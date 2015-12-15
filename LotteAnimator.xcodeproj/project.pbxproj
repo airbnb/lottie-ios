@@ -1,0 +1,447 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2729C93AC2BB9F90DD1DF3B3 /* libPods-LotteAnimator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 027033889637BDC48D72D292 /* libPods-LotteAnimator.a */; };
+		4804B2F91C1F55E600DA8AF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B2F81C1F55E600DA8AF7 /* main.m */; };
+		4804B2FC1C1F55E600DA8AF7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B2FB1C1F55E600DA8AF7 /* AppDelegate.m */; };
+		4804B2FF1C1F55E600DA8AF7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B2FE1C1F55E600DA8AF7 /* ViewController.m */; };
+		4804B3021C1F55E600DA8AF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4804B3001C1F55E600DA8AF7 /* Main.storyboard */; };
+		4804B3041C1F55E600DA8AF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4804B3031C1F55E600DA8AF7 /* Assets.xcassets */; };
+		4804B3071C1F55E600DA8AF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4804B3051C1F55E600DA8AF7 /* LaunchScreen.storyboard */; };
+		4804B3161C1F5B2000DA8AF7 /* LALayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B3151C1F5B2000DA8AF7 /* LALayer.m */; };
+		4804B3191C1F6DEA00DA8AF7 /* LAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B3181C1F6DEA00DA8AF7 /* LAScene.m */; };
+		4804B31E1C1F757600DA8AF7 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B31D1C1F757600DA8AF7 /* UIColor+Expanded.m */; };
+		4804B3211C1F761800DA8AF7 /* BWMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B3201C1F761800DA8AF7 /* BWMath.m */; };
+		4804B32C1C1F835F00DA8AF7 /* LALayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B32B1C1F835F00DA8AF7 /* LALayerView.m */; };
+		48372A441C1F84D700AD0293 /* LACompView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A431C1F84D700AD0293 /* LACompView.m */; };
+		48372A471C1F8B4C00AD0293 /* LAPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A461C1F8B4C00AD0293 /* LAPath.m */; };
+		48372A4A1C1F8D7D00AD0293 /* LAMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A491C1F8D7D00AD0293 /* LAMask.m */; };
+		48372A4C1C1F94A200AD0293 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A4B1C1F94A200AD0293 /* data.json */; };
+		48372A4F1C1F99C600AD0293 /* LAShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A4E1C1F99C600AD0293 /* LAShape.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		027033889637BDC48D72D292 /* libPods-LotteAnimator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LotteAnimator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4804B2F41C1F55E600DA8AF7 /* LotteAnimator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LotteAnimator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4804B2F81C1F55E600DA8AF7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4804B2FA1C1F55E600DA8AF7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		4804B2FB1C1F55E600DA8AF7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4804B2FD1C1F55E600DA8AF7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		4804B2FE1C1F55E600DA8AF7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		4804B3011C1F55E600DA8AF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4804B3031C1F55E600DA8AF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4804B3061C1F55E600DA8AF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4804B3081C1F55E600DA8AF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4804B3141C1F5B2000DA8AF7 /* LALayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LALayer.h; sourceTree = "<group>"; };
+		4804B3151C1F5B2000DA8AF7 /* LALayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LALayer.m; sourceTree = "<group>"; };
+		4804B3171C1F6DEA00DA8AF7 /* LAScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAScene.h; sourceTree = "<group>"; };
+		4804B3181C1F6DEA00DA8AF7 /* LAScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAScene.m; sourceTree = "<group>"; };
+		4804B31B1C1F738800DA8AF7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
+		4804B31C1C1F757600DA8AF7 /* UIColor+Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expanded.h"; sourceTree = "<group>"; };
+		4804B31D1C1F757600DA8AF7 /* UIColor+Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Expanded.m"; sourceTree = "<group>"; };
+		4804B31F1C1F761800DA8AF7 /* BWMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWMath.h; sourceTree = "<group>"; };
+		4804B3201C1F761800DA8AF7 /* BWMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWMath.m; sourceTree = "<group>"; };
+		4804B32A1C1F835F00DA8AF7 /* LALayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LALayerView.h; sourceTree = "<group>"; };
+		4804B32B1C1F835F00DA8AF7 /* LALayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LALayerView.m; sourceTree = "<group>"; };
+		48372A421C1F84D700AD0293 /* LACompView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LACompView.h; sourceTree = "<group>"; };
+		48372A431C1F84D700AD0293 /* LACompView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LACompView.m; sourceTree = "<group>"; };
+		48372A451C1F8B4C00AD0293 /* LAPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAPath.h; sourceTree = "<group>"; };
+		48372A461C1F8B4C00AD0293 /* LAPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAPath.m; sourceTree = "<group>"; };
+		48372A481C1F8D7D00AD0293 /* LAMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAMask.h; sourceTree = "<group>"; };
+		48372A491C1F8D7D00AD0293 /* LAMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAMask.m; sourceTree = "<group>"; };
+		48372A4B1C1F94A200AD0293 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		48372A4D1C1F99C600AD0293 /* LAShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShape.h; sourceTree = "<group>"; };
+		48372A4E1C1F99C600AD0293 /* LAShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShape.m; sourceTree = "<group>"; };
+		64D18A4F59FB72C8B3DEBCDE /* Pods-LotteAnimator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.release.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.release.xcconfig"; sourceTree = "<group>"; };
+		A3DACE6859B88B69187ADCF9 /* Pods-LotteAnimator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4804B2F11C1F55E600DA8AF7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2729C93AC2BB9F90DD1DF3B3 /* libPods-LotteAnimator.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2653721FDDC54D22BC994C27 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				027033889637BDC48D72D292 /* libPods-LotteAnimator.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4804B2EB1C1F55E600DA8AF7 = {
+			isa = PBXGroup;
+			children = (
+				4804B2F61C1F55E600DA8AF7 /* LotteAnimator */,
+				4804B2F51C1F55E600DA8AF7 /* Products */,
+				9FA3267ABDA7A42BA208E961 /* Pods */,
+				2653721FDDC54D22BC994C27 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4804B2F51C1F55E600DA8AF7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4804B2F41C1F55E600DA8AF7 /* LotteAnimator.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4804B2F61C1F55E600DA8AF7 /* LotteAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				4804B3221C1F762F00DA8AF7 /* Helpers */,
+				4804B3131C1F5B0900DA8AF7 /* Models */,
+				4804B2FA1C1F55E600DA8AF7 /* AppDelegate.h */,
+				4804B2FB1C1F55E600DA8AF7 /* AppDelegate.m */,
+				4804B32A1C1F835F00DA8AF7 /* LALayerView.h */,
+				4804B32B1C1F835F00DA8AF7 /* LALayerView.m */,
+				48372A421C1F84D700AD0293 /* LACompView.h */,
+				48372A431C1F84D700AD0293 /* LACompView.m */,
+				4804B2FD1C1F55E600DA8AF7 /* ViewController.h */,
+				4804B2FE1C1F55E600DA8AF7 /* ViewController.m */,
+				4804B3001C1F55E600DA8AF7 /* Main.storyboard */,
+				4804B3031C1F55E600DA8AF7 /* Assets.xcassets */,
+				4804B3051C1F55E600DA8AF7 /* LaunchScreen.storyboard */,
+				4804B3081C1F55E600DA8AF7 /* Info.plist */,
+				4804B31B1C1F738800DA8AF7 /* PrefixHeader.pch */,
+				48372A4B1C1F94A200AD0293 /* data.json */,
+				4804B2F71C1F55E600DA8AF7 /* Supporting Files */,
+			);
+			path = LotteAnimator;
+			sourceTree = "<group>";
+		};
+		4804B2F71C1F55E600DA8AF7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4804B2F81C1F55E600DA8AF7 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4804B3131C1F5B0900DA8AF7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4804B3141C1F5B2000DA8AF7 /* LALayer.h */,
+				4804B3151C1F5B2000DA8AF7 /* LALayer.m */,
+				4804B3171C1F6DEA00DA8AF7 /* LAScene.h */,
+				4804B3181C1F6DEA00DA8AF7 /* LAScene.m */,
+				48372A451C1F8B4C00AD0293 /* LAPath.h */,
+				48372A461C1F8B4C00AD0293 /* LAPath.m */,
+				48372A481C1F8D7D00AD0293 /* LAMask.h */,
+				48372A491C1F8D7D00AD0293 /* LAMask.m */,
+				48372A4D1C1F99C600AD0293 /* LAShape.h */,
+				48372A4E1C1F99C600AD0293 /* LAShape.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		4804B3221C1F762F00DA8AF7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4804B31F1C1F761800DA8AF7 /* BWMath.h */,
+				4804B3201C1F761800DA8AF7 /* BWMath.m */,
+				4804B31C1C1F757600DA8AF7 /* UIColor+Expanded.h */,
+				4804B31D1C1F757600DA8AF7 /* UIColor+Expanded.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		9FA3267ABDA7A42BA208E961 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A3DACE6859B88B69187ADCF9 /* Pods-LotteAnimator.debug.xcconfig */,
+				64D18A4F59FB72C8B3DEBCDE /* Pods-LotteAnimator.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4804B2F31C1F55E600DA8AF7 /* LotteAnimator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4804B30B1C1F55E600DA8AF7 /* Build configuration list for PBXNativeTarget "LotteAnimator" */;
+			buildPhases = (
+				726187649B7E60A373A8CA7B /* Check Pods Manifest.lock */,
+				4804B2F01C1F55E600DA8AF7 /* Sources */,
+				4804B2F11C1F55E600DA8AF7 /* Frameworks */,
+				4804B2F21C1F55E600DA8AF7 /* Resources */,
+				8A9FD320FF866AD587DA49E4 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LotteAnimator;
+			productName = LotteAnimator;
+			productReference = 4804B2F41C1F55E600DA8AF7 /* LotteAnimator.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4804B2EC1C1F55E600DA8AF7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Brandon Withrow";
+				TargetAttributes = {
+					4804B2F31C1F55E600DA8AF7 = {
+						CreatedOnToolsVersion = 7.1;
+					};
+				};
+			};
+			buildConfigurationList = 4804B2EF1C1F55E600DA8AF7 /* Build configuration list for PBXProject "LotteAnimator" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4804B2EB1C1F55E600DA8AF7;
+			productRefGroup = 4804B2F51C1F55E600DA8AF7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4804B2F31C1F55E600DA8AF7 /* LotteAnimator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4804B2F21C1F55E600DA8AF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4804B3071C1F55E600DA8AF7 /* LaunchScreen.storyboard in Resources */,
+				4804B3041C1F55E600DA8AF7 /* Assets.xcassets in Resources */,
+				4804B3021C1F55E600DA8AF7 /* Main.storyboard in Resources */,
+				48372A4C1C1F94A200AD0293 /* data.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		726187649B7E60A373A8CA7B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8A9FD320FF866AD587DA49E4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4804B2F01C1F55E600DA8AF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4804B31E1C1F757600DA8AF7 /* UIColor+Expanded.m in Sources */,
+				4804B2FF1C1F55E600DA8AF7 /* ViewController.m in Sources */,
+				4804B3191C1F6DEA00DA8AF7 /* LAScene.m in Sources */,
+				4804B2FC1C1F55E600DA8AF7 /* AppDelegate.m in Sources */,
+				4804B3211C1F761800DA8AF7 /* BWMath.m in Sources */,
+				48372A441C1F84D700AD0293 /* LACompView.m in Sources */,
+				48372A471C1F8B4C00AD0293 /* LAPath.m in Sources */,
+				4804B32C1C1F835F00DA8AF7 /* LALayerView.m in Sources */,
+				48372A4A1C1F8D7D00AD0293 /* LAMask.m in Sources */,
+				4804B3161C1F5B2000DA8AF7 /* LALayer.m in Sources */,
+				48372A4F1C1F99C600AD0293 /* LAShape.m in Sources */,
+				4804B2F91C1F55E600DA8AF7 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4804B3001C1F55E600DA8AF7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4804B3011C1F55E600DA8AF7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4804B3051C1F55E600DA8AF7 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4804B3061C1F55E600DA8AF7 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4804B3091C1F55E600DA8AF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		4804B30A1C1F55E600DA8AF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4804B30C1C1F55E600DA8AF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3DACE6859B88B69187ADCF9 /* Pods-LotteAnimator.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
+				INFOPLIST_FILE = LotteAnimator/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "-.LotteAnimator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4804B30D1C1F55E600DA8AF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64D18A4F59FB72C8B3DEBCDE /* Pods-LotteAnimator.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
+				INFOPLIST_FILE = LotteAnimator/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "-.LotteAnimator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4804B2EF1C1F55E600DA8AF7 /* Build configuration list for PBXProject "LotteAnimator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4804B3091C1F55E600DA8AF7 /* Debug */,
+				4804B30A1C1F55E600DA8AF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4804B30B1C1F55E600DA8AF7 /* Build configuration list for PBXNativeTarget "LotteAnimator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4804B30C1C1F55E600DA8AF7 /* Debug */,
+				4804B30D1C1F55E600DA8AF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4804B2EC1C1F55E600DA8AF7 /* Project object */;
+}

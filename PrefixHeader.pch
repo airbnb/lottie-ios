@@ -1,0 +1,26 @@
+//
+//  PrefixHeader.pch
+//  midiConnect
+//
+//  Created by Brandon Withrow on 11/6/15.
+//  Copyright © 2015 Brandon Withrow. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import <Foundation/Foundation.h>
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import <Mantle/Mantle.h>
+#import "UIColor+Expanded.h"
+#import "BWMath.h"
+#import "LAScene.h"
+#import "LALayer.h"
+#import "LALayerView.h"
+#import "LACompView.h"
+#import "LAPath.h"
+#import "LAMask.h"
+
+#endif /* PrefixHeader_pch */
