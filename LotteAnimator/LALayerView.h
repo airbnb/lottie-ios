@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LAModels.h"
 
 @interface LALayerView : UIView
 

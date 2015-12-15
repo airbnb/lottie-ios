@@ -22,8 +22,13 @@
 		48372A441C1F84D700AD0293 /* LACompView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A431C1F84D700AD0293 /* LACompView.m */; };
 		48372A471C1F8B4C00AD0293 /* LAPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A461C1F8B4C00AD0293 /* LAPath.m */; };
 		48372A4A1C1F8D7D00AD0293 /* LAMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A491C1F8D7D00AD0293 /* LAMask.m */; };
-		48372A4C1C1F94A200AD0293 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A4B1C1F94A200AD0293 /* data.json */; };
 		48372A4F1C1F99C600AD0293 /* LAShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A4E1C1F99C600AD0293 /* LAShape.m */; };
+		48372A521C20973300AD0293 /* LAShapeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A511C20973300AD0293 /* LAShapeItem.m */; };
+		48372A551C209A5F00AD0293 /* LAShapePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A541C209A5F00AD0293 /* LAShapePath.m */; };
+		48372A581C209A6C00AD0293 /* LAShapeStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A571C209A6C00AD0293 /* LAShapeStroke.m */; };
+		48372A5B1C209A7A00AD0293 /* LAShapeFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A5A1C209A7A00AD0293 /* LAShapeFill.m */; };
+		48372A5E1C209A8900AD0293 /* LAShapeTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A5D1C209A8900AD0293 /* LAShapeTransform.m */; };
+		48372A611C20A88E00AD0293 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A601C20A88E00AD0293 /* data.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,9 +60,20 @@
 		48372A461C1F8B4C00AD0293 /* LAPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAPath.m; sourceTree = "<group>"; };
 		48372A481C1F8D7D00AD0293 /* LAMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAMask.h; sourceTree = "<group>"; };
 		48372A491C1F8D7D00AD0293 /* LAMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAMask.m; sourceTree = "<group>"; };
-		48372A4B1C1F94A200AD0293 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		48372A4D1C1F99C600AD0293 /* LAShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShape.h; sourceTree = "<group>"; };
 		48372A4E1C1F99C600AD0293 /* LAShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShape.m; sourceTree = "<group>"; };
+		48372A501C20973300AD0293 /* LAShapeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeItem.h; sourceTree = "<group>"; };
+		48372A511C20973300AD0293 /* LAShapeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeItem.m; sourceTree = "<group>"; };
+		48372A531C209A5F00AD0293 /* LAShapePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapePath.h; sourceTree = "<group>"; };
+		48372A541C209A5F00AD0293 /* LAShapePath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapePath.m; sourceTree = "<group>"; };
+		48372A561C209A6C00AD0293 /* LAShapeStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeStroke.h; sourceTree = "<group>"; };
+		48372A571C209A6C00AD0293 /* LAShapeStroke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeStroke.m; sourceTree = "<group>"; };
+		48372A591C209A7A00AD0293 /* LAShapeFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeFill.h; sourceTree = "<group>"; };
+		48372A5A1C209A7A00AD0293 /* LAShapeFill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeFill.m; sourceTree = "<group>"; };
+		48372A5C1C209A8900AD0293 /* LAShapeTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeTransform.h; sourceTree = "<group>"; };
+		48372A5D1C209A8900AD0293 /* LAShapeTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeTransform.m; sourceTree = "<group>"; };
+		48372A5F1C209AA200AD0293 /* LAModels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LAModels.h; sourceTree = "<group>"; };
+		48372A601C20A88E00AD0293 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		64D18A4F59FB72C8B3DEBCDE /* Pods-LotteAnimator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.release.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.release.xcconfig"; sourceTree = "<group>"; };
 		A3DACE6859B88B69187ADCF9 /* Pods-LotteAnimator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,7 +134,7 @@
 				4804B3051C1F55E600DA8AF7 /* LaunchScreen.storyboard */,
 				4804B3081C1F55E600DA8AF7 /* Info.plist */,
 				4804B31B1C1F738800DA8AF7 /* PrefixHeader.pch */,
-				48372A4B1C1F94A200AD0293 /* data.json */,
+				48372A601C20A88E00AD0293 /* data.json */,
 				4804B2F71C1F55E600DA8AF7 /* Supporting Files */,
 			);
 			path = LotteAnimator;
@@ -135,6 +151,7 @@
 		4804B3131C1F5B0900DA8AF7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				48372A5F1C209AA200AD0293 /* LAModels.h */,
 				4804B3141C1F5B2000DA8AF7 /* LALayer.h */,
 				4804B3151C1F5B2000DA8AF7 /* LALayer.m */,
 				4804B3171C1F6DEA00DA8AF7 /* LAScene.h */,
@@ -145,6 +162,16 @@
 				48372A491C1F8D7D00AD0293 /* LAMask.m */,
 				48372A4D1C1F99C600AD0293 /* LAShape.h */,
 				48372A4E1C1F99C600AD0293 /* LAShape.m */,
+				48372A501C20973300AD0293 /* LAShapeItem.h */,
+				48372A511C20973300AD0293 /* LAShapeItem.m */,
+				48372A531C209A5F00AD0293 /* LAShapePath.h */,
+				48372A541C209A5F00AD0293 /* LAShapePath.m */,
+				48372A561C209A6C00AD0293 /* LAShapeStroke.h */,
+				48372A571C209A6C00AD0293 /* LAShapeStroke.m */,
+				48372A591C209A7A00AD0293 /* LAShapeFill.h */,
+				48372A5A1C209A7A00AD0293 /* LAShapeFill.m */,
+				48372A5C1C209A8900AD0293 /* LAShapeTransform.h */,
+				48372A5D1C209A8900AD0293 /* LAShapeTransform.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -231,7 +258,7 @@
 				4804B3071C1F55E600DA8AF7 /* LaunchScreen.storyboard in Resources */,
 				4804B3041C1F55E600DA8AF7 /* Assets.xcassets in Resources */,
 				4804B3021C1F55E600DA8AF7 /* Main.storyboard in Resources */,
-				48372A4C1C1F94A200AD0293 /* data.json in Resources */,
+				48372A611C20A88E00AD0293 /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,8 +312,13 @@
 				4804B32C1C1F835F00DA8AF7 /* LALayerView.m in Sources */,
 				48372A4A1C1F8D7D00AD0293 /* LAMask.m in Sources */,
 				4804B3161C1F5B2000DA8AF7 /* LALayer.m in Sources */,
+				48372A521C20973300AD0293 /* LAShapeItem.m in Sources */,
 				48372A4F1C1F99C600AD0293 /* LAShape.m in Sources */,
+				48372A581C209A6C00AD0293 /* LAShapeStroke.m in Sources */,
+				48372A5B1C209A7A00AD0293 /* LAShapeFill.m in Sources */,
 				4804B2F91C1F55E600DA8AF7 /* main.m in Sources */,
+				48372A551C209A5F00AD0293 /* LAShapePath.m in Sources */,
+				48372A5E1C209A8900AD0293 /* LAShapeTransform.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

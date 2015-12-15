@@ -10,20 +10,11 @@
 
 @interface LAShape : MTLModel <MTLJSONSerializing>
 
-@property (nonatomic, getter=isClosed) BOOL closed;
-@property (nonatomic, strong) LAPath *shapePath;
+@property (nonatomic, copy) NSArray *shapeItems;
 
-@property (nonatomic, strong) NSNumber *strokeWidth;
-@property (nonatomic, strong) NSNumber *strokeOpacity;
-@property (nonatomic, strong) NSArray *strokeColorElements;
-
-@property (nonatomic, strong) NSNumber *fillOpacity;
-@property (nonatomic, strong) NSArray *fillColorElements;
-
-@property (nonatomic, copy) NSArray *positionArray;
-@property (nonatomic, copy) NSArray *anchorPointArray;
-@property (nonatomic, copy) NSArray *scaleArray;
-@property (nonatomic, copy) NSNumber *rotation;
-@property (nonatomic, copy) NSNumber *opacity;
+@property (nonatomic, readonly) NSArray *paths;
+@property (nonatomic, readonly) NSArray *strokes;
+@property (nonatomic, readonly) NSArray *fills;
+@property (nonatomic, readonly) NSArray *transforms;
 
 @end

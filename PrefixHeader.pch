@@ -16,11 +16,8 @@
 #import <Mantle/Mantle.h>
 #import "UIColor+Expanded.h"
 #import "BWMath.h"
-#import "LAScene.h"
-#import "LALayer.h"
 #import "LALayerView.h"
 #import "LACompView.h"
-#import "LAPath.h"
-#import "LAMask.h"
+#import "LAModels.h"
 
 #endif /* PrefixHeader_pch */

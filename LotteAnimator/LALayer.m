@@ -18,14 +18,19 @@
            @"layerID" : @"ind",
            @"width" : @"width",
            @"height" : @"height",
-           @"rotation" : @"",
+           @"rotation" : @"ks.r",
            @"positionArray" : @"ks.p",
            @"anchorPointArray" : @"ks.a",
            @"scaleArray" : @"ks.s",
            @"opacity" : @"ks.o",
            @"color" : @"color",
-           @"masks" : @"masksProperties"
+           @"masks" : @"masksProperties",
+           @"shapes" : @"shapes"
            };
+}
+
++ (NSValueTransformer *)shapesJSONTransformer {
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[LAShape class]];
 }
 
 + (NSValueTransformer *)masksJSONTransformer {
