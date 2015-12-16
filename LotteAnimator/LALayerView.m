@@ -33,41 +33,48 @@
     if (model.shapes) {
       self.clipsToBounds = NO;
       for (LAShape *shape in model.shapes) {
-        // Get Path
-        LAShapePath *path = shape.paths.count ? shape.paths.firstObject : nil;
+        NSMutableArray *paths = [shape.paths mutableCopy];
         
-        // Get Stroke
-        LAShapeStroke *stroke = shape.strokes.count ? shape.strokes.firstObject : nil;
+        NSArray *allItems = shape.shapeItems;
+        NSArray *reversedItems = [[allItems reverseObjectEnumerator] allObjects];
         
-        //Get Fill
-        LAShapeFill *fill = shape.fills.count ? shape.fills.firstObject : nil;
-        
-        //Get Transform
-        LAShapeTransform *transform = shape.transforms.count ? shape.transforms.firstObject : nil;
-        
-        if (!path) {
-          continue;
+        for (LAShapeItem *item in reversedItems) {
+          // Reverse Enumerate to build up shape heirarchy.
+          // TODO track items.
+          if ([item isKindOfClass:[LAShapeFill class]]) {
+            LAShapeFill *fill = (LAShapeFill *)item;
+            for (LAShapeItem *path in paths) {
+              CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+              shapeLayer.path = path.path.CGPath;
+              shapeLayer.fillColor = fill.color.CGColor;
+              shapeLayer.opacity = fill.alpha;
+              [self.layer addSublayer:shapeLayer];
+            }
+          }
+          
+          if ([item isKindOfClass:[LAShapeStroke class]]) {
+            LAShapeStroke *stroke = (LAShapeStroke *)item;
+            for (LAShapeItem *path in paths) {
+              CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+              shapeLayer.path = path.path.CGPath;
+              shapeLayer.fillColor = nil;
+              shapeLayer.strokeColor = stroke.color.CGColor;
+              shapeLayer.lineWidth = stroke.width.floatValue;
+              shapeLayer.opacity = stroke.alpha;
+              [self.layer addSublayer:shapeLayer];
+            }
+          }
+          if ([paths containsObject:item]) {
+            [paths removeObject:item];
+          }
         }
-        UIBezierPath *shapePath = [path.shapePath bezierPath:path.isClosed];
-        CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-        shapeLayer.path = shapePath.CGPath;
         
-        if (stroke) {
-          shapeLayer.strokeColor = stroke.color.CGColor;
-          shapeLayer.lineWidth = stroke.width.floatValue;
-        }
-        
-        if (fill) {
-          shapeLayer.fillColor = fill.color.CGColor;
-          shapeLayer.opacity = fill.alpha;
-        }
-        
-        if (transform) {
-//          shapeLayer.anchorPoint = transform.anchorPoint;
-//          shapeLayer.position =
-//          shapeLayer.transform = CATransform3DMakeAffineTransform(transform.transform);
-        }
-        [self.layer addSublayer:shapeLayer];
+//        if (transform) {
+////          shapeLayer.anchorPoint = transform.anchorPoint;
+////          shapeLayer.position =
+////          shapeLayer.transform = CATransform3DMakeAffineTransform(transform.transform);
+//        }
+//        [self.layer addSublayer:shapeLayer];
       }
     }
     

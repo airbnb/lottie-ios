@@ -19,5 +19,7 @@
 #import "LAShapeStroke.h"
 #import "LAShapeFill.h"
 #import "LAShapeTransform.h"
+#import "LAShapeCircle.h"
+#import "LAShapeRectangle.h"
 
 #endif /* LAModels_h */

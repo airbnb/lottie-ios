@@ -27,7 +27,9 @@
   NSMutableArray *paths = [NSMutableArray array];
   
   for (LAShapeItem *item in self.shapeItems) {
-    if ([item.itemType isEqualToString:LAShapeItemType.Path]) {
+    if ([item.itemType isEqualToString:LAShapeItemType.Path] ||
+        [item.itemType isEqualToString:LAShapeItemType.Circle] ||
+        [item.itemType isEqualToString:LAShapeItemType.Rectangle]) {
       [paths addObject:item];
     }
   }

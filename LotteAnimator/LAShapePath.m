@@ -25,4 +25,7 @@
   return [NSValueTransformer valueTransformerForName:MTLBooleanValueTransformerName];
 }
 
+- (UIBezierPath *)path {
+  return [self.shapePath bezierPath:self.isClosed];
+}
 @end

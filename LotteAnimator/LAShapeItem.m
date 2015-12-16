@@ -12,7 +12,9 @@ const struct LAShapeItemType LAShapeItemType = {
   .Path = @"sh",
   .Stroke = @"st",
   .Fill = @"fl",
-  .Transform = @"tr"
+  .Transform = @"tr",
+  .Circle = @"el",
+  .Rectangle = @"rc"
 };
 
 @implementation LAShapeItem
@@ -36,6 +38,14 @@ const struct LAShapeItemType LAShapeItemType = {
   
   if ([JSONDictionary[@"ty"] isEqual:LAShapeItemType.Transform]) {
     return LAShapeTransform.class;
+  }
+  
+  if ([JSONDictionary[@"ty"] isEqual:LAShapeItemType.Circle]) {
+    return LAShapeCircle.class;
+  }
+  
+  if ([JSONDictionary[@"ty"] isEqual:LAShapeItemType.Rectangle]) {
+    return LAShapeRectangle.class;
   }
   
   return self;

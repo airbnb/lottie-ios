@@ -29,6 +29,48 @@
 		48372A5B1C209A7A00AD0293 /* LAShapeFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A5A1C209A7A00AD0293 /* LAShapeFill.m */; };
 		48372A5E1C209A8900AD0293 /* LAShapeTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A5D1C209A8900AD0293 /* LAShapeTransform.m */; };
 		48372A611C20A88E00AD0293 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A601C20A88E00AD0293 /* data.json */; };
+		48372A641C20A91C00AD0293 /* LAJSONExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A631C20A91C00AD0293 /* LAJSONExplorerViewController.m */; };
+		48372A8C1C20BFB700AD0293 /* 001_ShapeLayerSquare_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A661C20BFB700AD0293 /* 001_ShapeLayerSquare_data.json */; };
+		48372A8D1C20BFB700AD0293 /* 002_ShapeLayerLine_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A671C20BFB700AD0293 /* 002_ShapeLayerLine_data.json */; };
+		48372A8E1C20BFB700AD0293 /* 003_TwoShapeLayerSquares_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A681C20BFB700AD0293 /* 003_TwoShapeLayerSquares_data.json */; };
+		48372A8F1C20BFB700AD0293 /* 004_ShapeLayerLineLineCapdata.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A691C20BFB700AD0293 /* 004_ShapeLayerLineLineCapdata.json */; };
+		48372A901C20BFB700AD0293 /* 005_TwoShapeLayerSquaresDifferent_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A6A1C20BFB700AD0293 /* 005_TwoShapeLayerSquaresDifferent_data.json */; };
+		48372A911C20BFB700AD0293 /* 006_BezierShape_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A6B1C20BFB700AD0293 /* 006_BezierShape_data.json */; };
+		48372A921C20BFB700AD0293 /* 007_ShapeLayerShapes_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A6C1C20BFB700AD0293 /* 007_ShapeLayerShapes_data.json */; };
+		48372A931C20BFB700AD0293 /* 008_ShapeLayerMultiplePaths.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A6D1C20BFB700AD0293 /* 008_ShapeLayerMultiplePaths.json */; };
+		48372A941C20BFB700AD0293 /* 009_ShapeLayerRepeater.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A6E1C20BFB700AD0293 /* 009_ShapeLayerRepeater.json */; };
+		48372A951C20BFB700AD0293 /* 010_ShapeLayerRepeaterRotated.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A6F1C20BFB700AD0293 /* 010_ShapeLayerRepeaterRotated.json */; };
+		48372A961C20BFB700AD0293 /* 011_MergePaths_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A701C20BFB700AD0293 /* 011_MergePaths_data.json */; };
+		48372A971C20BFB700AD0293 /* 012_ShapeAlphaMatte.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A711C20BFB700AD0293 /* 012_ShapeAlphaMatte.json */; };
+		48372A981C20BFB700AD0293 /* 013_ShapeMasked.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A721C20BFB700AD0293 /* 013_ShapeMasked.json */; };
+		48372A991C20BFB700AD0293 /* 014_ShapeMaskedTwice.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A731C20BFB700AD0293 /* 014_ShapeMaskedTwice.json */; };
+		48372A9A1C20BFB700AD0293 /* 015_DottedLine.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A741C20BFB700AD0293 /* 015_DottedLine.json */; };
+		48372A9B1C20BFB700AD0293 /* 015_TrimPaths.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A751C20BFB700AD0293 /* 015_TrimPaths.json */; };
+		48372A9C1C20BFB700AD0293 /* 016_GroupedShapes.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A761C20BFB700AD0293 /* 016_GroupedShapes.json */; };
+		48372A9D1C20BFB700AD0293 /* 017_ShapeMaskedFeathered.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A771C20BFB700AD0293 /* 017_ShapeMaskedFeathered.json */; };
+		48372A9E1C20BFB700AD0293 /* 049_ShapeInOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A781C20BFB700AD0293 /* 049_ShapeInOut.json */; };
+		48372A9F1C20BFB700AD0293 /* 050_AnimateTransformPositionSingleKeyframe.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A791C20BFB700AD0293 /* 050_AnimateTransformPositionSingleKeyframe.json */; };
+		48372AA01C20BFB700AD0293 /* 051_AnimateTransformPositionLinear.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A7A1C20BFB700AD0293 /* 051_AnimateTransformPositionLinear.json */; };
+		48372AA11C20BFB700AD0293 /* 052_AnimateTransformPositionLinearCurved.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A7B1C20BFB700AD0293 /* 052_AnimateTransformPositionLinearCurved.json */; };
+		48372AA21C20BFB700AD0293 /* 053_AnimateTransformPositionEaseIn.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A7C1C20BFB700AD0293 /* 053_AnimateTransformPositionEaseIn.json */; };
+		48372AA31C20BFB700AD0293 /* 054_AnimateTransformPositionEaseOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A7D1C20BFB700AD0293 /* 054_AnimateTransformPositionEaseOut.json */; };
+		48372AA41C20BFB700AD0293 /* 055_AnimateTransformPositionEasyEase.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A7E1C20BFB700AD0293 /* 055_AnimateTransformPositionEasyEase.json */; };
+		48372AA51C20BFB700AD0293 /* 056_AnimateTransformPositionCustomEaseIn.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A7F1C20BFB700AD0293 /* 056_AnimateTransformPositionCustomEaseIn.json */; };
+		48372AA61C20BFB700AD0293 /* 057_AnimateTransformPositionCustomEasyInOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A801C20BFB700AD0293 /* 057_AnimateTransformPositionCustomEasyInOut.json */; };
+		48372AA71C20BFB700AD0293 /* 058_AnimateTransformPositionHoldKeyframe.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A811C20BFB700AD0293 /* 058_AnimateTransformPositionHoldKeyframe.json */; };
+		48372AA81C20BFB700AD0293 /* 059_AnimateTransformPositionRoveAcrossTime.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A821C20BFB700AD0293 /* 059_AnimateTransformPositionRoveAcrossTime.json */; };
+		48372AA91C20BFB700AD0293 /* 060_AnimateTransformPositionBakedEase.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A831C20BFB700AD0293 /* 060_AnimateTransformPositionBakedEase.json */; };
+		48372AAA1C20BFB700AD0293 /* 062_AnimateTransformParented.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A841C20BFB700AD0293 /* 062_AnimateTransformParented.json */; };
+		48372AAB1C20BFB700AD0293 /* 070_AnimatePathLine.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A851C20BFB700AD0293 /* 070_AnimatePathLine.json */; };
+		48372AAC1C20BFB700AD0293 /* 071_AnimatePathShape.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A861C20BFB700AD0293 /* 071_AnimatePathShape.json */; };
+		48372AAD1C20BFB700AD0293 /* 073_AnimateRectangleSizeEasyEase.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A871C20BFB700AD0293 /* 073_AnimateRectangleSizeEasyEase.json */; };
+		48372AAE1C20BFB700AD0293 /* 074_AnimateRectanglePosition.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A881C20BFB700AD0293 /* 074_AnimateRectanglePosition.json */; };
+		48372AAF1C20BFB700AD0293 /* 075_AnimateTrimPaths.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A891C20BFB700AD0293 /* 075_AnimateTrimPaths.json */; };
+		48372AB01C20BFB700AD0293 /* 100_House_AnimateInAndOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A8A1C20BFB700AD0293 /* 100_House_AnimateInAndOut.json */; };
+		48372AB11C20BFB700AD0293 /* 200_LYS_LightSwitch.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A8B1C20BFB700AD0293 /* 200_LYS_LightSwitch.json */; };
+		48372AB41C20C13700AD0293 /* CGGeometryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372AB31C20C13700AD0293 /* CGGeometryAdditions.m */; };
+		48372AB71C20D97200AD0293 /* LAShapeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372AB61C20D97200AD0293 /* LAShapeCircle.m */; };
+		48372ABA1C20D98200AD0293 /* LAShapeRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372AB91C20D98200AD0293 /* LAShapeRectangle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +116,52 @@
 		48372A5D1C209A8900AD0293 /* LAShapeTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeTransform.m; sourceTree = "<group>"; };
 		48372A5F1C209AA200AD0293 /* LAModels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LAModels.h; sourceTree = "<group>"; };
 		48372A601C20A88E00AD0293 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		48372A621C20A91C00AD0293 /* LAJSONExplorerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAJSONExplorerViewController.h; sourceTree = "<group>"; };
+		48372A631C20A91C00AD0293 /* LAJSONExplorerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAJSONExplorerViewController.m; sourceTree = "<group>"; };
+		48372A661C20BFB700AD0293 /* 001_ShapeLayerSquare_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 001_ShapeLayerSquare_data.json; sourceTree = "<group>"; };
+		48372A671C20BFB700AD0293 /* 002_ShapeLayerLine_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 002_ShapeLayerLine_data.json; sourceTree = "<group>"; };
+		48372A681C20BFB700AD0293 /* 003_TwoShapeLayerSquares_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 003_TwoShapeLayerSquares_data.json; sourceTree = "<group>"; };
+		48372A691C20BFB700AD0293 /* 004_ShapeLayerLineLineCapdata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 004_ShapeLayerLineLineCapdata.json; sourceTree = "<group>"; };
+		48372A6A1C20BFB700AD0293 /* 005_TwoShapeLayerSquaresDifferent_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 005_TwoShapeLayerSquaresDifferent_data.json; sourceTree = "<group>"; };
+		48372A6B1C20BFB700AD0293 /* 006_BezierShape_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 006_BezierShape_data.json; sourceTree = "<group>"; };
+		48372A6C1C20BFB700AD0293 /* 007_ShapeLayerShapes_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 007_ShapeLayerShapes_data.json; sourceTree = "<group>"; };
+		48372A6D1C20BFB700AD0293 /* 008_ShapeLayerMultiplePaths.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 008_ShapeLayerMultiplePaths.json; sourceTree = "<group>"; };
+		48372A6E1C20BFB700AD0293 /* 009_ShapeLayerRepeater.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 009_ShapeLayerRepeater.json; sourceTree = "<group>"; };
+		48372A6F1C20BFB700AD0293 /* 010_ShapeLayerRepeaterRotated.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 010_ShapeLayerRepeaterRotated.json; sourceTree = "<group>"; };
+		48372A701C20BFB700AD0293 /* 011_MergePaths_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 011_MergePaths_data.json; sourceTree = "<group>"; };
+		48372A711C20BFB700AD0293 /* 012_ShapeAlphaMatte.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 012_ShapeAlphaMatte.json; sourceTree = "<group>"; };
+		48372A721C20BFB700AD0293 /* 013_ShapeMasked.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 013_ShapeMasked.json; sourceTree = "<group>"; };
+		48372A731C20BFB700AD0293 /* 014_ShapeMaskedTwice.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 014_ShapeMaskedTwice.json; sourceTree = "<group>"; };
+		48372A741C20BFB700AD0293 /* 015_DottedLine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 015_DottedLine.json; sourceTree = "<group>"; };
+		48372A751C20BFB700AD0293 /* 015_TrimPaths.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 015_TrimPaths.json; sourceTree = "<group>"; };
+		48372A761C20BFB700AD0293 /* 016_GroupedShapes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 016_GroupedShapes.json; sourceTree = "<group>"; };
+		48372A771C20BFB700AD0293 /* 017_ShapeMaskedFeathered.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 017_ShapeMaskedFeathered.json; sourceTree = "<group>"; };
+		48372A781C20BFB700AD0293 /* 049_ShapeInOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 049_ShapeInOut.json; sourceTree = "<group>"; };
+		48372A791C20BFB700AD0293 /* 050_AnimateTransformPositionSingleKeyframe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 050_AnimateTransformPositionSingleKeyframe.json; sourceTree = "<group>"; };
+		48372A7A1C20BFB700AD0293 /* 051_AnimateTransformPositionLinear.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 051_AnimateTransformPositionLinear.json; sourceTree = "<group>"; };
+		48372A7B1C20BFB700AD0293 /* 052_AnimateTransformPositionLinearCurved.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 052_AnimateTransformPositionLinearCurved.json; sourceTree = "<group>"; };
+		48372A7C1C20BFB700AD0293 /* 053_AnimateTransformPositionEaseIn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 053_AnimateTransformPositionEaseIn.json; sourceTree = "<group>"; };
+		48372A7D1C20BFB700AD0293 /* 054_AnimateTransformPositionEaseOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 054_AnimateTransformPositionEaseOut.json; sourceTree = "<group>"; };
+		48372A7E1C20BFB700AD0293 /* 055_AnimateTransformPositionEasyEase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 055_AnimateTransformPositionEasyEase.json; sourceTree = "<group>"; };
+		48372A7F1C20BFB700AD0293 /* 056_AnimateTransformPositionCustomEaseIn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 056_AnimateTransformPositionCustomEaseIn.json; sourceTree = "<group>"; };
+		48372A801C20BFB700AD0293 /* 057_AnimateTransformPositionCustomEasyInOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 057_AnimateTransformPositionCustomEasyInOut.json; sourceTree = "<group>"; };
+		48372A811C20BFB700AD0293 /* 058_AnimateTransformPositionHoldKeyframe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 058_AnimateTransformPositionHoldKeyframe.json; sourceTree = "<group>"; };
+		48372A821C20BFB700AD0293 /* 059_AnimateTransformPositionRoveAcrossTime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 059_AnimateTransformPositionRoveAcrossTime.json; sourceTree = "<group>"; };
+		48372A831C20BFB700AD0293 /* 060_AnimateTransformPositionBakedEase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 060_AnimateTransformPositionBakedEase.json; sourceTree = "<group>"; };
+		48372A841C20BFB700AD0293 /* 062_AnimateTransformParented.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 062_AnimateTransformParented.json; sourceTree = "<group>"; };
+		48372A851C20BFB700AD0293 /* 070_AnimatePathLine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 070_AnimatePathLine.json; sourceTree = "<group>"; };
+		48372A861C20BFB700AD0293 /* 071_AnimatePathShape.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 071_AnimatePathShape.json; sourceTree = "<group>"; };
+		48372A871C20BFB700AD0293 /* 073_AnimateRectangleSizeEasyEase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 073_AnimateRectangleSizeEasyEase.json; sourceTree = "<group>"; };
+		48372A881C20BFB700AD0293 /* 074_AnimateRectanglePosition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 074_AnimateRectanglePosition.json; sourceTree = "<group>"; };
+		48372A891C20BFB700AD0293 /* 075_AnimateTrimPaths.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 075_AnimateTrimPaths.json; sourceTree = "<group>"; };
+		48372A8A1C20BFB700AD0293 /* 100_House_AnimateInAndOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 100_House_AnimateInAndOut.json; sourceTree = "<group>"; };
+		48372A8B1C20BFB700AD0293 /* 200_LYS_LightSwitch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 200_LYS_LightSwitch.json; sourceTree = "<group>"; };
+		48372AB21C20C13700AD0293 /* CGGeometryAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGGeometryAdditions.h; sourceTree = "<group>"; };
+		48372AB31C20C13700AD0293 /* CGGeometryAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGGeometryAdditions.m; sourceTree = "<group>"; };
+		48372AB51C20D97200AD0293 /* LAShapeCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeCircle.h; sourceTree = "<group>"; };
+		48372AB61C20D97200AD0293 /* LAShapeCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeCircle.m; sourceTree = "<group>"; };
+		48372AB81C20D98200AD0293 /* LAShapeRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeRectangle.h; sourceTree = "<group>"; };
+		48372AB91C20D98200AD0293 /* LAShapeRectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeRectangle.m; sourceTree = "<group>"; };
 		64D18A4F59FB72C8B3DEBCDE /* Pods-LotteAnimator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.release.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.release.xcconfig"; sourceTree = "<group>"; };
 		A3DACE6859B88B69187ADCF9 /* Pods-LotteAnimator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,12 +217,14 @@
 				48372A431C1F84D700AD0293 /* LACompView.m */,
 				4804B2FD1C1F55E600DA8AF7 /* ViewController.h */,
 				4804B2FE1C1F55E600DA8AF7 /* ViewController.m */,
+				48372A621C20A91C00AD0293 /* LAJSONExplorerViewController.h */,
+				48372A631C20A91C00AD0293 /* LAJSONExplorerViewController.m */,
+				48372A651C20B04300AD0293 /* JSONExamples */,
 				4804B3001C1F55E600DA8AF7 /* Main.storyboard */,
 				4804B3031C1F55E600DA8AF7 /* Assets.xcassets */,
 				4804B3051C1F55E600DA8AF7 /* LaunchScreen.storyboard */,
 				4804B3081C1F55E600DA8AF7 /* Info.plist */,
 				4804B31B1C1F738800DA8AF7 /* PrefixHeader.pch */,
-				48372A601C20A88E00AD0293 /* data.json */,
 				4804B2F71C1F55E600DA8AF7 /* Supporting Files */,
 			);
 			path = LotteAnimator;
@@ -164,14 +254,18 @@
 				48372A4E1C1F99C600AD0293 /* LAShape.m */,
 				48372A501C20973300AD0293 /* LAShapeItem.h */,
 				48372A511C20973300AD0293 /* LAShapeItem.m */,
-				48372A531C209A5F00AD0293 /* LAShapePath.h */,
-				48372A541C209A5F00AD0293 /* LAShapePath.m */,
 				48372A561C209A6C00AD0293 /* LAShapeStroke.h */,
 				48372A571C209A6C00AD0293 /* LAShapeStroke.m */,
 				48372A591C209A7A00AD0293 /* LAShapeFill.h */,
 				48372A5A1C209A7A00AD0293 /* LAShapeFill.m */,
 				48372A5C1C209A8900AD0293 /* LAShapeTransform.h */,
 				48372A5D1C209A8900AD0293 /* LAShapeTransform.m */,
+				48372A531C209A5F00AD0293 /* LAShapePath.h */,
+				48372A541C209A5F00AD0293 /* LAShapePath.m */,
+				48372AB51C20D97200AD0293 /* LAShapeCircle.h */,
+				48372AB61C20D97200AD0293 /* LAShapeCircle.m */,
+				48372AB81C20D98200AD0293 /* LAShapeRectangle.h */,
+				48372AB91C20D98200AD0293 /* LAShapeRectangle.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -183,8 +277,56 @@
 				4804B3201C1F761800DA8AF7 /* BWMath.m */,
 				4804B31C1C1F757600DA8AF7 /* UIColor+Expanded.h */,
 				4804B31D1C1F757600DA8AF7 /* UIColor+Expanded.m */,
+				48372AB21C20C13700AD0293 /* CGGeometryAdditions.h */,
+				48372AB31C20C13700AD0293 /* CGGeometryAdditions.m */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		48372A651C20B04300AD0293 /* JSONExamples */ = {
+			isa = PBXGroup;
+			children = (
+				48372A661C20BFB700AD0293 /* 001_ShapeLayerSquare_data.json */,
+				48372A671C20BFB700AD0293 /* 002_ShapeLayerLine_data.json */,
+				48372A681C20BFB700AD0293 /* 003_TwoShapeLayerSquares_data.json */,
+				48372A691C20BFB700AD0293 /* 004_ShapeLayerLineLineCapdata.json */,
+				48372A6A1C20BFB700AD0293 /* 005_TwoShapeLayerSquaresDifferent_data.json */,
+				48372A6B1C20BFB700AD0293 /* 006_BezierShape_data.json */,
+				48372A6C1C20BFB700AD0293 /* 007_ShapeLayerShapes_data.json */,
+				48372A6D1C20BFB700AD0293 /* 008_ShapeLayerMultiplePaths.json */,
+				48372A6E1C20BFB700AD0293 /* 009_ShapeLayerRepeater.json */,
+				48372A6F1C20BFB700AD0293 /* 010_ShapeLayerRepeaterRotated.json */,
+				48372A701C20BFB700AD0293 /* 011_MergePaths_data.json */,
+				48372A711C20BFB700AD0293 /* 012_ShapeAlphaMatte.json */,
+				48372A721C20BFB700AD0293 /* 013_ShapeMasked.json */,
+				48372A731C20BFB700AD0293 /* 014_ShapeMaskedTwice.json */,
+				48372A741C20BFB700AD0293 /* 015_DottedLine.json */,
+				48372A751C20BFB700AD0293 /* 015_TrimPaths.json */,
+				48372A761C20BFB700AD0293 /* 016_GroupedShapes.json */,
+				48372A771C20BFB700AD0293 /* 017_ShapeMaskedFeathered.json */,
+				48372A781C20BFB700AD0293 /* 049_ShapeInOut.json */,
+				48372A791C20BFB700AD0293 /* 050_AnimateTransformPositionSingleKeyframe.json */,
+				48372A7A1C20BFB700AD0293 /* 051_AnimateTransformPositionLinear.json */,
+				48372A7B1C20BFB700AD0293 /* 052_AnimateTransformPositionLinearCurved.json */,
+				48372A7C1C20BFB700AD0293 /* 053_AnimateTransformPositionEaseIn.json */,
+				48372A7D1C20BFB700AD0293 /* 054_AnimateTransformPositionEaseOut.json */,
+				48372A7E1C20BFB700AD0293 /* 055_AnimateTransformPositionEasyEase.json */,
+				48372A7F1C20BFB700AD0293 /* 056_AnimateTransformPositionCustomEaseIn.json */,
+				48372A801C20BFB700AD0293 /* 057_AnimateTransformPositionCustomEasyInOut.json */,
+				48372A811C20BFB700AD0293 /* 058_AnimateTransformPositionHoldKeyframe.json */,
+				48372A821C20BFB700AD0293 /* 059_AnimateTransformPositionRoveAcrossTime.json */,
+				48372A831C20BFB700AD0293 /* 060_AnimateTransformPositionBakedEase.json */,
+				48372A841C20BFB700AD0293 /* 062_AnimateTransformParented.json */,
+				48372A851C20BFB700AD0293 /* 070_AnimatePathLine.json */,
+				48372A861C20BFB700AD0293 /* 071_AnimatePathShape.json */,
+				48372A871C20BFB700AD0293 /* 073_AnimateRectangleSizeEasyEase.json */,
+				48372A881C20BFB700AD0293 /* 074_AnimateRectanglePosition.json */,
+				48372A891C20BFB700AD0293 /* 075_AnimateTrimPaths.json */,
+				48372A8A1C20BFB700AD0293 /* 100_House_AnimateInAndOut.json */,
+				48372A8B1C20BFB700AD0293 /* 200_LYS_LightSwitch.json */,
+				48372A601C20A88E00AD0293 /* data.json */,
+			);
+			name = JSONExamples;
 			sourceTree = "<group>";
 		};
 		9FA3267ABDA7A42BA208E961 /* Pods */ = {
@@ -255,10 +397,48 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48372AAA1C20BFB700AD0293 /* 062_AnimateTransformParented.json in Resources */,
 				4804B3071C1F55E600DA8AF7 /* LaunchScreen.storyboard in Resources */,
+				48372AB11C20BFB700AD0293 /* 200_LYS_LightSwitch.json in Resources */,
 				4804B3041C1F55E600DA8AF7 /* Assets.xcassets in Resources */,
+				48372AAE1C20BFB700AD0293 /* 074_AnimateRectanglePosition.json in Resources */,
+				48372AA31C20BFB700AD0293 /* 054_AnimateTransformPositionEaseOut.json in Resources */,
+				48372A9E1C20BFB700AD0293 /* 049_ShapeInOut.json in Resources */,
+				48372A8E1C20BFB700AD0293 /* 003_TwoShapeLayerSquares_data.json in Resources */,
 				4804B3021C1F55E600DA8AF7 /* Main.storyboard in Resources */,
+				48372A981C20BFB700AD0293 /* 013_ShapeMasked.json in Resources */,
+				48372AA41C20BFB700AD0293 /* 055_AnimateTransformPositionEasyEase.json in Resources */,
+				48372AAC1C20BFB700AD0293 /* 071_AnimatePathShape.json in Resources */,
+				48372A971C20BFB700AD0293 /* 012_ShapeAlphaMatte.json in Resources */,
+				48372AA81C20BFB700AD0293 /* 059_AnimateTransformPositionRoveAcrossTime.json in Resources */,
+				48372A921C20BFB700AD0293 /* 007_ShapeLayerShapes_data.json in Resources */,
+				48372A951C20BFB700AD0293 /* 010_ShapeLayerRepeaterRotated.json in Resources */,
+				48372A9D1C20BFB700AD0293 /* 017_ShapeMaskedFeathered.json in Resources */,
+				48372A941C20BFB700AD0293 /* 009_ShapeLayerRepeater.json in Resources */,
+				48372AA11C20BFB700AD0293 /* 052_AnimateTransformPositionLinearCurved.json in Resources */,
 				48372A611C20A88E00AD0293 /* data.json in Resources */,
+				48372A931C20BFB700AD0293 /* 008_ShapeLayerMultiplePaths.json in Resources */,
+				48372A991C20BFB700AD0293 /* 014_ShapeMaskedTwice.json in Resources */,
+				48372A961C20BFB700AD0293 /* 011_MergePaths_data.json in Resources */,
+				48372AA21C20BFB700AD0293 /* 053_AnimateTransformPositionEaseIn.json in Resources */,
+				48372AA01C20BFB700AD0293 /* 051_AnimateTransformPositionLinear.json in Resources */,
+				48372A8F1C20BFB700AD0293 /* 004_ShapeLayerLineLineCapdata.json in Resources */,
+				48372AA91C20BFB700AD0293 /* 060_AnimateTransformPositionBakedEase.json in Resources */,
+				48372AB01C20BFB700AD0293 /* 100_House_AnimateInAndOut.json in Resources */,
+				48372A9C1C20BFB700AD0293 /* 016_GroupedShapes.json in Resources */,
+				48372A9F1C20BFB700AD0293 /* 050_AnimateTransformPositionSingleKeyframe.json in Resources */,
+				48372A8D1C20BFB700AD0293 /* 002_ShapeLayerLine_data.json in Resources */,
+				48372A911C20BFB700AD0293 /* 006_BezierShape_data.json in Resources */,
+				48372AA61C20BFB700AD0293 /* 057_AnimateTransformPositionCustomEasyInOut.json in Resources */,
+				48372A9A1C20BFB700AD0293 /* 015_DottedLine.json in Resources */,
+				48372AAD1C20BFB700AD0293 /* 073_AnimateRectangleSizeEasyEase.json in Resources */,
+				48372AAB1C20BFB700AD0293 /* 070_AnimatePathLine.json in Resources */,
+				48372A8C1C20BFB700AD0293 /* 001_ShapeLayerSquare_data.json in Resources */,
+				48372AA71C20BFB700AD0293 /* 058_AnimateTransformPositionHoldKeyframe.json in Resources */,
+				48372AA51C20BFB700AD0293 /* 056_AnimateTransformPositionCustomEaseIn.json in Resources */,
+				48372A901C20BFB700AD0293 /* 005_TwoShapeLayerSquaresDifferent_data.json in Resources */,
+				48372A9B1C20BFB700AD0293 /* 015_TrimPaths.json in Resources */,
+				48372AAF1C20BFB700AD0293 /* 075_AnimateTrimPaths.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,20 +484,24 @@
 			files = (
 				4804B31E1C1F757600DA8AF7 /* UIColor+Expanded.m in Sources */,
 				4804B2FF1C1F55E600DA8AF7 /* ViewController.m in Sources */,
+				48372A641C20A91C00AD0293 /* LAJSONExplorerViewController.m in Sources */,
 				4804B3191C1F6DEA00DA8AF7 /* LAScene.m in Sources */,
 				4804B2FC1C1F55E600DA8AF7 /* AppDelegate.m in Sources */,
 				4804B3211C1F761800DA8AF7 /* BWMath.m in Sources */,
 				48372A441C1F84D700AD0293 /* LACompView.m in Sources */,
 				48372A471C1F8B4C00AD0293 /* LAPath.m in Sources */,
 				4804B32C1C1F835F00DA8AF7 /* LALayerView.m in Sources */,
+				48372AB41C20C13700AD0293 /* CGGeometryAdditions.m in Sources */,
 				48372A4A1C1F8D7D00AD0293 /* LAMask.m in Sources */,
 				4804B3161C1F5B2000DA8AF7 /* LALayer.m in Sources */,
 				48372A521C20973300AD0293 /* LAShapeItem.m in Sources */,
 				48372A4F1C1F99C600AD0293 /* LAShape.m in Sources */,
 				48372A581C209A6C00AD0293 /* LAShapeStroke.m in Sources */,
+				48372ABA1C20D98200AD0293 /* LAShapeRectangle.m in Sources */,
 				48372A5B1C209A7A00AD0293 /* LAShapeFill.m in Sources */,
 				4804B2F91C1F55E600DA8AF7 /* main.m in Sources */,
 				48372A551C209A5F00AD0293 /* LAShapePath.m in Sources */,
+				48372AB71C20D97200AD0293 /* LAShapeCircle.m in Sources */,
 				48372A5E1C209A8900AD0293 /* LAShapeTransform.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

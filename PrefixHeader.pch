@@ -19,5 +19,6 @@
 #import "LALayerView.h"
 #import "LACompView.h"
 #import "LAModels.h"
+#import "CGGeometryAdditions.h"
 
 #endif /* PrefixHeader_pch */
