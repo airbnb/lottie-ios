@@ -71,6 +71,10 @@
 		48372AB41C20C13700AD0293 /* CGGeometryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372AB31C20C13700AD0293 /* CGGeometryAdditions.m */; };
 		48372AB71C20D97200AD0293 /* LAShapeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372AB61C20D97200AD0293 /* LAShapeCircle.m */; };
 		48372ABA1C20D98200AD0293 /* LAShapeRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372AB91C20D98200AD0293 /* LAShapeRectangle.m */; };
+		4872BEDE1D146D850028E0B3 /* animatedTransformHold.json in Resources */ = {isa = PBXBuildFile; fileRef = 4872BEDB1D146D850028E0B3 /* animatedTransformHold.json */; };
+		4872BEDF1D146D850028E0B3 /* animatedTransform2.json in Resources */ = {isa = PBXBuildFile; fileRef = 4872BEDC1D146D850028E0B3 /* animatedTransform2.json */; };
+		4872BEE01D146D850028E0B3 /* animatedTransform.json in Resources */ = {isa = PBXBuildFile; fileRef = 4872BEDD1D146D850028E0B3 /* animatedTransform.json */; };
+		488990ED1D08A2A400425189 /* curve.json in Resources */ = {isa = PBXBuildFile; fileRef = 488990EC1D08A2A400425189 /* curve.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -162,6 +166,10 @@
 		48372AB61C20D97200AD0293 /* LAShapeCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeCircle.m; sourceTree = "<group>"; };
 		48372AB81C20D98200AD0293 /* LAShapeRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeRectangle.h; sourceTree = "<group>"; };
 		48372AB91C20D98200AD0293 /* LAShapeRectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeRectangle.m; sourceTree = "<group>"; };
+		4872BEDB1D146D850028E0B3 /* animatedTransformHold.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animatedTransformHold.json; sourceTree = "<group>"; };
+		4872BEDC1D146D850028E0B3 /* animatedTransform2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animatedTransform2.json; sourceTree = "<group>"; };
+		4872BEDD1D146D850028E0B3 /* animatedTransform.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animatedTransform.json; sourceTree = "<group>"; };
+		488990EC1D08A2A400425189 /* curve.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = curve.json; sourceTree = "<group>"; };
 		64D18A4F59FB72C8B3DEBCDE /* Pods-LotteAnimator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.release.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.release.xcconfig"; sourceTree = "<group>"; };
 		A3DACE6859B88B69187ADCF9 /* Pods-LotteAnimator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -286,6 +294,9 @@
 		48372A651C20B04300AD0293 /* JSONExamples */ = {
 			isa = PBXGroup;
 			children = (
+				4872BEDB1D146D850028E0B3 /* animatedTransformHold.json */,
+				4872BEDC1D146D850028E0B3 /* animatedTransform2.json */,
+				4872BEDD1D146D850028E0B3 /* animatedTransform.json */,
 				48372A661C20BFB700AD0293 /* 001_ShapeLayerSquare_data.json */,
 				48372A671C20BFB700AD0293 /* 002_ShapeLayerLine_data.json */,
 				48372A681C20BFB700AD0293 /* 003_TwoShapeLayerSquares_data.json */,
@@ -325,6 +336,7 @@
 				48372A8A1C20BFB700AD0293 /* 100_House_AnimateInAndOut.json */,
 				48372A8B1C20BFB700AD0293 /* 200_LYS_LightSwitch.json */,
 				48372A601C20A88E00AD0293 /* data.json */,
+				488990EC1D08A2A400425189 /* curve.json */,
 			);
 			name = JSONExamples;
 			sourceTree = "<group>";
@@ -401,8 +413,10 @@
 				4804B3071C1F55E600DA8AF7 /* LaunchScreen.storyboard in Resources */,
 				48372AB11C20BFB700AD0293 /* 200_LYS_LightSwitch.json in Resources */,
 				4804B3041C1F55E600DA8AF7 /* Assets.xcassets in Resources */,
+				4872BEDF1D146D850028E0B3 /* animatedTransform2.json in Resources */,
 				48372AAE1C20BFB700AD0293 /* 074_AnimateRectanglePosition.json in Resources */,
 				48372AA31C20BFB700AD0293 /* 054_AnimateTransformPositionEaseOut.json in Resources */,
+				488990ED1D08A2A400425189 /* curve.json in Resources */,
 				48372A9E1C20BFB700AD0293 /* 049_ShapeInOut.json in Resources */,
 				48372A8E1C20BFB700AD0293 /* 003_TwoShapeLayerSquares_data.json in Resources */,
 				4804B3021C1F55E600DA8AF7 /* Main.storyboard in Resources */,
@@ -436,7 +450,9 @@
 				48372A8C1C20BFB700AD0293 /* 001_ShapeLayerSquare_data.json in Resources */,
 				48372AA71C20BFB700AD0293 /* 058_AnimateTransformPositionHoldKeyframe.json in Resources */,
 				48372AA51C20BFB700AD0293 /* 056_AnimateTransformPositionCustomEaseIn.json in Resources */,
+				4872BEDE1D146D850028E0B3 /* animatedTransformHold.json in Resources */,
 				48372A901C20BFB700AD0293 /* 005_TwoShapeLayerSquaresDifferent_data.json in Resources */,
+				4872BEE01D146D850028E0B3 /* animatedTransform.json in Resources */,
 				48372A9B1C20BFB700AD0293 /* 015_TrimPaths.json in Resources */,
 				48372AAF1C20BFB700AD0293 /* 075_AnimateTrimPaths.json in Resources */,
 			);

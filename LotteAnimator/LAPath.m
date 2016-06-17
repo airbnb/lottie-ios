@@ -29,8 +29,9 @@
   
   if (closedPath) {
     [path addCurveToPoint:[self _vertexAtIndex:0] controlPoint1:[self _outTangentAtIndex:self.points.count - 1] controlPoint2:[self _inTangentAtIndex:0]];
+    [path closePath];
   }
-  
+
   return path;
 }
 

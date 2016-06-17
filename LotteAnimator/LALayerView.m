@@ -21,11 +21,17 @@
     _layerModel = model;
     if (model.masks) {
       self.clipsToBounds = NO;
-      LAMask *maskModel = model.masks.firstObject;
-      UIBezierPath *myClippingPath = [maskModel.maskPath bezierPath:maskModel.isClosed];
-      
+      UIBezierPath *clippingMask = nil;
+      for (LAMask *maskModel in model.masks) {
+        UIBezierPath *maskPath = [maskModel.maskPath bezierPath:maskModel.isClosed];
+        if (clippingMask) {
+          [clippingMask appendPath:maskPath];
+        } else {
+          clippingMask = maskPath;
+        }
+      }
       CAShapeLayer *mask = [CAShapeLayer layer];
-      mask.path = myClippingPath.CGPath;
+      mask.path = clippingMask.CGPath;
 
       self.layer.mask = mask;
     }
@@ -37,6 +43,8 @@
         
         NSArray *allItems = shape.shapeItems;
         NSArray *reversedItems = [[allItems reverseObjectEnumerator] allObjects];
+
+        LAShapeTransform *transformItem = shape.transforms.firstObject;
         
         for (LAShapeItem *item in reversedItems) {
           // Reverse Enumerate to build up shape heirarchy.
@@ -48,6 +56,7 @@
               shapeLayer.path = path.path.CGPath;
               shapeLayer.fillColor = fill.color.CGColor;
               shapeLayer.opacity = fill.alpha;
+              shapeLayer.transform = CATransform3DMakeAffineTransform(transformItem.transform);
               [self.layer addSublayer:shapeLayer];
             }
           }
@@ -61,6 +70,7 @@
               shapeLayer.strokeColor = stroke.color.CGColor;
               shapeLayer.lineWidth = stroke.width.floatValue;
               shapeLayer.opacity = stroke.alpha;
+              shapeLayer.transform = CATransform3DMakeAffineTransform(transformItem.transform);
               [self.layer addSublayer:shapeLayer];
             }
           }
@@ -68,13 +78,6 @@
             [paths removeObject:item];
           }
         }
-        
-//        if (transform) {
-////          shapeLayer.anchorPoint = transform.anchorPoint;
-////          shapeLayer.position =
-////          shapeLayer.transform = CATransform3DMakeAffineTransform(transform.transform);
-//        }
-//        [self.layer addSublayer:shapeLayer];
       }
     }
     

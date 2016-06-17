@@ -42,6 +42,7 @@
   return aeAnchorPoint;
 }
 
+// TODO Permanently Unwrap these arrays for efficency
 - (CGSize)scale {
   if (!self.scaleArray) {
     return CGSizeZero;
@@ -57,7 +58,10 @@
 }
 
 - (CGAffineTransform)transform {
-  return CGAffineTransformRotate(CGAffineTransformMakeScale(self.scale.width, self.scale.height), DegreesToRadians(self.rotation ? self.rotation.floatValue : 0.f));
+  CGAffineTransform translate = CGAffineTransformMakeTranslation(self.position.x, self.position.y);
+  CGAffineTransform scale = CGAffineTransformScale(translate, self.scale.width, self.scale.height);
+  CGAffineTransform rotate = CGAffineTransformRotate(scale, DegreesToRadians(self.rotation ? self.rotation.floatValue : 0.f));
+  return rotate;
 }
 
 @end

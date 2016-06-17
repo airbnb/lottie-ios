@@ -14,7 +14,7 @@
   return @{@"itemType" : @"ty",
            @"positionArray" : @"p",
            @"sizeArray" : @"s",
-           @"rotation" : @"r"};
+           @"cornerRadius" : @"r"};
 }
 
 - (CGPoint)position {
@@ -35,9 +35,11 @@
 
 - (UIBezierPath *)path {
   CGRect rectBounds = CGRectMake(self.size.width * -0.5, self.size.height * -0.5, self.size.width, self.size.height);
-  UIBezierPath *path = [UIBezierPath bezierPathWithRect:rectBounds];
-  if (self.rotation) {
-    [path applyTransform:CGAffineTransformMakeRotation(DegreesToRadians(self.rotation.floatValue))];
+  UIBezierPath *path;
+  if (self.cornerRadius && self.cornerRadius.floatValue > 0.0) {
+    path = [UIBezierPath bezierPathWithRoundedRect:rectBounds cornerRadius:self.cornerRadius.floatValue];
+  } else {
+    path = [UIBezierPath bezierPathWithRect:rectBounds];
   }
   return path;
 }

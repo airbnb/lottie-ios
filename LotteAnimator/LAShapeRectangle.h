@@ -12,7 +12,7 @@
 
 @property (nonatomic, copy) NSArray *positionArray;
 @property (nonatomic, copy) NSArray *sizeArray;
-@property (nonatomic, copy) NSNumber *rotation;
+@property (nonatomic, copy) NSNumber *cornerRadius;
 
 @property (nonatomic, readonly) CGPoint position;
 @property (nonatomic, readonly) CGSize size;

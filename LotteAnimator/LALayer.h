@@ -9,13 +9,15 @@
 #import "MTLModel.h"
 #import <UIKit/UIKit.h>
 @class LALayerView;
+@class LAShape;
+@class LAMask;
 
 @interface LALayer : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *layerName;
 @property (nonatomic, copy) NSNumber *layerID;
-@property (nonatomic, copy) NSArray *shapes;
-@property (nonatomic, copy) NSArray *masks;
+@property (nonatomic, copy) NSArray<LAShape *> *shapes;
+@property (nonatomic, copy) NSArray<LAMask *> *masks;
 
 @property (nonatomic, copy) NSNumber *width;
 @property (nonatomic, copy) NSNumber *height;

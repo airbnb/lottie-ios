@@ -23,3 +23,11 @@
 #import "LAShapeRectangle.h"
 
 #endif /* LAModels_h */
+
+// Bigger TODO (Requires work on Parser)
+// Support for line caps. (New parser check)
+// Support for star shapes
+// Support for repeaters
+// Support merged paths.
+// Support for layer masks. (TRICKY)
+// Support for dashed lines (New parser Check)

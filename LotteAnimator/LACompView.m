@@ -35,6 +35,7 @@
   for (UIView *child in self.subviews) {
     if ([child isKindOfClass:[LALayerView class]]) {
       [(LALayerView *)child setDebugModeOn:debugModeOn];
+      child.alpha = debugModeOn ? 0.5 : 1;
     }
   }
 }
