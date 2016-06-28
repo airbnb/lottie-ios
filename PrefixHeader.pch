@@ -17,7 +17,7 @@
 #import "UIColor+Expanded.h"
 #import "BWMath.h"
 #import "LALayerView.h"
-#import "LACompView.h"
+//#import "LACompView.h"
 #import "LAModels.h"
 #import "CGGeometryAdditions.h"
 

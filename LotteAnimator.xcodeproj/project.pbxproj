@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2729C93AC2BB9F90DD1DF3B3 /* libPods-LotteAnimator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 027033889637BDC48D72D292 /* libPods-LotteAnimator.a */; };
 		4804B2F91C1F55E600DA8AF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B2F81C1F55E600DA8AF7 /* main.m */; };
 		4804B2FC1C1F55E600DA8AF7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B2FB1C1F55E600DA8AF7 /* AppDelegate.m */; };
 		4804B2FF1C1F55E600DA8AF7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B2FE1C1F55E600DA8AF7 /* ViewController.m */; };
@@ -18,8 +17,6 @@
 		4804B3191C1F6DEA00DA8AF7 /* LAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B3181C1F6DEA00DA8AF7 /* LAScene.m */; };
 		4804B31E1C1F757600DA8AF7 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B31D1C1F757600DA8AF7 /* UIColor+Expanded.m */; };
 		4804B3211C1F761800DA8AF7 /* BWMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B3201C1F761800DA8AF7 /* BWMath.m */; };
-		4804B32C1C1F835F00DA8AF7 /* LALayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B32B1C1F835F00DA8AF7 /* LALayerView.m */; };
-		48372A441C1F84D700AD0293 /* LACompView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A431C1F84D700AD0293 /* LACompView.m */; };
 		48372A471C1F8B4C00AD0293 /* LAPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A461C1F8B4C00AD0293 /* LAPath.m */; };
 		48372A4A1C1F8D7D00AD0293 /* LAMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A491C1F8D7D00AD0293 /* LAMask.m */; };
 		48372A4F1C1F99C600AD0293 /* LAShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A4E1C1F99C600AD0293 /* LAShape.m */; };
@@ -72,13 +69,18 @@
 		48372AB71C20D97200AD0293 /* LAShapeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372AB61C20D97200AD0293 /* LAShapeCircle.m */; };
 		48372ABA1C20D98200AD0293 /* LAShapeRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372AB91C20D98200AD0293 /* LAShapeRectangle.m */; };
 		4872BEDE1D146D850028E0B3 /* animatedTransformHold.json in Resources */ = {isa = PBXBuildFile; fileRef = 4872BEDB1D146D850028E0B3 /* animatedTransformHold.json */; };
-		4872BEDF1D146D850028E0B3 /* animatedTransform2.json in Resources */ = {isa = PBXBuildFile; fileRef = 4872BEDC1D146D850028E0B3 /* animatedTransform2.json */; };
 		4872BEE01D146D850028E0B3 /* animatedTransform.json in Resources */ = {isa = PBXBuildFile; fileRef = 4872BEDD1D146D850028E0B3 /* animatedTransform.json */; };
 		488990ED1D08A2A400425189 /* curve.json in Resources */ = {isa = PBXBuildFile; fileRef = 488990EC1D08A2A400425189 /* curve.json */; };
+		620A56491D1B3B150030EBFB /* FullLayerModel_Animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 620A56481D1B3B150030EBFB /* FullLayerModel_Animation.json */; };
+		620A565C1D1C81610030EBFB /* LAAnimatableColorValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A565B1D1C81610030EBFB /* LAAnimatableColorValue.m */; };
+		620A565F1D1C81750030EBFB /* LAAnimatablePointValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A565E1D1C81750030EBFB /* LAAnimatablePointValue.m */; };
+		620A56621D1C81850030EBFB /* LAAnimatableNumberValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A56611D1C81850030EBFB /* LAAnimatableNumberValue.m */; };
+		620A56651D1C81930030EBFB /* LAAnimatableShapeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A56641D1C81930030EBFB /* LAAnimatableShapeValue.m */; };
+		F5B4E946F7B28B4594824641 /* libPods-LotteAnimator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		027033889637BDC48D72D292 /* libPods-LotteAnimator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LotteAnimator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F91706772A1FB721DE3F691 /* Pods-LotteAnimator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.release.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.release.xcconfig"; sourceTree = "<group>"; };
 		4804B2F41C1F55E600DA8AF7 /* LotteAnimator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LotteAnimator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4804B2F81C1F55E600DA8AF7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4804B2FA1C1F55E600DA8AF7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -167,11 +169,20 @@
 		48372AB81C20D98200AD0293 /* LAShapeRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeRectangle.h; sourceTree = "<group>"; };
 		48372AB91C20D98200AD0293 /* LAShapeRectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeRectangle.m; sourceTree = "<group>"; };
 		4872BEDB1D146D850028E0B3 /* animatedTransformHold.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animatedTransformHold.json; sourceTree = "<group>"; };
-		4872BEDC1D146D850028E0B3 /* animatedTransform2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animatedTransform2.json; sourceTree = "<group>"; };
 		4872BEDD1D146D850028E0B3 /* animatedTransform.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animatedTransform.json; sourceTree = "<group>"; };
 		488990EC1D08A2A400425189 /* curve.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = curve.json; sourceTree = "<group>"; };
-		64D18A4F59FB72C8B3DEBCDE /* Pods-LotteAnimator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.release.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.release.xcconfig"; sourceTree = "<group>"; };
-		A3DACE6859B88B69187ADCF9 /* Pods-LotteAnimator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.debug.xcconfig"; sourceTree = "<group>"; };
+		620A56451D1B2D3D0030EBFB /* LAAnimatableValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LAAnimatableValue.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		620A56481D1B3B150030EBFB /* FullLayerModel_Animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullLayerModel_Animation.json; sourceTree = "<group>"; };
+		620A565A1D1C81610030EBFB /* LAAnimatableColorValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableColorValue.h; sourceTree = "<group>"; };
+		620A565B1D1C81610030EBFB /* LAAnimatableColorValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableColorValue.m; sourceTree = "<group>"; };
+		620A565D1D1C81750030EBFB /* LAAnimatablePointValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LAAnimatablePointValue.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		620A565E1D1C81750030EBFB /* LAAnimatablePointValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LAAnimatablePointValue.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		620A56601D1C81850030EBFB /* LAAnimatableNumberValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableNumberValue.h; sourceTree = "<group>"; };
+		620A56611D1C81850030EBFB /* LAAnimatableNumberValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableNumberValue.m; sourceTree = "<group>"; };
+		620A56631D1C81930030EBFB /* LAAnimatableShapeValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableShapeValue.h; sourceTree = "<group>"; };
+		620A56641D1C81930030EBFB /* LAAnimatableShapeValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableShapeValue.m; sourceTree = "<group>"; };
+		AEE1A33E4CE2F6024DE7793E /* Pods-LotteAnimator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.debug.xcconfig"; sourceTree = "<group>"; };
+		BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LotteAnimator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,17 +190,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2729C93AC2BB9F90DD1DF3B3 /* libPods-LotteAnimator.a in Frameworks */,
+				F5B4E946F7B28B4594824641 /* libPods-LotteAnimator.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2653721FDDC54D22BC994C27 /* Frameworks */ = {
+		2C12DADFC72CFA8FAF73E072 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				027033889637BDC48D72D292 /* libPods-LotteAnimator.a */,
+				BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -199,8 +210,8 @@
 			children = (
 				4804B2F61C1F55E600DA8AF7 /* LotteAnimator */,
 				4804B2F51C1F55E600DA8AF7 /* Products */,
-				9FA3267ABDA7A42BA208E961 /* Pods */,
-				2653721FDDC54D22BC994C27 /* Frameworks */,
+				B825B6C4621B706133B91C89 /* Pods */,
+				2C12DADFC72CFA8FAF73E072 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -250,6 +261,15 @@
 			isa = PBXGroup;
 			children = (
 				48372A5F1C209AA200AD0293 /* LAModels.h */,
+				620A56451D1B2D3D0030EBFB /* LAAnimatableValue.h */,
+				620A565A1D1C81610030EBFB /* LAAnimatableColorValue.h */,
+				620A565B1D1C81610030EBFB /* LAAnimatableColorValue.m */,
+				620A565D1D1C81750030EBFB /* LAAnimatablePointValue.h */,
+				620A565E1D1C81750030EBFB /* LAAnimatablePointValue.m */,
+				620A56601D1C81850030EBFB /* LAAnimatableNumberValue.h */,
+				620A56611D1C81850030EBFB /* LAAnimatableNumberValue.m */,
+				620A56631D1C81930030EBFB /* LAAnimatableShapeValue.h */,
+				620A56641D1C81930030EBFB /* LAAnimatableShapeValue.m */,
 				4804B3141C1F5B2000DA8AF7 /* LALayer.h */,
 				4804B3151C1F5B2000DA8AF7 /* LALayer.m */,
 				4804B3171C1F6DEA00DA8AF7 /* LAScene.h */,
@@ -295,7 +315,6 @@
 			isa = PBXGroup;
 			children = (
 				4872BEDB1D146D850028E0B3 /* animatedTransformHold.json */,
-				4872BEDC1D146D850028E0B3 /* animatedTransform2.json */,
 				4872BEDD1D146D850028E0B3 /* animatedTransform.json */,
 				48372A661C20BFB700AD0293 /* 001_ShapeLayerSquare_data.json */,
 				48372A671C20BFB700AD0293 /* 002_ShapeLayerLine_data.json */,
@@ -314,6 +333,7 @@
 				48372A741C20BFB700AD0293 /* 015_DottedLine.json */,
 				48372A751C20BFB700AD0293 /* 015_TrimPaths.json */,
 				48372A761C20BFB700AD0293 /* 016_GroupedShapes.json */,
+				620A56481D1B3B150030EBFB /* FullLayerModel_Animation.json */,
 				48372A771C20BFB700AD0293 /* 017_ShapeMaskedFeathered.json */,
 				48372A781C20BFB700AD0293 /* 049_ShapeInOut.json */,
 				48372A791C20BFB700AD0293 /* 050_AnimateTransformPositionSingleKeyframe.json */,
@@ -341,11 +361,11 @@
 			name = JSONExamples;
 			sourceTree = "<group>";
 		};
-		9FA3267ABDA7A42BA208E961 /* Pods */ = {
+		B825B6C4621B706133B91C89 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A3DACE6859B88B69187ADCF9 /* Pods-LotteAnimator.debug.xcconfig */,
-				64D18A4F59FB72C8B3DEBCDE /* Pods-LotteAnimator.release.xcconfig */,
+				AEE1A33E4CE2F6024DE7793E /* Pods-LotteAnimator.debug.xcconfig */,
+				3F91706772A1FB721DE3F691 /* Pods-LotteAnimator.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -357,11 +377,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4804B30B1C1F55E600DA8AF7 /* Build configuration list for PBXNativeTarget "LotteAnimator" */;
 			buildPhases = (
-				726187649B7E60A373A8CA7B /* Check Pods Manifest.lock */,
+				31ED9E89C8339AC3C18DF05B /* [CP] Check Pods Manifest.lock */,
 				4804B2F01C1F55E600DA8AF7 /* Sources */,
 				4804B2F11C1F55E600DA8AF7 /* Frameworks */,
 				4804B2F21C1F55E600DA8AF7 /* Resources */,
-				8A9FD320FF866AD587DA49E4 /* Copy Pods Resources */,
+				68BBD7C8240876D886406E19 /* [CP] Embed Pods Frameworks */,
+				D9D262A0DAE4626C29081729 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -413,8 +434,8 @@
 				4804B3071C1F55E600DA8AF7 /* LaunchScreen.storyboard in Resources */,
 				48372AB11C20BFB700AD0293 /* 200_LYS_LightSwitch.json in Resources */,
 				4804B3041C1F55E600DA8AF7 /* Assets.xcassets in Resources */,
-				4872BEDF1D146D850028E0B3 /* animatedTransform2.json in Resources */,
 				48372AAE1C20BFB700AD0293 /* 074_AnimateRectanglePosition.json in Resources */,
+				620A56491D1B3B150030EBFB /* FullLayerModel_Animation.json in Resources */,
 				48372AA31C20BFB700AD0293 /* 054_AnimateTransformPositionEaseOut.json in Resources */,
 				488990ED1D08A2A400425189 /* curve.json in Resources */,
 				48372A9E1C20BFB700AD0293 /* 049_ShapeInOut.json in Resources */,
@@ -461,14 +482,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		726187649B7E60A373A8CA7B /* Check Pods Manifest.lock */ = {
+		31ED9E89C8339AC3C18DF05B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,14 +497,29 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		8A9FD320FF866AD587DA49E4 /* Copy Pods Resources */ = {
+		68BBD7C8240876D886406E19 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9D262A0DAE4626C29081729 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,13 +537,13 @@
 				4804B31E1C1F757600DA8AF7 /* UIColor+Expanded.m in Sources */,
 				4804B2FF1C1F55E600DA8AF7 /* ViewController.m in Sources */,
 				48372A641C20A91C00AD0293 /* LAJSONExplorerViewController.m in Sources */,
+				620A56651D1C81930030EBFB /* LAAnimatableShapeValue.m in Sources */,
 				4804B3191C1F6DEA00DA8AF7 /* LAScene.m in Sources */,
 				4804B2FC1C1F55E600DA8AF7 /* AppDelegate.m in Sources */,
 				4804B3211C1F761800DA8AF7 /* BWMath.m in Sources */,
-				48372A441C1F84D700AD0293 /* LACompView.m in Sources */,
 				48372A471C1F8B4C00AD0293 /* LAPath.m in Sources */,
-				4804B32C1C1F835F00DA8AF7 /* LALayerView.m in Sources */,
 				48372AB41C20C13700AD0293 /* CGGeometryAdditions.m in Sources */,
+				620A565F1D1C81750030EBFB /* LAAnimatablePointValue.m in Sources */,
 				48372A4A1C1F8D7D00AD0293 /* LAMask.m in Sources */,
 				4804B3161C1F5B2000DA8AF7 /* LALayer.m in Sources */,
 				48372A521C20973300AD0293 /* LAShapeItem.m in Sources */,
@@ -516,8 +552,10 @@
 				48372ABA1C20D98200AD0293 /* LAShapeRectangle.m in Sources */,
 				48372A5B1C209A7A00AD0293 /* LAShapeFill.m in Sources */,
 				4804B2F91C1F55E600DA8AF7 /* main.m in Sources */,
+				620A56621D1C81850030EBFB /* LAAnimatableNumberValue.m in Sources */,
 				48372A551C209A5F00AD0293 /* LAShapePath.m in Sources */,
 				48372AB71C20D97200AD0293 /* LAShapeCircle.m in Sources */,
+				620A565C1D1C81610030EBFB /* LAAnimatableColorValue.m in Sources */,
 				48372A5E1C209A8900AD0293 /* LAShapeTransform.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -628,7 +666,7 @@
 		};
 		4804B30C1C1F55E600DA8AF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3DACE6859B88B69187ADCF9 /* Pods-LotteAnimator.debug.xcconfig */;
+			baseConfigurationReference = AEE1A33E4CE2F6024DE7793E /* Pods-LotteAnimator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = PrefixHeader.pch;
@@ -641,7 +679,7 @@
 		};
 		4804B30D1C1F55E600DA8AF7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64D18A4F59FB72C8B3DEBCDE /* Pods-LotteAnimator.release.xcconfig */;
+			baseConfigurationReference = 3F91706772A1FB721DE3F691 /* Pods-LotteAnimator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = PrefixHeader.pch;

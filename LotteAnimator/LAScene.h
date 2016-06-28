@@ -14,5 +14,8 @@
 @property (nonatomic, strong) NSArray <LALayer *> *layers;
 @property (nonatomic, strong) NSNumber *compWidth;
 @property (nonatomic, strong) NSNumber *compHeight;
+@property (nonatomic, strong) NSNumber *startFrame;
+@property (nonatomic, strong) NSNumber *endFrame;
+@property (nonatomic, strong) NSNumber *framerate;
 
 @end

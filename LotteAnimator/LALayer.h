@@ -11,34 +11,27 @@
 @class LALayerView;
 @class LAShape;
 @class LAMask;
+@class LAAnimatableProperty;
 
 @interface LALayer : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *layerName;
 @property (nonatomic, copy) NSNumber *layerID;
+@property (nonatomic, copy) NSNumber *layerType;
+@property (nonatomic, copy) NSNumber *parentID;
+@property (nonatomic, copy) NSNumber *inPoint;
+@property (nonatomic, copy) NSNumber *outPoint;
+
 @property (nonatomic, copy) NSArray<LAShape *> *shapes;
 @property (nonatomic, copy) NSArray<LAMask *> *masks;
+@property (nonatomic, copy) LAAnimatableProperty *solidWidth;
+@property (nonatomic, copy) LAAnimatableProperty *solidHeight;
+@property (nonatomic, copy) LAAnimatableProperty *solidColor;
 
-@property (nonatomic, copy) NSNumber *width;
-@property (nonatomic, copy) NSNumber *height;
-
-@property (nonatomic, copy) NSArray *positionArray;
-@property (nonatomic, copy) NSArray *anchorPointArray;
-@property (nonatomic, copy) NSArray *scaleArray;
-@property (nonatomic, copy) NSNumber *rotation;
-@property (nonatomic, copy) NSNumber *opacity;
-@property (nonatomic, copy) NSString *color;
-
-
-// Readonly Helpers
-
-@property (nonatomic, readonly) UIColor *bgColor;
-@property (nonatomic, readonly) CGPoint position;
-@property (nonatomic, readonly) CGPoint anchorPoint;
-@property (nonatomic, readonly) CGSize size;
-@property (nonatomic, readonly) CGSize scale;
-@property (nonatomic, readonly) CGFloat alpha;
-@property (nonatomic, readonly) CGRect frameRect;
-@property (nonatomic, readonly) CGAffineTransform transform;
+@property (nonatomic, copy) LAAnimatableProperty *opacity;
+@property (nonatomic, copy) LAAnimatableProperty *rotation;
+@property (nonatomic, copy) LAAnimatableProperty *position;
+@property (nonatomic, copy) LAAnimatableProperty *anchor;
+@property (nonatomic, copy) LAAnimatableProperty *scale;
 
 @end

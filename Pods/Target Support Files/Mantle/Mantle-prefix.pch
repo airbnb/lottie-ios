@@ -2,4 +2,3 @@
 #import <UIKit/UIKit.h>
 #endif
 
-#import "Pods-LotteAnimator-environment.h"

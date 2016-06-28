@@ -7,6 +7,7 @@
 //
 
 #import "LALayer.h"
+#import "LAAnimatableValue.h"
 
 @implementation LALayer
 
@@ -16,16 +17,22 @@
   return @{
            @"layerName" : @"layerName",
            @"layerID" : @"ind",
-           @"width" : @"width",
-           @"height" : @"height",
+           @"layerType" : @"ty",
+           @"parentID" : @"parent",
+           @"inPoint" : @"ip",
+           @"outPoint" : @"op",
+           
            @"rotation" : @"ks.r",
-           @"positionArray" : @"ks.p",
-           @"anchorPointArray" : @"ks.a",
-           @"scaleArray" : @"ks.s",
+           @"position" : @"ks.p",
+           @"anchor" : @"ks.a",
+           @"scale" : @"ks.s",
            @"opacity" : @"ks.o",
-           @"color" : @"color",
-           @"masks" : @"masksProperties",
-           @"shapes" : @"shapes"
+           
+//           @"solidWidth" : @"sw",
+//           @"solidHeight" : @"sh",
+//           @"solidColor" : @"sc",
+//           @"masks" : @"masksProperties",
+//           @"shapes" : @"shapes"
            };
 }
 
@@ -37,65 +44,85 @@
   return [MTLJSONAdapter arrayTransformerWithModelClass:[LAMask class]];
 }
 
-- (UIColor *)bgColor {
-  if (!self.color) {
-    return [UIColor clearColor];
-  }
-  NSString *hexString = [self.color copy];
-  hexString = [hexString stringByReplacingOccurrencesOfString:@"#" withString:@""];
-  
-  return [UIColor colorWithHexString:hexString];
-}
+//+ (NSValueTransformer *)rotationJSONTransformer {
+//  return [LAAnimatableValue animatablePropertyValueTransformerForKey:@"rotation"];
+//}
+//
+//+ (NSValueTransformer *)positionJSONTransformer {
+//  return [LAAnimatableValue animatablePropertyValueTransformerForKey:@"position"];
+//}
+//
+//+ (NSValueTransformer *)anchorJSONTransformer {
+//  return [LAAnimatableValue animatablePropertyValueTransformerForKey:@"anchor"];
+//}
+//
+//+ (NSValueTransformer *)scaleJSONTransformer {
+//  return [LAAnimatableValue animatablePropertyValueTransformerForKey:@"scale"];
+//}
+//
+//+ (NSValueTransformer *)opacityJSONTransformer {
+//  return [LAAnimatableValue animatablePropertyValueTransformerForKey:@"opacity"];
+//}
 
-- (CGPoint)position {
-  if (!self.positionArray) {
-    return CGPointZero;
-  }
-  CGPoint aePosition = CGPointMake([self.positionArray[0] floatValue], [self.positionArray[1] floatValue]);
-  if (self.anchorPointArray) {
-    aePosition.x -= [self.anchorPointArray[0] floatValue];
-    aePosition.y -= [self.anchorPointArray[1] floatValue];
-  }
-  return aePosition;
-}
-
-- (CGPoint)anchorPoint {
-  if (!self.anchorPointArray) {
-    return CGPointZero;
-  }
-  CGPoint aeAnchorPoint = CGPointMake([self.anchorPointArray[0] floatValue], [self.anchorPointArray[1] floatValue]);
-  CGPoint uikitAnchorPoint = CGPointMake(aeAnchorPoint.x / self.size.width,
-                                         aeAnchorPoint.y / self.size.height);
-  return uikitAnchorPoint;
-}
-
-- (CGSize)size {
-  if (!self.width && !self.height) {
-    return CGSizeZero;
-  }
-  return CGSizeMake(self.width.floatValue, self.height.floatValue);
-}
-
-- (CGSize)scale {
-  if (!self.scaleArray) {
-    return CGSizeZero;
-  }
-  return CGSizeMake([self.scaleArray[0] floatValue] / 100.f, [self.scaleArray[1] floatValue] / 100.f);
-}
-
-- (CGFloat)alpha {
-  if (!self.opacity) {
-    return 1;
-  }
-  return self.opacity.floatValue / 100.f;
-}
-
-- (CGRect)frameRect {
-  return CGRectMake(self.position.x, self.position.y, self.size.width, self.size.height);
-}
-
-- (CGAffineTransform)transform {
-  return CGAffineTransformRotate(CGAffineTransformMakeScale(self.scale.width, self.scale.height), DegreesToRadians(self.rotation ? self.rotation.floatValue : 0.f));
-}
+//- (UIColor *)bgColor {
+//  if (!self.color) {
+//    return [UIColor clearColor];
+//  }
+//  NSString *hexString = [self.color copy];
+//  hexString = [hexString stringByReplacingOccurrencesOfString:@"#" withString:@""];
+//  
+//  return [UIColor colorWithHexString:hexString];
+//}
+//
+//- (CGPoint)position {
+//  if (!self.positionArray) {
+//    return CGPointZero;
+//  }
+//  CGPoint aePosition = CGPointMake([self.positionArray[0] floatValue], [self.positionArray[1] floatValue]);
+//  if (self.anchorPointArray) {
+//    aePosition.x -= [self.anchorPointArray[0] floatValue];
+//    aePosition.y -= [self.anchorPointArray[1] floatValue];
+//  }
+//  return aePosition;
+//}
+//
+//- (CGPoint)anchorPoint {
+//  if (!self.anchorPointArray) {
+//    return CGPointZero;
+//  }
+//  CGPoint aeAnchorPoint = CGPointMake([self.anchorPointArray[0] floatValue], [self.anchorPointArray[1] floatValue]);
+//  CGPoint uikitAnchorPoint = CGPointMake(aeAnchorPoint.x / self.size.width,
+//                                         aeAnchorPoint.y / self.size.height);
+//  return uikitAnchorPoint;
+//}
+//
+//- (CGSize)size {
+//  if (!self.width && !self.height) {
+//    return CGSizeZero;
+//  }
+//  return CGSizeMake(self.width.floatValue, self.height.floatValue);
+//}
+//
+//- (CGSize)scale {
+//  if (!self.scaleArray) {
+//    return CGSizeZero;
+//  }
+//  return CGSizeMake([self.scaleArray[0] floatValue] / 100.f, [self.scaleArray[1] floatValue] / 100.f);
+//}
+//
+//- (CGFloat)alpha {
+//  if (!self.opacity) {
+//    return 1;
+//  }
+//  return self.opacity.floatValue / 100.f;
+//}
+//
+//- (CGRect)frameRect {
+//  return CGRectMake(self.position.x, self.position.y, self.size.width, self.size.height);
+//}
+//
+//- (CGAffineTransform)transform {
+//  return CGAffineTransformRotate(CGAffineTransformMakeScale(self.scale.width, self.scale.height), DegreesToRadians(self.rotation ? self.rotation.floatValue : 0.f));
+//}
 
 @end

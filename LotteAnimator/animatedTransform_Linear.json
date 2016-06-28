@@ -1,0 +1,166 @@
+{
+  "assets": [
+    
+  ],
+  "v": "3.1.7", 
+  "layers": [
+    {
+      "ind": 0,       // Layer ID/Index
+      "ty": 4,        // Type. 4:Shape 3:Null 1:Solid
+      "ks": {
+        "o": 100,     //Opacity
+        "r": 0,       //Rotation
+        "p": [        //Position with keyframes
+          {
+            "i": {
+              "x": 0.833, 
+              "y": 0.833
+            },        // Temporal Tangent
+            "o": {
+              "x": 0.167,
+              "y": 0.167
+            },        // Temporal Tangent
+            "n": "0p833_0p833_0p167_0p167", // Some sort of string version of the temporal tangent
+            "t": 60,  // In Keyframe Position
+            "s": [
+              375,
+              339.75,
+              0
+            ],        // Start Position
+            "e": [
+              510.244,
+              714.661,
+              0
+            ],        // End Position
+            "to": [
+              0,
+              0,
+              0
+            ],        //Out spatial tangent
+            "ti": [
+              0,
+              0,
+              0
+            ]         //In spatial tangent
+          },
+          {
+            "i": {
+              "x": 0.833,
+              "y": 0.833
+            },
+            "o": {
+              "x": 0.167,
+              "y": 0.167
+            },
+            "n": "0p833_0p833_0p167_0p167",
+            "t": 229,
+            "s": [
+              510.244,
+              714.661,
+              0
+            ],
+            "e": [
+              375,
+              1114.697,
+              0
+            ],
+            "to": [
+              0,
+              0,
+              0
+            ],
+            "ti": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "t": 241  // Simple time for ending keyframe
+          }
+        ],            //Position
+        "a": [
+          0,
+          0,
+          0
+        ],            //AnchorPoint
+        "s": [
+          100,
+          100,
+          100
+        ]             //Scale
+      },              //Xform Group for layer
+      "shapes": [
+        {
+          "ty": "gr", //Type?
+          "it": [     //Items of shape Array of variable type
+            {
+              "ty": "rc",   //Shape Type, rc:rectangle, el:circle, tr:transform, fl:fill, st:stroke, sh:path
+              "d": 1, // Direction?
+              "s": [
+                200,
+                200
+              ],      //Size
+              "p": [
+                0,
+                0
+              ],      // Position
+              "r": 0  // Rotation
+            },
+            {
+              "ty": "st",
+              "fillEnabled": true, // Obv
+              "c": [
+                255,
+                0,
+                0,
+                255
+              ],      // Color
+              "o": 100, //Opacity
+              "w": 10, //Stroke Width
+              "lc": 1, //Line Cap type
+              "lj": 1, //Line Joint Type
+              "ml": 4  //Miter limit
+            },
+            {
+              "ty": "fl", //Fill
+              "fillEnabled": true,
+              "c": [
+                255,
+                255,
+                255,
+                255
+              ],    // Color
+              "o": 100 // Opacity
+            },
+            {
+              "ty": "tr", //Transform
+              "p": [
+                0,
+                0
+              ],    //Position
+              "a": [
+                0,
+                0
+              ],    //Anchor
+              "s": [
+                100,
+                100
+              ],    //Scale
+              "r": 0, //Rotation
+              "o": 100  //Opacity
+            }
+          ]
+        }
+      ],
+      "ip": 0,    //In Point for layer
+      "op": 300,  // Out point for layer
+      "st": 0     // Not sure
+    }
+  ],
+  "ip": 0,        //Inpoint
+  "op": 300,      //Outpoint
+  "fr": 60,       //Framerate
+  "w": 750,       //Width
+  "h": 1334       //Height
+}

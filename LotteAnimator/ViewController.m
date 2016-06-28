@@ -17,7 +17,7 @@
 
 @property (nonatomic, strong) UIButton *openButton;
 @property (nonatomic, strong) LAScene *currentScene;
-@property (nonatomic, strong) LACompView *currentSceneView;
+@property (nonatomic, strong) UIView *currentSceneView;
 @property (nonatomic, strong) UIView *logView;
 @property (nonatomic, strong) UITextView *logTextField;
 @property (nonatomic, strong) UIButton *openLogButton;
@@ -36,8 +36,8 @@
   self.logTextField.font = [UIFont boldSystemFontOfSize:18];
   self.logTextField.text = @"LOTTE ANIMATOR";
   
-  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"json"];
-  [self openFileURL:filePath];
+//  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"json"];
+//  [self openFileURL:filePath];
   self.openButton = [UIButton  buttonWithType:UIButtonTypeSystem];
   [self.openButton setTitle:@"Open Comp" forState:UIControlStateNormal];
   
@@ -70,6 +70,81 @@
   [self.view addSubview:self.logView];
   
   [self.logView addSubview:self.logTextField];
+  
+  UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
+  testView.backgroundColor = [UIColor whiteColor];
+//
+  UIBezierPath *startPath = [UIBezierPath new];
+  [startPath moveToPoint:CGPointMake(10, 10)];
+  [startPath addCurveToPoint:CGPointMake(300, 300) controlPoint1:CGPointMake(300, 0) controlPoint2:CGPointMake(0, 300)];
+  startPath.lineWidth = 10;
+
+  UIBezierPath *midPath = [UIBezierPath new];
+  [midPath moveToPoint:CGPointMake(50, 10)];
+  [midPath addCurveToPoint:CGPointMake(300, 300) controlPoint1:CGPointMake(0, 300) controlPoint2:CGPointMake(300, 0)];
+  midPath.lineWidth = 10;
+  
+  UIBezierPath *endPath = [UIBezierPath new];
+  [endPath moveToPoint:CGPointMake(70, 250)];
+  [endPath addCurveToPoint:CGPointMake(300, 300) controlPoint1:CGPointMake(0, 300) controlPoint2:CGPointMake(300, 0)];
+  endPath.lineWidth = 10;
+  
+  UIBezierPath *finalPath = [UIBezierPath new];
+  [finalPath moveToPoint:CGPointMake(150, 200)];
+  [finalPath addCurveToPoint:CGPointMake(150, 100) controlPoint1:CGPointMake(100, 200) controlPoint2:CGPointMake(100, 100)];
+  [finalPath addCurveToPoint:CGPointMake(150, 200) controlPoint1:CGPointMake(200, 100) controlPoint2:CGPointMake(200, 200)];
+  finalPath.lineWidth = 10;
+
+  CAShapeLayer *shapeLayer = [CAShapeLayer new];
+  shapeLayer.fillColor = nil;
+  shapeLayer.path = startPath.CGPath;
+  shapeLayer.strokeColor = [UIColor blueColor].CGColor;
+  shapeLayer.frame = testView.bounds;
+  shapeLayer.lineWidth = 10;
+  [self.view addSubview:testView];
+  [testView.layer addSublayer:shapeLayer];
+  
+//  CABasicAnimation *animation1 = [CABasicAnimation animationWithKeyPath:@"position"];
+//  animation1.fromValue = [NSValue valueWithCGPoint:CGPointMake(150, 150)];
+//  animation1.toValue = [NSValue valueWithCGPoint:CGPointMake(300, 300)];
+//  animation1.fillMode = kCAFillModeForwards;
+//  animation1.duration = 1;
+//  
+//  
+//  CABasicAnimation *animation2 = [CABasicAnimation animationWithKeyPath:@"position"];
+//  animation2.fromValue = animation1.toValue;
+//  animation2.toValue = [NSValue valueWithCGPoint:CGPointMake(500, 300)];
+//  animation2.duration = 1;
+//  animation2.fillMode = kCAFillModeForwards;
+//  animation2.beginTime = 2;
+//  
+//  CAAnimationGroup *group = [CAAnimationGroup new];
+//  group.animations = @[animation1, animation2];
+//  group.duration = 3;
+//  group.beginTime = CACurrentMediaTime() + 3;
+//  group.removedOnCompletion = NO;
+//  group.fillMode = kCAFillModeForwards;
+//  group.repeatCount = HUGE_VALF;
+//  group.autoreverses = YES;
+//  
+//  [shapeLayer addAnimation:group forKey:@"keyframeTest"];
+  
+  
+//
+  CAKeyframeAnimation *keyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:@"path"];
+  keyframeAnimation.values = @[(id)startPath.CGPath, (id)midPath.CGPath, (id)endPath.CGPath, (id)finalPath.CGPath, (id)finalPath.CGPath];
+  keyframeAnimation.keyTimes = @[@0.1,                  @0.25,              @0.5,               @0.9,                   @1];
+  keyframeAnimation.duration = 1;
+  keyframeAnimation.repeatCount = HUGE_VALF;
+  keyframeAnimation.autoreverses = YES;
+  keyframeAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn],
+                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
+  keyframeAnimation.beginTime = CACurrentMediaTime() + 5;
+  [shapeLayer addAnimation:keyframeAnimation forKey:@"keyframeTest"];
+  
+  
 }
 
 - (void)viewWillLayoutSubviews {
@@ -127,15 +202,14 @@
   [self.currentSceneView removeFromSuperview];
   self.currentSceneView = nil;
   self.currentScene = nil;
-  
+  NSError *error;
   NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
   NSDictionary  *JSONObject = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                              options:0 error:NULL];
+                                                              options:0 error:&error];
   
   NSDictionary *object = [JSONObject objectForKey:@"animation"];
-  
-  NSError *error;
-  LAScene *laScene = [MTLJSONAdapter modelOfClass:[LAScene class] fromJSONDictionary:object error:&error];
+
+  LAScene *laScene = [MTLJSONAdapter modelOfClass:[LAScene class] fromJSONDictionary:JSONObject error:&error];
   [self appendStringToLog:@"\n\nOPENING NEW FILE\n"];
   if (error) {
     [self appendStringToLog:[NSString stringWithFormat:@"Failed to open %@", filePath]];
@@ -152,11 +226,11 @@
 //    }
   }
   
-  LACompView *compView = [[LACompView alloc] initWithModel:laScene];
-  
-  [self.view addSubview:compView];
-  self.currentScene = laScene;
-  self.currentSceneView = compView;
-  [self.view sendSubviewToBack:self.currentSceneView];
+//  LACompView *compView = [[LACompView alloc] initWithModel:laScene];
+//  
+//  [self.view addSubview:compView];
+//  self.currentScene = laScene;
+//  self.currentSceneView = compView;
+//  [self.view sendSubviewToBack:self.currentSceneView];
 }
 @end

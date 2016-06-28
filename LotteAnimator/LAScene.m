@@ -12,8 +12,11 @@
 @implementation LAScene
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{@"compWidth" : @"compWidth",
-           @"compHeight" : @"compHeight",
+  return @{@"compWidth" : @"w",
+           @"compHeight" : @"h",
+           @"framerate" : @"fr",
+           @"startFrame" : @"ip",
+           @"endFrame" : @"op",
            @"layers" : @"layers"};
 }
 
