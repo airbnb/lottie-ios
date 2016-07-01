@@ -11,10 +11,12 @@
 
 @interface LAAnimatablePointValue : NSObject <LAAnimatableValue>
 
-- (instancetype)initWithPointValues:(NSArray *)pointValues
+- (instancetype)initWithPointValues:(NSDictionary *)pointValues
                       keyPath:(NSString *)keyPath
                      frameRate:(NSNumber *)frameRate;
 
 @property (nonatomic, readonly) CGPoint initialPoint;
+@property (nonatomic, readonly) NSString *keyPath;
+@property (nonatomic, readonly) CAKeyframeAnimation *animation;
 
 @end

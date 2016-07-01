@@ -9,22 +9,22 @@
 #import "LAAnimatableNumberValue.h"
 
 @implementation LAAnimatableNumberValue
-@synthesize animation = _animation;
-@synthesize keyPath = _keyPath;
 
-- (instancetype)initWithNumberValues:(id)numberValues
+- (instancetype)initWithNumberValues:(NSDictionary *)numberValues
                              keyPath:(NSString *)keyPath
                            frameRate:(NSNumber *)frameRate {
   self = [super init];
   if (self) {
     _keyPath = [keyPath copy];
     id value = numberValues[@"k"];
-    if ([value isKindOfClass:[NSNumber class]]) {
-      //Single Value, no animation
-      _initialValue = value;
-    } else if ([value isKindOfClass:[NSArray class]]) {
+    if ([value isKindOfClass:[NSArray class]] &&
+        [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
+        [(NSDictionary *)[(NSArray *)value firstObject] objectForKey:@"t"]) {
       //Keframes
       [self _buildAnimationForKeyframes:value keyPath:keyPath frameRate:frameRate];
+    } else {
+      //Single Value, no animation
+      _initialValue = [[self _numberValueFromObject:value] copy];
     }
   }
   return self;
@@ -35,7 +35,7 @@
                           frameRate:(NSNumber *)frameRate {
   NSMutableArray *keyTimes = [NSMutableArray array];
   NSMutableArray *timingFunctions = [NSMutableArray array];
-  NSMutableArray *numberValues = [NSMutableArray array];
+  NSMutableArray<NSNumber *> *numberValues = [NSMutableArray array];
   
   NSNumber *startFrame = keyframes.firstObject[@"t"];
   NSNumber *endFrame = keyframes.lastObject[@"t"];
@@ -47,46 +47,10 @@
   NSTimeInterval beginTime = startFrame.floatValue / frameRate.floatValue;
   NSNumber *durationFrames = @(endFrame.floatValue - startFrame.floatValue);
   NSTimeInterval durationTime = durationFrames.floatValue / frameRate.floatValue;
-  // TODO Figure out timing function
   
   BOOL addStartValue = YES;
   BOOL addTimePadding = NO;
-  id outValue = nil;
-  for (NSDictionary *keyframe in keyframes) {
-    
-    if (outValue) {
-      //add out value
-      outValue = nil;
-    }
-    
-    if (addStartValue) {
-      // Add start value
-      addStartValue = NO;
-    }
-    
-    if (addTimePadding) {
-      // add time padding
-      addTimePadding = NO;
-    }
-    
-    
-    
-    // add end value if present
-    
-    // add time
-    
-    
-    
-    //if self.hold
-    //set out value as start value
-    addStartValue = YES;
-    addTimePadding = YES;
-    
-  }
-  
-  
-  NSNumber *previousOutValue = nil;
-  BOOL previousFrameWasHold = NO;
+  NSNumber *outValue = nil;
   
   for (NSDictionary *keyframe in keyframes) {
     // Get keyframe time value
@@ -95,59 +59,71 @@
     //CA Animations accept time values of 0-1 as a percentage of animation completed.
     NSNumber *timePercentage = @((frame.floatValue - startFrame.floatValue) / durationFrames.floatValue);
     
-    if (previousFrameWasHold) {
-      // For Hold frames we need to add a padding keyframe to hold the value
-      // The time value for the padding needs to be right up against the next keyframe
+    if (outValue) {
+      //add out value
+      [numberValues addObject:[outValue copy]];
+      [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+      outValue = nil;
+    }
+    
+    NSNumber *startValue = [self _numberValueFromObject:keyframe[@"s"]];
+    if (addStartValue) {
+      // Add start value
+      if (startValue) {
+        if (keyframe == keyframes.firstObject) {
+          _initialValue = startValue;
+        }
+        [numberValues addObject:[startValue copy]];
+        if (timingFunctions.count) {
+          [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+        }
+      }
+      addStartValue = NO;
+    }
+    
+    if (addTimePadding) {
+      // add time padding
       NSNumber *holdPercentage = @(timePercentage.floatValue - 0.00001);
       [keyTimes addObject:[holdPercentage copy]];
-      [numberValues addObject:[previousOutValue copy]];
-      [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-      previousFrameWasHold = NO;
+      addTimePadding = NO;
     }
     
-    // Add time value for keyframe
-    [keyTimes addObject:[timePercentage copy]];
-    
-    // Get the start and end value.
-    NSNumber *startValue = [self _numberValueFromObject:keyframe[@"s"]];
+    // add end value if present for keyframe
     NSNumber *endValue = [self _numberValueFromObject:keyframe[@"e"]];
-    // Hold keyframes and final keyframes do not have an end value.
-    previousOutValue = endValue ?: startValue;
-    
-    // End keyframes often do not have an end value.
-    [numberValues addObject:[(startValue ?: previousOutValue) copy]];
-    
-    previousFrameWasHold = [keyframe[@"h"] boolValue];
-    
-    if (keyframes.firstObject == keyframe) {
-      _initialValue = [startValue copy];
+    if (endValue) {
+      [numberValues addObject:[endValue copy]];
+      /*
+       * Timing Function for time interpolations between keyframes
+       * Should be n-1 where n is the number of keyframes
+       */
+      CAMediaTimingFunction *timingFunction;
+      NSDictionary *timingControlPoint1 = keyframe[@"o"];
+      NSDictionary *timingControlPoint2 = keyframe[@"i"];
+      
+      if (timingControlPoint1 && timingControlPoint2) {
+        // Easing function
+        CGPoint cp1 = [self _pointFromValueDict:timingControlPoint1];
+        CGPoint cp2 = [self _pointFromValueDict:timingControlPoint2];
+        timingFunction = [CAMediaTimingFunction functionWithControlPoints:cp1.x :cp1.y :cp2.x :cp2.y];
+      } else {
+        // No easing function specified, fallback to linear
+        timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+      }
+      [timingFunctions addObject:timingFunction];
     }
     
-    if (keyframe == keyframes.lastObject) {
-      // No Timing Function for final keyframe.
-      continue;
-    }
+    // add time
+    [keyTimes addObject:timePercentage];
     
-    /*
-     * Timing Function for time interpolations between keyframes
-     * Should be n-1 where n is the number of keyframes
-     */
-    CAMediaTimingFunction *timingFunction;
-    NSDictionary *timingControlPoint1 = keyframe[@"o"];
-    NSDictionary *timingControlPoint2 = keyframe[@"i"];
-    
-    if (timingControlPoint1 && timingControlPoint2) {
-      // Easing function
-      CGPoint cp1 = [self _pointFromValueDict:timingControlPoint1];
-      CGPoint cp2 = [self _pointFromValueDict:timingControlPoint2];
-      timingFunction = [CAMediaTimingFunction functionWithControlPoints:cp1.x :cp1.y :cp2.x :cp2.y];
-    } else {
-      // No easing function specified, fallback to linear
-      timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    // Check if keyframe is a hold keyframe
+    if ([keyframe[@"h"] boolValue]) {
+      // set out value as start and flag next frame accordinly
+      outValue = startValue;
+      addStartValue = YES;
+      addTimePadding = YES;
     }
-    [timingFunctions addObject:timingFunction];
   }
-  
+
   _animation = [CAKeyframeAnimation animationWithKeyPath:keyPath];
   _animation.values = numberValues;
   _animation.keyTimes = keyTimes;
@@ -161,7 +137,8 @@
   if ([valueObject isKindOfClass:[NSNumber class]]) {
     return valueObject;
   }
-  if ([valueObject isKindOfClass:[NSArray class]]) {
+  if ([valueObject isKindOfClass:[NSArray class]] &&
+      [[valueObject firstObject] isKindOfClass:[NSNumber class]]) {
     return [(NSArray *)valueObject firstObject];
   }
   return nil;

@@ -9,12 +9,14 @@
 #import "LAAnimatableValue.h"
 #import <Foundation/Foundation.h>
 
-@interface LAAnimatableNumberValue : NSObject <LAAnimatableValue>
+@interface LAAnimatableNumberValue : NSObject
 
 - (instancetype)initWithNumberValues:(NSDictionary *)numberValues
                             keyPath:(NSString *)keyPath
                           frameRate:(NSNumber *)frameRate;
 
 @property (nonatomic, readonly) NSNumber *initialValue;
+@property (nonatomic, readonly) NSString *keyPath;
+@property (nonatomic, readonly) CAKeyframeAnimation *animation;
 
 @end

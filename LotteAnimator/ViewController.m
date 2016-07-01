@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "LAJSONExplorerViewController.h"
-
+#import "LAAnimatablePointValue.h"
 
 
 
@@ -27,8 +27,21 @@
 
 @implementation ViewController
 
+- (void)_loadTestData {
+  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"lastHold_KeyTest" ofType:@"json"];
+  NSError *error;
+  NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
+  NSDictionary  *JSONObject = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                              options:0 error:&error];
+  
+  NSDictionary *object = [JSONObject objectForKey:@"animation"];
+  
+  LAAnimatablePointValue *numnberValue = [[LAAnimatablePointValue alloc] initWithPointValues:JSONObject keyPath:@"" frameRate:@(60)];
+}
+
 - (void)viewDidLoad {
   [super viewDidLoad];
+  [self _loadTestData];
   // Do any additional setup after loading the view, typically from a nib.
   self.logTextField = [[UITextView alloc] initWithFrame:self.logView.bounds];
   self.logTextField.textColor = [UIColor greenColor];

@@ -12,18 +12,21 @@
 @synthesize animation = _animation;
 @synthesize keyPath = _keyPath;
 
-- (instancetype)initWithPointValues:(NSArray *)pointValues
+- (instancetype)initWithPointValues:(NSDictionary *)pointValues
                        keyPath:(NSString *)keyPath
                       frameRate:(NSNumber *)frameRate {
   self = [super init];
   if (self) {
     _keyPath = [keyPath copy];
-    if ([pointValues.firstObject isKindOfClass:[NSNumber class]]) {
-      //Single Value, no animation
-      _initialPoint = [self _pointFromValueArray:pointValues];
-    } else if ([pointValues.firstObject isKindOfClass:[NSDictionary class]]) {
+    NSArray *value = pointValues[@"k"];
+    if ([value isKindOfClass:[NSArray class]] &&
+        [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
+        [(NSDictionary *)[(NSArray *)value firstObject] objectForKey:@"t"]) {
       //Keframes
-      [self _buildAnimationForKeyframes:pointValues keyPath:keyPath frameRate:frameRate];
+      [self _buildAnimationForKeyframes:value keyPath:keyPath frameRate:frameRate];
+    } else {
+      //Single Value, no animation
+      _initialPoint = [self _pointFromValueArray:value];
     }
   }
   return self;
@@ -47,64 +50,91 @@
   NSNumber *durationFrames = @(endFrame.floatValue - startFrame.floatValue);
   NSTimeInterval durationTime = durationFrames.floatValue / frameRate.floatValue;
   
+  BOOL addStartValue = YES;
+  BOOL addTimePadding = NO;
+  NSArray *outPoint = nil;
+  
   for (NSDictionary *keyframe in keyframes) {
-    /*
-     * Add keyframeTime
-     */
+    // Get keyframe time value
     NSNumber *frame = keyframe[@"t"];
+    // Calculate percentage value for keyframe.
+    //CA Animations accept time values of 0-1 as a percentage of animation completed.
     NSNumber *timePercentage = @((frame.floatValue - startFrame.floatValue) / durationFrames.floatValue);
+    
+    if (outPoint) {
+      //add out value
+      [motionPath addLineToPoint:[self _pointFromValueArray:outPoint]];
+      [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+      outPoint = nil;
+    }
+    
+    NSArray *startPoint = keyframe[@"s"];
+    if (addStartValue) {
+      if (startPoint) {
+        CGPoint sPoint = [self _pointFromValueArray:startPoint];
+        if (keyframe == keyframes.firstObject) {
+          [motionPath moveToPoint:sPoint];
+          _initialPoint = sPoint;
+        } else {
+          [motionPath addLineToPoint:sPoint];
+          [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+        }
+        addStartValue = NO;
+      }
+    }
+    
+    if (addTimePadding) {
+      // add time padding
+      NSNumber *holdPercentage = @(timePercentage.floatValue - 0.00001);
+      [keyTimes addObject:[holdPercentage copy]];
+      addTimePadding = NO;
+    }
+    
+    // add end value if present for keyframe
+    NSArray *endPoint = keyframe[@"e"];
+    if (endPoint) {
+      NSArray *controlPoint1 = keyframe[@"to"];
+      NSArray *controlPoint2 = keyframe[@"ti"];
+      
+      if (controlPoint1 && controlPoint2) {
+        // Quadratic Spatial Interpolation
+        [motionPath addCurveToPoint:[self _pointFromValueArray:endPoint]
+                      controlPoint1:[self _pointFromValueArray:controlPoint1]
+                      controlPoint2:[self _pointFromValueArray:controlPoint2]];
+      } else {
+        // Linear Spatial Interpolation
+        [motionPath addLineToPoint:[self _pointFromValueArray:endPoint]];
+      }
+      
+      /*
+       * Timing Function for time interpolations between keyframes
+       * Should be n-1 where n is the number of keyframes
+       */
+      CAMediaTimingFunction *timingFunction;
+      NSDictionary *timingControlPoint1 = keyframe[@"o"];
+      NSDictionary *timingControlPoint2 = keyframe[@"i"];
+      
+      if (timingControlPoint1 && timingControlPoint2) {
+        // Easing function
+        CGPoint cp1 = [self _pointFromValueDict:timingControlPoint1];
+        CGPoint cp2 = [self _pointFromValueDict:timingControlPoint2];
+        timingFunction = [CAMediaTimingFunction functionWithControlPoints:cp1.x :cp1.y :cp2.x :cp2.y];
+      } else {
+        // No easing function specified, fallback to linear
+        timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+      }
+      [timingFunctions addObject:timingFunction];
+    }
+    
+    // add time
     [keyTimes addObject:timePercentage];
     
-    if (keyframe == keyframes.lastObject) {
-      // Last object is always just a time value.
-      continue;
-    }
-    
-    /*
-     * Timing Function for time interpolations between keyframes
-     * Should be n-1 where n is the number of keyframes
-     */
-    CAMediaTimingFunction *timingFunction;
-    NSDictionary *timingControlPoint1 = keyframe[@"o"];
-    NSDictionary *timingControlPoint2 = keyframe[@"i"];
-    
-    if (timingControlPoint1 && timingControlPoint2) {
-      // Easing function
-      CGPoint cp1 = [self _pointFromValueDict:timingControlPoint1];
-      CGPoint cp2 = [self _pointFromValueDict:timingControlPoint2];
-      timingFunction = [CAMediaTimingFunction functionWithControlPoints:cp1.x :cp1.y :cp2.x :cp2.y];
-    } else {
-      // No easing function specified, fallback to linear
-      timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    }
-    [timingFunctions addObject:timingFunction];
-    
-    /*
-     * Motion Path
-     */
-    CGPoint startPoint = [self _pointFromValueArray:keyframe[@"s"]];
-    CGPoint endPoint = [self _pointFromValueArray:keyframe[@"e"]];
-    
-    if (keyframes.firstObject == keyframe) {
-      _initialPoint = startPoint;
-      [motionPath moveToPoint:startPoint];
-    }
-    
-    if ([keyframe[@"h"] boolValue] == YES) {
-      endPoint = startPoint;
-    }
-    
-    NSArray *controlPoint1 = keyframe[@"to"];
-    NSArray *controlPoint2 = keyframe[@"ti"];
-    
-    if (controlPoint1 && controlPoint2) {
-      // Quadratic Spatial Interpolation
-      [motionPath addCurveToPoint:endPoint
-                    controlPoint1:[self _pointFromValueArray:controlPoint1]
-                    controlPoint2:[self _pointFromValueArray:controlPoint2]];
-    } else {
-      // Linear Spatial Interpolation
-      [motionPath addLineToPoint:endPoint];
+    // Check if keyframe is a hold keyframe
+    if ([keyframe[@"h"] boolValue]) {
+      // set out value as start and flag next frame accordinly
+      outPoint = startPoint;
+      addStartValue = YES;
+      addTimePadding = YES;
     }
   }
   

@@ -76,6 +76,10 @@
 		620A565F1D1C81750030EBFB /* LAAnimatablePointValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A565E1D1C81750030EBFB /* LAAnimatablePointValue.m */; };
 		620A56621D1C81850030EBFB /* LAAnimatableNumberValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A56611D1C81850030EBFB /* LAAnimatableNumberValue.m */; };
 		620A56651D1C81930030EBFB /* LAAnimatableShapeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A56641D1C81930030EBFB /* LAAnimatableShapeValue.m */; };
+		629737DF1D25D7FC007B4AC9 /* allHold_KeyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DB1D25D7FC007B4AC9 /* allHold_KeyTest.json */; };
+		629737E01D25D7FC007B4AC9 /* firstHold_KeyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DC1D25D7FC007B4AC9 /* firstHold_KeyTest.json */; };
+		629737E11D25D7FC007B4AC9 /* lastHold_KeyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DD1D25D7FC007B4AC9 /* lastHold_KeyTest.json */; };
+		629737E21D25D7FC007B4AC9 /* midHold_keyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DE1D25D7FC007B4AC9 /* midHold_keyTest.json */; };
 		F5B4E946F7B28B4594824641 /* libPods-LotteAnimator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */; };
 /* End PBXBuildFile section */
 
@@ -181,6 +185,10 @@
 		620A56611D1C81850030EBFB /* LAAnimatableNumberValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableNumberValue.m; sourceTree = "<group>"; };
 		620A56631D1C81930030EBFB /* LAAnimatableShapeValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableShapeValue.h; sourceTree = "<group>"; };
 		620A56641D1C81930030EBFB /* LAAnimatableShapeValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableShapeValue.m; sourceTree = "<group>"; };
+		629737DB1D25D7FC007B4AC9 /* allHold_KeyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allHold_KeyTest.json; sourceTree = "<group>"; };
+		629737DC1D25D7FC007B4AC9 /* firstHold_KeyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firstHold_KeyTest.json; sourceTree = "<group>"; };
+		629737DD1D25D7FC007B4AC9 /* lastHold_KeyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lastHold_KeyTest.json; sourceTree = "<group>"; };
+		629737DE1D25D7FC007B4AC9 /* midHold_keyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = midHold_keyTest.json; sourceTree = "<group>"; };
 		AEE1A33E4CE2F6024DE7793E /* Pods-LotteAnimator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.debug.xcconfig"; sourceTree = "<group>"; };
 		BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LotteAnimator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -238,6 +246,10 @@
 				4804B2FE1C1F55E600DA8AF7 /* ViewController.m */,
 				48372A621C20A91C00AD0293 /* LAJSONExplorerViewController.h */,
 				48372A631C20A91C00AD0293 /* LAJSONExplorerViewController.m */,
+				629737DB1D25D7FC007B4AC9 /* allHold_KeyTest.json */,
+				629737DC1D25D7FC007B4AC9 /* firstHold_KeyTest.json */,
+				629737DD1D25D7FC007B4AC9 /* lastHold_KeyTest.json */,
+				629737DE1D25D7FC007B4AC9 /* midHold_keyTest.json */,
 				48372A651C20B04300AD0293 /* JSONExamples */,
 				4804B3001C1F55E600DA8AF7 /* Main.storyboard */,
 				4804B3031C1F55E600DA8AF7 /* Assets.xcassets */,
@@ -435,6 +447,7 @@
 				48372AB11C20BFB700AD0293 /* 200_LYS_LightSwitch.json in Resources */,
 				4804B3041C1F55E600DA8AF7 /* Assets.xcassets in Resources */,
 				48372AAE1C20BFB700AD0293 /* 074_AnimateRectanglePosition.json in Resources */,
+				629737E01D25D7FC007B4AC9 /* firstHold_KeyTest.json in Resources */,
 				620A56491D1B3B150030EBFB /* FullLayerModel_Animation.json in Resources */,
 				48372AA31C20BFB700AD0293 /* 054_AnimateTransformPositionEaseOut.json in Resources */,
 				488990ED1D08A2A400425189 /* curve.json in Resources */,
@@ -447,7 +460,10 @@
 				48372A971C20BFB700AD0293 /* 012_ShapeAlphaMatte.json in Resources */,
 				48372AA81C20BFB700AD0293 /* 059_AnimateTransformPositionRoveAcrossTime.json in Resources */,
 				48372A921C20BFB700AD0293 /* 007_ShapeLayerShapes_data.json in Resources */,
+				629737E11D25D7FC007B4AC9 /* lastHold_KeyTest.json in Resources */,
 				48372A951C20BFB700AD0293 /* 010_ShapeLayerRepeaterRotated.json in Resources */,
+				629737DF1D25D7FC007B4AC9 /* allHold_KeyTest.json in Resources */,
+				629737E21D25D7FC007B4AC9 /* midHold_keyTest.json in Resources */,
 				48372A9D1C20BFB700AD0293 /* 017_ShapeMaskedFeathered.json in Resources */,
 				48372A941C20BFB700AD0293 /* 009_ShapeLayerRepeater.json in Resources */,
 				48372AA11C20BFB700AD0293 /* 052_AnimateTransformPositionLinearCurved.json in Resources */,

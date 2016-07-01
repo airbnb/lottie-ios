@@ -9,12 +9,14 @@
 #import "LAAnimatableValue.h"
 #import <Foundation/Foundation.h>
 
-@interface LAAnimatableColorValue : NSObject <LAAnimatableValue>
+@interface LAAnimatableColorValue : NSObject
 
 - (instancetype)initWithColorValues:(NSDictionary *)colorValues
                             keyPath:(NSString *)keyPath
                           frameRate:(NSNumber *)frameRate;
 
 @property (nonatomic, readonly) UIColor *initialColor;
+@property (nonatomic, readonly) NSString *keyPath;
+@property (nonatomic, readonly) CAKeyframeAnimation *animation;
 
 @end

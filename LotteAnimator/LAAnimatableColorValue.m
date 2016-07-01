@@ -19,12 +19,14 @@
   if (self) {
     _keyPath = [keyPath copy];
     NSArray *value = colorValues[@"k"];
-    if ([value.firstObject isKindOfClass:[NSNumber class]]) {
-      //Single Value, no animation
-      _initialColor = [self _colorValueFromArray:value];
-    } else if ([value.firstObject isKindOfClass:[NSDictionary class]]) {
+    if ([value isKindOfClass:[NSArray class]] &&
+        [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
+        [(NSDictionary *)[(NSArray *)value firstObject] objectForKey:@"t"]) {
       //Keframes
       [self _buildAnimationForKeyframes:value keyPath:keyPath frameRate:frameRate];
+    } else {
+      //Single Value, no animation
+      _initialColor = [[self _colorValueFromArray:value] copy];
     }
   }
   return self;
@@ -48,8 +50,9 @@
   NSNumber *durationFrames = @(endFrame.floatValue - startFrame.floatValue);
   NSTimeInterval durationTime = durationFrames.floatValue / frameRate.floatValue;
   
-  UIColor *previousOutValue = nil;
-  BOOL previousFrameWasHold = NO;
+  BOOL addStartValue = YES;
+  BOOL addTimePadding = NO;
+  UIColor *outColor = nil;
   
   for (NSDictionary *keyframe in keyframes) {
     // Get keyframe time value
@@ -58,59 +61,71 @@
     //CA Animations accept time values of 0-1 as a percentage of animation completed.
     NSNumber *timePercentage = @((frame.floatValue - startFrame.floatValue) / durationFrames.floatValue);
     
-    if (previousFrameWasHold) {
-      // For Hold frames we need to add a padding keyframe to hold the value
-      // The time value for the padding needs to be right up against the next keyframe
+    if (outColor) {
+      //add out value
+      [colorValues addObject:(id)[[outColor copy] CGColor]];
+      [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+      outColor = nil;
+    }
+    
+    UIColor *startColor = [self _colorValueFromArray:keyframe[@"s"]];
+    if (addStartValue) {
+      // Add start value
+      if (startColor) {
+        if (keyframe == keyframes.firstObject) {
+          _initialColor = startColor;
+        }
+        [colorValues addObject:(id)[[startColor copy] CGColor]];
+        if (timingFunctions.count) {
+          [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+        }
+      }
+      addStartValue = NO;
+    }
+    
+    if (addTimePadding) {
+      // add time padding
       NSNumber *holdPercentage = @(timePercentage.floatValue - 0.00001);
       [keyTimes addObject:[holdPercentage copy]];
-      [colorValues addObject:(id)[[previousOutValue copy] CGColor]];
-      [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-      previousFrameWasHold = NO;
+      addTimePadding = NO;
     }
     
-    // Add time value for keyframe
-    [keyTimes addObject:[timePercentage copy]];
-    
-    // Get the start and end value.
-    UIColor *startValue = [self _colorValueFromArray:keyframe[@"s"]];
-    UIColor *endValue = [self _colorValueFromArray:keyframe[@"e"]];
-    // Hold keyframes and final keyframes do not have an end value.
-    previousOutValue = endValue ?: startValue;
-    
-    // End keyframes often do not have an end value.
-    [colorValues addObject:(id)[[(startValue ?: previousOutValue) copy] CGColor]];
-    
-    previousFrameWasHold = [keyframe[@"h"] boolValue];
-    
-    if (keyframes.firstObject == keyframe) {
-      _initialColor = [startValue copy];
+    // add end value if present for keyframe
+    UIColor *endColor = [self _colorValueFromArray:keyframe[@"e"]];
+    if (endColor) {
+      [colorValues addObject:(id)[[endColor copy] CGColor]];
+      /*
+       * Timing Function for time interpolations between keyframes
+       * Should be n-1 where n is the number of keyframes
+       */
+      CAMediaTimingFunction *timingFunction;
+      NSDictionary *timingControlPoint1 = keyframe[@"o"];
+      NSDictionary *timingControlPoint2 = keyframe[@"i"];
+      
+      if (timingControlPoint1 && timingControlPoint2) {
+        // Easing function
+        CGPoint cp1 = [self _pointFromValueDict:timingControlPoint1];
+        CGPoint cp2 = [self _pointFromValueDict:timingControlPoint2];
+        timingFunction = [CAMediaTimingFunction functionWithControlPoints:cp1.x :cp1.y :cp2.x :cp2.y];
+      } else {
+        // No easing function specified, fallback to linear
+        timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+      }
+      [timingFunctions addObject:timingFunction];
     }
     
-    if (keyframe == keyframes.lastObject) {
-      // No Timing Function for final keyframe.
-      continue;
-    }
+    // add time
+    [keyTimes addObject:timePercentage];
     
-    /*
-     * Timing Function for time interpolations between keyframes
-     * Should be n-1 where n is the number of keyframes
-     */
-    CAMediaTimingFunction *timingFunction;
-    NSDictionary *timingControlPoint1 = keyframe[@"o"];
-    NSDictionary *timingControlPoint2 = keyframe[@"i"];
-    
-    if (timingControlPoint1 && timingControlPoint2) {
-      // Easing function
-      CGPoint cp1 = [self _pointFromValueDict:timingControlPoint1];
-      CGPoint cp2 = [self _pointFromValueDict:timingControlPoint2];
-      timingFunction = [CAMediaTimingFunction functionWithControlPoints:cp1.x :cp1.y :cp2.x :cp2.y];
-    } else {
-      // No easing function specified, fallback to linear
-      timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    // Check if keyframe is a hold keyframe
+    if ([keyframe[@"h"] boolValue]) {
+      // set out value as start and flag next frame accordinly
+      outColor = startColor;
+      addStartValue = YES;
+      addTimePadding = YES;
     }
-    [timingFunctions addObject:timingFunction];
   }
-  
+
   _animation = [CAKeyframeAnimation animationWithKeyPath:keyPath];
   _animation.values = colorValues;
   _animation.keyTimes = keyTimes;

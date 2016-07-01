@@ -11,10 +11,13 @@
 
 @interface LAAnimatableShapeValue : NSObject <LAAnimatableValue>
 
-- (instancetype)initWithShapeValues:(id)shapeValues
+- (instancetype)initWithShapeValues:(NSDictionary *)shapeValues
                             keyPath:(NSString *)keyPath
-                          frameRate:(NSNumber *)frameRate;
+                          frameRate:(NSNumber *)frameRate
+                         closedPath:(BOOL)closedPath;
 
 @property (nonatomic, readonly) UIBezierPath *initialShape;
+@property (nonatomic, readonly) NSString *keyPath;
+@property (nonatomic, readonly) CAKeyframeAnimation *animation;
 
 @end
