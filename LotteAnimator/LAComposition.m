@@ -6,10 +6,10 @@
 //  Copyright © 2015 Brandon Withrow. All rights reserved.
 //
 
-#import "LAScene.h"
+#import "LAComposition.h"
 #import "LALayer.h"
 
-@implementation LAScene
+@implementation LAComposition
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
   return @{@"compWidth" : @"w",

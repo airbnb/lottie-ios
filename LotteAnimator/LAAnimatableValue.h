@@ -8,13 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-// Make animatatable property class for each type of property
-// Number
-// Point (can be either linear animation or path driven animation)
-// Color
-// Path
-
-
 @protocol LAAnimatableValue <NSObject>
 
 @property (nonatomic, readonly) NSString *keyPath;

@@ -9,7 +9,7 @@
 #import "MTLModel.h"
 
 @class LALayer;
-@interface LAScene : MTLModel <MTLJSONSerializing>
+@interface LAComposition : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, strong) NSArray <LALayer *> *layers;
 @property (nonatomic, strong) NSNumber *compWidth;

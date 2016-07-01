@@ -9,7 +9,7 @@
 #import "LAAnimatableValue.h"
 #import <Foundation/Foundation.h>
 
-@interface LAAnimatableShapeValue : NSObject <LAAnimatableValue>
+@interface LAAnimatableShapeValue : NSObject
 
 - (instancetype)initWithShapeValues:(NSDictionary *)shapeValues
                             keyPath:(NSString *)keyPath

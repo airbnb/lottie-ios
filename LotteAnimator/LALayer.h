@@ -8,30 +8,41 @@
 
 #import "MTLModel.h"
 #import <UIKit/UIKit.h>
+
 @class LALayerView;
 @class LAShape;
 @class LAMask;
-@class LAAnimatableProperty;
+@class LAAnimatableColorValue;
+@class LAAnimatablePointValue;
+@class LAAnimatableNumberValue;
+
+typedef enum : NSUInteger {
+  LALayerTypeNone,
+  LALayerTypeSolid,
+  LALayerTypeUnknown,
+  LALayerTypeNull,
+  LALayerTypeShape
+} LALayerType;
 
 @interface LALayer : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *layerName;
 @property (nonatomic, copy) NSNumber *layerID;
-@property (nonatomic, copy) NSNumber *layerType;
+@property (nonatomic, assign) LALayerType layerType;
 @property (nonatomic, copy) NSNumber *parentID;
 @property (nonatomic, copy) NSNumber *inPoint;
 @property (nonatomic, copy) NSNumber *outPoint;
 
 @property (nonatomic, copy) NSArray<LAShape *> *shapes;
 @property (nonatomic, copy) NSArray<LAMask *> *masks;
-@property (nonatomic, copy) LAAnimatableProperty *solidWidth;
-@property (nonatomic, copy) LAAnimatableProperty *solidHeight;
-@property (nonatomic, copy) LAAnimatableProperty *solidColor;
+@property (nonatomic, copy) LAAnimatableNumberValue *solidWidth;
+@property (nonatomic, copy) LAAnimatableNumberValue *solidHeight;
+@property (nonatomic, copy) LAAnimatableColorValue *solidColor;
 
-@property (nonatomic, copy) LAAnimatableProperty *opacity;
-@property (nonatomic, copy) LAAnimatableProperty *rotation;
-@property (nonatomic, copy) LAAnimatableProperty *position;
-@property (nonatomic, copy) LAAnimatableProperty *anchor;
-@property (nonatomic, copy) LAAnimatableProperty *scale;
+@property (nonatomic, copy) LAAnimatableNumberValue *opacity;
+@property (nonatomic, copy) LAAnimatableNumberValue *rotation;
+@property (nonatomic, copy) LAAnimatablePointValue *position;
+@property (nonatomic, copy) LAAnimatablePointValue *anchor;
+//@property (nonatomic, copy) LAAnimatableProperty *scale; //TODO Make This
 
 @end

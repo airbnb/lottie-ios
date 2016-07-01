@@ -11,7 +11,7 @@
 
 #import "LAPath.h"
 #import "LAMask.h"
-#import "LAScene.h"
+#import "LAComposition.h"
 #import "LALayer.h"
 #import "LAShape.h"
 #import "LAShapeItem.h"

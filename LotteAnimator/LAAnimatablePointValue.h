@@ -9,7 +9,7 @@
 #import "LAAnimatableValue.h"
 #import <Foundation/Foundation.h>
 
-@interface LAAnimatablePointValue : NSObject <LAAnimatableValue>
+@interface LAAnimatablePointValue : NSObject
 
 - (instancetype)initWithPointValues:(NSDictionary *)pointValues
                       keyPath:(NSString *)keyPath

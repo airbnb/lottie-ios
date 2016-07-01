@@ -16,7 +16,7 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) UIButton *openButton;
-@property (nonatomic, strong) LAScene *currentScene;
+@property (nonatomic, strong) LAComposition *currentScene;
 @property (nonatomic, strong) UIView *currentSceneView;
 @property (nonatomic, strong) UIView *logView;
 @property (nonatomic, strong) UITextView *logTextField;
@@ -28,15 +28,13 @@
 @implementation ViewController
 
 - (void)_loadTestData {
-  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"lastHold_KeyTest" ofType:@"json"];
+  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"NewJson_DescriptiveLayers" ofType:@"json"];
   NSError *error;
   NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
   NSDictionary  *JSONObject = [NSJSONSerialization JSONObjectWithData:jsonData
                                                               options:0 error:&error];
+  LAComposition *laScene = [MTLJSONAdapter modelOfClass:[LAComposition class] fromJSONDictionary:JSONObject error:&error];
   
-  NSDictionary *object = [JSONObject objectForKey:@"animation"];
-  
-  LAAnimatablePointValue *numnberValue = [[LAAnimatablePointValue alloc] initWithPointValues:JSONObject keyPath:@"" frameRate:@(60)];
 }
 
 - (void)viewDidLoad {
@@ -222,7 +220,7 @@
   
   NSDictionary *object = [JSONObject objectForKey:@"animation"];
 
-  LAScene *laScene = [MTLJSONAdapter modelOfClass:[LAScene class] fromJSONDictionary:JSONObject error:&error];
+//  LAComposition *laScene = [MTLJSONAdapter modelOfClass:[LAComposition class] fromJSONDictionary:JSONObject error:&error];
   [self appendStringToLog:@"\n\nOPENING NEW FILE\n"];
   if (error) {
     [self appendStringToLog:[NSString stringWithFormat:@"Failed to open %@", filePath]];

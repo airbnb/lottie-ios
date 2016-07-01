@@ -14,7 +14,7 @@
 		4804B3041C1F55E600DA8AF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4804B3031C1F55E600DA8AF7 /* Assets.xcassets */; };
 		4804B3071C1F55E600DA8AF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4804B3051C1F55E600DA8AF7 /* LaunchScreen.storyboard */; };
 		4804B3161C1F5B2000DA8AF7 /* LALayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B3151C1F5B2000DA8AF7 /* LALayer.m */; };
-		4804B3191C1F6DEA00DA8AF7 /* LAScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B3181C1F6DEA00DA8AF7 /* LAScene.m */; };
+		4804B3191C1F6DEA00DA8AF7 /* LAComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B3181C1F6DEA00DA8AF7 /* LAComposition.m */; };
 		4804B31E1C1F757600DA8AF7 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B31D1C1F757600DA8AF7 /* UIColor+Expanded.m */; };
 		4804B3211C1F761800DA8AF7 /* BWMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B3201C1F761800DA8AF7 /* BWMath.m */; };
 		48372A471C1F8B4C00AD0293 /* LAPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A461C1F8B4C00AD0293 /* LAPath.m */; };
@@ -80,6 +80,7 @@
 		629737E01D25D7FC007B4AC9 /* firstHold_KeyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DC1D25D7FC007B4AC9 /* firstHold_KeyTest.json */; };
 		629737E11D25D7FC007B4AC9 /* lastHold_KeyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DD1D25D7FC007B4AC9 /* lastHold_KeyTest.json */; };
 		629737E21D25D7FC007B4AC9 /* midHold_keyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DE1D25D7FC007B4AC9 /* midHold_keyTest.json */; };
+		62F683991D270E290088C015 /* NewJson_DescriptiveLayers.json in Resources */ = {isa = PBXBuildFile; fileRef = 62F683981D270E290088C015 /* NewJson_DescriptiveLayers.json */; };
 		F5B4E946F7B28B4594824641 /* libPods-LotteAnimator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */; };
 /* End PBXBuildFile section */
 
@@ -97,8 +98,8 @@
 		4804B3081C1F55E600DA8AF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4804B3141C1F5B2000DA8AF7 /* LALayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LALayer.h; sourceTree = "<group>"; };
 		4804B3151C1F5B2000DA8AF7 /* LALayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LALayer.m; sourceTree = "<group>"; };
-		4804B3171C1F6DEA00DA8AF7 /* LAScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAScene.h; sourceTree = "<group>"; };
-		4804B3181C1F6DEA00DA8AF7 /* LAScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAScene.m; sourceTree = "<group>"; };
+		4804B3171C1F6DEA00DA8AF7 /* LAComposition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAComposition.h; sourceTree = "<group>"; };
+		4804B3181C1F6DEA00DA8AF7 /* LAComposition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAComposition.m; sourceTree = "<group>"; };
 		4804B31B1C1F738800DA8AF7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
 		4804B31C1C1F757600DA8AF7 /* UIColor+Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expanded.h"; sourceTree = "<group>"; };
 		4804B31D1C1F757600DA8AF7 /* UIColor+Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Expanded.m"; sourceTree = "<group>"; };
@@ -189,6 +190,7 @@
 		629737DC1D25D7FC007B4AC9 /* firstHold_KeyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firstHold_KeyTest.json; sourceTree = "<group>"; };
 		629737DD1D25D7FC007B4AC9 /* lastHold_KeyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lastHold_KeyTest.json; sourceTree = "<group>"; };
 		629737DE1D25D7FC007B4AC9 /* midHold_keyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = midHold_keyTest.json; sourceTree = "<group>"; };
+		62F683981D270E290088C015 /* NewJson_DescriptiveLayers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NewJson_DescriptiveLayers.json; sourceTree = "<group>"; };
 		AEE1A33E4CE2F6024DE7793E /* Pods-LotteAnimator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.debug.xcconfig"; sourceTree = "<group>"; };
 		BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LotteAnimator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -250,6 +252,7 @@
 				629737DC1D25D7FC007B4AC9 /* firstHold_KeyTest.json */,
 				629737DD1D25D7FC007B4AC9 /* lastHold_KeyTest.json */,
 				629737DE1D25D7FC007B4AC9 /* midHold_keyTest.json */,
+				62F683981D270E290088C015 /* NewJson_DescriptiveLayers.json */,
 				48372A651C20B04300AD0293 /* JSONExamples */,
 				4804B3001C1F55E600DA8AF7 /* Main.storyboard */,
 				4804B3031C1F55E600DA8AF7 /* Assets.xcassets */,
@@ -273,19 +276,11 @@
 			isa = PBXGroup;
 			children = (
 				48372A5F1C209AA200AD0293 /* LAModels.h */,
-				620A56451D1B2D3D0030EBFB /* LAAnimatableValue.h */,
-				620A565A1D1C81610030EBFB /* LAAnimatableColorValue.h */,
-				620A565B1D1C81610030EBFB /* LAAnimatableColorValue.m */,
-				620A565D1D1C81750030EBFB /* LAAnimatablePointValue.h */,
-				620A565E1D1C81750030EBFB /* LAAnimatablePointValue.m */,
-				620A56601D1C81850030EBFB /* LAAnimatableNumberValue.h */,
-				620A56611D1C81850030EBFB /* LAAnimatableNumberValue.m */,
-				620A56631D1C81930030EBFB /* LAAnimatableShapeValue.h */,
-				620A56641D1C81930030EBFB /* LAAnimatableShapeValue.m */,
+				62F683871D26EF420088C015 /* AnimatableProperties */,
+				4804B3171C1F6DEA00DA8AF7 /* LAComposition.h */,
+				4804B3181C1F6DEA00DA8AF7 /* LAComposition.m */,
 				4804B3141C1F5B2000DA8AF7 /* LALayer.h */,
 				4804B3151C1F5B2000DA8AF7 /* LALayer.m */,
-				4804B3171C1F6DEA00DA8AF7 /* LAScene.h */,
-				4804B3181C1F6DEA00DA8AF7 /* LAScene.m */,
 				48372A451C1F8B4C00AD0293 /* LAPath.h */,
 				48372A461C1F8B4C00AD0293 /* LAPath.m */,
 				48372A481C1F8D7D00AD0293 /* LAMask.h */,
@@ -371,6 +366,22 @@
 				488990EC1D08A2A400425189 /* curve.json */,
 			);
 			name = JSONExamples;
+			sourceTree = "<group>";
+		};
+		62F683871D26EF420088C015 /* AnimatableProperties */ = {
+			isa = PBXGroup;
+			children = (
+				620A56451D1B2D3D0030EBFB /* LAAnimatableValue.h */,
+				620A565A1D1C81610030EBFB /* LAAnimatableColorValue.h */,
+				620A565B1D1C81610030EBFB /* LAAnimatableColorValue.m */,
+				620A565D1D1C81750030EBFB /* LAAnimatablePointValue.h */,
+				620A565E1D1C81750030EBFB /* LAAnimatablePointValue.m */,
+				620A56601D1C81850030EBFB /* LAAnimatableNumberValue.h */,
+				620A56611D1C81850030EBFB /* LAAnimatableNumberValue.m */,
+				620A56631D1C81930030EBFB /* LAAnimatableShapeValue.h */,
+				620A56641D1C81930030EBFB /* LAAnimatableShapeValue.m */,
+			);
+			name = AnimatableProperties;
 			sourceTree = "<group>";
 		};
 		B825B6C4621B706133B91C89 /* Pods */ = {
@@ -484,6 +495,7 @@
 				48372A9A1C20BFB700AD0293 /* 015_DottedLine.json in Resources */,
 				48372AAD1C20BFB700AD0293 /* 073_AnimateRectangleSizeEasyEase.json in Resources */,
 				48372AAB1C20BFB700AD0293 /* 070_AnimatePathLine.json in Resources */,
+				62F683991D270E290088C015 /* NewJson_DescriptiveLayers.json in Resources */,
 				48372A8C1C20BFB700AD0293 /* 001_ShapeLayerSquare_data.json in Resources */,
 				48372AA71C20BFB700AD0293 /* 058_AnimateTransformPositionHoldKeyframe.json in Resources */,
 				48372AA51C20BFB700AD0293 /* 056_AnimateTransformPositionCustomEaseIn.json in Resources */,
@@ -554,7 +566,7 @@
 				4804B2FF1C1F55E600DA8AF7 /* ViewController.m in Sources */,
 				48372A641C20A91C00AD0293 /* LAJSONExplorerViewController.m in Sources */,
 				620A56651D1C81930030EBFB /* LAAnimatableShapeValue.m in Sources */,
-				4804B3191C1F6DEA00DA8AF7 /* LAScene.m in Sources */,
+				4804B3191C1F6DEA00DA8AF7 /* LAComposition.m in Sources */,
 				4804B2FC1C1F55E600DA8AF7 /* AppDelegate.m in Sources */,
 				4804B3211C1F761800DA8AF7 /* BWMath.m in Sources */,
 				48372A471C1F8B4C00AD0293 /* LAPath.m in Sources */,

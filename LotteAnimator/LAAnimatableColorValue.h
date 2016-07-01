@@ -11,9 +11,9 @@
 
 @interface LAAnimatableColorValue : NSObject
 
-- (instancetype)initWithColorValues:(NSDictionary *)colorValues
-                            keyPath:(NSString *)keyPath
-                          frameRate:(NSNumber *)frameRate;
+- (instancetype)initWithColorValues:(NSDictionary *)colorValues;
+
+- (void)prepareAnimationsForKeyPath:(NSString *)keyPath frameRate:(NSNumber *)frameRate;
 
 @property (nonatomic, readonly) UIColor *initialColor;
 @property (nonatomic, readonly) NSString *keyPath;

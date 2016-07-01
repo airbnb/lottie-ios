@@ -7,7 +7,9 @@
 //
 
 #import "LALayer.h"
-#import "LAAnimatableValue.h"
+#import "LAAnimatableColorValue.h"
+#import "LAAnimatablePointValue.h"
+#import "LAAnimatableNumberValue.h"
 
 @implementation LALayer
 
@@ -25,12 +27,12 @@
            @"rotation" : @"ks.r",
            @"position" : @"ks.p",
            @"anchor" : @"ks.a",
-           @"scale" : @"ks.s",
+//           @"scale" : @"ks.s",
            @"opacity" : @"ks.o",
            
-//           @"solidWidth" : @"sw",
-//           @"solidHeight" : @"sh",
-//           @"solidColor" : @"sc",
+           @"solidWidth" : @"sw",
+           @"solidHeight" : @"sh",
+           @"solidColor" : @"sc",
 //           @"masks" : @"masksProperties",
 //           @"shapes" : @"shapes"
            };
@@ -42,6 +44,28 @@
 
 + (NSValueTransformer *)masksJSONTransformer {
   return [MTLJSONAdapter arrayTransformerWithModelClass:[LAMask class]];
+}
+
++ (NSValueTransformer *)rotationJSONTransformer {
+  return [MTLValueTransformer transformerUsingForwardBlock:^id(NSDictionary *value, BOOL *success, NSError *__autoreleasing *error) {
+    if (value == nil) {
+      return nil;
+    }
+    if (![value isKindOfClass:NSDictionary.class]) {
+      if (error != NULL) {
+        NSDictionary *userInfo = @{
+                                   NSLocalizedDescriptionKey: NSLocalizedString(@"Could not convert JSON dictionary to model object", @""),
+                                   NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:NSLocalizedString(@"Expected an NSDictionary, got: %@", @""), value],
+                                   MTLTransformerErrorHandlingInputValueErrorKey : value
+                                   };
+        
+        *error = [NSError errorWithDomain:MTLTransformerErrorHandlingErrorDomain code:MTLTransformerErrorHandlingErrorInvalidInput userInfo:userInfo];
+      }
+      *success = NO;
+      return nil;
+    }
+    LAAnimatableNumberValue *numvalue = [[LAAnimatableNumberValue alloc] initWithNumberValues:<#(NSDictionary *)#> keyPath:<#(NSString *)#> frameRate:<#(NSNumber *)#>]
+  }];
 }
 
 //+ (NSValueTransformer *)rotationJSONTransformer {
