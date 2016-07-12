@@ -10,143 +10,77 @@
 #import "LAAnimatableColorValue.h"
 #import "LAAnimatablePointValue.h"
 #import "LAAnimatableNumberValue.h"
+#import "LAAnimatableScaleValue.h"
+#import "LAShapeGroup.h"
 
 @implementation LALayer
 
-+ (NSDictionary *)JSONKeyPathsByPropertyKey
-{
-  // model_property_name : json_field_name
-  return @{
-           @"layerName" : @"layerName",
-           @"layerID" : @"ind",
-           @"layerType" : @"ty",
-           @"parentID" : @"parent",
-           @"inPoint" : @"ip",
-           @"outPoint" : @"op",
-           
-           @"rotation" : @"ks.r",
-           @"position" : @"ks.p",
-           @"anchor" : @"ks.a",
-//           @"scale" : @"ks.s",
-           @"opacity" : @"ks.o",
-           
-           @"solidWidth" : @"sw",
-           @"solidHeight" : @"sh",
-           @"solidColor" : @"sc",
-//           @"masks" : @"masksProperties",
-//           @"shapes" : @"shapes"
-           };
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+  self = [super init];
+  if (self) {
+    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+  }
+  return self;
 }
 
-+ (NSValueTransformer *)shapesJSONTransformer {
-  return [MTLJSONAdapter arrayTransformerWithModelClass:[LAShape class]];
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+  _layerName = [jsonDictionary[@"nm"] copy];
+  _layerID = [jsonDictionary[@"ind"] copy];
+  
+  NSNumber *layerType = jsonDictionary[@"ty"];
+  if (layerType.integerValue <= LALayerTypeShape) {
+    _layerType = layerType.integerValue;
+  } else {
+    _layerType = LALayerTypeUnknown;
+  }
+  
+  _parentID = [jsonDictionary[@"parent"] copy];
+  _inFrame = [jsonDictionary[@"ip"] copy];
+  _outFrame = [jsonDictionary[@"op"] copy];
+  
+  if (_layerType == LALayerTypeSolid) {
+    // TODO Solids.
+    
+  }
+  
+  NSDictionary *opacity = jsonDictionary[@"ks.o"];
+  if (opacity) {
+    _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity];
+  }
+  
+  NSDictionary *rotation = jsonDictionary[@"ks.r"];
+  if (rotation) {
+    _rotation = [[LAAnimatableNumberValue alloc] initWithNumberValues:rotation];
+  }
+  
+  NSDictionary *position = jsonDictionary[@"ks.p"];
+  if (position) {
+    _position = [[LAAnimatablePointValue alloc] initWithPointValues:position];
+  }
+  
+  NSDictionary *anchor = jsonDictionary[@"ks.a"];
+  if (anchor) {
+    _anchor = [[LAAnimatablePointValue alloc] initWithPointValues:anchor];
+  }
+  
+  NSDictionary *scale = jsonDictionary[@"ks.s"];
+  if (scale) {
+    _scale = [[LAAnimatableScaleValue alloc] initWithScaleValues:scale];
+  }
+  
+  NSMutableArray *masks = [NSMutableArray array];
+  for (NSDictionary *maskJSON in jsonDictionary[@"masksProperties"]) {
+    LAMask *mask = [[LAMask alloc] initWithJSON:maskJSON frameRate:frameRate];
+    [masks addObject:mask];
+  }
+  _masks = masks;
+  
+  NSMutableArray *shapes = [NSMutableArray array];
+  for (NSDictionary *shapeJSON in jsonDictionary[@"shapes"]) {
+    LAShapeGroup *group = [[LAShapeGroup alloc] initWithJSON:shapeJSON frameRate:frameRate];
+    [shapes addObject:group];
+  }
+  _shapes = shapes;
 }
-
-+ (NSValueTransformer *)masksJSONTransformer {
-  return [MTLJSONAdapter arrayTransformerWithModelClass:[LAMask class]];
-}
-
-+ (NSValueTransformer *)rotationJSONTransformer {
-  return [MTLValueTransformer transformerUsingForwardBlock:^id(NSDictionary *value, BOOL *success, NSError *__autoreleasing *error) {
-    if (value == nil) {
-      return nil;
-    }
-    if (![value isKindOfClass:NSDictionary.class]) {
-      if (error != NULL) {
-        NSDictionary *userInfo = @{
-                                   NSLocalizedDescriptionKey: NSLocalizedString(@"Could not convert JSON dictionary to model object", @""),
-                                   NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:NSLocalizedString(@"Expected an NSDictionary, got: %@", @""), value],
-                                   MTLTransformerErrorHandlingInputValueErrorKey : value
-                                   };
-        
-        *error = [NSError errorWithDomain:MTLTransformerErrorHandlingErrorDomain code:MTLTransformerErrorHandlingErrorInvalidInput userInfo:userInfo];
-      }
-      *success = NO;
-      return nil;
-    }
-    LAAnimatableNumberValue *numvalue = [[LAAnimatableNumberValue alloc] initWithNumberValues:<#(NSDictionary *)#> keyPath:<#(NSString *)#> frameRate:<#(NSNumber *)#>]
-  }];
-}
-
-//+ (NSValueTransformer *)rotationJSONTransformer {
-//  return [LAAnimatableValue animatablePropertyValueTransformerForKey:@"rotation"];
-//}
-//
-//+ (NSValueTransformer *)positionJSONTransformer {
-//  return [LAAnimatableValue animatablePropertyValueTransformerForKey:@"position"];
-//}
-//
-//+ (NSValueTransformer *)anchorJSONTransformer {
-//  return [LAAnimatableValue animatablePropertyValueTransformerForKey:@"anchor"];
-//}
-//
-//+ (NSValueTransformer *)scaleJSONTransformer {
-//  return [LAAnimatableValue animatablePropertyValueTransformerForKey:@"scale"];
-//}
-//
-//+ (NSValueTransformer *)opacityJSONTransformer {
-//  return [LAAnimatableValue animatablePropertyValueTransformerForKey:@"opacity"];
-//}
-
-//- (UIColor *)bgColor {
-//  if (!self.color) {
-//    return [UIColor clearColor];
-//  }
-//  NSString *hexString = [self.color copy];
-//  hexString = [hexString stringByReplacingOccurrencesOfString:@"#" withString:@""];
-//  
-//  return [UIColor colorWithHexString:hexString];
-//}
-//
-//- (CGPoint)position {
-//  if (!self.positionArray) {
-//    return CGPointZero;
-//  }
-//  CGPoint aePosition = CGPointMake([self.positionArray[0] floatValue], [self.positionArray[1] floatValue]);
-//  if (self.anchorPointArray) {
-//    aePosition.x -= [self.anchorPointArray[0] floatValue];
-//    aePosition.y -= [self.anchorPointArray[1] floatValue];
-//  }
-//  return aePosition;
-//}
-//
-//- (CGPoint)anchorPoint {
-//  if (!self.anchorPointArray) {
-//    return CGPointZero;
-//  }
-//  CGPoint aeAnchorPoint = CGPointMake([self.anchorPointArray[0] floatValue], [self.anchorPointArray[1] floatValue]);
-//  CGPoint uikitAnchorPoint = CGPointMake(aeAnchorPoint.x / self.size.width,
-//                                         aeAnchorPoint.y / self.size.height);
-//  return uikitAnchorPoint;
-//}
-//
-//- (CGSize)size {
-//  if (!self.width && !self.height) {
-//    return CGSizeZero;
-//  }
-//  return CGSizeMake(self.width.floatValue, self.height.floatValue);
-//}
-//
-//- (CGSize)scale {
-//  if (!self.scaleArray) {
-//    return CGSizeZero;
-//  }
-//  return CGSizeMake([self.scaleArray[0] floatValue] / 100.f, [self.scaleArray[1] floatValue] / 100.f);
-//}
-//
-//- (CGFloat)alpha {
-//  if (!self.opacity) {
-//    return 1;
-//  }
-//  return self.opacity.floatValue / 100.f;
-//}
-//
-//- (CGRect)frameRect {
-//  return CGRectMake(self.position.x, self.position.y, self.size.width, self.size.height);
-//}
-//
-//- (CGAffineTransform)transform {
-//  return CGAffineTransformRotate(CGAffineTransformMakeScale(self.scale.width, self.scale.height), DegreesToRadians(self.rotation ? self.rotation.floatValue : 0.f));
-//}
 
 @end

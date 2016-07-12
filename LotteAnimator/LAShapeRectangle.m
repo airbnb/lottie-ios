@@ -10,38 +10,16 @@
 
 @implementation LAShapeRectangle
 
-+ (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{@"itemType" : @"ty",
-           @"positionArray" : @"p",
-           @"sizeArray" : @"s",
-           @"cornerRadius" : @"r"};
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+  self = [super init];
+  if (self) {
+    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+  }
+  return self;
 }
 
-- (CGPoint)position {
-  if (!self.positionArray) {
-    return CGPointZero;
-  }
-  CGPoint aePosition = CGPointMake([self.positionArray[0] floatValue], [self.positionArray[1] floatValue]);
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
   
-  return aePosition;
-}
-
-- (CGSize)size {
-  if (!self.sizeArray) {
-    return CGSizeZero;
-  }
-  return CGSizeMake([self.sizeArray[0] floatValue], [self.sizeArray[1] floatValue]);
-}
-
-- (UIBezierPath *)path {
-  CGRect rectBounds = CGRectMake(self.size.width * -0.5, self.size.height * -0.5, self.size.width, self.size.height);
-  UIBezierPath *path;
-  if (self.cornerRadius && self.cornerRadius.floatValue > 0.0) {
-    path = [UIBezierPath bezierPathWithRoundedRect:rectBounds cornerRadius:self.cornerRadius.floatValue];
-  } else {
-    path = [UIBezierPath bezierPathWithRect:rectBounds];
-  }
-  return path;
 }
 
 @end

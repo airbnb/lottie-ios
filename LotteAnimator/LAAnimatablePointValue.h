@@ -6,17 +6,17 @@
 //  Copyright © 2016 Brandon Withrow. All rights reserved.
 //
 
-#import "LAAnimatableValue.h"
 #import <Foundation/Foundation.h>
 
 @interface LAAnimatablePointValue : NSObject
 
-- (instancetype)initWithPointValues:(NSDictionary *)pointValues
-                      keyPath:(NSString *)keyPath
-                     frameRate:(NSNumber *)frameRate;
+- (instancetype)initWithPointValues:(NSDictionary *)pointValues;
 
 @property (nonatomic, readonly) CGPoint initialPoint;
-@property (nonatomic, readonly) NSString *keyPath;
-@property (nonatomic, readonly) CAKeyframeAnimation *animation;
+@property (nonatomic, readonly) UIBezierPath *animationPath;
+@property (nonatomic, readonly) NSArray<NSNumber *> *keyTimes;
+@property (nonatomic, readonly) NSArray<CAMediaTimingFunction *> *timingFunctions;
+@property (nonatomic, readonly) NSNumber *startFrame;
+@property (nonatomic, readonly) NSNumber *durationFrames;
 
 @end

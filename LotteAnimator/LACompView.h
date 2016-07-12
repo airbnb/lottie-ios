@@ -10,9 +10,9 @@
 
 @interface LACompView : UIView
 
-- (instancetype)initWithModel:(LAScene *)model;
+- (instancetype)initWithModel:(LAComposition *)model;
 
-@property (nonatomic, strong) LAScene *sceneModel;
+@property (nonatomic, strong) LAComposition *sceneModel;
 @property (nonatomic, assign) BOOL debugModeOn;
 
 @end

@@ -9,21 +9,16 @@
 #import "LAAnimatableColorValue.h"
 
 @implementation LAAnimatableColorValue
-@synthesize animation = _animation;
-@synthesize keyPath = _keyPath;
 
-- (instancetype)initWithColorValues:(NSDictionary *)colorValues
-                            keyPath:(NSString *)keyPath
-                          frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithColorValues:(NSDictionary *)colorValues {
   self = [super init];
   if (self) {
-    _keyPath = [keyPath copy];
     NSArray *value = colorValues[@"k"];
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
         [(NSDictionary *)[(NSArray *)value firstObject] objectForKey:@"t"]) {
       //Keframes
-      [self _buildAnimationForKeyframes:value keyPath:keyPath frameRate:frameRate];
+      [self _buildAnimationForKeyframes:value];
     } else {
       //Single Value, no animation
       _initialColor = [[self _colorValueFromArray:value] copy];
@@ -32,23 +27,19 @@
   return self;
 }
 
-- (void)_buildAnimationForKeyframes:(NSArray<NSDictionary *> *)keyframes
-                            keyPath:(NSString *)keyPath
-                          frameRate:(NSNumber *)frameRate {
+- (void)_buildAnimationForKeyframes:(NSArray<NSDictionary *> *)keyframes {
   NSMutableArray *keyTimes = [NSMutableArray array];
   NSMutableArray *timingFunctions = [NSMutableArray array];
   NSMutableArray<UIColor *> *colorValues = [NSMutableArray array];
   
-  NSNumber *startFrame = keyframes.firstObject[@"t"];
+  _startFrame = keyframes.firstObject[@"t"];
   NSNumber *endFrame = keyframes.lastObject[@"t"];
   
-  NSAssert((startFrame && endFrame && startFrame.integerValue < endFrame.integerValue),
+  NSAssert((_startFrame && endFrame && _startFrame.integerValue < endFrame.integerValue),
            @"Lotte: Keyframe animation has incorrect time values or invalid number of keyframes");
   
-  // Calculate time bounds
-  NSTimeInterval beginTime = startFrame.floatValue / frameRate.floatValue;
-  NSNumber *durationFrames = @(endFrame.floatValue - startFrame.floatValue);
-  NSTimeInterval durationTime = durationFrames.floatValue / frameRate.floatValue;
+  // Calculate time duration
+  _durationFrames = @(endFrame.floatValue - _startFrame.floatValue);
   
   BOOL addStartValue = YES;
   BOOL addTimePadding = NO;
@@ -59,11 +50,11 @@
     NSNumber *frame = keyframe[@"t"];
     // Calculate percentage value for keyframe.
     //CA Animations accept time values of 0-1 as a percentage of animation completed.
-    NSNumber *timePercentage = @((frame.floatValue - startFrame.floatValue) / durationFrames.floatValue);
+    NSNumber *timePercentage = @((frame.floatValue - _startFrame.floatValue) / _durationFrames.floatValue);
     
     if (outColor) {
       //add out value
-      [colorValues addObject:(id)[[outColor copy] CGColor]];
+      [colorValues addObject:[outColor copy]];
       [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
       outColor = nil;
     }
@@ -75,7 +66,7 @@
         if (keyframe == keyframes.firstObject) {
           _initialColor = startColor;
         }
-        [colorValues addObject:(id)[[startColor copy] CGColor]];
+        [colorValues addObject:[startColor copy]];
         if (timingFunctions.count) {
           [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
         }
@@ -93,7 +84,7 @@
     // add end value if present for keyframe
     UIColor *endColor = [self _colorValueFromArray:keyframe[@"e"]];
     if (endColor) {
-      [colorValues addObject:(id)[[endColor copy] CGColor]];
+      [colorValues addObject:[endColor copy]];
       /*
        * Timing Function for time interpolations between keyframes
        * Should be n-1 where n is the number of keyframes
@@ -126,13 +117,9 @@
     }
   }
 
-  _animation = [CAKeyframeAnimation animationWithKeyPath:keyPath];
-  _animation.values = colorValues;
-  _animation.keyTimes = keyTimes;
-  _animation.timingFunctions = timingFunctions;
-  _animation.beginTime = beginTime;
-  _animation.duration = durationTime;
-  _animation.fillMode = kCAFillModeForwards;
+  _colorKeyframes = colorValues;
+  _keyTimes = keyTimes;
+  _timingFunctions = timingFunctions;
 }
 
 - (UIColor *)_colorValueFromArray:(NSArray<NSNumber *>  *)colorArray {

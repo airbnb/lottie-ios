@@ -17,10 +17,8 @@
 		4804B3191C1F6DEA00DA8AF7 /* LAComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B3181C1F6DEA00DA8AF7 /* LAComposition.m */; };
 		4804B31E1C1F757600DA8AF7 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B31D1C1F757600DA8AF7 /* UIColor+Expanded.m */; };
 		4804B3211C1F761800DA8AF7 /* BWMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B3201C1F761800DA8AF7 /* BWMath.m */; };
-		48372A471C1F8B4C00AD0293 /* LAPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A461C1F8B4C00AD0293 /* LAPath.m */; };
 		48372A4A1C1F8D7D00AD0293 /* LAMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A491C1F8D7D00AD0293 /* LAMask.m */; };
-		48372A4F1C1F99C600AD0293 /* LAShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A4E1C1F99C600AD0293 /* LAShape.m */; };
-		48372A521C20973300AD0293 /* LAShapeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A511C20973300AD0293 /* LAShapeItem.m */; };
+		48372A4F1C1F99C600AD0293 /* LAShapeGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A4E1C1F99C600AD0293 /* LAShapeGroup.m */; };
 		48372A551C209A5F00AD0293 /* LAShapePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A541C209A5F00AD0293 /* LAShapePath.m */; };
 		48372A581C209A6C00AD0293 /* LAShapeStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A571C209A6C00AD0293 /* LAShapeStroke.m */; };
 		48372A5B1C209A7A00AD0293 /* LAShapeFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A5A1C209A7A00AD0293 /* LAShapeFill.m */; };
@@ -76,6 +74,10 @@
 		620A565F1D1C81750030EBFB /* LAAnimatablePointValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A565E1D1C81750030EBFB /* LAAnimatablePointValue.m */; };
 		620A56621D1C81850030EBFB /* LAAnimatableNumberValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A56611D1C81850030EBFB /* LAAnimatableNumberValue.m */; };
 		620A56651D1C81930030EBFB /* LAAnimatableShapeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A56641D1C81930030EBFB /* LAAnimatableShapeValue.m */; };
+		620CD7CD1D3415F000055AD1 /* LAAnimatableRectValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620CD7CC1D3415F000055AD1 /* LAAnimatableRectValue.m */; };
+		620CD7D01D343A2500055AD1 /* LAAnimatableScaleValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620CD7CF1D343A2500055AD1 /* LAAnimatableScaleValue.m */; };
+		620CD7D11D35AB9C00055AD1 /* LALayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B32B1C1F835F00DA8AF7 /* LALayerView.m */; };
+		620CD7D21D35AB9F00055AD1 /* LACompView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A431C1F84D700AD0293 /* LACompView.m */; };
 		629737DF1D25D7FC007B4AC9 /* allHold_KeyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DB1D25D7FC007B4AC9 /* allHold_KeyTest.json */; };
 		629737E01D25D7FC007B4AC9 /* firstHold_KeyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DC1D25D7FC007B4AC9 /* firstHold_KeyTest.json */; };
 		629737E11D25D7FC007B4AC9 /* lastHold_KeyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DD1D25D7FC007B4AC9 /* lastHold_KeyTest.json */; };
@@ -109,14 +111,10 @@
 		4804B32B1C1F835F00DA8AF7 /* LALayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LALayerView.m; sourceTree = "<group>"; };
 		48372A421C1F84D700AD0293 /* LACompView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LACompView.h; sourceTree = "<group>"; };
 		48372A431C1F84D700AD0293 /* LACompView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LACompView.m; sourceTree = "<group>"; };
-		48372A451C1F8B4C00AD0293 /* LAPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAPath.h; sourceTree = "<group>"; };
-		48372A461C1F8B4C00AD0293 /* LAPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAPath.m; sourceTree = "<group>"; };
 		48372A481C1F8D7D00AD0293 /* LAMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAMask.h; sourceTree = "<group>"; };
 		48372A491C1F8D7D00AD0293 /* LAMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAMask.m; sourceTree = "<group>"; };
-		48372A4D1C1F99C600AD0293 /* LAShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShape.h; sourceTree = "<group>"; };
-		48372A4E1C1F99C600AD0293 /* LAShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShape.m; sourceTree = "<group>"; };
-		48372A501C20973300AD0293 /* LAShapeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeItem.h; sourceTree = "<group>"; };
-		48372A511C20973300AD0293 /* LAShapeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeItem.m; sourceTree = "<group>"; };
+		48372A4D1C1F99C600AD0293 /* LAShapeGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeGroup.h; sourceTree = "<group>"; };
+		48372A4E1C1F99C600AD0293 /* LAShapeGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeGroup.m; sourceTree = "<group>"; };
 		48372A531C209A5F00AD0293 /* LAShapePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapePath.h; sourceTree = "<group>"; };
 		48372A541C209A5F00AD0293 /* LAShapePath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapePath.m; sourceTree = "<group>"; };
 		48372A561C209A6C00AD0293 /* LAShapeStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeStroke.h; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 		4872BEDB1D146D850028E0B3 /* animatedTransformHold.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animatedTransformHold.json; sourceTree = "<group>"; };
 		4872BEDD1D146D850028E0B3 /* animatedTransform.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animatedTransform.json; sourceTree = "<group>"; };
 		488990EC1D08A2A400425189 /* curve.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = curve.json; sourceTree = "<group>"; };
-		620A56451D1B2D3D0030EBFB /* LAAnimatableValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LAAnimatableValue.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		620A56481D1B3B150030EBFB /* FullLayerModel_Animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullLayerModel_Animation.json; sourceTree = "<group>"; };
 		620A565A1D1C81610030EBFB /* LAAnimatableColorValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableColorValue.h; sourceTree = "<group>"; };
 		620A565B1D1C81610030EBFB /* LAAnimatableColorValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableColorValue.m; sourceTree = "<group>"; };
@@ -186,6 +183,10 @@
 		620A56611D1C81850030EBFB /* LAAnimatableNumberValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableNumberValue.m; sourceTree = "<group>"; };
 		620A56631D1C81930030EBFB /* LAAnimatableShapeValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableShapeValue.h; sourceTree = "<group>"; };
 		620A56641D1C81930030EBFB /* LAAnimatableShapeValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableShapeValue.m; sourceTree = "<group>"; };
+		620CD7CB1D3415F000055AD1 /* LAAnimatableRectValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableRectValue.h; sourceTree = "<group>"; };
+		620CD7CC1D3415F000055AD1 /* LAAnimatableRectValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableRectValue.m; sourceTree = "<group>"; };
+		620CD7CE1D343A2500055AD1 /* LAAnimatableScaleValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableScaleValue.h; sourceTree = "<group>"; };
+		620CD7CF1D343A2500055AD1 /* LAAnimatableScaleValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableScaleValue.m; sourceTree = "<group>"; };
 		629737DB1D25D7FC007B4AC9 /* allHold_KeyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allHold_KeyTest.json; sourceTree = "<group>"; };
 		629737DC1D25D7FC007B4AC9 /* firstHold_KeyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firstHold_KeyTest.json; sourceTree = "<group>"; };
 		629737DD1D25D7FC007B4AC9 /* lastHold_KeyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lastHold_KeyTest.json; sourceTree = "<group>"; };
@@ -281,14 +282,10 @@
 				4804B3181C1F6DEA00DA8AF7 /* LAComposition.m */,
 				4804B3141C1F5B2000DA8AF7 /* LALayer.h */,
 				4804B3151C1F5B2000DA8AF7 /* LALayer.m */,
-				48372A451C1F8B4C00AD0293 /* LAPath.h */,
-				48372A461C1F8B4C00AD0293 /* LAPath.m */,
 				48372A481C1F8D7D00AD0293 /* LAMask.h */,
 				48372A491C1F8D7D00AD0293 /* LAMask.m */,
-				48372A4D1C1F99C600AD0293 /* LAShape.h */,
-				48372A4E1C1F99C600AD0293 /* LAShape.m */,
-				48372A501C20973300AD0293 /* LAShapeItem.h */,
-				48372A511C20973300AD0293 /* LAShapeItem.m */,
+				48372A4D1C1F99C600AD0293 /* LAShapeGroup.h */,
+				48372A4E1C1F99C600AD0293 /* LAShapeGroup.m */,
 				48372A561C209A6C00AD0293 /* LAShapeStroke.h */,
 				48372A571C209A6C00AD0293 /* LAShapeStroke.m */,
 				48372A591C209A7A00AD0293 /* LAShapeFill.h */,
@@ -371,7 +368,6 @@
 		62F683871D26EF420088C015 /* AnimatableProperties */ = {
 			isa = PBXGroup;
 			children = (
-				620A56451D1B2D3D0030EBFB /* LAAnimatableValue.h */,
 				620A565A1D1C81610030EBFB /* LAAnimatableColorValue.h */,
 				620A565B1D1C81610030EBFB /* LAAnimatableColorValue.m */,
 				620A565D1D1C81750030EBFB /* LAAnimatablePointValue.h */,
@@ -380,6 +376,10 @@
 				620A56611D1C81850030EBFB /* LAAnimatableNumberValue.m */,
 				620A56631D1C81930030EBFB /* LAAnimatableShapeValue.h */,
 				620A56641D1C81930030EBFB /* LAAnimatableShapeValue.m */,
+				620CD7CB1D3415F000055AD1 /* LAAnimatableRectValue.h */,
+				620CD7CC1D3415F000055AD1 /* LAAnimatableRectValue.m */,
+				620CD7CE1D343A2500055AD1 /* LAAnimatableScaleValue.h */,
+				620CD7CF1D343A2500055AD1 /* LAAnimatableScaleValue.m */,
 			);
 			name = AnimatableProperties;
 			sourceTree = "<group>";
@@ -563,28 +563,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				4804B31E1C1F757600DA8AF7 /* UIColor+Expanded.m in Sources */,
+				620CD7D21D35AB9F00055AD1 /* LACompView.m in Sources */,
 				4804B2FF1C1F55E600DA8AF7 /* ViewController.m in Sources */,
 				48372A641C20A91C00AD0293 /* LAJSONExplorerViewController.m in Sources */,
 				620A56651D1C81930030EBFB /* LAAnimatableShapeValue.m in Sources */,
 				4804B3191C1F6DEA00DA8AF7 /* LAComposition.m in Sources */,
 				4804B2FC1C1F55E600DA8AF7 /* AppDelegate.m in Sources */,
 				4804B3211C1F761800DA8AF7 /* BWMath.m in Sources */,
-				48372A471C1F8B4C00AD0293 /* LAPath.m in Sources */,
 				48372AB41C20C13700AD0293 /* CGGeometryAdditions.m in Sources */,
 				620A565F1D1C81750030EBFB /* LAAnimatablePointValue.m in Sources */,
 				48372A4A1C1F8D7D00AD0293 /* LAMask.m in Sources */,
 				4804B3161C1F5B2000DA8AF7 /* LALayer.m in Sources */,
-				48372A521C20973300AD0293 /* LAShapeItem.m in Sources */,
-				48372A4F1C1F99C600AD0293 /* LAShape.m in Sources */,
+				48372A4F1C1F99C600AD0293 /* LAShapeGroup.m in Sources */,
 				48372A581C209A6C00AD0293 /* LAShapeStroke.m in Sources */,
+				620CD7D11D35AB9C00055AD1 /* LALayerView.m in Sources */,
 				48372ABA1C20D98200AD0293 /* LAShapeRectangle.m in Sources */,
 				48372A5B1C209A7A00AD0293 /* LAShapeFill.m in Sources */,
 				4804B2F91C1F55E600DA8AF7 /* main.m in Sources */,
 				620A56621D1C81850030EBFB /* LAAnimatableNumberValue.m in Sources */,
 				48372A551C209A5F00AD0293 /* LAShapePath.m in Sources */,
 				48372AB71C20D97200AD0293 /* LAShapeCircle.m in Sources */,
+				620CD7CD1D3415F000055AD1 /* LAAnimatableRectValue.m in Sources */,
 				620A565C1D1C81610030EBFB /* LAAnimatableColorValue.m in Sources */,
 				48372A5E1C209A8900AD0293 /* LAShapeTransform.m in Sources */,
+				620CD7D01D343A2500055AD1 /* LAAnimatableScaleValue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

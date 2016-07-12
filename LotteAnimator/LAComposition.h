@@ -6,16 +6,18 @@
 //  Copyright © 2015 Brandon Withrow. All rights reserved.
 //
 
-#import "MTLModel.h"
+#import <Foundation/Foundation.h>
 
 @class LALayer;
-@interface LAComposition : MTLModel <MTLJSONSerializing>
+@interface LAComposition : NSObject
 
-@property (nonatomic, strong) NSArray <LALayer *> *layers;
-@property (nonatomic, strong) NSNumber *compWidth;
-@property (nonatomic, strong) NSNumber *compHeight;
-@property (nonatomic, strong) NSNumber *startFrame;
-@property (nonatomic, strong) NSNumber *endFrame;
-@property (nonatomic, strong) NSNumber *framerate;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
+
+@property (nonatomic, readonly) NSArray <LALayer *> *layers;
+@property (nonatomic, readonly) CGRect compBounds;
+@property (nonatomic, readonly) NSNumber *startFrame;
+@property (nonatomic, readonly) NSNumber *endFrame;
+@property (nonatomic, readonly) NSNumber *framerate;
+@property (nonatomic, readonly) NSTimeInterval timeDuration;
 
 @end

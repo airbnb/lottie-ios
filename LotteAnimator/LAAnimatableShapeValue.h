@@ -6,18 +6,18 @@
 //  Copyright © 2016 Brandon Withrow. All rights reserved.
 //
 
-#import "LAAnimatableValue.h"
 #import <Foundation/Foundation.h>
 
 @interface LAAnimatableShapeValue : NSObject
 
-- (instancetype)initWithShapeValues:(NSDictionary *)shapeValues
-                            keyPath:(NSString *)keyPath
-                          frameRate:(NSNumber *)frameRate
-                         closedPath:(BOOL)closedPath;
+- (instancetype)initWithShapeValues:(NSDictionary *)shapeValues closed:(BOOL)closed;
 
 @property (nonatomic, readonly) UIBezierPath *initialShape;
-@property (nonatomic, readonly) NSString *keyPath;
-@property (nonatomic, readonly) CAKeyframeAnimation *animation;
+
+@property (nonatomic, readonly) NSArray<UIBezierPath *> *shapeKeyframes;
+@property (nonatomic, readonly) NSArray<NSNumber *> *keyTimes;
+@property (nonatomic, readonly) NSArray<CAMediaTimingFunction *> *timingFunctions;
+@property (nonatomic, readonly) NSNumber *startFrame;
+@property (nonatomic, readonly) NSNumber *durationFrames;
 
 @end

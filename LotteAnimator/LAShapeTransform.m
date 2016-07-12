@@ -7,61 +7,45 @@
 //
 
 #import "LAShapeTransform.h"
+#import "LAAnimatableNumberValue.h"
+#import "LAAnimatablePointValue.h"
+#import "LAAnimatableScaleValue.h"
 
 @implementation LAShapeTransform
 
-+ (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{@"itemType" : @"ty",
-           @"positionArray" : @"p",
-           @"anchorPointArray" : @"a",
-           @"scaleArray" : @"s",
-           @"rotation" : @"r",
-           @"opacity" : @"o"};
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+  self = [super init];
+  if (self) {
+    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+  }
+  return self;
 }
 
-- (CGPoint)position {
-  if (!self.positionArray) {
-    return CGPointZero;
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+  NSDictionary *position = jsonDictionary[@"p"];
+  if (position) {
+    _position = [[LAAnimatablePointValue alloc] initWithPointValues:position];
   }
-  CGPoint aePosition = CGPointMake([self.positionArray[0] floatValue], [self.positionArray[1] floatValue]);
-  if (self.anchorPointArray) {
-    aePosition.x -= [self.anchorPointArray[0] floatValue];
-    aePosition.y -= [self.anchorPointArray[1] floatValue];
+  
+  NSDictionary *anchor = jsonDictionary[@"a"];
+  if (anchor) {
+    _anchor = [[LAAnimatablePointValue alloc] initWithPointValues:anchor];
   }
-  return aePosition;
-}
-
-- (CGPoint)anchorPoint {
-  if (!self.anchorPointArray) {
-    return CGPointZero;
+  
+  NSDictionary *scale = jsonDictionary[@"s"];
+  if (scale) {
+    _scale = [[LAAnimatableScaleValue alloc] initWithScaleValues:scale];
   }
-  CGPoint aeAnchorPoint = CGPointMake([self.anchorPointArray[0] floatValue], [self.anchorPointArray[1] floatValue]);
-//  CGPoint uikitAnchorPoint = CGPointMake(aeAnchorPoint.x / self.size.width,
-//                                         aeAnchorPoint.y / self.size.height);
-  // TODO Figure out this crazy thing
-  return aeAnchorPoint;
-}
-
-// TODO Permanently Unwrap these arrays for efficency
-- (CGSize)scale {
-  if (!self.scaleArray) {
-    return CGSizeZero;
+  
+  NSDictionary *rotation = jsonDictionary[@"r"];
+  if (rotation) {
+    _rotation = [[LAAnimatableNumberValue alloc] initWithNumberValues:rotation];
   }
-  return CGSizeMake([self.scaleArray[0] floatValue] / 100.f, [self.scaleArray[1] floatValue] / 100.f);
-}
-
-- (CGFloat)alpha {
-  if (!self.opacity) {
-    return 1;
+  
+  NSDictionary *opacity = jsonDictionary[@"o"];
+  if (opacity) {
+    _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity];
   }
-  return self.opacity.floatValue / 100.f;
-}
-
-- (CGAffineTransform)transform {
-  CGAffineTransform translate = CGAffineTransformMakeTranslation(self.position.x, self.position.y);
-  CGAffineTransform scale = CGAffineTransformScale(translate, self.scale.width, self.scale.height);
-  CGAffineTransform rotate = CGAffineTransformRotate(scale, DegreesToRadians(self.rotation ? self.rotation.floatValue : 0.f));
-  return rotate;
 }
 
 @end

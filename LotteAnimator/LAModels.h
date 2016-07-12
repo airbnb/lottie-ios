@@ -9,12 +9,10 @@
 #ifndef LAModels_h
 #define LAModels_h
 
-#import "LAPath.h"
 #import "LAMask.h"
 #import "LAComposition.h"
 #import "LALayer.h"
-#import "LAShape.h"
-#import "LAShapeItem.h"
+#import "LAShapeGroup.h"
 #import "LAShapePath.h"
 #import "LAShapeStroke.h"
 #import "LAShapeFill.h"

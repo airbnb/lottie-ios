@@ -6,14 +6,17 @@
 //  Copyright © 2015 Brandon Withrow. All rights reserved.
 //
 
-#import "LAShapeItem.h"
+#import <Foundation/Foundation.h>
 
-@interface LAShapeFill : LAShapeItem
+@class LAAnimatableColorValue;
+@class LAAnimatableNumberValue;
 
-@property (nonatomic, getter=isFillEnabled) BOOL fillEnabled;
-@property (nonatomic, copy) NSArray *colorElements;
-@property (nonatomic, copy) NSNumber *opacity;
+@interface LAShapeFill : NSObject
 
-@property (nonatomic, readonly) UIColor *color;
-@property (nonatomic, readonly) CGFloat alpha;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+
+@property (nonatomic, readonly) BOOL fillEnabled;
+@property (nonatomic, readonly) LAAnimatableColorValue *color;
+@property (nonatomic, readonly) LAAnimatableNumberValue *opacity;
+
 @end

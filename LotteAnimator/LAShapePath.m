@@ -7,25 +7,25 @@
 //
 
 #import "LAShapePath.h"
+#import "LAAnimatableShapeValue.h"
 
 @implementation LAShapePath
 
-+ (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{@"itemType" : @"ty",
-           @"closed" : @"closed",
-           @"shapePath" : @"ks"};
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+  self = [super init];
+  if (self) {
+    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+  }
+  return self;
 }
 
-+ (NSValueTransformer *)shapePathJSONTransformer {
-  // tell Mantle to populate diaAttributes property with an array of MDAttribute objects
-  return [MTLJSONAdapter dictionaryTransformerWithModelClass:[LAPath class]];
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+  _index = jsonDictionary[@"ind"];
+  _closed = [jsonDictionary[@"closed"] boolValue];
+  NSDictionary *shape = jsonDictionary[@"ks"];
+  if (shape) {
+    _shapePath = [[LAAnimatableShapeValue alloc] initWithShapeValues:shape closed:_closed];
+  }
 }
 
-+ (NSValueTransformer *)closedJSONTransformer {
-  return [NSValueTransformer valueTransformerForName:MTLBooleanValueTransformerName];
-}
-
-- (UIBezierPath *)path {
-  return [self.shapePath bezierPath:self.isClosed];
-}
 @end

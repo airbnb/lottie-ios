@@ -9,76 +9,65 @@
 #import "LAAnimatableShapeValue.h"
 
 @implementation LAAnimatableShapeValue
-@synthesize animation = _animation;
-@synthesize keyPath = _keyPath;
 
-- (instancetype)initWithShapeValues:(NSDictionary *)shapeValues
-                            keyPath:(NSString *)keyPath
-                          frameRate:(NSNumber *)frameRate
-                         closedPath:(BOOL)closedPath {
+- (instancetype)initWithShapeValues:(NSDictionary *)shapeValues closed:(BOOL)closed {
   self = [super init];
   if (self) {
-    _keyPath = [keyPath copy];
     id value = shapeValues[@"k"];
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
         [(NSDictionary *)[(NSArray *)value firstObject] objectForKey:@"t"]) {
       //Keframes
-      [self _buildAnimationForKeyframes:value keyPath:keyPath frameRate:frameRate closedPath:closedPath];
-    } else {
+      [self _buildAnimationForKeyframes:value closed:closed];
+    } else if ([value isKindOfClass:[NSDictionary class]]) {
       //Single Value, no animation
-      _initialShape = [self _bezierShapeFromValue:value closedPath:closedPath];
+      _initialShape = [self _bezierShapeFromValue:value closed:closed];
     }
   }
   return self;
 }
 
-- (void)_buildAnimationForKeyframes:(NSArray<NSDictionary *> *)keyframes
-                            keyPath:(NSString *)keyPath
-                          frameRate:(NSNumber *)frameRate
-                         closedPath:(BOOL)closedPath {
+- (void)_buildAnimationForKeyframes:(NSArray<NSDictionary *> *)keyframes closed:(BOOL)closed {
   NSMutableArray *keyTimes = [NSMutableArray array];
   NSMutableArray *timingFunctions = [NSMutableArray array];
-  NSMutableArray *shapeValues = [NSMutableArray array];
+  NSMutableArray<UIBezierPath *> *shapeValues = [NSMutableArray array];
   
-  NSNumber *startFrame = keyframes.firstObject[@"t"];
+  _startFrame = keyframes.firstObject[@"t"];
   NSNumber *endFrame = keyframes.lastObject[@"t"];
   
-  NSAssert((startFrame && endFrame && startFrame.integerValue < endFrame.integerValue),
+  NSAssert((_startFrame && endFrame && _startFrame.integerValue < endFrame.integerValue),
            @"Lotte: Keyframe animation has incorrect time values or invalid number of keyframes");
   
-  // Calculate time bounds
-  NSTimeInterval beginTime = startFrame.floatValue / frameRate.floatValue;
-  NSNumber *durationFrames = @(endFrame.floatValue - startFrame.floatValue);
-  NSTimeInterval durationTime = durationFrames.floatValue / frameRate.floatValue;
+  // Calculate time duration
+  _durationFrames = @(endFrame.floatValue - _startFrame.floatValue);
   
   BOOL addStartValue = YES;
   BOOL addTimePadding = NO;
-  UIBezierPath *outShape = nil;
+  NSDictionary *outShape = nil;
   
   for (NSDictionary *keyframe in keyframes) {
     // Get keyframe time value
     NSNumber *frame = keyframe[@"t"];
     // Calculate percentage value for keyframe.
     //CA Animations accept time values of 0-1 as a percentage of animation completed.
-    NSNumber *timePercentage = @((frame.floatValue - startFrame.floatValue) / durationFrames.floatValue);
+    NSNumber *timePercentage = @((frame.floatValue - _startFrame.floatValue) / _durationFrames.floatValue);
     
     if (outShape) {
       //add out value
-      [shapeValues addObject:(id)[[outShape copy] CGPath]];
+      [shapeValues addObject:[self _bezierShapeFromValue:outShape closed:closed]];
       [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
       outShape = nil;
     }
     
-    UIBezierPath *startShape = [self _bezierShapeFromValue:keyframe[@"s"] closedPath:closedPath];
+    NSDictionary *startShape = keyframe[@"s"];
     if (addStartValue) {
       // Add start value
       if (startShape) {
         if (keyframe == keyframes.firstObject) {
-          _initialShape = startShape;
+          _initialShape = [self _bezierShapeFromValue:startShape closed:closed];
         }
         
-        [shapeValues addObject:(id)[[startShape copy] CGPath]];
+        [shapeValues addObject:[self _bezierShapeFromValue:startShape closed:closed]];
         if (timingFunctions.count) {
           [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
         }
@@ -94,9 +83,9 @@
     }
     
     // add end value if present for keyframe
-    UIBezierPath *endShape = [self _bezierShapeFromValue:keyframe[@"e"] closedPath:closedPath];
+    NSDictionary *endShape = keyframe[@"e"];
     if (endShape) {
-      [shapeValues addObject:(id)[[endShape copy] CGColor]];
+      [shapeValues addObject:[self _bezierShapeFromValue:endShape closed:closed]];
       /*
        * Timing Function for time interpolations between keyframes
        * Should be n-1 where n is the number of keyframes
@@ -128,17 +117,13 @@
       addTimePadding = YES;
     }
   }
-  
-  _animation = [CAKeyframeAnimation animationWithKeyPath:keyPath];
-  _animation.values = shapeValues;
-  _animation.keyTimes = keyTimes;
-  _animation.timingFunctions = timingFunctions;
-  _animation.beginTime = beginTime;
-  _animation.duration = durationTime;
-  _animation.fillMode = kCAFillModeForwards;
+
+  _shapeKeyframes = shapeValues;
+  _keyTimes = keyTimes;
+  _timingFunctions = timingFunctions;
 }
 
-- (UIBezierPath *)_bezierShapeFromValue:(id)value closedPath:(BOOL)closedPath {
+- (UIBezierPath *)_bezierShapeFromValue:(id)value closed:(BOOL)closedPath {
   NSDictionary *pointsData = nil;
   if ([value isKindOfClass:[NSArray class]] &&
       [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&

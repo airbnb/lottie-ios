@@ -9,21 +9,16 @@
 #import "LAAnimatablePointValue.h"
 
 @implementation LAAnimatablePointValue
-@synthesize animation = _animation;
-@synthesize keyPath = _keyPath;
 
-- (instancetype)initWithPointValues:(NSDictionary *)pointValues
-                       keyPath:(NSString *)keyPath
-                      frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithPointValues:(NSDictionary *)pointValues {
   self = [super init];
   if (self) {
-    _keyPath = [keyPath copy];
     NSArray *value = pointValues[@"k"];
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
         [(NSDictionary *)[(NSArray *)value firstObject] objectForKey:@"t"]) {
       //Keframes
-      [self _buildAnimationForKeyframes:value keyPath:keyPath frameRate:frameRate];
+      [self _buildAnimationForKeyframes:value];
     } else {
       //Single Value, no animation
       _initialPoint = [self _pointFromValueArray:value];
@@ -32,23 +27,19 @@
   return self;
 }
 
-- (void)_buildAnimationForKeyframes:(NSArray<NSDictionary *> *)keyframes
-                            keyPath:(NSString *)keyPath
-                           frameRate:(NSNumber *)frameRate {
+- (void)_buildAnimationForKeyframes:(NSArray<NSDictionary *> *)keyframes {
   NSMutableArray *keyTimes = [NSMutableArray array];
   NSMutableArray *timingFunctions = [NSMutableArray array];
   UIBezierPath *motionPath = [UIBezierPath new];
   
-  NSNumber *startFrame = keyframes.firstObject[@"t"];
+  _startFrame = keyframes.firstObject[@"t"];
   NSNumber *endFrame = keyframes.lastObject[@"t"];
   
-  NSAssert((startFrame && endFrame && startFrame.integerValue < endFrame.integerValue),
+  NSAssert((_startFrame && endFrame && _startFrame.integerValue < endFrame.integerValue),
            @"Lotte: Keyframe animation has incorrect time values or invalid number of keyframes");
   
-  // Calculate time bounds
-  NSTimeInterval beginTime = startFrame.floatValue / frameRate.floatValue;
-  NSNumber *durationFrames = @(endFrame.floatValue - startFrame.floatValue);
-  NSTimeInterval durationTime = durationFrames.floatValue / frameRate.floatValue;
+  // Calculate time duration
+  _durationFrames = @(endFrame.floatValue - _startFrame.floatValue);
   
   BOOL addStartValue = YES;
   BOOL addTimePadding = NO;
@@ -59,7 +50,7 @@
     NSNumber *frame = keyframe[@"t"];
     // Calculate percentage value for keyframe.
     //CA Animations accept time values of 0-1 as a percentage of animation completed.
-    NSNumber *timePercentage = @((frame.floatValue - startFrame.floatValue) / durationFrames.floatValue);
+    NSNumber *timePercentage = @((frame.floatValue - _startFrame.floatValue) / _durationFrames.floatValue);
     
     if (outPoint) {
       //add out value
@@ -138,13 +129,9 @@
     }
   }
   
-  _animation = [CAKeyframeAnimation animationWithKeyPath:keyPath];
-  _animation.path = motionPath.CGPath;
-  _animation.keyTimes = keyTimes;
-  _animation.timingFunctions = timingFunctions;
-  _animation.beginTime = beginTime;
-  _animation.duration = durationTime;
-  _animation.fillMode = kCAFillModeForwards;
+  _animationPath = motionPath;
+  _keyTimes = keyTimes;
+  _timingFunctions = timingFunctions;
 }
 
 - (CGPoint)_pointFromValueArray:(NSArray<NSNumber *> *)values {

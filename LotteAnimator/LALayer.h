@@ -6,17 +6,18 @@
 //  Copyright © 2015 Brandon Withrow. All rights reserved.
 //
 
-#import "MTLModel.h"
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@class LALayerView;
-@class LAShape;
+@class LAShapeGroup;
 @class LAMask;
 @class LAAnimatableColorValue;
 @class LAAnimatablePointValue;
 @class LAAnimatableNumberValue;
+@class LAAnimatableRectValue;
+@class LAAnimatableScaleValue;
 
-typedef enum : NSUInteger {
+typedef enum : NSInteger {
   LALayerTypeNone,
   LALayerTypeSolid,
   LALayerTypeUnknown,
@@ -24,25 +25,27 @@ typedef enum : NSUInteger {
   LALayerTypeShape
 } LALayerType;
 
-@interface LALayer : MTLModel <MTLJSONSerializing>
+@interface LALayer : NSObject
 
-@property (nonatomic, copy) NSString *layerName;
-@property (nonatomic, copy) NSNumber *layerID;
-@property (nonatomic, assign) LALayerType layerType;
-@property (nonatomic, copy) NSNumber *parentID;
-@property (nonatomic, copy) NSNumber *inPoint;
-@property (nonatomic, copy) NSNumber *outPoint;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
 
-@property (nonatomic, copy) NSArray<LAShape *> *shapes;
-@property (nonatomic, copy) NSArray<LAMask *> *masks;
-@property (nonatomic, copy) LAAnimatableNumberValue *solidWidth;
-@property (nonatomic, copy) LAAnimatableNumberValue *solidHeight;
-@property (nonatomic, copy) LAAnimatableColorValue *solidColor;
+@property (nonatomic, readonly) NSString *layerName;
+@property (nonatomic, readonly) NSNumber *layerID;
+@property (nonatomic, readonly) LALayerType layerType;
+@property (nonatomic, readonly) NSNumber *parentID;
+@property (nonatomic, readonly) NSNumber *inFrame;
+@property (nonatomic, readonly) NSNumber *outFrame;
 
-@property (nonatomic, copy) LAAnimatableNumberValue *opacity;
-@property (nonatomic, copy) LAAnimatableNumberValue *rotation;
-@property (nonatomic, copy) LAAnimatablePointValue *position;
-@property (nonatomic, copy) LAAnimatablePointValue *anchor;
-//@property (nonatomic, copy) LAAnimatableProperty *scale; //TODO Make This
+@property (nonatomic, readonly) NSArray<LAShapeGroup *> *shapes;
+@property (nonatomic, readonly) NSArray<LAMask *> *masks;
+
+@property (nonatomic, readonly) LAAnimatableRectValue *solidBounds;
+@property (nonatomic, readonly) LAAnimatableColorValue *solidColor;
+
+@property (nonatomic, readonly) LAAnimatableNumberValue *opacity;
+@property (nonatomic, readonly) LAAnimatableNumberValue *rotation;
+@property (nonatomic, readonly) LAAnimatablePointValue *position;
+@property (nonatomic, readonly) LAAnimatablePointValue *anchor;
+@property (nonatomic, readonly) LAAnimatableScaleValue *scale;
 
 @end

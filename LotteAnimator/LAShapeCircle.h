@@ -6,14 +6,10 @@
 //  Copyright © 2015 Brandon Withrow. All rights reserved.
 //
 
-#import "LAShapeItem.h"
+#import <Foundation/Foundation.h>
 
-@interface LAShapeCircle : LAShapeItem
+@interface LAShapeCircle : NSObject
 
-@property (nonatomic, copy) NSArray *positionArray;
-@property (nonatomic, copy) NSArray *sizeArray;
-
-@property (nonatomic, readonly) CGPoint position;
-@property (nonatomic, readonly) CGSize size;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
 
 @end

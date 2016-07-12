@@ -10,8 +10,8 @@
 
 @implementation LACompView
 
-- (instancetype)initWithModel:(LAScene *)model {
-  self = [super initWithFrame:CGRectMake(0, 0, model.compWidth.floatValue, model.compHeight.floatValue)];
+- (instancetype)initWithModel:(LAComposition *)model {
+  self = [super initWithFrame:model.compBounds];
   if (self) {
     _sceneModel = model;
     for (LALayer *layer in model.layers) {

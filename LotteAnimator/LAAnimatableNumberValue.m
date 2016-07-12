@@ -10,18 +10,15 @@
 
 @implementation LAAnimatableNumberValue
 
-- (instancetype)initWithNumberValues:(NSDictionary *)numberValues
-                             keyPath:(NSString *)keyPath
-                           frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithNumberValues:(NSDictionary *)numberValues {
   self = [super init];
   if (self) {
-    _keyPath = [keyPath copy];
     id value = numberValues[@"k"];
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
         [(NSDictionary *)[(NSArray *)value firstObject] objectForKey:@"t"]) {
       //Keframes
-      [self _buildAnimationForKeyframes:value keyPath:keyPath frameRate:frameRate];
+      [self _buildAnimationForKeyframes:value];
     } else {
       //Single Value, no animation
       _initialValue = [[self _numberValueFromObject:value] copy];
@@ -30,23 +27,21 @@
   return self;
 }
 
-- (void)_buildAnimationForKeyframes:(NSArray<NSDictionary *> *)keyframes
-                            keyPath:(NSString *)keyPath
-                          frameRate:(NSNumber *)frameRate {
+- (void)_buildAnimationForKeyframes:(NSArray<NSDictionary *> *)keyframes {
+  
   NSMutableArray *keyTimes = [NSMutableArray array];
   NSMutableArray *timingFunctions = [NSMutableArray array];
   NSMutableArray<NSNumber *> *numberValues = [NSMutableArray array];
   
-  NSNumber *startFrame = keyframes.firstObject[@"t"];
+  _startFrame = keyframes.firstObject[@"t"];
   NSNumber *endFrame = keyframes.lastObject[@"t"];
   
-  NSAssert((startFrame && endFrame && startFrame.integerValue < endFrame.integerValue),
+  NSAssert((_startFrame && endFrame && _startFrame.integerValue < endFrame.integerValue),
            @"Lotte: Keyframe animation has incorrect time values or invalid number of keyframes");
   
-  // Calculate time bounds in second-time.
-  NSTimeInterval beginTime = startFrame.floatValue / frameRate.floatValue;
-  NSNumber *durationFrames = @(endFrame.floatValue - startFrame.floatValue);
-  NSTimeInterval durationTime = durationFrames.floatValue / frameRate.floatValue;
+  // Calculate time duration
+  _durationFrames = @(endFrame.floatValue - _startFrame.floatValue);
+  
   
   BOOL addStartValue = YES;
   BOOL addTimePadding = NO;
@@ -57,7 +52,7 @@
     NSNumber *frame = keyframe[@"t"];
     // Calculate percentage value for keyframe.
     //CA Animations accept time values of 0-1 as a percentage of animation completed.
-    NSNumber *timePercentage = @((frame.floatValue - startFrame.floatValue) / durationFrames.floatValue);
+    NSNumber *timePercentage = @((frame.floatValue - _startFrame.floatValue) / _durationFrames.floatValue);
     
     if (outValue) {
       //add out value
@@ -123,14 +118,9 @@
       addTimePadding = YES;
     }
   }
-
-  _animation = [CAKeyframeAnimation animationWithKeyPath:keyPath];
-  _animation.values = numberValues;
-  _animation.keyTimes = keyTimes;
-  _animation.timingFunctions = timingFunctions;
-  _animation.beginTime = beginTime;
-  _animation.duration = durationTime;
-  _animation.fillMode = kCAFillModeForwards;
+  _valueKeyframes = numberValues;
+  _keyTimes = keyTimes;
+  _timingFunctions = timingFunctions;
 }
 
 - (NSNumber *)_numberValueFromObject:(id)valueObject {

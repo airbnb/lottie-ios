@@ -6,20 +6,20 @@
 //  Copyright © 2015 Brandon Withrow. All rights reserved.
 //
 
-#import "LAShapeItem.h"
+#import <Foundation/Foundation.h>
 
-@interface LAShapeTransform : LAShapeItem
+@class LAAnimatableNumberValue;
+@class LAAnimatablePointValue;
+@class LAAnimatableScaleValue;
 
-@property (nonatomic, copy) NSArray *positionArray;
-@property (nonatomic, copy) NSArray *anchorPointArray;
-@property (nonatomic, copy) NSArray *scaleArray;
-@property (nonatomic, copy) NSNumber *rotation;
-@property (nonatomic, copy) NSNumber *opacity;
+@interface LAShapeTransform : NSObject
 
-@property (nonatomic, readonly) CGPoint position;
-@property (nonatomic, readonly) CGPoint anchorPoint;
-@property (nonatomic, readonly) CGSize scale;
-@property (nonatomic, readonly) CGFloat alpha;
-@property (nonatomic, readonly) CGAffineTransform transform;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+
+@property (nonatomic, readonly) LAAnimatablePointValue *position;
+@property (nonatomic, readonly) LAAnimatablePointValue *anchor;
+@property (nonatomic, readonly) LAAnimatableScaleValue *scale;
+@property (nonatomic, readonly) LAAnimatableNumberValue *rotation;
+@property (nonatomic, readonly) LAAnimatableNumberValue *opacity;
 
 @end

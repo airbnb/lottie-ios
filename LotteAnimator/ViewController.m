@@ -33,7 +33,7 @@
   NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
   NSDictionary  *JSONObject = [NSJSONSerialization JSONObjectWithData:jsonData
                                                               options:0 error:&error];
-  LAComposition *laScene = [MTLJSONAdapter modelOfClass:[LAComposition class] fromJSONDictionary:JSONObject error:&error];
+  LAComposition *laScene = [[LAComposition alloc] initWithJSON:JSONObject];
   
 }
 

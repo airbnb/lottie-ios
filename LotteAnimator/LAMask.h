@@ -6,13 +6,25 @@
 //  Copyright © 2015 Brandon Withrow. All rights reserved.
 //
 
-#import "MTLModel.h"
+#import <Foundation/Foundation.h>
+@class LAAnimatableShapeValue;
+@class LAAnimatableNumberValue;
 
-@interface LAMask : MTLModel <MTLJSONSerializing>
+typedef enum : NSUInteger {
+  LAMaskModeAdd,
+  LAMaskModeSubtract,
+  LAMaskModeIntersect,
+  LAMaskModeUnknown
+} LAMaskMode;
 
-@property (nonatomic, getter=isClosed) BOOL closed;
-@property (nonatomic, getter=isInverted) BOOL inverted;
-@property (nonatomic, strong) LAPath *maskPath;
-@property (nonatomic, copy) NSNumber *opacity;
+@interface LAMask : NSObject
+
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+
+@property (nonatomic, readonly) BOOL closed;
+@property (nonatomic, readonly) BOOL inverted;
+@property (nonatomic, readonly) LAMaskMode maskMode;
+@property (nonatomic, readonly) LAAnimatableShapeValue *maskPath;
+@property (nonatomic, readonly) LAAnimatableNumberValue *opacity;
 
 @end

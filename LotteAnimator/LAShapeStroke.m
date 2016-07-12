@@ -7,36 +7,37 @@
 //
 
 #import "LAShapeStroke.h"
+#import "LAAnimatableNumberValue.h"
+#import "LAAnimatableColorValue.h"
 
 @implementation LAShapeStroke
 
-+ (NSDictionary *)JSONKeyPathsByPropertyKey {
-  return @{@"itemType" : @"ty",
-           @"fillEnabled" : @"fillEnabled",
-           @"colorElements" : @"c",
-           @"opacity" : @"o",
-           @"width" : @"w"};
-}
-
-+ (NSValueTransformer *)fillEnabledJSONTransformer {
-  return [NSValueTransformer valueTransformerForName:MTLBooleanValueTransformerName];
-}
-
-- (CGFloat)alpha {
-  if (!self.opacity) {
-    return 1;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+  self = [super init];
+  if (self) {
+    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
   }
-  return self.opacity.floatValue / 100.f;
+  return self;
 }
 
-- (UIColor *)color {
-  if (!self.colorElements) {
-    return [UIColor clearColor];
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+  NSDictionary *color = jsonDictionary[@"c"];
+  if (color) {
+    _color = [[LAAnimatableColorValue alloc] initWithColorValues:color];
   }
-  return [UIColor colorWithRed:([self.colorElements[0] floatValue]/255.f)
-                         green:([self.colorElements[1] floatValue]/255.f)
-                          blue:([self.colorElements[2] floatValue]/255.f)
-                         alpha:([self.colorElements[3] floatValue]/255.f)];
+  
+  NSDictionary *width = jsonDictionary[@"w"];
+  if (width) {
+    _width = [[LAAnimatableNumberValue alloc] initWithNumberValues:width];
+  }
+  
+  NSDictionary *opacity = jsonDictionary[@"o"];
+  if (opacity) {
+    _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity];
+  }
+  
+  NSNumber *fillEnabled = jsonDictionary[@"fillEnabled"];
+  _fillEnabled = fillEnabled.boolValue;
 }
 
 @end
