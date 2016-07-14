@@ -124,10 +124,10 @@
 
 - (UIColor *)_colorValueFromArray:(NSArray<NSNumber *>  *)colorArray {
   if (colorArray.count == 4) {
-    return [UIColor colorWithRed:colorArray[0].floatValue / 255.f
-                           green:colorArray[1].floatValue / 255.f
-                            blue:colorArray[2].floatValue / 255.f
-                           alpha:colorArray[3].floatValue / 255.f];
+    return [UIColor colorWithRed:colorArray[0].floatValue
+                           green:colorArray[1].floatValue
+                            blue:colorArray[2].floatValue
+                           alpha:colorArray[3].floatValue];
   }
   return nil;
 }

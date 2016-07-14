@@ -9,8 +9,34 @@
 #import "ViewController.h"
 #import "LAJSONExplorerViewController.h"
 #import "LAAnimatablePointValue.h"
+#import "LACompView.h"
 
+@interface TestView : UIView
 
+@end
+
+@implementation TestView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+  self = [super initWithFrame:frame];
+  if (self) {
+    UIView *redView = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 100, 100)];
+    redView.backgroundColor = [UIColor redColor];
+    UIView *blueView = [[UIView alloc] initWithFrame:CGRectMake(70, 70, 100, 100)];
+    blueView.backgroundColor = [UIColor blueColor];
+    
+    [self addSubview:redView];
+    [self addSubview:blueView];
+    
+    redView.layer.zPosition = 100;
+    blueView.layer.zPosition = 10;
+    
+  }
+  return self;
+}
+
+@end
 
 
 @interface ViewController ()
@@ -28,18 +54,26 @@
 @implementation ViewController
 
 - (void)_loadTestData {
-  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"NewJson_DescriptiveLayers" ofType:@"json"];
+  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"newMoovin" ofType:@"json"];
   NSError *error;
   NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
   NSDictionary  *JSONObject = [NSJSONSerialization JSONObjectWithData:jsonData
                                                               options:0 error:&error];
   LAComposition *laScene = [[LAComposition alloc] initWithJSON:JSONObject];
+  LACompView *compView = [[LACompView alloc] initWithModel:laScene];
+  [self.view addSubview:compView];
   
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  
+//  TestView *test = [[TestView alloc] initWithFrame:self.view.bounds];
+//  [self.view addSubview:test];
+  
+//  return;
   [self _loadTestData];
+  return;
   // Do any additional setup after loading the view, typically from a nib.
   self.logTextField = [[UITextView alloc] initWithFrame:self.logView.bounds];
   self.logTextField.textColor = [UIColor greenColor];

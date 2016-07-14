@@ -149,15 +149,24 @@
   [shape moveToPoint:[self _vertexAtIndex:0 inArray:pointsArray]];
   
   for (int i = 1; i < pointsArray.count; i ++) {
-    [shape addCurveToPoint:[self _vertexAtIndex:i inArray:pointsArray]
-            controlPoint1:[self _vertexAtIndex:i - 1 inArray:outTangents]
-            controlPoint2:[self _vertexAtIndex:i inArray:inTangents]];
+    CGPoint vertex = [self _vertexAtIndex:i inArray:pointsArray];
+    CGPoint previousVertex = [self _vertexAtIndex:i - 1 inArray:pointsArray];
+    CGPoint cp1 = [self _vertexAtIndex:i - 1 inArray:outTangents];
+    CGPoint cp2 = [self _vertexAtIndex:i inArray:inTangents];
+
+    [shape addCurveToPoint:vertex
+            controlPoint1:CGPointAddedToPoint(previousVertex, cp1)
+            controlPoint2:CGPointAddedToPoint(vertex, cp2)];
   }
   
   if (closedPath) {
-    [shape addCurveToPoint:[self _vertexAtIndex:0 inArray:pointsArray]
-            controlPoint1:[self _vertexAtIndex:pointsArray.count - 1 inArray:outTangents]
-            controlPoint2:[self _vertexAtIndex:0 inArray:inTangents]];
+    CGPoint vertex = [self _vertexAtIndex:0 inArray:pointsArray];
+    CGPoint previousVertex = [self _vertexAtIndex:pointsArray.count - 1  inArray:pointsArray];
+    CGPoint cp1 = [self _vertexAtIndex:pointsArray.count - 1 inArray:outTangents];
+    CGPoint cp2 = [self _vertexAtIndex:0 inArray:inTangents];
+    [shape addCurveToPoint:vertex
+             controlPoint1:CGPointAddedToPoint(previousVertex, cp1)
+             controlPoint2:CGPointAddedToPoint(vertex, cp2)];
     [shape closePath];
   }
   

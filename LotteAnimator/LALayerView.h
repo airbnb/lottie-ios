@@ -11,7 +11,9 @@
 
 @interface LALayerView : UIView
 
-- (instancetype)initWithModel:(LALayer *)model;
+- (instancetype)initWithModel:(LALayer *)model
+                  parentModel:(LALayer *)parentModel
+                   compBounds:(CGRect)compBounds;
 
 @property (nonatomic, readonly) LALayer *layerModel;
 @property (nonatomic, assign) BOOL debugModeOn;

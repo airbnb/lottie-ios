@@ -33,6 +33,7 @@ typedef enum : NSInteger {
 @property (nonatomic, readonly) NSNumber *layerID;
 @property (nonatomic, readonly) LALayerType layerType;
 @property (nonatomic, readonly) NSNumber *parentID;
+@property (nonatomic, strong) NSArray *childrenIDs;
 @property (nonatomic, readonly) NSNumber *inFrame;
 @property (nonatomic, readonly) NSNumber *outFrame;
 
@@ -45,6 +46,7 @@ typedef enum : NSInteger {
 @property (nonatomic, readonly) LAAnimatableNumberValue *opacity;
 @property (nonatomic, readonly) LAAnimatableNumberValue *rotation;
 @property (nonatomic, readonly) LAAnimatablePointValue *position;
+// TODO Fix Anchor
 @property (nonatomic, readonly) LAAnimatablePointValue *anchor;
 @property (nonatomic, readonly) LAAnimatableScaleValue *scale;
 

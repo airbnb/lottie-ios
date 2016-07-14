@@ -19,6 +19,12 @@
 #import "LAShapeTransform.h"
 #import "LAShapeCircle.h"
 #import "LAShapeRectangle.h"
+#import "LAAnimatableColorValue.h"
+#import "LAAnimatableNumberValue.h"
+#import "LAAnimatablePointValue.h"
+#import "LAAnimatableRectValue.h"
+#import "LAAnimatableScaleValue.h"
+#import "LAAnimatableShapeValue.h"
 
 #endif /* LAModels_h */
 

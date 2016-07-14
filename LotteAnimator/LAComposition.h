@@ -20,4 +20,6 @@
 @property (nonatomic, readonly) NSNumber *framerate;
 @property (nonatomic, readonly) NSTimeInterval timeDuration;
 
+- (LALayer *)layerModelForID:(NSNumber *)layerID;
+
 @end

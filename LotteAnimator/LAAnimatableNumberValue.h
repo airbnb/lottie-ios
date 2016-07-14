@@ -19,4 +19,8 @@
 @property (nonatomic, readonly) NSNumber *startFrame;
 @property (nonatomic, readonly) NSNumber *durationFrames;
 
+- (void)remapValuesFromMin:(NSNumber *)fromMin
+                   fromMax:(NSNumber *)fromMax
+                     toMin:(NSNumber *)toMin
+                     toMax:(NSNumber *)toMax;
 @end

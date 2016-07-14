@@ -42,28 +42,30 @@
     // TODO Solids.
     
   }
+  NSDictionary *ks = jsonDictionary[@"ks"];
   
-  NSDictionary *opacity = jsonDictionary[@"ks.o"];
+  NSDictionary *opacity = ks[@"o"];
   if (opacity) {
     _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity];
+    [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
   }
   
-  NSDictionary *rotation = jsonDictionary[@"ks.r"];
+  NSDictionary *rotation = ks[@"r"];
   if (rotation) {
     _rotation = [[LAAnimatableNumberValue alloc] initWithNumberValues:rotation];
   }
   
-  NSDictionary *position = jsonDictionary[@"ks.p"];
+  NSDictionary *position = ks[@"p"];
   if (position) {
     _position = [[LAAnimatablePointValue alloc] initWithPointValues:position];
   }
   
-  NSDictionary *anchor = jsonDictionary[@"ks.a"];
+  NSDictionary *anchor = ks[@"a"];
   if (anchor) {
     _anchor = [[LAAnimatablePointValue alloc] initWithPointValues:anchor];
   }
   
-  NSDictionary *scale = jsonDictionary[@"ks.s"];
+  NSDictionary *scale = ks[@"s"];
   if (scale) {
     _scale = [[LAAnimatableScaleValue alloc] initWithScaleValues:scale];
   }

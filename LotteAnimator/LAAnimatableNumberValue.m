@@ -151,4 +151,24 @@
   return CGPointMake([xValue floatValue], [yValue floatValue]);
 }
 
+- (void)remapValuesFromMin:(NSNumber *)fromMin
+                   fromMax:(NSNumber *)fromMax
+                     toMin:(NSNumber *)toMin
+                     toMax:(NSNumber *)toMax {
+  NSMutableArray *newvalues = [NSMutableArray array];
+  for (NSNumber *value in _valueKeyframes) {
+    NSNumber *newValue = @(RemapValue(value.floatValue, fromMin.floatValue, fromMax.floatValue, toMin.floatValue, toMax.floatValue));
+    [newvalues addObject:newValue];
+  }
+  _valueKeyframes = newvalues;
+  
+  if (newvalues.count) {
+    _initialValue = newvalues.firstObject;
+  } else if (_initialValue) {
+    _initialValue = @(RemapValue(_initialValue.floatValue, fromMin.floatValue, fromMax.floatValue, toMin.floatValue, toMax.floatValue));
+  }
+  
+  
+}
+
 @end

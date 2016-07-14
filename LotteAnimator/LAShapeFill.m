@@ -29,6 +29,7 @@
   NSDictionary *opacity = jsonDictionary[@"o"];
   if (opacity) {
     _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity];
+    [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
   }
   
   NSNumber *fillEnabled = jsonDictionary[@"fillEnabled"];

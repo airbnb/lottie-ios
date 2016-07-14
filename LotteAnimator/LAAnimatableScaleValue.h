@@ -12,4 +12,12 @@
 
 - (instancetype)initWithScaleValues:(NSDictionary *)scaleValues;
 
+@property (nonatomic, readonly) CATransform3D initialScale;
+
+@property (nonatomic, readonly) NSArray<NSValue *> *scaleKeyframes;
+@property (nonatomic, readonly) NSArray<NSNumber *> *keyTimes;
+@property (nonatomic, readonly) NSArray<CAMediaTimingFunction *> *timingFunctions;
+@property (nonatomic, readonly) NSNumber *startFrame;
+@property (nonatomic, readonly) NSNumber *durationFrames;
+
 @end
