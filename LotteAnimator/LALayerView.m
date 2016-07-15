@@ -8,58 +8,45 @@
 
 #import "LALayerView.h"
 #import "LAShapeLayerView.h"
+#import "LAGroupLayerView.h"
 
 @implementation LALayerView {
   LALayer *_parentModel;
+  NSArray *_shapeLayers;
 }
 
-- (instancetype)initWithModel:(LALayer *)model
-                  parentModel:(LALayer *)parentModel
-                   compBounds:(CGRect)compBounds {
-  self = [super initWithFrame:compBounds];
+- (instancetype)initWithModel:(LALayer *)model {
+  self = [super initWithFrame:model.compBounds];
   if (self) {
     _layerModel = model;
-    _parentModel = parentModel;
     [self _setupViewFromModel];
   }
   return self;
 }
 
 - (void)_setupViewFromModel {
-  
-  
   self.alpha = _layerModel.opacity.initialValue.floatValue;
   self.layer.position = _layerModel.position.initialPoint;
   self.layer.anchorPoint = _layerModel.anchor.initialPoint;
   self.clipsToBounds = NO;
-  for (LAShapeGroup *group in _layerModel.shapes) {
-    [self _setupShapeGroup:group];
-  }
-}
-
-- (void)_setupShapeGroup:(LAShapeGroup *)shapeGroup {
-  NSArray *groupItems = shapeGroup.items;
-  NSArray *reversedItems = [[groupItems reverseObjectEnumerator] allObjects];
   
-  LAShapeFill *currentFill;
-  LAShapeStroke *currentStroke;
-  LAShapeTransform *currentTransform;
+  NSArray *groupItems = _layerModel.shapes;
+  NSArray *reversedItems = [[groupItems reverseObjectEnumerator] allObjects];
+  LAShapeTransform *currentTransform = nil;
+  
+  NSMutableArray *shapeLayers = [NSMutableArray array];
+  
   for (id item in reversedItems) {
-    if ([item isKindOfClass:[LAShapeTransform class]]) {
-      currentTransform = item;
-    } else if ([item isKindOfClass:[LAShapeStroke class]]) {
-      currentStroke = item;
-    } else if ([item isKindOfClass:[LAShapeFill class]]) {
-      currentFill = item;
-    } else if ([item isKindOfClass:[LAShapePath class]]) {
-      LAShapePath *shapePath = (LAShapePath *)item;
-      LAShapeLayerView *shapeLayer = [[LAShapeLayerView alloc] initWithShape:shapePath
-                                                                        fill:currentFill
-                                                                      stroke:currentStroke
-                                                                   transform:currentTransform];
-      [self.layer addSublayer:shapeLayer];
+    if ([item isKindOfClass:[LAShapeGroup class]]) {
+      LAGroupLayerView *groupLayer = [[LAGroupLayerView alloc] initWithShapeGroup:(LAShapeGroup *)item transform:currentTransform];
+      [self.layer addSublayer:groupLayer];
+      [shapeLayers addObject:groupLayer];
+    } else if ([item isKindOfClass:[LAShapeTransform class]]) {
+      currentTransform = (LAShapeTransform *)item;
     }
   }
+  
+  _shapeLayers = shapeLayers;
 }
 
 - (void)_viewtapped {
@@ -71,6 +58,14 @@
   self.layer.borderColor = debugModeOn ? [UIColor redColor].CGColor : nil;
   self.layer.borderWidth = debugModeOn ? 2 : 0;
   self.backgroundColor = debugModeOn ? [[UIColor blueColor] colorWithAlphaComponent:0.2] : [UIColor clearColor];
+  
+  for (LAGroupLayerView *group in _shapeLayers) {
+    group.debugModeOn = debugModeOn;
+  }
+}
+
+- (void)startAnimation {
+  
 }
 
 @end

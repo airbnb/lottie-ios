@@ -80,6 +80,7 @@
 		620A56651D1C81930030EBFB /* LAAnimatableShapeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A56641D1C81930030EBFB /* LAAnimatableShapeValue.m */; };
 		620CD7CD1D3415F000055AD1 /* LAAnimatableRectValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620CD7CC1D3415F000055AD1 /* LAAnimatableRectValue.m */; };
 		620CD7D01D343A2500055AD1 /* LAAnimatableScaleValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620CD7CF1D343A2500055AD1 /* LAAnimatableScaleValue.m */; };
+		620CD7E51D38180800055AD1 /* LAGroupLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 620CD7E41D38180800055AD1 /* LAGroupLayerView.m */; };
 		629737DF1D25D7FC007B4AC9 /* allHold_KeyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DB1D25D7FC007B4AC9 /* allHold_KeyTest.json */; };
 		629737E01D25D7FC007B4AC9 /* firstHold_KeyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DC1D25D7FC007B4AC9 /* firstHold_KeyTest.json */; };
 		629737E11D25D7FC007B4AC9 /* lastHold_KeyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DD1D25D7FC007B4AC9 /* lastHold_KeyTest.json */; };
@@ -192,6 +193,8 @@
 		620CD7CC1D3415F000055AD1 /* LAAnimatableRectValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableRectValue.m; sourceTree = "<group>"; };
 		620CD7CE1D343A2500055AD1 /* LAAnimatableScaleValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableScaleValue.h; sourceTree = "<group>"; };
 		620CD7CF1D343A2500055AD1 /* LAAnimatableScaleValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableScaleValue.m; sourceTree = "<group>"; };
+		620CD7E31D38180800055AD1 /* LAGroupLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAGroupLayerView.h; sourceTree = "<group>"; };
+		620CD7E41D38180800055AD1 /* LAGroupLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAGroupLayerView.m; sourceTree = "<group>"; };
 		629737DB1D25D7FC007B4AC9 /* allHold_KeyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allHold_KeyTest.json; sourceTree = "<group>"; };
 		629737DC1D25D7FC007B4AC9 /* firstHold_KeyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firstHold_KeyTest.json; sourceTree = "<group>"; };
 		629737DD1D25D7FC007B4AC9 /* lastHold_KeyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lastHold_KeyTest.json; sourceTree = "<group>"; };
@@ -246,12 +249,14 @@
 				4804B3131C1F5B0900DA8AF7 /* Models */,
 				4804B2FA1C1F55E600DA8AF7 /* AppDelegate.h */,
 				4804B2FB1C1F55E600DA8AF7 /* AppDelegate.m */,
-				4804B32A1C1F835F00DA8AF7 /* LALayerView.h */,
-				4804B32B1C1F835F00DA8AF7 /* LALayerView.m */,
-				486BE04C1D36F1BE00CD14A0 /* LAShapeLayerView.h */,
-				486BE04D1D36F1BE00CD14A0 /* LAShapeLayerView.m */,
 				48372A421C1F84D700AD0293 /* LACompView.h */,
 				48372A431C1F84D700AD0293 /* LACompView.m */,
+				4804B32A1C1F835F00DA8AF7 /* LALayerView.h */,
+				4804B32B1C1F835F00DA8AF7 /* LALayerView.m */,
+				620CD7E31D38180800055AD1 /* LAGroupLayerView.h */,
+				620CD7E41D38180800055AD1 /* LAGroupLayerView.m */,
+				486BE04C1D36F1BE00CD14A0 /* LAShapeLayerView.h */,
+				486BE04D1D36F1BE00CD14A0 /* LAShapeLayerView.m */,
 				4804B2FD1C1F55E600DA8AF7 /* ViewController.h */,
 				4804B2FE1C1F55E600DA8AF7 /* ViewController.m */,
 				48372A621C20A91C00AD0293 /* LAJSONExplorerViewController.h */,
@@ -592,6 +597,7 @@
 				4804B2F91C1F55E600DA8AF7 /* main.m in Sources */,
 				620A56621D1C81850030EBFB /* LAAnimatableNumberValue.m in Sources */,
 				48372A551C209A5F00AD0293 /* LAShapePath.m in Sources */,
+				620CD7E51D38180800055AD1 /* LAGroupLayerView.m in Sources */,
 				48372AB71C20D97200AD0293 /* LAShapeCircle.m in Sources */,
 				620CD7CD1D3415F000055AD1 /* LAAnimatableRectValue.m in Sources */,
 				620A565C1D1C81610030EBFB /* LAAnimatableColorValue.m in Sources */,

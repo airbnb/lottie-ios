@@ -7,6 +7,7 @@
 //
 
 #import "LAAnimatablePointValue.h"
+#import "BWMath.h"
 
 @implementation LAAnimatablePointValue
 
@@ -31,6 +32,7 @@
   NSMutableArray *keyTimes = [NSMutableArray array];
   NSMutableArray *timingFunctions = [NSMutableArray array];
   UIBezierPath *motionPath = [UIBezierPath new];
+  NSMutableArray *pointKeyframes = [NSMutableArray array];
   
   _startFrame = keyframes.firstObject[@"t"];
   NSNumber *endFrame = keyframes.lastObject[@"t"];
@@ -54,7 +56,9 @@
     
     if (outPoint) {
       //add out value
-      [motionPath addLineToPoint:[self _pointFromValueArray:outPoint]];
+      CGPoint vertex = [self _pointFromValueArray:outPoint];
+      [motionPath addLineToPoint:vertex];
+      [pointKeyframes addObject:[NSValue valueWithCGPoint:vertex]];
       [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
       outPoint = nil;
     }
@@ -64,10 +68,12 @@
       if (startPoint) {
         CGPoint sPoint = [self _pointFromValueArray:startPoint];
         if (keyframe == keyframes.firstObject) {
+          [pointKeyframes addObject:[NSValue valueWithCGPoint:sPoint]];
           [motionPath moveToPoint:sPoint];
           _initialPoint = sPoint;
         } else {
           [motionPath addLineToPoint:sPoint];
+          [pointKeyframes addObject:[NSValue valueWithCGPoint:sPoint]];
           [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
         }
         addStartValue = NO;
@@ -86,15 +92,17 @@
     if (endPoint) {
       NSArray *controlPoint1 = keyframe[@"to"];
       NSArray *controlPoint2 = keyframe[@"ti"];
-      
+      CGPoint vertex = [self _pointFromValueArray:endPoint];
+      [pointKeyframes addObject:[NSValue valueWithCGPoint:vertex]];
       if (controlPoint1 && controlPoint2) {
         // Quadratic Spatial Interpolation
-        [motionPath addCurveToPoint:[self _pointFromValueArray:endPoint]
+        [motionPath addCurveToPoint:vertex
                       controlPoint1:[self _pointFromValueArray:controlPoint1]
                       controlPoint2:[self _pointFromValueArray:controlPoint2]];
+        
       } else {
         // Linear Spatial Interpolation
-        [motionPath addLineToPoint:[self _pointFromValueArray:endPoint]];
+        [motionPath addLineToPoint:vertex];
       }
       
       /*
@@ -132,6 +140,26 @@
   _animationPath = motionPath;
   _keyTimes = keyTimes;
   _timingFunctions = timingFunctions;
+  _pointKeyframes = pointKeyframes;
+}
+
+- (void)remapPointsFromBounds:(CGRect)frombounds toBounds:(CGRect)toBounds {
+  if (_pointKeyframes.count) {
+    NSMutableArray *newValues = [NSMutableArray array];
+    for (NSValue *pointValue in _pointKeyframes) {
+      CGPoint oldPoint = pointValue.CGPointValue;
+      CGPoint newPoint = CGPointMake(RemapValue(oldPoint.x, frombounds.origin.x, frombounds.size.width, toBounds.origin.x, toBounds.size.width),
+                                     RemapValue(oldPoint.y, frombounds.origin.y, frombounds.size.height, toBounds.origin.y, toBounds.size.height));
+      [newValues addObject:[NSValue valueWithCGPoint:newPoint]];
+    }
+    NSValue *firstPoint = newValues.firstObject;
+    _initialPoint = firstPoint.CGPointValue;
+    _pointKeyframes = newValues;
+  } else {
+    CGPoint newPoint = CGPointMake(RemapValue(_initialPoint.x, frombounds.origin.x, frombounds.size.width, toBounds.origin.x, toBounds.size.width),
+                                   RemapValue(_initialPoint.y, frombounds.origin.y, frombounds.size.height, toBounds.origin.y, toBounds.size.height));
+    _initialPoint = newPoint;
+  }
 }
 
 - (CGPoint)_pointFromValueArray:(NSArray<NSNumber *> *)values {

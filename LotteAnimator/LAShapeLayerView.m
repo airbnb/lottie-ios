@@ -29,6 +29,11 @@
     _fill = fill;
     _transform = transform;
     
+    self.frame = _transform.compBounds;
+    self.anchorPoint = _transform.anchor.initialPoint;
+    self.opacity = _transform.opacity.initialValue.floatValue;
+    self.position = _transform.position.initialPoint;
+    
     _fillLayer = [CAShapeLayer layer];
     _fillLayer.path = _path.shapePath.initialShape.CGPath;
     _fillLayer.fillColor = _fill.color.initialColor.CGColor;
@@ -43,8 +48,7 @@
     _strokeLayer.fillColor = nil;
     [self addSublayer:_strokeLayer];
     
-    self.opacity = _transform.opacity.initialValue.floatValue;
-    self.position = _transform.position.initialPoint;
+    
   }
   return self;
 }

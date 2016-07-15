@@ -14,8 +14,9 @@
 
 @interface LAShapeTransform : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds;
 
+@property (nonatomic, readonly) CGRect compBounds;
 @property (nonatomic, readonly) LAAnimatablePointValue *position;
 @property (nonatomic, readonly) LAAnimatablePointValue *anchor;
 @property (nonatomic, readonly) LAAnimatableScaleValue *scale;

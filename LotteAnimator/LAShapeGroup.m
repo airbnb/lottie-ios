@@ -16,22 +16,22 @@
 
 @implementation LAShapeGroup
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+    [self _mapFromJSON:jsonDictionary frameRate:frameRate compBounds:compBounds];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds {
   NSArray *itemsJSON = jsonDictionary[@"it"];
   NSMutableArray *items = [NSMutableArray array];
   for (NSDictionary *itemJSON in itemsJSON) {
     NSString *type = itemJSON[@"ty"];
     
     if ([type isEqualToString:@"gr"]) {
-      LAShapeGroup *group = [[LAShapeGroup alloc] initWithJSON:itemJSON frameRate:frameRate];
+      LAShapeGroup *group = [[LAShapeGroup alloc] initWithJSON:itemJSON frameRate:frameRate compBounds:compBounds];
       [items addObject:group];
     } else if ([type isEqualToString:@"st"]) {
       LAShapeStroke *stroke = [[LAShapeStroke alloc] initWithJSON:itemJSON frameRate:frameRate];
@@ -40,7 +40,7 @@
       LAShapeFill *fill = [[LAShapeFill alloc] initWithJSON:itemJSON frameRate:frameRate];
       [items addObject:fill];
     } else if ([type isEqualToString:@"tr"]) {
-      LAShapeTransform *transform = [[LAShapeTransform alloc] initWithJSON:itemJSON frameRate:frameRate];
+      LAShapeTransform *transform = [[LAShapeTransform alloc] initWithJSON:itemJSON frameRate:frameRate compBounds:compBounds];
       [items addObject:transform];
     } else if ([type isEqualToString:@"sh"]) {
       LAShapePath *path = [[LAShapePath alloc] initWithJSON:itemJSON frameRate:frameRate];

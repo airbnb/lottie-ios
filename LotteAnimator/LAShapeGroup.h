@@ -10,7 +10,7 @@
 
 @interface LAShapeGroup : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds;
 
 @property (nonatomic, readonly) NSArray *items;
 

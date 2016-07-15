@@ -25,18 +25,9 @@
 }
 
 - (void)_buildSubviewsFromModel {
-  
   NSMutableDictionary *layerMap = [NSMutableDictionary dictionary];
-  
   for (LALayer *layer in _sceneModel.layers) {
-    LALayer *parentLayerModel = nil;
-    if (layer.parentID) {
-      [_sceneModel layerModelForID:layer.parentID];
-    }
-    LALayerView *layerView = [[LALayerView alloc] initWithModel:layer
-                                                    parentModel:parentLayerModel
-                                                     compBounds:self.bounds];
-    layerView.frame = self.bounds;
+    LALayerView *layerView = [[LALayerView alloc] initWithModel:layer];
     layerMap[layer.layerID] = layerView;
     [self addSubview:layerView];
     [self sendSubviewToBack:layerView];
@@ -50,12 +41,16 @@
 
 - (void)setDebugModeOn:(BOOL)debugModeOn {
   _debugModeOn = debugModeOn;
-  for (UIView *child in self.subviews) {
+  for (LALayerView *child in _layerMap.allValues) {
     if ([child isKindOfClass:[LALayerView class]]) {
-      [(LALayerView *)child setDebugModeOn:debugModeOn];
+      [child setDebugModeOn:debugModeOn];
       child.alpha = debugModeOn ? 0.5 : 1;
     }
   }
+}
+
+- (void)play {
+  
 }
 
 @end

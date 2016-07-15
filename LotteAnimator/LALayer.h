@@ -27,7 +27,7 @@ typedef enum : NSInteger {
 
 @interface LALayer : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds;
 
 @property (nonatomic, readonly) NSString *layerName;
 @property (nonatomic, readonly) NSNumber *layerID;
@@ -36,6 +36,7 @@ typedef enum : NSInteger {
 @property (nonatomic, strong) NSArray *childrenIDs;
 @property (nonatomic, readonly) NSNumber *inFrame;
 @property (nonatomic, readonly) NSNumber *outFrame;
+@property (nonatomic, readonly) CGRect compBounds;
 
 @property (nonatomic, readonly) NSArray<LAShapeGroup *> *shapes;
 @property (nonatomic, readonly) NSArray<LAMask *> *masks;

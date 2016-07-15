@@ -11,11 +11,11 @@
 
 @interface LALayerView : UIView
 
-- (instancetype)initWithModel:(LALayer *)model
-                  parentModel:(LALayer *)parentModel
-                   compBounds:(CGRect)compBounds;
+- (instancetype)initWithModel:(LALayer *)model;
 
 @property (nonatomic, readonly) LALayer *layerModel;
 @property (nonatomic, assign) BOOL debugModeOn;
+
+- (void)startAnimation;
 
 @end

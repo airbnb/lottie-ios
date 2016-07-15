@@ -15,17 +15,18 @@
 
 @implementation LALayer
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+    [self _mapFromJSON:jsonDictionary frameRate:frameRate compBounds:compBounds];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds {
   _layerName = [jsonDictionary[@"nm"] copy];
   _layerID = [jsonDictionary[@"ind"] copy];
+  _compBounds = compBounds;
   
   NSNumber *layerType = jsonDictionary[@"ty"];
   if (layerType.integerValue <= LALayerTypeShape) {
@@ -63,6 +64,7 @@
   NSDictionary *anchor = ks[@"a"];
   if (anchor) {
     _anchor = [[LAAnimatablePointValue alloc] initWithPointValues:anchor];
+    [_anchor remapPointsFromBounds:compBounds toBounds:CGRectMake(0, 0, 1, 1)];
   }
   
   NSDictionary *scale = ks[@"s"];
@@ -79,7 +81,7 @@
   
   NSMutableArray *shapes = [NSMutableArray array];
   for (NSDictionary *shapeJSON in jsonDictionary[@"shapes"]) {
-    LAShapeGroup *group = [[LAShapeGroup alloc] initWithJSON:shapeJSON frameRate:frameRate];
+    LAShapeGroup *group = [[LAShapeGroup alloc] initWithJSON:shapeJSON frameRate:frameRate compBounds:compBounds];
     [shapes addObject:group];
   }
   _shapes = shapes;

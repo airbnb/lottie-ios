@@ -13,15 +13,17 @@
 
 @implementation LAShapeTransform
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+    [self _mapFromJSON:jsonDictionary frameRate:frameRate compBounds:compBounds];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds {
+  _compBounds = compBounds;
+  
   NSDictionary *position = jsonDictionary[@"p"];
   if (position) {
     _position = [[LAAnimatablePointValue alloc] initWithPointValues:position];
@@ -30,6 +32,7 @@
   NSDictionary *anchor = jsonDictionary[@"a"];
   if (anchor) {
     _anchor = [[LAAnimatablePointValue alloc] initWithPointValues:anchor];
+    [_anchor remapPointsFromBounds:compBounds toBounds:CGRectMake(0, 0, 1, 1)];
   }
   
   NSDictionary *scale = jsonDictionary[@"s"];

@@ -14,5 +14,8 @@
 
 @property (nonatomic, strong) LAComposition *sceneModel;
 @property (nonatomic, assign) BOOL debugModeOn;
+@property (nonatomic, assign) BOOL loop;
+
+- (void)play;
 
 @end

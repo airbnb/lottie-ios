@@ -46,7 +46,7 @@
   NSMutableDictionary *parentToChildrenMap = [NSMutableDictionary dictionary];
   
   for (NSDictionary *layerJSON in layersJSON) {
-    LALayer *layer = [[LALayer alloc] initWithJSON:layerJSON frameRate:_framerate];
+    LALayer *layer = [[LALayer alloc] initWithJSON:layerJSON frameRate:_framerate compBounds:_compBounds];
     [layers addObject:layer];
     modelMap[layer.layerID] = layer;
     
