@@ -9,10 +9,11 @@
 #import "LALayerView.h"
 #import "LAShapeLayerView.h"
 #import "LAGroupLayerView.h"
+#import "CAAnimationGroup+LAAnimatableGroup.h"
 
 @implementation LALayerView {
-  LALayer *_parentModel;
-  NSArray *_shapeLayers;
+  NSArray<LAGroupLayerView *> *_shapeLayers;
+  CAAnimationGroup *_animation;
 }
 
 - (instancetype)initWithModel:(LALayer *)model {
@@ -47,6 +48,23 @@
   }
   
   _shapeLayers = shapeLayers;
+  [self _buildAnimations];
+}
+
+- (void)_buildAnimations {
+  _animation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"opacity" : _layerModel.opacity,
+                                                                                     @"transform.rotation" : _layerModel.rotation,
+                                                                                     @"position" : _layerModel.position,
+                                                                                     @"anchorPoint" : _layerModel.anchor}];
+}
+
+- (void)startAnimation {
+  if (_animation) {
+    [self.layer addAnimation:_animation forKey:@"lotteAnimation"];
+  }
+  for (LAGroupLayerView *groupLayer in _shapeLayers) {
+    [groupLayer startAnimation];
+  }
 }
 
 - (void)_viewtapped {
@@ -62,10 +80,6 @@
   for (LAGroupLayerView *group in _shapeLayers) {
     group.debugModeOn = debugModeOn;
   }
-}
-
-- (void)startAnimation {
-  
 }
 
 @end

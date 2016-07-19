@@ -24,7 +24,7 @@
   _closed = [jsonDictionary[@"closed"] boolValue];
   NSDictionary *shape = jsonDictionary[@"ks"];
   if (shape) {
-    _shapePath = [[LAAnimatableShapeValue alloc] initWithShapeValues:shape closed:_closed];
+    _shapePath = [[LAAnimatableShapeValue alloc] initWithShapeValues:shape frameRate:frameRate closed:_closed];
   }
 }
 

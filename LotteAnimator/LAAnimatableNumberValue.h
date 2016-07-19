@@ -7,20 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LAAnimatableValue.h"
 
-@interface LAAnimatableNumberValue : NSObject
+@interface LAAnimatableNumberValue : NSObject <LAAnimatableValue>
 
-- (instancetype)initWithNumberValues:(NSDictionary *)numberValues;
-
-@property (nonatomic, readonly) NSNumber *initialValue;
-@property (nonatomic, readonly) NSArray<NSNumber *> *valueKeyframes;
-@property (nonatomic, readonly) NSArray<NSNumber *> *keyTimes;
-@property (nonatomic, readonly) NSArray<CAMediaTimingFunction *> *timingFunctions;
-@property (nonatomic, readonly) NSNumber *startFrame;
-@property (nonatomic, readonly) NSNumber *durationFrames;
-
+- (instancetype)initWithNumberValues:(NSDictionary *)numberValues frameRate:(NSNumber *)frameRate;
 - (void)remapValuesFromMin:(NSNumber *)fromMin
                    fromMax:(NSNumber *)fromMax
                      toMin:(NSNumber *)toMin
                      toMax:(NSNumber *)toMax;
+
+@property (nonatomic, readonly) NSNumber *initialValue;
+
 @end

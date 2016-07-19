@@ -10,10 +10,10 @@
 
 @implementation LAAnimatableScaleValue
 
-- (instancetype)initWithScaleValues:(NSDictionary *)scaleValues {
+- (instancetype)initWithScaleValues:(NSDictionary *)scaleValues frameRate:(NSNumber *)frameRate {
   self = [super init];
   if (self) {
-    
+    _frameRate = frameRate;
   }
   return self;
 }

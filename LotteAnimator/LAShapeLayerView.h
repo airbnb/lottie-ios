@@ -14,4 +14,7 @@
                          fill:(LAShapeFill *)fill
                        stroke:(LAShapeStroke *)stroke
                     transform:(LAShapeTransform *)transform;
+
+- (void)startAnimation;
+
 @end

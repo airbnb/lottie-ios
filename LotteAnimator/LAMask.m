@@ -40,12 +40,12 @@
   
   NSDictionary *maskshape = jsonDictionary[@"pt"];
   if (maskshape) {
-    _maskPath = [[LAAnimatableShapeValue alloc] initWithShapeValues:maskshape closed:_closed];
+    _maskPath = [[LAAnimatableShapeValue alloc] initWithShapeValues:maskshape frameRate:frameRate closed:_closed];
   }
   
   NSDictionary *opacity = jsonDictionary[@"o"];
   if (opacity) {
-    _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity];
+    _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:frameRate];
   }
 }
 

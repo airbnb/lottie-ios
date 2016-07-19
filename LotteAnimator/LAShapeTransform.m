@@ -26,28 +26,28 @@
   
   NSDictionary *position = jsonDictionary[@"p"];
   if (position) {
-    _position = [[LAAnimatablePointValue alloc] initWithPointValues:position];
+    _position = [[LAAnimatablePointValue alloc] initWithPointValues:position frameRate:frameRate];
   }
   
   NSDictionary *anchor = jsonDictionary[@"a"];
   if (anchor) {
-    _anchor = [[LAAnimatablePointValue alloc] initWithPointValues:anchor];
+    _anchor = [[LAAnimatablePointValue alloc] initWithPointValues:anchor frameRate:frameRate];
     [_anchor remapPointsFromBounds:compBounds toBounds:CGRectMake(0, 0, 1, 1)];
   }
   
   NSDictionary *scale = jsonDictionary[@"s"];
   if (scale) {
-    _scale = [[LAAnimatableScaleValue alloc] initWithScaleValues:scale];
+    _scale = [[LAAnimatableScaleValue alloc] initWithScaleValues:scale frameRate:frameRate];
   }
   
   NSDictionary *rotation = jsonDictionary[@"r"];
   if (rotation) {
-    _rotation = [[LAAnimatableNumberValue alloc] initWithNumberValues:rotation];
+    _rotation = [[LAAnimatableNumberValue alloc] initWithNumberValues:rotation frameRate:frameRate];
   }
   
   NSDictionary *opacity = jsonDictionary[@"o"];
   if (opacity) {
-    _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity];
+    _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:frameRate];
   }
 }
 

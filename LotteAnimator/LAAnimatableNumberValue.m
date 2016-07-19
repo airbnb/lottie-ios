@@ -8,11 +8,25 @@
 
 #import "LAAnimatableNumberValue.h"
 
+@interface LAAnimatableNumberValue ()
+
+@property (nonatomic, readonly) NSArray<NSNumber *> *valueKeyframes;
+@property (nonatomic, readonly) NSArray<NSNumber *> *keyTimes;
+@property (nonatomic, readonly) NSArray<CAMediaTimingFunction *> *timingFunctions;
+@property (nonatomic, readonly) NSTimeInterval delay;
+@property (nonatomic, readonly) NSTimeInterval duration;
+@property (nonatomic, readonly) NSNumber *startFrame;
+@property (nonatomic, readonly) NSNumber *durationFrames;
+@property (nonatomic, readonly) NSNumber *frameRate;
+
+@end
+
 @implementation LAAnimatableNumberValue
 
-- (instancetype)initWithNumberValues:(NSDictionary *)numberValues {
+- (instancetype)initWithNumberValues:(NSDictionary *)numberValues frameRate:(NSNumber *)frameRate {
   self = [super init];
   if (self) {
+    _frameRate = frameRate;
     id value = numberValues[@"k"];
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
@@ -38,10 +52,11 @@
   
   NSAssert((_startFrame && endFrame && _startFrame.integerValue < endFrame.integerValue),
            @"Lotte: Keyframe animation has incorrect time values or invalid number of keyframes");
-  
   // Calculate time duration
   _durationFrames = @(endFrame.floatValue - _startFrame.floatValue);
   
+  _duration = _durationFrames.floatValue / _frameRate.floatValue;
+  _delay = _startFrame.floatValue / _frameRate.floatValue;
   
   BOOL addStartValue = YES;
   BOOL addTimePadding = NO;
@@ -167,8 +182,24 @@
   } else if (_initialValue) {
     _initialValue = @(RemapValue(_initialValue.floatValue, fromMin.floatValue, fromMax.floatValue, toMin.floatValue, toMax.floatValue));
   }
-  
-  
+}
+
+- (BOOL)hasAnimation {
+  return (self.valueKeyframes.count > 0);
+}
+
+- (nullable CAKeyframeAnimation *)animationForKeyPath:(nonnull NSString *)keypath {
+  if (self.hasAnimation == NO) {
+    return nil;
+  }
+  CAKeyframeAnimation *keyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:keypath];
+  keyframeAnimation.keyTimes = self.keyTimes;
+  keyframeAnimation.values = self.valueKeyframes;
+  keyframeAnimation.timingFunctions = self.timingFunctions;
+  keyframeAnimation.duration = self.duration;
+  keyframeAnimation.beginTime = self.delay;
+  keyframeAnimation.fillMode = kCAFillModeForwards;
+  return keyframeAnimation;
 }
 
 @end

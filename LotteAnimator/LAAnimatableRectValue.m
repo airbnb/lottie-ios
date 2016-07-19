@@ -10,10 +10,10 @@
 
 @implementation LAAnimatableRectValue
 
-- (instancetype)initWithRectValues:(NSDictionary *)rectValues {
+- (instancetype)initWithRectValues:(NSDictionary *)rectValues frameRate:(NSNumber *)frameRate {
   self = [super init];
   if (self) {
-    
+    _frameRate = frameRate;
   }
   return self;
 }

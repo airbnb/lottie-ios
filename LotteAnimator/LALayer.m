@@ -47,29 +47,29 @@
   
   NSDictionary *opacity = ks[@"o"];
   if (opacity) {
-    _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity];
+    _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:frameRate];
     [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
   }
   
   NSDictionary *rotation = ks[@"r"];
   if (rotation) {
-    _rotation = [[LAAnimatableNumberValue alloc] initWithNumberValues:rotation];
+    _rotation = [[LAAnimatableNumberValue alloc] initWithNumberValues:rotation frameRate:frameRate];
   }
   
   NSDictionary *position = ks[@"p"];
   if (position) {
-    _position = [[LAAnimatablePointValue alloc] initWithPointValues:position];
+    _position = [[LAAnimatablePointValue alloc] initWithPointValues:position frameRate:frameRate];
   }
   
   NSDictionary *anchor = ks[@"a"];
   if (anchor) {
-    _anchor = [[LAAnimatablePointValue alloc] initWithPointValues:anchor];
+    _anchor = [[LAAnimatablePointValue alloc] initWithPointValues:anchor frameRate:frameRate];
     [_anchor remapPointsFromBounds:compBounds toBounds:CGRectMake(0, 0, 1, 1)];
   }
   
   NSDictionary *scale = ks[@"s"];
   if (scale) {
-    _scale = [[LAAnimatableScaleValue alloc] initWithScaleValues:scale];
+    _scale = [[LAAnimatableScaleValue alloc] initWithScaleValues:scale frameRate:frameRate];
   }
   
   NSMutableArray *masks = [NSMutableArray array];

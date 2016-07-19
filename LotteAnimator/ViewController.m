@@ -62,6 +62,7 @@
   LAComposition *laScene = [[LAComposition alloc] initWithJSON:JSONObject];
   LACompView *compView = [[LACompView alloc] initWithModel:laScene];
   [self.view addSubview:compView];
+  [compView performSelector:@selector(play) withObject:nil afterDelay:3];
   
 }
 
@@ -72,8 +73,8 @@
 //  [self.view addSubview:test];
   
 //  return;
-  [self _loadTestData];
-  return;
+//  [self _loadTestData];
+//  return;
   // Do any additional setup after loading the view, typically from a nib.
   self.logTextField = [[UITextView alloc] initWithFrame:self.logView.bounds];
   self.logTextField.textColor = [UIColor greenColor];
@@ -116,38 +117,38 @@
   
   [self.logView addSubview:self.logTextField];
   
-  UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
-  testView.backgroundColor = [UIColor whiteColor];
+//  UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
+//  testView.backgroundColor = [UIColor whiteColor];
+////
+//  UIBezierPath *startPath = [UIBezierPath new];
+//  [startPath moveToPoint:CGPointMake(10, 10)];
+//  [startPath addCurveToPoint:CGPointMake(300, 300) controlPoint1:CGPointMake(300, 0) controlPoint2:CGPointMake(0, 300)];
+//  startPath.lineWidth = 10;
 //
-  UIBezierPath *startPath = [UIBezierPath new];
-  [startPath moveToPoint:CGPointMake(10, 10)];
-  [startPath addCurveToPoint:CGPointMake(300, 300) controlPoint1:CGPointMake(300, 0) controlPoint2:CGPointMake(0, 300)];
-  startPath.lineWidth = 10;
-
-  UIBezierPath *midPath = [UIBezierPath new];
-  [midPath moveToPoint:CGPointMake(50, 10)];
-  [midPath addCurveToPoint:CGPointMake(300, 300) controlPoint1:CGPointMake(0, 300) controlPoint2:CGPointMake(300, 0)];
-  midPath.lineWidth = 10;
-  
-  UIBezierPath *endPath = [UIBezierPath new];
-  [endPath moveToPoint:CGPointMake(70, 250)];
-  [endPath addCurveToPoint:CGPointMake(300, 300) controlPoint1:CGPointMake(0, 300) controlPoint2:CGPointMake(300, 0)];
-  endPath.lineWidth = 10;
-  
-  UIBezierPath *finalPath = [UIBezierPath new];
-  [finalPath moveToPoint:CGPointMake(150, 200)];
-  [finalPath addCurveToPoint:CGPointMake(150, 100) controlPoint1:CGPointMake(100, 200) controlPoint2:CGPointMake(100, 100)];
-  [finalPath addCurveToPoint:CGPointMake(150, 200) controlPoint1:CGPointMake(200, 100) controlPoint2:CGPointMake(200, 200)];
-  finalPath.lineWidth = 10;
-
-  CAShapeLayer *shapeLayer = [CAShapeLayer new];
-  shapeLayer.fillColor = nil;
-  shapeLayer.path = startPath.CGPath;
-  shapeLayer.strokeColor = [UIColor blueColor].CGColor;
-  shapeLayer.frame = testView.bounds;
-  shapeLayer.lineWidth = 10;
-  [self.view addSubview:testView];
-  [testView.layer addSublayer:shapeLayer];
+//  UIBezierPath *midPath = [UIBezierPath new];
+//  [midPath moveToPoint:CGPointMake(50, 10)];
+//  [midPath addCurveToPoint:CGPointMake(300, 300) controlPoint1:CGPointMake(0, 300) controlPoint2:CGPointMake(300, 0)];
+//  midPath.lineWidth = 10;
+//  
+//  UIBezierPath *endPath = [UIBezierPath new];
+//  [endPath moveToPoint:CGPointMake(70, 250)];
+//  [endPath addCurveToPoint:CGPointMake(300, 300) controlPoint1:CGPointMake(0, 300) controlPoint2:CGPointMake(300, 0)];
+//  endPath.lineWidth = 10;
+//  
+//  UIBezierPath *finalPath = [UIBezierPath new];
+//  [finalPath moveToPoint:CGPointMake(150, 200)];
+//  [finalPath addCurveToPoint:CGPointMake(150, 100) controlPoint1:CGPointMake(100, 200) controlPoint2:CGPointMake(100, 100)];
+//  [finalPath addCurveToPoint:CGPointMake(150, 200) controlPoint1:CGPointMake(200, 100) controlPoint2:CGPointMake(200, 200)];
+//  finalPath.lineWidth = 10;
+//
+//  CAShapeLayer *shapeLayer = [CAShapeLayer new];
+//  shapeLayer.fillColor = nil;
+//  shapeLayer.path = startPath.CGPath;
+//  shapeLayer.strokeColor = [UIColor blueColor].CGColor;
+//  shapeLayer.frame = testView.bounds;
+//  shapeLayer.lineWidth = 10;
+//  [self.view addSubview:testView];
+//  [testView.layer addSublayer:shapeLayer];
   
 //  CABasicAnimation *animation1 = [CABasicAnimation animationWithKeyPath:@"position"];
 //  animation1.fromValue = [NSValue valueWithCGPoint:CGPointMake(150, 150)];
@@ -176,18 +177,18 @@
   
   
 //
-  CAKeyframeAnimation *keyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:@"path"];
-  keyframeAnimation.values = @[(id)startPath.CGPath, (id)midPath.CGPath, (id)endPath.CGPath, (id)finalPath.CGPath, (id)finalPath.CGPath];
-  keyframeAnimation.keyTimes = @[@0.1,                  @0.25,              @0.5,               @0.9,                   @1];
-  keyframeAnimation.duration = 1;
-  keyframeAnimation.repeatCount = HUGE_VALF;
-  keyframeAnimation.autoreverses = YES;
-  keyframeAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn],
-                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
-  keyframeAnimation.beginTime = CACurrentMediaTime() + 5;
-  [shapeLayer addAnimation:keyframeAnimation forKey:@"keyframeTest"];
+//  CAKeyframeAnimation *keyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:@"path"];
+//  keyframeAnimation.values = @[(id)startPath.CGPath, (id)midPath.CGPath, (id)endPath.CGPath, (id)finalPath.CGPath, (id)finalPath.CGPath];
+//  keyframeAnimation.keyTimes = @[@0.1,                  @0.25,              @0.5,               @0.9,                   @1];
+//  keyframeAnimation.duration = 1;
+//  keyframeAnimation.repeatCount = HUGE_VALF;
+//  keyframeAnimation.autoreverses = YES;
+//  keyframeAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn],
+//                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+//                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+//                                        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
+//  keyframeAnimation.beginTime = CACurrentMediaTime() + 5;
+//  [shapeLayer addAnimation:keyframeAnimation forKey:@"keyframeTest"];
   
   
 }
@@ -252,8 +253,9 @@
   NSDictionary  *JSONObject = [NSJSONSerialization JSONObjectWithData:jsonData
                                                               options:0 error:&error];
   
-  NSDictionary *object = [JSONObject objectForKey:@"animation"];
+  LAComposition *laScene = [[LAComposition alloc] initWithJSON:JSONObject];
 
+  
 //  LAComposition *laScene = [MTLJSONAdapter modelOfClass:[LAComposition class] fromJSONDictionary:JSONObject error:&error];
   [self appendStringToLog:@"\n\nOPENING NEW FILE\n"];
   if (error) {
@@ -271,11 +273,12 @@
 //    }
   }
   
-//  LACompView *compView = [[LACompView alloc] initWithModel:laScene];
-//  
-//  [self.view addSubview:compView];
-//  self.currentScene = laScene;
-//  self.currentSceneView = compView;
-//  [self.view sendSubviewToBack:self.currentSceneView];
+  LACompView *compView = [[LACompView alloc] initWithModel:laScene];
+  
+  [self.view addSubview:compView];
+  self.currentScene = laScene;
+  self.currentSceneView = compView;
+  [self.view sendSubviewToBack:self.currentSceneView];
+  [compView performSelector:@selector(play) withObject:nil afterDelay:1];
 }
 @end

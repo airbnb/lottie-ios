@@ -23,46 +23,7 @@
 		48372A581C209A6C00AD0293 /* LAShapeStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A571C209A6C00AD0293 /* LAShapeStroke.m */; };
 		48372A5B1C209A7A00AD0293 /* LAShapeFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A5A1C209A7A00AD0293 /* LAShapeFill.m */; };
 		48372A5E1C209A8900AD0293 /* LAShapeTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A5D1C209A8900AD0293 /* LAShapeTransform.m */; };
-		48372A611C20A88E00AD0293 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A601C20A88E00AD0293 /* data.json */; };
 		48372A641C20A91C00AD0293 /* LAJSONExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A631C20A91C00AD0293 /* LAJSONExplorerViewController.m */; };
-		48372A8C1C20BFB700AD0293 /* 001_ShapeLayerSquare_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A661C20BFB700AD0293 /* 001_ShapeLayerSquare_data.json */; };
-		48372A8D1C20BFB700AD0293 /* 002_ShapeLayerLine_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A671C20BFB700AD0293 /* 002_ShapeLayerLine_data.json */; };
-		48372A8E1C20BFB700AD0293 /* 003_TwoShapeLayerSquares_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A681C20BFB700AD0293 /* 003_TwoShapeLayerSquares_data.json */; };
-		48372A8F1C20BFB700AD0293 /* 004_ShapeLayerLineLineCapdata.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A691C20BFB700AD0293 /* 004_ShapeLayerLineLineCapdata.json */; };
-		48372A901C20BFB700AD0293 /* 005_TwoShapeLayerSquaresDifferent_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A6A1C20BFB700AD0293 /* 005_TwoShapeLayerSquaresDifferent_data.json */; };
-		48372A911C20BFB700AD0293 /* 006_BezierShape_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A6B1C20BFB700AD0293 /* 006_BezierShape_data.json */; };
-		48372A921C20BFB700AD0293 /* 007_ShapeLayerShapes_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A6C1C20BFB700AD0293 /* 007_ShapeLayerShapes_data.json */; };
-		48372A931C20BFB700AD0293 /* 008_ShapeLayerMultiplePaths.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A6D1C20BFB700AD0293 /* 008_ShapeLayerMultiplePaths.json */; };
-		48372A941C20BFB700AD0293 /* 009_ShapeLayerRepeater.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A6E1C20BFB700AD0293 /* 009_ShapeLayerRepeater.json */; };
-		48372A951C20BFB700AD0293 /* 010_ShapeLayerRepeaterRotated.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A6F1C20BFB700AD0293 /* 010_ShapeLayerRepeaterRotated.json */; };
-		48372A961C20BFB700AD0293 /* 011_MergePaths_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A701C20BFB700AD0293 /* 011_MergePaths_data.json */; };
-		48372A971C20BFB700AD0293 /* 012_ShapeAlphaMatte.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A711C20BFB700AD0293 /* 012_ShapeAlphaMatte.json */; };
-		48372A981C20BFB700AD0293 /* 013_ShapeMasked.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A721C20BFB700AD0293 /* 013_ShapeMasked.json */; };
-		48372A991C20BFB700AD0293 /* 014_ShapeMaskedTwice.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A731C20BFB700AD0293 /* 014_ShapeMaskedTwice.json */; };
-		48372A9A1C20BFB700AD0293 /* 015_DottedLine.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A741C20BFB700AD0293 /* 015_DottedLine.json */; };
-		48372A9B1C20BFB700AD0293 /* 015_TrimPaths.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A751C20BFB700AD0293 /* 015_TrimPaths.json */; };
-		48372A9C1C20BFB700AD0293 /* 016_GroupedShapes.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A761C20BFB700AD0293 /* 016_GroupedShapes.json */; };
-		48372A9D1C20BFB700AD0293 /* 017_ShapeMaskedFeathered.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A771C20BFB700AD0293 /* 017_ShapeMaskedFeathered.json */; };
-		48372A9E1C20BFB700AD0293 /* 049_ShapeInOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A781C20BFB700AD0293 /* 049_ShapeInOut.json */; };
-		48372A9F1C20BFB700AD0293 /* 050_AnimateTransformPositionSingleKeyframe.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A791C20BFB700AD0293 /* 050_AnimateTransformPositionSingleKeyframe.json */; };
-		48372AA01C20BFB700AD0293 /* 051_AnimateTransformPositionLinear.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A7A1C20BFB700AD0293 /* 051_AnimateTransformPositionLinear.json */; };
-		48372AA11C20BFB700AD0293 /* 052_AnimateTransformPositionLinearCurved.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A7B1C20BFB700AD0293 /* 052_AnimateTransformPositionLinearCurved.json */; };
-		48372AA21C20BFB700AD0293 /* 053_AnimateTransformPositionEaseIn.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A7C1C20BFB700AD0293 /* 053_AnimateTransformPositionEaseIn.json */; };
-		48372AA31C20BFB700AD0293 /* 054_AnimateTransformPositionEaseOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A7D1C20BFB700AD0293 /* 054_AnimateTransformPositionEaseOut.json */; };
-		48372AA41C20BFB700AD0293 /* 055_AnimateTransformPositionEasyEase.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A7E1C20BFB700AD0293 /* 055_AnimateTransformPositionEasyEase.json */; };
-		48372AA51C20BFB700AD0293 /* 056_AnimateTransformPositionCustomEaseIn.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A7F1C20BFB700AD0293 /* 056_AnimateTransformPositionCustomEaseIn.json */; };
-		48372AA61C20BFB700AD0293 /* 057_AnimateTransformPositionCustomEasyInOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A801C20BFB700AD0293 /* 057_AnimateTransformPositionCustomEasyInOut.json */; };
-		48372AA71C20BFB700AD0293 /* 058_AnimateTransformPositionHoldKeyframe.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A811C20BFB700AD0293 /* 058_AnimateTransformPositionHoldKeyframe.json */; };
-		48372AA81C20BFB700AD0293 /* 059_AnimateTransformPositionRoveAcrossTime.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A821C20BFB700AD0293 /* 059_AnimateTransformPositionRoveAcrossTime.json */; };
-		48372AA91C20BFB700AD0293 /* 060_AnimateTransformPositionBakedEase.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A831C20BFB700AD0293 /* 060_AnimateTransformPositionBakedEase.json */; };
-		48372AAA1C20BFB700AD0293 /* 062_AnimateTransformParented.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A841C20BFB700AD0293 /* 062_AnimateTransformParented.json */; };
-		48372AAB1C20BFB700AD0293 /* 070_AnimatePathLine.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A851C20BFB700AD0293 /* 070_AnimatePathLine.json */; };
-		48372AAC1C20BFB700AD0293 /* 071_AnimatePathShape.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A861C20BFB700AD0293 /* 071_AnimatePathShape.json */; };
-		48372AAD1C20BFB700AD0293 /* 073_AnimateRectangleSizeEasyEase.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A871C20BFB700AD0293 /* 073_AnimateRectangleSizeEasyEase.json */; };
-		48372AAE1C20BFB700AD0293 /* 074_AnimateRectanglePosition.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A881C20BFB700AD0293 /* 074_AnimateRectanglePosition.json */; };
-		48372AAF1C20BFB700AD0293 /* 075_AnimateTrimPaths.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A891C20BFB700AD0293 /* 075_AnimateTrimPaths.json */; };
-		48372AB01C20BFB700AD0293 /* 100_House_AnimateInAndOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A8A1C20BFB700AD0293 /* 100_House_AnimateInAndOut.json */; };
-		48372AB11C20BFB700AD0293 /* 200_LYS_LightSwitch.json in Resources */ = {isa = PBXBuildFile; fileRef = 48372A8B1C20BFB700AD0293 /* 200_LYS_LightSwitch.json */; };
 		48372AB41C20C13700AD0293 /* CGGeometryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372AB31C20C13700AD0293 /* CGGeometryAdditions.m */; };
 		48372AB71C20D97200AD0293 /* LAShapeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372AB61C20D97200AD0293 /* LAShapeCircle.m */; };
 		48372ABA1C20D98200AD0293 /* LAShapeRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372AB91C20D98200AD0293 /* LAShapeRectangle.m */; };
@@ -70,10 +31,6 @@
 		486BE0491D36C9B500CD14A0 /* LALayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B32B1C1F835F00DA8AF7 /* LALayerView.m */; };
 		486BE04B1D36E06C00CD14A0 /* newMoovin.json in Resources */ = {isa = PBXBuildFile; fileRef = 486BE04A1D36E06C00CD14A0 /* newMoovin.json */; };
 		486BE04E1D36F1BE00CD14A0 /* LAShapeLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486BE04D1D36F1BE00CD14A0 /* LAShapeLayerView.m */; };
-		4872BEDE1D146D850028E0B3 /* animatedTransformHold.json in Resources */ = {isa = PBXBuildFile; fileRef = 4872BEDB1D146D850028E0B3 /* animatedTransformHold.json */; };
-		4872BEE01D146D850028E0B3 /* animatedTransform.json in Resources */ = {isa = PBXBuildFile; fileRef = 4872BEDD1D146D850028E0B3 /* animatedTransform.json */; };
-		488990ED1D08A2A400425189 /* curve.json in Resources */ = {isa = PBXBuildFile; fileRef = 488990EC1D08A2A400425189 /* curve.json */; };
-		620A56491D1B3B150030EBFB /* FullLayerModel_Animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 620A56481D1B3B150030EBFB /* FullLayerModel_Animation.json */; };
 		620A565C1D1C81610030EBFB /* LAAnimatableColorValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A565B1D1C81610030EBFB /* LAAnimatableColorValue.m */; };
 		620A565F1D1C81750030EBFB /* LAAnimatablePointValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A565E1D1C81750030EBFB /* LAAnimatablePointValue.m */; };
 		620A56621D1C81850030EBFB /* LAAnimatableNumberValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A56611D1C81850030EBFB /* LAAnimatableNumberValue.m */; };
@@ -81,11 +38,44 @@
 		620CD7CD1D3415F000055AD1 /* LAAnimatableRectValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620CD7CC1D3415F000055AD1 /* LAAnimatableRectValue.m */; };
 		620CD7D01D343A2500055AD1 /* LAAnimatableScaleValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620CD7CF1D343A2500055AD1 /* LAAnimatableScaleValue.m */; };
 		620CD7E51D38180800055AD1 /* LAGroupLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 620CD7E41D38180800055AD1 /* LAGroupLayerView.m */; };
-		629737DF1D25D7FC007B4AC9 /* allHold_KeyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DB1D25D7FC007B4AC9 /* allHold_KeyTest.json */; };
-		629737E01D25D7FC007B4AC9 /* firstHold_KeyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DC1D25D7FC007B4AC9 /* firstHold_KeyTest.json */; };
-		629737E11D25D7FC007B4AC9 /* lastHold_KeyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DD1D25D7FC007B4AC9 /* lastHold_KeyTest.json */; };
-		629737E21D25D7FC007B4AC9 /* midHold_keyTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 629737DE1D25D7FC007B4AC9 /* midHold_keyTest.json */; };
-		62F683991D270E290088C015 /* NewJson_DescriptiveLayers.json in Resources */ = {isa = PBXBuildFile; fileRef = 62F683981D270E290088C015 /* NewJson_DescriptiveLayers.json */; };
+		62FE408D1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FE408C1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.m */; };
+		62FE40B41D3EDC7400CA389D /* 001_ShapeLayerSquare_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40901D3EDC7400CA389D /* 001_ShapeLayerSquare_01.json */; };
+		62FE40B51D3EDC7400CA389D /* 002_ShapeLayerLine_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40911D3EDC7400CA389D /* 002_ShapeLayerLine_01.json */; };
+		62FE40B61D3EDC7400CA389D /* 003_TwoShapeLayerSquares_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40921D3EDC7400CA389D /* 003_TwoShapeLayerSquares_01.json */; };
+		62FE40B71D3EDC7400CA389D /* 004_ShapeLayerLineLineCap_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40931D3EDC7400CA389D /* 004_ShapeLayerLineLineCap_01.json */; };
+		62FE40B81D3EDC7400CA389D /* 005_TwoShapeLayerSquaresDifferent_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40941D3EDC7400CA389D /* 005_TwoShapeLayerSquaresDifferent_01.json */; };
+		62FE40B91D3EDC7400CA389D /* 006_BezierShape_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40951D3EDC7400CA389D /* 006_BezierShape_01.json */; };
+		62FE40BA1D3EDC7400CA389D /* 007_ShapeLayerShapes_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40961D3EDC7400CA389D /* 007_ShapeLayerShapes_01.json */; };
+		62FE40BB1D3EDC7400CA389D /* 008_ShapeLayerMultiplePaths_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40971D3EDC7400CA389D /* 008_ShapeLayerMultiplePaths_01.json */; };
+		62FE40BC1D3EDC7400CA389D /* 009_ShapeLayerRepeater_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40981D3EDC7400CA389D /* 009_ShapeLayerRepeater_01.json */; };
+		62FE40BD1D3EDC7400CA389D /* 010_ShapeLayerRepeaterRotated_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40991D3EDC7400CA389D /* 010_ShapeLayerRepeaterRotated_01.json */; };
+		62FE40BE1D3EDC7400CA389D /* 011_MergePaths_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE409A1D3EDC7400CA389D /* 011_MergePaths_01.json */; };
+		62FE40BF1D3EDC7400CA389D /* 012_ShapeAlphaMatte_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE409B1D3EDC7400CA389D /* 012_ShapeAlphaMatte_01.json */; };
+		62FE40C01D3EDC7400CA389D /* 013_ShapeMasked_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE409C1D3EDC7400CA389D /* 013_ShapeMasked_01.json */; };
+		62FE40C11D3EDC7400CA389D /* 014_ShapeMaskedTwice_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE409D1D3EDC7400CA389D /* 014_ShapeMaskedTwice_01.json */; };
+		62FE40C21D3EDC7400CA389D /* 015_DottedLine_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE409E1D3EDC7400CA389D /* 015_DottedLine_01.json */; };
+		62FE40C31D3EDC7400CA389D /* 015_TrimPaths_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE409F1D3EDC7400CA389D /* 015_TrimPaths_01.json */; };
+		62FE40C41D3EDC7400CA389D /* 016_GroupedShapes_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40A01D3EDC7400CA389D /* 016_GroupedShapes_01.json */; };
+		62FE40C51D3EDC7400CA389D /* 017_ShapeMaskedFeathered_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40A11D3EDC7400CA389D /* 017_ShapeMaskedFeathered_01.json */; };
+		62FE40C61D3EDC7400CA389D /* 050_AnimateTransformPositionSingleKeyframe_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40A21D3EDC7400CA389D /* 050_AnimateTransformPositionSingleKeyframe_01.json */; };
+		62FE40C71D3EDC7400CA389D /* 051_AnimateTransformPositionLinear_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40A31D3EDC7400CA389D /* 051_AnimateTransformPositionLinear_01.json */; };
+		62FE40C81D3EDC7400CA389D /* 052_AnimateTransformPositionlinearCurved_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40A41D3EDC7400CA389D /* 052_AnimateTransformPositionlinearCurved_01.json */; };
+		62FE40C91D3EDC7400CA389D /* 053_AnimateTransformPositionEaseIn_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40A51D3EDC7400CA389D /* 053_AnimateTransformPositionEaseIn_01.json */; };
+		62FE40CA1D3EDC7400CA389D /* 054_AnimateTransformPositionEaseOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40A61D3EDC7400CA389D /* 054_AnimateTransformPositionEaseOut.json */; };
+		62FE40CB1D3EDC7400CA389D /* 055_AnimateTransformPositionEasyEase.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40A71D3EDC7400CA389D /* 055_AnimateTransformPositionEasyEase.json */; };
+		62FE40CC1D3EDC7400CA389D /* 056_AnimateTransformPositionCustomEaseIn.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40A81D3EDC7400CA389D /* 056_AnimateTransformPositionCustomEaseIn.json */; };
+		62FE40CD1D3EDC7400CA389D /* 057_AnimateTransformPositionCustomEaseInout.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40A91D3EDC7400CA389D /* 057_AnimateTransformPositionCustomEaseInout.json */; };
+		62FE40CE1D3EDC7400CA389D /* 058_AnimateTransformPositionHoldKeyframe.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40AA1D3EDC7400CA389D /* 058_AnimateTransformPositionHoldKeyframe.json */; };
+		62FE40CF1D3EDC7400CA389D /* 059_AnimateTransformPositionRoveAcrossTime.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40AB1D3EDC7400CA389D /* 059_AnimateTransformPositionRoveAcrossTime.json */; };
+		62FE40D01D3EDC7400CA389D /* 060_AnimateTransformPositionBakedEase.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40AC1D3EDC7400CA389D /* 060_AnimateTransformPositionBakedEase.json */; };
+		62FE40D11D3EDC7400CA389D /* 062_AnimateTransformParented.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40AD1D3EDC7400CA389D /* 062_AnimateTransformParented.json */; };
+		62FE40D21D3EDC7400CA389D /* 063_AnimateTransformPrecomped.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40AE1D3EDC7400CA389D /* 063_AnimateTransformPrecomped.json */; };
+		62FE40D31D3EDC7400CA389D /* 070_AnimatePathLine.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40AF1D3EDC7400CA389D /* 070_AnimatePathLine.json */; };
+		62FE40D41D3EDC7400CA389D /* 071_AnimatePathShape.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40B01D3EDC7400CA389D /* 071_AnimatePathShape.json */; };
+		62FE40D51D3EDC7400CA389D /* 073_AnimaterectangleSizeEasyEase.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40B11D3EDC7400CA389D /* 073_AnimaterectangleSizeEasyEase.json */; };
+		62FE40D61D3EDC7400CA389D /* 074_AnimateRectanglePosition.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40B21D3EDC7400CA389D /* 074_AnimateRectanglePosition.json */; };
+		62FE40D71D3EDC7400CA389D /* 100_House_AnimateInAndOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40B31D3EDC7400CA389D /* 100_House_AnimateInAndOut.json */; };
+		62FE40D91D3EE26400CA389D /* 200_LYS_Lightswitch.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40D81D3EE26400CA389D /* 200_LYS_Lightswitch.json */; };
 		F5B4E946F7B28B4594824641 /* libPods-LotteAnimator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */; };
 /* End PBXBuildFile section */
 
@@ -127,47 +117,8 @@
 		48372A5C1C209A8900AD0293 /* LAShapeTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeTransform.h; sourceTree = "<group>"; };
 		48372A5D1C209A8900AD0293 /* LAShapeTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeTransform.m; sourceTree = "<group>"; };
 		48372A5F1C209AA200AD0293 /* LAModels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LAModels.h; sourceTree = "<group>"; };
-		48372A601C20A88E00AD0293 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		48372A621C20A91C00AD0293 /* LAJSONExplorerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAJSONExplorerViewController.h; sourceTree = "<group>"; };
 		48372A631C20A91C00AD0293 /* LAJSONExplorerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAJSONExplorerViewController.m; sourceTree = "<group>"; };
-		48372A661C20BFB700AD0293 /* 001_ShapeLayerSquare_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 001_ShapeLayerSquare_data.json; sourceTree = "<group>"; };
-		48372A671C20BFB700AD0293 /* 002_ShapeLayerLine_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 002_ShapeLayerLine_data.json; sourceTree = "<group>"; };
-		48372A681C20BFB700AD0293 /* 003_TwoShapeLayerSquares_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 003_TwoShapeLayerSquares_data.json; sourceTree = "<group>"; };
-		48372A691C20BFB700AD0293 /* 004_ShapeLayerLineLineCapdata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 004_ShapeLayerLineLineCapdata.json; sourceTree = "<group>"; };
-		48372A6A1C20BFB700AD0293 /* 005_TwoShapeLayerSquaresDifferent_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 005_TwoShapeLayerSquaresDifferent_data.json; sourceTree = "<group>"; };
-		48372A6B1C20BFB700AD0293 /* 006_BezierShape_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 006_BezierShape_data.json; sourceTree = "<group>"; };
-		48372A6C1C20BFB700AD0293 /* 007_ShapeLayerShapes_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 007_ShapeLayerShapes_data.json; sourceTree = "<group>"; };
-		48372A6D1C20BFB700AD0293 /* 008_ShapeLayerMultiplePaths.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 008_ShapeLayerMultiplePaths.json; sourceTree = "<group>"; };
-		48372A6E1C20BFB700AD0293 /* 009_ShapeLayerRepeater.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 009_ShapeLayerRepeater.json; sourceTree = "<group>"; };
-		48372A6F1C20BFB700AD0293 /* 010_ShapeLayerRepeaterRotated.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 010_ShapeLayerRepeaterRotated.json; sourceTree = "<group>"; };
-		48372A701C20BFB700AD0293 /* 011_MergePaths_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 011_MergePaths_data.json; sourceTree = "<group>"; };
-		48372A711C20BFB700AD0293 /* 012_ShapeAlphaMatte.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 012_ShapeAlphaMatte.json; sourceTree = "<group>"; };
-		48372A721C20BFB700AD0293 /* 013_ShapeMasked.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 013_ShapeMasked.json; sourceTree = "<group>"; };
-		48372A731C20BFB700AD0293 /* 014_ShapeMaskedTwice.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 014_ShapeMaskedTwice.json; sourceTree = "<group>"; };
-		48372A741C20BFB700AD0293 /* 015_DottedLine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 015_DottedLine.json; sourceTree = "<group>"; };
-		48372A751C20BFB700AD0293 /* 015_TrimPaths.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 015_TrimPaths.json; sourceTree = "<group>"; };
-		48372A761C20BFB700AD0293 /* 016_GroupedShapes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 016_GroupedShapes.json; sourceTree = "<group>"; };
-		48372A771C20BFB700AD0293 /* 017_ShapeMaskedFeathered.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 017_ShapeMaskedFeathered.json; sourceTree = "<group>"; };
-		48372A781C20BFB700AD0293 /* 049_ShapeInOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 049_ShapeInOut.json; sourceTree = "<group>"; };
-		48372A791C20BFB700AD0293 /* 050_AnimateTransformPositionSingleKeyframe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 050_AnimateTransformPositionSingleKeyframe.json; sourceTree = "<group>"; };
-		48372A7A1C20BFB700AD0293 /* 051_AnimateTransformPositionLinear.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 051_AnimateTransformPositionLinear.json; sourceTree = "<group>"; };
-		48372A7B1C20BFB700AD0293 /* 052_AnimateTransformPositionLinearCurved.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 052_AnimateTransformPositionLinearCurved.json; sourceTree = "<group>"; };
-		48372A7C1C20BFB700AD0293 /* 053_AnimateTransformPositionEaseIn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 053_AnimateTransformPositionEaseIn.json; sourceTree = "<group>"; };
-		48372A7D1C20BFB700AD0293 /* 054_AnimateTransformPositionEaseOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 054_AnimateTransformPositionEaseOut.json; sourceTree = "<group>"; };
-		48372A7E1C20BFB700AD0293 /* 055_AnimateTransformPositionEasyEase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 055_AnimateTransformPositionEasyEase.json; sourceTree = "<group>"; };
-		48372A7F1C20BFB700AD0293 /* 056_AnimateTransformPositionCustomEaseIn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 056_AnimateTransformPositionCustomEaseIn.json; sourceTree = "<group>"; };
-		48372A801C20BFB700AD0293 /* 057_AnimateTransformPositionCustomEasyInOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 057_AnimateTransformPositionCustomEasyInOut.json; sourceTree = "<group>"; };
-		48372A811C20BFB700AD0293 /* 058_AnimateTransformPositionHoldKeyframe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 058_AnimateTransformPositionHoldKeyframe.json; sourceTree = "<group>"; };
-		48372A821C20BFB700AD0293 /* 059_AnimateTransformPositionRoveAcrossTime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 059_AnimateTransformPositionRoveAcrossTime.json; sourceTree = "<group>"; };
-		48372A831C20BFB700AD0293 /* 060_AnimateTransformPositionBakedEase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 060_AnimateTransformPositionBakedEase.json; sourceTree = "<group>"; };
-		48372A841C20BFB700AD0293 /* 062_AnimateTransformParented.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 062_AnimateTransformParented.json; sourceTree = "<group>"; };
-		48372A851C20BFB700AD0293 /* 070_AnimatePathLine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 070_AnimatePathLine.json; sourceTree = "<group>"; };
-		48372A861C20BFB700AD0293 /* 071_AnimatePathShape.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 071_AnimatePathShape.json; sourceTree = "<group>"; };
-		48372A871C20BFB700AD0293 /* 073_AnimateRectangleSizeEasyEase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 073_AnimateRectangleSizeEasyEase.json; sourceTree = "<group>"; };
-		48372A881C20BFB700AD0293 /* 074_AnimateRectanglePosition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 074_AnimateRectanglePosition.json; sourceTree = "<group>"; };
-		48372A891C20BFB700AD0293 /* 075_AnimateTrimPaths.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 075_AnimateTrimPaths.json; sourceTree = "<group>"; };
-		48372A8A1C20BFB700AD0293 /* 100_House_AnimateInAndOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 100_House_AnimateInAndOut.json; sourceTree = "<group>"; };
-		48372A8B1C20BFB700AD0293 /* 200_LYS_LightSwitch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 200_LYS_LightSwitch.json; sourceTree = "<group>"; };
 		48372AB21C20C13700AD0293 /* CGGeometryAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGGeometryAdditions.h; sourceTree = "<group>"; };
 		48372AB31C20C13700AD0293 /* CGGeometryAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGGeometryAdditions.m; sourceTree = "<group>"; };
 		48372AB51C20D97200AD0293 /* LAShapeCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeCircle.h; sourceTree = "<group>"; };
@@ -177,10 +128,6 @@
 		486BE04A1D36E06C00CD14A0 /* newMoovin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = newMoovin.json; sourceTree = "<group>"; };
 		486BE04C1D36F1BE00CD14A0 /* LAShapeLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeLayerView.h; sourceTree = "<group>"; };
 		486BE04D1D36F1BE00CD14A0 /* LAShapeLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeLayerView.m; sourceTree = "<group>"; };
-		4872BEDB1D146D850028E0B3 /* animatedTransformHold.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animatedTransformHold.json; sourceTree = "<group>"; };
-		4872BEDD1D146D850028E0B3 /* animatedTransform.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animatedTransform.json; sourceTree = "<group>"; };
-		488990EC1D08A2A400425189 /* curve.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = curve.json; sourceTree = "<group>"; };
-		620A56481D1B3B150030EBFB /* FullLayerModel_Animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FullLayerModel_Animation.json; sourceTree = "<group>"; };
 		620A565A1D1C81610030EBFB /* LAAnimatableColorValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableColorValue.h; sourceTree = "<group>"; };
 		620A565B1D1C81610030EBFB /* LAAnimatableColorValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableColorValue.m; sourceTree = "<group>"; };
 		620A565D1D1C81750030EBFB /* LAAnimatablePointValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LAAnimatablePointValue.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -195,11 +142,46 @@
 		620CD7CF1D343A2500055AD1 /* LAAnimatableScaleValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableScaleValue.m; sourceTree = "<group>"; };
 		620CD7E31D38180800055AD1 /* LAGroupLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAGroupLayerView.h; sourceTree = "<group>"; };
 		620CD7E41D38180800055AD1 /* LAGroupLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAGroupLayerView.m; sourceTree = "<group>"; };
-		629737DB1D25D7FC007B4AC9 /* allHold_KeyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allHold_KeyTest.json; sourceTree = "<group>"; };
-		629737DC1D25D7FC007B4AC9 /* firstHold_KeyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firstHold_KeyTest.json; sourceTree = "<group>"; };
-		629737DD1D25D7FC007B4AC9 /* lastHold_KeyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lastHold_KeyTest.json; sourceTree = "<group>"; };
-		629737DE1D25D7FC007B4AC9 /* midHold_keyTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = midHold_keyTest.json; sourceTree = "<group>"; };
-		62F683981D270E290088C015 /* NewJson_DescriptiveLayers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NewJson_DescriptiveLayers.json; sourceTree = "<group>"; };
+		62FE408A1D3EC4B200CA389D /* LAAnimatableValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableValue.h; sourceTree = "<group>"; };
+		62FE408B1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimationGroup+LAAnimatableGroup.h"; sourceTree = "<group>"; };
+		62FE408C1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimationGroup+LAAnimatableGroup.m"; sourceTree = "<group>"; };
+		62FE40901D3EDC7400CA389D /* 001_ShapeLayerSquare_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 001_ShapeLayerSquare_01.json; sourceTree = "<group>"; };
+		62FE40911D3EDC7400CA389D /* 002_ShapeLayerLine_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 002_ShapeLayerLine_01.json; sourceTree = "<group>"; };
+		62FE40921D3EDC7400CA389D /* 003_TwoShapeLayerSquares_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 003_TwoShapeLayerSquares_01.json; sourceTree = "<group>"; };
+		62FE40931D3EDC7400CA389D /* 004_ShapeLayerLineLineCap_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 004_ShapeLayerLineLineCap_01.json; sourceTree = "<group>"; };
+		62FE40941D3EDC7400CA389D /* 005_TwoShapeLayerSquaresDifferent_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 005_TwoShapeLayerSquaresDifferent_01.json; sourceTree = "<group>"; };
+		62FE40951D3EDC7400CA389D /* 006_BezierShape_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 006_BezierShape_01.json; sourceTree = "<group>"; };
+		62FE40961D3EDC7400CA389D /* 007_ShapeLayerShapes_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 007_ShapeLayerShapes_01.json; sourceTree = "<group>"; };
+		62FE40971D3EDC7400CA389D /* 008_ShapeLayerMultiplePaths_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 008_ShapeLayerMultiplePaths_01.json; sourceTree = "<group>"; };
+		62FE40981D3EDC7400CA389D /* 009_ShapeLayerRepeater_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 009_ShapeLayerRepeater_01.json; sourceTree = "<group>"; };
+		62FE40991D3EDC7400CA389D /* 010_ShapeLayerRepeaterRotated_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 010_ShapeLayerRepeaterRotated_01.json; sourceTree = "<group>"; };
+		62FE409A1D3EDC7400CA389D /* 011_MergePaths_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 011_MergePaths_01.json; sourceTree = "<group>"; };
+		62FE409B1D3EDC7400CA389D /* 012_ShapeAlphaMatte_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 012_ShapeAlphaMatte_01.json; sourceTree = "<group>"; };
+		62FE409C1D3EDC7400CA389D /* 013_ShapeMasked_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 013_ShapeMasked_01.json; sourceTree = "<group>"; };
+		62FE409D1D3EDC7400CA389D /* 014_ShapeMaskedTwice_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 014_ShapeMaskedTwice_01.json; sourceTree = "<group>"; };
+		62FE409E1D3EDC7400CA389D /* 015_DottedLine_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 015_DottedLine_01.json; sourceTree = "<group>"; };
+		62FE409F1D3EDC7400CA389D /* 015_TrimPaths_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 015_TrimPaths_01.json; sourceTree = "<group>"; };
+		62FE40A01D3EDC7400CA389D /* 016_GroupedShapes_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 016_GroupedShapes_01.json; sourceTree = "<group>"; };
+		62FE40A11D3EDC7400CA389D /* 017_ShapeMaskedFeathered_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 017_ShapeMaskedFeathered_01.json; sourceTree = "<group>"; };
+		62FE40A21D3EDC7400CA389D /* 050_AnimateTransformPositionSingleKeyframe_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 050_AnimateTransformPositionSingleKeyframe_01.json; sourceTree = "<group>"; };
+		62FE40A31D3EDC7400CA389D /* 051_AnimateTransformPositionLinear_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 051_AnimateTransformPositionLinear_01.json; sourceTree = "<group>"; };
+		62FE40A41D3EDC7400CA389D /* 052_AnimateTransformPositionlinearCurved_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 052_AnimateTransformPositionlinearCurved_01.json; sourceTree = "<group>"; };
+		62FE40A51D3EDC7400CA389D /* 053_AnimateTransformPositionEaseIn_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 053_AnimateTransformPositionEaseIn_01.json; sourceTree = "<group>"; };
+		62FE40A61D3EDC7400CA389D /* 054_AnimateTransformPositionEaseOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 054_AnimateTransformPositionEaseOut.json; sourceTree = "<group>"; };
+		62FE40A71D3EDC7400CA389D /* 055_AnimateTransformPositionEasyEase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 055_AnimateTransformPositionEasyEase.json; sourceTree = "<group>"; };
+		62FE40A81D3EDC7400CA389D /* 056_AnimateTransformPositionCustomEaseIn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 056_AnimateTransformPositionCustomEaseIn.json; sourceTree = "<group>"; };
+		62FE40A91D3EDC7400CA389D /* 057_AnimateTransformPositionCustomEaseInout.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 057_AnimateTransformPositionCustomEaseInout.json; sourceTree = "<group>"; };
+		62FE40AA1D3EDC7400CA389D /* 058_AnimateTransformPositionHoldKeyframe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 058_AnimateTransformPositionHoldKeyframe.json; sourceTree = "<group>"; };
+		62FE40AB1D3EDC7400CA389D /* 059_AnimateTransformPositionRoveAcrossTime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 059_AnimateTransformPositionRoveAcrossTime.json; sourceTree = "<group>"; };
+		62FE40AC1D3EDC7400CA389D /* 060_AnimateTransformPositionBakedEase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 060_AnimateTransformPositionBakedEase.json; sourceTree = "<group>"; };
+		62FE40AD1D3EDC7400CA389D /* 062_AnimateTransformParented.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 062_AnimateTransformParented.json; sourceTree = "<group>"; };
+		62FE40AE1D3EDC7400CA389D /* 063_AnimateTransformPrecomped.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 063_AnimateTransformPrecomped.json; sourceTree = "<group>"; };
+		62FE40AF1D3EDC7400CA389D /* 070_AnimatePathLine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 070_AnimatePathLine.json; sourceTree = "<group>"; };
+		62FE40B01D3EDC7400CA389D /* 071_AnimatePathShape.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 071_AnimatePathShape.json; sourceTree = "<group>"; };
+		62FE40B11D3EDC7400CA389D /* 073_AnimaterectangleSizeEasyEase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 073_AnimaterectangleSizeEasyEase.json; sourceTree = "<group>"; };
+		62FE40B21D3EDC7400CA389D /* 074_AnimateRectanglePosition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 074_AnimateRectanglePosition.json; sourceTree = "<group>"; };
+		62FE40B31D3EDC7400CA389D /* 100_House_AnimateInAndOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 100_House_AnimateInAndOut.json; sourceTree = "<group>"; };
+		62FE40D81D3EE26400CA389D /* 200_LYS_Lightswitch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 200_LYS_Lightswitch.json; sourceTree = "<group>"; };
 		AEE1A33E4CE2F6024DE7793E /* Pods-LotteAnimator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.debug.xcconfig"; sourceTree = "<group>"; };
 		BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LotteAnimator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -261,11 +243,6 @@
 				4804B2FE1C1F55E600DA8AF7 /* ViewController.m */,
 				48372A621C20A91C00AD0293 /* LAJSONExplorerViewController.h */,
 				48372A631C20A91C00AD0293 /* LAJSONExplorerViewController.m */,
-				629737DB1D25D7FC007B4AC9 /* allHold_KeyTest.json */,
-				629737DC1D25D7FC007B4AC9 /* firstHold_KeyTest.json */,
-				629737DD1D25D7FC007B4AC9 /* lastHold_KeyTest.json */,
-				629737DE1D25D7FC007B4AC9 /* midHold_keyTest.json */,
-				62F683981D270E290088C015 /* NewJson_DescriptiveLayers.json */,
 				48372A651C20B04300AD0293 /* JSONExamples */,
 				4804B3001C1F55E600DA8AF7 /* Main.storyboard */,
 				4804B3031C1F55E600DA8AF7 /* Assets.xcassets */,
@@ -330,50 +307,44 @@
 		48372A651C20B04300AD0293 /* JSONExamples */ = {
 			isa = PBXGroup;
 			children = (
-				4872BEDB1D146D850028E0B3 /* animatedTransformHold.json */,
-				4872BEDD1D146D850028E0B3 /* animatedTransform.json */,
-				48372A661C20BFB700AD0293 /* 001_ShapeLayerSquare_data.json */,
-				48372A671C20BFB700AD0293 /* 002_ShapeLayerLine_data.json */,
-				48372A681C20BFB700AD0293 /* 003_TwoShapeLayerSquares_data.json */,
-				48372A691C20BFB700AD0293 /* 004_ShapeLayerLineLineCapdata.json */,
-				48372A6A1C20BFB700AD0293 /* 005_TwoShapeLayerSquaresDifferent_data.json */,
-				48372A6B1C20BFB700AD0293 /* 006_BezierShape_data.json */,
-				48372A6C1C20BFB700AD0293 /* 007_ShapeLayerShapes_data.json */,
-				48372A6D1C20BFB700AD0293 /* 008_ShapeLayerMultiplePaths.json */,
-				48372A6E1C20BFB700AD0293 /* 009_ShapeLayerRepeater.json */,
-				48372A6F1C20BFB700AD0293 /* 010_ShapeLayerRepeaterRotated.json */,
-				48372A701C20BFB700AD0293 /* 011_MergePaths_data.json */,
-				48372A711C20BFB700AD0293 /* 012_ShapeAlphaMatte.json */,
-				48372A721C20BFB700AD0293 /* 013_ShapeMasked.json */,
-				48372A731C20BFB700AD0293 /* 014_ShapeMaskedTwice.json */,
-				48372A741C20BFB700AD0293 /* 015_DottedLine.json */,
-				48372A751C20BFB700AD0293 /* 015_TrimPaths.json */,
-				48372A761C20BFB700AD0293 /* 016_GroupedShapes.json */,
-				620A56481D1B3B150030EBFB /* FullLayerModel_Animation.json */,
-				48372A771C20BFB700AD0293 /* 017_ShapeMaskedFeathered.json */,
-				48372A781C20BFB700AD0293 /* 049_ShapeInOut.json */,
-				48372A791C20BFB700AD0293 /* 050_AnimateTransformPositionSingleKeyframe.json */,
-				48372A7A1C20BFB700AD0293 /* 051_AnimateTransformPositionLinear.json */,
-				48372A7B1C20BFB700AD0293 /* 052_AnimateTransformPositionLinearCurved.json */,
-				48372A7C1C20BFB700AD0293 /* 053_AnimateTransformPositionEaseIn.json */,
-				48372A7D1C20BFB700AD0293 /* 054_AnimateTransformPositionEaseOut.json */,
-				48372A7E1C20BFB700AD0293 /* 055_AnimateTransformPositionEasyEase.json */,
-				48372A7F1C20BFB700AD0293 /* 056_AnimateTransformPositionCustomEaseIn.json */,
-				48372A801C20BFB700AD0293 /* 057_AnimateTransformPositionCustomEasyInOut.json */,
-				48372A811C20BFB700AD0293 /* 058_AnimateTransformPositionHoldKeyframe.json */,
-				48372A821C20BFB700AD0293 /* 059_AnimateTransformPositionRoveAcrossTime.json */,
-				48372A831C20BFB700AD0293 /* 060_AnimateTransformPositionBakedEase.json */,
-				48372A841C20BFB700AD0293 /* 062_AnimateTransformParented.json */,
-				48372A851C20BFB700AD0293 /* 070_AnimatePathLine.json */,
-				48372A861C20BFB700AD0293 /* 071_AnimatePathShape.json */,
-				48372A871C20BFB700AD0293 /* 073_AnimateRectangleSizeEasyEase.json */,
-				48372A881C20BFB700AD0293 /* 074_AnimateRectanglePosition.json */,
-				48372A891C20BFB700AD0293 /* 075_AnimateTrimPaths.json */,
+				62FE40901D3EDC7400CA389D /* 001_ShapeLayerSquare_01.json */,
+				62FE40911D3EDC7400CA389D /* 002_ShapeLayerLine_01.json */,
+				62FE40921D3EDC7400CA389D /* 003_TwoShapeLayerSquares_01.json */,
+				62FE40931D3EDC7400CA389D /* 004_ShapeLayerLineLineCap_01.json */,
+				62FE40941D3EDC7400CA389D /* 005_TwoShapeLayerSquaresDifferent_01.json */,
+				62FE40951D3EDC7400CA389D /* 006_BezierShape_01.json */,
+				62FE40961D3EDC7400CA389D /* 007_ShapeLayerShapes_01.json */,
+				62FE40971D3EDC7400CA389D /* 008_ShapeLayerMultiplePaths_01.json */,
+				62FE40981D3EDC7400CA389D /* 009_ShapeLayerRepeater_01.json */,
+				62FE40991D3EDC7400CA389D /* 010_ShapeLayerRepeaterRotated_01.json */,
+				62FE409A1D3EDC7400CA389D /* 011_MergePaths_01.json */,
+				62FE409B1D3EDC7400CA389D /* 012_ShapeAlphaMatte_01.json */,
+				62FE409C1D3EDC7400CA389D /* 013_ShapeMasked_01.json */,
+				62FE409D1D3EDC7400CA389D /* 014_ShapeMaskedTwice_01.json */,
+				62FE409E1D3EDC7400CA389D /* 015_DottedLine_01.json */,
+				62FE409F1D3EDC7400CA389D /* 015_TrimPaths_01.json */,
+				62FE40A01D3EDC7400CA389D /* 016_GroupedShapes_01.json */,
+				62FE40A11D3EDC7400CA389D /* 017_ShapeMaskedFeathered_01.json */,
+				62FE40A21D3EDC7400CA389D /* 050_AnimateTransformPositionSingleKeyframe_01.json */,
+				62FE40A31D3EDC7400CA389D /* 051_AnimateTransformPositionLinear_01.json */,
+				62FE40A41D3EDC7400CA389D /* 052_AnimateTransformPositionlinearCurved_01.json */,
+				62FE40A51D3EDC7400CA389D /* 053_AnimateTransformPositionEaseIn_01.json */,
+				62FE40A61D3EDC7400CA389D /* 054_AnimateTransformPositionEaseOut.json */,
+				62FE40A71D3EDC7400CA389D /* 055_AnimateTransformPositionEasyEase.json */,
+				62FE40A81D3EDC7400CA389D /* 056_AnimateTransformPositionCustomEaseIn.json */,
+				62FE40A91D3EDC7400CA389D /* 057_AnimateTransformPositionCustomEaseInout.json */,
+				62FE40AA1D3EDC7400CA389D /* 058_AnimateTransformPositionHoldKeyframe.json */,
+				62FE40AB1D3EDC7400CA389D /* 059_AnimateTransformPositionRoveAcrossTime.json */,
+				62FE40AC1D3EDC7400CA389D /* 060_AnimateTransformPositionBakedEase.json */,
+				62FE40AD1D3EDC7400CA389D /* 062_AnimateTransformParented.json */,
+				62FE40AE1D3EDC7400CA389D /* 063_AnimateTransformPrecomped.json */,
+				62FE40AF1D3EDC7400CA389D /* 070_AnimatePathLine.json */,
+				62FE40B01D3EDC7400CA389D /* 071_AnimatePathShape.json */,
+				62FE40B11D3EDC7400CA389D /* 073_AnimaterectangleSizeEasyEase.json */,
+				62FE40B21D3EDC7400CA389D /* 074_AnimateRectanglePosition.json */,
+				62FE40B31D3EDC7400CA389D /* 100_House_AnimateInAndOut.json */,
+				62FE40D81D3EE26400CA389D /* 200_LYS_Lightswitch.json */,
 				486BE04A1D36E06C00CD14A0 /* newMoovin.json */,
-				48372A8A1C20BFB700AD0293 /* 100_House_AnimateInAndOut.json */,
-				48372A8B1C20BFB700AD0293 /* 200_LYS_LightSwitch.json */,
-				48372A601C20A88E00AD0293 /* data.json */,
-				488990EC1D08A2A400425189 /* curve.json */,
 			);
 			name = JSONExamples;
 			sourceTree = "<group>";
@@ -381,6 +352,7 @@
 		62F683871D26EF420088C015 /* AnimatableProperties */ = {
 			isa = PBXGroup;
 			children = (
+				62FE408A1D3EC4B200CA389D /* LAAnimatableValue.h */,
 				620A565A1D1C81610030EBFB /* LAAnimatableColorValue.h */,
 				620A565B1D1C81610030EBFB /* LAAnimatableColorValue.m */,
 				620A565D1D1C81750030EBFB /* LAAnimatablePointValue.h */,
@@ -393,6 +365,8 @@
 				620CD7CC1D3415F000055AD1 /* LAAnimatableRectValue.m */,
 				620CD7CE1D343A2500055AD1 /* LAAnimatableScaleValue.h */,
 				620CD7CF1D343A2500055AD1 /* LAAnimatableScaleValue.m */,
+				62FE408B1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.h */,
+				62FE408C1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.m */,
 			);
 			name = AnimatableProperties;
 			sourceTree = "<group>";
@@ -466,58 +440,47 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48372AAA1C20BFB700AD0293 /* 062_AnimateTransformParented.json in Resources */,
+				62FE40D01D3EDC7400CA389D /* 060_AnimateTransformPositionBakedEase.json in Resources */,
+				62FE40BB1D3EDC7400CA389D /* 008_ShapeLayerMultiplePaths_01.json in Resources */,
+				62FE40B91D3EDC7400CA389D /* 006_BezierShape_01.json in Resources */,
+				62FE40D61D3EDC7400CA389D /* 074_AnimateRectanglePosition.json in Resources */,
+				62FE40D91D3EE26400CA389D /* 200_LYS_Lightswitch.json in Resources */,
+				62FE40C71D3EDC7400CA389D /* 051_AnimateTransformPositionLinear_01.json in Resources */,
+				62FE40C31D3EDC7400CA389D /* 015_TrimPaths_01.json in Resources */,
+				62FE40BD1D3EDC7400CA389D /* 010_ShapeLayerRepeaterRotated_01.json in Resources */,
 				4804B3071C1F55E600DA8AF7 /* LaunchScreen.storyboard in Resources */,
-				48372AB11C20BFB700AD0293 /* 200_LYS_LightSwitch.json in Resources */,
 				4804B3041C1F55E600DA8AF7 /* Assets.xcassets in Resources */,
-				48372AAE1C20BFB700AD0293 /* 074_AnimateRectanglePosition.json in Resources */,
-				629737E01D25D7FC007B4AC9 /* firstHold_KeyTest.json in Resources */,
-				620A56491D1B3B150030EBFB /* FullLayerModel_Animation.json in Resources */,
-				48372AA31C20BFB700AD0293 /* 054_AnimateTransformPositionEaseOut.json in Resources */,
-				488990ED1D08A2A400425189 /* curve.json in Resources */,
-				48372A9E1C20BFB700AD0293 /* 049_ShapeInOut.json in Resources */,
-				48372A8E1C20BFB700AD0293 /* 003_TwoShapeLayerSquares_data.json in Resources */,
+				62FE40D11D3EDC7400CA389D /* 062_AnimateTransformParented.json in Resources */,
+				62FE40D71D3EDC7400CA389D /* 100_House_AnimateInAndOut.json in Resources */,
+				62FE40D41D3EDC7400CA389D /* 071_AnimatePathShape.json in Resources */,
+				62FE40CE1D3EDC7400CA389D /* 058_AnimateTransformPositionHoldKeyframe.json in Resources */,
+				62FE40CC1D3EDC7400CA389D /* 056_AnimateTransformPositionCustomEaseIn.json in Resources */,
+				62FE40B71D3EDC7400CA389D /* 004_ShapeLayerLineLineCap_01.json in Resources */,
+				62FE40C81D3EDC7400CA389D /* 052_AnimateTransformPositionlinearCurved_01.json in Resources */,
 				4804B3021C1F55E600DA8AF7 /* Main.storyboard in Resources */,
-				48372A981C20BFB700AD0293 /* 013_ShapeMasked.json in Resources */,
-				48372AA41C20BFB700AD0293 /* 055_AnimateTransformPositionEasyEase.json in Resources */,
-				48372AAC1C20BFB700AD0293 /* 071_AnimatePathShape.json in Resources */,
-				48372A971C20BFB700AD0293 /* 012_ShapeAlphaMatte.json in Resources */,
-				48372AA81C20BFB700AD0293 /* 059_AnimateTransformPositionRoveAcrossTime.json in Resources */,
-				48372A921C20BFB700AD0293 /* 007_ShapeLayerShapes_data.json in Resources */,
-				629737E11D25D7FC007B4AC9 /* lastHold_KeyTest.json in Resources */,
-				48372A951C20BFB700AD0293 /* 010_ShapeLayerRepeaterRotated.json in Resources */,
+				62FE40BF1D3EDC7400CA389D /* 012_ShapeAlphaMatte_01.json in Resources */,
+				62FE40C61D3EDC7400CA389D /* 050_AnimateTransformPositionSingleKeyframe_01.json in Resources */,
+				62FE40C91D3EDC7400CA389D /* 053_AnimateTransformPositionEaseIn_01.json in Resources */,
+				62FE40C11D3EDC7400CA389D /* 014_ShapeMaskedTwice_01.json in Resources */,
+				62FE40CB1D3EDC7400CA389D /* 055_AnimateTransformPositionEasyEase.json in Resources */,
+				62FE40BA1D3EDC7400CA389D /* 007_ShapeLayerShapes_01.json in Resources */,
+				62FE40CA1D3EDC7400CA389D /* 054_AnimateTransformPositionEaseOut.json in Resources */,
+				62FE40B51D3EDC7400CA389D /* 002_ShapeLayerLine_01.json in Resources */,
+				62FE40B81D3EDC7400CA389D /* 005_TwoShapeLayerSquaresDifferent_01.json in Resources */,
+				62FE40C01D3EDC7400CA389D /* 013_ShapeMasked_01.json in Resources */,
 				486BE04B1D36E06C00CD14A0 /* newMoovin.json in Resources */,
-				629737DF1D25D7FC007B4AC9 /* allHold_KeyTest.json in Resources */,
-				629737E21D25D7FC007B4AC9 /* midHold_keyTest.json in Resources */,
-				48372A9D1C20BFB700AD0293 /* 017_ShapeMaskedFeathered.json in Resources */,
-				48372A941C20BFB700AD0293 /* 009_ShapeLayerRepeater.json in Resources */,
-				48372AA11C20BFB700AD0293 /* 052_AnimateTransformPositionLinearCurved.json in Resources */,
-				48372A611C20A88E00AD0293 /* data.json in Resources */,
-				48372A931C20BFB700AD0293 /* 008_ShapeLayerMultiplePaths.json in Resources */,
-				48372A991C20BFB700AD0293 /* 014_ShapeMaskedTwice.json in Resources */,
-				48372A961C20BFB700AD0293 /* 011_MergePaths_data.json in Resources */,
-				48372AA21C20BFB700AD0293 /* 053_AnimateTransformPositionEaseIn.json in Resources */,
-				48372AA01C20BFB700AD0293 /* 051_AnimateTransformPositionLinear.json in Resources */,
-				48372A8F1C20BFB700AD0293 /* 004_ShapeLayerLineLineCapdata.json in Resources */,
-				48372AA91C20BFB700AD0293 /* 060_AnimateTransformPositionBakedEase.json in Resources */,
-				48372AB01C20BFB700AD0293 /* 100_House_AnimateInAndOut.json in Resources */,
-				48372A9C1C20BFB700AD0293 /* 016_GroupedShapes.json in Resources */,
-				48372A9F1C20BFB700AD0293 /* 050_AnimateTransformPositionSingleKeyframe.json in Resources */,
-				48372A8D1C20BFB700AD0293 /* 002_ShapeLayerLine_data.json in Resources */,
-				48372A911C20BFB700AD0293 /* 006_BezierShape_data.json in Resources */,
-				48372AA61C20BFB700AD0293 /* 057_AnimateTransformPositionCustomEasyInOut.json in Resources */,
-				48372A9A1C20BFB700AD0293 /* 015_DottedLine.json in Resources */,
-				48372AAD1C20BFB700AD0293 /* 073_AnimateRectangleSizeEasyEase.json in Resources */,
-				48372AAB1C20BFB700AD0293 /* 070_AnimatePathLine.json in Resources */,
-				62F683991D270E290088C015 /* NewJson_DescriptiveLayers.json in Resources */,
-				48372A8C1C20BFB700AD0293 /* 001_ShapeLayerSquare_data.json in Resources */,
-				48372AA71C20BFB700AD0293 /* 058_AnimateTransformPositionHoldKeyframe.json in Resources */,
-				48372AA51C20BFB700AD0293 /* 056_AnimateTransformPositionCustomEaseIn.json in Resources */,
-				4872BEDE1D146D850028E0B3 /* animatedTransformHold.json in Resources */,
-				48372A901C20BFB700AD0293 /* 005_TwoShapeLayerSquaresDifferent_data.json in Resources */,
-				4872BEE01D146D850028E0B3 /* animatedTransform.json in Resources */,
-				48372A9B1C20BFB700AD0293 /* 015_TrimPaths.json in Resources */,
-				48372AAF1C20BFB700AD0293 /* 075_AnimateTrimPaths.json in Resources */,
+				62FE40B41D3EDC7400CA389D /* 001_ShapeLayerSquare_01.json in Resources */,
+				62FE40D51D3EDC7400CA389D /* 073_AnimaterectangleSizeEasyEase.json in Resources */,
+				62FE40D21D3EDC7400CA389D /* 063_AnimateTransformPrecomped.json in Resources */,
+				62FE40C41D3EDC7400CA389D /* 016_GroupedShapes_01.json in Resources */,
+				62FE40B61D3EDC7400CA389D /* 003_TwoShapeLayerSquares_01.json in Resources */,
+				62FE40CF1D3EDC7400CA389D /* 059_AnimateTransformPositionRoveAcrossTime.json in Resources */,
+				62FE40D31D3EDC7400CA389D /* 070_AnimatePathLine.json in Resources */,
+				62FE40C51D3EDC7400CA389D /* 017_ShapeMaskedFeathered_01.json in Resources */,
+				62FE40BE1D3EDC7400CA389D /* 011_MergePaths_01.json in Resources */,
+				62FE40BC1D3EDC7400CA389D /* 009_ShapeLayerRepeater_01.json in Resources */,
+				62FE40C21D3EDC7400CA389D /* 015_DottedLine_01.json in Resources */,
+				62FE40CD1D3EDC7400CA389D /* 057_AnimateTransformPositionCustomEaseInout.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +554,7 @@
 				48372A581C209A6C00AD0293 /* LAShapeStroke.m in Sources */,
 				48372ABA1C20D98200AD0293 /* LAShapeRectangle.m in Sources */,
 				486BE0481D36BE5C00CD14A0 /* LACompView.m in Sources */,
+				62FE408D1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.m in Sources */,
 				48372A5B1C209A7A00AD0293 /* LAShapeFill.m in Sources */,
 				486BE0491D36C9B500CD14A0 /* LALayerView.m in Sources */,
 				486BE04E1D36F1BE00CD14A0 /* LAShapeLayerView.m in Sources */,

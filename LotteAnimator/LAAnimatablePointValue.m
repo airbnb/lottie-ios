@@ -9,11 +9,26 @@
 #import "LAAnimatablePointValue.h"
 #import "BWMath.h"
 
+@interface LAAnimatablePointValue ()
+
+@property (nonatomic, readonly) UIBezierPath *animationPath;
+@property (nonatomic, readonly) NSArray<NSValue *> *pointKeyframes;
+@property (nonatomic, readonly) NSArray<NSNumber *> *keyTimes;
+@property (nonatomic, readonly) NSArray<CAMediaTimingFunction *> *timingFunctions;
+@property (nonatomic, readonly) NSTimeInterval delay;
+@property (nonatomic, readonly) NSTimeInterval duration;
+@property (nonatomic, readonly) NSNumber *startFrame;
+@property (nonatomic, readonly) NSNumber *durationFrames;
+@property (nonatomic, readonly) NSNumber *frameRate;
+
+@end
+
 @implementation LAAnimatablePointValue
 
-- (instancetype)initWithPointValues:(NSDictionary *)pointValues {
+- (instancetype)initWithPointValues:(NSDictionary *)pointValues frameRate:(NSNumber *)frameRate {
   self = [super init];
   if (self) {
+    _frameRate = frameRate;
     NSArray *value = pointValues[@"k"];
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
@@ -39,9 +54,12 @@
   
   NSAssert((_startFrame && endFrame && _startFrame.integerValue < endFrame.integerValue),
            @"Lotte: Keyframe animation has incorrect time values or invalid number of keyframes");
-  
+
   // Calculate time duration
   _durationFrames = @(endFrame.floatValue - _startFrame.floatValue);
+  
+  _duration = _durationFrames.floatValue / _frameRate.floatValue;
+  _delay = _startFrame.floatValue / _frameRate.floatValue;
   
   BOOL addStartValue = YES;
   BOOL addTimePadding = NO;
@@ -96,9 +114,12 @@
       [pointKeyframes addObject:[NSValue valueWithCGPoint:vertex]];
       if (controlPoint1 && controlPoint2) {
         // Quadratic Spatial Interpolation
+        CGPoint cp1 = [self _pointFromValueArray:controlPoint1];
+        CGPoint cp2 = [self _pointFromValueArray:controlPoint2];
+        CGPoint inVertex = [self _pointFromValueArray:startPoint];
         [motionPath addCurveToPoint:vertex
-                      controlPoint1:[self _pointFromValueArray:controlPoint1]
-                      controlPoint2:[self _pointFromValueArray:controlPoint2]];
+                      controlPoint1:CGPointAddedToPoint(inVertex, cp1)
+                      controlPoint2:CGPointAddedToPoint(vertex, cp2)];
         
       } else {
         // Linear Spatial Interpolation
@@ -155,6 +176,7 @@
     NSValue *firstPoint = newValues.firstObject;
     _initialPoint = firstPoint.CGPointValue;
     _pointKeyframes = newValues;
+    _animationPath = nil;
   } else {
     CGPoint newPoint = CGPointMake(RemapValue(_initialPoint.x, frombounds.origin.x, frombounds.size.width, toBounds.origin.x, toBounds.size.width),
                                    RemapValue(_initialPoint.y, frombounds.origin.y, frombounds.size.height, toBounds.origin.y, toBounds.size.height));
@@ -184,6 +206,28 @@
   }
   
   return CGPointMake([xValue floatValue], [yValue floatValue]);
+}
+
+- (BOOL)hasAnimation {
+  return (self.animationPath != nil || self.pointKeyframes.count > 0);
+}
+
+- (nullable CAKeyframeAnimation *)animationForKeyPath:(nonnull NSString *)keypath {
+  if (self.hasAnimation == NO) {
+    return nil;
+  }
+  CAKeyframeAnimation *keyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:keypath];
+  keyframeAnimation.keyTimes = self.keyTimes;
+  if (self.animationPath) {
+    keyframeAnimation.path = self.animationPath.CGPath;
+  } else {
+    keyframeAnimation.values = self.pointKeyframes;
+  }
+  keyframeAnimation.timingFunctions = self.timingFunctions;
+  keyframeAnimation.duration = self.duration;
+  keyframeAnimation.beginTime = self.delay;
+  keyframeAnimation.fillMode = kCAFillModeForwards;
+  return keyframeAnimation;
 }
 
 @end

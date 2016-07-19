@@ -8,10 +8,12 @@
 
 #import "LAGroupLayerView.h"
 #import "LAShapeLayerView.h"
+#import "CAAnimationGroup+LAAnimatableGroup.h"
 
 @implementation LAGroupLayerView {
-  LAShapeGroup *_shapeGroup;
-  LAShapeTransform *_shapeTransform;
+  NSArray<LAGroupLayerView *> *_groupLayers;
+  NSArray<LAShapeLayerView *> *_shapeLayers;
+  CAAnimationGroup *_animation;
 }
 
 - (instancetype)initWithShapeGroup:(LAShapeGroup *)shapeGroup
@@ -39,6 +41,10 @@
   LAShapeFill *currentFill;
   LAShapeStroke *currentStroke;
   LAShapeTransform *currentTransform;
+  
+  NSMutableArray *shapeLayers = [NSMutableArray array];
+  NSMutableArray *groupLayers = [NSMutableArray array];
+  
   for (id item in reversedItems) {
     if ([item isKindOfClass:[LAShapeTransform class]]) {
       currentTransform = item;
@@ -52,13 +58,40 @@
                                                                         fill:currentFill
                                                                       stroke:currentStroke
                                                                    transform:currentTransform];
+      [shapeLayers addObject:shapeLayer];
       [self addSublayer:shapeLayer];
     } else if ([item isKindOfClass:[LAShapeGroup class]]) {
       LAShapeGroup *shapeGroup = (LAShapeGroup *)item;
       LAGroupLayerView *groupLayer = [[LAGroupLayerView alloc] initWithShapeGroup:shapeGroup
                                                                         transform:currentTransform];
+      [groupLayers addObject:groupLayer];
       [self addSublayer:groupLayer];
     }
+  }
+  _groupLayers = groupLayers;
+  _shapeLayers = shapeLayers;
+  [self _buildAnimation];
+}
+
+- (void)_buildAnimation {
+  if (_shapeTransform) {
+    _animation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"opacity" : _shapeTransform.opacity,
+                                                                                       @"transform.rotation" : _shapeTransform.rotation,
+                                                                                       @"position" : _shapeTransform.position,
+                                                                                       @"anchorPoint" : _shapeTransform.anchor}];
+  }
+}
+
+- (void)startAnimation {
+  if (_animation) {
+    [self addAnimation:_animation forKey:@"lotteAnimation"];
+  }
+  for (LAGroupLayerView *groupLayer in _groupLayers) {
+    [groupLayer startAnimation];
+  }
+  
+  for (LAShapeLayerView *shapeLayer in _shapeLayers) {
+    [shapeLayer startAnimation];
   }
 }
 

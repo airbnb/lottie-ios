@@ -15,6 +15,10 @@
 - (instancetype)initWithShapeGroup:(LAShapeGroup *)shapeGroup
                          transform:(LAShapeTransform *)transform;
 
+@property (nonatomic, readonly) LAShapeGroup *shapeGroup;
+@property (nonatomic, readonly) LAShapeTransform *shapeTransform;
 @property (nonatomic, assign) BOOL debugModeOn;
+
+- (void)startAnimation;
 
 @end

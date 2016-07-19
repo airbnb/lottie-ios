@@ -7,6 +7,7 @@
 //
 
 #import "LAShapeLayerView.h"
+#import "CAAnimationGroup+LAAnimatableGroup.h"
 
 @implementation LAShapeLayerView {
   LAShapeTransform *_transform;
@@ -16,6 +17,10 @@
   
   CAShapeLayer *_fillLayer;
   CAShapeLayer *_strokeLayer;
+  
+  CAAnimationGroup *_animation;
+  CAAnimationGroup *_strokeAnimation;
+  CAAnimationGroup *_fillAnimation;
 }
 
 - (instancetype)initWithShape:(LAShapePath *)shape
@@ -47,10 +52,45 @@
     _strokeLayer.lineWidth = _stroke.width.initialValue.floatValue;
     _strokeLayer.fillColor = nil;
     [self addSublayer:_strokeLayer];
-    
+    [self _buildAnimation];
     
   }
   return self;
+}
+
+- (void)_buildAnimation {
+  if (_transform) {
+    _animation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"opacity" : _transform.opacity,
+                                                                                       @"transform.rotation" : _transform.rotation,
+                                                                                       @"position" : _transform.position,
+                                                                                       @"anchorPoint" : _transform.anchor}];
+  }
+  
+  if (_stroke) {
+    _strokeAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"strokeColor" : _stroke.color,
+                                                                                             @"opacity" : _stroke.opacity,
+                                                                                             @"lineWidth" : _stroke.width,
+                                                                                             @"path" : _path.shapePath}];
+  }
+  
+  if (_fill) {
+    _fillAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"fillColor" : _fill.color,
+                                                                                           @"opacity" : _fill.opacity,
+                                                                                           @"path" : _path.shapePath}];
+  }
+}
+
+- (void)startAnimation {
+  if (_animation) {
+    [self addAnimation:_animation forKey:@"LotteAnimation"];
+  }
+  if (_strokeAnimation) {
+    [_strokeLayer addAnimation:_strokeAnimation forKey:@""];
+  }
+  
+  if (_fillAnimation) {
+    [_fillLayer addAnimation:_fillAnimation forKey:@""];
+  }
 }
 
 @end

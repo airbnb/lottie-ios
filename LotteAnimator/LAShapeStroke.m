@@ -23,17 +23,17 @@
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
   NSDictionary *color = jsonDictionary[@"c"];
   if (color) {
-    _color = [[LAAnimatableColorValue alloc] initWithColorValues:color];
+    _color = [[LAAnimatableColorValue alloc] initWithColorValues:color frameRate:frameRate];
   }
   
   NSDictionary *width = jsonDictionary[@"w"];
   if (width) {
-    _width = [[LAAnimatableNumberValue alloc] initWithNumberValues:width];
+    _width = [[LAAnimatableNumberValue alloc] initWithNumberValues:width frameRate:frameRate];
   }
   
   NSDictionary *opacity = jsonDictionary[@"o"];
   if (opacity) {
-    _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity];
+    _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:frameRate];
     [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
   }
   

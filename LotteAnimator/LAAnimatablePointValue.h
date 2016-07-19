@@ -7,19 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LAAnimatableValue.h"
 
-@interface LAAnimatablePointValue : NSObject
+@interface LAAnimatablePointValue : NSObject <LAAnimatableValue>
 
-- (instancetype)initWithPointValues:(NSDictionary *)pointValues;
+- (instancetype)initWithPointValues:(NSDictionary *)pointValues frameRate:(NSNumber *)frameRate;
+- (void)remapPointsFromBounds:(CGRect)frombounds toBounds:(CGRect)toBounds;
 
 @property (nonatomic, readonly) CGPoint initialPoint;
-@property (nonatomic, readonly) UIBezierPath *animationPath;
-@property (nonatomic, readonly) NSArray<NSValue *> *pointKeyframes;
-@property (nonatomic, readonly) NSArray<NSNumber *> *keyTimes;
-@property (nonatomic, readonly) NSArray<CAMediaTimingFunction *> *timingFunctions;
-@property (nonatomic, readonly) NSNumber *startFrame;
-@property (nonatomic, readonly) NSNumber *durationFrames;
-
-- (void)remapPointsFromBounds:(CGRect)frombounds toBounds:(CGRect)toBounds;
 
 @end

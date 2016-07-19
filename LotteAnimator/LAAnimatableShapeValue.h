@@ -7,17 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LAAnimatableValue.h"
 
-@interface LAAnimatableShapeValue : NSObject
+@interface LAAnimatableShapeValue : NSObject <LAAnimatableValue>
 
-- (instancetype)initWithShapeValues:(NSDictionary *)shapeValues closed:(BOOL)closed;
+- (instancetype)initWithShapeValues:(NSDictionary *)shapeValues frameRate:(NSNumber *)frameRate closed:(BOOL)closed;
 
 @property (nonatomic, readonly) UIBezierPath *initialShape;
-
-@property (nonatomic, readonly) NSArray<UIBezierPath *> *shapeKeyframes;
-@property (nonatomic, readonly) NSArray<NSNumber *> *keyTimes;
-@property (nonatomic, readonly) NSArray<CAMediaTimingFunction *> *timingFunctions;
-@property (nonatomic, readonly) NSNumber *startFrame;
-@property (nonatomic, readonly) NSNumber *durationFrames;
 
 @end

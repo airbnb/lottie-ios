@@ -47,7 +47,7 @@ typedef enum : NSInteger {
 @property (nonatomic, readonly) LAAnimatableNumberValue *opacity;
 @property (nonatomic, readonly) LAAnimatableNumberValue *rotation;
 @property (nonatomic, readonly) LAAnimatablePointValue *position;
-// TODO Fix Anchor
+
 @property (nonatomic, readonly) LAAnimatablePointValue *anchor;
 @property (nonatomic, readonly) LAAnimatableScaleValue *scale;
 

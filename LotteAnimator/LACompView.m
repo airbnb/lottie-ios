@@ -50,7 +50,9 @@
 }
 
 - (void)play {
-  
+  for (LALayerView *layerView in _layerMap.allValues) {
+    [layerView startAnimation];
+  }
 }
 
 @end

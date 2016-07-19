@@ -7,17 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LAAnimatableValue.h"
 
-@interface LAAnimatableColorValue : NSObject
+@interface LAAnimatableColorValue : NSObject <LAAnimatableValue>
 
-- (instancetype)initWithColorValues:(NSDictionary *)colorValues;
+- (instancetype)initWithColorValues:(NSDictionary *)colorValues frameRate:(NSNumber *)frameRate;
 
 @property (nonatomic, readonly) UIColor *initialColor;
-
-@property (nonatomic, readonly) NSArray<UIColor *> *colorKeyframes;
-@property (nonatomic, readonly) NSArray<NSNumber *> *keyTimes;
-@property (nonatomic, readonly) NSArray<CAMediaTimingFunction *> *timingFunctions;
-@property (nonatomic, readonly) NSNumber *startFrame;
-@property (nonatomic, readonly) NSNumber *durationFrames;
 
 @end
