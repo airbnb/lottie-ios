@@ -76,6 +76,13 @@
 		62FE40D61D3EDC7400CA389D /* 074_AnimateRectanglePosition.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40B21D3EDC7400CA389D /* 074_AnimateRectanglePosition.json */; };
 		62FE40D71D3EDC7400CA389D /* 100_House_AnimateInAndOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40B31D3EDC7400CA389D /* 100_House_AnimateInAndOut.json */; };
 		62FE40D91D3EE26400CA389D /* 200_LYS_Lightswitch.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40D81D3EE26400CA389D /* 200_LYS_Lightswitch.json */; };
+		62FE40DD1D3FF0D900CA389D /* Heart58OnOff.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40DA1D3FF0D900CA389D /* Heart58OnOff.json */; };
+		62FE40DE1D3FF0D900CA389D /* Heart58TurnOff.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40DB1D3FF0D900CA389D /* Heart58TurnOff.json */; };
+		62FE40DF1D3FF0D900CA389D /* Heart58TurnOn.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40DC1D3FF0D900CA389D /* Heart58TurnOn.json */; };
+		62FE40E51D3FF78800CA389D /* LAAnimatableBoundsValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FE40E41D3FF78800CA389D /* LAAnimatableBoundsValue.m */; };
+		62FE40E81D3FFBB400CA389D /* LARectShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FE40E71D3FFBB400CA389D /* LARectShapeLayer.m */; };
+		62FE40EA1D401C0700CA389D /* scaleTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40E91D401C0700CA389D /* scaleTest.json */; };
+		62FE40EC1D402C0200CA389D /* parentTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40EB1D402C0200CA389D /* parentTest.json */; };
 		F5B4E946F7B28B4594824641 /* libPods-LotteAnimator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */; };
 /* End PBXBuildFile section */
 
@@ -182,6 +189,15 @@
 		62FE40B21D3EDC7400CA389D /* 074_AnimateRectanglePosition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 074_AnimateRectanglePosition.json; sourceTree = "<group>"; };
 		62FE40B31D3EDC7400CA389D /* 100_House_AnimateInAndOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 100_House_AnimateInAndOut.json; sourceTree = "<group>"; };
 		62FE40D81D3EE26400CA389D /* 200_LYS_Lightswitch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 200_LYS_Lightswitch.json; sourceTree = "<group>"; };
+		62FE40DA1D3FF0D900CA389D /* Heart58OnOff.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Heart58OnOff.json; sourceTree = "<group>"; };
+		62FE40DB1D3FF0D900CA389D /* Heart58TurnOff.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Heart58TurnOff.json; sourceTree = "<group>"; };
+		62FE40DC1D3FF0D900CA389D /* Heart58TurnOn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Heart58TurnOn.json; sourceTree = "<group>"; };
+		62FE40E31D3FF78800CA389D /* LAAnimatableBoundsValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableBoundsValue.h; sourceTree = "<group>"; };
+		62FE40E41D3FF78800CA389D /* LAAnimatableBoundsValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableBoundsValue.m; sourceTree = "<group>"; };
+		62FE40E61D3FFBB400CA389D /* LARectShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LARectShapeLayer.h; sourceTree = "<group>"; };
+		62FE40E71D3FFBB400CA389D /* LARectShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LARectShapeLayer.m; sourceTree = "<group>"; };
+		62FE40E91D401C0700CA389D /* scaleTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = scaleTest.json; sourceTree = "<group>"; };
+		62FE40EB1D402C0200CA389D /* parentTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = parentTest.json; sourceTree = "<group>"; };
 		AEE1A33E4CE2F6024DE7793E /* Pods-LotteAnimator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.debug.xcconfig"; sourceTree = "<group>"; };
 		BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LotteAnimator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -239,6 +255,8 @@
 				620CD7E41D38180800055AD1 /* LAGroupLayerView.m */,
 				486BE04C1D36F1BE00CD14A0 /* LAShapeLayerView.h */,
 				486BE04D1D36F1BE00CD14A0 /* LAShapeLayerView.m */,
+				62FE40E61D3FFBB400CA389D /* LARectShapeLayer.h */,
+				62FE40E71D3FFBB400CA389D /* LARectShapeLayer.m */,
 				4804B2FD1C1F55E600DA8AF7 /* ViewController.h */,
 				4804B2FE1C1F55E600DA8AF7 /* ViewController.m */,
 				48372A621C20A91C00AD0293 /* LAJSONExplorerViewController.h */,
@@ -307,6 +325,11 @@
 		48372A651C20B04300AD0293 /* JSONExamples */ = {
 			isa = PBXGroup;
 			children = (
+				62FE40EB1D402C0200CA389D /* parentTest.json */,
+				62FE40E91D401C0700CA389D /* scaleTest.json */,
+				62FE40DA1D3FF0D900CA389D /* Heart58OnOff.json */,
+				62FE40DB1D3FF0D900CA389D /* Heart58TurnOff.json */,
+				62FE40DC1D3FF0D900CA389D /* Heart58TurnOn.json */,
 				62FE40901D3EDC7400CA389D /* 001_ShapeLayerSquare_01.json */,
 				62FE40911D3EDC7400CA389D /* 002_ShapeLayerLine_01.json */,
 				62FE40921D3EDC7400CA389D /* 003_TwoShapeLayerSquares_01.json */,
@@ -361,10 +384,12 @@
 				620A56611D1C81850030EBFB /* LAAnimatableNumberValue.m */,
 				620A56631D1C81930030EBFB /* LAAnimatableShapeValue.h */,
 				620A56641D1C81930030EBFB /* LAAnimatableShapeValue.m */,
-				620CD7CB1D3415F000055AD1 /* LAAnimatableRectValue.h */,
-				620CD7CC1D3415F000055AD1 /* LAAnimatableRectValue.m */,
+				62FE40E31D3FF78800CA389D /* LAAnimatableBoundsValue.h */,
+				62FE40E41D3FF78800CA389D /* LAAnimatableBoundsValue.m */,
 				620CD7CE1D343A2500055AD1 /* LAAnimatableScaleValue.h */,
 				620CD7CF1D343A2500055AD1 /* LAAnimatableScaleValue.m */,
+				620CD7CB1D3415F000055AD1 /* LAAnimatableRectValue.h */,
+				620CD7CC1D3415F000055AD1 /* LAAnimatableRectValue.m */,
 				62FE408B1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.h */,
 				62FE408C1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.m */,
 			);
@@ -449,6 +474,7 @@
 				62FE40C31D3EDC7400CA389D /* 015_TrimPaths_01.json in Resources */,
 				62FE40BD1D3EDC7400CA389D /* 010_ShapeLayerRepeaterRotated_01.json in Resources */,
 				4804B3071C1F55E600DA8AF7 /* LaunchScreen.storyboard in Resources */,
+				62FE40DF1D3FF0D900CA389D /* Heart58TurnOn.json in Resources */,
 				4804B3041C1F55E600DA8AF7 /* Assets.xcassets in Resources */,
 				62FE40D11D3EDC7400CA389D /* 062_AnimateTransformParented.json in Resources */,
 				62FE40D71D3EDC7400CA389D /* 100_House_AnimateInAndOut.json in Resources */,
@@ -460,12 +486,14 @@
 				4804B3021C1F55E600DA8AF7 /* Main.storyboard in Resources */,
 				62FE40BF1D3EDC7400CA389D /* 012_ShapeAlphaMatte_01.json in Resources */,
 				62FE40C61D3EDC7400CA389D /* 050_AnimateTransformPositionSingleKeyframe_01.json in Resources */,
+				62FE40EC1D402C0200CA389D /* parentTest.json in Resources */,
 				62FE40C91D3EDC7400CA389D /* 053_AnimateTransformPositionEaseIn_01.json in Resources */,
 				62FE40C11D3EDC7400CA389D /* 014_ShapeMaskedTwice_01.json in Resources */,
 				62FE40CB1D3EDC7400CA389D /* 055_AnimateTransformPositionEasyEase.json in Resources */,
 				62FE40BA1D3EDC7400CA389D /* 007_ShapeLayerShapes_01.json in Resources */,
 				62FE40CA1D3EDC7400CA389D /* 054_AnimateTransformPositionEaseOut.json in Resources */,
 				62FE40B51D3EDC7400CA389D /* 002_ShapeLayerLine_01.json in Resources */,
+				62FE40DD1D3FF0D900CA389D /* Heart58OnOff.json in Resources */,
 				62FE40B81D3EDC7400CA389D /* 005_TwoShapeLayerSquaresDifferent_01.json in Resources */,
 				62FE40C01D3EDC7400CA389D /* 013_ShapeMasked_01.json in Resources */,
 				486BE04B1D36E06C00CD14A0 /* newMoovin.json in Resources */,
@@ -474,9 +502,11 @@
 				62FE40D21D3EDC7400CA389D /* 063_AnimateTransformPrecomped.json in Resources */,
 				62FE40C41D3EDC7400CA389D /* 016_GroupedShapes_01.json in Resources */,
 				62FE40B61D3EDC7400CA389D /* 003_TwoShapeLayerSquares_01.json in Resources */,
+				62FE40DE1D3FF0D900CA389D /* Heart58TurnOff.json in Resources */,
 				62FE40CF1D3EDC7400CA389D /* 059_AnimateTransformPositionRoveAcrossTime.json in Resources */,
 				62FE40D31D3EDC7400CA389D /* 070_AnimatePathLine.json in Resources */,
 				62FE40C51D3EDC7400CA389D /* 017_ShapeMaskedFeathered_01.json in Resources */,
+				62FE40EA1D401C0700CA389D /* scaleTest.json in Resources */,
 				62FE40BE1D3EDC7400CA389D /* 011_MergePaths_01.json in Resources */,
 				62FE40BC1D3EDC7400CA389D /* 009_ShapeLayerRepeater_01.json in Resources */,
 				62FE40C21D3EDC7400CA389D /* 015_DottedLine_01.json in Resources */,
@@ -546,6 +576,7 @@
 				4804B3191C1F6DEA00DA8AF7 /* LAComposition.m in Sources */,
 				4804B2FC1C1F55E600DA8AF7 /* AppDelegate.m in Sources */,
 				4804B3211C1F761800DA8AF7 /* BWMath.m in Sources */,
+				62FE40E51D3FF78800CA389D /* LAAnimatableBoundsValue.m in Sources */,
 				48372AB41C20C13700AD0293 /* CGGeometryAdditions.m in Sources */,
 				620A565F1D1C81750030EBFB /* LAAnimatablePointValue.m in Sources */,
 				48372A4A1C1F8D7D00AD0293 /* LAMask.m in Sources */,
@@ -554,6 +585,7 @@
 				48372A581C209A6C00AD0293 /* LAShapeStroke.m in Sources */,
 				48372ABA1C20D98200AD0293 /* LAShapeRectangle.m in Sources */,
 				486BE0481D36BE5C00CD14A0 /* LACompView.m in Sources */,
+				62FE40E81D3FFBB400CA389D /* LARectShapeLayer.m in Sources */,
 				62FE408D1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.m in Sources */,
 				48372A5B1C209A7A00AD0293 /* LAShapeFill.m in Sources */,
 				486BE0491D36C9B500CD14A0 /* LALayerView.m in Sources */,

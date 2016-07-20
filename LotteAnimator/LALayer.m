@@ -54,6 +54,9 @@
   NSDictionary *rotation = ks[@"r"];
   if (rotation) {
     _rotation = [[LAAnimatableNumberValue alloc] initWithNumberValues:rotation frameRate:frameRate];
+    [_rotation remapValueWithBlock:^CGFloat(CGFloat inValue) {
+      return DegreesToRadians(inValue);
+    }];
   }
   
   NSDictionary *position = ks[@"p"];
@@ -65,6 +68,7 @@
   if (anchor) {
     _anchor = [[LAAnimatablePointValue alloc] initWithPointValues:anchor frameRate:frameRate];
     [_anchor remapPointsFromBounds:compBounds toBounds:CGRectMake(0, 0, 1, 1)];
+    _anchor.usePathAnimation = NO;
   }
   
   NSDictionary *scale = ks[@"s"];

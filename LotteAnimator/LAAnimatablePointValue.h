@@ -15,5 +15,6 @@
 - (void)remapPointsFromBounds:(CGRect)frombounds toBounds:(CGRect)toBounds;
 
 @property (nonatomic, readonly) CGPoint initialPoint;
+@property (nonatomic, assign) BOOL usePathAnimation;
 
 @end

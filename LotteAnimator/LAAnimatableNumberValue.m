@@ -170,9 +170,15 @@
                    fromMax:(NSNumber *)fromMax
                      toMin:(NSNumber *)toMin
                      toMax:(NSNumber *)toMax {
+  [self remapValueWithBlock:^CGFloat(CGFloat inValue) {
+    return RemapValue(inValue, fromMin.floatValue, fromMax.floatValue, toMin.floatValue, toMax.floatValue);
+  }];
+}
+
+- (void)remapValueWithBlock:(CGFloat (^)(CGFloat inValue))remapBlock {
   NSMutableArray *newvalues = [NSMutableArray array];
   for (NSNumber *value in _valueKeyframes) {
-    NSNumber *newValue = @(RemapValue(value.floatValue, fromMin.floatValue, fromMax.floatValue, toMin.floatValue, toMax.floatValue));
+    NSNumber *newValue = @(remapBlock(value.floatValue));
     [newvalues addObject:newValue];
   }
   _valueKeyframes = newvalues;
@@ -180,7 +186,7 @@
   if (newvalues.count) {
     _initialValue = newvalues.firstObject;
   } else if (_initialValue) {
-    _initialValue = @(RemapValue(_initialValue.floatValue, fromMin.floatValue, fromMax.floatValue, toMin.floatValue, toMax.floatValue));
+    _initialValue = @(remapBlock(_initialValue.floatValue));
   }
 }
 

@@ -33,6 +33,7 @@
   if (anchor) {
     _anchor = [[LAAnimatablePointValue alloc] initWithPointValues:anchor frameRate:frameRate];
     [_anchor remapPointsFromBounds:compBounds toBounds:CGRectMake(0, 0, 1, 1)];
+    _anchor.usePathAnimation = NO;
   }
   
   NSDictionary *scale = jsonDictionary[@"s"];
@@ -43,6 +44,9 @@
   NSDictionary *rotation = jsonDictionary[@"r"];
   if (rotation) {
     _rotation = [[LAAnimatableNumberValue alloc] initWithNumberValues:rotation frameRate:frameRate];
+    [_rotation remapValueWithBlock:^CGFloat(CGFloat inValue) {
+      return DegreesToRadians(inValue);
+    }];
   }
   
   NSDictionary *opacity = jsonDictionary[@"o"];

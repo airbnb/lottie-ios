@@ -19,7 +19,21 @@
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+  NSDictionary *position = jsonDictionary[@"p"];
+  if (position) {
+    _position = [[LAAnimatablePointValue alloc] initWithPointValues:position frameRate:frameRate];
+    _position.usePathAnimation = NO;
+  }
   
+  NSDictionary *cornerRadius = jsonDictionary[@"r"];
+  if (cornerRadius) {
+    _cornerRadius = [[LAAnimatableNumberValue alloc] initWithNumberValues:cornerRadius frameRate:frameRate];
+  }
+  
+  NSDictionary *bounds = jsonDictionary[@"s"];
+  if (bounds) {
+    _bounds = [[LAAnimatableBoundsValue alloc] initWithSizeValues:bounds frameRate:frameRate];
+  }
 }
 
 @end

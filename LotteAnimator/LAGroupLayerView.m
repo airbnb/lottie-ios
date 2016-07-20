@@ -8,6 +8,7 @@
 
 #import "LAGroupLayerView.h"
 #import "LAShapeLayerView.h"
+#import "LARectShapeLayer.h"
 #import "CAAnimationGroup+LAAnimatableGroup.h"
 
 @implementation LAGroupLayerView {
@@ -33,6 +34,8 @@
     self.anchorPoint = _shapeTransform.anchor.initialPoint;
     self.position = _shapeTransform.position.initialPoint;
     self.opacity = _shapeTransform.opacity.initialValue.floatValue;
+    self.transform = _shapeTransform.scale.initialScale;
+    self.sublayerTransform = CATransform3DMakeRotation(_shapeTransform.rotation.initialValue.floatValue, 0, 0, 1);
   }
   
   NSArray *groupItems = _shapeGroup.items;
@@ -60,6 +63,14 @@
                                                                    transform:currentTransform];
       [shapeLayers addObject:shapeLayer];
       [self addSublayer:shapeLayer];
+    } else if ([item isKindOfClass:[LAShapeRectangle class]]) {
+      LAShapeRectangle *shapeRect = (LAShapeRectangle *)item;
+      LARectShapeLayer *shapeLayer = [[LARectShapeLayer alloc] initWithRectShape:shapeRect
+                                                                            fill:currentFill
+                                                                          stroke:currentStroke
+                                                                       transform:currentTransform];
+      [shapeLayers addObject:shapeLayer];
+      [self addSublayer:shapeLayer];
     } else if ([item isKindOfClass:[LAShapeGroup class]]) {
       LAShapeGroup *shapeGroup = (LAShapeGroup *)item;
       LAGroupLayerView *groupLayer = [[LAGroupLayerView alloc] initWithShapeGroup:shapeGroup
@@ -76,9 +87,10 @@
 - (void)_buildAnimation {
   if (_shapeTransform) {
     _animation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"opacity" : _shapeTransform.opacity,
-                                                                                       @"transform.rotation" : _shapeTransform.rotation,
                                                                                        @"position" : _shapeTransform.position,
-                                                                                       @"anchorPoint" : _shapeTransform.anchor}];
+                                                                                       @"anchorPoint" : _shapeTransform.anchor,
+                                                                                       @"transform" : _shapeTransform.scale,
+                                                                                       @"sublayerTransform.rotation" : _shapeTransform.rotation}];
   }
 }
 

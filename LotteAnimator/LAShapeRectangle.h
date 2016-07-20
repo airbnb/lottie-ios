@@ -7,9 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LAAnimatableBoundsValue.h"
+#import "LAAnimatablePointValue.h"
+#import "LAAnimatableNumberValue.h"
 
 @interface LAShapeRectangle : NSObject
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+
+@property (nonatomic, readonly) LAAnimatablePointValue *position;
+@property (nonatomic, readonly) LAAnimatableBoundsValue *bounds;
+@property (nonatomic, readonly) LAAnimatableNumberValue *cornerRadius;
 
 @end

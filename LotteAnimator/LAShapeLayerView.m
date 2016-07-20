@@ -34,18 +34,23 @@
     _fill = fill;
     _transform = transform;
     
+    self.allowsEdgeAntialiasing = YES;
     self.frame = _transform.compBounds;
     self.anchorPoint = _transform.anchor.initialPoint;
     self.opacity = _transform.opacity.initialValue.floatValue;
     self.position = _transform.position.initialPoint;
+    self.transform = _transform.scale.initialScale;
+    self.sublayerTransform = CATransform3DMakeRotation(_transform.rotation.initialValue.floatValue, 0, 0, 1);
     
     _fillLayer = [CAShapeLayer layer];
+    _fillLayer.allowsEdgeAntialiasing = YES;
     _fillLayer.path = _path.shapePath.initialShape.CGPath;
     _fillLayer.fillColor = _fill.color.initialColor.CGColor;
     _fillLayer.opacity = _fill.opacity.initialValue.floatValue;
     [self addSublayer:_fillLayer];
     
     _strokeLayer = [CAShapeLayer layer];
+    _strokeLayer.allowsEdgeAntialiasing = YES;
     _strokeLayer.path = _path.shapePath.initialShape.CGPath;
     _strokeLayer.strokeColor = _stroke.color.initialColor.CGColor;
     _strokeLayer.opacity = _stroke.opacity.initialValue.floatValue;
@@ -61,9 +66,10 @@
 - (void)_buildAnimation {
   if (_transform) {
     _animation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"opacity" : _transform.opacity,
-                                                                                       @"transform.rotation" : _transform.rotation,
                                                                                        @"position" : _transform.position,
-                                                                                       @"anchorPoint" : _transform.anchor}];
+                                                                                       @"anchorPoint" : _transform.anchor,
+                                                                                       @"transform" : _transform.scale,
+                                                                                       @"sublayerTransform.rotation" : _transform.rotation}];
   }
   
   if (_stroke) {

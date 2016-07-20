@@ -14,6 +14,7 @@
   self = [super init];
   if (self) {
     _frameRate = frameRate;
+
   }
   return self;
 }

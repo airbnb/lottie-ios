@@ -17,6 +17,8 @@
                      toMin:(NSNumber *)toMin
                      toMax:(NSNumber *)toMax;
 
+- (void)remapValueWithBlock:(CGFloat (^)(CGFloat inValue))remapBlock;
+
 @property (nonatomic, readonly) NSNumber *initialValue;
 
 @end

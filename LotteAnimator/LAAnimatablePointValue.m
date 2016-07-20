@@ -28,6 +28,7 @@
 - (instancetype)initWithPointValues:(NSDictionary *)pointValues frameRate:(NSNumber *)frameRate {
   self = [super init];
   if (self) {
+    _usePathAnimation = YES;
     _frameRate = frameRate;
     NSArray *value = pointValues[@"k"];
     if ([value isKindOfClass:[NSArray class]] &&
@@ -218,7 +219,7 @@
   }
   CAKeyframeAnimation *keyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:keypath];
   keyframeAnimation.keyTimes = self.keyTimes;
-  if (self.animationPath) {
+  if (self.animationPath && self.usePathAnimation) {
     keyframeAnimation.path = self.animationPath.CGPath;
   } else {
     keyframeAnimation.values = self.pointKeyframes;

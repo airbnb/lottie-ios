@@ -1,42 +1,41 @@
 //
-//  LAAnimatableColorValue.m
+//  LAAnimatableBoundsValue.m
 //  LotteAnimator
 //
-//  Created by brandon_withrow on 6/23/16.
+//  Created by brandon_withrow on 7/20/16.
 //  Copyright © 2016 Brandon Withrow. All rights reserved.
 //
 
-#import "LAAnimatableColorValue.h"
+#import "LAAnimatableBoundsValue.h"
 
-@interface LAAnimatableColorValue ()
+@interface LAAnimatableBoundsValue ()
 
-@property (nonatomic, readonly) NSArray *colorKeyframes;
+@property (nonatomic, readonly) NSArray *boundsKeyframes;
 @property (nonatomic, readonly) NSArray<NSNumber *> *keyTimes;
 @property (nonatomic, readonly) NSArray<CAMediaTimingFunction *> *timingFunctions;
 @property (nonatomic, readonly) NSTimeInterval delay;
 @property (nonatomic, readonly) NSTimeInterval duration;
-
 @property (nonatomic, readonly) NSNumber *startFrame;
 @property (nonatomic, readonly) NSNumber *durationFrames;
 @property (nonatomic, readonly) NSNumber *frameRate;
 
 @end
 
-@implementation LAAnimatableColorValue
+@implementation LAAnimatableBoundsValue
 
-- (instancetype)initWithColorValues:(NSDictionary *)colorValues frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithSizeValues:(NSDictionary *)sizeValue frameRate:(NSNumber *)frameRate {
   self = [super init];
   if (self) {
     _frameRate = frameRate;
-    NSArray *value = colorValues[@"k"];
+    id value = sizeValue[@"k"];
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
         [(NSDictionary *)[(NSArray *)value firstObject] objectForKey:@"t"]) {
       //Keframes
       [self _buildAnimationForKeyframes:value];
-    } else {
+    } else if ([value isKindOfClass:[NSArray class]]) {
       //Single Value, no animation
-      _initialColor = [[self _colorValueFromArray:value] copy];
+      _initialBounds = [self _boundsRectFromValueArray:value];
     }
   }
   return self;
@@ -45,14 +44,14 @@
 - (void)_buildAnimationForKeyframes:(NSArray<NSDictionary *> *)keyframes {
   NSMutableArray *keyTimes = [NSMutableArray array];
   NSMutableArray *timingFunctions = [NSMutableArray array];
-  NSMutableArray *colorValues = [NSMutableArray array];
+  NSMutableArray *rectKeyframes = [NSMutableArray array];
   
   _startFrame = keyframes.firstObject[@"t"];
   NSNumber *endFrame = keyframes.lastObject[@"t"];
   
   NSAssert((_startFrame && endFrame && _startFrame.integerValue < endFrame.integerValue),
            @"Lotte: Keyframe animation has incorrect time values or invalid number of keyframes");
-
+  
   // Calculate time duration
   _durationFrames = @(endFrame.floatValue - _startFrame.floatValue);
   
@@ -61,7 +60,7 @@
   
   BOOL addStartValue = YES;
   BOOL addTimePadding = NO;
-  UIColor *outColor = nil;
+  NSArray *outBounds = nil;
   
   for (NSDictionary *keyframe in keyframes) {
     // Get keyframe time value
@@ -70,26 +69,27 @@
     //CA Animations accept time values of 0-1 as a percentage of animation completed.
     NSNumber *timePercentage = @((frame.floatValue - _startFrame.floatValue) / _durationFrames.floatValue);
     
-    if (outColor) {
+    if (outBounds) {
       //add out value
-      [colorValues addObject:(id)[[outColor copy] CGColor]];
+      CGRect bounds = [self _boundsRectFromValueArray:outBounds];
+      [rectKeyframes addObject:[NSValue valueWithCGRect:bounds]];
       [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-      outColor = nil;
+      outBounds = nil;
     }
     
-    UIColor *startColor = [self _colorValueFromArray:keyframe[@"s"]];
+    NSArray *startRect = keyframe[@"s"];
     if (addStartValue) {
-      // Add start value
-      if (startColor) {
+      if (startRect) {
+        CGRect sRect = [self _boundsRectFromValueArray:startRect];
         if (keyframe == keyframes.firstObject) {
-          _initialColor = startColor;
-        }
-        [colorValues addObject:(id)[[startColor copy] CGColor]];
-        if (timingFunctions.count) {
+          [rectKeyframes addObject:[NSValue valueWithCGRect:sRect]];
+          _initialBounds = sRect;
+        } else {
+          [rectKeyframes addObject:[NSValue valueWithCGRect:sRect]];
           [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
         }
+        addStartValue = NO;
       }
-      addStartValue = NO;
     }
     
     if (addTimePadding) {
@@ -100,9 +100,11 @@
     }
     
     // add end value if present for keyframe
-    UIColor *endColor = [self _colorValueFromArray:keyframe[@"e"]];
-    if (endColor) {
-      [colorValues addObject:(id)[[endColor copy] CGColor]];
+    NSArray *endRect = keyframe[@"e"];
+    if (endRect) {
+      CGRect bounds = [self _boundsRectFromValueArray:endRect];
+      [rectKeyframes addObject:[NSValue valueWithCGRect:bounds]];
+      
       /*
        * Timing Function for time interpolations between keyframes
        * Should be n-1 where n is the number of keyframes
@@ -129,34 +131,22 @@
     // Check if keyframe is a hold keyframe
     if ([keyframe[@"h"] boolValue]) {
       // set out value as start and flag next frame accordinly
-      outColor = startColor;
+      outBounds = startRect;
       addStartValue = YES;
       addTimePadding = YES;
     }
   }
 
-  _colorKeyframes = colorValues;
   _keyTimes = keyTimes;
   _timingFunctions = timingFunctions;
+  _boundsKeyframes = rectKeyframes;
 }
 
-- (UIColor *)_colorValueFromArray:(NSArray<NSNumber *>  *)colorArray {
-  if (colorArray.count == 4) {
-    BOOL shouldUse255 = NO;
-    for (NSNumber *number in colorArray) {
-      if (number.floatValue > 1) {
-        shouldUse255 = YES;
-      }
-    }
-    
-    
-    
-    return [UIColor colorWithRed:colorArray[0].floatValue / (shouldUse255 ? 255.f : 1.f)
-                           green:colorArray[1].floatValue / (shouldUse255 ? 255.f : 1.f)
-                            blue:colorArray[2].floatValue / (shouldUse255 ? 255.f : 1.f)
-                           alpha:colorArray[3].floatValue / (shouldUse255 ? 255.f : 1.f)];
+- (CGRect)_boundsRectFromValueArray:(NSArray<NSNumber *> *)values {
+  if (values.count >= 2) {
+    return CGRectMake(0, 0, [values[0] floatValue], [values[1] floatValue]);
   }
-  return nil;
+  return CGRectZero;
 }
 
 - (CGPoint)_pointFromValueDict:(NSDictionary *)values {
@@ -177,7 +167,7 @@
 }
 
 - (BOOL)hasAnimation {
-  return (self.colorKeyframes.count > 0);
+  return (self.boundsKeyframes.count > 0);
 }
 
 - (nullable CAKeyframeAnimation *)animationForKeyPath:(nonnull NSString *)keypath {
@@ -186,7 +176,7 @@
   }
   CAKeyframeAnimation *keyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:keypath];
   keyframeAnimation.keyTimes = self.keyTimes;
-  keyframeAnimation.values = self.colorKeyframes;
+  keyframeAnimation.values = self.boundsKeyframes;
   keyframeAnimation.timingFunctions = self.timingFunctions;
   keyframeAnimation.duration = self.duration;
   keyframeAnimation.beginTime = self.delay;

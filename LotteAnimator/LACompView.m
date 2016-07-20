@@ -27,7 +27,7 @@
 - (void)_buildSubviewsFromModel {
   NSMutableDictionary *layerMap = [NSMutableDictionary dictionary];
   for (LALayer *layer in _sceneModel.layers) {
-    LALayerView *layerView = [[LALayerView alloc] initWithModel:layer];
+    LALayerView *layerView = [[LALayerView alloc] initWithModel:layer inComposition:_sceneModel];
     layerMap[layer.layerID] = layerView;
     [self addSubview:layerView];
     [self sendSubviewToBack:layerView];
