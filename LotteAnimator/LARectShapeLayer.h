@@ -7,8 +7,9 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import "LAAnimatableLayer.h"
 
-@interface LARectShapeLayer : CALayer
+@interface LARectShapeLayer : LAAnimatableLayer
 
 - (instancetype)initWithRectShape:(LAShapeRectangle *)rectShape
                          fill:(LAShapeFill *)fill

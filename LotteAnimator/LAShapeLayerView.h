@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LAAnimatableLayer.h"
 
-@interface LAShapeLayerView : CALayer
+@interface LAShapeLayerView : LAAnimatableLayer
 
 - (instancetype)initWithShape:(LAShapePath *)shape
                          fill:(LAShapeFill *)fill

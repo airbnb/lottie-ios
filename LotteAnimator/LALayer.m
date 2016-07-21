@@ -12,21 +12,23 @@
 #import "LAAnimatableNumberValue.h"
 #import "LAAnimatableScaleValue.h"
 #import "LAShapeGroup.h"
+#import "LAComposition.h"
 
 @implementation LALayer
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds {
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary fromComposition:(LAComposition *)composition {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary frameRate:frameRate compBounds:compBounds];
+    [self _mapFromJSON:jsonDictionary fromComposition:composition];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds {
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary fromComposition:(LAComposition *)composition {
   _layerName = [jsonDictionary[@"nm"] copy];
   _layerID = [jsonDictionary[@"ind"] copy];
-  _compBounds = compBounds;
+  _compBounds = composition.compBounds;
+  _framerate = composition.framerate;
   
   NSNumber *layerType = jsonDictionary[@"ty"];
   if (layerType.integerValue <= LALayerTypeShape) {
@@ -47,13 +49,13 @@
   
   NSDictionary *opacity = ks[@"o"];
   if (opacity) {
-    _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:frameRate];
+    _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:_framerate];
     [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
   }
   
   NSDictionary *rotation = ks[@"r"];
   if (rotation) {
-    _rotation = [[LAAnimatableNumberValue alloc] initWithNumberValues:rotation frameRate:frameRate];
+    _rotation = [[LAAnimatableNumberValue alloc] initWithNumberValues:rotation frameRate:_framerate];
     [_rotation remapValueWithBlock:^CGFloat(CGFloat inValue) {
       return DegreesToRadians(inValue);
     }];
@@ -61,34 +63,69 @@
   
   NSDictionary *position = ks[@"p"];
   if (position) {
-    _position = [[LAAnimatablePointValue alloc] initWithPointValues:position frameRate:frameRate];
+    _position = [[LAAnimatablePointValue alloc] initWithPointValues:position frameRate:_framerate];
   }
   
   NSDictionary *anchor = ks[@"a"];
   if (anchor) {
-    _anchor = [[LAAnimatablePointValue alloc] initWithPointValues:anchor frameRate:frameRate];
-    [_anchor remapPointsFromBounds:compBounds toBounds:CGRectMake(0, 0, 1, 1)];
+    _anchor = [[LAAnimatablePointValue alloc] initWithPointValues:anchor frameRate:_framerate];
+    [_anchor remapPointsFromBounds:_compBounds toBounds:CGRectMake(0, 0, 1, 1)];
     _anchor.usePathAnimation = NO;
   }
   
   NSDictionary *scale = ks[@"s"];
   if (scale) {
-    _scale = [[LAAnimatableScaleValue alloc] initWithScaleValues:scale frameRate:frameRate];
+    _scale = [[LAAnimatableScaleValue alloc] initWithScaleValues:scale frameRate:_framerate];
   }
   
   NSMutableArray *masks = [NSMutableArray array];
   for (NSDictionary *maskJSON in jsonDictionary[@"masksProperties"]) {
-    LAMask *mask = [[LAMask alloc] initWithJSON:maskJSON frameRate:frameRate];
+    LAMask *mask = [[LAMask alloc] initWithJSON:maskJSON frameRate:_framerate];
     [masks addObject:mask];
   }
   _masks = masks;
   
   NSMutableArray *shapes = [NSMutableArray array];
   for (NSDictionary *shapeJSON in jsonDictionary[@"shapes"]) {
-    LAShapeGroup *group = [[LAShapeGroup alloc] initWithJSON:shapeJSON frameRate:frameRate compBounds:compBounds];
+    LAShapeGroup *group = [[LAShapeGroup alloc] initWithJSON:shapeJSON frameRate:_framerate compBounds:_compBounds];
     [shapes addObject:group];
   }
   _shapes = shapes;
+  
+  BOOL hasInAnmation = (_inFrame.integerValue > composition.startFrame.integerValue);
+  BOOL hasOutAnimation = (_outFrame.integerValue < composition.endFrame.integerValue);
+  _hasInOutAnimation = hasInAnmation || hasOutAnimation;
+  if (_hasInOutAnimation) {
+    NSMutableArray *keys = [NSMutableArray array];
+    NSMutableArray *keyTimes = [NSMutableArray array];
+    CGFloat compLength = composition.endFrame.floatValue - composition.startFrame.floatValue;
+    
+    if (hasInAnmation) {
+      [keys addObject:@1];
+      [keyTimes addObject:@0];
+      [keys addObject:@0];
+      CGFloat inTime = _inFrame.floatValue / compLength;
+      [keyTimes addObject:@(inTime)];
+    } else {
+      [keys addObject:@0];
+      [keyTimes addObject:@0];
+    }
+    
+    if (hasOutAnimation) {
+      [keys addObject:@1];
+      CGFloat outTime = _outFrame.floatValue / compLength;
+      [keyTimes addObject:@(outTime)];
+      [keys addObject:@1];
+      [keyTimes addObject:@1];
+    } else {
+      [keys addObject:@0];
+      [keyTimes addObject:@1];
+    }
+    
+    _compDuration = composition.timeDuration;
+    _inOutKeyTimes = keyTimes;
+    _inOutKeyframes = keys;
+  }
 }
 
 @end

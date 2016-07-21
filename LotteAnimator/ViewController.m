@@ -43,12 +43,12 @@
 
 @property (nonatomic, strong) UIButton *openButton;
 @property (nonatomic, strong) LAComposition *currentScene;
-@property (nonatomic, strong) UIView *currentSceneView;
+@property (nonatomic, strong) LACompView *currentSceneView;
 @property (nonatomic, strong) UIView *logView;
 @property (nonatomic, strong) UITextView *logTextField;
 @property (nonatomic, strong) UIButton *openLogButton;
 @property (nonatomic, strong) UIButton *closeLogButton;
-
+@property (nonatomic, strong) UISlider *animationSlider;
 @end
 
 @implementation ViewController
@@ -104,11 +104,19 @@
   [self.openLogButton addTarget:self action:@selector(_openLogButtonPressed) forControlEvents:UIControlEventTouchUpInside];
   [self.view addSubview:self.openLogButton];
   
+  self.animationSlider = [[UISlider alloc] initWithFrame:CGRectZero];
+  
+  [self.animationSlider addTarget:self action:@selector(_sliderChanged) forControlEvents:UIControlEventValueChanged];
+  
+  [self.view addSubview:self.animationSlider];
+  
   self.closeLogButton = [UIButton buttonWithType:UIButtonTypeCustom];
   self.closeLogButton.frame = self.view.bounds;
   [self.closeLogButton addTarget:self action:@selector(_closeLog) forControlEvents:UIControlEventTouchUpInside];
   self.closeLogButton.hidden = YES;
   [self.view addSubview:self.closeLogButton];
+  
+ 
   
   self.logView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height * 0.3, self.view.bounds.size.width, self.view.bounds.size.height * 0.7)];
   self.logView.backgroundColor = [UIColor blackColor];
@@ -206,6 +214,12 @@
   
   self.closeLogButton.frame = self.view.bounds;
   
+  self.animationSlider.frame = CGRectAttachedRightToRect(self.openLogButton.frame, CGSizeMake(200, 44), 12, YES);
+  
+}
+
+- (void)_sliderChanged {
+  self.currentSceneView.animationProgress = self.animationSlider.value;
 }
 
 - (void)_openButtonPressed {
@@ -280,5 +294,6 @@
   self.currentSceneView = compView;
   [self.view sendSubviewToBack:self.currentSceneView];
   [compView performSelector:@selector(play) withObject:nil afterDelay:1];
+  [compView performSelector:@selector(pause) withObject:nil afterDelay:2];
 }
 @end

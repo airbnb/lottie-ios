@@ -60,6 +60,7 @@
     _strokeLayer.backgroundColor = nil;
     [self addSublayer:_strokeLayer];
     [self _buildAnimation];
+    [self pause];
     
   }
   return self;

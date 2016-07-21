@@ -16,6 +16,7 @@
 @class LAAnimatableNumberValue;
 @class LAAnimatableRectValue;
 @class LAAnimatableScaleValue;
+@class LAComposition;
 
 typedef enum : NSInteger {
   LALayerTypeNone,
@@ -27,16 +28,16 @@ typedef enum : NSInteger {
 
 @interface LALayer : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary fromComposition:(LAComposition *)composition;
 
 @property (nonatomic, readonly) NSString *layerName;
 @property (nonatomic, readonly) NSNumber *layerID;
 @property (nonatomic, readonly) LALayerType layerType;
 @property (nonatomic, readonly) NSNumber *parentID;
-@property (nonatomic, strong) NSArray *childrenIDs;
 @property (nonatomic, readonly) NSNumber *inFrame;
 @property (nonatomic, readonly) NSNumber *outFrame;
 @property (nonatomic, readonly) CGRect compBounds;
+@property (nonatomic, readonly) NSNumber *framerate;
 
 @property (nonatomic, readonly) NSArray<LAShapeGroup *> *shapes;
 @property (nonatomic, readonly) NSArray<LAMask *> *masks;
@@ -50,5 +51,10 @@ typedef enum : NSInteger {
 
 @property (nonatomic, readonly) LAAnimatablePointValue *anchor;
 @property (nonatomic, readonly) LAAnimatableScaleValue *scale;
+
+@property (nonatomic, readonly) BOOL hasInOutAnimation;
+@property (nonatomic, readonly) NSArray *inOutKeyframes;
+@property (nonatomic, readonly) NSArray *inOutKeyTimes;
+@property (nonatomic, readonly) NSTimeInterval compDuration;
 
 @end

@@ -8,6 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "LAAnimatableValue.h"
+@class LAComposition;
 
 @interface CAAnimationGroup (LAAnimatableGroup)
 

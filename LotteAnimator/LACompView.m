@@ -26,11 +26,13 @@
 
 - (void)_buildSubviewsFromModel {
   NSMutableDictionary *layerMap = [NSMutableDictionary dictionary];
-  for (LALayer *layer in _sceneModel.layers) {
+  
+  NSArray *reversedItems = [[_sceneModel.layers reverseObjectEnumerator] allObjects];
+
+  for (LALayer *layer in reversedItems) {
     LALayerView *layerView = [[LALayerView alloc] initWithModel:layer inComposition:_sceneModel];
     layerMap[layer.layerID] = layerView;
-    [self addSubview:layerView];
-    [self sendSubviewToBack:layerView];
+    [self.layer addSublayer:layerView];
   }
   _layerMap = layerMap;
 }
@@ -44,15 +46,30 @@
   for (LALayerView *child in _layerMap.allValues) {
     if ([child isKindOfClass:[LALayerView class]]) {
       [child setDebugModeOn:debugModeOn];
-      child.alpha = debugModeOn ? 0.5 : 1;
+      child.opacity = debugModeOn ? 0.5 : 1;
     }
   }
 }
 
 - (void)play {
+  [CATransaction begin];
   for (LALayerView *layerView in _layerMap.allValues) {
-    [layerView startAnimation];
+    [layerView play];
+  }
+  [CATransaction commit];
+}
+
+- (void)pause {
+  for (LALayerView *layerView in _layerMap.allValues) {
+    [layerView pause];
   }
 }
+
+- (void)setAnimationProgress:(CGFloat)animationProgress {
+  for (LALayerView *layerView in _layerMap.allValues) {
+    [layerView setAnimationProgress:animationProgress];
+  }
+}
+
 
 @end

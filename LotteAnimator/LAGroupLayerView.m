@@ -81,7 +81,14 @@
   }
   _groupLayers = groupLayers;
   _shapeLayers = shapeLayers;
+  
+  NSMutableArray *childLayers = [NSMutableArray array];
+  [childLayers addObjectsFromArray:groupLayers];
+  [childLayers addObjectsFromArray:shapeLayers];
+  self.childLayers = childLayers;
+  
   [self _buildAnimation];
+  [self pause];
 }
 
 - (void)_buildAnimation {
@@ -91,19 +98,7 @@
                                                                                        @"anchorPoint" : _shapeTransform.anchor,
                                                                                        @"transform" : _shapeTransform.scale,
                                                                                        @"sublayerTransform.rotation" : _shapeTransform.rotation}];
-  }
-}
-
-- (void)startAnimation {
-  if (_animation) {
     [self addAnimation:_animation forKey:@"lotteAnimation"];
-  }
-  for (LAGroupLayerView *groupLayer in _groupLayers) {
-    [groupLayer startAnimation];
-  }
-  
-  for (LAShapeLayerView *shapeLayer in _shapeLayers) {
-    [shapeLayer startAnimation];
   }
 }
 

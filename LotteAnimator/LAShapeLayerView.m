@@ -56,8 +56,11 @@
     _strokeLayer.opacity = _stroke.opacity.initialValue.floatValue;
     _strokeLayer.lineWidth = _stroke.width.initialValue.floatValue;
     _strokeLayer.fillColor = nil;
+    self.animationSublayers = @[_fillLayer, _strokeLayer];
     [self addSublayer:_strokeLayer];
     [self _buildAnimation];
+    [self pause];
+    
     
   }
   return self;
@@ -70,6 +73,7 @@
                                                                                        @"anchorPoint" : _transform.anchor,
                                                                                        @"transform" : _transform.scale,
                                                                                        @"sublayerTransform.rotation" : _transform.rotation}];
+    [self addAnimation:_animation forKey:@"LotteAnimation"];
   }
   
   if (_stroke) {
@@ -77,24 +81,13 @@
                                                                                              @"opacity" : _stroke.opacity,
                                                                                              @"lineWidth" : _stroke.width,
                                                                                              @"path" : _path.shapePath}];
+    [_strokeLayer addAnimation:_strokeAnimation forKey:@""];
   }
   
   if (_fill) {
     _fillAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"fillColor" : _fill.color,
                                                                                            @"opacity" : _fill.opacity,
                                                                                            @"path" : _path.shapePath}];
-  }
-}
-
-- (void)startAnimation {
-  if (_animation) {
-    [self addAnimation:_animation forKey:@"LotteAnimation"];
-  }
-  if (_strokeAnimation) {
-    [_strokeLayer addAnimation:_strokeAnimation forKey:@""];
-  }
-  
-  if (_fillAnimation) {
     [_fillLayer addAnimation:_fillAnimation forKey:@""];
   }
 }

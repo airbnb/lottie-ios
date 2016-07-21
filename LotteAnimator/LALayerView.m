@@ -11,7 +11,7 @@
 #import "LAGroupLayerView.h"
 #import "CAAnimationGroup+LAAnimatableGroup.h"
 
-@interface LAParentLayer : CALayer
+@interface LAParentLayer : LAAnimatableLayer
 
 - (instancetype)initWithParentModel:(LALayer *)parent compBounds:(CGRect)bounds;
 - (void)startAnimation;
@@ -39,6 +39,7 @@
   self.transform = _parentModel.scale.initialScale;
   self.sublayerTransform = CATransform3DMakeRotation(_parentModel.rotation.initialValue.floatValue, 0, 0, 1);
   [self _buildAnimations];
+  [self pause];
 }
 
 - (void)_buildAnimations {
@@ -46,12 +47,7 @@
                                                                                      @"anchorPoint" : _parentModel.anchor,
                                                                                      @"transform" : _parentModel.scale,
                                                                                      @"sublayerTransform.rotation" : _parentModel.rotation}];
-}
-
-- (void)startAnimation {
-  if (_animation) {
-    [self addAnimation:_animation forKey:@"lotteAnimation"];
-  }
+  [self addAnimation:_animation forKey:@"lotteAnimation"];
 }
 
 @end
@@ -61,11 +57,12 @@
   CALayer *_childContainerLayer;
   CALayer *_rotationLayer;
   CAAnimationGroup *_animation;
+  CAKeyframeAnimation *_inOutAnimation;
   NSArray<LAParentLayer *> *_parentLayers;
 }
 
 - (instancetype)initWithModel:(LALayer *)model inComposition:(LAComposition *)comp {
-  self = [super initWithFrame:model.compBounds];
+  self = [super init];
   if (self) {
     _layerModel = model;
     [self _setupViewFromModelInComposition:comp];
@@ -74,8 +71,10 @@
 }
 
 - (void)_setupViewFromModelInComposition:(LAComposition *)comp {
+  self.bounds = comp.compBounds;
+  self.anchorPoint = CGPointZero;
   _childContainerLayer = [CALayer new];
-  // Setup Parents
+  self.animationSublayers = @[_childContainerLayer];
   
   NSNumber *parentID = _layerModel.parentID;
   CALayer *currentChild = _childContainerLayer;
@@ -93,14 +92,14 @@
   if (parentLayers.count) {
     _parentLayers = parentLayers;
   }
-  [self.layer addSublayer:currentChild];
+  [self addSublayer:currentChild];
   
-  self.alpha = _layerModel.opacity.initialValue.floatValue;
+  _childContainerLayer.opacity = _layerModel.opacity.initialValue.floatValue;
   _childContainerLayer.position = _layerModel.position.initialPoint;
   _childContainerLayer.anchorPoint = _layerModel.anchor.initialPoint;
   _childContainerLayer.transform = _layerModel.scale.initialScale;
   _childContainerLayer.sublayerTransform = CATransform3DMakeRotation(_layerModel.rotation.initialValue.floatValue, 0, 0, 1);
-  self.clipsToBounds = NO;
+  self.hidden = _layerModel.inFrame.integerValue > comp.startFrame.integerValue;
   
   NSArray *groupItems = _layerModel.shapes;
   NSArray *reversedItems = [[groupItems reverseObjectEnumerator] allObjects];
@@ -119,7 +118,14 @@
   }
   
   _shapeLayers = shapeLayers;
+  
+  NSMutableArray *childLayers = [NSMutableArray array];
+  [childLayers addObjectsFromArray:_parentLayers];
+  [childLayers addObjectsFromArray:_shapeLayers];
+  self.childLayers = childLayers;
+  
   [self _buildAnimations];
+  [self pause];
 }
 
 - (void)_buildAnimations {
@@ -128,17 +134,23 @@
                                                                                      @"anchorPoint" : _layerModel.anchor,
                                                                                      @"transform" : _layerModel.scale,
                                                                                      @"sublayerTransform.rotation" : _layerModel.rotation}];
-}
+  
 
-- (void)startAnimation {
   if (_animation) {
     [_childContainerLayer addAnimation:_animation forKey:@"lotteAnimation"];
   }
-  for (LAGroupLayerView *groupLayer in _shapeLayers) {
-    [groupLayer startAnimation];
-  }
-  for (LAParentLayer *parent in _parentLayers) {
-    [parent startAnimation];
+  
+  if (_layerModel.hasInOutAnimation) {
+    CAKeyframeAnimation *inOutAnimation = [CAKeyframeAnimation animationWithKeyPath:@"hidden"];
+    inOutAnimation.keyTimes = _layerModel.inOutKeyTimes;
+    inOutAnimation.values = _layerModel.inOutKeyframes;
+    inOutAnimation.duration = _layerModel.compDuration;
+    inOutAnimation.calculationMode = kCAAnimationDiscrete;
+    inOutAnimation.fillMode = kCAFillModeForwards;
+    inOutAnimation.removedOnCompletion = NO;
+
+    _inOutAnimation = inOutAnimation;
+    [self addAnimation:_inOutAnimation forKey:@""];
   }
 }
 
@@ -148,9 +160,9 @@
 
 - (void)setDebugModeOn:(BOOL)debugModeOn {
   _debugModeOn = debugModeOn;
-  self.layer.borderColor = debugModeOn ? [UIColor redColor].CGColor : nil;
-  self.layer.borderWidth = debugModeOn ? 2 : 0;
-  self.backgroundColor = debugModeOn ? [[UIColor blueColor] colorWithAlphaComponent:0.2] : [UIColor clearColor];
+  self.borderColor = debugModeOn ? [UIColor redColor].CGColor : nil;
+  self.borderWidth = debugModeOn ? 2 : 0;
+  self.backgroundColor = debugModeOn ? [[UIColor blueColor] colorWithAlphaComponent:0.2].CGColor : [UIColor clearColor].CGColor;
   
   for (LAGroupLayerView *group in _shapeLayers) {
     group.debugModeOn = debugModeOn;

@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LAAnimatableLayer.h"
+
 #import "LAModels.h"
 
-@interface LALayerView : UIView
+@interface LALayerView : LAAnimatableLayer
 
 - (instancetype)initWithModel:(LALayer *)model inComposition:(LAComposition *)comp;
 
 @property (nonatomic, readonly) LALayer *layerModel;
 @property (nonatomic, assign) BOOL debugModeOn;
-
-- (void)startAnimation;
 
 @end

@@ -83,6 +83,8 @@
 		62FE40E81D3FFBB400CA389D /* LARectShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FE40E71D3FFBB400CA389D /* LARectShapeLayer.m */; };
 		62FE40EA1D401C0700CA389D /* scaleTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40E91D401C0700CA389D /* scaleTest.json */; };
 		62FE40EC1D402C0200CA389D /* parentTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE40EB1D402C0200CA389D /* parentTest.json */; };
+		62FE41161D41526D00CA389D /* InOutAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE41151D41526D00CA389D /* InOutAnimation.json */; };
+		62FE41431D41862200CA389D /* LAAnimatableLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FE41421D41862200CA389D /* LAAnimatableLayer.m */; };
 		F5B4E946F7B28B4594824641 /* libPods-LotteAnimator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */; };
 /* End PBXBuildFile section */
 
@@ -198,6 +200,9 @@
 		62FE40E71D3FFBB400CA389D /* LARectShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LARectShapeLayer.m; sourceTree = "<group>"; };
 		62FE40E91D401C0700CA389D /* scaleTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = scaleTest.json; sourceTree = "<group>"; };
 		62FE40EB1D402C0200CA389D /* parentTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = parentTest.json; sourceTree = "<group>"; };
+		62FE41151D41526D00CA389D /* InOutAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InOutAnimation.json; sourceTree = "<group>"; };
+		62FE41411D41862200CA389D /* LAAnimatableLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableLayer.h; sourceTree = "<group>"; };
+		62FE41421D41862200CA389D /* LAAnimatableLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableLayer.m; sourceTree = "<group>"; };
 		AEE1A33E4CE2F6024DE7793E /* Pods-LotteAnimator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.debug.xcconfig"; sourceTree = "<group>"; };
 		BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LotteAnimator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -249,6 +254,8 @@
 				4804B2FB1C1F55E600DA8AF7 /* AppDelegate.m */,
 				48372A421C1F84D700AD0293 /* LACompView.h */,
 				48372A431C1F84D700AD0293 /* LACompView.m */,
+				62FE41411D41862200CA389D /* LAAnimatableLayer.h */,
+				62FE41421D41862200CA389D /* LAAnimatableLayer.m */,
 				4804B32A1C1F835F00DA8AF7 /* LALayerView.h */,
 				4804B32B1C1F835F00DA8AF7 /* LALayerView.m */,
 				620CD7E31D38180800055AD1 /* LAGroupLayerView.h */,
@@ -325,6 +332,7 @@
 		48372A651C20B04300AD0293 /* JSONExamples */ = {
 			isa = PBXGroup;
 			children = (
+				62FE41151D41526D00CA389D /* InOutAnimation.json */,
 				62FE40EB1D402C0200CA389D /* parentTest.json */,
 				62FE40E91D401C0700CA389D /* scaleTest.json */,
 				62FE40DA1D3FF0D900CA389D /* Heart58OnOff.json */,
@@ -501,6 +509,7 @@
 				62FE40D51D3EDC7400CA389D /* 073_AnimaterectangleSizeEasyEase.json in Resources */,
 				62FE40D21D3EDC7400CA389D /* 063_AnimateTransformPrecomped.json in Resources */,
 				62FE40C41D3EDC7400CA389D /* 016_GroupedShapes_01.json in Resources */,
+				62FE41161D41526D00CA389D /* InOutAnimation.json in Resources */,
 				62FE40B61D3EDC7400CA389D /* 003_TwoShapeLayerSquares_01.json in Resources */,
 				62FE40DE1D3FF0D900CA389D /* Heart58TurnOff.json in Resources */,
 				62FE40CF1D3EDC7400CA389D /* 059_AnimateTransformPositionRoveAcrossTime.json in Resources */,
@@ -572,6 +581,7 @@
 				4804B31E1C1F757600DA8AF7 /* UIColor+Expanded.m in Sources */,
 				4804B2FF1C1F55E600DA8AF7 /* ViewController.m in Sources */,
 				48372A641C20A91C00AD0293 /* LAJSONExplorerViewController.m in Sources */,
+				62FE41431D41862200CA389D /* LAAnimatableLayer.m in Sources */,
 				620A56651D1C81930030EBFB /* LAAnimatableShapeValue.m in Sources */,
 				4804B3191C1F6DEA00DA8AF7 /* LAComposition.m in Sources */,
 				4804B2FC1C1F55E600DA8AF7 /* AppDelegate.m in Sources */,
@@ -713,6 +723,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = PrefixHeader.pch;
 				INFOPLIST_FILE = LotteAnimator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.LotteAnimator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -726,6 +737,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = PrefixHeader.pch;
 				INFOPLIST_FILE = LotteAnimator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.LotteAnimator";
 				PRODUCT_NAME = "$(TARGET_NAME)";

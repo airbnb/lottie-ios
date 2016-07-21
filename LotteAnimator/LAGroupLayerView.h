@@ -7,10 +7,12 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import "LAAnimatableLayer.h"
+
 @class LAShapeGroup;
 @class LAShapeTransform;
 
-@interface LAGroupLayerView : CALayer
+@interface LAGroupLayerView : LAAnimatableLayer
 
 - (instancetype)initWithShapeGroup:(LAShapeGroup *)shapeGroup
                          transform:(LAShapeTransform *)transform;
