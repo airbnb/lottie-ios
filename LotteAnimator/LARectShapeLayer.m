@@ -7,6 +7,7 @@
 //
 
 #import "LARectShapeLayer.h"
+#import "CAAnimationGroup+LAAnimatableGroup.h"
 
 @implementation LARectShapeLayer {
   LAShapeTransform *_transform;
@@ -25,14 +26,16 @@
 - (instancetype)initWithRectShape:(LAShapeRectangle *)rectShape
                              fill:(LAShapeFill *)fill
                            stroke:(LAShapeStroke *)stroke
-                        transform:(LAShapeTransform *)transform {
-  self = [super init];
+                        transform:(LAShapeTransform *)transform
+                     withDuration:(NSTimeInterval)duration {
+  self = [super initWithDuration:duration];
   if (self) {
     _rectangle = rectShape;
     _stroke = stroke;
     _fill = fill;
     _transform = transform;
     
+    self.allowsEdgeAntialiasing = YES;
     self.frame = _transform.compBounds;
     self.anchorPoint = _transform.anchor.initialPoint;
     self.opacity = _transform.opacity.initialValue.floatValue;
@@ -67,11 +70,34 @@
 }
 
 - (void)_buildAnimation {
+  if (_transform) {
+    _animation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"opacity" : _transform.opacity,
+                                                                                       @"position" : _transform.position,
+                                                                                       @"anchorPoint" : _transform.anchor,
+                                                                                       @"transform" : _transform.scale,
+                                                                                       @"sublayerTransform.rotation" : _transform.rotation}];
+    [self addAnimation:_animation forKey:@"LotteAnimation"];
+  }
   
-}
+  if (_stroke) {
+    _strokeAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"strokeColor" : _stroke.color,
+                                                                                             @"opacity" : _stroke.opacity,
+                                                                                             @"lineWidth" : _stroke.width,
+                                                                                             @"bounds" : _rectangle.bounds,
+                                                                                             @"position" : _rectangle.position,
+                                                                                             @"cornerRadius" : _rectangle.cornerRadius}];
+    [_strokeLayer addAnimation:_strokeAnimation forKey:@""];
 
-- (void)startAnimation {
+  }
   
+  if (_fill) {
+    _fillAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"backgroundColor" : _fill.color,
+                                                                                           @"opacity" : _fill.opacity,
+                                                                                           @"bounds" : _rectangle.bounds,
+                                                                                           @"position" : _rectangle.position,
+                                                                                           @"cornerRadius" : _rectangle.cornerRadius}];
+    [_fillLayer addAnimation:_fillAnimation forKey:@""];
+  }
 }
 
 @end

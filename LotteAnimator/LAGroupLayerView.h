@@ -15,12 +15,11 @@
 @interface LAGroupLayerView : LAAnimatableLayer
 
 - (instancetype)initWithShapeGroup:(LAShapeGroup *)shapeGroup
-                         transform:(LAShapeTransform *)transform;
+                         transform:(LAShapeTransform *)transform
+                      withDuration:(NSTimeInterval)duration;
 
 @property (nonatomic, readonly) LAShapeGroup *shapeGroup;
 @property (nonatomic, readonly) LAShapeTransform *shapeTransform;
 @property (nonatomic, assign) BOOL debugModeOn;
-
-- (void)startAnimation;
 
 @end

@@ -10,6 +10,14 @@
 
 @implementation LAAnimatableLayer
 
+- (instancetype)initWithDuration:(NSTimeInterval)duration {
+  self = [super init];
+  if (self) {
+    _laAnimationDuration = duration;
+  }
+  return self;
+}
+
 - (void)play {
   [self _resumeLayer:self];
   for (CALayer *layer in self.animationSublayers) {
@@ -44,18 +52,18 @@
 }
 
 - (void)setAnimationProgress:(CGFloat)animationProgress {
-  self.speed = 0.0;
+  self.speed = 0;
   self.timeOffset = 0.0;
   self.beginTime = 0.0;
   self.beginTime = [self convertTime:CACurrentMediaTime() fromLayer:nil];
-  self.timeOffset = [self convertTime:CACurrentMediaTime() fromLayer:nil] + animationProgress;
+  self.timeOffset = animationProgress * self.laAnimationDuration;
   
   for (CALayer *layer in self.animationSublayers) {
-    layer.speed = 0.0;
+    layer.speed = 0;
     layer.timeOffset = 0.0;
     layer.beginTime = 0.0;
     layer.beginTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
-    layer.timeOffset = [layer convertTime:CACurrentMediaTime() fromLayer:nil] + animationProgress;
+    layer.timeOffset = animationProgress * self.laAnimationDuration;
   }
   
   for (LAAnimatableLayer *layer in self.childLayers) {
@@ -76,18 +84,13 @@
 }
 
 -(void)_pauseLayer:(CALayer*)layer {
-  CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
   layer.speed = 0.0;
-  layer.timeOffset = pausedTime;
 }
 
 -(void)_resumeLayer:(CALayer*)layer {
-  CFTimeInterval pausedTime = [layer timeOffset];
   layer.speed = 1.0;
   layer.timeOffset = 0.0;
-  layer.beginTime = 0.0;
-  CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
-  layer.beginTime = timeSincePause;
+  layer.beginTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
 }
 
 

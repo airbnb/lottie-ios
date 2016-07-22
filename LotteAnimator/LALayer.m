@@ -92,15 +92,15 @@
   }
   _shapes = shapes;
   
-  BOOL hasInAnmation = (_inFrame.integerValue > composition.startFrame.integerValue);
-  BOOL hasOutAnimation = (_outFrame.integerValue < composition.endFrame.integerValue);
-  _hasInOutAnimation = hasInAnmation || hasOutAnimation;
+  _hasInAnimation = (_inFrame.integerValue > composition.startFrame.integerValue);
+  _hasOutAnimation = (_outFrame.integerValue < composition.endFrame.integerValue);
+  _hasInOutAnimation = _hasInAnimation || _hasOutAnimation;
   if (_hasInOutAnimation) {
     NSMutableArray *keys = [NSMutableArray array];
     NSMutableArray *keyTimes = [NSMutableArray array];
     CGFloat compLength = composition.endFrame.floatValue - composition.startFrame.floatValue;
     
-    if (hasInAnmation) {
+    if (_hasInAnimation) {
       [keys addObject:@1];
       [keyTimes addObject:@0];
       [keys addObject:@0];
@@ -111,7 +111,7 @@
       [keyTimes addObject:@0];
     }
     
-    if (hasOutAnimation) {
+    if (_hasOutAnimation) {
       [keys addObject:@1];
       CGFloat outTime = _outFrame.floatValue / compLength;
       [keyTimes addObject:@(outTime)];

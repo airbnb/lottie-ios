@@ -52,6 +52,8 @@ typedef enum : NSInteger {
 @property (nonatomic, readonly) LAAnimatablePointValue *anchor;
 @property (nonatomic, readonly) LAAnimatableScaleValue *scale;
 
+@property (nonatomic, readonly) BOOL hasOutAnimation;
+@property (nonatomic, readonly) BOOL hasInAnimation;
 @property (nonatomic, readonly) BOOL hasInOutAnimation;
 @property (nonatomic, readonly) NSArray *inOutKeyframes;
 @property (nonatomic, readonly) NSArray *inOutKeyTimes;

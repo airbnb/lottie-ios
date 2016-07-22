@@ -293,7 +293,7 @@
   self.currentScene = laScene;
   self.currentSceneView = compView;
   [self.view sendSubviewToBack:self.currentSceneView];
-  [compView performSelector:@selector(play) withObject:nil afterDelay:1];
-  [compView performSelector:@selector(pause) withObject:nil afterDelay:2];
+  compView.loopAnimation = YES;
+  [compView play];
 }
 @end

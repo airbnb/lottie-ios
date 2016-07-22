@@ -14,9 +14,7 @@
 - (instancetype)initWithRectShape:(LAShapeRectangle *)rectShape
                          fill:(LAShapeFill *)fill
                        stroke:(LAShapeStroke *)stroke
-                    transform:(LAShapeTransform *)transform;
-
-- (void)startAnimation;
-
+                    transform:(LAShapeTransform *)transform
+                     withDuration:(NSTimeInterval)duration;
 
 @end

@@ -18,8 +18,9 @@
 }
 
 - (instancetype)initWithShapeGroup:(LAShapeGroup *)shapeGroup
-                         transform:(LAShapeTransform *)transform  {
-  self = [super init];
+                         transform:(LAShapeTransform *)transform
+                      withDuration:(NSTimeInterval)duration {
+  self = [super initWithDuration:duration];
   if (self) {
     _shapeGroup = shapeGroup;
     _shapeTransform = transform;
@@ -60,7 +61,8 @@
       LAShapeLayerView *shapeLayer = [[LAShapeLayerView alloc] initWithShape:shapePath
                                                                         fill:currentFill
                                                                       stroke:currentStroke
-                                                                   transform:currentTransform];
+                                                                   transform:currentTransform
+                                                                withDuration:self.laAnimationDuration];
       [shapeLayers addObject:shapeLayer];
       [self addSublayer:shapeLayer];
     } else if ([item isKindOfClass:[LAShapeRectangle class]]) {
@@ -68,13 +70,15 @@
       LARectShapeLayer *shapeLayer = [[LARectShapeLayer alloc] initWithRectShape:shapeRect
                                                                             fill:currentFill
                                                                           stroke:currentStroke
-                                                                       transform:currentTransform];
+                                                                       transform:currentTransform
+                                                                    withDuration:self.laAnimationDuration];
       [shapeLayers addObject:shapeLayer];
       [self addSublayer:shapeLayer];
     } else if ([item isKindOfClass:[LAShapeGroup class]]) {
       LAShapeGroup *shapeGroup = (LAShapeGroup *)item;
       LAGroupLayerView *groupLayer = [[LAGroupLayerView alloc] initWithShapeGroup:shapeGroup
-                                                                        transform:currentTransform];
+                                                                        transform:currentTransform
+                                                                     withDuration:self.laAnimationDuration];
       [groupLayers addObject:groupLayer];
       [self addSublayer:groupLayer];
     }

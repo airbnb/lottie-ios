@@ -13,8 +13,7 @@
 
 @interface LAParentLayer : LAAnimatableLayer
 
-- (instancetype)initWithParentModel:(LALayer *)parent compBounds:(CGRect)bounds;
-- (void)startAnimation;
+- (instancetype)initWithParentModel:(LALayer *)parent inComposition:(LAComposition *)comp;
 
 @end
 
@@ -23,10 +22,10 @@
   CAAnimationGroup *_animation;
 }
 
-- (instancetype)initWithParentModel:(LALayer *)parent compBounds:(CGRect)bounds {
-  self = [super init];
+- (instancetype)initWithParentModel:(LALayer *)parent inComposition:(LAComposition *)comp {
+  self = [super initWithDuration:comp.timeDuration];
   if (self) {
-    self.bounds = bounds;
+    self.bounds = comp.compBounds;
     _parentModel = parent;
     [self _setupLayerFromModel];
   }
@@ -59,19 +58,22 @@
   CAAnimationGroup *_animation;
   CAKeyframeAnimation *_inOutAnimation;
   NSArray<LAParentLayer *> *_parentLayers;
+  LAComposition *_composition;
+
 }
 
 - (instancetype)initWithModel:(LALayer *)model inComposition:(LAComposition *)comp {
-  self = [super init];
+  self = [super initWithDuration:comp.timeDuration];
   if (self) {
     _layerModel = model;
-    [self _setupViewFromModelInComposition:comp];
+    _composition = comp;
+    [self _setupViewFromModel];
   }
   return self;
 }
 
-- (void)_setupViewFromModelInComposition:(LAComposition *)comp {
-  self.bounds = comp.compBounds;
+- (void)_setupViewFromModel {
+  self.bounds = _composition.compBounds;
   self.anchorPoint = CGPointZero;
   _childContainerLayer = [CALayer new];
   self.animationSublayers = @[_childContainerLayer];
@@ -81,8 +83,8 @@
   NSMutableArray *parentLayers = [NSMutableArray array];
   if (parentID) {
     while (parentID != nil) {
-      LALayer *parentModel = [comp layerModelForID:parentID];
-      LAParentLayer *parentLayer = [[LAParentLayer alloc] initWithParentModel:parentModel compBounds:comp.compBounds];
+      LALayer *parentModel = [_composition layerModelForID:parentID];
+      LAParentLayer *parentLayer = [[LAParentLayer alloc] initWithParentModel:parentModel inComposition:_composition];
       [parentLayer addSublayer:currentChild];
       [parentLayers addObject:parentLayer];
       currentChild = parentLayer;
@@ -99,7 +101,7 @@
   _childContainerLayer.anchorPoint = _layerModel.anchor.initialPoint;
   _childContainerLayer.transform = _layerModel.scale.initialScale;
   _childContainerLayer.sublayerTransform = CATransform3DMakeRotation(_layerModel.rotation.initialValue.floatValue, 0, 0, 1);
-  self.hidden = _layerModel.inFrame.integerValue > comp.startFrame.integerValue;
+  self.hidden = _layerModel.hasInAnimation;
   
   NSArray *groupItems = _layerModel.shapes;
   NSArray *reversedItems = [[groupItems reverseObjectEnumerator] allObjects];
@@ -109,7 +111,7 @@
   
   for (id item in reversedItems) {
     if ([item isKindOfClass:[LAShapeGroup class]]) {
-      LAGroupLayerView *groupLayer = [[LAGroupLayerView alloc] initWithShapeGroup:(LAShapeGroup *)item transform:currentTransform];
+      LAGroupLayerView *groupLayer = [[LAGroupLayerView alloc] initWithShapeGroup:(LAShapeGroup *)item transform:currentTransform withDuration:self.laAnimationDuration];
       [_childContainerLayer addSublayer:groupLayer];
       [shapeLayers addObject:groupLayer];
     } else if ([item isKindOfClass:[LAShapeTransform class]]) {
@@ -135,7 +137,6 @@
                                                                                      @"transform" : _layerModel.scale,
                                                                                      @"sublayerTransform.rotation" : _layerModel.rotation}];
   
-
   if (_animation) {
     [_childContainerLayer addAnimation:_animation forKey:@"lotteAnimation"];
   }
@@ -150,12 +151,9 @@
     inOutAnimation.removedOnCompletion = NO;
 
     _inOutAnimation = inOutAnimation;
+    _inOutAnimation.duration = self.laAnimationDuration;
     [self addAnimation:_inOutAnimation forKey:@""];
   }
-}
-
-- (void)_viewtapped {
-  NSLog(@"%@", self.layerModel);
 }
 
 - (void)setDebugModeOn:(BOOL)debugModeOn {

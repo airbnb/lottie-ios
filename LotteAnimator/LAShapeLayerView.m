@@ -26,8 +26,9 @@
 - (instancetype)initWithShape:(LAShapePath *)shape
                          fill:(LAShapeFill *)fill
                        stroke:(LAShapeStroke *)stroke
-                    transform:(LAShapeTransform *)transform {
-  self = [super init];
+                    transform:(LAShapeTransform *)transform
+                 withDuration:(NSTimeInterval)duration {
+  self = [super initWithDuration:duration];
   if (self) {
     _path = shape;
     _stroke = stroke;

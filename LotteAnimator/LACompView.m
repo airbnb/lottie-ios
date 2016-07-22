@@ -43,12 +43,6 @@
 
 - (void)setDebugModeOn:(BOOL)debugModeOn {
   _debugModeOn = debugModeOn;
-  for (LALayerView *child in _layerMap.allValues) {
-    if ([child isKindOfClass:[LALayerView class]]) {
-      [child setDebugModeOn:debugModeOn];
-      child.opacity = debugModeOn ? 0.5 : 1;
-    }
-  }
 }
 
 - (void)play {
@@ -66,10 +60,24 @@
 }
 
 - (void)setAnimationProgress:(CGFloat)animationProgress {
+  _animationProgress = animationProgress;
   for (LALayerView *layerView in _layerMap.allValues) {
     [layerView setAnimationProgress:animationProgress];
   }
 }
 
+- (void)setLoopAnimation:(BOOL)loopAnimation {
+  _loopAnimation = loopAnimation;
+  for (LALayerView *layerView in _layerMap.allValues) {
+    [layerView setLoopAnimation:loopAnimation];
+  }
+}
+
+- (void)setAutoReverseAnimation:(BOOL)autoReverseAnimation {
+  _autoReverseAnimation = autoReverseAnimation;
+  for (LALayerView *layerView in _layerMap.allValues) {
+    [layerView setAutoReverseAnimation:autoReverseAnimation];
+  }
+}
 
 @end
