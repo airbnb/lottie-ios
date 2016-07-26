@@ -14,7 +14,6 @@
 @class LAAnimatableColorValue;
 @class LAAnimatablePointValue;
 @class LAAnimatableNumberValue;
-@class LAAnimatableRectValue;
 @class LAAnimatableScaleValue;
 @class LAComposition;
 
@@ -25,6 +24,13 @@ typedef enum : NSInteger {
   LALayerTypeNull,
   LALayerTypeShape
 } LALayerType;
+
+typedef enum : NSInteger {
+  LAMatteTypeNone,
+  LAMatteTypeAdd,
+  LAMatteTypeInvert,
+  LALayerTypeUknown
+} LAMatteType;
 
 @interface LALayer : NSObject
 
@@ -42,8 +48,9 @@ typedef enum : NSInteger {
 @property (nonatomic, readonly) NSArray<LAShapeGroup *> *shapes;
 @property (nonatomic, readonly) NSArray<LAMask *> *masks;
 
-@property (nonatomic, readonly) LAAnimatableRectValue *solidBounds;
-@property (nonatomic, readonly) LAAnimatableColorValue *solidColor;
+@property (nonatomic, readonly) NSNumber *solidWidth;
+@property (nonatomic, readonly) NSNumber *solidHeight;
+@property (nonatomic, readonly) UIColor *solidColor;
 
 @property (nonatomic, readonly) LAAnimatableNumberValue *opacity;
 @property (nonatomic, readonly) LAAnimatableNumberValue *rotation;
@@ -58,5 +65,7 @@ typedef enum : NSInteger {
 @property (nonatomic, readonly) NSArray *inOutKeyframes;
 @property (nonatomic, readonly) NSArray *inOutKeyTimes;
 @property (nonatomic, readonly) NSTimeInterval compDuration;
+
+@property (nonatomic, readonly) LAMatteType matteType;
 
 @end

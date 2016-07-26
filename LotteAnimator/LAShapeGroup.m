@@ -13,6 +13,7 @@
 #import "LAShapeStroke.h"
 #import "LAShapeTransform.h"
 #import "LAShapeRectangle.h"
+#import "LAShapeTrimPath.h"
 
 @implementation LAShapeGroup
 
@@ -51,6 +52,9 @@
     } else if ([type isEqualToString:@"rc"]) {
       LAShapeRectangle *rectangle = [[LAShapeRectangle alloc] initWithJSON:itemJSON frameRate:frameRate];
       [items addObject:rectangle];
+    } else if ([type isEqualToString:@"tm"]) {
+      LAShapeTrimPath *trim = [[LAShapeTrimPath alloc] initWithJSON:itemJSON frameRate:frameRate];
+      [items addObject:trim];
     }
   }
   _items = items;

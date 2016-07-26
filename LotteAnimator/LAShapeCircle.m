@@ -19,7 +19,16 @@
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+  NSDictionary *position = jsonDictionary[@"p"];
+  if (position) {
+    _position = [[LAAnimatablePointValue alloc] initWithPointValues:position frameRate:frameRate];
+    _position.usePathAnimation = NO;
+  }
   
+  NSDictionary *scale = jsonDictionary[@"s"];
+  if (scale) {
+    _scale = [[LAAnimatableScaleValue alloc] initWithScaleValues:scale frameRate:frameRate];
+  }
 }
 
 @end

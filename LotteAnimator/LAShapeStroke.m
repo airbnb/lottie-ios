@@ -39,6 +39,20 @@
   
   NSNumber *fillEnabled = jsonDictionary[@"fillEnabled"];
   _fillEnabled = fillEnabled.boolValue;
+  
+  NSArray *dashes = jsonDictionary[@"d"];
+  if (dashes) {
+    NSMutableArray *dashPattern = [NSMutableArray array];
+    for (NSDictionary *dash in dashes) {
+      if ([dash[@"n"] isEqualToString:@"o"]) {
+        continue;
+      }
+      NSDictionary *value = dash[@"v"];
+      LAAnimatableNumberValue *numberValue = [[LAAnimatableNumberValue alloc] initWithNumberValues:value frameRate:frameRate];
+      [dashPattern addObject:[numberValue.initialValue copy]];
+    }
+    _lineDashPattern = dashPattern;
+  }
 }
 
 @end

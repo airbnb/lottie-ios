@@ -9,6 +9,8 @@
 #import "LAGroupLayerView.h"
 #import "LAShapeLayerView.h"
 #import "LARectShapeLayer.h"
+#import "LAEllipseShapeLayer.h"
+
 #import "CAAnimationGroup+LAAnimatableGroup.h"
 
 @implementation LAGroupLayerView {
@@ -45,6 +47,7 @@
   LAShapeFill *currentFill;
   LAShapeStroke *currentStroke;
   LAShapeTransform *currentTransform;
+  LAShapeTrimPath *currentTrim;
   
   NSMutableArray *shapeLayers = [NSMutableArray array];
   NSMutableArray *groupLayers = [NSMutableArray array];
@@ -56,11 +59,14 @@
       currentStroke = item;
     } else if ([item isKindOfClass:[LAShapeFill class]]) {
       currentFill = item;
+    } else if ([item isKindOfClass:[LAShapeTrimPath class]]) {
+      currentTrim = item;
     } else if ([item isKindOfClass:[LAShapePath class]]) {
       LAShapePath *shapePath = (LAShapePath *)item;
       LAShapeLayerView *shapeLayer = [[LAShapeLayerView alloc] initWithShape:shapePath
                                                                         fill:currentFill
                                                                       stroke:currentStroke
+                                                                        trim:currentTrim
                                                                    transform:currentTransform
                                                                 withDuration:self.laAnimationDuration];
       [shapeLayers addObject:shapeLayer];
@@ -72,6 +78,16 @@
                                                                           stroke:currentStroke
                                                                        transform:currentTransform
                                                                     withDuration:self.laAnimationDuration];
+      [shapeLayers addObject:shapeLayer];
+      [self addSublayer:shapeLayer];
+    }  else if ([item isKindOfClass:[LAShapeCircle class]]) {
+      LAShapeCircle *shapeCircle = (LAShapeCircle *)item;
+      LAEllipseShapeLayer *shapeLayer = [[LAEllipseShapeLayer alloc] initWithEllipseShape:shapeCircle
+                                                                                     fill:currentFill
+                                                                                   stroke:currentStroke
+                                                                                     trim:currentTrim
+                                                                                transform:currentTransform
+                                                                             withDuration:self.laAnimationDuration];
       [shapeLayers addObject:shapeLayer];
       [self addSublayer:shapeLayer];
     } else if ([item isKindOfClass:[LAShapeGroup class]]) {

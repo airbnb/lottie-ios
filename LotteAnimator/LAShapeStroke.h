@@ -19,5 +19,6 @@
 @property (nonatomic, readonly) LAAnimatableColorValue *color;
 @property (nonatomic, readonly) LAAnimatableNumberValue *opacity;
 @property (nonatomic, readonly) LAAnimatableNumberValue *width;
+@property (nonatomic, readonly) NSArray *lineDashPattern;
 
 @end

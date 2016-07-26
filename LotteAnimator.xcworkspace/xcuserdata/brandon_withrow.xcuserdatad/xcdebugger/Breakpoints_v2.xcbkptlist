@@ -67,13 +67,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LotteAnimator/LAShapeCircle.m"
-            timestampString = "490729764.635343"
+            filePath = "LotteAnimator/LAMaskLayer.m"
+            timestampString = "491264085.840767"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "-initWithJSON:frameRate:"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "-renderInContext:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -83,13 +83,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LotteAnimator/LAAnimatableScaleValue.m"
-            timestampString = "490740783.490737"
+            filePath = "LotteAnimator/LAMaskLayer.m"
+            timestampString = "491264087.213296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "-_buildAnimationForKeyframes:"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "-drawInContext:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -100,60 +100,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LotteAnimator/LAAnimatableLayer.m"
-            timestampString = "490920717.958644"
+            timestampString = "491266116.833188"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
             endingLineNumber = "56"
             landmarkName = "-setAnimationProgress:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LotteAnimator/LALayerView.m"
-            timestampString = "490921111.145475"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "-_setupViewFromModel"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LotteAnimator/CAAnimationGroup+LAAnimatableGroup.m"
-            timestampString = "490920346.033008"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "+animationGroupForAnimatablePropertiesWithKeyPaths:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LotteAnimator/CAAnimationGroup+LAAnimatableGroup.m"
-            timestampString = "490920366.856974"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "+animationGroupForAnimatablePropertiesWithKeyPaths:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

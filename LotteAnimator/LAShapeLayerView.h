@@ -14,9 +14,8 @@
 - (instancetype)initWithShape:(LAShapePath *)shape
                          fill:(LAShapeFill *)fill
                        stroke:(LAShapeStroke *)stroke
+                         trim:(LAShapeTrimPath *)trim
                     transform:(LAShapeTransform *)transform
                  withDuration:(NSTimeInterval)duration;
-
-- (void)startAnimation;
 
 @end

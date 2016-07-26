@@ -43,24 +43,30 @@
     self.transform = _transform.scale.initialScale;
     self.sublayerTransform = CATransform3DMakeRotation(_transform.rotation.initialValue.floatValue, 0, 0, 1);
     
-    _fillLayer = [CALayer layer];
-    _fillLayer.allowsEdgeAntialiasing = YES;
-    _fillLayer.bounds = rectShape.bounds.initialBounds;
-    _fillLayer.position = rectShape.position.initialPoint;
-    _fillLayer.cornerRadius = rectShape.cornerRadius.initialValue.floatValue;
-    _fillLayer.backgroundColor = _fill.color.initialColor.CGColor;
-    _fillLayer.opacity = _fill.opacity.initialValue.floatValue;
-    [self addSublayer:_fillLayer];
+    if (fill) {
+      _fillLayer = [CALayer layer];
+      _fillLayer.allowsEdgeAntialiasing = YES;
+      _fillLayer.bounds = rectShape.bounds.initialBounds;
+      _fillLayer.position = rectShape.position.initialPoint;
+      _fillLayer.cornerRadius = rectShape.cornerRadius.initialValue.floatValue;
+      _fillLayer.backgroundColor = _fill.color.initialColor.CGColor;
+      _fillLayer.opacity = _fill.opacity.initialValue.floatValue;
+      [self addSublayer:_fillLayer];
+    }
     
-    _strokeLayer = [CALayer layer];
-    _strokeLayer.allowsEdgeAntialiasing = YES;
-    _strokeLayer.bounds = rectShape.bounds.initialBounds;
-    _strokeLayer.position = rectShape.position.initialPoint;
-    _strokeLayer.cornerRadius = rectShape.cornerRadius.initialValue.floatValue;
-    _strokeLayer.borderColor = _stroke.color.initialColor.CGColor;
-    _strokeLayer.opacity = _stroke.opacity.initialValue.floatValue;
-    _strokeLayer.borderWidth = _stroke.width.initialValue.floatValue;
-    _strokeLayer.backgroundColor = nil;
+    if (stroke) {
+      _strokeLayer = [CALayer layer];
+      _strokeLayer.allowsEdgeAntialiasing = YES;
+      _strokeLayer.bounds = rectShape.bounds.initialBounds;
+      _strokeLayer.position = rectShape.position.initialPoint;
+      _strokeLayer.cornerRadius = rectShape.cornerRadius.initialValue.floatValue;
+      _strokeLayer.borderColor = _stroke.color.initialColor.CGColor;
+      _strokeLayer.opacity = _stroke.opacity.initialValue.floatValue;
+      _strokeLayer.borderWidth = _stroke.width.initialValue.floatValue;
+      _strokeLayer.backgroundColor = nil;
+    }
+    self.animationSublayers = [NSArray arrayWithArray:self.sublayers];
+    
     [self addSublayer:_strokeLayer];
     [self _buildAnimation];
     [self pause];

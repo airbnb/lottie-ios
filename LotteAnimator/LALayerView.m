@@ -10,6 +10,7 @@
 #import "LAShapeLayerView.h"
 #import "LAGroupLayerView.h"
 #import "CAAnimationGroup+LAAnimatableGroup.h"
+#import "LAMaskLayer.h"
 
 @interface LAParentLayer : LAAnimatableLayer
 
@@ -59,7 +60,7 @@
   CAKeyframeAnimation *_inOutAnimation;
   NSArray<LAParentLayer *> *_parentLayers;
   LAComposition *_composition;
-
+  LAMaskLayer *_maskLayer;
 }
 
 - (instancetype)initWithModel:(LALayer *)model inComposition:(LAComposition *)comp {
@@ -73,9 +74,18 @@
 }
 
 - (void)_setupViewFromModel {
-  self.bounds = _composition.compBounds;
+  self.backgroundColor = nil;
+  if (_layerModel.layerType == LALayerTypeSolid) {
+    self.bounds = CGRectMake(0, 0, _layerModel.solidWidth.floatValue, _layerModel.solidHeight.floatValue);
+  } else {
+    self.bounds = _composition.compBounds;
+  }
+  
   self.anchorPoint = CGPointZero;
+  
   _childContainerLayer = [CALayer new];
+  _childContainerLayer.bounds = self.bounds;
+  _childContainerLayer.backgroundColor = _layerModel.solidColor.CGColor;
   self.animationSublayers = @[_childContainerLayer];
   
   NSNumber *parentID = _layerModel.parentID;
@@ -121,9 +131,29 @@
   
   _shapeLayers = shapeLayers;
   
+//  CALayer *anchorLayer = [CALayer new];
+//  anchorLayer.bounds = CGRectMake(0, 0, 20, 20);
+//  anchorLayer.backgroundColor = [UIColor redColor].CGColor;
+//  anchorLayer.anchorPoint = CGPointMake(0.5, 0.5);
+//  anchorLayer.position = CGPointZero;
+//  anchorLayer.opacity = 0.25;
+//  _childContainerLayer.borderWidth = 6;
+//  _childContainerLayer.backgroundColor = [UIColor greenColor].CGColor;
+//  _childContainerLayer.borderColor = [UIColor redColor].CGColor;
+//  [_childContainerLayer addSublayer:anchorLayer];
+  
+  if (_layerModel.masks) {
+    _maskLayer = [[LAMaskLayer alloc] initWithMasks:_layerModel.masks inComposition:_composition];
+    _maskLayer.opacity = 0.5;
+    [_childContainerLayer addSublayer:_maskLayer];
+  }
+  
   NSMutableArray *childLayers = [NSMutableArray array];
   [childLayers addObjectsFromArray:_parentLayers];
   [childLayers addObjectsFromArray:_shapeLayers];
+  if (_maskLayer) {
+    [childLayers addObject:_maskLayer];
+  }
   self.childLayers = childLayers;
   
   [self _buildAnimations];

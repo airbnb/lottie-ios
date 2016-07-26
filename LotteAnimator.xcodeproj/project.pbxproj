@@ -35,7 +35,6 @@
 		620A565F1D1C81750030EBFB /* LAAnimatablePointValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A565E1D1C81750030EBFB /* LAAnimatablePointValue.m */; };
 		620A56621D1C81850030EBFB /* LAAnimatableNumberValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A56611D1C81850030EBFB /* LAAnimatableNumberValue.m */; };
 		620A56651D1C81930030EBFB /* LAAnimatableShapeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620A56641D1C81930030EBFB /* LAAnimatableShapeValue.m */; };
-		620CD7CD1D3415F000055AD1 /* LAAnimatableRectValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620CD7CC1D3415F000055AD1 /* LAAnimatableRectValue.m */; };
 		620CD7D01D343A2500055AD1 /* LAAnimatableScaleValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 620CD7CF1D343A2500055AD1 /* LAAnimatableScaleValue.m */; };
 		620CD7E51D38180800055AD1 /* LAGroupLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 620CD7E41D38180800055AD1 /* LAGroupLayerView.m */; };
 		62FE408D1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FE408C1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.m */; };
@@ -90,6 +89,11 @@
 		62FE41C21D46886600CA389D /* goftldalt.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE41BE1D46886600CA389D /* goftldalt.json */; };
 		62FE41C31D46886600CA389D /* govtid.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE41BF1D46886600CA389D /* govtid.json */; };
 		62FE41C41D46886600CA389D /* selfie.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE41C01D46886600CA389D /* selfie.json */; };
+		62FE41C61D46D5C900CA389D /* masktest.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE41C51D46D5C900CA389D /* masktest.json */; };
+		62FE41C81D47D92E00CA389D /* masksAndSolids.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE41C71D47D92E00CA389D /* masksAndSolids.json */; };
+		62FE41CB1D48004A00CA389D /* LAEllipseShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FE41CA1D48004A00CA389D /* LAEllipseShapeLayer.m */; };
+		62FE41CD1D4804E400CA389D /* circleTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 62FE41CC1D4804E400CA389D /* circleTest.json */; };
+		62FE41D31D4829E100CA389D /* LAShapeTrimPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FE41D21D4829E100CA389D /* LAShapeTrimPath.m */; };
 		F5B4E946F7B28B4594824641 /* libPods-LotteAnimator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */; };
 /* End PBXBuildFile section */
 
@@ -150,8 +154,6 @@
 		620A56611D1C81850030EBFB /* LAAnimatableNumberValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableNumberValue.m; sourceTree = "<group>"; };
 		620A56631D1C81930030EBFB /* LAAnimatableShapeValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableShapeValue.h; sourceTree = "<group>"; };
 		620A56641D1C81930030EBFB /* LAAnimatableShapeValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableShapeValue.m; sourceTree = "<group>"; };
-		620CD7CB1D3415F000055AD1 /* LAAnimatableRectValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableRectValue.h; sourceTree = "<group>"; };
-		620CD7CC1D3415F000055AD1 /* LAAnimatableRectValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableRectValue.m; sourceTree = "<group>"; };
 		620CD7CE1D343A2500055AD1 /* LAAnimatableScaleValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatableScaleValue.h; sourceTree = "<group>"; };
 		620CD7CF1D343A2500055AD1 /* LAAnimatableScaleValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableScaleValue.m; sourceTree = "<group>"; };
 		620CD7E31D38180800055AD1 /* LAGroupLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAGroupLayerView.h; sourceTree = "<group>"; };
@@ -214,6 +216,13 @@
 		62FE41BE1D46886600CA389D /* goftldalt.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = goftldalt.json; sourceTree = "<group>"; };
 		62FE41BF1D46886600CA389D /* govtid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = govtid.json; sourceTree = "<group>"; };
 		62FE41C01D46886600CA389D /* selfie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = selfie.json; sourceTree = "<group>"; };
+		62FE41C51D46D5C900CA389D /* masktest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = masktest.json; sourceTree = "<group>"; };
+		62FE41C71D47D92E00CA389D /* masksAndSolids.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = masksAndSolids.json; sourceTree = "<group>"; };
+		62FE41C91D48004A00CA389D /* LAEllipseShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAEllipseShapeLayer.h; sourceTree = "<group>"; };
+		62FE41CA1D48004A00CA389D /* LAEllipseShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAEllipseShapeLayer.m; sourceTree = "<group>"; };
+		62FE41CC1D4804E400CA389D /* circleTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = circleTest.json; sourceTree = "<group>"; };
+		62FE41D11D4829E100CA389D /* LAShapeTrimPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeTrimPath.h; sourceTree = "<group>"; };
+		62FE41D21D4829E100CA389D /* LAShapeTrimPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeTrimPath.m; sourceTree = "<group>"; };
 		AEE1A33E4CE2F6024DE7793E /* Pods-LotteAnimator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LotteAnimator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LotteAnimator/Pods-LotteAnimator.debug.xcconfig"; sourceTree = "<group>"; };
 		BC68632413866F85CEACB7EA /* libPods-LotteAnimator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LotteAnimator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -277,6 +286,8 @@
 				486BE04D1D36F1BE00CD14A0 /* LAShapeLayerView.m */,
 				62FE40E61D3FFBB400CA389D /* LARectShapeLayer.h */,
 				62FE40E71D3FFBB400CA389D /* LARectShapeLayer.m */,
+				62FE41C91D48004A00CA389D /* LAEllipseShapeLayer.h */,
+				62FE41CA1D48004A00CA389D /* LAEllipseShapeLayer.m */,
 				4804B2FD1C1F55E600DA8AF7 /* ViewController.h */,
 				4804B2FE1C1F55E600DA8AF7 /* ViewController.m */,
 				48372A621C20A91C00AD0293 /* LAJSONExplorerViewController.h */,
@@ -315,6 +326,8 @@
 				48372A4E1C1F99C600AD0293 /* LAShapeGroup.m */,
 				48372A561C209A6C00AD0293 /* LAShapeStroke.h */,
 				48372A571C209A6C00AD0293 /* LAShapeStroke.m */,
+				62FE41D11D4829E100CA389D /* LAShapeTrimPath.h */,
+				62FE41D21D4829E100CA389D /* LAShapeTrimPath.m */,
 				48372A591C209A7A00AD0293 /* LAShapeFill.h */,
 				48372A5A1C209A7A00AD0293 /* LAShapeFill.m */,
 				48372A5C1C209A8900AD0293 /* LAShapeTransform.h */,
@@ -345,6 +358,9 @@
 		48372A651C20B04300AD0293 /* JSONExamples */ = {
 			isa = PBXGroup;
 			children = (
+				62FE41CC1D4804E400CA389D /* circleTest.json */,
+				62FE41C71D47D92E00CA389D /* masksAndSolids.json */,
+				62FE41C51D46D5C900CA389D /* masktest.json */,
 				62FE41BD1D46886600CA389D /* allset.json */,
 				62FE41BE1D46886600CA389D /* goftldalt.json */,
 				62FE41BF1D46886600CA389D /* govtid.json */,
@@ -413,8 +429,6 @@
 				62FE40E41D3FF78800CA389D /* LAAnimatableBoundsValue.m */,
 				620CD7CE1D343A2500055AD1 /* LAAnimatableScaleValue.h */,
 				620CD7CF1D343A2500055AD1 /* LAAnimatableScaleValue.m */,
-				620CD7CB1D3415F000055AD1 /* LAAnimatableRectValue.h */,
-				620CD7CC1D3415F000055AD1 /* LAAnimatableRectValue.m */,
 				62FE408B1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.h */,
 				62FE408C1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.m */,
 			);
@@ -505,6 +519,7 @@
 				4804B3041C1F55E600DA8AF7 /* Assets.xcassets in Resources */,
 				62FE40D11D3EDC7400CA389D /* 062_AnimateTransformParented.json in Resources */,
 				62FE40D71D3EDC7400CA389D /* 100_House_AnimateInAndOut.json in Resources */,
+				62FE41CD1D4804E400CA389D /* circleTest.json in Resources */,
 				62FE40D41D3EDC7400CA389D /* 071_AnimatePathShape.json in Resources */,
 				62FE40CE1D3EDC7400CA389D /* 058_AnimateTransformPositionHoldKeyframe.json in Resources */,
 				62FE40CC1D3EDC7400CA389D /* 056_AnimateTransformPositionCustomEaseIn.json in Resources */,
@@ -522,6 +537,7 @@
 				62FE40CA1D3EDC7400CA389D /* 054_AnimateTransformPositionEaseOut.json in Resources */,
 				62FE40B51D3EDC7400CA389D /* 002_ShapeLayerLine_01.json in Resources */,
 				62FE40DD1D3FF0D900CA389D /* Heart58OnOff.json in Resources */,
+				62FE41C81D47D92E00CA389D /* masksAndSolids.json in Resources */,
 				62FE40B81D3EDC7400CA389D /* 005_TwoShapeLayerSquaresDifferent_01.json in Resources */,
 				62FE40C01D3EDC7400CA389D /* 013_ShapeMasked_01.json in Resources */,
 				486BE04B1D36E06C00CD14A0 /* newMoovin.json in Resources */,
@@ -539,6 +555,7 @@
 				62FE40EA1D401C0700CA389D /* scaleTest.json in Resources */,
 				62FE40BE1D3EDC7400CA389D /* 011_MergePaths_01.json in Resources */,
 				62FE40BC1D3EDC7400CA389D /* 009_ShapeLayerRepeater_01.json in Resources */,
+				62FE41C61D46D5C900CA389D /* masktest.json in Resources */,
 				62FE40C21D3EDC7400CA389D /* 015_DottedLine_01.json in Resources */,
 				62FE40CD1D3EDC7400CA389D /* 057_AnimateTransformPositionCustomEaseInout.json in Resources */,
 			);
@@ -602,9 +619,11 @@
 				4804B31E1C1F757600DA8AF7 /* UIColor+Expanded.m in Sources */,
 				4804B2FF1C1F55E600DA8AF7 /* ViewController.m in Sources */,
 				48372A641C20A91C00AD0293 /* LAJSONExplorerViewController.m in Sources */,
+				62FE41D31D4829E100CA389D /* LAShapeTrimPath.m in Sources */,
 				62FE41431D41862200CA389D /* LAAnimatableLayer.m in Sources */,
 				620A56651D1C81930030EBFB /* LAAnimatableShapeValue.m in Sources */,
 				4804B3191C1F6DEA00DA8AF7 /* LAComposition.m in Sources */,
+				62FE41CB1D48004A00CA389D /* LAEllipseShapeLayer.m in Sources */,
 				4804B2FC1C1F55E600DA8AF7 /* AppDelegate.m in Sources */,
 				4804B3211C1F761800DA8AF7 /* BWMath.m in Sources */,
 				62FE40E51D3FF78800CA389D /* LAAnimatableBoundsValue.m in Sources */,
@@ -626,7 +645,6 @@
 				48372A551C209A5F00AD0293 /* LAShapePath.m in Sources */,
 				620CD7E51D38180800055AD1 /* LAGroupLayerView.m in Sources */,
 				48372AB71C20D97200AD0293 /* LAShapeCircle.m in Sources */,
-				620CD7CD1D3415F000055AD1 /* LAAnimatableRectValue.m in Sources */,
 				620A565C1D1C81610030EBFB /* LAAnimatableColorValue.m in Sources */,
 				48372A5E1C209A8900AD0293 /* LAShapeTransform.m in Sources */,
 				62FE41BC1D42DD8500CA389D /* LAMaskLayer.m in Sources */,

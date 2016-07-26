@@ -12,9 +12,9 @@
 @interface LARectShapeLayer : LAAnimatableLayer
 
 - (instancetype)initWithRectShape:(LAShapeRectangle *)rectShape
-                         fill:(LAShapeFill *)fill
-                       stroke:(LAShapeStroke *)stroke
-                    transform:(LAShapeTransform *)transform
+                             fill:(LAShapeFill *)fill
+                           stroke:(LAShapeStroke *)stroke
+                        transform:(LAShapeTransform *)transform
                      withDuration:(NSTimeInterval)duration;
 
 @end

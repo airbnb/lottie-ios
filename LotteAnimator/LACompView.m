@@ -28,11 +28,20 @@
   NSMutableDictionary *layerMap = [NSMutableDictionary dictionary];
   
   NSArray *reversedItems = [[_sceneModel.layers reverseObjectEnumerator] allObjects];
-
+  
+  LALayerView *maskedLayer = nil;
   for (LALayer *layer in reversedItems) {
     LALayerView *layerView = [[LALayerView alloc] initWithModel:layer inComposition:_sceneModel];
     layerMap[layer.layerID] = layerView;
-    [self.layer addSublayer:layerView];
+    if (maskedLayer) {
+      maskedLayer.mask = layerView;
+      maskedLayer = nil;
+    } else {
+      if (layer.matteType == LAMatteTypeAdd) {
+        maskedLayer = layerView;
+      }
+      [self.layer addSublayer:layerView];
+    }
   }
   _layerMap = layerMap;
 }

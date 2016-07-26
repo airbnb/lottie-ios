@@ -1,19 +1,19 @@
 //
-//  LAShapeLayerView.m
+//  LAEllipseShapeLayer.m
 //  LotteAnimator
 //
-//  Created by Brandon Withrow on 7/13/16.
+//  Created by brandon_withrow on 7/26/16.
 //  Copyright © 2016 Brandon Withrow. All rights reserved.
 //
 
-#import "LAShapeLayerView.h"
+#import "LAEllipseShapeLayer.h"
 #import "CAAnimationGroup+LAAnimatableGroup.h"
 
-@implementation LAShapeLayerView {
+@implementation LAEllipseShapeLayer {
   LAShapeTransform *_transform;
   LAShapeStroke *_stroke;
   LAShapeFill *_fill;
-  LAShapePath *_path;
+  LAShapeCircle *_circle;
   LAShapeTrimPath *_trim;
   
   CAShapeLayer *_fillLayer;
@@ -24,15 +24,15 @@
   CAAnimationGroup *_fillAnimation;
 }
 
-- (instancetype)initWithShape:(LAShapePath *)shape
-                         fill:(LAShapeFill *)fill
-                       stroke:(LAShapeStroke *)stroke
-                         trim:(LAShapeTrimPath *)trim
-                    transform:(LAShapeTransform *)transform
-                 withDuration:(NSTimeInterval)duration {
+- (instancetype)initWithEllipseShape:(LAShapeCircle *)circleShape
+                                fill:(LAShapeFill *)fill
+                              stroke:(LAShapeStroke *)stroke
+                                trim:(LAShapeTrimPath *)trim
+                           transform:(LAShapeTransform *)transform
+                        withDuration:(NSTimeInterval)duration {
   self = [super initWithDuration:duration];
   if (self) {
-    _path = shape;
+    _circle = circleShape;
     _stroke = stroke;
     _fill = fill;
     _transform = transform;
@@ -47,43 +47,40 @@
     self.sublayerTransform = CATransform3DMakeRotation(_transform.rotation.initialValue.floatValue, 0, 0, 1);
     
     if (fill) {
-      _fillLayer = [CAShapeLayer layer];
+      _fillLayer = [CAShapeLayer new];
+      _fillLayer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(-50, -50, 100, 100)].CGPath;
       _fillLayer.allowsEdgeAntialiasing = YES;
-      _fillLayer.path = _path.shapePath.initialShape.CGPath;
+      _fillLayer.position = circleShape.position.initialPoint;
+      _fillLayer.transform = circleShape.scale.initialScale;
       _fillLayer.fillColor = _fill.color.initialColor.CGColor;
       _fillLayer.opacity = _fill.opacity.initialValue.floatValue;
       [self addSublayer:_fillLayer];
     }
     
     if (stroke) {
-      _strokeLayer = [CAShapeLayer layer];
+      _strokeLayer = [CAShapeLayer new];
+      _strokeLayer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(-50, -50, 100, 100)].CGPath;
       _strokeLayer.allowsEdgeAntialiasing = YES;
-      _strokeLayer.path = _path.shapePath.initialShape.CGPath;
+      _strokeLayer.position = circleShape.position.initialPoint;
+      _strokeLayer.transform = circleShape.scale.initialScale;
       _strokeLayer.strokeColor = _stroke.color.initialColor.CGColor;
       _strokeLayer.opacity = _stroke.opacity.initialValue.floatValue;
       _strokeLayer.lineWidth = _stroke.width.initialValue.floatValue;
+      _strokeLayer.fillColor = nil;
+      _strokeLayer.backgroundColor = nil;
       _strokeLayer.lineDashPattern = _stroke.lineDashPattern;
       if (trim) {
         _strokeLayer.strokeStart = _trim.start.initialValue.floatValue;
         _strokeLayer.strokeEnd = _trim.end.initialValue.floatValue;
       }
-      _strokeLayer.fillColor = nil;
+      [self addSublayer:_strokeLayer];
     }
-    
     self.animationSublayers = [NSArray arrayWithArray:self.sublayers];
-    [self addSublayer:_strokeLayer];
+    
     [self _buildAnimation];
     [self pause];
-    
-//    CALayer *anchorLayer = [CALayer new];
-//    anchorLayer.bounds = CGRectMake(0, 0, 10, 10);
-//    anchorLayer.backgroundColor = [UIColor blueColor].CGColor;
-//    anchorLayer.anchorPoint = CGPointMake(0.5, 0.5);
-//    anchorLayer.position = CGPointZero;
-//    self.borderColor = [UIColor blueColor].CGColor;
-//    self.borderWidth = 2;
-//    [self addSublayer:anchorLayer];
   }
+  
   return self;
 }
 
@@ -101,19 +98,22 @@
     NSMutableDictionary *properties = [NSMutableDictionary dictionaryWithDictionary:@{@"strokeColor" : _stroke.color,
                                                                                       @"opacity" : _stroke.opacity,
                                                                                       @"lineWidth" : _stroke.width,
-                                                                                      @"path" : _path.shapePath}];
+                                                                                      @"position" : _circle.position,
+                                                                                      @"transform" : _circle.scale}];
     if (_trim) {
       properties[@"strokeStart"] = _trim.start;
       properties[@"strokeEnd"] = _trim.end;
     }
     _strokeAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:properties];
     [_strokeLayer addAnimation:_strokeAnimation forKey:@""];
+    
   }
   
   if (_fill) {
-    _fillAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"fillColor" : _fill.color,
+    _fillAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"backgroundColor" : _fill.color,
                                                                                            @"opacity" : _fill.opacity,
-                                                                                           @"path" : _path.shapePath}];
+                                                                                           @"position" : _circle.position,
+                                                                                           @"transform" : _circle.scale}];
     [_fillLayer addAnimation:_fillAnimation forKey:@""];
   }
 }

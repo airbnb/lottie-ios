@@ -42,8 +42,10 @@
   _outFrame = [jsonDictionary[@"op"] copy];
   
   if (_layerType == LALayerTypeSolid) {
-    // TODO Solids.
-    
+    _solidWidth = jsonDictionary[@"sw"];
+    _solidHeight = jsonDictionary[@"sh"];
+    NSString *solidColor = jsonDictionary[@"sc"];
+    _solidColor = [UIColor colorWithHexString:solidColor];
   }
   NSDictionary *ks = jsonDictionary[@"ks"];
   
@@ -77,6 +79,9 @@
   if (scale) {
     _scale = [[LAAnimatableScaleValue alloc] initWithScaleValues:scale frameRate:_framerate];
   }
+  
+  _matteType = [jsonDictionary[@"tt"] integerValue];
+  
   
   NSMutableArray *masks = [NSMutableArray array];
   for (NSDictionary *maskJSON in jsonDictionary[@"masksProperties"]) {
