@@ -144,8 +144,7 @@
   
   if (_layerModel.masks) {
     _maskLayer = [[LAMaskLayer alloc] initWithMasks:_layerModel.masks inComposition:_composition];
-    _maskLayer.opacity = 0.5;
-    [_childContainerLayer addSublayer:_maskLayer];
+    _childContainerLayer.mask = _maskLayer;
   }
   
   NSMutableArray *childLayers = [NSMutableArray array];

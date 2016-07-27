@@ -88,7 +88,7 @@
     LAMask *mask = [[LAMask alloc] initWithJSON:maskJSON frameRate:_framerate];
     [masks addObject:mask];
   }
-  _masks = masks;
+  _masks = masks.count ? masks : nil;
   
   NSMutableArray *shapes = [NSMutableArray array];
   for (NSDictionary *shapeJSON in jsonDictionary[@"shapes"]) {

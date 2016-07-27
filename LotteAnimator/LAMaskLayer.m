@@ -46,12 +46,4 @@
   [self pause];
 }
 
-- (void)drawInContext:(CGContextRef)ctx {
-  
-}
-
--(void)renderInContext:(CGContextRef)ctx {
-  
-}
-
 @end
