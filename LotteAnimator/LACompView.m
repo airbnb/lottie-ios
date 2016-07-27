@@ -7,19 +7,43 @@
 //
 
 #import "LACompView.h"
+#import "LAModels.h"
+
+@interface LACompView ()
+
+@property (nonatomic, readonly) LAComposition *sceneModel;
+
+@end
 
 @implementation LACompView {
   NSDictionary *_layerMap;
+  CALayer *_animationContainer;
+}
+
++ (instancetype)animationNamed:(NSString *)animationName {
+  NSError *error;
+  NSString *filePath = [[NSBundle mainBundle] pathForResource:animationName ofType:@"json"];
+  NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
+  NSDictionary  *JSONObject = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                              options:0 error:&error];
+  return [LACompView animationFromJSON:JSONObject];
+}
+
++ (instancetype)animationFromJSON:(NSDictionary *)animationJSON {
+  LAComposition *laScene = [[LAComposition alloc] initWithJSON:animationJSON];
+  return [[LACompView alloc] initWithModel:laScene];
 }
 
 - (instancetype)initWithModel:(LAComposition *)model {
   self = [super initWithFrame:model.compBounds];
   if (self) {
     _sceneModel = model;
+    _animationContainer = [CALayer new];
+    _animationContainer.frame = self.bounds;
+    [self.layer addSublayer:_animationContainer];
     [self _buildSubviewsFromModel];
     self.backgroundColor = [UIColor blackColor];
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_viewtapped)];
-    [self addGestureRecognizer:tapGesture];
+    self.clipsToBounds = YES;
   }
   return self;
 }
@@ -40,26 +64,27 @@
       if (layer.matteType == LAMatteTypeAdd) {
         maskedLayer = layerView;
       }
-      [self.layer addSublayer:layerView];
+      [_animationContainer addSublayer:layerView];
     }
   }
   _layerMap = layerMap;
 }
 
-- (void)_viewtapped {
-  self.debugModeOn = !self.debugModeOn;
-}
-
-- (void)setDebugModeOn:(BOOL)debugModeOn {
-  _debugModeOn = debugModeOn;
-}
-
-- (void)play {
+- (void)playWithCompletion:(void (^)(void))completion {
   [CATransaction begin];
+  [CATransaction setAnimationDuration:self.sceneModel.timeDuration];
+  if (completion) {
+    [CATransaction setCompletionBlock:completion];
+  }
+  
   for (LALayerView *layerView in _layerMap.allValues) {
     [layerView play];
   }
   [CATransaction commit];
+}
+
+- (void)play {
+  [self playWithCompletion:nil];
 }
 
 - (void)pause {
@@ -89,4 +114,44 @@
   }
 }
 
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  
+  CGPoint centerPoint = CGRectGetCenterPoint(self.bounds);
+  CATransform3D xform;
+  
+  
+  
+  if (self.contentMode == UIViewContentModeScaleToFill) {
+    CGSize scaleSize = CGSizeMake(self.bounds.size.width / self.sceneModel.compBounds.size.width,
+                                  self.bounds.size.height / self.sceneModel.compBounds.size.height);
+    xform = CATransform3DMakeScale(scaleSize.width, scaleSize.height, 1);
+  } else if (self.contentMode == UIViewContentModeScaleAspectFit) {
+    CGFloat compAspect = self.sceneModel.compBounds.size.width / self.sceneModel.compBounds.size.height;
+    CGFloat viewAspect = self.bounds.size.width / self.bounds.size.height;
+    BOOL scaleWidth = compAspect > viewAspect;
+    CGFloat dominantDimension = scaleWidth ? self.bounds.size.width : self.bounds.size.height;
+    CGFloat compDimension = scaleWidth ? self.sceneModel.compBounds.size.width : self.sceneModel.compBounds.size.height;
+    CGFloat scale = dominantDimension / compDimension;
+    xform = CATransform3DMakeScale(scale, scale, 1);
+  } else if (self.contentMode == UIViewContentModeScaleAspectFill) {
+    CGFloat compAspect = self.sceneModel.compBounds.size.width / self.sceneModel.compBounds.size.height;
+    CGFloat viewAspect = self.bounds.size.width / self.bounds.size.height;
+    BOOL scaleWidth = compAspect < viewAspect;
+    CGFloat dominantDimension = scaleWidth ? self.bounds.size.width : self.bounds.size.height;
+    CGFloat compDimension = scaleWidth ? self.sceneModel.compBounds.size.width : self.sceneModel.compBounds.size.height;
+    CGFloat scale = dominantDimension / compDimension;
+    xform = CATransform3DMakeScale(scale, scale, 1);
+  } else {
+    xform = CATransform3DIdentity;
+  }
+  
+  [CATransaction begin];
+  [CATransaction setDisableActions:YES];
+  
+  _animationContainer.transform = xform;
+  _animationContainer.position = centerPoint;
+  [CATransaction commit];
+  
+}
 @end

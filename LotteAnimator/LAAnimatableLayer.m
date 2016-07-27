@@ -13,6 +13,7 @@
 - (instancetype)initWithDuration:(NSTimeInterval)duration {
   self = [super init];
   if (self) {
+    self.duration = duration;
     _laAnimationDuration = duration;
   }
   return self;
@@ -43,6 +44,7 @@
 - (void)setLoopAnimation:(BOOL)loopAnimation {
   self.repeatCount = loopAnimation ? HUGE_VALF : 0;
   for (CALayer *layer in self.animationSublayers) {
+    layer.duration = self.duration;
     layer.repeatCount = loopAnimation ? HUGE_VALF : 0;
   }
   

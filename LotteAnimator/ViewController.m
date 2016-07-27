@@ -42,7 +42,6 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) UIButton *openButton;
-@property (nonatomic, strong) LAComposition *currentScene;
 @property (nonatomic, strong) LACompView *currentSceneView;
 @property (nonatomic, strong) UIView *logView;
 @property (nonatomic, strong) UITextView *logTextField;
@@ -59,10 +58,10 @@
   NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
   NSDictionary  *JSONObject = [NSJSONSerialization JSONObjectWithData:jsonData
                                                               options:0 error:&error];
-  LAComposition *laScene = [[LAComposition alloc] initWithJSON:JSONObject];
-  LACompView *compView = [[LACompView alloc] initWithModel:laScene];
-  [self.view addSubview:compView];
-  [compView performSelector:@selector(play) withObject:nil afterDelay:3];
+//  LAComposition *laScene = [[LAComposition alloc] initWithJSON:JSONObject];
+//  LACompView *compView = [[LACompView alloc] initWithModel:laScene];
+//  [self.view addSubview:compView];
+//  [compView performSelector:@selector(play) withObject:nil afterDelay:3];
   
 }
 
@@ -261,13 +260,13 @@
 - (void)openFileURL:(NSString *)filePath {
   [self.currentSceneView removeFromSuperview];
   self.currentSceneView = nil;
-  self.currentScene = nil;
+//  self.currentScene = nil;
   NSError *error;
   NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
   NSDictionary  *JSONObject = [NSJSONSerialization JSONObjectWithData:jsonData
                                                               options:0 error:&error];
   
-  LAComposition *laScene = [[LAComposition alloc] initWithJSON:JSONObject];
+
 
   
 //  LAComposition *laScene = [MTLJSONAdapter modelOfClass:[LAComposition class] fromJSONDictionary:JSONObject error:&error];
@@ -287,13 +286,15 @@
 //    }
   }
   
-  LACompView *compView = [[LACompView alloc] initWithModel:laScene];
+  LACompView *compView = [LACompView animationFromJSON:JSONObject];
   
   [self.view addSubview:compView];
-  self.currentScene = laScene;
+  compView.loopAnimation = YES;
+  compView.contentMode = UIViewContentModeScaleAspectFit;
+  compView.frame = CGRectMake(0, 0, 200, 600);
+//  self.currentScene = laScene;
   self.currentSceneView = compView;
   [self.view sendSubviewToBack:self.currentSceneView];
-  compView.loopAnimation = YES;
   [compView play];
 }
 @end

@@ -10,15 +10,14 @@
 
 @interface LACompView : UIView
 
-- (instancetype)initWithModel:(LAComposition *)model;
-
-@property (nonatomic, readonly) LAComposition *sceneModel;
-@property (nonatomic, assign) BOOL debugModeOn;
++ (instancetype)animationNamed:(NSString *)animationName;
++ (instancetype)animationFromJSON:(NSDictionary *)animationJSON;
 
 @property (nonatomic, assign) BOOL loopAnimation;
 @property (nonatomic, assign) BOOL autoReverseAnimation;
 @property (nonatomic, assign) CGFloat animationProgress;
 
+- (void)playWithCompletion:(void (^)(void))completion;
 - (void)play;
 - (void)pause;
 
