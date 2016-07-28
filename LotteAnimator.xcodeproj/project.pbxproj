@@ -27,7 +27,7 @@
 		48372AB41C20C13700AD0293 /* CGGeometryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372AB31C20C13700AD0293 /* CGGeometryAdditions.m */; };
 		48372AB71C20D97200AD0293 /* LAShapeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372AB61C20D97200AD0293 /* LAShapeCircle.m */; };
 		48372ABA1C20D98200AD0293 /* LAShapeRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372AB91C20D98200AD0293 /* LAShapeRectangle.m */; };
-		486BE0481D36BE5C00CD14A0 /* LACompView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A431C1F84D700AD0293 /* LACompView.m */; };
+		486BE0481D36BE5C00CD14A0 /* LAAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48372A431C1F84D700AD0293 /* LAAnimationView.m */; };
 		486BE0491D36C9B500CD14A0 /* LALayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804B32B1C1F835F00DA8AF7 /* LALayerView.m */; };
 		486BE04B1D36E06C00CD14A0 /* newMoovin.json in Resources */ = {isa = PBXBuildFile; fileRef = 486BE04A1D36E06C00CD14A0 /* newMoovin.json */; };
 		486BE04E1D36F1BE00CD14A0 /* LAShapeLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486BE04D1D36F1BE00CD14A0 /* LAShapeLayerView.m */; };
@@ -120,8 +120,8 @@
 		4804B3201C1F761800DA8AF7 /* BWMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWMath.m; sourceTree = "<group>"; };
 		4804B32A1C1F835F00DA8AF7 /* LALayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LALayerView.h; sourceTree = "<group>"; };
 		4804B32B1C1F835F00DA8AF7 /* LALayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LALayerView.m; sourceTree = "<group>"; };
-		48372A421C1F84D700AD0293 /* LACompView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LACompView.h; sourceTree = "<group>"; };
-		48372A431C1F84D700AD0293 /* LACompView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LACompView.m; sourceTree = "<group>"; };
+		48372A421C1F84D700AD0293 /* LAAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimationView.h; sourceTree = "<group>"; };
+		48372A431C1F84D700AD0293 /* LAAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimationView.m; sourceTree = "<group>"; };
 		48372A481C1F8D7D00AD0293 /* LAMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAMask.h; sourceTree = "<group>"; };
 		48372A491C1F8D7D00AD0293 /* LAMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAMask.m; sourceTree = "<group>"; };
 		48372A4D1C1F99C600AD0293 /* LAShapeGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeGroup.h; sourceTree = "<group>"; };
@@ -270,24 +270,11 @@
 			children = (
 				4804B3221C1F762F00DA8AF7 /* Helpers */,
 				4804B3131C1F5B0900DA8AF7 /* Models */,
+				48E7740A1D49673A0029FC2D /* AnimatableLayers */,
 				4804B2FA1C1F55E600DA8AF7 /* AppDelegate.h */,
 				4804B2FB1C1F55E600DA8AF7 /* AppDelegate.m */,
-				48372A421C1F84D700AD0293 /* LACompView.h */,
-				48372A431C1F84D700AD0293 /* LACompView.m */,
-				62FE41411D41862200CA389D /* LAAnimatableLayer.h */,
-				62FE41421D41862200CA389D /* LAAnimatableLayer.m */,
-				4804B32A1C1F835F00DA8AF7 /* LALayerView.h */,
-				4804B32B1C1F835F00DA8AF7 /* LALayerView.m */,
-				62FE41BA1D42DD8500CA389D /* LAMaskLayer.h */,
-				62FE41BB1D42DD8500CA389D /* LAMaskLayer.m */,
-				620CD7E31D38180800055AD1 /* LAGroupLayerView.h */,
-				620CD7E41D38180800055AD1 /* LAGroupLayerView.m */,
-				486BE04C1D36F1BE00CD14A0 /* LAShapeLayerView.h */,
-				486BE04D1D36F1BE00CD14A0 /* LAShapeLayerView.m */,
-				62FE40E61D3FFBB400CA389D /* LARectShapeLayer.h */,
-				62FE40E71D3FFBB400CA389D /* LARectShapeLayer.m */,
-				62FE41C91D48004A00CA389D /* LAEllipseShapeLayer.h */,
-				62FE41CA1D48004A00CA389D /* LAEllipseShapeLayer.m */,
+				48372A421C1F84D700AD0293 /* LAAnimationView.h */,
+				48372A431C1F84D700AD0293 /* LAAnimationView.m */,
 				4804B2FD1C1F55E600DA8AF7 /* ViewController.h */,
 				4804B2FE1C1F55E600DA8AF7 /* ViewController.m */,
 				48372A621C20A91C00AD0293 /* LAJSONExplorerViewController.h */,
@@ -411,6 +398,27 @@
 				486BE04A1D36E06C00CD14A0 /* newMoovin.json */,
 			);
 			name = JSONExamples;
+			sourceTree = "<group>";
+		};
+		48E7740A1D49673A0029FC2D /* AnimatableLayers */ = {
+			isa = PBXGroup;
+			children = (
+				62FE41411D41862200CA389D /* LAAnimatableLayer.h */,
+				62FE41421D41862200CA389D /* LAAnimatableLayer.m */,
+				4804B32A1C1F835F00DA8AF7 /* LALayerView.h */,
+				4804B32B1C1F835F00DA8AF7 /* LALayerView.m */,
+				62FE41BA1D42DD8500CA389D /* LAMaskLayer.h */,
+				62FE41BB1D42DD8500CA389D /* LAMaskLayer.m */,
+				620CD7E31D38180800055AD1 /* LAGroupLayerView.h */,
+				620CD7E41D38180800055AD1 /* LAGroupLayerView.m */,
+				486BE04C1D36F1BE00CD14A0 /* LAShapeLayerView.h */,
+				486BE04D1D36F1BE00CD14A0 /* LAShapeLayerView.m */,
+				62FE40E61D3FFBB400CA389D /* LARectShapeLayer.h */,
+				62FE40E71D3FFBB400CA389D /* LARectShapeLayer.m */,
+				62FE41C91D48004A00CA389D /* LAEllipseShapeLayer.h */,
+				62FE41CA1D48004A00CA389D /* LAEllipseShapeLayer.m */,
+			);
+			name = AnimatableLayers;
 			sourceTree = "<group>";
 		};
 		62F683871D26EF420088C015 /* AnimatableProperties */ = {
@@ -634,7 +642,7 @@
 				48372A4F1C1F99C600AD0293 /* LAShapeGroup.m in Sources */,
 				48372A581C209A6C00AD0293 /* LAShapeStroke.m in Sources */,
 				48372ABA1C20D98200AD0293 /* LAShapeRectangle.m in Sources */,
-				486BE0481D36BE5C00CD14A0 /* LACompView.m in Sources */,
+				486BE0481D36BE5C00CD14A0 /* LAAnimationView.m in Sources */,
 				62FE40E81D3FFBB400CA389D /* LARectShapeLayer.m in Sources */,
 				62FE408D1D3EC81C00CA389D /* CAAnimationGroup+LAAnimatableGroup.m in Sources */,
 				48372A5B1C209A7A00AD0293 /* LAShapeFill.m in Sources */,

@@ -1,21 +1,21 @@
 //
-//  LACompView.m
+//  LAAnimationView
 //  LotteAnimator
 //
 //  Created by Brandon Withrow on 12/14/15.
 //  Copyright © 2015 Brandon Withrow. All rights reserved.
 //
 
-#import "LACompView.h"
+#import "LAAnimationView.h"
 #import "LAModels.h"
 
-@interface LACompView ()
+@interface LAAnimationView ()
 
 @property (nonatomic, readonly) LAComposition *sceneModel;
 
 @end
 
-@implementation LACompView {
+@implementation LAAnimationView {
   NSDictionary *_layerMap;
   CALayer *_animationContainer;
 }
@@ -26,12 +26,12 @@
   NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
   NSDictionary  *JSONObject = [NSJSONSerialization JSONObjectWithData:jsonData
                                                               options:0 error:&error];
-  return [LACompView animationFromJSON:JSONObject];
+  return [LAAnimationView animationFromJSON:JSONObject];
 }
 
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON {
   LAComposition *laScene = [[LAComposition alloc] initWithJSON:animationJSON];
-  return [[LACompView alloc] initWithModel:laScene];
+  return [[LAAnimationView alloc] initWithModel:laScene];
 }
 
 - (instancetype)initWithModel:(LAComposition *)model {

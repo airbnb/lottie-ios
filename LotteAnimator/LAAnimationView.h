@@ -1,5 +1,5 @@
 //
-//  LACompView.h
+//  LAAnimationView
 //  LotteAnimator
 //
 //  Created by Brandon Withrow on 12/14/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LACompView : UIView
+@interface LAAnimationView : UIView
 
 + (instancetype)animationNamed:(NSString *)animationName;
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON;

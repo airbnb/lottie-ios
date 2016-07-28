@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "LAJSONExplorerViewController.h"
 #import "LAAnimatablePointValue.h"
-#import "LACompView.h"
+#import "LAAnimationView.h"
 
 @interface TestView : UIView
 
@@ -42,7 +42,7 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) UIButton *openButton;
-@property (nonatomic, strong) LACompView *currentSceneView;
+@property (nonatomic, strong) LAAnimationView *currentSceneView;
 @property (nonatomic, strong) UIView *logView;
 @property (nonatomic, strong) UITextView *logTextField;
 @property (nonatomic, strong) UIButton *openLogButton;
@@ -286,7 +286,7 @@
 //    }
   }
   
-  LACompView *compView = [LACompView animationFromJSON:JSONObject];
+  LAAnimationView *compView = [LAAnimationView animationFromJSON:JSONObject];
   
   [self.view addSubview:compView];
   compView.loopAnimation = YES;
