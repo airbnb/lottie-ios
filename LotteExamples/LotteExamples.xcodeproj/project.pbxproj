@@ -1,0 +1,370 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		487284561D4FCD5300007A88 /* pause.json in Resources */ = {isa = PBXBuildFile; fileRef = 487284541D4FCD5300007A88 /* pause.json */; };
+		487284571D4FCD5300007A88 /* play.json in Resources */ = {isa = PBXBuildFile; fileRef = 487284551D4FCD5300007A88 /* play.json */; };
+		4872845A1D4FCF3200007A88 /* LAJSONExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487284591D4FCF3200007A88 /* LAJSONExplorerViewController.m */; };
+		487284611D5007B800007A88 /* 100_House_AnimateInAndOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 4872845F1D5007B800007A88 /* 100_House_AnimateInAndOut.json */; };
+		487284621D5007B800007A88 /* 200_LYS_Lightswitch.json in Resources */ = {isa = PBXBuildFile; fileRef = 487284601D5007B800007A88 /* 200_LYS_Lightswitch.json */; };
+		48E774CD1D4AC7300029FC2D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774CC1D4AC7300029FC2D /* main.m */; };
+		48E774D01D4AC7300029FC2D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774CF1D4AC7300029FC2D /* AppDelegate.m */; };
+		48E774D31D4AC7300029FC2D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774D21D4AC7300029FC2D /* ViewController.m */; };
+		48E774D61D4AC7300029FC2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48E774D41D4AC7300029FC2D /* Main.storyboard */; };
+		48E774D81D4AC7300029FC2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48E774D71D4AC7300029FC2D /* Assets.xcassets */; };
+		48E774DB1D4AC7300029FC2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48E774D91D4AC7300029FC2D /* LaunchScreen.storyboard */; };
+		48E774E91D4AC7A50029FC2D /* Lotte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E774E81D4AC7A50029FC2D /* Lotte.framework */; };
+		48E774F31D4AC8180029FC2D /* allset.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774EA1D4AC8180029FC2D /* allset.json */; };
+		48E774F41D4AC8180029FC2D /* goftldalt.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774EB1D4AC8180029FC2D /* goftldalt.json */; };
+		48E774F51D4AC8180029FC2D /* govtid.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774EC1D4AC8180029FC2D /* govtid.json */; };
+		48E774F61D4AC8180029FC2D /* Heart58OnOff.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774ED1D4AC8180029FC2D /* Heart58OnOff.json */; };
+		48E774F71D4AC8180029FC2D /* Heart58TurnOff.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774EE1D4AC8180029FC2D /* Heart58TurnOff.json */; };
+		48E774F81D4AC8180029FC2D /* Heart58TurnOn.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774EF1D4AC8180029FC2D /* Heart58TurnOn.json */; };
+		48E774F91D4AC8180029FC2D /* parentTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774F01D4AC8180029FC2D /* parentTest.json */; };
+		48E774FA1D4AC8180029FC2D /* scaleTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774F11D4AC8180029FC2D /* scaleTest.json */; };
+		48E774FB1D4AC8180029FC2D /* selfie.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774F21D4AC8180029FC2D /* selfie.json */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		487284541D4FCD5300007A88 /* pause.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pause.json; sourceTree = "<group>"; };
+		487284551D4FCD5300007A88 /* play.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = play.json; sourceTree = "<group>"; };
+		487284581D4FCF3200007A88 /* LAJSONExplorerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAJSONExplorerViewController.h; sourceTree = "<group>"; };
+		487284591D4FCF3200007A88 /* LAJSONExplorerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAJSONExplorerViewController.m; sourceTree = "<group>"; };
+		4872845F1D5007B800007A88 /* 100_House_AnimateInAndOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 100_House_AnimateInAndOut.json; sourceTree = "<group>"; };
+		487284601D5007B800007A88 /* 200_LYS_Lightswitch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 200_LYS_Lightswitch.json; sourceTree = "<group>"; };
+		48E774C81D4AC7300029FC2D /* LotteExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LotteExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		48E774CC1D4AC7300029FC2D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		48E774CE1D4AC7300029FC2D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		48E774CF1D4AC7300029FC2D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		48E774D11D4AC7300029FC2D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		48E774D21D4AC7300029FC2D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		48E774D51D4AC7300029FC2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		48E774D71D4AC7300029FC2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		48E774DA1D4AC7300029FC2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		48E774DC1D4AC7300029FC2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		48E774E81D4AC7A50029FC2D /* Lotte.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lotte.framework; path = "../Lotte/build/Debug-iphoneos/Lotte.framework"; sourceTree = "<group>"; };
+		48E774EA1D4AC8180029FC2D /* allset.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allset.json; sourceTree = "<group>"; };
+		48E774EB1D4AC8180029FC2D /* goftldalt.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = goftldalt.json; sourceTree = "<group>"; };
+		48E774EC1D4AC8180029FC2D /* govtid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = govtid.json; sourceTree = "<group>"; };
+		48E774ED1D4AC8180029FC2D /* Heart58OnOff.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Heart58OnOff.json; sourceTree = "<group>"; };
+		48E774EE1D4AC8180029FC2D /* Heart58TurnOff.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Heart58TurnOff.json; sourceTree = "<group>"; };
+		48E774EF1D4AC8180029FC2D /* Heart58TurnOn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Heart58TurnOn.json; sourceTree = "<group>"; };
+		48E774F01D4AC8180029FC2D /* parentTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = parentTest.json; sourceTree = "<group>"; };
+		48E774F11D4AC8180029FC2D /* scaleTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = scaleTest.json; sourceTree = "<group>"; };
+		48E774F21D4AC8180029FC2D /* selfie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = selfie.json; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		48E774C51D4AC7300029FC2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48E774E91D4AC7A50029FC2D /* Lotte.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		48E774BF1D4AC7300029FC2D = {
+			isa = PBXGroup;
+			children = (
+				48E774E81D4AC7A50029FC2D /* Lotte.framework */,
+				48E774CA1D4AC7300029FC2D /* LotteExamples */,
+				48E774C91D4AC7300029FC2D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		48E774C91D4AC7300029FC2D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				48E774C81D4AC7300029FC2D /* LotteExamples.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		48E774CA1D4AC7300029FC2D /* LotteExamples */ = {
+			isa = PBXGroup;
+			children = (
+				48E774CE1D4AC7300029FC2D /* AppDelegate.h */,
+				48E774CF1D4AC7300029FC2D /* AppDelegate.m */,
+				487284581D4FCF3200007A88 /* LAJSONExplorerViewController.h */,
+				487284591D4FCF3200007A88 /* LAJSONExplorerViewController.m */,
+				48E774D11D4AC7300029FC2D /* ViewController.h */,
+				48E774D21D4AC7300029FC2D /* ViewController.m */,
+				48E774D41D4AC7300029FC2D /* Main.storyboard */,
+				48E774D71D4AC7300029FC2D /* Assets.xcassets */,
+				48E774D91D4AC7300029FC2D /* LaunchScreen.storyboard */,
+				48E774DC1D4AC7300029FC2D /* Info.plist */,
+				48E774CB1D4AC7300029FC2D /* Supporting Files */,
+			);
+			path = LotteExamples;
+			sourceTree = "<group>";
+		};
+		48E774CB1D4AC7300029FC2D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4872845F1D5007B800007A88 /* 100_House_AnimateInAndOut.json */,
+				487284601D5007B800007A88 /* 200_LYS_Lightswitch.json */,
+				487284541D4FCD5300007A88 /* pause.json */,
+				487284551D4FCD5300007A88 /* play.json */,
+				48E774EA1D4AC8180029FC2D /* allset.json */,
+				48E774EB1D4AC8180029FC2D /* goftldalt.json */,
+				48E774EC1D4AC8180029FC2D /* govtid.json */,
+				48E774ED1D4AC8180029FC2D /* Heart58OnOff.json */,
+				48E774EE1D4AC8180029FC2D /* Heart58TurnOff.json */,
+				48E774EF1D4AC8180029FC2D /* Heart58TurnOn.json */,
+				48E774F01D4AC8180029FC2D /* parentTest.json */,
+				48E774F11D4AC8180029FC2D /* scaleTest.json */,
+				48E774F21D4AC8180029FC2D /* selfie.json */,
+				48E774CC1D4AC7300029FC2D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		48E774C71D4AC7300029FC2D /* LotteExamples */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 48E774DF1D4AC7300029FC2D /* Build configuration list for PBXNativeTarget "LotteExamples" */;
+			buildPhases = (
+				48E774C41D4AC7300029FC2D /* Sources */,
+				48E774C51D4AC7300029FC2D /* Frameworks */,
+				48E774C61D4AC7300029FC2D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LotteExamples;
+			productName = LotteExamples;
+			productReference = 48E774C81D4AC7300029FC2D /* LotteExamples.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		48E774C01D4AC7300029FC2D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Brandon Withrow";
+				TargetAttributes = {
+					48E774C71D4AC7300029FC2D = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 48E774C31D4AC7300029FC2D /* Build configuration list for PBXProject "LotteExamples" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 48E774BF1D4AC7300029FC2D;
+			productRefGroup = 48E774C91D4AC7300029FC2D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				48E774C71D4AC7300029FC2D /* LotteExamples */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		48E774C61D4AC7300029FC2D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48E774F71D4AC8180029FC2D /* Heart58TurnOff.json in Resources */,
+				48E774F31D4AC8180029FC2D /* allset.json in Resources */,
+				487284621D5007B800007A88 /* 200_LYS_Lightswitch.json in Resources */,
+				48E774F81D4AC8180029FC2D /* Heart58TurnOn.json in Resources */,
+				48E774DB1D4AC7300029FC2D /* LaunchScreen.storyboard in Resources */,
+				48E774F41D4AC8180029FC2D /* goftldalt.json in Resources */,
+				487284611D5007B800007A88 /* 100_House_AnimateInAndOut.json in Resources */,
+				48E774D81D4AC7300029FC2D /* Assets.xcassets in Resources */,
+				487284561D4FCD5300007A88 /* pause.json in Resources */,
+				48E774FA1D4AC8180029FC2D /* scaleTest.json in Resources */,
+				48E774FB1D4AC8180029FC2D /* selfie.json in Resources */,
+				48E774F51D4AC8180029FC2D /* govtid.json in Resources */,
+				48E774F91D4AC8180029FC2D /* parentTest.json in Resources */,
+				487284571D4FCD5300007A88 /* play.json in Resources */,
+				48E774F61D4AC8180029FC2D /* Heart58OnOff.json in Resources */,
+				48E774D61D4AC7300029FC2D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		48E774C41D4AC7300029FC2D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4872845A1D4FCF3200007A88 /* LAJSONExplorerViewController.m in Sources */,
+				48E774D31D4AC7300029FC2D /* ViewController.m in Sources */,
+				48E774D01D4AC7300029FC2D /* AppDelegate.m in Sources */,
+				48E774CD1D4AC7300029FC2D /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		48E774D41D4AC7300029FC2D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				48E774D51D4AC7300029FC2D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		48E774D91D4AC7300029FC2D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				48E774DA1D4AC7300029FC2D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		48E774DD1D4AC7300029FC2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		48E774DE1D4AC7300029FC2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		48E774E01D4AC7300029FC2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LotteExamples/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "-.LotteExamples";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		48E774E11D4AC7300029FC2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LotteExamples/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "-.LotteExamples";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		48E774C31D4AC7300029FC2D /* Build configuration list for PBXProject "LotteExamples" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48E774DD1D4AC7300029FC2D /* Debug */,
+				48E774DE1D4AC7300029FC2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		48E774DF1D4AC7300029FC2D /* Build configuration list for PBXNativeTarget "LotteExamples" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48E774E01D4AC7300029FC2D /* Debug */,
+				48E774E11D4AC7300029FC2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 48E774C01D4AC7300029FC2D /* Project object */;
+}

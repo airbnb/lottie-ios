@@ -1,1 +1,0 @@
-../../../Mantle/Mantle/MTLValueTransformer.h
