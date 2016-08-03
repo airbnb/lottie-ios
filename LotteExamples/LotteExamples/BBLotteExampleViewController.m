@@ -6,16 +6,16 @@
 //  Copyright © 2016 Brandon Withrow. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "BBLotteExampleViewController.h"
 #import "LAJSONExplorerViewController.h"
 
 #import <Lotte/Lotte.h>
 
-@interface ViewController ()
+@interface BBLotteExampleViewController ()
 
 @end
 
-@implementation ViewController {
+@implementation BBLotteExampleViewController {
   UIButton *playButton;
   UIButton *loopButton;
   UISlider *animationSlider;

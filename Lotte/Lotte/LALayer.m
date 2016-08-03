@@ -94,8 +94,10 @@
   
   NSMutableArray *shapes = [NSMutableArray array];
   for (NSDictionary *shapeJSON in jsonDictionary[@"shapes"]) {
-    LAShapeGroup *group = [[LAShapeGroup alloc] initWithJSON:shapeJSON frameRate:_framerate compBounds:_compBounds];
-    [shapes addObject:group];
+    id shapeItem = [LAShapeGroup shapeItemWithJSON:shapeJSON frameRate:_framerate compBounds:_compBounds];
+    if (shapeItem) {
+      [shapes addObject:shapeItem];
+    }
   }
   _shapes = shapes;
   

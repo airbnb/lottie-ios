@@ -11,11 +11,17 @@
 
 @class LAShapeGroup;
 @class LAShapeTransform;
+@class LAShapeFill;
+@class LAShapeStroke;
+@class LAShapeTrimPath;
 
 @interface LAGroupLayerView : LAAnimatableLayer
 
 - (instancetype)initWithShapeGroup:(LAShapeGroup *)shapeGroup
-                         transform:(LAShapeTransform *)transform
+                         transform:(LAShapeTransform *)previousTransform
+                              fill:(LAShapeFill *)previousFill
+                            stroke:(LAShapeStroke *)previousStroke
+                          trimPath:(LAShapeTrimPath *)previousTrimPath
                       withDuration:(NSTimeInterval)duration;
 
 @property (nonatomic, readonly) LAShapeGroup *shapeGroup;

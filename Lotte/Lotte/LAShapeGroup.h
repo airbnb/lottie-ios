@@ -15,4 +15,6 @@
 
 @property (nonatomic, readonly) NSArray *items;
 
++ (id)shapeItemWithJSON:(NSDictionary *)itemJSON frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds;
+
 @end

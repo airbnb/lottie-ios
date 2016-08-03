@@ -20,18 +20,23 @@
 }
 
 - (instancetype)initWithShapeGroup:(LAShapeGroup *)shapeGroup
-                         transform:(LAShapeTransform *)transform
+                         transform:(LAShapeTransform *)previousTransform
+                              fill:(LAShapeFill *)previousFill
+                            stroke:(LAShapeStroke *)previousStroke
+                          trimPath:(LAShapeTrimPath *)previousTrimPath
                       withDuration:(NSTimeInterval)duration {
   self = [super initWithDuration:duration];
   if (self) {
     _shapeGroup = shapeGroup;
-    _shapeTransform = transform;
-    [self _setupShapeGroup];
+    _shapeTransform = previousTransform;
+    [self _setupShapeGroupWithFill:previousFill stroke:previousStroke trimPath:previousTrimPath];
   }
   return self;
 }
 
-- (void)_setupShapeGroup {
+- (void)_setupShapeGroupWithFill:(LAShapeFill *)previousFill
+                          stroke:(LAShapeStroke *)previousStroke
+                        trimPath:(LAShapeTrimPath *)previousTrimPath {
   if (_shapeTransform) {
     self.frame = _shapeTransform.compBounds;
     self.anchorPoint = _shapeTransform.anchor.initialPoint;
@@ -44,10 +49,10 @@
   NSArray *groupItems = _shapeGroup.items;
   NSArray *reversedItems = [[groupItems reverseObjectEnumerator] allObjects];
   
-  LAShapeFill *currentFill;
-  LAShapeStroke *currentStroke;
+  LAShapeFill *currentFill = previousFill;
+  LAShapeStroke *currentStroke = previousStroke;
   LAShapeTransform *currentTransform;
-  LAShapeTrimPath *currentTrim;
+  LAShapeTrimPath *currentTrim = previousTrimPath;
   
   NSMutableArray *shapeLayers = [NSMutableArray array];
   NSMutableArray *groupLayers = [NSMutableArray array];
@@ -94,6 +99,9 @@
       LAShapeGroup *shapeGroup = (LAShapeGroup *)item;
       LAGroupLayerView *groupLayer = [[LAGroupLayerView alloc] initWithShapeGroup:shapeGroup
                                                                         transform:currentTransform
+                                                                             fill:currentFill
+                                                                           stroke:currentStroke
+                                                                         trimPath:currentTrim
                                                                      withDuration:self.laAnimationDuration];
       [groupLayers addObject:groupLayer];
       [self addSublayer:groupLayer];

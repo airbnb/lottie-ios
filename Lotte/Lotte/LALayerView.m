@@ -115,16 +115,30 @@
   NSArray *groupItems = _layerModel.shapes;
   NSArray *reversedItems = [[groupItems reverseObjectEnumerator] allObjects];
   LAShapeTransform *currentTransform = nil;
+  LAShapeTrimPath *currentTrimPath = nil;
+  LAShapeFill *currentFill = nil;
+  LAShapeStroke *currentStroke = nil;
   
   NSMutableArray *shapeLayers = [NSMutableArray array];
   
   for (id item in reversedItems) {
     if ([item isKindOfClass:[LAShapeGroup class]]) {
-      LAGroupLayerView *groupLayer = [[LAGroupLayerView alloc] initWithShapeGroup:(LAShapeGroup *)item transform:currentTransform withDuration:self.laAnimationDuration];
+      LAGroupLayerView *groupLayer = [[LAGroupLayerView alloc] initWithShapeGroup:(LAShapeGroup *)item
+                                                                        transform:currentTransform
+                                                                             fill:currentFill
+                                                                           stroke:currentStroke
+                                                                         trimPath:currentTrimPath
+                                                                     withDuration:self.laAnimationDuration];
       [_childContainerLayer addSublayer:groupLayer];
       [shapeLayers addObject:groupLayer];
     } else if ([item isKindOfClass:[LAShapeTransform class]]) {
       currentTransform = (LAShapeTransform *)item;
+    } else if ([item isKindOfClass:[LAShapeFill class]]) {
+      currentFill = (LAShapeFill *)item;
+    } else if ([item isKindOfClass:[LAShapeTrimPath class]]) {
+      currentTrimPath = (LAShapeTrimPath *)item;
+    } else if ([item isKindOfClass:[LAShapeStroke class]]) {
+      currentStroke = (LAShapeStroke *)item;
     }
   }
   

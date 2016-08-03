@@ -14,7 +14,6 @@
 		487284621D5007B800007A88 /* 200_LYS_Lightswitch.json in Resources */ = {isa = PBXBuildFile; fileRef = 487284601D5007B800007A88 /* 200_LYS_Lightswitch.json */; };
 		48E774CD1D4AC7300029FC2D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774CC1D4AC7300029FC2D /* main.m */; };
 		48E774D01D4AC7300029FC2D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774CF1D4AC7300029FC2D /* AppDelegate.m */; };
-		48E774D31D4AC7300029FC2D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774D21D4AC7300029FC2D /* ViewController.m */; };
 		48E774D61D4AC7300029FC2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48E774D41D4AC7300029FC2D /* Main.storyboard */; };
 		48E774D81D4AC7300029FC2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48E774D71D4AC7300029FC2D /* Assets.xcassets */; };
 		48E774DB1D4AC7300029FC2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48E774D91D4AC7300029FC2D /* LaunchScreen.storyboard */; };
@@ -28,6 +27,9 @@
 		48E774F91D4AC8180029FC2D /* parentTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774F01D4AC8180029FC2D /* parentTest.json */; };
 		48E774FA1D4AC8180029FC2D /* scaleTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774F11D4AC8180029FC2D /* scaleTest.json */; };
 		48E774FB1D4AC8180029FC2D /* selfie.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774F21D4AC8180029FC2D /* selfie.json */; };
+		6295CF351D526D45004FAD21 /* SwitchBG.json in Resources */ = {isa = PBXBuildFile; fileRef = 6295CF341D526D45004FAD21 /* SwitchBG.json */; };
+		6295CF381D526D72004FAD21 /* BBLotteExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6295CF371D526D72004FAD21 /* BBLotteExampleViewController.m */; };
+		6295CFB11D52AC28004FAD21 /* CheckSwitch.json in Resources */ = {isa = PBXBuildFile; fileRef = 6295CFB01D52AC28004FAD21 /* CheckSwitch.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,8 +43,6 @@
 		48E774CC1D4AC7300029FC2D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		48E774CE1D4AC7300029FC2D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		48E774CF1D4AC7300029FC2D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		48E774D11D4AC7300029FC2D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		48E774D21D4AC7300029FC2D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		48E774D51D4AC7300029FC2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		48E774D71D4AC7300029FC2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48E774DA1D4AC7300029FC2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,6 +57,10 @@
 		48E774F01D4AC8180029FC2D /* parentTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = parentTest.json; sourceTree = "<group>"; };
 		48E774F11D4AC8180029FC2D /* scaleTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = scaleTest.json; sourceTree = "<group>"; };
 		48E774F21D4AC8180029FC2D /* selfie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = selfie.json; sourceTree = "<group>"; };
+		6295CF341D526D45004FAD21 /* SwitchBG.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SwitchBG.json; sourceTree = "<group>"; };
+		6295CF361D526D72004FAD21 /* BBLotteExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLotteExampleViewController.h; sourceTree = "<group>"; };
+		6295CF371D526D72004FAD21 /* BBLotteExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLotteExampleViewController.m; sourceTree = "<group>"; };
+		6295CFB01D52AC28004FAD21 /* CheckSwitch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CheckSwitch.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +99,8 @@
 				48E774CF1D4AC7300029FC2D /* AppDelegate.m */,
 				487284581D4FCF3200007A88 /* LAJSONExplorerViewController.h */,
 				487284591D4FCF3200007A88 /* LAJSONExplorerViewController.m */,
-				48E774D11D4AC7300029FC2D /* ViewController.h */,
-				48E774D21D4AC7300029FC2D /* ViewController.m */,
+				6295CF361D526D72004FAD21 /* BBLotteExampleViewController.h */,
+				6295CF371D526D72004FAD21 /* BBLotteExampleViewController.m */,
 				48E774D41D4AC7300029FC2D /* Main.storyboard */,
 				48E774D71D4AC7300029FC2D /* Assets.xcassets */,
 				48E774D91D4AC7300029FC2D /* LaunchScreen.storyboard */,
@@ -109,6 +113,8 @@
 		48E774CB1D4AC7300029FC2D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6295CFB01D52AC28004FAD21 /* CheckSwitch.json */,
+				6295CF341D526D45004FAD21 /* SwitchBG.json */,
 				4872845F1D5007B800007A88 /* 100_House_AnimateInAndOut.json */,
 				487284601D5007B800007A88 /* 200_LYS_Lightswitch.json */,
 				487284541D4FCD5300007A88 /* pause.json */,
@@ -192,9 +198,11 @@
 				48E774F41D4AC8180029FC2D /* goftldalt.json in Resources */,
 				487284611D5007B800007A88 /* 100_House_AnimateInAndOut.json in Resources */,
 				48E774D81D4AC7300029FC2D /* Assets.xcassets in Resources */,
+				6295CF351D526D45004FAD21 /* SwitchBG.json in Resources */,
 				487284561D4FCD5300007A88 /* pause.json in Resources */,
 				48E774FA1D4AC8180029FC2D /* scaleTest.json in Resources */,
 				48E774FB1D4AC8180029FC2D /* selfie.json in Resources */,
+				6295CFB11D52AC28004FAD21 /* CheckSwitch.json in Resources */,
 				48E774F51D4AC8180029FC2D /* govtid.json in Resources */,
 				48E774F91D4AC8180029FC2D /* parentTest.json in Resources */,
 				487284571D4FCD5300007A88 /* play.json in Resources */,
@@ -210,8 +218,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6295CF381D526D72004FAD21 /* BBLotteExampleViewController.m in Sources */,
 				4872845A1D4FCF3200007A88 /* LAJSONExplorerViewController.m in Sources */,
-				48E774D31D4AC7300029FC2D /* ViewController.m in Sources */,
 				48E774D01D4AC7300029FC2D /* AppDelegate.m in Sources */,
 				48E774CD1D4AC7300029FC2D /* main.m in Sources */,
 			);
