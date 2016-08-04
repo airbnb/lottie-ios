@@ -184,4 +184,8 @@
   return keyframeAnimation;
 }
 
+- (NSString *)description {
+  return NSStringFromCGRect(self.initialBounds);
+}
+
 @end

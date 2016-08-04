@@ -17,7 +17,6 @@
 		48E774D61D4AC7300029FC2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48E774D41D4AC7300029FC2D /* Main.storyboard */; };
 		48E774D81D4AC7300029FC2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48E774D71D4AC7300029FC2D /* Assets.xcassets */; };
 		48E774DB1D4AC7300029FC2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48E774D91D4AC7300029FC2D /* LaunchScreen.storyboard */; };
-		48E774E91D4AC7A50029FC2D /* Lotte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E774E81D4AC7A50029FC2D /* Lotte.framework */; };
 		48E774F31D4AC8180029FC2D /* allset.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774EA1D4AC8180029FC2D /* allset.json */; };
 		48E774F41D4AC8180029FC2D /* goftldalt.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774EB1D4AC8180029FC2D /* goftldalt.json */; };
 		48E774F51D4AC8180029FC2D /* govtid.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774EC1D4AC8180029FC2D /* govtid.json */; };
@@ -30,7 +29,27 @@
 		6295CF351D526D45004FAD21 /* SwitchBG.json in Resources */ = {isa = PBXBuildFile; fileRef = 6295CF341D526D45004FAD21 /* SwitchBG.json */; };
 		6295CF381D526D72004FAD21 /* BBLotteExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6295CF371D526D72004FAD21 /* BBLotteExampleViewController.m */; };
 		6295CFB11D52AC28004FAD21 /* CheckSwitch.json in Resources */ = {isa = PBXBuildFile; fileRef = 6295CFB01D52AC28004FAD21 /* CheckSwitch.json */; };
+		6295CFB31D52AD4D004FAD21 /* Lotte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6295CFB21D52AD4D004FAD21 /* Lotte.framework */; };
+		6295CFB41D52AD4D004FAD21 /* Lotte.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6295CFB21D52AD4D004FAD21 /* Lotte.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6295CFB91D52AE9C004FAD21 /* Alarmdata.json in Resources */ = {isa = PBXBuildFile; fileRef = 6295CFB61D52AE9C004FAD21 /* Alarmdata.json */; };
+		6295CFBA1D52AE9C004FAD21 /* Diamondata.json in Resources */ = {isa = PBXBuildFile; fileRef = 6295CFB71D52AE9C004FAD21 /* Diamondata.json */; };
+		6295CFBB1D52AE9C004FAD21 /* LightBulb.json in Resources */ = {isa = PBXBuildFile; fileRef = 6295CFB81D52AE9C004FAD21 /* LightBulb.json */; };
+		62F8DFDF1D53EB39009CCCBD /* solidTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 62F8DFDE1D53EB39009CCCBD /* solidTest.json */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6295CFB51D52AD4D004FAD21 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6295CFB41D52AD4D004FAD21 /* Lotte.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		487284541D4FCD5300007A88 /* pause.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pause.json; sourceTree = "<group>"; };
@@ -61,6 +80,11 @@
 		6295CF361D526D72004FAD21 /* BBLotteExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLotteExampleViewController.h; sourceTree = "<group>"; };
 		6295CF371D526D72004FAD21 /* BBLotteExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLotteExampleViewController.m; sourceTree = "<group>"; };
 		6295CFB01D52AC28004FAD21 /* CheckSwitch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CheckSwitch.json; sourceTree = "<group>"; };
+		6295CFB21D52AD4D004FAD21 /* Lotte.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Lotte.framework; path = "/Users/brandon_withrow/Library/Developer/Xcode/DerivedData/LotteExamples-egoevfawucayozfplbchbmkjijau/Build/Products/Debug-iphoneos/Lotte.framework"; sourceTree = "<absolute>"; };
+		6295CFB61D52AE9C004FAD21 /* Alarmdata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Alarmdata.json; sourceTree = "<group>"; };
+		6295CFB71D52AE9C004FAD21 /* Diamondata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Diamondata.json; sourceTree = "<group>"; };
+		6295CFB81D52AE9C004FAD21 /* LightBulb.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LightBulb.json; sourceTree = "<group>"; };
+		62F8DFDE1D53EB39009CCCBD /* solidTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solidTest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48E774E91D4AC7A50029FC2D /* Lotte.framework in Frameworks */,
+				6295CFB31D52AD4D004FAD21 /* Lotte.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +102,7 @@
 		48E774BF1D4AC7300029FC2D = {
 			isa = PBXGroup;
 			children = (
+				6295CFB21D52AD4D004FAD21 /* Lotte.framework */,
 				48E774E81D4AC7A50029FC2D /* Lotte.framework */,
 				48E774CA1D4AC7300029FC2D /* LotteExamples */,
 				48E774C91D4AC7300029FC2D /* Products */,
@@ -113,6 +138,10 @@
 		48E774CB1D4AC7300029FC2D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				62F8DFDE1D53EB39009CCCBD /* solidTest.json */,
+				6295CFB61D52AE9C004FAD21 /* Alarmdata.json */,
+				6295CFB71D52AE9C004FAD21 /* Diamondata.json */,
+				6295CFB81D52AE9C004FAD21 /* LightBulb.json */,
 				6295CFB01D52AC28004FAD21 /* CheckSwitch.json */,
 				6295CF341D526D45004FAD21 /* SwitchBG.json */,
 				4872845F1D5007B800007A88 /* 100_House_AnimateInAndOut.json */,
@@ -143,6 +172,7 @@
 				48E774C41D4AC7300029FC2D /* Sources */,
 				48E774C51D4AC7300029FC2D /* Frameworks */,
 				48E774C61D4AC7300029FC2D /* Resources */,
+				6295CFB51D52AD4D004FAD21 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -191,11 +221,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				48E774F71D4AC8180029FC2D /* Heart58TurnOff.json in Resources */,
+				6295CFBB1D52AE9C004FAD21 /* LightBulb.json in Resources */,
 				48E774F31D4AC8180029FC2D /* allset.json in Resources */,
 				487284621D5007B800007A88 /* 200_LYS_Lightswitch.json in Resources */,
 				48E774F81D4AC8180029FC2D /* Heart58TurnOn.json in Resources */,
 				48E774DB1D4AC7300029FC2D /* LaunchScreen.storyboard in Resources */,
 				48E774F41D4AC8180029FC2D /* goftldalt.json in Resources */,
+				62F8DFDF1D53EB39009CCCBD /* solidTest.json in Resources */,
 				487284611D5007B800007A88 /* 100_House_AnimateInAndOut.json in Resources */,
 				48E774D81D4AC7300029FC2D /* Assets.xcassets in Resources */,
 				6295CF351D526D45004FAD21 /* SwitchBG.json in Resources */,
@@ -207,7 +239,9 @@
 				48E774F91D4AC8180029FC2D /* parentTest.json in Resources */,
 				487284571D4FCD5300007A88 /* play.json in Resources */,
 				48E774F61D4AC8180029FC2D /* Heart58OnOff.json in Resources */,
+				6295CFBA1D52AE9C004FAD21 /* Diamondata.json in Resources */,
 				48E774D61D4AC7300029FC2D /* Main.storyboard in Resources */,
+				6295CFB91D52AE9C004FAD21 /* Alarmdata.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,9 +368,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = LotteExamples/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.LotteExamples";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -345,9 +381,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = LotteExamples/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.LotteExamples";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -209,4 +209,8 @@
   return keyframeAnimation;
 }
 
+- (NSString *)description {
+  return self.initialValue.description;
+}
+
 @end

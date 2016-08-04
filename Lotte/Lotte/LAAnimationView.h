@@ -11,11 +11,11 @@
 // - Enable auto reverse animation
 // - Support repeater objects
 // - Animated Button
-// - Line caps
 // - Completion Block
 // - Merged Paths
 // - Color conversion from older version
 // - Line start offset
+// - Round Rect with dashed lines
 
 #import <UIKit/UIKit.h>
 

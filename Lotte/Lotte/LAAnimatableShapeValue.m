@@ -248,4 +248,8 @@
   return keyframeAnimation;
 }
 
+- (NSString *)description {
+  return self.initialShape.description;
+}
+
 @end

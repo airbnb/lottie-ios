@@ -232,4 +232,8 @@
   return keyframeAnimation;
 }
 
+- (NSString *)description {
+  return NSStringFromCGPoint(self.initialPoint);
+}
+
 @end

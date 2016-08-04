@@ -194,4 +194,8 @@
   return keyframeAnimation;
 }
 
+- (NSString *)description {
+  return self.initialColor.description;
+}
+
 @end

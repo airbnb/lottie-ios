@@ -75,17 +75,17 @@
 
 - (void)_setupViewFromModel {
   self.backgroundColor = nil;
-  if (_layerModel.layerType == LALayerTypeSolid) {
-    self.bounds = CGRectMake(0, 0, _layerModel.solidWidth.floatValue, _layerModel.solidHeight.floatValue);
-  } else {
-    self.bounds = _composition.compBounds;
-  }
-  
+  self.bounds = _composition.compBounds;
   self.anchorPoint = CGPointZero;
   
   _childContainerLayer = [CALayer new];
   _childContainerLayer.bounds = self.bounds;
   _childContainerLayer.backgroundColor = _layerModel.solidColor.CGColor;
+  
+  if (_layerModel.layerType == LALayerTypeSolid) {
+    _childContainerLayer.bounds = CGRectMake(0, 0, _layerModel.solidWidth.floatValue, _layerModel.solidHeight.floatValue);
+    _childContainerLayer.masksToBounds = YES;
+  }
   
   NSNumber *parentID = _layerModel.parentID;
   CALayer *currentChild = _childContainerLayer;

@@ -69,6 +69,20 @@
       _strokeLayer.fillColor = nil;
       _strokeLayer.backgroundColor = nil;
       _strokeLayer.lineDashPattern = _stroke.lineDashPattern;
+      _strokeLayer.lineCap = _stroke.capType == LALineCapTypeRound ? kCALineCapRound : kCALineCapButt;
+      switch (_stroke.joinType) {
+        case LALineJoinTypeBevel:
+          _strokeLayer.lineJoin = kCALineJoinBevel;
+          break;
+        case LALineJoinTypeMiter:
+          _strokeLayer.lineJoin = kCALineJoinMiter;
+          break;
+        case LALineJoinTypeRound:
+          _strokeLayer.lineJoin = kCALineJoinRound;
+          break;
+        default:
+          break;
+      }
       if (trim) {
         _strokeLayer.strokeStart = _trim.start.initialValue.floatValue;
         _strokeLayer.strokeEnd = _trim.end.initialValue.floatValue;
