@@ -9,14 +9,74 @@
 #import "LARectShapeLayer.h"
 #import "CAAnimationGroup+LAAnimatableGroup.h"
 
+@interface LARoundRectLayer : CAShapeLayer
+
+@property (nonatomic) CGPoint rectPosition;
+@property (nonatomic) CGPoint rectSize;
+@property (nonatomic) CGFloat rectCornerRadius;
+
+@end
+
+@implementation LARoundRectLayer
+
+@dynamic rectPosition;
+@dynamic rectSize;
+@dynamic rectCornerRadius;
+
+-(id)initWithLayer:(id)layer {
+  if( ( self = [super initWithLayer:layer] ) ) {
+    if ([layer isKindOfClass:[LARoundRectLayer class]]) {
+      self.rectSize = ((LARoundRectLayer *)layer).rectSize;
+      self.rectPosition = ((LARoundRectLayer *)layer).rectPosition;
+      self.rectCornerRadius = ((LARoundRectLayer *)layer).rectCornerRadius;
+    }
+  }
+  return self;
+}
+
++ (BOOL)needsDisplayForKey:(NSString *)key {
+  BOOL needsDisplay = [super needsDisplayForKey:key];
+  
+  if ([key isEqualToString:@"rectSize"] || [key isEqualToString:@"rectPosition"] || [key isEqualToString:@"rectCornerRadius"]) {
+    needsDisplay = YES;
+  }
+  
+  return needsDisplay;
+}
+
+-(id<CAAction>)actionForKey:(NSString *)event {
+  if([event isEqualToString:@"rectSize"] || [event isEqualToString:@"rectPosition"] || [event isEqualToString:@"rectCornerRadius"]) {
+    CABasicAnimation *theAnimation = [CABasicAnimation
+                                      animationWithKeyPath:event];
+    theAnimation.fromValue = [[self presentationLayer] valueForKey:event];
+    return theAnimation;
+  }
+  return [super actionForKey:event];
+}
+
+- (void)_setPath {
+  LARoundRectLayer *presentationRect = (LARoundRectLayer *)self.presentationLayer;
+  CGFloat halfWidth = presentationRect.rectSize.x / 2;
+  CGFloat halfHeight = presentationRect.rectSize.y / 2;
+  
+  CGRect rectFrame =  CGRectMake(presentationRect.rectPosition.x - halfWidth, presentationRect.rectPosition.y - halfHeight, presentationRect.rectSize.x, presentationRect.rectSize.y);
+  self.path = [UIBezierPath bezierPathWithRoundedRect:rectFrame cornerRadius:presentationRect.rectCornerRadius].CGPath;
+}
+
+- (void)display {
+  [self _setPath];
+}
+
+@end
+
 @implementation LARectShapeLayer {
   LAShapeTransform *_transform;
   LAShapeStroke *_stroke;
   LAShapeFill *_fill;
   LAShapeRectangle *_rectangle;
   
-  CALayer *_fillLayer;
-  CALayer *_strokeLayer;
+  LARoundRectLayer *_fillLayer;
+  LARoundRectLayer *_strokeLayer;
   
   CAAnimationGroup *_animation;
   CAAnimationGroup *_strokeAnimation;
@@ -44,30 +104,50 @@
     self.sublayerTransform = CATransform3DMakeRotation(_transform.rotation.initialValue.floatValue, 0, 0, 1);
     
     if (fill) {
-      _fillLayer = [CALayer layer];
+      _fillLayer = [LARoundRectLayer layer];
       _fillLayer.allowsEdgeAntialiasing = YES;
-      _fillLayer.bounds = rectShape.bounds.initialBounds;
-      _fillLayer.position = rectShape.position.initialPoint;
-      _fillLayer.cornerRadius = rectShape.cornerRadius.initialValue.floatValue;
-      _fillLayer.backgroundColor = _fill.color.initialColor.CGColor;
+      _fillLayer.fillColor = _fill.color.initialColor.CGColor;
       _fillLayer.opacity = _fill.opacity.initialValue.floatValue;
+      _fillLayer.rectCornerRadius = rectShape.cornerRadius.initialValue.floatValue;
+      _fillLayer.rectSize = rectShape.size.initialPoint;
+      _fillLayer.rectPosition = rectShape.position.initialPoint;
       [self addSublayer:_fillLayer];
     }
     
     if (stroke) {
-      _strokeLayer = [CALayer layer];
+      _strokeLayer = [LARoundRectLayer layer];
       _strokeLayer.allowsEdgeAntialiasing = YES;
-      _strokeLayer.bounds = rectShape.bounds.initialBounds;
-      _strokeLayer.position = rectShape.position.initialPoint;
-      _strokeLayer.cornerRadius = rectShape.cornerRadius.initialValue.floatValue;
-      _strokeLayer.borderColor = _stroke.color.initialColor.CGColor;
+      _strokeLayer.strokeColor = _stroke.color.initialColor.CGColor;
       _strokeLayer.opacity = _stroke.opacity.initialValue.floatValue;
-      _strokeLayer.borderWidth = _stroke.width.initialValue.floatValue;
+      _strokeLayer.lineWidth = _stroke.width.initialValue.floatValue;
+      _strokeLayer.fillColor = nil;
       _strokeLayer.backgroundColor = nil;
+      _strokeLayer.lineDashPattern = _stroke.lineDashPattern;
+      _strokeLayer.lineCap = _stroke.capType == LALineCapTypeRound ? kCALineCapRound : kCALineCapButt;
+      _strokeLayer.rectCornerRadius = rectShape.cornerRadius.initialValue.floatValue;
+      _strokeLayer.rectSize = rectShape.size.initialPoint;
+      _strokeLayer.rectPosition = rectShape.position.initialPoint;
+      switch (_stroke.joinType) {
+        case LALineJoinTypeBevel:
+          _strokeLayer.lineJoin = kCALineJoinBevel;
+          break;
+        case LALineJoinTypeMiter:
+          _strokeLayer.lineJoin = kCALineJoinMiter;
+          break;
+        case LALineJoinTypeRound:
+          _strokeLayer.lineJoin = kCALineJoinRound;
+          break;
+        default:
+          break;
+      }
+//      if (trim) {
+//        _strokeLayer.strokeStart = _trim.start.initialValue.floatValue;
+//        _strokeLayer.strokeEnd = _trim.end.initialValue.floatValue;
+//      }
+      [self addSublayer:_strokeLayer];
     }
     self.animationSublayers = [NSArray arrayWithArray:self.sublayers];
     
-    [self addSublayer:_strokeLayer];
     [self _buildAnimation];
     [self pause];
     
@@ -89,9 +169,9 @@
     _strokeAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"strokeColor" : _stroke.color,
                                                                                              @"opacity" : _stroke.opacity,
                                                                                              @"lineWidth" : _stroke.width,
-                                                                                             @"bounds" : _rectangle.bounds,
-                                                                                             @"position" : _rectangle.position,
-                                                                                             @"cornerRadius" : _rectangle.cornerRadius}];
+                                                                                             @"rectSize" : _rectangle.size,
+                                                                                             @"rectPosition" : _rectangle.position,
+                                                                                             @"rectCornerRadius" : _rectangle.cornerRadius}];
     [_strokeLayer addAnimation:_strokeAnimation forKey:@""];
 
   }
@@ -99,9 +179,9 @@
   if (_fill) {
     _fillAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"backgroundColor" : _fill.color,
                                                                                            @"opacity" : _fill.opacity,
-                                                                                           @"bounds" : _rectangle.bounds,
-                                                                                           @"position" : _rectangle.position,
-                                                                                           @"cornerRadius" : _rectangle.cornerRadius}];
+                                                                                           @"rectSize" : _rectangle.size,
+                                                                                           @"rectPosition" : _rectangle.position,
+                                                                                           @"rectCornerRadius" : _rectangle.cornerRadius}];
     [_fillLayer addAnimation:_fillAnimation forKey:@""];
   }
 }

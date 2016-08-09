@@ -33,9 +33,9 @@
     _cornerRadius = [[LAAnimatableNumberValue alloc] initWithNumberValues:cornerRadius frameRate:frameRate];
   }
   
-  NSDictionary *bounds = jsonDictionary[@"s"];
-  if (bounds) {
-    _bounds = [[LAAnimatableBoundsValue alloc] initWithSizeValues:bounds frameRate:frameRate];
+  NSDictionary *size = jsonDictionary[@"s"];
+  if (size) {
+    _size = [[LAAnimatablePointValue alloc] initWithPointValues:size frameRate:frameRate];
   }
 }
 

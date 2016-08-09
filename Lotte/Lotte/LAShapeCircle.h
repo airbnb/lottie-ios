@@ -15,6 +15,6 @@
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
 
 @property (nonatomic, readonly) LAAnimatablePointValue *position;
-@property (nonatomic, readonly) LAAnimatableScaleValue *scale;
+@property (nonatomic, readonly) LAAnimatablePointValue *size;
 
 @end

@@ -9,6 +9,62 @@
 #import "LAEllipseShapeLayer.h"
 #import "CAAnimationGroup+LAAnimatableGroup.h"
 
+@interface LACircleShapeLayer : CAShapeLayer
+
+@property (nonatomic) CGPoint circlePosition;
+@property (nonatomic) CGPoint circleSize;
+
+@end
+
+@implementation LACircleShapeLayer
+
+@dynamic circleSize;
+@dynamic circlePosition;
+
+-(id)initWithLayer:(id)layer {
+  if( ( self = [super initWithLayer:layer] ) ) {
+    if ([layer isKindOfClass:[LACircleShapeLayer class]]) {
+      self.circleSize = ((LACircleShapeLayer *)layer).circleSize;
+      self.circlePosition = ((LACircleShapeLayer *)layer).circlePosition;
+    }
+  }
+  return self;
+}
+
++ (BOOL)needsDisplayForKey:(NSString *)key {
+  BOOL needsDisplay = [super needsDisplayForKey:key];
+  
+  if ([key isEqualToString:@"circlePosition"] || [key isEqualToString:@"circleSize"]) {
+    needsDisplay = YES;
+  }
+  
+  return needsDisplay;
+}
+
+-(id<CAAction>)actionForKey:(NSString *)event {
+  if( [event isEqualToString:@"circlePosition"] || [event isEqualToString:@"circleSize"]) {
+    CABasicAnimation *theAnimation = [CABasicAnimation
+                                      animationWithKeyPath:event];
+    theAnimation.fromValue = [[self presentationLayer] valueForKey:event];
+    return theAnimation;
+  }
+  return [super actionForKey:event];
+}
+
+- (void)_setPath {
+  LACircleShapeLayer *presentationCircle = (LACircleShapeLayer *)self.presentationLayer;
+  CGFloat halfWidth = presentationCircle.circleSize.x / 2;
+  CGFloat halfHeight = presentationCircle.circleSize.y / 2;
+  CGRect ellipse =  CGRectMake(presentationCircle.circlePosition.x - halfWidth, presentationCircle.circlePosition.y - halfHeight, presentationCircle.circleSize.x, presentationCircle.circleSize.y);
+  self.path = [UIBezierPath bezierPathWithOvalInRect:ellipse].CGPath;
+}
+
+- (void)display {
+  [self _setPath];
+}
+
+@end
+
 @implementation LAEllipseShapeLayer {
   LAShapeTransform *_transform;
   LAShapeStroke *_stroke;
@@ -16,8 +72,8 @@
   LAShapeCircle *_circle;
   LAShapeTrimPath *_trim;
   
-  CAShapeLayer *_fillLayer;
-  CAShapeLayer *_strokeLayer;
+  LACircleShapeLayer *_fillLayer;
+  LACircleShapeLayer *_strokeLayer;
   
   CAAnimationGroup *_animation;
   CAAnimationGroup *_strokeAnimation;
@@ -47,22 +103,18 @@
     self.sublayerTransform = CATransform3DMakeRotation(_transform.rotation.initialValue.floatValue, 0, 0, 1);
     
     if (fill) {
-      _fillLayer = [CAShapeLayer new];
-      _fillLayer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(-50, -50, 100, 100)].CGPath;
+      _fillLayer = [LACircleShapeLayer new];
       _fillLayer.allowsEdgeAntialiasing = YES;
-      _fillLayer.position = circleShape.position.initialPoint;
-      _fillLayer.transform = circleShape.scale.initialScale;
       _fillLayer.fillColor = _fill.color.initialColor.CGColor;
       _fillLayer.opacity = _fill.opacity.initialValue.floatValue;
+      _fillLayer.circlePosition = circleShape.position.initialPoint;
+      _fillLayer.circleSize = circleShape.size.initialPoint;
       [self addSublayer:_fillLayer];
     }
     
     if (stroke) {
-      _strokeLayer = [CAShapeLayer new];
-      _strokeLayer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(-50, -50, 100, 100)].CGPath;
+      _strokeLayer = [LACircleShapeLayer new];
       _strokeLayer.allowsEdgeAntialiasing = YES;
-      _strokeLayer.position = circleShape.position.initialPoint;
-      _strokeLayer.transform = circleShape.scale.initialScale;
       _strokeLayer.strokeColor = _stroke.color.initialColor.CGColor;
       _strokeLayer.opacity = _stroke.opacity.initialValue.floatValue;
       _strokeLayer.lineWidth = _stroke.width.initialValue.floatValue;
@@ -70,6 +122,8 @@
       _strokeLayer.backgroundColor = nil;
       _strokeLayer.lineDashPattern = _stroke.lineDashPattern;
       _strokeLayer.lineCap = _stroke.capType == LALineCapTypeRound ? kCALineCapRound : kCALineCapButt;
+      _strokeLayer.circlePosition = circleShape.position.initialPoint;
+      _strokeLayer.circleSize = circleShape.size.initialPoint;
       switch (_stroke.joinType) {
         case LALineJoinTypeBevel:
           _strokeLayer.lineJoin = kCALineJoinBevel;
@@ -83,10 +137,10 @@
         default:
           break;
       }
-      if (trim) {
-        _strokeLayer.strokeStart = _trim.start.initialValue.floatValue;
-        _strokeLayer.strokeEnd = _trim.end.initialValue.floatValue;
-      }
+//      if (trim) {
+//        _strokeLayer.strokeStart = _trim.start.initialValue.floatValue;
+//        _strokeLayer.strokeEnd = _trim.end.initialValue.floatValue;
+//      }
       [self addSublayer:_strokeLayer];
     }
     self.animationSublayers = [NSArray arrayWithArray:self.sublayers];
@@ -112,12 +166,12 @@
     NSMutableDictionary *properties = [NSMutableDictionary dictionaryWithDictionary:@{@"strokeColor" : _stroke.color,
                                                                                       @"opacity" : _stroke.opacity,
                                                                                       @"lineWidth" : _stroke.width,
-                                                                                      @"position" : _circle.position,
-                                                                                      @"transform" : _circle.scale}];
-    if (_trim) {
-      properties[@"strokeStart"] = _trim.start;
-      properties[@"strokeEnd"] = _trim.end;
-    }
+                                                                                      @"circlePosition" : _circle.position,
+                                                                                      @"circleSize" : _circle.size}];
+//    if (_trim) {
+//      properties[@"strokeStart"] = _trim.start;
+//      properties[@"strokeEnd"] = _trim.end;
+//    }
     _strokeAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:properties];
     [_strokeLayer addAnimation:_strokeAnimation forKey:@""];
     
@@ -126,8 +180,8 @@
   if (_fill) {
     _fillAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"backgroundColor" : _fill.color,
                                                                                            @"opacity" : _fill.opacity,
-                                                                                           @"position" : _circle.position,
-                                                                                           @"transform" : _circle.scale}];
+                                                                                           @"circlePosition" : _circle.position,
+                                                                                           @"circleSize" : _circle.size}];
     [_fillLayer addAnimation:_fillAnimation forKey:@""];
   }
 }

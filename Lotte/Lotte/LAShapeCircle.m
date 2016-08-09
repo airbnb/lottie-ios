@@ -27,9 +27,10 @@
     _position.usePathAnimation = NO;
   }
   
-  NSDictionary *scale = jsonDictionary[@"s"];
-  if (scale) {
-    _scale = [[LAAnimatableScaleValue alloc] initWithScaleValues:scale frameRate:frameRate];
+  NSDictionary *size= jsonDictionary[@"s"];
+  if (size) {
+    _size = [[LAAnimatablePointValue alloc] initWithPointValues:size frameRate:frameRate];
+    _size.usePathAnimation = NO;
   }
 }
 

@@ -16,7 +16,7 @@
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
 
 @property (nonatomic, readonly) LAAnimatablePointValue *position;
-@property (nonatomic, readonly) LAAnimatableBoundsValue *bounds;
+@property (nonatomic, readonly) LAAnimatablePointValue *size;
 @property (nonatomic, readonly) LAAnimatableNumberValue *cornerRadius;
 
 @end
