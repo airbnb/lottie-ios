@@ -1,10 +1,3 @@
-//
-//  CGGeometryAdditions.h
-//  localmind
-//
-//  Created by Nelson Gauthier on 11-10-25.
-//  Copyright (c) 2011 Bitdingo. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKMathTypes.h>

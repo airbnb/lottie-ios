@@ -35,7 +35,6 @@
   NSDictionary *offset = jsonDictionary[@"o"];
   if (offset) {
     _offset = [[LAAnimatableNumberValue alloc] initWithNumberValues:offset frameRate:frameRate];
-//    [_end remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
   }
 }
 

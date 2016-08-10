@@ -144,10 +144,8 @@
 //      }
       [self addSublayer:_strokeLayer];
     }
-    self.animationSublayers = [NSArray arrayWithArray:self.sublayers];
     
     [self _buildAnimation];
-    [self pause];
   }
   
   return self;

@@ -110,13 +110,7 @@
   _groupLayers = groupLayers;
   _shapeLayers = shapeLayers;
   
-  NSMutableArray *childLayers = [NSMutableArray array];
-  [childLayers addObjectsFromArray:groupLayers];
-  [childLayers addObjectsFromArray:shapeLayers];
-  self.childLayers = childLayers;
-  
   [self _buildAnimation];
-  [self pause];
 }
 
 - (void)_buildAnimation {

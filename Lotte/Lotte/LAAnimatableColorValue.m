@@ -31,7 +31,7 @@
     NSArray *value = colorValues[@"k"];
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
-        [(NSDictionary *)[(NSArray *)value firstObject] objectForKey:@"t"]) {
+        [(NSArray *)value firstObject][@"t"]) {
       //Keframes
       [self _buildAnimationForKeyframes:value];
     } else {

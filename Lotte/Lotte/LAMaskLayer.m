@@ -41,8 +41,6 @@
     [maskLayers addObject:maskLayer];
   }
   _maskLayers = maskLayers;
-  self.animationSublayers = maskLayers;
-  [self pause];
 }
 
 @end

@@ -83,12 +83,9 @@
       }
       _strokeLayer.fillColor = nil;
     }
-    
-    self.animationSublayers = [NSArray arrayWithArray:self.sublayers];
+
     [self addSublayer:_strokeLayer];
     [self _buildAnimation];
-    [self pause];
-
   }
   return self;
 }

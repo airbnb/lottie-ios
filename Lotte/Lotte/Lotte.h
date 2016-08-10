@@ -15,5 +15,5 @@ FOUNDATION_EXPORT double LotteVersionNumber;
 FOUNDATION_EXPORT const unsigned char LotteVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <Lotte/PublicHeader.h>
-#import "LAAnimationView.h"
+#import <Lotte/LAAnimationView.h>
 

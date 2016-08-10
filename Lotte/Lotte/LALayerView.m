@@ -39,7 +39,6 @@
   self.transform = _parentModel.scale.initialScale;
   self.sublayerTransform = CATransform3DMakeRotation(_parentModel.rotation.initialValue.floatValue, 0, 0, 1);
   [self _buildAnimations];
-  [self pause];
 }
 
 - (void)_buildAnimations {
@@ -155,12 +154,8 @@
   if (_maskLayer) {
     [childLayers addObject:_maskLayer];
   }
-  
-  self.childLayers = childLayers;
-  self.animationSublayers = @[_childContainerLayer];
-  
+
   [self _buildAnimations];
-  [self pause];
 }
 
 - (void)_buildAnimations {
