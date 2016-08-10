@@ -32,8 +32,6 @@
   _compBounds = composition.compBounds;
   _framerate = composition.framerate;
   
-  CGRect selfBounds = _compBounds;
-  
   NSNumber *layerType = jsonDictionary[@"ty"];
   if (layerType.integerValue <= LALayerTypeShape) {
     _layerType = layerType.integerValue;
@@ -48,7 +46,7 @@
   if (_layerType == LALayerTypeSolid) {
     _solidWidth = jsonDictionary[@"sw"];
     _solidHeight = jsonDictionary[@"sh"];
-    selfBounds = CGRectMake(0, 0, _solidWidth.floatValue, _solidHeight.floatValue);
+    _compBounds = CGRectMake(0, 0, _solidWidth.floatValue, _solidHeight.floatValue);
     NSString *solidColor = jsonDictionary[@"sc"];
     _solidColor = [UIColor colorWithHexString:solidColor];
   }
@@ -76,7 +74,7 @@
   NSDictionary *anchor = ks[@"a"];
   if (anchor) {
     _anchor = [[LAAnimatablePointValue alloc] initWithPointValues:anchor frameRate:_framerate];
-    [_anchor remapPointsFromBounds:selfBounds toBounds:CGRectMake(0, 0, 1, 1)];
+    [_anchor remapPointsFromBounds:_compBounds toBounds:CGRectMake(0, 0, 1, 1)];
     _anchor.usePathAnimation = NO;
   }
   

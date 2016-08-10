@@ -26,6 +26,7 @@
 		48E774F91D4AC8180029FC2D /* parentTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774F01D4AC8180029FC2D /* parentTest.json */; };
 		48E774FA1D4AC8180029FC2D /* scaleTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774F11D4AC8180029FC2D /* scaleTest.json */; };
 		48E774FB1D4AC8180029FC2D /* selfie.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E774F21D4AC8180029FC2D /* selfie.json */; };
+		620ED8971D5BAB3600B40094 /* ellipseTrim.json in Resources */ = {isa = PBXBuildFile; fileRef = 620ED8961D5BAB3600B40094 /* ellipseTrim.json */; };
 		6295CF351D526D45004FAD21 /* SwitchBG.json in Resources */ = {isa = PBXBuildFile; fileRef = 6295CF341D526D45004FAD21 /* SwitchBG.json */; };
 		6295CF381D526D72004FAD21 /* BBLotteExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6295CF371D526D72004FAD21 /* BBLotteExampleViewController.m */; };
 		6295CFB11D52AC28004FAD21 /* CheckSwitch.json in Resources */ = {isa = PBXBuildFile; fileRef = 6295CFB01D52AC28004FAD21 /* CheckSwitch.json */; };
@@ -78,6 +79,7 @@
 		48E774F01D4AC8180029FC2D /* parentTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = parentTest.json; sourceTree = "<group>"; };
 		48E774F11D4AC8180029FC2D /* scaleTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = scaleTest.json; sourceTree = "<group>"; };
 		48E774F21D4AC8180029FC2D /* selfie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = selfie.json; sourceTree = "<group>"; };
+		620ED8961D5BAB3600B40094 /* ellipseTrim.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ellipseTrim.json; sourceTree = "<group>"; };
 		6295CF341D526D45004FAD21 /* SwitchBG.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SwitchBG.json; sourceTree = "<group>"; };
 		6295CF361D526D72004FAD21 /* BBLotteExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLotteExampleViewController.h; sourceTree = "<group>"; };
 		6295CF371D526D72004FAD21 /* BBLotteExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLotteExampleViewController.m; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		48E774CB1D4AC7300029FC2D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				620ED8961D5BAB3600B40094 /* ellipseTrim.json */,
 				6299193D1D5A8D32008EF7B6 /* rectTest.json */,
 				6299193B1D5A8A15008EF7B6 /* circleTest.json */,
 				62F8DFDE1D53EB39009CCCBD /* solidTest.json */,
@@ -229,6 +232,7 @@
 				48E774F71D4AC8180029FC2D /* Heart58TurnOff.json in Resources */,
 				6295CFBB1D52AE9C004FAD21 /* LightBulb.json in Resources */,
 				48E774F31D4AC8180029FC2D /* allset.json in Resources */,
+				620ED8971D5BAB3600B40094 /* ellipseTrim.json in Resources */,
 				487284621D5007B800007A88 /* 200_LYS_Lightswitch.json in Resources */,
 				48E774F81D4AC8180029FC2D /* Heart58TurnOn.json in Resources */,
 				6299193C1D5A8A15008EF7B6 /* circleTest.json in Resources */,

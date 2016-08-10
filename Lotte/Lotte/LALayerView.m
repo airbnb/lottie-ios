@@ -26,7 +26,7 @@
 - (instancetype)initWithParentModel:(LALayer *)parent inComposition:(LAComposition *)comp {
   self = [super initWithDuration:comp.timeDuration];
   if (self) {
-    self.bounds = comp.compBounds;
+    self.bounds = parent.compBounds;
     _parentModel = parent;
     [self _setupLayerFromModel];
   }

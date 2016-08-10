@@ -8,6 +8,7 @@
 
 #import "LAEllipseShapeLayer.h"
 #import "CAAnimationGroup+LAAnimatableGroup.h"
+#import "BWMath.h"
 
 @interface LACircleShapeLayer : CAShapeLayer
 
