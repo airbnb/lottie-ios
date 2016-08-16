@@ -56,6 +56,9 @@
 
 - (void)_setPath {
   LARoundRectLayer *presentationRect = (LARoundRectLayer *)self.presentationLayer;
+  if (presentationRect == nil) {
+    presentationRect = self;
+  }
   CGFloat halfWidth = presentationRect.rectSize.x / 2;
   CGFloat halfHeight = presentationRect.rectSize.y / 2;
   

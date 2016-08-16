@@ -10,6 +10,8 @@
 #import "CAAnimationGroup+LAAnimatableGroup.h"
 #import "BWMath.h"
 
+const CGFloat kEllipseControlPointPercentage = 0.55228;
+
 @interface LACircleShapeLayer : CAShapeLayer
 
 @property (nonatomic) CGPoint circlePosition;
@@ -54,10 +56,31 @@
 
 - (void)_setPath {
   LACircleShapeLayer *presentationCircle = (LACircleShapeLayer *)self.presentationLayer;
+  if (presentationCircle == nil) {
+    presentationCircle = self;
+  }
   CGFloat halfWidth = presentationCircle.circleSize.x / 2;
   CGFloat halfHeight = presentationCircle.circleSize.y / 2;
-  CGRect ellipse =  CGRectMake(presentationCircle.circlePosition.x - halfWidth, presentationCircle.circlePosition.y - halfHeight, presentationCircle.circleSize.x, presentationCircle.circleSize.y);
-  self.path = [UIBezierPath bezierPathWithOvalInRect:ellipse].CGPath;
+  
+  CGPoint circleQ1 = CGPointMake(0, -halfHeight);
+  CGPoint circleQ2 = CGPointMake(halfWidth, 0);
+  CGPoint circleQ3 = CGPointMake(0, halfHeight);
+  CGPoint circleQ4 = CGPointMake(-halfWidth, 0);
+  
+  CGFloat cpW = halfWidth * kEllipseControlPointPercentage;
+  CGFloat cpH = halfHeight * kEllipseControlPointPercentage;
+
+  UIBezierPath *path = [UIBezierPath bezierPath];
+  [path moveToPoint:circleQ1];
+  [path addCurveToPoint:circleQ2 controlPoint1:CGPointMake(circleQ1.x + cpW, circleQ1.y) controlPoint2:CGPointMake(circleQ2.x, circleQ2.y - cpH)];
+  
+  [path addCurveToPoint:circleQ3 controlPoint1:CGPointMake(circleQ2.x, circleQ2.y + cpH) controlPoint2:CGPointMake(circleQ3.x + cpW, circleQ3.y)];
+  
+  [path addCurveToPoint:circleQ4 controlPoint1:CGPointMake(circleQ3.x - cpW, circleQ3.y) controlPoint2:CGPointMake(circleQ4.x, circleQ4.y + cpH)];
+  
+  [path addCurveToPoint:circleQ1 controlPoint1:CGPointMake(circleQ4.x, circleQ4.y - cpH) controlPoint2:CGPointMake(circleQ1.x - cpW, circleQ1.y)];
+  
+  self.path = path.CGPath;
 }
 
 - (void)display {
@@ -138,10 +161,10 @@
         default:
           break;
       }
-//      if (trim) {
-//        _strokeLayer.strokeStart = _trim.start.initialValue.floatValue;
-//        _strokeLayer.strokeEnd = _trim.end.initialValue.floatValue;
-//      }
+      if (trim) {
+        _strokeLayer.strokeStart = _trim.start.initialValue.floatValue;
+        _strokeLayer.strokeEnd = _trim.end.initialValue.floatValue;
+      }
       [self addSublayer:_strokeLayer];
     }
     
@@ -167,10 +190,10 @@
                                                                                       @"lineWidth" : _stroke.width,
                                                                                       @"circlePosition" : _circle.position,
                                                                                       @"circleSize" : _circle.size}];
-//    if (_trim) {
-//      properties[@"strokeStart"] = _trim.start;
-//      properties[@"strokeEnd"] = _trim.end;
-//    }
+    if (_trim) {
+      properties[@"strokeStart"] = _trim.start;
+      properties[@"strokeEnd"] = _trim.end;
+    }
     _strokeAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:properties];
     [_strokeLayer addAnimation:_strokeAnimation forKey:@""];
     
