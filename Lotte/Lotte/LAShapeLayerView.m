@@ -82,9 +82,10 @@
         _strokeLayer.strokeEnd = _trim.end.initialValue.floatValue;
       }
       _strokeLayer.fillColor = nil;
+      [self addSublayer:_strokeLayer];
     }
 
-    [self addSublayer:_strokeLayer];
+    
     [self _buildAnimation];
   }
   return self;

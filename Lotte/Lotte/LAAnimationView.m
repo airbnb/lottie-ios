@@ -20,6 +20,7 @@
 @implementation LAAnimationView {
   NSDictionary *_layerMap;
   CALayer *_animationContainer;
+  CALayer *_timerLayer;
 }
 
 + (instancetype)animationNamed:(NSString *)animationName {
@@ -49,6 +50,8 @@
     [self.layer addSublayer:_animationContainer];
     [self _buildSubviewsFromModel];
     self.clipsToBounds = YES;
+    _timerLayer = [CALayer layer];
+    [self.layer addSublayer:_timerLayer];
   }
   return self;
 }
@@ -76,15 +79,24 @@
 }
 
 - (void)playWithCompletion:(void (^)(void))completion {
-  [CATransaction begin];
+  _isAnimationPlaying = YES;
   _animationContainer.speed = self.animationSpeed;
   _animationContainer.duration = self.sceneModel.timeDuration;
   _animationContainer.beginTime = [self.layer convertTime:CACurrentMediaTime() fromLayer:nil];
-  [CATransaction setAnimationDuration:self.sceneModel.timeDuration];
-  if (completion) {
-    [CATransaction setCompletionBlock:completion];
-  }
+
+  [CATransaction begin];
+  CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"opacity"];
+  anim.toValue = @1;
+  anim.duration = self.sceneModel.timeDuration;
+  [CATransaction setCompletionBlock:^{
+    _isAnimationPlaying = NO;
+    if (completion) {
+      completion();
+    }
+  }];
+  [_timerLayer addAnimation:anim forKey:@""];
   [CATransaction commit];
+  
 }
 
 - (void)play {
@@ -120,10 +132,6 @@
   if (self.isAnimationPlaying) {
     _animationContainer.speed = animationSpeed;
   }
-}
-
-- (BOOL)isAnimationPlaying {
-  return _animationContainer.speed > 0;
 }
 
 - (void)layoutSubviews {
