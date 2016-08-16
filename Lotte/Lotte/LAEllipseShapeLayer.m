@@ -161,10 +161,10 @@ const CGFloat kEllipseControlPointPercentage = 0.55228;
         default:
           break;
       }
-//      if (trim) {
-//        _strokeLayer.strokeStart = _trim.start.initialValue.floatValue;
-//        _strokeLayer.strokeEnd = _trim.end.initialValue.floatValue;
-//      }
+      if (trim) {
+        _strokeLayer.strokeStart = _trim.start.initialValue.floatValue;
+        _strokeLayer.strokeEnd = _trim.end.initialValue.floatValue;
+      }
       [self addSublayer:_strokeLayer];
     }
     
@@ -190,10 +190,10 @@ const CGFloat kEllipseControlPointPercentage = 0.55228;
                                                                                       @"lineWidth" : _stroke.width,
                                                                                       @"circlePosition" : _circle.position,
                                                                                       @"circleSize" : _circle.size}];
-//    if (_trim) {
-//      properties[@"strokeStart"] = _trim.start;
-//      properties[@"strokeEnd"] = _trim.end;
-//    }
+    if (_trim) {
+      properties[@"strokeStart"] = _trim.start;
+      properties[@"strokeEnd"] = _trim.end;
+    }
     _strokeAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:properties];
     [_strokeLayer addAnimation:_strokeAnimation forKey:@""];
     
