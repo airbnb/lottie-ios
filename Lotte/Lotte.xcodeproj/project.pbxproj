@@ -68,8 +68,6 @@
 		48E774AA1D4AABF00029FC2D /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774A41D4AABF00029FC2D /* UIColor+Expanded.m */; };
 		48E774AB1D4AABF00029FC2D /* CGGeometryAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E774A51D4AABF00029FC2D /* CGGeometryAdditions.h */; };
 		48E774AC1D4AABF00029FC2D /* CGGeometryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774A61D4AABF00029FC2D /* CGGeometryAdditions.m */; };
-		6294E63B1D62851000EC2F0F /* LAShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6294E6391D62851000EC2F0F /* LAShapeLayer.h */; };
-		6294E63C1D62851000EC2F0F /* LAShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6294E63A1D62851000EC2F0F /* LAShapeLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,8 +135,6 @@
 		48E774A51D4AABF00029FC2D /* CGGeometryAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGGeometryAdditions.h; sourceTree = "<group>"; };
 		48E774A61D4AABF00029FC2D /* CGGeometryAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGGeometryAdditions.m; sourceTree = "<group>"; };
 		48E774AF1D4AAD2E0029FC2D /* LAHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LAHelpers.h; sourceTree = "<group>"; };
-		6294E6391D62851000EC2F0F /* LAShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeLayer.h; sourceTree = "<group>"; };
-		6294E63A1D62851000EC2F0F /* LAShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,8 +189,6 @@
 				48E7743C1D4AABB70029FC2D /* LAMaskLayer.m */,
 				48E7743D1D4AABB70029FC2D /* LAGroupLayerView.h */,
 				48E7743E1D4AABB70029FC2D /* LAGroupLayerView.m */,
-				6294E6391D62851000EC2F0F /* LAShapeLayer.h */,
-				6294E63A1D62851000EC2F0F /* LAShapeLayer.m */,
 				48E7743F1D4AABB70029FC2D /* LAShapeLayerView.h */,
 				48E774401D4AABB70029FC2D /* LAShapeLayerView.m */,
 				48E774411D4AABB70029FC2D /* LARectShapeLayer.h */,
@@ -290,7 +284,6 @@
 				48E774981D4AABDA0029FC2D /* LAShapeTransform.h in Headers */,
 				48E7744D1D4AABB70029FC2D /* LAShapeLayerView.h in Headers */,
 				48E7747A1D4AABDA0029FC2D /* LAModels.h in Headers */,
-				6294E63B1D62851000EC2F0F /* LAShapeLayer.h in Headers */,
 				48E774801D4AABDA0029FC2D /* LAAnimatableNumberValue.h in Headers */,
 				48E774901D4AABDA0029FC2D /* LAShapeGroup.h in Headers */,
 				48E774A71D4AABF00029FC2D /* BWMath.h in Headers */,
@@ -376,7 +369,6 @@
 			files = (
 				48E774501D4AABB70029FC2D /* LARectShapeLayer.m in Sources */,
 				48E774AC1D4AABF00029FC2D /* CGGeometryAdditions.m in Sources */,
-				6294E63C1D62851000EC2F0F /* LAShapeLayer.m in Sources */,
 				48E774891D4AABDA0029FC2D /* CAAnimationGroup+LAAnimatableGroup.m in Sources */,
 				48E7747D1D4AABDA0029FC2D /* LAAnimatableColorValue.m in Sources */,
 				48E7749D1D4AABDA0029FC2D /* LAShapeCircle.m in Sources */,

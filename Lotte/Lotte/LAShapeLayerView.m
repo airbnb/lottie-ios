@@ -8,7 +8,6 @@
 
 #import "LAShapeLayerView.h"
 #import "CAAnimationGroup+LAAnimatableGroup.h"
-#import "LAShapeLayer.h"
 
 @implementation LAShapeLayerView {
   LAShapeTransform *_transform;
@@ -17,8 +16,8 @@
   LAShapePath *_path;
   LAShapeTrimPath *_trim;
   
-  LAShapeLayer *_fillLayer;
-  LAShapeLayer *_strokeLayer;
+  CAShapeLayer *_fillLayer;
+  CAShapeLayer *_strokeLayer;
   
   CAAnimationGroup *_animation;
   CAAnimationGroup *_strokeAnimation;
