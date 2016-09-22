@@ -11,6 +11,8 @@
 #import "LAModels.h"
 #import "LAHelpers.h"
 
+const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
+
 @interface LAAnimationView ()
 
 @property (nonatomic, readonly) LAComposition *sceneModel;
@@ -81,7 +83,7 @@
 - (void)playWithCompletion:(void (^)(void))completion {
   _isAnimationPlaying = YES;
   _animationContainer.speed = self.animationSpeed;
-  _animationContainer.duration = self.sceneModel.timeDuration;
+  _animationContainer.duration = self.sceneModel.timeDuration + singleFrameTimeValue;
   _animationContainer.beginTime = [self.layer convertTime:CACurrentMediaTime() fromLayer:nil];
 
   [CATransaction begin];
@@ -112,7 +114,7 @@
   
   _animationContainer.speed = 0;
   _animationContainer.timeOffset = 0.0;
-  _animationContainer.duration = self.sceneModel.timeDuration;
+  _animationContainer.duration = self.sceneModel.timeDuration + singleFrameTimeValue;
   _animationContainer.beginTime = [self.layer convertTime:CACurrentMediaTime() fromLayer:nil];
   _animationContainer.timeOffset = animationProgress * self.sceneModel.timeDuration;
 }
