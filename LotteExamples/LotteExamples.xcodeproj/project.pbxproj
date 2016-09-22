@@ -32,24 +32,27 @@
 		6295CF351D526D45004FAD21 /* SwitchBG.json in Resources */ = {isa = PBXBuildFile; fileRef = 6295CF341D526D45004FAD21 /* SwitchBG.json */; };
 		6295CF381D526D72004FAD21 /* BBLotteExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6295CF371D526D72004FAD21 /* BBLotteExampleViewController.m */; };
 		6295CFB11D52AC28004FAD21 /* CheckSwitch.json in Resources */ = {isa = PBXBuildFile; fileRef = 6295CFB01D52AC28004FAD21 /* CheckSwitch.json */; };
-		6295CFB31D52AD4D004FAD21 /* Lotte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6295CFB21D52AD4D004FAD21 /* Lotte.framework */; };
-		6295CFB41D52AD4D004FAD21 /* Lotte.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6295CFB21D52AD4D004FAD21 /* Lotte.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6295CFB91D52AE9C004FAD21 /* Alarmdata.json in Resources */ = {isa = PBXBuildFile; fileRef = 6295CFB61D52AE9C004FAD21 /* Alarmdata.json */; };
 		6295CFBA1D52AE9C004FAD21 /* Diamondata.json in Resources */ = {isa = PBXBuildFile; fileRef = 6295CFB71D52AE9C004FAD21 /* Diamondata.json */; };
 		6295CFBB1D52AE9C004FAD21 /* LightBulb.json in Resources */ = {isa = PBXBuildFile; fileRef = 6295CFB81D52AE9C004FAD21 /* LightBulb.json */; };
 		6299193C1D5A8A15008EF7B6 /* circleTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6299193B1D5A8A15008EF7B6 /* circleTest.json */; };
 		6299193E1D5A8D32008EF7B6 /* rectTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6299193D1D5A8D32008EF7B6 /* rectTest.json */; };
+		62B52C911D74FB72006500B0 /* Upvote14.json in Resources */ = {isa = PBXBuildFile; fileRef = 62B52C901D74FB72006500B0 /* Upvote14.json */; };
+		62B52C931D74FB78006500B0 /* Upvote_13.json in Resources */ = {isa = PBXBuildFile; fileRef = 62B52C921D74FB78006500B0 /* Upvote_13.json */; };
+		62B52C951D74FBBA006500B0 /* Lotte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B52C941D74FBBA006500B0 /* Lotte.framework */; };
+		62B52C961D74FBBD006500B0 /* Lotte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B52C941D74FBBA006500B0 /* Lotte.framework */; };
+		62B52C971D74FBBD006500B0 /* Lotte.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62B52C941D74FBBA006500B0 /* Lotte.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		62F8DFDF1D53EB39009CCCBD /* solidTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 62F8DFDE1D53EB39009CCCBD /* solidTest.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6295CFB51D52AD4D004FAD21 /* Embed Frameworks */ = {
+		62B52C981D74FBBD006500B0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6295CFB41D52AD4D004FAD21 /* Lotte.framework in Embed Frameworks */,
+				62B52C971D74FBBD006500B0 /* Lotte.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,6 +97,9 @@
 		6295CFB81D52AE9C004FAD21 /* LightBulb.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LightBulb.json; sourceTree = "<group>"; };
 		6299193B1D5A8A15008EF7B6 /* circleTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = circleTest.json; sourceTree = "<group>"; };
 		6299193D1D5A8D32008EF7B6 /* rectTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rectTest.json; sourceTree = "<group>"; };
+		62B52C901D74FB72006500B0 /* Upvote14.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Upvote14.json; sourceTree = "<group>"; };
+		62B52C921D74FB78006500B0 /* Upvote_13.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Upvote_13.json; sourceTree = "<group>"; };
+		62B52C941D74FBBA006500B0 /* Lotte.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lotte.framework; path = "../../../Library/Developer/Xcode/DerivedData/LotteExamples-egoevfawucayozfplbchbmkjijau/Build/Products/Debug-iphonesimulator/Lotte.framework"; sourceTree = "<group>"; };
 		62F8DFDE1D53EB39009CCCBD /* solidTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = solidTest.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,7 +108,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6295CFB31D52AD4D004FAD21 /* Lotte.framework in Frameworks */,
+				62B52C951D74FBBA006500B0 /* Lotte.framework in Frameworks */,
+				62B52C961D74FBBD006500B0 /* Lotte.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +119,7 @@
 		48E774BF1D4AC7300029FC2D = {
 			isa = PBXGroup;
 			children = (
+				62B52C941D74FBBA006500B0 /* Lotte.framework */,
 				6295CFB21D52AD4D004FAD21 /* Lotte.framework */,
 				48E774E81D4AC7A50029FC2D /* Lotte.framework */,
 				48E774CA1D4AC7300029FC2D /* LotteExamples */,
@@ -148,6 +156,8 @@
 		48E774CB1D4AC7300029FC2D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				62B52C921D74FB78006500B0 /* Upvote_13.json */,
+				62B52C901D74FB72006500B0 /* Upvote14.json */,
 				6294E63D1D63D10300EC2F0F /* AlarmNew.json */,
 				6294E6371D626C7F00EC2F0F /* AlarmAlt.json */,
 				620ED8961D5BAB3600B40094 /* ellipseTrim.json */,
@@ -187,7 +197,7 @@
 				48E774C41D4AC7300029FC2D /* Sources */,
 				48E774C51D4AC7300029FC2D /* Frameworks */,
 				48E774C61D4AC7300029FC2D /* Resources */,
-				6295CFB51D52AD4D004FAD21 /* Embed Frameworks */,
+				62B52C981D74FBBD006500B0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -236,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48E774F71D4AC8180029FC2D /* Heart58TurnOff.json in Resources */,
+				62B52C911D74FB72006500B0 /* Upvote14.json in Resources */,
 				6295CFBB1D52AE9C004FAD21 /* LightBulb.json in Resources */,
 				48E774F31D4AC8180029FC2D /* allset.json in Resources */,
 				620ED8971D5BAB3600B40094 /* ellipseTrim.json in Resources */,
@@ -252,6 +263,7 @@
 				487284561D4FCD5300007A88 /* pause.json in Resources */,
 				48E774FA1D4AC8180029FC2D /* scaleTest.json in Resources */,
 				48E774FB1D4AC8180029FC2D /* selfie.json in Resources */,
+				62B52C931D74FB78006500B0 /* Upvote_13.json in Resources */,
 				6294E63E1D63D10300EC2F0F /* AlarmNew.json in Resources */,
 				6295CFB11D52AC28004FAD21 /* CheckSwitch.json in Resources */,
 				48E774F51D4AC8180029FC2D /* govtid.json in Resources */,
