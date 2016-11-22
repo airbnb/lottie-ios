@@ -11,6 +11,16 @@
 #import "LAModels.h"
 #import "LAHelpers.h"
 
+@interface LAAnimationState : NSObject
+
+@property (nonatomic, assign) BOOL loopAnimation;
+@property (nonatomic, assign) BOOL animationIsPlaying;
+@property (nonatomic, assign) CFTimeInterval animationStartTime;
+@property (nonatomic, assign) CGFloat animatedProgress;
+
+
+@end
+
 const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
 @interface LAAnimationView ()
@@ -46,7 +56,6 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
     _animationSpeed = 1;
     _animationContainer = [CALayer new];
     _animationContainer.frame = self.bounds;
-    _animationContainer.speed = 0;
     _animationContainer.fillMode = kCAFillModeForwards;
     _animationContainer.masksToBounds = YES;
     [self.layer addSublayer:_animationContainer];
@@ -54,6 +63,10 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
     self.clipsToBounds = YES;
     _timerLayer = [CALayer layer];
     [self.layer addSublayer:_timerLayer];
+    _animationContainer.speed = 0.0;
+    _animationContainer.beginTime = 0.0;
+    _animationContainer.timeOffset = 0.0;
+    _animationContainer.duration = self.sceneModel.timeDuration + singleFrameTimeValue;
   }
   return self;
 }
@@ -80,11 +93,22 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   _layerMap = layerMap;
 }
 
+- (void)play {
+  [self playWithCompletion:nil];
+}
+
 - (void)playWithCompletion:(void (^)(void))completion {
+  // Problems with this method currently
+  // If playing animation a second time, the animation is borked.
+  
+  CFTimeInterval pausedTime = _animationContainer.timeOffset;
   _isAnimationPlaying = YES;
   _animationContainer.speed = self.animationSpeed;
-  _animationContainer.duration = self.sceneModel.timeDuration + singleFrameTimeValue;
-  _animationContainer.beginTime = [self.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+  _animationContainer.timeOffset = 0.0;
+  _animationContainer.beginTime = 0.0;
+  CFTimeInterval timeSincePause = [self.layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+  _animationContainer.beginTime = timeSincePause;
+  
 
   [CATransaction begin];
   CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"opacity"];
@@ -101,12 +125,18 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   
 }
 
-- (void)play {
-  [self playWithCompletion:nil];
+- (void)didMoveToSuperview {
+  [super didMoveToSuperview];
+  
 }
 
 - (void)pause {
-  _animationContainer.speed = 0;
+  CFTimeInterval pausedTime = [self.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+  _animationContainer.speed = 0.0;
+  _animationContainer.beginTime = 0.0;
+  _animationContainer.timeOffset = pausedTime;
+  _isAnimationPlaying = NO;
+  // TODO Fix completion block handling.
 }
 
 - (void)setAnimationProgress:(CGFloat)animationProgress {
@@ -122,6 +152,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 - (void)setLoopAnimation:(BOOL)loopAnimation {
   _loopAnimation = loopAnimation;
   _animationContainer.repeatCount = loopAnimation ? HUGE_VALF : 0;
+  _animationContainer.duration = loopAnimation ? self.sceneModel.timeDuration : 0;
 }
 
 - (void)setAutoReverseAnimation:(BOOL)autoReverseAnimation {
@@ -141,8 +172,6 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   
   CGPoint centerPoint = CGRectGetCenterPoint(self.bounds);
   CATransform3D xform;
-  
-  
   
   if (self.contentMode == UIViewContentModeScaleToFill) {
     CGSize scaleSize = CGSizeMake(self.bounds.size.width / self.sceneModel.compBounds.size.width,
@@ -174,6 +203,22 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   _animationContainer.transform = xform;
   _animationContainer.position = centerPoint;
   [CATransaction commit];
-  
 }
+
+- (void)setDebugSpeed:(CGFloat)debugSpeed {
+  _animationContainer.speed = debugSpeed;
+}
+
+- (void)setDebugDuration:(CGFloat)debugDuration {
+  _animationContainer.duration = debugDuration;
+}
+
+- (void)setDebugBeginTime:(CFTimeInterval)debugBeginTime {
+  _animationContainer.beginTime = debugBeginTime;
+}
+
+- (void)setDebugTimeOffset:(CFTimeInterval)debugTimeOffset {
+  _animationContainer.timeOffset = debugTimeOffset;
+}
+
 @end

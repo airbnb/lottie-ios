@@ -31,6 +31,11 @@
 // Currently Not Supported.
 @property (nonatomic, assign) BOOL autoReverseAnimation;
 
+@property (nonatomic, assign) CFTimeInterval debugBeginTime;
+@property (nonatomic, assign) CFTimeInterval debugTimeOffset;
+@property (nonatomic, assign) CGFloat debugDuration;
+@property (nonatomic, assign) CGFloat debugSpeed;
+
 - (void)playWithCompletion:(void (^)(void))completion;
 - (void)play;
 - (void)pause;

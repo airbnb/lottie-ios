@@ -11,7 +11,7 @@
 
 #import <Lotte/Lotte.h>
 
-@interface BBLotteExampleViewController ()
+@interface BBLotteExampleViewController () <UITextFieldDelegate>
 
 @end
 
@@ -25,6 +25,32 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  
+  CGFloat xOrigin = 0;
+  NSArray *strings = @[@"begin", @"offset", @"duration", @"speed"];
+  CGFloat xDiv = self.view.bounds.size.width / strings.count;
+  
+  
+  for (int i = 0; i < strings.count; i ++) {
+    CGRect textFieldFrame = CGRectMake(xOrigin, 20, xDiv, 60);
+    UITextField *inputField = [[UITextField alloc] initWithFrame:textFieldFrame];
+    inputField.tag = i;
+    inputField.delegate = self;
+    inputField.placeholder = strings[i];
+    [self.view addSubview:inputField];
+    
+    textFieldFrame.origin.y += textFieldFrame.size.height;
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    [button setTitle:strings[i] forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor blueColor];
+    button.frame = textFieldFrame;
+    button.tag = i;
+    [button addTarget:self action:@selector(setAnimationAttribute:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    xOrigin += xDiv;
+  }
+  
+  
   openButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
   [openButton setTitle:@"Open" forState:UIControlStateNormal];
   [self.view addSubview:openButton];
@@ -62,7 +88,7 @@
   CGRect sliderRect = CGRectMake(CGRectGetMaxX(loopButton.frame) + 10, CGRectGetMinY(loopButton.frame), boundsSize.width - CGRectGetMaxX(loopButton.frame) - 20, 44);
   animationSlider.frame = sliderRect;
   
-  currentAnimation.frame = CGRectMake(0, 0, boundsSize.width, boundsSize.height - 70);
+  currentAnimation.frame = CGRectMake(0, 180, boundsSize.width, boundsSize.height - 250);
   
 }
 
@@ -116,5 +142,50 @@
     [self.view setNeedsLayout];
   }
 }
+
+- (void)setAnimationAttribute:(UIButton *)button {
+//  NSArray *strings = @[@"begin", @"offset", @"duration", @"speed"];
+  switch (button.tag) {
+    case 0: {
+      currentAnimation.debugBeginTime = CACurrentMediaTime();
+    } break;
+    case 1: {
+      currentAnimation.debugTimeOffset = CACurrentMediaTime();
+    } break;
+    case 2: {
+      
+    } break;
+    case 3: {
+      
+    } break;
+    default:
+      break;
+  }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+  switch (textField.tag) {
+    case 0: {
+      currentAnimation.debugBeginTime = textField.text.floatValue;
+    } break;
+    case 1: {
+      currentAnimation.debugTimeOffset = textField.text.floatValue;
+
+    } break;
+    case 2: {
+      currentAnimation.debugDuration = textField.text.floatValue;
+    } break;
+    case 3: {
+      currentAnimation.debugSpeed = textField.text.floatValue;
+    } break;
+    default:
+      break;
+  }
+}
+
+// timeOffset
+// beginTime
+// duration
+// speed
 
 @end
