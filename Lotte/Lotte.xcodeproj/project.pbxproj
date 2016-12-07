@@ -71,6 +71,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		48A7230A1DF8C99D00A55C00 /* LAAnimationView_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LAAnimationView_Internal.h; sourceTree = "<group>"; };
 		48E774281D4AAB070029FC2D /* Lotte.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lotte.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48E7742B1D4AAB070029FC2D /* Lotte.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lotte.h; sourceTree = "<group>"; };
 		48E7742D1D4AAB070029FC2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -172,6 +173,7 @@
 				48E774531D4AABC10029FC2D /* Animatable Layers */,
 				48E774331D4AAB200029FC2D /* LAAnimationView.h */,
 				48E774341D4AAB200029FC2D /* LAAnimationView.m */,
+				48A7230A1DF8C99D00A55C00 /* LAAnimationView_Internal.h */,
 				48E7742B1D4AAB070029FC2D /* Lotte.h */,
 				48E7742D1D4AAB070029FC2D /* Info.plist */,
 			);

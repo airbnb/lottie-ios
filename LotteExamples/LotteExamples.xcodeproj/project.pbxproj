@@ -12,6 +12,7 @@
 		4872845A1D4FCF3200007A88 /* LAJSONExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487284591D4FCF3200007A88 /* LAJSONExplorerViewController.m */; };
 		487284611D5007B800007A88 /* 100_House_AnimateInAndOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 4872845F1D5007B800007A88 /* 100_House_AnimateInAndOut.json */; };
 		487284621D5007B800007A88 /* 200_LYS_Lightswitch.json in Resources */ = {isa = PBXBuildFile; fileRef = 487284601D5007B800007A88 /* 200_LYS_Lightswitch.json */; };
+		48A722BA1DF6383400A55C00 /* Lotte.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 48A722B81DF6383400A55C00 /* Lotte.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		48E774CD1D4AC7300029FC2D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774CC1D4AC7300029FC2D /* main.m */; };
 		48E774D01D4AC7300029FC2D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774CF1D4AC7300029FC2D /* AppDelegate.m */; };
 		48E774D61D4AC7300029FC2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48E774D41D4AC7300029FC2D /* Main.storyboard */; };
@@ -39,20 +40,17 @@
 		6299193E1D5A8D32008EF7B6 /* rectTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6299193D1D5A8D32008EF7B6 /* rectTest.json */; };
 		62B52C911D74FB72006500B0 /* Upvote14.json in Resources */ = {isa = PBXBuildFile; fileRef = 62B52C901D74FB72006500B0 /* Upvote14.json */; };
 		62B52C931D74FB78006500B0 /* Upvote_13.json in Resources */ = {isa = PBXBuildFile; fileRef = 62B52C921D74FB78006500B0 /* Upvote_13.json */; };
-		62B52C951D74FBBA006500B0 /* Lotte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B52C941D74FBBA006500B0 /* Lotte.framework */; };
-		62B52C961D74FBBD006500B0 /* Lotte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B52C941D74FBBA006500B0 /* Lotte.framework */; };
-		62B52C971D74FBBD006500B0 /* Lotte.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62B52C941D74FBBA006500B0 /* Lotte.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		62F8DFDF1D53EB39009CCCBD /* solidTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 62F8DFDE1D53EB39009CCCBD /* solidTest.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		62B52C981D74FBBD006500B0 /* Embed Frameworks */ = {
+		48A722BB1DF6383400A55C00 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				62B52C971D74FBBD006500B0 /* Lotte.framework in Embed Frameworks */,
+				48A722BA1DF6383400A55C00 /* Lotte.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,6 +64,7 @@
 		487284591D4FCF3200007A88 /* LAJSONExplorerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAJSONExplorerViewController.m; sourceTree = "<group>"; };
 		4872845F1D5007B800007A88 /* 100_House_AnimateInAndOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 100_House_AnimateInAndOut.json; sourceTree = "<group>"; };
 		487284601D5007B800007A88 /* 200_LYS_Lightswitch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 200_LYS_Lightswitch.json; sourceTree = "<group>"; };
+		48A722B81DF6383400A55C00 /* Lotte.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lotte.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48E774C81D4AC7300029FC2D /* LotteExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LotteExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48E774CC1D4AC7300029FC2D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		48E774CE1D4AC7300029FC2D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -108,8 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62B52C951D74FBBA006500B0 /* Lotte.framework in Frameworks */,
-				62B52C961D74FBBD006500B0 /* Lotte.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +116,7 @@
 		48E774BF1D4AC7300029FC2D = {
 			isa = PBXGroup;
 			children = (
+				48A722B81DF6383400A55C00 /* Lotte.framework */,
 				62B52C941D74FBBA006500B0 /* Lotte.framework */,
 				6295CFB21D52AD4D004FAD21 /* Lotte.framework */,
 				48E774E81D4AC7A50029FC2D /* Lotte.framework */,
@@ -197,7 +195,7 @@
 				48E774C41D4AC7300029FC2D /* Sources */,
 				48E774C51D4AC7300029FC2D /* Frameworks */,
 				48E774C61D4AC7300029FC2D /* Resources */,
-				62B52C981D74FBBD006500B0 /* Embed Frameworks */,
+				48A722BB1DF6383400A55C00 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
