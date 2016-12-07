@@ -11,7 +11,7 @@
 
 #import <Lotte/Lotte.h>
 
-@interface BBLotteExampleViewController ()
+@interface BBLotteExampleViewController () <UITextFieldDelegate>
 
 @end
 
@@ -48,7 +48,6 @@
 
 - (void)viewDidLayoutSubviews {
   [super viewDidLayoutSubviews];
-  
   CGSize boundsSize = self.view.bounds.size;
   CGSize buttonSize = [openButton sizeThatFits:boundsSize];
   openButton.frame = CGRectMake(10, boundsSize.height - 60, buttonSize.width + 20, 44);
@@ -62,8 +61,7 @@
   CGRect sliderRect = CGRectMake(CGRectGetMaxX(loopButton.frame) + 10, CGRectGetMinY(loopButton.frame), boundsSize.width - CGRectGetMaxX(loopButton.frame) - 20, 44);
   animationSlider.frame = sliderRect;
   
-  currentAnimation.frame = CGRectMake(0, 0, boundsSize.width, boundsSize.height - 70);
-  
+  currentAnimation.frame = CGRectMake(0, 180, boundsSize.width, boundsSize.height - 250);
 }
 
 - (void)_openPressed {
