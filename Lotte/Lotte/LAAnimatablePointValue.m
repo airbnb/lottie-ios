@@ -112,20 +112,25 @@
     if (endPoint) {
       NSArray *controlPoint1 = keyframe[@"to"];
       NSArray *controlPoint2 = keyframe[@"ti"];
+      CGPoint cp1, cp2 = CGPointZero;
       CGPoint vertex = [self _pointFromValueArray:endPoint];
       [pointKeyframes addObject:[NSValue valueWithCGPoint:vertex]];
+      
       if (controlPoint1 && controlPoint2) {
         // Quadratic Spatial Interpolation
-        CGPoint cp1 = [self _pointFromValueArray:controlPoint1];
-        CGPoint cp2 = [self _pointFromValueArray:controlPoint2];
+        cp1 = [self _pointFromValueArray:controlPoint1];
+        cp2 = [self _pointFromValueArray:controlPoint2];
+      }
+      if (CGPointEqualToPoint(cp1, CGPointZero) &&
+          CGPointEqualToPoint(cp2, CGPointZero)) {
+        // Linear Spatial Interpolation
+        [motionPath addLineToPoint:vertex];
+      } else {
         CGPoint inVertex = [self _pointFromValueArray:startPoint];
         [motionPath addCurveToPoint:vertex
                       controlPoint1:CGPointAddedToPoint(inVertex, cp1)
                       controlPoint2:CGPointAddedToPoint(vertex, cp2)];
-        
-      } else {
-        // Linear Spatial Interpolation
-        [motionPath addLineToPoint:vertex];
+      
       }
       
       /*

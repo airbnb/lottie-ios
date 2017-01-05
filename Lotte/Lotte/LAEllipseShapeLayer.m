@@ -79,7 +79,7 @@ const CGFloat kEllipseControlPointPercentage = 0.55228;
   [path addCurveToPoint:circleQ4 controlPoint1:CGPointMake(circleQ3.x - cpW, circleQ3.y) controlPoint2:CGPointMake(circleQ4.x, circleQ4.y + cpH)];
   
   [path addCurveToPoint:circleQ1 controlPoint1:CGPointMake(circleQ4.x, circleQ4.y - cpH) controlPoint2:CGPointMake(circleQ1.x - cpW, circleQ1.y)];
-  
+  [path applyTransform:CGAffineTransformMakeTranslation(presentationCircle.circlePosition.x, presentationCircle.circlePosition.y)];
   self.path = path.CGPath;
 }
 

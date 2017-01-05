@@ -13,6 +13,13 @@
 		487284611D5007B800007A88 /* 100_House_AnimateInAndOut.json in Resources */ = {isa = PBXBuildFile; fileRef = 4872845F1D5007B800007A88 /* 100_House_AnimateInAndOut.json */; };
 		487284621D5007B800007A88 /* 200_LYS_Lightswitch.json in Resources */ = {isa = PBXBuildFile; fileRef = 487284601D5007B800007A88 /* 200_LYS_Lightswitch.json */; };
 		48A7230D1DF8D41C00A55C00 /* Lotte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A7230C1DF8D41C00A55C00 /* Lotte.framework */; };
+		48A723151DF8D58D00A55C00 /* ShapeTestStrokeJoin.json in Resources */ = {isa = PBXBuildFile; fileRef = 48A7230E1DF8D58D00A55C00 /* ShapeTestStrokeJoin.json */; };
+		48A723161DF8D58D00A55C00 /* ShapeTestElipse.json in Resources */ = {isa = PBXBuildFile; fileRef = 48A7230F1DF8D58D00A55C00 /* ShapeTestElipse.json */; };
+		48A723171DF8D58D00A55C00 /* ShapeTestRectangle.json in Resources */ = {isa = PBXBuildFile; fileRef = 48A723101DF8D58D00A55C00 /* ShapeTestRectangle.json */; };
+		48A723181DF8D58D00A55C00 /* ShapeTestGroupOpacity.json in Resources */ = {isa = PBXBuildFile; fileRef = 48A723111DF8D58D00A55C00 /* ShapeTestGroupOpacity.json */; };
+		48A723191DF8D58D00A55C00 /* MasksOpacity.json in Resources */ = {isa = PBXBuildFile; fileRef = 48A723121DF8D58D00A55C00 /* MasksOpacity.json */; };
+		48A7231A1DF8D58D00A55C00 /* SolidsTransformRotation.json in Resources */ = {isa = PBXBuildFile; fileRef = 48A723131DF8D58D00A55C00 /* SolidsTransformRotation.json */; };
+		48A7231B1DF8D58D00A55C00 /* KeyframesLinear.json in Resources */ = {isa = PBXBuildFile; fileRef = 48A723141DF8D58D00A55C00 /* KeyframesLinear.json */; };
 		48E774CD1D4AC7300029FC2D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774CC1D4AC7300029FC2D /* main.m */; };
 		48E774D01D4AC7300029FC2D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774CF1D4AC7300029FC2D /* AppDelegate.m */; };
 		48E774D61D4AC7300029FC2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48E774D41D4AC7300029FC2D /* Main.storyboard */; };
@@ -64,6 +71,13 @@
 		4872845F1D5007B800007A88 /* 100_House_AnimateInAndOut.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 100_House_AnimateInAndOut.json; sourceTree = "<group>"; };
 		487284601D5007B800007A88 /* 200_LYS_Lightswitch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 200_LYS_Lightswitch.json; sourceTree = "<group>"; };
 		48A7230C1DF8D41C00A55C00 /* Lotte.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lotte.framework; path = "../Lotte/build/Debug-iphoneos/Lotte.framework"; sourceTree = "<group>"; };
+		48A7230E1DF8D58D00A55C00 /* ShapeTestStrokeJoin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ShapeTestStrokeJoin.json; sourceTree = "<group>"; };
+		48A7230F1DF8D58D00A55C00 /* ShapeTestElipse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ShapeTestElipse.json; sourceTree = "<group>"; };
+		48A723101DF8D58D00A55C00 /* ShapeTestRectangle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ShapeTestRectangle.json; sourceTree = "<group>"; };
+		48A723111DF8D58D00A55C00 /* ShapeTestGroupOpacity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ShapeTestGroupOpacity.json; sourceTree = "<group>"; };
+		48A723121DF8D58D00A55C00 /* MasksOpacity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MasksOpacity.json; sourceTree = "<group>"; };
+		48A723131DF8D58D00A55C00 /* SolidsTransformRotation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SolidsTransformRotation.json; sourceTree = "<group>"; };
+		48A723141DF8D58D00A55C00 /* KeyframesLinear.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = KeyframesLinear.json; sourceTree = "<group>"; };
 		48E774C81D4AC7300029FC2D /* LotteExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LotteExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48E774CC1D4AC7300029FC2D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		48E774CE1D4AC7300029FC2D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -156,6 +170,13 @@
 		48E774CB1D4AC7300029FC2D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				48A7230E1DF8D58D00A55C00 /* ShapeTestStrokeJoin.json */,
+				48A7230F1DF8D58D00A55C00 /* ShapeTestElipse.json */,
+				48A723101DF8D58D00A55C00 /* ShapeTestRectangle.json */,
+				48A723111DF8D58D00A55C00 /* ShapeTestGroupOpacity.json */,
+				48A723121DF8D58D00A55C00 /* MasksOpacity.json */,
+				48A723131DF8D58D00A55C00 /* SolidsTransformRotation.json */,
+				48A723141DF8D58D00A55C00 /* KeyframesLinear.json */,
 				62B52C921D74FB78006500B0 /* Upvote_13.json */,
 				62B52C901D74FB72006500B0 /* Upvote14.json */,
 				6294E63D1D63D10300EC2F0F /* AlarmNew.json */,
@@ -246,12 +267,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				48E774F71D4AC8180029FC2D /* Heart58TurnOff.json in Resources */,
+				48A723191DF8D58D00A55C00 /* MasksOpacity.json in Resources */,
 				62B52C911D74FB72006500B0 /* Upvote14.json in Resources */,
 				6295CFBB1D52AE9C004FAD21 /* LightBulb.json in Resources */,
 				48E774F31D4AC8180029FC2D /* allset.json in Resources */,
 				620ED8971D5BAB3600B40094 /* ellipseTrim.json in Resources */,
+				48A723171DF8D58D00A55C00 /* ShapeTestRectangle.json in Resources */,
 				487284621D5007B800007A88 /* 200_LYS_Lightswitch.json in Resources */,
 				48E774F81D4AC8180029FC2D /* Heart58TurnOn.json in Resources */,
+				48A7231A1DF8D58D00A55C00 /* SolidsTransformRotation.json in Resources */,
 				6299193C1D5A8A15008EF7B6 /* circleTest.json in Resources */,
 				48E774DB1D4AC7300029FC2D /* LaunchScreen.storyboard in Resources */,
 				48E774F41D4AC8180029FC2D /* goftldalt.json in Resources */,
@@ -259,12 +283,16 @@
 				62F8DFDF1D53EB39009CCCBD /* solidTest.json in Resources */,
 				487284611D5007B800007A88 /* 100_House_AnimateInAndOut.json in Resources */,
 				48E774D81D4AC7300029FC2D /* Assets.xcassets in Resources */,
+				48A723181DF8D58D00A55C00 /* ShapeTestGroupOpacity.json in Resources */,
 				6295CF351D526D45004FAD21 /* SwitchBG.json in Resources */,
 				487284561D4FCD5300007A88 /* pause.json in Resources */,
 				48E774FA1D4AC8180029FC2D /* scaleTest.json in Resources */,
 				48E774FB1D4AC8180029FC2D /* selfie.json in Resources */,
+				48A723161DF8D58D00A55C00 /* ShapeTestElipse.json in Resources */,
 				62B52C931D74FB78006500B0 /* Upvote_13.json in Resources */,
+				48A723151DF8D58D00A55C00 /* ShapeTestStrokeJoin.json in Resources */,
 				6294E63E1D63D10300EC2F0F /* AlarmNew.json in Resources */,
+				48A7231B1DF8D58D00A55C00 /* KeyframesLinear.json in Resources */,
 				6295CFB11D52AC28004FAD21 /* CheckSwitch.json in Resources */,
 				48E774F51D4AC8180029FC2D /* govtid.json in Resources */,
 				48E774F91D4AC8180029FC2D /* parentTest.json in Resources */,
