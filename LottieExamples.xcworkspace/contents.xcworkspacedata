@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:/Users/brandonwithrow/Coding/LottieAnimator/Lottie/Lottie.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/brandonwithrow/Coding/LottieAnimator/LottieExamples/LottieExamples.xcodeproj">
+   </FileRef>
+</Workspace>
