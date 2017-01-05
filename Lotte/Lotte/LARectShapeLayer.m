@@ -63,7 +63,9 @@
   CGFloat halfHeight = presentationRect.rectSize.y / 2;
   
   CGRect rectFrame =  CGRectMake(presentationRect.rectPosition.x - halfWidth, presentationRect.rectPosition.y - halfHeight, presentationRect.rectSize.x, presentationRect.rectSize.y);
-  self.path = [UIBezierPath bezierPathWithRoundedRect:rectFrame cornerRadius:presentationRect.rectCornerRadius].CGPath;
+  UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rectFrame cornerRadius:presentationRect.rectCornerRadius];
+  [path closePath];
+  self.path = path.CGPath;
 }
 
 - (void)display {

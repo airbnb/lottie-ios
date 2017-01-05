@@ -11,6 +11,7 @@
 #import "LAGroupLayerView.h"
 #import "CAAnimationGroup+LAAnimatableGroup.h"
 #import "LAMaskLayer.h"
+#import "CGGeometryAdditions.h"
 
 @interface LAParentLayer : LAAnimatableLayer
 
@@ -83,7 +84,14 @@
   
   if (_layerModel.layerType == LALayerTypeSolid) {
     _childContainerLayer.bounds = CGRectMake(0, 0, _layerModel.solidWidth.floatValue, _layerModel.solidHeight.floatValue);
-    _childContainerLayer.masksToBounds = YES;
+    _childContainerLayer.backgroundColor = nil;
+    _childContainerLayer.masksToBounds = NO;
+
+    CALayer *solid = [CALayer new];
+    solid.backgroundColor = _layerModel.solidColor.CGColor;
+    solid.frame = _childContainerLayer.bounds;
+    solid.masksToBounds = YES;
+    [_childContainerLayer addSublayer:solid];
   }
   
   NSNumber *parentID = _layerModel.parentID;
