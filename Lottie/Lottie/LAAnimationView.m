@@ -207,9 +207,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   [self _buildSubviewsFromModel];
   LAAnimationState *oldState = _animationState;
   _animationState = [[LAAnimationState alloc] initWithDuration:_sceneModel.timeDuration + singleFrameTimeValue layer:_animationContainer];
-  
-  NSLog(@"Animation Loaded");
-//  return;
+
   if (restoreAnimation && oldState) {
     [self setLoopAnimation:oldState.loopAnimation];
     [self setAnimationSpeed:oldState.animationSpeed];
@@ -218,8 +216,6 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
       [self play];
     }
   }
-  
-  
 }
 
 
