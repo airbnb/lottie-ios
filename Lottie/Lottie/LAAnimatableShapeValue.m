@@ -7,7 +7,6 @@
 //
 
 #import "LAAnimatableShapeValue.h"
-#import "BWMath.h"
 #import "CGGeometryAdditions.h"
 @interface LAAnimatableShapeValue ()
 

@@ -8,7 +8,6 @@
 
 #import "LAEllipseShapeLayer.h"
 #import "CAAnimationGroup+LAAnimatableGroup.h"
-#import "BWMath.h"
 
 const CGFloat kEllipseControlPointPercentage = 0.55228;
 

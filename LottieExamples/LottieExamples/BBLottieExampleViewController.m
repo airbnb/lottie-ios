@@ -99,6 +99,15 @@
   [self _updatePlayButtonTitle];
 }
 
+- (void)_openFileAtURL:(NSURL *)url {
+  currentAnimation = [[LAAnimationView alloc] initWithContentsOfURL:url];
+  currentAnimation.contentMode = UIViewContentModeScaleAspectFit;
+  [self.view addSubview:currentAnimation];
+  [currentAnimation play];
+  [self _updatePlayButtonTitle];
+  [self.view setNeedsLayout];
+}
+
 - (void)_openFileAtPath:(NSString *)filePath {
   NSError *error;
   NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];

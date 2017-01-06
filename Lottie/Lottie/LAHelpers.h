@@ -9,7 +9,6 @@
 #ifndef LAHelpers_h
 #define LAHelpers_h
 
-#import "BWMath.h"
 #import "UIColor+Expanded.h"
 #import "CGGeometryAdditions.h"
 

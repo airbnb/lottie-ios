@@ -98,3 +98,7 @@ GLKMatrix4 GLKMatrix4FromCATransform(CATransform3D xform);
 CATransform3D CATransform3DFromGLKMatrix4(GLKMatrix4 xform);
 
 CATransform3D CATransform3DSlerpToTransform(CATransform3D fromXorm, CATransform3D toXform, CGFloat amount );
+
+CGFloat DegreesToRadians(CGFloat degrees);
+
+CGFloat RemapValue(CGFloat value, CGFloat low1, CGFloat high1, CGFloat low2, CGFloat high2 );

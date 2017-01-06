@@ -10,7 +10,7 @@
 #import "LAAnimatableNumberValue.h"
 #import "LAAnimatablePointValue.h"
 #import "LAAnimatableScaleValue.h"
-#import "BWMath.h"
+#import "LAHelpers.h"
 
 @implementation LAShapeTransform
 
