@@ -138,6 +138,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   NSDictionary *_layerMap;
   CALayer *_animationContainer;
   CADisplayLink *_completionDisplayLink;
+  BOOL hasFullyInitialized_;
 }
 
 # pragma mark - Initializers
@@ -216,6 +217,10 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
       [self play];
     }
   }
+  
+  if (_sceneModel) {
+    hasFullyInitialized_ = YES;
+  }
 }
 
 
@@ -256,12 +261,12 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   [self playWithCompletion:nil];
 }
 
-- (void)playWithCompletion:(void (^)(void))completion {
+- (void)playWithCompletion:(LAAnimationCompletionBlock)completion {
   if (completion) {
     self.completionBlock = completion;
   }
 
-  if (_sceneModel == nil) {
+  if (!hasFullyInitialized_) {
     [_animationState setAnimationIsPlaying:YES];
     return;
   }
@@ -273,7 +278,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 }
 
 - (void)pause {
-  if (_sceneModel == nil) {
+  if (!hasFullyInitialized_) {
     [_animationState setAnimationIsPlaying:NO];
     return;
   }
@@ -281,6 +286,8 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   if (_animationState.animationIsPlaying) {
     [_animationState setAnimationIsPlaying:NO];
     [self stopDisplayLink];
+    
+    [self _callCompletionIfNecesarry:NO];
   }
 }
 
@@ -306,17 +313,26 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 - (void)checkAnimationState {
   if (self.animationState.animationIsPlaying == NO) {
     [self stopDisplayLink];
-    if (self.completionBlock) {
-      self.completionBlock();
-      self.completionBlock = nil;
-    }
+    [self _callCompletionIfNecesarry:YES];
+  }
+}
+
+- (void)_callCompletionIfNecesarry:(BOOL)animationComplete {
+  if (self.completionBlock && hasFullyInitialized_) {
+    self.completionBlock(animationComplete);
+    self.completionBlock = nil;
   }
 }
 
 # pragma mark - Getters and Setters
 
 - (void)setAnimationProgress:(CGFloat)animationProgress {
+  if (_animationState.animationIsPlaying) {
+    [self _callCompletionIfNecesarry:NO];
+  }
+  
   [_animationState setAnimatedProgress:animationProgress];
+  
   [self stopDisplayLink];
 }
 
@@ -357,7 +373,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 - (void)layoutSubviews {
   [super layoutSubviews];
   
-  if (_sceneModel == nil) {
+  if (!hasFullyInitialized_) {
     _animationContainer.bounds = self.bounds;
     return;
   }

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^LAAnimationCompletionBlock)(BOOL animationFinished);
+
 @interface LAAnimationView : UIView
 
 + (instancetype)animationNamed:(NSString *)animationName;
@@ -20,7 +22,7 @@
 @property (nonatomic, assign) CGFloat animationProgress;
 @property (nonatomic, assign) CGFloat animationSpeed;
 
-- (void)playWithCompletion:(void (^)(void))completion;
+- (void)playWithCompletion:(LAAnimationCompletionBlock)completion;
 - (void)play;
 - (void)pause;
 

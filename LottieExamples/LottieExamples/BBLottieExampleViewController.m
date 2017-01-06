@@ -77,7 +77,7 @@
   if (currentAnimation.isAnimationPlaying) {
     [currentAnimation pause];
   } else {
-    [currentAnimation playWithCompletion:^{
+    [currentAnimation playWithCompletion:^(BOOL animationFinished) {
       [self _updatePlayButtonTitle];
     }];
   }

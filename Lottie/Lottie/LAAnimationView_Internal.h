@@ -41,6 +41,6 @@
 
 @property (nonatomic, readonly) LAComposition *sceneModel;
 @property (nonatomic, strong) LAAnimationState *animationState;
-@property (nonatomic, copy, nullable) void (^completionBlock)();
+@property (nonatomic, copy, nullable) LAAnimationCompletionBlock completionBlock;
 
 @end
