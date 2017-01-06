@@ -412,3 +412,11 @@ CGFloat CGPointDistanceFromPoint(CGPoint point1, CGPoint point2) {
   CGFloat distance = sqrt((xDist * xDist) + (yDist * yDist));
   return distance;
 }
+
+CGFloat DegreesToRadians(CGFloat degrees) {
+  return  ( ( degrees ) / 180.0 * M_PI );
+}
+
+CGFloat RemapValue(CGFloat value, CGFloat low1, CGFloat high1, CGFloat low2, CGFloat high2 ) {
+  return low2 + (value - low1) * (high2 - low2) / (high1 - low1);
+}

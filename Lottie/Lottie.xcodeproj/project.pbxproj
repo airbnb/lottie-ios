@@ -62,8 +62,6 @@
 		48E7749D1D4AABDA0029FC2D /* LAShapeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774771D4AABDA0029FC2D /* LAShapeCircle.m */; };
 		48E7749E1D4AABDA0029FC2D /* LAShapeRectangle.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E774781D4AABDA0029FC2D /* LAShapeRectangle.h */; };
 		48E7749F1D4AABDA0029FC2D /* LAShapeRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774791D4AABDA0029FC2D /* LAShapeRectangle.m */; };
-		48E774A71D4AABF00029FC2D /* BWMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E774A11D4AABF00029FC2D /* BWMath.h */; };
-		48E774A81D4AABF00029FC2D /* BWMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774A21D4AABF00029FC2D /* BWMath.m */; };
 		48E774A91D4AABF00029FC2D /* UIColor+Expanded.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E774A31D4AABF00029FC2D /* UIColor+Expanded.h */; };
 		48E774AA1D4AABF00029FC2D /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774A41D4AABF00029FC2D /* UIColor+Expanded.m */; };
 		48E774AB1D4AABF00029FC2D /* CGGeometryAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E774A51D4AABF00029FC2D /* CGGeometryAdditions.h */; };
@@ -129,8 +127,6 @@
 		48E774771D4AABDA0029FC2D /* LAShapeCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeCircle.m; sourceTree = "<group>"; };
 		48E774781D4AABDA0029FC2D /* LAShapeRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAShapeRectangle.h; sourceTree = "<group>"; };
 		48E774791D4AABDA0029FC2D /* LAShapeRectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAShapeRectangle.m; sourceTree = "<group>"; };
-		48E774A11D4AABF00029FC2D /* BWMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWMath.h; sourceTree = "<group>"; };
-		48E774A21D4AABF00029FC2D /* BWMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWMath.m; sourceTree = "<group>"; };
 		48E774A31D4AABF00029FC2D /* UIColor+Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expanded.h"; sourceTree = "<group>"; };
 		48E774A41D4AABF00029FC2D /* UIColor+Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Expanded.m"; sourceTree = "<group>"; };
 		48E774A51D4AABF00029FC2D /* CGGeometryAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGGeometryAdditions.h; sourceTree = "<group>"; };
@@ -177,7 +173,6 @@
 				48E7742B1D4AAB070029FC2D /* Lottie.h */,
 				48E7742D1D4AAB070029FC2D /* Info.plist */,
 			);
-			name = Lottie;
 			path = Lottie;
 			sourceTree = "<group>";
 		};
@@ -250,8 +245,6 @@
 		48E774AD1D4AABF50029FC2D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				48E774A11D4AABF00029FC2D /* BWMath.h */,
-				48E774A21D4AABF00029FC2D /* BWMath.m */,
 				48E774A31D4AABF00029FC2D /* UIColor+Expanded.h */,
 				48E774A41D4AABF00029FC2D /* UIColor+Expanded.m */,
 				48E774A51D4AABF00029FC2D /* CGGeometryAdditions.h */,
@@ -289,7 +282,6 @@
 				48E7747A1D4AABDA0029FC2D /* LAModels.h in Headers */,
 				48E774801D4AABDA0029FC2D /* LAAnimatableNumberValue.h in Headers */,
 				48E774901D4AABDA0029FC2D /* LAShapeGroup.h in Headers */,
-				48E774A71D4AABF00029FC2D /* BWMath.h in Headers */,
 				48E7744B1D4AABB70029FC2D /* LAGroupLayerView.h in Headers */,
 				48E774921D4AABDA0029FC2D /* LAShapeStroke.h in Headers */,
 				48E774861D4AABDA0029FC2D /* LAAnimatableScaleValue.h in Headers */,
@@ -386,7 +378,6 @@
 				48E774971D4AABDA0029FC2D /* LAShapeFill.m in Sources */,
 				48E774991D4AABDA0029FC2D /* LAShapeTransform.m in Sources */,
 				48E7748D1D4AABDA0029FC2D /* LALayer.m in Sources */,
-				48E774A81D4AABF00029FC2D /* BWMath.m in Sources */,
 				48E7747F1D4AABDA0029FC2D /* LAAnimatablePointValue.m in Sources */,
 				48E7744C1D4AABB70029FC2D /* LAGroupLayerView.m in Sources */,
 				48E774931D4AABDA0029FC2D /* LAShapeStroke.m in Sources */,

@@ -122,7 +122,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 }
 
 - (BOOL)animationIsPlaying {
-  if (_animationIsPlaying && !_loopAnimation) {
+  if (_animationIsPlaying && !_loopAnimation && _layer) {
     CGFloat timeDiff = CACurrentMediaTime() - _startTimeAbsolute;
     if (timeDiff > (_animationDuration * _animationSpeed)) {
       _animationIsPlaying = NO;
@@ -159,23 +159,76 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 - (instancetype)initWithModel:(LAComposition *)model {
   self = [super initWithFrame:model.compBounds];
   if (self) {
-    _sceneModel = model;
-    _animationContainer = [CALayer new];
-    _animationContainer.frame = self.bounds;
-    _animationContainer.fillMode = kCAFillModeForwards;
-    _animationContainer.masksToBounds = YES;
-    [self.layer addSublayer:_animationContainer];
-    [self _buildSubviewsFromModel];
-    self.clipsToBounds = YES;
+    [self _initializeAnimationContainer];
+    [self _setupWithSceneModel:model restoreAnimationState:NO];
+  }
+  return self;
+}
 
-    _animationState = [[LAAnimationState alloc] initWithDuration:self.sceneModel.timeDuration + singleFrameTimeValue layer:_animationContainer];
+- (instancetype)initWithContentsOfURL:(NSURL *)url {
+  self = [super initWithFrame:CGRectZero];
+  if (self) {
+    [self _initializeAnimationContainer];
+    _animationState = [[LAAnimationState alloc] initWithDuration:singleFrameTimeValue layer:nil];
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+      NSData *animationData = [NSData dataWithContentsOfURL:url];
+      if (!animationData) {
+        return;
+      }
+      NSError *error;
+      NSDictionary  *animationJSON = [NSJSONSerialization JSONObjectWithData:animationData
+                                                                  options:0 error:&error];
+      if (error || !animationJSON) {
+        return;
+      }
+      
+      LAComposition *laScene = [[LAComposition alloc] initWithJSON:animationJSON];
+      dispatch_async(dispatch_get_main_queue(), ^(void){
+        [self _setupWithSceneModel:laScene restoreAnimationState:YES];
+      });
+    });
   }
   return self;
 }
 
 # pragma mark - Internal Methods
 
+- (void)_initializeAnimationContainer {
+  _animationContainer = [CALayer new];
+  _animationContainer.fillMode = kCAFillModeForwards;
+  _animationContainer.masksToBounds = YES;
+  [self.layer addSublayer:_animationContainer];
+  self.clipsToBounds = YES;
+}
+
+- (void)_setupWithSceneModel:(LAComposition *)model restoreAnimationState:(BOOL)restoreAnimation {
+  _sceneModel = model;
+  [self _buildSubviewsFromModel];
+  LAAnimationState *oldState = _animationState;
+  _animationState = [[LAAnimationState alloc] initWithDuration:_sceneModel.timeDuration + singleFrameTimeValue layer:_animationContainer];
+
+  if (restoreAnimation && oldState) {
+    [self setLoopAnimation:oldState.loopAnimation];
+    [self setAnimationSpeed:oldState.animationSpeed];
+    [self setAnimationProgress:oldState.animatedProgress];
+    if (oldState.animationIsPlaying) {
+      [self play];
+    }
+  }
+}
+
+
 - (void)_buildSubviewsFromModel {
+  if (_layerMap) {
+    _layerMap = nil;
+    [_animationContainer removeAllAnimations];
+    [_animationContainer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+  }
+  
+  _animationContainer.transform = CATransform3DIdentity;
+  _animationContainer.bounds = _sceneModel.compBounds;
+  
   NSMutableDictionary *layerMap = [NSMutableDictionary dictionary];
   
   NSArray *reversedItems = [[_sceneModel.layers reverseObjectEnumerator] allObjects];
@@ -204,14 +257,27 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 }
 
 - (void)playWithCompletion:(void (^)(void))completion {
-  if (_animationState.animationIsPlaying == NO) {
+  if (completion) {
     self.completionBlock = completion;
+  }
+
+  if (_sceneModel == nil) {
+    [_animationState setAnimationIsPlaying:YES];
+    return;
+  }
+  
+  if (_animationState.animationIsPlaying == NO) {
     [_animationState setAnimationIsPlaying:YES];
     [self startDisplayLink];
   }
 }
 
 - (void)pause {
+  if (_sceneModel == nil) {
+    [_animationState setAnimationIsPlaying:NO];
+    return;
+  }
+  
   if (_animationState.animationIsPlaying) {
     [_animationState setAnimationIsPlaying:NO];
     [self stopDisplayLink];
@@ -291,6 +357,11 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 - (void)layoutSubviews {
   [super layoutSubviews];
   
+  if (_sceneModel == nil) {
+    _animationContainer.bounds = self.bounds;
+    return;
+  }
+  
   CGPoint centerPoint = CGRectGetCenterPoint(self.bounds);
   CATransform3D xform;
   
@@ -320,7 +391,8 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   
   [CATransaction begin];
   [CATransaction setDisableActions:YES];
-  
+  _animationContainer.transform = CATransform3DIdentity;
+  _animationContainer.bounds = _sceneModel.compBounds;
   _animationContainer.transform = xform;
   _animationContainer.position = centerPoint;
   [CATransaction commit];

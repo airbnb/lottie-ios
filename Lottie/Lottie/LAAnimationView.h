@@ -6,21 +6,14 @@
 //  Copyright © 2015 Brandon Withrow. All rights reserved.
 //
 
-
-// TODO
-
-// - Support repeater objects
-// - Animated Button
-// - Merged Paths
-// - Line start offset
-// - Round Rect with dashed lines
-
 #import <UIKit/UIKit.h>
 
 @interface LAAnimationView : UIView
 
 + (instancetype)animationNamed:(NSString *)animationName;
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON;
+
+- (instancetype)initWithContentsOfURL:(NSURL *)url;
 
 @property (nonatomic, readonly) BOOL isAnimationPlaying;
 @property (nonatomic, assign) BOOL loopAnimation;

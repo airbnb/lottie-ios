@@ -7,7 +7,7 @@
 //
 
 #import "LAAnimatableNumberValue.h"
-#import "BWMath.h"
+#import "LAHelpers.h"
 
 @interface LAAnimatableNumberValue ()
 
