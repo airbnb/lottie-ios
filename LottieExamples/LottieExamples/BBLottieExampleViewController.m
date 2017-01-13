@@ -118,6 +118,7 @@
     [currentAnimation removeFromSuperview];
     currentAnimation = [LAAnimationView animationFromJSON:JSONObject];
     currentAnimation.contentMode = UIViewContentModeScaleAspectFit;
+    
     [self.view addSubview:currentAnimation];
     [self _updatePlayButtonTitle];
     [self.view setNeedsLayout];
