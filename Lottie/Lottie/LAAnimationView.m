@@ -11,6 +11,7 @@
 #import "LAModels.h"
 #import "LAHelpers.h"
 #import "LAAnimationView_Internal.h"
+#import "LAAnimationCache.h"
 
 const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
@@ -20,20 +21,41 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 }
 
 - (void)updateAnimationLayer {
-  self.layer.repeatCount = _loopAnimation ? HUGE_VALF : 0;
-  self.layer.beginTime = 0;
-  self.layer.timeOffset = 0;
-  
   self.layer.duration = self.animationDuration;
+  self.layer.repeatCount = _loopAnimation ? HUGE_VALF : 0;
+  
+  self.layer.speed = 0;
+  self.layer.timeOffset = 0;
+  self.layer.beginTime = 0;
+  
   self.layer.speed = self.layerSpeed;
   self.layer.beginTime = self.layerBeginTime;
   self.layer.timeOffset = self.layerTimeOffset;
 }
 
-- (void)setAnimationIsPlaying:(BOOL)animationIsPlaying {
+- (void)setAnimationIsPlaying:(BOOL)animationIsPlaying  {
   if (_animationIsPlaying == animationIsPlaying) {
     return;
   }
+  _animationIsPlaying = animationIsPlaying;
+  
+  if (_animationIsPlaying) {
+    // Play
+    _startTimeAbsolute = CACurrentMediaTime() - _layerTimeOffset;
+
+    
+    if (_resetOnPlay) {
+      _resetOnPlay = NO;
+      _startTimeAbsolute = CACurrentMediaTime();
+    }
+  }
+  
+  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+    [self _setAnimationIsPlayingSerialized:animationIsPlaying];
+  }];
+}
+
+- (void)_setAnimationIsPlayingSerialized:(BOOL)animationIsPlaying {
   _animationIsPlaying = animationIsPlaying;
   
   if (_animationIsPlaying) {
@@ -62,29 +84,39 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 }
 
 - (void)setAnimatedProgress:(CGFloat)animatedProgress {
-  if (_animatedProgress == animatedProgress && !_animationIsPlaying) {
-    return;
-  }
-  
+  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+    [self _setAnimatedProgressSerialized:animatedProgress];
+  }];
+}
+
+- (void)_setAnimatedProgressSerialized:(CGFloat)animatedProgress {
   if (_resetOnPlay) {
     _resetOnPlay = NO;
   }
-
-  _animationIsPlaying = NO;
-  _pauseTimeAbsolute = 0;
-  _startTimeAbsolute = 0;
   
-  CGFloat modifiedProgress = animatedProgress - floor(animatedProgress);
-  _layerTimeOffset = modifiedProgress * _animationDuration;
+  CGFloat modifiedProgress = animatedProgress > 1 ? animatedProgress - floor(animatedProgress) : animatedProgress;
+  CGFloat timeOffset = modifiedProgress * (_animationDuration - singleFrameTimeValue);
+  CGFloat pauseTime = CACurrentMediaTime();
+  _animatedProgress = modifiedProgress;
+  _animationIsPlaying = NO;
+  _pauseTimeAbsolute = pauseTime;
+  _startTimeAbsolute = _pauseTimeAbsolute - timeOffset;
+  _layerTimeOffset = timeOffset;
   _layerSpeed = 0;
   _layerBeginTime = 0;
-  
-  
-  _animatedProgress = animatedProgress;
+  [CATransaction begin];
+  [CATransaction setDisableActions:YES];
   [self updateAnimationLayer];
+  [CATransaction commit];
 }
 
 - (void)setAnimationSpeed:(CGFloat)speed {
+  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+    [self _setAnimationSpeedSerialized:speed];
+  }];
+}
+
+- (void)_setAnimationSpeedSerialized:(CGFloat)speed {
   _animationSpeed = speed;
   _layerSpeed = _animationIsPlaying ? _animationSpeed : 0;
   if (_animationIsPlaying) {
@@ -144,12 +176,23 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 # pragma mark - Initializers
 
 + (instancetype)animationNamed:(NSString *)animationName {
+  LAComposition *comp = [[LAAnimationCache sharedCache] animationForKey:animationName];
+  if (comp) {
+    return [[LAAnimationView alloc] initWithModel:comp];
+  }
+  
   NSError *error;
   NSString *filePath = [[NSBundle mainBundle] pathForResource:animationName ofType:@"json"];
   NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
-  NSDictionary  *JSONObject = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                              options:0 error:&error];
-  return [LAAnimationView animationFromJSON:JSONObject];
+  NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                         options:0 error:&error] : nil;
+  if (JSONObject && !error) {
+    LAComposition *laScene = [[LAComposition alloc] initWithJSON:JSONObject];
+    [[LAAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
+    return [[LAAnimationView alloc] initWithModel:laScene];
+  }
+  
+  return [[LAAnimationView alloc] initWithModel:nil];
 }
 
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON {
@@ -157,38 +200,44 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   return [[LAAnimationView alloc] initWithModel:laScene];
 }
 
+- (instancetype)initWithContentsOfURL:(NSURL *)url {
+  self = [super initWithFrame:CGRectZero];
+  if (self) {
+    [self _initializeAnimationContainer];
+    LAComposition *laScene = [[LAAnimationCache sharedCache] animationForKey:url.absoluteString];
+    if (laScene) {
+      [self _setupWithSceneModel:laScene restoreAnimationState:NO];
+    } else {
+      _animationState = [[LAAnimationState alloc] initWithDuration:singleFrameTimeValue layer:_animationContainer];
+      
+      dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        NSData *animationData = [NSData dataWithContentsOfURL:url];
+        if (!animationData) {
+          return;
+        }
+        NSError *error;
+        NSDictionary  *animationJSON = [NSJSONSerialization JSONObjectWithData:animationData
+                                                                       options:0 error:&error];
+        if (error || !animationJSON) {
+          return;
+        }
+        
+        LAComposition *laScene = [[LAComposition alloc] initWithJSON:animationJSON];
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+          [[LAAnimationCache sharedCache] addAnimation:laScene forKey:url.absoluteString];
+          [self _setupWithSceneModel:laScene restoreAnimationState:YES];
+        });
+      });
+    }
+  }
+  return self;
+}
+
 - (instancetype)initWithModel:(LAComposition *)model {
   self = [super initWithFrame:model.compBounds];
   if (self) {
     [self _initializeAnimationContainer];
     [self _setupWithSceneModel:model restoreAnimationState:NO];
-  }
-  return self;
-}
-
-- (instancetype)initWithContentsOfURL:(NSURL *)url {
-  self = [super initWithFrame:CGRectZero];
-  if (self) {
-    [self _initializeAnimationContainer];
-    _animationState = [[LAAnimationState alloc] initWithDuration:singleFrameTimeValue layer:nil];
-    
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-      NSData *animationData = [NSData dataWithContentsOfURL:url];
-      if (!animationData) {
-        return;
-      }
-      NSError *error;
-      NSDictionary  *animationJSON = [NSJSONSerialization JSONObjectWithData:animationData
-                                                                  options:0 error:&error];
-      if (error || !animationJSON) {
-        return;
-      }
-      
-      LAComposition *laScene = [[LAComposition alloc] initWithJSON:animationJSON];
-      dispatch_async(dispatch_get_main_queue(), ^(void){
-        [self _setupWithSceneModel:laScene restoreAnimationState:YES];
-      });
-    });
   }
   return self;
 }
@@ -207,7 +256,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   _sceneModel = model;
   [self _buildSubviewsFromModel];
   LAAnimationState *oldState = _animationState;
-  _animationState = [[LAAnimationState alloc] initWithDuration:_sceneModel.timeDuration + singleFrameTimeValue layer:_animationContainer];
+  _animationState = [[LAAnimationState alloc] initWithDuration:_sceneModel.timeDuration layer:_animationContainer];
 
   if (restoreAnimation && oldState) {
     [self setLoopAnimation:oldState.loopAnimation];
@@ -365,8 +414,8 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
 # pragma mark - Overrides
 
-- (void)didMoveToSuperview {
-  [super didMoveToSuperview];
+- (void)didMoveToWindow {
+  [super didMoveToWindow];
   [_animationState updateAnimationLayer];
 }
 

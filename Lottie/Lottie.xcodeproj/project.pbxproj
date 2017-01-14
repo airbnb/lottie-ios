@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4871B3621E243D6E00AE29CD /* LAAnimationCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 4871B3601E243D6E00AE29CD /* LAAnimationCache.h */; };
+		4871B3631E243D6E00AE29CD /* LAAnimationCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4871B3611E243D6E00AE29CD /* LAAnimationCache.m */; };
 		48E7742C1D4AAB070029FC2D /* Lottie.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E7742B1D4AAB070029FC2D /* Lottie.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48E774351D4AAB200029FC2D /* LAAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E774331D4AAB200029FC2D /* LAAnimationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48E774361D4AAB200029FC2D /* LAAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774341D4AAB200029FC2D /* LAAnimationView.m */; };
@@ -69,6 +71,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4871B3601E243D6E00AE29CD /* LAAnimationCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimationCache.h; sourceTree = "<group>"; };
+		4871B3611E243D6E00AE29CD /* LAAnimationCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimationCache.m; sourceTree = "<group>"; };
 		48A7230A1DF8C99D00A55C00 /* LAAnimationView_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LAAnimationView_Internal.h; sourceTree = "<group>"; };
 		48E774281D4AAB070029FC2D /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48E7742B1D4AAB070029FC2D /* Lottie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lottie.h; sourceTree = "<group>"; };
@@ -169,6 +173,8 @@
 				48E774531D4AABC10029FC2D /* Animatable Layers */,
 				48E774331D4AAB200029FC2D /* LAAnimationView.h */,
 				48E774341D4AAB200029FC2D /* LAAnimationView.m */,
+				4871B3601E243D6E00AE29CD /* LAAnimationCache.h */,
+				4871B3611E243D6E00AE29CD /* LAAnimationCache.m */,
 				48A7230A1DF8C99D00A55C00 /* LAAnimationView_Internal.h */,
 				48E7742B1D4AAB070029FC2D /* Lottie.h */,
 				48E7742D1D4AAB070029FC2D /* Info.plist */,
@@ -270,6 +276,7 @@
 				48E774511D4AABB70029FC2D /* LAEllipseShapeLayer.h in Headers */,
 				48E774841D4AABDA0029FC2D /* LAAnimatableBoundsValue.h in Headers */,
 				48E774491D4AABB70029FC2D /* LAMaskLayer.h in Headers */,
+				4871B3621E243D6E00AE29CD /* LAAnimationCache.h in Headers */,
 				48E774941D4AABDA0029FC2D /* LAShapeTrimPath.h in Headers */,
 				48E7744F1D4AABB70029FC2D /* LARectShapeLayer.h in Headers */,
 				48E774471D4AABB70029FC2D /* LALayerView.h in Headers */,
@@ -388,6 +395,7 @@
 				48E7749B1D4AABDA0029FC2D /* LAShapePath.m in Sources */,
 				48E774481D4AABB70029FC2D /* LALayerView.m in Sources */,
 				48E7744A1D4AABB70029FC2D /* LAMaskLayer.m in Sources */,
+				4871B3631E243D6E00AE29CD /* LAAnimationCache.m in Sources */,
 				48E7748F1D4AABDA0029FC2D /* LAMask.m in Sources */,
 				48E774361D4AAB200029FC2D /* LAAnimationView.m in Sources */,
 			);

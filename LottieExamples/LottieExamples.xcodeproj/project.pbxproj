@@ -7,7 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		48440E7E1E1F0A6800A7882C /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48440E7D1E1F0A6800A7882C /* Lottie.framework */; };
+		4844D3701E259B4A00D1B02D /* LAAnimatedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4844D36F1E259B4A00D1B02D /* LAAnimatedTextField.m */; };
+		4871B32A1E24204400AE29CD /* LottieLogo_04.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3291E24204400AE29CD /* LottieLogo_04.json */; };
+		4871B3461E24373000AE29CD /* A.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B32C1E24373000AE29CD /* A.json */; };
+		4871B3471E24373000AE29CD /* B.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B32D1E24373000AE29CD /* B.json */; };
+		4871B3481E24373000AE29CD /* C.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B32E1E24373000AE29CD /* C.json */; };
+		4871B3491E24373000AE29CD /* D.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B32F1E24373000AE29CD /* D.json */; };
+		4871B34A1E24373000AE29CD /* E.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3301E24373000AE29CD /* E.json */; };
+		4871B34B1E24373000AE29CD /* F.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3311E24373000AE29CD /* F.json */; };
+		4871B34C1E24373000AE29CD /* G.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3321E24373000AE29CD /* G.json */; };
+		4871B34D1E24373000AE29CD /* H.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3331E24373000AE29CD /* H.json */; };
+		4871B34E1E24373000AE29CD /* I.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3341E24373000AE29CD /* I.json */; };
+		4871B34F1E24373000AE29CD /* J.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3351E24373000AE29CD /* J.json */; };
+		4871B3501E24373000AE29CD /* K.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3361E24373000AE29CD /* K.json */; };
+		4871B3511E24373000AE29CD /* L.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3371E24373000AE29CD /* L.json */; };
+		4871B3521E24373000AE29CD /* M.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3381E24373000AE29CD /* M.json */; };
+		4871B3531E24373000AE29CD /* N.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3391E24373000AE29CD /* N.json */; };
+		4871B3541E24373000AE29CD /* O.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B33A1E24373000AE29CD /* O.json */; };
+		4871B3551E24373000AE29CD /* P.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B33B1E24373000AE29CD /* P.json */; };
+		4871B3561E24373000AE29CD /* Q.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B33C1E24373000AE29CD /* Q.json */; };
+		4871B3571E24373000AE29CD /* R.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B33D1E24373000AE29CD /* R.json */; };
+		4871B3581E24373000AE29CD /* S.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B33E1E24373000AE29CD /* S.json */; };
+		4871B3591E24373000AE29CD /* T.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B33F1E24373000AE29CD /* T.json */; };
+		4871B35A1E24373000AE29CD /* U.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3401E24373000AE29CD /* U.json */; };
+		4871B35B1E24373000AE29CD /* V.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3411E24373000AE29CD /* V.json */; };
+		4871B35C1E24373000AE29CD /* W.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3421E24373000AE29CD /* W.json */; };
+		4871B35D1E24373000AE29CD /* X.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3431E24373000AE29CD /* X.json */; };
+		4871B35E1E24373000AE29CD /* Y.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3441E24373000AE29CD /* Y.json */; };
+		4871B35F1E24373000AE29CD /* Z.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3451E24373000AE29CD /* Z.json */; };
+		4871B3661E244BB900AE29CD /* LATypingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4871B3651E244BB900AE29CD /* LATypingDemoViewController.m */; };
+		4871B3681E244C0300AE29CD /* LottieLogotype_01b.json in Resources */ = {isa = PBXBuildFile; fileRef = 4871B3671E244C0300AE29CD /* LottieLogotype_01b.json */; };
 		487284561D4FCD5300007A88 /* pause.json in Resources */ = {isa = PBXBuildFile; fileRef = 487284541D4FCD5300007A88 /* pause.json */; };
 		487284571D4FCD5300007A88 /* play.json in Resources */ = {isa = PBXBuildFile; fileRef = 487284551D4FCD5300007A88 /* play.json */; };
 		4872845A1D4FCF3200007A88 /* LAJSONExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487284591D4FCF3200007A88 /* LAJSONExplorerViewController.m */; };
@@ -20,6 +49,8 @@
 		48A723191DF8D58D00A55C00 /* MasksOpacity.json in Resources */ = {isa = PBXBuildFile; fileRef = 48A723121DF8D58D00A55C00 /* MasksOpacity.json */; };
 		48A7231A1DF8D58D00A55C00 /* SolidsTransformRotation.json in Resources */ = {isa = PBXBuildFile; fileRef = 48A723131DF8D58D00A55C00 /* SolidsTransformRotation.json */; };
 		48A7231B1DF8D58D00A55C00 /* KeyframesLinear.json in Resources */ = {isa = PBXBuildFile; fileRef = 48A723141DF8D58D00A55C00 /* KeyframesLinear.json */; };
+		48B96B211E29741400A1C49C /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 48B96B1F1E29741400A1C49C /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		48B96B231E298EDB00A1C49C /* BlinkingCursor.json in Resources */ = {isa = PBXBuildFile; fileRef = 48B96B221E298EDB00A1C49C /* BlinkingCursor.json */; };
 		48E774CD1D4AC7300029FC2D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774CC1D4AC7300029FC2D /* main.m */; };
 		48E774D01D4AC7300029FC2D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774CF1D4AC7300029FC2D /* AppDelegate.m */; };
 		48E774D61D4AC7300029FC2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48E774D41D4AC7300029FC2D /* Main.storyboard */; };
@@ -57,6 +88,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				48B96B211E29741400A1C49C /* Lottie.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,6 +97,38 @@
 
 /* Begin PBXFileReference section */
 		48440E7D1E1F0A6800A7882C /* Lottie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lottie.framework; path = "../../../Library/Developer/Xcode/DerivedData/LottieExamples-gdyakbdnisazzyhjjynybvmvamdk/Build/Products/Debug-iphonesimulator/Lottie.framework"; sourceTree = "<group>"; };
+		4844D36E1E259B4A00D1B02D /* LAAnimatedTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatedTextField.h; sourceTree = "<group>"; };
+		4844D36F1E259B4A00D1B02D /* LAAnimatedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatedTextField.m; sourceTree = "<group>"; };
+		4871B3291E24204400AE29CD /* LottieLogo_04.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LottieLogo_04.json; sourceTree = "<group>"; };
+		4871B32C1E24373000AE29CD /* A.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = A.json; sourceTree = "<group>"; };
+		4871B32D1E24373000AE29CD /* B.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = B.json; sourceTree = "<group>"; };
+		4871B32E1E24373000AE29CD /* C.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = C.json; sourceTree = "<group>"; };
+		4871B32F1E24373000AE29CD /* D.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = D.json; sourceTree = "<group>"; };
+		4871B3301E24373000AE29CD /* E.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = E.json; sourceTree = "<group>"; };
+		4871B3311E24373000AE29CD /* F.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = F.json; sourceTree = "<group>"; };
+		4871B3321E24373000AE29CD /* G.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = G.json; sourceTree = "<group>"; };
+		4871B3331E24373000AE29CD /* H.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = H.json; sourceTree = "<group>"; };
+		4871B3341E24373000AE29CD /* I.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = I.json; sourceTree = "<group>"; };
+		4871B3351E24373000AE29CD /* J.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = J.json; sourceTree = "<group>"; };
+		4871B3361E24373000AE29CD /* K.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = K.json; sourceTree = "<group>"; };
+		4871B3371E24373000AE29CD /* L.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = L.json; sourceTree = "<group>"; };
+		4871B3381E24373000AE29CD /* M.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = M.json; sourceTree = "<group>"; };
+		4871B3391E24373000AE29CD /* N.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = N.json; sourceTree = "<group>"; };
+		4871B33A1E24373000AE29CD /* O.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = O.json; sourceTree = "<group>"; };
+		4871B33B1E24373000AE29CD /* P.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = P.json; sourceTree = "<group>"; };
+		4871B33C1E24373000AE29CD /* Q.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Q.json; sourceTree = "<group>"; };
+		4871B33D1E24373000AE29CD /* R.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = R.json; sourceTree = "<group>"; };
+		4871B33E1E24373000AE29CD /* S.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = S.json; sourceTree = "<group>"; };
+		4871B33F1E24373000AE29CD /* T.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = T.json; sourceTree = "<group>"; };
+		4871B3401E24373000AE29CD /* U.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = U.json; sourceTree = "<group>"; };
+		4871B3411E24373000AE29CD /* V.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = V.json; sourceTree = "<group>"; };
+		4871B3421E24373000AE29CD /* W.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = W.json; sourceTree = "<group>"; };
+		4871B3431E24373000AE29CD /* X.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = X.json; sourceTree = "<group>"; };
+		4871B3441E24373000AE29CD /* Y.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Y.json; sourceTree = "<group>"; };
+		4871B3451E24373000AE29CD /* Z.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Z.json; sourceTree = "<group>"; };
+		4871B3641E244BB900AE29CD /* LATypingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LATypingDemoViewController.h; sourceTree = "<group>"; };
+		4871B3651E244BB900AE29CD /* LATypingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LATypingDemoViewController.m; sourceTree = "<group>"; };
+		4871B3671E244C0300AE29CD /* LottieLogotype_01b.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LottieLogotype_01b.json; sourceTree = "<group>"; };
 		487284541D4FCD5300007A88 /* pause.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pause.json; sourceTree = "<group>"; };
 		487284551D4FCD5300007A88 /* play.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = play.json; sourceTree = "<group>"; };
 		487284581D4FCF3200007A88 /* LAJSONExplorerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAJSONExplorerViewController.h; sourceTree = "<group>"; };
@@ -78,6 +142,8 @@
 		48A723121DF8D58D00A55C00 /* MasksOpacity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MasksOpacity.json; sourceTree = "<group>"; };
 		48A723131DF8D58D00A55C00 /* SolidsTransformRotation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SolidsTransformRotation.json; sourceTree = "<group>"; };
 		48A723141DF8D58D00A55C00 /* KeyframesLinear.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = KeyframesLinear.json; sourceTree = "<group>"; };
+		48B96B1F1E29741400A1C49C /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48B96B221E298EDB00A1C49C /* BlinkingCursor.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BlinkingCursor.json; sourceTree = "<group>"; };
 		48E774C81D4AC7300029FC2D /* LottieExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottieExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48E774CC1D4AC7300029FC2D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		48E774CE1D4AC7300029FC2D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -117,13 +183,46 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48440E7E1E1F0A6800A7882C /* Lottie.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4871B32B1E24373000AE29CD /* Amelie */ = {
+			isa = PBXGroup;
+			children = (
+				48B96B221E298EDB00A1C49C /* BlinkingCursor.json */,
+				4871B32C1E24373000AE29CD /* A.json */,
+				4871B32D1E24373000AE29CD /* B.json */,
+				4871B32E1E24373000AE29CD /* C.json */,
+				4871B32F1E24373000AE29CD /* D.json */,
+				4871B3301E24373000AE29CD /* E.json */,
+				4871B3311E24373000AE29CD /* F.json */,
+				4871B3321E24373000AE29CD /* G.json */,
+				4871B3331E24373000AE29CD /* H.json */,
+				4871B3341E24373000AE29CD /* I.json */,
+				4871B3351E24373000AE29CD /* J.json */,
+				4871B3361E24373000AE29CD /* K.json */,
+				4871B3371E24373000AE29CD /* L.json */,
+				4871B3381E24373000AE29CD /* M.json */,
+				4871B3391E24373000AE29CD /* N.json */,
+				4871B33A1E24373000AE29CD /* O.json */,
+				4871B33B1E24373000AE29CD /* P.json */,
+				4871B33C1E24373000AE29CD /* Q.json */,
+				4871B33D1E24373000AE29CD /* R.json */,
+				4871B33E1E24373000AE29CD /* S.json */,
+				4871B33F1E24373000AE29CD /* T.json */,
+				4871B3401E24373000AE29CD /* U.json */,
+				4871B3411E24373000AE29CD /* V.json */,
+				4871B3421E24373000AE29CD /* W.json */,
+				4871B3431E24373000AE29CD /* X.json */,
+				4871B3441E24373000AE29CD /* Y.json */,
+				4871B3451E24373000AE29CD /* Z.json */,
+			);
+			path = Amelie;
+			sourceTree = "<group>";
+		};
 		48A7230B1DF8D41C00A55C00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +234,7 @@
 		48E774BF1D4AC7300029FC2D = {
 			isa = PBXGroup;
 			children = (
+				48B96B1F1E29741400A1C49C /* Lottie.framework */,
 				48E774CA1D4AC7300029FC2D /* LottieExamples */,
 				48E774C91D4AC7300029FC2D /* Products */,
 				48A7230B1DF8D41C00A55C00 /* Frameworks */,
@@ -158,6 +258,10 @@
 				487284591D4FCF3200007A88 /* LAJSONExplorerViewController.m */,
 				6295CF361D526D72004FAD21 /* BBLottieExampleViewController.h */,
 				6295CF371D526D72004FAD21 /* BBLottieExampleViewController.m */,
+				4871B3641E244BB900AE29CD /* LATypingDemoViewController.h */,
+				4871B3651E244BB900AE29CD /* LATypingDemoViewController.m */,
+				4844D36E1E259B4A00D1B02D /* LAAnimatedTextField.h */,
+				4844D36F1E259B4A00D1B02D /* LAAnimatedTextField.m */,
 				48E774D41D4AC7300029FC2D /* Main.storyboard */,
 				48E774D71D4AC7300029FC2D /* Assets.xcassets */,
 				48E774D91D4AC7300029FC2D /* LaunchScreen.storyboard */,
@@ -170,6 +274,9 @@
 		48E774CB1D4AC7300029FC2D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4871B3671E244C0300AE29CD /* LottieLogotype_01b.json */,
+				4871B32B1E24373000AE29CD /* Amelie */,
+				4871B3291E24204400AE29CD /* LottieLogo_04.json */,
 				48A7230E1DF8D58D00A55C00 /* ShapeTestStrokeJoin.json */,
 				48A7230F1DF8D58D00A55C00 /* ShapeTestElipse.json */,
 				48A723101DF8D58D00A55C00 /* ShapeTestRectangle.json */,
@@ -240,6 +347,7 @@
 				TargetAttributes = {
 					48E774C71D4AC7300029FC2D = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 5LL7P8E8RA;
 					};
 				};
 			};
@@ -266,6 +374,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4871B35D1E24373000AE29CD /* X.json in Resources */,
+				4871B34D1E24373000AE29CD /* H.json in Resources */,
+				4871B35B1E24373000AE29CD /* V.json in Resources */,
+				4871B3471E24373000AE29CD /* B.json in Resources */,
 				48E774F71D4AC8180029FC2D /* Heart58TurnOff.json in Resources */,
 				48A723191DF8D58D00A55C00 /* MasksOpacity.json in Resources */,
 				62B52C911D74FB72006500B0 /* Upvote14.json in Resources */,
@@ -273,32 +385,57 @@
 				48E774F31D4AC8180029FC2D /* allset.json in Resources */,
 				620ED8971D5BAB3600B40094 /* ellipseTrim.json in Resources */,
 				48A723171DF8D58D00A55C00 /* ShapeTestRectangle.json in Resources */,
+				4871B3561E24373000AE29CD /* Q.json in Resources */,
+				4871B3501E24373000AE29CD /* K.json in Resources */,
 				487284621D5007B800007A88 /* 200_LYS_Lightswitch.json in Resources */,
 				48E774F81D4AC8180029FC2D /* Heart58TurnOn.json in Resources */,
+				4871B3531E24373000AE29CD /* N.json in Resources */,
+				4871B3541E24373000AE29CD /* O.json in Resources */,
+				4871B3571E24373000AE29CD /* R.json in Resources */,
 				48A7231A1DF8D58D00A55C00 /* SolidsTransformRotation.json in Resources */,
 				6299193C1D5A8A15008EF7B6 /* circleTest.json in Resources */,
 				48E774DB1D4AC7300029FC2D /* LaunchScreen.storyboard in Resources */,
 				48E774F41D4AC8180029FC2D /* goftldalt.json in Resources */,
+				4871B3491E24373000AE29CD /* D.json in Resources */,
+				4871B3461E24373000AE29CD /* A.json in Resources */,
+				4871B34E1E24373000AE29CD /* I.json in Resources */,
 				6294E6381D626C7F00EC2F0F /* AlarmAlt.json in Resources */,
 				62F8DFDF1D53EB39009CCCBD /* solidTest.json in Resources */,
+				4871B35F1E24373000AE29CD /* Z.json in Resources */,
+				4871B3551E24373000AE29CD /* P.json in Resources */,
 				487284611D5007B800007A88 /* 100_House_AnimateInAndOut.json in Resources */,
 				48E774D81D4AC7300029FC2D /* Assets.xcassets in Resources */,
 				48A723181DF8D58D00A55C00 /* ShapeTestGroupOpacity.json in Resources */,
 				6295CF351D526D45004FAD21 /* SwitchBG.json in Resources */,
+				4871B3521E24373000AE29CD /* M.json in Resources */,
+				4871B34F1E24373000AE29CD /* J.json in Resources */,
 				487284561D4FCD5300007A88 /* pause.json in Resources */,
 				48E774FA1D4AC8180029FC2D /* scaleTest.json in Resources */,
+				4871B3681E244C0300AE29CD /* LottieLogotype_01b.json in Resources */,
+				4871B32A1E24204400AE29CD /* LottieLogo_04.json in Resources */,
+				4871B35A1E24373000AE29CD /* U.json in Resources */,
 				48E774FB1D4AC8180029FC2D /* selfie.json in Resources */,
+				4871B3481E24373000AE29CD /* C.json in Resources */,
+				4871B34A1E24373000AE29CD /* E.json in Resources */,
 				48A723161DF8D58D00A55C00 /* ShapeTestElipse.json in Resources */,
 				62B52C931D74FB78006500B0 /* Upvote_13.json in Resources */,
 				48A723151DF8D58D00A55C00 /* ShapeTestStrokeJoin.json in Resources */,
+				4871B3581E24373000AE29CD /* S.json in Resources */,
 				6294E63E1D63D10300EC2F0F /* AlarmNew.json in Resources */,
+				4871B35C1E24373000AE29CD /* W.json in Resources */,
 				48A7231B1DF8D58D00A55C00 /* KeyframesLinear.json in Resources */,
+				4871B34B1E24373000AE29CD /* F.json in Resources */,
 				6295CFB11D52AC28004FAD21 /* CheckSwitch.json in Resources */,
 				48E774F51D4AC8180029FC2D /* govtid.json in Resources */,
 				48E774F91D4AC8180029FC2D /* parentTest.json in Resources */,
+				4871B3511E24373000AE29CD /* L.json in Resources */,
+				4871B34C1E24373000AE29CD /* G.json in Resources */,
 				487284571D4FCD5300007A88 /* play.json in Resources */,
+				4871B35E1E24373000AE29CD /* Y.json in Resources */,
+				4871B3591E24373000AE29CD /* T.json in Resources */,
 				6299193E1D5A8D32008EF7B6 /* rectTest.json in Resources */,
 				48E774F61D4AC8180029FC2D /* Heart58OnOff.json in Resources */,
+				48B96B231E298EDB00A1C49C /* BlinkingCursor.json in Resources */,
 				6295CFBA1D52AE9C004FAD21 /* Diamondata.json in Resources */,
 				48E774D61D4AC7300029FC2D /* Main.storyboard in Resources */,
 				6295CFB91D52AE9C004FAD21 /* Alarmdata.json in Resources */,
@@ -315,7 +452,9 @@
 				6295CF381D526D72004FAD21 /* BBLottieExampleViewController.m in Sources */,
 				4872845A1D4FCF3200007A88 /* LAJSONExplorerViewController.m in Sources */,
 				48E774D01D4AC7300029FC2D /* AppDelegate.m in Sources */,
+				4871B3661E244BB900AE29CD /* LATypingDemoViewController.m in Sources */,
 				48E774CD1D4AC7300029FC2D /* main.m in Sources */,
+				4844D3701E259B4A00D1B02D /* LAAnimatedTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +566,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5LL7P8E8RA;
 				INFOPLIST_FILE = LottieExamples/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -440,6 +580,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5LL7P8E8RA;
 				INFOPLIST_FILE = LottieExamples/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
