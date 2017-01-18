@@ -16,8 +16,6 @@
 		486F039E1E2EDF08001F5B4F /* PinJump.json in Resources */ = {isa = PBXBuildFile; fileRef = 486F03971E2EDF08001F5B4F /* PinJump.json */; };
 		486F039F1E2EDF08001F5B4F /* TwitterHeart.json in Resources */ = {isa = PBXBuildFile; fileRef = 486F03981E2EDF08001F5B4F /* TwitterHeart.json */; };
 		486F03A21E2EE00A001F5B4F /* LALaunchLogoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 486F03A11E2EE00A001F5B4F /* LALaunchLogoViewController.m */; };
-		486F03A41E2EE89A001F5B4F /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 486F03A31E2EE89A001F5B4F /* test.png */; };
-		486F03A61E2EE968001F5B4F /* childLayerTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 486F03A51E2EE968001F5B4F /* childLayerTest.json */; };
 		4871B3661E244BB900AE29CD /* LATypingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4871B3651E244BB900AE29CD /* LATypingDemoViewController.m */; };
 		4872845A1D4FCF3200007A88 /* LAJSONExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487284591D4FCF3200007A88 /* LAJSONExplorerViewController.m */; };
 		48B96B211E29741400A1C49C /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 48B96B1F1E29741400A1C49C /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -84,8 +82,6 @@
 		486F03981E2EDF08001F5B4F /* TwitterHeart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TwitterHeart.json; sourceTree = "<group>"; };
 		486F03A01E2EE00A001F5B4F /* LALaunchLogoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LALaunchLogoViewController.h; sourceTree = "<group>"; };
 		486F03A11E2EE00A001F5B4F /* LALaunchLogoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LALaunchLogoViewController.m; sourceTree = "<group>"; };
-		486F03A31E2EE89A001F5B4F /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
-		486F03A51E2EE968001F5B4F /* childLayerTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = childLayerTest.json; sourceTree = "<group>"; };
 		4871B3641E244BB900AE29CD /* LATypingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LATypingDemoViewController.h; sourceTree = "<group>"; };
 		4871B3651E244BB900AE29CD /* LATypingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LATypingDemoViewController.m; sourceTree = "<group>"; };
 		487284581D4FCF3200007A88 /* LAJSONExplorerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAJSONExplorerViewController.h; sourceTree = "<group>"; };
@@ -197,8 +193,6 @@
 			children = (
 				48F7F2C41E2F005300E34939 /* Animography-AnimatedTypeface */,
 				48F7F2C21E2EFCEC00E34939 /* LottieLogo1_masked.json */,
-				486F03A51E2EE968001F5B4F /* childLayerTest.json */,
-				486F03A31E2EE89A001F5B4F /* test.png */,
 				486F03921E2EDF08001F5B4F /* Animography-AMELIE.json */,
 				486F03931E2EDF08001F5B4F /* HamburgerArrow.json */,
 				486F03941E2EDF08001F5B4F /* LottieLogo1.json */,
@@ -309,7 +303,6 @@
 				48F7F2F51E2F005300E34939 /* U.json in Resources */,
 				48F7F2E01E2F005300E34939 /* A.json in Resources */,
 				48F7F2F71E2F005300E34939 /* W.json in Resources */,
-				486F03A61E2EE968001F5B4F /* childLayerTest.json in Resources */,
 				48F7F2F31E2F005300E34939 /* S.json in Resources */,
 				48F7F2EA1E2F005300E34939 /* J.json in Resources */,
 				48F7F2EC1E2F005300E34939 /* L.json in Resources */,
@@ -335,7 +328,6 @@
 				486F039C1E2EDF08001F5B4F /* LottieLogo2.json in Resources */,
 				48F7F2E81E2F005300E34939 /* H.json in Resources */,
 				48F7F2EF1E2F005300E34939 /* O.json in Resources */,
-				486F03A41E2EE89A001F5B4F /* test.png in Resources */,
 				48F7F2F21E2F005300E34939 /* R.json in Resources */,
 				486F039F1E2EDF08001F5B4F /* TwitterHeart.json in Resources */,
 				48F7F2F01E2F005300E34939 /* P.json in Resources */,
