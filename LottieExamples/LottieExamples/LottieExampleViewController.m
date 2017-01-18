@@ -11,7 +11,7 @@
 
 #import <Lottie/Lottie.h>
 
-@interface LottieExampleViewController () <UITextFieldDelegate>
+@interface LottieExampleViewController () <UITextFieldDelegate, UIViewControllerTransitioningDelegate>
 
 @end
 
@@ -67,6 +67,7 @@
 
 - (void)_openPressed {
   JSONExplorerViewController *jsonView = [[JSONExplorerViewController alloc] init];
+  jsonView.transitioningDelegate = self;
   [jsonView setCompletionBlock:^(NSString *path) {
     [self dismissViewControllerAnimated:YES completion:nil];
     [self _openFileAtPath:path];
@@ -121,14 +122,19 @@
     currentAnimation.contentMode = UIViewContentModeScaleAspectFit;
     
     [self.view addSubview:currentAnimation];
-    
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"test"]];
-//    imageView.contentMode = UIViewContentModeScaleAspectFill;
-//    [currentAnimation addSubview:imageView toLayerNamed:@"DotLayerMask"];
-    
+
     [self _updatePlayButtonTitle];
     [self.view setNeedsLayout];
   }
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source {
+  LAAnimationTransistionController *animationController = [[LAAnimationTransistionController alloc] initWithAnimationNamed:@"vcTransition1"
+                                                                                                            fromLayerNamed:@"outLayer"
+                                                                                                              toLayerNamed:@"inLayer"];
+  return animationController;
 }
 
 @end
