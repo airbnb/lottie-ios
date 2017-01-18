@@ -7,8 +7,10 @@
 //
 
 #import "AppDelegate.h"
-
+#import <Lottie/Lottie.h>
 @interface AppDelegate ()
+
+@property (nonatomic, strong)LAAnimationView *splashScreen;
 
 @end
 
@@ -17,6 +19,21 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Override point for customization after application launch.
+  [self.window makeKeyAndVisible];
+  
+  
+  LAAnimationView *splashScreen = [LAAnimationView animationNamed:@"LottieLogo1_masked"];
+  splashScreen.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+  splashScreen.frame = self.window.bounds;
+  splashScreen.contentMode = UIViewContentModeScaleAspectFill;
+  
+  [self.window addSubview:splashScreen];
+  self.splashScreen = splashScreen;
+  [self.splashScreen playWithCompletion:^(BOOL animationFinished) {
+    [self.splashScreen removeFromSuperview];
+    self.splashScreen = nil;
+  }];
+  
   return YES;
 }
 

@@ -14,6 +14,17 @@
 
 @implementation LAShapeTransform
 
++ (instancetype)transformIdentityWithCompBounds:(CGRect)compBounds {
+  NSDictionary *transformIdentity = @{@"p" : @{@"k" : @[@0, @0]},
+                                      @"a" : @{@"k" : @[@0, @0]},
+                                      @"s" : @{@"k" : @[@100, @100]},
+                                      @"r" : @{@"k" : @[@0]},
+                                      @"o" : @{@"k" : @[@100]}};
+  
+  
+  return [[LAShapeTransform alloc] initWithJSON:transformIdentity frameRate:@60 compBounds:compBounds];
+}
+
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds {
   self = [super init];
   if (self) {
@@ -55,6 +66,10 @@
     _opacity = [[LAAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:frameRate];
     [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
   }
+}
+
+- (NSString *)description {
+  return [NSString stringWithFormat:@"LAShapeTransform \"Position: %@ Anchor: %@ Scale: %@ Rotation: %@ Opacity: %@\"", _position.description, _anchor.description, _scale.description, _rotation.description, _opacity.description];
 }
 
 @end

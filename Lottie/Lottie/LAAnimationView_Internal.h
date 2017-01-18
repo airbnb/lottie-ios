@@ -6,6 +6,12 @@
 //  Copyright © 2016 Brandon Withrow. All rights reserved.
 //
 
+typedef enum : NSUInteger {
+  LAConstraintTypeAlignToBounds,
+  LAConstraintTypeAlignToLayer,
+  LAConstraintTypeNone
+} LAConstraintType;
+
 @interface LAAnimationState : NSObject
 
 - (id)initWithDuration:(CGFloat)duration layer:(CALayer *)layer;
