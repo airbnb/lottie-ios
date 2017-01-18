@@ -20,6 +20,7 @@
 		4872845A1D4FCF3200007A88 /* JSONExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487284591D4FCF3200007A88 /* JSONExplorerViewController.m */; };
 		48B96B211E29741400A1C49C /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 48B96B1F1E29741400A1C49C /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		48DD776E1E301544006C37F9 /* vcTransition1.json in Resources */ = {isa = PBXBuildFile; fileRef = 48DD776D1E301544006C37F9 /* vcTransition1.json */; };
+		48DD77701E301A11006C37F9 /* vcTransition2.json in Resources */ = {isa = PBXBuildFile; fileRef = 48DD776F1E301A11006C37F9 /* vcTransition2.json */; };
 		48E774CD1D4AC7300029FC2D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774CC1D4AC7300029FC2D /* main.m */; };
 		48E774D01D4AC7300029FC2D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774CF1D4AC7300029FC2D /* AppDelegate.m */; };
 		48E774D61D4AC7300029FC2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48E774D41D4AC7300029FC2D /* Main.storyboard */; };
@@ -89,6 +90,7 @@
 		487284591D4FCF3200007A88 /* JSONExplorerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONExplorerViewController.m; sourceTree = "<group>"; };
 		48B96B1F1E29741400A1C49C /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48DD776D1E301544006C37F9 /* vcTransition1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = vcTransition1.json; sourceTree = "<group>"; };
+		48DD776F1E301A11006C37F9 /* vcTransition2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = vcTransition2.json; sourceTree = "<group>"; };
 		48E774C81D4AC7300029FC2D /* LottieExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottieExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48E774CC1D4AC7300029FC2D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		48E774CE1D4AC7300029FC2D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				486F03971E2EDF08001F5B4F /* PinJump.json */,
 				486F03981E2EDF08001F5B4F /* TwitterHeart.json */,
 				48DD776D1E301544006C37F9 /* vcTransition1.json */,
+				48DD776F1E301A11006C37F9 /* vcTransition2.json */,
 				48E774CC1D4AC7300029FC2D /* main.m */,
 			);
 			name = "Supporting Files";
@@ -333,6 +336,7 @@
 				48F7F2EB1E2F005300E34939 /* K.json in Resources */,
 				486F039E1E2EDF08001F5B4F /* PinJump.json in Resources */,
 				48E774DB1D4AC7300029FC2D /* LaunchScreen.storyboard in Resources */,
+				48DD77701E301A11006C37F9 /* vcTransition2.json in Resources */,
 				486F03991E2EDF08001F5B4F /* Animography-AMELIE.json in Resources */,
 				48F7F2E41E2F005300E34939 /* D.json in Resources */,
 				48F7F2E21E2F005300E34939 /* BlinkingCursor.json in Resources */,

@@ -137,4 +137,11 @@
   return animationController;
 }
 
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+  LAAnimationTransistionController *animationController = [[LAAnimationTransistionController alloc] initWithAnimationNamed:@"vcTransition2"
+                                                                                                            fromLayerNamed:@"outLayer"
+                                                                                                              toLayerNamed:@"inLayer"];
+  return animationController;
+}
+
 @end
