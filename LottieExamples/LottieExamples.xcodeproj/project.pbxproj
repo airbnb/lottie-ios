@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4844D3701E259B4A00D1B02D /* LAAnimatedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4844D36F1E259B4A00D1B02D /* LAAnimatedTextField.m */; };
+		4844D3701E259B4A00D1B02D /* AnimatedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4844D36F1E259B4A00D1B02D /* AnimatedTextField.m */; };
 		486F03991E2EDF08001F5B4F /* Animography-AMELIE.json in Resources */ = {isa = PBXBuildFile; fileRef = 486F03921E2EDF08001F5B4F /* Animography-AMELIE.json */; };
 		486F039A1E2EDF08001F5B4F /* HamburgerArrow.json in Resources */ = {isa = PBXBuildFile; fileRef = 486F03931E2EDF08001F5B4F /* HamburgerArrow.json */; };
 		486F039B1E2EDF08001F5B4F /* LottieLogo1.json in Resources */ = {isa = PBXBuildFile; fileRef = 486F03941E2EDF08001F5B4F /* LottieLogo1.json */; };
@@ -15,9 +15,9 @@
 		486F039D1E2EDF08001F5B4F /* MotionCorpse-Jrcanest.json in Resources */ = {isa = PBXBuildFile; fileRef = 486F03961E2EDF08001F5B4F /* MotionCorpse-Jrcanest.json */; };
 		486F039E1E2EDF08001F5B4F /* PinJump.json in Resources */ = {isa = PBXBuildFile; fileRef = 486F03971E2EDF08001F5B4F /* PinJump.json */; };
 		486F039F1E2EDF08001F5B4F /* TwitterHeart.json in Resources */ = {isa = PBXBuildFile; fileRef = 486F03981E2EDF08001F5B4F /* TwitterHeart.json */; };
-		486F03A21E2EE00A001F5B4F /* LALaunchLogoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 486F03A11E2EE00A001F5B4F /* LALaunchLogoViewController.m */; };
-		4871B3661E244BB900AE29CD /* LATypingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4871B3651E244BB900AE29CD /* LATypingDemoViewController.m */; };
-		4872845A1D4FCF3200007A88 /* LAJSONExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487284591D4FCF3200007A88 /* LAJSONExplorerViewController.m */; };
+		486F03A21E2EE00A001F5B4F /* LaunchLogoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 486F03A11E2EE00A001F5B4F /* LaunchLogoViewController.m */; };
+		4871B3661E244BB900AE29CD /* TypingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4871B3651E244BB900AE29CD /* TypingDemoViewController.m */; };
+		4872845A1D4FCF3200007A88 /* JSONExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487284591D4FCF3200007A88 /* JSONExplorerViewController.m */; };
 		48B96B211E29741400A1C49C /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 48B96B1F1E29741400A1C49C /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		48E774CD1D4AC7300029FC2D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774CC1D4AC7300029FC2D /* main.m */; };
 		48E774D01D4AC7300029FC2D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774CF1D4AC7300029FC2D /* AppDelegate.m */; };
@@ -52,7 +52,7 @@
 		48F7F2F81E2F005300E34939 /* X.json in Resources */ = {isa = PBXBuildFile; fileRef = 48F7F2DD1E2F005300E34939 /* X.json */; };
 		48F7F2F91E2F005300E34939 /* Y.json in Resources */ = {isa = PBXBuildFile; fileRef = 48F7F2DE1E2F005300E34939 /* Y.json */; };
 		48F7F2FA1E2F005300E34939 /* Z.json in Resources */ = {isa = PBXBuildFile; fileRef = 48F7F2DF1E2F005300E34939 /* Z.json */; };
-		6295CF381D526D72004FAD21 /* BBLottieExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6295CF371D526D72004FAD21 /* BBLottieExampleViewController.m */; };
+		6295CF381D526D72004FAD21 /* LottieExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6295CF371D526D72004FAD21 /* LottieExampleViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -71,8 +71,8 @@
 
 /* Begin PBXFileReference section */
 		48440E7D1E1F0A6800A7882C /* Lottie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lottie.framework; path = "../../../Library/Developer/Xcode/DerivedData/LottieExamples-gdyakbdnisazzyhjjynybvmvamdk/Build/Products/Debug-iphonesimulator/Lottie.framework"; sourceTree = "<group>"; };
-		4844D36E1E259B4A00D1B02D /* LAAnimatedTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimatedTextField.h; sourceTree = "<group>"; };
-		4844D36F1E259B4A00D1B02D /* LAAnimatedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimatedTextField.m; sourceTree = "<group>"; };
+		4844D36E1E259B4A00D1B02D /* AnimatedTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedTextField.h; sourceTree = "<group>"; };
+		4844D36F1E259B4A00D1B02D /* AnimatedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedTextField.m; sourceTree = "<group>"; };
 		486F03921E2EDF08001F5B4F /* Animography-AMELIE.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Animography-AMELIE.json"; sourceTree = "<group>"; };
 		486F03931E2EDF08001F5B4F /* HamburgerArrow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HamburgerArrow.json; sourceTree = "<group>"; };
 		486F03941E2EDF08001F5B4F /* LottieLogo1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LottieLogo1.json; sourceTree = "<group>"; };
@@ -80,12 +80,12 @@
 		486F03961E2EDF08001F5B4F /* MotionCorpse-Jrcanest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "MotionCorpse-Jrcanest.json"; sourceTree = "<group>"; };
 		486F03971E2EDF08001F5B4F /* PinJump.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PinJump.json; sourceTree = "<group>"; };
 		486F03981E2EDF08001F5B4F /* TwitterHeart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TwitterHeart.json; sourceTree = "<group>"; };
-		486F03A01E2EE00A001F5B4F /* LALaunchLogoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LALaunchLogoViewController.h; sourceTree = "<group>"; };
-		486F03A11E2EE00A001F5B4F /* LALaunchLogoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LALaunchLogoViewController.m; sourceTree = "<group>"; };
-		4871B3641E244BB900AE29CD /* LATypingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LATypingDemoViewController.h; sourceTree = "<group>"; };
-		4871B3651E244BB900AE29CD /* LATypingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LATypingDemoViewController.m; sourceTree = "<group>"; };
-		487284581D4FCF3200007A88 /* LAJSONExplorerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAJSONExplorerViewController.h; sourceTree = "<group>"; };
-		487284591D4FCF3200007A88 /* LAJSONExplorerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAJSONExplorerViewController.m; sourceTree = "<group>"; };
+		486F03A01E2EE00A001F5B4F /* LaunchLogoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchLogoViewController.h; sourceTree = "<group>"; };
+		486F03A11E2EE00A001F5B4F /* LaunchLogoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchLogoViewController.m; sourceTree = "<group>"; };
+		4871B3641E244BB900AE29CD /* TypingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypingDemoViewController.h; sourceTree = "<group>"; };
+		4871B3651E244BB900AE29CD /* TypingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypingDemoViewController.m; sourceTree = "<group>"; };
+		487284581D4FCF3200007A88 /* JSONExplorerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONExplorerViewController.h; sourceTree = "<group>"; };
+		487284591D4FCF3200007A88 /* JSONExplorerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONExplorerViewController.m; sourceTree = "<group>"; };
 		48B96B1F1E29741400A1C49C /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48E774C81D4AC7300029FC2D /* LottieExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottieExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48E774CC1D4AC7300029FC2D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -123,8 +123,8 @@
 		48F7F2DD1E2F005300E34939 /* X.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = X.json; sourceTree = "<group>"; };
 		48F7F2DE1E2F005300E34939 /* Y.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Y.json; sourceTree = "<group>"; };
 		48F7F2DF1E2F005300E34939 /* Z.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Z.json; sourceTree = "<group>"; };
-		6295CF361D526D72004FAD21 /* BBLottieExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLottieExampleViewController.h; sourceTree = "<group>"; };
-		6295CF371D526D72004FAD21 /* BBLottieExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLottieExampleViewController.m; sourceTree = "<group>"; };
+		6295CF361D526D72004FAD21 /* LottieExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LottieExampleViewController.h; sourceTree = "<group>"; };
+		6295CF371D526D72004FAD21 /* LottieExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LottieExampleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,16 +169,12 @@
 			children = (
 				48E774CE1D4AC7300029FC2D /* AppDelegate.h */,
 				48E774CF1D4AC7300029FC2D /* AppDelegate.m */,
-				486F03A01E2EE00A001F5B4F /* LALaunchLogoViewController.h */,
-				486F03A11E2EE00A001F5B4F /* LALaunchLogoViewController.m */,
-				487284581D4FCF3200007A88 /* LAJSONExplorerViewController.h */,
-				487284591D4FCF3200007A88 /* LAJSONExplorerViewController.m */,
-				6295CF361D526D72004FAD21 /* BBLottieExampleViewController.h */,
-				6295CF371D526D72004FAD21 /* BBLottieExampleViewController.m */,
-				4871B3641E244BB900AE29CD /* LATypingDemoViewController.h */,
-				4871B3651E244BB900AE29CD /* LATypingDemoViewController.m */,
-				4844D36E1E259B4A00D1B02D /* LAAnimatedTextField.h */,
-				4844D36F1E259B4A00D1B02D /* LAAnimatedTextField.m */,
+				48F7F2FE1E2FEDE000E34939 /* LaunchAnimation */,
+				487284581D4FCF3200007A88 /* JSONExplorerViewController.h */,
+				487284591D4FCF3200007A88 /* JSONExplorerViewController.m */,
+				6295CF361D526D72004FAD21 /* LottieExampleViewController.h */,
+				6295CF371D526D72004FAD21 /* LottieExampleViewController.m */,
+				48F7F3061E2FFD1000E34939 /* Typing Demo */,
 				48E774D41D4AC7300029FC2D /* Main.storyboard */,
 				48E774D71D4AC7300029FC2D /* Assets.xcassets */,
 				48E774D91D4AC7300029FC2D /* LaunchScreen.storyboard */,
@@ -239,6 +235,26 @@
 			path = "Animography-AnimatedTypeface";
 			sourceTree = "<group>";
 		};
+		48F7F2FE1E2FEDE000E34939 /* LaunchAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				486F03A01E2EE00A001F5B4F /* LaunchLogoViewController.h */,
+				486F03A11E2EE00A001F5B4F /* LaunchLogoViewController.m */,
+			);
+			name = LaunchAnimation;
+			sourceTree = "<group>";
+		};
+		48F7F3061E2FFD1000E34939 /* Typing Demo */ = {
+			isa = PBXGroup;
+			children = (
+				4871B3641E244BB900AE29CD /* TypingDemoViewController.h */,
+				4871B3651E244BB900AE29CD /* TypingDemoViewController.m */,
+				4844D36E1E259B4A00D1B02D /* AnimatedTextField.h */,
+				4844D36F1E259B4A00D1B02D /* AnimatedTextField.m */,
+			);
+			name = "Typing Demo";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -266,7 +282,7 @@
 		48E774C01D4AC7300029FC2D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Brandon Withrow";
 				TargetAttributes = {
 					48E774C71D4AC7300029FC2D = {
@@ -346,13 +362,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6295CF381D526D72004FAD21 /* BBLottieExampleViewController.m in Sources */,
-				486F03A21E2EE00A001F5B4F /* LALaunchLogoViewController.m in Sources */,
-				4872845A1D4FCF3200007A88 /* LAJSONExplorerViewController.m in Sources */,
+				6295CF381D526D72004FAD21 /* LottieExampleViewController.m in Sources */,
+				486F03A21E2EE00A001F5B4F /* LaunchLogoViewController.m in Sources */,
+				4872845A1D4FCF3200007A88 /* JSONExplorerViewController.m in Sources */,
 				48E774D01D4AC7300029FC2D /* AppDelegate.m in Sources */,
-				4871B3661E244BB900AE29CD /* LATypingDemoViewController.m in Sources */,
+				4871B3661E244BB900AE29CD /* TypingDemoViewController.m in Sources */,
 				48E774CD1D4AC7300029FC2D /* main.m in Sources */,
-				4844D3701E259B4A00D1B02D /* LAAnimatedTextField.m in Sources */,
+				4844D3701E259B4A00D1B02D /* AnimatedTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,8 +407,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -435,8 +453,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

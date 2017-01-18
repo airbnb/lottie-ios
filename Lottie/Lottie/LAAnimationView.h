@@ -21,6 +21,7 @@ typedef void (^LAAnimationCompletionBlock)(BOOL animationFinished);
 @property (nonatomic, assign) BOOL loopAnimation;
 @property (nonatomic, assign) CGFloat animationProgress;
 @property (nonatomic, assign) CGFloat animationSpeed;
+@property (nonatomic, readonly) CGFloat animationDuration;
 
 - (void)playWithCompletion:(LAAnimationCompletionBlock)completion;
 - (void)play;

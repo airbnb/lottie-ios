@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LAJSONExplorerViewController : UIViewController
+@interface JSONExplorerViewController : UIViewController
 
 @property (nonatomic, copy) void (^completionBlock)(NSString *jsonURL);
 

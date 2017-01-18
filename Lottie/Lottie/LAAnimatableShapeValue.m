@@ -32,9 +32,21 @@
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
         [(NSArray *)value firstObject][@"t"]) {
       //Keframes
+      NSDictionary *first = [(NSArray *)value firstObject];
+      NSDictionary *start = ([first[@"s"] isKindOfClass:[NSDictionary class]] ?
+                             first[@"s"] :
+                             [(NSArray *)first[@"s"] firstObject]);
+      
+      if ([(start[@"c"]) isKindOfClass:[NSNumber class]]) {
+        closed = [(start[@"c"]) boolValue];
+      }
+      
       [self _buildAnimationForKeyframes:value closed:closed];
     } else if ([value isKindOfClass:[NSDictionary class]]) {
       //Single Value, no animation
+      if ([value[@"c"] isKindOfClass:[NSNumber class]]) {
+        closed = [value[@"c"] boolValue];
+      }
       _initialShape = [self _bezierShapeFromValue:value closed:closed];
     }
   }

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Brandon Withrow. All rights reserved.
 //
 
-#import "LAAnimatedTextField.h"
+#import "AnimatedTextField.h"
 #import <Lottie/Lottie.h>
 
 @interface LACharacterCell : UICollectionViewCell
@@ -65,11 +65,11 @@
 
 @end
 
-@interface LAAnimatedTextField () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface AnimatedTextField () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end
 
-@implementation LAAnimatedTextField {
+@implementation AnimatedTextField {
   NSString *_text;
   UICollectionView *_collectionView;
   UICollectionViewFlowLayout *_layout;

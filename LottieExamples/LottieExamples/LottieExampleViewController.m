@@ -6,16 +6,16 @@
 //  Copyright © 2016 Brandon Withrow. All rights reserved.
 //
 
-#import "BBLottieExampleViewController.h"
-#import "LAJSONExplorerViewController.h"
+#import "LottieExampleViewController.h"
+#import "JSONExplorerViewController.h"
 
 #import <Lottie/Lottie.h>
 
-@interface BBLottieExampleViewController () <UITextFieldDelegate>
+@interface LottieExampleViewController () <UITextFieldDelegate>
 
 @end
 
-@implementation BBLottieExampleViewController {
+@implementation LottieExampleViewController {
   UIButton *playButton;
   UIButton *loopButton;
   UISlider *animationSlider;
@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  self.view.backgroundColor = [UIColor whiteColor];
   openButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
   [openButton setTitle:@"Open" forState:UIControlStateNormal];
   [self.view addSubview:openButton];
@@ -65,7 +66,7 @@
 }
 
 - (void)_openPressed {
-  LAJSONExplorerViewController *jsonView = [[LAJSONExplorerViewController alloc] init];
+  JSONExplorerViewController *jsonView = [[JSONExplorerViewController alloc] init];
   [jsonView setCompletionBlock:^(NSString *path) {
     [self dismissViewControllerAnimated:YES completion:nil];
     [self _openFileAtPath:path];
