@@ -199,7 +199,7 @@ const CGFloat kEllipseControlPointPercentage = 0.55228;
   }
   
   if (_fill) {
-    _fillAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"backgroundColor" : _fill.color,
+    _fillAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"fillColor" : _fill.color,
                                                                                            @"opacity" : _fill.opacity,
                                                                                            @"circlePosition" : _circle.position,
                                                                                            @"circleSize" : _circle.size}];

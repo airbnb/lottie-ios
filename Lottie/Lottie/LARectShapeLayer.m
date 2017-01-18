@@ -180,7 +180,7 @@
   }
   
   if (_fill) {
-    _fillAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"backgroundColor" : _fill.color,
+    _fillAnimation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"fillColor" : _fill.color,
                                                                                            @"opacity" : _fill.opacity,
                                                                                            @"rectSize" : _rectangle.size,
                                                                                            @"rectPosition" : _rectangle.position,
