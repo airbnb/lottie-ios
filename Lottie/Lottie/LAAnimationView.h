@@ -26,4 +26,7 @@ typedef void (^LAAnimationCompletionBlock)(BOOL animationFinished);
 - (void)play;
 - (void)pause;
 
+- (void)addSubview:(UIView *)view
+      toLayerNamed:(NSString *)layer;
+
 @end

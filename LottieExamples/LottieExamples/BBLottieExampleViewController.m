@@ -120,6 +120,11 @@
     currentAnimation.contentMode = UIViewContentModeScaleAspectFit;
     
     [self.view addSubview:currentAnimation];
+    
+//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"test"]];
+//    imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    [currentAnimation addSubview:imageView toLayerNamed:@"DotLayerMask"];
+    
     [self _updatePlayButtonTitle];
     [self.view setNeedsLayout];
   }

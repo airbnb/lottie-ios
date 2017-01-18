@@ -15,6 +15,8 @@
 
 @interface LAShapeTransform : NSObject
 
++ (instancetype)transformIdentityWithCompBounds:(CGRect)compBounds;
+
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds;
 
 @property (nonatomic, readonly) CGRect compBounds;

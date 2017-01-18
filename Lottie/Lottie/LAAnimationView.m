@@ -166,8 +166,22 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
 @end
 
+@interface LACustomChild : NSObject
+
+@property (nonatomic, strong) UIView *childView;
+@property (nonatomic, weak) LALayerView *layer;
+@property (nonatomic, assign) LAConstraintType constraint;
+
+@end
+
+@implementation LACustomChild
+
+@end
+
 @implementation LAAnimationView {
   NSDictionary *_layerMap;
+  NSDictionary *_layerNameMap;
+  NSMutableArray *_customLayers;
   CALayer *_animationContainer;
   CADisplayLink *_completionDisplayLink;
   BOOL hasFullyInitialized_;
@@ -274,16 +288,28 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
 
 - (void)_buildSubviewsFromModel {
+  if (_customLayers) {
+    for (LACustomChild *child in _customLayers) {
+      [child.childView.layer removeFromSuperlayer];
+    }
+    _customLayers = nil;
+  }
+  
   if (_layerMap) {
     _layerMap = nil;
     [_animationContainer removeAllAnimations];
     [_animationContainer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
   }
   
+  if (_layerNameMap) {
+    _layerNameMap = nil;
+  }
+  
   _animationContainer.transform = CATransform3DIdentity;
   _animationContainer.bounds = _sceneModel.compBounds;
   
   NSMutableDictionary *layerMap = [NSMutableDictionary dictionary];
+  NSMutableDictionary *layerNameMap = [NSMutableDictionary dictionary];
   
   NSArray *reversedItems = [[_sceneModel.layers reverseObjectEnumerator] allObjects];
   
@@ -291,6 +317,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   for (LALayer *layer in reversedItems) {
     LALayerView *layerView = [[LALayerView alloc] initWithModel:layer inComposition:_sceneModel];
     layerMap[layer.layerID] = layerView;
+    layerNameMap[layer.layerName] = layerView;
     if (maskedLayer) {
       maskedLayer.mask = layerView;
       maskedLayer = nil;
@@ -302,6 +329,28 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
     }
   }
   _layerMap = layerMap;
+  _layerNameMap = layerNameMap;
+}
+
+- (void)_layoutCustomChildLayers {
+  if (!_customLayers.count) {
+    return;
+  }
+  
+  for (LACustomChild *child in _customLayers) {
+    switch (child.constraint) {
+      case LAConstraintTypeAlignToLayer:
+        child.childView.frame = child.layer.bounds;
+        break;
+      case LAConstraintTypeAlignToBounds: {
+        CGRect selfBounds = _animationContainer.frame;
+        CGRect convertedBounds = [child.childView.layer.superlayer convertRect:selfBounds fromLayer:self.layer];
+        child.childView.layer.frame = convertedBounds;
+      } break;
+      default:
+        break;
+    }
+  }
 }
 
 # pragma mark - External Methods
@@ -338,6 +387,32 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
     
     [self _callCompletionIfNecesarry:NO];
   }
+}
+
+- (void)addSubview:(UIView *)view
+      toLayerNamed:(NSString *)layer {
+  LAConstraintType constraint = LAConstraintTypeAlignToBounds;
+  LALayerView *layerObject = _layerNameMap[layer];
+  LACustomChild *newChild = [[LACustomChild alloc] init];
+  newChild.constraint = constraint;
+  newChild.childView = view;
+  
+  if (!layer) {
+    // TODO Throw Error
+    [self.layer addSublayer:view.layer];
+    newChild.layer = self.layer;
+  } else {
+    newChild.layer = layerObject;
+    [layerObject.superlayer insertSublayer:view.layer above:layerObject];
+    
+    view.layer.mask = layerObject;
+  }
+  
+  if (!_customLayers) {
+    _customLayers = [NSMutableArray array];
+  }
+  [_customLayers addObject:newChild];
+  [self _layoutCustomChildLayers];
 }
 
 # pragma mark - Display Link
@@ -461,6 +536,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   _animationContainer.transform = xform;
   _animationContainer.position = centerPoint;
   [CATransaction commit];
+  [self _layoutCustomChildLayers];
 }
 
 @end
