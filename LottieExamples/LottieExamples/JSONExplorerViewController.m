@@ -6,16 +6,16 @@
 //  Copyright © 2015 Brandon Withrow. All rights reserved.
 //
 
-#import "LAJSONExplorerViewController.h"
+#import "JSONExplorerViewController.h"
 
-@interface LAJSONExplorerViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface JSONExplorerViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *jsonFiles;
 
 @end
 
-@implementation LAJSONExplorerViewController
+@implementation JSONExplorerViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];

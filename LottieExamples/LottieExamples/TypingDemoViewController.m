@@ -6,15 +6,15 @@
 //  Copyright © 2017 Brandon Withrow. All rights reserved.
 //
 
-#import "LATypingDemoViewController.h"
-#import "LAAnimatedTextField.h"
+#import "TypingDemoViewController.h"
+#import "AnimatedTextField.h"
 
-@interface LATypingDemoViewController () <UITextFieldDelegate>
+@interface TypingDemoViewController () <UITextFieldDelegate>
 
 @end
 
-@implementation LATypingDemoViewController {
-  LAAnimatedTextField *textField_;
+@implementation TypingDemoViewController {
+  AnimatedTextField *textField_;
   UITextField *typingField_;
   UISlider *fontSlider_;
 }
@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   self.view.backgroundColor = [UIColor whiteColor];
-  textField_ = [[LAAnimatedTextField alloc] initWithFrame:self.view.bounds];
+  textField_ = [[AnimatedTextField alloc] initWithFrame:self.view.bounds];
   [self.view addSubview:textField_];
   [textField_ setText:@"Start Typing"];
   

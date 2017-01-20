@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LATypingDemoViewController : UIViewController
+@interface TypingDemoViewController : UIViewController
 
 @end

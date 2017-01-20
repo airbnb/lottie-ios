@@ -487,6 +487,10 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   return _animationState.animationIsPlaying;
 }
 
+- (CGFloat)animationDuration {
+  return _animationState.animationDuration;
+}
+
 # pragma mark - Overrides
 
 - (void)didMoveToWindow {

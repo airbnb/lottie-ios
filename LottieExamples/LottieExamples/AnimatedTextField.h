@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LAAnimatedTextField : UIView
+@interface AnimatedTextField : UIView
 
 @property (nonatomic, assign) NSInteger fontSize;
 @property (nonatomic, copy) NSString *text;

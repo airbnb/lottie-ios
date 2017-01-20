@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BBLottieExampleViewController : UIViewController
+@interface LottieExampleViewController : UIViewController
 
 
 @end

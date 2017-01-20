@@ -6,16 +6,16 @@
 //  Copyright © 2016 Brandon Withrow. All rights reserved.
 //
 
-#import "BBLottieExampleViewController.h"
-#import "LAJSONExplorerViewController.h"
+#import "LottieExampleViewController.h"
+#import "JSONExplorerViewController.h"
 
 #import <Lottie/Lottie.h>
 
-@interface BBLottieExampleViewController () <UITextFieldDelegate>
+@interface LottieExampleViewController () <UITextFieldDelegate, UIViewControllerTransitioningDelegate>
 
 @end
 
-@implementation BBLottieExampleViewController {
+@implementation LottieExampleViewController {
   UIButton *playButton;
   UIButton *loopButton;
   UISlider *animationSlider;
@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  self.view.backgroundColor = [UIColor whiteColor];
   openButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
   [openButton setTitle:@"Open" forState:UIControlStateNormal];
   [self.view addSubview:openButton];
@@ -65,7 +66,8 @@
 }
 
 - (void)_openPressed {
-  LAJSONExplorerViewController *jsonView = [[LAJSONExplorerViewController alloc] init];
+  JSONExplorerViewController *jsonView = [[JSONExplorerViewController alloc] init];
+  jsonView.transitioningDelegate = self;
   [jsonView setCompletionBlock:^(NSString *path) {
     [self dismissViewControllerAnimated:YES completion:nil];
     [self _openFileAtPath:path];
@@ -120,14 +122,26 @@
     currentAnimation.contentMode = UIViewContentModeScaleAspectFit;
     
     [self.view addSubview:currentAnimation];
-    
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"test"]];
-//    imageView.contentMode = UIViewContentModeScaleAspectFill;
-//    [currentAnimation addSubview:imageView toLayerNamed:@"DotLayerMask"];
-    
+
     [self _updatePlayButtonTitle];
     [self.view setNeedsLayout];
   }
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source {
+  LAAnimationTransistionController *animationController = [[LAAnimationTransistionController alloc] initWithAnimationNamed:@"vcTransition1"
+                                                                                                            fromLayerNamed:@"outLayer"
+                                                                                                              toLayerNamed:@"inLayer"];
+  return animationController;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+  LAAnimationTransistionController *animationController = [[LAAnimationTransistionController alloc] initWithAnimationNamed:@"vcTransition2"
+                                                                                                            fromLayerNamed:@"outLayer"
+                                                                                                              toLayerNamed:@"inLayer"];
+  return animationController;
 }
 
 @end

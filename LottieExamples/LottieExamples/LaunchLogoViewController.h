@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LALaunchLogoViewController : UIViewController
+@interface LaunchLogoViewController : UIViewController
 
 @end
