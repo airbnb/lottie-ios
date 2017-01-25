@@ -17,119 +17,8 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
 @implementation LAAnimationState {
   BOOL _animationIsPlaying;
-  BOOL _resetOnPlay;
-}
-
-- (void)updateAnimationLayer {
-  self.layer.duration = self.animationDuration;
-  self.layer.repeatCount = _loopAnimation ? HUGE_VALF : 0;
-  
-  self.layer.speed = 0;
-  self.layer.timeOffset = 0;
-  self.layer.beginTime = 0;
-  
-  self.layer.speed = self.layerSpeed;
-  self.layer.beginTime = self.layerBeginTime;
-  self.layer.timeOffset = self.layerTimeOffset;
-}
-
-- (void)setAnimationIsPlaying:(BOOL)animationIsPlaying  {
-  if (_animationIsPlaying == animationIsPlaying) {
-    return;
-  }
-  _animationIsPlaying = animationIsPlaying;
-  
-  if (_animationIsPlaying) {
-    // Play
-    _startTimeAbsolute = CACurrentMediaTime() - _layerTimeOffset;
-
-    
-    if (_resetOnPlay) {
-      _resetOnPlay = NO;
-      _startTimeAbsolute = CACurrentMediaTime();
-    }
-  }
-  
-  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-    [self _setAnimationIsPlayingSerialized:animationIsPlaying];
-  }];
-}
-
-- (void)_setAnimationIsPlayingSerialized:(BOOL)animationIsPlaying {
-  _animationIsPlaying = animationIsPlaying;
-  
-  if (_animationIsPlaying) {
-    // Play
-    _startTimeAbsolute = CACurrentMediaTime() - _layerTimeOffset;
-    _layerTimeOffset = 0;
-    _layerSpeed = _animationSpeed;
-    _layerBeginTime = _startTimeAbsolute;
-    
-    if (_resetOnPlay) {
-      _resetOnPlay = NO;
-      _startTimeAbsolute = CACurrentMediaTime();
-      _layerTimeOffset = 0;
-      _layerBeginTime = _startTimeAbsolute;
-    }
-  } else {
-    // Pause
-    _pauseTimeAbsolute = CACurrentMediaTime();
-    CGFloat relativeTimeDiff = _pauseTimeAbsolute - _startTimeAbsolute;
-    
-    _layerTimeOffset = relativeTimeDiff - (floor(relativeTimeDiff / _animationDuration) * _animationDuration);
-    _layerSpeed = 0;
-    _layerBeginTime = 0;
-  }
-  [self updateAnimationLayer];
-}
-
-- (void)setAnimatedProgress:(CGFloat)animatedProgress {
-  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-    [self _setAnimatedProgressSerialized:animatedProgress];
-  }];
-}
-
-- (void)_setAnimatedProgressSerialized:(CGFloat)animatedProgress {
-  if (_resetOnPlay) {
-    _resetOnPlay = NO;
-  }
-  
-  CGFloat modifiedProgress = animatedProgress > 1 ? animatedProgress - floor(animatedProgress) : animatedProgress;
-  CGFloat timeOffset = modifiedProgress * (_animationDuration - singleFrameTimeValue);
-  CGFloat pauseTime = CACurrentMediaTime();
-  _animatedProgress = modifiedProgress;
-  _animationIsPlaying = NO;
-  _pauseTimeAbsolute = pauseTime;
-  _startTimeAbsolute = _pauseTimeAbsolute - timeOffset;
-  _layerTimeOffset = timeOffset;
-  _layerSpeed = 0;
-  _layerBeginTime = 0;
-  [CATransaction begin];
-  [CATransaction setDisableActions:YES];
-  [self updateAnimationLayer];
-  [CATransaction commit];
-}
-
-- (void)setAnimationSpeed:(CGFloat)speed {
-  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-    [self _setAnimationSpeedSerialized:speed];
-  }];
-}
-
-- (void)_setAnimationSpeedSerialized:(CGFloat)speed {
-  _animationSpeed = speed;
-  _layerSpeed = _animationIsPlaying ? _animationSpeed : 0;
-  if (_animationIsPlaying) {
-    [self updateAnimationLayer];
-  }
-}
-
-- (void)setAnimationDoesLoop:(BOOL)loopAnimation {
-  _loopAnimation = loopAnimation;
-  if (_resetOnPlay) {
-    _resetOnPlay = NO;
-  }
-  [self updateAnimationLayer];
+  BOOL _playFromBeginning;
+  CFTimeInterval _previousLocalTime;
 }
 
 - (id)initWithDuration:(CGFloat)duration layer:(CALayer *)layer{
@@ -139,27 +28,106 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
     _animationIsPlaying = NO;
     _loopAnimation = NO;
     
-    _startTimeAbsolute = CACurrentMediaTime();
-    _pauseTimeAbsolute = CACurrentMediaTime();
-    
     _animationDuration = duration;
     _animatedProgress = 0;
     _animationSpeed = 1;
-    _layerTimeOffset = 0;
-    _layerBeginTime = 0;
-    _layerSpeed = 0;
-    [self updateAnimationLayer];
+    
+    // Initial Setup of Layer
+    _layer.fillMode = kCAFillModeBoth;
+    _layer.duration = _animationDuration;
+    _layer.speed = 0;
+    _layer.timeOffset = 0;
+    _layer.beginTime = 0;
+    _layer.timeOffset =  0;
+    _previousLocalTime = -1.f;
+
   }
   return self;
 }
 
+#pragma mark -- External Methods
+
+- (void)updateAnimationLayerClockTime:(CFTimeInterval)clockTime timeOffset:(CFTimeInterval)timeOffset {
+  CGFloat speed = _animationIsPlaying ? _animationSpeed : 0;
+  
+  _layer.speed = speed;
+  _layer.repeatCount = _loopAnimation ? HUGE_VALF : 0;
+  _layer.timeOffset = 0;
+  _layer.beginTime = 0;
+  
+  if (speed == 0) {
+    _layer.timeOffset = timeOffset;
+  } else {
+    CFTimeInterval offsetTime =  ((timeOffset != 0) ?
+                                  timeOffset / speed :
+                                  timeOffset);
+    _layer.beginTime = clockTime - offsetTime;
+  }
+}
+
+#pragma mark -- Setters
+
+- (void)setAnimationDoesLoop:(BOOL)loopAnimation {
+  _loopAnimation = loopAnimation;
+  CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
+  CFTimeInterval clock = CACurrentMediaTime();
+  [self updateAnimationLayerClockTime:clock timeOffset:offset];
+}
+
+- (void)setAnimationIsPlaying:(BOOL)animationIsPlaying  {
+  if (_animationIsPlaying == animationIsPlaying) {
+    return;
+  }
+  _animationIsPlaying = animationIsPlaying;
+  CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
+  CFTimeInterval clock = CACurrentMediaTime();
+
+  if (_animationIsPlaying) {
+    if (_playFromBeginning) {
+      _playFromBeginning = NO;
+      offset = 0;
+    }
+  } else {
+    _animatedProgress = _animationDuration / offset;
+  }
+  [self updateAnimationLayerClockTime:clock timeOffset:offset];
+}
+
+- (void)setAnimatedProgress:(CGFloat)animatedProgress {
+  if (_playFromBeginning) {
+    _playFromBeginning = NO;
+  }
+  _animatedProgress = animatedProgress > 1 ? fmod(animatedProgress, 1) : MAX(animatedProgress, 0);
+  _animationIsPlaying = NO;
+  CFTimeInterval offset = _animatedProgress * _animationDuration;
+  CFTimeInterval clock = CACurrentMediaTime();
+  [self updateAnimationLayerClockTime:clock timeOffset:offset];
+}
+
+- (void)setAnimationSpeed:(CGFloat)speed {
+  _animationSpeed = speed;
+  CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
+  CFTimeInterval clock = CACurrentMediaTime();
+  [self updateAnimationLayerClockTime:clock timeOffset:offset];
+}
+
+#pragma mark -- Getters
+
 - (BOOL)animationIsPlaying {
   if (_animationIsPlaying && !_loopAnimation && _layer) {
-    CGFloat timeDiff = CACurrentMediaTime() - _startTimeAbsolute;
-    if (timeDiff > (_animationDuration * _animationSpeed)) {
+    CFTimeInterval localTime = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    if (_previousLocalTime == localTime && localTime != 0) {
+      NSLog(@"Animation complete %lf local time %lf", _animationDuration, localTime);
       _animationIsPlaying = NO;
-      _resetOnPlay = YES;
+      NSInteger eLocalTime = roundf(localTime * 10000);
+      NSInteger eDuration = roundf(_animationDuration * 10000);
+
+      _animatedProgress = eDuration / eLocalTime;
+      if (eLocalTime == eDuration) {
+        _playFromBeginning = YES;
+      }
     }
+    _previousLocalTime = localTime;
   }
   return _animationIsPlaying;
 }
@@ -217,13 +185,12 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 - (instancetype)initWithContentsOfURL:(NSURL *)url {
   self = [super initWithFrame:CGRectZero];
   if (self) {
-    [self _initializeAnimationContainer];
     LAComposition *laScene = [[LAAnimationCache sharedCache] animationForKey:url.absoluteString];
     if (laScene) {
+      [self _initializeAnimationContainer];
       [self _setupWithSceneModel:laScene restoreAnimationState:NO];
     } else {
-      _animationState = [[LAAnimationState alloc] initWithDuration:singleFrameTimeValue layer:_animationContainer];
-      
+      _animationState = [[LAAnimationState alloc] initWithDuration:singleFrameTimeValue layer:nil];
       dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         NSData *animationData = [NSData dataWithContentsOfURL:url];
         if (!animationData) {
@@ -239,6 +206,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
         LAComposition *laScene = [[LAComposition alloc] initWithJSON:animationJSON];
         dispatch_async(dispatch_get_main_queue(), ^(void){
           [[LAAnimationCache sharedCache] addAnimation:laScene forKey:url.absoluteString];
+          [self _initializeAnimationContainer];
           [self _setupWithSceneModel:laScene restoreAnimationState:YES];
         });
       });
@@ -260,7 +228,6 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
 - (void)_initializeAnimationContainer {
   _animationContainer = [CALayer new];
-  _animationContainer.fillMode = kCAFillModeForwards;
   _animationContainer.masksToBounds = YES;
   [self.layer addSublayer:_animationContainer];
   self.clipsToBounds = YES;
@@ -385,7 +352,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
     [_animationState setAnimationIsPlaying:NO];
     [self stopDisplayLink];
     
-    [self _callCompletionIfNecesarry:NO];
+    [self _callCompletionIfNecesarry];
   }
 }
 
@@ -437,13 +404,13 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 - (void)checkAnimationState {
   if (self.animationState.animationIsPlaying == NO) {
     [self stopDisplayLink];
-    [self _callCompletionIfNecesarry:YES];
+    [self _callCompletionIfNecesarry];
   }
 }
 
-- (void)_callCompletionIfNecesarry:(BOOL)animationComplete {
+- (void)_callCompletionIfNecesarry {
   if (self.completionBlock && hasFullyInitialized_) {
-    self.completionBlock(animationComplete);
+    self.completionBlock(_animationState.animatedProgress == 1);
     self.completionBlock = nil;
   }
 }
@@ -452,7 +419,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
 - (void)setAnimationProgress:(CGFloat)animationProgress {
   if (_animationState.animationIsPlaying) {
-    [self _callCompletionIfNecesarry:NO];
+    [self _callCompletionIfNecesarry];
   }
   
   [_animationState setAnimatedProgress:animationProgress];
@@ -492,11 +459,6 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 }
 
 # pragma mark - Overrides
-
-- (void)didMoveToWindow {
-  [super didMoveToWindow];
-  [_animationState updateAnimationLayer];
-}
 
 - (void)layoutSubviews {
   [super layoutSubviews];

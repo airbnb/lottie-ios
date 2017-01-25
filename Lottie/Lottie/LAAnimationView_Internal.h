@@ -14,9 +14,7 @@ typedef enum : NSUInteger {
 
 @interface LAAnimationState : NSObject
 
-- (id)initWithDuration:(CGFloat)duration layer:(CALayer *)layer;
-
-- (void)updateAnimationLayer;
+- (instancetype)initWithDuration:(CGFloat)duration layer:(CALayer *)layer;
 
 - (void)setAnimationIsPlaying:(BOOL)animationIsPlaying;
 - (void)setAnimationDoesLoop:(BOOL)loopAnimation;
@@ -26,18 +24,10 @@ typedef enum : NSUInteger {
 @property (nonatomic, readonly) BOOL loopAnimation;
 @property (nonatomic, readonly) BOOL animationIsPlaying;
 
-@property (nonatomic, readonly) CFTimeInterval startTimeAbsolute;
-@property (nonatomic, readonly) CFTimeInterval pauseTimeAbsolute;
-
 // Model Properties
 @property (nonatomic, readonly) CGFloat animatedProgress;
 @property (nonatomic, readonly) CGFloat animationDuration;
 @property (nonatomic, readonly) CGFloat animationSpeed;
-
-// CA Layer Properties
-@property (nonatomic, readonly) CFTimeInterval layerBeginTime;
-@property (nonatomic, readonly) CFTimeInterval layerTimeOffset;
-@property (nonatomic, readonly) CGFloat layerSpeed;
 
 @property (nonatomic, readonly) CALayer *layer;
 

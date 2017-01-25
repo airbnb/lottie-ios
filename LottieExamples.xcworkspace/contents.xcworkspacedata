@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/brandonwithrow/Coding/LottieAnimator/Lottie/Lottie.xcodeproj">
+      location = "container:LottieExamples/LottieExamples.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/brandonwithrow/Coding/LottieAnimator/LottieExamples/LottieExamples.xcodeproj">
+      location = "container:Lottie/Lottie.xcodeproj">
    </FileRef>
 </Workspace>
