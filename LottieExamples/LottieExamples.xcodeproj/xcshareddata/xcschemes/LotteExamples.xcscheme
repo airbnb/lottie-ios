@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "48E774C71D4AC7300029FC2D"
-            BuildableName = "LotteExamples.app"
-            BlueprintName = "LotteExamples"
-            ReferencedContainer = "container:LotteExamples.xcodeproj">
+            BuildableName = "LottieExamples.app"
+            BlueprintName = "LottieExamples"
+            ReferencedContainer = "container:LottieExamples.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "48E774C71D4AC7300029FC2D"
-            BuildableName = "LotteExamples.app"
-            BlueprintName = "LotteExamples"
-            ReferencedContainer = "container:LotteExamples.xcodeproj">
+            BuildableName = "LottieExamples.app"
+            BlueprintName = "LottieExamples"
+            ReferencedContainer = "container:LottieExamples.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
