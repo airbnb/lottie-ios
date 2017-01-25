@@ -19,6 +19,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   BOOL _animationIsPlaying;
   BOOL _playFromBeginning;
   CFTimeInterval _previousLocalTime;
+  CGFloat _animatedProgress;
 }
 
 - (id)initWithDuration:(CGFloat)duration layer:(CALayer *)layer{
@@ -37,8 +38,8 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
     _layer.duration = _animationDuration;
     _layer.speed = 0;
     _layer.timeOffset = 0;
-    _layer.beginTime = 0;
-    _layer.timeOffset =  0;
+    _layer.beginTime = CACurrentMediaTime();
+
     _previousLocalTime = -1.f;
 
   }
@@ -48,6 +49,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 #pragma mark -- External Methods
 
 - (void)updateAnimationLayerClockTime:(CFTimeInterval)clockTime timeOffset:(CFTimeInterval)timeOffset {
+  [self logStats:@"Begin Update"];
   CGFloat speed = _animationIsPlaying ? _animationSpeed : 0;
   
   _layer.speed = speed;
@@ -61,8 +63,9 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
     CFTimeInterval offsetTime =  ((timeOffset != 0) ?
                                   timeOffset / speed :
                                   timeOffset);
-    _layer.beginTime = clockTime - offsetTime;
+    _layer.beginTime = CACurrentMediaTime() - offsetTime;
   }
+  [self logStats:@"End Update"];
 }
 
 #pragma mark -- Setters
@@ -88,7 +91,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
       offset = 0;
     }
   } else {
-    _animatedProgress = _animationDuration / offset;
+    _animatedProgress =  offset / _animationDuration;
   }
   [self updateAnimationLayerClockTime:clock timeOffset:offset];
 }
@@ -113,7 +116,20 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
 #pragma mark -- Getters
 
+- (CGFloat)animatedProgress {
+  if (_animationIsPlaying) {
+    CFTimeInterval localTime = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    NSInteger eLocalTime = roundf(localTime * 10000);
+    NSInteger eDuration = roundf(_animationDuration * 10000);
+    if (eLocalTime > 0) {
+      return  (float)eLocalTime / (float)eDuration;
+    }
+  }
+  return _animatedProgress;
+}
+
 - (BOOL)animationIsPlaying {
+  [self logStats:@"Frame Check"];
   if (_animationIsPlaying && !_loopAnimation && _layer) {
     CFTimeInterval localTime = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
     if (_previousLocalTime == localTime && localTime != 0) {
@@ -122,7 +138,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
       NSInteger eLocalTime = roundf(localTime * 10000);
       NSInteger eDuration = roundf(_animationDuration * 10000);
 
-      _animatedProgress = eDuration / eLocalTime;
+      _animatedProgress = (float)eLocalTime / (float)eDuration;
       if (eLocalTime == eDuration) {
         _playFromBeginning = YES;
       }
@@ -130,6 +146,12 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
     _previousLocalTime = localTime;
   }
   return _animationIsPlaying;
+}
+
+- (void)logStats:(NSString *)logName {
+  CFTimeInterval localTime = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
+  NSLog(@"LAAnimationState %@ || Is Playing %@ || Duration %f || Speed %lf ||  Progress %lf || Local Time %lf || ",
+        logName, (_animationIsPlaying ? @"YES" : @"NO"), self.animationDuration, _layer.speed, self.animatedProgress, localTime);
 }
 
 @end
