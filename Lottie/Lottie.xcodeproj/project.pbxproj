@@ -68,8 +68,8 @@
 		48E774AA1D4AABF00029FC2D /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774A41D4AABF00029FC2D /* UIColor+Expanded.m */; };
 		48E774AB1D4AABF00029FC2D /* CGGeometryAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E774A51D4AABF00029FC2D /* CGGeometryAdditions.h */; };
 		48E774AC1D4AABF00029FC2D /* CGGeometryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E774A61D4AABF00029FC2D /* CGGeometryAdditions.m */; };
-		48F7F3041E2FF8A200E34939 /* LAAnimationTransistionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F7F3021E2FF8A200E34939 /* LAAnimationTransistionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F7F3051E2FF8A200E34939 /* LAAnimationTransistionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F7F3031E2FF8A200E34939 /* LAAnimationTransistionController.m */; };
+		48F7F3041E2FF8A200E34939 /* LAAnimationTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F7F3021E2FF8A200E34939 /* LAAnimationTransitionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48F7F3051E2FF8A200E34939 /* LAAnimationTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F7F3031E2FF8A200E34939 /* LAAnimationTransitionController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,8 +138,8 @@
 		48E774A51D4AABF00029FC2D /* CGGeometryAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGGeometryAdditions.h; sourceTree = "<group>"; };
 		48E774A61D4AABF00029FC2D /* CGGeometryAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGGeometryAdditions.m; sourceTree = "<group>"; };
 		48E774AF1D4AAD2E0029FC2D /* LAHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LAHelpers.h; sourceTree = "<group>"; };
-		48F7F3021E2FF8A200E34939 /* LAAnimationTransistionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimationTransistionController.h; sourceTree = "<group>"; };
-		48F7F3031E2FF8A200E34939 /* LAAnimationTransistionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimationTransistionController.m; sourceTree = "<group>"; };
+		48F7F3021E2FF8A200E34939 /* LAAnimationTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimationTransitionController.h; sourceTree = "<group>"; };
+		48F7F3031E2FF8A200E34939 /* LAAnimationTransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAAnimationTransitionController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,8 +177,8 @@
 				48E774531D4AABC10029FC2D /* Animatable Layers */,
 				48E774331D4AAB200029FC2D /* LAAnimationView.h */,
 				48E774341D4AAB200029FC2D /* LAAnimationView.m */,
-				48F7F3021E2FF8A200E34939 /* LAAnimationTransistionController.h */,
-				48F7F3031E2FF8A200E34939 /* LAAnimationTransistionController.m */,
+				48F7F3021E2FF8A200E34939 /* LAAnimationTransitionController.h */,
+				48F7F3031E2FF8A200E34939 /* LAAnimationTransitionController.m */,
 				4871B3601E243D6E00AE29CD /* LAAnimationCache.h */,
 				4871B3611E243D6E00AE29CD /* LAAnimationCache.m */,
 				48A7230A1DF8C99D00A55C00 /* LAAnimationView_Internal.h */,
@@ -296,7 +296,7 @@
 				48E774801D4AABDA0029FC2D /* LAAnimatableNumberValue.h in Headers */,
 				48E774901D4AABDA0029FC2D /* LAShapeGroup.h in Headers */,
 				48E7744B1D4AABB70029FC2D /* LAGroupLayerView.h in Headers */,
-				48F7F3041E2FF8A200E34939 /* LAAnimationTransistionController.h in Headers */,
+				48F7F3041E2FF8A200E34939 /* LAAnimationTransitionController.h in Headers */,
 				48E774921D4AABDA0029FC2D /* LAShapeStroke.h in Headers */,
 				48E774861D4AABDA0029FC2D /* LAAnimatableScaleValue.h in Headers */,
 				48E7749E1D4AABDA0029FC2D /* LAShapeRectangle.h in Headers */,
@@ -378,7 +378,7 @@
 			files = (
 				48E774501D4AABB70029FC2D /* LARectShapeLayer.m in Sources */,
 				48E774AC1D4AABF00029FC2D /* CGGeometryAdditions.m in Sources */,
-				48F7F3051E2FF8A200E34939 /* LAAnimationTransistionController.m in Sources */,
+				48F7F3051E2FF8A200E34939 /* LAAnimationTransitionController.m in Sources */,
 				48E774891D4AABDA0029FC2D /* CAAnimationGroup+LAAnimatableGroup.m in Sources */,
 				48E7747D1D4AABDA0029FC2D /* LAAnimatableColorValue.m in Sources */,
 				48E7749D1D4AABDA0029FC2D /* LAShapeCircle.m in Sources */,

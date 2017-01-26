@@ -49,7 +49,6 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 #pragma mark -- External Methods
 
 - (void)updateAnimationLayerClockTime:(CFTimeInterval)clockTime timeOffset:(CFTimeInterval)timeOffset {
-  [self logStats:@"Begin Update"];
   CGFloat speed = _animationIsPlaying ? _animationSpeed : 0;
   
   _layer.speed = speed;
@@ -65,7 +64,6 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
                                   timeOffset);
     _layer.beginTime = CACurrentMediaTime() - offsetTime;
   }
-  [self logStats:@"End Update"];
 }
 
 #pragma mark -- Setters
@@ -102,7 +100,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   }
   _animatedProgress = animatedProgress > 1 ? fmod(animatedProgress, 1) : MAX(animatedProgress, 0);
   _animationIsPlaying = NO;
-  CFTimeInterval offset = _animatedProgress * _animationDuration;
+  CFTimeInterval offset = _animatedProgress == 1 ? _animationDuration - singleFrameTimeValue : _animatedProgress * _animationDuration;
   CFTimeInterval clock = CACurrentMediaTime();
   [self updateAnimationLayerClockTime:clock timeOffset:offset];
 }
@@ -129,11 +127,9 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 }
 
 - (BOOL)animationIsPlaying {
-  [self logStats:@"Frame Check"];
   if (_animationIsPlaying && !_loopAnimation && _layer) {
     CFTimeInterval localTime = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
     if (_previousLocalTime == localTime && localTime != 0) {
-      NSLog(@"Animation complete %lf local time %lf", _animationDuration, localTime);
       _animationIsPlaying = NO;
       NSInteger eLocalTime = roundf(localTime * 10000);
       NSInteger eDuration = roundf(_animationDuration * 10000);
@@ -180,6 +176,9 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 # pragma mark - Initializers
 
 + (instancetype)animationNamed:(NSString *)animationName {
+  NSArray *components = [animationName componentsSeparatedByString:@"."];
+  animationName = components.firstObject;
+  
   LAComposition *comp = [[LAAnimationCache sharedCache] animationForKey:animationName];
   if (comp) {
     return [[LAAnimationView alloc] initWithModel:comp];
@@ -481,6 +480,11 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 }
 
 # pragma mark - Overrides
+
+- (void)removeFromSuperview {
+  [self pause];
+  [super removeFromSuperview];
+}
 
 - (void)layoutSubviews {
   [super layoutSubviews];
