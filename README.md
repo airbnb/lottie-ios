@@ -85,11 +85,120 @@ Lottie comes with a UIViewController animation controller for making custom view
 
 If your animation will be frequently reused, `LAAnimationView` has an built in LRU Caching Strategy.
 
+## Supported After Effects Features
+
+### Keyframe Interpolation
+
+---
+
+* Linear Interpolation
+
+* Bezier Interpolation
+
+* Hold Interpolation
+
+* Rove Across Time
+
+* Spatial Bezier
+
+### Solids
+
+---
+
+* Transform Anchor Point
+
+* Transform Position
+
+* Transform Scale
+
+* Transform Rotation
+
+* Transform Opacity
+
+### Masks
+
+---
+
+* Path
+
+* Opacity
+
+* Multiple Masks (additive)
+
+### Track Mattes
+
+---
+
+* Alpha Matte
+
+### Parenting
+
+---
+
+* Multiple Parenting
+
+* Nulls
+
+### Shape Layers
+
+---
+
+* Anchor Point
+
+* Position
+
+* Scale
+
+* Rotation
+
+* Opacity
+
+* Path
+
+* Group Transforms (Anchor point, position, scale etc)
+
+* Rectangle (All properties)
+
+* Elipse (All properties)
+
+* Multiple paths in one group
+
+#### Stroke (shape layer)
+
+---
+
+* Stroke Color
+
+* Stroke Opacity
+
+* Stroke Width
+
+* Line Cap
+
+* Dashes
+
+#### Fill (shape layer)
+
+---
+
+* Fill Color
+
+* Fill Opacity
+
+#### Trim Paths (shape layer)
+
+---
+
+* Trim Paths Start
+
+* Trim Paths End
+
+* Trim Paths Offset
+
 ## Try it out
 
-
-Clone this repository and try out the LottieExamples app. The JSON files for them are located in [/assets](https://github.com/airbnb/lottie-ios/tree/master/LottieExamples/LottieExamples/Example_Files).
-
+Get the CocoaPod and run the Example app found in the Example folder.
+The JSON files for them are located in [/Assets](https://github.com/airbnb/lottie-ios/tree/master/Example/Assets).
 The sample app can also load json files at a given url.
 
 ## Alternatives
