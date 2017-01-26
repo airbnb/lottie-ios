@@ -113,7 +113,7 @@ File github issues for anything that is unexpectedly broken. If an After Effects
 ## Roadmap
 - Add support for interactive animated transitions
 - Add support for parenting programatically added layers, moving/scaling
-- Support for the After Effects Trim Paths feature
+- Support for the After Effects Trim Paths Offset feature
 - Animation Syncing
 - Programatically alter animations
 

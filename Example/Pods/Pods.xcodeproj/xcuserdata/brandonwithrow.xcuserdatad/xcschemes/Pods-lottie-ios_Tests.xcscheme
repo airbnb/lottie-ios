@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0820"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6003F589195388D20070C39A"
-               BuildableName = "Lottie.app"
-               BlueprintName = "Lottie"
-               ReferencedContainer = "container:lottie-ios.xcodeproj">
+               BlueprintIdentifier = "83ADD99A263B92A7CBD14D1B3DBE0C7B"
+               BuildableName = "Pods_lottie_ios_Tests.framework"
+               BlueprintName = "Pods-lottie-ios_Tests"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,26 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6003F5AD195388D20070C39A"
-               BuildableName = "lottie-ios_Tests.xctest"
-               BlueprintName = "lottie-ios_Tests"
-               ReferencedContainer = "container:lottie-ios.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "Lottie.app"
-            BlueprintName = "Lottie"
-            ReferencedContainer = "container:lottie-ios.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -61,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "Lottie.app"
-            BlueprintName = "Lottie"
-            ReferencedContainer = "container:lottie-ios.xcodeproj">
+            BlueprintIdentifier = "83ADD99A263B92A7CBD14D1B3DBE0C7B"
+            BuildableName = "Pods_lottie_ios_Tests.framework"
+            BlueprintName = "Pods-lottie-ios_Tests"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -80,16 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "Lottie.app"
-            BlueprintName = "Lottie"
-            ReferencedContainer = "container:lottie-ios.xcodeproj">
+            BlueprintIdentifier = "83ADD99A263B92A7CBD14D1B3DBE0C7B"
+            BuildableName = "Pods_lottie_ios_Tests.framework"
+            BlueprintName = "Pods-lottie-ios_Tests"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
