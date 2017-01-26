@@ -19,43 +19,82 @@
 
 @implementation LACharacterCell {
   LAAnimationView *animationView_;
+  NSString *character_;
 }
 
 - (void)prepareForReuse {
   [super prepareForReuse];
-  [animationView_ removeFromSuperview];
-  animationView_ = nil;
 }
 
 - (void)setCharacter:(NSString *)character {
-  if (animationView_) {
-    [animationView_ removeFromSuperview];
-    animationView_ = nil;
-  }
+  
   
   NSString *sanatizedCharacter = [character substringToIndex:1];
   NSCharacterSet *alphaSet = [NSCharacterSet letterCharacterSet];
   BOOL valid = [[sanatizedCharacter stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""];
-  if (!valid) {
-    return;
-  }
+  
   
   if ([character isEqualToString:@"BlinkingCursor"]) {
     sanatizedCharacter = character;
   }
+  if ([sanatizedCharacter isEqualToString:@","]) {
+    sanatizedCharacter = @"Comma";
+    valid = YES;
+  }
+  if ([sanatizedCharacter isEqualToString:@"'"]) {
+    sanatizedCharacter = @"Apostrophe";
+    valid = YES;
+  }
+  if ([sanatizedCharacter isEqualToString:@":"]) {
+    sanatizedCharacter = @"Colon";
+    valid = YES;
+  }
+  if ([sanatizedCharacter isEqualToString:@"?"]) {
+    sanatizedCharacter = @"QuestionMark";
+    valid = YES;
+  }
+  if ([sanatizedCharacter isEqualToString:@"!"]) {
+    sanatizedCharacter = @"ExclamationMark";
+    valid = YES;
+  }
+  if ([sanatizedCharacter isEqualToString:@"."]) {
+    sanatizedCharacter = @"Period";
+    valid = YES;
+  }
+
+  if ([sanatizedCharacter isEqualToString:character_]) {
+    return;
+  }
+  
+  [animationView_ removeFromSuperview];
+  animationView_ = nil;
+  character_ = nil;
+
+  if (!valid) {
+    return;
+  }
+  character_ = sanatizedCharacter;
   LAAnimationView *animationView = [LAAnimationView animationNamed:sanatizedCharacter];
   animationView_ = animationView;
-  animationView_.frame = self.contentView.bounds;
   animationView_.contentMode = UIViewContentModeScaleAspectFit;
-  animationView_.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
   [self.contentView addSubview:animationView_];
+  CGRect c = self.contentView.bounds;
+  animationView_.frame = CGRectMake(-c.size.width, 0, c.size.width * 3, c.size.height);
+}
+
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  CGRect c = self.contentView.bounds;
+  animationView_.frame = CGRectMake(-c.size.width, 0, c.size.width * 3, c.size.height);
 }
 
 - (void)displayCharacter:(BOOL)animated {
   if (animated) {
     [animationView_ play];
-  } else {
-    animationView_.animationProgress = 1;
+  } else if (animationView_.animationProgress != 1) {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+      animationView_.animationProgress = 1;
+    }];
   }
 }
 
@@ -106,11 +145,7 @@
 - (void)setFontSize:(NSInteger)fontSize {
   _fontSize = fontSize;
   [self _computeLetterSizes];
-  [_collectionView performBatchUpdates:^{
-    [_collectionView reloadData];
-  } completion:^(BOOL finished) {
-    [_collectionView reloadData];
-  }];
+  [_layout invalidateLayout];
 }
 
 - (void)scrollToBottom {

@@ -54,8 +54,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   NSString *fileURL = self.jsonFiles[indexPath.row];
-  if (self.completionBlock) {
-    self.completionBlock(fileURL);
+  NSArray *components = [fileURL componentsSeparatedByString:@"/"];
+   if (self.completionBlock) {
+    self.completionBlock(components.lastObject);
   }
 }
 
