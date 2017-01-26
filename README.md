@@ -22,7 +22,7 @@ Here is just a small sampling of the power of Lottie
 ![Community](LottieExamples/_Gifs/Community 2_3.gif)
 ![Example3](LottieExamples/_Gifs/Examples3.gif)
 
-![Abcs](LottieExamples/_Gifs/abcs.gif)
+![Abcs](LottieExamples/_Gifs/Examples4.gif)
 
 ## Using Lottie
 Lottie supports iOS 8 and above.
@@ -83,8 +83,6 @@ Lottie comes with a UIViewController animation controller for making custom view
 
 ```
 
-
-
 If your animation will be frequently reused, `LAAnimationView` has an built in LRU Caching Strategy.
 
 ## Try it out
@@ -111,3 +109,11 @@ If you would like to add more JSON files and screenshot tests, feel free to do s
 
 ## Issues or feature requests?
 File github issues for anything that is unexpectedly broken. If an After Effects file is not working, please attach it to your issue. Debugging without the original file is much more difficult.
+
+## Roadmap
+- Add support for interactive animated transitions
+- Add support for parenting programatically added layers, moving/scaling
+- Support for the After Effects Trim Paths feature
+- Animation Syncing
+- Programatically alter animations
+
