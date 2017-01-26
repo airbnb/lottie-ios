@@ -29,8 +29,8 @@ Lottie supports iOS 8 and above.
 Lottie animations can be loaded from bundled JSON or from a URL
 
 The simplest way to use it is with LAAnimationView:
-
-```LAAnimation *animation = [LAAnimationView animationNamed:@"Lottie"];
+```
+LAAnimation *animation = [LAAnimationView animationNamed:@"Lottie"];
 [self.view addSubview:animation];
 [animation playWithCompletion:^(BOOL animationFinished) {
   // Do Something
@@ -46,7 +46,6 @@ LAAnimation *animation = [[LAAnimationView alloc] initWithContentsOfURL:[NSURL U
 Lottie supports the iOS `UIViewContentModes` aspectFit and aspectFill
 
 You can also set the animation progress interactively.
-
 ```
 CGPoint translation = [gesture getTranslationInView:self.view];
 CGFloat progress = translation.y / self.view.bounds.size.height;
@@ -81,7 +80,6 @@ Lottie comes with a UIViewController animation controller for making custom view
                                                                                                             toLayerNamed:@"inLayer"];
   return animationController;
 }
-
 
 ```
 
