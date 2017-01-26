@@ -16,13 +16,13 @@ Lottie also supports native UIViewController Transitions out of the box!
 
 Here is just a small sampling of the power of Lottie
 
-![Example1](LottieExamples/_Gifs/Examples1.gif)
-![Example2](LottieExamples/_Gifs/Examples2.gif)
+![Example1](_Gifs/Examples1.gif)
+![Example2](_Gifs/Examples2.gif)
 
-![Community](LottieExamples/_Gifs/Community 2_3.gif)
-![Example3](LottieExamples/_Gifs/Examples3.gif)
+![Community](_Gifs/Community 2_3.gif)
+![Example3](_Gifs/Examples3.gif)
 
-![Abcs](LottieExamples/_Gifs/Examples4.gif)
+![Abcs](_Gifs/Examples4.gif)
 
 ## Using Lottie
 Lottie supports iOS 8 and above.
