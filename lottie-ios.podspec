@@ -11,12 +11,6 @@ Pod::Spec.new do |s|
   s.version          = '1.0.0'
   s.summary          = 'Used to natively render vector animations exported from After Effects.'
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
   s.description      = <<-DESC
 Lottie is a mobile library for Andorid and iOS that parses Adobe After Effects animations exported as json with bodymovin and renders the vector animations natively on mobile and through React Native!
 
@@ -36,7 +30,8 @@ For the first time, designers can create and ship beautiful animations without a
   #   'lottie-ios' => ['lottie-ios/Assets/*.png']
   # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.public_header_files = 'lottie-ios/Classes/PublicHeaders/*.h'
+  s.frameworks = 'UIKit'
+  s.module_name = 'Lottie'
+  s.header_dir = 'Lottie'
 end
