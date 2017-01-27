@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6003F589195388D20070C39A"
-               BuildableName = "Lottie.app"
-               BlueprintName = "Lottie"
+               BuildableName = "Lottie-Example.app"
+               BlueprintName = "Lottie-Example"
                ReferencedContainer = "container:lottie-ios.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -43,8 +43,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "Lottie.app"
-            BlueprintName = "Lottie"
+            BuildableName = "Lottie-Example.app"
+            BlueprintName = "Lottie-Example"
             ReferencedContainer = "container:lottie-ios.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -66,8 +66,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "Lottie.app"
-            BlueprintName = "Lottie"
+            BuildableName = "Lottie-Example.app"
+            BlueprintName = "Lottie-Example"
             ReferencedContainer = "container:lottie-ios.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -85,8 +85,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "Lottie.app"
-            BlueprintName = "Lottie"
+            BuildableName = "Lottie-Example.app"
+            BlueprintName = "Lottie-Example"
             ReferencedContainer = "container:lottie-ios.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

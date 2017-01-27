@@ -1,4 +1,4 @@
-framework module lottie_ios {
+framework module Lottie {
   umbrella header "lottie-ios-umbrella.h"
 
   export *

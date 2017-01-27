@@ -8,7 +8,7 @@
 
 #import "AnimationExplorerViewController.h"
 #import "JSONExplorerViewController.h"
-#import <lottie_ios/Lottie.h>
+#import <Lottie/Lottie.h>
 
 @interface AnimationExplorerViewController ()
 

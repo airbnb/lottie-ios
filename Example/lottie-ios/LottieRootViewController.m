@@ -7,7 +7,7 @@
 //
 
 #import "LottieRootViewController.h"
-#import <lottie_ios/Lottie.h>
+#import <Lottie/Lottie.h>
 
 @interface LottieRootViewController () <UITableViewDelegate, UITableViewDataSource>
 
