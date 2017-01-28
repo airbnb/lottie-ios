@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'lottie-ios'
-  s.version          = '1.0.2'
+  s.version          = '1.0.0'
   s.summary          = 'Used to natively render vector animations exported from After Effects.'
 
   s.description      = <<-DESC
@@ -20,7 +20,7 @@ For the first time, designers can create and ship beautiful animations without a
   s.homepage         = 'https://github.com/airbnb/lottie-ios'
   s.license          = { :type => 'Apache', :file => 'LICENSE' }
   s.author           = { 'Brandon Withrow' => 'buba447@gmail.com' }
-  s.source           = { :git => 'git@git.musta.ch:brandon-withrow/LotteAnimator.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/airbnb/lottie-ios.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
 
