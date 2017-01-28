@@ -10,8 +10,16 @@
 #import "JSONExplorerViewController.h"
 #import <Lottie/Lottie.h>
 
+typedef enum : NSUInteger {
+  ViewBackgroundColorWhite,
+  ViewBackgroundColorBlack,
+  ViewBackgroundColorGreen,
+  ViewBackgroundColorNone
+} ViewBackgroundColor;
+
 @interface AnimationExplorerViewController ()
 
+@property (nonatomic, assign) ViewBackgroundColor currentBGColor;
 @property (nonatomic, strong) UIToolbar *toolbar;
 @property (nonatomic, strong) UISlider *slider;
 @property (nonatomic, strong) LAAnimationView *laAnimation;
@@ -20,21 +28,49 @@
 
 @implementation AnimationExplorerViewController
 
+- (void)setCurrentBGColor:(ViewBackgroundColor)currentBGColor {
+  _currentBGColor = currentBGColor;
+  switch (currentBGColor) {
+    case ViewBackgroundColorWhite:
+      self.view.backgroundColor = [UIColor whiteColor];
+      break;
+    case ViewBackgroundColorBlack:
+      self.view.backgroundColor = [UIColor blackColor];
+      break;
+    case ViewBackgroundColorGreen:
+      self.view.backgroundColor = [UIColor colorWithRed:50.f/255.f
+                                                  green:207.f/255.f
+                                                   blue:193.f/255.f
+                                                  alpha:1.f];
+      break;
+    case ViewBackgroundColorNone:
+      self.view.backgroundColor = nil;
+      break;
+    default:
+      break;
+  }
+}
+
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.view.backgroundColor = [UIColor whiteColor];
+  
+  self.currentBGColor = ViewBackgroundColorWhite;
   self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectZero];
   
   UIBarButtonItem *open = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(_open:)];
   UIBarButtonItem *flx1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-  UIBarButtonItem *rewind = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(_rewind:)];
+  UIBarButtonItem *openWeb = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(_showURLInput)];
   UIBarButtonItem *flx2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
   UIBarButtonItem *play = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(_play:)];
   UIBarButtonItem *flx3 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
   UIBarButtonItem *loop = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(_loop:)];
   UIBarButtonItem *flx4 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+  UIBarButtonItem *zoom = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(_setZoom:)];
+  UIBarButtonItem *flx5 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+  UIBarButtonItem *bgcolor = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(_setBGColor:)];
+  UIBarButtonItem *flx6 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
   UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(_close:)];
-  self.toolbar.items = @[open, flx1, rewind, flx2, play, flx3, loop, flx4, close];
+  self.toolbar.items = @[open, flx1, openWeb, flx2, loop, flx3, play, flx4, zoom, flx5, bgcolor, flx6, close];
   [self.view addSubview:self.toolbar];
   [self resetAllButtons];
   
@@ -74,25 +110,37 @@
 }
 
 - (void)_open:(UIBarButtonItem *)button {
-  UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Open Animation"
-                                                                 message:NULL
-                                                          preferredStyle:UIAlertControllerStyleActionSheet];
-  
-  UIAlertAction *browseAction = [UIAlertAction actionWithTitle:@"Browse" style:UIAlertActionStyleDefault
-                                                       handler:^(UIAlertAction * action) {
-                                                         [self _showJSONExplorer];
-                                                       }];
-  
-  [alert addAction:browseAction];
-  
-  UIAlertAction *fromURLAction = [UIAlertAction actionWithTitle:@"Load from URL" style:UIAlertActionStyleDefault
-                                                        handler:^(UIAlertAction * action) {
-                                                          [self _showURLInput];
-                                                        }];
-  
-  [alert addAction:fromURLAction];
-  
-  [self presentViewController:alert animated:YES completion:nil];
+  [self _showJSONExplorer];
+}
+
+- (void)_setZoom:(UIBarButtonItem *)button {
+  switch (self.laAnimation.contentMode) {
+    case UIViewContentModeScaleAspectFit: {
+      self.laAnimation.contentMode = UIViewContentModeScaleAspectFill;
+      [self showMessage:@"Aspect Fill"];
+    }  break;
+    case UIViewContentModeScaleAspectFill:{
+      self.laAnimation.contentMode = UIViewContentModeScaleToFill;
+      [self showMessage:@"Scale Fill"];
+    }
+      break;
+    case UIViewContentModeScaleToFill: {
+      self.laAnimation.contentMode = UIViewContentModeScaleAspectFit;
+      [self showMessage:@"Aspect Fit"];
+    }
+      break;
+    default:
+      break;
+  }
+}
+
+- (void)_setBGColor:(UIBarButtonItem *)button {
+  ViewBackgroundColor current = self.currentBGColor;
+  current += 1;
+  if (current == ViewBackgroundColorNone) {
+    current = ViewBackgroundColorWhite;
+  }
+  self.currentBGColor = current;
 }
 
 - (void)_showURLInput {
@@ -113,7 +161,7 @@
   
   UIAlertAction *close = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction * action) {
-                                                          [self dismissViewControllerAnimated:YES completion:NULL];
+                                                          
                                                         }];
   
   [alert addAction:close];
@@ -139,7 +187,7 @@
   [self resetAllButtons];
   
   self.laAnimation = [[LAAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
-  self.laAnimation.contentMode = UIViewContentModeScaleAspectFill;
+  self.laAnimation.contentMode = UIViewContentModeScaleAspectFit;
   [self.view addSubview:self.laAnimation];
   [self.view setNeedsLayout];
 }
@@ -150,7 +198,7 @@
   [self resetAllButtons];
   
   self.laAnimation = [LAAnimationView animationNamed:named];
-  self.laAnimation.contentMode = UIViewContentModeScaleAspectFill;
+  self.laAnimation.contentMode = UIViewContentModeScaleAspectFit;
   [self.view addSubview:self.laAnimation];
   [self.view setNeedsLayout];
 }
@@ -175,10 +223,36 @@
 - (void)_loop:(UIBarButtonItem *)button {
   self.laAnimation.loopAnimation = !self.laAnimation.loopAnimation;
   [self resetButton:button highlighted:self.laAnimation.loopAnimation];
+  [self showMessage:self.laAnimation.loopAnimation ? @"Loop Enabled" : @"Loop Disabled"];
 }
 
 - (void)_close:(UIBarButtonItem *)button {
   [self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)showMessage:(NSString *)message {
+  UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+  messageLabel.textAlignment = NSTextAlignmentCenter;
+  messageLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+  messageLabel.textColor = [UIColor whiteColor];
+  messageLabel.text = message;
+  
+  CGSize messageSize = [messageLabel sizeThatFits:self.view.bounds.size];
+  messageSize.width += 14;
+  messageSize.height += 14;
+  messageLabel.frame = CGRectMake(10, 30, messageSize.width, messageSize.height);
+  messageLabel.alpha = 0;
+  [self.view addSubview:messageLabel];
+  
+  [UIView animateWithDuration:0.3 animations:^{
+    messageLabel.alpha = 1;
+  } completion:^(BOOL finished) {
+    [UIView animateWithDuration:0.3 delay:1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+      messageLabel.alpha = 0;
+    } completion:^(BOOL finished) {
+      [messageLabel removeFromSuperview];
+    }];
+  }];
 }
 
 

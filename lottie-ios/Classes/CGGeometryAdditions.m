@@ -420,3 +420,22 @@ CGFloat DegreesToRadians(CGFloat degrees) {
 CGFloat RemapValue(CGFloat value, CGFloat low1, CGFloat high1, CGFloat low2, CGFloat high2 ) {
   return low2 + (value - low1) * (high2 - low2) / (high1 - low1);
 }
+
+CGPoint CGPointByLerpingPoints(CGPoint point1, CGPoint point2, CGFloat value) {
+  CGFloat xDiff = point2.x - point1.x;
+  CGFloat yDiff = point2.y - point1.y;
+  CGPoint transposed = CGPointMake(fabs(xDiff), fabs(yDiff));
+  CGPoint returnPoint;
+  if (xDiff == 0 || yDiff == 0) {
+    returnPoint.x = xDiff == 0 ? point1.x : RemapValue(value, 0, 1, point1.x, point2.x);
+    returnPoint.y = yDiff == 0 ? point1.y : RemapValue(value, 0, 1, point1.y, point2.y);
+  } else {
+    CGFloat rx = transposed.x / transposed.y;
+    CGFloat yLerp = RemapValue(value, 0, 1, 0, transposed.y);
+    CGFloat xLerp = yLerp * rx;
+    CGPoint interpolatedPoint = CGPointMake(point2.x < point1.x ? xLerp * -1 : xLerp,
+                                            point2.y < point1.y ? yLerp * -1 : yLerp);
+    returnPoint = CGPointAddedToPoint(point1, interpolatedPoint);
+  }
+  return returnPoint;
+}

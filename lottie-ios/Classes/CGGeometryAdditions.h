@@ -102,3 +102,4 @@ CATransform3D CATransform3DSlerpToTransform(CATransform3D fromXorm, CATransform3
 CGFloat DegreesToRadians(CGFloat degrees);
 
 CGFloat RemapValue(CGFloat value, CGFloat low1, CGFloat high1, CGFloat low2, CGFloat high2 );
+CGPoint CGPointByLerpingPoints(CGPoint point1, CGPoint point2, CGFloat value);

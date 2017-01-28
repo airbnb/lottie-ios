@@ -179,22 +179,56 @@
   for (int i = 1; i < pointsArray.count; i ++) {
     CGPoint vertex = [self _vertexAtIndex:i inArray:pointsArray];
     CGPoint previousVertex = [self _vertexAtIndex:i - 1 inArray:pointsArray];
-    CGPoint cp1 = [self _vertexAtIndex:i - 1 inArray:outTangents];
-    CGPoint cp2 = [self _vertexAtIndex:i inArray:inTangents];
+    CGPoint cp1 = CGPointAddedToPoint(previousVertex, [self _vertexAtIndex:i - 1 inArray:outTangents]);
+    CGPoint cp2 = CGPointAddedToPoint(vertex, [self _vertexAtIndex:i inArray:inTangents]);
+    
+    if (CGPointEqualToPoint(previousVertex, cp1) &&
+        CGPointEqualToPoint(vertex, cp2)) {
+      // Straight Line
+      cp1 = CGPointByLerpingPoints(previousVertex, vertex, 0.01);
+      cp2 = CGPointByLerpingPoints(previousVertex, vertex, 0.99);
+    } else {
+      if (CGPointEqualToPoint(previousVertex, cp1)) {
+        // Missing out tan
+        cp1 = CGPointByLerpingPoints(previousVertex, cp2, 0.01);
+      }
+      
+      if (CGPointEqualToPoint(vertex, cp2)) {
+        // Missing in tan
+        cp2 = CGPointByLerpingPoints(cp1, vertex, 0.99);
+      }
+    }
 
     [shape addCurveToPoint:vertex
-            controlPoint1:CGPointAddedToPoint(previousVertex, cp1)
-            controlPoint2:CGPointAddedToPoint(vertex, cp2)];
+            controlPoint1:cp1
+            controlPoint2:cp2];
   }
   
   if (closedPath) {
     CGPoint vertex = [self _vertexAtIndex:0 inArray:pointsArray];
     CGPoint previousVertex = [self _vertexAtIndex:pointsArray.count - 1  inArray:pointsArray];
-    CGPoint cp1 = [self _vertexAtIndex:pointsArray.count - 1 inArray:outTangents];
-    CGPoint cp2 = [self _vertexAtIndex:0 inArray:inTangents];
+    CGPoint cp1 = CGPointAddedToPoint(previousVertex, [self _vertexAtIndex:pointsArray.count - 1 inArray:outTangents]);
+    CGPoint cp2 = CGPointAddedToPoint(vertex, [self _vertexAtIndex:0 inArray:inTangents]);
+    if (CGPointEqualToPoint(previousVertex, cp1) &&
+        CGPointEqualToPoint(vertex, cp2)) {
+      // Straight Line
+      cp1 = CGPointByLerpingPoints(previousVertex, vertex, 0.01);
+      cp2 = CGPointByLerpingPoints(previousVertex, vertex, 0.99);
+    } else {
+      if (CGPointEqualToPoint(previousVertex, cp1)) {
+        // Missing out tan
+        cp1 = CGPointByLerpingPoints(previousVertex, cp2, 0.01);
+      }
+      
+      if (CGPointEqualToPoint(vertex, cp2)) {
+        // Missing in tan
+        cp2 = CGPointByLerpingPoints(cp1, vertex, 0.99);
+      }
+    }
+    
     [shape addCurveToPoint:vertex
-             controlPoint1:CGPointAddedToPoint(previousVertex, cp1)
-             controlPoint2:CGPointAddedToPoint(vertex, cp2)];
+             controlPoint1:cp1
+             controlPoint2:cp2];
     [shape closePath];
   }
   

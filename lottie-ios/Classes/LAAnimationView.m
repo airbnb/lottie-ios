@@ -486,6 +486,11 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   [super removeFromSuperview];
 }
 
+- (void)setContentMode:(UIViewContentMode)contentMode {
+  [super setContentMode:contentMode];
+  [self setNeedsLayout];
+}
+
 - (void)layoutSubviews {
   [super layoutSubviews];
   

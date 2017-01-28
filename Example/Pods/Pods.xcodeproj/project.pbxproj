@@ -109,7 +109,7 @@
 		1C236B19E4FFE960ECFDD34836883DD7 /* LAMask.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAMask.m; sourceTree = "<group>"; };
 		1CCA5FDF7C65573AE79C4F072417CFDC /* LAShapeGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeGroup.h; sourceTree = "<group>"; };
 		1E93382328AAEDDFF2CCA4D3A9BAEBBF /* LAShapeTrimPath.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeTrimPath.m; sourceTree = "<group>"; };
-		23F6708733ECBC2C3A04347EBA5837B0 /* Pods_Lottie_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Lottie_Example.framework; path = "Pods-Lottie-Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		23F6708733ECBC2C3A04347EBA5837B0 /* Pods_Lottie_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lottie_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D9CFD668AB15AD6B7CFE597BA9790E5 /* LAShapeStroke.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeStroke.h; sourceTree = "<group>"; };
 		2DC01D5F7B5EBC356E0FB20DC94C658C /* Pods-lottie-ios_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-ios_Tests-resources.sh"; sourceTree = "<group>"; };
 		3168398BDCECCBDC1C7E675FD0F865BE /* LAShapeTransform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeTransform.h; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 		67AF90A5097C29BC3A2C9D0EEA1B8965 /* LAComposition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAComposition.h; sourceTree = "<group>"; };
 		6810DA145A9F737648B2F7EBE001C879 /* LAAnimatableValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableValue.h; sourceTree = "<group>"; };
 		6854FA93BA0760E539699367915E0AE1 /* LAEllipseShapeLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAEllipseShapeLayer.h; sourceTree = "<group>"; };
-		68A56E0FC68E08FCDABB5196B8B15F57 /* Pods_lottie_ios_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_ios_Tests.framework; path = "Pods-lottie-ios_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		68A56E0FC68E08FCDABB5196B8B15F57 /* Pods_lottie_ios_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lottie_ios_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69F2F9742D08E2243309184475E202B5 /* lottie-ios-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "lottie-ios-umbrella.h"; sourceTree = "<group>"; };
 		6A009F7BB3956DE25B7D98FAAFD9D45C /* LAAnimatableColorValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableColorValue.h; sourceTree = "<group>"; };
 		6E28C846F470114A8720585787867606 /* LAAnimationTransitionController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimationTransitionController.h; sourceTree = "<group>"; };
@@ -152,12 +152,12 @@
 		862D27A5FB1217BE2C4202A609CC9351 /* lottie-ios.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "lottie-ios.xcconfig"; sourceTree = "<group>"; };
 		88478EAF17F9D43306DE97A46B4840B3 /* Pods-lottie-ios_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-lottie-ios_Tests-umbrella.h"; sourceTree = "<group>"; };
 		897D5AC8BD2547BA2A4D03AF42836005 /* LAShapeGroup.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeGroup.m; sourceTree = "<group>"; };
-		89C152F786653980BD89744C6E227DE9 /* lottie-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "lottie-ios.modulemap"; sourceTree = "<group>"; };
+		89C152F786653980BD89744C6E227DE9 /* lottie-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "lottie-ios.modulemap"; sourceTree = "<group>"; };
 		8B91706714C29EACB9EAA3E6D83F61A7 /* LAModels.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAModels.h; sourceTree = "<group>"; };
-		8C084E31ED23F75F9BD506F2FB789544 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C084E31ED23F75F9BD506F2FB789544 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CADA9940CFF80BB8DDD5D016413EBC6 /* LALayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LALayer.h; sourceTree = "<group>"; };
 		915428D3FEC4E1ABADF7768CEBED641A /* Pods-Lottie-Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Lottie-Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		95D9A6B420F03D243766ECAEA51BD46E /* LAAnimationView_Internal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimationView_Internal.h; sourceTree = "<group>"; };
 		962AF50D4A08AC872FADF0DDD8957A07 /* Pods-lottie-ios_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-ios_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		9AC54C5E8FDA605DE83310670E321B13 /* CAAnimationGroup+LAAnimatableGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CAAnimationGroup+LAAnimatableGroup.h"; sourceTree = "<group>"; };
@@ -190,8 +190,8 @@
 		EC8D42FA867193B8064E88A63BF9C091 /* LAShapeLayerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeLayerView.m; sourceTree = "<group>"; };
 		F092DF71F80A4A52929733B0E1293CFF /* LAAnimationView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimationView.m; sourceTree = "<group>"; };
 		F13888D8746B98E5E1C6EF6F81062423 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F7E393464B8276C00839E29FC416F46F /* Pods-lottie-ios_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-lottie-ios_Tests.modulemap"; sourceTree = "<group>"; };
-		FD338AFDCC777CB0ECD39ED365C90FFE /* Pods-Lottie-Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Lottie-Example.modulemap"; sourceTree = "<group>"; };
+		F7E393464B8276C00839E29FC416F46F /* Pods-lottie-ios_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-lottie-ios_Tests.modulemap"; sourceTree = "<group>"; };
+		FD338AFDCC777CB0ECD39ED365C90FFE /* Pods-Lottie-Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Lottie-Example.modulemap"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,7 +281,6 @@
 				AD88BCA17AA9E910DA8BD8365D735147 /* LAAnimationView.h */,
 				7122D191949595366C457D09628D899B /* Lottie.h */,
 			);
-			name = PublicHeaders;
 			path = PublicHeaders;
 			sourceTree = "<group>";
 		};
@@ -327,7 +326,6 @@
 			children = (
 				DEFBD51A8FD5AF27519B91304E0F37D6 /* Classes */,
 			);
-			name = "lottie-ios";
 			path = "lottie-ios";
 			sourceTree = "<group>";
 		};
@@ -398,7 +396,6 @@
 				DEEE2366360412C30D658F231D791FE2 /* UIColor+Expanded.m */,
 				6C8E859BED3150A6861E5B8B9776F764 /* PublicHeaders */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
