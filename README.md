@@ -197,9 +197,8 @@ If your animation will be frequently reused, `LAAnimationView` has an built in L
 
 ## Try it out
 
-Get the CocoaPod and run the Example app found in the Example folder.
-The JSON files for them are located in [/Assets](https://github.com/airbnb/lottie-ios/tree/master/Example/Assets).
-The sample app can also load json files at a given url.
+Lottie Uses Cocoapods!
+Get the Cocoapod or clone this repo and try out [the Example App](https://github.com/airbnb/lottie-ios/tree/master/Example)
 
 ## Alternatives
 1. Build animations by hand. Building animations by hand is a huge time commitment for design and engingeering across Android and iOS. It's often hard or even impossible to justify spending so much time to get an animation right.
