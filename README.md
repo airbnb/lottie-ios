@@ -215,15 +215,18 @@ Lottie is named after a German film director and the foremost pioneer of silhoue
 ## Contributing
 Contributors are more than welcome. Just upload a PR with a description of your changes.
 
-If you would like to add more JSON files and screenshot tests, feel free to do so and add the test to `LottieTest`.
+If you would like to add more JSON files feel free to do so!
 
 ## Issues or feature requests?
-File github issues for anything that is unexpectedly broken. If an After Effects file is not working, please attach it to your issue. Debugging without the original file is much more difficult.
+File github issues for anything that is unexpectedly broken. If an After Effects file is not working, please attach it to your issue. Debugging without the original file is much more difficult. 
 
-## Roadmap
+## Roadmap (In no particular order)
 - Add support for interactive animated transitions
 - Add support for parenting programatically added layers, moving/scaling
 - Support for the After Effects Trim Paths Offset feature
 - Animation Syncing
 - Programatically alter animations
+- Animation Breakpoints/Seekpoints
+- Gradients
+- LAAnimatedButton
 
