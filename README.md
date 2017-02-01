@@ -85,6 +85,22 @@ Lottie comes with a UIViewController animation controller for making custom view
 
 If your animation will be frequently reused, `LAAnimationView` has an built in LRU Caching Strategy.
 
+## Swift Support
+
+Lottie works just fine in Swift too!
+Simply add `#import <Lottie/Lottie.h>` to your [Swift Bridging Header] (https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html)
+
+Then you can `import Lottie` at the top of your swift class, and use Lottie as follows
+
+```swift
+let animationView = LAAnimationView.animationNamed("hamburger")
+    self.view.addSubview(animationView!)
+    
+    animationView?.play(completion: { (finished) in
+      //Do Something
+    })
+```
+
 ## Supported After Effects Features
 
 ### Keyframe Interpolation
