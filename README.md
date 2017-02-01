@@ -4,7 +4,7 @@ Lottie is a mobile library for Andorid and iOS that parses [Adobe After Effects]
 
 
 
-For the first time, designers can create **and ship** beautiful animations without an enginineer painstakingly recreating it be hand.
+For the first time, designers can create **and ship** beautiful animations without an engineer painstakingly recreating it by hand.
 Since the animation is backed by JSON they are extremely small in size but can be large in complexity!
 Animations can be played, resized, looped, sped up, slowed down, and even interactively scrubbed.
 
@@ -37,7 +37,7 @@ LAAnimation *animation = [LAAnimationView animationNamed:@"Lottie"];
 }];
 ```
 
-Or you can load it programatically from a NSURL
+Or you can load it programmatically from a NSURL
 ```
 LAAnimation *animation = [[LAAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
 [self.view addSubview:animation];
@@ -203,7 +203,7 @@ After installing the cocoapod into your project import Lottie with
 `#import <Lottie/Lottie.h>`
 
 ## Alternatives
-1. Build animations by hand. Building animations by hand is a huge time commitment for design and engingeering across Android and iOS. It's often hard or even impossible to justify spending so much time to get an animation right.
+1. Build animations by hand. Building animations by hand is a huge time commitment for design and engineering across Android and iOS. It's often hard or even impossible to justify spending so much time to get an animation right.
 2. [Facebook Keyframes](https://github.com/facebookincubator/Keyframes). Keyframes is a wonderful new library from Facebook that they built for reactions. However, Keyframes doesn't support some of Lottie's features such as masks, mattes, trim paths, dash patterns, and more.
 2. Gifs. Gifs are more than double the size of a bodymovin JSON and are rendered at a fixed size that can't be scaled up to match large and high density screens.
 3. Png sequences. Png sequences are even worse than gifs in that their file sizes are often 30-50x the size of the bodymovin json and also can't be scaled up.
@@ -218,15 +218,14 @@ Contributors are more than welcome. Just upload a PR with a description of your 
 If you would like to add more JSON files feel free to do so!
 
 ## Issues or feature requests?
-File github issues for anything that is unexpectedly broken. If an After Effects file is not working, please attach it to your issue. Debugging without the original file is much more difficult. 
+File github issues for anything that is unexpectedly broken. If an After Effects file is not working, please attach it to your issue. Debugging without the original file is much more difficult.
 
 ## Roadmap (In no particular order)
 - Add support for interactive animated transitions
-- Add support for parenting programatically added layers, moving/scaling
+- Add support for parenting programmatically added layers, moving/scaling
 - Support for the After Effects Trim Paths Offset feature
 - Animation Syncing
-- Programatically alter animations
+- Programmatically alter animations
 - Animation Breakpoints/Seekpoints
 - Gradients
 - LAAnimatedButton
-
