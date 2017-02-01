@@ -245,3 +245,4 @@ File github issues for anything that is unexpectedly broken. If an After Effects
 - Animation Breakpoints/Seekpoints
 - Gradients
 - LAAnimatedButton
+- Repeater objects
