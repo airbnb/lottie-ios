@@ -29,7 +29,7 @@ Lottie supports iOS 8 and above.
 Lottie animations can be loaded from bundled JSON or from a URL
 
 The simplest way to use it is with LAAnimationView:
-```
+```objective-c
 LAAnimation *animation = [LAAnimationView animationNamed:@"Lottie"];
 [self.view addSubview:animation];
 [animation playWithCompletion:^(BOOL animationFinished) {
@@ -38,7 +38,7 @@ LAAnimation *animation = [LAAnimationView animationNamed:@"Lottie"];
 ```
 
 Or you can load it programmatically from a NSURL
-```
+```objective-c
 LAAnimation *animation = [[LAAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
 [self.view addSubview:animation];
 ```
@@ -46,7 +46,7 @@ LAAnimation *animation = [[LAAnimationView alloc] initWithContentsOfURL:[NSURL U
 Lottie supports the iOS `UIViewContentModes` aspectFit and aspectFill
 
 You can also set the animation progress interactively.
-```
+```objective-c
 CGPoint translation = [gesture getTranslationInView:self.view];
 CGFloat progress = translation.y / self.view.bounds.size.height;
 animationView.animationProgress = progress;
@@ -55,14 +55,14 @@ animationView.animationProgress = progress;
 Want to mask arbitrary views to animation layers in a Lottie View?
 Easy-peasy as long as you know the name of the layer from After Effects
 
-```
+```objective-c
 UIView *snapShot = [self.view snapshotViewAfterScreenUpdates:YES];
 [lottieAnimation addSubview:snapShot toLayerNamed:@"AfterEffectsLayerName"];
 ```
 
 Lottie comes with a UIViewController animation controller for making custom viewController transitions!
 
-```
+```objective-c
 #pragma mark -- View Controller Transitioning
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
