@@ -30,7 +30,7 @@ Lottie animations can be loaded from bundled JSON or from a URL
 
 The simplest way to use it is with LAAnimationView:
 ```objective-c
-LAAnimation *animation = [LAAnimationView animationNamed:@"Lottie"];
+LAAnimationView *animation = [LAAnimationView animationNamed:@"Lottie"];
 [self.view addSubview:animation];
 [animation playWithCompletion:^(BOOL animationFinished) {
   // Do Something
@@ -39,7 +39,7 @@ LAAnimation *animation = [LAAnimationView animationNamed:@"Lottie"];
 
 Or you can load it programmatically from a NSURL
 ```objective-c
-LAAnimation *animation = [[LAAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
+LAAnimationView *animation = [[LAAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
 [self.view addSubview:animation];
 ```
 
@@ -56,11 +56,11 @@ Want to mask arbitrary views to animation layers in a Lottie View?
 Easy-peasy as long as you know the name of the layer from After Effects
 
 ```objective-c
-UIView *snapShot = [self.view snapshotViewAfterScreenUpdates:YES];
-[lottieAnimation addSubview:snapShot toLayerNamed:@"AfterEffectsLayerName"];
+UIView *snapshot = [self.view snapshotViewAfterScreenUpdates:YES];
+[lottieAnimation addSubview:snapshot toLayerNamed:@"AfterEffectsLayerName"];
 ```
 
-Lottie comes with a UIViewController animation controller for making custom viewController transitions!
+Lottie comes with a `UIViewController` animation-controller for making custom viewController transitions!
 
 ```objective-c
 #pragma mark -- View Controller Transitioning
@@ -84,6 +84,22 @@ Lottie comes with a UIViewController animation controller for making custom view
 ```
 
 If your animation will be frequently reused, `LAAnimationView` has an built in LRU Caching Strategy.
+
+## Swift Support
+
+Lottie works just fine in Swift too!
+Simply add `#import <Lottie/Lottie.h>` to your [Swift Bridging Header] (https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html)
+
+Then you can `import Lottie` at the top of your swift class, and use Lottie as follows
+
+```swift
+let animationView = LAAnimationView.animationNamed("hamburger")
+self.view.addSubview(animationView!)
+    
+animationView?.play(completion: { (finished) in
+  // Do Something
+})
+```
 
 ## Supported After Effects Features
 
@@ -229,3 +245,4 @@ File github issues for anything that is unexpectedly broken. If an After Effects
 - Animation Breakpoints/Seekpoints
 - Gradients
 - LAAnimatedButton
+- Repeater objects

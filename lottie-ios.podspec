@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.summary          = 'Used to natively render vector animations exported from After Effects.'
 
   s.description      = <<-DESC
-Lottie is a mobile library for Andorid and iOS that parses Adobe After Effects animations exported as json with bodymovin and renders the vector animations natively on mobile and through React Native!
+Lottie is a mobile library for Android and iOS that parses Adobe After Effects animations exported as json with bodymovin and renders the vector animations natively on mobile and through React Native!
 
 For the first time, designers can create and ship beautiful animations without an enginineer painstakingly recreating it be hand. Since the animation is backed by JSON they are extremely small in size but can be large in complexity! Animations can be played, resized, looped, sped up, slowed down, and even interactively scrubbed.
                        DESC
