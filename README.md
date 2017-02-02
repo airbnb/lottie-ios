@@ -24,6 +24,18 @@ Here is just a small sampling of the power of Lottie
 
 ![Abcs](_Gifs/Examples4.gif)
 
+## Install Lottie
+
+###Cocoapods
+Add the pod to your podfile
+```
+pod 'lottie-ios'
+```
+run
+```
+pod install
+```
+
 ## Using Lottie
 Lottie supports iOS 8 and above.
 Lottie animations can be loaded from bundled JSON or from a URL
@@ -88,9 +100,7 @@ If your animation will be frequently reused, `LAAnimationView` has an built in L
 ## Swift Support
 
 Lottie works just fine in Swift too!
-Simply add `#import <Lottie/Lottie.h>` to your [Swift Bridging Header] (https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html)
-
-Then you can `import Lottie` at the top of your swift class, and use Lottie as follows
+Simply `import Lottie` at the top of your swift class, and use Lottie as follows
 
 ```swift
 let animationView = LAAnimationView.animationNamed("hamburger")
