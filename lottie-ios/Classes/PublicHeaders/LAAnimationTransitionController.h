@@ -22,22 +22,19 @@
 
 @interface LAAnimationTransitionController : NSObject <UIViewControllerAnimatedTransitioning>
 
-/** Initializer
+/**
+ The initializer to create a new transition animation.
  
- @param NSString *animation
-    The name of the Lottie Animation to load for the transition
+ @param animation The name of the Lottie Animation to load for the transition
  
- @param NSString *fromLayer
-    The name of the custom layer to mask the fromVC screenshot with.
-    If no layer is specified then the screenshot is added behind the Lottie Animation
+ @param fromLayer The name of the custom layer to mask the fromVC screenshot with. 
+ If no layer is specified then the screenshot is added behind the Lottie Animation
  
- @param NSString *toLayer
-    The name of the custom layer to mask the toVC screenshot with.
-    If no layer is specified then the screenshot is added behind the Lottie Animation
-    and a fade transition is performed along with the Lottie animation.
+ @param toLayer The name of the custom layer to mask the toVC screenshot with.
+ If no layer is specified then the screenshot is added behind the Lottie Animation
+ and a fade transition is performed along with the Lottie animation.
 
  */
-
 - (instancetype)initWithAnimationNamed:(NSString *)animation
                         fromLayerNamed:(NSString *)fromLayer
                           toLayerNamed:(NSString *)toLayer;
