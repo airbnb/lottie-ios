@@ -6,7 +6,6 @@
 //  Copyright © 2016 Brandon Withrow. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "LAAnimatableLayer.h"
 #import "LAModels.h"
 

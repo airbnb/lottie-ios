@@ -12,15 +12,24 @@
     "Brandon Withrow": "buba447@gmail.com"
   },
   "source": {
-    "git": "git@git.musta.ch:brandon-withrow/LotteAnimator.git",
+    "git": "https://github.com/airbnb/lottie-ios.git",
     "tag": "1.0.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "8.0",
+    "osx": "10.12"
   },
   "source_files": "lottie-ios/Classes/**/*",
   "public_header_files": "lottie-ios/Classes/PublicHeaders/*.h",
-  "frameworks": "UIKit",
+  "ios": {
+    "frameworks": "UIKit"
+  },
+  "osx": {
+    "frameworks": [
+      "AppKit",
+      "CoreVideo"
+    ]
+  },
   "module_name": "Lottie",
   "header_dir": "Lottie"
 }

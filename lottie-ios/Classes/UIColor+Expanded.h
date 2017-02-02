@@ -1,4 +1,4 @@
-#import <UIKit/UIKit.h>
+#import "LAPlatformCompat.h"
 
 // From http://github.com/ars/uicolor-utilities
 #define CLAMP(val,min,max)    MIN(MAX(val,min),max)

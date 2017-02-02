@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+#import "LAPlatformCompat.h"
 #import "LAAnimatableValue.h"
 
 @interface LAAnimatableShapeValue : NSObject <LAAnimatableValue>

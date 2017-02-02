@@ -7,6 +7,7 @@
 //
 
 #import "LAAnimationView.h"
+#import "LAPlatformCompat.h"
 #import "LALayerView.h"
 #import "LAModels.h"
 #import "LAHelpers.h"
@@ -154,7 +155,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
 @interface LACustomChild : NSObject
 
-@property (nonatomic, strong) UIView *childView;
+@property (nonatomic, strong) LAView *childView;
 @property (nonatomic, weak) LALayerView *layer;
 @property (nonatomic, assign) LAConstraintType constraint;
 
@@ -247,12 +248,25 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
 # pragma mark - Internal Methods
 
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+
 - (void)_initializeAnimationContainer {
-  _animationContainer = [CALayer new];
-  _animationContainer.masksToBounds = YES;
-  [self.layer addSublayer:_animationContainer];
-  self.clipsToBounds = YES;
+    _animationContainer = [CALayer new];
+    _animationContainer.masksToBounds = YES;
+    [self.layer addSublayer:_animationContainer];
+    self.clipsToBounds = YES;
 }
+
+#else
+
+- (void)_initializeAnimationContainer {
+    self.wantsLayer = YES;
+    _animationContainer = [CALayer new];
+    _animationContainer.masksToBounds = YES;
+    [self.layer addSublayer:_animationContainer];
+}
+
+#endif
 
 - (void)_setupWithSceneModel:(LAComposition *)model restoreAnimationState:(BOOL)restoreAnimation {
   _sceneModel = model;
@@ -273,7 +287,6 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
     hasFullyInitialized_ = YES;
   }
 }
-
 
 - (void)_buildSubviewsFromModel {
   if (_customLayers) {
@@ -377,7 +390,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   }
 }
 
-- (void)addSubview:(UIView *)view
+- (void)addSubview:(LAView *)view
       toLayerNamed:(NSString *)layer {
   LAConstraintType constraint = LAConstraintTypeAlignToBounds;
   LALayerView *layerObject = _layerNameMap[layer];
@@ -486,27 +499,73 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   [super removeFromSuperview];
 }
 
-- (void)setContentMode:(UIViewContentMode)contentMode {
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+
+#define LAViewContentMode UIViewContentMode
+#define LAViewContentModeScaleToFill UIViewContentModeScaleToFill
+#define LAViewContentModeScaleAspectFit UIViewContentModeScaleAspectFit
+#define LAViewContentModeScaleAspectFill UIViewContentModeScaleAspectFill
+#define LAViewContentModeRedraw UIViewContentModeRedraw
+#define LAViewContentModeCenter UIViewContentModeCenter
+#define LAViewContentModeTop UIViewContentModeTop
+#define LAViewContentModeBottom UIViewContentModeBottom
+#define LAViewContentModeLeft UIViewContentModeLeft
+#define LAViewContentModeRight UIViewContentModeRight
+#define LAViewContentModeTopLeft UIViewContentModeTopLeft
+#define LAViewContentModeTopRight UIViewContentModeTopRight
+#define LAViewContentModeBottomLeft UIViewContentModeBottomLeft
+#define LAViewContentModeBottomRight UIViewContentModeBottomRight
+
+- (void)setContentMode:(LAViewContentMode)contentMode {
   [super setContentMode:contentMode];
   [self setNeedsLayout];
 }
 
 - (void)layoutSubviews {
   [super layoutSubviews];
-  
+  [self _layout];
+}
+
+#else
+
+- (void)setContentMode:(LAViewContentMode)contentMode {
+  _contentMode = contentMode;
+  [self setNeedsLayout];
+}
+
+- (void)setNeedsLayout {
+    self.needsLayout = YES;
+}
+
+- (BOOL)isFlipped {
+    return YES;
+}
+
+- (BOOL)wantsUpdateLayer {
+    return YES;
+}
+
+- (void)layout {
+    [super layout];
+    [self _layout];
+}
+
+#endif
+
+- (void)_layout {
   if (!hasFullyInitialized_) {
     _animationContainer.bounds = self.bounds;
     return;
   }
-  
+
   CGPoint centerPoint = CGRectGetCenterPoint(self.bounds);
   CATransform3D xform;
-  
-  if (self.contentMode == UIViewContentModeScaleToFill) {
+
+  if (self.contentMode == LAViewContentModeScaleToFill) {
     CGSize scaleSize = CGSizeMake(self.bounds.size.width / self.sceneModel.compBounds.size.width,
-                                  self.bounds.size.height / self.sceneModel.compBounds.size.height);
+            self.bounds.size.height / self.sceneModel.compBounds.size.height);
     xform = CATransform3DMakeScale(scaleSize.width, scaleSize.height, 1);
-  } else if (self.contentMode == UIViewContentModeScaleAspectFit) {
+  } else if (self.contentMode == LAViewContentModeScaleAspectFit) {
     CGFloat compAspect = self.sceneModel.compBounds.size.width / self.sceneModel.compBounds.size.height;
     CGFloat viewAspect = self.bounds.size.width / self.bounds.size.height;
     BOOL scaleWidth = compAspect > viewAspect;
@@ -514,7 +573,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
     CGFloat compDimension = scaleWidth ? self.sceneModel.compBounds.size.width : self.sceneModel.compBounds.size.height;
     CGFloat scale = dominantDimension / compDimension;
     xform = CATransform3DMakeScale(scale, scale, 1);
-  } else if (self.contentMode == UIViewContentModeScaleAspectFill) {
+  } else if (self.contentMode == LAViewContentModeScaleAspectFill) {
     CGFloat compAspect = self.sceneModel.compBounds.size.width / self.sceneModel.compBounds.size.height;
     CGFloat viewAspect = self.bounds.size.width / self.bounds.size.height;
     BOOL scaleWidth = compAspect < viewAspect;
@@ -525,7 +584,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   } else {
     xform = CATransform3DIdentity;
   }
-  
+
   [CATransaction begin];
   [CATransaction setDisableActions:YES];
   _animationContainer.transform = CATransform3DIdentity;

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+#import "LAPlatformCompat.h"
 
 @class LAShapeGroup;
 @class LAMask;

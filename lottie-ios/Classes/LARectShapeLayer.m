@@ -7,6 +7,7 @@
 //
 
 #import "LARectShapeLayer.h"
+#import "LAPlatformCompat.h"
 #import "CAAnimationGroup+LAAnimatableGroup.h"
 
 @interface LARoundRectLayer : CAShapeLayer

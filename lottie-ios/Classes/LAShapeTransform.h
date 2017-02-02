@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 @class LAAnimatableNumberValue;
 @class LAAnimatablePointValue;
