@@ -169,7 +169,9 @@
 - (void)changeCharactersInRange:(NSRange)range
                        toString:(NSString *)replacementString {
   NSMutableString *newText = [_text mutableCopy];
-  [newText replaceCharactersInRange:range withString:replacementString];
+  if (range.location > 0) {
+     [newText replaceCharactersInRange:range withString:replacementString];
+  }
   
   NSMutableArray *updateIndices, *addIndices, *removeIndices;
 
