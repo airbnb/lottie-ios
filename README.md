@@ -36,6 +36,17 @@ run
 pod install
 ```
 
+###Carthage
+Install Carthage (https://github.com/Carthage/Carthage)
+Add Lottie to your Cartfile
+```
+github "airbnb/lottie-ios" "master"
+```
+run 
+```
+carthage update
+```
+
 ## Using Lottie
 Lottie supports iOS 8 and above.
 Lottie animations can be loaded from bundled JSON or from a URL
@@ -227,6 +238,9 @@ Lottie Uses Cocoapods!
 Get the Cocoapod or clone this repo and try out [the Example App](https://github.com/airbnb/lottie-ios/tree/master/Example)
 After installing the cocoapod into your project import Lottie with
 `#import <Lottie/Lottie.h>`
+
+Try with Carthage.
+In your application targets “General” tab under the “Embedded Binaries” section, drag and drop lottie-ios.framework from the Carthage/Build/iOS directory that `carthage update` produced.
 
 ## Alternatives
 1. Build animations by hand. Building animations by hand is a huge time commitment for design and engineering across Android and iOS. It's often hard or even impossible to justify spending so much time to get an animation right.
