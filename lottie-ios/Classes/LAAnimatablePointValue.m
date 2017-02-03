@@ -111,7 +111,8 @@
     if (endPoint) {
       NSArray *controlPoint1 = keyframe[@"to"];
       NSArray *controlPoint2 = keyframe[@"ti"];
-      CGPoint cp1, cp2 = CGPointZero;
+      CGPoint cp1 = CGPointZero;
+      CGPoint cp2 = CGPointZero;
       CGPoint vertex = [self _pointFromValueArray:endPoint];
       [pointKeyframes addObject:[NSValue valueWithCGPoint:vertex]];
       
