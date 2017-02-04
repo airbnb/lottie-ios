@@ -296,6 +296,9 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.row >= letterSizes_.count) {
+    return CGSizeZero;
+  }
   NSValue *value = letterSizes_[indexPath.row];
   return value.CGSizeValue;
 }
