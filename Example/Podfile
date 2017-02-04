@@ -1,6 +1,6 @@
 use_frameworks!
 
-target ‘Lottie-Example' do
+target 'Lottie-Example' do
   pod 'lottie-ios', :path => '../'
 
   target 'lottie-ios_Tests' do
