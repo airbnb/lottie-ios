@@ -26,7 +26,7 @@ Here is just a small sampling of the power of Lottie
 
 ## Install Lottie
 
-###Cocoapods
+###CocoaPods
 Add the pod to your podfile
 ```
 pod 'lottie-ios'
