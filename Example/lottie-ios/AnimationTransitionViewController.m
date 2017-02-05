@@ -88,7 +88,7 @@
                                                   alpha:1.f];
   self.button1.layer.cornerRadius = 7;
   
-  [self.button1 addTarget:self action:@selector(_showTransistionA) forControlEvents:UIControlEventTouchUpInside];
+  [self.button1 addTarget:self action:@selector(_showTransitionA) forControlEvents:UIControlEventTouchUpInside];
   self.view.backgroundColor = [UIColor colorWithRed:122.f/255.f
                                               green:8.f/255.f
                                                blue:81.f/255.f
@@ -114,7 +114,7 @@
   self.closeButton.center = CGPointMake(self.button1.center.x, CGRectGetMaxY(b) - closeSize.height);
 }
 
-- (void)_showTransistionA {
+- (void)_showTransitionA {
   ToAnimationViewController *vc = [[ToAnimationViewController alloc] init];
   vc.transitioningDelegate = self;
   [self presentViewController:vc animated:YES completion:NULL];
