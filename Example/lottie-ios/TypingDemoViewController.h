@@ -1,5 +1,5 @@
 //
-//  LATypingDemoViewController.h
+//  LOTTypingDemoViewController.h
 //  LottieExamples
 //
 //  Created by Brandon Withrow on 1/9/17.

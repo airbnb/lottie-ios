@@ -1,5 +1,5 @@
 //
-//  LAJSONExplorerViewController.m
+//  LOTJSONExplorerViewController.m
 //  LottieAnimator
 //
 //  Created by Brandon Withrow on 12/15/15.
@@ -20,15 +20,15 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.view.backgroundColor = [UIColor whiteColor];
-  
+
   self.jsonFiles = [[NSBundle mainBundle] pathsForResourcesOfType:@"json" inDirectory:nil];
-  
+
   self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
   [self.view addSubview:self.tableView];
-  
+
   self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close"
                                                                            style:UIBarButtonItemStyleDone
                                                                           target:self

@@ -1,5 +1,5 @@
 //
-//  LAAnimatedTextField.m
+//  LOTAnimatedTextField.m
 //  LottieExamples
 //
 //  Created by Brandon Withrow on 1/10/17.
@@ -9,7 +9,7 @@
 #import "AnimatedTextField.h"
 #import <Lottie/Lottie.h>
 
-@interface LACharacterCell : UICollectionViewCell
+@interface LOTCharacterCell : UICollectionViewCell
 
 - (void)setCharacter:(NSString *)character;
 - (void)displayCharacter:(BOOL)animated;
@@ -17,8 +17,8 @@
 
 @end
 
-@implementation LACharacterCell {
-  LAAnimationView *animationView_;
+@implementation LOTCharacterCell {
+  LOTAnimationView *animationView_;
   NSString *character_;
 }
 
@@ -27,13 +27,13 @@
 }
 
 - (void)setCharacter:(NSString *)character {
-  
-  
+
+
   NSString *sanatizedCharacter = [character substringToIndex:1];
   NSCharacterSet *alphaSet = [NSCharacterSet letterCharacterSet];
   BOOL valid = [[sanatizedCharacter stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""];
-  
-  
+
+
   if ([character isEqualToString:@"BlinkingCursor"]) {
     sanatizedCharacter = character;
   }
@@ -65,7 +65,7 @@
   if ([sanatizedCharacter isEqualToString:character_]) {
     return;
   }
-  
+
   [animationView_ removeFromSuperview];
   animationView_ = nil;
   character_ = nil;
@@ -74,7 +74,7 @@
     return;
   }
   character_ = sanatizedCharacter;
-  LAAnimationView *animationView = [LAAnimationView animationNamed:sanatizedCharacter];
+  LOTAnimationView *animationView = [LOTAnimationView animationNamed:sanatizedCharacter];
   animationView_ = animationView;
   animationView_.contentMode = UIViewContentModeScaleAspectFit;
   [self.contentView addSubview:animationView_];
@@ -125,12 +125,12 @@
     _layout = [[UICollectionViewFlowLayout alloc] init];
     _fontSize = 36;
     _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:_layout];
-    [_collectionView registerClass:[LACharacterCell class] forCellWithReuseIdentifier:@"char"];
+    [_collectionView registerClass:[LOTCharacterCell class] forCellWithReuseIdentifier:@"char"];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     _collectionView.backgroundColor = [UIColor whiteColor];
     [self addSubview:_collectionView];
-    
+
   }
   return self;
 }
@@ -172,7 +172,7 @@
   if (range.location > 0) {
      [newText replaceCharactersInRange:range withString:replacementString];
   }
-  
+
   NSMutableArray *updateIndices, *addIndices, *removeIndices;
 
   for (NSUInteger i = range.location; i < newText.length; i ++) {
@@ -188,7 +188,7 @@
       [addIndices addObject:[NSIndexPath indexPathForRow:i inSection:0]];
     }
   }
-  
+
   for (NSUInteger i = newText.length; i < _text.length; i ++) {
     if (!removeIndices) {
       removeIndices = [NSMutableArray array];
@@ -225,15 +225,15 @@
   NSMutableArray *sizes = [NSMutableArray array];
   CGFloat width = self.bounds.size.width;
   CGFloat currentWidth = 0;
-  
+
   for (NSInteger i = 0; i < _text.length; i ++) {
     NSString *letter = [_text substringWithRange:NSMakeRange(i, 1)].uppercaseString;
     CGSize letterSize = [self _sizeOfString:letter];
-    
+
     if ([letter isEqualToString:@" "] && i + 1 < _text.length) {
       NSString *cutString = [_text substringFromIndex:i + 1];
       NSArray *words = [cutString componentsSeparatedByString:@" "];
-      
+
       if (words.count) {
         CGSize nextWordLength = [self _sizeOfString:words.firstObject];
         if (currentWidth + nextWordLength.width + letterSize.width > width) {
@@ -275,12 +275,12 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                            cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-  LACharacterCell *charCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"char" forIndexPath:indexPath];
+  LOTCharacterCell *charCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"char" forIndexPath:indexPath];
   return charCell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView
-       willDisplayCell:(LACharacterCell *)cell
+       willDisplayCell:(LOTCharacterCell *)cell
     forItemAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.row < _text.length) {
     [cell setCharacter:[self _characterAtIndexPath:indexPath]];

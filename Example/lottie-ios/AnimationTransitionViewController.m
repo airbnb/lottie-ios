@@ -25,7 +25,7 @@
                                                   blue:134.f/255.f
                                                  alpha:1.f];
   self.button1.layer.cornerRadius = 7;
-  
+
   [self.button1 addTarget:self action:@selector(_close) forControlEvents:UIControlEventTouchUpInside];
   self.view.backgroundColor = [UIColor colorWithRed:200.f/255.f
                                               green:66.f/255.f
@@ -65,7 +65,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  
+
   self.closeButton = [UIButton buttonWithType:UIButtonTypeSystem];
   [self.closeButton setTitle:@"Close" forState:UIControlStateNormal];
   [self.closeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -74,11 +74,11 @@
                                                   blue:193.f/255.f
                                                  alpha:1.f];
   self.closeButton.layer.cornerRadius = 7;
-  
+
   [self.closeButton addTarget:self action:@selector(_close) forControlEvents:UIControlEventTouchUpInside];
   [self.view addSubview:self.closeButton];
-  
-  
+
+
   self.button1 = [UIButton buttonWithType:UIButtonTypeSystem];
   [self.button1 setTitle:@"Show Transition A" forState:UIControlStateNormal];
   [self.button1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -87,7 +87,7 @@
                                                    blue:193.f/255.f
                                                   alpha:1.f];
   self.button1.layer.cornerRadius = 7;
-  
+
   [self.button1 addTarget:self action:@selector(_showTransitionA) forControlEvents:UIControlEventTouchUpInside];
   self.view.backgroundColor = [UIColor colorWithRed:122.f/255.f
                                               green:8.f/255.f
@@ -104,12 +104,12 @@
   buttonSize.height += 20;
   self.button1.bounds = CGRectMake(0, 0, buttonSize.width, buttonSize.height);
   self.button1.center = self.view.center;
-  
-  
+
+
   CGSize closeSize = [self.closeButton sizeThatFits:b.size];
   closeSize.width += 20;
   closeSize.height += 20;
-  
+
   self.closeButton.bounds = CGRectMake(0, 0, closeSize.width, closeSize.height);
   self.closeButton.center = CGPointMake(self.button1.center.x, CGRectGetMaxY(b) - closeSize.height);
 }
@@ -129,14 +129,14 @@
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
                                                                   presentingController:(UIViewController *)presenting
                                                                       sourceController:(UIViewController *)source {
-  LAAnimationTransitionController *animationController = [[LAAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition1"
+  LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition1"
                                                                                                           fromLayerNamed:@"outLayer"
                                                                                                             toLayerNamed:@"inLayer"];
   return animationController;
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-  LAAnimationTransitionController *animationController = [[LAAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition2"
+  LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition2"
                                                                                                           fromLayerNamed:@"outLayer"
                                                                                                             toLayerNamed:@"inLayer"];
   return animationController;

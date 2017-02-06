@@ -1,5 +1,5 @@
 //
-//  LATypingDemoViewController.m
+//  LOTTypingDemoViewController.m
 //  LottieExamples
 //
 //  Created by Brandon Withrow on 1/9/17.
@@ -23,16 +23,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   self.view.backgroundColor = [UIColor whiteColor];
-  
+
   closeButton_ = [UIButton buttonWithType:UIButtonTypeSystem];
   [closeButton_ setTitle:@"Close" forState:UIControlStateNormal];
   [closeButton_ addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
   [self.view addSubview:closeButton_];
-  
+
   textField_ = [[AnimatedTextField alloc] initWithFrame:self.view.bounds];
   [self.view addSubview:textField_];
   [textField_ setText:@"Start Typing"];
-  
+
   typingField_ = [[UITextField alloc] initWithFrame:CGRectZero];
   typingField_.alpha = 0;
   typingField_.text = textField_.text;
@@ -40,7 +40,7 @@
   [self.view addSubview:typingField_];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillShowNotification object:NULL];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillHideNotification object:NULL];
-  
+
   fontSlider_ = [[UISlider alloc] initWithFrame:CGRectZero];
   fontSlider_.minimumValue = 18;
   fontSlider_.maximumValue = 128;
