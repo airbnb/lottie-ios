@@ -29,40 +29,40 @@
 - (void)setCharacter:(NSString *)character {
   
   
-  NSString *sanatizedCharacter = [character substringToIndex:1];
+  NSString *sanitizedCharacter = [character substringToIndex:1];
   NSCharacterSet *alphaSet = [NSCharacterSet letterCharacterSet];
-  BOOL valid = [[sanatizedCharacter stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""];
+  BOOL valid = [[sanitizedCharacter stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""];
   
   
   if ([character isEqualToString:@"BlinkingCursor"]) {
-    sanatizedCharacter = character;
+    sanitizedCharacter = character;
   }
-  if ([sanatizedCharacter isEqualToString:@","]) {
-    sanatizedCharacter = @"Comma";
+  if ([sanitizedCharacter isEqualToString:@","]) {
+    sanitizedCharacter = @"Comma";
     valid = YES;
   }
-  if ([sanatizedCharacter isEqualToString:@"'"]) {
-    sanatizedCharacter = @"Apostrophe";
+  if ([sanitizedCharacter isEqualToString:@"'"]) {
+    sanitizedCharacter = @"Apostrophe";
     valid = YES;
   }
-  if ([sanatizedCharacter isEqualToString:@":"]) {
-    sanatizedCharacter = @"Colon";
+  if ([sanitizedCharacter isEqualToString:@":"]) {
+    sanitizedCharacter = @"Colon";
     valid = YES;
   }
-  if ([sanatizedCharacter isEqualToString:@"?"]) {
-    sanatizedCharacter = @"QuestionMark";
+  if ([sanitizedCharacter isEqualToString:@"?"]) {
+    sanitizedCharacter = @"QuestionMark";
     valid = YES;
   }
-  if ([sanatizedCharacter isEqualToString:@"!"]) {
-    sanatizedCharacter = @"ExclamationMark";
+  if ([sanitizedCharacter isEqualToString:@"!"]) {
+    sanitizedCharacter = @"ExclamationMark";
     valid = YES;
   }
-  if ([sanatizedCharacter isEqualToString:@"."]) {
-    sanatizedCharacter = @"Period";
+  if ([sanitizedCharacter isEqualToString:@"."]) {
+    sanitizedCharacter = @"Period";
     valid = YES;
   }
 
-  if ([sanatizedCharacter isEqualToString:character_]) {
+  if ([sanitizedCharacter isEqualToString:character_]) {
     return;
   }
   
@@ -73,8 +73,8 @@
   if (!valid) {
     return;
   }
-  character_ = sanatizedCharacter;
-  LAAnimationView *animationView = [LAAnimationView animationNamed:sanatizedCharacter];
+  character_ = sanitizedCharacter;
+  LAAnimationView *animationView = [LAAnimationView animationNamed:sanitizedCharacter];
   animationView_ = animationView;
   animationView_.contentMode = UIViewContentModeScaleAspectFit;
   [self.contentView addSubview:animationView_];
@@ -266,7 +266,7 @@
   return textSize;
 }
 
-#pragma mark -- UICollevtionViewDataSource
+#pragma mark -- UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
@@ -291,7 +291,7 @@
     [cell displayCharacter:YES];
   }
 }
-#pragma mark -- UICollevtionViewDelegate
+#pragma mark -- UICollectionViewDelegate
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
