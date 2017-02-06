@@ -42,7 +42,7 @@ Add Lottie to your Cartfile
 ```
 github "airbnb/lottie-ios" "master"
 ```
-run 
+run
 ```
 carthage update
 ```
@@ -51,9 +51,9 @@ carthage update
 Lottie supports iOS 8 and above.
 Lottie animations can be loaded from bundled JSON or from a URL
 
-The simplest way to use it is with LAAnimationView:
+The simplest way to use it is with LOTAnimationView:
 ```objective-c
-LAAnimationView *animation = [LAAnimationView animationNamed:@"Lottie"];
+LOTAnimationView *animation = [LOTAnimationView animationNamed:@"Lottie"];
 [self.view addSubview:animation];
 [animation playWithCompletion:^(BOOL animationFinished) {
   // Do Something
@@ -62,7 +62,7 @@ LAAnimationView *animation = [LAAnimationView animationNamed:@"Lottie"];
 
 Or you can load it programmatically from a NSURL
 ```objective-c
-LAAnimationView *animation = [[LAAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
+LOTAnimationView *animation = [[LOTAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
 [self.view addSubview:animation];
 ```
 
@@ -91,14 +91,14 @@ Lottie comes with a `UIViewController` animation-controller for making custom vi
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
                                                                   presentingController:(UIViewController *)presenting
                                                                       sourceController:(UIViewController *)source {
-  LAAnimationTransitionController *animationController = [[LAAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition1"
+  LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition1"
                                                                                                           fromLayerNamed:@"outLayer"
                                                                                                             toLayerNamed:@"inLayer"];
   return animationController;
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-  LAAnimationTransitionController *animationController = [[LAAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition2"
+  LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition2"
                                                                                                           fromLayerNamed:@"outLayer"
                                                                                                             toLayerNamed:@"inLayer"];
   return animationController;
@@ -106,7 +106,7 @@ Lottie comes with a `UIViewController` animation-controller for making custom vi
 
 ```
 
-If your animation will be frequently reused, `LAAnimationView` has an built in LRU Caching Strategy.
+If your animation will be frequently reused, `LOTAnimationView` has an built in LRU Caching Strategy.
 
 ## Swift Support
 
@@ -114,9 +114,9 @@ Lottie works just fine in Swift too!
 Simply `import Lottie` at the top of your swift class, and use Lottie as follows
 
 ```swift
-let animationView = LAAnimationView.animationNamed("hamburger")
+let animationView = LOTAnimationView.animationNamed("hamburger")
 self.view.addSubview(animationView!)
-    
+
 animationView?.play(completion: { (finished) in
   // Do Something
 })
@@ -268,5 +268,5 @@ File github issues for anything that is unexpectedly broken. If an After Effects
 - Programmatically alter animations
 - Animation Breakpoints/Seekpoints
 - Gradients
-- LAAnimatedButton
+- LOTAnimatedButton
 - Repeater objects

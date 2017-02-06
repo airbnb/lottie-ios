@@ -11,7 +11,7 @@
 
 @interface LottieRootViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) LAAnimationView *lottieLogo;
+@property (nonatomic, strong) LOTAnimationView *lottieLogo;
 @property (nonatomic, strong) UIButton *lottieButton;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *tableViewItems;
@@ -23,14 +23,14 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self _buildDataSource];
-  self.lottieLogo = [LAAnimationView animationNamed:@"LottieLogo1"];
+  self.lottieLogo = [LOTAnimationView animationNamed:@"LottieLogo1"];
   self.lottieLogo.contentMode = UIViewContentModeScaleAspectFill;
   [self.view addSubview:self.lottieLogo];
-  
+
   self.lottieButton = [UIButton buttonWithType:UIButtonTypeCustom];
   [self.lottieButton addTarget:self action:@selector(_playLottieAnimation) forControlEvents:UIControlEventTouchUpInside];
   [self.view addSubview:self.lottieButton];
-  
+
   self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
   [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
   self.tableView.delegate = self;
@@ -54,7 +54,7 @@
   CGRect lottieRect = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height * 0.3);
   self.lottieLogo.frame = lottieRect;
   self.lottieButton.frame = lottieRect;
-  
+
   self.tableView.frame = CGRectMake(0, CGRectGetMaxY(lottieRect), CGRectGetWidth(lottieRect), self.view.bounds.size.height - CGRectGetMaxY(lottieRect));
 }
 

@@ -1,5 +1,5 @@
 //
-//  LAAnimatedTextField.h
+//  LOTAnimatedTextField.h
 //  LottieExamples
 //
 //  Created by Brandon Withrow on 1/10/17.

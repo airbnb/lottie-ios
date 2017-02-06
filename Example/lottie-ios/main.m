@@ -7,11 +7,11 @@
 //
 
 @import UIKit;
-#import "LAAppDelegate.h"
+#import "LOTAppDelegate.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([LAAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([LOTAppDelegate class]));
     }
 }

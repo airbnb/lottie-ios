@@ -22,7 +22,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) ViewBackgroundColor currentBGColor;
 @property (nonatomic, strong) UIToolbar *toolbar;
 @property (nonatomic, strong) UISlider *slider;
-@property (nonatomic, strong) LAAnimationView *laAnimation;
+@property (nonatomic, strong) LOTAnimationView *lotAnimation;
 
 @end
 
@@ -53,10 +53,10 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  
+
   self.currentBGColor = ViewBackgroundColorWhite;
   self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectZero];
-  
+
   UIBarButtonItem *open = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(_open:)];
   UIBarButtonItem *flx1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
   UIBarButtonItem *openWeb = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(_showURLInput)];
@@ -73,7 +73,7 @@ typedef enum : NSUInteger {
   self.toolbar.items = @[open, flx1, openWeb, flx2, loop, flx3, play, flx4, zoom, flx5, bgcolor, flx6, close];
   [self.view addSubview:self.toolbar];
   [self resetAllButtons];
-  
+
   self.slider = [[UISlider alloc] initWithFrame:CGRectZero];
   [self.slider addTarget:self action:@selector(_sliderChanged:) forControlEvents:UIControlEventValueChanged];
   self.slider.minimumValue = 0;
@@ -102,11 +102,11 @@ typedef enum : NSUInteger {
   CGSize sliderSize = [self.slider sizeThatFits:b.size];
   sliderSize.height += 12;
   self.slider.frame = CGRectMake(10, CGRectGetMinY(self.toolbar.frame) - sliderSize.height, b.size.width - 20, sliderSize.height);
-  self.laAnimation.frame = CGRectMake(0, 0, b.size.width, CGRectGetMinY(self.slider.frame));
+  self.lotAnimation.frame = CGRectMake(0, 0, b.size.width, CGRectGetMinY(self.slider.frame));
 }
 
 - (void)_sliderChanged:(UISlider *)slider {
-  self.laAnimation.animationProgress = slider.value;
+  self.lotAnimation.animationProgress = slider.value;
 }
 
 - (void)_open:(UIBarButtonItem *)button {
@@ -114,18 +114,18 @@ typedef enum : NSUInteger {
 }
 
 - (void)_setZoom:(UIBarButtonItem *)button {
-  switch (self.laAnimation.contentMode) {
+  switch (self.lotAnimation.contentMode) {
     case UIViewContentModeScaleAspectFit: {
-      self.laAnimation.contentMode = UIViewContentModeScaleAspectFill;
+      self.lotAnimation.contentMode = UIViewContentModeScaleAspectFill;
       [self showMessage:@"Aspect Fill"];
     }  break;
     case UIViewContentModeScaleAspectFill:{
-      self.laAnimation.contentMode = UIViewContentModeScaleToFill;
+      self.lotAnimation.contentMode = UIViewContentModeScaleToFill;
       [self showMessage:@"Scale Fill"];
     }
       break;
     case UIViewContentModeScaleToFill: {
-      self.laAnimation.contentMode = UIViewContentModeScaleAspectFit;
+      self.lotAnimation.contentMode = UIViewContentModeScaleAspectFit;
       [self showMessage:@"Aspect Fit"];
     }
       break;
@@ -147,25 +147,25 @@ typedef enum : NSUInteger {
   UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Load From URL"
                                                                  message:NULL
                                                           preferredStyle:UIAlertControllerStyleAlert];
-  
+
   [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
     textField.placeholder = @"Enter URL";
   }];
-  
+
   UIAlertAction *load = [UIAlertAction actionWithTitle:@"Load" style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * action) {
                                                          [self _loadAnimationFromURLString:alert.textFields.firstObject.text];
                                                        }];
-  
+
   [alert addAction:load];
-  
+
   UIAlertAction *close = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction * action) {
-                                                          
+
                                                         }];
-  
+
   [alert addAction:close];
-  
+
   [self presentViewController:alert animated:YES completion:nil];
 }
 
@@ -183,47 +183,47 @@ typedef enum : NSUInteger {
 
 - (void)_loadAnimationFromURLString:(NSString *)URL {
   [self.laAnimation removeFromSuperview];
-  self.laAnimation = nil;
+  self.lotAnimation = nil;
   [self resetAllButtons];
-  
-  self.laAnimation = [[LAAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
-  self.laAnimation.contentMode = UIViewContentModeScaleAspectFit;
-  [self.view addSubview:self.laAnimation];
+
+  self.lotAnimation = [[LOTAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
+  self.lotAnimation.contentMode = UIViewContentModeScaleAspectFit;
+  [self.view addSubview:self.lotAnimation];
   [self.view setNeedsLayout];
 }
 
 - (void)_loadAnimationNamed:(NSString *)named {
-  [self.laAnimation removeFromSuperview];
-  self.laAnimation = nil;
+  [self.lotAnimation removeFromSuperview];
+  self.lotAnimation = nil;
   [self resetAllButtons];
-  
-  self.laAnimation = [LAAnimationView animationNamed:named];
-  self.laAnimation.contentMode = UIViewContentModeScaleAspectFit;
-  [self.view addSubview:self.laAnimation];
+
+  self.lotAnimation = [LOTAnimationView animationNamed:named];
+  self.lotAnimation.contentMode = UIViewContentModeScaleAspectFit;
+  [self.view addSubview:self.lotAnimation];
   [self.view setNeedsLayout];
 }
 
 - (void)_rewind:(UIBarButtonItem *)button {
-  self.laAnimation.animationProgress = 0;
+  self.lotAnimation.animationProgress = 0;
 }
 
 - (void)_play:(UIBarButtonItem *)button {
-  if (self.laAnimation.isAnimationPlaying) {
+  if (self.lotAnimation.isAnimationPlaying) {
     [self resetButton:button highlighted:NO];
-    [self.laAnimation pause];
+    [self.lotAnimation pause];
   } else {
     [self resetButton:button highlighted:YES];
-    [self.laAnimation playWithCompletion:^(BOOL animationFinished) {
-      self.slider.value = self.laAnimation.animationProgress;
+    [self.lotAnimation playWithCompletion:^(BOOL animationFinished) {
+      self.slider.value = self.lotAnimation.animationProgress;
       [self resetButton:button highlighted:NO];
     }];
   }
 }
 
 - (void)_loop:(UIBarButtonItem *)button {
-  self.laAnimation.loopAnimation = !self.laAnimation.loopAnimation;
-  [self resetButton:button highlighted:self.laAnimation.loopAnimation];
-  [self showMessage:self.laAnimation.loopAnimation ? @"Loop Enabled" : @"Loop Disabled"];
+  self.lotAnimation.loopAnimation = !self.lotAnimation.loopAnimation;
+  [self resetButton:button highlighted:self.lotAnimation.loopAnimation];
+  [self showMessage:self.lotAnimation.loopAnimation ? @"Loop Enabled" : @"Loop Disabled"];
 }
 
 - (void)_close:(UIBarButtonItem *)button {
@@ -236,14 +236,14 @@ typedef enum : NSUInteger {
   messageLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
   messageLabel.textColor = [UIColor whiteColor];
   messageLabel.text = message;
-  
+
   CGSize messageSize = [messageLabel sizeThatFits:self.view.bounds.size];
   messageSize.width += 14;
   messageSize.height += 14;
   messageLabel.frame = CGRectMake(10, 30, messageSize.width, messageSize.height);
   messageLabel.alpha = 0;
   [self.view addSubview:messageLabel];
-  
+
   [UIView animateWithDuration:0.3 animations:^{
     messageLabel.alpha = 1;
   } completion:^(BOOL finished) {
