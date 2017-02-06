@@ -17,7 +17,7 @@
   },
   "platforms": {
     "ios": "8.0",
-    "osx": "10.12"
+    "osx": "10.10"
   },
   "source_files": "lottie-ios/Classes/**/*",
   "public_header_files": "lottie-ios/Classes/PublicHeaders/*.h",
