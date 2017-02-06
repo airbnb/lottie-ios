@@ -23,7 +23,7 @@ For the first time, designers can create and ship beautiful animations without a
   s.source           = { :git => 'https://github.com/airbnb/lottie-ios.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
-  s.osx.deployment_target = '10.12'
+  s.osx.deployment_target = '10.10'
 
   s.source_files = 'lottie-ios/Classes/**/*'
   
