@@ -16,4 +16,4 @@ FOUNDATION_EXPORT const unsigned char LottieVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <Lottie/PublicHeader.h>
 
-
+#import <Lottie/Lottie.h>
