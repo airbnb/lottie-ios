@@ -12,11 +12,9 @@ typedef enum : NSUInteger {
   LAConstraintTypeNone
 } LAConstraintType;
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface LAAnimationState : NSObject
 
-- (instancetype)initWithDuration:(CGFloat)duration layer:(nullable CALayer *)layer;
+- (_Nonnull instancetype)initWithDuration:(CGFloat)duration layer:( CALayer * _Nullable)layer;
 
 - (void)setAnimationIsPlaying:(BOOL)animationIsPlaying;
 - (void)setAnimationDoesLoop:(BOOL)loopAnimation;
@@ -31,16 +29,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) CGFloat animationDuration;
 @property (nonatomic, readonly) CGFloat animationSpeed;
 
-@property (nonatomic, readonly, nullable) CALayer *layer;
+@property (nonatomic, readonly) CALayer * _Nullable layer;
 
 @end
 
 @interface LAAnimationView ()
 
-@property (nonatomic, readonly) LAComposition *sceneModel;
-@property (nonatomic, strong) LAAnimationState *animationState;
+@property (nonatomic, readonly) LAComposition * _Nonnull sceneModel;
+@property (nonatomic, strong) LAAnimationState *_Nonnull animationState;
 @property (nonatomic, copy, nullable) LAAnimationCompletionBlock completionBlock;
 
 @end
-
-NS_ASSUME_NONNULL_END

@@ -24,6 +24,29 @@ Here is just a small sampling of the power of Lottie
 
 ![Abcs](_Gifs/Examples4.gif)
 
+## Install Lottie
+
+###CocoaPods
+Add the pod to your podfile
+```
+pod 'lottie-ios'
+```
+run
+```
+pod install
+```
+
+###Carthage
+Install Carthage (https://github.com/Carthage/Carthage)
+Add Lottie to your Cartfile
+```
+github "airbnb/lottie-ios" "master"
+```
+run 
+```
+carthage update
+```
+
 ## Using Lottie
 Lottie supports iOS 8 and above.
 Lottie animations can be loaded from bundled JSON or from a URL
@@ -88,9 +111,7 @@ If your animation will be frequently reused, `LAAnimationView` has an built in L
 ## Swift Support
 
 Lottie works just fine in Swift too!
-Simply add `#import <Lottie/Lottie.h>` to your [Swift Bridging Header] (https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html)
-
-Then you can `import Lottie` at the top of your swift class, and use Lottie as follows
+Simply `import Lottie` at the top of your swift class, and use Lottie as follows
 
 ```swift
 let animationView = LAAnimationView.animationNamed("hamburger")
@@ -217,6 +238,9 @@ Lottie Uses Cocoapods!
 Get the Cocoapod or clone this repo and try out [the Example App](https://github.com/airbnb/lottie-ios/tree/master/Example)
 After installing the cocoapod into your project import Lottie with
 `#import <Lottie/Lottie.h>`
+
+Try with Carthage.
+In your application targets “General” tab under the “Embedded Binaries” section, drag and drop lottie-ios.framework from the Carthage/Build/iOS directory that `carthage update` produced.
 
 ## Alternatives
 1. Build animations by hand. Building animations by hand is a huge time commitment for design and engineering across Android and iOS. It's often hard or even impossible to justify spending so much time to get an animation right.
