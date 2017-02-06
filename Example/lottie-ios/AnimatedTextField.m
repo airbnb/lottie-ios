@@ -169,7 +169,9 @@
 - (void)changeCharactersInRange:(NSRange)range
                        toString:(NSString *)replacementString {
   NSMutableString *newText = [_text mutableCopy];
-  [newText replaceCharactersInRange:range withString:replacementString];
+  if (range.location > 0) {
+     [newText replaceCharactersInRange:range withString:replacementString];
+  }
   
   NSMutableArray *updateIndices, *addIndices, *removeIndices;
 
@@ -294,6 +296,9 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.row >= letterSizes_.count) {
+    return CGSizeZero;
+  }
   NSValue *value = letterSizes_[indexPath.row];
   return value.CGSizeValue;
 }

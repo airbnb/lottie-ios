@@ -59,6 +59,9 @@
   }
   
   NSDictionary *rotation = ks[@"r"];
+  if (rotation == nil) {
+    rotation = ks[@"rz"];
+  }
   if (rotation) {
     _rotation = [[LAAnimatableNumberValue alloc] initWithNumberValues:rotation frameRate:_framerate];
     [_rotation remapValueWithBlock:^CGFloat(CGFloat inValue) {
