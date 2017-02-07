@@ -70,7 +70,11 @@
   }
   
   NSDictionary *position = ks[@"p"];
-  if (position) {
+  if ([position[@"s"] boolValue]) {
+    // Seperate dimensions
+    _positionX = [[LAAnimatableNumberValue alloc] initWithNumberValues:position[@"x"] frameRate:_framerate];
+    _positionY = [[LAAnimatableNumberValue alloc] initWithNumberValues:position[@"y"] frameRate:_framerate];
+  } else {
     _position = [[LAAnimatablePointValue alloc] initWithPointValues:position frameRate:_framerate];
   }
   
