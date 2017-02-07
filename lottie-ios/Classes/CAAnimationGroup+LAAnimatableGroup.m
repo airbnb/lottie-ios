@@ -24,7 +24,7 @@
       }
     }
   }
-  
+  //测试
   if (animations.count) {
     CAAnimationGroup *animation = [CAAnimationGroup new];
     animation.animations = animations;
