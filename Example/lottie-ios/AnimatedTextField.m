@@ -18,7 +18,7 @@
 @end
 
 @implementation LACharacterCell {
-  LAAnimationView *animationView_;
+  LOTAnimationView *animationView_;
   NSString *character_;
 }
 
@@ -74,7 +74,7 @@
     return;
   }
   character_ = sanitizedCharacter;
-  LAAnimationView *animationView = [LAAnimationView animationNamed:sanitizedCharacter];
+  LOTAnimationView *animationView = [LOTAnimationView animationNamed:sanitizedCharacter];
   animationView_ = animationView;
   animationView_.contentMode = UIViewContentModeScaleAspectFit;
   [self.contentView addSubview:animationView_];

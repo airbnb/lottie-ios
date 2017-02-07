@@ -11,7 +11,7 @@
 
 @interface LottieRootViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) LAAnimationView *lottieLogo;
+@property (nonatomic, strong) LOTAnimationView *lottieLogo;
 @property (nonatomic, strong) UIButton *lottieButton;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *tableViewItems;
@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self _buildDataSource];
-  self.lottieLogo = [LAAnimationView animationNamed:@"LottieLogo1"];
+  self.lottieLogo = [LOTAnimationView animationNamed:@"LottieLogo1"];
   self.lottieLogo.contentMode = UIViewContentModeScaleAspectFill;
   [self.view addSubview:self.lottieLogo];
   
