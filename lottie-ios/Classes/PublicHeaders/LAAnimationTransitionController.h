@@ -6,6 +6,8 @@
 //  Copyright © 2017 Brandon Withrow. All rights reserved.
 //
 
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
@@ -40,3 +42,5 @@
                           toLayerNamed:(NSString *)toLayer;
 
 @end
+
+#endif

@@ -6,7 +6,7 @@
 //  Copyright © 2015 Brandon Withrow. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "LAPlatformCompat.h"
 #import "LAAnimatableLayer.h"
 
 #import "LAModels.h"

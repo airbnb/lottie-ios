@@ -6,7 +6,7 @@
 //  Copyright © 2016 Brandon Withrow. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "LAModels.h"
 #import "LAAnimatableLayer.h"
 

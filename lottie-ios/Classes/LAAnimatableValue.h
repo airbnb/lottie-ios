@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 @protocol LAAnimatableValue <NSObject>
 
-- (nullable CAKeyframeAnimation *)animationForKeyPath:(nonnull NSString *)keypath;
+- (CAKeyframeAnimation *)animationForKeyPath:(NSString *)keypath;
 - (BOOL)hasAnimation;
 
 @end

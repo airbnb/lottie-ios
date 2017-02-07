@@ -9,3 +9,7 @@ target 'Lottie-Example' do
     
   end
 end
+
+target 'Lottie-Example-MacOS' do
+  pod 'lottie-ios', :path => '../'
+end

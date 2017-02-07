@@ -7,281 +7,531 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		029326480AAADC6238FF80D6606F188A /* LAAnimatableScaleValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0014F3805E4A9D6C5834AA9088291D8C /* LAAnimatableScaleValue.m */; };
-		061D8CA2D691EC3CB227CE570787CA79 /* LAShapeGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 897D5AC8BD2547BA2A4D03AF42836005 /* LAShapeGroup.m */; };
-		0A4934CC134B365C77CE157DE2BFBF0E /* LAGroupLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D7C6B15992B74722A2535604BEE5E /* LAGroupLayerView.m */; };
-		0AF45E92155E87E2C846E498CA6926ED /* LAShapeRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EAC4E86BAB746F7CBAE399BA7F8E1E3 /* LAShapeRectangle.m */; };
-		0B2B869FDB480627AE6726BD52684A8A /* LAHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 3693DDAD791836448E729C4EAB42A59A /* LAHelpers.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		0CF1282ED5B677A57665A9D79DB4DF9D /* LAMaskLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2996716749054224AE7D1A4E0F79D34 /* LAMaskLayer.m */; };
-		162BDD1CEB200F9AF6A6D7BE43A6C11E /* LAMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C236B19E4FFE960ECFDD34836883DD7 /* LAMask.m */; };
-		1A6BE1BAB7AB4FA2978288659B75E758 /* CAAnimationGroup+LAAnimatableGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC54C5E8FDA605DE83310670E321B13 /* CAAnimationGroup+LAAnimatableGroup.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1BA053677049F9998B340CCEE134CC31 /* LAShapeLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC8D42FA867193B8064E88A63BF9C091 /* LAShapeLayerView.m */; };
-		1D2B817CA5115901CF103726A02434F6 /* LARectShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4814D32F241BB645DDF1C9094ED6B0B2 /* LARectShapeLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1F187C46E0C081028EF12AFFC0A5103C /* LAShapeStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = E260645911BC3FA38A4A6C68F1EDA67A /* LAShapeStroke.m */; };
-		1F70AED482FD14CF45D64833A9F6552C /* LAAnimatableNumberValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D775D8C2A21B2A9EB48A0CF7C8ABB9A /* LAAnimatableNumberValue.m */; };
-		1FBFF7D43427EBBF3119AA2E7FD377CB /* LAAnimatableColorValue.m in Sources */ = {isa = PBXBuildFile; fileRef = A8218A1DB229C1582A3F1110BE824576 /* LAAnimatableColorValue.m */; };
-		205A5ED1C033299E05930F2C0937294C /* LAAnimationTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E28C846F470114A8720585787867606 /* LAAnimationTransitionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		212E6DEA4E0E85828E53F37C3B367A4A /* LAGroupLayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 38E69AA2AF061C5BCF9FA6E810995135 /* LAGroupLayerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		2B3647CA7949590221A44ECB1E77EC65 /* LAAnimatableLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = E603A6AC6EA653B20DF96E556BB88A9C /* LAAnimatableLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		2F97A2653C6DF77CA5F88440E702FBBE /* LAShapePath.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FECC0676FEAB5FCDC447ED9E0181DF /* LAShapePath.m */; };
-		2FA05CA82E63B381A93854681F08E578 /* LAAnimatableShapeValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AB10567EE3E39D66A41915B6BB391595 /* LAAnimatableShapeValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		328849E7E74157E13F2FF8DBFB74EE43 /* CGGeometryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E54164C1A84A466AD12DB79C82B7C5C5 /* CGGeometryAdditions.m */; };
-		433676A286EA024241A96EDCBC70686A /* LAModels.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91706714C29EACB9EAA3E6D83F61A7 /* LAModels.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		469C8FD7546F04EC8C367B0CCF1A42FA /* LAAnimatableScaleValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C5BF5145B351139F5C339A3E1A03671 /* LAAnimatableScaleValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		4ACF8D4438D16F5E9E95E415EEC7E48C /* LALayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CADA9940CFF80BB8DDD5D016413EBC6 /* LALayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		4C576DC1865BC6007558B8C6345BFDD5 /* LAAnimationView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 95D9A6B420F03D243766ECAEA51BD46E /* LAAnimationView_Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		4D705F4EA006C12A0C80A6FC53C1D02B /* LAShapeLayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37EFAB870470294744EFDD557852AEBD /* LAShapeLayerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		4DC605399F393948476050D7B4B965C5 /* LAShapeTrimPath.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC7F844CC30FDAB962E9568A2447E44 /* LAShapeTrimPath.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		4E581BAF7E5CBB6D12EF8343510FBED3 /* LAAnimatablePointValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E616FB8F6098FBADCEC80ABE1566C97 /* LAAnimatablePointValue.m */; };
-		4EA640211BD9920D097093E1605ACAE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC994CDC2D681BA26389F78A7E4B325 /* UIKit.framework */; };
-		4F22244EFA7B7565BC6A096BD80C9A3D /* LAMask.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCE2D23DE9E4B2F29B80166129B81FF /* LAMask.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		502F8DEA773CDA6B3BC66277BF1C6179 /* LAAnimatableShapeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E07F9801546F50136DE66BAA80384F /* LAAnimatableShapeValue.m */; };
-		55B9130CC859CBC9F8FA755FB55C56C5 /* lottie-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F078AC56DED57DF561A5272E61F238B /* lottie-ios-dummy.m */; };
-		56CA53355A772069D4FC3EB310A205A3 /* LAShapeCircle.h in Headers */ = {isa = PBXBuildFile; fileRef = 03956A107908AC2B9FA767EA22E82FB9 /* LAShapeCircle.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		58BE24E119A65FF99D020CA00BECE0B1 /* LARectShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC5D6A9C57A3FBA34FF133425759301 /* LARectShapeLayer.m */; };
-		5D7C4D12C74F0F1ECDBE05F50FAEB272 /* LAShapeFill.h in Headers */ = {isa = PBXBuildFile; fileRef = CBABCB638A8A4BAA0A19CD0CF36576D3 /* LAShapeFill.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		6283DD35B95E10C14050DF8C4E99A4CB /* Pods-Lottie-Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D6983538FB98EDAF86A85D465D57492D /* Pods-Lottie-Example-dummy.m */; };
-		645F09F8BB1EF39DB07B0E16DDBDE873 /* LAShapeTrimPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E93382328AAEDDFF2CCA4D3A9BAEBBF /* LAShapeTrimPath.m */; };
-		697A364D1C98299BD393928A1FB84806 /* LAMaskLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 84993A5242FECA10A6B05B2B3C88EBCB /* LAMaskLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		6C746D412B060BACD3F4B77752A166CA /* LAAnimatableNumberValue.h in Headers */ = {isa = PBXBuildFile; fileRef = C93A2B28FADD91B4A25BA723B4664F15 /* LAAnimatableNumberValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		74C08C0A050E7AADDBAFFE14E6699A05 /* Pods-lottie-ios_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAE7653294D8E8E8B25E54C834F380F /* Pods-lottie-ios_Tests-dummy.m */; };
-		7BFB54D1FD87C1B32258062CB65B84AA /* LAAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F092DF71F80A4A52929733B0E1293CFF /* LAAnimationView.m */; };
-		7DC9D0AC2955A50EEDB51A932D9E8DC7 /* Lottie.h in Headers */ = {isa = PBXBuildFile; fileRef = 7122D191949595366C457D09628D899B /* Lottie.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		808F999DDFCFE0D30712C6DE7F68B316 /* LAAnimationCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 417ED3666248DF953EAF966F14C8CBE0 /* LAAnimationCache.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		82E9783337DB0E3ED4B5BE1CAFC4CE47 /* LAComposition.h in Headers */ = {isa = PBXBuildFile; fileRef = 67AF90A5097C29BC3A2C9D0EEA1B8965 /* LAComposition.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		8E264A5FCED81A06DE5DBF25C75E1CCF /* LAShapeStroke.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D9CFD668AB15AD6B7CFE597BA9790E5 /* LAShapeStroke.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		90FC4103C13001C69C81AB8D6835FF5C /* LAShapeRectangle.h in Headers */ = {isa = PBXBuildFile; fileRef = AB5853C73807A991004C1B8D27BC4BFF /* LAShapeRectangle.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9C73A20A15B7007E0E080D7F2024D1E5 /* Pods-lottie-ios_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 88478EAF17F9D43306DE97A46B4840B3 /* Pods-lottie-ios_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9F7363B4ADAAD04FE20D236373E54EE2 /* LAAnimatableBoundsValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 64AD849985D55AD766CDBE72C9F5C893 /* LAAnimatableBoundsValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A1ED9178DA3479C26C594A0CB6AC19AB /* lottie-ios-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 69F2F9742D08E2243309184475E202B5 /* lottie-ios-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A203DA64F8CCC957713EC0EA8A30B06F /* LAAnimationTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7692B39F14346D891FBDEDE4D0B91E2D /* LAAnimationTransitionController.m */; };
-		A28652D8E7C97B4E7A6B39C8A477CB27 /* LAEllipseShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 16658FFF1D05C6620954B146901548BA /* LAEllipseShapeLayer.m */; };
-		A741080798EBCE18EFA461C1CFFF161C /* LALayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8613E34B2974E06056CACF911F0A1C27 /* LALayerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A7F558A615DA50EFAFD16ED775AF8EDC /* CAAnimationGroup+LAAnimatableGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 468F6B74631B26E3645A7E8DDEBDBA77 /* CAAnimationGroup+LAAnimatableGroup.m */; };
-		AA0D50C1AF1C66E20436205EC2F725CF /* LAShapeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8B71C5711F71E13A9EF29347944955 /* LAShapeCircle.m */; };
-		AD3013FBF2821668C85AAC30333C85A2 /* UIColor+Expanded.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0B2DE0B1673DF052851E6637DF4585 /* UIColor+Expanded.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		ADB33AC2154C3AC757446783BC654987 /* LAShapePath.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CB4CA92A985CD1E66A718E42E0FB6CA /* LAShapePath.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B4828C7D2034A5AE14EE6E2A9B7D7308 /* Pods-Lottie-Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0669D1DB44AFADC892A66F2E7D9FA516 /* Pods-Lottie-Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BAC9CDC1F1FA9A605D25BADF13FAFF7B /* LAShapeTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F6198D2EFD108D5FF35795FCCB1ECC /* LAShapeTransform.m */; };
-		C02059BCE413DF436A00A81E2E33AC33 /* LAShapeTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 3168398BDCECCBDC1C7E675FD0F865BE /* LAShapeTransform.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		CB3F789E2F7FB1AC27A6D33180DBAD33 /* LAComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 365C20C7BA9F72095A070EFC647C9797 /* LAComposition.m */; };
-		CD1319B13F16525C1894A8E376AE9FC6 /* LAShapeGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CCA5FDF7C65573AE79C4F072417CFDC /* LAShapeGroup.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		CEA163FF05C55EC5130CD3FF52F94921 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616BEB51ECCAD129BDBCB7A956B56CC6 /* Foundation.framework */; };
-		CF6FAED84507C783FF3269461DB93549 /* LAShapeFill.m in Sources */ = {isa = PBXBuildFile; fileRef = A25A5549C66ABA914BF7A64A152F70D2 /* LAShapeFill.m */; };
-		D0FE0998C42EDC2D996F7F8D38330421 /* LAAnimatablePointValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 751A8E2FD4ECD7CF83A639AADE21D747 /* LAAnimatablePointValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		D999C1F7F9B76F2F56FF7167875810D2 /* LAAnimatableColorValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A009F7BB3956DE25B7D98FAAFD9D45C /* LAAnimatableColorValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		DED7979FC0F2906A0C9F8FECF1592279 /* LAAnimatableBoundsValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3280E9A005CD9EF7CDF50AE0C44186 /* LAAnimatableBoundsValue.m */; };
-		DEF0E6B6AE9797F0CD494B3F4A190611 /* LAAnimationCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 430DD85804A51E1C1E2A18AFBB91AE36 /* LAAnimationCache.m */; };
-		E0B563A7C71DACBCC4565C198B27F86D /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEE2366360412C30D658F231D791FE2 /* UIColor+Expanded.m */; };
-		E7008E5C824BFE1C6D1F124434E356A0 /* CGGeometryAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EAEE602C639E16930B8D393D7332499 /* CGGeometryAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		E712472BBE96A721D41D38532DE0B2DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616BEB51ECCAD129BDBCB7A956B56CC6 /* Foundation.framework */; };
-		E9492B09BF07C0BAA3663FC8CB7F68E5 /* LALayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A64314506AB60D44187385D59BE05CE9 /* LALayerView.m */; };
-		EA2D630A63A8CFFD87F81D151663874C /* LAAnimatableLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 572FE8F3B0701581C9E0179C717A2A3D /* LAAnimatableLayer.m */; };
-		EB5B78A97EE13FFAFD17767E8119314D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616BEB51ECCAD129BDBCB7A956B56CC6 /* Foundation.framework */; };
-		EF92220217788D72C083653EA4B4C9FB /* LAAnimatableValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6810DA145A9F737648B2F7EBE001C879 /* LAAnimatableValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		F273910A8C243A0C5468B3DCEF9C6EF8 /* LAAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = AD88BCA17AA9E910DA8BD8365D735147 /* LAAnimationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F3B963434B6C1E6BAB070CC92FAB5F98 /* LALayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CA43552B1FF32510827747C2CECA5C05 /* LALayer.m */; };
-		FD1E62ECB3FDC0883956388A491AAFD4 /* LAEllipseShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6854FA93BA0760E539699367915E0AE1 /* LAEllipseShapeLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		00A925928D6055E43C8C32A255C27F71 /* LAAnimatableValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EB078A3C908F5AC8D41C6691DB53EEA /* LAAnimatableValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0195241BA273C0F113978563739634A2 /* LAMaskLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2AFB7FED0BCB96137645BEF578B074 /* LAMaskLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		024CCD2038FADCB0FA1AE864DBAE4292 /* LAHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 1590619B0841C73302F209B4B6659645 /* LAHelpers.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		02545E2F6F37C9F00668866976133DAB /* LARectShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = B7C33198914C3009934260E1B16040BF /* LARectShapeLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0425B37A59700AE9930DA97FCB40AEE9 /* LAMaskLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9643758EE0880EA5E1E7A3B8FA0B5C4F /* LAMaskLayer.m */; };
+		0523E22F23A4E990CEF9A0B22056A0FC /* LAShapePath.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B256F4A01324853F3D536D9BD97CCBA /* LAShapePath.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		08A16D83BEAC85D9A0A98718297500B4 /* NSValue+Compat.m in Sources */ = {isa = PBXBuildFile; fileRef = 627947A4AAEFFE8332FB1275E0022008 /* NSValue+Compat.m */; };
+		09EAD205EB6052485F7F9394E2806DCC /* LAShapeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = A729DC4B15922CBF6596364C9C7DF0C5 /* LAShapeCircle.m */; };
+		0EAF2FEEF852DC9C0396FAD04A22CE6F /* UIBezierPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 89C1EE73ADB8B76F7F0D7227A3DA0053 /* UIBezierPath.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0F47A120DEFEB7E9A68A6F737AA56B9C /* LAShapeRectangle.h in Headers */ = {isa = PBXBuildFile; fileRef = F7D66821AA5EE5BB26108ED46C391E19 /* LAShapeRectangle.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		10903E97980CA1E2E4F25C4D84C9D8B3 /* LAPlatformCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AF587B1E1C5510378FE74675F04A389 /* LAPlatformCompat.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		113F3F232DBF9618FDAE36E6F52D34B7 /* LAAnimationCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BC13CD9C6A6035CB36680D0A10AA3E /* LAAnimationCache.m */; };
+		11F3BE42CC4A1DD7F00945E52DA343D1 /* UIColor.h in Headers */ = {isa = PBXBuildFile; fileRef = D5746E9272F05894B0DFBF3385B3D054 /* UIColor.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		13E3EA46BFDEE92AD7783A4EDF09BD43 /* lottie-ios-OSX-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 143FBAE486947C2718AE48A507426B54 /* lottie-ios-OSX-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		140F0F5D7ADDCBD6455113B8108002E5 /* lottie-ios-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FF09253EB0B902C0017CD74BABB9FF52 /* lottie-ios-iOS-dummy.m */; };
+		14A2143A62CE0E49B37DF91E9BF0A5D8 /* LAAnimatableNumberValue.h in Headers */ = {isa = PBXBuildFile; fileRef = B6180C84735EBE49AFAE3B70D4E19F35 /* LAAnimatableNumberValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		15FC70FD083E40FAD0F5944D41DD88BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B84DD8BA444B84A5807EA458734DA5D /* Foundation.framework */; };
+		167C98102DB9FBFFD1C5B3B24B2C32E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B84DD8BA444B84A5807EA458734DA5D /* Foundation.framework */; };
+		17BC02DCEA347D064F43F42456D79B41 /* LAAnimationCache.h in Headers */ = {isa = PBXBuildFile; fileRef = DA6CF136ED58AE59DAB8D59065D07FCA /* LAAnimationCache.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		187789225E635DC13432112CA0D037EE /* LAAnimationTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = B55829B0C67F90AD7BA07A190AC460CC /* LAAnimationTransitionController.m */; };
+		1A2C0BE880C6C26BF5A3930F2C5944F0 /* LALayer.h in Headers */ = {isa = PBXBuildFile; fileRef = BA7661FFFABA02A2ED5F73C725A372C3 /* LALayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1A8DDED27875D75BE5EBE2462CAE5944 /* LAAnimationTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = D472A02BCE43AFFAA8ECC4D294DE5B8D /* LAAnimationTransitionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1A987AB7515757F549FC486AE0C0E32F /* LAEllipseShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F789F9D12C8F82EB39D074280B707B74 /* LAEllipseShapeLayer.m */; };
+		1B64907E5DC216E111CFB12FE773C603 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA13E2F72B2A84E8D774F18DD936CA54 /* UIKit.framework */; };
+		1CB67028DDE579663B04CEBC59E29E8B /* LAComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C4F62FA0BF2C9BF8269A4F6E79E80F /* LAComposition.m */; };
+		1D1BFE3375DE9776BA1B2E04CDA7B8CD /* LAAnimatableNumberValue.h in Headers */ = {isa = PBXBuildFile; fileRef = B6180C84735EBE49AFAE3B70D4E19F35 /* LAAnimatableNumberValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1F5F6906C5F06859201D8DC205258A9E /* LAAnimatablePointValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 263BD953EED2E6F8429D8D97CB2F4AF1 /* LAAnimatablePointValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		20F82EB6F6DE8E43C0344406A293A2A2 /* UIBezierPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 89C1EE73ADB8B76F7F0D7227A3DA0053 /* UIBezierPath.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		252D8834D7C8DF6351815843284AD302 /* CAAnimationGroup+LAAnimatableGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0846A5585A87C560BED9F3D2AB283289 /* CAAnimationGroup+LAAnimatableGroup.m */; };
+		25603E5AF4994E286029429B4E6980DD /* CAAnimationGroup+LAAnimatableGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0846A5585A87C560BED9F3D2AB283289 /* CAAnimationGroup+LAAnimatableGroup.m */; };
+		26927C671A95388B3C4BD8F3D8CB1D66 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F9FC62FF143AB6667CDD8163FCFDE1C /* Cocoa.framework */; };
+		28F6A4769188334DA98AD1C80DABECED /* Lottie.h in Headers */ = {isa = PBXBuildFile; fileRef = 52261001EAFC60D9CB90F856BF509706 /* Lottie.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2AB39793190F7EA1E812C56E2A32A669 /* LAShapeTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B58225E651D481B640659502D58F65 /* LAShapeTransform.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		2BF9A551EFCA34C91E27358CAED96206 /* LAShapeFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6F9DD05867FBA24AF55DE30C9C9CE2 /* LAShapeFill.m */; };
+		2FF63FE0A344562D194B5B2AA8D1699C /* LALayer.h in Headers */ = {isa = PBXBuildFile; fileRef = BA7661FFFABA02A2ED5F73C725A372C3 /* LALayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		3256AC7CF60340E592DCC1C1E5D4D4AA /* LAAnimatablePointValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 263BD953EED2E6F8429D8D97CB2F4AF1 /* LAAnimatablePointValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		32AF9707720B3585B56A8337C9A21E41 /* LAMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BAC24CC7B64A975739199B90652674 /* LAMask.m */; };
+		34D8B8958139C90E12DC858EFEF3DB0A /* Lottie.h in Headers */ = {isa = PBXBuildFile; fileRef = 52261001EAFC60D9CB90F856BF509706 /* Lottie.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		39DE9593C6FA16D84C8E034C05F2E719 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = CA84826E02421A5C6D358C85DB620A93 /* UIColor+Expanded.m */; };
+		3A30E971159FEF8ED69AA78FD3CA45A3 /* LALayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5B7866C927C7D0D2B0DF0511F536C1 /* LALayer.m */; };
+		3A438D6CBC5862925FEBCAAA046BC0D4 /* LAShapeTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAB0EAEF9C80B3C56E229F09B61B76B /* LAShapeTransform.m */; };
+		3B37FDE53EFAF5F786B5118EF1477C65 /* CADisplayLink.h in Headers */ = {isa = PBXBuildFile; fileRef = CF537C5754336A24E122FAD406DF6A14 /* CADisplayLink.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		3C0E8DB08385F6E98CEB66C870CAA21A /* LAAnimatableBoundsValue.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB0AD90A3501C2ABC05788EEB5B5A44 /* LAAnimatableBoundsValue.m */; };
+		3C4F35E8E69E15FECBFF0AFC70062BB0 /* LAAnimationTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = B55829B0C67F90AD7BA07A190AC460CC /* LAAnimationTransitionController.m */; };
+		3C53BD239ED5223881EB4C3CF9252A1C /* LAAnimationCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BC13CD9C6A6035CB36680D0A10AA3E /* LAAnimationCache.m */; };
+		4150BDB43DBE730F8FFD2E77046723EC /* LARectShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 435B68E5D2D868147AF17A75E1F57DB7 /* LARectShapeLayer.m */; };
+		45A543ACCF50AF12ACBC4038BEC545C5 /* CADisplayLink.m in Sources */ = {isa = PBXBuildFile; fileRef = E28FE9DD11EF37DFC9FFB74C2D6AB9E9 /* CADisplayLink.m */; };
+		460D50B1042E376F3A5397E915583244 /* CGGeometryAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA2328E5015A67E2D0EAFB8760405834 /* CGGeometryAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46B2B4E99B5149934CCC55E7CFCFC3AC /* UIBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DB96AFA9547620017B0B3D93D0AFDB /* UIBezierPath.m */; };
+		498F675602A7489A1E5DF8ADD939966F /* LAShapeGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AE7674DA30DA22174CCC932F6FAF349 /* LAShapeGroup.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		4C29D833A3D574AAE6D9D430FCD5315A /* LALayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = BA8FCEB16DBF22BE687E93B629705410 /* LALayerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		4C33608C0429FD80134C64AF5989AA1C /* LAAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D6996FEA90472D5190E82B5BD837AAD /* LAAnimationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4C62210B2B052BE54DCE036C4F0E4162 /* LAShapeTrimPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 345C024753303F2F5BD3228052384331 /* LAShapeTrimPath.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		4CD4393542E64221153CC1934728CDE7 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E8A32304416366E7C4FC7A2D6C3A08 /* AppKit.framework */; };
+		4D7FC0602A9BB89E8C07FE3BDF04E52F /* LAShapeStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 32479591B8F19BD0CBE9F774D15389D8 /* LAShapeStroke.m */; };
+		5035DDB29247100BD2E42525639FE1F5 /* UIColor.h in Headers */ = {isa = PBXBuildFile; fileRef = D5746E9272F05894B0DFBF3385B3D054 /* UIColor.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5096A3ADBA44CF6F98BA8201D53A3C2B /* LALayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C06138CD8F1D8AF8C690C81CF1F3CD /* LALayerView.m */; };
+		519E715BCC2CC3171AC0ACB7BAD25A52 /* LALayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = BA8FCEB16DBF22BE687E93B629705410 /* LALayerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		534AF43ECBFBB4CCBF65F9173652E19B /* LAGroupLayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = E50E712403469BBBEC9770ABFC5F518A /* LAGroupLayerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		54A10C4FF51980AE914A169404A5C60C /* LAShapeGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE071F9D9D4F8785E5CCD0A5D9BD629 /* LAShapeGroup.m */; };
+		569876359FD1E2274392B61185B9AD1C /* LAAnimatablePointValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D575039F11F3C1C3D8FF041B809D1 /* LAAnimatablePointValue.m */; };
+		57110107A9975DC0F3B2D5793298DF1F /* UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BE50F8CE9CCF76F0B6B8654C81CEDBB8 /* UIColor.m */; };
+		5B4BA30857E1208B23DE23458CBBDA6F /* CAAnimationGroup+LAAnimatableGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A9AE61EDF30010E78A9645050B7E8E /* CAAnimationGroup+LAAnimatableGroup.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5BC98275A642523238FEBBFC78B00834 /* LARectShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 435B68E5D2D868147AF17A75E1F57DB7 /* LARectShapeLayer.m */; };
+		5C696C798CB839E4C8E55AD1B3509CFB /* LAAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D6996FEA90472D5190E82B5BD837AAD /* LAAnimationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5E22489FE0C514A8E165511960207FA3 /* NSValue+Compat.h in Headers */ = {isa = PBXBuildFile; fileRef = E0E9E52D362EFDD9AD546B0C35F8955B /* NSValue+Compat.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5EF3F37C35243A3CA444557CC74DA8D7 /* LAAnimatableBoundsValue.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB0AD90A3501C2ABC05788EEB5B5A44 /* LAAnimatableBoundsValue.m */; };
+		5F56204A907EBDCD91C9DFBF394E9431 /* UIColor+Expanded.h in Headers */ = {isa = PBXBuildFile; fileRef = 09C9342D002179901B4854A44519F73D /* UIColor+Expanded.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5F720B7DF92E483239D975BBE29E3BEB /* LAAnimationView_Compat.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D93897CED27201D99C74890A61D2E7 /* LAAnimationView_Compat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6121AA8DB00BD883320CBB3030A24D35 /* CALayer+Compat.m in Sources */ = {isa = PBXBuildFile; fileRef = A6FC9892A39A424B3BF2E4E3375B341F /* CALayer+Compat.m */; };
+		61D81DCADCC07569E046AB22ED3B226C /* LAComposition.h in Headers */ = {isa = PBXBuildFile; fileRef = 9729EB695B9B3CB45539738BC477E081 /* LAComposition.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		64D095B955394A9DCABA0BB338DABFC4 /* LAMaskLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2AFB7FED0BCB96137645BEF578B074 /* LAMaskLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		66F660E4862504D2D58EA326D189B685 /* LAComposition.h in Headers */ = {isa = PBXBuildFile; fileRef = 9729EB695B9B3CB45539738BC477E081 /* LAComposition.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6818B258E3DB5289FF14AE27D0A0369C /* LAGroupLayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = E50E712403469BBBEC9770ABFC5F518A /* LAGroupLayerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		695E0CCAE6F585FBCDE5F397DA85EC93 /* Pods-lottie-ios_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A0CC55D11A791A4361B86F63BE68CB7 /* Pods-lottie-ios_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		696BDBCE159A25C73F04465AB29186AF /* LAMaskLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9643758EE0880EA5E1E7A3B8FA0B5C4F /* LAMaskLayer.m */; };
+		69BF8D967FFC55CECA6F48E6654BE98D /* LAShapeTrimPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 345C024753303F2F5BD3228052384331 /* LAShapeTrimPath.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		69DBD28ABB74A49A1D02DAD98D2FFCFB /* LAAnimationView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 15F0CFD52C7EEDA262166745EEDDA4FC /* LAAnimationView_Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6A2D62F341445F165D41C3AFD36CC6BE /* CALayer+Compat.h in Headers */ = {isa = PBXBuildFile; fileRef = CCC8915579E003A7E0CDA7B90202769D /* CALayer+Compat.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6ABFA01C27BF5E3262AA2FD08EAA5E4A /* LARectShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = B7C33198914C3009934260E1B16040BF /* LARectShapeLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6C17ECD85959810B21FCEF4F78FA2643 /* LAComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C4F62FA0BF2C9BF8269A4F6E79E80F /* LAComposition.m */; };
+		6DAE4C1769B861ADB750426DEBE9D6F2 /* LAAnimatableScaleValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEA58AEF5DCB8E826E345A247DEF800 /* LAAnimatableScaleValue.m */; };
+		6E546A07530D4E0B229B36F2BC7AFC89 /* Pods-Lottie-Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FF91F9344AF5B9FAEB941DAFB89A1A43 /* Pods-Lottie-Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7116A3A0D5A58E139F5195ED7B031866 /* LAShapeRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD977212B8B998E67B22B73AE0ACEC /* LAShapeRectangle.m */; };
+		728B3E0C21471D2A1AC547585ACA01E2 /* LAShapeLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 420760288C7276D65879243F90148E30 /* LAShapeLayerView.m */; };
+		7324B1E8126073A564A8902056781EF1 /* LAShapeLayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 161E8724384284CEB2AEDB8A6029DD24 /* LAShapeLayerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7364DF0D48A6E0A5D8BC8D19FD7C0184 /* LAAnimatableLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0966AD065F5C14181484ECADAA8C907F /* LAAnimatableLayer.m */; };
+		743F2EE40EED9AFC90EC9B25CC96DEA0 /* Pods-Lottie-Example-MacOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1C51ABEB93789541905240DF926E8 /* Pods-Lottie-Example-MacOS-dummy.m */; };
+		750F81ED62446D1CAB4D51AC82E33CD2 /* LAAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 946B6F0660E2C46FCE0CA21C57441C6A /* LAAnimationView.m */; };
+		75FA085770CBED209E352EB35F9E844C /* CGGeometryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 150D33E3EF90BE45A866631A59509D3C /* CGGeometryAdditions.m */; };
+		7835F96E54413047E2A20C5808DF9A8E /* LALayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C06138CD8F1D8AF8C690C81CF1F3CD /* LALayerView.m */; };
+		7853E06B1245D9674B7E9981BAF81C26 /* LAAnimatableShapeValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FE177F774CA086984F5F1E5216287C9 /* LAAnimatableShapeValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		79A1C71B78351D0AC84677DA917FF268 /* lottie-ios-OSX-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C926B498D73B1C3824C2B9732454E3 /* lottie-ios-OSX-dummy.m */; };
+		7A1622B4EB96752F23AC477C9E53E6FC /* CADisplayLink.m in Sources */ = {isa = PBXBuildFile; fileRef = E28FE9DD11EF37DFC9FFB74C2D6AB9E9 /* CADisplayLink.m */; };
+		7B8A0A2C0FDFAC1566035A68377C5A15 /* CGGeometryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 150D33E3EF90BE45A866631A59509D3C /* CGGeometryAdditions.m */; };
+		7D1531553AA89E9CC94EEC7F501CD776 /* LAAnimatableBoundsValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 82274F4DE9ADE4590DEE9890CB0843A6 /* LAAnimatableBoundsValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		81E3B0D93F5FF6147C1C5EE789FD7536 /* LAShapeStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 32479591B8F19BD0CBE9F774D15389D8 /* LAShapeStroke.m */; };
+		8267EC70394C0A17F093F8E38A45E9B0 /* LAShapeTrimPath.m in Sources */ = {isa = PBXBuildFile; fileRef = E833FF4589EA36FB7F1188E3BACBAB62 /* LAShapeTrimPath.m */; };
+		82BD8C7B71A74D529E9A49A6CCEF854F /* LAGroupLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD6374C4150B9A720B0BCA0CFAAA28C9 /* LAGroupLayerView.m */; };
+		83BD096F12141F9D4BB9575EF918A04A /* LAAnimatableShapeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BB4AA5C82A74418D3509F0748CF7E1 /* LAAnimatableShapeValue.m */; };
+		84C23CBD62FA989F35EC0D5171465D11 /* LAShapeRectangle.h in Headers */ = {isa = PBXBuildFile; fileRef = F7D66821AA5EE5BB26108ED46C391E19 /* LAShapeRectangle.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		8682CF6AA8BC40BEC26B5E63D4D29FB3 /* LAShapeTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B58225E651D481B640659502D58F65 /* LAShapeTransform.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		8E4456D9AEEACB889B115D1C4F7C4814 /* NSValue+Compat.h in Headers */ = {isa = PBXBuildFile; fileRef = E0E9E52D362EFDD9AD546B0C35F8955B /* NSValue+Compat.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		91BB1910FFAED4BFCA7354ACCDA7DF15 /* LAAnimationView_Compat.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D93897CED27201D99C74890A61D2E7 /* LAAnimationView_Compat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		944960A27D9DD38E3C5D16245FD0E40C /* UIBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DB96AFA9547620017B0B3D93D0AFDB /* UIBezierPath.m */; };
+		95D02816C8F9A026360169923CED114D /* LAShapeCircle.h in Headers */ = {isa = PBXBuildFile; fileRef = 057EB7B5AB0891C515A48F53B0D68C13 /* LAShapeCircle.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		96B591C65BA1057928FD13B41F7CF860 /* LAModels.h in Headers */ = {isa = PBXBuildFile; fileRef = F289321165E81FC6F4B2E4C06C3AB4D8 /* LAModels.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		976270E2D39BD6FB429440E0EC673878 /* UIColor+Expanded.h in Headers */ = {isa = PBXBuildFile; fileRef = 09C9342D002179901B4854A44519F73D /* UIColor+Expanded.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9781F0D9202D3A1C0F27D07D29A17A97 /* LAAnimatableScaleValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 258741D3F54E11EC0A573728DC09BA0D /* LAAnimatableScaleValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		98A4A4EFBAC643F8F45B149EBAE9332C /* LAEllipseShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DD06BD0A3F3D5F00FE848AF8A4A6F4E /* LAEllipseShapeLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		996E29770EB6AE15E2D90BE2F792EBFF /* LAAnimatableValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EB078A3C908F5AC8D41C6691DB53EEA /* LAAnimatableValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9A0EACA5274EFE20D775F6ED570E6384 /* LAShapeCircle.h in Headers */ = {isa = PBXBuildFile; fileRef = 057EB7B5AB0891C515A48F53B0D68C13 /* LAShapeCircle.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9B6860D8A382975806394BA2994E7F3E /* LAPlatformCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AF587B1E1C5510378FE74675F04A389 /* LAPlatformCompat.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9B6CEEA4245BB72DB2B55047B17DF0F8 /* LAModels.h in Headers */ = {isa = PBXBuildFile; fileRef = F289321165E81FC6F4B2E4C06C3AB4D8 /* LAModels.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9BF582DDD29D52C4556C827FF3D4EBC6 /* CALayer+Compat.m in Sources */ = {isa = PBXBuildFile; fileRef = A6FC9892A39A424B3BF2E4E3375B341F /* CALayer+Compat.m */; };
+		9CD4F251778605216B4B9E3CE2FAF13D /* LAAnimatableShapeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BB4AA5C82A74418D3509F0748CF7E1 /* LAAnimatableShapeValue.m */; };
+		9DE79EAE9763DE05CA50112928C99A2D /* LAShapePath.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B256F4A01324853F3D536D9BD97CCBA /* LAShapePath.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9DF81CA4B372C14CC4F48392AF6563ED /* LAAnimationView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 15F0CFD52C7EEDA262166745EEDDA4FC /* LAAnimationView_Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9E52F4F7D4588D34FC4EAAF7B00E2724 /* Pods-lottie-ios_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D026EFE442CC845F08509D94D1DC02D /* Pods-lottie-ios_Tests-dummy.m */; };
+		A09256CABD4990BCD0B6B8A121D3347E /* LAShapeStroke.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0E3B6953C086AE38D2B02446542316 /* LAShapeStroke.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A371EBF6B626124786AEE54C05F1E1F0 /* LAAnimatableColorValue.h in Headers */ = {isa = PBXBuildFile; fileRef = A2BEDD9079C2E7963A26DD51EFD98710 /* LAAnimatableColorValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A38F49864C3A60DCE3EBDF9A07E779C9 /* LAShapePath.m in Sources */ = {isa = PBXBuildFile; fileRef = A76174ED58C64052E2CDD5DEDB3A5B78 /* LAShapePath.m */; };
+		A5498F431E46CD29CB2BFB2EE7F9A19F /* UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BE50F8CE9CCF76F0B6B8654C81CEDBB8 /* UIColor.m */; };
+		A606E7F4F94DB70577116CB661651065 /* LAShapeLayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 161E8724384284CEB2AEDB8A6029DD24 /* LAShapeLayerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A841736F91767D6A73C6061DAE99A017 /* LAAnimatableScaleValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 258741D3F54E11EC0A573728DC09BA0D /* LAAnimatableScaleValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		AA2158FD288228A01611FC4F0135F3DF /* LAGroupLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD6374C4150B9A720B0BCA0CFAAA28C9 /* LAGroupLayerView.m */; };
+		AE72BCA9F2C4C281D2AF91D9508560BD /* LAMask.h in Headers */ = {isa = PBXBuildFile; fileRef = F0E0B35A67C266BEB014D3B254858A3E /* LAMask.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B2167362579A81312BD36EE1A9F512C3 /* LAAnimatableColorValue.h in Headers */ = {isa = PBXBuildFile; fileRef = A2BEDD9079C2E7963A26DD51EFD98710 /* LAAnimatableColorValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B3CFE17627AD96132E88A45FBD85C4E4 /* Pods-Lottie-Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9928BB42BD4378E9784E817BB6524C /* Pods-Lottie-Example-dummy.m */; };
+		B40CDE0CDDFB42EEBD0B9EC4D7BD3DAC /* CADisplayLink.h in Headers */ = {isa = PBXBuildFile; fileRef = CF537C5754336A24E122FAD406DF6A14 /* CADisplayLink.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B565AA421C11BF16A273AA27F4ED8237 /* LAEllipseShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F789F9D12C8F82EB39D074280B707B74 /* LAEllipseShapeLayer.m */; };
+		B8BCA47B1A77DF95917998D9085EFAA9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B84DD8BA444B84A5807EA458734DA5D /* Foundation.framework */; };
+		BA0FE612718C7F44679024E93A67C969 /* LAShapeGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE071F9D9D4F8785E5CCD0A5D9BD629 /* LAShapeGroup.m */; };
+		BF2364687323F0302DB1E58FF63F27E1 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB9B48CA5FB64F65C9333F75A778DD2 /* CoreVideo.framework */; };
+		C089E72FBF3005BCA10AC6E24E740701 /* LAMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BAC24CC7B64A975739199B90652674 /* LAMask.m */; };
+		C18CF98FF70FF9A3AA0176CC9828FCA5 /* CGGeometryAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA2328E5015A67E2D0EAFB8760405834 /* CGGeometryAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C1A8F54AFC9F46F238A13FBDA4CC915E /* LALayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5B7866C927C7D0D2B0DF0511F536C1 /* LALayer.m */; };
+		C287C27189A86CCAF27BE06889DF79E8 /* LAAnimatableShapeValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FE177F774CA086984F5F1E5216287C9 /* LAAnimatableShapeValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C3B7D2E745193CB6EF2C08B2D06E7CAC /* LAShapeFill.h in Headers */ = {isa = PBXBuildFile; fileRef = D202F619E99C2B98D97CCBFF025649EC /* LAShapeFill.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C46DD16EEE08DCD5C56578E8665BE212 /* LAAnimationTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = D472A02BCE43AFFAA8ECC4D294DE5B8D /* LAAnimationTransitionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C48AED9F7375F11616CE49703F2B18B7 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = CA84826E02421A5C6D358C85DB620A93 /* UIColor+Expanded.m */; };
+		C5F8F35D23221887C19F5265C9C47D70 /* LAEllipseShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DD06BD0A3F3D5F00FE848AF8A4A6F4E /* LAEllipseShapeLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C61817FDC77BD6EF22B45F0C75CEE1D7 /* LAShapeFill.h in Headers */ = {isa = PBXBuildFile; fileRef = D202F619E99C2B98D97CCBFF025649EC /* LAShapeFill.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C8BBCFD0EE112B9731A5B5826032F757 /* LAMask.h in Headers */ = {isa = PBXBuildFile; fileRef = F0E0B35A67C266BEB014D3B254858A3E /* LAMask.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		CAE9757CEA166B6B09F91E90A0D750ED /* LAShapeTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAB0EAEF9C80B3C56E229F09B61B76B /* LAShapeTransform.m */; };
+		D01F81BF32DD8A142446F9DE6C6B3077 /* CAAnimationGroup+LAAnimatableGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A9AE61EDF30010E78A9645050B7E8E /* CAAnimationGroup+LAAnimatableGroup.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D533FAA1FCADD0D8720646EA565A158B /* LAAnimatableBoundsValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 82274F4DE9ADE4590DEE9890CB0843A6 /* LAAnimatableBoundsValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D6D8EAD297B6C115A19E8251F00F9E7D /* LAAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 946B6F0660E2C46FCE0CA21C57441C6A /* LAAnimationView.m */; };
+		DB1FBA3AFD439B4A6944453681AF4C08 /* LAShapeTrimPath.m in Sources */ = {isa = PBXBuildFile; fileRef = E833FF4589EA36FB7F1188E3BACBAB62 /* LAShapeTrimPath.m */; };
+		DBB15F6C50CFDC2E3C950367815AAE15 /* lottie-ios-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B7EB62E6422B6FC6089CDCDC79BAC8B /* lottie-ios-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE7561B4787AA37B40CFA87ACF925E66 /* LAShapePath.m in Sources */ = {isa = PBXBuildFile; fileRef = A76174ED58C64052E2CDD5DEDB3A5B78 /* LAShapePath.m */; };
+		E2AF5D9B24315449F368CEA49CC3A767 /* LAShapeLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 420760288C7276D65879243F90148E30 /* LAShapeLayerView.m */; };
+		E30F0801C5DACEE2BC835E590C967A1F /* LAAnimatableLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0966AD065F5C14181484ECADAA8C907F /* LAAnimatableLayer.m */; };
+		E57657E9977D0C5F02042320AC67B7E0 /* LAShapeStroke.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A0E3B6953C086AE38D2B02446542316 /* LAShapeStroke.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		E6664D49454DEFEA0783ED54D0283F01 /* LAShapeGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AE7674DA30DA22174CCC932F6FAF349 /* LAShapeGroup.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		E7B3A01402ED6D125258032A01A07882 /* LAAnimatableColorValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A403C734BF487BD347F49865BBFD9B /* LAAnimatableColorValue.m */; };
+		E86C86F73BC730215BF32546403F7DEE /* LAAnimatableNumberValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8299ABA2556197A96AE752A320808B54 /* LAAnimatableNumberValue.m */; };
+		E9EC2EEDB9D1F159DF490A5FE1BF26AE /* Pods-Lottie-Example-MacOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 906B715060F9EA341552EDB58A78F404 /* Pods-Lottie-Example-MacOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA95283A17BC694A59592BBF83F801AE /* NSValue+Compat.m in Sources */ = {isa = PBXBuildFile; fileRef = 627947A4AAEFFE8332FB1275E0022008 /* NSValue+Compat.m */; };
+		EAAE79FBE06117F38602AAED294B8F4F /* LAAnimatableLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B3D997B28D82CB280938BE7921E75CF /* LAAnimatableLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		EAEBA1A31881FE6BAC7428111CA85149 /* LAAnimationCache.h in Headers */ = {isa = PBXBuildFile; fileRef = DA6CF136ED58AE59DAB8D59065D07FCA /* LAAnimationCache.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		EBC245AB0E25EF6538049E8B6BB6D66A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F9FC62FF143AB6667CDD8163FCFDE1C /* Cocoa.framework */; };
+		EC659D2D8F105BEBD6181A18AD390B6D /* LAAnimatableScaleValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEA58AEF5DCB8E826E345A247DEF800 /* LAAnimatableScaleValue.m */; };
+		ED422F0A358E96D224813DDB82FBC15A /* LAAnimatableLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B3D997B28D82CB280938BE7921E75CF /* LAAnimatableLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		EE12ED21C0878638B746B623801A657E /* LAShapeFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6F9DD05867FBA24AF55DE30C9C9CE2 /* LAShapeFill.m */; };
+		F56D173D068AC20AE2FFB18021E51371 /* LAShapeRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD977212B8B998E67B22B73AE0ACEC /* LAShapeRectangle.m */; };
+		F577303925D6D5E45D22F65C044F1EFC /* CALayer+Compat.h in Headers */ = {isa = PBXBuildFile; fileRef = CCC8915579E003A7E0CDA7B90202769D /* CALayer+Compat.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		F57B3EAB2BD69D6E66F261718D10FBEE /* LAShapeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = A729DC4B15922CBF6596364C9C7DF0C5 /* LAShapeCircle.m */; };
+		F88681F7B86A898FB57B6EC9C562C266 /* LAAnimatablePointValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D575039F11F3C1C3D8FF041B809D1 /* LAAnimatablePointValue.m */; };
+		F946DBDC74C4C2764660CD5C37AF87FB /* LAAnimatableNumberValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8299ABA2556197A96AE752A320808B54 /* LAAnimatableNumberValue.m */; };
+		FC723022FAA4BDE3DDE41852430FB775 /* LAAnimatableColorValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A403C734BF487BD347F49865BBFD9B /* LAAnimatableColorValue.m */; };
+		FD40D7585B8D297306469CA28E055AAB /* LAHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 1590619B0841C73302F209B4B6659645 /* LAHelpers.h */; settings = {ATTRIBUTES = (Project, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		898CE07CC6A0E06A99F29D556B837DD9 /* PBXContainerItemProxy */ = {
+		34EEF95B8289340A35BC99154B25CCE9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2A9EDD5C4151360AA6A7D3514EC77EEE;
-			remoteInfo = "lottie-ios";
+			remoteGlobalIDString = DF4D1F5D01DC53575B55E9BF553D920F;
+			remoteInfo = "lottie-ios-OSX";
+		};
+		68E1DE604219B922CE07CE2003EA0EA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05C48E477E92D5C02E6099FD28E535C8;
+			remoteInfo = "lottie-ios-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0014F3805E4A9D6C5834AA9088291D8C /* LAAnimatableScaleValue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableScaleValue.m; sourceTree = "<group>"; };
-		00E07F9801546F50136DE66BAA80384F /* LAAnimatableShapeValue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableShapeValue.m; sourceTree = "<group>"; };
-		03956A107908AC2B9FA767EA22E82FB9 /* LAShapeCircle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeCircle.h; sourceTree = "<group>"; };
-		0669D1DB44AFADC892A66F2E7D9FA516 /* Pods-Lottie-Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Lottie-Example-umbrella.h"; sourceTree = "<group>"; };
-		0AB46C4D2315834132B2DB53A02AB278 /* Pods-Lottie-Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Lottie-Example-frameworks.sh"; sourceTree = "<group>"; };
-		0C0B2DE0B1673DF052851E6637DF4585 /* UIColor+Expanded.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expanded.h"; sourceTree = "<group>"; };
-		0D9D7C6B15992B74722A2535604BEE5E /* LAGroupLayerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAGroupLayerView.m; sourceTree = "<group>"; };
-		0DDB1D3866645EBD8508832674E49465 /* Pods-Lottie-Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Lottie-Example-resources.sh"; sourceTree = "<group>"; };
-		0E616FB8F6098FBADCEC80ABE1566C97 /* LAAnimatablePointValue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimatablePointValue.m; sourceTree = "<group>"; };
-		10F6198D2EFD108D5FF35795FCCB1ECC /* LAShapeTransform.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeTransform.m; sourceTree = "<group>"; };
-		16658FFF1D05C6620954B146901548BA /* LAEllipseShapeLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAEllipseShapeLayer.m; sourceTree = "<group>"; };
-		1C236B19E4FFE960ECFDD34836883DD7 /* LAMask.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAMask.m; sourceTree = "<group>"; };
-		1CCA5FDF7C65573AE79C4F072417CFDC /* LAShapeGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeGroup.h; sourceTree = "<group>"; };
-		1E93382328AAEDDFF2CCA4D3A9BAEBBF /* LAShapeTrimPath.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeTrimPath.m; sourceTree = "<group>"; };
-		23F6708733ECBC2C3A04347EBA5837B0 /* Pods_Lottie_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lottie_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D9CFD668AB15AD6B7CFE597BA9790E5 /* LAShapeStroke.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeStroke.h; sourceTree = "<group>"; };
-		2DC01D5F7B5EBC356E0FB20DC94C658C /* Pods-lottie-ios_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-ios_Tests-resources.sh"; sourceTree = "<group>"; };
-		3168398BDCECCBDC1C7E675FD0F865BE /* LAShapeTransform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeTransform.h; sourceTree = "<group>"; };
-		3238590A7B7BB0162353C0C7C9337903 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		35FFFC1665B2F3945F97911427CAC39F /* Pods-Lottie-Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Lottie-Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		365C20C7BA9F72095A070EFC647C9797 /* LAComposition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAComposition.m; sourceTree = "<group>"; };
-		3693DDAD791836448E729C4EAB42A59A /* LAHelpers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAHelpers.h; sourceTree = "<group>"; };
-		37EFAB870470294744EFDD557852AEBD /* LAShapeLayerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeLayerView.h; sourceTree = "<group>"; };
-		38E69AA2AF061C5BCF9FA6E810995135 /* LAGroupLayerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAGroupLayerView.h; sourceTree = "<group>"; };
-		3A8B71C5711F71E13A9EF29347944955 /* LAShapeCircle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeCircle.m; sourceTree = "<group>"; };
-		3C5BF5145B351139F5C339A3E1A03671 /* LAAnimatableScaleValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableScaleValue.h; sourceTree = "<group>"; };
-		3EAEE602C639E16930B8D393D7332499 /* CGGeometryAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CGGeometryAdditions.h; sourceTree = "<group>"; };
-		3F078AC56DED57DF561A5272E61F238B /* lottie-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "lottie-ios-dummy.m"; sourceTree = "<group>"; };
-		417ED3666248DF953EAF966F14C8CBE0 /* LAAnimationCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimationCache.h; sourceTree = "<group>"; };
-		430DD85804A51E1C1E2A18AFBB91AE36 /* LAAnimationCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimationCache.m; sourceTree = "<group>"; };
-		468F6B74631B26E3645A7E8DDEBDBA77 /* CAAnimationGroup+LAAnimatableGroup.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CAAnimationGroup+LAAnimatableGroup.m"; sourceTree = "<group>"; };
-		4814D32F241BB645DDF1C9094ED6B0B2 /* LARectShapeLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LARectShapeLayer.h; sourceTree = "<group>"; };
-		4A562670476D7C9CEBA5A18B86BB963F /* lottie-ios-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "lottie-ios-prefix.pch"; sourceTree = "<group>"; };
-		4B3B5EF75C30BC14D457EA4F06908209 /* Pods-lottie-ios_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-ios_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		51B8B0DC7050B8F135E80D2B7328F6C6 /* Pods-lottie-ios_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-ios_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		572FE8F3B0701581C9E0179C717A2A3D /* LAAnimatableLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableLayer.m; sourceTree = "<group>"; };
-		5E3280E9A005CD9EF7CDF50AE0C44186 /* LAAnimatableBoundsValue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableBoundsValue.m; sourceTree = "<group>"; };
-		616BEB51ECCAD129BDBCB7A956B56CC6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		64AD849985D55AD766CDBE72C9F5C893 /* LAAnimatableBoundsValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableBoundsValue.h; sourceTree = "<group>"; };
-		67AF90A5097C29BC3A2C9D0EEA1B8965 /* LAComposition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAComposition.h; sourceTree = "<group>"; };
-		6810DA145A9F737648B2F7EBE001C879 /* LAAnimatableValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableValue.h; sourceTree = "<group>"; };
-		6854FA93BA0760E539699367915E0AE1 /* LAEllipseShapeLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAEllipseShapeLayer.h; sourceTree = "<group>"; };
-		68A56E0FC68E08FCDABB5196B8B15F57 /* Pods_lottie_ios_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lottie_ios_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		69F2F9742D08E2243309184475E202B5 /* lottie-ios-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "lottie-ios-umbrella.h"; sourceTree = "<group>"; };
-		6A009F7BB3956DE25B7D98FAAFD9D45C /* LAAnimatableColorValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableColorValue.h; sourceTree = "<group>"; };
-		6E28C846F470114A8720585787867606 /* LAAnimationTransitionController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimationTransitionController.h; sourceTree = "<group>"; };
-		7122D191949595366C457D09628D899B /* Lottie.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Lottie.h; sourceTree = "<group>"; };
-		751A8E2FD4ECD7CF83A639AADE21D747 /* LAAnimatablePointValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatablePointValue.h; sourceTree = "<group>"; };
-		7692B39F14346D891FBDEDE4D0B91E2D /* LAAnimationTransitionController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimationTransitionController.m; sourceTree = "<group>"; };
-		7BAE7653294D8E8E8B25E54C834F380F /* Pods-lottie-ios_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-ios_Tests-dummy.m"; sourceTree = "<group>"; };
-		7D775D8C2A21B2A9EB48A0CF7C8ABB9A /* LAAnimatableNumberValue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableNumberValue.m; sourceTree = "<group>"; };
-		7EC994CDC2D681BA26389F78A7E4B325 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		84993A5242FECA10A6B05B2B3C88EBCB /* LAMaskLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAMaskLayer.h; sourceTree = "<group>"; };
-		8613E34B2974E06056CACF911F0A1C27 /* LALayerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LALayerView.h; sourceTree = "<group>"; };
-		862D27A5FB1217BE2C4202A609CC9351 /* lottie-ios.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "lottie-ios.xcconfig"; sourceTree = "<group>"; };
-		88478EAF17F9D43306DE97A46B4840B3 /* Pods-lottie-ios_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-lottie-ios_Tests-umbrella.h"; sourceTree = "<group>"; };
-		897D5AC8BD2547BA2A4D03AF42836005 /* LAShapeGroup.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeGroup.m; sourceTree = "<group>"; };
-		89C152F786653980BD89744C6E227DE9 /* lottie-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "lottie-ios.modulemap"; sourceTree = "<group>"; };
-		8B91706714C29EACB9EAA3E6D83F61A7 /* LAModels.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAModels.h; sourceTree = "<group>"; };
-		8C084E31ED23F75F9BD506F2FB789544 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CADA9940CFF80BB8DDD5D016413EBC6 /* LALayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LALayer.h; sourceTree = "<group>"; };
-		915428D3FEC4E1ABADF7768CEBED641A /* Pods-Lottie-Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Lottie-Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		95D9A6B420F03D243766ECAEA51BD46E /* LAAnimationView_Internal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimationView_Internal.h; sourceTree = "<group>"; };
-		962AF50D4A08AC872FADF0DDD8957A07 /* Pods-lottie-ios_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-ios_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		9AC54C5E8FDA605DE83310670E321B13 /* CAAnimationGroup+LAAnimatableGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CAAnimationGroup+LAAnimatableGroup.h"; sourceTree = "<group>"; };
-		9CB4CA92A985CD1E66A718E42E0FB6CA /* LAShapePath.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapePath.h; sourceTree = "<group>"; };
-		9EAC4E86BAB746F7CBAE399BA7F8E1E3 /* LAShapeRectangle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeRectangle.m; sourceTree = "<group>"; };
-		A1FECC0676FEAB5FCDC447ED9E0181DF /* LAShapePath.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapePath.m; sourceTree = "<group>"; };
-		A25A5549C66ABA914BF7A64A152F70D2 /* LAShapeFill.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeFill.m; sourceTree = "<group>"; };
-		A4EF886C2B34BA58755AE202D28639CA /* Pods-Lottie-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Lottie-Example.release.xcconfig"; sourceTree = "<group>"; };
-		A64314506AB60D44187385D59BE05CE9 /* LALayerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LALayerView.m; sourceTree = "<group>"; };
-		A8218A1DB229C1582A3F1110BE824576 /* LAAnimatableColorValue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableColorValue.m; sourceTree = "<group>"; };
-		AAC7F844CC30FDAB962E9568A2447E44 /* LAShapeTrimPath.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeTrimPath.h; sourceTree = "<group>"; };
-		AB10567EE3E39D66A41915B6BB391595 /* LAAnimatableShapeValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableShapeValue.h; sourceTree = "<group>"; };
-		AB5853C73807A991004C1B8D27BC4BFF /* LAShapeRectangle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeRectangle.h; sourceTree = "<group>"; };
-		AD88BCA17AA9E910DA8BD8365D735147 /* LAAnimationView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimationView.h; sourceTree = "<group>"; };
-		ADCE2D23DE9E4B2F29B80166129B81FF /* LAMask.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAMask.h; sourceTree = "<group>"; };
-		B184103ECDADC2C1827FFC74B2A5AF81 /* Pods-Lottie-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Lottie-Example.debug.xcconfig"; sourceTree = "<group>"; };
-		B2996716749054224AE7D1A4E0F79D34 /* LAMaskLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAMaskLayer.m; sourceTree = "<group>"; };
-		B802BC4FFC10D971CE665063B2863EE0 /* Pods-lottie-ios_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-ios_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		BDC5D6A9C57A3FBA34FF133425759301 /* LARectShapeLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LARectShapeLayer.m; sourceTree = "<group>"; };
-		BFEB7178CC0F288E50131F096EEB1DB0 /* Pods-lottie-ios_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-ios_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		C3512AD6CAB530F13858D185B1776062 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C93A2B28FADD91B4A25BA723B4664F15 /* LAAnimatableNumberValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableNumberValue.h; sourceTree = "<group>"; };
-		CA43552B1FF32510827747C2CECA5C05 /* LALayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LALayer.m; sourceTree = "<group>"; };
-		CBABCB638A8A4BAA0A19CD0CF36576D3 /* LAShapeFill.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeFill.h; sourceTree = "<group>"; };
-		D6983538FB98EDAF86A85D465D57492D /* Pods-Lottie-Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Lottie-Example-dummy.m"; sourceTree = "<group>"; };
-		DEEE2366360412C30D658F231D791FE2 /* UIColor+Expanded.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Expanded.m"; sourceTree = "<group>"; };
-		E260645911BC3FA38A4A6C68F1EDA67A /* LAShapeStroke.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeStroke.m; sourceTree = "<group>"; };
-		E54164C1A84A466AD12DB79C82B7C5C5 /* CGGeometryAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CGGeometryAdditions.m; sourceTree = "<group>"; };
-		E603A6AC6EA653B20DF96E556BB88A9C /* LAAnimatableLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableLayer.h; sourceTree = "<group>"; };
-		EC8D42FA867193B8064E88A63BF9C091 /* LAShapeLayerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeLayerView.m; sourceTree = "<group>"; };
-		F092DF71F80A4A52929733B0E1293CFF /* LAAnimationView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimationView.m; sourceTree = "<group>"; };
-		F13888D8746B98E5E1C6EF6F81062423 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F7E393464B8276C00839E29FC416F46F /* Pods-lottie-ios_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-lottie-ios_Tests.modulemap"; sourceTree = "<group>"; };
-		FD338AFDCC777CB0ECD39ED365C90FFE /* Pods-Lottie-Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Lottie-Example.modulemap"; sourceTree = "<group>"; };
+		00BB4AA5C82A74418D3509F0748CF7E1 /* LAAnimatableShapeValue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableShapeValue.m; sourceTree = "<group>"; };
+		03BC13CD9C6A6035CB36680D0A10AA3E /* LAAnimationCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimationCache.m; sourceTree = "<group>"; };
+		04A9AE61EDF30010E78A9645050B7E8E /* CAAnimationGroup+LAAnimatableGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CAAnimationGroup+LAAnimatableGroup.h"; sourceTree = "<group>"; };
+		057EB7B5AB0891C515A48F53B0D68C13 /* LAShapeCircle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeCircle.h; sourceTree = "<group>"; };
+		066BD868B309BB71008F48B50699E933 /* Pods-lottie-ios_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-ios_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		0846A5585A87C560BED9F3D2AB283289 /* CAAnimationGroup+LAAnimatableGroup.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CAAnimationGroup+LAAnimatableGroup.m"; sourceTree = "<group>"; };
+		0966AD065F5C14181484ECADAA8C907F /* LAAnimatableLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableLayer.m; sourceTree = "<group>"; };
+		09C9342D002179901B4854A44519F73D /* UIColor+Expanded.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expanded.h"; sourceTree = "<group>"; };
+		0A1D575039F11F3C1C3D8FF041B809D1 /* LAAnimatablePointValue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimatablePointValue.m; sourceTree = "<group>"; };
+		0A96091EB00499090690B5654D9CCF82 /* Pods_lottie_ios_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_ios_Tests.framework; path = "Pods-lottie-ios_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		143FBAE486947C2718AE48A507426B54 /* lottie-ios-OSX-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "lottie-ios-OSX-umbrella.h"; sourceTree = "<group>"; };
+		14ADE27E32C54F0871A81FF10F12F0B2 /* Pods-Lottie-Example-MacOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Lottie-Example-MacOS-resources.sh"; sourceTree = "<group>"; };
+		150D33E3EF90BE45A866631A59509D3C /* CGGeometryAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CGGeometryAdditions.m; sourceTree = "<group>"; };
+		1590619B0841C73302F209B4B6659645 /* LAHelpers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAHelpers.h; sourceTree = "<group>"; };
+		15F0CFD52C7EEDA262166745EEDDA4FC /* LAAnimationView_Internal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimationView_Internal.h; sourceTree = "<group>"; };
+		161E8724384284CEB2AEDB8A6029DD24 /* LAShapeLayerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeLayerView.h; sourceTree = "<group>"; };
+		186BC3637E1E79D94ACCDCC95E358139 /* Pods-Lottie-Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Lottie-Example-frameworks.sh"; sourceTree = "<group>"; };
+		1C6F9DD05867FBA24AF55DE30C9C9CE2 /* LAShapeFill.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeFill.m; sourceTree = "<group>"; };
+		1CFEB0E1C0C1055A3411B98D51161788 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1D026EFE442CC845F08509D94D1DC02D /* Pods-lottie-ios_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-ios_Tests-dummy.m"; sourceTree = "<group>"; };
+		1D5B7866C927C7D0D2B0DF0511F536C1 /* LALayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LALayer.m; sourceTree = "<group>"; };
+		2245129E598EB9DC78D8E5E981507C52 /* lottie-ios-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "lottie-ios-iOS.xcconfig"; path = "../lottie-ios-iOS/lottie-ios-iOS.xcconfig"; sourceTree = "<group>"; };
+		24787644A116CDE813D8A8BA713028BE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../lottie-ios-iOS/Info.plist"; sourceTree = "<group>"; };
+		258741D3F54E11EC0A573728DC09BA0D /* LAAnimatableScaleValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableScaleValue.h; sourceTree = "<group>"; };
+		263BD953EED2E6F8429D8D97CB2F4AF1 /* LAAnimatablePointValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatablePointValue.h; sourceTree = "<group>"; };
+		26C7DE5BE1E84A1527B5D5FFB1789349 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		283CCF83DE08CC09D1A75FFDC1E80AC2 /* lottie-ios-OSX.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "lottie-ios-OSX.xcconfig"; sourceTree = "<group>"; };
+		2A0CC55D11A791A4361B86F63BE68CB7 /* Pods-lottie-ios_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-lottie-ios_Tests-umbrella.h"; sourceTree = "<group>"; };
+		2DD06BD0A3F3D5F00FE848AF8A4A6F4E /* LAEllipseShapeLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAEllipseShapeLayer.h; sourceTree = "<group>"; };
+		2E7978B0FE4ABEF65AB16645DB333515 /* Pods-Lottie-Example-MacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Lottie-Example-MacOS.debug.xcconfig"; sourceTree = "<group>"; };
+		2FEA58AEF5DCB8E826E345A247DEF800 /* LAAnimatableScaleValue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableScaleValue.m; sourceTree = "<group>"; };
+		32479591B8F19BD0CBE9F774D15389D8 /* LAShapeStroke.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeStroke.m; sourceTree = "<group>"; };
+		345C024753303F2F5BD3228052384331 /* LAShapeTrimPath.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeTrimPath.h; sourceTree = "<group>"; };
+		38B1EFB75C34BAD5A5CA0B1864428B42 /* Pods_Lottie_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Lottie_Example.framework; path = "Pods-Lottie-Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		39945EB608BBD749FA4F5C044342CFE7 /* lottie-ios-OSX.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "lottie-ios-OSX.modulemap"; sourceTree = "<group>"; };
+		39B58225E651D481B640659502D58F65 /* LAShapeTransform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeTransform.h; sourceTree = "<group>"; };
+		3ED39BAEA78A76BB031647F4E01D9689 /* Pods-Lottie-Example-MacOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Lottie-Example-MacOS.modulemap"; sourceTree = "<group>"; };
+		3FC6C122778B882931A442F9B6AAE024 /* lottie-ios-OSX-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "lottie-ios-OSX-prefix.pch"; sourceTree = "<group>"; };
+		420760288C7276D65879243F90148E30 /* LAShapeLayerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeLayerView.m; sourceTree = "<group>"; };
+		42BAC24CC7B64A975739199B90652674 /* LAMask.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAMask.m; sourceTree = "<group>"; };
+		435B68E5D2D868147AF17A75E1F57DB7 /* LARectShapeLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LARectShapeLayer.m; sourceTree = "<group>"; };
+		47C06138CD8F1D8AF8C690C81CF1F3CD /* LALayerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LALayerView.m; sourceTree = "<group>"; };
+		4A9928BB42BD4378E9784E817BB6524C /* Pods-Lottie-Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Lottie-Example-dummy.m"; sourceTree = "<group>"; };
+		4B3D997B28D82CB280938BE7921E75CF /* LAAnimatableLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableLayer.h; sourceTree = "<group>"; };
+		4EB1C51ABEB93789541905240DF926E8 /* Pods-Lottie-Example-MacOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Lottie-Example-MacOS-dummy.m"; sourceTree = "<group>"; };
+		52261001EAFC60D9CB90F856BF509706 /* Lottie.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Lottie.h; sourceTree = "<group>"; };
+		57A403C734BF487BD347F49865BBFD9B /* LAAnimatableColorValue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableColorValue.m; sourceTree = "<group>"; };
+		5A1DB1E8BAD6E7AFD306C8D64417AA00 /* Pods-lottie-ios_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-lottie-ios_Tests.modulemap"; sourceTree = "<group>"; };
+		5AF587B1E1C5510378FE74675F04A389 /* LAPlatformCompat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAPlatformCompat.h; sourceTree = "<group>"; };
+		5EB078A3C908F5AC8D41C6691DB53EEA /* LAAnimatableValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableValue.h; sourceTree = "<group>"; };
+		627947A4AAEFFE8332FB1275E0022008 /* NSValue+Compat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSValue+Compat.m"; sourceTree = "<group>"; };
+		62E0D5D410342ABD17CE0F0D9D02C05A /* Pods-Lottie-Example-MacOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Lottie-Example-MacOS-frameworks.sh"; sourceTree = "<group>"; };
+		63E8A32304416366E7C4FC7A2D6C3A08 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
+		691E5DA7E296E61F6161698A496BC899 /* Pods-Lottie-Example-MacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Lottie-Example-MacOS.release.xcconfig"; sourceTree = "<group>"; };
+		6B2AFB7FED0BCB96137645BEF578B074 /* LAMaskLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAMaskLayer.h; sourceTree = "<group>"; };
+		6B5F9B4E3DAA22F8E999F14F7223385F /* Pods-lottie-ios_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-ios_Tests-resources.sh"; sourceTree = "<group>"; };
+		7421CFD687F17710731C740FFE50CF08 /* Pods-Lottie-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Lottie-Example.release.xcconfig"; sourceTree = "<group>"; };
+		7A0E3B6953C086AE38D2B02446542316 /* LAShapeStroke.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeStroke.h; sourceTree = "<group>"; };
+		7B256F4A01324853F3D536D9BD97CCBA /* LAShapePath.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapePath.h; sourceTree = "<group>"; };
+		7B84DD8BA444B84A5807EA458734DA5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		82274F4DE9ADE4590DEE9890CB0843A6 /* LAAnimatableBoundsValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableBoundsValue.h; sourceTree = "<group>"; };
+		8299ABA2556197A96AE752A320808B54 /* LAAnimatableNumberValue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableNumberValue.m; sourceTree = "<group>"; };
+		882BD1ABCEEB35BB434E09E1341BED91 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios-OSX.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		89C1EE73ADB8B76F7F0D7227A3DA0053 /* UIBezierPath.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = UIBezierPath.h; sourceTree = "<group>"; };
+		8A2B53D7CFE2D3FE84ABAC705C3CF685 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F9FC62FF143AB6667CDD8163FCFDE1C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		8FBD977212B8B998E67B22B73AE0ACEC /* LAShapeRectangle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeRectangle.m; sourceTree = "<group>"; };
+		8FE177F774CA086984F5F1E5216287C9 /* LAAnimatableShapeValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableShapeValue.h; sourceTree = "<group>"; };
+		906B715060F9EA341552EDB58A78F404 /* Pods-Lottie-Example-MacOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Lottie-Example-MacOS-umbrella.h"; sourceTree = "<group>"; };
+		9305388DE27FE56411AAA529995B63B3 /* Pods-lottie-ios_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-ios_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		946B6F0660E2C46FCE0CA21C57441C6A /* LAAnimationView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimationView.m; sourceTree = "<group>"; };
+		9643758EE0880EA5E1E7A3B8FA0B5C4F /* LAMaskLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAMaskLayer.m; sourceTree = "<group>"; };
+		96B69884AAD3903EDA2E34D16F0BA362 /* lottie-ios-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; name = "lottie-ios-iOS.modulemap"; path = "../lottie-ios-iOS/lottie-ios-iOS.modulemap"; sourceTree = "<group>"; };
+		9729EB695B9B3CB45539738BC477E081 /* LAComposition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAComposition.h; sourceTree = "<group>"; };
+		98C88FF85E1094A3128BC98CB154A777 /* Pods-Lottie-Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Lottie-Example.modulemap"; sourceTree = "<group>"; };
+		99D3B5659E588C8AEE2472D2DE00DCC0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9AE7674DA30DA22174CCC932F6FAF349 /* LAShapeGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeGroup.h; sourceTree = "<group>"; };
+		9B7EB62E6422B6FC6089CDCDC79BAC8B /* lottie-ios-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "lottie-ios-iOS-umbrella.h"; path = "../lottie-ios-iOS/lottie-ios-iOS-umbrella.h"; sourceTree = "<group>"; };
+		9D6996FEA90472D5190E82B5BD837AAD /* LAAnimationView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimationView.h; sourceTree = "<group>"; };
+		A2BEDD9079C2E7963A26DD51EFD98710 /* LAAnimatableColorValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableColorValue.h; sourceTree = "<group>"; };
+		A4C4F62FA0BF2C9BF8269A4F6E79E80F /* LAComposition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAComposition.m; sourceTree = "<group>"; };
+		A6FC9892A39A424B3BF2E4E3375B341F /* CALayer+Compat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Compat.m"; sourceTree = "<group>"; };
+		A729DC4B15922CBF6596364C9C7DF0C5 /* LAShapeCircle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeCircle.m; sourceTree = "<group>"; };
+		A76174ED58C64052E2CDD5DEDB3A5B78 /* LAShapePath.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapePath.m; sourceTree = "<group>"; };
+		A7DF8965603F9BCC1A858825A49A011C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8B7943757B6273E76BA0133FF4C7DCD /* Pods_Lottie_Example_MacOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Lottie_Example_MacOS.framework; path = "Pods-Lottie-Example-MacOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9D277A9571B164AC05DE2592DD336D8 /* Pods-Lottie-Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Lottie-Example-resources.sh"; sourceTree = "<group>"; };
+		AD6374C4150B9A720B0BCA0CFAAA28C9 /* LAGroupLayerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAGroupLayerView.m; sourceTree = "<group>"; };
+		AEE071F9D9D4F8785E5CCD0A5D9BD629 /* LAShapeGroup.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeGroup.m; sourceTree = "<group>"; };
+		B39824F0377E4F493390169F20C1E3FC /* Pods-lottie-ios_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-ios_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		B55829B0C67F90AD7BA07A190AC460CC /* LAAnimationTransitionController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimationTransitionController.m; sourceTree = "<group>"; };
+		B6180C84735EBE49AFAE3B70D4E19F35 /* LAAnimatableNumberValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimatableNumberValue.h; sourceTree = "<group>"; };
+		B7C33198914C3009934260E1B16040BF /* LARectShapeLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LARectShapeLayer.h; sourceTree = "<group>"; };
+		B9C926B498D73B1C3824C2B9732454E3 /* lottie-ios-OSX-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "lottie-ios-OSX-dummy.m"; sourceTree = "<group>"; };
+		BA7661FFFABA02A2ED5F73C725A372C3 /* LALayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LALayer.h; sourceTree = "<group>"; };
+		BA8FCEB16DBF22BE687E93B629705410 /* LALayerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LALayerView.h; sourceTree = "<group>"; };
+		BC4C4DE410D328A09496CEFDB2143DD1 /* Pods-Lottie-Example-MacOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Lottie-Example-MacOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		BE50F8CE9CCF76F0B6B8654C81CEDBB8 /* UIColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = UIColor.m; sourceTree = "<group>"; };
+		C1D12FF588125789C1846CB81A2CFDD1 /* Pods-Lottie-Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Lottie-Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		C3B4255105642AC73947FB028D69B973 /* Pods-lottie-ios_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-ios_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		C9A0BB696DAB4D23402E4F92E8A879B0 /* Pods-Lottie-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Lottie-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		CA13E2F72B2A84E8D774F18DD936CA54 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		CA84826E02421A5C6D358C85DB620A93 /* UIColor+Expanded.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Expanded.m"; sourceTree = "<group>"; };
+		CCC8915579E003A7E0CDA7B90202769D /* CALayer+Compat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CALayer+Compat.h"; sourceTree = "<group>"; };
+		CF537C5754336A24E122FAD406DF6A14 /* CADisplayLink.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CADisplayLink.h; sourceTree = "<group>"; };
+		D01C3D077402D16057DAEA57E91EFD7D /* Pods-lottie-ios_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-ios_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		D10298087CCB7A83FB5C9FA172072C11 /* lottie-ios-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "lottie-ios-iOS-prefix.pch"; path = "../lottie-ios-iOS/lottie-ios-iOS-prefix.pch"; sourceTree = "<group>"; };
+		D202F619E99C2B98D97CCBFF025649EC /* LAShapeFill.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeFill.h; sourceTree = "<group>"; };
+		D472A02BCE43AFFAA8ECC4D294DE5B8D /* LAAnimationTransitionController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimationTransitionController.h; sourceTree = "<group>"; };
+		D5746E9272F05894B0DFBF3385B3D054 /* UIColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = UIColor.h; sourceTree = "<group>"; };
+		D9DB96AFA9547620017B0B3D93D0AFDB /* UIBezierPath.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = UIBezierPath.m; sourceTree = "<group>"; };
+		DA2328E5015A67E2D0EAFB8760405834 /* CGGeometryAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CGGeometryAdditions.h; sourceTree = "<group>"; };
+		DA6CF136ED58AE59DAB8D59065D07FCA /* LAAnimationCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimationCache.h; sourceTree = "<group>"; };
+		DC35AF8DD0BA3955397A629F2DAB90CE /* Pods-Lottie-Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Lottie-Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		DFB9B48CA5FB64F65C9333F75A778DD2 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
+		E0E9E52D362EFDD9AD546B0C35F8955B /* NSValue+Compat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSValue+Compat.h"; sourceTree = "<group>"; };
+		E28FE9DD11EF37DFC9FFB74C2D6AB9E9 /* CADisplayLink.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CADisplayLink.m; sourceTree = "<group>"; };
+		E50E712403469BBBEC9770ABFC5F518A /* LAGroupLayerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAGroupLayerView.h; sourceTree = "<group>"; };
+		E833FF4589EA36FB7F1188E3BACBAB62 /* LAShapeTrimPath.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeTrimPath.m; sourceTree = "<group>"; };
+		E9D93897CED27201D99C74890A61D2E7 /* LAAnimationView_Compat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAAnimationView_Compat.h; sourceTree = "<group>"; };
+		ECB0AD90A3501C2ABC05788EEB5B5A44 /* LAAnimatableBoundsValue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAAnimatableBoundsValue.m; sourceTree = "<group>"; };
+		EF3671BEFBC2DE55C261520886C5AFC4 /* Pods-Lottie-Example-MacOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Lottie-Example-MacOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		F0E0B35A67C266BEB014D3B254858A3E /* LAMask.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAMask.h; sourceTree = "<group>"; };
+		F289321165E81FC6F4B2E4C06C3AB4D8 /* LAModels.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAModels.h; sourceTree = "<group>"; };
+		F789F9D12C8F82EB39D074280B707B74 /* LAEllipseShapeLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAEllipseShapeLayer.m; sourceTree = "<group>"; };
+		F7D66821AA5EE5BB26108ED46C391E19 /* LAShapeRectangle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LAShapeRectangle.h; sourceTree = "<group>"; };
+		FBAB0EAEF9C80B3C56E229F09B61B76B /* LAShapeTransform.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LAShapeTransform.m; sourceTree = "<group>"; };
+		FF09253EB0B902C0017CD74BABB9FF52 /* lottie-ios-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "lottie-ios-iOS-dummy.m"; path = "../lottie-ios-iOS/lottie-ios-iOS-dummy.m"; sourceTree = "<group>"; };
+		FF91F9344AF5B9FAEB941DAFB89A1A43 /* Pods-Lottie-Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Lottie-Example-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0FE6AB6DABB33A683C2BA089E5FD59E7 /* Frameworks */ = {
+		1075D2ED1548A02B2E1ED8F45B7B1A28 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEA163FF05C55EC5130CD3FF52F94921 /* Foundation.framework in Frameworks */,
+				26927C671A95388B3C4BD8F3D8CB1D66 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8054C11AD6B6B0E8C9304CE852F4ECC3 /* Frameworks */ = {
+		35238516DA8B4E1DE968CC94C1A4BD2C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB5B78A97EE13FFAFD17767E8119314D /* Foundation.framework in Frameworks */,
-				4EA640211BD9920D097093E1605ACAE5 /* UIKit.framework in Frameworks */,
+				15FC70FD083E40FAD0F5944D41DD88BE /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8099F677EE59325056C9258B8A08AFA /* Frameworks */ = {
+		6EEF5B566DC7D7E0179AD5229FDDA4FE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E712472BBE96A721D41D38532DE0B2DB /* Foundation.framework in Frameworks */,
+				167C98102DB9FBFFD1C5B3B24B2C32E7 /* Foundation.framework in Frameworks */,
+				1B64907E5DC216E111CFB12FE773C603 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B5F29BA59D19C79F757EB6EE29DD1F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CD4393542E64221153CC1934728CDE7 /* AppKit.framework in Frameworks */,
+				EBC245AB0E25EF6538049E8B6BB6D66A /* Cocoa.framework in Frameworks */,
+				BF2364687323F0302DB1E58FF63F27E1 /* CoreVideo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9400EE0ECE003B3ACEB89B6D5B7AB442 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8BCA47B1A77DF95917998D9085EFAA9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		062D2134D5862064581127A963F919CB /* Targets Support Files */ = {
+		26342C9887425AAD969E2A28B5DBF666 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				C2C0A7614C548C3C520A96AE333966F0 /* Pods-Lottie-Example */,
-				F522730DFDCBB7AD0E383C75A43C4F1A /* Pods-lottie-ios_Tests */,
+				7B84DD8BA444B84A5807EA458734DA5D /* Foundation.framework */,
+				CA13E2F72B2A84E8D774F18DD936CA54 /* UIKit.framework */,
 			);
-			name = "Targets Support Files";
+			name = iOS;
 			sourceTree = "<group>";
 		};
-		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
+		35A1688F1BC6D227C7EE82DBE8260052 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				E6EE98446B568159EE277B68FD442AF0 /* iOS */,
+				04A9AE61EDF30010E78A9645050B7E8E /* CAAnimationGroup+LAAnimatableGroup.h */,
+				0846A5585A87C560BED9F3D2AB283289 /* CAAnimationGroup+LAAnimatableGroup.m */,
+				CF537C5754336A24E122FAD406DF6A14 /* CADisplayLink.h */,
+				E28FE9DD11EF37DFC9FFB74C2D6AB9E9 /* CADisplayLink.m */,
+				CCC8915579E003A7E0CDA7B90202769D /* CALayer+Compat.h */,
+				A6FC9892A39A424B3BF2E4E3375B341F /* CALayer+Compat.m */,
+				DA2328E5015A67E2D0EAFB8760405834 /* CGGeometryAdditions.h */,
+				150D33E3EF90BE45A866631A59509D3C /* CGGeometryAdditions.m */,
+				82274F4DE9ADE4590DEE9890CB0843A6 /* LAAnimatableBoundsValue.h */,
+				ECB0AD90A3501C2ABC05788EEB5B5A44 /* LAAnimatableBoundsValue.m */,
+				A2BEDD9079C2E7963A26DD51EFD98710 /* LAAnimatableColorValue.h */,
+				57A403C734BF487BD347F49865BBFD9B /* LAAnimatableColorValue.m */,
+				4B3D997B28D82CB280938BE7921E75CF /* LAAnimatableLayer.h */,
+				0966AD065F5C14181484ECADAA8C907F /* LAAnimatableLayer.m */,
+				B6180C84735EBE49AFAE3B70D4E19F35 /* LAAnimatableNumberValue.h */,
+				8299ABA2556197A96AE752A320808B54 /* LAAnimatableNumberValue.m */,
+				263BD953EED2E6F8429D8D97CB2F4AF1 /* LAAnimatablePointValue.h */,
+				0A1D575039F11F3C1C3D8FF041B809D1 /* LAAnimatablePointValue.m */,
+				258741D3F54E11EC0A573728DC09BA0D /* LAAnimatableScaleValue.h */,
+				2FEA58AEF5DCB8E826E345A247DEF800 /* LAAnimatableScaleValue.m */,
+				8FE177F774CA086984F5F1E5216287C9 /* LAAnimatableShapeValue.h */,
+				00BB4AA5C82A74418D3509F0748CF7E1 /* LAAnimatableShapeValue.m */,
+				5EB078A3C908F5AC8D41C6691DB53EEA /* LAAnimatableValue.h */,
+				DA6CF136ED58AE59DAB8D59065D07FCA /* LAAnimationCache.h */,
+				03BC13CD9C6A6035CB36680D0A10AA3E /* LAAnimationCache.m */,
+				B55829B0C67F90AD7BA07A190AC460CC /* LAAnimationTransitionController.m */,
+				946B6F0660E2C46FCE0CA21C57441C6A /* LAAnimationView.m */,
+				15F0CFD52C7EEDA262166745EEDDA4FC /* LAAnimationView_Internal.h */,
+				9729EB695B9B3CB45539738BC477E081 /* LAComposition.h */,
+				A4C4F62FA0BF2C9BF8269A4F6E79E80F /* LAComposition.m */,
+				2DD06BD0A3F3D5F00FE848AF8A4A6F4E /* LAEllipseShapeLayer.h */,
+				F789F9D12C8F82EB39D074280B707B74 /* LAEllipseShapeLayer.m */,
+				E50E712403469BBBEC9770ABFC5F518A /* LAGroupLayerView.h */,
+				AD6374C4150B9A720B0BCA0CFAAA28C9 /* LAGroupLayerView.m */,
+				1590619B0841C73302F209B4B6659645 /* LAHelpers.h */,
+				BA7661FFFABA02A2ED5F73C725A372C3 /* LALayer.h */,
+				1D5B7866C927C7D0D2B0DF0511F536C1 /* LALayer.m */,
+				BA8FCEB16DBF22BE687E93B629705410 /* LALayerView.h */,
+				47C06138CD8F1D8AF8C690C81CF1F3CD /* LALayerView.m */,
+				F0E0B35A67C266BEB014D3B254858A3E /* LAMask.h */,
+				42BAC24CC7B64A975739199B90652674 /* LAMask.m */,
+				6B2AFB7FED0BCB96137645BEF578B074 /* LAMaskLayer.h */,
+				9643758EE0880EA5E1E7A3B8FA0B5C4F /* LAMaskLayer.m */,
+				F289321165E81FC6F4B2E4C06C3AB4D8 /* LAModels.h */,
+				5AF587B1E1C5510378FE74675F04A389 /* LAPlatformCompat.h */,
+				B7C33198914C3009934260E1B16040BF /* LARectShapeLayer.h */,
+				435B68E5D2D868147AF17A75E1F57DB7 /* LARectShapeLayer.m */,
+				057EB7B5AB0891C515A48F53B0D68C13 /* LAShapeCircle.h */,
+				A729DC4B15922CBF6596364C9C7DF0C5 /* LAShapeCircle.m */,
+				D202F619E99C2B98D97CCBFF025649EC /* LAShapeFill.h */,
+				1C6F9DD05867FBA24AF55DE30C9C9CE2 /* LAShapeFill.m */,
+				9AE7674DA30DA22174CCC932F6FAF349 /* LAShapeGroup.h */,
+				AEE071F9D9D4F8785E5CCD0A5D9BD629 /* LAShapeGroup.m */,
+				161E8724384284CEB2AEDB8A6029DD24 /* LAShapeLayerView.h */,
+				420760288C7276D65879243F90148E30 /* LAShapeLayerView.m */,
+				7B256F4A01324853F3D536D9BD97CCBA /* LAShapePath.h */,
+				A76174ED58C64052E2CDD5DEDB3A5B78 /* LAShapePath.m */,
+				F7D66821AA5EE5BB26108ED46C391E19 /* LAShapeRectangle.h */,
+				8FBD977212B8B998E67B22B73AE0ACEC /* LAShapeRectangle.m */,
+				7A0E3B6953C086AE38D2B02446542316 /* LAShapeStroke.h */,
+				32479591B8F19BD0CBE9F774D15389D8 /* LAShapeStroke.m */,
+				39B58225E651D481B640659502D58F65 /* LAShapeTransform.h */,
+				FBAB0EAEF9C80B3C56E229F09B61B76B /* LAShapeTransform.m */,
+				345C024753303F2F5BD3228052384331 /* LAShapeTrimPath.h */,
+				E833FF4589EA36FB7F1188E3BACBAB62 /* LAShapeTrimPath.m */,
+				E0E9E52D362EFDD9AD546B0C35F8955B /* NSValue+Compat.h */,
+				627947A4AAEFFE8332FB1275E0022008 /* NSValue+Compat.m */,
+				89C1EE73ADB8B76F7F0D7227A3DA0053 /* UIBezierPath.h */,
+				D9DB96AFA9547620017B0B3D93D0AFDB /* UIBezierPath.m */,
+				D5746E9272F05894B0DFBF3385B3D054 /* UIColor.h */,
+				BE50F8CE9CCF76F0B6B8654C81CEDBB8 /* UIColor.m */,
+				09C9342D002179901B4854A44519F73D /* UIColor+Expanded.h */,
+				CA84826E02421A5C6D358C85DB620A93 /* UIColor+Expanded.m */,
+				E365717E4DB2854523858350BB6E0F31 /* PublicHeaders */,
 			);
-			name = Frameworks;
+			name = Classes;
+			path = Classes;
 			sourceTree = "<group>";
 		};
-		46B036B8CD3D98CF83A51D5EDFA53ECF /* Support Files */ = {
+		417A991C6B1629905D86CF923D58402E /* Pods-Lottie-Example */ = {
 			isa = PBXGroup;
 			children = (
-				F13888D8746B98E5E1C6EF6F81062423 /* Info.plist */,
-				89C152F786653980BD89744C6E227DE9 /* lottie-ios.modulemap */,
-				862D27A5FB1217BE2C4202A609CC9351 /* lottie-ios.xcconfig */,
-				3F078AC56DED57DF561A5272E61F238B /* lottie-ios-dummy.m */,
-				4A562670476D7C9CEBA5A18B86BB963F /* lottie-ios-prefix.pch */,
-				69F2F9742D08E2243309184475E202B5 /* lottie-ios-umbrella.h */,
+				26C7DE5BE1E84A1527B5D5FFB1789349 /* Info.plist */,
+				98C88FF85E1094A3128BC98CB154A777 /* Pods-Lottie-Example.modulemap */,
+				DC35AF8DD0BA3955397A629F2DAB90CE /* Pods-Lottie-Example-acknowledgements.markdown */,
+				C1D12FF588125789C1846CB81A2CFDD1 /* Pods-Lottie-Example-acknowledgements.plist */,
+				4A9928BB42BD4378E9784E817BB6524C /* Pods-Lottie-Example-dummy.m */,
+				186BC3637E1E79D94ACCDCC95E358139 /* Pods-Lottie-Example-frameworks.sh */,
+				A9D277A9571B164AC05DE2592DD336D8 /* Pods-Lottie-Example-resources.sh */,
+				FF91F9344AF5B9FAEB941DAFB89A1A43 /* Pods-Lottie-Example-umbrella.h */,
+				C9A0BB696DAB4D23402E4F92E8A879B0 /* Pods-Lottie-Example.debug.xcconfig */,
+				7421CFD687F17710731C740FFE50CF08 /* Pods-Lottie-Example.release.xcconfig */,
 			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/lottie-ios";
+			name = "Pods-Lottie-Example";
+			path = "Target Support Files/Pods-Lottie-Example";
 			sourceTree = "<group>";
 		};
-		4EC83BD036CCD249C69BB479D005E17C /* Products */ = {
+		482DB792FB2C1DF256A1FF81F0877A48 /* lottie-ios */ = {
 			isa = PBXGroup;
 			children = (
-				8C084E31ED23F75F9BD506F2FB789544 /* Lottie.framework */,
-				23F6708733ECBC2C3A04347EBA5837B0 /* Pods_Lottie_Example.framework */,
-				68A56E0FC68E08FCDABB5196B8B15F57 /* Pods_lottie_ios_Tests.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		564F077CE69F9D229E2B3703A3C06D09 /* lottie-ios */ = {
-			isa = PBXGroup;
-			children = (
-				CC7C049126BA9339A8D085AC10772B97 /* lottie-ios */,
-				46B036B8CD3D98CF83A51D5EDFA53ECF /* Support Files */,
+				35A1688F1BC6D227C7EE82DBE8260052 /* Classes */,
 			);
 			name = "lottie-ios";
-			path = ../..;
+			path = "lottie-ios";
 			sourceTree = "<group>";
 		};
-		6C8E859BED3150A6861E5B8B9776F764 /* PublicHeaders */ = {
+		6AE6986C594A999FC82761A98637F1F4 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				6E28C846F470114A8720585787867606 /* LAAnimationTransitionController.h */,
-				AD88BCA17AA9E910DA8BD8365D735147 /* LAAnimationView.h */,
-				7122D191949595366C457D09628D899B /* Lottie.h */,
+				24787644A116CDE813D8A8BA713028BE /* Info.plist */,
+				1CFEB0E1C0C1055A3411B98D51161788 /* Info.plist */,
+				96B69884AAD3903EDA2E34D16F0BA362 /* lottie-ios-iOS.modulemap */,
+				2245129E598EB9DC78D8E5E981507C52 /* lottie-ios-iOS.xcconfig */,
+				FF09253EB0B902C0017CD74BABB9FF52 /* lottie-ios-iOS-dummy.m */,
+				D10298087CCB7A83FB5C9FA172072C11 /* lottie-ios-iOS-prefix.pch */,
+				9B7EB62E6422B6FC6089CDCDC79BAC8B /* lottie-ios-iOS-umbrella.h */,
+				39945EB608BBD749FA4F5C044342CFE7 /* lottie-ios-OSX.modulemap */,
+				283CCF83DE08CC09D1A75FFDC1E80AC2 /* lottie-ios-OSX.xcconfig */,
+				B9C926B498D73B1C3824C2B9732454E3 /* lottie-ios-OSX-dummy.m */,
+				3FC6C122778B882931A442F9B6AAE024 /* lottie-ios-OSX-prefix.pch */,
+				143FBAE486947C2718AE48A507426B54 /* lottie-ios-OSX-umbrella.h */,
 			);
-			path = PublicHeaders;
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/lottie-ios-OSX";
+			sourceTree = "<group>";
+		};
+		74014EA21B36D4548E21AE83073A4697 /* Pods-lottie-ios_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				99D3B5659E588C8AEE2472D2DE00DCC0 /* Info.plist */,
+				5A1DB1E8BAD6E7AFD306C8D64417AA00 /* Pods-lottie-ios_Tests.modulemap */,
+				9305388DE27FE56411AAA529995B63B3 /* Pods-lottie-ios_Tests-acknowledgements.markdown */,
+				C3B4255105642AC73947FB028D69B973 /* Pods-lottie-ios_Tests-acknowledgements.plist */,
+				1D026EFE442CC845F08509D94D1DC02D /* Pods-lottie-ios_Tests-dummy.m */,
+				B39824F0377E4F493390169F20C1E3FC /* Pods-lottie-ios_Tests-frameworks.sh */,
+				6B5F9B4E3DAA22F8E999F14F7223385F /* Pods-lottie-ios_Tests-resources.sh */,
+				2A0CC55D11A791A4361B86F63BE68CB7 /* Pods-lottie-ios_Tests-umbrella.h */,
+				D01C3D077402D16057DAEA57E91EFD7D /* Pods-lottie-ios_Tests.debug.xcconfig */,
+				066BD868B309BB71008F48B50699E933 /* Pods-lottie-ios_Tests.release.xcconfig */,
+			);
+			name = "Pods-lottie-ios_Tests";
+			path = "Target Support Files/Pods-lottie-ios_Tests";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -289,215 +539,291 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				91A05F117974EDC888120AA0FA94B840 /* Development Pods */,
-				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				4EC83BD036CCD249C69BB479D005E17C /* Products */,
-				062D2134D5862064581127A963F919CB /* Targets Support Files */,
+				DE13583AB8F794BBEAF85E3A80DA349C /* Frameworks */,
+				D2431C38CE75E5F9371ACA56742FA10D /* Products */,
+				918E7489C38217348EA01153B8226E60 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		918E7489C38217348EA01153B8226E60 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				417A991C6B1629905D86CF923D58402E /* Pods-Lottie-Example */,
+				D91BDFF373A27B65CB13548AB5E3977B /* Pods-Lottie-Example-MacOS */,
+				74014EA21B36D4548E21AE83073A4697 /* Pods-lottie-ios_Tests */,
+			);
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		91A05F117974EDC888120AA0FA94B840 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				564F077CE69F9D229E2B3703A3C06D09 /* lottie-ios */,
+				F13189DB0902F98D525915FBB3DAB361 /* lottie-ios */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		C2C0A7614C548C3C520A96AE333966F0 /* Pods-Lottie-Example */ = {
+		A548659F165EEAABADBF152D8985886E /* OS X */ = {
 			isa = PBXGroup;
 			children = (
-				C3512AD6CAB530F13858D185B1776062 /* Info.plist */,
-				FD338AFDCC777CB0ECD39ED365C90FFE /* Pods-Lottie-Example.modulemap */,
-				35FFFC1665B2F3945F97911427CAC39F /* Pods-Lottie-Example-acknowledgements.markdown */,
-				915428D3FEC4E1ABADF7768CEBED641A /* Pods-Lottie-Example-acknowledgements.plist */,
-				D6983538FB98EDAF86A85D465D57492D /* Pods-Lottie-Example-dummy.m */,
-				0AB46C4D2315834132B2DB53A02AB278 /* Pods-Lottie-Example-frameworks.sh */,
-				0DDB1D3866645EBD8508832674E49465 /* Pods-Lottie-Example-resources.sh */,
-				0669D1DB44AFADC892A66F2E7D9FA516 /* Pods-Lottie-Example-umbrella.h */,
-				B184103ECDADC2C1827FFC74B2A5AF81 /* Pods-Lottie-Example.debug.xcconfig */,
-				A4EF886C2B34BA58755AE202D28639CA /* Pods-Lottie-Example.release.xcconfig */,
+				63E8A32304416366E7C4FC7A2D6C3A08 /* AppKit.framework */,
+				8F9FC62FF143AB6667CDD8163FCFDE1C /* Cocoa.framework */,
+				DFB9B48CA5FB64F65C9333F75A778DD2 /* CoreVideo.framework */,
 			);
-			name = "Pods-Lottie-Example";
-			path = "Target Support Files/Pods-Lottie-Example";
+			name = "OS X";
 			sourceTree = "<group>";
 		};
-		CC7C049126BA9339A8D085AC10772B97 /* lottie-ios */ = {
+		D2431C38CE75E5F9371ACA56742FA10D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DEFBD51A8FD5AF27519B91304E0F37D6 /* Classes */,
+				882BD1ABCEEB35BB434E09E1341BED91 /* Lottie.framework */,
+				8A2B53D7CFE2D3FE84ABAC705C3CF685 /* Lottie.framework */,
+				38B1EFB75C34BAD5A5CA0B1864428B42 /* Pods_Lottie_Example.framework */,
+				A8B7943757B6273E76BA0133FF4C7DCD /* Pods_Lottie_Example_MacOS.framework */,
+				0A96091EB00499090690B5654D9CCF82 /* Pods_lottie_ios_Tests.framework */,
 			);
-			path = "lottie-ios";
+			name = Products;
 			sourceTree = "<group>";
 		};
-		DEFBD51A8FD5AF27519B91304E0F37D6 /* Classes */ = {
+		D91BDFF373A27B65CB13548AB5E3977B /* Pods-Lottie-Example-MacOS */ = {
 			isa = PBXGroup;
 			children = (
-				9AC54C5E8FDA605DE83310670E321B13 /* CAAnimationGroup+LAAnimatableGroup.h */,
-				468F6B74631B26E3645A7E8DDEBDBA77 /* CAAnimationGroup+LAAnimatableGroup.m */,
-				3EAEE602C639E16930B8D393D7332499 /* CGGeometryAdditions.h */,
-				E54164C1A84A466AD12DB79C82B7C5C5 /* CGGeometryAdditions.m */,
-				64AD849985D55AD766CDBE72C9F5C893 /* LAAnimatableBoundsValue.h */,
-				5E3280E9A005CD9EF7CDF50AE0C44186 /* LAAnimatableBoundsValue.m */,
-				6A009F7BB3956DE25B7D98FAAFD9D45C /* LAAnimatableColorValue.h */,
-				A8218A1DB229C1582A3F1110BE824576 /* LAAnimatableColorValue.m */,
-				E603A6AC6EA653B20DF96E556BB88A9C /* LAAnimatableLayer.h */,
-				572FE8F3B0701581C9E0179C717A2A3D /* LAAnimatableLayer.m */,
-				C93A2B28FADD91B4A25BA723B4664F15 /* LAAnimatableNumberValue.h */,
-				7D775D8C2A21B2A9EB48A0CF7C8ABB9A /* LAAnimatableNumberValue.m */,
-				751A8E2FD4ECD7CF83A639AADE21D747 /* LAAnimatablePointValue.h */,
-				0E616FB8F6098FBADCEC80ABE1566C97 /* LAAnimatablePointValue.m */,
-				3C5BF5145B351139F5C339A3E1A03671 /* LAAnimatableScaleValue.h */,
-				0014F3805E4A9D6C5834AA9088291D8C /* LAAnimatableScaleValue.m */,
-				AB10567EE3E39D66A41915B6BB391595 /* LAAnimatableShapeValue.h */,
-				00E07F9801546F50136DE66BAA80384F /* LAAnimatableShapeValue.m */,
-				6810DA145A9F737648B2F7EBE001C879 /* LAAnimatableValue.h */,
-				417ED3666248DF953EAF966F14C8CBE0 /* LAAnimationCache.h */,
-				430DD85804A51E1C1E2A18AFBB91AE36 /* LAAnimationCache.m */,
-				7692B39F14346D891FBDEDE4D0B91E2D /* LAAnimationTransitionController.m */,
-				F092DF71F80A4A52929733B0E1293CFF /* LAAnimationView.m */,
-				95D9A6B420F03D243766ECAEA51BD46E /* LAAnimationView_Internal.h */,
-				67AF90A5097C29BC3A2C9D0EEA1B8965 /* LAComposition.h */,
-				365C20C7BA9F72095A070EFC647C9797 /* LAComposition.m */,
-				6854FA93BA0760E539699367915E0AE1 /* LAEllipseShapeLayer.h */,
-				16658FFF1D05C6620954B146901548BA /* LAEllipseShapeLayer.m */,
-				38E69AA2AF061C5BCF9FA6E810995135 /* LAGroupLayerView.h */,
-				0D9D7C6B15992B74722A2535604BEE5E /* LAGroupLayerView.m */,
-				3693DDAD791836448E729C4EAB42A59A /* LAHelpers.h */,
-				8CADA9940CFF80BB8DDD5D016413EBC6 /* LALayer.h */,
-				CA43552B1FF32510827747C2CECA5C05 /* LALayer.m */,
-				8613E34B2974E06056CACF911F0A1C27 /* LALayerView.h */,
-				A64314506AB60D44187385D59BE05CE9 /* LALayerView.m */,
-				ADCE2D23DE9E4B2F29B80166129B81FF /* LAMask.h */,
-				1C236B19E4FFE960ECFDD34836883DD7 /* LAMask.m */,
-				84993A5242FECA10A6B05B2B3C88EBCB /* LAMaskLayer.h */,
-				B2996716749054224AE7D1A4E0F79D34 /* LAMaskLayer.m */,
-				8B91706714C29EACB9EAA3E6D83F61A7 /* LAModels.h */,
-				4814D32F241BB645DDF1C9094ED6B0B2 /* LARectShapeLayer.h */,
-				BDC5D6A9C57A3FBA34FF133425759301 /* LARectShapeLayer.m */,
-				03956A107908AC2B9FA767EA22E82FB9 /* LAShapeCircle.h */,
-				3A8B71C5711F71E13A9EF29347944955 /* LAShapeCircle.m */,
-				CBABCB638A8A4BAA0A19CD0CF36576D3 /* LAShapeFill.h */,
-				A25A5549C66ABA914BF7A64A152F70D2 /* LAShapeFill.m */,
-				1CCA5FDF7C65573AE79C4F072417CFDC /* LAShapeGroup.h */,
-				897D5AC8BD2547BA2A4D03AF42836005 /* LAShapeGroup.m */,
-				37EFAB870470294744EFDD557852AEBD /* LAShapeLayerView.h */,
-				EC8D42FA867193B8064E88A63BF9C091 /* LAShapeLayerView.m */,
-				9CB4CA92A985CD1E66A718E42E0FB6CA /* LAShapePath.h */,
-				A1FECC0676FEAB5FCDC447ED9E0181DF /* LAShapePath.m */,
-				AB5853C73807A991004C1B8D27BC4BFF /* LAShapeRectangle.h */,
-				9EAC4E86BAB746F7CBAE399BA7F8E1E3 /* LAShapeRectangle.m */,
-				2D9CFD668AB15AD6B7CFE597BA9790E5 /* LAShapeStroke.h */,
-				E260645911BC3FA38A4A6C68F1EDA67A /* LAShapeStroke.m */,
-				3168398BDCECCBDC1C7E675FD0F865BE /* LAShapeTransform.h */,
-				10F6198D2EFD108D5FF35795FCCB1ECC /* LAShapeTransform.m */,
-				AAC7F844CC30FDAB962E9568A2447E44 /* LAShapeTrimPath.h */,
-				1E93382328AAEDDFF2CCA4D3A9BAEBBF /* LAShapeTrimPath.m */,
-				0C0B2DE0B1673DF052851E6637DF4585 /* UIColor+Expanded.h */,
-				DEEE2366360412C30D658F231D791FE2 /* UIColor+Expanded.m */,
-				6C8E859BED3150A6861E5B8B9776F764 /* PublicHeaders */,
+				A7DF8965603F9BCC1A858825A49A011C /* Info.plist */,
+				3ED39BAEA78A76BB031647F4E01D9689 /* Pods-Lottie-Example-MacOS.modulemap */,
+				BC4C4DE410D328A09496CEFDB2143DD1 /* Pods-Lottie-Example-MacOS-acknowledgements.markdown */,
+				EF3671BEFBC2DE55C261520886C5AFC4 /* Pods-Lottie-Example-MacOS-acknowledgements.plist */,
+				4EB1C51ABEB93789541905240DF926E8 /* Pods-Lottie-Example-MacOS-dummy.m */,
+				62E0D5D410342ABD17CE0F0D9D02C05A /* Pods-Lottie-Example-MacOS-frameworks.sh */,
+				14ADE27E32C54F0871A81FF10F12F0B2 /* Pods-Lottie-Example-MacOS-resources.sh */,
+				906B715060F9EA341552EDB58A78F404 /* Pods-Lottie-Example-MacOS-umbrella.h */,
+				2E7978B0FE4ABEF65AB16645DB333515 /* Pods-Lottie-Example-MacOS.debug.xcconfig */,
+				691E5DA7E296E61F6161698A496BC899 /* Pods-Lottie-Example-MacOS.release.xcconfig */,
 			);
-			path = Classes;
+			name = "Pods-Lottie-Example-MacOS";
+			path = "Target Support Files/Pods-Lottie-Example-MacOS";
 			sourceTree = "<group>";
 		};
-		E6EE98446B568159EE277B68FD442AF0 /* iOS */ = {
+		DE13583AB8F794BBEAF85E3A80DA349C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				616BEB51ECCAD129BDBCB7A956B56CC6 /* Foundation.framework */,
-				7EC994CDC2D681BA26389F78A7E4B325 /* UIKit.framework */,
+				26342C9887425AAD969E2A28B5DBF666 /* iOS */,
+				A548659F165EEAABADBF152D8985886E /* OS X */,
 			);
-			name = iOS;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F522730DFDCBB7AD0E383C75A43C4F1A /* Pods-lottie-ios_Tests */ = {
+		E365717E4DB2854523858350BB6E0F31 /* PublicHeaders */ = {
 			isa = PBXGroup;
 			children = (
-				3238590A7B7BB0162353C0C7C9337903 /* Info.plist */,
-				F7E393464B8276C00839E29FC416F46F /* Pods-lottie-ios_Tests.modulemap */,
-				962AF50D4A08AC872FADF0DDD8957A07 /* Pods-lottie-ios_Tests-acknowledgements.markdown */,
-				4B3B5EF75C30BC14D457EA4F06908209 /* Pods-lottie-ios_Tests-acknowledgements.plist */,
-				7BAE7653294D8E8E8B25E54C834F380F /* Pods-lottie-ios_Tests-dummy.m */,
-				BFEB7178CC0F288E50131F096EEB1DB0 /* Pods-lottie-ios_Tests-frameworks.sh */,
-				2DC01D5F7B5EBC356E0FB20DC94C658C /* Pods-lottie-ios_Tests-resources.sh */,
-				88478EAF17F9D43306DE97A46B4840B3 /* Pods-lottie-ios_Tests-umbrella.h */,
-				51B8B0DC7050B8F135E80D2B7328F6C6 /* Pods-lottie-ios_Tests.debug.xcconfig */,
-				B802BC4FFC10D971CE665063B2863EE0 /* Pods-lottie-ios_Tests.release.xcconfig */,
+				D472A02BCE43AFFAA8ECC4D294DE5B8D /* LAAnimationTransitionController.h */,
+				9D6996FEA90472D5190E82B5BD837AAD /* LAAnimationView.h */,
+				E9D93897CED27201D99C74890A61D2E7 /* LAAnimationView_Compat.h */,
+				52261001EAFC60D9CB90F856BF509706 /* Lottie.h */,
 			);
-			name = "Pods-lottie-ios_Tests";
-			path = "Target Support Files/Pods-lottie-ios_Tests";
+			name = PublicHeaders;
+			path = PublicHeaders;
+			sourceTree = "<group>";
+		};
+		F13189DB0902F98D525915FBB3DAB361 /* lottie-ios */ = {
+			isa = PBXGroup;
+			children = (
+				482DB792FB2C1DF256A1FF81F0877A48 /* lottie-ios */,
+				6AE6986C594A999FC82761A98637F1F4 /* Support Files */,
+			);
+			name = "lottie-ios";
+			path = ../..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		3354009E1B1D7CD3A1CDC1FD1E5013A9 /* Headers */ = {
+		3789888596B9F477052ABFBA23EE9E26 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4828C7D2034A5AE14EE6E2A9B7D7308 /* Pods-Lottie-Example-umbrella.h in Headers */,
+				695E0CCAE6F585FBCDE5F397DA85EC93 /* Pods-lottie-ios_Tests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5A253655146A4C2BE8F203C1A54471E9 /* Headers */ = {
+		3D68CC88C837BDC4C4307C02479C43BA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A6BE1BAB7AB4FA2978288659B75E758 /* CAAnimationGroup+LAAnimatableGroup.h in Headers */,
-				E7008E5C824BFE1C6D1F124434E356A0 /* CGGeometryAdditions.h in Headers */,
-				9F7363B4ADAAD04FE20D236373E54EE2 /* LAAnimatableBoundsValue.h in Headers */,
-				D999C1F7F9B76F2F56FF7167875810D2 /* LAAnimatableColorValue.h in Headers */,
-				2B3647CA7949590221A44ECB1E77EC65 /* LAAnimatableLayer.h in Headers */,
-				6C746D412B060BACD3F4B77752A166CA /* LAAnimatableNumberValue.h in Headers */,
-				D0FE0998C42EDC2D996F7F8D38330421 /* LAAnimatablePointValue.h in Headers */,
-				469C8FD7546F04EC8C367B0CCF1A42FA /* LAAnimatableScaleValue.h in Headers */,
-				2FA05CA82E63B381A93854681F08E578 /* LAAnimatableShapeValue.h in Headers */,
-				EF92220217788D72C083653EA4B4C9FB /* LAAnimatableValue.h in Headers */,
-				808F999DDFCFE0D30712C6DE7F68B316 /* LAAnimationCache.h in Headers */,
-				205A5ED1C033299E05930F2C0937294C /* LAAnimationTransitionController.h in Headers */,
-				F273910A8C243A0C5468B3DCEF9C6EF8 /* LAAnimationView.h in Headers */,
-				4C576DC1865BC6007558B8C6345BFDD5 /* LAAnimationView_Internal.h in Headers */,
-				82E9783337DB0E3ED4B5BE1CAFC4CE47 /* LAComposition.h in Headers */,
-				FD1E62ECB3FDC0883956388A491AAFD4 /* LAEllipseShapeLayer.h in Headers */,
-				212E6DEA4E0E85828E53F37C3B367A4A /* LAGroupLayerView.h in Headers */,
-				0B2B869FDB480627AE6726BD52684A8A /* LAHelpers.h in Headers */,
-				4ACF8D4438D16F5E9E95E415EEC7E48C /* LALayer.h in Headers */,
-				A741080798EBCE18EFA461C1CFFF161C /* LALayerView.h in Headers */,
-				4F22244EFA7B7565BC6A096BD80C9A3D /* LAMask.h in Headers */,
-				697A364D1C98299BD393928A1FB84806 /* LAMaskLayer.h in Headers */,
-				433676A286EA024241A96EDCBC70686A /* LAModels.h in Headers */,
-				1D2B817CA5115901CF103726A02434F6 /* LARectShapeLayer.h in Headers */,
-				56CA53355A772069D4FC3EB310A205A3 /* LAShapeCircle.h in Headers */,
-				5D7C4D12C74F0F1ECDBE05F50FAEB272 /* LAShapeFill.h in Headers */,
-				CD1319B13F16525C1894A8E376AE9FC6 /* LAShapeGroup.h in Headers */,
-				4D705F4EA006C12A0C80A6FC53C1D02B /* LAShapeLayerView.h in Headers */,
-				ADB33AC2154C3AC757446783BC654987 /* LAShapePath.h in Headers */,
-				90FC4103C13001C69C81AB8D6835FF5C /* LAShapeRectangle.h in Headers */,
-				8E264A5FCED81A06DE5DBF25C75E1CCF /* LAShapeStroke.h in Headers */,
-				C02059BCE413DF436A00A81E2E33AC33 /* LAShapeTransform.h in Headers */,
-				4DC605399F393948476050D7B4B965C5 /* LAShapeTrimPath.h in Headers */,
-				A1ED9178DA3479C26C594A0CB6AC19AB /* lottie-ios-umbrella.h in Headers */,
-				7DC9D0AC2955A50EEDB51A932D9E8DC7 /* Lottie.h in Headers */,
-				AD3013FBF2821668C85AAC30333C85A2 /* UIColor+Expanded.h in Headers */,
+				6E546A07530D4E0B229B36F2BC7AFC89 /* Pods-Lottie-Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6ED6CFA70C8DF9139AF6194BBCD78CE0 /* Headers */ = {
+		6D387232BA3FD4B5B0712B70F73F734B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C73A20A15B7007E0E080D7F2024D1E5 /* Pods-lottie-ios_Tests-umbrella.h in Headers */,
+				E9EC2EEDB9D1F159DF490A5FE1BF26AE /* Pods-Lottie-Example-MacOS-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F50B7D0C7005623296B9E211B96F8EE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B4BA30857E1208B23DE23458CBBDA6F /* CAAnimationGroup+LAAnimatableGroup.h in Headers */,
+				B40CDE0CDDFB42EEBD0B9EC4D7BD3DAC /* CADisplayLink.h in Headers */,
+				6A2D62F341445F165D41C3AFD36CC6BE /* CALayer+Compat.h in Headers */,
+				C18CF98FF70FF9A3AA0176CC9828FCA5 /* CGGeometryAdditions.h in Headers */,
+				D533FAA1FCADD0D8720646EA565A158B /* LAAnimatableBoundsValue.h in Headers */,
+				B2167362579A81312BD36EE1A9F512C3 /* LAAnimatableColorValue.h in Headers */,
+				EAAE79FBE06117F38602AAED294B8F4F /* LAAnimatableLayer.h in Headers */,
+				14A2143A62CE0E49B37DF91E9BF0A5D8 /* LAAnimatableNumberValue.h in Headers */,
+				1F5F6906C5F06859201D8DC205258A9E /* LAAnimatablePointValue.h in Headers */,
+				A841736F91767D6A73C6061DAE99A017 /* LAAnimatableScaleValue.h in Headers */,
+				7853E06B1245D9674B7E9981BAF81C26 /* LAAnimatableShapeValue.h in Headers */,
+				996E29770EB6AE15E2D90BE2F792EBFF /* LAAnimatableValue.h in Headers */,
+				17BC02DCEA347D064F43F42456D79B41 /* LAAnimationCache.h in Headers */,
+				1A8DDED27875D75BE5EBE2462CAE5944 /* LAAnimationTransitionController.h in Headers */,
+				4C33608C0429FD80134C64AF5989AA1C /* LAAnimationView.h in Headers */,
+				91BB1910FFAED4BFCA7354ACCDA7DF15 /* LAAnimationView_Compat.h in Headers */,
+				9DF81CA4B372C14CC4F48392AF6563ED /* LAAnimationView_Internal.h in Headers */,
+				61D81DCADCC07569E046AB22ED3B226C /* LAComposition.h in Headers */,
+				C5F8F35D23221887C19F5265C9C47D70 /* LAEllipseShapeLayer.h in Headers */,
+				534AF43ECBFBB4CCBF65F9173652E19B /* LAGroupLayerView.h in Headers */,
+				FD40D7585B8D297306469CA28E055AAB /* LAHelpers.h in Headers */,
+				2FF63FE0A344562D194B5B2AA8D1699C /* LALayer.h in Headers */,
+				519E715BCC2CC3171AC0ACB7BAD25A52 /* LALayerView.h in Headers */,
+				AE72BCA9F2C4C281D2AF91D9508560BD /* LAMask.h in Headers */,
+				64D095B955394A9DCABA0BB338DABFC4 /* LAMaskLayer.h in Headers */,
+				9B6CEEA4245BB72DB2B55047B17DF0F8 /* LAModels.h in Headers */,
+				9B6860D8A382975806394BA2994E7F3E /* LAPlatformCompat.h in Headers */,
+				02545E2F6F37C9F00668866976133DAB /* LARectShapeLayer.h in Headers */,
+				9A0EACA5274EFE20D775F6ED570E6384 /* LAShapeCircle.h in Headers */,
+				C61817FDC77BD6EF22B45F0C75CEE1D7 /* LAShapeFill.h in Headers */,
+				498F675602A7489A1E5DF8ADD939966F /* LAShapeGroup.h in Headers */,
+				A606E7F4F94DB70577116CB661651065 /* LAShapeLayerView.h in Headers */,
+				9DE79EAE9763DE05CA50112928C99A2D /* LAShapePath.h in Headers */,
+				0F47A120DEFEB7E9A68A6F737AA56B9C /* LAShapeRectangle.h in Headers */,
+				E57657E9977D0C5F02042320AC67B7E0 /* LAShapeStroke.h in Headers */,
+				2AB39793190F7EA1E812C56E2A32A669 /* LAShapeTransform.h in Headers */,
+				69BF8D967FFC55CECA6F48E6654BE98D /* LAShapeTrimPath.h in Headers */,
+				13E3EA46BFDEE92AD7783A4EDF09BD43 /* lottie-ios-OSX-umbrella.h in Headers */,
+				34D8B8958139C90E12DC858EFEF3DB0A /* Lottie.h in Headers */,
+				8E4456D9AEEACB889B115D1C4F7C4814 /* NSValue+Compat.h in Headers */,
+				0EAF2FEEF852DC9C0396FAD04A22CE6F /* UIBezierPath.h in Headers */,
+				5F56204A907EBDCD91C9DFBF394E9431 /* UIColor+Expanded.h in Headers */,
+				5035DDB29247100BD2E42525639FE1F5 /* UIColor.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7D82184E7C446E83BEC1345557C61A5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D01F81BF32DD8A142446F9DE6C6B3077 /* CAAnimationGroup+LAAnimatableGroup.h in Headers */,
+				3B37FDE53EFAF5F786B5118EF1477C65 /* CADisplayLink.h in Headers */,
+				F577303925D6D5E45D22F65C044F1EFC /* CALayer+Compat.h in Headers */,
+				460D50B1042E376F3A5397E915583244 /* CGGeometryAdditions.h in Headers */,
+				7D1531553AA89E9CC94EEC7F501CD776 /* LAAnimatableBoundsValue.h in Headers */,
+				A371EBF6B626124786AEE54C05F1E1F0 /* LAAnimatableColorValue.h in Headers */,
+				ED422F0A358E96D224813DDB82FBC15A /* LAAnimatableLayer.h in Headers */,
+				1D1BFE3375DE9776BA1B2E04CDA7B8CD /* LAAnimatableNumberValue.h in Headers */,
+				3256AC7CF60340E592DCC1C1E5D4D4AA /* LAAnimatablePointValue.h in Headers */,
+				9781F0D9202D3A1C0F27D07D29A17A97 /* LAAnimatableScaleValue.h in Headers */,
+				C287C27189A86CCAF27BE06889DF79E8 /* LAAnimatableShapeValue.h in Headers */,
+				00A925928D6055E43C8C32A255C27F71 /* LAAnimatableValue.h in Headers */,
+				EAEBA1A31881FE6BAC7428111CA85149 /* LAAnimationCache.h in Headers */,
+				C46DD16EEE08DCD5C56578E8665BE212 /* LAAnimationTransitionController.h in Headers */,
+				5C696C798CB839E4C8E55AD1B3509CFB /* LAAnimationView.h in Headers */,
+				5F720B7DF92E483239D975BBE29E3BEB /* LAAnimationView_Compat.h in Headers */,
+				69DBD28ABB74A49A1D02DAD98D2FFCFB /* LAAnimationView_Internal.h in Headers */,
+				66F660E4862504D2D58EA326D189B685 /* LAComposition.h in Headers */,
+				98A4A4EFBAC643F8F45B149EBAE9332C /* LAEllipseShapeLayer.h in Headers */,
+				6818B258E3DB5289FF14AE27D0A0369C /* LAGroupLayerView.h in Headers */,
+				024CCD2038FADCB0FA1AE864DBAE4292 /* LAHelpers.h in Headers */,
+				1A2C0BE880C6C26BF5A3930F2C5944F0 /* LALayer.h in Headers */,
+				4C29D833A3D574AAE6D9D430FCD5315A /* LALayerView.h in Headers */,
+				C8BBCFD0EE112B9731A5B5826032F757 /* LAMask.h in Headers */,
+				0195241BA273C0F113978563739634A2 /* LAMaskLayer.h in Headers */,
+				96B591C65BA1057928FD13B41F7CF860 /* LAModels.h in Headers */,
+				10903E97980CA1E2E4F25C4D84C9D8B3 /* LAPlatformCompat.h in Headers */,
+				6ABFA01C27BF5E3262AA2FD08EAA5E4A /* LARectShapeLayer.h in Headers */,
+				95D02816C8F9A026360169923CED114D /* LAShapeCircle.h in Headers */,
+				C3B7D2E745193CB6EF2C08B2D06E7CAC /* LAShapeFill.h in Headers */,
+				E6664D49454DEFEA0783ED54D0283F01 /* LAShapeGroup.h in Headers */,
+				7324B1E8126073A564A8902056781EF1 /* LAShapeLayerView.h in Headers */,
+				0523E22F23A4E990CEF9A0B22056A0FC /* LAShapePath.h in Headers */,
+				84C23CBD62FA989F35EC0D5171465D11 /* LAShapeRectangle.h in Headers */,
+				A09256CABD4990BCD0B6B8A121D3347E /* LAShapeStroke.h in Headers */,
+				8682CF6AA8BC40BEC26B5E63D4D29FB3 /* LAShapeTransform.h in Headers */,
+				4C62210B2B052BE54DCE036C4F0E4162 /* LAShapeTrimPath.h in Headers */,
+				DBB15F6C50CFDC2E3C950367815AAE15 /* lottie-ios-iOS-umbrella.h in Headers */,
+				28F6A4769188334DA98AD1C80DABECED /* Lottie.h in Headers */,
+				5E22489FE0C514A8E165511960207FA3 /* NSValue+Compat.h in Headers */,
+				20F82EB6F6DE8E43C0344406A293A2A2 /* UIBezierPath.h in Headers */,
+				976270E2D39BD6FB429440E0EC673878 /* UIColor+Expanded.h in Headers */,
+				11F3BE42CC4A1DD7F00945E52DA343D1 /* UIColor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0CCCA2C701A1BAC5A45DA0C5744EC081 /* Pods-lottie-ios_Tests */ = {
+		05C48E477E92D5C02E6099FD28E535C8 /* lottie-ios-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A3D9549948377672604367AF59FD51FF /* Build configuration list for PBXNativeTarget "Pods-lottie-ios_Tests" */;
+			buildConfigurationList = 6C614B6592A6A65C565FD5C1B9D94C9E /* Build configuration list for PBXNativeTarget "lottie-ios-iOS" */;
 			buildPhases = (
-				AF96CB04223CD0AC8AACDC62866F36C4 /* Sources */,
-				F8099F677EE59325056C9258B8A08AFA /* Frameworks */,
-				6ED6CFA70C8DF9139AF6194BBCD78CE0 /* Headers */,
+				AEAAE8C1485451ECC05490019F70830E /* Sources */,
+				6EEF5B566DC7D7E0179AD5229FDDA4FE /* Frameworks */,
+				D7D82184E7C446E83BEC1345557C61A5 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "lottie-ios-iOS";
+			productName = "lottie-ios-iOS";
+			productReference = 8A2B53D7CFE2D3FE84ABAC705C3CF685 /* Lottie.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		2095D67C1D81E0F861D9AC87B89BF033 /* Pods-Lottie-Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C987B5E55958C3747F5AE7FFBC8C7287 /* Build configuration list for PBXNativeTarget "Pods-Lottie-Example" */;
+			buildPhases = (
+				5B8EC4292EBA4DADB76AD54C9968DB49 /* Sources */,
+				35238516DA8B4E1DE968CC94C1A4BD2C /* Frameworks */,
+				3D68CC88C837BDC4C4307C02479C43BA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AD2FBD63A30D0AC75A11104406DB3C3C /* PBXTargetDependency */,
+			);
+			name = "Pods-Lottie-Example";
+			productName = "Pods-Lottie-Example";
+			productReference = 38B1EFB75C34BAD5A5CA0B1864428B42 /* Pods_Lottie_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4C337DE3217726D808920EB421756F9A /* Pods-Lottie-Example-MacOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E98FEEC9B59E72A12C3ABC5B058F4108 /* Build configuration list for PBXNativeTarget "Pods-Lottie-Example-MacOS" */;
+			buildPhases = (
+				7EF0A56B7F1C81CBD6014D75342B084B /* Sources */,
+				1075D2ED1548A02B2E1ED8F45B7B1A28 /* Frameworks */,
+				6D387232BA3FD4B5B0712B70F73F734B /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0C6AFC2DFAC60CAD0603A91B0D2D9372 /* PBXTargetDependency */,
+			);
+			name = "Pods-Lottie-Example-MacOS";
+			productName = "Pods-Lottie-Example-MacOS";
+			productReference = A8B7943757B6273E76BA0133FF4C7DCD /* Pods_Lottie_Example_MacOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		83ADD99A263B92A7CBD14D1B3DBE0C7B /* Pods-lottie-ios_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70E33968FC6B7C18F92ECB73BB882640 /* Build configuration list for PBXNativeTarget "Pods-lottie-ios_Tests" */;
+			buildPhases = (
+				2D9FCDC01EDAD6CF532E19DE48A7A879 /* Sources */,
+				9400EE0ECE003B3ACEB89B6D5B7AB442 /* Frameworks */,
+				3789888596B9F477052ABFBA23EE9E26 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -505,42 +831,24 @@
 			);
 			name = "Pods-lottie-ios_Tests";
 			productName = "Pods-lottie-ios_Tests";
-			productReference = 68A56E0FC68E08FCDABB5196B8B15F57 /* Pods_lottie_ios_Tests.framework */;
+			productReference = 0A96091EB00499090690B5654D9CCF82 /* Pods_lottie_ios_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		2A9EDD5C4151360AA6A7D3514EC77EEE /* lottie-ios */ = {
+		DF4D1F5D01DC53575B55E9BF553D920F /* lottie-ios-OSX */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E5ACF2400BF4E0B3D3BAD9C4F02032A3 /* Build configuration list for PBXNativeTarget "lottie-ios" */;
+			buildConfigurationList = C3782E487CF2AEE3CD3ED0EC825DC75F /* Build configuration list for PBXNativeTarget "lottie-ios-OSX" */;
 			buildPhases = (
-				76F1389092410A884539F058ED409711 /* Sources */,
-				8054C11AD6B6B0E8C9304CE852F4ECC3 /* Frameworks */,
-				5A253655146A4C2BE8F203C1A54471E9 /* Headers */,
+				ED072D29753AFCF70FB03A7726413485 /* Sources */,
+				7B5F29BA59D19C79F757EB6EE29DD1F9 /* Frameworks */,
+				6F50B7D0C7005623296B9E211B96F8EE /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "lottie-ios";
-			productName = "lottie-ios";
-			productReference = 8C084E31ED23F75F9BD506F2FB789544 /* Lottie.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		8225FD7B70A725753535A156BAC7CEAF /* Pods-Lottie-Example */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 07F1CEA341EB07B84822B8DD802A9416 /* Build configuration list for PBXNativeTarget "Pods-Lottie-Example" */;
-			buildPhases = (
-				8499804243773F913C2DF1CD4923994A /* Sources */,
-				0FE6AB6DABB33A683C2BA089E5FD59E7 /* Frameworks */,
-				3354009E1B1D7CD3A1CDC1FD1E5013A9 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5D609AFD82D218E04C48845AF996EBED /* PBXTargetDependency */,
-			);
-			name = "Pods-Lottie-Example";
-			productName = "Pods-Lottie-Example";
-			productReference = 23F6708733ECBC2C3A04347EBA5837B0 /* Pods_Lottie_Example.framework */;
+			name = "lottie-ios-OSX";
+			productName = "lottie-ios-OSX";
+			productReference = 882BD1ABCEEB35BB434E09E1341BED91 /* Lottie.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -560,87 +868,184 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 4EC83BD036CCD249C69BB479D005E17C /* Products */;
+			productRefGroup = D2431C38CE75E5F9371ACA56742FA10D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2A9EDD5C4151360AA6A7D3514EC77EEE /* lottie-ios */,
-				8225FD7B70A725753535A156BAC7CEAF /* Pods-Lottie-Example */,
-				0CCCA2C701A1BAC5A45DA0C5744EC081 /* Pods-lottie-ios_Tests */,
+				05C48E477E92D5C02E6099FD28E535C8 /* lottie-ios-iOS */,
+				DF4D1F5D01DC53575B55E9BF553D920F /* lottie-ios-OSX */,
+				2095D67C1D81E0F861D9AC87B89BF033 /* Pods-Lottie-Example */,
+				4C337DE3217726D808920EB421756F9A /* Pods-Lottie-Example-MacOS */,
+				83ADD99A263B92A7CBD14D1B3DBE0C7B /* Pods-lottie-ios_Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		76F1389092410A884539F058ED409711 /* Sources */ = {
+		2D9FCDC01EDAD6CF532E19DE48A7A879 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7F558A615DA50EFAFD16ED775AF8EDC /* CAAnimationGroup+LAAnimatableGroup.m in Sources */,
-				328849E7E74157E13F2FF8DBFB74EE43 /* CGGeometryAdditions.m in Sources */,
-				DED7979FC0F2906A0C9F8FECF1592279 /* LAAnimatableBoundsValue.m in Sources */,
-				1FBFF7D43427EBBF3119AA2E7FD377CB /* LAAnimatableColorValue.m in Sources */,
-				EA2D630A63A8CFFD87F81D151663874C /* LAAnimatableLayer.m in Sources */,
-				1F70AED482FD14CF45D64833A9F6552C /* LAAnimatableNumberValue.m in Sources */,
-				4E581BAF7E5CBB6D12EF8343510FBED3 /* LAAnimatablePointValue.m in Sources */,
-				029326480AAADC6238FF80D6606F188A /* LAAnimatableScaleValue.m in Sources */,
-				502F8DEA773CDA6B3BC66277BF1C6179 /* LAAnimatableShapeValue.m in Sources */,
-				DEF0E6B6AE9797F0CD494B3F4A190611 /* LAAnimationCache.m in Sources */,
-				A203DA64F8CCC957713EC0EA8A30B06F /* LAAnimationTransitionController.m in Sources */,
-				7BFB54D1FD87C1B32258062CB65B84AA /* LAAnimationView.m in Sources */,
-				CB3F789E2F7FB1AC27A6D33180DBAD33 /* LAComposition.m in Sources */,
-				A28652D8E7C97B4E7A6B39C8A477CB27 /* LAEllipseShapeLayer.m in Sources */,
-				0A4934CC134B365C77CE157DE2BFBF0E /* LAGroupLayerView.m in Sources */,
-				F3B963434B6C1E6BAB070CC92FAB5F98 /* LALayer.m in Sources */,
-				E9492B09BF07C0BAA3663FC8CB7F68E5 /* LALayerView.m in Sources */,
-				162BDD1CEB200F9AF6A6D7BE43A6C11E /* LAMask.m in Sources */,
-				0CF1282ED5B677A57665A9D79DB4DF9D /* LAMaskLayer.m in Sources */,
-				58BE24E119A65FF99D020CA00BECE0B1 /* LARectShapeLayer.m in Sources */,
-				AA0D50C1AF1C66E20436205EC2F725CF /* LAShapeCircle.m in Sources */,
-				CF6FAED84507C783FF3269461DB93549 /* LAShapeFill.m in Sources */,
-				061D8CA2D691EC3CB227CE570787CA79 /* LAShapeGroup.m in Sources */,
-				1BA053677049F9998B340CCEE134CC31 /* LAShapeLayerView.m in Sources */,
-				2F97A2653C6DF77CA5F88440E702FBBE /* LAShapePath.m in Sources */,
-				0AF45E92155E87E2C846E498CA6926ED /* LAShapeRectangle.m in Sources */,
-				1F187C46E0C081028EF12AFFC0A5103C /* LAShapeStroke.m in Sources */,
-				BAC9CDC1F1FA9A605D25BADF13FAFF7B /* LAShapeTransform.m in Sources */,
-				645F09F8BB1EF39DB07B0E16DDBDE873 /* LAShapeTrimPath.m in Sources */,
-				55B9130CC859CBC9F8FA755FB55C56C5 /* lottie-ios-dummy.m in Sources */,
-				E0B563A7C71DACBCC4565C198B27F86D /* UIColor+Expanded.m in Sources */,
+				9E52F4F7D4588D34FC4EAAF7B00E2724 /* Pods-lottie-ios_Tests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8499804243773F913C2DF1CD4923994A /* Sources */ = {
+		5B8EC4292EBA4DADB76AD54C9968DB49 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6283DD35B95E10C14050DF8C4E99A4CB /* Pods-Lottie-Example-dummy.m in Sources */,
+				B3CFE17627AD96132E88A45FBD85C4E4 /* Pods-Lottie-Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AF96CB04223CD0AC8AACDC62866F36C4 /* Sources */ = {
+		7EF0A56B7F1C81CBD6014D75342B084B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74C08C0A050E7AADDBAFFE14E6699A05 /* Pods-lottie-ios_Tests-dummy.m in Sources */,
+				743F2EE40EED9AFC90EC9B25CC96DEA0 /* Pods-Lottie-Example-MacOS-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AEAAE8C1485451ECC05490019F70830E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25603E5AF4994E286029429B4E6980DD /* CAAnimationGroup+LAAnimatableGroup.m in Sources */,
+				7A1622B4EB96752F23AC477C9E53E6FC /* CADisplayLink.m in Sources */,
+				9BF582DDD29D52C4556C827FF3D4EBC6 /* CALayer+Compat.m in Sources */,
+				7B8A0A2C0FDFAC1566035A68377C5A15 /* CGGeometryAdditions.m in Sources */,
+				5EF3F37C35243A3CA444557CC74DA8D7 /* LAAnimatableBoundsValue.m in Sources */,
+				E7B3A01402ED6D125258032A01A07882 /* LAAnimatableColorValue.m in Sources */,
+				7364DF0D48A6E0A5D8BC8D19FD7C0184 /* LAAnimatableLayer.m in Sources */,
+				E86C86F73BC730215BF32546403F7DEE /* LAAnimatableNumberValue.m in Sources */,
+				F88681F7B86A898FB57B6EC9C562C266 /* LAAnimatablePointValue.m in Sources */,
+				EC659D2D8F105BEBD6181A18AD390B6D /* LAAnimatableScaleValue.m in Sources */,
+				9CD4F251778605216B4B9E3CE2FAF13D /* LAAnimatableShapeValue.m in Sources */,
+				113F3F232DBF9618FDAE36E6F52D34B7 /* LAAnimationCache.m in Sources */,
+				187789225E635DC13432112CA0D037EE /* LAAnimationTransitionController.m in Sources */,
+				750F81ED62446D1CAB4D51AC82E33CD2 /* LAAnimationView.m in Sources */,
+				1CB67028DDE579663B04CEBC59E29E8B /* LAComposition.m in Sources */,
+				1A987AB7515757F549FC486AE0C0E32F /* LAEllipseShapeLayer.m in Sources */,
+				82BD8C7B71A74D529E9A49A6CCEF854F /* LAGroupLayerView.m in Sources */,
+				C1A8F54AFC9F46F238A13FBDA4CC915E /* LALayer.m in Sources */,
+				5096A3ADBA44CF6F98BA8201D53A3C2B /* LALayerView.m in Sources */,
+				C089E72FBF3005BCA10AC6E24E740701 /* LAMask.m in Sources */,
+				0425B37A59700AE9930DA97FCB40AEE9 /* LAMaskLayer.m in Sources */,
+				4150BDB43DBE730F8FFD2E77046723EC /* LARectShapeLayer.m in Sources */,
+				F57B3EAB2BD69D6E66F261718D10FBEE /* LAShapeCircle.m in Sources */,
+				EE12ED21C0878638B746B623801A657E /* LAShapeFill.m in Sources */,
+				BA0FE612718C7F44679024E93A67C969 /* LAShapeGroup.m in Sources */,
+				728B3E0C21471D2A1AC547585ACA01E2 /* LAShapeLayerView.m in Sources */,
+				A38F49864C3A60DCE3EBDF9A07E779C9 /* LAShapePath.m in Sources */,
+				F56D173D068AC20AE2FFB18021E51371 /* LAShapeRectangle.m in Sources */,
+				4D7FC0602A9BB89E8C07FE3BDF04E52F /* LAShapeStroke.m in Sources */,
+				3A438D6CBC5862925FEBCAAA046BC0D4 /* LAShapeTransform.m in Sources */,
+				DB1FBA3AFD439B4A6944453681AF4C08 /* LAShapeTrimPath.m in Sources */,
+				140F0F5D7ADDCBD6455113B8108002E5 /* lottie-ios-iOS-dummy.m in Sources */,
+				08A16D83BEAC85D9A0A98718297500B4 /* NSValue+Compat.m in Sources */,
+				944960A27D9DD38E3C5D16245FD0E40C /* UIBezierPath.m in Sources */,
+				C48AED9F7375F11616CE49703F2B18B7 /* UIColor+Expanded.m in Sources */,
+				57110107A9975DC0F3B2D5793298DF1F /* UIColor.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED072D29753AFCF70FB03A7726413485 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				252D8834D7C8DF6351815843284AD302 /* CAAnimationGroup+LAAnimatableGroup.m in Sources */,
+				45A543ACCF50AF12ACBC4038BEC545C5 /* CADisplayLink.m in Sources */,
+				6121AA8DB00BD883320CBB3030A24D35 /* CALayer+Compat.m in Sources */,
+				75FA085770CBED209E352EB35F9E844C /* CGGeometryAdditions.m in Sources */,
+				3C0E8DB08385F6E98CEB66C870CAA21A /* LAAnimatableBoundsValue.m in Sources */,
+				FC723022FAA4BDE3DDE41852430FB775 /* LAAnimatableColorValue.m in Sources */,
+				E30F0801C5DACEE2BC835E590C967A1F /* LAAnimatableLayer.m in Sources */,
+				F946DBDC74C4C2764660CD5C37AF87FB /* LAAnimatableNumberValue.m in Sources */,
+				569876359FD1E2274392B61185B9AD1C /* LAAnimatablePointValue.m in Sources */,
+				6DAE4C1769B861ADB750426DEBE9D6F2 /* LAAnimatableScaleValue.m in Sources */,
+				83BD096F12141F9D4BB9575EF918A04A /* LAAnimatableShapeValue.m in Sources */,
+				3C53BD239ED5223881EB4C3CF9252A1C /* LAAnimationCache.m in Sources */,
+				3C4F35E8E69E15FECBFF0AFC70062BB0 /* LAAnimationTransitionController.m in Sources */,
+				D6D8EAD297B6C115A19E8251F00F9E7D /* LAAnimationView.m in Sources */,
+				6C17ECD85959810B21FCEF4F78FA2643 /* LAComposition.m in Sources */,
+				B565AA421C11BF16A273AA27F4ED8237 /* LAEllipseShapeLayer.m in Sources */,
+				AA2158FD288228A01611FC4F0135F3DF /* LAGroupLayerView.m in Sources */,
+				3A30E971159FEF8ED69AA78FD3CA45A3 /* LALayer.m in Sources */,
+				7835F96E54413047E2A20C5808DF9A8E /* LALayerView.m in Sources */,
+				32AF9707720B3585B56A8337C9A21E41 /* LAMask.m in Sources */,
+				696BDBCE159A25C73F04465AB29186AF /* LAMaskLayer.m in Sources */,
+				5BC98275A642523238FEBBFC78B00834 /* LARectShapeLayer.m in Sources */,
+				09EAD205EB6052485F7F9394E2806DCC /* LAShapeCircle.m in Sources */,
+				2BF9A551EFCA34C91E27358CAED96206 /* LAShapeFill.m in Sources */,
+				54A10C4FF51980AE914A169404A5C60C /* LAShapeGroup.m in Sources */,
+				E2AF5D9B24315449F368CEA49CC3A767 /* LAShapeLayerView.m in Sources */,
+				DE7561B4787AA37B40CFA87ACF925E66 /* LAShapePath.m in Sources */,
+				7116A3A0D5A58E139F5195ED7B031866 /* LAShapeRectangle.m in Sources */,
+				81E3B0D93F5FF6147C1C5EE789FD7536 /* LAShapeStroke.m in Sources */,
+				CAE9757CEA166B6B09F91E90A0D750ED /* LAShapeTransform.m in Sources */,
+				8267EC70394C0A17F093F8E38A45E9B0 /* LAShapeTrimPath.m in Sources */,
+				79A1C71B78351D0AC84677DA917FF268 /* lottie-ios-OSX-dummy.m in Sources */,
+				EA95283A17BC694A59592BBF83F801AE /* NSValue+Compat.m in Sources */,
+				46B2B4E99B5149934CCC55E7CFCFC3AC /* UIBezierPath.m in Sources */,
+				39DE9593C6FA16D84C8E034C05F2E719 /* UIColor+Expanded.m in Sources */,
+				A5498F431E46CD29CB2BFB2EE7F9A19F /* UIColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5D609AFD82D218E04C48845AF996EBED /* PBXTargetDependency */ = {
+		0C6AFC2DFAC60CAD0603A91B0D2D9372 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "lottie-ios";
-			target = 2A9EDD5C4151360AA6A7D3514EC77EEE /* lottie-ios */;
-			targetProxy = 898CE07CC6A0E06A99F29D556B837DD9 /* PBXContainerItemProxy */;
+			name = "lottie-ios-OSX";
+			target = DF4D1F5D01DC53575B55E9BF553D920F /* lottie-ios-OSX */;
+			targetProxy = 34EEF95B8289340A35BC99154B25CCE9 /* PBXContainerItemProxy */;
+		};
+		AD2FBD63A30D0AC75A11104406DB3C3C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "lottie-ios-iOS";
+			target = 05C48E477E92D5C02E6099FD28E535C8 /* lottie-ios-iOS */;
+			targetProxy = 68E1DE604219B922CE07CE2003EA0EA3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		4D8D8EE1111CC96B9E875C942913F3D1 /* Release */ = {
+		0D019E06BAFF6F4DEFC11DA707355D31 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 862D27A5FB1217BE2C4202A609CC9351 /* lottie-ios.xcconfig */;
+			baseConfigurationReference = 283CCF83DE08CC09D1A75FFDC1E80AC2 /* lottie-ios-OSX.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/lottie-ios-OSX/lottie-ios-OSX-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/lottie-ios-OSX/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/lottie-ios-OSX/lottie-ios-OSX.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = Lottie;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		2DD448CED603766120B95E7F2715AF05 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2245129E598EB9DC78D8E5E981507C52 /* lottie-ios-iOS.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -653,12 +1058,12 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/lottie-ios/lottie-ios-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/lottie-ios/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/lottie-ios-iOS/lottie-ios-iOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/lottie-ios-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/lottie-ios/lottie-ios.modulemap";
+				MODULEMAP_FILE = "Target Support Files/lottie-ios-iOS/lottie-ios-iOS.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = Lottie;
 				SDKROOT = iphoneos;
@@ -669,48 +1074,15 @@
 			};
 			name = Release;
 		};
-		53DFE429910E22AE22EB176C161D2A91 /* Release */ = {
+		2EC8237384A4127C2AD221D0E355DF0D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4EF886C2B34BA58755AE202D28639CA /* Pods-Lottie-Example.release.xcconfig */;
+			baseConfigurationReference = 283CCF83DE08CC09D1A75FFDC1E80AC2 /* lottie-ios-OSX.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Lottie-Example/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Lottie-Example/Pods-Lottie-Example.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Lottie_Example;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		85C835A183054EF74ADDAB9FAAE29EA5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 862D27A5FB1217BE2C4202A609CC9351 /* lottie-ios.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
@@ -718,24 +1090,24 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/lottie-ios/lottie-ios-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/lottie-ios/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/lottie-ios-OSX/lottie-ios-OSX-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/lottie-ios-OSX/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/lottie-ios/lottie-ios.modulemap";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/lottie-ios-OSX/lottie-ios-OSX.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = Lottie;
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		8DED8AD26D381A6ACFF202E5217EC498 /* Release */ = {
+		32785CED8F165332830702913AE5F655 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -768,6 +1140,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
@@ -775,15 +1148,118 @@
 			};
 			name = Release;
 		};
-		8F647C969757D8DAD47B073CF5432639 /* Release */ = {
+		3F0D93F269A375B707839F7A63782239 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B802BC4FFC10D971CE665063B2863EE0 /* Pods-lottie-ios_Tests.release.xcconfig */;
+			baseConfigurationReference = C9A0BB696DAB4D23402E4F92E8A879B0 /* Pods-Lottie-Example.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Lottie-Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Lottie-Example/Pods-Lottie-Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Lottie_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		459B48F6F5A532D166BB404775044A50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 691E5DA7E296E61F6161698A496BC899 /* Pods-Lottie-Example-MacOS.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Lottie-Example-MacOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/Pods-Lottie-Example-MacOS/Pods-Lottie-Example-MacOS.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Lottie_Example_MacOS;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4B7EEDBAC539393523B997DD73C3A5C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2245129E598EB9DC78D8E5E981507C52 /* lottie-ios-iOS.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/lottie-ios-iOS/lottie-ios-iOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/lottie-ios-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/lottie-ios-iOS/lottie-ios-iOS.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = Lottie;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		68D57A1C80CE60FD73A64DA126BCBCC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D01C3D077402D16057DAEA57E91EFD7D /* Pods-lottie-ios_Tests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -796,7 +1272,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-lottie-ios_Tests/Pods-lottie-ios_Tests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -808,9 +1284,9 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
-		9E1E4E48AF2EAB23169E611BF694090A /* Debug */ = {
+		7343155173797CF1E365D82338A7368C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -847,6 +1323,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -854,15 +1331,15 @@
 			};
 			name = Debug;
 		};
-		C2886C726C9694F8B7C51AB1F95E0021 /* Debug */ = {
+		960615A6B5F8AF503B092AB163F6AC5B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 51B8B0DC7050B8F135E80D2B7328F6C6 /* Pods-lottie-ios_Tests.debug.xcconfig */;
+			baseConfigurationReference = 066BD868B309BB71008F48B50699E933 /* Pods-lottie-ios_Tests.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -875,7 +1352,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-lottie-ios_Tests/Pods-lottie-ios_Tests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -887,17 +1364,54 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
+			name = Release;
+		};
+		AF081F3B005FE70462A77ABD87AE2AED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E7978B0FE4ABEF65AB16645DB333515 /* Pods-Lottie-Example-MacOS.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Lottie-Example-MacOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/Pods-Lottie-Example-MacOS/Pods-Lottie-Example-MacOS.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Lottie_Example_MacOS;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
 			name = Debug;
 		};
-		D04EBCF57556B0B59C54CEB14AF5A608 /* Debug */ = {
+		DFF4B3316E8577E9E6CB94DADC29D2E8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B184103ECDADC2C1827FFC74B2A5AF81 /* Pods-Lottie-Example.debug.xcconfig */;
+			baseConfigurationReference = 7421CFD687F17710731C740FFE50CF08 /* Pods-Lottie-Example.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -910,7 +1424,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Lottie-Example/Pods-Lottie-Example.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -922,43 +1436,61 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		07F1CEA341EB07B84822B8DD802A9416 /* Build configuration list for PBXNativeTarget "Pods-Lottie-Example" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D04EBCF57556B0B59C54CEB14AF5A608 /* Debug */,
-				53DFE429910E22AE22EB176C161D2A91 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9E1E4E48AF2EAB23169E611BF694090A /* Debug */,
-				8DED8AD26D381A6ACFF202E5217EC498 /* Release */,
+				7343155173797CF1E365D82338A7368C /* Debug */,
+				32785CED8F165332830702913AE5F655 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A3D9549948377672604367AF59FD51FF /* Build configuration list for PBXNativeTarget "Pods-lottie-ios_Tests" */ = {
+		6C614B6592A6A65C565FD5C1B9D94C9E /* Build configuration list for PBXNativeTarget "lottie-ios-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C2886C726C9694F8B7C51AB1F95E0021 /* Debug */,
-				8F647C969757D8DAD47B073CF5432639 /* Release */,
+				4B7EEDBAC539393523B997DD73C3A5C9 /* Debug */,
+				2DD448CED603766120B95E7F2715AF05 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E5ACF2400BF4E0B3D3BAD9C4F02032A3 /* Build configuration list for PBXNativeTarget "lottie-ios" */ = {
+		70E33968FC6B7C18F92ECB73BB882640 /* Build configuration list for PBXNativeTarget "Pods-lottie-ios_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				85C835A183054EF74ADDAB9FAAE29EA5 /* Debug */,
-				4D8D8EE1111CC96B9E875C942913F3D1 /* Release */,
+				68D57A1C80CE60FD73A64DA126BCBCC3 /* Debug */,
+				960615A6B5F8AF503B092AB163F6AC5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C3782E487CF2AEE3CD3ED0EC825DC75F /* Build configuration list for PBXNativeTarget "lottie-ios-OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EC8237384A4127C2AD221D0E355DF0D /* Debug */,
+				0D019E06BAFF6F4DEFC11DA707355D31 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C987B5E55958C3747F5AE7FFBC8C7287 /* Build configuration list for PBXNativeTarget "Pods-Lottie-Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F0D93F269A375B707839F7A63782239 /* Debug */,
+				DFF4B3316E8577E9E6CB94DADC29D2E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E98FEEC9B59E72A12C3ABC5B058F4108 /* Build configuration list for PBXNativeTarget "Pods-Lottie-Example-MacOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF081F3B005FE70462A77ABD87AE2AED /* Debug */,
+				459B48F6F5A532D166BB404775044A50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
