@@ -1,0 +1,6 @@
+framework module Pods_Lottie_Example_MacOS {
+  umbrella header "Pods-Lottie-Example-MacOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

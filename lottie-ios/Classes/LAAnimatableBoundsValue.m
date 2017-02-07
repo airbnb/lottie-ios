@@ -6,6 +6,7 @@
 //  Copyright © 2016 Brandon Withrow. All rights reserved.
 //
 
+#import "LAPlatformCompat.h"
 #import "LAAnimatableBoundsValue.h"
 
 @interface LAAnimatableBoundsValue ()

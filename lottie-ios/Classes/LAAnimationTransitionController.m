@@ -6,6 +6,8 @@
 //  Copyright © 2017 Brandon Withrow. All rights reserved.
 //
 
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+
 #import "LAAnimationTransitionController.h"
 #import "LAAnimationView.h"
 
@@ -88,6 +90,6 @@
   }];
 }
 
-
-
 @end
+
+#endif

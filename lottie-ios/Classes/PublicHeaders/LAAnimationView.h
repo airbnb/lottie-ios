@@ -6,11 +6,12 @@
 //  Copyright © 2015 Brandon Withrow. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "LAAnimationView_Compat.h"
 
 typedef void (^LAAnimationCompletionBlock)(BOOL animationFinished);
 
-@interface LAAnimationView : UIView
+@interface LAAnimationView : LAView
 
 + (instancetype)animationNamed:(NSString *)animationName;
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON;
@@ -27,7 +28,11 @@ typedef void (^LAAnimationCompletionBlock)(BOOL animationFinished);
 - (void)play;
 - (void)pause;
 
-- (void)addSubview:(UIView *)view
+- (void)addSubview:(LAView *)view
       toLayerNamed:(NSString *)layer;
+
+#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+@property (nonatomic) LAViewContentMode contentMode;
+#endif
 
 @end

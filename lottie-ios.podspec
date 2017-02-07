@@ -23,6 +23,7 @@ For the first time, designers can create and ship beautiful animations without a
   s.source           = { :git => 'https://github.com/airbnb/lottie-ios.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
+  s.osx.deployment_target = '10.10'
 
   s.source_files = 'lottie-ios/Classes/**/*'
   
@@ -31,7 +32,8 @@ For the first time, designers can create and ship beautiful animations without a
   # }
 
   s.public_header_files = 'lottie-ios/Classes/PublicHeaders/*.h'
-  s.frameworks = 'UIKit'
+  s.ios.frameworks = 'UIKit'
+  s.osx.frameworks = ['AppKit', 'CoreVideo']
   s.module_name = 'Lottie'
   s.header_dir = 'Lottie'
 end

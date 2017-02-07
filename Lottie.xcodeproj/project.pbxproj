@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		62CA59BD1E3C173B002D7188 /* Lottie.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59BB1E3C173B002D7188 /* Lottie.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2DBA19324CDD83B5F0F115B8 /* LAAnimationView_Compat.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DBA16351B4FA408937A16CE /* LAAnimationView_Compat.h */; };
+		2DBA1C5A8098705F35AF3C1D /* LAPlatformCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DBA1CAF95F14074593D133F /* LAPlatformCompat.h */; };
+		62CA59BD1E3C173B002D7188 /* Lottie-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59BB1E3C173B002D7188 /* Lottie-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62CA5A051E3C179F002D7188 /* LAAnimationTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59C41E3C179F002D7188 /* LAAnimationTransitionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		62CA5A061E3C179F002D7188 /* LAAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59C51E3C179F002D7188 /* LAAnimationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62CA5A071E3C179F002D7188 /* Lottie.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59C61E3C179F002D7188 /* Lottie.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62CA5A081E3C179F002D7188 /* CAAnimationGroup+LAAnimatableGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59C71E3C179F002D7188 /* CAAnimationGroup+LAAnimatableGroup.h */; };
 		62CA5A091E3C179F002D7188 /* CAAnimationGroup+LAAnimatableGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59C81E3C179F002D7188 /* CAAnimationGroup+LAAnimatableGroup.m */; };
@@ -73,14 +74,92 @@
 		62CA5A431E3C179F002D7188 /* LAShapeTrimPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA5A021E3C179F002D7188 /* LAShapeTrimPath.m */; };
 		62CA5A441E3C179F002D7188 /* UIColor+Expanded.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA5A031E3C179F002D7188 /* UIColor+Expanded.h */; };
 		62CA5A451E3C179F002D7188 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA5A041E3C179F002D7188 /* UIColor+Expanded.m */; };
+		FA1F5A821E42B1D200FF36BF /* CADisplayLink.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1F5A6F1E42B1C400FF36BF /* CADisplayLink.m */; };
+		FA1F5A831E42B1D200FF36BF /* CALayer+Compat.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1F5A711E42B1C400FF36BF /* CALayer+Compat.m */; };
+		FA1F5A841E42B1D200FF36BF /* NSValue+Compat.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1F5A731E42B1C400FF36BF /* NSValue+Compat.m */; };
+		FA1F5A851E42B1D200FF36BF /* UIBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1F5A751E42B1C400FF36BF /* UIBezierPath.m */; };
+		FA1F5A861E42B1D200FF36BF /* UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1F5A771E42B1C400FF36BF /* UIColor.m */; };
+		FA1F5AA01E42B52800FF36BF /* LAAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1F5A9F1E42B52800FF36BF /* LAAnimationView.h */; };
+		FA1F5AA11E42B52800FF36BF /* LAAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1F5A9F1E42B52800FF36BF /* LAAnimationView.h */; };
+		FA1F5AA71E42B54400FF36BF /* CADisplayLink.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1F5A6E1E42B1C400FF36BF /* CADisplayLink.h */; };
+		FA1F5AA81E42B54400FF36BF /* CALayer+Compat.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1F5A701E42B1C400FF36BF /* CALayer+Compat.h */; };
+		FA1F5AA91E42B54400FF36BF /* NSValue+Compat.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1F5A721E42B1C400FF36BF /* NSValue+Compat.h */; };
+		FA1F5AAA1E42B54400FF36BF /* UIBezierPath.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1F5A741E42B1C400FF36BF /* UIBezierPath.h */; };
+		FA1F5AAB1E42B54400FF36BF /* UIColor.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1F5A761E42B1C400FF36BF /* UIColor.h */; };
+		FA1F5AB01E42C11F00FF36BF /* Lottie-macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1F5AAE1E42C11F00FF36BF /* Lottie-macOS.h */; };
+		FAE1F79E1E428CBE002E0974 /* CAAnimationGroup+LAAnimatableGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59C81E3C179F002D7188 /* CAAnimationGroup+LAAnimatableGroup.m */; };
+		FAE1F79F1E428CBE002E0974 /* CGGeometryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59CA1E3C179F002D7188 /* CGGeometryAdditions.m */; };
+		FAE1F7A01E428CBE002E0974 /* LAMaskLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59ED1E3C179F002D7188 /* LAMaskLayer.m */; };
+		FAE1F7A11E428CBE002E0974 /* LAShapeStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59FE1E3C179F002D7188 /* LAShapeStroke.m */; };
+		FAE1F7A21E428CBE002E0974 /* LAShapeTrimPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA5A021E3C179F002D7188 /* LAShapeTrimPath.m */; };
+		FAE1F7A31E428CBE002E0974 /* LAAnimatablePointValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59D41E3C179F002D7188 /* LAAnimatablePointValue.m */; };
+		FAE1F7A41E428CBE002E0974 /* LAEllipseShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59E21E3C179F002D7188 /* LAEllipseShapeLayer.m */; };
+		FAE1F7A51E428CBE002E0974 /* LAAnimatableScaleValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59D61E3C179F002D7188 /* LAAnimatableScaleValue.m */; };
+		FAE1F7A61E428CBE002E0974 /* LARectShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59F01E3C179F002D7188 /* LARectShapeLayer.m */; };
+		FAE1F7A71E428CBE002E0974 /* LAAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59DE1E3C179F002D7188 /* LAAnimationView.m */; };
+		FAE1F7A81E428CBE002E0974 /* LAGroupLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59E41E3C179F002D7188 /* LAGroupLayerView.m */; };
+		FAE1F7A91E428CBE002E0974 /* LAShapeFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59F41E3C179F002D7188 /* LAShapeFill.m */; };
+		FAE1F7AA1E428CBE002E0974 /* LAShapeTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA5A001E3C179F002D7188 /* LAShapeTransform.m */; };
+		FAE1F7AB1E428CBE002E0974 /* LAShapeRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59FC1E3C179F002D7188 /* LAShapeRectangle.m */; };
+		FAE1F7AC1E428CBE002E0974 /* LAAnimatableShapeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59D81E3C179F002D7188 /* LAAnimatableShapeValue.m */; };
+		FAE1F7AD1E428CBE002E0974 /* LAAnimatableColorValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59CE1E3C179F002D7188 /* LAAnimatableColorValue.m */; };
+		FAE1F7AE1E428CBE002E0974 /* LAAnimationCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59DB1E3C179F002D7188 /* LAAnimationCache.m */; };
+		FAE1F7AF1E428CBE002E0974 /* LAShapePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59FA1E3C179F002D7188 /* LAShapePath.m */; };
+		FAE1F7B01E428CBE002E0974 /* LAShapeGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59F61E3C179F002D7188 /* LAShapeGroup.m */; };
+		FAE1F7B11E428CBE002E0974 /* LAAnimatableNumberValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59D21E3C179F002D7188 /* LAAnimatableNumberValue.m */; };
+		FAE1F7B21E428CBE002E0974 /* LAAnimatableBoundsValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59CC1E3C179F002D7188 /* LAAnimatableBoundsValue.m */; };
+		FAE1F7B31E428CBE002E0974 /* LAShapeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59F21E3C179F002D7188 /* LAShapeCircle.m */; };
+		FAE1F7B41E428CBE002E0974 /* LAComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59E01E3C179F002D7188 /* LAComposition.m */; };
+		FAE1F7B51E428CBE002E0974 /* LAAnimatableLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59D01E3C179F002D7188 /* LAAnimatableLayer.m */; };
+		FAE1F7B61E428CBE002E0974 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA5A041E3C179F002D7188 /* UIColor+Expanded.m */; };
+		FAE1F7B71E428CBE002E0974 /* LAShapeLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59F81E3C179F002D7188 /* LAShapeLayerView.m */; };
+		FAE1F7B81E428CBE002E0974 /* LALayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59E91E3C179F002D7188 /* LALayerView.m */; };
+		FAE1F7B91E428CBE002E0974 /* LALayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59E71E3C179F002D7188 /* LALayer.m */; };
+		FAE1F7BA1E428CBE002E0974 /* LAMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59EB1E3C179F002D7188 /* LAMask.m */; };
+		FAE1F7BB1E428CBE002E0974 /* LAAnimationTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA59DC1E3C179F002D7188 /* LAAnimationTransitionController.m */; };
+		FAE1F7BE1E428CBE002E0974 /* LAModels.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59EE1E3C179F002D7188 /* LAModels.h */; };
+		FAE1F7BF1E428CBE002E0974 /* LAEllipseShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59E11E3C179F002D7188 /* LAEllipseShapeLayer.h */; };
+		FAE1F7C01E428CBE002E0974 /* LAHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59E51E3C179F002D7188 /* LAHelpers.h */; };
+		FAE1F7C11E428CBE002E0974 /* LAShapeGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59F51E3C179F002D7188 /* LAShapeGroup.h */; };
+		FAE1F7C31E428CBE002E0974 /* LAAnimationCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59DA1E3C179F002D7188 /* LAAnimationCache.h */; };
+		FAE1F7C41E428CBE002E0974 /* LAShapeLayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59F71E3C179F002D7188 /* LAShapeLayerView.h */; };
+		FAE1F7C51E428CBE002E0974 /* LAAnimatablePointValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59D31E3C179F002D7188 /* LAAnimatablePointValue.h */; };
+		FAE1F7C61E428CBE002E0974 /* LAShapeTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59FF1E3C179F002D7188 /* LAShapeTransform.h */; };
+		FAE1F7C71E428CBE002E0974 /* CAAnimationGroup+LAAnimatableGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59C71E3C179F002D7188 /* CAAnimationGroup+LAAnimatableGroup.h */; };
+		FAE1F7C81E428CBE002E0974 /* LAAnimationView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59DD1E3C179F002D7188 /* LAAnimationView_Internal.h */; };
+		FAE1F7C91E428CBE002E0974 /* LAMask.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59EA1E3C179F002D7188 /* LAMask.h */; };
+		FAE1F7CA1E428CBE002E0974 /* CGGeometryAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59C91E3C179F002D7188 /* CGGeometryAdditions.h */; };
+		FAE1F7CB1E428CBE002E0974 /* LAMaskLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59EC1E3C179F002D7188 /* LAMaskLayer.h */; };
+		FAE1F7CD1E428CBE002E0974 /* LAShapeFill.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59F31E3C179F002D7188 /* LAShapeFill.h */; };
+		FAE1F7CE1E428CBE002E0974 /* LAAnimationTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59C41E3C179F002D7188 /* LAAnimationTransitionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FAE1F7CF1E428CBE002E0974 /* UIColor+Expanded.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA5A031E3C179F002D7188 /* UIColor+Expanded.h */; };
+		FAE1F7D01E428CBE002E0974 /* LAAnimatableColorValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59CD1E3C179F002D7188 /* LAAnimatableColorValue.h */; };
+		FAE1F7D11E428CBE002E0974 /* LAAnimatableNumberValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59D11E3C179F002D7188 /* LAAnimatableNumberValue.h */; };
+		FAE1F7D21E428CBE002E0974 /* LAShapeStroke.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59FD1E3C179F002D7188 /* LAShapeStroke.h */; };
+		FAE1F7D31E428CBE002E0974 /* LAAnimatableBoundsValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59CB1E3C179F002D7188 /* LAAnimatableBoundsValue.h */; };
+		FAE1F7D41E428CBE002E0974 /* LALayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59E61E3C179F002D7188 /* LALayer.h */; };
+		FAE1F7D51E428CBE002E0974 /* LARectShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59EF1E3C179F002D7188 /* LARectShapeLayer.h */; };
+		FAE1F7D61E428CBE002E0974 /* LAAnimatableShapeValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59D71E3C179F002D7188 /* LAAnimatableShapeValue.h */; };
+		FAE1F7D71E428CBE002E0974 /* Lottie.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59C61E3C179F002D7188 /* Lottie.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FAE1F7D81E428CBE002E0974 /* LAShapeTrimPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA5A011E3C179F002D7188 /* LAShapeTrimPath.h */; };
+		FAE1F7D91E428CBE002E0974 /* LALayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59E81E3C179F002D7188 /* LALayerView.h */; };
+		FAE1F7DA1E428CBE002E0974 /* LAAnimatableValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59D91E3C179F002D7188 /* LAAnimatableValue.h */; };
+		FAE1F7DB1E428CBE002E0974 /* LAAnimatableScaleValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59D51E3C179F002D7188 /* LAAnimatableScaleValue.h */; };
+		FAE1F7DC1E428CBE002E0974 /* LAComposition.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59DF1E3C179F002D7188 /* LAComposition.h */; };
+		FAE1F7DD1E428CBE002E0974 /* LAShapeRectangle.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59FB1E3C179F002D7188 /* LAShapeRectangle.h */; };
+		FAE1F7DE1E428CBE002E0974 /* LAAnimatableLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59CF1E3C179F002D7188 /* LAAnimatableLayer.h */; };
+		FAE1F7DF1E428CBE002E0974 /* LAGroupLayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59E31E3C179F002D7188 /* LAGroupLayerView.h */; };
+		FAE1F7E01E428CBE002E0974 /* LAShapePath.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59F91E3C179F002D7188 /* LAShapePath.h */; };
+		FAE1F7E11E428CBE002E0974 /* LAShapeCircle.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59F11E3C179F002D7188 /* LAShapeCircle.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2DBA16351B4FA408937A16CE /* LAAnimationView_Compat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimationView_Compat.h; sourceTree = "<group>"; };
+		2DBA1CAF95F14074593D133F /* LAPlatformCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LAPlatformCompat.h; path = "../lottie-ios/Classes/LAPlatformCompat.h"; sourceTree = "<group>"; };
 		62CA59B81E3C173B002D7188 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		62CA59BB1E3C173B002D7188 /* Lottie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lottie.h; sourceTree = "<group>"; };
+		62CA59BB1E3C173B002D7188 /* Lottie-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lottie-iOS.h"; sourceTree = "<group>"; };
 		62CA59BC1E3C173B002D7188 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62CA59C41E3C179F002D7188 /* LAAnimationTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimationTransitionController.h; sourceTree = "<group>"; };
-		62CA59C51E3C179F002D7188 /* LAAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimationView.h; sourceTree = "<group>"; };
 		62CA59C61E3C179F002D7188 /* Lottie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lottie.h; sourceTree = "<group>"; };
 		62CA59C71E3C179F002D7188 /* CAAnimationGroup+LAAnimatableGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CAAnimationGroup+LAAnimatableGroup.h"; path = "lottie-ios/Classes/CAAnimationGroup+LAAnimatableGroup.h"; sourceTree = SOURCE_ROOT; };
 		62CA59C81E3C179F002D7188 /* CAAnimationGroup+LAAnimatableGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CAAnimationGroup+LAAnimatableGroup.m"; path = "lottie-ios/Classes/CAAnimationGroup+LAAnimatableGroup.m"; sourceTree = SOURCE_ROOT; };
@@ -144,10 +223,31 @@
 		62CA5A021E3C179F002D7188 /* LAShapeTrimPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LAShapeTrimPath.m; path = "lottie-ios/Classes/LAShapeTrimPath.m"; sourceTree = SOURCE_ROOT; };
 		62CA5A031E3C179F002D7188 /* UIColor+Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Expanded.h"; path = "lottie-ios/Classes/UIColor+Expanded.h"; sourceTree = SOURCE_ROOT; };
 		62CA5A041E3C179F002D7188 /* UIColor+Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Expanded.m"; path = "lottie-ios/Classes/UIColor+Expanded.m"; sourceTree = SOURCE_ROOT; };
+		FA1F5A6E1E42B1C400FF36BF /* CADisplayLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CADisplayLink.h; path = "lottie-ios/Classes/CADisplayLink.h"; sourceTree = SOURCE_ROOT; };
+		FA1F5A6F1E42B1C400FF36BF /* CADisplayLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CADisplayLink.m; path = "lottie-ios/Classes/CADisplayLink.m"; sourceTree = SOURCE_ROOT; };
+		FA1F5A701E42B1C400FF36BF /* CALayer+Compat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CALayer+Compat.h"; path = "lottie-ios/Classes/CALayer+Compat.h"; sourceTree = SOURCE_ROOT; };
+		FA1F5A711E42B1C400FF36BF /* CALayer+Compat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CALayer+Compat.m"; path = "lottie-ios/Classes/CALayer+Compat.m"; sourceTree = SOURCE_ROOT; };
+		FA1F5A721E42B1C400FF36BF /* NSValue+Compat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSValue+Compat.h"; path = "lottie-ios/Classes/NSValue+Compat.h"; sourceTree = SOURCE_ROOT; };
+		FA1F5A731E42B1C400FF36BF /* NSValue+Compat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSValue+Compat.m"; path = "lottie-ios/Classes/NSValue+Compat.m"; sourceTree = SOURCE_ROOT; };
+		FA1F5A741E42B1C400FF36BF /* UIBezierPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBezierPath.h; path = "lottie-ios/Classes/UIBezierPath.h"; sourceTree = SOURCE_ROOT; };
+		FA1F5A751E42B1C400FF36BF /* UIBezierPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIBezierPath.m; path = "lottie-ios/Classes/UIBezierPath.m"; sourceTree = SOURCE_ROOT; };
+		FA1F5A761E42B1C400FF36BF /* UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIColor.h; path = "lottie-ios/Classes/UIColor.h"; sourceTree = SOURCE_ROOT; };
+		FA1F5A771E42B1C400FF36BF /* UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIColor.m; path = "lottie-ios/Classes/UIColor.m"; sourceTree = SOURCE_ROOT; };
+		FA1F5A9F1E42B52800FF36BF /* LAAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAAnimationView.h; sourceTree = "<group>"; };
+		FA1F5AAE1E42C11F00FF36BF /* Lottie-macOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Lottie-macOS.h"; sourceTree = "<group>"; };
+		FAE1F7E61E428CBE002E0974 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAE1F7E71E428CBE002E0974 /* Lottie copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Lottie copy-Info.plist"; path = "/Users/alex/Projects/lottie-ios/Lottie copy-Info.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		62CA59B41E3C173B002D7188 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAE1F7BC1E428CBE002E0974 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -162,6 +262,7 @@
 			children = (
 				62CA59BA1E3C173B002D7188 /* Lottie */,
 				62CA59B91E3C173B002D7188 /* Products */,
+				FAE1F7E71E428CBE002E0974 /* Lottie copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				62CA59B81E3C173B002D7188 /* Lottie.framework */,
+				FAE1F7E61E428CBE002E0974 /* Lottie.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -239,8 +341,10 @@
 				62CA5A021E3C179F002D7188 /* LAShapeTrimPath.m */,
 				62CA5A031E3C179F002D7188 /* UIColor+Expanded.h */,
 				62CA5A041E3C179F002D7188 /* UIColor+Expanded.m */,
-				62CA59BB1E3C173B002D7188 /* Lottie.h */,
+				62CA59BB1E3C173B002D7188 /* Lottie-iOS.h */,
+				FA1F5AAE1E42C11F00FF36BF /* Lottie-macOS.h */,
 				62CA59BC1E3C173B002D7188 /* Info.plist */,
+				FAE1F7EC1E42935E002E0974 /* Platform Compat */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -248,13 +352,32 @@
 		62CA59C31E3C179F002D7188 /* PublicHeaders */ = {
 			isa = PBXGroup;
 			children = (
+				FA1F5A9F1E42B52800FF36BF /* LAAnimationView.h */,
 				62CA59C41E3C179F002D7188 /* LAAnimationTransitionController.h */,
-				62CA59C51E3C179F002D7188 /* LAAnimationView.h */,
+				2DBA16351B4FA408937A16CE /* LAAnimationView_Compat.h */,
 				62CA59C61E3C179F002D7188 /* Lottie.h */,
 			);
 			name = PublicHeaders;
 			path = "lottie-ios/Classes/PublicHeaders";
 			sourceTree = SOURCE_ROOT;
+		};
+		FAE1F7EC1E42935E002E0974 /* Platform Compat */ = {
+			isa = PBXGroup;
+			children = (
+				2DBA1CAF95F14074593D133F /* LAPlatformCompat.h */,
+				FA1F5A6E1E42B1C400FF36BF /* CADisplayLink.h */,
+				FA1F5A6F1E42B1C400FF36BF /* CADisplayLink.m */,
+				FA1F5A701E42B1C400FF36BF /* CALayer+Compat.h */,
+				FA1F5A711E42B1C400FF36BF /* CALayer+Compat.m */,
+				FA1F5A721E42B1C400FF36BF /* NSValue+Compat.h */,
+				FA1F5A731E42B1C400FF36BF /* NSValue+Compat.m */,
+				FA1F5A741E42B1C400FF36BF /* UIBezierPath.h */,
+				FA1F5A751E42B1C400FF36BF /* UIBezierPath.m */,
+				FA1F5A761E42B1C400FF36BF /* UIColor.h */,
+				FA1F5A771E42B1C400FF36BF /* UIColor.m */,
+			);
+			name = "Platform Compat";
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -267,7 +390,7 @@
 				62CA5A221E3C179F002D7188 /* LAEllipseShapeLayer.h in Headers */,
 				62CA5A261E3C179F002D7188 /* LAHelpers.h in Headers */,
 				62CA5A361E3C179F002D7188 /* LAShapeGroup.h in Headers */,
-				62CA59BD1E3C173B002D7188 /* Lottie.h in Headers */,
+				62CA59BD1E3C173B002D7188 /* Lottie-iOS.h in Headers */,
 				62CA5A1B1E3C179F002D7188 /* LAAnimationCache.h in Headers */,
 				62CA5A381E3C179F002D7188 /* LAShapeLayerView.h in Headers */,
 				62CA5A141E3C179F002D7188 /* LAAnimatablePointValue.h in Headers */,
@@ -275,9 +398,9 @@
 				62CA5A081E3C179F002D7188 /* CAAnimationGroup+LAAnimatableGroup.h in Headers */,
 				62CA5A1E1E3C179F002D7188 /* LAAnimationView_Internal.h in Headers */,
 				62CA5A2B1E3C179F002D7188 /* LAMask.h in Headers */,
+				FA1F5AA01E42B52800FF36BF /* LAAnimationView.h in Headers */,
 				62CA5A0A1E3C179F002D7188 /* CGGeometryAdditions.h in Headers */,
 				62CA5A2D1E3C179F002D7188 /* LAMaskLayer.h in Headers */,
-				62CA5A061E3C179F002D7188 /* LAAnimationView.h in Headers */,
 				62CA5A341E3C179F002D7188 /* LAShapeFill.h in Headers */,
 				62CA5A051E3C179F002D7188 /* LAAnimationTransitionController.h in Headers */,
 				62CA5A441E3C179F002D7188 /* UIColor+Expanded.h in Headers */,
@@ -299,15 +422,65 @@
 				62CA5A241E3C179F002D7188 /* LAGroupLayerView.h in Headers */,
 				62CA5A3A1E3C179F002D7188 /* LAShapePath.h in Headers */,
 				62CA5A321E3C179F002D7188 /* LAShapeCircle.h in Headers */,
+				2DBA1C5A8098705F35AF3C1D /* LAPlatformCompat.h in Headers */,
+				2DBA19324CDD83B5F0F115B8 /* LAAnimationView_Compat.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAE1F7BD1E428CBE002E0974 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAE1F7BE1E428CBE002E0974 /* LAModels.h in Headers */,
+				FAE1F7BF1E428CBE002E0974 /* LAEllipseShapeLayer.h in Headers */,
+				FA1F5AAB1E42B54400FF36BF /* UIColor.h in Headers */,
+				FA1F5AAA1E42B54400FF36BF /* UIBezierPath.h in Headers */,
+				FAE1F7C01E428CBE002E0974 /* LAHelpers.h in Headers */,
+				FA1F5AA91E42B54400FF36BF /* NSValue+Compat.h in Headers */,
+				FAE1F7C11E428CBE002E0974 /* LAShapeGroup.h in Headers */,
+				FA1F5AA81E42B54400FF36BF /* CALayer+Compat.h in Headers */,
+				FAE1F7C31E428CBE002E0974 /* LAAnimationCache.h in Headers */,
+				FAE1F7C41E428CBE002E0974 /* LAShapeLayerView.h in Headers */,
+				FAE1F7C51E428CBE002E0974 /* LAAnimatablePointValue.h in Headers */,
+				FAE1F7C61E428CBE002E0974 /* LAShapeTransform.h in Headers */,
+				FAE1F7C71E428CBE002E0974 /* CAAnimationGroup+LAAnimatableGroup.h in Headers */,
+				FAE1F7C81E428CBE002E0974 /* LAAnimationView_Internal.h in Headers */,
+				FAE1F7C91E428CBE002E0974 /* LAMask.h in Headers */,
+				FAE1F7CA1E428CBE002E0974 /* CGGeometryAdditions.h in Headers */,
+				FAE1F7CB1E428CBE002E0974 /* LAMaskLayer.h in Headers */,
+				FA1F5AA71E42B54400FF36BF /* CADisplayLink.h in Headers */,
+				FA1F5AA11E42B52800FF36BF /* LAAnimationView.h in Headers */,
+				FAE1F7CD1E428CBE002E0974 /* LAShapeFill.h in Headers */,
+				FAE1F7CE1E428CBE002E0974 /* LAAnimationTransitionController.h in Headers */,
+				FAE1F7CF1E428CBE002E0974 /* UIColor+Expanded.h in Headers */,
+				FAE1F7D01E428CBE002E0974 /* LAAnimatableColorValue.h in Headers */,
+				FAE1F7D11E428CBE002E0974 /* LAAnimatableNumberValue.h in Headers */,
+				FAE1F7D21E428CBE002E0974 /* LAShapeStroke.h in Headers */,
+				FAE1F7D31E428CBE002E0974 /* LAAnimatableBoundsValue.h in Headers */,
+				FAE1F7D41E428CBE002E0974 /* LALayer.h in Headers */,
+				FAE1F7D51E428CBE002E0974 /* LARectShapeLayer.h in Headers */,
+				FAE1F7D61E428CBE002E0974 /* LAAnimatableShapeValue.h in Headers */,
+				FAE1F7D71E428CBE002E0974 /* Lottie.h in Headers */,
+				FAE1F7D81E428CBE002E0974 /* LAShapeTrimPath.h in Headers */,
+				FAE1F7D91E428CBE002E0974 /* LALayerView.h in Headers */,
+				FAE1F7DA1E428CBE002E0974 /* LAAnimatableValue.h in Headers */,
+				FAE1F7DB1E428CBE002E0974 /* LAAnimatableScaleValue.h in Headers */,
+				FA1F5AB01E42C11F00FF36BF /* Lottie-macOS.h in Headers */,
+				FAE1F7DC1E428CBE002E0974 /* LAComposition.h in Headers */,
+				FAE1F7DD1E428CBE002E0974 /* LAShapeRectangle.h in Headers */,
+				FAE1F7DE1E428CBE002E0974 /* LAAnimatableLayer.h in Headers */,
+				FAE1F7DF1E428CBE002E0974 /* LAGroupLayerView.h in Headers */,
+				FAE1F7E01E428CBE002E0974 /* LAShapePath.h in Headers */,
+				FAE1F7E11E428CBE002E0974 /* LAShapeCircle.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		62CA59B71E3C173B002D7188 /* Lottie */ = {
+		62CA59B71E3C173B002D7188 /* Lottie_iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 62CA59C01E3C173B002D7188 /* Build configuration list for PBXNativeTarget "Lottie" */;
+			buildConfigurationList = 62CA59C01E3C173B002D7188 /* Build configuration list for PBXNativeTarget "Lottie_iOS" */;
 			buildPhases = (
 				62CA59B31E3C173B002D7188 /* Sources */,
 				62CA59B41E3C173B002D7188 /* Frameworks */,
@@ -318,9 +491,27 @@
 			);
 			dependencies = (
 			);
-			name = Lottie;
+			name = Lottie_iOS;
 			productName = Lottie;
 			productReference = 62CA59B81E3C173B002D7188 /* Lottie.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FAE1F79C1E428CBE002E0974 /* Lottie_macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAE1F7E31E428CBE002E0974 /* Build configuration list for PBXNativeTarget "Lottie_macOS" */;
+			buildPhases = (
+				FAE1F79D1E428CBE002E0974 /* Sources */,
+				FAE1F7BC1E428CBE002E0974 /* Frameworks */,
+				FAE1F7BD1E428CBE002E0974 /* Headers */,
+				FAE1F7E21E428CBE002E0974 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Lottie_macOS;
+			productName = Lottie;
+			productReference = FAE1F7E61E428CBE002E0974 /* Lottie.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -350,13 +541,21 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				62CA59B71E3C173B002D7188 /* Lottie */,
+				62CA59B71E3C173B002D7188 /* Lottie_iOS */,
+				FAE1F79C1E428CBE002E0974 /* Lottie_macOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		62CA59B61E3C173B002D7188 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAE1F7E21E428CBE002E0974 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -400,6 +599,48 @@
 				62CA5A281E3C179F002D7188 /* LALayer.m in Sources */,
 				62CA5A2C1E3C179F002D7188 /* LAMask.m in Sources */,
 				62CA5A1D1E3C179F002D7188 /* LAAnimationTransitionController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAE1F79D1E428CBE002E0974 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAE1F79E1E428CBE002E0974 /* CAAnimationGroup+LAAnimatableGroup.m in Sources */,
+				FAE1F79F1E428CBE002E0974 /* CGGeometryAdditions.m in Sources */,
+				FAE1F7A01E428CBE002E0974 /* LAMaskLayer.m in Sources */,
+				FAE1F7A11E428CBE002E0974 /* LAShapeStroke.m in Sources */,
+				FAE1F7A21E428CBE002E0974 /* LAShapeTrimPath.m in Sources */,
+				FAE1F7A31E428CBE002E0974 /* LAAnimatablePointValue.m in Sources */,
+				FAE1F7A41E428CBE002E0974 /* LAEllipseShapeLayer.m in Sources */,
+				FAE1F7A51E428CBE002E0974 /* LAAnimatableScaleValue.m in Sources */,
+				FAE1F7A61E428CBE002E0974 /* LARectShapeLayer.m in Sources */,
+				FAE1F7A71E428CBE002E0974 /* LAAnimationView.m in Sources */,
+				FAE1F7A81E428CBE002E0974 /* LAGroupLayerView.m in Sources */,
+				FAE1F7A91E428CBE002E0974 /* LAShapeFill.m in Sources */,
+				FAE1F7AA1E428CBE002E0974 /* LAShapeTransform.m in Sources */,
+				FAE1F7AB1E428CBE002E0974 /* LAShapeRectangle.m in Sources */,
+				FAE1F7AC1E428CBE002E0974 /* LAAnimatableShapeValue.m in Sources */,
+				FAE1F7AD1E428CBE002E0974 /* LAAnimatableColorValue.m in Sources */,
+				FAE1F7AE1E428CBE002E0974 /* LAAnimationCache.m in Sources */,
+				FAE1F7AF1E428CBE002E0974 /* LAShapePath.m in Sources */,
+				FAE1F7B01E428CBE002E0974 /* LAShapeGroup.m in Sources */,
+				FA1F5A821E42B1D200FF36BF /* CADisplayLink.m in Sources */,
+				FAE1F7B11E428CBE002E0974 /* LAAnimatableNumberValue.m in Sources */,
+				FAE1F7B21E428CBE002E0974 /* LAAnimatableBoundsValue.m in Sources */,
+				FAE1F7B31E428CBE002E0974 /* LAShapeCircle.m in Sources */,
+				FAE1F7B41E428CBE002E0974 /* LAComposition.m in Sources */,
+				FAE1F7B51E428CBE002E0974 /* LAAnimatableLayer.m in Sources */,
+				FAE1F7B61E428CBE002E0974 /* UIColor+Expanded.m in Sources */,
+				FAE1F7B71E428CBE002E0974 /* LAShapeLayerView.m in Sources */,
+				FA1F5A841E42B1D200FF36BF /* NSValue+Compat.m in Sources */,
+				FA1F5A831E42B1D200FF36BF /* CALayer+Compat.m in Sources */,
+				FA1F5A851E42B1D200FF36BF /* UIBezierPath.m in Sources */,
+				FAE1F7B81E428CBE002E0974 /* LALayerView.m in Sources */,
+				FAE1F7B91E428CBE002E0974 /* LALayer.m in Sources */,
+				FAE1F7BA1E428CBE002E0974 /* LAMask.m in Sources */,
+				FA1F5A861E42B1D200FF36BF /* UIColor.m in Sources */,
+				FAE1F7BB1E428CBE002E0974 /* LAAnimationTransitionController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,7 +755,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Lottie;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -531,8 +772,46 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Lottie;
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		FAE1F7E41E428CBE002E0974 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Lottie/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
+				PRODUCT_NAME = Lottie;
+				SDKROOT = macosx10.12;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
+			};
+			name = Debug;
+		};
+		FAE1F7E51E428CBE002E0974 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Lottie/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
+				PRODUCT_NAME = Lottie;
+				SDKROOT = macosx10.12;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
 			};
 			name = Release;
 		};
@@ -548,11 +827,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		62CA59C01E3C173B002D7188 /* Build configuration list for PBXNativeTarget "Lottie" */ = {
+		62CA59C01E3C173B002D7188 /* Build configuration list for PBXNativeTarget "Lottie_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				62CA59C11E3C173B002D7188 /* Debug */,
 				62CA59C21E3C173B002D7188 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAE1F7E31E428CBE002E0974 /* Build configuration list for PBXNativeTarget "Lottie_macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAE1F7E41E428CBE002E0974 /* Debug */,
+				FAE1F7E51E428CBE002E0974 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
