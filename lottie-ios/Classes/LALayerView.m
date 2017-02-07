@@ -198,11 +198,31 @@
 }
 
 - (void)_buildAnimations {
-  _animation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:@{@"opacity" : _layerModel.opacity,
-                                                                                     @"position" : _layerModel.position,
-                                                                                     @"anchorPoint" : _layerModel.anchor,
-                                                                                     @"transform" : _layerModel.scale,
-                                                                                     @"sublayerTransform.rotation" : _layerModel.rotation}];
+  NSMutableDictionary *keypaths = [NSMutableDictionary dictionary];
+  if (_layerModel.opacity) {
+    [keypaths setValue:_layerModel.opacity forKey:@"opacity"];
+  }
+  if (_layerModel.position) {
+    [keypaths setValue:_layerModel.position forKey:@"position"];
+  }
+  if (_layerModel.anchor) {
+    [keypaths setValue:_layerModel.anchor forKey:@"anchorPoint"];
+  }
+  if (_layerModel.scale) {
+    [keypaths setValue:_layerModel.scale forKey:@"transform"];
+  }
+  if (_layerModel.rotation) {
+    [keypaths setValue:_layerModel.rotation forKey:@"sublayerTransform.rotation"];
+  }
+  if (_layerModel.positionX) {
+    [keypaths setValue:_layerModel.positionX forKey:@"position.x"];
+  }
+  if (_layerModel.positionY) {
+    [keypaths setValue:_layerModel.positionY forKey:@"position.y"];
+  }
+  
+  
+  _animation = [CAAnimationGroup animationGroupForAnimatablePropertiesWithKeyPaths:keypaths];
   
   if (_animation) {
     [_childContainerLayer addAnimation:_animation forKey:@"LottieAnimation"];
