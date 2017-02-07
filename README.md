@@ -66,7 +66,7 @@ LAAnimationView *animation = [[LAAnimationView alloc] initWithContentsOfURL:[NSU
 [self.view addSubview:animation];
 ```
 
-Lottie supports the iOS `UIViewContentModes` aspectFit and aspectFill
+Lottie supports the iOS `UIViewContentModes` aspectFit, aspectFill and scaleFill
 
 You can also set the animation progress interactively.
 ```objective-c
