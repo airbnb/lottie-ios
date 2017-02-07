@@ -22,7 +22,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) ViewBackgroundColor currentBGColor;
 @property (nonatomic, strong) UIToolbar *toolbar;
 @property (nonatomic, strong) UISlider *slider;
-@property (nonatomic, strong) LAAnimationView *laAnimation;
+@property (nonatomic, strong) LOTAnimationView *laAnimation;
 
 @end
 
@@ -186,7 +186,7 @@ typedef enum : NSUInteger {
   self.laAnimation = nil;
   [self resetAllButtons];
   
-  self.laAnimation = [[LAAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
+  self.laAnimation = [[LOTAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
   self.laAnimation.contentMode = UIViewContentModeScaleAspectFit;
   [self.view addSubview:self.laAnimation];
   [self.view setNeedsLayout];
@@ -197,7 +197,7 @@ typedef enum : NSUInteger {
   self.laAnimation = nil;
   [self resetAllButtons];
   
-  self.laAnimation = [LAAnimationView animationNamed:named];
+  self.laAnimation = [LOTAnimationView animationNamed:named];
   self.laAnimation.contentMode = UIViewContentModeScaleAspectFit;
   [self.view addSubview:self.laAnimation];
   [self.view setNeedsLayout];

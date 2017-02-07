@@ -11,7 +11,7 @@
 
 @interface ViewController ()
 
-@property (nonatomic, strong) LAAnimationView *lottieLogo;
+@property (nonatomic, strong) LOTAnimationView *lottieLogo;
 
 @end
 
@@ -20,8 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.lottieLogo = [LAAnimationView animationNamed:@"LottieLogo1"];
-    self.lottieLogo.contentMode = LAViewContentModeScaleAspectFill;
+    self.lottieLogo = [LOTAnimationView animationNamed:@"LottieLogo1"];
+    self.lottieLogo.contentMode = LOTViewContentModeScaleAspectFill;
     self.lottieLogo.frame = self.view.bounds;
     self.lottieLogo.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     

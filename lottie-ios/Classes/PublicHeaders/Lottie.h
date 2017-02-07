@@ -9,7 +9,7 @@
 #ifndef Lottie_h
 #define Lottie_h
 
-#import "LAAnimationTransitionController.h"
-#import "LAAnimationView.h"
+#import "LOTAnimationTransitionController.h"
+#import "LOTAnimationView.h"
 
 #endif /* Lottie_h */
