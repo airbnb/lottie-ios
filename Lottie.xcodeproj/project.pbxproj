@@ -143,6 +143,10 @@
 		481A4AEC1E4A78A0003CF62B /* UIColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 481A4AE11E4A78A0003CF62B /* UIColor.h */; };
 		481A4AED1E4A78A0003CF62B /* UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4AE21E4A78A0003CF62B /* UIColor.m */; };
 		481A4AEE1E4A78A5003CF62B /* LOTPlatformCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 481A4ADC1E4A78A0003CF62B /* LOTPlatformCompat.h */; };
+		489F8E121E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 489F8E101E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h */; };
+		489F8E131E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 489F8E101E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h */; };
+		489F8E141E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 489F8E111E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m */; };
+		489F8E151E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 489F8E111E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m */; };
 		62CA59BD1E3C173B002D7188 /* Lottie-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59BB1E3C173B002D7188 /* Lottie-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62CA5A051E3C179F002D7188 /* LOTAnimationTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59C41E3C179F002D7188 /* LOTAnimationTransitionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62CA5A071E3C179F002D7188 /* Lottie.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59C61E3C179F002D7188 /* Lottie.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -228,6 +232,8 @@
 		481A4AE01E4A78A0003CF62B /* UIBezierPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBezierPath.m; sourceTree = "<group>"; };
 		481A4AE11E4A78A0003CF62B /* UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIColor.h; sourceTree = "<group>"; };
 		481A4AE21E4A78A0003CF62B /* UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIColor.m; sourceTree = "<group>"; };
+		489F8E101E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTStrokeShapeLayer.h; sourceTree = "<group>"; };
+		489F8E111E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTStrokeShapeLayer.m; sourceTree = "<group>"; };
 		62CA59B81E3C173B002D7188 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62CA59BB1E3C173B002D7188 /* Lottie-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lottie-iOS.h"; sourceTree = "<group>"; };
 		62CA59BC1E3C173B002D7188 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -274,6 +280,8 @@
 				481A4A231E4A7885003CF62B /* LOTRectShapeLayer.m */,
 				481A4A241E4A7885003CF62B /* LOTShapeLayerView.h */,
 				481A4A251E4A7885003CF62B /* LOTShapeLayerView.m */,
+				489F8E101E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h */,
+				489F8E111E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m */,
 			);
 			name = "Animatable Layers";
 			path = "lottie-ios/Classes/Animatable Layers";
@@ -462,6 +470,7 @@
 				481A4AB91E4A7885003CF62B /* LOTShapeGroup.h in Headers */,
 				481A4A5F1E4A7885003CF62B /* LOTEllipseShapeLayer.h in Headers */,
 				481A4ACD1E4A7885003CF62B /* LOTShapeTrimPath.h in Headers */,
+				489F8E121E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h in Headers */,
 				481A4A671E4A7885003CF62B /* LOTLayerView.h in Headers */,
 				481A4AC11E4A7885003CF62B /* LOTShapeRectangle.h in Headers */,
 				481A4A991E4A7885003CF62B /* CGGeometryAdditions.h in Headers */,
@@ -504,6 +513,7 @@
 				481A4A601E4A7885003CF62B /* LOTEllipseShapeLayer.h in Headers */,
 				481A4ACA1E4A7885003CF62B /* LOTShapeTransform.h in Headers */,
 				481A4AE51E4A78A0003CF62B /* CALayer+Compat.h in Headers */,
+				489F8E131E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h in Headers */,
 				481A4A701E4A7885003CF62B /* LOTRectShapeLayer.h in Headers */,
 				481A4A7C1E4A7885003CF62B /* LOTAnimatableColorValue.h in Headers */,
 				481A4A6C1E4A7885003CF62B /* LOTMaskLayer.h in Headers */,
@@ -636,6 +646,7 @@
 				481A4A651E4A7885003CF62B /* LOTGroupLayerView.m in Sources */,
 				481A4AB71E4A7885003CF62B /* LOTShapeFill.m in Sources */,
 				481A4A691E4A7885003CF62B /* LOTLayerView.m in Sources */,
+				489F8E141E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m in Sources */,
 				481A4AC31E4A7885003CF62B /* LOTShapeRectangle.m in Sources */,
 				481A4AD11E4A7885003CF62B /* LOTAnimationTransitionController.m in Sources */,
 				481A4AC71E4A7885003CF62B /* LOTShapeStroke.m in Sources */,
@@ -694,6 +705,7 @@
 				481A4A7A1E4A7885003CF62B /* LOTAnimatableBoundsValue.m in Sources */,
 				481A4A7E1E4A7885003CF62B /* LOTAnimatableColorValue.m in Sources */,
 				481A4AAA1E4A7885003CF62B /* LOTLayer.m in Sources */,
+				489F8E151E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m in Sources */,
 				481A4AED1E4A78A0003CF62B /* UIColor.m in Sources */,
 				481A4A661E4A7885003CF62B /* LOTGroupLayerView.m in Sources */,
 			);
