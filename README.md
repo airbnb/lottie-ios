@@ -240,7 +240,7 @@ After installing the cocoapod into your project import Lottie with
 `#import <Lottie/Lottie.h>`
 
 Try with Carthage.
-In your application targets “General” tab under the “Embedded Binaries” section, drag and drop lottie-ios.framework from the Carthage/Build/iOS directory that `carthage update` produced.
+In your application targets “General” tab under the “Linked Frameworks and Libraries” section, drag and drop lottie-ios.framework from the Carthage/Build/iOS directory that `carthage update` produced.
 
 ## Alternatives
 1. Build animations by hand. Building animations by hand is a huge time commitment for design and engineering across Android and iOS. It's often hard or even impossible to justify spending so much time to get an animation right.
