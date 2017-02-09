@@ -8,10 +8,11 @@
 
 #import "LOTEllipseShapeLayer.h"
 #import "CAAnimationGroup+LOTAnimatableGroup.h"
+#import "LOTStrokeShapeLayer.h"
 
 const CGFloat kEllipseControlPointPercentage = 0.55228;
 
-@interface LOTCircleShapeLayer : CAShapeLayer
+@interface LOTCircleShapeLayer : LOTStrokeShapeLayer
 
 @property (nonatomic) CGPoint circlePosition;
 @property (nonatomic) CGPoint circleSize;
@@ -78,12 +79,26 @@ const CGFloat kEllipseControlPointPercentage = 0.55228;
   [path addCurveToPoint:circleQ4 controlPoint1:CGPointMake(circleQ3.x - cpW, circleQ3.y) controlPoint2:CGPointMake(circleQ4.x, circleQ4.y + cpH)];
   
   [path addCurveToPoint:circleQ1 controlPoint1:CGPointMake(circleQ4.x, circleQ4.y - cpH) controlPoint2:CGPointMake(circleQ1.x - cpW, circleQ1.y)];
+  
+  // Double path for trim offset.
+  [path moveToPoint:circleQ1];
+  [path addCurveToPoint:circleQ2 controlPoint1:CGPointMake(circleQ1.x + cpW, circleQ1.y) controlPoint2:CGPointMake(circleQ2.x, circleQ2.y - cpH)];
+  
+  [path addCurveToPoint:circleQ3 controlPoint1:CGPointMake(circleQ2.x, circleQ2.y + cpH) controlPoint2:CGPointMake(circleQ3.x + cpW, circleQ3.y)];
+  
+  [path addCurveToPoint:circleQ4 controlPoint1:CGPointMake(circleQ3.x - cpW, circleQ3.y) controlPoint2:CGPointMake(circleQ4.x, circleQ4.y + cpH)];
+  
+  [path addCurveToPoint:circleQ1 controlPoint1:CGPointMake(circleQ4.x, circleQ4.y - cpH) controlPoint2:CGPointMake(circleQ1.x - cpW, circleQ1.y)];
+  
+  //Move path(s)
   [path applyTransform:CGAffineTransformMakeTranslation(presentationCircle.circlePosition.x, presentationCircle.circlePosition.y)];
+  
   self.path = path.CGPath;
 }
 
 - (void)display {
   [self _setPath];
+  [super display];
 }
 
 @end
@@ -161,8 +176,9 @@ const CGFloat kEllipseControlPointPercentage = 0.55228;
           break;
       }
       if (trim) {
-        _strokeLayer.strokeStart = _trim.start.initialValue.floatValue;
-        _strokeLayer.strokeEnd = _trim.end.initialValue.floatValue;
+        _strokeLayer.trimStart = _trim.start.initialValue.floatValue;
+        _strokeLayer.trimEnd = _trim.end.initialValue.floatValue;
+        _strokeLayer.trimOffset = _trim.offset.initialValue.floatValue;
       }
       [self addSublayer:_strokeLayer];
     }
@@ -190,8 +206,9 @@ const CGFloat kEllipseControlPointPercentage = 0.55228;
                                                                                       @"circlePosition" : _circle.position,
                                                                                       @"circleSize" : _circle.size}];
     if (_trim) {
-      properties[@"strokeStart"] = _trim.start;
-      properties[@"strokeEnd"] = _trim.end;
+      properties[@"trimStart"] = _trim.start;
+      properties[@"trimEnd"] = _trim.end;
+      properties[@"trimOffset"] = _trim.offset;
     }
     _strokeAnimation = [CAAnimationGroup LOT_animationGroupForAnimatablePropertiesWithKeyPaths:properties];
     [_strokeLayer addAnimation:_strokeAnimation forKey:@""];
