@@ -553,6 +553,10 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
 #endif
 
+- (CGSize)intrinsicContentSize {
+    return _sceneModel.compBounds.size;
+}
+
 - (void)_layout {
   if (!hasFullyInitialized_) {
     _animationContainer.bounds = self.bounds;
