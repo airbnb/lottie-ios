@@ -323,7 +323,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		481A4A171E4A7885003CF62B /* Animatable Layers */ = {
+		481A4A171E4A7885003CF62B /* AnimatableLayers */ = {
 			isa = PBXGroup;
 			children = (
 				481A4A181E4A7885003CF62B /* LOTAnimatableLayer.h */,
@@ -343,8 +343,8 @@
 				489F8E101E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h */,
 				489F8E111E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m */,
 			);
-			name = "Animatable Layers";
-			path = "lottie-ios/Classes/Animatable Layers";
+			name = "AnimatableLayers";
+			path = "lottie-ios/Classes/AnimatableLayers";
 			sourceTree = SOURCE_ROOT;
 		};
 		481A4A261E4A7885003CF62B /* AnimatableProperties */ = {
@@ -368,14 +368,14 @@
 			path = "lottie-ios/Classes/AnimatableProperties";
 			sourceTree = SOURCE_ROOT;
 		};
-		481A4A341E4A7885003CF62B /* Animation Cache */ = {
+		481A4A341E4A7885003CF62B /* AnimationCache */ = {
 			isa = PBXGroup;
 			children = (
 				481A4A351E4A7885003CF62B /* LOTAnimationCache.h */,
 				481A4A361E4A7885003CF62B /* LOTAnimationCache.m */,
 			);
-			name = "Animation Cache";
-			path = "lottie-ios/Classes/Animation Cache";
+			name = "AnimationCache";
+			path = "lottie-ios/Classes/AnimationCache";
 			sourceTree = SOURCE_ROOT;
 		};
 		481A4A371E4A7885003CF62B /* Extensions */ = {
@@ -435,7 +435,7 @@
 			path = "lottie-ios/Classes/Private";
 			sourceTree = SOURCE_ROOT;
 		};
-		481A4AD71E4A78A0003CF62B /* OSX Compatability */ = {
+		481A4AD71E4A78A0003CF62B /* MacCompatability */ = {
 			isa = PBXGroup;
 			children = (
 				481A4AD81E4A78A0003CF62B /* CADisplayLink.h */,
@@ -450,8 +450,8 @@
 				481A4AE11E4A78A0003CF62B /* UIColor.h */,
 				481A4AE21E4A78A0003CF62B /* UIColor.m */,
 			);
-			name = "OSX Compatability";
-			path = "lottie-ios/Classes/OSX Compatability";
+			name = "MacCompatability";
+			path = "lottie-ios/Classes/MacCompatability";
 			sourceTree = SOURCE_ROOT;
 		};
 		62CA59AE1E3C173B002D7188 = {
@@ -476,10 +476,10 @@
 		62CA59BA1E3C173B002D7188 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				481A4AD71E4A78A0003CF62B /* OSX Compatability */,
-				481A4A171E4A7885003CF62B /* Animatable Layers */,
+				481A4AD71E4A78A0003CF62B /* MacCompatability */,
+				481A4A171E4A7885003CF62B /* AnimatableLayers */,
 				481A4A261E4A7885003CF62B /* AnimatableProperties */,
-				481A4A341E4A7885003CF62B /* Animation Cache */,
+				481A4A341E4A7885003CF62B /* AnimationCache */,
 				481A4A371E4A7885003CF62B /* Extensions */,
 				481A4A3F1E4A7885003CF62B /* Models */,
 				481A4A571E4A7885003CF62B /* Private */,

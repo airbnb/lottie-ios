@@ -431,7 +431,7 @@
 			path = "Target Support Files/Pods-Lottie-Example";
 			sourceTree = "<group>";
 		};
-		5B2D50411C4B78B88E2AB8A386A1C1D6 /* OSX Compatability */ = {
+		5B2D50411C4B78B88E2AB8A386A1C1D6 /* MacCompatability */ = {
 			isa = PBXGroup;
 			children = (
 				32108CC0D27D536D0F888B4F25F6AA2C /* CADisplayLink.h */,
@@ -446,16 +446,16 @@
 				DC3B1FA61F43E8C516B69F77E9CAF1D6 /* UIColor.h */,
 				8D27B4F779C6777D529D7ECF8C2F7818 /* UIColor.m */,
 			);
-			path = "OSX Compatability";
+			path = "MacCompatability";
 			sourceTree = "<group>";
 		};
-		5C2E5B3228F4A33353B6DC6C3E4ACDA5 /* Animation Cache */ = {
+		5C2E5B3228F4A33353B6DC6C3E4ACDA5 /* AnimationCache */ = {
 			isa = PBXGroup;
 			children = (
 				262826A76F079A347BA24ABF06CDB0FE /* LOTAnimationCache.h */,
 				5B28A1060F4CA73B2C8DECA596DC1415 /* LOTAnimationCache.m */,
 			);
-			path = "Animation Cache";
+			path = "AnimationCache";
 			sourceTree = "<group>";
 		};
 		679D0DF302A7EBDDA0D3C6B2BA14DC8A /* Extensions */ = {
@@ -492,7 +492,7 @@
 			path = "Example/Pods/Target Support Files/lottie-ios-OSX";
 			sourceTree = "<group>";
 		};
-		713A592333FD491CE143F3A998347C77 /* Animatable Layers */ = {
+		713A592333FD491CE143F3A998347C77 /* AnimatableLayers */ = {
 			isa = PBXGroup;
 			children = (
 				4C2A251B58207A63E0E49CDB3483F584 /* LOTAnimatableLayer.h */,
@@ -512,7 +512,7 @@
 				484FF8C81E4A972500B2B4FF /* LOTStrokeShapeLayer.h */,
 				484FF8C91E4A972500B2B4FF /* LOTStrokeShapeLayer.m */,
 			);
-			path = "Animatable Layers";
+			path = "AnimatableLayers";
 			sourceTree = "<group>";
 		};
 		717A3D55F0A42F0DD366468F205B030C /* PublicHeaders */ = {
@@ -558,12 +558,12 @@
 		825CA7019F8FAE956DE05D48AA09297B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				713A592333FD491CE143F3A998347C77 /* Animatable Layers */,
+				713A592333FD491CE143F3A998347C77 /* AnimatableLayers */,
 				1BFB6AF8269497D6F4AC1B8DE971055A /* AnimatableProperties */,
-				5C2E5B3228F4A33353B6DC6C3E4ACDA5 /* Animation Cache */,
+				5C2E5B3228F4A33353B6DC6C3E4ACDA5 /* AnimationCache */,
 				679D0DF302A7EBDDA0D3C6B2BA14DC8A /* Extensions */,
 				996B107E895A51B21737FACB8230EEB0 /* Models */,
-				5B2D50411C4B78B88E2AB8A386A1C1D6 /* OSX Compatability */,
+				5B2D50411C4B78B88E2AB8A386A1C1D6 /* MacCompatability */,
 				D7095B4283071294364E7C0F32B848A8 /* Private */,
 				717A3D55F0A42F0DD366468F205B030C /* PublicHeaders */,
 			);
