@@ -1,18 +1,12 @@
-# Lottie for iOS (and [Android](https://github.com/airbnb/lottie-android))
+# Lottie for iOS MacOS (and [Android](https://github.com/airbnb/lottie-android) and [React Native](https://github.com/airbnb/lottie-react-native))
 
 Lottie is a mobile library for Android and iOS that parses [Adobe After Effects](http://www.adobe.com/products/aftereffects.html) animations exported as json with [bodymovin](https://github.com/bodymovin/bodymovin) and renders the vector animations natively on mobile and through React Native!
-
-
 
 For the first time, designers can create **and ship** beautiful animations without an engineer painstakingly recreating it by hand.
 Since the animation is backed by JSON they are extremely small in size but can be large in complexity!
 Animations can be played, resized, looped, sped up, slowed down, and even interactively scrubbed.
 
 Lottie also supports native UIViewController Transitions out of the box!
-
-* [Painstaking example 1](http://jeremie-martinez.com//2016/09/15/train-animations/)
-* [Painstaking example 2](https://blog.twitter.com/2015/hearts-on-twitter)
-* [Painstaking example 3](https://medium.com/@crafty/animation-jump-through-861f4f5b3de4#.lvq6k8lb5)
 
 Here is just a small sampling of the power of Lottie
 
@@ -23,29 +17,6 @@ Here is just a small sampling of the power of Lottie
 ![Example3](_Gifs/Examples3.gif)
 
 ![Abcs](_Gifs/Examples4.gif)
-
-## Install Lottie
-
-###CocoaPods
-Add the pod to your podfile
-```
-pod 'lottie-ios'
-```
-run
-```
-pod install
-```
-
-###Carthage
-Install Carthage (https://github.com/Carthage/Carthage)
-Add Lottie to your Cartfile
-```
-github "airbnb/lottie-ios" "master"
-```
-run
-```
-carthage update
-```
 
 ## Using Lottie
 Lottie supports iOS 8 and above.
@@ -232,6 +203,39 @@ animationView?.play(completion: { (finished) in
 
 * Trim Paths Offset
 
+## Currently Unsupport After Effects Features
+
+* Image Layers
+* Precomps
+* Even-Odd winding paths
+* Trim Shapes Individually feature of Trim Paths
+* Expressions
+* 3d Layer support
+* Gradients
+
+## Install Lottie
+
+###CocoaPods
+Add the pod to your podfile
+```
+pod 'lottie-ios'
+```
+run
+```
+pod install
+```
+
+###Carthage
+Install Carthage (https://github.com/Carthage/Carthage)
+Add Lottie to your Cartfile
+```
+github "airbnb/lottie-ios" "master"
+```
+run
+```
+carthage update
+```
+
 ## Try it out
 
 Lottie Uses Cocoapods!
@@ -263,10 +267,11 @@ File github issues for anything that is unexpectedly broken. If an After Effects
 ## Roadmap (In no particular order)
 - Add support for interactive animated transitions
 - Add support for parenting programmatically added layers, moving/scaling
-- Support for the After Effects Trim Paths Offset feature
-- Animation Syncing
+- Image Assets
 - Programmatically alter animations
 - Animation Breakpoints/Seekpoints
 - Gradients
 - LOTAnimatedButton
 - Repeater objects
+- Precomps
+
