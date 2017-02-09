@@ -9,8 +9,10 @@
 #import "LOTRectShapeLayer.h"
 #import "LOTPlatformCompat.h"
 #import "CAAnimationGroup+LOTAnimatableGroup.h"
+#import "LOTStrokeShapeLayer.h"
+#import "LOTHelpers.h"
 
-@interface LOTRoundRectLayer : CAShapeLayer
+@interface LOTRoundRectLayer : LOTStrokeShapeLayer
 
 @property (nonatomic) CGPoint rectPosition;
 @property (nonatomic) CGPoint rectSize;
@@ -64,13 +66,71 @@
   CGFloat halfHeight = presentationRect.rectSize.y / 2;
   
   CGRect rectFrame =  CGRectMake(presentationRect.rectPosition.x - halfWidth, presentationRect.rectPosition.y - halfHeight, presentationRect.rectSize.x, presentationRect.rectSize.y);
-  UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rectFrame cornerRadius:presentationRect.rectCornerRadius];
-  [path closePath];
-  self.path = path.CGPath;
+  
+  // UIBezierPath Draws rects from the top left corner, After Effects draws them from the top right.
+  // Switching to manual drawing.
+  
+  CGFloat radius = presentationRect.rectCornerRadius;
+  UIBezierPath *path1 = [UIBezierPath new];
+  UIBezierPath *path2 = [UIBezierPath new];
+  
+  CGPoint point =  CGPointMake(CGRectGetMaxX(rectFrame), CGRectGetMinY(rectFrame) + radius);
+  [path1 moveToPoint:point];
+  [path2 moveToPoint:point];
+  
+  point.y = CGRectGetMaxY(rectFrame) - radius;
+  [path1 addLineToPoint:point];
+  [path2 addLineToPoint:point];
+  
+  if (radius > 0) {
+    point.x = point.x - radius;
+    [path1 addArcWithCenter:point radius:radius startAngle:DegreestoRadians(0) endAngle:DegreestoRadians(90) clockwise:YES];
+    [path2 addArcWithCenter:point radius:radius startAngle:DegreestoRadians(0) endAngle:DegreestoRadians(90) clockwise:YES];
+  }
+  
+  point.x = CGRectGetMinX(rectFrame) + radius;
+  point.y = CGRectGetMaxY(rectFrame);
+  [path1 addLineToPoint:point];
+  [path2 addLineToPoint:point];
+  
+  if (radius > 0) {
+    point.y = point.y - radius;
+    [path1 addArcWithCenter:point radius:radius startAngle:DegreestoRadians(90) endAngle:DegreestoRadians(180) clockwise:YES];
+    [path2 addArcWithCenter:point radius:radius startAngle:DegreestoRadians(90) endAngle:DegreestoRadians(180) clockwise:YES];
+  }
+  
+  point.x = CGRectGetMinX(rectFrame);
+  point.y = CGRectGetMinY(rectFrame) + radius;
+  [path1 addLineToPoint:point];
+  [path2 addLineToPoint:point];
+  
+  if (radius > 0) {
+    point.x = point.x + radius;
+    [path1 addArcWithCenter:point radius:radius startAngle:DegreestoRadians(180) endAngle:DegreestoRadians(270) clockwise:YES];
+    [path2 addArcWithCenter:point radius:radius startAngle:DegreestoRadians(180) endAngle:DegreestoRadians(270) clockwise:YES];
+  }
+  
+  point.x = CGRectGetMaxX(rectFrame) - radius;
+  point.y = CGRectGetMinY(rectFrame);
+  [path1 addLineToPoint:point];
+  [path2 addLineToPoint:point];
+  
+  if (radius > 0) {
+    point.y = point.y + radius;
+    [path1 addArcWithCenter:point radius:radius startAngle:DegreestoRadians(270) endAngle:DegreestoRadians(360) clockwise:YES];
+    [path2 addArcWithCenter:point radius:radius startAngle:DegreestoRadians(270) endAngle:DegreestoRadians(360) clockwise:YES];
+  }
+  [path1 closePath];
+  [path2 closePath];
+  
+  [path1 appendPath:path2];
+
+  self.path = path1.CGPath;
 }
 
 - (void)display {
   [self _setPath];
+  [super display];
 }
 
 @end
@@ -80,6 +140,7 @@
   LOTShapeStroke *_stroke;
   LOTShapeFill *_fill;
   LOTShapeRectangle *_rectangle;
+  LOTShapeTrimPath *_trim;
   
   LOTRoundRectLayer *_fillLayer;
   LOTRoundRectLayer *_strokeLayer;
@@ -92,6 +153,7 @@
 - (instancetype)initWithRectShape:(LOTShapeRectangle *)rectShape
                              fill:(LOTShapeFill *)fill
                            stroke:(LOTShapeStroke *)stroke
+                             trim:(LOTShapeTrimPath *)trim
                         transform:(LOTShapeTransform *)transform
                      withDuration:(NSTimeInterval)duration {
   self = [super initWithDuration:duration];
@@ -100,6 +162,7 @@
     _stroke = stroke;
     _fill = fill;
     _transform = transform;
+    _trim = trim;
     
     self.allowsEdgeAntialiasing = YES;
     self.frame = _transform.compBounds;
@@ -146,10 +209,11 @@
         default:
           break;
       }
-//      if (trim) {
-//        _strokeLayer.strokeStart = _trim.start.initialValue.floatValue;
-//        _strokeLayer.strokeEnd = _trim.end.initialValue.floatValue;
-//      }
+      if (trim) {
+        _strokeLayer.trimStart = _trim.start.initialValue.floatValue;
+        _strokeLayer.trimEnd = _trim.end.initialValue.floatValue;
+        _strokeLayer.trimOffset = _trim.offset.initialValue.floatValue;
+      }
       [self addSublayer:_strokeLayer];
     }
 
@@ -170,14 +234,19 @@
   }
   
   if (_stroke) {
-    _strokeAnimation = [CAAnimationGroup LOT_animationGroupForAnimatablePropertiesWithKeyPaths:@{@"strokeColor" : _stroke.color,
-                                                                                             @"opacity" : _stroke.opacity,
-                                                                                             @"lineWidth" : _stroke.width,
-                                                                                             @"rectSize" : _rectangle.size,
-                                                                                             @"rectPosition" : _rectangle.position,
-                                                                                             @"rectCornerRadius" : _rectangle.cornerRadius}];
+    NSMutableDictionary *properties = [NSMutableDictionary dictionaryWithDictionary:@{@"strokeColor" : _stroke.color,
+                                                                                      @"opacity" : _stroke.opacity,
+                                                                                      @"lineWidth" : _stroke.width,
+                                                                                      @"rectSize" : _rectangle.size,
+                                                                                      @"rectPosition" : _rectangle.position,
+                                                                                      @"rectCornerRadius" : _rectangle.cornerRadius}];
+    if (_trim) {
+      properties[@"trimStart"] = _trim.start;
+      properties[@"trimEnd"] = _trim.end;
+      properties[@"trimOffset"] = _trim.offset;
+    }
+    _strokeAnimation = [CAAnimationGroup LOT_animationGroupForAnimatablePropertiesWithKeyPaths:properties];
     [_strokeLayer addAnimation:_strokeAnimation forKey:@""];
-
   }
   
   if (_fill) {

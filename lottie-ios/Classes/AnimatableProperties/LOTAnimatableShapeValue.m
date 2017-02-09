@@ -232,6 +232,11 @@
     [shape closePath];
   }
   
+  // Double up shape for trim offsets.
+  // TODO Remove this heavy solution by refactoring the drawing tree.
+  
+  [shape appendPath:[shape copy]];
+  
   return shape;
 }
 

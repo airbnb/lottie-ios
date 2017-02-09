@@ -15,6 +15,7 @@
 - (instancetype)initWithRectShape:(LOTShapeRectangle *)rectShape
                              fill:(LOTShapeFill *)fill
                            stroke:(LOTShapeStroke *)stroke
+                             trim:(LOTShapeTrimPath *)trim
                         transform:(LOTShapeTransform *)transform
                      withDuration:(NSTimeInterval)duration;
 
