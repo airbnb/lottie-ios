@@ -8,6 +8,7 @@
 
 #import "LOTShapeLayerView.h"
 #import "CAAnimationGroup+LOTAnimatableGroup.h"
+#import "LOTStrokeShapeLayer.h"
 
 @implementation LOTShapeLayerView {
   LOTShapeTransform *_transform;
@@ -17,7 +18,7 @@
   LOTShapeTrimPath *_trim;
   
   CAShapeLayer *_fillLayer;
-  CAShapeLayer *_strokeLayer;
+  LOTStrokeShapeLayer *_strokeLayer;
   
   CAAnimationGroup *_animation;
   CAAnimationGroup *_strokeAnimation;
@@ -56,7 +57,7 @@
     }
     
     if (stroke) {
-      _strokeLayer = [CAShapeLayer layer];
+      _strokeLayer = [LOTStrokeShapeLayer layer];
       _strokeLayer.allowsEdgeAntialiasing = YES;
       _strokeLayer.path = _path.shapePath.initialShape.CGPath;
       _strokeLayer.strokeColor = _stroke.color.initialColor.CGColor;
@@ -78,8 +79,9 @@
           break;
       }
       if (trim) {
-        _strokeLayer.strokeStart = _trim.start.initialValue.floatValue;
-        _strokeLayer.strokeEnd = _trim.end.initialValue.floatValue;
+        _strokeLayer.trimStart = _trim.start.initialValue.floatValue;
+        _strokeLayer.trimEnd = _trim.end.initialValue.floatValue;
+        _strokeLayer.trimOffset = _trim.offset.initialValue.floatValue;
       }
       _strokeLayer.fillColor = nil;
       [self addSublayer:_strokeLayer];
@@ -107,8 +109,9 @@
                                                                                       @"lineWidth" : _stroke.width,
                                                                                       @"path" : _path.shapePath}];
     if (_trim) {
-      properties[@"strokeStart"] = _trim.start;
-      properties[@"strokeEnd"] = _trim.end;
+      properties[@"trimStart"] = _trim.start;
+      properties[@"trimEnd"] = _trim.end;
+      properties[@"trimOffset"] = _trim.offset;
     }
     _strokeAnimation = [CAAnimationGroup LOT_animationGroupForAnimatablePropertiesWithKeyPaths:properties];
     [_strokeLayer addAnimation:_strokeAnimation forKey:@""];

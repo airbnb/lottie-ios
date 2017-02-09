@@ -153,9 +153,10 @@
     } else if ([item isKindOfClass:[LOTShapeRectangle class]]) {
       LOTShapeRectangle *shapeRect = (LOTShapeRectangle *)item;
       LOTRectShapeLayer *shapeLayer = [[LOTRectShapeLayer alloc] initWithRectShape:shapeRect
-                                                                            fill:currentFill
-                                                                          stroke:currentStroke
-                                                                       transform:currentTransform
+                                                                              fill:currentFill
+                                                                            stroke:currentStroke
+                                                                              trim:currentTrimPath
+                                                                         transform:currentTransform
                                                                     withDuration:self.laAnimationDuration];
       [shapeLayers addObject:shapeLayer];
       [_childContainerLayer addSublayer:shapeLayer];
