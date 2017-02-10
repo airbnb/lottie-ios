@@ -6,6 +6,8 @@
 //  Copyright © 2016 Brandon Withrow. All rights reserved.
 //
 
+#import "LOTAnimationView.h"
+
 typedef enum : NSUInteger {
   LOTConstraintTypeAlignToBounds,
   LOTConstraintTypeAlignToLayer,
