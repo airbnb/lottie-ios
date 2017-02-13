@@ -37,7 +37,19 @@
 }
 
 - (void)_setupLayerFromModel {
-  self.position = _parentModel.position.initialPoint;
+  if (_parentModel.position) {
+    self.position = _parentModel.position.initialPoint;
+  } else {
+    CGPoint initial = CGPointZero;
+    if (_parentModel.positionX) {
+      initial.x = _parentModel.positionX.initialValue.floatValue;
+    }
+    if (_parentModel.positionY) {
+      initial.y = _parentModel.positionY.initialValue.floatValue;
+    }
+    self.position = initial;
+  }
+  
   self.anchorPoint = _parentModel.anchor.initialPoint;
   self.transform = _parentModel.scale.initialScale;
   self.sublayerTransform = CATransform3DMakeRotation(_parentModel.rotation.initialValue.floatValue, 0, 0, 1);
@@ -45,10 +57,27 @@
 }
 
 - (void)_buildAnimations {
-  _animation = [CAAnimationGroup LOT_animationGroupForAnimatablePropertiesWithKeyPaths:@{@"position" : _parentModel.position,
-                                                                                     @"anchorPoint" : _parentModel.anchor,
-                                                                                     @"transform" : _parentModel.scale,
-                                                                                     @"sublayerTransform.rotation" : _parentModel.rotation}];
+  NSMutableDictionary *keypaths = [NSMutableDictionary dictionary];
+  if (_parentModel.position) {
+    [keypaths setValue:_parentModel.position forKey:@"position"];
+  }
+  if (_parentModel.anchor) {
+    [keypaths setValue:_parentModel.anchor forKey:@"anchorPoint"];
+  }
+  if (_parentModel.scale) {
+    [keypaths setValue:_parentModel.scale forKey:@"transform"];
+  }
+  if (_parentModel.rotation) {
+    [keypaths setValue:_parentModel.rotation forKey:@"sublayerTransform.rotation"];
+  }
+  if (_parentModel.positionX) {
+    [keypaths setValue:_parentModel.positionX forKey:@"position.x"];
+  }
+  if (_parentModel.positionY) {
+    [keypaths setValue:_parentModel.positionY forKey:@"position.y"];
+  }
+
+  _animation = [CAAnimationGroup LOT_animationGroupForAnimatablePropertiesWithKeyPaths:keypaths];
   [self addAnimation:_animation forKey:@"LottieAnimation"];
 }
 
@@ -115,7 +144,19 @@
   [self addSublayer:currentChild];
   
   _childContainerLayer.opacity = _layerModel.opacity.initialValue.floatValue;
-  _childContainerLayer.position = _layerModel.position.initialPoint;
+  
+  if (_layerModel.position) {
+    _childContainerLayer.position = _layerModel.position.initialPoint;
+  } else {
+    CGPoint initial = CGPointZero;
+    if (_layerModel.positionX) {
+      initial.x = _layerModel.positionX.initialValue.floatValue;
+    }
+    if (_layerModel.positionY) {
+      initial.y = _layerModel.positionY.initialValue.floatValue;
+    }
+    _childContainerLayer.position = initial;
+  }
   _childContainerLayer.anchorPoint = _layerModel.anchor.initialPoint;
   _childContainerLayer.transform = _layerModel.scale.initialScale;
   _childContainerLayer.sublayerTransform = CATransform3DMakeRotation(_layerModel.rotation.initialValue.floatValue, 0, 0, 1);
