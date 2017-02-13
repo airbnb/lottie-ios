@@ -196,7 +196,10 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
     return [[LOTAnimationView alloc] initWithModel:laScene];
   }
   
-  return [[LOTAnimationView alloc] initWithModel:nil];
+  NSException* resourceNotFoundException = [NSException exceptionWithName:@"ResourceNotFoundException"
+                                                                   reason:[error localizedDescription]
+                                                                 userInfo:nil];
+  @throw resourceNotFoundException;
 }
 
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON {
@@ -399,10 +402,10 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   newChild.childView = view;
   
   if (!layer) {
-    NSException* myException = [NSException exceptionWithName:@"LayerNotFoundException"
-                                                       reason:@"The required layer was not specified."
-                                                     userInfo:nil];
-    @throw myException;
+    NSException* layerNotFoundExpection = [NSException exceptionWithName:@"LayerNotFoundException"
+                                                                  reason:@"The required layer was not specified."
+                                                                userInfo:nil];
+    @throw layerNotFoundExpection;
   } else {
     newChild.layer = layerObject;
     [layerObject.superlayer insertSublayer:view.layer above:layerObject];
