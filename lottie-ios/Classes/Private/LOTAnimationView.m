@@ -17,6 +17,7 @@
 const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
 @implementation LOTAnimationState {
+  BOOL _needsAnimationUpdate;
   BOOL _animationIsPlaying;
   BOOL _playFromBeginning;
   CFTimeInterval _previousLocalTime;
@@ -27,6 +28,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   self = [super init];
   if (self) {
     _layer = layer;
+    _needsAnimationUpdate = NO;
     _animationIsPlaying = NO;
     _loopAnimation = NO;
     
@@ -42,7 +44,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
     _layer.beginTime = CACurrentMediaTime();
 
     _previousLocalTime = -1.f;
-
+    [self setNeedsAnimationUpdate];
   }
   return self;
 }
@@ -50,6 +52,9 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 #pragma mark -- External Methods
 
 - (void)updateAnimationLayerClockTime:(CFTimeInterval)clockTime timeOffset:(CFTimeInterval)timeOffset {
+  if (_needsAnimationUpdate) {
+    return;
+  }
   CGFloat speed = _animationIsPlaying ? _animationSpeed : 0;
   
   _layer.speed = speed;
@@ -67,6 +72,20 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   }
 }
 
+- (void)setNeedsAnimationUpdate {
+  if (!_needsAnimationUpdate) {
+    _needsAnimationUpdate = YES;
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+      _needsAnimationUpdate = NO;
+      if (_animationIsPlaying) {
+        [self setAnimationIsPlaying:_animationIsPlaying];
+      } else {
+        [self setAnimatedProgress:_animatedProgress];
+      }
+    }];
+  }
+}
+
 #pragma mark -- Setters
 
 - (void)setAnimationDoesLoop:(BOOL)loopAnimation {
@@ -77,9 +96,6 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 }
 
 - (void)setAnimationIsPlaying:(BOOL)animationIsPlaying  {
-  if (_animationIsPlaying == animationIsPlaying) {
-    return;
-  }
   _animationIsPlaying = animationIsPlaying;
   CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
   CFTimeInterval clock = CACurrentMediaTime();
@@ -497,6 +513,16 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 }
 
 # pragma mark - Overrides
+
+- (void)didMoveToWindow {
+  [super didMoveToWindow];
+  [_animationState setNeedsAnimationUpdate];
+}
+
+- (void)didMoveToSuperview {
+  [super didMoveToSuperview];
+  [_animationState setNeedsAnimationUpdate];
+}
 
 - (void)removeFromSuperview {
   [self pause];
