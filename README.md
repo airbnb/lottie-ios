@@ -212,6 +212,9 @@ animationView?.play(completion: { (finished) in
 * Expressions
 * 3d Layer support
 * Gradients
+* Polystar shapes (Can convert to vector path as a work around)
+* Alpha inverted mask
+
 
 ## Install Lottie
 
