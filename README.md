@@ -253,6 +253,7 @@ In your application targets “General” tab under the “Linked Frameworks and
  * [Xamarin bindings](https://github.com/martijn00/LottieXamarin)
  * [NativeScript bindings](https://github.com/bradmartin/nativescript-lottie)
  * [Appcelerator Titanium bindings](https://github.com/m1ga/ti.animation)
+ * MacOS Support added by [Alex Pawlowski](https://github.com/pawlowskialex)
 
 ## Alternatives
 1. Build animations by hand. Building animations by hand is a huge time commitment for design and engineering across Android and iOS. It's often hard or even impossible to justify spending so much time to get an animation right.
