@@ -91,10 +91,8 @@
 - (void)displayCharacter:(BOOL)animated {
   if (animated) {
     [animationView_ play];
-  } else if (animationView_.animationProgress != 1) {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+  } else  {
       animationView_.animationProgress = 1;
-    }];
   }
 }
 
