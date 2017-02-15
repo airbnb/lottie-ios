@@ -10,6 +10,6 @@
 #define LOTHelpers_h
 
 #import "UIColor+Expanded.h"
-#import "CGGeometryAdditions.h"
+#import "CGGeometry+LOTAdditions.h"
 
 #endif /* LOTHelpers_h */

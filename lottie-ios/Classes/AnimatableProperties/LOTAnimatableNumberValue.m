@@ -172,7 +172,7 @@
                      toMin:(NSNumber *)toMin
                      toMax:(NSNumber *)toMax {
   [self remapValueWithBlock:^CGFloat(CGFloat inValue) {
-    return RemapValue(inValue, fromMin.floatValue, fromMax.floatValue, toMin.floatValue, toMax.floatValue);
+    return LOT_RemapValue(inValue, fromMin.floatValue, fromMax.floatValue, toMin.floatValue, toMax.floatValue);
   }];
 }
 

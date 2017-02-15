@@ -7,7 +7,7 @@
 //
 
 #import "LOTAnimatableShapeValue.h"
-#import "CGGeometryAdditions.h"
+#import "CGGeometry+LOTAdditions.h"
 @interface LOTAnimatableShapeValue ()
 
 @property (nonatomic, readonly) NSArray *shapeKeyframes;
@@ -179,23 +179,23 @@
   for (int i = 1; i < pointsArray.count; i ++) {
     CGPoint vertex = [self _vertexAtIndex:i inArray:pointsArray];
     CGPoint previousVertex = [self _vertexAtIndex:i - 1 inArray:pointsArray];
-    CGPoint cp1 = CGPointAddedToPoint(previousVertex, [self _vertexAtIndex:i - 1 inArray:outTangents]);
-    CGPoint cp2 = CGPointAddedToPoint(vertex, [self _vertexAtIndex:i inArray:inTangents]);
+    CGPoint cp1 = LOT_PointAddedToPoint(previousVertex, [self _vertexAtIndex:i - 1 inArray:outTangents]);
+    CGPoint cp2 = LOT_PointAddedToPoint(vertex, [self _vertexAtIndex:i inArray:inTangents]);
     
     if (CGPointEqualToPoint(previousVertex, cp1) &&
         CGPointEqualToPoint(vertex, cp2)) {
       // Straight Line
-      cp1 = CGPointByLerpingPoints(previousVertex, vertex, 0.01);
-      cp2 = CGPointByLerpingPoints(previousVertex, vertex, 0.99);
+      cp1 = LOT_PointByLerpingPoints(previousVertex, vertex, 0.01);
+      cp2 = LOT_PointByLerpingPoints(previousVertex, vertex, 0.99);
     } else {
       if (CGPointEqualToPoint(previousVertex, cp1)) {
         // Missing out tan
-        cp1 = CGPointByLerpingPoints(previousVertex, cp2, 0.01);
+        cp1 = LOT_PointByLerpingPoints(previousVertex, cp2, 0.01);
       }
       
       if (CGPointEqualToPoint(vertex, cp2)) {
         // Missing in tan
-        cp2 = CGPointByLerpingPoints(cp1, vertex, 0.99);
+        cp2 = LOT_PointByLerpingPoints(cp1, vertex, 0.99);
       }
     }
 
@@ -207,22 +207,22 @@
   if (closedPath) {
     CGPoint vertex = [self _vertexAtIndex:0 inArray:pointsArray];
     CGPoint previousVertex = [self _vertexAtIndex:pointsArray.count - 1  inArray:pointsArray];
-    CGPoint cp1 = CGPointAddedToPoint(previousVertex, [self _vertexAtIndex:pointsArray.count - 1 inArray:outTangents]);
-    CGPoint cp2 = CGPointAddedToPoint(vertex, [self _vertexAtIndex:0 inArray:inTangents]);
+    CGPoint cp1 = LOT_PointAddedToPoint(previousVertex, [self _vertexAtIndex:pointsArray.count - 1 inArray:outTangents]);
+    CGPoint cp2 = LOT_PointAddedToPoint(vertex, [self _vertexAtIndex:0 inArray:inTangents]);
     if (CGPointEqualToPoint(previousVertex, cp1) &&
         CGPointEqualToPoint(vertex, cp2)) {
       // Straight Line
-      cp1 = CGPointByLerpingPoints(previousVertex, vertex, 0.01);
-      cp2 = CGPointByLerpingPoints(previousVertex, vertex, 0.99);
+      cp1 = LOT_PointByLerpingPoints(previousVertex, vertex, 0.01);
+      cp2 = LOT_PointByLerpingPoints(previousVertex, vertex, 0.99);
     } else {
       if (CGPointEqualToPoint(previousVertex, cp1)) {
         // Missing out tan
-        cp1 = CGPointByLerpingPoints(previousVertex, cp2, 0.01);
+        cp1 = LOT_PointByLerpingPoints(previousVertex, cp2, 0.01);
       }
       
       if (CGPointEqualToPoint(vertex, cp2)) {
         // Missing in tan
-        cp2 = CGPointByLerpingPoints(cp1, vertex, 0.99);
+        cp2 = LOT_PointByLerpingPoints(cp1, vertex, 0.99);
       }
     }
     
