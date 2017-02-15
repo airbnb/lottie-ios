@@ -185,8 +185,7 @@
     if (CGPointEqualToPoint(previousVertex, cp1) &&
         CGPointEqualToPoint(vertex, cp2)) {
       // Straight Line
-      cp1 = LOT_PointByLerpingPoints(previousVertex, vertex, 0.01);
-      cp2 = LOT_PointByLerpingPoints(previousVertex, vertex, 0.99);
+      [shape addLineToPoint:vertex];
     } else {
       if (CGPointEqualToPoint(previousVertex, cp1)) {
         // Missing out tan
@@ -197,11 +196,10 @@
         // Missing in tan
         cp2 = LOT_PointByLerpingPoints(cp1, vertex, 0.99);
       }
+      [shape addCurveToPoint:vertex
+               controlPoint1:cp1
+               controlPoint2:cp2];
     }
-
-    [shape addCurveToPoint:vertex
-            controlPoint1:cp1
-            controlPoint2:cp2];
   }
   
   if (closedPath) {
