@@ -514,21 +514,6 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
 # pragma mark - Overrides
 
-- (void)didMoveToWindow {
-  [super didMoveToWindow];
-  [_animationState setNeedsAnimationUpdate];
-}
-
-- (void)didMoveToSuperview {
-  [super didMoveToSuperview];
-  [_animationState setNeedsAnimationUpdate];
-}
-
-- (void)removeFromSuperview {
-  [self pause];
-  [super removeFromSuperview];
-}
-
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
 #define LOTViewContentMode UIViewContentMode
@@ -545,6 +530,21 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 #define LOTViewContentModeTopRight UIViewContentModeTopRight
 #define LOTViewContentModeBottomLeft UIViewContentModeBottomLeft
 #define LOTViewContentModeBottomRight UIViewContentModeBottomRight
+
+- (void)didMoveToWindow {
+  [super didMoveToWindow];
+  [_animationState setNeedsAnimationUpdate];
+}
+
+- (void)didMoveToSuperview {
+  [super didMoveToSuperview];
+  [_animationState setNeedsAnimationUpdate];
+}
+
+- (void)removeFromSuperview {
+  [self pause];
+  [super removeFromSuperview];
+}
 
 - (void)setContentMode:(LOTViewContentMode)contentMode {
   [super setContentMode:contentMode];
@@ -592,7 +592,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
     return;
   }
 
-  CGPoint centerPoint = CGRectGetCenterPoint(self.bounds);
+  CGPoint centerPoint = LOT_RectGetCenterPoint(self.bounds);
   CATransform3D xform;
 
   if (self.contentMode == LOTViewContentModeScaleToFill) {
