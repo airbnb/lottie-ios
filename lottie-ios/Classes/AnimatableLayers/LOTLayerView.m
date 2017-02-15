@@ -13,7 +13,7 @@
 #import "LOTGroupLayerView.h"
 #import "CAAnimationGroup+LOTAnimatableGroup.h"
 #import "LOTMaskLayer.h"
-#import "CGGeometryAdditions.h"
+#import "CGGeometry+LOTAdditions.h"
 
 @interface LOTParentLayer : LOTAnimatableLayer
 

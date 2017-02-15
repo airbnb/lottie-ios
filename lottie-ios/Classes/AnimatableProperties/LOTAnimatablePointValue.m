@@ -8,7 +8,7 @@
 
 #import "LOTPlatformCompat.h"
 #import "LOTAnimatablePointValue.h"
-#import "CGGeometryAdditions.h"
+#import "CGGeometry+LOTAdditions.h"
 
 @interface LOTAnimatablePointValue ()
 
@@ -129,8 +129,8 @@
       } else {
         CGPoint inVertex = [self _pointFromValueArray:startPoint];
         [motionPath addCurveToPoint:vertex
-                      controlPoint1:CGPointAddedToPoint(inVertex, cp1)
-                      controlPoint2:CGPointAddedToPoint(vertex, cp2)];
+                      controlPoint1:LOT_PointAddedToPoint(inVertex, cp1)
+                      controlPoint2:LOT_PointAddedToPoint(vertex, cp2)];
       
       }
       
@@ -177,8 +177,8 @@
     NSMutableArray *newValues = [NSMutableArray array];
     for (NSValue *pointValue in _pointKeyframes) {
       CGPoint oldPoint = pointValue.CGPointValue;
-      CGPoint newPoint = CGPointMake(RemapValue(oldPoint.x, frombounds.origin.x, frombounds.size.width, toBounds.origin.x, toBounds.size.width),
-                                     RemapValue(oldPoint.y, frombounds.origin.y, frombounds.size.height, toBounds.origin.y, toBounds.size.height));
+      CGPoint newPoint = CGPointMake(LOT_RemapValue(oldPoint.x, frombounds.origin.x, frombounds.size.width, toBounds.origin.x, toBounds.size.width),
+                                     LOT_RemapValue(oldPoint.y, frombounds.origin.y, frombounds.size.height, toBounds.origin.y, toBounds.size.height));
       [newValues addObject:[NSValue valueWithCGPoint:newPoint]];
     }
     NSValue *firstPoint = newValues.firstObject;
@@ -186,8 +186,8 @@
     _pointKeyframes = newValues;
     _animationPath = nil;
   } else {
-    CGPoint newPoint = CGPointMake(RemapValue(_initialPoint.x, frombounds.origin.x, frombounds.size.width, toBounds.origin.x, toBounds.size.width),
-                                   RemapValue(_initialPoint.y, frombounds.origin.y, frombounds.size.height, toBounds.origin.y, toBounds.size.height));
+    CGPoint newPoint = CGPointMake(LOT_RemapValue(_initialPoint.x, frombounds.origin.x, frombounds.size.width, toBounds.origin.x, toBounds.size.width),
+                                   LOT_RemapValue(_initialPoint.y, frombounds.origin.y, frombounds.size.height, toBounds.origin.y, toBounds.size.height));
     _initialPoint = newPoint;
   }
 }

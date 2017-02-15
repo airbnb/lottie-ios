@@ -57,7 +57,7 @@
   if (rotation) {
     _rotation = [[LOTAnimatableNumberValue alloc] initWithNumberValues:rotation frameRate:frameRate];
     [_rotation remapValueWithBlock:^CGFloat(CGFloat inValue) {
-      return DegreesToRadians(inValue);
+      return LOT_DegreesToRadians(inValue);
     }];
   }
   
