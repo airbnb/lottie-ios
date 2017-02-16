@@ -303,6 +303,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   }
   
   if (_sceneModel) {
+    self.frame = _sceneModel.compBounds;
     hasFullyInitialized_ = YES;
   }
 }
