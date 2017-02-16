@@ -228,6 +228,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   if (self) {
     LOTComposition *laScene = [[LOTAnimationCache sharedCache] animationForKey:url.absoluteString];
     if (laScene) {
+      self.frame = laScene.compBounds;
       [self _initializeAnimationContainer];
       [self _setupWithSceneModel:laScene restoreAnimationState:NO];
     } else {
@@ -247,6 +248,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
         LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON];
         dispatch_async(dispatch_get_main_queue(), ^(void){
           [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:url.absoluteString];
+          self.frame = laScene.compBounds;
           [self _initializeAnimationContainer];
           [self _setupWithSceneModel:laScene restoreAnimationState:YES];
         });
@@ -303,7 +305,6 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   }
   
   if (_sceneModel) {
-    self.bounds = _sceneModel.compBounds;
     hasFullyInitialized_ = YES;
   }
 }
