@@ -14,19 +14,19 @@
 #import "LOTAnimationView_Internal.h"
 #import "LOTAnimationCache.h"
 
-const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
-
 @implementation LOTAnimationState {
   BOOL _needsAnimationUpdate;
   BOOL _animationIsPlaying;
   BOOL _playFromBeginning;
   CFTimeInterval _previousLocalTime;
   CGFloat _animatedProgress;
+  NSNumber *_framerate;
 }
 
-- (id)initWithDuration:(CGFloat)duration layer:(CALayer *)layer{
+- (id)initWithDuration:(CGFloat)duration layer:(CALayer *)layer frameRate:(NSNumber *)framerate {
   self = [super init];
   if (self) {
+    _framerate = framerate;
     _layer = layer;
     _needsAnimationUpdate = NO;
     _animationIsPlaying = NO;
@@ -117,7 +117,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   }
   _animatedProgress = animatedProgress > 1 ? fmod(animatedProgress, 1) : MAX(animatedProgress, 0);
   _animationIsPlaying = NO;
-  CFTimeInterval offset = _animatedProgress == 1 ? _animationDuration - singleFrameTimeValue : _animatedProgress * _animationDuration;
+  CFTimeInterval offset = _animatedProgress == 1 ? _animationDuration - LOT_singleFrameTimeValue : _animatedProgress * _animationDuration;
   CFTimeInterval clock = CACurrentMediaTime();
   [self updateAnimationLayerClockTime:clock timeOffset:offset];
 }
@@ -163,8 +163,8 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 
 - (void)logStats:(NSString *)logName {
   CFTimeInterval localTime = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
-  NSLog(@"LOTAnimationState %@ || Is Playing %@ || Duration %f || Speed %lf ||  Progress %lf || Local Time %lf || ",
-        logName, (_animationIsPlaying ? @"YES" : @"NO"), self.animationDuration, _layer.speed, self.animatedProgress, localTime);
+  NSLog(@"LOTAnimationState %@ || Is Playing %@ || Duration %f || Speed %lf ||  Progress %lf || Local Time %lf || Frame %i ",
+        logName, (_animationIsPlaying ? @"YES" : @"NO"), self.animationDuration, _layer.speed, self.animatedProgress, localTime, (int)(localTime * _framerate.integerValue));
 }
 
 @end
@@ -231,7 +231,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
       [self _initializeAnimationContainer];
       [self _setupWithSceneModel:laScene restoreAnimationState:NO];
     } else {
-      _animationState = [[LOTAnimationState alloc] initWithDuration:singleFrameTimeValue layer:nil];
+      _animationState = [[LOTAnimationState alloc] initWithDuration:LOT_singleFrameTimeValue layer:nil frameRate:@1];
       dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         NSData *animationData = [NSData dataWithContentsOfURL:url];
         if (!animationData) {
@@ -291,7 +291,7 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   _sceneModel = model;
   [self _buildSubviewsFromModel];
   LOTAnimationState *oldState = _animationState;
-  _animationState = [[LOTAnimationState alloc] initWithDuration:_sceneModel.timeDuration layer:_animationContainer];
+  _animationState = [[LOTAnimationState alloc] initWithDuration:_sceneModel.timeDuration layer:_animationContainer frameRate:_sceneModel.framerate];
 
   if (restoreAnimation && oldState) {
     [self setLoopAnimation:oldState.loopAnimation];
@@ -331,11 +331,11 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
   NSMutableDictionary *layerMap = [NSMutableDictionary dictionary];
   NSMutableDictionary *layerNameMap = [NSMutableDictionary dictionary];
   
-  NSArray *reversedItems = [[_sceneModel.layers reverseObjectEnumerator] allObjects];
+  NSArray *reversedItems = [[_sceneModel.layerGroup.layers reverseObjectEnumerator] allObjects];
   
   LOTLayerView *maskedLayer = nil;
   for (LOTLayer *layer in reversedItems) {
-    LOTLayerView *layerView = [[LOTLayerView alloc] initWithModel:layer inComposition:_sceneModel];
+    LOTLayerView *layerView = [[LOTLayerView alloc] initWithModel:layer inLayerGroup:_sceneModel.layerGroup];
     layerMap[layer.layerID] = layerView;
     layerNameMap[layer.layerName] = layerView;
     if (maskedLayer) {

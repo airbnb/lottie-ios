@@ -13,7 +13,7 @@
 
 @interface LOTLayerView : LOTAnimatableLayer
 
-- (instancetype)initWithModel:(LOTLayer *)model inComposition:(LOTComposition *)comp;
+- (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup;
 
 @property (nonatomic, readonly) LOTLayer *layerModel;
 @property (nonatomic, assign) BOOL debugModeOn;

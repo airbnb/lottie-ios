@@ -28,5 +28,7 @@
 #import "LOTShapeStroke.h"
 #import "LOTShapeTransform.h"
 #import "LOTShapeTrimPath.h"
+#import "LOTLayerGroup.h"
+#import "LOTAsset.h"
 
 #endif /* LOTModels_h */

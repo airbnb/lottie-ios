@@ -8,6 +8,7 @@
 //
 
 extern const CGSize CGSizeMax;
+extern const NSTimeInterval LOT_singleFrameTimeValue;
 
 CGRect LOT_RectIntegral(CGRect rect);
 

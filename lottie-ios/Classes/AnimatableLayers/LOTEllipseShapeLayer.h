@@ -16,6 +16,6 @@
                               stroke:(LOTShapeStroke *)stroke
                                 trim:(LOTShapeTrimPath *)trim
                            transform:(LOTShapeTransform *)transform
-                        withDuration:(NSTimeInterval)duration;
+                        withLayerDuration:(NSTimeInterval)duration;
 
 @end
