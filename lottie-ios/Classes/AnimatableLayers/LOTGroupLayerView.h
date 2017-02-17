@@ -22,7 +22,7 @@
                               fill:(LOTShapeFill *)previousFill
                             stroke:(LOTShapeStroke *)previousStroke
                           trimPath:(LOTShapeTrimPath *)previousTrimPath
-                      withDuration:(NSTimeInterval)duration;
+                      withLayerDuration:(NSTimeInterval)duration;
 
 @property (nonatomic, readonly) LOTShapeGroup *shapeGroup;
 @property (nonatomic, readonly) LOTShapeTransform *shapeTransform;

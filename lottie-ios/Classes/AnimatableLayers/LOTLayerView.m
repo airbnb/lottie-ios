@@ -17,7 +17,7 @@
 
 @interface LOTParentLayer : LOTAnimatableLayer
 
-- (instancetype)initWithParentModel:(LOTLayer *)parent inComposition:(LOTComposition *)comp;
+- (instancetype)initWithParentModel:(LOTLayer *)parent;
 
 @end
 
@@ -26,10 +26,10 @@
   CAAnimationGroup *_animation;
 }
 
-- (instancetype)initWithParentModel:(LOTLayer *)parent inComposition:(LOTComposition *)comp {
-  self = [super initWithDuration:comp.timeDuration];
+- (instancetype)initWithParentModel:(LOTLayer *)parent {
+  self = [super initWithLayerDuration:parent.layerDuration];
   if (self) {
-    self.bounds = parent.compBounds;
+    self.bounds = parent.layerBounds;
     _parentModel = parent;
     [self _setupLayerFromModel];
   }
@@ -90,23 +90,21 @@
   CAAnimationGroup *_animation;
   CAKeyframeAnimation *_inOutAnimation;
   NSArray<LOTParentLayer *> *_parentLayers;
-  LOTComposition *_composition;
   LOTMaskLayer *_maskLayer;
 }
 
-- (instancetype)initWithModel:(LOTLayer *)model inComposition:(LOTComposition *)comp {
-  self = [super initWithDuration:comp.timeDuration];
+- (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup {
+  self = [super initWithLayerDuration:model.layerDuration];
   if (self) {
     _layerModel = model;
-    _composition = comp;
-    [self _setupViewFromModel];
+    [self _setupViewFromModelWithLayerGroup:layerGroup];
   }
   return self;
 }
 
-- (void)_setupViewFromModel {
+- (void)_setupViewFromModelWithLayerGroup:(LOTLayerGroup *)layersGroup {
   self.backgroundColor = nil;
-  self.bounds = _composition.compBounds;
+  self.bounds = _layerModel.layerBounds;
   self.anchorPoint = CGPointZero;
   
   _childContainerLayer = [CALayer new];
@@ -114,7 +112,7 @@
   _childContainerLayer.backgroundColor = _layerModel.solidColor.CGColor;
   
   if (_layerModel.layerType == LOTLayerTypeSolid) {
-    _childContainerLayer.bounds = CGRectMake(0, 0, _layerModel.solidWidth.floatValue, _layerModel.solidHeight.floatValue);
+    _childContainerLayer.bounds = CGRectMake(0, 0, _layerModel.layerWidth.floatValue, _layerModel.layerHeight.floatValue);
     _childContainerLayer.backgroundColor = nil;
     _childContainerLayer.masksToBounds = NO;
 
@@ -130,8 +128,8 @@
   NSMutableArray *parentLayers = [NSMutableArray array];
   if (parentID) {
     while (parentID != nil) {
-      LOTLayer *parentModel = [_composition layerModelForID:parentID];
-      LOTParentLayer *parentLayer = [[LOTParentLayer alloc] initWithParentModel:parentModel inComposition:_composition];
+      LOTLayer *parentModel = [layersGroup layerModelForID:parentID];
+      LOTParentLayer *parentLayer = [[LOTParentLayer alloc] initWithParentModel:parentModel];
       [parentLayer addSublayer:currentChild];
       [parentLayers addObject:parentLayer];
       currentChild = parentLayer;
@@ -164,7 +162,7 @@
   
   NSArray *groupItems = _layerModel.shapes;
   NSArray *reversedItems = [[groupItems reverseObjectEnumerator] allObjects];
-  LOTShapeTransform *currentTransform = [LOTShapeTransform transformIdentityWithCompBounds:_composition.compBounds];
+  LOTShapeTransform *currentTransform = [LOTShapeTransform transformIdentityWithCompBounds:_layerModel.layerBounds];
   LOTShapeTrimPath *currentTrimPath = nil;
   LOTShapeFill *currentFill = nil;
   LOTShapeStroke *currentStroke = nil;
@@ -178,7 +176,7 @@
                                                                              fill:currentFill
                                                                            stroke:currentStroke
                                                                          trimPath:currentTrimPath
-                                                                     withDuration:self.laAnimationDuration];
+                                                                     withLayerDuration:self.layerDuration];
       [_childContainerLayer addSublayer:groupLayer];
       [shapeLayers addObject:groupLayer];
     } else if ([item isKindOfClass:[LOTShapePath class]]) {
@@ -188,7 +186,7 @@
                                                                       stroke:currentStroke
                                                                         trim:currentTrimPath
                                                                    transform:currentTransform
-                                                                withDuration:self.laAnimationDuration];
+                                                                withLayerDuration:self.layerDuration];
       [shapeLayers addObject:shapeLayer];
       [_childContainerLayer addSublayer:shapeLayer];
     } else if ([item isKindOfClass:[LOTShapeRectangle class]]) {
@@ -198,7 +196,7 @@
                                                                             stroke:currentStroke
                                                                               trim:currentTrimPath
                                                                          transform:currentTransform
-                                                                    withDuration:self.laAnimationDuration];
+                                                                    withLayerDuration:self.layerDuration];
       [shapeLayers addObject:shapeLayer];
       [_childContainerLayer addSublayer:shapeLayer];
     }  else if ([item isKindOfClass:[LOTShapeCircle class]]) {
@@ -208,7 +206,7 @@
                                                                                    stroke:currentStroke
                                                                                      trim:currentTrimPath
                                                                                 transform:currentTransform
-                                                                             withDuration:self.laAnimationDuration];
+                                                                             withLayerDuration:self.layerDuration];
       [shapeLayers addObject:shapeLayer];
       [_childContainerLayer addSublayer:shapeLayer];
     } else if ([item isKindOfClass:[LOTShapeTransform class]]) {
@@ -225,7 +223,7 @@
   _shapeLayers = shapeLayers;
   
   if (_layerModel.masks) {
-    _maskLayer = [[LOTMaskLayer alloc] initWithMasks:_layerModel.masks inComposition:_composition];
+    _maskLayer = [[LOTMaskLayer alloc] initWithMasks:_layerModel.masks inLayer:_layerModel];
     _childContainerLayer.mask = _maskLayer;
   }
   
@@ -270,19 +268,20 @@
     [_childContainerLayer addAnimation:_animation forKey:@"LottieAnimation"];
   }
   
-  if (_layerModel.hasInOutAnimation) {
-    CAKeyframeAnimation *inOutAnimation = [CAKeyframeAnimation animationWithKeyPath:@"hidden"];
-    inOutAnimation.keyTimes = _layerModel.inOutKeyTimes;
-    inOutAnimation.values = _layerModel.inOutKeyframes;
-    inOutAnimation.duration = _layerModel.compDuration;
-    inOutAnimation.calculationMode = kCAAnimationDiscrete;
-    inOutAnimation.fillMode = kCAFillModeForwards;
-    inOutAnimation.removedOnCompletion = NO;
 
-    _inOutAnimation = inOutAnimation;
-    _inOutAnimation.duration = self.laAnimationDuration;
-    [self addAnimation:_inOutAnimation forKey:@""];
-  }
+  CAKeyframeAnimation *inOutAnimation = [CAKeyframeAnimation animationWithKeyPath:@"hidden"];
+  inOutAnimation.keyTimes = _layerModel.inOutKeyTimes;
+  inOutAnimation.values = _layerModel.inOutKeyframes;
+  inOutAnimation.duration = _layerModel.layerDuration;
+  inOutAnimation.calculationMode = kCAAnimationDiscrete;
+  inOutAnimation.fillMode = kCAFillModeBoth;
+  inOutAnimation.removedOnCompletion = NO;
+
+  _inOutAnimation = inOutAnimation;
+  _inOutAnimation.duration = self.layerDuration;
+  [self addAnimation:_inOutAnimation forKey:@"inout"];
+  self.duration = self.layerDuration + LOT_singleFrameTimeValue;
+
 }
 
 - (void)setDebugModeOn:(BOOL)debugModeOn {

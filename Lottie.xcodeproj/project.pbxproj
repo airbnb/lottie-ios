@@ -145,6 +145,15 @@
 		481A4AEE1E4A78A5003CF62B /* LOTPlatformCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 481A4ADC1E4A78A0003CF62B /* LOTPlatformCompat.h */; };
 		4883E4E31E5F9EE400027E57 /* LOTStrokeShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 489F8E111E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m */; };
 		4883E4E41E5F9EE400027E57 /* CGGeometry+LOTAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 48183C9B1E54E20B0039F121 /* CGGeometry+LOTAdditions.m */; };
+		484EBA161E565AF700D4CAD9 /* LOTAsset.h in Headers */ = {isa = PBXBuildFile; fileRef = 484EBA141E565AF700D4CAD9 /* LOTAsset.h */; };
+		484EBA171E565AF700D4CAD9 /* LOTAsset.h in Headers */ = {isa = PBXBuildFile; fileRef = 484EBA141E565AF700D4CAD9 /* LOTAsset.h */; };
+		484EBA181E565AF700D4CAD9 /* LOTAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 484EBA151E565AF700D4CAD9 /* LOTAsset.m */; };
+		484EBA191E565AF700D4CAD9 /* LOTAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 484EBA151E565AF700D4CAD9 /* LOTAsset.m */; };
+		484EBA1A1E565AF700D4CAD9 /* LOTAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 484EBA151E565AF700D4CAD9 /* LOTAsset.m */; };
+		484EBA251E57898D00D4CAD9 /* LOTLayerGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 484EBA231E57898D00D4CAD9 /* LOTLayerGroup.h */; };
+		484EBA261E57898D00D4CAD9 /* LOTLayerGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 484EBA231E57898D00D4CAD9 /* LOTLayerGroup.h */; };
+		484EBA271E57898D00D4CAD9 /* LOTLayerGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 484EBA241E57898D00D4CAD9 /* LOTLayerGroup.m */; };
+		484EBA281E57898D00D4CAD9 /* LOTLayerGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 484EBA241E57898D00D4CAD9 /* LOTLayerGroup.m */; };
 		489F8E121E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 489F8E101E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h */; };
 		489F8E131E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 489F8E101E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h */; };
 		489F8E141E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 489F8E111E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m */; };
@@ -282,6 +291,10 @@
 		481A4AE01E4A78A0003CF62B /* UIBezierPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBezierPath.m; sourceTree = "<group>"; };
 		481A4AE11E4A78A0003CF62B /* UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIColor.h; sourceTree = "<group>"; };
 		481A4AE21E4A78A0003CF62B /* UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIColor.m; sourceTree = "<group>"; };
+		484EBA141E565AF700D4CAD9 /* LOTAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAsset.h; sourceTree = "<group>"; };
+		484EBA151E565AF700D4CAD9 /* LOTAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTAsset.m; sourceTree = "<group>"; };
+		484EBA231E57898D00D4CAD9 /* LOTLayerGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTLayerGroup.h; sourceTree = "<group>"; };
+		484EBA241E57898D00D4CAD9 /* LOTLayerGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTLayerGroup.m; sourceTree = "<group>"; };
 		489F8E101E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTStrokeShapeLayer.h; sourceTree = "<group>"; };
 		489F8E111E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTStrokeShapeLayer.m; sourceTree = "<group>"; };
 		62CA59B81E3C173B002D7188 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -399,6 +412,10 @@
 				481A4A441E4A7885003CF62B /* LOTMask.h */,
 				481A4A451E4A7885003CF62B /* LOTMask.m */,
 				481A4A461E4A7885003CF62B /* LOTModels.h */,
+				484EBA141E565AF700D4CAD9 /* LOTAsset.h */,
+				484EBA151E565AF700D4CAD9 /* LOTAsset.m */,
+				484EBA231E57898D00D4CAD9 /* LOTLayerGroup.h */,
+				484EBA241E57898D00D4CAD9 /* LOTLayerGroup.m */,
 				481A4A471E4A7885003CF62B /* LOTShapeCircle.h */,
 				481A4A481E4A7885003CF62B /* LOTShapeCircle.m */,
 				481A4A491E4A7885003CF62B /* LOTShapeFill.h */,
@@ -526,6 +543,7 @@
 				481A4A5F1E4A7885003CF62B /* LOTEllipseShapeLayer.h in Headers */,
 				481A4ACD1E4A7885003CF62B /* LOTShapeTrimPath.h in Headers */,
 				489F8E121E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h in Headers */,
+				484EBA251E57898D00D4CAD9 /* LOTLayerGroup.h in Headers */,
 				481A4A671E4A7885003CF62B /* LOTLayerView.h in Headers */,
 				481A4AC11E4A7885003CF62B /* LOTShapeRectangle.h in Headers */,
 				481A4AC51E4A7885003CF62B /* LOTShapeStroke.h in Headers */,
@@ -537,6 +555,7 @@
 				481A4A771E4A7885003CF62B /* LOTAnimatableBoundsValue.h in Headers */,
 				481A4AB11E4A7885003CF62B /* LOTShapeCircle.h in Headers */,
 				481A4A8B1E4A7885003CF62B /* LOTAnimatableShapeValue.h in Headers */,
+				484EBA161E565AF700D4CAD9 /* LOTAsset.h in Headers */,
 				481A4AAB1E4A7885003CF62B /* LOTMask.h in Headers */,
 				481A4A871E4A7885003CF62B /* LOTAnimatableScaleValue.h in Headers */,
 				481A4A951E4A7885003CF62B /* CAAnimationGroup+LOTAnimatableGroup.h in Headers */,
@@ -568,6 +587,7 @@
 				481A4A601E4A7885003CF62B /* LOTEllipseShapeLayer.h in Headers */,
 				481A4ACA1E4A7885003CF62B /* LOTShapeTransform.h in Headers */,
 				481A4AE51E4A78A0003CF62B /* CALayer+Compat.h in Headers */,
+				484EBA171E565AF700D4CAD9 /* LOTAsset.h in Headers */,
 				489F8E131E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h in Headers */,
 				48183C9D1E54E20B0039F121 /* CGGeometry+LOTAdditions.h in Headers */,
 				481A4A701E4A7885003CF62B /* LOTRectShapeLayer.h in Headers */,
@@ -582,6 +602,7 @@
 				481A4AC61E4A7885003CF62B /* LOTShapeStroke.h in Headers */,
 				481A4AA41E4A7885003CF62B /* LOTComposition.h in Headers */,
 				481A4A801E4A7885003CF62B /* LOTAnimatableNumberValue.h in Headers */,
+				484EBA261E57898D00D4CAD9 /* LOTLayerGroup.h in Headers */,
 				481A4ACE1E4A7885003CF62B /* LOTShapeTrimPath.h in Headers */,
 				481A4AA01E4A7885003CF62B /* UIColor+Expanded.h in Headers */,
 				FAE1F7CE1E428CBE002E0974 /* LOTAnimationTransitionController.h in Headers */,
@@ -712,6 +733,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				481A4ACB1E4A7885003CF62B /* LOTShapeTransform.m in Sources */,
+				484EBA271E57898D00D4CAD9 /* LOTLayerGroup.m in Sources */,
 				481A4A6D1E4A7885003CF62B /* LOTMaskLayer.m in Sources */,
 				481A4A971E4A7885003CF62B /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */,
 				481A4A811E4A7885003CF62B /* LOTAnimatableNumberValue.m in Sources */,
@@ -731,6 +753,7 @@
 				481A4A5D1E4A7885003CF62B /* LOTAnimatableLayer.m in Sources */,
 				481A4ABB1E4A7885003CF62B /* LOTShapeGroup.m in Sources */,
 				481A4AAD1E4A7885003CF62B /* LOTMask.m in Sources */,
+				484EBA181E565AF700D4CAD9 /* LOTAsset.m in Sources */,
 				481A4A8D1E4A7885003CF62B /* LOTAnimatableShapeValue.m in Sources */,
 				481A4AB31E4A7885003CF62B /* LOTShapeCircle.m in Sources */,
 				481A4A711E4A7885003CF62B /* LOTRectShapeLayer.m in Sources */,
@@ -767,6 +790,7 @@
 				84FE13051E4C1553009B157C /* LOTAnimationCache.m in Sources */,
 				84FE13061E4C1553009B157C /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */,
 				84FE13081E4C1553009B157C /* UIColor+Expanded.m in Sources */,
+				484EBA1A1E565AF700D4CAD9 /* LOTAsset.m in Sources */,
 				84FE13091E4C1553009B157C /* LOTComposition.m in Sources */,
 				84FE130A1E4C1553009B157C /* LOTLayer.m in Sources */,
 				84FE130B1E4C1553009B157C /* LOTMask.m in Sources */,
@@ -804,7 +828,9 @@
 				481A4A5E1E4A7885003CF62B /* LOTAnimatableLayer.m in Sources */,
 				481A4A8A1E4A7885003CF62B /* LOTAnimatableScaleValue.m in Sources */,
 				481A4A861E4A7885003CF62B /* LOTAnimatablePointValue.m in Sources */,
+				484EBA191E565AF700D4CAD9 /* LOTAsset.m in Sources */,
 				481A4A621E4A7885003CF62B /* LOTEllipseShapeLayer.m in Sources */,
+				484EBA281E57898D00D4CAD9 /* LOTLayerGroup.m in Sources */,
 				481A4A821E4A7885003CF62B /* LOTAnimatableNumberValue.m in Sources */,
 				481A4AE41E4A78A0003CF62B /* CADisplayLink.m in Sources */,
 				481A4A981E4A7885003CF62B /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */,
