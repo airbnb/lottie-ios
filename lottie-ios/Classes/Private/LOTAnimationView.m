@@ -300,6 +300,7 @@
       _compLayer = nil;
     }
     _compLayer = [[LOTCompositionLayer alloc] initWithLayerGroup:_sceneModel.layerGroup
+                                                  withAssetGroup:_sceneModel.assetGroup
                                                       withBounds:_sceneModel.compBounds];
     [_timingLayer addSublayer:_compLayer];
   }

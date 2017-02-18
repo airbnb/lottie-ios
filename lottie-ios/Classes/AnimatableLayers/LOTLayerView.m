@@ -112,7 +112,8 @@
   _childContainerLayer.backgroundColor = _layerModel.solidColor.CGColor;
   
   if (_layerModel.layerType == LOTLayerTypeSolid) {
-    _childContainerLayer.bounds = CGRectMake(0, 0, _layerModel.layerWidth.floatValue, _layerModel.layerHeight.floatValue);
+    self.bounds = _layerModel.parentCompBounds;
+    _childContainerLayer.bounds = _layerModel.layerBounds;
     _childContainerLayer.backgroundColor = nil;
     _childContainerLayer.masksToBounds = NO;
 
@@ -121,6 +122,12 @@
     solid.frame = _childContainerLayer.bounds;
     solid.masksToBounds = YES;
     [_childContainerLayer addSublayer:solid];
+  }
+  
+  if (_layerModel.layerType == LOTLayerTypePrecomp) {
+    self.bounds = _layerModel.parentCompBounds;
+    _childContainerLayer.bounds = _layerModel.layerBounds;
+
   }
   
   NSNumber *parentID = _layerModel.parentID;
@@ -284,11 +291,19 @@
 
 }
 
+- (void)LOT_addChildLayer:(CALayer *)childLayer {
+  [_childContainerLayer addSublayer:childLayer];
+}
+
 - (void)setDebugModeOn:(BOOL)debugModeOn {
   _debugModeOn = debugModeOn;
   self.borderColor = debugModeOn ? [UIColor redColor].CGColor : nil;
   self.borderWidth = debugModeOn ? 2 : 0;
   self.backgroundColor = debugModeOn ? [[UIColor blueColor] colorWithAlphaComponent:0.2].CGColor : [UIColor clearColor].CGColor;
+  
+  _childContainerLayer.borderColor = debugModeOn ? [UIColor yellowColor].CGColor : nil;
+  _childContainerLayer.borderWidth = debugModeOn ? 2 : 0;
+  _childContainerLayer.backgroundColor = debugModeOn ? [[UIColor orangeColor] colorWithAlphaComponent:0.2].CGColor : [UIColor clearColor].CGColor;
   
   for (LOTGroupLayerView *group in _shapeLayers) {
     group.debugModeOn = debugModeOn;
