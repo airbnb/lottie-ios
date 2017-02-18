@@ -11,12 +11,14 @@
 
 @class LOTLayerGroup;
 @class LOTLayer;
+@class LOTAssetGroup;
 
 @interface LOTAsset : NSObject
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
                   withBounds:(CGRect)bounds
-               withFramerate:(NSNumber *)framerate;
+               withFramerate:(NSNumber * _Nullable)framerate
+              withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup;
 
 @property (nonatomic, readonly) NSString *referenceID;
 @property (nonatomic, readonly) NSNumber *assetWidth;
