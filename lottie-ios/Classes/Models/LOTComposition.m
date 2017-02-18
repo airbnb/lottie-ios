@@ -8,12 +8,10 @@
 
 #import "LOTComposition.h"
 #import "LOTLayer.h"
-#import "LOTAsset.h"
+#import "LOTAssetGroup.h"
 #import "LOTLayerGroup.h"
 
-@implementation LOTComposition {
-  NSDictionary *_assetMap;
-}
+@implementation LOTComposition
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary {
   self = [super init];
@@ -41,27 +39,20 @@
     _timeDuration = timeDuration;
   }
   
+  NSArray *assetArray = jsonDictionary[@"assets"];
+  if (assetArray.count) {
+    _assetGroup = [[LOTAssetGroup alloc] initWithJSON:assetArray];
+  }
+  
   NSArray *layersJSON = jsonDictionary[@"layers"];
   if (layersJSON) {
-    _layerGroup = [[LOTLayerGroup alloc] initWithLayerJSON:layersJSON withBounds:_compBounds withFramerate:_framerate];
+    _layerGroup = [[LOTLayerGroup alloc] initWithLayerJSON:layersJSON
+                                                withBounds:_compBounds
+                                             withFramerate:_framerate
+                                            withAssetGroup:_assetGroup];
   }
   
-  NSMutableDictionary *assets = [NSMutableDictionary dictionary];
-  NSArray *assetArray = jsonDictionary[@"assets"];
-  
-  for (NSDictionary *assetDictionary in assetArray) {
-    NSString *referenceID = assetDictionary[@"id"];
-    LOTLayer *layer = [_layerGroup layerForReferenceID:referenceID];
-    if (layer) {
-      LOTAsset *asset = [[LOTAsset alloc] initWithJSON:assetDictionary withBounds:layer.layerBounds withFramerate:layer.framerate];
-      assets[asset.referenceID] = asset;
-    }
-  }
-  _assetMap = assets;
-}
-
-- (LOTAsset *)assetModelForID:(NSNumber *)assetID {
-  return _assetMap[assetID];
+  [_assetGroup finalizeInitialization];
 }
 
 @end

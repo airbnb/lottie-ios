@@ -10,12 +10,14 @@
 #import <CoreGraphics/CoreGraphics.h>
 
 @class LOTLayer;
+@class LOTAssetGroup;
 
 @interface LOTLayerGroup : NSObject
 
 - (instancetype)initWithLayerJSON:(NSArray *)layersJSON
                        withBounds:(CGRect)bounds
-                    withFramerate:(NSNumber *)framerate;
+                    withFramerate:(NSNumber *)framerate
+                   withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup;
 
 @property (nonatomic, readonly) NSArray <LOTLayer *> *layers;
 

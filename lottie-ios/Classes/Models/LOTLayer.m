@@ -35,21 +35,26 @@
   
   _layerName = [jsonDictionary[@"nm"] copy];
   _layerID = [jsonDictionary[@"ind"] copy];
-  _layerBounds = compBounds;
-  _framerate = framerate;
+  
   
   NSNumber *layerType = jsonDictionary[@"ty"];
   _layerType = layerType.integerValue;
   
-  if (jsonDictionary[@"refID"]) {
-    _referenceID = [jsonDictionary[@"refID"] copy];
+  if (jsonDictionary[@"refId"]) {
+    _referenceID = [jsonDictionary[@"refId"] copy];
   }
   
   _parentID = [jsonDictionary[@"parent"] copy];
+  
   _inFrame = [jsonDictionary[@"ip"] copy];
   _outFrame = [jsonDictionary[@"op"] copy];
+  _framerate = framerate;
   
-  if (_layerType == LOTLayerTypePrecomp) {
+  _layerWidth = @(compBounds.size.width);
+  _layerHeight = @(compBounds.size.height);
+  
+  if (_layerType == LOTLayerTypePrecomp ||
+      _layerType == LOTLayerTypeImage) {
     _layerHeight = [jsonDictionary[@"h"] copy];
     _layerWidth = [jsonDictionary[@"w"] copy];
   }
@@ -57,10 +62,11 @@
   if (_layerType == LOTLayerTypeSolid) {
     _layerWidth = jsonDictionary[@"sw"];
     _layerHeight = jsonDictionary[@"sh"];
-    _layerBounds = CGRectMake(0, 0, _layerWidth.floatValue, _layerHeight.floatValue);
     NSString *solidColor = jsonDictionary[@"sc"];
     _solidColor = [UIColor LOT_colorWithHexString:solidColor];
   }
+  
+  _layerBounds = CGRectMake(0, 0, _layerWidth.floatValue, _layerHeight.floatValue);
   
   NSDictionary *ks = jsonDictionary[@"ks"];
   

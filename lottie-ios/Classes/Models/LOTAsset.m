@@ -9,15 +9,20 @@
 #import "LOTAsset.h"
 #import "LOTLayer.h"
 #import "LOTLayerGroup.h"
+#import "LOTAssetGroup.h"
 
 @implementation LOTAsset
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
                   withBounds:(CGRect)bounds
-               withFramerate:(NSNumber *)framerate {
+               withFramerate:(NSNumber *)framerate
+              withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup{
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary withBounds:bounds withFramerate:framerate];
+    [self _mapFromJSON:jsonDictionary
+            withBounds:bounds
+         withFramerate:framerate
+        withAssetGroup:assetGroup];
   }
   return self;
 }
@@ -25,7 +30,8 @@
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary
           withBounds:(CGRect)bounds
-       withFramerate:(NSNumber *)framerate {
+       withFramerate:(NSNumber *)framerate
+      withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup{
   _referenceID = [jsonDictionary[@"id"] copy];
   
   if (jsonDictionary[@"w"]) {
@@ -43,12 +49,15 @@
   if (jsonDictionary[@"p"]) {
     _imageName = [jsonDictionary[@"p"] copy];
   }
-  
+
   NSArray *layersJSON = jsonDictionary[@"layers"];
   if (layersJSON) {
-    _layerGroup = [[LOTLayerGroup alloc] initWithLayerJSON:layersJSON withBounds:bounds withFramerate:framerate];
+    _layerGroup = [[LOTLayerGroup alloc] initWithLayerJSON:layersJSON
+                                                withBounds:bounds
+                                             withFramerate:framerate
+                                            withAssetGroup:assetGroup];
   }
-  
+
 }
 
 @end

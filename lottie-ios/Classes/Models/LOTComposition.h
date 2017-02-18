@@ -11,12 +11,11 @@
 
 @class LOTLayerGroup;
 @class LOTLayer;
-@class LOTAsset;
+@class LOTAssetGroup;
 
 @interface LOTComposition : NSObject
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
-
 
 @property (nonatomic, readonly) CGRect compBounds;
 @property (nonatomic, readonly) NSNumber *startFrame;
@@ -24,7 +23,6 @@
 @property (nonatomic, readonly) NSNumber *framerate;
 @property (nonatomic, readonly) NSTimeInterval timeDuration;
 @property (nonatomic, readonly) LOTLayerGroup *layerGroup;
-
-- (LOTAsset *)assetModelForID:(NSNumber *)assetID;
+@property (nonatomic, readonly) LOTAssetGroup *assetGroup;
 
 @end
