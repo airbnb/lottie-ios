@@ -10,10 +10,12 @@
 #import "LOTAnimationView_Compat.h"
 
 @class LOTLayerGroup;
+@class LOTAssetGroup;
 
 @interface LOTCompositionLayer : CALayer
 
 - (instancetype)initWithLayerGroup:(LOTLayerGroup *)layerGroup
+                    withAssetGroup:(LOTAssetGroup *)assetGroup
                         withBounds:(CGRect)bounds;
 
 - (void)addSublayer:(LOTView *)view

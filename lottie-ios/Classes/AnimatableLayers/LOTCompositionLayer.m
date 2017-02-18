@@ -10,6 +10,8 @@
 #import "LOTPlatformCompat.h"
 #import "LOTLayerView.h"
 #import "LOTAnimationView_Internal.h"
+#import "LOTAsset.h"
+#import "LOTAssetGroup.h"
 
 @interface LOTCustomChild : NSObject
 
@@ -30,16 +32,20 @@
 }
 
 - (instancetype)initWithLayerGroup:(LOTLayerGroup *)layerGroup
+                    withAssetGroup:(LOTAssetGroup *)assetGroup
                         withBounds:(CGRect)bounds {
   self = [super init];
   if (self) {
     self.masksToBounds = YES;
-    [self _setupWithLayerGroup:layerGroup withBounds:bounds];
+    [self _setupWithLayerGroup:layerGroup withAssetGroup:assetGroup withBounds:bounds];
   }
   return self;
 }
 
-- (void)_setupWithLayerGroup:(LOTLayerGroup *)layerGroup withBounds:(CGRect)bounds {
+- (void)_setupWithLayerGroup:(LOTLayerGroup *)layerGroup
+              withAssetGroup:(LOTAssetGroup *)assetGroup
+                  withBounds:(CGRect)bounds
+               {
   if (_customLayers) {
     for (LOTCustomChild *child in _customLayers) {
       [child.childView.layer removeFromSuperlayer];
@@ -66,11 +72,20 @@
   
   CALayer *maskedLayer = nil;
   for (LOTLayer *layer in reversedItems) {
-    CALayer *layerView;
+    LOTAsset *asset;
+    
     if (layer.referenceID) {
-      // Now we need to make a precomp.
-    } else {
-      layerView = [[LOTLayerView alloc] initWithModel:layer inLayerGroup:layerGroup];
+      asset = [assetGroup assetModelForID:layer.referenceID];
+    }
+    
+    LOTLayerView *layerView = [[LOTLayerView alloc] initWithModel:layer inLayerGroup:layerGroup];
+    
+    if (asset.layerGroup) {
+      LOTCompositionLayer *precompLayer = [[LOTCompositionLayer alloc] initWithLayerGroup:asset.layerGroup
+                                                                           withAssetGroup:assetGroup
+                                                                               withBounds:layer.layerBounds];
+      precompLayer.frame = layer.layerBounds;
+      [layerView LOT_addChildLayer:precompLayer];
     }
     
     layerMap[layer.layerID] = layerView;

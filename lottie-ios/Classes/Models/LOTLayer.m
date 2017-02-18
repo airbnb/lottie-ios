@@ -32,7 +32,7 @@
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary
       withCompBounds:(CGRect)compBounds
        withFramerate:(NSNumber *)framerate {
-  
+  _parentCompBounds = compBounds;
   _layerName = [jsonDictionary[@"nm"] copy];
   _layerID = [jsonDictionary[@"ind"] copy];
   

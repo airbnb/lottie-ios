@@ -46,6 +46,7 @@ typedef enum : NSInteger {
 @property (nonatomic, readonly) NSNumber *inFrame;
 @property (nonatomic, readonly) NSNumber *outFrame;
 @property (nonatomic, readonly) CGRect layerBounds;
+@property (nonatomic, readonly) CGRect parentCompBounds;
 @property (nonatomic, readonly) NSNumber *framerate;
 
 @property (nonatomic, readonly) NSArray<LOTShapeGroup *> *shapes;
