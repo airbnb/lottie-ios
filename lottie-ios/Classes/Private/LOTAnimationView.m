@@ -557,6 +557,17 @@ const NSTimeInterval singleFrameTimeValue = 1.0 / 60.0;
 }
 
 #else
+    
+- (void)setCompletionBlock:(LOTAnimationCompletionBlock)completionBlock {
+    if (completionBlock) {
+        _completionBlock = ^(BOOL finished) {
+            dispatch_async(dispatch_get_main_queue(), ^{ completionBlock(finished); });
+        };
+    }
+    else {
+        _completionBlock = nil;
+    }
+}
 
 - (void)setContentMode:(LOTViewContentMode)contentMode {
   _contentMode = contentMode;
