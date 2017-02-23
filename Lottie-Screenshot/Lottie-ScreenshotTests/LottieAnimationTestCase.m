@@ -19,7 +19,7 @@
 
 - (void)setUp {
   [super setUp];
-//  self.recordMode = YES;
+  self.recordMode = YES;
   self.usesDrawViewHierarchyInRect = YES;
   self.animationView = [LOTAnimationView animationNamed:self.animationName];
   self.window = [[UIWindow alloc] initWithFrame:self.animationView.bounds];
@@ -31,6 +31,7 @@
 - (void)testAnimationProgress:(float)progress {
   XCTestExpectation *expectation = [self expectationWithDescription:@"Image"];
   [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+    [NSThread sleepForTimeInterval:0.1];
     [expectation fulfill];
   }];
   
