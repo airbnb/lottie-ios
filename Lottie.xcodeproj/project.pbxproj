@@ -143,6 +143,8 @@
 		481A4AEC1E4A78A0003CF62B /* UIColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 481A4AE11E4A78A0003CF62B /* UIColor.h */; };
 		481A4AED1E4A78A0003CF62B /* UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4AE21E4A78A0003CF62B /* UIColor.m */; };
 		481A4AEE1E4A78A5003CF62B /* LOTPlatformCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 481A4ADC1E4A78A0003CF62B /* LOTPlatformCompat.h */; };
+		4883E4E31E5F9EE400027E57 /* LOTStrokeShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 489F8E111E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m */; };
+		4883E4E41E5F9EE400027E57 /* CGGeometry+LOTAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 48183C9B1E54E20B0039F121 /* CGGeometry+LOTAdditions.m */; };
 		489F8E121E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 489F8E101E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h */; };
 		489F8E131E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 489F8E101E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.h */; };
 		489F8E141E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 489F8E111E4CF3BE00F2DEB7 /* LOTStrokeShapeLayer.m */; };
@@ -747,6 +749,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4883E4E31E5F9EE400027E57 /* LOTStrokeShapeLayer.m in Sources */,
+				4883E4E41E5F9EE400027E57 /* CGGeometry+LOTAdditions.m in Sources */,
 				84FE12F81E4C1553009B157C /* LOTAnimatableLayer.m in Sources */,
 				84FE12F91E4C1553009B157C /* LOTEllipseShapeLayer.m in Sources */,
 				84FE12FA1E4C1553009B157C /* LOTGroupLayerView.m in Sources */,
