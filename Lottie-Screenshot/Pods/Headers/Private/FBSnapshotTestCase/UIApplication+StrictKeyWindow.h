@@ -1,0 +1,1 @@
+../../../FBSnapshotTestCase/FBSnapshotTestCase/Categories/UIApplication+StrictKeyWindow.h
