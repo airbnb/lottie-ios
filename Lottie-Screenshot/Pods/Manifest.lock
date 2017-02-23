@@ -1,0 +1,19 @@
+PODS:
+  - FBSnapshotTestCase/Core (2.1.4)
+  - lottie-ios (1.0.4)
+
+DEPENDENCIES:
+  - FBSnapshotTestCase/Core
+  - lottie-ios (from `../`)
+
+EXTERNAL SOURCES:
+  lottie-ios:
+    :path: ../
+
+SPEC CHECKSUMS:
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  lottie-ios: 8b2c5ba38105430a72f03ce54be90d8dac950161
+
+PODFILE CHECKSUM: 755b664bbd82adfe47e0d96dfc0bc4413b6ba38a
+
+COCOAPODS: 1.1.1
