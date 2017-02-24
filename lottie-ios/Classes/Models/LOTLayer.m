@@ -7,6 +7,7 @@
 //
 
 #import "LOTLayer.h"
+#import "LOTAsset.h"
 #import "LOTAnimatableColorValue.h"
 #import "LOTAnimatablePointValue.h"
 #import "LOTAnimatableNumberValue.h"
@@ -152,6 +153,13 @@
   
   _inOutKeyTimes = keyTimes;
   _inOutKeyframes = keys;
+}
+
+- (void)setImageAsset:(LOTAsset *)imageAsset {
+  _imageAsset = imageAsset;
+  [_anchor remapPointsFromBounds:CGRectMake(0, 0, 1, 1) toBounds:_layerBounds];
+  _layerBounds = CGRectMake(0, 0, imageAsset.assetWidth.floatValue, imageAsset.assetHeight.floatValue);
+  [_anchor remapPointsFromBounds:_layerBounds toBounds:CGRectMake(0, 0, 1, 1)];
 }
 
 @end
