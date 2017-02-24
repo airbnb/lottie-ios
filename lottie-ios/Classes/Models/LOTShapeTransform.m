@@ -66,6 +66,18 @@
     _opacity = [[LOTAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:frameRate];
     [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
   }
+  
+  NSString *name = jsonDictionary[@"nm"];
+  
+  NSDictionary *skew = jsonDictionary[@"sk"];
+  BOOL hasSkew = (skew && [skew[@"k"] isEqual:@0] == NO);
+  NSDictionary *skewAxis = jsonDictionary[@"sa"];
+  BOOL hasSkewAxis = (skewAxis && [skewAxis[@"k"] isEqual:@0] == NO);
+  
+  if (hasSkew || hasSkewAxis) {
+    NSLog(@"%s: Warning: skew is not supported: %@", __PRETTY_FUNCTION__, name);
+  }
+  
 }
 
 - (NSString *)description {

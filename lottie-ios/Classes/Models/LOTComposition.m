@@ -49,6 +49,18 @@
     modelMap[layer.layerID] = layer;
   }
   
+  NSArray *assets = jsonDictionary[@"assets"];
+  if (assets && assets.count > 0) {
+    NSLog(@"%s: Warning: images and precomps are not supported.", __PRETTY_FUNCTION__);
+  }
+
+  NSString *version = jsonDictionary[@"v"];
+  NSString *supportedVersion = @"4.5.0";
+  
+  if ([supportedVersion compare:version options:NSNumericSearch] == NSOrderedDescending) {
+    NSLog(@"%s: Warning: version (%@) is lower than supported version (%@)", __PRETTY_FUNCTION__, version, supportedVersion);
+  }
+  
   _modelMap = modelMap;
   _layers = layers;
 }
