@@ -315,6 +315,12 @@
   }
 }
 
+- (NSString*)description {
+    NSMutableString *text = [[super description] mutableCopy];
+    [text appendFormat:@" model: %@", _layerModel];
+    return text;
+}
+
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
 - (void)_setImageForAsset {

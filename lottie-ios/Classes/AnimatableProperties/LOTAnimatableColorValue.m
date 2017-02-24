@@ -32,7 +32,7 @@
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
         [(NSArray *)value firstObject][@"t"]) {
-      //Keframes
+      //Keyframes
       [self _buildAnimationForKeyframes:value];
     } else {
       //Single Value, no animation

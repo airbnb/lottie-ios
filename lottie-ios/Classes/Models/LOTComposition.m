@@ -53,6 +53,7 @@
   }
   
   [_assetGroup finalizeInitialization];
+
 }
 
 @end
