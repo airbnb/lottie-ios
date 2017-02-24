@@ -10,15 +10,15 @@
 #import "CAAnimationGroup+LOTAnimatableGroup.h"
 
 @implementation LOTMaskLayer {
-  LOTComposition *_composition;
+  LOTLayer *_layer;
   NSArray *_maskLayers;
 }
 
-- (instancetype)initWithMasks:(NSArray<LOTMask *> *)masks inComposition:(LOTComposition *)comp {
-  self = [super initWithDuration:comp.timeDuration];
+- (instancetype)initWithMasks:(NSArray<LOTMask *> *)masks inLayer:(LOTLayer *)layer {
+  self = [super initWithLayerDuration:layer.layerDuration];
   if (self) {
     _masks = masks;
-    _composition = comp;
+    _layer = layer;
     [self _setupViewFromModel];
   }
   return self;

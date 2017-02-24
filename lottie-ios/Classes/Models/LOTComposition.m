@@ -8,10 +8,10 @@
 
 #import "LOTComposition.h"
 #import "LOTLayer.h"
+#import "LOTAssetGroup.h"
+#import "LOTLayerGroup.h"
 
-@implementation LOTComposition {
-  NSDictionary *_modelMap;
-}
+@implementation LOTComposition
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary {
   self = [super init];
@@ -39,19 +39,17 @@
     _timeDuration = timeDuration;
   }
   
-  NSArray *layersJSON = jsonDictionary[@"layers"];
-  NSMutableArray *layers = [NSMutableArray array];
-  NSMutableDictionary *modelMap = [NSMutableDictionary dictionary];
-  
-  for (NSDictionary *layerJSON in layersJSON) {
-    LOTLayer *layer = [[LOTLayer alloc] initWithJSON:layerJSON fromComposition:self];
-    [layers addObject:layer];
-    modelMap[layer.layerID] = layer;
+  NSArray *assetArray = jsonDictionary[@"assets"];
+  if (assetArray.count) {
+    _assetGroup = [[LOTAssetGroup alloc] initWithJSON:assetArray];
   }
   
-  NSArray *assets = jsonDictionary[@"assets"];
-  if (assets && assets.count > 0) {
-    NSLog(@"%s: Warning: images and precomps are not supported.", __PRETTY_FUNCTION__);
+  NSArray *layersJSON = jsonDictionary[@"layers"];
+  if (layersJSON) {
+    _layerGroup = [[LOTLayerGroup alloc] initWithLayerJSON:layersJSON
+                                                withBounds:_compBounds
+                                             withFramerate:_framerate
+                                            withAssetGroup:_assetGroup];
   }
 
   NSString *version = jsonDictionary[@"v"];
@@ -61,12 +59,8 @@
     NSLog(@"%s: Warning: version (%@) is lower than supported version (%@)", __PRETTY_FUNCTION__, version, supportedVersion);
   }
   
-  _modelMap = modelMap;
-  _layers = layers;
-}
+  [_assetGroup finalizeInitialization];
 
-- (LOTLayer *)layerModelForID:(NSNumber *)layerID {
-  return _modelMap[layerID];
 }
 
 @end

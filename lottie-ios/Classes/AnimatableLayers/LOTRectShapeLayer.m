@@ -70,7 +70,7 @@
   // UIBezierPath Draws rects from the top left corner, After Effects draws them from the top right.
   // Switching to manual drawing.
   
-  CGFloat radius = presentationRect.rectCornerRadius;
+  CGFloat radius = MIN(MIN(halfWidth, halfHeight), presentationRect.rectCornerRadius);
   UIBezierPath *path1 = [UIBezierPath new];
   UIBezierPath *path2 = [UIBezierPath new];
   
@@ -155,8 +155,8 @@
                            stroke:(LOTShapeStroke *)stroke
                              trim:(LOTShapeTrimPath *)trim
                         transform:(LOTShapeTransform *)transform
-                     withDuration:(NSTimeInterval)duration {
-  self = [super initWithDuration:duration];
+                     withLayerDuration:(NSTimeInterval)duration {
+  self = [super initWithLayerDuration:duration];
   if (self) {
     _rectangle = rectShape;
     _stroke = stroke;

@@ -11,18 +11,19 @@
 
 @class LOTShapeGroup;
 @class LOTMask;
+@class LOTAsset;
 @class LOTAnimatableColorValue;
 @class LOTAnimatablePointValue;
 @class LOTAnimatableNumberValue;
 @class LOTAnimatableScaleValue;
-@class LOTComposition;
 
 typedef enum : NSInteger {
-  LOTLayerTypeNone = 0, // bodymovin calls this a "PreComp"
+  LOTLayerTypePrecomp,
   LOTLayerTypeSolid,
   LOTLayerTypeImage,
   LOTLayerTypeNull,
-  LOTLayerTypeShape
+  LOTLayerTypeShape,
+  LOTLayerTypeUnknown
 } LOTLayerType;
 
 typedef enum : NSInteger {
@@ -34,23 +35,30 @@ typedef enum : NSInteger {
 
 @interface LOTLayer : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary fromComposition:(LOTComposition *)composition;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
+              withCompBounds:(CGRect)compBounds
+               withFramerate:(NSNumber *)framerate;
+
+- (void)setImageAsset:(LOTAsset *)imageAsset;
 
 @property (nonatomic, readonly) NSString *layerName;
+@property (nonatomic, readonly) NSString *referenceID;
 @property (nonatomic, readonly) NSNumber *layerID;
 @property (nonatomic, readonly) LOTLayerType layerType;
 @property (nonatomic, readonly) NSNumber *parentID;
 @property (nonatomic, readonly) NSNumber *inFrame;
 @property (nonatomic, readonly) NSNumber *outFrame;
-@property (nonatomic, readonly) CGRect compBounds;
+@property (nonatomic, readonly) CGRect layerBounds;
+@property (nonatomic, readonly) CGRect parentCompBounds;
 @property (nonatomic, readonly) NSNumber *framerate;
 
 @property (nonatomic, readonly) NSArray<LOTShapeGroup *> *shapes;
 @property (nonatomic, readonly) NSArray<LOTMask *> *masks;
 
-@property (nonatomic, readonly) NSNumber *solidWidth;
-@property (nonatomic, readonly) NSNumber *solidHeight;
+@property (nonatomic, readonly) NSNumber *layerWidth;
+@property (nonatomic, readonly) NSNumber *layerHeight;
 @property (nonatomic, readonly) UIColor *solidColor;
+@property (nonatomic, readonly) LOTAsset *imageAsset;
 
 @property (nonatomic, readonly) LOTAnimatableNumberValue *opacity;
 @property (nonatomic, readonly) LOTAnimatableNumberValue *rotation;
@@ -62,12 +70,10 @@ typedef enum : NSInteger {
 @property (nonatomic, readonly) LOTAnimatablePointValue *anchor;
 @property (nonatomic, readonly) LOTAnimatableScaleValue *scale;
 
-@property (nonatomic, readonly) BOOL hasOutAnimation;
 @property (nonatomic, readonly) BOOL hasInAnimation;
-@property (nonatomic, readonly) BOOL hasInOutAnimation;
 @property (nonatomic, readonly) NSArray *inOutKeyframes;
 @property (nonatomic, readonly) NSArray *inOutKeyTimes;
-@property (nonatomic, readonly) NSTimeInterval compDuration;
+@property (nonatomic, readonly) NSTimeInterval layerDuration;
 
 @property (nonatomic, readonly) LOTMatteType matteType;
 
