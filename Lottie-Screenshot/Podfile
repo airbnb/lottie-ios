@@ -14,9 +14,4 @@ target 'Lottie-Screenshot' do
     pod 'lottie-ios', :path => '../'
   end
 
-  target 'Lottie-ScreenshotUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
 end

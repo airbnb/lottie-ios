@@ -10,8 +10,8 @@
 
 @interface LOTAnimatableLayer : CALayer
 
-- (instancetype)initWithDuration:(NSTimeInterval)duration NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithLayerDuration:(NSTimeInterval)duration NS_DESIGNATED_INITIALIZER;
 
-@property (nonatomic, readonly) NSTimeInterval laAnimationDuration;
+@property (nonatomic, readonly) NSTimeInterval layerDuration;
 
 @end

@@ -8,10 +8,10 @@
 
 #import "LOTComposition.h"
 #import "LOTLayer.h"
+#import "LOTAssetGroup.h"
+#import "LOTLayerGroup.h"
 
-@implementation LOTComposition {
-  NSDictionary *_modelMap;
-}
+@implementation LOTComposition
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary {
   self = [super init];
@@ -39,22 +39,20 @@
     _timeDuration = timeDuration;
   }
   
-  NSArray *layersJSON = jsonDictionary[@"layers"];
-  NSMutableArray *layers = [NSMutableArray array];
-  NSMutableDictionary *modelMap = [NSMutableDictionary dictionary];
-  
-  for (NSDictionary *layerJSON in layersJSON) {
-    LOTLayer *layer = [[LOTLayer alloc] initWithJSON:layerJSON fromComposition:self];
-    [layers addObject:layer];
-    modelMap[layer.layerID] = layer;
+  NSArray *assetArray = jsonDictionary[@"assets"];
+  if (assetArray.count) {
+    _assetGroup = [[LOTAssetGroup alloc] initWithJSON:assetArray];
   }
   
-  _modelMap = modelMap;
-  _layers = layers;
-}
-
-- (LOTLayer *)layerModelForID:(NSNumber *)layerID {
-  return _modelMap[layerID];
+  NSArray *layersJSON = jsonDictionary[@"layers"];
+  if (layersJSON) {
+    _layerGroup = [[LOTLayerGroup alloc] initWithLayerJSON:layersJSON
+                                                withBounds:_compBounds
+                                             withFramerate:_framerate
+                                            withAssetGroup:_assetGroup];
+  }
+  
+  [_assetGroup finalizeInitialization];
 }
 
 @end

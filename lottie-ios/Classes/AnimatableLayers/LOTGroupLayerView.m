@@ -24,8 +24,8 @@
                               fill:(LOTShapeFill *)previousFill
                             stroke:(LOTShapeStroke *)previousStroke
                           trimPath:(LOTShapeTrimPath *)previousTrimPath
-                      withDuration:(NSTimeInterval)duration {
-  self = [super initWithDuration:duration];
+                      withLayerDuration:(NSTimeInterval)duration {
+  self = [super initWithLayerDuration:duration];
   if (self) {
     _shapeGroup = shapeGroup;
     _shapeTransform = previousTransform;
@@ -73,7 +73,7 @@
                                                                       stroke:currentStroke
                                                                         trim:currentTrim
                                                                    transform:currentTransform
-                                                                withDuration:self.laAnimationDuration];
+                                                                withLayerDuration:self.layerDuration];
       [shapeLayers addObject:shapeLayer];
       [self addSublayer:shapeLayer];
     } else if ([item isKindOfClass:[LOTShapeRectangle class]]) {
@@ -83,7 +83,7 @@
                                                                             stroke:currentStroke
                                                                               trim:currentTrim
                                                                          transform:currentTransform
-                                                                      withDuration:self.laAnimationDuration];
+                                                                      withLayerDuration:self.layerDuration];
       [shapeLayers addObject:shapeLayer];
       [self addSublayer:shapeLayer];
     }  else if ([item isKindOfClass:[LOTShapeCircle class]]) {
@@ -93,7 +93,7 @@
                                                                                    stroke:currentStroke
                                                                                      trim:currentTrim
                                                                                 transform:currentTransform
-                                                                             withDuration:self.laAnimationDuration];
+                                                                             withLayerDuration:self.layerDuration];
       [shapeLayers addObject:shapeLayer];
       [self addSublayer:shapeLayer];
     } else if ([item isKindOfClass:[LOTShapeGroup class]]) {
@@ -103,7 +103,7 @@
                                                                              fill:currentFill
                                                                            stroke:currentStroke
                                                                          trimPath:currentTrim
-                                                                     withDuration:self.laAnimationDuration];
+                                                                     withLayerDuration:self.layerDuration];
       [groupLayers addObject:groupLayer];
       [self addSublayer:groupLayer];
     }
