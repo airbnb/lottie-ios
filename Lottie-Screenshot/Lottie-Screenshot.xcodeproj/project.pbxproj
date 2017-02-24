@@ -31,6 +31,14 @@
 		4883E4FF1E60ACAF00027E57 /* PhonePreCompTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4883E4FE1E60ACAF00027E57 /* PhonePreCompTest.m */; };
 		4883E5011E60ACC800027E57 /* phonePreComp.json in Resources */ = {isa = PBXBuildFile; fileRef = 4883E5001E60ACC800027E57 /* phonePreComp.json */; };
 		4883E5021E60ACC800027E57 /* phonePreComp.json in Resources */ = {isa = PBXBuildFile; fileRef = 4883E5001E60ACC800027E57 /* phonePreComp.json */; };
+		4883E5451E60CE6100027E57 /* img_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 4883E5441E60CE6100027E57 /* img_0.png */; };
+		4883E5461E60CE6100027E57 /* img_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 4883E5441E60CE6100027E57 /* img_0.png */; };
+		4883E5481E60CE6800027E57 /* Image.json in Resources */ = {isa = PBXBuildFile; fileRef = 4883E5471E60CE6800027E57 /* Image.json */; };
+		4883E5491E60CE6800027E57 /* Image.json in Resources */ = {isa = PBXBuildFile; fileRef = 4883E5471E60CE6800027E57 /* Image.json */; };
+		4883E54B1E60CE6C00027E57 /* image_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 4883E54A1E60CE6C00027E57 /* image_2.json */; };
+		4883E54C1E60CE6C00027E57 /* image_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 4883E54A1E60CE6C00027E57 /* image_2.json */; };
+		4883E54E1E60CE8600027E57 /* ImageLoadTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4883E54D1E60CE8600027E57 /* ImageLoadTest.m */; };
+		4883E5501E60CE9900027E57 /* ImageMoveTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4883E54F1E60CE9900027E57 /* ImageMoveTest.m */; };
 		48D2C7171E5D158A00CC145E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D2C7161E5D158A00CC145E /* main.m */; };
 		48D2C71A1E5D158A00CC145E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D2C7191E5D158A00CC145E /* AppDelegate.m */; };
 		48D2C71D1E5D158A00CC145E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D2C71C1E5D158A00CC145E /* ViewController.m */; };
@@ -107,6 +115,11 @@
 		4883E4D51E5E6C7C00027E57 /* EmpyStateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmpyStateTest.m; sourceTree = "<group>"; };
 		4883E4FE1E60ACAF00027E57 /* PhonePreCompTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhonePreCompTest.m; sourceTree = "<group>"; };
 		4883E5001E60ACC800027E57 /* phonePreComp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = phonePreComp.json; sourceTree = "<group>"; };
+		4883E5441E60CE6100027E57 /* img_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_0.png; sourceTree = "<group>"; };
+		4883E5471E60CE6800027E57 /* Image.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Image.json; sourceTree = "<group>"; };
+		4883E54A1E60CE6C00027E57 /* image_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = image_2.json; sourceTree = "<group>"; };
+		4883E54D1E60CE8600027E57 /* ImageLoadTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoadTest.m; sourceTree = "<group>"; };
+		4883E54F1E60CE9900027E57 /* ImageMoveTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageMoveTest.m; sourceTree = "<group>"; };
 		48D2C7121E5D158A00CC145E /* Lottie-Screenshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lottie-Screenshot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D2C7161E5D158A00CC145E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		48D2C7181E5D158A00CC145E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -221,6 +234,9 @@
 		48D2C7151E5D158A00CC145E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4883E54A1E60CE6C00027E57 /* image_2.json */,
+				4883E5471E60CE6800027E57 /* Image.json */,
+				4883E5441E60CE6100027E57 /* img_0.png */,
 				4883E5001E60ACC800027E57 /* phonePreComp.json */,
 				48EAE1FB1E5E615E0077ED37 /* Alarm.json */,
 				48EAE1FC1E5E615E0077ED37 /* AllSet.json */,
@@ -255,6 +271,8 @@
 				4883E4D51E5E6C7C00027E57 /* EmpyStateTest.m */,
 				4883E4CD1E5E6B2D00027E57 /* HamburgerArrowTest.m */,
 				4883E4AF1E5E68AE00027E57 /* Hosts.m */,
+				4883E54D1E60CE8600027E57 /* ImageLoadTest.m */,
+				4883E54F1E60CE9900027E57 /* ImageMoveTest.m */,
 				4883E4B11E5E68C900027E57 /* LightBulb.m */,
 				4883E4D31E5E6C6100027E57 /* LoopPlayOnceTest.m */,
 				48D2C72F1E5D158A00CC145E /* LottieLogoTest.m */,
@@ -382,8 +400,10 @@
 				48EAE2101E5E615E0077ED37 /* Alarm.json in Resources */,
 				4883E4BF1E5E6AF000027E57 /* 9squares-AlBoardman.json in Resources */,
 				4883E4C51E5E6AF000027E57 /* HamburgerArrow.json in Resources */,
+				4883E5451E60CE6100027E57 /* img_0.png in Resources */,
 				48D2C7221E5D158A00CC145E /* Assets.xcassets in Resources */,
 				48EAE2221E5E615F0077ED37 /* LoopPlayOnce.json in Resources */,
+				4883E5481E60CE6800027E57 /* Image.json in Resources */,
 				48EAE21A1E5E615F0077ED37 /* Hosts.json in Resources */,
 				48D2C7201E5D158A00CC145E /* Main.storyboard in Resources */,
 				48EAE1F11E5D16E30077ED37 /* LottieLogo2.json in Resources */,
@@ -394,6 +414,7 @@
 				4883E5011E60ACC800027E57 /* phonePreComp.json in Resources */,
 				48EAE2361E5E615F0077ED37 /* TrimPathFill.json in Resources */,
 				48EAE23B1E5E61690077ED37 /* pathStrokeTests.json in Resources */,
+				4883E54B1E60CE6C00027E57 /* image_2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,14 +422,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4883E5461E60CE6100027E57 /* img_0.png in Resources */,
 				48EAE2211E5E615F0077ED37 /* LightBulb.json in Resources */,
 				4883E4C81E5E6AF000027E57 /* PinJump.json in Resources */,
 				48EAE2131E5E615E0077ED37 /* AllSet.json in Resources */,
+				4883E5491E60CE6800027E57 /* Image.json in Resources */,
 				4883E5021E60ACC800027E57 /* phonePreComp.json in Resources */,
 				4883E4C61E5E6AF000027E57 /* HamburgerArrow.json in Resources */,
 				48EAE2391E5E615F0077ED37 /* TrimPathsFull.json in Resources */,
 				4883E4C41E5E6AF000027E57 /* EmptyState.json in Resources */,
 				48EAE2371E5E615F0077ED37 /* TrimPathFill.json in Resources */,
+				4883E54C1E60CE6C00027E57 /* image_2.json in Resources */,
 				4883E4C01E5E6AF000027E57 /* 9squares-AlBoardman.json in Resources */,
 				48EAE1F21E5D16E30077ED37 /* LottieLogo2.json in Resources */,
 				48EAE21B1E5E615F0077ED37 /* Hosts.json in Resources */,
@@ -541,6 +565,7 @@
 				4883E4FF1E60ACAF00027E57 /* PhonePreCompTest.m in Sources */,
 				48EAE1F41E5E5BC60077ED37 /* LottieLogoTestB.m in Sources */,
 				48EAE2401E5E61E60077ED37 /* AlarmTest.m in Sources */,
+				4883E54E1E60CE8600027E57 /* ImageLoadTest.m in Sources */,
 				4883E4B81E5E690500027E57 /* SplitDimensions.m in Sources */,
 				4883E4D61E5E6C7C00027E57 /* EmpyStateTest.m in Sources */,
 				4883E4CE1E5E6B2D00027E57 /* HamburgerArrowTest.m in Sources */,
@@ -548,6 +573,7 @@
 				48EAE2441E5E62630077ED37 /* CheckSwitchTest.m in Sources */,
 				48D2C7301E5D158A00CC145E /* LottieLogoTest.m in Sources */,
 				4883E4D21E5E6B4B00027E57 /* TwitterHeartTest.m in Sources */,
+				4883E5501E60CE9900027E57 /* ImageMoveTest.m in Sources */,
 				4883E4B61E5E68E600027E57 /* TrimPathsFull.m in Sources */,
 				4883E4D01E5E6B3B00027E57 /* PinJump.m in Sources */,
 				48EAE2461E5E62EC0077ED37 /* CityTest.m in Sources */,
