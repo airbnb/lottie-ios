@@ -70,7 +70,7 @@
   // UIBezierPath Draws rects from the top left corner, After Effects draws them from the top right.
   // Switching to manual drawing.
   
-  CGFloat radius = presentationRect.rectCornerRadius;
+  CGFloat radius = MIN(MIN(halfWidth, halfHeight), presentationRect.rectCornerRadius);
   UIBezierPath *path1 = [UIBezierPath new];
   UIBezierPath *path2 = [UIBezierPath new];
   
