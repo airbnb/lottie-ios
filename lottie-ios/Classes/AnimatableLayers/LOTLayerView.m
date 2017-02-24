@@ -296,4 +296,10 @@
   }
 }
 
+- (NSString*)description {
+    NSMutableString *text = [[super description] mutableCopy];
+    [text appendFormat:@" model: %@", _layerModel];
+    return text;
+}
+
 @end
