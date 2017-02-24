@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
+
 @class LOTAsset;
 @class LOTLayerGroup;
 @interface LOTAssetGroup : NSObject

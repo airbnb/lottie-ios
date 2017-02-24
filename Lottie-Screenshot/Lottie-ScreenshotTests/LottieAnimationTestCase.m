@@ -19,7 +19,7 @@
 
 - (void)setUp {
   [super setUp];
-  self.recordMode = YES;
+//  self.recordMode = YES;
   self.usesDrawViewHierarchyInRect = YES;
   self.animationView = [LOTAnimationView animationNamed:self.animationName];
   self.window = [[UIWindow alloc] initWithFrame:self.animationView.bounds];
@@ -40,5 +40,12 @@
     FBSnapshotVerifyView(self.animationView.layer, nil);
   }];
 }
+
+//-(void)tearDown {
+//  [super tearDown];
+//  [self.animationView removeFromSuperview];
+//  self.animationView = nil;
+//  [self.window resignKeyWindow];
+//}
 
 @end
