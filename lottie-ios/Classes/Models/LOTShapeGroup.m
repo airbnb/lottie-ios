@@ -63,8 +63,21 @@
   } else if ([type isEqualToString:@"tm"]) {
     LOTShapeTrimPath *trim = [[LOTShapeTrimPath alloc] initWithJSON:itemJSON frameRate:frameRate];
     return trim;
+  } else if ([type isEqualToString:@"gs"] || [type isEqualToString:@"gf"]) {
+    // gs = gradient stroke
+    // gf = gradient fill
+    NSLog(@"%s: Warning: gradients are not supported", __PRETTY_FUNCTION__);
+  } else if ([type isEqualToString:@"sr"]) {
+    NSLog(@"%s: Warning: star is not supported. Convert to vector path?", __PRETTY_FUNCTION__);
   }
+  
   return nil;
+}
+
+- (NSString*)description {
+    NSMutableString *text = [[super description] mutableCopy];
+    [text appendFormat:@" items: %@", self.items];
+    return text;
 }
 
 @end

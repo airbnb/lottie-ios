@@ -37,7 +37,6 @@
   _layerName = [jsonDictionary[@"nm"] copy];
   _layerID = [jsonDictionary[@"ind"] copy];
   
-  
   NSNumber *layerType = jsonDictionary[@"ty"];
   _layerType = layerType.integerValue;
   
@@ -90,7 +89,7 @@
   
   NSDictionary *position = ks[@"p"];
   if ([position[@"s"] boolValue]) {
-    // Seperate dimensions
+    // Separate dimensions
     _positionX = [[LOTAnimatableNumberValue alloc] initWithNumberValues:position[@"x"] frameRate:_framerate];
     _positionY = [[LOTAnimatableNumberValue alloc] initWithNumberValues:position[@"y"] frameRate:_framerate];
   } else {
@@ -160,6 +159,13 @@
   [_anchor remapPointsFromBounds:CGRectMake(0, 0, 1, 1) toBounds:_layerBounds];
   _layerBounds = CGRectMake(0, 0, imageAsset.assetWidth.floatValue, imageAsset.assetHeight.floatValue);
   [_anchor remapPointsFromBounds:_layerBounds toBounds:CGRectMake(0, 0, 1, 1)];
+}
+
+- (NSString*)description {
+    NSMutableString *text = [[super description] mutableCopy];
+    [text appendFormat:@" %@ id: %d pid: %d frames: %d-%d", _layerName, (int)_layerID.integerValue, (int)_parentID.integerValue,
+     (int)_inFrame.integerValue, (int)_outFrame.integerValue];
+    return text;
 }
 
 @end

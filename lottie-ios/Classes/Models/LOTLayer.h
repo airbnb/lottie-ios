@@ -30,7 +30,7 @@ typedef enum : NSInteger {
   LOTMatteTypeNone,
   LOTMatteTypeAdd,
   LOTMatteTypeInvert,
-  LOTLayerTypeUknown
+  LOTMatteTypeUnknown
 } LOTMatteType;
 
 @interface LOTLayer : NSObject
