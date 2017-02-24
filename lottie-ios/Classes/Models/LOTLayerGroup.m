@@ -43,6 +43,12 @@
     if (layer.referenceID && assetGroup) {
       referenceMap[layer.referenceID] = layer;
       [assetGroup buildAssetNamed:layer.referenceID withBounds:layer.layerBounds andFramerate:layer.framerate];
+      if (layer.layerType == LOTLayerTypeImage) {
+        LOTAsset *imageAsset = [assetGroup assetModelForID:layer.referenceID];
+        if (imageAsset) {
+          [layer setImageAsset:imageAsset];
+        }
+      }
     }
   }
   
