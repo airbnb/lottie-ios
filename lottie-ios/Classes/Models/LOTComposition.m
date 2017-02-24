@@ -51,13 +51,6 @@
                                              withFramerate:_framerate
                                             withAssetGroup:_assetGroup];
   }
-
-  NSString *version = jsonDictionary[@"v"];
-  NSString *supportedVersion = @"4.5.0";
-  
-  if ([supportedVersion compare:version options:NSNumericSearch] == NSOrderedDescending) {
-    NSLog(@"%s: Warning: version (%@) is lower than supported version (%@)", __PRETTY_FUNCTION__, version, supportedVersion);
-  }
   
   [_assetGroup finalizeInitialization];
 
