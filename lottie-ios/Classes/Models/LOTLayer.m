@@ -71,7 +71,7 @@
   
   NSDictionary *position = ks[@"p"];
   if ([position[@"s"] boolValue]) {
-    // Seperate dimensions
+    // Separate dimensions
     _positionX = [[LOTAnimatableNumberValue alloc] initWithNumberValues:position[@"x"] frameRate:_framerate];
     _positionY = [[LOTAnimatableNumberValue alloc] initWithNumberValues:position[@"y"] frameRate:_framerate];
   } else {
@@ -143,6 +143,13 @@
     _inOutKeyTimes = keyTimes;
     _inOutKeyframes = keys;
   }
+}
+
+- (NSString*)description {
+    NSMutableString *text = [[super description] mutableCopy];
+    [text appendFormat:@" %@ id: %d pid: %d frames: %d-%d\n", _layerName, (int)_layerID.integerValue, (int)_parentID.integerValue,
+     (int)_inFrame.integerValue, (int)_outFrame.integerValue];
+    return text;
 }
 
 @end
