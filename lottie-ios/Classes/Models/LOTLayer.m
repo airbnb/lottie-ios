@@ -32,11 +32,15 @@
   _compBounds = composition.compBounds;
   _framerate = composition.framerate;
   
-  NSNumber *layerType = jsonDictionary[@"ty"];
-  if (layerType.integerValue <= LOTLayerTypeShape) {
-    _layerType = layerType.integerValue;
+  NSInteger layerType = [jsonDictionary[@"ty"] integerValue];
+  if (layerType <= LOTLayerTypeShape) {
+    if (layerType == LOTLayerTypeImage) {
+      NSLog(@"%s: Warning: image layer not supported. convert to a shape layer?", __PRETTY_FUNCTION__);
+    }
+    _layerType = layerType;
   } else {
-    _layerType = LOTLayerTypeUnknown;
+    NSLog(@"%s: Warning: Invalid layer type: %d", __PRETTY_FUNCTION__, (int)layerType);
+    _layerType = LOTLayerTypeImage;
   }
   
   _parentID = [jsonDictionary[@"parent"] copy];

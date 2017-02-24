@@ -18,9 +18,9 @@
 @class LOTComposition;
 
 typedef enum : NSInteger {
-  LOTLayerTypeNone,
+  LOTLayerTypeNone = 0, // bodymovin calls this a "PreComp"
   LOTLayerTypeSolid,
-  LOTLayerTypeUnknown,
+  LOTLayerTypeImage,
   LOTLayerTypeNull,
   LOTLayerTypeShape
 } LOTLayerType;
@@ -29,7 +29,7 @@ typedef enum : NSInteger {
   LOTMatteTypeNone,
   LOTMatteTypeAdd,
   LOTMatteTypeInvert,
-  LOTLayerTypeUknown
+  LOTMatteTypeUnknown
 } LOTMatteType;
 
 @interface LOTLayer : NSObject
