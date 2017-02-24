@@ -2,6 +2,7 @@
 #import "CGGeometry+LOTAdditions.h"
 
 const CGSize CGSizeMax = {CGFLOAT_MAX, CGFLOAT_MAX};
+const NSTimeInterval LOT_singleFrameTimeValue = 1.0 / 60.0;
 //
 // Core Graphics Geometry Additions
 //

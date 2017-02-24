@@ -10,10 +10,10 @@
 
 @implementation LOTAnimatableLayer
 
-- (instancetype)initWithDuration:(NSTimeInterval)duration {
+- (instancetype)initWithLayerDuration:(NSTimeInterval)duration {
   self = [super init];
   if (self) {
-    _laAnimationDuration = duration;
+    _layerDuration = duration;
   }
   return self;
 }
