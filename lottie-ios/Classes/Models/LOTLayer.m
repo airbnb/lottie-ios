@@ -163,7 +163,7 @@
 
 - (NSString*)description {
     NSMutableString *text = [[super description] mutableCopy];
-    [text appendFormat:@" %@ id: %d pid: %d frames: %d-%d\n", _layerName, (int)_layerID.integerValue, (int)_parentID.integerValue,
+    [text appendFormat:@" %@ id: %d pid: %d frames: %d-%d", _layerName, (int)_layerID.integerValue, (int)_parentID.integerValue,
      (int)_inFrame.integerValue, (int)_outFrame.integerValue];
     return text;
 }
