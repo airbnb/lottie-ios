@@ -31,6 +31,7 @@
 - (void)testAnimationProgress:(float)progress {
   XCTestExpectation *expectation = [self expectationWithDescription:@"Image"];
   [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+    [NSThread sleepForTimeInterval:0.1];
     [expectation fulfill];
   }];
   
@@ -39,5 +40,12 @@
     FBSnapshotVerifyView(self.animationView.layer, nil);
   }];
 }
+
+//-(void)tearDown {
+//  [super tearDown];
+//  [self.animationView removeFromSuperview];
+//  self.animationView = nil;
+//  [self.window resignKeyWindow];
+//}
 
 @end

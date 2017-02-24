@@ -25,6 +25,10 @@
   [self testAnimationProgress:0];
 }
 
+- (void)testAllSet30 {
+  [self testAnimationProgress:0.3];
+}
+
 - (void)testAllSet50 {
   [self testAnimationProgress:0.5];
 }

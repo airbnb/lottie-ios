@@ -30,8 +30,8 @@
                        stroke:(LOTShapeStroke *)stroke
                          trim:(LOTShapeTrimPath *)trim
                     transform:(LOTShapeTransform *)transform
-                 withDuration:(NSTimeInterval)duration {
-  self = [super initWithDuration:duration];
+                 withLayerDuration:(NSTimeInterval)duration {
+  self = [super initWithLayerDuration:duration];
   if (self) {
     _path = shape;
     _stroke = stroke;
