@@ -127,7 +127,12 @@
   if (_layerModel.layerType == LOTLayerTypePrecomp) {
     self.bounds = _layerModel.parentCompBounds;
     _childContainerLayer.bounds = _layerModel.layerBounds;
-
+  }
+  
+  if (_layerModel.layerType == LOTLayerTypeImage) {
+    self.bounds = _layerModel.parentCompBounds;
+    _childContainerLayer.bounds = _layerModel.layerBounds;
+    [self _setImageForAsset];
   }
   
   NSNumber *parentID = _layerModel.parentID;
@@ -309,5 +314,36 @@
     group.debugModeOn = debugModeOn;
   }
 }
+
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+
+- (void)_setImageForAsset {
+  if (_layerModel.imageAsset.imageName) {
+    NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
+    UIImage *image = [UIImage imageNamed:components.firstObject];
+    if (image) {
+      _childContainerLayer.contents = (__bridge id _Nullable)(image.CGImage);
+    }
+  }
+}
+
+#else
+
+- (void)_setImageForAsset {
+  if (_layerModel.imageAsset.imageName) {
+    NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
+    NSImage *image = [NSImage imageNamed:components.firstObject];
+    if (image) {
+      NSWindow *window = [NSApp mainWindow];
+      CGFloat desiredScaleFactor = [window backingScaleFactor];
+      CGFloat actualScaleFactor = [image recommendedLayerContentsScale:desiredScaleFactor];
+      id layerContents = [image layerContentsForContentsScale:actualScaleFactor];
+      _childContainerLayer.contents = layerContents;
+    }
+  }
+
+}
+
+#endif
 
 @end

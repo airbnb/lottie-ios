@@ -11,6 +11,7 @@
 
 @class LOTShapeGroup;
 @class LOTMask;
+@class LOTAsset;
 @class LOTAnimatableColorValue;
 @class LOTAnimatablePointValue;
 @class LOTAnimatableNumberValue;
@@ -38,6 +39,8 @@ typedef enum : NSInteger {
               withCompBounds:(CGRect)compBounds
                withFramerate:(NSNumber *)framerate;
 
+- (void)setImageAsset:(LOTAsset *)imageAsset;
+
 @property (nonatomic, readonly) NSString *layerName;
 @property (nonatomic, readonly) NSString *referenceID;
 @property (nonatomic, readonly) NSNumber *layerID;
@@ -55,6 +58,7 @@ typedef enum : NSInteger {
 @property (nonatomic, readonly) NSNumber *layerWidth;
 @property (nonatomic, readonly) NSNumber *layerHeight;
 @property (nonatomic, readonly) UIColor *solidColor;
+@property (nonatomic, readonly) LOTAsset *imageAsset;
 
 @property (nonatomic, readonly) LOTAnimatableNumberValue *opacity;
 @property (nonatomic, readonly) LOTAnimatableNumberValue *rotation;
