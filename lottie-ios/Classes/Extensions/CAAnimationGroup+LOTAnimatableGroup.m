@@ -16,11 +16,13 @@
   for (NSString *keyPath in properties.allKeys) {
     id <LOTAnimatableValue>property = properties[keyPath];
     if ([property hasAnimation]) {
-      CAKeyframeAnimation *animation = [property animationForKeyPath:keyPath];
-      [animations addObject:animation];
-      
-      if (animation.duration + animation.beginTime > animduration) {
-        animduration = animation.duration + animation.beginTime;
+      NSArray<CAKeyframeAnimation *> *propertyAnimations = [property animationsForKeyPath:keyPath];
+      [animations addObjectsFromArray:propertyAnimations];
+
+      for (CAKeyframeAnimation *animation in propertyAnimations) {
+        if (animation.duration + animation.beginTime > animduration) {
+          animduration = animation.duration + animation.beginTime;
+        }
       }
     }
   }

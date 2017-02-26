@@ -11,7 +11,7 @@
 
 @protocol LOTAnimatableValue <NSObject>
 
-- (CAKeyframeAnimation *)animationForKeyPath:(NSString *)keypath;
+- (NSArray<CAKeyframeAnimation *> *)animationsForKeyPath:(NSString *)keypath;
 - (BOOL)hasAnimation;
 
 @end

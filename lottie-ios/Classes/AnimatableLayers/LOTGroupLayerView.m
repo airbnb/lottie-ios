@@ -43,7 +43,7 @@
     self.position = _shapeTransform.position.initialPoint;
     self.opacity = _shapeTransform.opacity.initialValue.floatValue;
     self.transform = _shapeTransform.scale.initialScale;
-    self.sublayerTransform = CATransform3DMakeRotation(_shapeTransform.rotation.initialValue.floatValue, 0, 0, 1);
+    self.transform = CATransform3DRotate(self.transform, _shapeTransform.rotation.initialValue.floatValue, 0, 0, 1);
   }
   
   NSArray *groupItems = _shapeGroup.items;
@@ -119,8 +119,8 @@
     _animation = [CAAnimationGroup LOT_animationGroupForAnimatablePropertiesWithKeyPaths:@{@"opacity" : _shapeTransform.opacity,
                                                                                        @"position" : _shapeTransform.position,
                                                                                        @"anchorPoint" : _shapeTransform.anchor,
-                                                                                       @"transform" : _shapeTransform.scale,
-                                                                                       @"sublayerTransform.rotation" : _shapeTransform.rotation}];
+                                                                                       @"transform.scale" : _shapeTransform.scale,
+                                                                                       @"transform.rotation.z" : _shapeTransform.rotation}];
     [self addAnimation:_animation forKey:@"LottieAnimation"];
   }
 }

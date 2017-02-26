@@ -10,7 +10,8 @@
 
 @interface LOTAnimatableScaleValue ()
 
-@property (nonatomic, readonly) NSArray<NSValue *> *scaleKeyframes;
+@property (nonatomic, readonly) NSArray<NSNumber *> *xScaleKeyframes;
+@property (nonatomic, readonly) NSArray<NSNumber *> *yScaleKeyframes;
 @property (nonatomic, readonly) NSArray<NSNumber *> *keyTimes;
 @property (nonatomic, readonly) NSArray<CAMediaTimingFunction *> *timingFunctions;
 @property (nonatomic, readonly) NSTimeInterval delay;
@@ -46,7 +47,8 @@
   
   NSMutableArray *keyTimes = [NSMutableArray array];
   NSMutableArray *timingFunctions = [NSMutableArray array];
-  NSMutableArray<NSValue *> *scaleValues = [NSMutableArray array];
+  NSMutableArray<NSValue *> *xScaleValues = [NSMutableArray array];
+  NSMutableArray<NSValue *> *yScaleValues = [NSMutableArray array];
   
   _startFrame = keyframes.firstObject[@"t"];
   NSNumber *endFrame = keyframes.lastObject[@"t"];
@@ -72,7 +74,9 @@
     
     if (outValue) {
       //add out value
-      [scaleValues addObject:[NSValue valueWithCATransform3D:[self _xformForValueArray:outValue]]];
+      CGVector vectorValue = [self _vectorForValueArray:outValue];
+      [xScaleValues addObject:@(vectorValue.dx)];
+      [yScaleValues addObject:@(vectorValue.dy)];
       [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
       outValue = nil;
     }
@@ -84,7 +88,9 @@
         if (keyframe == keyframes.firstObject) {
           _initialScale = [self _xformForValueArray:startValue];
         }
-        [scaleValues addObject:[NSValue valueWithCATransform3D:[self _xformForValueArray:startValue]]];
+        CGVector vectorValue = [self _vectorForValueArray:startValue];
+        [xScaleValues addObject:@(vectorValue.dx)];
+        [yScaleValues addObject:@(vectorValue.dy)];
         if (timingFunctions.count) {
           [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
         }
@@ -102,7 +108,9 @@
     // add end value if present for keyframe
     NSArray *endValue = keyframe[@"e"];
     if (endValue) {
-      [scaleValues addObject:[NSValue valueWithCATransform3D:[self _xformForValueArray:endValue]]];
+      CGVector vectorValue = [self _vectorForValueArray:endValue];
+      [xScaleValues addObject:@(vectorValue.dx)];
+      [yScaleValues addObject:@(vectorValue.dy)];
       /*
        * Timing Function for time interpolations between keyframes
        * Should be n-1 where n is the number of keyframes
@@ -134,9 +142,17 @@
       addTimePadding = YES;
     }
   }
-  _scaleKeyframes = scaleValues;
+  _xScaleKeyframes = xScaleValues;
+  _yScaleKeyframes = yScaleValues;
   _keyTimes = keyTimes;
   _timingFunctions = timingFunctions;
+}
+
+- (CGVector)_vectorForValueArray:(NSArray<NSNumber *> *)value {
+  if (value.count >=2) {
+    return CGVectorMake(value[0].floatValue / 100.f, value[1].floatValue / 100.f);
+  }
+  return CGVectorMake(1.0, 1.0);
 }
 
 - (CATransform3D)_xformForValueArray:(NSArray *)value {
@@ -164,21 +180,34 @@
 }
 
 - (BOOL)hasAnimation {
-  return (self.scaleKeyframes.count > 0);
+  return (self.xScaleKeyframes.count > 0);
 }
 
-- (nullable CAKeyframeAnimation *)animationForKeyPath:(nonnull NSString *)keypath {
+- (NSArray<CAKeyframeAnimation *> *)animationsForKeyPath:(NSString *)keypath {
   if (self.hasAnimation == NO) {
-    return nil;
+    return @[];
   }
-  CAKeyframeAnimation *keyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:keypath];
-  keyframeAnimation.keyTimes = self.keyTimes;
-  keyframeAnimation.values = self.scaleKeyframes;
-  keyframeAnimation.timingFunctions = self.timingFunctions;
-  keyframeAnimation.duration = self.duration;
-  keyframeAnimation.beginTime = self.delay;
-  keyframeAnimation.fillMode = kCAFillModeForwards;
-  return keyframeAnimation;
+  NSAssert([keypath hasSuffix:@"transform.scale"], @"Lottie: %@ must be applied to a 'transform.scale' keypath", self);
+
+  NSString *xKeypath = [keypath stringByAppendingString:@".x"];
+  CAKeyframeAnimation *xKeyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:xKeypath];
+  xKeyframeAnimation.keyTimes = self.keyTimes;
+  xKeyframeAnimation.values = self.xScaleKeyframes;
+  xKeyframeAnimation.timingFunctions = self.timingFunctions;
+  xKeyframeAnimation.duration = self.duration;
+  xKeyframeAnimation.beginTime = self.delay;
+  xKeyframeAnimation.fillMode = kCAFillModeForwards;
+
+  NSString *yKeypath = [keypath stringByAppendingString:@".y"];
+  CAKeyframeAnimation *yKeyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:yKeypath];
+  yKeyframeAnimation.keyTimes = self.keyTimes;
+  yKeyframeAnimation.values = self.yScaleKeyframes;
+  yKeyframeAnimation.timingFunctions = self.timingFunctions;
+  yKeyframeAnimation.duration = self.duration;
+  yKeyframeAnimation.beginTime = self.delay;
+  yKeyframeAnimation.fillMode = kCAFillModeForwards;
+
+  return @[xKeyframeAnimation, yKeyframeAnimation];
 }
 
 @end

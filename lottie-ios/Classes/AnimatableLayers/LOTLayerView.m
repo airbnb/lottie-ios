@@ -52,7 +52,7 @@
   
   self.anchorPoint = _parentModel.anchor.initialPoint;
   self.transform = _parentModel.scale.initialScale;
-  self.sublayerTransform = CATransform3DMakeRotation(_parentModel.rotation.initialValue.floatValue, 0, 0, 1);
+  self.transform = CATransform3DRotate(self.transform, _parentModel.rotation.initialValue.floatValue, 0, 0, 1);
   [self _buildAnimations];
 }
 
@@ -65,10 +65,10 @@
     [keypaths setValue:_parentModel.anchor forKey:@"anchorPoint"];
   }
   if (_parentModel.scale) {
-    [keypaths setValue:_parentModel.scale forKey:@"transform"];
+    [keypaths setValue:_parentModel.scale forKey:@"transform.scale"];
   }
   if (_parentModel.rotation) {
-    [keypaths setValue:_parentModel.rotation forKey:@"sublayerTransform.rotation"];
+    [keypaths setValue:_parentModel.rotation forKey:@"transform.rotation.z"];
   }
   if (_parentModel.positionX) {
     [keypaths setValue:_parentModel.positionX forKey:@"position.x"];
@@ -169,7 +169,7 @@
   }
   _childContainerLayer.anchorPoint = _layerModel.anchor.initialPoint;
   _childContainerLayer.transform = _layerModel.scale.initialScale;
-  _childContainerLayer.sublayerTransform = CATransform3DMakeRotation(_layerModel.rotation.initialValue.floatValue, 0, 0, 1);
+  _childContainerLayer.transform = CATransform3DRotate(_childContainerLayer.transform, _layerModel.rotation.initialValue.floatValue, 0, 0, 1);
   self.hidden = _layerModel.hasInAnimation;
   
   NSArray *groupItems = _layerModel.shapes;
@@ -261,10 +261,10 @@
     [keypaths setValue:_layerModel.anchor forKey:@"anchorPoint"];
   }
   if (_layerModel.scale) {
-    [keypaths setValue:_layerModel.scale forKey:@"transform"];
+    [keypaths setValue:_layerModel.scale forKey:@"transform.scale"];
   }
   if (_layerModel.rotation) {
-    [keypaths setValue:_layerModel.rotation forKey:@"sublayerTransform.rotation"];
+    [keypaths setValue:_layerModel.rotation forKey:@"transform.rotation.z"];
   }
   if (_layerModel.positionX) {
     [keypaths setValue:_layerModel.positionX forKey:@"position.x"];
@@ -293,7 +293,6 @@
   _inOutAnimation.duration = self.layerDuration;
   [self addAnimation:_inOutAnimation forKey:@"inout"];
   self.duration = self.layerDuration + LOT_singleFrameTimeValue;
-
 }
 
 - (void)LOT_addChildLayer:(CALayer *)childLayer {

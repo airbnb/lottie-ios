@@ -138,7 +138,7 @@ const CGFloat kEllipseControlPointPercentage = 0.55228;
     self.opacity = _transform.opacity.initialValue.floatValue;
     self.position = _transform.position.initialPoint;
     self.transform = _transform.scale.initialScale;
-    self.sublayerTransform = CATransform3DMakeRotation(_transform.rotation.initialValue.floatValue, 0, 0, 1);
+    self.transform = CATransform3DRotate(self.transform, _transform.rotation.initialValue.floatValue, 0, 0, 1);
     
     if (fill) {
       _fillLayer = [LOTCircleShapeLayer new];
@@ -194,8 +194,8 @@ const CGFloat kEllipseControlPointPercentage = 0.55228;
     _animation = [CAAnimationGroup LOT_animationGroupForAnimatablePropertiesWithKeyPaths:@{@"opacity" : _transform.opacity,
                                                                                        @"position" : _transform.position,
                                                                                        @"anchorPoint" : _transform.anchor,
-                                                                                       @"transform" : _transform.scale,
-                                                                                       @"sublayerTransform.rotation" : _transform.rotation}];
+                                                                                       @"transform.scale" : _transform.scale,
+                                                                                       @"transform.rotation.z" : _transform.rotation}];
     [self addAnimation:_animation forKey:@"LottieAnimation"];
   }
   
