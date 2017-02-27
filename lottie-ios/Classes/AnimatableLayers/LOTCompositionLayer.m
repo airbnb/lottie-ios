@@ -125,7 +125,7 @@
   }
 }
 
-- (void)addSubview:(LOTView *)view
+- (void)addSublayer:(LOTView *)view
       toLayerNamed:(NSString *)layer {
   LOTConstraintType constraint = LOTConstraintTypeAlignToBounds;
   LOTLayerView *layerObject = _layerNameMap[layer];
