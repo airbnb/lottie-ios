@@ -8,6 +8,7 @@
 
 #import "LOTLayer.h"
 #import "LOTAsset.h"
+#import "LOTAssetGroup.h"
 #import "LOTAnimatableColorValue.h"
 #import "LOTAnimatablePointValue.h"
 #import "LOTAnimatableNumberValue.h"
@@ -22,17 +23,23 @@
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
               withCompBounds:(CGRect)compBounds
-               withFramerate:(NSNumber *)framerate {
+               withFramerate:(NSNumber *)framerate
+              withAssetGroup:(LOTAssetGroup *)assetGroup {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary withCompBounds:compBounds withFramerate:framerate];
+    [self _mapFromJSON:jsonDictionary
+        withCompBounds:compBounds
+         withFramerate:framerate
+     withAssetGroup:assetGroup];
   }
   return self;
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary
       withCompBounds:(CGRect)compBounds
-       withFramerate:(NSNumber *)framerate {
+       withFramerate:(NSNumber *)framerate
+      withAssetGroup:(LOTAssetGroup *)assetGroup{
+  
   _parentCompBounds = compBounds;
   _layerName = [jsonDictionary[@"nm"] copy];
   _layerID = [jsonDictionary[@"ind"] copy];
@@ -50,20 +57,27 @@
   _outFrame = [jsonDictionary[@"op"] copy];
   _framerate = framerate;
   
-  _layerWidth = @(compBounds.size.width);
-  _layerHeight = @(compBounds.size.height);
-  
-  if (_layerType == LOTLayerTypePrecomp ||
-      _layerType == LOTLayerTypeImage) {
+  if (_layerType == LOTLayerTypePrecomp) {
     _layerHeight = [jsonDictionary[@"h"] copy];
     _layerWidth = [jsonDictionary[@"w"] copy];
-  }
-  
-  if (_layerType == LOTLayerTypeSolid) {
+    [assetGroup buildAssetNamed:_referenceID
+                     withBounds:CGRectMake(0, 0, _layerWidth.floatValue, _layerHeight.floatValue)
+                   andFramerate:_framerate];
+  } else if (_layerType == LOTLayerTypeImage) {
+    [assetGroup buildAssetNamed:_referenceID
+                     withBounds:CGRectZero
+                   andFramerate:_framerate];
+    _imageAsset = [assetGroup assetModelForID:_referenceID];
+    _layerWidth = [_imageAsset.assetWidth copy];
+    _layerHeight = [_imageAsset.assetHeight copy];
+  } else if (_layerType == LOTLayerTypeSolid) {
     _layerWidth = jsonDictionary[@"sw"];
     _layerHeight = jsonDictionary[@"sh"];
     NSString *solidColor = jsonDictionary[@"sc"];
     _solidColor = [UIColor LOT_colorWithHexString:solidColor];
+  } else {
+    _layerWidth = @(compBounds.size.width);
+    _layerHeight = @(compBounds.size.height);
   }
   
   _layerBounds = CGRectMake(0, 0, _layerWidth.floatValue, _layerHeight.floatValue);
@@ -152,13 +166,6 @@
   
   _inOutKeyTimes = keyTimes;
   _inOutKeyframes = keys;
-}
-
-- (void)setImageAsset:(LOTAsset *)imageAsset {
-  _imageAsset = imageAsset;
-  [_anchor remapPointsFromBounds:CGRectMake(0, 0, 1, 1) toBounds:_layerBounds];
-  _layerBounds = CGRectMake(0, 0, imageAsset.assetWidth.floatValue, imageAsset.assetHeight.floatValue);
-  [_anchor remapPointsFromBounds:_layerBounds toBounds:CGRectMake(0, 0, 1, 1)];
 }
 
 - (NSString*)description {
