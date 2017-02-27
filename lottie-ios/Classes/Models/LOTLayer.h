@@ -12,6 +12,7 @@
 @class LOTShapeGroup;
 @class LOTMask;
 @class LOTAsset;
+@class LOTAssetGroup;
 @class LOTAnimatableColorValue;
 @class LOTAnimatablePointValue;
 @class LOTAnimatableNumberValue;
@@ -37,9 +38,8 @@ typedef enum : NSInteger {
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
               withCompBounds:(CGRect)compBounds
-               withFramerate:(NSNumber *)framerate;
-
-- (void)setImageAsset:(LOTAsset *)imageAsset;
+               withFramerate:(NSNumber *)framerate
+              withAssetGroup:(LOTAssetGroup *)assetGroup;
 
 @property (nonatomic, readonly) NSString *layerName;
 @property (nonatomic, readonly) NSString *referenceID;
