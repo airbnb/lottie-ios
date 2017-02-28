@@ -329,6 +329,8 @@
     UIImage *image = [UIImage imageNamed:components.firstObject];
     if (image) {
       _childContainerLayer.contents = (__bridge id _Nullable)(image.CGImage);
+    } else {
+        NSLog(@"%s: Warn: image not found: %@", __PRETTY_FUNCTION__, components.firstObject);
     }
   }
 }
