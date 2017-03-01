@@ -52,7 +52,7 @@
 
 #pragma mark -- External Methods
 
-- (void)updateAnimationLayerClockTime:(CFTimeInterval)clockTime timeOffset:(CFTimeInterval)timeOffset {
+- (void)updateAnimationLayerWithTimeOffset:(CFTimeInterval)timeOffset {
   if (_needsAnimationUpdate) {
     return;
   }
@@ -93,7 +93,7 @@
   _loopAnimation = loopAnimation;
   CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
   CFTimeInterval clock = CACurrentMediaTime();
-  [self updateAnimationLayerClockTime:clock timeOffset:offset];
+  [self updateAnimationLayerWithTimeOffset:offset];
 }
 
 - (void)setAnimationIsPlaying:(BOOL)animationIsPlaying  {
@@ -109,7 +109,7 @@
   } else {
     _animatedProgress =  offset / _animationDuration;
   }
-  [self updateAnimationLayerClockTime:clock timeOffset:offset];
+  [self updateAnimationLayerWithTimeOffset:offset];
 }
 
 - (void)setAnimatedProgress:(CGFloat)animatedProgress {
@@ -120,14 +120,14 @@
   _animationIsPlaying = NO;
   CFTimeInterval offset = _animatedProgress == 1 ? _animationDuration - LOT_singleFrameTimeValue : _animatedProgress * _animationDuration;
   CFTimeInterval clock = CACurrentMediaTime();
-  [self updateAnimationLayerClockTime:clock timeOffset:offset];
+  [self updateAnimationLayerWithTimeOffset:offset];
 }
 
 - (void)setAnimationSpeed:(CGFloat)speed {
   _animationSpeed = speed;
   CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
   CFTimeInterval clock = CACurrentMediaTime();
-  [self updateAnimationLayerClockTime:clock timeOffset:offset];
+  [self updateAnimationLayerWithTimeOffset:offset];
 }
 
 #pragma mark -- Getters
