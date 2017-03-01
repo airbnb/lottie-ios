@@ -39,6 +39,12 @@
 		4883E54C1E60CE6C00027E57 /* image_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 4883E54A1E60CE6C00027E57 /* image_2.json */; };
 		4883E54E1E60CE8600027E57 /* ImageLoadTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4883E54D1E60CE8600027E57 /* ImageLoadTest.m */; };
 		4883E5501E60CE9900027E57 /* ImageMoveTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4883E54F1E60CE9900027E57 /* ImageMoveTest.m */; };
+		4883E5671E64EB4500027E57 /* anchorTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 4883E5651E64EB4500027E57 /* anchorTest.json */; };
+		4883E5681E64EB4500027E57 /* anchorTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 4883E5651E64EB4500027E57 /* anchorTest.json */; };
+		4883E5691E64EB4500027E57 /* ImageXforms.json in Resources */ = {isa = PBXBuildFile; fileRef = 4883E5661E64EB4500027E57 /* ImageXforms.json */; };
+		4883E56A1E64EB4500027E57 /* ImageXforms.json in Resources */ = {isa = PBXBuildFile; fileRef = 4883E5661E64EB4500027E57 /* ImageXforms.json */; };
+		4883E56C1E64EB5700027E57 /* ImageTransformTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4883E56B1E64EB5700027E57 /* ImageTransformTest.m */; };
+		4883E56E1E64EB9B00027E57 /* AnchorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4883E56D1E64EB9B00027E57 /* AnchorTest.m */; };
 		48D2C7171E5D158A00CC145E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D2C7161E5D158A00CC145E /* main.m */; };
 		48D2C71A1E5D158A00CC145E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D2C7191E5D158A00CC145E /* AppDelegate.m */; };
 		48D2C71D1E5D158A00CC145E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D2C71C1E5D158A00CC145E /* ViewController.m */; };
@@ -120,6 +126,10 @@
 		4883E54A1E60CE6C00027E57 /* image_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = image_2.json; sourceTree = "<group>"; };
 		4883E54D1E60CE8600027E57 /* ImageLoadTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoadTest.m; sourceTree = "<group>"; };
 		4883E54F1E60CE9900027E57 /* ImageMoveTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageMoveTest.m; sourceTree = "<group>"; };
+		4883E5651E64EB4500027E57 /* anchorTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = anchorTest.json; sourceTree = "<group>"; };
+		4883E5661E64EB4500027E57 /* ImageXforms.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ImageXforms.json; sourceTree = "<group>"; };
+		4883E56B1E64EB5700027E57 /* ImageTransformTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTransformTest.m; sourceTree = "<group>"; };
+		4883E56D1E64EB9B00027E57 /* AnchorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnchorTest.m; sourceTree = "<group>"; };
 		48D2C7121E5D158A00CC145E /* Lottie-Screenshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lottie-Screenshot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D2C7161E5D158A00CC145E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		48D2C7181E5D158A00CC145E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -234,6 +244,8 @@
 		48D2C7151E5D158A00CC145E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4883E5651E64EB4500027E57 /* anchorTest.json */,
+				4883E5661E64EB4500027E57 /* ImageXforms.json */,
 				4883E54A1E60CE6C00027E57 /* image_2.json */,
 				4883E5471E60CE6800027E57 /* Image.json */,
 				4883E5441E60CE6100027E57 /* img_0.png */,
@@ -288,6 +300,8 @@
 				48D2C7311E5D158A00CC145E /* Info.plist */,
 				48EAE1F51E5E5C900077ED37 /* LottieAnimationTestCase.h */,
 				48EAE1F61E5E5C900077ED37 /* LottieAnimationTestCase.m */,
+				4883E56B1E64EB5700027E57 /* ImageTransformTest.m */,
+				4883E56D1E64EB9B00027E57 /* AnchorTest.m */,
 			);
 			path = "Lottie-ScreenshotTests";
 			sourceTree = "<group>";
@@ -402,6 +416,8 @@
 				4883E4C51E5E6AF000027E57 /* HamburgerArrow.json in Resources */,
 				4883E5451E60CE6100027E57 /* img_0.png in Resources */,
 				48D2C7221E5D158A00CC145E /* Assets.xcassets in Resources */,
+				4883E5691E64EB4500027E57 /* ImageXforms.json in Resources */,
+				4883E5671E64EB4500027E57 /* anchorTest.json in Resources */,
 				48EAE2221E5E615F0077ED37 /* LoopPlayOnce.json in Resources */,
 				4883E5481E60CE6800027E57 /* Image.json in Resources */,
 				48EAE21A1E5E615F0077ED37 /* Hosts.json in Resources */,
@@ -424,6 +440,7 @@
 			files = (
 				4883E5461E60CE6100027E57 /* img_0.png in Resources */,
 				48EAE2211E5E615F0077ED37 /* LightBulb.json in Resources */,
+				4883E5681E64EB4500027E57 /* anchorTest.json in Resources */,
 				4883E4C81E5E6AF000027E57 /* PinJump.json in Resources */,
 				48EAE2131E5E615E0077ED37 /* AllSet.json in Resources */,
 				4883E5491E60CE6800027E57 /* Image.json in Resources */,
@@ -439,6 +456,7 @@
 				48EAE2231E5E615F0077ED37 /* LoopPlayOnce.json in Resources */,
 				48EAE23C1E5E61690077ED37 /* pathStrokeTests.json in Resources */,
 				48EAE2331E5E615F0077ED37 /* SplitDimensions.json in Resources */,
+				4883E56A1E64EB4500027E57 /* ImageXforms.json in Resources */,
 				48EAE2151E5E615E0077ED37 /* CheckSwitch.json in Resources */,
 				4883E4CA1E5E6AF000027E57 /* TwitterHeart.json in Resources */,
 				48EAE2111E5E615E0077ED37 /* Alarm.json in Resources */,
@@ -557,6 +575,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4883E56C1E64EB5700027E57 /* ImageTransformTest.m in Sources */,
 				48EAE2421E5E621F0077ED37 /* AllSetTest.m in Sources */,
 				4883E4B01E5E68AE00027E57 /* Hosts.m in Sources */,
 				4883E4D41E5E6C6100027E57 /* LoopPlayOnceTest.m in Sources */,
@@ -574,6 +593,7 @@
 				48D2C7301E5D158A00CC145E /* LottieLogoTest.m in Sources */,
 				4883E4D21E5E6B4B00027E57 /* TwitterHeartTest.m in Sources */,
 				4883E5501E60CE9900027E57 /* ImageMoveTest.m in Sources */,
+				4883E56E1E64EB9B00027E57 /* AnchorTest.m in Sources */,
 				4883E4B61E5E68E600027E57 /* TrimPathsFull.m in Sources */,
 				4883E4D01E5E6B3B00027E57 /* PinJump.m in Sources */,
 				48EAE2461E5E62EC0077ED37 /* CityTest.m in Sources */,
