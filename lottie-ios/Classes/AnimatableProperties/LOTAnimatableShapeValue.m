@@ -49,6 +49,9 @@
       }
       _initialShape = [self _bezierShapeFromValue:value closed:closed];
     }
+    if (shapeValues[@"x"]) {
+      NSLog(@"%s: Warning: expressions are not supported", __PRETTY_FUNCTION__);
+    }
   }
   return self;
 }

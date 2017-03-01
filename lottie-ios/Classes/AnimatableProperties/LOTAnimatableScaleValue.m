@@ -38,6 +38,9 @@
       //Single Value, no animation
       _initialScale = [self _xformForValueArray:value];
     }
+    if (scaleValues[@"x"]) {
+      NSLog(@"%s: Warning: expressions are not supported", __PRETTY_FUNCTION__);
+    }
   }
   return self;
 }
