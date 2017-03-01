@@ -13,14 +13,14 @@
 @class LOTLayerGroup;
 @interface LOTAssetGroup : NSObject
 
-- (instancetype)initWithJSON:(NSArray *)jsonArray;
+- (instancetype _Nonnull)initWithJSON:(NSArray * _Nonnull)jsonArray;
 
-- (void)buildAssetNamed:(NSString *)refID
+- (void)buildAssetNamed:(NSString * _Nonnull)refID
              withBounds:(CGRect)bounds
            andFramerate:(NSNumber * _Nullable)framerate;
 
 - (void)finalizeInitialization;
 
-- (LOTAsset *)assetModelForID:(NSNumber *)assetID;
+- (LOTAsset * _Nullable)assetModelForID:(NSString * _Nonnull)assetID;
 
 @end
