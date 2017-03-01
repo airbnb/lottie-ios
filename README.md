@@ -100,13 +100,9 @@ animationView?.play(completion: { (finished) in
 ---
 
 * Linear Interpolation
-
 * Bezier Interpolation
-
 * Hold Interpolation
-
 * Rove Across Time
-
 * Spatial Bezier
 
 ### Solids
@@ -114,13 +110,9 @@ animationView?.play(completion: { (finished) in
 ---
 
 * Transform Anchor Point
-
 * Transform Position
-
 * Transform Scale
-
 * Transform Rotation
-
 * Transform Opacity
 
 ### Masks
@@ -128,9 +120,7 @@ animationView?.play(completion: { (finished) in
 ---
 
 * Path
-
 * Opacity
-
 * Multiple Masks (additive)
 
 ### Track Mattes
@@ -144,7 +134,6 @@ animationView?.play(completion: { (finished) in
 ---
 
 * Multiple Parenting
-
 * Nulls
 
 ### Shape Layers
@@ -152,23 +141,14 @@ animationView?.play(completion: { (finished) in
 ---
 
 * Anchor Point
-
 * Position
-
 * Scale
-
 * Rotation
-
 * Opacity
-
 * Path
-
 * Group Transforms (Anchor point, position, scale etc)
-
 * Rectangle (All properties)
-
 * Elipse (All properties)
-
 * Multiple paths in one group
 
 #### Stroke (shape layer)
@@ -176,13 +156,9 @@ animationView?.play(completion: { (finished) in
 ---
 
 * Stroke Color
-
 * Stroke Opacity
-
 * Stroke Width
-
 * Line Cap
-
 * Dashes
 
 #### Fill (shape layer)
@@ -190,7 +166,6 @@ animationView?.play(completion: { (finished) in
 ---
 
 * Fill Color
-
 * Fill Opacity
 
 #### Trim Paths (shape layer)
@@ -198,15 +173,23 @@ animationView?.play(completion: { (finished) in
 ---
 
 * Trim Paths Start
-
 * Trim Paths End
-
 * Trim Paths Offset
+
+#### Layer Features
+
+---
+
+* Precomps
+* Image Layers
+* Shape Layers
+* Null Layers
+* Solid Layers
+* Parenting Layers
+* Alpha Matte Layers
 
 ## Currently Unsupport After Effects Features
 
-* Image Layers
-* Precomps
 * Even-Odd winding paths
 * Trim Shapes Individually feature of Trim Paths
 * Expressions
@@ -276,11 +259,9 @@ File github issues for anything that is unexpectedly broken. If an After Effects
 ## Roadmap (In no particular order)
 - Add support for interactive animated transitions
 - Add support for parenting programmatically added layers, moving/scaling
-- Image Assets
 - Programmatically alter animations
 - Animation Breakpoints/Seekpoints
 - Gradients
 - LOTAnimatedButton
 - Repeater objects
-- Precomps
 

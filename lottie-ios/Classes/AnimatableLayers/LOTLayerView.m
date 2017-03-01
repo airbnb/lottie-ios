@@ -91,6 +91,7 @@
   CAKeyframeAnimation *_inOutAnimation;
   NSArray<LOTParentLayer *> *_parentLayers;
   LOTMaskLayer *_maskLayer;
+  CALayer *_childSolid;
 }
 
 - (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup {
@@ -108,30 +109,22 @@
   self.anchorPoint = CGPointZero;
   
   _childContainerLayer = [CALayer new];
-  _childContainerLayer.bounds = self.bounds;
+  _childContainerLayer.bounds = _layerModel.layerBounds;
   _childContainerLayer.backgroundColor = _layerModel.solidColor.CGColor;
-  
-  if (_layerModel.layerType == LOTLayerTypeSolid) {
+
+  if (_layerModel.layerType <= LOTLayerTypeSolid) {
     self.bounds = _layerModel.parentCompBounds;
-    _childContainerLayer.bounds = _layerModel.layerBounds;
     _childContainerLayer.backgroundColor = nil;
     _childContainerLayer.masksToBounds = NO;
+  }
+  
+  if (_layerModel.layerType == LOTLayerTypeSolid) {
+    [self _createChildSolid];
+    [self _setSolidLayerBackground];
+  }
 
-    CALayer *solid = [CALayer new];
-    solid.backgroundColor = _layerModel.solidColor.CGColor;
-    solid.frame = _childContainerLayer.bounds;
-    solid.masksToBounds = YES;
-    [_childContainerLayer addSublayer:solid];
-  }
-  
-  if (_layerModel.layerType == LOTLayerTypePrecomp) {
-    self.bounds = _layerModel.parentCompBounds;
-    _childContainerLayer.bounds = _layerModel.layerBounds;
-  }
-  
   if (_layerModel.layerType == LOTLayerTypeImage) {
-    self.bounds = _layerModel.parentCompBounds;
-    _childContainerLayer.bounds = _layerModel.layerBounds;
+    [self _createChildSolid];
     [self _setImageForAsset];
   }
   
@@ -328,9 +321,9 @@
     NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
     UIImage *image = [UIImage imageNamed:components.firstObject];
     if (image) {
-      _childContainerLayer.contents = (__bridge id _Nullable)(image.CGImage);
+      _childSolid.contents = (__bridge id _Nullable)(image.CGImage);
     } else {
-        NSLog(@"%s: Warn: image not found: %@", __PRETTY_FUNCTION__, components.firstObject);
+      NSLog(@"%s: Warn: image not found: %@", __PRETTY_FUNCTION__, components.firstObject);
     }
   }
 }
@@ -346,12 +339,24 @@
       CGFloat desiredScaleFactor = [window backingScaleFactor];
       CGFloat actualScaleFactor = [image recommendedLayerContentsScale:desiredScaleFactor];
       id layerContents = [image layerContentsForContentsScale:actualScaleFactor];
-      _childContainerLayer.contents = layerContents;
+      _childSolid.contents = layerContents;
+
     }
   }
 
 }
 
 #endif
+
+- (void)_createChildSolid {
+  _childSolid = [CALayer new];
+  _childSolid.frame = _childContainerLayer.bounds;
+  _childSolid.masksToBounds = YES;
+  [_childContainerLayer addSublayer:_childSolid];
+}
+
+- (void)_setSolidLayerBackground {
+  _childSolid.backgroundColor = _layerModel.solidColor.CGColor;
+}
 
 @end
