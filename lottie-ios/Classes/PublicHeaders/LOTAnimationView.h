@@ -14,7 +14,9 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 @interface LOTAnimationView : LOTView
 
 + (instancetype)animationNamed:(NSString *)animationName;
++ (instancetype)animationNamed:(NSString *)animationName inBundle:(NSBundle *)bundle;
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON;
+
 
 - (instancetype)initWithContentsOfURL:(NSURL *)url;
 
