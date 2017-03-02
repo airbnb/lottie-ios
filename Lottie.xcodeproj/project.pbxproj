@@ -127,7 +127,6 @@
 		481A4ACF1E4A7885003CF62B /* LOTShapeTrimPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4A561E4A7885003CF62B /* LOTShapeTrimPath.m */; };
 		481A4AD01E4A7885003CF62B /* LOTShapeTrimPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4A561E4A7885003CF62B /* LOTShapeTrimPath.m */; };
 		481A4AD11E4A7885003CF62B /* LOTAnimationTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4A581E4A7885003CF62B /* LOTAnimationTransitionController.m */; };
-		481A4AD21E4A7885003CF62B /* LOTAnimationTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4A581E4A7885003CF62B /* LOTAnimationTransitionController.m */; };
 		481A4AD31E4A7885003CF62B /* LOTAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4A591E4A7885003CF62B /* LOTAnimationView.m */; };
 		481A4AD41E4A7885003CF62B /* LOTAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4A591E4A7885003CF62B /* LOTAnimationView.m */; };
 		481A4AD51E4A7885003CF62B /* LOTAnimationView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 481A4A5A1E4A7885003CF62B /* LOTAnimationView_Internal.h */; };
@@ -207,7 +206,6 @@
 		84FE13191E4C15A1009B157C /* Lottie.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 62CA59C61E3C179F002D7188 /* Lottie.h */; };
 		FA1F5AA01E42B52800FF36BF /* LOTAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1F5A9F1E42B52800FF36BF /* LOTAnimationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA1F5AA11E42B52800FF36BF /* LOTAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1F5A9F1E42B52800FF36BF /* LOTAnimationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FAE1F7CE1E428CBE002E0974 /* LOTAnimationTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59C41E3C179F002D7188 /* LOTAnimationTransitionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FAE1F7D71E428CBE002E0974 /* Lottie.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59C61E3C179F002D7188 /* Lottie.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -628,7 +626,6 @@
 				4883E4E81E5FA59200027E57 /* LOTCompositionLayer.h in Headers */,
 				481A4ACE1E4A7885003CF62B /* LOTShapeTrimPath.h in Headers */,
 				481A4AA01E4A7885003CF62B /* UIColor+Expanded.h in Headers */,
-				FAE1F7CE1E428CBE002E0974 /* LOTAnimationTransitionController.h in Headers */,
 				4883E4F11E5FA5EE00027E57 /* LOTAssetGroup.h in Headers */,
 				FAE1F7D71E428CBE002E0974 /* Lottie.h in Headers */,
 				481A4AAC1E4A7885003CF62B /* LOTMask.h in Headers */,
@@ -839,7 +836,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				481A4AD21E4A7885003CF62B /* LOTAnimationTransitionController.m in Sources */,
 				481A4AB41E4A7885003CF62B /* LOTShapeCircle.m in Sources */,
 				481A4A6E1E4A7885003CF62B /* LOTMaskLayer.m in Sources */,
 				481A4A941E4A7885003CF62B /* LOTAnimationCache.m in Sources */,
@@ -926,7 +922,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -971,7 +967,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1048,6 +1044,7 @@
 				INFOPLIST_FILE = Lottie/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
 				PRODUCT_NAME = Lottie;
 				SDKROOT = macosx10.12;
@@ -1067,6 +1064,7 @@
 				INFOPLIST_FILE = Lottie/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
 				PRODUCT_NAME = Lottie;
 				SDKROOT = macosx10.12;
