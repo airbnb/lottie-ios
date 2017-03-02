@@ -140,6 +140,34 @@
     }
   }
   _shapes = shapes;
+    
+  NSArray *effects = jsonDictionary[@"ef"];
+  if (effects.count > 0) {
+    
+    NSDictionary *effectNames = @{ @0: @"slider",
+                                   @1: @"angle",
+                                   @2: @"color",
+                                   @3: @"point",
+                                   @4: @"checkbox",
+                                   @5: @"group",
+                                   @6: @"noValue",
+                                   @7: @"dropDown",
+                                   @9: @"customValue",
+                                   @10: @"layerIndex",
+                                   @20: @"tint",
+                                   @21: @"fill" };
+                             
+    for (NSDictionary *effect in effects) {
+      NSNumber *typeNumber = effect[@"ty"];
+      NSString *name = effect[@"nm"];
+      NSString *internalName = effect[@"mn"];
+      NSString *typeString = effectNames[typeNumber];
+      if (typeString) {
+        NSLog(@"%s: Warning: %@ effect not supported: %@ / %@", __PRETTY_FUNCTION__, typeString, internalName, name);
+      }
+    }
+  }
+  
   
   _hasInAnimation = _inFrame.integerValue > 0;
   
