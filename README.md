@@ -22,9 +22,21 @@ Here is just a small sampling of the power of Lottie
 Lottie supports iOS 8 and above.
 Lottie animations can be loaded from bundled JSON or from a URL
 
+To bundle JSON just add it and any images that the animation requires to your target in xcode.
+
 The simplest way to use it is with LOTAnimationView:
 ```objective-c
 LOTAnimationView *animation = [LOTAnimationView animationNamed:@"Lottie"];
+[self.view addSubview:animation];
+[animation playWithCompletion:^(BOOL animationFinished) {
+  // Do Something
+}];
+```
+
+If you are working with multiple bundles you can use.
+
+```objective-c
+LOTAnimationView *animation = [LOTAnimationView animationNamed:@"Lottie" inBundle:[NSBundle YOUR_BUNDLE]];
 [self.view addSubview:animation];
 [animation playWithCompletion:^(BOOL animationFinished) {
   // Do Something
