@@ -92,14 +92,14 @@
 - (void)setAnimationDoesLoop:(BOOL)loopAnimation {
   _loopAnimation = loopAnimation;
   CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
-  CFTimeInterval clock = CACurrentMediaTime();
+  __unused CFTimeInterval clock = CACurrentMediaTime();
   [self updateAnimationLayerWithTimeOffset:offset];
 }
 
 - (void)setAnimationIsPlaying:(BOOL)animationIsPlaying  {
   _animationIsPlaying = animationIsPlaying;
   CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
-  CFTimeInterval clock = CACurrentMediaTime();
+  __unused CFTimeInterval clock = CACurrentMediaTime();
 
   if (_animationIsPlaying) {
     if (_playFromBeginning) {
@@ -119,14 +119,14 @@
   _animatedProgress = animatedProgress > 1 ? fmod(animatedProgress, 1) : MAX(animatedProgress, 0);
   _animationIsPlaying = NO;
   CFTimeInterval offset = _animatedProgress == 1 ? _animationDuration - LOT_singleFrameTimeValue : _animatedProgress * _animationDuration;
-  CFTimeInterval clock = CACurrentMediaTime();
+  __unused CFTimeInterval clock = CACurrentMediaTime();
   [self updateAnimationLayerWithTimeOffset:offset];
 }
 
 - (void)setAnimationSpeed:(CGFloat)speed {
   _animationSpeed = speed;
   CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
-  CFTimeInterval clock = CACurrentMediaTime();
+  __unused CFTimeInterval clock = CACurrentMediaTime();
   [self updateAnimationLayerWithTimeOffset:offset];
 }
 
