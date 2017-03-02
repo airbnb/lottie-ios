@@ -15,7 +15,6 @@
   NSNumber *_framerate;
   NSDictionary *_modelMap;
   NSDictionary *_referenceIDMap;
-  NSArray *layersJSON;
 }
 
 - (instancetype)initWithLayerJSON:(NSArray *)layersJSON
