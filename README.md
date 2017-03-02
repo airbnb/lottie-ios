@@ -203,11 +203,12 @@ animationView?.play(completion: { (finished) in
 ## Currently Unsupport After Effects Features
 
 * Even-Odd winding paths
+* Merge Shapes
 * Trim Shapes Individually feature of Trim Paths
 * Expressions
 * 3d Layer support
 * Gradients
-* Polystar shapes (Can convert to vector path as a work around)
+* Polystar shapes (Can convert to vector path as a workaround)
 * Alpha inverted mask
 
 
