@@ -63,14 +63,18 @@
   } else if ([type isEqualToString:@"tm"]) {
     LOTShapeTrimPath *trim = [[LOTShapeTrimPath alloc] initWithJSON:itemJSON frameRate:frameRate];
     return trim;
-  } else if ([type isEqualToString:@"gs"] || [type isEqualToString:@"gf"]) {
-    // gs = gradient stroke
-    // gf = gradient fill
-    NSLog(@"%s: Warning: gradients are not supported", __PRETTY_FUNCTION__);
-  } else if ([type isEqualToString:@"sr"]) {
-    NSLog(@"%s: Warning: star is not supported. Convert to vector path?", __PRETTY_FUNCTION__);
+  } else {
+    NSString *name = itemJSON[@"nm"];
+    if ([type isEqualToString:@"gs"] /* gradient stroke */ || [type isEqualToString:@"gf"] /* gradient fill */) {
+      NSLog(@"%s: Warning: gradients are not supported", __PRETTY_FUNCTION__);
+    } else if ([type isEqualToString:@"sr"]) {
+      NSLog(@"%s: Warning: star is not supported. Convert to vector path? name: %@", __PRETTY_FUNCTION__, name);
+    } else if ([type isEqualToString:@"mm"]) {
+      NSLog(@"%s: Warning: merge shape is not supported. name: %@", __PRETTY_FUNCTION__, name);
+    } else {
+      NSLog(@"%s: Unsupported shape: %@ name: %@", __PRETTY_FUNCTION__, type, name);
+    }
   }
-  
   return nil;
 }
 
