@@ -10,8 +10,8 @@
 #import "LOTAsset.h"
 
 @implementation LOTAssetGroup {
-  NSMutableDictionary *_assetMap;
-  NSDictionary *_assetJSONMap;
+  NSMutableDictionary<NSString *, LOTAsset *> *_assetMap;
+  NSDictionary<NSString *, NSDictionary *> *_assetJSONMap;
 }
 
 - (instancetype)initWithJSON:(NSArray *)jsonArray {
@@ -19,7 +19,7 @@
   if (self) {
     _assetMap = [NSMutableDictionary dictionary];
     NSMutableDictionary *assetJSONMap = [NSMutableDictionary dictionary];
-    for (NSDictionary *assetDictionary in jsonArray) {
+    for (NSDictionary<NSString *, NSString *> *assetDictionary in jsonArray) {
       NSString *referenceID = assetDictionary[@"id"];
       if (referenceID) {
         assetJSONMap[referenceID] = assetDictionary;
@@ -55,7 +55,7 @@
   _assetJSONMap = nil;
 }
 
-- (LOTAsset *)assetModelForID:(NSNumber *)assetID {
+- (LOTAsset *)assetModelForID:(NSString *)assetID {
   return _assetMap[assetID];
 }
 
