@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class LOTLayer;
 @class LOTAssetGroup;
 
@@ -16,7 +18,7 @@
 
 - (instancetype)initWithLayerJSON:(NSArray *)layersJSON
                        withBounds:(CGRect)bounds
-                    withFramerate:(NSNumber *)framerate
+                    withFramerate:(NSNumber * _Nullable)framerate
                    withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup;
 
 @property (nonatomic, readonly) NSArray <LOTLayer *> *layers;
@@ -25,3 +27,5 @@
 - (LOTLayer *)layerForReferenceID:(NSString *)referenceID;
 
 @end
+
+NS_ASSUME_NONNULL_END
