@@ -22,9 +22,9 @@ Here is just a small sampling of the power of Lottie
 Lottie supports iOS 8 and above.
 Lottie animations can be loaded from bundled JSON or from a URL
 
-The simplest way to use it is with LOTAnimationView:
+The simplest way to use it is with LAAnimationView:
 ```objective-c
-LOTAnimationView *animation = [LOTAnimationView animationNamed:@"Lottie"];
+LAAnimationView *animation = [LAAnimationView animationNamed:@"Lottie"];
 [self.view addSubview:animation];
 [animation playWithCompletion:^(BOOL animationFinished) {
   // Do Something
@@ -33,7 +33,7 @@ LOTAnimationView *animation = [LOTAnimationView animationNamed:@"Lottie"];
 
 Or you can load it programmatically from a NSURL
 ```objective-c
-LOTAnimationView *animation = [[LOTAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
+LAAnimationView *animation = [[LAAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
 [self.view addSubview:animation];
 ```
 
@@ -62,14 +62,14 @@ Lottie comes with a `UIViewController` animation-controller for making custom vi
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
                                                                   presentingController:(UIViewController *)presenting
                                                                       sourceController:(UIViewController *)source {
-  LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition1"
+  LAAnimationTransitionController *animationController = [[LAAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition1"
                                                                                                           fromLayerNamed:@"outLayer"
                                                                                                             toLayerNamed:@"inLayer"];
   return animationController;
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-  LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition2"
+  LAAnimationTransitionController *animationController = [[LAAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition2"
                                                                                                           fromLayerNamed:@"outLayer"
                                                                                                             toLayerNamed:@"inLayer"];
   return animationController;
@@ -77,7 +77,7 @@ Lottie comes with a `UIViewController` animation-controller for making custom vi
 
 ```
 
-If your animation will be frequently reused, `LOTAnimationView` has an built in LRU Caching Strategy.
+If your animation will be frequently reused, `LAAnimationView` has an built in LRU Caching Strategy.
 
 ## Swift Support
 
@@ -85,7 +85,7 @@ Lottie works just fine in Swift too!
 Simply `import Lottie` at the top of your swift class, and use Lottie as follows
 
 ```swift
-let animationView = LOTAnimationView.animationNamed("hamburger")
+let animationView = LAAnimationView.animationNamed("hamburger")
 self.view.addSubview(animationView!)
 
 animationView?.play(completion: { (finished) in
