@@ -26,13 +26,13 @@ For the first time, designers can create and ship beautiful animations without a
   s.osx.deployment_target = '10.10'
   s.tvos.deployment_target = '9.0'
 
-  s.source_files = 'lottie-ios/Classes/**/*'
+  s.source_files = 'IKLottie-ios/Classes/**/*'
 
   # s.resource_bundles = {
   #   'lottie-ios' => ['lottie-ios/Assets/*.png']
   # }
 
-  s.public_header_files = 'lottie-ios/Classes/PublicHeaders/*.h'
+  s.public_header_files = 'IKLottie-ios/Classes/PublicHeaders/*.h'
   s.ios.frameworks = 'UIKit'
   s.osx.frameworks = ['AppKit', 'CoreVideo']
   s.module_name = 'IKLottie'
