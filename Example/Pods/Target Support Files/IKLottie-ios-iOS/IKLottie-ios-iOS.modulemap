@@ -1,0 +1,6 @@
+framework module IKLottie {
+  umbrella header "IKLottie-ios-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

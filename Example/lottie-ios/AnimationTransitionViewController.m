@@ -7,7 +7,7 @@
 //
 
 #import "AnimationTransitionViewController.h"
-#import <Lottie/Lottie.h>
+#import <IKLottie/lottie.h>
 
 @interface ToAnimationViewController : UIViewController
 @property (nonnull, strong) UIButton *button1;
