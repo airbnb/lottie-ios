@@ -1,7 +1,7 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## lottie-ios
+## IKLottie-ios
 
                                  Apache License
                            Version 2.0, January 2004

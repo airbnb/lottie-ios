@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'Lottie-Example' do
-  pod 'lottie-ios', :path => '../'
+  pod 'IKLottie-ios', :path => '../'
 
   target 'lottie-ios_Tests' do
     inherit! :search_paths
@@ -11,5 +11,5 @@ target 'Lottie-Example' do
 end
 
 target 'Lottie-Example-MacOS' do
-  pod 'lottie-ios', :path => '../'
+  pod 'IKLottie-ios', :path => '../'
 end

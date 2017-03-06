@@ -7,7 +7,7 @@
 //
 
 #import "AnimatedTextField.h"
-#import <Lottie/Lottie.h>
+#import <IKLottie/Lottie.h>
 
 @interface LACharacterCell : UICollectionViewCell
 

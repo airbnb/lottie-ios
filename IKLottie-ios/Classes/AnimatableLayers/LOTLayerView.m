@@ -14,6 +14,7 @@
 #import "CAAnimationGroup+LOTAnimatableGroup.h"
 #import "LOTMaskLayer.h"
 #import "CGGeometry+LOTAdditions.h"
+#import "LOTAsset+Bundle.h"
 
 @interface LOTParentLayer : LOTAnimatableLayer
 
@@ -319,7 +320,16 @@
 - (void)_setImageForAsset {
   if (_layerModel.imageAsset.imageName) {
     NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
-    UIImage *image = [UIImage imageNamed:components.firstObject];
+      UIImage *image = nil;
+      if ([LOTAsset getRegisterBundle] == [NSBundle mainBundle]) {
+        image = [UIImage imageNamed:components.firstObject];
+      }else{
+          NSBundle *bundle = [LOTAsset getRegisterBundle];
+          NSString *bundleName = [[bundle bundlePath] lastPathComponent];
+          
+          image = [UIImage imageNamed:[bundleName stringByAppendingPathComponent:components.firstObject]];
+      }
+    
     if (image) {
       _childSolid.contents = (__bridge id _Nullable)(image.CGImage);
     } else {
