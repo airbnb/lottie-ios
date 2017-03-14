@@ -50,7 +50,7 @@
   return self;
 }
 
-#pragma mark -- External Methods
+#pragma mark - External Methods
 
 - (void)updateAnimationLayerWithTimeOffset:(CFTimeInterval)timeOffset {
   if (_needsAnimationUpdate) {
@@ -87,7 +87,7 @@
   }
 }
 
-#pragma mark -- Setters
+#pragma mark - Setters
 
 - (void)setAnimationDoesLoop:(BOOL)loopAnimation {
   _loopAnimation = loopAnimation;
@@ -130,7 +130,7 @@
   [self updateAnimationLayerWithTimeOffset:offset];
 }
 
-#pragma mark -- Getters
+#pragma mark - Getters
 
 - (CGFloat)animatedProgress {
   if (_animationIsPlaying) {
@@ -170,6 +170,8 @@
 
 @end
 
+#pragma mark -
+
 @implementation LOTAnimationView {
   CALayer *_timingLayer;
   LOTCompositionLayer *_compLayer;
@@ -183,31 +185,44 @@
   return [self animationNamed:animationName inBundle:[NSBundle mainBundle]];
 }
 
-
 + (instancetype)animationNamed:(NSString *)animationName inBundle:(NSBundle *)bundle {
-  NSArray *components = [animationName componentsSeparatedByString:@"."];
-  animationName = components.firstObject;
-  
-  LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
-  if (comp) {
-    return [[LOTAnimationView alloc] initWithModel:comp];
-  }
-  
-  NSError *error;
-  NSString *filePath = [bundle pathForResource:animationName ofType:@"json"];
-  NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
-  NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                         options:0 error:&error] : nil;
-  if (JSONObject && !error) {
-    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject];
-    [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
-    return [[LOTAnimationView alloc] initWithModel:laScene];
-  }
-  
-  NSException* resourceNotFoundException = [NSException exceptionWithName:@"ResourceNotFoundException"
-                                                                   reason:[error localizedDescription]
-                                                                 userInfo:nil];
-  @throw resourceNotFoundException;
+    LOTComposition *model = [self compositionForAnimationNamed:animationName inBundle:bundle];
+    return [[LOTAnimationView alloc] initWithModel:model];
+}
+
++ (LOTComposition*)compositionForAnimationNamed:(NSString *)animationName inBundle:(NSBundle *)bundle {
+    NSArray *components = [animationName componentsSeparatedByString:@"."];
+    if (components.count > 2) {
+        NSLog(@"%s: Warning: only one period [.] is supported in the name: %@", __PRETTY_FUNCTION__, animationName);
+    }
+    animationName = components.firstObject;
+
+    NSError *error;
+    LOTComposition *composition = [[LOTAnimationCache sharedCache] animationForKey:animationName];
+    if (composition == nil) {
+        NSString *filePath = [bundle pathForResource:animationName ofType:@"json"];
+        if (filePath == nil) {
+            NSString *text = [NSString stringWithFormat:NSLocalizedString(@"Animation not found: %@", @""), animationName];
+            NSDictionary *info = @{NSLocalizedDescriptionKey: text};
+            error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:info];
+        } else {
+            NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
+
+            NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                                   options:0 error:&error] : nil;
+            if (JSONObject && !error) {
+                composition = [[LOTComposition alloc] initWithJSON:JSONObject];
+                [[LOTAnimationCache sharedCache] addAnimation:composition forKey:animationName];
+            }
+        }
+    }
+
+    if (error) {
+        NSLog(@"%s: Unable to load animation: %@", __PRETTY_FUNCTION__, error);
+        [NSException raise:@"ResourceNotLoadedException" format:[error localizedDescription]];
+    }
+
+    return composition;
 }
 
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON {
@@ -246,6 +261,15 @@
     }
   }
   return self;
+}
+
+/// storyboard/interface builder initializer
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self _initializeAnimationContainer];
+    }
+    return self;
 }
 
 - (instancetype)initWithModel:(LOTComposition *)model {
@@ -386,6 +410,19 @@
 }
 
 # pragma mark - Getters and Setters
+
+- (void) setAnimationName:(NSString *)animationName {
+    [self setAnimationName:animationName inBundle:[NSBundle mainBundle]];
+}
+
+- (void) setAnimationName:(NSString *)animationName inBundle:(NSBundle*)bundle {
+    LOTComposition *model = [[self class] compositionForAnimationNamed:animationName inBundle:bundle];
+    self.sceneModel = model;
+}
+
+- (void) setSceneModel:(LOTComposition * _Nonnull)sceneModel {
+    [self _setupWithSceneModel:sceneModel restoreAnimationState:NO];
+}
 
 - (void)setAnimationProgress:(CGFloat)animationProgress {
   if (_animationState.animationIsPlaying) {
