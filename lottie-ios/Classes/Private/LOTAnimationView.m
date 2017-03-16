@@ -355,8 +355,7 @@
 # pragma mark - Display Link
 
 - (void)startDisplayLink {
-  if (_animationState.animationIsPlaying == NO ||
-      _animationState.loopAnimation) {
+  if (_animationState.animationIsPlaying == NO) {
     return;
   }
   
