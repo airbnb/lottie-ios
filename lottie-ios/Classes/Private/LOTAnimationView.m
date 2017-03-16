@@ -403,9 +403,6 @@
 
 - (void)setLoopAnimation:(BOOL)loopAnimation {
   [_animationState setAnimationDoesLoop:loopAnimation];
-  if (loopAnimation) {
-    [self stopDisplayLink];
-  }
 }
 
 - (BOOL)loopAnimation {
