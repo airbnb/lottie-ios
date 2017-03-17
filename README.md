@@ -104,6 +104,9 @@ animationView?.play(completion: { (finished) in
   // Do Something
 })
 ```
+## Note:
+Animation file name should be first added to your project. as for the above code sample, It won't work until you add an animation file called `hamburger.json`.. 
+`let animationView = LOTAnimatedView.animationNamed("here_goes_your_json_file_name_without_.json")` 
 
 ## Supported After Effects Features
 
