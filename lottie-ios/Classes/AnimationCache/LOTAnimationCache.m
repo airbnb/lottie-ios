@@ -45,6 +45,9 @@ const NSInteger kLOTCacheSize = 50;
 }
 
 - (LOTComposition *)animationForKey:(NSString *)key {
+  if (!key) {
+    return nil;
+  }
   LOTComposition *animation = [animationsCache_ objectForKey:key];
   [lruOrderArray_ removeObject:key];
   [lruOrderArray_ addObject:key];
