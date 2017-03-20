@@ -355,8 +355,7 @@
 # pragma mark - Display Link
 
 - (void)startDisplayLink {
-  if (_animationState.animationIsPlaying == NO ||
-      _animationState.loopAnimation) {
+  if (_animationState.animationIsPlaying == NO) {
     return;
   }
   
@@ -403,9 +402,6 @@
 
 - (void)setLoopAnimation:(BOOL)loopAnimation {
   [_animationState setAnimationDoesLoop:loopAnimation];
-  if (loopAnimation) {
-    [self stopDisplayLink];
-  }
 }
 
 - (BOOL)loopAnimation {
