@@ -13,6 +13,8 @@
 #import "LOTHelpers.h"
 #import "LOTAnimationView_Internal.h"
 #import "LOTAnimationCache.h"
+#import "LOTComposition.h"
+#import "LOTComposition_Internal.h"
 #import "LOTCompositionLayer.h"
 
 @implementation LOTAnimationState {
@@ -186,43 +188,8 @@
 }
 
 + (instancetype)animationNamed:(NSString *)animationName inBundle:(NSBundle *)bundle {
-    LOTComposition *model = [self compositionForAnimationNamed:animationName inBundle:bundle];
+    LOTComposition *model = [LOTComposition compositionForAnimationNamed:animationName inBundle:bundle];
     return [[LOTAnimationView alloc] initWithModel:model];
-}
-
-+ (LOTComposition*)compositionForAnimationNamed:(NSString *)animationName inBundle:(NSBundle *)bundle {
-    NSArray *components = [animationName componentsSeparatedByString:@"."];
-    if (components.count > 2) {
-        NSLog(@"%s: Warning: only one period [.] is supported in the name: %@", __PRETTY_FUNCTION__, animationName);
-    }
-    animationName = components.firstObject;
-
-    NSError *error;
-    LOTComposition *composition = [[LOTAnimationCache sharedCache] animationForKey:animationName];
-    if (composition == nil) {
-        NSString *filePath = [bundle pathForResource:animationName ofType:@"json"];
-        if (filePath == nil) {
-            NSString *text = [NSString stringWithFormat:NSLocalizedString(@"Animation not found: %@", @""), animationName];
-            NSDictionary *info = @{NSLocalizedDescriptionKey: text};
-            error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:info];
-        } else {
-            NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
-
-            NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                                   options:0 error:&error] : nil;
-            if (JSONObject && !error) {
-                composition = [[LOTComposition alloc] initWithJSON:JSONObject];
-                [[LOTAnimationCache sharedCache] addAnimation:composition forKey:animationName];
-            }
-        }
-    }
-
-    if (error) {
-        NSLog(@"%s: Unable to load animation: %@", __PRETTY_FUNCTION__, error);
-        [NSException raise:@"ResourceNotLoadedException" format:[error localizedDescription]];
-    }
-
-    return composition;
 }
 
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON {
@@ -416,7 +383,7 @@
 }
 
 - (void) setAnimationName:(NSString *)animationName inBundle:(NSBundle*)bundle {
-    LOTComposition *model = [[self class] compositionForAnimationNamed:animationName inBundle:bundle];
+    LOTComposition *model = [LOTComposition compositionForAnimationNamed:animationName inBundle:bundle];
     self.sceneModel = model;
 }
 

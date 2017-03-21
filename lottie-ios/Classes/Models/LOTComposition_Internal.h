@@ -1,5 +1,5 @@
 //
-//  LOTScene.h
+//  LOTComposition_Internal.h
 //  LottieAnimator
 //
 //  Created by Brandon Withrow on 12/14/15.
@@ -13,7 +13,7 @@
 @class LOTLayer;
 @class LOTAssetGroup;
 
-@interface LOTComposition : NSObject
+@interface LOTComposition ()
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
