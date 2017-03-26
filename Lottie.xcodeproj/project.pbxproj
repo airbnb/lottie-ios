@@ -171,6 +171,7 @@
 		489F8EAF1E4D21A400F2DEB7 /* LOTAnimationView_Compat.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DBA16351B4FA408937A16CE /* LOTAnimationView_Compat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62CA5A051E3C179F002D7188 /* LOTAnimationTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59C41E3C179F002D7188 /* LOTAnimationTransitionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62CA5A071E3C179F002D7188 /* Lottie.h in Headers */ = {isa = PBXBuildFile; fileRef = 62CA59C61E3C179F002D7188 /* Lottie.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		847709411E875369009CE1B5 /* LOTLayerGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 484EBA241E57898D00D4CAD9 /* LOTLayerGroup.m */; };
 		84FE12F81E4C1553009B157C /* LOTAnimatableLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4A191E4A7885003CF62B /* LOTAnimatableLayer.m */; };
 		84FE12F91E4C1553009B157C /* LOTEllipseShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4A1B1E4A7885003CF62B /* LOTEllipseShapeLayer.m */; };
 		84FE12FA1E4C1553009B157C /* LOTGroupLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4A1D1E4A7885003CF62B /* LOTGroupLayerView.m */; };
@@ -795,6 +796,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				847709411E875369009CE1B5 /* LOTLayerGroup.m in Sources */,
 				4883E4FA1E5FA67200027E57 /* LOTStrokeShapeLayer.m in Sources */,
 				4883E4FB1E5FA67200027E57 /* CGGeometry+LOTAdditions.m in Sources */,
 				84FE12F81E4C1553009B157C /* LOTAnimatableLayer.m in Sources */,
