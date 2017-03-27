@@ -217,7 +217,7 @@ Animation file name should be first added to your project. as for the above code
 
 ## Install Lottie
 
-###CocoaPods
+### CocoaPods
 Add the pod to your podfile
 ```
 pod 'lottie-ios'
@@ -227,7 +227,7 @@ run
 pod install
 ```
 
-###Carthage
+### Carthage
 Install Carthage (https://github.com/Carthage/Carthage)
 Add Lottie to your Cartfile
 ```
