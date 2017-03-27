@@ -13,7 +13,8 @@ Here is just a small sampling of the power of Lottie
 ![Example1](_Gifs/Examples1.gif)
 ![Example2](_Gifs/Examples2.gif)
 
-![Community](_Gifs/Community 2_3.gif)
+<img src="_Gifs/Community 2_3.gif" />
+
 ![Example3](_Gifs/Examples3.gif)
 
 ![Abcs](_Gifs/Examples4.gif)
