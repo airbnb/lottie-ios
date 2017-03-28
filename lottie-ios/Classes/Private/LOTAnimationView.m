@@ -220,6 +220,7 @@
   if (self) {
     LOTComposition *laScene = [[LOTAnimationCache sharedCache] animationForKey:url.absoluteString];
     if (laScene) {
+      self.frame = laScene.compBounds;
       [self _initializeAnimationContainer];
       [self _setupWithSceneModel:laScene restoreAnimationState:NO];
     } else {
@@ -239,6 +240,7 @@
         LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON];
         dispatch_async(dispatch_get_main_queue(), ^(void){
           [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:url.absoluteString];
+          self.frame = laScene.compBounds;
           [self _initializeAnimationContainer];
           [self _setupWithSceneModel:laScene restoreAnimationState:YES];
         });
