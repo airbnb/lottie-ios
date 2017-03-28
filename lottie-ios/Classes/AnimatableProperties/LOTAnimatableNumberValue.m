@@ -198,9 +198,9 @@
   return (self.valueKeyframes.count > 0);
 }
 
-- (nullable CAKeyframeAnimation *)animationForKeyPath:(nonnull NSString *)keypath {
+- (NSArray<CAKeyframeAnimation *> *)animationsForKeyPath:(NSString *)keypath {
   if (self.hasAnimation == NO) {
-    return nil;
+    return @[];
   }
   CAKeyframeAnimation *keyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:keypath];
   keyframeAnimation.keyTimes = self.keyTimes;
@@ -209,7 +209,7 @@
   keyframeAnimation.duration = self.duration;
   keyframeAnimation.beginTime = self.delay;
   keyframeAnimation.fillMode = kCAFillModeForwards;
-  return keyframeAnimation;
+  return @[keyframeAnimation];
 }
 
 - (NSString *)description {
