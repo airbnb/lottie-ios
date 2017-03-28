@@ -74,6 +74,12 @@ static NSMutableDictionary *colorNameCache = nil;
 		case kCGColorSpaceModelRGB:
 		case kCGColorSpaceModelMonochrome:
 			return YES;
+        case kCGColorSpaceModelLab:
+        case kCGColorSpaceModelCMYK:
+        case kCGColorSpaceModelDeviceN:
+        case kCGColorSpaceModelIndexed:
+        case kCGColorSpaceModelPattern:
+        case kCGColorSpaceModelUnknown:
 		default:
 			return NO;
 	}
@@ -86,10 +92,10 @@ static NSMutableDictionary *colorNameCache = nil;
 	if (![self LOT_red:&r green:&g blue:&b alpha:&a]) return nil;
   
 	return [NSArray arrayWithObjects:
-          [NSNumber numberWithFloat:r],
-          [NSNumber numberWithFloat:g],
-          [NSNumber numberWithFloat:b],
-          [NSNumber numberWithFloat:a],
+          [NSNumber numberWithFloat:(float)r],
+          [NSNumber numberWithFloat:(float)g],
+          [NSNumber numberWithFloat:(float)b],
+          [NSNumber numberWithFloat:(float)a],
           nil];
 }
 
@@ -109,6 +115,12 @@ static NSMutableDictionary *colorNameCache = nil;
 			b = components[2];
 			a = components[3];
 			break;
+        case kCGColorSpaceModelUnknown:
+        case kCGColorSpaceModelPattern:
+        case kCGColorSpaceModelIndexed:
+        case kCGColorSpaceModelDeviceN:
+        case kCGColorSpaceModelCMYK:
+        case kCGColorSpaceModelLab:
 		default:	// We don't know how to handle this model
 			return NO;
 	}
@@ -161,9 +173,9 @@ static NSMutableDictionary *colorNameCache = nil;
 	g = MIN(MAX(self.green, 0.0f), 1.0f);
 	b = MIN(MAX(self.blue, 0.0f), 1.0f);
   
-	return (((int)roundf(r * 255)) << 16)
-  | (((int)roundf(g * 255)) << 8)
-  | (((int)roundf(b * 255)));
+	return (UInt32)((lround(r * 255.f)) << 16)
+  | (UInt32)((lround(g * 255.f)) << 8)
+  | (UInt32)((lround(b * 255.f)));
 }
 
 #pragma mark Arithmetic operations
@@ -293,6 +305,12 @@ static NSMutableDictionary *colorNameCache = nil;
 		case kCGColorSpaceModelMonochrome:
 			result = [NSString stringWithFormat:@"{%0.3f, %0.3f}", self.white, self.alpha];
 			break;
+        case kCGColorSpaceModelLab:
+        case kCGColorSpaceModelCMYK:
+        case kCGColorSpaceModelDeviceN:
+        case kCGColorSpaceModelIndexed:
+        case kCGColorSpaceModelPattern:
+        case kCGColorSpaceModelUnknown:
 		default:
 			result = nil;
 	}
@@ -339,9 +357,9 @@ static NSMutableDictionary *colorNameCache = nil;
 #pragma mark Class methods
 
 + (UIColor *)LOT_randomColor {
-	return [UIColor colorWithRed:(CGFloat)random() / (CGFloat)RAND_MAX
-                         green:(CGFloat)random() / (CGFloat)RAND_MAX
-                          blue:(CGFloat)random() / (CGFloat)RAND_MAX
+	return [UIColor colorWithRed:random() / (CGFloat)RAND_MAX
+                         green:random() / (CGFloat)RAND_MAX
+                          blue:random() / (CGFloat)RAND_MAX
                          alpha:1.0f];
 }
 
@@ -394,10 +412,10 @@ static NSMutableDictionary *colorNameCache = nil;
   amount = CLAMP(amount, 0.f, 1.f);
   const CGFloat *fromComponents = CGColorGetComponents(fromColor.CGColor);
   const CGFloat *toComponents = CGColorGetComponents(toColor.CGColor);
-  float r = fromComponents[0] + ((toComponents[0] - fromComponents[0]) * amount);
-  float g = fromComponents[1] + ((toComponents[1] - fromComponents[1]) * amount);
-  float b = fromComponents[2] + ((toComponents[2] - fromComponents[2]) * amount);
-  float a = fromComponents[3] + ((toComponents[3] - fromComponents[3]) * amount);
+  CGFloat r = fromComponents[0] + ((toComponents[0] - fromComponents[0]) * amount);
+  CGFloat g = fromComponents[1] + ((toComponents[1] - fromComponents[1]) * amount);
+  CGFloat b = fromComponents[2] + ((toComponents[2] - fromComponents[2]) * amount);
+  CGFloat a = fromComponents[3] + ((toComponents[3] - fromComponents[3]) * amount);
   return [UIColor colorWithRed:r green:g blue:b alpha:a];
 }
 

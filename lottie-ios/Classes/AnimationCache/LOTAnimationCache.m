@@ -8,7 +8,7 @@
 
 #import "LOTAnimationCache.h"
 
-const NSInteger kLOTCacheSize = 50;
+static const NSInteger kLOTCacheSize = 50;
 
 @implementation LOTAnimationCache {
   NSMutableDictionary *animationsCache_;

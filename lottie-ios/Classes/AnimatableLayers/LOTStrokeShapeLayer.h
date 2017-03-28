@@ -10,8 +10,8 @@
 
 @interface LOTStrokeShapeLayer : CAShapeLayer
 
-@property CGFloat trimStart;
-@property CGFloat trimEnd;
-@property CGFloat trimOffset;
+@property (nonatomic) CGFloat trimStart;
+@property (nonatomic) CGFloat trimEnd;
+@property (nonatomic) CGFloat trimOffset;
 
 @end
