@@ -123,7 +123,6 @@
         child.childView.layer.frame = convertedBounds;
       } break;
       case LOTConstraintTypeNone:
-      default:
         break;
     }
   }

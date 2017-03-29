@@ -74,13 +74,12 @@ static NSMutableDictionary *colorNameCache = nil;
 		case kCGColorSpaceModelRGB:
 		case kCGColorSpaceModelMonochrome:
 			return YES;
-        case kCGColorSpaceModelLab:
-        case kCGColorSpaceModelCMYK:
-        case kCGColorSpaceModelDeviceN:
-        case kCGColorSpaceModelIndexed:
-        case kCGColorSpaceModelPattern:
-        case kCGColorSpaceModelUnknown:
-		default:
+ 		case kCGColorSpaceModelLab:
+ 		case kCGColorSpaceModelCMYK:
+ 		case kCGColorSpaceModelDeviceN:
+ 		case kCGColorSpaceModelIndexed:
+ 		case kCGColorSpaceModelPattern:
+ 		case kCGColorSpaceModelUnknown:
 			return NO;
 	}
 }
@@ -115,13 +114,13 @@ static NSMutableDictionary *colorNameCache = nil;
 			b = components[2];
 			a = components[3];
 			break;
-        case kCGColorSpaceModelUnknown:
-        case kCGColorSpaceModelPattern:
-        case kCGColorSpaceModelIndexed:
-        case kCGColorSpaceModelDeviceN:
-        case kCGColorSpaceModelCMYK:
-        case kCGColorSpaceModelLab:
-		default:	// We don't know how to handle this model
+ 		case kCGColorSpaceModelUnknown:
+ 		case kCGColorSpaceModelPattern:
+ 		case kCGColorSpaceModelIndexed:
+ 		case kCGColorSpaceModelDeviceN:
+ 		case kCGColorSpaceModelCMYK:
+ 		case kCGColorSpaceModelLab:
+        // We don't know how to handle this model
 			return NO;
 	}
   
@@ -305,13 +304,12 @@ static NSMutableDictionary *colorNameCache = nil;
 		case kCGColorSpaceModelMonochrome:
 			result = [NSString stringWithFormat:@"{%0.3f, %0.3f}", self.white, self.alpha];
 			break;
-        case kCGColorSpaceModelLab:
-        case kCGColorSpaceModelCMYK:
-        case kCGColorSpaceModelDeviceN:
-        case kCGColorSpaceModelIndexed:
-        case kCGColorSpaceModelPattern:
-        case kCGColorSpaceModelUnknown:
-		default:
+ 		case kCGColorSpaceModelLab:
+ 		case kCGColorSpaceModelCMYK:
+ 		case kCGColorSpaceModelDeviceN:
+ 		case kCGColorSpaceModelIndexed:
+ 		case kCGColorSpaceModelPattern:
+ 		case kCGColorSpaceModelUnknown:
 			result = nil;
 	}
 	return result;
