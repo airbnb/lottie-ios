@@ -16,12 +16,21 @@
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary];
+    [self _mapFromJSON:jsonDictionary resFilePath:@""];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary resFilePath:(NSString *)resFilePath
+{
+    self = [super init];
+    if (self) {
+        [self _mapFromJSON:jsonDictionary resFilePath:resFilePath];
+    }
+    return self;
+}
+
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary resFilePath:(NSString *)resFilePath {
   NSNumber *width = jsonDictionary[@"w"];
   NSNumber *height = jsonDictionary[@"h"];
   if (width && height) {
@@ -41,7 +50,7 @@
   
   NSArray *assetArray = jsonDictionary[@"assets"];
   if (assetArray.count) {
-    _assetGroup = [[LOTAssetGroup alloc] initWithJSON:assetArray];
+    _assetGroup = [[LOTAssetGroup alloc] initWithJSON:assetArray resFilePath:resFilePath];
   }
   
   NSArray *layersJSON = jsonDictionary[@"layers"];

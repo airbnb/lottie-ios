@@ -315,35 +315,50 @@
 }
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-
 - (void)_setImageForAsset {
-  if (_layerModel.imageAsset.imageName) {
-    NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
-    UIImage *image = [UIImage imageNamed:components.firstObject];
-    if (image) {
-      _childSolid.contents = (__bridge id _Nullable)(image.CGImage);
-    } else {
-      NSLog(@"%s: Warn: image not found: %@", __PRETTY_FUNCTION__, components.firstObject);
+    if (_layerModel.imageAsset.imageName)
+    {
+        UIImage *resImage = nil;
+        if (_layerModel.imageAsset.imageFilePath.length > 0)
+        {
+            NSString *imagePath = [_layerModel.imageAsset.imageFilePath stringByAppendingPathComponent:_layerModel.imageAsset.imageName];
+            resImage = [UIImage imageWithContentsOfFile:imagePath];
+        } else {
+            NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
+            resImage = [UIImage imageNamed:components.firstObject];
+        }
+        
+        if (resImage)
+        {
+            _childSolid.contents = (__bridge id _Nullable)(resImage.CGImage);
+        } else {
+            NSLog(@"%s: Warn: image not found: %@", __PRETTY_FUNCTION__, _layerModel.imageAsset.imageName);
+        }
     }
-  }
 }
 
 #else
 
 - (void)_setImageForAsset {
-  if (_layerModel.imageAsset.imageName) {
-    NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
-    NSImage *image = [NSImage imageNamed:components.firstObject];
-    if (image) {
-      NSWindow *window = [NSApp mainWindow];
-      CGFloat desiredScaleFactor = [window backingScaleFactor];
-      CGFloat actualScaleFactor = [image recommendedLayerContentsScale:desiredScaleFactor];
-      id layerContents = [image layerContentsForContentsScale:actualScaleFactor];
-      _childSolid.contents = layerContents;
+    if (_layerModel.imageAsset.imageName) {
+        NSImage *resImage = nil;
+        if (_layerModel.imageAsset.imageFilePath.length > 0)
+        {
+          NSString *imagePath = [_layerModel.imageAsset.imageFilePath stringByAppendingPathComponent:_layerModel.imageAsset.imageName];
+          resImage = [[NSImage alloc] initWithContentsOfFile:imagePath];
+        } else {
+          NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
+          resImage = [NSImage imageNamed:components.firstObject];
+        }
 
+        if (resImage) {
+          NSWindow *window = [NSApp mainWindow];
+          CGFloat desiredScaleFactor = [window backingScaleFactor];
+          CGFloat actualScaleFactor = [resImage recommendedLayerContentsScale:desiredScaleFactor];
+          id layerContents = [resImage layerContentsForContentsScale:actualScaleFactor];
+          _childSolid.contents = layerContents;
+        }
     }
-  }
-
 }
 
 #endif
@@ -360,3 +375,6 @@
 }
 
 @end
+
+
+
