@@ -14,7 +14,7 @@
 #import "LOTAnimationView_Internal.h"
 #import "LOTAnimationCache.h"
 #import "LOTCompositionLayer.h"
-
+#import "LOTContext.h"
 @implementation LOTAnimationState {
   BOOL _needsAnimationUpdate;
   BOOL _animationIsPlaying;
@@ -189,6 +189,10 @@
   animationName = components.firstObject;
   
   LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
+  if (bundle == nil) {
+    bundle = [NSBundle mainBundle];
+  }
+  [LOTContext registerBundle:bundle];
   if (comp) {
     return [[LOTAnimationView alloc] initWithModel:comp];
   }
@@ -201,6 +205,7 @@
   if (JSONObject && !error) {
     LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject];
     [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
+    [LOTContext registerBundle:bundle];
     return [[LOTAnimationView alloc] initWithModel:laScene];
   }
   
@@ -220,6 +225,7 @@
   if (self) {
     LOTComposition *laScene = [[LOTAnimationCache sharedCache] animationForKey:url.absoluteString];
     if (laScene) {
+      [LOTContext registerBundle:[NSBundle mainBundle]];
       [self _initializeAnimationContainer];
       [self _setupWithSceneModel:laScene restoreAnimationState:NO];
     } else {
@@ -238,6 +244,7 @@
         
         LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON];
         dispatch_async(dispatch_get_main_queue(), ^(void){
+          [LOTContext registerBundle:[NSBundle mainBundle]];
           [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:url.absoluteString];
           [self _initializeAnimationContainer];
           [self _setupWithSceneModel:laScene restoreAnimationState:YES];
