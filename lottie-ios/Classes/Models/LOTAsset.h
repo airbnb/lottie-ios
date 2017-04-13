@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, nullable) NSNumber *assetHeight;
 
 @property (nonatomic, readonly, nullable) NSString *imageName;
+@property (nonatomic, readonly, nullable) UIImage *image;
 @property (nonatomic, readonly, nullable) NSString *imageDirectory;
 
 @property (nonatomic, readonly, nullable) LOTLayerGroup *layerGroup;

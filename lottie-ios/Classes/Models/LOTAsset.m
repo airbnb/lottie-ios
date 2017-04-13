@@ -48,6 +48,8 @@
   
   if (jsonDictionary[@"p"]) {
     _imageName = [jsonDictionary[@"p"] copy];
+    NSString *nameWithoutExtension = [_imageName componentsSeparatedByString:@"."].firstObject;
+    _image = [assetGroup imageForName:nameWithoutExtension];
   }
 
   NSArray *layersJSON = jsonDictionary[@"layers"];

@@ -318,8 +318,15 @@
 
 - (void)_setImageForAsset {
   if (_layerModel.imageAsset.imageName) {
+    UIImage *image = nil;
     NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
-    UIImage *image = [UIImage imageNamed:components.firstObject];
+    if (_layerModel.imageAsset.image) {
+        image = _layerModel.imageAsset.image;
+    }
+    else {
+        image = [UIImage imageNamed:components.firstObject];
+    }
+    
     if (image) {
       _childSolid.contents = (__bridge id _Nullable)(image.CGImage);
     } else {
