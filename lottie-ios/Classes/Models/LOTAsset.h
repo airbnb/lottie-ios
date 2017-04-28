@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly, nullable) LOTLayerGroup *layerGroup;
 
+@property (nonatomic, readwrite) NSString *rootDir;
 @end
 
 NS_ASSUME_NONNULL_END
