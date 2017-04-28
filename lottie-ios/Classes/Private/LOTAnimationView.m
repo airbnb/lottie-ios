@@ -215,6 +215,31 @@
   return [[LOTAnimationView alloc] initWithModel:laScene];
 }
 
++ (instancetype)animationWithFile:(NSString *)filePath{
+    NSString *animationName = filePath;
+    
+    LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
+    if (comp) {
+        return [[LOTAnimationView alloc] initWithModel:comp];
+    }
+    
+    NSError *error;
+    NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
+    NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                           options:0 error:&error] : nil;
+    if (JSONObject && !error) {
+        LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject];
+        laScene.rootDir = [filePath stringByDeletingLastPathComponent];
+        [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
+        return [[LOTAnimationView alloc] initWithModel:laScene];
+    }
+    
+    NSException* resourceNotFoundException = [NSException exceptionWithName:@"ResourceNotFoundException"
+                                                                     reason:[error localizedDescription]
+                                                                   userInfo:nil];
+    @throw resourceNotFoundException;
+}
+
 - (instancetype)initWithContentsOfURL:(NSURL *)url {
   self = [super initWithFrame:CGRectZero];
   if (self) {
