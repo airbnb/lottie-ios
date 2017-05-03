@@ -13,11 +13,11 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 
 @interface LOTAnimationView : LOTView
 
-+ (nullable instancetype)animationNamed:(nonnull NSString *)animationName NS_SWIFT_NAME(init(name:));
-+ (nullable instancetype)animationNamed:(nonnull NSString *)animationName inBundle:(nonnull NSBundle *)bundle NS_SWIFT_NAME(init(name:bundle:));
-+ (nullable instancetype)animationFromJSON:(nonnull NSDictionary *)animationJSON NS_SWIFT_NAME(init(json:));
++ (nonnull instancetype)animationNamed:(nonnull NSString *)animationName NS_SWIFT_NAME(init(name:));
++ (nonnull instancetype)animationNamed:(nonnull NSString *)animationName inBundle:(nonnull NSBundle *)bundle NS_SWIFT_NAME(init(name:bundle:));
++ (nonnull instancetype)animationFromJSON:(nonnull NSDictionary *)animationJSON NS_SWIFT_NAME(init(json:));
 
-- (nullable instancetype)initWithContentsOfURL:(nonnull NSURL *)url;
+- (nonnull instancetype)initWithContentsOfURL:(nonnull NSURL *)url;
 
 @property (nonatomic, readonly) BOOL isAnimationPlaying;
 @property (nonatomic, assign) BOOL loopAnimation;
