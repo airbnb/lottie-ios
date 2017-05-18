@@ -175,6 +175,7 @@
   LOTCompositionLayer *_compLayer;
   CADisplayLink *_completionDisplayLink;
   BOOL hasFullyInitialized_;
+  NSBundle *_bundle;
 }
 
 # pragma mark - Initializers
@@ -190,7 +191,7 @@
   
   LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
   if (comp) {
-    return [[LOTAnimationView alloc] initWithModel:comp];
+    return [[LOTAnimationView alloc] initWithModel:comp inBundle:bundle];
   }
   
   NSError *error;
@@ -201,7 +202,7 @@
   if (JSONObject && !error) {
     LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject];
     [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
-    return [[LOTAnimationView alloc] initWithModel:laScene];
+    return [[LOTAnimationView alloc] initWithModel:laScene inBundle:bundle];
   }
   
   NSException* resourceNotFoundException = [NSException exceptionWithName:@"ResourceNotFoundException"
@@ -211,8 +212,12 @@
 }
 
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON {
+    return [self animationFromJSON:animationJSON inBundle:[NSBundle mainBundle]];
+}
+
++ (instancetype)animationFromJSON:(NSDictionary *)animationJSON inBundle:(NSBundle *)bundle{
   LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON];
-  return [[LOTAnimationView alloc] initWithModel:laScene];
+  return [[LOTAnimationView alloc] initWithModel:laScene inBundle:bundle];
 }
 
 - (instancetype)initWithContentsOfURL:(NSURL *)url {
@@ -248,9 +253,10 @@
   return self;
 }
 
-- (instancetype)initWithModel:(LOTComposition *)model {
+- (instancetype)initWithModel:(LOTComposition *)model inBundle:(NSBundle *)bundle{
   self = [super initWithFrame:model.compBounds];
   if (self) {
+    _bundle = bundle;
     [self _initializeAnimationContainer];
     [self _setupWithSceneModel:model restoreAnimationState:NO];
   }
@@ -306,7 +312,8 @@
     }
     _compLayer = [[LOTCompositionLayer alloc] initWithLayerGroup:_sceneModel.layerGroup
                                                   withAssetGroup:_sceneModel.assetGroup
-                                                      withBounds:_sceneModel.compBounds];
+                                                      withBounds:_sceneModel.compBounds
+                  inBundle:_bundle];
     [_timingLayer addSublayer:_compLayer];
   }
 }

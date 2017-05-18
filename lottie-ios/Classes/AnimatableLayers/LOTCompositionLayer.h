@@ -16,7 +16,8 @@
 
 - (instancetype)initWithLayerGroup:(LOTLayerGroup *)layerGroup
                     withAssetGroup:(LOTAssetGroup *)assetGroup
-                        withBounds:(CGRect)bounds;
+                        withBounds:(CGRect)bounds
+                          inBundle:(NSBundle *)bundle;
 
 - (void)addSublayer:(LOTView *)view
        toLayerNamed:(NSString *)layer;
