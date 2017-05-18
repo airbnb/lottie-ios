@@ -98,7 +98,7 @@
 - (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup inBundle:(NSBundle *)bundle{
   self = [super initWithLayerDuration:model.layerDuration];
   if (self) {
-      _bundle = bundle;
+    _bundle = bundle;
     _layerModel = model;
     [self _setupViewFromModelWithLayerGroup:layerGroup];
   }
@@ -321,7 +321,7 @@
 - (void)_setImageForAsset {
   if (_layerModel.imageAsset.imageName) {
     NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
-      UIImage *image = [UIImage imageNamed:components.firstObject inBundle:_bundle compatibleWithTraitCollection:nil];
+    UIImage *image = [UIImage imageNamed:components.firstObject inBundle:_bundle compatibleWithTraitCollection:nil];
     if (image) {
       _childSolid.contents = (__bridge id _Nullable)(image.CGImage);
     } else {
@@ -335,7 +335,7 @@
 - (void)_setImageForAsset {
   if (_layerModel.imageAsset.imageName) {
     NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
-      NSImage *image = [NSImage imageNamed:components.firstObject];
+    NSImage *image = [NSImage imageNamed:components.firstObject];
     if (image) {
       NSWindow *window = [NSApp mainWindow];
       CGFloat desiredScaleFactor = [window backingScaleFactor];

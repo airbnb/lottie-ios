@@ -15,7 +15,7 @@
   LOTAnimationView *tranistionAnimationView_;
   NSString *fromLayerName_;
   NSString *toLayerName_;
-    NSBundle *inBundle_;
+  NSBundle *inBundle_;
 }
 
 - (instancetype)initWithAnimationNamed:(NSString *)animation
@@ -33,7 +33,7 @@
                               inBundle:(NSBundle *)bundle {
   self = [super init];
   if (self) {
-      tranistionAnimationView_ = [LOTAnimationView animationNamed:animation inBundle:bundle];
+    tranistionAnimationView_ = [LOTAnimationView animationNamed:animation inBundle:bundle];
     fromLayerName_ = fromLayer;
     toLayerName_ = toLayer;
   }
