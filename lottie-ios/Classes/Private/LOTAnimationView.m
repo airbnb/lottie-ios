@@ -281,7 +281,7 @@
   _sceneModel = model;
   [self _buildSubviewsFromModel];
   LOTAnimationState *oldState = _animationState;
-  _animationState = [[LOTAnimationState alloc] initWithDuration:_sceneModel.timeDuration layer:_timingLayer frameRate:_sceneModel.framerate];
+  _animationState = [[LOTAnimationState alloc] initWithDuration:_sceneModel.timeDuration + LOT_singleFrameTimeValue layer:_timingLayer frameRate:_sceneModel.framerate];
 
   if (restoreAnimation && oldState) {
     [self setLoopAnimation:oldState.loopAnimation];
