@@ -90,6 +90,7 @@
       } else {
         [self setAnimatedProgress:_animatedProgress updateAnimation:true];
       }
+      [self.layer setNeedsDisplay];
     }];
   }
 }
