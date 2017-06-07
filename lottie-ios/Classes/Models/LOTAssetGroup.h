@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import <UIKit/UIKit.h>
 
 @class LOTAsset;
 @class LOTLayerGroup;
 @interface LOTAssetGroup : NSObject
 
 - (instancetype _Nonnull)initWithJSON:(NSArray * _Nonnull)jsonArray;
+- (instancetype _Nonnull)initWithJSON:(NSArray * _Nonnull)jsonArray customImages:(NSDictionary *)customImages;
 
 - (void)buildAssetNamed:(NSString * _Nonnull)refID
              withBounds:(CGRect)bounds
@@ -22,5 +24,6 @@
 - (void)finalizeInitialization;
 
 - (LOTAsset * _Nullable)assetModelForID:(NSString * _Nonnull)assetID;
+- (UIImage *)imageForName:(NSString *)imageName;
 
 @end

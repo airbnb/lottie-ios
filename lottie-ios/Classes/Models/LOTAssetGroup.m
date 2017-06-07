@@ -12,9 +12,14 @@
 @implementation LOTAssetGroup {
   NSMutableDictionary<NSString *, LOTAsset *> *_assetMap;
   NSDictionary<NSString *, NSDictionary *> *_assetJSONMap;
+  NSDictionary<NSString *, UIImage *> *_customImages;
 }
 
 - (instancetype)initWithJSON:(NSArray *)jsonArray {
+    return [self initWithJSON:jsonArray customImages:nil];
+}
+
+- (instancetype)initWithJSON:(NSArray *)jsonArray customImages:(NSDictionary *)customImages {
   self = [super init];
   if (self) {
     _assetMap = [NSMutableDictionary dictionary];
@@ -26,6 +31,7 @@
       }
     }
     _assetJSONMap = assetJSONMap;
+    _customImages = customImages;
   }
   return self;
 }
@@ -57,6 +63,10 @@
 
 - (LOTAsset *)assetModelForID:(NSString *)assetID {
   return _assetMap[assetID];
+}
+
+- (UIImage *)imageForName:(NSString *)imageName {
+    return _customImages[imageName];
 }
 
 @end

@@ -180,11 +180,14 @@
 # pragma mark - Initializers
 
 + (instancetype)animationNamed:(NSString *)animationName {
-  return [self animationNamed:animationName inBundle:[NSBundle mainBundle]];
+  return [self animationNamed:animationName inBundle:[NSBundle mainBundle] customImages:nil];
 }
 
++ (instancetype)animationNamed:(NSString *)animationName customImages:(NSDictionary *)customImages {
+    return [self animationNamed:animationName inBundle:[NSBundle mainBundle] customImages:customImages];
+}
 
-+ (instancetype)animationNamed:(NSString *)animationName inBundle:(NSBundle *)bundle {
++ (instancetype)animationNamed:(NSString *)animationName inBundle:(NSBundle *)bundle customImages:(NSDictionary *)customImages {
   NSArray *components = [animationName componentsSeparatedByString:@"."];
   animationName = components.firstObject;
   
@@ -199,7 +202,7 @@
   NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
                                                                          options:0 error:&error] : nil;
   if (JSONObject && !error) {
-    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject];
+    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject customImages:customImages];
     [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
     return [[LOTAnimationView alloc] initWithModel:laScene];
   }
