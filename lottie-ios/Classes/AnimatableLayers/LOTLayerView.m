@@ -95,6 +95,10 @@
   NSBundle *_bundle;
 }
 
+- (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup{
+    return [self initWithModel:model inLayerGroup:layerGroup inBundle:[NSBundle mainBundle]];
+}
+
 - (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup inBundle:(NSBundle *)bundle{
   self = [super initWithLayerDuration:model.layerDuration];
   if (self) {
