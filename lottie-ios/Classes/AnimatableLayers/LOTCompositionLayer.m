@@ -36,7 +36,6 @@
                         withBounds:(CGRect)bounds {
   self = [super init];
   if (self) {
-    self.masksToBounds = YES;
     [self _setupWithLayerGroup:layerGroup withAssetGroup:assetGroup withBounds:bounds];
   }
   return self;
