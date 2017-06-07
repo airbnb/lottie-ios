@@ -343,7 +343,7 @@
     [_animationState setAnimationIsPlaying:NO];
     [self stopDisplayLink];
     
-    [self _callCompletionIfNecesarry];
+    [self _callCompletionIfNecessary];
   }
 }
 
@@ -373,11 +373,11 @@
 - (void)checkAnimationState {
   if (self.animationState.animationIsPlaying == NO) {
     [self stopDisplayLink];
-    [self _callCompletionIfNecesarry];
+    [self _callCompletionIfNecessary];
   }
 }
 
-- (void)_callCompletionIfNecesarry {
+- (void)_callCompletionIfNecessary {
   if (self.completionBlock && hasFullyInitialized_) {
     self.completionBlock(_animationState.animatedProgress == 1);
     self.completionBlock = nil;
@@ -388,7 +388,7 @@
 
 - (void)setAnimationProgress:(CGFloat)animationProgress {
   if (_animationState.animationIsPlaying) {
-    [self _callCompletionIfNecesarry];
+    [self _callCompletionIfNecessary];
   }
   
   [_animationState setAnimatedProgress:animationProgress];
