@@ -204,7 +204,7 @@ Animation file name should be first added to your project. as for the above code
 * Parenting Layers
 * Alpha Matte Layers
 
-## Currently Unsupport After Effects Features
+## Currently Unsupported After Effects Features
 
 * Even-Odd winding paths
 * Merge Shapes
