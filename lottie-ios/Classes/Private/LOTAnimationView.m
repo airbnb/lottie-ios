@@ -215,6 +215,11 @@
   return [[LOTAnimationView alloc] initWithModel:laScene];
 }
 
++ (instancetype)animationFromJSON:(NSDictionary *)animationJSON resFilePath:(NSString *)resFilePath {
+    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON resFilePath:resFilePath];
+    return [[LOTAnimationView alloc] initWithModel:laScene];
+}
+
 - (instancetype)initWithContentsOfURL:(NSURL *)url {
   self = [super initWithFrame:CGRectZero];
   if (self) {

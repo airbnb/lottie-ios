@@ -16,6 +16,7 @@
 @interface LOTComposition : NSObject
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary resFilePath:(NSString *)resFilePath;
 
 @property (nonatomic, readonly) CGRect compBounds;
 @property (nonatomic, readonly) NSNumber *startFrame;

@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LOTAsset : NSObject
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
+               imageFilePath:(NSString *)imageFilePath
                   withBounds:(CGRect)bounds
                withFramerate:(NSNumber * _Nullable)framerate
               withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup;
@@ -28,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly, nullable) NSString *imageName;
 @property (nonatomic, readonly, nullable) NSString *imageDirectory;
+@property (nonatomic, readonly, nullable) NSString *imageFilePath;
 
 @property (nonatomic, readonly, nullable) LOTLayerGroup *layerGroup;
 

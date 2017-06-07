@@ -12,9 +12,10 @@
 @implementation LOTAssetGroup {
   NSMutableDictionary<NSString *, LOTAsset *> *_assetMap;
   NSDictionary<NSString *, NSDictionary *> *_assetJSONMap;
+  NSString *_resFilePath;
 }
 
-- (instancetype)initWithJSON:(NSArray *)jsonArray {
+- (instancetype)initWithJSON:(NSArray *)jsonArray resFilePath:(NSString *)resFilePath {
   self = [super init];
   if (self) {
     _assetMap = [NSMutableDictionary dictionary];
@@ -26,6 +27,7 @@
       }
     }
     _assetJSONMap = assetJSONMap;
+    _resFilePath = resFilePath;
   }
   return self;
 }
@@ -41,6 +43,7 @@
   NSDictionary *assetDictionary = _assetJSONMap[refID];
   if (assetDictionary) {
     LOTAsset *asset = [[LOTAsset alloc] initWithJSON:assetDictionary
+                                       imageFilePath:_resFilePath
                                           withBounds:bounds
                                        withFramerate:framerate
                                       withAssetGroup:self];

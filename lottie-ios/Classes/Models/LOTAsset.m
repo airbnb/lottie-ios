@@ -14,15 +14,20 @@
 @implementation LOTAsset
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
+               imageFilePath:(NSString *)imageFilePath
                   withBounds:(CGRect)bounds
                withFramerate:(NSNumber *)framerate
               withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup{
+  
+  NSAssert(imageFilePath, @"params imageFilePath can not be nil");
   self = [super init];
   if (self) {
     [self _mapFromJSON:jsonDictionary
             withBounds:bounds
          withFramerate:framerate
         withAssetGroup:assetGroup];
+      
+    _imageFilePath = imageFilePath;
   }
   return self;
 }
