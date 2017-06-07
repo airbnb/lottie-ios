@@ -45,7 +45,14 @@
     _layer.beginTime = CACurrentMediaTime();
 
     _previousLocalTime = -1.f;
-    [self setNeedsAnimationUpdate];
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+      if (_animationIsPlaying) {
+        [self setAnimationIsPlaying:_animationIsPlaying];
+      } else {
+        [self setAnimatedProgress:_animatedProgress updateAnimation:false];
+      }
+    }];
   }
   return self;
 }
@@ -62,7 +69,7 @@
   _layer.repeatCount = _loopAnimation ? HUGE_VALF : 0;
   _layer.timeOffset = 0;
   _layer.beginTime = 0;
-  
+    
   if (speed == 0) {
     _layer.timeOffset = timeOffset;
   } else {
@@ -81,22 +88,25 @@
       if (_animationIsPlaying) {
         [self setAnimationIsPlaying:_animationIsPlaying];
       } else {
-        [self setAnimatedProgress:_animatedProgress];
+        [self setAnimatedProgress:_animatedProgress updateAnimation:true];
       }
+      [self.layer setNeedsDisplay];
     }];
   }
 }
 
 #pragma mark -- Setters
 
-- (void)setAnimationDoesLoop:(BOOL)loopAnimation {
+- (void)setAnimationDoesLoop:(BOOL)loopAnimation updateAnimation:(BOOL)updateAnimation {
   _loopAnimation = loopAnimation;
-  CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
-  __unused CFTimeInterval clock = CACurrentMediaTime();
-  [self updateAnimationLayerWithTimeOffset:offset];
+  if (updateAnimation) {
+    CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    __unused CFTimeInterval clock = CACurrentMediaTime();
+    [self updateAnimationLayerWithTimeOffset:offset];
+  }
 }
 
-- (void)setAnimationIsPlaying:(BOOL)animationIsPlaying  {
+- (void)setAnimationIsPlaying:(BOOL)animationIsPlaying {
   _animationIsPlaying = animationIsPlaying;
   CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
   __unused CFTimeInterval clock = CACurrentMediaTime();
@@ -112,22 +122,29 @@
   [self updateAnimationLayerWithTimeOffset:offset];
 }
 
-- (void)setAnimatedProgress:(CGFloat)animatedProgress {
+- (void)setAnimatedProgress:(CGFloat)animatedProgress updateAnimation:(BOOL)updateAnimation {
+    
   if (_playFromBeginning) {
     _playFromBeginning = NO;
   }
   _animatedProgress = animatedProgress > 1 ? fmod(animatedProgress, 1) : MAX(animatedProgress, 0);
   _animationIsPlaying = NO;
-  CFTimeInterval offset = _animatedProgress == 1 ? _animationDuration - LOT_singleFrameTimeValue : _animatedProgress * _animationDuration;
-  __unused CFTimeInterval clock = CACurrentMediaTime();
-  [self updateAnimationLayerWithTimeOffset:offset];
+  
+  if (updateAnimation) {
+    CFTimeInterval offset = _animatedProgress == 1 ? _animationDuration - LOT_singleFrameTimeValue : _animatedProgress * _animationDuration;
+    __unused CFTimeInterval clock = CACurrentMediaTime();
+    [self updateAnimationLayerWithTimeOffset:offset];
+  }
 }
 
-- (void)setAnimationSpeed:(CGFloat)speed {
+- (void)setAnimationSpeed:(CGFloat)speed updateAnimation:(BOOL)updateAnimation {
   _animationSpeed = speed;
-  CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
-  __unused CFTimeInterval clock = CACurrentMediaTime();
-  [self updateAnimationLayerWithTimeOffset:offset];
+  
+  if (updateAnimation) {
+    CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    __unused CFTimeInterval clock = CACurrentMediaTime();
+    [self updateAnimationLayerWithTimeOffset:offset];
+  }
 }
 
 #pragma mark -- Getters
@@ -262,17 +279,17 @@
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
 - (void)_initializeAnimationContainer {
-    _timingLayer = [CALayer new];
-    [self.layer addSublayer:_timingLayer];
-    self.clipsToBounds = YES;
+  _timingLayer = [CALayer new];
+  [self.layer addSublayer:_timingLayer];
+  self.clipsToBounds = YES;
 }
 
 #else
 
 - (void)_initializeAnimationContainer {
-    self.wantsLayer = YES;
-    _timingLayer = [CALayer new];
-    [self.layer addSublayer:_timingLayer];
+  self.wantsLayer = YES;
+  _timingLayer = [CALayer new];
+  [self.layer addSublayer:_timingLayer];
 }
 
 #endif
@@ -391,7 +408,7 @@
     [self _callCompletionIfNecessary];
   }
   
-  [_animationState setAnimatedProgress:animationProgress];
+  [_animationState setAnimatedProgress:animationProgress updateAnimation:self.window != nil];
   
   [self stopDisplayLink];
 }
@@ -401,7 +418,7 @@
 }
 
 - (void)setLoopAnimation:(BOOL)loopAnimation {
-  [_animationState setAnimationDoesLoop:loopAnimation];
+  [_animationState setAnimationDoesLoop:loopAnimation updateAnimation:self.window != nil];
 }
 
 - (BOOL)loopAnimation {
@@ -409,7 +426,7 @@
 }
 
 -(void)setAnimationSpeed:(CGFloat)animationSpeed {
-  [_animationState setAnimationSpeed:animationSpeed];
+  [_animationState setAnimationSpeed:animationSpeed updateAnimation:self.window != nil];
 }
 
 - (CGFloat)animationSpeed {
@@ -445,12 +462,16 @@
 
 - (void)didMoveToWindow {
   [super didMoveToWindow];
-  [_animationState setNeedsAnimationUpdate];
+  if (self.window) {
+    [_animationState setNeedsAnimationUpdate];
+  }
 }
 
 - (void)didMoveToSuperview {
   [super didMoveToSuperview];
-  [_animationState setNeedsAnimationUpdate];
+  if (self.window) {
+    [_animationState setNeedsAnimationUpdate];
+  }
 }
 
 - (void)removeFromSuperview {
@@ -472,12 +493,12 @@
     
 - (void)setCompletionBlock:(LOTAnimationCompletionBlock)completionBlock {
     if (completionBlock) {
-        _completionBlock = ^(BOOL finished) {
-            dispatch_async(dispatch_get_main_queue(), ^{ completionBlock(finished); });
-        };
+      _completionBlock = ^(BOOL finished) {
+        dispatch_async(dispatch_get_main_queue(), ^{ completionBlock(finished); });
+      };
     }
     else {
-        _completionBlock = nil;
+      _completionBlock = nil;
     }
 }
 
@@ -487,26 +508,26 @@
 }
 
 - (void)setNeedsLayout {
-    self.needsLayout = YES;
+  self.needsLayout = YES;
 }
 
 - (BOOL)isFlipped {
-    return YES;
+  return YES;
 }
 
 - (BOOL)wantsUpdateLayer {
-    return YES;
+  return YES;
 }
 
 - (void)layout {
-    [super layout];
-    [self _layout];
+  [super layout];
+  [self _layout];
 }
 
 #endif
 
 - (CGSize)intrinsicContentSize {
-    return _sceneModel.compBounds.size;
+  return _sceneModel.compBounds.size;
 }
 
 - (void)_layout {
