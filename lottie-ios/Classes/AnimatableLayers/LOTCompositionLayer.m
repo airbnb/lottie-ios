@@ -118,7 +118,7 @@
         child.childView.frame = child.layer.bounds;
         break;
       case LOTConstraintTypeAlignToBounds: {
-        CGRect selfBounds = self.frame;
+        CGRect selfBounds = self.bounds;
         CGRect convertedBounds = [child.childView.layer.superlayer convertRect:selfBounds fromLayer:self];
         child.childView.layer.frame = convertedBounds;
       } break;
@@ -144,7 +144,8 @@
   } else {
     newChild.layer = layerObject;
     [layerObject.superlayer insertSublayer:view.layer above:layerObject];
-    
+
+    [layerObject removeFromSuperlayer];
     view.layer.mask = layerObject;
   }
   

@@ -37,9 +37,9 @@
  and a fade transition is performed along with the Lottie animation.
 
  */
-- (instancetype)initWithAnimationNamed:(NSString *)animation
-                        fromLayerNamed:(NSString *)fromLayer
-                          toLayerNamed:(NSString *)toLayer;
+- (nonnull instancetype)initWithAnimationNamed:(nonnull NSString *)animation
+                        fromLayerNamed:(nullable NSString *)fromLayer
+                          toLayerNamed:(nullable NSString *)toLayer;
 
 /**
  The initializer to create a new transition animation.
