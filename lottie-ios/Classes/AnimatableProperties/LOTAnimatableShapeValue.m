@@ -171,6 +171,11 @@
   NSArray *inTangents = pointsData[@"i"];
   NSArray *outTangents = pointsData[@"o"];
   
+  if (pointsArray.count == 0) {
+    NSLog(@"%s: Warning: shape has no vertices", __PRETTY_FUNCTION__);
+    return nil;
+  }
+  
   NSAssert((pointsArray.count == inTangents.count &&
             pointsArray.count == outTangents.count),
            @"Lottie: Incorrect number of points and tangents");
