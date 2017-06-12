@@ -92,11 +92,17 @@
   NSArray<LOTParentLayer *> *_parentLayers;
   LOTMaskLayer *_maskLayer;
   CALayer *_childSolid;
+  NSBundle *_bundle;
 }
 
-- (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup {
+- (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup{
+    return [self initWithModel:model inLayerGroup:layerGroup inBundle:[NSBundle mainBundle]];
+}
+
+- (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup inBundle:(NSBundle *)bundle{
   self = [super initWithLayerDuration:model.layerDuration];
   if (self) {
+    _bundle = bundle;
     _layerModel = model;
     [self _setupViewFromModelWithLayerGroup:layerGroup];
   }
@@ -328,7 +334,7 @@
             image = [UIImage imageWithContentsOfFile:imagePath];
         }else{
             NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
-            image = [UIImage imageNamed:components.firstObject];
+            image = [UIImage imageNamed:components.firstObject inBundle:_bundle compatibleWithTraitCollection:nil];
         }
         
         if (image) {
