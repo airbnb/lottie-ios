@@ -21,7 +21,12 @@ FOUNDATION_EXPORT double LottieVersionNumber;
 //! Project version string for Lottie.
 FOUNDATION_EXPORT const unsigned char LottieVersionString[];
 
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
 #import "LOTAnimationTransitionController.h"
+#endif
+
 #import "LOTAnimationView.h"
 
 #endif /* Lottie_h */
