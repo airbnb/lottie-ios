@@ -28,5 +28,6 @@ FOUNDATION_EXPORT const unsigned char LottieVersionString[];
 #endif
 
 #import "LOTAnimationView.h"
+#import "LOTComposition.h"
 
 #endif /* Lottie_h */

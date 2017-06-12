@@ -19,6 +19,9 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 
 - (nonnull instancetype)initWithContentsOfURL:(nonnull NSURL *)url;
 
+/// load an animation after initialization (e.g. after LOTAnimationView is created in a storyboard)
+@property (nonatomic, strong) NSString *animationName;
+
 @property (nonatomic, readonly) BOOL isAnimationPlaying;
 @property (nonatomic, assign) BOOL loopAnimation;
 @property (nonatomic, assign) CGFloat animationProgress;

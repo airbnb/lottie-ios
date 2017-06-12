@@ -4,8 +4,8 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,12 +20,36 @@
                     <view key="view" contentMode="scaleToFill" id="TpU-gO-2f1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQR-m3-nJH" customClass="LOTAnimationView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="222.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BV0-qR-mT3">
+                                <rect key="frame" x="0.0" y="222.5" width="375" height="444.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="TQR-m3-nJH" firstAttribute="height" secondItem="TpU-gO-2f1" secondAttribute="height" multiplier="1/3" id="3R3-e3-CLJ"/>
+                            <constraint firstItem="BV0-qR-mT3" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leading" id="Iog-ex-c9c"/>
+                            <constraint firstAttribute="trailing" secondItem="BV0-qR-mT3" secondAttribute="trailing" id="J2K-3E-4ne"/>
+                            <constraint firstItem="Mvr-aV-6Um" firstAttribute="top" secondItem="BV0-qR-mT3" secondAttribute="bottom" id="PIz-pQ-UGj"/>
+                            <constraint firstItem="BV0-qR-mT3" firstAttribute="top" secondItem="TQR-m3-nJH" secondAttribute="bottom" id="Udi-Av-DA4"/>
+                            <constraint firstItem="TQR-m3-nJH" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leading" id="ZXp-S5-3KK"/>
+                            <constraint firstItem="TQR-m3-nJH" firstAttribute="top" secondItem="TpU-gO-2f1" secondAttribute="top" id="aO4-te-5w0"/>
+                            <constraint firstAttribute="trailing" secondItem="TQR-m3-nJH" secondAttribute="trailing" id="rlR-WG-VaB"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lottieLogo" destination="TQR-m3-nJH" id="ke7-Yb-w23"/>
+                        <outlet property="tableView" destination="BV0-qR-mT3" id="yAr-gw-Q7y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="305" y="433"/>
+            <point key="canvasLocation" x="44" y="419.64017991004499"/>
         </scene>
     </scenes>
 </document>

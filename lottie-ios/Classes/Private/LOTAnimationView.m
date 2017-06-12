@@ -13,6 +13,8 @@
 #import "LOTHelpers.h"
 #import "LOTAnimationView_Internal.h"
 #import "LOTAnimationCache.h"
+#import "LOTComposition.h"
+#import "LOTComposition_Internal.h"
 #import "LOTCompositionLayer.h"
 
 @implementation LOTAnimationState {
@@ -57,7 +59,7 @@
   return self;
 }
 
-#pragma mark -- External Methods
+#pragma mark - External Methods
 
 - (void)updateAnimationLayerWithTimeOffset:(CFTimeInterval)timeOffset {
   if (_needsAnimationUpdate) {
@@ -95,7 +97,7 @@
   }
 }
 
-#pragma mark -- Setters
+#pragma mark - Setters
 
 - (void)setAnimationDoesLoop:(BOOL)loopAnimation updateAnimation:(BOOL)updateAnimation {
   _loopAnimation = loopAnimation;
@@ -147,7 +149,7 @@
   }
 }
 
-#pragma mark -- Getters
+#pragma mark - Getters
 
 - (CGFloat)animatedProgress {
   if (_animationIsPlaying) {
@@ -187,6 +189,8 @@
 
 @end
 
+#pragma mark -
+
 @implementation LOTAnimationView {
   CALayer *_timingLayer;
   LOTCompositionLayer *_compLayer;
@@ -200,31 +204,9 @@
   return [self animationNamed:animationName inBundle:[NSBundle mainBundle]];
 }
 
-
 + (instancetype)animationNamed:(NSString *)animationName inBundle:(NSBundle *)bundle {
-  NSArray *components = [animationName componentsSeparatedByString:@"."];
-  animationName = components.firstObject;
-  
-  LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
-  if (comp) {
-    return [[LOTAnimationView alloc] initWithModel:comp];
-  }
-  
-  NSError *error;
-  NSString *filePath = [bundle pathForResource:animationName ofType:@"json"];
-  NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
-  NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                         options:0 error:&error] : nil;
-  if (JSONObject && !error) {
-    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject];
-    [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
-    return [[LOTAnimationView alloc] initWithModel:laScene];
-  }
-  
-  NSException* resourceNotFoundException = [NSException exceptionWithName:@"ResourceNotFoundException"
-                                                                   reason:[error localizedDescription]
-                                                                 userInfo:nil];
-  @throw resourceNotFoundException;
+    LOTComposition *model = [LOTComposition compositionForAnimationNamed:animationName inBundle:bundle];
+    return [[LOTAnimationView alloc] initWithModel:model];
 }
 
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON {
@@ -263,6 +245,15 @@
     }
   }
   return self;
+}
+
+/// storyboard/interface builder initializer
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self _initializeAnimationContainer];
+    }
+    return self;
 }
 
 - (instancetype)initWithModel:(LOTComposition *)model {
@@ -402,6 +393,19 @@
 }
 
 # pragma mark - Getters and Setters
+
+- (void) setAnimationName:(NSString *)animationName {
+    [self setAnimationName:animationName inBundle:[NSBundle mainBundle]];
+}
+
+- (void) setAnimationName:(NSString *)animationName inBundle:(NSBundle*)bundle {
+    LOTComposition *model = [LOTComposition compositionForAnimationNamed:animationName inBundle:bundle];
+    self.sceneModel = model;
+}
+
+- (void) setSceneModel:(LOTComposition * _Nonnull)sceneModel {
+    [self _setupWithSceneModel:sceneModel restoreAnimationState:NO];
+}
 
 - (void)setAnimationProgress:(CGFloat)animationProgress {
   if (_animationState.animationIsPlaying) {
