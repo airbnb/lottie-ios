@@ -14,6 +14,7 @@
 @interface LOTLayerView : LOTAnimatableLayer
 
 - (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup;
+- (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup inBundle:(NSBundle *)bundle;
 
 - (void)LOT_addChildLayer:(CALayer *)childLayer;
 
