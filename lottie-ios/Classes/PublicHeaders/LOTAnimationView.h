@@ -20,6 +20,8 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 
 - (nonnull instancetype)initWithContentsOfURL:(nonnull NSURL *)url;
 
++ (instancetype)animationWithFilePath:(NSString *)filePath NS_SWIFT_NAME(init(filePath:));
+
 @property (nonatomic, readonly) BOOL isAnimationPlaying;
 @property (nonatomic, assign) BOOL loopAnimation;
 @property (nonatomic, assign) CGFloat animationProgress;
