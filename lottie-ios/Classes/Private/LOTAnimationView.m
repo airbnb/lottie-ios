@@ -215,7 +215,7 @@
   return [[LOTAnimationView alloc] initWithModel:laScene];
 }
 
-+ (instancetype)animationWithFile:(NSString *)filePath{
++ (instancetype)animationWithFilePath:(NSString *)filePath{
     NSString *animationName = filePath;
     
     LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
@@ -229,7 +229,7 @@
                                                                            options:0 error:&error] : nil;
     if (JSONObject && !error) {
         LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject];
-        laScene.rootDir = [filePath stringByDeletingLastPathComponent];
+        laScene.rootDirectory = [filePath stringByDeletingLastPathComponent];
         [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
         return [[LOTAnimationView alloc] initWithModel:laScene];
     }
