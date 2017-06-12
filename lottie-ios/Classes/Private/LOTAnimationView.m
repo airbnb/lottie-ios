@@ -242,7 +242,7 @@
     
     LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
     if (comp) {
-        return [[LOTAnimationView alloc] initWithModel:comp];
+        return [[LOTAnimationView alloc] initWithModel:comp inBundle:[NSBundle mainBundle]];
     }
     
     NSError *error;
@@ -253,7 +253,7 @@
         LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject];
         laScene.rootDirectory = [filePath stringByDeletingLastPathComponent];
         [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
-        return [[LOTAnimationView alloc] initWithModel:laScene];
+        return [[LOTAnimationView alloc] initWithModel:laScene inBundle:[NSBundle mainBundle]];
     }
     
     NSException* resourceNotFoundException = [NSException exceptionWithName:@"ResourceNotFoundException"
