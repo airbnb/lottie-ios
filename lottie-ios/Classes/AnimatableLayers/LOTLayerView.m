@@ -317,15 +317,26 @@
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
 - (void)_setImageForAsset {
-  if (_layerModel.imageAsset.imageName) {
-    NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
-    UIImage *image = [UIImage imageNamed:components.firstObject];
-    if (image) {
-      _childSolid.contents = (__bridge id _Nullable)(image.CGImage);
-    } else {
-      NSLog(@"%s: Warn: image not found: %@", __PRETTY_FUNCTION__, components.firstObject);
+    if (_layerModel.imageAsset.imageName) {
+        UIImage *image;
+        if (_layerModel.imageAsset.rootDirectory.length > 0) {
+            NSString *rootDirectory  = _layerModel.imageAsset.rootDirectory;
+            if (_layerModel.imageAsset.imageDirectory.length > 0) {
+                rootDirectory = [rootDirectory stringByAppendingPathComponent:_layerModel.imageAsset.imageDirectory];
+            }
+            NSString *imagePath = [rootDirectory stringByAppendingPathComponent:_layerModel.imageAsset.imageName];
+            image = [UIImage imageWithContentsOfFile:imagePath];
+        }else{
+            NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
+            image = [UIImage imageNamed:components.firstObject];
+        }
+        
+        if (image) {
+            _childSolid.contents = (__bridge id _Nullable)(image.CGImage);
+        } else {
+            NSLog(@"%s: Warn: image not found: %@", __PRETTY_FUNCTION__, _layerModel.imageAsset.imageName);
+        }
     }
-  }
 }
 
 #else
