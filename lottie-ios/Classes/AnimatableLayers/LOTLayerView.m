@@ -319,12 +319,12 @@
 - (void)_setImageForAsset {
     if (_layerModel.imageAsset.imageName) {
         UIImage *image;
-        if (_layerModel.imageAsset.rootDir.length > 0) {
-            NSString *rootDic  = _layerModel.imageAsset.rootDir;
+        if (_layerModel.imageAsset.rootDirectory.length > 0) {
+            NSString *rootDirectory  = _layerModel.imageAsset.rootDirectory;
             if (_layerModel.imageAsset.imageDirectory.length > 0) {
-                rootDic = [rootDic stringByAppendingPathComponent:_layerModel.imageAsset.imageDirectory];
+                rootDirectory = [rootDirectory stringByAppendingPathComponent:_layerModel.imageAsset.imageDirectory];
             }
-            NSString *imagePath = [rootDic stringByAppendingPathComponent:_layerModel.imageAsset.imageName];
+            NSString *imagePath = [rootDirectory stringByAppendingPathComponent:_layerModel.imageAsset.imageName];
             image = [UIImage imageWithContentsOfFile:imagePath];
         }else{
             NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];

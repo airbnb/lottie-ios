@@ -55,8 +55,8 @@
   [_assetGroup finalizeInitialization];
 
 }
-- (void)setRootDir:(NSString *)rootDir{
-    _rootDir = rootDir;
-    self.assetGroup.rootDir = rootDir;
+- (void)setRootDirectory:(NSString *)rootDirectory{
+    _rootDirectory = rootDirectory;
+    self.assetGroup.rootDirectory = rootDirectory;
 }
 @end

@@ -24,6 +24,6 @@
 @property (nonatomic, readonly) NSTimeInterval timeDuration;
 @property (nonatomic, readonly) LOTLayerGroup *layerGroup;
 @property (nonatomic, readonly) LOTAssetGroup *assetGroup;
-@property (nonatomic, readwrite) NSString *rootDir;
+@property (nonatomic, readwrite) NSString *rootDirectory;
 
 @end
