@@ -39,7 +39,7 @@
     
     // Initial Setup of Layer
     _layer.fillMode = kCAFillModeBoth;
-    _layer.duration = _animationDuration;
+    _layer.duration = _animationDuration + (1.f / framerate.floatValue);
     _layer.speed = 0;
     _layer.timeOffset = 0;
     _layer.beginTime = CACurrentMediaTime();
@@ -131,7 +131,7 @@
   _animationIsPlaying = NO;
   
   if (updateAnimation) {
-    CFTimeInterval offset = _animatedProgress == 1 ? _animationDuration - LOT_singleFrameTimeValue : _animatedProgress * _animationDuration;
+    CFTimeInterval offset = _animatedProgress == 1 ? _animationDuration : _animatedProgress * _animationDuration;
     __unused CFTimeInterval clock = CACurrentMediaTime();
     [self updateAnimationLayerWithTimeOffset:offset];
   }
@@ -181,8 +181,8 @@
 
 - (void)logStats:(NSString *)logName {
   CFTimeInterval localTime = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
-  NSLog(@"LOTAnimationState %@ || Is Playing %@ || Duration %f || Speed %lf ||  Progress %lf || Local Time %lf || Frame %i ",
-        logName, (_animationIsPlaying ? @"YES" : @"NO"), self.animationDuration, _layer.speed, self.animatedProgress, localTime, (int)(localTime * _framerate.integerValue));
+  NSLog(@"LOTAnimationState %@ || Is Playing %@ || Duration %f || Speed %lf ||  Progress %lf || Local Time %lf || Frame %lf ",
+        logName, (_animationIsPlaying ? @"YES" : @"NO"), self.animationDuration, _layer.speed, self.animatedProgress, localTime, floorf(localTime * _framerate.floatValue));
 }
 
 @end
@@ -270,7 +270,7 @@
       [self _initializeAnimationContainer];
       [self _setupWithSceneModel:laScene restoreAnimationState:NO];
     } else {
-      _animationState = [[LOTAnimationState alloc] initWithDuration:LOT_singleFrameTimeValue layer:nil frameRate:@1];
+      _animationState = [[LOTAnimationState alloc] initWithDuration:1.f/60.f layer:nil frameRate:@1];
       dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         NSData *animationData = [NSData dataWithContentsOfURL:url];
         if (!animationData) {
@@ -329,7 +329,7 @@
   _sceneModel = model;
   [self _buildSubviewsFromModel];
   LOTAnimationState *oldState = _animationState;
-  _animationState = [[LOTAnimationState alloc] initWithDuration:_sceneModel.timeDuration + LOT_singleFrameTimeValue layer:_timingLayer frameRate:_sceneModel.framerate];
+  _animationState = [[LOTAnimationState alloc] initWithDuration:_sceneModel.timeDuration layer:_timingLayer frameRate:_sceneModel.framerate];
 
   if (restoreAnimation && oldState) {
     [self setLoopAnimation:oldState.loopAnimation];
