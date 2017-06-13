@@ -173,7 +173,7 @@
   
   NSMutableArray *keys = [NSMutableArray array];
   NSMutableArray *keyTimes = [NSMutableArray array];
-  CGFloat layerLength = _outFrame.integerValue - 1;
+  CGFloat layerLength = _outFrame.integerValue;
   _layerDuration = (layerLength / _framerate.floatValue);
   
   if (_hasInAnimation) {

@@ -291,7 +291,7 @@
   _inOutAnimation = inOutAnimation;
   _inOutAnimation.duration = self.layerDuration;
   [self addAnimation:_inOutAnimation forKey:@"inout"];
-  self.duration = self.layerDuration + LOT_singleFrameTimeValue;
+  self.duration = self.layerDuration;
 
 }
 
