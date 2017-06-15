@@ -15,7 +15,6 @@
   NSNumber *_framerate;
   NSDictionary *_modelMap;
   NSDictionary *_referenceIDMap;
-  NSArray *layersJSON;
 }
 
 - (instancetype)initWithLayerJSON:(NSArray *)layersJSON
@@ -37,18 +36,14 @@
   NSMutableDictionary *referenceMap = [NSMutableDictionary dictionary];
   
   for (NSDictionary *layerJSON in layersJSON) {
-    LOTLayer *layer = [[LOTLayer alloc] initWithJSON:layerJSON withCompBounds:_bounds withFramerate:_framerate];
+    LOTLayer *layer = [[LOTLayer alloc] initWithJSON:layerJSON
+                                      withCompBounds:_bounds
+                                       withFramerate:_framerate
+                                      withAssetGroup:assetGroup];
     [layers addObject:layer];
     modelMap[layer.layerID] = layer;
-    if (layer.referenceID && assetGroup) {
+    if (layer.referenceID) {
       referenceMap[layer.referenceID] = layer;
-      [assetGroup buildAssetNamed:layer.referenceID withBounds:layer.layerBounds andFramerate:layer.framerate];
-      if (layer.layerType == LOTLayerTypeImage) {
-        LOTAsset *imageAsset = [assetGroup assetModelForID:layer.referenceID];
-        if (imageAsset) {
-          [layer setImageAsset:imageAsset];
-        }
-      }
     }
   }
   

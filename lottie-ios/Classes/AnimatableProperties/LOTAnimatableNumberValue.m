@@ -38,6 +38,9 @@
       //Single Value, no animation
       _initialValue = [[self _numberValueFromObject:value] copy];
     }
+    if (numberValues[@"x"]) {
+      NSLog(@"%s: Warning: expressions are not supported", __PRETTY_FUNCTION__);
+    }
   }
   return self;
 }
@@ -51,7 +54,7 @@
   _startFrame = keyframes.firstObject[@"t"];
   NSNumber *endFrame = keyframes.lastObject[@"t"];
   
-  NSAssert((_startFrame && endFrame && _startFrame.integerValue < endFrame.integerValue),
+  NSAssert((_startFrame && endFrame && _startFrame.integerValue <= endFrame.integerValue),
            @"Lottie: Keyframe animation has incorrect time values or invalid number of keyframes");
   // Calculate time duration
   _durationFrames = @(endFrame.floatValue - _startFrame.floatValue);

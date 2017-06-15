@@ -49,6 +49,9 @@
       }
       _initialShape = [self _bezierShapeFromValue:value closed:closed];
     }
+    if (shapeValues[@"x"]) {
+      NSLog(@"%s: Warning: expressions are not supported", __PRETTY_FUNCTION__);
+    }
   }
   return self;
 }
@@ -167,6 +170,11 @@
   NSArray *pointsArray = pointsData[@"v"];
   NSArray *inTangents = pointsData[@"i"];
   NSArray *outTangents = pointsData[@"o"];
+  
+  if (pointsArray.count == 0) {
+    NSLog(@"%s: Warning: shape has no vertices", __PRETTY_FUNCTION__);
+    return nil;
+  }
   
   NSAssert((pointsArray.count == inTangents.count &&
             pointsArray.count == outTangents.count),

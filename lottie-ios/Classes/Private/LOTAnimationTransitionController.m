@@ -15,14 +15,25 @@
   LOTAnimationView *tranistionAnimationView_;
   NSString *fromLayerName_;
   NSString *toLayerName_;
+  NSBundle *inBundle_;
 }
 
 - (instancetype)initWithAnimationNamed:(NSString *)animation
                         fromLayerNamed:(NSString *)fromLayer
                           toLayerNamed:(NSString *)toLayer {
+    
+    return [self initWithAnimationNamed:animation
+                          fromLayerNamed:fromLayer
+                           toLayerNamed:toLayer
+                               inBundle:[NSBundle mainBundle]];
+}
+- (instancetype)initWithAnimationNamed:(NSString *)animation
+                        fromLayerNamed:(NSString *)fromLayer
+                          toLayerNamed:(NSString *)toLayer
+                              inBundle:(NSBundle *)bundle {
   self = [super init];
   if (self) {
-    tranistionAnimationView_ = [LOTAnimationView animationNamed:animation];
+    tranistionAnimationView_ = [LOTAnimationView animationNamed:animation inBundle:bundle];
     fromLayerName_ = fromLayer;
     toLayerName_ = toLayer;
   }

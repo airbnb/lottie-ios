@@ -39,20 +39,27 @@
     
     // Initial Setup of Layer
     _layer.fillMode = kCAFillModeBoth;
-    _layer.duration = _animationDuration;
+    _layer.duration = _animationDuration + (1.f / framerate.floatValue);
     _layer.speed = 0;
     _layer.timeOffset = 0;
     _layer.beginTime = CACurrentMediaTime();
 
     _previousLocalTime = -1.f;
-    [self setNeedsAnimationUpdate];
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+      if (_animationIsPlaying) {
+        [self setAnimationIsPlaying:_animationIsPlaying];
+      } else {
+        [self setAnimatedProgress:_animatedProgress updateAnimation:false];
+      }
+    }];
   }
   return self;
 }
 
 #pragma mark -- External Methods
 
-- (void)updateAnimationLayerClockTime:(CFTimeInterval)clockTime timeOffset:(CFTimeInterval)timeOffset {
+- (void)updateAnimationLayerWithTimeOffset:(CFTimeInterval)timeOffset {
   if (_needsAnimationUpdate) {
     return;
   }
@@ -62,7 +69,7 @@
   _layer.repeatCount = _loopAnimation ? HUGE_VALF : 0;
   _layer.timeOffset = 0;
   _layer.beginTime = 0;
-  
+    
   if (speed == 0) {
     _layer.timeOffset = timeOffset;
   } else {
@@ -81,25 +88,28 @@
       if (_animationIsPlaying) {
         [self setAnimationIsPlaying:_animationIsPlaying];
       } else {
-        [self setAnimatedProgress:_animatedProgress];
+        [self setAnimatedProgress:_animatedProgress updateAnimation:true];
       }
+      [self.layer setNeedsDisplay];
     }];
   }
 }
 
 #pragma mark -- Setters
 
-- (void)setAnimationDoesLoop:(BOOL)loopAnimation {
+- (void)setAnimationDoesLoop:(BOOL)loopAnimation updateAnimation:(BOOL)updateAnimation {
   _loopAnimation = loopAnimation;
-  CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
-  CFTimeInterval clock = CACurrentMediaTime();
-  [self updateAnimationLayerClockTime:clock timeOffset:offset];
+  if (updateAnimation) {
+    CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    __unused CFTimeInterval clock = CACurrentMediaTime();
+    [self updateAnimationLayerWithTimeOffset:offset];
+  }
 }
 
-- (void)setAnimationIsPlaying:(BOOL)animationIsPlaying  {
+- (void)setAnimationIsPlaying:(BOOL)animationIsPlaying {
   _animationIsPlaying = animationIsPlaying;
   CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
-  CFTimeInterval clock = CACurrentMediaTime();
+  __unused CFTimeInterval clock = CACurrentMediaTime();
 
   if (_animationIsPlaying) {
     if (_playFromBeginning) {
@@ -109,25 +119,32 @@
   } else {
     _animatedProgress =  offset / _animationDuration;
   }
-  [self updateAnimationLayerClockTime:clock timeOffset:offset];
+  [self updateAnimationLayerWithTimeOffset:offset];
 }
 
-- (void)setAnimatedProgress:(CGFloat)animatedProgress {
+- (void)setAnimatedProgress:(CGFloat)animatedProgress updateAnimation:(BOOL)updateAnimation {
+    
   if (_playFromBeginning) {
     _playFromBeginning = NO;
   }
   _animatedProgress = animatedProgress > 1 ? fmod(animatedProgress, 1) : MAX(animatedProgress, 0);
   _animationIsPlaying = NO;
-  CFTimeInterval offset = _animatedProgress == 1 ? _animationDuration - LOT_singleFrameTimeValue : _animatedProgress * _animationDuration;
-  CFTimeInterval clock = CACurrentMediaTime();
-  [self updateAnimationLayerClockTime:clock timeOffset:offset];
+  
+  if (updateAnimation) {
+    CFTimeInterval offset = _animatedProgress == 1 ? _animationDuration : _animatedProgress * _animationDuration;
+    __unused CFTimeInterval clock = CACurrentMediaTime();
+    [self updateAnimationLayerWithTimeOffset:offset];
+  }
 }
 
-- (void)setAnimationSpeed:(CGFloat)speed {
+- (void)setAnimationSpeed:(CGFloat)speed updateAnimation:(BOOL)updateAnimation {
   _animationSpeed = speed;
-  CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
-  CFTimeInterval clock = CACurrentMediaTime();
-  [self updateAnimationLayerClockTime:clock timeOffset:offset];
+  
+  if (updateAnimation) {
+    CFTimeInterval offset = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    __unused CFTimeInterval clock = CACurrentMediaTime();
+    [self updateAnimationLayerWithTimeOffset:offset];
+  }
 }
 
 #pragma mark -- Getters
@@ -164,8 +181,8 @@
 
 - (void)logStats:(NSString *)logName {
   CFTimeInterval localTime = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
-  NSLog(@"LOTAnimationState %@ || Is Playing %@ || Duration %f || Speed %lf ||  Progress %lf || Local Time %lf || Frame %i ",
-        logName, (_animationIsPlaying ? @"YES" : @"NO"), self.animationDuration, _layer.speed, self.animatedProgress, localTime, (int)(localTime * _framerate.integerValue));
+  NSLog(@"LOTAnimationState %@ || Is Playing %@ || Duration %f || Speed %lf ||  Progress %lf || Local Time %lf || Frame %lf ",
+        logName, (_animationIsPlaying ? @"YES" : @"NO"), self.animationDuration, _layer.speed, self.animatedProgress, localTime, floorf(localTime * _framerate.floatValue));
 }
 
 @end
@@ -175,28 +192,34 @@
   LOTCompositionLayer *_compLayer;
   CADisplayLink *_completionDisplayLink;
   BOOL hasFullyInitialized_;
+  NSBundle *_bundle;
 }
 
 # pragma mark - Initializers
 
 + (instancetype)animationNamed:(NSString *)animationName {
+  return [self animationNamed:animationName inBundle:[NSBundle mainBundle]];
+}
+
+
++ (instancetype)animationNamed:(NSString *)animationName inBundle:(NSBundle *)bundle {
   NSArray *components = [animationName componentsSeparatedByString:@"."];
   animationName = components.firstObject;
   
   LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
   if (comp) {
-    return [[LOTAnimationView alloc] initWithModel:comp];
+    return [[LOTAnimationView alloc] initWithModel:comp inBundle:bundle];
   }
   
   NSError *error;
-  NSString *filePath = [[NSBundle mainBundle] pathForResource:animationName ofType:@"json"];
+  NSString *filePath = [bundle pathForResource:animationName ofType:@"json"];
   NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
   NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
                                                                          options:0 error:&error] : nil;
   if (JSONObject && !error) {
     LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject];
     [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
-    return [[LOTAnimationView alloc] initWithModel:laScene];
+    return [[LOTAnimationView alloc] initWithModel:laScene inBundle:bundle];
   }
   
   NSException* resourceNotFoundException = [NSException exceptionWithName:@"ResourceNotFoundException"
@@ -206,8 +229,37 @@
 }
 
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON {
+    return [self animationFromJSON:animationJSON inBundle:[NSBundle mainBundle]];
+}
+
++ (instancetype)animationFromJSON:(NSDictionary *)animationJSON inBundle:(NSBundle *)bundle{
   LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON];
-  return [[LOTAnimationView alloc] initWithModel:laScene];
+  return [[LOTAnimationView alloc] initWithModel:laScene inBundle:bundle];
+}
+
++ (instancetype)animationWithFilePath:(NSString *)filePath{
+    NSString *animationName = filePath;
+    
+    LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
+    if (comp) {
+        return [[LOTAnimationView alloc] initWithModel:comp inBundle:[NSBundle mainBundle]];
+    }
+    
+    NSError *error;
+    NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
+    NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                           options:0 error:&error] : nil;
+    if (JSONObject && !error) {
+        LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject];
+        laScene.rootDirectory = [filePath stringByDeletingLastPathComponent];
+        [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
+        return [[LOTAnimationView alloc] initWithModel:laScene inBundle:[NSBundle mainBundle]];
+    }
+    
+    NSException* resourceNotFoundException = [NSException exceptionWithName:@"ResourceNotFoundException"
+                                                                     reason:[error localizedDescription]
+                                                                   userInfo:nil];
+    @throw resourceNotFoundException;
 }
 
 - (instancetype)initWithContentsOfURL:(NSURL *)url {
@@ -218,7 +270,7 @@
       [self _initializeAnimationContainer];
       [self _setupWithSceneModel:laScene restoreAnimationState:NO];
     } else {
-      _animationState = [[LOTAnimationState alloc] initWithDuration:LOT_singleFrameTimeValue layer:nil frameRate:@1];
+      _animationState = [[LOTAnimationState alloc] initWithDuration:1.f/60.f layer:nil frameRate:@1];
       dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         NSData *animationData = [NSData dataWithContentsOfURL:url];
         if (!animationData) {
@@ -243,9 +295,10 @@
   return self;
 }
 
-- (instancetype)initWithModel:(LOTComposition *)model {
+- (instancetype)initWithModel:(LOTComposition *)model inBundle:(NSBundle *)bundle{
   self = [super initWithFrame:model.compBounds];
   if (self) {
+    _bundle = bundle;
     [self _initializeAnimationContainer];
     [self _setupWithSceneModel:model restoreAnimationState:NO];
   }
@@ -257,17 +310,17 @@
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
 - (void)_initializeAnimationContainer {
-    _timingLayer = [CALayer new];
-    [self.layer addSublayer:_timingLayer];
-    self.clipsToBounds = YES;
+  _timingLayer = [CALayer new];
+  [self.layer addSublayer:_timingLayer];
+  self.clipsToBounds = YES;
 }
 
 #else
 
 - (void)_initializeAnimationContainer {
-    self.wantsLayer = YES;
-    _timingLayer = [CALayer new];
-    [self.layer addSublayer:_timingLayer];
+  self.wantsLayer = YES;
+  _timingLayer = [CALayer new];
+  [self.layer addSublayer:_timingLayer];
 }
 
 #endif
@@ -301,7 +354,8 @@
     }
     _compLayer = [[LOTCompositionLayer alloc] initWithLayerGroup:_sceneModel.layerGroup
                                                   withAssetGroup:_sceneModel.assetGroup
-                                                      withBounds:_sceneModel.compBounds];
+                                                      withBounds:_sceneModel.compBounds
+                                                        inBundle:_bundle];
     [_timingLayer addSublayer:_compLayer];
   }
 }
@@ -338,7 +392,7 @@
     [_animationState setAnimationIsPlaying:NO];
     [self stopDisplayLink];
     
-    [self _callCompletionIfNecesarry];
+    [self _callCompletionIfNecessary];
   }
 }
 
@@ -350,8 +404,7 @@
 # pragma mark - Display Link
 
 - (void)startDisplayLink {
-  if (_animationState.animationIsPlaying == NO ||
-      _animationState.loopAnimation) {
+  if (_animationState.animationIsPlaying == NO) {
     return;
   }
   
@@ -369,11 +422,11 @@
 - (void)checkAnimationState {
   if (self.animationState.animationIsPlaying == NO) {
     [self stopDisplayLink];
-    [self _callCompletionIfNecesarry];
+    [self _callCompletionIfNecessary];
   }
 }
 
-- (void)_callCompletionIfNecesarry {
+- (void)_callCompletionIfNecessary {
   if (self.completionBlock && hasFullyInitialized_) {
     self.completionBlock(_animationState.animatedProgress == 1);
     self.completionBlock = nil;
@@ -384,10 +437,10 @@
 
 - (void)setAnimationProgress:(CGFloat)animationProgress {
   if (_animationState.animationIsPlaying) {
-    [self _callCompletionIfNecesarry];
+    [self _callCompletionIfNecessary];
   }
   
-  [_animationState setAnimatedProgress:animationProgress];
+  [_animationState setAnimatedProgress:animationProgress updateAnimation:self.window != nil];
   
   [self stopDisplayLink];
 }
@@ -397,10 +450,7 @@
 }
 
 - (void)setLoopAnimation:(BOOL)loopAnimation {
-  [_animationState setAnimationDoesLoop:loopAnimation];
-  if (loopAnimation) {
-    [self stopDisplayLink];
-  }
+  [_animationState setAnimationDoesLoop:loopAnimation updateAnimation:self.window != nil];
 }
 
 - (BOOL)loopAnimation {
@@ -408,7 +458,7 @@
 }
 
 -(void)setAnimationSpeed:(CGFloat)animationSpeed {
-  [_animationState setAnimationSpeed:animationSpeed];
+  [_animationState setAnimationSpeed:animationSpeed updateAnimation:self.window != nil];
 }
 
 - (CGFloat)animationSpeed {
@@ -444,12 +494,16 @@
 
 - (void)didMoveToWindow {
   [super didMoveToWindow];
-  [_animationState setNeedsAnimationUpdate];
+  if (self.window) {
+    [_animationState setNeedsAnimationUpdate];
+  }
 }
 
 - (void)didMoveToSuperview {
   [super didMoveToSuperview];
-  [_animationState setNeedsAnimationUpdate];
+  if (self.window) {
+    [_animationState setNeedsAnimationUpdate];
+  }
 }
 
 - (void)removeFromSuperview {
@@ -471,12 +525,12 @@
     
 - (void)setCompletionBlock:(LOTAnimationCompletionBlock)completionBlock {
     if (completionBlock) {
-        _completionBlock = ^(BOOL finished) {
-            dispatch_async(dispatch_get_main_queue(), ^{ completionBlock(finished); });
-        };
+      _completionBlock = ^(BOOL finished) {
+        dispatch_async(dispatch_get_main_queue(), ^{ completionBlock(finished); });
+      };
     }
     else {
-        _completionBlock = nil;
+      _completionBlock = nil;
     }
 }
 
@@ -486,26 +540,26 @@
 }
 
 - (void)setNeedsLayout {
-    self.needsLayout = YES;
+  self.needsLayout = YES;
 }
 
 - (BOOL)isFlipped {
-    return YES;
+  return YES;
 }
 
 - (BOOL)wantsUpdateLayer {
-    return YES;
+  return YES;
 }
 
 - (void)layout {
-    [super layout];
-    [self _layout];
+  [super layout];
+  [self _layout];
 }
 
 #endif
 
 - (CGSize)intrinsicContentSize {
-    return _sceneModel.compBounds.size;
+  return _sceneModel.compBounds.size;
 }
 
 - (void)_layout {
