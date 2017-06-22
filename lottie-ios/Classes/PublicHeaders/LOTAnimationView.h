@@ -27,6 +27,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 @property (nonatomic, assign) CGFloat animationProgress;
 @property (nonatomic, assign) CGFloat animationSpeed;
 @property (nonatomic, readonly) CGFloat animationDuration;
+@property (nonatomic, assign) BOOL cacheEnable;
 
 - (void)playWithCompletion:(nullable LOTAnimationCompletionBlock)completion;
 - (void)play;
