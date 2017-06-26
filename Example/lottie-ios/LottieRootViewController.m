@@ -66,7 +66,9 @@
                           @{@"name" : @"Animated Keyboard",
                             @"vc" : @"TypingDemoViewController"},
                           @{@"name" : @"Animated Transitions Demo",
-                            @"vc" : @"AnimationTransitionViewController"}];
+                            @"vc" : @"AnimationTransitionViewController"},
+                          @{@"name" : @"Animation From Bundle",
+                            @"vc" : @"AnimationBundleViewController"}];
 }
 
 - (void)_playLottieAnimation {

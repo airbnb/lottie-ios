@@ -70,6 +70,9 @@
 		62B254CB1E3A90040035A842 /* Watermelon.json in Resources */ = {isa = PBXBuildFile; fileRef = 62B254A11E3A90040035A842 /* Watermelon.json */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		A93021D61F00C7EC003212C8 /* itemfinder.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A93021D51F00C7EC003212C8 /* itemfinder.bundle */; };
+		A93021D71F00C7EC003212C8 /* itemfinder.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A93021D51F00C7EC003212C8 /* itemfinder.bundle */; };
+		A93021DB1F00C89C003212C8 /* AnimationBundleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93021DA1F00C89C003212C8 /* AnimationBundleViewController.m */; };
 		B8E8748514D4FA9C683B1711 /* Pods_lottie_ios_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EBDFEA18138A27DD5A89337 /* Pods_lottie_ios_Tests.framework */; };
 		EEC1E1E127D92497BB7EB181 /* Pods_Lottie_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B15EF764A3BC631B7F802E1 /* Pods_Lottie_Example.framework */; };
 		FA1F5A8F1E42B25500FF36BF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1F5A8E1E42B25500FF36BF /* AppDelegate.m */; };
@@ -177,6 +180,9 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		94B0A9361261413477E89F1E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		99F3982078CC5B93DA1AFF47 /* Pods-Lottie-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lottie-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lottie-Example/Pods-Lottie-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		A93021D51F00C7EC003212C8 /* itemfinder.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = itemfinder.bundle; sourceTree = "<group>"; };
+		A93021D91F00C89C003212C8 /* AnimationBundleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationBundleViewController.h; sourceTree = "<group>"; };
+		A93021DA1F00C89C003212C8 /* AnimationBundleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationBundleViewController.m; sourceTree = "<group>"; };
 		AC7587B24F90B40ADD0CEA8C /* Pods_Lottie_Example_MacOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lottie_Example_MacOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C83F4B06A893EA3322E53A /* Pods-Lottie-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lottie-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lottie-Example/Pods-Lottie-Example.release.xcconfig"; sourceTree = "<group>"; };
 		FA1F5A8B1E42B25500FF36BF /* Lottie-Example-MacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lottie-Example-MacOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -282,6 +288,7 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				62B254621E3A8D310035A842 /* LottieRootViewController.h */,
 				62B254631E3A8D310035A842 /* LottieRootViewController.m */,
+				A93021D81F00C87C003212C8 /* BundlerDemo */,
 				62B254741E3A8D400035A842 /* Animation Explorer */,
 				62B254751E3A8D500035A842 /* Transition Demo */,
 				62B254761E3A8D620035A842 /* Typing Animation Demo */,
@@ -317,6 +324,7 @@
 		6003F5B6195388D20070C39A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A93021D51F00C7EC003212C8 /* itemfinder.bundle */,
 				62B254801E3A90040035A842 /* TypeFace */,
 				62B254771E3A90040035A842 /* 9squares-AlBoardman.json */,
 				62B254781E3A90040035A842 /* HamburgerArrow.json */,
@@ -416,6 +424,15 @@
 			name = TypeFace;
 			path = Assets/TypeFace;
 			sourceTree = SOURCE_ROOT;
+		};
+		A93021D81F00C87C003212C8 /* BundlerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				A93021D91F00C89C003212C8 /* AnimationBundleViewController.h */,
+				A93021DA1F00C89C003212C8 /* AnimationBundleViewController.m */,
+			);
+			name = BundlerDemo;
+			sourceTree = "<group>";
 		};
 		FA1F5A8C1E42B25500FF36BF /* Example for lottie-macos */ = {
 			isa = PBXGroup;
@@ -564,6 +581,7 @@
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				62B254AB1E3A90040035A842 /* A.json in Resources */,
 				62B254A31E3A90040035A842 /* HamburgerArrow.json in Resources */,
+				A93021D61F00C7EC003212C8 /* itemfinder.bundle in Resources */,
 				62B254C91E3A90040035A842 /* vcTransition1.json in Resources */,
 				62B254CA1E3A90040035A842 /* vcTransition2.json in Resources */,
 				62B254BF1E3A90040035A842 /* Q.json in Resources */,
@@ -612,6 +630,7 @@
 			files = (
 				FA1F5A971E42B25500FF36BF /* Assets.xcassets in Resources */,
 				FA1F5AB11E42C21600FF36BF /* LottieLogo1.json in Resources */,
+				A93021D71F00C7EC003212C8 /* itemfinder.bundle in Resources */,
 				FA1F5A9A1E42B25500FF36BF /* Main.storyboard in Resources */,
 				FA1F5AB21E42C21C00FF36BF /* 9squares-AlBoardman.json in Resources */,
 			);
@@ -764,6 +783,7 @@
 			files = (
 				6003F59E195388D20070C39A /* LAAppDelegate.m in Sources */,
 				62B2546A1E3A8D310035A842 /* LottieRootViewController.m in Sources */,
+				A93021DB1F00C89C003212C8 /* AnimationBundleViewController.m in Sources */,
 				62B2546B1E3A8D310035A842 /* AnimationExplorerViewController.m in Sources */,
 				62B2546D1E3A8D310035A842 /* JSONExplorerViewController.m in Sources */,
 				62B254721E3A8D3B0035A842 /* TypingDemoViewController.m in Sources */,
@@ -915,6 +935,7 @@
 			baseConfigurationReference = 99F3982078CC5B93DA1AFF47 /* Pods-Lottie-Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "lottie-ios/lottie-ios-Prefix.pch";
 				INFOPLIST_FILE = "lottie-ios/lottie-ios-Info.plist";
@@ -931,6 +952,7 @@
 			baseConfigurationReference = D8C83F4B06A893EA3322E53A /* Pods-Lottie-Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "lottie-ios/lottie-ios-Prefix.pch";
 				INFOPLIST_FILE = "lottie-ios/lottie-ios-Info.plist";
