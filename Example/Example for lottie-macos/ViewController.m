@@ -21,8 +21,7 @@
     [super viewDidLoad];
 
     NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"itemfinder" ofType:@"bundle"]];
-    self.lottieLogo = [LOTAnimationView animationNamed:@"data" inBundle:bundle];
-    self.lottieLogo.contentMode = LOTViewContentModeScaleAspectFill;
+    self.lottieLogo = [LOTAnimationView animationNamed:@"data.json" inBundle:bundle];
     self.lottieLogo.contentMode = LOTViewContentModeScaleAspectFill;
     self.lottieLogo.frame = self.view.bounds;
     self.lottieLogo.loopAnimation = YES;
