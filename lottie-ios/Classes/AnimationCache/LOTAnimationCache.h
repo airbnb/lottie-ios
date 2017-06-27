@@ -15,6 +15,7 @@
 + (instancetype)sharedCache;
 
 - (void)addAnimation:(LOTComposition *)animation forKey:(NSString *)key;
+- (void)removeAnimationForKey:(NSString *)key;
 - (LOTComposition *)animationForKey:(NSString *)key;
 
 @end

@@ -13,23 +13,28 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 
 @interface LOTAnimationView : LOTView
 
-+ (instancetype)animationNamed:(NSString *)animationName;
-+ (instancetype)animationFromJSON:(NSDictionary *)animationJSON;
++ (nonnull instancetype)animationNamed:(nonnull NSString *)animationName NS_SWIFT_NAME(init(name:));
++ (nonnull instancetype)animationNamed:(nonnull NSString *)animationName inBundle:(nonnull NSBundle *)bundle NS_SWIFT_NAME(init(name:bundle:));
++ (nonnull instancetype)animationFromJSON:(nonnull NSDictionary *)animationJSON NS_SWIFT_NAME(init(json:));
++ (nonnull instancetype)animationFromJSON:(nonnull NSDictionary *)animationJSON inBundle:(nonnull NSBundle *)bundle NS_SWIFT_NAME(init(json:bundle:));
 
-- (instancetype)initWithContentsOfURL:(NSURL *)url;
+- (nonnull instancetype)initWithContentsOfURL:(nonnull NSURL *)url;
+
++ (nonnull instancetype)animationWithFilePath:(nonnull NSString *)filePath NS_SWIFT_NAME(init(filePath:));
 
 @property (nonatomic, readonly) BOOL isAnimationPlaying;
 @property (nonatomic, assign) BOOL loopAnimation;
 @property (nonatomic, assign) CGFloat animationProgress;
 @property (nonatomic, assign) CGFloat animationSpeed;
 @property (nonatomic, readonly) CGFloat animationDuration;
+@property (nonatomic, assign) BOOL cacheEnable;
 
-- (void)playWithCompletion:(LOTAnimationCompletionBlock)completion;
+- (void)playWithCompletion:(nullable LOTAnimationCompletionBlock)completion;
 - (void)play;
 - (void)pause;
 
-- (void)addSubview:(LOTView *)view
-      toLayerNamed:(NSString *)layer;
+- (void)addSubview:(nonnull LOTView *)view
+      toLayerNamed:(nonnull NSString *)layer;
 
 #if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
 @property (nonatomic) LOTViewContentMode contentMode;

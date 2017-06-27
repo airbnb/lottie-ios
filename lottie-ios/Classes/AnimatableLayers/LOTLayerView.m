@@ -92,11 +92,17 @@
   NSArray<LOTParentLayer *> *_parentLayers;
   LOTMaskLayer *_maskLayer;
   CALayer *_childSolid;
+  NSBundle *_bundle;
 }
 
-- (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup {
+- (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup{
+    return [self initWithModel:model inLayerGroup:layerGroup inBundle:[NSBundle mainBundle]];
+}
+
+- (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup inBundle:(NSBundle *)bundle{
   self = [super initWithLayerDuration:model.layerDuration];
   if (self) {
+    _bundle = bundle;
     _layerModel = model;
     [self _setupViewFromModelWithLayerGroup:layerGroup];
   }
@@ -285,7 +291,7 @@
   _inOutAnimation = inOutAnimation;
   _inOutAnimation.duration = self.layerDuration;
   [self addAnimation:_inOutAnimation forKey:@"inout"];
-  self.duration = self.layerDuration + LOT_singleFrameTimeValue;
+  self.duration = self.layerDuration;
 
 }
 
@@ -317,13 +323,26 @@
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
 - (void)_setImageForAsset {
-  if (_layerModel.imageAsset.imageName) {
-    NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
-    UIImage *image = [UIImage imageNamed:components.firstObject];
-    if (image) {
-      _childSolid.contents = (__bridge id _Nullable)(image.CGImage);
+    if (_layerModel.imageAsset.imageName) {
+        UIImage *image;
+        if (_layerModel.imageAsset.rootDirectory.length > 0) {
+            NSString *rootDirectory  = _layerModel.imageAsset.rootDirectory;
+            if (_layerModel.imageAsset.imageDirectory.length > 0) {
+                rootDirectory = [rootDirectory stringByAppendingPathComponent:_layerModel.imageAsset.imageDirectory];
+            }
+            NSString *imagePath = [rootDirectory stringByAppendingPathComponent:_layerModel.imageAsset.imageName];
+            image = [UIImage imageWithContentsOfFile:imagePath];
+        }else{
+            NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
+            image = [UIImage imageNamed:components.firstObject inBundle:_bundle compatibleWithTraitCollection:nil];
+        }
+        
+        if (image) {
+            _childSolid.contents = (__bridge id _Nullable)(image.CGImage);
+        } else {
+            NSLog(@"%s: Warn: image not found: %@", __PRETTY_FUNCTION__, _layerModel.imageAsset.imageName);
+        }
     }
-  }
 }
 
 #else

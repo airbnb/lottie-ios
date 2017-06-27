@@ -41,6 +41,9 @@
       //Single Value, no animation
       _initialPoint = [self _pointFromValueArray:value];
     }
+    if (pointValues[@"x"]) {
+        NSLog(@"%s: Warning: expressions are not supported", __PRETTY_FUNCTION__);
+    }
   }
   return self;
 }

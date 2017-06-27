@@ -16,12 +16,12 @@ typedef enum : NSUInteger {
 
 @interface LOTAnimationState : NSObject
 
-- (instancetype)initWithDuration:(CGFloat)duration layer:(CALayer *)layer frameRate:(NSNumber *)framerate;
+- (instancetype _Nonnull)initWithDuration:(CGFloat)duration layer:(CALayer * _Nullable)layer frameRate:(NSNumber * _Nullable)framerate;
 
 - (void)setAnimationIsPlaying:(BOOL)animationIsPlaying;
-- (void)setAnimationDoesLoop:(BOOL)loopAnimation;
-- (void)setAnimatedProgress:(CGFloat)progress;
-- (void)setAnimationSpeed:(CGFloat)speed;
+- (void)setAnimationDoesLoop:(BOOL)loopAnimation updateAnimation:(BOOL)updateAnimation;
+- (void)setAnimatedProgress:(CGFloat)progress updateAnimation:(BOOL)updateAnimation;
+- (void)setAnimationSpeed:(CGFloat)speed updateAnimation:(BOOL)updateAnimation;
 
 @property (nonatomic, readonly) BOOL loopAnimation;
 @property (nonatomic, readonly) BOOL animationIsPlaying;

@@ -33,11 +33,12 @@
 
 - (instancetype)initWithLayerGroup:(LOTLayerGroup *)layerGroup
                     withAssetGroup:(LOTAssetGroup *)assetGroup
-                        withBounds:(CGRect)bounds {
+                        withBounds:(CGRect)bounds
+                          inBundle:(NSBundle *)bundle{
   self = [super init];
   if (self) {
     self.masksToBounds = YES;
-    [self _setupWithLayerGroup:layerGroup withAssetGroup:assetGroup withBounds:bounds];
+    [self _setupWithLayerGroup:layerGroup withAssetGroup:assetGroup withBounds:bounds inBundle:bundle];
   }
   return self;
 }
@@ -45,6 +46,7 @@
 - (void)_setupWithLayerGroup:(LOTLayerGroup *)layerGroup
               withAssetGroup:(LOTAssetGroup *)assetGroup
                   withBounds:(CGRect)bounds
+                    inBundle:(NSBundle *)bundle
                {
   if (_customLayers) {
     for (LOTCustomChild *child in _customLayers) {
@@ -78,12 +80,13 @@
       asset = [assetGroup assetModelForID:layer.referenceID];
     }
     
-    LOTLayerView *layerView = [[LOTLayerView alloc] initWithModel:layer inLayerGroup:layerGroup];
+    LOTLayerView *layerView = [[LOTLayerView alloc] initWithModel:layer inLayerGroup:layerGroup inBundle:bundle];
     
     if (asset.layerGroup) {
       LOTCompositionLayer *precompLayer = [[LOTCompositionLayer alloc] initWithLayerGroup:asset.layerGroup
                                                                            withAssetGroup:assetGroup
-                                                                               withBounds:layer.layerBounds];
+                                                                               withBounds:layer.layerBounds
+                                                                                 inBundle:bundle];
       precompLayer.frame = layer.layerBounds;
       [layerView LOT_addChildLayer:precompLayer];
     }
@@ -115,7 +118,7 @@
         child.childView.frame = child.layer.bounds;
         break;
       case LOTConstraintTypeAlignToBounds: {
-        CGRect selfBounds = self.frame;
+        CGRect selfBounds = self.bounds;
         CGRect convertedBounds = [child.childView.layer.superlayer convertRect:selfBounds fromLayer:self];
         child.childView.layer.frame = convertedBounds;
       } break;
@@ -141,7 +144,8 @@
   } else {
     newChild.layer = layerObject;
     [layerObject.superlayer insertSublayer:view.layer above:layerObject];
-    
+
+    [layerObject removeFromSuperlayer];
     view.layer.mask = layerObject;
   }
   

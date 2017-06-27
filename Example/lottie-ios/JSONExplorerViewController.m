@@ -45,7 +45,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
   NSString *fileURL = self.jsonFiles[indexPath.row];
   NSArray *components = [fileURL componentsSeparatedByString:@"/"];
   cell.textLabel.text = components.lastObject;

@@ -34,7 +34,7 @@
   _framerate = [jsonDictionary[@"fr"] copy];
   
   if (_startFrame && _endFrame && _framerate) {
-    NSInteger frameDuration = _endFrame.integerValue - _startFrame.integerValue;
+    NSInteger frameDuration = (_endFrame.integerValue - _startFrame.integerValue) - 1;
     NSTimeInterval timeDuration = frameDuration / _framerate.floatValue;
     _timeDuration = timeDuration;
   }
@@ -55,5 +55,8 @@
   [_assetGroup finalizeInitialization];
 
 }
-
+- (void)setRootDirectory:(NSString *)rootDirectory{
+    _rootDirectory = rootDirectory;
+    self.assetGroup.rootDirectory = rootDirectory;
+}
 @end
