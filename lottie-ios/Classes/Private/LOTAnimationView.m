@@ -50,7 +50,7 @@
       if (_animationIsPlaying) {
         [self setAnimationIsPlaying:_animationIsPlaying];
       } else {
-        [self setAnimatedProgress:_animatedProgress updateAnimation:false];
+        [self setAnimatedProgress:_animatedProgress updateAnimation:NO];
       }
     }];
   }
@@ -73,9 +73,7 @@
   if (speed == 0) {
     _layer.timeOffset = timeOffset;
   } else {
-    CFTimeInterval offsetTime =  ((timeOffset != 0) ?
-                                  timeOffset / speed :
-                                  timeOffset);
+    CFTimeInterval offsetTime = timeOffset / speed;
     _layer.beginTime = CACurrentMediaTime() - offsetTime;
   }
 }
@@ -88,7 +86,7 @@
       if (_animationIsPlaying) {
         [self setAnimationIsPlaying:_animationIsPlaying];
       } else {
-        [self setAnimatedProgress:_animatedProgress updateAnimation:true];
+        [self setAnimatedProgress:_animatedProgress updateAnimation:YES];
       }
       [self.layer setNeedsDisplay];
     }];
@@ -131,7 +129,7 @@
   _animationIsPlaying = NO;
   
   if (updateAnimation) {
-    CFTimeInterval offset = _animatedProgress == 1 ? _animationDuration : _animatedProgress * _animationDuration;
+    CFTimeInterval offset = _animatedProgress * _animationDuration;
     __unused CFTimeInterval clock = CACurrentMediaTime();
     [self updateAnimationLayerWithTimeOffset:offset];
   }
