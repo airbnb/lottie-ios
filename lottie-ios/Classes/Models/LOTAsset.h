@@ -9,13 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-
+#import <UIKit/UIKit.h>
 @compatibility_alias LOTImage UIImage;
 #else
-
 #import <AppKit/AppKit.h>
 @compatibility_alias LOTImage NSImage;
-
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
