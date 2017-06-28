@@ -8,7 +8,6 @@
 
 #import "LOTAnimationView.h"
 #import "LOTPlatformCompat.h"
-#import "LOTLayerView.h"
 #import "LOTModels.h"
 #import "LOTHelpers.h"
 #import "LOTAnimationView_Internal.h"
