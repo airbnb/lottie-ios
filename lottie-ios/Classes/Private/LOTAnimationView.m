@@ -73,10 +73,21 @@
   if (speed == 0) {
     _layer.timeOffset = timeOffset;
   } else {
+    NSTimeInterval superlayerTime = -1;
+    NSTimeInterval currentTime = -1;
+    if (_layer.superlayer) {
+        currentTime = CACurrentMediaTime();
+        superlayerTime = [_layer.superlayer convertTime:currentTime fromLayer:nil];
+    }
     CFTimeInterval offsetTime =  ((timeOffset != 0) ?
                                   timeOffset / speed :
                                   timeOffset);
-    _layer.beginTime = CACurrentMediaTime() - offsetTime;
+    if ((superlayerTime > 0) && ((superlayerTime - currentTime) < 0)) {
+        // fix Time
+        _layer.beginTime = superlayerTime - offsetTime;
+    } else {
+        _layer.beginTime = CACurrentMediaTime() - offsetTime;
+    }
   }
 }
 
