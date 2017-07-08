@@ -162,7 +162,7 @@
     
     // Check if keyframe is a hold keyframe
     if ([keyframe[@"h"] boolValue]) {
-      // set out value as start and flag next frame accordinly
+      // set out value as start and flag next frame accordingly
       outPoint = startPoint;
       addStartValue = YES;
       addTimePadding = YES;
