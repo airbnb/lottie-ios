@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
-#import <UIKit/UIKit.h>
 
 @class LOTAsset;
 @class LOTLayerGroup;
+@class UIImage;
 @interface LOTAssetGroup : NSObject
 
 - (instancetype _Nonnull)initWithJSON:(NSArray * _Nonnull)jsonArray;

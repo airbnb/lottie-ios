@@ -23,6 +23,7 @@
 #import "CADisplayLink.h"
 #import "CALayer+Compat.h"
 #import "NSValue+Compat.h"
+#import "UIImage.h"
 
 NS_INLINE NSString *NSStringFromCGRect(CGRect rect) {
     return NSStringFromRect(rect);

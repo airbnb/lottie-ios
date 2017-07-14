@@ -340,7 +340,13 @@
 - (void)_setImageForAsset {
   if (_layerModel.imageAsset.imageName) {
     NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
-    NSImage *image = [NSImage imageNamed:components.firstObject];
+    NSImage *image = nil;
+    if (_layerModel.imageAsset.image) {
+        image = _layerModel.imageAsset.image;
+    }
+    else {
+        image = [NSImage imageNamed:components.firstObject];
+    }
     if (image) {
       NSWindow *window = [NSApp mainWindow];
       CGFloat desiredScaleFactor = [window backingScaleFactor];

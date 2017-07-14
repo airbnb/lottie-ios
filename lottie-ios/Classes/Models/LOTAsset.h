@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class LOTLayerGroup;
 @class LOTLayer;
 @class LOTAssetGroup;
+@class UIImage;
 
 @interface LOTAsset : NSObject
 
