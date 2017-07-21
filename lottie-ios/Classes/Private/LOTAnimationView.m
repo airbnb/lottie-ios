@@ -380,19 +380,23 @@
 }
 
 - (void)playWithCompletion:(LOTAnimationCompletionBlock)completion {
-  if (completion) {
-    self.completionBlock = completion;
-  }
+    [self playWithCompletion:completion forRunloopMode:nil];
+}
 
-  if (!hasFullyInitialized_) {
-    [_animationState setAnimationIsPlaying:YES];
-    return;
-  }
-  
-  if (_animationState.animationIsPlaying == NO) {
-    [_animationState setAnimationIsPlaying:YES];
-    [self startDisplayLink];
-  }
+- (void)playWithCompletion:(nullable LOTAnimationCompletionBlock)completion forRunloopMode:(nullable NSRunLoopMode)mode{
+    if (completion) {
+        self.completionBlock = completion;
+    }
+    
+    if (!hasFullyInitialized_) {
+        [_animationState setAnimationIsPlaying:YES];
+        return;
+    }
+    
+    if (_animationState.animationIsPlaying == NO) {
+        [_animationState setAnimationIsPlaying:YES];
+        [self startDisplayLinkWithRunloop:mode];
+    }
 }
 
 - (void)pause {
@@ -427,16 +431,22 @@
 }
 
 # pragma mark - Display Link
+- (void)startDisplayLinkWithRunloop:(NSRunLoopMode)mode {
+    if (_animationState.animationIsPlaying == NO) {
+        return;
+    }
+    
+    [self stopDisplayLink];
+    
+    if(!mode){
+        mode = NSDefaultRunLoopMode;
+    }
+    _completionDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(checkAnimationState)];
+    [_completionDisplayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:mode];
+}
 
 - (void)startDisplayLink {
-  if (_animationState.animationIsPlaying == NO) {
-    return;
-  }
-  
-  [self stopDisplayLink];
-  
-  _completionDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(checkAnimationState)];
-  [_completionDisplayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+  [self startDisplayLinkWithRunloop:NSDefaultRunLoopMode];
 }
 
 - (void)stopDisplayLink {

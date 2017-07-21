@@ -29,6 +29,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 @property (nonatomic, readonly) CGFloat animationDuration;
 @property (nonatomic, assign) BOOL cacheEnable;
 
+- (void)playWithCompletion:(nullable LOTAnimationCompletionBlock)completion forRunloopMode:(nullable NSRunLoopMode)mode;
 - (void)playWithCompletion:(nullable LOTAnimationCompletionBlock)completion;
 - (void)play;
 - (void)pause;
