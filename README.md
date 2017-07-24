@@ -19,6 +19,11 @@ Here is just a small sampling of the power of Lottie
 
 ![Abcs](_Gifs/Examples4.gif)
 
+## PSA
+Lottie V2 is currently in development! We are rewriting the render system. This will be a major update that will address most of the currently outstanding issues. We will only consider merging minor bugfixes in the meantime! Stay Tuned!
+Please forward all questions to Brandon Withrow, @thewithra on twitter or lottie@airbnb.com
+Thanks!
+
 ## Using Lottie
 Lottie supports iOS 8 and above.
 Lottie animations can be loaded from bundled JSON or from a URL
