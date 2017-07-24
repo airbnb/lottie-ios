@@ -23,8 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) NSArray <LOTLayer *> *layers;
 
-- (LOTLayer *)layerModelForID:(NSNumber *)layerID;
-- (LOTLayer *)layerForReferenceID:(NSString *)referenceID;
+- (nullable LOTLayer *)layerModelForID:(NSNumber *)layerID;
+- (nullable LOTLayer *)layerForReferenceID:(NSString *)referenceID;
 
 @end
 

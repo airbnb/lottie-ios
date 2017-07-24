@@ -122,7 +122,7 @@
         CGRect convertedBounds = [child.childView.layer.superlayer convertRect:selfBounds fromLayer:self];
         child.childView.layer.frame = convertedBounds;
       } break;
-      default:
+      case LOTConstraintTypeNone:
         break;
     }
   }

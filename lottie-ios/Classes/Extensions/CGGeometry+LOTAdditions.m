@@ -10,8 +10,8 @@ const CGSize CGSizeMax = {CGFLOAT_MAX, CGFLOAT_MAX};
 // For a rect with .origin={5, 5.5}, .size=(10, 10), it will return .origin={5,5}, .size={10, 11};
 // LOT_RectIntegral will return {5,5}, {10, 10}.
 CGRect LOT_RectIntegral(CGRect rect) {
-  rect.origin = CGPointMake(rintf(rect.origin.x), rintf(rect.origin.y));
-  rect.size = CGSizeMake(ceilf(rect.size.width), ceil(rect.size.height));
+  rect.origin = CGPointMake(rintf((float)rect.origin.x), rintf((float)rect.origin.y));
+  rect.size = CGSizeMake(ceilf((float)rect.size.width), ceil(rect.size.height));
   return rect;
 }
 
@@ -93,8 +93,8 @@ CGRect LOT_RectInsetAll(CGRect rect, CGFloat leftInset, CGFloat rightInset, CGFl
 
 CGRect LOT_RectFramedCenteredInRect(CGRect rect, CGSize size, BOOL integral) {
   CGRect result;
-  result.origin.x = rect.origin.x + rintf(0.5f * (rect.size.width - size.width));
-  result.origin.y = rect.origin.y + rintf(0.5f * (rect.size.height - size.height));
+  result.origin.x = rect.origin.x + rintf(0.5f * (float)(rect.size.width - size.width));
+  result.origin.y = rect.origin.y + rintf(0.5f * (float)(rect.size.height - size.height));
   result.size = size;
   
   if (integral) { result = LOT_RectIntegral(result); }
@@ -106,7 +106,7 @@ CGRect LOT_RectFramedCenteredInRect(CGRect rect, CGSize size, BOOL integral) {
 CGRect LOT_RectFramedLeftInRect(CGRect rect, CGSize size, CGFloat inset, BOOL integral) {
   CGRect result;
   result.origin.x = rect.origin.x + inset;
-  result.origin.y = rect.origin.y + rintf(0.5f * (rect.size.height - size.height));
+  result.origin.y = rect.origin.y + rintf(0.5f * (float)(rect.size.height - size.height));
   result.size = size;
   
   if (integral) { result = LOT_RectIntegral(result); }
@@ -116,7 +116,7 @@ CGRect LOT_RectFramedLeftInRect(CGRect rect, CGSize size, CGFloat inset, BOOL in
 CGRect LOT_RectFramedRightInRect(CGRect rect, CGSize size, CGFloat inset, BOOL integral) {
   CGRect result;
   result.origin.x = rect.origin.x + rect.size.width - size.width - inset;
-  result.origin.y = rect.origin.y + rintf(0.5f * (rect.size.height - size.height));
+  result.origin.y = rect.origin.y + rintf(0.5f * (float)(rect.size.height - size.height));
   result.size = size;
   
   if (integral) { result = LOT_RectIntegral(result); }
@@ -125,7 +125,7 @@ CGRect LOT_RectFramedRightInRect(CGRect rect, CGSize size, CGFloat inset, BOOL i
 
 CGRect LOT_RectFramedTopInRect(CGRect rect, CGSize size, CGFloat inset, BOOL integral) {
   CGRect result;
-  result.origin.x = rect.origin.x + rintf(0.5f * (rect.size.width - size.width));
+  result.origin.x = rect.origin.x + rintf(0.5f * (float)(rect.size.width - size.width));
   result.origin.y = rect.origin.y + inset;
   result.size = size;
   
@@ -135,7 +135,7 @@ CGRect LOT_RectFramedTopInRect(CGRect rect, CGSize size, CGFloat inset, BOOL int
 
 CGRect LOT_RectFramedBottomInRect(CGRect rect, CGSize size, CGFloat inset, BOOL integral) {
   CGRect result;
-  result.origin.x = rect.origin.x + rintf(0.5f * (rect.size.width - size.width));
+  result.origin.x = rect.origin.x + rintf(0.5f * (float)(rect.size.width - size.width));
   result.origin.y = rect.origin.y + rect.size.height - size.height - inset;
   result.size = size;
   
@@ -188,7 +188,7 @@ CGRect LOT_RectFramedBottomRightInRect(CGRect rect, CGSize size, CGFloat insetWi
 CGRect LOT_RectAttachedLeftToRect(CGRect rect, CGSize size, CGFloat margin, BOOL integral) {
   CGRect result;
   result.origin.x = rect.origin.x - size.width - margin;
-  result.origin.y = rect.origin.y + rintf(0.5f * (rect.size.height - size.height));
+  result.origin.y = rect.origin.y + rintf(0.5f * (float)(rect.size.height - size.height));
   result.size = size;
   
   if (integral) { result = LOT_RectIntegral(result); }
@@ -198,7 +198,7 @@ CGRect LOT_RectAttachedLeftToRect(CGRect rect, CGSize size, CGFloat margin, BOOL
 CGRect LOT_RectAttachedRightToRect(CGRect rect, CGSize size, CGFloat margin, BOOL integral) {
   CGRect result;
   result.origin.x = rect.origin.x + rect.size.width + margin;
-  result.origin.y = rect.origin.y + rintf(0.5f * (rect.size.height - size.height));
+  result.origin.y = rect.origin.y + rintf(0.5f * (float)(rect.size.height - size.height));
   result.size = size;
   
   if (integral) { result = LOT_RectIntegral(result); }
@@ -207,7 +207,7 @@ CGRect LOT_RectAttachedRightToRect(CGRect rect, CGSize size, CGFloat margin, BOO
 
 CGRect LOT_RectAttachedTopToRect(CGRect rect, CGSize size, CGFloat margin, BOOL integral) {
   CGRect result;
-  result.origin.x = rect.origin.x + rintf(0.5f * (rect.size.width - size.width));
+  result.origin.x = rect.origin.x + rintf(0.5f * (float)(rect.size.width - size.width));
   result.origin.y = rect.origin.y - size.height - margin;
   result.size = size;
   
@@ -237,7 +237,7 @@ CGRect LOT_RectAttachedTopRightToRect(CGRect rect, CGSize size, CGFloat marginWi
 
 CGRect LOT_RectAttachedBottomToRect(CGRect rect, CGSize size, CGFloat margin, BOOL integral) {
   CGRect result;
-  result.origin.x = rect.origin.x + rintf(0.5f * (rect.size.width - size.width));
+  result.origin.x = rect.origin.x + rintf(0.5f * (float)(rect.size.width - size.width));
   result.origin.y = rect.origin.y + rect.size.height + margin;
   result.size = size;
   
@@ -320,10 +320,10 @@ CGFloat LOT_DegreesToRadians(CGFloat degrees) {
 }
 
 GLKMatrix4 LOT_GLKMatrix4FromCATransform(CATransform3D xform) {
-  return GLKMatrix4Make(xform.m11, xform.m12, xform.m13, xform.m14,
-                        xform.m21, xform.m22, xform.m23, xform.m24,
-                        xform.m31, xform.m32, xform.m33, xform.m34,
-                        xform.m41, xform.m42, xform.m43, xform.m44);
+  return GLKMatrix4Make((float)xform.m11, (float)xform.m12, (float)xform.m13, (float)xform.m14,
+                        (float)xform.m21, (float)xform.m22, (float)xform.m23, (float)xform.m24,
+                        (float)xform.m31, (float)xform.m32, (float)xform.m33, (float)xform.m34,
+                        (float)xform.m41, (float)xform.m42, (float)xform.m43, (float)xform.m44);
 }
 
 CATransform3D LOT_CATransform3DFromGLKMatrix4(GLKMatrix4 xform) {
@@ -356,10 +356,10 @@ CATransform3D LOT_CATransform3DSlerpToTransform(CATransform3D fromXorm, CATransf
   GLKMatrix4 xform2 = LOT_GLKMatrix4FromCATransform(toXform);
   GLKQuaternion q1 = GLKQuaternionMakeWithMatrix4(xform1);
   GLKQuaternion q2 = GLKQuaternionMakeWithMatrix4(xform2);
-  GLKQuaternion r1 = GLKQuaternionSlerp(q1, q2, amount);
+  GLKQuaternion r1 = GLKQuaternionSlerp(q1, q2, (float)amount);
   GLKVector4 t1 = GLKVector4Make(xform1.m30, xform1.m31, xform1.m32, xform1.m33);
   GLKVector4 t2 = GLKVector4Make(xform2.m30, xform2.m31, xform2.m32, xform2.m33);
-  GLKVector4 r2 = GLKVector4Lerp(t1, t2, amount);
+  GLKVector4 r2 = GLKVector4Lerp(t1, t2, (float)amount);
   
   GLKMatrix4 rX = GLKMatrix4MakeWithQuaternion(r1);
   rX.m30 = r2.x;

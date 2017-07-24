@@ -56,7 +56,7 @@
   }
 
   CGFloat threeSixty = 360;
-  CGFloat offsetAmount = fmodf(fabs(presentationLayer.trimOffset) , threeSixty) / threeSixty;
+  CGFloat offsetAmount = fmod(fabs(presentationLayer.trimOffset) , (float)threeSixty) / threeSixty;
   offsetAmount = presentationLayer.trimOffset < 0 ? offsetAmount * -1 : offsetAmount;
   BOOL startFirst = presentationLayer.trimStart < presentationLayer.trimEnd;
   

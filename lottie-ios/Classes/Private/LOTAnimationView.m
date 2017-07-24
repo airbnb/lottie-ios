@@ -65,7 +65,7 @@
   }
   CGFloat speed = _animationIsPlaying ? _animationSpeed : 0;
   
-  _layer.speed = speed;
+  _layer.speed = (float)speed;
   _layer.repeatCount = _loopAnimation ? HUGE_VALF : 0;
   _layer.timeOffset = 0;
   _layer.beginTime = 0;
@@ -84,11 +84,11 @@
   if (!_needsAnimationUpdate) {
     _needsAnimationUpdate = YES;
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-      _needsAnimationUpdate = NO;
-      if (_animationIsPlaying) {
-        [self setAnimationIsPlaying:_animationIsPlaying];
+      self->_needsAnimationUpdate = NO;
+      if (self->_animationIsPlaying) {
+        [self setAnimationIsPlaying:self->_animationIsPlaying];
       } else {
-        [self setAnimatedProgress:_animatedProgress updateAnimation:true];
+        [self setAnimatedProgress:self->_animatedProgress updateAnimation:true];
       }
       [self.layer setNeedsDisplay];
     }];
@@ -152,8 +152,8 @@
 - (CGFloat)animatedProgress {
   if (_animationIsPlaying) {
     CFTimeInterval localTime = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
-    NSInteger eLocalTime = roundf(localTime * 10000);
-    NSInteger eDuration = roundf(_animationDuration * 10000);
+    NSInteger eLocalTime = lroundf((float)localTime * 10000.f);
+    NSInteger eDuration = lroundf((float)_animationDuration * 10000.f);
     if (eLocalTime > 0) {
       return  (float)eLocalTime / (float)eDuration;
     }
@@ -166,8 +166,8 @@
     CFTimeInterval localTime = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
     if (_previousLocalTime == localTime && localTime != 0) {
       _animationIsPlaying = NO;
-      NSInteger eLocalTime = roundf(localTime * 10000);
-      NSInteger eDuration = roundf(_animationDuration * 10000);
+      NSInteger eLocalTime = lroundf((float)localTime * 10000.f);
+      NSInteger eDuration = lroundf((float)_animationDuration * 10000.f);
 
       _animatedProgress = (float)eLocalTime / (float)eDuration;
       if (eLocalTime == eDuration) {
@@ -296,11 +296,11 @@
           return;
         }
         
-        LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON];
+        LOTComposition *laScene2 = [[LOTComposition alloc] initWithJSON:animationJSON];
         dispatch_async(dispatch_get_main_queue(), ^(void){
-          [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:url.absoluteString];
+          [[LOTAnimationCache sharedCache] addAnimation:laScene2 forKey:url.absoluteString];
           [self _initializeAnimationContainer];
-          [self _setupWithSceneModel:laScene restoreAnimationState:YES];
+          [self _setupWithSceneModel:laScene2 restoreAnimationState:YES];
         });
       });
     }
@@ -502,6 +502,8 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-macros"
 #define LOTViewContentMode UIViewContentMode
 #define LOTViewContentModeScaleToFill UIViewContentModeScaleToFill
 #define LOTViewContentModeScaleAspectFit UIViewContentModeScaleAspectFit
@@ -516,6 +518,7 @@
 #define LOTViewContentModeTopRight UIViewContentModeTopRight
 #define LOTViewContentModeBottomLeft UIViewContentModeBottomLeft
 #define LOTViewContentModeBottomRight UIViewContentModeBottomRight
+#pragma clang diagnostic pop
 
 - (void)didMoveToWindow {
   [super didMoveToWindow];

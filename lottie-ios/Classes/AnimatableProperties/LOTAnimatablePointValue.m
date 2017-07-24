@@ -147,9 +147,9 @@
       
       if (timingControlPoint1 && timingControlPoint2) {
         // Easing function
-        CGPoint cp1 = [self _pointFromValueDict:timingControlPoint1];
-        CGPoint cp2 = [self _pointFromValueDict:timingControlPoint2];
-        timingFunction = [CAMediaTimingFunction functionWithControlPoints:cp1.x :cp1.y :cp2.x :cp2.y];
+        CGPoint point1 = [self _pointFromValueDict:timingControlPoint1];
+        CGPoint point2 = [self _pointFromValueDict:timingControlPoint2];
+        timingFunction = [CAMediaTimingFunction functionWithControlPoints:(float)point1.x :(float)point1.y :(float)point2.x :(float)point2.y];
       } else {
         // No easing function specified, fallback to linear
         timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];

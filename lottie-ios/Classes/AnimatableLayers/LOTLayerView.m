@@ -332,9 +332,12 @@
             }
             NSString *imagePath = [rootDirectory stringByAppendingPathComponent:_layerModel.imageAsset.imageName];
             image = [UIImage imageWithContentsOfFile:imagePath];
-        }else{
-            NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
-            image = [UIImage imageNamed:components.firstObject inBundle:_bundle compatibleWithTraitCollection:nil];
+        } else {
+            NSArray<NSString *> *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
+            NSString *imageName = components.firstObject;
+            if (imageName) {
+                image = [UIImage imageNamed:imageName inBundle:_bundle compatibleWithTraitCollection:nil];
+            }
         }
         
         if (image) {
