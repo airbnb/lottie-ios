@@ -39,6 +39,5 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, readonly) LOTComposition * _Nonnull sceneModel;
 @property (nonatomic, strong) LOTAnimationState *_Nonnull animationState;
-@property (nonatomic, copy, nullable) LOTAnimationCompletionBlock completionBlock;
 
 @end
