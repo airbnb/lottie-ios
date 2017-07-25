@@ -57,6 +57,9 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// Enables or disables caching of the backing animation model. Defaults to YES
 @property (nonatomic, assign) BOOL cacheEnable;
 
+/// Sets a completion block to call when the animation has completed
+@property (nonatomic, copy, nullable) LOTAnimationCompletionBlock completionBlock;
+
 /* 
  * Plays the animation from its current position to a specific progress. 
  * The animation will start from its current position.
