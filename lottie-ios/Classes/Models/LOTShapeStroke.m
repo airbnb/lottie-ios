@@ -9,6 +9,7 @@
 #import "LOTShapeStroke.h"
 #import "LOTAnimatableNumberValue.h"
 #import "LOTAnimatableColorValue.h"
+#import "CGGeometry+LOTAdditions.h"
 
 @implementation LOTShapeStroke
 
@@ -35,6 +36,9 @@
   if (opacity) {
     _opacity = [[LOTAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:frameRate];
     [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
+    [_opacity.keyframeGroup remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+      return LOT_RemapValue(inValue, 0, 100, 0, 1);
+    }];
   }
   
   _capType = [jsonDictionary[@"lc"] integerValue] - 1;

@@ -15,7 +15,8 @@
 
 @interface LOTComposition : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
+             withAssetBundle:(NSBundle *)bundle;
 
 @property (nonatomic, readonly) CGRect compBounds;
 @property (nonatomic, readonly) NSNumber *startFrame;
@@ -25,5 +26,6 @@
 @property (nonatomic, readonly) LOTLayerGroup *layerGroup;
 @property (nonatomic, readonly) LOTAssetGroup *assetGroup;
 @property (nonatomic, readwrite) NSString *rootDirectory;
+@property (nonatomic, readonly) NSBundle *assetBundle;
 
 @end

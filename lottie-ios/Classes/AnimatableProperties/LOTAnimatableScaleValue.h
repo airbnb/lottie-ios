@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "LOTAnimatableValue.h"
+#import "LOTKeyframe.h"
 
 @interface LOTAnimatableScaleValue : NSObject <LOTAnimatableValue>
 
 - (instancetype)initWithScaleValues:(NSDictionary *)scaleValues frameRate:(NSNumber *)frameRate;
 
 @property (nonatomic, readonly) CATransform3D initialScale;
+@property (nonatomic, readonly) LOTKeyframeGroup *keyframeGroup;
 
 @end

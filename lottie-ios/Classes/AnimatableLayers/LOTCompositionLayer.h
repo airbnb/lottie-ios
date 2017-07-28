@@ -14,6 +14,7 @@
 
 @interface LOTCompositionLayer : CALayer
 
+/// DEPRECATED
 - (instancetype)initWithLayerGroup:(LOTLayerGroup *)layerGroup
                     withAssetGroup:(LOTAssetGroup *)assetGroup
                         withBounds:(CGRect)bounds
@@ -23,5 +24,7 @@
        toLayerNamed:(NSString *)layer;
 
 - (void)layoutCustomChildLayers;
+
+@property (nonatomic) NSNumber *currentFrame;
 
 @end

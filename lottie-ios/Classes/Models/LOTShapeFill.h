@@ -18,5 +18,6 @@
 @property (nonatomic, readonly) BOOL fillEnabled;
 @property (nonatomic, readonly) LOTAnimatableColorValue *color;
 @property (nonatomic, readonly) LOTAnimatableNumberValue *opacity;
+@property (nonatomic, readonly) BOOL evenOddFillRule;
 
 @end

@@ -16,5 +16,6 @@
 
 @property (nonatomic, readonly) LOTAnimatablePointValue *position;
 @property (nonatomic, readonly) LOTAnimatablePointValue *size;
+@property (nonatomic, readonly) BOOL reversed;
 
 @end

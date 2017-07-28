@@ -12,6 +12,8 @@
 #import "LOTAnimationView_Internal.h"
 #import "LOTAsset.h"
 #import "LOTAssetGroup.h"
+#import "LOTHelpers.h"
+#import "LOTLayerContainer.h"
 
 @interface LOTCustomChild : NSObject
 
@@ -34,7 +36,7 @@
 - (instancetype)initWithLayerGroup:(LOTLayerGroup *)layerGroup
                     withAssetGroup:(LOTAssetGroup *)assetGroup
                         withBounds:(CGRect)bounds
-                          inBundle:(NSBundle *)bundle{
+                          inBundle:(NSBundle *)bundle {
   self = [super init];
   if (self) {
     self.masksToBounds = YES;
@@ -46,8 +48,7 @@
 - (void)_setupWithLayerGroup:(LOTLayerGroup *)layerGroup
               withAssetGroup:(LOTAssetGroup *)assetGroup
                   withBounds:(CGRect)bounds
-                    inBundle:(NSBundle *)bundle
-               {
+                    inBundle:(NSBundle *)bundle {
   if (_customLayers) {
     for (LOTCustomChild *child in _customLayers) {
       [child.childView.layer removeFromSuperlayer];
@@ -155,5 +156,7 @@
   [_customLayers addObject:newChild];
   [self layoutCustomChildLayers];
 }
+
+
 
 @end

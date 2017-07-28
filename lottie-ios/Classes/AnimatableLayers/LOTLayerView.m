@@ -15,6 +15,9 @@
 #import "LOTMaskLayer.h"
 #import "CGGeometry+LOTAdditions.h"
 
+#import "LOTHelpers.h"
+#import "LOTRenderGroup.h"
+
 @interface LOTParentLayer : LOTAnimatableLayer
 
 - (instancetype)initWithParentModel:(LOTLayer *)parent;
@@ -93,6 +96,8 @@
   LOTMaskLayer *_maskLayer;
   CALayer *_childSolid;
   NSBundle *_bundle;
+  
+  LOTRenderGroup *_childGroup;
 }
 
 - (instancetype)initWithModel:(LOTLayer *)model inLayerGroup:(LOTLayerGroup *)layerGroup{
@@ -169,6 +174,14 @@
   _childContainerLayer.anchorPoint = _layerModel.anchor.initialPoint;
   _childContainerLayer.transform = _layerModel.scale.initialScale;
   _childContainerLayer.sublayerTransform = CATransform3DMakeRotation(_layerModel.rotation.initialValue.floatValue, 0, 0, 1);
+  
+  if (DEBUG_USE_NEW_RENDERER) {
+    _childGroup = [[LOTRenderGroup alloc] initWithInputNode:nil contents:_layerModel.shapes];
+    [_childContainerLayer addSublayer:_childGroup.containerLayer];
+    [_childGroup updateWithFrame:@0];
+    return;
+  }
+  
   self.hidden = _layerModel.hasInAnimation;
   
   NSArray *groupItems = _layerModel.shapes;
@@ -246,6 +259,12 @@
   }
 
   [self _buildAnimations];
+}
+
+- (void)setCurrentFrame:(NSNumber *)currentFrame {
+  _currentFrame = currentFrame;
+  NSLog(@"--------------------------------- Layer Update %@ ---------------------------------", currentFrame);
+  [_childGroup updateWithFrame:currentFrame];
 }
 
 - (void)_buildAnimations {

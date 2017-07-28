@@ -8,6 +8,7 @@
 
 #import "LOTPlatformCompat.h"
 #import "LOTAnimatableBoundsValue.h"
+#import "LOTHelpers.h"
 
 @interface LOTAnimatableBoundsValue ()
 
@@ -29,6 +30,9 @@
   if (self) {
     _frameRate = frameRate;
     id value = sizeValue[@"k"];
+    if (DEBUG_USE_NEW_RENDERER) {
+      _keyframeGroup = [[LOTKeyframeGroup alloc] initWithData:value];
+    }
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
         [(NSArray *)value firstObject][@"t"]) {

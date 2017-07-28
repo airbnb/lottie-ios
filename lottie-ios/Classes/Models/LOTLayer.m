@@ -53,6 +53,9 @@
   
   _parentID = [jsonDictionary[@"parent"] copy];
   
+  if (jsonDictionary[@"st"]) {
+    _startFrame = [jsonDictionary[@"st"] copy];
+  }
   _inFrame = [jsonDictionary[@"ip"] copy];
   _outFrame = [jsonDictionary[@"op"] copy];
   _framerate = framerate;
@@ -88,6 +91,9 @@
   if (opacity) {
     _opacity = [[LOTAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:_framerate];
     [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
+    [_opacity.keyframeGroup remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+      return LOT_RemapValue(inValue, 0, 100, 0, 1);
+    }];
   }
   
   NSDictionary *rotation = ks[@"r"];
@@ -97,6 +103,9 @@
   if (rotation) {
     _rotation = [[LOTAnimatableNumberValue alloc] initWithNumberValues:rotation frameRate:_framerate];
     [_rotation remapValueWithBlock:^CGFloat(CGFloat inValue) {
+      return LOT_DegreesToRadians(inValue);
+    }];
+    [_rotation.keyframeGroup remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
       return LOT_DegreesToRadians(inValue);
     }];
   }
@@ -120,6 +129,9 @@
   NSDictionary *scale = ks[@"s"];
   if (scale) {
     _scale = [[LOTAnimatableScaleValue alloc] initWithScaleValues:scale frameRate:_framerate];
+    [_scale.keyframeGroup remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+      return LOT_RemapValue(inValue, 0, 100, 0, 1);
+    }];
   }
   
   _matteType = [jsonDictionary[@"tt"] integerValue];

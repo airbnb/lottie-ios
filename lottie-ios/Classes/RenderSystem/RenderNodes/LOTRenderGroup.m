@@ -1,0 +1,175 @@
+//
+//  LOTRenderGroup.m
+//  Lottie
+//
+//  Created by brandon_withrow on 6/27/17.
+//  Copyright © 2017 Airbnb. All rights reserved.
+//
+
+#import "LOTRenderGroup.h"
+#import "LOTModels.h"
+#import "LOTPathAnimator.h"
+#import "LOTFillRenderer.h"
+#import "LOTStrokeRenderer.h"
+#import "LOTNumberInterpolator.h"
+#import "LOTTransformInterpolator.h"
+#import "LOTCircleAnimator.h"
+#import "LOTRoundedRectAnimator.h"
+#import "LOTTrimPathNode.h"
+#import "LOTShapeStar.h"
+#import "LOTPolygonAnimator.h"
+#import "LOTPolystarAnimator.h"
+#import "LOTShapeGradientFill.h"
+#import "LOTGradientFillRender.h"
+#import "LOTRepeaterRenderer.h"
+#import "LOTShapeRepeater.h"
+
+@implementation LOTRenderGroup {
+  LOTAnimatorNode *_rootNode;
+  LOTBezierPath *_outputPath;
+  LOTBezierPath *_localPath;
+  
+  LOTNumberInterpolator *_opacityInterpolator;
+  LOTTransformInterpolator *_transformInterolator;
+}
+
+- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode * _Nullable)inputNode
+                                   contents:(NSArray * _Nonnull)contents {
+  self = [super initWithInputNode:inputNode];
+  if (self) {
+    _containerLayer = [CALayer layer];
+    _containerLayer.actions = @{@"transform": [NSNull null],
+                                @"opacity": [NSNull null]};
+    [self buildContents:contents];
+  }
+  return self;
+}
+
+- (void)buildContents:(NSArray *)contents {
+  LOTAnimatorNode *previousNode = nil;
+  LOTShapeTransform *transform;
+  for (id item in contents) {
+    if ([item isKindOfClass:[LOTShapeFill class]]) {
+      LOTFillRenderer *fillRenderer = [[LOTFillRenderer alloc] initWithInputNode:previousNode
+                                                                       shapeFill:(LOTShapeFill *)item];
+      [self.containerLayer insertSublayer:fillRenderer.outputLayer atIndex:0];
+      previousNode = fillRenderer;
+    } else if ([item isKindOfClass:[LOTShapeStroke class]]) {
+      LOTStrokeRenderer *strokRenderer = [[LOTStrokeRenderer alloc] initWithInputNode:previousNode
+                                                                          shapeStroke:(LOTShapeStroke *)item];
+      [self.containerLayer insertSublayer:strokRenderer.outputLayer atIndex:0];
+      previousNode = strokRenderer;
+    } else if ([item isKindOfClass:[LOTShapePath class]]) {
+      LOTPathAnimator *pathAnimator = [[LOTPathAnimator alloc] initWithInputNode:previousNode
+                                                                       shapePath:(LOTShapePath *)item];
+      previousNode = pathAnimator;
+    } else if ([item isKindOfClass:[LOTShapeRectangle class]]) {
+      LOTRoundedRectAnimator *rectAnimator = [[LOTRoundedRectAnimator alloc] initWithInputNode:previousNode
+                                                                                shapeRectangle:(LOTShapeRectangle *)item];
+      previousNode = rectAnimator;
+    } else if ([item isKindOfClass:[LOTShapeCircle class]]) {
+      LOTCircleAnimator *circleAnimator = [[LOTCircleAnimator alloc] initWithInputNode:previousNode
+                                                                           shapeCircle:(LOTShapeCircle*)item];
+      previousNode = circleAnimator;
+    } else if ([item isKindOfClass:[LOTShapeGroup class]]) {
+      LOTShapeGroup *shapeGroup = (LOTShapeGroup *)item;
+      LOTRenderGroup *renderGroup = [[LOTRenderGroup alloc] initWithInputNode:previousNode contents:shapeGroup.items];
+      [self.containerLayer insertSublayer:renderGroup.containerLayer atIndex:0];
+      previousNode = renderGroup;
+    } else if ([item isKindOfClass:[LOTShapeTransform class]]) {
+      transform = (LOTShapeTransform *)item;
+    } else if ([item isKindOfClass:[LOTShapeTrimPath class]]) {
+      LOTTrimPathNode *trim = [[LOTTrimPathNode alloc] initWithInputNode:previousNode trimPath:(LOTShapeTrimPath*)item];
+      previousNode = trim;
+    } else if ([item isKindOfClass:[LOTShapeStar class]]) {
+      LOTShapeStar *star = (LOTShapeStar *)item;
+      if (star.type == LOTPolystarShapeStar) {
+        LOTPolystarAnimator *starAnimator = [[LOTPolystarAnimator alloc] initWithInputNode:previousNode shapeStar:star];
+        previousNode = starAnimator;
+      }
+      if (star.type == LOTPolystarShapePolygon) {
+        LOTPolygonAnimator *polygonAnimator = [[LOTPolygonAnimator alloc] initWithInputNode:previousNode shapePolygon:star];
+        previousNode = polygonAnimator;
+      }
+    } else if ([item isKindOfClass:[LOTShapeGradientFill class]]) {
+      LOTGradientFillRender *gradientFill = [[LOTGradientFillRender alloc] initWithInputNode:previousNode shapeGradientFill:(LOTShapeGradientFill *)item];
+      previousNode = gradientFill;
+      [self.containerLayer insertSublayer:gradientFill.outputLayer atIndex:0];
+    } else if ([item isKindOfClass:[LOTShapeRepeater class]]) {
+      LOTRepeaterRenderer *repeater = [[LOTRepeaterRenderer alloc] initWithInputNode:previousNode shapeRepeater:(LOTShapeRepeater *)item];
+      previousNode = repeater;
+      [self.containerLayer insertSublayer:repeater.outputLayer atIndex:0];
+    }
+  }
+  if (transform) {
+    _opacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:transform.opacity.keyframeGroup.keyframes];
+    _transformInterolator = [[LOTTransformInterpolator alloc] initWithPosition:transform.position.keyframeGroup.keyframes
+                                                                      rotation:transform.rotation.keyframeGroup.keyframes
+                                                                        anchor:transform.anchor.keyframeGroup.keyframes
+                                                                         scale:transform.scale.keyframeGroup.keyframes];
+  }
+  _rootNode = previousNode;
+}
+
+- (BOOL)needsUpdateForFrame:(NSNumber *)frame {
+  return ([_opacityInterpolator hasUpdateForFrame:frame] ||
+          [_transformInterolator hasUpdateForFrame:frame] ||
+          [_rootNode needsUpdateForFrame:frame]);
+
+}
+
+- (BOOL)updateWithFrame:(NSNumber *)frame withModifierBlock:(void (^ _Nullable)(LOTAnimatorNode * _Nonnull))modifier forceLocalUpdate:(BOOL)forceUpdate {
+  indentation_level = indentation_level + 1;
+  [_rootNode updateWithFrame:frame withModifierBlock:modifier forceLocalUpdate:forceUpdate];
+  indentation_level = indentation_level - 1;
+  BOOL update = [super updateWithFrame:frame withModifierBlock:modifier forceLocalUpdate:forceUpdate];
+  return update;
+}
+
+- (void)performLocalUpdate {
+  if (_opacityInterpolator) {
+    self.containerLayer.opacity = [_opacityInterpolator floatValueForFrame:self.currentFrame];
+  }
+  if (_transformInterolator) {
+    CATransform3D xform = [_transformInterolator transformForFrame:self.currentFrame];
+    self.containerLayer.transform = xform;
+    
+    CGAffineTransform appliedXform = CATransform3DGetAffineTransform(xform);
+    _localPath = [_rootNode.outputPath copy];
+    [_localPath LOT_applyTransform:appliedXform];
+  } else {
+    _localPath = [_rootNode.outputPath copy];
+  }
+}
+
+- (void)rebuildOutputs {
+  if (self.inputNode) {
+    _outputPath = [self.inputNode.outputPath copy];
+    [_outputPath LOT_appendPath:self.localPath];
+  } else {
+    _outputPath = self.localPath;
+  }
+}
+
+-(void)setPathShouldCacheLengths:(BOOL)pathShouldCacheLengths {
+  [super setPathShouldCacheLengths:pathShouldCacheLengths];
+  _rootNode.pathShouldCacheLengths = pathShouldCacheLengths;
+}
+
+- (LOTBezierPath *)localPath {
+  return _localPath;
+}
+
+- (LOTBezierPath *)outputPath {
+  return _outputPath;
+}
+
+@end
+
+/*
+ 
+ A render group is a colleciton of items, some animators and some rendered objects.
+ the render group itself will hold the items in a subview and will apply a transform to them.
+ the render group will also output the sum of all its paths with the transform applied on request
+ 
+ */
