@@ -26,5 +26,5 @@ typedef enum : NSUInteger {
 @property (nonatomic, readonly) LOTMaskMode maskMode;
 @property (nonatomic, readonly) LOTAnimatableShapeValue *maskPath;
 @property (nonatomic, readonly) LOTAnimatableNumberValue *opacity;
-
+@property (nonatomic, readonly) LOTAnimatableNumberValue *expansion;
 @end

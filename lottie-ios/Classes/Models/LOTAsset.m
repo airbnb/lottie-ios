@@ -15,10 +15,12 @@
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
                   withBounds:(CGRect)bounds
-               withFramerate:(NSNumber *)framerate
-              withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup{
+               withFramerate:(NSNumber * _Nullable)framerate
+              withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup
+             withAssetBundle:(NSBundle *_Nonnull)bundle {
   self = [super init];
   if (self) {
+    _assetBundle = bundle;
     [self _mapFromJSON:jsonDictionary
             withBounds:bounds
          withFramerate:framerate

@@ -14,6 +14,7 @@
 #import "LOTAnimationView_Internal.h"
 #import "LOTAnimationCache.h"
 #import "LOTCompositionLayer.h"
+#import "LOTCompositionContainer.h"
 
 @implementation LOTAnimationState {
   BOOL _needsAnimationUpdate;
@@ -189,6 +190,7 @@
 
 @implementation LOTAnimationView {
   CALayer *_timingLayer;
+  LOTCompositionContainer *_compContainer;
   LOTCompositionLayer *_compLayer;
   CADisplayLink *_completionDisplayLink;
   BOOL hasFullyInitialized_;
@@ -217,15 +219,11 @@
   NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
                                                                          options:0 error:&error] : nil;
   if (JSONObject && !error) {
-    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject];
+    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:bundle];
     [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
     return [[LOTAnimationView alloc] initWithModel:laScene inBundle:bundle];
   }
-  
-  NSException* resourceNotFoundException = [NSException exceptionWithName:@"ResourceNotFoundException"
-                                                                   reason:[error localizedDescription]
-                                                                 userInfo:nil];
-  @throw resourceNotFoundException;
+  return [[LOTAnimationView alloc] initWithModel:nil inBundle:nil];
 }
 
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON {
@@ -233,7 +231,7 @@
 }
 
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON inBundle:(NSBundle *)bundle{
-  LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON];
+  LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON withAssetBundle:bundle];
   return [[LOTAnimationView alloc] initWithModel:laScene inBundle:bundle];
 }
 
@@ -250,7 +248,7 @@
     NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
                                                                            options:0 error:&error] : nil;
     if (JSONObject && !error) {
-        LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject];
+        LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:[NSBundle mainBundle]];
         laScene.rootDirectory = [filePath stringByDeletingLastPathComponent];
         [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
         return [[LOTAnimationView alloc] initWithModel:laScene inBundle:[NSBundle mainBundle]];
@@ -283,7 +281,7 @@
           return;
         }
         
-        LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON];
+        LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON withAssetBundle:[NSBundle mainBundle]];
         dispatch_async(dispatch_get_main_queue(), ^(void){
           [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:url.absoluteString];
           [self _initializeAnimationContainer];
@@ -327,6 +325,13 @@
 
 - (void)_setupWithSceneModel:(LOTComposition *)model restoreAnimationState:(BOOL)restoreAnimation {
   _sceneModel = model;
+  if (DEBUG_USE_NEW_RENDERER) {
+    _compContainer = [[LOTCompositionContainer alloc] initWithModel:nil inLayerGroup:nil withLayerGroup:_sceneModel.layerGroup withAssestGroup:_sceneModel.assetGroup];
+    [self.layer addSublayer:_compContainer];
+    _compContainer.currentFrame = @0;
+    hasFullyInitialized_ = YES;
+    return;
+  }
   [self _buildSubviewsFromModel];
   LOTAnimationState *oldState = _animationState;
   _animationState = [[LOTAnimationState alloc] initWithDuration:_sceneModel.timeDuration layer:_timingLayer frameRate:_sceneModel.framerate];
@@ -367,6 +372,19 @@
 }
 
 - (void)playWithCompletion:(LOTAnimationCompletionBlock)completion {
+  if (DEBUG_USE_NEW_RENDERER) {
+    NSNumber *start = _compContainer.currentFrame;
+    NSNumber *end = _sceneModel.endFrame;
+    NSTimeInterval duration = (end.floatValue - start.floatValue) / _sceneModel.framerate.floatValue;
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"currentFrame"];
+    animation.fromValue = start;
+    animation.toValue = end;
+    animation.duration = duration;
+    animation.fillMode = kCAFillModeForwards;
+    [_compContainer addAnimation:animation forKey:@"play"];
+    return;
+  }
+  
   if (completion) {
     self.completionBlock = completion;
   }
@@ -440,8 +458,15 @@
     [self _callCompletionIfNecessary];
   }
   
-  [_animationState setAnimatedProgress:animationProgress updateAnimation:self.window != nil];
-  
+  if (DEBUG_USE_NEW_RENDERER) {
+    CGFloat duration = _sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue;
+    CGFloat frame = (duration * animationProgress) + _sceneModel.startFrame.floatValue;
+    
+    _compContainer.currentFrame = @(frame);
+    
+  } else {
+    [_animationState setAnimatedProgress:animationProgress updateAnimation:self.window != nil];
+  }
   [self stopDisplayLink];
 }
 
@@ -597,6 +622,11 @@
 
   [CATransaction begin];
   [CATransaction setDisableActions:YES];
+  _compContainer.transform = CATransform3DIdentity;
+  _compContainer.bounds = _sceneModel.compBounds;
+  _compContainer.viewportBounds = _sceneModel.compBounds;
+  _compContainer.transform = xform;
+  _compContainer.position = centerPoint;
   _compLayer.transform = CATransform3DIdentity;
   _compLayer.bounds = _sceneModel.compBounds;
   _compLayer.transform = xform;

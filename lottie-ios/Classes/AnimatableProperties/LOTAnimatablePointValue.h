@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import "LOTAnimatableValue.h"
+#import "LOTKeyframe.h"
 
 @interface LOTAnimatablePointValue : NSObject <LOTAnimatableValue>
 
@@ -17,5 +18,6 @@
 
 @property (nonatomic, readonly) CGPoint initialPoint;
 @property (nonatomic, assign) BOOL usePathAnimation;
+@property (nonatomic, readonly) LOTKeyframeGroup *keyframeGroup;
 
 @end

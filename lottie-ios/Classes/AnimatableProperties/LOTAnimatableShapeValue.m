@@ -8,6 +8,8 @@
 
 #import "LOTAnimatableShapeValue.h"
 #import "CGGeometry+LOTAdditions.h"
+#import "LOTHelpers.h"
+
 @interface LOTAnimatableShapeValue ()
 
 @property (nonatomic, readonly) NSArray *shapeKeyframes;
@@ -28,6 +30,9 @@
   if (self) {
     _frameRate = frameRate;
     id value = shapeValues[@"k"];
+    if (DEBUG_USE_NEW_RENDERER) {
+      _keyframeGroup = [[LOTKeyframeGroup alloc] initWithData:value];
+    }
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
         [(NSArray *)value firstObject][@"t"]) {
@@ -256,7 +261,7 @@
            [pointArray.firstObject isKindOfClass:[NSNumber class]]),
            @"Lottie: Point Data Malformed");
   
-  return CGPointMake([pointArray[0] floatValue], [pointArray[1] floatValue]);
+  return CGPointMake([(NSNumber *)pointArray[0] floatValue], [(NSNumber *)pointArray[1] floatValue]);
 }
 
 - (NSNumber *)_numberValueFromObject:(id)valueObject {

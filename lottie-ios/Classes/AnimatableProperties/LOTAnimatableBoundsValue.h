@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 #import "LOTAnimatableValue.h"
+#import "LOTKeyframe.h"
 
 @interface LOTAnimatableBoundsValue : NSObject <LOTAnimatableValue>
 
 - (instancetype)initWithSizeValues:(NSDictionary *)sizeValue frameRate:(NSNumber *)frameRate;
 
 @property (nonatomic, readonly) CGRect initialBounds;
+@property (nonatomic, readonly) LOTKeyframeGroup *keyframeGroup;
 
 @end

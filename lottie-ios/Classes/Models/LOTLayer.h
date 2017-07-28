@@ -46,6 +46,7 @@ typedef enum : NSInteger {
 @property (nonatomic, readonly) NSNumber *layerID;
 @property (nonatomic, readonly) LOTLayerType layerType;
 @property (nonatomic, readonly) NSNumber *parentID;
+@property (nonatomic, readonly) NSNumber *startFrame;
 @property (nonatomic, readonly) NSNumber *inFrame;
 @property (nonatomic, readonly) NSNumber *outFrame;
 @property (nonatomic, readonly) CGRect layerBounds;

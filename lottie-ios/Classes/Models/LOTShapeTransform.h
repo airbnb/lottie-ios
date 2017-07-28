@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import <QuartzCore/QuartzCore.h>
 
 @class LOTAnimatableNumberValue;
 @class LOTAnimatablePointValue;
@@ -18,6 +19,8 @@
 + (instancetype)transformIdentityWithCompBounds:(CGRect)compBounds;
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds;
+
+- (CATransform3D)transformForFrame:(NSNumber *)frame;
 
 @property (nonatomic, readonly) CGRect compBounds;
 @property (nonatomic, readonly) LOTAnimatablePointValue *position;

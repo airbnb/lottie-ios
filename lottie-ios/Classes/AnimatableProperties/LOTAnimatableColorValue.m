@@ -7,6 +7,7 @@
 //
 
 #import "LOTAnimatableColorValue.h"
+#import "LOTHelpers.h"
 
 @interface LOTAnimatableColorValue ()
 
@@ -29,6 +30,9 @@
   if (self) {
     _frameRate = frameRate;
     NSArray *value = colorValues[@"k"];
+    if (DEBUG_USE_NEW_RENDERER) {
+      _keyframeGroup = [[LOTKeyframeGroup alloc] initWithData:value];
+    }
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
         [(NSArray *)value firstObject][@"t"]) {

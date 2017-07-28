@@ -9,6 +9,7 @@
 #import "LOTShapeFill.h"
 #import "LOTAnimatableNumberValue.h"
 #import "LOTAnimatableColorValue.h"
+#import "CGGeometry+LOTAdditions.h"
 
 @implementation LOTShapeFill
 
@@ -30,6 +31,16 @@
   if (opacity) {
     _opacity = [[LOTAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:frameRate];
     [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
+    [_opacity.keyframeGroup remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+      return LOT_RemapValue(inValue, 0, 100, 0, 1);
+    }];
+  }
+  
+  NSNumber *evenOdd = jsonDictionary[@"r"];
+  if (evenOdd.integerValue == 2) {
+    _evenOddFillRule = YES;
+  } else {
+    _evenOddFillRule = NO;
   }
   
   NSNumber *fillEnabled = jsonDictionary[@"fillEnabled"];

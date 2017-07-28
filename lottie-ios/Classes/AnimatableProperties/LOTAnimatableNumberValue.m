@@ -29,6 +29,9 @@
   if (self) {
     _frameRate = frameRate;
     id value = numberValues[@"k"];
+    if (DEBUG_USE_NEW_RENDERER) {
+      _keyframeGroup = [[LOTKeyframeGroup alloc] initWithData:value];
+    }
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
         [(NSArray *)value firstObject][@"t"]) {
@@ -46,7 +49,6 @@
 }
 
 - (void)_buildAnimationForKeyframes:(NSArray<NSDictionary *> *)keyframes {
-  
   NSMutableArray *keyTimes = [NSMutableArray array];
   NSMutableArray *timingFunctions = [NSMutableArray array];
   NSMutableArray<NSNumber *> *numberValues = [NSMutableArray array];
@@ -61,6 +63,7 @@
   
   _duration = _durationFrames.floatValue / _frameRate.floatValue;
   _delay = _startFrame.floatValue / _frameRate.floatValue;
+  
   
   BOOL addStartValue = YES;
   BOOL addTimePadding = NO;
@@ -177,6 +180,7 @@
   [self remapValueWithBlock:^CGFloat(CGFloat inValue) {
     return LOT_RemapValue(inValue, fromMin.floatValue, fromMax.floatValue, toMin.floatValue, toMax.floatValue);
   }];
+  
 }
 
 - (void)remapValueWithBlock:(CGFloat (^)(CGFloat inValue))remapBlock {

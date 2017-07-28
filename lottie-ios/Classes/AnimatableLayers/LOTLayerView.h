@@ -18,6 +18,7 @@
 
 - (void)LOT_addChildLayer:(CALayer *)childLayer;
 
+@property (nonatomic, strong) NSNumber *currentFrame;
 @property (nonatomic, readonly) LOTLayer *layerModel;
 @property (nonatomic, assign) BOOL debugModeOn;
 

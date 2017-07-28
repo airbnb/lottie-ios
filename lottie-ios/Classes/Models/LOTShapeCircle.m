@@ -32,6 +32,8 @@
     _size = [[LOTAnimatablePointValue alloc] initWithPointValues:size frameRate:frameRate];
     _size.usePathAnimation = NO;
   }
+  NSNumber *reversed = jsonDictionary[@"d"];
+  _reversed = (reversed.integerValue == 3);
 }
 
 @end

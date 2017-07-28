@@ -7,7 +7,7 @@
 //
 
 #import "LOTAnimatableScaleValue.h"
-
+#import "LOTHelpers.h"
 @interface LOTAnimatableScaleValue ()
 
 @property (nonatomic, readonly) NSArray<NSValue *> *scaleKeyframes;
@@ -29,6 +29,9 @@
   if (self) {
     _frameRate = frameRate;
     id value = scaleValues[@"k"];
+    if (DEBUG_USE_NEW_RENDERER) {
+      _keyframeGroup = [[LOTKeyframeGroup alloc] initWithData:value];
+    }
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
         [(NSArray *)value firstObject][@"t"]) {
@@ -46,7 +49,6 @@
 }
 
 - (void)_buildAnimationForKeyframes:(NSArray<NSDictionary *> *)keyframes {
-  
   NSMutableArray *keyTimes = [NSMutableArray array];
   NSMutableArray *timingFunctions = [NSMutableArray array];
   NSMutableArray<NSValue *> *scaleValues = [NSMutableArray array];
@@ -144,7 +146,7 @@
 
 - (CATransform3D)_xformForValueArray:(NSArray *)value {
   if (value.count >=2) {
-    return CATransform3DMakeScale([value[0] floatValue] / 100.f, [value[1] floatValue] / 100.f, 1);
+    return CATransform3DMakeScale([(NSNumber *)value[0] floatValue] / 100.f, [(NSNumber *)value[1] floatValue] / 100.f, 1);
   }
   return CATransform3DIdentity;
 }

@@ -1,6 +1,6 @@
 PODS:
   - FBSnapshotTestCase/Core (2.1.4)
-  - lottie-ios (1.5.1)
+  - lottie-ios (1.5.2)
 
 DEPENDENCIES:
   - FBSnapshotTestCase/Core
@@ -8,11 +8,11 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   lottie-ios:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  lottie-ios: f680a7c4cb7a567ecf258fde0f967913aff111b8
+  lottie-ios: 255a0e95973a5c4424e809d7a5c19f7384c73e84
 
 PODFILE CHECKSUM: 3901ca88392ceeedc459164e7080c5f357e54e04
 

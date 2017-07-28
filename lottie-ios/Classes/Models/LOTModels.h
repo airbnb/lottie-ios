@@ -30,5 +30,6 @@
 #import "LOTShapeTrimPath.h"
 #import "LOTLayerGroup.h"
 #import "LOTAsset.h"
+#import "LOTShapeGradientFill.h"
 
 #endif /* LOTModels_h */

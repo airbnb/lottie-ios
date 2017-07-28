@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import "LOTAnimatableValue.h"
+#import "LOTKeyframe.h"
 
 @interface LOTAnimatableNumberValue : NSObject <LOTAnimatableValue>
 
@@ -21,5 +22,6 @@
 - (void)remapValueWithBlock:(CGFloat (^)(CGFloat inValue))remapBlock;
 
 @property (nonatomic, readonly) NSNumber *initialValue;
+@property (nonatomic, readonly) LOTKeyframeGroup *keyframeGroup;
 
 @end

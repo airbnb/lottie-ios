@@ -51,6 +51,9 @@
   NSDictionary *scale = jsonDictionary[@"s"];
   if (scale) {
     _scale = [[LOTAnimatableScaleValue alloc] initWithScaleValues:scale frameRate:frameRate];
+    [_scale.keyframeGroup remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+      return LOT_RemapValue(inValue, 0, 100, 0, 1);
+    }];
   }
   
   NSDictionary *rotation = jsonDictionary[@"r"];
@@ -59,12 +62,18 @@
     [_rotation remapValueWithBlock:^CGFloat(CGFloat inValue) {
       return LOT_DegreesToRadians(inValue);
     }];
+    [_rotation.keyframeGroup remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+      return LOT_DegreesToRadians(inValue);
+    }];
   }
   
   NSDictionary *opacity = jsonDictionary[@"o"];
   if (opacity) {
     _opacity = [[LOTAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:frameRate];
     [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
+    [_opacity.keyframeGroup remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+      return LOT_RemapValue(inValue, 0, 100, 0, 1);
+    }];
   }
   
   NSString *name = jsonDictionary[@"nm"];
@@ -78,6 +87,14 @@
     NSLog(@"%s: Warning: skew is not supported: %@", __PRETTY_FUNCTION__, name);
   }
   
+}
+
+- (CATransform3D)transformForFrame:(NSNumber *)frame {
+  CATransform3D translate = CATransform3DMakeTranslation(_position.initialPoint.x, _position.initialPoint.y, 0);
+  CATransform3D rotate = CATransform3DRotate(translate, _rotation.initialValue.floatValue, 0, 0, 1);
+  CATransform3D scale = CATransform3DConcat(_scale.initialScale, rotate);
+  CATransform3D anchor = CATransform3DTranslate(scale, -1 *_anchor.initialPoint.x, -1 *_anchor.initialPoint.y, 0);
+  return anchor;
 }
 
 - (NSString *)description {

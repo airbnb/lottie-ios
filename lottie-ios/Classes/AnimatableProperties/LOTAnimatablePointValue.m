@@ -8,7 +8,7 @@
 
 #import "LOTPlatformCompat.h"
 #import "LOTAnimatablePointValue.h"
-#import "CGGeometry+LOTAdditions.h"
+#import "LOTHelpers.h"
 
 @interface LOTAnimatablePointValue ()
 
@@ -32,6 +32,9 @@
     _usePathAnimation = YES;
     _frameRate = frameRate;
     NSArray *value = pointValues[@"k"];
+    if (DEBUG_USE_NEW_RENDERER) {
+      _keyframeGroup = [[LOTKeyframeGroup alloc] initWithData:value];
+    }
     if ([value isKindOfClass:[NSArray class]] &&
         [[(NSArray *)value firstObject] isKindOfClass:[NSDictionary class]] &&
         [(NSArray *)value firstObject][@"t"]) {
@@ -39,6 +42,7 @@
       [self _buildAnimationForKeyframes:value];
     } else {
       //Single Value, no animation
+      
       _initialPoint = [self _pointFromValueArray:value];
     }
     if (pointValues[@"x"]) {
@@ -176,6 +180,9 @@
 }
 
 - (void)remapPointsFromBounds:(CGRect)frombounds toBounds:(CGRect)toBounds {
+  if (DEBUG_USE_NEW_RENDERER) {
+    return;
+  }
   if (_pointKeyframes.count) {
     NSMutableArray *newValues = [NSMutableArray array];
     for (NSValue *pointValue in _pointKeyframes) {
