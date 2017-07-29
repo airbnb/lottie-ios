@@ -7,17 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@class LOTAnimatableColorValue;
-@class LOTAnimatableNumberValue;
+#import "LOTKeyframe.h"
 
 @interface LOTShapeFill : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
 @property (nonatomic, readonly) BOOL fillEnabled;
-@property (nonatomic, readonly) LOTAnimatableColorValue *color;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *opacity;
+@property (nonatomic, readonly) LOTKeyframeGroup *color;
+@property (nonatomic, readonly) LOTKeyframeGroup *opacity;
 @property (nonatomic, readonly) BOOL evenOddFillRule;
 
 @end

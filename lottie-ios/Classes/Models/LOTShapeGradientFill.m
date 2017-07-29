@@ -7,22 +7,19 @@
 //
 
 #import "LOTShapeGradientFill.h"
-#import "LOTAnimatablePointValue.h"
-#import "LOTAnimatableNumberValue.h"
-#import "LOTAnimatableColorValue.h"
 #import "CGGeometry+LOTAdditions.h"
 
 @implementation LOTShapeGradientFill
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+    [self _mapFromJSON:jsonDictionary];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
   NSNumber *type = jsonDictionary[@"t"];
   if (type.integerValue != 1) {
     NSLog(@"%s: Warning: Only Linear Gradients are supported.", __PRETTY_FUNCTION__);
@@ -30,26 +27,25 @@
   
   NSDictionary *start = jsonDictionary[@"s"];
   if (start) {
-    _startPoint = [[LOTAnimatablePointValue alloc] initWithPointValues:start frameRate:frameRate];
+    _startPoint = [[LOTKeyframeGroup alloc] initWithData:start];
   }
   
   NSDictionary *end = jsonDictionary[@"e"];
   if (end) {
-    _endPoint = [[LOTAnimatablePointValue alloc] initWithPointValues:end frameRate:frameRate];
+    _endPoint = [[LOTKeyframeGroup alloc] initWithData:end];
   }
   
   NSDictionary *gradient = jsonDictionary[@"g"];
   if (gradient) {
     NSDictionary *unwrappedGradient = gradient[@"k"];
     _numberOfColors = gradient[@"p"];
-    _gradient = [[LOTAnimatableNumberValue alloc] initWithNumberValues:unwrappedGradient frameRate:frameRate];
+    _gradient = [[LOTKeyframeGroup alloc] initWithData:unwrappedGradient];
   }
   
   NSDictionary *opacity = jsonDictionary[@"o"];
   if (opacity) {
-    _opacity = [[LOTAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:frameRate];
-    [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
-    [_opacity.keyframeGroup remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+    _opacity = [[LOTKeyframeGroup alloc] initWithData:opacity];
+    [_opacity remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
       return LOT_RemapValue(inValue, 0, 100, 0, 1);
     }];
   }

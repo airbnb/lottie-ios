@@ -7,8 +7,6 @@
 //
 
 #import "LOTPolystarAnimator.h"
-#import "LOTAnimatablePointValue.h"
-#import "LOTAnimatableNumberValue.h"
 #import "LOTPointInterpolator.h"
 #import "LOTNumberInterpolator.h"
 #import "LOTBezierPath.h"
@@ -30,13 +28,13 @@ const CGFloat kPOLYSTAR_MAGIC_NUMBER = .47829f;
                              shapeStar:(LOTShapeStar *_Nonnull)shapeStar {
   self = [super initWithInputNode:inputNode];
   if (self) {
-    _outerRadiusInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeStar.outerRadius.keyframeGroup.keyframes];
-    _innerRadiusInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeStar.innerRadius.keyframeGroup.keyframes];
-    _outerRoundnessInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeStar.outerRoundness.keyframeGroup.keyframes];
-    _innerRoundnessInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeStar.innerRoundness.keyframeGroup.keyframes];
-    _pointsInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeStar.numberOfPoints.keyframeGroup.keyframes];
-    _rotationInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeStar.rotation.keyframeGroup.keyframes];
-    _positionInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeStar.position.keyframeGroup.keyframes];
+    _outerRadiusInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeStar.outerRadius.keyframes];
+    _innerRadiusInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeStar.innerRadius.keyframes];
+    _outerRoundnessInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeStar.outerRoundness.keyframes];
+    _innerRoundnessInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeStar.innerRoundness.keyframes];
+    _pointsInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeStar.numberOfPoints.keyframes];
+    _rotationInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeStar.rotation.keyframes];
+    _positionInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeStar.position.keyframes];
   }
   return self;
 }

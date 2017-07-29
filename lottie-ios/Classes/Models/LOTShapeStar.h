@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class LOTAnimatablePointValue;
-@class LOTAnimatableNumberValue;
+#import "LOTKeyframe.h"
 
 typedef enum : NSUInteger {
   LOTPolystarShapeNone,
@@ -18,17 +17,17 @@ typedef enum : NSUInteger {
 
 @interface LOTShapeStar : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
-@property (nonatomic, readonly) LOTAnimatableNumberValue *outerRadius;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *outerRoundness;
+@property (nonatomic, readonly) LOTKeyframeGroup *outerRadius;
+@property (nonatomic, readonly) LOTKeyframeGroup *outerRoundness;
 
-@property (nonatomic, readonly) LOTAnimatableNumberValue *innerRadius;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *innerRoundness;
+@property (nonatomic, readonly) LOTKeyframeGroup *innerRadius;
+@property (nonatomic, readonly) LOTKeyframeGroup *innerRoundness;
 
-@property (nonatomic, readonly) LOTAnimatablePointValue *position;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *numberOfPoints;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *rotation;
+@property (nonatomic, readonly) LOTKeyframeGroup *position;
+@property (nonatomic, readonly) LOTKeyframeGroup *numberOfPoints;
+@property (nonatomic, readonly) LOTKeyframeGroup *rotation;
 
 @property (nonatomic, readonly) LOTPolystarShape type;
 

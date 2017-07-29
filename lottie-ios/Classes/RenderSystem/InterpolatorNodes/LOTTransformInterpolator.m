@@ -7,9 +7,6 @@
 //
 
 #import "LOTTransformInterpolator.h"
-#import "LOTAnimatablePointValue.h"
-#import "LOTAnimatableScaleValue.h"
-#import "LOTAnimatableNumberValue.h"
 
 // TODO BW Perf update, Cache transform
 
@@ -24,16 +21,16 @@
 
 + (instancetype)transformForLayer:(LOTLayer *)layer {
   if (layer.position) {
-    return [[LOTTransformInterpolator alloc] initWithPosition:layer.position.keyframeGroup.keyframes
-                                                     rotation:layer.rotation.keyframeGroup.keyframes
-                                                       anchor:layer.anchor.keyframeGroup.keyframes
-                                                        scale:layer.scale.keyframeGroup.keyframes];
+    return [[LOTTransformInterpolator alloc] initWithPosition:layer.position.keyframes
+                                                     rotation:layer.rotation.keyframes
+                                                       anchor:layer.anchor.keyframes
+                                                        scale:layer.scale.keyframes];
   }
-  return [[LOTTransformInterpolator alloc] initWithPositionX:layer.positionX.keyframeGroup.keyframes
-                                                   positionY:layer.positionY.keyframeGroup.keyframes
-                                                    rotation:layer.rotation.keyframeGroup.keyframes
-                                                      anchor:layer.anchor.keyframeGroup.keyframes
-                                                       scale:layer.scale.keyframeGroup.keyframes];
+  return [[LOTTransformInterpolator alloc] initWithPositionX:layer.positionX.keyframes
+                                                   positionY:layer.positionY.keyframes
+                                                    rotation:layer.rotation.keyframes
+                                                      anchor:layer.anchor.keyframes
+                                                       scale:layer.scale.keyframes];
 }
 
 - (instancetype)initWithPosition:(NSArray <LOTKeyframe *> *)position

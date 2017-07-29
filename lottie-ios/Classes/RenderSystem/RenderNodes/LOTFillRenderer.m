@@ -7,8 +7,6 @@
 //
 
 #import "LOTFillRenderer.h"
-#import "LOTAnimatableColorValue.h"
-#import "LOTAnimatableNumberValue.h"
 #import "LOTColorInterpolator.h"
 #import "LOTNumberInterpolator.h"
 #import "LOTHelpers.h"
@@ -24,8 +22,8 @@
                                   shapeFill:(LOTShapeFill *_Nonnull)fill {
   self = [super initWithInputNode:inputNode];
   if (self) {
-    colorInterpolator_ = [[LOTColorInterpolator alloc] initWithKeyframes:fill.color.keyframeGroup.keyframes];
-    opacityInterpolator_ = [[LOTNumberInterpolator alloc] initWithKeyframes:fill.opacity.keyframeGroup.keyframes];
+    colorInterpolator_ = [[LOTColorInterpolator alloc] initWithKeyframes:fill.color.keyframes];
+    opacityInterpolator_ = [[LOTNumberInterpolator alloc] initWithKeyframes:fill.opacity.keyframes];
     centerPoint_DEBUG = [CALayer layer];
     centerPoint_DEBUG.bounds = CGRectMake(0, 0, 20, 20);
     if (ENABLE_DEBUG_SHAPES) {

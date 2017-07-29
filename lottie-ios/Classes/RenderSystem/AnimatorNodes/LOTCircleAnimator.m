@@ -7,7 +7,6 @@
 //
 
 #import "LOTCircleAnimator.h"
-#import "LOTAnimatablePointValue.h"
 #import "LOTPointInterpolator.h"
 
 const CGFloat kLOTEllipseControlPointPercentage = 0.55228;
@@ -22,8 +21,8 @@ const CGFloat kLOTEllipseControlPointPercentage = 0.55228;
                                   shapeCircle:(LOTShapeCircle *_Nonnull)shapeCircle {
   self = [super initWithInputNode:inputNode];
   if (self) {
-    _centerInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeCircle.position.keyframeGroup.keyframes];
-    _sizeInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeCircle.size.keyframeGroup.keyframes];
+    _centerInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeCircle.position.keyframes];
+    _sizeInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeCircle.size.keyframes];
     _reversed = shapeCircle.reversed;
   }
   return self;

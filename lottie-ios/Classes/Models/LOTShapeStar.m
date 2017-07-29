@@ -7,53 +7,51 @@
 //
 
 #import "LOTShapeStar.h"
-#import "LOTAnimatableNumberValue.h"
-#import "LOTAnimatablePointValue.h"
 
 @implementation LOTShapeStar
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+    [self _mapFromJSON:jsonDictionary];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
   NSDictionary *outerRadius = jsonDictionary[@"or"];
   if (outerRadius) {
-    _outerRadius = [[LOTAnimatableNumberValue alloc] initWithNumberValues:outerRadius frameRate:frameRate];
+    _outerRadius = [[LOTKeyframeGroup alloc] initWithData:outerRadius];
   }
   
   NSDictionary *outerRoundness = jsonDictionary[@"os"];
   if (outerRoundness) {
-    _outerRoundness = [[LOTAnimatableNumberValue alloc] initWithNumberValues:outerRoundness frameRate:frameRate];
+    _outerRoundness = [[LOTKeyframeGroup alloc] initWithData:outerRoundness];
   }
   
   NSDictionary *innerRadius = jsonDictionary[@"ir"];
   if (innerRadius) {
-    _innerRadius = [[LOTAnimatableNumberValue alloc] initWithNumberValues:innerRadius frameRate:frameRate];
+    _innerRadius = [[LOTKeyframeGroup alloc] initWithData:innerRadius];
   }
   
   NSDictionary *innerRoundness = jsonDictionary[@"is"];
   if (innerRoundness) {
-    _innerRoundness = [[LOTAnimatableNumberValue alloc] initWithNumberValues:innerRoundness frameRate:frameRate];
+    _innerRoundness = [[LOTKeyframeGroup alloc] initWithData:innerRoundness];
   }
   
   NSDictionary *position = jsonDictionary[@"p"];
   if (position) {
-    _position = [[LOTAnimatablePointValue alloc] initWithPointValues:position frameRate:frameRate];
+    _position = [[LOTKeyframeGroup alloc] initWithData:position];
   }
   
   NSDictionary *numberOfPoints = jsonDictionary[@"pt"];
   if (numberOfPoints) {
-    _numberOfPoints = [[LOTAnimatableNumberValue alloc] initWithNumberValues:numberOfPoints frameRate:frameRate];
+    _numberOfPoints = [[LOTKeyframeGroup alloc] initWithData:numberOfPoints];
   }
   
   NSDictionary *rotation = jsonDictionary[@"r"];
   if (rotation) {
-    _rotation = [[LOTAnimatableNumberValue alloc] initWithNumberValues:rotation frameRate:frameRate];
+    _rotation = [[LOTKeyframeGroup alloc] initWithData:rotation];
   }
   
   NSNumber *type = jsonDictionary[@"sy"];

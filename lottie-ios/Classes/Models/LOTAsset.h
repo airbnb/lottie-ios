@@ -18,8 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LOTAsset : NSObject
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
-                  withBounds:(CGRect)bounds
-               withFramerate:(NSNumber * _Nullable)framerate
               withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup
              withAssetBundle:(NSBundle *_Nonnull)bundle;
 

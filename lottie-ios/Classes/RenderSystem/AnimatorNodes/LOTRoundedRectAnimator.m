@@ -7,10 +7,8 @@
 //
 
 #import "LOTRoundedRectAnimator.h"
-#import "LOTAnimatablePointValue.h"
 #import "LOTPointInterpolator.h"
 #import "LOTNumberInterpolator.h"
-#import "LOTAnimatableNumberValue.h"
 #import "CGGeometry+LOTAdditions.h"
 
 @implementation LOTRoundedRectAnimator {
@@ -24,9 +22,9 @@
                              shapeRectangle:(LOTShapeRectangle *_Nonnull)shapeRectangle {
   self = [super initWithInputNode:inputNode];
   if (self) {
-    _centerInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeRectangle.position.keyframeGroup.keyframes];
-    _sizeInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeRectangle.size.keyframeGroup.keyframes];
-    _cornerRadiusInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeRectangle.cornerRadius.keyframeGroup.keyframes];
+    _centerInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeRectangle.position.keyframes];
+    _sizeInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeRectangle.size.keyframes];
+    _cornerRadiusInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeRectangle.cornerRadius.keyframes];
     _reversed = shapeRectangle.reversed;
   }
   return self;

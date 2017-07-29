@@ -49,8 +49,6 @@
   NSArray *layersJSON = jsonDictionary[@"layers"];
   if (layersJSON) {
     _layerGroup = [[LOTLayerGroup alloc] initWithLayerJSON:layersJSON
-                                                withBounds:_compBounds
-                                             withFramerate:_framerate
                                             withAssetGroup:_assetGroup];
   }
   

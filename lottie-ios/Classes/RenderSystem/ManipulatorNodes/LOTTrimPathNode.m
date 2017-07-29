@@ -7,7 +7,6 @@
 //
 
 #import "LOTTrimPathNode.h"
-#import "LOTAnimatableNumberValue.h"
 #import "LOTNumberInterpolator.h"
 #import "LOTPathAnimator.h"
 #import "LOTCircleAnimator.h"
@@ -29,9 +28,9 @@
   self = [super initWithInputNode:inputNode];
   if (self) {
     inputNode.pathShouldCacheLengths = YES;
-    _startInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:trimPath.start.keyframeGroup.keyframes];
-    _endInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:trimPath.end.keyframeGroup.keyframes];
-    _offsetInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:trimPath.offset.keyframeGroup.keyframes];
+    _startInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:trimPath.start.keyframes];
+    _endInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:trimPath.end.keyframes];
+    _offsetInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:trimPath.offset.keyframes];
   }
   return self;
 }

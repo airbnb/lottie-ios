@@ -11,10 +11,10 @@
 
 @interface LOTShapeGroup : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
 @property (nonatomic, readonly) NSArray *items;
 
-+ (id)shapeItemWithJSON:(NSDictionary *)itemJSON frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds;
++ (id)shapeItemWithJSON:(NSDictionary *)itemJSON;
 
 @end

@@ -18,9 +18,7 @@
 - (instancetype _Nonnull)initWithJSON:(NSArray * _Nonnull)jsonArray
                       withAssetBundle:(NSBundle *_Nullable)bundle;
 
-- (void)buildAssetNamed:(NSString * _Nonnull)refID
-             withBounds:(CGRect)bounds
-           andFramerate:(NSNumber * _Nullable)framerate;
+- (void)buildAssetNamed:(NSString * _Nonnull)refID;
 
 - (void)finalizeInitialization;
 
