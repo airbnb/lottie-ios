@@ -8,7 +8,6 @@
 
 #import "LOTPathAnimator.h"
 #import "LOTPathInterpolator.h"
-#import "LOTAnimatableShapeValue.h"
 
 @implementation LOTPathAnimator {
   LOTShapePath *_pathConent;
@@ -20,7 +19,7 @@
   self = [super initWithInputNode:inputNode];
   if (self) {
     _pathConent = shapePath;
-    _interpolator = [[LOTPathInterpolator alloc] initWithKeyframes:_pathConent.shapePath.keyframeGroup.keyframes];
+    _interpolator = [[LOTPathInterpolator alloc] initWithKeyframes:_pathConent.shapePath.keyframes];
   }
   return self;
 }

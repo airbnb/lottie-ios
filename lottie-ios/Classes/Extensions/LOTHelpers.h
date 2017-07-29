@@ -11,6 +11,7 @@
 
 #import "UIColor+Expanded.h"
 #import "CGGeometry+LOTAdditions.h"
+#import "LOTBezierPath.h"
 
 #define DEBUG_USE_NEW_RENDERER YES
 #define ENABLE_DEBUG_LOGGING NO
@@ -25,11 +26,10 @@
  - Preload animation
  - Image bundle support
  - Image Cache Support
- 
+ - Asset bundle
+ - Skew transform
  PASS on LOTAnimationView
-  - Completion Block Support
-  - Proper Playing looping seeking
-  - Reverse, autoreverse
+
   - Add sublayer support
 
   - Play to Keyframe Point

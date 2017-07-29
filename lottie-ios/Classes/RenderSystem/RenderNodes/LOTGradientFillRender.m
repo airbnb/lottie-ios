@@ -35,10 +35,10 @@
                           shapeGradientFill:(LOTShapeGradientFill *_Nonnull)fill {
   self = [super initWithInputNode:inputNode];
   if (self) {
-    _gradientInterpolator = [[LOTArrayInterpolator alloc] initWithKeyframes:fill.gradient.keyframeGroup.keyframes];
-    _startPointInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:fill.startPoint.keyframeGroup.keyframes];
-    _endPointInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:fill.endPoint.keyframeGroup.keyframes];
-    _opacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:fill.opacity.keyframeGroup.keyframes];
+    _gradientInterpolator = [[LOTArrayInterpolator alloc] initWithKeyframes:fill.gradient.keyframes];
+    _startPointInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:fill.startPoint.keyframes];
+    _endPointInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:fill.endPoint.keyframes];
+    _opacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:fill.opacity.keyframes];
     _numberOfPositions = fill.numberOfColors.integerValue;
     
     _evenOddFillRule = fill.evenOddFillRule;

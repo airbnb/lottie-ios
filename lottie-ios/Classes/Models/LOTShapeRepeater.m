@@ -11,71 +11,68 @@
 
 @implementation LOTShapeRepeater
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
-                   frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary  {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+    [self _mapFromJSON:jsonDictionary];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
   NSDictionary *copies = jsonDictionary[@"c"];
   if (copies) {
-    _copies = [[LOTAnimatableNumberValue alloc] initWithNumberValues:copies frameRate:frameRate];
+    _copies = [[LOTKeyframeGroup alloc] initWithData:copies];
   }
   
   NSDictionary *offset = jsonDictionary[@"o"];
   if (offset) {
-    _offset = [[LOTAnimatableNumberValue alloc] initWithNumberValues:offset frameRate:frameRate];
+    _offset = [[LOTKeyframeGroup alloc] initWithData:offset];
   }
   
   NSDictionary *transform = jsonDictionary[@"tr"];
   
   NSDictionary *rotation = transform[@"r"];
   if (rotation) {
-    _rotation = [[LOTAnimatableNumberValue alloc] initWithNumberValues:rotation frameRate:frameRate];
-    [_rotation.keyframeGroup remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+    _rotation = [[LOTKeyframeGroup alloc] initWithData:rotation];
+    [_rotation remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
       return LOT_DegreesToRadians(inValue);
     }];
   }
   
   NSDictionary *startOpacity = transform[@"so"];
   if (startOpacity) {
-    _startOpacity = [[LOTAnimatableNumberValue alloc] initWithNumberValues:startOpacity frameRate:frameRate];
-    [_startOpacity.keyframeGroup remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+    _startOpacity = [[LOTKeyframeGroup alloc] initWithData:startOpacity];
+    [_startOpacity remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
       return LOT_RemapValue(inValue, 0, 100, 0, 1);
     }];
   }
   
   NSDictionary *endOpacity = transform[@"eo"];
   if (endOpacity) {
-    _endOpacity = [[LOTAnimatableNumberValue alloc] initWithNumberValues:endOpacity frameRate:frameRate];
-    [_endOpacity.keyframeGroup remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+    _endOpacity = [[LOTKeyframeGroup alloc] initWithData:endOpacity];
+    [_endOpacity remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
       return LOT_RemapValue(inValue, 0, 100, 0, 1);
     }];
   }
   
   NSDictionary *anchorPoint = transform[@"a"];
   if (anchorPoint) {
-    _anchorPoint = [[LOTAnimatablePointValue alloc] initWithPointValues:anchorPoint frameRate:frameRate];
+    _anchorPoint = [[LOTKeyframeGroup alloc] initWithData:anchorPoint];
   }
   
   NSDictionary *position = transform[@"p"];
   if (position) {
-    _position = [[LOTAnimatablePointValue alloc] initWithPointValues:position frameRate:frameRate];
+    _position = [[LOTKeyframeGroup alloc] initWithData:position];
   }
   
   NSDictionary *scale = transform[@"s"];
   if (scale) {
-    _scale = [[LOTAnimatableScaleValue alloc] initWithScaleValues:scale frameRate:frameRate];
-    [_scale.keyframeGroup remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+    _scale = [[LOTKeyframeGroup alloc] initWithData:scale];
+    [_scale remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
       return LOT_RemapValue(inValue, 0, 100, 0, 1);
     }];
   }
-
-
 }
 
 @end

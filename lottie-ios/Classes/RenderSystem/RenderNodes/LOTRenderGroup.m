@@ -102,11 +102,11 @@
     }
   }
   if (transform) {
-    _opacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:transform.opacity.keyframeGroup.keyframes];
-    _transformInterolator = [[LOTTransformInterpolator alloc] initWithPosition:transform.position.keyframeGroup.keyframes
-                                                                      rotation:transform.rotation.keyframeGroup.keyframes
-                                                                        anchor:transform.anchor.keyframeGroup.keyframes
-                                                                         scale:transform.scale.keyframeGroup.keyframes];
+    _opacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:transform.opacity.keyframes];
+    _transformInterolator = [[LOTTransformInterpolator alloc] initWithPosition:transform.position.keyframes
+                                                                      rotation:transform.rotation.keyframes
+                                                                        anchor:transform.anchor.keyframes
+                                                                         scale:transform.scale.keyframes];
   }
   _rootNode = previousNode;
 }

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LOTAnimationView_Compat.h"
+#import "LOTComposition.h"
 
 typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 
@@ -19,6 +20,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 + (nonnull instancetype)animationWithFilePath:(nonnull NSString *)filePath NS_SWIFT_NAME(init(filePath:));
 + (nonnull instancetype)animationFromJSON:(nullable NSDictionary *)animationJSON inBundle:(nullable NSBundle *)bundle NS_SWIFT_NAME(init(json:bundle:));
 
+- (nonnull instancetype)initWithModel:(nullable LOTComposition *)model inBundle:(nullable NSBundle *)bundle;
 - (nonnull instancetype)initWithContentsOfURL:(nonnull NSURL *)url;
 
 @property (nonatomic, readonly) BOOL isAnimationPlaying;
@@ -32,7 +34,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 - (void)playWithCompletion:(nullable LOTAnimationCompletionBlock)completion;
 - (void)play;
 - (void)pause;
-- (void)rewind;
+- (void)stop;
 
 - (void)addSubview:(nonnull LOTView *)view
       toLayerNamed:(nonnull NSString *)layer;

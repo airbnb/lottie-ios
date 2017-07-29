@@ -9,14 +9,7 @@
 #ifndef LOTModels_h
 #define LOTModels_h
 
-#import "CAAnimationGroup+LOTAnimatableGroup.h"
-#import "LOTAnimatableBoundsValue.h"
-#import "LOTAnimatableColorValue.h"
-#import "LOTAnimatableNumberValue.h"
-#import "LOTAnimatablePointValue.h"
-#import "LOTAnimatableScaleValue.h"
-#import "LOTAnimatableShapeValue.h"
-#import "LOTAnimatableValue.h"
+#import "LOTKeyframe.h"
 #import "LOTComposition.h"
 #import "LOTLayer.h"
 #import "LOTMask.h"

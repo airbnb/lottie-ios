@@ -140,7 +140,12 @@
 - (instancetype)initWithData:(id)data {
   self = [super init];
   if (self) {
-    [self buildKeyframesFromData:data];
+    if ([data isKindOfClass:[NSDictionary class]] &&
+        [(NSDictionary *)data valueForKey:@"k"]) {
+      [self buildKeyframesFromData:[(NSDictionary *)data valueForKey:@"k"]];
+    } else {
+      [self buildKeyframesFromData:data];
+    }
   }
   return self;
 }

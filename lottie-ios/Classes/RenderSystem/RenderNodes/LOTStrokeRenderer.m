@@ -9,8 +9,6 @@
 #import "LOTStrokeRenderer.h"
 #import "LOTColorInterpolator.h"
 #import "LOTNumberInterpolator.h"
-#import "LOTAnimatableColorValue.h"
-#import "LOTAnimatableNumberValue.h"
 
 @implementation LOTStrokeRenderer {
   LOTColorInterpolator *_colorInterpolator;
@@ -22,9 +20,9 @@
                                 shapeStroke:(LOTShapeStroke *_Nonnull)stroke {
   self = [super initWithInputNode:inputNode];
   if (self) {
-    _colorInterpolator = [[LOTColorInterpolator alloc] initWithKeyframes:stroke.color.keyframeGroup.keyframes];
-    _opacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:stroke.opacity.keyframeGroup.keyframes];
-    _widthInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:stroke.width.keyframeGroup.keyframes];
+    _colorInterpolator = [[LOTColorInterpolator alloc] initWithKeyframes:stroke.color.keyframes];
+    _opacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:stroke.opacity.keyframes];
+    _widthInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:stroke.width.keyframes];
     self.outputLayer.fillColor = nil;
     self.outputLayer.lineDashPattern = stroke.lineDashPattern;
     self.outputLayer.lineCap = stroke.capType == LOTLineCapTypeRound ? kCALineCapRound : kCALineCapButt;

@@ -7,18 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LOTAnimatablePointValue.h"
-#import "LOTAnimatableNumberValue.h"
+#import "LOTKeyframe.h"
 
 @interface LOTShapeGradientFill : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
 @property (nonatomic, readonly) NSNumber *numberOfColors;
-@property (nonatomic, readonly) LOTAnimatablePointValue *startPoint;
-@property (nonatomic, readonly) LOTAnimatablePointValue *endPoint;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *gradient;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *opacity;
+@property (nonatomic, readonly) LOTKeyframeGroup *startPoint;
+@property (nonatomic, readonly) LOTKeyframeGroup *endPoint;
+@property (nonatomic, readonly) LOTKeyframeGroup *gradient;
+@property (nonatomic, readonly) LOTKeyframeGroup *opacity;
 @property (nonatomic, readonly) BOOL evenOddFillRule;
 
 @end

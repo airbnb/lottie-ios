@@ -7,8 +7,6 @@
 //
 
 #import "LOTMaskContainer.h"
-#import "LOTAnimatableShapeValue.h"
-#import "LOTAnimatableNumberValue.h"
 #import "LOTPathInterpolator.h"
 #import "LOTNumberInterpolator.h"
 
@@ -30,9 +28,9 @@
 - (instancetype)initWithMask:(LOTMask *)maskNode {
   self = [super init];
   if (self) {
-    _pathInterpolator = [[LOTPathInterpolator alloc] initWithKeyframes:maskNode.maskPath.keyframeGroup.keyframes];
-    _opacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:maskNode.opacity.keyframeGroup.keyframes];
-    _expansionInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:maskNode.expansion.keyframeGroup.keyframes];
+    _pathInterpolator = [[LOTPathInterpolator alloc] initWithKeyframes:maskNode.maskPath.keyframes];
+    _opacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:maskNode.opacity.keyframes];
+    _expansionInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:maskNode.expansion.keyframes];
     _maskNode = maskNode;
     self.fillColor = [UIColor blueColor].CGColor;
   }

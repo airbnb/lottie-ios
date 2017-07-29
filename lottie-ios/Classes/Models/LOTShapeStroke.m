@@ -7,36 +7,33 @@
 //
 
 #import "LOTShapeStroke.h"
-#import "LOTAnimatableNumberValue.h"
-#import "LOTAnimatableColorValue.h"
 #import "CGGeometry+LOTAdditions.h"
 
 @implementation LOTShapeStroke
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+    [self _mapFromJSON:jsonDictionary];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
   NSDictionary *color = jsonDictionary[@"c"];
   if (color) {
-    _color = [[LOTAnimatableColorValue alloc] initWithColorValues:color frameRate:frameRate];
+    _color = [[LOTKeyframeGroup alloc] initWithData:color];
   }
   
   NSDictionary *width = jsonDictionary[@"w"];
   if (width) {
-    _width = [[LOTAnimatableNumberValue alloc] initWithNumberValues:width frameRate:frameRate];
+    _width = [[LOTKeyframeGroup alloc] initWithData:width];
   }
   
   NSDictionary *opacity = jsonDictionary[@"o"];
   if (opacity) {
-    _opacity = [[LOTAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:frameRate];
-    [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
-    [_opacity.keyframeGroup remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+    _opacity = [[LOTKeyframeGroup alloc] initWithData:opacity];
+    [_opacity remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
       return LOT_RemapValue(inValue, 0, 100, 0, 1);
     }];
   }
@@ -54,9 +51,10 @@
       if ([dash[@"n"] isEqualToString:@"o"]) {
         continue;
       }
+      // TODO DASH PATTERNS
       NSDictionary *value = dash[@"v"];
-      LOTAnimatableNumberValue *numberValue = [[LOTAnimatableNumberValue alloc] initWithNumberValues:value frameRate:frameRate];
-      [dashPattern addObject:[numberValue.initialValue copy]];
+//      LOTAnimatableNumberValue *numberValue = [[LOTKeyframeGroup alloc] initWithData:value];
+//      [dashPattern addObject:[numberValue.initialValue copy]];
     }
     _lineDashPattern = dashPattern;
   }

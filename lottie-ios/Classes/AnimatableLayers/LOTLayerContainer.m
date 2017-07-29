@@ -9,7 +9,6 @@
 #import "LOTLayerContainer.h"
 #import "LOTTransformInterpolator.h"
 #import "LOTNumberInterpolator.h"
-#import "LOTAnimatableNumberValue.h"
 #import "CGGeometry+LOTAdditions.h"
 #import "LOTRenderGroup.h"
 #import "LOTHelpers.h"
@@ -84,7 +83,7 @@
       parentID = parentModel.parentID;
     }
   }
-  _opacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:layer.opacity.keyframeGroup.keyframes];
+  _opacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:layer.opacity.keyframes];
   if (layer.layerType == LOTLayerTypeShape &&
       layer.shapes.count) {
     [self buildContents:layer.shapes];
@@ -131,7 +130,7 @@
 #else
 
 - (void)_setImageForAsset:(LOTAsset *)asset {
-  if (lasset.imageName) {
+  if (asset.imageName) {
     NSArray *components = [asset.imageName componentsSeparatedByString:@"."];
     NSImage *image = [NSImage imageNamed:components.firstObject];
     if (image) {
@@ -139,7 +138,7 @@
       CGFloat desiredScaleFactor = [window backingScaleFactor];
       CGFloat actualScaleFactor = [image recommendedLayerContentsScale:desiredScaleFactor];
       id layerContents = [image layerContentsForContentsScale:actualScaleFactor];
-      _childSolid.contents = layerContents;
+      _wrapperLayer = layerContents;
       
     }
   }

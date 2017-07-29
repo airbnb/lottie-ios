@@ -27,14 +27,14 @@
                               shapeRepeater:(LOTShapeRepeater *_Nonnull)repeater {
   self = [super initWithInputNode:inputNode];
   if (self) {
-    _transformInterpolator = [[LOTTransformInterpolator alloc] initWithPosition:repeater.position.keyframeGroup.keyframes
-                                                                       rotation:repeater.rotation.keyframeGroup.keyframes
-                                                                         anchor:repeater.anchorPoint.keyframeGroup.keyframes
-                                                                          scale:repeater.scale.keyframeGroup.keyframes];
-    _copiesInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:repeater.copies.keyframeGroup.keyframes];
-    _offsetInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:repeater.offset.keyframeGroup.keyframes];
-    _startOpacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:repeater.startOpacity.keyframeGroup.keyframes];
-    _endOpacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:repeater.endOpacity.keyframeGroup.keyframes];
+    _transformInterpolator = [[LOTTransformInterpolator alloc] initWithPosition:repeater.position.keyframes
+                                                                       rotation:repeater.rotation.keyframes
+                                                                         anchor:repeater.anchorPoint.keyframes
+                                                                          scale:repeater.scale.keyframes];
+    _copiesInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:repeater.copies.keyframes];
+    _offsetInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:repeater.offset.keyframes];
+    _startOpacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:repeater.startOpacity.keyframes];
+    _endOpacityInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:repeater.endOpacity.keyframes];
     
     _instanceLayer = [CALayer layer];
     [self recursivelyAddChildLayers:inputNode];

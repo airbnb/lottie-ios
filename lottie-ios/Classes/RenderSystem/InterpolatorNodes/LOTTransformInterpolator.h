@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "LOTNumberInterpolator.h"
 #import "LOTPointInterpolator.h"
-#import "LOTAnimatableColorValue.h"
 #import "LOTSizeInterpolator.h"
 #import "LOTKeyframe.h"
 #import "LOTLayer.h"
