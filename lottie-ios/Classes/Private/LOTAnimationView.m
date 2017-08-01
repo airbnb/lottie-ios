@@ -14,6 +14,8 @@
 #import "LOTAnimationView_Internal.h"
 #import "LOTAnimationCache.h"
 #import "LOTCompositionLayer.h"
+#import "LOTAssetGroup.h"
+#import "LOTAsset.h"
 
 @implementation LOTAnimationState {
   BOOL _needsAnimationUpdate;
@@ -208,6 +210,44 @@
                                                                    reason:[error localizedDescription]
                                                                  userInfo:nil];
   @throw resourceNotFoundException;
+}
+
++ (instancetype)animationNamed:(NSString *)animationName
+                     jsonBlock:(NSDictionary* (^)())jsonBlock
+                    imageBlock:(UIImage* (^)(NSString *))imageBlock {
+    
+    LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
+    if (!comp) {
+        
+        NSDictionary *JSONObject = nil;
+        if (jsonBlock) {
+            JSONObject = jsonBlock();
+        }
+        
+        if (!jsonBlock) {
+            NSError *error;
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:animationName ofType:@"json"];
+            NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
+            JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                                   options:0 error:&error] : nil;
+        }
+        
+        if (!JSONObject) {
+            return nil;
+        }
+        
+        comp = [[LOTComposition alloc] initWithJSON:JSONObject];
+        [[LOTAnimationCache sharedCache] addAnimation:comp forKey:animationName];
+    }
+    
+    if (imageBlock) {
+        [comp.assetGroup.assetMap.objectEnumerator.allObjects
+         enumerateObjectsUsingBlock:^(LOTAsset *asset, NSUInteger idx, BOOL *stop){
+             asset.image = imageBlock(asset.imageName);
+         }];
+    }
+    
+    return [[LOTAnimationView alloc] initWithModel:comp];
 }
 
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON {

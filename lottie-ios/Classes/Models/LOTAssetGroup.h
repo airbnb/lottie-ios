@@ -23,4 +23,7 @@
 
 - (LOTAsset * _Nullable)assetModelForID:(NSString * _Nonnull)assetID;
 
+@property(nonatomic,readonly,nullable) NSDictionary<NSString *, LOTAsset *> *assetMap;
+
+
 @end

@@ -10,12 +10,17 @@
 #import "LOTAnimationView_Compat.h"
 
 typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
+@class LOTComposition;
 
 @interface LOTAnimationView : LOTView
 
 + (instancetype)animationNamed:(NSString *)animationName NS_SWIFT_NAME(init(name:));
 + (instancetype)animationNamed:(NSString *)animationName inBundle:(NSBundle *)bundle NS_SWIFT_NAME(init(name:bundle:));
 + (instancetype)animationFromJSON:(NSDictionary *)animationJSON NS_SWIFT_NAME(init(json:));
++ (instancetype)animationNamed:(NSString *)animationName
+                     jsonBlock:(NSDictionary* (^)())jsonBlock
+                    imageBlock:(UIImage* (^)(NSString *))imageBlock;
+
 
 - (instancetype)initWithContentsOfURL:(NSURL *)url;
 

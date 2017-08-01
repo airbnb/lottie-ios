@@ -59,4 +59,8 @@
   return _assetMap[assetID];
 }
 
+- (NSDictionary<NSString *, LOTAsset *> *)assetMap {
+    return _assetMap;
+}
+
 @end
