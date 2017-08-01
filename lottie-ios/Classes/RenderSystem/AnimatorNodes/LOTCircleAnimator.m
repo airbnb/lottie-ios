@@ -19,13 +19,18 @@ const CGFloat kLOTEllipseControlPointPercentage = 0.55228;
 
 - (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                                   shapeCircle:(LOTShapeCircle *_Nonnull)shapeCircle {
-  self = [super initWithInputNode:inputNode];
+  self = [super initWithInputNode:inputNode keyName:shapeCircle.keyname];
   if (self) {
     _centerInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeCircle.position.keyframes];
     _sizeInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeCircle.size.keyframes];
     _reversed = shapeCircle.reversed;
   }
   return self;
+}
+
+- (NSDictionary *)valueInterpolators {
+  return @{@"Size" : _sizeInterpolator,
+           @"Position" : _centerInterpolator};
 }
 
 - (BOOL)needsUpdateForFrame:(NSNumber *)frame {

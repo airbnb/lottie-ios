@@ -10,8 +10,9 @@
 
 @implementation LOTRenderNode
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode {
-  self = [super initWithInputNode:inputNode];
+- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
+                                    keyName:(NSString * _Nullable)keyname {
+  self = [super initWithInputNode:inputNode keyName:keyname];
   if (self) {
     _outputLayer = [CAShapeLayer new];
     _outputLayer.actions = [self actionsForRenderLayer];
@@ -20,7 +21,7 @@
 }
 
 /// Layer Properties that need to disable implicit animations
-- (NSDictionary *)actionsForRenderLayer {
+- (NSDictionary * _Nonnull)actionsForRenderLayer {
   return @{@"path": [NSNull null]};
 }
 

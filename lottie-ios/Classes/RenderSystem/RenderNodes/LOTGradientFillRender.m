@@ -33,7 +33,7 @@
 
 - (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nonnull)inputNode
                           shapeGradientFill:(LOTShapeGradientFill *_Nonnull)fill {
-  self = [super initWithInputNode:inputNode];
+  self = [super initWithInputNode:inputNode keyName:fill.keyname];
   if (self) {
     _gradientInterpolator = [[LOTArrayInterpolator alloc] initWithKeyframes:fill.gradient.keyframes];
     _startPointInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:fill.startPoint.keyframes];
@@ -71,6 +71,12 @@
     }
   }
   return self;
+}
+
+- (NSDictionary *)valueInterpolators {
+  return @{@"Start Point" : _startPointInterpolator,
+           @"End Point" : _endPointInterpolator,
+           @"Opacity" : _opacityInterpolator};
 }
 
 - (BOOL)needsUpdateForFrame:(NSNumber *)frame {

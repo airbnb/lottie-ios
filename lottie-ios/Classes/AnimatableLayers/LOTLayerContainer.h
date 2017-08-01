@@ -12,12 +12,19 @@
 
 @interface LOTLayerContainer : CALayer
 
-- (instancetype)initWithModel:(LOTLayer *)layer
-                 inLayerGroup:(LOTLayerGroup *)layerGroup;
+- (instancetype _Nonnull )initWithModel:(LOTLayer * _Nullable)layer
+                 inLayerGroup:(LOTLayerGroup * _Nullable)layerGroup;
 
-@property (nonatomic) NSNumber *currentFrame;
+@property (nonatomic,  readonly, strong, nullable) NSString *layerName;
+@property (nonatomic, nullable) NSNumber *currentFrame;
 @property (nonatomic, assign) CGRect viewportBounds;
-@property (nonatomic, readonly) CALayer *wrapperLayer;
-- (void)displayWithFrame:(NSNumber *)frame;
+@property (nonatomic, readonly, nonnull) CALayer *wrapperLayer;
+- (void)displayWithFrame:(NSNumber * _Nonnull)frame;
+- (void)displayWithFrame:(NSNumber * _Nonnull)frame forceUpdate:(BOOL)forceUpdate;
 
+- (void)addAndMaskSublayer:(nonnull CALayer *)subLayer;
+
+- (BOOL)setValue:(nonnull id)value
+      forKeypath:(nonnull NSString *)keypath
+         atFrame:(nullable NSNumber *)frame;
 @end

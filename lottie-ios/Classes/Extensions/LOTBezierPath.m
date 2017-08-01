@@ -78,17 +78,6 @@ struct LOT_Subpath {
   copy.flatness = self.flatness;
   copy.usesEvenOddFillRule = self.usesEvenOddFillRule;
   
-  NSInteger lineDashCount = 0;
-  [self getLineDash:NULL count:&lineDashCount phase:NULL];
-  
-  if (lineDashCount > 0) {
-    CGFloat *lineDashPattern = malloc(sizeof(CGFloat) * lineDashCount);
-    CGFloat lineDashPhase = 0;
-    [self getLineDash:lineDashPattern count:NULL phase:&lineDashPhase];
-    [copy setLineDash:lineDashPattern count:lineDashCount phase:lineDashPhase];
-    free(lineDashPattern);
-  }
-  
   [copy LOT_appendPath:self];
   
   return copy;
@@ -194,36 +183,6 @@ struct LOT_Subpath {
 - (void)LOT_removeAllPoints {
   [self removeAllSubpaths];
   [self _clearPathData];
-}
-
-- (void)setLineDash:(const CGFloat *)pattern count:(NSInteger)count phase:(CGFloat)phase {
-  free(_lineDashPattern);
-  
-  if (pattern && count > 0) {
-    const size_t size = sizeof(CGFloat) * count;
-    _lineDashPattern = malloc(size);
-    bcopy(pattern, _lineDashPattern, size);
-  } else {
-    _lineDashPattern = NULL;
-  }
-  
-  _lineDashCount = count;
-  _lineDashPhase = phase;
-}
-
-- (void)getLineDash:(CGFloat *)pattern count:(NSInteger *)count phase:(CGFloat *)phase {
-  if (pattern && _lineDashPattern && _lineDashCount > 0) {
-    const size_t size = sizeof(CGFloat) * _lineDashCount;
-    bcopy(_lineDashPattern, pattern, size);
-  }
-  
-  if (count) {
-    *count = _lineDashCount;
-  }
-  
-  if (phase) {
-    *phase = _lineDashPhase;
-  }
 }
 
 - (BOOL)containsPoint:(CGPoint)point {

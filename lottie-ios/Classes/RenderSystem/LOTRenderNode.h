@@ -12,6 +12,6 @@
 
 @property (nonatomic, readonly, strong) CAShapeLayer * _Nonnull outputLayer;
 
-- (NSDictionary *)actionsForRenderLayer;
+- (NSDictionary * _Nonnull)actionsForRenderLayer;
 
 @end

@@ -19,6 +19,7 @@ typedef enum : NSUInteger {
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
+@property (nonatomic, readonly) NSString *keyname;
 @property (nonatomic, readonly) LOTKeyframeGroup *outerRadius;
 @property (nonatomic, readonly) LOTKeyframeGroup *outerRoundness;
 

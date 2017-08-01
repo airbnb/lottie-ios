@@ -20,7 +20,7 @@
 
 - (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nonnull)inputNode
                                   shapeFill:(LOTShapeFill *_Nonnull)fill {
-  self = [super initWithInputNode:inputNode];
+  self = [super initWithInputNode:inputNode keyName:fill.keyname];
   if (self) {
     colorInterpolator_ = [[LOTColorInterpolator alloc] initWithKeyframes:fill.color.keyframes];
     opacityInterpolator_ = [[LOTNumberInterpolator alloc] initWithKeyframes:fill.opacity.keyframes];
@@ -30,9 +30,15 @@
       [self.outputLayer addSublayer:centerPoint_DEBUG];
     }
     _evenOddFillRule = fill.evenOddFillRule;
+    
     self.outputLayer.fillRule = _evenOddFillRule ? @"even-odd" : @"non-zero";
   }
   return self;
+}
+
+- (NSDictionary *)valueInterpolators {
+  return @{@"Color" : colorInterpolator_,
+           @"Opacity" : opacityInterpolator_};
 }
 
 - (BOOL)needsUpdateForFrame:(NSNumber *)frame {

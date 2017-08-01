@@ -88,6 +88,54 @@
   if (ENABLE_DEBUG_LOGGING) NSLog(@"-------------------- ------------------------------- --------------------");
 }
 
+- (BOOL)setValue:(nonnull id)value
+      forKeypath:(nonnull NSString *)keypath
+         atFrame:(nullable NSNumber *)frame {
+  BOOL transformSet = [super setValue:value forKeypath:keypath atFrame:frame];
+  if (transformSet) {
+    return transformSet;
+  }
+  NSString *childKey = nil;
+  if (self.layerName == nil) {
+    childKey = keypath;
+  } else {
+    NSArray *components = [keypath componentsSeparatedByString:@"."];
+    NSString *firstKey = components.firstObject;
+    if ([firstKey isEqualToString:self.layerName]) {
+      childKey = [keypath stringByReplacingCharactersInRange:NSMakeRange(0, firstKey.length + 1) withString:@""];
+    }
+  }
+
+  if (childKey) {
+    for (LOTLayerContainer *child in _childLayers) {
+      BOOL childHasKey = [child setValue:value forKeypath:childKey atFrame:frame];
+      if (childHasKey) {
+        return childHasKey;
+      }
+    }
+  }
+  
+  return NO;
+}
+
+- (void)addSublayer:(nonnull CALayer *)subLayer
+       toLayerNamed:(nonnull NSString *)layerName
+     applyTransform:(BOOL)applyTransform {
+  for (LOTLayerContainer *child in _childLayers) {
+    if ([child.layerName isEqualToString:layerName]) {
+      if (applyTransform) {
+        [child addAndMaskSublayer:subLayer];
+      } else {
+        CALayer *maskWrapper = [CALayer new];
+        [maskWrapper addSublayer:subLayer];
+        [self.wrapperLayer insertSublayer:maskWrapper below:child];
+        [child removeFromSuperlayer];
+        maskWrapper.mask = child;
+      }
+    }
+  }
+}
+
 - (void)setViewportBounds:(CGRect)viewportBounds {
   [super setViewportBounds:viewportBounds];
   for (LOTLayerContainer *layer in _childLayers) {

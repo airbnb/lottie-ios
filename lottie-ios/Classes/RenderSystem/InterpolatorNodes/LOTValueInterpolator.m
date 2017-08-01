@@ -26,6 +26,50 @@
   return self;
 }
 
+- (id)keyframeDataForValue:(id)value  {
+  NSLog(@"%s: Unsupported Keyframe Data: %@", __PRETTY_FUNCTION__, value);
+  return nil;
+}
+
+- (BOOL)setValue:(id)value atFrame:(NSNumber *)frame {
+  id data = [self keyframeDataForValue:value];
+  if (data == nil) {
+    return NO;
+  }
+  if (frame == nil) {
+    frame = @0;
+  }
+  [self updateKeyframeSpanForFrame:frame];
+  if (frame.floatValue == self.leadingKeyframe.keyframeTime.floatValue) {
+    // Is leading frame, replace
+    [self.leadingKeyframe setData:data];
+  } else if (frame.floatValue == self.trailingKeyframe.keyframeTime.floatValue) {
+    // Is trailing frame
+    [self.trailingKeyframe setData:data];
+  } else {
+    // Is between leading and trailing. Either can be nil.
+    // For now added keyframes will default to linear interpolation.
+    // TODO BW Add smart bezier interpolation
+    NSMutableDictionary *keyframeDict = [NSMutableDictionary dictionary];
+    keyframeDict[@"s"] = data;
+    keyframeDict[@"t"] = frame;
+    LOTKeyframe *keyframe = [[LOTKeyframe alloc] initWithKeyframe:keyframeDict];
+    NSMutableArray *newKeyframes = [NSMutableArray arrayWithArray:_keyframes];
+    if (self.trailingKeyframe == nil ||
+        self.trailingKeyframe == newKeyframes.lastObject) {
+      [newKeyframes addObject:keyframe];
+    } else {
+      NSInteger idx = [newKeyframes indexOfObject:self.trailingKeyframe];
+      [newKeyframes insertObject:keyframe atIndex:idx];
+    }
+    _keyframes = newKeyframes;
+    self.leadingKeyframe = nil;
+    self.trailingKeyframe = nil;
+  }
+  
+  return YES;
+}
+
 - (BOOL)hasUpdateForFrame:(NSNumber *)frame {
   /*
    Cases we dont update keyframe
@@ -52,7 +96,6 @@
     // Frame is in span and current span is a hold keyframe
     return NO;
   }
-  
   
   return YES;
 }
@@ -148,8 +191,10 @@
 
   CGFloat progession = LOT_RemapValue(frame.floatValue, self.leadingKeyframe.keyframeTime.floatValue, self.trailingKeyframe.keyframeTime.floatValue, 0, 1);
   
-  if (self.leadingKeyframe.outTangent.x != self.leadingKeyframe.outTangent.y ||
-      self.trailingKeyframe.inTangent.x != self.trailingKeyframe.inTangent.y) {
+  if ((self.leadingKeyframe.outTangent.x != self.leadingKeyframe.outTangent.y ||
+      self.trailingKeyframe.inTangent.x != self.trailingKeyframe.inTangent.y) &&
+      (!LOT_CGPointIsZero(self.leadingKeyframe.outTangent) &&
+       !LOT_CGPointIsZero(self.trailingKeyframe.inTangent))) {
     // Bezeir Time Curve
     progession = LOT_CubicBezeirInterpolate(CGPointMake(0, 0), self.leadingKeyframe.outTangent, self.trailingKeyframe.inTangent, CGPointMake(1, 1), progession);
   }

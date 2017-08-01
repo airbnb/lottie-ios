@@ -25,7 +25,7 @@ const CGFloat kPOLYGON_MAGIC_NUMBER = .25f;
 
 - (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                              shapePolygon:(LOTShapeStar *_Nonnull)shapeStar {
-  self = [super initWithInputNode:inputNode];
+  self = [super initWithInputNode:inputNode keyName:shapeStar.keyname];
   if (self) {
     _outerRadiusInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeStar.outerRadius.keyframes];
     _outerRoundnessInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:shapeStar.outerRoundness.keyframes];
@@ -34,6 +34,14 @@ const CGFloat kPOLYGON_MAGIC_NUMBER = .25f;
     _positionInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeStar.position.keyframes];
   }
   return self;
+}
+
+- (NSDictionary *)valueInterpolators {
+  return @{@"Points" : _pointsInterpolator,
+           @"Position" : _positionInterpolator,
+           @"Rotation" : _rotationInterpolator,
+           @"Outer Radius" : _outerRadiusInterpolator,
+           @"Outer Roundness" : _outerRoundnessInterpolator};
 }
 
 - (BOOL)needsUpdateForFrame:(NSNumber *)frame {

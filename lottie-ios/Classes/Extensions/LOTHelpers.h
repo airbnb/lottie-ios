@@ -21,35 +21,7 @@
 
 // TODO Feature Phase
 /*
-  - Trim Path individually
- - Cache update
- - Preload animation
- - Image bundle support
+ - Trim Path individually
  - Image Cache Support
- - Asset bundle
  - Skew transform
- PASS on LOTAnimationView
-
-  - Add sublayer support
-
-  - Play to Keyframe Point
-  - Color change
-  - Arbitrary keyframe change
  */
-
-/*
- - Check perfomance vs old renderer
- - Check if the bounds value is still used
- */
-
-// TODO Cleanup Phase
-/*
-  - Check all variable names, proper underscore
-  - Remove Animatable Values
- - Remove animatable layers
- - remove framerate and compbounds passing around
- - Check nullability
- - Check all BWs
- - Check MacOS Compat
-
-*/

@@ -22,4 +22,11 @@
   return LOT_RemapValue(progress, 0, 1, self.leadingKeyframe.floatValue, self.trailingKeyframe.floatValue);
 }
 
+- (id)keyframeDataForValue:(id)value {
+  if ([value isKindOfClass:[NSNumber class]]) {
+    return value;
+  }
+  return nil;
+}
+
 @end

@@ -20,7 +20,7 @@
 
 - (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                              shapeRectangle:(LOTShapeRectangle *_Nonnull)shapeRectangle {
-  self = [super initWithInputNode:inputNode];
+  self = [super initWithInputNode:inputNode keyName:shapeRectangle.keyname];
   if (self) {
     _centerInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeRectangle.position.keyframes];
     _sizeInterpolator = [[LOTPointInterpolator alloc] initWithKeyframes:shapeRectangle.size.keyframes];
@@ -28,6 +28,12 @@
     _reversed = shapeRectangle.reversed;
   }
   return self;
+}
+
+- (NSDictionary *)valueInterpolators {
+  return @{@"Size" : _sizeInterpolator,
+           @"Position" : _centerInterpolator,
+           @"Roundness" : _cornerRadiusInterpolator};
 }
 
 - (BOOL)needsUpdateForFrame:(NSNumber *)frame {

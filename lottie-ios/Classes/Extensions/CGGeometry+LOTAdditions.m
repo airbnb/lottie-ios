@@ -524,4 +524,6 @@ CGFloat LOT_CubicLength(CGPoint fromPoint, CGPoint toPoint, CGPoint controlPoint
   return LOT_CubicLengthWithPrecision(fromPoint, toPoint, controlPoint1, controlPoint2, 20);
 }
 
-
+BOOL LOT_CGPointIsZero(CGPoint point) {
+  return CGPointEqualToPoint(point, CGPointZero);
+}

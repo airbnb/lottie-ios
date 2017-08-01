@@ -11,7 +11,8 @@
 @interface LOTRenderGroup : LOTRenderNode
 
 - (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode * _Nullable)inputNode
-                                   contents:(NSArray * _Nonnull)contents;
+                                   contents:(NSArray * _Nonnull)contents
+                                    keyname:(NSString * _Nullable)keyname;
 
 @property (nonatomic, strong, readonly) CALayer * _Nonnull containerLayer;
 

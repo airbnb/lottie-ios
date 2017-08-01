@@ -19,6 +19,11 @@
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
+  
+  if (jsonDictionary[@"nm"] ) {
+    _keyname = [jsonDictionary[@"nm"] copy];
+  }
+  
   NSDictionary *outerRadius = jsonDictionary[@"or"];
   if (outerRadius) {
     _outerRadius = [[LOTKeyframeGroup alloc] initWithData:outerRadius];

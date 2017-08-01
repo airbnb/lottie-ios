@@ -20,6 +20,11 @@
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
+  
+  if (jsonDictionary[@"nm"] ) {
+    _keyname = [jsonDictionary[@"nm"] copy];
+  }
+  
   NSDictionary *color = jsonDictionary[@"c"];
   if (color) {
     _color = [[LOTKeyframeGroup alloc] initWithData:color];

@@ -19,6 +19,11 @@
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
+  
+  if (jsonDictionary[@"nm"] ) {
+    _keyname = [jsonDictionary[@"nm"] copy];
+  }
+  
   _index = jsonDictionary[@"ind"];
   _closed = [jsonDictionary[@"closed"] boolValue];
   NSDictionary *shape = jsonDictionary[@"ks"];

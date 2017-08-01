@@ -20,6 +20,10 @@
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
+  if (jsonDictionary[@"nm"] ) {
+    _keyname = [jsonDictionary[@"nm"] copy];
+  }
+  
   NSNumber *type = jsonDictionary[@"t"];
   if (type.integerValue != 1) {
     NSLog(@"%s: Warning: Only Linear Gradients are supported.", __PRETTY_FUNCTION__);
