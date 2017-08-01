@@ -24,6 +24,8 @@
   CFTimeInterval _previousLocalTime;
   CGFloat _animatedProgress;
   NSNumber *_framerate;
+  BOOL _onscreen;
+  CADisplayLink *_displayLink;
 }
 
 - (id)initWithDuration:(CGFloat)duration layer:(CALayer *)layer frameRate:(NSNumber *)framerate {
@@ -32,6 +34,7 @@
     _framerate = framerate;
     _layer = layer;
     _needsAnimationUpdate = NO;
+    _onscreen= NO;
     _animationIsPlaying = NO;
     _loopAnimation = NO;
     
@@ -44,10 +47,8 @@
     _layer.duration = _animationDuration;
     _layer.speed = 0;
     _layer.timeOffset = 0;
-    _layer.beginTime = CACurrentMediaTime();
-
+    _layer.beginTime = 0;
     _previousLocalTime = -1.f;
-    [self setNeedsAnimationUpdate];
   }
   return self;
 }
@@ -64,7 +65,7 @@
   _layer.repeatCount = _loopAnimation ? HUGE_VALF : 0;
   _layer.timeOffset = 0;
   _layer.beginTime = 0;
-  
+    
   if (speed == 0) {
     _layer.timeOffset = timeOffset;
   } else {
@@ -75,18 +76,29 @@
   }
 }
 
-- (void)setNeedsAnimationUpdate {
-  if (!_needsAnimationUpdate) {
-    _needsAnimationUpdate = YES;
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-      _needsAnimationUpdate = NO;
-      if (_animationIsPlaying) {
+- (void)updateAnimationState {
+    _needsAnimationUpdate = NO;
+    _onscreen = YES;
+    
+    if (_animationIsPlaying) {
         [self setAnimationIsPlaying:_animationIsPlaying];
-      } else {
+    } else {
         [self setAnimatedProgress:_animatedProgress];
-      }
-    }];
-  }
+    }
+    
+    [_displayLink invalidate];
+    _displayLink = nil;
+}
+
+- (void)setNeedsAnimationUpdate {
+    if (!_needsAnimationUpdate) {
+        _needsAnimationUpdate = YES;
+        
+        [_displayLink invalidate];
+        _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateAnimationState)];
+        [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+        [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:UITrackingRunLoopMode];
+    }
 }
 
 #pragma mark -- Setters
@@ -97,6 +109,7 @@
   __unused CFTimeInterval clock = CACurrentMediaTime();
   [self updateAnimationLayerWithTimeOffset:offset];
 }
+
 
 - (void)setAnimationIsPlaying:(BOOL)animationIsPlaying  {
   _animationIsPlaying = animationIsPlaying;
@@ -115,6 +128,10 @@
 }
 
 - (void)setAnimatedProgress:(CGFloat)animatedProgress {
+    if (!_onscreen) {
+        return;
+    }
+    
   if (_playFromBeginning) {
     _playFromBeginning = NO;
   }
@@ -166,8 +183,8 @@
 
 - (void)logStats:(NSString *)logName {
   CFTimeInterval localTime = [_layer convertTime:CACurrentMediaTime() fromLayer:nil];
-  NSLog(@"LOTAnimationState %@ || Is Playing %@ || Duration %f || Speed %lf ||  Progress %lf || Local Time %lf || Frame %i ",
-        logName, (_animationIsPlaying ? @"YES" : @"NO"), self.animationDuration, _layer.speed, self.animatedProgress, localTime, (int)(localTime * _framerate.integerValue));
+  NSLog(@"+++++++++++++%@|| Is Playing %@ || Duration %f || Speed %lf ||  Progress %lf || Local Time %lf || Frame %i || timeOffset %f || beginTime %f",
+        logName, (_animationIsPlaying ? @"YES" : @"NO"), self.animationDuration, _layer.speed, self.animatedProgress, localTime, (int)(localTime * _framerate.integerValue),_layer.timeOffset,_layer.beginTime);
 }
 
 @end
@@ -395,8 +412,7 @@
 # pragma mark - Display Link
 
 - (void)startDisplayLink {
-  if (_animationState.animationIsPlaying == NO ||
-      _animationState.loopAnimation) {
+  if (_animationState.animationIsPlaying == NO) {
     return;
   }
   
@@ -443,9 +459,6 @@
 
 - (void)setLoopAnimation:(BOOL)loopAnimation {
   [_animationState setAnimationDoesLoop:loopAnimation];
-  if (loopAnimation) {
-    [self stopDisplayLink];
-  }
 }
 
 - (BOOL)loopAnimation {
