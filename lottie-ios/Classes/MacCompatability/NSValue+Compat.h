@@ -13,6 +13,7 @@
 
 @property (nonatomic, readonly) CGRect CGRectValue;
 @property(nonatomic, readonly) CGPoint CGPointValue;
+@property (nonatomic, readonly) CGSize CGSizeValue;
 
 @end
 

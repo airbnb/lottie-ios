@@ -25,7 +25,7 @@
 
 - (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                                    trimPath:(LOTShapeTrimPath *_Nonnull)trimPath {
-  self = [super initWithInputNode:inputNode];
+  self = [super initWithInputNode:inputNode keyName:trimPath.keyname];
   if (self) {
     inputNode.pathShouldCacheLengths = YES;
     _startInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:trimPath.start.keyframes];
@@ -33,6 +33,12 @@
     _offsetInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:trimPath.offset.keyframes];
   }
   return self;
+}
+
+- (NSDictionary *)valueInterpolators {
+  return @{@"Start" : _startInterpolator,
+           @"End" : _endInterpolator,
+           @"Offset" : _offsetInterpolator};
 }
 
 - (BOOL)needsUpdateForFrame:(NSNumber *)frame {

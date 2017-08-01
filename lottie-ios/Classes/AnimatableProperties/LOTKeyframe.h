@@ -11,13 +11,14 @@
 #import "LOTPlatformCompat.h"
 #import "LOTBezierData.h"
 
-// TODO Move to models
+NS_ASSUME_NONNULL_BEGIN
 
 @interface LOTKeyframe : NSObject
 
 - (instancetype)initWithKeyframe:(NSDictionary *)keyframe;
 - (instancetype)initWithValue:(id)value;
 - (void)remapValueWithBlock:(CGFloat (^)(CGFloat inValue))remapBlock;
+- (void)setData:(id)data;
 
 @property (nonatomic, readonly) NSNumber *keyframeTime;
 @property (nonatomic, readonly) BOOL isHold;
@@ -29,9 +30,8 @@
 @property (nonatomic, readonly) CGFloat floatValue;
 @property (nonatomic, readonly) CGPoint pointValue;
 @property (nonatomic, readonly) CGSize sizeValue;
-@property (nonatomic, readonly) CGRect rectValue;
 @property (nonatomic, readonly) UIColor *colorValue;
-@property (nonatomic, readonly) LOTBezierData *pathData;
+@property (nonatomic, readonly, nullable) LOTBezierData *pathData;
 @property (nonatomic, readonly) NSArray *arrayValue;
 
 @end
@@ -45,3 +45,5 @@
 @property (nonatomic, readonly) NSArray<LOTKeyframe *> *keyframes;
 
 @end
+
+NS_ASSUME_NONNULL_END

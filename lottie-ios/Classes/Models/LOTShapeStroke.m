@@ -20,6 +20,11 @@
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
+  
+  if (jsonDictionary[@"nm"] ) {
+    _keyname = [jsonDictionary[@"nm"] copy];
+  }
+  
   NSDictionary *color = jsonDictionary[@"c"];
   if (color) {
     _color = [[LOTKeyframeGroup alloc] initWithData:color];
@@ -44,19 +49,24 @@
   NSNumber *fillEnabled = jsonDictionary[@"fillEnabled"];
   _fillEnabled = fillEnabled.boolValue;
   
+  NSDictionary *dashOffset = nil;
   NSArray *dashes = jsonDictionary[@"d"];
   if (dashes) {
     NSMutableArray *dashPattern = [NSMutableArray array];
     for (NSDictionary *dash in dashes) {
       if ([dash[@"n"] isEqualToString:@"o"]) {
+        dashOffset = dash[@"v"];
         continue;
       }
       // TODO DASH PATTERNS
       NSDictionary *value = dash[@"v"];
-//      LOTAnimatableNumberValue *numberValue = [[LOTKeyframeGroup alloc] initWithData:value];
-//      [dashPattern addObject:[numberValue.initialValue copy]];
+      LOTKeyframeGroup *keyframeGroup = [[LOTKeyframeGroup alloc] initWithData:value];
+      [dashPattern addObject:keyframeGroup];
     }
     _lineDashPattern = dashPattern;
+  }
+  if (dashOffset) {
+    _dashOffset = [[LOTKeyframeGroup alloc] initWithData:dashOffset];
   }
 }
 

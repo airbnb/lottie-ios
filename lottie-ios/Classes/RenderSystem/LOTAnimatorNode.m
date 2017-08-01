@@ -8,15 +8,18 @@
 
 #import "LOTAnimatorNode.h"
 #import "LOTHelpers.h"
+#import "LOTValueInterpolator.h"
 
 NSInteger indentation_level = 0;
 
 @implementation LOTAnimatorNode
 
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode {
+- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
+                                    keyName:(NSString *_Nullable)keyname {
   self = [super init];
   if (self) {
+    _keyname = keyname;
     _inputNode = inputNode;
   }
   return self;
@@ -94,6 +97,30 @@ NSInteger indentation_level = 0;
 - (void)setPathShouldCacheLengths:(BOOL)pathShouldCacheLengths {
   _pathShouldCacheLengths = pathShouldCacheLengths;
   self.inputNode.pathShouldCacheLengths = pathShouldCacheLengths;
+}
+
+/// Traverses children untill keypath is found and attempts to set the keypath to the value.
+- (BOOL)setValue:(nonnull id)value
+    forKeyAtPath:(nonnull NSString *)keypath
+        forFrame:(nullable NSNumber *)frame {
+  NSArray *components = [keypath componentsSeparatedByString:@"."];
+  NSString *firstKey = components.firstObject;
+  if ([firstKey isEqualToString:self.keyname]) {
+    NSString *nextPath = [keypath stringByReplacingCharactersInRange:NSMakeRange(0, firstKey.length + 1) withString:@""];
+    return  [self setInterpolatorValue:value forKey:nextPath forFrame:frame];
+  }
+  return  [self.inputNode setValue:value forKeyAtPath:keypath forFrame:frame];
+}
+
+/// Sets the keyframe to the value, to be overwritten by subclasses
+- (BOOL)setInterpolatorValue:(nonnull id)value
+                      forKey:(nonnull NSString *)key
+                    forFrame:(nullable NSNumber *)frame {
+  LOTValueInterpolator *interpolator = self.valueInterpolators[key];
+  if (interpolator) {
+    return [interpolator setValue:value atFrame:frame];
+  }
+  return NO;
 }
 
 @end

@@ -6,8 +6,6 @@
 //  Copyright © 2017 Brandon Withrow. All rights reserved.
 //
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-
 #import "LOTAnimationTransitionController.h"
 #import "LOTAnimationView.h"
 
@@ -16,26 +14,32 @@
   NSString *fromLayerName_;
   NSString *toLayerName_;
   NSBundle *inBundle_;
+  BOOL _applyTransform;
+}
+
+- (nonnull instancetype)initWithAnimationNamed:(nonnull NSString *)animation
+                                fromLayerNamed:(nullable NSString *)fromLayer
+                                  toLayerNamed:(nullable NSString *)toLayer
+                       applyAnimationTransform:(BOOL)applyAnimationTransform {
+  
+  return [self initWithAnimationNamed:animation
+                       fromLayerNamed:fromLayer
+                         toLayerNamed:toLayer
+              applyAnimationTransform:applyAnimationTransform
+                             inBundle:[NSBundle mainBundle]];
 }
 
 - (instancetype)initWithAnimationNamed:(NSString *)animation
                         fromLayerNamed:(NSString *)fromLayer
-                          toLayerNamed:(NSString *)toLayer {
-    
-    return [self initWithAnimationNamed:animation
-                          fromLayerNamed:fromLayer
-                           toLayerNamed:toLayer
-                               inBundle:[NSBundle mainBundle]];
-}
-- (instancetype)initWithAnimationNamed:(NSString *)animation
-                        fromLayerNamed:(NSString *)fromLayer
                           toLayerNamed:(NSString *)toLayer
+               applyAnimationTransform:(BOOL)applyAnimationTransform
                               inBundle:(NSBundle *)bundle {
   self = [super init];
   if (self) {
     tranistionAnimationView_ = [LOTAnimationView animationNamed:animation inBundle:bundle];
     fromLayerName_ = fromLayer;
     toLayerName_ = toLayer;
+    _applyTransform = applyAnimationTransform;
   }
   return self;
 }
@@ -49,20 +53,25 @@
   UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
   UIView *containerView = transitionContext.containerView;
   
-  UIView *toSnapshot = [toVC.view snapshotViewAfterScreenUpdates:YES];
+  UIView *toSnapshot = [toVC.view resizableSnapshotViewFromRect:containerView.bounds
+                                             afterScreenUpdates:YES
+                                                  withCapInsets:UIEdgeInsetsZero];
   toSnapshot.frame = containerView.bounds;
   
-  UIView *fromSnapshot = [fromVC.view snapshotViewAfterScreenUpdates:YES];
+  UIView *fromSnapshot = [fromVC.view resizableSnapshotViewFromRect:containerView.bounds
+                                                 afterScreenUpdates:YES
+                                                      withCapInsets:UIEdgeInsetsZero];
   fromSnapshot.frame = containerView.bounds;
   
   tranistionAnimationView_.frame = containerView.bounds;
   tranistionAnimationView_.contentMode = UIViewContentModeScaleAspectFill;
   [containerView addSubview:tranistionAnimationView_];
-  
+  tranistionAnimationView_.animationProgress = 0;
+  [tranistionAnimationView_ layoutSubviews];
   BOOL crossFadeViews = NO;
   
   if (toLayerName_.length) {
-    [tranistionAnimationView_ addSubview:toSnapshot toLayerNamed:toLayerName_];
+    [tranistionAnimationView_ addSubview:toSnapshot toLayerNamed:toLayerName_ applyTransform:_applyTransform];
   } else {
     [containerView addSubview:toSnapshot];
     [containerView sendSubviewToBack:toSnapshot];
@@ -71,7 +80,7 @@
   }
   
   if (fromLayerName_.length) {
-    [tranistionAnimationView_ addSubview:fromSnapshot toLayerNamed:fromLayerName_];
+    [tranistionAnimationView_ addSubview:fromSnapshot toLayerNamed:fromLayerName_ applyTransform:_applyTransform];
   } else {
     [containerView addSubview:fromSnapshot];
     [containerView sendSubviewToBack:fromSnapshot];
@@ -103,4 +112,3 @@
 
 @end
 
-#endif

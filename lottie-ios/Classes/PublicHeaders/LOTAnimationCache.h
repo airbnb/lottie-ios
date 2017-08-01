@@ -17,4 +17,6 @@
 - (void)addAnimation:(LOTComposition *)animation forKey:(NSString *)key;
 - (LOTComposition *)animationForKey:(NSString *)key;
 
+- (void)clearCache;
+
 @end

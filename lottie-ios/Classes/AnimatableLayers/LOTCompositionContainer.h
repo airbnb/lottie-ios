@@ -11,9 +11,13 @@
 
 @interface LOTCompositionContainer : LOTLayerContainer
 
-- (instancetype)initWithModel:(LOTLayer *)layer
-                 inLayerGroup:(LOTLayerGroup *)layerGroup
-               withLayerGroup:(LOTLayerGroup *)childLayerGroup
-              withAssestGroup:(LOTAssetGroup *)assetGroup;
+- (instancetype _Nonnull)initWithModel:(LOTLayer * _Nullable)layer
+                          inLayerGroup:(LOTLayerGroup * _Nullable)layerGroup
+                        withLayerGroup:(LOTLayerGroup * _Nullable)childLayerGroup
+                       withAssestGroup:(LOTAssetGroup * _Nullable)assetGroup;
+
+- (void)addSublayer:(nonnull CALayer *)subLayer
+       toLayerNamed:(nonnull NSString *)layerName
+     applyTransform:(BOOL)applyTransform;
 
 @end

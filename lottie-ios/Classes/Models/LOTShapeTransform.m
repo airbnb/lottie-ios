@@ -20,6 +20,11 @@
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
+  
+  if (jsonDictionary[@"nm"] ) {
+    _keyname = [jsonDictionary[@"nm"] copy];
+  }
+  
   NSDictionary *position = jsonDictionary[@"p"];
   if (position) {
     _position = [[LOTKeyframeGroup alloc] initWithData:position];

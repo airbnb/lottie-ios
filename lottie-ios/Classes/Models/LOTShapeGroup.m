@@ -29,6 +29,11 @@
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
+  
+  if (jsonDictionary[@"nm"] ) {
+    _keyname = [jsonDictionary[@"nm"] copy];
+  }
+  
   NSArray *itemsJSON = jsonDictionary[@"it"];
   NSMutableArray *items = [NSMutableArray array];
   for (NSDictionary *itemJSON in itemsJSON) {

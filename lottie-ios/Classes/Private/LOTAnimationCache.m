@@ -54,5 +54,10 @@ const NSInteger kLOTCacheSize = 50;
   return animation;
 }
 
+- (void)clearCache {
+  [animationsCache_ removeAllObjects];
+  [lruOrderArray_ removeAllObjects];
+}
+
 
 @end

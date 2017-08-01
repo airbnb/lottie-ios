@@ -8,6 +8,8 @@
 
 #import "LOTPlatformCompat.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface LOTBezierPath : NSObject
 
 + (instancetype)newPath;
@@ -28,8 +30,6 @@
 
 - (void)trimPathFromT:(CGFloat)fromT toT:(CGFloat)toT offset:(CGFloat)offset;
 
-- (void)setLineDash:(const CGFloat *)pattern count:(NSInteger)count phase:(CGFloat)phase;
-- (void)getLineDash:(CGFloat *)pattern count:(NSInteger *)count phase:(CGFloat *)phase;
 - (void)LOT_applyTransform:(CGAffineTransform)transform;
 
 @property (nonatomic, assign) BOOL cacheLengths;
@@ -48,3 +48,5 @@
 @property (nonatomic, readonly) CGRect bounds;
 
 @end
+
+NS_ASSUME_NONNULL_END

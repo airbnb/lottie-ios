@@ -18,12 +18,12 @@ typedef enum : NSUInteger {
 
 @interface LOTMask : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
+- (instancetype _Nonnull)initWithJSON:(NSDictionary * _Nonnull)jsonDictionary;
 
 @property (nonatomic, readonly) BOOL closed;
 @property (nonatomic, readonly) BOOL inverted;
 @property (nonatomic, readonly) LOTMaskMode maskMode;
-@property (nonatomic, readonly) LOTKeyframeGroup *maskPath;
-@property (nonatomic, readonly) LOTKeyframeGroup *opacity;
-@property (nonatomic, readonly) LOTKeyframeGroup *expansion;
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *maskPath;
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *opacity;
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *expansion;
 @end

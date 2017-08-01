@@ -25,6 +25,7 @@
 }
 
 - (void)_mapFromJSON:(NSArray *)layersJSON withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup {
+  
   NSMutableArray *layers = [NSMutableArray array];
   NSMutableDictionary *modelMap = [NSMutableDictionary dictionary];
   NSMutableDictionary *referenceMap = [NSMutableDictionary dictionary];

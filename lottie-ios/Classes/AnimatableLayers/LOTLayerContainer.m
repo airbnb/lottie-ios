@@ -23,6 +23,7 @@
   CALayer *DEBUG_Center;
   LOTRenderGroup *_contentsGroup;
   LOTMaskContainer *_maskLayer;
+  NSDictionary *_valueInterpolators;
 }
 
 @dynamic currentFrame;
@@ -55,7 +56,7 @@
   if (layer == nil) {
     return;
   }
-  
+  _layerName = layer.layerName;
   if (layer.layerType == LOTLayerTypeImage ||
       layer.layerType == LOTLayerTypeSolid ||
       layer.layerType == LOTLayerTypePrecomp) {
@@ -95,10 +96,24 @@
     _maskLayer = [[LOTMaskContainer alloc] initWithMasks:layer.masks];
     _wrapperLayer.mask = _maskLayer;
   }
+  
+  NSMutableDictionary *interpolators = [NSMutableDictionary dictionary];
+  interpolators[@"Transform.Opacity"] = _opacityInterpolator;
+  interpolators[@"Transform.Anchor Point"] = _transformInterpolator.anchorInterpolator;
+  interpolators[@"Transform.Scale"] = _transformInterpolator.scaleInterpolator;
+  interpolators[@"Transform.Rotation"] = _transformInterpolator.scaleInterpolator;
+  if (_transformInterpolator.positionXInterpolator &&
+      _transformInterpolator.positionYInterpolator) {
+    interpolators[@"Transform.X Position"] = _transformInterpolator.positionXInterpolator;
+    interpolators[@"Transform.Y Position"] = _transformInterpolator.positionYInterpolator;
+  } else if (_transformInterpolator.positionInterpolator) {
+    interpolators[@"Transform.Position"] = _transformInterpolator.positionInterpolator;
+  }
+  _valueInterpolators = interpolators;
 }
 
 - (void)buildContents:(NSArray *)contents {
-  _contentsGroup = [[LOTRenderGroup alloc] initWithInputNode:nil contents:contents];
+  _contentsGroup = [[LOTRenderGroup alloc] initWithInputNode:nil contents:contents keyname:_layerName];
   [_wrapperLayer addSublayer:_contentsGroup.containerLayer];
 }
 
@@ -139,7 +154,6 @@
       CGFloat actualScaleFactor = [image recommendedLayerContentsScale:desiredScaleFactor];
       id layerContents = [image layerContentsForContentsScale:actualScaleFactor];
       _wrapperLayer = layerContents;
-      
     }
   }
   
@@ -178,6 +192,10 @@
 }
 
 - (void)displayWithFrame:(NSNumber *)frame {
+  [self displayWithFrame:frame forceUpdate:NO];
+}
+
+- (void)displayWithFrame:(NSNumber *)frame forceUpdate:(BOOL)forceUpdate {
   if (ENABLE_DEBUG_LOGGING) NSLog(@"View %@ Displaying Frame %@", self, frame);
   BOOL hidden = NO;
   if (_inFrame && _outFrame) {
@@ -194,8 +212,29 @@
   if (_transformInterpolator && [_transformInterpolator hasUpdateForFrame:frame]) {
     _wrapperLayer.transform = [_transformInterpolator transformForFrame:frame];
   }
-  [_contentsGroup updateWithFrame:frame];
+  [_contentsGroup updateWithFrame:frame withModifierBlock:nil forceLocalUpdate:forceUpdate];
   _maskLayer.currentFrame = frame;
+}
+
+- (void)addAndMaskSublayer:(nonnull CALayer *)subLayer {
+  [_wrapperLayer addSublayer:subLayer];
+}
+
+- (BOOL)setValue:(nonnull id)value
+      forKeypath:(nonnull NSString *)keypath
+         atFrame:(nullable NSNumber *)frame {
+  NSArray *components = [keypath componentsSeparatedByString:@"."];
+  NSString *firstKey = components.firstObject;
+  if ([firstKey isEqualToString:self.layerName]) {
+    NSString *nextPath = [keypath stringByReplacingCharactersInRange:NSMakeRange(0, firstKey.length + 1) withString:@""];
+    LOTValueInterpolator *interpolator = _valueInterpolators[nextPath];
+    if (interpolator) {
+      return [interpolator setValue:value atFrame:frame];
+    } else {
+      return [_contentsGroup setValue:value forKeyAtPath:keypath forFrame:frame];
+    }
+  }
+  return NO;
 }
 
 - (void)setViewportBounds:(CGRect)viewportBounds {

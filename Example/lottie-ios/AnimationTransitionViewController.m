@@ -44,7 +44,7 @@
   buttonRect.origin.x = b.origin.x + rintf(0.5f * (b.size.width - buttonSize.width));
   buttonRect.origin.y = b.origin.y + rintf(0.5f * (b.size.height - buttonSize.height));
   buttonRect.size = buttonSize;
-
+  
   self.button1.frame = buttonRect;
 }
 
@@ -70,9 +70,9 @@
   [self.closeButton setTitle:@"Close" forState:UIControlStateNormal];
   [self.closeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
   self.closeButton.backgroundColor = [UIColor colorWithRed:50.f/255.f
-                                                 green:207.f/255.f
-                                                  blue:193.f/255.f
-                                                 alpha:1.f];
+                                                     green:207.f/255.f
+                                                      blue:193.f/255.f
+                                                     alpha:1.f];
   self.closeButton.layer.cornerRadius = 7;
   
   [self.closeButton addTarget:self action:@selector(_close) forControlEvents:UIControlEventTouchUpInside];
@@ -83,9 +83,9 @@
   [self.button1 setTitle:@"Show Transition A" forState:UIControlStateNormal];
   [self.button1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
   self.button1.backgroundColor = [UIColor colorWithRed:50.f/255.f
-                                                  green:207.f/255.f
-                                                   blue:193.f/255.f
-                                                  alpha:1.f];
+                                                 green:207.f/255.f
+                                                  blue:193.f/255.f
+                                                 alpha:1.f];
   self.button1.layer.cornerRadius = 7;
   
   [self.button1 addTarget:self action:@selector(_showTransitionA) forControlEvents:UIControlEventTouchUpInside];
@@ -130,15 +130,17 @@
                                                                   presentingController:(UIViewController *)presenting
                                                                       sourceController:(UIViewController *)source {
   LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition1"
-                                                                                                          fromLayerNamed:@"outLayer"
-                                                                                                            toLayerNamed:@"inLayer"];
+                                                                                                            fromLayerNamed:@"outLayer"
+                                                                                                              toLayerNamed:@"inLayer"
+                                                                                                   applyAnimationTransform:NO];
   return animationController;
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
   LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition2"
-                                                                                                          fromLayerNamed:@"outLayer"
-                                                                                                            toLayerNamed:@"inLayer"];
+                                                                                                            fromLayerNamed:@"outLayer"
+                                                                                                              toLayerNamed:@"inLayer"
+                                                                                                   applyAnimationTransform:NO];
   return animationController;
 }
 

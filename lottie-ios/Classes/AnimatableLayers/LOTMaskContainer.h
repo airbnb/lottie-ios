@@ -11,8 +11,8 @@
 
 @interface LOTMaskContainer : CALayer
 
-- (instancetype)initWithMasks:(NSArray<LOTMask *> *)masks;
+- (instancetype _Nonnull)initWithMasks:(NSArray<LOTMask *> * _Nonnull)masks;
 
-@property (nonatomic, strong) NSNumber *currentFrame;
+@property (nonatomic, strong, nullable) NSNumber *currentFrame;
 
 @end

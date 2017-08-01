@@ -13,8 +13,15 @@
 extern NSInteger indentation_level;
 @interface LOTAnimatorNode : NSObject
 
-/// Initializes the node with and optional intput node.
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode;
+/// Initializes the node with and optional intput node and keyname.
+- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
+                                    keyName:(NSString *_Nullable)keyname;
+
+/// A dictionary of the value interpolators this node controls
+@property (nonatomic, readonly, strong) NSDictionary * _Nullable valueInterpolators;
+
+/// The keyname of the node. Used for dynamically setting keyframe data.
+@property (nonatomic, readonly, strong) NSString * _Nullable keyname;
 
 /// The current time in frames
 @property (nonatomic, readonly, strong) NSNumber * _Nullable currentFrame;
@@ -44,52 +51,16 @@ extern NSInteger indentation_level;
 /// Rebuild all outputs for the node. This is called after upstream updates have been performed.
 - (void)rebuildOutputs;
 
+/// Traverses children untill keypath is found and attempts to set the keypath to the value.
+- (BOOL)setValue:(nonnull id)value
+    forKeyAtPath:(nonnull NSString *)keypath
+        forFrame:(nullable NSNumber *)frame;
+
+/// Sets the keyframe to the value, to be overwritten by subclasses
+- (BOOL)setInterpolatorValue:(nonnull id)value
+                      forKey:(nonnull NSString *)key
+                    forFrame:(nullable NSNumber *)frame;
+
 - (void)logString:(NSString *_Nonnull)string;
 
 @end
-
-// TIME Is updated at the LAYER Level
-// The LAYER has CONTAINER and updates its TIME.
-// the CONTENTS of a CONTAINER can be other CONTAINERS, or ANIMATORS
-// The CONATAINER also handles a subcoordinate XFORM and has a colleciton of RENDERERS
-// The CONTAINER tells its RENDERERS and sub CONTAINERS to UPDATE TIME
-// The RENDERERS tell their INPUT to update TIME and then asks for OUTPUTPATH
-// The RENDERER then updates its SHAPELAYER
-
-// RENDERS NODES - path input shapelayer output
-// - FILL
-// - STROKE
-// - GRADIENT FILL
-// - GRADIENT STROKE
-
-// ANIMATOR NODES - Path input and path output
-// - PATH
-// - RECTANGLE
-// - ELLIPSE
-// - STAR
-
-// - GROUP
-
-// - TRIM PATH
-// - MERGE PATH
-// - TRANSFORM (Always last?)
-
-/*
-
- Seems like we actually have three kinds of nodes
- Path nodes, which generate path data and merge with input data
- Render nodes which render out their input
- manipulators nodes, which all seem to operate differenctly.
-
- - Trimpath
-  Affects all path nodes upstream. Needs complete context before it can perform its operation.
- 
- - Mergepath
-  Affects uses all path nodes upstream. Will disable all upstream rendernodes.
- 
- - Repeater node
-  Affects all path nodes upstream.
- 
-*/
-
-

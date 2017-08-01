@@ -66,6 +66,8 @@ CGRect LOT_RectAttachedBottomRightToRect(CGRect rect, CGSize size, CGFloat margi
 CGRect LOT_RectAttachedTopRightToRect(CGRect rect, CGSize size, CGFloat marginWidth, CGFloat marginHeight, BOOL integral);
 CGRect LOT_RectAttachedTopLeftToRect(CGRect rect, CGSize size, CGFloat marginWidth, CGFloat marginHeight, BOOL integral);
 
+BOOL LOT_CGPointIsZero(CGPoint point);
+
 // Combining
 // Adds all values of the 2nd rect to the first rect
 CGRect LOT_RectAddRect(CGRect rect, CGRect other);

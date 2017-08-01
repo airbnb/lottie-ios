@@ -60,7 +60,10 @@
   _floatValue = remapBlock(_floatValue);
   _pointValue = CGPointMake(remapBlock(_pointValue.x), remapBlock(_pointValue.y));
   _sizeValue = CGSizeMake(remapBlock(_sizeValue.width), remapBlock(_sizeValue.height));
-  _rectValue = CGRectMake(0, 0, _sizeValue.width, _sizeValue.height);
+}
+
+- (void)setData:(id)data {
+  [self setupOutputWithData:data];
 }
 
 - (void)setupOutputWithData:(id)data {
@@ -77,7 +80,6 @@
       _pointValue = CGPointMake(_floatValue = [(NSNumber *)numberArray[0] floatValue],
                                 _floatValue = [(NSNumber *)numberArray[1] floatValue]);
       _sizeValue = CGSizeMake(_pointValue.x, _pointValue.y);
-      _rectValue = CGRectMake(0, 0, _sizeValue.width, _sizeValue.height);
     }
     if (numberArray.count > 3) {
       _colorValue = [self _colorValueFromArray:numberArray];

@@ -13,6 +13,8 @@
 #import "LOTKeyframe.h"
 #import "LOTLayer.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface LOTTransformInterpolator : NSObject
 
 + (instancetype)transformForLayer:(LOTLayer *)layer;
@@ -30,7 +32,16 @@
 
 @property (nonatomic, strong) LOTTransformInterpolator * inputNode;
 
+@property (nonatomic, readonly) LOTPointInterpolator *positionInterpolator;
+@property (nonatomic, readonly) LOTPointInterpolator *anchorInterpolator;
+@property (nonatomic, readonly) LOTSizeInterpolator *scaleInterpolator;
+@property (nonatomic, readonly) LOTNumberInterpolator *rotationInterpolator;
+@property (nonatomic, readonly) LOTNumberInterpolator *positionXInterpolator;
+@property (nonatomic, readonly) LOTNumberInterpolator *positionYInterpolator;
+
 - (CATransform3D)transformForFrame:(NSNumber *)frame;
 - (BOOL)hasUpdateForFrame:(NSNumber *)frame;
 
 @end
+
+NS_ASSUME_NONNULL_END

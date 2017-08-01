@@ -25,7 +25,7 @@
 
 - (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nonnull)inputNode
                               shapeRepeater:(LOTShapeRepeater *_Nonnull)repeater {
-  self = [super initWithInputNode:inputNode];
+  self = [super initWithInputNode:inputNode keyName:repeater.keyname];
   if (self) {
     _transformInterpolator = [[LOTTransformInterpolator alloc] initWithPosition:repeater.position.keyframes
                                                                        rotation:repeater.rotation.keyframes
@@ -53,6 +53,17 @@
     }
   }
   return self;
+}
+
+- (NSDictionary *)valueInterpolators {
+  return @{@"Copies" : _copiesInterpolator,
+           @"Offset" : _offsetInterpolator,
+           @"Transform.Anchor Point" : _transformInterpolator.anchorInterpolator,
+           @"Transform.Position" : _transformInterpolator.positionInterpolator,
+           @"Transform.Scale" : _transformInterpolator.scaleInterpolator,
+           @"Transform.Rotation" : _transformInterpolator.rotationInterpolator,
+           @"Transform.Start Opacity" : _startOpacityInterpolator,
+           @"Transform.End Opacity" : _endOpacityInterpolator};
 }
 
 - (void)recursivelyAddChildLayers:(LOTAnimatorNode *)node {

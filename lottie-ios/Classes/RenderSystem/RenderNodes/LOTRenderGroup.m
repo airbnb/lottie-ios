@@ -34,8 +34,9 @@
 }
 
 - (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode * _Nullable)inputNode
-                                   contents:(NSArray * _Nonnull)contents {
-  self = [super initWithInputNode:inputNode];
+                                   contents:(NSArray * _Nonnull)contents
+                                    keyname:(NSString * _Nullable)keyname {
+  self = [super initWithInputNode:inputNode keyName:keyname];
   if (self) {
     _containerLayer = [CALayer layer];
     _containerLayer.actions = @{@"transform": [NSNull null],
@@ -43,6 +44,17 @@
     [self buildContents:contents];
   }
   return self;
+}
+
+- (NSDictionary *)valueInterpolators {
+  if (_opacityInterpolator && _transformInterolator) {
+    return @{@"Transform.Opacity" : _opacityInterpolator,
+             @"Transform.Position" : _transformInterolator.positionInterpolator,
+             @"Transform.Scale" : _transformInterolator.scaleInterpolator,
+             @"Transform.Rotation" : _transformInterolator.scaleInterpolator,
+             @"Transform.Anchor Point" : _transformInterolator.anchorInterpolator};
+  }
+  return nil;
 }
 
 - (void)buildContents:(NSArray *)contents {
@@ -73,7 +85,7 @@
       previousNode = circleAnimator;
     } else if ([item isKindOfClass:[LOTShapeGroup class]]) {
       LOTShapeGroup *shapeGroup = (LOTShapeGroup *)item;
-      LOTRenderGroup *renderGroup = [[LOTRenderGroup alloc] initWithInputNode:previousNode contents:shapeGroup.items];
+      LOTRenderGroup *renderGroup = [[LOTRenderGroup alloc] initWithInputNode:previousNode contents:shapeGroup.items keyname:shapeGroup.keyname];
       [self.containerLayer insertSublayer:renderGroup.containerLayer atIndex:0];
       previousNode = renderGroup;
     } else if ([item isKindOfClass:[LOTShapeTransform class]]) {
@@ -164,12 +176,14 @@
   return _outputPath;
 }
 
-@end
+- (BOOL)setInterpolatorValue:(id)value
+                      forKey:(NSString *)key
+                    forFrame:(NSNumber *)frame {
+  BOOL interpolatorsSet = [super setInterpolatorValue:value forKey:key forFrame:frame];
+  if (interpolatorsSet) {
+    return YES;
+  }
+  return [_rootNode setValue:value forKeyAtPath:key forFrame:frame];
+}
 
-/*
- 
- A render group is a colleciton of items, some animators and some rendered objects.
- the render group itself will hold the items in a subview and will apply a transform to them.
- the render group will also output the sum of all its paths with the transform applied on request
- 
- */
+@end

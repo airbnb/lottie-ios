@@ -20,6 +20,11 @@
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
+  
+  if (jsonDictionary[@"nm"] ) {
+    _keyname = [jsonDictionary[@"nm"] copy];
+  }
+  
   NSDictionary *copies = jsonDictionary[@"c"];
   if (copies) {
     _copies = [[LOTKeyframeGroup alloc] initWithData:copies];

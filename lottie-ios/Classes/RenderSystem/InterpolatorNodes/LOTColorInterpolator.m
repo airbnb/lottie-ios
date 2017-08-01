@@ -7,6 +7,7 @@
 //
 
 #import "LOTColorInterpolator.h"
+#import "LOTPlatformCompat.h"
 #import "UIColor+Expanded.h"
 
 @implementation LOTColorInterpolator
@@ -21,6 +22,14 @@
   }
   UIColor *returnColor = [UIColor LOT_colorByLerpingFromColor:self.leadingKeyframe.colorValue toColor:self.trailingKeyframe.colorValue amount:progress];
   return returnColor;
+}
+
+- (id)keyframeDataForValue:(id)value {
+  if ([value isKindOfClass:[UIColor class]]) {
+    NSArray *colorComponents = [(UIColor *)value LOT_arrayFromRGBAComponents];
+    return colorComponents;
+  }
+  return nil;
 }
 
 @end

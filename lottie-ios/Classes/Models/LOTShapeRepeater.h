@@ -9,17 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "LOTKeyframe.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface LOTShapeRepeater : NSObject
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
-@property (nonatomic, readonly) LOTKeyframeGroup *copies;
-@property (nonatomic, readonly) LOTKeyframeGroup *offset;
-@property (nonatomic, readonly) LOTKeyframeGroup *anchorPoint;
-@property (nonatomic, readonly) LOTKeyframeGroup *scale;
-@property (nonatomic, readonly) LOTKeyframeGroup *position;
-@property (nonatomic, readonly) LOTKeyframeGroup *rotation;
-@property (nonatomic, readonly) LOTKeyframeGroup *startOpacity;
-@property (nonatomic, readonly) LOTKeyframeGroup *endOpacity;
+@property (nonatomic, readonly) NSString *keyname;
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *copies;
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *offset;
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *anchorPoint;
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *scale;
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *position;
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *rotation;
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *startOpacity;
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *endOpacity;
 
 @end
+
+NS_ASSUME_NONNULL_END
