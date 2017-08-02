@@ -73,10 +73,21 @@
   if (speed == 0) {
     _layer.timeOffset = timeOffset;
   } else {
+    NSTimeInterval superlayerTime = -1;
+    NSTimeInterval currentTime = -1;
+    if (_layer.superlayer) {
+        currentTime = CACurrentMediaTime();
+        superlayerTime = [_layer.superlayer convertTime:currentTime fromLayer:nil];
+    }
     CFTimeInterval offsetTime =  ((timeOffset != 0) ?
                                   timeOffset / speed :
                                   timeOffset);
-    _layer.beginTime = CACurrentMediaTime() - offsetTime;
+    if ((superlayerTime > 0) && ((superlayerTime - currentTime) < 0)) {
+        // fix Time
+        _layer.beginTime = superlayerTime - offsetTime;
+    } else {
+        _layer.beginTime = CACurrentMediaTime() - offsetTime;
+    }
   }
 }
 
@@ -187,6 +198,10 @@
 
 @end
 
+@interface LOTAnimationView ()
+@property (nonatomic, copy) NSString *cacheKey;
+@end
+
 @implementation LOTAnimationView {
   CALayer *_timingLayer;
   LOTCompositionLayer *_compLayer;
@@ -205,10 +220,12 @@
 + (instancetype)animationNamed:(NSString *)animationName inBundle:(NSBundle *)bundle {
   NSArray *components = [animationName componentsSeparatedByString:@"."];
   animationName = components.firstObject;
-  
+  LOTAnimationView *animationView;
   LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
   if (comp) {
-    return [[LOTAnimationView alloc] initWithModel:comp inBundle:bundle];
+    animationView = [[LOTAnimationView alloc] initWithModel:comp inBundle:bundle];
+    animationView.cacheKey = animationName;
+    return animationView;
   }
   
   NSError *error;
@@ -219,7 +236,9 @@
   if (JSONObject && !error) {
     LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject];
     [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
-    return [[LOTAnimationView alloc] initWithModel:laScene inBundle:bundle];
+    animationView = [[LOTAnimationView alloc] initWithModel:laScene inBundle:bundle];
+    animationView.cacheKey = animationName;
+    return animationView;
   }
   
   NSException* resourceNotFoundException = [NSException exceptionWithName:@"ResourceNotFoundException"
@@ -239,10 +258,12 @@
 
 + (instancetype)animationWithFilePath:(NSString *)filePath{
     NSString *animationName = filePath;
-    
+    LOTAnimationView *animationView;
     LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
     if (comp) {
-        return [[LOTAnimationView alloc] initWithModel:comp inBundle:[NSBundle mainBundle]];
+        animationView = [[LOTAnimationView alloc] initWithModel:comp inBundle:[NSBundle mainBundle]];
+        animationView.cacheKey = animationName;
+        return animationView;
     }
     
     NSError *error;
@@ -253,7 +274,9 @@
         LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject];
         laScene.rootDirectory = [filePath stringByDeletingLastPathComponent];
         [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
-        return [[LOTAnimationView alloc] initWithModel:laScene inBundle:[NSBundle mainBundle]];
+        animationView = [[LOTAnimationView alloc] initWithModel:laScene inBundle:[NSBundle mainBundle]];
+        animationView.cacheKey = animationName;
+        return animationView;
     }
     
     NSException* resourceNotFoundException = [NSException exceptionWithName:@"ResourceNotFoundException"
@@ -265,6 +288,7 @@
 - (instancetype)initWithContentsOfURL:(NSURL *)url {
   self = [super initWithFrame:CGRectZero];
   if (self) {
+    self.cacheKey = url.absoluteString;
     LOTComposition *laScene = [[LOTAnimationCache sharedCache] animationForKey:url.absoluteString];
     if (laScene) {
       [self _initializeAnimationContainer];
@@ -399,6 +423,18 @@
 - (void)addSubview:(LOTView *)view
       toLayerNamed:(NSString *)layer {
   [_compLayer addSublayer:view toLayerNamed:layer];
+}
+
+- (void)setCacheEnable:(BOOL)cacheEnable{
+    _cacheEnable = cacheEnable;
+    if (!self.cacheKey) {
+        return;
+    }
+    if (cacheEnable) {
+        [[LOTAnimationCache sharedCache] addAnimation:_sceneModel forKey:self.cacheKey];
+    }else {
+        [[LOTAnimationCache sharedCache] removeAnimationForKey:self.cacheKey];
+    }
 }
 
 # pragma mark - Display Link
