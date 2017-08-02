@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'lottie-ios'
-  s.version          = '1.5.2'
+  s.version          = '2.0.0'
   s.summary          = 'Used to natively render vector animations exported from After Effects.'
 
   s.description      = <<-DESC
@@ -27,7 +27,8 @@ For the first time, designers can create and ship beautiful animations without a
   s.tvos.deployment_target = '9.0'
 
   s.source_files = 'lottie-ios/Classes/**/*'
-
+  s.osx.exclude_files = ['lottie-ios/Classes/PublicHeaders/LOTAnimationTransitionController.h',
+                         'lottie-ios/Classes/Private/LOTAnimationTransitionController.m']
   # s.resource_bundles = {
   #   'lottie-ios' => ['lottie-ios/Assets/*.png']
   # }

@@ -1,0 +1,1 @@
+../../../../../../lottie-ios/Classes/RenderSystem/RenderNodes/LOTStrokeRenderer.h

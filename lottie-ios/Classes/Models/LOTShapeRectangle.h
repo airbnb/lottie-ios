@@ -7,16 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-@class LOTAnimatableBoundsValue;
-@class LOTAnimatablePointValue;
-@class LOTAnimatableNumberValue;
+#import "LOTKeyframe.h"
 
 @interface LOTShapeRectangle : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
-@property (nonatomic, readonly) LOTAnimatablePointValue *position;
-@property (nonatomic, readonly) LOTAnimatablePointValue *size;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *cornerRadius;
+@property (nonatomic, readonly) NSString *keyname;
+@property (nonatomic, readonly) LOTKeyframeGroup *position;
+@property (nonatomic, readonly) LOTKeyframeGroup *size;
+@property (nonatomic, readonly) LOTKeyframeGroup *cornerRadius;
+@property (nonatomic, readonly) BOOL reversed;
 
 @end

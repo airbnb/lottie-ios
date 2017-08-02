@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-@class LOTAnimatableNumberValue;
+#import "LOTKeyframe.h"
 
 @interface LOTShapeTrimPath : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
-@property (nonatomic, readonly) LOTAnimatableNumberValue *start;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *end;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *offset;
+@property (nonatomic, readonly) NSString *keyname;
+@property (nonatomic, readonly) LOTKeyframeGroup *start;
+@property (nonatomic, readonly) LOTKeyframeGroup *end;
+@property (nonatomic, readonly) LOTKeyframeGroup *offset;
+
 @end

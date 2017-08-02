@@ -37,7 +37,7 @@
   
   self.animationView.animationProgress = progress;
   [self waitForExpectationsWithTimeout:1 handler:^(NSError * _Nullable error) {
-    FBSnapshotVerifyView(self.animationView.layer, nil);
+    FBSnapshotVerifyViewWithOptions(self.animationView.layer, nil, FBSnapshotTestCaseDefaultSuffixes(), 0.005);
   }];
 }
 

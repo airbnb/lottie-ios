@@ -14,14 +14,12 @@
 @implementation LOTAsset
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
-                  withBounds:(CGRect)bounds
-               withFramerate:(NSNumber *)framerate
-              withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup{
+              withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup
+             withAssetBundle:(NSBundle *_Nonnull)bundle {
   self = [super init];
   if (self) {
+    _assetBundle = bundle;
     [self _mapFromJSON:jsonDictionary
-            withBounds:bounds
-         withFramerate:framerate
         withAssetGroup:assetGroup];
   }
   return self;
@@ -29,8 +27,6 @@
 
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary
-          withBounds:(CGRect)bounds
-       withFramerate:(NSNumber *)framerate
       withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup{
   _referenceID = [jsonDictionary[@"id"] copy];
   
@@ -53,8 +49,6 @@
   NSArray *layersJSON = jsonDictionary[@"layers"];
   if (layersJSON) {
     _layerGroup = [[LOTLayerGroup alloc] initWithLayerJSON:layersJSON
-                                                withBounds:bounds
-                                             withFramerate:framerate
                                             withAssetGroup:assetGroup];
   }
 

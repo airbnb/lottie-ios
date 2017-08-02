@@ -19,8 +19,6 @@
 
 #import <AppKit/AppKit.h>
 #import "UIColor.h"
-#import "UIBezierPath.h"
-#import "CADisplayLink.h"
 #import "CALayer+Compat.h"
 #import "NSValue+Compat.h"
 

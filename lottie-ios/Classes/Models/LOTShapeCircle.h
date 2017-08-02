@@ -7,14 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-@class LOTAnimatablePointValue;
-@class LOTAnimatableScaleValue;
+#import "LOTKeyframe.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface LOTShapeCircle : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
-@property (nonatomic, readonly) LOTAnimatablePointValue *position;
-@property (nonatomic, readonly) LOTAnimatablePointValue *size;
+@property (nonatomic, readonly) NSString *keyname;
+@property (nonatomic, readonly) LOTKeyframeGroup *position;
+@property (nonatomic, readonly) LOTKeyframeGroup *size;
+@property (nonatomic, readonly) BOOL reversed;
 
 @end
+
+NS_ASSUME_NONNULL_END

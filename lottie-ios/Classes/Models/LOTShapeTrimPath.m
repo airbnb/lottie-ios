@@ -7,34 +7,36 @@
 //
 
 #import "LOTShapeTrimPath.h"
-#import "LOTAnimatableNumberValue.h"
 
 @implementation LOTShapeTrimPath
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+    [self _mapFromJSON:jsonDictionary];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
+  
+  if (jsonDictionary[@"nm"] ) {
+    _keyname = [jsonDictionary[@"nm"] copy];
+  }
+  
   NSDictionary *start = jsonDictionary[@"s"];
   if (start) {
-    _start = [[LOTAnimatableNumberValue alloc] initWithNumberValues:start frameRate:frameRate];
-    [_start remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
+    _start = [[LOTKeyframeGroup alloc] initWithData:start];
   }
   
   NSDictionary *end = jsonDictionary[@"e"];
   if (end) {
-    _end = [[LOTAnimatableNumberValue alloc] initWithNumberValues:end frameRate:frameRate];
-    [_end remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
+    _end = [[LOTKeyframeGroup alloc] initWithData:end];
   }
   
   NSDictionary *offset = jsonDictionary[@"o"];
   if (offset) {
-    _offset = [[LOTAnimatableNumberValue alloc] initWithNumberValues:offset frameRate:frameRate];
+    _offset = [[LOTKeyframeGroup alloc] initWithData:offset];
   }
 }
 

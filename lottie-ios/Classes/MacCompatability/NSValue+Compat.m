@@ -24,6 +24,10 @@
     return self.pointValue;
 }
 
+- (CGSize)CGSizeValue {
+  return self.sizeValue;
+}
+
 @end
 
 #endif

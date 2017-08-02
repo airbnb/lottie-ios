@@ -7,31 +7,34 @@
 //
 
 #import "LOTShapeCircle.h"
-#import "LOTAnimatablePointValue.h"
-#import "LOTAnimatableScaleValue.h"
 
 @implementation LOTShapeCircle
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+    [self _mapFromJSON:jsonDictionary];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
+  
+  if (jsonDictionary[@"nm"] ) {
+    _keyname = [jsonDictionary[@"nm"] copy];
+  }
+  
   NSDictionary *position = jsonDictionary[@"p"];
   if (position) {
-    _position = [[LOTAnimatablePointValue alloc] initWithPointValues:position frameRate:frameRate];
-    _position.usePathAnimation = NO;
+    _position = [[LOTKeyframeGroup alloc] initWithData:position];
   }
   
   NSDictionary *size= jsonDictionary[@"s"];
   if (size) {
-    _size = [[LOTAnimatablePointValue alloc] initWithPointValues:size frameRate:frameRate];
-    _size.usePathAnimation = NO;
+    _size = [[LOTKeyframeGroup alloc] initWithData:size];
   }
+  NSNumber *reversed = jsonDictionary[@"d"];
+  _reversed = (reversed.integerValue == 3);
 }
 
 @end
