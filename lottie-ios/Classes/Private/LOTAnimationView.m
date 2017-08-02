@@ -43,7 +43,9 @@
   if (JSONObject && !error) {
     LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:bundle];
     [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
-    return [[LOTAnimationView alloc] initWithModel:laScene inBundle:bundle];
+    LOTAnimationView *animationView = [[LOTAnimationView alloc] initWithModel:laScene inBundle:bundle];
+    animationView.cacheKey = animationName;
+    return animationView;
   }
   NSLog(@"%s: Animation Not Found", __PRETTY_FUNCTION__);
   return [[LOTAnimationView alloc] initWithModel:nil inBundle:nil];
@@ -74,7 +76,9 @@
     LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:[NSBundle mainBundle]];
     laScene.rootDirectory = [filePath stringByDeletingLastPathComponent];
     [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
-    return [[LOTAnimationView alloc] initWithModel:laScene inBundle:[NSBundle mainBundle]];
+    LOTAnimationView *animationView = [[LOTAnimationView alloc] initWithModel:laScene inBundle:[NSBundle mainBundle]];
+    animationView.cacheKey = animationName;
+    return animationView;
   }
   
   NSLog(@"%s: Animation Not Found", __PRETTY_FUNCTION__);
@@ -86,6 +90,7 @@
   if (self) {
     LOTComposition *laScene = [[LOTAnimationCache sharedCache] animationForKey:url.absoluteString];
     if (laScene) {
+      self.cacheKey = url.absoluteString;
       [self _initializeAnimationContainer];
       [self _setupWithSceneModel:laScene];
     } else {
@@ -104,6 +109,7 @@
         LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON withAssetBundle:[NSBundle mainBundle]];
         dispatch_async(dispatch_get_main_queue(), ^(void){
           [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:url.absoluteString];
+          self.cacheKey = url.absoluteString;
           [self _initializeAnimationContainer];
           [self _setupWithSceneModel:laScene];
         });
@@ -140,6 +146,7 @@
 #endif
 
 - (void)_setupWithSceneModel:(LOTComposition *)model {
+  _cacheEnable = YES;
   _animationSpeed = 1;
   _sceneModel = model;
   [CATransaction begin];
@@ -230,13 +237,24 @@
 - (void)setProgressWithFrame:(nonnull NSNumber *)currentFrame {
   [self _removeCurrentAnimationIfNecessary];
   [self _callCompletionIfNecessary:NO];
-  CGFloat duration = _sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue;
   _animationProgress = currentFrame.floatValue / (_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue);
   [CATransaction begin];
   [CATransaction setDisableActions:YES];
   _compContainer.currentFrame = currentFrame;
   [_compContainer setNeedsDisplay];
   [CATransaction commit];
+}
+
+- (void)setCacheEnable:(BOOL)cacheEnable{
+  _cacheEnable = cacheEnable;
+  if (!self.cacheKey) {
+    return;
+  }
+  if (cacheEnable) {
+    [[LOTAnimationCache sharedCache] addAnimation:_sceneModel forKey:self.cacheKey];
+  }else {
+    [[LOTAnimationCache sharedCache] removeAnimationForKey:self.cacheKey];
+  }
 }
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR

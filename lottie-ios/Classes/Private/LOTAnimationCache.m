@@ -59,5 +59,9 @@ const NSInteger kLOTCacheSize = 50;
   [lruOrderArray_ removeAllObjects];
 }
 
+- (void)removeAnimationForKey:(NSString *)key {
+  [lruOrderArray_ removeObject:key];
+  [animationsCache_ removeObjectForKey:key];
+}
 
 @end

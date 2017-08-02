@@ -8,15 +8,27 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class LOTComposition;
 
 @interface LOTAnimationCache : NSObject
 
+/// Global Cache
 + (instancetype)sharedCache;
 
+/// Adds animation to the cache
 - (void)addAnimation:(LOTComposition *)animation forKey:(NSString *)key;
-- (LOTComposition *)animationForKey:(NSString *)key;
 
+/// Returns animation from cache.
+- (LOTComposition * _Nullable)animationForKey:(NSString *)key;
+
+/// Removes a specific animation from the cache
+- (void)removeAnimationForKey:(NSString *)key;
+
+/// Clears Everything from the Cache
 - (void)clearCache;
 
 @end
+
+NS_ASSUME_NONNULL_END
