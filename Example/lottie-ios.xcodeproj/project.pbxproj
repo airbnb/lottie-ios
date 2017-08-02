@@ -70,6 +70,8 @@
 		62B2546D1E3A8D310035A842 /* JSONExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B254691E3A8D310035A842 /* JSONExplorerViewController.m */; };
 		62B254721E3A8D3B0035A842 /* TypingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B2546F1E3A8D3B0035A842 /* TypingDemoViewController.m */; };
 		62B254731E3A8D3B0035A842 /* AnimatedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B254711E3A8D3B0035A842 /* AnimatedTextField.m */; };
+		62E27B4F1F3132A50098420E /* LAMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E27B4E1F3132A50098420E /* LAMainView.m */; };
+		62E27B501F31334A0098420E /* LottieLogo1.json in Resources */ = {isa = PBXBuildFile; fileRef = 622F76B91F2BE58100269858 /* LottieLogo1.json */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		B8E8748514D4FA9C683B1711 /* Pods_lottie_ios_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EBDFEA18138A27DD5A89337 /* Pods_lottie_ios_Tests.framework */; };
@@ -173,6 +175,8 @@
 		62B2546F1E3A8D3B0035A842 /* TypingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypingDemoViewController.m; sourceTree = "<group>"; };
 		62B254701E3A8D3B0035A842 /* AnimatedTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedTextField.h; sourceTree = "<group>"; };
 		62B254711E3A8D3B0035A842 /* AnimatedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedTextField.m; sourceTree = "<group>"; };
+		62E27B4D1F3132A50098420E /* LAMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAMainView.h; sourceTree = "<group>"; };
+		62E27B4E1F3132A50098420E /* LAMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAMainView.m; sourceTree = "<group>"; };
 		687661C57667AB2C5371F7BB /* Pods-Lottie-Example-MacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lottie-Example-MacOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lottie-Example-MacOS/Pods-Lottie-Example-MacOS.release.xcconfig"; sourceTree = "<group>"; };
 		6BC326E3835099034E161393 /* Pods-Lottie-Example-MacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lottie-Example-MacOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lottie-Example-MacOS/Pods-Lottie-Example-MacOS.debug.xcconfig"; sourceTree = "<group>"; };
 		6DC4D284D6109D58EE331F86 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -182,7 +186,7 @@
 		99F3982078CC5B93DA1AFF47 /* Pods-Lottie-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lottie-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lottie-Example/Pods-Lottie-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		AC7587B24F90B40ADD0CEA8C /* Pods_Lottie_Example_MacOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lottie_Example_MacOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C83F4B06A893EA3322E53A /* Pods-Lottie-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lottie-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lottie-Example/Pods-Lottie-Example.release.xcconfig"; sourceTree = "<group>"; };
-		FA1F5A8B1E42B25500FF36BF /* Lottie-Example-MacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lottie-Example-MacOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA1F5A8B1E42B25500FF36BF /* Lottie Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lottie Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA1F5A8D1E42B25500FF36BF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FA1F5A8E1E42B25500FF36BF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FA1F5A911E42B25500FF36BF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -259,7 +263,7 @@
 			children = (
 				6003F58A195388D20070C39A /* Lottie-Example.app */,
 				6003F5AE195388D20070C39A /* lottie-ios_Tests.xctest */,
-				FA1F5A8B1E42B25500FF36BF /* Lottie-Example-MacOS.app */,
+				FA1F5A8B1E42B25500FF36BF /* Lottie Viewer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -327,8 +331,8 @@
 				622F76B61F2BE58100269858 /* HamburgerArrow.json */,
 				622F76B71F2BE58100269858 /* IconTransitions.json */,
 				622F76B81F2BE58100269858 /* LottieLogo1_masked.json */,
-				622F76B91F2BE58100269858 /* LottieLogo1.json */,
 				622F76BA1F2BE58100269858 /* LottieLogo2.json */,
+				622F76B91F2BE58100269858 /* LottieLogo1.json */,
 				622F76BB1F2BE58100269858 /* MotionCorpse-Jrcanest.json */,
 				622F76BC1F2BE58100269858 /* PinJump.json */,
 				622F76BD1F2BE58100269858 /* TwitterHeart.json */,
@@ -430,6 +434,8 @@
 				FA1F5A8E1E42B25500FF36BF /* AppDelegate.m */,
 				FA1F5A931E42B25500FF36BF /* ViewController.h */,
 				FA1F5A941E42B25500FF36BF /* ViewController.m */,
+				62E27B4D1F3132A50098420E /* LAMainView.h */,
+				62E27B4E1F3132A50098420E /* LAMainView.m */,
 				FA1F5A961E42B25500FF36BF /* Assets.xcassets */,
 				FA1F5A981E42B25500FF36BF /* Main.storyboard */,
 				FA1F5A9B1E42B25500FF36BF /* Info.plist */,
@@ -490,9 +496,9 @@
 			productReference = 6003F5AE195388D20070C39A /* lottie-ios_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		FA1F5A8A1E42B25500FF36BF /* Lottie-Example-MacOS */ = {
+		FA1F5A8A1E42B25500FF36BF /* Lottie Viewer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FA1F5A9E1E42B25500FF36BF /* Build configuration list for PBXNativeTarget "Lottie-Example-MacOS" */;
+			buildConfigurationList = FA1F5A9E1E42B25500FF36BF /* Build configuration list for PBXNativeTarget "Lottie Viewer" */;
 			buildPhases = (
 				EDE8BE235F9BC416C262B8CD /* [CP] Check Pods Manifest.lock */,
 				FA1F5A871E42B25500FF36BF /* Sources */,
@@ -505,9 +511,9 @@
 			);
 			dependencies = (
 			);
-			name = "Lottie-Example-MacOS";
+			name = "Lottie Viewer";
 			productName = "Example for lottie-macos";
-			productReference = FA1F5A8B1E42B25500FF36BF /* Lottie-Example-MacOS.app */;
+			productReference = FA1F5A8B1E42B25500FF36BF /* Lottie Viewer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -547,7 +553,7 @@
 			targets = (
 				6003F589195388D20070C39A /* Lottie-Example */,
 				6003F5AD195388D20070C39A /* lottie-ios_Tests */,
-				FA1F5A8A1E42B25500FF36BF /* Lottie-Example-MacOS */,
+				FA1F5A8A1E42B25500FF36BF /* Lottie Viewer */,
 			);
 		};
 /* End PBXProject section */
@@ -620,6 +626,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA1F5A971E42B25500FF36BF /* Assets.xcassets in Resources */,
+				62E27B501F31334A0098420E /* LottieLogo1.json in Resources */,
 				FA1F5A9A1E42B25500FF36BF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -793,6 +800,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62E27B4F1F3132A50098420E /* LAMainView.m in Sources */,
 				FA1F5A951E42B25500FF36BF /* ViewController.m in Sources */,
 				FA1F5A921E42B25500FF36BF /* main.m in Sources */,
 				FA1F5A8F1E42B25500FF36BF /* AppDelegate.m in Sources */,
@@ -1077,7 +1085,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FA1F5A9E1E42B25500FF36BF /* Build configuration list for PBXNativeTarget "Lottie-Example-MacOS" */ = {
+		FA1F5A9E1E42B25500FF36BF /* Build configuration list for PBXNativeTarget "Lottie Viewer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FA1F5A9C1E42B25500FF36BF /* Debug */,

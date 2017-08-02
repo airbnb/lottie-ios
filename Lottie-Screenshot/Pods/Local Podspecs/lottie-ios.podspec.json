@@ -21,15 +21,19 @@
     "tvos": "9.0"
   },
   "source_files": "lottie-ios/Classes/**/*",
-  "public_header_files": "lottie-ios/Classes/PublicHeaders/*.h",
-  "ios": {
-    "frameworks": "UIKit"
-  },
   "osx": {
+    "exclude_files": [
+      "lottie-ios/Classes/PublicHeaders/LOTAnimationTransitionController.h",
+      "lottie-ios/Classes/Private/LOTAnimationTransitionController.m"
+    ],
     "frameworks": [
       "AppKit",
       "CoreVideo"
     ]
+  },
+  "public_header_files": "lottie-ios/Classes/PublicHeaders/*.h",
+  "ios": {
+    "frameworks": "UIKit"
   },
   "module_name": "Lottie",
   "header_dir": "Lottie"

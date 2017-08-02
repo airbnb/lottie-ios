@@ -77,15 +77,16 @@
   _childLayers = children;
 }
 
-- (void)displayWithFrame:(NSNumber *)frame {
+- (void)displayWithFrame:(NSNumber *)frame forceUpdate:(BOOL)forceUpdate {
   if (ENABLE_DEBUG_LOGGING) NSLog(@"-------------------- Composition Displaying Frame %@ --------------------", frame);
-  [super displayWithFrame:frame];
+  [super displayWithFrame:frame forceUpdate:forceUpdate];
   NSNumber *childFrame = @(frame.floatValue - _frameOffset.floatValue);
   for (LOTLayerContainer *child in _childLayers) {
-    [child displayWithFrame:childFrame];
+    [child displayWithFrame:childFrame forceUpdate:forceUpdate];
   }
   if (ENABLE_DEBUG_LOGGING) NSLog(@"-------------------- ------------------------------- --------------------");
   if (ENABLE_DEBUG_LOGGING) NSLog(@"-------------------- ------------------------------- --------------------");
+
 }
 
 - (BOOL)setValue:(nonnull id)value

@@ -20,7 +20,7 @@ Here is just a small sampling of the power of Lottie
 ![Abcs](_Gifs/Examples4.gif)
 
 ## Using Lottie
-Lottie supports iOS 8 and above.
+Lottie supports iOS 8+ and MacOS 10.10+
 Lottie animations can be loaded from bundled JSON or from a URL
 
 To bundle JSON just add it and any images that the animation requires to your target in xcode.
