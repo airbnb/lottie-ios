@@ -54,6 +54,9 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// Read only of the duration in seconds of the animation at speed of 1
 @property (nonatomic, readonly) CGFloat animationDuration;
 
+/// Enables or disables caching of the backing animation model. Defaults to YES
+@property (nonatomic, assign) BOOL cacheEnable;
+
 /* 
  * Plays the animation from its current position to a specific progress. 
  * The animation will start from its current position.
