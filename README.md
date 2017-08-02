@@ -4,8 +4,9 @@ Lottie is a mobile library for Android and iOS that parses [Adobe After Effects]
 
 For the first time, designers can create **and ship** beautiful animations without an engineer painstakingly recreating it by hand.
 Since the animation is backed by JSON they are extremely small in size but can be large in complexity!
-Animations can be played, resized, looped, sped up, slowed down, and even interactively scrubbed.
-
+Animations can be played, resized, looped, sped up, slowed down, reversed, and even interactively scrubbed.
+Lottie can play or loop just a portion of the animation as well, the possibilities are endless!
+Animations can even be ***changed at runtime*** in various ways! Change the color, position or any keyframable value!
 Lottie also supports native UIViewController Transitions out of the box!
 
 Here is just a small sampling of the power of Lottie
@@ -20,8 +21,8 @@ Here is just a small sampling of the power of Lottie
 ![Abcs](_Gifs/Examples4.gif)
 
 ## Using Lottie
-Lottie supports iOS 8 and above.
-Lottie animations can be loaded from bundled JSON or from a URL
+Lottie supports iOS 8+ and MacOS 10.10+
+Lottie animations can be loaded from any application Bundle or asynchronously from a URL
 
 To bundle JSON just add it and any images that the animation requires to your target in xcode.
 
@@ -59,12 +60,30 @@ CGFloat progress = translation.y / self.view.bounds.size.height;
 animationView.animationProgress = progress;
 ```
 
+Or you can play just a portion of the animation:
+```objective-c
+[lottieAnimation playFromProgress:0.25 toProgress:0.5 withCompletion:^(BOOL animationFinished) {
+// Do Something
+}];
+```
+
 Want to mask arbitrary views to animation layers in a Lottie View?
 Easy-peasy as long as you know the name of the layer from After Effects
 
 ```objective-c
 UIView *snapshot = [self.view snapshotViewAfterScreenUpdates:YES];
-[lottieAnimation addSubview:snapshot toLayerNamed:@"AfterEffectsLayerName"];
+[lottieAnimation addSubview:snapshot toLayerNamed:@"AfterEffectsLayerName" applyTransform:NO];
+```
+
+Or how about moving a view with a part of the animation?
+```objective-c
+UIView *snapshot = [self.view snapshotViewAfterScreenUpdates:YES];
+[lottieAnimation addSubview:snapshot toLayerNamed:@"AfterEffectsLayerName" applyTransform:YES];
+```
+
+Want to dynamically change the color of an animation?
+```objective-c
+[lottieAnimation setValue:[UIColor greenColor] forKeypath:@"Layer 1.Shape 1.Fill 1" atFrame:@0];
 ```
 
 Lottie comes with a `UIViewController` animation-controller for making custom viewController transitions!
@@ -77,14 +96,16 @@ Lottie comes with a `UIViewController` animation-controller for making custom vi
                                                                       sourceController:(UIViewController *)source {
   LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition1"
                                                                                                           fromLayerNamed:@"outLayer"
-                                                                                                            toLayerNamed:@"inLayer"];
+                                                                                                            toLayerNamed:@"inLayer"
+                                                                                                 applyAnimationTransform:NO];
   return animationController;
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
   LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition2"
                                                                                                           fromLayerNamed:@"outLayer"
-                                                                                                            toLayerNamed:@"inLayer"];
+                                                                                                            toLayerNamed:@"inLayer"
+                                                                                                 applyAnimationTransform:NO];
   return animationController;
 }
 
@@ -108,6 +129,11 @@ animationView.play(completion: { finished in
 ## Note:
 Animation file name should be first added to your project. as for the above code sample, It won't work until you add an animation file called `hamburger.json`.. 
 `let animationView = LOTAnimationView(name: "here_goes_your_json_file_name_without_.json")` 
+
+## MacOS support and Lottie View
+Lottie also fully supports MacOS, so you can add animations to your awesome Mac App!
+In the [Example Folder](Example/) you will find a Lottie Viewer Mac App. Build and run this app to preview Lottie animations straight from your desktop!
+The app supports play, scrubbing, resizing, and most importantly you can drag and drop JSON files onto the app window to open any animation.
 
 ## Supported After Effects Features
 
@@ -137,7 +163,7 @@ Animation file name should be first added to your project. as for the above code
 
 * Path
 * Opacity
-* Multiple Masks (additive)
+* Multiple Masks (additive, subtractive and intersection)
 
 ### Track Mattes
 
@@ -166,6 +192,8 @@ Animation file name should be first added to your project. as for the above code
 * Rectangle (All properties)
 * Elipse (All properties)
 * Multiple paths in one group
+* Even-Odd winding paths
+* Reverse Fill Rule
 
 #### Stroke (shape layer)
 
@@ -175,7 +203,7 @@ Animation file name should be first added to your project. as for the above code
 * Stroke Opacity
 * Stroke Width
 * Line Cap
-* Dashes
+* Dashes (Now Animated!)
 
 #### Fill (shape layer)
 
@@ -192,6 +220,25 @@ Animation file name should be first added to your project. as for the above code
 * Trim Paths End
 * Trim Paths Offset
 
+### Repeaters
+
+---
+
+* Supports repeater transforms
+* Offset currently not supported.
+
+### Gradients
+
+---
+
+* Support for Linear Gradients
+
+### Polystar and Polygon
+
+---
+
+* Supported! Theres a known bug if the roundness is greater than 100 percent.
+
 #### Layer Features
 
 ---
@@ -206,14 +253,12 @@ Animation file name should be first added to your project. as for the above code
 
 ## Currently Unsupported After Effects Features
 
-* Even-Odd winding paths
+
 * Merge Shapes
 * Trim Shapes Individually feature of Trim Paths
 * Expressions
 * 3d Layer support
-* Gradients
-* Polystar shapes (Can convert to vector path as a workaround)
-* Alpha inverted mask
+* Radial Gradients
 
 
 ## Install Lottie
@@ -275,10 +320,4 @@ File github issues for anything that is unexpectedly broken. If an After Effects
 
 ## Roadmap (In no particular order)
 - Add support for interactive animated transitions
-- Add support for parenting programmatically added layers, moving/scaling
-- Programmatically alter animations
 - Animation Breakpoints/Seekpoints
-- Gradients
-- LOTAnimatedButton
-- Repeater objects
-

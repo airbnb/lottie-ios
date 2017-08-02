@@ -1,1 +1,0 @@
-../../../../../../lottie-ios/Classes/AnimatableProperties/LOTAnimatablePointValue.h

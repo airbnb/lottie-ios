@@ -8,22 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
-
-@class LOTAnimatableNumberValue;
-@class LOTAnimatablePointValue;
-@class LOTAnimatableScaleValue;
+#import <QuartzCore/QuartzCore.h>
+#import "LOTKeyframe.h"
 
 @interface LOTShapeTransform : NSObject
 
-+ (instancetype)transformIdentityWithCompBounds:(CGRect)compBounds;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate compBounds:(CGRect)compBounds;
-
-@property (nonatomic, readonly) CGRect compBounds;
-@property (nonatomic, readonly) LOTAnimatablePointValue *position;
-@property (nonatomic, readonly) LOTAnimatablePointValue *anchor;
-@property (nonatomic, readonly) LOTAnimatableScaleValue *scale;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *rotation;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *opacity;
+@property (nonatomic, readonly) NSString *keyname;
+@property (nonatomic, readonly) LOTKeyframeGroup *position;
+@property (nonatomic, readonly) LOTKeyframeGroup *anchor;
+@property (nonatomic, readonly) LOTKeyframeGroup *scale;
+@property (nonatomic, readonly) LOTKeyframeGroup *rotation;
+@property (nonatomic, readonly) LOTKeyframeGroup *opacity;
 
 @end

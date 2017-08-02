@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class LOTAnimatableShapeValue;
-@class LOTAnimatableNumberValue;
+#import "LOTKeyframe.h"
 
 typedef enum : NSUInteger {
   LOTMaskModeAdd,
@@ -19,12 +18,12 @@ typedef enum : NSUInteger {
 
 @interface LOTMask : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+- (instancetype _Nonnull)initWithJSON:(NSDictionary * _Nonnull)jsonDictionary;
 
 @property (nonatomic, readonly) BOOL closed;
 @property (nonatomic, readonly) BOOL inverted;
 @property (nonatomic, readonly) LOTMaskMode maskMode;
-@property (nonatomic, readonly) LOTAnimatableShapeValue *maskPath;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *opacity;
-
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *maskPath;
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *opacity;
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *expansion;
 @end

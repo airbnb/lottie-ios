@@ -7,15 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@class LOTAnimatableShapeValue;
+#import "LOTKeyframe.h"
 
 @interface LOTShapePath : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
+@property (nonatomic, readonly) NSString *keyname;
 @property (nonatomic, readonly) BOOL closed;
 @property (nonatomic, readonly) NSNumber *index;
-@property (nonatomic, readonly) LOTAnimatableShapeValue *shapePath;
+@property (nonatomic, readonly) LOTKeyframeGroup *shapePath;
 
 @end

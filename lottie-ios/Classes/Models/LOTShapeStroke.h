@@ -7,9 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@class LOTAnimatableColorValue;
-@class LOTAnimatableNumberValue;
+#import "LOTKeyframe.h"
 
 typedef enum : NSUInteger {
   LOTLineCapTypeButt,
@@ -25,12 +23,14 @@ typedef enum : NSUInteger {
 
 @interface LOTShapeStroke : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate;
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
+@property (nonatomic, readonly) NSString *keyname;
 @property (nonatomic, readonly) BOOL fillEnabled;
-@property (nonatomic, readonly) LOTAnimatableColorValue *color;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *opacity;
-@property (nonatomic, readonly) LOTAnimatableNumberValue *width;
+@property (nonatomic, readonly) LOTKeyframeGroup *color;
+@property (nonatomic, readonly) LOTKeyframeGroup *opacity;
+@property (nonatomic, readonly) LOTKeyframeGroup *width;
+@property (nonatomic, readonly) LOTKeyframeGroup *dashOffset;
 @property (nonatomic, readonly) LOTLineCapType capType;
 @property (nonatomic, readonly) LOTLineJoinType joinType;
 

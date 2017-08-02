@@ -7,29 +7,42 @@
 //
 
 #import "LOTShapeFill.h"
-#import "LOTAnimatableNumberValue.h"
-#import "LOTAnimatableColorValue.h"
+#import "CGGeometry+LOTAdditions.h"
 
 @implementation LOTShapeFill
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+    [self _mapFromJSON:jsonDictionary];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
+  
+  if (jsonDictionary[@"nm"] ) {
+    _keyname = [jsonDictionary[@"nm"] copy];
+  }
+  
   NSDictionary *color = jsonDictionary[@"c"];
   if (color) {
-    _color = [[LOTAnimatableColorValue alloc] initWithColorValues:color frameRate:frameRate];
+    _color = [[LOTKeyframeGroup alloc] initWithData:color];
   }
   
   NSDictionary *opacity = jsonDictionary[@"o"];
   if (opacity) {
-    _opacity = [[LOTAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:frameRate];
-    [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
+    _opacity = [[LOTKeyframeGroup alloc] initWithData:opacity];
+    [_opacity remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+      return LOT_RemapValue(inValue, 0, 100, 0, 1);
+    }];
+  }
+  
+  NSNumber *evenOdd = jsonDictionary[@"r"];
+  if (evenOdd.integerValue == 2) {
+    _evenOddFillRule = YES;
+  } else {
+    _evenOddFillRule = NO;
   }
   
   NSNumber *fillEnabled = jsonDictionary[@"fillEnabled"];

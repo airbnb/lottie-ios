@@ -7,24 +7,28 @@
 //
 
 #import "LOTShapePath.h"
-#import "LOTAnimatableShapeValue.h"
 
 @implementation LOTShapePath
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+    [self _mapFromJSON:jsonDictionary];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
+  
+  if (jsonDictionary[@"nm"] ) {
+    _keyname = [jsonDictionary[@"nm"] copy];
+  }
+  
   _index = jsonDictionary[@"ind"];
   _closed = [jsonDictionary[@"closed"] boolValue];
   NSDictionary *shape = jsonDictionary[@"ks"];
   if (shape) {
-    _shapePath = [[LOTAnimatableShapeValue alloc] initWithShapeValues:shape frameRate:frameRate closed:_closed];
+    _shapePath = [[LOTKeyframeGroup alloc] initWithData:shape];
   }
 }
 

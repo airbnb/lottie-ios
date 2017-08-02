@@ -7,20 +7,19 @@
 //
 
 #import "LOTMask.h"
-#import "LOTAnimatableShapeValue.h"
-#import "LOTAnimatableNumberValue.h"
+#import "CGGeometry+LOTAdditions.h"
 
 @implementation LOTMask
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary frameRate:frameRate];
+    [self _mapFromJSON:jsonDictionary];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSDictionary *)jsonDictionary frameRate:(NSNumber *)frameRate {
+- (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
   NSNumber *closed = jsonDictionary[@"cl"];
   _closed = closed.boolValue;
   
@@ -40,13 +39,20 @@
   
   NSDictionary *maskshape = jsonDictionary[@"pt"];
   if (maskshape) {
-    _maskPath = [[LOTAnimatableShapeValue alloc] initWithShapeValues:maskshape frameRate:frameRate closed:_closed];
+    _maskPath = [[LOTKeyframeGroup alloc] initWithData:maskshape];
   }
   
   NSDictionary *opacity = jsonDictionary[@"o"];
   if (opacity) {
-    _opacity = [[LOTAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:frameRate];
-    [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
+    _opacity = [[LOTKeyframeGroup alloc] initWithData:opacity];
+    [_opacity remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+      return LOT_RemapValue(inValue, 0, 100, 0, 1);
+    }];
+  }
+  
+  NSDictionary *expansion = jsonDictionary[@"x"];
+  if (expansion) {
+    _expansion = [[LOTKeyframeGroup alloc] initWithData:expansion];
   }
 }
 

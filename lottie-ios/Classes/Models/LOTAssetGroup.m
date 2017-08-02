@@ -14,9 +14,11 @@
   NSDictionary<NSString *, NSDictionary *> *_assetJSONMap;
 }
 
-- (instancetype)initWithJSON:(NSArray *)jsonArray {
+- (instancetype _Nonnull)initWithJSON:(NSArray * _Nonnull)jsonArray
+                      withAssetBundle:(NSBundle *_Nullable)bundle {
   self = [super init];
   if (self) {
+    _assetBundle = bundle;
     _assetMap = [NSMutableDictionary dictionary];
     NSMutableDictionary *assetJSONMap = [NSMutableDictionary dictionary];
     for (NSDictionary<NSString *, NSString *> *assetDictionary in jsonArray) {
@@ -30,9 +32,7 @@
   return self;
 }
 
-- (void)buildAssetNamed:(NSString *)refID
-             withBounds:(CGRect)bounds
-           andFramerate:(NSNumber * _Nullable)framerate {
+- (void)buildAssetNamed:(NSString *)refID {
   
   if ([self assetModelForID:refID]) {
     return;
@@ -41,16 +41,15 @@
   NSDictionary *assetDictionary = _assetJSONMap[refID];
   if (assetDictionary) {
     LOTAsset *asset = [[LOTAsset alloc] initWithJSON:assetDictionary
-                                          withBounds:bounds
-                                       withFramerate:framerate
-                                      withAssetGroup:self];
+                                      withAssetGroup:self
+                                     withAssetBundle:_assetBundle];
     _assetMap[refID] = asset;
   }
 }
 
 - (void)finalizeInitialization {
   for (NSString *refID in _assetJSONMap.allKeys) {
-    [self buildAssetNamed:refID withBounds:CGRectZero andFramerate:nil];
+    [self buildAssetNamed:refID];
   }
   _assetJSONMap = nil;
 }

@@ -397,3 +397,133 @@ CGPoint LOT_PointByLerpingPoints(CGPoint point1, CGPoint point2, CGFloat value) 
   }
   return returnPoint;
 }
+
+CGPoint LOT_PointInLine(CGPoint A, CGPoint B, CGFloat T) {
+  CGPoint C;
+  C.x = A.x - ((A.x - B.x) * T);
+  C.y = A.y - ((A.y - B.y) * T);
+  return C;
+}
+
+CGFloat LOT_CubicBezierGetY(CGPoint cp1, CGPoint cp2, CGFloat T) {
+//       (1-x)^3 * y0 + 3*(1-x)^2 * x * y1 + 3*(1-x) * x^2 * y2 + x^3 * y3
+  return 3 * powf(1.f - T, 2.f) * T * cp1.y + 3.f * (1.f - T) * powf(T, 2.f) * cp2.y + powf(T, 3.f);
+}
+
+CGPoint LOT_PointInCubicCurve(CGPoint start, CGPoint cp1, CGPoint cp2, CGPoint end, CGFloat T) {
+  CGPoint A = LOT_PointInLine(start, cp1, T);
+  CGPoint B = LOT_PointInLine(cp1, cp2, T);
+  CGPoint C = LOT_PointInLine(cp2, end, T);
+  CGPoint D = LOT_PointInLine(A, B, T);
+  CGPoint E = LOT_PointInLine(B, C, T);
+  CGPoint F = LOT_PointInLine(D, E, T);
+  return F;
+}
+
+CGFloat LOT_SolveCubic(CGFloat a, CGFloat b, CGFloat c, CGFloat d) {
+  if (a == 0) return LOT_SolveQuadratic(b, c, d);
+  if (d == 0) return 0;
+  
+  b /= a;
+  c /= a;
+  d /= a;
+  CGFloat q = (3.0 * c - LOT_Squared(b)) / 9.0;
+  CGFloat r = (-27.0 * d + b * (9.0 * c - 2.0 * LOT_Squared(b))) / 54.0;
+  CGFloat disc = LOT_Cubed(q) + LOT_Squared(r);
+  CGFloat term1 = b / 3.0;
+  
+  if (disc > 0) {
+    double s = r + sqrtf(disc);
+    s = (s < 0) ? - LOT_CubicRoot(-s) : LOT_CubicRoot(s);
+    double t = r - sqrtf(disc);
+    t = (t < 0) ? - LOT_CubicRoot(-t) : LOT_CubicRoot(t);
+    
+    double result = -term1 + s + t;
+    if (result >= 0 && result <= 1) return result;
+  } else if (disc == 0) {
+    double r13 = (r < 0) ? - LOT_CubicRoot(-r) : LOT_CubicRoot(r);
+    
+    double result = -term1 + 2.0 * r13;
+    if (result >= 0 && result <= 1) return result;
+    
+    result = -(r13 + term1);
+    if (result >= 0 && result <= 1) return result;
+  } else {
+    q = -q;
+    double dum1 = q * q * q;
+    dum1 = acosf(r / sqrtf(dum1));
+    double r13 = 2.0 * sqrtf(q);
+    
+    double result = -term1 + r13 * cos(dum1 / 3.0);
+    if (result >= 0 && result <= 1) return result;
+    
+    result = -term1 + r13 * cos((dum1 + 2.0 * M_PI) / 3.0);
+    if (result >= 0 && result <= 1) return result;
+    
+    result = -term1 + r13 * cos((dum1 + 4.0 * M_PI) / 3.0);
+    if (result >= 0 && result <= 1) return result;
+  }
+  
+  return -1;
+}
+
+CGFloat LOT_SolveQuadratic(CGFloat a, CGFloat b, CGFloat c) {
+  CGFloat result = (-b + sqrtf(LOT_Squared(b) - 4 * a * c)) / (2 * a);
+  if (result >= 0 && result <= 1) return result;
+  
+  result = (-b - sqrtf(LOT_Squared(b) - 4 * a * c)) / (2 * a);
+  if (result >= 0 && result <= 1) return result;
+  
+  return -1;
+}
+
+CGFloat LOT_Squared(CGFloat f) { return f * f; }
+
+CGFloat LOT_Cubed(CGFloat f) { return f * f * f; }
+
+CGFloat LOT_CubicRoot(CGFloat f) { return powf(f, 1.0 / 3.0); }
+
+CGFloat LOT_CubicBezeirInterpolate(CGPoint P0, CGPoint P1, CGPoint P2, CGPoint P3, CGFloat x) {
+  CGFloat t;
+  if (x == P0.x) {
+    // Handle corner cases explicitly to prevent rounding errors
+    t = 0;
+  } else if (x == P3.x) {
+    t = 1;
+  } else {
+    // Calculate t
+    CGFloat a = -P0.x + 3 * P1.x - 3 * P2.x + P3.x;
+    CGFloat b = 3 * P0.x - 6 * P1.x + 3 * P2.x;
+    CGFloat c = -3 * P0.x + 3 * P1.x;
+    CGFloat d = P0.x - x;
+    CGFloat tTemp = LOT_SolveCubic(a, b, c, d);
+    if (tTemp == -1) return -1;
+    t = tTemp;
+  }
+  
+  // Calculate y from t
+  return LOT_Cubed(1 - t) * P0.y + 3 * t * LOT_Squared(1 - t) * P1.y + 3 * LOT_Squared(t) * (1 - t) * P2.y + LOT_Cubed(t) * P3.y;
+}
+
+CGFloat LOT_CubicLengthWithPrecision(CGPoint fromPoint, CGPoint toPoint, CGPoint controlPoint1, CGPoint controlPoint2, CGFloat iterations) {
+  CGFloat length = 0;
+  CGPoint previousPoint = fromPoint;
+  iterations = ceilf(iterations);
+  for (int i = 1; i <= iterations; ++i) {
+    float s = (float)i  / iterations;
+    
+    CGPoint p = LOT_PointInCubicCurve(fromPoint, controlPoint1, controlPoint2, toPoint, s);
+    
+    length += LOT_PointDistanceFromPoint(previousPoint, p);
+    previousPoint = p;
+  }
+  return length;
+}
+
+CGFloat LOT_CubicLength(CGPoint fromPoint, CGPoint toPoint, CGPoint controlPoint1, CGPoint controlPoint2) {
+  return LOT_CubicLengthWithPrecision(fromPoint, toPoint, controlPoint1, controlPoint2, 20);
+}
+
+BOOL LOT_CGPointIsZero(CGPoint point) {
+  return CGPointEqualToPoint(point, CGPointZero);
+}

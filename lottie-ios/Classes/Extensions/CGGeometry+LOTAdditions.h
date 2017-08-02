@@ -1,5 +1,6 @@
 
 #import "LOTPlatformCompat.h"
+
 #import <CoreGraphics/CoreGraphics.h>
 #import <GLKit/GLKMathTypes.h>
 #import <GLKit/GLKit.h>
@@ -65,6 +66,8 @@ CGRect LOT_RectAttachedBottomRightToRect(CGRect rect, CGSize size, CGFloat margi
 CGRect LOT_RectAttachedTopRightToRect(CGRect rect, CGSize size, CGFloat marginWidth, CGFloat marginHeight, BOOL integral);
 CGRect LOT_RectAttachedTopLeftToRect(CGRect rect, CGSize size, CGFloat marginWidth, CGFloat marginHeight, BOOL integral);
 
+BOOL LOT_CGPointIsZero(CGPoint point);
+
 // Combining
 // Adds all values of the 2nd rect to the first rect
 CGRect LOT_RectAddRect(CGRect rect, CGRect other);
@@ -87,3 +90,16 @@ CATransform3D LOT_CATransform3DSlerpToTransform(CATransform3D fromXorm, CATransf
 
 CGFloat LOT_RemapValue(CGFloat value, CGFloat low1, CGFloat high1, CGFloat low2, CGFloat high2 );
 CGPoint LOT_PointByLerpingPoints(CGPoint point1, CGPoint point2, CGFloat value);
+
+CGPoint LOT_PointInLine(CGPoint A, CGPoint B, CGFloat T);
+CGPoint LOT_PointInCubicCurve(CGPoint start, CGPoint cp1, CGPoint cp2, CGPoint end, CGFloat T);
+
+CGFloat LOT_CubicBezeirInterpolate(CGPoint P0, CGPoint P1, CGPoint P2, CGPoint P3, CGFloat x);
+CGFloat LOT_SolveCubic(CGFloat a, CGFloat b, CGFloat c, CGFloat d);
+CGFloat LOT_SolveQuadratic(CGFloat a, CGFloat b, CGFloat c);
+CGFloat LOT_Squared(CGFloat f);
+CGFloat LOT_Cubed(CGFloat f);
+CGFloat LOT_CubicRoot(CGFloat f);
+
+CGFloat LOT_CubicLength(CGPoint fromPoint, CGPoint toPoint, CGPoint controlPoint1, CGPoint controlPoint2);
+CGFloat LOT_CubicLengthWithPrecision(CGPoint fromPoint, CGPoint toPoint, CGPoint controlPoint1, CGPoint controlPoint2, CGFloat iterations);
