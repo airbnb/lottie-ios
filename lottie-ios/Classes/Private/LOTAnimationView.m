@@ -153,11 +153,11 @@
 # pragma mark - External Methods
 
 - (void)play {
-  [self playWithCompletion:nil];
+  [self playFromFrame:_sceneModel.startFrame toFrame:_sceneModel.endFrame withCompletion:nil];
 }
 
 - (void)playWithCompletion:(LOTAnimationCompletionBlock)completion {
-  [self playToFrame:_sceneModel.endFrame withCompletion:completion];
+  [self playFromFrame:_sceneModel.startFrame toFrame:_sceneModel.endFrame withCompletion:completion];
 }
 
 - (void)playToProgress:(CGFloat)progress withCompletion:(nullable LOTAnimationCompletionBlock)completion {
@@ -225,6 +225,18 @@
 - (void)setLoopAnimation:(BOOL)loopAnimation {
   _loopAnimation = loopAnimation;
   _playAnimation.repeatCount = _loopAnimation ? HUGE_VALF : 1;
+}
+
+- (void)setProgressWithFrame:(nonnull NSNumber *)currentFrame {
+  [self _removeCurrentAnimationIfNecessary];
+  [self _callCompletionIfNecessary:NO];
+  CGFloat duration = _sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue;
+  _animationProgress = currentFrame.floatValue / (_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue);
+  [CATransaction begin];
+  [CATransaction setDisableActions:YES];
+  _compContainer.currentFrame = currentFrame;
+  [_compContainer setNeedsDisplay];
+  [CATransaction commit];
 }
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
@@ -302,7 +314,8 @@
   _animationProgress = animationProgress;
   [CATransaction begin];
   [CATransaction setDisableActions:YES];
-  [_compContainer displayWithFrame:@(frame) forceUpdate:YES];
+  _compContainer.currentFrame = @(frame);
+  [_compContainer setNeedsDisplay];
   [CATransaction commit];
 }
 
@@ -431,7 +444,7 @@
   }
   if (!_isAnimationPlaying || !complete || ![anim isKindOfClass:[CABasicAnimation class]]) return;
   NSNumber *frame = [(CABasicAnimation *)anim toValue];
-  _animationProgress = frame.floatValue / _sceneModel.endFrame.floatValue;
+  _animationProgress = frame.floatValue / (_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue);
   _isAnimationPlaying = NO;
   _playAnimation.delegate = nil;
   [_compContainer removeAllAnimations];
