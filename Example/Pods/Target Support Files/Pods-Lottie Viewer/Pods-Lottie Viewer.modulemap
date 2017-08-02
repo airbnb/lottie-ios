@@ -1,0 +1,6 @@
+framework module Pods_Lottie_Viewer {
+  umbrella header "Pods-Lottie Viewer-umbrella.h"
+
+  export *
+  module * { export * }
+}
