@@ -212,6 +212,7 @@ typedef enum : NSUInteger {
   self.laAnimation = [LOTAnimationView animationNamed:named];
   self.laAnimation.contentMode = UIViewContentModeScaleAspectFit;
   [self.view addSubview:self.laAnimation];
+  [self.laAnimation setProgressWithFrame:@16];
   [self.view setNeedsLayout];
 }
 

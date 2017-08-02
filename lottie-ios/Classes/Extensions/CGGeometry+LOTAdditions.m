@@ -507,15 +507,15 @@ CGFloat LOT_CubicBezeirInterpolate(CGPoint P0, CGPoint P1, CGPoint P2, CGPoint P
 
 CGFloat LOT_CubicLengthWithPrecision(CGPoint fromPoint, CGPoint toPoint, CGPoint controlPoint1, CGPoint controlPoint2, CGFloat iterations) {
   CGFloat length = 0;
-  
-  for (int i = 0; i < iterations; ++i) {
-    float s = i * (1.0 / iterations);
-    float t = s + (1.0 / iterations);
+  CGPoint previousPoint = fromPoint;
+  iterations = ceilf(iterations);
+  for (int i = 1; i <= iterations; ++i) {
+    float s = (float)i  / iterations;
     
     CGPoint p = LOT_PointInCubicCurve(fromPoint, controlPoint1, controlPoint2, toPoint, s);
-    CGPoint q = LOT_PointInCubicCurve(fromPoint, controlPoint1, controlPoint2, toPoint, t);
     
-    length += LOT_PointDistanceFromPoint(p, q);
+    length += LOT_PointDistanceFromPoint(previousPoint, p);
+    previousPoint = p;
   }
   return length;
 }

@@ -110,6 +110,8 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// Stops the animation and rewinds to the beginning. The completion block will be called.
 - (void)stop;
 
+/// Sets progress of animation to a specific frame. If the animation is playing it will stop and the compeltion block will be called.
+- (void)setProgressWithFrame:(nonnull NSNumber *)currentFrame;
 
 /**
  * Sets the keyframe value for a specific After Effects property at a given time.
