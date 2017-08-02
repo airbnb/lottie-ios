@@ -13,8 +13,8 @@
 @implementation LOTLayerGroup {
   CGRect _bounds;
   NSNumber *_framerate;
-  NSDictionary *_modelMap;
-  NSDictionary *_referenceIDMap;
+  NSDictionary<NSNumber *, LOTLayer *> *_modelMap;
+  NSDictionary<NSString *, LOTLayer *> *_referenceIDMap;
 }
 
 - (instancetype)initWithLayerJSON:(NSArray *)layersJSON

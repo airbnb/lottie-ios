@@ -121,7 +121,7 @@
         // Easing function
         CGPoint cp1 = [self _pointFromValueDict:timingControlPoint1];
         CGPoint cp2 = [self _pointFromValueDict:timingControlPoint2];
-        timingFunction = [CAMediaTimingFunction functionWithControlPoints:cp1.x :cp1.y :cp2.x :cp2.y];
+        timingFunction = [CAMediaTimingFunction functionWithControlPoints:(float)cp1.x :(float)cp1.y :(float)cp2.x :(float)cp2.y];
       } else {
         // No easing function specified, fallback to linear
         timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];

@@ -82,7 +82,10 @@
     // Calculate percentage value for keyframe.
     //CA Animations accept time values of 0-1 as a percentage of animation completed.
     NSNumber *timePercentage = @((frame.floatValue - _startFrame.floatValue) / _durationFrames.floatValue);
-    
+
+// Silences "Cast from 'const struct CGPath *' to 'id' drops const qualifier" warning when adding CGPath's to array
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wcast-qual"
     if (outShape) {
       //add out value
       [shapeValues addObject:(id)[[self _bezierShapeFromValue:outShape closed:closed] CGPath]];
@@ -129,14 +132,15 @@
         // Easing function
         CGPoint cp1 = [self _pointFromValueDict:timingControlPoint1];
         CGPoint cp2 = [self _pointFromValueDict:timingControlPoint2];
-        timingFunction = [CAMediaTimingFunction functionWithControlPoints:cp1.x :cp1.y :cp2.x :cp2.y];
+        timingFunction = [CAMediaTimingFunction functionWithControlPoints:(float)cp1.x :(float)cp1.y :(float)cp2.x :(float)cp2.y];
       } else {
         // No easing function specified, fallback to linear
         timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
       }
       [timingFunctions addObject:timingFunction];
     }
-    
+#pragma clang diagnostic pop
+
     // add time
     [keyTimes addObject:timePercentage];
     
@@ -184,7 +188,7 @@
   
   [shape moveToPoint:[self _vertexAtIndex:0 inArray:pointsArray]];
   
-  for (int i = 1; i < pointsArray.count; i ++) {
+  for (NSUInteger i = 1; i < pointsArray.count; i ++) {
     CGPoint vertex = [self _vertexAtIndex:i inArray:pointsArray];
     CGPoint previousVertex = [self _vertexAtIndex:i - 1 inArray:pointsArray];
     CGPoint cp1 = LOT_PointAddedToPoint(previousVertex, [self _vertexAtIndex:i - 1 inArray:outTangents]);
@@ -247,7 +251,7 @@
 }
 
 - (CGPoint)_vertexAtIndex:(NSInteger)idx inArray:(NSArray *)points {
-  NSAssert((idx < points.count),
+  NSAssert((idx < (NSInteger)points.count),
            @"Lottie: Vertex Point out of bounds");
   
   NSArray *pointArray = points[idx];

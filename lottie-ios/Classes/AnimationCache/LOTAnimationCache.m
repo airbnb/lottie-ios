@@ -8,7 +8,7 @@
 
 #import "LOTAnimationCache.h"
 
-const NSInteger kLOTCacheSize = 50;
+static const NSInteger kLOTCacheSize = 50;
 
 @implementation LOTAnimationCache {
   NSMutableDictionary *animationsCache_;
@@ -42,6 +42,14 @@ const NSInteger kLOTCacheSize = 50;
   [lruOrderArray_ removeObject:key];
   [lruOrderArray_ addObject:key];
   [animationsCache_ setObject:animation forKey:key];
+}
+
+- (void)removeAnimationForKey:(NSString *)key {
+    if (!key) {
+        return ;
+    }
+    [lruOrderArray_ removeObject:key];
+    [animationsCache_ removeObjectForKey:key];
 }
 
 - (LOTComposition *)animationForKey:(NSString *)key {

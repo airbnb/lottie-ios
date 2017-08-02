@@ -10,7 +10,7 @@
 #import "CAAnimationGroup+LOTAnimatableGroup.h"
 #import "LOTStrokeShapeLayer.h"
 
-const CGFloat kEllipseControlPointPercentage = 0.55228;
+static const CGFloat kEllipseControlPointPercentage = 0.55228;
 
 @interface LOTCircleShapeLayer : LOTStrokeShapeLayer
 
