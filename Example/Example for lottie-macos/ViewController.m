@@ -8,34 +8,40 @@
 
 #import "ViewController.h"
 #import <Lottie/Lottie.h>
+#import "LAMainView.h"
 
-@interface ViewController ()
-
-@property (nonatomic, strong) LOTAnimationView *lottieLogo;
-
-@end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-
-    self.lottieLogo = [LOTAnimationView animationNamed:@"LottieLogo1"];
-    self.lottieLogo.contentMode = LOTViewContentModeScaleAspectFill;
-    self.lottieLogo.frame = self.view.bounds;
-    self.lottieLogo.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-    
-    [self.view addSubview:self.lottieLogo];
+  [super viewDidLoad];
+  
+  
+  
 }
 
 - (void)viewDidAppear {
-    [super viewDidAppear];
-    [self.lottieLogo play];
+  [super viewDidAppear];
 }
 
 - (void)viewDidDisappear {
-    [super viewDidDisappear];
-    [self.lottieLogo pause];
+  [super viewDidDisappear];
+}
+
+- (IBAction)_sliderChanged:(NSSlider *)sender {
+  [(LAMainView *)self.view setAnimationProgress:sender.floatValue];
+}
+
+- (IBAction)_rewind:(id)sender {
+  [(LAMainView *)self.view rewindAnimation];
+}
+
+- (IBAction)_play:(id)sender {
+  [(LAMainView *)self.view playAnimation];
+}
+
+- (IBAction)_loops:(id)sender {
+  [(LAMainView *)self.view toggleLoop];
 }
 
 @end

@@ -205,8 +205,6 @@
 }
 
 - (void)stop {
-  [self _removeCurrentAnimationIfNecessary];
-  [self _callCompletionIfNecessary:NO];
   self.animationProgress = 0;
 }
 
@@ -277,6 +275,7 @@
 }
 
 - (void)_removeCurrentAnimationIfNecessary {
+  _playAnimation.speed = 0;
   _isAnimationPlaying = NO;
   _playAnimation.delegate = nil;
   [_compContainer removeAllAnimations];
@@ -303,7 +302,7 @@
   _animationProgress = animationProgress;
   [CATransaction begin];
   [CATransaction setDisableActions:YES];
-  _compContainer.currentFrame = @(frame);
+  [_compContainer displayWithFrame:@(frame) forceUpdate:YES];
   [CATransaction commit];
 }
 
@@ -427,6 +426,9 @@
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)complete {
+  if (!_isAnimationPlaying || !complete) {
+    [_compContainer displayWithFrame:_compContainer.currentFrame forceUpdate:YES];
+  }
   if (!_isAnimationPlaying || !complete || ![anim isKindOfClass:[CABasicAnimation class]]) return;
   NSNumber *frame = [(CABasicAnimation *)anim toValue];
   _animationProgress = frame.floatValue / _sceneModel.endFrame.floatValue;
