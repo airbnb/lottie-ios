@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#import <UIKit/UIKit.h>
+@compatibility_alias LOTImage UIImage;
+#else
+#import <AppKit/AppKit.h>
+@compatibility_alias LOTImage NSImage;
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly, nullable) NSString *imageName;
 @property (nonatomic, readonly, nullable) NSString *imageDirectory;
+@property (nonatomic, readwrite, nullable) LOTImage *image;
 
 @property (nonatomic, readonly, nullable) LOTLayerGroup *layerGroup;
 

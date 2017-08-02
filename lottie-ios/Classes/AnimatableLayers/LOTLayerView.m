@@ -325,16 +325,21 @@
 - (void)_setImageForAsset {
     if (_layerModel.imageAsset.imageName) {
         UIImage *image;
-        if (_layerModel.imageAsset.rootDirectory.length > 0) {
-            NSString *rootDirectory  = _layerModel.imageAsset.rootDirectory;
-            if (_layerModel.imageAsset.imageDirectory.length > 0) {
-                rootDirectory = [rootDirectory stringByAppendingPathComponent:_layerModel.imageAsset.imageDirectory];
-            }
-            NSString *imagePath = [rootDirectory stringByAppendingPathComponent:_layerModel.imageAsset.imageName];
-            image = [UIImage imageWithContentsOfFile:imagePath];
+        if (_layerModel.imageAsset.image) {
+            image = _layerModel.imageAsset.image;
         }else{
-            NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
-            image = [UIImage imageNamed:components.firstObject inBundle:_bundle compatibleWithTraitCollection:nil];
+            if (_layerModel.imageAsset.rootDirectory.length > 0) {
+                NSString *rootDirectory  = _layerModel.imageAsset.rootDirectory;
+                if (_layerModel.imageAsset.imageDirectory.length > 0) {
+                    rootDirectory = [rootDirectory stringByAppendingPathComponent:_layerModel.imageAsset.imageDirectory];
+                }
+                NSString *imagePath = [rootDirectory stringByAppendingPathComponent:_layerModel.imageAsset.imageName];
+                image = [UIImage imageWithContentsOfFile:imagePath];
+            }else{
+                NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
+                image = [UIImage imageNamed:components.firstObject inBundle:_bundle compatibleWithTraitCollection:nil];
+            }
+            _layerModel.imageAsset.image = image;
         }
         
         if (image) {
@@ -349,8 +354,15 @@
 
 - (void)_setImageForAsset {
   if (_layerModel.imageAsset.imageName) {
-    NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
-    NSImage *image = [NSImage imageNamed:components.firstObject];
+    NSImage *image;
+    if (_layerModel.imageAsset.image) {
+        image = _layerModel.imageAsset.image;
+    }else{
+        NSArray *components = [_layerModel.imageAsset.imageName componentsSeparatedByString:@"."];
+        image = [NSImage imageNamed:components.firstObject];
+        _layerModel.imageAsset.image = image;
+    }
+    
     if (image) {
       NSWindow *window = [NSApp mainWindow];
       CGFloat desiredScaleFactor = [window backingScaleFactor];
