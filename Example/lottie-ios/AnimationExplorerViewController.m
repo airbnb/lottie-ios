@@ -62,6 +62,7 @@ typedef enum : NSUInteger {
   UIBarButtonItem *openWeb = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(_showURLInput)];
   UIBarButtonItem *flx2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
   UIBarButtonItem *play = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(_play:)];
+  UIBarButtonItem *rewind = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(_rewind:)];
   UIBarButtonItem *flx3 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
   UIBarButtonItem *loop = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(_loop:)];
   UIBarButtonItem *flx4 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -70,7 +71,7 @@ typedef enum : NSUInteger {
   UIBarButtonItem *bgcolor = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(_setBGColor:)];
   UIBarButtonItem *flx6 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
   UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(_close:)];
-  self.toolbar.items = @[open, flx1, openWeb, flx2, loop, flx3, play, flx4, zoom, flx5, bgcolor, flx6, close];
+  self.toolbar.items = @[open, flx1, openWeb, flx2, loop, flx3, play, rewind, flx4, zoom, flx5, bgcolor, flx6, close];
   [self.view addSubview:self.toolbar];
   [self resetAllButtons];
   
@@ -204,10 +205,21 @@ typedef enum : NSUInteger {
 }
 
 - (void)_rewind:(UIBarButtonItem *)button {
-  self.laAnimation.animationProgress = 0;
+  self.laAnimation.animationSpeed = -1;
+  if (self.laAnimation.isAnimationPlaying) {
+    [self resetButton:button highlighted:NO];
+    [self.laAnimation pause];
+  } else {
+    [self resetButton:button highlighted:YES];
+    [self.laAnimation playWithCompletion:^(BOOL animationFinished) {
+      self.slider.value = self.laAnimation.animationProgress;
+      [self resetButton:button highlighted:NO];
+    }];
+  }
 }
 
 - (void)_play:(UIBarButtonItem *)button {
+  self.laAnimation.animationSpeed = 1;
   if (self.laAnimation.isAnimationPlaying) {
     [self resetButton:button highlighted:NO];
     [self.laAnimation pause];
