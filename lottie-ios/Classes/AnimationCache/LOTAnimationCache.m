@@ -44,6 +44,14 @@ const NSInteger kLOTCacheSize = 50;
   [animationsCache_ setObject:animation forKey:key];
 }
 
+- (void)removeAnimationForKey:(NSString *)key {
+    if (!key) {
+        return ;
+    }
+    [lruOrderArray_ removeObject:key];
+    [animationsCache_ removeObjectForKey:key];
+}
+
 - (LOTComposition *)animationForKey:(NSString *)key {
   if (!key) {
     return nil;
