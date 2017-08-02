@@ -10,6 +10,6 @@ target 'Lottie-Example' do
   end
 end
 
-target 'Lottie-Example-MacOS' do
+target 'Lottie Viewer' do
   pod 'lottie-ios', :path => '../'
 end
