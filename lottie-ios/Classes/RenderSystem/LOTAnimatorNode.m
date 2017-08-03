@@ -38,7 +38,7 @@ NSInteger indentation_level = 0;
 - (BOOL)updateWithFrame:(NSNumber *_Nonnull)frame
       withModifierBlock:(void (^_Nullable)(LOTAnimatorNode * _Nonnull inputNode))modifier
        forceLocalUpdate:(BOOL)forceUpdate{
-  if ([_currentFrame isEqual:frame]) {
+  if ([_currentFrame isEqual:frame] && !forceUpdate) {
     return NO;
   }
   NSString *name = NSStringFromClass([self class]);
