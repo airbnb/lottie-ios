@@ -15,7 +15,7 @@
 #import "LOTCompositionContainer.h"
 
 @implementation LOTAnimationView {
-  CAAnimation *_playAnimation;
+  CABasicAnimation *_playAnimation;
   LOTCompositionContainer *_compContainer;
   NSBundle *_bundle;
 }
@@ -231,7 +231,17 @@
 
 - (void)setLoopAnimation:(BOOL)loopAnimation {
   _loopAnimation = loopAnimation;
-  _playAnimation.repeatCount = _loopAnimation ? HUGE_VALF : 1;
+  if (_isAnimationPlaying) {
+    
+    NSNumber *frame = [(LOTCompositionContainer *)_compContainer.presentationLayer currentFrame];
+    NSNumber *start = _playAnimation.fromValue;
+    NSNumber *end = _playAnimation.toValue;
+    [self _removeCurrentAnimationIfNecessary];
+    
+    _compContainer.currentFrame = frame;
+    _animationProgress = frame.floatValue / (_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue);
+    [self playFromFrame:start toFrame:end withCompletion:self.completionBlock];
+  }
 }
 
 - (void)setProgressWithFrame:(nonnull NSNumber *)currentFrame {
