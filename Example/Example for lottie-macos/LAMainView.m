@@ -99,11 +99,11 @@
   self.lottieLogo = nil;
   
   self.lottieLogo = [LOTAnimationView animationWithFilePath:file];
-  self.lottieLogo.contentMode = LOTViewContentModeScaleAspectFill;
+  self.lottieLogo.contentMode = LOTViewContentModeScaleAspectFit;
   self.lottieLogo.frame = self.bounds;
   self.lottieLogo.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
   
-  [self addSubview:self.lottieLogo];
+  [self addSubview:self.lottieLogo positioned:NSWindowBelow relativeTo:nil];
   [self.lottieLogo play];
 }
 
