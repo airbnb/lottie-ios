@@ -1,1 +1,0 @@
-../../../../../../lottie-ios/Classes/Models/LOTShapeRectangle.h

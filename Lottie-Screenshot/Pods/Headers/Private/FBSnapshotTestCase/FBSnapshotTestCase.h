@@ -1,1 +1,0 @@
-../../../FBSnapshotTestCase/FBSnapshotTestCase/FBSnapshotTestCase.h

@@ -6,6 +6,7 @@
 #import "LOTAnimationTransitionController.h"
 #import "LOTAnimationView.h"
 #import "LOTAnimationView_Compat.h"
+#import "LOTCacheProvider.h"
 #import "LOTComposition.h"
 #import "Lottie.h"
 
