@@ -1,1 +1,0 @@
-../../../../../../lottie-ios/Classes/Models/LOTShapeTransform.h
