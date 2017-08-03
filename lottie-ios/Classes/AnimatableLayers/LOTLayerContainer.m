@@ -15,6 +15,10 @@
 #import "LOTMaskContainer.h"
 #import "LOTAsset.h"
 
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#import "LOTCacheProvider.h"
+#endif
+
 @implementation LOTLayerContainer {
   LOTTransformInterpolator *_transformInterpolator;
   LOTNumberInterpolator *_opacityInterpolator;
@@ -128,7 +132,17 @@
         rootDirectory = [rootDirectory stringByAppendingPathComponent:asset.imageDirectory];
       }
       NSString *imagePath = [rootDirectory stringByAppendingPathComponent:asset.imageName];
-      image = [UIImage imageWithContentsOfFile:imagePath];
+        
+      id<LOTImageCache> imageCache = [LOTCacheProvider imageCache];
+      if (imageCache) {
+        image = [imageCache imageForKey:imagePath];
+        if (!image) {
+          image = [UIImage imageWithContentsOfFile:imagePath];
+          [imageCache setImage:image forKey:imagePath];
+        }
+      } else {
+        image = [UIImage imageWithContentsOfFile:imagePath];
+      }
     }else{
       NSArray *components = [asset.imageName componentsSeparatedByString:@"."];
       image = [UIImage imageNamed:components.firstObject inBundle:asset.assetBundle compatibleWithTraitCollection:nil];
