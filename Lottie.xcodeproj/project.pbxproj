@@ -190,6 +190,7 @@
 		6274D0231F1E830E00E05049 /* LOTTransformInterpolator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6274D0201F1E830E00E05049 /* LOTTransformInterpolator.m */; };
 		6274D0241F1E830E00E05049 /* LOTTransformInterpolator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6274D0201F1E830E00E05049 /* LOTTransformInterpolator.m */; };
 		6274D0251F1E830E00E05049 /* LOTTransformInterpolator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6274D0201F1E830E00E05049 /* LOTTransformInterpolator.m */; };
+		6289053E1F33EA0F005154FA /* LOTCacheProvider.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EE498E3D1F336A4900D1DFCD /* LOTCacheProvider.h */; };
 		62BFC2DE1F14298D0068A342 /* LOTAnimatorNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BFC2D01F14298D0068A342 /* LOTAnimatorNode.h */; };
 		62BFC2DF1F14298D0068A342 /* LOTAnimatorNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BFC2D01F14298D0068A342 /* LOTAnimatorNode.h */; };
 		62BFC2E01F14298D0068A342 /* LOTAnimatorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BFC2D11F14298D0068A342 /* LOTAnimatorNode.m */; };
@@ -286,6 +287,7 @@
 			dstPath = include/Lottie;
 			dstSubfolderSpec = 16;
 			files = (
+				6289053E1F33EA0F005154FA /* LOTCacheProvider.h in CopyFiles */,
 				62E27B481F3115A00098420E /* LOTAnimationCache.h in CopyFiles */,
 				622F77141F2BF6BE00269858 /* LOTComposition.h in CopyFiles */,
 				84FE13161E4C15A1009B157C /* LOTAnimationView.h in CopyFiles */,
