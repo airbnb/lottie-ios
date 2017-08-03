@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithKeyframe:(NSDictionary *)keyframe;
 - (instancetype)initWithValue:(id)value;
 - (void)remapValueWithBlock:(CGFloat (^)(CGFloat inValue))remapBlock;
-- (void)setData:(id)data;
+- (LOTKeyframe *)copyWithData:(id)data;
 
 @property (nonatomic, readonly) NSNumber *keyframeTime;
 @property (nonatomic, readonly) BOOL isHold;

@@ -56,14 +56,33 @@
   return self;
 }
 
-- (void)remapValueWithBlock:(CGFloat (^)(CGFloat inValue))remapBlock {
-  _floatValue = remapBlock(_floatValue);
-  _pointValue = CGPointMake(remapBlock(_pointValue.x), remapBlock(_pointValue.y));
-  _sizeValue = CGSizeMake(remapBlock(_sizeValue.width), remapBlock(_sizeValue.height));
+- (instancetype)initWithLOTKeyframe:(LOTKeyframe *)keyframe {
+  self = [super init];
+  if (self) {
+    _keyframeTime = [keyframe.keyframeTime copy];
+    _inTangent = keyframe.inTangent;
+    _outTangent = keyframe.outTangent;
+    _spatialInTangent = keyframe.spatialInTangent;
+    _spatialOutTangent = keyframe.spatialOutTangent;
+    _isHold = keyframe.isHold;
+  }
+  return self;
+}
+
+- (LOTKeyframe *)copyWithData:(id)data {
+  LOTKeyframe *newFrame = [[LOTKeyframe alloc] initWithLOTKeyframe:self];
+  [newFrame setData:data];
+  return newFrame;
 }
 
 - (void)setData:(id)data {
   [self setupOutputWithData:data];
+}
+
+- (void)remapValueWithBlock:(CGFloat (^)(CGFloat inValue))remapBlock {
+  _floatValue = remapBlock(_floatValue);
+  _pointValue = CGPointMake(remapBlock(_pointValue.x), remapBlock(_pointValue.y));
+  _sizeValue = CGSizeMake(remapBlock(_sizeValue.width), remapBlock(_sizeValue.height));
 }
 
 - (void)setupOutputWithData:(id)data {
