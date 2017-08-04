@@ -317,6 +317,8 @@
     [CATransaction setDisableActions:YES];
     [_compContainer displayWithFrame:_compContainer.currentFrame forceUpdate:YES];
     [CATransaction commit];
+  } else {
+    NSLog(@"%s: Keypath Not Found: %@", __PRETTY_FUNCTION__, keypath);
   }
 }
 
