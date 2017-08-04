@@ -11,6 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum : NSUInteger {
+  LOTGradientTypeLinear,
+  LOTGradientTypeRadial
+} LOTGradientType;
+
 @interface LOTShapeGradientFill : NSObject
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
@@ -22,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) LOTKeyframeGroup *gradient;
 @property (nonatomic, readonly) LOTKeyframeGroup *opacity;
 @property (nonatomic, readonly) BOOL evenOddFillRule;
+@property (nonatomic, readonly) LOTGradientType type;
 
 @end
 
