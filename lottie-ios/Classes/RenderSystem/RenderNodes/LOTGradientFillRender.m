@@ -57,7 +57,8 @@
                                       @"locations" : [NSNull null],
                                       @"colors" : [NSNull null],
                                       @"bounds" : [NSNull null],
-                                      @"anchorPoint" : [NSNull null]};
+                                      @"anchorPoint" : [NSNull null],
+                                      @"isRadial" : [NSNull null]};
     _gradientOpacityLayer.mask = _maskShape;
     [wrapperLayer addSublayer:_gradientOpacityLayer];
     
@@ -137,6 +138,7 @@
   CGRect frame = [self.inputNode.outputPath bounds];
   CGPoint modifiedAnchor = CGPointMake(-frame.origin.x / frame.size.width,
                                        -frame.origin.y / frame.size.height);
+  _maskShape.path = self.inputNode.outputPath.CGPath;
   _gradientOpacityLayer.bounds = frame;
   _gradientOpacityLayer.anchorPoint = modifiedAnchor;
   
