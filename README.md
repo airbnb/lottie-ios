@@ -7,6 +7,7 @@
 - [MacOS Sample App](#macos-sample-app)
 - [Objective C Examples](#objective-c-examples)
 - [Swift Examples](#swift-examples)
+- [Debugging Lottie](#debugging)
 - [iOS View Controller Transitioning](#ios-view-controller-transitioning)
 - [Changing Animations At Runtime](#changing-animations-at-runtime)
 - [Supported After Effects Features](#supported-after-effects-features)
@@ -208,6 +209,19 @@ return animationController;
 
 ```
 
+## Debugging
+Lottie has a couple of debugging features to know about. 
+When an animation is loaded unsupported features are logged out in the console with their function names.
+
+If you checkout LOTHelpers.h you will see two debug flags. `ENABLE_DEBUG_LOGGING` and `ENABLE_DEBUG_SHAPES`. 
+`ENABLE_DEBUG_LOGGING` increases the verbosity of Lottie Logging. It logs anytime an animation node is set during animation. If your animation if not working, turn this on and play your animation. The console log might give you some clues as to whats going on.
+
+`ENABLE_DEBUG_SHAPES` Draws a colored square for the anchor-point of every layer and shape. This is helpful to see if anything is on screen.
+
+### Keypaths
+
+LOTAnimationView provides `- (void)logHierarchyKeypaths` which will recursively log all settable keypaths for the animation. This is helpful for changing animationations at runtime.
+
 ## Changing Animations At Runtime
 
 Lottie can do more than just play beautiful animations. Lottie allows you to **change** animations at runtime.
@@ -257,6 +271,7 @@ animationView3.setValue(UIColor.red, forKeypath: "BG-On.Group 1.Fill 1.Color", a
 animationView4.setValue(UIColor.orange, forKeypath: "BG-On.Group 1.Fill 1.Color", atFrame: 0)
 ```
 The keyPath is a dot separated path of layer and property names from After Effects.
+LOTAnimationView provides `- (void)logHierarchyKeypaths` which will recursively log all settable keypaths for the animation.
 ![Key Path](_Gifs/aftereffectskeypath.png)
 "BG-On.Group 1.Fill 1.Color"
 

@@ -27,4 +27,7 @@
 - (BOOL)setValue:(nonnull id)value
       forKeypath:(nonnull NSString *)keypath
          atFrame:(nullable NSNumber *)frame;
+
+- (void)logHierarchyKeypathsWithParent:(NSString * _Nullable)parent;
+
 @end
