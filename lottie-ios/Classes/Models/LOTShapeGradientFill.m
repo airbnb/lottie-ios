@@ -25,8 +25,11 @@
   }
   
   NSNumber *type = jsonDictionary[@"t"];
+  
   if (type.integerValue != 1) {
-    NSLog(@"%s: Warning: Only Linear Gradients are supported.", __PRETTY_FUNCTION__);
+    _type = LOTGradientTypeRadial;
+  } else {
+    _type = LOTGradientTypeLinear;
   }
   
   NSDictionary *start = jsonDictionary[@"s"];
