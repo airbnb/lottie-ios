@@ -14,7 +14,7 @@
 #import "LOTBezierPath.h"
 
 #define ENABLE_DEBUG_LOGGING NO
-#define ENABLE_DEBUG_SHAPES YES
+#define ENABLE_DEBUG_SHAPES NO
 
 #endif /* LOTHelpers_h */
 
