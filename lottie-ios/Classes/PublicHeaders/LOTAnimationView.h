@@ -60,6 +60,9 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// Sets a completion block to call when the animation has completed
 @property (nonatomic, copy, nullable) LOTAnimationCompletionBlock completionBlock;
 
+/// Set the amimation data
+@property (nonatomic, strong, nonnull) LOTComposition *sceneModel;
+
 /* 
  * Plays the animation from its current position to a specific progress. 
  * The animation will start from its current position.

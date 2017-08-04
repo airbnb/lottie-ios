@@ -95,16 +95,17 @@
 }
 
 - (void)_openAnimationFile:(NSString *)file {
-  [self.lottieLogo removeFromSuperview];
-  self.lottieLogo = nil;
   
-  self.lottieLogo = [LOTAnimationView animationWithFilePath:file];
-  self.lottieLogo.contentMode = LOTViewContentModeScaleAspectFit;
-  self.lottieLogo.frame = self.bounds;
-  self.lottieLogo.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-  
-  [self addSubview:self.lottieLogo positioned:NSWindowBelow relativeTo:nil];
-  [self.lottieLogo play];
+  NSError *error;
+  NSData *jsonData = [[NSData alloc] initWithContentsOfFile:file];
+  NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                         options:0 error:&error] : nil;
+  if (JSONObject && !error) {
+    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:[NSBundle mainBundle]];
+    laScene.rootDirectory = [file stringByDeletingLastPathComponent];
+    self.lottieLogo.sceneModel = laScene;
+    [self.lottieLogo play];
+  }
 }
 
 - (void)setAnimationProgress:(CGFloat)progress {
