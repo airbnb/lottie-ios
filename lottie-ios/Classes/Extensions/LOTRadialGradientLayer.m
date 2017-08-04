@@ -29,6 +29,10 @@
 }
 
 - (id)actionForKey:(NSString *)key {
+  if (self.actions[key]) {
+    return self.actions[key];
+  }
+  
   if ([key isEqualToString:@"startPoint"] ||
       [key isEqualToString:@"endPoint"] ||
       [key isEqualToString:@"colors"] ||
@@ -73,7 +77,7 @@
   if (self.isRadial) {
     CGContextDrawRadialGradient(ctx, gradient, origin, 0, origin, radius, kCGGradientDrawsAfterEndLocation);
   } else {
-    CGContextDrawLinearGradient(ctx, gradient, self.startPoint, self.endPoint, kCGGradientDrawsAfterEndLocation);
+    CGContextDrawLinearGradient(ctx, gradient, self.startPoint, self.endPoint, kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation);
   }
   
   CGGradientRelease(gradient);
