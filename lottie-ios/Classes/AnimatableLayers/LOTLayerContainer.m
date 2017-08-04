@@ -260,4 +260,9 @@
   }
 }
 
+- (void)logHierarchyKeypathsWithParent:(NSString * _Nullable)parent {
+  [_contentsGroup logHierarchyKeypathsWithParent:parent
+   ];
+}
+
 @end
