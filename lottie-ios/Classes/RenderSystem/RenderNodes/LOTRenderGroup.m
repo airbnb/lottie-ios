@@ -186,4 +186,19 @@
   return [_rootNode setValue:value forKeyAtPath:key forFrame:frame];
 }
 
+- (void)logHierarchyKeypathsWithParent:(NSString * _Nullable)parent {
+  NSString *keypath = self.keyname;
+  if (parent && self.keyname) {
+    keypath = [NSString stringWithFormat:@"%@.%@", parent, self.keyname];
+  }
+  if (keypath) {
+    for (NSString *interpolator in self.valueInterpolators.allKeys) {
+      [self logString:[NSString stringWithFormat:@"%@.%@", keypath, interpolator]];
+    }
+    [_rootNode logHierarchyKeypathsWithParent:keypath];
+  }
+  
+  [self.inputNode logHierarchyKeypathsWithParent:parent];
+}
+
 @end

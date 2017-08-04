@@ -155,6 +155,9 @@
   [self.layer addSublayer:_compContainer];
   _compContainer.currentFrame = @0;
   [CATransaction commit];
+  if (ENABLE_DEBUG_LOGGING) {
+    [self logHierarchyKeypaths];
+  }
 }
 
 # pragma mark - External Methods
@@ -485,6 +488,10 @@
   _compContainer.currentFrame = frame;
   [CATransaction commit];
   [self _callCompletionIfNecessary:complete];
+}
+
+- (void)logHierarchyKeypaths {
+  [_compContainer logHierarchyKeypathsWithParent:nil];
 }
 
 @end

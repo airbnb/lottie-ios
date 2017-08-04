@@ -42,10 +42,10 @@ NSInteger indentation_level = 0;
     return NO;
   }
   NSString *name = NSStringFromClass([self class]);
-  if (ENABLE_DEBUG_LOGGING) [self logString:[NSString stringWithFormat:@"%@ %lu Checking for update", name, (unsigned long)self.hash]];
+  if (ENABLE_DEBUG_LOGGING) [self logString:[NSString stringWithFormat:@"%@ %lu %@ Checking for update", name, (unsigned long)self.hash, self.keyname]];
   BOOL localUpdate = [self needsUpdateForFrame:frame] || forceUpdate;
   if (localUpdate && ENABLE_DEBUG_LOGGING) {
-    [self logString:[NSString stringWithFormat:@"%@ %lu Performing update", name, (unsigned long)self.hash]];
+    [self logString:[NSString stringWithFormat:@"%@ %lu %@ Performing update", name, (unsigned long)self.hash, self.keyname]];
   }
   BOOL inputUpdated = [_inputNode updateWithFrame:frame
                                 withModifierBlock:modifier
@@ -105,7 +105,7 @@ NSInteger indentation_level = 0;
         forFrame:(nullable NSNumber *)frame {
   NSArray *components = [keypath componentsSeparatedByString:@"."];
   NSString *firstKey = components.firstObject;
-  if ([firstKey isEqualToString:self.keyname]) {
+  if ([firstKey isEqualToString:self.keyname] && components.count > 1) {
     NSString *nextPath = [keypath stringByReplacingCharactersInRange:NSMakeRange(0, firstKey.length + 1) withString:@""];
     return  [self setInterpolatorValue:value forKey:nextPath forFrame:frame];
   }
@@ -121,6 +121,20 @@ NSInteger indentation_level = 0;
     return [interpolator setValue:value atFrame:frame];
   }
   return NO;
+}
+
+- (void)logHierarchyKeypathsWithParent:(NSString *)parent {
+  NSString *keypath = self.keyname;
+  if (parent && self.keyname) {
+    keypath = [NSString stringWithFormat:@"%@.%@", parent, self.keyname];
+  }
+  if (keypath) {
+    for (NSString *interpolator in self.valueInterpolators.allKeys) {
+      [self logString:[NSString stringWithFormat:@"%@.%@", keypath, interpolator]];
+    }
+  }
+  
+  [self.inputNode logHierarchyKeypathsWithParent:parent];
 }
 
 @end

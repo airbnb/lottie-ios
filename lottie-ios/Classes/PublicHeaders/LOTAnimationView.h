@@ -138,6 +138,9 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
       forKeypath:(nonnull NSString *)keypath
          atFrame:(nullable NSNumber *)frame;
 
+/// Logs all child keypaths
+- (void)logHierarchyKeypaths;
+
 /**
  * Adds a custom subview to the animation using a LayerName from After Effects 
  * as a reference point.
