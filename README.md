@@ -382,6 +382,7 @@ Lottie allows you to change **any** property that is animatable in After Effects
 ---
 
 * Support for Linear Gradients
+* Support for Radial Gradients
 
 ### Polystar and Polygon
 
@@ -407,7 +408,6 @@ Lottie allows you to change **any** property that is animatable in After Effects
 * Trim Shapes Individually feature of Trim Paths
 * Expressions
 * 3d Layer support
-* Radial Gradients
 
 ## Community Contributions
  * [Xamarin bindings](https://github.com/martijn00/LottieXamarin)
