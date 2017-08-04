@@ -12,14 +12,15 @@
 #import "LOTNumberInterpolator.h"
 #import "CGGeometry+LOTAdditions.h"
 #import "LOTHelpers.h"
+#import "LOTRadialGradientLayer.h"
 
 @implementation LOTGradientFillRender {
   BOOL _evenOddFillRule;
   CALayer *centerPoint_DEBUG;
   
   CAShapeLayer *_maskShape;
-  CAGradientLayer *_gradientOpacityLayer;
-  CAGradientLayer *_gradientLayer;
+  LOTRadialGradientLayer *_gradientOpacityLayer;
+  LOTRadialGradientLayer *_gradientLayer;
   NSInteger _numberOfPositions;
   
   CGPoint _startPoint;
@@ -48,7 +49,8 @@
     _maskShape.fillColor = [UIColor whiteColor].CGColor;
     _maskShape.actions = @{@"path": [NSNull null]};
     
-    _gradientOpacityLayer = [CAGradientLayer new];
+    _gradientOpacityLayer = [LOTRadialGradientLayer new];
+    _gradientOpacityLayer.isRadial = (fill.type == LOTGradientTypeRadial);
     _gradientOpacityLayer.actions = @{@"startPoint" : [NSNull null],
                                       @"endPoint" : [NSNull null],
                                       @"opacity" : [NSNull null],
@@ -59,7 +61,8 @@
     _gradientOpacityLayer.mask = _maskShape;
     [wrapperLayer addSublayer:_gradientOpacityLayer];
     
-    _gradientLayer = [CAGradientLayer new];
+    _gradientLayer = [LOTRadialGradientLayer new];
+    _gradientLayer.isRadial = (fill.type == LOTGradientTypeRadial);
     _gradientLayer.mask = wrapperLayer;
     _gradientLayer.actions = [_gradientOpacityLayer.actions copy];
     [self.outputLayer addSublayer:_gradientLayer];
@@ -116,8 +119,16 @@
     UIColor *opacityColor = [UIColor colorWithWhite:1 alpha:opacity.floatValue];
     [opacityArray addObject:(id)(opacityColor.CGColor)];
   }
-  _gradientOpacityLayer.locations = opacitylocationsArray;
-  _gradientOpacityLayer.colors = opacityArray;
+  if (opacityArray.count == 0) {
+    _gradientOpacityLayer.backgroundColor = [UIColor whiteColor].CGColor;
+  } else {
+    _gradientOpacityLayer.startPoint = _startPoint;
+    _gradientOpacityLayer.endPoint = _endPoint;
+    _gradientOpacityLayer.locations = opacitylocationsArray;
+    _gradientOpacityLayer.colors = opacityArray;
+  }
+  _gradientLayer.startPoint = _startPoint;
+  _gradientLayer.endPoint = _endPoint;
   _gradientLayer.locations = locationsArray;
   _gradientLayer.colors = colorArray;
 }
@@ -126,19 +137,12 @@
   CGRect frame = [self.inputNode.outputPath bounds];
   CGPoint modifiedAnchor = CGPointMake(-frame.origin.x / frame.size.width,
                                        -frame.origin.y / frame.size.height);
-  CGPoint modifiedStart = CGPointMake((_startPoint.x - frame.origin.x) / frame.size.width,
-                                      (_startPoint.y - frame.origin.y) / frame.size.height);
-  CGPoint modifiedEnd = CGPointMake((_endPoint.x - frame.origin.x) / frame.size.width,
-                                    (_endPoint.y - frame.origin.y) / frame.size.height);
-  _maskShape.path = self.inputNode.outputPath.CGPath;
   _gradientOpacityLayer.bounds = frame;
   _gradientOpacityLayer.anchorPoint = modifiedAnchor;
-  _gradientOpacityLayer.startPoint = modifiedStart;
-  _gradientOpacityLayer.endPoint = modifiedEnd;
+  
   _gradientLayer.bounds = frame;
   _gradientLayer.anchorPoint = modifiedAnchor;
-  _gradientLayer.startPoint = modifiedStart;
-  _gradientLayer.endPoint = modifiedEnd;
+  
 }
 
 - (NSDictionary *)actionsForRenderLayer {
