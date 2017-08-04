@@ -63,4 +63,6 @@ extern NSInteger indentation_level;
 
 - (void)logString:(NSString *_Nonnull)string;
 
+- (void)logHierarchyKeypathsWithParent:(NSString * _Nullable)parent;
+
 @end

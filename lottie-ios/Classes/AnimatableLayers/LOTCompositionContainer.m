@@ -144,4 +144,14 @@
   }
 }
 
+- (void)logHierarchyKeypathsWithParent:(NSString * _Nullable)parent {
+  NSString *keypath = parent;
+  if (parent && self.layerName) {
+    keypath = [NSString stringWithFormat:@"%@.%@", parent, self.layerName];
+  }  
+  for (LOTLayerContainer *layer in _childLayers) {
+    [layer logHierarchyKeypathsWithParent:keypath];
+  }
+}
+
 @end
