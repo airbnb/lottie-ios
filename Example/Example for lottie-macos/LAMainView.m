@@ -108,6 +108,28 @@
   }
 }
 
+-(void)openAnimationURL:(NSURL *)url
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+
+        NSError *error;
+        NSData *jsonData = [[NSData alloc] initWithContentsOfURL:url];
+        NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                               options:0 error:&error] : nil;
+        if (JSONObject && !error) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:[NSBundle mainBundle]];
+                self.lottieLogo.sceneModel = laScene;
+                self.lottieLogo.contentMode = LOTViewContentModeScaleAspectFit;
+                [self.lottieLogo play];
+            });
+        }
+        
+    });
+}
+
+
 - (void)setAnimationProgress:(CGFloat)progress {
   self.lottieLogo.animationProgress = progress;
 }

@@ -15,4 +15,6 @@
 - (void)rewindAnimation;
 - (void)toggleLoop;
 
+-(void)openAnimationURL:(NSURL *)url;
+
 @end
