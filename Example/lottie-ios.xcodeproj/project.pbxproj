@@ -75,6 +75,8 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		B8E8748514D4FA9C683B1711 /* Pods_lottie_ios_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EBDFEA18138A27DD5A89337 /* Pods_lottie_ios_Tests.framework */; };
+		BC7BF4841F37DA7300FB702C /* LottieFilesURL.m in Sources */ = {isa = PBXBuildFile; fileRef = BC7BF4831F37DA7200FB702C /* LottieFilesURL.m */; };
+		BC7BF4861F37EE0300FB702C /* LottieFilesURL.m in Sources */ = {isa = PBXBuildFile; fileRef = BC7BF4831F37DA7200FB702C /* LottieFilesURL.m */; };
 		EEC1E1E127D92497BB7EB181 /* Pods_Lottie_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B15EF764A3BC631B7F802E1 /* Pods_Lottie_Example.framework */; };
 		FA1F5A8F1E42B25500FF36BF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1F5A8E1E42B25500FF36BF /* AppDelegate.m */; };
 		FA1F5A921E42B25500FF36BF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1F5A911E42B25500FF36BF /* main.m */; };
@@ -188,6 +190,8 @@
 		94B0A9361261413477E89F1E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		99F3982078CC5B93DA1AFF47 /* Pods-Lottie-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lottie-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lottie-Example/Pods-Lottie-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		AC7587B24F90B40ADD0CEA8C /* Pods_Lottie_Example_MacOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lottie_Example_MacOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC7BF4821F37DA7200FB702C /* LottieFilesURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LottieFilesURL.h; sourceTree = "<group>"; };
+		BC7BF4831F37DA7200FB702C /* LottieFilesURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LottieFilesURL.m; sourceTree = "<group>"; };
 		CED53248BEFE3C87F0FE12C7 /* Pods_Lottie_Viewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lottie_Viewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C83F4B06A893EA3322E53A /* Pods-Lottie-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lottie-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lottie-Example/Pods-Lottie-Example.release.xcconfig"; sourceTree = "<group>"; };
 		FA1F5A8B1E42B25500FF36BF /* Lottie Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lottie Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -444,6 +448,8 @@
 				FA1F5A941E42B25500FF36BF /* ViewController.m */,
 				62E27B4D1F3132A50098420E /* LAMainView.h */,
 				62E27B4E1F3132A50098420E /* LAMainView.m */,
+				BC7BF4821F37DA7200FB702C /* LottieFilesURL.h */,
+				BC7BF4831F37DA7200FB702C /* LottieFilesURL.m */,
 				FA1F5A961E42B25500FF36BF /* Assets.xcassets */,
 				FA1F5A981E42B25500FF36BF /* Main.storyboard */,
 				FA1F5A9B1E42B25500FF36BF /* Info.plist */,
@@ -792,6 +798,7 @@
 				62B254731E3A8D3B0035A842 /* AnimatedTextField.m in Sources */,
 				62B2546C1E3A8D310035A842 /* AnimationTransitionViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				BC7BF4841F37DA7300FB702C /* LottieFilesURL.m in Sources */,
 				622F76451F2AAA6500269858 /* LAQRScannerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -808,6 +815,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC7BF4861F37EE0300FB702C /* LottieFilesURL.m in Sources */,
 				62E27B4F1F3132A50098420E /* LAMainView.m in Sources */,
 				FA1F5A951E42B25500FF36BF /* ViewController.m in Sources */,
 				FA1F5A921E42B25500FF36BF /* main.m in Sources */,
