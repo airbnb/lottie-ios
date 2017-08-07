@@ -424,6 +424,13 @@
   }
 }
 
+- (CGFloat)animationDuration {
+  if (_playAnimation) {
+    return _playAnimation.duration;
+  }
+  return (_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue) / _sceneModel.framerate.floatValue;
+}
+
 # pragma mark - Overrides
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
