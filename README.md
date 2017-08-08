@@ -188,6 +188,21 @@ animationView.play(fromProgress: 0.25, toProgress: 0.5, withCompletion: nil)
 
 Lottie comes with a `UIViewController` animation-controller for making custom viewController transitions!
 
+![Transition1](_Gifs/transitionMasked.gif)
+![Transition2](_Gifs/transitionPosition.gif)
+
+Just become the delegate for a transition
+
+```objective-c
+- (void)_showTransitionA {
+  ToAnimationViewController *vc = [[ToAnimationViewController alloc] init];
+  vc.transitioningDelegate = self;
+  [self presentViewController:vc animated:YES completion:NULL];
+}
+```
+
+And implement the delegate methods with a `LOTAnimationTransitionController`
+
 ```objective-c
 #pragma mark -- View Controller Transitioning
 
@@ -210,6 +225,8 @@ return animationController;
 }
 
 ```
+
+By setting `applyAnimationTransform` to YES you can make the Lottie animation move the from and to view controllers. They will be positioned at the origin of the layer. When set to NO Lottie just masks the view controller with the specified layer while resepecting z order.
 
 ## Debugging
 Lottie has a couple of debugging features to know about. 
