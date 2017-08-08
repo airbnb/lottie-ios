@@ -153,7 +153,9 @@ To bundle JSON just add it and any images that the animation requires to your ta
 ```swift
 let animationView = LOTAnimationView(name: "LottieLogo")
 self.view.addSubview(animationView)
-animationView.play()
+animationView.play{ (finished) in
+      // Do Something
+}
 ```
 
 If your animation is in another bundle you can use
