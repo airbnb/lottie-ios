@@ -68,9 +68,9 @@
     if (modifier) {
       modifier(inputNode);
     }
-
+    
   } forceLocalUpdate:(localUpdate || forceUpdate)];
-
+  
   return inputUpdated;
 }
 
