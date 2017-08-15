@@ -12,13 +12,17 @@ Hello! Sorry you are having and Issue! Please help us make Lottie better by fill
 - [ ] Feature Request
 - [ ] Regression (Something that once worked doesnt work anymore)
 
-## What Platform are you on? (Specify Platform Version)
-- [ ] MacOS (Version )
-- [ ] iOS (Version )
+## What Platform are you on? 
+- [ ] MacOS (Specify Platform Version)
+- [ ] iOS (Specify Platform Version)
 
-## Expected Behavior
+## Expected Behavior 
+(Screenshots encouraged)
 
 ## Actual Behavior
+(Screenshots encouraged)
 
 ## Code Example
 
+## Animation JSON
+Adding the animation JSON helps us debug the issue faster!
