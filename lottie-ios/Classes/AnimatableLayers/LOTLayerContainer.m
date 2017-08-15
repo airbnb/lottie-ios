@@ -178,29 +178,38 @@
 // MARK - Animation
 
 + (BOOL)needsDisplayForKey:(NSString *)key {
-  BOOL needsDisplay = [super needsDisplayForKey:key];
-  
   if ([key isEqualToString:@"currentFrame"]) {
-    needsDisplay = YES;
+    return YES;
   }
-  
-  return needsDisplay;
+  return [super needsDisplayForKey:key];
 }
 
 -(id<CAAction>)actionForKey:(NSString *)event {
   if([event isEqualToString:@"currentFrame"]) {
     CABasicAnimation *theAnimation = [CABasicAnimation
                                       animationWithKeyPath:event];
+    theAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     theAnimation.fromValue = [[self presentationLayer] valueForKey:event];
     return theAnimation;
   }
   return [super actionForKey:event];
 }
 
+- (id)initWithLayer:(id)layer {
+  if (self = [super initWithLayer:layer]) {
+    if ([layer isKindOfClass:[LOTLayerContainer class]]) {
+      LOTLayerContainer *other = (LOTLayerContainer *)layer;
+      self.currentFrame = other.currentFrame;
+    }
+  }
+  return self;
+}
+
 - (void)display {
-  LOTLayerContainer *presentation = (LOTLayerContainer *)self.presentationLayer;
-  if (presentation == nil) {
-    presentation = self;
+  LOTLayerContainer *presentation = self;
+  if (self.animationKeys.count &&
+      self.presentationLayer) {
+    presentation = (LOTLayerContainer *)self.presentationLayer;
   }
   [self displayWithFrame:presentation.currentFrame];
 }
