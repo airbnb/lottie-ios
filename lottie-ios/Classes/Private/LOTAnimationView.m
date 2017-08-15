@@ -15,13 +15,13 @@
 #import "LOTCompositionContainer.h"
 
 @implementation LOTAnimationView {
-  CABasicAnimation *_playAnimation;
   LOTCompositionContainer *_compContainer;
   NSNumber *_playRangeStartFrame;
   NSNumber *_playRangeEndFrame;
   CGFloat _playRangeStartProgress;
   CGFloat _playRangeEndProgress;
   NSBundle *_bundle;
+  CGFloat _animationProgress;
 }
 
 # pragma mark - Convenience Initializers
@@ -200,11 +200,8 @@
 }
 
 - (void)_removeCurrentAnimationIfNecessary {
-  _playAnimation.speed = 0;
   _isAnimationPlaying = NO;
-  _playAnimation.delegate = nil;
   [_compContainer removeAllAnimations];
-  _playAnimation = nil;
 }
 
 - (CGFloat)_progressForFrame:(NSNumber *)frame {
@@ -225,8 +222,9 @@
 
 - (void)_callCompletionIfNecessary:(BOOL)complete {
   if (self.completionBlock) {
-    self.completionBlock(complete);
+    LOTAnimationCompletionBlock completion = self.completionBlock;
     self.completionBlock = nil;
+    completion(complete);
   }
 }
 
@@ -314,8 +312,7 @@
   animation.autoreverses = _autoReverseAnimation;
   animation.delegate = self;
   animation.removedOnCompletion = NO;
-  _playAnimation = animation;
-  _playAnimation.beginTime = CACurrentMediaTime() - offset;
+  animation.beginTime = CACurrentMediaTime() - offset;
   [_compContainer addAnimation:animation forKey:@"play"];
   _isAnimationPlaying = YES;
 }
@@ -323,12 +320,10 @@
 #pragma mark - Other Time Controls
 
 - (void)stop {
-  if (!_sceneModel ||
-      !_isAnimationPlaying) {
-    _isAnimationPlaying = NO;
-    return;
+  _isAnimationPlaying = NO;
+  if (_sceneModel) {
+    [self setProgressWithFrame:_sceneModel.startFrame callCompletionIfNecessary:YES];
   }
-  [self setProgressWithFrame:_sceneModel.startFrame callCompletionIfNecessary:YES];
 }
 
 - (void)pause {
@@ -469,10 +464,20 @@
   if (!_sceneModel) {
     return 0;
   }
-  if (_playAnimation) {
-    return _playAnimation.duration;
+  CAAnimation *play = [_compContainer animationForKey:@"play"];
+  if (play) {
+    return play.duration;
   }
   return (_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue) / _sceneModel.framerate.floatValue;
+}
+
+- (CGFloat)animationProgress {
+  if (_isAnimationPlaying &&
+      _compContainer.presentationLayer) {
+    CGFloat activeProgress = [self _progressForFrame:[(LOTCompositionContainer *)_compContainer.presentationLayer currentFrame]];
+    return activeProgress;
+  }
+  return _animationProgress;
 }
 
 # pragma mark - Overrides
@@ -495,9 +500,8 @@
 #define LOTViewContentModeBottomRight UIViewContentModeBottomRight
 
 - (void)removeFromSuperview {
-  [self _callCompletionIfNecessary:NO];
-  [self _removeCurrentAnimationIfNecessary];
   [super removeFromSuperview];
+  [self _callCompletionIfNecessary:NO];
 }
 
 - (void)setContentMode:(LOTViewContentMode)contentMode {
@@ -592,13 +596,17 @@
 # pragma mark - CAANimationDelegate
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)complete {
-  if (!_isAnimationPlaying || !complete) {
-    [_compContainer displayWithFrame:_compContainer.currentFrame forceUpdate:YES];
+  if ([_compContainer animationForKey:@"play"] == anim &&
+      [anim isKindOfClass:[CABasicAnimation class]]) {
+    CABasicAnimation *playAnimation = (CABasicAnimation *)anim;
+    NSNumber *frame = _compContainer.presentationLayer.currentFrame;
+    if (complete) {
+      frame = (NSNumber *)playAnimation.toValue;
+    }
+    [self _removeCurrentAnimationIfNecessary];
+    [self setProgressWithFrame:frame callCompletionIfNecessary:NO];
+    [self _callCompletionIfNecessary:complete];
   }
-  if (!_isAnimationPlaying || !complete || ![anim isKindOfClass:[CABasicAnimation class]]) return;
-  [self _removeCurrentAnimationIfNecessary];
-  [self setProgressWithFrame:_playRangeEndFrame callCompletionIfNecessary:NO];
-  [self _callCompletionIfNecessary:complete];
 }
 
 @end
