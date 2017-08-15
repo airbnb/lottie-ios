@@ -83,7 +83,6 @@
 		FA1F5A951E42B25500FF36BF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1F5A941E42B25500FF36BF /* ViewController.m */; };
 		FA1F5A971E42B25500FF36BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA1F5A961E42B25500FF36BF /* Assets.xcassets */; };
 		FA1F5A9A1E42B25500FF36BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1F5A981E42B25500FF36BF /* Main.storyboard */; };
-		FAFA304C27E35A5B877B245D /* Pods_Lottie_Example_MacOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC7587B24F90B40ADD0CEA8C /* Pods_Lottie_Example_MacOS.framework */; };
 		FC6DFE4EE48E30E0517FE2B2 /* Pods_Lottie_Viewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED53248BEFE3C87F0FE12C7 /* Pods_Lottie_Viewer.framework */; };
 /* End PBXBuildFile section */
 
@@ -233,7 +232,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAFA304C27E35A5B877B245D /* Pods_Lottie_Example_MacOS.framework in Frameworks */,
 				FC6DFE4EE48E30E0517FE2B2 /* Pods_Lottie_Viewer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

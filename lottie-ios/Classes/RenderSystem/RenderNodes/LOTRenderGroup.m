@@ -28,7 +28,7 @@
   LOTAnimatorNode *_rootNode;
   LOTBezierPath *_outputPath;
   LOTBezierPath *_localPath;
-  
+  BOOL _rootNodeHasUpdate;
   LOTNumberInterpolator *_opacityInterpolator;
   LOTTransformInterpolator *_transformInterolator;
 }
@@ -126,11 +126,12 @@
 - (BOOL)needsUpdateForFrame:(NSNumber *)frame {
   return ([_opacityInterpolator hasUpdateForFrame:frame] ||
           [_transformInterolator hasUpdateForFrame:frame] ||
-          [_rootNode needsUpdateForFrame:frame]);
+          _rootNodeHasUpdate);
 
 }
 
 - (BOOL)updateWithFrame:(NSNumber *)frame withModifierBlock:(void (^ _Nullable)(LOTAnimatorNode * _Nonnull))modifier forceLocalUpdate:(BOOL)forceUpdate {
+  _rootNodeHasUpdate = [_rootNode needsUpdateForFrame:frame];
   indentation_level = indentation_level + 1;
   [_rootNode updateWithFrame:frame withModifierBlock:modifier forceLocalUpdate:forceUpdate];
   indentation_level = indentation_level - 1;
