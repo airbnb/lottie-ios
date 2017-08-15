@@ -433,6 +433,10 @@ Lottie allows you to change **any** property that is animatable in After Effects
 * Trim Shapes Individually feature of Trim Paths
 * Expressions
 * 3d Layer support
+* Time remapping / Layer Reverse
+* Layer Blend Modes
+* Layer Effects
+
 
 ## Community Contributions
  * [Xamarin bindings](https://github.com/martijn00/LottieXamarin)
