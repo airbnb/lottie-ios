@@ -495,9 +495,9 @@
 #define LOTViewContentModeBottomRight UIViewContentModeBottomRight
 
 - (void)removeFromSuperview {
-  [super removeFromSuperview];
-  self.completionBlock = nil;
+  [self _callCompletionIfNecessary:NO];
   [self _removeCurrentAnimationIfNecessary];
+  [super removeFromSuperview];
 }
 
 - (void)setContentMode:(LOTViewContentMode)contentMode {
