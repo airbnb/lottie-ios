@@ -44,7 +44,6 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// The animation will play forward and then backwards if loopAnimation is also YES
 @property (nonatomic, assign) BOOL autoReverseAnimation;
 
-// TODO
 /// Sets a progress from 0 - 1 of the animation. If the animation is playing it will stop and the compeltion block will be called.
 /// The current progress of the animation in absolute time.
 /// e.g. a value of 0.75 always represents the same point in the animation, regardless of positive
@@ -122,7 +121,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// Stops the animation and rewinds to the beginning. The completion block will be called.
 - (void)stop;
 
-/// Sets progress of animation to a specific frame. If the animation is playing it will stop and the compeltion block will be called.
+/// Sets progress of animation to a specific frame. If the animation is playing it will stop and the completion block will be called.
 - (void)setProgressWithFrame:(nonnull NSNumber *)currentFrame;
 
 /**
