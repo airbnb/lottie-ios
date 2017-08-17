@@ -220,7 +220,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
   return @(((_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue) * progress) + _sceneModel.startFrame.floatValue);
 }
 
-- (BOOL)_isPlayingForwards {
+- (BOOL)_isSpeedNegative {
   // If the animation speed is negative, then we're moving backwards.
   return _animationSpeed >= 0;
 }
@@ -302,7 +302,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
   NSNumber *currentFrame = [self _frameForProgress:_animationProgress];
 
   currentFrame = @(MAX(MIN(currentFrame.floatValue, toEndFrame.floatValue), fromStartFrame.floatValue));
-  BOOL playingForward = [self _isPlayingForwards];
+  BOOL playingForward = [self _isSpeedNegative];
   if (currentFrame.floatValue == toEndFrame.floatValue && playingForward) {
     currentFrame = fromStartFrame;
   } else if (currentFrame.floatValue == fromStartFrame.floatValue && !playingForward) {
@@ -613,7 +613,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
     if (complete) {
       // Set the final frame based on the animation to/from values. If playing forward, use the
       // toValue otherwise we want to end on the fromValue.
-      frame = [self _isPlayingForwards] ? (NSNumber *)playAnimation.toValue : (NSNumber *)playAnimation.fromValue;
+      frame = [self _isSpeedNegative] ? (NSNumber *)playAnimation.toValue : (NSNumber *)playAnimation.fromValue;
     }
     [self _removeCurrentAnimationIfNecessary];
     [self setProgressWithFrame:frame callCompletionIfNecessary:NO];
