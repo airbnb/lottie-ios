@@ -210,27 +210,14 @@ static NSString * const kCompContainerAnimationKey = @"play";
   if (!_sceneModel) {
     return 0;
   }
-  CGFloat absoluteProgress = ((frame.floatValue - _sceneModel.startFrame.floatValue) / (_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue));
-  if ([self _isPlayingForwards]) {
-    return absoluteProgress;
-  } else {
-    // If the animation is playing backwards, the progress is inverted.
-    return 1 - absoluteProgress;
-  }
+  return ((frame.floatValue - _sceneModel.startFrame.floatValue) / (_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue));
 }
 
 - (NSNumber *)_frameForProgress:(CGFloat)progress {
   if (!_sceneModel) {
     return @0;
   }
-  CGFloat absoluteProgress = ((_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue) * progress);
-  if ([self _isPlayingForwards]) {
-    // If we're moving forward, then add the absolute progress to the start.
-    return @(absoluteProgress + _sceneModel.startFrame.floatValue);
-  } else {
-    // It the animation is playing backwards, subtract the progress from the end.
-    return @(_sceneModel.endFrame.floatValue - absoluteProgress);
-  }
+  return @(((_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue) * progress) + _sceneModel.startFrame.floatValue);
 }
 
 - (BOOL)_isPlayingForwards {
@@ -397,18 +384,11 @@ static NSString * const kCompContainerAnimationKey = @"play";
 }
 
 -(void)setAnimationSpeed:(CGFloat)animationSpeed {
-  BOOL directionChange = NO;
-  if ((animationSpeed >= 0 && _animationSpeed < 0) || (animationSpeed < 0 && _animationSpeed >= 0)) {
-    directionChange = YES;
-  }
   _animationSpeed = animationSpeed;
-  NSNumber *frame = [_compContainer.presentationLayer.currentFrame copy];
   if (_isAnimationPlaying && _sceneModel) {
+    NSNumber *frame = [_compContainer.presentationLayer.currentFrame copy];
     [self setProgressWithFrame:frame callCompletionIfNecessary:NO];
     [self playFromFrame:_playRangeStartFrame toFrame:_playRangeEndFrame withCompletion:self.completionBlock];
-  } else if (directionChange) {
-    // The progress needs to be re-calculated if the speed direction changes if the animation is not playing.
-    _animationProgress = [self _progressForFrame:frame];
   }
 }
 

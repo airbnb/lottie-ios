@@ -46,9 +46,12 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 
 // TODO
 /// Sets a progress from 0 - 1 of the animation. If the animation is playing it will stop and the compeltion block will be called.
+/// The animation progress is in terms of absolute progress of the defined animation and does not
+/// take into account negative speeds.
 @property (nonatomic, assign) CGFloat animationProgress;
 
-/// Sets the speed of the animation. Accepts a negative value for reversing animation
+/// Sets the speed of the animation. Accepts a negative value for reversing animation.
+/// Negative speeds do not affect animationProgress
 @property (nonatomic, assign) CGFloat animationSpeed;
 
 /// Read only of the duration in seconds of the animation at speed of 1
