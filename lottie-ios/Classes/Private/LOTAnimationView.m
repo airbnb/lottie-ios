@@ -14,6 +14,8 @@
 #import "LOTAnimationCache.h"
 #import "LOTCompositionContainer.h"
 
+static NSString * const kCompContainerAnimationKey = @"play";
+
 @implementation LOTAnimationView {
   LOTCompositionContainer *_compContainer;
   NSNumber *_playRangeStartFrame;
@@ -218,6 +220,11 @@
   return @(((_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue) * progress) + _sceneModel.startFrame.floatValue);
 }
 
+- (BOOL)_isSpeedNegative {
+  // If the animation speed is negative, then we're moving backwards.
+  return _animationSpeed >= 0;
+}
+
 # pragma mark - Completion Block
 
 - (void)_callCompletionIfNecessary:(BOOL)complete {
@@ -293,10 +300,13 @@
     return;
   }
   NSNumber *currentFrame = [self _frameForProgress:_animationProgress];
-  
+
   currentFrame = @(MAX(MIN(currentFrame.floatValue, toEndFrame.floatValue), fromStartFrame.floatValue));
-  if (currentFrame.floatValue == toEndFrame.floatValue) {
+  BOOL playingForward = [self _isSpeedNegative];
+  if (currentFrame.floatValue == toEndFrame.floatValue && playingForward) {
     currentFrame = fromStartFrame;
+  } else if (currentFrame.floatValue == fromStartFrame.floatValue && !playingForward) {
+    currentFrame = toEndFrame;
   }
   _animationProgress = [self _progressForFrame:currentFrame];
   
@@ -313,7 +323,7 @@
   animation.delegate = self;
   animation.removedOnCompletion = NO;
   animation.beginTime = CACurrentMediaTime() - offset;
-  [_compContainer addAnimation:animation forKey:@"play"];
+  [_compContainer addAnimation:animation forKey:kCompContainerAnimationKey];
   _isAnimationPlaying = YES;
 }
 
@@ -464,7 +474,7 @@
   if (!_sceneModel) {
     return 0;
   }
-  CAAnimation *play = [_compContainer animationForKey:@"play"];
+  CAAnimation *play = [_compContainer animationForKey:kCompContainerAnimationKey];
   if (play) {
     return play.duration;
   }
@@ -596,12 +606,14 @@
 # pragma mark - CAANimationDelegate
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)complete {
-  if ([_compContainer animationForKey:@"play"] == anim &&
+  if ([_compContainer animationForKey:kCompContainerAnimationKey] == anim &&
       [anim isKindOfClass:[CABasicAnimation class]]) {
     CABasicAnimation *playAnimation = (CABasicAnimation *)anim;
     NSNumber *frame = _compContainer.presentationLayer.currentFrame;
     if (complete) {
-      frame = (NSNumber *)playAnimation.toValue;
+      // Set the final frame based on the animation to/from values. If playing forward, use the
+      // toValue otherwise we want to end on the fromValue.
+      frame = [self _isSpeedNegative] ? (NSNumber *)playAnimation.toValue : (NSNumber *)playAnimation.fromValue;
     }
     [self _removeCurrentAnimationIfNecessary];
     [self setProgressWithFrame:frame callCompletionIfNecessary:NO];
