@@ -44,11 +44,13 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// The animation will play forward and then backwards if loopAnimation is also YES
 @property (nonatomic, assign) BOOL autoReverseAnimation;
 
-// TODO
-/// Sets a progress from 0 - 1 of the animation. If the animation is playing it will stop and the completion block will be called.
+/// Sets a progress from 0 - 1 of the animation. If the animation is playing it will stop and the compeltion block will be called.
+/// The current progress of the animation in absolute time.
+/// e.g. a value of 0.75 always represents the same point in the animation, regardless of positive
+/// or negative speed.
 @property (nonatomic, assign) CGFloat animationProgress;
 
-/// Sets the speed of the animation. Accepts a negative value for reversing animation
+/// Sets the speed of the animation. Accepts a negative value for reversing animation.
 @property (nonatomic, assign) CGFloat animationSpeed;
 
 /// Read only of the duration in seconds of the animation at speed of 1
