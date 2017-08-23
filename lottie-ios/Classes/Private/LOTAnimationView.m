@@ -190,7 +190,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 - (BOOL)_isSpeedNegative {
   // If the animation speed is negative, then we're moving backwards.
-  return _animationSpeed >= 0;
+  return _animationSpeed < 0;
 }
 
 # pragma mark - Completion Block
@@ -599,7 +599,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
     if (complete) {
       // Set the final frame based on the animation to/from values. If playing forward, use the
       // toValue otherwise we want to end on the fromValue.
-      frame = [self _isSpeedNegative] ? (NSNumber *)playAnimation.toValue : (NSNumber *)playAnimation.fromValue;
+      frame = [self _isSpeedNegative] ? (NSNumber *)playAnimation.fromValue : (NSNumber *)playAnimation.toValue;
     }
     [self _removeCurrentAnimationIfNecessary];
     [self setProgressWithFrame:frame callCompletionIfNecessary:NO];
