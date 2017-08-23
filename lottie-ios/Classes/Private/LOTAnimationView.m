@@ -322,7 +322,9 @@ static NSString * const kCompContainerAnimationKey = @"play";
   animation.autoreverses = _autoReverseAnimation;
   animation.delegate = self;
   animation.removedOnCompletion = NO;
-  animation.beginTime = CACurrentMediaTime() - offset;
+  if (offset != 0) {
+    animation.beginTime = CACurrentMediaTime() - offset;
+  }
   [_compContainer addAnimation:animation forKey:kCompContainerAnimationKey];
   _isAnimationPlaying = YES;
 }
@@ -509,9 +511,11 @@ static NSString * const kCompContainerAnimationKey = @"play";
 #define LOTViewContentModeBottomLeft UIViewContentModeBottomLeft
 #define LOTViewContentModeBottomRight UIViewContentModeBottomRight
 
-- (void)removeFromSuperview {
-  [super removeFromSuperview];
-  [self _callCompletionIfNecessary:NO];
+- (void)didMoveToSuperview {
+  [super didMoveToSuperview];
+  if (self.superview == nil) {
+    [self _callCompletionIfNecessary:NO];
+  }
 }
 
 - (void)setContentMode:(LOTViewContentMode)contentMode {
