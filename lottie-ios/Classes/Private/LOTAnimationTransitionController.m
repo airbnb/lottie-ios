@@ -59,18 +59,19 @@
   toSnapshot.frame = containerView.bounds;
   
   UIView *fromSnapshot = [fromVC.view resizableSnapshotViewFromRect:containerView.bounds
-                                                 afterScreenUpdates:YES
+                                                 afterScreenUpdates:NO
                                                       withCapInsets:UIEdgeInsetsZero];
   fromSnapshot.frame = containerView.bounds;
   
   tranistionAnimationView_.frame = containerView.bounds;
   tranistionAnimationView_.contentMode = UIViewContentModeScaleAspectFill;
   [containerView addSubview:tranistionAnimationView_];
-  tranistionAnimationView_.animationProgress = 0;
-  [tranistionAnimationView_ layoutSubviews];
+  
   BOOL crossFadeViews = NO;
   
   if (toLayerName_.length) {
+    CGRect convertedBounds = [tranistionAnimationView_ convertRect:containerView.bounds toLayerNamed:toLayerName_];
+    toSnapshot.frame = convertedBounds;
     [tranistionAnimationView_ addSubview:toSnapshot toLayerNamed:toLayerName_ applyTransform:_applyTransform];
   } else {
     [containerView addSubview:toSnapshot];
@@ -80,6 +81,8 @@
   }
   
   if (fromLayerName_.length) {
+    CGRect convertedBounds = [tranistionAnimationView_ convertRect:containerView.bounds toLayerNamed:fromLayerName_];
+    fromSnapshot.frame = convertedBounds;
     [tranistionAnimationView_ addSubview:fromSnapshot toLayerNamed:fromLayerName_ applyTransform:_applyTransform];
   } else {
     [containerView addSubview:fromSnapshot];
