@@ -137,6 +137,18 @@
   }
 }
 
+- (CGRect)convertRect:(CGRect)rect
+            fromLayer:(CALayer *_Nonnull)fromlayer
+         toLayerNamed:(NSString *_Nonnull)layerName {
+  CGRect xRect = rect;
+  for (LOTLayerContainer *child in _childLayers) {
+    if ([child.layerName isEqualToString:layerName]) {
+      xRect = [fromlayer convertRect:rect toLayer:child];
+    }
+  }
+  return xRect;
+}
+
 - (void)setViewportBounds:(CGRect)viewportBounds {
   [super setViewportBounds:viewportBounds];
   for (LOTLayerContainer *layer in _childLayers) {

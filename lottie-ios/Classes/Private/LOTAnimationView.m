@@ -141,7 +141,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 # pragma mark - Internal Methods
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 
 - (void)_initializeAnimationContainer {
   self.clipsToBounds = YES;
@@ -417,11 +417,12 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 # pragma mark - External Methods - Other
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 
 - (void)addSubview:(nonnull LOTView *)view
       toLayerNamed:(nonnull NSString *)layer
     applyTransform:(BOOL)applyTransform {
+  [self _layout];
   CGRect viewRect = view.frame;
   LOTView *wrapperView = [[LOTView alloc] initWithFrame:viewRect];
   view.frame = view.bounds;
@@ -429,9 +430,6 @@ static NSString * const kCompContainerAnimationKey = @"play";
   [wrapperView addSubview:view];
   [self addSubview:wrapperView];
   [_compContainer addSublayer:wrapperView.layer toLayerNamed:layer applyTransform:applyTransform];
-  CGRect newRect = [self.layer convertRect:viewRect toLayer:wrapperView.layer.superlayer];
-  wrapperView.layer.frame = newRect;
-  view.frame = newRect;
 }
 
 #else
@@ -446,12 +444,18 @@ static NSString * const kCompContainerAnimationKey = @"play";
   [wrapperView addSubview:view];
   [self addSubview:wrapperView];
   [_compContainer addSublayer:wrapperView.layer toLayerNamed:layer applyTransform:applyTransform];
-  CGRect newRect = [self.layer convertRect:viewRect toLayer:wrapperView.layer.superlayer];
-  wrapperView.layer.frame = newRect;
-  view.frame = newRect;
 }
 
 #endif
+
+
+- (CGRect)convertRect:(CGRect)rect
+         toLayerNamed:(NSString *_Nonnull)layerName {
+  [self _layout];
+  return [_compContainer convertRect:rect fromLayer:self.layer toLayerNamed:layerName];
+}
+
+
 - (void)setValue:(nonnull id)value
       forKeypath:(nonnull NSString *)keypath
          atFrame:(nullable NSNumber *)frame{
@@ -494,7 +498,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 # pragma mark - Overrides
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 
 #define LOTViewContentMode UIViewContentMode
 #define LOTViewContentModeScaleToFill UIViewContentModeScaleToFill

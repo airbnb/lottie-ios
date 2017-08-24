@@ -6,7 +6,7 @@
 //  Copyright (c) 2017 Airbnb. All rights reserved.
 //
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 
 #import <UIKit/UIKit.h>
 @compatibility_alias LOTView UIView;
