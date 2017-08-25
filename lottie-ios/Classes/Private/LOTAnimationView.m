@@ -305,13 +305,14 @@ static NSString * const kCompContainerAnimationKey = @"play";
   BOOL playingBackwards = [self _isSpeedNegative];
   if (currentFrame.floatValue == toEndFrame.floatValue && !playingBackwards) {
     currentFrame = fromStartFrame;
-  } else if (currentFrame.floatValue == fromStartFrame.floatValue && !playingBackwards) {
+  } else if (currentFrame.floatValue == fromStartFrame.floatValue && playingBackwards) {
     currentFrame = toEndFrame;
   }
   _animationProgress = [self _progressForFrame:currentFrame];
   
-  // If the animation is playing backrwars, to get the offset we need to invert the progress.
-  NSTimeInterval offset = MAX(0, (_animationProgress * (_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue)) - fromStartFrame.floatValue) / _sceneModel.framerate.floatValue;
+  // If the animation is playing backwards, to get the offset we need to invert the progress.
+  CGFloat offsetProgress = playingBackwards ? 1 - _animationProgress : _animationProgress;
+  NSTimeInterval offset = MAX(0, (offsetProgress * (_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue)) - fromStartFrame.floatValue) / _sceneModel.framerate.floatValue;
   NSTimeInterval duration = ((toEndFrame.floatValue - fromStartFrame.floatValue) / _sceneModel.framerate.floatValue);
   CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"currentFrame"];
   animation.speed = _animationSpeed;
