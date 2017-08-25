@@ -78,10 +78,15 @@
 - (void)_updateLineDashPatternsForFrame:(NSNumber *)frame {
   if (_dashPatternInterpolators.count) {
     NSMutableArray *lineDashPatterns = [NSMutableArray array];
+    CGFloat dashTotal = 0;
     for (LOTNumberInterpolator *interpolator in _dashPatternInterpolators) {
-      [lineDashPatterns addObject:@([interpolator floatValueForFrame:frame])];
+      CGFloat patternValue = [interpolator floatValueForFrame:frame];
+      dashTotal = dashTotal + patternValue;
+      [lineDashPatterns addObject:@(patternValue)];
     }
-    self.outputLayer.lineDashPattern = lineDashPatterns;
+    if (dashTotal > 0) {
+      self.outputLayer.lineDashPattern = lineDashPatterns;
+    }
   }
 }
 

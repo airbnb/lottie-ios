@@ -15,7 +15,7 @@
 #import "LOTMaskContainer.h"
 #import "LOTAsset.h"
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 #import "LOTCacheProvider.h"
 #endif
 
@@ -121,7 +121,7 @@
   [_wrapperLayer addSublayer:_contentsGroup.containerLayer];
 }
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 
 - (void)_setImageForAsset:(LOTAsset *)asset {
   if (asset.imageName) {
