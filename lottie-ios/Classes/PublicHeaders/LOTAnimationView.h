@@ -165,13 +165,13 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /**
  * Converts the given CGRect from the recieving animation view's coordinate space
  * to the supplied layer's coordinate space
- *
+ * If layerName is null then the rect will be converted to the composition coordinate system.
  * This is helpful when adding custom subviews to a LOTAnimationView
  *
  **/
 
 - (CGRect)convertRect:(CGRect)rect
-         toLayerNamed:(NSString *_Nonnull)layerName;
+         toLayerNamed:(NSString *_Nullable)layerName;
 
 #if !TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR
 @property (nonatomic) LOTViewContentMode contentMode;

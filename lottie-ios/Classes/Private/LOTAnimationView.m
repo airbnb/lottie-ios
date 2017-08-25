@@ -450,8 +450,11 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 
 - (CGRect)convertRect:(CGRect)rect
-         toLayerNamed:(NSString *_Nonnull)layerName {
+         toLayerNamed:(NSString *_Nullable)layerName {
   [self _layout];
+  if (layerName == nil) {
+    return [self.layer convertRect:rect toLayer:_compContainer];
+  }
   return [_compContainer convertRect:rect fromLayer:self.layer toLayerNamed:layerName];
 }
 
