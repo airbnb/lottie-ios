@@ -270,10 +270,10 @@ static NSString * const kCompContainerAnimationKey = @"play";
   NSNumber *currentFrame = [self _frameForProgress:_animationProgress];
 
   currentFrame = @(MAX(MIN(currentFrame.floatValue, toEndFrame.floatValue), fromStartFrame.floatValue));
-  BOOL playingForward = [self _isSpeedNegative];
-  if (currentFrame.floatValue == toEndFrame.floatValue && playingForward) {
+  BOOL playingBackwards = [self _isSpeedNegative];
+  if (currentFrame.floatValue == toEndFrame.floatValue && !playingBackwards) {
     currentFrame = fromStartFrame;
-  } else if (currentFrame.floatValue == fromStartFrame.floatValue && !playingForward) {
+  } else if (currentFrame.floatValue == fromStartFrame.floatValue && !playingBackwards) {
     currentFrame = toEndFrame;
   }
   _animationProgress = [self _progressForFrame:currentFrame];
