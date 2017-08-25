@@ -29,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Clears Everything from the Cache
 - (void)clearCache;
 
+/// Disables Caching Animation Model Objects
+- (void)disableCaching;
+
 @end
 
 NS_ASSUME_NONNULL_END
