@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 
 #import <UIKit/UIKit.h>
 @compatibility_alias LOTImage UIImage;

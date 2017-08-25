@@ -131,9 +131,8 @@
 }
 
 - (BOOL)updateWithFrame:(NSNumber *)frame withModifierBlock:(void (^ _Nullable)(LOTAnimatorNode * _Nonnull))modifier forceLocalUpdate:(BOOL)forceUpdate {
-  _rootNodeHasUpdate = [_rootNode needsUpdateForFrame:frame];
   indentation_level = indentation_level + 1;
-  [_rootNode updateWithFrame:frame withModifierBlock:modifier forceLocalUpdate:forceUpdate];
+  _rootNodeHasUpdate = [_rootNode updateWithFrame:frame withModifierBlock:modifier forceLocalUpdate:forceUpdate];
   indentation_level = indentation_level - 1;
   BOOL update = [super updateWithFrame:frame withModifierBlock:modifier forceLocalUpdate:forceUpdate];
   return update;
