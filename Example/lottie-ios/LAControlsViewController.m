@@ -31,9 +31,9 @@
   
   LOTAnimatedSwitch *toggle1 = [LOTAnimatedSwitch switchNamed:@"Switch"];
   
-  /// Off animation is 0 to 0.5 progress.
   /// On animation is 0.5 to 1 progress.
   [toggle1 setProgressRangeForOnState:0.5 toProgress:1];
+  /// Off animation is 0 to 0.5 progress.
   [toggle1 setProgressRangeForOffState:0 toProgress:0.5];
   
   [toggle1 addTarget:self action:@selector(switchToggled:) forControlEvents:UIControlEventValueChanged];
