@@ -12,7 +12,6 @@
 #import "LOTHelpers.h"
 
 @implementation LOTCompositionContainer {
-  NSArray<LOTLayerContainer *> *_childLayers;
   NSNumber *_frameOffset;
   CALayer *DEBUG_Center;
 }
@@ -44,6 +43,7 @@
 
 - (void)intializeWithChildGroup:(LOTLayerGroup *)childGroup
                  withAssetGroup:(LOTAssetGroup *)assetGroup {
+  NSMutableDictionary *childMap = [NSMutableDictionary dictionary];
   NSMutableArray *children = [NSMutableArray array];
   NSArray *reversedItems = [[childGroup.layers reverseObjectEnumerator] allObjects];
   
@@ -73,7 +73,11 @@
       [self.wrapperLayer addSublayer:child];
     }
     [children addObject:child];
+    if (child.layerName) {
+      [childMap setObject:child forKey:child.layerName];
+    }
   }
+  _childMap = childMap;
   _childLayers = children;
 }
 
@@ -115,24 +119,22 @@
       }
     }
   }
-  
   return NO;
 }
 
 - (void)addSublayer:(nonnull CALayer *)subLayer
        toLayerNamed:(nonnull NSString *)layerName
      applyTransform:(BOOL)applyTransform {
-  for (LOTLayerContainer *child in _childLayers) {
-    if ([child.layerName isEqualToString:layerName]) {
-      if (applyTransform) {
-        [child addAndMaskSublayer:subLayer];
-      } else {
-        CALayer *maskWrapper = [CALayer new];
-        [maskWrapper addSublayer:subLayer];
-        [self.wrapperLayer insertSublayer:maskWrapper below:child];
-        [child removeFromSuperlayer];
-        maskWrapper.mask = child;
-      }
+  LOTLayerContainer *child = _childMap[layerName];
+  if (child) {
+    if (applyTransform) {
+      [child addAndMaskSublayer:subLayer];
+    } else {
+      CALayer *maskWrapper = [CALayer new];
+      [maskWrapper addSublayer:subLayer];
+      [self.wrapperLayer insertSublayer:maskWrapper below:child];
+      [child removeFromSuperlayer];
+      maskWrapper.mask = child;
     }
   }
 }
@@ -141,10 +143,9 @@
             fromLayer:(CALayer *_Nonnull)fromlayer
          toLayerNamed:(NSString *_Nonnull)layerName {
   CGRect xRect = rect;
-  for (LOTLayerContainer *child in _childLayers) {
-    if ([child.layerName isEqualToString:layerName]) {
-      xRect = [fromlayer convertRect:rect toLayer:child];
-    }
+  LOTLayerContainer *child = _childMap[layerName];
+  if (child) {
+    xRect = [fromlayer convertRect:rect toLayer:child];
   }
   return xRect;
 }
