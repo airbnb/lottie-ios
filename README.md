@@ -409,6 +409,7 @@ Lottie allows you to change **any** property that is animatable in After Effects
 
 ## Animated Controls and Switches
 
+![Animated Buttons](_Gifs/switchTest.gif)
 Lottie also has a custom subclass of UIControl for creating custom animatable interactive controls.
 Currently Lottie has `LOTAnimatedSwitch` which is a toggle style switch control. Tapping on the switch plays either the On-Off or Off-On animation and sends out a UIControlStateValueChanged broadcast to all targets. It is used in the same way UISwitch is used with a few additions to setup the animation with Lottie.
 
