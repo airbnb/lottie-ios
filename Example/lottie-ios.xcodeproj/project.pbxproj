@@ -66,6 +66,7 @@
 		622F770B1F2BE63100269858 /* Z.json in Resources */ = {isa = PBXBuildFile; fileRef = 622F76ED1F2BE63100269858 /* Z.json */; };
 		629EC57F1F54BFF1005B2C59 /* LAControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 629EC57E1F54BFF1005B2C59 /* LAControlsViewController.m */; };
 		629EC5811F54C00B005B2C59 /* Switch.json in Resources */ = {isa = PBXBuildFile; fileRef = 629EC5801F54C00B005B2C59 /* Switch.json */; };
+		629EC5891F54C925005B2C59 /* Switch_States.json in Resources */ = {isa = PBXBuildFile; fileRef = 629EC5881F54C925005B2C59 /* Switch_States.json */; };
 		62B2546A1E3A8D310035A842 /* LottieRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B254631E3A8D310035A842 /* LottieRootViewController.m */; };
 		62B2546B1E3A8D310035A842 /* AnimationExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B254651E3A8D310035A842 /* AnimationExplorerViewController.m */; };
 		62B2546C1E3A8D310035A842 /* AnimationTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B254671E3A8D310035A842 /* AnimationTransitionViewController.m */; };
@@ -171,6 +172,7 @@
 		629EC57D1F54BFF1005B2C59 /* LAControlsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAControlsViewController.h; sourceTree = "<group>"; };
 		629EC57E1F54BFF1005B2C59 /* LAControlsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAControlsViewController.m; sourceTree = "<group>"; };
 		629EC5801F54C00B005B2C59 /* Switch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Switch.json; sourceTree = "<group>"; };
+		629EC5881F54C925005B2C59 /* Switch_States.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Switch_States.json; sourceTree = "<group>"; };
 		62B254621E3A8D310035A842 /* LottieRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LottieRootViewController.h; sourceTree = "<group>"; };
 		62B254631E3A8D310035A842 /* LottieRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LottieRootViewController.m; sourceTree = "<group>"; };
 		62B254641E3A8D310035A842 /* AnimationExplorerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationExplorerViewController.h; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		6003F5B6195388D20070C39A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				629EC5881F54C925005B2C59 /* Switch_States.json */,
 				622F76CF1F2BE63100269858 /* TypeFace */,
 				622F76B51F2BE58100269858 /* 9squares-AlBoardman.json */,
 				629EC5801F54C00B005B2C59 /* Switch.json */,
@@ -614,6 +617,7 @@
 				622F77071F2BE63100269858 /* V.json in Resources */,
 				622F77061F2BE63100269858 /* U.json in Resources */,
 				622F76CE1F2BE58100269858 /* Watermelon.json in Resources */,
+				629EC5891F54C925005B2C59 /* Switch_States.json in Resources */,
 				622F77041F2BE63100269858 /* S.json in Resources */,
 				622F770A1F2BE63100269858 /* Y.json in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
