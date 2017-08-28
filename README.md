@@ -10,6 +10,7 @@
 - [Debugging Lottie](#debugging)
 - [iOS View Controller Transitioning](#ios-view-controller-transitioning)
 - [Changing Animations At Runtime](#changing-animations-at-runtime)
+- [Animated Controls and Switches](#animated-controls-and-switches)
 - [Adding Subviews to Animation](#adding-views-to-an-animation-at-runtime)
 - [Supported After Effects Features](#supported-after-effects-features)
 - [Currently Unsupported After Effects Features](#currently-unsupported-after-effects-features)
