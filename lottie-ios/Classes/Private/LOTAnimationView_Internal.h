@@ -16,4 +16,7 @@ typedef enum : NSUInteger {
 
 @interface LOTAnimationView () <CAAnimationDelegate>
 
+- (CALayer * _Nullable)layerForKey:(NSString * _Nonnull)keyname;
+- (NSArray * _Nonnull)compositionLayers;
+
 @end
