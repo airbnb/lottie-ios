@@ -30,7 +30,11 @@ For the first time, designers can create and ship beautiful animations without a
   s.osx.exclude_files = ['lottie-ios/Classes/PublicHeaders/LOTAnimationTransitionController.h',
                          'lottie-ios/Classes/Private/LOTAnimationTransitionController.m',
                           'lottie-ios/Classes/PublicHeaders/LOTCacheProvider.h',
-                          'lottie-ios/Classes/Private/LOTCacheProvider.m']
+                          'lottie-ios/Classes/Private/LOTCacheProvider.m',
+                          'lottie-ios/Classes/PublicHeaders/LOTAnimatedSwitch.h',
+                          'lottie-ios/Classes/Private/LOTAnimatedSwitch.m',
+                          'lottie-ios/Classes/PublicHeaders/LOTAnimatedControl.h',
+                          'lottie-ios/Classes/Private/LOTAnimatedControl.m']
   # s.resource_bundles = {
   #   'lottie-ios' => ['lottie-ios/Assets/*.png']
   # }

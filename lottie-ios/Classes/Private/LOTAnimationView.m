@@ -99,6 +99,14 @@ static NSString * const kCompContainerAnimationKey = @"play";
   return self;
 }
 
+- (instancetype)init {
+  self = [super init];
+  if (self) {
+    [self _commonInit];
+  }
+  return self;
+}
+
 # pragma mark - Internal Methods
 
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
@@ -401,7 +409,6 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 #endif
 
-
 - (CGRect)convertRect:(CGRect)rect
          toLayerNamed:(NSString *_Nullable)layerName {
   [self _layout];
@@ -428,6 +435,16 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 - (void)logHierarchyKeypaths {
   [_compContainer logHierarchyKeypathsWithParent:nil];
+}
+
+# pragma mark - Semi-Private Methods
+
+- (CALayer * _Nullable)layerForKey:(NSString * _Nonnull)keyname {
+  return _compContainer.childMap[keyname];
+}
+
+- (NSArray * _Nonnull)compositionLayers {
+  return _compContainer.childLayers;
 }
 
 # pragma mark - Getters and Setters
@@ -470,6 +487,13 @@ static NSString * const kCompContainerAnimationKey = @"play";
 #define LOTViewContentModeTopRight UIViewContentModeTopRight
 #define LOTViewContentModeBottomLeft UIViewContentModeBottomLeft
 #define LOTViewContentModeBottomRight UIViewContentModeBottomRight
+
+- (CGSize)intrinsicContentSize {
+  if (!_sceneModel) {
+    return CGSizeMake(UIViewNoIntrinsicMetric, UIViewNoIntrinsicMetric);
+  }
+  return _sceneModel.compBounds.size;
+}
 
 - (void)didMoveToSuperview {
   [super didMoveToSuperview];
@@ -524,10 +548,6 @@ static NSString * const kCompContainerAnimationKey = @"play";
 }
 
 #endif
-
-- (CGSize)intrinsicContentSize {
-  return _sceneModel.compBounds.size;
-}
 
 - (void)_layout {
   CGPoint centerPoint = LOT_RectGetCenterPoint(self.bounds);
