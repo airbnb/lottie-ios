@@ -199,7 +199,7 @@
   if (self = [super initWithLayer:layer]) {
     if ([layer isKindOfClass:[LOTLayerContainer class]]) {
       LOTLayerContainer *other = (LOTLayerContainer *)layer;
-      self.currentFrame = other.currentFrame;
+      self.currentFrame = [other.currentFrame copy];
     }
   }
   return self;
