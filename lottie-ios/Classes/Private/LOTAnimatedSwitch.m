@@ -37,6 +37,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {
+    self.accessibilityHint = NSLocalizedString(@"Double tap to toggle setting.", @"Double tap to toggle setting.");
     _onStartProgress = 0;
     _onEndProgress = 1;
     _offStartProgress = 1;
@@ -89,10 +90,18 @@
   
 }
 
+- (NSString *)accessibilityValue {
+  return self.isOn ? NSLocalizedString(@"On", @"On")  : NSLocalizedString(@"Off", @"Off");
+}
+
 #pragma mark - Internal Methods
 
 - (void)_toggle {
   if (self.isEnabled) {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+      UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleLight];
+      [generator impactOccurred];
+    }
     [self setOn:!_on animated:YES];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
   }
