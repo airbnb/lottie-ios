@@ -10,17 +10,86 @@
 #import "LOTLayer.h"
 #import "LOTAssetGroup.h"
 #import "LOTLayerGroup.h"
+#import "LOTAnimationCache.h"
 
 @implementation LOTComposition
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
-             withAssetBundle:(NSBundle *)bundle {
+# pragma mark - Convenience Initializers
+
++ (nullable instancetype)animationNamed:(nonnull NSString *)animationName {
+  return [self animationNamed:animationName inBundle:[NSBundle mainBundle]];
+}
+
++ (nullable instancetype)animationNamed:(nonnull NSString *)animationName inBundle:(nonnull NSBundle *)bundle {
+  NSArray *components = [animationName componentsSeparatedByString:@"."];
+  animationName = components.firstObject;
+  
+  LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
+  if (comp) {
+    return comp;
+  }
+  
+  NSError *error;
+  NSString *filePath = [bundle pathForResource:animationName ofType:@"json"];
+  NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
+  NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                         options:0 error:&error] : nil;
+  if (JSONObject && !error) {
+    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:bundle];
+    [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
+    laScene.cacheKey = animationName;
+    return laScene;
+  }
+  NSLog(@"%s: Animation Not Found", __PRETTY_FUNCTION__);
+  return nil;
+}
+
++ (nullable instancetype)animationWithFilePath:(nonnull NSString *)filePath {
+  NSString *animationName = filePath;
+  
+  LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
+  if (comp) {
+    return comp;
+  }
+  
+  NSError *error;
+  NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
+  NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                         options:0 error:&error] : nil;
+  if (JSONObject && !error) {
+    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:[NSBundle mainBundle]];
+    laScene.rootDirectory = [filePath stringByDeletingLastPathComponent];
+    [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
+    laScene.cacheKey = animationName;
+    return laScene;
+  }
+  
+  NSLog(@"%s: Animation Not Found", __PRETTY_FUNCTION__);
+  return nil;
+}
+
++ (nonnull instancetype)animationFromJSON:(nonnull NSDictionary *)animationJSON {
+  return [self animationFromJSON:animationJSON inBundle:[NSBundle mainBundle]];
+}
+
++ (nonnull instancetype)animationFromJSON:(nullable NSDictionary *)animationJSON inBundle:(nullable NSBundle *)bundle {
+  return [[LOTComposition alloc] initWithJSON:animationJSON withAssetBundle:bundle];
+}
+
+#pragma mark - Initializer
+
+- (instancetype _Nonnull)initWithJSON:(NSDictionary * _Nullable)jsonDictionary
+                      withAssetBundle:(NSBundle * _Nullable)bundle {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:jsonDictionary withAssetBundle:bundle];
+    if (jsonDictionary) {
+      [self _mapFromJSON:jsonDictionary withAssetBundle:bundle];
+    }
   }
   return self;
 }
+
+#pragma mark - Internal Methods
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary
      withAssetBundle:(NSBundle *)bundle {

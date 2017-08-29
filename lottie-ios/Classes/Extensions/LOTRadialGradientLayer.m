@@ -28,11 +28,7 @@
   return [super needsDisplayForKey:key];
 }
 
-- (id)actionForKey:(NSString *)key {
-  if (self.actions[key]) {
-    return self.actions[key];
-  }
-  
+- (id)actionForKey:(NSString *)key {  
   if ([key isEqualToString:@"startPoint"] ||
       [key isEqualToString:@"endPoint"] ||
       [key isEqualToString:@"colors"] ||

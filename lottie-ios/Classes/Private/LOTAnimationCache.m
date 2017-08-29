@@ -64,4 +64,10 @@ const NSInteger kLOTCacheSize = 50;
   [animationsCache_ removeObjectForKey:key];
 }
 
+- (void)disableCaching {
+  [self clearCache];
+  animationsCache_ = nil;
+  lruOrderArray_ = nil;
+}
+
 @end

@@ -64,6 +64,9 @@
 		622F77091F2BE63100269858 /* X.json in Resources */ = {isa = PBXBuildFile; fileRef = 622F76EB1F2BE63100269858 /* X.json */; };
 		622F770A1F2BE63100269858 /* Y.json in Resources */ = {isa = PBXBuildFile; fileRef = 622F76EC1F2BE63100269858 /* Y.json */; };
 		622F770B1F2BE63100269858 /* Z.json in Resources */ = {isa = PBXBuildFile; fileRef = 622F76ED1F2BE63100269858 /* Z.json */; };
+		629EC57F1F54BFF1005B2C59 /* LAControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 629EC57E1F54BFF1005B2C59 /* LAControlsViewController.m */; };
+		629EC5811F54C00B005B2C59 /* Switch.json in Resources */ = {isa = PBXBuildFile; fileRef = 629EC5801F54C00B005B2C59 /* Switch.json */; };
+		629EC5891F54C925005B2C59 /* Switch_States.json in Resources */ = {isa = PBXBuildFile; fileRef = 629EC5881F54C925005B2C59 /* Switch_States.json */; };
 		62B2546A1E3A8D310035A842 /* LottieRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B254631E3A8D310035A842 /* LottieRootViewController.m */; };
 		62B2546B1E3A8D310035A842 /* AnimationExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B254651E3A8D310035A842 /* AnimationExplorerViewController.m */; };
 		62B2546C1E3A8D310035A842 /* AnimationTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B254671E3A8D310035A842 /* AnimationTransitionViewController.m */; };
@@ -166,6 +169,10 @@
 		622F76EC1F2BE63100269858 /* Y.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Y.json; sourceTree = "<group>"; };
 		622F76ED1F2BE63100269858 /* Z.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Z.json; sourceTree = "<group>"; };
 		62569CB2461B12ABC97FCB96 /* lottie-ios.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "lottie-ios.podspec"; path = "../lottie-ios.podspec"; sourceTree = "<group>"; };
+		629EC57D1F54BFF1005B2C59 /* LAControlsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAControlsViewController.h; sourceTree = "<group>"; };
+		629EC57E1F54BFF1005B2C59 /* LAControlsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAControlsViewController.m; sourceTree = "<group>"; };
+		629EC5801F54C00B005B2C59 /* Switch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Switch.json; sourceTree = "<group>"; };
+		629EC5881F54C925005B2C59 /* Switch_States.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Switch_States.json; sourceTree = "<group>"; };
 		62B254621E3A8D310035A842 /* LottieRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LottieRootViewController.h; sourceTree = "<group>"; };
 		62B254631E3A8D310035A842 /* LottieRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LottieRootViewController.m; sourceTree = "<group>"; };
 		62B254641E3A8D310035A842 /* AnimationExplorerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationExplorerViewController.h; sourceTree = "<group>"; };
@@ -301,6 +308,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				62B254621E3A8D310035A842 /* LottieRootViewController.h */,
 				62B254631E3A8D310035A842 /* LottieRootViewController.m */,
+				629EC57D1F54BFF1005B2C59 /* LAControlsViewController.h */,
+				629EC57E1F54BFF1005B2C59 /* LAControlsViewController.m */,
 				62B254741E3A8D400035A842 /* Animation Explorer */,
 				62B254751E3A8D500035A842 /* Transition Demo */,
 				62B254761E3A8D620035A842 /* Typing Animation Demo */,
@@ -336,8 +345,10 @@
 		6003F5B6195388D20070C39A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				629EC5881F54C925005B2C59 /* Switch_States.json */,
 				622F76CF1F2BE63100269858 /* TypeFace */,
 				622F76B51F2BE58100269858 /* 9squares-AlBoardman.json */,
+				629EC5801F54C00B005B2C59 /* Switch.json */,
 				622F76B61F2BE58100269858 /* HamburgerArrow.json */,
 				622F76B71F2BE58100269858 /* IconTransitions.json */,
 				622F76B81F2BE58100269858 /* LottieLogo1_masked.json */,
@@ -596,6 +607,7 @@
 				622F76C61F2BE58100269858 /* LottieLogo1.json in Resources */,
 				622F77051F2BE63100269858 /* T.json in Resources */,
 				622F77021F2BE63100269858 /* Q.json in Resources */,
+				629EC5811F54C00B005B2C59 /* Switch.json in Resources */,
 				622F76FB1F2BE63100269858 /* J.json in Resources */,
 				622F77081F2BE63100269858 /* W.json in Resources */,
 				622F76F61F2BE63100269858 /* E.json in Resources */,
@@ -605,6 +617,7 @@
 				622F77071F2BE63100269858 /* V.json in Resources */,
 				622F77061F2BE63100269858 /* U.json in Resources */,
 				622F76CE1F2BE58100269858 /* Watermelon.json in Resources */,
+				629EC5891F54C925005B2C59 /* Switch_States.json in Resources */,
 				622F77041F2BE63100269858 /* S.json in Resources */,
 				622F770A1F2BE63100269858 /* Y.json in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
@@ -796,6 +809,7 @@
 				62B254731E3A8D3B0035A842 /* AnimatedTextField.m in Sources */,
 				62B2546C1E3A8D310035A842 /* AnimationTransitionViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				629EC57F1F54BFF1005B2C59 /* LAControlsViewController.m in Sources */,
 				BC7BF4841F37DA7300FB702C /* LottieFilesURL.m in Sources */,
 				622F76451F2AAA6500269858 /* LAQRScannerViewController.m in Sources */,
 			);

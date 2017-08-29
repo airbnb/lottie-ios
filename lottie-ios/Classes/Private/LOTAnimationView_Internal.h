@@ -16,6 +16,7 @@ typedef enum : NSUInteger {
 
 @interface LOTAnimationView () <CAAnimationDelegate>
 
-@property (nonatomic, copy, nullable) NSString *cacheKey;
+- (CALayer * _Nullable)layerForKey:(NSString * _Nonnull)keyname;
+- (NSArray * _Nonnull)compositionLayers;
 
 @end

@@ -20,4 +20,11 @@
        toLayerNamed:(nonnull NSString *)layerName
      applyTransform:(BOOL)applyTransform;
 
+- (CGRect)convertRect:(CGRect)rect
+            fromLayer:(CALayer *_Nonnull)fromlayer
+         toLayerNamed:(NSString *_Nonnull)layerName;
+
+@property (nonatomic, readonly, nonnull) NSArray<LOTLayerContainer *> *childLayers;
+@property (nonatomic, readonly, nonnull)  NSDictionary *childMap;
+
 @end

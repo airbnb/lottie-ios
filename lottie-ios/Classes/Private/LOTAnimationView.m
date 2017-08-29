@@ -33,28 +33,8 @@ static NSString * const kCompContainerAnimationKey = @"play";
 }
 
 + (nonnull instancetype)animationNamed:(nonnull NSString *)animationName inBundle:(nonnull NSBundle *)bundle {
-  NSArray *components = [animationName componentsSeparatedByString:@"."];
-  animationName = components.firstObject;
-  
-  LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
-  if (comp) {
-    return [[LOTAnimationView alloc] initWithModel:comp inBundle:bundle];
-  }
-  
-  NSError *error;
-  NSString *filePath = [bundle pathForResource:animationName ofType:@"json"];
-  NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
-  NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                         options:0 error:&error] : nil;
-  if (JSONObject && !error) {
-    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:bundle];
-    [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
-    LOTAnimationView *animationView = [[LOTAnimationView alloc] initWithModel:laScene inBundle:bundle];
-    animationView.cacheKey = animationName;
-    return animationView;
-  }
-  NSLog(@"%s: Animation Not Found", __PRETTY_FUNCTION__);
-  return [[LOTAnimationView alloc] initWithModel:nil inBundle:nil];
+  LOTComposition *comp = [LOTComposition animationNamed:animationName inBundle:bundle];
+  return [[LOTAnimationView alloc] initWithModel:comp inBundle:bundle];
 }
 
 + (nonnull instancetype)animationFromJSON:(nonnull NSDictionary *)animationJSON {
@@ -62,33 +42,13 @@ static NSString * const kCompContainerAnimationKey = @"play";
 }
 
 + (nonnull instancetype)animationFromJSON:(nullable NSDictionary *)animationJSON inBundle:(nullable NSBundle *)bundle {
-  LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON withAssetBundle:bundle];
-  return [[LOTAnimationView alloc] initWithModel:laScene inBundle:bundle];
+  LOTComposition *comp = [LOTComposition animationFromJSON:animationJSON inBundle:bundle];
+  return [[LOTAnimationView alloc] initWithModel:comp inBundle:bundle];
 }
 
 + (nonnull instancetype)animationWithFilePath:(nonnull NSString *)filePath {
-  NSString *animationName = filePath;
-  
-  LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
-  if (comp) {
-    return [[LOTAnimationView alloc] initWithModel:comp inBundle:[NSBundle mainBundle]];
-  }
-  
-  NSError *error;
-  NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
-  NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                         options:0 error:&error] : nil;
-  if (JSONObject && !error) {
-    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:[NSBundle mainBundle]];
-    laScene.rootDirectory = [filePath stringByDeletingLastPathComponent];
-    [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
-    LOTAnimationView *animationView = [[LOTAnimationView alloc] initWithModel:laScene inBundle:[NSBundle mainBundle]];
-    animationView.cacheKey = animationName;
-    return animationView;
-  }
-  
-  NSLog(@"%s: Animation Not Found", __PRETTY_FUNCTION__);
-  return [[LOTAnimationView alloc] initWithModel:nil inBundle:nil];
+  LOTComposition *comp = [LOTComposition animationWithFilePath:filePath];
+  return [[LOTAnimationView alloc] initWithModel:comp inBundle:[NSBundle mainBundle]];
 }
 
 # pragma mark - Initializers
@@ -99,7 +59,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
     [self _commonInit];
     LOTComposition *laScene = [[LOTAnimationCache sharedCache] animationForKey:url.absoluteString];
     if (laScene) {
-      self.cacheKey = url.absoluteString;
+      laScene.cacheKey = url.absoluteString;
       [self _initializeAnimationContainer];
       [self _setupWithSceneModel:laScene];
     } else {
@@ -118,7 +78,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
         LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON withAssetBundle:[NSBundle mainBundle]];
         dispatch_async(dispatch_get_main_queue(), ^(void){
           [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:url.absoluteString];
-          self.cacheKey = url.absoluteString;
+          laScene.cacheKey = url.absoluteString;
           [self _initializeAnimationContainer];
           [self _setupWithSceneModel:laScene];
         });
@@ -139,9 +99,17 @@ static NSString * const kCompContainerAnimationKey = @"play";
   return self;
 }
 
+- (instancetype)init {
+  self = [super init];
+  if (self) {
+    [self _commonInit];
+  }
+  return self;
+}
+
 # pragma mark - Internal Methods
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 
 - (void)_initializeAnimationContainer {
   self.clipsToBounds = YES;
@@ -398,30 +366,24 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 - (void)setCacheEnable:(BOOL)cacheEnable{
   _cacheEnable = cacheEnable;
-  if (!self.cacheKey) {
+  if (!self.sceneModel.cacheKey) {
     return;
   }
   if (cacheEnable) {
-    [[LOTAnimationCache sharedCache] addAnimation:_sceneModel forKey:self.cacheKey];
+    [[LOTAnimationCache sharedCache] addAnimation:_sceneModel forKey:self.sceneModel.cacheKey];
   }else {
-    [[LOTAnimationCache sharedCache] removeAnimationForKey:self.cacheKey];
-  }
-}
-
-- (void)setCacheKey:(NSString *)cacheKey {
-  _cacheKey = cacheKey;
-  if (cacheKey) {
-    _cacheEnable = YES;
+    [[LOTAnimationCache sharedCache] removeAnimationForKey:self.sceneModel.cacheKey];
   }
 }
 
 # pragma mark - External Methods - Other
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 
 - (void)addSubview:(nonnull LOTView *)view
       toLayerNamed:(nonnull NSString *)layer
     applyTransform:(BOOL)applyTransform {
+  [self _layout];
   CGRect viewRect = view.frame;
   LOTView *wrapperView = [[LOTView alloc] initWithFrame:viewRect];
   view.frame = view.bounds;
@@ -429,9 +391,6 @@ static NSString * const kCompContainerAnimationKey = @"play";
   [wrapperView addSubview:view];
   [self addSubview:wrapperView];
   [_compContainer addSublayer:wrapperView.layer toLayerNamed:layer applyTransform:applyTransform];
-  CGRect newRect = [self.layer convertRect:viewRect toLayer:wrapperView.layer.superlayer];
-  wrapperView.layer.frame = newRect;
-  view.frame = newRect;
 }
 
 #else
@@ -446,12 +405,20 @@ static NSString * const kCompContainerAnimationKey = @"play";
   [wrapperView addSubview:view];
   [self addSubview:wrapperView];
   [_compContainer addSublayer:wrapperView.layer toLayerNamed:layer applyTransform:applyTransform];
-  CGRect newRect = [self.layer convertRect:viewRect toLayer:wrapperView.layer.superlayer];
-  wrapperView.layer.frame = newRect;
-  view.frame = newRect;
 }
 
 #endif
+
+- (CGRect)convertRect:(CGRect)rect
+         toLayerNamed:(NSString *_Nullable)layerName {
+  [self _layout];
+  if (layerName == nil) {
+    return [self.layer convertRect:rect toLayer:_compContainer];
+  }
+  return [_compContainer convertRect:rect fromLayer:self.layer toLayerNamed:layerName];
+}
+
+
 - (void)setValue:(nonnull id)value
       forKeypath:(nonnull NSString *)keypath
          atFrame:(nullable NSNumber *)frame{
@@ -468,6 +435,16 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 - (void)logHierarchyKeypaths {
   [_compContainer logHierarchyKeypathsWithParent:nil];
+}
+
+# pragma mark - Semi-Private Methods
+
+- (CALayer * _Nullable)layerForKey:(NSString * _Nonnull)keyname {
+  return _compContainer.childMap[keyname];
+}
+
+- (NSArray * _Nonnull)compositionLayers {
+  return _compContainer.childLayers;
 }
 
 # pragma mark - Getters and Setters
@@ -494,7 +471,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 # pragma mark - Overrides
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 
 #define LOTViewContentMode UIViewContentMode
 #define LOTViewContentModeScaleToFill UIViewContentModeScaleToFill
@@ -510,6 +487,13 @@ static NSString * const kCompContainerAnimationKey = @"play";
 #define LOTViewContentModeTopRight UIViewContentModeTopRight
 #define LOTViewContentModeBottomLeft UIViewContentModeBottomLeft
 #define LOTViewContentModeBottomRight UIViewContentModeBottomRight
+
+- (CGSize)intrinsicContentSize {
+  if (!_sceneModel) {
+    return CGSizeMake(UIViewNoIntrinsicMetric, UIViewNoIntrinsicMetric);
+  }
+  return _sceneModel.compBounds.size;
+}
 
 - (void)didMoveToSuperview {
   [super didMoveToSuperview];
@@ -564,10 +548,6 @@ static NSString * const kCompContainerAnimationKey = @"play";
 }
 
 #endif
-
-- (CGSize)intrinsicContentSize {
-  return _sceneModel.compBounds.size;
-}
 
 - (void)_layout {
   CGPoint centerPoint = LOT_RectGetCenterPoint(self.bounds);
