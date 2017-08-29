@@ -93,6 +93,15 @@
   _animationView.frame = self.bounds;
 }
 
+- (UIAccessibilityTraits)accessibilityTraits {
+  return UIAccessibilityTraitButton;
+}
+
+- (BOOL)isAccessibilityElement
+{
+  return YES;
+}
+
 #pragma mark - Private interface implementation
 
 - (void)checkStateChangedAndUpdate:(BOOL)forceUpdate {
