@@ -15,7 +15,10 @@
   CGFloat _onEndProgress;
   CGFloat _offStartProgress;
   CGFloat _offEndProgress;
+  CGPoint _touchTrackingStart;
   BOOL _on;
+  BOOL _suppressToggle;
+  BOOL _toggleToState;
 }
 
 /// Convenience method to initialize a control from the Main Bundle by name
@@ -72,18 +75,31 @@
 }
 
 - (void)setOn:(BOOL)on animated:(BOOL)animated {
-  if (_on == on) {
-    animated = NO;
-  }
-  
   _on = on;
   
   CGFloat startProgress = on ? _onStartProgress : _offStartProgress;
   CGFloat endProgress = on ? _onEndProgress : _offEndProgress;
+  CGFloat finalProgress = endProgress;
+  if (self.animationView.animationProgress < MIN(startProgress, endProgress) ||
+      self.animationView.animationProgress > MAX(startProgress, endProgress)) {
+    if (self.animationView.animationProgress != (!_on ? _onEndProgress : _offEndProgress)) {
+      // Current progress is in the wrong timeline. Switch.
+      endProgress = on ? _offStartProgress : _onStartProgress;
+      startProgress = on ? _offEndProgress : _onEndProgress;
+    }
+  }
+  
+  if (finalProgress == self.animationView.animationProgress) {
+    return;
+  }
   
   if (animated) {
     [self.animationView pause];
-    [self.animationView playFromProgress:startProgress toProgress:endProgress withCompletion:nil];
+    [self.animationView playFromProgress:startProgress toProgress:endProgress withCompletion:^(BOOL animationFinished) {
+      if (animationFinished) {
+        self.animationView.animationProgress = finalProgress;
+      }
+    }];
   } else {
     self.animationView.animationProgress = endProgress;
   }
@@ -97,13 +113,82 @@
 #pragma mark - Internal Methods
 
 - (void)_toggle {
+  if (!_suppressToggle) {
+    NSLog(@"Touch up toggle");
+    [self _toggleAndSendActions];
+  }
+}
+
+- (void)_toggleAndSendActions {
   if (self.isEnabled) {
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
       UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleLight];
       [generator impactOccurred];
     }
     [self setOn:!_on animated:YES];
+    NSLog(@"%@", _on ? @"ON" : @"OFF");
     [self sendActionsForControlEvents:UIControlEventValueChanged];
+  }
+}
+
+- (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+  [super beginTrackingWithTouch:touch withEvent:event];
+  _suppressToggle = NO;
+  _touchTrackingStart = [touch locationInView:self];
+  return YES;
+}
+
+- (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+  BOOL superContinue = [super continueTrackingWithTouch:touch withEvent:event];
+  if (!_interactiveGesture) {
+    return superContinue;
+  }
+  CGPoint location = [touch locationInView:self];
+  CGFloat diff = location.x - _touchTrackingStart.x;
+  if (LOT_PointDistanceFromPoint(_touchTrackingStart, location) > self.bounds.size.width * 0.25) {
+    // The touch has moved enough to register as its own gesture. Suppress the touch up toggle.
+    NSLog(@"Suppressing TouchUP");
+    _suppressToggle = YES;
+  }
+  if ([UIView userInterfaceLayoutDirectionForSemanticContentAttribute:self.semanticContentAttribute] == UIUserInterfaceLayoutDirectionRightToLeft) {
+    diff = diff * -1;
+  }
+  if (_on) {
+    diff = diff * -1;
+    if (diff <= 0) {
+      self.animationView.animationProgress = _onEndProgress;
+      _toggleToState = YES;
+    } else {
+      diff = MAX(MIN(self.bounds.size.width, diff), 0);
+      self.animationView.animationProgress = LOT_RemapValue(diff, 0, self.bounds.size.width, _offStartProgress, _offEndProgress);
+      _toggleToState = (diff / self.bounds.size.width) > 0.5 ? NO : YES;
+    }
+  } else {
+    if (diff <= 0) {
+      self.animationView.animationProgress = _offEndProgress;
+      _toggleToState = NO;
+    } else {
+      diff = MAX(MIN(self.bounds.size.width, diff), 0);
+      self.animationView.animationProgress = LOT_RemapValue(diff, 0, self.bounds.size.width, _onStartProgress, _onEndProgress);
+      _toggleToState = (diff / self.bounds.size.width) > 0.5 ? YES : NO;
+    }
+  }
+  NSLog(@"Diff %f", diff);
+  return YES;
+}
+
+- (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+  [super endTrackingWithTouch:touch withEvent:event];
+  if (!_interactiveGesture) {
+    return;
+  }
+  NSLog(@"Touch ended");
+  if (_suppressToggle) {
+    if (_toggleToState != _on) {
+      [self _toggleAndSendActions];
+    } else {
+      [self setOn:_toggleToState animated:YES];
+    }
   }
 }
 
