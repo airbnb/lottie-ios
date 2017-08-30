@@ -579,6 +579,7 @@ statefulSwitch.enabled = YES;
 ## Currently Unsupported After Effects Features
 
 * Merge Shapes
+* Alpha Inverted Masks
 * Trim Shapes Individually feature of Trim Paths
 * Expressions
 * 3d Layer support
@@ -613,4 +614,3 @@ File github issues for anything that is unexpectedly broken. If an After Effects
 
 ## Roadmap (In no particular order)
 - Add support for interactive animated transitions
-- Animation Breakpoints/Seekpoints
