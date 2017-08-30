@@ -114,7 +114,6 @@
 
 - (void)_toggle {
   if (!_suppressToggle) {
-    NSLog(@"Touch up toggle");
     [self _toggleAndSendActions];
   }
 }
@@ -126,7 +125,6 @@
       [generator impactOccurred];
     }
     [self setOn:!_on animated:YES];
-    NSLog(@"%@", _on ? @"ON" : @"OFF");
     [self sendActionsForControlEvents:UIControlEventValueChanged];
   }
 }
@@ -147,7 +145,6 @@
   CGFloat diff = location.x - _touchTrackingStart.x;
   if (LOT_PointDistanceFromPoint(_touchTrackingStart, location) > self.bounds.size.width * 0.25) {
     // The touch has moved enough to register as its own gesture. Suppress the touch up toggle.
-    NSLog(@"Suppressing TouchUP");
     _suppressToggle = YES;
   }
   if ([UIView userInterfaceLayoutDirectionForSemanticContentAttribute:self.semanticContentAttribute] == UIUserInterfaceLayoutDirectionRightToLeft) {
@@ -173,7 +170,6 @@
       _toggleToState = (diff / self.bounds.size.width) > 0.5 ? YES : NO;
     }
   }
-  NSLog(@"Diff %f", diff);
   return YES;
 }
 
@@ -182,7 +178,6 @@
   if (!_interactiveGesture) {
     return;
   }
-  NSLog(@"Touch ended");
   if (_suppressToggle) {
     if (_toggleToState != _on) {
       [self _toggleAndSendActions];
