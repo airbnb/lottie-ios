@@ -22,6 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// The ON/OFF state of the control. Setting will toggle without animation
 @property (nonatomic, getter=isOn) BOOL on;
 
+/// Enable interactive sliding gesture for toggle
+@property (nonatomic) BOOL interactiveGesture;
+
 /// Set the state of the control with animation
 - (void)setOn:(BOOL)on animated:(BOOL)animated; // does not send action
 
