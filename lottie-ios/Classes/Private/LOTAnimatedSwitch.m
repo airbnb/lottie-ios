@@ -120,10 +120,12 @@
 
 - (void)_toggleAndSendActions {
   if (self.isEnabled) {
+    #ifndef TARGET_OS_TV
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
       UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleLight];
       [generator impactOccurred];
     }
+    #endif
     [self setOn:!_on animated:YES];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
   }
