@@ -112,7 +112,7 @@ To bundle JSON just add it and any images that the animation requires to your ta
 LOTAnimationView *animation = [LOTAnimationView animationNamed:@"Lottie"];
 [self.view addSubview:animation];
 [animation playWithCompletion:^(BOOL animationFinished) {
-// Do Something
+  // Do Something
 }];
 ```
 
@@ -122,7 +122,7 @@ If you are working with multiple bundles you can use.
 LOTAnimationView *animation = [LOTAnimationView animationNamed:@"Lottie" inBundle:[NSBundle YOUR_BUNDLE]];
 [self.view addSubview:animation];
 [animation playWithCompletion:^(BOOL animationFinished) {
-// Do Something
+  // Do Something
 }];
 ```
 
@@ -144,7 +144,7 @@ animationView.animationProgress = progress;
 Or you can play just a portion of the animation:
 ```objective-c
 [lottieAnimation playFromProgress:0.25 toProgress:0.5 withCompletion:^(BOOL animationFinished) {
-// Do Something
+  // Do Something
 }];
 ```
 ## Swift Examples
@@ -156,7 +156,7 @@ To bundle JSON just add it and any images that the animation requires to your ta
 let animationView = LOTAnimationView(name: "LottieLogo")
 self.view.addSubview(animationView)
 animationView.play{ (finished) in
-      // Do Something
+  // Do Something
 }
 ```
 
@@ -208,22 +208,14 @@ And implement the delegate methods with a `LOTAnimationTransitionController`
 ```objective-c
 #pragma mark -- View Controller Transitioning
 
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
-presentingController:(UIViewController *)presenting
-sourceController:(UIViewController *)source {
-LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition1"
-fromLayerNamed:@"outLayer"
-toLayerNamed:@"inLayer"
-applyAnimationTransform:NO];
-return animationController;
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+  LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition1" fromLayerNamed:@"outLayer" toLayerNamed:@"inLayer" applyAnimationTransform:NO];
+  return animationController;
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition2"
-fromLayerNamed:@"outLayer"
-toLayerNamed:@"inLayer"
-applyAnimationTransform:NO];
-return animationController;
+  LOTAnimationTransitionController *animationController = [[LOTAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition2" fromLayerNamed:@"outLayer" toLayerNamed:@"inLayer" applyAnimationTransform:NO];
+  return animationController;
 }
 
 ```
@@ -346,6 +338,7 @@ Lottie can do more than just play beautiful animations. Lottie allows you to **c
 ### Say we want to create 4 toggle switches.
 ![Toggle](_Gifs/switch_Normal.gif)
 Its easy to create the four switches and play them:
+
 ```swift
 let animationView = LOTAnimationView(name: "toggle");
 self.view.addSubview(animationView)
@@ -389,9 +382,7 @@ animationView4.setValue(UIColor.orange, forKeypath: "BG-On.Group 1.Fill 1.Color"
 ```
 
 ```objective-c
-[animationView2 setValue:[UIColor greenColor]
-              forKeypath:@"BG-On.Group 1.Fill 1.Color"
-                 atFrame:@0];
+[animationView2 setValue:[UIColor greenColor] forKeypath:@"BG-On.Group 1.Fill 1.Color" atFrame:@0];
 ```
 The keyPath is a dot separated path of layer and property names from After Effects.
 LOTAnimationView provides `- (void)logHierarchyKeypaths` which will recursively log all settable keypaths for the animation.
@@ -434,6 +425,7 @@ Lets say that the supplied animation animates ON from 0.5-1 progress and OFF fro
 ```
 /// On animation is 0.5 to 1 progress.
 [toggle1 setProgressRangeForOnState:0.5 toProgress:1];
+
 /// Off animation is 0 to 0.5 progress.
 [toggle1 setProgressRangeForOffState:0 toProgress:0.5];
 ```
