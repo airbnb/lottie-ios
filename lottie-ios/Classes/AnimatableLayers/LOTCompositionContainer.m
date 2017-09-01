@@ -110,16 +110,16 @@
       childKey = [keypath stringByReplacingCharactersInRange:NSMakeRange(0, firstKey.length + 1) withString:@""];
     }
   }
-
+  BOOL childSet = NO;
   if (childKey) {
     for (LOTLayerContainer *child in _childLayers) {
       BOOL childHasKey = [child setValue:value forKeypath:childKey atFrame:frame];
       if (childHasKey) {
-        return childHasKey;
+        childSet = YES;
       }
     }
   }
-  return NO;
+  return childSet;
 }
 
 - (void)addSublayer:(nonnull CALayer *)subLayer

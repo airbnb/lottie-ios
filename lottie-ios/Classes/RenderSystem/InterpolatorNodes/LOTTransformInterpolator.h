@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) LOTNumberInterpolator *rotationInterpolator;
 @property (nonatomic, readonly) LOTNumberInterpolator *positionXInterpolator;
 @property (nonatomic, readonly) LOTNumberInterpolator *positionYInterpolator;
+@property (nonatomic, strong, nullable) NSString *parentKeyName;
 
 - (CATransform3D)transformForFrame:(NSNumber *)frame;
 - (BOOL)hasUpdateForFrame:(NSNumber *)frame;
