@@ -63,7 +63,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
       [self _initializeAnimationContainer];
       [self _setupWithSceneModel:laScene];
     } else {
-      dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         NSData *animationData = [NSData dataWithContentsOfURL:url];
         if (!animationData) {
           return;
@@ -76,7 +76,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
         }
         
         LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON withAssetBundle:[NSBundle mainBundle]];
-        dispatch_async(dispatch_get_main_queue(), ^(void){
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
           [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:url.absoluteString];
           laScene.cacheKey = url.absoluteString;
           [self _initializeAnimationContainer];
@@ -248,7 +248,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
 }
 
 - (void)playToFrame:(nonnull NSNumber *)toFrame
-     withCompletion:(nullable LOTAnimationCompletionBlock)completion{
+     withCompletion:(nullable LOTAnimationCompletionBlock)completion {
   [self playFromFrame:_sceneModel.startFrame toFrame:toFrame withCompletion:completion];
 }
 
@@ -353,7 +353,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
   }
 }
 
--(void)setAnimationSpeed:(CGFloat)animationSpeed {
+- (void)setAnimationSpeed:(CGFloat)animationSpeed {
   _animationSpeed = animationSpeed;
   if (_isAnimationPlaying && _sceneModel) {
     NSNumber *frame = [_compContainer.presentationLayer.currentFrame copy];
@@ -364,14 +364,14 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 # pragma mark - External Methods - Cache
 
-- (void)setCacheEnable:(BOOL)cacheEnable{
+- (void)setCacheEnable:(BOOL)cacheEnable {
   _cacheEnable = cacheEnable;
   if (!self.sceneModel.cacheKey) {
     return;
   }
   if (cacheEnable) {
     [[LOTAnimationCache sharedCache] addAnimation:_sceneModel forKey:self.sceneModel.cacheKey];
-  }else {
+  } else {
     [[LOTAnimationCache sharedCache] removeAnimationForKey:self.sceneModel.cacheKey];
   }
 }

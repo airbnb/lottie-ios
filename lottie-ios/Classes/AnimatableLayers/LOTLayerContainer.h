@@ -12,7 +12,7 @@
 
 @interface LOTLayerContainer : CALayer
 
-- (instancetype _Nonnull )initWithModel:(LOTLayer * _Nullable)layer
+- (instancetype _Nonnull)initWithModel:(LOTLayer * _Nullable)layer
                  inLayerGroup:(LOTLayerGroup * _Nullable)layerGroup;
 
 @property (nonatomic,  readonly, strong, nullable) NSString *layerName;

@@ -340,7 +340,6 @@ struct LOT_Subpath {
           toPoint = LOT_PointInLine(currentPoint, subpath->endPoint, currentSpanEndT);
         }
         [self LOT_addLineToPoint:toPoint];
-        currentPoint = toPoint;
       } else if (subpath->type == kCGPathElementAddCurveToPoint) {
 
         CGPoint cp1, cp2, end;

@@ -18,7 +18,7 @@
   BOOL _reversed;
 }
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                              shapeRectangle:(LOTShapeRectangle *_Nonnull)shapeRectangle {
   self = [super initWithInputNode:inputNode keyName:shapeRectangle.keyname];
   if (self) {

@@ -11,7 +11,7 @@
 
 @interface LOTTrimPathNode : LOTAnimatorNode
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                                   trimPath:(LOTShapeTrimPath *_Nonnull)trimPath;
 
 @end

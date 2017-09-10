@@ -23,7 +23,7 @@
   CGFloat _offsetT;
 }
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                                    trimPath:(LOTShapeTrimPath *_Nonnull)trimPath {
   self = [super initWithInputNode:inputNode keyName:trimPath.keyname];
   if (self) {

@@ -63,7 +63,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 @property (nonatomic, copy, nullable) LOTAnimationCompletionBlock completionBlock;
 
 /// Set the amimation data
-@property (nonatomic, strong, nonnull) LOTComposition *sceneModel;
+@property (nonatomic, strong, nullable) LOTComposition *sceneModel;
 
 /* 
  * Plays the animation from its current position to a specific progress. 

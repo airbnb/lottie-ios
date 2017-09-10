@@ -22,12 +22,12 @@
 }
 
 /// Convenience method to initialize a control from the Main Bundle by name
-+ (instancetype _Nonnull )switchNamed:(NSString * _Nonnull)toggleName {
++ (instancetype _Nonnull)switchNamed:(NSString * _Nonnull)toggleName {
   return [LOTAnimatedSwitch switchNamed:toggleName inBundle:[NSBundle mainBundle]];
 }
 
 /// Convenience method to initialize a control from the specified bundle by name
-+ (instancetype _Nonnull )switchNamed:(NSString * _Nonnull)toggleName inBundle:(NSBundle * _Nonnull)bundle {
++ (instancetype _Nonnull)switchNamed:(NSString * _Nonnull)toggleName inBundle:(NSBundle * _Nonnull)bundle {
   LOTComposition *composition = [LOTComposition animationNamed:toggleName inBundle:bundle];
   LOTAnimatedSwitch *animatedControl = [[LOTAnimatedSwitch alloc] initWithFrame:CGRectZero];
   if (composition) {

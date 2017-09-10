@@ -11,7 +11,7 @@
 
 @interface LOTGradientFillRender : LOTRenderNode
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nonnull)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                           shapeGradientFill:(LOTShapeGradientFill *_Nonnull)fill;
 
 @end

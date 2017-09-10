@@ -11,7 +11,7 @@
 
 @interface LOTRepeaterRenderer : LOTRenderNode
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nonnull)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                               shapeRepeater:(LOTShapeRepeater *_Nonnull)repeater;
 
 @end
