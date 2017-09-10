@@ -57,7 +57,8 @@
 - (LOTAsset *)assetModelForID:(NSString *)assetID {
   return _assetMap[assetID];
 }
-- (void)setRootDirectory:(NSString *)rootDirectory{
+
+- (void)setRootDirectory:(NSString *)rootDirectory {
     _rootDirectory = rootDirectory;
     [_assetMap enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, LOTAsset * _Nonnull obj, BOOL * _Nonnull stop) {
         obj.rootDirectory = rootDirectory;

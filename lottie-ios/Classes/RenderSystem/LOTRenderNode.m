@@ -10,7 +10,7 @@
 
 @implementation LOTRenderNode
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                                     keyName:(NSString * _Nullable)keyname {
   self = [super initWithInputNode:inputNode keyName:keyname];
   if (self) {
