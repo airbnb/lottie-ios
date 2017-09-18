@@ -36,12 +36,12 @@
     } else {
       _frameOffset = @0;
     }
-    [self intializeWithChildGroup:childLayerGroup withAssetGroup:assetGroup];
+    [self initializeWithChildGroup:childLayerGroup withAssetGroup:assetGroup];
   }
   return self;
 }
 
-- (void)intializeWithChildGroup:(LOTLayerGroup *)childGroup
+- (void)initializeWithChildGroup:(LOTLayerGroup *)childGroup
                  withAssetGroup:(LOTAssetGroup *)assetGroup {
   NSMutableDictionary *childMap = [NSMutableDictionary dictionary];
   NSMutableArray *children = [NSMutableArray array];
