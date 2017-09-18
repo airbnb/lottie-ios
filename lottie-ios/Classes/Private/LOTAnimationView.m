@@ -190,7 +190,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 - (BOOL)_isSpeedNegative {
   // If the animation speed is negative, then we're moving backwards.
-  return _animationSpeed >= 0;
+  return _animationSpeed < 0;
 }
 
 # pragma mark - Completion Block
@@ -270,15 +270,17 @@ static NSString * const kCompContainerAnimationKey = @"play";
   NSNumber *currentFrame = [self _frameForProgress:_animationProgress];
 
   currentFrame = @(MAX(MIN(currentFrame.floatValue, toEndFrame.floatValue), fromStartFrame.floatValue));
-  BOOL playingForward = [self _isSpeedNegative];
-  if (currentFrame.floatValue == toEndFrame.floatValue && playingForward) {
+  BOOL playingBackwards = [self _isSpeedNegative];
+  if (currentFrame.floatValue == toEndFrame.floatValue && !playingBackwards) {
     currentFrame = fromStartFrame;
-  } else if (currentFrame.floatValue == fromStartFrame.floatValue && !playingForward) {
+  } else if (currentFrame.floatValue == fromStartFrame.floatValue && playingBackwards) {
     currentFrame = toEndFrame;
   }
   _animationProgress = [self _progressForFrame:currentFrame];
   
-  NSTimeInterval offset = MAX(0, (_animationProgress * (_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue)) - fromStartFrame.floatValue) / _sceneModel.framerate.floatValue;
+  // If the animation is playing backwards, to get the offset we need to invert the progress.
+  CGFloat offsetProgress = playingBackwards ? 1 - _animationProgress : _animationProgress;
+  NSTimeInterval offset = MAX(0, (offsetProgress * (_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue)) - fromStartFrame.floatValue) / _sceneModel.framerate.floatValue;
   NSTimeInterval duration = ((toEndFrame.floatValue - fromStartFrame.floatValue) / _sceneModel.framerate.floatValue);
   CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"currentFrame"];
   animation.speed = _animationSpeed;
@@ -597,7 +599,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
     if (complete) {
       // Set the final frame based on the animation to/from values. If playing forward, use the
       // toValue otherwise we want to end on the fromValue.
-      frame = [self _isSpeedNegative] ? (NSNumber *)playAnimation.toValue : (NSNumber *)playAnimation.fromValue;
+      frame = [self _isSpeedNegative] ? (NSNumber *)playAnimation.fromValue : (NSNumber *)playAnimation.toValue;
     }
     [self _removeCurrentAnimationIfNecessary];
     [self setProgressWithFrame:frame callCompletionIfNecessary:NO];
