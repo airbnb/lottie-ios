@@ -14,7 +14,7 @@ extern NSInteger indentation_level;
 @interface LOTAnimatorNode : NSObject
 
 /// Initializes the node with and optional intput node and keyname.
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                                     keyName:(NSString *_Nullable)keyname;
 
 /// A dictionary of the value interpolators this node controls

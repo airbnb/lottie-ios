@@ -13,10 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LOTAnimatedSwitch : LOTAnimatedControl
 
 /// Convenience method to initialize a control from the Main Bundle by name
-+ (instancetype _Nonnull )switchNamed:(NSString * _Nonnull)toggleName;
++ (instancetype _Nonnull)switchNamed:(NSString * _Nonnull)toggleName;
 
 /// Convenience method to initialize a control from the specified bundle by name
-+ (instancetype _Nonnull )switchNamed:(NSString * _Nonnull)toggleName inBundle:(NSBundle * _Nonnull)bundle;
++ (instancetype _Nonnull)switchNamed:(NSString * _Nonnull)toggleName inBundle:(NSBundle * _Nonnull)bundle;
 
 
 /// The ON/OFF state of the control. Setting will toggle without animation

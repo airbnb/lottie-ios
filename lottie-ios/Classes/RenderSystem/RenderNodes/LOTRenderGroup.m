@@ -33,7 +33,7 @@
   LOTTransformInterpolator *_transformInterolator;
 }
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode * _Nullable)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode * _Nullable)inputNode
                                    contents:(NSArray * _Nonnull)contents
                                     keyname:(NSString * _Nullable)keyname {
   self = [super initWithInputNode:inputNode keyName:keyname];
@@ -81,7 +81,7 @@
       previousNode = rectAnimator;
     } else if ([item isKindOfClass:[LOTShapeCircle class]]) {
       LOTCircleAnimator *circleAnimator = [[LOTCircleAnimator alloc] initWithInputNode:previousNode
-                                                                           shapeCircle:(LOTShapeCircle*)item];
+                                                                           shapeCircle:(LOTShapeCircle *)item];
       previousNode = circleAnimator;
     } else if ([item isKindOfClass:[LOTShapeGroup class]]) {
       LOTShapeGroup *shapeGroup = (LOTShapeGroup *)item;
@@ -91,7 +91,7 @@
     } else if ([item isKindOfClass:[LOTShapeTransform class]]) {
       transform = (LOTShapeTransform *)item;
     } else if ([item isKindOfClass:[LOTShapeTrimPath class]]) {
-      LOTTrimPathNode *trim = [[LOTTrimPathNode alloc] initWithInputNode:previousNode trimPath:(LOTShapeTrimPath*)item];
+      LOTTrimPathNode *trim = [[LOTTrimPathNode alloc] initWithInputNode:previousNode trimPath:(LOTShapeTrimPath *)item];
       previousNode = trim;
     } else if ([item isKindOfClass:[LOTShapeStar class]]) {
       LOTShapeStar *star = (LOTShapeStar *)item;
@@ -163,7 +163,7 @@
   }
 }
 
--(void)setPathShouldCacheLengths:(BOOL)pathShouldCacheLengths {
+- (void)setPathShouldCacheLengths:(BOOL)pathShouldCacheLengths {
   [super setPathShouldCacheLengths:pathShouldCacheLengths];
   _rootNode.pathShouldCacheLengths = pathShouldCacheLengths;
 }

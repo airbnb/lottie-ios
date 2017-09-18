@@ -24,7 +24,7 @@ const CGFloat kPOLYSTAR_MAGIC_NUMBER = .47829f;
   LOTNumberInterpolator *_rotationInterpolator;
 }
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                              shapeStar:(LOTShapeStar *_Nonnull)shapeStar {
   self = [super initWithInputNode:inputNode keyName:shapeStar.keyname];
   if (self) {

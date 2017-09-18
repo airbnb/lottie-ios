@@ -347,7 +347,7 @@ CATransform3D LOT_CATransform3DFromGLKMatrix4(GLKMatrix4 xform) {
   return newXform;
 }
 
-CATransform3D LOT_CATransform3DSlerpToTransform(CATransform3D fromXorm, CATransform3D toXform, CGFloat amount ){
+CATransform3D LOT_CATransform3DSlerpToTransform(CATransform3D fromXorm, CATransform3D toXform, CGFloat amount ) {
   //  amount = MIN(MAX(0, amount), 1);
   if (amount == 0 || amount == 1) {
     return amount == 0 ? fromXorm : toXform;

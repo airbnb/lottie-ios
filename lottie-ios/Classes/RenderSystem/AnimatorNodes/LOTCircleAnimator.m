@@ -17,7 +17,7 @@ const CGFloat kLOTEllipseControlPointPercentage = 0.55228;
   BOOL _reversed;
 }
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                                   shapeCircle:(LOTShapeCircle *_Nonnull)shapeCircle {
   self = [super initWithInputNode:inputNode keyName:shapeCircle.keyname];
   if (self) {

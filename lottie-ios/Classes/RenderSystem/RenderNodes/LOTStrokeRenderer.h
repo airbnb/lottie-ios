@@ -11,7 +11,7 @@
 
 @interface LOTStrokeRenderer : LOTRenderNode
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nonnull)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                                 shapeStroke:(LOTShapeStroke *_Nonnull)stroke;
 
 

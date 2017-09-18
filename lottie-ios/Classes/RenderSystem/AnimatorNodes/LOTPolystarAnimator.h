@@ -11,7 +11,7 @@
 
 @interface LOTPolystarAnimator : LOTAnimatorNode
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                              shapeStar:(LOTShapeStar *_Nonnull)shapeStar;
 
 @end

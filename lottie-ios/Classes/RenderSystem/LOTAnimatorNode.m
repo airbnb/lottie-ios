@@ -15,7 +15,7 @@ NSInteger indentation_level = 0;
 @implementation LOTAnimatorNode
 
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                                     keyName:(NSString *_Nullable)keyname {
   self = [super init];
   if (self) {
@@ -37,15 +37,14 @@ NSInteger indentation_level = 0;
 
 - (BOOL)updateWithFrame:(NSNumber *_Nonnull)frame
       withModifierBlock:(void (^_Nullable)(LOTAnimatorNode * _Nonnull inputNode))modifier
-       forceLocalUpdate:(BOOL)forceUpdate{
+       forceLocalUpdate:(BOOL)forceUpdate {
   if ([_currentFrame isEqual:frame] && !forceUpdate) {
     return NO;
   }
-  NSString *name = NSStringFromClass([self class]);
-  if (ENABLE_DEBUG_LOGGING) [self logString:[NSString stringWithFormat:@"%@ %lu %@ Checking for update", name, (unsigned long)self.hash, self.keyname]];
+  if (ENABLE_DEBUG_LOGGING) [self logString:[NSString stringWithFormat:@"%lu %@ Checking for update", (unsigned long)self.hash, self.keyname]];
   BOOL localUpdate = [self needsUpdateForFrame:frame] || forceUpdate;
   if (localUpdate && ENABLE_DEBUG_LOGGING) {
-    [self logString:[NSString stringWithFormat:@"%@ %lu %@ Performing update", name, (unsigned long)self.hash, self.keyname]];
+    [self logString:[NSString stringWithFormat:@"%lu %@ Performing update", (unsigned long)self.hash, self.keyname]];
   }
   BOOL inputUpdated = [_inputNode updateWithFrame:frame
                                 withModifierBlock:modifier
@@ -75,7 +74,7 @@ NSInteger indentation_level = 0;
     [logString appendString:@"  "];
   }
   [logString appendString:string];
-  NSLog(@"%@", logString);
+  NSLog(@"%@ %@", NSStringFromClass([self class]), logString);
 }
 
 // TOBO BW Perf, make updates perform only when necessarry. Currently everything in a node is updated

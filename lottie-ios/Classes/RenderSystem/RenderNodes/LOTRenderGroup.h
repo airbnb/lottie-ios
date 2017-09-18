@@ -10,7 +10,7 @@
 
 @interface LOTRenderGroup : LOTRenderNode
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode * _Nullable)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode * _Nullable)inputNode
                                    contents:(NSArray * _Nonnull)contents
                                     keyname:(NSString * _Nullable)keyname;
 

@@ -87,7 +87,7 @@
 
 - (void)setupOutputWithData:(id)data {
   if ([data isKindOfClass:[NSNumber class]]) {
-    _floatValue = [(NSNumber*)data floatValue];
+    _floatValue = [(NSNumber *)data floatValue];
   }
   if ([data isKindOfClass:[NSArray class]] &&
       [[(NSArray *)data firstObject] isKindOfClass:[NSNumber class]]) {
@@ -221,7 +221,7 @@
   }
 }
 
--(void)remapKeyframesWithBlock:(CGFloat (^)(CGFloat))remapBlock {
+- (void)remapKeyframesWithBlock:(CGFloat (^)(CGFloat))remapBlock {
   for (LOTKeyframe *keyframe in _keyframes) {
     [keyframe remapValueWithBlock:remapBlock];
   }

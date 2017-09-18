@@ -60,25 +60,25 @@
   [self checkStateChangedAndUpdate:NO];
 }
 
-- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
   _priorState = self.state;
   [super touchesBegan:touches withEvent:event];
   [self checkStateChangedAndUpdate:NO];
 }
 
-- (void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
   _priorState = self.state;
   [super touchesMoved:touches withEvent:event];
   [self checkStateChangedAndUpdate:NO];
 }
 
-- (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
   _priorState = self.state;
   [super touchesEnded:touches withEvent:event];
   [self checkStateChangedAndUpdate:NO];
 }
 
-- (void)touchesCancelled:(NSSet*)touches withEvent:(UIEvent*)event {
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
   _priorState = self.state;
   [super touchesCancelled:touches withEvent:event];
   [self checkStateChangedAndUpdate:NO];
@@ -105,7 +105,7 @@
 #pragma mark - Private interface implementation
 
 - (void)checkStateChangedAndUpdate:(BOOL)forceUpdate {
-  if(self.state == _priorState && !forceUpdate) {
+  if (self.state == _priorState && !forceUpdate) {
     return;
   }
   _priorState = self.state;
