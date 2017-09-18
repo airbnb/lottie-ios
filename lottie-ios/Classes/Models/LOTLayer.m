@@ -28,7 +28,7 @@
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary
-      withAssetGroup:(LOTAssetGroup *)assetGroup{
+      withAssetGroup:(LOTAssetGroup *)assetGroup {
 
   _layerName = [jsonDictionary[@"nm"] copy];
   _layerID = [jsonDictionary[@"ind"] copy];
@@ -156,7 +156,7 @@
   }
 }
 
-- (NSString*)description {
+- (NSString *)description {
     NSMutableString *text = [[super description] mutableCopy];
     [text appendFormat:@" %@ id: %d pid: %d frames: %d-%d", _layerName, (int)_layerID.integerValue, (int)_parentID.integerValue,
      (int)_inFrame.integerValue, (int)_outFrame.integerValue];

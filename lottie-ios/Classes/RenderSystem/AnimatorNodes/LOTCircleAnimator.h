@@ -11,7 +11,7 @@
 
 @interface LOTCircleAnimator : LOTAnimatorNode
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                                   shapeCircle:(LOTShapeCircle *_Nonnull)shapeCircle;
 
 @end

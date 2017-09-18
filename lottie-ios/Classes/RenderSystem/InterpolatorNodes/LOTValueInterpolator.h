@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Used to dynamically update keyframe data.
 - (BOOL)setValue:(id)value atFrame:(NSNumber *)frame;
-- (id)keyframeDataForValue:(id)value;
+- (id _Nullable)keyframeDataForValue:(id)value;
 
 @property (nonatomic, weak, nullable) LOTKeyframe *leadingKeyframe;
 @property (nonatomic, weak, nullable) LOTKeyframe *trailingKeyframe;

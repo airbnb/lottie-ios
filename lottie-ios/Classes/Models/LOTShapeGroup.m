@@ -93,7 +93,7 @@
   return nil;
 }
 
-- (NSString*)description {
+- (NSString *)description {
     NSMutableString *text = [[super description] mutableCopy];
     [text appendFormat:@" items: %@", self.items];
     return text;

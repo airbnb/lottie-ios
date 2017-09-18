@@ -11,7 +11,7 @@
 
 @interface LOTPathAnimator : LOTAnimatorNode
 
-- (instancetype _Nonnull )initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
+- (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                                   shapePath:(LOTShapePath *_Nonnull)shapePath;
 
 @end

@@ -63,7 +63,7 @@
  @param bundle custom bundle to load animation and images, if no bundle is specified will load
  from mainBundle
  */
-- (instancetype _Nonnull )initWithAnimationNamed:(NSString *_Nonnull)animation
+- (instancetype _Nonnull)initWithAnimationNamed:(NSString *_Nonnull)animation
                                   fromLayerNamed:(NSString *_Nullable)fromLayer
                                     toLayerNamed:(NSString *_Nullable)toLayer
                          applyAnimationTransform:(BOOL)applyAnimationTransform
