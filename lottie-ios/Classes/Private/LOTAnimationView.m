@@ -107,6 +107,14 @@ static NSString * const kCompContainerAnimationKey = @"play";
   return self;
 }
 
+- (instancetype)initWithCoder:(NSCoder *)coder {
+  self = [super initWithCoder:coder];
+  if (self) {
+    [self _commonInit];
+  }
+  return self;
+}
+
 # pragma mark - Internal Methods
 
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
