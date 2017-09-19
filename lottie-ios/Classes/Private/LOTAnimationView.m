@@ -267,19 +267,34 @@ static NSString * const kCompContainerAnimationKey = @"play";
     _isAnimationPlaying = YES;
     return;
   }
+
+  BOOL playingForward = ((_animationSpeed > 0) && (toEndFrame.floatValue > fromStartFrame.floatValue))
+    || ((_animationSpeed < 0) && (fromStartFrame.floatValue > toEndFrame.floatValue));
+
+  CGFloat leftFrameValue = MIN(fromStartFrame.floatValue, toEndFrame.floatValue);
+  CGFloat rightFrameValue = MAX(fromStartFrame.floatValue, toEndFrame.floatValue);
+
   NSNumber *currentFrame = [self _frameForProgress:_animationProgress];
 
-  currentFrame = @(MAX(MIN(currentFrame.floatValue, toEndFrame.floatValue), fromStartFrame.floatValue));
-  BOOL playingForward = [self _isSpeedNegative];
-  if (currentFrame.floatValue == toEndFrame.floatValue && playingForward) {
-    currentFrame = fromStartFrame;
-  } else if (currentFrame.floatValue == fromStartFrame.floatValue && !playingForward) {
-    currentFrame = toEndFrame;
+  currentFrame = @(MAX(MIN(currentFrame.floatValue, rightFrameValue), leftFrameValue));
+
+  if (currentFrame.floatValue == rightFrameValue && playingForward) {
+    currentFrame = @(leftFrameValue);
+  } else if (currentFrame.floatValue == leftFrameValue && !playingForward) {
+    currentFrame = @(rightFrameValue);
   }
   _animationProgress = [self _progressForFrame:currentFrame];
   
-  NSTimeInterval offset = MAX(0, (_animationProgress * (_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue)) - fromStartFrame.floatValue) / _sceneModel.framerate.floatValue;
-  NSTimeInterval duration = ((toEndFrame.floatValue - fromStartFrame.floatValue) / _sceneModel.framerate.floatValue);
+  CGFloat currentProgress = _animationProgress * (_sceneModel.endFrame.floatValue - _sceneModel.startFrame.floatValue);
+  CGFloat skipProgress;
+  if (playingForward) {
+    skipProgress = currentProgress - leftFrameValue;
+  } else {
+    skipProgress = rightFrameValue - currentProgress;
+  }
+  NSTimeInterval offset = MAX(0, skipProgress) / _sceneModel.framerate.floatValue;
+
+  NSTimeInterval duration = (ABS(toEndFrame.floatValue - fromStartFrame.floatValue) / _sceneModel.framerate.floatValue);
   CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"currentFrame"];
   animation.speed = _animationSpeed;
   animation.fromValue = fromStartFrame;
