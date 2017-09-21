@@ -167,7 +167,7 @@
       CGFloat desiredScaleFactor = [window backingScaleFactor];
       CGFloat actualScaleFactor = [image recommendedLayerContentsScale:desiredScaleFactor];
       id layerContents = [image layerContentsForContentsScale:actualScaleFactor];
-      _wrapperLayer = layerContents;
+      _wrapperLayer.contents = layerContents;
     }
   }
   
