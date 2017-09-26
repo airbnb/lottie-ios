@@ -1,10 +1,10 @@
-# Lottie for iOS, MacOS (and [Android](https://github.com/airbnb/lottie-android) and [React Native](https://github.com/airbnb/lottie-react-native))
+# Lottie for iOS, macOS (and [Android](https://github.com/airbnb/lottie-android) and [React Native](https://github.com/airbnb/lottie-react-native))
 
 ### Table of Contents
 - [Introduction](#introduction)
 - [Installing Lottie](#installing-lottie)
 - [iOS Sample App](#ios-sample-app)
-- [MacOS Sample App](#macos-sample-app)
+- [macOS Sample App](#macos-sample-app)
 - [Objective C Examples](#objective-c-examples)
 - [Swift Examples](#swift-examples)
 - [Debugging Lottie](#debugging)
@@ -82,7 +82,7 @@ In your application targets “General” tab under the “Linked Frameworks and
 ## iOS Sample App
 
 Clone this repo and try out [the Sample App](https://github.com/airbnb/lottie-ios/tree/master/Example)
-The repo can build a MacOS Example and an iOS Example
+The repo can build a macOS Example and an iOS Example
 
 The iOS Example App demos several of the features of Lottie
 
@@ -92,14 +92,14 @@ The iOS Example App demos several of the features of Lottie
 The animation Explorer allows you to scrub, play, loop, and resize animations.
 Animations can be loaded from the app bundle or from [Lottie Files](http://www.lottiefiles.com) using the built in QR Code reader.
 
-## MacOS Sample App
+## macOS Sample App
 
 Clone this repo and try out [the Sample App](https://github.com/airbnb/lottie-ios/tree/master/Example)
-The repo can build a MacOS Example and an iOS Example
+The repo can build a macOS Example and an iOS Example
 
 ![Lottie Viewer](_Gifs/macexample.png)
 
-The Lottie Viewer for MacOS allows you to drag and drop JSON files to open, play, scrub and loop animations. This app is backed by the same animation code as the iOS app, so you will get an accurate representation of Mac and iOS animations.
+The Lottie Viewer for macOS allows you to drag and drop JSON files to open, play, scrub and loop animations. This app is backed by the same animation code as the iOS app, so you will get an accurate representation of Mac and iOS animations.
 
 
 ## Objective C Examples
@@ -584,7 +584,7 @@ statefulSwitch.enabled = YES;
  * [Xamarin bindings](https://github.com/martijn00/LottieXamarin)
  * [NativeScript bindings](https://github.com/bradmartin/nativescript-lottie)
  * [Appcelerator Titanium bindings](https://github.com/m1ga/ti.animation)
- * MacOS Support added by [Alex Pawlowski](https://github.com/pawlowskialex)
+ * macOS Support added by [Alex Pawlowski](https://github.com/pawlowskialex)
 
 ## Alternatives
 1. Build animations by hand. Building animations by hand is a huge time commitment for design and engineering across Android and iOS. It's often hard or even impossible to justify spending so much time to get an animation right.
