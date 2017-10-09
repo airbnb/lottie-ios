@@ -24,6 +24,10 @@ static NSString * const kCompContainerAnimationKey = @"play";
   CGFloat _playRangeEndProgress;
   NSBundle *_bundle;
   CGFloat _animationProgress;
+
+  // Properties for tracking automatic restoration of animation.
+  BOOL _shouldRestoreStateWhenAttachedToWindow;
+  LOTAnimationCompletionBlock _completionBlockToRestoreWhenAttachedToWindow;
 }
 
 # pragma mark - Convenience Initializers
@@ -275,6 +279,11 @@ static NSString * const kCompContainerAnimationKey = @"play";
     _isAnimationPlaying = YES;
     return;
   }
+  if (!self.window) {
+    _shouldRestoreStateWhenAttachedToWindow = YES;
+    _completionBlockToRestoreWhenAttachedToWindow = self.completionBlock;
+    self.completionBlock = nil;
+  }
 
   BOOL playingForward = ((_animationSpeed > 0) && (toEndFrame.floatValue > fromStartFrame.floatValue))
     || ((_animationSpeed < 0) && (fromStartFrame.floatValue > toEndFrame.floatValue));
@@ -353,7 +362,14 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 - (void)setProgressWithFrame:(nonnull NSNumber *)currentFrame callCompletionIfNecessary:(BOOL)callCompletion {
   [self _removeCurrentAnimationIfNecessary];
-  
+
+  if (_shouldRestoreStateWhenAttachedToWindow) {
+    _shouldRestoreStateWhenAttachedToWindow = NO;
+
+    self.completionBlock = _completionBlockToRestoreWhenAttachedToWindow;
+    _completionBlockToRestoreWhenAttachedToWindow = nil;
+  }
+
   _animationProgress = [self _progressForFrame:currentFrame];
 
   [CATransaction begin];
@@ -522,6 +538,34 @@ static NSString * const kCompContainerAnimationKey = @"play";
   [super didMoveToSuperview];
   if (self.superview == nil) {
     [self _callCompletionIfNecessary:NO];
+  }
+}
+
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+  // When this view or its superview is leaving the screen, e.g. a modal is presented or another
+  // screen is pushed, this method will get called with newWindow value set to nil - indicating that
+  // this view will be detached from the visible window.
+  // When a view is detached, animations will stop - but will not automatically resumed when it's
+  // re-attached back to window, e.g. when the presented modal is dismissed or another screen is
+  // pop.
+  if (newWindow) {
+    // The view is being re-attached, resume animation if needed.
+    if (_shouldRestoreStateWhenAttachedToWindow) {
+      _shouldRestoreStateWhenAttachedToWindow = NO;
+
+      _isAnimationPlaying = YES;
+      _completionBlock = _completionBlockToRestoreWhenAttachedToWindow;
+      _completionBlockToRestoreWhenAttachedToWindow = nil;
+
+      [self performSelector:@selector(_restoreState) withObject:nil afterDelay:0];
+    }
+  } else {
+    // The view is being detached, capture information that need to be restored later.
+    if (_isAnimationPlaying) {
+      _shouldRestoreStateWhenAttachedToWindow = YES;
+      _completionBlockToRestoreWhenAttachedToWindow = _completionBlock;
+      _completionBlock = nil;
+    }
   }
 }
 
