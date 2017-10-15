@@ -28,7 +28,7 @@
   LOTAnimatorNode *_rootNode;
   LOTBezierPath *_outputPath;
   LOTBezierPath *_localPath;
-  
+  BOOL _rootNodeHasUpdate;
   LOTNumberInterpolator *_opacityInterpolator;
   LOTTransformInterpolator *_transformInterolator;
 }
@@ -126,13 +126,13 @@
 - (BOOL)needsUpdateForFrame:(NSNumber *)frame {
   return ([_opacityInterpolator hasUpdateForFrame:frame] ||
           [_transformInterolator hasUpdateForFrame:frame] ||
-          [_rootNode needsUpdateForFrame:frame]);
+          _rootNodeHasUpdate);
 
 }
 
 - (BOOL)updateWithFrame:(NSNumber *)frame withModifierBlock:(void (^ _Nullable)(LOTAnimatorNode * _Nonnull))modifier forceLocalUpdate:(BOOL)forceUpdate {
   indentation_level = indentation_level + 1;
-  [_rootNode updateWithFrame:frame withModifierBlock:modifier forceLocalUpdate:forceUpdate];
+  _rootNodeHasUpdate = [_rootNode updateWithFrame:frame withModifierBlock:modifier forceLocalUpdate:forceUpdate];
   indentation_level = indentation_level - 1;
   BOOL update = [super updateWithFrame:frame withModifierBlock:modifier forceLocalUpdate:forceUpdate];
   return update;
@@ -184,6 +184,21 @@
     return YES;
   }
   return [_rootNode setValue:value forKeyAtPath:key forFrame:frame];
+}
+
+- (void)logHierarchyKeypathsWithParent:(NSString * _Nullable)parent {
+  NSString *keypath = self.keyname;
+  if (parent && self.keyname) {
+    keypath = [NSString stringWithFormat:@"%@.%@", parent, self.keyname];
+  }
+  if (keypath) {
+    for (NSString *interpolator in self.valueInterpolators.allKeys) {
+      [self logString:[NSString stringWithFormat:@"%@.%@", keypath, interpolator]];
+    }
+    [_rootNode logHierarchyKeypathsWithParent:keypath];
+  }
+  
+  [self.inputNode logHierarchyKeypathsWithParent:parent];
 }
 
 @end

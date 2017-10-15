@@ -31,6 +31,7 @@
   return nil;
 }
 
+// Change keyframe data
 - (BOOL)setValue:(id)value atFrame:(NSNumber *)frame {
   id data = [self keyframeDataForValue:value];
   if (data == nil) {
@@ -42,10 +43,20 @@
   [self updateKeyframeSpanForFrame:frame];
   if (frame.floatValue == self.leadingKeyframe.keyframeTime.floatValue) {
     // Is leading frame, replace
-    [self.leadingKeyframe setData:data];
+    LOTKeyframe *newKeyframe = [self.leadingKeyframe copyWithData:data];
+    NSMutableArray *keyframes = [NSMutableArray arrayWithArray:_keyframes];
+    NSUInteger idx = [keyframes indexOfObject:self.leadingKeyframe];
+    [keyframes replaceObjectAtIndex:idx withObject:newKeyframe];
+    self.leadingKeyframe = newKeyframe;
+    _keyframes = keyframes;
   } else if (frame.floatValue == self.trailingKeyframe.keyframeTime.floatValue) {
     // Is trailing frame
-    [self.trailingKeyframe setData:data];
+    LOTKeyframe *newKeyframe = [self.trailingKeyframe copyWithData:data];
+    NSMutableArray *keyframes = [NSMutableArray arrayWithArray:_keyframes];
+    NSUInteger idx = [keyframes indexOfObject:self.trailingKeyframe];
+    [keyframes replaceObjectAtIndex:idx withObject:newKeyframe];
+    self.trailingKeyframe = newKeyframe;
+    _keyframes = keyframes;
   } else {
     // Is between leading and trailing. Either can be nil.
     // For now added keyframes will default to linear interpolation.

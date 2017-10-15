@@ -20,17 +20,21 @@
 }
 
 + (instancetype)transformForLayer:(LOTLayer *)layer {
+  LOTTransformInterpolator *interpolator = nil;
   if (layer.position) {
-    return [[LOTTransformInterpolator alloc] initWithPosition:layer.position.keyframes
-                                                     rotation:layer.rotation.keyframes
-                                                       anchor:layer.anchor.keyframes
-                                                        scale:layer.scale.keyframes];
+    interpolator = [[LOTTransformInterpolator alloc] initWithPosition:layer.position.keyframes
+                                                             rotation:layer.rotation.keyframes
+                                                               anchor:layer.anchor.keyframes
+                                                                scale:layer.scale.keyframes];
+  } else {
+    interpolator = [[LOTTransformInterpolator alloc] initWithPositionX:layer.positionX.keyframes
+                                                             positionY:layer.positionY.keyframes
+                                                              rotation:layer.rotation.keyframes
+                                                                anchor:layer.anchor.keyframes
+                                                                 scale:layer.scale.keyframes];
   }
-  return [[LOTTransformInterpolator alloc] initWithPositionX:layer.positionX.keyframes
-                                                   positionY:layer.positionY.keyframes
-                                                    rotation:layer.rotation.keyframes
-                                                      anchor:layer.anchor.keyframes
-                                                       scale:layer.scale.keyframes];
+  interpolator.parentKeyName = [layer.layerName copy];
+  return interpolator;
 }
 
 - (instancetype)initWithPosition:(NSArray <LOTKeyframe *> *)position

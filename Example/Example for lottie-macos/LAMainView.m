@@ -95,17 +95,40 @@
 }
 
 - (void)_openAnimationFile:(NSString *)file {
-  [self.lottieLogo removeFromSuperview];
-  self.lottieLogo = nil;
   
-  self.lottieLogo = [LOTAnimationView animationWithFilePath:file];
-  self.lottieLogo.contentMode = LOTViewContentModeScaleAspectFill;
-  self.lottieLogo.frame = self.bounds;
-  self.lottieLogo.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-  
-  [self addSubview:self.lottieLogo];
-  [self.lottieLogo play];
+  NSError *error;
+  NSData *jsonData = [[NSData alloc] initWithContentsOfFile:file];
+  NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                         options:0 error:&error] : nil;
+  if (JSONObject && !error) {
+    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:[NSBundle mainBundle]];
+    laScene.rootDirectory = [file stringByDeletingLastPathComponent];
+    self.lottieLogo.sceneModel = laScene;
+    [self.lottieLogo play];
+  }
 }
+
+-(void)openAnimationURL:(NSURL *)url
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+
+        NSError *error;
+        NSData *jsonData = [[NSData alloc] initWithContentsOfURL:url];
+        NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                               options:0 error:&error] : nil;
+        if (JSONObject && !error) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:[NSBundle mainBundle]];
+                self.lottieLogo.sceneModel = laScene;
+                self.lottieLogo.contentMode = LOTViewContentModeScaleAspectFit;
+                [self.lottieLogo play];
+            });
+        }
+        
+    });
+}
+
 
 - (void)setAnimationProgress:(CGFloat)progress {
   self.lottieLogo.animationProgress = progress;

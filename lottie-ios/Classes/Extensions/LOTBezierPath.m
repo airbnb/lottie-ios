@@ -385,7 +385,13 @@ struct LOT_Subpath {
         // We have possibly reached the end.
         // Current From and To will possibly need to be reset.
         if (fromLength < toLength) {
-          break;
+            while (subpath) {
+                LOT_Subpath *nextNode = subpath->nextSubpath;
+                subpath->nextSubpath = NULL;
+                free(subpath);
+                subpath = nextNode;
+            }
+            break;
         } else {
           currentStartLength = fromLength;
           currentEndLength = totalLength;

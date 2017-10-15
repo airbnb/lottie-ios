@@ -1,1 +1,0 @@
-../../../../../../lottie-ios/Classes/Extensions/CGGeometry+LOTAdditions.h

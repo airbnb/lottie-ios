@@ -1,1 +1,0 @@
-../../../../../../lottie-ios/Classes/PublicHeaders/LOTComposition.h

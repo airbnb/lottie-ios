@@ -44,11 +44,13 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// The animation will play forward and then backwards if loopAnimation is also YES
 @property (nonatomic, assign) BOOL autoReverseAnimation;
 
-// TODO
 /// Sets a progress from 0 - 1 of the animation. If the animation is playing it will stop and the compeltion block will be called.
+/// The current progress of the animation in absolute time.
+/// e.g. a value of 0.75 always represents the same point in the animation, regardless of positive
+/// or negative speed.
 @property (nonatomic, assign) CGFloat animationProgress;
 
-/// Sets the speed of the animation. Accepts a negative value for reversing animation
+/// Sets the speed of the animation. Accepts a negative value for reversing animation.
 @property (nonatomic, assign) CGFloat animationSpeed;
 
 /// Read only of the duration in seconds of the animation at speed of 1
@@ -59,6 +61,9 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 
 /// Sets a completion block to call when the animation has completed
 @property (nonatomic, copy, nullable) LOTAnimationCompletionBlock completionBlock;
+
+/// Set the amimation data
+@property (nonatomic, strong, nonnull) LOTComposition *sceneModel;
 
 /* 
  * Plays the animation from its current position to a specific progress. 
@@ -116,7 +121,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// Stops the animation and rewinds to the beginning. The completion block will be called.
 - (void)stop;
 
-/// Sets progress of animation to a specific frame. If the animation is playing it will stop and the compeltion block will be called.
+/// Sets progress of animation to a specific frame. If the animation is playing it will stop and the completion block will be called.
 - (void)setProgressWithFrame:(nonnull NSNumber *)currentFrame;
 
 /**
@@ -138,6 +143,9 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
       forKeypath:(nonnull NSString *)keypath
          atFrame:(nullable NSNumber *)frame;
 
+/// Logs all child keypaths
+- (void)logHierarchyKeypaths;
+
 /**
  * Adds a custom subview to the animation using a LayerName from After Effects 
  * as a reference point.
@@ -154,7 +162,18 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
       toLayerNamed:(nonnull NSString *)layer
     applyTransform:(BOOL)applyTransform;
 
-#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+/**
+ * Converts the given CGRect from the recieving animation view's coordinate space
+ * to the supplied layer's coordinate space
+ * If layerName is null then the rect will be converted to the composition coordinate system.
+ * This is helpful when adding custom subviews to a LOTAnimationView
+ *
+ **/
+
+- (CGRect)convertRect:(CGRect)rect
+         toLayerNamed:(NSString *_Nullable)layerName;
+
+#if !TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR
 @property (nonatomic) LOTViewContentMode contentMode;
 #endif
 

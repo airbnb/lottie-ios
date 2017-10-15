@@ -12,7 +12,6 @@
 #import "LOTHelpers.h"
 
 @implementation LOTCompositionContainer {
-  NSArray<LOTLayerContainer *> *_childLayers;
   NSNumber *_frameOffset;
   CALayer *DEBUG_Center;
 }
@@ -44,6 +43,7 @@
 
 - (void)intializeWithChildGroup:(LOTLayerGroup *)childGroup
                  withAssetGroup:(LOTAssetGroup *)assetGroup {
+  NSMutableDictionary *childMap = [NSMutableDictionary dictionary];
   NSMutableArray *children = [NSMutableArray array];
   NSArray *reversedItems = [[childGroup.layers reverseObjectEnumerator] allObjects];
   
@@ -73,7 +73,11 @@
       [self.wrapperLayer addSublayer:child];
     }
     [children addObject:child];
+    if (child.layerName) {
+      [childMap setObject:child forKey:child.layerName];
+    }
   }
+  _childMap = childMap;
   _childLayers = children;
 }
 
@@ -106,41 +110,60 @@
       childKey = [keypath stringByReplacingCharactersInRange:NSMakeRange(0, firstKey.length + 1) withString:@""];
     }
   }
-
+  BOOL childSet = NO;
   if (childKey) {
     for (LOTLayerContainer *child in _childLayers) {
       BOOL childHasKey = [child setValue:value forKeypath:childKey atFrame:frame];
       if (childHasKey) {
-        return childHasKey;
+        childSet = YES;
       }
     }
   }
-  
-  return NO;
+  return childSet;
 }
 
 - (void)addSublayer:(nonnull CALayer *)subLayer
        toLayerNamed:(nonnull NSString *)layerName
      applyTransform:(BOOL)applyTransform {
-  for (LOTLayerContainer *child in _childLayers) {
-    if ([child.layerName isEqualToString:layerName]) {
-      if (applyTransform) {
-        [child addAndMaskSublayer:subLayer];
-      } else {
-        CALayer *maskWrapper = [CALayer new];
-        [maskWrapper addSublayer:subLayer];
-        [self.wrapperLayer insertSublayer:maskWrapper below:child];
-        [child removeFromSuperlayer];
-        maskWrapper.mask = child;
-      }
+  LOTLayerContainer *child = _childMap[layerName];
+  if (child) {
+    if (applyTransform) {
+      [child addAndMaskSublayer:subLayer];
+    } else {
+      CALayer *maskWrapper = [CALayer new];
+      [maskWrapper addSublayer:subLayer];
+      [self.wrapperLayer insertSublayer:maskWrapper below:child];
+      [child removeFromSuperlayer];
+      maskWrapper.mask = child;
     }
   }
+}
+
+- (CGRect)convertRect:(CGRect)rect
+            fromLayer:(CALayer *_Nonnull)fromlayer
+         toLayerNamed:(NSString *_Nonnull)layerName {
+  CGRect xRect = rect;
+  LOTLayerContainer *child = _childMap[layerName];
+  if (child) {
+    xRect = [fromlayer convertRect:rect toLayer:child];
+  }
+  return xRect;
 }
 
 - (void)setViewportBounds:(CGRect)viewportBounds {
   [super setViewportBounds:viewportBounds];
   for (LOTLayerContainer *layer in _childLayers) {
     layer.viewportBounds = viewportBounds;
+  }
+}
+
+- (void)logHierarchyKeypathsWithParent:(NSString * _Nullable)parent {
+  NSString *keypath = parent;
+  if (parent && self.layerName) {
+    keypath = [NSString stringWithFormat:@"%@.%@", parent, self.layerName];
+  }  
+  for (LOTLayerContainer *layer in _childLayers) {
+    [layer logHierarchyKeypathsWithParent:keypath];
   }
 }
 

@@ -212,7 +212,6 @@ typedef enum : NSUInteger {
   self.laAnimation = [LOTAnimationView animationNamed:named];
   self.laAnimation.contentMode = UIViewContentModeScaleAspectFit;
   [self.view addSubview:self.laAnimation];
-  [self.laAnimation setProgressWithFrame:@16];
   [self.view setNeedsLayout];
 }
 
@@ -225,12 +224,19 @@ typedef enum : NSUInteger {
     [self resetButton:button highlighted:NO];
     [self.laAnimation pause];
   } else {
+    
+    CADisplayLink *displayLink =[CADisplayLink displayLinkWithTarget:self selector:@selector(_updateSlider)] ;
+    [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
     [self resetButton:button highlighted:YES];
     [self.laAnimation playWithCompletion:^(BOOL animationFinished) {
-      self.slider.value = self.laAnimation.animationProgress;
+      [displayLink invalidate];
       [self resetButton:button highlighted:NO];
     }];
   }
+}
+
+- (void)_updateSlider {
+  self.slider.value = self.laAnimation.animationProgress;
 }
 
 - (void)_loop:(UIBarButtonItem *)button {
