@@ -161,7 +161,9 @@
   NSString *keypath = parent;
   if (parent && self.layerName) {
     keypath = [NSString stringWithFormat:@"%@.%@", parent, self.layerName];
-  }  
+  } else if (self.layerName) {
+    keypath = self.layerName;
+  }
   for (LOTLayerContainer *layer in _childLayers) {
     [layer logHierarchyKeypathsWithParent:keypath];
   }
