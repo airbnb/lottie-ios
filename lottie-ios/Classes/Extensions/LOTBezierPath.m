@@ -237,6 +237,8 @@ struct LOT_Subpath {
 }
 
 - (void)trimPathFromT:(CGFloat)fromT toT:(CGFloat)toT offset:(CGFloat)offset {
+  fromT = MIN(MAX(0, fromT), 1);
+  toT = MIN(MAX(0, toT), 1);
   if (fromT > toT) {
     CGFloat to = fromT;
     fromT = toT;
@@ -395,6 +397,13 @@ struct LOT_Subpath {
         } else {
           currentStartLength = fromLength;
           currentEndLength = totalLength;
+          if (fromLength < (subpathBeginningLength + pathLength) &&
+              fromLength > subpathBeginningLength &&
+              currentSpanEndT < 1) {
+            // Loop over this subpath one more time.
+            // In this case the path start and end trim fall within this subpath bounds
+            continue;
+          }
         }
       }
     }
