@@ -40,7 +40,7 @@ For the first time, designers can create and ship beautiful animations without a
   # }
 
   s.public_header_files = 'lottie-ios/Classes/PublicHeaders/*.h'
-  s.ios.frameworks = 'UIKit'
+  s.ios.frameworks = 'UIKit', 'GLKit'
   s.osx.frameworks = ['AppKit', 'CoreVideo']
   s.module_name = 'Lottie'
   s.header_dir = 'Lottie'
