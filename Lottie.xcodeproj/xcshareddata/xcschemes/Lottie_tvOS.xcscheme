@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8C5378FE1FB471D100C1BC65"
-               BuildableName = "Lottie_tvOS.framework"
+               BuildableName = "Lottie.framework"
                BlueprintName = "Lottie_tvOS"
                ReferencedContainer = "container:Lottie.xcodeproj">
             </BuildableReference>
@@ -48,7 +48,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8C5378FE1FB471D100C1BC65"
-            BuildableName = "Lottie_tvOS.framework"
+            BuildableName = "Lottie.framework"
             BlueprintName = "Lottie_tvOS"
             ReferencedContainer = "container:Lottie.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8C5378FE1FB471D100C1BC65"
-            BuildableName = "Lottie_tvOS.framework"
+            BuildableName = "Lottie.framework"
             BlueprintName = "Lottie_tvOS"
             ReferencedContainer = "container:Lottie.xcodeproj">
          </BuildableReference>
