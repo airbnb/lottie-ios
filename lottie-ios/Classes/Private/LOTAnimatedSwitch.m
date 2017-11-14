@@ -103,7 +103,6 @@
   } else {
     self.animationView.animationProgress = endProgress;
   }
-  
 }
 
 - (NSString *)accessibilityValue {

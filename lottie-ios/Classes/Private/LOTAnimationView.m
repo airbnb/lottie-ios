@@ -382,7 +382,6 @@ static NSString * const kCompContainerAnimationKey = @"play";
   }
 }
 
-
 - (void)setLoopAnimation:(BOOL)loopAnimation {
   _loopAnimation = loopAnimation;
   if (_isAnimationPlaying && _sceneModel) {
@@ -456,7 +455,6 @@ static NSString * const kCompContainerAnimationKey = @"play";
   }
   return [_compContainer convertRect:rect fromLayer:self.layer toLayerNamed:layerName];
 }
-
 
 - (void)setValue:(nonnull id)value
       forKeypath:(nonnull NSString *)keypath

@@ -30,7 +30,6 @@
 
 - (BOOL)needsUpdateForFrame:(NSNumber *)frame {
   return [_interpolator hasUpdateForFrame:frame];
-
 }
 
 - (void)performLocalUpdate {
