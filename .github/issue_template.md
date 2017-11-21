@@ -1,5 +1,7 @@
+<!--
 ## Lottie-iOS Issue
 Hello! Sorry you're having an Issue! Please help us make Lottie better by filling everything below out with as much information as you can, so we can try to reproduce and fix the issue!
+-->
 
 ## Check these before submitting:
 - [ ] Updated to the latest version of Lottie (2.1.4)
