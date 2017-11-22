@@ -17,13 +17,25 @@
 - (instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {
-    _animationView = [[LOTAnimationView alloc] init];
-    _animationView.contentMode = UIViewContentModeScaleAspectFit;
-    _animationView.userInteractionEnabled = NO;
-    [self addSubview:_animationView];
-    _layerMap = [NSMutableDictionary dictionary];
+    [self _commonInit];
   }
   return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+  self = [super initWithCoder:aDecoder];
+  if (self) {
+    [self _commonInit];
+  }
+  return self;
+}
+
+- (void)_commonInit {
+  _animationView = [[LOTAnimationView alloc] init];
+  _animationView.contentMode = UIViewContentModeScaleAspectFit;
+  _animationView.userInteractionEnabled = NO;
+  [self addSubview:_animationView];
+  _layerMap = [NSMutableDictionary dictionary];
 }
 
 - (LOTComposition *)animationComp {
