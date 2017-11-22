@@ -60,6 +60,9 @@ static NSString * const kCompContainerAnimationKey = @"play";
 - (instancetype)initWithContentsOfURL:(NSURL *)url {
   self = [super initWithFrame:CGRectZero];
   if (self) {
+    if (![url isKindOfClass:[NSURL class]]) {
+        url = [NSURL URLWithString:url.description];
+    }
     [self _commonInit];
     LOTComposition *laScene = [[LOTAnimationCache sharedCache] animationForKey:url.absoluteString];
     if (laScene) {
