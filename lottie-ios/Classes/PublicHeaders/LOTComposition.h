@@ -32,7 +32,6 @@
 + (nonnull instancetype)animationFromJSON:(nullable NSDictionary *)animationJSON
                                  inBundle:(nullable NSBundle *)bundle NS_SWIFT_NAME(init(json:bundle:));
 
-
 - (instancetype _Nonnull)initWithJSON:(NSDictionary * _Nullable)jsonDictionary
                       withAssetBundle:(NSBundle * _Nullable)bundle;
 

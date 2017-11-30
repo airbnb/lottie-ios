@@ -15,8 +15,7 @@
 
 @end
 
-@implementation LOTValueInterpolator {
-}
+@implementation LOTValueInterpolator
 
 - (instancetype)initWithKeyframes:(NSArray <LOTKeyframe *> *)keyframes {
   self = [super init];

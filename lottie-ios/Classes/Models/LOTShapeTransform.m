@@ -69,7 +69,6 @@
   if (hasSkew || hasSkewAxis) {
     NSLog(@"%s: Warning: skew is not supported: %@", __PRETTY_FUNCTION__, name);
   }
-  
 }
 
 - (NSString *)description {

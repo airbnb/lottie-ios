@@ -144,6 +144,4 @@
   self.localPath = path1;
 }
 
-
-
 @end
