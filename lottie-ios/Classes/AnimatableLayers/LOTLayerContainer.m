@@ -206,12 +206,14 @@
 }
 
 - (void)display {
-  LOTLayerContainer *presentation = self;
-  if (self.animationKeys.count &&
+  @synchronized(self) {
+    LOTLayerContainer *presentation = self;
+    if (self.animationKeys.count &&
       self.presentationLayer) {
-    presentation = (LOTLayerContainer *)self.presentationLayer;
+        presentation = (LOTLayerContainer *)self.presentationLayer;
+    }
+    [self displayWithFrame:presentation.currentFrame];
   }
-  [self displayWithFrame:presentation.currentFrame];
 }
 
 - (void)displayWithFrame:(NSNumber *)frame {
