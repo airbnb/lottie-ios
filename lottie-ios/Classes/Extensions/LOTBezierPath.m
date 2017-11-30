@@ -233,7 +233,6 @@ struct LOT_Subpath {
     
     nextSubpath = nextSubpath->nextSubpath;
   }
-  
 }
 
 - (void)trimPathFromT:(CGFloat)fromT toT:(CGFloat)toT offset:(CGFloat)offset {
