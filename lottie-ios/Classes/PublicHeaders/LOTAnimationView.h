@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "LOTAnimationView_Compat.h"
 #import "LOTComposition.h"
+#import "LOTKeypath.h"
+#import "LOTValueCallback.h"
 
 typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 
@@ -66,7 +68,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 @property (nonatomic, strong, nullable) LOTComposition *sceneModel;
 
 /* 
- * Plays the animation from its current position to a specific progress. 
+ * Plays the animation from its current position to a specific progress.
  * The animation will start from its current position.
  * If loopAnimation is YES the animation will loop from start position to toProgress indefinitely.
  * If loopAnimation is NO the animation will stop and the comletion block will be called.
@@ -94,7 +96,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
      withCompletion:(nullable LOTAnimationCompletionBlock)completion;
 
 /*
- * Plays the animation from specific frame to a specific frame. 
+ * Plays the animation from specific frame to a specific frame.
  * The animation will start from its current position.
  * If loopAnimation is YES the animation will loop start frame to end frame indefinitely.
  * If loopAnimation is NO the animation will stop and the comletion block will be called.
@@ -132,35 +134,35 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
  * @param keypath NSString . separate keypath
  * The Keypath is a dot seperated key path that specifies the location of the key to
  * be set from the After Effects file. This will begin with the Layer Name.
- * EG "Layer 1.Shape 1.Fill 1.Color" 
+ * EG "Layer 1.Shape 1.Fill 1.Color"
  *
  * @param frame
- * The frame is the frame to be set. 
- * If the keyframe exists it will be overwritten, if it does not exist a new 
+ * The frame is the frame to be set.
+ * If the keyframe exists it will be overwritten, if it does not exist a new
  * Linearlly interpolated keyframe will be added
  **/
 - (void)setValue:(nonnull id)value
       forKeypath:(nonnull NSString *)keypath
-         atFrame:(nullable NSNumber *)frame;
+         atFrame:(nullable NSNumber *)frame __deprecated;
 
 /// Logs all child keypaths
-- (void)logHierarchyKeypaths;
+- (void)logHierarchyKeypaths __deprecated;
 
 /**
- * Adds a custom subview to the animation using a LayerName from After Effects 
+ * Adds a custom subview to the animation using a LayerName from After Effects
  * as a reference point.
  *
  * @param view The custom view instance to be added
  *
  * @param layer The string name of the After Effects layer to be referenced.
  *
- * @param applyTransform If YES the custom view will be animated to move with the 
+ * @param applyTransform If YES the custom view will be animated to move with the
  * specified After Effects layer.
  * If NO the custom view will be masked by the After Effects layer
  **/
 - (void)addSubview:(nonnull LOTView *)view
       toLayerNamed:(nonnull NSString *)layer
-    applyTransform:(BOOL)applyTransform;
+    applyTransform:(BOOL)applyTransform __deprecated;
 
 /**
  * Converts the given CGRect from the recieving animation view's coordinate space
@@ -171,7 +173,30 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
  **/
 
 - (CGRect)convertRect:(CGRect)rect
-         toLayerNamed:(NSString *_Nullable)layerName;
+         toLayerNamed:(NSString *_Nullable)layerName __deprecated;
+
+- (void)setValueCallback:(nonnull LOTValueCallback *)callback
+              forKeypath:(nonnull LOTKeypath *)keypath;
+
+- (nullable NSArray *)keysForKeyPath:(nonnull LOTKeypath *)keypath;
+
+- (CGPoint)convertPoint:(CGPoint)point
+         toKeypathLayer:(nonnull LOTKeypath *)keypath;
+
+- (CGRect)convertRect:(CGRect)rect
+       toKeypathLayer:(nonnull LOTKeypath *)keypath;
+
+- (CGPoint)convertPoint:(CGPoint)point
+       fromKeypathLayer:(nonnull LOTKeypath *)keypath;
+
+- (CGRect)convertRect:(CGRect)rect
+     fromKeypathLayer:(nonnull LOTKeypath *)keypath;
+
+- (void)addSubview:(nonnull LOTView *)view
+    toKeypathLayer:(nonnull LOTKeypath *)keypath;
+
+- (void)maskSubview:(nonnull LOTView *)view
+     toKeypathLayer:(nonnull LOTKeypath *)keypath;
 
 #if !TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR
 @property (nonatomic) LOTViewContentMode contentMode;
