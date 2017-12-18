@@ -24,7 +24,6 @@ static NSString * const kCompContainerAnimationKey = @"play";
   CGFloat _playRangeEndProgress;
   NSBundle *_bundle;
   CGFloat _animationProgress;
-
   // Properties for tracking automatic restoration of animation.
   BOOL _shouldRestoreStateWhenAttachedToWindow;
   LOTAnimationCompletionBlock _completionBlockToRestoreWhenAttachedToWindow;
@@ -159,9 +158,6 @@ static NSString * const kCompContainerAnimationKey = @"play";
   _sceneModel = model;
   _compContainer = [[LOTCompositionContainer alloc] initWithModel:nil inLayerGroup:nil withLayerGroup:_sceneModel.layerGroup withAssestGroup:_sceneModel.assetGroup];
   [self.layer addSublayer:_compContainer];
-  if (ENABLE_DEBUG_LOGGING) {
-    [self logHierarchyKeypaths];
-  }
   [self _restoreState];
   [self setNeedsLayout];
 }
@@ -414,65 +410,96 @@ static NSString * const kCompContainerAnimationKey = @"play";
   }
 }
 
-# pragma mark - External Methods - Other
+# pragma mark - External Methods - Interactive Controls
+
+- (void)setValueCallback:(nonnull LOTValueCallback *)callbackBlock
+              forKeypath:(nonnull LOTKeypath *)keypath {
+  [_compContainer setValueCallback:callbackBlock forKeypath:keypath];
+  [self _layoutAndForceUpdate];
+}
+
+- (nullable NSArray *)keysForKeyPath:(nonnull LOTKeypath *)keypath {
+  return [_compContainer keysForKeyPath:keypath];
+}
+
+- (CGPoint)convertPoint:(CGPoint)point
+         toKeypathLayer:(nonnull LOTKeypath *)keypath {
+  [self _layoutAndForceUpdate];
+  return [_compContainer convertPoint:point toKeypathLayer:keypath withParentLayer:self.layer];
+}
+
+- (CGRect)convertRect:(CGRect)rect
+       toKeypathLayer:(nonnull LOTKeypath *)keypath {
+  [self _layoutAndForceUpdate];
+  return [_compContainer convertRect:rect toKeypathLayer:keypath withParentLayer:self.layer];
+}
+
+- (CGPoint)convertPoint:(CGPoint)point
+       fromKeypathLayer:(nonnull LOTKeypath *)keypath {
+  [self _layoutAndForceUpdate];
+  return [_compContainer convertPoint:point fromKeypathLayer:keypath withParentLayer:self.layer];
+}
+
+- (CGRect)convertRect:(CGRect)rect
+     fromKeypathLayer:(nonnull LOTKeypath *)keypath {
+  [self _layoutAndForceUpdate];
+  return [_compContainer convertRect:rect fromKeypathLayer:keypath withParentLayer:self.layer];
+}
 
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 
 - (void)addSubview:(nonnull LOTView *)view
-      toLayerNamed:(nonnull NSString *)layer
-    applyTransform:(BOOL)applyTransform {
-  [self _layout];
+    toKeypathLayer:(nonnull LOTKeypath *)keypath {
+  [self _layoutAndForceUpdate];
   CGRect viewRect = view.frame;
   LOTView *wrapperView = [[LOTView alloc] initWithFrame:viewRect];
   view.frame = view.bounds;
   view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
   [wrapperView addSubview:view];
   [self addSubview:wrapperView];
-  [_compContainer addSublayer:wrapperView.layer toLayerNamed:layer applyTransform:applyTransform];
+  [_compContainer addSublayer:wrapperView.layer toKeypathLayer:keypath];
 }
+
+- (void)maskSubview:(nonnull LOTView *)view
+     toKeypathLayer:(nonnull LOTKeypath *)keypath {
+  [self _layoutAndForceUpdate];
+  CGRect viewRect = view.frame;
+  LOTView *wrapperView = [[LOTView alloc] initWithFrame:viewRect];
+  view.frame = view.bounds;
+  view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+  [wrapperView addSubview:view];
+  [self addSubview:wrapperView];
+  [_compContainer maskSublayer:wrapperView.layer toKeypathLayer:keypath];
+}
+
 
 #else
 
 - (void)addSubview:(nonnull LOTView *)view
-      toLayerNamed:(nonnull NSString *)layer
-    applyTransform:(BOOL)applyTransform {
+    toKeypathLayer:(nonnull LOTKeypath *)keypath {
+  [self _layout];
   CGRect viewRect = view.frame;
   LOTView *wrapperView = [[LOTView alloc] initWithFrame:viewRect];
   view.frame = view.bounds;
   view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
   [wrapperView addSubview:view];
   [self addSubview:wrapperView];
-  [_compContainer addSublayer:wrapperView.layer toLayerNamed:layer applyTransform:applyTransform];
+  [_compContainer addSublayer:wrapperView.layer toKeypathLayer:keypath];
+}
+
+- (void)maskSubview:(nonnull LOTView *)view
+     toKeypathLayer:(nonnull LOTKeypath *)keypath {
+  [self _layout];
+  CGRect viewRect = view.frame;
+  LOTView *wrapperView = [[LOTView alloc] initWithFrame:viewRect];
+  view.frame = view.bounds;
+  view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+  [wrapperView addSubview:view];
+  [self addSubview:wrapperView];
+  [_compContainer maskSublayer:wrapperView.layer toKeypathLayer:keypath];
 }
 
 #endif
-
-- (CGRect)convertRect:(CGRect)rect
-         toLayerNamed:(NSString *_Nullable)layerName {
-  [self _layout];
-  if (layerName == nil) {
-    return [self.layer convertRect:rect toLayer:_compContainer];
-  }
-  return [_compContainer convertRect:rect fromLayer:self.layer toLayerNamed:layerName];
-}
-
-- (void)setValue:(nonnull id)value
-      forKeypath:(nonnull NSString *)keypath
-         atFrame:(nullable NSNumber *)frame{
-  BOOL didUpdate = [_compContainer setValue:value forKeypath:keypath atFrame:frame];
-  if (didUpdate) {
-    [CATransaction begin];
-    [CATransaction setDisableActions:YES];
-    [_compContainer displayWithFrame:_compContainer.currentFrame forceUpdate:YES];
-    [CATransaction commit];
-  } else {
-    NSLog(@"%s: Keypath Not Found: %@", __PRETTY_FUNCTION__, keypath);
-  }
-}
-
-- (void)logHierarchyKeypaths {
-  [_compContainer logHierarchyKeypathsWithParent:nil];
-}
 
 # pragma mark - Semi-Private Methods
 
@@ -615,6 +642,14 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 #endif
 
+- (void)_layoutAndForceUpdate {
+  [CATransaction begin];
+  [CATransaction setDisableActions:YES];
+  [self _layout];
+  [_compContainer displayWithFrame:_compContainer.currentFrame forceUpdate:YES];
+  [CATransaction commit];
+}
+
 - (void)_layout {
   CGPoint centerPoint = LOT_RectGetCenterPoint(self.bounds);
   CATransform3D xform;
@@ -669,6 +704,70 @@ static NSString * const kCompContainerAnimationKey = @"play";
     [self setProgressWithFrame:frame callCompletionIfNecessary:NO];
     [self _callCompletionIfNecessary:complete];
   }
+}
+
+# pragma mark - DEPRECATED
+
+#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
+
+- (void)addSubview:(nonnull LOTView *)view
+      toLayerNamed:(nonnull NSString *)layer
+    applyTransform:(BOOL)applyTransform {
+  NSLog(@"%s: Function is DEPRECATED. Please use addSubview:forKeypathLayer:", __PRETTY_FUNCTION__);
+  [self _layout];
+  CGRect viewRect = view.frame;
+  LOTView *wrapperView = [[LOTView alloc] initWithFrame:viewRect];
+  view.frame = view.bounds;
+  view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+  [wrapperView addSubview:view];
+  [self addSubview:wrapperView];
+  [_compContainer addSublayer:wrapperView.layer toLayerNamed:layer applyTransform:applyTransform];
+}
+
+#else
+
+- (void)addSubview:(nonnull LOTView *)view
+      toLayerNamed:(nonnull NSString *)layer
+    applyTransform:(BOOL)applyTransform {
+  NSLog(@"%s: Function is DEPRECATED. Please use addSubview:forKeypathLayer:", __PRETTY_FUNCTION__);
+  CGRect viewRect = view.frame;
+  LOTView *wrapperView = [[LOTView alloc] initWithFrame:viewRect];
+  view.frame = view.bounds;
+  view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+  [wrapperView addSubview:view];
+  [self addSubview:wrapperView];
+  [_compContainer addSublayer:wrapperView.layer toLayerNamed:layer applyTransform:applyTransform];
+}
+
+#endif
+
+- (CGRect)convertRect:(CGRect)rect
+         toLayerNamed:(NSString *_Nullable)layerName {
+  NSLog(@"%s: Function is DEPRECATED. Please use convertRect:forKeypathLayer:", __PRETTY_FUNCTION__);
+  [self _layout];
+  if (layerName == nil) {
+    return [self.layer convertRect:rect toLayer:_compContainer];
+  }
+  return [_compContainer convertRect:rect fromLayer:self.layer toLayerNamed:layerName];
+}
+
+- (void)setValue:(nonnull id)value
+      forKeypath:(nonnull NSString *)keypath
+         atFrame:(nullable NSNumber *)frame{
+  NSLog(@"%s: Function is DEPRECATED. Please use setValueCallback:forKeypath:", __PRETTY_FUNCTION__);
+  BOOL didUpdate = [_compContainer setValue:value forKeypath:keypath atFrame:frame];
+  if (didUpdate) {
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    [_compContainer displayWithFrame:_compContainer.currentFrame forceUpdate:YES];
+    [CATransaction commit];
+  } else {
+    NSLog(@"%s: Keypath Not Found: %@", __PRETTY_FUNCTION__, keypath);
+  }
+}
+
+- (void)logHierarchyKeypaths {
+  [_compContainer logHierarchyKeypathsWithParent:nil];
 }
 
 @end

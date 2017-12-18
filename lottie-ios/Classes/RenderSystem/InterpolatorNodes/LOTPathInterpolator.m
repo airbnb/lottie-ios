@@ -13,7 +13,11 @@
 
 - (LOTBezierPath *)pathForFrame:(NSNumber *)frame cacheLengths:(BOOL)cacheLengths {
   CGFloat progress = [self progressForFrame:frame];
-  
+  if (self.hasValueOverride) {
+    UIBezierPath *path = self.pathCallback.callback(self.leadingKeyframe.keyframeTime.floatValue, self.trailingKeyframe.keyframeTime.floatValue, progress, frame.floatValue);
+    return [LOTBezierPath pathWithCGPath:path.CGPath];
+  }
+
   LOTBezierPath *returnPath = [[LOTBezierPath alloc] init];
   returnPath.cacheLengths = cacheLengths;
   LOTBezierData *leadingData = self.leadingKeyframe.pathData;
@@ -60,6 +64,15 @@
   }
 
   return returnPath;
+}
+
+- (void)setValueCallback:(LOTValueCallback *)valueCallback {
+  NSAssert(([valueCallback isKindOfClass:[LOTPathValueCallback class]]), @"Path Interpolator set with incorrect callback type. Expected LOTPathValueCallback");
+  self.pathCallback = (LOTPathValueCallback*)valueCallback;
+}
+
+- (BOOL)hasValueOverride {
+  return self.pathCallback != nil;
 }
 
 @end

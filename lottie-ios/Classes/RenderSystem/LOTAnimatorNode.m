@@ -14,7 +14,6 @@ NSInteger indentation_level = 0;
 
 @implementation LOTAnimatorNode
 
-
 - (instancetype _Nonnull)initWithInputNode:(LOTAnimatorNode *_Nullable)inputNode
                                     keyName:(NSString *_Nullable)keyname {
   self = [super init];
@@ -97,6 +96,39 @@ NSInteger indentation_level = 0;
   _pathShouldCacheLengths = pathShouldCacheLengths;
   self.inputNode.pathShouldCacheLengths = pathShouldCacheLengths;
 }
+
+- (void)searchNodesForKeypath:(LOTKeypath * _Nonnull)keypath {
+  [self.inputNode searchNodesForKeypath:keypath];
+  if ([keypath pushKey:self.keyname]) {
+    // Matches self. Check interpolators
+    if (keypath.endOfKeypath) {
+      // Add self
+      [keypath addSearchResultForCurrentPath:self];
+    } else if (self.valueInterpolators[keypath.currentKey] != nil) {
+      [keypath pushKey:keypath.currentKey];
+      // We have a match!
+      [keypath addSearchResultForCurrentPath:self];
+      [keypath popKey];
+    }
+    [keypath popKey];
+  }
+}
+
+- (void)setValueCallback:(nonnull LOTValueCallback *)callbackBlock
+              forKeypath:(nonnull LOTKeypath *)keypath {
+  if ([keypath pushKey:self.keyname]) {
+    // Matches self. Check interpolators
+    LOTValueInterpolator *interpolator = self.valueInterpolators[keypath.currentKey];
+    if (interpolator) {
+      // We have a match!
+      [interpolator setValueCallback:callbackBlock];
+    }
+    [keypath popKey];
+  }
+  [self.inputNode setValueCallback:callbackBlock forKeypath:keypath];
+}
+
+#pragma mark - DEPRECATED
 
 /// Traverses children untill keypath is found and attempts to set the keypath to the value.
 - (BOOL)setValue:(nonnull id)value

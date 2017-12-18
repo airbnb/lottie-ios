@@ -48,11 +48,18 @@
 
 - (NSDictionary *)valueInterpolators {
   if (_opacityInterpolator && _transformInterolator) {
-    return @{@"Transform.Opacity" : _opacityInterpolator,
+    return @{@"Opacity" : _opacityInterpolator,
+             @"Position" : _transformInterolator.positionInterpolator,
+             @"Scale" : _transformInterolator.scaleInterpolator,
+             @"Rotation" : _transformInterolator.scaleInterpolator,
+             @"Anchor Point" : _transformInterolator.anchorInterpolator,
+             // Deprecated
+             @"Transform.Opacity" : _opacityInterpolator,
              @"Transform.Position" : _transformInterolator.positionInterpolator,
              @"Transform.Scale" : _transformInterolator.scaleInterpolator,
              @"Transform.Rotation" : _transformInterolator.scaleInterpolator,
-             @"Transform.Anchor Point" : _transformInterolator.anchorInterpolator};
+             @"Transform.Anchor Point" : _transformInterolator.anchorInterpolator
+             };
   }
   return nil;
 }
@@ -175,6 +182,59 @@
 - (LOTBezierPath *)outputPath {
   return _outputPath;
 }
+
+- (void)searchNodesForKeypath:(LOTKeypath * _Nonnull)keypath {
+  [self.inputNode searchNodesForKeypath:keypath];
+  if ([keypath pushKey:self.keyname]) {
+    // Matches self. Dig deeper.
+    // Check interpolators
+
+    if ([keypath pushKey:@"Transform"]) {
+      // Matches a Transform interpolator!
+      if (self.valueInterpolators[keypath.currentKey] != nil) {
+        [keypath pushKey:keypath.currentKey];
+        [keypath addSearchResultForCurrentPath:self];
+        [keypath popKey];
+      }
+      [keypath popKey];
+    }
+
+    if (keypath.endOfKeypath) {
+      // We have a match!
+      [keypath addSearchResultForCurrentPath:self];
+    }
+    // Check child nodes
+    [_rootNode searchNodesForKeypath:keypath];
+    [keypath popKey];
+  }
+}
+
+- (void)setValueCallback:(nonnull LOTValueCallback *)callbackBlock
+              forKeypath:(nonnull LOTKeypath *)keypath {
+  if ([keypath pushKey:self.keyname]) {
+    // Matches self. Dig deeper.
+    // Check interpolators
+    if ([keypath pushKey:@"Transform"]) {
+      // Matches a Transform interpolator!
+      LOTValueInterpolator *interpolator = self.valueInterpolators[keypath.currentKey];
+      if (interpolator) {
+        // We have a match!
+        [interpolator setValueCallback:callbackBlock];
+      }
+      [keypath popKey];
+    }
+
+    // Check child nodes
+    [_rootNode setValueCallback:callbackBlock forKeypath:keypath];
+
+    [keypath popKey];
+  }
+
+  // Check upstream
+  [self.inputNode setValueCallback:callbackBlock forKeypath:keypath];
+}
+
+#pragma mark - DEPRECATED
 
 - (BOOL)setInterpolatorValue:(id)value
                       forKey:(NSString *)key

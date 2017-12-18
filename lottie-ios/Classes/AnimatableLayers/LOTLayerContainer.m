@@ -27,7 +27,6 @@
   CALayer *DEBUG_Center;
   LOTRenderGroup *_contentsGroup;
   LOTMaskContainer *_maskLayer;
-  NSDictionary *_valueInterpolators;
 }
 
 @dynamic currentFrame;
@@ -102,6 +101,19 @@
   }
   
   NSMutableDictionary *interpolators = [NSMutableDictionary dictionary];
+  interpolators[@"Opacity"] = _opacityInterpolator;
+  interpolators[@"Anchor Point"] = _transformInterpolator.anchorInterpolator;
+  interpolators[@"Scale"] = _transformInterpolator.scaleInterpolator;
+  interpolators[@"Rotation"] = _transformInterpolator.rotationInterpolator;
+  if (_transformInterpolator.positionXInterpolator &&
+      _transformInterpolator.positionYInterpolator) {
+    interpolators[@"X Position"] = _transformInterpolator.positionXInterpolator;
+    interpolators[@"Y Position"] = _transformInterpolator.positionYInterpolator;
+  } else if (_transformInterpolator.positionInterpolator) {
+    interpolators[@"Position"] = _transformInterpolator.positionInterpolator;
+  }
+
+  // Deprecated
   interpolators[@"Transform.Opacity"] = _opacityInterpolator;
   interpolators[@"Transform.Anchor Point"] = _transformInterpolator.anchorInterpolator;
   interpolators[@"Transform.Scale"] = _transformInterpolator.scaleInterpolator;
@@ -241,6 +253,39 @@
   _maskLayer.currentFrame = frame;
 }
 
+- (void)setViewportBounds:(CGRect)viewportBounds {
+  _viewportBounds = viewportBounds;
+  if (_maskLayer) {
+    CGPoint center = LOT_RectGetCenterPoint(viewportBounds);
+    viewportBounds.origin = CGPointMake(-center.x, -center.y);
+    _maskLayer.bounds = viewportBounds;
+  }
+}
+
+- (void)searchNodesForKeypath:(LOTKeypath * _Nonnull)keypath {
+  [_contentsGroup searchNodesForKeypath:keypath];
+}
+
+- (void)setValueCallback:(nonnull LOTValueCallback *)callbackBlock
+              forKeypath:(nonnull LOTKeypath *)keypath {
+  if ([keypath pushKey:self.layerName]) {
+    // Matches self.
+    if ([keypath pushKey:@"Transform"]) {
+      // Is a transform node, check  interpolators
+      LOTValueInterpolator *interpolator = _valueInterpolators[keypath.currentKey];
+      if (interpolator) {
+        // We have a match!
+        [interpolator setValueCallback:callbackBlock];
+      }
+      [keypath popKey];
+    }
+    [keypath popKey];
+  }
+  [_contentsGroup setValueCallback:callbackBlock forKeypath:keypath];
+}
+
+# pragma mark - DEPRECATED
+
 - (void)addAndMaskSublayer:(nonnull CALayer *)subLayer {
   [_wrapperLayer addSublayer:subLayer];
 }
@@ -287,15 +332,6 @@
     }
   }
   return NO;
-}
-
-- (void)setViewportBounds:(CGRect)viewportBounds {
-  _viewportBounds = viewportBounds;
-  if (_maskLayer) {
-    CGPoint center = LOT_RectGetCenterPoint(viewportBounds);
-    viewportBounds.origin = CGPointMake(-center.x, -center.y);
-    _maskLayer.bounds = viewportBounds;
-  }
 }
 
 - (void)logHierarchyKeypathsWithParent:(NSString * _Nullable)parent {

@@ -16,13 +16,37 @@
                         withLayerGroup:(LOTLayerGroup * _Nullable)childLayerGroup
                        withAssestGroup:(LOTAssetGroup * _Nullable)assetGroup;
 
+- (nullable NSArray *)keysForKeyPath:(nonnull LOTKeypath *)keypath;
+
+- (CGPoint)convertPoint:(CGPoint)point
+         toKeypathLayer:(nonnull LOTKeypath *)keypath
+        withParentLayer:(CALayer *_Nonnull)parent;
+
+- (CGRect)convertRect:(CGRect)rect
+       toKeypathLayer:(nonnull LOTKeypath *)keypath
+      withParentLayer:(CALayer *_Nonnull)parent;
+
+- (CGPoint)convertPoint:(CGPoint)point
+       fromKeypathLayer:(nonnull LOTKeypath *)keypath
+        withParentLayer:(CALayer *_Nonnull)parent;
+
+- (CGRect)convertRect:(CGRect)rect
+     fromKeypathLayer:(nonnull LOTKeypath *)keypath
+      withParentLayer:(CALayer *_Nonnull)parent;
+
+- (void)addSublayer:(nonnull CALayer *)subLayer
+    toKeypathLayer:(nonnull LOTKeypath *)keypath;
+
+- (void)maskSublayer:(nonnull CALayer *)subLayer
+     toKeypathLayer:(nonnull LOTKeypath *)keypath;
+
 - (void)addSublayer:(nonnull CALayer *)subLayer
        toLayerNamed:(nonnull NSString *)layerName
-     applyTransform:(BOOL)applyTransform;
+     applyTransform:(BOOL)applyTransform __deprecated;
 
 - (CGRect)convertRect:(CGRect)rect
             fromLayer:(CALayer *_Nonnull)fromlayer
-         toLayerNamed:(NSString *_Nonnull)layerName;
+         toLayerNamed:(NSString *_Nonnull)layerName __deprecated;
 
 @property (nonatomic, readonly, nonnull) NSArray<LOTLayerContainer *> *childLayers;
 @property (nonatomic, readonly, nonnull)  NSDictionary *childMap;
