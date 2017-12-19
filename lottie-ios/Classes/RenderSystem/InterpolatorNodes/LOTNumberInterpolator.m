@@ -37,11 +37,4 @@
   self.numberCallback = (LOTNumberValueCallback*)valueCallback;
 }
 
-- (id)keyframeDataForValue:(id)value {
-  if ([value isKindOfClass:[NSNumber class]]) {
-    return value;
-  }
-  return nil;
-}
-
 @end

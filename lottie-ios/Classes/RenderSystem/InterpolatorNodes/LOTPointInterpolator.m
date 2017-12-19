@@ -42,12 +42,4 @@
   self.pointCallback = (LOTPointValueCallback*)valueCallback;
 }
 
-- (id)keyframeDataForValue:(id)value {
-  if ([value isKindOfClass:[NSValue class]]) {
-    CGPoint pointValue = [(NSValue *)value CGPointValue];
-    return @[@(pointValue.x), @(pointValue.y)];
-  }
-  return nil;
-}
-
 @end

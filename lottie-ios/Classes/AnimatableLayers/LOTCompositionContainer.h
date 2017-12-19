@@ -40,14 +40,6 @@
 - (void)maskSublayer:(nonnull CALayer *)subLayer
      toKeypathLayer:(nonnull LOTKeypath *)keypath;
 
-- (void)addSublayer:(nonnull CALayer *)subLayer
-       toLayerNamed:(nonnull NSString *)layerName
-     applyTransform:(BOOL)applyTransform __deprecated;
-
-- (CGRect)convertRect:(CGRect)rect
-            fromLayer:(CALayer *_Nonnull)fromlayer
-         toLayerNamed:(NSString *_Nonnull)layerName __deprecated;
-
 @property (nonatomic, readonly, nonnull) NSArray<LOTLayerContainer *> *childLayers;
 @property (nonatomic, readonly, nonnull)  NSDictionary *childMap;
 

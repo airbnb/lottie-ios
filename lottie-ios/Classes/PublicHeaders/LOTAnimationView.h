@@ -126,80 +126,102 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// Sets progress of animation to a specific frame. If the animation is playing it will stop and the completion block will be called.
 - (void)setProgressWithFrame:(nonnull NSNumber *)currentFrame;
 
-/**
- * Sets the keyframe value for a specific After Effects property at a given time.
- * @param value id
- * Value is the color, point, or number object that should be set at given time
- *
- * @param keypath NSString . separate keypath
- * The Keypath is a dot seperated key path that specifies the location of the key to
- * be set from the After Effects file. This will begin with the Layer Name.
- * EG "Layer 1.Shape 1.Fill 1.Color"
- *
- * @param frame
- * The frame is the frame to be set.
- * If the keyframe exists it will be overwritten, if it does not exist a new
- * Linearlly interpolated keyframe will be added
- **/
-- (void)setValue:(nonnull id)value
-      forKeypath:(nonnull NSString *)keypath
-         atFrame:(nullable NSNumber *)frame __deprecated;
-
 /// Logs all child keypaths
-- (void)logHierarchyKeypaths __deprecated;
+- (void)logHierarchyKeypaths;
 
-/**
- * Adds a custom subview to the animation using a LayerName from After Effects
- * as a reference point.
- *
- * @param view The custom view instance to be added
- *
- * @param layer The string name of the After Effects layer to be referenced.
- *
- * @param applyTransform If YES the custom view will be animated to move with the
- * specified After Effects layer.
- * If NO the custom view will be masked by the After Effects layer
- **/
-- (void)addSubview:(nonnull LOTView *)view
-      toLayerNamed:(nonnull NSString *)layer
-    applyTransform:(BOOL)applyTransform __deprecated;
+/*!
+ @brief Sets a LOTValueCallback for each node returned from the LOTKeypath search. The LOTValueCallback block is called every frame as the animation plays to override animation values.
 
-/**
- * Converts the given CGRect from the recieving animation view's coordinate space
- * to the supplied layer's coordinate space
- * If layerName is null then the rect will be converted to the composition coordinate system.
- * This is helpful when adding custom subviews to a LOTAnimationView
- *
- **/
+ @discussion
+ Example that sets an animated stroke to Red.
+ @code
+ LOTKeypath *keypath = [LOTKeypath keypathWithKeys:@"Layer 1", @"Ellipse 1", @"Stroke 1", @"Color", nil];
+ LOTColorValueCallback *colorCallback = [LOTColorValueCallback withBlock:^UIColor * _Nonnull(CGFloat startFrame, CGFloat endFrame, UIColor * _Nullable startColor, UIColor * _Nullable endColor, UIColor * _Nullable interpolatedColor, CGFloat interpolatedProgress, CGFloat currentFrame) {
+ return [UIColor redColor];
+ }];
+ [animationView setValueCallback:colorCallback forKeypath:keypath];
+ @endcode
+ See the documentation for LOTValueCallback to see how to create LOTValueCallbacks. Acceptable types are LOTColorValueCallback, LOTNumberValueCallback, LOTPointValueCallback, LOTSizeValueCallback, LOTPathValueCallback.
 
-- (CGRect)convertRect:(CGRect)rect
-         toLayerNamed:(NSString *_Nullable)layerName __deprecated;
-
+ See the documentation for LOTKeypath to learn more about how to create keypaths.
+ */
 - (void)setValueCallback:(nonnull LOTValueCallback *)callback
               forKeypath:(nonnull LOTKeypath *)keypath;
 
+/*!
+ @brief returns the string representation of every keypath matching the LOTKeypath search.
+ */
 - (nullable NSArray *)keysForKeyPath:(nonnull LOTKeypath *)keypath;
 
+/*!
+ @brief Converts a CGPoint from the Animation views top coordinate space into the coordinate space of the specified renderable animation node.
+ */
 - (CGPoint)convertPoint:(CGPoint)point
          toKeypathLayer:(nonnull LOTKeypath *)keypath;
 
+/*!
+ @brief Converts a CGRect from the Animation views top coordinate space into the coordinate space of the specified renderable animation node.
+ */
 - (CGRect)convertRect:(CGRect)rect
        toKeypathLayer:(nonnull LOTKeypath *)keypath;
 
+/*!
+ @brief Converts a CGPoint to the Animation views top coordinate space from the coordinate space of the specified renderable animation node.
+ */
 - (CGPoint)convertPoint:(CGPoint)point
        fromKeypathLayer:(nonnull LOTKeypath *)keypath;
 
+/*!
+ @brief Converts a CGRect to the Animation views top coordinate space from the coordinate space of the specified renderable animation node.
+ */
 - (CGRect)convertRect:(CGRect)rect
      fromKeypathLayer:(nonnull LOTKeypath *)keypath;
 
+/*!
+ @brief Adds a UIView, or NSView, to the renderable layer found at the Keypath
+ */
 - (void)addSubview:(nonnull LOTView *)view
     toKeypathLayer:(nonnull LOTKeypath *)keypath;
 
+/*!
+ @brief Adds a UIView, or NSView, to the parentrenderable layer found at the Keypath and then masks the view with layer found at the keypath.
+ */
 - (void)maskSubview:(nonnull LOTView *)view
      toKeypathLayer:(nonnull LOTKeypath *)keypath;
 
 #if !TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR
 @property (nonatomic) LOTViewContentMode contentMode;
 #endif
+
+/*!
+ @brief Sets the keyframe value for a specific After Effects property at a given time. NOTE: Deprecated. Use setValueCallback:forKeypath:
+ @discussion NOTE: Deprecated and non functioning. Use setValueCallback:forKeypath:
+ @param value Value is the color, point, or number object that should be set at given time
+ @param keypath NSString . separate keypath The Keypath is a dot seperated key path that specifies the location of the key to be set from the After Effects file. This will begin with the Layer Name. EG "Layer 1.Shape 1.Fill 1.Color"
+ @param frame The frame is the frame to be set. If the keyframe exists it will be overwritten, if it does not exist a new linearlly interpolated keyframe will be added
+ */
+- (void)setValue:(nonnull id)value
+      forKeypath:(nonnull NSString *)keypath
+         atFrame:(nullable NSNumber *)frame __deprecated;
+
+/*!
+ @brief Adds a custom subview to the animation using a LayerName from After Effect as a reference point.
+ @discussion NOTE: Deprecated. Use addSubview:toKeypathLayer: or maskSubview:toKeypathLayer:
+ @param view The custom view instance to be added
+
+ @param layer The string name of the After Effects layer to be referenced.
+
+ @param applyTransform If YES the custom view will be animated to move with the specified After Effects layer. If NO the custom view will be masked by the After Effects layer
+ */
+- (void)addSubview:(nonnull LOTView *)view
+      toLayerNamed:(nonnull NSString *)layer
+    applyTransform:(BOOL)applyTransform __deprecated;
+
+/*!
+ @brief Converts the given CGRect from the recieving animation view's coordinate space to the supplied layer's coordinate space If layerName is null then the rect will be converted to the composition coordinate system. This is helpful when adding custom subviews to a LOTAnimationView
+ @discussion NOTE: Deprecated. Use convertRect:fromKeypathLayer:
+ */
+- (CGRect)convertRect:(CGRect)rect
+         toLayerNamed:(NSString *_Nullable)layerName __deprecated;
 
 @end
