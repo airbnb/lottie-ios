@@ -10,9 +10,53 @@
 
 extern NSString * _Nonnull const kLOTKeypathEnd;
 
+/*!
+ @brief LOTKeypath is an object that describes a keypath search for nodes in the animation JSON.
+
+ @discussion
+ LOTKeypath is used with LOTAnimationView to set animation properties dynamically at runtime, to add or mask subviews, converting geometry, and numerous other functions.
+
+ LOTKeypath can describe a specific object, or can use wildcards for fuzzy matching of objects. Acceptable wildcards are either "*" (star) or "**" (double star). Single star will search a single depth for the next object, double star will search any depth.
+
+ EG:
+  @"Layer.Shape Group.Stroke 1.Color"
+  Represents a specific color node on a specific stroke.
+
+  @"**.Stroke 1.Color"
+  Represents the color node for every "Stroke 1" in the animation scene.
+ */
+
 @interface LOTKeypath : NSObject
 
+/*!
+ @brief Creates a LOTKeypath from a dot separated string, can use wildcards @"*" and fuzzy depth wild cards @"**".
+
+ @discussion LOTKeypath is an object that describes a keypath search for nodes in the animation JSON.
+
+ LOTKeypath is used with LOTAnimationView to set animation properties dynamically at runtime, to add or mask subviews, converting geometry, and numerous other functions.
+
+ LOTKeypath can describe a specific object, or can use wildcards for fuzzy matching of objects. Acceptable wildcards are either "*" (star) or "**" (double star). Single star will search a single depth for the next object, double star will search any depth.
+
+ @param  keypath A dot separated string describing a keypath from the JSON animation. EG @"Layer.Shape Group.Stroke 1.Color"
+
+ @return A new LOTKeypath
+ */
+
 + (nonnull LOTKeypath *)keypathWithString:(nonnull NSString *)keypath;
+
+/*!
+ @brief Creates a LOTKeypath from a list of keypath string objects, can use wildcards @"*" and fuzzy depth wild cards @"**".
+
+ @discussion LOTKeypath is an object that describes a keypath search for nodes in the animation JSON.
+
+ LOTKeypath is used with LOTAnimationView to set animation properties dynamically at runtime, to add or mask subviews, converting geometry, and numerous other functions.
+
+ LOTKeypath can describe a specific object, or can use wildcards for fuzzy matching of objects. Acceptable wildcards are either "*" (star) or "**" (double star). Single star will search a single depth for the next object, double star will search any depth.
+
+ @param  firstKey A nil terminitated list of strings describing a keypath. EG @"Layer", @"Shape Group", @"Stroke 1", @"Color", nil
+
+ @return A new LOTKeypath
+ */
 
 + (nonnull LOTKeypath *)keypathWithKeys:(nonnull NSString *)firstKey, ...
   NS_REQUIRES_NIL_TERMINATION;

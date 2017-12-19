@@ -25,14 +25,6 @@
 - (void)displayWithFrame:(NSNumber * _Nonnull)frame;
 - (void)displayWithFrame:(NSNumber * _Nonnull)frame forceUpdate:(BOOL)forceUpdate;
 
-- (void)addAndMaskSublayer:(nonnull CALayer *)subLayer __deprecated;
-
-- (BOOL)setValue:(nonnull id)value
-      forKeypath:(nonnull NSString *)keypath
-         atFrame:(nullable NSNumber *)frame __deprecated;
-
-- (void)logHierarchyKeypathsWithParent:(NSString * _Nullable)parent __deprecated;
-
 - (void)searchNodesForKeypath:(LOTKeypath * _Nonnull)keypath;
 
 - (void)setValueCallback:(nonnull LOTValueCallback *)callbackBlock

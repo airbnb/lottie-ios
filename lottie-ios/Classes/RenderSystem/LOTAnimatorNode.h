@@ -60,20 +60,4 @@ extern NSInteger indentation_level;
 - (void)setValueCallback:(nonnull LOTValueCallback *)callbackBlock
               forKeypath:(nonnull LOTKeypath *)keypath;
 
-/*
- *  DEPRECATED
- */
-
-/// Traverses children untill keypath is found and attempts to set the keypath to the value.
-- (BOOL)setValue:(nonnull id)value
-    forKeyAtPath:(nonnull NSString *)keypath
-        forFrame:(nullable NSNumber *)frame __deprecated;
-
-/// Sets the keyframe to the value, to be overwritten by subclasses
-- (BOOL)setInterpolatorValue:(nonnull id)value
-                      forKey:(nonnull NSString *)key
-                    forFrame:(nullable NSNumber *)frame __deprecated;
-
-- (void)logHierarchyKeypathsWithParent:(NSString * _Nullable)parent __deprecated;
-
 @end

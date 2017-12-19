@@ -38,12 +38,4 @@
   self.sizeCallback = (LOTSizeValueCallback*)valueCallback;
 }
 
-- (id)keyframeDataForValue:(id)value {
-  if ([value isKindOfClass:[NSValue class]]) {
-    CGSize sizeValue = [(NSValue *)value CGSizeValue];
-    return @[@(sizeValue.width), @(sizeValue.height)];
-  }
-  return nil;
-}
-
 @end

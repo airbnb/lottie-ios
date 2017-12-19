@@ -128,44 +128,4 @@ NSInteger indentation_level = 0;
   [self.inputNode setValueCallback:callbackBlock forKeypath:keypath];
 }
 
-#pragma mark - DEPRECATED
-
-/// Traverses children untill keypath is found and attempts to set the keypath to the value.
-- (BOOL)setValue:(nonnull id)value
-    forKeyAtPath:(nonnull NSString *)keypath
-        forFrame:(nullable NSNumber *)frame {
-  NSArray *components = [keypath componentsSeparatedByString:@"."];
-  NSString *firstKey = components.firstObject;
-  if ([firstKey isEqualToString:self.keyname] && components.count > 1) {
-    NSString *nextPath = [keypath stringByReplacingCharactersInRange:NSMakeRange(0, firstKey.length + 1) withString:@""];
-    return  [self setInterpolatorValue:value forKey:nextPath forFrame:frame];
-  }
-  return  [self.inputNode setValue:value forKeyAtPath:keypath forFrame:frame];
-}
-
-/// Sets the keyframe to the value, to be overwritten by subclasses
-- (BOOL)setInterpolatorValue:(nonnull id)value
-                      forKey:(nonnull NSString *)key
-                    forFrame:(nullable NSNumber *)frame {
-  LOTValueInterpolator *interpolator = self.valueInterpolators[key];
-  if (interpolator) {
-    return [interpolator setValue:value atFrame:frame];
-  }
-  return NO;
-}
-
-- (void)logHierarchyKeypathsWithParent:(NSString *)parent {
-  NSString *keypath = self.keyname;
-  if (parent && self.keyname) {
-    keypath = [NSString stringWithFormat:@"%@.%@", parent, self.keyname];
-  }
-  if (keypath) {
-    for (NSString *interpolator in self.valueInterpolators.allKeys) {
-      [self logString:[NSString stringWithFormat:@"%@.%@", keypath, interpolator]];
-    }
-  }
-  
-  [self.inputNode logHierarchyKeypathsWithParent:parent];
-}
-
 @end

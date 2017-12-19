@@ -708,66 +708,36 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 # pragma mark - DEPRECATED
 
-#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
-
 - (void)addSubview:(nonnull LOTView *)view
       toLayerNamed:(nonnull NSString *)layer
     applyTransform:(BOOL)applyTransform {
   NSLog(@"%s: Function is DEPRECATED. Please use addSubview:forKeypathLayer:", __PRETTY_FUNCTION__);
-  [self _layout];
-  CGRect viewRect = view.frame;
-  LOTView *wrapperView = [[LOTView alloc] initWithFrame:viewRect];
-  view.frame = view.bounds;
-  view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-  [wrapperView addSubview:view];
-  [self addSubview:wrapperView];
-  [_compContainer addSublayer:wrapperView.layer toLayerNamed:layer applyTransform:applyTransform];
+  LOTKeypath *keypath = [LOTKeypath keypathWithString:layer];
+  if (applyTransform) {
+    [self addSubview:view toKeypathLayer:keypath];
+  } else {
+    [self maskSubview:view toKeypathLayer:keypath];
+  }
 }
-
-#else
-
-- (void)addSubview:(nonnull LOTView *)view
-      toLayerNamed:(nonnull NSString *)layer
-    applyTransform:(BOOL)applyTransform {
-  NSLog(@"%s: Function is DEPRECATED. Please use addSubview:forKeypathLayer:", __PRETTY_FUNCTION__);
-  CGRect viewRect = view.frame;
-  LOTView *wrapperView = [[LOTView alloc] initWithFrame:viewRect];
-  view.frame = view.bounds;
-  view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-  [wrapperView addSubview:view];
-  [self addSubview:wrapperView];
-  [_compContainer addSublayer:wrapperView.layer toLayerNamed:layer applyTransform:applyTransform];
-}
-
-#endif
 
 - (CGRect)convertRect:(CGRect)rect
          toLayerNamed:(NSString *_Nullable)layerName {
   NSLog(@"%s: Function is DEPRECATED. Please use convertRect:forKeypathLayer:", __PRETTY_FUNCTION__);
-  [self _layout];
-  if (layerName == nil) {
-    return [self.layer convertRect:rect toLayer:_compContainer];
-  }
-  return [_compContainer convertRect:rect fromLayer:self.layer toLayerNamed:layerName];
+  LOTKeypath *keypath = [LOTKeypath keypathWithString:layerName];
+  return [self convertRect:rect toKeypathLayer:keypath];
 }
 
 - (void)setValue:(nonnull id)value
       forKeypath:(nonnull NSString *)keypath
-         atFrame:(nullable NSNumber *)frame{
-  NSLog(@"%s: Function is DEPRECATED. Please use setValueCallback:forKeypath:", __PRETTY_FUNCTION__);
-  BOOL didUpdate = [_compContainer setValue:value forKeypath:keypath atFrame:frame];
-  if (didUpdate) {
-    [CATransaction begin];
-    [CATransaction setDisableActions:YES];
-    [_compContainer displayWithFrame:_compContainer.currentFrame forceUpdate:YES];
-    [CATransaction commit];
-  } else {
-    NSLog(@"%s: Keypath Not Found: %@", __PRETTY_FUNCTION__, keypath);
-  }
+         atFrame:(nullable NSNumber *)frame {
+  NSLog(@"%s: Function is DEPRECATED and no longer functional. Please use setValueCallback:forKeypath:", __PRETTY_FUNCTION__);
 }
 
 - (void)logHierarchyKeypaths {
-  [_compContainer logHierarchyKeypathsWithParent:nil];
+  NSArray *keypaths = [self keysForKeyPath:[LOTKeypath keypathWithString:@"**"]];
+  for (NSString *keypath in keypaths) {
+    NSLog(@"%@", keypath);
+  }
 }
 
 @end

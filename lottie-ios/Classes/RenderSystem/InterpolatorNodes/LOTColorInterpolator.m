@@ -30,14 +30,6 @@
   return returnColor;
 }
 
-- (id)keyframeDataForValue:(id)value {
-  if ([value isKindOfClass:[UIColor class]]) {
-    NSArray *colorComponents = [(UIColor *)value LOT_arrayFromRGBAComponents];
-    return colorComponents;
-  }
-  return nil;
-}
-
 - (void)setValueCallback:(LOTValueCallback *)valueCallback {
   NSAssert(([valueCallback isKindOfClass:[LOTColorValueCallback class]]), @"Color Interpolator set with incorrect callback type. Expected LOTColorValueCallback");
   self.colorCallback = (LOTColorValueCallback *)valueCallback;
