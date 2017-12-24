@@ -130,7 +130,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
  * Value is the color, point, or number object that should be set at given time
  *
  * @param keypath NSString . separate keypath
- * The Keypath is a dot seperated key path that specifies the location of the key to
+ * The Keypath is a dot separated key path that specifies the location of the key to
  * be set from the After Effects file. This will begin with the Layer Name.
  * EG "Layer 1.Shape 1.Fill 1.Color" 
  *
@@ -163,7 +163,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
     applyTransform:(BOOL)applyTransform;
 
 /**
- * Converts the given CGRect from the recieving animation view's coordinate space
+ * Converts the given CGRect from the receiving animation view's coordinate space
  * to the supplied layer's coordinate space
  * If layerName is null then the rect will be converted to the composition coordinate system.
  * This is helpful when adding custom subviews to a LOTAnimationView
