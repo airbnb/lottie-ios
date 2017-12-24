@@ -98,7 +98,7 @@ NSInteger indentation_level = 0;
   self.inputNode.pathShouldCacheLengths = pathShouldCacheLengths;
 }
 
-/// Traverses children untill keypath is found and attempts to set the keypath to the value.
+/// Traverses children until keypath is found and attempts to set the keypath to the value.
 - (BOOL)setValue:(nonnull id)value
     forKeyAtPath:(nonnull NSString *)keypath
         forFrame:(nullable NSNumber *)frame {

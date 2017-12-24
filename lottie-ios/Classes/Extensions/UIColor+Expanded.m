@@ -5,7 +5,7 @@
 /*
  
  Thanks to Poltras, Millenomi, Eridius, Nownot, WhatAHam, jberry,
- and everyone else who helped out but whose name is inadvertantly omitted
+ and everyone else who helped out but whose name is inadvertently omitted
  
  */
 
