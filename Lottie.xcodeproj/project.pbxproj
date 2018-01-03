@@ -150,6 +150,8 @@
 		622F77121F2BF6AA00269858 /* LOTComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 622F77101F2BF6AA00269858 /* LOTComposition.m */; };
 		622F77131F2BF6AA00269858 /* LOTComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 622F77101F2BF6AA00269858 /* LOTComposition.m */; };
 		622F77141F2BF6BE00269858 /* LOTComposition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 622F770D1F2BF6A000269858 /* LOTComposition.h */; };
+		6257F31B1FFD61A100DAE7B2 /* UIBezierPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 6257F3191FFD61A100DAE7B2 /* UIBezierPath.h */; };
+		6257F31C1FFD61A100DAE7B2 /* UIBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6257F31A1FFD61A100DAE7B2 /* UIBezierPath.m */; };
 		6274CEB91F157DCD00E05049 /* LOTNumberInterpolator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6274CEB71F157DCD00E05049 /* LOTNumberInterpolator.h */; };
 		6274CEBA1F157DCD00E05049 /* LOTNumberInterpolator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6274CEB71F157DCD00E05049 /* LOTNumberInterpolator.h */; };
 		6274CEBB1F157DCD00E05049 /* LOTNumberInterpolator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6274CEB81F157DCD00E05049 /* LOTNumberInterpolator.m */; };
@@ -395,6 +397,8 @@
 		622F766A1F2BCE1300269858 /* LOTRepeaterRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LOTRepeaterRenderer.m; path = "lottie-ios/Classes/RenderSystem/RenderNodes/LOTRepeaterRenderer.m"; sourceTree = SOURCE_ROOT; };
 		622F770D1F2BF6A000269858 /* LOTComposition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTComposition.h; sourceTree = "<group>"; };
 		622F77101F2BF6AA00269858 /* LOTComposition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTComposition.m; sourceTree = "<group>"; };
+		6257F3191FFD61A100DAE7B2 /* UIBezierPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBezierPath.h; sourceTree = "<group>"; };
+		6257F31A1FFD61A100DAE7B2 /* UIBezierPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBezierPath.m; sourceTree = "<group>"; };
 		6274CEB71F157DCD00E05049 /* LOTNumberInterpolator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LOTNumberInterpolator.h; path = "lottie-ios/Classes/RenderSystem/InterpolatorNodes/LOTNumberInterpolator.h"; sourceTree = SOURCE_ROOT; };
 		6274CEB81F157DCD00E05049 /* LOTNumberInterpolator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LOTNumberInterpolator.m; path = "lottie-ios/Classes/RenderSystem/InterpolatorNodes/LOTNumberInterpolator.m"; sourceTree = SOURCE_ROOT; };
 		6274CF891F16F29200E05049 /* LOTPointInterpolator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LOTPointInterpolator.h; path = "lottie-ios/Classes/RenderSystem/InterpolatorNodes/LOTPointInterpolator.h"; sourceTree = SOURCE_ROOT; };
@@ -587,6 +591,8 @@
 		481A4AD71E4A78A0003CF62B /* MacCompatability */ = {
 			isa = PBXGroup;
 			children = (
+				6257F3191FFD61A100DAE7B2 /* UIBezierPath.h */,
+				6257F31A1FFD61A100DAE7B2 /* UIBezierPath.m */,
 				481A4ADA1E4A78A0003CF62B /* CALayer+Compat.h */,
 				481A4ADB1E4A78A0003CF62B /* CALayer+Compat.m */,
 				481A4ADC1E4A78A0003CF62B /* LOTPlatformCompat.h */,
@@ -843,6 +849,7 @@
 				481A4AD61E4A7885003CF62B /* LOTAnimationView_Internal.h in Headers */,
 				FA1F5AA11E42B52800FF36BF /* LOTAnimationView.h in Headers */,
 				6279981D1FE1D99F00B2DDD9 /* LOTKeypath.h in Headers */,
+				6257F31B1FFD61A100DAE7B2 /* UIBezierPath.h in Headers */,
 				62BFC2EE1F14298D0068A342 /* LOTPathAnimator.h in Headers */,
 				62E27B471F31158B0098420E /* LOTAnimationCache.h in Headers */,
 				62BFC2DF1F14298D0068A342 /* LOTAnimatorNode.h in Headers */,
@@ -1135,6 +1142,7 @@
 				62BFC2F51F14298D0068A342 /* LOTRenderGroup.m in Sources */,
 				481A4AD41E4A7885003CF62B /* LOTAnimationView.m in Sources */,
 				622F762F1F2A8CBA00269858 /* LOTShapeStar.m in Sources */,
+				6257F31C1FFD61A100DAE7B2 /* UIBezierPath.m in Sources */,
 				6274CFAB1F17E98200E05049 /* LOTColorInterpolator.m in Sources */,
 				6274CFA31F17E94C00E05049 /* LOTPathInterpolator.m in Sources */,
 				481A4AC81E4A7885003CF62B /* LOTShapeStroke.m in Sources */,

@@ -319,55 +319,6 @@ CGFloat LOT_DegreesToRadians(CGFloat degrees) {
   return degrees * M_PI / 180;
 }
 
-GLKMatrix4 LOT_GLKMatrix4FromCATransform(CATransform3D xform) {
-  return GLKMatrix4Make(xform.m11, xform.m12, xform.m13, xform.m14,
-                        xform.m21, xform.m22, xform.m23, xform.m24,
-                        xform.m31, xform.m32, xform.m33, xform.m34,
-                        xform.m41, xform.m42, xform.m43, xform.m44);
-}
-
-CATransform3D LOT_CATransform3DFromGLKMatrix4(GLKMatrix4 xform) {
-  CATransform3D newXform;
-  newXform.m11 = xform.m00;
-  newXform.m12 = xform.m01;
-  newXform.m13 = xform.m02;
-  newXform.m14 = xform.m03;
-  newXform.m21 = xform.m10;
-  newXform.m22 = xform.m11;
-  newXform.m23 = xform.m12;
-  newXform.m24 = xform.m13;
-  newXform.m31 = xform.m20;
-  newXform.m32 = xform.m21;
-  newXform.m33 = xform.m22;
-  newXform.m34 = xform.m23;
-  newXform.m41 = xform.m30;
-  newXform.m42 = xform.m31;
-  newXform.m43 = xform.m32;
-  newXform.m44 = xform.m33;
-  return newXform;
-}
-
-CATransform3D LOT_CATransform3DSlerpToTransform(CATransform3D fromXorm, CATransform3D toXform, CGFloat amount ) {
-  //  amount = MIN(MAX(0, amount), 1);
-  if (amount == 0 || amount == 1) {
-    return amount == 0 ? fromXorm : toXform;
-  }
-  GLKMatrix4 xform1 = LOT_GLKMatrix4FromCATransform(fromXorm);
-  GLKMatrix4 xform2 = LOT_GLKMatrix4FromCATransform(toXform);
-  GLKQuaternion q1 = GLKQuaternionMakeWithMatrix4(xform1);
-  GLKQuaternion q2 = GLKQuaternionMakeWithMatrix4(xform2);
-  GLKQuaternion r1 = GLKQuaternionSlerp(q1, q2, amount);
-  GLKVector4 t1 = GLKVector4Make(xform1.m30, xform1.m31, xform1.m32, xform1.m33);
-  GLKVector4 t2 = GLKVector4Make(xform2.m30, xform2.m31, xform2.m32, xform2.m33);
-  GLKVector4 r2 = GLKVector4Lerp(t1, t2, amount);
-  
-  GLKMatrix4 rX = GLKMatrix4MakeWithQuaternion(r1);
-  rX.m30 = r2.x;
-  rX.m31 = r2.y;
-  rX.m32 = r2.z;
-  return LOT_CATransform3DFromGLKMatrix4(rX);
-}
-
 CGFloat LOT_PointDistanceFromPoint(CGPoint point1, CGPoint point2) {
   CGFloat xDist = (point2.x - point1.x);
   CGFloat yDist = (point2.y - point1.y);
