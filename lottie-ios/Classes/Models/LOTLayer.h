@@ -36,7 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LOTLayer : NSObject
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
-              withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup;
+              withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup
+               withFramerate:(NSNumber *)framerate;
 
 @property (nonatomic, readonly) NSString *layerName;
 @property (nonatomic, readonly, nullable) NSString *referenceID;
@@ -46,6 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSNumber *startFrame;
 @property (nonatomic, readonly) NSNumber *inFrame;
 @property (nonatomic, readonly) NSNumber *outFrame;
+@property (nonatomic, readonly) NSNumber *timeStretch;
 @property (nonatomic, readonly) CGRect layerBounds;
 
 @property (nonatomic, readonly, nullable) NSArray<LOTShapeGroup *> *shapes;
@@ -57,6 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, nullable) LOTAsset *imageAsset;
 
 @property (nonatomic, readonly) LOTKeyframeGroup *opacity;
+@property (nonatomic, readonly, nullable) LOTKeyframeGroup *timeRemapping;
 @property (nonatomic, readonly) LOTKeyframeGroup *rotation;
 @property (nonatomic, readonly, nullable) LOTKeyframeGroup *position;
 

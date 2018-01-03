@@ -14,8 +14,8 @@
 - (LOTBezierPath *)pathForFrame:(NSNumber *)frame cacheLengths:(BOOL)cacheLengths {
   CGFloat progress = [self progressForFrame:frame];
   if (self.hasValueOverride) {
-    UIBezierPath *path = self.pathCallback.callback(self.leadingKeyframe.keyframeTime.floatValue, self.trailingKeyframe.keyframeTime.floatValue, progress, frame.floatValue);
-    return [LOTBezierPath pathWithCGPath:path.CGPath];
+    CGPathRef callBackPath = self.pathCallback.callback(self.leadingKeyframe.keyframeTime.floatValue, self.trailingKeyframe.keyframeTime.floatValue, progress, frame.floatValue);
+    return [LOTBezierPath pathWithCGPath:callBackPath];
   }
 
   LOTBezierPath *returnPath = [[LOTBezierPath alloc] init];

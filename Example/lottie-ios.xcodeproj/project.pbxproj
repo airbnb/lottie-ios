@@ -64,6 +64,7 @@
 		622F77091F2BE63100269858 /* X.json in Resources */ = {isa = PBXBuildFile; fileRef = 622F76EB1F2BE63100269858 /* X.json */; };
 		622F770A1F2BE63100269858 /* Y.json in Resources */ = {isa = PBXBuildFile; fileRef = 622F76EC1F2BE63100269858 /* Y.json */; };
 		622F770B1F2BE63100269858 /* Z.json in Resources */ = {isa = PBXBuildFile; fileRef = 622F76ED1F2BE63100269858 /* Z.json */; };
+		6257F31E1FFD65BC00DAE7B2 /* timeremap.json in Resources */ = {isa = PBXBuildFile; fileRef = 6257F31D1FFD65BB00DAE7B2 /* timeremap.json */; };
 		6289F3851FE4A3F500C10B3E /* setValueTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6289F3841FE4A3F500C10B3E /* setValueTest.json */; };
 		6289F3871FE877FC00C10B3E /* GeometryTransformTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6289F3861FE877FC00C10B3E /* GeometryTransformTest.json */; };
 		6289F3881FE877FC00C10B3E /* GeometryTransformTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6289F3861FE877FC00C10B3E /* GeometryTransformTest.json */; };
@@ -176,6 +177,7 @@
 		622F76EC1F2BE63100269858 /* Y.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Y.json; sourceTree = "<group>"; };
 		622F76ED1F2BE63100269858 /* Z.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Z.json; sourceTree = "<group>"; };
 		62569CB2461B12ABC97FCB96 /* lottie-ios.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "lottie-ios.podspec"; path = "../lottie-ios.podspec"; sourceTree = "<group>"; };
+		6257F31D1FFD65BB00DAE7B2 /* timeremap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = timeremap.json; sourceTree = "<group>"; };
 		6289F3841FE4A3F500C10B3E /* setValueTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = setValueTest.json; sourceTree = "<group>"; };
 		6289F3861FE877FC00C10B3E /* GeometryTransformTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GeometryTransformTest.json; sourceTree = "<group>"; };
 		6289F3891FE8784200C10B3E /* LAGeometryTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LAGeometryTest.m; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				622F76B91F2BE58100269858 /* LottieLogo1.json */,
 				622F76BB1F2BE58100269858 /* MotionCorpse-Jrcanest.json */,
 				622F76BC1F2BE58100269858 /* PinJump.json */,
+				6257F31D1FFD65BB00DAE7B2 /* timeremap.json */,
 				622F76BD1F2BE58100269858 /* TwitterHeart.json */,
 				622F76BF1F2BE58100269858 /* vcTransition1.json */,
 				622F76C01F2BE58100269858 /* vcTransition2.json */,
@@ -628,6 +631,7 @@
 				622F77021F2BE63100269858 /* Q.json in Resources */,
 				629EC5811F54C00B005B2C59 /* Switch.json in Resources */,
 				622F76FB1F2BE63100269858 /* J.json in Resources */,
+				6257F31E1FFD65BC00DAE7B2 /* timeremap.json in Resources */,
 				622F77081F2BE63100269858 /* W.json in Resources */,
 				622F76F61F2BE63100269858 /* E.json in Resources */,
 				622F76C41F2BE58100269858 /* IconTransitions.json in Resources */,

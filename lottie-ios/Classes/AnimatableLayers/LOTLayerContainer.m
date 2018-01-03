@@ -49,6 +49,7 @@
     } 
     self.actions = @{@"hidden" : [NSNull null], @"opacity" : [NSNull null], @"transform" : [NSNull null]};
     _wrapperLayer.actions = [self.actions copy];
+    _timeStretchFactor = @1;
     [self commonInitializeWith:layer inLayerGroup:layerGroup];
   }
   return self;
@@ -75,7 +76,10 @@
   
   _inFrame = [layer.inFrame copy];
   _outFrame = [layer.outFrame copy];
+
+  _timeStretchFactor = [layer.timeStretch copy];
   _transformInterpolator = [LOTTransformInterpolator transformForLayer:layer];
+
   if (layer.parentID) {
     NSNumber *parentID = layer.parentID;
     LOTTransformInterpolator *childInterpolator = _transformInterpolator;
@@ -233,7 +237,8 @@
 }
 
 - (void)displayWithFrame:(NSNumber *)frame forceUpdate:(BOOL)forceUpdate {
-  if (ENABLE_DEBUG_LOGGING) NSLog(@"View %@ Displaying Frame %@", self, frame);
+  NSNumber *newFrame = @(frame.floatValue / self.timeStretchFactor.floatValue);
+  if (ENABLE_DEBUG_LOGGING) NSLog(@"View %@ Displaying Frame %@, with local time %@", self, frame, newFrame);
   BOOL hidden = NO;
   if (_inFrame && _outFrame) {
     hidden = (frame.floatValue < _inFrame.floatValue ||
@@ -243,14 +248,14 @@
   if (hidden) {
     return;
   }
-  if (_opacityInterpolator && [_opacityInterpolator hasUpdateForFrame:frame]) {
-    self.opacity = [_opacityInterpolator floatValueForFrame:frame];
+  if (_opacityInterpolator && [_opacityInterpolator hasUpdateForFrame:newFrame]) {
+    self.opacity = [_opacityInterpolator floatValueForFrame:newFrame];
   }
-  if (_transformInterpolator && [_transformInterpolator hasUpdateForFrame:frame]) {
-    _wrapperLayer.transform = [_transformInterpolator transformForFrame:frame];
+  if (_transformInterpolator && [_transformInterpolator hasUpdateForFrame:newFrame]) {
+    _wrapperLayer.transform = [_transformInterpolator transformForFrame:newFrame];
   }
-  [_contentsGroup updateWithFrame:frame withModifierBlock:nil forceLocalUpdate:forceUpdate];
-  _maskLayer.currentFrame = frame;
+  [_contentsGroup updateWithFrame:newFrame withModifierBlock:nil forceLocalUpdate:forceUpdate];
+  _maskLayer.currentFrame = newFrame;
 }
 
 - (void)setViewportBounds:(CGRect)viewportBounds {

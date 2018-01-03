@@ -14,11 +14,13 @@
 #import "LOTAnimatorNode.h"
 #import "LOTRenderNode.h"
 #import "LOTRenderGroup.h"
+#import "LOTNumberInterpolator.h"
 
 @implementation LOTCompositionContainer {
   NSNumber *_frameOffset;
   CALayer *DEBUG_Center;
   NSMutableDictionary *_keypathCache;
+  LOTNumberInterpolator *_timeInterpolator;
 }
 
 - (instancetype)initWithModel:(LOTLayer *)layer
@@ -41,6 +43,11 @@
     } else {
       _frameOffset = @0;
     }
+
+    if (layer.timeRemapping) {
+      _timeInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:layer.timeRemapping.keyframes];
+    }
+
     [self initializeWithChildGroup:childLayerGroup withAssetGroup:assetGroup];
   }
   return self;
@@ -89,9 +96,12 @@
 - (void)displayWithFrame:(NSNumber *)frame forceUpdate:(BOOL)forceUpdate {
   if (ENABLE_DEBUG_LOGGING) NSLog(@"-------------------- Composition Displaying Frame %@ --------------------", frame);
   [super displayWithFrame:frame forceUpdate:forceUpdate];
-  NSNumber *childFrame = @(frame.floatValue - _frameOffset.floatValue);
+  NSNumber *newFrame = @((frame.floatValue  - _frameOffset.floatValue) / self.timeStretchFactor.floatValue);
+  if (_timeInterpolator) {
+    newFrame = @([_timeInterpolator floatValueForFrame:newFrame]);
+  }
   for (LOTLayerContainer *child in _childLayers) {
-    [child displayWithFrame:childFrame forceUpdate:forceUpdate];
+    [child displayWithFrame:newFrame forceUpdate:forceUpdate];
   }
   if (ENABLE_DEBUG_LOGGING) NSLog(@"-------------------- ------------------------------- --------------------");
   if (ENABLE_DEBUG_LOGGING) NSLog(@"-------------------- ------------------------------- --------------------");
