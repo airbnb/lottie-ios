@@ -121,7 +121,7 @@
 
 - (void)testFuzzyKeySearch_Precomp {
   NSArray *results = [self.animationView keysForKeyPath:[LOTKeypath keypathWithKeys:@"Precomp", @"**", nil]];
-  XCTAssertTrue((results.count == 33), @"Wrong number of results");
+  XCTAssertTrue((results.count == 33), @"Wrong number of results Sorry");
 }
 
 @end
