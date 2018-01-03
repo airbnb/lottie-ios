@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LOTPlatformCompat.h"
+#import <CoreGraphics/CoreGraphics.h>
 
 /*!
  @brief A block that is used to change a Color value at keytime, the block is called continuously for a keypath while the aniamtion plays.
@@ -19,14 +19,15 @@
  @param interpolatedProgress A value from 0-1 that represents the current progress between keyframes. It respects the keyframes current easing curves.
  @param currentFrame The current frame of the animation in the parent compositions time space.
  @return UIColor the color to set the keypath node for the current frame
-*/
-typedef UIColor * _Nonnull (^LOTColorValueCallbackBlock)(CGFloat startFrame,
-                                                         CGFloat endFrame,
-                                                         UIColor * _Nullable startColor,
-                                                         UIColor * _Nullable endColor,
-                                                         UIColor * _Nullable interpolatedColor,
-                                                         CGFloat interpolatedProgress,
-                                                         CGFloat currentFrame);
+ */
+typedef CGColorRef _Nonnull (^LOTColorValueCallbackBlock)(CGFloat startFrame,
+                                                          CGFloat endFrame,
+                                                          CGColorRef _Nullable startColor,
+                                                          CGColorRef _Nullable endColor,
+                                                          CGColorRef _Nullable interpolatedColor,
+                                                          CGFloat interpolatedProgress,
+                                                          CGFloat currentFrame);
+
 /*!
  @brief A block that is used to change a Number value at keytime, the block is called continuously for a keypath while the aniamtion plays.
  @param startFrame When the block is called, startFrame is the most recent keyframe for the keypath in relation to the current time.
@@ -91,10 +92,11 @@ typedef CGSize (^LOTSizeValueCallbackBlock)(CGFloat startFrame,
  @param currentFrame The current frame of the animation in the parent compositions time space.
  @return UIBezierPath the path to set the keypath node for the current frame.
  */
-typedef UIBezierPath * _Nonnull (^LOTPathValueCallbackBlock)(CGFloat startFrame,
-                                                             CGFloat endFrame,
-                                                             CGFloat interpolatedProgress,
-                                                             CGFloat currentFrame);
+typedef CGPathRef  _Nonnull (^LOTPathValueCallbackBlock)(CGFloat startFrame,
+                                                         CGFloat endFrame,
+                                                         CGFloat interpolatedProgress,
+                                                         CGFloat currentFrame);
+
 
 /*!
  @brief LOTValueCallback is a thin wrapper around a value block. It is not intended to be used directly. It has several child classes that are each associated with a value type that can be used to change animations at runtime.
@@ -162,6 +164,5 @@ typedef UIBezierPath * _Nonnull (^LOTPathValueCallbackBlock)(CGFloat startFrame,
 + (instancetype _Nonnull)withBlock:(LOTPathValueCallbackBlock _Nonnull)block;
 
 @property (nonatomic, copy, nonnull) LOTPathValueCallbackBlock callback;
-
 
 @end

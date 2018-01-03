@@ -10,7 +10,8 @@
 #import "LOTLayer.h"
 #import "LOTLayerGroup.h"
 #import "LOTKeypath.h"
-#import "LOTValueCallback.h"
+
+@class LOTValueCallback;
 
 @interface LOTLayerContainer : CALayer
 
@@ -19,9 +20,11 @@
 
 @property (nonatomic,  readonly, strong, nullable) NSString *layerName;
 @property (nonatomic, nullable) NSNumber *currentFrame;
+@property (nonatomic, readonly, nonnull) NSNumber *timeStretchFactor;
 @property (nonatomic, assign) CGRect viewportBounds;
 @property (nonatomic, readonly, nonnull) CALayer *wrapperLayer;
 @property (nonatomic, readonly, nonnull) NSDictionary *valueInterpolators;
+
 - (void)displayWithFrame:(NSNumber * _Nonnull)frame;
 - (void)displayWithFrame:(NSNumber * _Nonnull)frame forceUpdate:(BOOL)forceUpdate;
 

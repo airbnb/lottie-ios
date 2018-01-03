@@ -12,7 +12,7 @@
 
 @implementation LOTColorInterpolator
 
-- (UIColor *)colorForFrame:(NSNumber *)frame {
+- (CGColorRef)colorForFrame:(NSNumber *)frame {
   CGFloat progress = [self progressForFrame:frame];
   UIColor *returnColor;
 
@@ -24,10 +24,10 @@
     returnColor = [UIColor LOT_colorByLerpingFromColor:self.leadingKeyframe.colorValue toColor:self.trailingKeyframe.colorValue amount:progress];
   }
   if (self.hasValueOverride) {
-    return self.colorCallback.callback(self.leadingKeyframe.keyframeTime.floatValue, self.trailingKeyframe.keyframeTime.floatValue, self.leadingKeyframe.colorValue, self.trailingKeyframe.colorValue, returnColor, progress, frame.floatValue);
+    return self.colorCallback.callback(self.leadingKeyframe.keyframeTime.floatValue, self.trailingKeyframe.keyframeTime.floatValue, self.leadingKeyframe.colorValue.CGColor, self.trailingKeyframe.colorValue.CGColor, returnColor.CGColor, progress, frame.floatValue);
   }
 
-  return returnColor;
+  return returnColor.CGColor;
 }
 
 - (void)setValueCallback:(LOTValueCallback *)valueCallback {

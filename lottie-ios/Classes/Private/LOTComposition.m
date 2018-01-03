@@ -112,16 +112,17 @@
   
   NSArray *assetArray = jsonDictionary[@"assets"];
   if (assetArray.count) {
-    _assetGroup = [[LOTAssetGroup alloc] initWithJSON:assetArray withAssetBundle:bundle];
+    _assetGroup = [[LOTAssetGroup alloc] initWithJSON:assetArray withAssetBundle:bundle withFramerate:_framerate];
   }
   
   NSArray *layersJSON = jsonDictionary[@"layers"];
   if (layersJSON) {
     _layerGroup = [[LOTLayerGroup alloc] initWithLayerJSON:layersJSON
-                                            withAssetGroup:_assetGroup];
+                                            withAssetGroup:_assetGroup
+                                             withFramerate:_framerate];
   }
   
-  [_assetGroup finalizeInitialization];
+  [_assetGroup finalizeInitializationWithFramerate:_framerate];
 }
   
 - (void)setRootDirectory:(NSString *)rootDirectory {

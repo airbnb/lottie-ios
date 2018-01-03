@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LOTColorInterpolator : LOTValueInterpolator
 
-- (UIColor *)colorForFrame:(NSNumber *)frame;
+- (CGColorRef)colorForFrame:(NSNumber *)frame;
 
 @property (nonatomic, strong, nullable) LOTColorValueCallback *colorCallback;
 
