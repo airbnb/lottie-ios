@@ -113,7 +113,7 @@ typedef CGPathRef  _Nonnull (^LOTPathValueCallbackBlock)(CGFloat startFrame,
 
 @interface LOTColorValueCallback : LOTValueCallback
 
-+ (instancetype _Nonnull)withBlock:(LOTColorValueCallbackBlock _Nonnull )block;
++ (instancetype _Nonnull)withBlock:(LOTColorValueCallbackBlock _Nonnull )block NS_SWIFT_NAME(init(block:));
 
 @property (nonatomic, copy, nonnull) LOTColorValueCallbackBlock callback;
 
@@ -125,7 +125,7 @@ typedef CGPathRef  _Nonnull (^LOTPathValueCallbackBlock)(CGFloat startFrame,
 
 @interface LOTNumberValueCallback : LOTValueCallback
 
-+ (instancetype _Nonnull)withBlock:(LOTNumberValueCallbackBlock _Nonnull)block;
++ (instancetype _Nonnull)withBlock:(LOTNumberValueCallbackBlock _Nonnull)block NS_SWIFT_NAME(init(block:));
 
 @property (nonatomic, copy, nonnull) LOTNumberValueCallbackBlock callback;
 
@@ -137,7 +137,7 @@ typedef CGPathRef  _Nonnull (^LOTPathValueCallbackBlock)(CGFloat startFrame,
 
 @interface LOTPointValueCallback : LOTValueCallback
 
-+ (instancetype _Nonnull)withBlock:(LOTPointValueCallbackBlock _Nonnull)block;
++ (instancetype _Nonnull)withBlock:(LOTPointValueCallbackBlock _Nonnull)block NS_SWIFT_NAME(init(block:));
 
 @property (nonatomic, copy, nonnull) LOTPointValueCallbackBlock callback;
 
@@ -149,7 +149,7 @@ typedef CGPathRef  _Nonnull (^LOTPathValueCallbackBlock)(CGFloat startFrame,
 
 @interface LOTSizeValueCallback : LOTValueCallback
 
-+ (instancetype _Nonnull)withBlock:(LOTSizeValueCallbackBlock _Nonnull)block;
++ (instancetype _Nonnull)withBlock:(LOTSizeValueCallbackBlock _Nonnull)block NS_SWIFT_NAME(init(block:));
 
 @property (nonatomic, copy, nonnull) LOTSizeValueCallbackBlock callback;
 
@@ -161,7 +161,7 @@ typedef CGPathRef  _Nonnull (^LOTPathValueCallbackBlock)(CGFloat startFrame,
 
 @interface LOTPathValueCallback : LOTValueCallback
 
-+ (instancetype _Nonnull)withBlock:(LOTPathValueCallbackBlock _Nonnull)block;
++ (instancetype _Nonnull)withBlock:(LOTPathValueCallbackBlock _Nonnull)block NS_SWIFT_NAME(init(block:));
 
 @property (nonatomic, copy, nonnull) LOTPathValueCallbackBlock callback;
 

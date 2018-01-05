@@ -68,7 +68,9 @@
                           @{@"name" : @"Animated Transitions Demo",
                             @"vc" : @"AnimationTransitionViewController"},
                           @{@"name" : @"Animated UIControls Demo",
-                            @"vc" : @"LAControlsViewController"}];
+                            @"vc" : @"LAControlsViewController"},
+                          @{@"name" : @"Download Progress Demo",
+                            @"vc" : @"LADownloadTestViewController"}];
 }
 
 - (void)_playLottieAnimation {

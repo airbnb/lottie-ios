@@ -75,7 +75,7 @@
   if (scale) {
     _scale = [[LOTKeyframeGroup alloc] initWithData:scale];
     [_scale remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
-      return LOT_RemapValue(inValue, 0, 100, 0, 1);
+      return LOT_RemapValue(inValue, -100, 100, -1, 1);
     }];
   }
 }

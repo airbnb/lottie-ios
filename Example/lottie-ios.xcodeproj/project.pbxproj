@@ -65,6 +65,7 @@
 		622F770A1F2BE63100269858 /* Y.json in Resources */ = {isa = PBXBuildFile; fileRef = 622F76EC1F2BE63100269858 /* Y.json */; };
 		622F770B1F2BE63100269858 /* Z.json in Resources */ = {isa = PBXBuildFile; fileRef = 622F76ED1F2BE63100269858 /* Z.json */; };
 		6257F31E1FFD65BC00DAE7B2 /* timeremap.json in Resources */ = {isa = PBXBuildFile; fileRef = 6257F31D1FFD65BB00DAE7B2 /* timeremap.json */; };
+		6257F3261FFDAC9300DAE7B2 /* Boat_Loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 6257F3251FFDAC9200DAE7B2 /* Boat_Loader.json */; };
 		6289F3851FE4A3F500C10B3E /* setValueTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6289F3841FE4A3F500C10B3E /* setValueTest.json */; };
 		6289F3871FE877FC00C10B3E /* GeometryTransformTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6289F3861FE877FC00C10B3E /* GeometryTransformTest.json */; };
 		6289F3881FE877FC00C10B3E /* GeometryTransformTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6289F3861FE877FC00C10B3E /* GeometryTransformTest.json */; };
@@ -83,6 +84,7 @@
 		62B254731E3A8D3B0035A842 /* AnimatedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B254711E3A8D3B0035A842 /* AnimatedTextField.m */; };
 		62E27B4F1F3132A50098420E /* LAMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E27B4E1F3132A50098420E /* LAMainView.m */; };
 		62E27B501F31334A0098420E /* LottieLogo1.json in Resources */ = {isa = PBXBuildFile; fileRef = 622F76B91F2BE58100269858 /* LottieLogo1.json */; };
+		62E46FFD1FFEB641000C97B5 /* LADownloadTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E46FFC1FFEB641000C97B5 /* LADownloadTestViewController.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		B8E8748514D4FA9C683B1711 /* Pods_lottie_ios_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EBDFEA18138A27DD5A89337 /* Pods_lottie_ios_Tests.framework */; };
@@ -178,6 +180,7 @@
 		622F76ED1F2BE63100269858 /* Z.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Z.json; sourceTree = "<group>"; };
 		62569CB2461B12ABC97FCB96 /* lottie-ios.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "lottie-ios.podspec"; path = "../lottie-ios.podspec"; sourceTree = "<group>"; };
 		6257F31D1FFD65BB00DAE7B2 /* timeremap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = timeremap.json; sourceTree = "<group>"; };
+		6257F3251FFDAC9200DAE7B2 /* Boat_Loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Boat_Loader.json; sourceTree = "<group>"; };
 		6289F3841FE4A3F500C10B3E /* setValueTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = setValueTest.json; sourceTree = "<group>"; };
 		6289F3861FE877FC00C10B3E /* GeometryTransformTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GeometryTransformTest.json; sourceTree = "<group>"; };
 		6289F3891FE8784200C10B3E /* LAGeometryTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LAGeometryTest.m; sourceTree = "<group>"; };
@@ -201,6 +204,8 @@
 		62B254711E3A8D3B0035A842 /* AnimatedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedTextField.m; sourceTree = "<group>"; };
 		62E27B4D1F3132A50098420E /* LAMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAMainView.h; sourceTree = "<group>"; };
 		62E27B4E1F3132A50098420E /* LAMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LAMainView.m; sourceTree = "<group>"; };
+		62E46FFB1FFEB641000C97B5 /* LADownloadTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LADownloadTestViewController.h; sourceTree = "<group>"; };
+		62E46FFC1FFEB641000C97B5 /* LADownloadTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LADownloadTestViewController.m; sourceTree = "<group>"; };
 		687661C57667AB2C5371F7BB /* Pods-Lottie-Example-MacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lottie-Example-MacOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lottie-Example-MacOS/Pods-Lottie-Example-MacOS.release.xcconfig"; sourceTree = "<group>"; };
 		6BC326E3835099034E161393 /* Pods-Lottie-Example-MacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lottie-Example-MacOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lottie-Example-MacOS/Pods-Lottie-Example-MacOS.debug.xcconfig"; sourceTree = "<group>"; };
 		6DC4D284D6109D58EE331F86 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -324,6 +329,8 @@
 				62B254631E3A8D310035A842 /* LottieRootViewController.m */,
 				629EC57D1F54BFF1005B2C59 /* LAControlsViewController.h */,
 				629EC57E1F54BFF1005B2C59 /* LAControlsViewController.m */,
+				62E46FFB1FFEB641000C97B5 /* LADownloadTestViewController.h */,
+				62E46FFC1FFEB641000C97B5 /* LADownloadTestViewController.m */,
 				62B254741E3A8D400035A842 /* Animation Explorer */,
 				62B254751E3A8D500035A842 /* Transition Demo */,
 				62B254761E3A8D620035A842 /* Typing Animation Demo */,
@@ -368,6 +375,7 @@
 				62A62AE71FE2FF2A001A2C2F /* keypathTest.json */,
 				622F76B61F2BE58100269858 /* HamburgerArrow.json */,
 				6289F3861FE877FC00C10B3E /* GeometryTransformTest.json */,
+				6257F3251FFDAC9200DAE7B2 /* Boat_Loader.json */,
 				622F76B71F2BE58100269858 /* IconTransitions.json */,
 				622F76B81F2BE58100269858 /* LottieLogo1_masked.json */,
 				6289F3841FE4A3F500C10B3E /* setValueTest.json */,
@@ -618,6 +626,7 @@
 				622F76CD1F2BE58100269858 /* vcTransition2.json in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				622F77091F2BE63100269858 /* X.json in Resources */,
+				6257F3261FFDAC9300DAE7B2 /* Boat_Loader.json in Resources */,
 				622F76F41F2BE63100269858 /* Comma.json in Resources */,
 				622F76FD1F2BE63100269858 /* L.json in Resources */,
 				622F76C81F2BE58100269858 /* MotionCorpse-Jrcanest.json in Resources */,
@@ -832,6 +841,7 @@
 				62B2546B1E3A8D310035A842 /* AnimationExplorerViewController.m in Sources */,
 				62B2546D1E3A8D310035A842 /* JSONExplorerViewController.m in Sources */,
 				62B254721E3A8D3B0035A842 /* TypingDemoViewController.m in Sources */,
+				62E46FFD1FFEB641000C97B5 /* LADownloadTestViewController.m in Sources */,
 				62B254731E3A8D3B0035A842 /* AnimatedTextField.m in Sources */,
 				62B2546C1E3A8D310035A842 /* AnimationTransitionViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

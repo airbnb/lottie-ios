@@ -155,7 +155,7 @@
 }
 
 - (CALayer *)_layerForKeypath:(nonnull LOTKeypath *)keypath {
-  LOTAnimatorNode *node = _keypathCache[keypath.absoluteKeypath];
+  id node = _keypathCache[keypath.absoluteKeypath];
   if (node == nil) {
     [self keysForKeyPath:keypath];
     node = _keypathCache[keypath.absoluteKeypath];
@@ -163,6 +163,9 @@
   if (node == nil) {
     NSLog(@"LOTComposition could not find layer for keypath:%@", keypath.absoluteKeypath);
     return nil;
+  }
+  if ([node isKindOfClass:[CALayer class]]) {
+    return (CALayer *)node;
   }
   if (![node isKindOfClass:[LOTRenderNode class]]) {
     NSLog(@"LOTComposition: Keypath return non-layer node:%@ ", keypath.absoluteKeypath);

@@ -268,6 +268,27 @@
 }
 
 - (void)searchNodesForKeypath:(LOTKeypath * _Nonnull)keypath {
+  if (_contentsGroup == nil && [keypath pushKey:self.layerName]) {
+    // Matches self.
+    if ([keypath pushKey:@"Transform"]) {
+      // Is a transform node, check  interpolators
+      LOTValueInterpolator *interpolator = _valueInterpolators[keypath.currentKey];
+      if (interpolator) {
+        // We have a match!
+        [keypath pushKey:keypath.currentKey];
+        [keypath addSearchResultForCurrentPath:_wrapperLayer];
+        [keypath popKey];
+      }
+      if (keypath.endOfKeypath) {
+        [keypath addSearchResultForCurrentPath:_wrapperLayer];
+      }
+      [keypath popKey];
+    }
+    if (keypath.endOfKeypath) {
+      [keypath addSearchResultForCurrentPath:_wrapperLayer];
+    }
+    [keypath popKey];
+  }
   [_contentsGroup searchNodesForKeypath:keypath];
 }
 
