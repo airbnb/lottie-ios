@@ -165,7 +165,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
 - (void)_restoreState {
   if (_isAnimationPlaying) {
     _isAnimationPlaying = NO;
-    if (_playRangeStartFrame && _playRangeEndProgress) {
+    if (_playRangeStartFrame && _playRangeEndFrame) {
       [self playFromFrame:_playRangeStartFrame toFrame:_playRangeEndFrame withCompletion:self.completionBlock];
     } else if (_playRangeEndProgress != _playRangeStartProgress) {
       [self playFromProgress:_playRangeStartProgress toProgress:_playRangeEndProgress withCompletion:self.completionBlock];
