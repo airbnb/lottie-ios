@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "LOTValueInterpolator.h"
-#import "LOTValueCallback.h"
+#import "LOTValueDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @interface LOTNumberInterpolator : LOTValueInterpolator
 
 - (CGFloat)floatValueForFrame:(NSNumber *)frame;
 
-@property (nonatomic, strong, nullable) LOTNumberValueCallback *numberCallback;
+@property (nonatomic, weak, nullable) id<LOTNumberValueDelegate> delegate;
 
 @end
 

@@ -7,7 +7,7 @@
 //
 
 #import "LOTValueInterpolator.h"
-#import "LOTValueCallback.h"
+#import "LOTValueDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (CGPoint)pointValueForFrame:(NSNumber *)frame;
 
-@property (nonatomic, strong, nullable) LOTPointValueCallback *pointCallback;
+@property (nonatomic, weak, nullable) id<LOTPointValueDelegate> delegate;
 
 @end
 

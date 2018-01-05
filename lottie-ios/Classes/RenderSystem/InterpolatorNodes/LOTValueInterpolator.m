@@ -26,7 +26,7 @@
 }
 
 - (BOOL)hasUpdateForFrame:(NSNumber *)frame {
-  if (self.hasValueOverride) {
+  if (self.hasDelegateOverride) {
     return YES;
   }
   /*
@@ -160,7 +160,7 @@
   return progession;
 }
 
-- (void)setValueCallback:(LOTValueCallback *)valueCallback {
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate {
   NSAssert((NO), @"Interpolator does not support value callbacks");
 }
 

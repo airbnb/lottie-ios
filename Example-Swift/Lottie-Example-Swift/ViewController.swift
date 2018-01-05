@@ -37,6 +37,7 @@ class ViewController: UIViewController, URLSessionDownloadDelegate {
     let boatEndPoint = boatAnimation!.convert(CGPoint(x:view.bounds.midX, y:-view.bounds.midY), toKeypathLayer: LOTKeypath(string: "Boat"))
     let boatStartPoint = boatAnimation!.convert(CGPoint(x:view.bounds.midX, y:view.bounds.midY), toKeypathLayer: LOTKeypath(string: "Boat"))
     let diff = boatStartPoint.y - boatEndPoint.y
+
     let pointCallBack: LOTPointValueCallback  = LOTPointValueCallback { [weak self] (startFrame, endFrame, startPoint, endPoint, interpolatedPoint, interpolatedProgress, currentFrame) -> CGPoint in
       let y = interpolatedPoint.y - (CGFloat(self!.downloadProgress) * diff)
       return CGPoint(x: interpolatedPoint.x, y: y)

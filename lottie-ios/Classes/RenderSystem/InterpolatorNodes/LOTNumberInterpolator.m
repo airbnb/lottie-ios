@@ -21,20 +21,26 @@
   } else {
     returnValue = LOT_RemapValue(progress, 0, 1, self.leadingKeyframe.floatValue, self.trailingKeyframe.floatValue);
   }
-  if (self.hasValueOverride) {
-    return self.numberCallback.callback(self.leadingKeyframe.keyframeTime.floatValue, self.trailingKeyframe.keyframeTime.floatValue, self.leadingKeyframe.floatValue, self.trailingKeyframe.floatValue, returnValue, progress, frame.floatValue);
+  if (self.hasDelegateOverride) {
+    return [self.delegate floatValueForFrame:frame.floatValue
+                               startKeyframe:self.leadingKeyframe.keyframeTime.floatValue
+                                 endKeyframe:self.trailingKeyframe.keyframeTime.floatValue
+                        interpolatedProgress:progress
+                                  startValue:self.leadingKeyframe.floatValue
+                                    endValue:self.trailingKeyframe.floatValue
+                                currentValue:returnValue];
   }
 
   return returnValue;
 }
 
-- (BOOL)hasValueOverride {
-  return self.numberCallback != nil;
+- (BOOL)hasDelegateOverride {
+  return self.delegate != nil;
 }
 
-- (void)setValueCallback:(LOTValueCallback *)valueCallback {
-  NSAssert(([valueCallback isKindOfClass:[LOTNumberValueCallback class]]), @"Number Interpolator set with incorrect callback type. Expected LOTNumberValueCallback");
-  self.numberCallback = (LOTNumberValueCallback*)valueCallback;
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate {
+  NSAssert(([delegate conformsToProtocol:@protocol(LOTNumberValueDelegate)]), @"Number Interpolator set with incorrect callback type. Expected LOTNumberValueDelegate");
+  self.delegate = (id<LOTNumberValueDelegate>)delegate;
 }
 
 @end

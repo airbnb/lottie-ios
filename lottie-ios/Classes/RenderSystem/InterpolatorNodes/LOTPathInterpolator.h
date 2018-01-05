@@ -9,7 +9,7 @@
 #import "LOTValueInterpolator.h"
 #import "LOTPlatformCompat.h"
 #import "LOTBezierPath.h"
-#import "LOTValueCallback.h"
+#import "LOTValueDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (LOTBezierPath *)pathForFrame:(NSNumber *)frame cacheLengths:(BOOL)cacheLengths;
 
-@property (nonatomic, strong, nullable) LOTPathValueCallback *pathCallback;
+@property (nonatomic, weak, nullable) id<LOTPathValueDelegate> delegate;
 
 @end
 

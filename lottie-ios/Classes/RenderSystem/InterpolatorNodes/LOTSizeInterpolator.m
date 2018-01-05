@@ -23,19 +23,24 @@
     returnSize = CGSizeMake(LOT_RemapValue(progress, 0, 1, self.leadingKeyframe.sizeValue.width, self.trailingKeyframe.sizeValue.width),
                             LOT_RemapValue(progress, 0, 1, self.leadingKeyframe.sizeValue.height, self.trailingKeyframe.sizeValue.height));
   }
-  if (self.hasValueOverride) {
-    return self.sizeCallback.callback(self.leadingKeyframe.keyframeTime.floatValue, self.trailingKeyframe.keyframeTime.floatValue, self.leadingKeyframe.sizeValue, self.trailingKeyframe.sizeValue, returnSize, progress, frame.floatValue);
+  if (self.hasDelegateOverride) {
+    return [self.delegate sizeForFrame:frame.floatValue
+                         startKeyframe:self.leadingKeyframe.keyframeTime.floatValue
+                           endKeyframe:self.trailingKeyframe.keyframeTime.floatValue
+                  interpolatedProgress:progress startSize:self.leadingKeyframe.sizeValue
+                               endSize:self.trailingKeyframe.sizeValue
+                           currentSize:returnSize];
   }
   return returnSize;
 }
 
-- (BOOL)hasValueOverride {
-  return self.sizeCallback != nil;
+- (BOOL)hasDelegateOverride {
+  return self.delegate != nil;
 }
 
-- (void)setValueCallback:(LOTValueCallback *)valueCallback {
-  NSAssert(([valueCallback isKindOfClass:[LOTSizeValueCallback class]]), @"Size Interpolator set with incorrect callback type. Expected LOTSizeValueCallback");
-  self.sizeCallback = (LOTSizeValueCallback*)valueCallback;
+- (void)setValueDelegate:(id<LOTValueDelegate>)delegate {
+  NSAssert(([delegate conformsToProtocol:@protocol(LOTSizeValueDelegate)]), @"Size Interpolator set with incorrect callback type. Expected LOTSizeValueDelegate");
+  self.delegate = (id<LOTSizeValueDelegate>)delegate;
 }
 
 @end

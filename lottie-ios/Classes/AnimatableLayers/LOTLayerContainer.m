@@ -292,8 +292,8 @@
   [_contentsGroup searchNodesForKeypath:keypath];
 }
 
-- (void)setValueCallback:(nonnull LOTValueCallback *)callbackBlock
-              forKeypath:(nonnull LOTKeypath *)keypath {
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate
+              forKeypath:(LOTKeypath * _Nonnull)keypath {
   if ([keypath pushKey:self.layerName]) {
     // Matches self.
     if ([keypath pushKey:@"Transform"]) {
@@ -301,13 +301,13 @@
       LOTValueInterpolator *interpolator = _valueInterpolators[keypath.currentKey];
       if (interpolator) {
         // We have a match!
-        [interpolator setValueCallback:callbackBlock];
+        [interpolator setValueDelegate:delegate];
       }
       [keypath popKey];
     }
     [keypath popKey];
   }
-  [_contentsGroup setValueCallback:callbackBlock forKeypath:keypath];
+  [_contentsGroup setValueDelegate:delegate forKeypath:keypath];
 }
 
 @end
