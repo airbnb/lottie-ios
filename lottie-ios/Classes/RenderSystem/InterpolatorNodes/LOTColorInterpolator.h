@@ -8,7 +8,7 @@
 
 #import "LOTValueInterpolator.h"
 #import "LOTPlatformCompat.h"
-#import "LOTValueCallback.h"
+#import "LOTValueDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (CGColorRef)colorForFrame:(NSNumber *)frame;
 
-@property (nonatomic, strong, nullable) LOTColorValueCallback *colorCallback;
+@property (nonatomic, weak, nullable) id<LOTColorValueDelegate> delegate;
 
 @end
 

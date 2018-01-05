@@ -412,9 +412,9 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 # pragma mark - External Methods - Interactive Controls
 
-- (void)setValueCallback:(nonnull LOTValueCallback *)callbackBlock
-              forKeypath:(nonnull LOTKeypath *)keypath {
-  [_compContainer setValueCallback:callbackBlock forKeypath:keypath];
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate
+              forKeypath:(LOTKeypath * _Nonnull)keypath {
+  [_compContainer setValueDelegate:delegate forKeypath:keypath];
   [self _layoutAndForceUpdate];
 }
 

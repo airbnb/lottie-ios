@@ -129,15 +129,15 @@
   }
 }
 
-- (void)setValueCallback:(nonnull LOTValueCallback *)callbackBlock
-              forKeypath:(nonnull LOTKeypath *)keypath {
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate
+              forKeypath:(LOTKeypath * _Nonnull)keypath {
   if (self.layerName != nil) {
-    [super setValueCallback:callbackBlock forKeypath:keypath];
+    [super setValueDelegate:delegate forKeypath:keypath];
   }
   if (self.layerName == nil ||
       [keypath pushKey:self.layerName]) {
     for (LOTLayerContainer *child in _childLayers) {
-      [child setValueCallback:callbackBlock forKeypath:keypath];
+      [child setValueDelegate:delegate forKeypath:keypath];
     }
     if (self.layerName != nil) {
       [keypath popKey];

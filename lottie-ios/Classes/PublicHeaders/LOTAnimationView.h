@@ -10,7 +10,7 @@
 #import "LOTAnimationView_Compat.h"
 #import "LOTComposition.h"
 #import "LOTKeypath.h"
-#import "LOTValueCallback.h"
+#import "LOTValueDelegate.h"
 
 typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 
@@ -130,23 +130,24 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 - (void)logHierarchyKeypaths;
 
 /*!
- @brief Sets a LOTValueCallback for each node returned from the LOTKeypath search. The LOTValueCallback block is called every frame as the animation plays to override animation values.
+ @brief Sets a LOTValueDelegate for each animation property returned from the LOTKeypath search. LOTKeypath matches views inside of LOTAnimationView to their After Effects counterparts. The LOTValueDelegate is called every frame as the animation plays to override animation values. A delegate can be any object that conforms to the LOTValueDelegate protocol, or one of the prebuilt delegate classes found in LOTBlockCallback, LOTInterpolatorCallback, and LOTValueCallback.
 
  @discussion
- Example that sets an animated stroke to Red.
+ Example that sets an animated stroke to Red using a LOTColorValueCallback.
  @code
  LOTKeypath *keypath = [LOTKeypath keypathWithKeys:@"Layer 1", @"Ellipse 1", @"Stroke 1", @"Color", nil];
- LOTColorValueCallback *colorCallback = [LOTColorValueCallback withBlock:^UIColor * _Nonnull(CGFloat startFrame, CGFloat endFrame, UIColor * _Nullable startColor, UIColor * _Nullable endColor, UIColor * _Nullable interpolatedColor, CGFloat interpolatedProgress, CGFloat currentFrame) {
- return [UIColor redColor];
- }];
+ LOTColorValueCallback *colorCallback = [LOTColorBlockCallback withColor:[UIColor redColor]];
  [animationView setValueCallback:colorCallback forKeypath:keypath];
  @endcode
- See the documentation for LOTValueCallback to see how to create LOTValueCallbacks. Acceptable types are LOTColorValueCallback, LOTNumberValueCallback, LOTPointValueCallback, LOTSizeValueCallback, LOTPathValueCallback.
+
+ See the documentation for LOTValueDelegate to see how to create LOTValueCallbacks. A delegate can be any object that conforms to the LOTValueDelegate protocol, or one of the prebuilt delegate classes found in LOTBlockCallback, LOTInterpolatorCallback, and LOTValueCallback.
 
  See the documentation for LOTKeypath to learn more about how to create keypaths.
+
+ NOTE: The delegate is weakly retained. Be sure that the creator of a delgate is retained.
  */
-- (void)setValueCallback:(nonnull LOTValueCallback *)callback
-              forKeypath:(nonnull LOTKeypath *)keypath;
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate
+              forKeypath:(LOTKeypath * _Nonnull)keypath;
 
 /*!
  @brief returns the string representation of every keypath matching the LOTKeypath search.
@@ -194,7 +195,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 #endif
 
 /*!
- @brief Sets the keyframe value for a specific After Effects property at a given time. NOTE: Deprecated. Use setValueCallback:forKeypath:
+ @brief Sets the keyframe value for a specific After Effects property at a given time. NOTE: Deprecated. Use setValueDelegate:forKeypath:
  @discussion NOTE: Deprecated and non functioning. Use setValueCallback:forKeypath:
  @param value Value is the color, point, or number object that should be set at given time
  @param keypath NSString . separate keypath The Keypath is a dot seperated key path that specifies the location of the key to be set from the After Effects file. This will begin with the Layer Name. EG "Layer 1.Shape 1.Fill 1.Color"

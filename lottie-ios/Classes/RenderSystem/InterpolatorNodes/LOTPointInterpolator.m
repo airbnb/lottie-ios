@@ -27,19 +27,25 @@
   } else {
     returnPoint = LOT_PointInLine(self.leadingKeyframe.pointValue, self.trailingKeyframe.pointValue, progress);
   }
-  if (self.hasValueOverride) {
-    return self.pointCallback.callback(self.leadingKeyframe.keyframeTime.floatValue, self.trailingKeyframe.keyframeTime.floatValue, self.leadingKeyframe.pointValue, self.trailingKeyframe.pointValue, returnPoint, progress, frame.floatValue);
+  if (self.hasDelegateOverride) {
+    return [self.delegate pointForFrame:frame.floatValue
+                          startKeyframe:self.leadingKeyframe.keyframeTime.floatValue
+                            endKeyframe:self.trailingKeyframe.keyframeTime.floatValue
+                   interpolatedProgress:progress
+                             startPoint:self.leadingKeyframe.pointValue
+                               endPoint:self.trailingKeyframe.pointValue
+                           currentPoint:returnPoint];
   }
   return returnPoint;
 }
 
-- (BOOL)hasValueOverride {
-  return self.pointCallback != nil;
+- (BOOL)hasDelegateOverride {
+  return self.delegate != nil;
 }
 
-- (void)setValueCallback:(LOTValueCallback *)valueCallback {
-  NSAssert(([valueCallback isKindOfClass:[LOTPointValueCallback class]]), @"Point Interpolator set with incorrect callback type. Expected LOTPointValueCallback");
-  self.pointCallback = (LOTPointValueCallback*)valueCallback;
+- (void)setValueDelegate:(id<LOTValueDelegate>)delegate {
+  NSAssert(([delegate conformsToProtocol:@protocol(LOTPointValueDelegate)]), @"Point Interpolator set with incorrect callback type. Expected LOTPointValueDelegate");
+  self.delegate = (id<LOTPointValueDelegate>)delegate;
 }
 
 @end

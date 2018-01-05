@@ -10,6 +10,7 @@
 #import "LOTLayer.h"
 #import "LOTLayerGroup.h"
 #import "LOTKeypath.h"
+#import "LOTValueDelegate.h"
 
 @class LOTValueCallback;
 
@@ -30,7 +31,7 @@
 
 - (void)searchNodesForKeypath:(LOTKeypath * _Nonnull)keypath;
 
-- (void)setValueCallback:(nonnull LOTValueCallback *)callbackBlock
-              forKeypath:(nonnull LOTKeypath *)keypath;
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate
+              forKeypath:(LOTKeypath * _Nonnull)keypath;
 
 @end

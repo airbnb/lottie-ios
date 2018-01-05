@@ -23,20 +23,26 @@
   } else {
     returnColor = [UIColor LOT_colorByLerpingFromColor:self.leadingKeyframe.colorValue toColor:self.trailingKeyframe.colorValue amount:progress];
   }
-  if (self.hasValueOverride) {
-    return self.colorCallback.callback(self.leadingKeyframe.keyframeTime.floatValue, self.trailingKeyframe.keyframeTime.floatValue, self.leadingKeyframe.colorValue.CGColor, self.trailingKeyframe.colorValue.CGColor, returnColor.CGColor, progress, frame.floatValue);
+  if (self.hasDelegateOverride) {
+    return [self.delegate colorForFrame:frame.floatValue
+                          startKeyframe:self.leadingKeyframe.keyframeTime.floatValue
+                            endKeyframe:self.trailingKeyframe.keyframeTime.floatValue
+                   interpolatedProgress:progress
+                             startColor:self.leadingKeyframe.colorValue.CGColor
+                               endColor:self.trailingKeyframe.colorValue.CGColor
+                           currentColor:returnColor.CGColor];
   }
 
   return returnColor.CGColor;
 }
 
-- (void)setValueCallback:(LOTValueCallback *)valueCallback {
-  NSAssert(([valueCallback isKindOfClass:[LOTColorValueCallback class]]), @"Color Interpolator set with incorrect callback type. Expected LOTColorValueCallback");
-  self.colorCallback = (LOTColorValueCallback *)valueCallback;
+- (void)setValueDelegate:(id<LOTValueDelegate>)delegate {
+  NSAssert(([delegate conformsToProtocol:@protocol(LOTColorValueDelegate)]), @"Color Interpolator set with incorrect callback type. Expected LOTColorValueDelegate");
+  self.delegate = (id<LOTColorValueDelegate>)delegate;
 }
 
-- (BOOL)hasValueOverride {
-  return self.colorCallback != nil;
+- (BOOL)hasDelegateOverride {
+  return self.delegate != nil;
 }
 
 @end

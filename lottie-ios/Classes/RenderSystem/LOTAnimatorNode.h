@@ -10,7 +10,7 @@
 #import "LOTPlatformCompat.h"
 #import "LOTBezierPath.h"
 #import "LOTKeypath.h"
-#import "LOTValueCallback.h"
+#import "LOTValueDelegate.h"
 
 extern NSInteger indentation_level;
 @interface LOTAnimatorNode : NSObject
@@ -57,7 +57,7 @@ extern NSInteger indentation_level;
 
 - (void)searchNodesForKeypath:(LOTKeypath * _Nonnull)keypath;
 
-- (void)setValueCallback:(nonnull LOTValueCallback *)callbackBlock
-              forKeypath:(nonnull LOTKeypath *)keypath;
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate
+              forKeypath:(LOTKeypath * _Nonnull)keypath;
 
 @end

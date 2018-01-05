@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LOTKeyframe.h"
-#import "LOTValueCallback.h"
+#import "LOTValueDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,9 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak, nullable) LOTKeyframe *leadingKeyframe;
 @property (nonatomic, weak, nullable) LOTKeyframe *trailingKeyframe;
-@property (nonatomic, readonly) BOOL hasValueOverride;
+@property (nonatomic, readonly) BOOL hasDelegateOverride;
 
-- (void)setValueCallback:(LOTValueCallback *)valueCallback;
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate;
 
 - (BOOL)hasUpdateForFrame:(NSNumber *)frame;
 - (CGFloat)progressForFrame:(NSNumber *)frame;

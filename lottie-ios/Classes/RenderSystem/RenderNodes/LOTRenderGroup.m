@@ -209,8 +209,8 @@
   }
 }
 
-- (void)setValueCallback:(nonnull LOTValueCallback *)callbackBlock
-              forKeypath:(nonnull LOTKeypath *)keypath {
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate
+              forKeypath:(LOTKeypath * _Nonnull)keypath {
   if ([keypath pushKey:self.keyname]) {
     // Matches self. Dig deeper.
     // Check interpolators
@@ -219,19 +219,19 @@
       LOTValueInterpolator *interpolator = self.valueInterpolators[keypath.currentKey];
       if (interpolator) {
         // We have a match!
-        [interpolator setValueCallback:callbackBlock];
+        [interpolator setValueDelegate:delegate];
       }
       [keypath popKey];
     }
 
     // Check child nodes
-    [_rootNode setValueCallback:callbackBlock forKeypath:keypath];
+    [_rootNode setValueDelegate:delegate forKeypath:keypath];
 
     [keypath popKey];
   }
 
   // Check upstream
-  [self.inputNode setValueCallback:callbackBlock forKeypath:keypath];
+  [self.inputNode setValueDelegate:delegate forKeypath:keypath];
 }
 
 @end
