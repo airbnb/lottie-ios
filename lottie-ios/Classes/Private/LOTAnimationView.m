@@ -275,11 +275,6 @@ static NSString * const kCompContainerAnimationKey = @"play";
     _isAnimationPlaying = YES;
     return;
   }
-  if (!self.window) {
-    _shouldRestoreStateWhenAttachedToWindow = YES;
-    _completionBlockToRestoreWhenAttachedToWindow = self.completionBlock;
-    self.completionBlock = nil;
-  }
 
   BOOL playingForward = ((_animationSpeed > 0) && (toEndFrame.floatValue > fromStartFrame.floatValue))
     || ((_animationSpeed < 0) && (fromStartFrame.floatValue > toEndFrame.floatValue));
@@ -306,22 +301,27 @@ static NSString * const kCompContainerAnimationKey = @"play";
     skipProgress = rightFrameValue - currentProgress;
   }
   NSTimeInterval offset = MAX(0, skipProgress) / _sceneModel.framerate.floatValue;
-
-  NSTimeInterval duration = (ABS(toEndFrame.floatValue - fromStartFrame.floatValue) / _sceneModel.framerate.floatValue);
-  CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"currentFrame"];
-  animation.speed = _animationSpeed;
-  animation.fromValue = fromStartFrame;
-  animation.toValue = toEndFrame;
-  animation.duration = duration;
-  animation.fillMode = kCAFillModeBoth;
-  animation.repeatCount = _loopAnimation ? HUGE_VALF : 1;
-  animation.autoreverses = _autoReverseAnimation;
-  animation.delegate = self;
-  animation.removedOnCompletion = NO;
-  if (offset != 0) {
-    animation.beginTime = CACurrentMediaTime() - (offset * 1 / _animationSpeed);
+  if (!self.window) {
+    _shouldRestoreStateWhenAttachedToWindow = YES;
+    _completionBlockToRestoreWhenAttachedToWindow = self.completionBlock;
+    self.completionBlock = nil;
+  } else {
+    NSTimeInterval duration = (ABS(toEndFrame.floatValue - fromStartFrame.floatValue) / _sceneModel.framerate.floatValue);
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"currentFrame"];
+    animation.speed = _animationSpeed;
+    animation.fromValue = fromStartFrame;
+    animation.toValue = toEndFrame;
+    animation.duration = duration;
+    animation.fillMode = kCAFillModeBoth;
+    animation.repeatCount = _loopAnimation ? HUGE_VALF : 1;
+    animation.autoreverses = _autoReverseAnimation;
+    animation.delegate = self;
+    animation.removedOnCompletion = NO;
+    if (offset != 0) {
+      animation.beginTime = CACurrentMediaTime() - (offset * 1 / _animationSpeed);
+    }
+    [_compContainer addAnimation:animation forKey:kCompContainerAnimationKey];
   }
-  [_compContainer addAnimation:animation forKey:kCompContainerAnimationKey];
   _isAnimationPlaying = YES;
 }
 
@@ -394,6 +394,10 @@ static NSString * const kCompContainerAnimationKey = @"play";
     [self setProgressWithFrame:frame callCompletionIfNecessary:NO];
     [self playFromFrame:_playRangeStartFrame toFrame:_playRangeEndFrame withCompletion:self.completionBlock];
   }
+}
+
+- (void)forceDrawingUpdate {
+  [self _layoutAndForceUpdate];
 }
 
 # pragma mark - External Methods - Cache

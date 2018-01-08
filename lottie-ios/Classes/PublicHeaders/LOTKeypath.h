@@ -11,19 +11,22 @@
 extern NSString * _Nonnull const kLOTKeypathEnd;
 
 /*!
- @brief LOTKeypath is an object that describes a keypath search for nodes in the animation JSON.
+ @brief LOTKeypath is an object that describes a keypath search for nodes in the animation JSON. LOTKeypath matches views inside of LOTAnimationView to their After Effects counterparts.
 
  @discussion
  LOTKeypath is used with LOTAnimationView to set animation properties dynamically at runtime, to add or mask subviews, converting geometry, and numerous other functions.
 
  LOTKeypath can describe a specific object, or can use wildcards for fuzzy matching of objects. Acceptable wildcards are either "*" (star) or "**" (double star). Single star will search a single depth for the next object, double star will search any depth.
 
+ Read More at http://airbnb.io/lottie/ios/dynamic.html
+ 
  EG:
   @"Layer.Shape Group.Stroke 1.Color"
   Represents a specific color node on a specific stroke.
 
   @"**.Stroke 1.Color"
   Represents the color node for every "Stroke 1" in the animation scene.
+
  */
 
 @interface LOTKeypath : NSObject
