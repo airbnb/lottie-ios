@@ -126,6 +126,9 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// Sets progress of animation to a specific frame. If the animation is playing it will stop and the completion block will be called.
 - (void)setProgressWithFrame:(nonnull NSNumber *)currentFrame;
 
+/// Forces a layout and drawing update for the current frame.
+- (void)forceDrawingUpdate;
+
 /// Logs all child keypaths
 - (void)logHierarchyKeypaths;
 
@@ -145,8 +148,9 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
  See the documentation for LOTKeypath to learn more about how to create keypaths.
 
  NOTE: The delegate is weakly retained. Be sure that the creator of a delgate is retained.
+ Read More at http://airbnb.io/lottie/ios/dynamic.html
  */
-- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegates
               forKeypath:(LOTKeypath * _Nonnull)keypath;
 
 /*!

@@ -13,7 +13,7 @@ class ViewController: UIViewController, URLSessionDownloadDelegate {
 
   private var downloadTask: URLSessionDownloadTask?
   private var boatAnimation: LOTAnimationView?
-  var downloadProgress: Float = 0.0
+  var positionInterpolator: LOTPointInterpolatorCallback?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -34,18 +34,21 @@ class ViewController: UIViewController, URLSessionDownloadDelegate {
     button.addTarget(self, action: #selector(startDownload(button:)), for: .touchUpInside)
     view.addSubview(button)
 
-    let boatEndPoint = boatAnimation!.convert(CGPoint(x:view.bounds.midX, y:-view.bounds.midY), toKeypathLayer: LOTKeypath(string: "Boat"))
-    let boatStartPoint = boatAnimation!.convert(CGPoint(x:view.bounds.midX, y:view.bounds.midY), toKeypathLayer: LOTKeypath(string: "Boat"))
-    let diff = boatStartPoint.y - boatEndPoint.y
+    // The center of the screen, where the boat will start
+    let screenCenter = CGPoint(x:view.bounds.midX, y:view.bounds.midY)
+    // The center one screen height above the screen. Where the boat will end up when the download completes
+    let offscreenCenter = CGPoint(x:view.bounds.midX, y:-view.bounds.midY)
 
-    let pointCallBack: LOTPointValueCallback  = LOTPointValueCallback { [weak self] (startFrame, endFrame, startPoint, endPoint, interpolatedPoint, interpolatedProgress, currentFrame) -> CGPoint in
-      let y = interpolatedPoint.y - (CGFloat(self!.downloadProgress) * diff)
-      return CGPoint(x: interpolatedPoint.x, y: y)
-    }
+    // Convert points into animation view coordinate space.
+    let boatStartPoint = boatAnimation!.convert(screenCenter, toKeypathLayer: LOTKeypath(string: "Boat"))
+    let boatEndPoint = boatAnimation!.convert(offscreenCenter, toKeypathLayer: LOTKeypath(string: "Boat"))
 
-    boatAnimation!.setValueCallback(pointCallBack, for: LOTKeypath(string: "Boat.Transform.Position"))
+    // Set up out interpolator, to be driven by the download callback
+    positionInterpolator = LOTPointInterpolatorCallback(from: boatStartPoint, to: boatEndPoint)
+    // Set the interpolator on the animation view for the Boat.Transform.Position keypath.
+    boatAnimation!.setValueDelegate(positionInterpolator!, for:LOTKeypath(string: "Boat.Transform.Position"))
 
-    //Play the first portion of the animation on loop until the animation finishes.
+    //Play the first portion of the animation on loop until the download finishes.
     boatAnimation!.loopAnimation = true
     boatAnimation!.play(fromProgress: 0,
                         toProgress: 0.5,
@@ -67,20 +70,21 @@ class ViewController: UIViewController, URLSessionDownloadDelegate {
   }
   
   func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-    print("Download finished")
+    // Pause the animation and disable looping.
     boatAnimation!.pause()
     boatAnimation!.loopAnimation = false
+    // Speed up animation to finish out the current loop.
     boatAnimation!.animationSpeed = 4
-
+    
     boatAnimation!.play(toProgress: 0.5) {[weak self] (_) in
+      // At this time the animation is at the halfway point. Reset sped to 1 and play through the completion animation.
       self?.boatAnimation!.animationSpeed = 1
       self?.boatAnimation!.play(toProgress: 1, withCompletion: nil)
     }
   }
 
   func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-    downloadProgress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
+    positionInterpolator?.currentProgress = CGFloat(totalBytesWritten) / CGFloat(totalBytesExpectedToWrite)
   }
 
 }
-

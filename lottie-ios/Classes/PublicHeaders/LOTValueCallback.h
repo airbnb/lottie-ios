@@ -17,7 +17,7 @@
 
 @interface LOTColorValueCallback : NSObject <LOTColorValueDelegate>
 
-+ (instancetype _Nonnull)withCGColor:(CGColorRef _Nonnull)color;
++ (instancetype _Nonnull)withCGColor:(CGColorRef _Nonnull)color NS_SWIFT_NAME(init(color:));
 
 @property (nonatomic, nonnull) CGColorRef colorValue;
 
@@ -30,7 +30,7 @@
 
 @interface LOTNumberValueCallback : NSObject <LOTNumberValueDelegate>
 
-+ (instancetype _Nonnull)withFloatValue:(CGFloat)numberValue;
++ (instancetype _Nonnull)withFloatValue:(CGFloat)numberValue NS_SWIFT_NAME(init(number:));
 
 @property (nonatomic, assign) CGFloat numberValue;
 
@@ -56,7 +56,7 @@
 
 @interface LOTSizeValueCallback : NSObject <LOTSizeValueDelegate>
 
-+ (instancetype _Nonnull)withPointValue:(CGSize)sizeValue;
++ (instancetype _Nonnull)withPointValue:(CGSize)sizeValue NS_SWIFT_NAME(init(size:));
 
 @property (nonatomic, assign) CGSize sizeValue;
 
@@ -69,7 +69,7 @@
 
 @interface LOTPathValueCallback : NSObject <LOTPathValueDelegate>
 
-+ (instancetype _Nonnull)withCGPath:(CGPathRef _Nonnull)path;
++ (instancetype _Nonnull)withCGPath:(CGPathRef _Nonnull)path NS_SWIFT_NAME(init(path:));
 
 @property (nonatomic, nonnull) CGPathRef pathValue;
 
