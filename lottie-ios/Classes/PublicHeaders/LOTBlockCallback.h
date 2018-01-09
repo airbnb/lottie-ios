@@ -22,8 +22,8 @@
  @return CGColorRef the color to set the keypath node for the current frame
  */
 typedef CGColorRef _Nonnull (^LOTColorValueCallbackBlock)(CGFloat currentFrame,
-                                                          CGFloat startFrame,
-                                                          CGFloat endFrame,
+                                                          CGFloat startKeyFrame,
+                                                          CGFloat endKeyFrame,
                                                           CGFloat interpolatedProgress,
                                                           CGColorRef _Nullable startColor,
                                                           CGColorRef _Nullable endColor,
@@ -41,8 +41,8 @@ typedef CGColorRef _Nonnull (^LOTColorValueCallbackBlock)(CGFloat currentFrame,
  @return CGFloat the number to set the keypath node for the current frame
  */
 typedef CGFloat (^LOTNumberValueCallbackBlock)(CGFloat currentFrame,
-                                               CGFloat startFrame,
-                                               CGFloat endFrame,
+                                               CGFloat startKeyFrame,
+                                               CGFloat endKeyFrame,
                                                CGFloat interpolatedProgress,
                                                CGFloat startValue,
                                                CGFloat endValue,
@@ -59,8 +59,8 @@ typedef CGFloat (^LOTNumberValueCallbackBlock)(CGFloat currentFrame,
  @return CGPoint the point to set the keypath node for the current frame.
  */
 typedef CGPoint (^LOTPointValueCallbackBlock)(CGFloat currentFrame,
-                                              CGFloat startFrame,
-                                              CGFloat endFrame,
+                                              CGFloat startKeyFrame,
+                                              CGFloat endKeyFrame,
                                               CGFloat interpolatedProgress,
                                               CGPoint startPoint,
                                               CGPoint endPoint,
@@ -78,8 +78,8 @@ typedef CGPoint (^LOTPointValueCallbackBlock)(CGFloat currentFrame,
  @return CGSize the size to set the keypath node for the current frame.
  */
 typedef CGSize (^LOTSizeValueCallbackBlock)(CGFloat currentFrame,
-                                            CGFloat startFrame,
-                                            CGFloat endFrame,
+                                            CGFloat startKeyFrame,
+                                            CGFloat endKeyFrame,
                                             CGFloat interpolatedProgress,
                                             CGSize startSize,
                                             CGSize endSize,
@@ -94,8 +94,8 @@ typedef CGSize (^LOTSizeValueCallbackBlock)(CGFloat currentFrame,
  @return UIBezierPath the path to set the keypath node for the current frame.
  */
 typedef CGPathRef  _Nonnull (^LOTPathValueCallbackBlock)(CGFloat currentFrame,
-                                                         CGFloat startFrame,
-                                                         CGFloat endFrame,
+                                                         CGFloat startKeyFrame,
+                                                         CGFloat endKeyFrame,
                                                          CGFloat interpolatedProgress);
 
 /*!
