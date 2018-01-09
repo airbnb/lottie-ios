@@ -7,12 +7,15 @@
 //
 
 #import "LOTValueInterpolator.h"
+#import "LOTValueDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LOTPointInterpolator : LOTValueInterpolator
 
 - (CGPoint)pointValueForFrame:(NSNumber *)frame;
+
+@property (nonatomic, weak, nullable) id<LOTPointValueDelegate> delegate;
 
 @end
 

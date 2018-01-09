@@ -2,8 +2,7 @@
 #import "LOTPlatformCompat.h"
 
 #import <CoreGraphics/CoreGraphics.h>
-#import <GLKit/GLKMathTypes.h>
-#import <GLKit/GLKit.h>
+
 //
 // Core Graphics Geometry Additions
 //
@@ -81,12 +80,6 @@ CGRect LOT_RectSetHeight(CGRect rect, CGFloat height);
 
 CGFloat LOT_PointDistanceFromPoint(CGPoint point1, CGPoint point2);
 CGFloat LOT_DegreesToRadians(CGFloat degrees);
-
-GLKMatrix4 LOT_GLKMatrix4FromCATransform(CATransform3D xform);
-
-CATransform3D LOT_CATransform3DFromGLKMatrix4(GLKMatrix4 xform);
-
-CATransform3D LOT_CATransform3DSlerpToTransform(CATransform3D fromXorm, CATransform3D toXform, CGFloat amount );
 
 CGFloat LOT_RemapValue(CGFloat value, CGFloat low1, CGFloat high1, CGFloat low2, CGFloat high2 );
 CGPoint LOT_PointByLerpingPoints(CGPoint point1, CGPoint point2, CGFloat value);

@@ -25,62 +25,10 @@
   return self;
 }
 
-- (id)keyframeDataForValue:(id)value  {
-  NSLog(@"%s: Unsupported Keyframe Data: %@", __PRETTY_FUNCTION__, value);
-  return nil;
-}
-
-// Change keyframe data
-- (BOOL)setValue:(id)value atFrame:(NSNumber *)frame {
-  id data = [self keyframeDataForValue:value];
-  if (data == nil) {
-    return NO;
-  }
-  if (frame == nil) {
-    frame = @0;
-  }
-  [self updateKeyframeSpanForFrame:frame];
-  if (frame.floatValue == self.leadingKeyframe.keyframeTime.floatValue) {
-    // Is leading frame, replace
-    LOTKeyframe *newKeyframe = [self.leadingKeyframe copyWithData:data];
-    NSMutableArray *keyframes = [NSMutableArray arrayWithArray:_keyframes];
-    NSUInteger idx = [keyframes indexOfObject:self.leadingKeyframe];
-    [keyframes replaceObjectAtIndex:idx withObject:newKeyframe];
-    self.leadingKeyframe = newKeyframe;
-    _keyframes = keyframes;
-  } else if (frame.floatValue == self.trailingKeyframe.keyframeTime.floatValue) {
-    // Is trailing frame
-    LOTKeyframe *newKeyframe = [self.trailingKeyframe copyWithData:data];
-    NSMutableArray *keyframes = [NSMutableArray arrayWithArray:_keyframes];
-    NSUInteger idx = [keyframes indexOfObject:self.trailingKeyframe];
-    [keyframes replaceObjectAtIndex:idx withObject:newKeyframe];
-    self.trailingKeyframe = newKeyframe;
-    _keyframes = keyframes;
-  } else {
-    // Is between leading and trailing. Either can be nil.
-    // For now added keyframes will default to linear interpolation.
-    // TODO BW Add smart bezier interpolation
-    NSMutableDictionary *keyframeDict = [NSMutableDictionary dictionary];
-    keyframeDict[@"s"] = data;
-    keyframeDict[@"t"] = frame;
-    LOTKeyframe *keyframe = [[LOTKeyframe alloc] initWithKeyframe:keyframeDict];
-    NSMutableArray *newKeyframes = [NSMutableArray arrayWithArray:_keyframes];
-    if (self.trailingKeyframe == nil ||
-        self.trailingKeyframe == newKeyframes.lastObject) {
-      [newKeyframes addObject:keyframe];
-    } else {
-      NSInteger idx = [newKeyframes indexOfObject:self.trailingKeyframe];
-      [newKeyframes insertObject:keyframe atIndex:idx];
-    }
-    _keyframes = newKeyframes;
-    self.leadingKeyframe = nil;
-    self.trailingKeyframe = nil;
-  }
-  
-  return YES;
-}
-
 - (BOOL)hasUpdateForFrame:(NSNumber *)frame {
+  if (self.hasDelegateOverride) {
+    return YES;
+  }
   /*
    Cases we dont update keyframe
    if time is in span and leading keyframe is hold
@@ -210,6 +158,10 @@
   }
   
   return progession;
+}
+
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate {
+  NSAssert((NO), @"Interpolator does not support value callbacks");
 }
 
 @end

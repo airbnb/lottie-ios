@@ -1,0 +1,46 @@
+{
+  "name": "lottie-ios",
+  "version": "2.1.5",
+  "summary": "Used to natively render vector animations exported from After Effects.",
+  "description": "Lottie is a mobile library for Android and iOS that parses Adobe After Effects animations exported as json with bodymovin and renders the vector animations natively on mobile and through React Native!\n\nFor the first time, designers can create and ship beautiful animations without an enginineer painstakingly recreating it be hand. Since the animation is backed by JSON they are extremely small in size but can be large in complexity! Animations can be played, resized, looped, sped up, slowed down, and even interactively scrubbed.",
+  "homepage": "https://github.com/airbnb/lottie-ios",
+  "license": {
+    "type": "Apache",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Brandon Withrow": "buba447@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/airbnb/lottie-ios.git",
+    "tag": "2.1.5"
+  },
+  "platforms": {
+    "ios": "8.0",
+    "osx": "10.10",
+    "tvos": "9.0"
+  },
+  "source_files": "lottie-ios/Classes/**/*",
+  "osx": {
+    "exclude_files": [
+      "lottie-ios/Classes/PublicHeaders/LOTAnimationTransitionController.h",
+      "lottie-ios/Classes/Private/LOTAnimationTransitionController.m",
+      "lottie-ios/Classes/PublicHeaders/LOTCacheProvider.h",
+      "lottie-ios/Classes/Private/LOTCacheProvider.m",
+      "lottie-ios/Classes/PublicHeaders/LOTAnimatedSwitch.h",
+      "lottie-ios/Classes/Private/LOTAnimatedSwitch.m",
+      "lottie-ios/Classes/PublicHeaders/LOTAnimatedControl.h",
+      "lottie-ios/Classes/Private/LOTAnimatedControl.m"
+    ],
+    "frameworks": [
+      "AppKit",
+      "CoreVideo"
+    ]
+  },
+  "public_header_files": "lottie-ios/Classes/PublicHeaders/*.h",
+  "ios": {
+    "frameworks": "UIKit"
+  },
+  "module_name": "Lottie",
+  "header_dir": "Lottie"
+}

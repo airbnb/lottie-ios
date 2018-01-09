@@ -14,22 +14,33 @@
 
 - (CGSize)sizeValueForFrame:(NSNumber *)frame {
   CGFloat progress = [self progressForFrame:frame];
+  CGSize returnSize;
   if (progress == 0) {
-    return self.leadingKeyframe.sizeValue;
+    returnSize = self.leadingKeyframe.sizeValue;
+  }else if (progress == 1) {
+    returnSize = self.trailingKeyframe.sizeValue;
+  } else {
+    returnSize = CGSizeMake(LOT_RemapValue(progress, 0, 1, self.leadingKeyframe.sizeValue.width, self.trailingKeyframe.sizeValue.width),
+                            LOT_RemapValue(progress, 0, 1, self.leadingKeyframe.sizeValue.height, self.trailingKeyframe.sizeValue.height));
   }
-  if (progress == 1) {
-    return self.trailingKeyframe.sizeValue;
+  if (self.hasDelegateOverride) {
+    return [self.delegate sizeForFrame:frame.floatValue
+                         startKeyframe:self.leadingKeyframe.keyframeTime.floatValue
+                           endKeyframe:self.trailingKeyframe.keyframeTime.floatValue
+                  interpolatedProgress:progress startSize:self.leadingKeyframe.sizeValue
+                               endSize:self.trailingKeyframe.sizeValue
+                           currentSize:returnSize];
   }
-  return CGSizeMake(LOT_RemapValue(progress, 0, 1, self.leadingKeyframe.sizeValue.width, self.trailingKeyframe.sizeValue.width),
-                    LOT_RemapValue(progress, 0, 1, self.leadingKeyframe.sizeValue.height, self.trailingKeyframe.sizeValue.height));
+  return returnSize;
 }
 
-- (id)keyframeDataForValue:(id)value {
-  if ([value isKindOfClass:[NSValue class]]) {
-    CGSize sizeValue = [(NSValue *)value CGSizeValue];
-    return @[@(sizeValue.width), @(sizeValue.height)];
-  }
-  return nil;
+- (BOOL)hasDelegateOverride {
+  return self.delegate != nil;
+}
+
+- (void)setValueDelegate:(id<LOTValueDelegate>)delegate {
+  NSAssert(([delegate conformsToProtocol:@protocol(LOTSizeValueDelegate)]), @"Size Interpolator set with incorrect callback type. Expected LOTSizeValueDelegate");
+  self.delegate = (id<LOTSizeValueDelegate>)delegate;
 }
 
 @end

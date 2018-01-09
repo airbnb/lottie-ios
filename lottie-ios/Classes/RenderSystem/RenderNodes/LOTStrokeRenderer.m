@@ -104,7 +104,7 @@
 
 - (void)performLocalUpdate {
   self.outputLayer.lineDashPhase = [_dashOffsetInterpolator floatValueForFrame:self.currentFrame];
-  self.outputLayer.strokeColor = [_colorInterpolator colorForFrame:self.currentFrame].CGColor;
+  self.outputLayer.strokeColor = [_colorInterpolator colorForFrame:self.currentFrame];
   self.outputLayer.lineWidth = [_widthInterpolator floatValueForFrame:self.currentFrame];
   self.outputLayer.opacity = [_opacityInterpolator floatValueForFrame:self.currentFrame];
 }
