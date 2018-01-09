@@ -27,7 +27,6 @@
   CALayer *DEBUG_Center;
   LOTRenderGroup *_contentsGroup;
   LOTMaskContainer *_maskLayer;
-  NSDictionary *_valueInterpolators;
 }
 
 @dynamic currentFrame;
@@ -50,6 +49,7 @@
     } 
     self.actions = @{@"hidden" : [NSNull null], @"opacity" : [NSNull null], @"transform" : [NSNull null]};
     _wrapperLayer.actions = [self.actions copy];
+    _timeStretchFactor = @1;
     [self commonInitializeWith:layer inLayerGroup:layerGroup];
   }
   return self;
@@ -76,7 +76,10 @@
   
   _inFrame = [layer.inFrame copy];
   _outFrame = [layer.outFrame copy];
+
+  _timeStretchFactor = [layer.timeStretch copy];
   _transformInterpolator = [LOTTransformInterpolator transformForLayer:layer];
+
   if (layer.parentID) {
     NSNumber *parentID = layer.parentID;
     LOTTransformInterpolator *childInterpolator = _transformInterpolator;
@@ -102,6 +105,19 @@
   }
   
   NSMutableDictionary *interpolators = [NSMutableDictionary dictionary];
+  interpolators[@"Opacity"] = _opacityInterpolator;
+  interpolators[@"Anchor Point"] = _transformInterpolator.anchorInterpolator;
+  interpolators[@"Scale"] = _transformInterpolator.scaleInterpolator;
+  interpolators[@"Rotation"] = _transformInterpolator.rotationInterpolator;
+  if (_transformInterpolator.positionXInterpolator &&
+      _transformInterpolator.positionYInterpolator) {
+    interpolators[@"X Position"] = _transformInterpolator.positionXInterpolator;
+    interpolators[@"Y Position"] = _transformInterpolator.positionYInterpolator;
+  } else if (_transformInterpolator.positionInterpolator) {
+    interpolators[@"Position"] = _transformInterpolator.positionInterpolator;
+  }
+
+  // Deprecated
   interpolators[@"Transform.Opacity"] = _opacityInterpolator;
   interpolators[@"Transform.Anchor Point"] = _transformInterpolator.anchorInterpolator;
   interpolators[@"Transform.Scale"] = _transformInterpolator.scaleInterpolator;
@@ -221,7 +237,8 @@
 }
 
 - (void)displayWithFrame:(NSNumber *)frame forceUpdate:(BOOL)forceUpdate {
-  if (ENABLE_DEBUG_LOGGING) NSLog(@"View %@ Displaying Frame %@", self, frame);
+  NSNumber *newFrame = @(frame.floatValue / self.timeStretchFactor.floatValue);
+  if (ENABLE_DEBUG_LOGGING) NSLog(@"View %@ Displaying Frame %@, with local time %@", self, frame, newFrame);
   BOOL hidden = NO;
   if (_inFrame && _outFrame) {
     hidden = (frame.floatValue < _inFrame.floatValue ||
@@ -231,62 +248,14 @@
   if (hidden) {
     return;
   }
-  if (_opacityInterpolator && [_opacityInterpolator hasUpdateForFrame:frame]) {
-    self.opacity = [_opacityInterpolator floatValueForFrame:frame];
+  if (_opacityInterpolator && [_opacityInterpolator hasUpdateForFrame:newFrame]) {
+    self.opacity = [_opacityInterpolator floatValueForFrame:newFrame];
   }
-  if (_transformInterpolator && [_transformInterpolator hasUpdateForFrame:frame]) {
-    _wrapperLayer.transform = [_transformInterpolator transformForFrame:frame];
+  if (_transformInterpolator && [_transformInterpolator hasUpdateForFrame:newFrame]) {
+    _wrapperLayer.transform = [_transformInterpolator transformForFrame:newFrame];
   }
-  [_contentsGroup updateWithFrame:frame withModifierBlock:nil forceLocalUpdate:forceUpdate];
-  _maskLayer.currentFrame = frame;
-}
-
-- (void)addAndMaskSublayer:(nonnull CALayer *)subLayer {
-  [_wrapperLayer addSublayer:subLayer];
-}
-
-- (BOOL)setValue:(nonnull id)value
-      forKeypath:(nonnull NSString *)keypath
-         atFrame:(nullable NSNumber *)frame {
-  NSArray *components = [keypath componentsSeparatedByString:@"."];
-  NSString *firstKey = components.firstObject;
-  if ([firstKey isEqualToString:self.layerName]) {
-    NSString *nextPath = [keypath stringByReplacingCharactersInRange:NSMakeRange(0, firstKey.length + 1) withString:@""];
-    LOTValueInterpolator *interpolator = _valueInterpolators[nextPath];
-    if (interpolator) {
-      return [interpolator setValue:value atFrame:frame];
-    } else {
-      return [_contentsGroup setValue:value forKeyAtPath:keypath forFrame:frame];
-    }
-  } else {
-    NSArray *transFormComponents = [keypath componentsSeparatedByString:@".Transform."];
-    if (transFormComponents.count == 2) {
-      // Is a layer level transform. Check if it applies to a parent transform.
-      NSString *layerName = transFormComponents.firstObject;
-      NSString *attribute = transFormComponents.lastObject;
-      LOTTransformInterpolator *parentTransform = _transformInterpolator.inputNode;
-      while (parentTransform) {
-        if ([parentTransform.parentKeyName isEqualToString:layerName]) {
-          if ([attribute isEqualToString:@"Anchor Point"]) {
-            [parentTransform.anchorInterpolator setValue:value atFrame:frame];
-          } else if ([attribute isEqualToString:@"Scale"]) {
-            [parentTransform.scaleInterpolator setValue:value atFrame:frame];
-          } else if ([attribute isEqualToString:@"Rotation"]) {
-            [parentTransform.rotationInterpolator setValue:value atFrame:frame];
-          } else if ([attribute isEqualToString:@"X Position"]) {
-            [parentTransform.positionXInterpolator setValue:value atFrame:frame];
-          } else if ([attribute isEqualToString:@"Y Position"]) {
-            [parentTransform.positionYInterpolator setValue:value atFrame:frame];
-          } else if ([attribute isEqualToString:@"Position"]) {
-            [parentTransform.positionInterpolator setValue:value atFrame:frame];
-          }
-          parentTransform = nil;
-        }
-        parentTransform = parentTransform.inputNode;
-      }
-    }
-  }
-  return NO;
+  [_contentsGroup updateWithFrame:newFrame withModifierBlock:nil forceLocalUpdate:forceUpdate];
+  _maskLayer.currentFrame = newFrame;
 }
 
 - (void)setViewportBounds:(CGRect)viewportBounds {
@@ -298,8 +267,47 @@
   }
 }
 
-- (void)logHierarchyKeypathsWithParent:(NSString * _Nullable)parent {
-  [_contentsGroup logHierarchyKeypathsWithParent:parent];
+- (void)searchNodesForKeypath:(LOTKeypath * _Nonnull)keypath {
+  if (_contentsGroup == nil && [keypath pushKey:self.layerName]) {
+    // Matches self.
+    if ([keypath pushKey:@"Transform"]) {
+      // Is a transform node, check  interpolators
+      LOTValueInterpolator *interpolator = _valueInterpolators[keypath.currentKey];
+      if (interpolator) {
+        // We have a match!
+        [keypath pushKey:keypath.currentKey];
+        [keypath addSearchResultForCurrentPath:_wrapperLayer];
+        [keypath popKey];
+      }
+      if (keypath.endOfKeypath) {
+        [keypath addSearchResultForCurrentPath:_wrapperLayer];
+      }
+      [keypath popKey];
+    }
+    if (keypath.endOfKeypath) {
+      [keypath addSearchResultForCurrentPath:_wrapperLayer];
+    }
+    [keypath popKey];
+  }
+  [_contentsGroup searchNodesForKeypath:keypath];
+}
+
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate
+              forKeypath:(LOTKeypath * _Nonnull)keypath {
+  if ([keypath pushKey:self.layerName]) {
+    // Matches self.
+    if ([keypath pushKey:@"Transform"]) {
+      // Is a transform node, check  interpolators
+      LOTValueInterpolator *interpolator = _valueInterpolators[keypath.currentKey];
+      if (interpolator) {
+        // We have a match!
+        [interpolator setValueDelegate:delegate];
+      }
+      [keypath popKey];
+    }
+    [keypath popKey];
+  }
+  [_contentsGroup setValueDelegate:delegate forKeypath:keypath];
 }
 
 @end

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "LOTPlatformCompat.h"
 #import "LOTBezierPath.h"
+#import "LOTKeypath.h"
+#import "LOTValueDelegate.h"
 
 extern NSInteger indentation_level;
 @interface LOTAnimatorNode : NSObject
@@ -51,18 +53,11 @@ extern NSInteger indentation_level;
 /// Rebuild all outputs for the node. This is called after upstream updates have been performed.
 - (void)rebuildOutputs;
 
-/// Traverses children untill keypath is found and attempts to set the keypath to the value.
-- (BOOL)setValue:(nonnull id)value
-    forKeyAtPath:(nonnull NSString *)keypath
-        forFrame:(nullable NSNumber *)frame;
-
-/// Sets the keyframe to the value, to be overwritten by subclasses
-- (BOOL)setInterpolatorValue:(nonnull id)value
-                      forKey:(nonnull NSString *)key
-                    forFrame:(nullable NSNumber *)frame;
-
 - (void)logString:(NSString *_Nonnull)string;
 
-- (void)logHierarchyKeypathsWithParent:(NSString * _Nullable)parent;
+- (void)searchNodesForKeypath:(LOTKeypath * _Nonnull)keypath;
+
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate
+              forKeypath:(LOTKeypath * _Nonnull)keypath;
 
 @end

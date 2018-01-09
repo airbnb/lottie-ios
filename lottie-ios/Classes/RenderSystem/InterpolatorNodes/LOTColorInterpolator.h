@@ -8,12 +8,15 @@
 
 #import "LOTValueInterpolator.h"
 #import "LOTPlatformCompat.h"
+#import "LOTValueDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LOTColorInterpolator : LOTValueInterpolator
 
-- (UIColor *)colorForFrame:(NSNumber *)frame;
+- (CGColorRef)colorForFrame:(NSNumber *)frame;
+
+@property (nonatomic, weak, nullable) id<LOTColorValueDelegate> delegate;
 
 @end
 

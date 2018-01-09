@@ -10,6 +10,7 @@
 #import "CGGeometry+LOTAdditions.h"
 
 typedef struct LOT_Subpath LOT_Subpath;
+typedef void(^LOTBezierPathEnumerationHandler)(const CGPathElement *element);
 
 struct LOT_Subpath {
   CGPathElementType type;
@@ -35,6 +36,12 @@ struct LOT_Subpath {
 }
 
 // MARK - Lifecycle
+
++ (instancetype)pathWithCGPath:(CGPathRef)path {
+  LOTBezierPath *returnPath = [LOTBezierPath newPath];
+  [returnPath setWithCGPath:path];
+  return returnPath;
+}
 
 + (instancetype)newPath {
   return [[LOTBezierPath alloc] init];
@@ -281,8 +288,7 @@ struct LOT_Subpath {
   CGFloat totalLength = _length;
   
   [self _clearPathData];
-  
-  
+
   LOT_Subpath *subpath = headSubpath_;
   headSubpath_ = NULL;
   tailSubpath_ = NULL;
@@ -416,4 +422,50 @@ struct LOT_Subpath {
   }
 }
 
+#pragma mark - From CGPath
+
+- (void)setWithCGPath:(CGPathRef)path {
+  [self lot_enumeratePath:path elementsUsingBlock:^(const CGPathElement *element) {
+    switch (element->type) {
+      case kCGPathElementMoveToPoint: {
+        CGPoint point = element ->points[0];
+        [self LOT_moveToPoint:point];
+        break;
+      }
+      case kCGPathElementAddLineToPoint: {
+        CGPoint point = element ->points[0];
+        [self LOT_addLineToPoint:point];
+        break;
+      }
+      case kCGPathElementAddQuadCurveToPoint: {
+        break;
+      }
+      case kCGPathElementAddCurveToPoint: {
+        CGPoint point1 = element->points[0];
+        CGPoint point2 = element->points[1];
+        CGPoint point3 = element->points[2];
+        [self LOT_addCurveToPoint:point3 controlPoint1:point1 controlPoint2:point2];
+        break;
+      }
+      case kCGPathElementCloseSubpath: {
+        [self LOT_closePath];
+        break;
+      }
+    }
+  }];
+}
+
+- (void)lot_enumeratePath:(CGPathRef)cgPath elementsUsingBlock:(LOTBezierPathEnumerationHandler)handler {
+  void CGPathEnumerationCallback(void *info, const CGPathElement *element);
+  CGPathApply(cgPath, (__bridge void * _Nullable)(handler), CGPathEnumerationCallback);
+}
+
 @end
+
+void CGPathEnumerationCallback(void *info, const CGPathElement *element)
+{
+  LOTBezierPathEnumerationHandler handler = (__bridge  LOTBezierPathEnumerationHandler)(info);
+  if (handler) {
+    handler(element);
+  }
+}

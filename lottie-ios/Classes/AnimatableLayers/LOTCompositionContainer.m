@@ -10,10 +10,17 @@
 #import "LOTAsset.h"
 #import "CGGeometry+LOTAdditions.h"
 #import "LOTHelpers.h"
+#import "LOTValueInterpolator.h"
+#import "LOTAnimatorNode.h"
+#import "LOTRenderNode.h"
+#import "LOTRenderGroup.h"
+#import "LOTNumberInterpolator.h"
 
 @implementation LOTCompositionContainer {
   NSNumber *_frameOffset;
   CALayer *DEBUG_Center;
+  NSMutableDictionary *_keypathCache;
+  LOTNumberInterpolator *_timeInterpolator;
 }
 
 - (instancetype)initWithModel:(LOTLayer *)layer
@@ -36,13 +43,18 @@
     } else {
       _frameOffset = @0;
     }
+
+    if (layer.timeRemapping) {
+      _timeInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:layer.timeRemapping.keyframes];
+    }
+
     [self initializeWithChildGroup:childLayerGroup withAssetGroup:assetGroup];
   }
   return self;
 }
 
 - (void)initializeWithChildGroup:(LOTLayerGroup *)childGroup
-                 withAssetGroup:(LOTAssetGroup *)assetGroup {
+                  withAssetGroup:(LOTAssetGroup *)assetGroup {
   NSMutableDictionary *childMap = [NSMutableDictionary dictionary];
   NSMutableArray *children = [NSMutableArray array];
   NSArray *reversedItems = [[childGroup.layers reverseObjectEnumerator] allObjects];
@@ -84,69 +96,15 @@
 - (void)displayWithFrame:(NSNumber *)frame forceUpdate:(BOOL)forceUpdate {
   if (ENABLE_DEBUG_LOGGING) NSLog(@"-------------------- Composition Displaying Frame %@ --------------------", frame);
   [super displayWithFrame:frame forceUpdate:forceUpdate];
-  NSNumber *childFrame = @(frame.floatValue - _frameOffset.floatValue);
+  NSNumber *newFrame = @((frame.floatValue  - _frameOffset.floatValue) / self.timeStretchFactor.floatValue);
+  if (_timeInterpolator) {
+    newFrame = @([_timeInterpolator floatValueForFrame:newFrame]);
+  }
   for (LOTLayerContainer *child in _childLayers) {
-    [child displayWithFrame:childFrame forceUpdate:forceUpdate];
+    [child displayWithFrame:newFrame forceUpdate:forceUpdate];
   }
   if (ENABLE_DEBUG_LOGGING) NSLog(@"-------------------- ------------------------------- --------------------");
   if (ENABLE_DEBUG_LOGGING) NSLog(@"-------------------- ------------------------------- --------------------");
-}
-
-- (BOOL)setValue:(nonnull id)value
-      forKeypath:(nonnull NSString *)keypath
-         atFrame:(nullable NSNumber *)frame {
-  BOOL transformSet = [super setValue:value forKeypath:keypath atFrame:frame];
-  if (transformSet) {
-    return transformSet;
-  }
-  NSString *childKey = nil;
-  if (self.layerName == nil) {
-    childKey = keypath;
-  } else {
-    NSArray *components = [keypath componentsSeparatedByString:@"."];
-    NSString *firstKey = components.firstObject;
-    if ([firstKey isEqualToString:self.layerName]) {
-      childKey = [keypath stringByReplacingCharactersInRange:NSMakeRange(0, firstKey.length + 1) withString:@""];
-    }
-  }
-  BOOL childSet = NO;
-  if (childKey) {
-    for (LOTLayerContainer *child in _childLayers) {
-      BOOL childHasKey = [child setValue:value forKeypath:childKey atFrame:frame];
-      if (childHasKey) {
-        childSet = YES;
-      }
-    }
-  }
-  return childSet;
-}
-
-- (void)addSublayer:(nonnull CALayer *)subLayer
-       toLayerNamed:(nonnull NSString *)layerName
-     applyTransform:(BOOL)applyTransform {
-  LOTLayerContainer *child = _childMap[layerName];
-  if (child) {
-    if (applyTransform) {
-      [child addAndMaskSublayer:subLayer];
-    } else {
-      CALayer *maskWrapper = [CALayer new];
-      [maskWrapper addSublayer:subLayer];
-      [self.wrapperLayer insertSublayer:maskWrapper below:child];
-      [child removeFromSuperlayer];
-      maskWrapper.mask = child;
-    }
-  }
-}
-
-- (CGRect)convertRect:(CGRect)rect
-            fromLayer:(CALayer *_Nonnull)fromlayer
-         toLayerNamed:(NSString *_Nonnull)layerName {
-  CGRect xRect = rect;
-  LOTLayerContainer *child = _childMap[layerName];
-  if (child) {
-    xRect = [fromlayer convertRect:rect toLayer:child];
-  }
-  return xRect;
 }
 
 - (void)setViewportBounds:(CGRect)viewportBounds {
@@ -156,15 +114,125 @@
   }
 }
 
-- (void)logHierarchyKeypathsWithParent:(NSString * _Nullable)parent {
-  NSString *keypath = parent;
-  if (parent && self.layerName) {
-    keypath = [NSString stringWithFormat:@"%@.%@", parent, self.layerName];
-  } else if (self.layerName) {
-    keypath = self.layerName;
+- (void)searchNodesForKeypath:(LOTKeypath * _Nonnull)keypath {
+  if (self.layerName != nil) {
+    [super searchNodesForKeypath:keypath];
   }
-  for (LOTLayerContainer *layer in _childLayers) {
-    [layer logHierarchyKeypathsWithParent:keypath];
+  if (self.layerName == nil ||
+      [keypath pushKey:self.layerName]) {
+    for (LOTLayerContainer *child in _childLayers) {
+      [child searchNodesForKeypath:keypath];
+    }
+    if (self.layerName != nil) {
+      [keypath popKey];
+    }
+  }
+}
+
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate
+              forKeypath:(LOTKeypath * _Nonnull)keypath {
+  if (self.layerName != nil) {
+    [super setValueDelegate:delegate forKeypath:keypath];
+  }
+  if (self.layerName == nil ||
+      [keypath pushKey:self.layerName]) {
+    for (LOTLayerContainer *child in _childLayers) {
+      [child setValueDelegate:delegate forKeypath:keypath];
+    }
+    if (self.layerName != nil) {
+      [keypath popKey];
+    }
+  }
+}
+
+- (nullable NSArray *)keysForKeyPath:(nonnull LOTKeypath *)keypath {
+  if (_keypathCache == nil) {
+    _keypathCache = [NSMutableDictionary dictionary];
+  }
+  [self searchNodesForKeypath:keypath];
+  [_keypathCache addEntriesFromDictionary:keypath.searchResults];
+  return keypath.searchResults.allKeys;
+}
+
+- (CALayer *)_layerForKeypath:(nonnull LOTKeypath *)keypath {
+  id node = _keypathCache[keypath.absoluteKeypath];
+  if (node == nil) {
+    [self keysForKeyPath:keypath];
+    node = _keypathCache[keypath.absoluteKeypath];
+  }
+  if (node == nil) {
+    NSLog(@"LOTComposition could not find layer for keypath:%@", keypath.absoluteKeypath);
+    return nil;
+  }
+  if ([node isKindOfClass:[CALayer class]]) {
+    return (CALayer *)node;
+  }
+  if (![node isKindOfClass:[LOTRenderNode class]]) {
+    NSLog(@"LOTComposition: Keypath return non-layer node:%@ ", keypath.absoluteKeypath);
+    return nil;
+  }
+  if ([node isKindOfClass:[LOTRenderGroup class]]) {
+    return [(LOTRenderGroup *)node containerLayer];
+  }
+  LOTRenderNode *renderNode = (LOTRenderNode *)node;
+  return renderNode.outputLayer;
+}
+
+- (CGPoint)convertPoint:(CGPoint)point
+         toKeypathLayer:(nonnull LOTKeypath *)keypath
+        withParentLayer:(CALayer *_Nonnull)parent{
+  CALayer *layer = [self _layerForKeypath:keypath];
+  if (!layer) {
+    return CGPointZero;
+  }
+  return [parent convertPoint:point toLayer:layer];
+}
+
+- (CGRect)convertRect:(CGRect)rect
+       toKeypathLayer:(nonnull LOTKeypath *)keypath
+      withParentLayer:(CALayer *_Nonnull)parent{
+  CALayer *layer = [self _layerForKeypath:keypath];
+  if (!layer) {
+    return CGRectZero;
+  }
+  return [parent convertRect:rect toLayer:layer];
+}
+
+- (CGPoint)convertPoint:(CGPoint)point
+       fromKeypathLayer:(nonnull LOTKeypath *)keypath
+        withParentLayer:(CALayer *_Nonnull)parent{
+  CALayer *layer = [self _layerForKeypath:keypath];
+  if (!layer) {
+    return CGPointZero;
+  }
+  return [parent convertPoint:point fromLayer:layer];
+}
+
+- (CGRect)convertRect:(CGRect)rect
+     fromKeypathLayer:(nonnull LOTKeypath *)keypath
+      withParentLayer:(CALayer *_Nonnull)parent{
+  CALayer *layer = [self _layerForKeypath:keypath];
+  if (!layer) {
+    return CGRectZero;
+  }
+  return [parent convertRect:rect fromLayer:layer];
+}
+
+- (void)addSublayer:(nonnull CALayer *)subLayer
+     toKeypathLayer:(nonnull LOTKeypath *)keypath {
+  CALayer *layer = [self _layerForKeypath:keypath];
+  if (layer) {
+    [layer addSublayer:subLayer];
+  }
+}
+
+- (void)maskSublayer:(nonnull CALayer *)subLayer
+      toKeypathLayer:(nonnull LOTKeypath *)keypath {
+  CALayer *layer = [self _layerForKeypath:keypath];
+  if (layer) {
+    [layer.superlayer addSublayer:subLayer];
+    [layer removeFromSuperlayer];
+    subLayer.mask = layer;
   }
 }
 

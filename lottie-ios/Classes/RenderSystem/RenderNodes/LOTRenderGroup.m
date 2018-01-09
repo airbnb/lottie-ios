@@ -48,11 +48,18 @@
 
 - (NSDictionary *)valueInterpolators {
   if (_opacityInterpolator && _transformInterolator) {
-    return @{@"Transform.Opacity" : _opacityInterpolator,
+    return @{@"Opacity" : _opacityInterpolator,
+             @"Position" : _transformInterolator.positionInterpolator,
+             @"Scale" : _transformInterolator.scaleInterpolator,
+             @"Rotation" : _transformInterolator.scaleInterpolator,
+             @"Anchor Point" : _transformInterolator.anchorInterpolator,
+             // Deprecated
+             @"Transform.Opacity" : _opacityInterpolator,
              @"Transform.Position" : _transformInterolator.positionInterpolator,
              @"Transform.Scale" : _transformInterolator.scaleInterpolator,
              @"Transform.Rotation" : _transformInterolator.scaleInterpolator,
-             @"Transform.Anchor Point" : _transformInterolator.anchorInterpolator};
+             @"Transform.Anchor Point" : _transformInterolator.anchorInterpolator
+             };
   }
   return nil;
 }
@@ -176,29 +183,55 @@
   return _outputPath;
 }
 
-- (BOOL)setInterpolatorValue:(id)value
-                      forKey:(NSString *)key
-                    forFrame:(NSNumber *)frame {
-  BOOL interpolatorsSet = [super setInterpolatorValue:value forKey:key forFrame:frame];
-  if (interpolatorsSet) {
-    return YES;
+- (void)searchNodesForKeypath:(LOTKeypath * _Nonnull)keypath {
+  [self.inputNode searchNodesForKeypath:keypath];
+  if ([keypath pushKey:self.keyname]) {
+    // Matches self. Dig deeper.
+    // Check interpolators
+
+    if ([keypath pushKey:@"Transform"]) {
+      // Matches a Transform interpolator!
+      if (self.valueInterpolators[keypath.currentKey] != nil) {
+        [keypath pushKey:keypath.currentKey];
+        [keypath addSearchResultForCurrentPath:self];
+        [keypath popKey];
+      }
+      [keypath popKey];
+    }
+
+    if (keypath.endOfKeypath) {
+      // We have a match!
+      [keypath addSearchResultForCurrentPath:self];
+    }
+    // Check child nodes
+    [_rootNode searchNodesForKeypath:keypath];
+    [keypath popKey];
   }
-  return [_rootNode setValue:value forKeyAtPath:key forFrame:frame];
 }
 
-- (void)logHierarchyKeypathsWithParent:(NSString * _Nullable)parent {
-  NSString *keypath = self.keyname;
-  if (parent && self.keyname) {
-    keypath = [NSString stringWithFormat:@"%@.%@", parent, self.keyname];
-  }
-  if (keypath) {
-    for (NSString *interpolator in self.valueInterpolators.allKeys) {
-      [self logString:[NSString stringWithFormat:@"%@.%@", keypath, interpolator]];
+- (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegate
+              forKeypath:(LOTKeypath * _Nonnull)keypath {
+  if ([keypath pushKey:self.keyname]) {
+    // Matches self. Dig deeper.
+    // Check interpolators
+    if ([keypath pushKey:@"Transform"]) {
+      // Matches a Transform interpolator!
+      LOTValueInterpolator *interpolator = self.valueInterpolators[keypath.currentKey];
+      if (interpolator) {
+        // We have a match!
+        [interpolator setValueDelegate:delegate];
+      }
+      [keypath popKey];
     }
-    [_rootNode logHierarchyKeypathsWithParent:keypath];
+
+    // Check child nodes
+    [_rootNode setValueDelegate:delegate forKeypath:keypath];
+
+    [keypath popKey];
   }
-  
-  [self.inputNode logHierarchyKeypathsWithParent:parent];
+
+  // Check upstream
+  [self.inputNode setValueDelegate:delegate forKeypath:keypath];
 }
 
 @end
