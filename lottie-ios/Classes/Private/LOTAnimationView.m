@@ -211,6 +211,15 @@ static NSString * const kCompContainerAnimationKey = @"play";
   }
 }
 
+# pragma mark - External Methods
+
+- (void)setAnimationNamed:(nonnull NSString *)animationName {
+  LOTComposition *comp = [LOTComposition animationNamed:animationName];
+
+  [self _initializeAnimationContainer];
+  [self _setupWithSceneModel:comp];
+}
+
 # pragma mark - External Methods - Model
 
 - (void)setSceneModel:(LOTComposition *)sceneModel {
