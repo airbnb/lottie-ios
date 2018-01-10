@@ -50,15 +50,14 @@
 }
 
 - (void)drawInContext:(CGContextRef)ctx {
-  NSInteger numberOfLocations = self.locations.count;
-  NSInteger numberOfComponents = 0;
-  CGColorSpaceRef colorSpace = NULL;
-  
-  if (self.colors.count) {
-    CGColorRef colorRef = (__bridge CGColorRef)[self.colors objectAtIndex:0];
-    numberOfComponents = CGColorGetNumberOfComponents(colorRef);
-    colorSpace = CGColorGetColorSpace(colorRef);
+  if (self.colors.count == 0) {
+    return;
   }
+    
+  NSInteger numberOfLocations = self.locations.count;
+  CGColorRef colorRef = (__bridge CGColorRef)[self.colors objectAtIndex:0];
+  NSInteger numberOfComponents = CGColorGetNumberOfComponents(colorRef);
+  CGColorSpaceRef colorSpace = CGColorGetColorSpace(colorRef);
   
   CGPoint origin = self.startPoint;
   CGFloat radius = LOT_PointDistanceFromPoint(self.startPoint, self.endPoint);
