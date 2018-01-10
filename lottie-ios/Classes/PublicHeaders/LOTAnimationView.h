@@ -37,6 +37,9 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// Loads animation asynchrounously from the specified URL
 - (nonnull instancetype)initWithContentsOfURL:(nonnull NSURL *)url;
 
+/// Load animation by name from the default bundle. Use when loading LOTAnimationView via Interface Builder.
+- (void)setAnimationNamed:(nonnull NSString *)animationName NS_SWIFT_NAME(setAnimation(named:));
+
 /// Flag is YES when the animation is playing
 @property (nonatomic, readonly) BOOL isAnimationPlaying;
 
