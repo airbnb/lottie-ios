@@ -104,6 +104,8 @@
 		621A4F721F2275980065E14F /* LOTTrimPathNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 621A4F6F1F2275980065E14F /* LOTTrimPathNode.m */; };
 		621A4F731F2275980065E14F /* LOTTrimPathNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 621A4F6F1F2275980065E14F /* LOTTrimPathNode.m */; };
 		621A4F741F2275980065E14F /* LOTTrimPathNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 621A4F6F1F2275980065E14F /* LOTTrimPathNode.m */; };
+		6220C9142007E61300D47989 /* LOTBlockCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 62ACB6BC20003027006EDE2D /* LOTBlockCallback.h */; };
+		6220C9152007E61800D47989 /* LOTInterpolatorCallback.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 62ACB6C3200030BB006EDE2D /* LOTInterpolatorCallback.h */; };
 		622F75E91F29508D00269858 /* LOTShapeGradientFill.h in Headers */ = {isa = PBXBuildFile; fileRef = 622F75E71F29508D00269858 /* LOTShapeGradientFill.h */; };
 		622F75EA1F29508D00269858 /* LOTShapeGradientFill.h in Headers */ = {isa = PBXBuildFile; fileRef = 622F75E71F29508D00269858 /* LOTShapeGradientFill.h */; };
 		622F75EB1F29508D00269858 /* LOTShapeGradientFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 622F75E81F29508D00269858 /* LOTShapeGradientFill.m */; };
@@ -326,6 +328,8 @@
 			dstPath = include/Lottie;
 			dstSubfolderSpec = 16;
 			files = (
+				6220C9152007E61800D47989 /* LOTInterpolatorCallback.h in CopyFiles */,
+				6220C9142007E61300D47989 /* LOTBlockCallback.h in CopyFiles */,
 				62ACB6BB200028D6006EDE2D /* LOTValueDelegate.h in CopyFiles */,
 				62A62B4E1FE4A1DC001A2C2F /* LOTValueCallback.h in CopyFiles */,
 				627998201FE1D9C800B2DDD9 /* LOTKeypath.h in CopyFiles */,
