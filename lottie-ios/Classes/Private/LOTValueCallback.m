@@ -11,7 +11,7 @@
 @implementation LOTColorValueCallback
 
 + (instancetype _Nonnull)withCGColor:(CGColorRef _Nonnull)color {
-  LOTColorValueCallback *colorCallback = [[LOTColorValueCallback alloc] init];
+  LOTColorValueCallback *colorCallback = [[self alloc] init];
   colorCallback.colorValue = color;
   return colorCallback;
 }
@@ -25,7 +25,7 @@
 @implementation LOTNumberValueCallback
 
 + (instancetype _Nonnull)withFloatValue:(CGFloat)numberValue {
-  LOTNumberValueCallback *numberCallback = [[LOTNumberValueCallback alloc] init];
+  LOTNumberValueCallback *numberCallback = [[self alloc] init];
   numberCallback.numberValue = numberValue;
   return numberCallback;
 }
@@ -39,7 +39,7 @@
 @implementation LOTPointValueCallback
 
 + (instancetype _Nonnull)withPointValue:(CGPoint)pointValue {
-  LOTPointValueCallback *callback = [[LOTPointValueCallback alloc] init];
+  LOTPointValueCallback *callback = [[self alloc] init];
   callback.pointValue = pointValue;
   return callback;
 }
@@ -53,7 +53,7 @@
 @implementation LOTSizeValueCallback
 
 + (instancetype _Nonnull)withPointValue:(CGSize)sizeValue {
-  LOTSizeValueCallback *callback = [[LOTSizeValueCallback alloc] init];
+  LOTSizeValueCallback *callback = [[self alloc] init];
   callback.sizeValue = sizeValue;
   return callback;
 }
@@ -67,7 +67,7 @@
 @implementation LOTPathValueCallback
 
 + (instancetype _Nonnull)withCGPath:(CGPathRef _Nonnull)path {
-  LOTPathValueCallback *callback = [[LOTPathValueCallback alloc] init];
+  LOTPathValueCallback *callback = [[self alloc] init];
   callback.pathValue = path;
   return callback;
 }

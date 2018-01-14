@@ -12,7 +12,7 @@
 @implementation LOTFloatInterpolatorCallback
 
 + (instancetype _Nonnull)withFromFloat:(CGFloat)fromFloat toFloat:(CGFloat)toFloat {
-  LOTFloatInterpolatorCallback *interpolator = [[LOTFloatInterpolatorCallback alloc] init];
+  LOTFloatInterpolatorCallback *interpolator = [[self alloc] init];
   interpolator.fromFloat = fromFloat;
   interpolator.toFloat = toFloat;
   return interpolator;
@@ -26,7 +26,7 @@
 @implementation LOTPointInterpolatorCallback
 
 + (instancetype _Nonnull)withFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint {
-  LOTPointInterpolatorCallback *interpolator = [[LOTPointInterpolatorCallback alloc] init];
+  LOTPointInterpolatorCallback *interpolator = [[self alloc] init];
   interpolator.fromPoint = fromPoint;
   interpolator.toPoint = toPoint;
   return interpolator;
@@ -40,7 +40,7 @@
 @implementation LOTSizeInterpolatorCallback
 
 + (instancetype)withFromSize:(CGSize)fromSize toSize:(CGSize)toSize {
-  LOTSizeInterpolatorCallback *interpolator = [[LOTSizeInterpolatorCallback alloc] init];
+  LOTSizeInterpolatorCallback *interpolator = [[self alloc] init];
   interpolator.fromSize = fromSize;
   interpolator.toSize = toSize;
   return interpolator;
