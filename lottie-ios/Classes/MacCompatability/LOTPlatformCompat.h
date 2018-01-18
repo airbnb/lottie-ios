@@ -9,7 +9,7 @@
 #ifndef LOTPlatformCompat_h
 #define LOTPlatformCompat_h
 
-#import "TargetConditionals.h"
+#include <TargetConditionals.h>
 
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 
