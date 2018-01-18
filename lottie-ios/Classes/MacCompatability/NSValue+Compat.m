@@ -3,6 +3,8 @@
 // Copyright (c) 2017 Airbnb. All rights reserved.
 //
 
+#include <TargetConditionals.h>
+
 #if !TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR
 #import "NSValue+Compat.h"
 
