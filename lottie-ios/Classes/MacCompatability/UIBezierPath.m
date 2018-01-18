@@ -28,7 +28,9 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+#include <TargetConditionals.h>
+
+#if !TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR
 #import "UIBezierPath.h"
 
 @implementation UIBezierPath {
