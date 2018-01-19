@@ -4,7 +4,7 @@
 //
 //  Created by Brandon Withrow on 12/14/15.
 //  Copyright © 2015 Brandon Withrow. All rights reserved.
-//
+//  Dream Big.
 
 #import <Foundation/Foundation.h>
 #import "LOTAnimationView_Compat.h"

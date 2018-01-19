@@ -148,7 +148,13 @@
     // The touch has moved enough to register as its own gesture. Suppress the touch up toggle.
     _suppressToggle = YES;
   }
-  if (floor(NSFoundationVersionNumber) >= floor(NSFoundationVersionNumber_iOS_9_0)) {
+#ifdef __IPHONE_11_0
+  // Xcode 9+
+  if (@available(iOS 9.0, *)) {
+#else
+    // Xcode 8-
+    if ([UIView respondsToSelector:@selector(userInterfaceLayoutDirectionForSemanticContentAttribute:)]) {
+#endif
       if ([UIView userInterfaceLayoutDirectionForSemanticContentAttribute:self.semanticContentAttribute] == UIUserInterfaceLayoutDirectionRightToLeft) {
           diff = diff * -1;
       }
