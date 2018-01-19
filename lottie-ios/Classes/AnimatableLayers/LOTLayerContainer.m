@@ -160,8 +160,8 @@
         image = [UIImage imageWithContentsOfFile:imagePath];
       }
     } else {
-      NSArray *components = [asset.imageName componentsSeparatedByString:@"."];
-      image = [UIImage imageNamed:components.firstObject inBundle:asset.assetBundle compatibleWithTraitCollection:nil];
+        NSString *imagePath = [asset.assetBundle pathForResource:asset.imageName ofType:nil];
+        image = [UIImage imageWithContentsOfFile:imagePath];
     }
     
     if (image) {
