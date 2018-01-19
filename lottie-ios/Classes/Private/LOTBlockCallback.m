@@ -11,7 +11,7 @@
 @implementation LOTColorBlockCallback
 
 + (instancetype)withBlock:(LOTColorValueCallbackBlock)block {
-  LOTColorBlockCallback *colorCallback = [[LOTColorBlockCallback alloc] init];
+  LOTColorBlockCallback *colorCallback = [[self alloc] init];
   colorCallback.callback = block;
   return colorCallback;
 }
@@ -25,7 +25,7 @@
 @implementation LOTNumberBlockCallback
 
 + (instancetype)withBlock:(LOTNumberValueCallbackBlock)block {
-  LOTNumberBlockCallback *numberCallback = [[LOTNumberBlockCallback alloc] init];
+  LOTNumberBlockCallback *numberCallback = [[self alloc] init];
   numberCallback.callback = block;
   return numberCallback;
 }
@@ -39,7 +39,7 @@
 @implementation LOTPointBlockCallback
 
 + (instancetype)withBlock:(LOTPointValueCallbackBlock)block {
-  LOTPointBlockCallback *callback = [[LOTPointBlockCallback alloc] init];
+  LOTPointBlockCallback *callback = [[self alloc] init];
   callback.callback = block;
   return callback;
 }
@@ -53,7 +53,7 @@
 @implementation LOTSizeBlockCallback
 
 + (instancetype)withBlock:(LOTSizeValueCallbackBlock)block {
-  LOTSizeBlockCallback *callback = [[LOTSizeBlockCallback alloc] init];
+  LOTSizeBlockCallback *callback = [[self alloc] init];
   callback.callback = block;
   return callback;
 }
@@ -67,7 +67,7 @@
 @implementation LOTPathBlockCallback
 
 + (instancetype)withBlock:(LOTPathValueCallbackBlock)block {
-  LOTPathBlockCallback *callback = [[LOTPathBlockCallback alloc] init];
+  LOTPathBlockCallback *callback = [[self alloc] init];
   callback.callback = block;
   return callback;
 }
