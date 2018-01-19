@@ -19,7 +19,7 @@ NSString *const kLOTKeypathEnd = @"LOTENDKEYPATH";
 }
 
 + (nonnull LOTKeypath *)keypathWithString:(nonnull NSString *)keypath {
-  return [[LOTKeypath alloc] initWithKeys:[keypath componentsSeparatedByString:@"."]];
+  return [[self alloc] initWithKeys:[keypath componentsSeparatedByString:@"."]];
 }
 
 + (nonnull LOTKeypath *)keypathWithKeys:(nonnull NSString *)firstKey, ... {
@@ -31,7 +31,7 @@ NSString *const kLOTKeypathEnd = @"LOTENDKEYPATH";
     [keys addObject:arg];
   }
   va_end(args);
-  return [[LOTKeypath alloc] initWithKeys:keys];
+  return [[self alloc] initWithKeys:keys];
 }
 
 - (instancetype)initWithKeys:(NSArray *)keys {
