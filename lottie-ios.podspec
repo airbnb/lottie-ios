@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'lottie-ios'
-  s.version          = '2.1.5'
+  s.version          = '2.5.0'
   s.summary          = 'Used to natively render vector animations exported from After Effects.'
 
   s.description      = <<-DESC
