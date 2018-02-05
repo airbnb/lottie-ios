@@ -271,7 +271,7 @@
   if (_contentsGroup == nil && [keypath pushKey:self.layerName]) {
     // Matches self.
     if ([keypath pushKey:@"Transform"]) {
-      // Is a transform node, check  interpolators
+      // Is a transform node, check interpolators
       LOTValueInterpolator *interpolator = _valueInterpolators[keypath.currentKey];
       if (interpolator) {
         // We have a match!
@@ -297,7 +297,7 @@
   if ([keypath pushKey:self.layerName]) {
     // Matches self.
     if ([keypath pushKey:@"Transform"]) {
-      // Is a transform node, check  interpolators
+      // Is a transform node, check interpolators
       LOTValueInterpolator *interpolator = _valueInterpolators[keypath.currentKey];
       if (interpolator) {
         // We have a match!
