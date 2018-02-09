@@ -4,7 +4,7 @@ Hello! Sorry you're having an Issue! Please help us make Lottie better by fillin
 -->
 
 ## Check these before submitting:
-- [] Updated to the latest version of Lottie (2.1.5)
+- [] Updated to the latest version of Lottie (2.5.0)
 - [] The issue doesn't involve an [Unsupported Feature](https://github.com/airbnb/lottie-ios/blob/master/README.md#currently-unsupported-after-effects-features)
 - [] This issue isn't related to another open issue
 
