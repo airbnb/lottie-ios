@@ -160,8 +160,13 @@
         image = [UIImage imageWithContentsOfFile:imagePath];
       }
     } else {
-        NSString *imagePath = [asset.assetBundle pathForResource:asset.imageName ofType:nil];
-        image = [UIImage imageWithContentsOfFile:imagePath];
+        NSString * _Nullable imagePath = [asset.assetBundle pathForResource:asset.imageName ofType:nil];
+        
+        if (imagePath == nil) {
+            image = [UIImage imageNamed:asset.imageName];
+        } else {
+            image = [UIImage imageWithContentsOfFile:imagePath];
+        }
     }
     
     if (image) {
