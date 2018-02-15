@@ -118,6 +118,16 @@ static NSString * const kCompContainerAnimationKey = @"play";
   return self;
 }
 
+# pragma mark - Inspectables
+
+- (void)setAnimation:(NSString *)animationName {
+    
+    _animation = animationName;
+    
+    [self setAnimationNamed:animationName];
+    
+}
+
 # pragma mark - Internal Methods
 
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
