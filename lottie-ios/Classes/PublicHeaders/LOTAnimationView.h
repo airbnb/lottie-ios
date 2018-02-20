@@ -34,7 +34,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// Creates an animation from the LOTComposition, images are loaded from the specified bundle
 - (nonnull instancetype)initWithModel:(nullable LOTComposition *)model inBundle:(nullable NSBundle *)bundle;
 
-/// Loads animation asynchrounously from the specified URL
+/// Loads animation asynchronously from the specified URL
 - (nonnull instancetype)initWithContentsOfURL:(nonnull NSURL *)url;
 
 /// Load animation by name from the default bundle. Use when loading LOTAnimationView via Interface Builder.
@@ -49,7 +49,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// The animation will play forward and then backwards if loopAnimation is also YES
 @property (nonatomic, assign) BOOL autoReverseAnimation;
 
-/// Sets a progress from 0 - 1 of the animation. If the animation is playing it will stop and the compeltion block will be called.
+/// Sets a progress from 0 - 1 of the animation. If the animation is playing it will stop and the completion block will be called.
 /// The current progress of the animation in absolute time.
 /// e.g. a value of 0.75 always represents the same point in the animation, regardless of positive
 /// or negative speed.
@@ -67,14 +67,14 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// Sets a completion block to call when the animation has completed
 @property (nonatomic, copy, nullable) LOTAnimationCompletionBlock completionBlock;
 
-/// Set the amimation data
+/// Set the animation data
 @property (nonatomic, strong, nullable) LOTComposition *sceneModel;
 
 /* 
  * Plays the animation from its current position to a specific progress.
  * The animation will start from its current position.
  * If loopAnimation is YES the animation will loop from start position to toProgress indefinitely.
- * If loopAnimation is NO the animation will stop and the comletion block will be called.
+ * If loopAnimation is NO the animation will stop and the completion block will be called.
  */
 - (void)playToProgress:(CGFloat)toProgress
         withCompletion:(nullable LOTAnimationCompletionBlock)completion;
@@ -83,7 +83,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
  * Plays the animation from specific progress to a specific progress
  * The animation will start from its current position..
  * If loopAnimation is YES the animation will loop from the startProgress to the endProgress indefinitely
- * If loopAnimation is NO the animation will stop and the comletion block will be called.
+ * If loopAnimation is NO the animation will stop and the completion block will be called.
  */
 - (void)playFromProgress:(CGFloat)fromStartProgress
               toProgress:(CGFloat)toEndProgress
@@ -93,7 +93,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
  * Plays the animation from its current position to a specific frame.
  * The animation will start from its current position.
  * If loopAnimation is YES the animation will loop from beginning to toFrame indefinitely.
- * If loopAnimation is NO the animation will stop and the comletion block will be called.
+ * If loopAnimation is NO the animation will stop and the completion block will be called.
  */
 - (void)playToFrame:(nonnull NSNumber *)toFrame
      withCompletion:(nullable LOTAnimationCompletionBlock)completion;
@@ -102,7 +102,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
  * Plays the animation from specific frame to a specific frame.
  * The animation will start from its current position.
  * If loopAnimation is YES the animation will loop start frame to end frame indefinitely.
- * If loopAnimation is NO the animation will stop and the comletion block will be called.
+ * If loopAnimation is NO the animation will stop and the completion block will be called.
  */
 - (void)playFromFrame:(nonnull NSNumber *)fromStartFrame
               toFrame:(nonnull NSNumber *)toEndFrame
@@ -113,11 +113,11 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
  * Plays the animation from its current position to the end of the animation.
  * The animation will start from its current position.
  * If loopAnimation is YES the animation will loop from beginning to end indefinitely.
- * If loopAnimation is NO the animation will stop and the comletion block will be called.
+ * If loopAnimation is NO the animation will stop and the completion block will be called.
  **/
 - (void)playWithCompletion:(nullable LOTAnimationCompletionBlock)completion;
 
-/// Plays the animaiton
+/// Plays the animation
 - (void)play;
 
 /// Stops the animation at the current frame. The completion block will be called.
@@ -205,8 +205,8 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
  @brief Sets the keyframe value for a specific After Effects property at a given time. NOTE: Deprecated. Use setValueDelegate:forKeypath:
  @discussion NOTE: Deprecated and non functioning. Use setValueCallback:forKeypath:
  @param value Value is the color, point, or number object that should be set at given time
- @param keypath NSString . separate keypath The Keypath is a dot seperated key path that specifies the location of the key to be set from the After Effects file. This will begin with the Layer Name. EG "Layer 1.Shape 1.Fill 1.Color"
- @param frame The frame is the frame to be set. If the keyframe exists it will be overwritten, if it does not exist a new linearlly interpolated keyframe will be added
+ @param keypath NSString . separate keypath The Keypath is a dot separated key path that specifies the location of the key to be set from the After Effects file. This will begin with the Layer Name. EG "Layer 1.Shape 1.Fill 1.Color"
+ @param frame The frame is the frame to be set. If the keyframe exists it will be overwritten, if it does not exist a new linearly interpolated keyframe will be added
  */
 - (void)setValue:(nonnull id)value
       forKeypath:(nonnull NSString *)keypath
@@ -226,7 +226,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
     applyTransform:(BOOL)applyTransform __deprecated;
 
 /*!
- @brief Converts the given CGRect from the recieving animation view's coordinate space to the supplied layer's coordinate space If layerName is null then the rect will be converted to the composition coordinate system. This is helpful when adding custom subviews to a LOTAnimationView
+ @brief Converts the given CGRect from the receiving animation view's coordinate space to the supplied layer's coordinate space If layerName is null then the rect will be converted to the composition coordinate system. This is helpful when adding custom subviews to a LOTAnimationView
  @discussion NOTE: Deprecated. Use convertRect:fromKeypathLayer:
  */
 - (CGRect)convertRect:(CGRect)rect
