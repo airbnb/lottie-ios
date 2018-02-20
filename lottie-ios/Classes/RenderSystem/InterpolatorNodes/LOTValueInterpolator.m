@@ -153,7 +153,7 @@
       self.trailingKeyframe.inTangent.x != self.trailingKeyframe.inTangent.y) &&
       (!LOT_CGPointIsZero(self.leadingKeyframe.outTangent) &&
        !LOT_CGPointIsZero(self.trailingKeyframe.inTangent))) {
-    // Bezeir Time Curve
+    // Bezier Time Curve
     progession = LOT_CubicBezeirInterpolate(CGPointMake(0, 0), self.leadingKeyframe.outTangent, self.trailingKeyframe.inTangent, CGPointMake(1, 1), progession);
   }
   
