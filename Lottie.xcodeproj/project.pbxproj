@@ -425,6 +425,8 @@
 		8C53796F1FB471D100C1BC65 /* LOTLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 481A4A421E4A7885003CF62B /* LOTLayer.h */; };
 		8C5379701FB471D100C1BC65 /* LOTColorInterpolator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6274CFA61F17E98200E05049 /* LOTColorInterpolator.h */; };
 		8C5379711FB471D100C1BC65 /* LOTAnimationView_Compat.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DBA16351B4FA408937A16CE /* LOTAnimationView_Compat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A874744D204EC2E300E5C62C /* LOTKeypath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6279981A1FE1D04600B2DDD9 /* LOTKeypath.m */; };
+		A874744E204EC2ED00E5C62C /* LOTKeypath.h in Headers */ = {isa = PBXBuildFile; fileRef = 627998191FE1D04600B2DDD9 /* LOTKeypath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EE498E3C1F336A3B00D1DFCD /* LOTCacheProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = EE498E3B1F336A3B00D1DFCD /* LOTCacheProvider.m */; };
 		EE498E3E1F336A4900D1DFCD /* LOTCacheProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = EE498E3D1F336A4900D1DFCD /* LOTCacheProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EE498E3F1F336B0400D1DFCD /* LOTCacheProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = EE498E3B1F336A3B00D1DFCD /* LOTCacheProvider.m */; };
@@ -972,6 +974,7 @@
 				8C53793B1FB471D100C1BC65 /* LOTComposition.h in Headers */,
 				8C53793C1FB471D100C1BC65 /* LOTModels.h in Headers */,
 				8C53793D1FB471D100C1BC65 /* LOTAnimationView.h in Headers */,
+				A874744E204EC2ED00E5C62C /* LOTKeypath.h in Headers */,
 				8C53793E1FB471D100C1BC65 /* UIColor+Expanded.h in Headers */,
 				8C53793F1FB471D100C1BC65 /* LOTShapeFill.h in Headers */,
 				8C5379401FB471D100C1BC65 /* LOTTrimPathNode.h in Headers */,
@@ -1394,6 +1397,7 @@
 				8C5379171FB471D100C1BC65 /* LOTPointInterpolator.m in Sources */,
 				8C5379181FB471D100C1BC65 /* LOTShapeStroke.m in Sources */,
 				8C5379191FB471D100C1BC65 /* LOTSizeInterpolator.m in Sources */,
+				A874744D204EC2E300E5C62C /* LOTKeypath.m in Sources */,
 				8C53791A1FB471D100C1BC65 /* LOTFillRenderer.m in Sources */,
 				8C53791B1FB471D100C1BC65 /* LOTLayer.m in Sources */,
 				8C53791C1FB471D100C1BC65 /* LOTRoundedRectAnimator.m in Sources */,
