@@ -73,6 +73,10 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// Set the animation data
 @property (nonatomic, strong, nullable) LOTComposition *sceneModel;
 
+/// Sets sholdRasterize to YES on the animation layer to improve compositioning performance when not animating.
+/// Defaults to YES
+@property (nonatomic, assign) BOOL shouldRasterizeWhenIdle;
+
 /* 
  * Plays the animation from its current position to a specific progress.
  * The animation will start from its current position.
