@@ -190,9 +190,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
 - (void)_removeCurrentAnimationIfNecessary {
   _isAnimationPlaying = NO;
   [_compContainer removeAllAnimations];
-  if (_shouldRasterizeWhenIdle) {
-    _compContainer.shouldRasterize = YES;
-  }
+  _compContainer.shouldRasterize = _shouldRasterizeWhenIdle;
 }
 
 - (CGFloat)_progressForFrame:(NSNumber *)frame {
@@ -343,9 +341,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
       animation.beginTime = CACurrentMediaTime() - (offset * 1 / _animationSpeed);
     }
     [_compContainer addAnimation:animation forKey:kCompContainerAnimationKey];
-    if (_shouldRasterizeWhenIdle) {
-      _compContainer.shouldRasterize = NO;
-    }
+    _compContainer.shouldRasterize = NO;
   }
   _isAnimationPlaying = YES;
 }
