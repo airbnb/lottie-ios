@@ -57,9 +57,8 @@ static NSString * const kCompContainerAnimationKey = @"play";
 # pragma mark - Initializers
 
 - (instancetype)initWithContentsOfURL:(NSURL *)url {
-  self = [super initWithFrame:CGRectZero];
+  self = [self initWithFrame:CGRectZero];
   if (self) {
-    [self _commonInit];
     LOTComposition *laScene = [[LOTAnimationCache sharedCache] animationForKey:url.absoluteString];
     if (laScene) {
       laScene.cacheKey = url.absoluteString;
@@ -92,18 +91,17 @@ static NSString * const kCompContainerAnimationKey = @"play";
 }
 
 - (instancetype)initWithModel:(LOTComposition *)model inBundle:(NSBundle *)bundle {
-  self = [super initWithFrame:model.compBounds];
+  self = [self initWithFrame:model.compBounds];
   if (self) {
     _bundle = bundle;
-    [self _commonInit];
     [self _initializeAnimationContainer];
     [self _setupWithSceneModel:model];
   }
   return self;
 }
 
-- (instancetype)init {
-  self = [super init];
+- (instancetype)initWithFrame:(CGRect)frame {
+  self = [super initWithFrame:frame];
   if (self) {
     [self _commonInit];
   }
