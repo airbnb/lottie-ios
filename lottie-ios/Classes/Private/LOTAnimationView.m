@@ -188,6 +188,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
 - (void)_removeCurrentAnimationIfNecessary {
   _isAnimationPlaying = NO;
   [_compContainer removeAllAnimations];
+  _compContainer.shouldRasterize = _shouldRasterizeWhenIdle;
 }
 
 - (CGFloat)_progressForFrame:(NSNumber *)frame {
@@ -338,6 +339,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
       animation.beginTime = CACurrentMediaTime() - (offset * 1 / _animationSpeed);
     }
     [_compContainer addAnimation:animation forKey:kCompContainerAnimationKey];
+    _compContainer.shouldRasterize = NO;
   }
   _isAnimationPlaying = YES;
 }
@@ -415,6 +417,15 @@ static NSString * const kCompContainerAnimationKey = @"play";
 
 - (void)forceDrawingUpdate {
   [self _layoutAndForceUpdate];
+}
+
+# pragma mark - External Methods - Idle Rasterization
+
+- (void)setShouldRasterizeWhenIdle:(BOOL)shouldRasterize {
+  _shouldRasterizeWhenIdle = shouldRasterize;
+  if (!_isAnimationPlaying) {
+    _compContainer.shouldRasterize = _shouldRasterizeWhenIdle;
+  }
 }
 
 # pragma mark - External Methods - Cache
@@ -616,6 +627,10 @@ static NSString * const kCompContainerAnimationKey = @"play";
   }
 }
 
+- (void)didMoveToWindow {
+    _compContainer.rasterizationScale = self.window.screen.scale;
+}
+
 - (void)setContentMode:(LOTViewContentMode)contentMode {
   [super setContentMode:contentMode];
   [self setNeedsLayout];
@@ -627,6 +642,10 @@ static NSString * const kCompContainerAnimationKey = @"play";
 }
 
 #else
+
+- (void)viewDidMoveToWindow {
+    _compContainer.rasterizationScale = self.window.screen.backingScaleFactor;
+}
     
 - (void)setCompletionBlock:(LOTAnimationCompletionBlock)completionBlock {
     if (completionBlock) {
