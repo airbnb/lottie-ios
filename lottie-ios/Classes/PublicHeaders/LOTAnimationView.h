@@ -157,7 +157,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 
  See the documentation for LOTKeypath to learn more about how to create keypaths.
 
- NOTE: The delegate is weakly retained. Be sure that the creator of a delgate is retained.
+ NOTE: The delegate is weakly retained. Be sure that the creator of a delegate is retained.
  Read More at http://airbnb.io/lottie/ios/dynamic.html
  */
 - (void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegates
