@@ -46,7 +46,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// Flag is YES when the animation is playing
 @property (nonatomic, readonly) BOOL isAnimationPlaying;
 
-/// Tells the animation to loop indefinitely.
+/// Tells the animation to loop indefinitely. Defaults to NO.
 @property (nonatomic, assign) BOOL loopAnimation;
 
 /// The animation will play forward and then backwards if loopAnimation is also YES
