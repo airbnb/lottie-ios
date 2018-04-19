@@ -602,7 +602,7 @@ Contributors are more than welcome. Just upload a PR with a description of your 
 If you would like to add more JSON files feel free to do so!
 
 ## Issues or feature requests?
-File github issues for anything that is unexpectedly broken. If an After Effects file is not working, please attach it to your issue. Debugging without the original file is much more difficult. Lottie is developed and maintained by [Brandon Withrow](mailto:brandon.withrow@airbnb.com). Feel free to reach out via email or [Twitter](https://twitter.com/theWithra)
+File github issues for anything that is unexpectedly broken. If an After Effects file is not working, please attach it to your issue. Debugging without the original file is much more difficult. Lottie is developed and maintained by [Brandon Withrow](mailto:brandon@withrow.io). Feel free to reach out via email or [Twitter](https://twitter.com/theWithra)
 
 ## Roadmap (In no particular order)
 - Add support for interactive animated transitions
