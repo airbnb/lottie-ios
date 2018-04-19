@@ -14,7 +14,8 @@
 #import "LOTHelpers.h"
 #import "LOTMask.h"
 #import "LOTTextAnimations.h"
-#import "LOTTextDocument.h"
+#import "LOTText.h"
+#import "LOTCharacter.h"
 #import "LOTHelpers.h"
 
 @implementation LOTLayer
@@ -59,7 +60,7 @@
     _timeStretch = @1;
   }
 
-  if (_layerType == LOTLayerTypePrecomp || _layerType == LOTLayerTypeText) {
+  if (_layerType == LOTLayerTypePrecomp) {
     _layerHeight = [jsonDictionary[@"h"] copy];
     _layerWidth = [jsonDictionary[@"w"] copy];
     [assetGroup buildAssetNamed:_referenceID withFramerate:framerate];
@@ -73,6 +74,8 @@
     _layerHeight = jsonDictionary[@"sh"];
     NSString *solidColor = jsonDictionary[@"sc"];
     _solidColor = [UIColor LOT_colorWithHexString:solidColor];
+  } else if (_layerType == LOTLayerTypeText) {
+
   }
   
   _layerBounds = CGRectMake(0, 0, _layerWidth.floatValue, _layerHeight.floatValue);
@@ -147,15 +150,10 @@
   }
   _shapes = shapes;
 
-  NSDictionary *textData = jsonDictionary[@"t"];
-  if (textData) {
-    NSDictionary *documentJSON = textData[@"d"];
-    LOTTextDocument *document = [[LOTTextDocument alloc] initWithJSON:documentJSON];
-
-    // This is an array, but we're only concerned with the first item. This cue is taken from the
-    // Android implementation but may have a better reason we can note here:
-    NSDictionary *textAnimationsJSON = [textData[@"a"] firstObject];
-    LOTTextAnimations *textAnimations = [[LOTTextAnimations alloc] initWithJSON:textAnimationsJSON];
+  NSDictionary *textJSON = jsonDictionary[@"t"];
+  if (textJSON) {
+    LOTText *text = [[LOTText alloc] initWithJSON:textJSON];
+    _text = text;
   }
     
   NSArray *effects = jsonDictionary[@"ef"];

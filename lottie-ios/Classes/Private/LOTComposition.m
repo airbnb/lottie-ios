@@ -10,6 +10,7 @@
 #import "LOTLayer.h"
 #import "LOTAssetGroup.h"
 #import "LOTLayerGroup.h"
+#import "LOTFontResolver.h"
 #import "LOTAnimationCache.h"
 
 @implementation LOTComposition
@@ -116,7 +117,13 @@
     NSTimeInterval timeDuration = frameDuration / _framerate.floatValue;
     _timeDuration = timeDuration;
   }
-  
+
+  LOTFontResolver *fontResolver = [LOTFontResolver shared];
+  NSArray *characters = jsonDictionary[@"chars"];
+  if (characters) {
+    [fontResolver seedGlyphPathsWithJSON:characters];
+  }
+
   NSArray *assetArray = jsonDictionary[@"assets"];
   if (assetArray.count) {
     _assetGroup = [[LOTAssetGroup alloc] initWithJSON:assetArray withAssetBundle:bundle withFramerate:_framerate];

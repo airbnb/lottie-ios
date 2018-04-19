@@ -14,6 +14,7 @@
 @class LOTMask;
 @class LOTAsset;
 @class LOTAssetGroup;
+@class LOTText;
 
 typedef enum : NSInteger {
   LOTLayerTypePrecomp,
@@ -50,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSNumber *outFrame;
 @property (nonatomic, readonly) NSNumber *timeStretch;
 @property (nonatomic, readonly) CGRect layerBounds;
+@property (nonatomic, readonly) LOTText *text;
 
 @property (nonatomic, readonly, nullable) NSArray<LOTShapeGroup *> *shapes;
 @property (nonatomic, readonly, nullable) NSArray<LOTMask *> *masks;

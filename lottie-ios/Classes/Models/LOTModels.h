@@ -24,5 +24,6 @@
 #import "LOTLayerGroup.h"
 #import "LOTAsset.h"
 #import "LOTShapeGradientFill.h"
+#import "LOTText.h"
 
 #endif /* LOTModels_h */
