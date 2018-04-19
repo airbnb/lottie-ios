@@ -23,6 +23,7 @@
 #import "LOTGradientFillRender.h"
 #import "LOTRepeaterRenderer.h"
 #import "LOTShapeRepeater.h"
+#import "LOTTextRenderer.h"
 
 @implementation LOTRenderGroup {
   LOTAnimatorNode *_rootNode;
@@ -118,6 +119,10 @@
       LOTRepeaterRenderer *repeater = [[LOTRepeaterRenderer alloc] initWithInputNode:previousNode shapeRepeater:(LOTShapeRepeater *)item];
       previousNode = repeater;
       [self.containerLayer insertSublayer:repeater.outputLayer atIndex:0];
+    } else if ([item isKindOfClass:[LOTText class]]) {
+      LOTTextRenderer *textRenderer = [[LOTTextRenderer alloc] initWithInputNode:previousNode document:(LOTText *)item];
+      previousNode = textRenderer;
+      [self.containerLayer insertSublayer:textRenderer.outputLayer atIndex:0];
     }
   }
   if (transform) {

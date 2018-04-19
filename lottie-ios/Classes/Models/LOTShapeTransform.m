@@ -19,6 +19,19 @@
   return self;
 }
 
+// TODO: validate this
+- (instancetype)initWithPositionKeyframes:(LOTKeyframeGroup*)positions
+                           scaleKeyframes:(LOTKeyframeGroup*)scales {
+  self = [super init];
+  if (self) {
+    _position = positions;
+    _scale = scales;
+    _opacity = [[LOTKeyframeGroup alloc] initWithData:@1];
+  }
+  return self;
+}
+
+
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
   
   if (jsonDictionary[@"nm"] ) {

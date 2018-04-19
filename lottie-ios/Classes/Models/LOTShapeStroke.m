@@ -19,6 +19,26 @@
   return self;
 }
 
+// TODO: validate this
+- (instancetype)initWithKeyname:(NSString*)keyname
+                    colorFrames:(LOTKeyframeGroup*)colorFrames
+                    widthFrames:(LOTKeyframeGroup*)widthFrames
+                  opacityFrames:(LOTKeyframeGroup*)opacityFrames {
+  self = [super init];
+  if (self) {
+    _keyname = keyname;
+    _color = colorFrames;
+    _width = widthFrames;
+    _opacity = opacityFrames;
+    _fillEnabled = false;
+    _dashOffset = nil;
+    _capType = LOTLineCapTypeRound;
+    _joinType = LOTLineJoinTypeRound;
+  }
+  return self;
+}
+
+
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
   
   if (jsonDictionary[@"nm"] ) {

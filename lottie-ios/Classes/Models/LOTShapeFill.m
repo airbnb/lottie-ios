@@ -19,6 +19,22 @@
   return self;
 }
 
+// TODO: validate this
+- (instancetype)initWithKeyName:(NSString*)keyname
+                 colorKeyframes:(LOTKeyframeGroup*)colorFrames
+               opacityKeyframes:(LOTKeyframeGroup*)opacityFrames {
+  
+  self = [super init];
+  if (self) {
+    _keyname = keyname;
+    _color = colorFrames;
+    _opacity = opacityFrames;
+    _fillEnabled = YES;
+    _evenOddFillRule = NO;
+  }
+  return self;
+}
+
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
   
   if (jsonDictionary[@"nm"] ) {

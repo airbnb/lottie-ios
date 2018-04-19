@@ -22,7 +22,6 @@
 - (void)_mapFromJSON:(NSDictionary*)jsonDictionary {
   _characterString = jsonDictionary[@"ch"];
   _width = jsonDictionary[@"w"];
-  _fontFamilyName = jsonDictionary[@"fFamily"];
   _fontSize = jsonDictionary[@"size"];
   _fontStyle = jsonDictionary[@"style"];
   _fontFamilyName = jsonDictionary[@"fFamily"];
@@ -30,14 +29,12 @@
   NSDictionary *characterData = jsonDictionary[@"data"];
   if (characterData && characterData[@"shapes"]) {
 
-    NSMutableArray *shapes = [NSMutableArray array];
-    for (NSDictionary *shapeJSON in characterData[@"shapes"]) {
-      id shapeItem = [LOTShapeGroup shapeItemWithJSON:shapeJSON];
-      if (shapeItem) {
-        [shapes addObject:shapeItem];
-      }
-    }
-    _shapes = shapes;
+    // NOTE: is this a guarantee?
+    // Assume this array will contain one shape group:
+    NSArray *shapesArray = characterData[@"shapes"];
+    NSDictionary *shapeJSON = shapesArray.firstObject;
+    id shapeItem = [LOTShapeGroup shapeItemWithJSON:shapeJSON];
+    _shapes = shapeItem;
   }
 }
 

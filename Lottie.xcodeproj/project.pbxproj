@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		233701152097E6CC003EB3CB /* LOTTextRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 233701132097E6CB003EB3CB /* LOTTextRenderer.h */; };
+		233701162097E6CC003EB3CB /* LOTTextRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 233701132097E6CB003EB3CB /* LOTTextRenderer.h */; };
+		233701172097E6CC003EB3CB /* LOTTextRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 233701132097E6CB003EB3CB /* LOTTextRenderer.h */; };
+		233701182097E6CC003EB3CB /* LOTTextRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 233701142097E6CC003EB3CB /* LOTTextRenderer.m */; };
+		233701192097E6CC003EB3CB /* LOTTextRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 233701142097E6CC003EB3CB /* LOTTextRenderer.m */; };
+		2337011A2097E6CC003EB3CB /* LOTTextRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 233701142097E6CC003EB3CB /* LOTTextRenderer.m */; };
+		2337011B2097E6E0003EB3CB /* LOTTextRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 233701142097E6CC003EB3CB /* LOTTextRenderer.m */; };
 		23A216432089157400DB1762 /* LOTFontResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 23A216412089157400DB1762 /* LOTFontResolver.h */; };
 		23A216442089157400DB1762 /* LOTFontResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 23A216412089157400DB1762 /* LOTFontResolver.h */; };
 		23A216452089157400DB1762 /* LOTFontResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 23A216412089157400DB1762 /* LOTFontResolver.h */; };
@@ -490,6 +497,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		233701132097E6CB003EB3CB /* LOTTextRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LOTTextRenderer.h; path = "lottie-ios/Classes/RenderSystem/AnimatorNodes/LOTTextRenderer.h"; sourceTree = SOURCE_ROOT; };
+		233701142097E6CC003EB3CB /* LOTTextRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LOTTextRenderer.m; path = "lottie-ios/Classes/RenderSystem/AnimatorNodes/LOTTextRenderer.m"; sourceTree = SOURCE_ROOT; };
 		23A216412089157400DB1762 /* LOTFontResolver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LOTFontResolver.h; sourceTree = "<group>"; };
 		23A216422089157400DB1762 /* LOTFontResolver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LOTFontResolver.m; sourceTree = "<group>"; };
 		23A2164A208915A200DB1762 /* LOTCharacter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LOTCharacter.h; sourceTree = "<group>"; };
@@ -831,6 +840,8 @@
 		6274D0091F1D6B3300E05049 /* RenderNodes */ = {
 			isa = PBXGroup;
 			children = (
+				233701132097E6CB003EB3CB /* LOTTextRenderer.h */,
+				233701142097E6CC003EB3CB /* LOTTextRenderer.m */,
 				6274D00B1F1D6CE200E05049 /* LOTStrokeRenderer.h */,
 				6274D00C1F1D6CE200E05049 /* LOTStrokeRenderer.m */,
 				62BFC2D81F14298D0068A342 /* LOTRenderGroup.h */,
@@ -962,6 +973,7 @@
 				23ADDF332087F0D600EF6FDA /* LOTTextAnimations.h in Headers */,
 				62CA5A051E3C179F002D7188 /* LOTAnimationTransitionController.h in Headers */,
 				481A4A9D1E4A7885003CF62B /* LOTHelpers.h in Headers */,
+				233701152097E6CC003EB3CB /* LOTTextRenderer.h in Headers */,
 				62BFC2E81F14298D0068A342 /* LOTKeyframe.h in Headers */,
 				62CA5A071E3C179F002D7188 /* Lottie.h in Headers */,
 				481A4AB91E4A7885003CF62B /* LOTShapeGroup.h in Headers */,
@@ -1055,6 +1067,7 @@
 				8C53795A1FB471D100C1BC65 /* LOTAnimatedSwitch.h in Headers */,
 				8C53795B1FB471D100C1BC65 /* LOTPointInterpolator.h in Headers */,
 				8C53795C1FB471D100C1BC65 /* LOTShapeStar.h in Headers */,
+				233701172097E6CC003EB3CB /* LOTTextRenderer.h in Headers */,
 				8C53795D1FB471D100C1BC65 /* LOTShapeRepeater.h in Headers */,
 				8C53795E1FB471D100C1BC65 /* LOTRepeaterRenderer.h in Headers */,
 				8C53795F1FB471D100C1BC65 /* LOTRoundedRectAnimator.h in Headers */,
@@ -1108,6 +1121,7 @@
 				23ADDF342087F0D600EF6FDA /* LOTTextAnimations.h in Headers */,
 				481A4AC21E4A7885003CF62B /* LOTShapeRectangle.h in Headers */,
 				62BFC2F31F14298D0068A342 /* LOTRenderGroup.h in Headers */,
+				233701162097E6CC003EB3CB /* LOTTextRenderer.h in Headers */,
 				628905421F352472005154FA /* LOTRadialGradientLayer.h in Headers */,
 				62A62B4B1FE48220001A2C2F /* LOTValueCallback.h in Headers */,
 				62C9EA441F1FDBF000DE7D07 /* LOTCircleAnimator.h in Headers */,
@@ -1313,6 +1327,7 @@
 				481A4AA11E4A7885003CF62B /* UIColor+Expanded.m in Sources */,
 				62BFC3051F1449380068A342 /* LOTBezierData.m in Sources */,
 				EE498E3C1F336A3B00D1DFCD /* LOTCacheProvider.m in Sources */,
+				233701182097E6CC003EB3CB /* LOTTextRenderer.m in Sources */,
 				481A4AB71E4A7885003CF62B /* LOTShapeFill.m in Sources */,
 				62C9EA451F1FDBF000DE7D07 /* LOTCircleAnimator.m in Sources */,
 				622F76501F2AC1BF00269858 /* LOTArrayInterpolator.m in Sources */,
@@ -1402,6 +1417,7 @@
 				6279981F1FE1D9AD00B2DDD9 /* LOTKeypath.m in Sources */,
 				84FE13081E4C1553009B157C /* UIColor+Expanded.m in Sources */,
 				621A4F6C1F216DC60065E14F /* LOTBezierPath.m in Sources */,
+				2337011B2097E6E0003EB3CB /* LOTTextRenderer.m in Sources */,
 				62BFC2F61F14298D0068A342 /* LOTRenderGroup.m in Sources */,
 				6274CEBD1F157DCD00E05049 /* LOTNumberInterpolator.m in Sources */,
 				484EBA1A1E565AF700D4CAD9 /* LOTAsset.m in Sources */,
@@ -1473,6 +1489,7 @@
 				8C53791F1FB471D100C1BC65 /* LOTTrimPathNode.m in Sources */,
 				8C5379201FB471D100C1BC65 /* LOTBezierPath.m in Sources */,
 				8C5379211FB471D100C1BC65 /* LOTRenderGroup.m in Sources */,
+				2337011A2097E6CC003EB3CB /* LOTTextRenderer.m in Sources */,
 				8C5379221FB471D100C1BC65 /* LOTNumberInterpolator.m in Sources */,
 				8C5379231FB471D100C1BC65 /* LOTShapeGroup.m in Sources */,
 				8C5379241FB471D100C1BC65 /* LOTMask.m in Sources */,
@@ -1513,6 +1530,7 @@
 				481A4AC01E4A7885003CF62B /* LOTShapePath.m in Sources */,
 				6274D0101F1D6CE200E05049 /* LOTStrokeRenderer.m in Sources */,
 				62BFC3061F1449380068A342 /* LOTBezierData.m in Sources */,
+				233701192097E6CC003EB3CB /* LOTTextRenderer.m in Sources */,
 				62C9EA271F1EB49000DE7D07 /* LOTCompositionContainer.m in Sources */,
 				6279981E1FE1D9AC00B2DDD9 /* LOTKeypath.m in Sources */,
 				48183C9F1E54E20B0039F121 /* CGGeometry+LOTAdditions.m in Sources */,

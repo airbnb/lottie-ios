@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LOTShapeFill : NSObject
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
+- (instancetype)initWithKeyName:(NSString*)keyname
+                 colorKeyframes:(LOTKeyframeGroup*)colorFrames
+               opacityKeyframes:(LOTKeyframeGroup*)opacityFrames;
 
 @property (nonatomic, readonly) NSString *keyname;
 @property (nonatomic, readonly) BOOL fillEnabled;

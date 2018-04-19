@@ -1,3 +1,4 @@
+
 //
 //  LOTBezierPath.h
 //  Lottie

@@ -31,9 +31,12 @@
 @property (nonatomic, readonly) NSNumber * keyframeTime;
 @property (nonatomic, readonly) NSString * fontName;
 @property (nonatomic, readonly) UIColor  * fontColor;
+@property (nonatomic, readonly) UIColor  * strokeColor;
+@property (nonatomic, readonly) NSNumber * strokeWidth;
 @property (nonatomic, readonly) NSString * justification;
 @property (nonatomic, readonly) NSNumber * lineHeight;
 @property (nonatomic, readonly) NSNumber * fontSize;
 @property (nonatomic, readonly) NSNumber * tracking;
+@property (nonatomic, readonly) BOOL strokeOverfill;
 
 @end

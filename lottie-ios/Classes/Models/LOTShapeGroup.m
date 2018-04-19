@@ -28,6 +28,16 @@
   return self;
 }
 
+- (instancetype _Nonnull)initWithKeyname:(NSString *_Nonnull)keyname
+                                  shapes:(NSArray *_Nonnull)shapes {
+  self = [super init];
+  if (self) {
+    _keyname = keyname;
+    _items = shapes;
+  }
+  return self;
+}
+
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary {
   
   if (jsonDictionary[@"nm"] ) {

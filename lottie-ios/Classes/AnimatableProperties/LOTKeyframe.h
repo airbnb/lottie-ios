@@ -17,7 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithKeyframe:(NSDictionary *)keyframe;
 - (instancetype)initWithValue:(id)value;
+- (instancetype)initWithSizeValue:(CGSize)sizeValue;
+- (instancetype)initWithColorValue:(UIColor*)colorValue;
 - (void)remapValueWithBlock:(CGFloat (^)(CGFloat inValue))remapBlock;
+- (void)formPointFromFloatValue:(CGFloat)yValue;
 - (LOTKeyframe *)copyWithData:(id)data;
 
 @property (nonatomic, readonly) NSNumber *keyframeTime;
@@ -39,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LOTKeyframeGroup : NSObject
 
 - (instancetype)initWithData:(id)data;
+- (instancetype)initWithKeyframes:(NSArray<LOTKeyframe*>*)keyframes;
 
 - (void)remapKeyframesWithBlock:(CGFloat (^)(CGFloat inValue))remapBlock;
 

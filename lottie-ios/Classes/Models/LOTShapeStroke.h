@@ -24,6 +24,10 @@ typedef enum : NSUInteger {
 @interface LOTShapeStroke : NSObject
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
+- (instancetype)initWithKeyname:(NSString*)keyname
+                    colorFrames:(LOTKeyframeGroup*)colorFrames
+                    widthFrames:(LOTKeyframeGroup*)widthFrames
+                  opacityFrames:(LOTKeyframeGroup*)opacityFrames;
 
 @property (nonatomic, readonly) NSString *keyname;
 @property (nonatomic, readonly) BOOL fillEnabled;

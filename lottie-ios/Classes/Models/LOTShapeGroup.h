@@ -12,6 +12,8 @@
 @interface LOTShapeGroup : NSObject
 
 - (instancetype _Nonnull)initWithJSON:(NSDictionary *_Nonnull)jsonDictionary;
+- (instancetype _Nonnull)initWithKeyname:(NSString *_Nonnull)keyname
+                                  shapes:(NSArray *_Nonnull)shapes;
 
 @property (nonatomic, readonly, nonnull) NSString *keyname;
 @property (nonatomic, readonly, nonnull) NSArray *items;

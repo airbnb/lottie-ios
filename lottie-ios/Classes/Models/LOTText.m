@@ -89,6 +89,10 @@
   _text = documentInfo[@"t"];
   _tracking = documentInfo[@"tr"];
   _fontColor = [UIColor LOT_colorFromRGBAArray:documentInfo[@"fc"]];
+  _strokeColor = [UIColor LOT_colorFromRGBAArray:documentInfo[@"sc"]];
+  _strokeWidth = documentInfo[@"sw"];
+  _strokeOverfill = [documentInfo[@"of"] boolValue];
+
 }
 
 @end
