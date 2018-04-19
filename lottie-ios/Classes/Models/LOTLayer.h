@@ -21,6 +21,7 @@ typedef enum : NSInteger {
   LOTLayerTypeImage,
   LOTLayerTypeNull,
   LOTLayerTypeShape,
+  LOTLayerTypeText,
   LOTLayerTypeUnknown
 } LOTLayerType;
 

@@ -93,6 +93,26 @@ static NSMutableDictionary *colorNameCache = nil;
           nil];
 }
 
++ (UIColor*)LOT_colorFromRGBAArray:(NSArray<NSNumber *> *)colorArray {
+  NSUInteger componentCount = colorArray.count;
+  if (componentCount == 3 || componentCount == 4) {
+    BOOL shouldUse255 = NO;
+    for (NSNumber *number in colorArray) {
+      if (number.floatValue > 1) {
+        shouldUse255 = YES;
+        break;
+      }
+    }
+
+    CGFloat alpha = componentCount == 4 ? colorArray[3].floatValue / (shouldUse255 ? 255.f : 1.f) : 1;
+    return [UIColor colorWithRed:colorArray[0].floatValue / (shouldUse255 ? 255.f : 1.f)
+                           green:colorArray[1].floatValue / (shouldUse255 ? 255.f : 1.f)
+                            blue:colorArray[2].floatValue / (shouldUse255 ? 255.f : 1.f)
+                           alpha:alpha];
+  }
+  return nil;
+}
+
 - (BOOL)LOT_red:(CGFloat *)red green:(CGFloat *)green blue:(CGFloat *)blue alpha:(CGFloat *)alpha {
 	const CGFloat *components = CGColorGetComponents(self.CGColor);
   

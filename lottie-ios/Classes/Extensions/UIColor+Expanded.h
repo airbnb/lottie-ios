@@ -16,6 +16,8 @@
 - (NSString *)LOT_colorSpaceString;
 
 - (NSArray *)LOT_arrayFromRGBAComponents;
+/// returns a UIColor from a 3 or 4 component color array (RGB(A))
++ (UIColor*)LOT_colorFromRGBAArray:(NSArray<NSNumber *> *)colorArray;
 
 - (BOOL)LOT_red:(CGFloat *)r green:(CGFloat *)g blue:(CGFloat *)b alpha:(CGFloat *)a;
 
