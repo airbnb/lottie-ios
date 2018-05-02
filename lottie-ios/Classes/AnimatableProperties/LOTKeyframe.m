@@ -56,6 +56,14 @@
   return self;
 }
 
+- (instancetype)initWithValue:(id)value forTime:(NSNumber*)keyframeTime {
+  self = [self initWithValue:value];
+  if (self) {
+    _keyframeTime = keyframeTime;
+  }
+  return self;
+}
+
 // TODO: check all nil guaruntees, ensure these two inits are good to go
 - (instancetype)initWithColorValue:(UIColor*)colorValue {
   self = [super init];
@@ -125,7 +133,7 @@
   _sizeValue = CGSizeMake(remapBlock(_sizeValue.width), remapBlock(_sizeValue.height));
 }
 
-- (void)formPointFromFloatValue:(CGFloat)yValue {
+- (void)formPointFromFloatWithYValue:(CGFloat)yValue {
   CGFloat xValue = _floatValue ? _floatValue : 0;
   _pointValue = CGPointMake(xValue, yValue);
 }
@@ -153,7 +161,13 @@
       [[(NSArray *)data firstObject] isKindOfClass:[NSDictionary class]]) {
     _pathData = [[LOTBezierData alloc] initWithData:[(NSArray *)data firstObject]];
   } else if ([data isKindOfClass:[NSDictionary class]]) {
-    _pathData = [[LOTBezierData alloc] initWithData:data];
+    if ([data[@"t"] isKindOfClass:[NSString class]]) {
+      // has a string under "t" key, text document:
+      _textProperties = [[LOTTextProperties alloc] initWithJSON:data];
+    } else {
+      // bezier path:
+      _pathData = [[LOTBezierData alloc] initWithData:data];
+    }
   }
 }
 

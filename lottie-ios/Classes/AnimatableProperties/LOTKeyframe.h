@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "LOTPlatformCompat.h"
 #import "LOTBezierData.h"
+#import "LOTTextProperties.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,10 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithKeyframe:(NSDictionary *)keyframe;
 - (instancetype)initWithValue:(id)value;
+- (instancetype)initWithValue:(id)value forTime:(NSNumber*)keyframeTime;
 - (instancetype)initWithSizeValue:(CGSize)sizeValue;
 - (instancetype)initWithColorValue:(UIColor*)colorValue;
 - (void)remapValueWithBlock:(CGFloat (^)(CGFloat inValue))remapBlock;
-- (void)formPointFromFloatValue:(CGFloat)yValue;
+- (void)formPointFromFloatWithYValue:(CGFloat)yValue;
 - (LOTKeyframe *)copyWithData:(id)data;
 
 @property (nonatomic, readonly) NSNumber *keyframeTime;
@@ -36,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) UIColor *colorValue;
 @property (nonatomic, readonly, nullable) LOTBezierData *pathData;
 @property (nonatomic, readonly) NSArray *arrayValue;
+@property (nonatomic, readonly, nullable) LOTTextProperties* textProperties;
 
 @end
 

@@ -21,12 +21,13 @@
 
 // TODO: validate this
 - (instancetype)initWithPositionKeyframes:(LOTKeyframeGroup*)positions
-                           scaleKeyframes:(LOTKeyframeGroup*)scales {
+                           scaleKeyframes:(LOTKeyframeGroup*)scales
+                         opacityKeyframes:(LOTKeyframeGroup*)opacities {
   self = [super init];
   if (self) {
     _position = positions;
     _scale = scales;
-    _opacity = [[LOTKeyframeGroup alloc] initWithData:@1];
+    _opacity = opacities;
   }
   return self;
 }

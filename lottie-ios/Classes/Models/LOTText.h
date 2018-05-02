@@ -1,5 +1,5 @@
 //
-//  LOTTextDocument.h
+//  LOTText.h
 //  Lottie
 //
 //  Created by Adam Tierney on 4/18/18.
@@ -7,36 +7,33 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LOTPlatformCompat.h"
 
-@class LOTTextDocumentKeyframe;
+@class LOTKeyframeGroup;
+@class LOTShapeGroup;
+@class LOTTextProperties;
+@class LOTTextFrame;
 @class LOTTextAnimations;
-@class LOTCharacter;
 
 @interface LOTText : NSObject
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
 @property (nonatomic, readonly) LOTTextAnimations * animations;
-@property (nonatomic, readonly) NSArray<LOTTextDocumentKeyframe*> * keyframes;
+@property (nonatomic, readonly) LOTKeyframeGroup * propertyFrames;
+
+- (NSArray<LOTTextFrame*>*)textFramesFromKeyframes;
 
 @end
 
-@interface LOTTextDocumentKeyframe : NSObject
+@interface LOTTextFrame : NSObject
 
-- (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
+@property (nonatomic, readonly) LOTTextAnimations * animations;
+@property (nonatomic, readonly) LOTTextProperties * properties;
+@property (nonatomic, readonly) LOTKeyframeGroup * textFrameGroup;
 
-@property (nonatomic, readonly) NSString * text;
-@property (nonatomic, readonly) NSArray<LOTCharacter*> * characters;
-@property (nonatomic, readonly) NSNumber * keyframeTime;
-@property (nonatomic, readonly) NSString * fontName;
-@property (nonatomic, readonly) UIColor  * fontColor;
-@property (nonatomic, readonly) UIColor  * strokeColor;
-@property (nonatomic, readonly) NSNumber * strokeWidth;
-@property (nonatomic, readonly) NSString * justification;
-@property (nonatomic, readonly) NSNumber * lineHeight;
-@property (nonatomic, readonly) NSNumber * fontSize;
-@property (nonatomic, readonly) NSNumber * tracking;
-@property (nonatomic, readonly) BOOL strokeOverfill;
+@property (nonatomic, readonly) NSArray<LOTShapeGroup*> * frameGroups;
 
+- (instancetype)initWithProperties:(LOTTextProperties*)properties
+                     andAnimations:(LOTTextAnimations*)animations
+                         fromGroup:(LOTKeyframeGroup*)group;
 @end

@@ -14,6 +14,7 @@
 #import "LOTHelpers.h"
 #import "LOTMaskContainer.h"
 #import "LOTAsset.h"
+#import "LOTText.h"
 
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 #import "LOTCacheProvider.h"
@@ -98,7 +99,7 @@
     [self buildContents:layer.shapes];
   }
   if (layer.layerType == LOTLayerTypeText && layer.text) {
-    [self buildContents:@[layer.text]];
+    [self buildContents:[layer.text textFramesFromKeyframes]];
   }
   if (layer.layerType == LOTLayerTypeSolid) {
     _wrapperLayer.backgroundColor = layer.solidColor.CGColor;

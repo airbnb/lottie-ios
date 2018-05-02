@@ -25,5 +25,8 @@
 #import "LOTAsset.h"
 #import "LOTShapeGradientFill.h"
 #import "LOTText.h"
+#import "LOTTextAnimations.h"
+#import "LOTTextProperties.h"
+#import "LOTCharacter.h"
 
 #endif /* LOTModels_h */

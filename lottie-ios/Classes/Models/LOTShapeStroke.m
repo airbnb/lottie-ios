@@ -19,11 +19,12 @@
   return self;
 }
 
-// TODO: validate this
+// TODO: validate this 
 - (instancetype)initWithKeyname:(NSString*)keyname
                     colorFrames:(LOTKeyframeGroup*)colorFrames
                     widthFrames:(LOTKeyframeGroup*)widthFrames
                   opacityFrames:(LOTKeyframeGroup*)opacityFrames {
+
   self = [super init];
   if (self) {
     _keyname = keyname;
@@ -32,8 +33,9 @@
     _opacity = opacityFrames;
     _fillEnabled = false;
     _dashOffset = nil;
-    _capType = LOTLineCapTypeRound;
-    _joinType = LOTLineJoinTypeRound;
+    // set defaults
+    _capType = LOTLineCapTypeButt;
+    _joinType = LOTLineJoinTypeMiter;
   }
   return self;
 }
