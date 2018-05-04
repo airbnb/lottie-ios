@@ -50,6 +50,7 @@
       _dashOffsetInterpolator = [[LOTNumberInterpolator alloc] initWithKeyframes:stroke.dashOffset.keyframes];
     }
 
+    self.outputLayer.miterLimit = stroke.miterLimit;
     self.outputLayer.fillColor = nil;
     self.outputLayer.lineCap = stroke.capType == LOTLineCapTypeRound ? kCALineCapRound : kCALineCapButt;
     switch (stroke.joinType) {

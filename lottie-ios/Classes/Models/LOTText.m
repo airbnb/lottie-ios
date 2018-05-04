@@ -158,10 +158,13 @@
                                                        andTrackingKeyframes:trackingKeyframes];
 
     // create a stroke node to stroke the outline of the character:
+    // a 4 miter limit bezels angles <~30º this is the default value on Android and gives us parity
+    // in text rendering.
     LOTShapeStroke *strokeNode = [[LOTShapeStroke alloc] initWithKeyname:character.characterString
                                                              colorFrames:_strokeColorKeyframes
                                                              widthFrames:_strokeWidthKeyframes
-                                                           opacityFrames:[[LOTKeyframeGroup alloc] initWithData:@1]];
+                                                           opacityFrames:[[LOTKeyframeGroup alloc] initWithData:@1]
+                                                              miterLimit: 4.0];
 
     NSArray *strokeItems = [character.shapes.items arrayByAddingObject:strokeNode];
     LOTShapeGroup *strokeGroup = [[LOTShapeGroup alloc] initWithKeyname:character.characterString
