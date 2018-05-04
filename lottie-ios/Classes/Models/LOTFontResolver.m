@@ -8,10 +8,13 @@
 
 #import "LOTFontResolver.h"
 #import "LOTCharacter.h"
+#import "LOTFont.h"
 #import "LOTHelpers.h"
 
 @implementation LOTFontResolver {
-  NSMutableDictionary <NSString *, LOTCharacter *> * _characterMap;
+  /// maps conjoined font name to font object
+  NSMutableDictionary <NSString*, LOTFont*> * _fontMap;
+  NSMutableDictionary <NSString*, LOTCharacter*> * _characterMap;
 }
 
 // TODO: probably don't use a singleton and scope this to animation
@@ -30,63 +33,103 @@
   self = [super init];
   if (self) {
     _characterMap = [NSMutableDictionary dictionary];
+    _fontMap = [NSMutableDictionary dictionary];
   }
   return self;
 }
 
-- (void)seedGlyphPathsWithJSON:(NSArray*)charactersJSON {
+- (void)seedGlyphPathsWithJSON:(NSArray*)charactersJSON fontsJSON:(NSArray*)fontsJSON {
+
+  for (NSDictionary *fontJSON in fontsJSON) {
+    LOTFont *font = [[LOTFont alloc] initWithJSON:fontJSON];
+    if (font) {
+      _fontMap[font.name] = font;
+    }
+  }
+
   for (NSDictionary *characterJSON in charactersJSON) {
     LOTCharacter *character = [[LOTCharacter alloc] initWithJSON:characterJSON];
     if (character) {
-      [self setCharacter:character];
+      [self setGlyph:character];
     }
   }
 
   NSLog(@"imported glyphs %@", _characterMap);
 }
 
-- (void)setCharacter:(nonnull LOTCharacter*)character {
-  NSString *key = [LOTFontResolver keyForCharacterString:character.characterString
-                                                  ofSize:character.fontSize
-                                          fromFontFamily:character.fontFamilyName
-                                                 inStyle:character.fontStyle];
-  if (key) {
-    _characterMap[key] = character;
+- (LOTCharacter *)getGlyphForCharacter:(unichar)characterString
+                                ofSize:(NSNumber*)size
+                     withConjoinedName:(NSString*)familyStyleString {
+
+  LOTFont *font = _fontMap[familyStyleString];
+
+  NSString *keypath = [LOTFontResolver keypathForCharacter:characterString
+                                                      font:font
+                                                      size:size];
+
+  LOTCharacter *glyph = [_characterMap valueForKeyPath:keypath];
+  if (!glyph) {
+    NSLog(@"%C not present for keypath %@ – be sure to export the character as a glyph or provide a custom font file", characterString, keypath);
+  }
+
+  return glyph;
+}
+
+- (void)setGlyph:(LOTCharacter*)glyph {
+  NSString *keypath = [LOTFontResolver keypathForGlyph:glyph];
+  NSArray<NSString*> *pathComponents = [keypath componentsSeparatedByString:@"."];
+  [self setGlyph:glyph inDictionary:_characterMap forKeypathComponents:pathComponents];
+}
+
+- (void)setGlyph:(LOTCharacter*)glyph
+    inDictionary:(NSMutableDictionary*)dict
+forKeypathComponents:(NSArray<NSString*>*)keypathComponents {
+
+  NSUInteger pathCount = keypathComponents.count;
+  NSAssert(pathCount > 0, @"trying to set glyph without a keypath");
+  if (pathCount == 1) {
+    dict[[keypathComponents firstObject]] = glyph;
+  } else {
+    NSString *key = [keypathComponents firstObject];
+    NSMutableDictionary *mutableContainer;
+    if (dict[key] && [dict[key] isKindOfClass:[NSMutableDictionary class]]) {
+      mutableContainer = dict[key];
+    } else {
+      mutableContainer = [NSMutableDictionary dictionary];
+      dict[key] = mutableContainer;
+    }
+
+    // drop first:
+    NSArray *nextComponents = [keypathComponents subarrayWithRange:NSMakeRange(1, pathCount - 1)];
+
+    [self setGlyph:glyph
+      inDictionary:mutableContainer
+forKeypathComponents: nextComponents];
   }
 }
 
-- (LOTCharacter *)getCharacterWithString:(NSString*)characterString
-                                  ofSize:(NSNumber*)size
-                          fromFontFamily:(NSString*)family
-                                 inStyle:(NSString*)style {
+// MARK: - Keypath Helpers
 
-  NSString *key = [LOTFontResolver keyForCharacterString:characterString ofSize:size fromFontFamily:family inStyle:style];
-  LOTCharacter *lotCharacter = _characterMap[key];
-  if (!lotCharacter) {
-    NSLog(@"%@ not present for key %@ – be sure to export the character as a glyph or provide a custom font file", characterString, key);
-  }
-
-  return lotCharacter;
++ (NSString *)keypathForCharacter:(unichar)characterString
+                             font:(LOTFont*)font
+                             size:(NSNumber*)size {
+  return  [LOTFontResolver keypathForCharacter:characterString
+                                        ofSize:size
+                                fromFontFamily:font.familyName
+                                       inStyle:font.style];
 }
 
-- (LOTCharacter *)getCharacter:(unichar)character
-                        ofSize:(NSNumber*)size
-                fromFontFamily:(NSString*)family
-                       inStyle:(NSString*)style {
-
-  NSString *key = [LOTFontResolver keyForCharacter:character ofSize:size fromFontFamily:family inStyle:style];
-  LOTCharacter *lotCharacter = _characterMap[key];
-  if (!lotCharacter) {
-    NSLog(@"%C not present for key %@ – be sure to export the character as a glyph or provide a custom font file", character, key);
-  }
-
-  return lotCharacter;
++ (NSString *)keypathForGlyph:(LOTCharacter*)glyph {
+  return [LOTFontResolver keypathForCharacterString:glyph.characterString
+                                             ofSize:glyph.fontSize
+                                     fromFontFamily:glyph.fontFamilyName
+                                            inStyle:glyph.fontStyle];
 }
 
-+ (NSString *)keyForCharacterString:(NSString*)characterString
-                             ofSize:(NSNumber*)size
-                     fromFontFamily:(NSString*)family
-                            inStyle:(NSString*)style {
++ (NSString *)keypathForCharacterString:(NSString*)characterString
+                                 ofSize:(NSNumber*)size
+                         fromFontFamily:(NSString*)family
+                                inStyle:(NSString*)style {
 
   NSRange range = [characterString rangeOfComposedCharacterSequenceAtIndex:0];
 
@@ -97,20 +140,18 @@
   }
 
   unichar characterValue = [characterString characterAtIndex:0];
-  NSString *key = [LOTFontResolver keyForCharacter:characterValue
-                                            ofSize:size
-                                    fromFontFamily:family
-                                           inStyle:style];
+  NSString *key = [LOTFontResolver keypathForCharacter:characterValue
+                                                ofSize:size
+                                        fromFontFamily:family
+                                               inStyle:style];
   return key;
 }
 
-+ (NSString *)keyForCharacter:(unichar)character
-                       ofSize:(NSNumber*)size
-               fromFontFamily:(NSString*)family
-                      inStyle:(NSString*)style {
-  //FIXME: reconcile two different spellings for chars and doc
-//  return [NSString stringWithFormat: @"%@-%@-%C", family, size, character];
-  return [NSString stringWithFormat: @"%C", character];
++ (NSString *)keypathForCharacter:(unichar)character
+                           ofSize:(NSNumber*)size
+                   fromFontFamily:(NSString*)family
+                          inStyle:(NSString*)style {
+  return [NSString stringWithFormat: @"%@.%@.%@.%C", family, style, size, character];
 }
 
 @end

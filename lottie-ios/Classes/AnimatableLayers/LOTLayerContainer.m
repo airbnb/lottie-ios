@@ -14,6 +14,7 @@
 #import "LOTHelpers.h"
 #import "LOTMaskContainer.h"
 #import "LOTAsset.h"
+#import "LOTText.h"
 
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 #import "LOTCacheProvider.h"
@@ -61,9 +62,10 @@
     return;
   }
   _layerName = layer.layerName;
-  if (layer.layerType == LOTLayerTypeImage ||
-      layer.layerType == LOTLayerTypeSolid ||
-      layer.layerType == LOTLayerTypePrecomp) {
+  if (layer.layerType == LOTLayerTypeImage   ||
+      layer.layerType == LOTLayerTypeSolid   ||
+      layer.layerType == LOTLayerTypePrecomp
+      ) {
     _wrapperLayer.bounds = CGRectMake(0, 0, layer.layerWidth.floatValue, layer.layerHeight.floatValue);
     _wrapperLayer.anchorPoint = CGPointMake(0, 0);
     _wrapperLayer.masksToBounds = YES;
@@ -95,6 +97,9 @@
   if (layer.layerType == LOTLayerTypeShape &&
       layer.shapes.count) {
     [self buildContents:layer.shapes];
+  }
+  if (layer.layerType == LOTLayerTypeText && layer.text) {
+    [self buildContents:[layer.text textFramesFromKeyframes]];
   }
   if (layer.layerType == LOTLayerTypeSolid) {
     _wrapperLayer.backgroundColor = layer.solidColor.CGColor;

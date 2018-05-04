@@ -19,6 +19,6 @@
 @property (nonatomic, readonly) NSString * fontFamilyName;
 @property (nonatomic, readonly) NSNumber * fontSize;
 @property (nonatomic, readonly) NSString * fontStyle;
-@property (nonatomic, readonly) NSArray<LOTShapeGroup *> * shapes;
+@property (nonatomic, readonly) LOTShapeGroup * shapes;
 
 @end

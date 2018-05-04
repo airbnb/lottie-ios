@@ -24,6 +24,22 @@
   return self;
 }
 
+- (id)copyWithZone:(NSZone*)zone {
+  LOTBezierData *copy = [[LOTBezierData alloc] init];
+  copy->_count = self.count;
+  copy->_closed = self.closed;
+
+  NSUInteger pointsSize = sizeof(CGPoint) * self.count;
+  copy->_vertices = (CGPoint *)malloc(pointsSize);
+  memcpy(copy->_vertices, _vertices, pointsSize);
+  copy->_inTangents = (CGPoint *)malloc(pointsSize);
+  memcpy(copy->_inTangents, _inTangents, pointsSize);
+  copy->_outTangents = (CGPoint *)malloc(pointsSize);
+  memcpy(copy->_outTangents, _outTangents, pointsSize);
+
+  return copy;
+}
+
 - (void)dealloc {
   free(_vertices);
   free(_inTangents);

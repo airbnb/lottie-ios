@@ -14,15 +14,10 @@
 
 + (instancetype)shared;
 
-- (void)seedGlyphPathsWithJSON:(NSArray*)charactersJSON;
+- (void)seedGlyphPathsWithJSON:(NSArray*)charactersJSON fontsJSON:(NSArray*)fontsJSON;
 
-- (LOTCharacter *)getCharacter:(unichar)character
-                        ofSize:(NSNumber*)size
-                fromFontFamily:(NSString*)family
-                       inStyle:(NSString*)style;
+- (LOTCharacter *)getGlyphForCharacter:(unichar)characterString
+                                ofSize:(NSNumber*)size
+                     withConjoinedName:(NSString*)familyStyleString;
 
-- (LOTCharacter *)getCharacterWithString:(NSString*)characterString
-                                  ofSize:(NSNumber*)size
-                          fromFontFamily:(NSString*)family
-                                 inStyle:(NSString*)style;
 @end

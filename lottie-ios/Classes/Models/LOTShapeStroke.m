@@ -12,9 +12,41 @@
 @implementation LOTShapeStroke
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary {
-  self = [super init];
+  self = [self init];
   if (self) {
     [self _mapFromJSON:jsonDictionary];
+  }
+  return self;
+}
+
+// TODO: validate this 
+- (instancetype)initWithKeyname:(NSString*)keyname
+                    colorFrames:(LOTKeyframeGroup*)colorFrames
+                    widthFrames:(LOTKeyframeGroup*)widthFrames
+                  opacityFrames:(LOTKeyframeGroup*)opacityFrames
+                     miterLimit:(CGFloat)miterLimit {
+
+  self = [self init];
+  if (self) {
+    _keyname = keyname;
+    _color = colorFrames;
+    _width = widthFrames;
+    _opacity = opacityFrames;
+    _fillEnabled = false;
+    _dashOffset = nil;
+    // TODO: #? remove miter limit from LOTBezier as it's currenlty not used.
+    _miterLimit = miterLimit;
+    // set defaults
+    _capType = LOTLineCapTypeButt;
+    _joinType = LOTLineJoinTypeMiter;
+  }
+  return self;
+}
+
+- (instancetype) init {
+  self = [super init];
+  if (self) {
+    _miterLimit = 10.0; // os default
   }
   return self;
 }

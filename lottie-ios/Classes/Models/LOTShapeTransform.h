@@ -14,6 +14,9 @@
 @interface LOTShapeTransform : NSObject
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
+- (instancetype)initWithPositionKeyframes:(LOTKeyframeGroup*)positions
+                           scaleKeyframes:(LOTKeyframeGroup*)scales
+                         opacityKeyframes:(LOTKeyframeGroup*)opacities;
 
 @property (nonatomic, readonly) NSString *keyname;
 @property (nonatomic, readonly) LOTKeyframeGroup *position;

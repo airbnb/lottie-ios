@@ -56,6 +56,44 @@
   return self;
 }
 
+- (instancetype)initWithValue:(id)value forTime:(NSNumber*)keyframeTime {
+  self = [self initWithValue:value];
+  if (self) {
+    _keyframeTime = keyframeTime;
+  }
+  return self;
+}
+
+// TODO: check all nil guaruntees, ensure these two inits are good to go
+- (instancetype)initWithColorValue:(UIColor*)colorValue {
+  self = [super init];
+  if (self) {
+    _inTangent = CGPointZero;
+    _outTangent = CGPointZero;
+    _spatialInTangent = CGPointZero;
+    _spatialOutTangent = CGPointZero;
+    _keyframeTime = @0;
+    _isHold = YES;
+    _colorValue = colorValue;
+  }
+  return self;
+}
+
+- (instancetype)initWithSizeValue:(CGSize)sizeValue {
+  self = [super init];
+  if (self) {
+    _inTangent = CGPointZero;
+    _outTangent = CGPointZero;
+    _spatialInTangent = CGPointZero;
+    _spatialOutTangent = CGPointZero;
+    _keyframeTime = @0;
+    _isHold = YES;
+    _sizeValue = sizeValue;
+  }
+  return self;
+}
+//
+
 - (instancetype)initWithLOTKeyframe:(LOTKeyframe *)keyframe {
   self = [super init];
   if (self) {
@@ -75,6 +113,16 @@
   return newFrame;
 }
 
+- (id)copyWithZone:(NSZone*)zone {
+  LOTKeyframe *copy = [[LOTKeyframe alloc] initWithLOTKeyframe:self];
+  copy->_floatValue = self.floatValue;
+  copy->_pointValue = self.pointValue;
+  copy->_sizeValue = self.sizeValue;
+  copy->_colorValue = [self.colorValue copy];
+  copy->_arrayValue = [[NSArray alloc] initWithArray:self.arrayValue copyItems:YES];
+  return copy;
+}
+
 - (void)setData:(id)data {
   [self setupOutputWithData:data];
 }
@@ -83,6 +131,11 @@
   _floatValue = remapBlock(_floatValue);
   _pointValue = CGPointMake(remapBlock(_pointValue.x), remapBlock(_pointValue.y));
   _sizeValue = CGSizeMake(remapBlock(_sizeValue.width), remapBlock(_sizeValue.height));
+}
+
+- (void)formPointFromFloatWithYValue:(CGFloat)yValue {
+  CGFloat xValue = _floatValue ? _floatValue : 0;
+  _pointValue = CGPointMake(xValue, yValue);
 }
 
 - (void)setupOutputWithData:(id)data {
@@ -108,7 +161,13 @@
       [[(NSArray *)data firstObject] isKindOfClass:[NSDictionary class]]) {
     _pathData = [[LOTBezierData alloc] initWithData:[(NSArray *)data firstObject]];
   } else if ([data isKindOfClass:[NSDictionary class]]) {
-    _pathData = [[LOTBezierData alloc] initWithData:data];
+    if ([data[@"t"] isKindOfClass:[NSString class]]) {
+      // has a string under "t" key, text document:
+      _textProperties = [[LOTTextProperties alloc] initWithJSON:data];
+    } else {
+      // bezier path:
+      _pathData = [[LOTBezierData alloc] initWithData:data];
+    }
   }
 }
 
@@ -169,6 +228,20 @@
     }
   }
   return self;
+}
+
+- (instancetype)initWithKeyframes:(NSArray<LOTKeyframe*>*)keyframes {
+  self = [super init];
+  if (self) {
+    _keyframes = keyframes;
+  }
+  return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  LOTKeyframeGroup *copy = [[LOTKeyframeGroup alloc] init];
+  copy->_keyframes = [[NSArray alloc] initWithArray:self.keyframes copyItems:YES];
+  return copy;
 }
 
 - (void)buildKeyframesFromData:(id)data {

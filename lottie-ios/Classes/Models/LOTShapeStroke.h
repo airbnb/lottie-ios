@@ -25,12 +25,19 @@ typedef enum : NSUInteger {
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary;
 
+- (instancetype)initWithKeyname:(NSString*)keyname
+                    colorFrames:(LOTKeyframeGroup*)colorFrames
+                    widthFrames:(LOTKeyframeGroup*)widthFrames
+                  opacityFrames:(LOTKeyframeGroup*)opacityFrames
+                     miterLimit:(CGFloat)miterLimit;
+
 @property (nonatomic, readonly) NSString *keyname;
 @property (nonatomic, readonly) BOOL fillEnabled;
 @property (nonatomic, readonly) LOTKeyframeGroup *color;
 @property (nonatomic, readonly) LOTKeyframeGroup *opacity;
 @property (nonatomic, readonly) LOTKeyframeGroup *width;
 @property (nonatomic, readonly) LOTKeyframeGroup *dashOffset;
+@property (nonatomic, readonly) CGFloat miterLimit;
 @property (nonatomic, readonly) LOTLineCapType capType;
 @property (nonatomic, readonly) LOTLineJoinType joinType;
 

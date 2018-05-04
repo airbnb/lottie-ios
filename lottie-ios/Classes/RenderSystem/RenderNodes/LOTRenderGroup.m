@@ -118,6 +118,13 @@
       LOTRepeaterRenderer *repeater = [[LOTRepeaterRenderer alloc] initWithInputNode:previousNode shapeRepeater:(LOTShapeRepeater *)item];
       previousNode = repeater;
       [self.containerLayer insertSublayer:repeater.outputLayer atIndex:0];
+    } else if ([item isKindOfClass:[LOTTextFrame class]]) {
+      LOTTextFrame *textFrame = (LOTTextFrame *)item;
+      LOTRenderGroup *renderGroup = [[LOTRenderGroup alloc] initWithInputNode:previousNode
+                                                                     contents:textFrame.frameGroups
+                                                                      keyname:textFrame.properties.text];
+      [self.containerLayer insertSublayer:renderGroup.containerLayer atIndex:0];
+      previousNode = renderGroup;
     }
   }
   if (transform) {
