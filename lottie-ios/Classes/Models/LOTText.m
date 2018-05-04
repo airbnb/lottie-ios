@@ -77,14 +77,12 @@
   // stroke width, unscaled
   if (_animations.strokeWidth) {
     _strokeWidthKeyframes = _animations.strokeWidth;
-
-    //TODO: figure out what is up with stroke widths... this should be right without scaling...
-//    CGFloat fontScale = _fontScale;
-//    [_strokeWidthKeyframes remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
-//      return inValue / fontScale;
-//    }];
+    CGFloat fontScale = _fontScale;
+    [_strokeWidthKeyframes remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+      return inValue / fontScale;
+    }];
   } else if (_properties.strokeWidth) {
-    NSNumber *normalizedStrokeWidth = [[NSNumber alloc] initWithFloat:_properties.strokeWidth.floatValue];// / _fontScale];
+    NSNumber *normalizedStrokeWidth = [[NSNumber alloc] initWithFloat:_properties.strokeWidth.floatValue / _fontScale];
     LOTKeyframe *strokeWidthKeyframe = [[LOTKeyframe alloc] initWithValue:normalizedStrokeWidth];
     _strokeWidthKeyframes = [[LOTKeyframeGroup alloc] initWithKeyframes:@[strokeWidthKeyframe]];
   } else {

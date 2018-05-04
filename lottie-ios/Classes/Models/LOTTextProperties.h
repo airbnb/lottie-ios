@@ -28,6 +28,4 @@
 @property (nonatomic, readonly) NSNumber * tracking;
 @property (nonatomic, readonly) BOOL strokeOverfill;
 
-- (BOOL)isEqualToProperties:(LOTTextProperties*)properties;
-
 @end

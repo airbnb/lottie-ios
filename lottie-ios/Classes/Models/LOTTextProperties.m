@@ -51,10 +51,9 @@
   [self.text getCharacters:buffer range:NSMakeRange(0, length)];
   for (int i=0; i<length; i++) {
 
-    LOTCharacter *glyph = [[LOTFontResolver shared] getCharacter:buffer[i]
-                                                          ofSize:self.fontSize
-                                                  fromFontFamily:self.fontName
-                                                         inStyle:@"foo"];
+    LOTCharacter *glyph = [[LOTFontResolver shared] getGlyphForCharacter:buffer[i]
+                                                                  ofSize:self.fontSize
+                                                       withConjoinedName:self.fontName];
     if (glyph) {
       [arr addObject:glyph];
     }

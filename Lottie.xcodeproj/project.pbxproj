@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		232DFA18209CD7140000941E /* LOTFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 232DFA16209CD7140000941E /* LOTFont.h */; };
+		232DFA19209CD7140000941E /* LOTFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 232DFA16209CD7140000941E /* LOTFont.h */; };
+		232DFA1A209CD7140000941E /* LOTFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 232DFA16209CD7140000941E /* LOTFont.h */; };
+		232DFA1B209CD7140000941E /* LOTFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 232DFA17209CD7140000941E /* LOTFont.m */; };
+		232DFA1C209CD7140000941E /* LOTFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 232DFA17209CD7140000941E /* LOTFont.m */; };
+		232DFA1D209CD7140000941E /* LOTFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 232DFA17209CD7140000941E /* LOTFont.m */; };
+		232DFA1E209CD71F0000941E /* LOTFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 232DFA17209CD7140000941E /* LOTFont.m */; };
 		23370127209A5D04003EB3CB /* LOTTextProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 23370125209A5D04003EB3CB /* LOTTextProperties.h */; };
 		23370128209A5D04003EB3CB /* LOTTextProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 23370125209A5D04003EB3CB /* LOTTextProperties.h */; };
 		23370129209A5D04003EB3CB /* LOTTextProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 23370125209A5D04003EB3CB /* LOTTextProperties.h */; };
@@ -497,6 +504,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		232DFA16209CD7140000941E /* LOTFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LOTFont.h; sourceTree = "<group>"; };
+		232DFA17209CD7140000941E /* LOTFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LOTFont.m; sourceTree = "<group>"; };
 		23370125209A5D04003EB3CB /* LOTTextProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LOTTextProperties.h; sourceTree = "<group>"; };
 		23370126209A5D04003EB3CB /* LOTTextProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LOTTextProperties.m; sourceTree = "<group>"; };
 		23A216412089157400DB1762 /* LOTFontResolver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LOTFontResolver.h; sourceTree = "<group>"; };
@@ -726,6 +735,8 @@
 				4883E4ED1E5FA5EE00027E57 /* LOTAssetGroup.m */,
 				23A2164A208915A200DB1762 /* LOTCharacter.h */,
 				23A2164B208915A200DB1762 /* LOTCharacter.m */,
+				232DFA16209CD7140000941E /* LOTFont.h */,
+				232DFA17209CD7140000941E /* LOTFont.m */,
 				23A216412089157400DB1762 /* LOTFontResolver.h */,
 				23A216422089157400DB1762 /* LOTFontResolver.m */,
 				481A4A421E4A7885003CF62B /* LOTLayer.h */,
@@ -996,6 +1007,7 @@
 				622F766B1F2BCE1300269858 /* LOTRepeaterRenderer.h in Headers */,
 				62C9EA4A1F1FE6C800DE7D07 /* LOTRoundedRectAnimator.h in Headers */,
 				6201FAE61F200B4A00A047C9 /* LOTMaskContainer.h in Headers */,
+				232DFA18209CD7140000941E /* LOTFont.h in Headers */,
 				62E4703B20000C9A000C97B5 /* LOTValueDelegate.h in Headers */,
 				622F76551F2AC70400269858 /* LOTGradientFillRender.h in Headers */,
 				6274CF991F17E92F00E05049 /* LOTSizeInterpolator.h in Headers */,
@@ -1048,6 +1060,7 @@
 				8C5379471FB471D100C1BC65 /* LOTShapePath.h in Headers */,
 				8C5379481FB471D100C1BC65 /* LOTCompositionContainer.h in Headers */,
 				8C5379491FB471D100C1BC65 /* LOTAnimationTransitionController.h in Headers */,
+				232DFA1A209CD7140000941E /* LOTFont.h in Headers */,
 				8C53794A1FB471D100C1BC65 /* LOTHelpers.h in Headers */,
 				8C53794B1FB471D100C1BC65 /* LOTKeyframe.h in Headers */,
 				8C53794C1FB471D100C1BC65 /* Lottie.h in Headers */,
@@ -1144,6 +1157,7 @@
 				481A4AC61E4A7885003CF62B /* LOTShapeStroke.h in Headers */,
 				6274D00E1F1D6CE200E05049 /* LOTStrokeRenderer.h in Headers */,
 				6274CFA91F17E98200E05049 /* LOTColorInterpolator.h in Headers */,
+				232DFA19209CD7140000941E /* LOTFont.h in Headers */,
 				62E4703C20000C9A000C97B5 /* LOTValueDelegate.h in Headers */,
 				622F764F1F2AC1BF00269858 /* LOTArrayInterpolator.h in Headers */,
 				62BFC2E41F14298D0068A342 /* LOTFillRenderer.h in Headers */,
@@ -1341,6 +1355,7 @@
 				622F76371F2A91CA00269858 /* LOTPolystarAnimator.m in Sources */,
 				6274CF8D1F16F29200E05049 /* LOTPointInterpolator.m in Sources */,
 				481A4AC71E4A7885003CF62B /* LOTShapeStroke.m in Sources */,
+				232DFA1B209CD7140000941E /* LOTFont.m in Sources */,
 				6274CF9B1F17E92F00E05049 /* LOTSizeInterpolator.m in Sources */,
 				6279981C1FE1D04600B2DDD9 /* LOTKeypath.m in Sources */,
 				62BFC2E51F14298D0068A342 /* LOTFillRenderer.m in Sources */,
@@ -1423,6 +1438,7 @@
 				62BFC2F11F14298D0068A342 /* LOTPathAnimator.m in Sources */,
 				622F76301F2A8CBA00269858 /* LOTShapeStar.m in Sources */,
 				84FE130A1E4C1553009B157C /* LOTLayer.m in Sources */,
+				232DFA1E209CD71F0000941E /* LOTFont.m in Sources */,
 				84FE130B1E4C1553009B157C /* LOTMask.m in Sources */,
 				6274CFAC1F17E98200E05049 /* LOTColorInterpolator.m in Sources */,
 				84FE130C1E4C1553009B157C /* LOTShapeCircle.m in Sources */,
@@ -1481,6 +1497,7 @@
 				8C5379181FB471D100C1BC65 /* LOTShapeStroke.m in Sources */,
 				8C5379191FB471D100C1BC65 /* LOTSizeInterpolator.m in Sources */,
 				A874744D204EC2E300E5C62C /* LOTKeypath.m in Sources */,
+				232DFA1D209CD7140000941E /* LOTFont.m in Sources */,
 				8C53791A1FB471D100C1BC65 /* LOTFillRenderer.m in Sources */,
 				8C53791B1FB471D100C1BC65 /* LOTLayer.m in Sources */,
 				8C53791C1FB471D100C1BC65 /* LOTRoundedRectAnimator.m in Sources */,
@@ -1544,6 +1561,7 @@
 				62BFC2F51F14298D0068A342 /* LOTRenderGroup.m in Sources */,
 				481A4AD41E4A7885003CF62B /* LOTAnimationView.m in Sources */,
 				622F762F1F2A8CBA00269858 /* LOTShapeStar.m in Sources */,
+				232DFA1C209CD7140000941E /* LOTFont.m in Sources */,
 				6257F31C1FFD61A100DAE7B2 /* UIBezierPath.m in Sources */,
 				6274CFAB1F17E98200E05049 /* LOTColorInterpolator.m in Sources */,
 				6274CFA31F17E94C00E05049 /* LOTPathInterpolator.m in Sources */,

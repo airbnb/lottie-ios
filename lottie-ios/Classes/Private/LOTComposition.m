@@ -120,8 +120,10 @@
 
   LOTFontResolver *fontResolver = [LOTFontResolver shared];
   NSArray *characters = jsonDictionary[@"chars"];
-  if (characters) {
-    [fontResolver seedGlyphPathsWithJSON:characters];
+  NSDictionary *fonts = jsonDictionary[@"fonts"];
+  NSArray *fontList = fonts[@"list"];
+  if (characters && fontList) {
+    [fontResolver seedGlyphPathsWithJSON:characters fontsJSON:fontList];
   }
 
   NSArray *assetArray = jsonDictionary[@"assets"];
