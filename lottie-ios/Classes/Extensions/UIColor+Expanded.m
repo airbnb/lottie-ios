@@ -1,5 +1,3 @@
-// From http://github.com/ars/uicolor-utilities
-
 #import "UIColor+Expanded.h"
 
 /*
