@@ -336,7 +336,9 @@ static NSString * const kCompContainerAnimationKey = @"play";
     animation.delegate = self;
     animation.removedOnCompletion = NO;
     if (offset != 0) {
-      animation.beginTime = CACurrentMediaTime() - (offset * 1 / _animationSpeed);
+      CFTimeInterval currentTime = CACurrentMediaTime();
+      CFTimeInterval currentLayerTime = [self.layer convertTime:currentTime fromLayer:nil];
+      animation.beginTime = currentLayerTime - (offset * 1 / _animationSpeed);
     }
     [_compContainer addAnimation:animation forKey:kCompContainerAnimationKey];
     _compContainer.shouldRasterize = NO;
