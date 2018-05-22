@@ -229,6 +229,13 @@ static NSString * const kCompContainerAnimationKey = @"play";
   [self _setupWithSceneModel:comp];
 }
 
+- (void)setAnimationFromJSON:(nonnull NSDictionary *)animationJSON {
+  LOTComposition *comp = [LOTComposition animationFromJSON:animationJSON];
+
+  [self _initializeAnimationContainer];
+  [self _setupWithSceneModel:comp];
+}
+
 # pragma mark - External Methods - Model
 
 - (void)setSceneModel:(LOTComposition *)sceneModel {
