@@ -151,10 +151,10 @@
         
       id<LOTImageCache> imageCache = [LOTCacheProvider imageCache];
       if (imageCache) {
-        image = [imageCache imageForKey:imagePath];
+        image = [imageCache cachedImageForKey:imagePath];
         if (!image) {
           image = [UIImage imageWithContentsOfFile:imagePath];
-          [imageCache setImage:image forKey:imagePath];
+          [imageCache setCachedImage:image forKey:imagePath];
         }
       } else {
         image = [UIImage imageWithContentsOfFile:imagePath];
