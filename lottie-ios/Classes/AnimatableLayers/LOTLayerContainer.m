@@ -162,8 +162,16 @@
     } else {
         NSString *imagePath = [asset.assetBundle pathForResource:asset.imageName ofType:nil];
         image = [UIImage imageWithContentsOfFile:imagePath];
-        if(!image) {
+        if (!image) {
             image = [UIImage imageNamed:asset.imageName inBundle: asset.assetBundle compatibleWithTraitCollection:nil];
+        }
+
+        if (!image) {
+            // Try to get the image from an xcasset catalogue
+            NSData *data = [[NSDataAsset alloc] initWithName: asset.imageName].data;
+            if (data) {
+                image = [UIImage imageWithData: data];
+            }
         }
     }
     
