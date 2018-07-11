@@ -154,31 +154,6 @@ typedef enum : NSUInteger {
   }];
   UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:qrVC];
   [self presentViewController:nav animated:YES completion:NULL];
-  return;
-  
-  UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Load From URL"
-                                                                 message:NULL
-                                                          preferredStyle:UIAlertControllerStyleAlert];
-  
-  [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-    textField.placeholder = @"Enter URL";
-  }];
-  
-  UIAlertAction *load = [UIAlertAction actionWithTitle:@"Load" style:UIAlertActionStyleDefault
-                                                       handler:^(UIAlertAction * action) {
-                                                         [self _loadAnimationFromURLString:alert.textFields.firstObject.text];
-                                                       }];
-  
-  [alert addAction:load];
-  
-  UIAlertAction *close = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
-                                                        handler:^(UIAlertAction * action) {
-                                                          
-                                                        }];
-  
-  [alert addAction:close];
-  
-  [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)_showJSONExplorer {
