@@ -402,7 +402,7 @@
 				D1D919F4C7036D5CA46FF2514100B24D /* AnimatableLayers */,
 				28ADE39125B3AAB566C5F8CD9B1F39BC /* AnimatableProperties */,
 				5A0CDDFF2E1F91ADB11551A056E0F1D8 /* Extensions */,
-				38729DCE42C9DC108E0930F0A662FCC4 /* MacCompatability */,
+				38729DCE42C9DC108E0930F0A662FCC4 /* MacCompatibility */,
 				839F503398E50380EDCD5BBB8E51517D /* Models */,
 				753C9ADE783DF5A6F287F86039EA8041 /* Private */,
 				682D22B62124CA5284E5D55291E47760 /* PublicHeaders */,
@@ -412,7 +412,7 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		38729DCE42C9DC108E0930F0A662FCC4 /* MacCompatability */ = {
+		38729DCE42C9DC108E0930F0A662FCC4 /* MacCompatibility */ = {
 			isa = PBXGroup;
 			children = (
 				D807159EEFCDE052D5968205E78BF755 /* CALayer+Compat.h */,
@@ -425,8 +425,8 @@
 				231B01F24F8CDEBB1D25604265A9508F /* UIColor.h */,
 				B7F54200464F054B752F2FEFD79B453A /* UIColor.m */,
 			);
-			name = MacCompatability;
-			path = MacCompatability;
+			name = MacCompatibility;
+			path = MacCompatibility;
 			sourceTree = "<group>";
 		};
 		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
