@@ -1,22 +1,11 @@
-Example/Pods/Pods.xcodeproj/xcuserdata/
-Example/lottie-ios.xcworkspace/xcuserdata/
-Example/lottie-ios.xcodeproj/xcuserdata/
-LottieExamples/LottieExamples.xcodeproj/xcuserdata/
-LottieExamples.xcworkspace/xcuserdata/
-Lottie/Lottie.xcodeproj/xcuserdata/
-UserInterfaceState.xcuserstate
-xample/lottie-ios.xcodeproj/xcuserdata
-Lottie.xcodeproj/xcuserdata/
-Example/lottie-ios.xcworkspace/xcuserdata/
-Example/lottie-ios.xcodeproj/xcuserdata/
+# Xcode
+xcuserdata/
+
+# AppCode
 .idea/
+
+# other
 build/
-Lottie-Screenshot/Lottie-Screenshot.xcworkspace/xcuserdata/
-Lottie-Screenshot/Lottie-Screenshot.xcodeproj/xcuserdata/
-Lottie-Screenshot/Pods/Pods.xcodeproj/xcuserdata/
-Example/.DS_Store
-Example/lottie-ios.xcodeproj/xcuserdata
-Example/lottie-ios.xcodeproj/xcuserdata
-Example-Swift/Pods/Pods.xcodeproj/xcuserdata/
-Example-Swift/Lottie-Example-Swift.xcodeproj/xcuserdata/
+
+# macOS
 .DS_Store
