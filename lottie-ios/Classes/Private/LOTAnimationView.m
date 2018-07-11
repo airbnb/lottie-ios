@@ -746,7 +746,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
   [CATransaction commit];
 }
 
-# pragma mark - CAANimationDelegate
+# pragma mark - CAAnimationDelegate
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)complete {
   if ([_compContainer animationForKey:kCompContainerAnimationKey] == anim &&

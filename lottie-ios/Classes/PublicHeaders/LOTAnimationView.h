@@ -202,7 +202,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
     toKeypathLayer:(nonnull LOTKeypath *)keypath;
 
 /*!
- @brief Adds a UIView, or NSView, to the parentrenderable layer found at the Keypath and then masks the view with layer found at the keypath.
+ @brief Adds a UIView, or NSView, to the parent renderable layer found at the Keypath and then masks the view with layer found at the keypath.
  */
 - (void)maskSubview:(nonnull LOTView *)view
      toKeypathLayer:(nonnull LOTKeypath *)keypath;

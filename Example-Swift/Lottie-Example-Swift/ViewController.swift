@@ -35,9 +35,9 @@ class ViewController: UIViewController, URLSessionDownloadDelegate {
     view.addSubview(button)
 
     // The center of the screen, where the boat will start
-    let screenCenter = CGPoint(x:view.bounds.midX, y:view.bounds.midY)
+    let screenCenter = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
     // The center one screen height above the screen. Where the boat will end up when the download completes
-    let offscreenCenter = CGPoint(x:view.bounds.midX, y:-view.bounds.midY)
+    let offscreenCenter = CGPoint(x: view.bounds.midX, y: -view.bounds.midY)
 
     // Convert points into animation view coordinate space.
     let boatStartPoint = boatAnimation!.convert(screenCenter, toKeypathLayer: LOTKeypath(string: "Boat"))
@@ -46,7 +46,7 @@ class ViewController: UIViewController, URLSessionDownloadDelegate {
     // Set up out interpolator, to be driven by the download callback
     positionInterpolator = LOTPointInterpolatorCallback(from: boatStartPoint, to: boatEndPoint)
     // Set the interpolator on the animation view for the Boat.Transform.Position keypath.
-    boatAnimation!.setValueDelegate(positionInterpolator!, for:LOTKeypath(string: "Boat.Transform.Position"))
+    boatAnimation!.setValueDelegate(positionInterpolator!, for: LOTKeypath(string: "Boat.Transform.Position"))
 
     //Play the first portion of the animation on loop until the download finishes.
     boatAnimation!.loopAnimation = true
@@ -65,7 +65,7 @@ class ViewController: UIViewController, URLSessionDownloadDelegate {
     let downloadRequest = URLRequest(url: URL(string: "https://upload.wikimedia.org/wikipedia/commons/8/8f/Whole_world_-_land_and_oceans_12000.jpg")!)
     let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.main)
 
-    downloadTask = session.downloadTask(with:downloadRequest)
+    downloadTask = session.downloadTask(with: downloadRequest)
     downloadTask!.resume()
   }
   
