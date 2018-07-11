@@ -80,7 +80,7 @@
   _timeStretchFactor = [layer.timeStretch copy];
   _transformInterpolator = [LOTTransformInterpolator transformForLayer:layer];
 
-  if (layer.parentID) {
+  if (layer.parentID != nil) {
     NSNumber *parentID = layer.parentID;
     LOTTransformInterpolator *childInterpolator = _transformInterpolator;
     while (parentID != nil) {
