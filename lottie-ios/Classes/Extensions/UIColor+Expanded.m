@@ -401,8 +401,10 @@ static NSMutableDictionary *colorNameCache = nil;
 
 #pragma mark UIColor_Expanded initialization
 
-+ (void)load {
-	colorNameCache = [[NSMutableDictionary alloc] init];
++ (void)initialize {
+    if (self == [UIColor self]) {
+        colorNameCache = [[NSMutableDictionary alloc] init];
+    }
 }
 
 @end
