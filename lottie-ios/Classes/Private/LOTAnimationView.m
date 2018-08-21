@@ -227,7 +227,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
       _completionBlock = _completionBlockToRestoreWhenAttachedToWindow;
       _completionBlockToRestoreWhenAttachedToWindow = nil;
       
-      [self performSelector:@selector(_restoreState) withObject:nil afterDelay:0];
+      [self performSelector:@selector(_restoreState) withObject:nil afterDelay:0 inModes:@[NSRunLoopCommonModes]];
     }
   } else {
     // The view is being detached, capture information that need to be restored later.
