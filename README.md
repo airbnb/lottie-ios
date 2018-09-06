@@ -375,14 +375,30 @@ animationView4.play()
 ```
 ### Now lets change their colors
 ![Recolored Toggle](_Gifs/switch_BgColors.gif)
-```swift
-animationView2.setValue(UIColor.green, forKeypath: "BG-On.Group 1.Fill 1.Color", atFrame: 0)
-animationView3.setValue(UIColor.red, forKeypath: "BG-On.Group 1.Fill 1.Color", atFrame: 0)
-animationView4.setValue(UIColor.orange, forKeypath: "BG-On.Group 1.Fill 1.Color", atFrame: 0)
-```
 
-```objective-c
-[animationView2 setValue:[UIColor greenColor] forKeypath:@"BG-On.Group 1.Fill 1.Color" atFrame:@0];
+**NB**: `animationView.setValue(YOUR_COLOR, forKeypath: "YOUR_PATH.Color", atFrame: 0)` is now deprecated.
+
+```swift
+class GreenDelegate : NSObject, LOTColorValueDelegate {
+	func color(forFrame currentFrame: CGFloat, startKeyframe: CGFloat, endKeyframe: CGFloat, interpolatedProgress: CGFloat, start startColor: CGColor!, end endColor: CGColor!, currentColor interpolatedColor: CGColor!) -> Unmanaged<CGColor>! {
+		return  Unmanaged.passRetained(UIColor.green.cgColor)
+	}
+}
+animationView2.setValueDelegate(GreenDelegate(), for: LOTKeypath(string: "BG-On.Group 1.Fill 1.Color"))
+
+class RedDelegate : NSObject, LOTColorValueDelegate {
+	func color(forFrame currentFrame: CGFloat, startKeyframe: CGFloat, endKeyframe: CGFloat, interpolatedProgress: CGFloat, start startColor: CGColor!, end endColor: CGColor!, currentColor interpolatedColor: CGColor!) -> Unmanaged<CGColor>! {
+		return  Unmanaged.passRetained(UIColor.red.cgColor)
+	}
+}
+animationView3.setValueDelegate(RedDelegate(), for: LOTKeypath(string: "BG-On.Group 1.Fill 1.Color"))
+
+class OrangeDelegate : NSObject, LOTColorValueDelegate {
+	func color(forFrame currentFrame: CGFloat, startKeyframe: CGFloat, endKeyframe: CGFloat, interpolatedProgress: CGFloat, start startColor: CGColor!, end endColor: CGColor!, currentColor interpolatedColor: CGColor!) -> Unmanaged<CGColor>! {
+		return  Unmanaged.passRetained(UIColor.orange.cgColor)
+	}
+}
+animationView4.setValueDelegate(OrangeDelegate(), for: LOTKeypath(string: "BG-On.Group 1.Fill 1.Color"))
 ```
 The keyPath is a dot separated path of layer and property names from After Effects.
 LOTAnimationView provides `- (void)logHierarchyKeypaths` which will recursively log all settable keypaths for the animation.
@@ -391,12 +407,19 @@ LOTAnimationView provides `- (void)logHierarchyKeypaths` which will recursively 
 
 ### Now lets change a couple of properties
 ![Multiple Colors](_Gifs/switch_MultipleBgs.gif)
+
 ```swift
-animationView2.setValue(UIColor.green, forKeypath: "BG-On.Group 1.Fill 1.Color", atFrame: 0)
-animationView2.setValue(UIColor.red, forKeypath: "BG-Off.Group 1.Fill 1.Color", atFrame: 0)
+animationView2.setValueDelegate(delegate, for: LOTKeypath(string: YOUR_PATH))
 ```
 
 Lottie allows you to change **any** property that is animatable in After Effects. If a keyframe does not exist, a linear keyframe is created for you. If a keyframe does exist then just its data is replaced.
+
+For this you need to use a `LOTValueDelegate` there are many already available:
+* `LOTColorValueDelegate`
+* `LOTNumberValueDelegate`
+* `LOTPointValueDelegate`
+* `LOTSizeValueDelegate`
+* `LOTPathValueDelegate`
 
 ## Animated Controls and Switches
 
