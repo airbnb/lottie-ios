@@ -151,6 +151,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
   _playRangeStartFrame = nil;
   _playRangeEndProgress = 0;
   _playRangeStartProgress = 0;
+  _shouldRasterizeWhenIdle = YES;
 }
 
 - (void)_setupWithSceneModel:(LOTComposition *)model {
