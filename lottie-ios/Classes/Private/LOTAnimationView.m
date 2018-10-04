@@ -134,14 +134,6 @@ static NSString * const kCompContainerAnimationKey = @"play";
   self.clipsToBounds = YES;
 }
 
-#else
-
-- (void)_initializeAnimationContainer {
-  self.wantsLayer = YES;
-}
-
-#endif
-
 - (void)_commonInit {
   _animationSpeed = 1;
   _animationProgress = 0;
@@ -155,6 +147,28 @@ static NSString * const kCompContainerAnimationKey = @"play";
   [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_handleWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
   [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_handleWillEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
 }
+
+#else
+
+- (void)_initializeAnimationContainer {
+  self.wantsLayer = YES;
+}
+
+- (void)_commonInit {
+  _animationSpeed = 1;
+  _animationProgress = 0;
+  _loopAnimation = NO;
+  _autoReverseAnimation = NO;
+  _playRangeEndFrame = nil;
+  _playRangeStartFrame = nil;
+  _playRangeEndProgress = 0;
+  _playRangeStartProgress = 0;
+  _shouldRasterizeWhenIdle = NO;
+}
+
+#endif
+
+
 
 - (void)dealloc {
   [NSNotificationCenter.defaultCenter removeObserver:self];
