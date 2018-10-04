@@ -151,7 +151,13 @@ static NSString * const kCompContainerAnimationKey = @"play";
   _playRangeStartFrame = nil;
   _playRangeEndProgress = 0;
   _playRangeStartProgress = 0;
-  _shouldRasterizeWhenIdle = YES;
+  _shouldRasterizeWhenIdle = NO;
+  [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_handleWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+  [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_handleWillEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+}
+
+- (void)dealloc {
+  [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
 - (void)_setupWithSceneModel:(LOTComposition *)model {
@@ -239,6 +245,14 @@ static NSString * const kCompContainerAnimationKey = @"play";
       _completionBlock = nil;
     }
   }
+}
+
+- (void)_handleWillEnterBackground {
+  [self _handleWindowChanges: false];
+}
+
+- (void)_handleWillEnterForeground {
+  [self _handleWindowChanges: (self.window != nil)];
 }
 
 # pragma mark - Completion Block
