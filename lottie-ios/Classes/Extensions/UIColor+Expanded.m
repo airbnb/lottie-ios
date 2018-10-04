@@ -367,6 +367,11 @@ static NSMutableDictionary *colorNameCache = nil;
 // Lookup a color using css 3/svg color name
 + (UIColor *)LOT_colorWithName:(NSString *)cssColorName {
 	UIColor *color;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        colorNameCache = [[NSMutableDictionary alloc] init];
+    });
+    
 	@synchronized(colorNameCache) {
 		// Look for the color in the cache
 		color = [colorNameCache objectForKey:cssColorName];
@@ -397,12 +402,6 @@ static NSMutableDictionary *colorNameCache = nil;
   float b = fromComponents[2] + ((toComponents[2] - fromComponents[2]) * amount);
   float a = fromComponents[3] + ((toComponents[3] - fromComponents[3]) * amount);
   return [UIColor colorWithRed:r green:g blue:b alpha:a];
-}
-
-#pragma mark UIColor_Expanded initialization
-
-+ (void)load {
-	colorNameCache = [[NSMutableDictionary alloc] init];
 }
 
 @end
