@@ -77,7 +77,8 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 @property (nonatomic, strong, nullable) LOTComposition *sceneModel;
 
 /// Sets sholdRasterize to YES on the animation layer to improve compositioning performance when not animating.
-/// Defaults to YES
+/// Note this will not produce crisp results at resolutions above the animations set resolution.
+/// Defaults to NO
 @property (nonatomic, assign) BOOL shouldRasterizeWhenIdle;
 
 /* 
