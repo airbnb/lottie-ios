@@ -167,9 +167,11 @@
     } else {
         NSString *imagePath = [asset.assetBundle pathForResource:asset.imageName ofType:nil];
         image = [UIImage imageWithContentsOfFile:imagePath];
-        if(!image) {
-            image = [UIImage imageNamed:asset.imageName inBundle: asset.assetBundle compatibleWithTraitCollection:nil];
-        }
+    }
+
+    //try loading from asset catalogue instead if all else fails
+    if (!image) {
+      image = [UIImage imageNamed:asset.imageName inBundle: asset.assetBundle compatibleWithTraitCollection:nil];
     }
     
     if (image) {
