@@ -829,7 +829,7 @@
 			path = "lottie-ios/Classes/Private";
 			sourceTree = SOURCE_ROOT;
 		};
-		481A4AD71E4A78A0003CF62B /* MacCompatability */ = {
+		481A4AD71E4A78A0003CF62B /* MacCompatibility */ = {
 			isa = PBXGroup;
 			children = (
 				6257F3191FFD61A100DAE7B2 /* UIBezierPath.h */,
@@ -842,8 +842,8 @@
 				481A4AE11E4A78A0003CF62B /* UIColor.h */,
 				481A4AE21E4A78A0003CF62B /* UIColor.m */,
 			);
-			name = MacCompatability;
-			path = "lottie-ios/Classes/MacCompatability";
+			name = MacCompatibility;
+			path = "lottie-ios/Classes/MacCompatibility";
 			sourceTree = SOURCE_ROOT;
 		};
 		621A4F6D1F22754F0065E14F /* ManipulatorNodes */ = {
@@ -951,7 +951,7 @@
 			isa = PBXGroup;
 			children = (
 				62BFC2CF1F1428E80068A342 /* RenderSystem */,
-				481A4AD71E4A78A0003CF62B /* MacCompatability */,
+				481A4AD71E4A78A0003CF62B /* MacCompatibility */,
 				481A4A171E4A7885003CF62B /* AnimatableLayers */,
 				481A4A371E4A7885003CF62B /* Extensions */,
 				481A4A3F1E4A7885003CF62B /* Models */,
