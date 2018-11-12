@@ -5,7 +5,7 @@
 - [Installing Lottie](#installing-lottie)
 - [iOS Sample App](#ios-sample-app)
 - [macOS Sample App](#macos-sample-app)
-- [Objective C Examples](#objective-c-examples)
+- [Objective-C Examples](#objective-c-examples)
 - [Swift Examples](#swift-examples)
 - [Debugging Lottie](#debugging)
 - [iOS View Controller Transitioning](#ios-view-controller-transitioning)
@@ -60,7 +60,7 @@ pod install
 ```
 
 After installing the cocoapod into your project import Lottie with
-Objective C
+Objective-C
 `#import <Lottie/Lottie.h>` 
 Swift
 `import Lottie`
@@ -102,7 +102,7 @@ The repo can build a macOS Example and an iOS Example
 The Lottie Viewer for macOS allows you to drag and drop JSON files to open, play, scrub and loop animations. This app is backed by the same animation code as the iOS app, so you will get an accurate representation of Mac and iOS animations.
 
 
-## Objective C Examples
+## Objective-C Examples
 
 
 Lottie animations can be loaded from bundled JSON or from a URL
