@@ -119,6 +119,13 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
               toFrame:(nonnull NSNumber *)toEndFrame
        withCompletion:(nullable LOTAnimationCompletionBlock)completion;
 
+/**
+ * Plays the animation from its current position to the end of the animation with the specified seconds delay.
+ * The animation will start from its current position.
+ * If loopAnimation is YES the animation will loop from beginning to end indefinitely.
+ * If loopAnimation is NO the animation will stop and the completion block will be called.
+ **/
+- (void)playWithDelay:(CGFloat)delay completion:(LOTAnimationCompletionBlock)completion;
 
 /**
  * Plays the animation from its current position to the end of the animation.

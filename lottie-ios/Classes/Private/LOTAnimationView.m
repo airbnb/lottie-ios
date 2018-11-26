@@ -311,6 +311,17 @@ static NSString * const kCompContainerAnimationKey = @"play";
   [self playFromFrame:_sceneModel.startFrame toFrame:_sceneModel.endFrame withCompletion:nil];
 }
 
+- (void)playWithDelay:(CGFloat)delay completion:(LOTAnimationCompletionBlock)completion {
+    if (!_sceneModel) {
+        _isAnimationPlaying = YES;
+        return;
+    }
+    __weak typeof(self) weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakSelf playFromFrame:weakSelf.sceneModel.startFrame toFrame:weakSelf.sceneModel.endFrame withCompletion:completion];
+    });
+}
+
 - (void)playWithCompletion:(LOTAnimationCompletionBlock)completion {
   if (!_sceneModel) {
     _isAnimationPlaying = YES;
