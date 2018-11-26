@@ -287,10 +287,24 @@ static NSString * const kCompContainerAnimationKey = @"play";
   [self _initializeAnimationContainer];
   [self _setupWithSceneModel:comp];
 }
+  
+- (void)setAnimationNamed:(NSString *)animationName inBundle:(NSBundle *)bundle {
+  LOTComposition *comp = [LOTComposition animationNamed:animationName inBundle:bundle];
+  
+  [self _initializeAnimationContainer];
+  [self _setupWithSceneModel:comp];
+}
 
 - (void)setAnimationFromJSON:(nonnull NSDictionary *)animationJSON {
   LOTComposition *comp = [LOTComposition animationFromJSON:animationJSON];
 
+  [self _initializeAnimationContainer];
+  [self _setupWithSceneModel:comp];
+}
+  
+- (void)setAnimationFromJSON:(NSDictionary *)animationJSON inBundle:(NSBundle *)bundle {
+  LOTComposition *comp = [LOTComposition animationFromJSON:animationJSON inBundle:bundle];
+  
   [self _initializeAnimationContainer];
   [self _setupWithSceneModel:comp];
 }
