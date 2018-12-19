@@ -99,7 +99,11 @@ typedef enum : NSUInteger {
 - (void)viewWillLayoutSubviews {
   [super viewWillLayoutSubviews];
   CGRect b = self.view.bounds;
-  self.toolbar.frame = CGRectMake(0, b.size.height - 44, b.size.width, 44);
+  CGFloat safeAreaBottomInset = 0;
+  if (@available(iOS 11.0, *)) {
+    safeAreaBottomInset = self.view.safeAreaInsets.bottom;
+  }
+  self.toolbar.frame = CGRectMake(0, b.size.height - 44 - safeAreaBottomInset, b.size.width, 44);
   CGSize sliderSize = [self.slider sizeThatFits:b.size];
   sliderSize.height += 12;
   self.slider.frame = CGRectMake(10, CGRectGetMinY(self.toolbar.frame) - sliderSize.height, b.size.width - 20, sliderSize.height);
