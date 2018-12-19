@@ -42,9 +42,15 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 
 /// Load animation by name from the default bundle. Use when loading LOTAnimationView via Interface Builder.
 - (void)setAnimationNamed:(nonnull NSString *)animationName NS_SWIFT_NAME(setAnimation(named:));
+  
+/// Load animation by name from a specific bundle.
+- (void)setAnimationNamed:(nonnull NSString *)animationName inBundle:(nullable NSBundle *)bundle  NS_SWIFT_NAME(setAnimation(named:bundle:));
 
 /// Load animation from a JSON dictionary
 - (void)setAnimationFromJSON:(nonnull NSDictionary *)animationJSON NS_SWIFT_NAME(setAnimation(json:));
+
+/// Load animation from a JSON dictionary from a specific bundle
+- (void)setAnimationFromJSON:(nonnull NSDictionary *)animationJSON inBundle:(nullable NSBundle *)bundle NS_SWIFT_NAME(setAnimation(json:bundle:));
 
 /// Flag is YES when the animation is playing
 @property (nonatomic, readonly) BOOL isAnimationPlaying;
