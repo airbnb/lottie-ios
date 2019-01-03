@@ -1229,9 +1229,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6445B0D2207E0D4D00D84F6A /* Build configuration list for PBXNativeTarget "LottieLibraryMacOS" */;
 			buildPhases = (
+				6445B0C3207E0D4D00D84F6A /* CopyFiles */,
 				6445B089207E0D4D00D84F6A /* Sources */,
 				6445B0C2207E0D4D00D84F6A /* Frameworks */,
-				6445B0C3207E0D4D00D84F6A /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1246,9 +1246,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84FE12F71E4C1485009B157C /* Build configuration list for PBXNativeTarget "LottieLibraryIOS" */;
 			buildPhases = (
+				84FE12ED1E4C1485009B157C /* CopyFiles */,
 				84FE12EB1E4C1485009B157C /* Sources */,
 				84FE12EC1E4C1485009B157C /* Frameworks */,
-				84FE12ED1E4C1485009B157C /* CopyFiles */,
 			);
 			buildRules = (
 			);
