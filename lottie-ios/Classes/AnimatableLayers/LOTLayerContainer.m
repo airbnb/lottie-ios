@@ -140,46 +140,55 @@
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 
 - (void)_setImageForAsset:(LOTAsset *)asset {
-  if (asset.imageName) {
-    UIImage *image;
-    if ([asset.imageName hasPrefix:@"data:"]) {
-      // Contents look like a data: URL. Ignore asset.imageDirectory and simply load the image directly.
-      NSURL *imageUrl = [NSURL URLWithString:asset.imageName];
-      NSData *imageData = [NSData dataWithContentsOfURL:imageUrl];
-      image = [UIImage imageWithData:imageData];
-    } else if (asset.rootDirectory.length > 0) {
-      NSString *rootDirectory  = asset.rootDirectory;
-      if (asset.imageDirectory.length > 0) {
-        rootDirectory = [rootDirectory stringByAppendingPathComponent:asset.imageDirectory];
-      }
-      NSString *imagePath = [rootDirectory stringByAppendingPathComponent:asset.imageName];
+  __weak typeof(self) weakSelf = self;
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    if (asset.imageName) {
+      UIImage *image;
+      if ([asset.imageName hasPrefix:@"data:"]) {
+        // Contents look like a data: URL. Ignore asset.imageDirectory and simply load the image directly.
+        NSURL *imageUrl = [NSURL URLWithString:asset.imageName];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageUrl];
+        image = [UIImage imageWithData:imageData];
+      } else if (asset.rootDirectory.length > 0) {
+        NSString *rootDirectory  = asset.rootDirectory;
+        if (asset.imageDirectory.length > 0) {
+          rootDirectory = [rootDirectory stringByAppendingPathComponent:asset.imageDirectory];
+        }
+        NSString *imagePath = [rootDirectory stringByAppendingPathComponent:asset.imageName];
         
-      id<LOTImageCache> imageCache = [LOTCacheProvider imageCache];
-      if (imageCache) {
-        image = [imageCache imageForKey:imagePath];
-        if (!image) {
+        id<LOTImageCache> imageCache = [LOTCacheProvider imageCache];
+        if (imageCache) {
+          image = [imageCache imageForKey:imagePath];
+          if (!image) {
+            image = [UIImage imageWithContentsOfFile:imagePath];
+            [imageCache setImage:image forKey:imagePath];
+          }
+        } else {
           image = [UIImage imageWithContentsOfFile:imagePath];
-          [imageCache setImage:image forKey:imagePath];
         }
       } else {
-        image = [UIImage imageWithContentsOfFile:imagePath];
-      }
-    } else {
         NSString *imagePath = [asset.assetBundle pathForResource:asset.imageName ofType:nil];
         image = [UIImage imageWithContentsOfFile:imagePath];
+      }
+      
+      //try loading from asset catalogue instead if all else fails
+      if (!image) {
+        image = [UIImage imageNamed:asset.imageName inBundle: asset.assetBundle compatibleWithTraitCollection:nil];
+      }
+      
+      if (image) {
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(CGImageGetWidth(image.CGImage), CGImageGetHeight(image.CGImage)), NO, 0);
+        [image drawInRect:CGRectMake(0, 0, CGImageGetWidth(image.CGImage), CGImageGetHeight(image.CGImage))];
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        dispatch_async(dispatch_get_main_queue(), ^{
+          weakSelf.wrapperLayer.contents = (__bridge id _Nullable)(image.CGImage);
+        });
+      } else {
+        NSLog(@"%s: Warn: image not found: %@", __PRETTY_FUNCTION__, asset.imageName);
+      }
     }
-
-    //try loading from asset catalogue instead if all else fails
-    if (!image) {
-      image = [UIImage imageNamed:asset.imageName inBundle: asset.assetBundle compatibleWithTraitCollection:nil];
-    }
-    
-    if (image) {
-      _wrapperLayer.contents = (__bridge id _Nullable)(image.CGImage);
-    } else {
-      NSLog(@"%s: Warn: image not found: %@", __PRETTY_FUNCTION__, asset.imageName);
-    }
-  }
+  });
 }
 
 #else
