@@ -123,7 +123,7 @@
   }
   
   NSArray *layersJSON = jsonDictionary[@"layers"];
-  if (layersJSON && _assetGroup && _framerate) {
+  if (layersJSON && _framerate) {
     _layerGroup = [[LOTLayerGroup alloc] initWithLayerJSON:layersJSON
                                             withAssetGroup:_assetGroup
                                              withFramerate:_framerate];
