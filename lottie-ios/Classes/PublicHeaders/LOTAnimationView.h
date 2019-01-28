@@ -160,7 +160,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
  @code
  LOTKeypath *keypath = [LOTKeypath keypathWithKeys:@"Layer 1", @"Ellipse 1", @"Stroke 1", @"Color", nil];
  LOTColorValueCallback *colorCallback = [LOTColorBlockCallback withColor:[UIColor redColor]];
- [animationView setValueCallback:colorCallback forKeypath:keypath];
+ [animationView setValueDelegate:colorCallback forKeypath:keypath];
  @endcode
 
  See the documentation for LOTValueDelegate to see how to create LOTValueCallbacks. A delegate can be any object that conforms to the LOTValueDelegate protocol, or one of the prebuilt delegate classes found in LOTBlockCallback, LOTInterpolatorCallback, and LOTValueCallback.
