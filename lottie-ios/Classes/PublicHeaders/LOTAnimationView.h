@@ -220,7 +220,7 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 
 /*!
  @brief Sets the keyframe value for a specific After Effects property at a given time. NOTE: Deprecated. Use setValueDelegate:forKeypath:
- @discussion NOTE: Deprecated and non functioning. Use setValueCallback:forKeypath:
+ @discussion NOTE: Deprecated and non functioning. Use setValueDelegate:forKeypath:
  @param value Value is the color, point, or number object that should be set at given time
  @param keypath NSString . separate keypath The Keypath is a dot separated key path that specifies the location of the key to be set from the After Effects file. This will begin with the Layer Name. EG "Layer 1.Shape 1.Fill 1.Color"
  @param frame The frame is the frame to be set. If the keyframe exists it will be overwritten, if it does not exist a new linearly interpolated keyframe will be added
