@@ -21,6 +21,9 @@
 }
 
 + (nullable instancetype)animationNamed:(nonnull NSString *)animationName inBundle:(nonnull NSBundle *)bundle {
+  if (!animationName) {
+    return nil;
+  }
   NSArray *components = [animationName componentsSeparatedByString:@"."];
   animationName = components.firstObject;
   
