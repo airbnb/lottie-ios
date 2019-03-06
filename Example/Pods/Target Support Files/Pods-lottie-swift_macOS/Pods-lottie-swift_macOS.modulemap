@@ -1,0 +1,6 @@
+framework module Pods_lottie_swift_macOS {
+  umbrella header "Pods-lottie-swift_macOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
