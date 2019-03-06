@@ -38,7 +38,7 @@
   
   if (@available(iOS 9.0, *)) {
     if (!jsonData) {
-      jsonData = [[NSDataAsset alloc] initWithName:animationName].data;
+      jsonData = [[NSDataAsset alloc] initWithName:animationName bundle:bundle].data;
     }
   }
   
