@@ -15,7 +15,7 @@ import QuartzCore
  */
 class InvertedMatteLayer: CALayer, CompositionLayerDelegate {
   
-  let inputMatte: CompositionLayer
+  let inputMatte: CompositionLayer?
   let wrapperLayer = CALayer()
   
   init(inputMatte: CompositionLayer) {
@@ -25,6 +25,14 @@ class InvertedMatteLayer: CALayer, CompositionLayerDelegate {
     self.anchorPoint = .zero
     self.bounds = inputMatte.bounds
     self.setNeedsDisplay()
+  }
+  
+  override init(layer: Any) {
+    guard let layer = layer as? InvertedMatteLayer else {
+      fatalError("init(layer:) wrong class.")
+    }
+    self.inputMatte = nil
+    super.init(layer: layer)
   }
   
   func frameUpdated(frame: CGFloat) {
@@ -37,6 +45,7 @@ class InvertedMatteLayer: CALayer, CompositionLayerDelegate {
   }
 
   override func draw(in ctx: CGContext) {
+    guard let inputMatte = inputMatte else { return }
     guard let fillColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0, 0, 0, 1])
       else { return }
     ctx.setFillColor(fillColor)

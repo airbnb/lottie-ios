@@ -14,17 +14,18 @@ import CoreGraphics
 class ShapeCompositionLayer: CompositionLayer {
   
   let rootNode: AnimatorNode?
-  let renderContainer: ShapeContainerLayer
+  let renderContainer: ShapeContainerLayer?
   
   override var renderScale: CGFloat {
     didSet {
-      renderContainer.renderScale = renderScale
+      renderContainer?.renderScale = renderScale
     }
   }
   
   init(shapeLayer: ShapeLayerModel) {
     let results = shapeLayer.items.initializeNodeTree()
-    self.renderContainer = ShapeContainerLayer()
+    let renderContainer = ShapeContainerLayer()
+    self.renderContainer = renderContainer
     self.rootNode = results.rootNode
     super.init(layer: shapeLayer, size: .zero)
     contentsLayer.addSublayer(renderContainer)
@@ -35,9 +36,18 @@ class ShapeCompositionLayer: CompositionLayer {
     self.childKeypaths.append(contentsOf: results.childrenNodes)
   }
   
+  override init(layer: Any) {
+    guard let layer = layer as? ShapeCompositionLayer else {
+      fatalError("init(layer:) wrong class.")
+    }
+    self.rootNode = nil
+    self.renderContainer = nil
+    super.init(layer: layer)
+  }
+  
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
     rootNode?.updateTree(frame, forceUpdates: forceUpdates)
-    renderContainer.markRenderUpdates(forFrame: frame)
+    renderContainer?.markRenderUpdates(forFrame: frame)
   }
   
   required init?(coder aDecoder: NSCoder) {

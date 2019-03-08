@@ -30,6 +30,16 @@ class ImageCompositionLayer: CompositionLayer {
     contentsLayer.contentsGravity = kCAGravityResize
   }
   
+  override init(layer: Any) {
+    /// Used for creating shadow model layers. Read More here: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
+    guard let layer = layer as? ImageCompositionLayer else {
+      fatalError("init(layer:) Wrong Layer Class")
+    }
+    self.imageReferenceID = layer.imageReferenceID
+    self.image = nil
+    super.init(layer: layer)
+  }
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
