@@ -49,6 +49,14 @@ class ShapeRenderLayer: ShapeContainerLayer {
     ]
     addSublayer(shapeLayer)
   }
+  
+  override init(layer: Any) {
+    guard let layer = layer as? ShapeRenderLayer else {
+      fatalError("init(layer:) wrong class.")
+    }
+    self.renderer = layer.renderer
+    super.init(layer: layer)
+  }
 
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")

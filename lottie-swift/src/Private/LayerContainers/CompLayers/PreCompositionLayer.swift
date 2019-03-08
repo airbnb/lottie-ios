@@ -67,6 +67,18 @@ class PreCompositionLayer: CompositionLayer {
     layerImageProvider.addImageLayers(imageLayers)
   }
   
+  override init(layer: Any) {
+    /// Used for creating shadow model layers. Read More here: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
+    guard let layer = layer as? PreCompositionLayer else {
+      fatalError("init(layer:) Wrong Layer Class")
+    }
+    self.frameRate = layer.frameRate
+    self.remappingNode = nil
+    self.animationLayers = []
+    
+    super.init(layer: layer)
+  }
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

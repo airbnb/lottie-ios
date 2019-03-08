@@ -54,6 +54,14 @@ class MaskContainerLayer: CALayer {
     addSublayer(containerLayer)
   }
   
+  override init(layer: Any) {
+    /// Used for creating shadow model layers. Read More here: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
+    guard let layer = layer as? MaskContainerLayer else {
+      fatalError("init(layer:) Wrong Layer Class")
+    }
+    super.init(layer: layer)
+  }
+  
   fileprivate var maskLayers: [MaskLayer] = []
   
   func updateWithFrame(frame: CGFloat, forceUpdates: Bool) {

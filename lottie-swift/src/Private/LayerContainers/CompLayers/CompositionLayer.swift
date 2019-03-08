@@ -85,6 +85,23 @@ class CompositionLayer: CALayer, KeypathSearchable {
     }
   }
   
+  override init(layer: Any) {
+    /// Used for creating shadow model layers. Read More here: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
+    guard let layer = layer as? CompositionLayer else {
+      fatalError("Wrong Layer Class")
+    }
+    self.transformNode = layer.transformNode
+    self.matteType = layer.matteType
+    self.inFrame = layer.inFrame
+    self.outFrame = layer.outFrame
+    self.timeStretch = layer.timeStretch
+    self.startFrame = layer.startFrame
+    self.keypathName = layer.keypathName
+    self.childKeypaths = [transformNode.transformProperties]
+    self.maskLayer = nil
+    super.init(layer: layer)
+  }
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

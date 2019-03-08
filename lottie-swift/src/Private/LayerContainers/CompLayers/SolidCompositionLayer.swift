@@ -10,7 +10,7 @@ import QuartzCore
 
 class SolidCompositionLayer: CompositionLayer {
 
-  let colorProperty: NodeProperty<Color>
+  let colorProperty: NodeProperty<Color>?
   let solidShape: CAShapeLayer = CAShapeLayer()
   
   init(solid: SolidLayerModel) {
@@ -22,16 +22,27 @@ class SolidCompositionLayer: CompositionLayer {
     contentsLayer.addSublayer(solidShape)
   }
   
+  override init(layer: Any) {
+    /// Used for creating shadow model layers. Read More here: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
+    guard let layer = layer as? SolidCompositionLayer else {
+      fatalError("init(layer:) Wrong Layer Class")
+    }
+    self.colorProperty = layer.colorProperty
+    super.init(layer: layer)
+  }
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
+    guard let colorProperty = colorProperty else { return }
     colorProperty.update(frame: frame)
     solidShape.fillColor = colorProperty.value.cgColorValue
   }
   
   override var keypathProperties: [String : AnyNodeProperty] {
+    guard let colorProperty = colorProperty else { return super.keypathProperties }
     return ["Color" : colorProperty]
   }
 }

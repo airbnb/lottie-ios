@@ -19,7 +19,7 @@ class DisabledTextLayer: CATextLayer {
 class TextCompositionLayer: CompositionLayer {
   
   let rootNode: TextAnimatorNode?
-  let textDocument: KeyframeInterpolator<TextDocument>
+  let textDocument: KeyframeInterpolator<TextDocument>?
   
   let textLayer: DisabledTextLayer = DisabledTextLayer()
   
@@ -41,7 +41,18 @@ class TextCompositionLayer: CompositionLayer {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override init(layer: Any) {
+    /// Used for creating shadow model layers. Read More here: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
+    guard let layer = layer as? TextCompositionLayer else {
+      fatalError("init(layer:) Wrong Layer Class")
+    }
+    self.rootNode = nil
+    self.textDocument = nil
+    super.init(layer: layer)
+  }
+  
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
+    guard let textDocument = textDocument else { return }
     let documentUpdate = textDocument.hasUpdate(frame: frame)
     let animatorUpdate = rootNode?.updateContents(frame, forceLocalUpdate: forceUpdates) ?? false
     guard documentUpdate == true || animatorUpdate == true else { return }

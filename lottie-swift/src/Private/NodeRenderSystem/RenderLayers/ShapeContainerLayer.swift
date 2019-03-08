@@ -30,6 +30,13 @@ class ShapeContainerLayer: CALayer {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override init(layer: Any) {
+    guard let layer = layer as? ShapeContainerLayer else {
+      fatalError("init(layer:) wrong class.")
+    }
+    super.init(layer: layer)
+  }
+  
   var renderScale: CGFloat = 1 {
     didSet {
       renderLayers.forEach( { $0.renderScale = renderScale } )
