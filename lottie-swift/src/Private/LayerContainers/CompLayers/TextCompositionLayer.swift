@@ -59,16 +59,16 @@ class TextCompositionLayer: CompositionLayer {
     
     let text = textDocument.value(frame: frame) as! TextDocument
     rootNode?.rebuildOutputs(frame: frame)
-  
+    
     let fillColor = rootNode?.textOuputNode.fillColor ?? text.fillColorData.cgColorValue
     let strokeColor = rootNode?.textOuputNode.strokeColor ?? text.strokeColorData?.cgColorValue
     let strokeWidth = rootNode?.textOuputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
     let tracking = rootNode?.textOuputNode.tracking ?? CGFloat(text.tracking)
     // TODO LINE HEIGHT
-
+    
     let matrix = rootNode?.textOuputNode.xform ?? CATransform3DIdentity
     let ctFont = CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil)
-
+    
     var attributes: [NSAttributedStringKey : Any] = [
       NSAttributedStringKey.font: ctFont,
       NSAttributedStringKey.foregroundColor: fillColor,

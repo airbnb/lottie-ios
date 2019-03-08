@@ -39,11 +39,11 @@ class InvertedMatteLayer: CALayer, CompositionLayerDelegate {
     self.setNeedsDisplay()
     self.displayIfNeeded()
   }
-
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
   override func draw(in ctx: CGContext) {
     guard let inputMatte = inputMatte else { return }
     guard let fillColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0, 0, 0, 1])

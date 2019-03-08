@@ -16,7 +16,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let animation = Animation.named("LottieLogo1", subdirectory: "TestAnimations")
+    let animation = Animation.named("LottieLogo2", subdirectory: "TestAnimations")
     
     animationView.animation = animation
     animationView.contentMode = .scaleAspectFit
@@ -39,10 +39,10 @@ class ViewController: UIViewController {
     
     /// *** Keypath Setting
     
-//    let redValueProvider = ColorValueProvider(Color(r: 1, g: 0.2, b: 0.3, a: 1))
-//    animationView.setValueProvider(redValueProvider, keypath: AnimationKeypath(keypath: "Switch Outline Outlines.**.Fill 1.Color"))
-//    animationView.setValueProvider(redValueProvider, keypath: AnimationKeypath(keypath: "Checkmark Outlines 2.**.Stroke 1.Color"))
-//
+    let redValueProvider = ColorValueProvider(Color(r: 1, g: 0.2, b: 0.3, a: 1))
+    animationView.setValueProvider(redValueProvider, keypath: AnimationKeypath(keypath: "Switch Outline Outlines.**.Fill 1.Color"))
+    animationView.setValueProvider(redValueProvider, keypath: AnimationKeypath(keypath: "Checkmark Outlines 2.**.Stroke 1.Color"))
+    
     /// Slider
     slider.heightAnchor.constraint(equalToConstant: 40).isActive = true
     slider.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true

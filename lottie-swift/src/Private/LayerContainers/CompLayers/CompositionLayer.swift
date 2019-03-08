@@ -139,3 +139,4 @@ class CompositionLayer: CALayer, KeypathSearchable {
 protocol CompositionLayerDelegate: class {
   func frameUpdated(frame: CGFloat)
 }
+

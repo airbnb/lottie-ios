@@ -12,7 +12,7 @@ import QuartzCore
  The layer responsible for rendering shape objects
  */
 class ShapeRenderLayer: ShapeContainerLayer {
-
+  
   fileprivate(set) var renderer: Renderable & NodeOutput
   
   let shapeLayer: CAShapeLayer = CAShapeLayer()
@@ -57,7 +57,7 @@ class ShapeRenderLayer: ShapeContainerLayer {
     self.renderer = layer.renderer
     super.init(layer: layer)
   }
-
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -81,7 +81,7 @@ class ShapeRenderLayer: ShapeContainerLayer {
       renderer.updateShapeLayer(layer: shapeLayer)
     }
   }
-
+  
   override func draw(in ctx: CGContext) {
     if let path = renderer.outputPath {
       if !path.isEmpty {
