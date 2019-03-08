@@ -44,7 +44,7 @@ class Transform: Codable {
     case rotationZ = "rz"
     case opacity = "o"
   }
-  
+
   enum PositionCodingKeys : String, CodingKey {
     case split = "s"
     case positionX = "x"
@@ -95,7 +95,7 @@ class Transform: Codable {
     if let rotationZ = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotationZ) {
       self.rotation = rotationZ
     } else {
-      self.rotation = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation) ?? KeyframeGroup(Vector1D(0))
+       self.rotation = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation) ?? KeyframeGroup(Vector1D(0))
     }
     self.rotationZ = nil
     
@@ -103,4 +103,3 @@ class Transform: Codable {
     self.opacity = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .opacity) ?? KeyframeGroup(Vector1D(100))
   }
 }
-

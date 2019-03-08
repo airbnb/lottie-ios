@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25D5436F22306E2D00ED90FA /* CompatibleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */; };
+		25D543712230787900ED90FA /* CompatibleAnimationKeypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */; };
+		25D5437222307C8700ED90FA /* CompatibleAnimationKeypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */; };
+		25D5437322307C8800ED90FA /* CompatibleAnimationKeypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */; };
+		25D5437422307C8B00ED90FA /* CompatibleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */; };
+		25D5437522307C8C00ED90FA /* CompatibleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */; };
 		4866743322249C0600258C00 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4866743222249C0600258C00 /* TextCompositionLayer.swift */; };
 		4866743422249C0600258C00 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4866743222249C0600258C00 /* TextCompositionLayer.swift */; };
 		4866743522249C0600258C00 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4866743222249C0600258C00 /* TextCompositionLayer.swift */; };
@@ -628,6 +634,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleAnimationView.swift; sourceTree = "<group>"; };
+		25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleAnimationKeypath.swift; sourceTree = "<group>"; };
 		4866743222249C0600258C00 /* TextCompositionLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCompositionLayer.swift; sourceTree = "<group>"; };
 		4866744022249C4E00258C00 /* TextAnimatorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAnimatorNode.swift; sourceTree = "<group>"; };
 		486E8395220A3038007CD915 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -802,6 +810,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25D5436B22306C8C00ED90FA /* Compatibility */ = {
+			isa = PBXGroup;
+			children = (
+				25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */,
+				25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */,
+			);
+			path = Compatibility;
+			sourceTree = "<group>";
+		};
 		4866743F22249C4E00258C00 /* Text */ = {
 			isa = PBXGroup;
 			children = (
@@ -895,6 +912,7 @@
 		486E8707220B78BF007CD915 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				25D5436B22306C8C00ED90FA /* Compatibility */,
 				486E8708220B78BF007CD915 /* FilepathImageProvider.swift */,
 				486E8709220B78BF007CD915 /* AnimatedSwitch.swift */,
 				486E870A220B78BF007CD915 /* BundleImageProvider.swift */,
@@ -1568,9 +1586,11 @@
 				486E87E0220B78D1007CD915 /* ItemsExtension.swift in Sources */,
 				486E87E1220B78D1007CD915 /* ShapeRenderLayer.swift in Sources */,
 				486E87E2220B78D1007CD915 /* ShapeContainerLayer.swift in Sources */,
+				25D5436F22306E2D00ED90FA /* CompatibleAnimationView.swift in Sources */,
 				486E87E3220B78D1007CD915 /* PathNode.swift in Sources */,
 				486E87E4220B78D1007CD915 /* RenderNode.swift in Sources */,
 				486E87E5220B78D1007CD915 /* AnimatorNode.swift in Sources */,
+				25D543712230787900ED90FA /* CompatibleAnimationKeypath.swift in Sources */,
 				486E87E6220B78D1007CD915 /* Ellipse.swift in Sources */,
 				486E87E7220B78D1007CD915 /* Trim.swift in Sources */,
 				486E87E8220B78D1007CD915 /* ShapeItem.swift in Sources */,
@@ -1656,6 +1676,7 @@
 				486E8830220B78E4007CD915 /* PointValueProvider.swift in Sources */,
 				486E8831220B78E4007CD915 /* CompositionLayer.swift in Sources */,
 				486E8832220B78E4007CD915 /* NullCompositionLayer.swift in Sources */,
+				25D5437422307C8B00ED90FA /* CompatibleAnimationView.swift in Sources */,
 				486E8833220B78E4007CD915 /* TextCompositionLayer.swift in Sources */,
 				486E8834220B78E4007CD915 /* SolidCompositionLayer.swift in Sources */,
 				486E8835220B78E4007CD915 /* PreCompositionLayer.swift in Sources */,
@@ -1720,6 +1741,7 @@
 				486E886F220B78E4007CD915 /* ImageLayerModel.swift in Sources */,
 				486E8870220B78E4007CD915 /* TextLayerModel.swift in Sources */,
 				486E8871220B78E4007CD915 /* PreCompLayerModel.swift in Sources */,
+				25D5437222307C8700ED90FA /* CompatibleAnimationKeypath.swift in Sources */,
 				486E8872220B78E4007CD915 /* ShapeLayerModel.swift in Sources */,
 				486E8873220B78E4007CD915 /* Animation.swift in Sources */,
 				486E8874220B78E4007CD915 /* DashPattern.swift in Sources */,
@@ -1912,6 +1934,7 @@
 				486E891E220B78FF007CD915 /* PointValueProvider.swift in Sources */,
 				486E891F220B78FF007CD915 /* CompositionLayer.swift in Sources */,
 				486E8920220B78FF007CD915 /* NullCompositionLayer.swift in Sources */,
+				25D5437522307C8C00ED90FA /* CompatibleAnimationView.swift in Sources */,
 				486E8921220B78FF007CD915 /* TextCompositionLayer.swift in Sources */,
 				486E8922220B78FF007CD915 /* SolidCompositionLayer.swift in Sources */,
 				486E8923220B78FF007CD915 /* PreCompositionLayer.swift in Sources */,
@@ -1976,6 +1999,7 @@
 				486E895D220B78FF007CD915 /* ImageLayerModel.swift in Sources */,
 				486E895E220B78FF007CD915 /* TextLayerModel.swift in Sources */,
 				486E895F220B78FF007CD915 /* PreCompLayerModel.swift in Sources */,
+				25D5437322307C8800ED90FA /* CompatibleAnimationKeypath.swift in Sources */,
 				486E8960220B78FF007CD915 /* ShapeLayerModel.swift in Sources */,
 				486E8961220B78FF007CD915 /* Animation.swift in Sources */,
 				486E8962220B78FF007CD915 /* DashPattern.swift in Sources */,
