@@ -1,6 +1,8 @@
-# Migrating from Lottie 2.5.2(OBJC) -> 3.0 (SWIFT)
+# Migrating from Lottie 2.5.3(OBJC) -> 3.0 (SWIFT)
 
 Lottie 3.0 is a complete rewrite of Lottie in swift. Because of this there are some minor API changes. This guide should help you through migrating code from Lottie 2.5.2 to 3.0
+
+For continued supprt and contribution to Objective-C please point to the official Lottie Objective-C Branch [Here](https://github.com/airbnb/lottie-ios/tree/lottie/objectiveC)
 
 Swift discourages the use of Prefix for names. A lot of the api changes are just the removal of `LOT` from the class name. Below is a complete list of API changes.
 
