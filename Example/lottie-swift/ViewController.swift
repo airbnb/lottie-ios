@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     slider.maximumValue = 1
     slider.value = 0
     view.addSubview(slider)
-    animationView.backgroundBehvior = .pauseAndRestore
+    animationView.backgroundBehavior = .pauseAndRestore
     animationView.translatesAutoresizingMaskIntoConstraints = false
     animationView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
     animationView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true

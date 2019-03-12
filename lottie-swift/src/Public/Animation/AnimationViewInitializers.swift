@@ -44,7 +44,7 @@ public extension AnimationView {
   }
   
   /**
-   Loads a Lottie animation asyncronously from the URL
+   Loads a Lottie animation asynchronously from the URL
    
    - Parameter url: The url to load the animation from.
    - Parameter imageProvider: An image provider for the animation's image data.

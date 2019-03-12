@@ -99,7 +99,7 @@ class KeyframeInterpolator<ValueType>: AnyValueProvider where ValueType: Interpo
   fileprivate var leadingKeyframe: Keyframe<ValueType>? = nil
   fileprivate var trailingKeyframe: Keyframe<ValueType>? = nil
   
-  /// Finds the appropiate Leanding and Traling keyframe index for the given time.
+  /// Finds the appropriate Leading and Trailing keyframe index for the given time.
   fileprivate func updateSpanIndices(frame: CGFloat) {
     guard keyframes.count > 0 else {
       leadingIndex = nil
@@ -139,7 +139,7 @@ class KeyframeInterpolator<ValueType>: AnyValueProvider where ValueType: Interpo
         /// Time is before the first keyframe. Set it as the trailing.
         trailingIndex = 0
       } else {
-        /// Time is after the frist keyframe. Set the keyframe and the trailing.
+        /// Time is after the first keyframe. Set the keyframe and the trailing.
         leadingIndex = 0
         trailingIndex = 1
       }
@@ -172,7 +172,7 @@ class KeyframeInterpolator<ValueType>: AnyValueProvider where ValueType: Interpo
     } else if let currentLeading = leadingIndex,
       frame < keyframes[currentLeading].time {
       
-      /// Time is before the current spane. Iterate backwards
+      /// Time is before the current span. Iterate backwards
       var newTrailing = currentLeading
       
       var keyframeFound: Bool = false

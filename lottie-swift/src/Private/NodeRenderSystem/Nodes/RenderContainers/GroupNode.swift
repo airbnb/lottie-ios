@@ -25,7 +25,7 @@ class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
       self.skew = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.skew.keyframes))
       self.skewAxis = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.skewAxis.keyframes))
     } else {
-      /// Transform node missing. Default to empy transform.
+      /// Transform node missing. Default to empty transform.
       self.anchor = NodeProperty(provider: SingleValueProvider(Vector3D(x: CGFloat(0), y: CGFloat(0), z: CGFloat(0))))
       self.position = NodeProperty(provider: SingleValueProvider(Vector3D(x: CGFloat(0), y: CGFloat(0), z: CGFloat(0))))
       self.scale = NodeProperty(provider: SingleValueProvider(Vector3D(x: CGFloat(1), y: CGFloat(1), z: CGFloat(1))))

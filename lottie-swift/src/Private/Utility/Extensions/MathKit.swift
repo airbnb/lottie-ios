@@ -25,7 +25,7 @@ extension CGFloat: Interpolatable {
   
   
   /**
-   Interpolates the reciever to the given number by Amount.
+   Interpolates the receiver to the given number by Amount.
    - Parameter toNumber: The number to interpolate to.
    - Parameter amount: The amount to interpolate from 0-1
    
@@ -60,7 +60,7 @@ extension CGFloat: Interpolatable {
   }
   
   /**
-   Returns the difference between the reciever and the given number.
+   Returns the difference between the receiver and the given number.
    - Parameter absolute: If *true* (Default) the returned value will always be positive.
    */
   func diff(_ a: CGFloat, absolute: Bool = true) -> CGFloat {
@@ -75,7 +75,7 @@ extension CGFloat: Interpolatable {
 extension Double: Interpolatable {
   
   /**
-   Interpolates the reciever to the given number by Amount.
+   Interpolates the receiver to the given number by Amount.
    - Parameter toNumber: The number to interpolate to.
    - Parameter amount: The amount to interpolate from 0-1
    
@@ -185,7 +185,7 @@ extension CGRect {
   }
   
   /**
-   Interpolates the reciever to the given rect by Amount.
+   Interpolates the receiver to the given rect by Amount.
    - Parameter to: The rect to interpolate to.
    - Parameter amount: The amount to interpolate from 0-1
    
@@ -210,7 +210,7 @@ extension CGRect {
 extension CGSize {
   
   /**
-   Interpolates the reciever to the given size by Amount.
+   Interpolates the receiver to the given size by Amount.
    - Parameter to: The size to interpolate to.
    - Parameter amount: The amount to interpolate from 0-1
    
@@ -228,22 +228,22 @@ extension CGSize {
                   height: height.interpolateTo(to.height, amount: amount))
   }
   
-  /// Returns the scale float that will fit the recieve inside of the given size.
+  /// Returns the scale float that will fit the receive inside of the given size.
   func scaleThatFits(_ size: CGSize) -> CGFloat {
     return CGFloat.minimum(width / size.width, height / size.height)
   }
   
-  /// Adds reciever size to give size.
+  /// Adds receiver size to give size.
   func add(_ size: CGSize) -> CGSize {
     return CGSize(width: width + size.width, height: height + size.height)
   }
   
-  /// Subtracts given size from reciever size.
+  /// Subtracts given size from receiver size.
   func subtract(_ size: CGSize) -> CGSize {
     return CGSize(width: width - size.width, height: height - size.height)
   }
   
-  /// Multiplies reciever size by the given size.
+  /// Multiplies receiver size by the given size.
   func multiply(_ size: CGSize) -> CGSize {
     return CGSize(width: width * size.width, height: height * size.height)
   }
@@ -284,7 +284,7 @@ struct CGLine {
     return end.distanceTo(start)
   }
   
-  /// Returns a line sgement that is normalized to a length of 1
+  /// Returns a line segment that is normalized to a length of 1
   func normalize() -> CGLine {
     let len = length
     guard len > 0  else {
@@ -297,14 +297,14 @@ struct CGLine {
   }
   
   /// Trims a line segment to the given length
-  func trimmedToLength(_ tolength: CGFloat) -> CGLine {
+  func trimmedToLength(_ toLength: CGFloat) -> CGLine {
     let len = length
     guard len > 0  else {
       return self
     }
     let relativeEnd = end - start
     let relativeVector = CGPoint(x: relativeEnd.x / len, y: relativeEnd.y / len)
-    let sizedVector = CGPoint(x: relativeVector.x * tolength, y: relativeVector.y * tolength)
+    let sizedVector = CGPoint(x: relativeVector.x * toLength, y: relativeVector.y * toLength)
     let absoluteVector = sizedVector + start
     return CGLine(start: start, end: absoluteVector)
   }
@@ -330,14 +330,14 @@ infix operator +-
 
 extension CGPoint: Interpolatable {
   
-  /// Returns the distance between the reciever and the given point.
+  /// Returns the distance between the receiver and the given point.
   func distanceTo(_ a: CGPoint) -> CGFloat {
     let xDist = a.x - x
     let yDist = a.y - y
     return CGFloat(sqrt((xDist * xDist) + (yDist * yDist)))
   }
   
-  /// Returns the length between the reciever and *CGPoint.zero*
+  /// Returns the length between the receiver and *CGPoint.zero*
   var vectorLength: CGFloat {
     return distanceTo(.zero)
   }
@@ -347,7 +347,7 @@ extension CGPoint: Interpolatable {
   }
   
   /**
-   Interpolates the reciever to the given Point by Amount.
+   Interpolates the receiver to the given Point by Amount.
    - Parameter to: The Point to interpolate to.
    - Parameter amount: The amount to interpolate from 0-1
    

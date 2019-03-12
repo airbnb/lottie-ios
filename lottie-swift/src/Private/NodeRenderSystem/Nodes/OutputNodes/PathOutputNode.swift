@@ -26,7 +26,7 @@ class PathOutputNode: NodeOutput {
     /// Ask if parent was updated
     let upstreamUpdates = parent?.hasOutputUpdates(forFrame) ?? false
     
-    /// If parent was updated and the path hasnt been built for this frame, clear the path.
+    /// If parent was updated and the path hasn't been built for this frame, clear the path.
     if upstreamUpdates && lastPathBuildFrame != forFrame {
       outputPath = nil
     }

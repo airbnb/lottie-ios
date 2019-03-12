@@ -10,7 +10,7 @@ import Foundation
 /// A layer that holds vector shape objects.
 class ShapeLayerModel: LayerModel {
   
-  /// A lits of shape items.
+  /// A list of shape items.
   let items: [ShapeItem]
   
   private enum CodingKeys : String, CodingKey {

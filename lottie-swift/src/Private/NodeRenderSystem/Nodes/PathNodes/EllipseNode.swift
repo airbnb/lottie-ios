@@ -44,7 +44,7 @@ class EllipseNode: AnimatorNode, PathNode {
     self.parentNode = parentNode
   }
   
-  // MARK: Animatore Node
+  // MARK: Animator Node
   
   var propertyMap: NodePropertyMap & KeypathSearchable {
     return properties

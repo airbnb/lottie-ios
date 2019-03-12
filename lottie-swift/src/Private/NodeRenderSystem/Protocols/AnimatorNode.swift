@@ -16,7 +16,7 @@ protocol NodeOutput {
   /// The parent node.
   var parent: NodeOutput? { get }
   
-  /// Returns true if there are any updates upstream. OutputPath must be built before returing.
+  /// Returns true if there are any updates upstream. OutputPath must be built before returning.
   func hasOutputUpdates(_ forFrame: CGFloat) -> Bool
   
   var outputPath: CGPath? { get }
@@ -26,13 +26,13 @@ protocol NodeOutput {
  The Animator Node is the base node in the render system tree.
  
  It defines a single node that has an output path and option input node.
- At animation time the root animtion node is asked to update its contents for
+ At animation time the root animation node is asked to update its contents for
  the current frame.
  The node reaches up its chain of nodes until the first node that does not need
  updating is found. Then each node updates its contents down the render pipeline.
  Each node adds its local path to its input path and passes it forward.
  
- An animator node holds a group of interpolators. These inteerpolators determine
+ An animator node holds a group of interpolators. These interpolators determine
  if the node needs an update for the current frame.
  
  */
@@ -126,7 +126,7 @@ extension AnimatorNode {
   }
   
   
-  /// Rebuilds the content of this node, and upstream nodes if necesarry.
+  /// Rebuilds the content of this node, and upstream nodes if necessary.
   @discardableResult func updateContents(_ frame: CGFloat, forceLocalUpdate: Bool) -> Bool {
     if forceLocalUpdate == false && lastUpdateFrame != nil && lastUpdateFrame! == frame {
       /// This node has already updated for this frame. Go ahead and return the results.
