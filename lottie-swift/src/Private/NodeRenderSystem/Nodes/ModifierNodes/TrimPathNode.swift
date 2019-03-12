@@ -71,7 +71,7 @@ class TrimPathNode: AnimatorNode {
     
     let offset = properties.offset.value.cgFloatValue.truncatingRemainder(dividingBy: 360) / 360
     
-    /// No need to trim, its a full path
+    /// No need to trim, it's a full path
     if start == 0, end == 1 {
       return
     }

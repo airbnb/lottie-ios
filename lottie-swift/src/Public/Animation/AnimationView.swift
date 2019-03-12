@@ -10,7 +10,7 @@ import QuartzCore
 
 /// Describes the behavior of an AnimationView when the app is moved to the background.
 public enum LottieBackgroundBehavior {
-  /// Stop the animation and reset it to the beginning of it's current play time. The completion block is called.
+  /// Stop the animation and reset it to the beginning of its current play time. The completion block is called.
   case stop
   /// Pause the animation in its current state. The completion block is called.
   case pause
@@ -63,7 +63,7 @@ final public class AnimationView: LottieView {
   
   /**
    Sets the image provider for the animation view. An image provider provides the
-   animation with it's required image data.
+   animation with its required image data.
    
    Setting this will cause the animation to reload its image contents.
    */
@@ -330,7 +330,7 @@ final public class AnimationView: LottieView {
     animationLayer?.reloadImages()
   }
   
-  /// Forces the AnimationView to redraw it's contents.
+  /// Forces the AnimationView to redraw its contents.
   public func forceDisplayUpdate() {
     animationLayer?.forceDisplayUpdate()
   }

@@ -13,7 +13,7 @@ public extension Animation {
   // MARK: Animation (Loading)
   
   /**
-   Loads an animation model from a bundle by it's name. Returns `nil` if an animation is not found.
+   Loads an animation model from a bundle by its name. Returns `nil` if an animation is not found.
    
    - Parameter name: The name of the json file without the json extension. EG "StarAnimation"
    - Parameter bundle: The bundle in which the animation is located. Defaults to `Bundle.main`

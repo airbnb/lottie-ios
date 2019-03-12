@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 
 /**
- A path section, containing one point and it's length to the previous point.
+ A path section, containing one point and its length to the previous point.
  
  The relationship between this path element and the previous is implicit.
  Ideally a path section would be defined by two vertices and a length.
