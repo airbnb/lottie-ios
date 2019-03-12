@@ -13,7 +13,7 @@ Hello! Sorry you're having an Issue! Please help us make Lottie better by fillin
 - [] Feature Request
 - [] Regression (Something that once worked, but doesn't work anymore)
 
-## Which Version of Lottie are you Using?
+## Which Version of Lottie are you using?
 
 Lottie 3.0
 

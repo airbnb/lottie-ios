@@ -12,7 +12,7 @@ import Foundation
 public final class CompatibleAnimationKeypath: NSObject {
 
   @objc
-  /// Creates a keypath from a dot separated string. The stirng is separated by "."
+  /// Creates a keypath from a dot separated string. The string is separated by "."
   public init(keypath: String) {
     animationKeypath = AnimationKeypath(keypath: keypath)
   }

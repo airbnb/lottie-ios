@@ -56,13 +56,13 @@ Here is just a small sampling of the power of Lottie
 - [Contributing](#contributing)
 - [Issues or Feature Requests?](#issues-or-feature-requests)
 ## Installing Lottie
-Lottie supports [Cocoapods](https://cocoapods.org/) and  [Carthage](https://github.com/Carthage/Carthage) (Both dynamic and static). Lottie is written in ***Swift 4.0***
+Lottie supports [CocoaPods](https://cocoapods.org/) and  [Carthage](https://github.com/Carthage/Carthage) (Both dynamic and static). Lottie is written in ***Swift 4.0***
 ### Github Repo
 
 You can pull the [Lottie Github Repo](https://github.com/airbnb/lottie-ios/) and include the Lottie.xcodeproj to build a dynamic or static library.
 
-### Cocoapods
-Add the pod to your podfile:
+### CocoaPods
+Add the pod to your Podfile:
 ```
 pod 'lottie-ios'
 ```
@@ -126,7 +126,7 @@ Codable; see JSON schema [here](https://github.com/airbnb/lottie-web/tree/master
  `Animation` is also fully `codable`. ==Animations can be decoded, and encoded to JSON!==
  
 ### Loading Animation
-There are a variety of ways to load an `Animation` on it's own. Additionally you can load an animation while allocating an `AnimationView` through one of the conveinence initializers on `AnimationView`.
+There are a variety of ways to load an `Animation` on its own. Additionally you can load an animation while allocating an `AnimationView` through one of the convenience initializers on `AnimationView`.
 
 Animations can be stored in an `AnimationCacheProvider`  to reduce the overhead of deserializing the same animations over and over. Read more [here](#animation-cache).
 #
@@ -134,7 +134,7 @@ Animations can be stored in an `AnimationCacheProvider`  to reduce the overhead 
 ```swift
 Animation.named(_ name: String, bundle: Bundle, subdirectory: String?, animationCache: AnimationCacheProvider?) -> Animation?
 ```
-Loads an animation model from a bundle by it's name. Returns `nil` if an animation is not found. 
+Loads an animation model from a bundle by its name. Returns `nil` if an animation is not found. 
 
 Parameters:
 : **name**: The name of the json file without the json extension. EG "StarAnimation"
@@ -178,7 +178,7 @@ Animation views can be allocated with or without animation data. There are a han
 
 #
 ### Supplying Images
-`AnimationView` uses `AnimationImageProvider` to retrieve the images for it's animation.
+`AnimationView` uses `AnimationImageProvider` to retrieve the images for its animation.
 An image provider can be supplied when the Animation View is initialized, or after by setting its `imageProvider` property. 
 To force an AnimationView to reload its images call `reloadImages()` on the AnimationView.
 
@@ -198,10 +198,10 @@ All three can be used to play and set time on an `AnimationView`
 ```swift
 AnimationView.play(completion: LottieCompletionBlock?)
 ```
-Plays the animation from its current state to the end of it's timeline. Calls the completion block when the animation is stopped.
+Plays the animation from its current state to the end of its timeline. Calls the completion block when the animation is stopped.
 
 Parameters:
-: **completion**: A completion block that is called when the animation completes. The block will be passed `true` if the animation completes and `false` if the animation was interupted. Optional.
+: **completion**: A completion block that is called when the animation completes. The block will be passed `true` if the animation completes and `false` if the animation was interrupted. Optional.
 
 Example:
 ```swift
@@ -270,7 +270,7 @@ animationView.play(fromMarker: "ftue1_begin", toMarker: "ftue1_end")
 ```swift
 AnimationView.stop()
 ```
-Stops the currently playing animation, if any. The animation view is reset to it's start frame. The previous animation's completion block will be closed with `false`
+Stops the currently playing animation, if any. The animation view is reset to its start frame. The previous animation's completion block will be closed with `false`
 Example:
 ```swift
 animationView.stop()
@@ -300,20 +300,20 @@ Describes how the AnimationView should resize and scale its contents.
 
 Options:
 : **scaleToFill**: Animation scaled to fill the bounds of AnimationView. The animation will be stretched if the aspect of the AnimationView is different than the Animation.
-: **scaleAspectFit**: Animation will be scaled to fit the AnimationView while preserving its apect ratio.
-: **scaleAspectFill**: Animation will be scaled to fill the AnimationView while preserving its apect ratio.
+: **scaleAspectFit**: Animation will be scaled to fit the AnimationView while preserving its aspect ratio.
+: **scaleAspectFill**: Animation will be scaled to fill the AnimationView while preserving its aspect ratio.
 : **topLeft**: Animation will not be scaled.
 #
 #### Background Behavior
 ```swift
-var AnimationView.backgroundBehvior: LottieBackgroundBehavior { get set }
+var AnimationView.backgroundBehavior: LottieBackgroundBehavior { get set }
 ```
 Describes the behavior of an AnimationView when the app is moved to the background. (iOS only)
 
 The default is `.pause`
 
 Options:
-: **stop**: Stop the animation and reset it to the beginning of it's current play time. The completion block is called.
+: **stop**: Stop the animation and reset it to the beginning of its current play time. The completion block is called.
 : **pause**: Pause the animation in its current state. The completion block is called.
 : **pauseAndRestore**: Pause the animation and restart it when the application moves back to the foreground. The completion block is stored and called when the animation completes.
 #
@@ -321,9 +321,9 @@ Options:
 ```swift
 var AnimationView.loopMode: LottieLoopMode { get set }
 ```
-Sets the loop behavior for `play` calls. Defaults to `playeOnce`
+Sets the loop behavior for `play` calls. Defaults to `playOnce`
 Options:
-: **playeOnce**: Animation is played once then stops.
+: **playOnce**: Animation is played once then stops.
 : **loop**: Animation will loop from end to beginning until stopped.
 : **autoReverse**: Animation will play forward, then backwards and loop until stopped.
 #
@@ -394,7 +394,7 @@ Returns the realtime Progress Time of an AnimationView while an animation is in 
 ```swift
 func AnimationView.forceDisplayUpdate()
 ```
-Forces the AnimationView to redraw it's contents.
+Forces the AnimationView to redraw its contents.
 
 #
 ### Using Markers
@@ -626,7 +626,7 @@ Users of `AnimationControl` can set a Layer Name for each `UIControlState`. When
 
 ![SwitchButton](_Gifs/switchTest.gif)
 
-An interactive switch with an 'On' and 'Off' state. When the user taps on the switch the state is toggled and the appropiate animation is played. 
+An interactive switch with an 'On' and 'Off' state. When the user taps on the switch the state is toggled and the appropriate animation is played.
 
 Both the 'On' and 'Off' have an animation play range associated with their state.
 
@@ -680,7 +680,7 @@ Lottie can do more than just play beautiful animations. Lottie allows you to **c
 ### Say we want to create 4 toggle switches.
 ![Toggle](_Gifs/switch_Normal.gif)
 
-Its easy to create the four switches and play them:
+It's easy to create the four switches and play them:
 
 ```swift
 let animationView = AnimationView(name: "toggle");
