@@ -226,7 +226,7 @@ struct BezierPath {
       
       if newLength == trim.end {
         /// Element is the end element.
-        /// The element could have a new length if its added right after the start node.
+        /// The element could have a new length if it's added right after the start node.
         currentPath.addElement(element)
         /// We are done with this span.
         runningLength = newLength

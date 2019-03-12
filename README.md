@@ -134,7 +134,7 @@ Animations can be stored in an `AnimationCacheProvider`  to reduce the overhead 
 ```swift
 Animation.named(_ name: String, bundle: Bundle, subdirectory: String?, animationCache: AnimationCacheProvider?) -> Animation?
 ```
-Loads an animation model from a bundle by it's name. Returns `nil` if an animation is not found. 
+Loads an animation model from a bundle by its name. Returns `nil` if an animation is not found. 
 
 Parameters:
 : **name**: The name of the json file without the json extension. EG "StarAnimation"
@@ -178,7 +178,7 @@ Animation views can be allocated with or without animation data. There are a han
 
 #
 ### Supplying Images
-`AnimationView` uses `AnimationImageProvider` to retrieve the images for it's animation.
+`AnimationView` uses `AnimationImageProvider` to retrieve the images for its animation.
 An image provider can be supplied when the Animation View is initialized, or after by setting its `imageProvider` property. 
 To force an AnimationView to reload its images call `reloadImages()` on the AnimationView.
 
@@ -198,7 +198,7 @@ All three can be used to play and set time on an `AnimationView`
 ```swift
 AnimationView.play(completion: LottieCompletionBlock?)
 ```
-Plays the animation from its current state to the end of it's timeline. Calls the completion block when the animation is stopped.
+Plays the animation from its current state to the end of its timeline. Calls the completion block when the animation is stopped.
 
 Parameters:
 : **completion**: A completion block that is called when the animation completes. The block will be passed `true` if the animation completes and `false` if the animation was interrupted. Optional.
@@ -270,7 +270,7 @@ animationView.play(fromMarker: "ftue1_begin", toMarker: "ftue1_end")
 ```swift
 AnimationView.stop()
 ```
-Stops the currently playing animation, if any. The animation view is reset to it's start frame. The previous animation's completion block will be closed with `false`
+Stops the currently playing animation, if any. The animation view is reset to its start frame. The previous animation's completion block will be closed with `false`
 Example:
 ```swift
 animationView.stop()
@@ -313,7 +313,7 @@ Describes the behavior of an AnimationView when the app is moved to the backgrou
 The default is `.pause`
 
 Options:
-: **stop**: Stop the animation and reset it to the beginning of it's current play time. The completion block is called.
+: **stop**: Stop the animation and reset it to the beginning of its current play time. The completion block is called.
 : **pause**: Pause the animation in its current state. The completion block is called.
 : **pauseAndRestore**: Pause the animation and restart it when the application moves back to the foreground. The completion block is stored and called when the animation completes.
 #
@@ -394,7 +394,7 @@ Returns the realtime Progress Time of an AnimationView while an animation is in 
 ```swift
 func AnimationView.forceDisplayUpdate()
 ```
-Forces the AnimationView to redraw it's contents.
+Forces the AnimationView to redraw its contents.
 
 #
 ### Using Markers
@@ -680,7 +680,7 @@ Lottie can do more than just play beautiful animations. Lottie allows you to **c
 ### Say we want to create 4 toggle switches.
 ![Toggle](_Gifs/switch_Normal.gif)
 
-Its easy to create the four switches and play them:
+It's easy to create the four switches and play them:
 
 ```swift
 let animationView = AnimationView(name: "toggle");
