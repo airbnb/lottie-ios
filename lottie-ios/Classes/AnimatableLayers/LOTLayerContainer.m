@@ -186,8 +186,7 @@
 
 - (void)_setImageForAsset:(LOTAsset *)asset {
   if (asset.imageName) {
-    NSArray *components = [asset.imageName componentsSeparatedByString:@"."];
-    NSImage *image = [NSImage imageNamed:components.firstObject];
+    NSImage *image = [NSImage imageNamed:[asset.imageName stringByDeletingPathExtension]];
     if (image == nil) {
       if (asset.rootDirectory.length > 0 && asset.imageDirectory.length > 0) {
         NSString *imagePath = [[asset.rootDirectory stringByAppendingPathComponent:asset.imageDirectory] stringByAppendingPathComponent:asset.imageName];

@@ -24,8 +24,7 @@
   if (!animationName) {
     return nil;
   }
-  NSArray *components = [animationName componentsSeparatedByString:@"."];
-  animationName = components.firstObject;
+  animationName = [animationName stringByDeletingPathExtension];
   
   LOTComposition *comp = [[LOTAnimationCache sharedCache] animationForKey:animationName];
   if (comp) {
