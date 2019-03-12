@@ -20,7 +20,7 @@ import Foundation
  Single star will search a single depth for the next object.
  Double star will search any depth.
  
- Read More at http://airbnb.io/lottie/ios/dynamic.html
+ Read More at https://airbnb.io/lottie/ios/dynamic.html
  
  EG:
  @"Layer.Shape Group.Stroke 1.Color"
@@ -31,7 +31,7 @@ import Foundation
  */
 public struct AnimationKeypath {
   
-  /// Creates a keypath from a dot separated string. The stirng is separated by "."
+  /// Creates a keypath from a dot separated string. The string is separated by "."
   public init(keypath: String) {
     self.keys = keypath.components(separatedBy: ".")
   }

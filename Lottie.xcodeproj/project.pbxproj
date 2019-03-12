@@ -132,7 +132,7 @@
 		486E880C220B78D1007CD915 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8790220B78BF007CD915 /* CGFloatExtensions.swift */; };
 		486E880D220B78D1007CD915 /* AnimationKeypathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8791220B78BF007CD915 /* AnimationKeypathExtension.swift */; };
 		486E880E220B78D2007CD915 /* MathKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8792220B78BF007CD915 /* MathKit.swift */; };
-		486E880F220B78D2007CD915 /* StringExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8793220B78BF007CD915 /* StringExtenstions.swift */; };
+		486E880F220B78D2007CD915 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8793220B78BF007CD915 /* StringExtensions.swift */; };
 		486E8810220B78D2007CD915 /* BezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8795220B78BF007CD915 /* BezierPath.swift */; };
 		486E8811220B78D2007CD915 /* CompoundBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8796220B78BF007CD915 /* CompoundBezierPath.swift */; };
 		486E8812220B78D2007CD915 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8797220B78BF007CD915 /* ColorExtension.swift */; };
@@ -253,7 +253,7 @@
 		486E8885220B78E4007CD915 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8790220B78BF007CD915 /* CGFloatExtensions.swift */; };
 		486E8886220B78E4007CD915 /* AnimationKeypathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8791220B78BF007CD915 /* AnimationKeypathExtension.swift */; };
 		486E8887220B78E4007CD915 /* MathKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8792220B78BF007CD915 /* MathKit.swift */; };
-		486E8888220B78E4007CD915 /* StringExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8793220B78BF007CD915 /* StringExtenstions.swift */; };
+		486E8888220B78E4007CD915 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8793220B78BF007CD915 /* StringExtensions.swift */; };
 		486E8889220B78E4007CD915 /* BezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8795220B78BF007CD915 /* BezierPath.swift */; };
 		486E888A220B78E4007CD915 /* CompoundBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8796220B78BF007CD915 /* CompoundBezierPath.swift */; };
 		486E888B220B78E4007CD915 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8797220B78BF007CD915 /* ColorExtension.swift */; };
@@ -370,7 +370,7 @@
 		486E88FA220B78F4007CD915 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8790220B78BF007CD915 /* CGFloatExtensions.swift */; };
 		486E88FB220B78F4007CD915 /* AnimationKeypathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8791220B78BF007CD915 /* AnimationKeypathExtension.swift */; };
 		486E88FC220B78F4007CD915 /* MathKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8792220B78BF007CD915 /* MathKit.swift */; };
-		486E88FD220B78F4007CD915 /* StringExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8793220B78BF007CD915 /* StringExtenstions.swift */; };
+		486E88FD220B78F4007CD915 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8793220B78BF007CD915 /* StringExtensions.swift */; };
 		486E88FE220B78F4007CD915 /* BezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8795220B78BF007CD915 /* BezierPath.swift */; };
 		486E88FF220B78F4007CD915 /* CompoundBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8796220B78BF007CD915 /* CompoundBezierPath.swift */; };
 		486E8900220B78F4007CD915 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8797220B78BF007CD915 /* ColorExtension.swift */; };
@@ -491,7 +491,7 @@
 		486E8973220B78FF007CD915 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8790220B78BF007CD915 /* CGFloatExtensions.swift */; };
 		486E8974220B78FF007CD915 /* AnimationKeypathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8791220B78BF007CD915 /* AnimationKeypathExtension.swift */; };
 		486E8975220B78FF007CD915 /* MathKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8792220B78BF007CD915 /* MathKit.swift */; };
-		486E8976220B78FF007CD915 /* StringExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8793220B78BF007CD915 /* StringExtenstions.swift */; };
+		486E8976220B78FF007CD915 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8793220B78BF007CD915 /* StringExtensions.swift */; };
 		486E8977220B78FF007CD915 /* BezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8795220B78BF007CD915 /* BezierPath.swift */; };
 		486E8978220B78FF007CD915 /* CompoundBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8796220B78BF007CD915 /* CompoundBezierPath.swift */; };
 		486E8979220B78FF007CD915 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8797220B78BF007CD915 /* ColorExtension.swift */; };
@@ -608,7 +608,7 @@
 		486E89E8220B790E007CD915 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8790220B78BF007CD915 /* CGFloatExtensions.swift */; };
 		486E89E9220B790E007CD915 /* AnimationKeypathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8791220B78BF007CD915 /* AnimationKeypathExtension.swift */; };
 		486E89EA220B790E007CD915 /* MathKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8792220B78BF007CD915 /* MathKit.swift */; };
-		486E89EB220B790E007CD915 /* StringExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8793220B78BF007CD915 /* StringExtenstions.swift */; };
+		486E89EB220B790E007CD915 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8793220B78BF007CD915 /* StringExtensions.swift */; };
 		486E89EC220B790E007CD915 /* BezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8795220B78BF007CD915 /* BezierPath.swift */; };
 		486E89ED220B790E007CD915 /* CompoundBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8796220B78BF007CD915 /* CompoundBezierPath.swift */; };
 		486E89EE220B790E007CD915 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8797220B78BF007CD915 /* ColorExtension.swift */; };
@@ -758,7 +758,7 @@
 		486E8790220B78BF007CD915 /* CGFloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtensions.swift; sourceTree = "<group>"; };
 		486E8791220B78BF007CD915 /* AnimationKeypathExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationKeypathExtension.swift; sourceTree = "<group>"; };
 		486E8792220B78BF007CD915 /* MathKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathKit.swift; sourceTree = "<group>"; };
-		486E8793220B78BF007CD915 /* StringExtenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtenstions.swift; sourceTree = "<group>"; };
+		486E8793220B78BF007CD915 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		486E8795220B78BF007CD915 /* BezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierPath.swift; sourceTree = "<group>"; };
 		486E8796220B78BF007CD915 /* CompoundBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundBezierPath.swift; sourceTree = "<group>"; };
 		486E8797220B78BF007CD915 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
@@ -1284,7 +1284,7 @@
 				486E8790220B78BF007CD915 /* CGFloatExtensions.swift */,
 				486E8791220B78BF007CD915 /* AnimationKeypathExtension.swift */,
 				486E8792220B78BF007CD915 /* MathKit.swift */,
-				486E8793220B78BF007CD915 /* StringExtenstions.swift */,
+				486E8793220B78BF007CD915 /* StringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1632,7 +1632,7 @@
 				486E880C220B78D1007CD915 /* CGFloatExtensions.swift in Sources */,
 				486E880D220B78D1007CD915 /* AnimationKeypathExtension.swift in Sources */,
 				486E880E220B78D2007CD915 /* MathKit.swift in Sources */,
-				486E880F220B78D2007CD915 /* StringExtenstions.swift in Sources */,
+				486E880F220B78D2007CD915 /* StringExtensions.swift in Sources */,
 				486E8810220B78D2007CD915 /* BezierPath.swift in Sources */,
 				486E8811220B78D2007CD915 /* CompoundBezierPath.swift in Sources */,
 				486E8812220B78D2007CD915 /* ColorExtension.swift in Sources */,
@@ -1764,7 +1764,7 @@
 				486E8885220B78E4007CD915 /* CGFloatExtensions.swift in Sources */,
 				486E8886220B78E4007CD915 /* AnimationKeypathExtension.swift in Sources */,
 				486E8887220B78E4007CD915 /* MathKit.swift in Sources */,
-				486E8888220B78E4007CD915 /* StringExtenstions.swift in Sources */,
+				486E8888220B78E4007CD915 /* StringExtensions.swift in Sources */,
 				486E8889220B78E4007CD915 /* BezierPath.swift in Sources */,
 				486E888A220B78E4007CD915 /* CompoundBezierPath.swift in Sources */,
 				486E888B220B78E4007CD915 /* ColorExtension.swift in Sources */,
@@ -1881,7 +1881,7 @@
 				486E88FB220B78F4007CD915 /* AnimationKeypathExtension.swift in Sources */,
 				4866743522249C0600258C00 /* TextCompositionLayer.swift in Sources */,
 				486E88FC220B78F4007CD915 /* MathKit.swift in Sources */,
-				486E88FD220B78F4007CD915 /* StringExtenstions.swift in Sources */,
+				486E88FD220B78F4007CD915 /* StringExtensions.swift in Sources */,
 				486E88FE220B78F4007CD915 /* BezierPath.swift in Sources */,
 				486E88FF220B78F4007CD915 /* CompoundBezierPath.swift in Sources */,
 				486E8900220B78F4007CD915 /* ColorExtension.swift in Sources */,
@@ -2022,7 +2022,7 @@
 				486E8973220B78FF007CD915 /* CGFloatExtensions.swift in Sources */,
 				486E8974220B78FF007CD915 /* AnimationKeypathExtension.swift in Sources */,
 				486E8975220B78FF007CD915 /* MathKit.swift in Sources */,
-				486E8976220B78FF007CD915 /* StringExtenstions.swift in Sources */,
+				486E8976220B78FF007CD915 /* StringExtensions.swift in Sources */,
 				486E8977220B78FF007CD915 /* BezierPath.swift in Sources */,
 				486E8978220B78FF007CD915 /* CompoundBezierPath.swift in Sources */,
 				486E8979220B78FF007CD915 /* ColorExtension.swift in Sources */,
@@ -2139,7 +2139,7 @@
 				486E89E9220B790E007CD915 /* AnimationKeypathExtension.swift in Sources */,
 				4866743722249C0600258C00 /* TextCompositionLayer.swift in Sources */,
 				486E89EA220B790E007CD915 /* MathKit.swift in Sources */,
-				486E89EB220B790E007CD915 /* StringExtenstions.swift in Sources */,
+				486E89EB220B790E007CD915 /* StringExtensions.swift in Sources */,
 				486E89EC220B790E007CD915 /* BezierPath.swift in Sources */,
 				486E89ED220B790E007CD915 /* CompoundBezierPath.swift in Sources */,
 				486E89EE220B790E007CD915 /* ColorExtension.swift in Sources */,

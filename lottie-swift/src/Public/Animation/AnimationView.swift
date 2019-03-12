@@ -10,7 +10,7 @@ import QuartzCore
 
 /// Describes the behavior of an AnimationView when the app is moved to the background.
 public enum LottieBackgroundBehavior {
-  /// Stop the animation and reset it to the beginning of it's current play time. The completion block is called.
+  /// Stop the animation and reset it to the beginning of its current play time. The completion block is called.
   case stop
   /// Pause the animation in its current state. The completion block is called.
   case pause
@@ -59,11 +59,11 @@ final public class AnimationView: LottieView {
    The default is `pause` which pauses the animation when the application moves to
    the background. The completion block is called with `false` for completed.
    */
-  public var backgroundBehvior: LottieBackgroundBehavior = .pause
+  public var backgroundBehavior: LottieBackgroundBehavior = .pause
   
   /**
    Sets the image provider for the animation view. An image provider provides the
-   animation with it's required image data.
+   animation with its required image data.
    
    Setting this will cause the animation to reload its image contents.
    */
@@ -330,7 +330,7 @@ final public class AnimationView: LottieView {
     animationLayer?.reloadImages()
   }
   
-  /// Forces the AnimationView to redraw it's contents.
+  /// Forces the AnimationView to redraw its contents.
   public func forceDisplayUpdate() {
     animationLayer?.forceDisplayUpdate()
   }
@@ -666,13 +666,13 @@ final public class AnimationView: LottieView {
   }
   
   @objc override func animationWillMoveToBackground() {
-    if backgroundBehvior == .pauseAndRestore, let currentContext = animationContext {
+    if backgroundBehavior == .pauseAndRestore, let currentContext = animationContext {
       /// Ignore the delegate of the animation.
       currentContext.closure.ignoreDelegate = true
       removeCurrentAnimation()
       /// Keep the stale context around for when the app enters the foreground.
       self.animationContext = currentContext
-    }  else if backgroundBehvior == .stop,
+    }  else if backgroundBehavior == .stop,
       let context = animationContext {
       removeCurrentAnimation()
       updateAnimationFrame(context.playFrom)
@@ -680,7 +680,7 @@ final public class AnimationView: LottieView {
   }
   
   @objc override func animationWillEnterForeground() {
-    if backgroundBehvior == .pauseAndRestore {
+    if backgroundBehavior == .pauseAndRestore {
       /// Restore animation from saved state
       updateInFlightAnimation()
     }

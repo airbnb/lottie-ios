@@ -71,7 +71,7 @@ class TrimPathNode: AnimatorNode {
     
     let offset = properties.offset.value.cgFloatValue.truncatingRemainder(dividingBy: 360) / 360
     
-    /// No need to trim, its a full path
+    /// No need to trim, it's a full path
     if start == 0, end == 1 {
       return
     }
@@ -135,14 +135,14 @@ class TrimPathNode: AnimatorNode {
         // pathStart|=======E----------------------|pathEnd
         // Cut path components, removing after end.
         
-        let pathCutLenth = endLength - pathStart
+        let pathCutLength = endLength - pathStart
         let subpaths = pathContainer.removePaths(updateFrame: frame)
         var subpathStart: CGFloat = 0
         for path in subpaths {
           let subpathEnd = subpathStart + path.length
-          if pathCutLenth < subpathEnd {
+          if pathCutLength < subpathEnd {
             /// This is the subpath that needs to be cut.
-            let cutLength = pathCutLenth - subpathStart
+            let cutLength = pathCutLength - subpathStart
             let newPath = path.trim(fromPosition: 0, toPosition: cutLength / path.length, offset: 0, trimSimultaneously: false)
             pathContainer.appendPath(newPath, updateFrame: frame)
             break
@@ -150,7 +150,7 @@ class TrimPathNode: AnimatorNode {
             /// Add to container and move on
             pathContainer.appendPath(path, updateFrame: frame)
           }
-          if pathCutLenth == subpathEnd {
+          if pathCutLength == subpathEnd {
             /// Right on the end. The next subpath is not included. Break.
             break
           }
@@ -162,7 +162,7 @@ class TrimPathNode: AnimatorNode {
         // pathStart|-------S======================|pathEnd
         //
         
-        // Cut path components, removing before begining.
+        // Cut path components, removing before beginning.
         let pathCutLength = startLength - pathStart
         // Clear paths from container
         let subpaths = pathContainer.removePaths(updateFrame: frame)
@@ -184,9 +184,9 @@ class TrimPathNode: AnimatorNode {
         startLength.isInRange(pathStart, pathEnd) {
         // pathStart|-------S============E---------|endLength
         // pathStart|=====E----------------S=======|endLength
-        // trim from path begging to endLength.
+        // trim from path beginning to endLength.
         
-        // Cut path components, removing before beggings.
+        // Cut path components, removing before beginnings.
         let startCutLength = startLength - pathStart
         let endCutLength = endLength - pathStart
         // Clear paths from container

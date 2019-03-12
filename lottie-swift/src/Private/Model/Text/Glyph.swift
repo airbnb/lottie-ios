@@ -49,9 +49,9 @@ class Glyph: Codable {
     self.fontStyle = try container.decode(String.self, forKey: .fontStyle)
     self.width = try container.decode(Double.self, forKey: .width)
     if container.contains(.shapeWrapper),
-      let shapeContaier = try? container.nestedContainer(keyedBy: ShapeKey.self, forKey: .shapeWrapper),
-      shapeContaier.contains(.shapes) {
-      self.shapes = try shapeContaier.decode([ShapeItem].self, ofFamily: ShapeType.self, forKey: .shapes)
+      let shapeContainer = try? container.nestedContainer(keyedBy: ShapeKey.self, forKey: .shapeWrapper),
+      shapeContainer.contains(.shapes) {
+      self.shapes = try shapeContainer.decode([ShapeItem].self, ofFamily: ShapeType.self, forKey: .shapes)
     } else {
       self.shapes = []
     }

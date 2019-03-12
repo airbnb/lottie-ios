@@ -128,14 +128,14 @@ class RectangleNode: AnimatorNode, PathNode {
         CurveVertex(
           CGPoint(x: 0, y: radius), // In tangent
           CGPoint(x: 0, y: radius), // Point
-          CGPoint(x: -controlPoint, y: radius))// Out Tanget
+          CGPoint(x: -controlPoint, y: radius))// Out tangent
           .translated(CGPoint(x: radius, y: -radius))
           .translated(CGPoint(x: -size.width, y: size.height))
           .translated(position),
         CurveVertex(
           CGPoint(x: -radius, y: controlPoint), // In tangent
           CGPoint(x: -radius, y: 0), // Point
-          CGPoint(x: -radius, y: 0)) // Out Tanget
+          CGPoint(x: -radius, y: 0)) // Out tangent
           .translated(CGPoint(x: radius, y: -radius))
           .translated(CGPoint(x: -size.width, y: size.height))
           .translated(position),
@@ -143,14 +143,14 @@ class RectangleNode: AnimatorNode, PathNode {
         CurveVertex(
           CGPoint(x: -radius, y: 0), // In tangent
           CGPoint(x: -radius, y: 0), // Point
-          CGPoint(x: -radius, y: -controlPoint)) // Out Tanget
+          CGPoint(x: -radius, y: -controlPoint)) // Out tangent
           .translated(CGPoint(x: radius, y: radius))
           .translated(CGPoint(x: -size.width, y: -size.height))
           .translated(position),
         CurveVertex(
           CGPoint(x: -controlPoint, y: -radius), // In tangent
           CGPoint(x: 0, y: -radius), // Point
-          CGPoint(x: 0, y: -radius)) // Out Tanget
+          CGPoint(x: 0, y: -radius)) // Out tangent
           .translated(CGPoint(x: radius, y: radius))
           .translated(CGPoint(x: -size.width, y: -size.height))
           .translated(position),
@@ -158,14 +158,14 @@ class RectangleNode: AnimatorNode, PathNode {
         CurveVertex(
           CGPoint(x: 0, y: -radius), // In tangent
           CGPoint(x: 0, y: -radius), // Point
-          CGPoint(x: controlPoint, y: -radius)) // Out Tanget
+          CGPoint(x: controlPoint, y: -radius)) // Out tangent
           .translated(CGPoint(x: -radius, y: radius))
           .translated(CGPoint(x: size.width, y: -size.height))
           .translated(position),
         CurveVertex(
           CGPoint(x: radius, y: -controlPoint), // In tangent
           CGPoint(x: radius, y: 0), // Point
-          CGPoint(x: radius, y: 0)) // Out Tanget
+          CGPoint(x: radius, y: 0)) // Out tangent
           .translated(CGPoint(x: -radius, y: radius))
           .translated(CGPoint(x: size.width, y: -size.height))
           .translated(position),

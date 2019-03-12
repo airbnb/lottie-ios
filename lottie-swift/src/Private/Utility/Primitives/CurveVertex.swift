@@ -59,7 +59,7 @@ struct CurveVertex {
    The path can be visualized below.
    
    F is fromVertex.
-   V is the vertex of the reciever.
+   V is the vertex of the receiver.
    P is the position from 0-1.
    O is the outTangent of fromVertex.
    F====O=========P=======I====V
@@ -150,7 +150,7 @@ struct CurveVertex {
 
   
   /**
-   The distance from the reciever to the provided vertex.
+   The distance from the receiver to the provided vertex.
    
    For lines (zeroed tangents) the distance between the two points is measured.
    For curves the curve is iterated over by sample count and the points are measured.

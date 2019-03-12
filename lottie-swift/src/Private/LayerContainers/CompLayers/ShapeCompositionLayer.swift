@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 
 /**
- A CompositionLayer responsible for intializing and rendering shapes
+ A CompositionLayer responsible for initializing and rendering shapes
  */
 class ShapeCompositionLayer: CompositionLayer {
   

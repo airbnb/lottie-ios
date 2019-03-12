@@ -31,12 +31,12 @@ protocol AnyNodeProperty {
 
 extension AnyNodeProperty {
 
-  /// Returns the most recently computed value for the keypath, returns nil if property wasnt found
+  /// Returns the most recently computed value for the keypath, returns nil if property wasn't found
   func getValueOfType<T>() -> T? {
     return valueContainer.value as? T
   }
   
-  /// Returns the most recently computed value for the keypath, returns nil if property wasnt found
+  /// Returns the most recently computed value for the keypath, returns nil if property wasn't found
   func getValue() -> Any? {
     return valueContainer.value
   }
