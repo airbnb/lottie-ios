@@ -209,16 +209,16 @@ class TextOutputNode: NodeOutput {
 
 class TextAnimatorNode: AnimatorNode {
   
-  let textOuputNode: TextOutputNode
+  let textOutputNode: TextOutputNode
   
   var outputNode: NodeOutput {
-    return textOuputNode
+    return textOutputNode
   }
   
   let textAnimatorProperties: TextAnimatorNodeProperties
   
   init(parentNode: TextAnimatorNode?, textAnimator: TextAnimator) {
-    self.textOuputNode = TextOutputNode(parent: parentNode?.textOuputNode)
+    self.textOutputNode = TextOutputNode(parent: parentNode?.textOutputNode)
     self.textAnimatorProperties = TextAnimatorNodeProperties(textAnimator: textAnimator)
     self.parentNode = parentNode
   }
@@ -239,11 +239,11 @@ class TextAnimatorNode: AnimatorNode {
   }
   
   func rebuildOutputs(frame: CGFloat) {
-    textOuputNode.xform = textAnimatorProperties.caTransform
-    textOuputNode.opacity = (textAnimatorProperties.opacity?.value.cgFloatValue ?? 100) * 0.01
-    textOuputNode.strokeColor = textAnimatorProperties.strokeColor?.value.cgColorValue
-    textOuputNode.fillColor = textAnimatorProperties.fillColor?.value.cgColorValue
-    textOuputNode.tracking = textAnimatorProperties.tracking?.value.cgFloatValue ?? 1
-    textOuputNode.strokeWidth = textAnimatorProperties.strokeWidth?.value.cgFloatValue ?? 0
+    textOutputNode.xform = textAnimatorProperties.caTransform
+    textOutputNode.opacity = (textAnimatorProperties.opacity?.value.cgFloatValue ?? 100) * 0.01
+    textOutputNode.strokeColor = textAnimatorProperties.strokeColor?.value.cgColorValue
+    textOutputNode.fillColor = textAnimatorProperties.fillColor?.value.cgColorValue
+    textOutputNode.tracking = textAnimatorProperties.tracking?.value.cgFloatValue ?? 1
+    textOutputNode.strokeWidth = textAnimatorProperties.strokeWidth?.value.cgFloatValue ?? 0
   }
 }

@@ -24,7 +24,7 @@ public enum LottieContentMode {
   case topRight
 }
 
-/// A wrapper around NSView for cross platform compatability.
+/// A wrapper around NSView for cross platform compatibility.
 
 public class LottieView: NSView {
   

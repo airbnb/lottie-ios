@@ -59,7 +59,7 @@ final public class AnimationView: LottieView {
    The default is `pause` which pauses the animation when the application moves to
    the background. The completion block is called with `false` for completed.
    */
-  public var backgroundBehvior: LottieBackgroundBehavior = .pause
+  public var backgroundBehavior: LottieBackgroundBehavior = .pause
   
   /**
    Sets the image provider for the animation view. An image provider provides the
@@ -666,13 +666,13 @@ final public class AnimationView: LottieView {
   }
   
   @objc override func animationWillMoveToBackground() {
-    if backgroundBehvior == .pauseAndRestore, let currentContext = animationContext {
+    if backgroundBehavior == .pauseAndRestore, let currentContext = animationContext {
       /// Ignore the delegate of the animation.
       currentContext.closure.ignoreDelegate = true
       removeCurrentAnimation()
       /// Keep the stale context around for when the app enters the foreground.
       self.animationContext = currentContext
-    }  else if backgroundBehvior == .stop,
+    }  else if backgroundBehavior == .stop,
       let context = animationContext {
       removeCurrentAnimation()
       updateAnimationFrame(context.playFrom)
@@ -680,7 +680,7 @@ final public class AnimationView: LottieView {
   }
   
   @objc override func animationWillEnterForeground() {
-    if backgroundBehvior == .pauseAndRestore {
+    if backgroundBehavior == .pauseAndRestore {
       /// Restore animation from saved state
       updateInFlightAnimation()
     }

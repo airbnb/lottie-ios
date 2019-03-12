@@ -60,13 +60,13 @@ class TextCompositionLayer: CompositionLayer {
     let text = textDocument.value(frame: frame) as! TextDocument
     rootNode?.rebuildOutputs(frame: frame)
     
-    let fillColor = rootNode?.textOuputNode.fillColor ?? text.fillColorData.cgColorValue
-    let strokeColor = rootNode?.textOuputNode.strokeColor ?? text.strokeColorData?.cgColorValue
-    let strokeWidth = rootNode?.textOuputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
-    let tracking = rootNode?.textOuputNode.tracking ?? CGFloat(text.tracking)
+    let fillColor = rootNode?.textOutputNode.fillColor ?? text.fillColorData.cgColorValue
+    let strokeColor = rootNode?.textOutputNode.strokeColor ?? text.strokeColorData?.cgColorValue
+    let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
+    let tracking = rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking)
     // TODO LINE HEIGHT
     
-    let matrix = rootNode?.textOuputNode.xform ?? CATransform3DIdentity
+    let matrix = rootNode?.textOutputNode.xform ?? CATransform3DIdentity
     let ctFont = CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil)
     
     var attributes: [NSAttributedStringKey : Any] = [
@@ -88,7 +88,7 @@ class TextCompositionLayer: CompositionLayer {
                                                             CGSize(width: CGFloat.greatestFiniteMagnitude,
                                                                    height: CGFloat.greatestFiniteMagnitude),
                                                             nil)
-    switch text.juistification {
+    switch text.justification {
     case .left:
       textLayer.anchorPoint = CGPoint(x: 0, y: 1)
     case .right:
@@ -96,7 +96,7 @@ class TextCompositionLayer: CompositionLayer {
     case .center:
       textLayer.anchorPoint = CGPoint(x: 0.5, y: 1)
     }
-    textLayer.opacity = Float(rootNode?.textOuputNode.opacity ?? 1)
+    textLayer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
     textLayer.transform = CATransform3DIdentity
     textLayer.frame = CGRect(origin: .zero, size: size)
     textLayer.position = CGPoint.zero

@@ -36,7 +36,7 @@ public class BundleImageProvider: AnimationImageProvider {
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
     
     let imagePath: String?
-    /// Try to find the image in the bund.
+    /// Try to find the image in the bundle.
     if let searchPath = searchPath {
       /// Search in the provided search path for the image
       var directoryPath = URL(fileURLWithPath: searchPath)

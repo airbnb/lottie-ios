@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 /**
  An interactive switch with an 'On' and 'Off' state. When the user taps on the
- switch the state is toggled and the appropiate animation is played.
+ switch the state is toggled and the appropriate animation is played.
  
  Both the 'On' and 'Off' have an animation play range associated with their state.
  */

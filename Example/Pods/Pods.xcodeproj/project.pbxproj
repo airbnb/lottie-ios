@@ -96,7 +96,7 @@
 		0000000011B0 /* AnimationKeypathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000000007F0 /* AnimationKeypathExtension.swift */; };
 		0000000011C0 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000800 /* CGFloatExtensions.swift */; };
 		0000000011D0 /* MathKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000810 /* MathKit.swift */; };
-		0000000011E0 /* StringExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000820 /* StringExtenstions.swift */; };
+		0000000011E0 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000820 /* StringExtensions.swift */; };
 		0000000011F0 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000840 /* AnimationContext.swift */; };
 		000000001200 /* Interpolatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000860 /* Interpolatable.swift */; };
 		000000001210 /* InterpolatableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000870 /* InterpolatableExtensions.swift */; };
@@ -223,7 +223,7 @@
 		000000001AC0 /* AnimationKeypathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000000007F0 /* AnimationKeypathExtension.swift */; };
 		000000001AD0 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000800 /* CGFloatExtensions.swift */; };
 		000000001AE0 /* MathKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000810 /* MathKit.swift */; };
-		000000001AF0 /* StringExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000820 /* StringExtenstions.swift */; };
+		000000001AF0 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000820 /* StringExtensions.swift */; };
 		000000001B00 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000840 /* AnimationContext.swift */; };
 		000000001B10 /* Interpolatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000860 /* Interpolatable.swift */; };
 		000000001B20 /* InterpolatableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000870 /* InterpolatableExtensions.swift */; };
@@ -346,7 +346,7 @@
 		000000002380 /* AnimationKeypathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000000007F0 /* AnimationKeypathExtension.swift */; };
 		000000002390 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000800 /* CGFloatExtensions.swift */; };
 		0000000023A0 /* MathKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000810 /* MathKit.swift */; };
-		0000000023B0 /* StringExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000820 /* StringExtenstions.swift */; };
+		0000000023B0 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000820 /* StringExtensions.swift */; };
 		0000000023C0 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000840 /* AnimationContext.swift */; };
 		0000000023D0 /* Interpolatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000860 /* Interpolatable.swift */; };
 		0000000023E0 /* InterpolatableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000870 /* InterpolatableExtensions.swift */; };
@@ -528,7 +528,7 @@
 		0000000007F0 /* AnimationKeypathExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnimationKeypathExtension.swift; sourceTree = "<group>"; };
 		000000000800 /* CGFloatExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CGFloatExtensions.swift; sourceTree = "<group>"; };
 		000000000810 /* MathKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MathKit.swift; sourceTree = "<group>"; };
-		000000000820 /* StringExtenstions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StringExtenstions.swift; sourceTree = "<group>"; };
+		000000000820 /* StringExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		000000000840 /* AnimationContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
 		000000000860 /* Interpolatable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Interpolatable.swift; sourceTree = "<group>"; };
 		000000000870 /* InterpolatableExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InterpolatableExtensions.swift; sourceTree = "<group>"; };
@@ -1139,7 +1139,7 @@
 				0000000007F0 /* AnimationKeypathExtension.swift */,
 				000000000800 /* CGFloatExtensions.swift */,
 				000000000810 /* MathKit.swift */,
-				000000000820 /* StringExtenstions.swift */,
+				000000000820 /* StringExtensions.swift */,
 			);
 			name = Extensions;
 			path = Extensions;
@@ -1827,7 +1827,7 @@
 				000000000DF0 /* SolidLayerModel.swift in Sources */,
 				000000000F00 /* Star.swift in Sources */,
 				0000000010D0 /* StarNode.swift in Sources */,
-				0000000011E0 /* StringExtenstions.swift in Sources */,
+				0000000011E0 /* StringExtensions.swift in Sources */,
 				000000000F10 /* Stroke.swift in Sources */,
 				000000001120 /* StrokeNode.swift in Sources */,
 				000000001080 /* StrokeRenderer.swift in Sources */,
@@ -1956,7 +1956,7 @@
 				000000001700 /* SolidLayerModel.swift in Sources */,
 				000000001810 /* Star.swift in Sources */,
 				0000000019E0 /* StarNode.swift in Sources */,
-				000000001AF0 /* StringExtenstions.swift in Sources */,
+				000000001AF0 /* StringExtensions.swift in Sources */,
 				000000001820 /* Stroke.swift in Sources */,
 				000000001A30 /* StrokeNode.swift in Sources */,
 				000000001990 /* StrokeRenderer.swift in Sources */,
@@ -2087,7 +2087,7 @@
 				000000001FC0 /* SolidLayerModel.swift in Sources */,
 				0000000020D0 /* Star.swift in Sources */,
 				0000000022A0 /* StarNode.swift in Sources */,
-				0000000023B0 /* StringExtenstions.swift in Sources */,
+				0000000023B0 /* StringExtensions.swift in Sources */,
 				0000000020E0 /* Stroke.swift in Sources */,
 				0000000022F0 /* StrokeNode.swift in Sources */,
 				000000002250 /* StrokeRenderer.swift in Sources */,

@@ -7,7 +7,7 @@ protocol ClassFamily: Decodable {
   /// The discriminator key.
   static var discriminator: Discriminator { get }
   
-  /// Returns the class type of the object coresponding to the value.
+  /// Returns the class type of the object corresponding to the value.
   func getType() -> AnyObject.Type
 }
 

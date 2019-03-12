@@ -20,7 +20,7 @@ public extension Animation {
    - Parameter subdirectory: A subdirectory in the bundle in which the animation is located. Optional.
    - Parameter animationCache: A cache for holding loaded animations. Optional.
    
-   - Returns: Deseralized `Animation`. Optional.
+   - Returns: Deserialized `Animation`. Optional.
    */
   public static func named(_ name: String,
                            bundle: Bundle = Bundle.main,
@@ -57,7 +57,7 @@ public extension Animation {
    - Parameter filepath: The absolute filepath of the animation to load. EG "/User/Me/starAnimation.json"
    - Parameter animationCache: A cache for holding loaded animations. Optional.
    
-   - Returns: Deseralized `Animation`. Optional.
+   - Returns: Deserialized `Animation`. Optional.
    */
   public static func filepath(_ filepath: String,
                               animationCache: AnimationCacheProvider? = nil) -> Animation? {
@@ -88,7 +88,7 @@ public extension Animation {
   public typealias DownloadClosure = (Animation?) -> Void
   
   /**
-   Loads a Lottie animation asyncronously from the URL.
+   Loads a Lottie animation asynchronously from the URL.
    
    - Parameter url: The url to load the animation from.
    - Parameter closure: A closure to be called when the animation has loaded.

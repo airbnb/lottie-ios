@@ -32,7 +32,7 @@ protocol Renderable {
   /// Passes in the CAShapeLayer to update
   func updateShapeLayer(layer: CAShapeLayer)
   
-  /// Asks the renderer what the renerable bounds is for the given box.
+  /// Asks the renderer what the renderable bounds is for the given box.
   func renderBoundsFor(_ boundingBox: CGRect) -> CGRect
   
   /// Renders the shape in a custom context

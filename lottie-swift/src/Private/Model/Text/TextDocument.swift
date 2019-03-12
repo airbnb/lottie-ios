@@ -25,7 +25,7 @@ final class TextDocument: Codable {
   let fontFamily: String
   
   /// Justification
-  let juistification: TextJustification
+  let justification: TextJustification
   
   /// Tracking
   let tracking: Int
@@ -52,7 +52,7 @@ final class TextDocument: Codable {
     case text = "t"
     case fontSize = "s"
     case fontFamily = "f"
-    case juistification = "j"
+    case justification = "j"
     case tracking = "tr"
     case lineHeight = "lh"
     case baseline = "ls"
