@@ -9,7 +9,7 @@ let package = Package(
     targets: [
         .target(
             name: "Lottie",
-            path: "lottie-ios/Classes"
+            path: "lottie-ios"
         )
     ]
 )
