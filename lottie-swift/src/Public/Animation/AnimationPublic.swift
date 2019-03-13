@@ -22,7 +22,7 @@ public extension Animation {
    
    - Returns: Deserialized `Animation`. Optional.
    */
-  public static func named(_ name: String,
+  static func named(_ name: String,
                            bundle: Bundle = Bundle.main,
                            subdirectory: String? = nil,
                            animationCache: AnimationCacheProvider? = nil) -> Animation? {
@@ -59,7 +59,7 @@ public extension Animation {
    
    - Returns: Deserialized `Animation`. Optional.
    */
-  public static func filepath(_ filepath: String,
+  static func filepath(_ filepath: String,
                               animationCache: AnimationCacheProvider? = nil) -> Animation? {
     
     /// Check cache for animation
@@ -67,11 +67,7 @@ public extension Animation {
       let animation = animationCache.animation(forKey: filepath) {
       return animation
     }
-    
-    /// Make sure the file exists.
-    guard FileManager.default.fileExists(atPath: filepath) else {
-      return nil
-    }
+
     do {
       /// Decode the animation.
       let json = try Data(contentsOf: URL(fileURLWithPath: filepath))
@@ -95,7 +91,7 @@ public extension Animation {
    - Parameter animationCache: A cache for holding loaded animations.
    
    */
-  public static func loadedFrom(url: URL,
+  static func loadedFrom(url: URL,
                                 closure: @escaping Animation.DownloadClosure,
                                 animationCache: AnimationCacheProvider?) {
     
