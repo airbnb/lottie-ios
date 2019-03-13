@@ -14,7 +14,7 @@ import UIKit
 public final class CompatibleAnimation: NSObject {
 
   @objc
-  public static func named(_ name: String) -> CompatibleAnimation {
+  static func named(_ name: String) -> CompatibleAnimation {
     return CompatibleAnimation(name: name)
   }
 
