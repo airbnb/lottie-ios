@@ -81,7 +81,7 @@ public extension Animation {
   }
   
   /// A closure for an Animation download. The closure is passed `nil` if there was an error.
-  public typealias DownloadClosure = (Animation?) -> Void
+  typealias DownloadClosure = (Animation?) -> Void
   
   /**
    Loads a Lottie animation asynchronously from the URL.
@@ -134,7 +134,7 @@ public extension Animation {
    
    Returns the Progress Time for the marker named. Returns nil if no marker found.
    */
-  public func progressTime(forMarker named: String) -> AnimationProgressTime? {
+  func progressTime(forMarker named: String) -> AnimationProgressTime? {
     guard let markers = markerMap, let marker = markers[named] else {
       return nil
     }
@@ -151,7 +151,7 @@ public extension Animation {
    
    Returns the Frame Time for the marker named. Returns nil if no marker found.
    */
-  public func frameTime(forMarker named: String) -> AnimationFrameTime? {
+  func frameTime(forMarker named: String) -> AnimationFrameTime? {
     guard let markers = markerMap, let marker = markers[named] else {
       return nil
     }
@@ -159,37 +159,37 @@ public extension Animation {
   }
   
   /// Converts Frame Time (Seconds * Framerate) into Progress Time (0 to 1).
-  public func progressTime(forFrame frameTime: AnimationFrameTime) -> AnimationProgressTime {
+  func progressTime(forFrame frameTime: AnimationFrameTime) -> AnimationProgressTime {
     return ((frameTime - startFrame) / (endFrame - startFrame)).clamp(0, 1)
   }
   
   /// Converts Progress Time (0 to 1) into Frame Time (Seconds * Framerate)
-  public func frameTime(forProgress progressTime: AnimationProgressTime) -> AnimationFrameTime {
+  func frameTime(forProgress progressTime: AnimationProgressTime) -> AnimationFrameTime {
     return ((endFrame - startFrame) * progressTime) + startFrame
   }
   
   /// Converts Frame Time (Seconds * Framerate) into Time (Seconds)
-  public func time(forFrame frameTime: AnimationFrameTime) -> TimeInterval {
+  func time(forFrame frameTime: AnimationFrameTime) -> TimeInterval {
     return Double(frameTime - startFrame) / framerate
   }
   
   /// Converts Time (Seconds) into Frame Time (Seconds * Framerate)
-  public func frameTime(forTime time: TimeInterval) -> AnimationFrameTime {
+  func frameTime(forTime time: TimeInterval) -> AnimationFrameTime {
     return CGFloat(time * framerate) + startFrame
   }
   
   /// The duration in seconds of the animation.
-  public var duration: TimeInterval {
+  var duration: TimeInterval {
     return Double(endFrame - startFrame) / framerate
   }
   
   /// The natural bounds in points of the animation.
-  public var bounds: CGRect {
+  var bounds: CGRect {
     return CGRect(x: 0, y: 0, width: width, height: height)
   }
   
   /// The natural size in points of the animation.
-  public var size: CGSize {
+  var size: CGSize {
     return CGSize(width: width, height: height)
   }
 }
