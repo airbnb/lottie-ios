@@ -38,7 +38,7 @@ class DebugLayer: CALayer {
 
 public extension CALayer {
   
-  public func logLayerTree(withIndent: Int = 0) {
+  func logLayerTree(withIndent: Int = 0) {
     var string = ""
     for _ in 0...withIndent {
       string = string + "  "

@@ -143,11 +143,11 @@ extension Vector3D: Codable {
 }
 
 public extension Vector3D {
-  public var pointValue: CGPoint {
+  var pointValue: CGPoint {
     return CGPoint(x: x, y: y)
   }
   
-  public var sizeValue: CGSize {
+  var sizeValue: CGSize {
     return CGSize(width: x, height: y)
   }
 }

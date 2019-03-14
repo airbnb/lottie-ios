@@ -19,7 +19,7 @@ public extension AnimationView {
    - Parameter imageProvider: An image provider for the animation's image data.
    If none is supplied Lottie will search in the supplied bundle for images.
    */
-  public convenience init(name: String,
+  convenience init(name: String,
                           bundle: Bundle = Bundle.main,
                           imageProvider: AnimationImageProvider? = nil,
                           animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache) {
@@ -35,7 +35,7 @@ public extension AnimationView {
    - Parameter imageProvider: An image provider for the animation's image data.
    If none is supplied Lottie will search in the supplied filepath for images.
    */
-  public convenience init(filePath: String,
+  convenience init(filePath: String,
                           imageProvider: AnimationImageProvider? = nil,
                           animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache) {
     let animation = Animation.filepath(filePath, animationCache: animationCache)
@@ -51,7 +51,7 @@ public extension AnimationView {
    If none is supplied Lottie will search in the main bundle for images.
    - Parameter closure: A closure to be called when the animation has loaded.
    */
-  public convenience init(url: URL,
+  convenience init(url: URL,
                           imageProvider: AnimationImageProvider? = nil,
                           closure: @escaping AnimationView.DownloadClosure,
                           animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache) {
@@ -74,7 +74,7 @@ public extension AnimationView {
     }
   }
   
-  public typealias DownloadClosure = (Error?) -> Void
+  typealias DownloadClosure = (Error?) -> Void
   
 }
 
