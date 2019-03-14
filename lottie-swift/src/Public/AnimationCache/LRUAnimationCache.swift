@@ -24,7 +24,7 @@ public class LRUAnimationCache: AnimationCacheProvider {
   }
   
   /// The global shared Cache.
-  static let sharedCache = LRUAnimationCache()
+  public static let sharedCache = LRUAnimationCache()
   
   /// The size of the cache.
   public var cacheSize: Int = 100
