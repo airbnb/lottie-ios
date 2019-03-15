@@ -366,6 +366,7 @@
 		6445B0D8207E0E5A00D84F6A /* NSValue+Compat.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4ADE1E4A78A0003CF62B /* NSValue+Compat.m */; };
 		6445B0D9207E0E5E00D84F6A /* UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4AE21E4A78A0003CF62B /* UIColor.m */; };
 		6445B0DA207E0EA700D84F6A /* LOTValueCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A62B491FE48220001A2C2F /* LOTValueCallback.m */; };
+		69FCAAD12239A94B0026DA90 /* LOTValueCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A62B491FE48220001A2C2F /* LOTValueCallback.m */; };
 		847709411E875369009CE1B5 /* LOTLayerGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 484EBA241E57898D00D4CAD9 /* LOTLayerGroup.m */; };
 		84FE13081E4C1553009B157C /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4A3E1E4A7885003CF62B /* UIColor+Expanded.m */; };
 		84FE130A1E4C1553009B157C /* LOTLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A4A431E4A7885003CF62B /* LOTLayer.m */; };
@@ -1503,6 +1504,7 @@
 				622F76401F2A92FC00269858 /* LOTPolygonAnimator.m in Sources */,
 				4883E4FB1E5FA67200027E57 /* CGGeometry+LOTAdditions.m in Sources */,
 				6274D01E1F1E82D000E05049 /* LOTLayerContainer.m in Sources */,
+				69FCAAD12239A94B0026DA90 /* LOTValueCallback.m in Sources */,
 				62BFC2EC1F14298D0068A342 /* LOTKeyframe.m in Sources */,
 				622F77131F2BF6AA00269858 /* LOTComposition.m in Sources */,
 				622F76681F2BCA7700269858 /* LOTShapeRepeater.m in Sources */,
