@@ -6,11 +6,11 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   lottie-ios:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  lottie-ios: a42e1d6a51bbb7c9a73b9668eb29c38226ecc2d0
+  lottie-ios: 8563142c9d9032a42d811fbe95603fa3064bd710
 
 PODFILE CHECKSUM: d7d1d3df3df6c9862ab67dbbfb2f695895dc9d7b
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.4.0

@@ -29,9 +29,9 @@ DESC
   
   s.source_files = 'lottie-swift/src/**/*'
   s.ios.source_files   = 'lottie-swift/iOS/*.swift'
-  s.ios.exclude_files   = 'lottie-swift/src/Public/MacOS/*.swift'
-  s.tvos.exclude_files   = 'lottie-swift/src/Public/MacOS/*.swift'
-  s.osx.exclude_files = 'lottie-swift/src/Public/iOS/*.swift'
+  s.ios.exclude_files   = 'lottie-swift/src/Public/MacOS/**/*'
+  s.tvos.exclude_files   = 'lottie-swift/src/Public/MacOS/**/*'
+  s.osx.exclude_files = 'lottie-swift/src/Public/iOS/**/*'
   
   s.ios.frameworks = ['UIKit', 'CoreGraphics', 'QuartzCore']
   s.tvos.frameworks = ['UIKit', 'CoreGraphics', 'QuartzCore']
