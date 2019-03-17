@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "summary": "A library to render native animations from bodymovin json. Now in Swift!",
   "description": "Lottie is a mobile library for Android and iOS that parses Adobe After Effects animations exported as json with bodymovin and renders the vector animations natively on mobile and through React Native!\n\nFor the first time, designers can create and ship beautiful animations without an engineer painstakingly recreating it be hand. Since the animation is backed by JSON they are extremely small in size but can be large in complexity! Animations can be played, resized, looped, sped up, slowed down, and even interactively scrubbed.",
-  "homepage": "https://github.com/buba447/lottie-swift",
+  "homepage": "https://github.com/airbnb/lottie-ios",
   "license": {
     "type": "Apache",
     "file": "LICENSE"
@@ -12,7 +12,7 @@
     "Brandon Withrow": "buba447@gmail.com"
   },
   "source": {
-    "git": "https://github.com/buba447/lottie-swift.git",
+    "git": "https://github.com/airbnb/lottie-ios.git",
     "tag": "3.0.0"
   },
   "swift_version": "4.0",
@@ -24,7 +24,7 @@
   "source_files": "lottie-swift/src/**/*",
   "ios": {
     "source_files": "lottie-swift/iOS/*.swift",
-    "exclude_files": "lottie-swift/src/Public/MacOS/*.swift",
+    "exclude_files": "lottie-swift/src/Public/MacOS/**/*",
     "frameworks": [
       "UIKit",
       "CoreGraphics",
@@ -32,7 +32,7 @@
     ]
   },
   "tvos": {
-    "exclude_files": "lottie-swift/src/Public/MacOS/*.swift",
+    "exclude_files": "lottie-swift/src/Public/MacOS/**/*",
     "frameworks": [
       "UIKit",
       "CoreGraphics",
@@ -40,7 +40,7 @@
     ]
   },
   "osx": {
-    "exclude_files": "lottie-swift/src/Public/iOS/*.swift",
+    "exclude_files": "lottie-swift/src/Public/iOS/**/*",
     "frameworks": [
       "AppKit",
       "CoreGraphics",
