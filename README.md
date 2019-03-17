@@ -1,5 +1,5 @@
 # Lottie for iOS, macOS (and [Android](https://github.com/airbnb/lottie-android) and [React Native](https://github.com/airbnb/lottie-react-native))
-[![CI Status](https://img.shields.io/travis/buba447/lottie-ios.svg?style=flat)](https://travis-ci.org/buba447/lottie-swift)[![Version](https://img.shields.io/cocoapods/v/lottie-ios.svg?style=flat)](https://cocoapods.org/pods/lottie-ios)[![License](https://img.shields.io/cocoapods/l/lottie-ios.svg?style=flat)](https://cocoapods.org/pods/lottie-ios)[![Platform](https://img.shields.io/cocoapods/p/lottie-ios.svg?style=flat)](https://cocoapods.org/pods/lottie-ios)
+[![Version](https://img.shields.io/cocoapods/v/lottie-ios.svg?style=flat)](https://cocoapods.org/pods/lottie-ios)[![License](https://img.shields.io/cocoapods/l/lottie-ios.svg?style=flat)](https://cocoapods.org/pods/lottie-ios)[![Platform](https://img.shields.io/cocoapods/p/lottie-ios.svg?style=flat)](https://cocoapods.org/pods/lottie-ios)
 >  ==**Announcement**==: As of 3.0 Lottie has been completely rewritten in Swift 4.0! For Objective-C support please use Lottie 2.5.3. Read Migration doc [Here](/Documentation/MIGRATING.md)
 
 Lottie is a mobile library for Android and iOS that natively renders vector based animations and art in realtime with minimal code.
