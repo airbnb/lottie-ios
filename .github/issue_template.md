@@ -4,8 +4,7 @@ Hello! Sorry you're having an Issue! Please help us make Lottie better by fillin
 -->
 
 ## Check these before submitting:
-- [] Updated to the latest version of Lottie (2.5.0)
-- [] The issue doesn't involve an [Unsupported Feature](https://github.com/airbnb/lottie-ios/blob/master/README.md#currently-unsupported-after-effects-features)
+- [] The issue doesn't involve an [Unsupported Feature](https://github.com/airbnb/lottie-ios/blob/master/README.md#supported-after-effects-features)
 - [] This issue isn't related to another open issue
 
 ## This issue is a:
@@ -14,10 +13,18 @@ Hello! Sorry you're having an Issue! Please help us make Lottie better by fillin
 - [] Feature Request
 - [] Regression (Something that once worked, but doesn't work anymore)
 
+## Which Version of Lottie are you using?
+
+Lottie 3.0
+
 ## What Platform are you on? 
 <!-- (Specify Platform Version) -->
 - [] MacOS
 - [] iOS
+
+## What Language are you in?
+- [] Swift
+- [] Objective-C
 
 ## Expected Behavior 
 <!-- Screenshots encouraged -->
@@ -28,4 +35,4 @@ Hello! Sorry you're having an Issue! Please help us make Lottie better by fillin
 ## Code Example
 
 ## Animation JSON
-<!-- Adding the animation JSON helps us debug the issue faster! -->
+<!-- Adding the animation JSON helps us debug the issue faster!  If you don't want to publicly share the Animation, please email me brandon@withrow.io -->
