@@ -13,12 +13,12 @@ import UIKit
 final public class AnimatedButton: AnimatedControl {
   
   /// Sets the play range for the given UIControlEvent.
-  public func setPlayRange(fromProgress: AnimationProgressTime, toProgress: AnimationProgressTime, event: UIControlEvents) {
+  public func setPlayRange(fromProgress: AnimationProgressTime, toProgress: AnimationProgressTime, event: UIControl.Event) {
     rangesForEvents[event.rawValue] = (from: fromProgress, to: toProgress)
   }
   
   /// Sets the play range for the given UIControlEvent.
-  public func setPlayRange(fromMarker fromName: String, toMarker toName: String, event: UIControlEvents) {
+  public func setPlayRange(fromMarker fromName: String, toMarker toName: String, event: UIControl.Event) {
     if let start = animationView.progressTime(forMarker: fromName),
       let end = animationView.progressTime(forMarker: toName) {
       rangesForEvents[event.rawValue] = (from: start, to: end)
@@ -27,15 +27,15 @@ final public class AnimatedButton: AnimatedControl {
   
   public override init(animation: Animation) {
     super.init(animation: animation)
-    self.accessibilityTraits = UIAccessibilityTraitButton
+    self.accessibilityTraits = UIAccessibilityTraits.button
   }
   
   public override init() {
     super.init()
-    self.accessibilityTraits = UIAccessibilityTraitButton
+    self.accessibilityTraits = UIAccessibilityTraits.button
   }
 
-  fileprivate var rangesForEvents: [UInt : (from: CGFloat, to: CGFloat)] = [UIControlEvents.touchUpInside.rawValue : (from: 0, to: 1)]
+  fileprivate var rangesForEvents: [UInt : (from: CGFloat, to: CGFloat)] = [UIControl.Event.touchUpInside.rawValue : (from: 0, to: 1)]
   
   required public init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -53,7 +53,7 @@ final public class AnimatedButton: AnimatedControl {
   
   public override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
     super.endTracking(touch, with: event)
-    let touchEvent: UIControlEvents
+    let touchEvent: UIControl.Event
     if let touch = touch, bounds.contains(touch.location(in: self)) {
       touchEvent = UIControl.Event.touchUpInside
     } else {
