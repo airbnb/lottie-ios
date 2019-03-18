@@ -522,6 +522,13 @@ final public class AnimationView: LottieView {
     commonInit()
   }
   
+  public override init(frame: CGRect) {
+    self.animation = nil
+    self.imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
+    super.init(frame: .zero)
+    commonInit()
+  }
+  
   required init?(coder aDecoder: NSCoder) {
     self.imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     super.init(coder: aDecoder)
