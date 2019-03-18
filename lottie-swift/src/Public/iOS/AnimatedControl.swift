@@ -60,7 +60,9 @@ open class AnimatedControl: UIControl {
   }
   
   required public init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    self.animationView = AnimationView()
+    super.init(coder: aDecoder)
+    commonInit()
   }
   
   // MARK: UIControl Overrides

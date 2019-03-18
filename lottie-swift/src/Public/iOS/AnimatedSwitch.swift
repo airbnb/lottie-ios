@@ -72,7 +72,18 @@ final public class AnimatedSwitch: AnimatedControl {
   }
   
   required public init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    /// Generate a haptic generator if available.
+    #if os(iOS)
+    if #available(iOS 10.0, *) {
+      self.hapticGenerator = HapticGenerator()
+    } else {
+      self.hapticGenerator = NullHapticGenerator()
+    }
+    #else
+    self.hapticGenerator = NullHapticGenerator()
+    #endif
+    super.init(coder: aDecoder)
+    self.accessibilityTraits = UIAccessibilityTraits.button
   }
   
   fileprivate var onStartProgress: CGFloat = 0
