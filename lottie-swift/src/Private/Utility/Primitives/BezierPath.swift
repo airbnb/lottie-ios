@@ -118,12 +118,16 @@ struct BezierPath {
     }
     
     /// Normalize lengths to the curve length.
-    var start = offsetLength < 0 ?
-      length - (fromLength+offsetLength).truncatingRemainder(dividingBy: length) :
-      (fromLength+offsetLength).truncatingRemainder(dividingBy: length)
-    var end =  offsetLength < 0 ?
-      length - (toLength+offsetLength).truncatingRemainder(dividingBy: length) :
-      (toLength+offsetLength).truncatingRemainder(dividingBy: length)
+    var start = (fromLength+offsetLength).truncatingRemainder(dividingBy: length)
+    var end =  (toLength+offsetLength).truncatingRemainder(dividingBy: length)
+    
+    if start < 0 {
+      start = length + start
+    }
+    
+    if end < 0 {
+      end = length + end
+    }
     
     if start == length {
       start = 0

@@ -101,13 +101,16 @@ class TrimPathNode: AnimatorNode {
     /// Brace yourself for the below code.
     
     /// Normalize lengths with offset.
-    var startPosition = offset < 0 ?
-      1 - (start+offset).truncatingRemainder(dividingBy: 1) :
-      (start+offset).truncatingRemainder(dividingBy: 1)
-    var endPosition =  offset < 0 ?
-      1 - (end+offset).truncatingRemainder(dividingBy: 1) :
-      (end+offset).truncatingRemainder(dividingBy: 1)
+    var startPosition = (start+offset).truncatingRemainder(dividingBy: 1)
+    var endPosition =  (end+offset).truncatingRemainder(dividingBy: 1)
     
+    if startPosition < 0 {
+      startPosition = 1 + startPosition
+    }
+    
+    if endPosition < 0 {
+      endPosition = 1 + endPosition
+    }
     if startPosition == 1 {
       startPosition = 0
     }
