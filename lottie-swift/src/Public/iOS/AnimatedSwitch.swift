@@ -53,7 +53,7 @@ final public class AnimatedSwitch: AnimatedControl {
     self.hapticGenerator = NullHapticGenerator()
     #endif
     super.init(animation: animation)
-    self.accessibilityTraits = UIAccessibilityTraitButton
+    self.accessibilityTraits = UIAccessibilityTraits.button
   }
   
   public override init() {
@@ -68,7 +68,7 @@ final public class AnimatedSwitch: AnimatedControl {
     self.hapticGenerator = NullHapticGenerator()
     #endif
     super.init()
-    self.accessibilityTraits = UIAccessibilityTraitButton
+    self.accessibilityTraits = UIAccessibilityTraits.button
   }
   
   required public init?(coder aDecoder: NSCoder) {

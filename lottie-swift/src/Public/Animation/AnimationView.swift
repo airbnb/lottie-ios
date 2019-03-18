@@ -752,7 +752,7 @@ final public class AnimationView: LottieView {
     layerAnimation.toValue = playTo
     layerAnimation.speed = Float(animationSpeed)
     layerAnimation.duration = TimeInterval(duration)
-    layerAnimation.fillMode = kCAFillModeBoth
+    layerAnimation.fillMode = CAMediaTimingFillMode.both
     
     layerAnimation.repeatCount = loopMode == .playOnce ? 1 : HUGE
     layerAnimation.autoreverses = loopMode == .autoReverse ? true : false
