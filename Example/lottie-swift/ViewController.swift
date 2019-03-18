@@ -16,7 +16,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let animation = Animation.named("file_error", subdirectory: "TestAnimations")
+    let animation = Animation.named("LottieLogo2", subdirectory: "TestAnimations")
     
     animationView.animation = animation
     animationView.contentMode = .scaleAspectFit
