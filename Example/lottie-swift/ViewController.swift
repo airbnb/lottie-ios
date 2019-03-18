@@ -103,16 +103,16 @@ class ViewController: UIViewController {
   }
   
   @objc func sliderFinished() {
-    animationView.play(fromProgress: 0,
-                       toProgress: 1,
-                       loopMode: LottieLoopMode.playOnce,
-                       completion: { (finished) in
-                        if finished {
-                          print("Animation Complete")
-                        } else {
-                          print("Animation cancelled")
-                        }
-    })
+//    animationView.play(fromProgress: 0,
+//                       toProgress: 1,
+//                       loopMode: LottieLoopMode.playOnce,
+//                       completion: { (finished) in
+//                        if finished {
+//                          print("Animation Complete")
+//                        } else {
+//                          print("Animation cancelled")
+//                        }
+//    })
   }
   
   @objc func animationCallback() {

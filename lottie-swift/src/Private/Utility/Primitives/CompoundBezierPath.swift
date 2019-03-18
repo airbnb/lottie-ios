@@ -71,12 +71,16 @@ struct CompoundBezierPath {
     }
     
     /// Normalize lengths to the curve length.
-    var startPosition = offset < 0 ?
-      1 - (fromPosition+offset).truncatingRemainder(dividingBy: 1) :
-      (fromPosition+offset).truncatingRemainder(dividingBy: 1)
-    var endPosition =  offset < 0 ?
-      1 - (toPosition+offset).truncatingRemainder(dividingBy: 1) :
-      (toPosition+offset).truncatingRemainder(dividingBy: 1)
+    var startPosition = (fromPosition+offset).truncatingRemainder(dividingBy: 1)
+    var endPosition =  (toPosition+offset).truncatingRemainder(dividingBy: 1)
+    
+    if startPosition < 0 {
+      startPosition = 1 + startPosition
+    }
+    
+    if endPosition < 0 {
+      endPosition = 1 + endPosition
+    }
     
     if startPosition == 1 {
       startPosition = 0
