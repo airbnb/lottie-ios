@@ -148,7 +148,7 @@ class AnimationContainer: CALayer {
   override public func action(forKey event: String) -> CAAction? {
     if event == "currentFrame" {
       let animation = CABasicAnimation(keyPath: event)
-      animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+      animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
       animation.fromValue = self.presentation()?.currentFrame
       return animation
     }

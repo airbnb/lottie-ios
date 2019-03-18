@@ -22,16 +22,16 @@ extension LineJoin {
     }
   }
   
-  var caLineJoin: String {
+  var caLineJoin: CAShapeLayerLineJoin {
     switch self {
     case .none:
-      return kCALineJoinMiter
+      return CAShapeLayerLineJoin.miter
     case .miter:
-      return kCALineJoinMiter
+      return CAShapeLayerLineJoin.miter
     case .round:
-      return kCALineJoinRound
+      return CAShapeLayerLineJoin.round
     case .bevel:
-      return kCALineJoinBevel
+      return CAShapeLayerLineJoin.bevel
     }
   }
 }
@@ -50,16 +50,16 @@ extension LineCap {
     }
   }
   
-  var caLineCap: String {
+  var caLineCap: CAShapeLayerLineCap {
     switch self {
     case .none:
-      return kCALineCapButt
+      return CAShapeLayerLineCap.butt
     case .butt:
-      return kCALineCapButt
+      return CAShapeLayerLineCap.butt
     case .round:
-      return kCALineCapRound
+      return CAShapeLayerLineCap.round
     case .square:
-      return kCALineCapSquare
+      return CAShapeLayerLineCap.square
     }
   }
 }

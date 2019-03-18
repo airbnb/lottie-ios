@@ -69,15 +69,15 @@ class TextCompositionLayer: CompositionLayer {
     let matrix = rootNode?.textOutputNode.xform ?? CATransform3DIdentity
     let ctFont = CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil)
     
-    var attributes: [NSAttributedStringKey : Any] = [
-      NSAttributedStringKey.font: ctFont,
-      NSAttributedStringKey.foregroundColor: fillColor,
-      NSAttributedStringKey.kern: tracking,
+    var attributes: [NSAttributedString.Key : Any] = [
+      NSAttributedString.Key.font: ctFont,
+      NSAttributedString.Key.foregroundColor: fillColor,
+      NSAttributedString.Key.kern: tracking,
       ]
     
     if let strokeColor = strokeColor {
-      attributes[NSAttributedStringKey.strokeColor] = strokeColor
-      attributes[NSAttributedStringKey.strokeWidth] = strokeWidth
+      attributes[NSAttributedString.Key.strokeColor] = strokeColor
+      attributes[NSAttributedString.Key.strokeWidth] = strokeWidth
     }
     
     let attributedString = NSAttributedString(string: text.text, attributes: attributes )

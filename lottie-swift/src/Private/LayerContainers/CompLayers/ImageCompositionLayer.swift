@@ -27,7 +27,7 @@ class ImageCompositionLayer: CompositionLayer {
     self.imageReferenceID = imageLayer.referenceID
     super.init(layer: imageLayer, size: size)
     contentsLayer.masksToBounds = true
-    contentsLayer.contentsGravity = kCAGravityResize
+    contentsLayer.contentsGravity = CALayerContentsGravity.resize
   }
   
   override init(layer: Any) {

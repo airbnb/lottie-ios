@@ -2308,7 +2308,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.airbnb.Lottie-iOS";
 				PRODUCT_NAME = Lottie;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2334,7 +2334,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.airbnb.Lottie-iOS";
 				PRODUCT_NAME = Lottie;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -2360,7 +2360,7 @@
 				PRODUCT_NAME = Lottie;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -2387,7 +2387,7 @@
 				PRODUCT_NAME = Lottie;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -2417,7 +2417,7 @@
 				PRODUCT_NAME = Lottie;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -2445,7 +2445,7 @@
 				PRODUCT_NAME = Lottie;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -2458,7 +2458,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Lottie;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2471,7 +2471,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Lottie;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -2488,7 +2488,7 @@
 				PRODUCT_NAME = Lottie;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -2503,7 +2503,7 @@
 				PRODUCT_NAME = Lottie;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

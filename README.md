@@ -617,9 +617,9 @@ Lottie comes prepacked with a two Animated Controls, `AnimatedSwitch` and `Anima
 
 `AnimatedControl` is a subclass of `UIControl` that provides an interactive mechanism for controlling the visual state of an animation in response to user actions.
 
-The `AnimatedControl` will show and hide layers depending on the current `UIControlState` of the control.
+The `AnimatedControl` will show and hide layers depending on the current `UIControl.State` of the control.
 
-Users of `AnimationControl` can set a Layer Name for each `UIControlState`. When the state is change the `AnimationControl` will change the visibility of its layers.
+Users of `AnimationControl` can set a Layer Name for each `UIControl.State`. When the state is change the `AnimationControl` will change the visibility of its layers.
 
 [Back to contents](#contents)
 ## Animated Switch
@@ -642,16 +642,16 @@ public func setProgressForState(fromProgress: AnimationProgressTime,
 ![HeartButton](_Gifs/HeartButton.gif)
 
 An interactive button that plays an animation when pressed.
-The `AnimatedButton` can play a variety of time ranges for different `UIControlEvents`.  Play ranges are set using either:
+The `AnimatedButton` can play a variety of time ranges for different `UIControl.Event`.  Play ranges are set using either:
 ```swift
 /// Set a play range with Progress Time.
 public func setPlayRange(fromProgress: AnimationProgressTime, 
 		toProgress: AnimationProgressTime, 
-		event: UIControlEvents)
+		event: UIControl.Event)
 /// Set a play range with Marker Keys.
 public func setPlayRange(fromMarker fromName: String, 
 		toMarker toName: String, 
-		event: UIControlEvents)
+		event: UIControl.Event)
 ```
 Once set the  animation will automatically play when the event is triggered.
 
