@@ -16,7 +16,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let animation = Animation.named("LottieLogo2", subdirectory: "TestAnimations")
+    let animation = Animation.named("file_error", subdirectory: "TestAnimations")
     
     animationView.animation = animation
     animationView.contentMode = .scaleAspectFit
@@ -103,16 +103,16 @@ class ViewController: UIViewController {
   }
   
   @objc func sliderFinished() {
-    animationView.play(fromProgress: 0,
-                       toProgress: 1,
-                       loopMode: LottieLoopMode.playOnce,
-                       completion: { (finished) in
-                        if finished {
-                          print("Animation Complete")
-                        } else {
-                          print("Animation cancelled")
-                        }
-    })
+//    animationView.play(fromProgress: 0,
+//                       toProgress: 1,
+//                       loopMode: LottieLoopMode.playOnce,
+//                       completion: { (finished) in
+//                        if finished {
+//                          print("Animation Complete")
+//                        } else {
+//                          print("Animation cancelled")
+//                        }
+//    })
   }
   
   @objc func animationCallback() {
