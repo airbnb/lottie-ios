@@ -19,12 +19,12 @@ extension FillRule {
     }
   }
   
-  var caFillRule: String {
+  var caFillRule: CAShapeLayerFillRule {
     switch self {
     case .evenOdd:
-      return kCAFillRuleEvenOdd
+      return CAShapeLayerFillRule.evenOdd
     default:
-      return kCAFillRuleNonZero
+      return CAShapeLayerFillRule.nonZero
     }
   }
 }

@@ -95,7 +95,7 @@ fileprivate class MaskLayer: CALayer {
     anchorPoint = .zero
     maskLayer.fillColor = mask.mode == .add ? CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1, 0, 0, 1]) :
       CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0, 1, 0, 1])
-    maskLayer.fillRule = kCAFillRuleEvenOdd
+    maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
     self.actions = [
       "opacity" : NSNull()
     ]

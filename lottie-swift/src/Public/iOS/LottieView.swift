@@ -27,11 +27,11 @@ open class LottieView: UIView {
   func commonInit() {
     contentMode = .scaleAspectFit
     clipsToBounds = true
-    NotificationCenter.default.addObserver(self, selector: #selector(animationWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(animationWillMoveToBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(animationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(animationWillMoveToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
   }
 
-  open override var contentMode: UIViewContentMode {
+  open override var contentMode: UIView.ContentMode {
     didSet {
       setNeedsLayout()
     }
