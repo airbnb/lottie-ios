@@ -38,7 +38,7 @@ final public class AnimatedButton: AnimatedControl {
   fileprivate var rangesForEvents: [UInt : (from: CGFloat, to: CGFloat)] = [UIControl.Event.touchUpInside.rawValue : (from: 0, to: 1)]
   
   required public init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    super.init(coder: aDecoder)
   }
   
   public override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
