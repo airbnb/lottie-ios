@@ -96,6 +96,11 @@ final public class AnimatedSwitch: AnimatedControl {
   // MARK: Animation State
 
   func updateOnState(isOn: Bool, animated: Bool) {
+    // no need to update if the state isn't changing
+    guard isOn != _isOn else {
+      return
+    }
+
     _isOn = isOn
     var startProgress = isOn ? onStartProgress : offStartProgress
     var endProgress = isOn ? onEndProgress : offEndProgress
