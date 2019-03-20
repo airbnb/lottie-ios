@@ -36,6 +36,7 @@ open class AnimatedControl: UIControl {
       animationView.bounds = animation?.bounds ?? .zero
       setNeedsLayout()
       updateForState()
+      animationDidSet()
     }
   }
   
@@ -107,6 +108,10 @@ open class AnimatedControl: UIControl {
   
   open override var intrinsicContentSize: CGSize {
     return animationView.intrinsicContentSize
+  }
+  
+  open func animationDidSet() {
+    
   }
   
   // MARK: Private

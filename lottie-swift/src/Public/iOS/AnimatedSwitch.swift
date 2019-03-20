@@ -18,6 +18,8 @@ final public class AnimatedSwitch: AnimatedControl {
   /// The current state of the switch.
   public var isOn: Bool {
     set {
+      /// This is forwarded to a private variable because the animation needs to be updated without animation when set externally and with animation when set internally.
+      guard _isOn != newValue else { return }
       updateOnState(isOn: newValue, animated: false)
       accessibilityValue = newValue ? NSLocalizedString("On", comment: "On") : NSLocalizedString("Off", comment: "Off")
     }
@@ -25,7 +27,7 @@ final public class AnimatedSwitch: AnimatedControl {
       return _isOn
     }
   }
-  
+
   /// Sets the play range for the given state. When the switch is toggled, the animation range is played.
   public func setProgressForState(fromProgress: AnimationProgressTime,
                                   toProgress: AnimationProgressTime,
@@ -53,6 +55,7 @@ final public class AnimatedSwitch: AnimatedControl {
     self.hapticGenerator = NullHapticGenerator()
     #endif
     super.init(animation: animation)
+    updateOnState(isOn: _isOn, animated: false)
     self.accessibilityTraits = UIAccessibilityTraits.button
   }
   
@@ -68,6 +71,7 @@ final public class AnimatedSwitch: AnimatedControl {
     self.hapticGenerator = NullHapticGenerator()
     #endif
     super.init()
+    updateOnState(isOn: _isOn, animated: false)
     self.accessibilityTraits = UIAccessibilityTraits.button
   }
   
@@ -96,11 +100,6 @@ final public class AnimatedSwitch: AnimatedControl {
   // MARK: Animation State
 
   func updateOnState(isOn: Bool, animated: Bool) {
-    // no need to update if the state isn't changing
-    guard isOn != _isOn else {
-      return
-    }
-
     _isOn = isOn
     var startProgress = isOn ? onStartProgress : offStartProgress
     var endProgress = isOn ? onEndProgress : offEndProgress
@@ -133,6 +132,10 @@ final public class AnimatedSwitch: AnimatedControl {
     super.endTracking(touch, with: event)
     updateOnState(isOn: !_isOn, animated: true)
     sendActions(for: .valueChanged)
+  }
+  
+  public override func animationDidSet() {
+    updateOnState(isOn: _isOn, animated: true)
   }
   
 }

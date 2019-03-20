@@ -61,7 +61,7 @@ class ViewController: UIViewController {
     
     /// Animated Switch
     
-    /*
+    
     let switchButton = AnimatedSwitch()
     switchButton.animation = Animation.named("Switch", subdirectory: "TestAnimations")
     switchButton.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +74,7 @@ class ViewController: UIViewController {
 
     switchButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 12).isActive = true
     switchButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 20).isActive = true
-    */
+ 
 
     /// Animated Button
     
