@@ -31,6 +31,13 @@ public class FilepathImageProvider: AnimationImageProvider {
   
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
 
+    if asset.name.hasPrefix("data:"),
+      let url = URL(string: asset.name),
+      let data = try? Data(contentsOf: url),
+      let image = UIImage(data: data) {
+      return image.cgImage
+    }
+    
     let directPath = filepath.appendingPathComponent(asset.name).path
     if FileManager.default.fileExists(atPath: directPath) {
       return UIImage(contentsOfFile: directPath)?.cgImage
