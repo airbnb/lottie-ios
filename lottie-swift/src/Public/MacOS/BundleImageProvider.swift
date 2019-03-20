@@ -37,7 +37,7 @@ public class BundleImageProvider: AnimationImageProvider {
       let url = URL(string: asset.name),
       let data = try? Data(contentsOf: url),
       let image = NSImage(data: data) {
-      return image.cgImage
+      return image.CGImage
     }
     
     let imagePath: String?
