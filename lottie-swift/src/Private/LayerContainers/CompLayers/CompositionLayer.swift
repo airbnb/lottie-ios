@@ -132,7 +132,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
   final var childKeypaths: [KeypathSearchable]
   
   var keypathLayer: CALayer? {
-    return self
+    return contentsLayer
   }
 }
 
