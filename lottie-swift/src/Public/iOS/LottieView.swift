@@ -20,6 +20,15 @@ open class LottieView: UIView {
 
   }
   
+  func animationMovedToWindow() {
+    
+  }
+  
+  open override func didMoveToWindow() {
+    super.didMoveToWindow()
+    animationMovedToWindow()
+  }
+  
   var screenScale: CGFloat {
     return UIScreen.main.scale
   }
