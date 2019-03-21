@@ -529,7 +529,7 @@ final public class AnimationView: LottieView {
     commonInit()
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  required public init?(coder aDecoder: NSCoder) {
     self.imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     super.init(coder: aDecoder)
     commonInit()
@@ -541,7 +541,7 @@ final public class AnimationView: LottieView {
   
   // MARK: - Public (UIView Overrides)
   
-  public override var intrinsicContentSize: CGSize {
+  override public var intrinsicContentSize: CGSize {
     if let animation = animation {
       return animation.bounds.size
     }
