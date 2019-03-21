@@ -40,6 +40,15 @@ public class LottieView: NSView {
     
   }
   
+  func animationMovedToWindow() {
+    
+  }
+  
+  public override func viewDidMoveToWindow() {
+    super.viewDidMoveToWindow()
+    animationMovedToWindow()
+  }
+  
   func commonInit() {
     self.wantsLayer = true
   }
