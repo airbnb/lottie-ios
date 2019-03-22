@@ -16,7 +16,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let animation = Animation.named("LottieLogo2", subdirectory: "TestAnimations")
+    let animation = Animation.named("LottieLogo1", subdirectory: "TestAnimations")
     
     animationView.animation = animation
     animationView.contentMode = .scaleAspectFit
@@ -31,10 +31,10 @@ class ViewController: UIViewController {
     animationView.backgroundBehavior = .pauseAndRestore
     animationView.translatesAutoresizingMaskIntoConstraints = false
     animationView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
-    animationView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
+    animationView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     
     animationView.bottomAnchor.constraint(equalTo: slider.topAnchor, constant: -12).isActive = true
-    animationView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
+    animationView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     animationView.setContentCompressionResistancePriority(.fittingSizeLevel, for: .horizontal)
     
     /// *** Keypath Setting

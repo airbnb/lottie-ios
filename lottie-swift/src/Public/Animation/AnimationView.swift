@@ -571,8 +571,9 @@ final public class AnimationView: LottieView {
       position = bounds.center
       let compAspect = animation.size.width / animation.size.height
       let viewAspect = bounds.size.width / bounds.size.height
-      let dominantDimension = compAspect > viewAspect ? bounds.size.width : bounds.size.height
-      let compDimension = compAspect < viewAspect ? animation.size.width : animation.size.height
+      let scaleWidth = compAspect < viewAspect
+      let dominantDimension = scaleWidth ? bounds.size.width : bounds.size.height
+      let compDimension = scaleWidth ? animation.size.width : animation.size.height
       let scale = dominantDimension / compDimension
       xform = CATransform3DMakeScale(scale, scale, 1)
     case .redraw:
