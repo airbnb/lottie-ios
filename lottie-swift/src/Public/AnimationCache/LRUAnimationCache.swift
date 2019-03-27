@@ -33,7 +33,7 @@ public class LRUAnimationCache: AnimationCacheProvider {
     guard let animation = cacheMap[forKey] else {
       return nil
     }
-    if let index = lruList.index(of: forKey) {
+    if let index = lruList.firstIndex(of: forKey) {
       lruList.remove(at: index)
       lruList.append(forKey)
     }
