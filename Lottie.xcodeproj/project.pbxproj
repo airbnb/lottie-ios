@@ -14,7 +14,6 @@
 		25D5437422307C8B00ED90FA /* CompatibleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */; };
 		25D5437522307C8C00ED90FA /* CompatibleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */; };
 		4866743322249C0600258C00 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4866743222249C0600258C00 /* TextCompositionLayer.swift */; };
-		4866743422249C0600258C00 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4866743222249C0600258C00 /* TextCompositionLayer.swift */; };
 		4866743522249C0600258C00 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4866743222249C0600258C00 /* TextCompositionLayer.swift */; };
 		4866743622249C0600258C00 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4866743222249C0600258C00 /* TextCompositionLayer.swift */; };
 		4866743722249C0600258C00 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4866743222249C0600258C00 /* TextCompositionLayer.swift */; };
@@ -285,7 +284,6 @@
 		486E88A5220B78F4007CD915 /* PointValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E871E220B78BF007CD915 /* PointValueProvider.swift */; };
 		486E88A6220B78F4007CD915 /* CompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8722220B78BF007CD915 /* CompositionLayer.swift */; };
 		486E88A7220B78F4007CD915 /* NullCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8723220B78BF007CD915 /* NullCompositionLayer.swift */; };
-		486E88A8220B78F4007CD915 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8724220B78BF007CD915 /* TextCompositionLayer.swift */; };
 		486E88A9220B78F4007CD915 /* SolidCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8725220B78BF007CD915 /* SolidCompositionLayer.swift */; };
 		486E88AA220B78F4007CD915 /* PreCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8726220B78BF007CD915 /* PreCompositionLayer.swift */; };
 		486E88AB220B78F4007CD915 /* ImageCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8727220B78BF007CD915 /* ImageCompositionLayer.swift */; };
@@ -1655,7 +1653,6 @@
 				486E881C220B78E4007CD915 /* AnimationPublic.swift in Sources */,
 				486E881D220B78E4007CD915 /* AnimationImageProvider.swift in Sources */,
 				486E881E220B78E4007CD915 /* FilepathImageProvider.swift in Sources */,
-				4866743422249C0600258C00 /* TextCompositionLayer.swift in Sources */,
 				486E881F220B78E4007CD915 /* AnimatedSwitch.swift in Sources */,
 				486E8820220B78E4007CD915 /* BundleImageProvider.swift in Sources */,
 				486E8821220B78E4007CD915 /* UIColorExtension.swift in Sources */,
@@ -1795,7 +1792,6 @@
 				486E88A5220B78F4007CD915 /* PointValueProvider.swift in Sources */,
 				486E88A6220B78F4007CD915 /* CompositionLayer.swift in Sources */,
 				486E88A7220B78F4007CD915 /* NullCompositionLayer.swift in Sources */,
-				486E88A8220B78F4007CD915 /* TextCompositionLayer.swift in Sources */,
 				486E88A9220B78F4007CD915 /* SolidCompositionLayer.swift in Sources */,
 				486E88AA220B78F4007CD915 /* PreCompositionLayer.swift in Sources */,
 				486E88AB220B78F4007CD915 /* ImageCompositionLayer.swift in Sources */,
