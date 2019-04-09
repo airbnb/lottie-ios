@@ -20,12 +20,17 @@ final public class AnimatedSwitch: AnimatedControl {
     set {
       /// This is forwarded to a private variable because the animation needs to be updated without animation when set externally and with animation when set internally.
       guard _isOn != newValue else { return }
-      updateOnState(isOn: newValue, animated: false)
-      accessibilityValue = newValue ? NSLocalizedString("On", comment: "On") : NSLocalizedString("Off", comment: "Off")
+      updateOnState(isOn: newValue, animated: false, shouldFireHaptics: false)
     }
     get {
       return _isOn
     }
+  }
+
+  /// Set the state of the switch and specify animation and haptics
+  public func setIsOn(_ isOn: Bool, animated: Bool, shouldFireHaptics: Bool = true) {
+    guard isOn != _isOn else { return }
+    updateOnState(isOn: isOn, animated: animated, shouldFireHaptics: shouldFireHaptics)
   }
 
   /// Sets the play range for the given state. When the switch is toggled, the animation range is played.
@@ -40,7 +45,7 @@ final public class AnimatedSwitch: AnimatedControl {
       offEndProgress = toProgress
     }
     
-    updateOnState(isOn: _isOn, animated: false)
+    updateOnState(isOn: _isOn, animated: false, shouldFireHaptics: false)
   }
   
   public override init(animation: Animation) {
@@ -55,7 +60,7 @@ final public class AnimatedSwitch: AnimatedControl {
     self.hapticGenerator = NullHapticGenerator()
     #endif
     super.init(animation: animation)
-    updateOnState(isOn: _isOn, animated: false)
+    updateOnState(isOn: _isOn, animated: false, shouldFireHaptics: false)
     self.accessibilityTraits = UIAccessibilityTraits.button
   }
   
@@ -71,7 +76,7 @@ final public class AnimatedSwitch: AnimatedControl {
     self.hapticGenerator = NullHapticGenerator()
     #endif
     super.init()
-    updateOnState(isOn: _isOn, animated: false)
+    updateOnState(isOn: _isOn, animated: false, shouldFireHaptics: false)
     self.accessibilityTraits = UIAccessibilityTraits.button
   }
   
@@ -99,7 +104,7 @@ final public class AnimatedSwitch: AnimatedControl {
   
   // MARK: Animation State
 
-  func updateOnState(isOn: Bool, animated: Bool) {
+  func updateOnState(isOn: Bool, animated: Bool, shouldFireHaptics: Bool) {
     _isOn = isOn
     var startProgress = isOn ? onStartProgress : offStartProgress
     var endProgress = isOn ? onEndProgress : offEndProgress
@@ -120,22 +125,34 @@ final public class AnimatedSwitch: AnimatedControl {
       animationView.currentProgress = finalProgress
       return
     }
-    self.hapticGenerator.generateImpact()
+
+    if shouldFireHaptics {
+      self.hapticGenerator.generateImpact()
+    }
+
     animationView.play(fromProgress: startProgress, toProgress: endProgress, loopMode: LottieLoopMode.playOnce) { (finished) in
       if finished == true {
         self.animationView.currentProgress = finalProgress
       }
     }
+
+    updateAccessibilityLabel()
   }
   
   public override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
     super.endTracking(touch, with: event)
-    updateOnState(isOn: !_isOn, animated: true)
+    updateOnState(isOn: !_isOn, animated: true, shouldFireHaptics: true)
     sendActions(for: .valueChanged)
   }
   
   public override func animationDidSet() {
-    updateOnState(isOn: _isOn, animated: true)
+    updateOnState(isOn: _isOn, animated: true, shouldFireHaptics: false)
+  }
+
+  // MARK: Private
+
+  private func updateAccessibilityLabel() {
+    accessibilityValue = _isOn ? NSLocalizedString("On", comment: "On") : NSLocalizedString("Off", comment: "Off")
   }
   
 }
