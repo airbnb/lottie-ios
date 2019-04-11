@@ -382,62 +382,62 @@
 		0000000025C0 /* Vectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000AA0 /* Vectors.swift */; };
 		000000002600 /* lottie-ios-tvOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000025F0 /* lottie-ios-tvOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		000000002640 /* lottie-ios-tvOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000002630 /* lottie-ios-tvOS-dummy.m */; };
-		000000002660 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002650 /* UIKit.framework */; };
-		000000002680 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002670 /* CoreGraphics.framework */; };
-		0000000026A0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002690 /* QuartzCore.framework */; };
-		0000000026C0 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0000000026B0 /* AppKit.framework */; };
-		0000000026E0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0000000026D0 /* CoreGraphics.framework */; };
-		000000002700 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0000000026F0 /* QuartzCore.framework */; };
-		000000002720 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002710 /* UIKit.framework */; };
-		000000002740 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002730 /* CoreGraphics.framework */; };
-		000000002760 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002750 /* QuartzCore.framework */; };
-		000000002800 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000000C40 /* Foundation.framework */; };
-		000000002870 /* Pods-lottie-swift_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000002860 /* Pods-lottie-swift_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0000000028C0 /* Pods-lottie-swift_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0000000028B0 /* Pods-lottie-swift_Example-dummy.m */; };
-		000000002960 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000000C40 /* Foundation.framework */; };
-		0000000029D0 /* Pods-lottie-swift_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000029C0 /* Pods-lottie-swift_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		000000002A10 /* Pods-lottie-swift_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000002A00 /* Pods-lottie-swift_Tests-dummy.m */; };
-		000000002AB0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000001550 /* Cocoa.framework */; };
-		000000002B20 /* Pods-lottie-swift_macOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000002B10 /* Pods-lottie-swift_macOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		000000002B70 /* Pods-lottie-swift_macOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000002B60 /* Pods-lottie-swift_macOS-dummy.m */; };
-		000000002C10 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000001DF0 /* Foundation.framework */; };
-		000000002C80 /* Pods-lottie-swift_tvOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000002C70 /* Pods-lottie-swift_tvOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		000000002CD0 /* Pods-lottie-swift_tvOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000002CC0 /* Pods-lottie-swift_tvOS-dummy.m */; };
+		0000000026E0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000000C40 /* Foundation.framework */; };
+		000000002750 /* Pods-lottie-swift_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000002740 /* Pods-lottie-swift_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0000000027B0 /* Pods-lottie-swift_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0000000027A0 /* Pods-lottie-swift_Example-dummy.m */; };
+		000000002850 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000000C40 /* Foundation.framework */; };
+		0000000028C0 /* Pods-lottie-swift_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0000000028B0 /* Pods-lottie-swift_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		000000002920 /* Pods-lottie-swift_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000002910 /* Pods-lottie-swift_Tests-dummy.m */; };
+		0000000029C0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000001550 /* Cocoa.framework */; };
+		000000002A30 /* Pods-lottie-swift_macOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000002A20 /* Pods-lottie-swift_macOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		000000002A90 /* Pods-lottie-swift_macOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000002A80 /* Pods-lottie-swift_macOS-dummy.m */; };
+		000000002B30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000001DF0 /* Foundation.framework */; };
+		000000002BA0 /* Pods-lottie-swift_tvOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 000000002B90 /* Pods-lottie-swift_tvOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		000000002C00 /* Pods-lottie-swift_tvOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 000000002BF0 /* Pods-lottie-swift_tvOS-dummy.m */; };
+		000000002C20 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002C10 /* UIKit.framework */; };
+		000000002C40 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002C30 /* CoreGraphics.framework */; };
+		000000002C60 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002C50 /* QuartzCore.framework */; };
+		000000002C80 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002C70 /* AppKit.framework */; };
+		000000002CA0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002C90 /* CoreGraphics.framework */; };
+		000000002CC0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002CB0 /* QuartzCore.framework */; };
+		000000002CE0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002CD0 /* UIKit.framework */; };
+		000000002D00 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002CF0 /* CoreGraphics.framework */; };
+		000000002D20 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000000002D10 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		000000002CE0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 000000000000 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 000000000BA0;
-			remoteInfo = "lottie-ios-iOS";
-		};
-		000000002D00 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 000000000000 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 000000002770;
-			remoteInfo = "Pods-lottie-swift_Example";
-		};
-		000000002D20 /* PBXContainerItemProxy */ = {
+		000000002D30 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 000000000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0000000014B0;
 			remoteInfo = "lottie-ios-macOS";
 		};
-		000000002D40 /* PBXContainerItemProxy */ = {
+		000000002D50 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 000000000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 000000001D50;
 			remoteInfo = "lottie-ios-tvOS";
 		};
+		000000002D70 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 000000000000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 000000000BA0;
+			remoteInfo = "lottie-ios-iOS";
+		};
+		000000002D90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 000000000000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 000000002650;
+			remoteInfo = "Pods-lottie-swift_Example";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0000000000B0 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0000000000B0 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0000000000E0 /* AnimationContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnimationContainer.swift; sourceTree = "<group>"; };
 		000000000100 /* CompositionLayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompositionLayer.swift; sourceTree = "<group>"; };
 		000000000110 /* ImageCompositionLayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageCompositionLayer.swift; sourceTree = "<group>"; };
@@ -567,13 +567,13 @@
 		000000000B50 /* LottieView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		000000000B60 /* UIColorExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		000000000B80 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		000000000B90 /* lottie-ios.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = "lottie-ios.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		000000000B90 /* lottie-ios.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = "lottie-ios.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		000000000BE0 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		000000000C40 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		000000001430 /* lottie-ios-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "lottie-ios-iOS.xcconfig"; sourceTree = "<group>"; };
 		000000001440 /* lottie-ios-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "lottie-ios-iOS.modulemap"; sourceTree = "<group>"; };
 		000000001450 /* lottie-ios-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "lottie-ios-iOS-umbrella.h"; sourceTree = "<group>"; };
-		000000001470 /* lottie-ios-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "lottie-ios-iOS-Info.plist"; sourceTree = "<group>"; };
+		000000001470 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		000000001480 /* lottie-ios-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "lottie-ios-iOS-prefix.pch"; sourceTree = "<group>"; };
 		000000001490 /* lottie-ios-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "lottie-ios-iOS-dummy.m"; sourceTree = "<group>"; };
 		0000000014F0 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios-macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -581,7 +581,7 @@
 		000000001CD0 /* lottie-ios-macOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "lottie-ios-macOS.xcconfig"; path = "../lottie-ios-macOS/lottie-ios-macOS.xcconfig"; sourceTree = "<group>"; };
 		000000001CE0 /* lottie-ios-macOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = "lottie-ios-macOS.modulemap"; path = "../lottie-ios-macOS/lottie-ios-macOS.modulemap"; sourceTree = "<group>"; };
 		000000001CF0 /* lottie-ios-macOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "lottie-ios-macOS-umbrella.h"; path = "../lottie-ios-macOS/lottie-ios-macOS-umbrella.h"; sourceTree = "<group>"; };
-		000000001D10 /* lottie-ios-macOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "lottie-ios-macOS-Info.plist"; path = "../lottie-ios-macOS/lottie-ios-macOS-Info.plist"; sourceTree = "<group>"; };
+		000000001D10 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../lottie-ios-macOS/Info.plist"; sourceTree = "<group>"; };
 		000000001D20 /* lottie-ios-macOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "lottie-ios-macOS-prefix.pch"; path = "../lottie-ios-macOS/lottie-ios-macOS-prefix.pch"; sourceTree = "<group>"; };
 		000000001D30 /* lottie-ios-macOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "lottie-ios-macOS-dummy.m"; path = "../lottie-ios-macOS/lottie-ios-macOS-dummy.m"; sourceTree = "<group>"; };
 		000000001D90 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios-tvOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -589,57 +589,62 @@
 		0000000025D0 /* lottie-ios-tvOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "lottie-ios-tvOS.xcconfig"; path = "../lottie-ios-tvOS/lottie-ios-tvOS.xcconfig"; sourceTree = "<group>"; };
 		0000000025E0 /* lottie-ios-tvOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = "lottie-ios-tvOS.modulemap"; path = "../lottie-ios-tvOS/lottie-ios-tvOS.modulemap"; sourceTree = "<group>"; };
 		0000000025F0 /* lottie-ios-tvOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "lottie-ios-tvOS-umbrella.h"; path = "../lottie-ios-tvOS/lottie-ios-tvOS-umbrella.h"; sourceTree = "<group>"; };
-		000000002610 /* lottie-ios-tvOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "lottie-ios-tvOS-Info.plist"; path = "../lottie-ios-tvOS/lottie-ios-tvOS-Info.plist"; sourceTree = "<group>"; };
+		000000002610 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../lottie-ios-tvOS/Info.plist"; sourceTree = "<group>"; };
 		000000002620 /* lottie-ios-tvOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "lottie-ios-tvOS-prefix.pch"; path = "../lottie-ios-tvOS/lottie-ios-tvOS-prefix.pch"; sourceTree = "<group>"; };
 		000000002630 /* lottie-ios-tvOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "lottie-ios-tvOS-dummy.m"; path = "../lottie-ios-tvOS/lottie-ios-tvOS-dummy.m"; sourceTree = "<group>"; };
-		000000002650 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		000000002670 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		000000002690 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		0000000026B0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
-		0000000026D0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		0000000026F0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		000000002710 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		000000002730 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		000000002750 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		0000000027B0 /* Pods_lottie_swift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_Example.framework; path = "Pods-lottie-swift_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		000000002820 /* Pods-lottie-swift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_Example.release.xcconfig"; sourceTree = "<group>"; };
-		000000002830 /* Pods-lottie-swift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		000000002840 /* Pods-lottie-swift_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_Example-Info.plist"; sourceTree = "<group>"; };
-		000000002850 /* Pods-lottie-swift_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-lottie-swift_Example.modulemap"; sourceTree = "<group>"; };
-		000000002860 /* Pods-lottie-swift_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-lottie-swift_Example-umbrella.h"; sourceTree = "<group>"; };
-		000000002880 /* Pods-lottie-swift_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-swift_Example-frameworks.sh"; sourceTree = "<group>"; };
-		000000002890 /* Pods-lottie-swift_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		0000000028A0 /* Pods-lottie-swift_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-swift_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		0000000028B0 /* Pods-lottie-swift_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-swift_Example-dummy.m"; sourceTree = "<group>"; };
-		000000002910 /* Pods_lottie_swift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_Tests.framework; path = "Pods-lottie-swift_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		000000002980 /* Pods-lottie-swift_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		000000002990 /* Pods-lottie-swift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		0000000029A0 /* Pods-lottie-swift_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_Tests-Info.plist"; sourceTree = "<group>"; };
-		0000000029B0 /* Pods-lottie-swift_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-lottie-swift_Tests.modulemap"; sourceTree = "<group>"; };
-		0000000029C0 /* Pods-lottie-swift_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-lottie-swift_Tests-umbrella.h"; sourceTree = "<group>"; };
-		0000000029E0 /* Pods-lottie-swift_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		0000000029F0 /* Pods-lottie-swift_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-swift_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		000000002A00 /* Pods-lottie-swift_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-swift_Tests-dummy.m"; sourceTree = "<group>"; };
-		000000002A60 /* Pods_lottie_swift_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_macOS.framework; path = "Pods-lottie-swift_macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		000000002AD0 /* Pods-lottie-swift_macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_macOS.release.xcconfig"; sourceTree = "<group>"; };
-		000000002AE0 /* Pods-lottie-swift_macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_macOS.debug.xcconfig"; sourceTree = "<group>"; };
-		000000002AF0 /* Pods-lottie-swift_macOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_macOS-Info.plist"; sourceTree = "<group>"; };
-		000000002B00 /* Pods-lottie-swift_macOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-lottie-swift_macOS.modulemap"; sourceTree = "<group>"; };
-		000000002B10 /* Pods-lottie-swift_macOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-lottie-swift_macOS-umbrella.h"; sourceTree = "<group>"; };
-		000000002B30 /* Pods-lottie-swift_macOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-swift_macOS-frameworks.sh"; sourceTree = "<group>"; };
-		000000002B40 /* Pods-lottie-swift_macOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_macOS-acknowledgements.plist"; sourceTree = "<group>"; };
-		000000002B50 /* Pods-lottie-swift_macOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-swift_macOS-acknowledgements.markdown"; sourceTree = "<group>"; };
-		000000002B60 /* Pods-lottie-swift_macOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-swift_macOS-dummy.m"; sourceTree = "<group>"; };
-		000000002BC0 /* Pods_lottie_swift_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_tvOS.framework; path = "Pods-lottie-swift_tvOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		000000002C30 /* Pods-lottie-swift_tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		000000002C40 /* Pods-lottie-swift_tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		000000002C50 /* Pods-lottie-swift_tvOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_tvOS-Info.plist"; sourceTree = "<group>"; };
-		000000002C60 /* Pods-lottie-swift_tvOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-lottie-swift_tvOS.modulemap"; sourceTree = "<group>"; };
-		000000002C70 /* Pods-lottie-swift_tvOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-lottie-swift_tvOS-umbrella.h"; sourceTree = "<group>"; };
-		000000002C90 /* Pods-lottie-swift_tvOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-swift_tvOS-frameworks.sh"; sourceTree = "<group>"; };
-		000000002CA0 /* Pods-lottie-swift_tvOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_tvOS-acknowledgements.plist"; sourceTree = "<group>"; };
-		000000002CB0 /* Pods-lottie-swift_tvOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-swift_tvOS-acknowledgements.markdown"; sourceTree = "<group>"; };
-		000000002CC0 /* Pods-lottie-swift_tvOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-swift_tvOS-dummy.m"; sourceTree = "<group>"; };
+		000000002690 /* Pods_lottie_swift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_Example.framework; path = "Pods-lottie-swift_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		000000002700 /* Pods-lottie-swift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_Example.release.xcconfig"; sourceTree = "<group>"; };
+		000000002710 /* Pods-lottie-swift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		000000002720 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		000000002730 /* Pods-lottie-swift_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-lottie-swift_Example.modulemap"; sourceTree = "<group>"; };
+		000000002740 /* Pods-lottie-swift_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-lottie-swift_Example-umbrella.h"; sourceTree = "<group>"; };
+		000000002760 /* Pods-lottie-swift_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-swift_Example-frameworks.sh"; sourceTree = "<group>"; };
+		000000002770 /* Pods-lottie-swift_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-swift_Example-resources.sh"; sourceTree = "<group>"; };
+		000000002780 /* Pods-lottie-swift_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		000000002790 /* Pods-lottie-swift_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-swift_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		0000000027A0 /* Pods-lottie-swift_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-swift_Example-dummy.m"; sourceTree = "<group>"; };
+		000000002800 /* Pods_lottie_swift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_Tests.framework; path = "Pods-lottie-swift_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		000000002870 /* Pods-lottie-swift_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		000000002880 /* Pods-lottie-swift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		000000002890 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0000000028A0 /* Pods-lottie-swift_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-lottie-swift_Tests.modulemap"; sourceTree = "<group>"; };
+		0000000028B0 /* Pods-lottie-swift_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-lottie-swift_Tests-umbrella.h"; sourceTree = "<group>"; };
+		0000000028D0 /* Pods-lottie-swift_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-swift_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		0000000028E0 /* Pods-lottie-swift_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-swift_Tests-resources.sh"; sourceTree = "<group>"; };
+		0000000028F0 /* Pods-lottie-swift_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		000000002900 /* Pods-lottie-swift_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-swift_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		000000002910 /* Pods-lottie-swift_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-swift_Tests-dummy.m"; sourceTree = "<group>"; };
+		000000002970 /* Pods_lottie_swift_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_macOS.framework; path = "Pods-lottie-swift_macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0000000029E0 /* Pods-lottie-swift_macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_macOS.release.xcconfig"; sourceTree = "<group>"; };
+		0000000029F0 /* Pods-lottie-swift_macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		000000002A00 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		000000002A10 /* Pods-lottie-swift_macOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-lottie-swift_macOS.modulemap"; sourceTree = "<group>"; };
+		000000002A20 /* Pods-lottie-swift_macOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-lottie-swift_macOS-umbrella.h"; sourceTree = "<group>"; };
+		000000002A40 /* Pods-lottie-swift_macOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-swift_macOS-frameworks.sh"; sourceTree = "<group>"; };
+		000000002A50 /* Pods-lottie-swift_macOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-swift_macOS-resources.sh"; sourceTree = "<group>"; };
+		000000002A60 /* Pods-lottie-swift_macOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_macOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		000000002A70 /* Pods-lottie-swift_macOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-swift_macOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		000000002A80 /* Pods-lottie-swift_macOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-swift_macOS-dummy.m"; sourceTree = "<group>"; };
+		000000002AE0 /* Pods_lottie_swift_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_tvOS.framework; path = "Pods-lottie-swift_tvOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		000000002B50 /* Pods-lottie-swift_tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		000000002B60 /* Pods-lottie-swift_tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		000000002B70 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		000000002B80 /* Pods-lottie-swift_tvOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-lottie-swift_tvOS.modulemap"; sourceTree = "<group>"; };
+		000000002B90 /* Pods-lottie-swift_tvOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-lottie-swift_tvOS-umbrella.h"; sourceTree = "<group>"; };
+		000000002BB0 /* Pods-lottie-swift_tvOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-swift_tvOS-frameworks.sh"; sourceTree = "<group>"; };
+		000000002BC0 /* Pods-lottie-swift_tvOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-lottie-swift_tvOS-resources.sh"; sourceTree = "<group>"; };
+		000000002BD0 /* Pods-lottie-swift_tvOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_tvOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		000000002BE0 /* Pods-lottie-swift_tvOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-swift_tvOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		000000002BF0 /* Pods-lottie-swift_tvOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-swift_tvOS-dummy.m"; sourceTree = "<group>"; };
+		000000002C10 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		000000002C30 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		000000002C50 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		000000002C70 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
+		000000002C90 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		000000002CB0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		000000002CD0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		000000002CF0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		000000002D10 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -647,10 +652,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000002680 /* CoreGraphics.framework in Frameworks */,
+				000000002C40 /* CoreGraphics.framework in Frameworks */,
 				000000000C50 /* Foundation.framework in Frameworks */,
-				0000000026A0 /* QuartzCore.framework in Frameworks */,
-				000000002660 /* UIKit.framework in Frameworks */,
+				000000002C60 /* QuartzCore.framework in Frameworks */,
+				000000002C20 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,10 +663,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0000000026C0 /* AppKit.framework in Frameworks */,
+				000000002C80 /* AppKit.framework in Frameworks */,
 				000000001560 /* Cocoa.framework in Frameworks */,
-				0000000026E0 /* CoreGraphics.framework in Frameworks */,
-				000000002700 /* QuartzCore.framework in Frameworks */,
+				000000002CA0 /* CoreGraphics.framework in Frameworks */,
+				000000002CC0 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,42 +674,42 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000002740 /* CoreGraphics.framework in Frameworks */,
+				000000002D00 /* CoreGraphics.framework in Frameworks */,
 				000000001E00 /* Foundation.framework in Frameworks */,
-				000000002760 /* QuartzCore.framework in Frameworks */,
-				000000002720 /* UIKit.framework in Frameworks */,
+				000000002D20 /* QuartzCore.framework in Frameworks */,
+				000000002CE0 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0000000027E0 /* Frameworks */ = {
+		0000000026C0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000002800 /* Foundation.framework in Frameworks */,
+				0000000026E0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000002940 /* Frameworks */ = {
+		000000002830 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000002960 /* Foundation.framework in Frameworks */,
+				000000002850 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000002A90 /* Frameworks */ = {
+		0000000029A0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000002AB0 /* Cocoa.framework in Frameworks */,
+				0000000029C0 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000002BF0 /* Frameworks */ = {
+		000000002B10 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000002C10 /* Foundation.framework in Frameworks */,
+				000000002B30 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,10 +733,10 @@
 				000000000BE0 /* Lottie.framework */,
 				0000000014F0 /* Lottie.framework */,
 				000000001D90 /* Lottie.framework */,
-				0000000027B0 /* Pods_lottie_swift_Example.framework */,
-				000000002A60 /* Pods_lottie_swift_macOS.framework */,
-				000000002910 /* Pods_lottie_swift_Tests.framework */,
-				000000002BC0 /* Pods_lottie_swift_tvOS.framework */,
+				000000002690 /* Pods_lottie_swift_Example.framework */,
+				000000002970 /* Pods_lottie_swift_macOS.framework */,
+				000000002800 /* Pods_lottie_swift_Tests.framework */,
+				000000002AE0 /* Pods_lottie_swift_tvOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -749,10 +754,10 @@
 		000000000070 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				000000002810 /* Pods-lottie-swift_Example */,
-				000000002AC0 /* Pods-lottie-swift_macOS */,
-				000000002970 /* Pods-lottie-swift_Tests */,
-				000000002C20 /* Pods-lottie-swift_tvOS */,
+				0000000026F0 /* Pods-lottie-swift_Example */,
+				0000000029D0 /* Pods-lottie-swift_macOS */,
+				000000002860 /* Pods-lottie-swift_Tests */,
+				000000002B40 /* Pods-lottie-swift_tvOS */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
@@ -1302,10 +1307,10 @@
 		000000000C30 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				000000002670 /* CoreGraphics.framework */,
+				000000002C30 /* CoreGraphics.framework */,
 				000000000C40 /* Foundation.framework */,
-				000000002690 /* QuartzCore.framework */,
-				000000002650 /* UIKit.framework */,
+				000000002C50 /* QuartzCore.framework */,
+				000000002C10 /* UIKit.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -1313,22 +1318,22 @@
 		000000001420 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				000000001D10 /* Info.plist */,
+				000000002610 /* Info.plist */,
+				000000001470 /* Info.plist */,
 				000000001440 /* lottie-ios-iOS.modulemap */,
 				000000001430 /* lottie-ios-iOS.xcconfig */,
 				000000001490 /* lottie-ios-iOS-dummy.m */,
-				000000001470 /* lottie-ios-iOS-Info.plist */,
 				000000001480 /* lottie-ios-iOS-prefix.pch */,
 				000000001450 /* lottie-ios-iOS-umbrella.h */,
 				000000001CE0 /* lottie-ios-macOS.modulemap */,
 				000000001CD0 /* lottie-ios-macOS.xcconfig */,
 				000000001D30 /* lottie-ios-macOS-dummy.m */,
-				000000001D10 /* lottie-ios-macOS-Info.plist */,
 				000000001D20 /* lottie-ios-macOS-prefix.pch */,
 				000000001CF0 /* lottie-ios-macOS-umbrella.h */,
 				0000000025E0 /* lottie-ios-tvOS.modulemap */,
 				0000000025D0 /* lottie-ios-tvOS.xcconfig */,
 				000000002630 /* lottie-ios-tvOS-dummy.m */,
-				000000002610 /* lottie-ios-tvOS-Info.plist */,
 				000000002620 /* lottie-ios-tvOS-prefix.pch */,
 				0000000025F0 /* lottie-ios-tvOS-umbrella.h */,
 			);
@@ -1339,10 +1344,10 @@
 		000000001540 /* OS X */ = {
 			isa = PBXGroup;
 			children = (
-				0000000026B0 /* AppKit.framework */,
+				000000002C70 /* AppKit.framework */,
 				000000001550 /* Cocoa.framework */,
-				0000000026D0 /* CoreGraphics.framework */,
-				0000000026F0 /* QuartzCore.framework */,
+				000000002C90 /* CoreGraphics.framework */,
+				000000002CB0 /* QuartzCore.framework */,
 			);
 			name = "OS X";
 			sourceTree = "<group>";
@@ -1350,76 +1355,81 @@
 		000000001DE0 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
-				000000002730 /* CoreGraphics.framework */,
+				000000002CF0 /* CoreGraphics.framework */,
 				000000001DF0 /* Foundation.framework */,
-				000000002750 /* QuartzCore.framework */,
-				000000002710 /* UIKit.framework */,
+				000000002D10 /* QuartzCore.framework */,
+				000000002CD0 /* UIKit.framework */,
 			);
 			name = tvOS;
 			sourceTree = "<group>";
 		};
-		000000002810 /* Pods-lottie-swift_Example */ = {
+		0000000026F0 /* Pods-lottie-swift_Example */ = {
 			isa = PBXGroup;
 			children = (
-				000000002850 /* Pods-lottie-swift_Example.modulemap */,
-				0000000028A0 /* Pods-lottie-swift_Example-acknowledgements.markdown */,
-				000000002890 /* Pods-lottie-swift_Example-acknowledgements.plist */,
-				0000000028B0 /* Pods-lottie-swift_Example-dummy.m */,
-				000000002880 /* Pods-lottie-swift_Example-frameworks.sh */,
-				000000002840 /* Pods-lottie-swift_Example-Info.plist */,
-				000000002860 /* Pods-lottie-swift_Example-umbrella.h */,
-				000000002830 /* Pods-lottie-swift_Example.debug.xcconfig */,
-				000000002820 /* Pods-lottie-swift_Example.release.xcconfig */,
+				000000002720 /* Info.plist */,
+				000000002730 /* Pods-lottie-swift_Example.modulemap */,
+				000000002790 /* Pods-lottie-swift_Example-acknowledgements.markdown */,
+				000000002780 /* Pods-lottie-swift_Example-acknowledgements.plist */,
+				0000000027A0 /* Pods-lottie-swift_Example-dummy.m */,
+				000000002760 /* Pods-lottie-swift_Example-frameworks.sh */,
+				000000002770 /* Pods-lottie-swift_Example-resources.sh */,
+				000000002740 /* Pods-lottie-swift_Example-umbrella.h */,
+				000000002710 /* Pods-lottie-swift_Example.debug.xcconfig */,
+				000000002700 /* Pods-lottie-swift_Example.release.xcconfig */,
 			);
 			name = "Pods-lottie-swift_Example";
 			path = "Target Support Files/Pods-lottie-swift_Example";
 			sourceTree = "<group>";
 		};
-		000000002970 /* Pods-lottie-swift_Tests */ = {
+		000000002860 /* Pods-lottie-swift_Tests */ = {
 			isa = PBXGroup;
 			children = (
-				0000000029B0 /* Pods-lottie-swift_Tests.modulemap */,
-				0000000029F0 /* Pods-lottie-swift_Tests-acknowledgements.markdown */,
-				0000000029E0 /* Pods-lottie-swift_Tests-acknowledgements.plist */,
-				000000002A00 /* Pods-lottie-swift_Tests-dummy.m */,
-				0000000029A0 /* Pods-lottie-swift_Tests-Info.plist */,
-				0000000029C0 /* Pods-lottie-swift_Tests-umbrella.h */,
-				000000002990 /* Pods-lottie-swift_Tests.debug.xcconfig */,
-				000000002980 /* Pods-lottie-swift_Tests.release.xcconfig */,
+				000000002890 /* Info.plist */,
+				0000000028A0 /* Pods-lottie-swift_Tests.modulemap */,
+				000000002900 /* Pods-lottie-swift_Tests-acknowledgements.markdown */,
+				0000000028F0 /* Pods-lottie-swift_Tests-acknowledgements.plist */,
+				000000002910 /* Pods-lottie-swift_Tests-dummy.m */,
+				0000000028D0 /* Pods-lottie-swift_Tests-frameworks.sh */,
+				0000000028E0 /* Pods-lottie-swift_Tests-resources.sh */,
+				0000000028B0 /* Pods-lottie-swift_Tests-umbrella.h */,
+				000000002880 /* Pods-lottie-swift_Tests.debug.xcconfig */,
+				000000002870 /* Pods-lottie-swift_Tests.release.xcconfig */,
 			);
 			name = "Pods-lottie-swift_Tests";
 			path = "Target Support Files/Pods-lottie-swift_Tests";
 			sourceTree = "<group>";
 		};
-		000000002AC0 /* Pods-lottie-swift_macOS */ = {
+		0000000029D0 /* Pods-lottie-swift_macOS */ = {
 			isa = PBXGroup;
 			children = (
-				000000002B00 /* Pods-lottie-swift_macOS.modulemap */,
-				000000002B50 /* Pods-lottie-swift_macOS-acknowledgements.markdown */,
-				000000002B40 /* Pods-lottie-swift_macOS-acknowledgements.plist */,
-				000000002B60 /* Pods-lottie-swift_macOS-dummy.m */,
-				000000002B30 /* Pods-lottie-swift_macOS-frameworks.sh */,
-				000000002AF0 /* Pods-lottie-swift_macOS-Info.plist */,
-				000000002B10 /* Pods-lottie-swift_macOS-umbrella.h */,
-				000000002AE0 /* Pods-lottie-swift_macOS.debug.xcconfig */,
-				000000002AD0 /* Pods-lottie-swift_macOS.release.xcconfig */,
+				000000002A00 /* Info.plist */,
+				000000002A10 /* Pods-lottie-swift_macOS.modulemap */,
+				000000002A70 /* Pods-lottie-swift_macOS-acknowledgements.markdown */,
+				000000002A60 /* Pods-lottie-swift_macOS-acknowledgements.plist */,
+				000000002A80 /* Pods-lottie-swift_macOS-dummy.m */,
+				000000002A40 /* Pods-lottie-swift_macOS-frameworks.sh */,
+				000000002A50 /* Pods-lottie-swift_macOS-resources.sh */,
+				000000002A20 /* Pods-lottie-swift_macOS-umbrella.h */,
+				0000000029F0 /* Pods-lottie-swift_macOS.debug.xcconfig */,
+				0000000029E0 /* Pods-lottie-swift_macOS.release.xcconfig */,
 			);
 			name = "Pods-lottie-swift_macOS";
 			path = "Target Support Files/Pods-lottie-swift_macOS";
 			sourceTree = "<group>";
 		};
-		000000002C20 /* Pods-lottie-swift_tvOS */ = {
+		000000002B40 /* Pods-lottie-swift_tvOS */ = {
 			isa = PBXGroup;
 			children = (
-				000000002C60 /* Pods-lottie-swift_tvOS.modulemap */,
-				000000002CB0 /* Pods-lottie-swift_tvOS-acknowledgements.markdown */,
-				000000002CA0 /* Pods-lottie-swift_tvOS-acknowledgements.plist */,
-				000000002CC0 /* Pods-lottie-swift_tvOS-dummy.m */,
-				000000002C90 /* Pods-lottie-swift_tvOS-frameworks.sh */,
-				000000002C50 /* Pods-lottie-swift_tvOS-Info.plist */,
-				000000002C70 /* Pods-lottie-swift_tvOS-umbrella.h */,
-				000000002C40 /* Pods-lottie-swift_tvOS.debug.xcconfig */,
-				000000002C30 /* Pods-lottie-swift_tvOS.release.xcconfig */,
+				000000002B70 /* Info.plist */,
+				000000002B80 /* Pods-lottie-swift_tvOS.modulemap */,
+				000000002BE0 /* Pods-lottie-swift_tvOS-acknowledgements.markdown */,
+				000000002BD0 /* Pods-lottie-swift_tvOS-acknowledgements.plist */,
+				000000002BF0 /* Pods-lottie-swift_tvOS-dummy.m */,
+				000000002BB0 /* Pods-lottie-swift_tvOS-frameworks.sh */,
+				000000002BC0 /* Pods-lottie-swift_tvOS-resources.sh */,
+				000000002B90 /* Pods-lottie-swift_tvOS-umbrella.h */,
+				000000002B60 /* Pods-lottie-swift_tvOS.debug.xcconfig */,
+				000000002B50 /* Pods-lottie-swift_tvOS.release.xcconfig */,
 			);
 			name = "Pods-lottie-swift_tvOS";
 			path = "Target Support Files/Pods-lottie-swift_tvOS";
@@ -1452,35 +1462,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0000000027C0 /* Headers */ = {
+		0000000026A0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000002870 /* Pods-lottie-swift_Example-umbrella.h in Headers */,
+				000000002750 /* Pods-lottie-swift_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000002920 /* Headers */ = {
+		000000002810 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0000000029D0 /* Pods-lottie-swift_Tests-umbrella.h in Headers */,
+				0000000028C0 /* Pods-lottie-swift_Tests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000002A70 /* Headers */ = {
+		000000002980 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000002B20 /* Pods-lottie-swift_macOS-umbrella.h in Headers */,
+				000000002A30 /* Pods-lottie-swift_macOS-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000002BD0 /* Headers */ = {
+		000000002AF0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000002C80 /* Pods-lottie-swift_tvOS-umbrella.h in Headers */,
+				000000002BA0 /* Pods-lottie-swift_tvOS-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1541,80 +1551,80 @@
 			productReference = 000000001D90 /* Lottie.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		000000002770 /* Pods-lottie-swift_Example */ = {
+		000000002650 /* Pods-lottie-swift_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 000000002780 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_Example" */;
+			buildConfigurationList = 000000002660 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_Example" */;
 			buildPhases = (
-				0000000027C0 /* Headers */,
-				0000000027D0 /* Sources */,
-				0000000027E0 /* Frameworks */,
-				0000000027F0 /* Resources */,
+				0000000026A0 /* Headers */,
+				0000000026B0 /* Sources */,
+				0000000026C0 /* Frameworks */,
+				0000000026D0 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				000000002CF0 /* PBXTargetDependency */,
+				000000002D80 /* PBXTargetDependency */,
 			);
 			name = "Pods-lottie-swift_Example";
 			productName = "Pods-lottie-swift_Example";
-			productReference = 0000000027B0 /* Pods_lottie_swift_Example.framework */;
+			productReference = 000000002690 /* Pods_lottie_swift_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		0000000028D0 /* Pods-lottie-swift_Tests */ = {
+		0000000027C0 /* Pods-lottie-swift_Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0000000028E0 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_Tests" */;
+			buildConfigurationList = 0000000027D0 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_Tests" */;
 			buildPhases = (
-				000000002920 /* Headers */,
-				000000002930 /* Sources */,
-				000000002940 /* Frameworks */,
-				000000002950 /* Resources */,
+				000000002810 /* Headers */,
+				000000002820 /* Sources */,
+				000000002830 /* Frameworks */,
+				000000002840 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				000000002D10 /* PBXTargetDependency */,
+				000000002DA0 /* PBXTargetDependency */,
 			);
 			name = "Pods-lottie-swift_Tests";
 			productName = "Pods-lottie-swift_Tests";
-			productReference = 000000002910 /* Pods_lottie_swift_Tests.framework */;
+			productReference = 000000002800 /* Pods_lottie_swift_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		000000002A20 /* Pods-lottie-swift_macOS */ = {
+		000000002930 /* Pods-lottie-swift_macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 000000002A30 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_macOS" */;
+			buildConfigurationList = 000000002940 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_macOS" */;
 			buildPhases = (
-				000000002A70 /* Headers */,
-				000000002A80 /* Sources */,
-				000000002A90 /* Frameworks */,
-				000000002AA0 /* Resources */,
+				000000002980 /* Headers */,
+				000000002990 /* Sources */,
+				0000000029A0 /* Frameworks */,
+				0000000029B0 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				000000002D30 /* PBXTargetDependency */,
+				000000002D40 /* PBXTargetDependency */,
 			);
 			name = "Pods-lottie-swift_macOS";
 			productName = "Pods-lottie-swift_macOS";
-			productReference = 000000002A60 /* Pods_lottie_swift_macOS.framework */;
+			productReference = 000000002970 /* Pods_lottie_swift_macOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		000000002B80 /* Pods-lottie-swift_tvOS */ = {
+		000000002AA0 /* Pods-lottie-swift_tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 000000002B90 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_tvOS" */;
+			buildConfigurationList = 000000002AB0 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_tvOS" */;
 			buildPhases = (
-				000000002BD0 /* Headers */,
-				000000002BE0 /* Sources */,
-				000000002BF0 /* Frameworks */,
-				000000002C00 /* Resources */,
+				000000002AF0 /* Headers */,
+				000000002B00 /* Sources */,
+				000000002B10 /* Frameworks */,
+				000000002B20 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				000000002D50 /* PBXTargetDependency */,
+				000000002D60 /* PBXTargetDependency */,
 			);
 			name = "Pods-lottie-swift_tvOS";
 			productName = "Pods-lottie-swift_tvOS";
-			productReference = 000000002BC0 /* Pods_lottie_swift_tvOS.framework */;
+			productReference = 000000002AE0 /* Pods_lottie_swift_tvOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -1641,10 +1651,10 @@
 				000000000BA0 /* lottie-ios-iOS */,
 				0000000014B0 /* lottie-ios-macOS */,
 				000000001D50 /* lottie-ios-tvOS */,
-				000000002770 /* Pods-lottie-swift_Example */,
-				000000002A20 /* Pods-lottie-swift_macOS */,
-				0000000028D0 /* Pods-lottie-swift_Tests */,
-				000000002B80 /* Pods-lottie-swift_tvOS */,
+				000000002650 /* Pods-lottie-swift_Example */,
+				000000002930 /* Pods-lottie-swift_macOS */,
+				0000000027C0 /* Pods-lottie-swift_Tests */,
+				000000002AA0 /* Pods-lottie-swift_tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -1671,28 +1681,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0000000027F0 /* Resources */ = {
+		0000000026D0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000002950 /* Resources */ = {
+		000000002840 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000002AA0 /* Resources */ = {
+		0000000029B0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000002C00 /* Resources */ = {
+		000000002B20 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2092,64 +2102,64 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0000000027D0 /* Sources */ = {
+		0000000026B0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0000000028C0 /* Pods-lottie-swift_Example-dummy.m in Sources */,
+				0000000027B0 /* Pods-lottie-swift_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000002930 /* Sources */ = {
+		000000002820 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000002A10 /* Pods-lottie-swift_Tests-dummy.m in Sources */,
+				000000002920 /* Pods-lottie-swift_Tests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000002A80 /* Sources */ = {
+		000000002990 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000002B70 /* Pods-lottie-swift_macOS-dummy.m in Sources */,
+				000000002A90 /* Pods-lottie-swift_macOS-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		000000002BE0 /* Sources */ = {
+		000000002B00 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000000002CD0 /* Pods-lottie-swift_tvOS-dummy.m in Sources */,
+				000000002C00 /* Pods-lottie-swift_tvOS-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		000000002CF0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "lottie-ios-iOS";
-			target = 000000000BA0 /* lottie-ios-iOS */;
-			targetProxy = 000000002CE0 /* PBXContainerItemProxy */;
-		};
-		000000002D10 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-lottie-swift_Example";
-			target = 000000002770 /* Pods-lottie-swift_Example */;
-			targetProxy = 000000002D00 /* PBXContainerItemProxy */;
-		};
-		000000002D30 /* PBXTargetDependency */ = {
+		000000002D40 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "lottie-ios-macOS";
 			target = 0000000014B0 /* lottie-ios-macOS */;
-			targetProxy = 000000002D20 /* PBXContainerItemProxy */;
+			targetProxy = 000000002D30 /* PBXContainerItemProxy */;
 		};
-		000000002D50 /* PBXTargetDependency */ = {
+		000000002D60 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "lottie-ios-tvOS";
 			target = 000000001D50 /* lottie-ios-tvOS */;
-			targetProxy = 000000002D40 /* PBXContainerItemProxy */;
+			targetProxy = 000000002D50 /* PBXContainerItemProxy */;
+		};
+		000000002D80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "lottie-ios-iOS";
+			target = 000000000BA0 /* lottie-ios-iOS */;
+			targetProxy = 000000002D70 /* PBXContainerItemProxy */;
+		};
+		000000002DA0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-lottie-swift_Example";
+			target = 000000002650 /* Pods-lottie-swift_Example */;
+			targetProxy = 000000002D90 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2186,6 +2196,8 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2252,6 +2264,8 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2296,7 +2310,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREFIX_HEADER = "Target Support Files/lottie-ios-iOS/lottie-ios-iOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/lottie-ios-iOS/lottie-ios-iOS-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/lottie-ios-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -2328,7 +2342,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREFIX_HEADER = "Target Support Files/lottie-ios-iOS/lottie-ios-iOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/lottie-ios-iOS/lottie-ios-iOS-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/lottie-ios-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -2349,7 +2363,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 000000001CD0 /* lottie-ios-macOS.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2363,7 +2376,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				GCC_PREFIX_HEADER = "Target Support Files/lottie-ios-macOS/lottie-ios-macOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/lottie-ios-macOS/lottie-ios-macOS-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/lottie-ios-macOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -2383,7 +2396,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 000000001CD0 /* lottie-ios-macOS.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2397,7 +2409,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				GCC_PREFIX_HEADER = "Target Support Files/lottie-ios-macOS/lottie-ios-macOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/lottie-ios-macOS/lottie-ios-macOS-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/lottie-ios-macOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -2427,7 +2439,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREFIX_HEADER = "Target Support Files/lottie-ios-tvOS/lottie-ios-tvOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/lottie-ios-tvOS/lottie-ios-tvOS-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/lottie-ios-tvOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/lottie-ios-tvOS/lottie-ios-tvOS.modulemap";
@@ -2459,7 +2471,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREFIX_HEADER = "Target Support Files/lottie-ios-tvOS/lottie-ios-tvOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/lottie-ios-tvOS/lottie-ios-tvOS-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/lottie-ios-tvOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/lottie-ios-tvOS/lottie-ios-tvOS.modulemap";
@@ -2476,9 +2488,9 @@
 			};
 			name = Debug;
 		};
-		000000002790 /* Release */ = {
+		000000002670 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000002820 /* Pods-lottie-swift_Example.release.xcconfig */;
+			baseConfigurationReference = 000000002700 /* Pods-lottie-swift_Example.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -2490,7 +2502,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_Example/Pods-lottie-swift_Example-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_Example/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -2510,9 +2522,9 @@
 			};
 			name = Release;
 		};
-		0000000027A0 /* Debug */ = {
+		000000002680 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000002830 /* Pods-lottie-swift_Example.debug.xcconfig */;
+			baseConfigurationReference = 000000002710 /* Pods-lottie-swift_Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -2524,7 +2536,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_Example/Pods-lottie-swift_Example-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_Example/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -2543,9 +2555,9 @@
 			};
 			name = Debug;
 		};
-		0000000028F0 /* Release */ = {
+		0000000027E0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000002980 /* Pods-lottie-swift_Tests.release.xcconfig */;
+			baseConfigurationReference = 000000002870 /* Pods-lottie-swift_Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -2557,7 +2569,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_Tests/Pods-lottie-swift_Tests-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_Tests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -2577,9 +2589,9 @@
 			};
 			name = Release;
 		};
-		000000002900 /* Debug */ = {
+		0000000027F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000002990 /* Pods-lottie-swift_Tests.debug.xcconfig */;
+			baseConfigurationReference = 000000002880 /* Pods-lottie-swift_Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -2591,7 +2603,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_Tests/Pods-lottie-swift_Tests-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_Tests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -2610,12 +2622,11 @@
 			};
 			name = Debug;
 		};
-		000000002A40 /* Release */ = {
+		000000002950 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000002AD0 /* Pods-lottie-swift_macOS.release.xcconfig */;
+			baseConfigurationReference = 0000000029E0 /* Pods-lottie-swift_macOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2628,7 +2639,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_macOS/Pods-lottie-swift_macOS-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_macOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
@@ -2646,12 +2657,11 @@
 			};
 			name = Release;
 		};
-		000000002A50 /* Debug */ = {
+		000000002960 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000002AE0 /* Pods-lottie-swift_macOS.debug.xcconfig */;
+			baseConfigurationReference = 0000000029F0 /* Pods-lottie-swift_macOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2664,7 +2674,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_macOS/Pods-lottie-swift_macOS-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_macOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
@@ -2682,9 +2692,9 @@
 			};
 			name = Debug;
 		};
-		000000002BA0 /* Release */ = {
+		000000002AC0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000002C30 /* Pods-lottie-swift_tvOS.release.xcconfig */;
+			baseConfigurationReference = 000000002B50 /* Pods-lottie-swift_tvOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -2696,7 +2706,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_tvOS/Pods-lottie-swift_tvOS-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_tvOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
@@ -2716,9 +2726,9 @@
 			};
 			name = Release;
 		};
-		000000002BB0 /* Debug */ = {
+		000000002AD0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 000000002C40 /* Pods-lottie-swift_tvOS.debug.xcconfig */;
+			baseConfigurationReference = 000000002B60 /* Pods-lottie-swift_tvOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -2730,7 +2740,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_tvOS/Pods-lottie-swift_tvOS-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-lottie-swift_tvOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
@@ -2788,38 +2798,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		000000002780 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_Example" */ = {
+		000000002660 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0000000027A0 /* Debug */,
-				000000002790 /* Release */,
+				000000002680 /* Debug */,
+				000000002670 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0000000028E0 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_Tests" */ = {
+		0000000027D0 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				000000002900 /* Debug */,
-				0000000028F0 /* Release */,
+				0000000027F0 /* Debug */,
+				0000000027E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		000000002A30 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_macOS" */ = {
+		000000002940 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				000000002A50 /* Debug */,
-				000000002A40 /* Release */,
+				000000002960 /* Debug */,
+				000000002950 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		000000002B90 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_tvOS" */ = {
+		000000002AB0 /* Build configuration list for PBXNativeTarget "Pods-lottie-swift_tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				000000002BB0 /* Debug */,
-				000000002BA0 /* Release */,
+				000000002AD0 /* Debug */,
+				000000002AC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
