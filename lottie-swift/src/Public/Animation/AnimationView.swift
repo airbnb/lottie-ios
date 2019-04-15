@@ -694,12 +694,6 @@ final public class AnimationView: LottieView {
     }
   }
   
-  override func animationMovedToWindow() {
-    if let context = self.animationContext {
-      self.addNewAnimationForContext(context)
-    }
-  }
-  
   /// Stops the current in flight animation and freezes the animation in its current state.
   fileprivate func removeCurrentAnimation() {
     guard animationContext != nil else { return }
