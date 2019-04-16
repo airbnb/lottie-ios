@@ -101,7 +101,7 @@ You can quickly load a Lottie animation with:
 ```swift
 let starAnimationView = AnimationView(name: "StarAnimation")
 ```
-Additionally you can chose to load an `AnimationView` without any animation, and set the animation later:
+Additionally you can choose to load an `AnimationView` without any animation, and set the animation later:
 ```swift
 let starAnimationView = AnimationView()
 /// Some time later
