@@ -1450,6 +1450,7 @@
 				TargetAttributes = {
 					486E83B1220A317C007CD915 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 					};
 					486E84E1220A357D007CD915 = {
 						CreatedOnToolsVersion = 10.0;
@@ -2302,7 +2303,7 @@
 				PRODUCT_NAME = Lottie;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2329,7 +2330,7 @@
 				PRODUCT_NAME = Lottie;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
