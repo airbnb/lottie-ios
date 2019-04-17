@@ -18,7 +18,11 @@ extension Array where Element == LayerModel {
     var childLayers = [LayerModel]()
     
     for layer in self {
-      if let shapeLayer = layer as? ShapeLayerModel {
+      if layer.hidden == true {
+        let genericLayer = NullCompositionLayer(layer: layer)
+        compositionLayers.append(genericLayer)
+        layerMap[layer.index] = genericLayer
+      } else if let shapeLayer = layer as? ShapeLayerModel {
         let shapeContainer = ShapeCompositionLayer(shapeLayer: shapeLayer)
         compositionLayers.append(shapeContainer)
         layerMap[layer.index] = shapeContainer
