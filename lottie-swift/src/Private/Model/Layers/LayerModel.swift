@@ -107,6 +107,8 @@ class LayerModel: Codable {
   /// The type of matte if any.
   let matte: MatteType?
   
+  let hidden: Bool
+  
   private enum CodingKeys : String, CodingKey {
     case name = "nm"
     case index = "ind"
@@ -121,6 +123,7 @@ class LayerModel: Codable {
     case masks = "masksProperties"
     case timeStretch = "sr"
     case matte = "tt"
+    case hidden = "hd"
   }
   
   required init(from decoder: Decoder) throws {
@@ -138,5 +141,6 @@ class LayerModel: Codable {
     self.masks = try container.decodeIfPresent([Mask].self, forKey: .masks)
     self.timeStretch = try container.decodeIfPresent(Double.self, forKey: .timeStretch) ?? 1
     self.matte = try container.decodeIfPresent(MatteType.self, forKey: .matte)
+    self.hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden) ?? false
   }
 }
