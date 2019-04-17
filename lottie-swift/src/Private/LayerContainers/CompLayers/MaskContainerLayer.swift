@@ -84,7 +84,7 @@ extension CGRect {
 
 fileprivate class MaskLayer: CALayer {
   
-  let properties: MaskNodeProperties
+  let properties: MaskNodeProperties?
   
   let maskLayer = CAShapeLayer()
   
@@ -102,12 +102,17 @@ fileprivate class MaskLayer: CALayer {
     
   }
   
+  override init(layer: Any) {
+    self.properties = nil
+    super.init(layer: layer)
+  }
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
   func updateWithFrame(frame: CGFloat, forceUpdates: Bool) {
-    
+    guard let properties = properties else { return }
     if properties.opacity.needsUpdate(frame: frame) || forceUpdates {
       properties.opacity.update(frame: frame)
       self.opacity = Float(properties.opacity.value.cgFloatValue)
