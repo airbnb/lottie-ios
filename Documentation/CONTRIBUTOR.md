@@ -28,14 +28,14 @@ All of the source code for Lottie is located in `/lottie-swift/src` in the repo.
 
  - `src`: The Root directory for all Lottie source files
 	 - `Public`: Public facing files.
-		 - `Animation`: Files relating to `Animation` and `AnimationView`. *Files in this directory are complied on both iOS and MacOS.*
-		 - `AnimationCache`: Files relating to `AnimationCache`. *Files in this directory are complied on both iOS and MacOS.*
-		 - `DynamicProperties`: All public facing files relating to the Dynamic Properties API. *Files in this directory are complied on both iOS and MacOS.*
-		 - `ImageProvider`: Holds the `ImageProvider` protocol. *Files in this directory are complied on both iOS and MacOS.*
-		 - `MacOS`: Files that are **only** compiled for MacOS. *Files in this directory are complied on MacOS.*
-		 - `Primitives`: Primitive data structures. *Files in this directory are complied on both iOS and MacOS.*
-		 - `iOS`: Files that are **only** compiled for iOS. *Files in this directory are complied on iOS.*
-	 - `Private`: Private `internal` files. *Files in this directory are complied on both iOS and MacOS.*
+		 - `Animation`: Files relating to `Animation` and `AnimationView`. *Files in this directory are compiled on both iOS and MacOS.*
+		 - `AnimationCache`: Files relating to `AnimationCache`. *Files in this directory are compiled on both iOS and MacOS.*
+		 - `DynamicProperties`: All public facing files relating to the Dynamic Properties API. *Files in this directory are compiled on both iOS and MacOS.*
+		 - `ImageProvider`: Holds the `ImageProvider` protocol. *Files in this directory are compiled on both iOS and MacOS.*
+		 - `MacOS`: Files that are **only** compiled for MacOS. *Files in this directory are compiled on MacOS.*
+		 - `Primitives`: Primitive data structures. *Files in this directory are compiled on both iOS and MacOS.*
+		 - `iOS`: Files that are **only** compiled for iOS. *Files in this directory are compiled on iOS.*
+	 - `Private`: Private `internal` files. *Files in this directory are compiled on both iOS and MacOS.*
 
 ### Adding a file to the project.
 
