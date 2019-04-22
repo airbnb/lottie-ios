@@ -8,7 +8,6 @@
 import Foundation
 import AppKit
 
-public enum LottieContentMode {
   case bottom
   case bottomLeft
   case bottomRight
@@ -16,6 +15,7 @@ public enum LottieContentMode {
   case left
   case redraw
   case right
+public enum LottieContentMode: Int {
   case scaleToFill
   case scaleAspectFit
   case scaleAspectFill
