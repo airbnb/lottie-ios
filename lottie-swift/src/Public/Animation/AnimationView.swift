@@ -9,7 +9,7 @@ import Foundation
 import QuartzCore
 
 /// Describes the behavior of an AnimationView when the app is moved to the background.
-public enum LottieBackgroundBehavior {
+@objc public enum LottieBackgroundBehavior: Int {
   /// Stop the animation and reset it to the beginning of its current play time. The completion block is called.
   case stop
   /// Pause the animation in its current state. The completion block is called.
