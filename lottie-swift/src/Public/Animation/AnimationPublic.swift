@@ -22,7 +22,7 @@ public extension Animation {
    
    - Returns: Deserialized `Animation`. Optional.
    */
-  static func named(_ name: String,
+  @objc static func named(_ name: String,
                            bundle: Bundle = Bundle.main,
                            subdirectory: String? = nil,
                            animationCache: AnimationCacheProvider? = nil) -> Animation? {
@@ -59,8 +59,8 @@ public extension Animation {
    
    - Returns: Deserialized `Animation`. Optional.
    */
-  static func filepath(_ filepath: String,
-                              animationCache: AnimationCacheProvider? = nil) -> Animation? {
+  @objc static func filepath(_ filepath: String,
+                             animationCache: AnimationCacheProvider? = nil) -> Animation? {
     
     /// Check cache for animation
     if let animationCache = animationCache,

@@ -251,7 +251,8 @@ final public class AnimationView: LottieView {
      */
     public func play(startingAtFrame fromFrame: CGFloat,
                      toFrame: CGFloat,
-                     loopMode: LottieLoopMode? = nil, completion: @escaping (Bool) -> Void) {
+                     isLooped: Bool = false, completion: LottieCompletionBlock? = nil) {
+        let loopMode: LottieLoopMode = isLooped ? .loop : .playOnce
         self.play(fromFrame: fromFrame, toFrame: toFrame, loopMode: loopMode, completion: completion)
     }
   
