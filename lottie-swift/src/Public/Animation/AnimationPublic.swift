@@ -11,6 +11,23 @@ import CoreGraphics
 public extension Animation {
   
   // MARK: Animation (Loading)
+
+  /**
+   Loads an animation from provided JSON.
+   - Parameter json: The JSON representing the animation to load.
+
+   - Returns: Deserialized `Animation`. Optional.
+   */
+    @objc static func json(_ json: Data) -> Animation? {
+      do {
+        /// Decode animation.
+        let animation = try JSONDecoder().decode(Animation.self, from: json)
+        return animation
+      } catch {
+        /// Decoding error.
+        return nil
+      }
+    }
   
   /**
    Loads an animation model from a bundle by its name. Returns `nil` if an animation is not found.
