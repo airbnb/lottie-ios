@@ -29,6 +29,7 @@ public enum LottieLoopMode {
 }
 
 @IBDesignable
+@objcMembers
 final public class AnimationView: LottieView {
   
   // MARK: - Public Properties
