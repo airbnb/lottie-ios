@@ -244,12 +244,12 @@ final public class AnimationView: LottieView {
     /**
      Objective-C interface. Plays the animation from a start frame to an end frame in the animation's framerate.
 
-     - Parameter startingAtFrame: The start progress of the animation. If `nil` the animation will start at the current progress.
+     - Parameter startingFrame: The start progress of the animation. If `nil` the animation will start at the current progress.
      - Parameter toProgress: The end progress of the animation.
      - Parameter toProgress: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
      - Parameter completion: An optional completion closure to be called when the animation stops.
      */
-    public func play(startingAtFrame fromFrame: CGFloat,
+    public func play(startingFrame fromFrame: CGFloat,
                      toFrame: CGFloat,
                      isLooped: Bool = false, completion: LottieCompletionBlock? = nil) {
         let loopMode: LottieLoopMode = isLooped ? .loop : .playOnce
@@ -518,7 +518,12 @@ final public class AnimationView: LottieView {
   }
   
   // MARK: - Public (Initializers)
-  
+
+  /// Objective-c Convenience Initializer to create a LottieView with an animation.
+  @objc public convenience init(animation: Animation?) {
+    self.init(animation: animation, imageProvider: nil)
+  }
+
   /// Initializes a LottieView with an animation.
   public init(animation: Animation?, imageProvider: AnimationImageProvider? = nil) {
     self.animation = animation
