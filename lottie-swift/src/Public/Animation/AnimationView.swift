@@ -19,7 +19,7 @@ public enum LottieBackgroundBehavior {
 }
 
 /// Defines animation loop behavior
-public enum LottieLoopMode {
+@objc public enum LottieLoopMode: Int {
   /// Animation is played once then stops.
   case playOnce
   /// Animation will loop from end to beginning until stopped.
