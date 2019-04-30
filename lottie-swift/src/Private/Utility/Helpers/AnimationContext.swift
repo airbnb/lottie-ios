@@ -14,23 +14,23 @@ public typealias LottieCompletionBlock = (Bool) -> Void
 
 public struct AnimationContext {
 
-  init(playFrom: CGFloat,
-       playTo: CGFloat,
-       closure: LottieCompletionBlock?) {
+  public init(playFrom: CGFloat,
+              playTo: CGFloat,
+              closure: LottieCompletionBlock?) {
     self.playTo = playTo
     self.playFrom = playFrom
     self.closure = AnimationCompletionDelegate(completionBlock: closure)
   }
 
-  var playFrom: CGFloat
-  var playTo: CGFloat
-  var closure: AnimationCompletionDelegate
+  public var playFrom: CGFloat
+  public var playTo: CGFloat
+  public var closure: AnimationCompletionDelegate
 
 }
 
-class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
+public class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
   
-  init(completionBlock: LottieCompletionBlock?) {
+  public init(completionBlock: LottieCompletionBlock?) {
     self.completionBlock = completionBlock
     super.init()
   }
