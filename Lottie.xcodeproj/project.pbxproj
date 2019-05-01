@@ -2412,7 +2412,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.airbnb.Lottie-macOS";
 				PRODUCT_NAME = Lottie;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2441,7 +2441,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.airbnb.Lottie-macOS";
 				PRODUCT_NAME = Lottie;
 				PROVISIONING_PROFILE_SPECIFIER = "";

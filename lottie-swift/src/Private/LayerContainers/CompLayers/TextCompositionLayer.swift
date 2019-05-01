@@ -102,5 +102,6 @@ class TextCompositionLayer: CompositionLayer {
     textLayer.position = CGPoint.zero
     textLayer.transform = matrix
     textLayer.string = attributedString
+    textLayer.contentsScale = 2.0
   }
 }
