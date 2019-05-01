@@ -35,8 +35,8 @@ public class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
     super.init()
   }
   
-  var animationLayer: AnimationContainer?
-  var animationKey: String?
+  public var animationLayer: AnimationContainer?
+  public var animationKey: String?
   var ignoreDelegate: Bool = false
   let completionBlock: LottieCompletionBlock?
   
