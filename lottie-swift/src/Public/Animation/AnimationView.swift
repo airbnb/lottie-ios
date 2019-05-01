@@ -28,7 +28,7 @@ public enum LottieLoopMode {
   case autoReverse
 }
 
-@IBDesignable
+@IBDesignable @objcMembers
 final public class AnimationView: LottieView {
   
   // MARK: - Public Properties
@@ -607,9 +607,6 @@ final public class AnimationView: LottieView {
     case .bottomRight:
       position.x = bounds.maxX - animation.bounds.midX
       position.y = bounds.maxY - animation.bounds.midY
-      xform = CATransform3DIdentity
-    @unknown default:
-      print("unsupported contentMode: \(contentMode.rawValue); please update lottie-ios")
       xform = CATransform3DIdentity
     }
     animationLayer.position = position
