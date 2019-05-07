@@ -745,6 +745,7 @@ Lottie allows you to change **any** property that is animatable in After Effects
 | Rounded Rectangle | 👍 | 👍 |
 | Polystar | 👍 | 👍 |
 | Group | 👍 | 👍 |
+| Repeater | 👍 | ⛔️ |
 | Trim Path (individually) | ⛔️ | 🎉 |
 | Trim Path (simultaneously) | ❗️ | 🎉 |
 | **Renderable** | **2.5.2** | **3.0** |
