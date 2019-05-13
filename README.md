@@ -101,7 +101,7 @@ You can quickly load a Lottie animation with:
 ```swift
 let starAnimationView = AnimationView(name: "StarAnimation")
 ```
-Additionally you can chose to load an `AnimationView` without any animation, and set the animation later:
+Additionally you can choose to load an `AnimationView` without any animation, and set the animation later:
 ```swift
 let starAnimationView = AnimationView()
 /// Some time later
@@ -745,6 +745,7 @@ Lottie allows you to change **any** property that is animatable in After Effects
 | Rounded Rectangle | 👍 | 👍 |
 | Polystar | 👍 | 👍 |
 | Group | 👍 | 👍 |
+| Repeater | 👍 | ⛔️ |
 | Trim Path (individually) | ⛔️ | 🎉 |
 | Trim Path (simultaneously) | ❗️ | 🎉 |
 | **Renderable** | **2.5.2** | **3.0** |

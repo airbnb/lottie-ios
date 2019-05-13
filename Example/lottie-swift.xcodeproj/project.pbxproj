@@ -509,7 +509,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_macOS/Pods-lottie-swift_macOS-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_macOS/Pods-lottie-swift_macOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios-macOS/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -518,7 +518,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_macOS/Pods-lottie-swift_macOS-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_macOS/Pods-lottie-swift_macOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		322D9F8EFCF8B5B52C137986 /* [CP] Check Pods Manifest.lock */ = {
@@ -563,7 +563,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_Example/Pods-lottie-swift_Example-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_Example/Pods-lottie-swift_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios-iOS/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -572,7 +572,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_Example/Pods-lottie-swift_Example-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_Example/Pods-lottie-swift_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FDBE7F928D3C0C3F9DEBE218 /* [CP] Embed Pods Frameworks */ = {
@@ -581,7 +581,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_tvOS/Pods-lottie-swift_tvOS-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_tvOS/Pods-lottie-swift_tvOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios-tvOS/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -590,7 +590,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_tvOS/Pods-lottie-swift_tvOS-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_tvOS/Pods-lottie-swift_tvOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

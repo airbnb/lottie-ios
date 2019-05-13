@@ -21,6 +21,7 @@ extension Array where Element == ShapeItem {
     var nodeTree = NodeTree()
 
     for item in self {
+      guard item.hidden == false else { continue }
       if let fill = item as? Fill {
         let node = FillNode(parentNode: nodeTree.rootNode, fill: fill)
         nodeTree.rootNode = node
