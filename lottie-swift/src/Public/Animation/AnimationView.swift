@@ -23,9 +23,29 @@ public enum LottieLoopMode {
   /// Animation is played once then stops.
   case playOnce
   /// Animation will loop from end to beginning until stopped.
-  case loop
+  case infinite
   /// Animation will play forward, then backwards and loop until stopped.
   case autoReverse
+  /// Animation will loop from end to beginning up to defined amount of times.
+  case loop(Float)
+  /// Animation will play forward, then backwards a defined amount of times.
+  case loopBackwards(Float)
+}
+
+extension LottieLoopMode: Equatable {
+    public static func == (lhs: LottieLoopMode, rhs: LottieLoopMode) -> Bool {
+        switch (lhs, rhs) {
+        case (.loopBackwards(let lhsAmount), .loopBackwards(let rhsAmount)),
+             (.loop(let lhsAmount), .loop(let rhsAmount)):
+            return lhsAmount == rhsAmount
+        case (.playOnce, .playOnce),
+             (.infinite, .infinite),
+             (.autoReverse, .autoReverse):
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 @IBDesignable
@@ -777,8 +797,21 @@ final public class AnimationView: LottieView {
     layerAnimation.duration = TimeInterval(duration)
     layerAnimation.fillMode = CAMediaTimingFillMode.both
     
-    layerAnimation.repeatCount = loopMode == .playOnce ? 1 : HUGE
-    layerAnimation.autoreverses = loopMode == .autoReverse ? true : false
+    switch loopMode {
+    case .playOnce:
+      layerAnimation.repeatCount = 1
+    case .infinite:
+      layerAnimation.repeatCount = HUGE
+    case .autoReverse:
+      layerAnimation.repeatCount = HUGE
+      layerAnimation.autoreverses = true
+    case let .loop(amount):
+      layerAnimation.repeatCount = amount
+    case let .loopBackwards(amount):
+      layerAnimation.repeatCount = amount
+      layerAnimation.autoreverses = true
+    }
+
     layerAnimation.isRemovedOnCompletion = false
     if timeOffset != 0 {
       let currentLayerTime = viewLayer?.convertTime(CACurrentMediaTime(), from: nil) ?? 0

@@ -67,9 +67,9 @@ public final class CompatibleAnimationView: UIView {
   }
 
   @objc
-  public var loopAnimation: Bool = false {
+  public var loopAnimationCount: CGFloat = 0 {
     didSet {
-      animationView.loopMode = loopAnimation ? .loop : .playOnce
+      animationView.loopMode = loopAnimationCount == -1 ? .infinite : .loop(Float(loopAnimationCount))
     }
   }
 
