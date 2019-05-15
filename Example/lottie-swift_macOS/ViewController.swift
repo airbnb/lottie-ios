@@ -18,7 +18,7 @@ class ViewController: NSViewController {
     let animationView = AnimationView(animation: animation)
     view.addSubview(animationView)
     self.preferredContentSize = animationView.bounds.size
-    animationView.loopMode = .loop
+    animationView.loopMode = .infinite
     animationView.play()
     
     // Do any additional setup after loading the view.
