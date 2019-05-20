@@ -324,10 +324,10 @@ var AnimationView.loopMode: LottieLoopMode { get set }
 Sets the loop behavior for `play` calls. Defaults to `playOnce`
 Options:
 : **playOnce**: Animation is played once then stops.
-: **infinite**: Animation will loop from end to beginning until stopped.
+: **loop**: Animation will loop from end to beginning until stopped.
 : **autoReverse**: Animation will play forward, then backwards and loop until stopped.
-: **loop(amount)**: Animation will loop from end to beginning up to *amount* of times.
-: **loopBackwards(amount)**: Animation will play forward, then backwards a *amount* of times.
+: **repeat(amount)**: Animation will loop from end to beginning up to *amount* of times.
+: **repeatBackwards(amount)**: Animation will play forward, then backwards a *amount* of times.
 #
 #### Is Animation Playing
 ```swift

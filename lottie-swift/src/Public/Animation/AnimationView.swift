@@ -23,23 +23,23 @@ public enum LottieLoopMode {
   /// Animation is played once then stops.
   case playOnce
   /// Animation will loop from end to beginning until stopped.
-  case infinite
+  case loop
   /// Animation will play forward, then backwards and loop until stopped.
   case autoReverse
   /// Animation will loop from end to beginning up to defined amount of times.
-  case loop(Float)
+  case `repeat`(Float)
   /// Animation will play forward, then backwards a defined amount of times.
-  case loopBackwards(Float)
+  case repeatBackwards(Float)
 }
 
 extension LottieLoopMode: Equatable {
     public static func == (lhs: LottieLoopMode, rhs: LottieLoopMode) -> Bool {
         switch (lhs, rhs) {
-        case (.loopBackwards(let lhsAmount), .loopBackwards(let rhsAmount)),
-             (.loop(let lhsAmount), .loop(let rhsAmount)):
+        case (.repeat(let lhsAmount), .repeat(let rhsAmount)),
+             (.repeatBackwards(let lhsAmount), .repeatBackwards(let rhsAmount)):
             return lhsAmount == rhsAmount
         case (.playOnce, .playOnce),
-             (.infinite, .infinite),
+             (.loop, .loop),
              (.autoReverse, .autoReverse):
             return true
         default:
@@ -800,14 +800,14 @@ final public class AnimationView: LottieView {
     switch loopMode {
     case .playOnce:
       layerAnimation.repeatCount = 1
-    case .infinite:
+    case .loop:
       layerAnimation.repeatCount = HUGE
     case .autoReverse:
       layerAnimation.repeatCount = HUGE
       layerAnimation.autoreverses = true
-    case let .loop(amount):
+    case let .repeat(amount):
       layerAnimation.repeatCount = amount
-    case let .loopBackwards(amount):
+    case let .repeatBackwards(amount):
       layerAnimation.repeatCount = amount
       layerAnimation.autoreverses = true
     }
