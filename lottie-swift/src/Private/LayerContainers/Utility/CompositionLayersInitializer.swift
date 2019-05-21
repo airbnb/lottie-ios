@@ -10,7 +10,7 @@ import CoreGraphics
 
 extension Array where Element == LayerModel {
   
-  func initializeCompositionLayers(assetLibrary: AssetLibrary?, layerImageProvider: LayerImageProvider, frameRate: CGFloat) -> [CompositionLayer] {
+	func initializeCompositionLayers(assetLibrary: AssetLibrary?, layerImageProvider: LayerImageProvider, frameRate: CGFloat, fonts: FontList?) -> [CompositionLayer] {
     var compositionLayers = [CompositionLayer]()
     var layerMap = [Int : CompositionLayer]()
     
@@ -47,7 +47,7 @@ extension Array where Element == LayerModel {
         compositionLayers.append(imageContainer)
         layerMap[layer.index] = imageContainer
       } else if let textLayer = layer as? TextLayerModel {
-        let textContainer = TextCompositionLayer(textLayer: textLayer)
+        let textContainer = TextCompositionLayer(textLayer: textLayer, fonts: fonts)
         compositionLayers.append(textContainer)
         layerMap[layer.index] = textContainer
       } else {
