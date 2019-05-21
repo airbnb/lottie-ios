@@ -42,14 +42,14 @@ class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
   
   public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
     guard ignoreDelegate == false else { return }
+	if let completionBlock = completionBlock {
+		completionBlock(flag)
+	}
     if let animationLayer = animationLayer, let key = animationKey {
       animationLayer.removeAnimation(forKey: key)
       if flag {
         animationLayer.currentFrame = (anim as! CABasicAnimation).toValue as! CGFloat
       }
-    }
-    if let completionBlock = completionBlock {
-      completionBlock(flag)
     }
   }
   
