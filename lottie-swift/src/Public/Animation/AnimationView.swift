@@ -275,7 +275,7 @@ final public class AnimationView: LottieView {
    - Parameter fromProgress: The start marker for the animation playback. If `nil` the
    animation will start at the current progress.
    - Parameter toProgress: The end marker for the animation playback.
-   - Parameter toProgress: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+   - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
    - Parameter completion: An optional completion closure to be called when the animation stops.
    */
   public func play(fromMarker: String? = nil,
