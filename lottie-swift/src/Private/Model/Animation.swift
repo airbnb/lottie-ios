@@ -1,5 +1,5 @@
 //
-//  Composition.swift
+//  Animation.swift
 //  lottie-swift
 //
 //  Created by Brandon Withrow on 1/7/19.
