@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-@objc
 /// An Objective-C compatible wrapper around Lottie's Animation class.
 /// Use in tandem with CompatibleAnimationView when using Lottie in Objective-C
+@objc
 public final class CompatibleAnimation: NSObject {
 
   @objc
@@ -35,8 +35,8 @@ public final class CompatibleAnimation: NSObject {
   private let bundle: Bundle
 }
 
-@objc
 /// An Objective-C compatible wrapper around Lottie's AnimationView.
+@objc
 public final class CompatibleAnimationView: UIView {
 
   @objc
