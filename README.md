@@ -63,16 +63,16 @@ You can pull the [Lottie Github Repo](https://github.com/airbnb/lottie-ios/) and
 
 ### CocoaPods
 Add the pod to your Podfile:
-```
+```ruby
 pod 'lottie-ios'
 ```
 
 And then run:
-```
+```ruby
 pod install
 ```
 After installing the cocoapod into your project import Lottie with 
-```
+```swift
 import Lottie
 ```
 ### Carthage
@@ -113,7 +113,7 @@ You can load animations from a specific bundle, a filepath, or even asynchronous
 After loading an animation it can be played with:
 ```swift
 starAnimationView.play { (finished) in
-/// Animation finished
+	/// Animation finished
 }
 ```
 Read more about playing animations [Here](#playing-animations)
