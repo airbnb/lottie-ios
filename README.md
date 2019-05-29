@@ -326,6 +326,8 @@ Options:
 : **playOnce**: Animation is played once then stops.
 : **loop**: Animation will loop from end to beginning until stopped.
 : **autoReverse**: Animation will play forward, then backwards and loop until stopped.
+: **repeat(amount)**: Animation will loop from end to beginning up to *amount* of times.
+: **repeatBackwards(amount)**: Animation will play forward, then backwards a *amount* of times.
 #
 #### Is Animation Playing
 ```swift
