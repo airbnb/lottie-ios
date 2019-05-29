@@ -700,29 +700,48 @@ final public class AnimationView: LottieView {
   }
   
   @objc override func animationWillMoveToBackground() {
-    if backgroundBehavior == .pauseAndRestore, let currentContext = animationContext {
-      /// Ignore the delegate of the animation.
-      currentContext.closure.ignoreDelegate = true
-      removeCurrentAnimation()
-      /// Keep the stale context around for when the app enters the foreground.
-      self.animationContext = currentContext
-    }  else if backgroundBehavior == .stop,
-      let context = animationContext {
-      removeCurrentAnimation()
-      updateAnimationFrame(context.playFrom)
-    }
+    updateAnimationForBackgroundState()
   }
   
   @objc override func animationWillEnterForeground() {
-    if backgroundBehavior == .pauseAndRestore {
-      /// Restore animation from saved state
-      updateInFlightAnimation()
-    }
+    updateAnimationForForegroundState()
   }
   
   override func animationMovedToWindow() {
-    if let context = self.animationContext {
-      self.addNewAnimationForContext(context)
+    if window != nil {
+      updateAnimationForForegroundState()
+    } else {
+      updateAnimationForBackgroundState()
+    }
+  }
+  
+  fileprivate func updateAnimationForBackgroundState() {
+    if let currentContext = animationContext {
+      switch backgroundBehavior {
+      case .stop:
+        removeCurrentAnimation()
+        updateAnimationFrame(currentContext.playFrom)
+      case .pause:
+        removeCurrentAnimation()
+      case .pauseAndRestore:
+        currentContext.closure.ignoreDelegate = true
+        removeCurrentAnimation()
+        /// Keep the stale context around for when the app enters the foreground.
+        self.animationContext = currentContext
+      }
+    }
+  }
+  
+  fileprivate var waitingToPlayAimation: Bool = false
+  fileprivate func updateAnimationForForegroundState() {
+    if let currentContext = animationContext {
+      if waitingToPlayAimation {
+        waitingToPlayAimation = false
+        self.addNewAnimationForContext(currentContext)
+      } else if backgroundBehavior == .pauseAndRestore {
+        /// Restore animation from saved state
+        updateInFlightAnimation()
+      }
     }
   }
   
@@ -738,6 +757,12 @@ final public class AnimationView: LottieView {
   /// Updates an in flight animation.
   fileprivate func updateInFlightAnimation() {
     guard let animationContext = animationContext else { return }
+    
+    guard animationContext.closure.animationState != .complete else {
+      // Tried to re-add an already completed animation. Cancel.
+      self.animationContext = nil
+      return
+    }
     
     /// Tell existing context to ignore its closure
     animationContext.closure.ignoreDelegate = true
@@ -763,7 +788,7 @@ final public class AnimationView: LottieView {
     
     self.animationContext = animationContext
     
-    guard self.window != nil else { return }
+    guard self.window != nil else { waitingToPlayAimation = true; return }
     
     animationID = animationID + 1
     activeAnimationName = AnimationView.animationName + String(animationID)
