@@ -614,6 +614,7 @@
 		486E89F3220B790E007CD915 /* Interpolatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E879D220B78BF007CD915 /* Interpolatable.swift */; };
 		486E89F4220B790E007CD915 /* KeyframeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E879E220B78BF007CD915 /* KeyframeExtensions.swift */; };
 		486E89F5220B790E007CD915 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E87A0220B78BF007CD915 /* AnimationContext.swift */; };
+		48F4EECD229F167F00949A97 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8724220B78BF007CD915 /* TextCompositionLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1901,6 +1902,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48F4EECD229F167F00949A97 /* TextCompositionLayer.swift in Sources */,
 				486E8908220B78FF007CD915 /* AnimationViewInitializers.swift in Sources */,
 				486E8909220B78FF007CD915 /* AnimationView.swift in Sources */,
 				486E890A220B78FF007CD915 /* AnimationPublic.swift in Sources */,
@@ -2356,7 +2358,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -2385,7 +2387,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -2417,7 +2419,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -2447,7 +2449,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -2460,7 +2462,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Lottie;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2473,7 +2475,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Lottie;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -2490,7 +2492,7 @@
 				PRODUCT_NAME = Lottie;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -2505,7 +2507,7 @@
 				PRODUCT_NAME = Lottie;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

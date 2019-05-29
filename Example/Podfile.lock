@@ -1,16 +1,16 @@
 PODS:
-  - lottie-ios (3.0.6)
+  - lottie-ios (3.0.7)
 
 DEPENDENCIES:
   - lottie-ios (from `../`)
 
 EXTERNAL SOURCES:
   lottie-ios:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  lottie-ios: 4870ccbaca9c76caaca29f7b27edfde7b531bc48
+  lottie-ios: 8ede6d51117239953d190409cceedc346a40e58a
 
 PODFILE CHECKSUM: d7d1d3df3df6c9862ab67dbbfb2f695895dc9d7b
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.4.0
