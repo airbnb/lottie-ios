@@ -293,7 +293,6 @@
 				486E8359220A234C007CD915 /* Frameworks */,
 				486E835A220A234C007CD915 /* Resources */,
 				29F5F2A5D9B88463FCED8286 /* [CP] Embed Pods Frameworks */,
-				629FF3484CC702F5C168DDF4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -313,7 +312,6 @@
 				486E8374220A2BB5007CD915 /* Frameworks */,
 				486E8375220A2BB5007CD915 /* Resources */,
 				FDBE7F928D3C0C3F9DEBE218 /* [CP] Embed Pods Frameworks */,
-				C590FCBD714432D074C41133 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -333,7 +331,6 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				D98B4A5651290F1D6739B9EB /* [CP] Embed Pods Frameworks */,
-				F0012A39E8643134382ADBC7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -352,8 +349,6 @@
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
-				EA9C6596084A865026A1EC40 /* [CP] Embed Pods Frameworks */,
-				2497452EFD2E92CC4547939D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -509,28 +504,13 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2497452EFD2E92CC4547939D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_Tests/Pods-lottie-swift_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		29F5F2A5D9B88463FCED8286 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_macOS/Pods-lottie-swift_macOS-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_macOS/Pods-lottie-swift_macOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios-macOS/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -539,7 +519,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_macOS/Pods-lottie-swift_macOS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_macOS/Pods-lottie-swift_macOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		322D9F8EFCF8B5B52C137986 /* [CP] Check Pods Manifest.lock */ = {
@@ -560,21 +540,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		629FF3484CC702F5C168DDF4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_macOS/Pods-lottie-swift_macOS-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7F1AAA6B793865A10C5907D8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -593,28 +558,13 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C590FCBD714432D074C41133 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_tvOS/Pods-lottie-swift_tvOS-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D98B4A5651290F1D6739B9EB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_Example/Pods-lottie-swift_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_Example/Pods-lottie-swift_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios-iOS/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -623,37 +573,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_Example/Pods-lottie-swift_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EA9C6596084A865026A1EC40 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_Tests/Pods-lottie-swift_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F0012A39E8643134382ADBC7 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_Example/Pods-lottie-swift_Example-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_Example/Pods-lottie-swift_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FDBE7F928D3C0C3F9DEBE218 /* [CP] Embed Pods Frameworks */ = {
@@ -662,7 +582,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_tvOS/Pods-lottie-swift_tvOS-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_tvOS/Pods-lottie-swift_tvOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios-tvOS/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -671,7 +591,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lottie-swift_tvOS/Pods-lottie-swift_tvOS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_tvOS/Pods-lottie-swift_tvOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
