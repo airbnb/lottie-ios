@@ -402,7 +402,6 @@
 		486E891E220B78FF007CD915 /* PointValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E871E220B78BF007CD915 /* PointValueProvider.swift */; };
 		486E891F220B78FF007CD915 /* CompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8722220B78BF007CD915 /* CompositionLayer.swift */; };
 		486E8920220B78FF007CD915 /* NullCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8723220B78BF007CD915 /* NullCompositionLayer.swift */; };
-		486E8921220B78FF007CD915 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8724220B78BF007CD915 /* TextCompositionLayer.swift */; };
 		486E8922220B78FF007CD915 /* SolidCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8725220B78BF007CD915 /* SolidCompositionLayer.swift */; };
 		486E8923220B78FF007CD915 /* PreCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8726220B78BF007CD915 /* PreCompositionLayer.swift */; };
 		486E8924220B78FF007CD915 /* ImageCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8727220B78BF007CD915 /* ImageCompositionLayer.swift */; };
@@ -1443,11 +1442,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = YurtvilleProds;
 				TargetAttributes = {
 					486E83B1220A317C007CD915 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 					};
 					486E84E1220A357D007CD915 = {
 						CreatedOnToolsVersion = 10.0;
@@ -1469,6 +1469,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 486E8387220A3038007CD915;
 			productRefGroup = 486E8392220A3038007CD915 /* Products */;
@@ -1926,7 +1927,6 @@
 				486E891F220B78FF007CD915 /* CompositionLayer.swift in Sources */,
 				486E8920220B78FF007CD915 /* NullCompositionLayer.swift in Sources */,
 				25D5437522307C8C00ED90FA /* CompatibleAnimationView.swift in Sources */,
-				486E8921220B78FF007CD915 /* TextCompositionLayer.swift in Sources */,
 				486E8922220B78FF007CD915 /* SolidCompositionLayer.swift in Sources */,
 				486E8923220B78FF007CD915 /* PreCompositionLayer.swift in Sources */,
 				486E8924220B78FF007CD915 /* ImageCompositionLayer.swift in Sources */,
@@ -2300,7 +2300,7 @@
 				PRODUCT_NAME = Lottie;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2328,7 +2328,7 @@
 				PRODUCT_NAME = Lottie;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
