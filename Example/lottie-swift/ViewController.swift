@@ -56,7 +56,7 @@ class ViewController: UIViewController {
     /// Create a display link to make slider track with animation progress.
     displayLink = CADisplayLink(target: self, selector: #selector(animationCallback))
     displayLink?.add(to: .current,
-                    forMode: .defaultRunLoopMode)
+                    forMode: RunLoop.Mode.default)
     
     
     /// Animated Switch
