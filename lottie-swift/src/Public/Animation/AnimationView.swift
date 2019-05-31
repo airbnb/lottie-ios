@@ -33,19 +33,19 @@ public enum LottieLoopMode {
 }
 
 extension LottieLoopMode: Equatable {
-    public static func == (lhs: LottieLoopMode, rhs: LottieLoopMode) -> Bool {
-        switch (lhs, rhs) {
-        case (.repeat(let lhsAmount), .repeat(let rhsAmount)),
-             (.repeatBackwards(let lhsAmount), .repeatBackwards(let rhsAmount)):
-            return lhsAmount == rhsAmount
-        case (.playOnce, .playOnce),
-             (.loop, .loop),
-             (.autoReverse, .autoReverse):
-            return true
-        default:
-            return false
-        }
+  public static func == (lhs: LottieLoopMode, rhs: LottieLoopMode) -> Bool {
+    switch (lhs, rhs) {
+    case (.repeat(let lhsAmount), .repeat(let rhsAmount)),
+         (.repeatBackwards(let lhsAmount), .repeatBackwards(let rhsAmount)):
+      return lhsAmount == rhsAmount
+    case (.playOnce, .playOnce),
+         (.loop, .loop),
+         (.autoReverse, .autoReverse):
+      return true
+    default:
+      return false
     }
+  }
 }
 
 @IBDesignable
@@ -454,7 +454,7 @@ final public class AnimationView: LottieView {
       return viewLayer?.convert(rect, to: animationLayer)
     }
     guard let sublayer = animationLayer.layer(for: keypath) else {
-        return nil
+      return nil
     }
     self.setNeedsLayout()
     self.layoutIfNeeded()
@@ -635,8 +635,30 @@ final public class AnimationView: LottieView {
       xform = CATransform3DIdentity
       #endif
     }
+    
+    /*
+     UIView Animation does not implicitly set CAAnimation time or timing fuctions.
+     If layout is changed in an animation we must get the current animation duration
+     and timing function and then manually set them in a CATransaction.
+     */
+    let duration: Double
+    let timingFunction: CAMediaTimingFunction
+    /// Check if any animation exist on the view's layer, and grab the duration and timing functions of the animation.
+    if let key = layer.animationKeys()?.first, let animation = layer.animation(forKey: key) {
+      duration = animation.duration
+      timingFunction = animation.timingFunction ?? CAMediaTimingFunction(name: .linear)
+    } else {
+      duration = 0.0
+      timingFunction = CAMediaTimingFunction(name: .linear)
+    }
+    
+    /// Create a transaction and set the duration and timing function of the implicit animation.
+    CATransaction.begin()
+    CATransaction.setAnimationDuration(duration)
+    CATransaction.setAnimationTimingFunction(timingFunction)
     animationLayer.position = position
     animationLayer.transform = xform
+    CATransaction.commit()
     
     if shouldForceUpdates {
       animationLayer.forceDisplayUpdate()
@@ -836,7 +858,7 @@ final public class AnimationView: LottieView {
       layerAnimation.repeatCount = amount
       layerAnimation.autoreverses = true
     }
-
+    
     layerAnimation.isRemovedOnCompletion = false
     if timeOffset != 0 {
       let currentLayerTime = viewLayer?.convertTime(CACurrentMediaTime(), from: nil) ?? 0
