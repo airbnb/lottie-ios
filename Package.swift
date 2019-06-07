@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.1
 import PackageDescription
 
 let package = Package(
@@ -14,5 +14,6 @@ let package = Package(
             path: "lottie-swift/src",
             exclude: ["Public/MacOS"]
         )
-    ]
+    ],
+    swiftLanguageVersions: [.v4_2, .v5]
 )
