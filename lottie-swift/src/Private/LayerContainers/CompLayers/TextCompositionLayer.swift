@@ -22,14 +22,16 @@ class TextCompositionLayer: CompositionLayer {
   let textDocument: KeyframeInterpolator<TextDocument>?
   
   let textLayer: DisabledTextLayer = DisabledTextLayer()
+  var textProvider: AnimationTextProvider
   
-  init(textLayer: TextLayerModel) {
+  init(textLayer: TextLayerModel, textProvider: AnimationTextProvider) {
     var rootNode: TextAnimatorNode?
     for animator in textLayer.animators {
       rootNode = TextAnimatorNode(parentNode: rootNode, textAnimator: animator)
     }
     self.rootNode = rootNode
     self.textDocument = KeyframeInterpolator(keyframes: textLayer.text.keyframes)
+    self.textProvider = textProvider
     
     super.init(layer: textLayer, size: .zero)
     contentsLayer.addSublayer(self.textLayer)
@@ -48,6 +50,7 @@ class TextCompositionLayer: CompositionLayer {
     }
     self.rootNode = nil
     self.textDocument = nil
+    self.textProvider = DefaultTextProvider()
     super.init(layer: layer)
   }
   
@@ -80,7 +83,8 @@ class TextCompositionLayer: CompositionLayer {
       attributes[NSAttributedString.Key.strokeWidth] = strokeWidth
     }
     
-    let attributedString = NSAttributedString(string: text.text, attributes: attributes )
+    let textString = textProvider.textFor(keypathName: self.keypathName, sourceText: text.text)
+    let attributedString = NSAttributedString(string: textString, attributes: attributes )
     let framesetter = CTFramesetterCreateWithAttributedString(attributedString)
     let size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,
                                                             CFRange(location: 0,length: 0),

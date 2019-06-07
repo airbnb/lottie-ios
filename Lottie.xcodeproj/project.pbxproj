@@ -615,6 +615,7 @@
 		486E89F4220B790E007CD915 /* KeyframeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E879E220B78BF007CD915 /* KeyframeExtensions.swift */; };
 		486E89F5220B790E007CD915 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E87A0220B78BF007CD915 /* AnimationContext.swift */; };
 		48F4EECD229F167F00949A97 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8724220B78BF007CD915 /* TextCompositionLayer.swift */; };
+		E6EAA7B822AA834F00F345A4 /* AnimationTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -764,6 +765,7 @@
 		486E879D220B78BF007CD915 /* Interpolatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolatable.swift; sourceTree = "<group>"; };
 		486E879E220B78BF007CD915 /* KeyframeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyframeExtensions.swift; sourceTree = "<group>"; };
 		486E87A0220B78BF007CD915 /* AnimationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
+		E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTextProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -867,6 +869,7 @@
 				486E86FC220B78BF007CD915 /* MacOS */,
 				486E8701220B78BF007CD915 /* Animation */,
 				486E8705220B78BF007CD915 /* ImageProvider */,
+				E6EAA7B622AA833200F345A4 /* TextProvider */,
 				486E8707220B78BF007CD915 /* iOS */,
 				486E8710220B78BF007CD915 /* Primitives */,
 				486E8714220B78BF007CD915 /* AnimationCache */,
@@ -1314,6 +1317,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		E6EAA7B622AA833200F345A4 /* TextProvider */ = {
+			isa = PBXGroup;
+			children = (
+				E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */,
+			);
+			path = TextProvider;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1612,6 +1623,7 @@
 				486E87FC220B78D1007CD915 /* Transform.swift in Sources */,
 				486E87FD220B78D1007CD915 /* Mask.swift in Sources */,
 				486E87FE220B78D1007CD915 /* Marker.swift in Sources */,
+				E6EAA7B822AA834F00F345A4 /* AnimationTextProvider.swift in Sources */,
 				486E87FF220B78D1007CD915 /* KeyedDecodingContainerExtensions.swift in Sources */,
 				486E8800220B78D1007CD915 /* KeyframeGroup.swift in Sources */,
 				486E8801220B78D1007CD915 /* Keyframe.swift in Sources */,
@@ -1743,6 +1755,7 @@
 				486E8875220B78E4007CD915 /* Transform.swift in Sources */,
 				486E8876220B78E4007CD915 /* Mask.swift in Sources */,
 				486E8877220B78E4007CD915 /* Marker.swift in Sources */,
+				E6EAA7B922AA83BA00F345A4 /* AnimationTextProvider.swift in Sources */,
 				486E8878220B78E4007CD915 /* KeyedDecodingContainerExtensions.swift in Sources */,
 				486E8879220B78E4007CD915 /* KeyframeGroup.swift in Sources */,
 				486E887A220B78E4007CD915 /* Keyframe.swift in Sources */,
@@ -1833,6 +1846,7 @@
 				486E88D1220B78F4007CD915 /* PathNode.swift in Sources */,
 				486E88D2220B78F4007CD915 /* RenderNode.swift in Sources */,
 				486E88D3220B78F4007CD915 /* AnimatorNode.swift in Sources */,
+				E6EAA7BA22AA83BB00F345A4 /* AnimationTextProvider.swift in Sources */,
 				486E88D4220B78F4007CD915 /* Ellipse.swift in Sources */,
 				486E88D5220B78F4007CD915 /* Trim.swift in Sources */,
 				486E88D6220B78F4007CD915 /* ShapeItem.swift in Sources */,
@@ -1999,6 +2013,7 @@
 				486E8963220B78FF007CD915 /* Transform.swift in Sources */,
 				486E8964220B78FF007CD915 /* Mask.swift in Sources */,
 				486E8965220B78FF007CD915 /* Marker.swift in Sources */,
+				E6EAA7BB22AA83BC00F345A4 /* AnimationTextProvider.swift in Sources */,
 				486E8966220B78FF007CD915 /* KeyedDecodingContainerExtensions.swift in Sources */,
 				486E8967220B78FF007CD915 /* KeyframeGroup.swift in Sources */,
 				486E8968220B78FF007CD915 /* Keyframe.swift in Sources */,
@@ -2089,6 +2104,7 @@
 				486E89BE220B790E007CD915 /* ShapeContainerLayer.swift in Sources */,
 				486E89BF220B790E007CD915 /* PathNode.swift in Sources */,
 				486E89C0220B790E007CD915 /* RenderNode.swift in Sources */,
+				E6EAA7BC22AA83BD00F345A4 /* AnimationTextProvider.swift in Sources */,
 				486E89C1220B790E007CD915 /* AnimatorNode.swift in Sources */,
 				486E89C2220B790E007CD915 /* Ellipse.swift in Sources */,
 				486E89C3220B790E007CD915 /* Trim.swift in Sources */,
