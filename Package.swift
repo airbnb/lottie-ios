@@ -12,6 +12,7 @@ let package = Package(
         .target(
             name: "Lottie",
             path: "lottie-swift/src",
+			exclude: [ "lottie-swift/src/MacOS" ]
             sources: [
 				"lottie-swift/src/iOS",
 				"lottie-swift/src/Private",
