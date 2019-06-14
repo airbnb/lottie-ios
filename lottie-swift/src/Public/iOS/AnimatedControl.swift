@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
 
 /**
@@ -153,3 +154,4 @@ open class AnimatedControl: UIControl {
   }
   
 }
+#endif

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS) || os(watchOS)
 
 /// An Objective-C compatible wrapper around Lottie's AnimationKeypath
 @objc
@@ -25,3 +26,4 @@ public final class CompatibleAnimationKeypath: NSObject {
 
   public let animationKeypath: AnimationKeypath
 }
+#endif

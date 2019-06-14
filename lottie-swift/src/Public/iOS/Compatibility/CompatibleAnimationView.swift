@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
 
 /// An Objective-C compatible wrapper around Lottie's Animation class.
@@ -269,3 +270,4 @@ public final class CompatibleAnimationView: UIView {
     animationView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
   }
 }
+#endif

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
 /**
  An interactive switch with an 'On' and 'Off' state. When the user taps on the
@@ -156,6 +157,7 @@ final public class AnimatedSwitch: AnimatedControl {
   }
   
 }
+#endif
 
 protocol ImpactGenerator {
   func generateImpact()

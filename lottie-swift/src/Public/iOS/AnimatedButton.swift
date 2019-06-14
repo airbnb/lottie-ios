@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
 /**
  An interactive button that plays an animation when pressed.
@@ -64,3 +65,4 @@ final public class AnimatedButton: AnimatedControl {
     }
   }
 }
+#endif
