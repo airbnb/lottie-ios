@@ -22,11 +22,11 @@ public enum LottieBackgroundBehavior {
 public enum LottieLoopMode {
   /// Animation is played once then stops.
   case playOnce
-  /// Animation will loop from end to beginning until stopped.
+  /// Animation will loop from beginning to end until stopped.
   case loop
   /// Animation will play forward, then backwards and loop until stopped.
   case autoReverse
-  /// Animation will loop from end to beginning up to defined amount of times.
+  /// Animation will loop from beginning to end up to defined amount of times.
   case `repeat`(Float)
   /// Animation will play forward, then backwards a defined amount of times.
   case repeatBackwards(Float)
