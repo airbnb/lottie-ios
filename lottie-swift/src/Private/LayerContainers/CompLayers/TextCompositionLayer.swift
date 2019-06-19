@@ -80,6 +80,10 @@ class TextCompositionLayer: CompositionLayer {
       attributes[NSAttributedString.Key.strokeWidth] = strokeWidth
     }
     
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.lineSpacing = CGFloat(text.lineHeight)
+    attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
+    
     let attributedString = NSAttributedString(string: text.text, attributes: attributes )
     let framesetter = CTFramesetterCreateWithAttributedString(attributedString)
     let size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,
