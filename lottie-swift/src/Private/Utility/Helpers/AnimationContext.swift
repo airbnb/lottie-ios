@@ -46,7 +46,7 @@ class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
   var ignoreDelegate: Bool = false
   var animationState: AnimationContextState = .playing
   
-  let completionBlock: LottieCompletionBlock?
+  var completionBlock: LottieCompletionBlock?
   
   public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
     guard ignoreDelegate == false else { return }
@@ -57,9 +57,8 @@ class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
         animationLayer.currentFrame = (anim as! CABasicAnimation).toValue as! CGFloat
       }
     }
-    if let completionBlock = completionBlock {
-      completionBlock(flag)
-    }
+    completionBlock?(flag)
+    completionBlock = nil
   }
   
 }
