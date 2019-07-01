@@ -24,14 +24,18 @@ class TextCompositionLayer: CompositionLayer {
   let interpolatableScale: KeyframeInterpolator<Vector3D>?
   
   let textLayer: DisabledTextLayer = DisabledTextLayer()
+  var textProvider: AnimationTextProvider
   
-  init(textLayer: TextLayerModel) {
+  init(textLayer: TextLayerModel, textProvider: AnimationTextProvider) {
     var rootNode: TextAnimatorNode?
     for animator in textLayer.animators {
       rootNode = TextAnimatorNode(parentNode: rootNode, textAnimator: animator)
     }
     self.rootNode = rootNode
     self.textDocument = KeyframeInterpolator(keyframes: textLayer.text.keyframes)
+
+    self.textProvider = textProvider
+
     // TODO: this has to be somewhere that can be interpolated
     // TODO: look for inspiration from other composite layer
     self.interpolatableAnchorPoint = KeyframeInterpolator(keyframes: textLayer.transform.anchorPoint.keyframes)
@@ -54,8 +58,12 @@ class TextCompositionLayer: CompositionLayer {
     }
     self.rootNode = nil
     self.textDocument = nil
+
+    self.textProvider = DefaultTextProvider()
+
     self.interpolatableAnchorPoint = nil
     self.interpolatableScale = nil
+
     super.init(layer: layer)
   }
   
@@ -90,11 +98,16 @@ class TextCompositionLayer: CompositionLayer {
       attributes[NSAttributedString.Key.strokeWidth] = strokeWidth
     }
     
+
+    let textString = textProvider.textFor(keypathName: self.keypathName, sourceText: text.text)
+    let attributedString = NSAttributedString(string: textString, attributes: attributes )
+
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.lineSpacing = CGFloat(text.lineHeight)
     attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
     
     let attributedString = NSAttributedString(string: text.text, attributes: attributes )
+
     let framesetter = CTFramesetterCreateWithAttributedString(attributedString)
     let size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,
                                                             CFRange(location: 0,length: 0),

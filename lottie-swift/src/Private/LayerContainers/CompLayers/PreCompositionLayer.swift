@@ -23,6 +23,7 @@ class PreCompositionLayer: CompositionLayer {
   init(precomp: PreCompLayerModel,
        asset: PrecompAsset,
        layerImageProvider: LayerImageProvider,
+       textProvider: AnimationTextProvider,
        assetLibrary: AssetLibrary?,
        frameRate: CGFloat) {
     self.animationLayers = []
@@ -36,7 +37,7 @@ class PreCompositionLayer: CompositionLayer {
     masksToBounds = true
     bounds = CGRect(origin: .zero, size: CGSize(width: precomp.width, height: precomp.height))
     
-    let layers = asset.layers.initializeCompositionLayers(assetLibrary: assetLibrary, layerImageProvider: layerImageProvider, frameRate: frameRate)
+    let layers = asset.layers.initializeCompositionLayers(assetLibrary: assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, frameRate: frameRate)
     
     var imageLayers = [ImageCompositionLayer]()
     

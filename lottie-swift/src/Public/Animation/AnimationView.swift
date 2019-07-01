@@ -92,7 +92,17 @@ final public class AnimationView: LottieView {
       reloadImages()
     }
   }
-  
+  /**
+   Sets the text provider for animation view. A text provider provides the
+   animation with values for text layers
+   */
+   public var textProvider: AnimationTextProvider {
+     didSet {
+       animationLayer?.textProvider = textProvider
+     }
+  }
+    
+    
   /// Returns `true` if the animation is currently playing.
   public var isAnimationPlaying: Bool {
     return animationLayer?.animation(forKey: activeAnimationName) != nil
@@ -349,7 +359,7 @@ final public class AnimationView: LottieView {
   public func reloadImages() {
     animationLayer?.reloadImages()
   }
-  
+    
   /// Forces the AnimationView to redraw its contents.
   public func forceDisplayUpdate() {
     animationLayer?.forceDisplayUpdate()
@@ -524,9 +534,10 @@ final public class AnimationView: LottieView {
   // MARK: - Public (Initializers)
   
   /// Initializes a LottieView with an animation.
-  public init(animation: Animation?, imageProvider: AnimationImageProvider? = nil) {
+  public init(animation: Animation?, imageProvider: AnimationImageProvider? = nil, textProvider: AnimationTextProvider = DefaultTextProvider()) {
     self.animation = animation
     self.imageProvider = imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
+    self.textProvider = textProvider
     super.init(frame: .zero)
     commonInit()
     makeAnimationLayer()
@@ -538,6 +549,7 @@ final public class AnimationView: LottieView {
   public init() {
     self.animation = nil
     self.imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
+    self.textProvider = DefaultTextProvider()
     super.init(frame: .zero)
     commonInit()
   }
@@ -545,12 +557,14 @@ final public class AnimationView: LottieView {
   public override init(frame: CGRect) {
     self.animation = nil
     self.imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
+    self.textProvider = DefaultTextProvider()
     super.init(frame: .zero)
     commonInit()
   }
   
   required public init?(coder aDecoder: NSCoder) {
     self.imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
+    self.textProvider = DefaultTextProvider()
     super.init(coder: aDecoder)
     commonInit()
   }
@@ -692,7 +706,7 @@ final public class AnimationView: LottieView {
       return
     }
     
-    let animationLayer = AnimationContainer(animation: animation, imageProvider: imageProvider)
+    let animationLayer = AnimationContainer(animation: animation, imageProvider: imageProvider, textProvider: textProvider)
     animationLayer.renderScale = self.screenScale
     viewLayer?.addSublayer(animationLayer)
     self.animationLayer = animationLayer
