@@ -16,6 +16,8 @@ public enum LottieBackgroundBehavior {
   case pause
   /// Pause the animation and restart it when the application moves to the foreground. The completion block is stored and called when the animation completes.
   case pauseAndRestore
+  /// Stops the animation and sets it to the end of its current play time. The completion block is called.
+  case forceFinish
 }
 
 /// Defines animation loop behavior
@@ -764,6 +766,9 @@ final public class AnimationView: LottieView {
         removeCurrentAnimation()
         /// Keep the stale context around for when the app enters the foreground.
         self.animationContext = currentContext
+      case .forceFinish:
+        removeCurrentAnimation()
+        updateAnimationFrame(currentContext.playTo)
       }
     }
   }
