@@ -644,7 +644,7 @@ final public class AnimationView: LottieView {
     let duration: Double
     let timingFunction: CAMediaTimingFunction
     /// Check if any animation exist on the view's layer, and grab the duration and timing functions of the animation.
-    if let key = layer.animationKeys()?.first, let animation = layer.animation(forKey: key) {
+    if let key = viewLayer?.animationKeys()?.first, let animation = viewLayer?.animation(forKey: key) {
       duration = animation.duration
       timingFunction = animation.timingFunction ?? CAMediaTimingFunction(name: .linear)
     } else {
