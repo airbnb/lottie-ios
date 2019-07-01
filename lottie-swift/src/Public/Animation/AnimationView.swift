@@ -22,11 +22,11 @@ public enum LottieBackgroundBehavior {
 public enum LottieLoopMode {
   /// Animation is played once then stops.
   case playOnce
-  /// Animation will loop from end to beginning until stopped.
+  /// Animation will loop from beginning to end until stopped.
   case loop
   /// Animation will play forward, then backwards and loop until stopped.
   case autoReverse
-  /// Animation will loop from end to beginning up to defined amount of times.
+  /// Animation will loop from beginning to end up to defined amount of times.
   case `repeat`(Float)
   /// Animation will play forward, then backwards a defined amount of times.
   case repeatBackwards(Float)
@@ -248,7 +248,7 @@ final public class AnimationView: LottieView {
    
    - Parameter fromProgress: The start progress of the animation. If `nil` the animation will start at the current progress.
    - Parameter toProgress: The end progress of the animation.
-   - Parameter toProgress: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+   - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
    - Parameter completion: An optional completion closure to be called when the animation stops.
    */
   public func play(fromProgress: AnimationProgressTime? = nil,
@@ -275,7 +275,7 @@ final public class AnimationView: LottieView {
    
    - Parameter fromProgress: The start progress of the animation. If `nil` the animation will start at the current progress.
    - Parameter toProgress: The end progress of the animation.
-   - Parameter toProgress: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+   - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
    - Parameter completion: An optional completion closure to be called when the animation stops.
    */
   public func play(fromFrame: AnimationFrameTime? = nil,
@@ -305,7 +305,7 @@ final public class AnimationView: LottieView {
    - Parameter fromProgress: The start marker for the animation playback. If `nil` the
    animation will start at the current progress.
    - Parameter toProgress: The end marker for the animation playback.
-   - Parameter toProgress: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+   - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
    - Parameter completion: An optional completion closure to be called when the animation stops.
    */
   public func play(fromMarker: String? = nil,
@@ -658,7 +658,7 @@ final public class AnimationView: LottieView {
     let duration: Double
     let timingFunction: CAMediaTimingFunction
     /// Check if any animation exist on the view's layer, and grab the duration and timing functions of the animation.
-    if let key = layer.animationKeys()?.first, let animation = layer.animation(forKey: key) {
+    if let key = viewLayer?.animationKeys()?.first, let animation = viewLayer?.animation(forKey: key) {
       duration = animation.duration
       timingFunction = animation.timingFunction ?? CAMediaTimingFunction(name: .linear)
     } else {
