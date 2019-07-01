@@ -10,6 +10,13 @@ import CoreGraphics
 import QuartzCore
 import CoreText
 
+/// Needed for NSMutableParagraphStyle...
+#if os(OSX)
+import AppKit
+#else
+import UIKit
+#endif
+
 class DisabledTextLayer: CATextLayer {
   override func action(forKey event: String) -> CAAction? {
     return nil
@@ -106,7 +113,6 @@ class TextCompositionLayer: CompositionLayer {
     paragraphStyle.lineSpacing = CGFloat(text.lineHeight)
     attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
     
-    let attributedString = NSAttributedString(string: text.text, attributes: attributes )
 
     let framesetter = CTFramesetterCreateWithAttributedString(attributedString)
     let size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,

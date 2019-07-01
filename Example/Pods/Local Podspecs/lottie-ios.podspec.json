@@ -15,7 +15,7 @@
     "git": "https://github.com/airbnb/lottie-ios.git",
     "tag": "3.1.0"
   },
-  "swift_versions": "4.2",
+  "swift_versions": "5.0",
   "platforms": {
     "ios": "9.0",
     "osx": "10.10",
@@ -49,5 +49,5 @@
   },
   "module_name": "Lottie",
   "header_dir": "Lottie",
-  "swift_version": "4.2"
+  "swift_version": "5.0"
 }
