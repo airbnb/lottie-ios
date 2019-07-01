@@ -128,6 +128,7 @@ open class AnimatedControl: UIControl {
     animationView.clipsToBounds = false
     clipsToBounds = true
     animationView.translatesAutoresizingMaskIntoConstraints = false
+    animationView.backgroundBehavior = .forceFinish
     addSubview(animationView)
     animationView.contentMode = .scaleAspectFit
     animationView.isUserInteractionEnabled = false
