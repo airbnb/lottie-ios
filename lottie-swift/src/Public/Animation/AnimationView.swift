@@ -275,8 +275,8 @@ final public class AnimationView: LottieView {
   /**
    Plays the animation from a start frame to an end frame in the animation's framerate.
    
-   - Parameter fromProgress: The start progress of the animation. If `nil` the animation will start at the current progress.
-   - Parameter toProgress: The end progress of the animation.
+   - Parameter fromFrame: The start frame of the animation. If `nil` the animation will start at the current frame.
+   - Parameter toFrame: The end frame of the animation.
    - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
    - Parameter completion: An optional completion closure to be called when the animation stops.
    */
@@ -304,9 +304,9 @@ final public class AnimationView: LottieView {
    
    NOTE: If markers are not found the play command will exit.
    
-   - Parameter fromProgress: The start marker for the animation playback. If `nil` the
+   - Parameter fromMarker: The start marker for the animation playback. If `nil` the
    animation will start at the current progress.
-   - Parameter toProgress: The end marker for the animation playback.
+   - Parameter toMarker: The end marker for the animation playback.
    - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
    - Parameter completion: An optional completion closure to be called when the animation stops.
    */
