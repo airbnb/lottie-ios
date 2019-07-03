@@ -734,7 +734,9 @@ final public class AnimationView: LottieView {
     CATransaction.setDisableActions(true)
     animationLayer?.currentFrame = newFrame
     CATransaction.commit()
-    animationLayer?.forceDisplayUpdate()
+    CATransaction.setCompletionBlock {
+        self.animationLayer?.forceDisplayUpdate()
+    }
   }
   
   @objc override func animationWillMoveToBackground() {
