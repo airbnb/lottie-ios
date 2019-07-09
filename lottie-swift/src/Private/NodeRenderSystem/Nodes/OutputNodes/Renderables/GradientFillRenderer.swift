@@ -43,7 +43,7 @@ class GradientFillRenderer: PassThroughOutputNode, Renderable {
       if alpha < 1 {
         drawMask = true
       }
-      if let color = CGColor(colorSpace: maskColorSpace, components: [alpha, 1]) {
+      if let color = CGColor(colorSpace: maskColorSpace, components: [1.0 - alpha, 1]) {
         alphaLocations.append(colors[i])
         alphaColors.append(color)
       }
