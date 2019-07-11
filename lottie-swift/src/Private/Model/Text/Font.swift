@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Font: Codable {
+public class Font: Codable {
   
   let name: String
   let familyName: String
@@ -24,9 +24,9 @@ class Font: Codable {
 }
 
 /// A list of fonts
-class FontList: Codable {
+public class FontList: Codable {
   
-  let fonts: [Font]
+  public let fonts: [Font]
   
   enum CodingKeys : String, CodingKey {
     case fonts = "list"

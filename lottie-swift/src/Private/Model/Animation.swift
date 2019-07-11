@@ -48,7 +48,7 @@ public class Animation: Codable {
   let glyphs: [Glyph]?
   
   /// The list of fonts used for text rendering
-  let fonts: FontList?
+  public let fonts: FontList?
   
   /// Asset Library
   let assetLibrary: AssetLibrary?
