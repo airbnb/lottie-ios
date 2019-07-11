@@ -344,7 +344,7 @@ final public class AnimationView: LottieView {
    The completion closure will be called with `false`
    */
   public func stop() {
-    removeCurrentAnimation()
+    removeAllAnimations()
     currentFrame = 0
   }
   
@@ -759,7 +759,7 @@ final public class AnimationView: LottieView {
     if let currentContext = animationContext {
       switch backgroundBehavior {
       case .stop:
-        removeCurrentAnimation()
+        removeAllAnimations()
         updateAnimationFrame(currentContext.playFrom)
       case .pause:
         removeCurrentAnimation()
@@ -793,6 +793,16 @@ final public class AnimationView: LottieView {
     guard animationContext != nil else { return }
     let pauseFrame = realtimeAnimationFrame
     animationLayer?.removeAnimation(forKey: activeAnimationName)
+    updateAnimationFrame(pauseFrame)
+    self.animationContext = nil
+  }
+  
+  fileprivate func removeAllAnimations() {
+    guard animationContext != nil else { return }
+    let pauseFrame = realtimeAnimationFrame
+    for animationName in animationLayer?.animationKeys() ?? [] {
+      animationLayer?.removeAnimation(forKey: animationName)
+    }
     updateAnimationFrame(pauseFrame)
     self.animationContext = nil
   }
