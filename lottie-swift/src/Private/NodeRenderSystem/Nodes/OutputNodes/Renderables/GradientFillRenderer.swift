@@ -43,7 +43,7 @@ class GradientFillRenderer: PassThroughOutputNode, Renderable {
       if alpha < 1 {
         drawMask = true
       }
-      if let color = CGColor(colorSpace: maskColorSpace, components: [1.0 - alpha, 1]) {
+      if let color = CGColor(colorSpace: maskColorSpace, components: [alpha, 1]) {
         alphaLocations.append(colors[i])
         alphaColors.append(color)
       }
@@ -64,7 +64,8 @@ class GradientFillRenderer: PassThroughOutputNode, Renderable {
                                     bytesPerRow: inContext.width,
                                     space: maskColorSpace,
                                     bitmapInfo: 0) else { return }
-      
+      let flipVertical = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: CGFloat(maskContext.height))
+      maskContext.concatenate(flipVertical)
       maskContext.concatenate(inContext.ctm)
       if type == .linear {
         maskContext.drawLinearGradient(maskGradient, start: start, end: end, options: [.drawsAfterEndLocation, .drawsBeforeStartLocation])
