@@ -131,10 +131,11 @@ struct CompoundBezierPath {
         /// Full Path is inside of trim. Add full path.
         compoundPath = compoundPath.addPath(path: path)
       } else {
-        let trimPath = path.trim(fromLength: trim.start > pathStartPosition ? (trim.start - pathStartPosition) : 0,
+        if let trimPath = path.trim(fromLength: trim.start > pathStartPosition ? (trim.start - pathStartPosition) : 0,
                                  toLength: trim.end < pathEndPosition ? (trim.end - pathStartPosition) : path.length,
-                                 offsetLength: 0)[0]
-        compoundPath = compoundPath.addPath(path: trimPath)
+                                 offsetLength: 0).first {
+            compoundPath = compoundPath.addPath(path: trimPath)
+        }
       }
 
       
