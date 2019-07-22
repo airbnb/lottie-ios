@@ -625,6 +625,9 @@
 		E654753C22AAA9B600FE590F /* LayerTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E654753822AAA9AD00FE590F /* LayerTextProvider.swift */; };
 		E654753D22AAA9B600FE590F /* LayerTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E654753822AAA9AD00FE590F /* LayerTextProvider.swift */; };
 		E6EAA7B822AA834F00F345A4 /* AnimationTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */; };
+		EE90829822E5E6820088A05C /* AnimationFromAssetLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE90829722E5E6820088A05C /* AnimationFromAssetLoading.swift */; };
+		EE90829922E5E6820088A05C /* AnimationFromAssetLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE90829722E5E6820088A05C /* AnimationFromAssetLoading.swift */; };
+		EE90829A22E5E6820088A05C /* AnimationFromAssetLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE90829722E5E6820088A05C /* AnimationFromAssetLoading.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -776,6 +779,7 @@
 		486E87A0220B78BF007CD915 /* AnimationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
 		E654753822AAA9AD00FE590F /* LayerTextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerTextProvider.swift; sourceTree = "<group>"; };
 		E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTextProvider.swift; sourceTree = "<group>"; };
+		EE90829722E5E6820088A05C /* AnimationFromAssetLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationFromAssetLoading.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -929,6 +933,7 @@
 				486E870D220B78BF007CD915 /* LottieView.swift */,
 				486E870E220B78BF007CD915 /* AnimationSubview.swift */,
 				486E870F220B78BF007CD915 /* AnimatedControl.swift */,
+				EE90829722E5E6820088A05C /* AnimationFromAssetLoading.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -1548,6 +1553,7 @@
 				486E87A9220B78D1007CD915 /* AnimatedButton.swift in Sources */,
 				486E87AA220B78D1007CD915 /* LottieView.swift in Sources */,
 				486E87AB220B78D1007CD915 /* AnimationSubview.swift in Sources */,
+				EE90829822E5E6820088A05C /* AnimationFromAssetLoading.swift in Sources */,
 				486E87AC220B78D1007CD915 /* AnimatedControl.swift in Sources */,
 				486E87AD220B78D1007CD915 /* AnimationTime.swift in Sources */,
 				486E87AE220B78D1007CD915 /* Vectors.swift in Sources */,
@@ -1681,6 +1687,7 @@
 				486E8822220B78E4007CD915 /* AnimatedButton.swift in Sources */,
 				486E8823220B78E4007CD915 /* LottieView.swift in Sources */,
 				486E8824220B78E4007CD915 /* AnimationSubview.swift in Sources */,
+				EE90829922E5E6820088A05C /* AnimationFromAssetLoading.swift in Sources */,
 				486E8825220B78E4007CD915 /* AnimatedControl.swift in Sources */,
 				486E8826220B78E4007CD915 /* AnimationTime.swift in Sources */,
 				486E8827220B78E4007CD915 /* Vectors.swift in Sources */,
@@ -1941,6 +1948,7 @@
 				486E890F220B78FF007CD915 /* UIColorExtension.swift in Sources */,
 				486E8910220B78FF007CD915 /* AnimatedButton.swift in Sources */,
 				486E8911220B78FF007CD915 /* LottieView.swift in Sources */,
+				EE90829A22E5E6820088A05C /* AnimationFromAssetLoading.swift in Sources */,
 				486E8912220B78FF007CD915 /* AnimationSubview.swift in Sources */,
 				486E8913220B78FF007CD915 /* AnimatedControl.swift in Sources */,
 				486E8914220B78FF007CD915 /* AnimationTime.swift in Sources */,
