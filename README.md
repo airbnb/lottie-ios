@@ -57,3 +57,38 @@ carthage update
 ```
 In your application targets “General” tab under the “Linked Frameworks and Libraries” section, drag and drop lottie-ios.framework from the Carthage/Build/iOS directory that `carthage update` produced.
 
+### Swift Package Manager
+``` swift
+// swift-tools-version:5.1
+
+import PackageDescription
+
+let package = Package(
+  name: "YourTestProject",
+  platforms: [
+       .iOS(.v12),
+  ],
+  dependencies: [
+    .package(url: "https://github.com/airbnb/lottie-ios.git", from: "3.1.2")
+  ],
+  targets: [
+    .target(name: "YourTestProject", dependencies: ["Lottie"])
+  ]
+)
+```
+And then import wherever needed: ```import Lottie```
+
+#### Adding it to an existent iOS Project via Swift Package Manager
+
+1. Using Xcode 11 go to File > Swift Packages > Add Package Dependency
+2. Paste the project URL: https://github.com/airbnb/lottie-ios
+3. Click on next and select the project target
+
+If you have doubts, please, check the following links:
+
+[How to use](https://developer.apple.com/videos/play/wwdc2019/408/)
+
+[Creating Swift Packages](https://developer.apple.com/videos/play/wwdc2019/410/)
+
+After successfully retrieved the package and added it to your project, just import `Lottie` and you can get the full benefits of it.
+
