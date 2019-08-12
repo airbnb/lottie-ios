@@ -764,13 +764,16 @@ final public class AnimationView: LottieView {
       case .pause:
         removeCurrentAnimation()
       case .pauseAndRestore:
-        currentContext.closure.ignoreDelegate = true
+        currentContext.closure.ignoreDelegate = !waitingToPlayAimation
         removeCurrentAnimation()
         /// Keep the stale context around for when the app enters the foreground.
         self.animationContext = currentContext
       case .forceFinish:
         removeCurrentAnimation()
         updateAnimationFrame(currentContext.playTo)
+      }
+      if waitingToPlayAimation, backgroundBehavior != .pauseAndRestore {
+        currentContext.closure.completionBlock?(true)
       }
     }
   }
