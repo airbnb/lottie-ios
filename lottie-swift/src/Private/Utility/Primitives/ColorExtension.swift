@@ -69,6 +69,13 @@ extension Color {
   }
   
   var cgColorValue: CGColor {
-    return CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [CGFloat(r), CGFloat(g), CGFloat(b), CGFloat(a)]) ?? Color.clearColor
+    var colorspace : CGColorSpace?
+
+    if #available(iOS 9.3, *) {
+        // Always use P3 colorspace for now
+        colorspace = CGColorSpace.init(name: CGColorSpace.displayP3)
+    }
+
+    return CGColor(colorSpace: colorspace ?? CGColorSpaceCreateDeviceRGB(), components: [CGFloat(r), CGFloat(g), CGFloat(b), CGFloat(a)]) ?? Color.clearColor
   }
 }
