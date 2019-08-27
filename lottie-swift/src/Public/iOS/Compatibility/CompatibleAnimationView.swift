@@ -210,6 +210,19 @@ public final class CompatibleAnimationView: UIView {
   }
 
   @objc
+  public func setColorValue(_ color: UIColor, forKeypath keypath: CompatibleAnimationKeypath)
+  {
+    var red: CGFloat = 0
+    var green: CGFloat = 0
+    var blue: CGFloat = 0
+    var alpha: CGFloat = 0
+    color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+
+    let valueProvider = ColorValueProvider(Color(r: Double(red), g: Double(green), b: Double(blue), a: Double(alpha)))
+    animationView.setValueProvider(valueProvider, keypath: keypath.animationKeypath)
+  }
+
+  @objc
   public func addSubview(
     _ subview: AnimationSubview,
     forLayerAt keypath: CompatibleAnimationKeypath)
