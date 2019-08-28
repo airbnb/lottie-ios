@@ -216,7 +216,24 @@ public final class CompatibleAnimationView: UIView {
     var green: CGFloat = 0
     var blue: CGFloat = 0
     var alpha: CGFloat = 0
-    color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+
+    var colorspace : CGColorSpace?
+
+    if #available(iOS 9.3, *) {
+        // Always use P3 colorspace for now
+        colorspace = CGColorSpace.init(name: CGColorSpace.displayP3)
+    }
+
+    let convertedColor = color.cgColor.converted(to: colorspace ?? CGColorSpaceCreateDeviceRGB(), intent: .defaultIntent, options: nil)
+
+    if let components = convertedColor?.components, components.count == 4 {
+      red = components[0]
+      green = components[1]
+      blue = components[2]
+      alpha = components[3]
+    } else {
+      color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+    }
 
     let valueProvider = ColorValueProvider(Color(r: Double(red), g: Double(green), b: Double(blue), a: Double(alpha)))
     animationView.setValueProvider(valueProvider, keypath: keypath.animationKeypath)
