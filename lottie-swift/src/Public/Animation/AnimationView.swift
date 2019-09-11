@@ -225,6 +225,33 @@ final public class AnimationView: LottieView {
     }
   }
   
+  /**
+   Controls the cropping of an Animation. Setting this property will crop the animation
+   to the current views bounds by the viewport frame. The coordinate space is specified
+   in the animation's coordinate space.
+   
+   Animatable.
+  */
+  public var viewportFrame: CGRect? = nil {
+    didSet {
+      
+      /*
+       This is really ugly, but is needed to trigger a layout pass within an animation block.
+       Typically this happens automatically, when layout objects are UIView based.
+       The animation layer is a CALayer which will not implicitly grab the animation
+       duration of a UIView animation block.
+       
+       By setting bounds and then resetting bounds the UIView animation block's
+       duration and curve are captured and added to the layer. This is used in the
+       layout block to animate the animationLayer's position and size.
+       */
+      let rect = bounds
+      self.bounds = CGRect.zero
+      self.bounds = rect
+      self.setNeedsLayout()
+    }
+  }
+  
   // MARK: - Public Functions
   
   /**
@@ -589,92 +616,121 @@ final public class AnimationView: LottieView {
     var position = animation.bounds.center
     let xform: CATransform3D
     var shouldForceUpdates: Bool = false
-    switch contentMode {
-    case .scaleToFill:
-      position = bounds.center
-      xform = CATransform3DMakeScale(bounds.size.width / animation.size.width,
-                                     bounds.size.height / animation.size.height,
-                                     1);
-    case .scaleAspectFit:
-      position = bounds.center
-      let compAspect = animation.size.width / animation.size.height
+    
+    if let viewportFrame = self.viewportFrame {
+      shouldForceUpdates = self.contentMode == .redraw
+      
+      let compAspect = viewportFrame.size.width / viewportFrame.size.height
       let viewAspect = bounds.size.width / bounds.size.height
       let dominantDimension = compAspect > viewAspect ? bounds.size.width : bounds.size.height
-      let compDimension = compAspect > viewAspect ? animation.size.width : animation.size.height
+      let compDimension = compAspect > viewAspect ? viewportFrame.size.width : viewportFrame.size.height
       let scale = dominantDimension / compDimension
-      xform = CATransform3DMakeScale(scale, scale, 1)
-    case .scaleAspectFill:
-      position = bounds.center
-      let compAspect = animation.size.width / animation.size.height
-      let viewAspect = bounds.size.width / bounds.size.height
-      let scaleWidth = compAspect < viewAspect
-      let dominantDimension = scaleWidth ? bounds.size.width : bounds.size.height
-      let compDimension = scaleWidth ? animation.size.width : animation.size.height
-      let scale = dominantDimension / compDimension
-      xform = CATransform3DMakeScale(scale, scale, 1)
-    case .redraw:
-      shouldForceUpdates = true
-      xform = CATransform3DIdentity
-    case .center:
-      position = bounds.center
-      xform = CATransform3DIdentity
-    case .top:
-      position.x = bounds.center.x
-      xform = CATransform3DIdentity
-    case .bottom:
-      position.x = bounds.center.x
-      position.y = bounds.maxY - animation.bounds.midY
-      xform = CATransform3DIdentity
-    case .left:
-      position.y = bounds.center.y
-      xform = CATransform3DIdentity
-    case .right:
-      position.y = bounds.center.y
-      position.x = bounds.maxX - animation.bounds.midX
-      xform = CATransform3DIdentity
-    case .topLeft:
-      xform = CATransform3DIdentity
-    case .topRight:
-      position.x = bounds.maxX - animation.bounds.midX
-      xform = CATransform3DIdentity
-    case .bottomLeft:
-      position.y = bounds.maxY - animation.bounds.midY
-      xform = CATransform3DIdentity
-    case .bottomRight:
-      position.x = bounds.maxX - animation.bounds.midX
-      position.y = bounds.maxY - animation.bounds.midY
-      xform = CATransform3DIdentity
       
-      #if os(iOS) || os(tvOS)
-    @unknown default:
-      print("unsupported contentMode: \(contentMode.rawValue); please update lottie-ios")
-      xform = CATransform3DIdentity
-      #endif
+      let viewportOffset = animation.bounds.center - viewportFrame.center
+      xform = CATransform3DTranslate(CATransform3DMakeScale(scale, scale, 1), viewportOffset.x, viewportOffset.y, 0)
+      position = bounds.center
+    } else {
+      switch contentMode {
+      case .scaleToFill:
+        position = bounds.center
+        xform = CATransform3DMakeScale(bounds.size.width / animation.size.width,
+                                       bounds.size.height / animation.size.height,
+                                       1);
+      case .scaleAspectFit:
+        position = bounds.center
+        let compAspect = animation.size.width / animation.size.height
+        let viewAspect = bounds.size.width / bounds.size.height
+        let dominantDimension = compAspect > viewAspect ? bounds.size.width : bounds.size.height
+        let compDimension = compAspect > viewAspect ? animation.size.width : animation.size.height
+        let scale = dominantDimension / compDimension
+        xform = CATransform3DMakeScale(scale, scale, 1)
+      case .scaleAspectFill:
+        position = bounds.center
+        let compAspect = animation.size.width / animation.size.height
+        let viewAspect = bounds.size.width / bounds.size.height
+        let scaleWidth = compAspect < viewAspect
+        let dominantDimension = scaleWidth ? bounds.size.width : bounds.size.height
+        let compDimension = scaleWidth ? animation.size.width : animation.size.height
+        let scale = dominantDimension / compDimension
+        xform = CATransform3DMakeScale(scale, scale, 1)
+      case .redraw:
+        shouldForceUpdates = true
+        xform = CATransform3DIdentity
+      case .center:
+        position = bounds.center
+        xform = CATransform3DIdentity
+      case .top:
+        position.x = bounds.center.x
+        xform = CATransform3DIdentity
+      case .bottom:
+        position.x = bounds.center.x
+        position.y = bounds.maxY - animation.bounds.midY
+        xform = CATransform3DIdentity
+      case .left:
+        position.y = bounds.center.y
+        xform = CATransform3DIdentity
+      case .right:
+        position.y = bounds.center.y
+        position.x = bounds.maxX - animation.bounds.midX
+        xform = CATransform3DIdentity
+      case .topLeft:
+        xform = CATransform3DIdentity
+      case .topRight:
+        position.x = bounds.maxX - animation.bounds.midX
+        xform = CATransform3DIdentity
+      case .bottomLeft:
+        position.y = bounds.maxY - animation.bounds.midY
+        xform = CATransform3DIdentity
+      case .bottomRight:
+        position.x = bounds.maxX - animation.bounds.midX
+        position.y = bounds.maxY - animation.bounds.midY
+        xform = CATransform3DIdentity
+        
+        #if os(iOS) || os(tvOS)
+      @unknown default:
+        print("unsupported contentMode: \(contentMode.rawValue); please update lottie-ios")
+        xform = CATransform3DIdentity
+        #endif
+      }
     }
     
     /*
      UIView Animation does not implicitly set CAAnimation time or timing fuctions.
      If layout is changed in an animation we must get the current animation duration
-     and timing function and then manually set them in a CATransaction.
+     and timing function and then manually create a CAAnimation to match the UIView animation.
      */
-    let duration: Double
-    let timingFunction: CAMediaTimingFunction
+
     /// Check if any animation exist on the view's layer, and grab the duration and timing functions of the animation.
     if let key = viewLayer?.animationKeys()?.first, let animation = viewLayer?.animation(forKey: key) {
-      duration = animation.duration
-      timingFunction = animation.timingFunction ?? CAMediaTimingFunction(name: .linear)
+      // The layout is happening within an animation block. Grab the animation data.
+      
+      let animationKey = "LayoutAnimation"
+      animationLayer.removeAnimation(forKey: animationKey)
+      
+      let positionAnimation = CABasicAnimation(keyPath: "position")
+      positionAnimation.fromValue = animationLayer.position
+      positionAnimation.toValue = position
+      let xformAnimation = CABasicAnimation(keyPath: "transform")
+      xformAnimation.fromValue = animationLayer.transform
+      xformAnimation.toValue = xform
+      
+      let group = CAAnimationGroup()
+      group.animations = [positionAnimation, xformAnimation]
+      group.duration = animation.duration
+      group.fillMode = .both
+      group.timingFunction = animation.timingFunction
+      if animation.beginTime > 0 {
+        group.beginTime = CACurrentMediaTime() + animation.beginTime
+      }
+      group.isRemovedOnCompletion = true
+      
+      animationLayer.position = position
+      animationLayer.transform = xform
+      animationLayer.add(group, forKey: animationKey)
     } else {
-      duration = 0.0
-      timingFunction = CAMediaTimingFunction(name: .linear)
+      animationLayer.position = position
+      animationLayer.transform = xform
     }
-    
-    /// Create a transaction and set the duration and timing function of the implicit animation.
-    CATransaction.begin()
-    CATransaction.setAnimationDuration(duration)
-    CATransaction.setAnimationTimingFunction(timingFunction)
-    animationLayer.position = position
-    animationLayer.transform = xform
-    CATransaction.commit()
     
     if shouldForceUpdates {
       animationLayer.forceDisplayUpdate()
