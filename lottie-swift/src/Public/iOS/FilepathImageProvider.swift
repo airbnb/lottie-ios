@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
 
 /**
@@ -52,3 +53,4 @@ public class FilepathImageProvider: AnimationImageProvider {
   }
   
 }
+#endif

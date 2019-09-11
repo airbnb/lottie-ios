@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreGraphics
+#if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
 
 /**
@@ -76,3 +77,4 @@ public class BundleImageProvider: AnimationImageProvider {
   }
   
 }
+#endif

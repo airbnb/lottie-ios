@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
 
 /**
@@ -169,6 +170,7 @@ final public class AnimatedSwitch: AnimatedControl {
   }
   
 }
+#endif
 
 protocol ImpactGenerator {
   func generateImpact()
