@@ -1,5 +1,5 @@
 //
-//  TestCompositionLayer.swift
+//  TextCompositionLayer.swift
 //  lottie-swift
 //
 //  Created by Brandon Withrow on 1/25/19.
@@ -132,8 +132,9 @@ class TextCompositionLayer: CompositionLayer {
   }
   
   private func calculateAnchor(withAnchorPoint anchorPoint: Vector3D, justification: TextJustification, scale: Vector3D, andSize size: CGSize) -> CGPoint {
-    let calibratedAnchorPoint = CGPoint(x: (anchorPoint.x / Double(size.width) * (scale.x / 100.0)),
-                                        y: (anchorPoint.y / Double(size.height) * (scale.y / 100.0)))
+    let x_value: Double = (anchorPoint.x / Double(size.width)).isNaN ? 0 : (anchorPoint.x / Double(size.width)) * (scale.x / 100.0)
+    let y_value: Double = (anchorPoint.y / Double(size.height)).isNaN ? 0 : (anchorPoint.y / Double(size.height)) * (scale.y / 100.0)
+    let calibratedAnchorPoint = CGPoint(x: x_value, y: y_value)
     
     let justificationAnchorPoint: CGPoint
     switch justification {
