@@ -134,6 +134,8 @@ final public class AnimatedSwitch: AnimatedControl {
         endProgress = previousStateStart
       }
     }
+
+    updateAccessibilityLabel()
     
     guard animated == true else {
       animationView.currentProgress = finalProgress
@@ -149,8 +151,6 @@ final public class AnimatedSwitch: AnimatedControl {
         self.animationView.currentProgress = finalProgress
       }
     }
-
-    updateAccessibilityLabel()
   }
   
   public override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
