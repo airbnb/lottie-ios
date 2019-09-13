@@ -108,6 +108,8 @@ class LayerModel: Codable {
   let matte: MatteType?
   
   let hidden: Bool
+	
+  let effects: [Effect]?
   
   private enum CodingKeys : String, CodingKey {
     case name = "nm"
@@ -124,6 +126,7 @@ class LayerModel: Codable {
     case timeStretch = "sr"
     case matte = "tt"
     case hidden = "hd"
+    case effects = "ef"
   }
   
   required init(from decoder: Decoder) throws {
@@ -142,5 +145,6 @@ class LayerModel: Codable {
     self.timeStretch = try container.decodeIfPresent(Double.self, forKey: .timeStretch) ?? 1
     self.matte = try container.decodeIfPresent(MatteType.self, forKey: .matte)
     self.hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden) ?? false
+    self.effects = container.decodeIfPresent([Effect].self, ofFamily: EffectType.self, forKey: .effects)
   }
 }
