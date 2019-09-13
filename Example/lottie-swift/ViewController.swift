@@ -94,6 +94,16 @@ class ViewController: UIViewController {
     twitterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 12).isActive = true
     twitterButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 20).isActive = true
     */
+    
+    let keypath1 = AnimationKeypath(keypath: "Shape Layer 1.Rectangle 1")
+    let keypath2 = AnimationKeypath(keypath: "*.Rectangle 1")
+    let keypath3 = AnimationKeypath(keypath: "**.Rectangle 1")
+    let keypath4 = AnimationKeypath(keypath: "**.Stroke 1")
+    
+//    animationView.setNodeIsEnabled(isEnabled: true, keypath: keypath1)
+//    animationView.setNodeIsEnabled(isEnabled: true, keypath: keypath2)
+//    animationView.setNodeIsEnabled(isEnabled: true, keypath: keypath3)
+//    animationView.setNodeIsEnabled(isEnabled: true, keypath: keypath4)
   }
   
   var displayLink: CADisplayLink?

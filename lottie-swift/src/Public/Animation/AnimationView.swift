@@ -524,6 +524,16 @@ final public class AnimationView: LottieView {
     return animationLayer.convert(point, to: sublayer)
   }
   
+  public func setNodeIsEnabled(isEnabled: Bool, keypath: AnimationKeypath) {
+    guard let animationLayer = animationLayer else { return }
+    let nodes = animationLayer.animatorNodes(for: keypath)
+    if let nodes = nodes {
+      for node in nodes {
+        print(node)
+      }
+    }
+  }
+  
   // MARK: - Public (Markers)
   
   /**

@@ -10,6 +10,53 @@ import QuartzCore
 
 extension KeypathSearchable {
   
+  func animatorNodes(for keyPath: AnimationKeypath) -> [AnimatorNode]? {
+    // Make sure there is a current key path.
+    guard let currentKey = keyPath.currentKey else { return nil }
+    
+    // Now try popping the keypath for wildcard / child search
+    guard let nextKeypath = keyPath.popKey(keypathName) else {
+      // We may be on the final keypath. Check for match.
+      if let node = self as? AnimatorNode,
+        currentKey.equalsKeypath(keypathName) {
+        // This is the final keypath and matches self. Return.s
+        return [node]
+      }
+      /// Nope. Stop Search
+      return nil
+    }
+    
+    var results: [AnimatorNode] = []
+    
+    if let node = self as? AnimatorNode,
+      nextKeypath.currentKey == nil {
+      // Keypath matched self and was the final keypath.
+      results.append(node)
+    }
+    
+    for child in childKeypaths {
+      guard let childNode = child as? AnimatorNode else { continue }
+      
+      // Check if the child has any nodes matching the next keypath.
+      if let foundNodes = childNode.animatorNodes(for: nextKeypath) {
+        results.append(contentsOf: foundNodes)
+      }
+      
+      // In this case the current key is fuzzy, and both child and self have the same name. Keep digging!
+      if currentKey.keyPathType == .fuzzyWildcard,
+        child.keypathName == keypathName,
+        let foundNodes = childNode.animatorNodes(for: keyPath) {
+        results.append(contentsOf: foundNodes)
+      }
+    }
+    
+    guard results.count > 0 else {
+      return nil
+    }
+    
+    return results
+  }
+  
   func nodeProperties(for keyPath: AnimationKeypath) -> [AnyNodeProperty]? {
     guard let nextKeypath = keyPath.popKey(keypathName) else {
       /// Nope. Stop Search
@@ -104,14 +151,18 @@ extension AnimationKeypath {
     return nil
   }
   
+  // Pops the top keypath from the stack if the keyname matches.
   func popKey(_ keyname: String) -> AnimationKeypath? {
     guard let currentKey = currentKey,
       currentKey.equalsKeypath(keyname),
       keys.count > 1 else {
+        // Current key either doesnt match or we are on the last key.
         return nil
     }
     
+    // Pop the keypath from the stack and return the new stack.
     let newKeys: [String]
+    
     if currentKey.keyPathType == .fuzzyWildcard {
       /// Dont remove if current key is a fuzzy wildcard, and if the next keypath doesnt equal keypathname
       if nextKeypath == keyname {
