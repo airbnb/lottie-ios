@@ -104,6 +104,11 @@ class GradientStrokeNode: AnimatorNode, RenderNode {
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+  var isEnabled: Bool = true {
+    didSet {
+      strokeRender.isEnabled = isEnabled
+    }
+  }
   
   func localUpdatesPermeateDownstream() -> Bool {
     return false

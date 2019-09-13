@@ -34,7 +34,8 @@ class ShapeRenderLayer: ShapeContainerLayer {
       "anchorPoint" : NSNull(),
       "path" : NSNull(),
       "transform" : NSNull(),
-      "opacity" : NSNull()
+      "opacity" : NSNull(),
+      "hidden" : NSNull(),
     ]
     shapeLayer.actions = [
       "position" : NSNull(),
@@ -46,6 +47,7 @@ class ShapeRenderLayer: ShapeContainerLayer {
       "lineWidth" : NSNull(),
       "miterLimit" : NSNull(),
       "lineDashPhase" : NSNull(),
+      "hidden" : NSNull(),
     ]
     addSublayer(shapeLayer)
   }
@@ -63,6 +65,8 @@ class ShapeRenderLayer: ShapeContainerLayer {
   }
   
   override func hasRenderUpdate(forFrame: CGFloat) -> Bool {
+    self.isHidden = !renderer.isEnabled
+    guard self.isHidden == false else { return false }
     return renderer.hasRenderUpdates(forFrame)
   }
   

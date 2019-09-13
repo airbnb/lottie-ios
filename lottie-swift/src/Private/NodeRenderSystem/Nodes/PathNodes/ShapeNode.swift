@@ -48,6 +48,14 @@ class ShapeNode: AnimatorNode, PathNode {
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+  var isEnabled: Bool = true {
+    didSet{
+      if !isEnabled {
+        // Clear the path output.
+        self.pathOutput.removePaths(updateFrame: nil)
+      }
+    }
+  }
   
   func rebuildOutputs(frame: CGFloat) {
     pathOutput.setPath(properties.path.value, updateFrame: frame)

@@ -58,6 +58,7 @@ protocol AnimatorNode: class, KeypathSearchable {
   func rebuildOutputs(frame: CGFloat)
   
   /// Setters for marking current node state.
+  var isEnabled: Bool { get set }
   var hasLocalUpdates: Bool { get set }
   var hasUpstreamUpdates: Bool { get set }
   var lastUpdateFrame: CGFloat? { get set }
@@ -103,6 +104,11 @@ extension AnimatorNode {
   }
 
   @discardableResult func updateOutputs(_ frame: CGFloat, forceOutputUpdate: Bool) -> Bool {
+    if !isEnabled {
+      lastUpdateFrame = nil
+      return hasUpstreamUpdates
+    }
+    
     if forceOutputUpdate == false && lastUpdateFrame != nil && lastUpdateFrame! == frame {
       /// This node has already updated for this frame. Go ahead and return the results.
       return hasUpstreamUpdates || hasLocalUpdates
@@ -133,8 +139,12 @@ extension AnimatorNode {
       return localUpdatesPermeateDownstream() ? hasUpstreamUpdates || hasLocalUpdates : hasUpstreamUpdates
     }
     
-    /// Are there local updates? If so mark the node.
-    hasLocalUpdates = forceLocalUpdate ? forceLocalUpdate : propertyMap.needsLocalUpdate(frame: frame)
+    if isEnabled {
+      /// Are there local updates? If so mark the node.
+      hasLocalUpdates = forceLocalUpdate ? forceLocalUpdate : propertyMap.needsLocalUpdate(frame: frame)
+    } else {
+      hasLocalUpdates = false
+    }
     
     /// Were there upstream updates? If so mark the node
     hasUpstreamUpdates = parentNode?.updateContents(frame, forceLocalUpdate: forceLocalUpdate) ?? false
@@ -145,8 +155,10 @@ extension AnimatorNode {
       propertyMap.updateNodeProperties(frame: frame)
     }
     
-    /// Ask the node to perform any other updates it might have.
-    hasUpstreamUpdates = performAdditionalLocalUpdates(frame: frame, forceLocalUpdate: forceLocalUpdate) || hasUpstreamUpdates
+    if isEnabled {
+      /// Ask the node to perform any other updates it might have.
+      hasUpstreamUpdates = performAdditionalLocalUpdates(frame: frame, forceLocalUpdate: forceLocalUpdate) || hasUpstreamUpdates
+    }
     
     /// If the node can update nodes downstream, notify them, otherwise pass on any upstream updates downstream.
     return localUpdatesPermeateDownstream() ? hasUpstreamUpdates || hasLocalUpdates : hasUpstreamUpdates

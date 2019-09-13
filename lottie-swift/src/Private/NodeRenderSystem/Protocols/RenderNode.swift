@@ -19,6 +19,7 @@ protocol Renderable {
   
   /// The last frame in which this node was updated.
   var hasUpdate: Bool { get }
+  var isEnabled: Bool { get set }
   
   func hasRenderUpdates(_ forFrame: CGFloat) -> Bool
   

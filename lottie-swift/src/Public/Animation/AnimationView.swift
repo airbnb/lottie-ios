@@ -524,13 +524,21 @@ final public class AnimationView: LottieView {
     return animationLayer.convert(point, to: sublayer)
   }
   
+  /**
+   Sets the enabled state of all animator nodes found with the keypath search.
+   This can be used to interactively enable / disable parts of the animation.
+
+   - Parameter isEnabled: When true the animator nodes affect the rendering tree. When false the node is removed from the tree.
+   - Parameter keypath: The keypath used to find the node(s).
+   */
   public func setNodeIsEnabled(isEnabled: Bool, keypath: AnimationKeypath) {
     guard let animationLayer = animationLayer else { return }
     let nodes = animationLayer.animatorNodes(for: keypath)
     if let nodes = nodes {
       for node in nodes {
-        print(node)
+        node.isEnabled = isEnabled
       }
+      self.forceDisplayUpdate()
     }
   }
   
