@@ -524,6 +524,8 @@ final public class AnimationView: LottieView {
     return animationLayer.convert(point, to: sublayer)
   }
   
+  // MARK: - Public (Animation Contents)
+  
   /**
    Sets the enabled state of all animator nodes found with the keypath search.
    This can be used to interactively enable / disable parts of the animation.
