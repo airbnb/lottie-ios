@@ -617,6 +617,21 @@
 		486E89F3220B790E007CD915 /* Interpolatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E879D220B78BF007CD915 /* Interpolatable.swift */; };
 		486E89F4220B790E007CD915 /* KeyframeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E879E220B78BF007CD915 /* KeyframeExtensions.swift */; };
 		486E89F5220B790E007CD915 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E87A0220B78BF007CD915 /* AnimationContext.swift */; };
+		BD4FE9032326C4E80011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
+		BD4FE9042326C5F90011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
+		BD4FE9052326C5FB0011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
+		BD4FE9062326C5FC0011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
+		BD4FE9072326C5FC0011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
+		BD4FE90A2327A24E0011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
+		BD4FE90B2327A2700011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
+		BD4FE90C2327A2710011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
+		BD4FE90D2327A2710011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
+		BD4FE90E2327A2710011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
+		BD4FE9102327A7AF0011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
+		BD4FE9112327AC310011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
+		BD4FE9122327AC320011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
+		BD4FE9132327AC320011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
+		BD4FE9142327AC320011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -767,6 +782,9 @@
 		486E879D220B78BF007CD915 /* Interpolatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolatable.swift; sourceTree = "<group>"; };
 		486E879E220B78BF007CD915 /* KeyframeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyframeExtensions.swift; sourceTree = "<group>"; };
 		486E87A0220B78BF007CD915 /* AnimationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
+		BD4FE9022326C4E80011B14B /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
+		BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadowEffect.swift; sourceTree = "<group>"; };
+		BD4FE90F2327A7AF0011B14B /* EffectValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1212,6 +1230,9 @@
 				486E8779220B78BF007CD915 /* Transform.swift */,
 				486E877A220B78BF007CD915 /* Mask.swift */,
 				486E877B220B78BF007CD915 /* Marker.swift */,
+				BD4FE9022326C4E80011B14B /* Effect.swift */,
+				BD4FE90F2327A7AF0011B14B /* EffectValue.swift */,
+				BD4FE9082327A21F0011B14B /* Effects */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -1316,6 +1337,14 @@
 				486E87A0220B78BF007CD915 /* AnimationContext.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BD4FE9082327A21F0011B14B /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */,
+			);
+			path = Effects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1529,6 +1558,7 @@
 				486E87A9220B78D1007CD915 /* AnimatedButton.swift in Sources */,
 				486E87AA220B78D1007CD915 /* LottieView.swift in Sources */,
 				486E87AB220B78D1007CD915 /* AnimationSubview.swift in Sources */,
+				BD4FE9102327A7AF0011B14B /* EffectValue.swift in Sources */,
 				486E87AC220B78D1007CD915 /* AnimatedControl.swift in Sources */,
 				486E87AD220B78D1007CD915 /* AnimationTime.swift in Sources */,
 				486E87AE220B78D1007CD915 /* Vectors.swift in Sources */,
@@ -1540,6 +1570,7 @@
 				486E87B4220B78D1007CD915 /* ColorValueProvider.swift in Sources */,
 				486E87B5220B78D1007CD915 /* FloatValueProvider.swift in Sources */,
 				486E87B6220B78D1007CD915 /* SizeValueProvider.swift in Sources */,
+				BD4FE90A2327A24E0011B14B /* DropShadowEffect.swift in Sources */,
 				486E87B7220B78D1007CD915 /* PointValueProvider.swift in Sources */,
 				486E87B8220B78D1007CD915 /* CompositionLayer.swift in Sources */,
 				486E87B9220B78D1007CD915 /* NullCompositionLayer.swift in Sources */,
@@ -1592,6 +1623,7 @@
 				486E87E6220B78D1007CD915 /* Ellipse.swift in Sources */,
 				486E87E7220B78D1007CD915 /* Trim.swift in Sources */,
 				486E87E8220B78D1007CD915 /* ShapeItem.swift in Sources */,
+				BD4FE9032326C4E80011B14B /* Effect.swift in Sources */,
 				486E87E9220B78D1007CD915 /* Shape.swift in Sources */,
 				486E87EA220B78D1007CD915 /* Group.swift in Sources */,
 				486E87EB220B78D1007CD915 /* ShapeTransform.swift in Sources */,
@@ -1660,6 +1692,7 @@
 				486E8823220B78E4007CD915 /* LottieView.swift in Sources */,
 				486E8824220B78E4007CD915 /* AnimationSubview.swift in Sources */,
 				486E8825220B78E4007CD915 /* AnimatedControl.swift in Sources */,
+				BD4FE9112327AC310011B14B /* EffectValue.swift in Sources */,
 				486E8826220B78E4007CD915 /* AnimationTime.swift in Sources */,
 				486E8827220B78E4007CD915 /* Vectors.swift in Sources */,
 				486E8828220B78E4007CD915 /* Color.swift in Sources */,
@@ -1671,6 +1704,7 @@
 				486E882E220B78E4007CD915 /* FloatValueProvider.swift in Sources */,
 				486E882F220B78E4007CD915 /* SizeValueProvider.swift in Sources */,
 				486E8830220B78E4007CD915 /* PointValueProvider.swift in Sources */,
+				BD4FE90B2327A2700011B14B /* DropShadowEffect.swift in Sources */,
 				486E8831220B78E4007CD915 /* CompositionLayer.swift in Sources */,
 				486E8832220B78E4007CD915 /* NullCompositionLayer.swift in Sources */,
 				25D5437422307C8B00ED90FA /* CompatibleAnimationView.swift in Sources */,
@@ -1723,6 +1757,7 @@
 				486E8860220B78E4007CD915 /* Trim.swift in Sources */,
 				486E8861220B78E4007CD915 /* ShapeItem.swift in Sources */,
 				486E8862220B78E4007CD915 /* Shape.swift in Sources */,
+				BD4FE9052326C5FB0011B14B /* Effect.swift in Sources */,
 				486E8863220B78E4007CD915 /* Group.swift in Sources */,
 				486E8864220B78E4007CD915 /* ShapeTransform.swift in Sources */,
 				486E8865220B78E4007CD915 /* Merge.swift in Sources */,
@@ -1795,6 +1830,7 @@
 				486E88A9220B78F4007CD915 /* SolidCompositionLayer.swift in Sources */,
 				486E88AA220B78F4007CD915 /* PreCompositionLayer.swift in Sources */,
 				486E88AB220B78F4007CD915 /* ImageCompositionLayer.swift in Sources */,
+				BD4FE9122327AC320011B14B /* EffectValue.swift in Sources */,
 				486E88AC220B78F4007CD915 /* ShapeCompositionLayer.swift in Sources */,
 				486E88AD220B78F4007CD915 /* MaskContainerLayer.swift in Sources */,
 				486E88AE220B78F4007CD915 /* AnimationContainer.swift in Sources */,
@@ -1829,6 +1865,7 @@
 				486E88CB220B78F4007CD915 /* KeyframeInterpolator.swift in Sources */,
 				486E88CC220B78F4007CD915 /* SingleValueProvider.swift in Sources */,
 				486E88CD220B78F4007CD915 /* GroupInterpolator.swift in Sources */,
+				BD4FE9042326C5F90011B14B /* Effect.swift in Sources */,
 				486E88CE220B78F4007CD915 /* ItemsExtension.swift in Sources */,
 				486E88CF220B78F4007CD915 /* ShapeRenderLayer.swift in Sources */,
 				486E88D0220B78F4007CD915 /* ShapeContainerLayer.swift in Sources */,
@@ -1867,6 +1904,7 @@
 				486E88F1220B78F4007CD915 /* Glyph.swift in Sources */,
 				486E88F2220B78F4007CD915 /* TextAnimator.swift in Sources */,
 				486E88F3220B78F4007CD915 /* Font.swift in Sources */,
+				BD4FE90C2327A2710011B14B /* DropShadowEffect.swift in Sources */,
 				486E88F4220B78F4007CD915 /* ImageAsset.swift in Sources */,
 				486E88F5220B78F4007CD915 /* PrecompAsset.swift in Sources */,
 				486E88F6220B78F4007CD915 /* AssetLibrary.swift in Sources */,
@@ -1958,6 +1996,7 @@
 				486E8939220B78FF007CD915 /* StarNode.swift in Sources */,
 				486E893A220B78FF007CD915 /* GradientFillNode.swift in Sources */,
 				486E893B220B78FF007CD915 /* StrokeNode.swift in Sources */,
+				BD4FE9142327AC320011B14B /* EffectValue.swift in Sources */,
 				486E893C220B78FF007CD915 /* FillNode.swift in Sources */,
 				486E893D220B78FF007CD915 /* GradientStrokeNode.swift in Sources */,
 				486E893E220B78FF007CD915 /* ValueContainer.swift in Sources */,
@@ -2023,7 +2062,9 @@
 				486E8978220B78FF007CD915 /* CompoundBezierPath.swift in Sources */,
 				486E8979220B78FF007CD915 /* ColorExtension.swift in Sources */,
 				486E897A220B78FF007CD915 /* PathElement.swift in Sources */,
+				BD4FE90D2327A2710011B14B /* DropShadowEffect.swift in Sources */,
 				486E897B220B78FF007CD915 /* CurveVertex.swift in Sources */,
+				BD4FE9062326C5FC0011B14B /* Effect.swift in Sources */,
 				486E897C220B78FF007CD915 /* VectorsExtensions.swift in Sources */,
 				486E897D220B78FF007CD915 /* InterpolatableExtensions.swift in Sources */,
 				486E897E220B78FF007CD915 /* Interpolatable.swift in Sources */,
@@ -2096,6 +2137,7 @@
 				486E89C2220B790E007CD915 /* Ellipse.swift in Sources */,
 				486E89C3220B790E007CD915 /* Trim.swift in Sources */,
 				486E89C4220B790E007CD915 /* ShapeItem.swift in Sources */,
+				BD4FE9072326C5FC0011B14B /* Effect.swift in Sources */,
 				486E89C5220B790E007CD915 /* Shape.swift in Sources */,
 				486E89C6220B790E007CD915 /* Group.swift in Sources */,
 				486E89C7220B790E007CD915 /* ShapeTransform.swift in Sources */,
@@ -2126,12 +2168,14 @@
 				486E89E0220B790E007CD915 /* TextAnimator.swift in Sources */,
 				486E89E1220B790E007CD915 /* Font.swift in Sources */,
 				486E89E2220B790E007CD915 /* ImageAsset.swift in Sources */,
+				BD4FE90E2327A2710011B14B /* DropShadowEffect.swift in Sources */,
 				486E89E3220B790E007CD915 /* PrecompAsset.swift in Sources */,
 				486E89E4220B790E007CD915 /* AssetLibrary.swift in Sources */,
 				486E89E5220B790E007CD915 /* Asset.swift in Sources */,
 				486E89E6220B790E007CD915 /* LayerDebugging.swift in Sources */,
 				486E89E7220B790E007CD915 /* AnimatorNodeDebugging.swift in Sources */,
 				486E89E8220B790E007CD915 /* CGFloatExtensions.swift in Sources */,
+				BD4FE9132327AC320011B14B /* EffectValue.swift in Sources */,
 				486E89E9220B790E007CD915 /* AnimationKeypathExtension.swift in Sources */,
 				4866743722249C0600258C00 /* TextCompositionLayer.swift in Sources */,
 				486E89EA220B790E007CD915 /* MathKit.swift in Sources */,
