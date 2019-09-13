@@ -94,6 +94,27 @@ class ViewController: UIViewController {
     twitterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 12).isActive = true
     twitterButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 20).isActive = true
     */
+    
+//    let keypath1 = AnimationKeypath(keypath: "*.Group 1")
+//    let keypath2 = AnimationKeypath(keypath: "*.Polystar 1")
+//    let keypath3 = AnimationKeypath(keypath: "**.Rectangle 1")
+//    let keypath4 = AnimationKeypath(keypath: "**.Fill 1")
+    
+    
+//    animationView.setNodeIsEnabled(isEnabled: true, keypath: keypath1)
+//    animationView.setNodeIsEnabled(isEnabled: true, keypath: keypath2)
+//    animationView.setNodeIsEnabled(isEnabled: true, keypath: keypath3)
+//    animationView.setNodeIsEnabled(isEnabled: true, keypath: keypath4)
+    
+//    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+//      print("Disabling group 1")
+//      self.animationView.setNodeIsEnabled(isEnabled: false, keypath: keypath4)
+//      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+//        print("Enabling group 1")
+//        self.animationView.setNodeIsEnabled(isEnabled: true, keypath: keypath4)
+//
+//      }
+//    }
   }
   
   var displayLink: CADisplayLink?
@@ -124,16 +145,16 @@ class ViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    animationView.play(fromProgress: 0,
-                       toProgress: 1,
-                       loopMode: LottieLoopMode.playOnce,
-                       completion: { (finished) in
-                        if finished {
-                          print("Animation Complete")
-                        } else {
-                          print("Animation cancelled")
-                        }
-    })
+//    animationView.play(fromProgress: 0,
+//                       toProgress: 1,
+//                       loopMode: LottieLoopMode.playOnce,
+//                       completion: { (finished) in
+//                        if finished {
+//                          print("Animation Complete")
+//                        } else {
+//                          print("Animation cancelled")
+//                        }
+//    })
     
   }
   

@@ -34,6 +34,8 @@ class FillRenderer: PassThroughOutputNode, Renderable {
   
   let shouldRenderInContext: Bool = false
   
+  var isEnabled: Bool = true
+  
   func updateShapeLayer(layer: CAShapeLayer) {
     layer.fillColor = color
     layer.opacity = Float(opacity)

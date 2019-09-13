@@ -55,7 +55,7 @@ class PathOutputNode: NodeOutput {
   fileprivate(set) var totalLength: CGFloat = 0
   fileprivate(set) var pathObjects: [CompoundBezierPath] = []
   
-  @discardableResult func removePaths(updateFrame: CGFloat) -> [CompoundBezierPath] {
+  @discardableResult func removePaths(updateFrame: CGFloat?) -> [CompoundBezierPath] {
     lastUpdateFrame = updateFrame
     let returnPaths = pathObjects
     outputPath = nil

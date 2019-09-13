@@ -79,6 +79,19 @@ class AnimationContainer: CALayer {
     }
     return nil
   }
+  
+  func animatorNodes(for keypath: AnimationKeypath) -> [AnimatorNode]? {
+    var results = [AnimatorNode]()
+    for layer in animationLayers {
+      if let nodes = layer.animatorNodes(for: keypath) {
+        results.append(contentsOf: nodes)
+      }
+    }
+    if results.count == 0 {
+      return nil
+    }
+    return results
+  }
 
   var textProvider: AnimationTextProvider {
     get { return layerTextProvider.textProvider }
