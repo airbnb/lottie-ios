@@ -217,14 +217,16 @@ public final class CompatibleAnimationView: UIView {
     var blue: CGFloat = 0
     var alpha: CGFloat = 0
 
-    var colorspace : CGColorSpace?
+    var colorspace : CGColorSpace
 
     if #available(iOS 9.3, *) {
-        // Always use P3 colorspace for now
-        colorspace = CGColorSpace.init(name: CGColorSpace.displayP3)
+      // Always use P3 colorspace for now
+      colorspace = CGColorSpace.init(name: CGColorSpace.displayP3) ?? CGColorSpaceCreateDeviceRGB()
+    } else {
+      colorspace = CGColorSpaceCreateDeviceRGB()
     }
 
-    let convertedColor = color.cgColor.converted(to: colorspace ?? CGColorSpaceCreateDeviceRGB(), intent: .defaultIntent, options: nil)
+    let convertedColor = color.cgColor.converted(to: colorspace, intent: .defaultIntent, options: nil)
 
     if let components = convertedColor?.components, components.count == 4 {
       red = components[0]
