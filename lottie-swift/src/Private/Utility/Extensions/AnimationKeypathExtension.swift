@@ -90,7 +90,7 @@ extension KeypathSearchable {
   }
   
   func layer(for keyPath: AnimationKeypath) -> CALayer? {
-    if keyPath.currentKey == keypathName && keyPath.nextKeypath == nil {
+    if keyPath.nextKeypath == nil, let layerKey = keyPath.currentKey,  layerKey.equalsKeypath(keypathName) {
       /// We found our layer!
       return keypathLayer
     }
@@ -165,7 +165,8 @@ extension AnimationKeypath {
     
     if currentKey.keyPathType == .fuzzyWildcard {
       /// Dont remove if current key is a fuzzy wildcard, and if the next keypath doesnt equal keypathname
-      if nextKeypath == keyname {
+      if let nextKeypath = nextKeypath,
+        nextKeypath.equalsKeypath(keyname) {
         /// Remove next two keypaths. This keypath breaks the wildcard.
         var oldKeys = keys
         oldKeys.remove(at: 0)
