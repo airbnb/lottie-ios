@@ -62,10 +62,7 @@ class RectangleNode: AnimatorNode, PathNode {
   var lastUpdateFrame: CGFloat? = nil
   var isEnabled: Bool = true {
     didSet{
-      if !isEnabled {
-        // Clear the path output.
-        self.pathOutput.removePaths(updateFrame: nil)
-      }
+      self.pathOutput.isEnabled = self.isEnabled
     }
   }
   

@@ -131,6 +131,7 @@ class TextOutputNode: NodeOutput {
   }
   
   var parentTextNode: TextOutputNode?
+  var isEnabled: Bool = true
   
   init(parent: TextOutputNode?) {
     self.parentTextNode = parent

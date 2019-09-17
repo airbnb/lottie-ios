@@ -21,8 +21,15 @@ class PathOutputNode: NodeOutput {
   
   var lastUpdateFrame: CGFloat? = nil
   var lastPathBuildFrame: CGFloat? = nil
+  var isEnabled: Bool = true
   
   func hasOutputUpdates(_ forFrame: CGFloat) -> Bool {
+    guard isEnabled else {
+      let upstreamUpdates = parent?.hasOutputUpdates(forFrame) ?? false
+      outputPath = parent?.outputPath
+      return upstreamUpdates
+    }
+    
     /// Ask if parent was updated
     let upstreamUpdates = parent?.hasOutputUpdates(forFrame) ?? false
     
