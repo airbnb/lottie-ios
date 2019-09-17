@@ -11,7 +11,6 @@ import QuartzCore
 /**
  Defines the basic outputs of an animator node.
  
- var isEnabled: Bool
  */
 protocol NodeOutput {
   
