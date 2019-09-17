@@ -71,8 +71,6 @@ class StrokeRenderer: PassThroughOutputNode, Renderable {
   
   var shouldRenderInContext: Bool = false
   
-  var isEnabled: Bool = true
-  
   var color: CGColor? {
     didSet {
       hasUpdate = true

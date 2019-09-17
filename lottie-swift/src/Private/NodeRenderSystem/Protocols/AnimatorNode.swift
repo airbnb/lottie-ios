@@ -10,6 +10,7 @@ import QuartzCore
 
 /**
  Defines the basic outputs of an animator node.
+ 
  */
 protocol NodeOutput {
   
@@ -20,6 +21,8 @@ protocol NodeOutput {
   func hasOutputUpdates(_ forFrame: CGFloat) -> Bool
   
   var outputPath: CGPath? { get }
+  
+  var isEnabled: Bool { get set }
 }
 
 /**
@@ -104,9 +107,10 @@ extension AnimatorNode {
   }
 
   @discardableResult func updateOutputs(_ frame: CGFloat, forceOutputUpdate: Bool) -> Bool {
-    if !isEnabled {
-      lastUpdateFrame = nil
-      return hasUpstreamUpdates
+    guard isEnabled else {
+      // Disabled node, pass through.
+      lastUpdateFrame = frame
+      return parentNode?.updateOutputs(frame, forceOutputUpdate: forceOutputUpdate) ?? false
     }
     
     if forceOutputUpdate == false && lastUpdateFrame != nil && lastUpdateFrame! == frame {
@@ -134,17 +138,18 @@ extension AnimatorNode {
   
   /// Rebuilds the content of this node, and upstream nodes if necessary.
   @discardableResult func updateContents(_ frame: CGFloat, forceLocalUpdate: Bool) -> Bool {
+    guard isEnabled else {
+      // Disabled node, pass through.
+      return parentNode?.updateContents(frame, forceLocalUpdate: forceLocalUpdate) ?? false
+    }
+    
     if forceLocalUpdate == false && lastUpdateFrame != nil && lastUpdateFrame! == frame {
       /// This node has already updated for this frame. Go ahead and return the results.
       return localUpdatesPermeateDownstream() ? hasUpstreamUpdates || hasLocalUpdates : hasUpstreamUpdates
     }
     
-    if isEnabled {
-      /// Are there local updates? If so mark the node.
-      hasLocalUpdates = forceLocalUpdate ? forceLocalUpdate : propertyMap.needsLocalUpdate(frame: frame)
-    } else {
-      hasLocalUpdates = false
-    }
+    /// Are there local updates? If so mark the node.
+    hasLocalUpdates = forceLocalUpdate ? forceLocalUpdate : propertyMap.needsLocalUpdate(frame: frame)
     
     /// Were there upstream updates? If so mark the node
     hasUpstreamUpdates = parentNode?.updateContents(frame, forceLocalUpdate: forceLocalUpdate) ?? false
@@ -155,10 +160,8 @@ extension AnimatorNode {
       propertyMap.updateNodeProperties(frame: frame)
     }
     
-    if isEnabled {
-      /// Ask the node to perform any other updates it might have.
-      hasUpstreamUpdates = performAdditionalLocalUpdates(frame: frame, forceLocalUpdate: forceLocalUpdate) || hasUpstreamUpdates
-    }
+    /// Ask the node to perform any other updates it might have.
+    hasUpstreamUpdates = performAdditionalLocalUpdates(frame: frame, forceLocalUpdate: forceLocalUpdate) || hasUpstreamUpdates
     
     /// If the node can update nodes downstream, notify them, otherwise pass on any upstream updates downstream.
     return localUpdatesPermeateDownstream() ? hasUpstreamUpdates || hasLocalUpdates : hasUpstreamUpdates

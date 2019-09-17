@@ -19,8 +19,6 @@ class GradientStrokeRenderer: PassThroughOutputNode, Renderable {
   
   var shouldRenderInContext: Bool = true
   
-  var isEnabled: Bool = true
-  
   func updateShapeLayer(layer: CAShapeLayer) {
     /// Not Applicable
   }

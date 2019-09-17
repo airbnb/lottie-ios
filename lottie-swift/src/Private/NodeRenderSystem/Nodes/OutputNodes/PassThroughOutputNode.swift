@@ -17,6 +17,7 @@ class PassThroughOutputNode: NodeOutput {
   let parent: NodeOutput?
   
   var hasUpdate: Bool = false
+  var isEnabled: Bool = true
   
   func hasOutputUpdates(_ forFrame: CGFloat) -> Bool {
     /// Changes to this node do not affect downstream nodes.

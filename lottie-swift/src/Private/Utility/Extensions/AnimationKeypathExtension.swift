@@ -42,9 +42,10 @@ extension KeypathSearchable {
         results.append(contentsOf: foundNodes)
       }
       
-      // In this case the current key is fuzzy, and both child and self have the same name. Keep digging!
+      // In this case the current key is fuzzy, and both child and self match the next keyname. Keep digging!
       if currentKey.keyPathType == .fuzzyWildcard,
-        child.keypathName == keypathName,
+        let nextKeypath = keyPath.nextKeypath,
+        nextKeypath.equalsKeypath(child.keypathName),
         let foundNodes = childNode.animatorNodes(for: keyPath) {
         results.append(contentsOf: foundNodes)
       }
