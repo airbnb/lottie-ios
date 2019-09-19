@@ -26,10 +26,10 @@ public enum ColorFormatDenominator {
 
 public struct Color {
   
-  var r: Double
-  var g: Double
-  var b: Double
-  var a: Double
+  public var r: Double
+  public var g: Double
+  public var b: Double
+  public var a: Double
   
   public init(r: Double, g: Double, b: Double, a: Double, denominator: ColorFormatDenominator = .One) {
     self.r = r / denominator.value
