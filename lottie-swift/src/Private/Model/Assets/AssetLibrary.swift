@@ -10,10 +10,10 @@ import Foundation
 class AssetLibrary: Codable {
   
   /// The Assets
-  let assets: [String : Asset]
+  private(set) var  assets: [String : Asset]
   
-  let imageAssets: [String : ImageAsset]
-  let precompAssets: [String : PrecompAsset]
+  private(set) var  imageAssets: [String : ImageAsset]
+  private(set) var precompAssets: [String : PrecompAsset]
   
   required init(from decoder: Decoder) throws {
     var container = try decoder.unkeyedContainer()
@@ -44,5 +44,23 @@ class AssetLibrary: Codable {
   func encode(to encoder: Encoder) throws {
     var container = encoder.unkeyedContainer()
     try container.encode(contentsOf: Array(assets.values))
+  }
+}
+
+extension AssetLibrary: ContentsReplaceable {
+  func replaceContents(with object: ContentsReplaceable) {
+    guard let replacementLibrary = object as? AssetLibrary else { return }
+    for assetKey in self.precompAssets.keys {
+      if let replacement = replacementLibrary.precompAssets[assetKey] {
+        self.precompAssets[assetKey] = replacement
+        self.assets[assetKey] = replacement
+      }
+    }
+    for assetKey in self.imageAssets.keys {
+      if let replacement = replacementLibrary.imageAssets[assetKey] {
+        self.imageAssets[assetKey] = replacement
+        self.assets[assetKey] = replacement
+      }
+    }
   }
 }

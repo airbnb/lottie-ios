@@ -7,6 +7,11 @@
 
 import Foundation
 
+
+protocol ContentsReplaceable {
+  func replaceContents(with object: ContentsReplaceable)
+}
+
 public enum CoordinateSpace: Int, Codable {
   case type2d
   case type3d
