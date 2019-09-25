@@ -11,7 +11,7 @@ import Foundation
 class ShapeLayerModel: LayerModel {
   
   /// A list of shape items.
-  let items: [ShapeItem]
+  private(set) var items: [ShapeItem]
   
   private enum CodingKeys : String, CodingKey {
     case items = "shapes"
@@ -29,4 +29,11 @@ class ShapeLayerModel: LayerModel {
     try container.encode(self.items, forKey: .items)
   }
   
+}
+
+extension ShapeLayerModel: ContentsReplaceable {
+  func replaceContents(with object: ContentsReplaceable) {
+    guard let replacementLayer = object as? ShapeLayerModel else { return }
+    self.items = Array(replacementLayer.items)
+  }
 }

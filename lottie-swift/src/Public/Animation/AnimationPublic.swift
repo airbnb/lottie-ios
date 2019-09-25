@@ -122,6 +122,33 @@ public extension Animation {
     }
   }
   
+  /**
+   Creates a new animation by merging the contents of two animations.
+   
+   Layers of the reciever are matched by name to the provided animation. If a layer
+   has a match the contents of the provided animation will replace the contents
+   of the reciever's layer.
+   
+   If a match is not found for a layer of the provided animation, it is ignored.
+   
+   */
+  
+  func overrideLayerContents(with animation: Animation) {
+    if let replacementLibrary = animation.assetLibrary {
+      self.assetLibrary?.replaceContents(with: replacementLibrary)
+    }
+    
+    let overrideLayersMap = animation.layers.reduce(into: [String: LayerModel]()) {
+      $0[$1.name] = $1
+    }
+    for layer in self.layers {
+      if let contentsLayer = layer as? ContentsReplaceable,
+        let replacement = overrideLayersMap[layer.name] as? ContentsReplaceable {
+        contentsLayer.replaceContents(with: replacement)
+      }
+    }
+  }
+  
   // MARK: Animation (Helpers)
   
   /**
