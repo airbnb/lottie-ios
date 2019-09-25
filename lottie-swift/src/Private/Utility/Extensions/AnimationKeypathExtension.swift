@@ -34,9 +34,7 @@ extension KeypathSearchable {
       results.append(node)
     }
     
-    for child in childKeypaths {
-      guard let childNode = child as? AnimatorNode else { continue }
-      
+    for childNode in childKeypaths {
       // Check if the child has any nodes matching the next keypath.
       if let foundNodes = childNode.animatorNodes(for: nextKeypath) {
         results.append(contentsOf: foundNodes)
@@ -45,7 +43,7 @@ extension KeypathSearchable {
       // In this case the current key is fuzzy, and both child and self match the next keyname. Keep digging!
       if currentKey.keyPathType == .fuzzyWildcard,
         let nextKeypath = keyPath.nextKeypath,
-        nextKeypath.equalsKeypath(child.keypathName),
+        nextKeypath.equalsKeypath(childNode.keypathName),
         let foundNodes = childNode.animatorNodes(for: keyPath) {
         results.append(contentsOf: foundNodes)
       }
