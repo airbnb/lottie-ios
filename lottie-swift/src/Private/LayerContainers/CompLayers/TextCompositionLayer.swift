@@ -23,6 +23,31 @@ class DisabledTextLayer: CATextLayer {
   }
 }
 
+extension TextJustification {
+  var textAlignment: NSTextAlignment {
+    switch self {
+    case .left:
+      return .left
+    case .right:
+      return .right
+    case .center:
+      return .center
+    }
+  }
+  
+  var caTextAlignement: CATextLayerAlignmentMode {
+    switch self {
+    case .left:
+      return .left
+    case .right:
+      return .right
+    case .center:
+      return .center
+    }
+  }
+  
+}
+
 class TextCompositionLayer: CompositionLayer {
   
   let rootNode: TextAnimatorNode?
@@ -73,9 +98,11 @@ class TextCompositionLayer: CompositionLayer {
 
     super.init(layer: layer)
   }
-  
+
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
     guard let textDocument = textDocument else { return }
+    
+    textLayer.contentsScale = self.renderScale
     let documentUpdate = textDocument.hasUpdate(frame: frame)
     let animatorUpdate = rootNode?.updateContents(frame, forceLocalUpdate: forceUpdates) ?? false
     guard documentUpdate == true || animatorUpdate == true else { return }
@@ -107,14 +134,16 @@ class TextCompositionLayer: CompositionLayer {
     
 
     let textString = textProvider.textFor(keypathName: self.keypathName, sourceText: text.text)
-    let attributedString = NSAttributedString(string: textString, attributes: attributes )
-
+    
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.lineSpacing = CGFloat(text.lineHeight)
+    paragraphStyle.alignment = text.justification.textAlignment
     attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
     
-
+    let attributedString = NSAttributedString(string: textString, attributes: attributes )
+    
     let framesetter = CTFramesetterCreateWithAttributedString(attributedString)
+    
     let size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,
                                                             CFRange(location: 0,length: 0),
                                                             nil,
@@ -122,30 +151,26 @@ class TextCompositionLayer: CompositionLayer {
                                                                    height: CGFloat.greatestFiniteMagnitude),
                                                             nil)
     
-    textLayer.anchorPoint = self.calculateAnchor(withAnchorPoint: anchorPoint, justification: text.justification, scale: scale, andSize: size)
+    let baselinePosition = CTFontGetAscent(ctFont)
+    let textAnchor: CGPoint
+    switch text.justification {
+    case .left:
+      textAnchor = CGPoint(x: 0, y: baselinePosition)
+    case .right:
+      textAnchor = CGPoint(x: size.width, y: baselinePosition)
+    case .center:
+      textAnchor = CGPoint(x: size.width * 0.5, y: baselinePosition)
+    }
+    let anchor = textAnchor + anchorPoint.pointValue
+  
+    textLayer.anchorPoint = CGPoint(x: anchor.x.remap(fromLow: 0, fromHigh: size.width, toLow: 0, toHigh: 1),
+                                    y: anchor.y.remap(fromLow: 0, fromHigh: size.height, toLow: 0, toHigh: 1))
     textLayer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
     textLayer.transform = CATransform3DIdentity
     textLayer.frame = CGRect(origin: .zero, size: size)
     textLayer.position = CGPoint.zero
     textLayer.transform = matrix
     textLayer.string = attributedString
-  }
-  
-  private func calculateAnchor(withAnchorPoint anchorPoint: Vector3D, justification: TextJustification, scale: Vector3D, andSize size: CGSize) -> CGPoint {
-    let x_value: Double = (anchorPoint.x / Double(size.width)).isNaN ? 0 : (anchorPoint.x / Double(size.width)) * (scale.x / 100.0)
-    let y_value: Double = (anchorPoint.y / Double(size.height)).isNaN ? 0 : (anchorPoint.y / Double(size.height)) * (scale.y / 100.0)
-    let calibratedAnchorPoint = CGPoint(x: x_value, y: y_value)
-    
-    let justificationAnchorPoint: CGPoint
-    switch justification {
-    case .left:
-      justificationAnchorPoint = CGPoint(x: 0, y: 1)
-    case .right:
-      justificationAnchorPoint = CGPoint(x: 1, y: 1)
-    case .center:
-      justificationAnchorPoint = CGPoint(x: 0.5, y: 1)
-    }
-
-    return calibratedAnchorPoint + justificationAnchorPoint
+    textLayer.alignmentMode = text.justification.caTextAlignement
   }
 }
