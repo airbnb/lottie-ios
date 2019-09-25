@@ -47,6 +47,10 @@ extension CGFloat: Interpolatable {
   }
   
   func remap(fromLow: CGFloat, fromHigh: CGFloat, toLow: CGFloat, toHigh: CGFloat) -> CGFloat {
+    guard (fromHigh - fromLow) != 0 else {
+      // Would produce NAN
+      return 0
+    }
     return toLow + (self - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)
   }
   
