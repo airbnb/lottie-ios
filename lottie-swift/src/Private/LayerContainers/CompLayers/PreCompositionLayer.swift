@@ -14,12 +14,6 @@ class PreCompositionLayer: CompositionLayer {
   let remappingNode: NodeProperty<Vector1D>?
   fileprivate var animationLayers: [CompositionLayer]
   
-  override var renderScale: CGFloat {
-    didSet {
-      animationLayers.forEach( { $0.renderScale = renderScale } )
-    }
-  }
-  
   init(precomp: PreCompLayerModel,
        asset: PrecompAsset,
        layerImageProvider: LayerImageProvider,
@@ -100,5 +94,10 @@ class PreCompositionLayer: CompositionLayer {
       return super.keypathProperties
     }
     return ["Time Remap" : remappingNode]
+  }
+  
+  override func updateRenderScale() {
+    super.updateRenderScale()
+    animationLayers.forEach( { $0.renderScale = renderScale } )
   }
 }

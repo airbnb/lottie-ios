@@ -102,7 +102,6 @@ class TextCompositionLayer: CompositionLayer {
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
     guard let textDocument = textDocument else { return }
     
-    textLayer.contentsScale = self.renderScale
     let documentUpdate = textDocument.hasUpdate(frame: frame)
     let animatorUpdate = rootNode?.updateContents(frame, forceLocalUpdate: forceUpdates) ?? false
     guard documentUpdate == true || animatorUpdate == true else { return }
@@ -172,5 +171,10 @@ class TextCompositionLayer: CompositionLayer {
     textLayer.transform = matrix
     textLayer.string = attributedString
     textLayer.alignmentMode = text.justification.caTextAlignement
+  }
+  
+  override func updateRenderScale() {
+    super.updateRenderScale()
+    textLayer.contentsScale = self.renderScale
   }
 }
