@@ -56,7 +56,6 @@ class TextCompositionLayer: CompositionLayer {
   let interpolatableScale: KeyframeInterpolator<Vector3D>?
   
   let textLayer: DisabledTextLayer = DisabledTextLayer()
-  let textStrokeLayer: DisabledTextLayer = DisabledTextLayer()
   var textProvider: AnimationTextProvider
   
   init(textLayer: TextLayerModel, textProvider: AnimationTextProvider) {
@@ -76,9 +75,8 @@ class TextCompositionLayer: CompositionLayer {
     
     super.init(layer: textLayer, size: .zero)
     contentsLayer.addSublayer(self.textLayer)
-    contentsLayer.addSublayer(self.textStrokeLayer)
     self.textLayer.masksToBounds = false
-    self.textStrokeLayer.masksToBounds = false
+    
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -105,8 +103,6 @@ class TextCompositionLayer: CompositionLayer {
     guard let textDocument = textDocument else { return }
     
     textLayer.contentsScale = self.renderScale
-    textStrokeLayer.contentsScale = self.renderScale
-    
     let documentUpdate = textDocument.hasUpdate(frame: frame)
     let animatorUpdate = rootNode?.updateContents(frame, forceLocalUpdate: forceUpdates) ?? false
     guard documentUpdate == true || animatorUpdate == true else { return }
@@ -120,11 +116,10 @@ class TextCompositionLayer: CompositionLayer {
     let strokeColor = rootNode?.textOutputNode.strokeColor ?? text.strokeColorData?.cgColorValue
     let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
     let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
+    // TODO LINE HEIGHT
     
     let matrix = rootNode?.textOutputNode.xform ?? CATransform3DIdentity
     let ctFont = CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil)
-    
-    let textString = textProvider.textFor(keypathName: self.keypathName, sourceText: text.text)
     
     var attributes: [NSAttributedString.Key : Any] = [
       NSAttributedString.Key.font: ctFont,
@@ -132,22 +127,20 @@ class TextCompositionLayer: CompositionLayer {
       NSAttributedString.Key.kern: tracking,
       ]
     
+    if let strokeColor = strokeColor {
+      attributes[NSAttributedString.Key.strokeColor] = strokeColor
+      attributes[NSAttributedString.Key.strokeWidth] = strokeWidth
+    }
+    
+
+    let textString = textProvider.textFor(keypathName: self.keypathName, sourceText: text.text)
+    
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.lineSpacing = CGFloat(text.lineHeight)
     paragraphStyle.alignment = text.justification.textAlignment
     attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
     
-    let baseAttributedString = NSAttributedString(string: textString, attributes: attributes )
-    
-    if let strokeColor = strokeColor {
-      textStrokeLayer.isHidden = false
-      attributes[NSAttributedString.Key.strokeColor] = strokeColor
-      attributes[NSAttributedString.Key.strokeWidth] = strokeWidth
-    } else {
-      textStrokeLayer.isHidden = true
-    }
-    
-    let attributedString: NSAttributedString = NSAttributedString(string: textString, attributes: attributes )
+    let attributedString = NSAttributedString(string: textString, attributes: attributes )
     
     let framesetter = CTFramesetterCreateWithAttributedString(attributedString)
     
@@ -169,27 +162,15 @@ class TextCompositionLayer: CompositionLayer {
       textAnchor = CGPoint(x: size.width * 0.5, y: baselinePosition)
     }
     let anchor = textAnchor + anchorPoint.pointValue
-    let normalizedAnchor = CGPoint(x: anchor.x.remap(fromLow: 0, fromHigh: size.width, toLow: 0, toHigh: 1),
-                                   y: anchor.y.remap(fromLow: 0, fromHigh: size.height, toLow: 0, toHigh: 1))
-    
-    if textStrokeLayer.isHidden == false {
-      textStrokeLayer.anchorPoint = normalizedAnchor
-      textStrokeLayer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
-      textStrokeLayer.transform = CATransform3DIdentity
-      textStrokeLayer.frame = CGRect(origin: .zero, size: size)
-      textStrokeLayer.position = CGPoint.zero
-      textStrokeLayer.transform = matrix
-      textStrokeLayer.string = attributedString
-      textStrokeLayer.alignmentMode = text.justification.caTextAlignement
-    }
-    
-    textLayer.anchorPoint = normalizedAnchor
+  
+    textLayer.anchorPoint = CGPoint(x: anchor.x.remap(fromLow: 0, fromHigh: size.width, toLow: 0, toHigh: 1),
+                                    y: anchor.y.remap(fromLow: 0, fromHigh: size.height, toLow: 0, toHigh: 1))
     textLayer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
     textLayer.transform = CATransform3DIdentity
     textLayer.frame = CGRect(origin: .zero, size: size)
     textLayer.position = CGPoint.zero
     textLayer.transform = matrix
-    textLayer.string = baseAttributedString
+    textLayer.string = attributedString
     textLayer.alignmentMode = text.justification.caTextAlignement
   }
 }
