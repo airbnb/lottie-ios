@@ -173,6 +173,13 @@ class TextCompositionLayer: CompositionLayer {
                                    y: anchor.y.remap(fromLow: 0, fromHigh: size.height, toLow: 0, toHigh: 1))
     
     if textStrokeLayer.isHidden == false {
+      if text.strokeOverFill ?? false {
+        textStrokeLayer.removeFromSuperlayer()
+        contentsLayer.addSublayer(textStrokeLayer)
+      } else {
+        textLayer.removeFromSuperlayer()
+        contentsLayer.addSublayer(textLayer)
+      }
       textStrokeLayer.anchorPoint = normalizedAnchor
       textStrokeLayer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
       textStrokeLayer.transform = CATransform3DIdentity
