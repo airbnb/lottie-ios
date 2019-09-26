@@ -61,6 +61,11 @@ enum ShapeType: String, Codable {
   case stroke = "st"
   case trim = "tm"
   case transform = "tr"
+  case unknown
+  
+  public init(from decoder: Decoder) throws {
+    self = try ShapeType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
+  }
 }
 
 /// An item belonging to a Shape Layer
