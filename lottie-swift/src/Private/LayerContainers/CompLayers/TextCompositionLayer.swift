@@ -79,6 +79,8 @@ class TextCompositionLayer: CompositionLayer {
     contentsLayer.addSublayer(self.textStrokeLayer)
     self.textLayer.masksToBounds = false
     self.textStrokeLayer.masksToBounds = false
+    self.textLayer.isWrapped = true
+    self.textStrokeLayer.isWrapped = true
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -147,16 +149,21 @@ class TextCompositionLayer: CompositionLayer {
       textStrokeLayer.isHidden = true
     }
     
+    let size: CGSize
     let attributedString: NSAttributedString = NSAttributedString(string: textString, attributes: attributes )
     
-    let framesetter = CTFramesetterCreateWithAttributedString(attributedString)
-    
-    let size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,
-                                                            CFRange(location: 0,length: 0),
-                                                            nil,
-                                                            CGSize(width: CGFloat.greatestFiniteMagnitude,
-                                                                   height: CGFloat.greatestFiniteMagnitude),
-                                                            nil)
+    if let frameSize = text.textFrameSize {
+      size = CGSize(width: frameSize.x, height: frameSize.y)
+    } else {
+      let framesetter = CTFramesetterCreateWithAttributedString(attributedString)
+      
+      size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,
+                                                          CFRange(location: 0,length: 0),
+                                                          nil,
+                                                          CGSize(width: CGFloat.greatestFiniteMagnitude,
+                                                                 height: CGFloat.greatestFiniteMagnitude),
+                                                          nil)
+    }
     
     let baselinePosition = CTFontGetAscent(ctFont)
     let textAnchor: CGPoint
@@ -184,7 +191,7 @@ class TextCompositionLayer: CompositionLayer {
       textStrokeLayer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
       textStrokeLayer.transform = CATransform3DIdentity
       textStrokeLayer.frame = CGRect(origin: .zero, size: size)
-      textStrokeLayer.position = CGPoint.zero
+      textStrokeLayer.position = text.textFramePosition?.pointValue ?? CGPoint.zero
       textStrokeLayer.transform = matrix
       textStrokeLayer.string = attributedString
       textStrokeLayer.alignmentMode = text.justification.caTextAlignement
@@ -194,7 +201,7 @@ class TextCompositionLayer: CompositionLayer {
     textLayer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
     textLayer.transform = CATransform3DIdentity
     textLayer.frame = CGRect(origin: .zero, size: size)
-    textLayer.position = CGPoint.zero
+    textLayer.position = text.textFramePosition?.pointValue ?? CGPoint.zero
     textLayer.transform = matrix
     textLayer.string = baseAttributedString
     textLayer.alignmentMode = text.justification.caTextAlignement
