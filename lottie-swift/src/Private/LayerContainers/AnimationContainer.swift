@@ -182,6 +182,7 @@ class AnimationContainer: CALayer {
   }
   
   public override func display() {
+    guard Thread.isMainThread else { return }
     var newFrame: CGFloat = self.presentation()?.currentFrame ?? self.currentFrame
     if respectAnimationFrameRate {
       newFrame = floor(newFrame)
