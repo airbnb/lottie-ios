@@ -11,7 +11,7 @@ import CoreGraphics
 /**
  A CompositionLayer responsible for initializing and rendering shapes
  */
-class ShapeCompositionLayer: CompositionLayer {
+final class ShapeCompositionLayer: CompositionLayer {
   
   let rootNode: AnimatorNode?
   let renderContainer: ShapeContainerLayer?

@@ -13,7 +13,7 @@ import QuartzCore
  
  WARNING: This is experimental and probably not very performant.
  */
-class InvertedMatteLayer: CALayer, CompositionLayerDelegate {
+final class InvertedMatteLayer: CALayer, CompositionLayerDelegate {
   
   let inputMatte: CompositionLayer?
   let wrapperLayer = CALayer()

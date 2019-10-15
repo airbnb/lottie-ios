@@ -8,7 +8,7 @@
 import Foundation
 
 /// An item that define an ellipse shape
-class Shape: ShapeItem {
+final class Shape: ShapeItem {
 
   /// The Path
   let path: KeyframeGroup<BezierPath>

@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 
 /// A value provider that produces a value at Time from a group of keyframes
-class KeyframeInterpolator<ValueType>: AnyValueProvider where ValueType: Interpolatable {
+final class KeyframeInterpolator<ValueType>: AnyValueProvider where ValueType: Interpolatable {
   
   init(keyframes: [Keyframe<ValueType>]) {
     self.keyframes = keyframes

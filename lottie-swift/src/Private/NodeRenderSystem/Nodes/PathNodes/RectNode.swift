@@ -8,7 +8,7 @@
 import Foundation
 import CoreGraphics
 
-class RectNodeProperties: NodePropertyMap, KeypathSearchable {
+final class RectNodeProperties: NodePropertyMap, KeypathSearchable {
   
   var keypathName: String
 
@@ -38,7 +38,7 @@ class RectNodeProperties: NodePropertyMap, KeypathSearchable {
   
 }
 
-class RectangleNode: AnimatorNode, PathNode {
+final class RectangleNode: AnimatorNode, PathNode {
   
   let properties: RectNodeProperties
   

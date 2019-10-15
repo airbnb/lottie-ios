@@ -9,7 +9,7 @@ import Foundation
 import QuartzCore
 
 /// Returns a value for every frame.
-class SingleValueProvider<ValueType>: AnyValueProvider {
+final class SingleValueProvider<ValueType>: AnyValueProvider {
   
   var value: ValueType {
     didSet {

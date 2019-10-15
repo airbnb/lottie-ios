@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TextAnimator: Codable {
+final class TextAnimator: Codable {
   
   let name: String
   

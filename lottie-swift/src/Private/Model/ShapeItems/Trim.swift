@@ -12,7 +12,7 @@ enum TrimType: Int, Codable {
   case individually = 2
 }
 /// An item that define an ellipse shape
-class Trim: ShapeItem {
+final class Trim: ShapeItem {
   
   /// The start of the trim
   let start: KeyframeGroup<Vector1D>

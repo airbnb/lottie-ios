@@ -17,7 +17,7 @@ enum MaskMode: String, Codable {
   case none = "n"
 }
 
-class Mask: Codable {
+final class Mask: Codable {
   
   let mode: MaskMode
   

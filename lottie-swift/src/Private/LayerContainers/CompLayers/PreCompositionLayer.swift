@@ -8,7 +8,7 @@
 import Foundation
 import QuartzCore
 
-class PreCompositionLayer: CompositionLayer {
+final class PreCompositionLayer: CompositionLayer {
   
   let frameRate: CGFloat
   let remappingNode: NodeProperty<Vector1D>?

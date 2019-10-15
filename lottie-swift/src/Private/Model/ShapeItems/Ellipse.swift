@@ -14,7 +14,7 @@ enum PathDirection: Int, Codable {
 }
 
 /// An item that define an ellipse shape
-class Ellipse: ShapeItem {
+final class Ellipse: ShapeItem {
   
   /// The direction of the ellipse.
   let direction: PathDirection

@@ -14,7 +14,7 @@ enum GradientType: Int, Codable {
 }
 
 /// An item that define a gradient fill
-class GradientFill: ShapeItem {
+final class GradientFill: ShapeItem {
   
   /// The opacity of the fill
   let opacity: KeyframeGroup<Vector1D>

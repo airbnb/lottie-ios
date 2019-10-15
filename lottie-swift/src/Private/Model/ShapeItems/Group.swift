@@ -8,7 +8,7 @@
 import Foundation
 
 /// An item that define an ellipse shape
-class Group: ShapeItem {
+final class Group: ShapeItem {
   
   /// A list of shape items.
   let items: [ShapeItem]

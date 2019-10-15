@@ -8,7 +8,7 @@
 import Foundation
 
 /// Connects a LottieImageProvider to a group of image layers
-class LayerImageProvider {
+final class LayerImageProvider {
   
   var imageProvider: AnimationImageProvider {
     didSet {

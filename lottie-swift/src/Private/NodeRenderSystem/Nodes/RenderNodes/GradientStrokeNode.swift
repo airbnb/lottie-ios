@@ -10,7 +10,7 @@ import CoreGraphics
 
 // MARK: - Properties
 
-class GradientStrokeProperties: NodePropertyMap, KeypathSearchable {
+final class GradientStrokeProperties: NodePropertyMap, KeypathSearchable {
   
   var keypathName: String
   
@@ -78,7 +78,7 @@ class GradientStrokeProperties: NodePropertyMap, KeypathSearchable {
 
 // MARK: - Node
 
-class GradientStrokeNode: AnimatorNode, RenderNode {
+final class GradientStrokeNode: AnimatorNode, RenderNode {
   
   let strokeRender: GradientStrokeRenderer
   

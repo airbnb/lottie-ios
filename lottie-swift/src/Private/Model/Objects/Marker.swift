@@ -8,7 +8,7 @@
 import Foundation
 
 /// A time marker
-class Marker: Codable {
+final class Marker: Codable {
   
   /// The Marker Name
   let name: String

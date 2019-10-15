@@ -8,7 +8,7 @@
 import Foundation
 
 /// A layer that holds a solid color.
-class SolidLayerModel: LayerModel {
+final class SolidLayerModel: LayerModel {
   
   /// The color of the solid in Hex // Change to value provider.
   let colorHex: String

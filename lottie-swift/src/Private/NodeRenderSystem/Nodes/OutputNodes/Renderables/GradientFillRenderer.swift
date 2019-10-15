@@ -9,7 +9,7 @@ import Foundation
 import QuartzCore
 
 /// A rendered for a Path Fill
-class GradientFillRenderer: PassThroughOutputNode, Renderable {
+final class GradientFillRenderer: PassThroughOutputNode, Renderable {
   
   var shouldRenderInContext: Bool = true
   
