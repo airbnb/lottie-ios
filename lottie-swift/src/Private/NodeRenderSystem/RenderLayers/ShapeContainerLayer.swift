@@ -22,7 +22,8 @@ class ShapeContainerLayer: CALayer {
       "bounds" : NSNull(),
       "anchorPoint" : NSNull(),
       "transform" : NSNull(),
-      "opacity" : NSNull()
+      "opacity" : NSNull(),
+      "hidden" : NSNull(),
     ]
   }
   
@@ -52,6 +53,7 @@ class ShapeContainerLayer: CALayer {
     if self.hasRenderUpdate(forFrame: forFrame) {
       self.rebuildContents(forFrame: forFrame)
     }
+    guard self.isHidden == false else { return }
     renderLayers.forEach { $0.markRenderUpdates(forFrame: forFrame) }
   }
   

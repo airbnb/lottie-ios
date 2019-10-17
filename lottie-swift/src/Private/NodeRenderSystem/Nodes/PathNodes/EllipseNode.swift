@@ -54,6 +54,11 @@ class EllipseNode: AnimatorNode, PathNode {
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+  var isEnabled: Bool = true {
+    didSet{
+      self.pathOutput.isEnabled = self.isEnabled
+    }
+  }
   
   func rebuildOutputs(frame: CGFloat) {
     let ellipseSize = properties.size.value.sizeValue

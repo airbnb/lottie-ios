@@ -88,6 +88,7 @@ class LayerTransformNode: AnimatorNode {
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+  var isEnabled: Bool = true
   
   func shouldRebuildOutputs(frame: CGFloat) -> Bool {
     return hasLocalUpdates || hasUpstreamUpdates

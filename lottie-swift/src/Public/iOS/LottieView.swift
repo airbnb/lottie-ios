@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
 
 //public typealias LottieView = UIView
@@ -58,3 +59,4 @@ open class LottieView: UIView {
   }
   
 }
+#endif

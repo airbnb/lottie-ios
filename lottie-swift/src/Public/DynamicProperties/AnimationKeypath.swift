@@ -20,7 +20,7 @@ import Foundation
  Single star will search a single depth for the next object.
  Double star will search any depth.
  
- Read More at https://airbnb.io/lottie/ios/dynamic.html
+ Read More at https://airbnb.io/lottie/#/ios?id=dynamic-animation-properties
  
  EG:
  @"Layer.Shape Group.Stroke 1.Color"

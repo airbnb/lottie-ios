@@ -6,22 +6,23 @@
 //
 
 import Foundation
+#if os(OSX)
 import AppKit
 
-public enum LottieContentMode {
-  case bottom
-  case bottomLeft
-  case bottomRight
-  case center
-  case left
-  case redraw
-  case right
+public enum LottieContentMode: Int {
   case scaleToFill
   case scaleAspectFit
   case scaleAspectFill
+  case redraw
+  case center
   case top
+  case bottom
+  case left
+  case right
   case topLeft
   case topRight
+  case bottomLeft
+  case bottomRight
 }
 
 /// A wrapper around NSView for cross platform compatibility.
@@ -90,3 +91,4 @@ public class LottieView: NSView {
   }
   
 }
+#endif

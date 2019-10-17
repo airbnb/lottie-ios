@@ -65,6 +65,11 @@ class PolygonNode: AnimatorNode, PathNode {
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+  var isEnabled: Bool = true {
+    didSet{
+      self.pathOutput.isEnabled = self.isEnabled
+    }
+  }
   
   /// Magic number needed for constructing path.
   static let PolygonConstant: CGFloat = 0.25

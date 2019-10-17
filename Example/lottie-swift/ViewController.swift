@@ -56,7 +56,7 @@ class ViewController: UIViewController {
     /// Create a display link to make slider track with animation progress.
     displayLink = CADisplayLink(target: self, selector: #selector(animationCallback))
     displayLink?.add(to: .current,
-                    forMode: .defaultRunLoopMode)
+                    forMode: RunLoop.Mode.default)
     
     
     /// Animated Switch
@@ -94,6 +94,28 @@ class ViewController: UIViewController {
     twitterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 12).isActive = true
     twitterButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 20).isActive = true
     */
+//    view.backgroundColor = UIColor.black
+//    let keypath1 = AnimationKeypath(keypath: "**.eyes_*")
+//    let keypath2 = AnimationKeypath(keypath: "**.head_*")
+//
+//    let keypath3 = AnimationKeypath(keypath: "**.head_006")
+//    let keypath4 = AnimationKeypath(keypath: "**.eyes_002")
+//
+//
+//    animationView.setNodeIsEnabled(isEnabled: false, keypath: keypath1)
+//    animationView.setNodeIsEnabled(isEnabled: false, keypath: keypath2)
+//    animationView.setNodeIsEnabled(isEnabled: true, keypath: keypath3)
+//    animationView.setNodeIsEnabled(isEnabled: true, keypath: keypath4)
+    
+//    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+//      print("Disabling group 1")
+//      self.animationView.setNodeIsEnabled(isEnabled: false, keypath: keypath4)
+//      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+//        print("Enabling group 1")
+//        self.animationView.setNodeIsEnabled(isEnabled: true, keypath: keypath4)
+//
+//      }
+//    }
   }
   
   var displayLink: CADisplayLink?

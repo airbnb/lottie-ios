@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(OSX)
 import AppKit
 
 /**
@@ -75,3 +76,4 @@ public class BundleImageProvider: AnimationImageProvider {
   
 }
 
+#endif
