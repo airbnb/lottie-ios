@@ -108,7 +108,7 @@ class AnimationContainer: CALayer {
     self.animationLayers = []
     super.init()
     bounds = animation.bounds
-    let layers = animation.layers.initializeCompositionLayers(assetLibrary: animation.assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, frameRate: CGFloat(animation.framerate))
+    let layers = animation.layers.initializeCompositionLayers(assetLibrary: animation.assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, frameRate: CGFloat(animation.framerate), fonts: animation.fonts)
     
     var imageLayers = [ImageCompositionLayer]()
     var textLayers = [TextCompositionLayer]()

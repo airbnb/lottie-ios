@@ -10,6 +10,7 @@ import Foundation
 import AppKit
 
 /// A view that can be added to a keypath of an AnimationView
+@objcMembers
 public final class AnimationSubview: NSView {
   
   var viewLayer: CALayer? {

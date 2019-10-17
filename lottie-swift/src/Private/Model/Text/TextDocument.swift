@@ -25,7 +25,7 @@ final class TextDocument: Codable {
   let fontFamily: String
   
   /// Justification
-  let justification: TextJustification
+  let justification: TextJustification?
   
   /// Tracking
   let tracking: Int

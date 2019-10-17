@@ -37,4 +37,8 @@ extension KeyedDecodingContainer {
     }
     return list
   }
+    
+    func decodeIfPresent<T : Decodable, U : ClassFamily>(_ heterogeneousType: [T].Type, ofFamily family: U.Type, forKey key: K) -> [T]? {
+        return try? decode(heterogeneousType, ofFamily: family, forKey: key)
+    }
 }

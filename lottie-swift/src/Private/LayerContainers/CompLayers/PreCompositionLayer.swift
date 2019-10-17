@@ -37,7 +37,7 @@ class PreCompositionLayer: CompositionLayer {
     masksToBounds = true
     bounds = CGRect(origin: .zero, size: CGSize(width: precomp.width, height: precomp.height))
     
-    let layers = asset.layers.initializeCompositionLayers(assetLibrary: assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, frameRate: frameRate)
+    let layers = asset.layers.initializeCompositionLayers(assetLibrary: assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, frameRate: frameRate, fonts: nil)
     
     var imageLayers = [ImageCompositionLayer]()
     

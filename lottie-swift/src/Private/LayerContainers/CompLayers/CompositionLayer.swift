@@ -78,6 +78,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
       "sublayerTransform" : NSNull(),
       "hidden" : NSNull()
     ]
+    layer.effects?.forEach { $0.apply(layer: contentsLayer) }
     addSublayer(contentsLayer)
     
     if let maskLayer = maskLayer {
