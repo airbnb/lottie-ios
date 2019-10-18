@@ -55,9 +55,9 @@ extension Array where Element == LayerModel {
         compositionLayers.append(textContainer)
         layerMap[layer.index] = textContainer
     } else if let videoLayer = layer as? VideoLayerModel {
-        let textContainer = VideoCompositionLayer(videoModel: videoLayer)
-        compositionLayers.append(textContainer)
-        layerMap[layer.index] = textContainer
+        let videoContainer = VideoCompositionLayer(videoModel: videoLayer)
+        compositionLayers.append(videoContainer)
+        layerMap[layer.index] = videoContainer
       } else {
         let genericLayer = NullCompositionLayer(layer: layer)
         compositionLayers.append(genericLayer)
