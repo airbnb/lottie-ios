@@ -433,12 +433,13 @@ extension CGPoint: Interpolatable {
       }
       if accurateDistance < point.distance {
         closestPoint = closestPoint - 1
+        if closestPoint < 0 {
+          foundPoint = true
+          continue
+        }
         point = points[closestPoint]
         pointAmount = CGFloat(closestPoint) * step
         nextPointAmount = pointAmount + step
-        if closestPoint < 0 {
-          foundPoint = true
-        }
         continue
       }
       
