@@ -6,22 +6,24 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS) || os(watchOS)
 
-@objc
 /// An Objective-C compatible wrapper around Lottie's AnimationKeypath
+@objc
 public final class CompatibleAnimationKeypath: NSObject {
 
-  @objc
   /// Creates a keypath from a dot separated string. The string is separated by "."
+  @objc
   public init(keypath: String) {
     animationKeypath = AnimationKeypath(keypath: keypath)
   }
 
-  @objc
   /// Creates a keypath from a list of strings.
+  @objc
   public init(keys: [String]) {
     animationKeypath = AnimationKeypath(keys: keys)
   }
 
   public let animationKeypath: AnimationKeypath
 }
+#endif

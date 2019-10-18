@@ -36,6 +36,10 @@ public enum LayerType: Int, Codable {
   case null
   case shape
   case text
+  
+  public init(from decoder: Decoder) throws {
+    self = try LayerType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .null
+  }
 }
 
 public enum MatteType: Int, Codable {

@@ -1,5 +1,5 @@
 //
-//  Composition.swift
+//  Animation.swift
 //  lottie-swift
 //
 //  Created by Brandon Withrow on 1/7/19.
@@ -56,6 +56,12 @@ public class Animation: Codable {
   /// Markers
   let markers: [Marker]?
   let markerMap: [String : Marker]?
+  
+  /// Return all marker names, in order, or an empty list if none are specified
+  public var markerNames: [String] {
+    guard let markers = markers else { return [] }
+    return markers.map { $0.name }
+  }
   
   enum CodingKeys : String, CodingKey {
     case version = "v"

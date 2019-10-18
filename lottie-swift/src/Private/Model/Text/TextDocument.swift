@@ -25,7 +25,7 @@ final class TextDocument: Codable {
   let fontFamily: String
   
   /// Justification
-  let justification: TextJustification
+  let justification: TextJustification?
   
   /// Tracking
   let tracking: Int
@@ -48,6 +48,10 @@ final class TextDocument: Codable {
   /// Stroke Over Fill
   let strokeOverFill: Bool?
   
+  let textFramePosition: Vector3D?
+  
+  let textFrameSize: Vector3D?
+  
   private enum CodingKeys : String, CodingKey {
     case text = "t"
     case fontSize = "s"
@@ -60,5 +64,7 @@ final class TextDocument: Codable {
     case strokeColorData = "sc"
     case strokeWidth = "sw"
     case strokeOverFill = "of"
+    case textFramePosition = "ps"
+    case textFrameSize = "sz"
   }
 }

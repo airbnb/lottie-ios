@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
 
 /**
@@ -128,6 +129,7 @@ open class AnimatedControl: UIControl {
     animationView.clipsToBounds = false
     clipsToBounds = true
     animationView.translatesAutoresizingMaskIntoConstraints = false
+    animationView.backgroundBehavior = .forceFinish
     addSubview(animationView)
     animationView.contentMode = .scaleAspectFit
     animationView.isUserInteractionEnabled = false
@@ -153,3 +155,4 @@ open class AnimatedControl: UIControl {
   }
   
 }
+#endif
