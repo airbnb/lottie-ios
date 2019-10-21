@@ -26,6 +26,8 @@ extension EffectType: ClassFamily {
 		switch self {
 		case .dropShadow:
 			return DropShadowEffect.self
+        case .controls:
+            return ControlEffect.self
 		default:
 			return Effect.self
 		}
@@ -46,7 +48,8 @@ class Effect: Codable {
 	let type: EffectType
 	let values: [EffectValue]?
 	
-	public func apply(layer: CALayer) {}
+    public func setUp(layer: CALayer) {}
+	public func apply(layer: CALayer, frame: CGFloat) {}
 	
 	required init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: Effect.CodingKeys.self)

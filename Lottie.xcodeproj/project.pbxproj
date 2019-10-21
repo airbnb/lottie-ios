@@ -621,6 +621,31 @@
 		BD25D5C72357783D0046BA8A /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = BD25D5C62357783D0046BA8A /* data.json */; };
 		BD25D5C92357784C0046BA8A /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486E8567220A3605007CD915 /* Lottie.framework */; };
 		BD25D5CA2357784C0046BA8A /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 486E8567220A3605007CD915 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BD4FE9032326C4E80011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
+		BD4FE9042326C5F90011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
+		BD4FE9052326C5FB0011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
+		BD4FE9062326C5FC0011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
+		BD4FE9072326C5FC0011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
+		BD4FE90A2327A24E0011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
+		BD4FE90B2327A2700011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
+		BD4FE90C2327A2710011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
+		BD4FE90D2327A2710011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
+		BD4FE90E2327A2710011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
+		BD4FE9102327A7AF0011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
+		BD4FE9112327AC310011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
+		BD4FE9122327AC320011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
+		BD4FE9132327AC320011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
+		BD4FE9142327AC320011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
+		BD972B21235CD91E0097B566 /* WordAnimatedTextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD972B20235CD91E0097B566 /* WordAnimatedTextLayer.swift */; };
+		BD972B22235CDCB50097B566 /* WordAnimatedTextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD972B20235CD91E0097B566 /* WordAnimatedTextLayer.swift */; };
+		BD972B23235CDCB50097B566 /* WordAnimatedTextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD972B20235CD91E0097B566 /* WordAnimatedTextLayer.swift */; };
+		BD972B24235CDCB60097B566 /* WordAnimatedTextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD972B20235CD91E0097B566 /* WordAnimatedTextLayer.swift */; };
+		BD972B25235CDCB60097B566 /* WordAnimatedTextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD972B20235CD91E0097B566 /* WordAnimatedTextLayer.swift */; };
+		BD972B27235DDCB40097B566 /* ControlEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD972B26235DDCB40097B566 /* ControlEffect.swift */; };
+		BD972B28235DE0300097B566 /* ControlEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD972B26235DDCB40097B566 /* ControlEffect.swift */; };
+		BD972B29235DE0300097B566 /* ControlEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD972B26235DDCB40097B566 /* ControlEffect.swift */; };
+		BD972B2A235DE0300097B566 /* ControlEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD972B26235DDCB40097B566 /* ControlEffect.swift */; };
+		BD972B2B235DE0300097B566 /* ControlEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD972B26235DDCB40097B566 /* ControlEffect.swift */; };
 		BDCD2A0A235781D000793A20 /* Gandalf.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = BDCD2A092357818E00793A20 /* Gandalf.mp4 */; };
 		BDCD2A0C2357883500793A20 /* VideoLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCD2A0B2357883500793A20 /* VideoLayerModel.swift */; };
 		BDCD2A0D2357883B00793A20 /* VideoLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCD2A0B2357883500793A20 /* VideoLayerModel.swift */; };
@@ -662,21 +687,6 @@
 		E654753C22AAA9B600FE590F /* LayerTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E654753822AAA9AD00FE590F /* LayerTextProvider.swift */; };
 		E654753D22AAA9B600FE590F /* LayerTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E654753822AAA9AD00FE590F /* LayerTextProvider.swift */; };
 		E6EAA7B822AA834F00F345A4 /* AnimationTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */; };
-		BD4FE9032326C4E80011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
-		BD4FE9042326C5F90011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
-		BD4FE9052326C5FB0011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
-		BD4FE9062326C5FC0011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
-		BD4FE9072326C5FC0011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
-		BD4FE90A2327A24E0011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
-		BD4FE90B2327A2700011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
-		BD4FE90C2327A2710011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
-		BD4FE90D2327A2710011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
-		BD4FE90E2327A2710011B14B /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */; };
-		BD4FE9102327A7AF0011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
-		BD4FE9112327AC310011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
-		BD4FE9122327AC320011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
-		BD4FE9132327AC320011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
-		BD4FE9142327AC320011B14B /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE90F2327A7AF0011B14B /* EffectValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -854,6 +864,11 @@
 		BD25D5C12357782C0046BA8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD25D5C22357782C0046BA8A /* Test.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Test.entitlements; sourceTree = "<group>"; };
 		BD25D5C62357783D0046BA8A /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		BD4FE9022326C4E80011B14B /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
+		BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadowEffect.swift; sourceTree = "<group>"; };
+		BD4FE90F2327A7AF0011B14B /* EffectValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectValue.swift; sourceTree = "<group>"; };
+		BD972B20235CD91E0097B566 /* WordAnimatedTextLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordAnimatedTextLayer.swift; sourceTree = "<group>"; };
+		BD972B26235DDCB40097B566 /* ControlEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlEffect.swift; sourceTree = "<group>"; };
 		BDCD2A092357818E00793A20 /* Gandalf.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gandalf.mp4; sourceTree = "<group>"; };
 		BDCD2A0B2357883500793A20 /* VideoLayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLayerModel.swift; sourceTree = "<group>"; };
 		BDCD2A112357898300793A20 /* VideoCompositionLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCompositionLayer.swift; sourceTree = "<group>"; };
@@ -879,9 +894,6 @@
 		BDCD2A3E2358CE2800793A20 /* shutterstock_1020198613 (1).mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "shutterstock_1020198613 (1).mov"; sourceTree = "<group>"; };
 		E654753822AAA9AD00FE590F /* LayerTextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerTextProvider.swift; sourceTree = "<group>"; };
 		E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTextProvider.swift; sourceTree = "<group>"; };
-		BD4FE9022326C4E80011B14B /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
-		BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadowEffect.swift; sourceTree = "<group>"; };
-		BD4FE90F2327A7AF0011B14B /* EffectValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1123,6 +1135,7 @@
 				486E8728220B78BF007CD915 /* ShapeCompositionLayer.swift */,
 				486E8729220B78BF007CD915 /* MaskContainerLayer.swift */,
 				BDCD2A112357898300793A20 /* VideoCompositionLayer.swift */,
+				BD972B20235CD91E0097B566 /* WordAnimatedTextLayer.swift */,
 			);
 			path = CompLayers;
 			sourceTree = "<group>";
@@ -1472,6 +1485,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BD4FE9082327A21F0011B14B /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */,
+				BD972B26235DDCB40097B566 /* ControlEffect.swift */,
+			);
+			path = Effects;
+			sourceTree = "<group>";
+		};
 		BDCD2A402358E92B00793A20 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -1506,7 +1528,6 @@
 			path = Videos;
 			sourceTree = "<group>";
 		};
-		
 		BDCD2A422358E96100793A20 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
@@ -1522,14 +1543,6 @@
 				E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */,
 			);
 			path = TextProvider;
-			sourceTree = "<group>";
-		};
-		BD4FE9082327A21F0011B14B /* Effects */ = {
-			isa = PBXGroup;
-			children = (
-				BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */,
-			);
-			path = Effects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1826,6 +1839,7 @@
 				486E87C4220B78D1007CD915 /* CompositionLayersInitializer.swift in Sources */,
 				486E87C5220B78D1007CD915 /* TrimPathNode.swift in Sources */,
 				486E87C6220B78D1007CD915 /* GroupNode.swift in Sources */,
+				BD972B21235CD91E0097B566 /* WordAnimatedTextLayer.swift in Sources */,
 				486E87C7220B78D1007CD915 /* GradientFillRenderer.swift in Sources */,
 				486E87C8220B78D1007CD915 /* GradientStrokeRenderer.swift in Sources */,
 				486E87C9220B78D1007CD915 /* FillRenderer.swift in Sources */,
@@ -1852,6 +1866,7 @@
 				486E87DD220B78D1007CD915 /* KeyframeInterpolator.swift in Sources */,
 				4866744122249C4E00258C00 /* TextAnimatorNode.swift in Sources */,
 				486E87DE220B78D1007CD915 /* SingleValueProvider.swift in Sources */,
+				BD972B27235DDCB40097B566 /* ControlEffect.swift in Sources */,
 				486E87DF220B78D1007CD915 /* GroupInterpolator.swift in Sources */,
 				486E87E0220B78D1007CD915 /* ItemsExtension.swift in Sources */,
 				486E87E1220B78D1007CD915 /* ShapeRenderLayer.swift in Sources */,
@@ -1964,6 +1979,7 @@
 				486E883B220B78E4007CD915 /* InvertedMatteLayer.swift in Sources */,
 				486E883C220B78E4007CD915 /* LayerImageProvider.swift in Sources */,
 				486E883D220B78E4007CD915 /* CompositionLayersInitializer.swift in Sources */,
+				BD972B22235CDCB50097B566 /* WordAnimatedTextLayer.swift in Sources */,
 				486E883E220B78E4007CD915 /* TrimPathNode.swift in Sources */,
 				486E883F220B78E4007CD915 /* GroupNode.swift in Sources */,
 				486E8840220B78E4007CD915 /* GradientFillRenderer.swift in Sources */,
@@ -1990,6 +2006,7 @@
 				486E8854220B78E4007CD915 /* KeypathSearchable.swift in Sources */,
 				486E8855220B78E4007CD915 /* AnyValueContainer.swift in Sources */,
 				486E8856220B78E4007CD915 /* KeyframeInterpolator.swift in Sources */,
+				BD972B28235DE0300097B566 /* ControlEffect.swift in Sources */,
 				4866744222249C4E00258C00 /* TextAnimatorNode.swift in Sources */,
 				486E8857220B78E4007CD915 /* SingleValueProvider.swift in Sources */,
 				486E8858220B78E4007CD915 /* GroupInterpolator.swift in Sources */,
@@ -2102,6 +2119,7 @@
 				486E88BF220B78F4007CD915 /* ShapeNode.swift in Sources */,
 				486E88C0220B78F4007CD915 /* StarNode.swift in Sources */,
 				486E88C1220B78F4007CD915 /* GradientFillNode.swift in Sources */,
+				BD972B29235DE0300097B566 /* ControlEffect.swift in Sources */,
 				486E88C2220B78F4007CD915 /* StrokeNode.swift in Sources */,
 				E654753B22AAA9B500FE590F /* LayerTextProvider.swift in Sources */,
 				486E88C3220B78F4007CD915 /* FillNode.swift in Sources */,
@@ -2186,6 +2204,7 @@
 				486E8896220B78ED007CD915 /* AnimationSubview.swift in Sources */,
 				486E8897220B78ED007CD915 /* AnimationViewInitializers.swift in Sources */,
 				486E8898220B78ED007CD915 /* AnimationView.swift in Sources */,
+				BD972B23235CDCB50097B566 /* WordAnimatedTextLayer.swift in Sources */,
 				486E8899220B78ED007CD915 /* AnimationPublic.swift in Sources */,
 				486E889A220B78ED007CD915 /* AnimationImageProvider.swift in Sources */,
 			);
@@ -2234,6 +2253,7 @@
 				486E892B220B78FF007CD915 /* CompositionLayersInitializer.swift in Sources */,
 				486E892C220B78FF007CD915 /* TrimPathNode.swift in Sources */,
 				486E892D220B78FF007CD915 /* GroupNode.swift in Sources */,
+				BD972B24235CDCB60097B566 /* WordAnimatedTextLayer.swift in Sources */,
 				486E892E220B78FF007CD915 /* GradientFillRenderer.swift in Sources */,
 				486E892F220B78FF007CD915 /* GradientStrokeRenderer.swift in Sources */,
 				486E8930220B78FF007CD915 /* FillRenderer.swift in Sources */,
@@ -2260,6 +2280,7 @@
 				486E8943220B78FF007CD915 /* AnyValueContainer.swift in Sources */,
 				486E8944220B78FF007CD915 /* KeyframeInterpolator.swift in Sources */,
 				4866744422249C4E00258C00 /* TextAnimatorNode.swift in Sources */,
+				BD972B2A235DE0300097B566 /* ControlEffect.swift in Sources */,
 				486E8945220B78FF007CD915 /* SingleValueProvider.swift in Sources */,
 				486E8946220B78FF007CD915 /* GroupInterpolator.swift in Sources */,
 				486E8947220B78FF007CD915 /* ItemsExtension.swift in Sources */,
@@ -2372,6 +2393,7 @@
 				486E89AD220B790E007CD915 /* ShapeNode.swift in Sources */,
 				486E89AE220B790E007CD915 /* StarNode.swift in Sources */,
 				486E89AF220B790E007CD915 /* GradientFillNode.swift in Sources */,
+				BD972B2B235DE0300097B566 /* ControlEffect.swift in Sources */,
 				E654753D22AAA9B600FE590F /* LayerTextProvider.swift in Sources */,
 				486E89B0220B790E007CD915 /* StrokeNode.swift in Sources */,
 				486E89B1220B790E007CD915 /* FillNode.swift in Sources */,
@@ -2456,6 +2478,7 @@
 				486E8984220B7908007CD915 /* AnimationSubview.swift in Sources */,
 				486E8985220B7908007CD915 /* AnimationViewInitializers.swift in Sources */,
 				486E8986220B7908007CD915 /* AnimationView.swift in Sources */,
+				BD972B25235CDCB60097B566 /* WordAnimatedTextLayer.swift in Sources */,
 				486E8987220B7908007CD915 /* AnimationPublic.swift in Sources */,
 				486E8988220B7908007CD915 /* AnimationImageProvider.swift in Sources */,
 			);

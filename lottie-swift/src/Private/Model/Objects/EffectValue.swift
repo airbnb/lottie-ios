@@ -9,8 +9,10 @@
 import Foundation
 
 public enum EffectValueType: Int, Codable {
-	case doubleValue = 0
-	case arrayValue = 2
+	case lineValue = 0
+    case flatValue = 2
+    case volumeValue = 3
+	
 	case boolValue = 7
 }
 
@@ -19,10 +21,12 @@ extension EffectValueType: ClassFamily {
 	
 	func getType() -> AnyObject.Type {
 		switch self {
-		case .doubleValue:
-			return DoubleEffectValue.self
-		case .arrayValue:
-			return ArrayEffectValue.self
+		case .lineValue:
+			return VolumeEffectValue<Vector1D>.self
+        case .flatValue:
+            return VolumeEffectValue<Vector2D>.self
+        case .volumeValue:
+            return VolumeEffectValue<Vector3D>.self
 		case .boolValue:
 			return BoolEffectValue.self
 		}
@@ -59,13 +63,14 @@ class EffectValue: Codable {
 	}
 }
 
-class DoubleEffectValue: EffectValue {
-	let value: Double
-	
+class VolumeEffectValue<T>: EffectValue where T : Interpolatable & Codable {
+	let value: KeyframeGroup<T>
+    lazy var interpolator = KeyframeInterpolator(keyframes: value.keyframes)
+    
 	required init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
-		let dictionary: [String: Double] = try container.decode([String: Double].self, forKey: CodingKeys.value)
-		self.value = dictionary[CodingKeys.key.rawValue] ?? 0.0
+        
+		self.value = try container.decode(KeyframeGroup<T>.self, forKey: CodingKeys.value)
 		try super.init(from: decoder)
 	}
 }
