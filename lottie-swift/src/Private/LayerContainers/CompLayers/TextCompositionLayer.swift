@@ -126,8 +126,8 @@ class TextCompositionLayer: CompositionLayer {
     let strokeColor = rootNode?.textOutputNode.strokeColor ?? text.strokeColorData?.cgColorValue
     let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
     let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
-    
-    let matrix = rootNode?.textOutputNode.xform ?? CATransform3DIdentity
+//    TODO: Investigate what is wrong with transform matrix
+//    let matrix = rootNode?.textOutputNode.xform ?? CATransform3DIdentity
     let ctFont = CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil)
     
     let textString = textProvider.textFor(keypathName: self.keypathName, sourceText: text.text)
@@ -192,7 +192,7 @@ class TextCompositionLayer: CompositionLayer {
     }
     
     let baselinePosition = CTFontGetAscent(ctFont)
-    let textAnchor: CGPoint
+    var textAnchor: CGPoint
     switch text.justification {
     case .left, .none:
       textAnchor = CGPoint(x: 0, y: baselinePosition)
@@ -201,9 +201,24 @@ class TextCompositionLayer: CompositionLayer {
     case .center:
       textAnchor = CGPoint(x: size.width * 0.5, y: baselinePosition)
     }
+    textAnchor.y += CGFloat(text.baseline ?? 0.0)
     let anchor = textAnchor + anchorPoint.pointValue
     let normalizedAnchor = CGPoint(x: anchor.x.remap(fromLow: 0, fromHigh: size.width, toLow: 0, toHigh: 1),
                                    y: anchor.y.remap(fromLow: 0, fromHigh: size.height, toLow: 0, toHigh: 1))
+    
+    func setupLayer(layer: CATextLayer) {
+        layer.anchorPoint = normalizedAnchor
+        layer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
+        layer.transform = CATransform3DIdentity
+        let emptyPosition = CGPoint(x: -textAnchor.x, y: -CGFloat(text.fontSize * 0.9))
+        layer.frame = CGRect(origin: text.textFramePosition?.pointValue ?? emptyPosition, size: size)
+        //    TODO: Investigate what is wrong with transform matrix
+        //    textLayer.transform = matrix
+        layer.string = baseAttributedString
+        layer.alignmentMode = text.justification?.caTextAlignement ?? CATextLayerAlignmentMode.left
+        layer.contentsScale = 2.0
+        layer.rasterizationScale = 2.0
+    }
     
     if textStrokeLayer.isHidden == false {
       if text.strokeOverFill ?? false {
@@ -213,25 +228,10 @@ class TextCompositionLayer: CompositionLayer {
         textLayer.removeFromSuperlayer()
         contentsLayer.addSublayer(textLayer)
       }
-      textStrokeLayer.anchorPoint = normalizedAnchor
-      textStrokeLayer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
-      textStrokeLayer.transform = CATransform3DIdentity
-      textStrokeLayer.frame = CGRect(origin: .zero, size: size)
-      textStrokeLayer.position = text.textFramePosition?.pointValue ?? CGPoint.zero
-      textStrokeLayer.transform = matrix
-      textStrokeLayer.string = attributedString
-        textStrokeLayer.alignmentMode = text.justification?.caTextAlignement ?? CATextLayerAlignmentMode.left
+      setupLayer(layer: textStrokeLayer)
     }
     
-    textLayer.anchorPoint = normalizedAnchor
-    textLayer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
-    textLayer.transform = CATransform3DIdentity
-    textLayer.frame = CGRect(origin: .zero, size: size)
-    textLayer.position = text.textFramePosition?.pointValue ?? CGPoint.zero
-    textLayer.transform = matrix
-    textLayer.string = baseAttributedString
-    textLayer.alignmentMode = text.justification?.caTextAlignement ?? CATextLayerAlignmentMode.left
-    textLayer.contentsScale = 2.0
+    setupLayer(layer: textLayer)
   }
 }
 
