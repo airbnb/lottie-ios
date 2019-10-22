@@ -1135,7 +1135,6 @@
 				486E8728220B78BF007CD915 /* ShapeCompositionLayer.swift */,
 				486E8729220B78BF007CD915 /* MaskContainerLayer.swift */,
 				BDCD2A112357898300793A20 /* VideoCompositionLayer.swift */,
-				BD972B20235CD91E0097B566 /* WordAnimatedTextLayer.swift */,
 			);
 			path = CompLayers;
 			sourceTree = "<group>";
@@ -1148,6 +1147,7 @@
 				486E872E220B78BF007CD915 /* LayerImageProvider.swift */,
 				E654753822AAA9AD00FE590F /* LayerTextProvider.swift */,
 				486E872F220B78BF007CD915 /* CompositionLayersInitializer.swift */,
+				BD972B20235CD91E0097B566 /* WordAnimatedTextLayer.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";

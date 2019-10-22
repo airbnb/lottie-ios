@@ -22,11 +22,11 @@ extension EffectValueType: ClassFamily {
 	func getType() -> AnyObject.Type {
 		switch self {
 		case .lineValue:
-			return VolumeEffectValue<Vector1D>.self
+			return InterpolatableEffectValue<Vector1D>.self
         case .flatValue:
-            return VolumeEffectValue<Vector2D>.self
+            return ArrayEffectValue.self
         case .volumeValue:
-            return VolumeEffectValue<Vector3D>.self
+            return InterpolatableEffectValue<Vector3D>.self
 		case .boolValue:
 			return BoolEffectValue.self
 		}
@@ -63,7 +63,7 @@ class EffectValue: Codable {
 	}
 }
 
-class VolumeEffectValue<T>: EffectValue where T : Interpolatable & Codable {
+class InterpolatableEffectValue<T>: EffectValue where T : Interpolatable & Codable {
 	let value: KeyframeGroup<T>
     lazy var interpolator = KeyframeInterpolator(keyframes: value.keyframes)
     

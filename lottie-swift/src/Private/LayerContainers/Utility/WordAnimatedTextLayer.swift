@@ -12,7 +12,7 @@ import CoreGraphics
 
 class WordAnimatedTextLayer : DisabledTextLayer {
     
-    var attributedString: NSAttributedString?
+    private var attributedString: NSAttributedString?
     override var string: Any? {
         set {
             attributedString = newValue as? NSAttributedString

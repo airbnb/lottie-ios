@@ -12,7 +12,7 @@ import QuartzCore
 
 class ControlEffect: Effect {
     
-    var evolutionEffect: DelayedEvolutionEffect?
+    private var evolutionEffect: DelayedEvolutionEffect?
     
     override func setUp(layer: CALayer) {
         if name == "Evolution_(%)_In" {
@@ -20,20 +20,24 @@ class ControlEffect: Effect {
             if evolutionEffect == nil {
                 evolutionEffect = DelayedEvolutionEffect(layer: textLayer, effect: self)
             }
+        } else {
+            super.setUp(layer: layer)
         }
     }
     
     override func apply(layer: CALayer, frame: CGFloat) {
         if name == "Evolution_(%)_In" {
             evolutionEffect?.apply(frame: frame)
+        } else {
+            super.apply(layer: layer, frame: frame)
         }
     }
 }
 
 class DelayedEvolutionEffect {
     
-    var layer: TextCompositionLayer
-    var value: KeyframeInterpolator<Vector1D>?
+    let layer: TextCompositionLayer
+    let value: KeyframeInterpolator<Vector1D>?
     var reverse: Bool?
     var position: KeyframeInterpolator<Vector3D>?
     var opacity: KeyframeInterpolator<Vector1D>?
@@ -41,17 +45,17 @@ class DelayedEvolutionEffect {
     
     init(layer: TextCompositionLayer, effect: Effect) {
         self.layer = layer
-        self.value = (effect.values?.first(where: { $0.name == "Slider" }) as? VolumeEffectValue<Vector1D>)?.interpolator
+        self.value = (effect.values?.first(where: { $0.name == "Slider" }) as? InterpolatableEffectValue<Vector1D>)?.interpolator
         layer.effects?.forEach {
             switch $0.name {
             case "Reverse_In":
                 reverse = (($0.values?.first { $0.name == "Checkbox" }) as? BoolEffectValue)?.value
             case "Delay_In":
-                delay = (($0.values?.first { $0.name == "Slider" }) as? VolumeEffectValue<Vector1D>)?.interpolator
+                delay = (($0.values?.first { $0.name == "Slider" }) as? InterpolatableEffectValue<Vector1D>)?.interpolator
             case "Position_In":
-                position = (($0.values?.first { $0.name == "3D Point" }) as? VolumeEffectValue<Vector3D>)?.interpolator
+                position = (($0.values?.first { $0.name == "3D Point" }) as? InterpolatableEffectValue<Vector3D>)?.interpolator
             case "Opacity_In":
-                opacity = (($0.values?.first { $0.name == "Slider" }) as? VolumeEffectValue<Vector1D>)?.interpolator
+                opacity = (($0.values?.first { $0.name == "Slider" }) as? InterpolatableEffectValue<Vector1D>)?.interpolator
             default:
                 break
             }

@@ -105,6 +105,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
     self.effects = layer.effects
     self.maskLayer = nil
     super.init(layer: layer)
+    self.effects?.forEach { $0.setUp(layer: self) }
   }
   
   required init?(coder aDecoder: NSCoder) {
