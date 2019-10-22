@@ -11,7 +11,7 @@ import QuartzCore
 
 class DropShadowEffect: Effect {
 	
-	override func apply(layer: CALayer) {
+	override func apply(layer: CALayer, frame: CGFloat) {
 		values?.forEach({ (value) in
 			switch value.name {
 			case "Shadow Color":
@@ -19,18 +19,23 @@ class DropShadowEffect: Effect {
 					layer.shadowColor = CGColor(red: CGFloat(colorArray.value[0]), green: CGFloat(colorArray.value[1]), blue: CGFloat(colorArray.value[2]), alpha: CGFloat(colorArray.value[3]))
 				}
 			case "Direction":
-				if let direction = value as? DoubleEffectValue {
-					if let distance = values?.first(where: { $0.name == "Distance" }) as? DoubleEffectValue {
-						layer.shadowOffset = NSSize(width: -cos(direction.value * .pi / 180) * distance.value, height: sin(direction.value * .pi / 180) * distance.value)
+				if let direction = value as? InterpolatableEffectValue<Vector1D> {
+					if let distance = values?.first(where: { $0.name == "Distance" }) as? InterpolatableEffectValue<Vector1D> {
+                        let directionValue = (direction.interpolator.value(frame: frame) as! Vector1D).value
+                        let distanceValue = (distance.interpolator.value(frame: frame) as! Vector1D).value
+                        
+						layer.shadowOffset = NSSize(width: -cos(directionValue * .pi / 180) * distanceValue, height: sin(directionValue * .pi / 180) * distanceValue)
 					}
 				}
 			case "Opacity":
-				if let opacity = value as? DoubleEffectValue {
-					layer.shadowOpacity = Float(opacity.value) / 255.0
+				if let opacity = value as? InterpolatableEffectValue<Vector1D> {
+                    let opacityValue = (opacity.interpolator.value(frame: frame) as! Vector1D).value
+					layer.shadowOpacity = Float(opacityValue) / 255.0
 				}
 			case "Softness":
-				if let softness = value as? DoubleEffectValue {
-					layer.shadowRadius = CGFloat(softness.value) / 5.0
+				if let softness = value as? InterpolatableEffectValue<Vector1D> {
+                    let softnessValue = (softness.interpolator.value(frame: frame) as! Vector1D).cgFloatValue
+					layer.shadowRadius = softnessValue / 5.0
 				}
 			default:
 				break

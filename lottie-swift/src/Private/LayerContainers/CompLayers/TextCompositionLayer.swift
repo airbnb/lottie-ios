@@ -57,8 +57,8 @@ class TextCompositionLayer: CompositionLayer {
   let interpolatableScale: KeyframeInterpolator<Vector3D>?
   
   let fonts : FontList?
-  let textLayer: DisabledTextLayer = DisabledTextLayer()
-  let textStrokeLayer: DisabledTextLayer = DisabledTextLayer()
+  let textLayer: CATextLayer
+  let textStrokeLayer: CATextLayer
   var textProvider: AnimationTextProvider
   
   init(textLayer: TextLayerModel, textProvider: AnimationTextProvider, fonts: FontList?) {
@@ -77,7 +77,16 @@ class TextCompositionLayer: CompositionLayer {
     self.interpolatableScale = KeyframeInterpolator(keyframes: textLayer.transform.scale.keyframes)
     
     self.fonts = fonts
+    if (textLayer.effects?.first { $0.name == "Evolution_(%)_In" }) != nil {
+        self.textLayer = WordAnimatedTextLayer()
+        self.textStrokeLayer = WordAnimatedTextLayer()
+    } else {
+        self.textLayer = DisabledTextLayer()
+        self.textStrokeLayer = DisabledTextLayer()
+    }
+    
     super.init(layer: textLayer, size: .zero)
+    
     contentsLayer.addSublayer(self.textLayer)
     contentsLayer.addSublayer(self.textStrokeLayer)
     self.textLayer.masksToBounds = false
@@ -102,6 +111,9 @@ class TextCompositionLayer: CompositionLayer {
     
     self.interpolatableAnchorPoint = nil
     self.interpolatableScale = nil
+    
+    self.textLayer = DisabledTextLayer()
+    self.textStrokeLayer = DisabledTextLayer()
     
 	self.fonts = nil
     super.init(layer: layer)
@@ -214,10 +226,11 @@ class TextCompositionLayer: CompositionLayer {
         layer.frame = CGRect(origin: text.textFramePosition?.pointValue ?? emptyPosition, size: size)
         //    TODO: Investigate what is wrong with transform matrix
         //    textLayer.transform = matrix
-        layer.string = baseAttributedString
+        
         layer.alignmentMode = text.justification?.caTextAlignement ?? CATextLayerAlignmentMode.left
         layer.contentsScale = 2.0
         layer.rasterizationScale = 2.0
+        layer.string = baseAttributedString
     }
     
     if textStrokeLayer.isHidden == false {

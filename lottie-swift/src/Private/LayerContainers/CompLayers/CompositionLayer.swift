@@ -24,6 +24,8 @@ class CompositionLayer: CALayer, KeypathSearchable {
   let matteType: MatteType?
   
   var renderScale: CGFloat = 1
+    
+  var effects: [Effect]?
   
   var matteLayer: CompositionLayer? {
     didSet {
@@ -57,8 +59,10 @@ class CompositionLayer: CALayer, KeypathSearchable {
     self.timeStretch = layer.timeStretch.cgFloat
     self.startFrame = layer.startTime.cgFloat
     self.keypathName = layer.name
+    self.effects = layer.effects
     self.childKeypaths = [transformNode.transformProperties]
     super.init()
+    self.effects?.forEach { $0.setUp(layer: self) }
     self.anchorPoint = .zero
     self.actions = [
       "opacity" : NSNull(),
@@ -78,7 +82,6 @@ class CompositionLayer: CALayer, KeypathSearchable {
       "sublayerTransform" : NSNull(),
       "hidden" : NSNull()
     ]
-    layer.effects?.forEach { $0.apply(layer: contentsLayer) }
     addSublayer(contentsLayer)
     
     if let maskLayer = maskLayer {
@@ -99,8 +102,10 @@ class CompositionLayer: CALayer, KeypathSearchable {
     self.startFrame = layer.startFrame
     self.keypathName = layer.keypathName
     self.childKeypaths = [transformNode.transformProperties]
+    self.effects = layer.effects
     self.maskLayer = nil
     super.init(layer: layer)
+    self.effects?.forEach { $0.setUp(layer: self) }
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -118,6 +123,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
     contentsLayer.transform = transformNode.globalTransform
     contentsLayer.opacity = transformNode.opacity
     contentsLayer.isHidden = !layerVisible
+    effects?.forEach { $0.apply(layer: self, frame: frame) }
     layerDelegate?.frameUpdated(frame: frame)
   }
   
