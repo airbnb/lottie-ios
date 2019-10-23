@@ -30,7 +30,7 @@ public enum LottieContentMode: Int {
 public class LottieView: NSView {
   
   var screenScale: CGFloat {
-    return NSApp.mainWindow?.backingScaleFactor ?? 1
+    return NSApp.mainWindow?.backingScaleFactor ?? 2.0
   }
   
   var viewLayer: CALayer? {
