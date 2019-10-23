@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DA732F023609AF100F00421 /* CompositionLayerDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA732EF23609AF100F00421 /* CompositionLayerDependency.swift */; };
+		0DA732F223609CBB00F00421 /* CompositionLayerDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA732EF23609AF100F00421 /* CompositionLayerDependency.swift */; };
 		25D5436F22306E2D00ED90FA /* CompatibleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */; };
 		25D543712230787900ED90FA /* CompatibleAnimationKeypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */; };
 		25D5437222307C8700ED90FA /* CompatibleAnimationKeypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */; };
@@ -723,6 +725,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0DA732EF23609AF100F00421 /* CompositionLayerDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionLayerDependency.swift; sourceTree = "<group>"; };
 		25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleAnimationView.swift; sourceTree = "<group>"; };
 		25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleAnimationKeypath.swift; sourceTree = "<group>"; };
 		4866744022249C4E00258C00 /* TextAnimatorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAnimatorNode.swift; sourceTree = "<group>"; };
@@ -1084,6 +1087,7 @@
 		486E8717220B78BF007CD915 /* DynamicProperties */ = {
 			isa = PBXGroup;
 			children = (
+				0DA732EF23609AF100F00421 /* CompositionLayerDependency.swift */,
 				486E8718220B78BF007CD915 /* AnimationKeypath.swift */,
 				486E8719220B78BF007CD915 /* AnyValueProvider.swift */,
 				486E871A220B78BF007CD915 /* ValueProviders */,
@@ -1858,6 +1862,7 @@
 				486E87D5220B78D1007CD915 /* FillNode.swift in Sources */,
 				486E87D6220B78D1007CD915 /* GradientStrokeNode.swift in Sources */,
 				486E87D7220B78D1007CD915 /* ValueContainer.swift in Sources */,
+				0DA732F023609AF100F00421 /* CompositionLayerDependency.swift in Sources */,
 				486E87D8220B78D1007CD915 /* NodeProperty.swift in Sources */,
 				486E87D9220B78D1007CD915 /* AnyNodeProperty.swift in Sources */,
 				486E87DA220B78D1007CD915 /* NodePropertyMap.swift in Sources */,
@@ -2080,6 +2085,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DA732F223609CBB00F00421 /* CompositionLayerDependency.swift in Sources */,
 				486E889B220B78F4007CD915 /* AnimationTime.swift in Sources */,
 				486E889C220B78F4007CD915 /* Vectors.swift in Sources */,
 				486E889D220B78F4007CD915 /* Color.swift in Sources */,

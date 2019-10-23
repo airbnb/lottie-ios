@@ -37,4 +37,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.animationView = animationView
     }
 }
-
