@@ -479,6 +479,41 @@ final public class AnimationView: LottieView {
   }
   
   /**
+   Searches for the  layer to the first Keypath and adds  ` CompositionLayerDependecy `
+   to that layer. Dependency will notify with updated layer
+   
+   Note: if no layer is found for the keypath, then function returns `false`.
+   
+   - Parameter dependency: The dependency to add to the found animation layer.
+   - Parameter keypath: The keypath used to find the animation layer.
+   
+   Example:
+   ```
+   /// A keypath that finds `2.2_framed/2.2/Btn_Blue_Lets_Go`
+   let layerKeypath = AnimationKeypath(keypath: "2.2_framed/2.2/Btn_Blue_Lets_Go")
+   
+   /// Create custom calss that conforms to `CompositionLayerDependecy`
+   class MyButton: NSButton, CompositionLayerDependecy {
+   func layerUpdated(layer: CALayer) {
+   self.isHidden = layer.isHidden
+   self.alphaValue = CGFloat(layer.opacity)
+   self.frame = layer.frame
+   }
+   .....
+   }
+   /// Set the provider on the animationView.
+   animationView.addDependency(customView, forLayerAt: layerKeypath)
+   ```
+   */
+  
+  public func addDependency(_ dependency: CompositionLayerDependency, forLayerAt keypath: AnimationKeypath) -> Bool {
+    guard let animationLayer = animationLayer else {
+      return false
+    }
+    return animationLayer.addDependency(dependency: dependency, for: keypath)
+  }
+  
+  /**
    Converts a CGRect from the AnimationView's coordinate space into the
    coordinate space of the layer found at Keypath.
    

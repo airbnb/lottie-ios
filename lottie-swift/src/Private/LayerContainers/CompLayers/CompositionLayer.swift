@@ -27,6 +27,8 @@ class CompositionLayer: CALayer, KeypathSearchable {
     
   var effects: [Effect]?
   
+  var layerDependencies = [CompositionLayerDependency]()
+  
   var matteLayer: CompositionLayer? {
     didSet {
       if let matte = matteLayer {
@@ -125,10 +127,20 @@ class CompositionLayer: CALayer, KeypathSearchable {
     contentsLayer.isHidden = !layerVisible
     effects?.forEach { $0.apply(layer: self, frame: frame) }
     layerDelegate?.frameUpdated(frame: frame)
+    layerDependencies.forEach {
+      $0.layerUpdated(layer: contentsLayer)
+    }
   }
   
   func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
     /// To be overridden by subclass
+    layerDependencies.forEach {
+      $0.layerUpdated(layer: contentsLayer)
+    }
+  }
+  
+  func addDependency(_ dependency: CompositionLayerDependency) {
+    layerDependencies.append(dependency)
   }
   
   // MARK: Keypath Searchable

@@ -685,17 +685,17 @@
         <window title="Test" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="870" height="584"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1440"/>
+            <rect key="contentRect" x="335" y="390" width="1200" height="722"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="870" height="584"/>
+                <rect key="frame" x="0.0" y="0.0" width="1200" height="722"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="qn7-dd-PW6">
-                        <rect key="frame" x="0.0" y="72" width="870" height="512"/>
+                        <rect key="frame" x="0.0" y="72" width="1200" height="650"/>
                     </customView>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iTB-xm-H1X">
-                        <rect key="frame" x="173" y="18" width="589" height="19"/>
+                        <rect key="frame" x="173" y="18" width="919" height="19"/>
                         <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="yKy-fW-JC1"/>
                         <connections>
                             <binding destination="Voe-Tx-rLC" name="value" keyPath="currentProgress" id="uso-gr-xhT"/>

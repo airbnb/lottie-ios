@@ -109,6 +109,23 @@ extension KeypathSearchable {
     return nil
   }
   
+  func compositionLayer(for keyPath: AnimationKeypath) -> CompositionLayer? {
+    if keyPath.nextKeypath == nil, let layerKey = keyPath.currentKey, layerKey.equalsKeypath(keypathName) {
+      return self as? CompositionLayer
+    }
+
+    guard let nextKeypath = keyPath.popKey(keypathName) else {
+      return nil
+    }
+
+    for child in childKeypaths {
+      if let layer = child.compositionLayer(for: nextKeypath) {
+        return layer
+      }
+    }
+    return nil
+  }
+    
   func logKeypaths(for keyPath: AnimationKeypath?) {
     let newKeypath: AnimationKeypath
     if let previousKeypath = keyPath {
@@ -184,7 +201,7 @@ extension AnimationKeypath {
   }
   
   var fullPath: String {
-    return keys.joined(separator: ".")
+    return keys.joined(separator: "/")
   }
   
   func appendingKey(_ key: String) -> AnimationKeypath {
