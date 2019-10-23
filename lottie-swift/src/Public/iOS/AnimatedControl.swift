@@ -40,6 +40,13 @@ open class AnimatedControl: UIControl {
       animationDidSet()
     }
   }
+
+  /// Sets the speed of the animation playback. Defaults to 1
+  public var animationSpeed: CGFloat = 1 {
+    didSet {
+      animationView.animationSpeed = animationSpeed
+    }
+  }
   
   /// Sets which Animation Layer should be visible for the given state.
   public func setLayer(named: String, forState: UIControl.State) {
