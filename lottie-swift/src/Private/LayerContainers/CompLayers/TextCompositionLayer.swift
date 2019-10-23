@@ -222,8 +222,12 @@ class TextCompositionLayer: CompositionLayer {
         layer.anchorPoint = normalizedAnchor
         layer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
         layer.transform = CATransform3DIdentity
-        let emptyPosition = CGPoint(x: -textAnchor.x, y: -CGFloat(text.fontSize * 0.9))
-        layer.frame = CGRect(origin: text.textFramePosition?.pointValue ?? emptyPosition, size: size)
+        if let position = text.textFramePosition?.pointValue {
+            layer.frame = CGRect(origin: position, size: size)
+            layer.position.y -= CGFloat(text.fontSize * 0.2)
+        } else {
+            layer.frame = CGRect(origin: CGPoint(x: -textAnchor.x, y: -CGFloat(text.fontSize)), size: size)
+        }
         //    TODO: Investigate what is wrong with transform matrix
         //    textLayer.transform = matrix
         
