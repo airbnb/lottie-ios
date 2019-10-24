@@ -232,8 +232,6 @@ class TextCompositionLayer: CompositionLayer {
         //    textLayer.transform = matrix
         
         layer.alignmentMode = text.justification?.caTextAlignement ?? CATextLayerAlignmentMode.left
-        layer.contentsScale = 2.0
-        layer.rasterizationScale = 2.0
         layer.string = baseAttributedString
     }
     
