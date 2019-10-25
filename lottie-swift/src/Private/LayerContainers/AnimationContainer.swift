@@ -118,7 +118,7 @@ class AnimationContainer: CALayer {
     self.animationLayers = []
     super.init()
     bounds = animation.bounds
-    let layers = animation.layers.initializeCompositionLayers(assetLibrary: animation.assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, frameRate: CGFloat(animation.framerate), fonts: animation.fonts)
+    let layers = animation.layers.initializeCompositionLayers(assetLibrary: animation.assetLibrary, layerImageProvider: layerImageProvider, layerTextProvider: layerTextProvider, frameRate: CGFloat(animation.framerate), fonts: animation.fonts)
     
     var imageLayers = [ImageCompositionLayer]()
     var textLayers = [TextCompositionLayer]()
@@ -157,15 +157,23 @@ class AnimationContainer: CALayer {
   
   /// For CAAnimation Use
   public override init(layer: Any) {
+    
+    let animationLayer = layer as? AnimationContainer
+    
+    if let animationLayer = animationLayer {
+        layerImageProvider = animationLayer.layerImageProvider
+        layerTextProvider = animationLayer.layerTextProvider
+    } else {
+        layerImageProvider = LayerImageProvider(imageProvider: BlankImageProvider(), assets: nil)
+        layerTextProvider = LayerTextProvider(textProvider: DefaultTextProvider())
+    }
+    
     self.animationLayers = []
-    self.layerImageProvider = LayerImageProvider(imageProvider: BlankImageProvider(), assets: nil)
-    self.layerTextProvider = LayerTextProvider(textProvider: DefaultTextProvider())
     super.init(layer: layer)
     
-    guard let animationLayer = layer as? AnimationContainer else { return }
-    
-    currentFrame = animationLayer.currentFrame
-    
+    if let animationLayer = animationLayer {
+        currentFrame = animationLayer.currentFrame
+    }
   }
   
   required init?(coder aDecoder: NSCoder) {
