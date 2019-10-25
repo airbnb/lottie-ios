@@ -41,11 +41,10 @@ open class AnimatedControl: UIControl {
     }
   }
 
-  /// Sets the speed of the animation playback. Defaults to 1
-  public var animationSpeed: CGFloat = 1 {
-    didSet {
-      animationView.animationSpeed = animationSpeed
-    }
+  /// The speed of the animation playback. Defaults to 1
+  public var animationSpeed: CGFloat {
+    set { animationView.animationSpeed = newValue }
+    get { return animationView.animationSpeed }
   }
   
   /// Sets which Animation Layer should be visible for the given state.
