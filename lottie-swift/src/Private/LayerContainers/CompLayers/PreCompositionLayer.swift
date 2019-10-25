@@ -23,7 +23,7 @@ class PreCompositionLayer: CompositionLayer {
   init(precomp: PreCompLayerModel,
        asset: PrecompAsset,
        layerImageProvider: LayerImageProvider,
-       textProvider: AnimationTextProvider,
+       layerTextProvider: LayerTextProvider,
        assetLibrary: AssetLibrary?,
        frameRate: CGFloat) {
     self.animationLayers = []
@@ -37,10 +37,10 @@ class PreCompositionLayer: CompositionLayer {
     masksToBounds = true
     bounds = CGRect(origin: .zero, size: CGSize(width: precomp.width, height: precomp.height))
     
-    let layers = asset.layers.initializeCompositionLayers(assetLibrary: assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, frameRate: frameRate, fonts: nil)
+    let layers = asset.layers.initializeCompositionLayers(assetLibrary: assetLibrary, layerImageProvider: layerImageProvider, layerTextProvider: layerTextProvider, frameRate: frameRate, fonts: nil)
     
     var imageLayers = [ImageCompositionLayer]()
-    
+    var textLayers = [TextCompositionLayer]()
     var mattedLayer: CompositionLayer? = nil
     
     for layer in layers.reversed() {
@@ -48,6 +48,9 @@ class PreCompositionLayer: CompositionLayer {
       animationLayers.append(layer)
       if let imageLayer = layer as? ImageCompositionLayer {
         imageLayers.append(imageLayer)
+      }
+      if let textLayer = layer as? TextCompositionLayer {
+        textLayers.append(textLayer)
       }
       if let matte = mattedLayer {
         /// The previous layer requires this layer to be its matte
@@ -66,6 +69,7 @@ class PreCompositionLayer: CompositionLayer {
     self.childKeypaths.append(contentsOf: layers)
     
     layerImageProvider.addImageLayers(imageLayers)
+    layerTextProvider.addTextLayers(textLayers)
   }
   
   override init(layer: Any) {
