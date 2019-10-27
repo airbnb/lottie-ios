@@ -56,6 +56,7 @@ class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
 	}
     if let animationLayer = animationLayer, let key = animationKey {
       animationLayer.removeAnimation(forKey: key)
+      animationLayer.updateDependencies()
       if flag {
         animationLayer.currentFrame = (anim as! CABasicAnimation).toValue as! CGFloat
       }
