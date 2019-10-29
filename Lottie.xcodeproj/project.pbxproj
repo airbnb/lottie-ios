@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D2C87F92367203D000DCA47 /* CompositionLayerDependencyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2C87F82367203D000DCA47 /* CompositionLayerDependencyProtocol.swift */; };
 		0DA732F023609AF100F00421 /* CompositionLayerDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA732EF23609AF100F00421 /* CompositionLayerDependency.swift */; };
 		0DA732F223609CBB00F00421 /* CompositionLayerDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA732EF23609AF100F00421 /* CompositionLayerDependency.swift */; };
 		25D5436F22306E2D00ED90FA /* CompatibleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */; };
@@ -725,6 +726,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D2C87F82367203D000DCA47 /* CompositionLayerDependencyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositionLayerDependencyProtocol.swift; sourceTree = "<group>"; };
 		0DA732EF23609AF100F00421 /* CompositionLayerDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionLayerDependency.swift; sourceTree = "<group>"; };
 		25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleAnimationView.swift; sourceTree = "<group>"; };
 		25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleAnimationKeypath.swift; sourceTree = "<group>"; };
@@ -1146,6 +1148,7 @@
 		486E872B220B78BF007CD915 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				0D2C87F82367203D000DCA47 /* CompositionLayerDependencyProtocol.swift */,
 				486E872C220B78BF007CD915 /* LayerTransformNode.swift */,
 				486E872D220B78BF007CD915 /* InvertedMatteLayer.swift */,
 				486E872E220B78BF007CD915 /* LayerImageProvider.swift */,
@@ -1825,6 +1828,7 @@
 				486E87B2220B78D1007CD915 /* AnimationKeypath.swift in Sources */,
 				486E87B3220B78D1007CD915 /* AnyValueProvider.swift in Sources */,
 				486E87B4220B78D1007CD915 /* ColorValueProvider.swift in Sources */,
+				0D2C87F92367203D000DCA47 /* CompositionLayerDependencyProtocol.swift in Sources */,
 				486E87B5220B78D1007CD915 /* FloatValueProvider.swift in Sources */,
 				486E87B6220B78D1007CD915 /* SizeValueProvider.swift in Sources */,
 				BD4FE90A2327A24E0011B14B /* DropShadowEffect.swift in Sources */,

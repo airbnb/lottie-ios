@@ -39,7 +39,15 @@ class AnimationContainer: CALayer {
   }
   
   public var respectAnimationFrameRate: Bool = false
-  
+    
+  func updateDependencies() {
+    layersWithDependencies.forEach { layer in
+      layer.layerDependencies.forEach { dependency in
+        dependency.layerAnimationRemoved(layer: layer.contentsLayer)
+     }
+   }
+  }
+    
   /// Forces the view to update its drawing.
   func forceDisplayUpdate() {
     animationLayers.forEach( { $0.displayWithFrame(frame: currentFrame, forceUpdates: true) })
@@ -84,6 +92,7 @@ class AnimationContainer: CALayer {
     for layer in animationLayers {
       if let foundLayer = layer.compositionLayer(for: keyPath) {
         foundLayer.addDependency(dependency)
+        layersWithDependencies.insert(foundLayer)
         return true
       }
     }
@@ -109,6 +118,8 @@ class AnimationContainer: CALayer {
   }
   
   var animationLayers: [CompositionLayer]
+  fileprivate var layersWithDependencies = Set<CompositionLayer>()
+    
   fileprivate let layerImageProvider: LayerImageProvider
   fileprivate let layerTextProvider: LayerTextProvider
   

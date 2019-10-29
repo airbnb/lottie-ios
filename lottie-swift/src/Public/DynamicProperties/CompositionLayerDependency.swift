@@ -10,4 +10,5 @@ import QuartzCore
 
 public protocol CompositionLayerDependency {
   func layerUpdated(layer: CALayer)
+  func layerAnimationRemoved(layer: CALayer)
 }
