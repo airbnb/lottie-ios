@@ -128,14 +128,14 @@ class CompositionLayer: CALayer, KeypathSearchable {
     effects?.forEach { $0.apply(layer: self, frame: frame) }
     layerDelegate?.frameUpdated(frame: frame)
     layerDependencies.forEach {
-      $0.layerUpdated(layer: contentsLayer)
+      $0.layerUpdated(layer: notificationLayer)
     }
   }
   
   func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
     /// To be overridden by subclass
     layerDependencies.forEach {
-      $0.layerUpdated(layer: contentsLayer)
+      $0.layerUpdated(layer: notificationLayer)
     }
   }
   
@@ -154,6 +154,10 @@ class CompositionLayer: CALayer, KeypathSearchable {
   final var childKeypaths: [KeypathSearchable]
   
   var keypathLayer: CALayer? {
+    return contentsLayer
+  }
+    
+  var notificationLayer: CALayer {
     return contentsLayer
   }
 }

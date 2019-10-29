@@ -7,8 +7,33 @@
 
 import Foundation
 
+protocol Transformable {
+    var anchorPoint: KeyframeGroup<Vector3D> { get }
+    
+    /// The position of the transform. This is nil if the position data was split.
+    var position: KeyframeGroup<Vector3D>? { get }
+    
+    /// The positionX of the transform. This is nil if the position property is set.
+    var positionX: KeyframeGroup<Vector1D>? { get }
+    
+    /// The positionY of the transform. This is nil if the position property is set.
+    var positionY: KeyframeGroup<Vector1D>? { get }
+    
+    /// The scale of the transform
+    var scale: KeyframeGroup<Vector3D> { get }
+    
+    /// The rotation of the transform. Note: This is single dimensional rotation.
+    var rotation: KeyframeGroup<Vector1D> { get }
+    
+    /// The opacity of the transform.
+    var opacity: KeyframeGroup<Vector1D> { get }
+    
+    /// Should always be nil.
+    var rotationZ: KeyframeGroup<Vector1D>? { get }
+}
+
 /// The animatable transform for a layer. Controls position, rotation, scale, and opacity.
-class Transform: Codable {
+class Transform: Codable, Transformable {
   
   /// The anchor point of the transform.
   let anchorPoint: KeyframeGroup<Vector3D>

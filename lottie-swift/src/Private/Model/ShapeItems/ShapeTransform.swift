@@ -8,13 +8,18 @@
 import Foundation
 
 /// An item that define an ellipse shape
-class ShapeTransform: ShapeItem {
-  
-  /// Anchor Point
-  let anchor: KeyframeGroup<Vector3D>
+class ShapeTransform: ShapeItem, Transformable {
+    
+  let anchorPoint: KeyframeGroup<Vector3D>
+    
+  let positionX: KeyframeGroup<Vector1D>? = nil
+    
+  let positionY: KeyframeGroup<Vector1D>? = nil
+     
+  let rotationZ: KeyframeGroup<Vector1D>? = nil
   
   /// Position
-  let position: KeyframeGroup<Vector3D>
+  let position: KeyframeGroup<Vector3D>?
   
   /// Scale
   let scale: KeyframeGroup<Vector3D>
@@ -32,7 +37,7 @@ class ShapeTransform: ShapeItem {
   let skewAxis: KeyframeGroup<Vector1D>
   
   private enum CodingKeys : String, CodingKey {
-    case anchor = "a"
+    case anchorPoint = "a"
     case position = "p"
     case scale = "s"
     case rotation = "r"
@@ -43,7 +48,7 @@ class ShapeTransform: ShapeItem {
   
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: ShapeTransform.CodingKeys.self)
-    self.anchor = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .anchor) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+    self.anchorPoint = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .anchorPoint) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
     self.position = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .position) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
     self.scale = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .scale) ?? KeyframeGroup(Vector3D(x: Double(100), y: 100, z: 100))
     self.rotation = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation) ?? KeyframeGroup(Vector1D(0))
@@ -56,7 +61,7 @@ class ShapeTransform: ShapeItem {
   override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(anchor, forKey: .anchor)
+    try container.encode(anchorPoint, forKey: .anchorPoint)
     try container.encode(position, forKey: .position)
     try container.encode(scale, forKey: .scale)
     try container.encode(rotation, forKey: .rotation)
