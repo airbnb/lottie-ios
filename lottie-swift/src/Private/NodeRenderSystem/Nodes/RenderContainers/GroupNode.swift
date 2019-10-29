@@ -17,8 +17,12 @@ class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
   
   init(transform: ShapeTransform?) {
     if let transform = transform {
-      self.anchor = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.anchor.keyframes))
-      self.position = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.position.keyframes))
+        if let position = transform.position {
+            self.position = NodeProperty(provider: KeyframeInterpolator(keyframes: position.keyframes))
+        } else {
+            self.position = NodeProperty(provider: SingleValueProvider(Vector3D(x: CGFloat(0), y: CGFloat(0), z: CGFloat(0))))
+        }
+      self.anchor = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.anchorPoint.keyframes))
       self.scale = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.scale.keyframes))
       self.rotation = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.rotation.keyframes))
       self.opacity = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.opacity.keyframes))

@@ -8,7 +8,7 @@
 import Foundation
 
 /// An item that define an ellipse shape
-class Rectangle: ShapeItem {
+class Rectangle: ShapeItem, MeasurableShape {
   
   /// The direction of the rect.
   let direction: PathDirection

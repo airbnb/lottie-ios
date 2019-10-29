@@ -7,6 +7,11 @@
 
 import Foundation
 
+protocol MeasurableShape {
+    var size: KeyframeGroup<Vector3D> { get }
+    var position: KeyframeGroup<Vector3D> { get }
+}
+
 /// Used for mapping a heterogeneous list to classes for parsing.
 extension ShapeType: ClassFamily {
 
