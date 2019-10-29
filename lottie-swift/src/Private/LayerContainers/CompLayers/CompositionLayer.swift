@@ -127,7 +127,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
     contentsLayer.isHidden = !layerVisible
     effects?.forEach { $0.apply(layer: self, frame: frame) }
     layerDelegate?.frameUpdated(frame: frame)
-    layerDependencies.forEach { $0.layerUpdated(layer: contentsLayer) }
+    layerDependencies.forEach { $0.layerUpdated(layer: notificationLayer) }
   }
   
   func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
