@@ -86,7 +86,7 @@ And then import wherever needed: ```import Lottie```
 
 If you have doubts, please, check the following links:
 
-[How to use](https://developer.apple.com/videos/play/wwdc2019/408/)
+[How to use](https://airbnb.io/lottie/#/ios?id=animation-model)
 
 [Creating Swift Packages](https://developer.apple.com/videos/play/wwdc2019/410/)
 
