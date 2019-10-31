@@ -44,10 +44,15 @@ public class LottieView: NSView {
   func animationMovedToWindow() {
     
   }
+    @objc
+    func renderScaleDidChange(_ notification: NSNotification? = nil) {
+        
+    }
   
   public override func viewDidMoveToWindow() {
     super.viewDidMoveToWindow()
     animationMovedToWindow()
+    NotificationCenter.default.addObserver(self, selector: #selector(renderScaleDidChange(_:)), name: NSWindow.didChangeScreenNotification, object: window)
   }
   
   func commonInit() {

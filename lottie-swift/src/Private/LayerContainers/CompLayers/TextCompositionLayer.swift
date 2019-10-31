@@ -60,6 +60,13 @@ class TextCompositionLayer: CompositionLayer {
   let textLayer: CATextLayer
   let textStrokeLayer: CATextLayer
   var textProvider: AnimationTextProvider
+    
+    override var renderScale: CGFloat {
+        didSet {
+            textLayer.contentsScale = self.renderScale
+            textStrokeLayer.contentsScale = self.renderScale
+        }
+    }
   
   init(textLayer: TextLayerModel, textProvider: AnimationTextProvider, fonts: FontList?) {
     var rootNode: TextAnimatorNode?

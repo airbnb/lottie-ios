@@ -830,6 +830,10 @@ final public class AnimationView: LottieView {
     setNeedsLayout()
     currentFrame = CGFloat(animation.startFrame)
   }
+    
+    override func renderScaleDidChange(_ notification: NSNotification? = nil) {
+         animationLayer?.renderScale = screenScale
+    }
   
   func updateRasterizationState() {
     if isAnimationPlaying {
