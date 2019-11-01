@@ -114,7 +114,10 @@ class AnimationContainer: CALayer {
 
   var textProvider: AnimationTextProvider {
     get { return layerTextProvider.textProvider }
-    set { layerTextProvider.textProvider = newValue }
+    set {
+        layerTextProvider.textProvider = newValue
+        forceDisplayUpdate()
+    }
   }
   
   var animationLayers: [CompositionLayer]

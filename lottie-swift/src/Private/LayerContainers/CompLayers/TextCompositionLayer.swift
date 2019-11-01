@@ -53,13 +53,18 @@ class TextCompositionLayer: CompositionLayer {
   
   let rootNode: TextAnimatorNode?
   let textDocument: KeyframeInterpolator<TextDocument>?
+  var textParams: (textDocument: TextDocument, anchorPoint: Vector3D, scale: Vector3D)?
   let interpolatableAnchorPoint: KeyframeInterpolator<Vector3D>?
   let interpolatableScale: KeyframeInterpolator<Vector3D>?
   
   let fonts : FontList?
   let textLayer: CATextLayer
   let textStrokeLayer: CATextLayer
-  var textProvider: AnimationTextProvider
+  var textProvider: AnimationTextProvider {
+    didSet {
+        setupLayerWithTextParams()
+    }
+  }
     
     override var renderScale: CGFloat {
         didSet {
@@ -140,6 +145,15 @@ class TextCompositionLayer: CompositionLayer {
     let anchorPoint = interpolatableAnchorPoint?.value(frame: frame) as! Vector3D
     let scale = interpolatableScale?.value(frame: frame) as! Vector3D
     rootNode?.rebuildOutputs(frame: frame)
+    textParams = (textDocument:text, anchorPoint: anchorPoint, scale: scale)
+    setupLayerWithTextParams()
+  }
+    
+  func setupLayerWithTextParams(silently: Bool = false) {
+    guard let textParams = textParams else { return }
+    let text = textParams.textDocument
+    let anchorPoint = textParams.anchorPoint
+    let scale = textParams.scale
     
     let fillColor = rootNode?.textOutputNode.fillColor ?? text.fillColorData.cgColorValue
     let strokeColor = rootNode?.textOutputNode.strokeColor ?? text.strokeColorData?.cgColorValue
