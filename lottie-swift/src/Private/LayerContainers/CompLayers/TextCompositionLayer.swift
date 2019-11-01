@@ -53,7 +53,6 @@ class TextCompositionLayer: CompositionLayer {
   
   let rootNode: TextAnimatorNode?
   let textDocument: KeyframeInterpolator<TextDocument>?
-  var textParams: (textDocument: TextDocument, anchorPoint: Vector3D, scale: Vector3D)?
   let interpolatableAnchorPoint: KeyframeInterpolator<Vector3D>?
   let interpolatableScale: KeyframeInterpolator<Vector3D>?
   
