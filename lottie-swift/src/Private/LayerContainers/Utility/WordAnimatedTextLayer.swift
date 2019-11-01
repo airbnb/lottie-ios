@@ -23,6 +23,18 @@ class WordAnimatedTextLayer : DisabledTextLayer {
         }
     }
     
+    let shifted: Bool
+    
+    init(_ shifted: Bool = false) {
+        self.shifted = shifted
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        shifted = false
+        super.init(coder: coder)
+    }
+    
     func updateLayers() {
         guard let attributedString = attributedString else { return }
         
