@@ -59,7 +59,12 @@ class TextCompositionLayer: CompositionLayer {
   let fonts : FontList?
   let textLayer: CATextLayer
   let textStrokeLayer: CATextLayer
-  var textProvider: AnimationTextProvider
+  var textProvider: AnimationTextProvider {
+    didSet {
+        guard let lastUpdatedFrame = textDocument?.lastUpdatedFrame else { return }
+        displayContentsWithFrame(frame: lastUpdatedFrame, forceUpdates: true)
+    }
+  }
     
     override var renderScale: CGFloat {
         didSet {
