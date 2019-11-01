@@ -90,8 +90,8 @@ class TextCompositionLayer: CompositionLayer {
     
     self.fonts = fonts
     if (textLayer.effects?.first { $0.name == "Evolution_(%)_In" }) != nil {
-        self.textLayer = WordAnimatedTextLayer()
-        self.textStrokeLayer = WordAnimatedTextLayer()
+        self.textLayer = WordAnimatedTextLayer(textLayer.parent != nil)
+        self.textStrokeLayer = WordAnimatedTextLayer(textLayer.parent != nil)
     } else {
         self.textLayer = DisabledTextLayer()
         self.textStrokeLayer = DisabledTextLayer()
@@ -234,12 +234,19 @@ class TextCompositionLayer: CompositionLayer {
         layer.anchorPoint = normalizedAnchor
         layer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
         layer.transform = CATransform3DIdentity
+        layer.fontSize = CGFloat(text.fontSize)
+        layer.font = resultFont
+        layer.foregroundColor = fillColor
         if let position = text.textFramePosition?.pointValue {
             layer.frame = CGRect(origin: position, size: size)
             layer.position.y -= CGFloat(text.fontSize * 0.2)
         } else {
             layer.frame = CGRect(origin: CGPoint(x: -textAnchor.x, y: -CGFloat(text.fontSize)), size: size)
         }
+        if let wordLayer = layer as? WordAnimatedTextLayer, wordLayer.shifted {
+            wordLayer.frame.origin.y += wordLayer.fontSize
+        }
+        
         //    TODO: Investigate what is wrong with transform matrix
         //    textLayer.transform = matrix
         
