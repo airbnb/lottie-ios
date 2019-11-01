@@ -62,7 +62,8 @@ class TextCompositionLayer: CompositionLayer {
   let textStrokeLayer: CATextLayer
   var textProvider: AnimationTextProvider {
     didSet {
-        setupLayerWithTextParams()
+        guard let lastUpdatedFrame = textDocument?.lastUpdatedFrame else { return }
+        displayContentsWithFrame(frame: lastUpdatedFrame, forceUpdates: true)
     }
   }
     
@@ -145,15 +146,6 @@ class TextCompositionLayer: CompositionLayer {
     let anchorPoint = interpolatableAnchorPoint?.value(frame: frame) as! Vector3D
     let scale = interpolatableScale?.value(frame: frame) as! Vector3D
     rootNode?.rebuildOutputs(frame: frame)
-    textParams = (textDocument:text, anchorPoint: anchorPoint, scale: scale)
-    setupLayerWithTextParams()
-  }
-    
-  func setupLayerWithTextParams(silently: Bool = false) {
-    guard let textParams = textParams else { return }
-    let text = textParams.textDocument
-    let anchorPoint = textParams.anchorPoint
-    let scale = textParams.scale
     
     let fillColor = rootNode?.textOutputNode.fillColor ?? text.fillColorData.cgColorValue
     let strokeColor = rootNode?.textOutputNode.strokeColor ?? text.strokeColorData?.cgColorValue

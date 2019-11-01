@@ -65,7 +65,7 @@ class KeyframeInterpolator<ValueType>: AnyValueProvider where ValueType: Interpo
     return true
   }
   
-  fileprivate var lastUpdatedFrame: CGFloat?
+  fileprivate(set) var lastUpdatedFrame: CGFloat?
   
   func value(frame: CGFloat) -> Any {
     // First set the keyframe span for the frame.
