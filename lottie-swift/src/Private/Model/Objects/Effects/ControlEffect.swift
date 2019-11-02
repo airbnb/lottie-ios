@@ -13,12 +13,18 @@ import QuartzCore
 class ControlEffect: Effect {
     
     private var evolutionEffect: DelayedEvolutionEffect?
+    private var fastBlurEffect: RadialFastBlurEffect?
     
     override func setUp(layer: CALayer) {
         if name == "Evolution_(%)_In" {
             guard let textLayer = layer as? TextCompositionLayer else { return }
             if evolutionEffect == nil {
                 evolutionEffect = DelayedEvolutionEffect(layer: textLayer, effect: self)
+            }
+        } else if name == "CC Radial Fast Blur" {
+            guard let shapeLayer = layer as? ShapeCompositionLayer else { return }
+            if fastBlurEffect == nil {
+                fastBlurEffect = RadialFastBlurEffect(layer: shapeLayer, effect: self)
             }
         } else {
             super.setUp(layer: layer)
@@ -28,6 +34,8 @@ class ControlEffect: Effect {
     override func apply(layer: CALayer, frame: CGFloat) {
         if name == "Evolution_(%)_In" {
             evolutionEffect?.apply(frame: frame)
+        } else if name == "CC Radial Fast Blur" {
+            fastBlurEffect?.apply(frame: frame)
         } else {
             super.apply(layer: layer, frame: frame)
         }
@@ -73,6 +81,43 @@ class DelayedEvolutionEffect {
             
             sublayer.opacity = Float((1.0 - opacity) * fraction)
             sublayer.frame.origin = CGPoint(x: position.x * fraction, y: -(position.y * fraction))
+        }
+    }
+}
+
+class RadialFastBlurEffect {
+    let layer: ShapeCompositionLayer
+    let replicator: CAReplicatorLayer
+    
+    let center: KeyframeInterpolator<Vector3D>?
+    var amount: KeyframeInterpolator<Vector1D>?
+    var zoom: BoolEffectValue?
+    
+    init(layer: ShapeCompositionLayer, effect: Effect) {
+        let replicator = CAReplicatorLayer()
+        replicator.frame = layer.frame
+        replicator.instanceCount = 5
+        self.layer = layer
+        self.replicator = replicator
+        self.center = (effect.values?.first(where: { $0.name == "Center" }) as? InterpolatableEffectValue<Vector3D>)?.interpolator
+        self.amount = (effect.values?.first(where: { $0.name == "Amount" }) as? InterpolatableEffectValue<Vector1D>)?.interpolator
+        self.zoom = effect.values?.first(where: { $0.name == "Zoom" }) as? BoolEffectValue
+    }
+    
+    func apply(frame: CGFloat) {
+        guard let center = (center?.value(frame: frame) as? Vector3D)?.pointValue,
+              let amount = (amount?.value(frame: frame) as? Vector1D)?.value else {
+            return
+        }
+        
+        if replicator.superlayer == nil {
+            layer.superlayer?.addSublayer(replicator)
+            replicator.addSublayer(layer)
+        }
+        
+        if #available(OSXApplicationExtension 10.10, *) {
+            layer.filters = [CIFilter(name: "CIZoomBlur", parameters: [kCIInputCenterKey: CIVector(cgPoint: center),"inputAmount": amount]) as Any,
+                             CIFilter(name: "CIBoxBlur", parameters: ["inputRadius": amount / 5]) as Any]
         }
     }
 }
