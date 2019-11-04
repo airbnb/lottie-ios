@@ -9,7 +9,6 @@ import Foundation
 import CoreGraphics
 import QuartzCore
 import CoreText
-import Cocoa
 
 /// Needed for NSMutableParagraphStyle...
 #if os(OSX)
@@ -22,6 +21,16 @@ class DisabledTextLayer: CATextLayer {
   override func action(forKey event: String) -> CAAction? {
     return nil
   }
+#if os(OSX)
+    override func draw(in ctx: CGContext) {
+        NSGraphicsContext.saveGraphicsState()
+        if #available(OSX 10.10, *) {
+            NSGraphicsContext.current = NSGraphicsContext(cgContext: ctx, flipped: true)
+        }
+        (string as? NSAttributedString)?.draw(in: bounds)
+        NSGraphicsContext.restoreGraphicsState()
+    }
+#endif
 }
 
 extension TextJustification {
@@ -148,6 +157,14 @@ class TextCompositionLayer: CompositionLayer {
     
     let fillColor = rootNode?.textOutputNode.fillColor ?? text.fillColorData.cgColorValue
     let strokeColor = rootNode?.textOutputNode.strokeColor ?? text.strokeColorData?.cgColorValue
+#if os(OSX)
+    let nsFillColor = NSColor(cgColor: fillColor)
+    var nsStrokeColor: NSColor? = nil
+    if let strokeColor = strokeColor {
+        nsStrokeColor = NSColor(cgColor: strokeColor)
+    }
+#endif
+    
     let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
     let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
 //    TODO: Investigate what is wrong with transform matrix
@@ -179,33 +196,43 @@ class TextCompositionLayer: CompositionLayer {
 	
 	let resultFont = nsFont ?? CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil) as NSFont
 	var attributes: [NSAttributedString.Key : Any] = [
-      NSAttributedString.Key.font: resultFont,
-      NSAttributedString.Key.foregroundColor: fillColor,
-      NSAttributedString.Key.kern: tracking,
+      .font: resultFont,
+      .kern: tracking,
     ]
     
-    let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.lineSpacing = CGFloat(text.lineHeight)
-    paragraphStyle.alignment = text.justification?.textAlignment ?? NSTextAlignment.left
-    attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
+#if os(OSX)
+    attributes[.foregroundColor] = nsFillColor
+#else
+    attributes[.foregroundColor] = fillColor
+#endif
     
-    let baseAttributedString = NSAttributedString(string: textString, attributes: attributes )
+    let baselinePosition = CTFontGetAscent(ctFont)
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.lineSpacing = CGFloat(text.fontSize / text.lineHeight) * 6
+    paragraphStyle.alignment = text.justification?.textAlignment ?? NSTextAlignment.left
+    attributes[.paragraphStyle] = paragraphStyle
+    
+    let baseAttributedString = NSAttributedString(string: textString, attributes: attributes)
     
     if let strokeColor = strokeColor {
       textStrokeLayer.isHidden = false
-      attributes[NSAttributedString.Key.strokeColor] = strokeColor
-      attributes[NSAttributedString.Key.strokeWidth] = strokeWidth
+#if os(OSX)
+      attributes[.strokeColor] = nsStrokeColor
+#else
+      attributes[.strokeColor] = strokeColor
+#endif
+      attributes[.strokeWidth] = strokeWidth
     } else {
       textStrokeLayer.isHidden = true
     }
     
+    let strokeAttributedString: NSAttributedString = NSAttributedString(string: textString, attributes: attributes)
     let size: CGSize
-    let attributedString: NSAttributedString = NSAttributedString(string: textString, attributes: attributes )
     
     if let frameSize = text.textFrameSize {
       size = CGSize(width: frameSize.x, height: frameSize.y)
     } else {
-      let framesetter = CTFramesetterCreateWithAttributedString(attributedString)
+      let framesetter = CTFramesetterCreateWithAttributedString(baseAttributedString)
       
       size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,
                                                           CFRange(location: 0,length: 0),
@@ -215,7 +242,6 @@ class TextCompositionLayer: CompositionLayer {
                                                           nil)
     }
     
-    let baselinePosition = CTFontGetAscent(ctFont)
     var textAnchor: CGPoint
     switch text.justification {
     case .left, .none:
@@ -243,15 +269,20 @@ class TextCompositionLayer: CompositionLayer {
         } else {
             layer.frame = CGRect(origin: CGPoint(x: -textAnchor.x, y: -CGFloat(text.fontSize)), size: size)
         }
-        if let wordLayer = layer as? WordAnimatedTextLayer, wordLayer.shifted {
-            wordLayer.frame.origin.y += wordLayer.fontSize
+        if let wordLayer = layer as? WordAnimatedTextLayer {
+            if wordLayer.shifted {
+                wordLayer.frame.origin.y += wordLayer.fontSize
+                wordLayer.frame.size.height += wordLayer.fontSize
+            } else {
+                wordLayer.frame.origin.y += wordLayer.fontSize / 5.0
+            }
+            
         }
         
         //    TODO: Investigate what is wrong with transform matrix
         //    textLayer.transform = matrix
         
         layer.alignmentMode = text.justification?.caTextAlignement ?? CATextLayerAlignmentMode.left
-        layer.string = baseAttributedString
     }
     
     if textStrokeLayer.isHidden == false {
@@ -263,9 +294,11 @@ class TextCompositionLayer: CompositionLayer {
         contentsLayer.addSublayer(textLayer)
       }
       setupLayer(layer: textStrokeLayer)
+      textStrokeLayer.string = strokeAttributedString
     }
     
     setupLayer(layer: textLayer)
+    textLayer.string = baseAttributedString
   }
 }
 
