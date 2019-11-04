@@ -206,4 +206,9 @@ final class TextCompositionLayer: CompositionLayer {
     textLayer.string = baseAttributedString
     textLayer.alignmentMode = text.justification.caTextAlignement
   }
+  
+  override func updateRenderScale() {
+    super.updateRenderScale()
+    textLayer.contentsScale = self.renderScale
+  }
 }

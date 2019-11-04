@@ -40,7 +40,7 @@ class ShapeContainerLayer: CALayer {
   
   var renderScale: CGFloat = 1 {
     didSet {
-      renderLayers.forEach( { $0.renderScale = renderScale } )
+      updateRenderScale()
     }
   }
   
@@ -63,6 +63,11 @@ class ShapeContainerLayer: CALayer {
   
   func rebuildContents(forFrame: CGFloat) {
     /// Override
+  }
+  
+  func updateRenderScale() {
+    self.contentsScale = self.renderScale
+    renderLayers.forEach( { $0.renderScale = renderScale } )
   }
   
 }

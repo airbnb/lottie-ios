@@ -17,13 +17,6 @@ final class ShapeRenderLayer: ShapeContainerLayer {
   
   let shapeLayer: CAShapeLayer = CAShapeLayer()
   
-  override var renderScale: CGFloat {
-    didSet {
-      renderLayers.forEach( { $0.renderScale = renderScale } )
-      self.contentsScale = renderScale
-    }
-  }
-  
   init(renderer: Renderable & NodeOutput) {
     self.renderer = renderer
     super.init()
@@ -95,4 +88,8 @@ final class ShapeRenderLayer: ShapeContainerLayer {
     renderer.render(ctx)
   }
   
+  override func updateRenderScale() {
+    super.updateRenderScale()
+    shapeLayer.contentsScale = self.renderScale
+  }
 }
