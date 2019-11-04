@@ -30,7 +30,7 @@ extension FillRule {
 }
 
 /// A rendered for a Path Fill
-class FillRenderer: PassThroughOutputNode, Renderable {
+final class FillRenderer: PassThroughOutputNode, Renderable {
   
   let shouldRenderInContext: Bool = false
   

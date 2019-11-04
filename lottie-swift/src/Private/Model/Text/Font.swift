@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Font: Codable {
+final class Font: Codable {
   
   let name: String
   let familyName: String
@@ -24,7 +24,7 @@ class Font: Codable {
 }
 
 /// A list of fonts
-class FontList: Codable {
+final class FontList: Codable {
   
   let fonts: [Font]
   

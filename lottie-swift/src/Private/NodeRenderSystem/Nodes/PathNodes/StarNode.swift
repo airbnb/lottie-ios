@@ -8,7 +8,7 @@
 import Foundation
 import QuartzCore
 
-class StarNodeProperties: NodePropertyMap, KeypathSearchable {
+final class StarNodeProperties: NodePropertyMap, KeypathSearchable {
   
   var keypathName: String
   
@@ -55,7 +55,7 @@ class StarNodeProperties: NodePropertyMap, KeypathSearchable {
   let points: NodeProperty<Vector1D>
 }
 
-class StarNode: AnimatorNode, PathNode {
+final class StarNode: AnimatorNode, PathNode {
   
   let properties: StarNodeProperties
 

@@ -8,7 +8,7 @@
 import Foundation
 
 /// An item that define an ellipse shape
-class Repeater: ShapeItem {
+final class Repeater: ShapeItem {
   
   /// The number of copies to repeat
   let copies: KeyframeGroup<Vector1D>

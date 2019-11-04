@@ -11,7 +11,7 @@ import QuartzCore
 /**
  The layer responsible for rendering shape objects
  */
-class ShapeRenderLayer: ShapeContainerLayer {
+final class ShapeRenderLayer: ShapeContainerLayer {
   
   fileprivate(set) var renderer: Renderable & NodeOutput
   

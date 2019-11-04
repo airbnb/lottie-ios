@@ -9,7 +9,7 @@ import Foundation
 import QuartzCore
 import CoreGraphics
 
-class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
+final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
   
   var keypathName: String = "Transform"
   
@@ -67,7 +67,7 @@ class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
   }
 }
 
-class GroupNode: AnimatorNode {
+final class GroupNode: AnimatorNode {
   
   // MARK: Properties
   let groupOutput: GroupOutputNode

@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 
 /// A value provider that produces an array of values from an array of Keyframe Interpolators
-class GroupInterpolator<ValueType>: AnyValueProvider where ValueType: Interpolatable {
+final class GroupInterpolator<ValueType>: AnyValueProvider where ValueType: Interpolatable {
   var valueType: Any.Type {
     return [ValueType].self
   }

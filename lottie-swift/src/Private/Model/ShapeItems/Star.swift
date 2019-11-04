@@ -14,7 +14,7 @@ enum StarType: Int, Codable {
 }
 
 /// An item that define an ellipse shape
-class Star: ShapeItem {
+final class Star: ShapeItem {
   
   /// The direction of the star.
   let direction: PathDirection

@@ -15,7 +15,7 @@ import Foundation
  This helper object is needed to properly decode the json.
  */
 
-class KeyframeGroup<T>: Codable where T: Codable, T: Interpolatable {
+final class KeyframeGroup<T>: Codable where T: Codable, T: Interpolatable {
   
   let keyframes: [Keyframe<T>]
   

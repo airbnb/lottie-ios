@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 import QuartzCore
 
-class ImageCompositionLayer: CompositionLayer {
+final class ImageCompositionLayer: CompositionLayer {
   
   var image: CGImage? = nil {
     didSet {

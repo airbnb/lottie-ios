@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 import QuartzCore
 
-class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
+final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
   
   let keypathName: String
   
@@ -124,7 +124,7 @@ class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
   }
 }
 
-class TextOutputNode: NodeOutput {
+final class TextOutputNode: NodeOutput {
   
   var parent: NodeOutput? {
     return parentTextNode

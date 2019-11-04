@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NodeTree {
+final class NodeTree {
   var rootNode: AnimatorNode? = nil
   var transform: ShapeTransform? = nil
   var renderContainers: [ShapeContainerLayer] = []
@@ -18,7 +18,7 @@ struct NodeTree {
 extension Array where Element == ShapeItem {
   func initializeNodeTree() -> NodeTree {
     
-    var nodeTree = NodeTree()
+    let nodeTree = NodeTree()
 
     for item in self {
       guard item.hidden == false, item.type != .unknown else { continue }

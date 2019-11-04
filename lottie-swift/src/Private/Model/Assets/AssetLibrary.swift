@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AssetLibrary: Codable {
+final class AssetLibrary: Codable {
   
   /// The Assets
   let assets: [String : Asset]

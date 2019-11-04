@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NullCompositionLayer: CompositionLayer {
+final class NullCompositionLayer: CompositionLayer {
   
   init(layer: LayerModel) {
     super.init(layer: layer, size: .zero)

@@ -211,6 +211,49 @@ public final class CompatibleAnimationView: UIView {
   }
 
   @objc
+  public func setColorValue(_ color: UIColor, forKeypath keypath: CompatibleAnimationKeypath)
+  {
+    var red: CGFloat = 0
+    var green: CGFloat = 0
+    var blue: CGFloat = 0
+    var alpha: CGFloat = 0
+
+    var colorspace : CGColorSpace
+
+    if #available(iOS 9.3, *) {
+      // Always use P3 colorspace for now
+      colorspace = CGColorSpace.init(name: CGColorSpace.displayP3) ?? CGColorSpaceCreateDeviceRGB()
+    } else {
+      colorspace = CGColorSpaceCreateDeviceRGB()
+    }
+
+    let convertedColor = color.cgColor.converted(to: colorspace, intent: .defaultIntent, options: nil)
+
+    if let components = convertedColor?.components, components.count == 4 {
+      red = components[0]
+      green = components[1]
+      blue = components[2]
+      alpha = components[3]
+    } else {
+      color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+    }
+
+    let valueProvider = ColorValueProvider(Color(r: Double(red), g: Double(green), b: Double(blue), a: Double(alpha)))
+    animationView.setValueProvider(valueProvider, keypath: keypath.animationKeypath)
+  }
+
+  @objc
+  public func getColorValue(for keypath: CompatibleAnimationKeypath, atFrame: CGFloat) -> UIColor?
+  {
+    let value = animationView.getValue(for: keypath.animationKeypath, atFrame: atFrame)
+    guard let colorValue = value as? Color else {
+        return nil;
+    }
+
+    return UIColor(red: CGFloat(colorValue.r), green: CGFloat(colorValue.g), blue: CGFloat(colorValue.b), alpha: CGFloat(colorValue.a))
+  }
+
+  @objc
   public func addSubview(
     _ subview: AnimationSubview,
     forLayerAt keypath: CompatibleAnimationKeypath)
