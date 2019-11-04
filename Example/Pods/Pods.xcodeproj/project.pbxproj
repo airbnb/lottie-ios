@@ -443,6 +443,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		048453C59218382D7DF5255A63609E6B /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios-macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		33662CA4353DC524E4075FF2D6DB28FB /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios-tvOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EB2E000000C0 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		46EB2E000000F0 /* AnimationContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnimationContainer.swift; sourceTree = "<group>"; };
 		46EB2E00000110 /* CompositionLayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompositionLayer.swift; sourceTree = "<group>"; };
@@ -576,7 +578,6 @@
 		46EB2E00000BA0 /* UIColorExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		46EB2E00000BC0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		46EB2E00000BD0 /* lottie-ios.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = "lottie-ios.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		46EB2E00000C20 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EB2E00000C80 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		46EB2E00001490 /* lottie-ios-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "lottie-ios-iOS.xcconfig"; sourceTree = "<group>"; };
 		46EB2E000014A0 /* lottie-ios-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "lottie-ios-iOS.modulemap"; sourceTree = "<group>"; };
@@ -584,7 +585,6 @@
 		46EB2E000014D0 /* lottie-ios-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "lottie-ios-iOS-Info.plist"; sourceTree = "<group>"; };
 		46EB2E000014E0 /* lottie-ios-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "lottie-ios-iOS-prefix.pch"; sourceTree = "<group>"; };
 		46EB2E000014F0 /* lottie-ios-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "lottie-ios-iOS-dummy.m"; sourceTree = "<group>"; };
-		46EB2E00001550 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios-macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EB2E000015B0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		46EB2E00001D50 /* lottie-ios-macOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "lottie-ios-macOS.xcconfig"; path = "../lottie-ios-macOS/lottie-ios-macOS.xcconfig"; sourceTree = "<group>"; };
 		46EB2E00001D60 /* lottie-ios-macOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = "lottie-ios-macOS.modulemap"; path = "../lottie-ios-macOS/lottie-ios-macOS.modulemap"; sourceTree = "<group>"; };
@@ -592,7 +592,6 @@
 		46EB2E00001D90 /* lottie-ios-macOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "lottie-ios-macOS-Info.plist"; path = "../lottie-ios-macOS/lottie-ios-macOS-Info.plist"; sourceTree = "<group>"; };
 		46EB2E00001DA0 /* lottie-ios-macOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "lottie-ios-macOS-prefix.pch"; path = "../lottie-ios-macOS/lottie-ios-macOS-prefix.pch"; sourceTree = "<group>"; };
 		46EB2E00001DB0 /* lottie-ios-macOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "lottie-ios-macOS-dummy.m"; path = "../lottie-ios-macOS/lottie-ios-macOS-dummy.m"; sourceTree = "<group>"; };
-		46EB2E00001E10 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios-tvOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EB2E00001E70 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		46EB2E00002670 /* lottie-ios-tvOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "lottie-ios-tvOS.xcconfig"; path = "../lottie-ios-tvOS/lottie-ios-tvOS.xcconfig"; sourceTree = "<group>"; };
 		46EB2E00002680 /* lottie-ios-tvOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = "lottie-ios-tvOS.modulemap"; path = "../lottie-ios-tvOS/lottie-ios-tvOS.modulemap"; sourceTree = "<group>"; };
@@ -609,7 +608,6 @@
 		46EB2E000027B0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		46EB2E000027D0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.2.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		46EB2E000027F0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		46EB2E00002850 /* Pods_lottie_swift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_Example.framework; path = "Pods-lottie-swift_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EB2E000028C0 /* Pods-lottie-swift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_Example.release.xcconfig"; sourceTree = "<group>"; };
 		46EB2E000028D0 /* Pods-lottie-swift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		46EB2E000028E0 /* Pods-lottie-swift_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_Example-Info.plist"; sourceTree = "<group>"; };
@@ -619,7 +617,6 @@
 		46EB2E00002930 /* Pods-lottie-swift_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		46EB2E00002940 /* Pods-lottie-swift_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-swift_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		46EB2E00002950 /* Pods-lottie-swift_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-swift_Example-dummy.m"; sourceTree = "<group>"; };
-		46EB2E000029B0 /* Pods_lottie_swift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_Tests.framework; path = "Pods-lottie-swift_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EB2E00002A20 /* Pods-lottie-swift_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		46EB2E00002A30 /* Pods-lottie-swift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		46EB2E00002A40 /* Pods-lottie-swift_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_Tests-Info.plist"; sourceTree = "<group>"; };
@@ -628,7 +625,6 @@
 		46EB2E00002A80 /* Pods-lottie-swift_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		46EB2E00002A90 /* Pods-lottie-swift_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-swift_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		46EB2E00002AA0 /* Pods-lottie-swift_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-swift_Tests-dummy.m"; sourceTree = "<group>"; };
-		46EB2E00002B00 /* Pods_lottie_swift_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_macOS.framework; path = "Pods-lottie-swift_macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EB2E00002B70 /* Pods-lottie-swift_macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_macOS.release.xcconfig"; sourceTree = "<group>"; };
 		46EB2E00002B80 /* Pods-lottie-swift_macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		46EB2E00002B90 /* Pods-lottie-swift_macOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_macOS-Info.plist"; sourceTree = "<group>"; };
@@ -638,7 +634,6 @@
 		46EB2E00002BE0 /* Pods-lottie-swift_macOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_macOS-acknowledgements.plist"; sourceTree = "<group>"; };
 		46EB2E00002BF0 /* Pods-lottie-swift_macOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-swift_macOS-acknowledgements.markdown"; sourceTree = "<group>"; };
 		46EB2E00002C00 /* Pods-lottie-swift_macOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-swift_macOS-dummy.m"; sourceTree = "<group>"; };
-		46EB2E00002C60 /* Pods_lottie_swift_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_tvOS.framework; path = "Pods-lottie-swift_tvOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EB2E00002CD0 /* Pods-lottie-swift_tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		46EB2E00002CE0 /* Pods-lottie-swift_tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-lottie-swift_tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		46EB2E00002CF0 /* Pods-lottie-swift_tvOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_tvOS-Info.plist"; sourceTree = "<group>"; };
@@ -648,6 +643,11 @@
 		46EB2E00002D40 /* Pods-lottie-swift_tvOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_tvOS-acknowledgements.plist"; sourceTree = "<group>"; };
 		46EB2E00002D50 /* Pods-lottie-swift_tvOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-swift_tvOS-acknowledgements.markdown"; sourceTree = "<group>"; };
 		46EB2E00002D60 /* Pods-lottie-swift_tvOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-swift_tvOS-dummy.m"; sourceTree = "<group>"; };
+		5CBAEAF1D52528C70D31576C2FD2253E /* Pods_lottie_swift_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_tvOS.framework; path = "Pods-lottie-swift_tvOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DE012080E255559C105B0699451AE31 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		61B5A455553977229E8D85D13C54AA54 /* Pods_lottie_swift_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_macOS.framework; path = "Pods-lottie-swift_macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EAA9105ACA723812B2965646AFFACA4 /* Pods_lottie_swift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_Tests.framework; path = "Pods-lottie-swift_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEBA8AF97457829146B4F4122C2762D2 /* Pods_lottie_swift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_Example.framework; path = "Pods-lottie-swift_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -733,13 +733,13 @@
 		46EB2E00000020 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				46EB2E00000C20 /* Lottie.framework */,
-				46EB2E00001550 /* Lottie.framework */,
-				46EB2E00001E10 /* Lottie.framework */,
-				46EB2E00002850 /* Pods_lottie_swift_Example.framework */,
-				46EB2E00002B00 /* Pods_lottie_swift_macOS.framework */,
-				46EB2E000029B0 /* Pods_lottie_swift_Tests.framework */,
-				46EB2E00002C60 /* Pods_lottie_swift_tvOS.framework */,
+				5DE012080E255559C105B0699451AE31 /* Lottie.framework */,
+				048453C59218382D7DF5255A63609E6B /* Lottie.framework */,
+				33662CA4353DC524E4075FF2D6DB28FB /* Lottie.framework */,
+				FEBA8AF97457829146B4F4122C2762D2 /* Pods_lottie_swift_Example.framework */,
+				61B5A455553977229E8D85D13C54AA54 /* Pods_lottie_swift_macOS.framework */,
+				9EAA9105ACA723812B2965646AFFACA4 /* Pods_lottie_swift_Tests.framework */,
+				5CBAEAF1D52528C70D31576C2FD2253E /* Pods_lottie_swift_tvOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1522,7 +1522,7 @@
 			);
 			name = "Pods-lottie-swift_tvOS";
 			productName = "Pods-lottie-swift_tvOS";
-			productReference = 46EB2E00002C60 /* Pods_lottie_swift_tvOS.framework */;
+			productReference = 5CBAEAF1D52528C70D31576C2FD2253E /* Pods_lottie_swift_tvOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		5A06426EC0602C2A4394A10D4F381570 /* Pods-lottie-swift_macOS */ = {
@@ -1541,7 +1541,7 @@
 			);
 			name = "Pods-lottie-swift_macOS";
 			productName = "Pods-lottie-swift_macOS";
-			productReference = 46EB2E00002B00 /* Pods_lottie_swift_macOS.framework */;
+			productReference = 61B5A455553977229E8D85D13C54AA54 /* Pods_lottie_swift_macOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		67F339FB1A9F8C8BAC16A1F598EB77D7 /* Pods-lottie-swift_Example */ = {
@@ -1560,7 +1560,7 @@
 			);
 			name = "Pods-lottie-swift_Example";
 			productName = "Pods-lottie-swift_Example";
-			productReference = 46EB2E00002850 /* Pods_lottie_swift_Example.framework */;
+			productReference = FEBA8AF97457829146B4F4122C2762D2 /* Pods_lottie_swift_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		875B0E62901566E185ED6E365E210CA7 /* lottie-ios-tvOS */ = {
@@ -1578,7 +1578,7 @@
 			);
 			name = "lottie-ios-tvOS";
 			productName = "lottie-ios-tvOS";
-			productReference = 46EB2E00001E10 /* Lottie.framework */;
+			productReference = 33662CA4353DC524E4075FF2D6DB28FB /* Lottie.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		BA5437F88178F90AF62706C0F4EB9817 /* lottie-ios-iOS */ = {
@@ -1596,7 +1596,7 @@
 			);
 			name = "lottie-ios-iOS";
 			productName = "lottie-ios-iOS";
-			productReference = 46EB2E00000C20 /* Lottie.framework */;
+			productReference = 5DE012080E255559C105B0699451AE31 /* Lottie.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		CD4DE62DD0DBC7258ED31041F6E04060 /* lottie-ios-macOS */ = {
@@ -1614,7 +1614,7 @@
 			);
 			name = "lottie-ios-macOS";
 			productName = "lottie-ios-macOS";
-			productReference = 46EB2E00001550 /* Lottie.framework */;
+			productReference = 048453C59218382D7DF5255A63609E6B /* Lottie.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		E593822C83289D47F656990438489E27 /* Pods-lottie-swift_Tests */ = {
@@ -1633,7 +1633,7 @@
 			);
 			name = "Pods-lottie-swift_Tests";
 			productName = "Pods-lottie-swift_Tests";
-			productReference = 46EB2E000029B0 /* Pods_lottie_swift_Tests.framework */;
+			productReference = 9EAA9105ACA723812B2965646AFFACA4 /* Pods_lottie_swift_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -1642,8 +1642,8 @@
 		46EB2E00000000 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1020;
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 46EB2E00000030 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
