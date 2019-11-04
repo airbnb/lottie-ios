@@ -14,7 +14,7 @@ enum FillRule: Int, Codable {
 }
 
 /// An item that defines a fill render
-class Fill: ShapeItem {
+final class Fill: ShapeItem {
   
   /// The opacity of the fill
   let opacity: KeyframeGroup<Vector1D>

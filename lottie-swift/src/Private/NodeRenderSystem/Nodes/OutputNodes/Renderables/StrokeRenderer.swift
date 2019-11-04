@@ -67,7 +67,7 @@ extension LineCap {
 // MARK: - Renderer
 
 /// A rendered that renders a stroke on a path.
-class StrokeRenderer: PassThroughOutputNode, Renderable {
+final class StrokeRenderer: PassThroughOutputNode, Renderable {
   
   var shouldRenderInContext: Bool = false
   

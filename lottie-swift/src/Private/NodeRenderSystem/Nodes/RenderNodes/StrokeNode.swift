@@ -9,7 +9,7 @@ import Foundation
 import QuartzCore
 // MARK: - Properties
 
-class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
+final class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
   
   init(stroke: Stroke) {
     self.keypathName = stroke.name
@@ -70,7 +70,7 @@ class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
 // MARK: - Node
 
 /// Node that manages stroking a path
-class StrokeNode: AnimatorNode, RenderNode {
+final class StrokeNode: AnimatorNode, RenderNode {
   
   let strokeRender: StrokeRenderer
   var renderer: NodeOutput & Renderable {

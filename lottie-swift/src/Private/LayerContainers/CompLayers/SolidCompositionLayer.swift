@@ -8,7 +8,7 @@
 import Foundation
 import QuartzCore
 
-class SolidCompositionLayer: CompositionLayer {
+final class SolidCompositionLayer: CompositionLayer {
   
   let colorProperty: NodeProperty<Color>?
   let solidShape: CAShapeLayer = CAShapeLayer()

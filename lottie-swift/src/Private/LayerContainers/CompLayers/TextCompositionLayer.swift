@@ -48,7 +48,7 @@ extension TextJustification {
   
 }
 
-class TextCompositionLayer: CompositionLayer {
+final class TextCompositionLayer: CompositionLayer {
   
   let rootNode: TextAnimatorNode?
   let textDocument: KeyframeInterpolator<TextDocument>?

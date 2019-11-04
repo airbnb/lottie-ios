@@ -8,7 +8,7 @@
 import Foundation
 
 /// A layer that holds an image.
-class ImageLayerModel: LayerModel {
+final class ImageLayerModel: LayerModel {
   
   /// The reference ID of the image.
   let referenceID: String

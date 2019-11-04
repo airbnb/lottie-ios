@@ -8,7 +8,7 @@
 import Foundation
 
 /// A model that holds a vector character
-class Glyph: Codable {
+final class Glyph: Codable {
   
   /// The character
   let character: String

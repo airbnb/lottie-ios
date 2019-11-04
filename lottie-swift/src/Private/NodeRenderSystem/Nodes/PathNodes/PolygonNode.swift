@@ -8,7 +8,7 @@
 import Foundation
 import QuartzCore
 
-class PolygonNodeProperties: NodePropertyMap, KeypathSearchable {
+final class PolygonNodeProperties: NodePropertyMap, KeypathSearchable {
   
   var keypathName: String
 
@@ -43,7 +43,7 @@ class PolygonNodeProperties: NodePropertyMap, KeypathSearchable {
   let points: NodeProperty<Vector1D>
 }
 
-class PolygonNode: AnimatorNode, PathNode {
+final class PolygonNode: AnimatorNode, PathNode {
   
   let properties: PolygonNodeProperties
   

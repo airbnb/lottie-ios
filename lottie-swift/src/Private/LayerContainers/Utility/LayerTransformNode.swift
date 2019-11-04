@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 import QuartzCore
 
-class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
+final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
   
   init(transform: Transform) {
     

@@ -8,7 +8,7 @@
 import Foundation
 
 /// The animatable transform for a layer. Controls position, rotation, scale, and opacity.
-class Transform: Codable {
+final class Transform: Codable {
   
   /// The anchor point of the transform.
   let anchorPoint: KeyframeGroup<Vector3D>

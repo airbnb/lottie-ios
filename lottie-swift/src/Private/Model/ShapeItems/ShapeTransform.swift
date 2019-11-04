@@ -8,7 +8,7 @@
 import Foundation
 
 /// An item that define an ellipse shape
-class ShapeTransform: ShapeItem {
+final class ShapeTransform: ShapeItem {
   
   /// Anchor Point
   let anchor: KeyframeGroup<Vector3D>
