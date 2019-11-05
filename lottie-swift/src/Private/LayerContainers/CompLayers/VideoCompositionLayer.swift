@@ -22,7 +22,13 @@ class VideoCompositionLayer: CompositionLayer {
         let player = AVPlayer(url: contentUrl)
         playerLayer.player = player
         playerLayer.frame = CGRect(origin: .zero, size: contentSize)
+        
+        #if os(macOS)
         playerLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+        #else
+        playerLayer.videoGravity = .resizeAspectFill
+        #endif
+        
         contentsLayer.addSublayer(playerLayer)
     }
   
