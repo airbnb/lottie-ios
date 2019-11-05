@@ -19,6 +19,7 @@ public final class GradientValueProvider: AnyValueProvider {
     /// The colors values of the provider.
     public var colors: [Color] {
         didSet {
+            updateValueArray()
             hasUpdate = true
         }
     }
@@ -26,6 +27,7 @@ public final class GradientValueProvider: AnyValueProvider {
     /// The color location values of the provider.
     public var locations: [Double] {
         didSet {
+            updateValueArray()
             hasUpdate = true
         }
     }
@@ -44,6 +46,7 @@ public final class GradientValueProvider: AnyValueProvider {
                 locations: [Double] = []) {
         self.colors = colors
         self.locations = locations
+        updateValueArray()
         hasUpdate = true
     }
     
@@ -62,42 +65,31 @@ public final class GradientValueProvider: AnyValueProvider {
     
     public func value(frame: CGFloat) -> Any {
         hasUpdate = false
-        let newColors: [Color]
+        
         if let block = block {
-            newColors = block(frame)
-        } else {
-            newColors = colors
+            let newColors = block(frame)
+            let newLocations = locationsBlock?(frame) ?? []
+            value = value(from: newColors, locations: newLocations)
         }
         
-        let newLocations: [Double]
-        if let colorLocationsBlock = locationsBlock {
-            newLocations = colorLocationsBlock(frame)
-        } else {
-            newLocations = locations
-        }
-        
-        return self.value(from: newColors, locations: newLocations)
+        return value
     }
     
     // MARK: Private
     
-    func value(from colors: [Color], locations: [Double]) -> [Double] {
+    private func value(from colors: [Color], locations: [Double]) -> [Double] {
         
         var colorValues = [Double]()
         var alphaValues = [Double]()
         var shouldAddAlphaValues = false
         
         for i in 0..<colors.count {
-
+            
             if colors[i].a < 1 { shouldAddAlphaValues = true }
             
             let location = locations.count > i ? locations[i] :
-                calculateLocation(withStartValue: locations.last ?? 0.0,
-                                  endValue: 1.0,
-                                  elements: colors.count - locations.count,
-                                  position:  i - locations.count,
-                                  skipStartValue: locations.count > 0)
-
+                (Double(i) / Double(colors.count - 1))
+            
             colorValues.append(location)
             colorValues.append(colors[i].r)
             colorValues.append(colors[i].g)
@@ -110,24 +102,13 @@ public final class GradientValueProvider: AnyValueProvider {
         return colorValues + (shouldAddAlphaValues ? alphaValues : [])
     }
     
-    private func calculateLocation(withStartValue startValue: Double,
-                                   endValue: Double,
-                                   elements: Int,
-                                   position: Int,
-                                   skipStartValue: Bool) -> Double{
-        
-        guard startValue != endValue else { return 1.0 }
-        
-        let strides = (elements - 1) + (skipStartValue ? 1 : 0)
-        let index = position + (skipStartValue ? 1 : 0)
-        
-        return  Array(stride(from: startValue,
-                             through: endValue,
-                             by: (endValue - startValue) / Double(strides)))[index]
+    private func updateValueArray() {
+        value = value(from: colors, locations: locations)
     }
     
     private var hasUpdate: Bool = true
     
     private var block: ColorsValueBlock?
     private var locationsBlock: ColorLocationsBlock?
+    private var value: [Double] = []
 }
