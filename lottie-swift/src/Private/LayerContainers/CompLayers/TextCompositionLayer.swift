@@ -10,10 +10,11 @@ import CoreGraphics
 import QuartzCore
 import CoreText
 
-/// Needed for NSMutableParagraphStyle...
-#if os(OSX)
+#if os(macOS)
+import Cocoa
 import AppKit
 #else
+import Foundation
 import UIKit
 #endif
 
@@ -172,7 +173,8 @@ class TextCompositionLayer: CompositionLayer {
     let ctFont = CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil)
     
     let textString = textProvider.textFor(keypathName: self.keypathName, sourceText: text.text)
-    
+
+#if os(macOS)
 	var nsFont : NSFont?
 	fonts?.fonts.forEach({ (font) in
 		if (font.name == text.fontFamily) {
@@ -193,8 +195,33 @@ class TextCompositionLayer: CompositionLayer {
 			}
  		}
 	})
+    
+    let resultFont = nsFont ?? CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil) as NSFont
+#else
+    var uiFont : UIFont?
+    fonts?.fonts.forEach({ (font) in
+        if (font.name == text.fontFamily) {
+            if (font.style == "UltraLight") {
+                uiFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .ultraLight)
+            }
+            else if (font.style == "Thin") {
+                uiFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .thin)
+            }
+            else if (font.style == "Light") {
+                uiFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .light)
+            }
+            else if (font.style == "Regular") {
+                uiFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .regular)
+            }
+            else if (font.style == "Medium") {
+                uiFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .medium)
+            }
+        }
+    })
+    
+    let resultFont = uiFont ?? CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil) as UIFont
+#endif
 	
-	let resultFont = nsFont ?? CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil) as NSFont
 	var attributes: [NSAttributedString.Key : Any] = [
       .font: resultFont,
       .kern: tracking,
@@ -302,6 +329,9 @@ class TextCompositionLayer: CompositionLayer {
   }
 }
 
+
+#if os(macOS)
+
 extension NSFont {
 	
 	func systemUIFontUltraLight(size: CGFloat) -> NSFont {
@@ -390,3 +420,5 @@ extension NSFont {
 		return result
 	}
 }
+
+#endif

@@ -114,10 +114,11 @@ class RadialFastBlurEffect {
             layer.superlayer?.addSublayer(replicator)
             replicator.addSublayer(layer)
         }
-        
+#if os(macOS)
         if #available(OSX 10.10, *) {
             layer.filters = [CIFilter(name: "CIZoomBlur", parameters: [kCIInputCenterKey: CIVector(cgPoint: center),"inputAmount": amount]) as Any,
                              CIFilter(name: "CIBoxBlur", parameters: ["inputRadius": amount / 5]) as Any]
         }
+#endif
     }
 }

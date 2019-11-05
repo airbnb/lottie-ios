@@ -8,6 +8,11 @@
 
 import Foundation
 import QuartzCore
+import CoreGraphics
+
+#if os(iOS)
+import UIKit
+#endif
 
 class DropShadowEffect: Effect {
 	
@@ -16,7 +21,11 @@ class DropShadowEffect: Effect {
 			switch value.name {
 			case "Shadow Color":
 				if let colorArray = value as? ArrayEffectValue {
+                    #if os(macOS)
 					layer.shadowColor = CGColor(red: CGFloat(colorArray.value[0]), green: CGFloat(colorArray.value[1]), blue: CGFloat(colorArray.value[2]), alpha: CGFloat(colorArray.value[3]))
+                    #else
+                    layer.shadowColor = UIColor(red: CGFloat(colorArray.value[0]), green: CGFloat(colorArray.value[1]), blue: CGFloat(colorArray.value[2]), alpha: CGFloat(colorArray.value[3])).cgColor
+                    #endif
 				}
 			case "Direction":
 				if let direction = value as? InterpolatableEffectValue<Vector1D> {
@@ -24,7 +33,7 @@ class DropShadowEffect: Effect {
                         let directionValue = (direction.interpolator.value(frame: frame) as! Vector1D).value
                         let distanceValue = (distance.interpolator.value(frame: frame) as! Vector1D).value
                         
-						layer.shadowOffset = NSSize(width: -cos(directionValue * .pi / 180) * distanceValue, height: sin(directionValue * .pi / 180) * distanceValue)
+						layer.shadowOffset = CGSize(width: -cos(directionValue * .pi / 180) * distanceValue, height: sin(directionValue * .pi / 180) * distanceValue)
 					}
 				}
 			case "Opacity":
