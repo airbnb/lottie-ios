@@ -615,6 +615,11 @@
 		486E89F4220B790E007CD915 /* KeyframeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E879E220B78BF007CD915 /* KeyframeExtensions.swift */; };
 		486E89F5220B790E007CD915 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E87A0220B78BF007CD915 /* AnimationContext.swift */; };
 		48F4EECD229F167F00949A97 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8724220B78BF007CD915 /* TextCompositionLayer.swift */; };
+		CD1616482367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
+		CD1616492367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
+		CD16164A2367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
+		CD16164B2367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
+		CD16164C2367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
 		E654753422AAA91600FE590F /* AnimationTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */; };
 		E654753522AAA91600FE590F /* AnimationTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */; };
 		E654753622AAA91700FE590F /* AnimationTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */; };
@@ -774,6 +779,7 @@
 		486E879D220B78BF007CD915 /* Interpolatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolatable.swift; sourceTree = "<group>"; };
 		486E879E220B78BF007CD915 /* KeyframeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyframeExtensions.swift; sourceTree = "<group>"; };
 		486E87A0220B78BF007CD915 /* AnimationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
+		CD1616472367325A00325353 /* GradientValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientValueProvider.swift; sourceTree = "<group>"; };
 		E654753822AAA9AD00FE590F /* LayerTextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerTextProvider.swift; sourceTree = "<group>"; };
 		E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTextProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -969,6 +975,7 @@
 				486E871C220B78BF007CD915 /* FloatValueProvider.swift */,
 				486E871D220B78BF007CD915 /* SizeValueProvider.swift */,
 				486E871E220B78BF007CD915 /* PointValueProvider.swift */,
+				CD1616472367325A00325353 /* GradientValueProvider.swift */,
 			);
 			path = ValueProviders;
 			sourceTree = "<group>";
@@ -1634,6 +1641,7 @@
 				486E87FB220B78D1007CD915 /* DashPattern.swift in Sources */,
 				486E87FC220B78D1007CD915 /* Transform.swift in Sources */,
 				486E87FD220B78D1007CD915 /* Mask.swift in Sources */,
+				CD1616482367325A00325353 /* GradientValueProvider.swift in Sources */,
 				486E87FE220B78D1007CD915 /* Marker.swift in Sources */,
 				E6EAA7B822AA834F00F345A4 /* AnimationTextProvider.swift in Sources */,
 				486E87FF220B78D1007CD915 /* KeyedDecodingContainerExtensions.swift in Sources */,
@@ -1767,6 +1775,7 @@
 				486E8873220B78E4007CD915 /* Animation.swift in Sources */,
 				486E8874220B78E4007CD915 /* DashPattern.swift in Sources */,
 				486E8875220B78E4007CD915 /* Transform.swift in Sources */,
+				CD1616492367325A00325353 /* GradientValueProvider.swift in Sources */,
 				486E8876220B78E4007CD915 /* Mask.swift in Sources */,
 				486E8877220B78E4007CD915 /* Marker.swift in Sources */,
 				486E8878220B78E4007CD915 /* KeyedDecodingContainerExtensions.swift in Sources */,
@@ -1882,6 +1891,7 @@
 				486E88E7220B78F4007CD915 /* ShapeLayerModel.swift in Sources */,
 				486E88E8220B78F4007CD915 /* Animation.swift in Sources */,
 				486E88E9220B78F4007CD915 /* DashPattern.swift in Sources */,
+				CD16164A2367325A00325353 /* GradientValueProvider.swift in Sources */,
 				486E88EA220B78F4007CD915 /* Transform.swift in Sources */,
 				486E88EB220B78F4007CD915 /* Mask.swift in Sources */,
 				486E88EC220B78F4007CD915 /* Marker.swift in Sources */,
@@ -2027,6 +2037,7 @@
 				486E8961220B78FF007CD915 /* Animation.swift in Sources */,
 				486E8962220B78FF007CD915 /* DashPattern.swift in Sources */,
 				486E8963220B78FF007CD915 /* Transform.swift in Sources */,
+				CD16164B2367325A00325353 /* GradientValueProvider.swift in Sources */,
 				486E8964220B78FF007CD915 /* Mask.swift in Sources */,
 				486E8965220B78FF007CD915 /* Marker.swift in Sources */,
 				486E8966220B78FF007CD915 /* KeyedDecodingContainerExtensions.swift in Sources */,
@@ -2142,6 +2153,7 @@
 				486E89D4220B790E007CD915 /* PreCompLayerModel.swift in Sources */,
 				486E89D5220B790E007CD915 /* ShapeLayerModel.swift in Sources */,
 				486E89D6220B790E007CD915 /* Animation.swift in Sources */,
+				CD16164C2367325A00325353 /* GradientValueProvider.swift in Sources */,
 				486E89D7220B790E007CD915 /* DashPattern.swift in Sources */,
 				486E89D8220B790E007CD915 /* Transform.swift in Sources */,
 				486E89D9220B790E007CD915 /* Mask.swift in Sources */,
