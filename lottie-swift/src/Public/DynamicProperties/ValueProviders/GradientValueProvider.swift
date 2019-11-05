@@ -1,5 +1,5 @@
 //
-//  ColorsValueProvider.swift
+//  GradientValueProvider.swift
 //  lottie-swift
 //
 //  Created by Enrique Bermúdez on 10/27/19.
@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 
 /// A `ValueProvider` that returns a Gradient Color Value.
-public final class ColorsValueProvider: AnyValueProvider {
+public final class GradientValueProvider: AnyValueProvider {
     
     /// Returns a [Color] for a CGFloat(Frame Time).
     public typealias ColorsValueBlock = (CGFloat) -> [Color]
