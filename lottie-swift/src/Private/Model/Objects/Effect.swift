@@ -28,6 +28,8 @@ extension EffectType: ClassFamily {
 			return DropShadowEffect.self
         case .controls:
             return ControlEffect.self
+        case .blur:
+            return BlurEffect.self
 		default:
 			return Effect.self
 		}

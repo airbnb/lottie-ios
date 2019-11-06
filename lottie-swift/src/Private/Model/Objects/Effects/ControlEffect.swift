@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 import QuartzCore
 
 class ControlEffect: Effect {

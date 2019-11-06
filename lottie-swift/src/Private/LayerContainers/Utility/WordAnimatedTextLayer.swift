@@ -15,8 +15,12 @@ class WordAnimatedTextLayer : DisabledTextLayer {
     private var attributedString: NSAttributedString?
     override var string: Any? {
         set {
-            attributedString = newValue as? NSAttributedString
-            updateLayers()
+            if attributedString == nil {
+                attributedString = newValue as? NSAttributedString
+                updateLayers()
+            } else {
+                attributedString = newValue as? NSAttributedString
+            }
         }
         get {
             return attributedString
@@ -24,14 +28,17 @@ class WordAnimatedTextLayer : DisabledTextLayer {
     }
     
     let shifted: Bool
+    let basedOn: Selector.BasedOn
     
-    init(_ shifted: Bool = false) {
+    init(_ shifted: Bool = false, basedOn: Selector.BasedOn?) {
         self.shifted = shifted
+        self.basedOn = basedOn ?? .words
         super.init()
     }
     
     required init?(coder: NSCoder) {
         shifted = false
+        basedOn = .words
         super.init(coder: coder)
     }
     
@@ -40,12 +47,13 @@ class WordAnimatedTextLayer : DisabledTextLayer {
         
         sublayers?.forEach { $0.removeFromSuperlayer() }
         
-        let string = attributedString.string
-        string.split(separator: " ").forEach {
+        let ranges = basedOn == .words ? attributedString.words() : attributedString.lines(with: bounds.width)
+        
+        ranges.forEach {
             guard let mutableString = attributedString.mutableCopy() as? NSMutableAttributedString else { return }
             
-            mutableString.addAttribute(.foregroundColor, value: NSColor.clear, range:NSRange(..<$0.startIndex, in: string))
-            mutableString.addAttribute(.foregroundColor, value: NSColor.clear, range:NSRange($0.endIndex..., in: string))
+            mutableString.addAttribute(.foregroundColor, value: NSColor.clear, range:$0.0)
+            mutableString.addAttribute(.foregroundColor, value: NSColor.clear, range:$0.1)
             
             let layer = DisabledTextLayer()
             layer.frame = CGRect(origin: .zero, size: self.frame.size)
@@ -61,4 +69,21 @@ class WordAnimatedTextLayer : DisabledTextLayer {
     }
     
     override func draw(in ctx: CGContext) {}
+}
+
+extension NSAttributedString {
+
+    func lines(with width: CGFloat) -> [(NSRange, NSRange)] {
+        let path = CGPath(rect: CGRect(x: 0, y: 0, width: width, height: CGFloat(MAXFLOAT)), transform: nil)
+        let frameSetterRef = CTFramesetterCreateWithAttributedString(self as CFAttributedString)
+        let frameRef = CTFramesetterCreateFrame(frameSetterRef, CFRangeMake(0, 0), path, nil)
+        let linesNS = CTFrameGetLines(frameRef)
+
+        guard let lines = linesNS as? [CTLine] else { return [] }
+        return lines.map(CTLineGetStringRange).map { (NSRange(location: 0, length: $0.location), NSRange(location: $0.location + $0.length, length: string.count - $0.location - $0.length)) }
+    }
+    
+    func words() -> [(NSRange, NSRange)] {
+        string.split(separator: " ").map { (NSRange(..<$0.startIndex, in: string), NSRange($0.endIndex..., in: string)) }
+    }
 }

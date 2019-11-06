@@ -624,6 +624,16 @@
 		BD25D5C72357783D0046BA8A /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = BD25D5C62357783D0046BA8A /* data.json */; };
 		BD25D5C92357784C0046BA8A /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486E8567220A3605007CD915 /* Lottie.framework */; };
 		BD25D5CA2357784C0046BA8A /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 486E8567220A3605007CD915 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BD44DB5C2372F057002B818C /* Selector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD44DB5B2372F056002B818C /* Selector.swift */; };
+		BD44DB5D2372F05E002B818C /* Selector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD44DB5B2372F056002B818C /* Selector.swift */; };
+		BD44DB5E2372F05E002B818C /* Selector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD44DB5B2372F056002B818C /* Selector.swift */; };
+		BD44DB5F2372F05F002B818C /* Selector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD44DB5B2372F056002B818C /* Selector.swift */; };
+		BD44DB602372F05F002B818C /* Selector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD44DB5B2372F056002B818C /* Selector.swift */; };
+		BD44DB6223730195002B818C /* BlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD44DB6123730195002B818C /* BlurEffect.swift */; };
+		BD44DB6323730281002B818C /* BlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD44DB6123730195002B818C /* BlurEffect.swift */; };
+		BD44DB6423730281002B818C /* BlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD44DB6123730195002B818C /* BlurEffect.swift */; };
+		BD44DB6523730281002B818C /* BlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD44DB6123730195002B818C /* BlurEffect.swift */; };
+		BD44DB6623730282002B818C /* BlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD44DB6123730195002B818C /* BlurEffect.swift */; };
 		BD4FE9032326C4E80011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
 		BD4FE9042326C5F90011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
 		BD4FE9052326C5FB0011B14B /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4FE9022326C4E80011B14B /* Effect.swift */; };
@@ -869,6 +879,8 @@
 		BD25D5C12357782C0046BA8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD25D5C22357782C0046BA8A /* Test.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Test.entitlements; sourceTree = "<group>"; };
 		BD25D5C62357783D0046BA8A /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		BD44DB5B2372F056002B818C /* Selector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selector.swift; sourceTree = "<group>"; };
+		BD44DB6123730195002B818C /* BlurEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffect.swift; sourceTree = "<group>"; };
 		BD4FE9022326C4E80011B14B /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
 		BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadowEffect.swift; sourceTree = "<group>"; };
 		BD4FE90F2327A7AF0011B14B /* EffectValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectValue.swift; sourceTree = "<group>"; };
@@ -1388,6 +1400,7 @@
 		486E8781220B78BF007CD915 /* Text */ = {
 			isa = PBXGroup;
 			children = (
+				BD44DB5B2372F056002B818C /* Selector.swift */,
 				486E8782220B78BF007CD915 /* TextDocument.swift */,
 				486E8783220B78BF007CD915 /* Glyph.swift */,
 				486E8784220B78BF007CD915 /* TextAnimator.swift */,
@@ -1497,6 +1510,7 @@
 			children = (
 				BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */,
 				BD972B26235DDCB40097B566 /* ControlEffect.swift */,
+				BD44DB6123730195002B818C /* BlurEffect.swift */,
 			);
 			path = Effects;
 			sourceTree = "<group>";
@@ -1834,6 +1848,7 @@
 				BD4FE90A2327A24E0011B14B /* DropShadowEffect.swift in Sources */,
 				486E87B7220B78D1007CD915 /* PointValueProvider.swift in Sources */,
 				486E87B8220B78D1007CD915 /* CompositionLayer.swift in Sources */,
+				BD44DB6223730195002B818C /* BlurEffect.swift in Sources */,
 				486E87B9220B78D1007CD915 /* NullCompositionLayer.swift in Sources */,
 				486E87BB220B78D1007CD915 /* SolidCompositionLayer.swift in Sources */,
 				486E87BC220B78D1007CD915 /* PreCompositionLayer.swift in Sources */,
@@ -1873,6 +1888,7 @@
 				486E87DB220B78D1007CD915 /* KeypathSearchable.swift in Sources */,
 				486E87DC220B78D1007CD915 /* AnyValueContainer.swift in Sources */,
 				486E87DD220B78D1007CD915 /* KeyframeInterpolator.swift in Sources */,
+				BD44DB5C2372F057002B818C /* Selector.swift in Sources */,
 				4866744122249C4E00258C00 /* TextAnimatorNode.swift in Sources */,
 				486E87DE220B78D1007CD915 /* SingleValueProvider.swift in Sources */,
 				BD972B27235DDCB40097B566 /* ControlEffect.swift in Sources */,
@@ -1951,6 +1967,7 @@
 			files = (
 				486E881A220B78E4007CD915 /* AnimationViewInitializers.swift in Sources */,
 				486E881B220B78E4007CD915 /* AnimationView.swift in Sources */,
+				BD44DB5D2372F05E002B818C /* Selector.swift in Sources */,
 				486E881C220B78E4007CD915 /* AnimationPublic.swift in Sources */,
 				486E881D220B78E4007CD915 /* AnimationImageProvider.swift in Sources */,
 				486E881E220B78E4007CD915 /* FilepathImageProvider.swift in Sources */,
@@ -2017,6 +2034,7 @@
 				486E8856220B78E4007CD915 /* KeyframeInterpolator.swift in Sources */,
 				BD972B28235DE0300097B566 /* ControlEffect.swift in Sources */,
 				4866744222249C4E00258C00 /* TextAnimatorNode.swift in Sources */,
+				BD44DB6323730281002B818C /* BlurEffect.swift in Sources */,
 				486E8857220B78E4007CD915 /* SingleValueProvider.swift in Sources */,
 				486E8858220B78E4007CD915 /* GroupInterpolator.swift in Sources */,
 				486E8859220B78E4007CD915 /* ItemsExtension.swift in Sources */,
@@ -2100,6 +2118,7 @@
 				486E88A2220B78F4007CD915 /* ColorValueProvider.swift in Sources */,
 				486E88A3220B78F4007CD915 /* FloatValueProvider.swift in Sources */,
 				486E88A4220B78F4007CD915 /* SizeValueProvider.swift in Sources */,
+				BD44DB5E2372F05E002B818C /* Selector.swift in Sources */,
 				486E88A5220B78F4007CD915 /* PointValueProvider.swift in Sources */,
 				486E88A6220B78F4007CD915 /* CompositionLayer.swift in Sources */,
 				486E88A7220B78F4007CD915 /* NullCompositionLayer.swift in Sources */,
@@ -2177,6 +2196,7 @@
 				486E88EB220B78F4007CD915 /* Mask.swift in Sources */,
 				486E88EC220B78F4007CD915 /* Marker.swift in Sources */,
 				486E88ED220B78F4007CD915 /* KeyedDecodingContainerExtensions.swift in Sources */,
+				BD44DB6423730281002B818C /* BlurEffect.swift in Sources */,
 				486E88EE220B78F4007CD915 /* KeyframeGroup.swift in Sources */,
 				486E88EF220B78F4007CD915 /* Keyframe.swift in Sources */,
 				486E88F0220B78F4007CD915 /* TextDocument.swift in Sources */,
@@ -2226,6 +2246,7 @@
 			files = (
 				48F4EECD229F167F00949A97 /* TextCompositionLayer.swift in Sources */,
 				486E8908220B78FF007CD915 /* AnimationViewInitializers.swift in Sources */,
+				BD44DB5F2372F05F002B818C /* Selector.swift in Sources */,
 				486E8909220B78FF007CD915 /* AnimationView.swift in Sources */,
 				486E890A220B78FF007CD915 /* AnimationPublic.swift in Sources */,
 				486E890B220B78FF007CD915 /* AnimationImageProvider.swift in Sources */,
@@ -2292,6 +2313,7 @@
 				4866744422249C4E00258C00 /* TextAnimatorNode.swift in Sources */,
 				BD972B2A235DE0300097B566 /* ControlEffect.swift in Sources */,
 				486E8945220B78FF007CD915 /* SingleValueProvider.swift in Sources */,
+				BD44DB6523730281002B818C /* BlurEffect.swift in Sources */,
 				486E8946220B78FF007CD915 /* GroupInterpolator.swift in Sources */,
 				486E8947220B78FF007CD915 /* ItemsExtension.swift in Sources */,
 				486E8948220B78FF007CD915 /* ShapeRenderLayer.swift in Sources */,
@@ -2406,6 +2428,7 @@
 				BD972B2B235DE0300097B566 /* ControlEffect.swift in Sources */,
 				E654753D22AAA9B600FE590F /* LayerTextProvider.swift in Sources */,
 				486E89B0220B790E007CD915 /* StrokeNode.swift in Sources */,
+				BD44DB602372F05F002B818C /* Selector.swift in Sources */,
 				486E89B1220B790E007CD915 /* FillNode.swift in Sources */,
 				486E89B2220B790E007CD915 /* GradientStrokeNode.swift in Sources */,
 				486E89B3220B790E007CD915 /* ValueContainer.swift in Sources */,
@@ -2420,6 +2443,7 @@
 				486E89BC220B790E007CD915 /* ItemsExtension.swift in Sources */,
 				486E89BD220B790E007CD915 /* ShapeRenderLayer.swift in Sources */,
 				486E89BE220B790E007CD915 /* ShapeContainerLayer.swift in Sources */,
+				BD44DB6623730282002B818C /* BlurEffect.swift in Sources */,
 				486E89BF220B790E007CD915 /* PathNode.swift in Sources */,
 				486E89C0220B790E007CD915 /* RenderNode.swift in Sources */,
 				486E89C1220B790E007CD915 /* AnimatorNode.swift in Sources */,
