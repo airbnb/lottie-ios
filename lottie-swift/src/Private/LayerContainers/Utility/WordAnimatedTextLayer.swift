@@ -6,7 +6,12 @@
 //  Copyright © 2019 YurtvilleProds. All rights reserved.
 //
 
+#if os(macOS)
 import Cocoa
+#else
+import UIKit
+#endif
+
 import QuartzCore
 import CoreGraphics
 
@@ -52,8 +57,13 @@ class WordAnimatedTextLayer : DisabledTextLayer {
         ranges.forEach {
             guard let mutableString = attributedString.mutableCopy() as? NSMutableAttributedString else { return }
             
+            #if os(macOS)
             mutableString.addAttribute(.foregroundColor, value: NSColor.clear, range:$0.0)
             mutableString.addAttribute(.foregroundColor, value: NSColor.clear, range:$0.1)
+            #else
+            mutableString.addAttribute(.foregroundColor, value: UIColor.clear, range:$0.0)
+            mutableString.addAttribute(.foregroundColor, value: UIColor.clear, range:$0.1)
+            #endif
             
             let layer = DisabledTextLayer()
             layer.frame = CGRect(origin: .zero, size: self.frame.size)

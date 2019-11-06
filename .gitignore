@@ -9,3 +9,6 @@ build/
 
 # macOS
 .DS_Store
+
+# SPM
+.swiftpm/
