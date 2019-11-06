@@ -10,6 +10,8 @@ import Foundation
 class TextAnimator: Codable {
   
   let name: String
+    
+  let selector: Selector?
   
   /// Anchor
   let anchor: KeyframeGroup<Vector3D>?
@@ -45,7 +47,7 @@ class TextAnimator: Codable {
   let tracking: KeyframeGroup<Vector1D>?
   
   private enum CodingKeys: String, CodingKey {
-//    case textSelector = "s" TODO
+    case textSelector = "s"
     case textAnimator = "a"
     case name = "nm"
   }
@@ -73,6 +75,7 @@ class TextAnimator: Codable {
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: TextAnimator.CodingKeys.self)
     self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
+    self.selector = try container.decodeIfPresent(Selector.self, forKey: .textSelector)
     let animatorContainer = try container.nestedContainer(keyedBy: TextAnimatorKeys.self, forKey: .textAnimator)
     self.fillColor = try animatorContainer.decodeIfPresent(KeyframeGroup<Color>.self, forKey: .fillColor)
     self.strokeColor = try animatorContainer.decodeIfPresent(KeyframeGroup<Color>.self, forKey: .strokeColor)
