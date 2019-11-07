@@ -75,7 +75,6 @@ final public class AnimationView: LottieView {
     }
   }
   
-  private var currentMarker: String?
   /**
    Describes the behavior of an AnimationView when the app is moved to the background.
    
@@ -342,11 +341,9 @@ final public class AnimationView: LottieView {
                    toMarker: String,
                    loopMode: LottieLoopMode? = nil,
                    completion: LottieCompletionBlock? = nil) {
-    guard let animation = animation, let markers = animation.markerMap, let to = markers[toMarker], currentMarker != toMarker else {
+    guard let animation = animation, let markers = animation.markerMap, let to = markers[toMarker] else {
       return
     }
-    
-    currentMarker = toMarker
     
     removeCurrentAnimation()
     if let loopMode = loopMode {
