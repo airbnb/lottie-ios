@@ -8,6 +8,9 @@
 
 import Foundation
 import QuartzCore
+#if os(iOS)
+import CoreImage
+#endif
 
 class BlurEffect: Effect {
     
