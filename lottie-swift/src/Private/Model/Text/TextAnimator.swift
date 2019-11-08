@@ -29,7 +29,9 @@ class TextAnimator: Codable {
   let skewAxis: KeyframeGroup<Vector1D>?
   
   /// Rotation
-  let rotation: KeyframeGroup<Vector1D>?
+  let rotationX: KeyframeGroup<Vector1D>?
+  let rotationY: KeyframeGroup<Vector1D>?
+  let rotationZ: KeyframeGroup<Vector1D>?
   
   /// Opacity
   let opacity: KeyframeGroup<Vector1D>?
@@ -69,6 +71,9 @@ class TextAnimator: Codable {
     case skew = "sk"
     case skewAxis = "sa"
     case rotation = "r"
+    case rotationX = "rx"
+    case rotationY = "ry"
+    case rotationZ = "rz"
     case opacity = "o"
   }
   
@@ -86,7 +91,10 @@ class TextAnimator: Codable {
     self.scale = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .scale)
     self.skew = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .skew)
     self.skewAxis = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .skewAxis)
-    self.rotation = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation)
+    let rotationZ = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotationZ)
+    self.rotationZ = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation) ?? rotationZ
+    self.rotationX = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotationX)
+    self.rotationY = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotationY)
     self.opacity = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .opacity)
     
   }
@@ -98,5 +106,8 @@ class TextAnimator: Codable {
     try animatorContainer.encodeIfPresent(strokeColor, forKey: .strokeColor)
     try animatorContainer.encodeIfPresent(strokeWidth, forKey: .strokeWidth)
     try animatorContainer.encodeIfPresent(tracking, forKey: .tracking)
+    try animatorContainer.encodeIfPresent(rotationZ, forKey: .rotationZ)
+    try animatorContainer.encodeIfPresent(rotationX, forKey: .rotationX)
+    try animatorContainer.encodeIfPresent(rotationY, forKey: .rotationY)
   }
 }

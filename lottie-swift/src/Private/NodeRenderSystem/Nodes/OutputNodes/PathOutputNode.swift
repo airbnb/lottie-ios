@@ -22,6 +22,7 @@ class PathOutputNode: NodeOutput {
   var lastUpdateFrame: CGFloat? = nil
   var lastPathBuildFrame: CGFloat? = nil
   var isEnabled: Bool = true
+  public var transform: CGAffineTransform?
   
   func hasOutputUpdates(_ forFrame: CGFloat) -> Bool {
     guard isEnabled else {
@@ -50,7 +51,11 @@ class PathOutputNode: NodeOutput {
           newPath.addPath(subPath.cgPath())
         }
       }
-      outputPath = newPath
+        if var transform = transform {
+            outputPath = newPath.copy(using: &transform)
+        } else {
+            outputPath = newPath
+        }
     }
     
     /// Return true if there were upstream updates or if this node was updated.
