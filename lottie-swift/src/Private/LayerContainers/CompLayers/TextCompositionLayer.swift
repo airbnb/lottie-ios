@@ -168,8 +168,7 @@ class TextCompositionLayer: CompositionLayer {
     
     let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
     let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
-//    TODO: Investigate what is wrong with transform matrix
-//    let matrix = rootNode?.textOutputNode.xform ?? CATransform3DIdentity
+    let matrix = rootNode?.textAnimatorProperties.caTransform ?? CATransform3DIdentity
     let ctFont = CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil)
     
     let textString = textProvider.textFor(keypathName: self.keypathName, sourceText: text.text)
@@ -306,8 +305,7 @@ class TextCompositionLayer: CompositionLayer {
             
         }
         
-        //    TODO: Investigate what is wrong with transform matrix
-        //    textLayer.transform = matrix
+        textLayer.transform = matrix
         
         layer.alignmentMode = text.justification?.caTextAlignement ?? CATextLayerAlignmentMode.left
     }

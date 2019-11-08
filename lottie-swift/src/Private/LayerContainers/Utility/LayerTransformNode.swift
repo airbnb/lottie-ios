@@ -15,13 +15,17 @@ class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
     
     self.anchor = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.anchorPoint.keyframes))
     self.scale = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.scale.keyframes))
-    self.rotation = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.rotation.keyframes))
+    self.rotationX = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.rotationX.keyframes))
+    self.rotationY = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.rotationY.keyframes))
+    self.rotationZ = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.rotationZ.keyframes))
     self.opacity = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.opacity.keyframes))
     
     var propertyMap: [String: AnyNodeProperty] = [
       "Anchor Point" : anchor,
       "Scale" : scale,
-      "Rotation" : rotation,
+      "RotationX" : rotationX,
+      "RotationY" : rotationY,
+      "RotationZ" : rotationZ,
       "Opacity" : opacity
     ]
     
@@ -61,7 +65,9 @@ class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
   
   let anchor: NodeProperty<Vector3D>
   let scale: NodeProperty<Vector3D>
-  let rotation: NodeProperty<Vector1D>
+  let rotationX: NodeProperty<Vector1D>
+  let rotationY: NodeProperty<Vector1D>
+  let rotationZ: NodeProperty<Vector1D>
   let position: NodeProperty<Vector3D>?
   let positionX: NodeProperty<Vector1D>?
   let positionY: NodeProperty<Vector1D>?
@@ -107,10 +113,15 @@ class LayerTransformNode: AnimatorNode {
       position = .zero
     }
     
+    transformProperties.rotationZ.update(frame: frame)
+    transformProperties.rotationX.update(frame: frame)
+    transformProperties.rotationY.update(frame: frame)
+    
     localTransform = CATransform3D.makeTransform(anchor: transformProperties.anchor.value.pointValue,
                                                  position: position,
                                                  scale: transformProperties.scale.value.sizeValue,
-                                                 rotation: transformProperties.rotation.value.cgFloatValue,
+                                                 rotation: (transformProperties.rotationX.value.cgFloatValue, transformProperties.rotationY.value.cgFloatValue,
+                                                            transformProperties.rotationZ.value.cgFloatValue),
                                                  skew: nil,
                                                  skewAxis: nil)
     

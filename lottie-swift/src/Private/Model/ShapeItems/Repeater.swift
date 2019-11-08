@@ -23,7 +23,9 @@ class Repeater: ShapeItem {
   let endOpacity: KeyframeGroup<Vector1D>
   
   /// The rotation
-  let rotation: KeyframeGroup<Vector1D>
+  let rotationZ: KeyframeGroup<Vector1D>
+  let rotationX: KeyframeGroup<Vector1D>
+  let rotationY: KeyframeGroup<Vector1D>
   
   /// Anchor Point
   let anchorPoint: KeyframeGroup<Vector3D>
@@ -42,6 +44,9 @@ class Repeater: ShapeItem {
   
   private enum TransformKeys : String, CodingKey {
     case rotation = "r"
+    case rotationX = "rx"
+    case rotationZ = "rz"
+    case rotationY = "ry"
     case startOpacity = "so"
     case endOpacity = "eo"
     case anchorPoint = "a"
@@ -56,7 +61,10 @@ class Repeater: ShapeItem {
     let transformContainer = try container.nestedContainer(keyedBy: TransformKeys.self, forKey: .transform)
     self.startOpacity = try transformContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .startOpacity) ?? KeyframeGroup(Vector1D(100))
     self.endOpacity = try transformContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .endOpacity) ?? KeyframeGroup(Vector1D(100))
-    self.rotation = try transformContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation) ?? KeyframeGroup(Vector1D(0))
+    let rotationZ = try transformContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotationZ)
+    self.rotationZ = try transformContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation) ?? rotationZ ?? KeyframeGroup(Vector1D(0))
+    self.rotationX = try transformContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation) ?? KeyframeGroup(Vector1D(0))
+    self.rotationY = try transformContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation) ?? KeyframeGroup(Vector1D(0))
     self.position = try transformContainer.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .position) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
     self.anchorPoint = try transformContainer.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .anchorPoint) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
     self.scale = try transformContainer.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .scale) ?? KeyframeGroup(Vector3D(x: Double(100), y: 100, z: 100))
@@ -71,7 +79,9 @@ class Repeater: ShapeItem {
     var transformContainer = container.nestedContainer(keyedBy: TransformKeys.self, forKey: .transform)
     try transformContainer.encode(startOpacity, forKey: .startOpacity)
     try transformContainer.encode(endOpacity, forKey: .endOpacity)
-    try transformContainer.encode(rotation, forKey: .rotation)
+    try transformContainer.encode(rotationZ, forKey: .rotationZ)
+    try transformContainer.encode(rotationX, forKey: .rotationX)
+    try transformContainer.encode(rotationY, forKey: .rotationY)
     try transformContainer.encode(position, forKey: .position)
     try transformContainer.encode(anchorPoint, forKey: .anchorPoint)
     try transformContainer.encode(scale, forKey: .scale)

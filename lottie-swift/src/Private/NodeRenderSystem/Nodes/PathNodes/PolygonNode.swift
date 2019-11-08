@@ -20,13 +20,17 @@ class PolygonNodeProperties: NodePropertyMap, KeypathSearchable {
     self.position = NodeProperty(provider: KeyframeInterpolator(keyframes: star.position.keyframes))
     self.outerRadius = NodeProperty(provider: KeyframeInterpolator(keyframes: star.outerRadius.keyframes))
     self.outerRoundedness = NodeProperty(provider: KeyframeInterpolator(keyframes: star.outerRoundness.keyframes))
-    self.rotation = NodeProperty(provider: KeyframeInterpolator(keyframes: star.rotation.keyframes))
+    self.rotationX = NodeProperty(provider: KeyframeInterpolator(keyframes: star.rotationX.keyframes))
+    self.rotationY = NodeProperty(provider: KeyframeInterpolator(keyframes: star.rotationX.keyframes))
+    self.rotationZ = NodeProperty(provider: KeyframeInterpolator(keyframes: star.rotationX.keyframes))
     self.points = NodeProperty(provider: KeyframeInterpolator(keyframes: star.points.keyframes))
     self.keypathProperties = [
       "Position" : position,
       "Outer Radius" : outerRadius,
       "Outer Roundedness" : outerRoundedness,
-      "Rotation" : rotation,
+      "RotationX" : rotationX,
+      "RotationY" : rotationY,
+      "RotationZ" : rotationZ,
       "Points" : points
     ]
     self.properties = Array(keypathProperties.values)
@@ -39,7 +43,9 @@ class PolygonNodeProperties: NodePropertyMap, KeypathSearchable {
   let position: NodeProperty<Vector3D>
   let outerRadius: NodeProperty<Vector1D>
   let outerRoundedness: NodeProperty<Vector1D>
-  let rotation: NodeProperty<Vector1D>
+  let rotationX: NodeProperty<Vector1D>
+  let rotationY: NodeProperty<Vector1D>
+  let rotationZ: NodeProperty<Vector1D>
   let points: NodeProperty<Vector1D>
 }
 
@@ -78,7 +84,7 @@ class PolygonNode: AnimatorNode, PathNode {
     let outerRadius = properties.outerRadius.value.cgFloatValue
     let outerRoundedness = properties.outerRoundedness.value.cgFloatValue * 0.01
     let numberOfPoints = properties.points.value.cgFloatValue
-    let rotation = properties.rotation.value.cgFloatValue
+    let rotation = properties.rotationZ.value.cgFloatValue
     let position = properties.position.value.pointValue
   
     var currentAngle = (rotation - 90).toRadians()
@@ -127,6 +133,9 @@ class PolygonNode: AnimatorNode, PathNode {
     }
     path.close()
     pathOutput.setPath(path, updateFrame: frame)
+    
+    let t = CATransform3DMakeTranslation(0, 0, 0).rotated((properties.rotationX.value.cgFloatValue, properties.rotationY.value.cgFloatValue, 0.0))
+    pathOutput.transform = CGAffineTransform(a: t.m11, b: t.m12, c: t.m21, d: t.m22, tx: t.m41, ty: t.m42)
   }
   
 }
