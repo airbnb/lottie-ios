@@ -120,7 +120,8 @@ class LayerTransformNode: AnimatorNode {
     localTransform = CATransform3D.makeTransform(anchor: transformProperties.anchor.value.pointValue,
                                                  position: position,
                                                  scale: transformProperties.scale.value.sizeValue,
-                                                 rotation: (transformProperties.rotationZ.value.cgFloatValue, transformProperties.rotationX.value.cgFloatValue, transformProperties.rotationY.value.cgFloatValue),
+                                                 rotation: (transformProperties.rotationX.value.cgFloatValue, transformProperties.rotationY.value.cgFloatValue,
+                                                            transformProperties.rotationZ.value.cgFloatValue),
                                                  skew: nil,
                                                  skewAxis: nil)
     
