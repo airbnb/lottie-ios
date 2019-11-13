@@ -169,57 +169,70 @@ class TextCompositionLayer: CompositionLayer {
     let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
     let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
     let matrix = rootNode?.textAnimatorProperties.caTransform ?? CATransform3DIdentity
-    let ctFont = CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil)
     
-    let textString = textProvider.textFor(keypathName: self.keypathName, sourceText: text.text)
-
 #if os(macOS)
-	var nsFont : NSFont?
-	fonts?.fonts.forEach({ (font) in
-		if (font.name == text.fontFamily) {
-			if (font.style == "UltraLight") {
-				nsFont = NSFont().systemUIFontUltraLight(size: CGFloat(text.fontSize))
-			}
-			else if (font.style == "Thin") {
-				nsFont = NSFont().systemUIFontThin(size: CGFloat(text.fontSize))
-			}
-			else if (font.style == "Light") {
-				nsFont = NSFont().systemUIFontLight(size: CGFloat(text.fontSize))
-			}
-			else if (font.style == "Regular") {
-				nsFont = NSFont().systemUIFontRegular(size: CGFloat(text.fontSize))
-			}
-			else if (font.style == "Medium") {
-				nsFont = NSFont().systemUIFontMedium(size: CGFloat(text.fontSize))
-			}
- 		}
-	})
-    
-    let resultFont = nsFont ?? CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil) as NSFont
+    let resultFont: NSFont
 #else
-    var uiFont : UIFont?
-    fonts?.fonts.forEach({ (font) in
-        if (font.name == text.fontFamily) {
-            if (font.style == "UltraLight") {
-                uiFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .ultraLight)
-            }
-            else if (font.style == "Thin") {
-                uiFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .thin)
-            }
-            else if (font.style == "Light") {
-                uiFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .light)
-            }
-            else if (font.style == "Regular") {
-                uiFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .regular)
-            }
-            else if (font.style == "Medium") {
-                uiFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .medium)
-            }
-        }
-    })
-    
-    let resultFont = uiFont ?? CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil) as UIFont
+    let resultFont: UIFont
 #endif
+    
+    //  If font with the same family can be created, then use it.
+    let fontFamily = text.fontFamily as CFString
+    let ctFont = CTFontCreateWithName(fontFamily, CGFloat(text.fontSize), nil)
+    if CTFontCopyPostScriptName(ctFont) == fontFamily {
+        resultFont = ctFont
+    }
+    else {
+    //  If not, then try to get system font instead ...
+#if os(macOS)
+        var systemFont : NSFont?
+        fonts?.fonts.forEach({ (font) in
+            if (font.name == text.fontFamily) {
+                if (font.style == "UltraLight") {
+                    systemFont = NSFont().systemUIFontUltraLight(size: CGFloat(text.fontSize))
+                }
+                else if (font.style == "Thin") {
+                    systemFont = NSFont().systemUIFontThin(size: CGFloat(text.fontSize))
+                }
+                else if (font.style == "Light") {
+                    systemFont = NSFont().systemUIFontLight(size: CGFloat(text.fontSize))
+                }
+                else if (font.style == "Regular") {
+                    systemFont = NSFont().systemUIFontRegular(size: CGFloat(text.fontSize))
+                }
+                else if (font.style == "Medium") {
+                    systemFont = NSFont().systemUIFontMedium(size: CGFloat(text.fontSize))
+                }
+                if (font.style == "Bold") {
+                    systemFont = NSFont().systemUIFontBold(size: CGFloat(text.fontSize))
+                }
+            }
+        })
+#else
+        var systemFont : UIFont?
+        fonts?.fonts.forEach({ (font) in
+            if (font.name == text.fontFamily) {
+                if (font.style == "UltraLight") {
+                    systemFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .ultraLight)
+                }
+                else if (font.style == "Thin") {
+                    systemFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .thin)
+                }
+                else if (font.style == "Light") {
+                    systemFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .light)
+                }
+                else if (font.style == "Regular") {
+                    systemFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .regular)
+                }
+                else if (font.style == "Medium") {
+                    systemFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .medium)
+                }
+            }
+        })
+#endif
+        //  ... and use it if available, otherwise fallback to the ctFont
+        resultFont = systemFont ?? ctFont
+    }
 	
 	var attributes: [NSAttributedString.Key : Any] = [
       .font: resultFont,
@@ -232,12 +245,13 @@ class TextCompositionLayer: CompositionLayer {
     attributes[.foregroundColor] = fillColor
 #endif
     
-    let baselinePosition = CTFontGetAscent(ctFont)
+    let baselinePosition = CTFontGetAscent(resultFont)
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.lineSpacing = CGFloat(text.fontSize / text.lineHeight) * 6
     paragraphStyle.alignment = text.justification?.textAlignment ?? NSTextAlignment.left
     attributes[.paragraphStyle] = paragraphStyle
     
+    let textString = textProvider.textFor(keypathName: self.keypathName, sourceText: text.text)
     let baseAttributedString = NSAttributedString(string: textString, attributes: attributes)
     
     if let strokeColor = strokeColor {
@@ -401,6 +415,20 @@ extension NSFont {
 		}
 		return resultFont
 	}
+    
+    func systemUIFontBold(size: CGFloat) -> NSFont {
+        var resultFont : NSFont
+        if #available(OSX 10.11, *) {
+            resultFont = NSFont.systemFont(ofSize: size, weight: NSFont.Weight.bold)
+        }
+        else if (floor(NSFoundationVersionNumber) <= floor(NSFoundationVersionNumber10_10)) {
+            resultFont = CTFontCreateWithName("HelveticaNeue-Bold" as CFString, size, nil)
+        }
+        else {
+            resultFont = systemUIFont(size: size, weightDelta: 3)
+        }
+        return resultFont
+    }
 	
 	func systemUIFont(size: CGFloat, weightDelta: Int) -> NSFont {
 		var result = NSFont.systemFont(ofSize: size)
