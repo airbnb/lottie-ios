@@ -227,6 +227,9 @@ class TextCompositionLayer: CompositionLayer {
                 else if (font.style == "Medium") {
                     systemFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .medium)
                 }
+                else if (font.style == "Bold") {
+                    systemFont = UIFont.systemFont(ofSize: CGFloat(text.fontSize), weight: .bold)
+                }
             }
         })
 #endif
