@@ -115,7 +115,8 @@ final class TextCompositionLayer: CompositionLayer {
     
     let text = textDocument.value(frame: frame) as! TextDocument
     let anchorPoint = interpolatableAnchorPoint?.value(frame: frame) as! Vector3D
-    _ = interpolatableScale?.value(frame: frame) as! Vector3D
+    
+    interpolatableScale?.value(frame: frame)
     rootNode?.rebuildOutputs(frame: frame)
     
     let fillColor = rootNode?.textOutputNode.fillColor ?? text.fillColorData.cgColorValue
