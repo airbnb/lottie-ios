@@ -67,9 +67,10 @@ final class KeyframeInterpolator<ValueType>: AnyValueProvider where ValueType: I
   
   fileprivate var lastUpdatedFrame: CGFloat?
   
+  @discardableResult
   func value(frame: CGFloat) -> Any {
     // First set the keyframe span for the frame.
-    self.updateSpanIndices(frame: frame)
+    updateSpanIndices(frame: frame)
     lastUpdatedFrame = frame
     // If only one keyframe return its value
     let progress: CGFloat
