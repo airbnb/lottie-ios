@@ -63,6 +63,12 @@ public class Animation: Codable {
     return markers.map { $0.name }
   }
   
+  public var loopVideoAnimations = false {
+    didSet {
+      layers.compactMap({ $0 as? VideoLayerModel }).forEach({ $0.loopVideo = loopVideoAnimations})
+    }
+  }
+  
   enum CodingKeys : String, CodingKey {
     case version = "v"
     case type = "ddd"
