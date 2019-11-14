@@ -12,6 +12,7 @@ class VideoLayerModel: LayerModel {
   
     var fileName: String?
     var fileExtension: String?
+    var loopVideo = false
 
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

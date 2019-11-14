@@ -13,6 +13,13 @@ import AVFoundation
 
 class VideoCompositionLayer: CompositionLayer {
     let playerLayer = AVPlayerLayer()
+    var endVideoObserver: Any?
+    
+    deinit {
+        if let endVideoObserver = endVideoObserver {
+            NotificationCenter.default.removeObserver(endVideoObserver)
+        }
+    }
     
     init(videoModel: VideoLayerModel) {
         super.init(layer: videoModel, size: .zero)
@@ -30,6 +37,14 @@ class VideoCompositionLayer: CompositionLayer {
         #endif
         
         contentsLayer.addSublayer(playerLayer)
+        
+        if videoModel.loopVideo {
+            endVideoObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
+                                                                      object: player.currentItem, queue: .main) { [weak self] _ in
+                player.seek(to: CMTime.zero)
+                player.play()
+            }
+        }
     }
   
     required init?(coder aDecoder: NSCoder) {
