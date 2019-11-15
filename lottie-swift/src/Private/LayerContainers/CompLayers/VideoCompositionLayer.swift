@@ -40,7 +40,7 @@ class VideoCompositionLayer: CompositionLayer {
         
         if videoModel.loopVideo {
             endVideoObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
-                                                                      object: player.currentItem, queue: .main) { [weak self] _ in
+                                                                      object: player.currentItem, queue: .main) { _ in
                 player.seek(to: CMTime.zero)
                 player.play()
             }
@@ -52,9 +52,7 @@ class VideoCompositionLayer: CompositionLayer {
     }
     
     override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
-        if playerLayer.player?.rate ?? 0.0 < 1.0 {
-            playerLayer.player?.play()
-        }
+        playerLayer.player?.play()
         super.displayContentsWithFrame(frame: frame, forceUpdates: forceUpdates)
     }
     
