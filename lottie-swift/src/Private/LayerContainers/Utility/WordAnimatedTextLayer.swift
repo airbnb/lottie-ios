@@ -20,11 +20,12 @@ class WordAnimatedTextLayer : DisabledTextLayer {
     private var attributedString: NSAttributedString?
     override var string: Any? {
         set {
-            if attributedString == nil {
-                attributedString = newValue as? NSAttributedString
+            let newAttributedString = newValue as? NSAttributedString
+            if attributedString != newAttributedString {
+                attributedString = newAttributedString
                 updateLayers()
             } else {
-                attributedString = newValue as? NSAttributedString
+                attributedString = newAttributedString
             }
         }
         get {
