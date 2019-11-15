@@ -24,8 +24,6 @@ class WordAnimatedTextLayer : DisabledTextLayer {
             if attributedString != newAttributedString {
                 attributedString = newAttributedString
                 updateLayers()
-            } else {
-                attributedString = newAttributedString
             }
         }
         get {
