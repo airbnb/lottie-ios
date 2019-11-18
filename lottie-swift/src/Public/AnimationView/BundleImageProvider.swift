@@ -141,7 +141,11 @@ public class BundleImageProvider: AnimationImageProvider {
         imagePath = bundle.path(forResource: asset.name, ofType: nil)
       }
     }
-    
+    if let foundPath = (imagePath as NSString?)?.utf8String,
+       let provider = CGDataProvider(filename: foundPath),
+       let result = CGImage(pngDataProviderSource: provider, decode: nil, shouldInterpolate: true, intent: .defaultIntent) {
+        return result
+    }
     guard let foundPath = imagePath, let image = NSImage(contentsOfFile: foundPath) else {
       /// No image found.
       return nil

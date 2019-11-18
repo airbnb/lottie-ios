@@ -163,7 +163,6 @@ class AnimationContainer: CALayer {
     }
     
     layerImageProvider.addImageLayers(imageLayers)
-    layerImageProvider.reloadImages()
     layerTextProvider.addTextLayers(textLayers)
     layerTextProvider.reloadTexts()
     setNeedsDisplay()
