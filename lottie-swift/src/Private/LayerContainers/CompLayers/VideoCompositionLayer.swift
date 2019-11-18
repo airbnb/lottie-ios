@@ -27,6 +27,9 @@ class VideoCompositionLayer: CompositionLayer {
         guard let contentUrl = Bundle.main.url(forResource: videoModel.fileName, withExtension: videoModel.fileExtension),
               let contentSize = resolutionForLocalVideo(url: contentUrl) else { return }
         let player = AVPlayer(url: contentUrl)
+        if #available(OSX 10.14, iOS 12, *) {
+            player.preventsDisplaySleepDuringVideoPlayback = false
+        }
         playerLayer.player = player
         playerLayer.frame = CGRect(origin: .zero, size: contentSize)
         
