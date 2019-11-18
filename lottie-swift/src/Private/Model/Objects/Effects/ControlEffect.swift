@@ -73,7 +73,9 @@ class DelayedEvolutionEffect {
     }
     
     func apply(frame: CGFloat) {
-        layer.textLayer.sublayers?.enumerated().forEach { index, sublayer in
+        guard let parts = (layer.textLayer as? PartedTextLayer)?.parts else { return }
+        
+        for (index, part) in parts.enumerated() {
             let delay = (self.delay?.value(frame: frame) as? Vector1D)?.cgFloatValue ?? 2.0
             let subFrame = frame - CGFloat(index) * delay
             let slider = (self.value?.value(frame: subFrame) as? Vector1D)?.cgFloatValue ?? 100.0
@@ -81,9 +83,14 @@ class DelayedEvolutionEffect {
             let opacity = (self.opacity?.value(frame: subFrame) as? Vector1D)?.cgFloatValue ?? 0.0
             let fraction = 1.0 - slider / 100.0
             
-            sublayer.opacity = Float((1.0 - opacity) * fraction)
-            sublayer.frame.origin = CGPoint(x: position.x * fraction, y: -(position.y * fraction))
+            part.opacity = Float((1.0 - opacity) * fraction)
+            if layer.textLayer.isGeometryFlipped {
+               part.origin = CGPoint(x: position.x * (fraction - 1.0), y: position.y * (fraction - 1.0))
+            } else {
+               part.origin = CGPoint(x: position.x * fraction, y: -(position.y * fraction))
+            }
         }
+        layer.textLayer.setNeedsDisplay()
     }
 }
 

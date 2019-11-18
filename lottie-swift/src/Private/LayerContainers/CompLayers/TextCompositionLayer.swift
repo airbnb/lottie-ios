@@ -100,8 +100,13 @@ class TextCompositionLayer: CompositionLayer {
     
     self.fonts = fonts
     if (textLayer.effects?.first { $0.name == "Evolution_(%)_In" }) != nil {
-        self.textLayer = WordAnimatedTextLayer(textLayer.parent != nil, basedOn: textLayer.animators.first?.selector?.basedOn)
-        self.textStrokeLayer = WordAnimatedTextLayer(textLayer.parent != nil, basedOn: textLayer.animators.first?.selector?.basedOn)
+        if textLayer.animators.first?.selector?.basedOn == .words {
+            self.textLayer = WordAnimatedTextLayer(textLayer.parent != nil)
+            self.textStrokeLayer = WordAnimatedTextLayer(textLayer.parent != nil)
+        } else {
+            self.textLayer = LineAnimatedTextLayer()
+            self.textStrokeLayer = LineAnimatedTextLayer()
+        }
     } else {
         self.textLayer = DisabledTextLayer()
         self.textStrokeLayer = DisabledTextLayer()
