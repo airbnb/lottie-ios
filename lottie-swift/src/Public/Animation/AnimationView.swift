@@ -62,6 +62,7 @@ final public class AnimationView: LottieView {
    */
   public var animation: Animation? {
     didSet {
+      animation?.loopVideoAnimations = loopVideos
       makeAnimationLayer()
     }
   }
@@ -74,6 +75,12 @@ final public class AnimationView: LottieView {
       }
     }
   }
+    
+    @IBInspectable var loopVideos: Bool = false {
+      didSet {
+        animation?.loopVideoAnimations = loopVideos
+      }
+    }
   
   /**
    Describes the behavior of an AnimationView when the app is moved to the background.
