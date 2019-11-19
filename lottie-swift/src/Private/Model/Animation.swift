@@ -66,6 +66,12 @@ public class Animation: Codable {
   public var loopVideoAnimations = false {
     didSet {
       layers.compactMap({ $0 as? VideoLayerModel }).forEach({ $0.loopVideo = loopVideoAnimations})
+        assetLibrary?.precompAssets.forEach({
+            $1.layers.compactMap({
+                $0 as? VideoLayerModel
+            }).forEach({
+                $0.loopVideo = loopVideoAnimations})
+        })
     }
   }
   
