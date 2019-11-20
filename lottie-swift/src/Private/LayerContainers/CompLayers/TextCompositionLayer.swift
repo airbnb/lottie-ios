@@ -318,13 +318,8 @@ class TextCompositionLayer: CompositionLayer {
             layer.frame = CGRect(origin: CGPoint(x: -textAnchor.x, y: -CGFloat(text.fontSize)), size: size)
         }
         if let wordLayer = layer as? WordAnimatedTextLayer {
-            if wordLayer.shifted {
-                wordLayer.frame.origin.y += wordLayer.fontSize
-                wordLayer.frame.size.height += wordLayer.fontSize
-            } else {
-                wordLayer.frame.origin.y += wordLayer.fontSize / 5.0
-            }
-            
+            wordLayer.frame.origin.y += wordLayer.fontSize
+            wordLayer.frame.size.height += wordLayer.fontSize
         }
         
         textLayer.transform = matrix
