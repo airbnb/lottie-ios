@@ -259,6 +259,10 @@ final public class AnimationView: LottieView {
     }
   }
   
+  public var drawingLayer: CALayer? {
+    return animationLayer
+  }
+  
   // MARK: - Public Functions
   
   /**
