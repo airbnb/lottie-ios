@@ -83,6 +83,8 @@ And then import wherever needed: ```import Lottie```
 1. Using Xcode 11 go to File > Swift Packages > Add Package Dependency
 2. Paste the project URL: https://github.com/airbnb/lottie-ios
 3. Click on next and select the project target
+  **NOTE: For MacOS you must set the `Branch` field to `lottie/macos-spm`
+  ![Example](_Gifs/spm-branch.png)
 
 If you have doubts, please, check the following links:
 
