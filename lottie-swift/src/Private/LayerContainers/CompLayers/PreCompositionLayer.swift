@@ -24,6 +24,7 @@ class PreCompositionLayer: CompositionLayer {
        asset: PrecompAsset,
        layerImageProvider: LayerImageProvider,
        layerTextProvider: LayerTextProvider,
+       layerVideoProvider: LayerVideoProvider,
        assetLibrary: AssetLibrary?,
        frameRate: CGFloat) {
     self.animationLayers = []
@@ -37,10 +38,11 @@ class PreCompositionLayer: CompositionLayer {
     masksToBounds = true
     bounds = CGRect(origin: .zero, size: CGSize(width: precomp.width, height: precomp.height))
     
-    let layers = asset.layers.initializeCompositionLayers(assetLibrary: assetLibrary, layerImageProvider: layerImageProvider, layerTextProvider: layerTextProvider, frameRate: frameRate, fonts: nil)
+    let layers = asset.layers.initializeCompositionLayers(assetLibrary: assetLibrary, layerImageProvider: layerImageProvider, layerTextProvider: layerTextProvider, layerVideoProvider: layerVideoProvider, frameRate: frameRate, fonts: nil)
     
     var imageLayers = [ImageCompositionLayer]()
     var textLayers = [TextCompositionLayer]()
+    var videoLayers = [VideoCompositionLayer]()
     var mattedLayer: CompositionLayer? = nil
     
     for layer in layers.reversed() {
@@ -51,6 +53,9 @@ class PreCompositionLayer: CompositionLayer {
       }
       if let textLayer = layer as? TextCompositionLayer {
         textLayers.append(textLayer)
+      }
+      if let videoLayer = layer as? VideoCompositionLayer {
+        videoLayers.append(videoLayer)
       }
       if let matte = mattedLayer {
         /// The previous layer requires this layer to be its matte
@@ -70,6 +75,7 @@ class PreCompositionLayer: CompositionLayer {
     
     layerImageProvider.addImageLayers(imageLayers)
     layerTextProvider.addTextLayers(textLayers)
+    layerVideoProvider.addLayers(videoLayers)
   }
   
   override init(layer: Any) {

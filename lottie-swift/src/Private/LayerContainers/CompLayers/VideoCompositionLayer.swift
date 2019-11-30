@@ -13,7 +13,18 @@ import AVFoundation
 
 class VideoCompositionLayer: CompositionLayer {
     let playerLayer = AVPlayerLayer()
+    let file: (name: String, extension: String)
+    let loopVideo: Bool
+    var playing: Bool = false
     var endVideoObserver: Any?
+    var videoProvider: AnimationVideoProvider? {
+      didSet {
+        updatePlayer()
+        if playing {
+            playerLayer.player?.play()
+        }
+      }
+    }
     
     deinit {
         if let endVideoObserver = endVideoObserver {
@@ -21,33 +32,15 @@ class VideoCompositionLayer: CompositionLayer {
         }
     }
     
-    init(videoModel: VideoLayerModel) {
+    init(videoModel: VideoLayerModel, videoProvider: AnimationVideoProvider = DefaultVideoProvider()) {
+        file = (name: videoModel.fileName ?? "", extension: videoModel.fileExtension ?? "")
+        self.videoProvider = videoProvider
+        loopVideo = videoModel.loopVideo
+        
         super.init(layer: videoModel, size: .zero)
-
-        guard let contentUrl = Bundle.main.url(forResource: videoModel.fileName, withExtension: videoModel.fileExtension),
-              let contentSize = resolutionForLocalVideo(url: contentUrl) else { return }
-        let player = AVPlayer(url: contentUrl)
-        if #available(OSX 10.14, iOS 12, *) {
-            player.preventsDisplaySleepDuringVideoPlayback = false
-        }
-        playerLayer.player = player
-        playerLayer.frame = CGRect(origin: .zero, size: contentSize)
         
-        #if os(macOS)
-        playerLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
-        #else
-        playerLayer.videoGravity = .resizeAspectFill
-        #endif
-        
+        updatePlayer()
         contentsLayer.addSublayer(playerLayer)
-        
-        if videoModel.loopVideo {
-            endVideoObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
-                                                                      object: player.currentItem, queue: .main) { _ in
-                player.seek(to: CMTime.zero)
-                player.play()
-            }
-        }
     }
   
     required init?(coder aDecoder: NSCoder) {
@@ -56,7 +49,35 @@ class VideoCompositionLayer: CompositionLayer {
     
     override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
         playerLayer.player?.play()
+        playing = true
         super.displayContentsWithFrame(frame: frame, forceUpdates: forceUpdates)
+    }
+    
+    private func updatePlayer() {
+        if let url = videoProvider?.urlFor(keypathName: keypathName, file: file),
+           let contentSize = resolutionForLocalVideo(url: url) {
+            let player = AVPlayer(url: url)
+            if #available(OSX 10.14, iOS 12, *) {
+                player.preventsDisplaySleepDuringVideoPlayback = false
+            }
+            playerLayer.player = player
+            playerLayer.frame = CGRect(origin: .zero, size: contentSize)
+            endVideoObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
+                                                                      object: player.currentItem,
+                                                                      queue: .main) { [weak self] _ in
+                if self?.loopVideo == true {
+                    player.seek(to: CMTime.zero)
+                    player.play()
+                } else {
+                    self?.playing = false
+                }
+            }
+            #if os(macOS)
+            playerLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+            #else
+            playerLayer.videoGravity = .resizeAspectFill
+            #endif
+        }
     }
     
     private func resolutionForLocalVideo(url: URL) -> CGSize? {
