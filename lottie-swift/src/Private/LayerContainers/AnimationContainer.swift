@@ -119,23 +119,31 @@ class AnimationContainer: CALayer {
         forceDisplayUpdate()
     }
   }
+    
+    var videoProvider: AnimationVideoProvider {
+      get { return layerVideoProvider.videoProvider }
+      set { layerVideoProvider.videoProvider = newValue }
+    }
   
   var animationLayers: [CompositionLayer]
   fileprivate var layersWithDependencies = Set<CompositionLayer>()
     
   fileprivate let layerImageProvider: LayerImageProvider
   fileprivate let layerTextProvider: LayerTextProvider
+  fileprivate let layerVideoProvider: LayerVideoProvider
   
-  init(animation: Animation, imageProvider: AnimationImageProvider, textProvider: AnimationTextProvider) {
+  init(animation: Animation, imageProvider: AnimationImageProvider, textProvider: AnimationTextProvider, videoProvider: AnimationVideoProvider) {
     self.layerImageProvider = LayerImageProvider(imageProvider: imageProvider, assets: animation.assetLibrary?.imageAssets)
     self.layerTextProvider = LayerTextProvider(textProvider: textProvider)
+    self.layerVideoProvider = LayerVideoProvider(videoProvider: videoProvider)
     self.animationLayers = []
     super.init()
     bounds = animation.bounds
-    let layers = animation.layers.initializeCompositionLayers(assetLibrary: animation.assetLibrary, layerImageProvider: layerImageProvider, layerTextProvider: layerTextProvider, frameRate: CGFloat(animation.framerate), fonts: animation.fonts)
+    let layers = animation.layers.initializeCompositionLayers(assetLibrary: animation.assetLibrary, layerImageProvider: layerImageProvider, layerTextProvider: layerTextProvider, layerVideoProvider: layerVideoProvider, frameRate: CGFloat(animation.framerate), fonts: animation.fonts)
     
     var imageLayers = [ImageCompositionLayer]()
     var textLayers = [TextCompositionLayer]()
+    var videoLayers = [VideoCompositionLayer]()
     
     var mattedLayer: CompositionLayer? = nil
 
@@ -147,6 +155,9 @@ class AnimationContainer: CALayer {
       }
       if let textLayer = layer as? TextCompositionLayer {
         textLayers.append(textLayer)
+      }
+      if let videoLayer = layer as? VideoCompositionLayer {
+        videoLayers.append(videoLayer)
       }
       if let matte = mattedLayer {
         /// The previous layer requires this layer to be its matte
@@ -164,6 +175,7 @@ class AnimationContainer: CALayer {
     
     layerImageProvider.addImageLayers(imageLayers)
     layerTextProvider.addTextLayers(textLayers)
+    layerVideoProvider.addLayers(videoLayers)
     layerTextProvider.reloadTexts()
     setNeedsDisplay()
   }
@@ -176,9 +188,11 @@ class AnimationContainer: CALayer {
     if let animationLayer = animationLayer {
         layerImageProvider = animationLayer.layerImageProvider
         layerTextProvider = animationLayer.layerTextProvider
+        layerVideoProvider = animationLayer.layerVideoProvider
     } else {
         layerImageProvider = LayerImageProvider(imageProvider: BlankImageProvider(), assets: nil)
         layerTextProvider = LayerTextProvider(textProvider: DefaultTextProvider())
+        layerVideoProvider = LayerVideoProvider(videoProvider: DefaultVideoProvider())
     }
     
     self.animationLayers = []
