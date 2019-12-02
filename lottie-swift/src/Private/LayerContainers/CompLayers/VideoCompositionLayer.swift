@@ -11,8 +11,9 @@ import CoreGraphics
 import QuartzCore
 import AVFoundation
 
-class VideoCompositionLayer: CompositionLayer {
-    let playerLayer = AVPlayerLayer()
+class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
+    var playerLayer: AVPlayerLayer?
+    var oldPlayerLayer: AVPlayerLayer?
     let file: (name: String, extension: String)
     let loopVideo: Bool
     var playing: Bool = false
@@ -20,9 +21,6 @@ class VideoCompositionLayer: CompositionLayer {
     var videoProvider: AnimationVideoProvider? {
       didSet {
         updatePlayer()
-        if playing {
-            playerLayer.player?.play()
-        }
       }
     }
     
@@ -40,7 +38,6 @@ class VideoCompositionLayer: CompositionLayer {
         super.init(layer: videoModel, size: .zero)
         
         updatePlayer()
-        contentsLayer.addSublayer(playerLayer)
     }
   
     required init?(coder aDecoder: NSCoder) {
@@ -48,7 +45,7 @@ class VideoCompositionLayer: CompositionLayer {
     }
     
     override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
-        playerLayer.player?.play()
+        playerLayer?.player?.play()
         playing = true
         super.displayContentsWithFrame(frame: frame, forceUpdates: forceUpdates)
     }
@@ -56,6 +53,7 @@ class VideoCompositionLayer: CompositionLayer {
     private func updatePlayer() {
         if let url = videoProvider?.urlFor(keypathName: keypathName, file: file),
            let contentSize = resolutionForLocalVideo(url: url) {
+            let playerLayer = AVPlayerLayer()
             let player = AVPlayer(url: url)
             if #available(OSX 10.14, iOS 12, *) {
                 player.preventsDisplaySleepDuringVideoPlayback = false
@@ -77,12 +75,49 @@ class VideoCompositionLayer: CompositionLayer {
             #else
             playerLayer.videoGravity = .resizeAspectFill
             #endif
+            
+            if let oldPlayerLayer = self.playerLayer {
+                playerLayer.opacity = 0.0
+                
+                let fadeIn = CABasicAnimation()
+                fadeIn.fromValue = 0.0
+                fadeIn.toValue = 1.0
+                configure(animation: fadeIn, for: playerLayer)
+                
+                let fadeOut = CABasicAnimation()
+                fadeOut.fromValue = 1.0
+                fadeOut.toValue = 0.0
+                fadeOut.delegate = self
+                configure(animation: fadeOut, for: oldPlayerLayer)
+                
+                self.oldPlayerLayer = oldPlayerLayer
+            }
+            if playing {
+                player.play()
+            }
+            contentsLayer.addSublayer(playerLayer)
+            self.playerLayer = playerLayer
         }
+    }
+    
+    private func configure(animation: CAAnimation, for layer: CALayer) {
+        animation.duration = 1.0
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
+        
+        layer.add(animation, forKey: #keyPath(CALayer.opacity))
     }
     
     private func resolutionForLocalVideo(url: URL) -> CGSize? {
         guard let track = AVURLAsset(url: url).tracks(withMediaType: .video).first else { return nil }
         let size = track.naturalSize.applying(track.preferredTransform)
         return CGSize(width: abs(size.width), height: abs(size.height))
+    }
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        oldPlayerLayer?.opacity = 0.0
+        oldPlayerLayer?.removeFromSuperlayer()
+        
+        playerLayer?.opacity = 1.0
     }
 }
