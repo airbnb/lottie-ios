@@ -279,7 +279,6 @@ final public class AnimationView: LottieView {
     let context = AnimationContext(playFrom: CGFloat(animation.startFrame),
                                    playTo: CGFloat(animation.endFrame),
                                    closure: completion)
-    removeCurrentAnimation()
     addNewAnimationForContext(context)
   }
   
@@ -322,7 +321,6 @@ final public class AnimationView: LottieView {
                    toFrame: AnimationFrameTime,
                    loopMode: LottieLoopMode? = nil,
                    completion: LottieCompletionBlock? = nil) {
-    removeCurrentAnimation()
     if let loopMode = loopMode {
       /// Set the loop mode, if one was supplied
       self.loopMode = loopMode
@@ -356,7 +354,6 @@ final public class AnimationView: LottieView {
       return
     }
     
-    removeCurrentAnimation()
     if let loopMode = loopMode {
       /// Set the loop mode, if one was supplied
       self.loopMode = loopMode
