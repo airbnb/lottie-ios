@@ -12,12 +12,12 @@ import QuartzCore
 import AVFoundation
 
 class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
-    var playerLayer: AVPlayerLayer?
-    var oldPlayerLayer: AVPlayerLayer?
-    let file: (name: String, extension: String)
-    let loopVideo: Bool
-    var playing: Bool = false
-    var endVideoObserver: Any?
+    private var playerLayer: AVPlayerLayer?
+    private var oldPlayerLayer: AVPlayerLayer?
+    private let file: (name: String, extension: String)
+    private let loopVideo: Bool
+    private var playing: Bool = false
+    private var endVideoObserver: Any?
     var videoProvider: AnimationVideoProvider? {
       didSet {
         updatePlayer()
@@ -82,13 +82,13 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
                 let fadeIn = CABasicAnimation()
                 fadeIn.fromValue = 0.0
                 fadeIn.toValue = 1.0
-                configure(animation: fadeIn, for: playerLayer)
+                configure(fadeAnimation: fadeIn, for: playerLayer)
                 
                 let fadeOut = CABasicAnimation()
                 fadeOut.fromValue = 1.0
                 fadeOut.toValue = 0.0
                 fadeOut.delegate = self
-                configure(animation: fadeOut, for: oldPlayerLayer)
+                configure(fadeAnimation: fadeOut, for: oldPlayerLayer)
                 
                 self.oldPlayerLayer = oldPlayerLayer
             }
@@ -100,12 +100,12 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
         }
     }
     
-    private func configure(animation: CAAnimation, for layer: CALayer) {
-        animation.duration = 1.0
-        animation.fillMode = .forwards
-        animation.isRemovedOnCompletion = false
+    private func configure(fadeAnimation: CAAnimation, for layer: CALayer) {
+        fadeAnimation.duration = 1.0
+        fadeAnimation.fillMode = .forwards
+        fadeAnimation.isRemovedOnCompletion = false
         
-        layer.add(animation, forKey: #keyPath(CALayer.opacity))
+        layer.add(fadeAnimation, forKey: #keyPath(CALayer.opacity))
     }
     
     private func resolutionForLocalVideo(url: URL) -> CGSize? {
