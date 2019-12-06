@@ -285,6 +285,7 @@ final public class AnimationView: LottieView {
     let context = AnimationContext(playFrom: CGFloat(animation.startFrame),
                                    playTo: CGFloat(animation.endFrame),
                                    closure: completion)
+    removeCurrentAnimation()
     addNewAnimationForContext(context)
   }
   
@@ -327,6 +328,7 @@ final public class AnimationView: LottieView {
                    toFrame: AnimationFrameTime,
                    loopMode: LottieLoopMode? = nil,
                    completion: LottieCompletionBlock? = nil) {
+    removeCurrentAnimation()
     if let loopMode = loopMode {
       /// Set the loop mode, if one was supplied
       self.loopMode = loopMode
@@ -360,6 +362,7 @@ final public class AnimationView: LottieView {
       return
     }
     
+    removeCurrentAnimation()
     if let loopMode = loopMode {
       /// Set the loop mode, if one was supplied
       self.loopMode = loopMode
@@ -868,9 +871,6 @@ final public class AnimationView: LottieView {
     CATransaction.setDisableActions(true)
     animationLayer?.currentFrame = newFrame
     CATransaction.commit()
-    CATransaction.setCompletionBlock {
-        self.animationLayer?.forceDisplayUpdate()
-    }
   }
   
   @objc override func animationWillMoveToBackground() {
@@ -927,7 +927,6 @@ final public class AnimationView: LottieView {
     guard animationContext != nil else { return }
     let pauseFrame = realtimeAnimationFrame
     animationLayer?.removeAnimation(forKey: activeAnimationName)
-    animationLayer?.updateDependencies()
     updateAnimationFrame(pauseFrame)
     self.animationContext = nil
   }
