@@ -773,7 +773,7 @@ final public class AnimationView: LottieView {
           && contentsLayer.opacity > 0.01
       }
       .sorted { lhs, rhs in
-        lhs.contentsLayer.zPosition > rhs.contentsLayer.zPosition
+        lhs.contentsLayer.zPosition < rhs.contentsLayer.zPosition
       }
       .map { compositionLayer in
         compositionLayer.keypathName
