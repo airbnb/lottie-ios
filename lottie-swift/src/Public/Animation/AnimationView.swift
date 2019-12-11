@@ -759,7 +759,7 @@ final public class AnimationView: LottieView {
 
   /**
    Returns keypathes of all animation layers at given point.
-   Keypathes sorted by zPosition from front to back.
+   Keypathes sorted by zPosition from back to front.
 
    - Parameter point: Point in animation view
    */
@@ -771,9 +771,6 @@ final public class AnimationView: LottieView {
         return contentsLayer.contains(pointInContainer)
           && !contentsLayer.isHidden
           && contentsLayer.opacity > 0.01
-      }
-      .sorted { lhs, rhs in
-        lhs.contentsLayer.zPosition > rhs.contentsLayer.zPosition
       }
       .map { compositionLayer in
         compositionLayer.keypathName
