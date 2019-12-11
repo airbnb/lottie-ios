@@ -756,6 +756,29 @@ final public class AnimationView: LottieView {
       animationLayer.forceDisplayUpdate()
     }
   }
+
+  /**
+   Returns keypathes of all animation layers at given point.
+   Keypathes sorted by zPosition from front to back.
+
+   - Parameter point: Point in animation view
+   */
+  public func animationKeys(at point: CGPoint) -> [String] {
+    animationLayer?.animationLayers
+      .filter { compositionLayer in
+        let contentsLayer = compositionLayer.contentsLayer
+        let pointInContainer = contentsLayer.convert(point, from: layer)
+        return contentsLayer.contains(pointInContainer)
+          && !contentsLayer.isHidden
+          && contentsLayer.opacity > 0.01
+      }
+      .sorted { lhs, rhs in
+        lhs.contentsLayer.zPosition > rhs.contentsLayer.zPosition
+      }
+      .map { compositionLayer in
+        compositionLayer.keypathName
+      } ?? []
+  }
   
   // MARK: - Private (Properties)
   
