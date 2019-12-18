@@ -64,7 +64,7 @@ class WordAnimatedTextLayer : DisabledTextLayer, PartedTextLayer {
     }
     
     let shifted: Bool
-    var parts: [TextLayerPart]? = [TextLayerPart]()
+    var parts: [TextLayerPart]?
     
     init(_ shifted: Bool = false) {
         self.shifted = shifted
@@ -82,6 +82,7 @@ class WordAnimatedTextLayer : DisabledTextLayer, PartedTextLayer {
         sublayers?.forEach { $0.removeFromSuperlayer() }
         
         let ranges = attributedString.words()
+        parts = []
         
         ranges.forEach {
             guard let mutableString = attributedString.mutableCopy() as? NSMutableAttributedString else { return }
@@ -116,7 +117,7 @@ class LineAnimatedTextLayer : DisabledTextLayer, PartedTextLayer {
     
     private var lines: [CTLine]?
     private var origins: [CGPoint]?
-    private(set) var parts: [TextLayerPart]? = []
+    private(set) var parts: [TextLayerPart]?
         
     override var string: Any? {
         set {
@@ -125,6 +126,7 @@ class LineAnimatedTextLayer : DisabledTextLayer, PartedTextLayer {
                 attributedString = newAttributedString
                 
                 if let attributedString = newAttributedString {
+                    parts = []
                     let path = CGPath(rect: self.frame, transform: nil)
                     let frameSetterRef = CTFramesetterCreateWithAttributedString(attributedString)
                     let frameRef = CTFramesetterCreateFrame(frameSetterRef, CFRangeMake(0, 0), path, nil)
