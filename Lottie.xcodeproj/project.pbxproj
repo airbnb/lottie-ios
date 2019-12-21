@@ -1714,7 +1714,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1110;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = YurtvilleProds;
 				TargetAttributes = {
 					486E83B1220A317C007CD915 = {
