@@ -231,6 +231,11 @@ extension CATransform3D {
     let scale = CATransform3DMakeScale(CGFloat(scale.x / 100.0), CGFloat(scale.y / 100.0), CGFloat(scale.z / 100.0))
     let anchor = CATransform3DMakeTranslation(CGFloat(-anchor.x), CGFloat(-anchor.y), CGFloat(-anchor.z))
 
-    return anchor.concat(xRotation).concat(yRotation).concat(zRotation).concat(translation).concat(scale).concat(anchor)
+    return anchor
+      .concat(xRotation)
+      .concat(yRotation)
+      .concat(zRotation)
+      .concat(scale)
+      .concat(translation)
   }
 }
