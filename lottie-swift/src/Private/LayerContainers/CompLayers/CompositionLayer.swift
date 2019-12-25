@@ -73,6 +73,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
     ]
     
     contentsLayer.anchorPoint = .zero
+    contentsLayer.isDoubleSided = true
     contentsLayer.bounds = CGRect(origin: .zero, size: size)
     contentsLayer.actions = [
       "opacity" : NSNull(),

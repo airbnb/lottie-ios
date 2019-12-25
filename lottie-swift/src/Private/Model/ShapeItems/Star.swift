@@ -35,7 +35,7 @@ final class Star: ShapeItem {
   let innerRoundness: KeyframeGroup<Vector1D>?
   
   /// The rotation of the star
-  let rotation: KeyframeGroup<Vector1D>
+  let rotation: KeyframeGroup<Vector3D>
   
   /// The number of points on the star
   let points: KeyframeGroup<Vector1D>
@@ -63,7 +63,7 @@ final class Star: ShapeItem {
     self.outerRoundness = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .outerRoundness)
     self.innerRadius = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .innerRadius)
     self.innerRoundness = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .innerRoundness)
-    self.rotation = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .rotation)
+    self.rotation = try container.decode(KeyframeGroup<Vector3D>.self, forKey: .rotation)
     self.points = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .points)
     self.starType = try container.decode(StarType.self, forKey: .starType)
     try super.init(from: decoder)
