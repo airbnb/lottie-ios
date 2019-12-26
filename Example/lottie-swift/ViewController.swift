@@ -38,7 +38,6 @@ class ViewController: UIViewController {
     animationView.imageProvider = TestAnimationImageProvider()
     
     animationView.animation = animation
-    animationView.loopMode = .loop
     animationView.contentMode = .scaleAspectFit
     view.addSubview(animationView)
   

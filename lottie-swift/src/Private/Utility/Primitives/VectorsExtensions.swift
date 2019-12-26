@@ -225,7 +225,6 @@ extension CATransform3D {
                             position: Vector3D,
                             scale: Vector3D,
                             rotation: Vector3D) -> CATransform3D {
-    /// Default AfterEffect camera: 50mm
     let translation = CATransform3DMakeTranslation(CGFloat(position.x), CGFloat(position.y), CGFloat(position.z))
     let xRotation = CATransform3DMakeRotation(CGFloat(-rotation.x).toRadians(), 1.0, 0.0, 0.0)
     let yRotation = CATransform3DMakeRotation(CGFloat(rotation.y).toRadians(), 0.0, 1.0, 0.0)
@@ -233,14 +232,16 @@ extension CATransform3D {
     let scale = CATransform3DMakeScale(CGFloat(scale.x / 100.0), CGFloat(scale.y / 100.0), CGFloat(scale.z / 100.0))
     let anchor = CATransform3DMakeTranslation(CGFloat(-anchor.x), CGFloat(-anchor.y), CGFloat(-anchor.z))
 
+    /// This matricies are used to apply perspective effect
+    var perspectiveProjection = CATransform3DIdentity
+    perspectiveProjection.m34 = -1.0 / CGFloat(cameraPosition.z)
+
     let cameraMoving = CATransform3DTranslate(
       CATransform3DIdentity,
       -CGFloat(cameraPosition.x),
       -CGFloat(cameraPosition.y),
       0
     )
-    var projection = CATransform3DIdentity
-    projection.m34 = -1/1777.8
 
 
     return anchor
@@ -250,7 +251,7 @@ extension CATransform3D {
       .concat(scale)
       .concat(translation)
       .concat(cameraMoving)
-      .concat(projection)
+      .concat(perspectiveProjection)
       .concat(CATransform3DInvert(cameraMoving))
   }
 }
