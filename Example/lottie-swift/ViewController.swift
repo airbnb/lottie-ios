@@ -9,13 +9,31 @@
 import UIKit
 import Lottie
 
+class HashColorAnimationImageProvider: AnimationImageProvider {
+  private func hashColor(for hash: Int) -> UIColor {
+    let normalizedHash = CGFloat(Double(UInt.max) / Double(UInt(abs(hash))))
+    return UIColor(hue: normalizedHash, saturation: 1.0, brightness: 1.0, alpha: 1.0)
+  }
+
+  func imageForAsset(asset: ImageAsset) -> CGImage? {
+    let size = CGSize(width: asset.width, height: asset.height)
+    UIGraphicsBeginImageContext(size)
+    let context = UIGraphicsGetCurrentContext()
+    context?.setFillColor(hashColor(for: asset.name.hashValue).cgColor)
+    context?.fill(CGRect(origin: .zero, size: size))
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return image?.cgImage
+  }
+}
+
 class ViewController: UIViewController {
   let animationView = AnimationView()
   let slider = UISlider()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     let animation = Animation.named("3DRotation", subdirectory: "TestAnimations")
     animationView.imageProvider = TestAnimationImageProvider()
     
@@ -44,6 +62,11 @@ class ViewController: UIViewController {
     let redValueProvider = ColorValueProvider(Color(r: 1, g: 0.2, b: 0.3, a: 1))
     animationView.setValueProvider(redValueProvider, keypath: AnimationKeypath(keypath: "Switch Outline Outlines.**.Fill 1.Color"))
     animationView.setValueProvider(redValueProvider, keypath: AnimationKeypath(keypath: "Checkmark Outlines 2.**.Stroke 1.Color"))
+
+    /// Tap handling
+    animationView.addGestureRecognizer(
+      UITapGestureRecognizer(target: self, action: #selector(tappedOnAnimation(tapRecognizer:)))
+    )
     
     /// Slider
     slider.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -143,6 +166,11 @@ class ViewController: UIViewController {
     if animationView.isAnimationPlaying {
       slider.value = Float(animationView.realtimeAnimationProgress)
     }
+  }
+
+  @objc func tappedOnAnimation(tapRecognizer: UITapGestureRecognizer) {
+    let position = tapRecognizer.location(in: animationView)
+    print(animationView.animationKeys(at: position))
   }
   
   
