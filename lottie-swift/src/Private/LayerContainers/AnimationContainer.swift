@@ -108,7 +108,14 @@ final class AnimationContainer: CALayer {
     self.animationLayers = []
     super.init()
     bounds = animation.bounds
-    let layers = animation.layers.initializeCompositionLayers(assetLibrary: animation.assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, frameRate: CGFloat(animation.framerate))
+    let cameraPosition = Vector3D(x: 0.5 * bounds.width, y: 0.5 * bounds.height, z: 1777.8)
+    let layers = animation.layers.initializeCompositionLayers(
+      assetLibrary: animation.assetLibrary,
+      layerImageProvider: layerImageProvider,
+      textProvider: textProvider,
+      cameraPosition: cameraPosition,
+      frameRate: CGFloat(animation.framerate)
+    )
     
     var imageLayers = [ImageCompositionLayer]()
     var textLayers = [TextCompositionLayer]()

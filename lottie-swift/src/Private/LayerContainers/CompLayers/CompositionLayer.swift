@@ -48,8 +48,8 @@ class CompositionLayer: CALayer, KeypathSearchable {
   let startFrame: CGFloat
   let timeStretch: CGFloat
   
-  init(layer: LayerModel, size: CGSize) {
-    self.transformNode = LayerTransformNode(transform: layer.transform)
+  init(layer: LayerModel, size: CGSize, cameraPosition: Vector3D? = nil) {
+    self.transformNode = LayerTransformNode(transform: layer.transform, cameraPosition: cameraPosition)
     if let masks = layer.masks {
       maskLayer = MaskContainerLayer(masks: masks)
     } else {
@@ -73,6 +73,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
     ]
     
     contentsLayer.anchorPoint = .zero
+    contentsLayer.isDoubleSided = true
     contentsLayer.bounds = CGRect(origin: .zero, size: size)
     contentsLayer.actions = [
       "opacity" : NSNull(),

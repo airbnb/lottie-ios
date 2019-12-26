@@ -181,6 +181,10 @@ extension CATransform3D {
   func skewed(skew: CGFloat, skewAxis: CGFloat) -> CATransform3D {
     return CATransform3DConcat(CATransform3D.makeSkew(skew: skew, skewAxis: skewAxis), self)
   }
+
+  func concat(_ other: CATransform3D) -> CATransform3D {
+    return CATransform3DConcat(self, other)
+  }
   
   static func makeSkew(skew: CGFloat, skewAxis: CGFloat) -> CATransform3D {
     let mCos = cos(skewAxis.toRadians())
@@ -214,5 +218,40 @@ extension CATransform3D {
       return CATransform3DMakeTranslation(position.x, position.y, 0).rotated(rotation).skewed(skew: -skew, skewAxis: skewAxis).scaled(scale * 0.01).translated(anchor * -1)
     }
     return CATransform3DMakeTranslation(position.x, position.y, 0).rotated(rotation).scaled(scale * 0.01).translated(anchor * -1)
+  }
+
+  static func makeTransform(cameraPosition: Vector3D,
+                            anchor: Vector3D,
+                            position: Vector3D,
+                            scale: Vector3D,
+                            rotation: Vector3D) -> CATransform3D {
+    let translation = CATransform3DMakeTranslation(CGFloat(position.x), CGFloat(position.y), CGFloat(position.z))
+    let xRotation = CATransform3DMakeRotation(CGFloat(-rotation.x).toRadians(), 1.0, 0.0, 0.0)
+    let yRotation = CATransform3DMakeRotation(CGFloat(rotation.y).toRadians(), 0.0, 1.0, 0.0)
+    let zRotation = CATransform3DMakeRotation(CGFloat(rotation.z).toRadians(), 0.0, 0.0, 1.0)
+    let scale = CATransform3DMakeScale(CGFloat(scale.x / 100.0), CGFloat(scale.y / 100.0), CGFloat(scale.z / 100.0))
+    let anchor = CATransform3DMakeTranslation(CGFloat(-anchor.x), CGFloat(-anchor.y), CGFloat(-anchor.z))
+
+    /// This matricies are used to apply perspective effect
+    var perspectiveProjection = CATransform3DIdentity
+    perspectiveProjection.m34 = -1.0 / CGFloat(cameraPosition.z)
+
+    let cameraMoving = CATransform3DTranslate(
+      CATransform3DIdentity,
+      -CGFloat(cameraPosition.x),
+      -CGFloat(cameraPosition.y),
+      0
+    )
+
+
+    return anchor
+      .concat(yRotation)
+      .concat(zRotation)
+      .concat(xRotation)
+      .concat(scale)
+      .concat(translation)
+      .concat(cameraMoving)
+      .concat(perspectiveProjection)
+      .concat(CATransform3DInvert(cameraMoving))
   }
 }

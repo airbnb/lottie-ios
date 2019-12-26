@@ -33,9 +33,9 @@ class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    let animation = Animation.named("HereWeGoAgain", subdirectory: "TestAnimations")
-    animationView.imageProvider = HashColorAnimationImageProvider()
+
+    let animation = Animation.named("3DRotation", subdirectory: "TestAnimations")
+    animationView.imageProvider = TestAnimationImageProvider()
     
     animationView.animation = animation
     animationView.contentMode = .scaleAspectFit
