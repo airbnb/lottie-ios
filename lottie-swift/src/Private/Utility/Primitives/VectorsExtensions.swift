@@ -224,18 +224,24 @@ extension CATransform3D {
                             position: Vector3D,
                             scale: Vector3D,
                             rotation: Vector3D) -> CATransform3D {
+    /// Default AfterEffect camera: 50mm
     let translation = CATransform3DMakeTranslation(CGFloat(position.x), CGFloat(position.y), CGFloat(position.z))
-    let xRotation = CATransform3DMakeRotation(CGFloat(rotation.x).toRadians(), 1.0, 0.0, 0.0)
+    let xRotation = CATransform3DMakeRotation(CGFloat(-rotation.x).toRadians(), 1.0, 0.0, 0.0)
     let yRotation = CATransform3DMakeRotation(CGFloat(rotation.y).toRadians(), 0.0, 1.0, 0.0)
     let zRotation = CATransform3DMakeRotation(CGFloat(rotation.z).toRadians(), 0.0, 0.0, 1.0)
     let scale = CATransform3DMakeScale(CGFloat(scale.x / 100.0), CGFloat(scale.y / 100.0), CGFloat(scale.z / 100.0))
     let anchor = CATransform3DMakeTranslation(CGFloat(-anchor.x), CGFloat(-anchor.y), CGFloat(-anchor.z))
 
+    var projection = CATransform3DIdentity
+    projection.m34 = -1/1777.8
+
+
     return anchor
-      .concat(xRotation)
       .concat(yRotation)
       .concat(zRotation)
+      .concat(xRotation)
       .concat(scale)
       .concat(translation)
+      .concat(projection)
   }
 }

@@ -634,7 +634,7 @@ final public class AnimationView: LottieView {
   override func layoutAnimation() {
     guard let animation = animation, let animationLayer = animationLayer else { return }
     var position = animation.bounds.center
-    let xform: CATransform3D
+    var xform: CATransform3D
     var shouldForceUpdates: Bool = false
     
     if let viewportFrame = self.viewportFrame {
@@ -713,7 +713,7 @@ final public class AnimationView: LottieView {
         #endif
       }
     }
-    
+
     /*
      UIView Animation does not implicitly set CAAnimation time or timing fuctions.
      If layout is changed in an animation we must get the current animation duration
