@@ -23,9 +23,9 @@ final class ImageCompositionLayer: CompositionLayer {
   
   let imageReferenceID: String
   
-  init(imageLayer: ImageLayerModel, size: CGSize) {
+  init(imageLayer: ImageLayerModel, size: CGSize, cameraPosition: Vector3D? = nil) {
     self.imageReferenceID = imageLayer.referenceID
-    super.init(layer: imageLayer, size: size)
+    super.init(layer: imageLayer, size: size, cameraPosition: cameraPosition)
     contentsLayer.masksToBounds = true
     contentsLayer.contentsGravity = CALayerContentsGravity.resize
   }

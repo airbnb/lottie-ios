@@ -375,22 +375,23 @@
 				TargetAttributes = {
 					486E835B220A234C007CD915 = {
 						CreatedOnToolsVersion = 10.0;
-						DevelopmentTeam = VM8ZLJG6JZ;
+						DevelopmentTeam = FS28Y8MS6P;
 						ProvisioningStyle = Automatic;
 					};
 					486E8376220A2BB5007CD915 = {
 						CreatedOnToolsVersion = 10.0;
-						DevelopmentTeam = VM8ZLJG6JZ;
+						DevelopmentTeam = FS28Y8MS6P;
 						ProvisioningStyle = Automatic;
 					};
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = VM8ZLJG6JZ;
+						DevelopmentTeam = FS28Y8MS6P;
 						LastSwiftMigration = 1020;
+						ProvisioningStyle = Automatic;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = VM8ZLJG6JZ;
+						DevelopmentTeam = FS28Y8MS6P;
 						LastSwiftMigration = 1020;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -699,7 +700,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = VM8ZLJG6JZ;
+				DEVELOPMENT_TEAM = FS28Y8MS6P;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "lottie-swift_macOS/Info.plist";
@@ -732,7 +733,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = VM8ZLJG6JZ;
+				DEVELOPMENT_TEAM = FS28Y8MS6P;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "lottie-swift_macOS/Info.plist";
@@ -762,13 +763,13 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = VM8ZLJG6JZ;
+				DEVELOPMENT_TEAM = FS28Y8MS6P;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "lottie-swift_tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.airbnb.lottie-swift-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.shedward.lottie-swift-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -793,12 +794,12 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VM8ZLJG6JZ;
+				DEVELOPMENT_TEAM = FS28Y8MS6P;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "lottie-swift_tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.airbnb.lottie-swift-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.shedward.lottie-swift-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
@@ -919,12 +920,15 @@
 			baseConfigurationReference = 90A6D05A7336A0F45A1084BE /* Pods-lottie-swift_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VM8ZLJG6JZ;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FS28Y8MS6P;
 				INFOPLIST_FILE = "lottie-swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.shedward.demo.lottie-swift-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -934,12 +938,15 @@
 			baseConfigurationReference = 990C0AA8A35456B23B51C127 /* Pods-lottie-swift_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VM8ZLJG6JZ;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FS28Y8MS6P;
 				INFOPLIST_FILE = "lottie-swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.shedward.demo.lottie-swift-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -948,7 +955,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E82294C6B04BC5EF7FF4ED2E /* Pods-lottie-swift_Tests.debug.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = VM8ZLJG6JZ;
+				DEVELOPMENT_TEAM = FS28Y8MS6P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -970,7 +977,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 40ED9D991E74F17AC8F06E90 /* Pods-lottie-swift_Tests.release.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = VM8ZLJG6JZ;
+				DEVELOPMENT_TEAM = FS28Y8MS6P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

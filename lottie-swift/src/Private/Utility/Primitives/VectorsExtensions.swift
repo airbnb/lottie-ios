@@ -220,7 +220,8 @@ extension CATransform3D {
     return CATransform3DMakeTranslation(position.x, position.y, 0).rotated(rotation).scaled(scale * 0.01).translated(anchor * -1)
   }
 
-  static func makeTransform(anchor: Vector3D,
+  static func makeTransform(cameraPosition: Vector3D,
+                            anchor: Vector3D,
                             position: Vector3D,
                             scale: Vector3D,
                             rotation: Vector3D) -> CATransform3D {
@@ -232,6 +233,12 @@ extension CATransform3D {
     let scale = CATransform3DMakeScale(CGFloat(scale.x / 100.0), CGFloat(scale.y / 100.0), CGFloat(scale.z / 100.0))
     let anchor = CATransform3DMakeTranslation(CGFloat(-anchor.x), CGFloat(-anchor.y), CGFloat(-anchor.z))
 
+    let cameraMoving = CATransform3DTranslate(
+      CATransform3DIdentity,
+      -CGFloat(cameraPosition.x),
+      -CGFloat(cameraPosition.y),
+      0
+    )
     var projection = CATransform3DIdentity
     projection.m34 = -1/1777.8
 
@@ -242,6 +249,8 @@ extension CATransform3D {
       .concat(xRotation)
       .concat(scale)
       .concat(translation)
+      .concat(cameraMoving)
       .concat(projection)
+      .concat(CATransform3DInvert(cameraMoving))
   }
 }

@@ -98,8 +98,9 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
 class LayerTransformNode: AnimatorNode {
   let outputNode: NodeOutput = PassThroughOutputNode(parent: nil)
   
-  init(transform: Transform) {
+  init(transform: Transform, cameraPosition: Vector3D?) {
     self.transformProperties = LayerTransformProperties(transform: transform)
+    self.cameraPosition = cameraPosition ?? Vector3D(x: 0, y: 0, z: 1777.8)
   }
   
   let transformProperties: LayerTransformProperties
@@ -145,7 +146,8 @@ class LayerTransformNode: AnimatorNode {
       )
     }
 
-    localTransform = CATransform3D.makeTransform(anchor: transformProperties.anchor.value,
+    localTransform = CATransform3D.makeTransform(cameraPosition: cameraPosition,
+                                                 anchor: transformProperties.anchor.value,
                                                  position: position,
                                                  scale: transformProperties.scale.value,
                                                  rotation: rotation)
@@ -156,7 +158,8 @@ class LayerTransformNode: AnimatorNode {
       globalTransform = localTransform
     }
   }
-  
+
+  var cameraPosition: Vector3D
   var opacity: Float = 1
   var localTransform: CATransform3D = CATransform3DIdentity
   var globalTransform: CATransform3D = CATransform3DIdentity

@@ -13,6 +13,7 @@ extension Array where Element == LayerModel {
   func initializeCompositionLayers(assetLibrary: AssetLibrary?,
                                    layerImageProvider: LayerImageProvider,
                                    textProvider: AnimationTextProvider,
+                                   cameraPosition: Vector3D? = nil,
                                    frameRate: CGFloat) -> [CompositionLayer] {
     var compositionLayers = [CompositionLayer]()
     var layerMap = [Int : CompositionLayer]()
@@ -47,7 +48,11 @@ extension Array where Element == LayerModel {
       } else if let imageLayer = layer as? ImageLayerModel,
         let assetLibrary = assetLibrary,
         let imageAsset = assetLibrary.imageAssets[imageLayer.referenceID] {
-        let imageContainer = ImageCompositionLayer(imageLayer: imageLayer, size: CGSize(width: imageAsset.width, height: imageAsset.height))
+        let imageContainer = ImageCompositionLayer(
+          imageLayer: imageLayer,
+          size: CGSize(width: imageAsset.width, height: imageAsset.height),
+          cameraPosition: cameraPosition
+        )
         compositionLayers.append(imageContainer)
         layerMap[layer.index] = imageContainer
       } else if let textLayer = layer as? TextLayerModel {
