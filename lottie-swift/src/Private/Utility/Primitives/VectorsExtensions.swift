@@ -228,7 +228,7 @@ extension CATransform3D {
     let translation = CATransform3DMakeTranslation(CGFloat(position.x), CGFloat(position.y), CGFloat(position.z))
     let xRotation = CATransform3DMakeRotation(CGFloat(-rotation.x).toRadians(), 1.0, 0.0, 0.0)
     let yRotation = CATransform3DMakeRotation(CGFloat(rotation.y).toRadians(), 0.0, 1.0, 0.0)
-    let zRotation = CATransform3DMakeRotation(CGFloat(rotation.z).toRadians(), 0.0, 0.0, 1.0)
+    let zRotation = CATransform3DMakeRotation(CGFloat(-rotation.z).toRadians(), 0.0, 0.0, 1.0)
     let scale = CATransform3DMakeScale(CGFloat(scale.x / 100.0), CGFloat(scale.y / 100.0), CGFloat(scale.z / 100.0))
     let anchor = CATransform3DMakeTranslation(CGFloat(-anchor.x), CGFloat(-anchor.y), CGFloat(-anchor.z))
 
