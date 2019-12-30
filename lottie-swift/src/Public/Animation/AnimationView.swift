@@ -718,6 +718,8 @@ final public class AnimationView: LottieView {
      UIView Animation does not implicitly set CAAnimation time or timing fuctions.
      If layout is changed in an animation we must get the current animation duration
      and timing function and then manually create a CAAnimation to match the UIView animation.
+     If layout is changed without animation, explicitly set animation duration to 0.0
+     inside CATransaction to avoid unwanted artifacts.
      */
 
     /// Check if any animation exist on the view's layer, and grab the duration and timing functions of the animation.
@@ -748,8 +750,12 @@ final public class AnimationView: LottieView {
       animationLayer.transform = xform
       animationLayer.add(group, forKey: animationKey)
     } else {
+      CATransaction.begin()
+      CATransaction.setAnimationDuration(0.0)
+      CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .linear))
       animationLayer.position = position
       animationLayer.transform = xform
+      CATransaction.commit()
     }
     
     if shouldForceUpdates {
