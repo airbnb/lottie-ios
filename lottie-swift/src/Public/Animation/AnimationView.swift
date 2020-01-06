@@ -959,7 +959,7 @@ final public class AnimationView: LottieView {
     layerAnimation.isRemovedOnCompletion = false
     if timeOffset != 0 {
       let currentLayerTime = viewLayer?.convertTime(CACurrentMediaTime(), from: nil) ?? 0
-      layerAnimation.beginTime = currentLayerTime - (timeOffset * 1 / Double(animationSpeed))
+      layerAnimation.beginTime = currentLayerTime - (timeOffset * 1 / Double(abs(animationSpeed)))
     }
     layerAnimation.delegate = animationContext.closure
     animationContext.closure.animationLayer = animationlayer
