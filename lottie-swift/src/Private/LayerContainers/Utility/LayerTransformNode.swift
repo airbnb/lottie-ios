@@ -25,7 +25,7 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
     
     if transform.positionX != nil || transform.positionY != nil || transform.positionZ != nil {
       self.position = nil
-      self.positionX = transform.positionY.map { NodeProperty(provider: KeyframeInterpolator(keyframes: $0.keyframes)) }
+      self.positionX = transform.positionX.map { NodeProperty(provider: KeyframeInterpolator(keyframes: $0.keyframes)) }
       self.positionY = transform.positionY.map { NodeProperty(provider: KeyframeInterpolator(keyframes: $0.keyframes)) }
       self.positionZ = transform.positionZ.map { NodeProperty(provider: KeyframeInterpolator(keyframes: $0.keyframes)) }
     } else if let positionKeyframes = transform.position?.keyframes {
@@ -35,8 +35,8 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
       self.positionZ = nil
     } else {
       self.position = nil
-      self.positionY = nil
       self.positionX = nil
+      self.positionY = nil
       self.positionZ = nil
     }
 
