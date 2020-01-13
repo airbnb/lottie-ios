@@ -29,7 +29,7 @@ final class Transform: Codable {
   let scale: KeyframeGroup<Vector3D>
   
   /// The rotation of the transform. Note: This is single dimensional rotation.
-  let rotation: KeyframeGroup<Vector3D>?
+  let rotation: KeyframeGroup<Vector1D>?
 
   /// The rotationX of the transform.
   let rotationX: KeyframeGroup<Vector1D>?
@@ -116,8 +116,8 @@ final class Transform: Codable {
       self.rotationZ = try? container.decode(KeyframeGroup<Vector1D>.self, forKey: .rotationZ)
       self.rotation = nil
     } else {
-      self.rotation = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .rotation)
-        ?? KeyframeGroup(Vector3D(x: 0.0, y: 0.0, z: 0.0))
+      self.rotation = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation)
+        ?? KeyframeGroup(Vector1D(0.0))
       self.rotationX = nil
       self.rotationY = nil
       self.rotationZ = nil
