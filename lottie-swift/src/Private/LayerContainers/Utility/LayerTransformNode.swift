@@ -51,7 +51,7 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
       self.rotationY = transform.rotationY.map { NodeProperty(provider: KeyframeInterpolator(keyframes: $0.keyframes)) }
       self.rotationZ = transform.rotationZ.map { NodeProperty(provider: KeyframeInterpolator(keyframes: $0.keyframes)) }
     } else if let rotationKeyframes = transform.rotation?.keyframes {
-      let rotation: NodeProperty<Vector3D> = NodeProperty(provider: KeyframeInterpolator(keyframes: rotationKeyframes))
+      let rotation: NodeProperty<Vector1D> = NodeProperty(provider: KeyframeInterpolator(keyframes: rotationKeyframes))
       self.rotation = rotation
       self.rotationX = nil
       self.rotationY = nil
@@ -83,7 +83,7 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
   
   let anchor: NodeProperty<Vector3D>
   let scale: NodeProperty<Vector3D>
-  let rotation: NodeProperty<Vector3D>?
+  let rotation: NodeProperty<Vector1D>?
   let rotationX: NodeProperty<Vector1D>?
   let rotationY: NodeProperty<Vector1D>?
   let rotationZ: NodeProperty<Vector1D>?
@@ -100,7 +100,7 @@ class LayerTransformNode: AnimatorNode {
   
   init(transform: Transform, cameraPosition: Vector3D?) {
     self.transformProperties = LayerTransformProperties(transform: transform)
-    self.cameraPosition = cameraPosition ?? Vector3D(x: 0, y: 0, z: 1777.8)
+    self.cameraPosition = cameraPosition ?? Vector3D(x: 0, y: 0, z: 1777.8) // Default 50mm camera in AfterEffect
   }
   
   let transformProperties: LayerTransformProperties
@@ -136,8 +136,8 @@ class LayerTransformNode: AnimatorNode {
     }
 
     let rotation: Vector3D
-    if let rotation3Dvalue = transformProperties.rotation?.value {
-      rotation = rotation3Dvalue
+    if let rotation1Dvalue = transformProperties.rotation?.value {
+        rotation = Vector3D(x: 0, y: 0, z: rotation1Dvalue.value)
     } else {
       rotation = Vector3D(
         x: transformProperties.rotationX?.value.value ?? 0.0,
