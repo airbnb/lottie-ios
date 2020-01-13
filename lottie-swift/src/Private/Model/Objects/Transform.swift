@@ -88,14 +88,11 @@ final class Transform: Codable {
       self.positionX = nil
       self.positionY = nil
       self.positionZ = nil
-    } else if let positionContainer = try? container.nestedContainer(keyedBy: PositionCodingKeys.self, forKey: .position),
-      let positionX = try? positionContainer.decode(KeyframeGroup<Vector1D>.self, forKey: .positionX),
-      let positionY = try? positionContainer.decode(KeyframeGroup<Vector1D>.self, forKey: .positionY),
-      let positionZ = try? positionContainer.decode(KeyframeGroup<Vector1D>.self, forKey: .positionZ) {
+    } else if let positionContainer = try? container.nestedContainer(keyedBy: PositionCodingKeys.self, forKey: .position) {
       /// Position keyframes are split and nested.
-      self.positionX = positionX
-      self.positionY = positionY
-      self.positionZ = positionZ
+      self.positionX = try? positionContainer.decode(KeyframeGroup<Vector1D>.self, forKey: .positionX)
+      self.positionY = try? positionContainer.decode(KeyframeGroup<Vector1D>.self, forKey: .positionY)
+      self.positionZ = try? positionContainer.decode(KeyframeGroup<Vector1D>.self, forKey: .positionZ)
       self.position = nil
     } else {
       /// Default value.
