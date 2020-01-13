@@ -34,7 +34,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let animation = Animation.named("3DRotation", subdirectory: "TestAnimations")
+    let animation = Animation.named("HereWeGoAgain", subdirectory: "TestAnimations")
     animationView.imageProvider = TestAnimationImageProvider()
     
     animationView.animation = animation

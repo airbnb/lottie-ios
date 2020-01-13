@@ -146,11 +146,13 @@ class LayerTransformNode: AnimatorNode {
       )
     }
 
-    localTransform = CATransform3D.makeTransform(cameraPosition: cameraPosition,
-                                                 anchor: transformProperties.anchor.value,
-                                                 position: position,
-                                                 scale: transformProperties.scale.value,
-                                                 rotation: rotation)
+    localTransform = CATransform3D.makeTransform(
+        cameraPosition: cameraPosition,
+        anchor: transformProperties.anchor.value,
+        position: position,
+        scale: transformProperties.scale.value,
+        rotation: rotation
+    )
     
     if let parentNode = parentNode as? LayerTransformNode {
       globalTransform = CATransform3DConcat(localTransform, parentNode.globalTransform)
