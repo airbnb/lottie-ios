@@ -94,3 +94,6 @@ If you have doubts, please, check the following links:
 
 After successfully retrieved the package and added it to your project, just import `Lottie` and you can get the full benefits of it.
 
+### Objective-C Support
+
+As of 3.0 Lottie has been completely rewritten in Swift! For Objective-C support please use Lottie 2.5.3.
