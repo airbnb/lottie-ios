@@ -8,6 +8,7 @@
 import Foundation
 import CoreGraphics
 import QuartzCore
+import simd
 
 /**
  Single value container. Needed because lottie sometimes wraps a Double in an array.
@@ -226,9 +227,21 @@ extension CATransform3D {
                             scale: Vector3D,
                             rotation: Vector3D) -> CATransform3D {
     let translation = CATransform3DMakeTranslation(CGFloat(position.x), CGFloat(position.y), CGFloat(position.z))
-    let xRotation = CATransform3DMakeRotation(CGFloat(-rotation.x).toRadians(), 1.0, 0.0, 0.0)
-    let yRotation = CATransform3DMakeRotation(CGFloat(rotation.y).toRadians(), 0.0, 1.0, 0.0)
-    let zRotation = CATransform3DMakeRotation(CGFloat(-rotation.z).toRadians(), 0.0, 0.0, 1.0)
+
+    /// Compositng AfterEffect rotations into a single rotation.
+    /// z-axis is inverted intentionally to confm AffterEffect's behaviour
+    let degreeToRadians: Double = .pi / 180
+    let xRotation = simd_quaternion(rotation.x * degreeToRadians, simd_double3(x: -1.0, y: 0.0, z: 0.0))
+    let xyRotation = simd_quaternion(rotation.y * degreeToRadians, xRotation.act(simd_double3(x: 0.0, y: -1.0, z: 0.0)))
+    let xyzRotation = simd_quaternion(rotation.z * degreeToRadians, xyRotation.act(simd_double3(x: 0.0, y: 0.0, z: 1.0)))
+    let rotation = CATransform3DMakeRotation(
+        CGFloat(xyzRotation.angle),
+        CGFloat(xyzRotation.axis.x),
+        CGFloat(xyzRotation.axis.y),
+        CGFloat(xyzRotation.axis.z)
+    )
+
+
     let scale = CATransform3DMakeScale(CGFloat(scale.x / 100.0), CGFloat(scale.y / 100.0), CGFloat(scale.z / 100.0))
     let anchor = CATransform3DMakeTranslation(CGFloat(-anchor.x), CGFloat(-anchor.y), CGFloat(-anchor.z))
 
@@ -243,12 +256,9 @@ extension CATransform3D {
       0
     )
 
-
     return anchor
-      .concat(yRotation)
-      .concat(zRotation)
-      .concat(xRotation)
       .concat(scale)
+      .concat(rotation)
       .concat(translation)
       .concat(cameraMoving)
       .concat(perspectiveProjection)
