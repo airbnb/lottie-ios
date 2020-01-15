@@ -96,4 +96,14 @@ After successfully retrieved the package and added it to your project, just impo
 
 ### Objective-C Support
 
-As of 3.0 Lottie has been completely rewritten in Swift! For Objective-C support please use Lottie 2.5.3.
+As of 3.0 Lottie has been completely rewritten in Swift! 
+
+For Objective-C support please use Lottie 2.5.3. Alternatively an Objective-C branch exists and is still active.
+
+The official objective c branch can be found here:
+
+[Objective-C Branch](https://github.com/airbnb/lottie-ios/tree/lottie/objectiveC)
+
+Also check out the documentation regarding it here: 
+
+[iOS Migration](http://airbnb.io/lottie/#/ios-migration)
