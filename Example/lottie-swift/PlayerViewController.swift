@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PlayerViewController.swift
 //  lottie-swift
 //
 //  Created by buba447 on 01/07/2019.
@@ -9,52 +9,25 @@
 import UIKit
 import Lottie
 
-class HashColorAnimationImageProvider: AnimationImageProvider {
-  private func hashColor(for hash: Int) -> UIColor {
-    let normalizedHash = CGFloat(Double(UInt.max) / Double(UInt(abs(hash))))
-    return UIColor(hue: normalizedHash, saturation: 1.0, brightness: 1.0, alpha: 1.0)
-  }
+class PlayerViewController: UIViewController {
+  @IBOutlet weak var animationView: AnimationView!
+  @IBOutlet weak var slider: UISlider!
 
-  func imageForAsset(asset: ImageAsset) -> CGImage? {
-    let size = CGSize(width: asset.width, height: asset.height)
-    UIGraphicsBeginImageContext(size)
-    let context = UIGraphicsGetCurrentContext()
-    context?.setFillColor(hashColor(for: asset.name.hashValue).cgColor)
-    context?.fill(CGRect(origin: .zero, size: size))
-    let image = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    return image?.cgImage
-  }
-}
-
-class ViewController: UIViewController {
-  let animationView = AnimationView()
-  let slider = UISlider()
+  var animationName = "3DRotation"
   
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let animation = Animation.named("HereWeGoAgain", subdirectory: "TestAnimations")
+    title = animationName
+    let animation = Animation.named(animationName, subdirectory: "TestAnimations")
     animationView.imageProvider = TestAnimationImageProvider()
-    
     animationView.animation = animation
     animationView.contentMode = .scaleAspectFit
-    view.addSubview(animationView)
-  
-    slider.translatesAutoresizingMaskIntoConstraints = false
-    view.translatesAutoresizingMaskIntoConstraints = false
+    animationView.backgroundBehavior = .pauseAndRestore
+
     slider.minimumValue = 0
     slider.maximumValue = 1
     slider.value = 0
-    view.addSubview(slider)
-    animationView.backgroundBehavior = .pauseAndRestore
-    animationView.translatesAutoresizingMaskIntoConstraints = false
-    animationView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
-    animationView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-    
-    animationView.bottomAnchor.constraint(equalTo: slider.topAnchor, constant: -12).isActive = true
-    animationView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-    animationView.setContentCompressionResistancePriority(.fittingSizeLevel, for: .horizontal)
     
     /// *** Keypath Setting
     
@@ -68,10 +41,6 @@ class ViewController: UIViewController {
     )
     
     /// Slider
-    slider.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    slider.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
-    slider.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
-    slider.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -12).isActive = true
     slider.addTarget(self, action: #selector(updateAnimation(sender:)), for: .valueChanged)
     slider.addTarget(self, action: #selector(sliderFinished), for: .touchUpInside)
     
