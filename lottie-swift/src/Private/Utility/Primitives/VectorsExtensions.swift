@@ -241,16 +241,16 @@ extension CATransform3D {
 
     let rotation: CATransform3D
     if rotationAxis.x.isNaN || rotationAxis.y.isNaN, rotationAxis.z.isNaN {
-        /// There is no valid rotation axis if there is no rotation, so
-        /// we need to handle this case manually
-        rotation = CATransform3DIdentity
+      /// There is no valid rotation axis if there is no rotation, so
+      /// we need to handle this case manually
+      rotation = CATransform3DIdentity
     } else {
-        rotation = CATransform3DMakeRotation(
-          CGFloat(rotationAngle),
-          CGFloat(rotationAxis.x),
-          CGFloat(rotationAxis.y),
-          CGFloat(rotationAxis.z)
-        )
+      rotation = CATransform3DMakeRotation(
+        CGFloat(rotationAngle),
+        CGFloat(rotationAxis.x),
+        CGFloat(rotationAxis.y),
+        CGFloat(rotationAxis.z)
+      )
     }
 
     let scale = CATransform3DMakeScale(CGFloat(scale.x / 100.0), CGFloat(scale.y / 100.0), CGFloat(scale.z / 100.0))
