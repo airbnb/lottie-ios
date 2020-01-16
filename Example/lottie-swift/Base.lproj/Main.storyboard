@@ -1,31 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="kYe-Sz-N1S">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <!--Animations-->
+        <scene sceneID="c5O-mT-bGq">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="lottie_swift_Example" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <tableViewController id="w86-31-u31" customClass="AnimationsListViewController" customModule="lottie_swift_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZpZ-hT-lWW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AnimationCell" textLabel="FwX-cB-JiB" style="IBUITableViewCellStyleDefault" id="HAH-4k-DJ3">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HAH-4k-DJ3" id="iZX-9a-vD7">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FwX-cB-JiB">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="w86-31-u31" id="vWp-ar-JME"/>
+                            <outlet property="delegate" destination="w86-31-u31" id="S1B-PU-WeN"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Animations" id="z4G-cQ-PCY"/>
+                    <connections>
+                        <segue destination="A1S-Jc-SeX" kind="show" id="jZq-ju-CkW"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MGn-oe-Igw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="104.7976011994003"/>
+            <point key="canvasLocation" x="-986" y="144"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="t8Z-jT-Hwb">
+            <objects>
+                <navigationController id="kYe-Sz-N1S" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4Nq-lO-nIf">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="w86-31-u31" kind="relationship" relationship="rootViewController" id="eUy-4A-RKC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8CJ-Je-xWt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1900" y="144"/>
+        </scene>
+        <!--Player View Controller-->
+        <scene sceneID="Iie-cf-lL1">
+            <objects>
+                <viewController storyboardIdentifier="PlayerViewController" id="A1S-Jc-SeX" customClass="PlayerViewController" customModule="lottie_swift_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0Oi-6U-e36"/>
+                        <viewControllerLayoutGuide type="bottom" id="K0O-ha-hJI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XXZ-C3-vxJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" placeholderIntrinsicWidth="1000" placeholderIntrinsicHeight="1000" translatesAutoresizingMaskIntoConstraints="NO" id="b0n-Gj-qEi" customClass="AnimationView" customModule="Lottie">
+                                <rect key="frame" x="0.0" y="88" width="414" height="728"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="f4R-nX-oaZ">
+                                <rect key="frame" x="18" y="824" width="378" height="31"/>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="b0n-Gj-qEi" firstAttribute="leading" secondItem="XXZ-C3-vxJ" secondAttribute="leading" id="3dd-Q3-D5w"/>
+                            <constraint firstItem="f4R-nX-oaZ" firstAttribute="top" secondItem="b0n-Gj-qEi" secondAttribute="bottom" constant="8" symbolic="YES" id="3tp-Vk-BCa"/>
+                            <constraint firstItem="f4R-nX-oaZ" firstAttribute="leading" secondItem="XXZ-C3-vxJ" secondAttribute="leadingMargin" id="4i3-y1-stH"/>
+                            <constraint firstItem="f4R-nX-oaZ" firstAttribute="trailing" secondItem="XXZ-C3-vxJ" secondAttribute="trailingMargin" id="7Sw-Hl-EpW"/>
+                            <constraint firstItem="b0n-Gj-qEi" firstAttribute="top" secondItem="0Oi-6U-e36" secondAttribute="bottom" id="UeG-Xm-R10"/>
+                            <constraint firstItem="K0O-ha-hJI" firstAttribute="top" secondItem="f4R-nX-oaZ" secondAttribute="bottom" constant="8" symbolic="YES" id="i7e-PJ-bfM"/>
+                            <constraint firstItem="b0n-Gj-qEi" firstAttribute="trailing" secondItem="XXZ-C3-vxJ" secondAttribute="trailing" id="uxF-L0-ZCj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="6GI-SR-CC6"/>
+                    <connections>
+                        <outlet property="animationView" destination="b0n-Gj-qEi" id="6iL-hf-kh6"/>
+                        <outlet property="slider" destination="f4R-nX-oaZ" id="Bvx-Gz-tuj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n5C-be-UKl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-184" y="144"/>
         </scene>
     </scenes>
 </document>
