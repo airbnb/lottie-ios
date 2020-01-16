@@ -229,18 +229,29 @@ extension CATransform3D {
     let translation = CATransform3DMakeTranslation(CGFloat(position.x), CGFloat(position.y), CGFloat(position.z))
 
     /// Compositng AfterEffect rotations into a single rotation.
-    /// z-axis is inverted intentionally to confm AffterEffect's behaviour
-    let degreeToRadians: Double = .pi / 180
-    let xRotation = simd_quaternion(rotation.x * degreeToRadians, simd_double3(x: -1.0, y: 0.0, z: 0.0))
-    let xyRotation = simd_quaternion(rotation.y * degreeToRadians, xRotation.act(simd_double3(x: 0.0, y: -1.0, z: 0.0)))
-    let xyzRotation = simd_quaternion(rotation.z * degreeToRadians, xyRotation.act(simd_double3(x: 0.0, y: 0.0, z: 1.0)))
-    let rotation = CATransform3DMakeRotation(
-        CGFloat(xyzRotation.angle),
-        CGFloat(xyzRotation.axis.x),
-        CGFloat(xyzRotation.axis.y),
-        CGFloat(xyzRotation.axis.z)
-    )
+    /// z-axis is inverted intentionally to conform to AffterEffect's behaviour
+    let degToRad: Double = .pi / 180
+    let quatX = simd_quatd(angle: rotation.x * degToRad, axis: simd_double3(x: -1.0, y: 0.0, z: 0.0))
+    let quatY = simd_quatd(angle: rotation.y * degToRad, axis: simd_double3(x: 0.0, y: -1.0, z: 0.0))
+    let quatZ = simd_quatd(angle: rotation.z * degToRad, axis: simd_double3(x: 0.0, y: 0.0, z: +1.0))
 
+    let totalQuat = quatX * quatY * quatZ
+    let rotationAxis = totalQuat.axis
+    let rotationAngle = totalQuat.angle
+
+    let rotation: CATransform3D
+    if rotationAxis.x.isNaN || rotationAxis.y.isNaN, rotationAxis.z.isNaN {
+        /// There is no valid rotation axis if there is no rotation, so
+        /// we need to handle this case manually
+        rotation = CATransform3DIdentity
+    } else {
+        rotation = CATransform3DMakeRotation(
+          CGFloat(rotationAngle),
+          CGFloat(rotationAxis.x),
+          CGFloat(rotationAxis.y),
+          CGFloat(rotationAxis.z)
+        )
+    }
 
     let scale = CATransform3DMakeScale(CGFloat(scale.x / 100.0), CGFloat(scale.y / 100.0), CGFloat(scale.z / 100.0))
     let anchor = CATransform3DMakeTranslation(CGFloat(-anchor.x), CGFloat(-anchor.y), CGFloat(-anchor.z))
