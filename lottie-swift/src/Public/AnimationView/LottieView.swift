@@ -84,7 +84,7 @@ public enum LottieContentMode: Int {
 
 /// A wrapper around NSView for cross platform compatibility.
 @objcMembers
-public class LottieView: NSView {
+open class LottieView: NSView {
   
   var screenScale: CGFloat {
     return NSApp.mainWindow?.backingScaleFactor ?? 2.0
