@@ -12,7 +12,7 @@ import CoreGraphics
  A collection of BezierPath objects that can be trimmed and added.
  
  */
-struct CompoundBezierPath {
+final class CompoundBezierPath {
   
   let paths: [BezierPath]
   

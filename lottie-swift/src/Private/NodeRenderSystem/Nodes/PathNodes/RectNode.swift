@@ -71,7 +71,7 @@ final class RectangleNode: AnimatorNode, PathNode {
     let size = properties.size.value.sizeValue * 0.5
     let radius = min(min(properties.cornerRadius.value.cgFloatValue, size.width) , size.height)
     let position = properties.position.value.pointValue
-    var bezierPath = BezierPath()
+    let bezierPath = BezierPath()
     let points: [CurveVertex]
     
     if radius <= 0 {

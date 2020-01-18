@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 
 /// A container that holds instructions for creating a single, unbroken Bezier Path.
-struct BezierPath {
+final class BezierPath {
   
   /// The elements of the path
   fileprivate(set) var elements: [PathElement]
@@ -33,12 +33,12 @@ struct BezierPath {
     self.closed = false
   }
   
-  mutating func moveToStartPoint(_ vertex: CurveVertex) {
+  func moveToStartPoint(_ vertex: CurveVertex) {
     self.elements = [PathElement(vertex: vertex)]
     self.length = 0
   }
   
-  mutating func addVertex(_ vertex: CurveVertex) {
+  func addVertex(_ vertex: CurveVertex) {
     guard let previous = elements.last else {
       addElement(PathElement(vertex: vertex))
       return
@@ -46,30 +46,30 @@ struct BezierPath {
     addElement(previous.pathElementTo(vertex))
   }
   
-  mutating func addCurve(toPoint: CGPoint, outTangent: CGPoint, inTangent: CGPoint) {
+  func addCurve(toPoint: CGPoint, outTangent: CGPoint, inTangent: CGPoint) {
     guard let previous = elements.last else { return }
     let newVertex = CurveVertex(inTangent, toPoint, toPoint)
     updateVertex(CurveVertex(previous.vertex.inTangent, previous.vertex.point, outTangent), atIndex: elements.endIndex - 1, remeasure: false)
     addVertex(newVertex)
   }
   
-  mutating func addLine(toPoint: CGPoint) {
+  func addLine(toPoint: CGPoint) {
     guard let previous = elements.last else { return }
     let newVertex = CurveVertex(point: toPoint, inTangentRelative: .zero, outTangentRelative: .zero)
     updateVertex(CurveVertex(previous.vertex.inTangent, previous.vertex.point, previous.vertex.point), atIndex: elements.endIndex - 1, remeasure: false)
     addVertex(newVertex)
   }
   
-  mutating func close() {
+  func close() {
     self.closed = true
   }
   
-  mutating func addElement(_ pathElement: PathElement) {
+  func addElement(_ pathElement: PathElement) {
     elements.append(pathElement)
     length = length + pathElement.length
   }
   
-  mutating func updateVertex(_ vertex: CurveVertex, atIndex: Int, remeasure: Bool) {
+  func updateVertex(_ vertex: CurveVertex, atIndex: Int, remeasure: Bool) {
     if remeasure {
       var newElement: PathElement
       if atIndex > 0 {
@@ -295,7 +295,8 @@ extension BezierPath: Codable {
     case vertices = "v"
   }
   
-  init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
+    self.init();
     let container: KeyedDecodingContainer<BezierPath.CodingKeys>
     
     if let keyedContainer = try? decoder.container(keyedBy: BezierPath.CodingKeys.self) {

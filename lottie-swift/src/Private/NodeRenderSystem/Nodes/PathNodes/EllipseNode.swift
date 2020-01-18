@@ -82,7 +82,7 @@ final class EllipseNode: AnimatorNode, PathNode {
     
     let cp = half * EllipseNode.ControlPointConstant
     
-    var path = BezierPath(startPoint: CurveVertex(point: q1,
+    let path = BezierPath(startPoint: CurveVertex(point: q1,
                                                   inTangentRelative: CGPoint(x: -cp.width, y: 0),
                                                   outTangentRelative: CGPoint(x: cp.width, y: 0)))
     path.addVertex(CurveVertex(point: q2,

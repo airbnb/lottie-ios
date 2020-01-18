@@ -172,7 +172,7 @@ final class StarNode: AnimatorNode, PathNode {
     if reverse {
       vertices = vertices.reversed()
     }
-    var path = BezierPath()
+    let path = BezierPath()
     for vertex in vertices {
       path.addVertex(reverse ? vertex.reversed() : vertex)
     }
