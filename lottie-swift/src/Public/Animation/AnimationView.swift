@@ -618,10 +618,6 @@ final public class AnimationView: LottieView {
     commonInit()
   }
   
-  deinit {
-    NotificationCenter.default.removeObserver(self)
-  }
-  
   // MARK: - Public (UIView Overrides)
   
   override public var intrinsicContentSize: CGSize {
