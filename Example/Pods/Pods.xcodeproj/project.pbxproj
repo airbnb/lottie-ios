@@ -446,9 +446,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		048453C59218382D7DF5255A63609E6B /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		33662CA4353DC524E4075FF2D6DB28FB /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		46EB2E000000C0 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		048453C59218382D7DF5255A63609E6B /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios-macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		33662CA4353DC524E4075FF2D6DB28FB /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios-tvOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		46EB2E000000C0 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		46EB2E000000F0 /* AnimationContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnimationContainer.swift; sourceTree = "<group>"; };
 		46EB2E00000110 /* CompositionLayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompositionLayer.swift; sourceTree = "<group>"; };
 		46EB2E00000120 /* ImageCompositionLayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageCompositionLayer.swift; sourceTree = "<group>"; };
@@ -580,8 +580,8 @@
 		46EB2E00000B90 /* FilepathImageProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FilepathImageProvider.swift; sourceTree = "<group>"; };
 		46EB2E00000BA0 /* LottieView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		46EB2E00000BB0 /* UIColorExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
-		46EB2E00000BD0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		46EB2E00000BE0 /* lottie-ios.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = "lottie-ios.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		46EB2E00000BD0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		46EB2E00000BE0 /* lottie-ios.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = "lottie-ios.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		46EB2E00000C90 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		46EB2E000014B0 /* lottie-ios-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "lottie-ios-iOS.xcconfig"; sourceTree = "<group>"; };
 		46EB2E000014C0 /* lottie-ios-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "lottie-ios-iOS.modulemap"; sourceTree = "<group>"; };
@@ -647,11 +647,11 @@
 		46EB2E00002D80 /* Pods-lottie-swift_tvOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-lottie-swift_tvOS-acknowledgements.plist"; sourceTree = "<group>"; };
 		46EB2E00002D90 /* Pods-lottie-swift_tvOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-lottie-swift_tvOS-acknowledgements.markdown"; sourceTree = "<group>"; };
 		46EB2E00002DA0 /* Pods-lottie-swift_tvOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-lottie-swift_tvOS-dummy.m"; sourceTree = "<group>"; };
-		5CBAEAF1D52528C70D31576C2FD2253E /* Pods_lottie_swift_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lottie_swift_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5DE012080E255559C105B0699451AE31 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		61B5A455553977229E8D85D13C54AA54 /* Pods_lottie_swift_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lottie_swift_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9EAA9105ACA723812B2965646AFFACA4 /* Pods_lottie_swift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lottie_swift_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FEBA8AF97457829146B4F4122C2762D2 /* Pods_lottie_swift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lottie_swift_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CBAEAF1D52528C70D31576C2FD2253E /* Pods_lottie_swift_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_tvOS.framework; path = "Pods-lottie-swift_tvOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DE012080E255559C105B0699451AE31 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Lottie.framework; path = "lottie-ios-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		61B5A455553977229E8D85D13C54AA54 /* Pods_lottie_swift_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_macOS.framework; path = "Pods-lottie-swift_macOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EAA9105ACA723812B2965646AFFACA4 /* Pods_lottie_swift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_Tests.framework; path = "Pods-lottie-swift_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEBA8AF97457829146B4F4122C2762D2 /* Pods_lottie_swift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_lottie_swift_Example.framework; path = "Pods-lottie-swift_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -808,6 +808,7 @@
 				46EB2E00000100 /* CompLayers */,
 				46EB2E00000190 /* Utility */,
 			);
+			name = LayerContainers;
 			path = LayerContainers;
 			sourceTree = "<group>";
 		};
@@ -823,6 +824,7 @@
 				46EB2E00000170 /* SolidCompositionLayer.swift */,
 				46EB2E00000180 /* TextCompositionLayer.swift */,
 			);
+			name = CompLayers;
 			path = CompLayers;
 			sourceTree = "<group>";
 		};
@@ -835,6 +837,7 @@
 				46EB2E000001D0 /* LayerTextProvider.swift */,
 				46EB2E000001E0 /* LayerTransformNode.swift */,
 			);
+			name = Utility;
 			path = Utility;
 			sourceTree = "<group>";
 		};
@@ -850,6 +853,7 @@
 				46EB2E00000370 /* ShapeItems */,
 				46EB2E00000460 /* Text */,
 			);
+			name = Model;
 			path = Model;
 			sourceTree = "<group>";
 		};
@@ -861,6 +865,7 @@
 				46EB2E00000240 /* ImageAsset.swift */,
 				46EB2E00000250 /* PrecompAsset.swift */,
 			);
+			name = Assets;
 			path = Assets;
 			sourceTree = "<group>";
 		};
@@ -869,6 +874,7 @@
 			children = (
 				46EB2E00000270 /* KeyedDecodingContainerExtensions.swift */,
 			);
+			name = Extensions;
 			path = Extensions;
 			sourceTree = "<group>";
 		};
@@ -878,6 +884,7 @@
 				46EB2E00000290 /* Keyframe.swift */,
 				46EB2E000002A0 /* KeyframeGroup.swift */,
 			);
+			name = Keyframes;
 			path = Keyframes;
 			sourceTree = "<group>";
 		};
@@ -891,6 +898,7 @@
 				46EB2E00000300 /* SolidLayerModel.swift */,
 				46EB2E00000310 /* TextLayerModel.swift */,
 			);
+			name = Layers;
 			path = Layers;
 			sourceTree = "<group>";
 		};
@@ -902,6 +910,7 @@
 				46EB2E00000350 /* Mask.swift */,
 				46EB2E00000360 /* Transform.swift */,
 			);
+			name = Objects;
 			path = Objects;
 			sourceTree = "<group>";
 		};
@@ -923,6 +932,7 @@
 				46EB2E00000440 /* Stroke.swift */,
 				46EB2E00000450 /* Trim.swift */,
 			);
+			name = ShapeItems;
 			path = ShapeItems;
 			sourceTree = "<group>";
 		};
@@ -934,6 +944,7 @@
 				46EB2E00000490 /* TextAnimator.swift */,
 				46EB2E000004A0 /* TextDocument.swift */,
 			);
+			name = Text;
 			path = Text;
 			sourceTree = "<group>";
 		};
@@ -946,6 +957,7 @@
 				46EB2E00000750 /* Protocols */,
 				46EB2E00000790 /* RenderLayers */,
 			);
+			name = NodeRenderSystem;
 			path = NodeRenderSystem;
 			sourceTree = "<group>";
 		};
@@ -954,6 +966,7 @@
 			children = (
 				46EB2E000004D0 /* ItemsExtension.swift */,
 			);
+			name = Extensions;
 			path = Extensions;
 			sourceTree = "<group>";
 		};
@@ -965,6 +978,7 @@
 				46EB2E00000500 /* Protocols */,
 				46EB2E00000560 /* ValueProviders */,
 			);
+			name = NodeProperties;
 			path = NodeProperties;
 			sourceTree = "<group>";
 		};
@@ -976,6 +990,7 @@
 				46EB2E00000530 /* KeypathSearchable.swift */,
 				46EB2E00000540 /* NodePropertyMap.swift */,
 			);
+			name = Protocols;
 			path = Protocols;
 			sourceTree = "<group>";
 		};
@@ -986,6 +1001,7 @@
 				46EB2E00000580 /* KeyframeInterpolator.swift */,
 				46EB2E00000590 /* SingleValueProvider.swift */,
 			);
+			name = ValueProviders;
 			path = ValueProviders;
 			sourceTree = "<group>";
 		};
@@ -999,6 +1015,7 @@
 				46EB2E000006E0 /* RenderNodes */,
 				46EB2E00000730 /* Text */,
 			);
+			name = Nodes;
 			path = Nodes;
 			sourceTree = "<group>";
 		};
@@ -1007,6 +1024,7 @@
 			children = (
 				46EB2E000005C0 /* TrimPathNode.swift */,
 			);
+			name = ModifierNodes;
 			path = ModifierNodes;
 			sourceTree = "<group>";
 		};
@@ -1018,6 +1036,7 @@
 				46EB2E00000600 /* PathOutputNode.swift */,
 				46EB2E00000610 /* Renderables */,
 			);
+			name = OutputNodes;
 			path = OutputNodes;
 			sourceTree = "<group>";
 		};
@@ -1029,6 +1048,7 @@
 				46EB2E00000640 /* GradientStrokeRenderer.swift */,
 				46EB2E00000650 /* StrokeRenderer.swift */,
 			);
+			name = Renderables;
 			path = Renderables;
 			sourceTree = "<group>";
 		};
@@ -1041,6 +1061,7 @@
 				46EB2E000006A0 /* ShapeNode.swift */,
 				46EB2E000006B0 /* StarNode.swift */,
 			);
+			name = PathNodes;
 			path = PathNodes;
 			sourceTree = "<group>";
 		};
@@ -1049,6 +1070,7 @@
 			children = (
 				46EB2E000006D0 /* GroupNode.swift */,
 			);
+			name = RenderContainers;
 			path = RenderContainers;
 			sourceTree = "<group>";
 		};
@@ -1060,6 +1082,7 @@
 				46EB2E00000710 /* GradientStrokeNode.swift */,
 				46EB2E00000720 /* StrokeNode.swift */,
 			);
+			name = RenderNodes;
 			path = RenderNodes;
 			sourceTree = "<group>";
 		};
@@ -1068,6 +1091,7 @@
 			children = (
 				46EB2E00000740 /* TextAnimatorNode.swift */,
 			);
+			name = Text;
 			path = Text;
 			sourceTree = "<group>";
 		};
@@ -1078,6 +1102,7 @@
 				46EB2E00000770 /* PathNode.swift */,
 				46EB2E00000780 /* RenderNode.swift */,
 			);
+			name = Protocols;
 			path = Protocols;
 			sourceTree = "<group>";
 		};
@@ -1087,6 +1112,7 @@
 				46EB2E000007A0 /* ShapeContainerLayer.swift */,
 				46EB2E000007B0 /* ShapeRenderLayer.swift */,
 			);
+			name = RenderLayers;
 			path = RenderLayers;
 			sourceTree = "<group>";
 		};
@@ -1099,6 +1125,7 @@
 				46EB2E00000870 /* Interpolatable */,
 				46EB2E000008B0 /* Primitives */,
 			);
+			name = Utility;
 			path = Utility;
 			sourceTree = "<group>";
 		};
@@ -1108,6 +1135,7 @@
 				46EB2E000007E0 /* AnimatorNodeDebugging.swift */,
 				46EB2E000007F0 /* LayerDebugging.swift */,
 			);
+			name = Debugging;
 			path = Debugging;
 			sourceTree = "<group>";
 		};
@@ -1119,6 +1147,7 @@
 				46EB2E00000830 /* MathKit.swift */,
 				46EB2E00000840 /* StringExtensions.swift */,
 			);
+			name = Extensions;
 			path = Extensions;
 			sourceTree = "<group>";
 		};
@@ -1127,6 +1156,7 @@
 			children = (
 				46EB2E00000860 /* AnimationContext.swift */,
 			);
+			name = Helpers;
 			path = Helpers;
 			sourceTree = "<group>";
 		};
@@ -1137,6 +1167,7 @@
 				46EB2E00000890 /* InterpolatableExtensions.swift */,
 				46EB2E000008A0 /* KeyframeExtensions.swift */,
 			);
+			name = Interpolatable;
 			path = Interpolatable;
 			sourceTree = "<group>";
 		};
@@ -1150,6 +1181,7 @@
 				46EB2E00000900 /* PathElement.swift */,
 				46EB2E00000910 /* VectorsExtensions.swift */,
 			);
+			name = Primitives;
 			path = Primitives;
 			sourceTree = "<group>";
 		};
@@ -1176,6 +1208,7 @@
 				46EB2E00000950 /* AnimationView.swift */,
 				46EB2E00000960 /* AnimationViewInitializers.swift */,
 			);
+			name = Animation;
 			path = Animation;
 			sourceTree = "<group>";
 		};
@@ -1185,6 +1218,7 @@
 				46EB2E00000980 /* AnimationCacheProvider.swift */,
 				46EB2E00000990 /* LRUAnimationCache.swift */,
 			);
+			name = AnimationCache;
 			path = AnimationCache;
 			sourceTree = "<group>";
 		};
@@ -1195,6 +1229,7 @@
 				46EB2E000009C0 /* AnyValueProvider.swift */,
 				46EB2E000009D0 /* ValueProviders */,
 			);
+			name = DynamicProperties;
 			path = DynamicProperties;
 			sourceTree = "<group>";
 		};
@@ -1207,6 +1242,7 @@
 				46EB2E00000A10 /* PointValueProvider.swift */,
 				46EB2E00000A20 /* SizeValueProvider.swift */,
 			);
+			name = ValueProviders;
 			path = ValueProviders;
 			sourceTree = "<group>";
 		};
@@ -1215,6 +1251,7 @@
 			children = (
 				46EB2E00000A40 /* AnimationImageProvider.swift */,
 			);
+			name = ImageProvider;
 			path = ImageProvider;
 			sourceTree = "<group>";
 		};
@@ -1226,6 +1263,7 @@
 				46EB2E00000A80 /* FilepathImageProvider.swift */,
 				46EB2E00000A90 /* LottieView.swift */,
 			);
+			name = MacOS;
 			path = MacOS;
 			sourceTree = "<group>";
 		};
@@ -1236,6 +1274,7 @@
 				46EB2E00000AC0 /* Color.swift */,
 				46EB2E00000AD0 /* Vectors.swift */,
 			);
+			name = Primitives;
 			path = Primitives;
 			sourceTree = "<group>";
 		};
@@ -1244,6 +1283,7 @@
 			children = (
 				46EB2E00000AF0 /* AnimationTextProvider.swift */,
 			);
+			name = TextProvider;
 			path = TextProvider;
 			sourceTree = "<group>";
 		};
@@ -1260,6 +1300,7 @@
 				46EB2E00000BB0 /* UIColorExtension.swift */,
 				46EB2E00000B60 /* Compatibility */,
 			);
+			name = iOS;
 			path = iOS;
 			sourceTree = "<group>";
 		};
@@ -1269,6 +1310,7 @@
 				46EB2E00000B70 /* CompatibleAnimationKeypath.swift */,
 				46EB2E00000B80 /* CompatibleAnimationView.swift */,
 			);
+			name = Compatibility;
 			path = Compatibility;
 			sourceTree = "<group>";
 		};
@@ -1606,7 +1648,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 46EB2E00000030 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2266,7 +2308,8 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
@@ -2340,6 +2383,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46EB2E00001D80 /* lottie-ios-macOS.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2373,6 +2417,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46EB2E00001D80 /* lottie-ios-macOS.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2604,6 +2649,7 @@
 			baseConfigurationReference = 46EB2E00002BB0 /* Pods-lottie-swift_macOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2639,6 +2685,7 @@
 			baseConfigurationReference = 46EB2E00002BC0 /* Pods-lottie-swift_macOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
