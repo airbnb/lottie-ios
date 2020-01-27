@@ -21,7 +21,6 @@ final class GroupInterpolator<ValueType>: AnyValueProvider where ValueType: Inte
   
   func value(frame: CGFloat) -> Any {
     let output = keyframeInterpolators.map({$0.value(frame: frame) as! ValueType})
-    print("lele");
     return output
   }
   
