@@ -618,10 +618,6 @@ final public class AnimationView: LottieView {
     commonInit()
   }
   
-  deinit {
-    NotificationCenter.default.removeObserver(self)
-  }
-  
   // MARK: - Public (UIView Overrides)
   
   override public var intrinsicContentSize: CGSize {
@@ -824,6 +820,9 @@ final public class AnimationView: LottieView {
   }
   
   override func animationMovedToWindow() {
+    /// Don't update any state if both the `superview` and `window` is `nil`
+    guard window != nil && superview != nil else { return }
+
     if window != nil {
       updateAnimationForForegroundState()
     } else {
