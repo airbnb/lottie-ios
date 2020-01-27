@@ -117,6 +117,7 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         oldPlayerLayer?.opacity = 0.0
         oldPlayerLayer?.removeFromSuperlayer()
+        oldPlayerLayer = nil
         
         playerLayer?.opacity = 1.0
     }
