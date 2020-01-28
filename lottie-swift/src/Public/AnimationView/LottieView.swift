@@ -106,7 +106,7 @@ open class LottieView: NSView {
         
     }
   
-  public override func viewDidMoveToWindow() {
+  open override func viewDidMoveToWindow() {
     super.viewDidMoveToWindow()
     animationMovedToWindow()
     NotificationCenter.default.addObserver(self, selector: #selector(renderScaleDidChange(_:)), name: NSWindow.didChangeScreenNotification, object: window)
