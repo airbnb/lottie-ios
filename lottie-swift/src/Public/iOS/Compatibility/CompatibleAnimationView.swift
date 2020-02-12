@@ -13,27 +13,37 @@ import UIKit
 /// Use in tandem with CompatibleAnimationView when using Lottie in Objective-C
 @objc
 public final class CompatibleAnimation: NSObject {
-
+  
   @objc
   static func named(_ name: String) -> CompatibleAnimation {
     return CompatibleAnimation(name: name)
   }
-
   @objc
-  public init(name: String, bundle: Bundle = Bundle.main) {
+  static func filepath(_ filepath: String) -> CompatibleAnimation {
+    return CompatibleAnimation(filepath: filepath)
+  }
+  
+  @objc
+  public init(filepath: String? = nil, name: String? = nil, bundle: Bundle = Bundle.main) {
+    self.filepath = filepath
     self.name = name
     self.bundle = bundle
     super.init()
   }
 
   internal var animation: Animation? {
-    return Animation.named(name, bundle: bundle)
+    if (filepath != nil) {
+      return Animation.filepath(filepath!)
+    } else {
+      return Animation.named(name!, bundle: bundle!)
+    }
   }
 
   // MARK: Private
 
-  private let name: String
-  private let bundle: Bundle
+  private let filepath: String?
+  private let name: String?
+  private let bundle: Bundle?
 }
 
 /// An Objective-C compatible wrapper around Lottie's AnimationView.
@@ -86,7 +96,7 @@ public final class CompatibleAnimationView: UIView {
     set { animationView.shouldRasterizeWhenIdle = newValue }
     get { return animationView.shouldRasterizeWhenIdle }
   }
-
+  
   @objc
   public var currentProgress: CGFloat {
     set { animationView.currentProgress = newValue }
@@ -109,10 +119,21 @@ public final class CompatibleAnimationView: UIView {
   public var realtimeAnimationFrame: CGFloat {
     return animationView.realtimeAnimationFrame
   }
-
+  
   @objc
   public var realtimeAnimationProgress: CGFloat {
     return animationView.realtimeAnimationProgress
+  }
+  
+  @objc
+  public var isAnimationPlaying: Bool {
+    return animationView.isAnimationPlaying
+  }
+  
+  
+  @objc
+  public var animationDuration: TimeInterval {
+    return animationView.animation?.duration ?? -1;
   }
 
   @objc
@@ -245,6 +266,23 @@ public final class CompatibleAnimationView: UIView {
 
     return UIColor(red: CGFloat(colorValue.r), green: CGFloat(colorValue.g), blue: CGFloat(colorValue.b), alpha: CGFloat(colorValue.a))
   }
+  
+  
+  @objc
+  public func setFloatValue(_ value: CGFloat, forKeypath keypath: CompatibleAnimationKeypath)
+  {
+    
+    let valueProvider = FloatValueProvider(value)
+    animationView.setValueProvider(valueProvider, keypath: keypath.animationKeypath)
+  }
+
+  @objc
+  public func getFloatValue(for keypath: CompatibleAnimationKeypath, atFrame: CGFloat) -> NSNumber?
+  {
+    let value = animationView.getValue(for: keypath.animationKeypath, atFrame: atFrame)
+    return value as? NSNumber
+  }
+
 
   @objc
   public func addSubview(
