@@ -24,15 +24,42 @@ public final class CompatibleAnimation: NSObject {
   }
   
   @objc
-  public init(filepath: String? = nil, name: String? = nil, bundle: Bundle = Bundle.main) {
+  static func json(_ json: String) -> CompatibleAnimation {
+    return CompatibleAnimation(json: json)
+  }
+  
+  @objc
+  public init(filepath: String? = nil) {
     self.filepath = filepath
+    self.bundle = nil
+    self.name = nil
+    self.json = nil
+    super.init()
+  }
+  
+  @objc
+  public init(json: String? = nil) {
+    self.filepath = nil
+    self.bundle = nil
+    self.name = nil
+    self.json = json
+    super.init()
+  }
+  
+  @objc
+  public init(name: String, bundle: Bundle = Bundle.main) {
     self.name = name
     self.bundle = bundle
+    self.filepath = nil
+    self.json = nil
     super.init()
   }
 
   internal var animation: Animation? {
-    if (filepath != nil) {
+    if (json != nil) {
+      let jsonData = json?.data(using: .utf8)!
+      return try? JSONDecoder().decode(Animation.self, from: jsonData!)
+    } else if (filepath != nil) {
       return Animation.filepath(filepath!)
     } else {
       return Animation.named(name!, bundle: bundle!)
@@ -43,6 +70,7 @@ public final class CompatibleAnimation: NSObject {
 
   private let filepath: String?
   private let name: String?
+  private let json: String?
   private let bundle: Bundle?
 }
 
@@ -320,10 +348,20 @@ public final class CompatibleAnimationView: UIView {
   public func progressTime(forMarker named: String) -> CGFloat {
     return animationView.progressTime(forMarker: named) ?? 0
   }
-
+  
   @objc
   public func frameTime(forMarker named: String) -> CGFloat {
     return animationView.frameTime(forMarker: named) ?? 0
+  }
+  
+  @objc
+  public override func sizeThatFits(_ size: CGSize) -> CGSize {
+    return animationView.intrinsicContentSize
+  }
+  
+  @objc
+  public override var intrinsicContentSize: CGSize {
+    get { return animationView.intrinsicContentSize }
   }
 
   // MARK: Private
@@ -334,6 +372,7 @@ public final class CompatibleAnimationView: UIView {
     translatesAutoresizingMaskIntoConstraints = false
     setUpViews()
   }
+  
 
   private func setUpViews() {
     animationView.translatesAutoresizingMaskIntoConstraints = false
