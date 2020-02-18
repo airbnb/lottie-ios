@@ -65,10 +65,19 @@ extension Color: Codable {
 extension Color {
   
   static var clearColor: CGColor {
-    return CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0, 0, 0, 0])!
+    return CGColor(colorSpace: bestColorSpace, components: [0, 0, 0, 0])!
   }
   
   var cgColorValue: CGColor {
-    return CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [CGFloat(r), CGFloat(g), CGFloat(b), CGFloat(a)]) ?? Color.clearColor
+    
+    return CGColor(colorSpace: Self.bestColorSpace, components: [CGFloat(r), CGFloat(g), CGFloat(b), CGFloat(a)]) ?? Color.clearColor
   }
+    
+    private static var bestColorSpace: CGColorSpace {
+        if #available(OSXApplicationExtension 10.11.2, *),
+           let p3Space = CGColorSpace(name: CGColorSpace.displayP3) {
+            return p3Space
+        }
+        return CGColorSpaceCreateDeviceRGB()
+    }
 }
