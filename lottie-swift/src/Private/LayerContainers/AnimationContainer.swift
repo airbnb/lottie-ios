@@ -105,6 +105,14 @@ final public class AnimationContainer: CALayer {
   var animationLayers: ContiguousArray<CompositionLayer>
   fileprivate let layerImageProvider: LayerImageProvider
   fileprivate let layerTextProvider: LayerTextProvider
+
+  public convenience init(animation: Animation, imageProvider: AnimationImageProvider?, textProvider: AnimationTextProvider?) {
+    self.init(
+        animation: animation,
+        imageProvider: imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil),
+        textProvider: textProvider ?? DefaultTextProvider()
+    )
+  }
   
   public init(animation: Animation, imageProvider: AnimationImageProvider, textProvider: AnimationTextProvider) {
     self.layerImageProvider = LayerImageProvider(imageProvider: imageProvider, assets: animation.assetLibrary?.imageAssets)
