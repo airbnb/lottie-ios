@@ -265,10 +265,6 @@ open class AnimationView: LottieView {
     }
   }
   
-  public var drawingLayer: CALayer? {
-    return animationLayer
-  }
-  
   // MARK: - Public Functions
   
   /**
@@ -573,6 +569,48 @@ open class AnimationView: LottieView {
     self.layoutIfNeeded()
     self.forceDisplayUpdate()
     return animationLayer.convert(point, to: sublayer)
+  }
+  
+  /**
+   Converts a CGRect from the coordinate space of the layer found at keypath
+   into the coordinate space of the destination layer.
+   
+   If no layer is found, nil is returned
+   
+   - Parameter rect: The CGRect to convert.
+   - Parameter fromLayerAt: The keypath used to find the original layer. If nil is provided, root animation layer is used
+   - Parameter to: The destination layer.
+   */
+  public func convert(_ rect: CGRect, fromLayerAt keypath: AnimationKeypath?, to layer: CALayer) -> CGRect? {
+    guard let animationLayer = animationLayer else { return nil }
+    guard let keypath = keypath else {
+      return animationLayer.convert(rect, to: layer)
+    }
+    guard let sublayer = animationLayer.compositionLayer(for: keypath) else {
+      return nil
+    }
+    return sublayer.convert(rect, to: layer)
+  }
+  
+  /**
+   Converts a CGPoint from the coordinate space of the layer found at keypath
+   into the coordinate space of the destination layer.
+   
+   If no layer is found, nil is returned
+   
+   - Parameter rect: The CGPoint to convert.
+   - Parameter fromLayerAt: The keypath used to find the original layer. If nil is provided, root animation layer is used
+   - Parameter to: The destinatino layer.
+   */
+  public func convert(_ point: CGPoint, fromLayerAt keypath: AnimationKeypath?, to layer: CALayer) -> CGPoint? {
+    guard let animationLayer = animationLayer else { return nil }
+    guard let keypath = keypath else {
+      return animationLayer.convert(point, to: layer)
+    }
+    guard let sublayer = animationLayer.compositionLayer(for: keypath) else {
+      return nil
+    }
+    return sublayer.convert(point, to: layer)
   }
   
   // MARK: - Public (Animation Contents)
