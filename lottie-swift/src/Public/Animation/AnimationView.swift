@@ -780,7 +780,7 @@ final public class AnimationView: LottieView {
   // MARK: - Private (Properties)
   
   
-  var animationLayer: AnimationContainer? = nil
+  public var animationLayer: AnimationContainer? = nil
   
   fileprivate var animationContext: AnimationContext?
   static private let animationName: String = "Lottie"
