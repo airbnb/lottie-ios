@@ -45,9 +45,21 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
     }
     
     override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
-        playerLayer?.player?.play()
-        playing = true
+        if !playing {
+            playing = true
+            playerLayer?.player?.play()
+        }
+        
         super.displayContentsWithFrame(frame: frame, forceUpdates: forceUpdates)
+    }
+    
+    override func hideContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
+        if playing {
+            playerLayer?.player?.pause()
+            playing = false
+        }
+        
+        super.hideContentsWithFrame(frame: frame, forceUpdates: forceUpdates)
     }
     
     private func updatePlayer() {
@@ -60,10 +72,13 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
             }
             playerLayer.player = player
             playerLayer.frame = CGRect(origin: .zero, size: contentSize)
+            if let endVideoObserver = endVideoObserver {
+                NotificationCenter.default.removeObserver(endVideoObserver)
+            }
             endVideoObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
                                                                       object: player.currentItem,
                                                                       queue: .main) { [weak self] _ in
-                if self?.loopVideo == true {
+                if self?.loopVideo == true, self?.playing == true {
                     player.seek(to: CMTime.zero)
                     player.play()
                 } else {

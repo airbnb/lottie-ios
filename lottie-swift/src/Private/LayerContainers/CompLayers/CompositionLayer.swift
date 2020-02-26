@@ -121,6 +121,8 @@ class CompositionLayer: CALayer, KeypathSearchable {
     if layerVisible {
       displayContentsWithFrame(frame: frame, forceUpdates: forceUpdates)
       maskLayer?.updateWithFrame(frame: frame, forceUpdates: forceUpdates)
+    } else {
+        hideContentsWithFrame(frame: frame, forceUpdates: forceUpdates)
     }
     contentsLayer.transform = transformNode.globalTransform
     contentsLayer.opacity = transformNode.opacity
@@ -131,6 +133,10 @@ class CompositionLayer: CALayer, KeypathSearchable {
   }
   
   func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
+    /// To be overridden by subclass
+  }
+    
+  func hideContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
     /// To be overridden by subclass
   }
   

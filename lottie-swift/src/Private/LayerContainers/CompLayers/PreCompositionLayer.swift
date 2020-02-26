@@ -104,6 +104,17 @@ class PreCompositionLayer: CompositionLayer {
     }
     animationLayers.forEach( { $0.displayWithFrame(frame: localFrame, forceUpdates: forceUpdates) })
   }
+    
+    override func hideContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
+        let localFrame: CGFloat
+        if let remappingNode = remappingNode {
+          remappingNode.update(frame: frame)
+          localFrame = remappingNode.value.cgFloatValue * frameRate
+        } else {
+          localFrame = (frame - startFrame) / timeStretch
+        }
+        animationLayers.forEach( { $0.hideContentsWithFrame(frame: localFrame, forceUpdates: forceUpdates) })
+    }
   
   override var keypathProperties: [String : AnyNodeProperty] {
     guard let remappingNode = remappingNode else {
