@@ -44,6 +44,10 @@ final public class AnimationContainer: CALayer {
   func forceDisplayUpdate() {
     animationLayers.forEach( { $0.displayWithFrame(frame: currentFrame, forceUpdates: true) })
   }
+
+  public func displayUpdate(for frame: CGFloat, forceUpdate: Bool) {
+    animationLayers.forEach( { $0.displayWithFrame(frame: frame, forceUpdates: forceUpdate) })
+  }
   
   func logHierarchyKeypaths() {
     print("Lottie: Logging Animation Keypaths")
