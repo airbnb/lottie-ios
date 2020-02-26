@@ -106,12 +106,19 @@ final public class AnimationContainer: CALayer {
   fileprivate let layerImageProvider: LayerImageProvider
   fileprivate let layerTextProvider: LayerTextProvider
 
-  public convenience init(animation: Animation, imageProvider: AnimationImageProvider?, textProvider: AnimationTextProvider?) {
+  public convenience init(
+    animation: Animation,
+    imageProvider: AnimationImageProvider? = nil,
+    textProvider: AnimationTextProvider? = nil,
+    scale: CGFloat
+  ) {
     self.init(
         animation: animation,
         imageProvider: imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil),
         textProvider: textProvider ?? DefaultTextProvider()
     )
+
+    renderScale = scale
   }
   
   public init(animation: Animation, imageProvider: AnimationImageProvider, textProvider: AnimationTextProvider) {
