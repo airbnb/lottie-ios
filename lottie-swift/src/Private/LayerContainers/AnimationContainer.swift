@@ -18,7 +18,7 @@ final public class AnimationContainer: CALayer {
   
   /// The animatable Current Frame Property
   @NSManaged var currentFrame: CGFloat
-  
+
   var imageProvider: AnimationImageProvider {
     get {
       return layerImageProvider.imageProvider
@@ -47,6 +47,16 @@ final public class AnimationContainer: CALayer {
 
   public func displayUpdate(for frame: CGFloat, forceUpdate: Bool) {
     animationLayers.forEach( { $0.displayWithFrame(frame: frame, forceUpdates: forceUpdate) })
+  }
+
+  public func updateAnimationFrame(_ newFrame: CGFloat) {
+    CATransaction.begin()
+    CATransaction.setDisableActions(true)
+    currentFrame = newFrame
+    CATransaction.commit()
+    CATransaction.setCompletionBlock {
+      self.forceDisplayUpdate()
+    }
   }
   
   func logHierarchyKeypaths() {
