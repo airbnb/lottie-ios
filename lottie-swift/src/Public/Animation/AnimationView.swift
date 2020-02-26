@@ -821,6 +821,7 @@ open class AnimationView: LottieView {
   static private let animationName: String = "Lottie"
   fileprivate var activeAnimationName: String = AnimationView.animationName
   fileprivate var animationID: Int = 0
+    public var resetFrameOnAnimationsChange = true
   
   // MARK: - Private (Building Animation View)
   
@@ -841,12 +842,17 @@ open class AnimationView: LottieView {
     
     let animationLayer = AnimationContainer(animation: animation, imageProvider: imageProvider, textProvider: textProvider, videoProvider: videoProvider)
     animationLayer.renderScale = self.screenScale
+    if !resetFrameOnAnimationsChange {
+        animationLayer.currentFrame = currentFrame
+    }
     viewLayer?.addSublayer(animationLayer)
     self.animationLayer = animationLayer
     reloadImages()
     animationLayer.setNeedsDisplay()
     setNeedsLayout()
-    currentFrame = CGFloat(animation.startFrame)
+    if resetFrameOnAnimationsChange {
+        currentFrame = CGFloat(animation.startFrame)
+    }
   }
     
 #if os (macOS)
