@@ -88,6 +88,15 @@ class AnimationContainer: CALayer {
     return nil
   }
   
+  func compositionLayer(for keypath: AnimationKeypath) -> CALayer? {
+    for layer in animationLayers {
+      if let foundLayer = layer.compositionLayer(for: keypath) {
+        return foundLayer
+      }
+    }
+    return nil
+  }
+  
   func addDependency(dependency: CompositionLayerDependency, for keyPath: AnimationKeypath) -> Bool {
     for layer in animationLayers {
       if let foundLayer = layer.compositionLayer(for: keyPath) {
