@@ -40,10 +40,12 @@ class LayerImageProvider {
   }
   
   func reloadImages() {
-    for imageLayer in imageLayers {
-      if let asset = imageAssets[imageLayer.imageReferenceID] {
-        imageLayer.image = imageProvider.imageForAsset(asset: asset)
-      }
+    DispatchQueue.global(priority: .default).async {
+        for imageLayer in self.imageLayers {
+            if let asset = self.imageAssets[imageLayer.imageReferenceID] {
+                imageLayer.image = self.imageProvider.imageForAsset(asset: asset)
+          }
+        }
     }
   }
 }

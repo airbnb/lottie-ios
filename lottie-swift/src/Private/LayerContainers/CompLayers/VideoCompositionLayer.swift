@@ -63,55 +63,60 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
     }
     
     private func updatePlayer() {
-        if let url = videoProvider?.urlFor(keypathName: keypathName, file: file),
-           let contentSize = resolutionForLocalVideo(url: url) {
-            let playerLayer = AVPlayerLayer()
-            let player = AVPlayer(url: url)
-            if #available(OSX 10.14, iOS 12, *) {
-                player.preventsDisplaySleepDuringVideoPlayback = false
-            }
-            playerLayer.player = player
-            playerLayer.frame = CGRect(origin: .zero, size: contentSize)
-            if let endVideoObserver = endVideoObserver {
-                NotificationCenter.default.removeObserver(endVideoObserver)
-            }
-            endVideoObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
-                                                                      object: player.currentItem,
-                                                                      queue: .main) { [weak self] _ in
-                if self?.loopVideo == true, self?.playing == true {
-                    player.seek(to: CMTime.zero)
-                    player.play()
-                } else {
-                    self?.playing = false
+        DispatchQueue.global(priority: .default).async {
+            if let url = self.videoProvider?.urlFor(keypathName: self.keypathName, file: self.file),
+                let contentSize = self.resolutionForLocalVideo(url: url) {
+                let playerLayer = AVPlayerLayer()
+                let player = AVPlayer(url: url)
+                if #available(OSX 10.14, iOS 12, *) {
+                    player.preventsDisplaySleepDuringVideoPlayback = false
                 }
-            }
-            #if os(macOS)
-            playerLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
-            #else
-            playerLayer.videoGravity = .resizeAspectFill
-            #endif
-            
-            if let oldPlayerLayer = self.playerLayer {
-                playerLayer.opacity = 0.0
+                playerLayer.player = player
+                playerLayer.frame = CGRect(origin: .zero, size: contentSize)
+                if let endVideoObserver = self.endVideoObserver {
+                    NotificationCenter.default.removeObserver(endVideoObserver)
+                }
+                self.endVideoObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
+                                                                          object: player.currentItem,
+                                                                          queue: .main) { [weak self] _ in
+                    if self?.loopVideo == true, self?.playing == true {
+                        player.seek(to: CMTime.zero)
+                        player.play()
+                    } else {
+                        self?.playing = false
+                    }
+                }
+                #if os(macOS)
+                playerLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+                #else
+                playerLayer.videoGravity = .resizeAspectFill
+                #endif
                 
-                let fadeIn = CABasicAnimation()
-                fadeIn.fromValue = 0.0
-                fadeIn.toValue = 1.0
-                configure(fadeAnimation: fadeIn, for: playerLayer)
+                if let oldPlayerLayer = self.playerLayer {
+                    playerLayer.opacity = 0.0
+                    
+                    let fadeIn = CABasicAnimation()
+                    fadeIn.fromValue = 0.0
+                    fadeIn.toValue = 1.0
+                    self.configure(fadeAnimation: fadeIn, for: playerLayer)
+                    
+                    let fadeOut = CABasicAnimation()
+                    fadeOut.fromValue = 1.0
+                    fadeOut.toValue = 0.0
+                    fadeOut.delegate = self
+                    self.configure(fadeAnimation: fadeOut, for: oldPlayerLayer)
+                    
+                    self.oldPlayerLayer = oldPlayerLayer
+                }
+                if self.playing {
+                    player.play()
+                }
+                DispatchQueue.main.async {
+                    self.contentsLayer.addSublayer(playerLayer)
+                }
                 
-                let fadeOut = CABasicAnimation()
-                fadeOut.fromValue = 1.0
-                fadeOut.toValue = 0.0
-                fadeOut.delegate = self
-                configure(fadeAnimation: fadeOut, for: oldPlayerLayer)
-                
-                self.oldPlayerLayer = oldPlayerLayer
+                self.playerLayer = playerLayer
             }
-            if playing {
-                player.play()
-            }
-            contentsLayer.addSublayer(playerLayer)
-            self.playerLayer = playerLayer
         }
     }
     
