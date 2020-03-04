@@ -118,6 +118,7 @@ class LineAnimatedTextLayer : DisabledTextLayer, PartedTextLayer {
     private var lines: [CTLine]?
     private var origins: [CGPoint]?
     private(set) var parts: [TextLayerPart]?
+    private lazy var clipLayer: CALayer? = { self.clipLayer(from: self) }()
         
     override var string: Any? {
         set {
@@ -158,18 +159,34 @@ class LineAnimatedTextLayer : DisabledTextLayer, PartedTextLayer {
     
     override func draw(in ctx: CGContext) {
         guard let lines = lines, let parts = parts else { return }
+        var visibleFrame = bounds
+        if let clipLayer = self.clipLayer {
+            visibleFrame = convert(clipLayer.bounds, from: clipLayer)
+        }
+        
         ctx.textMatrix = .identity
         lines.enumerated().forEach { index, line in
             let part = parts[index]
-            ctx.setAlpha(CGFloat(part.opacity))
-            
             var position = origins?[index] ?? .zero
             position.x += part.origin.x
             position.y += part.origin.y
-            ctx.textPosition = position
             
-            CTLineDraw(line, ctx)
+            if visibleFrame.contains(position) {
+                ctx.setAlpha(CGFloat(part.opacity))
+                ctx.textPosition = position
+            
+                CTLineDraw(line, ctx)
+            }
         }
+    }
+    
+    func clipLayer(from layer: CALayer?) -> CALayer? {
+        if layer?.superlayer?.name?.hasSuffix("ClipView") == true {
+            return layer?.superlayer
+        }
+        
+        guard let superlayer = layer?.superlayer else { return nil }
+        return clipLayer(from: superlayer)
     }
 }
 
