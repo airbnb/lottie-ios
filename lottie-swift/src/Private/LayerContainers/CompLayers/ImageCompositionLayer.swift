@@ -11,10 +11,13 @@ import QuartzCore
 
 class ImageCompositionLayer: CompositionLayer {
   
-  // Image currently can't be animated or dynamicaly changed for layer in AE,
-  // so changing image property will lead to nothing after layer was displayed
-  var image: CGImage? = nil
-  var shouldUpdateImage = true
+    var image: CGImage? = nil {
+        didSet {
+            DispatchQueue.main.async {
+                self.contentsLayer.contents = self.image
+            }
+        }
+    }
   
   let imageReferenceID: String
   
@@ -38,12 +41,4 @@ class ImageCompositionLayer: CompositionLayer {
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-    
-  override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
-    if shouldUpdateImage {
-        contentsLayer.contents = image
-        shouldUpdateImage = false
-    }
-  }
-  
 }
