@@ -256,23 +256,9 @@ extension CATransform3D {
     let scale = CATransform3DMakeScale(CGFloat(scale.x / 100.0), CGFloat(scale.y / 100.0), CGFloat(scale.z / 100.0))
     let anchor = CATransform3DMakeTranslation(CGFloat(-anchor.x), CGFloat(-anchor.y), CGFloat(-anchor.z))
 
-    /// This matricies are used to apply perspective effect
-    var perspectiveProjection = CATransform3DIdentity
-    perspectiveProjection.m34 = -1.0 / CGFloat(cameraPosition.z)
-
-    let cameraMoving = CATransform3DTranslate(
-      CATransform3DIdentity,
-      -CGFloat(cameraPosition.x),
-      -CGFloat(cameraPosition.y),
-      0
-    )
-
     return anchor
       .concat(scale)
       .concat(rotation)
       .concat(translation)
-      .concat(cameraMoving)
-      .concat(perspectiveProjection)
-      .concat(CATransform3DInvert(cameraMoving))
   }
 }
