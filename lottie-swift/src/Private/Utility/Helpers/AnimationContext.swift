@@ -24,7 +24,7 @@ struct AnimationContext {
 
   var playFrom: CGFloat
   var playTo: CGFloat
-  var closure: AnimationCompletionDelegate
+  weak var closure: AnimationCompletionDelegate?
 
 }
 

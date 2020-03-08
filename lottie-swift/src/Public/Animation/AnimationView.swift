@@ -845,7 +845,7 @@ final public class AnimationView: LottieView {
       case .pause:
         removeCurrentAnimation()
       case .pauseAndRestore:
-        currentContext.closure.ignoreDelegate = true
+        currentContext.closure?.ignoreDelegate = true
         removeCurrentAnimation()
         /// Keep the stale context around for when the app enters the foreground.
         self.animationContext = currentContext
@@ -882,19 +882,19 @@ final public class AnimationView: LottieView {
   fileprivate func updateInFlightAnimation() {
     guard let animationContext = animationContext else { return }
     
-    guard animationContext.closure.animationState != .complete else {
+    guard animationContext.closure?.animationState != .complete else {
       // Tried to re-add an already completed animation. Cancel.
       self.animationContext = nil
       return
     }
     
     /// Tell existing context to ignore its closure
-    animationContext.closure.ignoreDelegate = true
+    animationContext.closure?.ignoreDelegate = true
     
     /// Make a new context, stealing the completion block from the previous.
     let newContext = AnimationContext(playFrom: animationContext.playFrom,
                                       playTo: animationContext.playTo,
-                                      closure: animationContext.closure.completionBlock)
+                                      closure: animationContext.closure?.completionBlock)
     
     /// Remove current animation, and freeze the current frame.
     let pauseFrame = realtimeAnimationFrame
@@ -967,8 +967,8 @@ final public class AnimationView: LottieView {
       layerAnimation.beginTime = currentLayerTime - (timeOffset * 1 / Double(abs(animationSpeed)))
     }
     layerAnimation.delegate = animationContext.closure
-    animationContext.closure.animationLayer = animationlayer
-    animationContext.closure.animationKey = activeAnimationName
+    animationContext.closure?.animationLayer = animationlayer
+    animationContext.closure?.animationKey = activeAnimationName
     
     animationlayer.add(layerAnimation, forKey: activeAnimationName)
     updateRasterizationState()
