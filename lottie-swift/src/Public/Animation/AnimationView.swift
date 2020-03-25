@@ -373,6 +373,7 @@ final public class AnimationView: LottieView {
   public func stop() {
     removeCurrentAnimation()
     currentFrame = 0
+    CATransaction.flush()
   }
   
   /**
