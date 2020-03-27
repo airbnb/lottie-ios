@@ -61,11 +61,11 @@ final class AnimationContainer: CALayer {
     }
   }
   
-  func getValue(for keypath: AnimationKeypath, atFrame: CGFloat?) -> Any? {
+  func getValueProvider(for keypath: AnimationKeypath) -> AnyValueProvider? {
     for layer in animationLayers {
       if let foundProperties = layer.nodeProperties(for: keypath),
         let first = foundProperties.first {
-        return first.valueProvider.value(frame: atFrame ?? currentFrame)
+        return first.valueProvider
       }
     }
     return nil

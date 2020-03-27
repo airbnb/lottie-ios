@@ -432,7 +432,17 @@ final public class AnimationView: LottieView {
    - Parameter atFrame: The Frame Time of the value to query. If nil then the current frame is used.
    */
   public func getValue(for keypath: AnimationKeypath, atFrame: AnimationFrameTime?) -> Any? {
-    return animationLayer?.getValue(for: keypath, atFrame: atFrame)
+    return getValueProvider(for: keypath)?.value(frame: atFrame ?? currentFrame)
+  }
+  
+  /**
+   Reads the value provider of a property specified by the Keypath.
+   Returns nil if no property provider is found.
+   
+   - Parameter for: The keypath used to search for the property.
+   */
+  public func getValueProvider(for keypath: AnimationKeypath) -> AnyValueProvider? {
+    return animationLayer?.getValueProvider(for: keypath)
   }
   
   /// Logs all child keypaths.
