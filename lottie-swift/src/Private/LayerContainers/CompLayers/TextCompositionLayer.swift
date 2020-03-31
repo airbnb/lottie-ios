@@ -55,7 +55,12 @@ final class TextCompositionLayer: CompositionLayer {
   
   let textLayer: DisabledTextLayer = DisabledTextLayer()
   let textStrokeLayer: DisabledTextLayer = DisabledTextLayer()
-  var textProvider: AnimationTextProvider
+  var textProvider: AnimationTextProvider {
+	didSet {
+      forceLocalUpdate = true
+    }
+  }
+  var forceLocalUpdate: Bool = true
   
   init(textLayer: TextLayerModel, textProvider: AnimationTextProvider) {
     var rootNode: TextAnimatorNode?
@@ -101,8 +106,10 @@ final class TextCompositionLayer: CompositionLayer {
     
     let documentUpdate = textDocument.hasUpdate(frame: frame)
     let animatorUpdate = rootNode?.updateContents(frame, forceLocalUpdate: forceUpdates) ?? false
-    guard documentUpdate == true || animatorUpdate == true else { return }
+    guard documentUpdate == true || animatorUpdate == true || forceLocalUpdate == true else { return }
     
+	forceLocalUpdate = false
+	
     let text = textDocument.value(frame: frame) as! TextDocument
 
     rootNode?.rebuildOutputs(frame: frame)
