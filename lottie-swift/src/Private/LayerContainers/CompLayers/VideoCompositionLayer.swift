@@ -20,7 +20,7 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
     private var endVideoObserver: Any?
     var videoProvider: AnimationVideoProvider? {
       didSet {
-        updatePlayer()
+        startUpdatingPlayer()
       }
     }
     
@@ -37,7 +37,7 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
         
         super.init(layer: videoModel, size: .zero)
         
-        updatePlayer()
+        startUpdatingPlayer()
     }
   
     required init?(coder aDecoder: NSCoder) {
@@ -62,8 +62,23 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
         super.hideContentsWithFrame(frame: frame, forceUpdates: forceUpdates)
     }
     
+    private func startUpdatingPlayer() {
+        if #available(macOS 10.13, *) {
+            if #available(macOS 10.14, *) {
+                DispatchQueue.global(priority: .default).async {
+                    self.updatePlayer()
+                }
+            } else {
+                self.updatePlayer()
+            }
+        } else {
+            DispatchQueue.global(priority: .default).async {
+                self.updatePlayer()
+            }
+        }
+    }
+    
     private func updatePlayer() {
-        DispatchQueue.global(priority: .default).async {
             if let url = self.videoProvider?.urlFor(keypathName: self.keypathName, file: self.file),
                 let contentSize = self.resolutionForLocalVideo(url: url) {
                 let playerLayer = AVPlayerLayer()
@@ -117,7 +132,6 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
                 
                 self.playerLayer = playerLayer
             }
-        }
     }
     
     private func configure(fadeAnimation: CAAnimation, for layer: CALayer) {
