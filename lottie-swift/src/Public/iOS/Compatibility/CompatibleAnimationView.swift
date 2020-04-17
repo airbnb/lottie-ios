@@ -176,6 +176,16 @@ public final class CompatibleAnimationView: UIView {
   }
 
   @objc
+  public func play(
+    marker: String,
+    completion: ((Bool) -> Void)? = nil)
+  {
+    animationView.play(
+      marker: marker,
+      completion: completion)
+  }
+  
+  @objc
   public func stop() {
     animationView.stop()
   }
