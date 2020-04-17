@@ -366,6 +366,31 @@ final public class AnimationView: LottieView {
   }
   
   /**
+   Plays the animation with a marker name.
+   
+   Marker is a point in time with a duration that are encoded into the Animation data and assigned
+   a name.
+   
+   NOTE: If marker is not found the play command will exit.
+   
+   - Parameter marker: The marker name for the animation playback.
+   - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+   - Parameter completion: An optional completion closure to be called when the animation stops.
+   */
+  public func play(marker markerName: String,
+                   loopMode: LottieLoopMode? = nil,
+                   completion: LottieCompletionBlock? = nil) {
+    guard let marker = animation?.markerMap?[markerName] else {
+      return
+    }
+    
+    play(fromFrame: marker.frameTime,
+         toFrame: marker.frameTime + marker.durationFrames,
+         loopMode: loopMode,
+         completion: completion)
+  }
+  
+  /**
    Stops the animation and resets the view to its start frame.
    
    The completion closure will be called with `false`
