@@ -16,8 +16,12 @@ final class Marker: Codable {
   /// The Frame time of the marker
   let frameTime: AnimationFrameTime
   
+  /// The duration in frames of the marker.
+  let durationFrames: AnimationFrameTime
+  
   enum CodingKeys : String, CodingKey {
     case name = "cm"
     case frameTime = "tm"
+    case durationFrames = "dr"
   }
 }
