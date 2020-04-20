@@ -826,8 +826,9 @@ final public class AnimationView: LottieView {
   }
   
   override func animationMovedToWindow() {
-    /// Don't update any state if both the `superview` and `window` is `nil`
-    guard window != nil && superview != nil else { return }
+    /// Don't update any state if the `superview`  is `nil`
+    /// When A viewA owns superViewB, it removes the superViewB from the window. At this point, viewA still owns superViewB and triggers the viewA method: -didmovetowindow
+    guard superview != nil else { return }
 
     if window != nil {
       updateAnimationForForegroundState()
