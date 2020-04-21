@@ -16,6 +16,7 @@ class ControlEffect: Effect {
     
     private var evolutionEffect: DelayedEvolutionEffect?
     private var fastBlurEffect: RadialFastBlurEffect?
+    private var centerVerticallyEffect: CenteredVerticallyEffect?
     
     override func setUp(layer: CALayer) {
         if name == "Evolution_(%)_In" {
@@ -28,6 +29,11 @@ class ControlEffect: Effect {
             if fastBlurEffect == nil {
                 fastBlurEffect = RadialFastBlurEffect(layer: shapeLayer, effect: self)
             }
+        } else if name == "CenteredVertically" {
+            guard let textLayer = layer as? TextCompositionLayer else { return }
+            if centerVerticallyEffect == nil {
+                centerVerticallyEffect = CenteredVerticallyEffect(layer: textLayer)
+            }
         } else {
             super.setUp(layer: layer)
         }
@@ -38,6 +44,8 @@ class ControlEffect: Effect {
             evolutionEffect?.apply(frame: frame)
         } else if name == "CC Radial Fast Blur" {
             fastBlurEffect?.apply(frame: frame)
+        } else if name == "CenteredVertically" {
+            centerVerticallyEffect?.layer.textLayer.centeredVertically = true
         } else {
             super.apply(layer: layer, frame: frame)
         }
@@ -128,5 +136,14 @@ class RadialFastBlurEffect {
             layer.filters = [CIFilter(name: "CIZoomBlur", parameters: [kCIInputCenterKey: CIVector(cgPoint: center),"inputAmount": amount]) as Any,
                              CIFilter(name: "CIBoxBlur", parameters: ["inputRadius": amount / 5]) as Any]
         }
+    }
+}
+
+class CenteredVerticallyEffect {
+
+    let layer: TextCompositionLayer
+    
+    init(layer: TextCompositionLayer) {
+        self.layer = layer
     }
 }

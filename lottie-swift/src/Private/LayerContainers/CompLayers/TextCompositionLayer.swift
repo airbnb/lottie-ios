@@ -19,12 +19,19 @@ import UIKit
 #endif
 
 class DisabledTextLayer: CATextLayer {
+  var centeredVertically = false
   override func action(forKey event: String) -> CAAction? {
     return nil
   }
 #if os(OSX)
     override func draw(in ctx: CGContext) {
         NSGraphicsContext.saveGraphicsState()
+        if centeredVertically {
+            // From https://stackoverflow.com/questions/4765461/vertically-align-text-in-a-catextlayer
+            let lines = CGFloat((string as? NSAttributedString)?.linesCount(for: bounds.width) ?? 1)
+            let yDiff = lines * fontSize / 10.0 - (bounds.height - lines * fontSize) / 2.0
+            ctx.translateBy(x: 0, y: -yDiff)
+        }
         if #available(OSX 10.10, *) {
             NSGraphicsContext.current = NSGraphicsContext(cgContext: ctx, flipped: true)
         }
@@ -32,6 +39,19 @@ class DisabledTextLayer: CATextLayer {
         NSGraphicsContext.restoreGraphicsState()
     }
 #endif
+}
+
+extension NSAttributedString {
+
+    func linesCount(for width: CGFloat) -> Int {
+        let path = CGPath(rect: CGRect(x: 0, y: 0, width: width, height: CGFloat(MAXFLOAT)), transform: nil)
+        let frameSetterRef = CTFramesetterCreateWithAttributedString(self as CFAttributedString)
+        let frameRef = CTFramesetterCreateFrame(frameSetterRef, CFRangeMake(0, 0), path, nil)
+        let linesNS = CTFrameGetLines(frameRef)
+
+        guard let lines = linesNS as? [CTLine] else { return 1 }
+        return lines.count
+    }
 }
 
 extension TextJustification {
@@ -67,7 +87,7 @@ class TextCompositionLayer: CompositionLayer {
   let interpolatableScale: KeyframeInterpolator<Vector3D>?
   
   let fonts : FontList?
-  let textLayer: CATextLayer
+  let textLayer: DisabledTextLayer
   let textStrokeLayer: CATextLayer
   var textProvider: AnimationTextProvider {
     didSet {
@@ -158,7 +178,6 @@ class TextCompositionLayer: CompositionLayer {
     
     let text = textDocument.value(frame: frame) as! TextDocument
     let anchorPoint = interpolatableAnchorPoint?.value(frame: frame) as! Vector3D
-    let scale = interpolatableScale?.value(frame: frame) as! Vector3D
     rootNode?.rebuildOutputs(frame: frame)
     
     let fillColor = rootNode?.textOutputNode.fillColor ?? text.fillColorData.cgColorValue
