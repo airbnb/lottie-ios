@@ -29,9 +29,10 @@ class DisabledTextLayer: CATextLayer {
         if centeredVertically {
             // From https://stackoverflow.com/questions/4765461/vertically-align-text-in-a-catextlayer
             let lines = CGFloat((string as? NSAttributedString)?.linesCount(for: bounds.width) ?? 1)
-            var yDiff = lines * fontSize / 10.0 - (bounds.height - lines * fontSize) / 2.0
-            yDiff += (lines - 1.0) * fontSize / 4.0 // Line spacing
-            ctx.translateBy(x: 0, y: -yDiff)
+            let lineHeight = (font as? NSFont)?.lineHeight ?? fontSize * 1.2
+            let yDiff = (bounds.height - lines * lineHeight) / 2.0
+            
+            ctx.translateBy(x: 0, y: yDiff)
         }
         if #available(OSX 10.10, *) {
             NSGraphicsContext.current = NSGraphicsContext(cgContext: ctx, flipped: true)
@@ -468,6 +469,10 @@ extension NSFont {
 		}
 		return result
 	}
+       
+    var lineHeight: CGFloat {
+      return CGFloat(ceilf(Float(ascender + abs(descender) + leading)))
+    }
 }
 
 #endif
