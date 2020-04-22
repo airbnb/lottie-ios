@@ -101,6 +101,7 @@ class WordAnimatedTextLayer : DisabledTextLayer, PartedTextLayer {
             layer.contentsScale = self.contentsScale
             layer.rasterizationScale = self.rasterizationScale
             layer.alignmentMode = self.alignmentMode
+            layer.font = self.font
             layer.centeredVertically = self.centeredVertically
             
             layer.string = mutableString
