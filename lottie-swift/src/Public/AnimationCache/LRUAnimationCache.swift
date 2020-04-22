@@ -41,10 +41,17 @@ public class LRUAnimationCache: AnimationCacheProvider {
   }
   
   public func setAnimation(_ animation: Animation, forKey: String) {
-    cacheMap[forKey] = animation
-    lruList.append(forKey)
-    if lruList.count > cacheSize {
-      lruList.remove(at: 0)
+    if cacheSize > 0 {
+        if lruList.count >= cacheSize {
+          let key = lruList.remove(at: 0)
+          cacheMap.removeValue(forKey: key)
+        }
+        cacheMap[forKey] = animation
+        lruList.append(forKey)
+    } else {
+        if lruList.count > 0 {
+            clearCache()
+        }
     }
   }
   
