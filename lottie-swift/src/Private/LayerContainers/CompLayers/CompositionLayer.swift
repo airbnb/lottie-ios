@@ -118,7 +118,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
     transformNode.updateTree(frame, forceUpdates: forceUpdates)
     let layerVisible = frame.isInRangeOrEqual(inFrame, outFrame)
     /// Only update contents if current time is within the layers time bounds.
-    if layerVisible {
+    if layerVisible || forceUpdates {
       displayContentsWithFrame(frame: frame, forceUpdates: forceUpdates)
       maskLayer?.updateWithFrame(frame: frame, forceUpdates: forceUpdates)
     } else {
