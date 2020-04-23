@@ -103,10 +103,9 @@ final class TextCompositionLayer: CompositionLayer {
     let animatorUpdate = rootNode?.updateContents(frame, forceLocalUpdate: forceUpdates) ?? false
     guard documentUpdate == true || animatorUpdate == true else { return }
     
-    let text = textDocument.value(frame: frame) as! TextDocument
-
     rootNode?.rebuildOutputs(frame: frame)
     
+    let text = textDocument.value(frame: frame) as! TextDocument
     let fillColor = rootNode?.textOutputNode.fillColor ?? text.fillColorData.cgColorValue
     let strokeColor = rootNode?.textOutputNode.strokeColor ?? text.strokeColorData?.cgColorValue
     let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
@@ -117,16 +116,13 @@ final class TextCompositionLayer: CompositionLayer {
     
     let textString = textProvider.textFor(keypathName: self.keypathName, sourceText: text.text)
     
+    // TODO Fix Line hegith.
     var attributes: [NSAttributedString.Key : Any] = [
       NSAttributedString.Key.font: ctFont,
       NSAttributedString.Key.foregroundColor: fillColor,
       NSAttributedString.Key.kern: tracking,
     ]
     
-    let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.lineSpacing = CGFloat(text.lineHeight)
-    paragraphStyle.alignment = text.justification.textAlignment
-    attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
     
     let baseAttributedString = NSAttributedString(string: textString, attributes: attributes )
     
@@ -139,33 +135,39 @@ final class TextCompositionLayer: CompositionLayer {
     }
     
     let size: CGSize
-    let attributedString: NSAttributedString = NSAttributedString(string: textString, attributes: attributes )
+    let normalizedAnchor: CGPoint
+    let strokeAttributedString: NSAttributedString = NSAttributedString(string: textString, attributes: attributes )
     
     if let frameSize = text.textFrameSize {
+      // Compute geometry for a text block that fits in a specified frame.
       size = CGSize(width: frameSize.x, height: frameSize.y)
+      normalizedAnchor = CGPoint.zero
     } else {
-      let framesetter = CTFramesetterCreateWithAttributedString(attributedString)
+      // Compute geometry for a text that starts form an anchor point.
+      let framesetter = CTFramesetterCreateWithAttributedString(strokeAttributedString)
+      size = CTFramesetterSuggestFrameSizeWithConstraints(
+        framesetter,
+        CFRange(location: 0,length: 0),
+        nil,
+        CGSize(width: CGFloat.greatestFiniteMagnitude,
+               height: CGFloat.greatestFiniteMagnitude),
+        nil
+      )
       
-      size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,
-                                                          CFRange(location: 0,length: 0),
-                                                          nil,
-                                                          CGSize(width: CGFloat.greatestFiniteMagnitude,
-                                                                 height: CGFloat.greatestFiniteMagnitude),
-                                                          nil)
+      let baselinePosition = CTFontGetAscent(ctFont)
+      let textAnchor: CGPoint
+      switch text.justification {
+      case .left:
+        textAnchor = CGPoint(x: 0, y: baselinePosition)
+      case .right:
+        textAnchor = CGPoint(x: size.width, y: baselinePosition)
+      case .center:
+        textAnchor = CGPoint(x: size.width * 0.5, y: baselinePosition)
+      }
+      
+      normalizedAnchor = CGPoint(x: textAnchor.x.remap(fromLow: 0, fromHigh: size.width, toLow: 0, toHigh: 1),
+                                 y: textAnchor.y.remap(fromLow: 0, fromHigh: size.height, toLow: 0, toHigh: 1))
     }
-    
-    let baselinePosition = CTFontGetAscent(ctFont)
-    let textAnchor: CGPoint
-    switch text.justification {
-    case .left:
-      textAnchor = CGPoint(x: 0, y: baselinePosition)
-    case .right:
-      textAnchor = CGPoint(x: size.width, y: baselinePosition)
-    case .center:
-      textAnchor = CGPoint(x: size.width * 0.5, y: baselinePosition)
-    }
-    let normalizedAnchor = CGPoint(x: textAnchor.x.remap(fromLow: 0, fromHigh: size.width, toLow: 0, toHigh: 1),
-                                   y: textAnchor.y.remap(fromLow: 0, fromHigh: size.height, toLow: 0, toHigh: 1))
     
     if textStrokeLayer.isHidden == false {
       if text.strokeOverFill ?? false {
@@ -181,7 +183,7 @@ final class TextCompositionLayer: CompositionLayer {
       textStrokeLayer.frame = CGRect(origin: .zero, size: size)
       textStrokeLayer.position = text.textFramePosition?.pointValue ?? CGPoint.zero
       textStrokeLayer.transform = matrix
-      textStrokeLayer.string = attributedString
+      textStrokeLayer.string = strokeAttributedString
       textStrokeLayer.alignmentMode = text.justification.caTextAlignement
     }
     

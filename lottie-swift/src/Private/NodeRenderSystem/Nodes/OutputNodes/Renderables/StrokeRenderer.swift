@@ -156,7 +156,7 @@ final class StrokeRenderer: PassThroughOutputNode, Renderable {
     layer.lineDashPhase = dashPhase ?? 0
     layer.fillColor = nil
     if let dashPattern = dashLengths {
-      layer.lineDashPattern = dashPattern.map({ NSNumber(value: Double($0))})
+      layer.lineDashPattern = dashPattern.map({ NSNumber(value: Double($0)) })
     }
   }
 }
