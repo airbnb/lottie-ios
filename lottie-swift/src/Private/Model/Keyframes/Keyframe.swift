@@ -12,7 +12,7 @@ import CoreGraphics
  Keyframe represents a point in time and is the container for datatypes.
  Note: This is a parent class and should not be used directly.
  */
-struct Keyframe<T: Interpolatable> {
+final class Keyframe<T: Interpolatable> {
   
   /// The value of the keyframe
   let value: T
@@ -63,13 +63,13 @@ struct Keyframe<T: Interpolatable> {
 }
 
 /**
- A generic struct used to parse and remap keyframe json.
+ A generic class used to parse and remap keyframe json.
  
  Keyframe json has a couple of different variations and formats depending on the
  type of keyframea and also the version of the JSON. By parsing the raw data
  we can reconfigure it into a constant format.
  */
-struct KeyframeData<T: Codable>: Codable {
+final class KeyframeData<T: Codable>: Codable {
   
   /// The start value of the keyframe
   let startValue: T?

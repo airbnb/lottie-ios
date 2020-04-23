@@ -28,8 +28,8 @@ final class GradientStrokeProperties: NodePropertyMap, KeypathSearchable {
     self.lineJoin = gradientStroke.lineJoin
     
     if let dashes = gradientStroke.dashPattern {
-      var dashPatterns = [[Keyframe<Vector1D>]]()
-      var dashPhase = [Keyframe<Vector1D>]()
+      var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>()
+      var dashPhase = ContiguousArray<Keyframe<Vector1D>>()
       for dash in dashes {
         if dash.type == .offset {
           dashPhase = dash.value.keyframes
