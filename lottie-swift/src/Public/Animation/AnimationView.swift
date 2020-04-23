@@ -857,11 +857,11 @@ final public class AnimationView: LottieView {
     }
   }
   
-  fileprivate var waitingToPlayAimation: Bool = false
+  fileprivate var waitingToPlayAnimation: Bool = false
   fileprivate func updateAnimationForForegroundState() {
     if let currentContext = animationContext {
-      if waitingToPlayAimation {
-        waitingToPlayAimation = false
+      if waitingToPlayAnimation {
+        waitingToPlayAnimation = false
         self.addNewAnimationForContext(currentContext)
       } else if backgroundBehavior == .pauseAndRestore {
         /// Restore animation from saved state
@@ -913,7 +913,7 @@ final public class AnimationView: LottieView {
     
     self.animationContext = animationContext
     
-    guard self.window != nil else { waitingToPlayAimation = true; return }
+    guard self.window != nil else { waitingToPlayAnimation = true; return }
     
     animationID = animationID + 1
     activeAnimationName = AnimationView.animationName + String(animationID)
