@@ -743,7 +743,11 @@ final public class AnimationView: LottieView {
       
       animationLayer.position = position
       animationLayer.transform = xform
+      #if os(OSX)
+      animationLayer.anchorPoint = layer?.anchorPoint ?? CGPoint.zero
+      #else
       animationLayer.anchorPoint = layer.anchorPoint
+      #endif
       animationLayer.add(positionAnimation, forKey: positionKey)
       animationLayer.add(xformAnimation, forKey: transformKey)
     } else {
