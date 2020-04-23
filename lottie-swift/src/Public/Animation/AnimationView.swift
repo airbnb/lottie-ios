@@ -718,34 +718,34 @@ final public class AnimationView: LottieView {
      If layout is changed without animation, explicitly set animation duration to 0.0
      inside CATransaction to avoid unwanted artifacts.
      */
-
-    /// Check if any animation exist on the view's layer, and grab the duration and timing functions of the animation.
+    /// Check if any animation exist on the view's layer, and match it.
     if let key = viewLayer?.animationKeys()?.first, let animation = viewLayer?.animation(forKey: key) {
       // The layout is happening within an animation block. Grab the animation data.
       
-      let animationKey = "LayoutAnimation"
-      animationLayer.removeAnimation(forKey: animationKey)
+      let positionKey = "LayoutPositionAnimation"
+      let transformKey = "LayoutTransformAnimation"
+      animationLayer.removeAnimation(forKey: positionKey)
+      animationLayer.removeAnimation(forKey: transformKey)
       
-      let positionAnimation = CABasicAnimation(keyPath: "position")
+      let positionAnimation = animation.copy() as? CABasicAnimation ?? CABasicAnimation(keyPath: "position")
+      positionAnimation.keyPath = "position"
+      positionAnimation.isAdditive = false
       positionAnimation.fromValue = animationLayer.position
       positionAnimation.toValue = position
-      let xformAnimation = CABasicAnimation(keyPath: "transform")
+      positionAnimation.isRemovedOnCompletion = true
+      
+      let xformAnimation = animation.copy() as? CABasicAnimation ?? CABasicAnimation(keyPath: "transform")
+      xformAnimation.keyPath = "transform"
+      xformAnimation.isAdditive = false
       xformAnimation.fromValue = animationLayer.transform
       xformAnimation.toValue = xform
-      
-      let group = CAAnimationGroup()
-      group.animations = [positionAnimation, xformAnimation]
-      group.duration = animation.duration
-      group.fillMode = .both
-      group.timingFunction = animation.timingFunction
-      if animation.beginTime > 0 {
-        group.beginTime = CACurrentMediaTime() + animation.beginTime
-      }
-      group.isRemovedOnCompletion = true
+      xformAnimation.isRemovedOnCompletion = true
       
       animationLayer.position = position
       animationLayer.transform = xform
-      animationLayer.add(group, forKey: animationKey)
+      animationLayer.anchorPoint = layer.anchorPoint
+      animationLayer.add(positionAnimation, forKey: positionKey)
+      animationLayer.add(xformAnimation, forKey: transformKey)
     } else {
       CATransaction.begin()
       CATransaction.setAnimationDuration(0.0)
