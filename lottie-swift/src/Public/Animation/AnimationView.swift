@@ -373,6 +373,7 @@ final public class AnimationView: LottieView {
   public func stop() {
     removeCurrentAnimation()
     currentFrame = 0
+    CATransaction.flush()
   }
   
   /**
@@ -809,12 +810,12 @@ final public class AnimationView: LottieView {
   /// Updates the animation frame. Does not affect any current animations
   func updateAnimationFrame(_ newFrame: CGFloat) {
     CATransaction.begin()
-    CATransaction.setDisableActions(true)
-    animationLayer?.currentFrame = newFrame
-    CATransaction.commit()
     CATransaction.setCompletionBlock {
         self.animationLayer?.forceDisplayUpdate()
     }
+    CATransaction.setDisableActions(true)
+    animationLayer?.currentFrame = newFrame
+    CATransaction.commit()
   }
   
   @objc override func animationWillMoveToBackground() {
