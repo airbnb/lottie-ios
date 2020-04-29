@@ -14,10 +14,18 @@ import UIKit
 @objc
 public final class CompatibleAnimation: NSObject {
   
+  // MARK: Private
+
+  private let filepath: String?
+  private let name: String?
+  private let json: String?
+  private let bundle: Bundle?
+
   @objc
   static func named(_ name: String) -> CompatibleAnimation {
     return CompatibleAnimation(name: name)
   }
+
   @objc
   static func filepath(_ filepath: String) -> CompatibleAnimation {
     return CompatibleAnimation(filepath: filepath)
@@ -56,22 +64,17 @@ public final class CompatibleAnimation: NSObject {
   }
 
   internal var animation: Animation? {
-    if (json != nil) {
-      let jsonData = json?.data(using: .utf8)!
-      return try? JSONDecoder().decode(Animation.self, from: jsonData!)
-    } else if (filepath != nil) {
-      return Animation.filepath(filepath!)
-    } else {
-      return Animation.named(name!, bundle: bundle!)
+    if let json = json {
+      guard let jsonData = json.data(using: .utf8) else { return nil }
+      return try? JSONDecoder().decode(Animation.self, from: jsonData)
+    } else if let filepath = filepath {
+      return Animation.filepath(filepath)
+    } else if let name = name, let bundle = bundle {
+      return Animation.named(name, bundle: bundle)
     }
+    return nil
   }
 
-  // MARK: Private
-
-  private let filepath: String?
-  private let name: String?
-  private let json: String?
-  private let bundle: Bundle?
 }
 
 /// An Objective-C compatible wrapper around Lottie's AnimationView.
@@ -158,7 +161,6 @@ public final class CompatibleAnimationView: UIView {
     return animationView.isAnimationPlaying
   }
   
-  
   @objc
   public var animationDuration: TimeInterval {
     return animationView.animation?.duration ?? -1;
@@ -190,8 +192,7 @@ public final class CompatibleAnimationView: UIView {
   public func play(
     fromProgress: CGFloat,
     toProgress: CGFloat,
-    completion: ((Bool) -> Void)? = nil)
-  {
+    completion: ((Bool) -> Void)? = nil) {
     animationView.play(
       fromProgress: fromProgress,
       toProgress: toProgress,
@@ -203,8 +204,7 @@ public final class CompatibleAnimationView: UIView {
   public func play(
     fromFrame: CGFloat,
     toFrame: CGFloat,
-    completion: ((Bool) -> Void)? = nil)
-  {
+    completion: ((Bool) -> Void)? = nil) {
     animationView.play(
       fromFrame: fromFrame,
       toFrame: toFrame,
@@ -216,8 +216,7 @@ public final class CompatibleAnimationView: UIView {
   public func play(
     fromMarker: String,
     toMarker: String,
-    completion: ((Bool) -> Void)? = nil)
-  {
+    completion: ((Bool) -> Void)? = nil) {
     animationView.play(
       fromMarker: fromMarker,
       toMarker: toMarker,
@@ -247,8 +246,7 @@ public final class CompatibleAnimationView: UIView {
   @objc
   public func getValue(
     for keypath: CompatibleAnimationKeypath,
-    atFrame: CGFloat) -> Any?
-  {
+    atFrame: CGFloat) -> Any? {
     return animationView.getValue(
       for: keypath.animationKeypath,
       atFrame: atFrame)
@@ -260,8 +258,7 @@ public final class CompatibleAnimationView: UIView {
   }
 
   @objc
-  public func setColorValue(_ color: UIColor, forKeypath keypath: CompatibleAnimationKeypath)
-  {
+  public func setColorValue(_ color: UIColor, forKeypath keypath: CompatibleAnimationKeypath) {
     var red: CGFloat = 0
     var green: CGFloat = 0
     var blue: CGFloat = 0
@@ -285,8 +282,7 @@ public final class CompatibleAnimationView: UIView {
   }
 
   @objc
-  public func getColorValue(for keypath: CompatibleAnimationKeypath, atFrame: CGFloat) -> UIColor?
-  {
+  public func getColorValue(for keypath: CompatibleAnimationKeypath, atFrame: CGFloat) -> UIColor? {
     let value = animationView.getValue(for: keypath.animationKeypath, atFrame: atFrame)
     guard let colorValue = value as? Color else {
         return nil;
@@ -295,18 +291,14 @@ public final class CompatibleAnimationView: UIView {
     return UIColor(red: CGFloat(colorValue.r), green: CGFloat(colorValue.g), blue: CGFloat(colorValue.b), alpha: CGFloat(colorValue.a))
   }
   
-  
   @objc
-  public func setFloatValue(_ value: CGFloat, forKeypath keypath: CompatibleAnimationKeypath)
-  {
-    
+  public func setFloatValue(_ value: CGFloat, forKeypath keypath: CompatibleAnimationKeypath) {
     let valueProvider = FloatValueProvider(value)
     animationView.setValueProvider(valueProvider, keypath: keypath.animationKeypath)
   }
 
   @objc
-  public func getFloatValue(for keypath: CompatibleAnimationKeypath, atFrame: CGFloat) -> NSNumber?
-  {
+  public func getFloatValue(for keypath: CompatibleAnimationKeypath, atFrame: CGFloat) -> NSNumber? {
     let value = animationView.getValue(for: keypath.animationKeypath, atFrame: atFrame)
     return value as? NSNumber
   }
@@ -315,8 +307,7 @@ public final class CompatibleAnimationView: UIView {
   @objc
   public func addSubview(
     _ subview: AnimationSubview,
-    forLayerAt keypath: CompatibleAnimationKeypath)
-  {
+    forLayerAt keypath: CompatibleAnimationKeypath) {
     animationView.addSubview(
       subview,
       forLayerAt: keypath.animationKeypath)
@@ -326,8 +317,7 @@ public final class CompatibleAnimationView: UIView {
   public func convert(
     rect: CGRect,
     toLayerAt keypath: CompatibleAnimationKeypath?)
-    -> CGRect
-  {
+    -> CGRect {
     return animationView.convert(
       rect,
       toLayerAt: keypath?.animationKeypath) ?? .zero
@@ -337,8 +327,7 @@ public final class CompatibleAnimationView: UIView {
   public func convert(
     point: CGPoint,
     toLayerAt keypath: CompatibleAnimationKeypath?)
-    -> CGPoint
-  {
+    -> CGPoint {
     return animationView.convert(
       point,
       toLayerAt: keypath?.animationKeypath) ?? .zero
