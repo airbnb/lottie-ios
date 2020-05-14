@@ -25,14 +25,15 @@ final class Transform: Codable {
   /// The scale of the transform
   let scale: KeyframeGroup<Vector3D>
   
-  /// The rotation of the transform. Note: This is single dimensional rotation.
-  let rotation: KeyframeGroup<Vector1D>
-  
   /// The opacity of the transform.
   let opacity: KeyframeGroup<Vector1D>
   
+  let rotationZ: KeyframeGroup<Vector1D>
+  let rotationX: KeyframeGroup<Vector1D>
+  let rotationY: KeyframeGroup<Vector1D>
+    
   /// Should always be nil.
-  let rotationZ: KeyframeGroup<Vector1D>?
+  let rotation: KeyframeGroup<Vector1D>?
   
   enum CodingKeys : String, CodingKey {
     case anchorPoint = "a"
@@ -42,6 +43,8 @@ final class Transform: Codable {
     case scale = "s"
     case rotation = "r"
     case rotationZ = "rz"
+    case rotationX = "rx"
+    case rotationY = "ry"
     case opacity = "o"
   }
 
@@ -91,13 +94,17 @@ final class Transform: Codable {
     // Scale
     self.scale = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .scale) ?? KeyframeGroup(Vector3D(x: Double(100), y: 100, z: 100))
     
-    // Rotation
+    self.rotationX = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotationX) ?? KeyframeGroup(Vector1D(0))
+    self.rotationY = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotationY) ?? KeyframeGroup(Vector1D(0))
+    
+    
     if let rotationZ = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotationZ) {
-      self.rotation = rotationZ
+      self.rotationZ = rotationZ
     } else {
-       self.rotation = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation) ?? KeyframeGroup(Vector1D(0))
+       self.rotationZ = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation) ?? KeyframeGroup(Vector1D(0))
     }
-    self.rotationZ = nil
+    
+    self.rotation = nil
     
     // Opacity
     self.opacity = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .opacity) ?? KeyframeGroup(Vector1D(100))

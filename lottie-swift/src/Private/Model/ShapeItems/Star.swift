@@ -35,7 +35,9 @@ final class Star: ShapeItem {
   let innerRoundness: KeyframeGroup<Vector1D>?
   
   /// The rotation of the star
-  let rotation: KeyframeGroup<Vector1D>
+  let rotationX: KeyframeGroup<Vector1D>
+  let rotationY: KeyframeGroup<Vector1D>
+  let rotationZ: KeyframeGroup<Vector1D>
   
   /// The number of points on the star
   let points: KeyframeGroup<Vector1D>
@@ -51,6 +53,9 @@ final class Star: ShapeItem {
     case innerRadius = "ir"
     case innerRoundness = "is"
     case rotation = "r"
+    case rotationX = "rx"
+    case rotationY = "ry"
+    case rotationZ = "rz"
     case points = "pt"
     case starType = "sy"
   }
@@ -63,7 +68,11 @@ final class Star: ShapeItem {
     self.outerRoundness = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .outerRoundness)
     self.innerRadius = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .innerRadius)
     self.innerRoundness = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .innerRoundness)
-    self.rotation = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .rotation)
+    let rotationZ = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .rotationZ)
+    self.rotationZ = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation) ?? rotationZ
+    self.rotationX = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .rotationX)
+    self.rotationY = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .rotationY)
+    
     self.points = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .points)
     self.starType = try container.decode(StarType.self, forKey: .starType)
     try super.init(from: decoder)
@@ -78,7 +87,9 @@ final class Star: ShapeItem {
     try container.encode(outerRoundness, forKey: .outerRoundness)
     try container.encode(innerRadius, forKey: .innerRadius)
     try container.encode(innerRoundness, forKey: .innerRoundness)
-    try container.encode(rotation, forKey: .rotation)
+    try container.encode(rotationZ, forKey: .rotationZ)
+    try container.encode(rotationX, forKey: .rotationX)
+    try container.encode(rotationY, forKey: .rotationY)
     try container.encode(points, forKey: .points)
     try container.encode(starType, forKey: .starType)
   }
