@@ -18,6 +18,7 @@ class GroupOutputNode: NodeOutput {
   
   let parent: NodeOutput?
   let rootNode: NodeOutput?
+  var isEnabled: Bool = true
   
   private(set) var outputPath: CGPath? = nil
   private(set) var transform: CATransform3D = CATransform3DIdentity
@@ -28,6 +29,12 @@ class GroupOutputNode: NodeOutput {
   }
 
   func hasOutputUpdates(_ forFrame: CGFloat) -> Bool {
+    guard isEnabled else {
+      let upstreamUpdates = parent?.hasOutputUpdates(forFrame) ?? false
+      outputPath = parent?.outputPath
+      return upstreamUpdates
+    }
+    
     let upstreamUpdates = parent?.hasOutputUpdates(forFrame) ?? false
     if upstreamUpdates {
       outputPath = nil

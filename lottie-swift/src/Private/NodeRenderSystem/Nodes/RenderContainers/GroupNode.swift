@@ -9,7 +9,7 @@ import Foundation
 import QuartzCore
 import CoreGraphics
 
-class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
+final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
   
   var keypathName: String = "Transform"
   
@@ -67,7 +67,7 @@ class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
   }
 }
 
-class GroupNode: AnimatorNode {
+final class GroupNode: AnimatorNode {
   
   // MARK: Properties
   let groupOutput: GroupOutputNode
@@ -118,6 +118,11 @@ class GroupNode: AnimatorNode {
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+  var isEnabled: Bool = true {
+    didSet {
+      container.isHidden = !isEnabled
+    }
+  }
   
   func performAdditionalLocalUpdates(frame: CGFloat, forceLocalUpdate: Bool) -> Bool {
     return rootNode?.updateContents(frame, forceLocalUpdate: forceLocalUpdate) ?? false

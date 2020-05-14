@@ -8,7 +8,7 @@
 import Foundation
 import QuartzCore
 
-class PolygonNodeProperties: NodePropertyMap, KeypathSearchable {
+final class PolygonNodeProperties: NodePropertyMap, KeypathSearchable {
   
   var keypathName: String
 
@@ -43,7 +43,7 @@ class PolygonNodeProperties: NodePropertyMap, KeypathSearchable {
   let points: NodeProperty<Vector1D>
 }
 
-class PolygonNode: AnimatorNode, PathNode {
+final class PolygonNode: AnimatorNode, PathNode {
   
   let properties: PolygonNodeProperties
   
@@ -65,6 +65,11 @@ class PolygonNode: AnimatorNode, PathNode {
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+  var isEnabled: Bool = true {
+    didSet{
+      self.pathOutput.isEnabled = self.isEnabled
+    }
+  }
   
   /// Magic number needed for constructing path.
   static let PolygonConstant: CGFloat = 0.25

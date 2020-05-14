@@ -8,7 +8,7 @@
 import Foundation
 
 /// A layer that holds text.
-class TextLayerModel: LayerModel {
+final class TextLayerModel: LayerModel {
 
   /// The text for the layer
   let text: KeyframeGroup<TextDocument>

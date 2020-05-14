@@ -8,7 +8,7 @@
 import Foundation
 
 /// A layer that holds vector shape objects.
-class ShapeLayerModel: LayerModel {
+final class ShapeLayerModel: LayerModel {
   
   /// A list of shape items.
   let items: [ShapeItem]

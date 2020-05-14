@@ -8,7 +8,7 @@
 import Foundation
 import CoreGraphics
 
-class RectNodeProperties: NodePropertyMap, KeypathSearchable {
+final class RectNodeProperties: NodePropertyMap, KeypathSearchable {
   
   var keypathName: String
 
@@ -38,7 +38,7 @@ class RectNodeProperties: NodePropertyMap, KeypathSearchable {
   
 }
 
-class RectangleNode: AnimatorNode, PathNode {
+final class RectangleNode: AnimatorNode, PathNode {
   
   let properties: RectNodeProperties
   
@@ -60,6 +60,11 @@ class RectangleNode: AnimatorNode, PathNode {
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+  var isEnabled: Bool = true {
+    didSet{
+      self.pathOutput.isEnabled = self.isEnabled
+    }
+  }
   
   func rebuildOutputs(frame: CGFloat) {
     

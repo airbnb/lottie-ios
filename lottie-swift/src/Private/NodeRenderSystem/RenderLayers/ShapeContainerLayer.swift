@@ -22,7 +22,8 @@ class ShapeContainerLayer: CALayer {
       "bounds" : NSNull(),
       "anchorPoint" : NSNull(),
       "transform" : NSNull(),
-      "opacity" : NSNull()
+      "opacity" : NSNull(),
+      "hidden" : NSNull(),
     ]
   }
   
@@ -39,7 +40,7 @@ class ShapeContainerLayer: CALayer {
   
   var renderScale: CGFloat = 1 {
     didSet {
-      renderLayers.forEach( { $0.renderScale = renderScale } )
+      updateRenderScale()
     }
   }
   
@@ -52,6 +53,7 @@ class ShapeContainerLayer: CALayer {
     if self.hasRenderUpdate(forFrame: forFrame) {
       self.rebuildContents(forFrame: forFrame)
     }
+    guard self.isHidden == false else { return }
     renderLayers.forEach { $0.markRenderUpdates(forFrame: forFrame) }
   }
   
@@ -61,6 +63,11 @@ class ShapeContainerLayer: CALayer {
   
   func rebuildContents(forFrame: CGFloat) {
     /// Override
+  }
+  
+  func updateRenderScale() {
+    self.contentsScale = self.renderScale
+    renderLayers.forEach( { $0.renderScale = renderScale } )
   }
   
 }

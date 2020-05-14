@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(OSX)
 import AppKit
 
 public enum LottieContentMode: Int {
@@ -90,3 +91,4 @@ public class LottieView: NSView {
   }
   
 }
+#endif

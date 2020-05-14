@@ -8,7 +8,7 @@
 import Foundation
 
 /// An item that define an ellipse shape
-class Stroke: ShapeItem {
+final class Stroke: ShapeItem {
   
   /// The opacity of the stroke
   let opacity: KeyframeGroup<Vector1D>

@@ -13,7 +13,7 @@ enum DashElementType: String, Codable {
   case gap = "g"
 }
 
-struct DashElement: Codable {
+final class DashElement: Codable {
   let type: DashElementType
   let value: KeyframeGroup<Vector1D>
   

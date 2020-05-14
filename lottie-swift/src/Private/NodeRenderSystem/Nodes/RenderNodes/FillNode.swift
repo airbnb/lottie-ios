@@ -8,7 +8,7 @@
 import Foundation
 import CoreGraphics
 
-class FillNodeProperties: NodePropertyMap, KeypathSearchable {
+final class FillNodeProperties: NodePropertyMap, KeypathSearchable {
   
   var keypathName: String
   
@@ -33,7 +33,7 @@ class FillNodeProperties: NodePropertyMap, KeypathSearchable {
   
 }
 
-class FillNode: AnimatorNode, RenderNode {
+final class FillNode: AnimatorNode, RenderNode {
   
   let fillRender: FillRenderer
   var renderer: NodeOutput & Renderable {
@@ -58,6 +58,11 @@ class FillNode: AnimatorNode, RenderNode {
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+  var isEnabled: Bool = true {
+    didSet {
+      fillRender.isEnabled = isEnabled
+    }
+  }
   
   func localUpdatesPermeateDownstream() -> Bool {
     return false

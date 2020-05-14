@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
 
 public extension UIColor {
@@ -17,3 +18,4 @@ public extension UIColor {
   }
   
 }
+#endif

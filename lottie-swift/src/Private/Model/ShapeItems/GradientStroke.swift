@@ -22,7 +22,7 @@ enum LineJoin: Int, Codable {
 }
 
 /// An item that define an ellipse shape
-class GradientStroke: ShapeItem {
+final class GradientStroke: ShapeItem {
   
   /// The opacity of the fill
   let opacity: KeyframeGroup<Vector1D>

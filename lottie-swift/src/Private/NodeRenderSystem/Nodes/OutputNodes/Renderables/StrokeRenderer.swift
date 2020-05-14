@@ -67,7 +67,7 @@ extension LineCap {
 // MARK: - Renderer
 
 /// A rendered that renders a stroke on a path.
-class StrokeRenderer: PassThroughOutputNode, Renderable {
+final class StrokeRenderer: PassThroughOutputNode, Renderable {
   
   var shouldRenderInContext: Bool = false
   
@@ -156,7 +156,7 @@ class StrokeRenderer: PassThroughOutputNode, Renderable {
     layer.lineDashPhase = dashPhase ?? 0
     layer.fillColor = nil
     if let dashPattern = dashLengths {
-      layer.lineDashPattern = dashPattern.map({ NSNumber(value: Double($0))})
+      layer.lineDashPattern = dashPattern.map({ NSNumber(value: Double($0)) })
     }
   }
 }

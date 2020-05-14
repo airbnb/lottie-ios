@@ -14,7 +14,7 @@ import QuartzCore
  This layer holds a single composition container and allows for animation of
  the currentFrame property.
  */
-class AnimationContainer: CALayer {
+final class AnimationContainer: CALayer {
   
   /// The animatable Current Frame Property
   @NSManaged var currentFrame: CGFloat
@@ -80,17 +80,38 @@ class AnimationContainer: CALayer {
     return nil
   }
   
-  var animationLayers: [CompositionLayer]
-  fileprivate let layerImageProvider: LayerImageProvider
+  func animatorNodes(for keypath: AnimationKeypath) -> [AnimatorNode]? {
+    var results = [AnimatorNode]()
+    for layer in animationLayers {
+      if let nodes = layer.animatorNodes(for: keypath) {
+        results.append(contentsOf: nodes)
+      }
+    }
+    if results.count == 0 {
+      return nil
+    }
+    return results
+  }
+
+  var textProvider: AnimationTextProvider {
+    get { return layerTextProvider.textProvider }
+    set { layerTextProvider.textProvider = newValue }
+  }
   
-  init(animation: Animation, imageProvider: AnimationImageProvider) {
+  var animationLayers: ContiguousArray<CompositionLayer>
+  fileprivate let layerImageProvider: LayerImageProvider
+  fileprivate let layerTextProvider: LayerTextProvider
+  
+  init(animation: Animation, imageProvider: AnimationImageProvider, textProvider: AnimationTextProvider) {
     self.layerImageProvider = LayerImageProvider(imageProvider: imageProvider, assets: animation.assetLibrary?.imageAssets)
+    self.layerTextProvider = LayerTextProvider(textProvider: textProvider)
     self.animationLayers = []
     super.init()
     bounds = animation.bounds
-    let layers = animation.layers.initializeCompositionLayers(assetLibrary: animation.assetLibrary, layerImageProvider: layerImageProvider, frameRate: CGFloat(animation.framerate))
+    let layers = animation.layers.initializeCompositionLayers(assetLibrary: animation.assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, frameRate: CGFloat(animation.framerate))
     
     var imageLayers = [ImageCompositionLayer]()
+    var textLayers = [TextCompositionLayer]()
     
     var mattedLayer: CompositionLayer? = nil
 
@@ -99,6 +120,9 @@ class AnimationContainer: CALayer {
       animationLayers.append(layer)
       if let imageLayer = layer as? ImageCompositionLayer {
         imageLayers.append(imageLayer)
+      }
+      if let textLayer = layer as? TextCompositionLayer {
+        textLayers.append(textLayer)
       }
       if let matte = mattedLayer {
         /// The previous layer requires this layer to be its matte
@@ -116,6 +140,8 @@ class AnimationContainer: CALayer {
     
     layerImageProvider.addImageLayers(imageLayers)
     layerImageProvider.reloadImages()
+    layerTextProvider.addTextLayers(textLayers)
+    layerTextProvider.reloadTexts()
     setNeedsDisplay()
   }
   
@@ -123,7 +149,7 @@ class AnimationContainer: CALayer {
   public override init(layer: Any) {
     self.animationLayers = []
     self.layerImageProvider = LayerImageProvider(imageProvider: BlankImageProvider(), assets: nil)
-
+    self.layerTextProvider = LayerTextProvider(textProvider: DefaultTextProvider())
     super.init(layer: layer)
     
     guard let animationLayer = layer as? AnimationContainer else { return }
@@ -156,6 +182,7 @@ class AnimationContainer: CALayer {
   }
   
   public override func display() {
+    guard Thread.isMainThread else { return }
     var newFrame: CGFloat = self.presentation()?.currentFrame ?? self.currentFrame
     if respectAnimationFrameRate {
       newFrame = floor(newFrame)

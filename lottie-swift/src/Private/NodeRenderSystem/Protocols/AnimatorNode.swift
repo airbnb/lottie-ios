@@ -10,6 +10,7 @@ import QuartzCore
 
 /**
  Defines the basic outputs of an animator node.
+ 
  */
 protocol NodeOutput {
   
@@ -20,6 +21,8 @@ protocol NodeOutput {
   func hasOutputUpdates(_ forFrame: CGFloat) -> Bool
   
   var outputPath: CGPath? { get }
+  
+  var isEnabled: Bool { get set }
 }
 
 /**
@@ -58,6 +61,7 @@ protocol AnimatorNode: class, KeypathSearchable {
   func rebuildOutputs(frame: CGFloat)
   
   /// Setters for marking current node state.
+  var isEnabled: Bool { get set }
   var hasLocalUpdates: Bool { get set }
   var hasUpstreamUpdates: Bool { get set }
   var lastUpdateFrame: CGFloat? { get set }
@@ -103,6 +107,12 @@ extension AnimatorNode {
   }
 
   @discardableResult func updateOutputs(_ frame: CGFloat, forceOutputUpdate: Bool) -> Bool {
+    guard isEnabled else {
+      // Disabled node, pass through.
+      lastUpdateFrame = frame
+      return parentNode?.updateOutputs(frame, forceOutputUpdate: forceOutputUpdate) ?? false
+    }
+    
     if forceOutputUpdate == false && lastUpdateFrame != nil && lastUpdateFrame! == frame {
       /// This node has already updated for this frame. Go ahead and return the results.
       return hasUpstreamUpdates || hasLocalUpdates
@@ -128,6 +138,11 @@ extension AnimatorNode {
   
   /// Rebuilds the content of this node, and upstream nodes if necessary.
   @discardableResult func updateContents(_ frame: CGFloat, forceLocalUpdate: Bool) -> Bool {
+    guard isEnabled else {
+      // Disabled node, pass through.
+      return parentNode?.updateContents(frame, forceLocalUpdate: forceLocalUpdate) ?? false
+    }
+    
     if forceLocalUpdate == false && lastUpdateFrame != nil && lastUpdateFrame! == frame {
       /// This node has already updated for this frame. Go ahead and return the results.
       return localUpdatesPermeateDownstream() ? hasUpstreamUpdates || hasLocalUpdates : hasUpstreamUpdates

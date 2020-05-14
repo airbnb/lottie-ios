@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PrecompAsset: Asset {
+final class PrecompAsset: Asset {
   
   /// Layers of the precomp
   let layers: [LayerModel]

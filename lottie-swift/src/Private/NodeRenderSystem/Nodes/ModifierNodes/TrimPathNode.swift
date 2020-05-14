@@ -8,7 +8,7 @@
 import Foundation
 import QuartzCore
 
-class TrimPathProperties: NodePropertyMap, KeypathSearchable {
+final class TrimPathProperties: NodePropertyMap, KeypathSearchable {
   
   init(trim: Trim) {
     self.keypathName = trim.name
@@ -34,7 +34,7 @@ class TrimPathProperties: NodePropertyMap, KeypathSearchable {
   let type: TrimType
 }
 
-class TrimPathNode: AnimatorNode {
+final class TrimPathNode: AnimatorNode {
   
   let properties: TrimPathProperties
   
@@ -57,6 +57,7 @@ class TrimPathNode: AnimatorNode {
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+  var isEnabled: Bool = true
   
   func forceUpstreamOutputUpdates() -> Bool {
     return hasLocalUpdates || hasUpstreamUpdates

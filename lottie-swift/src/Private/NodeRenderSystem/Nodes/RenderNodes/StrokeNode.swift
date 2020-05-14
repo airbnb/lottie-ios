@@ -9,7 +9,7 @@ import Foundation
 import QuartzCore
 // MARK: - Properties
 
-class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
+final class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
   
   init(stroke: Stroke) {
     self.keypathName = stroke.name
@@ -21,8 +21,8 @@ class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
     self.lineJoin = stroke.lineJoin
     
     if let dashes = stroke.dashPattern {
-      var dashPatterns = [[Keyframe<Vector1D>]]()
-      var dashPhase = [Keyframe<Vector1D>]()
+      var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>()
+      var dashPhase = ContiguousArray<Keyframe<Vector1D>>()
       for dash in dashes {
         if dash.type == .offset {
           dashPhase = dash.value.keyframes
@@ -70,7 +70,7 @@ class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
 // MARK: - Node
 
 /// Node that manages stroking a path
-class StrokeNode: AnimatorNode, RenderNode {
+final class StrokeNode: AnimatorNode, RenderNode {
   
   let strokeRender: StrokeRenderer
   var renderer: NodeOutput & Renderable {
@@ -95,6 +95,11 @@ class StrokeNode: AnimatorNode, RenderNode {
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+  var isEnabled: Bool = true {
+    didSet {
+      strokeRender.isEnabled = isEnabled
+    }
+  }
   
   func localUpdatesPermeateDownstream() -> Bool {
     return false
