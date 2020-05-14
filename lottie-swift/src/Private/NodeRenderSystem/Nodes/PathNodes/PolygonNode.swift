@@ -134,7 +134,7 @@ final class PolygonNode: AnimatorNode, PathNode {
     path.close()
     pathOutput.setPath(path, updateFrame: frame)
     
-    let t = CATransform3DMakeTranslation(0, 0, 0).rotated((0.0, properties.rotationX.value.cgFloatValue, properties.rotationY.value.cgFloatValue))
+    let t = CATransform3DMakeTranslation(0, 0, 0).rotated((properties.rotationX.value.cgFloatValue, properties.rotationY.value.cgFloatValue, 0.0))
     pathOutput.transform = CGAffineTransform(a: t.m11, b: t.m12, c: t.m21, d: t.m22, tx: t.m41, ty: t.m42)
   }
   

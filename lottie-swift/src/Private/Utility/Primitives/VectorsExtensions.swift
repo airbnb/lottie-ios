@@ -166,11 +166,11 @@ extension CGSize {
 
 extension CATransform3D {
   
-  func rotated(_ degrees: (CGFloat, CGFloat, CGFloat)) -> CATransform3D {
-    let xRotate = CATransform3DRotate(self, degrees.0.toRadians(), 0, 0, 1)
-    let yRotate = CATransform3DRotate(xRotate, degrees.1.toRadians(), 1, 0, 0)
-    let zRotate = CATransform3DRotate(yRotate, degrees.2.toRadians(), 0, 1, 0)
-    return zRotate
+  func rotated(_ degrees: (x: CGFloat, y: CGFloat, z: CGFloat)) -> CATransform3D {
+    let xRotated = CATransform3DRotate(self, degrees.x.toRadians(), 1, 0, 0)
+    let xyRotated = CATransform3DRotate(xRotated, degrees.y.toRadians(), 0, 1, 0)
+    let xyzRotated = CATransform3DRotate(xyRotated, degrees.z.toRadians(), 0, 0, 1)
+    return xyzRotated
   }
   
   func translated(_ translation: CGPoint) -> CATransform3D {
@@ -210,7 +210,7 @@ extension CATransform3D {
   static func makeTransform(anchor: CGPoint,
                             position: CGPoint,
                             scale: CGSize,
-                            rotation: (CGFloat, CGFloat, CGFloat),
+                            rotation: (x: CGFloat, y: CGFloat, z: CGFloat),
                             skew: CGFloat?,
                             skewAxis: CGFloat?) -> CATransform3D {
     if let skew = skew, let skewAxis = skewAxis {
