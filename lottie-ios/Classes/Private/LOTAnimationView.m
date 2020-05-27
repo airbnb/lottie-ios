@@ -14,6 +14,9 @@
 #import "LOTAnimationCache.h"
 #import "LOTCompositionContainer.h"
 
+#define kCompContainerTransformKey @"compContainerTransformKey"
+#define kCompContainerPositionKey @"compContainerPositionKey"
+
 static NSString * const kCompContainerAnimationKey = @"play";
 
 @implementation LOTAnimationView {
@@ -779,15 +782,66 @@ static NSString * const kCompContainerAnimationKey = @"play";
   } else {
     xform = CATransform3DIdentity;
   }
+    
+  // Support use LOTAnimationView with UIView:animate
+  NSArray *animKey = self.layer.animationKeys;
+  CAAnimation *animation;
+  if (animKey && animKey.count > 0) {
+    animation = [self.layer animationForKey:animKey[0]];
+  }
+  
+  if (animation) {
+    [_compContainer removeAnimationForKey:kCompContainerPositionKey];
+    [_compContainer removeAnimationForKey:kCompContainerTransformKey];
 
-  [CATransaction begin];
-  [CATransaction setDisableActions:YES];
-  _compContainer.transform = CATransform3DIdentity;
-  _compContainer.bounds = _sceneModel.compBounds;
-  _compContainer.viewportBounds = _sceneModel.compBounds;
-  _compContainer.transform = xform;
-  _compContainer.position = centerPoint;
-  [CATransaction commit];
+    id positionAnimCopy = animation.copy;
+    CABasicAnimation *positionAnimation;
+    if (positionAnimCopy && [positionAnimCopy isKindOfClass:CABasicAnimation.class]) {
+      positionAnimation = (CABasicAnimation *)positionAnimCopy;
+    } else {
+      positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
+    }
+    positionAnimation.keyPath = @"position";
+    positionAnimation.additive = NO;
+    positionAnimation.fromValue = [NSValue valueWithCGPoint:_compContainer.presentationLayer.position];
+    positionAnimation.toValue = [NSValue valueWithCGPoint:centerPoint];
+    positionAnimation.removedOnCompletion = YES;
+    
+    id xformAnimCopy = animation.copy;
+    CABasicAnimation *xformAnimation;
+    if (xformAnimCopy && [xformAnimCopy isKindOfClass:CABasicAnimation.class]) {
+      xformAnimation = (CABasicAnimation *)xformAnimCopy;
+    } else {
+      xformAnimCopy = [CABasicAnimation animationWithKeyPath:@"transform"];
+    }
+    xformAnimation.keyPath = @"transform";
+    xformAnimation.additive = NO;
+    xformAnimation.fromValue = [NSValue valueWithCATransform3D:_compContainer.presentationLayer.transform];
+    xformAnimation.toValue = [NSValue valueWithCATransform3D:xform];
+    xformAnimation.removedOnCompletion = YES;
+    
+    _compContainer.transform = CATransform3DIdentity;
+    _compContainer.bounds = _sceneModel.compBounds;
+    _compContainer.viewportBounds = _sceneModel.compBounds;
+    
+    _compContainer.position = centerPoint;
+    _compContainer.transform = xform;
+    _compContainer.anchorPoint = self.layer.anchorPoint;
+    
+    [_compContainer addAnimation:positionAnimation forKey:kCompContainerPositionKey];
+    [_compContainer addAnimation:xformAnimation forKey:kCompContainerTransformKey];
+
+  } else {
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    CATransaction.animationDuration = 0;
+    _compContainer.transform = CATransform3DIdentity;
+    _compContainer.bounds = _sceneModel.compBounds;
+    _compContainer.viewportBounds = _sceneModel.compBounds;
+    _compContainer.transform = xform;
+    _compContainer.position = centerPoint;
+    [CATransaction commit];
+  }
 }
 
 # pragma mark - CAAnimationDelegate
