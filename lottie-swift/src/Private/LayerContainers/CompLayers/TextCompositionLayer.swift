@@ -321,7 +321,7 @@ class TextCompositionLayer: CompositionLayer {
       textAnchor = CGPoint(x: size.width * 0.5, y: baselinePosition)
     }
     textAnchor.y += CGFloat(text.baseline ?? 0.0)
-    let anchor = textAnchor + anchorPoint.pointValue
+    let anchor = textAnchor + anchorPoint.pointValue.flatPoint
     let normalizedAnchor = CGPoint(x: anchor.x.remap(fromLow: 0, fromHigh: size.width, toLow: 0, toHigh: 1),
                                    y: anchor.y.remap(fromLow: 0, fromHigh: size.height, toLow: 0, toHigh: 1))
     
@@ -332,7 +332,7 @@ class TextCompositionLayer: CompositionLayer {
         layer.fontSize = CGFloat(text.fontSize)
         layer.font = resultFont
         layer.foregroundColor = fillColor
-        if let position = text.textFramePosition?.pointValue {
+        if let position = text.textFramePosition?.pointValue.flatPoint {
             layer.frame = CGRect(origin: position, size: size)
             layer.position.y -= CGFloat(text.fontSize * 0.2)
         } else {

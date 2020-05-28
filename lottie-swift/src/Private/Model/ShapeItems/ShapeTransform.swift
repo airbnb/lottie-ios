@@ -46,12 +46,16 @@ class ShapeTransform: ShapeItem, Transformable {
     case opacity = "o"
     case skew = "sk"
     case skewAxis = "sa"
+    case orientation = "or"
   }
   
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: ShapeTransform.CodingKeys.self)
+//    print(container)
     self.anchorPoint = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .anchorPoint) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
     self.position = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .position) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+//    print("\(self.anchorPoint.keyframes.first?.value.x) \(self.anchorPoint.keyframes.first?.value.y) \(self.anchorPoint.keyframes.first?.value.z)")
+//    print("\(self.position?.keyframes.first?.value.x) \(self.position?.keyframes.first?.value.y) \(self.position?.keyframes.first?.value.z)")
     self.scale = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .scale) ?? KeyframeGroup(Vector3D(x: Double(100), y: 100, z: 100))
     let rotationZ = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotationZ)
     self.rotationZ = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation) ?? rotationZ ?? KeyframeGroup(Vector1D(0))

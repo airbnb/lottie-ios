@@ -87,7 +87,7 @@ class DelayedEvolutionEffect {
             let delay = (self.delay?.value(frame: frame) as? Vector1D)?.cgFloatValue ?? 2.0
             let subFrame = frame - CGFloat(index) * delay
             let slider = (self.value?.value(frame: subFrame) as? Vector1D)?.cgFloatValue ?? 100.0
-            let position = (self.position?.value(frame: subFrame) as? Vector3D)?.pointValue ?? CGPoint(x:0.0, y:15.0)
+            let position = (self.position?.value(frame: subFrame) as? Vector3D)?.pointValue ?? Point3D(x: 0.0, y: 15.0, z: 0.0)
             let opacity = (self.opacity?.value(frame: subFrame) as? Vector1D)?.cgFloatValue ?? 0.0
             let fraction = 1.0 - slider / 100.0
             
@@ -133,9 +133,15 @@ class RadialFastBlurEffect {
         }
         
         if #available(OSX 10.10, *) {
-            layer.filters = [CIFilter(name: "CIZoomBlur", parameters: [kCIInputCenterKey: CIVector(cgPoint: center),"inputAmount": amount]) as Any,
+            layer.filters = [CIFilter(name: "CIZoomBlur", parameters: [kCIInputCenterKey: center.ciVector,"inputAmount": amount]) as Any,
                              CIFilter(name: "CIBoxBlur", parameters: ["inputRadius": amount / 5]) as Any]
         }
+    }
+}
+
+extension Point3D {
+    var ciVector: CIVector {
+        CIVector(x: x, y: y, z: z)
     }
 }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreGraphics
+import QuartzCore
 
 class RectNodeProperties: NodePropertyMap, KeypathSearchable {
   
@@ -183,6 +184,10 @@ class RectangleNode: AnimatorNode, PathNode {
     }
     bezierPath.close()
     pathOutput.setPath(bezierPath, updateFrame: frame)
+    
+    print("HUU \(properties.position.value.pointValue.z)")
+    let t = CATransform3DMakeTranslation(0, 0, properties.position.value.pointValue.z)
+    pathOutput.transform = CGAffineTransform(a: t.m11, b: t.m12, c: t.m21, d: t.m22, tx: t.m41, ty: t.m42)
   }
   
 }

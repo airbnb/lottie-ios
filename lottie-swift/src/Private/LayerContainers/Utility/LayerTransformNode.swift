@@ -103,12 +103,12 @@ class LayerTransformNode: AnimatorNode {
   func rebuildOutputs(frame: CGFloat) {
     opacity = Float(transformProperties.opacity.value.cgFloatValue) * 0.01
     
-    let position: CGPoint
+    let position: Point3D
     if let point = transformProperties.position?.value.pointValue {
       position = point
     } else if let xPos = transformProperties.positionX?.value.cgFloatValue,
       let yPos = transformProperties.positionY?.value.cgFloatValue {
-      position = CGPoint(x: xPos, y: yPos)
+      position = Point3D(x: xPos, y: yPos, z: 0)
     } else {
       position = .zero
     }
@@ -117,6 +117,8 @@ class LayerTransformNode: AnimatorNode {
     transformProperties.rotationX.update(frame: frame)
     transformProperties.rotationY.update(frame: frame)
     
+    print("BLLL \(position.z)")
+    
     localTransform = CATransform3D.makeTransform(anchor: transformProperties.anchor.value.pointValue,
                                                  position: position,
                                                  scale: transformProperties.scale.value.sizeValue,
@@ -124,6 +126,7 @@ class LayerTransformNode: AnimatorNode {
                                                             transformProperties.rotationZ.value.cgFloatValue),
                                                  skew: nil,
                                                  skewAxis: nil)
+    localTransform = CATransform3DTranslate(localTransform, 0, 0, position.z)
     
     if let parentNode = parentNode as? LayerTransformNode {
       globalTransform = CATransform3DConcat(localTransform, parentNode.globalTransform)

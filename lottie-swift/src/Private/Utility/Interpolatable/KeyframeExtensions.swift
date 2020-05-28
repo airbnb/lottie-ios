@@ -37,7 +37,7 @@ extension Keyframe {
   
   /// Interpolates the keyframes' by a progress from 0-1
   func interpolate(_ to: Keyframe, progress: CGFloat) -> T {
-    return value.interpolateTo(to.value, amount: progress, spatialOutTangent: spatialOutTangent?.pointValue, spatialInTangent: to.spatialInTangent?.pointValue)
+    return value.interpolateTo(to.value, amount: progress, spatialOutTangent: spatialOutTangent?.pointValue.flatPoint, spatialInTangent: to.spatialInTangent?.pointValue.flatPoint)
   }
   
 }

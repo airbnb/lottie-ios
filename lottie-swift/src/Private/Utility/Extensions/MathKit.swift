@@ -536,3 +536,41 @@ extension CGPoint: Interpolatable {
     return CGPoint(x: left.x + right, y: left.y)
   }
 }
+
+extension Point3D: Interpolatable {
+    func interpolateTo(_ to: Point3D, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> Point3D {
+        return Point3D(x: x.interpolateTo(to.x, amount: amount, spatialOutTangent: spatialOutTangent, spatialInTangent: spatialInTangent),
+        y: y.interpolateTo(to.y, amount: amount, spatialOutTangent: spatialOutTangent, spatialInTangent: spatialInTangent),
+        z: z.interpolateTo(to.z, amount: amount, spatialOutTangent: spatialOutTangent, spatialInTangent: spatialInTangent))
+    }
+    
+    static func * (lhs: Point3D, rhs: CGFloat) -> Point3D {
+      return Point3D(x: lhs.x * CGFloat(rhs), y: lhs.y * CGFloat(rhs), z: lhs.z * CGFloat(rhs))
+    }
+    
+    static func +(left: Point3D, right: Point3D) -> Point3D {
+        return Point3D(x: left.x + right.x, y: left.y + right.y, z: left.z + right.z)
+    }
+    
+    /// Operator convenience to subtract points with -
+    static func -(left: Point3D, right: Point3D) -> Point3D {
+      return Point3D(x: left.x - right.x, y: left.y - right.y, z: left.z - right.z)
+    }
+    
+    func interpolate(_ to: Point3D, amount: CGFloat) -> Point3D {
+        Point3D(x: x.interpolateTo(to.x, amount: amount),
+                y: y.interpolateTo(to.y, amount: amount),
+                z: z.interpolateTo(to.z, amount: amount))
+    }
+    
+    var isZero: Bool {
+        return self == .zero
+    }
+    
+    func distanceTo(_ a: Point3D) -> CGFloat {
+      let xDist = a.x - x
+      let yDist = a.y - y
+      let zDist = a.z - z
+      return CGFloat(sqrt((xDist * xDist) + (yDist * yDist) + (zDist * zDist)))
+    }
+}

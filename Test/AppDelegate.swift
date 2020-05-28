@@ -29,10 +29,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var animationView: AnimationView?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let animationView = AnimationView(name: "lumis")
+        let animationView = AnimationView(name: "data")
         animationView.frame = view.bounds
         animationView.play()
         view.addSubview(animationView)
+        animationView.animationSpeed = 0.1
         
         self.animationView = animationView
     }

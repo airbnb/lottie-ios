@@ -79,7 +79,7 @@ class ShapeCompositionLayer: CompositionLayer {
                     if position.pointValue == .zero {
                         origin = self.contentsLayer.frame.origin
                     } else {
-                        origin = position.pointValue
+                        origin = position.pointValue.flatPoint
                     }
                     
                     fakeLayer.frame = CGRect(origin: origin, size: size.sizeValue)
@@ -101,6 +101,7 @@ class ShapeCompositionLayer: CompositionLayer {
         if let position = position.value(frame: frame) as? Vector3D,
            let scale = scale.value(frame: frame) as? Vector3D {
             var frame = fakeLayer.frame
+//                print("\(position.pointValue.z)")
             frame.origin.x = position.pointValue.x
             frame.origin.y = position.pointValue.y
             frame.size.width *= CGFloat(scale.x / 100.0)
