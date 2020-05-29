@@ -34,7 +34,9 @@ class AnimationContainer: CALayer {
   
   var renderScale: CGFloat = 1 {
     didSet {
-      animationLayers.forEach({ $0.renderScale = renderScale })
+        for var layer in animationLayers {
+            layer.renderScale = renderScale
+        }
     }
   }
   
@@ -42,6 +44,7 @@ class AnimationContainer: CALayer {
     
   func updateDependencies() {
     layersWithDependencies.forEach { layer in
+        guard let layer = layer as? (CALayer & Composition) else { return }
       layer.layerDependencies.forEach { dependency in
         dependency.layerAnimationRemoved(layer: layer.contentsLayer)
      }
@@ -134,8 +137,8 @@ class AnimationContainer: CALayer {
       set { layerVideoProvider.videoProvider = newValue }
     }
   
-  var animationLayers: [CompositionLayer]
-  fileprivate var layersWithDependencies = Set<CompositionLayer>()
+  var animationLayers: [CALayer & Composition]
+  fileprivate var layersWithDependencies = Set<CALayer>()
     
   fileprivate let layerImageProvider: LayerImageProvider
   fileprivate let layerTextProvider: LayerTextProvider
@@ -154,7 +157,7 @@ class AnimationContainer: CALayer {
     var textLayers = [TextCompositionLayer]()
     var videoLayers = [VideoCompositionLayer]()
     
-    var mattedLayer: CompositionLayer? = nil
+    var mattedLayer: (CALayer & Composition)? = nil
 
     for layer in layers.reversed() {
       layer.bounds = bounds
@@ -168,7 +171,7 @@ class AnimationContainer: CALayer {
       if let videoLayer = layer as? VideoCompositionLayer {
         videoLayers.append(videoLayer)
       }
-      if let matte = mattedLayer {
+      if var matte = mattedLayer {
         /// The previous layer requires this layer to be its matte
         matte.matteLayer = layer
         mattedLayer = nil

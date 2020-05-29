@@ -8,15 +8,17 @@
 import Foundation
 import QuartzCore
 
-class PreCompositionLayer: CompositionLayer {
+class PreCompositionLayer: TransformCompositionLayer {
   
   let frameRate: CGFloat
   let remappingNode: NodeProperty<Vector1D>?
-  fileprivate var animationLayers: [CompositionLayer]
+  fileprivate var animationLayers: [CALayer & Composition]
   
   override var renderScale: CGFloat {
     didSet {
-      animationLayers.forEach( { $0.renderScale = renderScale } )
+        for var animationLayer in animationLayers {
+            animationLayer.renderScale = renderScale
+        }
     }
   }
   
@@ -35,7 +37,6 @@ class PreCompositionLayer: CompositionLayer {
     }
     self.frameRate = frameRate
     super.init(layer: precomp, size: CGSize(width: precomp.width, height: precomp.height))
-    masksToBounds = true
     bounds = CGRect(origin: .zero, size: CGSize(width: precomp.width, height: precomp.height))
     
     let layers = asset.layers.initializeCompositionLayers(assetLibrary: assetLibrary, layerImageProvider: layerImageProvider, layerTextProvider: layerTextProvider, layerVideoProvider: layerVideoProvider, frameRate: frameRate, fonts: nil)
@@ -43,7 +44,7 @@ class PreCompositionLayer: CompositionLayer {
     var imageLayers = [ImageCompositionLayer]()
     var textLayers = [TextCompositionLayer]()
     var videoLayers = [VideoCompositionLayer]()
-    var mattedLayer: CompositionLayer? = nil
+    var mattedLayer: (CALayer & Composition)? = nil
     
     for layer in layers.reversed() {
       layer.bounds = bounds
@@ -57,7 +58,7 @@ class PreCompositionLayer: CompositionLayer {
       if let videoLayer = layer as? VideoCompositionLayer {
         videoLayers.append(videoLayer)
       }
-      if let matte = mattedLayer {
+      if var matte = mattedLayer {
         /// The previous layer requires this layer to be its matte
         matte.matteLayer = layer
         mattedLayer = nil

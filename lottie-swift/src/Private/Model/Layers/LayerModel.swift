@@ -115,6 +115,8 @@ class LayerModel: Codable {
   let matte: MatteType?
   
   let hidden: Bool
+    
+  var flatHierarchy = true
 	
   let effects: [Effect]?
   

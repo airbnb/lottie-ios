@@ -29,7 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var animationView: AnimationView?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let animationView = AnimationView(name: "data")
+        let animationView = AnimationView(name: "mobilePromo")
         animationView.frame = view.bounds
         animationView.play()
         view.addSubview(animationView)

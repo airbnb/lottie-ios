@@ -15,7 +15,8 @@ import CoreImage
 class ControlEffect: Effect {
     
     private var evolutionEffect: DelayedEvolutionEffect?
-    private var fastBlurEffect: RadialFastBlurEffect?
+    private var fastBlurEffect: FastBlurEffect?
+    private var radialFastBlurEffect: RadialFastBlurEffect?
     private var centerVerticallyEffect: CenteredVerticallyEffect?
     
     override func setUp(layer: CALayer) {
@@ -26,8 +27,13 @@ class ControlEffect: Effect {
             }
         } else if name == "CC Radial Fast Blur" {
             guard let shapeLayer = layer as? ShapeCompositionLayer else { return }
+            if radialFastBlurEffect == nil {
+                radialFastBlurEffect = RadialFastBlurEffect(layer: shapeLayer, effect: self)
+            }
+        } else if name == "CC Fast Blur" || name == "Fast Blur (Legacy)" {
+            guard let shapeLayer = layer as? ShapeCompositionLayer else { return }
             if fastBlurEffect == nil {
-                fastBlurEffect = RadialFastBlurEffect(layer: shapeLayer, effect: self)
+                fastBlurEffect = FastBlurEffect(layer: shapeLayer, effect: self)
             }
         } else if name == "CenteredVertically" {
             guard let textLayer = layer as? TextCompositionLayer else { return }
@@ -43,6 +49,8 @@ class ControlEffect: Effect {
         if name == "Evolution_(%)_In" {
             evolutionEffect?.apply(frame: frame)
         } else if name == "CC Radial Fast Blur" {
+            radialFastBlurEffect?.apply(frame: frame)
+        } else if name == "CC Fast Blur" || name == "Fast Blur (Legacy)" {
             fastBlurEffect?.apply(frame: frame)
         } else if name == "CenteredVertically" {
             centerVerticallyEffect?.layer.textLayer.centeredVertically = true
@@ -133,7 +141,7 @@ class RadialFastBlurEffect {
         }
         
         if #available(OSX 10.10, *) {
-            layer.filters = [CIFilter(name: "CIZoomBlur", parameters: [kCIInputCenterKey: center.ciVector,"inputAmount": amount]) as Any,
+            layer.contentsLayer.filters = [CIFilter(name: "CIZoomBlur", parameters: [kCIInputCenterKey: center.ciVector, "inputAmount": amount]) as Any,
                              CIFilter(name: "CIBoxBlur", parameters: ["inputRadius": amount / 5]) as Any]
         }
     }

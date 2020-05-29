@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreGraphics
+import QuartzCore
 
 class ShapeNodeProperties: NodePropertyMap, KeypathSearchable {
   
@@ -56,6 +57,9 @@ class ShapeNode: AnimatorNode, PathNode {
   
   func rebuildOutputs(frame: CGFloat) {
     pathOutput.setPath(properties.path.value, updateFrame: frame)
+    
+//    let t = CATransform3DMakeTranslation(properties.position.value.pointValue.x, properties.position.value.pointValue.y, properties.position.value.pointValue.z)
+//    pathOutput.transform = CGAffineTransform(a: t.m11, b: t.m12, c: t.m21, d: t.m22, tx: t.m41, ty: t.m42)
   }
   
 }

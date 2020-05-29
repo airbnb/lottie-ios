@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreGraphics
+import QuartzCore
 
 extension Array where Element == LayerModel {
   
@@ -14,12 +15,19 @@ extension Array where Element == LayerModel {
                                    layerImageProvider: LayerImageProvider,
                                    layerTextProvider: LayerTextProvider,
                                    layerVideoProvider: LayerVideoProvider,
-                                   frameRate: CGFloat, fonts: FontList?) -> [CompositionLayer] {
-    var compositionLayers = [CompositionLayer]()
-    var layerMap = [Int : CompositionLayer]()
+                                   frameRate: CGFloat, fonts: FontList?) -> [CALayer & Composition] {
+    var compositionLayers = [CALayer & Composition]()
+    var layerMap = [Int : CALayer & Composition]()
     
     /// Organize the assets into a dictionary of [ID : ImageAsset]
     var childLayers = [LayerModel]()
+    
+    for layer in self {
+        if layer.parent != 0,
+           (layer.transform.position?.keyframes.first { $0.value.z != 0 }) != nil {
+            self.first { $0.index == layer.parent }?.flatHierarchy = false
+        }
+    }
     
     for layer in self {
       if layer.hidden == true {
@@ -27,9 +35,15 @@ extension Array where Element == LayerModel {
         compositionLayers.append(genericLayer)
         layerMap[layer.index] = genericLayer
       } else if let shapeLayer = layer as? ShapeLayerModel {
-        let shapeContainer = ShapeCompositionLayer(shapeLayer: shapeLayer)
-        compositionLayers.append(shapeContainer)
-        layerMap[layer.index] = shapeContainer
+        if (shapeLayer.transform.position?.keyframes.first { $0.value.z != 0 }) == nil {
+            let shapeContainer = ShapeCompositionLayer(shapeLayer: shapeLayer)
+            compositionLayers.append(shapeContainer)
+            layerMap[layer.index] = shapeContainer
+        } else {
+            let shapeContainer = ShapeTransformCompositionLayer(shapeLayer: shapeLayer)
+            compositionLayers.append(shapeContainer)
+            layerMap[layer.index] = shapeContainer
+        }
       } else if let solidLayer = layer as? SolidLayerModel {
         let solidContainer = SolidCompositionLayer(solid: solidLayer)
         compositionLayers.append(solidContainer)
@@ -37,6 +51,7 @@ extension Array where Element == LayerModel {
       } else if let precompLayer = layer as? PreCompLayerModel,
         let assetLibrary = assetLibrary,
         let precompAsset = assetLibrary.precompAssets[precompLayer.referenceID] {
+        precompLayer.flatHierarchy = false
         let precompContainer = PreCompositionLayer(precomp: precompLayer,
                                                    asset: precompAsset,
                                                    layerImageProvider: layerImageProvider,

@@ -109,9 +109,9 @@ extension KeypathSearchable {
     return nil
   }
   
-  func compositionLayer(for keyPath: AnimationKeypath) -> CompositionLayer? {
+  func compositionLayer(for keyPath: AnimationKeypath) -> (CALayer & Composition)? {
     if keyPath.nextKeypath == nil, let layerKey = keyPath.currentKey, layerKey.equalsKeypath(keypathName) {
-      return self as? CompositionLayer
+      return self as? (CALayer & Composition)
     }
 
     guard let nextKeypath = keyPath.popKey(keypathName) else {

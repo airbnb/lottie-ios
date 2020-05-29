@@ -30,6 +30,8 @@ extension EffectType: ClassFamily {
             return ControlEffect.self
         case .blur:
             return BlurEffect.self
+        case .fill:
+            return FillEffect.self
 		default:
 			return Effect.self
 		}

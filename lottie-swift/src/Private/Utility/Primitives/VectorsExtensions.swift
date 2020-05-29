@@ -212,8 +212,8 @@ extension CATransform3D {
     return CATransform3DTranslate(self, translation.x, translation.y, 0)
   }
   
-  func scaled(_ scale: CGSize) -> CATransform3D {
-    return CATransform3DScale(self, scale.width, scale.height, 1)
+  func scaled(_ scale: Point3D) -> CATransform3D {
+    return CATransform3DScale(self, scale.x, scale.y, -scale.z)
   }
   
   func skewed(skew: CGFloat, skewAxis: CGFloat) -> CATransform3D {
@@ -244,7 +244,7 @@ extension CATransform3D {
   
   static func makeTransform(anchor: Point3D,
                             position: Point3D,
-                            scale: CGSize,
+                            scale: Point3D,
                             rotation: (x: CGFloat, y: CGFloat, z: CGFloat),
                             skew: CGFloat?,
                             skewAxis: CGFloat?) -> CATransform3D {

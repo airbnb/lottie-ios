@@ -639,6 +639,11 @@
 		B9CC814623954D7D005FBFAE /* LayerVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC814323954D7A005FBFAE /* LayerVideoProvider.swift */; };
 		B9CC814723954D7E005FBFAE /* LayerVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC814323954D7A005FBFAE /* LayerVideoProvider.swift */; };
 		B9CC814823954D7E005FBFAE /* LayerVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC814323954D7A005FBFAE /* LayerVideoProvider.swift */; };
+		B9DA4ECB2480FF2E004FD2C3 /* FillEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA4ECA2480FF2E004FD2C3 /* FillEffect.swift */; };
+		B9DA4ECC2481061A004FD2C3 /* FillEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA4ECA2480FF2E004FD2C3 /* FillEffect.swift */; };
+		B9DA4ECF24814A3B004FD2C3 /* PromoQR.png in Resources */ = {isa = PBXBuildFile; fileRef = B9DA4ECD24814A3B004FD2C3 /* PromoQR.png */; };
+		B9DA4ED024814A3B004FD2C3 /* MobileScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B9DA4ECE24814A3B004FD2C3 /* MobileScreen.png */; };
+		B9DA4ED224814A44004FD2C3 /* mobilePromo.json in Resources */ = {isa = PBXBuildFile; fileRef = B9DA4ED124814A44004FD2C3 /* mobilePromo.json */; };
 		BD25D5BB235778280046BA8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD25D5BA235778280046BA8A /* AppDelegate.swift */; };
 		BD25D5BD2357782C0046BA8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD25D5BC2357782C0046BA8A /* Assets.xcassets */; };
 		BD25D5C02357782C0046BA8A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD25D5BE2357782C0046BA8A /* MainMenu.xib */; };
@@ -890,6 +895,10 @@
 		486E87A0220B78BF007CD915 /* AnimationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
 		B9CC813D23954D21005FBFAE /* AnimationVideoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationVideoProvider.swift; sourceTree = "<group>"; };
 		B9CC814323954D7A005FBFAE /* LayerVideoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerVideoProvider.swift; sourceTree = "<group>"; };
+		B9DA4ECA2480FF2E004FD2C3 /* FillEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillEffect.swift; sourceTree = "<group>"; };
+		B9DA4ECD24814A3B004FD2C3 /* PromoQR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PromoQR.png; path = Test/Animations/PromoQR.png; sourceTree = SOURCE_ROOT; };
+		B9DA4ECE24814A3B004FD2C3 /* MobileScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MobileScreen.png; path = Test/Animations/MobileScreen.png; sourceTree = SOURCE_ROOT; };
+		B9DA4ED124814A44004FD2C3 /* mobilePromo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mobilePromo.json; sourceTree = "<group>"; };
 		BD25D5B8235778280046BA8A /* Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD25D5BA235778280046BA8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD25D5BC2357782C0046BA8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1519,6 +1528,7 @@
 				BD4FE9092327A24E0011B14B /* DropShadowEffect.swift */,
 				BD972B26235DDCB40097B566 /* ControlEffect.swift */,
 				BD44DB6123730195002B818C /* BlurEffect.swift */,
+				B9DA4ECA2480FF2E004FD2C3 /* FillEffect.swift */,
 			);
 			path = Effects;
 			sourceTree = "<group>";
@@ -1526,6 +1536,8 @@
 		BDCD2A402358E92B00793A20 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B9DA4ECE24814A3B004FD2C3 /* MobileScreen.png */,
+				B9DA4ECD24814A3B004FD2C3 /* PromoQR.png */,
 				BDCD2A27235869DB00793A20 /* img_0.png */,
 				BDCD2A1A235869DA00793A20 /* img_1.png */,
 				BDCD2A23235869DB00793A20 /* img_2.png */,
@@ -1560,6 +1572,7 @@
 		BDCD2A422358E96100793A20 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				B9DA4ED124814A44004FD2C3 /* mobilePromo.json */,
 				BD25D5C62357783D0046BA8A /* data.json */,
 				BDCD2A17235869CD00793A20 /* lumis.json */,
 			);
@@ -1795,9 +1808,11 @@
 				BDCD2A3D2358CD9600793A20 /* shutterstock_1020302005.mov in Resources */,
 				BDCD2A35235869DC00793A20 /* img_10.png in Resources */,
 				BDCD2A2C235869DC00793A20 /* img_11.png in Resources */,
+				B9DA4ED224814A44004FD2C3 /* mobilePromo.json in Resources */,
 				BDCD2A2A235869DC00793A20 /* img_12.png in Resources */,
 				BDCD2A30235869DC00793A20 /* img_6.png in Resources */,
 				BD25D5C72357783D0046BA8A /* data.json in Resources */,
+				B9DA4ED024814A3B004FD2C3 /* MobileScreen.png in Resources */,
 				BDCD2A2D235869DC00793A20 /* img_8.png in Resources */,
 				BDCD2A28235869DC00793A20 /* img_9.png in Resources */,
 				BDCD2A32235869DC00793A20 /* img_2.png in Resources */,
@@ -1809,6 +1824,7 @@
 				BD25D5C02357782C0046BA8A /* MainMenu.xib in Resources */,
 				BDCD2A0A235781D000793A20 /* Gandalf.mp4 in Resources */,
 				BDCD2A2E235869DC00793A20 /* img_5.png in Resources */,
+				B9DA4ECF24814A3B004FD2C3 /* PromoQR.png in Resources */,
 				BDCD2A3B2358CD9600793A20 /* GettyImages-994145022.mov in Resources */,
 				BDCD2A3C2358CD9600793A20 /* shutterstock_1015166806.mov in Resources */,
 			);
@@ -1949,6 +1965,7 @@
 				486E880E220B78D2007CD915 /* MathKit.swift in Sources */,
 				486E880F220B78D2007CD915 /* StringExtensions.swift in Sources */,
 				486E8810220B78D2007CD915 /* BezierPath.swift in Sources */,
+				B9DA4ECB2480FF2E004FD2C3 /* FillEffect.swift in Sources */,
 				486E8811220B78D2007CD915 /* CompoundBezierPath.swift in Sources */,
 				486E8812220B78D2007CD915 /* ColorExtension.swift in Sources */,
 				486E8813220B78D2007CD915 /* PathElement.swift in Sources */,
@@ -2238,6 +2255,7 @@
 				4866744322249C4E00258C00 /* TextAnimatorNode.swift in Sources */,
 				486E8902220B78F4007CD915 /* CurveVertex.swift in Sources */,
 				486E8903220B78F4007CD915 /* VectorsExtensions.swift in Sources */,
+				B9DA4ECC2481061A004FD2C3 /* FillEffect.swift in Sources */,
 				486E8904220B78F4007CD915 /* InterpolatableExtensions.swift in Sources */,
 				BDCD2A0E2357883C00793A20 /* VideoLayerModel.swift in Sources */,
 				486E8905220B78F4007CD915 /* Interpolatable.swift in Sources */,
