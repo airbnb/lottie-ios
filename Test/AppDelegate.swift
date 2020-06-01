@@ -33,7 +33,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         animationView.frame = view.bounds
         animationView.play()
         view.addSubview(animationView)
-        animationView.animationSpeed = 0.1
         
         self.animationView = animationView
     }
