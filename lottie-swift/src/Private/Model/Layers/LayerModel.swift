@@ -116,7 +116,7 @@ class LayerModel: Codable {
   
   let hidden: Bool
     
-  var flatHierarchy = true
+  var flat: Bool { (transform.position?.keyframes.first { $0.value.z != 0 }) == nil }
 	
   let effects: [Effect]?
   

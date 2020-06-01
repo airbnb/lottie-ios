@@ -83,11 +83,7 @@ class CompositionLayer: CALayer, Composition {
     self.keypathName = layer.name
     self.effects = layer.effects
     self.childKeypaths = [transformNode.transformProperties]
-    if layer.flatHierarchy {
-        contentsLayer = CALayer()
-    } else {
-        contentsLayer = CATransformLayer()
-    }
+    contentsLayer = CALayer()
     
     super.init()
     self.effects?.forEach { $0.setUp(layer: self) }
@@ -196,7 +192,26 @@ class TransformCompositionLayer: CATransformLayer, Composition {
   
   let transformNode: LayerTransformNode
   
-  let contentsLayer: CALayer
+    var contentsLayer: CALayer {
+        didSet {
+            contentsLayer.anchorPoint = .zero
+            contentsLayer.bounds = oldValue.bounds
+            contentsLayer.actions = [
+              "opacity" : NSNull(),
+              "transform" : NSNull(),
+              "bounds" : NSNull(),
+              "anchorPoint" : NSNull(),
+              "sublayerTransform" : NSNull(),
+              "hidden" : NSNull()
+            ]
+            oldValue.removeFromSuperlayer()
+            addSublayer(contentsLayer)
+            
+            if let maskLayer = maskLayer {
+              contentsLayer.mask = maskLayer
+            }
+        }
+    }
   
   let maskLayer: MaskContainerLayer?
   
@@ -242,11 +257,8 @@ class TransformCompositionLayer: CATransformLayer, Composition {
     self.keypathName = layer.name
     self.effects = layer.effects
     self.childKeypaths = [transformNode.transformProperties]
-    if layer.flatHierarchy {
-        contentsLayer = CALayer()
-    } else {
-        contentsLayer = CATransformLayer()
-    }
+    
+    contentsLayer = CALayer()
     
     super.init()
     self.effects?.forEach { $0.setUp(layer: self) }

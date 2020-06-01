@@ -23,19 +23,12 @@ extension Array where Element == LayerModel {
     var childLayers = [LayerModel]()
     
     for layer in self {
-        if layer.parent != 0,
-           (layer.transform.position?.keyframes.first { $0.value.z != 0 }) != nil {
-            self.first { $0.index == layer.parent }?.flatHierarchy = false
-        }
-    }
-    
-    for layer in self {
       if layer.hidden == true {
         let genericLayer = NullCompositionLayer(layer: layer)
         compositionLayers.append(genericLayer)
         layerMap[layer.index] = genericLayer
       } else if let shapeLayer = layer as? ShapeLayerModel {
-        if (shapeLayer.transform.position?.keyframes.first { $0.value.z != 0 }) == nil {
+        if shapeLayer.flat {
             let shapeContainer = ShapeCompositionLayer(shapeLayer: shapeLayer)
             compositionLayers.append(shapeContainer)
             layerMap[layer.index] = shapeContainer
@@ -51,16 +44,27 @@ extension Array where Element == LayerModel {
       } else if let precompLayer = layer as? PreCompLayerModel,
         let assetLibrary = assetLibrary,
         let precompAsset = assetLibrary.precompAssets[precompLayer.referenceID] {
-        precompLayer.flatHierarchy = false
-        let precompContainer = PreCompositionLayer(precomp: precompLayer,
-                                                   asset: precompAsset,
-                                                   layerImageProvider: layerImageProvider,
-                                                   layerTextProvider: layerTextProvider,
-                                                   layerVideoProvider: layerVideoProvider,
-                                                   assetLibrary: assetLibrary,
-                                                   frameRate: frameRate)
-        compositionLayers.append(precompContainer)
-        layerMap[layer.index] = precompContainer
+        if precompAsset.flat && precompLayer.flat  {
+            let precompContainer = PreCompositionLayer(precomp: precompLayer,
+                                                       asset: precompAsset,
+                                                       layerImageProvider: layerImageProvider,
+                                                       layerTextProvider: layerTextProvider,
+                                                       layerVideoProvider: layerVideoProvider,
+                                                       assetLibrary: assetLibrary,
+                                                       frameRate: frameRate)
+            compositionLayers.append(precompContainer)
+            layerMap[layer.index] = precompContainer
+        } else {
+            let precompContainer = TransformPreCompositionLayer(precomp: precompLayer,
+                                                       asset: precompAsset,
+                                                       layerImageProvider: layerImageProvider,
+                                                       layerTextProvider: layerTextProvider,
+                                                       layerVideoProvider: layerVideoProvider,
+                                                       assetLibrary: assetLibrary,
+                                                       frameRate: frameRate)
+            compositionLayers.append(precompContainer)
+            layerMap[layer.index] = precompContainer
+        }
       } else if let imageLayer = layer as? ImageLayerModel,
         let assetLibrary = assetLibrary,
         let imageAsset = assetLibrary.imageAssets[imageLayer.referenceID] {
