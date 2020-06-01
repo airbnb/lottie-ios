@@ -8,7 +8,7 @@
 import Foundation
 import QuartzCore
 
-protocol ShapeComposition {
+protocol ShapeComposition: Composition {
     var renderContainer: ShapeContainerLayer? { get }
 }
 

@@ -26,12 +26,12 @@ class ControlEffect: Effect {
                 evolutionEffect = DelayedEvolutionEffect(layer: textLayer, effect: self)
             }
         } else if name == "CC Radial Fast Blur" {
-            guard let shapeLayer = layer as? ShapeCompositionLayer else { return }
+            guard let shapeLayer = layer as? (CALayer & ShapeComposition) else { return }
             if radialFastBlurEffect == nil {
                 radialFastBlurEffect = RadialFastBlurEffect(layer: shapeLayer, effect: self)
             }
         } else if name == "CC Fast Blur" || name == "Fast Blur (Legacy)" {
-            guard let shapeLayer = layer as? ShapeCompositionLayer else { return }
+            guard let shapeLayer = layer as? (CALayer & ShapeComposition) else { return }
             if fastBlurEffect == nil {
                 fastBlurEffect = FastBlurEffect(layer: shapeLayer, effect: self)
             }
@@ -111,14 +111,14 @@ class DelayedEvolutionEffect {
 }
 
 class RadialFastBlurEffect {
-    let layer: ShapeCompositionLayer
+    let layer: CALayer & ShapeComposition
     let replicator: CAReplicatorLayer
     
     let center: KeyframeInterpolator<Vector3D>?
     var amount: KeyframeInterpolator<Vector1D>?
     var zoom: BoolEffectValue?
     
-    init(layer: ShapeCompositionLayer, effect: Effect) {
+    init(layer: CALayer & ShapeComposition, effect: Effect) {
         let replicator = CAReplicatorLayer()
         replicator.frame = layer.frame
         replicator.instanceCount = 5

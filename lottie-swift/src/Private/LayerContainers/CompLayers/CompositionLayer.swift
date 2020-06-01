@@ -51,15 +51,10 @@ class CompositionLayer: CALayer, Composition {
   
   var matteLayer: (CALayer & Composition)? {
     didSet {
-      if let matte = matteLayer {
-        if let type = matteType, type == .invert {
-          mask = InvertedMatteLayer(inputMatte: matte)
-        } else {
-          mask = matte
-        }
-      } else {
-        mask = nil
-      }
+        guard let matte = matteLayer else { mask = nil; return }
+        guard let type = matteType, type == .invert else { mask = matte; return }
+          
+        mask = InvertedMatteLayer(inputMatte: matte)
     }
   }
   
@@ -225,15 +220,10 @@ class TransformCompositionLayer: CATransformLayer, Composition {
   
   var matteLayer: (CALayer & Composition)? {
     didSet {
-      if let matte = matteLayer {
-        if let type = matteType, type == .invert {
-          mask = InvertedMatteLayer(inputMatte: matte)
-        } else {
-          mask = matte
-        }
-      } else {
-        mask = nil
-      }
+      guard let matte = matteLayer else { mask = nil; return }
+      guard let type = matteType, type == .invert else { mask = matte; return }
+        
+      mask = InvertedMatteLayer(inputMatte: matte)
     }
   }
   

@@ -519,12 +519,12 @@ extension CGPoint: Interpolatable {
   }
   
   /// Operator convenience to add points with +
-  static func +(left: CGPoint, right: CGPoint) -> CGPoint {
+  static func + (left: CGPoint, right: CGPoint) -> CGPoint {
     return left.add(right)
   }
   
   /// Operator convenience to subtract points with -
-  static func -(left: CGPoint, right: CGPoint) -> CGPoint {
+  static func - (left: CGPoint, right: CGPoint) -> CGPoint {
     return left.subtract(right)
   }
   
@@ -548,12 +548,12 @@ extension Point3D: Interpolatable {
       return Point3D(x: lhs.x * CGFloat(rhs), y: lhs.y * CGFloat(rhs), z: lhs.z * CGFloat(rhs))
     }
     
-    static func +(left: Point3D, right: Point3D) -> Point3D {
+    static func + (left: Point3D, right: Point3D) -> Point3D {
         return Point3D(x: left.x + right.x, y: left.y + right.y, z: left.z + right.z)
     }
     
     /// Operator convenience to subtract points with -
-    static func -(left: Point3D, right: Point3D) -> Point3D {
+    static func - (left: Point3D, right: Point3D) -> Point3D {
       return Point3D(x: left.x - right.x, y: left.y - right.y, z: left.z - right.z)
     }
     

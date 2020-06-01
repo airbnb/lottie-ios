@@ -15,18 +15,12 @@ import CoreImage
 class BlurEffect: Effect {
     
     private var gaussianBlurEffect: GaussianBlurEffect?
-    private var fastBlurEffect: FastBlurEffect?
     
     override func setUp(layer: CALayer) {
         if name == "Gaussian Blur" {
             guard let shapeLayer = layer as? (CALayer & Composition) else { return }
             if gaussianBlurEffect == nil {
                 gaussianBlurEffect = GaussianBlurEffect(layer: shapeLayer, effect: self)
-            }
-        } else if name == "Fast Blur (Legacy)" || name == "Fast Blur" {
-            guard let shapeLayer = layer as? (CALayer & Composition) else { return }
-            if fastBlurEffect == nil {
-                fastBlurEffect = FastBlurEffect(layer: shapeLayer, effect: self)
             }
         } else {
             super.setUp(layer: layer)
@@ -36,8 +30,6 @@ class BlurEffect: Effect {
     override func apply(layer: CALayer, frame: CGFloat) {
         if name == "Gaussian Blur" {
             gaussianBlurEffect?.apply(frame: frame)
-        } else if name == "Fast Blur (Legacy)" || name == "Fast Blur" {
-            fastBlurEffect?.apply(frame: frame)
         } else {
             super.apply(layer: layer, frame: frame)
         }
