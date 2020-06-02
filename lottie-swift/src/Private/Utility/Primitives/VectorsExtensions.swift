@@ -142,9 +142,40 @@ extension Vector3D: Codable {
   
 }
 
+public struct Point3D: Equatable {
+    public var x: CGFloat
+    public var y: CGFloat
+    public var z: CGFloat
+    
+    init(_ x: Double, _ y: Double, _ z: Double) {
+        self.x = CGFloat(x)
+        self.y = CGFloat(y)
+        self.z = CGFloat(z)
+    }
+    
+    init(x: CGFloat, y: CGFloat, z: CGFloat) {
+        self.x = x
+        self.y = y
+        self.z = z
+    }
+}
+
+extension Point3D {
+  public static var zero: Self { Point3D(x: 0, y: 0, z: 0) }
+    
+  var vector3dValue: Vector3D {
+    return Vector3D(x: x, y: y, z: z)
+  }
+    
+  var flatPoint: CGPoint {
+    CGPoint(x: x, y: y)
+  }
+}
+
 public extension Vector3D {
-  var pointValue: CGPoint {
-    return CGPoint(x: x, y: y)
+    
+  var pointValue: Point3D {
+    return Point3D(x, y, z)
   }
   
   var sizeValue: CGSize {
@@ -173,12 +204,16 @@ extension CATransform3D {
     return xyzRotated
   }
   
+  func translated(_ translation: Point3D) -> CATransform3D {
+    return CATransform3DTranslate(self, translation.x, translation.y, translation.z)
+  }
+    
   func translated(_ translation: CGPoint) -> CATransform3D {
     return CATransform3DTranslate(self, translation.x, translation.y, 0)
   }
   
-  func scaled(_ scale: CGSize) -> CATransform3D {
-    return CATransform3DScale(self, scale.width, scale.height, 1)
+  func scaled(_ scale: Point3D) -> CATransform3D {
+    return CATransform3DScale(self, scale.x, scale.y, -scale.z)
   }
   
   func skewed(skew: CGFloat, skewAxis: CGFloat) -> CATransform3D {
@@ -207,15 +242,15 @@ extension CATransform3D {
     return CATransform3DConcat(transform3, CATransform3DConcat(transform2, transform1))
   }
   
-  static func makeTransform(anchor: CGPoint,
-                            position: CGPoint,
-                            scale: CGSize,
+  static func makeTransform(anchor: Point3D,
+                            position: Point3D,
+                            scale: Point3D,
                             rotation: (x: CGFloat, y: CGFloat, z: CGFloat),
                             skew: CGFloat?,
                             skewAxis: CGFloat?) -> CATransform3D {
     if let skew = skew, let skewAxis = skewAxis {
-      return CATransform3DMakeTranslation(position.x, position.y, 0).rotated(rotation).skewed(skew: -skew, skewAxis: skewAxis).scaled(scale * 0.01).translated(anchor * -1)
+        return CATransform3DMakeTranslation(position.x, position.y, position.z).rotated(rotation).skewed(skew: -skew, skewAxis: skewAxis).scaled(scale * 0.01).translated(anchor * -1)
     }
-    return CATransform3DMakeTranslation(position.x, position.y, 0).rotated(rotation).scaled(scale * 0.01).translated(anchor * -1)
+    return CATransform3DMakeTranslation(position.x, position.y, position.z).rotated(rotation).scaled(scale * 0.01).translated(anchor * -1)
   }
 }

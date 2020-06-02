@@ -19,6 +19,7 @@ class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
     self.rotationY = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.rotationY.keyframes))
     self.rotationZ = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.rotationZ.keyframes))
     self.opacity = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.opacity.keyframes))
+    self.orientation = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.orientation.keyframes))
     
     var propertyMap: [String: AnyNodeProperty] = [
       "Anchor Point" : anchor,
@@ -26,10 +27,17 @@ class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
       "RotationX" : rotationX,
       "RotationY" : rotationY,
       "RotationZ" : rotationZ,
-      "Opacity" : opacity
+      "Opacity" : opacity,
+      "Orientation" : orientation
     ]
     
-    if let positionKeyframesX = transform.positionX?.keyframes,
+    if let positionKeyframes = transform.position?.keyframes {
+      let position: NodeProperty<Vector3D> = NodeProperty(provider: KeyframeInterpolator(keyframes: positionKeyframes))
+      propertyMap["Position"] = position
+      self.position = position
+      self.positionX = nil
+      self.positionY = nil
+    } else if let positionKeyframesX = transform.positionX?.keyframes,
       let positionKeyframesY = transform.positionY?.keyframes {
       let xPosition: NodeProperty<Vector1D> = NodeProperty(provider: KeyframeInterpolator(keyframes: positionKeyframesX))
       let yPosition: NodeProperty<Vector1D> = NodeProperty(provider: KeyframeInterpolator(keyframes: positionKeyframesY))
@@ -38,12 +46,6 @@ class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
       self.positionX = xPosition
       self.positionY = yPosition
       self.position = nil
-    } else if let positionKeyframes = transform.position?.keyframes {
-      let position: NodeProperty<Vector3D> = NodeProperty(provider: KeyframeInterpolator(keyframes: positionKeyframes))
-      propertyMap["Position"] = position
-      self.position = position
-      self.positionX = nil
-      self.positionY = nil
     } else {
       self.position = nil
       self.positionY = nil
@@ -72,6 +74,7 @@ class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
   let positionX: NodeProperty<Vector1D>?
   let positionY: NodeProperty<Vector1D>?
   let opacity: NodeProperty<Vector1D>
+  let orientation: NodeProperty<Vector3D>
   
 }
 
@@ -103,12 +106,12 @@ class LayerTransformNode: AnimatorNode {
   func rebuildOutputs(frame: CGFloat) {
     opacity = Float(transformProperties.opacity.value.cgFloatValue) * 0.01
     
-    let position: CGPoint
+    let position: Point3D
     if let point = transformProperties.position?.value.pointValue {
       position = point
     } else if let xPos = transformProperties.positionX?.value.cgFloatValue,
       let yPos = transformProperties.positionY?.value.cgFloatValue {
-      position = CGPoint(x: xPos, y: yPos)
+      position = Point3D(x: xPos, y: yPos, z: 0)
     } else {
       position = .zero
     }
@@ -117,11 +120,18 @@ class LayerTransformNode: AnimatorNode {
     transformProperties.rotationX.update(frame: frame)
     transformProperties.rotationY.update(frame: frame)
     
+    let orientation = transformProperties.orientation
+    orientation.update(frame: frame)
+    
+    let rotationX = transformProperties.rotationX.value.cgFloatValue + CGFloat(orientation.value.x)
+    let rotationY = transformProperties.rotationY.value.cgFloatValue + CGFloat(orientation.value.y)
+    let rotationZ = transformProperties.rotationZ.value.cgFloatValue + CGFloat(orientation.value.z)
+    
     localTransform = CATransform3D.makeTransform(anchor: transformProperties.anchor.value.pointValue,
                                                  position: position,
-                                                 scale: transformProperties.scale.value.sizeValue,
-                                                 rotation: (transformProperties.rotationX.value.cgFloatValue, transformProperties.rotationY.value.cgFloatValue,
-                                                            transformProperties.rotationZ.value.cgFloatValue),
+                                                 scale: transformProperties.scale.value.pointValue,
+                                                 rotation: (rotationX, rotationY,
+                                                            rotationZ),
                                                  skew: nil,
                                                  skewAxis: nil)
     

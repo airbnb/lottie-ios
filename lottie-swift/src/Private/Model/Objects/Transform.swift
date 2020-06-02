@@ -25,6 +25,9 @@ protocol Transformable {
     /// The opacity of the transform.
     var opacity: KeyframeGroup<Vector1D> { get }
     
+    /// Orientation in 3D, like rotation, but static
+    var orientation: KeyframeGroup<Vector3D> { get }
+    
     /// One dimensional rotations
     var rotationZ: KeyframeGroup<Vector1D> { get }
     var rotationX: KeyframeGroup<Vector1D> { get }
@@ -51,6 +54,8 @@ class Transform: Codable, Transformable {
   
   /// The opacity of the transform.
   let opacity: KeyframeGroup<Vector1D>
+    
+  let orientation: KeyframeGroup<Vector3D>
   
   let rotationZ: KeyframeGroup<Vector1D>
   let rotationX: KeyframeGroup<Vector1D>
@@ -70,6 +75,7 @@ class Transform: Codable, Transformable {
     case rotationX = "rx"
     case rotationY = "ry"
     case opacity = "o"
+    case orientation = "or"
   }
 
   enum PositionCodingKeys : String, CodingKey {
@@ -88,6 +94,7 @@ class Transform: Codable, Transformable {
     
     // AnchorPoint
     self.anchorPoint = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .anchorPoint) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+    self.orientation = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .orientation) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
     
     // Position
     if container.contains(.positionX), container.contains(.positionY) {
@@ -97,7 +104,7 @@ class Transform: Codable, Transformable {
       self.position = nil
     } else if let positionKeyframes = try? container.decode(KeyframeGroup<Vector3D>.self, forKey: .position) {
       // Position dimensions are a single keyframe group.
-      self.position = positionKeyframes
+      self.position = positionKeyframes.flipLast()
       self.positionX = nil
       self.positionY = nil
     } else if let positionContainer = try? container.nestedContainer(keyedBy: PositionCodingKeys.self, forKey: .position),

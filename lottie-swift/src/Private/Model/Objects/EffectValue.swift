@@ -14,6 +14,7 @@ public enum EffectValueType: Int, Codable {
     case volumeValue = 3
 	
 	case boolValue = 7
+    case boolValue2 = 10
 }
 
 extension EffectValueType: ClassFamily {
@@ -27,7 +28,7 @@ extension EffectValueType: ClassFamily {
             return ArrayEffectValue.self
         case .volumeValue:
             return InterpolatableEffectValue<Vector3D>.self
-		case .boolValue:
+		case .boolValue, .boolValue2:
 			return BoolEffectValue.self
 		}
 	}

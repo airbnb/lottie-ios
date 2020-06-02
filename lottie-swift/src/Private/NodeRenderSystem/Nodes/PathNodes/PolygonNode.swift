@@ -85,7 +85,7 @@ class PolygonNode: AnimatorNode, PathNode {
     let outerRoundedness = properties.outerRoundedness.value.cgFloatValue * 0.01
     let numberOfPoints = properties.points.value.cgFloatValue
     let rotation = properties.rotationZ.value.cgFloatValue
-    let position = properties.position.value.pointValue
+    let position = properties.position.value.pointValue.flatPoint
   
     var currentAngle = (rotation - 90).toRadians()
     let anglePerPoint = ((2 * CGFloat.pi) / numberOfPoints)
@@ -134,7 +134,7 @@ class PolygonNode: AnimatorNode, PathNode {
     path.close()
     pathOutput.setPath(path, updateFrame: frame)
     
-    let t = CATransform3DMakeTranslation(0, 0, 0).rotated((properties.rotationX.value.cgFloatValue, properties.rotationY.value.cgFloatValue, 0.0))
+    let t = CATransform3DMakeTranslation(0, 0, properties.position.value.pointValue.z).rotated((properties.rotationX.value.cgFloatValue, properties.rotationY.value.cgFloatValue, 0.0))
     pathOutput.transform = CGAffineTransform(a: t.m11, b: t.m12, c: t.m21, d: t.m22, tx: t.m41, ty: t.m42)
   }
   

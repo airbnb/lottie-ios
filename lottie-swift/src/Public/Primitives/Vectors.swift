@@ -33,5 +33,11 @@ public struct Vector3D {
     self.y = y
     self.z = z
   }
+    
+    public init(_ point: Point3D) {
+        x = Double(point.x)
+        y = Double(point.y)
+        z = Double(point.z)
+    }
   
 }

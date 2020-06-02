@@ -15,7 +15,8 @@ import CoreImage
 class ControlEffect: Effect {
     
     private var evolutionEffect: DelayedEvolutionEffect?
-    private var fastBlurEffect: RadialFastBlurEffect?
+    private var fastBlurEffect: FastBlurEffect?
+    private var radialFastBlurEffect: RadialFastBlurEffect?
     private var centerVerticallyEffect: CenteredVerticallyEffect?
     
     override func setUp(layer: CALayer) {
@@ -25,9 +26,14 @@ class ControlEffect: Effect {
                 evolutionEffect = DelayedEvolutionEffect(layer: textLayer, effect: self)
             }
         } else if name == "CC Radial Fast Blur" {
-            guard let shapeLayer = layer as? ShapeCompositionLayer else { return }
+            guard let shapeLayer = layer as? (CALayer & ShapeComposition) else { return }
+            if radialFastBlurEffect == nil {
+                radialFastBlurEffect = RadialFastBlurEffect(layer: shapeLayer, effect: self)
+            }
+        } else if name == "CC Fast Blur" || name == "Fast Blur (Legacy)" {
+            guard let shapeLayer = layer as? (CALayer & ShapeComposition) else { return }
             if fastBlurEffect == nil {
-                fastBlurEffect = RadialFastBlurEffect(layer: shapeLayer, effect: self)
+                fastBlurEffect = FastBlurEffect(layer: shapeLayer, effect: self)
             }
         } else if name == "CenteredVertically" {
             guard let textLayer = layer as? TextCompositionLayer else { return }
@@ -43,6 +49,8 @@ class ControlEffect: Effect {
         if name == "Evolution_(%)_In" {
             evolutionEffect?.apply(frame: frame)
         } else if name == "CC Radial Fast Blur" {
+            radialFastBlurEffect?.apply(frame: frame)
+        } else if name == "CC Fast Blur" || name == "Fast Blur (Legacy)" {
             fastBlurEffect?.apply(frame: frame)
         } else if name == "CenteredVertically" {
             centerVerticallyEffect?.layer.textLayer.centeredVertically = true
@@ -87,7 +95,7 @@ class DelayedEvolutionEffect {
             let delay = (self.delay?.value(frame: frame) as? Vector1D)?.cgFloatValue ?? 2.0
             let subFrame = frame - CGFloat(index) * delay
             let slider = (self.value?.value(frame: subFrame) as? Vector1D)?.cgFloatValue ?? 100.0
-            let position = (self.position?.value(frame: subFrame) as? Vector3D)?.pointValue ?? CGPoint(x:0.0, y:15.0)
+            let position = (self.position?.value(frame: subFrame) as? Vector3D)?.pointValue ?? Point3D(x: 0.0, y: 15.0, z: 0.0)
             let opacity = (self.opacity?.value(frame: subFrame) as? Vector1D)?.cgFloatValue ?? 0.0
             let fraction = 1.0 - slider / 100.0
             
@@ -103,14 +111,14 @@ class DelayedEvolutionEffect {
 }
 
 class RadialFastBlurEffect {
-    let layer: ShapeCompositionLayer
+    let layer: CALayer & ShapeComposition
     let replicator: CAReplicatorLayer
     
     let center: KeyframeInterpolator<Vector3D>?
     var amount: KeyframeInterpolator<Vector1D>?
     var zoom: BoolEffectValue?
     
-    init(layer: ShapeCompositionLayer, effect: Effect) {
+    init(layer: CALayer & ShapeComposition, effect: Effect) {
         let replicator = CAReplicatorLayer()
         replicator.frame = layer.frame
         replicator.instanceCount = 5
@@ -133,9 +141,15 @@ class RadialFastBlurEffect {
         }
         
         if #available(OSX 10.10, *) {
-            layer.filters = [CIFilter(name: "CIZoomBlur", parameters: [kCIInputCenterKey: CIVector(cgPoint: center),"inputAmount": amount]) as Any,
+            layer.contentsLayer.filters = [CIFilter(name: "CIZoomBlur", parameters: [kCIInputCenterKey: center.ciVector, "inputAmount": amount]) as Any,
                              CIFilter(name: "CIBoxBlur", parameters: ["inputRadius": amount / 5]) as Any]
         }
+    }
+}
+
+extension Point3D {
+    var ciVector: CIVector {
+        CIVector(x: x, y: y, z: z)
     }
 }
 

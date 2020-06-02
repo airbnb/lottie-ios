@@ -26,8 +26,8 @@ struct CurveVertex {
   /// Initializes a curve point with relative values
   init(point: CGPoint, inTangentRelative: CGPoint, outTangentRelative: CGPoint) {
     self.point = point
-    self.inTangent = point.add(inTangentRelative)
-    self.outTangent = point.add(outTangentRelative)
+    self.inTangent = point + inTangentRelative
+    self.outTangent = point + outTangentRelative
   }
   
   /// Initializes a curve point with absolute values
@@ -38,11 +38,11 @@ struct CurveVertex {
   }
   
   var inTangentRelative: CGPoint {
-    return inTangent.subtract(point)
+    return inTangent - point
   }
   
   var outTangentRelative: CGPoint {
-    return outTangent.subtract(point)
+    return outTangent - point
   }
   
   func reversed() -> CurveVertex {
@@ -51,6 +51,10 @@ struct CurveVertex {
   
   func translated(_ translation: CGPoint) -> CurveVertex {
     return CurveVertex(point: point + translation, inTangent: inTangent + translation, outTangent: outTangent + translation)
+  }
+    
+  func translated(_ translation: Point3D) -> CurveVertex {
+    return CurveVertex(point: point + translation.flatPoint, inTangent: inTangent + translation.flatPoint, outTangent: outTangent + translation.flatPoint)
   }
   
   /**
