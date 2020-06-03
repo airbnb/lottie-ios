@@ -50,7 +50,7 @@ class Transform: Codable, Transformable {
   let positionY: KeyframeGroup<Vector1D>?
   
   /// The scale of the transform
-  let scale: KeyframeGroup<Vector3D>
+  var scale: KeyframeGroup<Vector3D>
   
   /// The opacity of the transform.
   let opacity: KeyframeGroup<Vector1D>

@@ -539,8 +539,9 @@ extension CGPoint: Interpolatable {
 
 extension Point3D: Interpolatable {
     func interpolateTo(_ to: Point3D, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> Point3D {
-        return Point3D(x: x.interpolateTo(to.x, amount: amount, spatialOutTangent: spatialOutTangent, spatialInTangent: spatialInTangent),
-        y: y.interpolateTo(to.y, amount: amount, spatialOutTangent: spatialOutTangent, spatialInTangent: spatialInTangent),
+        let flatPoint = self.flatPoint.interpolateTo(to.flatPoint, amount: amount, spatialOutTangent: spatialOutTangent, spatialInTangent: spatialInTangent)
+        return Point3D(x: flatPoint.x,
+                       y: flatPoint.y,
         z: z.interpolateTo(to.z, amount: amount, spatialOutTangent: spatialOutTangent, spatialInTangent: spatialInTangent))
     }
     

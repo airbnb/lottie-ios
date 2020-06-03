@@ -36,6 +36,8 @@ class PreCompLayerModel: LayerModel {
     self.width = try container.decode(Double.self, forKey: .width)
     self.height = try container.decode(Double.self, forKey: .height)
     try super.init(from: decoder)
+    
+    self.transform.scale = transform.scale.flipLast()
   }
   
   override func encode(to encoder: Encoder) throws {
