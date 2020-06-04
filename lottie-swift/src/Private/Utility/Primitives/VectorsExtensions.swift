@@ -213,7 +213,7 @@ extension CATransform3D {
   }
   
   func scaled(_ scale: Point3D) -> CATransform3D {
-    return CATransform3DScale(self, scale.x, scale.y, -scale.z)
+    return CATransform3DScale(self, scale.x, scale.y, (scale.z == 0 ? 1 : scale.z))
   }
   
   func skewed(skew: CGFloat, skewAxis: CGFloat) -> CATransform3D {

@@ -97,7 +97,7 @@ class LayerModel: Codable {
   let startTime: Double
   
   /// The transform of the layer
-  let transform: Transform
+  var transform: Transform
   
   /// The index of the parent layer, if applicable.
   let parent: Int?
