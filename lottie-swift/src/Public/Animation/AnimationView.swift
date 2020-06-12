@@ -110,6 +110,11 @@ final public class AnimationView: LottieView {
     return animationLayer?.animation(forKey: activeAnimationName) != nil
   }
   
+  /// Returns `true` if the animation will start playing when this view is added to a window.
+  public var isAnimationQueued: Bool {
+    return animationContext != nil && waitingToPlayAnimation
+  }
+  
   /// Sets the loop behavior for `play` calls. Defaults to `playOnce`
   public var loopMode: LottieLoopMode = .playOnce {
     didSet {
