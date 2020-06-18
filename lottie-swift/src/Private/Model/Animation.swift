@@ -100,14 +100,20 @@ public class Animation: Codable {
     self.width = try container.decode(Int.self, forKey: .width)
     self.height = try container.decode(Int.self, forKey: .height)
     self.layers = try container.decode([LayerModel].self, ofFamily: LayerType.self, forKey: .layers)
+    self.glyphs = try container.decodeIfPresent([Glyph].self, forKey: .glyphs)
+    self.fonts = try container.decodeIfPresent(FontList.self, forKey: .fonts)
+    self.assetLibrary = try container.decodeIfPresent(AssetLibrary.self, forKey: .assetLibrary)
     if type == .type3d {
         for layer in layers where layer is PreCompLayerModel {
             layer.transform.scale = layer.transform.scale.flipLast()
         }
+        
+        for asset in assetLibrary?.precompAssets ?? [:] {
+            for layer in asset.value.layers where layer is PreCompLayerModel {
+                layer.transform.scale = layer.transform.scale.flipLast()
+            }
+        }
     }
-    self.glyphs = try container.decodeIfPresent([Glyph].self, forKey: .glyphs)
-    self.fonts = try container.decodeIfPresent(FontList.self, forKey: .fonts)
-    self.assetLibrary = try container.decodeIfPresent(AssetLibrary.self, forKey: .assetLibrary)
     self.markers = try container.decodeIfPresent([Marker].self, forKey: .markers)
     
     if let markers = markers {
