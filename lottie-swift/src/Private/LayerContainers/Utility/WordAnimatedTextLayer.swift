@@ -165,6 +165,8 @@ class LineAnimatedTextLayer : DisabledTextLayer, PartedTextLayer {
         if let clipLayer = self.clipLayer {
             visibleFrame = convert(clipLayer.bounds, from: clipLayer)
         }
+        visibleFrame.size.height += fontSize
+        visibleFrame.origin.y -= fontSize
         
         ctx.textMatrix = .identity
         lines.enumerated().forEach { index, line in
