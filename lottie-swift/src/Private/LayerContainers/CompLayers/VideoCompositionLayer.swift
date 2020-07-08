@@ -10,6 +10,9 @@ import Foundation
 import CoreGraphics
 import QuartzCore
 import AVFoundation
+#if os(iOS)
+import UIKit
+#endif
 
 class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
     private var playerLayer: AVPlayerLayer?
@@ -27,6 +30,9 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
     deinit {
         if let endVideoObserver = endVideoObserver {
             NotificationCenter.default.removeObserver(endVideoObserver)
+        }
+        if let appResumeObserver = appResumeObserver {
+            NotificationCenter.default.removeObserver(appResumeObserver)
         }
     }
     
@@ -63,6 +69,7 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
     }
     
     private func startUpdatingPlayer() {
+        #if os(macOS)
         if #available(macOS 10.13, *) {
             if #available(macOS 10.14, *) {
                 DispatchQueue.global(priority: .default).async {
@@ -76,6 +83,9 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
                 self.updatePlayer()
             }
         }
+        #else
+        self.updatePlayer()
+        #endif
     }
     
     private func updatePlayer() {
@@ -103,8 +113,9 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
                 }
                 #if os(macOS)
                 playerLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
-                #else
+                #elseif os(iOS)
                 playerLayer.videoGravity = .resizeAspectFill
+                setupAppResumeHandler(for: player)
                 #endif
                 
                 if let oldPlayerLayer = self.playerLayer {
@@ -155,4 +166,21 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
         
         playerLayer?.opacity = 1.0
     }
+    
+    #if os(iOS)
+    // Method below is required to fix an issue when video freezes on app resume
+    private var appResumeObserver: Any?
+    private func setupAppResumeHandler(for player: AVPlayer) {
+        if let observer = appResumeObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+        appResumeObserver = NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification,
+                                                                   object: UIApplication.shared,
+                                                                  queue: .main) { [weak self] _ in
+            if self?.playing == true {
+                player.play()
+            }
+        }
+    }
+    #endif
 }
