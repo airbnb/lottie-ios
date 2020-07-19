@@ -67,6 +67,13 @@ public class BundleImageProvider: AnimationImageProvider {
       }
     }
     
+    if imagePath == nil {
+        guard let image = UIImage(named: asset.name, in: bundle, compatibleWith: nil) else {
+            return nil
+        }
+        return image.cgImage
+    }
+    
     guard let foundPath = imagePath, let image = NSImage(contentsOfFile: foundPath) else {
       /// No image found.
       return nil
