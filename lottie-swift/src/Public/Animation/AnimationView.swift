@@ -117,6 +117,13 @@ final public class AnimationView: LottieView {
     }
   }
   
+  /// Sets delay between `loop` behavior
+  public var loopDelay: CGFloat = 0 {
+    didSet {
+      updateInFlightAnimation()
+    }
+  }
+      
   /**
    When `true` the animation view will rasterize its contents when not animating.
    Rasterizing will improve performance of static animations.
@@ -945,34 +952,38 @@ final public class AnimationView: LottieView {
       Double(startFrame - min(playFrom, playTo)) / framerate :
       Double(max(playFrom, playTo) - startFrame) / framerate
     
+    let animationGroup : CAAnimationGroup = CAAnimationGroup()
+    animationGroup.duration = TimeInterval(duration + loopDelay)
     let layerAnimation = CABasicAnimation(keyPath: "currentFrame")
     layerAnimation.fromValue = playFrom
     layerAnimation.toValue = playTo
-    layerAnimation.speed = Float(animationSpeed)
     layerAnimation.duration = TimeInterval(duration)
+    layerAnimation.speed = Float(animationSpeed)
     layerAnimation.fillMode = CAMediaTimingFillMode.both
+    animationGroup.animations = [layerAnimation]
+    
     
     switch loopMode {
     case .playOnce:
-      layerAnimation.repeatCount = 1
+        animationGroup.repeatCount = 1
     case .loop:
-      layerAnimation.repeatCount = HUGE
+        animationGroup.repeatCount = HUGE
     case .autoReverse:
-      layerAnimation.repeatCount = HUGE
-      layerAnimation.autoreverses = true
+      animationGroup.repeatCount = HUGE
+      animationGroup.autoreverses = true
     case let .repeat(amount):
-      layerAnimation.repeatCount = amount
+        animationGroup.repeatCount = amount
     case let .repeatBackwards(amount):
-      layerAnimation.repeatCount = amount
-      layerAnimation.autoreverses = true
+      animationGroup.repeatCount = amount
+      animationGroup.autoreverses = true
     }
     
-    layerAnimation.isRemovedOnCompletion = false
+    animationGroup.isRemovedOnCompletion = false
     if timeOffset != 0 {
       let currentLayerTime = viewLayer?.convertTime(CACurrentMediaTime(), from: nil) ?? 0
-      layerAnimation.beginTime = currentLayerTime - (timeOffset * 1 / Double(abs(animationSpeed)))
+      animationGroup.beginTime = currentLayerTime - (timeOffset * 1 / Double(abs(animationSpeed)))
     }
-    layerAnimation.delegate = animationContext.closure
+    animationGroup.delegate = animationContext.closure
     animationContext.closure.animationLayer = animationlayer
     animationContext.closure.animationKey = activeAnimationName
     
