@@ -8,24 +8,59 @@
 import Foundation
 import CoreText
 import QuartzCore
-
 import CoreGraphics
-
-
+/// Needed for NSMutableParagraphStyle...
+#if os(OSX)
+import AppKit
+#else
+import UIKit
+#endif
 
 final class TextLayer: CALayer {
   
-  public var attributedText: NSAttributedString? {
+  public var text: String? {
     didSet {
-      needsSizeUpdate = true
+      needsContentUpdate = true
       self.setNeedsLayout()
       self.setNeedsDisplay()
     }
   }
   
-  public var preferredSize: CGSize? {
+  public var font: CTFont? {
     didSet {
-      needsSizeUpdate = true
+      needsContentUpdate = true
+      self.setNeedsLayout()
+      self.setNeedsDisplay()
+    }
+  }
+  
+  public var alignment: NSTextAlignment = .left {
+    didSet {
+      needsContentUpdate = true
+      self.setNeedsLayout()
+      self.setNeedsDisplay()
+    }
+  }
+  
+  public var lineHeight: CGFloat = 0 {
+    didSet {
+      needsContentUpdate = true
+      self.setNeedsLayout()
+      self.setNeedsDisplay()
+    }
+  }
+  
+  public var tracking: CGFloat = 0 {
+    didSet {
+      needsContentUpdate = true
+      self.setNeedsLayout()
+      self.setNeedsDisplay()
+    }
+  }
+  
+  public var fillColor: CGColor? {
+    didSet {
+      needsContentUpdate = true
       self.setNeedsLayout()
       self.setNeedsDisplay()
     }
@@ -33,13 +68,15 @@ final class TextLayer: CALayer {
   
   public var strokeColor: CGColor? {
     didSet {
+      needsContentUpdate = true
       self.setNeedsLayout()
       self.setNeedsDisplay()
     }
   }
   
-  public var strokeWidth: CGFloat? {
+  public var strokeWidth: CGFloat = 0 {
     didSet {
+      needsContentUpdate = true
       self.setNeedsLayout()
       self.setNeedsDisplay()
     }
@@ -52,9 +89,18 @@ final class TextLayer: CALayer {
     }
   }
   
+  public var preferredSize: CGSize? {
+    didSet {
+      needsContentUpdate = true
+      self.setNeedsLayout()
+      self.setNeedsDisplay()
+    }
+  }
+  
   public func sizeToFit() {
-    calculateContentSize()
+    updateTextContent()
     bounds = drawingRect
+    anchorPoint = drawingAnchor
     self.setNeedsLayout()
     self.setNeedsDisplay()
   }
@@ -63,25 +109,10 @@ final class TextLayer: CALayer {
     return nil
   }
   
-  private var needsSizeUpdate: Bool = false
-  
-  
   override func draw(in ctx: CGContext) {
-    guard let attributedString = attributedText else { return }
-    calculateContentSize()
-    if #available(iOS 13.0, *) {
-      ctx.setFillColor(CGColor(srgbRed: 0, green: 0, blue: 1, alpha: 1))
-    } else {
-      // Fallback on earlier versions
-    }
-    ctx.fill(bounds)
-    
-    if #available(iOS 13.0, *) {
-      ctx.setFillColor(CGColor(srgbRed: 0, green: 1, blue: 1, alpha: 1))
-    } else {
-      // Fallback on earlier versions
-    }
-    ctx.fill(drawingRect)
+    guard let attributedString = attributedString else { return }
+    updateTextContent()
+    guard let setter = fillFrameSetter else { return }
     
     ctx.textMatrix = .identity
     ctx.setAllowsAntialiasing(true)
@@ -98,42 +129,114 @@ final class TextLayer: CALayer {
     ctx.scaleBy(x: 1.0, y: -1.0)
     
     let drawingPath = CGPath(rect: drawingRect, transform: nil)
-    let setter = CTFramesetterCreateWithAttributedString(attributedString as CFAttributedString)
+    
+    if !strokeOnTop, let strokeSetter = strokeFrameSetter {
+      // Draw stroke first
+      let frame = CTFramesetterCreateFrame(strokeSetter, CFRangeMake(0, attributedString.length), drawingPath, nil)
+      CTFrameDraw(frame, ctx)
+    }
+    
     let frame = CTFramesetterCreateFrame(setter, CFRangeMake(0, attributedString.length), drawingPath, nil)
     CTFrameDraw(frame, ctx)
+    
+    if strokeOnTop, let strokeSetter = strokeFrameSetter {
+      ctx.translateBy(x: strokeWidth * -0.5, y: strokeWidth * 0.5)
+      let frame = CTFramesetterCreateFrame(strokeSetter, CFRangeMake(0, attributedString.length), drawingPath, nil)
+      CTFrameDraw(frame, ctx)
+    }
   }
   
   private var drawingRect: CGRect = .zero
+  private var drawingAnchor: CGPoint = .zero
+  private var fillFrameSetter: CTFramesetter?
+  private var attributedString: NSAttributedString?
+  private var strokeFrameSetter: CTFramesetter?
+  private var needsContentUpdate: Bool = false
   
-  private func calculateContentSize() {
-    guard needsSizeUpdate else { return }
-    
-    if let preferredSize = preferredSize {
-      drawingRect = CGRect(origin: .zero, size: preferredSize)
+  private func updateTextContent() {
+    guard needsContentUpdate else { return }
+    needsContentUpdate = false
+    guard let font = font, let text = text, text.count > 0, let fillColor = fillColor else {
+      drawingRect = .zero
+      drawingAnchor = .zero
+      attributedString = nil
+      fillFrameSetter = nil
+      strokeFrameSetter = nil
       return
     }
 
-    guard let attributedString = attributedText else {
-      drawingRect = .zero
-      return
+    // Get Font properties
+    let ascent = CTFontGetAscent(font)
+    let descent = CTFontGetDescent(font)
+    let capHeight = CTFontGetCapHeight(font)
+    let leading = floor(max(CTFontGetLeading(font), 0) + 0.5)
+    let fontLineHeight = floor(ascent + 0.5) + floor(descent + 0.5) + leading
+    let ascenderDelta = leading > 0 ? 0 : floor (0.2 * fontLineHeight + 0.5)
+    let minLineHeight = -(fontLineHeight + ascenderDelta)
+    
+    // Calculate line spacing
+    let lineSpacing = max(CGFloat(minLineHeight) + lineHeight, CGFloat(minLineHeight))
+
+    // Build Attributes
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.lineSpacing = lineSpacing
+    paragraphStyle.lineHeightMultiple = 1
+    paragraphStyle.alignment = alignment
+    paragraphStyle.lineBreakMode = NSLineBreakMode.byWordWrapping
+    var attributes: [NSAttributedString.Key : Any] = [
+      NSAttributedString.Key.font: font,
+      NSAttributedString.Key.foregroundColor: fillColor,
+      NSAttributedString.Key.kern: tracking,
+      NSAttributedString.Key.paragraphStyle: paragraphStyle
+    ]
+    
+    let attrString = NSAttributedString(string: text, attributes: attributes)
+    attributedString = attrString
+    let setter = CTFramesetterCreateWithAttributedString(attrString as CFAttributedString)
+    fillFrameSetter = setter
+
+    // Calculate drawing size
+    let textAnchor: CGPoint
+    if let preferredSize = preferredSize {
+      drawingRect = CGRect(origin: .zero, size: preferredSize)
+      drawingRect.size.height += (ascent - capHeight)
+      textAnchor = CGPoint(x: 0, y: ascent-capHeight)
+    } else {
+      let size = CTFramesetterSuggestFrameSizeWithConstraints(
+        setter,
+        CFRange(location: 0, length: attrString.length),
+        nil,
+        CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
+        nil
+      )
+      switch alignment {
+      case .left:
+        textAnchor = CGPoint(x: 0, y: ascent)
+      case .right:
+        textAnchor = CGPoint(x: size.width, y: ascent)
+      case .center:
+        textAnchor = CGPoint(x: size.width * 0.5, y: ascent)
+      default:
+        textAnchor = .zero
+      }
+      drawingRect = CGRect(x: 0, y: 0, width: ceil(size.width),
+                           height: ceil(size.height))
     }
     
-    if attributedString.length == 0 {
-      drawingRect = .zero
-      return
-    }
+    // Now Calculate Anchor
+    drawingAnchor = CGPoint(x: textAnchor.x.remap(fromLow: 0, fromHigh: drawingRect.size.width, toLow: 0, toHigh: 1),
+                            y: textAnchor.y.remap(fromLow: 0, fromHigh: drawingRect.size.height, toLow: 0, toHigh: 1))
     
-    let setter = CTFramesetterCreateWithAttributedString(attributedString as CFAttributedString)
-    let size = CTFramesetterSuggestFrameSizeWithConstraints(
-      setter,
-      CFRange(location: 0, length: attributedString.length),
-      nil,
-      CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
-      nil
-    )
-    drawingRect = CGRect(x: 0, y: 0, width: ceil(size.width),
-                         height: ceil(size.height))
-    needsSizeUpdate = false
+    if let strokeColor = strokeColor {
+      attributes[NSAttributedString.Key.strokeWidth] = strokeWidth
+      attributes[NSAttributedString.Key.strokeColor] = strokeColor
+      let strokeAttributedString = NSAttributedString(string: text, attributes: attributes)
+      strokeFrameSetter = CTFramesetterCreateWithAttributedString(strokeAttributedString as CFAttributedString)
+      drawingRect.size.width += strokeWidth
+      drawingRect.size.height += strokeWidth
+    } else {
+      strokeFrameSetter = nil
+    }
   }
   
 }

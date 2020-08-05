@@ -39,7 +39,6 @@ extension TextJustification {
       return .center
     }
   }
-  
 }
 
 final class TextCompositionLayer: CompositionLayer {
@@ -49,8 +48,9 @@ final class TextCompositionLayer: CompositionLayer {
   
   let textLayer: TextLayer = TextLayer()
   var textProvider: AnimationTextProvider
+  var fontProvider: AnimationFontProvider
   
-  init(textLayer: TextLayerModel, textProvider: AnimationTextProvider) {
+  init(textLayer: TextLayerModel, textProvider: AnimationTextProvider, fontProvider: AnimationFontProvider) {
     var rootNode: TextAnimatorNode?
     for animator in textLayer.animators {
       rootNode = TextAnimatorNode(parentNode: rootNode, textAnimator: animator)
@@ -59,6 +59,7 @@ final class TextCompositionLayer: CompositionLayer {
     self.textDocument = KeyframeInterpolator(keyframes: textLayer.text.keyframes)
     
     self.textProvider = textProvider
+    self.fontProvider = fontProvider
     
     super.init(layer: textLayer, size: .zero)
     contentsLayer.addSublayer(self.textLayer)
@@ -78,6 +79,7 @@ final class TextCompositionLayer: CompositionLayer {
     self.textDocument = nil
     
     self.textProvider = DefaultTextProvider()
+    self.fontProvider = DefaultFontProvider()
     
     super.init(layer: layer)
   }
@@ -89,7 +91,7 @@ final class TextCompositionLayer: CompositionLayer {
     
     let documentUpdate = textDocument.hasUpdate(frame: frame)
     let animatorUpdate = rootNode?.updateContents(frame, forceLocalUpdate: forceUpdates) ?? false
-//    guard documentUpdate == true || animatorUpdate == true else { return }
+    guard documentUpdate == true || animatorUpdate == true else { return }
     
     rootNode?.rebuildOutputs(frame: frame)
     
@@ -101,57 +103,21 @@ final class TextCompositionLayer: CompositionLayer {
     let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
     let matrix = rootNode?.textOutputNode.xform ?? CATransform3DIdentity
     let textString = textProvider.textFor(keypathName: self.keypathName, sourceText: text.text)
-    
-    let ctFont = CTFontCreateWithName(text.fontFamily as CFString, CGFloat(text.fontSize), nil)
-    let ascent = CTFontGetAscent(ctFont)
-    let descent = CTFontGetDescent(ctFont)
-    let leading = floor(max(CTFontGetLeading(ctFont), 0) + 0.5)
-    let fontLineHeight = floor(ascent + 0.5) + floor(descent + 0.5) + leading
-    let ascenderDelta = leading > 0 ? 0 : floor (0.2 * fontLineHeight + 0.5)
-    let minLineHeight = -(fontLineHeight + ascenderDelta)
-    let lineHeight = max(CGFloat(minLineHeight) + CGFloat(text.lineHeight), CGFloat(minLineHeight))
+    let ctFont = fontProvider.fontFor(family: text.fontFamily, size: CGFloat(text.fontSize))
 
-    let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.lineSpacing = lineHeight
-    paragraphStyle.lineHeightMultiple = 1
-    paragraphStyle.alignment = text.justification.textAlignment
-    paragraphStyle.lineBreakMode = NSLineBreakMode.byWordWrapping
-
-    let attributes: [NSAttributedString.Key : Any] = [
-      NSAttributedString.Key.font: ctFont,
-      NSAttributedString.Key.foregroundColor: fillColor,
-      NSAttributedString.Key.kern: tracking,
-      NSAttributedString.Key.paragraphStyle: paragraphStyle
-    ]
-    
     // Set all of the text layer options
+    textLayer.text = textString
+    textLayer.font = ctFont
+    textLayer.alignment = text.justification.textAlignment
+    textLayer.lineHeight = CGFloat(text.lineHeight)
+    textLayer.tracking = tracking
+    textLayer.fillColor = fillColor
     textLayer.preferredSize = text.textFrameSize?.sizeValue
-    textLayer.attributedText = NSMutableAttributedString(string: textString, attributes: attributes )
     textLayer.strokeOnTop = text.strokeOverFill ?? false
     textLayer.strokeWidth = strokeWidth
     textLayer.strokeColor = strokeColor
     textLayer.sizeToFit()
     
-    let normalizedAnchor: CGPoint
-    if text.textFrameSize != nil {
-      normalizedAnchor = CGPoint.zero
-    } else {
-      let size = textLayer.bounds.size
-      let baselinePosition = CTFontGetAscent(ctFont)
-      let textAnchor: CGPoint
-      switch text.justification {
-      case .left:
-        textAnchor = CGPoint(x: 0, y: baselinePosition)
-      case .right:
-        textAnchor = CGPoint(x: size.width, y: baselinePosition)
-      case .center:
-        textAnchor = CGPoint(x: size.width * 0.5, y: baselinePosition)
-      }
-      normalizedAnchor = CGPoint(x: textAnchor.x.remap(fromLow: 0, fromHigh: size.width, toLow: 0, toHigh: 1),
-                                 y: textAnchor.y.remap(fromLow: 0, fromHigh: size.height, toLow: 0, toHigh: 1))
-    }
-
-    textLayer.anchorPoint = normalizedAnchor
     textLayer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
     textLayer.transform = CATransform3DIdentity
     textLayer.position = text.textFramePosition?.pointValue ?? CGPoint.zero

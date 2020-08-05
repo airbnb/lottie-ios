@@ -614,6 +614,21 @@
 		486E89F3220B790E007CD915 /* Interpolatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E879D220B78BF007CD915 /* Interpolatable.swift */; };
 		486E89F4220B790E007CD915 /* KeyframeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E879E220B78BF007CD915 /* KeyframeExtensions.swift */; };
 		486E89F5220B790E007CD915 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E87A0220B78BF007CD915 /* AnimationContext.swift */; };
+		4899AFFC24DB269A00194C96 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899AFFB24DB269A00194C96 /* AnimationFontProvider.swift */; };
+		4899AFFD24DB269A00194C96 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899AFFB24DB269A00194C96 /* AnimationFontProvider.swift */; };
+		4899AFFE24DB269A00194C96 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899AFFB24DB269A00194C96 /* AnimationFontProvider.swift */; };
+		4899B00024DB27F200194C96 /* LayerFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899AFFF24DB27F200194C96 /* LayerFontProvider.swift */; };
+		4899B00124DB27F200194C96 /* LayerFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899AFFF24DB27F200194C96 /* LayerFontProvider.swift */; };
+		4899B00224DB27F200194C96 /* LayerFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899AFFF24DB27F200194C96 /* LayerFontProvider.swift */; };
+		4899B00324DB294A00194C96 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899AFFB24DB269A00194C96 /* AnimationFontProvider.swift */; };
+		4899B00424DB294B00194C96 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899AFFB24DB269A00194C96 /* AnimationFontProvider.swift */; };
+		4899B00524DB294F00194C96 /* LayerFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899AFFF24DB27F200194C96 /* LayerFontProvider.swift */; };
+		4899B00624DB294F00194C96 /* LayerFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899AFFF24DB27F200194C96 /* LayerFontProvider.swift */; };
+		4899B00824DB2A3D00194C96 /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899B00724DB2A3D00194C96 /* TextLayer.swift */; };
+		4899B00924DB2A3D00194C96 /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899B00724DB2A3D00194C96 /* TextLayer.swift */; };
+		4899B00A24DB2A3D00194C96 /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899B00724DB2A3D00194C96 /* TextLayer.swift */; };
+		4899B00B24DB2A3D00194C96 /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899B00724DB2A3D00194C96 /* TextLayer.swift */; };
+		4899B00C24DB2A3D00194C96 /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899B00724DB2A3D00194C96 /* TextLayer.swift */; };
 		48F4EECD229F167F00949A97 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8724220B78BF007CD915 /* TextCompositionLayer.swift */; };
 		CD1616482367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
 		CD1616492367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
@@ -779,6 +794,9 @@
 		486E879D220B78BF007CD915 /* Interpolatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolatable.swift; sourceTree = "<group>"; };
 		486E879E220B78BF007CD915 /* KeyframeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyframeExtensions.swift; sourceTree = "<group>"; };
 		486E87A0220B78BF007CD915 /* AnimationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
+		4899AFFB24DB269A00194C96 /* AnimationFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationFontProvider.swift; sourceTree = "<group>"; };
+		4899AFFF24DB27F200194C96 /* LayerFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerFontProvider.swift; sourceTree = "<group>"; };
+		4899B00724DB2A3D00194C96 /* TextLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayer.swift; sourceTree = "<group>"; };
 		CD1616472367325A00325353 /* GradientValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientValueProvider.swift; sourceTree = "<group>"; };
 		E654753822AAA9AD00FE590F /* LayerTextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerTextProvider.swift; sourceTree = "<group>"; };
 		E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTextProvider.swift; sourceTree = "<group>"; };
@@ -882,6 +900,7 @@
 		486E86FB220B78BF007CD915 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				4899AFFA24DB267500194C96 /* FontProvider */,
 				486E86FC220B78BF007CD915 /* MacOS */,
 				486E8701220B78BF007CD915 /* Animation */,
 				486E8705220B78BF007CD915 /* ImageProvider */,
@@ -1023,7 +1042,9 @@
 				486E872D220B78BF007CD915 /* InvertedMatteLayer.swift */,
 				486E872E220B78BF007CD915 /* LayerImageProvider.swift */,
 				E654753822AAA9AD00FE590F /* LayerTextProvider.swift */,
+				4899AFFF24DB27F200194C96 /* LayerFontProvider.swift */,
 				486E872F220B78BF007CD915 /* CompositionLayersInitializer.swift */,
+				4899B00724DB2A3D00194C96 /* TextLayer.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1335,6 +1356,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		4899AFFA24DB267500194C96 /* FontProvider */ = {
+			isa = PBXGroup;
+			children = (
+				4899AFFB24DB269A00194C96 /* AnimationFontProvider.swift */,
+			);
+			path = FontProvider;
+			sourceTree = "<group>";
+		};
 		E6EAA7B622AA833200F345A4 /* TextProvider */ = {
 			isa = PBXGroup;
 			children = (
@@ -1630,6 +1659,7 @@
 				486E87F0220B78D1007CD915 /* GradientStroke.swift in Sources */,
 				486E87F1220B78D1007CD915 /* Stroke.swift in Sources */,
 				486E87F2220B78D1007CD915 /* Rectangle.swift in Sources */,
+				4899B00824DB2A3D00194C96 /* TextLayer.swift in Sources */,
 				486E87F3220B78D1007CD915 /* Star.swift in Sources */,
 				486E87F4220B78D1007CD915 /* SolidLayerModel.swift in Sources */,
 				486E87F5220B78D1007CD915 /* LayerModel.swift in Sources */,
@@ -1664,9 +1694,11 @@
 				486E8810220B78D2007CD915 /* BezierPath.swift in Sources */,
 				486E8811220B78D2007CD915 /* CompoundBezierPath.swift in Sources */,
 				486E8812220B78D2007CD915 /* ColorExtension.swift in Sources */,
+				4899AFFC24DB269A00194C96 /* AnimationFontProvider.swift in Sources */,
 				486E8813220B78D2007CD915 /* PathElement.swift in Sources */,
 				486E8814220B78D2007CD915 /* CurveVertex.swift in Sources */,
 				486E8815220B78D2007CD915 /* VectorsExtensions.swift in Sources */,
+				4899B00024DB27F200194C96 /* LayerFontProvider.swift in Sources */,
 				486E8816220B78D2007CD915 /* InterpolatableExtensions.swift in Sources */,
 				486E8817220B78D2007CD915 /* Interpolatable.swift in Sources */,
 				486E8818220B78D2007CD915 /* KeyframeExtensions.swift in Sources */,
@@ -1764,6 +1796,7 @@
 				486E8869220B78E4007CD915 /* GradientStroke.swift in Sources */,
 				486E886A220B78E4007CD915 /* Stroke.swift in Sources */,
 				486E886B220B78E4007CD915 /* Rectangle.swift in Sources */,
+				4899B00924DB2A3D00194C96 /* TextLayer.swift in Sources */,
 				486E886C220B78E4007CD915 /* Star.swift in Sources */,
 				486E886D220B78E4007CD915 /* SolidLayerModel.swift in Sources */,
 				486E886E220B78E4007CD915 /* LayerModel.swift in Sources */,
@@ -1798,9 +1831,11 @@
 				486E8889220B78E4007CD915 /* BezierPath.swift in Sources */,
 				486E888A220B78E4007CD915 /* CompoundBezierPath.swift in Sources */,
 				486E888B220B78E4007CD915 /* ColorExtension.swift in Sources */,
+				4899AFFD24DB269A00194C96 /* AnimationFontProvider.swift in Sources */,
 				486E888C220B78E4007CD915 /* PathElement.swift in Sources */,
 				486E888D220B78E4007CD915 /* CurveVertex.swift in Sources */,
 				486E888E220B78E4007CD915 /* VectorsExtensions.swift in Sources */,
+				4899B00124DB27F200194C96 /* LayerFontProvider.swift in Sources */,
 				486E888F220B78E4007CD915 /* InterpolatableExtensions.swift in Sources */,
 				486E8890220B78E4007CD915 /* Interpolatable.swift in Sources */,
 				486E8891220B78E4007CD915 /* KeyframeExtensions.swift in Sources */,
@@ -1822,6 +1857,7 @@
 				486E88A2220B78F4007CD915 /* ColorValueProvider.swift in Sources */,
 				486E88A3220B78F4007CD915 /* FloatValueProvider.swift in Sources */,
 				486E88A4220B78F4007CD915 /* SizeValueProvider.swift in Sources */,
+				4899B00224DB27F200194C96 /* LayerFontProvider.swift in Sources */,
 				486E88A5220B78F4007CD915 /* PointValueProvider.swift in Sources */,
 				486E88A6220B78F4007CD915 /* CompositionLayer.swift in Sources */,
 				486E88A7220B78F4007CD915 /* NullCompositionLayer.swift in Sources */,
@@ -1842,6 +1878,7 @@
 				486E88B7220B78F4007CD915 /* FillRenderer.swift in Sources */,
 				486E88B8220B78F4007CD915 /* StrokeRenderer.swift in Sources */,
 				486E88B9220B78F4007CD915 /* GroupOutputNode.swift in Sources */,
+				4899AFFE24DB269A00194C96 /* AnimationFontProvider.swift in Sources */,
 				486E88BA220B78F4007CD915 /* PathOutputNode.swift in Sources */,
 				486E88BB220B78F4007CD915 /* PassThroughOutputNode.swift in Sources */,
 				486E88BC220B78F4007CD915 /* EllipseNode.swift in Sources */,
@@ -1878,6 +1915,7 @@
 				486E88DA220B78F4007CD915 /* Merge.swift in Sources */,
 				486E88DB220B78F4007CD915 /* FillI.swift in Sources */,
 				486E88DC220B78F4007CD915 /* Repeater.swift in Sources */,
+				4899B00A24DB2A3D00194C96 /* TextLayer.swift in Sources */,
 				486E88DD220B78F4007CD915 /* GradientFill.swift in Sources */,
 				486E88DE220B78F4007CD915 /* GradientStroke.swift in Sources */,
 				486E88DF220B78F4007CD915 /* Stroke.swift in Sources */,
@@ -2026,6 +2064,7 @@
 				486E8957220B78FF007CD915 /* GradientStroke.swift in Sources */,
 				486E8958220B78FF007CD915 /* Stroke.swift in Sources */,
 				486E8959220B78FF007CD915 /* Rectangle.swift in Sources */,
+				4899B00B24DB2A3D00194C96 /* TextLayer.swift in Sources */,
 				486E895A220B78FF007CD915 /* Star.swift in Sources */,
 				486E895B220B78FF007CD915 /* SolidLayerModel.swift in Sources */,
 				486E895C220B78FF007CD915 /* LayerModel.swift in Sources */,
@@ -2060,9 +2099,11 @@
 				486E8977220B78FF007CD915 /* BezierPath.swift in Sources */,
 				486E8978220B78FF007CD915 /* CompoundBezierPath.swift in Sources */,
 				486E8979220B78FF007CD915 /* ColorExtension.swift in Sources */,
+				4899B00324DB294A00194C96 /* AnimationFontProvider.swift in Sources */,
 				486E897A220B78FF007CD915 /* PathElement.swift in Sources */,
 				486E897B220B78FF007CD915 /* CurveVertex.swift in Sources */,
 				486E897C220B78FF007CD915 /* VectorsExtensions.swift in Sources */,
+				4899B00524DB294F00194C96 /* LayerFontProvider.swift in Sources */,
 				486E897D220B78FF007CD915 /* InterpolatableExtensions.swift in Sources */,
 				486E897E220B78FF007CD915 /* Interpolatable.swift in Sources */,
 				486E897F220B78FF007CD915 /* KeyframeExtensions.swift in Sources */,
@@ -2084,6 +2125,7 @@
 				486E8990220B790E007CD915 /* ColorValueProvider.swift in Sources */,
 				486E8991220B790E007CD915 /* FloatValueProvider.swift in Sources */,
 				486E8992220B790E007CD915 /* SizeValueProvider.swift in Sources */,
+				4899B00624DB294F00194C96 /* LayerFontProvider.swift in Sources */,
 				486E8993220B790E007CD915 /* PointValueProvider.swift in Sources */,
 				486E8994220B790E007CD915 /* CompositionLayer.swift in Sources */,
 				486E8995220B790E007CD915 /* NullCompositionLayer.swift in Sources */,
@@ -2104,6 +2146,7 @@
 				486E89A4220B790E007CD915 /* GradientStrokeRenderer.swift in Sources */,
 				486E89A5220B790E007CD915 /* FillRenderer.swift in Sources */,
 				486E89A6220B790E007CD915 /* StrokeRenderer.swift in Sources */,
+				4899B00424DB294B00194C96 /* AnimationFontProvider.swift in Sources */,
 				486E89A7220B790E007CD915 /* GroupOutputNode.swift in Sources */,
 				486E89A8220B790E007CD915 /* PathOutputNode.swift in Sources */,
 				486E89A9220B790E007CD915 /* PassThroughOutputNode.swift in Sources */,
@@ -2140,6 +2183,7 @@
 				486E89C7220B790E007CD915 /* ShapeTransform.swift in Sources */,
 				486E89C8220B790E007CD915 /* Merge.swift in Sources */,
 				486E89C9220B790E007CD915 /* FillI.swift in Sources */,
+				4899B00C24DB2A3D00194C96 /* TextLayer.swift in Sources */,
 				486E89CA220B790E007CD915 /* Repeater.swift in Sources */,
 				486E89CB220B790E007CD915 /* GradientFill.swift in Sources */,
 				486E89CC220B790E007CD915 /* GradientStroke.swift in Sources */,
