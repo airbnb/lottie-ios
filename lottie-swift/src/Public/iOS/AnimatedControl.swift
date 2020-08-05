@@ -30,6 +30,9 @@ open class AnimatedControl: UIControl {
   
   // MARK: Public
   
+  /// The animation view in which the animation is rendered.
+  public let animationView: AnimationView
+  
   /// The animation backing the animated control.
   public var animation: Animation? {
     didSet {
@@ -128,7 +131,6 @@ open class AnimatedControl: UIControl {
   
   // MARK: Private
   
-  let animationView: AnimationView
   var stateMap: [UInt : String] = [:]
   
   fileprivate func commonInit() {
