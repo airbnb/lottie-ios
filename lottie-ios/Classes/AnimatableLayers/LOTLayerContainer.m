@@ -186,7 +186,15 @@
 
 - (void)_setImageForAsset:(LOTAsset *)asset {
   if (asset.imageName) {
-    NSImage *image = [NSImage imageNamed:[asset.imageName stringByDeletingPathExtension]];
+    NSImage *image;
+    if ([asset.imageName hasPrefix:@"data:"]) {
+      // Contents look like a data: URL. Ignore asset.imageDirectory and simply load the image directly.
+      NSURL *imageUrl = [NSURL URLWithString:asset.imageName];
+      NSData *imageData = [NSData dataWithContentsOfURL:imageUrl];
+      image = [[NSImage alloc] initWithData:imageData];
+    } else {
+      image = [NSImage imageNamed:[asset.imageName stringByDeletingPathExtension]];
+    }
     if (image == nil) {
       if (asset.rootDirectory.length > 0 && asset.imageDirectory.length > 0) {
         NSString *imagePath = [[asset.rootDirectory stringByAppendingPathComponent:asset.imageDirectory] stringByAppendingPathComponent:asset.imageName];
