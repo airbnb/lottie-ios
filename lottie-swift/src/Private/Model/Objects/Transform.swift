@@ -7,8 +7,35 @@
 
 import Foundation
 
+protocol Transformable {
+    var anchorPoint: KeyframeGroup<Vector3D> { get }
+    
+    /// The position of the transform. This is nil if the position data was split.
+    var position: KeyframeGroup<Vector3D>? { get }
+    
+    /// The positionX of the transform. This is nil if the position property is set.
+    var positionX: KeyframeGroup<Vector1D>? { get }
+    
+    /// The positionY of the transform. This is nil if the position property is set.
+    var positionY: KeyframeGroup<Vector1D>? { get }
+    
+    /// The scale of the transform
+    var scale: KeyframeGroup<Vector3D> { get }
+    
+    /// The opacity of the transform.
+    var opacity: KeyframeGroup<Vector1D> { get }
+    
+    /// Orientation in 3D, like rotation, but static
+    var orientation: KeyframeGroup<Vector3D> { get }
+    
+    /// One dimensional rotations
+    var rotationZ: KeyframeGroup<Vector1D> { get }
+    var rotationX: KeyframeGroup<Vector1D> { get }
+    var rotationY: KeyframeGroup<Vector1D> { get }
+}
+
 /// The animatable transform for a layer. Controls position, rotation, scale, and opacity.
-final class Transform: Codable {
+final class Transform: Codable, Transformable {
   
   /// The anchor point of the transform.
   let anchorPoint: KeyframeGroup<Vector3D>
@@ -23,10 +50,12 @@ final class Transform: Codable {
   let positionY: KeyframeGroup<Vector1D>?
   
   /// The scale of the transform
-  let scale: KeyframeGroup<Vector3D>
+  var scale: KeyframeGroup<Vector3D>
   
   /// The opacity of the transform.
   let opacity: KeyframeGroup<Vector1D>
+    
+  let orientation: KeyframeGroup<Vector3D>
   
   let rotationZ: KeyframeGroup<Vector1D>
   let rotationX: KeyframeGroup<Vector1D>
@@ -46,6 +75,7 @@ final class Transform: Codable {
     case rotationX = "rx"
     case rotationY = "ry"
     case opacity = "o"
+    case orientation = "or"
   }
 
   enum PositionCodingKeys : String, CodingKey {
@@ -64,6 +94,7 @@ final class Transform: Codable {
     
     // AnchorPoint
     self.anchorPoint = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .anchorPoint) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+    self.orientation = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .orientation) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
     
     // Position
     if container.contains(.positionX), container.contains(.positionY) {
@@ -73,7 +104,7 @@ final class Transform: Codable {
       self.position = nil
     } else if let positionKeyframes = try? container.decode(KeyframeGroup<Vector3D>.self, forKey: .position) {
       // Position dimensions are a single keyframe group.
-      self.position = positionKeyframes
+      self.position = positionKeyframes.flipLast()
       self.positionX = nil
       self.positionY = nil
     } else if let positionContainer = try? container.nestedContainer(keyedBy: PositionCodingKeys.self, forKey: .position),

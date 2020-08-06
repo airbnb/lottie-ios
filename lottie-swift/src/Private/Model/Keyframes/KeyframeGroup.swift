@@ -106,3 +106,20 @@ final class KeyframeGroup<T>: Codable where T: Codable, T: Interpolatable {
   }
   
 }
+
+extension KeyframeGroup where T == Vector1D {
+    func flip() -> KeyframeGroup<Vector1D> {
+        KeyframeGroup(keyframes: ContiguousArray(keyframes.map{ Keyframe(value: Vector1D(-$0.value.value), time: Double($0.time), isHold: $0.isHold, inTangent: $0.inTangent, outTangent: $0.outTangent, spatialInTangent: $0.spatialInTangent, spatialOutTangent: $0.spatialOutTangent) }))
+    }
+}
+
+extension KeyframeGroup where T == Vector3D {
+    func flipLast() -> KeyframeGroup<Vector3D> {
+        KeyframeGroup(keyframes: ContiguousArray(keyframes.map{
+            var point = $0.value.pointValue
+            point.z *= -1.0
+            
+            return Keyframe(value: Vector3D(point), time: Double($0.time), isHold: $0.isHold, inTangent: $0.inTangent, outTangent: $0.outTangent, spatialInTangent: $0.spatialInTangent, spatialOutTangent: $0.spatialOutTangent)
+        }))
+    }
+}

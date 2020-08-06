@@ -7,15 +7,16 @@
 
 import Foundation
 import CoreGraphics
+import QuartzCore
 
 extension Array where Element == LayerModel {
   
   func initializeCompositionLayers(assetLibrary: AssetLibrary?,
                                    layerImageProvider: LayerImageProvider,
                                    textProvider: AnimationTextProvider,
-                                   frameRate: CGFloat) -> [CompositionLayer] {
-    var compositionLayers = [CompositionLayer]()
-    var layerMap = [Int : CompositionLayer]()
+                                   frameRate: CGFloat) -> [CALayer & Composition] {
+    var compositionLayers = [CALayer & Composition]()
+    var layerMap = [Int : CALayer & Composition]()
     
     /// Organize the assets into a dictionary of [ID : ImageAsset]
     var childLayers = [LayerModel]()
@@ -26,9 +27,15 @@ extension Array where Element == LayerModel {
         compositionLayers.append(genericLayer)
         layerMap[layer.index] = genericLayer
       } else if let shapeLayer = layer as? ShapeLayerModel {
-        let shapeContainer = ShapeCompositionLayer(shapeLayer: shapeLayer)
-        compositionLayers.append(shapeContainer)
-        layerMap[layer.index] = shapeContainer
+        if shapeLayer.flat {
+            let shapeContainer = ShapeCompositionLayer(shapeLayer: shapeLayer)
+            compositionLayers.append(shapeContainer)
+            layerMap[layer.index] = shapeContainer
+        } else {
+            let shapeContainer = ShapeTransformCompositionLayer(shapeLayer: shapeLayer)
+            compositionLayers.append(shapeContainer)
+            layerMap[layer.index] = shapeContainer
+        }
       } else if let solidLayer = layer as? SolidLayerModel {
         let solidContainer = SolidCompositionLayer(solid: solidLayer)
         compositionLayers.append(solidContainer)
@@ -36,14 +43,25 @@ extension Array where Element == LayerModel {
       } else if let precompLayer = layer as? PreCompLayerModel,
         let assetLibrary = assetLibrary,
         let precompAsset = assetLibrary.precompAssets[precompLayer.referenceID] {
-        let precompContainer = PreCompositionLayer(precomp: precompLayer,
-                                                   asset: precompAsset,
-                                                   layerImageProvider: layerImageProvider,
-                                                   textProvider: textProvider,
-                                                   assetLibrary: assetLibrary,
-                                                   frameRate: frameRate)
-        compositionLayers.append(precompContainer)
-        layerMap[layer.index] = precompContainer
+        if precompAsset.flat && precompLayer.flat  {
+            let precompContainer = PreCompositionLayer(precomp: precompLayer,
+                                                       asset: precompAsset,
+                                                       layerImageProvider: layerImageProvider,
+                                                       textProvider: textProvider,
+                                                       assetLibrary: assetLibrary,
+                                                       frameRate: frameRate)
+            compositionLayers.append(precompContainer)
+            layerMap[layer.index] = precompContainer
+        } else {
+            let precompContainer = TransformPreCompositionLayer(precomp: precompLayer,
+                                                       asset: precompAsset,
+                                                       layerImageProvider: layerImageProvider,
+                                                       textProvider: textProvider,
+                                                       assetLibrary: assetLibrary,
+                                                       frameRate: frameRate)
+            compositionLayers.append(precompContainer)
+            layerMap[layer.index] = precompContainer
+        }
       } else if let imageLayer = layer as? ImageLayerModel,
         let assetLibrary = assetLibrary,
         let imageAsset = assetLibrary.imageAssets[imageLayer.referenceID] {
@@ -54,7 +72,7 @@ extension Array where Element == LayerModel {
         let textContainer = TextCompositionLayer(textLayer: textLayer, textProvider: textProvider)
         compositionLayers.append(textContainer)
         layerMap[layer.index] = textContainer
-      } else {
+    } else {
         let genericLayer = NullCompositionLayer(layer: layer)
         compositionLayers.append(genericLayer)
         layerMap[layer.index] = genericLayer

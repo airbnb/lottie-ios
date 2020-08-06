@@ -34,7 +34,9 @@ final class AnimationContainer: CALayer {
   
   var renderScale: CGFloat = 1 {
     didSet {
-      animationLayers.forEach({ $0.renderScale = renderScale })
+        for var layer in animationLayers {
+            layer.renderScale = renderScale
+        }
     }
   }
   
@@ -98,7 +100,7 @@ final class AnimationContainer: CALayer {
     set { layerTextProvider.textProvider = newValue }
   }
   
-  var animationLayers: ContiguousArray<CompositionLayer>
+  var animationLayers: ContiguousArray<CALayer & Composition>
   fileprivate let layerImageProvider: LayerImageProvider
   fileprivate let layerTextProvider: LayerTextProvider
   
@@ -113,7 +115,7 @@ final class AnimationContainer: CALayer {
     var imageLayers = [ImageCompositionLayer]()
     var textLayers = [TextCompositionLayer]()
     
-    var mattedLayer: CompositionLayer? = nil
+    var mattedLayer: (CALayer & Composition)? = nil
 
     for layer in layers.reversed() {
       layer.bounds = bounds
@@ -124,7 +126,7 @@ final class AnimationContainer: CALayer {
       if let textLayer = layer as? TextCompositionLayer {
         textLayers.append(textLayer)
       }
-      if let matte = mattedLayer {
+      if var matte = mattedLayer {
         /// The previous layer requires this layer to be its matte
         matte.matteLayer = layer
         mattedLayer = nil

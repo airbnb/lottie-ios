@@ -17,8 +17,12 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
   
   init(transform: ShapeTransform?) {
     if let transform = transform {
-      self.anchor = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.anchor.keyframes))
-      self.position = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.position.keyframes))
+      if let position = transform.position {
+            self.position = NodeProperty(provider: KeyframeInterpolator(keyframes: position.keyframes))
+        } else {
+            self.position = NodeProperty(provider: SingleValueProvider(Vector3D(x: CGFloat(0), y: CGFloat(0), z: CGFloat(0))))
+        }
+      self.anchor = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.anchorPoint.keyframes))
       self.scale = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.scale.keyframes))
       self.rotationX = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.rotationX.keyframes))
       self.rotationY = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.rotationY.keyframes))
@@ -68,7 +72,7 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
   var caTransform: CATransform3D {
     return CATransform3D.makeTransform(anchor: anchor.value.pointValue,
                                        position: position.value.pointValue,
-                                       scale: scale.value.sizeValue,
+                                       scale: scale.value.pointValue,
                                        rotation: (rotationX.value.cgFloatValue, rotationY.value.cgFloatValue, rotationZ.value.cgFloatValue),
                                        skew: skew.value.cgFloatValue,
                                        skewAxis: skewAxis.value.cgFloatValue)

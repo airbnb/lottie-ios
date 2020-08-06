@@ -94,7 +94,7 @@ class LayerModel: Codable {
   let startTime: Double
   
   /// The transform of the layer
-  let transform: Transform
+  var transform: Transform
   
   /// The index of the parent layer, if applicable.
   let parent: Int?
@@ -112,6 +112,8 @@ class LayerModel: Codable {
   let matte: MatteType?
   
   let hidden: Bool
+    
+  var flat: Bool { (transform.position?.keyframes.first { $0.value.z != 0 }) == nil }
   
   private enum CodingKeys : String, CodingKey {
     case name = "nm"

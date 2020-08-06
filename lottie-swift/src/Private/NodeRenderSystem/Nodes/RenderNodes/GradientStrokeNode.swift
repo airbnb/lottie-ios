@@ -116,8 +116,8 @@ final class GradientStrokeNode: AnimatorNode, RenderNode {
   
   func rebuildOutputs(frame: CGFloat) {
     /// Update gradient properties
-    strokeRender.gradientRender.start = strokeProperties.startPoint.value.pointValue
-    strokeRender.gradientRender.end = strokeProperties.endPoint.value.pointValue
+    strokeRender.gradientRender.start = strokeProperties.startPoint.value.pointValue.flatPoint
+    strokeRender.gradientRender.end = strokeProperties.endPoint.value.pointValue.flatPoint
     strokeRender.gradientRender.opacity = strokeProperties.opacity.value.cgFloatValue
     strokeRender.gradientRender.colors = strokeProperties.colors.value.map { CGFloat($0) }
     strokeRender.gradientRender.type = strokeProperties.gradientType

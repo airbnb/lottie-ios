@@ -11,6 +11,8 @@ final class PrecompAsset: Asset {
   
   /// Layers of the precomp
   let layers: [LayerModel]
+    
+  var flat: Bool { layers.allSatisfy{ $0.flat } }
   
   enum CodingKeys : String, CodingKey {
     case layers = "layers"

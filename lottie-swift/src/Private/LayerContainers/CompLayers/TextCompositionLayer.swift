@@ -181,7 +181,7 @@ final class TextCompositionLayer: CompositionLayer {
       textStrokeLayer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
       textStrokeLayer.transform = CATransform3DIdentity
       textStrokeLayer.frame = CGRect(origin: .zero, size: size)
-      textStrokeLayer.position = text.textFramePosition?.pointValue ?? CGPoint.zero
+        textStrokeLayer.position = text.textFramePosition?.pointValue.flatPoint ?? CGPoint.zero
       textStrokeLayer.transform = matrix
       textStrokeLayer.string = strokeAttributedString
       textStrokeLayer.alignmentMode = text.justification.caTextAlignement
@@ -191,7 +191,7 @@ final class TextCompositionLayer: CompositionLayer {
     textLayer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
     textLayer.transform = CATransform3DIdentity
     textLayer.frame = CGRect(origin: .zero, size: size)
-    textLayer.position = text.textFramePosition?.pointValue ?? CGPoint.zero
+    textLayer.position = text.textFramePosition?.pointValue.flatPoint ?? CGPoint.zero
     textLayer.transform = matrix
     textLayer.string = baseAttributedString
     textLayer.alignmentMode = text.justification.caTextAlignement

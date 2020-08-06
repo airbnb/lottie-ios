@@ -15,13 +15,14 @@ import QuartzCore
  */
 final class InvertedMatteLayer: CALayer, CompositionLayerDelegate {
   
-  let inputMatte: CompositionLayer?
+  let inputMatte: (CALayer & Composition)?
   let wrapperLayer = CALayer()
   
-  init(inputMatte: CompositionLayer) {
+  init(inputMatte: (CALayer & Composition)) {
+    var matte = inputMatte
     self.inputMatte = inputMatte
     super.init()
-    inputMatte.layerDelegate = self
+    matte.layerDelegate = self
     self.anchorPoint = .zero
     self.bounds = inputMatte.bounds
     self.setNeedsDisplay()

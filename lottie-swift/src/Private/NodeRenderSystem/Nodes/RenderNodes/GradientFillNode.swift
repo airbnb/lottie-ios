@@ -80,8 +80,8 @@ final class GradientFillNode: AnimatorNode, RenderNode {
   }
   
   func rebuildOutputs(frame: CGFloat) {
-    fillRender.start = fillProperties.startPoint.value.pointValue
-    fillRender.end = fillProperties.endPoint.value.pointValue
+    fillRender.start = fillProperties.startPoint.value.pointValue.flatPoint
+    fillRender.end = fillProperties.endPoint.value.pointValue.flatPoint
     fillRender.opacity = fillProperties.opacity.value.cgFloatValue * 0.01
     fillRender.colors = fillProperties.colors.value.map { CGFloat($0) }
     fillRender.type = fillProperties.gradientType

@@ -12,7 +12,7 @@ final class PreCompositionLayer: CompositionLayer {
   
   let frameRate: CGFloat
   let remappingNode: NodeProperty<Vector1D>?
-  fileprivate var animationLayers: [CompositionLayer]
+  fileprivate var animationLayers: [CALayer & Composition]
   
   init(precomp: PreCompLayerModel,
        asset: PrecompAsset,
@@ -35,7 +35,7 @@ final class PreCompositionLayer: CompositionLayer {
     
     var imageLayers = [ImageCompositionLayer]()
     
-    var mattedLayer: CompositionLayer? = nil
+    var mattedLayer: (CALayer & Composition)? = nil
     
     for layer in layers.reversed() {
       layer.bounds = bounds
@@ -43,7 +43,7 @@ final class PreCompositionLayer: CompositionLayer {
       if let imageLayer = layer as? ImageCompositionLayer {
         imageLayers.append(imageLayer)
       }
-      if let matte = mattedLayer {
+      if var matte = mattedLayer {
         /// The previous layer requires this layer to be its matte
         matte.matteLayer = layer
         mattedLayer = nil
@@ -98,6 +98,116 @@ final class PreCompositionLayer: CompositionLayer {
   
   override func updateRenderScale() {
     super.updateRenderScale()
-    animationLayers.forEach( { $0.renderScale = renderScale } )
+    for var animationLayer in animationLayers {
+        animationLayer.renderScale = renderScale
+    }
+  }
+}
+
+final class TransformPreCompositionLayer: TransformCompositionLayer {
+  
+  let frameRate: CGFloat
+  let remappingNode: NodeProperty<Vector1D>?
+  fileprivate var animationLayers: [CALayer & Composition]
+    
+    override var renderScale: CGFloat {
+        didSet {
+            for var animationLayer in animationLayers {
+                animationLayer.renderScale = renderScale
+            }
+        }
+    }
+
+  
+  init(precomp: PreCompLayerModel,
+       asset: PrecompAsset,
+       layerImageProvider: LayerImageProvider,
+       textProvider: AnimationTextProvider,
+       assetLibrary: AssetLibrary?,
+       frameRate: CGFloat) {
+    self.animationLayers = []
+    if let keyframes = precomp.timeRemapping?.keyframes {
+      self.remappingNode = NodeProperty(provider: KeyframeInterpolator(keyframes: keyframes))
+    } else {
+      self.remappingNode = nil
+    }
+    self.frameRate = frameRate
+    super.init(layer: precomp, size: CGSize(width: precomp.width, height: precomp.height))
+    if !asset.flat {
+        contentsLayer = CATransformLayer()
+    }
+    
+    bounds = CGRect(origin: .zero, size: CGSize(width: precomp.width, height: precomp.height))
+    
+    let layers = asset.layers.initializeCompositionLayers(assetLibrary: assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, frameRate: frameRate)
+    
+    var imageLayers = [ImageCompositionLayer]()
+    
+    var mattedLayer: (CALayer & Composition)? = nil
+    
+    for layer in layers.reversed() {
+      layer.bounds = bounds
+      animationLayers.append(layer)
+      if let imageLayer = layer as? ImageCompositionLayer {
+        imageLayers.append(imageLayer)
+      }
+      if var matte = mattedLayer {
+        /// The previous layer requires this layer to be its matte
+        matte.matteLayer = layer
+        mattedLayer = nil
+        continue
+      }
+      if let matte = layer.matteType,
+        (matte == .add || matte == .invert) {
+        /// We have a layer that requires a matte.
+        mattedLayer = layer
+      }
+      contentsLayer.addSublayer(layer)
+    }
+    
+    self.childKeypaths.append(contentsOf: layers)
+    
+    layerImageProvider.addImageLayers(imageLayers)
+  }
+  
+  override init(layer: Any) {
+    /// Used for creating shadow model layers. Read More here: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
+    guard let layer = layer as? PreCompositionLayer else {
+      fatalError("init(layer:) Wrong Layer Class")
+    }
+    self.frameRate = layer.frameRate
+    self.remappingNode = nil
+    self.animationLayers = []
+    
+    super.init(layer: layer)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
+    let localFrame: CGFloat
+    if let remappingNode = remappingNode {
+      remappingNode.update(frame: frame)
+      localFrame = remappingNode.value.cgFloatValue * frameRate
+    } else {
+      localFrame = (frame - startFrame) / timeStretch
+    }
+    animationLayers.forEach( { $0.displayWithFrame(frame: localFrame, forceUpdates: forceUpdates) })
+  }
+  
+  override var keypathProperties: [String : AnyNodeProperty] {
+    guard let remappingNode = remappingNode else {
+      return super.keypathProperties
+    }
+    return ["Time Remap" : remappingNode]
+  }
+  
+  override func updateRenderScale() {
+    super.updateRenderScale()
+    for var animationLayer in animationLayers {
+        animationLayer.renderScale = renderScale
+    }
   }
 }

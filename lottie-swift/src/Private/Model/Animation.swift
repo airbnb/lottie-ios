@@ -91,6 +91,17 @@ public final class Animation: Codable {
     self.glyphs = try container.decodeIfPresent([Glyph].self, forKey: .glyphs)
     self.fonts = try container.decodeIfPresent(FontList.self, forKey: .fonts)
     self.assetLibrary = try container.decodeIfPresent(AssetLibrary.self, forKey: .assetLibrary)
+    if type == .type3d {
+        for layer in layers where layer is PreCompLayerModel {
+            layer.transform.scale = layer.transform.scale.flipLast()
+        }
+        
+        for asset in assetLibrary?.precompAssets ?? [:] {
+            for layer in asset.value.layers where layer is PreCompLayerModel {
+                layer.transform.scale = layer.transform.scale.flipLast()
+            }
+        }
+    }
     self.markers = try container.decodeIfPresent([Marker].self, forKey: .markers)
     
     if let markers = markers {
