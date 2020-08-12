@@ -71,11 +71,13 @@ static NSString * const kCompContainerAnimationKey = @"play";
           return;
         }
         NSError *error;
-        NSDictionary  *animationJSON = [NSJSONSerialization JSONObjectWithData:animationData
+        id jsonObject = [NSJSONSerialization JSONObjectWithData:animationData
                                                                        options:0 error:&error];
-        if (error || !animationJSON || ![animationJSON isKindOfClass:[NSDictionary class]]) {
+        if (error || !jsonObject || ![jsonObject isKindOfClass:[NSDictionary class]]) {
           return;
         }
+          
+        NSDictionary * animationJSON = (NSDictionary *) jsonObject;
         
         LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:animationJSON withAssetBundle:[NSBundle mainBundle]];
         dispatch_async(dispatch_get_main_queue(), ^(void) {
