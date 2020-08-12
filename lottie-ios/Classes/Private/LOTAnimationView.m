@@ -73,7 +73,7 @@ static NSString * const kCompContainerAnimationKey = @"play";
         NSError *error;
         NSDictionary  *animationJSON = [NSJSONSerialization JSONObjectWithData:animationData
                                                                        options:0 error:&error];
-        if (error || !animationJSON) {
+        if (error || !animationJSON || ![animationJSON isKindOfClass:[NSDictionary class]]) {
           return;
         }
         
