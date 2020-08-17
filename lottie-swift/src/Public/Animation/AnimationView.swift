@@ -51,7 +51,7 @@ extension LottieLoopMode: Equatable {
 }
 
 @IBDesignable
-final public class AnimationView: LottieView {
+open class AnimationView: LottieView {
   
   // MARK: - Public Properties
   
