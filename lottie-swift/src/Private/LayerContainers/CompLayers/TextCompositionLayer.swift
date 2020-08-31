@@ -97,7 +97,6 @@ final class TextCompositionLayer: CompositionLayer {
     
     // Get Text Attributes
     let text = textDocument.value(frame: frame) as! TextDocument
-    let fillColor = rootNode?.textOutputNode.fillColor ?? text.fillColorData.cgColorValue
     let strokeColor = rootNode?.textOutputNode.strokeColor ?? text.strokeColorData?.cgColorValue
     let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
     let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
@@ -111,7 +110,15 @@ final class TextCompositionLayer: CompositionLayer {
     textLayer.alignment = text.justification.textAlignment
     textLayer.lineHeight = CGFloat(text.lineHeight)
     textLayer.tracking = tracking
-    textLayer.fillColor = fillColor
+    
+    if let fillColor = rootNode?.textOutputNode.fillColor {
+      textLayer.fillColor = fillColor
+    } else if let fillColor = text.fillColorData?.cgColorValue {
+      textLayer.fillColor = fillColor
+    } else {
+      textLayer.fillColor = nil
+    }
+    
     textLayer.preferredSize = text.textFrameSize?.sizeValue
     textLayer.strokeOnTop = text.strokeOverFill ?? false
     textLayer.strokeWidth = strokeWidth
