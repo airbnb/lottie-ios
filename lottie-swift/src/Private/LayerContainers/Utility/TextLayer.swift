@@ -165,8 +165,7 @@ final class TextLayer: CALayer {
     guard let attributedString = attributedString else { return }
     updateTextContent()
     guard fillFrameSetter != nil || strokeFrameSetter != nil else { return }
-//    guard let font = font else { return }
-//    drawDebug(ctx)
+
     ctx.textMatrix = .identity
     ctx.setAllowsAntialiasing(true)
     ctx.setAllowsFontSmoothing(true)
@@ -197,27 +196,6 @@ final class TextLayer: CALayer {
       strokeFrame = nil
     }
     
-    // This fixes a vertical padding issue that arises when drawing some fonts.
-    // For some reason some fonts, such as Helvetica draw with and ascender that is greater than the one reported by CTFontGetAscender.
-    // I suspect this is actually an issue with the Attributed string, but cannot reproduce.
-    
-//    if let fillFrame = fillFrame {
-//      var o = [CGPoint] (repeating: .zero, count: 1)
-//      let count = CFArrayGetCount(CTFrameGetLines(fillFrame))
-//      if count > 0 {
-//        CTFrameGetLineOrigins (fillFrame, CFRange (location: count-1,length: 1), &o)
-//        let diff = CTFontGetDescent(font) - o[0].y
-//        ctx.translateBy(x: 0, y: diff)
-//      }
-//    } else if let strokeFrame = strokeFrame {
-//      var o = [CGPoint] (repeating: .zero, count: 1)
-//      let count = CFArrayGetCount(CTFrameGetLines(strokeFrame))
-//      if count > 0 {
-//        CTFrameGetLineOrigins (strokeFrame, CFRange (location: count-1,length: 1), &o)
-//        let diff = CTFontGetDescent(font) - o[0].y
-//        ctx.translateBy(x: 0, y: diff)
-//      }
-//    }
 
     if !strokeOnTop, let strokeFrame = strokeFrame {
       CTFrameDraw(strokeFrame, ctx)
