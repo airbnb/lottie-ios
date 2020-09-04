@@ -630,6 +630,8 @@
 		4899B00B24DB2A3D00194C96 /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899B00724DB2A3D00194C96 /* TextLayer.swift */; };
 		4899B00C24DB2A3D00194C96 /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899B00724DB2A3D00194C96 /* TextLayer.swift */; };
 		48F4EECD229F167F00949A97 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8724220B78BF007CD915 /* TextCompositionLayer.swift */; };
+		AA8842AA25022D4E008E5E87 /* CompatibleColorValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8842A825022D4E008E5E87 /* CompatibleColorValueProvider.swift */; };
+		AA8842AB25022D4E008E5E87 /* CompatibleGradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8842A925022D4E008E5E87 /* CompatibleGradientValueProvider.swift */; };
 		CD1616482367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
 		CD1616492367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
 		CD16164A2367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
@@ -797,6 +799,8 @@
 		4899AFFB24DB269A00194C96 /* AnimationFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationFontProvider.swift; sourceTree = "<group>"; };
 		4899AFFF24DB27F200194C96 /* LayerFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerFontProvider.swift; sourceTree = "<group>"; };
 		4899B00724DB2A3D00194C96 /* TextLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayer.swift; sourceTree = "<group>"; };
+		AA8842A825022D4E008E5E87 /* CompatibleColorValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleColorValueProvider.swift; sourceTree = "<group>"; };
+		AA8842A925022D4E008E5E87 /* CompatibleGradientValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleGradientValueProvider.swift; sourceTree = "<group>"; };
 		CD1616472367325A00325353 /* GradientValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientValueProvider.swift; sourceTree = "<group>"; };
 		E654753822AAA9AD00FE590F /* LayerTextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerTextProvider.swift; sourceTree = "<group>"; };
 		E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTextProvider.swift; sourceTree = "<group>"; };
@@ -846,6 +850,8 @@
 			children = (
 				25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */,
 				25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */,
+				AA8842A825022D4E008E5E87 /* CompatibleColorValueProvider.swift */,
+				AA8842A925022D4E008E5E87 /* CompatibleGradientValueProvider.swift */,
 			);
 			path = Compatibility;
 			sourceTree = "<group>";
@@ -1615,6 +1621,7 @@
 				486E87C9220B78D1007CD915 /* FillRenderer.swift in Sources */,
 				486E87CA220B78D1007CD915 /* StrokeRenderer.swift in Sources */,
 				486E87CB220B78D1007CD915 /* GroupOutputNode.swift in Sources */,
+				AA8842AB25022D4E008E5E87 /* CompatibleGradientValueProvider.swift in Sources */,
 				486E87CC220B78D1007CD915 /* PathOutputNode.swift in Sources */,
 				486E87CD220B78D1007CD915 /* PassThroughOutputNode.swift in Sources */,
 				486E87CE220B78D1007CD915 /* EllipseNode.swift in Sources */,
@@ -1686,6 +1693,7 @@
 				486E8808220B78D1007CD915 /* AssetLibrary.swift in Sources */,
 				486E8809220B78D1007CD915 /* Asset.swift in Sources */,
 				486E880A220B78D1007CD915 /* LayerDebugging.swift in Sources */,
+				AA8842AA25022D4E008E5E87 /* CompatibleColorValueProvider.swift in Sources */,
 				486E880B220B78D1007CD915 /* AnimatorNodeDebugging.swift in Sources */,
 				486E880C220B78D1007CD915 /* CGFloatExtensions.swift in Sources */,
 				486E880D220B78D1007CD915 /* AnimationKeypathExtension.swift in Sources */,
