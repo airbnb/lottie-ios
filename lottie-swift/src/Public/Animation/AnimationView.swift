@@ -94,6 +94,7 @@ final public class AnimationView: LottieView {
       reloadImages()
     }
   }
+  
   /**
    Sets the text provider for animation view. A text provider provides the
    animation with values for text layers
@@ -103,7 +104,16 @@ final public class AnimationView: LottieView {
        animationLayer?.textProvider = textProvider
      }
   }
-    
+  
+  /**
+   Sets the text provider for animation view. A text provider provides the
+   animation with values for text layers
+   */
+   public var fontProvider: AnimationFontProvider {
+     didSet {
+       animationLayer?.fontProvider = fontProvider
+     }
+  }
     
   /// Returns `true` if the animation is currently playing.
   public var isAnimationPlaying: Bool {
@@ -373,6 +383,7 @@ final public class AnimationView: LottieView {
   public func stop() {
     removeCurrentAnimation()
     currentFrame = 0
+    CATransaction.flush()
   }
   
   /**
@@ -583,10 +594,15 @@ final public class AnimationView: LottieView {
   // MARK: - Public (Initializers)
   
   /// Initializes a LottieView with an animation.
-  public init(animation: Animation?, imageProvider: AnimationImageProvider? = nil, textProvider: AnimationTextProvider = DefaultTextProvider()) {
+  public init(
+    animation: Animation?,
+    imageProvider: AnimationImageProvider? = nil,
+    textProvider: AnimationTextProvider = DefaultTextProvider(),
+    fontProvider: AnimationFontProvider = DefaultFontProvider()) {
     self.animation = animation
     self.imageProvider = imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = textProvider
+    self.fontProvider = fontProvider
     super.init(frame: .zero)
     commonInit()
     makeAnimationLayer()
@@ -599,6 +615,7 @@ final public class AnimationView: LottieView {
     self.animation = nil
     self.imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = DefaultTextProvider()
+    self.fontProvider = DefaultFontProvider()
     super.init(frame: .zero)
     commonInit()
   }
@@ -607,6 +624,7 @@ final public class AnimationView: LottieView {
     self.animation = nil
     self.imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = DefaultTextProvider()
+    self.fontProvider = DefaultFontProvider()
     super.init(frame: .zero)
     commonInit()
   }
@@ -614,6 +632,7 @@ final public class AnimationView: LottieView {
   required public init?(coder aDecoder: NSCoder) {
     self.imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = DefaultTextProvider()
+    self.fontProvider = DefaultFontProvider()
     super.init(coder: aDecoder)
     commonInit()
   }
@@ -717,34 +736,38 @@ final public class AnimationView: LottieView {
      If layout is changed without animation, explicitly set animation duration to 0.0
      inside CATransaction to avoid unwanted artifacts.
      */
-
-    /// Check if any animation exist on the view's layer, and grab the duration and timing functions of the animation.
+    /// Check if any animation exist on the view's layer, and match it.
     if let key = viewLayer?.animationKeys()?.first, let animation = viewLayer?.animation(forKey: key) {
       // The layout is happening within an animation block. Grab the animation data.
       
-      let animationKey = "LayoutAnimation"
-      animationLayer.removeAnimation(forKey: animationKey)
+      let positionKey = "LayoutPositionAnimation"
+      let transformKey = "LayoutTransformAnimation"
+      animationLayer.removeAnimation(forKey: positionKey)
+      animationLayer.removeAnimation(forKey: transformKey)
       
-      let positionAnimation = CABasicAnimation(keyPath: "position")
+      let positionAnimation = animation.copy() as? CABasicAnimation ?? CABasicAnimation(keyPath: "position")
+      positionAnimation.keyPath = "position"
+      positionAnimation.isAdditive = false
       positionAnimation.fromValue = animationLayer.position
       positionAnimation.toValue = position
-      let xformAnimation = CABasicAnimation(keyPath: "transform")
+      positionAnimation.isRemovedOnCompletion = true
+      
+      let xformAnimation = animation.copy() as? CABasicAnimation ?? CABasicAnimation(keyPath: "transform")
+      xformAnimation.keyPath = "transform"
+      xformAnimation.isAdditive = false
       xformAnimation.fromValue = animationLayer.transform
       xformAnimation.toValue = xform
-      
-      let group = CAAnimationGroup()
-      group.animations = [positionAnimation, xformAnimation]
-      group.duration = animation.duration
-      group.fillMode = .both
-      group.timingFunction = animation.timingFunction
-      if animation.beginTime > 0 {
-        group.beginTime = CACurrentMediaTime() + animation.beginTime
-      }
-      group.isRemovedOnCompletion = true
+      xformAnimation.isRemovedOnCompletion = true
       
       animationLayer.position = position
       animationLayer.transform = xform
-      animationLayer.add(group, forKey: animationKey)
+      #if os(OSX)
+      animationLayer.anchorPoint = layer?.anchorPoint ?? CGPoint.zero
+      #else
+      animationLayer.anchorPoint = layer.anchorPoint
+      #endif
+      animationLayer.add(positionAnimation, forKey: positionKey)
+      animationLayer.add(xformAnimation, forKey: transformKey)
     } else {
       CATransaction.begin()
       CATransaction.setAnimationDuration(0.0)
@@ -786,7 +809,7 @@ final public class AnimationView: LottieView {
       return
     }
     
-    let animationLayer = AnimationContainer(animation: animation, imageProvider: imageProvider, textProvider: textProvider)
+    let animationLayer = AnimationContainer(animation: animation, imageProvider: imageProvider, textProvider: textProvider, fontProvider: fontProvider)
     animationLayer.renderScale = self.screenScale
     viewLayer?.addSublayer(animationLayer)
     self.animationLayer = animationLayer
@@ -809,12 +832,12 @@ final public class AnimationView: LottieView {
   /// Updates the animation frame. Does not affect any current animations
   func updateAnimationFrame(_ newFrame: CGFloat) {
     CATransaction.begin()
-    CATransaction.setDisableActions(true)
-    animationLayer?.currentFrame = newFrame
-    CATransaction.commit()
     CATransaction.setCompletionBlock {
         self.animationLayer?.forceDisplayUpdate()
     }
+    CATransaction.setDisableActions(true)
+    animationLayer?.currentFrame = newFrame
+    CATransaction.commit()
   }
   
   @objc override func animationWillMoveToBackground() {
@@ -826,8 +849,9 @@ final public class AnimationView: LottieView {
   }
   
   override func animationMovedToWindow() {
-    /// Don't update any state if both the `superview` and `window` is `nil`
-    guard window != nil && superview != nil else { return }
+    /// Don't update any state if the `superview`  is `nil`
+    /// When A viewA owns superViewB, it removes the superViewB from the window. At this point, viewA still owns superViewB and triggers the viewA method: -didmovetowindow
+    guard superview != nil else { return }
 
     if window != nil {
       updateAnimationForForegroundState()
@@ -856,11 +880,11 @@ final public class AnimationView: LottieView {
     }
   }
   
-  fileprivate var waitingToPlayAimation: Bool = false
+  fileprivate var waitingToPlayAnimation: Bool = false
   fileprivate func updateAnimationForForegroundState() {
     if let currentContext = animationContext {
-      if waitingToPlayAimation {
-        waitingToPlayAimation = false
+      if waitingToPlayAnimation {
+        waitingToPlayAnimation = false
         self.addNewAnimationForContext(currentContext)
       } else if backgroundBehavior == .pauseAndRestore {
         /// Restore animation from saved state
@@ -912,7 +936,7 @@ final public class AnimationView: LottieView {
     
     self.animationContext = animationContext
     
-    guard self.window != nil else { waitingToPlayAimation = true; return }
+    guard self.window != nil else { waitingToPlayAnimation = true; return }
     
     animationID = animationID + 1
     activeAnimationName = AnimationView.animationName + String(animationID)

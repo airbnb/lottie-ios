@@ -21,8 +21,8 @@ final class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
     self.lineJoin = stroke.lineJoin
     
     if let dashes = stroke.dashPattern {
-      var dashPatterns = [[Keyframe<Vector1D>]]()
-      var dashPhase = [Keyframe<Vector1D>]()
+      var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>()
+      var dashPhase = ContiguousArray<Keyframe<Vector1D>>()
       for dash in dashes {
         if dash.type == .offset {
           dashPhase = dash.value.keyframes
