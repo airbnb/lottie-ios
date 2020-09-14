@@ -80,6 +80,26 @@ public extension Animation {
       return nil
     }
   }
+    
+     /**
+     Loads an animation model from a bundle by JSON string. Returns `nil` if an animation is not found.
+     
+     - Parameter animationJSON: The JSON of target animation
+     - Parameter animationCache: A cache for holding loaded animations. Optional.
+     
+     - Returns: Deserialized `Animation`. Optional.
+     */
+    static func animation(from animationJSON: [AnyHashable: Any], animationCache: AnimationCacheProvider? = nil) -> Animation? {
+
+       do {
+         let data = try JSONSerialization.data(withJSONObject: animationJSON, options: [])
+         let animation = try JSONDecoder().decode(Animation.self, from: data);
+         return animation
+       } catch {
+         assertionFailure("Error creating animation from JSON \(error)")
+         return nil
+       }
+     }
   
   /// A closure for an Animation download. The closure is passed `nil` if there was an error.
   typealias DownloadClosure = (Animation?) -> Void
