@@ -33,6 +33,7 @@ For the first time, designers can create and ship beautiful animations without a
   s.tvos.exclude_files = 'lottie-swift/src/Public/MacOS/**/*'
   s.osx.exclude_files = 'lottie-swift/src/Public/iOS/**/*'
 
+  s.dependency 'ZippyJSON', '1.2.1'
   s.ios.frameworks = ['UIKit', 'CoreGraphics', 'QuartzCore']
   s.tvos.frameworks = ['UIKit', 'CoreGraphics', 'QuartzCore']
   s.osx.frameworks = ['AppKit', 'CoreGraphics', 'QuartzCore']
