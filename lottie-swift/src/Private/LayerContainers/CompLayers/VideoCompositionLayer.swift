@@ -23,7 +23,7 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
     private var endVideoObserver: Any?
     var videoProvider: AnimationVideoProvider? {
       didSet {
-        startUpdatingPlayer()
+        updatePlayer()
       }
     }
     
@@ -31,9 +31,12 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
         if let endVideoObserver = endVideoObserver {
             NotificationCenter.default.removeObserver(endVideoObserver)
         }
+        
+        #if os(iOS)
         if let appResumeObserver = appResumeObserver {
             NotificationCenter.default.removeObserver(appResumeObserver)
         }
+        #endif
     }
     
     init(videoModel: VideoLayerModel, videoProvider: AnimationVideoProvider = DefaultVideoProvider()) {
@@ -43,7 +46,7 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
         
         super.init(layer: videoModel, size: .zero)
         
-        startUpdatingPlayer()
+        updatePlayer()
     }
   
     required init?(coder aDecoder: NSCoder) {
@@ -66,26 +69,6 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
         }
         
         super.hideContentsWithFrame(frame: frame, forceUpdates: forceUpdates)
-    }
-    
-    private func startUpdatingPlayer() {
-        #if os(macOS)
-        if #available(macOS 10.13, *) {
-            if #available(macOS 10.14, *) {
-                DispatchQueue.global(priority: .default).async {
-                    self.updatePlayer()
-                }
-            } else {
-                self.updatePlayer()
-            }
-        } else {
-            DispatchQueue.global(priority: .default).async {
-                self.updatePlayer()
-            }
-        }
-        #else
-        self.updatePlayer()
-        #endif
     }
     
     private func updatePlayer() {
@@ -118,6 +101,7 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
                 setupAppResumeHandler(for: player)
                 #endif
                 
+                var redundantOldPlayerLayer: AVPlayerLayer?
                 if let oldPlayerLayer = self.playerLayer {
                     playerLayer.opacity = 0.0
                     
@@ -132,15 +116,15 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
                     fadeOut.delegate = self
                     self.configure(fadeAnimation: fadeOut, for: oldPlayerLayer)
                     
+                    redundantOldPlayerLayer = self.oldPlayerLayer
                     self.oldPlayerLayer = oldPlayerLayer
                 }
                 if self.playing {
                     player.play()
                 }
-                DispatchQueue.main.async {
-                    self.contentsLayer.addSublayer(playerLayer)
-                }
                 
+                redundantOldPlayerLayer?.removeFromSuperlayer()
+                contentsLayer.addSublayer(playerLayer)
                 self.playerLayer = playerLayer
             }
     }
