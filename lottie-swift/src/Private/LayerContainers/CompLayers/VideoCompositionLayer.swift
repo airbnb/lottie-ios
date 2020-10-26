@@ -23,7 +23,8 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
     private var endVideoObserver: Any?
     var videoProvider: AnimationVideoProvider? {
       didSet {
-        startUpdatingPlayer()
+        oldPlayerLayer?.removeFromSuperlayer()
+        updatePlayer()
       }
     }
     
@@ -31,9 +32,12 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
         if let endVideoObserver = endVideoObserver {
             NotificationCenter.default.removeObserver(endVideoObserver)
         }
+        
+        #if os(iOS)
         if let appResumeObserver = appResumeObserver {
             NotificationCenter.default.removeObserver(appResumeObserver)
         }
+        #endif
     }
     
     init(videoModel: VideoLayerModel, videoProvider: AnimationVideoProvider = DefaultVideoProvider()) {
@@ -43,7 +47,7 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
         
         super.init(layer: videoModel, size: .zero)
         
-        startUpdatingPlayer()
+        updatePlayer()
     }
   
     required init?(coder aDecoder: NSCoder) {
@@ -68,81 +72,88 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
         super.hideContentsWithFrame(frame: frame, forceUpdates: forceUpdates)
     }
     
-    private func startUpdatingPlayer() {
-        #if os(macOS)
-        if #available(macOS 10.13, *) {
-            if #available(macOS 10.14, *) {
-                DispatchQueue.global(priority: .default).async {
-                    self.updatePlayer()
-                }
-            } else {
-                self.updatePlayer()
+    private func updatePlayer() {
+        guard let url = self.videoProvider?.urlFor(keypathName: self.keypathName, file: self.file) else { return }
+        
+        let assetLoader: (URL) -> (AVPlayer?, CGSize?) = { url in
+            let asset = AVAsset(url: url)
+            guard let contentSize = self.resolutionForLocalVideo(asset: asset) else { return (nil, nil) }
+            
+            let playerItem = AVPlayerItem(asset: asset)
+            let player = AVPlayer(playerItem: playerItem)
+            if #available(OSX 10.14, iOS 12, *) {
+                player.preventsDisplaySleepDuringVideoPlayback = false
             }
-        } else {
-            DispatchQueue.global(priority: .default).async {
-                self.updatePlayer()
+            return (player, contentSize)
+        }
+        
+        #if os(macOS)
+        let videoProvider = self.videoProvider
+        let backgroundQueue = DispatchQueue.global(priority: .default)
+        backgroundQueue.async {
+            let (player, size) = assetLoader(url)
+            guard let unwrappedPlayer = player, let unwrappedSize = size else { return }
+            DispatchQueue.main.async {
+                guard self.videoProvider === videoProvider else { return }
+
+                self.configure(with: unwrappedPlayer, contentSize: unwrappedSize)
             }
         }
         #else
-        self.updatePlayer()
+        let (player, size) = assetLoader(url)
+        guard let unwrappedPlayer = player, let unwrappedSize = size else { return }
+        configure(with: unwrappedPlayer, contentSize: unwrappedSize)
         #endif
     }
     
-    private func updatePlayer() {
-            if let url = self.videoProvider?.urlFor(keypathName: self.keypathName, file: self.file),
-                let contentSize = self.resolutionForLocalVideo(url: url) {
-                let playerLayer = AVPlayerLayer()
-                let player = AVPlayer(url: url)
-                if #available(OSX 10.14, iOS 12, *) {
-                    player.preventsDisplaySleepDuringVideoPlayback = false
-                }
-                playerLayer.player = player
-                playerLayer.frame = CGRect(origin: .zero, size: contentSize)
-                if let endVideoObserver = self.endVideoObserver {
-                    NotificationCenter.default.removeObserver(endVideoObserver)
-                }
-                self.endVideoObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
-                                                                          object: player.currentItem,
-                                                                          queue: .main) { [weak self] _ in
-                    if self?.loopVideo == true, self?.playing == true {
-                        player.seek(to: CMTime.zero)
-                        player.play()
-                    } else {
-                        self?.playing = false
-                    }
-                }
-                #if os(macOS)
-                playerLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
-                #elseif os(iOS)
-                playerLayer.videoGravity = .resizeAspectFill
-                setupAppResumeHandler(for: player)
-                #endif
-                
-                if let oldPlayerLayer = self.playerLayer {
-                    playerLayer.opacity = 0.0
-                    
-                    let fadeIn = CABasicAnimation()
-                    fadeIn.fromValue = 0.0
-                    fadeIn.toValue = 1.0
-                    self.configure(fadeAnimation: fadeIn, for: playerLayer)
-                    
-                    let fadeOut = CABasicAnimation()
-                    fadeOut.fromValue = 1.0
-                    fadeOut.toValue = 0.0
-                    fadeOut.delegate = self
-                    self.configure(fadeAnimation: fadeOut, for: oldPlayerLayer)
-                    
-                    self.oldPlayerLayer = oldPlayerLayer
-                }
-                if self.playing {
-                    player.play()
-                }
-                DispatchQueue.main.async {
-                    self.contentsLayer.addSublayer(playerLayer)
-                }
-                
-                self.playerLayer = playerLayer
+    private func configure(with player: AVPlayer, contentSize: CGSize) {
+        if let endVideoObserver = self.endVideoObserver {
+            NotificationCenter.default.removeObserver(endVideoObserver)
+        }
+        
+        let playerLayer = AVPlayerLayer()
+        playerLayer.player = player
+        playerLayer.frame = CGRect(origin: .zero, size: contentSize)
+        self.endVideoObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
+                                                                       object: player.currentItem,
+                                                                       queue: .main) { [weak self] _ in
+            if self?.loopVideo == true, self?.playing == true {
+                player.seek(to: CMTime.zero)
+                player.play()
+            } else {
+                self?.playing = false
             }
+        }
+        
+        #if os(macOS)
+        playerLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+        #elseif os(iOS)
+        playerLayer.videoGravity = .resizeAspectFill
+        setupAppResumeHandler(for: player)
+        #endif
+        
+        if let oldPlayerLayer = self.playerLayer {
+            playerLayer.opacity = 0.0
+            
+            let fadeIn = CABasicAnimation()
+            fadeIn.fromValue = 0.0
+            fadeIn.toValue = 1.0
+            self.configure(fadeAnimation: fadeIn, for: playerLayer)
+            
+            let fadeOut = CABasicAnimation()
+            fadeOut.fromValue = 1.0
+            fadeOut.toValue = 0.0
+            fadeOut.delegate = self
+            self.configure(fadeAnimation: fadeOut, for: oldPlayerLayer)
+            
+            self.oldPlayerLayer = oldPlayerLayer
+        }
+        if self.playing {
+            player.play()
+        }
+        
+        contentsLayer.addSublayer(playerLayer)
+        self.playerLayer = playerLayer
     }
     
     private func configure(fadeAnimation: CAAnimation, for layer: CALayer) {
@@ -153,8 +164,8 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
         layer.add(fadeAnimation, forKey: #keyPath(CALayer.opacity))
     }
     
-    private func resolutionForLocalVideo(url: URL) -> CGSize? {
-        guard let track = AVURLAsset(url: url).tracks(withMediaType: .video).first else { return nil }
+    private func resolutionForLocalVideo(asset: AVAsset) -> CGSize? {
+        guard let track = asset.tracks(withMediaType: .video).first else { return nil }
         let size = track.naturalSize.applying(track.preferredTransform)
         return CGSize(width: abs(size.width), height: abs(size.height))
     }
