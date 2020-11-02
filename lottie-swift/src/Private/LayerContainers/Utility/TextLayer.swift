@@ -110,6 +110,7 @@ final class TextLayer: CALayer {
   }
   
   // Draws Debug colors for the font alignment.
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
   private func drawDebug(_ ctx: CGContext) {
     if let font = font {
       let ascent = CTFontGetAscent(font)
@@ -118,44 +119,24 @@ final class TextLayer: CALayer {
       let leading = CTFontGetLeading(font)
       
       // Ascent Red
-      if #available(iOS 13.0, *) {
-        ctx.setFillColor(CGColor(srgbRed: 1, green: 0, blue: 0, alpha: 0.5))
-      } else {
-        // Fallback on earlier versions
-      }
+      ctx.setFillColor(CGColor(srgbRed: 1, green: 0, blue: 0, alpha: 0.5))
       ctx.fill(CGRect(x:0, y:0, width:drawingRect.width, height:ascent))
       
       // Descent Blue
-      if #available(iOS 13.0, *) {
-        ctx.setFillColor(CGColor(srgbRed: 0, green: 0, blue: 1, alpha: 0.5))
-      } else {
-        // Fallback on earlier versions
-      }
+      ctx.setFillColor(CGColor(srgbRed: 0, green: 0, blue: 1, alpha: 0.5))
       ctx.fill(CGRect(x:0, y:ascent, width:drawingRect.width, height:descent))
       
       // Leading Yellow
-      if #available(iOS 13.0, *) {
-        ctx.setFillColor(CGColor(srgbRed: 1, green: 1, blue: 0, alpha: 0.5))
-      } else {
-        // Fallback on earlier versions
-      }
+      ctx.setFillColor(CGColor(srgbRed: 1, green: 1, blue: 0, alpha: 0.5))
       ctx.fill(CGRect(x:0, y:ascent+descent, width:drawingRect.width, height:leading))
       
       // Cap height Green
-      if #available(iOS 13.0, *) {
-        ctx.setFillColor(CGColor(srgbRed: 0, green: 1, blue: 0, alpha: 0.5))
-      } else {
-        // Fallback on earlier versions
-      }
+      ctx.setFillColor(CGColor(srgbRed: 0, green: 1, blue: 0, alpha: 0.5))
       ctx.fill(CGRect(x:0, y:ascent - capHeight, width:drawingRect.width, height:capHeight))
       
       if drawingRect.height - ascent+descent+leading > 0 {
         // Remainder
-        if #available(iOS 13.0, *) {
-          ctx.setFillColor(CGColor(srgbRed: 0, green: 1, blue: 1, alpha: 0.5))
-        } else {
-          // Fallback on earlier versions
-        }
+        ctx.setFillColor(CGColor(srgbRed: 0, green: 1, blue: 1, alpha: 0.5))
         ctx.fill(CGRect(x:0, y:ascent+descent+leading, width:drawingRect.width, height:drawingRect.height - ascent+descent+leading))
       }
     }
