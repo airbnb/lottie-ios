@@ -37,7 +37,7 @@ final class TextDocument: Codable {
   let baseline: Double?
   
   /// Fill Color data
-  let fillColorData: Color
+  let fillColorData: Color?
   
   /// Scroke Color data
   let strokeColorData: Color?

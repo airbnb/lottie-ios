@@ -10,7 +10,7 @@ import Foundation
 public class Asset: Codable {
   
   /// The ID of the asset
-  let id: String
+  public let id: String
   
   private enum CodingKeys : String, CodingKey {
     case id = "id"

@@ -217,15 +217,15 @@ extension String {
     }
     if let index = self.firstIndex(of: "*") {
       // Wildcard search.
-      let prefix = self.prefix(upTo: index)
-      let suffix = self.suffix(from: self.index(after: index))
+      let prefix = String(self.prefix(upTo: index))
+      let suffix = String(self.suffix(from: self.index(after: index)))
       
       if prefix.count > 0 {
         // Match prefix.
         if keyname.count < prefix.count {
           return false
         }
-        let testPrefix = keyname.prefix(upTo: keyname.index(keyname.startIndex, offsetBy: prefix.count))
+        let testPrefix = String(keyname.prefix(upTo: keyname.index(keyname.startIndex, offsetBy: prefix.count)))
         if testPrefix != prefix {
           // Prefix doesnt match
           return false
@@ -238,7 +238,7 @@ extension String {
           return false
         }
         let index = keyname.index(keyname.endIndex, offsetBy: -suffix.count)
-        let testSuffix = keyname.suffix(from: index)
+        let testSuffix = String(keyname.suffix(from: index))
         if testSuffix != suffix {
           return false
         }
