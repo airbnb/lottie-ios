@@ -95,6 +95,8 @@ If you have doubts, please, check the following links:
 
 After successfully retrieved the package and added it to your project, just import `Lottie` and you can get the full benefits of it.
 
+-----
+
 ### Objective-C Support
 
 As of 3.0 Lottie has been completely rewritten in Swift! 
@@ -108,3 +110,7 @@ The official objective c branch can be found here:
 Also check out the documentation regarding it here: 
 
 [iOS Migration](http://airbnb.io/lottie/#/ios-migration)
+
+### Data collection
+
+The Lottie SDK does not collect any data. We provide this notice to help you fill out [App Privacy Details](https://developer.apple.com/app-store/app-privacy-details/).
