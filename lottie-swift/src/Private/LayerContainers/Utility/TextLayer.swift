@@ -223,7 +223,7 @@ final class TextLayer: CALayer {
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.lineSpacing = lineSpacing
     paragraphStyle.lineHeightMultiple = 1
-    paragraphStyle.maximumLineHeight = ascent+descent+leading
+//    paragraphStyle.maximumLineHeight = ascent+descent+leading
     paragraphStyle.alignment = alignment
     paragraphStyle.lineBreakMode = NSLineBreakMode.byWordWrapping
     var attributes: [NSAttributedString.Key : Any] = [
@@ -269,6 +269,9 @@ final class TextLayer: CALayer {
       drawingRect.size.height += (ascent - capHeight)
       drawingRect.size.height += descent
       textAnchor = CGPoint(x: 0, y: (ascent-capHeight))
+      drawingAnchor = CGPoint(x: textAnchor.x.remap(fromLow: 0, fromHigh: drawingRect.size.width, toLow: 0, toHigh: 1),
+                                y: textAnchor.y.remap(fromLow: 0, fromHigh: drawingRect.size.height , toLow: 0, toHigh: 1))
+
     } else {
       let size = CTFramesetterSuggestFrameSizeWithConstraints(
         setter,
@@ -289,11 +292,16 @@ final class TextLayer: CALayer {
       }
       drawingRect = CGRect(x: 0, y: 0, width: ceil(size.width),
                            height: ceil(size.height))
+      let diff: CGFloat = drawingRect.height - ascent-descent+leading
+      // Now Calculate Anchor
+      drawingAnchor = CGPoint(x: textAnchor.x.remap(fromLow: 0, fromHigh: drawingRect.size.width, toLow: 0, toHigh: 1),
+                            y: textAnchor.y.remap(fromLow: 0, fromHigh: drawingRect.size.height - diff, toLow: 0, toHigh: 1))
+
     }
     
-    // Now Calculate Anchor
-    drawingAnchor = CGPoint(x: textAnchor.x.remap(fromLow: 0, fromHigh: drawingRect.size.width, toLow: 0, toHigh: 1),
-                            y: textAnchor.y.remap(fromLow: 0, fromHigh: drawingRect.size.height, toLow: 0, toHigh: 1))
+//    // Now Calculate Anchor
+//    drawingAnchor = CGPoint(x: textAnchor.x.remap(fromLow: 0, fromHigh: drawingRect.size.width, toLow: 0, toHigh: 1),
+//                            y: textAnchor.y.remap(fromLow: 0, fromHigh: drawingRect.size.height, toLow: 0, toHigh: 1))
 
     if fillFrameSetter != nil && strokeFrameSetter != nil {
       drawingRect.size.width += strokeWidth
