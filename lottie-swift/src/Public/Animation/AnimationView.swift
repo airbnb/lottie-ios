@@ -91,6 +91,7 @@ final public class AnimationView: LottieView {
    */
   public var imageProvider: AnimationImageProvider {
     didSet {
+      animationLayer?.imageProvider = imageProvider
       reloadImages()
     }
   }
