@@ -91,6 +91,7 @@ final public class AnimationView: LottieView {
    */
   public var imageProvider: AnimationImageProvider {
     didSet {
+      animationLayer?.imageProvider = imageProvider
       reloadImages()
     }
   }
@@ -402,7 +403,6 @@ final public class AnimationView: LottieView {
   
   /// Reloads the images supplied to the animation from the `imageProvider`
   public func reloadImages() {
-    animationLayer?.imageProvider = imageProvider
     animationLayer?.reloadImages()
   }
     
