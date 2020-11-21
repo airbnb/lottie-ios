@@ -1,0 +1,6 @@
+framework module Lottie {
+  umbrella header "lottie-ios-macOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

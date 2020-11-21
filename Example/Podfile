@@ -1,0 +1,22 @@
+use_frameworks!
+
+install! 'cocoapods', :deterministic_uuids => false
+
+target 'lottie-swift_macOS' do
+  platform :osx, '10.10'
+  pod 'lottie-ios', :path => '../'
+end
+
+target 'lottie-swift_tvOS' do
+  platform :tvos, '9.0'
+  pod 'lottie-ios', :path => '../'
+end
+
+target 'lottie-swift_Example' do
+  platform :ios, '9.0'
+  pod 'lottie-ios', :path => '../'
+
+  target 'lottie-swift_Tests' do
+    inherit! :search_paths
+  end
+end

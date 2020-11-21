@@ -1,1 +1,0 @@
-PODS_LOTTEANIMATOR_MANTLE_OTHER_LDFLAGS = -framework "Foundation"
