@@ -13,6 +13,7 @@ extension Array where Element == LayerModel {
   func initializeCompositionLayers(assetLibrary: AssetLibrary?,
                                    layerImageProvider: LayerImageProvider,
                                    textProvider: AnimationTextProvider,
+                                   layerVideoProvider: LayerVideoProvider,
                                    fontProvider: AnimationFontProvider,
                                    frameRate: CGFloat) -> [CompositionLayer] {
     var compositionLayers = [CompositionLayer]()
@@ -40,7 +41,7 @@ extension Array where Element == LayerModel {
         let precompContainer = PreCompositionLayer(precomp: precompLayer,
                                                    asset: precompAsset,
                                                    layerImageProvider: layerImageProvider,
-                                                   textProvider: textProvider,
+                                                   textProvider: textProvider, layerVideoProvider: layerVideoProvider,
                                                    fontProvider: fontProvider,
                                                    assetLibrary: assetLibrary,
                                                    frameRate: frameRate)
@@ -56,6 +57,10 @@ extension Array where Element == LayerModel {
         let textContainer = TextCompositionLayer(textLayer: textLayer, textProvider: textProvider, fontProvider: fontProvider)
         compositionLayers.append(textContainer)
         layerMap[layer.index] = textContainer
+      } else if let videoLayer = layer as? VideoLayerModel {
+        let videoContainer = VideoCompositionLayer(videoModel: videoLayer, videoProvider: layerVideoProvider.videoProvider)
+        compositionLayers.append(videoContainer)
+        layerMap[layer.index] = videoContainer
       } else {
         let genericLayer = NullCompositionLayer(layer: layer)
         compositionLayers.append(genericLayer)
