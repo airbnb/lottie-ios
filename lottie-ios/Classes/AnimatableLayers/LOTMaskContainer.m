@@ -37,13 +37,13 @@
   return self;
 }
 
-- (void)updateForFrame:(NSNumber *)frame withViewBounds:(CGRect)viewBounds {
+- (void)updateForFrame:(NSNumber *)frame withViewBounds:(__unused CGRect)viewBounds {
   if ([self hasUpdateForFrame:frame]) {
     LOTBezierPath *path = [_pathInterpolator pathForFrame:frame cacheLengths:NO];
     
     if (self.maskNode.maskMode == LOTMaskModeSubtract) {
       CGMutablePathRef pathRef = CGPathCreateMutable();
-      CGPathAddRect(pathRef, NULL, viewBounds);
+      CGPathAddRect(pathRef, NULL, (CGRect){-1e8, -1e8, 2e8, 2e8});
       CGPathAddPath(pathRef, NULL, path.CGPath);
       self.path = pathRef;
       self.fillRule = @"even-odd";
