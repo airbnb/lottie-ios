@@ -36,6 +36,8 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		B9FB24E62574F24300EB3EB4 /* 31206454-preview.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B9FB24E42574F24200EB3EB4 /* 31206454-preview.mp4 */; };
+		B9FB24E72574F24300EB3EB4 /* 1052689496-preview.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B9FB24E52574F24300EB3EB4 /* 1052689496-preview.mp4 */; };
 		BD219F24999976E886C12456 /* Pods_lottie_swift_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486E8356220A2275007CD915 /* Pods_lottie_swift_macOS.framework */; };
 		F70695AD1682BD3DE4571C16 /* Pods_lottie_swift_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE029188DBACE4177BA6CED /* Pods_lottie_swift_Example.framework */; };
 		F9607D5C3894D27EBC8E897A /* Pods_lottie_swift_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A87FE847836C80F1A12E29 /* Pods_lottie_swift_Tests.framework */; };
@@ -97,6 +99,9 @@
 		990C0AA8A35456B23B51C127 /* Pods-lottie-swift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lottie-swift_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-lottie-swift_Example/Pods-lottie-swift_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9BE45D36D5254BD996E95AB1 /* Pods-lottie-swift_macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lottie-swift_macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-lottie-swift_macOS/Pods-lottie-swift_macOS.release.xcconfig"; sourceTree = "<group>"; };
 		9C512735B8BB596E2E2D58CE /* Pods-lottie-swift_tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lottie-swift_tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-lottie-swift_tvOS/Pods-lottie-swift_tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		B9FB24DB2574F0F300EB3EB4 /* lottie-swift_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "lottie-swift_Example.entitlements"; sourceTree = "<group>"; };
+		B9FB24E42574F24200EB3EB4 /* 31206454-preview.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "31206454-preview.mp4"; sourceTree = "<group>"; };
+		B9FB24E52574F24300EB3EB4 /* 1052689496-preview.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1052689496-preview.mp4"; sourceTree = "<group>"; };
 		E23ECB37162FF8C4A2827EEC /* Pods_lottie_swift_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lottie_swift_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E82294C6B04BC5EF7FF4ED2E /* Pods-lottie-swift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lottie-swift_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-lottie-swift_Tests/Pods-lottie-swift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		EBE029188DBACE4177BA6CED /* Pods_lottie_swift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lottie_swift_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,6 +203,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				B9FB24DB2574F0F300EB3EB4 /* lottie-swift_Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for lottie-swift */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -227,6 +233,7 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
+				B9FB24EC2574F60300EB3EB4 /* Assets */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
@@ -279,6 +286,15 @@
 				E23ECB37162FF8C4A2827EEC /* Pods_lottie_swift_tvOS.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B9FB24EC2574F60300EB3EB4 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				B9FB24E42574F24200EB3EB4 /* 31206454-preview.mp4 */,
+				B9FB24E52574F24300EB3EB4 /* 1052689496-preview.mp4 */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -443,7 +459,9 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				48F48E7D21E406B100D9E9A6 /* BasicLayers.json in Resources */,
+				B9FB24E62574F24300EB3EB4 /* 31206454-preview.mp4 in Resources */,
 				48F48E7F21E406B100D9E9A6 /* AnimatedTransforms.json in Resources */,
+				B9FB24E72574F24300EB3EB4 /* 1052689496-preview.mp4 in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -916,12 +934,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VM8ZLJG6JZ;
+				CODE_SIGN_ENTITLEMENTS = "lottie-swift_Example.entitlements";
 				INFOPLIST_FILE = "lottie-swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -931,12 +952,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VM8ZLJG6JZ;
+				CODE_SIGN_ENTITLEMENTS = "lottie-swift_Example.entitlements";
 				INFOPLIST_FILE = "lottie-swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -62,6 +62,7 @@ final public class AnimationView: LottieView {
    */
   public var animation: Animation? {
     didSet {
+      animation?.loopVideoAnimations = loopVideos
       makeAnimationLayer()
     }
   }
@@ -72,6 +73,12 @@ final public class AnimationView: LottieView {
       self.animation = animationName.flatMap {
         Animation.named($0, animationCache: nil)
       }
+    }
+  }
+
+  @IBInspectable var loopVideos: Bool = false {
+    didSet {
+      animation?.loopVideoAnimations = loopVideos
     }
   }
   

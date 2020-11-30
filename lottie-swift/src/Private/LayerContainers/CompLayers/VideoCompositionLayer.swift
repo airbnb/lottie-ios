@@ -63,14 +63,14 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
         super.displayContentsWithFrame(frame: frame, forceUpdates: forceUpdates)
     }
     
-//    override func hideContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
-//        if playing {
-//            playerLayer?.player?.pause()
-//            playing = false
-//        }
-//
-//        super.hideContentsWithFrame(frame: frame, forceUpdates: forceUpdates)
-//    }
+    override func hideContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
+        if playing {
+            playerLayer?.player?.pause()
+            playing = false
+        }
+
+        super.hideContentsWithFrame(frame: frame, forceUpdates: forceUpdates)
+    }
     
     private func updatePlayer() {
         guard let url = self.videoProvider?.urlFor(keypathName: self.keypathName, file: self.file) else { return }
@@ -81,7 +81,7 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
             
             let playerItem = AVPlayerItem(asset: asset)
             let player = AVPlayer(playerItem: playerItem)
-            if #available(OSX 10.14, iOS 12, *) {
+            if #available(OSX 10.14, iOS 12, tvOS 12.0, *) {
                 player.preventsDisplaySleepDuringVideoPlayback = false
             }
             return (player, contentSize)

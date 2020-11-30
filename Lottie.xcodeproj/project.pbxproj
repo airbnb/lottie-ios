@@ -630,6 +630,26 @@
 		4899B00B24DB2A3D00194C96 /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899B00724DB2A3D00194C96 /* TextLayer.swift */; };
 		4899B00C24DB2A3D00194C96 /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899B00724DB2A3D00194C96 /* TextLayer.swift */; };
 		48F4EECD229F167F00949A97 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8724220B78BF007CD915 /* TextCompositionLayer.swift */; };
+		B9FB24F22574F9FA00EB3EB4 /* VideoLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB24F12574F9FA00EB3EB4 /* VideoLayerModel.swift */; };
+		B9FB24F32574F9FB00EB3EB4 /* VideoLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB24F12574F9FA00EB3EB4 /* VideoLayerModel.swift */; };
+		B9FB24F42574F9FB00EB3EB4 /* VideoLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB24F12574F9FA00EB3EB4 /* VideoLayerModel.swift */; };
+		B9FB24F52574F9FB00EB3EB4 /* VideoLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB24F12574F9FA00EB3EB4 /* VideoLayerModel.swift */; };
+		B9FB24F62574F9FB00EB3EB4 /* VideoLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB24F12574F9FA00EB3EB4 /* VideoLayerModel.swift */; };
+		B9FB24FD2574FA0E00EB3EB4 /* VideoCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB24FC2574FA0E00EB3EB4 /* VideoCompositionLayer.swift */; };
+		B9FB24FE2574FA0E00EB3EB4 /* VideoCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB24FC2574FA0E00EB3EB4 /* VideoCompositionLayer.swift */; };
+		B9FB24FF2574FA0E00EB3EB4 /* VideoCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB24FC2574FA0E00EB3EB4 /* VideoCompositionLayer.swift */; };
+		B9FB25002574FA0E00EB3EB4 /* VideoCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB24FC2574FA0E00EB3EB4 /* VideoCompositionLayer.swift */; };
+		B9FB25012574FA0E00EB3EB4 /* VideoCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB24FC2574FA0E00EB3EB4 /* VideoCompositionLayer.swift */; };
+		B9FB25082574FA3000EB3EB4 /* AnimationVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB25072574FA3000EB3EB4 /* AnimationVideoProvider.swift */; };
+		B9FB25092574FA3000EB3EB4 /* AnimationVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB25072574FA3000EB3EB4 /* AnimationVideoProvider.swift */; };
+		B9FB250A2574FA3000EB3EB4 /* AnimationVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB25072574FA3000EB3EB4 /* AnimationVideoProvider.swift */; };
+		B9FB250B2574FA3000EB3EB4 /* AnimationVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB25072574FA3000EB3EB4 /* AnimationVideoProvider.swift */; };
+		B9FB250C2574FA3000EB3EB4 /* AnimationVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB25072574FA3000EB3EB4 /* AnimationVideoProvider.swift */; };
+		B9FB25132574FA7E00EB3EB4 /* LayerVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB25122574FA7E00EB3EB4 /* LayerVideoProvider.swift */; };
+		B9FB25142574FA7E00EB3EB4 /* LayerVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB25122574FA7E00EB3EB4 /* LayerVideoProvider.swift */; };
+		B9FB25152574FA7E00EB3EB4 /* LayerVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB25122574FA7E00EB3EB4 /* LayerVideoProvider.swift */; };
+		B9FB25162574FA7E00EB3EB4 /* LayerVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB25122574FA7E00EB3EB4 /* LayerVideoProvider.swift */; };
+		B9FB25172574FA7E00EB3EB4 /* LayerVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB25122574FA7E00EB3EB4 /* LayerVideoProvider.swift */; };
 		CD1616482367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
 		CD1616492367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
 		CD16164A2367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
@@ -797,6 +817,10 @@
 		4899AFFB24DB269A00194C96 /* AnimationFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationFontProvider.swift; sourceTree = "<group>"; };
 		4899AFFF24DB27F200194C96 /* LayerFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerFontProvider.swift; sourceTree = "<group>"; };
 		4899B00724DB2A3D00194C96 /* TextLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayer.swift; sourceTree = "<group>"; };
+		B9FB24F12574F9FA00EB3EB4 /* VideoLayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoLayerModel.swift; sourceTree = "<group>"; };
+		B9FB24FC2574FA0E00EB3EB4 /* VideoCompositionLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCompositionLayer.swift; sourceTree = "<group>"; };
+		B9FB25072574FA3000EB3EB4 /* AnimationVideoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationVideoProvider.swift; sourceTree = "<group>"; };
+		B9FB25122574FA7E00EB3EB4 /* LayerVideoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerVideoProvider.swift; sourceTree = "<group>"; };
 		CD1616472367325A00325353 /* GradientValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientValueProvider.swift; sourceTree = "<group>"; };
 		E654753822AAA9AD00FE590F /* LayerTextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerTextProvider.swift; sourceTree = "<group>"; };
 		E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTextProvider.swift; sourceTree = "<group>"; };
@@ -903,7 +927,7 @@
 				4899AFFA24DB267500194C96 /* FontProvider */,
 				486E86FC220B78BF007CD915 /* MacOS */,
 				486E8701220B78BF007CD915 /* Animation */,
-				486E8705220B78BF007CD915 /* ImageProvider */,
+				486E8705220B78BF007CD915 /* Providers */,
 				E6EAA7B622AA833200F345A4 /* TextProvider */,
 				486E8707220B78BF007CD915 /* iOS */,
 				486E8710220B78BF007CD915 /* Primitives */,
@@ -934,12 +958,13 @@
 			path = Animation;
 			sourceTree = "<group>";
 		};
-		486E8705220B78BF007CD915 /* ImageProvider */ = {
+		486E8705220B78BF007CD915 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				B9FB25072574FA3000EB3EB4 /* AnimationVideoProvider.swift */,
 				486E8706220B78BF007CD915 /* AnimationImageProvider.swift */,
 			);
-			path = ImageProvider;
+			path = Providers;
 			sourceTree = "<group>";
 		};
 		486E8707220B78BF007CD915 /* iOS */ = {
@@ -1023,6 +1048,7 @@
 		486E8721220B78BF007CD915 /* CompLayers */ = {
 			isa = PBXGroup;
 			children = (
+				B9FB24FC2574FA0E00EB3EB4 /* VideoCompositionLayer.swift */,
 				486E8722220B78BF007CD915 /* CompositionLayer.swift */,
 				486E8723220B78BF007CD915 /* NullCompositionLayer.swift */,
 				486E8724220B78BF007CD915 /* TextCompositionLayer.swift */,
@@ -1038,6 +1064,7 @@
 		486E872B220B78BF007CD915 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				B9FB25122574FA7E00EB3EB4 /* LayerVideoProvider.swift */,
 				486E872C220B78BF007CD915 /* LayerTransformNode.swift */,
 				486E872D220B78BF007CD915 /* InvertedMatteLayer.swift */,
 				486E872E220B78BF007CD915 /* LayerImageProvider.swift */,
@@ -1233,6 +1260,7 @@
 		486E876F220B78BF007CD915 /* Layers */ = {
 			isa = PBXGroup;
 			children = (
+				B9FB24F12574F9FA00EB3EB4 /* VideoLayerModel.swift */,
 				486E8770220B78BF007CD915 /* SolidLayerModel.swift */,
 				486E8771220B78BF007CD915 /* LayerModel.swift */,
 				486E8772220B78BF007CD915 /* ImageLayerModel.swift */,
@@ -1576,6 +1604,7 @@
 				486E87A1220B78D1007CD915 /* AnimationViewInitializers.swift in Sources */,
 				486E87A2220B78D1007CD915 /* AnimationView.swift in Sources */,
 				486E87A3220B78D1007CD915 /* AnimationPublic.swift in Sources */,
+				B9FB25082574FA3000EB3EB4 /* AnimationVideoProvider.swift in Sources */,
 				486E87A4220B78D1007CD915 /* AnimationImageProvider.swift in Sources */,
 				486E87A5220B78D1007CD915 /* FilepathImageProvider.swift in Sources */,
 				486E87A6220B78D1007CD915 /* AnimatedSwitch.swift in Sources */,
@@ -1626,9 +1655,11 @@
 				486E87D4220B78D1007CD915 /* StrokeNode.swift in Sources */,
 				E654753922AAA9AD00FE590F /* LayerTextProvider.swift in Sources */,
 				486E87D5220B78D1007CD915 /* FillNode.swift in Sources */,
+				B9FB24F22574F9FA00EB3EB4 /* VideoLayerModel.swift in Sources */,
 				486E87D6220B78D1007CD915 /* GradientStrokeNode.swift in Sources */,
 				486E87D7220B78D1007CD915 /* ValueContainer.swift in Sources */,
 				486E87D8220B78D1007CD915 /* NodeProperty.swift in Sources */,
+				B9FB25132574FA7E00EB3EB4 /* LayerVideoProvider.swift in Sources */,
 				486E87D9220B78D1007CD915 /* AnyNodeProperty.swift in Sources */,
 				486E87DA220B78D1007CD915 /* NodePropertyMap.swift in Sources */,
 				486E87DB220B78D1007CD915 /* KeypathSearchable.swift in Sources */,
@@ -1702,6 +1733,7 @@
 				486E8816220B78D2007CD915 /* InterpolatableExtensions.swift in Sources */,
 				486E8817220B78D2007CD915 /* Interpolatable.swift in Sources */,
 				486E8818220B78D2007CD915 /* KeyframeExtensions.swift in Sources */,
+				B9FB24FD2574FA0E00EB3EB4 /* VideoCompositionLayer.swift in Sources */,
 				486E8819220B78D2007CD915 /* AnimationContext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1713,6 +1745,7 @@
 				486E881A220B78E4007CD915 /* AnimationViewInitializers.swift in Sources */,
 				486E881B220B78E4007CD915 /* AnimationView.swift in Sources */,
 				486E881C220B78E4007CD915 /* AnimationPublic.swift in Sources */,
+				B9FB25092574FA3000EB3EB4 /* AnimationVideoProvider.swift in Sources */,
 				486E881D220B78E4007CD915 /* AnimationImageProvider.swift in Sources */,
 				486E881E220B78E4007CD915 /* FilepathImageProvider.swift in Sources */,
 				486E881F220B78E4007CD915 /* AnimatedSwitch.swift in Sources */,
@@ -1763,9 +1796,11 @@
 				486E884B220B78E4007CD915 /* StarNode.swift in Sources */,
 				E654753A22AAA9B400FE590F /* LayerTextProvider.swift in Sources */,
 				486E884C220B78E4007CD915 /* GradientFillNode.swift in Sources */,
+				B9FB24F32574F9FB00EB3EB4 /* VideoLayerModel.swift in Sources */,
 				486E884D220B78E4007CD915 /* StrokeNode.swift in Sources */,
 				486E884E220B78E4007CD915 /* FillNode.swift in Sources */,
 				486E884F220B78E4007CD915 /* GradientStrokeNode.swift in Sources */,
+				B9FB25142574FA7E00EB3EB4 /* LayerVideoProvider.swift in Sources */,
 				486E8850220B78E4007CD915 /* ValueContainer.swift in Sources */,
 				486E8851220B78E4007CD915 /* NodeProperty.swift in Sources */,
 				486E8852220B78E4007CD915 /* AnyNodeProperty.swift in Sources */,
@@ -1839,6 +1874,7 @@
 				486E888F220B78E4007CD915 /* InterpolatableExtensions.swift in Sources */,
 				486E8890220B78E4007CD915 /* Interpolatable.swift in Sources */,
 				486E8891220B78E4007CD915 /* KeyframeExtensions.swift in Sources */,
+				B9FB24FE2574FA0E00EB3EB4 /* VideoCompositionLayer.swift in Sources */,
 				486E8892220B78E4007CD915 /* AnimationContext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1897,6 +1933,7 @@
 				486E88C8220B78F4007CD915 /* NodePropertyMap.swift in Sources */,
 				486E88C9220B78F4007CD915 /* KeypathSearchable.swift in Sources */,
 				486E88CA220B78F4007CD915 /* AnyValueContainer.swift in Sources */,
+				B9FB25152574FA7E00EB3EB4 /* LayerVideoProvider.swift in Sources */,
 				486E88CB220B78F4007CD915 /* KeyframeInterpolator.swift in Sources */,
 				486E88CC220B78F4007CD915 /* SingleValueProvider.swift in Sources */,
 				486E88CD220B78F4007CD915 /* GroupInterpolator.swift in Sources */,
@@ -1935,9 +1972,11 @@
 				486E88EC220B78F4007CD915 /* Marker.swift in Sources */,
 				486E88ED220B78F4007CD915 /* KeyedDecodingContainerExtensions.swift in Sources */,
 				486E88EE220B78F4007CD915 /* KeyframeGroup.swift in Sources */,
+				B9FB24FF2574FA0E00EB3EB4 /* VideoCompositionLayer.swift in Sources */,
 				486E88EF220B78F4007CD915 /* Keyframe.swift in Sources */,
 				486E88F0220B78F4007CD915 /* TextDocument.swift in Sources */,
 				486E88F1220B78F4007CD915 /* Glyph.swift in Sources */,
+				B9FB24F42574F9FB00EB3EB4 /* VideoLayerModel.swift in Sources */,
 				486E88F2220B78F4007CD915 /* TextAnimator.swift in Sources */,
 				486E88F3220B78F4007CD915 /* Font.swift in Sources */,
 				486E88F4220B78F4007CD915 /* ImageAsset.swift in Sources */,
@@ -1963,6 +2002,7 @@
 				486E8905220B78F4007CD915 /* Interpolatable.swift in Sources */,
 				486E8906220B78F4007CD915 /* KeyframeExtensions.swift in Sources */,
 				486E8907220B78F4007CD915 /* AnimationContext.swift in Sources */,
+				B9FB250A2574FA3000EB3EB4 /* AnimationVideoProvider.swift in Sources */,
 				486E8893220B78ED007CD915 /* FilepathImageProvider.swift in Sources */,
 				486E8894220B78ED007CD915 /* BundleImageProvider.swift in Sources */,
 				486E8895220B78ED007CD915 /* LottieView.swift in Sources */,
@@ -1981,6 +2021,7 @@
 				48F4EECD229F167F00949A97 /* TextCompositionLayer.swift in Sources */,
 				486E8908220B78FF007CD915 /* AnimationViewInitializers.swift in Sources */,
 				486E8909220B78FF007CD915 /* AnimationView.swift in Sources */,
+				B9FB250B2574FA3000EB3EB4 /* AnimationVideoProvider.swift in Sources */,
 				486E890A220B78FF007CD915 /* AnimationPublic.swift in Sources */,
 				486E890B220B78FF007CD915 /* AnimationImageProvider.swift in Sources */,
 				486E890C220B78FF007CD915 /* FilepathImageProvider.swift in Sources */,
@@ -2031,9 +2072,11 @@
 				486E8939220B78FF007CD915 /* StarNode.swift in Sources */,
 				E654753C22AAA9B600FE590F /* LayerTextProvider.swift in Sources */,
 				486E893A220B78FF007CD915 /* GradientFillNode.swift in Sources */,
+				B9FB24F52574F9FB00EB3EB4 /* VideoLayerModel.swift in Sources */,
 				486E893B220B78FF007CD915 /* StrokeNode.swift in Sources */,
 				486E893C220B78FF007CD915 /* FillNode.swift in Sources */,
 				486E893D220B78FF007CD915 /* GradientStrokeNode.swift in Sources */,
+				B9FB25162574FA7E00EB3EB4 /* LayerVideoProvider.swift in Sources */,
 				486E893E220B78FF007CD915 /* ValueContainer.swift in Sources */,
 				486E893F220B78FF007CD915 /* NodeProperty.swift in Sources */,
 				486E8940220B78FF007CD915 /* AnyNodeProperty.swift in Sources */,
@@ -2107,6 +2150,7 @@
 				486E897D220B78FF007CD915 /* InterpolatableExtensions.swift in Sources */,
 				486E897E220B78FF007CD915 /* Interpolatable.swift in Sources */,
 				486E897F220B78FF007CD915 /* KeyframeExtensions.swift in Sources */,
+				B9FB25002574FA0E00EB3EB4 /* VideoCompositionLayer.swift in Sources */,
 				486E8980220B78FF007CD915 /* AnimationContext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2165,6 +2209,7 @@
 				486E89B5220B790E007CD915 /* AnyNodeProperty.swift in Sources */,
 				486E89B6220B790E007CD915 /* NodePropertyMap.swift in Sources */,
 				486E89B7220B790E007CD915 /* KeypathSearchable.swift in Sources */,
+				B9FB25172574FA7E00EB3EB4 /* LayerVideoProvider.swift in Sources */,
 				486E89B8220B790E007CD915 /* AnyValueContainer.swift in Sources */,
 				486E89B9220B790E007CD915 /* KeyframeInterpolator.swift in Sources */,
 				486E89BA220B790E007CD915 /* SingleValueProvider.swift in Sources */,
@@ -2203,9 +2248,11 @@
 				486E89D9220B790E007CD915 /* Mask.swift in Sources */,
 				486E89DA220B790E007CD915 /* Marker.swift in Sources */,
 				486E89DB220B790E007CD915 /* KeyedDecodingContainerExtensions.swift in Sources */,
+				B9FB25012574FA0E00EB3EB4 /* VideoCompositionLayer.swift in Sources */,
 				486E89DC220B790E007CD915 /* KeyframeGroup.swift in Sources */,
 				486E89DD220B790E007CD915 /* Keyframe.swift in Sources */,
 				486E89DE220B790E007CD915 /* TextDocument.swift in Sources */,
+				B9FB24F62574F9FB00EB3EB4 /* VideoLayerModel.swift in Sources */,
 				486E89DF220B790E007CD915 /* Glyph.swift in Sources */,
 				486E89E0220B790E007CD915 /* TextAnimator.swift in Sources */,
 				486E89E1220B790E007CD915 /* Font.swift in Sources */,
@@ -2231,6 +2278,7 @@
 				486E89F3220B790E007CD915 /* Interpolatable.swift in Sources */,
 				486E89F4220B790E007CD915 /* KeyframeExtensions.swift in Sources */,
 				486E89F5220B790E007CD915 /* AnimationContext.swift in Sources */,
+				B9FB250C2574FA3000EB3EB4 /* AnimationVideoProvider.swift in Sources */,
 				486E8981220B7908007CD915 /* FilepathImageProvider.swift in Sources */,
 				486E8982220B7908007CD915 /* BundleImageProvider.swift in Sources */,
 				486E8983220B7908007CD915 /* LottieView.swift in Sources */,
