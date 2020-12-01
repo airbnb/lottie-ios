@@ -41,9 +41,16 @@
   if ([self hasUpdateForFrame:frame]) {
     LOTBezierPath *path = [_pathInterpolator pathForFrame:frame cacheLengths:NO];
     
-    if (self.maskNode.maskMode == LOTMaskModeSubtract) {
+    BOOL canInvoke = (self.maskNode.maskMode == LOTMaskModeSubtract && !self.maskNode.inverted);
+    canInvoke = canInvoke || (self.maskNode.maskMode == LOTMaskModeAdd && self.maskNode.inverted);
+      
+    if (canInvoke) {
       CGMutablePathRef pathRef = CGPathCreateMutable();
-      CGPathAddRect(pathRef, NULL, viewBounds);
+      CGRect rect{-1e8, -1e8, 2e8, 2e8};
+      if (!CGRectContainsRect(viewBounds, UIScreen.mainScreen.bounds)) {
+          rect = viewBounds;
+      }
+      CGPathAddRect(pathRef, NULL, rect);
       CGPathAddPath(pathRef, NULL, path.CGPath);
       self.path = pathRef;
       self.fillRule = @"even-odd";
