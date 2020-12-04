@@ -53,7 +53,7 @@ class ShapeTransform: ShapeItem, Transformable {
   
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: ShapeTransform.CodingKeys.self)
-    self.anchorPoint = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .anchorPoint) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+    self.anchorPoint = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .anchorPoint)?.flipLast() ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
     self.position = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .position)?.flipLast() ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
     self.scale = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .scale) ?? KeyframeGroup(Vector3D(x: Double(100), y: 100, z: 100))
     let rotationZ = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotationZ)

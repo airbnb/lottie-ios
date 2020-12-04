@@ -123,13 +123,14 @@ class LayerTransformNode: AnimatorNode {
     let orientation = transformProperties.orientation
     orientation.update(frame: frame)
     
-    let rotationX = transformProperties.rotationX.value.cgFloatValue + CGFloat(orientation.value.x)
-    let rotationY = transformProperties.rotationY.value.cgFloatValue + CGFloat(orientation.value.y)
-    let rotationZ = transformProperties.rotationZ.value.cgFloatValue + CGFloat(orientation.value.z)
+    let rotationX = transformProperties.rotationX.value.cgFloatValue
+    let rotationY = transformProperties.rotationY.value.cgFloatValue
+    let rotationZ = transformProperties.rotationZ.value.cgFloatValue
     
     localTransform = CATransform3D.makeTransform(anchor: transformProperties.anchor.value.pointValue,
                                                  position: position,
                                                  scale: transformProperties.scale.value.pointValue,
+                                                 orientation: (CGFloat(orientation.value.x), CGFloat(orientation.value.y), CGFloat(orientation.value.z)),
                                                  rotation: (rotationX, rotationY,
                                                             rotationZ),
                                                  skew: nil,

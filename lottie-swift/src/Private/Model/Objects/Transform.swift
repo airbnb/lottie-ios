@@ -93,7 +93,8 @@ class Transform: Codable, Transformable {
     let container = try decoder.container(keyedBy: Transform.CodingKeys.self)
     
     // AnchorPoint
-    self.anchorPoint = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .anchorPoint) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+    let anchorPointKeyframes = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .anchorPoint) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+    self.anchorPoint = anchorPointKeyframes.flipLast()
     self.orientation = try container.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .orientation) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
     
     // Position

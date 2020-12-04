@@ -69,6 +69,7 @@ public enum BlendMode: Int, Codable {
   case saturation
   case color
   case luminosity
+  case stencilAlpha
 }
 
 /**

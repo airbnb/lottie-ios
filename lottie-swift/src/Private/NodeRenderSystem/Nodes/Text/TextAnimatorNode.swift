@@ -134,6 +134,7 @@ class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
     return CATransform3D.makeTransform(anchor: anchor?.value.pointValue ?? .zero,
                                        position: position?.value.pointValue ?? .zero,
                                        scale: scale?.value.pointValue ?? Point3D(x: 100, y: 100, z: 0),
+                                       orientation: (x: 0, y: 0, z: 0),
                                        rotation: (rotationX?.value.cgFloatValue ?? 0, rotationY?.value.cgFloatValue ?? 0, rotationZ?.value.cgFloatValue ?? 0),
                                        skew: skew?.value.cgFloatValue,
                                        skewAxis: skewAxis?.value.cgFloatValue)
