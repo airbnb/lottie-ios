@@ -18,6 +18,7 @@ class ControlEffect: Effect {
     private var fastBlurEffect: FastBlurEffect?
     private var radialFastBlurEffect: RadialFastBlurEffect?
     private var centerVerticallyEffect: CenteredVerticallyEffect?
+    private var shiftChannelsEffect: ShiftChannelsEffect?
     
     override func setUp(layer: CALayer) {
         if name == "Evolution_(%)_In" {
@@ -36,6 +37,11 @@ class ControlEffect: Effect {
                   !(shapeLayer is ShapeTransformCompositionLayer) else { return }
             if fastBlurEffect == nil {
                 fastBlurEffect = FastBlurEffect(layer: shapeLayer, effect: self)
+            }
+        } else if name == "Shift Channels" {
+            guard let textLayer = layer as? CompositionLayer else { return }
+            if shiftChannelsEffect == nil {
+                shiftChannelsEffect = ShiftChannelsEffect(layer: textLayer)
             }
         } else if name == "CenteredVertically" {
             guard let textLayer = layer as? TextCompositionLayer else { return }
@@ -161,5 +167,11 @@ class CenteredVerticallyEffect {
     
     init(layer: TextCompositionLayer) {
         self.layer = layer
+    }
+}
+
+class ShiftChannelsEffect {
+    init(layer: CompositionLayer) {
+        layer.contentsLayer.filters = [ChromeKeyFilter.chromaKeyFilter(fromHue: 0, toHue: 1) as Any]
     }
 }
