@@ -629,6 +629,11 @@
 		48806186237084C100C19C82 /* CompatibleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */; };
 		48806187237084C100C19C82 /* CompatibleAnimationKeypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */; };
 		48F4EECD229F167F00949A97 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8724220B78BF007CD915 /* TextCompositionLayer.swift */; };
+		B940FE22259E40050094D60B /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B940FE21259E40050094D60B /* DispatchQueueExtensions.swift */; };
+		B940FE23259E40050094D60B /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B940FE21259E40050094D60B /* DispatchQueueExtensions.swift */; };
+		B940FE24259E40050094D60B /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B940FE21259E40050094D60B /* DispatchQueueExtensions.swift */; };
+		B940FE25259E40050094D60B /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B940FE21259E40050094D60B /* DispatchQueueExtensions.swift */; };
+		B940FE26259E40050094D60B /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B940FE21259E40050094D60B /* DispatchQueueExtensions.swift */; };
 		B9CC813E23954D21005FBFAE /* AnimationVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC813D23954D21005FBFAE /* AnimationVideoProvider.swift */; };
 		B9CC813F23954D24005FBFAE /* AnimationVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC813D23954D21005FBFAE /* AnimationVideoProvider.swift */; };
 		B9CC814023954D24005FBFAE /* AnimationVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC813D23954D21005FBFAE /* AnimationVideoProvider.swift */; };
@@ -873,6 +878,7 @@
 		486E879D220B78BF007CD915 /* Interpolatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolatable.swift; sourceTree = "<group>"; };
 		486E879E220B78BF007CD915 /* KeyframeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyframeExtensions.swift; sourceTree = "<group>"; };
 		486E87A0220B78BF007CD915 /* AnimationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
+		B940FE21259E40050094D60B /* DispatchQueueExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtensions.swift; sourceTree = "<group>"; };
 		B9CC813D23954D21005FBFAE /* AnimationVideoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationVideoProvider.swift; sourceTree = "<group>"; };
 		B9CC814323954D7A005FBFAE /* LayerVideoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerVideoProvider.swift; sourceTree = "<group>"; };
 		B9DA4ECA2480FF2E004FD2C3 /* FillEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillEffect.swift; sourceTree = "<group>"; };
@@ -1425,6 +1431,7 @@
 				486E8791220B78BF007CD915 /* AnimationKeypathExtension.swift */,
 				486E8792220B78BF007CD915 /* MathKit.swift */,
 				486E8793220B78BF007CD915 /* StringExtensions.swift */,
+				B940FE21259E40050094D60B /* DispatchQueueExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1659,7 +1666,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1110;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = YurtvilleProds;
 				TargetAttributes = {
 					486E83B1220A317C007CD915 = {
@@ -1858,6 +1865,7 @@
 				486E87FC220B78D1007CD915 /* Transform.swift in Sources */,
 				486E87FD220B78D1007CD915 /* Mask.swift in Sources */,
 				486E87FE220B78D1007CD915 /* Marker.swift in Sources */,
+				B940FE22259E40050094D60B /* DispatchQueueExtensions.swift in Sources */,
 				E6EAA7B822AA834F00F345A4 /* AnimationTextProvider.swift in Sources */,
 				486E87FF220B78D1007CD915 /* KeyedDecodingContainerExtensions.swift in Sources */,
 				486E8800220B78D1007CD915 /* KeyframeGroup.swift in Sources */,
@@ -1976,6 +1984,7 @@
 				486E885E220B78E4007CD915 /* AnimatorNode.swift in Sources */,
 				486E885F220B78E4007CD915 /* Ellipse.swift in Sources */,
 				486E8860220B78E4007CD915 /* Trim.swift in Sources */,
+				B940FE23259E40050094D60B /* DispatchQueueExtensions.swift in Sources */,
 				E654753422AAA91600FE590F /* AnimationTextProvider.swift in Sources */,
 				B9CC813F23954D24005FBFAE /* AnimationVideoProvider.swift in Sources */,
 				486E8861220B78E4007CD915 /* ShapeItem.swift in Sources */,
@@ -2148,6 +2157,7 @@
 				486E88F2220B78F4007CD915 /* TextAnimator.swift in Sources */,
 				486E88F3220B78F4007CD915 /* Font.swift in Sources */,
 				BD4FE90C2327A2710011B14B /* DropShadowEffect.swift in Sources */,
+				B940FE24259E40050094D60B /* DispatchQueueExtensions.swift in Sources */,
 				486E88F4220B78F4007CD915 /* ImageAsset.swift in Sources */,
 				486E88F5220B78F4007CD915 /* PrecompAsset.swift in Sources */,
 				486E88F6220B78F4007CD915 /* AssetLibrary.swift in Sources */,
@@ -2266,6 +2276,7 @@
 				486E894D220B78FF007CD915 /* Ellipse.swift in Sources */,
 				486E894E220B78FF007CD915 /* Trim.swift in Sources */,
 				E654753622AAA91700FE590F /* AnimationTextProvider.swift in Sources */,
+				B940FE25259E40050094D60B /* DispatchQueueExtensions.swift in Sources */,
 				486E894F220B78FF007CD915 /* ShapeItem.swift in Sources */,
 				B9CC814123954D25005FBFAE /* AnimationVideoProvider.swift in Sources */,
 				486E8950220B78FF007CD915 /* Shape.swift in Sources */,
@@ -2410,6 +2421,7 @@
 				486E89CB220B790E007CD915 /* GradientFill.swift in Sources */,
 				486E89CC220B790E007CD915 /* GradientStroke.swift in Sources */,
 				486E89CD220B790E007CD915 /* Stroke.swift in Sources */,
+				B940FE26259E40050094D60B /* DispatchQueueExtensions.swift in Sources */,
 				486E89CE220B790E007CD915 /* Rectangle.swift in Sources */,
 				B9CC814223954D25005FBFAE /* AnimationVideoProvider.swift in Sources */,
 				486E89CF220B790E007CD915 /* Star.swift in Sources */,
