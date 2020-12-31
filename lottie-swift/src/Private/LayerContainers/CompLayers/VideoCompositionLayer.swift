@@ -81,7 +81,7 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
             
             let playerItem = AVPlayerItem(asset: asset)
             let player = AVPlayer(playerItem: playerItem)
-            if #available(OSX 10.14, iOS 12, *) {
+            if #available(OSX 10.14, iOS 12, tvOS 12, *) {
                 player.preventsDisplaySleepDuringVideoPlayback = false
             }
             return (player, contentSize)

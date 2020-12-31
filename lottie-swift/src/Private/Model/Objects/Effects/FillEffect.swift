@@ -8,7 +8,7 @@
 
 import Foundation
 import QuartzCore
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 import UIKit
 #endif
 
@@ -20,7 +20,7 @@ class FillEffect: Effect {
             case "Color":
                 if let colorArray = value as? ArrayEffectValue,
                    let shapeLayer = layer as? ShapeComposition {
-                    #if os(iOS)
+                    #if os(iOS) || os(tvOS)
                     let color = UIColor(red: CGFloat(colorArray.value[0]), green: CGFloat(colorArray.value[1]), blue: CGFloat(colorArray.value[2]), alpha: CGFloat(colorArray.value[3])).cgColor
                     #else
                     let color = CGColor(red: CGFloat(colorArray.value[0]), green: CGFloat(colorArray.value[1]), blue: CGFloat(colorArray.value[2]), alpha: CGFloat(colorArray.value[3]))

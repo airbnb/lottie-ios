@@ -634,6 +634,12 @@
 		B940FE24259E40050094D60B /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B940FE21259E40050094D60B /* DispatchQueueExtensions.swift */; };
 		B940FE25259E40050094D60B /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B940FE21259E40050094D60B /* DispatchQueueExtensions.swift */; };
 		B940FE26259E40050094D60B /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B940FE21259E40050094D60B /* DispatchQueueExtensions.swift */; };
+		B940FE48259E6F110094D60B /* CompositionLayerDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA732EF23609AF100F00421 /* CompositionLayerDependency.swift */; };
+		B940FE4E259E6F120094D60B /* CompositionLayerDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA732EF23609AF100F00421 /* CompositionLayerDependency.swift */; };
+		B940FE4F259E6F120094D60B /* CompositionLayerDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA732EF23609AF100F00421 /* CompositionLayerDependency.swift */; };
+		B940FE55259E6F530094D60B /* FillEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA4ECA2480FF2E004FD2C3 /* FillEffect.swift */; };
+		B940FE5B259E6F530094D60B /* FillEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA4ECA2480FF2E004FD2C3 /* FillEffect.swift */; };
+		B940FE5C259E6F540094D60B /* FillEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA4ECA2480FF2E004FD2C3 /* FillEffect.swift */; };
 		B9CC813E23954D21005FBFAE /* AnimationVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC813D23954D21005FBFAE /* AnimationVideoProvider.swift */; };
 		B9CC813F23954D24005FBFAE /* AnimationVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC813D23954D21005FBFAE /* AnimationVideoProvider.swift */; };
 		B9CC814023954D24005FBFAE /* AnimationVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC813D23954D21005FBFAE /* AnimationVideoProvider.swift */; };
@@ -1936,6 +1942,7 @@
 				486E8834220B78E4007CD915 /* SolidCompositionLayer.swift in Sources */,
 				486E8835220B78E4007CD915 /* PreCompositionLayer.swift in Sources */,
 				486E8836220B78E4007CD915 /* ImageCompositionLayer.swift in Sources */,
+				B940FE48259E6F110094D60B /* CompositionLayerDependency.swift in Sources */,
 				486E8837220B78E4007CD915 /* ShapeCompositionLayer.swift in Sources */,
 				486E8838220B78E4007CD915 /* MaskContainerLayer.swift in Sources */,
 				486E8839220B78E4007CD915 /* AnimationContainer.swift in Sources */,
@@ -2033,6 +2040,7 @@
 				486E8889220B78E4007CD915 /* BezierPath.swift in Sources */,
 				486E888A220B78E4007CD915 /* CompoundBezierPath.swift in Sources */,
 				486E888B220B78E4007CD915 /* ColorExtension.swift in Sources */,
+				B940FE55259E6F530094D60B /* FillEffect.swift in Sources */,
 				486E888C220B78E4007CD915 /* PathElement.swift in Sources */,
 				486E888D220B78E4007CD915 /* CurveVertex.swift in Sources */,
 				486E888E220B78E4007CD915 /* VectorsExtensions.swift in Sources */,
@@ -2228,6 +2236,7 @@
 				486E8924220B78FF007CD915 /* ImageCompositionLayer.swift in Sources */,
 				486E8925220B78FF007CD915 /* ShapeCompositionLayer.swift in Sources */,
 				486E8926220B78FF007CD915 /* MaskContainerLayer.swift in Sources */,
+				B940FE4E259E6F120094D60B /* CompositionLayerDependency.swift in Sources */,
 				486E8927220B78FF007CD915 /* AnimationContainer.swift in Sources */,
 				486E8928220B78FF007CD915 /* LayerTransformNode.swift in Sources */,
 				486E8929220B78FF007CD915 /* InvertedMatteLayer.swift in Sources */,
@@ -2325,6 +2334,7 @@
 				486E8979220B78FF007CD915 /* ColorExtension.swift in Sources */,
 				486E897A220B78FF007CD915 /* PathElement.swift in Sources */,
 				BD4FE90D2327A2710011B14B /* DropShadowEffect.swift in Sources */,
+				B940FE5B259E6F530094D60B /* FillEffect.swift in Sources */,
 				486E897B220B78FF007CD915 /* CurveVertex.swift in Sources */,
 				BD4FE9062326C5FC0011B14B /* Effect.swift in Sources */,
 				486E897C220B78FF007CD915 /* VectorsExtensions.swift in Sources */,
@@ -2373,6 +2383,7 @@
 				486E89A3220B790E007CD915 /* GradientFillRenderer.swift in Sources */,
 				48806183237084AE00C19C82 /* AnimatedControl.swift in Sources */,
 				486E89A4220B790E007CD915 /* GradientStrokeRenderer.swift in Sources */,
+				B940FE4F259E6F120094D60B /* CompositionLayerDependency.swift in Sources */,
 				486E89A5220B790E007CD915 /* FillRenderer.swift in Sources */,
 				486E89A6220B790E007CD915 /* StrokeRenderer.swift in Sources */,
 				486E89A7220B790E007CD915 /* GroupOutputNode.swift in Sources */,
@@ -2470,6 +2481,7 @@
 				486E89F2220B790E007CD915 /* InterpolatableExtensions.swift in Sources */,
 				BDCD2A102357883C00793A20 /* VideoLayerModel.swift in Sources */,
 				48806186237084C100C19C82 /* CompatibleAnimationView.swift in Sources */,
+				B940FE5C259E6F540094D60B /* FillEffect.swift in Sources */,
 				486E89F3220B790E007CD915 /* Interpolatable.swift in Sources */,
 				486E89F4220B790E007CD915 /* KeyframeExtensions.swift in Sources */,
 				486E89F5220B790E007CD915 /* AnimationContext.swift in Sources */,

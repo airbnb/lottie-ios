@@ -8,7 +8,7 @@
 
 import Foundation
 import QuartzCore
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 import CoreImage
 #endif
 

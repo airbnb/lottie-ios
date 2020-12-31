@@ -74,7 +74,7 @@ extension Color {
   }
     
     private static var bestColorSpace: CGColorSpace {
-        if #available(macOS 10.11.2, iOS 9.3, *),
+        if #available(macOS 10.11.2, iOS 9.3, tvOS 9.3, *),
            let p3Space = CGColorSpace(name: CGColorSpace.displayP3) {
             return p3Space
         }

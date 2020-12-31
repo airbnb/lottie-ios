@@ -10,7 +10,7 @@ import Foundation
 import QuartzCore
 import CoreGraphics
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 import UIKit
 #endif
 
