@@ -40,7 +40,7 @@ class LayerImageProvider {
   }
   
   func reloadImages() {
-    DispatchQueue.global(priority: .default).async {
+    DispatchQueue.global.async {
         for imageLayer in self.imageLayers {
             if let asset = self.imageAssets[imageLayer.imageReferenceID] {
                 imageLayer.image = self.imageProvider.imageForAsset(asset: asset)

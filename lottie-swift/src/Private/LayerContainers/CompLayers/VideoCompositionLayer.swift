@@ -81,7 +81,7 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
             
             let playerItem = AVPlayerItem(asset: asset)
             let player = AVPlayer(playerItem: playerItem)
-            if #available(OSX 10.14, iOS 12, *) {
+            if #available(OSX 10.14, iOS 12, tvOS 12, *) {
                 player.preventsDisplaySleepDuringVideoPlayback = false
             }
             return (player, contentSize)
@@ -89,7 +89,7 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
         
         #if os(macOS)
         let videoProvider = self.videoProvider
-        let backgroundQueue = DispatchQueue.global(priority: .default)
+        let backgroundQueue = DispatchQueue.global
         backgroundQueue.async {
             let (player, size) = assetLoader(url)
             guard let unwrappedPlayer = player, let unwrappedSize = size else { return }
@@ -186,7 +186,7 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
             NotificationCenter.default.removeObserver(observer)
         }
         appResumeObserver = NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification,
-                                                                   object: UIApplication.shared,
+                                                                   object: UIApplication.extensionSafeShared,
                                                                   queue: .main) { [weak self] _ in
             if self?.playing == true {
                 player.play()
@@ -195,3 +195,13 @@ class VideoCompositionLayer: CompositionLayer & CAAnimationDelegate {
     }
     #endif
 }
+
+#if os(iOS)
+extension UIApplication {
+    static var extensionSafeShared: Self? {
+        guard Bundle.main.bundleURL.pathExtension != "appex" else { return nil }
+        
+        return UIApplication.perform(NSSelectorFromString("sharedApplication"))?.takeUnretainedValue() as? Self
+    }
+}
+#endif
