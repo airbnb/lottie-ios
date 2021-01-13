@@ -10,7 +10,7 @@ import Foundation
 import QuartzCore
 import CoreImage
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 import UIKit
 #else
 import AppKit
@@ -61,15 +61,15 @@ public struct HSBColor {
     var alpha: CGFloat
     
     static func create(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) -> HSBColor {
-        #if os(iOS)
-        UIColor()
+        #if os(iOS) || os(tvOS)
+        return UIColor(red: red, green: green, blue: blue, alpha: alpha).hsbColor
         #else
         return NSColor(red: red, green: green, blue: blue, alpha: alpha).hsbColor
         #endif
     }
 }
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 extension UIColor {
     var hsbColor: HSBColor {
         var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
