@@ -31,3 +31,17 @@ public final class DefaultVideoProvider: AnimationVideoProvider {
     
     public init() {}
 }
+
+public final class DictionaryVideoProviderWithFallback: AnimationVideoProvider {
+    
+    public init(_ values: [String: URL]) {
+        self.values = values
+    }
+    
+    let values: [String: URL]
+    
+    public func urlFor(keypathName: String, file: (name: String, extension: String)) -> URL? {
+        return values[keypathName] ?? Bundle.main.url(forResource: file.name, withExtension: file.extension)
+    }
+}
+

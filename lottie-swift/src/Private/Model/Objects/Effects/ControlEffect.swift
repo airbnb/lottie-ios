@@ -18,6 +18,7 @@ class ControlEffect: Effect {
     private var fastBlurEffect: FastBlurEffect?
     private var radialFastBlurEffect: RadialFastBlurEffect?
     private var centerVerticallyEffect: CenteredVerticallyEffect?
+    private var shiftChannelsEffect: ShiftChannelsEffect?
     
     override func setUp(layer: CALayer) {
         if name == "Evolution_(%)_In" {
@@ -31,9 +32,16 @@ class ControlEffect: Effect {
                 radialFastBlurEffect = RadialFastBlurEffect(layer: shapeLayer, effect: self)
             }
         } else if name == "CC Fast Blur" || name == "Fast Blur (Legacy)" {
-            guard let shapeLayer = layer as? (CALayer & ShapeComposition) else { return }
+            // Fast blur can only now be applied to flat shapes
+            guard let shapeLayer = layer as? (CALayer & ShapeComposition),
+                  !(shapeLayer is ShapeTransformCompositionLayer) else { return }
             if fastBlurEffect == nil {
                 fastBlurEffect = FastBlurEffect(layer: shapeLayer, effect: self)
+            }
+        } else if name == "Shift Channels" {
+            guard let textLayer = layer as? CompositionLayer else { return }
+            if shiftChannelsEffect == nil {
+                shiftChannelsEffect = ShiftChannelsEffect(layer: textLayer)
             }
         } else if name == "CenteredVertically" {
             guard let textLayer = layer as? TextCompositionLayer else { return }
@@ -62,7 +70,7 @@ class ControlEffect: Effect {
 
 class DelayedEvolutionEffect {
     
-    let layer: TextCompositionLayer
+    weak var layer: TextCompositionLayer?
     let value: KeyframeInterpolator<Vector1D>?
     var reverse: Bool?
     var position: KeyframeInterpolator<Vector3D>?
@@ -89,7 +97,7 @@ class DelayedEvolutionEffect {
     }
     
     func apply(frame: CGFloat) {
-        guard let parts = (layer.textLayer as? PartedTextLayer)?.parts else { return }
+        guard let layer = layer, let parts = (layer.textLayer as? PartedTextLayer)?.parts else { return }
         
         for (index, part) in parts.enumerated() {
             let delay = (self.delay?.value(frame: frame) as? Vector1D)?.cgFloatValue ?? 2.0
@@ -111,7 +119,7 @@ class DelayedEvolutionEffect {
 }
 
 class RadialFastBlurEffect {
-    let layer: CALayer & ShapeComposition
+    weak var layer: (CALayer & ShapeComposition)?
     let replicator: CAReplicatorLayer
     
     let center: KeyframeInterpolator<Vector3D>?
@@ -130,7 +138,8 @@ class RadialFastBlurEffect {
     }
     
     func apply(frame: CGFloat) {
-        guard let center = (center?.value(frame: frame) as? Vector3D)?.pointValue,
+        guard let layer = layer,
+              let center = (center?.value(frame: frame) as? Vector3D)?.pointValue,
               let amount = (amount?.value(frame: frame) as? Vector1D)?.value else {
             return
         }
@@ -159,5 +168,11 @@ class CenteredVerticallyEffect {
     
     init(layer: TextCompositionLayer) {
         self.layer = layer
+    }
+}
+
+class ShiftChannelsEffect {
+    init(layer: CompositionLayer) {
+        layer.contentsLayer.filters = [ChromeKeyFilter.chromaKeyFilter(fromHue: 0, toHue: 1) as Any]
     }
 }

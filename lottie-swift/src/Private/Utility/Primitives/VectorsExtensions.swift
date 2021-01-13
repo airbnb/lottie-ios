@@ -245,12 +245,13 @@ extension CATransform3D {
   static func makeTransform(anchor: Point3D,
                             position: Point3D,
                             scale: Point3D,
+                            orientation: (x: CGFloat, y: CGFloat, z: CGFloat),
                             rotation: (x: CGFloat, y: CGFloat, z: CGFloat),
                             skew: CGFloat?,
                             skewAxis: CGFloat?) -> CATransform3D {
     if let skew = skew, let skewAxis = skewAxis {
-        return CATransform3DMakeTranslation(position.x, position.y, position.z).rotated(rotation).skewed(skew: -skew, skewAxis: skewAxis).scaled(scale * 0.01).translated(anchor * -1)
+        return CATransform3DMakeTranslation(position.x, position.y, position.z).rotated(orientation).rotated(rotation).skewed(skew: -skew, skewAxis: skewAxis).scaled(scale * 0.01).translated(anchor * -1)
     }
-    return CATransform3DMakeTranslation(position.x, position.y, position.z).rotated(rotation).scaled(scale * 0.01).translated(anchor * -1)
+    return CATransform3DMakeTranslation(position.x, position.y, position.z).rotated(orientation).rotated(rotation).scaled(scale * 0.01).translated(anchor * -1)
   }
 }

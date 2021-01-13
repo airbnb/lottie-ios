@@ -640,6 +640,11 @@
 		B940FE55259E6F530094D60B /* FillEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA4ECA2480FF2E004FD2C3 /* FillEffect.swift */; };
 		B940FE5B259E6F530094D60B /* FillEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA4ECA2480FF2E004FD2C3 /* FillEffect.swift */; };
 		B940FE5C259E6F540094D60B /* FillEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA4ECA2480FF2E004FD2C3 /* FillEffect.swift */; };
+		B911DF26258FC75A0097F8AC /* ChromeKeyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B911DF25258FC7590097F8AC /* ChromeKeyFilter.swift */; };
+		B911DF27258FC75A0097F8AC /* ChromeKeyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B911DF25258FC7590097F8AC /* ChromeKeyFilter.swift */; };
+		B911DF28258FC75A0097F8AC /* ChromeKeyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B911DF25258FC7590097F8AC /* ChromeKeyFilter.swift */; };
+		B911DF29258FC75A0097F8AC /* ChromeKeyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B911DF25258FC7590097F8AC /* ChromeKeyFilter.swift */; };
+		B911DF2A258FC75A0097F8AC /* ChromeKeyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B911DF25258FC7590097F8AC /* ChromeKeyFilter.swift */; };
 		B9CC813E23954D21005FBFAE /* AnimationVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC813D23954D21005FBFAE /* AnimationVideoProvider.swift */; };
 		B9CC813F23954D24005FBFAE /* AnimationVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC813D23954D21005FBFAE /* AnimationVideoProvider.swift */; };
 		B9CC814023954D24005FBFAE /* AnimationVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC813D23954D21005FBFAE /* AnimationVideoProvider.swift */; };
@@ -885,6 +890,7 @@
 		486E879E220B78BF007CD915 /* KeyframeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyframeExtensions.swift; sourceTree = "<group>"; };
 		486E87A0220B78BF007CD915 /* AnimationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
 		B940FE21259E40050094D60B /* DispatchQueueExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtensions.swift; sourceTree = "<group>"; };
+		B911DF25258FC7590097F8AC /* ChromeKeyFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChromeKeyFilter.swift; sourceTree = "<group>"; };
 		B9CC813D23954D21005FBFAE /* AnimationVideoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationVideoProvider.swift; sourceTree = "<group>"; };
 		B9CC814323954D7A005FBFAE /* LayerVideoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerVideoProvider.swift; sourceTree = "<group>"; };
 		B9DA4ECA2480FF2E004FD2C3 /* FillEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillEffect.swift; sourceTree = "<group>"; };
@@ -1116,6 +1122,7 @@
 				486E8730220B78BF007CD915 /* NodeRenderSystem */,
 				486E875F220B78BF007CD915 /* Model */,
 				486E878B220B78BF007CD915 /* Utility */,
+				B911DF24258FC6CD0097F8AC /* Filters */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -1473,6 +1480,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		B911DF24258FC6CD0097F8AC /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				B911DF25258FC7590097F8AC /* ChromeKeyFilter.swift */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
 		BD25D5B9235778280046BA8A /* Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -1803,6 +1818,7 @@
 				486E87C5220B78D1007CD915 /* TrimPathNode.swift in Sources */,
 				486E87C6220B78D1007CD915 /* GroupNode.swift in Sources */,
 				BD972B21235CD91E0097B566 /* WordAnimatedTextLayer.swift in Sources */,
+				B911DF26258FC75A0097F8AC /* ChromeKeyFilter.swift in Sources */,
 				486E87C7220B78D1007CD915 /* GradientFillRenderer.swift in Sources */,
 				486E87C8220B78D1007CD915 /* GradientStrokeRenderer.swift in Sources */,
 				486E87C9220B78D1007CD915 /* FillRenderer.swift in Sources */,
@@ -1910,6 +1926,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				486E881A220B78E4007CD915 /* AnimationViewInitializers.swift in Sources */,
+				B911DF27258FC75A0097F8AC /* ChromeKeyFilter.swift in Sources */,
 				486E881B220B78E4007CD915 /* AnimationView.swift in Sources */,
 				BD44DB5D2372F05E002B818C /* Selector.swift in Sources */,
 				486E881C220B78E4007CD915 /* AnimationPublic.swift in Sources */,
@@ -2097,6 +2114,7 @@
 				486E88BC220B78F4007CD915 /* EllipseNode.swift in Sources */,
 				486E88BD220B78F4007CD915 /* PolygonNode.swift in Sources */,
 				4880617B237084AD00C19C82 /* AnimationSubview.swift in Sources */,
+				B911DF28258FC75A0097F8AC /* ChromeKeyFilter.swift in Sources */,
 				486E88BE220B78F4007CD915 /* RectNode.swift in Sources */,
 				486E88BF220B78F4007CD915 /* ShapeNode.swift in Sources */,
 				486E88C0220B78F4007CD915 /* StarNode.swift in Sources */,
@@ -2204,6 +2222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48F4EECD229F167F00949A97 /* TextCompositionLayer.swift in Sources */,
+				B911DF29258FC75A0097F8AC /* ChromeKeyFilter.swift in Sources */,
 				486E8908220B78FF007CD915 /* AnimationViewInitializers.swift in Sources */,
 				BD44DB5F2372F05F002B818C /* Selector.swift in Sources */,
 				486E8909220B78FF007CD915 /* AnimationView.swift in Sources */,
