@@ -70,7 +70,7 @@ class ControlEffect: Effect {
 
 class DelayedEvolutionEffect {
     
-    let layer: TextCompositionLayer
+    weak var layer: TextCompositionLayer?
     let value: KeyframeInterpolator<Vector1D>?
     var reverse: Bool?
     var position: KeyframeInterpolator<Vector3D>?
@@ -97,7 +97,7 @@ class DelayedEvolutionEffect {
     }
     
     func apply(frame: CGFloat) {
-        guard let parts = (layer.textLayer as? PartedTextLayer)?.parts else { return }
+        guard let layer = layer, let parts = (layer.textLayer as? PartedTextLayer)?.parts else { return }
         
         for (index, part) in parts.enumerated() {
             let delay = (self.delay?.value(frame: frame) as? Vector1D)?.cgFloatValue ?? 2.0
@@ -119,7 +119,7 @@ class DelayedEvolutionEffect {
 }
 
 class RadialFastBlurEffect {
-    let layer: CALayer & ShapeComposition
+    weak var layer: (CALayer & ShapeComposition)?
     let replicator: CAReplicatorLayer
     
     let center: KeyframeInterpolator<Vector3D>?
@@ -138,7 +138,8 @@ class RadialFastBlurEffect {
     }
     
     func apply(frame: CGFloat) {
-        guard let center = (center?.value(frame: frame) as? Vector3D)?.pointValue,
+        guard let layer = layer,
+              let center = (center?.value(frame: frame) as? Vector3D)?.pointValue,
               let amount = (amount?.value(frame: frame) as? Vector1D)?.value else {
             return
         }

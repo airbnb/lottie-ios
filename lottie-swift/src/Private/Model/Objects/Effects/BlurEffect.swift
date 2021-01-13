@@ -37,7 +37,7 @@ class BlurEffect: Effect {
 }
 
 class GaussianBlurEffect {
-    let layer: (CALayer & Composition)
+    weak var layer: (CALayer & Composition)?
     
     let blurriness: KeyframeInterpolator<Vector1D>?
     
@@ -52,13 +52,13 @@ class GaussianBlurEffect {
         }
         
         if #available(OSX 10.10, *) {
-            layer.contentsLayer.filters = [CIFilter(name: "CIGaussianBlur", parameters: ["inputRadius": blurriness]) as Any]
+            layer?.contentsLayer.filters = [CIFilter(name: "CIGaussianBlur", parameters: ["inputRadius": blurriness]) as Any]
         }
     }
 }
 
 class FastBlurEffect {
-    let layer: (CALayer & Composition)
+    weak var layer: (CALayer & Composition)?
     
     let blurriness: KeyframeInterpolator<Vector1D>?
     
@@ -73,7 +73,7 @@ class FastBlurEffect {
         }
         
         if #available(OSX 10.10, *) {
-            layer.contentsLayer.filters = [CIFilter(name: "CIGaussianBlur", parameters: ["inputRadius": blurriness]) as Any]
+            layer?.contentsLayer.filters = [CIFilter(name: "CIGaussianBlur", parameters: ["inputRadius": blurriness]) as Any]
         }
     }
 }
