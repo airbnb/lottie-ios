@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build_mac:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Build
+      run: xcodebuild build -scheme Lottie_macOS -derivedDataPath ci_build -configuration Release
+      
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Lottie_Mac
+        path: ci_build/Build/Products/Release
+  build_ios:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Build
+      run: xcodebuild build -scheme Lottie_iOS -derivedDataPath ci_build -configuration Release -destination generic/platform=iOS
+      
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Lottie_iOS
+        path: ci_build/Build/Products/Release-iphoneos
+  build_tvos:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Build
+      run: xcodebuild build -scheme Lottie_tvOS -derivedDataPath ci_build -configuration Release -destination generic/platform=tvOS
+      
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Lottie_tvOS
+        path: ci_build/Build/Products/Release-appletvos
