@@ -193,7 +193,14 @@ final class AnimationContainer: CALayer {
   
   public override func display() {
     guard Thread.isMainThread else { return }
-    var newFrame: CGFloat = self.presentation()?.currentFrame ?? self.currentFrame
+    var newFrame: CGFloat
+    if let animationKeys = self.animationKeys(),
+      !animationKeys.isEmpty {
+      newFrame = self.presentation()?.currentFrame ?? self.currentFrame
+    } else {
+      // We ignore the presentation's frame if there's no animation in the layer.
+      newFrame = self.currentFrame
+    }
     if respectAnimationFrameRate {
       newFrame = floor(newFrame)
     }
