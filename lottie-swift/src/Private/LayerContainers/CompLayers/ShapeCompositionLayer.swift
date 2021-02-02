@@ -92,6 +92,11 @@ class ShapeCompositionLayer: CompositionLayer, ShapeComposition {
                 updateSize(fromShapeItems: group.items, frame: frame)
             } else if let transform = shape as? ShapeTransform {
                 applyTransform(transform: transform, frame: frame)
+            } else if let shape = shape as? Shape {
+                let paths = KeyframeInterpolator(keyframes: shape.path.keyframes)
+                if let framePath = paths.value(frame: frame) as? BezierPath {
+                    fakeLayer.frame = framePath.cgPath().boundingBox
+                }
             }
         }
     }
