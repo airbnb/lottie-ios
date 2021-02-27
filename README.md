@@ -69,7 +69,7 @@ let package = Package(
        .iOS(.v12),
   ],
   dependencies: [
-    .package(url: "https://github.com/airbnb/lottie-ios.git", from: "3.1.2")
+    .package(name: "Lottie", url: "https://github.com/airbnb/lottie-ios.git", from: "3.2.1")
   ],
   targets: [
     .target(name: "YourTestProject", dependencies: ["Lottie"])
