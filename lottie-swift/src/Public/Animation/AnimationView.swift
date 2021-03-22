@@ -74,6 +74,19 @@ final public class AnimationView: LottieView {
       }
     }
   }
+
+  /**
+   Sets the rendering scale to use for animations. If set to nil, the render scale will be
+   set to the screen scale.
+
+   The default is set to nil, which maps to the screen scale, but setting the value to 1
+   can increase performance without significant decrease to the quality of the rendering.
+   */
+  public var renderScale: CGFloat? = nil {
+    didSet {
+      animationLayer?.renderScale = self.renderScale ?? self.screenScale
+    }
+  }
   
   /**
    Describes the behavior of an AnimationView when the app is moved to the background.
@@ -815,7 +828,7 @@ final public class AnimationView: LottieView {
     }
     
     let animationLayer = AnimationContainer(animation: animation, imageProvider: imageProvider, textProvider: textProvider, fontProvider: fontProvider)
-    animationLayer.renderScale = self.screenScale
+    animationLayer.renderScale = self.renderScale ?? self.screenScale
     viewLayer?.addSublayer(animationLayer)
     self.animationLayer = animationLayer
     reloadImages()
