@@ -158,8 +158,10 @@ final class TextLayer: CALayer {
     ctx.setShouldSubpixelPositionFonts(true)
     ctx.setShouldSubpixelQuantizeFonts(true)
 
-    ctx.translateBy(x: 0, y: drawingRect.height)
-    ctx.scaleBy(x: 1.0, y: -1.0)
+    if self.contentsAreFlipped() {
+      ctx.translateBy(x: 0, y: drawingRect.height)
+      ctx.scaleBy(x: 1.0, y: -1.0)
+    }
 
     let drawingPath = CGPath(rect: drawingRect, transform: nil)
     
