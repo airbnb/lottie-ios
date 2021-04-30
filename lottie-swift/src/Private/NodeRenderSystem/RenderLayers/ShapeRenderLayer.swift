@@ -87,9 +87,4 @@ final class ShapeRenderLayer: ShapeContainerLayer {
     }
     renderer.render(ctx)
   }
-  
-  override func updateRenderScale() {
-    super.updateRenderScale()
-    shapeLayer.contentsScale = self.renderScale
-  }
 }
