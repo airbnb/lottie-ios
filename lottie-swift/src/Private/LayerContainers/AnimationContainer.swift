@@ -115,6 +115,7 @@ final class AnimationContainer: CALayer {
     self.animationLayers = []
     super.init()
     bounds = animation.bounds
+    masksToBounds = true
     let layers = animation.layers.initializeCompositionLayers(assetLibrary: animation.assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, fontProvider: fontProvider, frameRate: CGFloat(animation.framerate))
     
     var imageLayers = [ImageCompositionLayer]()
