@@ -1,0 +1,134 @@
+force_cast: warning
+force_try: 
+  severity: error
+force_unwrapping: warning
+block_based_kvo:
+  severity: error
+class_delegate_protocol:
+  severity: error
+compiler_protocol_init:
+  severity: error
+contains_over_first_not_nil:
+  severity: error
+discouraged_direct_init:
+  severity: error
+explicit_acl:
+  severity: error
+explicit_init:
+  severity: error
+fatal_error_message:
+  severity: error
+first_where:
+  severity: warning # changed to warning due to false positive
+for_where:
+  severity: error
+generic_type_name:
+  severity: error
+implicitly_unwrapped_optional:
+  severity: warning
+  mode: all_except_iboutlets
+is_disjoint:
+  severity: error
+joined_default_parameter:
+  severity: error
+legacy_cggeometry_functions:
+  severity: error
+legacy_constant:
+  severity: error
+legacy_constructor:
+  severity: error
+legacy_nsgeometry_functions:
+  severity: error
+notification_center_detachment: error
+overridden_super_call:
+  severity: error
+override_in_extension:
+  severity: warning
+pattern_matching_keywords:
+  severity: error
+private_action:
+  severity: error
+private_outlet:
+  severity: warning
+private_over_fileprivate:
+  severity: error
+prohibited_super_call:
+  severity: error
+redundant_nil_coalescing:
+  severity: error
+redundant_optional_initialization:
+  severity: error
+redundant_string_enum_value:
+  severity: error
+redundant_void_return:
+  severity: error
+sorted_first_last:
+  severity: error
+syntactic_sugar:
+  severity: warning
+todo:
+  severity: warning
+trailing_semicolon:
+  severity: error
+unneeded_break_in_switch:
+  severity: error
+unused_enumerated:
+  severity: error
+valid_ibinspectable:
+  severity: error
+weak_delegate:
+  severity: error
+yoda_condition:
+  severity: error
+discouraged_object_literal:
+  color_literal: false
+  severity: error
+
+whitelist_rules: 
+  - block_based_kvo
+  - class_delegate_protocol
+  - compiler_protocol_init
+  - contains_over_first_not_nil
+  - discouraged_direct_init
+  - explicit_acl
+  - explicit_init
+  - fatal_error_message
+  - first_where
+  - for_where
+  - force_unwrapping
+  - force_try
+  - force_cast
+  - generic_type_name
+  - implicitly_unwrapped_optional
+  - is_disjoint
+  - joined_default_parameter
+  - legacy_cggeometry_functions
+  - legacy_constant
+  - legacy_constructor
+  - legacy_nsgeometry_functions
+  - notification_center_detachment
+  - pattern_matching_keywords
+  - private_action
+  - private_outlet
+  - private_over_fileprivate
+  - redundant_nil_coalescing
+  - redundant_optional_initialization
+  - redundant_string_enum_value
+  - redundant_void_return
+  - sorted_first_last
+  - todo
+  - trailing_semicolon
+  - unneeded_break_in_switch
+  - unused_enumerated
+  - weak_delegate
+  - valid_ibinspectable
+  - void_return
+  - vertical_whitespace
+  - multiple_closures_with_trailing_closure
+  - control_statement
+  - overridden_super_call
+  - override_in_extension
+  - syntactic_sugar
+  - prohibited_super_call
+  - yoda_condition
+  - discouraged_object_literal

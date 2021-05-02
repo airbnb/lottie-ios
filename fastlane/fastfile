@@ -33,6 +33,14 @@ platform :ios do
         )
     end
 
+    lane :run_danger do
+        danger(
+            dangerfile: 'Dangerfile',
+            fail_on_errors: true,
+            github_api_token: ENV['DANGER_GITHUB_API_TOKEN'] # TODO: add this
+        )
+    end
+
 end
 
 platform :macos do

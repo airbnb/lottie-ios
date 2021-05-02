@@ -26,6 +26,11 @@ fastlane ios ios_build
 fastlane ios macos_catalyst
 ```
 
+### ios run_danger
+```
+fastlane ios run_danger
+```
+
 
 ----
 
