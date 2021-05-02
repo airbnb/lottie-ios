@@ -16,9 +16,20 @@ platform :ios do
             project: ENV["PROJECT_FILE"],
             scheme: ios_scheme,
             configuration: 'Debug',
-            sdk: 'iphoneos',
             buildlog_path: ENV["LOG_PATH"],
             skip_archive: true
+        )
+    end
+
+    lane :macos_catalyst do
+        gym(
+            clean: true,
+            project: ENV["PROJECT_FILE"],
+            scheme: ios_scheme,
+            configuration: 'Debug',
+            buildlog_path: ENV["LOG_PATH"],
+            skip_archive: true,
+            catalyst_platform: 'macos'
         )
     end
 

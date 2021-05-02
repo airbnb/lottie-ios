@@ -21,9 +21,9 @@ or alternatively using `brew install fastlane`
 fastlane ios ios_build
 ```
 
-### ios ios_catalyst
+### ios macos_catalyst
 ```
-fastlane ios ios_catalyst
+fastlane ios macos_catalyst
 ```
 
 
