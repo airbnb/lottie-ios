@@ -6,6 +6,7 @@ xcuserdata/
 
 # other
 build/
+vendor/
 
 # macOS
 .DS_Store
