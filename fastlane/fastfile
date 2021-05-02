@@ -49,3 +49,20 @@ platform :macos do
         )
     end
 end
+
+
+platform :tvos do
+    tvos_scheme = 'Lottie_tvOS'
+
+    lane :tvos_build do
+        gym(
+            clean: true,
+            project: ENV["PROJECT_FILE"],
+            scheme: tvos_scheme,
+            configuration: 'Debug',
+            buildlog_path: ENV["LOG_PATH"],
+            skip_archive: true
+        )
+    end
+end
+
