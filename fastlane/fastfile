@@ -1,0 +1,25 @@
+min_fastlane_version "2.181.0"
+default_platform :ios
+
+before_all do |lane, options|
+    ENV["PROJECT_FILE"] = 'Lottie.xcodeproj'
+    ENV["LOG_PATH"] = './log_output/'
+    ENV["ARCHIVE_PATH"] = './output/'
+end
+
+platform :ios do
+    ios_scheme = 'Lottie_iOS'
+
+    lane :ios_build do
+        gym(
+            clean: true,
+            project: ENV["PROJECT_FILE"],
+            scheme: ios_scheme,
+            configuration: 'Debug',
+            sdk: 'iphoneos',
+            buildlog_path: ENV["LOG_PATH"],
+            skip_archive: true
+        )
+    end
+
+end
