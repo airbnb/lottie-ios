@@ -34,3 +34,18 @@ platform :ios do
     end
 
 end
+
+platform :macos do
+    macos_scheme = 'Lottie_macOS'
+
+    lane :macos_build do
+        gym(
+            clean: true,
+            project: ENV["PROJECT_FILE"],
+            scheme: macos_scheme,
+            configuration: 'Debug',
+            buildlog_path: ENV["LOG_PATH"],
+            skip_archive: true
+        )
+    end
+end
