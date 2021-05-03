@@ -8,7 +8,7 @@
 import Foundation
 
 /// Connects a LottieTextProvider to a group of text layers
-class LayerTextProvider {
+final class LayerTextProvider {
     
     var textProvider: AnimationTextProvider {
         didSet {

@@ -17,7 +17,7 @@ enum MergeMode: Int, Codable {
 }
 
 /// An item that define an ellipse shape
-class Merge: ShapeItem {
+final class Merge: ShapeItem {
   
   /// The mode of the merge path
   let mode: MergeMode

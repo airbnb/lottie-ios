@@ -14,7 +14,7 @@ import QuartzCore
  This layer holds a single composition container and allows for animation of
  the currentFrame property.
  */
-class AnimationContainer: CALayer {
+final class AnimationContainer: CALayer {
   
   /// The animatable Current Frame Property
   @NSManaged var currentFrame: CGFloat
@@ -79,23 +79,43 @@ class AnimationContainer: CALayer {
     }
     return nil
   }
+  
+  func animatorNodes(for keypath: AnimationKeypath) -> [AnimatorNode]? {
+    var results = [AnimatorNode]()
+    for layer in animationLayers {
+      if let nodes = layer.animatorNodes(for: keypath) {
+        results.append(contentsOf: nodes)
+      }
+    }
+    if results.count == 0 {
+      return nil
+    }
+    return results
+  }
 
   var textProvider: AnimationTextProvider {
     get { return layerTextProvider.textProvider }
     set { layerTextProvider.textProvider = newValue }
   }
   
-  var animationLayers: [CompositionLayer]
+  var fontProvider: AnimationFontProvider {
+    get { return layerFontProvider.fontProvider }
+    set { layerFontProvider.fontProvider = newValue }
+  }
+  
+  var animationLayers: ContiguousArray<CompositionLayer>
   fileprivate let layerImageProvider: LayerImageProvider
   fileprivate let layerTextProvider: LayerTextProvider
+  fileprivate let layerFontProvider: LayerFontProvider
   
-  init(animation: Animation, imageProvider: AnimationImageProvider, textProvider: AnimationTextProvider) {
+  init(animation: Animation, imageProvider: AnimationImageProvider, textProvider: AnimationTextProvider, fontProvider: AnimationFontProvider) {
     self.layerImageProvider = LayerImageProvider(imageProvider: imageProvider, assets: animation.assetLibrary?.imageAssets)
     self.layerTextProvider = LayerTextProvider(textProvider: textProvider)
+    self.layerFontProvider = LayerFontProvider(fontProvider: fontProvider)
     self.animationLayers = []
     super.init()
     bounds = animation.bounds
-    let layers = animation.layers.initializeCompositionLayers(assetLibrary: animation.assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, frameRate: CGFloat(animation.framerate))
+    let layers = animation.layers.initializeCompositionLayers(assetLibrary: animation.assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, fontProvider: fontProvider, frameRate: CGFloat(animation.framerate))
     
     var imageLayers = [ImageCompositionLayer]()
     var textLayers = [TextCompositionLayer]()
@@ -129,6 +149,8 @@ class AnimationContainer: CALayer {
     layerImageProvider.reloadImages()
     layerTextProvider.addTextLayers(textLayers)
     layerTextProvider.reloadTexts()
+    layerFontProvider.addTextLayers(textLayers)
+    layerFontProvider.reloadTexts()
     setNeedsDisplay()
   }
   
@@ -137,6 +159,7 @@ class AnimationContainer: CALayer {
     self.animationLayers = []
     self.layerImageProvider = LayerImageProvider(imageProvider: BlankImageProvider(), assets: nil)
     self.layerTextProvider = LayerTextProvider(textProvider: DefaultTextProvider())
+    self.layerFontProvider = LayerFontProvider(fontProvider: DefaultFontProvider())
     super.init(layer: layer)
     
     guard let animationLayer = layer as? AnimationContainer else { return }
@@ -169,7 +192,15 @@ class AnimationContainer: CALayer {
   }
   
   public override func display() {
-    var newFrame: CGFloat = self.presentation()?.currentFrame ?? self.currentFrame
+    guard Thread.isMainThread else { return }
+    var newFrame: CGFloat
+    if let animationKeys = self.animationKeys(),
+      !animationKeys.isEmpty {
+      newFrame = self.presentation()?.currentFrame ?? self.currentFrame
+    } else {
+      // We ignore the presentation's frame if there's no animation in the layer.
+      newFrame = self.currentFrame
+    }
     if respectAnimationFrameRate {
       newFrame = floor(newFrame)
     }

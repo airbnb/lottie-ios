@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(OSX)
 import AppKit
 
 /**
@@ -66,6 +67,7 @@ public class BundleImageProvider: AnimationImageProvider {
       }
     }
     
+    
     guard let foundPath = imagePath, let image = NSImage(contentsOfFile: foundPath) else {
       /// No image found.
       return nil
@@ -75,3 +77,4 @@ public class BundleImageProvider: AnimationImageProvider {
   
 }
 
+#endif

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(OSX)
 import AppKit
 
 /// A view that can be added to a keypath of an AnimationView
@@ -16,3 +17,4 @@ public final class AnimationSubview: NSView {
   }
   
 }
+#endif

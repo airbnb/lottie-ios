@@ -8,7 +8,7 @@
 import Foundation
 import QuartzCore
 
-class EllipseNodeProperties: NodePropertyMap, KeypathSearchable {
+final class EllipseNodeProperties: NodePropertyMap, KeypathSearchable {
   
   var keypathName: String
   
@@ -32,7 +32,7 @@ class EllipseNodeProperties: NodePropertyMap, KeypathSearchable {
   let properties: [AnyNodeProperty]
 }
 
-class EllipseNode: AnimatorNode, PathNode {
+final class EllipseNode: AnimatorNode, PathNode {
   
   let pathOutput: PathOutputNode
   
@@ -54,6 +54,11 @@ class EllipseNode: AnimatorNode, PathNode {
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+  var isEnabled: Bool = true {
+    didSet{
+      self.pathOutput.isEnabled = self.isEnabled
+    }
+  }
   
   func rebuildOutputs(frame: CGFloat) {
     let ellipseSize = properties.size.value.sizeValue

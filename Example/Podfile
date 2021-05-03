@@ -20,5 +20,3 @@ target 'lottie-swift_Example' do
     inherit! :search_paths
   end
 end
-
-

@@ -8,7 +8,7 @@
 import Foundation
 
 /// A layer that holds another animation composition.
-class PreCompLayerModel: LayerModel {
+final class PreCompLayerModel: LayerModel {
   
   /// The reference ID of the precomp.
   let referenceID: String

@@ -8,7 +8,7 @@
 import Foundation
 import QuartzCore
 
-class GradientFillProperties: NodePropertyMap, KeypathSearchable {
+final class GradientFillProperties: NodePropertyMap, KeypathSearchable {
   
   init(gradientfill: GradientFill) {
     self.keypathName = gradientfill.name
@@ -43,7 +43,7 @@ class GradientFillProperties: NodePropertyMap, KeypathSearchable {
   
 }
 
-class GradientFillNode: AnimatorNode, RenderNode {
+final class GradientFillNode: AnimatorNode, RenderNode {
   
   let fillRender: GradientFillRenderer
   
@@ -69,6 +69,11 @@ class GradientFillNode: AnimatorNode, RenderNode {
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+  var isEnabled: Bool = true {
+    didSet {
+      fillRender.isEnabled = isEnabled
+    }
+  }
   
   func localUpdatesPermeateDownstream() -> Bool {
     return false

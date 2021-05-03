@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 import QuartzCore
 
-class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
+final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
   
   let keypathName: String
   
@@ -124,13 +124,14 @@ class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
   }
 }
 
-class TextOutputNode: NodeOutput {
+final class TextOutputNode: NodeOutput {
   
   var parent: NodeOutput? {
     return parentTextNode
   }
   
   var parentTextNode: TextOutputNode?
+  var isEnabled: Bool = true
   
   init(parent: TextOutputNode?) {
     self.parentTextNode = parent
@@ -233,6 +234,7 @@ class TextAnimatorNode: AnimatorNode {
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+  var isEnabled: Bool = true
   
   func localUpdatesPermeateDownstream() -> Bool {
     return true

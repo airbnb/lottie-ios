@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(OSX)
 import AppKit
 
 /**
@@ -63,3 +64,4 @@ extension NSImage {
     }
   }
 }
+#endif

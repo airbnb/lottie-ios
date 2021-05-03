@@ -47,6 +47,10 @@ extension CGFloat: Interpolatable {
   }
   
   func remap(fromLow: CGFloat, fromHigh: CGFloat, toLow: CGFloat, toHigh: CGFloat) -> CGFloat {
+    guard (fromHigh - fromLow) != 0 else {
+      // Would produce NAN
+      return 0
+    }
     return toLow + (self - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)
   }
   
@@ -429,12 +433,13 @@ extension CGPoint: Interpolatable {
       }
       if accurateDistance < point.distance {
         closestPoint = closestPoint - 1
+        if closestPoint < 0 {
+          foundPoint = true
+          continue
+        }
         point = points[closestPoint]
         pointAmount = CGFloat(closestPoint) * step
         nextPointAmount = pointAmount + step
-        if closestPoint < 0 {
-          foundPoint = true
-        }
         continue
       }
       

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class ImageAsset: Asset {
+public final class ImageAsset: Asset {
   
   /// Image name
   public let name: String

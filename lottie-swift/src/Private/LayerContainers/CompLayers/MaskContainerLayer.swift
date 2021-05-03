@@ -29,7 +29,7 @@ extension MaskMode {
   }
 }
 
-class MaskContainerLayer: CALayer {
+final class MaskContainerLayer: CALayer {
   
   init(masks: [Mask]) {
     super.init()

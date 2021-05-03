@@ -23,7 +23,11 @@ class CompositionLayer: CALayer, KeypathSearchable {
   
   let matteType: MatteType?
   
-  var renderScale: CGFloat = 1
+  var renderScale: CGFloat = 1 {
+    didSet {
+      self.updateRenderScale()
+    }
+  }
   
   var matteLayer: CompositionLayer? {
     didSet {
@@ -137,9 +141,13 @@ class CompositionLayer: CALayer, KeypathSearchable {
   var keypathLayer: CALayer? {
     return contentsLayer
   }
+  
+  func updateRenderScale() {
+    /// To be overridden by subclass
+  }
 }
 
-protocol CompositionLayerDelegate: class {
+protocol CompositionLayerDelegate: AnyObject {
   func frameUpdated(frame: CGFloat)
 }
 
