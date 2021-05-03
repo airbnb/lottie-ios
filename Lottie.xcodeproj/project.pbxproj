@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11740509264000230018659B /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11740508264000230018659B /* DataExtension.swift */; };
+		1174050A264000230018659B /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11740508264000230018659B /* DataExtension.swift */; };
+		1174051026401B790018659B /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11740508264000230018659B /* DataExtension.swift */; };
+		1174051126401B7A0018659B /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11740508264000230018659B /* DataExtension.swift */; };
+		1174051226401B7B0018659B /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11740508264000230018659B /* DataExtension.swift */; };
 		25D5436F22306E2D00ED90FA /* CompatibleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */; };
 		25D543712230787900ED90FA /* CompatibleAnimationKeypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */; };
 		25D5437222307C8700ED90FA /* CompatibleAnimationKeypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */; };
@@ -645,9 +650,6 @@
 		E654753C22AAA9B600FE590F /* LayerTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E654753822AAA9AD00FE590F /* LayerTextProvider.swift */; };
 		E654753D22AAA9B600FE590F /* LayerTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E654753822AAA9AD00FE590F /* LayerTextProvider.swift */; };
 		E6EAA7B822AA834F00F345A4 /* AnimationTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */; };
-		EE90829822E5E6820088A05C /* AnimationFromAssetLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE90829722E5E6820088A05C /* AnimationFromAssetLoading.swift */; };
-		EE90829922E5E6820088A05C /* AnimationFromAssetLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE90829722E5E6820088A05C /* AnimationFromAssetLoading.swift */; };
-		EE90829A22E5E6820088A05C /* AnimationFromAssetLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE90829722E5E6820088A05C /* AnimationFromAssetLoading.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -663,6 +665,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		11740508264000230018659B /* DataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleAnimationView.swift; sourceTree = "<group>"; };
 		25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleAnimationKeypath.swift; sourceTree = "<group>"; };
 		4866744022249C4E00258C00 /* TextAnimatorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAnimatorNode.swift; sourceTree = "<group>"; };
@@ -803,7 +806,6 @@
 		CD1616472367325A00325353 /* GradientValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientValueProvider.swift; sourceTree = "<group>"; };
 		E654753822AAA9AD00FE590F /* LayerTextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerTextProvider.swift; sourceTree = "<group>"; };
 		E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTextProvider.swift; sourceTree = "<group>"; };
-		EE90829722E5E6820088A05C /* AnimationFromAssetLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationFromAssetLoading.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -958,7 +960,6 @@
 				486E870D220B78BF007CD915 /* LottieView.swift */,
 				486E870E220B78BF007CD915 /* AnimationSubview.swift */,
 				486E870F220B78BF007CD915 /* AnimatedControl.swift */,
-				EE90829722E5E6820088A05C /* AnimationFromAssetLoading.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -1325,6 +1326,7 @@
 				486E8790220B78BF007CD915 /* CGFloatExtensions.swift */,
 				486E8791220B78BF007CD915 /* AnimationKeypathExtension.swift */,
 				486E8792220B78BF007CD915 /* MathKit.swift */,
+				11740508264000230018659B /* DataExtension.swift */,
 				486E8793220B78BF007CD915 /* StringExtensions.swift */,
 			);
 			path = Extensions;
@@ -1589,7 +1591,6 @@
 				486E87A9220B78D1007CD915 /* AnimatedButton.swift in Sources */,
 				486E87AA220B78D1007CD915 /* LottieView.swift in Sources */,
 				486E87AB220B78D1007CD915 /* AnimationSubview.swift in Sources */,
-				EE90829822E5E6820088A05C /* AnimationFromAssetLoading.swift in Sources */,
 				486E87AC220B78D1007CD915 /* AnimatedControl.swift in Sources */,
 				486E87AD220B78D1007CD915 /* AnimationTime.swift in Sources */,
 				486E87AE220B78D1007CD915 /* Vectors.swift in Sources */,
@@ -1661,6 +1662,7 @@
 				486E87EC220B78D1007CD915 /* Merge.swift in Sources */,
 				486E87ED220B78D1007CD915 /* FillI.swift in Sources */,
 				486E87EE220B78D1007CD915 /* Repeater.swift in Sources */,
+				1174051026401B790018659B /* DataExtension.swift in Sources */,
 				486E87EF220B78D1007CD915 /* GradientFill.swift in Sources */,
 				486E87F0220B78D1007CD915 /* GradientStroke.swift in Sources */,
 				486E87F1220B78D1007CD915 /* Stroke.swift in Sources */,
@@ -1727,7 +1729,6 @@
 				486E8822220B78E4007CD915 /* AnimatedButton.swift in Sources */,
 				486E8823220B78E4007CD915 /* LottieView.swift in Sources */,
 				486E8824220B78E4007CD915 /* AnimationSubview.swift in Sources */,
-				EE90829922E5E6820088A05C /* AnimationFromAssetLoading.swift in Sources */,
 				486E8825220B78E4007CD915 /* AnimatedControl.swift in Sources */,
 				486E8826220B78E4007CD915 /* AnimationTime.swift in Sources */,
 				486E8827220B78E4007CD915 /* Vectors.swift in Sources */,
@@ -1799,6 +1800,7 @@
 				486E8865220B78E4007CD915 /* Merge.swift in Sources */,
 				486E8866220B78E4007CD915 /* FillI.swift in Sources */,
 				486E8867220B78E4007CD915 /* Repeater.swift in Sources */,
+				1174051126401B7A0018659B /* DataExtension.swift in Sources */,
 				486E8868220B78E4007CD915 /* GradientFill.swift in Sources */,
 				486E8869220B78E4007CD915 /* GradientStroke.swift in Sources */,
 				486E886A220B78E4007CD915 /* Stroke.swift in Sources */,
@@ -1967,6 +1969,7 @@
 				486E8902220B78F4007CD915 /* CurveVertex.swift in Sources */,
 				486E8903220B78F4007CD915 /* VectorsExtensions.swift in Sources */,
 				486E8904220B78F4007CD915 /* InterpolatableExtensions.swift in Sources */,
+				11740509264000230018659B /* DataExtension.swift in Sources */,
 				486E8905220B78F4007CD915 /* Interpolatable.swift in Sources */,
 				486E8906220B78F4007CD915 /* KeyframeExtensions.swift in Sources */,
 				486E8907220B78F4007CD915 /* AnimationContext.swift in Sources */,
@@ -1996,7 +1999,6 @@
 				486E890F220B78FF007CD915 /* UIColorExtension.swift in Sources */,
 				486E8910220B78FF007CD915 /* AnimatedButton.swift in Sources */,
 				486E8911220B78FF007CD915 /* LottieView.swift in Sources */,
-				EE90829A22E5E6820088A05C /* AnimationFromAssetLoading.swift in Sources */,
 				486E8912220B78FF007CD915 /* AnimationSubview.swift in Sources */,
 				486E8913220B78FF007CD915 /* AnimatedControl.swift in Sources */,
 				486E8914220B78FF007CD915 /* AnimationTime.swift in Sources */,
@@ -2068,6 +2070,7 @@
 				486E8953220B78FF007CD915 /* Merge.swift in Sources */,
 				486E8954220B78FF007CD915 /* FillI.swift in Sources */,
 				486E8955220B78FF007CD915 /* Repeater.swift in Sources */,
+				1174051226401B7B0018659B /* DataExtension.swift in Sources */,
 				486E8956220B78FF007CD915 /* GradientFill.swift in Sources */,
 				486E8957220B78FF007CD915 /* GradientStroke.swift in Sources */,
 				486E8958220B78FF007CD915 /* Stroke.swift in Sources */,
@@ -2236,6 +2239,7 @@
 				486E89F0220B790E007CD915 /* CurveVertex.swift in Sources */,
 				486E89F1220B790E007CD915 /* VectorsExtensions.swift in Sources */,
 				486E89F2220B790E007CD915 /* InterpolatableExtensions.swift in Sources */,
+				1174050A264000230018659B /* DataExtension.swift in Sources */,
 				486E89F3220B790E007CD915 /* Interpolatable.swift in Sources */,
 				486E89F4220B790E007CD915 /* KeyframeExtensions.swift in Sources */,
 				486E89F5220B790E007CD915 /* AnimationContext.swift in Sources */,
