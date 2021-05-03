@@ -3,7 +3,6 @@
 //  Lottie
 //
 //  Created by René Fouquet on 03.05.21.
-//  Copyright © 2021 YurtvilleProds. All rights reserved.
 //
 
 import Foundation
