@@ -10,7 +10,7 @@ import CoreGraphics
 
 /**
  `AnyValueProvider` is a protocol that return animation data for a property at a
- given time. Every fame an `AnimationView` queries all of its properties and asks
+ given time. Every frame an `AnimationView` queries all of its properties and asks
  if their ValueProvider has an update. If it does the AnimationView will read the
  property and update that portion of the animation.
  
