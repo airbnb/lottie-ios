@@ -20,7 +20,19 @@ workflows:
     - fastlane@3:
         inputs:
         - verbose_log: 'yes'
+        - lane: 'ios macos_catalyst'
+    - fastlane@3:
+        inputs:
+        - verbose_log: 'yes'
+        - lane: 'ios run_danger'
+    - fastlane@3:
+        inputs:
+        - verbose_log: 'yes'
         - lane: 'macos macos_build'
+    - fastlane@3:
+        inputs:
+        - verbose_log: 'yes'
+        - lane: 'tvos tvos_build'
     - cache-push@2: {}
 app:
   envs:
