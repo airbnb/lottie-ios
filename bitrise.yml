@@ -2,9 +2,9 @@ format_version: '8'
 default_step_lib_source: 'https://github.com/bitrise-io/bitrise-steplib.git'
 project_type: ios
 trigger_map:
-- push_branch: '*'
+- push_branch: 'master'
   workflow: primary
-- pull_request_source_branch: 'master'
+- pull_request_source_branch: '*'
   workflow: primary
 workflows:
   primary:
