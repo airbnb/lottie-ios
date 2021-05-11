@@ -13,7 +13,6 @@ class Tests: XCTestCase {
   }
 
   func testLottieLogo() {
-    isRecording = true
     let animation = Animation.named("LottieLogo1", subdirectory: "TestAnimations")
     animationView.animation = animation
 
