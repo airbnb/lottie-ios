@@ -17,6 +17,10 @@ target 'lottie-swift_Example' do
   pod 'lottie-ios', :path => '../'
 
   target 'lottie-swift_Tests' do
+    platform :ios, '11.0' # the snapshot library used requires iOS 11 or higher
+
+    pod 'SnapshotTesting', '~> 1.8.2'
+
     inherit! :search_paths
   end
 end
