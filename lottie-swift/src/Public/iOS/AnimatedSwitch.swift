@@ -15,7 +15,7 @@ import UIKit
  
  Both the 'On' and 'Off' have an animation play range associated with their state.
  */
-final public class AnimatedSwitch: AnimatedControl {
+open class AnimatedSwitch: AnimatedControl {
 
   /// Defines what happens when the user taps the switch while an
   /// animation is still in flight
