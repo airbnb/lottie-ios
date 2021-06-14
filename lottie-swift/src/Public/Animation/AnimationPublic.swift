@@ -35,14 +35,12 @@ public extension Animation {
       /// If found, return the animation.
       return animation
     }
-    /// Make sure the bundle has a file at the path provided.
-    guard let url = bundle.url(forResource: name, withExtension: "json", subdirectory: subdirectory) else {
-      return nil
-    }
-    
+
     do {
       /// Decode animation.
-      let json = try Data(contentsOf: url)
+      guard let json = try bundle.getAnimationData(name, subdirectory: subdirectory) else {
+        return nil
+      }
       let animation = try JSONDecoder().decode(Animation.self, from: json)
       animationCache?.setAnimation(animation, forKey: cacheKey)
       return animation
