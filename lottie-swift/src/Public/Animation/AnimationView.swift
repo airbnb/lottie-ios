@@ -62,6 +62,7 @@ final public class AnimationView: LottieView {
    */
   public var animation: Animation? {
     didSet {
+      animation?.loopVideoAnimations = loopVideos
       makeAnimationLayer()
     }
   }
@@ -72,6 +73,12 @@ final public class AnimationView: LottieView {
       self.animation = animationName.flatMap {
         Animation.named($0, animationCache: nil)
       }
+    }
+  }
+
+  @IBInspectable var loopVideos: Bool = false {
+    didSet {
+      animation?.loopVideoAnimations = loopVideos
     }
   }
   
@@ -114,6 +121,12 @@ final public class AnimationView: LottieView {
      didSet {
        animationLayer?.fontProvider = fontProvider
      }
+  }
+    
+  public var videoProvider: AnimationVideoProvider {
+    didSet {
+      animationLayer?.videoProvider = videoProvider
+    }
   }
     
   /// Returns `true` if the animation is currently playing.
@@ -603,11 +616,13 @@ final public class AnimationView: LottieView {
     animation: Animation?,
     imageProvider: AnimationImageProvider? = nil,
     textProvider: AnimationTextProvider = DefaultTextProvider(),
-    fontProvider: AnimationFontProvider = DefaultFontProvider()) {
+    fontProvider: AnimationFontProvider = DefaultFontProvider(),
+    videoProvider: AnimationVideoProvider = DefaultVideoProvider()) {
     self.animation = animation
     self.imageProvider = imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = textProvider
     self.fontProvider = fontProvider
+    self.videoProvider = videoProvider
     super.init(frame: .zero)
     commonInit()
     makeAnimationLayer()
@@ -621,6 +636,7 @@ final public class AnimationView: LottieView {
     self.imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = DefaultTextProvider()
     self.fontProvider = DefaultFontProvider()
+    self.videoProvider = DefaultVideoProvider()
     super.init(frame: .zero)
     commonInit()
   }
@@ -630,6 +646,7 @@ final public class AnimationView: LottieView {
     self.imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = DefaultTextProvider()
     self.fontProvider = DefaultFontProvider()
+    self.videoProvider = DefaultVideoProvider()
     super.init(frame: .zero)
     commonInit()
   }
@@ -638,6 +655,7 @@ final public class AnimationView: LottieView {
     self.imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = DefaultTextProvider()
     self.fontProvider = DefaultFontProvider()
+    self.videoProvider = DefaultVideoProvider()
     super.init(coder: aDecoder)
     commonInit()
   }
@@ -814,7 +832,7 @@ final public class AnimationView: LottieView {
       return
     }
     
-    let animationLayer = AnimationContainer(animation: animation, imageProvider: imageProvider, textProvider: textProvider, fontProvider: fontProvider)
+    let animationLayer = AnimationContainer(animation: animation, imageProvider: imageProvider, textProvider: textProvider, fontProvider: fontProvider, videoProvider: videoProvider)
     animationLayer.renderScale = self.screenScale
     viewLayer?.addSublayer(animationLayer)
     self.animationLayer = animationLayer

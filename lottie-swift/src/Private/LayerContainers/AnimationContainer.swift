@@ -102,20 +102,31 @@ final class AnimationContainer: CALayer {
     get { return layerFontProvider.fontProvider }
     set { layerFontProvider.fontProvider = newValue }
   }
+    
+  var videoProvider: AnimationVideoProvider {
+    get { return layerVideoProvider.videoProvider }
+    set { layerVideoProvider.videoProvider = newValue }
+  }
   
   var animationLayers: ContiguousArray<CompositionLayer>
   fileprivate let layerImageProvider: LayerImageProvider
   fileprivate let layerTextProvider: LayerTextProvider
   fileprivate let layerFontProvider: LayerFontProvider
+  fileprivate let layerVideoProvider: LayerVideoProvider
   
-  init(animation: Animation, imageProvider: AnimationImageProvider, textProvider: AnimationTextProvider, fontProvider: AnimationFontProvider) {
+  init(animation: Animation,
+       imageProvider: AnimationImageProvider,
+       textProvider: AnimationTextProvider,
+       fontProvider: AnimationFontProvider,
+       videoProvider: AnimationVideoProvider) {
     self.layerImageProvider = LayerImageProvider(imageProvider: imageProvider, assets: animation.assetLibrary?.imageAssets)
     self.layerTextProvider = LayerTextProvider(textProvider: textProvider)
     self.layerFontProvider = LayerFontProvider(fontProvider: fontProvider)
+    self.layerVideoProvider = LayerVideoProvider(videoProvider: videoProvider)
     self.animationLayers = []
     super.init()
     bounds = animation.bounds
-    let layers = animation.layers.initializeCompositionLayers(assetLibrary: animation.assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, fontProvider: fontProvider, frameRate: CGFloat(animation.framerate))
+    let layers = animation.layers.initializeCompositionLayers(assetLibrary: animation.assetLibrary, layerImageProvider: layerImageProvider, textProvider: textProvider, layerVideoProvider: layerVideoProvider, fontProvider: fontProvider, frameRate: CGFloat(animation.framerate))
     
     var imageLayers = [ImageCompositionLayer]()
     var textLayers = [TextCompositionLayer]()
@@ -156,15 +167,26 @@ final class AnimationContainer: CALayer {
   
   /// For CAAnimation Use
   public override init(layer: Any) {
+    let animationLayer = layer as? AnimationContainer
+    
+    if let animationLayer = animationLayer {
+        layerImageProvider = animationLayer.layerImageProvider
+        layerTextProvider = animationLayer.layerTextProvider
+        layerVideoProvider = animationLayer.layerVideoProvider
+        layerFontProvider = animationLayer.layerFontProvider
+    } else {
+        layerImageProvider = LayerImageProvider(imageProvider: BlankImageProvider(), assets: nil)
+        layerTextProvider = LayerTextProvider(textProvider: DefaultTextProvider())
+        layerVideoProvider = LayerVideoProvider(videoProvider: DefaultVideoProvider())
+        layerFontProvider = LayerFontProvider(fontProvider: DefaultFontProvider())
+    }
+    
     self.animationLayers = []
-    self.layerImageProvider = LayerImageProvider(imageProvider: BlankImageProvider(), assets: nil)
-    self.layerTextProvider = LayerTextProvider(textProvider: DefaultTextProvider())
-    self.layerFontProvider = LayerFontProvider(fontProvider: DefaultFontProvider())
     super.init(layer: layer)
     
-    guard let animationLayer = layer as? AnimationContainer else { return }
-    
-    currentFrame = animationLayer.currentFrame
+    if let animationLayer = animationLayer {
+        currentFrame = animationLayer.currentFrame
+    }
     
   }
   

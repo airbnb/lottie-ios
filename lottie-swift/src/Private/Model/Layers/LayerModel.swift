@@ -25,6 +25,8 @@ extension LayerType: ClassFamily {
       return ShapeLayerModel.self
     case .text:
       return TextLayerModel.self
+    case .video:
+      return VideoLayerModel.self
     }
   }
 }
@@ -36,6 +38,7 @@ public enum LayerType: Int, Codable {
   case null
   case shape
   case text
+  case video = 9
   
   public init(from decoder: Decoder) throws {
     self = try LayerType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .null
