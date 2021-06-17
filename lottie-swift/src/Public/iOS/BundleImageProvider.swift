@@ -36,11 +36,17 @@ public class BundleImageProvider: AnimationImageProvider {
   
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
     
-    if asset.name.hasPrefix("data:"),
-      let url = URL(string: asset.name),
-      let data = try? Data(contentsOf: url),
-      let image = UIImage(data: data) {
-      return image.cgImage
+    if asset.name.hasPrefix("data:") {
+        let encodedAsset = asset.name
+        let mimeLookupUpperBound = 25
+        let searchRange = encodedAsset.startIndex..<encodedAsset.index(encodedAsset.startIndex, offsetBy: mimeLookupUpperBound)
+        let mimeRange = encodedAsset.range(of: ";base64,", range: searchRange)
+        let base64String = String(encodedAsset[mimeRange!.upperBound..<encodedAsset.endIndex])
+
+        if let data = Data(base64Encoded: base64String, options: .ignoreUnknownCharacters),
+           let image = UIImage(data: data) {
+            return image.cgImage
+        }
     }
     
     let imagePath: String?
