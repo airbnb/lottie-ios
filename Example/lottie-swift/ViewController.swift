@@ -10,20 +10,22 @@ import UIKit
 import Lottie
 
 class ViewController: UIViewController {
-  let animationView = AnimationView()
-  let slider = UISlider()
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
+    let animationView = AnimationView()
+    let slider = UISlider()
+    var animationName: String = ""
+    var subdirectory: String = ""
+
+    override func viewDidLoad() {
+       super.viewDidLoad()
     
-    let animation = Animation.named("LottieLogo1", subdirectory: "TestAnimations")
+    let animation = Animation.named(animationName, subdirectory: subdirectory)
     
     animationView.animation = animation
     animationView.contentMode = .scaleAspectFit
     view.addSubview(animationView)
   
     slider.translatesAutoresizingMaskIntoConstraints = false
-    view.translatesAutoresizingMaskIntoConstraints = false
+   // view.translatesAutoresizingMaskIntoConstraints = false
     slider.minimumValue = 0
     slider.maximumValue = 1
     slider.value = 0

@@ -36,6 +36,9 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		AAB6A6CB2493D88300043201 /* AnimationSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB6A6CA2493D88300043201 /* AnimationSelectionViewController.swift */; };
+		AAB6A6CC2493D88300043201 /* AnimationSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB6A6CA2493D88300043201 /* AnimationSelectionViewController.swift */; };
+		AAB6A6CD2493D88300043201 /* AnimationSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB6A6CA2493D88300043201 /* AnimationSelectionViewController.swift */; };
 		BD219F24999976E886C12456 /* Pods_lottie_swift_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486E8356220A2275007CD915 /* Pods_lottie_swift_macOS.framework */; };
 		F70695AD1682BD3DE4571C16 /* Pods_lottie_swift_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE029188DBACE4177BA6CED /* Pods_lottie_swift_Example.framework */; };
 		F9607D5C3894D27EBC8E897A /* Pods_lottie_swift_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A87FE847836C80F1A12E29 /* Pods_lottie_swift_Tests.framework */; };
@@ -97,6 +100,7 @@
 		990C0AA8A35456B23B51C127 /* Pods-lottie-swift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lottie-swift_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-lottie-swift_Example/Pods-lottie-swift_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9BE45D36D5254BD996E95AB1 /* Pods-lottie-swift_macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lottie-swift_macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-lottie-swift_macOS/Pods-lottie-swift_macOS.release.xcconfig"; sourceTree = "<group>"; };
 		9C512735B8BB596E2E2D58CE /* Pods-lottie-swift_tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lottie-swift_tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-lottie-swift_tvOS/Pods-lottie-swift_tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		AAB6A6CA2493D88300043201 /* AnimationSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationSelectionViewController.swift; sourceTree = "<group>"; };
 		E23ECB37162FF8C4A2827EEC /* Pods_lottie_swift_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lottie_swift_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E82294C6B04BC5EF7FF4ED2E /* Pods-lottie-swift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lottie-swift_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-lottie-swift_Tests/Pods-lottie-swift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		EBE029188DBACE4177BA6CED /* Pods_lottie_swift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lottie_swift_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,6 +229,7 @@
 			children = (
 				48E24AC2220231F100BBB8E5 /* TestAnimations */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				AAB6A6CA2493D88300043201 /* AnimationSelectionViewController.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -601,6 +606,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				486E8361220A234C007CD915 /* ViewController.swift in Sources */,
+				AAB6A6CC2493D88300043201 /* AnimationSelectionViewController.swift in Sources */,
 				486E835F220A234C007CD915 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,6 +616,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				486E837C220A2BB5007CD915 /* ViewController.swift in Sources */,
+				AAB6A6CD2493D88300043201 /* AnimationSelectionViewController.swift in Sources */,
 				486E837A220A2BB5007CD915 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -619,6 +626,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				AAB6A6CB2493D88300043201 /* AnimationSelectionViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
