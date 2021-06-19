@@ -6,6 +6,14 @@ xcuserdata/
 
 # other
 build/
+vendor/
 
 # macOS
 .DS_Store
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+log_output/
+output/

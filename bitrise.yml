@@ -1,0 +1,52 @@
+format_version: '8'
+default_step_lib_source: 'https://github.com/bitrise-io/bitrise-steplib.git'
+project_type: ios
+trigger_map:
+- push_branch: 'master'
+  workflow: primary
+- pull_request_source_branch: '*'
+  workflow: primary
+workflows:
+  primary:
+    steps:
+    - activate-ssh-key@4:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@5: {}
+    - cache-pull@2: {}
+    - fastlane@3:
+        title: Fastlane - iOS Build
+        inputs:
+        - verbose_log: 'yes'
+        - lane: 'ios ios_build'
+    - fastlane@3:
+        title: Fastlane - MacOS Catalyst Build
+        inputs:
+        - verbose_log: 'yes'
+        - lane: 'ios macos_catalyst'
+    - fastlane@3:
+        title: Fastlane - Danger
+        inputs:
+        - verbose_log: 'yes'
+        - lane: 'ios run_danger'
+    - fastlane@3:
+        title: Fastlane - macOS Build
+        inputs:
+        - verbose_log: 'yes'
+        - lane: 'macos macos_build'
+    - fastlane@3:
+        title: Fastlane - tvOS Build
+        inputs:
+        - verbose_log: 'yes'
+        - lane: 'tvos tvos_build'
+    - cache-push@2: {}
+app:
+  envs:
+  - opts:
+      is_expand: false
+    BITRISE_PROJECT_PATH: Lottie.xcodeproj
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME: Lottie_iOS
+  - opts:
+      is_expand: false
+    BITRISE_EXPORT_METHOD: development

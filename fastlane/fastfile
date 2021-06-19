@@ -1,0 +1,76 @@
+min_fastlane_version "2.181.0"
+default_platform :ios
+
+before_all do |lane, options|
+    ENV["PROJECT_FILE"] = 'Lottie.xcodeproj'
+    ENV["LOG_PATH"] = './log_output/'
+    ENV["ARCHIVE_PATH"] = './output/'
+end
+
+platform :ios do
+    ios_scheme = 'Lottie_iOS'
+
+    lane :ios_build do
+        gym(
+            clean: true,
+            project: ENV["PROJECT_FILE"],
+            scheme: ios_scheme,
+            configuration: 'Debug',
+            buildlog_path: ENV["LOG_PATH"],
+            skip_archive: true
+        )
+    end
+
+    lane :macos_catalyst do
+        gym(
+            clean: true,
+            project: ENV["PROJECT_FILE"],
+            scheme: ios_scheme,
+            configuration: 'Debug',
+            buildlog_path: ENV["LOG_PATH"],
+            skip_archive: true,
+            catalyst_platform: 'macos'
+        )
+    end
+
+    lane :run_danger do
+        danger(
+            dangerfile: 'Dangerfile',
+            fail_on_errors: true,
+            github_api_token: ENV['DANGER_GITHUB_API_TOKEN'] # TODO: add this
+        )
+    end
+
+end
+
+platform :macos do
+    macos_scheme = 'Lottie_macOS'
+
+    lane :macos_build do
+        gym(
+            clean: true,
+            project: ENV["PROJECT_FILE"],
+            scheme: macos_scheme,
+            configuration: 'Debug',
+            buildlog_path: ENV["LOG_PATH"],
+            skip_archive: true
+        )
+    end
+end
+
+
+platform :tvos do
+    tvos_scheme = 'Lottie_tvOS'
+
+    lane :tvos_build do
+        gym(
+            clean: true,
+            project: ENV["PROJECT_FILE"],
+            scheme: tvos_scheme,
+            configuration: 'Debug',
+            buildlog_path: ENV["LOG_PATH"],
+            skip_archive: true
+        )
+    end
+end
+
