@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11740509264000230018659B /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11740508264000230018659B /* DataExtension.swift */; };
+		1174050A264000230018659B /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11740508264000230018659B /* DataExtension.swift */; };
+		1174051026401B790018659B /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11740508264000230018659B /* DataExtension.swift */; };
+		1174051126401B7A0018659B /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11740508264000230018659B /* DataExtension.swift */; };
+		1174051226401B7B0018659B /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11740508264000230018659B /* DataExtension.swift */; };
 		25D5436F22306E2D00ED90FA /* CompatibleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */; };
 		25D543712230787900ED90FA /* CompatibleAnimationKeypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */; };
 		25D5437222307C8700ED90FA /* CompatibleAnimationKeypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */; };
@@ -665,6 +670,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		11740508264000230018659B /* DataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleAnimationView.swift; sourceTree = "<group>"; };
 		25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleAnimationKeypath.swift; sourceTree = "<group>"; };
 		4866744022249C4E00258C00 /* TextAnimatorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAnimatorNode.swift; sourceTree = "<group>"; };
@@ -1327,6 +1333,7 @@
 				486E8790220B78BF007CD915 /* CGFloatExtensions.swift */,
 				486E8791220B78BF007CD915 /* AnimationKeypathExtension.swift */,
 				486E8792220B78BF007CD915 /* MathKit.swift */,
+				11740508264000230018659B /* DataExtension.swift */,
 				486E8793220B78BF007CD915 /* StringExtensions.swift */,
 			);
 			path = Extensions;
@@ -1662,6 +1669,7 @@
 				486E87EC220B78D1007CD915 /* Merge.swift in Sources */,
 				486E87ED220B78D1007CD915 /* FillI.swift in Sources */,
 				486E87EE220B78D1007CD915 /* Repeater.swift in Sources */,
+				1174051026401B790018659B /* DataExtension.swift in Sources */,
 				486E87EF220B78D1007CD915 /* GradientFill.swift in Sources */,
 				486E87F0220B78D1007CD915 /* GradientStroke.swift in Sources */,
 				486E87F1220B78D1007CD915 /* Stroke.swift in Sources */,
@@ -1800,6 +1808,7 @@
 				486E8865220B78E4007CD915 /* Merge.swift in Sources */,
 				486E8866220B78E4007CD915 /* FillI.swift in Sources */,
 				486E8867220B78E4007CD915 /* Repeater.swift in Sources */,
+				1174051126401B7A0018659B /* DataExtension.swift in Sources */,
 				486E8868220B78E4007CD915 /* GradientFill.swift in Sources */,
 				486E8869220B78E4007CD915 /* GradientStroke.swift in Sources */,
 				486E886A220B78E4007CD915 /* Stroke.swift in Sources */,
@@ -1970,6 +1979,7 @@
 				486E8902220B78F4007CD915 /* CurveVertex.swift in Sources */,
 				486E8903220B78F4007CD915 /* VectorsExtensions.swift in Sources */,
 				486E8904220B78F4007CD915 /* InterpolatableExtensions.swift in Sources */,
+				11740509264000230018659B /* DataExtension.swift in Sources */,
 				486E8905220B78F4007CD915 /* Interpolatable.swift in Sources */,
 				486E8906220B78F4007CD915 /* KeyframeExtensions.swift in Sources */,
 				486E8907220B78F4007CD915 /* AnimationContext.swift in Sources */,
@@ -2070,6 +2080,7 @@
 				486E8953220B78FF007CD915 /* Merge.swift in Sources */,
 				486E8954220B78FF007CD915 /* FillI.swift in Sources */,
 				486E8955220B78FF007CD915 /* Repeater.swift in Sources */,
+				1174051226401B7B0018659B /* DataExtension.swift in Sources */,
 				486E8956220B78FF007CD915 /* GradientFill.swift in Sources */,
 				486E8957220B78FF007CD915 /* GradientStroke.swift in Sources */,
 				486E8958220B78FF007CD915 /* Stroke.swift in Sources */,
@@ -2240,6 +2251,7 @@
 				486E89F0220B790E007CD915 /* CurveVertex.swift in Sources */,
 				486E89F1220B790E007CD915 /* VectorsExtensions.swift in Sources */,
 				486E89F2220B790E007CD915 /* InterpolatableExtensions.swift in Sources */,
+				1174050A264000230018659B /* DataExtension.swift in Sources */,
 				486E89F3220B790E007CD915 /* Interpolatable.swift in Sources */,
 				486E89F4220B790E007CD915 /* KeyframeExtensions.swift in Sources */,
 				486E89F5220B790E007CD915 /* AnimationContext.swift in Sources */,
