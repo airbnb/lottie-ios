@@ -349,6 +349,7 @@
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
+				F6F7DBE3FACB33254FAEB758 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -573,6 +574,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_Example/Pods-lottie-swift_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6F7DBE3FACB33254FAEB758 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_Tests/Pods-lottie-swift_Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SnapshotTesting/SnapshotTesting.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapshotTesting.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lottie-swift_Tests/Pods-lottie-swift_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FDBE7F928D3C0C3F9DEBE218 /* [CP] Embed Pods Frameworks */ = {

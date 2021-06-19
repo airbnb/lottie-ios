@@ -1,8 +1,14 @@
 PODS:
   - lottie-ios (3.2.2)
+  - SnapshotTesting (1.8.2)
 
 DEPENDENCIES:
   - lottie-ios (from `../`)
+  - SnapshotTesting (~> 1.8.2)
+
+SPEC REPOS:
+  trunk:
+    - SnapshotTesting
 
 EXTERNAL SOURCES:
   lottie-ios:
@@ -10,7 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   lottie-ios: a033bb989eea77d9f99cc4e2bbdd3788229761ad
+  SnapshotTesting: 38947050d13960d57a4a9c166fcf51bca7d56970
 
-PODFILE CHECKSUM: 39996949d6fdb53021e9e6dfeaf254366502807f
+PODFILE CHECKSUM: 9fa6df131f75b046fc0f7030e567517601aef0fe
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.1
