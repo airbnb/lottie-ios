@@ -41,8 +41,9 @@ final class LayerImageProvider {
   
   func reloadImages() {
     for imageLayer in imageLayers {
-      if let asset = imageAssets[imageLayer.imageReferenceID] {
-        imageLayer.image = imageProvider.imageForAsset(asset: asset)
+      if let asset = imageAssets[imageLayer.imageReferenceID],
+        let image = imageProvider.imageForAsset(asset: asset) {
+        imageLayer.image = image
       }
     }
   }
