@@ -34,4 +34,16 @@ final class Shape: ShapeItem {
     try container.encodeIfPresent(direction, forKey: .direction)
   }
   
+  required init(dictionary: [String : Any]) throws {
+    let pathDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.path.rawValue)
+    self.path = try KeyframeGroup<BezierPath>(dictionary: pathDictionary)
+    if let directionRawValue = dictionary[CodingKeys.direction.rawValue] as? Int,
+       let direction = PathDirection(rawValue: directionRawValue) {
+      self.direction = direction
+    } else {
+      self.direction = nil
+    }
+    try super.init(dictionary: dictionary)
+  }
+  
 }

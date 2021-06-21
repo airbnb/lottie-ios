@@ -8,7 +8,7 @@
 import Foundation
 
 /// A model that holds a vector character
-final class Glyph: Codable {
+final class Glyph: Codable, DictionaryInitializable {
   
   /// The character
   let character: String
@@ -68,5 +68,19 @@ final class Glyph: Codable {
     
     var shapeContainer = container.nestedContainer(keyedBy: ShapeKey.self, forKey: .shapeWrapper)
     try shapeContainer.encode(shapes, forKey: .shapes)
+  }
+  
+  init(dictionary: [String : Any]) throws {
+    self.character = try dictionary.valueFor(key: CodingKeys.character.rawValue)
+    self.fontSize = try dictionary.valueFor(key: CodingKeys.fontSize.rawValue)
+    self.fontFamily = try dictionary.valueFor(key: CodingKeys.fontFamily.rawValue)
+    self.fontStyle = try dictionary.valueFor(key: CodingKeys.fontStyle.rawValue)
+    self.width = try dictionary.valueFor(key: CodingKeys.width.rawValue)
+    if let shapes = dictionary[CodingKeys.shapeWrapper.rawValue] as? [String: Any],
+       let shapeDictionaries = shapes[ShapeKey.shapes.rawValue] as? [[String: Any]] {
+      self.shapes = try [ShapeItem].fromDictionaries(shapeDictionaries)
+    } else {
+      self.shapes = [ShapeItem]()
+    }
   }
 }

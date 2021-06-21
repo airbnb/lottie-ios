@@ -78,6 +78,20 @@ public extension Animation {
       return nil
     }
   }
+
+  /**
+   Loads an animation from data. Uses a dictionary to decode the data rather than `JSONDecoder`.
+   - Parameter data: The data containing the animation.
+
+   - Returns: Deserialized `Animation`. Optional.
+   */
+  static func data(_ data: Data) -> Animation? {
+    guard let dictionary = try? JSONSerialization.jsonObject(with: data, options: .init()) as? [String: Any],
+      let animation = try? Animation(dictionary: dictionary) else {
+      return nil
+    }
+    return animation
+  }
   
   /// A closure for an Animation download. The closure is passed `nil` if there was an error.
   typealias DownloadClosure = (Animation?) -> Void

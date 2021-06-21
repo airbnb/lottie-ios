@@ -17,7 +17,7 @@ enum MaskMode: String, Codable {
   case none = "n"
 }
 
-final class Mask: Codable {
+final class Mask: Codable, DictionaryInitializable {
   
   let mode: MaskMode
   
@@ -44,5 +44,27 @@ final class Mask: Codable {
     self.shape = try container.decode(KeyframeGroup<BezierPath>.self, forKey: .shape)
     self.inverted = try container.decodeIfPresent(Bool.self, forKey: .inverted) ?? false
     self.expansion = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .expansion) ?? KeyframeGroup(Vector1D(0))
+  }
+  
+  init(dictionary: [String : Any]) throws {
+    if let modeRawType = dictionary[CodingKeys.mode.rawValue] as? String,
+       let mode = MaskMode(rawValue: modeRawType) {
+      self.mode = mode
+    } else {
+      self.mode = .add
+    }
+    if let opacityDictionary = dictionary[CodingKeys.opacity.rawValue] as? [String: Any] {
+      self.opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
+    } else {
+      self.opacity = KeyframeGroup(Vector1D(100))
+    }
+    let shapeDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.shape.rawValue)
+    self.shape = try KeyframeGroup<BezierPath>(dictionary: shapeDictionary)
+    self.inverted = (try? dictionary.valueFor(key: CodingKeys.inverted.rawValue)) ?? false
+    if let expansionDictionary = dictionary[CodingKeys.expansion.rawValue] as? [String: Any] {
+      self.expansion = try KeyframeGroup<Vector1D>(dictionary: expansionDictionary)
+    } else {
+      self.expansion = KeyframeGroup(Vector1D(0))
+    }
   }
 }

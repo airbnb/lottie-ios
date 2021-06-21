@@ -46,5 +46,21 @@ final class Rectangle: ShapeItem {
     try container.encode(size, forKey: .size)
     try container.encode(cornerRadius, forKey: .cornerRadius)
   }
+
+  required init(dictionary: [String : Any]) throws {
+    if let directionRawType = dictionary[CodingKeys.direction.rawValue] as? Int,
+       let direction = PathDirection(rawValue: directionRawType) {
+      self.direction = direction
+    } else {
+      self.direction = .clockwise
+    }
+    let positionDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.position.rawValue)
+    self.position = try KeyframeGroup<Vector3D>(dictionary: positionDictionary)
+    let sizeDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.size.rawValue)
+    self.size = try KeyframeGroup<Vector3D>(dictionary: sizeDictionary)
+    let cornerRadiusDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.cornerRadius.rawValue)
+    self.cornerRadius = try KeyframeGroup<Vector1D>(dictionary: cornerRadiusDictionary)
+    try super.init(dictionary: dictionary)
+  }
   
 }

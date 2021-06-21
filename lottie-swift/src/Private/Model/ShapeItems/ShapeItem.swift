@@ -69,7 +69,7 @@ enum ShapeType: String, Codable {
 }
 
 /// An item belonging to a Shape Layer
-class ShapeItem: Codable {
+class ShapeItem: Codable, DictionaryInitializable {
   
   /// The name of the shape
   let name: String
@@ -79,7 +79,7 @@ class ShapeItem: Codable {
   
   let hidden: Bool
   
-  private enum CodingKeys : String, CodingKey {
+  fileprivate enum CodingKeys : String, CodingKey {
     case name = "nm"
     case type = "ty"
     case hidden = "hd"
@@ -91,5 +91,53 @@ class ShapeItem: Codable {
     self.type = try container.decode(ShapeType.self, forKey: .type)
     self.hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden) ?? false
   }
+  
+  required init(dictionary: [String : Any]) throws {
+    self.name = (try? dictionary.valueFor(key: CodingKeys.name.rawValue)) ?? "Layer"
+    self.type = ShapeType(rawValue: try dictionary.valueFor(key: CodingKeys.type.rawValue)) ?? .unknown
+    self.hidden = (try? dictionary.valueFor(key: CodingKeys.hidden.rawValue)) ?? false
+  }
+  
+}
 
+extension Array where Element == ShapeItem {
+  
+  static func fromDictionaries(_ dictionaries: [[String: Any]]) throws -> [ShapeItem] {
+    return try dictionaries.compactMap { dictionary in
+      let shapeType = dictionary[ShapeItem.CodingKeys.type.rawValue] as? String
+      switch ShapeType(rawValue: shapeType ?? ShapeType.unknown.rawValue) {
+      case .ellipse:
+        return try Ellipse(dictionary: dictionary)
+      case .fill:
+        return try Fill(dictionary: dictionary)
+      case .gradientFill:
+        return try GradientFill(dictionary: dictionary)
+      case .group:
+        return try Group(dictionary: dictionary)
+      case .gradientStroke:
+        return try GradientStroke(dictionary: dictionary)
+      case .merge:
+        return try Merge(dictionary: dictionary)
+      case .rectangle:
+        return try Rectangle(dictionary: dictionary)
+      case .repeater:
+        return try Repeater(dictionary: dictionary)
+      case .shape:
+        return try Shape(dictionary: dictionary)
+      case .star:
+        return try Star(dictionary: dictionary)
+      case .stroke:
+        return try Stroke(dictionary: dictionary)
+      case .trim:
+        return try Trim(dictionary: dictionary)
+      case .transform:
+        return try ShapeTransform(dictionary: dictionary)
+      case .none:
+        return nil
+      default:
+        return try ShapeItem(dictionary: dictionary)
+      }
+    }
+  }
+  
 }

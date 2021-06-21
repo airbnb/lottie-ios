@@ -15,11 +15,11 @@ import Foundation
  This helper object is needed to properly decode the json.
  */
 
-final class KeyframeGroup<T>: Codable where T: Codable, T: Interpolatable {
+final class KeyframeGroup<T>: Codable, DictionaryInitializable where T: Codable, T: AnyInitializable, T: Interpolatable {
   
   let keyframes: ContiguousArray<Keyframe<T>>
   
-  private enum KeyframeWrapperKey: String, CodingKey {
+  enum KeyframeWrapperKey: String, CodingKey {
     case keyframeData = "k"
   }
   
@@ -102,6 +102,38 @@ final class KeyframeGroup<T>: Codable where T: Codable, T: Interpolatable {
                                                   spatialOutTangent: nil)
         try keyframeContainer.encode(keyframeData)
       }
+    }
+  }
+  
+  init(dictionary: [String : Any]) throws {
+    if let rawValue = dictionary[KeyframeWrapperKey.keyframeData.rawValue],
+       let value = try? T(value: rawValue) {
+      self.keyframes = [Keyframe<T>(value)]
+    } else {
+      var frameDictionaries: [[String: Any]]
+      if let singleFrameDictionary = dictionary[KeyframeWrapperKey.keyframeData.rawValue] as? [String: Any] {
+        frameDictionaries = [singleFrameDictionary]
+      } else {
+        frameDictionaries = try dictionary.valueFor(key: KeyframeWrapperKey.keyframeData.rawValue)
+      }
+      var keyframes = ContiguousArray<Keyframe<T>>()
+      var previousKeyframeData: KeyframeData<T>?
+      for frameDictionary in frameDictionaries {
+        let data = try KeyframeData<T>(dictionary: frameDictionary)
+        guard let value: T = data.startValue ?? previousKeyframeData?.endValue,
+              let time = data.time else {
+          throw InitializableError.invalidInput
+        }
+        keyframes.append(Keyframe<T>(value: value,
+                                     time: time,
+                                     isHold: data.isHold,
+                                     inTangent: previousKeyframeData?.inTangent,
+                                     outTangent: data.outTangent,
+                                     spatialInTangent: previousKeyframeData?.spatialInTangent,
+                                     spatialOutTangent: data.spatialOutTangent))
+        previousKeyframeData = data
+      }
+      self.keyframes = keyframes
     }
   }
   

@@ -44,5 +44,13 @@ public final class ImageAsset: Asset {
     try container.encode(width, forKey: .width)
     try container.encode(height, forKey: .height)
   }
-
+  
+  required init(dictionary: [String : Any]) throws {
+    self.name = try dictionary.valueFor(key: CodingKeys.name.rawValue)
+    self.directory = try dictionary.valueFor(key: CodingKeys.directory.rawValue)
+    self.width = try dictionary.valueFor(key: CodingKeys.width.rawValue)
+    self.height = try dictionary.valueFor(key: CodingKeys.height.rawValue)
+    try super.init(dictionary: dictionary)
+  }
+  
 }

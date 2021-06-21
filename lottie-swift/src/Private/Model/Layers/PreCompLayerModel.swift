@@ -47,4 +47,16 @@ final class PreCompLayerModel: LayerModel {
     try container.encode(height, forKey: .height)
   }
   
+  required init(dictionary: [String : Any]) throws {
+    self.referenceID = try dictionary.valueFor(key: CodingKeys.referenceID.rawValue)
+    if let timeRemappingDictionary = dictionary[CodingKeys.timeRemapping.rawValue] as? [String: Any] {
+      self.timeRemapping = try KeyframeGroup<Vector1D>(dictionary: timeRemappingDictionary)
+    } else {
+      self.timeRemapping = nil
+    }
+    self.width = try dictionary.valueFor(key: CodingKeys.width.rawValue)
+    self.height = try dictionary.valueFor(key: CodingKeys.height.rawValue)
+    try super.init(dictionary: dictionary)
+  }
+  
 }

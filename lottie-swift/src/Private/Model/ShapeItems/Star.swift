@@ -83,4 +83,39 @@ final class Star: ShapeItem {
     try container.encode(starType, forKey: .starType)
   }
   
+  required init(dictionary: [String : Any]) throws {
+    if let directionRawValue = dictionary[CodingKeys.direction.rawValue] as? Int,
+       let direction = PathDirection(rawValue: directionRawValue) {
+      self.direction = direction
+    } else {
+      self.direction = .clockwise
+    }
+    let positionDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.position.rawValue)
+    self.position = try KeyframeGroup<Vector3D>(dictionary: positionDictionary)
+    let outerRadiusDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.outerRadius.rawValue)
+    self.outerRadius = try KeyframeGroup<Vector1D>(dictionary: outerRadiusDictionary)
+    let outerRoundnessDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.outerRoundness.rawValue)
+    self.outerRoundness = try KeyframeGroup<Vector1D>(dictionary: outerRoundnessDictionary)
+    if let innerRadiusDictionary = dictionary[CodingKeys.innerRadius.rawValue] as? [String: Any] {
+      self.innerRadius = try KeyframeGroup<Vector1D>(dictionary: innerRadiusDictionary)
+    } else {
+      self.innerRadius = nil
+    }
+    if let innerRoundnessDictionary = dictionary[CodingKeys.innerRoundness.rawValue] as? [String: Any] {
+      self.innerRoundness = try KeyframeGroup<Vector1D>(dictionary: innerRoundnessDictionary)
+    } else {
+      self.innerRoundness = nil
+    }
+    let rotationDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.rotation.rawValue)
+    self.rotation = try KeyframeGroup<Vector1D>(dictionary: rotationDictionary)
+    let pointsDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.points.rawValue)
+    self.points = try KeyframeGroup<Vector1D>(dictionary: pointsDictionary)
+    let starTypeRawValue: Int = try dictionary.valueFor(key: CodingKeys.starType.rawValue)
+    guard let starType = StarType(rawValue: starTypeRawValue) else {
+      throw InitializableError.invalidInput
+    }
+    self.starType = starType
+    try super.init(dictionary: dictionary)
+  }
+  
 }

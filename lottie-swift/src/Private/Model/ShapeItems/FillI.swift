@@ -46,4 +46,18 @@ final class Fill: ShapeItem {
     try container.encode(fillRule, forKey: .fillRule)
   }
   
+  required init(dictionary: [String : Any]) throws {
+    let opacityDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.opacity.rawValue)
+    self.opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
+    let colorDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.color.rawValue)
+    self.color = try KeyframeGroup<Color>(dictionary: colorDictionary)
+    if let fillRuleRawValue = dictionary[CodingKeys.fillRule.rawValue] as? Int,
+       let fillRule = FillRule(rawValue: fillRuleRawValue) {
+      self.fillRule = fillRule
+    } else {
+      self.fillRule = .nonZeroWinding
+    }
+    try super.init(dictionary: dictionary)
+  }
+  
 }

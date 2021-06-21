@@ -38,4 +38,13 @@ final class Merge: ShapeItem {
     try container.encode(mode, forKey: .mode)
   }
   
+  required init(dictionary: [String : Any]) throws {
+    let modeRawType: Int = try dictionary.valueFor(key: CodingKeys.mode.rawValue)
+    guard let mode = MergeMode(rawValue: modeRawType) else {
+      throw InitializableError.invalidInput
+    }
+    self.mode = mode
+    try super.init(dictionary: dictionary)
+  }
+  
 }

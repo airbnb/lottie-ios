@@ -41,4 +41,11 @@ final class SolidLayerModel: LayerModel {
     try container.encode(height, forKey: .height)
   }
   
+  required init(dictionary: [String : Any]) throws {
+    self.colorHex = try dictionary.valueFor(key: CodingKeys.colorHex.rawValue)
+    self.width = try dictionary.valueFor(key: CodingKeys.width.rawValue)
+    self.height = try dictionary.valueFor(key: CodingKeys.height.rawValue)
+    try super.init(dictionary: dictionary)
+  }
+  
 }
