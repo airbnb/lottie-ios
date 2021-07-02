@@ -41,6 +41,21 @@ extension Double {
   }
 }
 
+extension Vector1D: AnyInitializable {
+  
+  init(value: Any) throws {
+    if let array = value as? [Double],
+       let double = array.first {
+      self.value = double
+    } else if let double = value as? Double {
+      self.value = double
+    } else {
+      throw InitializableError.invalidInput
+    }
+  }
+  
+}
+
 /**
  Needed for decoding json {x: y:} to a CGPoint
  */
@@ -88,7 +103,30 @@ struct Vector2D: Codable {
   }
 }
 
-extension Vector2D {
+extension Vector2D: AnyInitializable {
+  
+  init(value: Any) throws {
+    guard let dictionary = value as? [String: Any] else {
+      throw InitializableError.invalidInput
+    }
+    
+    if let array = dictionary[CodingKeys.x.rawValue] as? [Double],
+       let double = array.first {
+      self.x = double
+    } else if let double = dictionary[CodingKeys.x.rawValue] as? Double {
+      self.x = double
+    } else {
+      throw InitializableError.invalidInput
+    }
+    if let array = dictionary[CodingKeys.y.rawValue] as? [Double],
+       let double = array.first {
+      self.y = double
+    } else if let double = dictionary[CodingKeys.y.rawValue] as? Double {
+      self.y = double
+    } else {
+      throw InitializableError.invalidInput
+    }
+  }
   
 }
 
@@ -138,6 +176,19 @@ extension Vector3D: Codable {
     try container.encode(x)
     try container.encode(y)
     try container.encode(z)
+  }
+  
+}
+
+extension Vector3D: AnyInitializable {
+  
+  init(value: Any) throws {
+    guard var array = value as? [Double] else {
+      throw InitializableError.invalidInput
+    }
+    self.x = array.count > 0 ? array.removeFirst() : 0
+    self.y = array.count > 0 ? array.removeFirst() : 0
+    self.z = array.count > 0 ? array.removeFirst() : 0
   }
   
 }

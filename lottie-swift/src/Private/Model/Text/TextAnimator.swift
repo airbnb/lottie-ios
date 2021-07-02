@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class TextAnimator: Codable {
+final class TextAnimator: Codable, DictionaryInitializable {
   
   let name: String
   
@@ -96,4 +96,65 @@ final class TextAnimator: Codable {
     try animatorContainer.encodeIfPresent(strokeWidth, forKey: .strokeWidth)
     try animatorContainer.encodeIfPresent(tracking, forKey: .tracking)
   }
+  
+  init(dictionary: [String : Any]) throws {
+    self.name = (try? dictionary.valueFor(key: CodingKeys.name.rawValue)) ?? ""
+    let animatorDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.textAnimator.rawValue)
+    if let fillColorDictionary = animatorDictionary[TextAnimatorKeys.fillColor.rawValue] as? [String: Any] {
+      self.fillColor = try? KeyframeGroup<Color>(dictionary: fillColorDictionary)
+    } else {
+      self.fillColor = nil
+    }
+    if let strokeColorDictionary = animatorDictionary[TextAnimatorKeys.strokeColor.rawValue] as? [String: Any] {
+      self.strokeColor = try? KeyframeGroup<Color>(dictionary: strokeColorDictionary)
+    } else {
+      self.strokeColor = nil
+    }
+    if let strokeWidthDictionary = animatorDictionary[TextAnimatorKeys.strokeWidth.rawValue] as? [String: Any] {
+      self.strokeWidth = try? KeyframeGroup<Vector1D>(dictionary: strokeWidthDictionary)
+    } else {
+      self.strokeWidth = nil
+    }
+    if let trackingDictionary = animatorDictionary[TextAnimatorKeys.tracking.rawValue] as? [String: Any] {
+      self.tracking = try? KeyframeGroup<Vector1D>(dictionary: trackingDictionary)
+    } else {
+      self.tracking = nil
+    }
+    if let anchorDictionary = animatorDictionary[TextAnimatorKeys.anchor.rawValue] as? [String: Any] {
+      self.anchor = try? KeyframeGroup<Vector3D>(dictionary: anchorDictionary)
+    } else {
+      self.anchor = nil
+    }
+    if let positionDictionary = animatorDictionary[TextAnimatorKeys.position.rawValue] as? [String: Any] {
+      self.position = try? KeyframeGroup<Vector3D>(dictionary: positionDictionary)
+    } else {
+      self.position = nil
+    }
+    if let scaleDictionary = animatorDictionary[TextAnimatorKeys.scale.rawValue] as? [String: Any] {
+      self.scale = try? KeyframeGroup<Vector3D>(dictionary: scaleDictionary)
+    } else {
+      self.scale = nil
+    }
+    if let skewDictionary = animatorDictionary[TextAnimatorKeys.skew.rawValue] as? [String: Any] {
+      self.skew = try? KeyframeGroup<Vector1D>(dictionary: skewDictionary)
+    } else {
+      self.skew = nil
+    }
+    if let skewAxisDictionary = animatorDictionary[TextAnimatorKeys.skewAxis.rawValue] as? [String: Any] {
+      self.skewAxis = try? KeyframeGroup<Vector1D>(dictionary: skewAxisDictionary)
+    } else {
+      self.skewAxis = nil
+    }
+    if let rotationDictionary = animatorDictionary[TextAnimatorKeys.rotation.rawValue] as? [String: Any] {
+      self.rotation = try? KeyframeGroup<Vector1D>(dictionary: rotationDictionary)
+    } else {
+      self.rotation = nil
+    }
+    if let opacityDictionary = animatorDictionary[TextAnimatorKeys.opacity.rawValue] as? [String: Any] {
+      self.opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
+    } else {
+      self.opacity = nil
+    }
+  }
+  
 }

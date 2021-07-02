@@ -29,4 +29,9 @@ final class ImageLayerModel: LayerModel {
     try container.encode(referenceID, forKey: .referenceID)
   }
   
+  required init(dictionary: [String : Any]) throws {
+    self.referenceID = try dictionary.valueFor(key: CodingKeys.referenceID.rawValue)
+    try super.init(dictionary: dictionary)
+  }
+  
 }

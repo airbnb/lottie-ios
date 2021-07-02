@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CF66489267A96B900B75456 /* DictionaryInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF66488267A96B900B75456 /* DictionaryInitializable.swift */; };
+		0CF6648A267A96B900B75456 /* DictionaryInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF66488267A96B900B75456 /* DictionaryInitializable.swift */; };
+		0CF6648B267A96B900B75456 /* DictionaryInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF66488267A96B900B75456 /* DictionaryInitializable.swift */; };
+		0CF6648C267A96B900B75456 /* DictionaryInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF66488267A96B900B75456 /* DictionaryInitializable.swift */; };
+		0CF6648D267A96B900B75456 /* DictionaryInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF66488267A96B900B75456 /* DictionaryInitializable.swift */; };
+		0CF6648F267BB50400B75456 /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF6648E267BB50400B75456 /* CGPointExtensions.swift */; };
+		0CF66490267BB50400B75456 /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF6648E267BB50400B75456 /* CGPointExtensions.swift */; };
+		0CF66491267BB50400B75456 /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF6648E267BB50400B75456 /* CGPointExtensions.swift */; };
+		0CF66492267BB50400B75456 /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF6648E267BB50400B75456 /* CGPointExtensions.swift */; };
+		0CF66493267BB50400B75456 /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF6648E267BB50400B75456 /* CGPointExtensions.swift */; };
 		25D5436F22306E2D00ED90FA /* CompatibleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */; };
 		25D543712230787900ED90FA /* CompatibleAnimationKeypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */; };
 		25D5437222307C8700ED90FA /* CompatibleAnimationKeypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */; };
@@ -665,6 +675,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0CF66488267A96B900B75456 /* DictionaryInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryInitializable.swift; sourceTree = "<group>"; };
+		0CF6648E267BB50400B75456 /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
 		25D5436E22306E2D00ED90FA /* CompatibleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleAnimationView.swift; sourceTree = "<group>"; };
 		25D543702230787900ED90FA /* CompatibleAnimationKeypath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleAnimationKeypath.swift; sourceTree = "<group>"; };
 		4866744022249C4E00258C00 /* TextAnimatorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAnimatorNode.swift; sourceTree = "<group>"; };
@@ -1325,9 +1337,11 @@
 			isa = PBXGroup;
 			children = (
 				486E8790220B78BF007CD915 /* CGFloatExtensions.swift */,
+				0CF6648E267BB50400B75456 /* CGPointExtensions.swift */,
 				486E8791220B78BF007CD915 /* AnimationKeypathExtension.swift */,
 				486E8792220B78BF007CD915 /* MathKit.swift */,
 				486E8793220B78BF007CD915 /* StringExtensions.swift */,
+				0CF66488267A96B900B75456 /* DictionaryInitializable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1590,6 +1604,7 @@
 				486E87A8220B78D1007CD915 /* UIColorExtension.swift in Sources */,
 				486E87A9220B78D1007CD915 /* AnimatedButton.swift in Sources */,
 				486E87AA220B78D1007CD915 /* LottieView.swift in Sources */,
+				0CF6648F267BB50400B75456 /* CGPointExtensions.swift in Sources */,
 				486E87AB220B78D1007CD915 /* AnimationSubview.swift in Sources */,
 				486E87AC220B78D1007CD915 /* AnimatedControl.swift in Sources */,
 				486E87AD220B78D1007CD915 /* AnimationTime.swift in Sources */,
@@ -1668,6 +1683,7 @@
 				486E87F2220B78D1007CD915 /* Rectangle.swift in Sources */,
 				4899B00824DB2A3D00194C96 /* TextLayer.swift in Sources */,
 				486E87F3220B78D1007CD915 /* Star.swift in Sources */,
+				0CF66489267A96B900B75456 /* DictionaryInitializable.swift in Sources */,
 				486E87F4220B78D1007CD915 /* SolidLayerModel.swift in Sources */,
 				486E87F5220B78D1007CD915 /* LayerModel.swift in Sources */,
 				486E87F6220B78D1007CD915 /* ImageLayerModel.swift in Sources */,
@@ -1728,6 +1744,7 @@
 				486E8821220B78E4007CD915 /* UIColorExtension.swift in Sources */,
 				486E8822220B78E4007CD915 /* AnimatedButton.swift in Sources */,
 				486E8823220B78E4007CD915 /* LottieView.swift in Sources */,
+				0CF66490267BB50400B75456 /* CGPointExtensions.swift in Sources */,
 				486E8824220B78E4007CD915 /* AnimationSubview.swift in Sources */,
 				486E8825220B78E4007CD915 /* AnimatedControl.swift in Sources */,
 				486E8826220B78E4007CD915 /* AnimationTime.swift in Sources */,
@@ -1806,6 +1823,7 @@
 				486E886B220B78E4007CD915 /* Rectangle.swift in Sources */,
 				4899B00924DB2A3D00194C96 /* TextLayer.swift in Sources */,
 				486E886C220B78E4007CD915 /* Star.swift in Sources */,
+				0CF6648A267A96B900B75456 /* DictionaryInitializable.swift in Sources */,
 				486E886D220B78E4007CD915 /* SolidLayerModel.swift in Sources */,
 				486E886E220B78E4007CD915 /* LayerModel.swift in Sources */,
 				486E886F220B78E4007CD915 /* ImageLayerModel.swift in Sources */,
@@ -1908,6 +1926,7 @@
 				486E88CA220B78F4007CD915 /* AnyValueContainer.swift in Sources */,
 				486E88CB220B78F4007CD915 /* KeyframeInterpolator.swift in Sources */,
 				486E88CC220B78F4007CD915 /* SingleValueProvider.swift in Sources */,
+				0CF66491267BB50400B75456 /* CGPointExtensions.swift in Sources */,
 				486E88CD220B78F4007CD915 /* GroupInterpolator.swift in Sources */,
 				486E88CE220B78F4007CD915 /* ItemsExtension.swift in Sources */,
 				486E88CF220B78F4007CD915 /* ShapeRenderLayer.swift in Sources */,
@@ -1934,6 +1953,7 @@
 				486E88E3220B78F4007CD915 /* LayerModel.swift in Sources */,
 				486E88E4220B78F4007CD915 /* ImageLayerModel.swift in Sources */,
 				486E88E5220B78F4007CD915 /* TextLayerModel.swift in Sources */,
+				0CF6648B267A96B900B75456 /* DictionaryInitializable.swift in Sources */,
 				486E88E6220B78F4007CD915 /* PreCompLayerModel.swift in Sources */,
 				486E88E7220B78F4007CD915 /* ShapeLayerModel.swift in Sources */,
 				486E88E8220B78F4007CD915 /* Animation.swift in Sources */,
@@ -1998,6 +2018,7 @@
 				486E890E220B78FF007CD915 /* BundleImageProvider.swift in Sources */,
 				486E890F220B78FF007CD915 /* UIColorExtension.swift in Sources */,
 				486E8910220B78FF007CD915 /* AnimatedButton.swift in Sources */,
+				0CF66492267BB50400B75456 /* CGPointExtensions.swift in Sources */,
 				486E8911220B78FF007CD915 /* LottieView.swift in Sources */,
 				486E8912220B78FF007CD915 /* AnimationSubview.swift in Sources */,
 				486E8913220B78FF007CD915 /* AnimatedControl.swift in Sources */,
@@ -2076,6 +2097,7 @@
 				486E8959220B78FF007CD915 /* Rectangle.swift in Sources */,
 				4899B00B24DB2A3D00194C96 /* TextLayer.swift in Sources */,
 				486E895A220B78FF007CD915 /* Star.swift in Sources */,
+				0CF6648C267A96B900B75456 /* DictionaryInitializable.swift in Sources */,
 				486E895B220B78FF007CD915 /* SolidLayerModel.swift in Sources */,
 				486E895C220B78FF007CD915 /* LayerModel.swift in Sources */,
 				486E895D220B78FF007CD915 /* ImageLayerModel.swift in Sources */,
@@ -2178,6 +2200,7 @@
 				486E89B7220B790E007CD915 /* KeypathSearchable.swift in Sources */,
 				486E89B8220B790E007CD915 /* AnyValueContainer.swift in Sources */,
 				486E89B9220B790E007CD915 /* KeyframeInterpolator.swift in Sources */,
+				0CF66493267BB50400B75456 /* CGPointExtensions.swift in Sources */,
 				486E89BA220B790E007CD915 /* SingleValueProvider.swift in Sources */,
 				486E89BB220B790E007CD915 /* GroupInterpolator.swift in Sources */,
 				486E89BC220B790E007CD915 /* ItemsExtension.swift in Sources */,
@@ -2204,6 +2227,7 @@
 				486E89D0220B790E007CD915 /* SolidLayerModel.swift in Sources */,
 				486E89D1220B790E007CD915 /* LayerModel.swift in Sources */,
 				486E89D2220B790E007CD915 /* ImageLayerModel.swift in Sources */,
+				0CF6648D267A96B900B75456 /* DictionaryInitializable.swift in Sources */,
 				486E89D3220B790E007CD915 /* TextLayerModel.swift in Sources */,
 				486E89D4220B790E007CD915 /* PreCompLayerModel.swift in Sources */,
 				486E89D5220B790E007CD915 /* ShapeLayerModel.swift in Sources */,

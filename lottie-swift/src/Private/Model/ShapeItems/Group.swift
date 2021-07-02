@@ -28,5 +28,11 @@ final class Group: ShapeItem {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(items, forKey: .items)
   }
-
+  
+  required init(dictionary: [String : Any]) throws {
+    let itemDictionaries: [[String: Any]] = try dictionary.valueFor(key: CodingKeys.items.rawValue)
+    self.items = try [ShapeItem].fromDictionaries(itemDictionaries)
+    try super.init(dictionary: dictionary)
+  }
+  
 }

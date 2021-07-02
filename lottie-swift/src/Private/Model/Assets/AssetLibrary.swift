@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class AssetLibrary: Codable {
+final class AssetLibrary: Codable, AnyInitializable {
   
   /// The Assets
   let assets: [String : Asset]
@@ -44,5 +44,28 @@ final class AssetLibrary: Codable {
   func encode(to encoder: Encoder) throws {
     var container = encoder.unkeyedContainer()
     try container.encode(contentsOf: Array(assets.values))
+  }
+  
+  init(value: Any) throws {
+    guard let dictionaries = value as? [[String: Any]] else {
+      throw InitializableError.invalidInput
+    }
+    var decodedAssets = [String : Asset]()
+    var imageAssets = [String : ImageAsset]()
+    var precompAssets = [String : PrecompAsset]()
+    try dictionaries.forEach { dictionary in
+      if dictionary[PrecompAsset.CodingKeys.layers.rawValue] != nil {
+        let asset = try PrecompAsset(dictionary: dictionary)
+        decodedAssets[asset.id] = asset
+        precompAssets[asset.id] = asset
+      } else {
+        let asset = try ImageAsset(dictionary: dictionary)
+        decodedAssets[asset.id] = asset
+        imageAssets[asset.id] = asset
+      }
+    }
+    self.assets = decodedAssets
+    self.precompAssets = precompAssets
+    self.imageAssets = imageAssets
   }
 }

@@ -64,4 +64,29 @@ final class Stroke: ShapeItem {
     try container.encode(miterLimit, forKey: .miterLimit)
     try container.encodeIfPresent(dashPattern, forKey: .dashPattern)
   }
+  
+  required init(dictionary: [String : Any]) throws {
+    let opacityDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.opacity.rawValue)
+    self.opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
+    let colorDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.color.rawValue)
+    self.color = try KeyframeGroup<Color>(dictionary: colorDictionary)
+    let widthDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.width.rawValue)
+    self.width = try KeyframeGroup<Vector1D>(dictionary: widthDictionary)
+    if let lineCapRawValue = dictionary[CodingKeys.lineCap.rawValue] as? Int,
+       let lineCap = LineCap(rawValue: lineCapRawValue) {
+      self.lineCap = lineCap
+    } else {
+      self.lineCap = .round
+    }
+    if let lineJoinRawValue = dictionary[CodingKeys.lineJoin.rawValue] as? Int,
+       let lineJoin = LineJoin(rawValue: lineJoinRawValue) {
+      self.lineJoin = lineJoin
+    } else {
+      self.lineJoin = .round
+    }
+    self.miterLimit = (try? dictionary.valueFor(key: CodingKeys.miterLimit.rawValue)) ?? 4
+    let dashPatternDictionaries = dictionary[CodingKeys.dashPattern.rawValue] as? [[String: Any]]
+    self.dashPattern = try? dashPatternDictionaries?.map({ try DashElement(dictionary: $0) })
+    try super.init(dictionary: dictionary)
+  }
 }

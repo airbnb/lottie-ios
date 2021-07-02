@@ -65,4 +65,50 @@ final class ShapeTransform: ShapeItem {
     try container.encode(skewAxis, forKey: .skewAxis)
   }
   
+  required init(dictionary: [String : Any]) throws {
+    if let anchorDictionary = dictionary[CodingKeys.anchor.rawValue] as? [String: Any],
+       let anchor = try? KeyframeGroup<Vector3D>(dictionary: anchorDictionary) {
+      self.anchor = anchor
+    } else {
+      self.anchor = KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+    }
+    if let positionDictionary = dictionary[CodingKeys.position.rawValue] as? [String: Any],
+       let position = try? KeyframeGroup<Vector3D>(dictionary: positionDictionary) {
+      self.position = position
+    } else {
+      self.position = KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+    }
+    if let scaleDictionary = dictionary[CodingKeys.scale.rawValue] as? [String: Any],
+       let scale = try? KeyframeGroup<Vector3D>(dictionary: scaleDictionary) {
+      self.scale = scale
+    } else {
+      self.scale = KeyframeGroup(Vector3D(x: Double(100), y: 100, z: 100))
+    }
+    if let rotationDictionary = dictionary[CodingKeys.rotation.rawValue] as? [String: Any],
+       let rotation = try? KeyframeGroup<Vector1D>(dictionary: rotationDictionary) {
+      self.rotation = rotation
+    } else {
+      self.rotation = KeyframeGroup(Vector1D(0))
+    }
+    if let opacityDictionary = dictionary[CodingKeys.opacity.rawValue] as? [String: Any],
+       let opacity = try? KeyframeGroup<Vector1D>(dictionary: opacityDictionary) {
+      self.opacity = opacity
+    } else {
+      self.opacity = KeyframeGroup(Vector1D(100))
+    }
+    if let skewDictionary = dictionary[CodingKeys.skew.rawValue] as? [String: Any],
+       let skew = try? KeyframeGroup<Vector1D>(dictionary: skewDictionary) {
+      self.skew = skew
+    } else {
+      self.skew = KeyframeGroup(Vector1D(0))
+    }
+    if let skewAxisDictionary = dictionary[CodingKeys.skewAxis.rawValue] as? [String: Any],
+       let skewAxis = try? KeyframeGroup<Vector1D>(dictionary: skewAxisDictionary) {
+      self.skewAxis = skewAxis
+    } else {
+      self.skewAxis = KeyframeGroup(Vector1D(0))
+    }
+    try super.init(dictionary: dictionary)
+  }
+  
 }

@@ -69,7 +69,7 @@ final class Keyframe<T: Interpolatable> {
  type of keyframea and also the version of the JSON. By parsing the raw data
  we can reconfigure it into a constant format.
  */
-final class KeyframeData<T: Codable>: Codable {
+final class KeyframeData<T>: Codable, DictionaryInitializable where T: Codable, T: AnyInitializable {
   
   /// The start value of the keyframe
   let startValue: T?
@@ -106,6 +106,41 @@ final class KeyframeData<T: Codable>: Codable {
     self.outTangent = outTangent
     self.spatialInTangent = spatialInTangent
     self.spatialOutTangent = spatialOutTangent
+  }
+  
+  init(dictionary: [String : Any]) throws {
+    if let rawValue = dictionary[CodingKeys.startValue.rawValue] {
+      self.startValue = try? T(value: rawValue)
+    } else {
+      self.startValue = nil
+    }
+    if let rawValue = dictionary[CodingKeys.endValue.rawValue] {
+      self.endValue = try? T(value: rawValue)
+    } else {
+      self.endValue = nil
+    }
+    self.time = try? dictionary.valueFor(key: CodingKeys.time.rawValue)
+    self.hold = try? dictionary.valueFor(key: CodingKeys.hold.rawValue)
+    if let rawValue = dictionary[CodingKeys.inTangent.rawValue] {
+      self.inTangent = try? Vector2D(value: rawValue)
+    } else {
+      self.inTangent = nil
+    }
+    if let rawValue = dictionary[CodingKeys.outTangent.rawValue] {
+      self.outTangent = try? Vector2D(value: rawValue)
+    } else {
+      self.outTangent = nil
+    }
+    if let rawValue = dictionary[CodingKeys.spatialInTangent.rawValue] {
+      self.spatialInTangent = try? Vector3D(value: rawValue)
+    } else {
+      self.spatialInTangent = nil
+    }
+    if let rawValue = dictionary[CodingKeys.spatialOutTangent.rawValue] {
+      self.spatialOutTangent = try? Vector3D(value: rawValue)
+    } else {
+      self.spatialOutTangent = nil
+    }
   }
   
   enum CodingKeys : String, CodingKey {

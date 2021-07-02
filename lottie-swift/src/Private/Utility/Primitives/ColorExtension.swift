@@ -62,6 +62,30 @@ extension Color: Codable {
   
 }
 
+extension Color: AnyInitializable {
+  
+  init(value: Any) throws {
+    guard var array = value as? [Double] else {
+      throw InitializableError.invalidInput
+    }
+    var r: Double = array.count > 0 ? array.removeFirst() : 0
+    var g: Double = array.count > 0 ? array.removeFirst() : 0
+    var b: Double = array.count > 0 ? array.removeFirst() : 0
+    var a: Double = array.count > 0 ? array.removeFirst() : 1
+    if r > 1, g > 1, b > 1, a > 1 {
+      r /= 255
+      g /= 255
+      b /= 255
+      a /= 255
+    }
+    self.r = r
+    self.g = g
+    self.b = b
+    self.a = a
+  }
+  
+}
+
 extension Color {
   
   static var clearColor: CGColor {

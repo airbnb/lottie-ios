@@ -27,4 +27,10 @@ final class PrecompAsset: Asset {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(layers, forKey: .layers)
   }
+
+  required init(dictionary: [String : Any]) throws {
+    let layerDictionaries: [[String: Any]] = try dictionary.valueFor(key: CodingKeys.layers.rawValue)
+    self.layers = try [LayerModel].fromDictionaries(layerDictionaries)
+    try super.init(dictionary: dictionary)
+  }
 }

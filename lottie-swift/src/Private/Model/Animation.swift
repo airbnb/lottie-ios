@@ -18,7 +18,7 @@ public enum CoordinateSpace: Int, Codable {
  An `Animation` holds all of the animation data backing a Lottie Animation.
  Codable, see JSON schema [here](https://github.com/airbnb/lottie-web/tree/master/docs/json).
  */
-public final class Animation: Codable {
+public final class Animation: Codable, DictionaryInitializable {
   
   /// The version of the JSON Schema.
   let version: String
@@ -103,5 +103,49 @@ public final class Animation: Codable {
       self.markerMap = nil
     }
   }
-
+  
+  init(dictionary: [String : Any]) throws {
+    self.version = try dictionary.valueFor(key: CodingKeys.version.rawValue)
+    if let typeRawValue = dictionary[CodingKeys.type.rawValue] as? Int,
+       let type = CoordinateSpace(rawValue: typeRawValue) {
+      self.type = type
+    } else {
+      self.type = .type2d
+    }
+    self.startFrame = try dictionary.valueFor(key: CodingKeys.startFrame.rawValue)
+    self.endFrame = try dictionary.valueFor(key: CodingKeys.endFrame.rawValue)
+    self.framerate = try dictionary.valueFor(key: CodingKeys.framerate.rawValue)
+    self.width = try dictionary.valueFor(key: CodingKeys.width.rawValue)
+    self.height = try dictionary.valueFor(key: CodingKeys.height.rawValue)
+    let layerDictionaries: [[String: Any]] = try dictionary.valueFor(key: CodingKeys.layers.rawValue)
+    self.layers = try [LayerModel].fromDictionaries(layerDictionaries)
+    if let glyphDictionaries = dictionary[CodingKeys.glyphs.rawValue] as? [[String: Any]] {
+      self.glyphs = try glyphDictionaries.map({ try Glyph(dictionary: $0) })
+    } else {
+      self.glyphs = nil
+    }
+    if let fontsDictionary = dictionary[CodingKeys.fonts.rawValue] as? [String: Any] {
+      self.fonts = try FontList(dictionary: fontsDictionary)
+    } else {
+      self.fonts = nil
+    }
+    if let assetLibraryDictionaries = dictionary[CodingKeys.assetLibrary.rawValue] as? [[String: Any]] {
+      self.assetLibrary = try AssetLibrary(value: assetLibraryDictionaries)
+    } else {
+      self.assetLibrary = nil
+    }
+    if let markerDictionaries = dictionary[CodingKeys.markers.rawValue] as? [[String: Any]] {
+      let markers = try markerDictionaries.map({ try Marker(dictionary: $0) })
+      var markerMap: [String : Marker] = [:]
+      for marker in markers {
+        markerMap[marker.name] = marker
+      }
+      self.markers = markers
+      self.markerMap = markerMap
+    } else {
+      self.markers = nil
+      self.markerMap = nil
+    }
+  }
+  
 }
