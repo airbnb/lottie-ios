@@ -157,11 +157,6 @@ public final class CompatibleAnimationView: UIView {
   }
   
   @objc
-  public var isAnimationPlaying: Bool {
-    return animationView.isAnimationPlaying
-  }
-  
-  @objc
   public var animationDuration: TimeInterval {
     return animationView.animation?.duration ?? -1;
   }
