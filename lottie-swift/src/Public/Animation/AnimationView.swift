@@ -91,6 +91,7 @@ final public class AnimationView: LottieView {
    */
   public var imageProvider: AnimationImageProvider {
     didSet {
+      animationLayer?.imageProvider = imageProvider
       reloadImages()
     }
   }
@@ -118,6 +119,11 @@ final public class AnimationView: LottieView {
   /// Returns `true` if the animation is currently playing.
   public var isAnimationPlaying: Bool {
     return animationLayer?.animation(forKey: activeAnimationName) != nil
+  }
+  
+  /// Returns `true` if the animation will start playing when this view is added to a window.
+  public var isAnimationQueued: Bool {
+    return animationContext != nil && waitingToPlayAnimation
   }
   
   /// Sets the loop behavior for `play` calls. Defaults to `playOnce`
@@ -383,7 +389,6 @@ final public class AnimationView: LottieView {
   public func stop() {
     removeCurrentAnimation()
     currentFrame = 0
-    CATransaction.flush()
   }
   
   /**

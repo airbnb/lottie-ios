@@ -630,6 +630,11 @@
 		4899B00B24DB2A3D00194C96 /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899B00724DB2A3D00194C96 /* TextLayer.swift */; };
 		4899B00C24DB2A3D00194C96 /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4899B00724DB2A3D00194C96 /* TextLayer.swift */; };
 		48F4EECD229F167F00949A97 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8724220B78BF007CD915 /* TextCompositionLayer.swift */; };
+		69B21D8C267AAEAB0085543E /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B21D8B267AAEAB0085543E /* Bundle.swift */; };
+		69B21D8D267AAEAB0085543E /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B21D8B267AAEAB0085543E /* Bundle.swift */; };
+		69B21D8E267AAEAB0085543E /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B21D8B267AAEAB0085543E /* Bundle.swift */; };
+		69B21D8F267AAEAB0085543E /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B21D8B267AAEAB0085543E /* Bundle.swift */; };
+		69B21D90267AAEAB0085543E /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B21D8B267AAEAB0085543E /* Bundle.swift */; };
 		CD1616482367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
 		CD1616492367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
 		CD16164A2367325A00325353 /* GradientValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1616472367325A00325353 /* GradientValueProvider.swift */; };
@@ -797,6 +802,7 @@
 		4899AFFB24DB269A00194C96 /* AnimationFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationFontProvider.swift; sourceTree = "<group>"; };
 		4899AFFF24DB27F200194C96 /* LayerFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerFontProvider.swift; sourceTree = "<group>"; };
 		4899B00724DB2A3D00194C96 /* TextLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayer.swift; sourceTree = "<group>"; };
+		69B21D8B267AAEAB0085543E /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		CD1616472367325A00325353 /* GradientValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientValueProvider.swift; sourceTree = "<group>"; };
 		E654753822AAA9AD00FE590F /* LayerTextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerTextProvider.swift; sourceTree = "<group>"; };
 		E6EAA7B722AA834F00F345A4 /* AnimationTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTextProvider.swift; sourceTree = "<group>"; };
@@ -1257,6 +1263,7 @@
 		486E877C220B78BF007CD915 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				69B21D8B267AAEAB0085543E /* Bundle.swift */,
 				486E877D220B78BF007CD915 /* KeyedDecodingContainerExtensions.swift */,
 			);
 			path = Extensions;
@@ -1668,6 +1675,7 @@
 				486E87F8220B78D1007CD915 /* PreCompLayerModel.swift in Sources */,
 				486E87F9220B78D1007CD915 /* ShapeLayerModel.swift in Sources */,
 				486E87FA220B78D1007CD915 /* Animation.swift in Sources */,
+				69B21D8C267AAEAB0085543E /* Bundle.swift in Sources */,
 				486E87FB220B78D1007CD915 /* DashPattern.swift in Sources */,
 				486E87FC220B78D1007CD915 /* Transform.swift in Sources */,
 				486E87FD220B78D1007CD915 /* Mask.swift in Sources */,
@@ -1805,6 +1813,7 @@
 				486E8871220B78E4007CD915 /* PreCompLayerModel.swift in Sources */,
 				25D5437222307C8700ED90FA /* CompatibleAnimationKeypath.swift in Sources */,
 				486E8872220B78E4007CD915 /* ShapeLayerModel.swift in Sources */,
+				69B21D8D267AAEAB0085543E /* Bundle.swift in Sources */,
 				486E8873220B78E4007CD915 /* Animation.swift in Sources */,
 				486E8874220B78E4007CD915 /* DashPattern.swift in Sources */,
 				486E8875220B78E4007CD915 /* Transform.swift in Sources */,
@@ -1935,6 +1944,7 @@
 				486E88EC220B78F4007CD915 /* Marker.swift in Sources */,
 				486E88ED220B78F4007CD915 /* KeyedDecodingContainerExtensions.swift in Sources */,
 				486E88EE220B78F4007CD915 /* KeyframeGroup.swift in Sources */,
+				69B21D8E267AAEAB0085543E /* Bundle.swift in Sources */,
 				486E88EF220B78F4007CD915 /* Keyframe.swift in Sources */,
 				486E88F0220B78F4007CD915 /* TextDocument.swift in Sources */,
 				486E88F1220B78F4007CD915 /* Glyph.swift in Sources */,
@@ -2073,6 +2083,7 @@
 				486E895F220B78FF007CD915 /* PreCompLayerModel.swift in Sources */,
 				25D5437322307C8800ED90FA /* CompatibleAnimationKeypath.swift in Sources */,
 				486E8960220B78FF007CD915 /* ShapeLayerModel.swift in Sources */,
+				69B21D8F267AAEAB0085543E /* Bundle.swift in Sources */,
 				486E8961220B78FF007CD915 /* Animation.swift in Sources */,
 				486E8962220B78FF007CD915 /* DashPattern.swift in Sources */,
 				486E8963220B78FF007CD915 /* Transform.swift in Sources */,
@@ -2203,6 +2214,7 @@
 				486E89D9220B790E007CD915 /* Mask.swift in Sources */,
 				486E89DA220B790E007CD915 /* Marker.swift in Sources */,
 				486E89DB220B790E007CD915 /* KeyedDecodingContainerExtensions.swift in Sources */,
+				69B21D90267AAEAB0085543E /* Bundle.swift in Sources */,
 				486E89DC220B790E007CD915 /* KeyframeGroup.swift in Sources */,
 				486E89DD220B790E007CD915 /* Keyframe.swift in Sources */,
 				486E89DE220B790E007CD915 /* TextDocument.swift in Sources */,

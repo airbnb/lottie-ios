@@ -64,6 +64,11 @@ final class TextCompositionLayer: CompositionLayer {
     super.init(layer: textLayer, size: .zero)
     contentsLayer.addSublayer(self.textLayer)
     self.textLayer.masksToBounds = false
+    self.textLayer.isGeometryFlipped = true
+
+    if let rootNode = rootNode {
+        childKeypaths.append(rootNode)
+    }
   }
   
   required init?(coder aDecoder: NSCoder) {

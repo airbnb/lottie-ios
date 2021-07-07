@@ -6,7 +6,7 @@
 //
 
 import Foundation
-#if os(iOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(tvOS) || os(watchOS) || targetEnvironment(macCatalyst)
 import UIKit
 
 /// An Objective-C compatible wrapper around Lottie's Animation class.
@@ -176,6 +176,11 @@ public final class CompatibleAnimationView: UIView {
   public var respectAnimationFrameRate: Bool {
     set { animationView.respectAnimationFrameRate = newValue }
     get { return animationView.respectAnimationFrameRate }
+  }
+
+  @objc
+  public var isAnimationPlaying: Bool {
+    return animationView.isAnimationPlaying
   }
 
   @objc
