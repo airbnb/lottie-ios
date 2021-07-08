@@ -24,13 +24,13 @@
 		486E87A2220B78D1007CD915 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8703220B78BF007CD915 /* AnimationView.swift */; };
 		486E87A3220B78D1007CD915 /* AnimationPublic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8704220B78BF007CD915 /* AnimationPublic.swift */; };
 		486E87A4220B78D1007CD915 /* AnimationImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8706220B78BF007CD915 /* AnimationImageProvider.swift */; };
-		486E87A5220B78D1007CD915 /* FilepathImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8708220B78BF007CD915 /* FilepathImageProvider.swift */; };
+		486E87A5220B78D1007CD915 /* FilepathImageProvider-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8708220B78BF007CD915 /* FilepathImageProvider-iOS.swift */; };
 		486E87A6220B78D1007CD915 /* AnimatedSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8709220B78BF007CD915 /* AnimatedSwitch.swift */; };
-		486E87A7220B78D1007CD915 /* BundleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870A220B78BF007CD915 /* BundleImageProvider.swift */; };
+		486E87A7220B78D1007CD915 /* BundleImageProvider-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870A220B78BF007CD915 /* BundleImageProvider-iOS.swift */; };
 		486E87A8220B78D1007CD915 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870B220B78BF007CD915 /* UIColorExtension.swift */; };
 		486E87A9220B78D1007CD915 /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870C220B78BF007CD915 /* AnimatedButton.swift */; };
-		486E87AA220B78D1007CD915 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870D220B78BF007CD915 /* LottieView.swift */; };
-		486E87AB220B78D1007CD915 /* AnimationSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870E220B78BF007CD915 /* AnimationSubview.swift */; };
+		486E87AA220B78D1007CD915 /* LottieView-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870D220B78BF007CD915 /* LottieView-iOS.swift */; };
+		486E87AB220B78D1007CD915 /* AnimationSubview-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870E220B78BF007CD915 /* AnimationSubview-iOS.swift */; };
 		486E87AC220B78D1007CD915 /* AnimatedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870F220B78BF007CD915 /* AnimatedControl.swift */; };
 		486E87AD220B78D1007CD915 /* AnimationTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8711220B78BF007CD915 /* AnimationTime.swift */; };
 		486E87AE220B78D1007CD915 /* Vectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8712220B78BF007CD915 /* Vectors.swift */; };
@@ -144,13 +144,13 @@
 		486E881B220B78E4007CD915 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8703220B78BF007CD915 /* AnimationView.swift */; };
 		486E881C220B78E4007CD915 /* AnimationPublic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8704220B78BF007CD915 /* AnimationPublic.swift */; };
 		486E881D220B78E4007CD915 /* AnimationImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8706220B78BF007CD915 /* AnimationImageProvider.swift */; };
-		486E881E220B78E4007CD915 /* FilepathImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8708220B78BF007CD915 /* FilepathImageProvider.swift */; };
+		486E881E220B78E4007CD915 /* FilepathImageProvider-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8708220B78BF007CD915 /* FilepathImageProvider-iOS.swift */; };
 		486E881F220B78E4007CD915 /* AnimatedSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8709220B78BF007CD915 /* AnimatedSwitch.swift */; };
-		486E8820220B78E4007CD915 /* BundleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870A220B78BF007CD915 /* BundleImageProvider.swift */; };
+		486E8820220B78E4007CD915 /* BundleImageProvider-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870A220B78BF007CD915 /* BundleImageProvider-iOS.swift */; };
 		486E8821220B78E4007CD915 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870B220B78BF007CD915 /* UIColorExtension.swift */; };
 		486E8822220B78E4007CD915 /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870C220B78BF007CD915 /* AnimatedButton.swift */; };
-		486E8823220B78E4007CD915 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870D220B78BF007CD915 /* LottieView.swift */; };
-		486E8824220B78E4007CD915 /* AnimationSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870E220B78BF007CD915 /* AnimationSubview.swift */; };
+		486E8823220B78E4007CD915 /* LottieView-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870D220B78BF007CD915 /* LottieView-iOS.swift */; };
+		486E8824220B78E4007CD915 /* AnimationSubview-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870E220B78BF007CD915 /* AnimationSubview-iOS.swift */; };
 		486E8825220B78E4007CD915 /* AnimatedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870F220B78BF007CD915 /* AnimatedControl.swift */; };
 		486E8826220B78E4007CD915 /* AnimationTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8711220B78BF007CD915 /* AnimationTime.swift */; };
 		486E8827220B78E4007CD915 /* Vectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8712220B78BF007CD915 /* Vectors.swift */; };
@@ -261,10 +261,10 @@
 		486E8890220B78E4007CD915 /* Interpolatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E879D220B78BF007CD915 /* Interpolatable.swift */; };
 		486E8891220B78E4007CD915 /* KeyframeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E879E220B78BF007CD915 /* KeyframeExtensions.swift */; };
 		486E8892220B78E4007CD915 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E87A0220B78BF007CD915 /* AnimationContext.swift */; };
-		486E8893220B78ED007CD915 /* FilepathImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E86FD220B78BF007CD915 /* FilepathImageProvider.swift */; };
-		486E8894220B78ED007CD915 /* BundleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E86FE220B78BF007CD915 /* BundleImageProvider.swift */; };
-		486E8895220B78ED007CD915 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E86FF220B78BF007CD915 /* LottieView.swift */; };
-		486E8896220B78ED007CD915 /* AnimationSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8700220B78BF007CD915 /* AnimationSubview.swift */; };
+		486E8893220B78ED007CD915 /* FilepathImageProvider-macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E86FD220B78BF007CD915 /* FilepathImageProvider-macOS.swift */; };
+		486E8894220B78ED007CD915 /* BundleImageProvider-macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E86FE220B78BF007CD915 /* BundleImageProvider-macOS.swift */; };
+		486E8895220B78ED007CD915 /* LottieView-macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E86FF220B78BF007CD915 /* LottieView-macOS.swift */; };
+		486E8896220B78ED007CD915 /* AnimationSubview-macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8700220B78BF007CD915 /* AnimationSubview-macOS.swift */; };
 		486E8897220B78ED007CD915 /* AnimationViewInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8702220B78BF007CD915 /* AnimationViewInitializers.swift */; };
 		486E8898220B78ED007CD915 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8703220B78BF007CD915 /* AnimationView.swift */; };
 		486E8899220B78ED007CD915 /* AnimationPublic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8704220B78BF007CD915 /* AnimationPublic.swift */; };
@@ -381,13 +381,13 @@
 		486E8909220B78FF007CD915 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8703220B78BF007CD915 /* AnimationView.swift */; };
 		486E890A220B78FF007CD915 /* AnimationPublic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8704220B78BF007CD915 /* AnimationPublic.swift */; };
 		486E890B220B78FF007CD915 /* AnimationImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8706220B78BF007CD915 /* AnimationImageProvider.swift */; };
-		486E890C220B78FF007CD915 /* FilepathImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8708220B78BF007CD915 /* FilepathImageProvider.swift */; };
+		486E890C220B78FF007CD915 /* FilepathImageProvider-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8708220B78BF007CD915 /* FilepathImageProvider-iOS.swift */; };
 		486E890D220B78FF007CD915 /* AnimatedSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8709220B78BF007CD915 /* AnimatedSwitch.swift */; };
-		486E890E220B78FF007CD915 /* BundleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870A220B78BF007CD915 /* BundleImageProvider.swift */; };
+		486E890E220B78FF007CD915 /* BundleImageProvider-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870A220B78BF007CD915 /* BundleImageProvider-iOS.swift */; };
 		486E890F220B78FF007CD915 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870B220B78BF007CD915 /* UIColorExtension.swift */; };
 		486E8910220B78FF007CD915 /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870C220B78BF007CD915 /* AnimatedButton.swift */; };
-		486E8911220B78FF007CD915 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870D220B78BF007CD915 /* LottieView.swift */; };
-		486E8912220B78FF007CD915 /* AnimationSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870E220B78BF007CD915 /* AnimationSubview.swift */; };
+		486E8911220B78FF007CD915 /* LottieView-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870D220B78BF007CD915 /* LottieView-iOS.swift */; };
+		486E8912220B78FF007CD915 /* AnimationSubview-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870E220B78BF007CD915 /* AnimationSubview-iOS.swift */; };
 		486E8913220B78FF007CD915 /* AnimatedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E870F220B78BF007CD915 /* AnimatedControl.swift */; };
 		486E8914220B78FF007CD915 /* AnimationTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8711220B78BF007CD915 /* AnimationTime.swift */; };
 		486E8915220B78FF007CD915 /* Vectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8712220B78BF007CD915 /* Vectors.swift */; };
@@ -497,10 +497,10 @@
 		486E897E220B78FF007CD915 /* Interpolatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E879D220B78BF007CD915 /* Interpolatable.swift */; };
 		486E897F220B78FF007CD915 /* KeyframeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E879E220B78BF007CD915 /* KeyframeExtensions.swift */; };
 		486E8980220B78FF007CD915 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E87A0220B78BF007CD915 /* AnimationContext.swift */; };
-		486E8981220B7908007CD915 /* FilepathImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E86FD220B78BF007CD915 /* FilepathImageProvider.swift */; };
-		486E8982220B7908007CD915 /* BundleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E86FE220B78BF007CD915 /* BundleImageProvider.swift */; };
-		486E8983220B7908007CD915 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E86FF220B78BF007CD915 /* LottieView.swift */; };
-		486E8984220B7908007CD915 /* AnimationSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8700220B78BF007CD915 /* AnimationSubview.swift */; };
+		486E8981220B7908007CD915 /* FilepathImageProvider-macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E86FD220B78BF007CD915 /* FilepathImageProvider-macOS.swift */; };
+		486E8982220B7908007CD915 /* BundleImageProvider-macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E86FE220B78BF007CD915 /* BundleImageProvider-macOS.swift */; };
+		486E8983220B7908007CD915 /* LottieView-macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E86FF220B78BF007CD915 /* LottieView-macOS.swift */; };
+		486E8984220B7908007CD915 /* AnimationSubview-macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8700220B78BF007CD915 /* AnimationSubview-macOS.swift */; };
 		486E8985220B7908007CD915 /* AnimationViewInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8702220B78BF007CD915 /* AnimationViewInitializers.swift */; };
 		486E8986220B7908007CD915 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8703220B78BF007CD915 /* AnimationView.swift */; };
 		486E8987220B7908007CD915 /* AnimationPublic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8704220B78BF007CD915 /* AnimationPublic.swift */; };
@@ -674,21 +674,21 @@
 		486E8567220A3605007CD915 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		486E85F3220A36F6007CD915 /* libLottie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLottie.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		486E8675220A3751007CD915 /* libLottie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLottie.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		486E86FD220B78BF007CD915 /* FilepathImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilepathImageProvider.swift; sourceTree = "<group>"; };
-		486E86FE220B78BF007CD915 /* BundleImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleImageProvider.swift; sourceTree = "<group>"; };
-		486E86FF220B78BF007CD915 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
-		486E8700220B78BF007CD915 /* AnimationSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationSubview.swift; sourceTree = "<group>"; };
+		486E86FD220B78BF007CD915 /* FilepathImageProvider-macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilepathImageProvider-macOS.swift"; sourceTree = "<group>"; };
+		486E86FE220B78BF007CD915 /* BundleImageProvider-macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BundleImageProvider-macOS.swift"; sourceTree = "<group>"; };
+		486E86FF220B78BF007CD915 /* LottieView-macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LottieView-macOS.swift"; sourceTree = "<group>"; };
+		486E8700220B78BF007CD915 /* AnimationSubview-macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationSubview-macOS.swift"; sourceTree = "<group>"; };
 		486E8702220B78BF007CD915 /* AnimationViewInitializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewInitializers.swift; sourceTree = "<group>"; };
 		486E8703220B78BF007CD915 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		486E8704220B78BF007CD915 /* AnimationPublic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationPublic.swift; sourceTree = "<group>"; };
 		486E8706220B78BF007CD915 /* AnimationImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationImageProvider.swift; sourceTree = "<group>"; };
-		486E8708220B78BF007CD915 /* FilepathImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilepathImageProvider.swift; sourceTree = "<group>"; };
+		486E8708220B78BF007CD915 /* FilepathImageProvider-iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilepathImageProvider-iOS.swift"; sourceTree = "<group>"; };
 		486E8709220B78BF007CD915 /* AnimatedSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedSwitch.swift; sourceTree = "<group>"; };
-		486E870A220B78BF007CD915 /* BundleImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleImageProvider.swift; sourceTree = "<group>"; };
+		486E870A220B78BF007CD915 /* BundleImageProvider-iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BundleImageProvider-iOS.swift"; sourceTree = "<group>"; };
 		486E870B220B78BF007CD915 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		486E870C220B78BF007CD915 /* AnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
-		486E870D220B78BF007CD915 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
-		486E870E220B78BF007CD915 /* AnimationSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationSubview.swift; sourceTree = "<group>"; };
+		486E870D220B78BF007CD915 /* LottieView-iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LottieView-iOS.swift"; sourceTree = "<group>"; };
+		486E870E220B78BF007CD915 /* AnimationSubview-iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationSubview-iOS.swift"; sourceTree = "<group>"; };
 		486E870F220B78BF007CD915 /* AnimatedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedControl.swift; sourceTree = "<group>"; };
 		486E8711220B78BF007CD915 /* AnimationTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTime.swift; sourceTree = "<group>"; };
 		486E8712220B78BF007CD915 /* Vectors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vectors.swift; sourceTree = "<group>"; };
@@ -922,10 +922,10 @@
 		486E86FC220B78BF007CD915 /* MacOS */ = {
 			isa = PBXGroup;
 			children = (
-				486E86FD220B78BF007CD915 /* FilepathImageProvider.swift */,
-				486E86FE220B78BF007CD915 /* BundleImageProvider.swift */,
-				486E86FF220B78BF007CD915 /* LottieView.swift */,
-				486E8700220B78BF007CD915 /* AnimationSubview.swift */,
+				486E86FD220B78BF007CD915 /* FilepathImageProvider-macOS.swift */,
+				486E86FE220B78BF007CD915 /* BundleImageProvider-macOS.swift */,
+				486E86FF220B78BF007CD915 /* LottieView-macOS.swift */,
+				486E8700220B78BF007CD915 /* AnimationSubview-macOS.swift */,
 			);
 			path = MacOS;
 			sourceTree = "<group>";
@@ -952,13 +952,13 @@
 			isa = PBXGroup;
 			children = (
 				25D5436B22306C8C00ED90FA /* Compatibility */,
-				486E8708220B78BF007CD915 /* FilepathImageProvider.swift */,
+				486E8708220B78BF007CD915 /* FilepathImageProvider-iOS.swift */,
 				486E8709220B78BF007CD915 /* AnimatedSwitch.swift */,
-				486E870A220B78BF007CD915 /* BundleImageProvider.swift */,
+				486E870A220B78BF007CD915 /* BundleImageProvider-iOS.swift */,
 				486E870B220B78BF007CD915 /* UIColorExtension.swift */,
 				486E870C220B78BF007CD915 /* AnimatedButton.swift */,
-				486E870D220B78BF007CD915 /* LottieView.swift */,
-				486E870E220B78BF007CD915 /* AnimationSubview.swift */,
+				486E870D220B78BF007CD915 /* LottieView-iOS.swift */,
+				486E870E220B78BF007CD915 /* AnimationSubview-iOS.swift */,
 				486E870F220B78BF007CD915 /* AnimatedControl.swift */,
 			);
 			path = iOS;
@@ -1584,13 +1584,13 @@
 				486E87A2220B78D1007CD915 /* AnimationView.swift in Sources */,
 				486E87A3220B78D1007CD915 /* AnimationPublic.swift in Sources */,
 				486E87A4220B78D1007CD915 /* AnimationImageProvider.swift in Sources */,
-				486E87A5220B78D1007CD915 /* FilepathImageProvider.swift in Sources */,
+				486E87A5220B78D1007CD915 /* FilepathImageProvider-iOS.swift in Sources */,
 				486E87A6220B78D1007CD915 /* AnimatedSwitch.swift in Sources */,
-				486E87A7220B78D1007CD915 /* BundleImageProvider.swift in Sources */,
+				486E87A7220B78D1007CD915 /* BundleImageProvider-iOS.swift in Sources */,
 				486E87A8220B78D1007CD915 /* UIColorExtension.swift in Sources */,
 				486E87A9220B78D1007CD915 /* AnimatedButton.swift in Sources */,
-				486E87AA220B78D1007CD915 /* LottieView.swift in Sources */,
-				486E87AB220B78D1007CD915 /* AnimationSubview.swift in Sources */,
+				486E87AA220B78D1007CD915 /* LottieView-iOS.swift in Sources */,
+				486E87AB220B78D1007CD915 /* AnimationSubview-iOS.swift in Sources */,
 				486E87AC220B78D1007CD915 /* AnimatedControl.swift in Sources */,
 				486E87AD220B78D1007CD915 /* AnimationTime.swift in Sources */,
 				486E87AE220B78D1007CD915 /* Vectors.swift in Sources */,
@@ -1722,13 +1722,13 @@
 				486E881B220B78E4007CD915 /* AnimationView.swift in Sources */,
 				486E881C220B78E4007CD915 /* AnimationPublic.swift in Sources */,
 				486E881D220B78E4007CD915 /* AnimationImageProvider.swift in Sources */,
-				486E881E220B78E4007CD915 /* FilepathImageProvider.swift in Sources */,
+				486E881E220B78E4007CD915 /* FilepathImageProvider-iOS.swift in Sources */,
 				486E881F220B78E4007CD915 /* AnimatedSwitch.swift in Sources */,
-				486E8820220B78E4007CD915 /* BundleImageProvider.swift in Sources */,
+				486E8820220B78E4007CD915 /* BundleImageProvider-iOS.swift in Sources */,
 				486E8821220B78E4007CD915 /* UIColorExtension.swift in Sources */,
 				486E8822220B78E4007CD915 /* AnimatedButton.swift in Sources */,
-				486E8823220B78E4007CD915 /* LottieView.swift in Sources */,
-				486E8824220B78E4007CD915 /* AnimationSubview.swift in Sources */,
+				486E8823220B78E4007CD915 /* LottieView-iOS.swift in Sources */,
+				486E8824220B78E4007CD915 /* AnimationSubview-iOS.swift in Sources */,
 				486E8825220B78E4007CD915 /* AnimatedControl.swift in Sources */,
 				486E8826220B78E4007CD915 /* AnimationTime.swift in Sources */,
 				486E8827220B78E4007CD915 /* Vectors.swift in Sources */,
@@ -1973,10 +1973,10 @@
 				486E8905220B78F4007CD915 /* Interpolatable.swift in Sources */,
 				486E8906220B78F4007CD915 /* KeyframeExtensions.swift in Sources */,
 				486E8907220B78F4007CD915 /* AnimationContext.swift in Sources */,
-				486E8893220B78ED007CD915 /* FilepathImageProvider.swift in Sources */,
-				486E8894220B78ED007CD915 /* BundleImageProvider.swift in Sources */,
-				486E8895220B78ED007CD915 /* LottieView.swift in Sources */,
-				486E8896220B78ED007CD915 /* AnimationSubview.swift in Sources */,
+				486E8893220B78ED007CD915 /* FilepathImageProvider-macOS.swift in Sources */,
+				486E8894220B78ED007CD915 /* BundleImageProvider-macOS.swift in Sources */,
+				486E8895220B78ED007CD915 /* LottieView-macOS.swift in Sources */,
+				486E8896220B78ED007CD915 /* AnimationSubview-macOS.swift in Sources */,
 				486E8897220B78ED007CD915 /* AnimationViewInitializers.swift in Sources */,
 				486E8898220B78ED007CD915 /* AnimationView.swift in Sources */,
 				486E8899220B78ED007CD915 /* AnimationPublic.swift in Sources */,
@@ -1993,13 +1993,13 @@
 				486E8909220B78FF007CD915 /* AnimationView.swift in Sources */,
 				486E890A220B78FF007CD915 /* AnimationPublic.swift in Sources */,
 				486E890B220B78FF007CD915 /* AnimationImageProvider.swift in Sources */,
-				486E890C220B78FF007CD915 /* FilepathImageProvider.swift in Sources */,
+				486E890C220B78FF007CD915 /* FilepathImageProvider-iOS.swift in Sources */,
 				486E890D220B78FF007CD915 /* AnimatedSwitch.swift in Sources */,
-				486E890E220B78FF007CD915 /* BundleImageProvider.swift in Sources */,
+				486E890E220B78FF007CD915 /* BundleImageProvider-iOS.swift in Sources */,
 				486E890F220B78FF007CD915 /* UIColorExtension.swift in Sources */,
 				486E8910220B78FF007CD915 /* AnimatedButton.swift in Sources */,
-				486E8911220B78FF007CD915 /* LottieView.swift in Sources */,
-				486E8912220B78FF007CD915 /* AnimationSubview.swift in Sources */,
+				486E8911220B78FF007CD915 /* LottieView-iOS.swift in Sources */,
+				486E8912220B78FF007CD915 /* AnimationSubview-iOS.swift in Sources */,
 				486E8913220B78FF007CD915 /* AnimatedControl.swift in Sources */,
 				486E8914220B78FF007CD915 /* AnimationTime.swift in Sources */,
 				486E8915220B78FF007CD915 /* Vectors.swift in Sources */,
@@ -2243,10 +2243,10 @@
 				486E89F3220B790E007CD915 /* Interpolatable.swift in Sources */,
 				486E89F4220B790E007CD915 /* KeyframeExtensions.swift in Sources */,
 				486E89F5220B790E007CD915 /* AnimationContext.swift in Sources */,
-				486E8981220B7908007CD915 /* FilepathImageProvider.swift in Sources */,
-				486E8982220B7908007CD915 /* BundleImageProvider.swift in Sources */,
-				486E8983220B7908007CD915 /* LottieView.swift in Sources */,
-				486E8984220B7908007CD915 /* AnimationSubview.swift in Sources */,
+				486E8981220B7908007CD915 /* FilepathImageProvider-macOS.swift in Sources */,
+				486E8982220B7908007CD915 /* BundleImageProvider-macOS.swift in Sources */,
+				486E8983220B7908007CD915 /* LottieView-macOS.swift in Sources */,
+				486E8984220B7908007CD915 /* AnimationSubview-macOS.swift in Sources */,
 				486E8985220B7908007CD915 /* AnimationViewInitializers.swift in Sources */,
 				486E8986220B7908007CD915 /* AnimationView.swift in Sources */,
 				486E8987220B7908007CD915 /* AnimationPublic.swift in Sources */,
