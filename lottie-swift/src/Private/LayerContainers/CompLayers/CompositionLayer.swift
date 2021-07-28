@@ -143,11 +143,11 @@ class CompositionLayer: CALayer, KeypathSearchable {
   }
   
   func updateRenderScale() {
-    self.contentsScale = self.renderScale
+    /// To be overridden by subclass
   }
 }
 
-protocol CompositionLayerDelegate: class {
+protocol CompositionLayerDelegate: AnyObject {
   func frameUpdated(frame: CGFloat)
 }
 

@@ -39,7 +39,7 @@ protocol NodeOutput {
  if the node needs an update for the current frame.
  
  */
-protocol AnimatorNode: class, KeypathSearchable {
+protocol AnimatorNode: AnyObject, KeypathSearchable {
   
   /**
    The available properties of the Node.
