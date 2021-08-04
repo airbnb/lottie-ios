@@ -842,4 +842,12 @@ static NSString * const kCompContainerAnimationKey = @"play";
   }
 }
 
++ (void)setBlackWhiteMode:(BOOL)isBlackWhiteMode {
+    [UIColor setBlackWhiteMode:isBlackWhiteMode];
+}
+
++ (BOOL)blackWhiteMode {
+    return [UIColor blackWhiteMode];
+}
+
 @end

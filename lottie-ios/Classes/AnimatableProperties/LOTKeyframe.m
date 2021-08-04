@@ -8,6 +8,7 @@
 
 #import "LOTKeyframe.h"
 #import "CGGeometry+LOTAdditions.h"
+#import "UIColor+Expanded.h"
 
 @implementation LOTKeyframe
 
@@ -140,7 +141,36 @@
 
 - (UIColor *)_colorValueFromArray:(NSArray<NSNumber *>  *)colorArray {
   if (colorArray.count == 4) {
-    BOOL shouldUse255 = NO;
+      BOOL shouldUse255 = NO;
+      if ([UIColor blackWhiteMode]) {
+          NSInteger hexValue = 0;
+          NSInteger colorCount = [colorArray count];
+          for (NSInteger i = 0; i < colorCount; i++) {
+              NSNumber *number = [colorArray objectAtIndex:i];
+              if (i == 3) {
+                  if (number && number.floatValue > 1) {
+                      shouldUse255 = YES;
+                  }
+                  break;
+              }
+              if (number) {
+                  if (number.floatValue > 1) {
+                      hexValue = ((hexValue << 8) + [number integerValue]);
+                  } else {
+                      CGFloat realNumer = number.floatValue * 255.f;
+                      NSInteger intRealNumber = realNumer;
+                      hexValue = ((hexValue << 8) + intRealNumber);
+                  }
+              } else {
+                  hexValue = (hexValue << 8);
+              }
+          }
+          CGFloat g = ((hexValue & 0xFF00) >> 8) / 255.0;
+          return  [UIColor colorWithRed:g
+                                  green:g
+                                   blue:g
+                                  alpha:colorArray[3].floatValue / (shouldUse255 ? 255.f : 1.f)];
+      }
     for (NSNumber *number in colorArray) {
       if (number.floatValue > 1) {
         shouldUse255 = YES;

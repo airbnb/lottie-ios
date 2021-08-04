@@ -36,6 +36,8 @@ static NSMutableDictionary *colorNameCache = nil;
 + (UIColor *)searchForColorByName:(NSString *)cssColorName;
 @end
 
+static BOOL _blackWhiteMode = NO;
+
 #pragma mark -
 
 @implementation UIColor (UIColor_Expanded)
@@ -404,6 +406,14 @@ static NSMutableDictionary *colorNameCache = nil;
   return [UIColor colorWithRed:r green:g blue:b alpha:a];
 }
 
++ (void)setBlackWhiteMode: (BOOL)isBlackWhiteMode {
+    _blackWhiteMode = isBlackWhiteMode;
+}
+
++ (BOOL)blackWhiteMode {
+    return _blackWhiteMode;
+}
+
 @end
 
 #pragma mark -
@@ -477,4 +487,5 @@ static const char *colorNameDB = ","
   
 	return result;
 }
+
 @end

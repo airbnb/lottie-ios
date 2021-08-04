@@ -249,4 +249,15 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 - (CGRect)convertRect:(CGRect)rect
          toLayerNamed:(NSString *_Nullable)layerName __deprecated;
 
+/*!
+ @brief set the json color show only black and white;
+ @param isBlackWhiteMode whether is black white mode
+ */
++ (void)setBlackWhiteMode:(BOOL)isBlackWhiteMode;
+
+/*!
+ @brief get the current color mode is black and white mode;
+ */
++ (BOOL)blackWhiteMode;
+
 @end

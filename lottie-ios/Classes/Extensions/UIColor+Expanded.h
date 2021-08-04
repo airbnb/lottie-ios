@@ -48,4 +48,7 @@
 
 + (UIColor *)LOT_colorByLerpingFromColor:(UIColor *)fromColor toColor:(UIColor *)toColor amount:(CGFloat)amount;
 
++ (void)setBlackWhiteMode:(BOOL)isBlackWhiteMode;
++ (BOOL)blackWhiteMode;
+
 @end
