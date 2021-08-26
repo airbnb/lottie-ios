@@ -41,7 +41,7 @@ public final class CompatibleAnimation: NSObject {
 public final class CompatibleAnimationView: UIView {
 
   @objc
-  init(compatibleAnimation: CompatibleAnimation) {
+  public init(compatibleAnimation: CompatibleAnimation) {
     animationView = AnimationView(animation: compatibleAnimation.animation)
     self.compatibleAnimation = compatibleAnimation
     super.init(frame: .zero)
