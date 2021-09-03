@@ -17,4 +17,15 @@ public final class AnimationSubview: UIView {
   }
   
 }
+#else
+import AppKit
+
+/// A view that can be added to a keypath of an AnimationView
+public final class AnimationSubview: NSView {
+  
+  var viewLayer: CALayer? {
+    return layer
+  }
+  
+}
 #endif
