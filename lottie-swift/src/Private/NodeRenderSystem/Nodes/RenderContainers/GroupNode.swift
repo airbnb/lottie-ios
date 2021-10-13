@@ -61,7 +61,9 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
     return CATransform3D.makeTransform(anchor: anchor.value.pointValue,
                                        position: position.value.pointValue,
                                        scale: scale.value.sizeValue,
-                                       rotation: rotation.value.cgFloatValue,
+                                       rotationX: 0,
+                                       rotationY: 0,
+                                       rotationZ: rotation.value.cgFloatValue,
                                        skew: skew.value.cgFloatValue,
                                        skewAxis: skewAxis.value.cgFloatValue)
   }

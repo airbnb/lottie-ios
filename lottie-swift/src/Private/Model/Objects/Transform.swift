@@ -32,8 +32,10 @@ final class Transform: Codable {
   let opacity: KeyframeGroup<Vector1D>
   
   /// Should always be nil.
+  let rotationX: KeyframeGroup<Vector1D>
+  let rotationY: KeyframeGroup<Vector1D>
   let rotationZ: KeyframeGroup<Vector1D>?
-  
+
   enum CodingKeys : String, CodingKey {
     case anchorPoint = "a"
     case position = "p"
@@ -41,6 +43,8 @@ final class Transform: Codable {
     case positionY = "py"
     case scale = "s"
     case rotation = "r"
+    case rotationX = "rx"
+    case rotationY = "ry"
     case rotationZ = "rz"
     case opacity = "o"
   }
@@ -98,7 +102,10 @@ final class Transform: Codable {
        self.rotation = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation) ?? KeyframeGroup(Vector1D(0))
     }
     self.rotationZ = nil
-    
+      
+    self.rotationX = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotationX) ?? KeyframeGroup(Vector1D(0))
+    self.rotationY = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotationY) ?? KeyframeGroup(Vector1D(0))
+      
     // Opacity
     self.opacity = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .opacity) ?? KeyframeGroup(Vector1D(100))
   }
