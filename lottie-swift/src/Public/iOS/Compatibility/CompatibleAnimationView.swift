@@ -15,7 +15,7 @@ import UIKit
 public final class CompatibleAnimation: NSObject {
 
   @objc
-  static func named(_ name: String) -> CompatibleAnimation {
+  public static func named(_ name: String) -> CompatibleAnimation {
     return CompatibleAnimation(name: name)
   }
 
@@ -25,15 +25,26 @@ public final class CompatibleAnimation: NSObject {
     self.bundle = bundle
     super.init()
   }
-
-  internal var animation: Animation? {
-    return Animation.named(name, bundle: bundle)
+	
+  public init(animation: Animation) {
+	name = ""
+	bundle = Bundle.main
+	super.init()
+	self.animation = animation
   }
+
+  internal lazy var animation = Animation.named(name, bundle: bundle)
 
   // MARK: Private
 
   private let name: String
   private let bundle: Bundle
+}
+
+public extension Animation {
+	func ocCompatible() -> CompatibleAnimation {
+		CompatibleAnimation(animation: self)
+	}
 }
 
 /// An Objective-C compatible wrapper around Lottie's AnimationView.
