@@ -81,7 +81,7 @@ final public class AnimationView: LottieView {
    The default is `pause` which pauses the animation when the application moves to
    the background. The completion block is called with `false` for completed.
    */
-  public var backgroundBehavior: LottieBackgroundBehavior = .pause
+  public var backgroundBehavior: LottieBackgroundBehavior = .pauseAndRestore
   
   /**
    Sets the image provider for the animation view. An image provider provides the
