@@ -18,7 +18,8 @@ public enum CoordinateSpace: Int, Codable {
  An `Animation` holds all of the animation data backing a Lottie Animation.
  Codable, see JSON schema [here](https://github.com/airbnb/lottie-web/tree/master/docs/json).
  */
-public final class Animation: Codable {
+@objc
+public final class Animation: NSObject, Codable {
   
   /// The version of the JSON Schema.
   let version: String
