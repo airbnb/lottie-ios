@@ -108,6 +108,13 @@ public final class CompatibleAnimationView: UIView {
       animationView.animation = compatibleAnimation?.animation
     }
   }
+  
+  @objc
+  public var animation: Animation? {
+    didSet {
+      animationView.animation = animation
+    }
+  }
 
   @objc
   public var loopAnimationCount: CGFloat = 0 {
