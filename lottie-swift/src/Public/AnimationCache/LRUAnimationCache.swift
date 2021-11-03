@@ -15,43 +15,27 @@ import Foundation
  */
 public class LRUAnimationCache: AnimationCacheProvider {
 
-  public init() { }
-  
-  /// Clears the Cache.
-  public func clearCache() {
-    cacheMap.removeAll()
-    lruList.removeAll()
-  }
-  
-  /// The global shared Cache.
-  public static let sharedCache = LRUAnimationCache()
-  
-  /// The size of the cache.
-  public var cacheSize: Int = 100
-  
-  public func animation(forKey: String) -> Animation? {
-    guard let animation = cacheMap[forKey] else {
-      return nil
+    public static let sharedCache = LRUAnimationCache()
+
+    public var cacheSize: Int = 100
+
+    private var cache = NSCache<NSString, Animation>()
+
+    /// This prevents other objects from using the default initializer
+    private init() {
+        cache.countLimit = cacheSize
     }
-    if let index = lruList.firstIndex(of: forKey) {
-      lruList.remove(at: index)
-      lruList.append(forKey)
+
+    public func animation(forKey key: String) -> Animation? {
+        cache.object(forKey: key.nsString)
     }
-    return animation
-  }
-  
-  public func setAnimation(_ animation: Animation, forKey: String) {
-    cacheMap[forKey] = animation
-    lruList.append(forKey)
-    if lruList.count > cacheSize {
-      let removed = lruList.remove(at: 0)
-      if removed != forKey {
-        cacheMap[removed] = nil
-      }
+
+    public func setAnimation(_ animation: Animation, forKey key: String) {
+        cache.setObject(animation, forKey: key.nsString)
     }
-  }
-  
-  fileprivate var cacheMap: [String : Animation] = [:]
-  fileprivate var lruList: [String] = []
-  
+
+    public func clearCache() {
+        // Let ARC manage clearing the cache.
+        self.cache = NSCache<NSString, Animation>()
+    }
 }
