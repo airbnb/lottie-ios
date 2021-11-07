@@ -22,7 +22,7 @@ extension Array where Element == LayerModel {
     var childLayers = [LayerModel]()
     
     for layer in self {
-      let layerIndex = layer.index ?? Int(layer.inFrame)
+      let layerIndex = layer.index ?? Int(layer.inFrame) // In case of using image sequencies not vector data json
       if layer.hidden == true {
         let genericLayer = NullCompositionLayer(layer: layer)
         compositionLayers.append(genericLayer)
@@ -68,7 +68,7 @@ extension Array where Element == LayerModel {
     }
     /// Now link children with their parents
     for layerModel in childLayers {
-      let layerIndex = layerModel.index ?? Int(layerModel.inFrame)
+      let layerIndex = layerModel.index ?? Int(layerModel.inFrame) // In case of using image sequencies not vector data json
       if let parentID = layerModel.parent {
         let childLayer = layerMap[layerIndex]
         let parentLayer = layerMap[parentID]
