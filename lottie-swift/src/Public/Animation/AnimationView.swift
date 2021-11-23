@@ -67,7 +67,7 @@ final public class AnimationView: LottieView {
   }
   
   /// Set animation name from Interface Builder
-  @IBInspectable var animationName: String? {
+  @IBInspectable public var animationName: String? {
     didSet {
       self.animation = animationName.flatMap {
         Animation.named($0, animationCache: nil)
