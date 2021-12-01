@@ -133,7 +133,7 @@ class LayerModel: Codable {
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: LayerModel.CodingKeys.self)
     self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Layer"
-    self.index = try container.decode(Int.self, forKey: .index)
+    self.index = try container.decodeIfPresent(Int.self, forKey: .index) ?? 0
     self.type = try container.decode(LayerType.self, forKey: .type)
     self.coordinateSpace = try container.decodeIfPresent(CoordinateSpace.self, forKey: .coordinateSpace) ?? .type2d
     self.inFrame = try container.decode(Double.self, forKey: .inFrame)
