@@ -21,8 +21,8 @@ class PolygonNodeProperties: NodePropertyMap, KeypathSearchable {
     self.outerRadius = NodeProperty(provider: KeyframeInterpolator(keyframes: star.outerRadius.keyframes))
     self.outerRoundedness = NodeProperty(provider: KeyframeInterpolator(keyframes: star.outerRoundness.keyframes))
     self.rotationX = NodeProperty(provider: KeyframeInterpolator(keyframes: star.rotationX.keyframes))
-    self.rotationY = NodeProperty(provider: KeyframeInterpolator(keyframes: star.rotationX.keyframes))
-    self.rotationZ = NodeProperty(provider: KeyframeInterpolator(keyframes: star.rotationX.keyframes))
+    self.rotationY = NodeProperty(provider: KeyframeInterpolator(keyframes: star.rotationY.keyframes))
+    self.rotationZ = NodeProperty(provider: KeyframeInterpolator(keyframes: star.rotationZ.keyframes))
     self.points = NodeProperty(provider: KeyframeInterpolator(keyframes: star.points.keyframes))
     self.keypathProperties = [
       "Position" : position,
