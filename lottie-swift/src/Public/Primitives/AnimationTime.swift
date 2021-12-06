@@ -5,8 +5,8 @@
 //  Created by Brandon Withrow on 2/6/19.
 //
 
-import Foundation
 import CoreGraphics
+import Foundation
 
 /// Defines animation time in Frames (Seconds * Framerate).
 public typealias AnimationFrameTime = CGFloat

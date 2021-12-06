@@ -9,69 +9,77 @@ import Foundation
 import QuartzCore
 
 extension KeypathSearchable {
-  
+
   func animatorNodes(for keyPath: AnimationKeypath) -> [AnimatorNode]? {
     // Make sure there is a current key path.
     guard let currentKey = keyPath.currentKey else { return nil }
-    
+
     // Now try popping the keypath for wildcard / child search
     guard let nextKeypath = keyPath.popKey(keypathName) else {
       // We may be on the final keypath. Check for match.
-      if let node = self as? AnimatorNode,
-        currentKey.equalsKeypath(keypathName) {
+      if
+        let node = self as? AnimatorNode,
+        currentKey.equalsKeypath(keypathName)
+      {
         // This is the final keypath and matches self. Return.s
         return [node]
       }
       /// Nope. Stop Search
       return nil
     }
-    
+
     var results: [AnimatorNode] = []
-    
-    if let node = self as? AnimatorNode,
-      nextKeypath.currentKey == nil {
+
+    if
+      let node = self as? AnimatorNode,
+      nextKeypath.currentKey == nil
+    {
       // Keypath matched self and was the final keypath.
       results.append(node)
     }
-    
+
     for childNode in childKeypaths {
       // Check if the child has any nodes matching the next keypath.
       if let foundNodes = childNode.animatorNodes(for: nextKeypath) {
         results.append(contentsOf: foundNodes)
       }
-      
+
       // In this case the current key is fuzzy, and both child and self match the next keyname. Keep digging!
-      if currentKey.keyPathType == .fuzzyWildcard,
+      if
+        currentKey.keyPathType == .fuzzyWildcard,
         let nextKeypath = keyPath.nextKeypath,
         nextKeypath.equalsKeypath(childNode.keypathName),
-        let foundNodes = childNode.animatorNodes(for: keyPath) {
+        let foundNodes = childNode.animatorNodes(for: keyPath)
+      {
         results.append(contentsOf: foundNodes)
       }
     }
-    
+
     guard results.count > 0 else {
       return nil
     }
-    
+
     return results
   }
-  
+
   func nodeProperties(for keyPath: AnimationKeypath) -> [AnyNodeProperty]? {
     guard let nextKeypath = keyPath.popKey(keypathName) else {
       /// Nope. Stop Search
       return nil
     }
-    
+
     /// Keypath matches in some way. Continue the search.
     var results: [AnyNodeProperty] = []
-    
+
     /// Check if we have a property keypath yet
-    if let propertyKey = nextKeypath.propertyKey,
-      let property = keypathProperties[propertyKey] {
+    if
+      let propertyKey = nextKeypath.propertyKey,
+      let property = keypathProperties[propertyKey]
+    {
       /// We found a property!
       results.append(property)
     }
-    
+
     if nextKeypath.nextKeypath != nil {
       /// Now check child keypaths.
       for child in childKeypaths {
@@ -80,16 +88,16 @@ extension KeypathSearchable {
         }
       }
     }
-    
+
     guard results.count > 0 else {
       return nil
     }
-    
+
     return results
   }
-  
+
   func layer(for keyPath: AnimationKeypath) -> CALayer? {
-    if keyPath.nextKeypath == nil, let layerKey = keyPath.currentKey,  layerKey.equalsKeypath(keypathName) {
+    if keyPath.nextKeypath == nil, let layerKey = keyPath.currentKey, layerKey.equalsKeypath(keypathName) {
       /// We found our layer!
       return keypathLayer
     }
@@ -97,7 +105,7 @@ extension KeypathSearchable {
       /// Nope. Stop Search
       return nil
     }
-    
+
     if nextKeypath.nextKeypath != nil {
       /// Now check child keypaths.
       for child in childKeypaths {
@@ -108,7 +116,7 @@ extension KeypathSearchable {
     }
     return nil
   }
-  
+
   func logKeypaths(for keyPath: AnimationKeypath?) {
     let newKeypath: AnimationKeypath
     if let previousKeypath = keyPath {
@@ -128,16 +136,16 @@ extension KeypathSearchable {
 
 extension AnimationKeypath {
   var currentKey: String? {
-    return keys.first
+    keys.first
   }
-  
+
   var nextKeypath: String? {
     guard keys.count > 1 else {
       return nil
     }
     return keys[1]
   }
-  
+
   var propertyKey: String? {
     if nextKeypath == nil {
       /// There are no more keypaths. This is a property key.
@@ -149,23 +157,31 @@ extension AnimationKeypath {
     }
     return nil
   }
-  
+
+  var fullPath: String {
+    keys.joined(separator: ".")
+  }
+
   // Pops the top keypath from the stack if the keyname matches.
   func popKey(_ keyname: String) -> AnimationKeypath? {
-    guard let currentKey = currentKey,
+    guard
+      let currentKey = currentKey,
       currentKey.equalsKeypath(keyname),
-      keys.count > 1 else {
-        // Current key either doesnt match or we are on the last key.
-        return nil
+      keys.count > 1 else
+    {
+      // Current key either doesnt match or we are on the last key.
+      return nil
     }
-    
+
     // Pop the keypath from the stack and return the new stack.
     let newKeys: [String]
-    
+
     if currentKey.keyPathType == .fuzzyWildcard {
       /// Dont remove if current key is a fuzzy wildcard, and if the next keypath doesnt equal keypathname
-      if let nextKeypath = nextKeypath,
-        nextKeypath.equalsKeypath(keyname) {
+      if
+        let nextKeypath = nextKeypath,
+        nextKeypath.equalsKeypath(keyname)
+      {
         /// Remove next two keypaths. This keypath breaks the wildcard.
         var oldKeys = keys
         oldKeys.remove(at: 0)
@@ -179,22 +195,16 @@ extension AnimationKeypath {
       oldKeys.remove(at: 0)
       newKeys = oldKeys
     }
-    
+
     return AnimationKeypath(keys: newKeys)
   }
-  
-  var fullPath: String {
-    return keys.joined(separator: ".")
-  }
-  
+
   func appendingKey(_ key: String) -> AnimationKeypath {
     var newKeys = keys
     newKeys.append(key)
     return AnimationKeypath(keys: newKeys)
   }
 }
-
-
 
 extension String {
   var keyPathType: KeyType {
@@ -207,7 +217,7 @@ extension String {
       return .specific
     }
   }
-  
+
   func equalsKeypath(_ keyname: String) -> Bool {
     if keyPathType == .wildcard || keyPathType == .fuzzyWildcard {
       return true
@@ -215,11 +225,11 @@ extension String {
     if self == keyname {
       return true
     }
-    if let index = self.firstIndex(of: "*") {
+    if let index = firstIndex(of: "*") {
       // Wildcard search.
       let prefix = String(self.prefix(upTo: index))
       let suffix = String(self.suffix(from: self.index(after: index)))
-      
+
       if prefix.count > 0 {
         // Match prefix.
         if keyname.count < prefix.count {
@@ -248,6 +258,8 @@ extension String {
     return false
   }
 }
+
+// MARK: - KeyType
 
 enum KeyType {
   case specific

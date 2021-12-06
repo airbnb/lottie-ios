@@ -5,70 +5,84 @@
 //  Created by Brandon Withrow on 1/17/19.
 //
 
-import Foundation
 import CoreGraphics
+import Foundation
+
+// MARK: - FillNodeProperties
 
 final class FillNodeProperties: NodePropertyMap, KeypathSearchable {
-  
-  var keypathName: String
-  
+
+  // MARK: Lifecycle
+
   init(fill: Fill) {
-    self.keypathName = fill.name
-    self.color = NodeProperty(provider: KeyframeInterpolator(keyframes: fill.color.keyframes))
-    self.opacity = NodeProperty(provider: KeyframeInterpolator(keyframes: fill.opacity.keyframes))
-    self.type = fill.fillRule
-    self.keypathProperties = [
+    keypathName = fill.name
+    color = NodeProperty(provider: KeyframeInterpolator(keyframes: fill.color.keyframes))
+    opacity = NodeProperty(provider: KeyframeInterpolator(keyframes: fill.opacity.keyframes))
+    type = fill.fillRule
+    keypathProperties = [
       "Opacity" : opacity,
-      "Color" : color
+      "Color" : color,
     ]
-    self.properties = Array(keypathProperties.values)
+    properties = Array(keypathProperties.values)
   }
-  
+
+  // MARK: Internal
+
+  var keypathName: String
+
   let opacity: NodeProperty<Vector1D>
   let color: NodeProperty<Color>
   let type: FillRule
-  
-  let keypathProperties: [String : AnyNodeProperty]
+
+  let keypathProperties: [String: AnyNodeProperty]
   let properties: [AnyNodeProperty]
-  
+
 }
 
+// MARK: - FillNode
+
 final class FillNode: AnimatorNode, RenderNode {
-  
-  let fillRender: FillRenderer
-  var renderer: NodeOutput & Renderable {
-    return fillRender
-  }
-  
-  let fillProperties: FillNodeProperties
+
+  // MARK: Lifecycle
 
   init(parentNode: AnimatorNode?, fill: Fill) {
-    self.fillRender = FillRenderer(parent: parentNode?.outputNode)
-    self.fillProperties = FillNodeProperties(fill: fill)
+    fillRender = FillRenderer(parent: parentNode?.outputNode)
+    fillProperties = FillNodeProperties(fill: fill)
     self.parentNode = parentNode
   }
-  
-  // MARK: Animator Node Protocol
-  
-  var propertyMap: NodePropertyMap & KeypathSearchable {
-    return fillProperties
-  }
-  
+
+  // MARK: Internal
+
+  let fillRender: FillRenderer
+
+  let fillProperties: FillNodeProperties
+
   let parentNode: AnimatorNode?
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+
+  var renderer: NodeOutput & Renderable {
+    fillRender
+  }
+
+  // MARK: Animator Node Protocol
+
+  var propertyMap: NodePropertyMap & KeypathSearchable {
+    fillProperties
+  }
+
   var isEnabled: Bool = true {
     didSet {
       fillRender.isEnabled = isEnabled
     }
   }
-  
+
   func localUpdatesPermeateDownstream() -> Bool {
-    return false
+    false
   }
-  
-  func rebuildOutputs(frame: CGFloat) {
+
+  func rebuildOutputs(frame _: CGFloat) {
     fillRender.color = fillProperties.color.value.cgColorValue
     fillRender.opacity = fillProperties.opacity.value.cgFloatValue * 0.01
     fillRender.fillRule = fillProperties.type

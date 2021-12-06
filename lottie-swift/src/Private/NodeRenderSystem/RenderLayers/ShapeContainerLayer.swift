@@ -12,12 +12,12 @@ import QuartzCore
  The base layer that holds Shapes and Shape Renderers
  */
 class ShapeContainerLayer: CALayer {
-  
-  private(set) var renderLayers: [ShapeContainerLayer] = []
-  
+
+  // MARK: Lifecycle
+
   override init() {
     super.init()
-    self.actions = [
+    actions = [
       "position" : NSNull(),
       "bounds" : NSNull(),
       "anchorPoint" : NSNull(),
@@ -26,47 +26,51 @@ class ShapeContainerLayer: CALayer {
       "hidden" : NSNull(),
     ]
   }
-  
-  required init?(coder aDecoder: NSCoder) {
+
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override init(layer: Any) {
     guard let layer = layer as? ShapeContainerLayer else {
       fatalError("init(layer:) wrong class.")
     }
     super.init(layer: layer)
   }
-  
+
+  // MARK: Internal
+
+  private(set) var renderLayers: [ShapeContainerLayer] = []
+
   var renderScale: CGFloat = 1 {
     didSet {
       updateRenderScale()
     }
   }
-  
+
   func insertRenderLayer(_ layer: ShapeContainerLayer) {
     renderLayers.append(layer)
     insertSublayer(layer, at: 0)
   }
-  
+
   func markRenderUpdates(forFrame: CGFloat) {
-    if self.hasRenderUpdate(forFrame: forFrame) {
-      self.rebuildContents(forFrame: forFrame)
+    if hasRenderUpdate(forFrame: forFrame) {
+      rebuildContents(forFrame: forFrame)
     }
-    guard self.isHidden == false else { return }
+    guard isHidden == false else { return }
     renderLayers.forEach { $0.markRenderUpdates(forFrame: forFrame) }
   }
-  
-  func hasRenderUpdate(forFrame: CGFloat) -> Bool {
-    return false
+
+  func hasRenderUpdate(forFrame _: CGFloat) -> Bool {
+    false
   }
-  
-  func rebuildContents(forFrame: CGFloat) {
+
+  func rebuildContents(forFrame _: CGFloat) {
     /// Override
   }
-  
+
   func updateRenderScale() {
     renderLayers.forEach( { $0.renderScale = renderScale } )
   }
-  
+
 }

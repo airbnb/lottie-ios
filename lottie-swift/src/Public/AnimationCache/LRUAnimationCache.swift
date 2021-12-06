@@ -9,26 +9,30 @@ import Foundation
 
 /**
  An Animation Cache that will store animations up to `cacheSize`.
- 
+
  Once `cacheSize` is reached, the least recently used animation will be ejected.
  The default size of the cache is 100.
  */
 public class LRUAnimationCache: AnimationCacheProvider {
 
+  // MARK: Lifecycle
+
   public init() { }
-  
+
+  // MARK: Public
+
+  /// The global shared Cache.
+  public static let sharedCache = LRUAnimationCache()
+
+  /// The size of the cache.
+  public var cacheSize: Int = 100
+
   /// Clears the Cache.
   public func clearCache() {
     cacheMap.removeAll()
     lruList.removeAll()
   }
-  
-  /// The global shared Cache.
-  public static let sharedCache = LRUAnimationCache()
-  
-  /// The size of the cache.
-  public var cacheSize: Int = 100
-  
+
   public func animation(forKey: String) -> Animation? {
     guard let animation = cacheMap[forKey] else {
       return nil
@@ -39,7 +43,7 @@ public class LRUAnimationCache: AnimationCacheProvider {
     }
     return animation
   }
-  
+
   public func setAnimation(_ animation: Animation, forKey: String) {
     cacheMap[forKey] = animation
     lruList.append(forKey)
@@ -50,8 +54,10 @@ public class LRUAnimationCache: AnimationCacheProvider {
       }
     }
   }
-  
-  fileprivate var cacheMap: [String : Animation] = [:]
+
+  // MARK: Fileprivate
+
+  fileprivate var cacheMap: [String: Animation] = [:]
   fileprivate var lruList: [String] = []
-  
+
 }

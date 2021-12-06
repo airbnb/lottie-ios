@@ -14,10 +14,7 @@ import UIKit
 @objc
 public final class CompatibleAnimation: NSObject {
 
-  @objc
-  static func named(_ name: String) -> CompatibleAnimation {
-    return CompatibleAnimation(name: name)
-  }
+  // MARK: Lifecycle
 
   @objc
   public init(name: String, bundle: Bundle = Bundle.main) {
@@ -26,8 +23,15 @@ public final class CompatibleAnimation: NSObject {
     super.init()
   }
 
+  // MARK: Internal
+
   internal var animation: Animation? {
-    return Animation.named(name, bundle: bundle)
+    Animation.named(name, bundle: bundle)
+  }
+
+  @objc
+  static func named(_ name: String) -> CompatibleAnimation {
+    CompatibleAnimation(name: name)
   }
 
   // MARK: Private
@@ -39,6 +43,8 @@ public final class CompatibleAnimation: NSObject {
 /// An Objective-C compatible wrapper around Lottie's AnimationView.
 @objc
 public final class CompatibleAnimationView: UIView {
+
+  // MARK: Lifecycle
 
   @objc
   public init(compatibleAnimation: CompatibleAnimation) {
@@ -55,7 +61,7 @@ public final class CompatibleAnimationView: UIView {
     commonInit()
   }
 
-  required init?(coder aDecoder: NSCoder) {
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
@@ -78,58 +84,58 @@ public final class CompatibleAnimationView: UIView {
   @objc
   public override var contentMode: UIView.ContentMode {
     set { animationView.contentMode = newValue }
-    get { return animationView.contentMode }
+    get { animationView.contentMode }
   }
 
   @objc
   public var shouldRasterizeWhenIdle: Bool {
     set { animationView.shouldRasterizeWhenIdle = newValue }
-    get { return animationView.shouldRasterizeWhenIdle }
+    get { animationView.shouldRasterizeWhenIdle }
   }
 
   @objc
   public var currentProgress: CGFloat {
     set { animationView.currentProgress = newValue }
-    get { return animationView.currentProgress }
+    get { animationView.currentProgress }
   }
 
   @objc
   public var currentTime: TimeInterval {
     set { animationView.currentTime = newValue }
-    get { return animationView.currentTime }
+    get { animationView.currentTime }
   }
 
   @objc
   public var currentFrame: CGFloat {
     set { animationView.currentFrame = newValue }
-    get { return animationView.currentFrame }
+    get { animationView.currentFrame }
   }
 
   @objc
   public var realtimeAnimationFrame: CGFloat {
-    return animationView.realtimeAnimationFrame
+    animationView.realtimeAnimationFrame
   }
 
   @objc
   public var realtimeAnimationProgress: CGFloat {
-    return animationView.realtimeAnimationProgress
+    animationView.realtimeAnimationProgress
   }
 
   @objc
   public var animationSpeed: CGFloat {
     set { animationView.animationSpeed = newValue }
-    get { return animationView.animationSpeed }
+    get { animationView.animationSpeed }
   }
 
   @objc
   public var respectAnimationFrameRate: Bool {
     set { animationView.respectAnimationFrameRate = newValue }
-    get { return animationView.respectAnimationFrameRate }
+    get { animationView.respectAnimationFrameRate }
   }
 
   @objc
   public var isAnimationPlaying: Bool {
-    return animationView.isAnimationPlaying
+    animationView.isAnimationPlaying
   }
 
   @objc
@@ -203,9 +209,10 @@ public final class CompatibleAnimationView: UIView {
   @objc
   public func getValue(
     for keypath: CompatibleAnimationKeypath,
-    atFrame: CGFloat) -> Any?
+    atFrame: CGFloat)
+    -> Any?
   {
-    return animationView.getValue(
+    animationView.getValue(
       for: keypath.animationKeypath,
       atFrame: atFrame)
   }
@@ -245,10 +252,14 @@ public final class CompatibleAnimationView: UIView {
   {
     let value = animationView.getValue(for: keypath.animationKeypath, atFrame: atFrame)
     guard let colorValue = value as? Color else {
-        return nil;
+      return nil;
     }
 
-    return UIColor(red: CGFloat(colorValue.r), green: CGFloat(colorValue.g), blue: CGFloat(colorValue.b), alpha: CGFloat(colorValue.a))
+    return UIColor(
+      red: CGFloat(colorValue.r),
+      green: CGFloat(colorValue.g),
+      blue: CGFloat(colorValue.b),
+      alpha: CGFloat(colorValue.a))
   }
 
   @objc
@@ -267,7 +278,7 @@ public final class CompatibleAnimationView: UIView {
     toLayerAt keypath: CompatibleAnimationKeypath?)
     -> CGRect
   {
-    return animationView.convert(
+    animationView.convert(
       rect,
       toLayerAt: keypath?.animationKeypath) ?? .zero
   }
@@ -278,19 +289,19 @@ public final class CompatibleAnimationView: UIView {
     toLayerAt keypath: CompatibleAnimationKeypath?)
     -> CGPoint
   {
-    return animationView.convert(
+    animationView.convert(
       point,
       toLayerAt: keypath?.animationKeypath) ?? .zero
   }
 
   @objc
   public func progressTime(forMarker named: String) -> CGFloat {
-    return animationView.progressTime(forMarker: named) ?? 0
+    animationView.progressTime(forMarker: named) ?? 0
   }
 
   @objc
   public func frameTime(forMarker named: String) -> CGFloat {
-    return animationView.frameTime(forMarker: named) ?? 0
+    animationView.frameTime(forMarker: named) ?? 0
   }
 
   // MARK: Private

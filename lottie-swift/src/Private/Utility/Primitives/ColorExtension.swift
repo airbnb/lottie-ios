@@ -5,35 +5,39 @@
 //  Created by Brandon Withrow on 1/14/19.
 //
 
-import Foundation
 import CoreGraphics
+import Foundation
+
+// MARK: - Color + Codable
 
 extension Color: Codable {
 
+  // MARK: Lifecycle
+
   public init(from decoder: Decoder) throws {
     var container = try decoder.unkeyedContainer()
-    
+
     var r1: Double
     if !container.isAtEnd {
       r1 = try container.decode(Double.self)
     } else {
       r1 = 0
     }
-    
+
     var g1: Double
     if !container.isAtEnd {
       g1 = try container.decode(Double.self)
     } else {
       g1 = 0
     }
-    
+
     var b1: Double
     if !container.isAtEnd {
       b1 = try container.decode(Double.self)
     } else {
       b1 = 0
     }
-    
+
     var a1: Double
     if !container.isAtEnd {
       a1 = try container.decode(Double.self)
@@ -46,12 +50,14 @@ extension Color: Codable {
       b1 = b1 / 255
       a1 = a1 / 255
     }
-    self.r = r1
-    self.g = g1
-    self.b = b1
-    self.a = a1
+    r = r1
+    g = g1
+    b = b1
+    a = a1
   }
-  
+
+  // MARK: Public
+
   public func encode(to encoder: Encoder) throws {
     var container = encoder.unkeyedContainer()
     try container.encode(r)
@@ -59,15 +65,15 @@ extension Color: Codable {
     try container.encode(b)
     try container.encode(a)
   }
-  
+
 }
 
 extension Color {
-  
+
   static var clearColor: CGColor {
-    return CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0, 0, 0, 0])!
+    CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0, 0, 0, 0])!
   }
-  
+
   var cgColorValue: CGColor {
     // TODO: Fix color spaces
     let colorspace = CGColorSpaceCreateDeviceRGB()

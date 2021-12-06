@@ -5,9 +5,9 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
+import CoreGraphics
 import Foundation
 import QuartzCore
-import CoreGraphics
 
 extension FillRule {
   var cgFillRule: CGPathFillRule {
@@ -18,7 +18,7 @@ extension FillRule {
       return .winding
     }
   }
-  
+
   var caFillRule: CAShapeLayerFillRule {
     switch self {
     case .evenOdd:
@@ -29,36 +29,38 @@ extension FillRule {
   }
 }
 
+// MARK: - FillRenderer
+
 /// A rendered for a Path Fill
 final class FillRenderer: PassThroughOutputNode, Renderable {
-  
+
   let shouldRenderInContext: Bool = false
-  
+
+  var color: CGColor? {
+    didSet {
+      hasUpdate = true
+    }
+  }
+
+  var opacity: CGFloat = 0 {
+    didSet {
+      hasUpdate = true
+    }
+  }
+
+  var fillRule: FillRule = .none {
+    didSet {
+      hasUpdate = true
+    }
+  }
+
   func updateShapeLayer(layer: CAShapeLayer) {
     layer.fillColor = color
     layer.opacity = Float(opacity)
     layer.fillRule = fillRule.caFillRule
     hasUpdate = false
   }
-  
-  var color: CGColor? {
-    didSet {
-      hasUpdate = true
-    }
-  }
-  
-  var opacity: CGFloat = 0 {
-    didSet {
-      hasUpdate = true
-    }
-  }
-  
-  var fillRule: FillRule = .none {
-    didSet {
-      hasUpdate = true
-    }
-  }
-  
+
   func render(_ inContext: CGContext) {
     guard inContext.path != nil && inContext.path!.isEmpty == false else {
       return

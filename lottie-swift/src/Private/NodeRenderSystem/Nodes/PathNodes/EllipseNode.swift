@@ -8,102 +8,119 @@
 import Foundation
 import QuartzCore
 
+// MARK: - EllipseNodeProperties
+
 final class EllipseNodeProperties: NodePropertyMap, KeypathSearchable {
-  
-  var keypathName: String
-  
+
+  // MARK: Lifecycle
+
   init(ellipse: Ellipse) {
-    self.keypathName = ellipse.name
-    self.direction = ellipse.direction
-    self.position = NodeProperty(provider: KeyframeInterpolator(keyframes: ellipse.position.keyframes))
-    self.size = NodeProperty(provider: KeyframeInterpolator(keyframes: ellipse.size.keyframes))
-    self.keypathProperties = [
+    keypathName = ellipse.name
+    direction = ellipse.direction
+    position = NodeProperty(provider: KeyframeInterpolator(keyframes: ellipse.position.keyframes))
+    size = NodeProperty(provider: KeyframeInterpolator(keyframes: ellipse.size.keyframes))
+    keypathProperties = [
       "Position" : position,
-      "Size" : size
+      "Size" : size,
     ]
-    self.properties = Array(keypathProperties.values)
+    properties = Array(keypathProperties.values)
   }
-  
+
+  // MARK: Internal
+
+  var keypathName: String
+
   let direction: PathDirection
   let position: NodeProperty<Vector3D>
   let size: NodeProperty<Vector3D>
-  
-  let keypathProperties: [String : AnyNodeProperty]
+
+  let keypathProperties: [String: AnyNodeProperty]
   let properties: [AnyNodeProperty]
 }
 
+// MARK: - EllipseNode
+
 final class EllipseNode: AnimatorNode, PathNode {
-  
-  let pathOutput: PathOutputNode
-  
-  let properties: EllipseNodeProperties
+
+  // MARK: Lifecycle
 
   init(parentNode: AnimatorNode?, ellipse: Ellipse) {
-    self.pathOutput = PathOutputNode(parent: parentNode?.outputNode)
-    self.properties = EllipseNodeProperties(ellipse: ellipse)
+    pathOutput = PathOutputNode(parent: parentNode?.outputNode)
+    properties = EllipseNodeProperties(ellipse: ellipse)
     self.parentNode = parentNode
   }
-  
-  // MARK: Animator Node
-  
-  var propertyMap: NodePropertyMap & KeypathSearchable {
-    return properties
-  }
-  
+
+  // MARK: Internal
+
+  static let ControlPointConstant: CGFloat = 0.55228
+
+  let pathOutput: PathOutputNode
+
+  let properties: EllipseNodeProperties
+
   let parentNode: AnimatorNode?
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+
+  // MARK: Animator Node
+
+  var propertyMap: NodePropertyMap & KeypathSearchable {
+    properties
+  }
+
   var isEnabled: Bool = true {
     didSet{
-      self.pathOutput.isEnabled = self.isEnabled
+      pathOutput.isEnabled = isEnabled
     }
   }
-  
+
   func rebuildOutputs(frame: CGFloat) {
     let ellipseSize = properties.size.value.sizeValue
     let center = properties.position.value.pointValue
-    
+
     // Unfortunately we HAVE to manually build out the ellipse.
     // Every Apple method constructs an ellipse from the 3 o-clock position
     // After effects constructs from the Noon position.
     // After effects does clockwise, but also has a flag for reversed.
-    
+
     var half = ellipseSize * 0.5
     if properties.direction == .counterClockwise {
       half.width = half.width * -1
     }
-    
-    
+
     let q1 = CGPoint(x: center.x, y: center.y - half.height)
     let q2 = CGPoint(x: center.x + half.width, y: center.y)
     let q3 = CGPoint(x: center.x, y: center.y + half.height)
     let q4 = CGPoint(x: center.x - half.width, y: center.y)
-    
+
     let cp = half * EllipseNode.ControlPointConstant
-    
-    var path = BezierPath(startPoint: CurveVertex(point: q1,
-                                                  inTangentRelative: CGPoint(x: -cp.width, y: 0),
-                                                  outTangentRelative: CGPoint(x: cp.width, y: 0)))
-    path.addVertex(CurveVertex(point: q2,
-                               inTangentRelative: CGPoint(x: 0, y: -cp.height),
-                               outTangentRelative: CGPoint(x: 0, y: cp.height)))
-    
-    path.addVertex(CurveVertex(point: q3,
-                               inTangentRelative: CGPoint(x: cp.width, y: 0),
-                               outTangentRelative: CGPoint(x: -cp.width, y: 0)))
-    
-    path.addVertex(CurveVertex(point: q4,
-                               inTangentRelative: CGPoint(x: 0, y: cp.height),
-                               outTangentRelative: CGPoint(x: 0, y: -cp.height)))
-    
-    path.addVertex(CurveVertex(point: q1,
-                               inTangentRelative: CGPoint(x: -cp.width, y: 0),
-                               outTangentRelative: CGPoint(x: cp.width, y: 0)))
+
+    var path = BezierPath(startPoint: CurveVertex(
+      point: q1,
+      inTangentRelative: CGPoint(x: -cp.width, y: 0),
+      outTangentRelative: CGPoint(x: cp.width, y: 0)))
+    path.addVertex(CurveVertex(
+      point: q2,
+      inTangentRelative: CGPoint(x: 0, y: -cp.height),
+      outTangentRelative: CGPoint(x: 0, y: cp.height)))
+
+    path.addVertex(CurveVertex(
+      point: q3,
+      inTangentRelative: CGPoint(x: cp.width, y: 0),
+      outTangentRelative: CGPoint(x: -cp.width, y: 0)))
+
+    path.addVertex(CurveVertex(
+      point: q4,
+      inTangentRelative: CGPoint(x: 0, y: cp.height),
+      outTangentRelative: CGPoint(x: 0, y: -cp.height)))
+
+    path.addVertex(CurveVertex(
+      point: q1,
+      inTangentRelative: CGPoint(x: -cp.width, y: 0),
+      outTangentRelative: CGPoint(x: cp.width, y: 0)))
     path.close()
     pathOutput.setPath(path, updateFrame: frame)
   }
 
-  static let ControlPointConstant: CGFloat = 0.55228
-  
 }

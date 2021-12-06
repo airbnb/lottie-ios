@@ -5,11 +5,11 @@
 //  Created by Brandon Withrow on 1/14/19.
 //
 
-import Foundation
 import CoreGraphics
+import Foundation
 
 extension Keyframe {
-  
+
   /// Interpolates the keyTime into a value from 0-1
   func interpolatedProgress(_ to: Keyframe, keyTime: CGFloat) -> CGFloat {
     let startTime = time
@@ -20,11 +20,11 @@ extension Keyframe {
     if endTime <= keyTime {
       return 1
     }
-    
+
     if isHold {
       return 0
     }
-    
+
     let outTanPoint = outTangent?.pointValue ?? .zero
     let inTanPoint = to.inTangent?.pointValue ?? CGPoint(x: 1, y: 1)
     var progress: CGFloat = keyTime.remap(fromLow: startTime, fromHigh: endTime, toLow: 0, toHigh: 1)
@@ -34,10 +34,14 @@ extension Keyframe {
     }
     return progress
   }
-  
+
   /// Interpolates the keyframes' by a progress from 0-1
   func interpolate(_ to: Keyframe, progress: CGFloat) -> T {
-    return value.interpolateTo(to.value, amount: progress, spatialOutTangent: spatialOutTangent?.pointValue, spatialInTangent: to.spatialInTangent?.pointValue)
+    value.interpolateTo(
+      to.value,
+      amount: progress,
+      spatialOutTangent: spatialOutTangent?.pointValue,
+      spatialInTangent: to.spatialInTangent?.pointValue)
   }
-  
+
 }

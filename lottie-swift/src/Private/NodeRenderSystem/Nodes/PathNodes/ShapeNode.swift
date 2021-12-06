@@ -5,57 +5,70 @@
 //  Created by Brandon Withrow on 1/16/19.
 //
 
-import Foundation
 import CoreGraphics
+import Foundation
+
+// MARK: - ShapeNodeProperties
 
 final class ShapeNodeProperties: NodePropertyMap, KeypathSearchable {
-  
-  var keypathName: String
-  
+
+  // MARK: Lifecycle
+
   init(shape: Shape) {
-    self.keypathName = shape.name
-    self.path = NodeProperty(provider: KeyframeInterpolator(keyframes: shape.path.keyframes))
-    self.keypathProperties = [
-      "Path" : path
+    keypathName = shape.name
+    path = NodeProperty(provider: KeyframeInterpolator(keyframes: shape.path.keyframes))
+    keypathProperties = [
+      "Path" : path,
     ]
-    self.properties = Array(keypathProperties.values)
+    properties = Array(keypathProperties.values)
   }
-  
+
+  // MARK: Internal
+
+  var keypathName: String
+
   let path: NodeProperty<BezierPath>
-  let keypathProperties: [String : AnyNodeProperty]
+  let keypathProperties: [String: AnyNodeProperty]
   let properties: [AnyNodeProperty]
-  
+
 }
 
-final class ShapeNode: AnimatorNode, PathNode {
-  
-  let properties: ShapeNodeProperties
+// MARK: - ShapeNode
 
-  let pathOutput: PathOutputNode
-  
+final class ShapeNode: AnimatorNode, PathNode {
+
+  // MARK: Lifecycle
+
   init(parentNode: AnimatorNode?, shape: Shape) {
-    self.pathOutput = PathOutputNode(parent: parentNode?.outputNode)
-    self.properties = ShapeNodeProperties(shape: shape)
+    pathOutput = PathOutputNode(parent: parentNode?.outputNode)
+    properties = ShapeNodeProperties(shape: shape)
     self.parentNode = parentNode
   }
 
-  // MARK: Animator Node
-  var propertyMap: NodePropertyMap & KeypathSearchable {
-    return properties
-  }
-  
+  // MARK: Internal
+
+  let properties: ShapeNodeProperties
+
+  let pathOutput: PathOutputNode
+
   let parentNode: AnimatorNode?
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+
+  // MARK: Animator Node
+  var propertyMap: NodePropertyMap & KeypathSearchable {
+    properties
+  }
+
   var isEnabled: Bool = true {
     didSet{
-      self.pathOutput.isEnabled = self.isEnabled
+      pathOutput.isEnabled = isEnabled
     }
   }
-  
+
   func rebuildOutputs(frame: CGFloat) {
     pathOutput.setPath(properties.path.value, updateFrame: frame)
   }
-  
+
 }

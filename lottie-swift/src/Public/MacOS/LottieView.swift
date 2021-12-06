@@ -28,67 +28,73 @@ public enum LottieContentMode: Int {
 /// A wrapper around NSView for cross platform compatibility.
 
 public class LottieView: NSView {
-  
-  var screenScale: CGFloat {
-    return NSApp.mainWindow?.backingScaleFactor ?? 1
-  }
-  
-  var viewLayer: CALayer? {
-    return layer
-  }
-  
-  func layoutAnimation() {
-    
-  }
-  
-  func animationMovedToWindow() {
-    
-  }
-  
-  public override func viewDidMoveToWindow() {
-    super.viewDidMoveToWindow()
-    animationMovedToWindow()
-  }
-  
-  func commonInit() {
-    self.wantsLayer = true
-  }
-  
-  func setNeedsLayout() {
-    self.needsLayout = true
-  }
-  
-  func layoutIfNeeded() {
-    
-  }
-  
+
+  // MARK: Public
+
   public override var wantsUpdateLayer: Bool {
-    return true
+    true
   }
-  
+
   public override var isFlipped: Bool {
-    return true
+    true
   }
-  
+
   public var contentMode: LottieContentMode = .scaleAspectFit {
     didSet {
       setNeedsLayout()
     }
   }
-  
+
+  public override func viewDidMoveToWindow() {
+    super.viewDidMoveToWindow()
+    animationMovedToWindow()
+  }
+
   public override func layout() {
     super.layout()
     CATransaction.begin()
     CATransaction.setDisableActions(true)
-    self.layoutAnimation()
+    layoutAnimation()
     CATransaction.commit()
   }
-  
-  @objc func animationWillMoveToBackground() {
+
+  // MARK: Internal
+
+  var screenScale: CGFloat {
+    NSApp.mainWindow?.backingScaleFactor ?? 1
   }
-  
-  @objc func animationWillEnterForeground() {
+
+  var viewLayer: CALayer? {
+    layer
   }
-  
+
+  func layoutAnimation() {
+
+  }
+
+  func animationMovedToWindow() {
+
+  }
+
+  func commonInit() {
+    wantsLayer = true
+  }
+
+  func setNeedsLayout() {
+    needsLayout = true
+  }
+
+  func layoutIfNeeded() {
+
+  }
+
+  @objc
+  func animationWillMoveToBackground() {
+  }
+
+  @objc
+  func animationWillEnterForeground() {
+  }
+
 }
 #endif
