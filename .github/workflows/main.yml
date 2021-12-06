@@ -1,0 +1,15 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  lint-swift:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint Swift
+        run: brew install mint && bundle install && bundle exec rake lint:swift

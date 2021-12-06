@@ -5,28 +5,28 @@
 //  Created by Brandon Withrow on 1/23/19.
 //
 
-import Foundation
 import CoreGraphics
+import Foundation
 
-// MARK: - Properties
+// MARK: - GradientStrokeProperties
 
 final class GradientStrokeProperties: NodePropertyMap, KeypathSearchable {
-  
-  var keypathName: String
-  
+
+  // MARK: Lifecycle
+
   init(gradientStroke: GradientStroke) {
-    self.keypathName = gradientStroke.name
-    self.opacity = NodeProperty(provider: KeyframeInterpolator(keyframes: gradientStroke.opacity.keyframes))
-    self.startPoint = NodeProperty(provider: KeyframeInterpolator(keyframes: gradientStroke.startPoint.keyframes))
-    self.endPoint = NodeProperty(provider: KeyframeInterpolator(keyframes: gradientStroke.endPoint.keyframes))
-    self.colors = NodeProperty(provider: KeyframeInterpolator(keyframes: gradientStroke.colors.keyframes))
-    self.gradientType = gradientStroke.gradientType
-    self.numberOfColors = gradientStroke.numberOfColors
-    self.width = NodeProperty(provider: KeyframeInterpolator(keyframes: gradientStroke.width.keyframes))
-    self.miterLimit = CGFloat(gradientStroke.miterLimit)
-    self.lineCap = gradientStroke.lineCap
-    self.lineJoin = gradientStroke.lineJoin
-    
+    keypathName = gradientStroke.name
+    opacity = NodeProperty(provider: KeyframeInterpolator(keyframes: gradientStroke.opacity.keyframes))
+    startPoint = NodeProperty(provider: KeyframeInterpolator(keyframes: gradientStroke.startPoint.keyframes))
+    endPoint = NodeProperty(provider: KeyframeInterpolator(keyframes: gradientStroke.endPoint.keyframes))
+    colors = NodeProperty(provider: KeyframeInterpolator(keyframes: gradientStroke.colors.keyframes))
+    gradientType = gradientStroke.gradientType
+    numberOfColors = gradientStroke.numberOfColors
+    width = NodeProperty(provider: KeyframeInterpolator(keyframes: gradientStroke.width.keyframes))
+    miterLimit = CGFloat(gradientStroke.miterLimit)
+    lineCap = gradientStroke.lineCap
+    lineJoin = gradientStroke.lineJoin
+
     if let dashes = gradientStroke.dashPattern {
       var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>()
       var dashPhase = ContiguousArray<Keyframe<Vector1D>>()
@@ -37,84 +37,92 @@ final class GradientStrokeProperties: NodePropertyMap, KeypathSearchable {
           dashPatterns.append(dash.value.keyframes)
         }
       }
-      self.dashPattern = NodeProperty(provider: GroupInterpolator(keyframeGroups: dashPatterns))
+      dashPattern = NodeProperty(provider: GroupInterpolator(keyframeGroups: dashPatterns))
       self.dashPhase = NodeProperty(provider: KeyframeInterpolator(keyframes: dashPhase))
     } else {
-      self.dashPattern = NodeProperty(provider: SingleValueProvider([Vector1D]()))
-      self.dashPhase = NodeProperty(provider: SingleValueProvider(Vector1D(0)))
+      dashPattern = NodeProperty(provider: SingleValueProvider([Vector1D]()))
+      dashPhase = NodeProperty(provider: SingleValueProvider(Vector1D(0)))
     }
-    self.keypathProperties = [
+    keypathProperties = [
       "Opacity" : opacity,
       "Start Point" : startPoint,
       "End Point" : endPoint,
       "Colors" : colors,
       "Stroke Width" : width,
       "Dashes" : dashPattern,
-      "Dash Phase" : dashPhase
+      "Dash Phase" : dashPhase,
     ]
-    self.properties = Array(keypathProperties.values)
+    properties = Array(keypathProperties.values)
   }
-  
+
+  // MARK: Internal
+
+  var keypathName: String
+
   let opacity: NodeProperty<Vector1D>
   let startPoint: NodeProperty<Vector3D>
   let endPoint: NodeProperty<Vector3D>
   let colors: NodeProperty<[Double]>
   let width: NodeProperty<Vector1D>
-  
+
   let dashPattern: NodeProperty<[Vector1D]>
   let dashPhase: NodeProperty<Vector1D>
-  
+
   let lineCap: LineCap
   let lineJoin: LineJoin
   let miterLimit: CGFloat
   let gradientType: GradientType
   let numberOfColors: Int
-  
-  
-  let keypathProperties: [String : AnyNodeProperty]
+
+  let keypathProperties: [String: AnyNodeProperty]
   let properties: [AnyNodeProperty]
-  
+
 }
 
-// MARK: - Node
+// MARK: - GradientStrokeNode
 
 final class GradientStrokeNode: AnimatorNode, RenderNode {
-  
-  let strokeRender: GradientStrokeRenderer
-  
-  var renderer: NodeOutput & Renderable {
-    return strokeRender
-  }
-  
-  let strokeProperties: GradientStrokeProperties
-  
+
+  // MARK: Lifecycle
+
   init(parentNode: AnimatorNode?, gradientStroke: GradientStroke) {
-    self.strokeRender = GradientStrokeRenderer(parent: parentNode?.outputNode)
-    self.strokeProperties = GradientStrokeProperties(gradientStroke: gradientStroke)
+    strokeRender = GradientStrokeRenderer(parent: parentNode?.outputNode)
+    strokeProperties = GradientStrokeProperties(gradientStroke: gradientStroke)
     self.parentNode = parentNode
   }
-  
-  // MARK: Animator Node Protocol
-  
-  var propertyMap: NodePropertyMap & KeypathSearchable {
-    return strokeProperties
-  }
-  
+
+  // MARK: Internal
+
+  let strokeRender: GradientStrokeRenderer
+
+  let strokeProperties: GradientStrokeProperties
+
   let parentNode: AnimatorNode?
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+
+  var renderer: NodeOutput & Renderable {
+    strokeRender
+  }
+
+  // MARK: Animator Node Protocol
+
+  var propertyMap: NodePropertyMap & KeypathSearchable {
+    strokeProperties
+  }
+
   var isEnabled: Bool = true {
     didSet {
       strokeRender.isEnabled = isEnabled
     }
   }
-  
+
   func localUpdatesPermeateDownstream() -> Bool {
-    return false
+    false
   }
-  
-  func rebuildOutputs(frame: CGFloat) {
+
+  func rebuildOutputs(frame _: CGFloat) {
     /// Update gradient properties
     strokeRender.gradientRender.start = strokeProperties.startPoint.value.pointValue
     strokeRender.gradientRender.end = strokeProperties.endPoint.value.pointValue
@@ -122,14 +130,14 @@ final class GradientStrokeNode: AnimatorNode, RenderNode {
     strokeRender.gradientRender.colors = strokeProperties.colors.value.map { CGFloat($0) }
     strokeRender.gradientRender.type = strokeProperties.gradientType
     strokeRender.gradientRender.numberOfColors = strokeProperties.numberOfColors
-    
+
     /// Now update stroke properties
     strokeRender.strokeRender.opacity = strokeProperties.opacity.value.cgFloatValue
     strokeRender.strokeRender.width = strokeProperties.width.value.cgFloatValue
     strokeRender.strokeRender.miterLimit = strokeProperties.miterLimit
     strokeRender.strokeRender.lineCap = strokeProperties.lineCap
     strokeRender.strokeRender.lineJoin = strokeProperties.lineJoin
-    
+
     /// Get dash lengths
     let dashLengths = strokeProperties.dashPattern.value.map { $0.cgFloatValue }
     if dashLengths.count > 0 {

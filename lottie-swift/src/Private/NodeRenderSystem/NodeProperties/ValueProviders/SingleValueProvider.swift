@@ -10,29 +10,35 @@ import QuartzCore
 
 /// Returns a value for every frame.
 final class SingleValueProvider<ValueType>: AnyValueProvider {
-  
+
+  // MARK: Lifecycle
+
+  init(_ value: ValueType) {
+    self.value = value
+  }
+
+  // MARK: Internal
+
   var value: ValueType {
     didSet {
       hasUpdate = true
     }
   }
-  
-  init(_ value: ValueType) {
-    self.value = value
-  }
-  
+
   var valueType: Any.Type {
-    return ValueType.self
+    ValueType.self
   }
-  
-  func hasUpdate(frame: CGFloat) -> Bool {
-    return hasUpdate
+
+  func hasUpdate(frame _: CGFloat) -> Bool {
+    hasUpdate
   }
-  
-  func value(frame: CGFloat) -> Any {
+
+  func value(frame _: CGFloat) -> Any {
     hasUpdate = false
     return value
   }
-  
+
+  // MARK: Private
+
   private var hasUpdate: Bool = true
 }

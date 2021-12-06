@@ -8,20 +8,24 @@
 import Foundation
 
 final class PrecompAsset: Asset {
-  
-  /// Layers of the precomp
-  let layers: [LayerModel]
-  
-  enum CodingKeys : String, CodingKey {
-    case layers = "layers"
-  }
-  
+
+  // MARK: Lifecycle
+
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: PrecompAsset.CodingKeys.self)
-    self.layers = try container.decode([LayerModel].self, ofFamily: LayerType.self, forKey: .layers)
+    layers = try container.decode([LayerModel].self, ofFamily: LayerType.self, forKey: .layers)
     try super.init(from: decoder)
   }
-  
+
+  // MARK: Internal
+
+  enum CodingKeys: String, CodingKey {
+    case layers
+  }
+
+  /// Layers of the precomp
+  let layers: [LayerModel]
+
   override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)

@@ -5,102 +5,119 @@
 //  Created by Brandon Withrow on 1/21/19.
 //
 
-import Foundation
 import CoreGraphics
+import Foundation
+
+// MARK: - RectNodeProperties
 
 final class RectNodeProperties: NodePropertyMap, KeypathSearchable {
-  
-  var keypathName: String
+
+  // MARK: Lifecycle
 
   init(rectangle: Rectangle) {
-    self.keypathName = rectangle.name
-    self.direction = rectangle.direction
-    self.position = NodeProperty(provider: KeyframeInterpolator(keyframes: rectangle.position.keyframes))
-    self.size = NodeProperty(provider: KeyframeInterpolator(keyframes: rectangle.size.keyframes))
-    self.cornerRadius = NodeProperty(provider: KeyframeInterpolator(keyframes: rectangle.cornerRadius.keyframes))
- 
-    self.keypathProperties =  [
+    keypathName = rectangle.name
+    direction = rectangle.direction
+    position = NodeProperty(provider: KeyframeInterpolator(keyframes: rectangle.position.keyframes))
+    size = NodeProperty(provider: KeyframeInterpolator(keyframes: rectangle.size.keyframes))
+    cornerRadius = NodeProperty(provider: KeyframeInterpolator(keyframes: rectangle.cornerRadius.keyframes))
+
+    keypathProperties = [
       "Position" : position,
       "Size" : size,
-      "Roundness" : cornerRadius
+      "Roundness" : cornerRadius,
     ]
-    
-    self.properties = Array(keypathProperties.values)
+
+    properties = Array(keypathProperties.values)
   }
-  
-  let keypathProperties: [String : AnyNodeProperty]
+
+  // MARK: Internal
+
+  var keypathName: String
+
+  let keypathProperties: [String: AnyNodeProperty]
   let properties: [AnyNodeProperty]
-  
+
   let direction: PathDirection
   let position: NodeProperty<Vector3D>
   let size: NodeProperty<Vector3D>
   let cornerRadius: NodeProperty<Vector1D>
-  
+
 }
 
+// MARK: - RectangleNode
+
 final class RectangleNode: AnimatorNode, PathNode {
-  
-  let properties: RectNodeProperties
-  
-  let pathOutput: PathOutputNode
-  
+
+  // MARK: Lifecycle
+
   init(parentNode: AnimatorNode?, rectangle: Rectangle) {
-    self.properties = RectNodeProperties(rectangle: rectangle)
-    self.pathOutput = PathOutputNode(parent: parentNode?.outputNode)
+    properties = RectNodeProperties(rectangle: rectangle)
+    pathOutput = PathOutputNode(parent: parentNode?.outputNode)
     self.parentNode = parentNode
   }
 
-  // MARK: Animator Node
-  
-  var propertyMap: NodePropertyMap & KeypathSearchable {
-    return properties
-  }
+  // MARK: Internal
 
+  let properties: RectNodeProperties
+
+  let pathOutput: PathOutputNode
   let parentNode: AnimatorNode?
   var hasLocalUpdates: Bool = false
   var hasUpstreamUpdates: Bool = false
   var lastUpdateFrame: CGFloat? = nil
+
+  // MARK: Animator Node
+
+  var propertyMap: NodePropertyMap & KeypathSearchable {
+    properties
+  }
+
   var isEnabled: Bool = true {
     didSet{
-      self.pathOutput.isEnabled = self.isEnabled
+      pathOutput.isEnabled = isEnabled
     }
   }
-  
+
   func rebuildOutputs(frame: CGFloat) {
-    
+
     let size = properties.size.value.sizeValue * 0.5
     let radius = min(min(properties.cornerRadius.value.cgFloatValue, size.width) , size.height)
     let position = properties.position.value.pointValue
     var bezierPath = BezierPath()
     let points: [CurveVertex]
-    
+
     if radius <= 0 {
       /// No Corners
       points = [
         /// Lead In
-        CurveVertex(point: CGPoint(x: size.width, y: -size.height),
-                    inTangentRelative: .zero,
-                    outTangentRelative: .zero)
+        CurveVertex(
+          point: CGPoint(x: size.width, y: -size.height),
+          inTangentRelative: .zero,
+          outTangentRelative: .zero)
           .translated(position),
         /// Corner 1
-        CurveVertex(point: CGPoint(x: size.width, y: size.height),
-                    inTangentRelative: .zero,
-                    outTangentRelative: .zero)
+        CurveVertex(
+          point: CGPoint(x: size.width, y: size.height),
+          inTangentRelative: .zero,
+          outTangentRelative: .zero)
           .translated(position),
         /// Corner 2
-        CurveVertex(point: CGPoint(x: -size.width, y: size.height),
-                    inTangentRelative: .zero,
-                    outTangentRelative: .zero)
+        CurveVertex(
+          point: CGPoint(x: -size.width, y: size.height),
+          inTangentRelative: .zero,
+          outTangentRelative: .zero)
           .translated(position),
         /// Corner 3
-        CurveVertex(point: CGPoint(x: -size.width, y: -size.height),
-                    inTangentRelative: .zero,
-                    outTangentRelative: .zero)
+        CurveVertex(
+          point: CGPoint(x: -size.width, y: -size.height),
+          inTangentRelative: .zero,
+          outTangentRelative: .zero)
           .translated(position),
         /// Corner 4
-        CurveVertex(point: CGPoint(x: size.width, y: -size.height),
-                    inTangentRelative: .zero,
-                    outTangentRelative: .zero)
+        CurveVertex(
+          point: CGPoint(x: size.width, y: -size.height),
+          inTangentRelative: .zero,
+          outTangentRelative: .zero)
           .translated(position),
       ]
     } else {
@@ -184,5 +201,5 @@ final class RectangleNode: AnimatorNode, PathNode {
     bezierPath.close()
     pathOutput.setPath(bezierPath, updateFrame: frame)
   }
-  
+
 }

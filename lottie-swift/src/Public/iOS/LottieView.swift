@@ -13,33 +13,7 @@ import UIKit
 
 open class LottieView: UIView {
 
-  var viewLayer: CALayer? {
-    return layer
-  }
-
-  func layoutAnimation() {
-
-  }
-  
-  func animationMovedToWindow() {
-    
-  }
-  
-  open override func didMoveToWindow() {
-    super.didMoveToWindow()
-    animationMovedToWindow()
-  }
-  
-  var screenScale: CGFloat {
-    return UIScreen.main.scale
-  }
-
-  func commonInit() {
-    contentMode = .scaleAspectFit
-    clipsToBounds = true
-    NotificationCenter.default.addObserver(self, selector: #selector(animationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(animationWillMoveToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
-  }
+  // MARK: Open
 
   open override var contentMode: UIView.ContentMode {
     didSet {
@@ -47,16 +21,56 @@ open class LottieView: UIView {
     }
   }
 
+  open override func didMoveToWindow() {
+    super.didMoveToWindow()
+    animationMovedToWindow()
+  }
+
   open override func layoutSubviews() {
     super.layoutSubviews()
-    self.layoutAnimation()
+    layoutAnimation()
   }
-  
-  @objc func animationWillMoveToBackground() {
+
+  // MARK: Internal
+
+  var viewLayer: CALayer? {
+    layer
   }
-  
-  @objc func animationWillEnterForeground() {
+
+  var screenScale: CGFloat {
+    UIScreen.main.scale
   }
-  
+
+  func layoutAnimation() {
+
+  }
+
+  func animationMovedToWindow() {
+
+  }
+
+  func commonInit() {
+    contentMode = .scaleAspectFit
+    clipsToBounds = true
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(animationWillEnterForeground),
+      name: UIApplication.willEnterForegroundNotification,
+      object: nil)
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(animationWillMoveToBackground),
+      name: UIApplication.didEnterBackgroundNotification,
+      object: nil)
+  }
+
+  @objc
+  func animationWillMoveToBackground() {
+  }
+
+  @objc
+  func animationWillEnterForeground() {
+  }
+
 }
 #endif

@@ -7,31 +7,34 @@
 
 import Foundation
 
+// MARK: - Vector1D
+
 public struct Vector1D {
-  
+
   public init(_ value: Double) {
     self.value = value
   }
-  
+
   public let value: Double
-  
+
 }
 
+// MARK: - Vector3D
 
 /**
  A three dimensional vector.
  These vectors are encoded and decoded from [Double]
  */
 public struct Vector3D {
-  
+
   public let x: Double
   public let y: Double
   public let z: Double
-  
+
   public init(x: Double, y: Double, z: Double) {
     self.x = x
     self.y = y
     self.z = z
   }
-  
+
 }

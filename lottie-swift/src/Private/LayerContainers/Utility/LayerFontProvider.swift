@@ -10,28 +10,32 @@ import Foundation
 
 /// Connects a LottieFontProvider to a group of text layers
 final class LayerFontProvider {
-    
-    var fontProvider: AnimationFontProvider {
-        didSet {
-            reloadTexts()
-        }
-    }
-    
-    fileprivate(set) var textLayers: [TextCompositionLayer]
-    
-    init(fontProvider: AnimationFontProvider) {
-        self.fontProvider = fontProvider
-        self.textLayers = []
-        reloadTexts()
-    }
 
-    func addTextLayers(_ layers: [TextCompositionLayer]) {
-        textLayers += layers
+  // MARK: Lifecycle
+
+  init(fontProvider: AnimationFontProvider) {
+    self.fontProvider = fontProvider
+    textLayers = []
+    reloadTexts()
+  }
+
+  // MARK: Internal
+
+  fileprivate(set) var textLayers: [TextCompositionLayer]
+
+  var fontProvider: AnimationFontProvider {
+    didSet {
+      reloadTexts()
     }
-        
-    func reloadTexts() {
-        textLayers.forEach {
-            $0.fontProvider = fontProvider
-        }
+  }
+
+  func addTextLayers(_ layers: [TextCompositionLayer]) {
+    textLayers += layers
+  }
+
+  func reloadTexts() {
+    textLayers.forEach {
+      $0.fontProvider = fontProvider
     }
+  }
 }

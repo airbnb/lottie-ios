@@ -7,11 +7,13 @@
 
 import Foundation
 
+// MARK: - ColorFormatDenominator
+
 public enum ColorFormatDenominator {
   case One
   case OneHundred
   case TwoFiftyFive
-  
+
   var value: Double {
     switch self {
     case .One:
@@ -24,18 +26,20 @@ public enum ColorFormatDenominator {
   }
 }
 
+// MARK: - Color
+
 public struct Color {
-  
+
   public var r: Double
   public var g: Double
   public var b: Double
   public var a: Double
-  
+
   public init(r: Double, g: Double, b: Double, a: Double, denominator: ColorFormatDenominator = .One) {
     self.r = r / denominator.value
     self.g = g / denominator.value
     self.b = b / denominator.value
     self.a = a / denominator.value
   }
-  
+
 }

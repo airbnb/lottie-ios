@@ -12,6 +12,8 @@ import Foundation
 @objc
 public final class CompatibleAnimationKeypath: NSObject {
 
+  // MARK: Lifecycle
+
   /// Creates a keypath from a dot separated string. The string is separated by "."
   @objc
   public init(keypath: String) {
@@ -23,6 +25,8 @@ public final class CompatibleAnimationKeypath: NSObject {
   public init(keys: [String]) {
     animationKeypath = AnimationKeypath(keys: keys)
   }
+
+  // MARK: Public
 
   public let animationKeypath: AnimationKeypath
 }

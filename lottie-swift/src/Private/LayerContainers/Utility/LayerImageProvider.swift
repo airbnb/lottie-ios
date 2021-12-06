@@ -9,27 +9,31 @@ import Foundation
 
 /// Connects a LottieImageProvider to a group of image layers
 final class LayerImageProvider {
-  
+
+  // MARK: Lifecycle
+
+  init(imageProvider: AnimationImageProvider, assets: [String: ImageAsset]?) {
+    self.imageProvider = imageProvider
+    imageLayers = [ImageCompositionLayer]()
+    if let assets = assets {
+      imageAssets = assets
+    } else {
+      imageAssets = [:]
+    }
+    reloadImages()
+  }
+
+  // MARK: Internal
+
+  fileprivate(set) var imageLayers: [ImageCompositionLayer]
+  let imageAssets: [String: ImageAsset]
+
   var imageProvider: AnimationImageProvider {
     didSet {
       reloadImages()
     }
   }
-  
-  fileprivate(set) var imageLayers: [ImageCompositionLayer]
-  let imageAssets: [String : ImageAsset]
-  
-  init(imageProvider: AnimationImageProvider, assets: [String : ImageAsset]?) {
-    self.imageProvider = imageProvider
-    self.imageLayers = [ImageCompositionLayer]()
-    if let assets = assets {
-      self.imageAssets = assets
-    } else {
-      self.imageAssets = [:]
-    }
-    reloadImages()
-  }
-  
+
   func addImageLayers(_ layers: [ImageCompositionLayer]) {
     for layer in layers {
       if imageAssets[layer.imageReferenceID] != nil {
@@ -38,7 +42,7 @@ final class LayerImageProvider {
       }
     }
   }
-  
+
   func reloadImages() {
     for imageLayer in imageLayers {
       if let asset = imageAssets[imageLayer.imageReferenceID] {

@@ -13,41 +13,44 @@ import AppKit
  Provides an image for a lottie animation from a provided Bundle.
  */
 public class BundleImageProvider: AnimationImageProvider {
-  
-  let bundle: Bundle
-  let searchPath: String?
-  
+
+  // MARK: Lifecycle
+
   /**
    Initializes an image provider with a bundle and an optional subpath.
-   
+
    Provides images for an animation from a bundle. Additionally the provider can
    search a specific subpath for the images.
-   
+
    - Parameter bundle: The bundle containing images for the provider.
    - Parameter searchPath: The subpath is a path within the bundle to search for image assets.
-   
+
    */
   public init(bundle: Bundle, searchPath: String?) {
     self.bundle = bundle
     self.searchPath = searchPath
   }
-  
+
+  // MARK: Public
+
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
-    
-    if asset.name.hasPrefix("data:"),
+
+    if
+      asset.name.hasPrefix("data:"),
       let url = URL(string: asset.name),
       let data = try? Data(contentsOf: url),
-      let image = NSImage(data: data) {
+      let image = NSImage(data: data)
+    {
       return image.CGImage
     }
-    
+
     let imagePath: String?
     /// Try to find the image in the bundle.
     if let searchPath = searchPath {
       /// Search in the provided search path for the image
       var directoryPath = URL(fileURLWithPath: searchPath)
       directoryPath.appendPathComponent(asset.directory)
-      
+
       if let path = bundle.path(forResource: asset.name, ofType: nil, inDirectory: directoryPath.path) {
         /// First search for the image in the asset provided sub directory.
         imagePath = path
@@ -66,15 +69,18 @@ public class BundleImageProvider: AnimationImageProvider {
         imagePath = bundle.path(forResource: asset.name, ofType: nil)
       }
     }
-    
-    
+
     guard let foundPath = imagePath, let image = NSImage(contentsOfFile: foundPath) else {
       /// No image found.
       return nil
     }
     return image.CGImage
   }
-  
+
+  // MARK: Internal
+
+  let bundle: Bundle
+  let searchPath: String?
 }
 
 #endif

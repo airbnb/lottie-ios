@@ -7,11 +7,13 @@
 
 import Foundation
 
+// MARK: - ShapeType + ClassFamily
+
 /// Used for mapping a heterogeneous list to classes for parsing.
 extension ShapeType: ClassFamily {
 
   static var discriminator: Discriminator = .type
-  
+
   func getType() -> AnyObject.Type {
     switch self {
     case .ellipse:
@@ -46,6 +48,8 @@ extension ShapeType: ClassFamily {
   }
 }
 
+// MARK: - ShapeType
+
 enum ShapeType: String, Codable {
   case ellipse = "el"
   case fill = "fl"
@@ -62,34 +66,41 @@ enum ShapeType: String, Codable {
   case trim = "tm"
   case transform = "tr"
   case unknown
-  
+
   public init(from decoder: Decoder) throws {
     self = try ShapeType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
   }
 }
 
+// MARK: - ShapeItem
+
 /// An item belonging to a Shape Layer
 class ShapeItem: Codable {
-  
+
+  // MARK: Lifecycle
+
+  required init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: ShapeItem.CodingKeys.self)
+    name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Layer"
+    type = try container.decode(ShapeType.self, forKey: .type)
+    hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden) ?? false
+  }
+
+  // MARK: Internal
+
   /// The name of the shape
   let name: String
-  
+
   /// The type of shape
   let type: ShapeType
-  
+
   let hidden: Bool
-  
-  private enum CodingKeys : String, CodingKey {
+
+  // MARK: Private
+
+  private enum CodingKeys: String, CodingKey {
     case name = "nm"
     case type = "ty"
     case hidden = "hd"
   }
-  
-  required init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: ShapeItem.CodingKeys.self)
-    self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Layer"
-    self.type = try container.decode(ShapeType.self, forKey: .type)
-    self.hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden) ?? false
-  }
-
 }
