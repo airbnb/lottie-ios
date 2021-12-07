@@ -143,7 +143,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
   }
   
   func updateRenderScale() {
-    /// To be overridden by subclass
+    self.contentsScale = self.renderScale
   }
 }
 

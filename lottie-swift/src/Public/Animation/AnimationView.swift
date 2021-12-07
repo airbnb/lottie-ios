@@ -630,7 +630,7 @@ final public class AnimationView: LottieView {
     self.imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = DefaultTextProvider()
     self.fontProvider = DefaultFontProvider()
-    super.init(frame: .zero)
+    super.init(frame: frame)
     commonInit()
   }
   
