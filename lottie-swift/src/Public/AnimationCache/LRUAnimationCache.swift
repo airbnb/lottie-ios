@@ -17,7 +17,11 @@ public class LRUAnimationCache: AnimationCacheProvider {
 
     public static let sharedCache = LRUAnimationCache()
 
-    public var cacheSize: Int = 100
+    public var cacheSize: Int = 100 {
+      didSet {
+        cache.countLimit = cacheSize
+      }
+    }
 
     private var cache = NSCache<NSString, Animation>()
 
