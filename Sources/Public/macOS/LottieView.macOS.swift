@@ -5,8 +5,7 @@
 //  Created by Brandon Withrow on 2/6/19.
 //
 
-import Foundation
-#if os(OSX)
+#if os(macOS)
 import AppKit
 
 public enum LottieContentMode: Int {

@@ -5,8 +5,7 @@
 //  Created by Brandon Withrow on 2/1/19.
 //
 
-import Foundation
-#if os(OSX)
+#if os(macOS)
 import AppKit
 
 /**

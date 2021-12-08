@@ -8,5 +8,5 @@ let package = Package(
     .library(name: "Lottie", targets: ["Lottie"]),
   ],
   targets: [
-    .target(name: "Lottie", path: "Sources", exclude: ["Public/MacOS"]),
+    .target(name: "Lottie", path: "Sources"),
   ])
