@@ -1,12 +1,20 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.4
 import PackageDescription
 
 let package = Package(
   name: "Lottie",
-  platforms: [.iOS("9.0"), .macOS("10.10"), .tvOS("9.0")],
+  platforms: [.iOS("11.0"), .macOS("10.10"), .tvOS("11.0")],
   products: [
     .library(name: "Lottie", targets: ["Lottie"]),
   ],
+  dependencies: [
+    .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.9.0"),
+  ],
   targets: [
     .target(name: "Lottie", path: "Sources"),
+    .testTarget(
+      name: "LottieTests",
+      dependencies: ["Lottie", "SnapshotTesting"],
+      path: "Tests",
+      resources: [.process("Samples"), .process("__Snapshots__")]),
   ])
