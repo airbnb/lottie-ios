@@ -12,13 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Package
-        run: bundle install && bundle exec rake build:package:all
+        run: brew install mint && bundle install && bundle exec rake build:package:all
   build-example:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: Build Example
-        run: bundle install && bundle exec rake build:example:all
+        run: brew install mint && bundle install && bundle exec rake build:example:all
   lint-swift:
     runs-on: macos-latest
     steps:
