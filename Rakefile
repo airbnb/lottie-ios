@@ -8,18 +8,18 @@ namespace :build do
     task all: ['iOS', 'macOS', 'tvOS']
 
     desc 'Builds the Lottie package for iOS'
-    task :iOS => 'bootstrap:mint' do
-      sh 'xcodebuild build -scheme Lottie -destination generic/platform=iOS | mint run xcbeautify'
+    task :iOS do
+      sh 'xcodebuild build -scheme Lottie -destination generic/platform=iOS | mint run thii/xcbeautify@0.10.2'
     end
 
     desc 'Builds the Lottie package for macOS'
-    task :macOS => 'bootstrap:mint' do
-      sh 'xcodebuild build -scheme Lottie -destination generic/platform=macOS | mint run xcbeautify'
+    task :macOS do
+      sh 'xcodebuild build -scheme Lottie -destination generic/platform=macOS | mint run thii/xcbeautify@0.10.2'
     end
 
     desc 'Builds the Lottie package for tvOS'
-    task :tvOS => 'bootstrap:mint' do
-      sh 'xcodebuild build -scheme Lottie -destination generic/platform=tvOS | mint run xcbeautify'
+    task :tvOS do
+      sh 'xcodebuild build -scheme Lottie -destination generic/platform=tvOS | mint run thii/xcbeautify@0.10.2'
     end
   end
 
@@ -29,42 +29,34 @@ namespace :build do
     task all: ['iOS', 'macOS', 'tvOS']
 
     desc 'Builds the iOS Lottie Example app'
-    task :iOS => 'bootstrap:mint' do
-      sh 'xcodebuild build -scheme "Example (iOS)" -destination "platform=iOS Simulator,name=iPhone 8" | mint run xcbeautify'
+    task :iOS do
+      sh 'xcodebuild build -scheme "Example (iOS)" -destination "platform=iOS Simulator,name=iPhone 8" | mint run thii/xcbeautify@0.10.2'
     end
 
     desc 'Builds the macOS Lottie Example app'
-    task :macOS => 'bootstrap:mint' do
-      sh 'xcodebuild build -scheme "Example (macOS)" | mint run xcbeautify'
+    task :macOS do
+      sh 'xcodebuild build -scheme "Example (macOS)" | mint run thii/xcbeautify@0.10.2'
     end
 
     desc 'Builds the tvOS Lottie Example app'
-    task :tvOS => 'bootstrap:mint' do
-      sh 'xcodebuild build -scheme "Example (tvOS)" -destination "platform=tvOS Simulator,name=Apple TV" | mint run xcbeautify'
+    task :tvOS do
+      sh 'xcodebuild build -scheme "Example (tvOS)" -destination "platform=tvOS Simulator,name=Apple TV" | mint run thii/xcbeautify@0.10.2'
     end
   end
 end
 
 namespace :lint do
   desc 'Lints swift files'
-  task :swift => 'bootstrap:mint' do
-    sh 'mint run SwiftLint lint Sources Example Package.swift --config script/lint/swiftlint.yml --strict'
-    sh 'mint run SwiftFormat Sources Example Package.swift --config script/lint/airbnb.swiftformat --lint'
+  task :swift do
+    sh 'mint run realm/SwiftLint@0.42.0 lint Sources Example Package.swift --config script/lint/swiftlint.yml --strict'
+    sh 'mint run nicklockwood/SwiftFormat@0.48.16 Sources Example Package.swift --config script/lint/airbnb.swiftformat --lint'
   end
 end
 
 namespace :format do
   desc 'Runs SwiftFormat'
-  task :swift => 'bootstrap:mint' do
-    sh 'mint run SwiftLint autocorrect Sources Example Package.swift --config script/lint/swiftlint.yml'
-    sh 'mint run SwiftFormat Sources Example Package.swift --config script/lint/airbnb.swiftformat'
-  end
-end
-
-namespace :bootstrap do
-  task :mint do
-    `which mint`
-    throw 'You must have mint installed to lint or format swift' unless $?.success?
-    sh 'mint bootstrap'
+  task :swift do
+    sh 'mint run realm/SwiftLint@0.42.0 autocorrect Sources Example Package.swift --config script/lint/swiftlint.yml'
+    sh 'mint run nicklockwood/SwiftFormat@0.48.16 Sources Example Package.swift --config script/lint/airbnb.swiftformat'
   end
 end
