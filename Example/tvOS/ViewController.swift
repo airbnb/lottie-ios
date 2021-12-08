@@ -14,7 +14,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let animation = Animation.named("LottieLogo1", subdirectory: "TestAnimations")
+    let animation = Animation.named("LottieLogo1")
     let animationView = AnimationView(animation: animation)
     view.addSubview(animationView)
     animationView.contentMode = .scaleAspectFill
@@ -26,7 +26,6 @@ class ViewController: UIViewController {
     animationView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
     animationView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor).isActive = true
     animationView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
-    // Do any additional setup after loading the view, typically from a nib.
   }
 
 }

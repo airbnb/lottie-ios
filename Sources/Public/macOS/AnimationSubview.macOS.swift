@@ -5,8 +5,7 @@
 //  Created by Brandon Withrow on 2/5/19.
 //
 
-import Foundation
-#if os(OSX)
+#if os(macOS)
 import AppKit
 
 /// A view that can be added to a keypath of an AnimationView
