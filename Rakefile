@@ -1,11 +1,14 @@
 namespace :build do
-  desc 'Builds the Lottie package for iOS'
+  desc 'Builds all packages and executables'
+  task all: ['package:all', 'example:all']
+
+  desc 'Builds the Lottie package for supported platforms'
   namespace :package do
     desc 'Builds the Lottie package for all supported platforms'
-    task all: ['ios', 'macOS', 'tvOS']
+    task all: ['iOS', 'macOS', 'tvOS']
 
     desc 'Builds the Lottie package for iOS'
-    task :ios do
+    task :iOS do
       sh 'xcodebuild build -scheme Lottie -destination generic/platform=iOS'
     end
 
@@ -20,9 +23,25 @@ namespace :build do
     end
   end
 
-  desc 'Builds the iOS Lottie Example app'
-  task :example do
-    sh 'xcodebuild build -scheme "Example (iOS)" -destination "platform=iOS Simulator,name=iPhone 8"'
+  desc 'Builds the Lottie example app for supported platforms'
+  namespace :example do
+    desc 'Builds the Lottie example apps for all supported platforms'
+    task all: ['iOS', 'macOS', 'tvOS']
+
+    desc 'Builds the iOS Lottie Example app'
+    task :ios do
+      sh 'xcodebuild build -scheme "Example (iOS)" -destination "platform=iOS Simulator,name=iPhone 8"'
+    end
+
+    desc 'Builds the macOS Lottie Example app'
+    task :macOS do
+      sh 'xcodebuild build -scheme "Example (macOS)"'
+    end
+
+    desc 'Builds the tvOS Lottie Example app'
+    task :tvOS do
+      sh 'xcodebuild build -scheme "Example (tvOS)" -destination "platform=tvOS Simulator,name=Apple TV"'
+    end
   end
 end
 
