@@ -7,6 +7,18 @@ on:
     branches: [ master ]
 
 jobs:
+  build-package:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Package
+        run: bundle install && bundle exec rake build:package
+  build-example:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Example
+        run: bundle install && bundle exec rake build:example
   lint-swift:
     runs-on: macos-latest
     steps:
