@@ -29,7 +29,7 @@ namespace :build do
     task all: ['iOS', 'macOS', 'tvOS']
 
     desc 'Builds the iOS Lottie Example app'
-    task :ios do
+    task :iOS do
       sh 'xcodebuild build -scheme "Example (iOS)" -destination "platform=iOS Simulator,name=iPhone 8"'
     end
 
