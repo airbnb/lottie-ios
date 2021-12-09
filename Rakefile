@@ -9,17 +9,17 @@ namespace :build do
 
     desc 'Builds the Lottie package for iOS'
     task :iOS do
-      sh 'xcodebuild build -scheme Lottie -destination generic/platform=iOS | mint run xcbeautify'
+      xcodebuild('build -scheme Lottie -destination generic/platform=iOS')
     end
 
     desc 'Builds the Lottie package for macOS'
     task :macOS do
-      sh 'xcodebuild build -scheme Lottie -destination generic/platform=macOS | mint run xcbeautify'
+      xcodebuild('build -scheme Lottie -destination generic/platform=macOS')
     end
 
     desc 'Builds the Lottie package for tvOS'
     task :tvOS do
-      sh 'xcodebuild build -scheme Lottie -destination generic/platform=tvOS | mint run xcbeautify'
+      xcodebuild('build -scheme Lottie -destination generic/platform=tvOS')
     end
   end
 
@@ -30,17 +30,17 @@ namespace :build do
 
     desc 'Builds the iOS Lottie Example app'
     task :iOS do
-      sh 'xcodebuild build -scheme "Example (iOS)" -destination "platform=iOS Simulator,name=iPhone 8" | mint run xcbeautify'
+      xcodebuild('build -scheme "Example (iOS)" -destination "platform=iOS Simulator,name=iPhone 8"')
     end
 
     desc 'Builds the macOS Lottie Example app'
     task :macOS do
-      sh 'xcodebuild build -scheme "Example (macOS)" | mint run xcbeautify'
+      xcodebuild('build -scheme "Example (macOS)"')
     end
 
     desc 'Builds the tvOS Lottie Example app'
     task :tvOS do
-      sh 'xcodebuild build -scheme "Example (tvOS)" -destination "platform=tvOS Simulator,name=Apple TV" | mint run xcbeautify'
+      xcodebuild('build -scheme "Example (tvOS)" -destination "platform=tvOS Simulator,name=Apple TV"')
     end
   end
 end
@@ -48,7 +48,7 @@ end
 namespace :test do
   desc 'Tests the Lottie package for iOS'
   task :package do
-    sh 'xcodebuild test -scheme Lottie -destination "platform=iOS Simulator,name=iPhone 8" | mint run xcbeautify'
+    xcodebuild('test -scheme Lottie -destination "platform=iOS Simulator,name=iPhone 8"')
   end
 end
 
@@ -66,4 +66,8 @@ namespace :format do
     sh 'mint run SwiftLint autocorrect Sources Tests Example Package.swift --config script/lint/swiftlint.yml'
     sh 'mint run SwiftFormat Sources Tests Example Package.swift --config script/lint/airbnb.swiftformat'
   end
+end
+
+def xcodebuild(command)
+  sh "set -o pipefail && xcodebuild #{command} | mint run xcbeautify"
 end
