@@ -1,9 +1,10 @@
 // Created by Cal Stephens on 12/8/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
-@testable import Lottie
 import SnapshotTesting
 import XCTest
+
+@testable import Lottie
 
 // MARK: - SnapshotTests
 
@@ -63,6 +64,8 @@ extension Animation {
     }
   }
 }
+
+// MARK: - SnapshotError
 
 enum SnapshotError: Error {
   /// We only run snapshot tests on iOS, since running snapshot tests
