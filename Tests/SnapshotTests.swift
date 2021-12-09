@@ -12,7 +12,9 @@ class SnapshotTests: XCTestCase {
   /// Snapshots all of the sample animation JSON files visible to this test target
   func testLottieSnapshots() {
     #if !os(iOS)
-    // We only run snapshot tests on iOS
+    // We only run snapshot tests on iOS, since running snapshot tests
+    // for macOS and tvOS would triple the number of snapshot images
+    // we have to check in to the repo.
     XCTFail("Snapshot tests should only be ran on iOS")
     #endif
 

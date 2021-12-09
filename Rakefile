@@ -45,6 +45,13 @@ namespace :build do
   end
 end
 
+namespace :test do
+  desc 'Tests the Lottie package for iOS'
+  task :package do
+    sh 'xcodebuild test -scheme Lottie -destination "platform=iOS Simulator,name=iPhone 8" | mint run xcbeautify'
+  end
+end
+
 namespace :lint do
   desc 'Lints swift files'
   task :swift do
