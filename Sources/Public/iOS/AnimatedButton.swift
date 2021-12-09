@@ -11,7 +11,7 @@ import UIKit
 /**
  An interactive button that plays an animation when pressed.
  */
-final public class AnimatedButton: AnimatedControl {
+open class AnimatedButton: AnimatedControl {
 
   // MARK: Lifecycle
 
