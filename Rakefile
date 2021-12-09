@@ -48,7 +48,8 @@ end
 namespace :test do
   desc 'Tests the Lottie package for iOS'
   task :package do
-    xcodebuild('test -scheme Lottie -destination "platform=iOS Simulator,name=iPhone 8"')
+    sh 'rm -rf Tests/Artifacts'
+    xcodebuild('test -scheme Lottie -destination "platform=iOS Simulator,name=iPhone 8" -resultBundlePath Tests/Artifacts/LottieTests.xcresult')
   end
 end
 
