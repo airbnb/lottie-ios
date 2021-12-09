@@ -55,15 +55,15 @@ end
 namespace :lint do
   desc 'Lints swift files'
   task :swift do
-    sh 'mint run SwiftLint lint Sources Example Package.swift --config script/lint/swiftlint.yml --strict'
-    sh 'mint run SwiftFormat Sources Example Package.swift --config script/lint/airbnb.swiftformat --lint'
+    sh 'mint run SwiftLint lint Sources Tests Example Package.swift --config script/lint/swiftlint.yml --strict'
+    sh 'mint run SwiftFormat Sources Tests Example Package.swift --config script/lint/airbnb.swiftformat --lint'
   end
 end
 
 namespace :format do
   desc 'Runs SwiftFormat'
   task :swift do
-    sh 'mint run SwiftLint autocorrect Sources Example Package.swift --config script/lint/swiftlint.yml'
-    sh 'mint run SwiftFormat Sources Example Package.swift --config script/lint/airbnb.swiftformat'
+    sh 'mint run SwiftLint autocorrect Sources Tests Example Package.swift --config script/lint/swiftlint.yml'
+    sh 'mint run SwiftFormat Sources Tests Example Package.swift --config script/lint/airbnb.swiftformat'
   end
 end
