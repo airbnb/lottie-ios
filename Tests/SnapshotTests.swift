@@ -10,12 +10,12 @@ import XCTest
 class SnapshotTests: XCTestCase {
 
   /// Snapshots all of the sample animation JSON files visible to this test target
-  func testLottieSnapshots() {
+  func testLottieSnapshots() throws {
     #if !os(iOS)
     // We only run snapshot tests on iOS, since running snapshot tests
     // for macOS and tvOS would triple the number of snapshot images
     // we have to check in to the repo.
-    XCTFail("Snapshot tests should only be ran on iOS")
+    throw SnapshotError.unsupportedPlatform
     #endif
 
     for sampleAnimationURL in Bundle.module.urls(forResourcesWithExtension: "json", subdirectory: nil)! {
@@ -33,8 +33,7 @@ class SnapshotTests: XCTestCase {
         assertSnapshot(
           matching: animationView,
           as: .image,
-          named: "\(sampleAnimationName) (\(Int(percent * 100))%",
-          testName: "Sample")
+          named: "\(sampleAnimationName) (\(Int(percent * 100))%")
       }
     }
   }
@@ -63,4 +62,11 @@ extension Animation {
       return CGSize(width: newWidth, height: newHeight)
     }
   }
+}
+
+enum SnapshotError: Error {
+  /// We only run snapshot tests on iOS, since running snapshot tests
+  /// for macOS and tvOS would triple the number of snapshot images
+  /// we have to check in to the repo.
+  case unsupportedPlatform
 }
