@@ -10,6 +10,8 @@ import XCTest
 
 class SnapshotTests: XCTestCase {
 
+  // MARK: Internal
+
   /// Snapshots all of the sample animation JSON files visible to this test target
   func testLottieSnapshots() throws {
     #if !os(iOS)
@@ -21,6 +23,7 @@ class SnapshotTests: XCTestCase {
 
     for sampleAnimationURL in Bundle.module.urls(forResourcesWithExtension: "json", subdirectory: nil)! {
       let sampleAnimationName = sampleAnimationURL.lastPathComponent.replacingOccurrences(of: ".json", with: "")
+      let configuration = SnapshotConfiguration.forSample(named: sampleAnimationName)
 
       guard let animation = Animation.named(sampleAnimationName, bundle: .module) else {
         XCTFail("Could not parse \(sampleAnimationName).json")
@@ -34,9 +37,32 @@ class SnapshotTests: XCTestCase {
 
         assertSnapshot(
           matching: animationView,
-          as: .image,
+          as: .image(precision: configuration.precision),
           named: "\(sampleAnimationName) (\(Int(percent * 100))%)")
       }
+    }
+  }
+
+  // MARK: Private
+
+  /// Snapshot configuration for an individual test case
+  private struct SnapshotConfiguration {
+    var precision: Float = 1
+
+    /// The default configuration to use if no custom mapping is provided
+    static let `default` = SnapshotConfiguration()
+
+    /// Custom configurations for individual snapshot tests that
+    /// cannot use the default configuration
+    static let customMapping = [
+      /// The edges in this snapshot alias in a slightly nondeterministic way,
+      /// depending on the test environment, so we have to decrease precision a bit.
+      "issue-1407": SnapshotConfiguration(precision: 0.9),
+    ]
+
+    /// The `SnapshotConfiguration` to use for the given sample JSON file name
+    static func forSample(named sampleName: String) -> SnapshotConfiguration {
+      customMapping[sampleName] ?? .default
     }
   }
 
