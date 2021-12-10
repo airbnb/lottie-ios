@@ -8,18 +8,21 @@ on:
 
 jobs:
   build-package:
+    name: "Build Package"
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: Build Package
         run: brew install mint && bundle install && bundle exec rake build:package:all
   build-example:
+    name: "Build Example App"
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: Build Example
         run: brew install mint && bundle install && bundle exec rake build:example:all
   test-package:
+    name: "Test Package"
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -34,9 +37,17 @@ jobs:
         with:
           name: TestArtifacts
           path: Tests/Artifacts
-  lint-swift:
+  swiftlint:
+    name: "Lint Swift (SwiftLint)"
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Lint Swift
-        run: brew install mint && bundle install && bundle exec rake lint:swift
+      - name: Lint Swift using SwiftLint
+        run: brew install mint && bundle install && bundle exec rake lint:swift:swiftlint
+  swiftformat:
+    name: "Lint Swift (SwiftFormat)"
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint Swift using SwiftFormat
+        run: brew install mint && bundle install && bundle exec rake lint:swift:swiftformat
