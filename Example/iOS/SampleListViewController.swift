@@ -60,6 +60,9 @@ final class SampleListViewController: CollectionViewController {
         fileManager.fileExists(atPath: url.path, isDirectory: &isDirectory)
         return isDirectory.boolValue
       }
+      .sorted(by: {
+        $0.lastPathComponent.localizedCompare($1.lastPathComponent) == .orderedAscending
+      })
 
     for subdirectoryURL in subdirectoryURLs {
       LinkView.itemModel(
