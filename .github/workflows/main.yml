@@ -19,6 +19,21 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build Example
         run: brew install mint && bundle install && bundle exec rake build:example:all
+  test-package:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test Package
+        run: brew install mint && bundle install && bundle exec rake test:package
+      - name: Process test artifacts
+        if: always()
+        run: brew install mint && bundle install && bundle exec rake test:process
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: TestArtifacts
+          path: Tests/Artifacts
   lint-swift:
     runs-on: macos-latest
     steps:

@@ -13,3 +13,6 @@ build/
 # Swift Package Manager
 .swiftpm
 .build/
+
+# Test artifacts
+Tests/Artifacts
