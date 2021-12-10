@@ -54,10 +54,10 @@ final class SampleListViewController: CollectionViewController {
     // Create a link for each subdirectory in the current directory
     let fileManager = FileManager()
 
-    let subdirectoryURLs = (try? fileManager.contentsOfDirectory(
+    let subdirectoryURLs = ((try? fileManager.contentsOfDirectory(
       at: Bundle.main.bundleURL.appendingPathComponent(directory),
       includingPropertiesForKeys: [.isDirectoryKey],
-      options: []) ?? [])
+      options: [])) ?? [])
       .filter { url in
         var isDirectory = ObjCBool(false)
         fileManager.fileExists(atPath: url.path, isDirectory: &isDirectory)
