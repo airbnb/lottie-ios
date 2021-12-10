@@ -23,6 +23,7 @@ class SnapshotTests: XCTestCase {
       let sampleAnimationName = sampleAnimationURL.lastPathComponent.replacingOccurrences(of: ".json", with: "")
 
       guard let animation = Animation.named(sampleAnimationName, bundle: .module) else {
+        XCTFail("Could not parse \(sampleAnimationName).json")
         continue
       }
 
