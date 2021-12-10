@@ -30,7 +30,7 @@ final class SampleListViewController: CollectionViewController {
     var items = [ItemModeling]()
 
     // Create an link for each sample .json in the current directory
-    let animationsNames = Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: directory)!
+    let animationsNames = (Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: directory) ?? [])
       .map { $0.lastPathComponent.replacingOccurrences(of: ".json", with: "") }
       .sorted(by: { $0.localizedCompare($1) == .orderedAscending })
 
@@ -54,10 +54,10 @@ final class SampleListViewController: CollectionViewController {
     // Create a link for each subdirectory in the current directory
     let fileManager = FileManager()
 
-    let subdirectoryURLs = try! fileManager.contentsOfDirectory(
+    let subdirectoryURLs = (try? fileManager.contentsOfDirectory(
       at: Bundle.main.bundleURL.appendingPathComponent(directory),
       includingPropertiesForKeys: [.isDirectoryKey],
-      options: [])
+      options: []) ?? [])
       .filter { url in
         var isDirectory = ObjCBool(false)
         fileManager.fileExists(atPath: url.path, isDirectory: &isDirectory)
