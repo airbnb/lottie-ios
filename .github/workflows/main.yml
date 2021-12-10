@@ -27,11 +27,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Lint Swift using SwiftLint
-        run: brew install mint && bundle install && bundle exec rake lint:run:swiftlint
+        run: brew install mint && bundle install && bundle exec rake lint:swift:swiftlint
   swiftformat:
     name: "Lint Swift (SwiftFormat)"
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: Lint Swift using SwiftFormat
-        run: brew install mint && bundle install && bundle exec rake lint:run:swiftformat
+        run: brew install mint && bundle install && bundle exec rake lint:swift:swiftformat
