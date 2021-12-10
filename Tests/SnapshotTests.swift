@@ -8,6 +8,9 @@ import XCTest
 
 // MARK: - SnapshotTests
 
+// TODO: We should have a test case that validates that all of the snapshots in __Snapshots__
+// correspond to a sample json that is actually used in the tests (otherwise the tests
+// would pass even if they accidentally didn't pick up any sample files)
 class SnapshotTests: XCTestCase {
 
   // MARK: Internal

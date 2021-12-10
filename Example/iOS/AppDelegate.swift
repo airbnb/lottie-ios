@@ -1,10 +1,5 @@
-//
-//  AppDelegate.swift
-//  lottie-swift
-//
-//  Created by buba447 on 01/07/2019.
-//  Copyright (c) 2019 buba447. All rights reserved.
-//
+// Created by Cal Stephens on 12/9/21.
+// Copyright © 2021 Airbnb Inc. All rights reserved.
 
 import UIKit
 
@@ -18,7 +13,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?)
     -> Bool
   {
-    true
+    let window = UIWindow(frame: UIScreen.main.bounds)
+
+    let navigationController = UINavigationController(
+      rootViewController: SampleListViewController(directory: "Samples"))
+
+    navigationController.navigationBar.prefersLargeTitles = true
+    window.rootViewController = navigationController
+
+    window.makeKeyAndVisible()
+    self.window = window
+    return true
   }
 
 }
