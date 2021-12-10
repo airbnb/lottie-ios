@@ -22,6 +22,7 @@ jobs:
       - name: Build Example
         run: brew install mint && bundle install && bundle exec rake build:example:all
   test-package:
+    name: "Test Package"
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
