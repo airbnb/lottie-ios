@@ -47,7 +47,7 @@ final class SampleListViewController: CollectionViewController {
             self?.show(
               AnimationPreviewViewController(animationPath),
               sender: context.view)
-          }
+          },
       ]
     }
 
@@ -78,8 +78,8 @@ final class SampleListViewController: CollectionViewController {
             self.show(
               SampleListViewController(directory: "\(self.directory)/\(subdirectoryURL.lastPathComponent)"),
               sender: context.view)
-          }
-        ]
+          },
+      ]
     }
 
     return items
