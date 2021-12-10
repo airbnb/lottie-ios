@@ -51,6 +51,11 @@ namespace :test do
     sh 'rm -rf Tests/Artifacts'
     xcodebuild('test -scheme Lottie -destination "platform=iOS Simulator,name=iPhone 8" -resultBundlePath Tests/Artifacts/LottieTests.xcresult')
   end
+
+  desc 'Processes .xcresult artifacts from the most recent test:package execution'
+  task :process do
+    sh 'mint run ChargePoint/xcparse@2.1.0 xcparse attachments Tests/Artifacts/LottieTests.xcresult Tests/Artifacts/TestAttachments'
+  end
 end
 
 namespace :lint do
