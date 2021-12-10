@@ -34,7 +34,7 @@ class SnapshotTests: XCTestCase {
         assertSnapshot(
           matching: animationView,
           as: .image,
-          named: "\(sampleAnimationName) (\(Int(percent * 100))%")
+          named: "\(sampleAnimationName) (\(Int(percent * 100))%)")
       }
     }
   }
