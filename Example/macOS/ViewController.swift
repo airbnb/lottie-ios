@@ -14,7 +14,7 @@ class ViewController: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let animation = Animation.named("LottieLogo1")
+    let animation = Animation.named("Samples/LottieLogo1")
     let animationView = AnimationView(animation: animation)
     view.addSubview(animationView)
     preferredContentSize = animationView.bounds.size
