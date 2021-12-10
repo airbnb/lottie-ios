@@ -10,6 +10,8 @@ import XCTest
 
 class SnapshotTests: XCTestCase {
 
+  // MARK: Internal
+
   /// Snapshots all of the sample animation JSON files visible to this test target
   func testLottieSnapshots() throws {
     #if !os(iOS)
@@ -40,6 +42,8 @@ class SnapshotTests: XCTestCase {
       }
     }
   }
+
+  // MARK: Private
 
   /// Snapshot configuration for an individual test case
   private struct SnapshotConfiguration {
