@@ -8,9 +8,6 @@ import XCTest
 
 // MARK: - SnapshotTests
 
-// TODO: We should have a test case that validates that all of the snapshots in __Snapshots__
-// correspond to a sample json that is actually used in the tests (otherwise the tests
-// would pass even if they accidentally didn't pick up any sample files)
 class SnapshotTests: XCTestCase {
 
   // MARK: Internal
@@ -24,7 +21,7 @@ class SnapshotTests: XCTestCase {
     throw SnapshotError.unsupportedPlatform
     #endif
 
-    for sampleAnimationURL in Bundle.module.urls(forResourcesWithExtension: "json", subdirectory: nil)! {
+    for sampleAnimationURL in sampleAnimationURLs {
       let sampleAnimationName = sampleAnimationURL.lastPathComponent.replacingOccurrences(of: ".json", with: "")
       let configuration = SnapshotConfiguration.forSample(named: sampleAnimationName)
 
@@ -46,6 +43,36 @@ class SnapshotTests: XCTestCase {
     }
   }
 
+  /// Validates that all of the snapshots in __Snapshots__ correspond to
+  /// a sample JSON file that is visible to this test target.
+  func testAllSnapshotsHaveCorrespondingSampleFile() {
+    for snapshotURL in snapshotURLs {
+      // The snapshot files follow the format `testLottieSnapshots.NAME-PERCENTAGE.png`
+      let animationName = snapshotURL.lastPathComponent.components(separatedBy: .init(charactersIn: ".-"))[1]
+
+      XCTAssert(
+        sampleAnimationURLs.contains(where: { $0.lastPathComponent == "\(animationName).json" }),
+        "Snapshot \"\(snapshotURL.lastPathComponent)\" has no corresponding sample animation")
+    }
+  }
+
+  /// Validates that all of the custom snapshot configurations in `SnapshotConfiguration.customMapping`
+  /// reference a sample json file that actually exists
+  func testCustomSnapshotConfigurationsHaveCorrespondingSampleFile() {
+    for (animationName, _) in SnapshotConfiguration.customMapping {
+      XCTAssert(
+        sampleAnimationURLs.contains(where: { $0.lastPathComponent == "\(animationName).json" }),
+        "Custom configuration for \"\(animationName)\" has no corresponding sample animation")
+    }
+  }
+
+  /// Validates that this test target can access sample json files from `Tests/Samples`
+  /// and snapshot images from `Tests/__Snapshots__`.
+  func testCanAccessSamplesAndSnapshots() {
+    XCTAssert(sampleAnimationURLs.count > 50)
+    XCTAssert(snapshotURLs.count > 300)
+  }
+
   // MARK: Private
 
   /// Snapshot configuration for an individual test case
@@ -60,7 +87,7 @@ class SnapshotTests: XCTestCase {
     static let customMapping = [
       /// The edges in this snapshot alias in a slightly nondeterministic way,
       /// depending on the test environment, so we have to decrease precision a bit.
-      "issue-1407": SnapshotConfiguration(precision: 0.9),
+      "issue_1407": SnapshotConfiguration(precision: 0.9),
     ]
 
     /// The `SnapshotConfiguration` to use for the given sample JSON file name
@@ -68,6 +95,12 @@ class SnapshotTests: XCTestCase {
       customMapping[sampleName] ?? .default
     }
   }
+
+  /// The list of sample animation files in `Tests/Samples`
+  private let sampleAnimationURLs = Bundle.module.urls(forResourcesWithExtension: "json", subdirectory: nil)!
+
+  /// The list of snapshot image files in `Tests/__Snapshots__`
+  private let snapshotURLs = Bundle.module.urls(forResourcesWithExtension: "png", subdirectory: nil)!
 
 }
 
