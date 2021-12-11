@@ -56,6 +56,16 @@ class SnapshotTests: XCTestCase {
     }
   }
 
+  /// Validates that all of the custom snapshot configurations in `SnapshotConfiguration.customMapping`
+  /// reference a sample json file that actually exists
+  func testCustomSnapshotConfigurationsHaveCorrespondingSampleFile() {
+    for (animationName, _) in SnapshotConfiguration.customMapping {
+      XCTAssert(
+        sampleAnimationURLs.contains(where: { $0.lastPathComponent == "\(animationName).json" }),
+        "Custom configuration for \"\(animationName)\" has no corresponding sample animation")
+    }
+  }
+
   /// Validates that this test target can access sample json files from `Tests/Samples`
   /// and snapshot images from `Tests/__Snapshots__`.
   func testCanAccessSamplesAndSnapshots() {
@@ -77,7 +87,7 @@ class SnapshotTests: XCTestCase {
     static let customMapping = [
       /// The edges in this snapshot alias in a slightly nondeterministic way,
       /// depending on the test environment, so we have to decrease precision a bit.
-      "issue-1407": SnapshotConfiguration(precision: 0.9),
+      "issue_1407": SnapshotConfiguration(precision: 0.9),
     ]
 
     /// The `SnapshotConfiguration` to use for the given sample JSON file name
