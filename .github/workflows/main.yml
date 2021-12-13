@@ -43,7 +43,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Lint Cocoapod
-        run: bundle install && bundle exec rake lint:pod
+        run: bundle install && bundle exec rake lint:podspec
   swiftlint:
     name: "Lint Swift (SwiftLint)"
     runs-on: macos-latest

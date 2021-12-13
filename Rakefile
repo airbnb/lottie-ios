@@ -76,7 +76,7 @@ namespace :lint do
   end
 
   desc 'Lints the CocoaPods podspec'
-  task :pod do
+  task :podspec do
     sh 'pod lib lint lottie-ios.podspec'
   end
 end
