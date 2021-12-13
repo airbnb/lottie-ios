@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint lottie-swift.podspec' to ensure this is a
+# Be sure to run `pod lib lint lottie-ios.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -27,11 +27,10 @@ For the first time, designers can create and ship beautiful animations without a
   s.osx.deployment_target = '10.10'
   s.tvos.deployment_target = '11.0'
 
-  s.source_files = 'lottie-swift/src/**/*'
-  s.ios.source_files = 'lottie-swift/iOS/*.swift'
-  s.ios.exclude_files = 'lottie-swift/src/Public/MacOS/**/*'
-  s.tvos.exclude_files = 'lottie-swift/src/Public/MacOS/**/*'
-  s.osx.exclude_files = 'lottie-swift/src/Public/iOS/**/*'
+  s.source_files = 'Sources/**/*'
+  s.ios.exclude_files = 'Sources/Public/MacOS/**/*'
+  s.tvos.exclude_files = 'Sources/Public/MacOS/**/*'
+  s.osx.exclude_files = 'Sources/Public/iOS/**/*'
 
   s.ios.frameworks = ['UIKit', 'CoreGraphics', 'QuartzCore']
   s.tvos.frameworks = ['UIKit', 'CoreGraphics', 'QuartzCore']
