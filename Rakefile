@@ -54,7 +54,7 @@ namespace :test do
 
   desc 'Processes .xcresult artifacts from the most recent test:package execution'
   task :process do
-    sh 'mint run ChargePoint/xcparse@2.1.0 xcparse attachments Tests/Artifacts/LottieTests.xcresult Tests/Artifacts/TestAttachments'
+    sh 'mint run ChargePoint/xcparse@2.2.1 xcparse attachments Tests/Artifacts/LottieTests.xcresult Tests/Artifacts/TestAttachments'
   end
 end
 
