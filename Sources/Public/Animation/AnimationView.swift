@@ -670,7 +670,7 @@ final public class AnimationView: LottieView {
 
   // MARK: - Private (Properties)
 
-  var animationLayer: AnimationContainer? = nil
+  var animationLayer: RootAnimationLayer? = nil
 
   /// Set animation name from Interface Builder
   @IBInspectable var animationName: String? {
@@ -876,7 +876,7 @@ final public class AnimationView: LottieView {
     /// Remove current animation if any
     removeCurrentAnimation()
 
-    if let oldAnimation = self.animationLayer {
+    if let oldAnimation = animationLayer {
       oldAnimation.removeFromSuperlayer()
     }
 
@@ -886,18 +886,22 @@ final public class AnimationView: LottieView {
       return
     }
 
-    let animationLayer = AnimationContainer(
-      animation: animation,
-      imageProvider: imageProvider,
-      textProvider: textProvider,
-      fontProvider: fontProvider)
-    animationLayer.renderScale = screenScale
-    viewLayer?.addSublayer(animationLayer)
-    self.animationLayer = animationLayer
-    reloadImages()
-    animationLayer.setNeedsDisplay()
-    setNeedsLayout()
-    currentFrame = CGFloat(animation.startFrame)
+    if ExperimentalFeatureConfiguration.shared.useNewRenderingEngine {
+      animationLayer = ExperimentalAnimationLayer(animation: animation)
+    } else {
+      let animationLayer = AnimationContainer(
+        animation: animation,
+        imageProvider: imageProvider,
+        textProvider: textProvider,
+        fontProvider: fontProvider)
+      animationLayer.renderScale = screenScale
+      viewLayer?.addSublayer(animationLayer)
+      self.animationLayer = animationLayer
+      reloadImages()
+      animationLayer.setNeedsDisplay()
+      setNeedsLayout()
+      currentFrame = CGFloat(animation.startFrame)
+    }
   }
 
   fileprivate func updateAnimationForBackgroundState() {
