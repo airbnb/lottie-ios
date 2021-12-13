@@ -37,6 +37,13 @@ jobs:
         with:
           name: TestArtifacts
           path: Tests/Artifacts
+  cocoapod:
+    name: "Lint Cocoapod"
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint Cocoapod
+        run: bundle install && bundle exec rake lint:pod
   swiftlint:
     name: "Lint Swift (SwiftLint)"
     runs-on: macos-latest
