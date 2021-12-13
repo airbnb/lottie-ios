@@ -8,7 +8,10 @@ let package = Package(
     .library(name: "Lottie", targets: ["Lottie"]),
   ],
   dependencies: [
-    .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.9.0"),
+    .package(
+      name: "SnapshotTesting",
+      url: "https://github.com/pointfreeco/swift-snapshot-testing.git",
+      .revision("0259c2fbd69c7bfaa34b0b86280496f84653e396")),
   ],
   targets: [
     .target(name: "Lottie", path: "Sources"),

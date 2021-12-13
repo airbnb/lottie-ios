@@ -85,9 +85,11 @@ class SnapshotTests: XCTestCase {
     /// Custom configurations for individual snapshot tests that
     /// cannot use the default configuration
     static let customMapping = [
-      /// The edges in this snapshot alias in a slightly nondeterministic way,
+      /// These samples appear to render in a slightly non-deterministic way,
       /// depending on the test environment, so we have to decrease precision a bit.
       "issue_1407": SnapshotConfiguration(precision: 0.9),
+      "FirstText": SnapshotConfiguration(precision: 0.99),
+      "verifyLineHeight": SnapshotConfiguration(precision: 0.99),
     ]
 
     /// The `SnapshotConfiguration` to use for the given sample JSON file name
