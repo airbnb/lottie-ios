@@ -58,8 +58,15 @@ final class ExperimentalAnimationLayer: CALayer {
   private func setupChildLayers() {
     for layerModel in animation.layers.reversed() {
       if let layer = (layerModel as? LayerConstructing)?.makeLayer() {
+        // Set the sublayer's anchorPoint to (0, 0) so it has the
+        // same coordinate space at this root layer
+        //  - This allows us to set `layer.bounds = bounds`
+        //    instead of `layer.frame = bounds`
         layer.anchorPoint = .zero
+
+        // Sublayers should have the same bounds as this root layer
         layer.bounds = bounds
+
         addSublayer(layer)
       }
     }

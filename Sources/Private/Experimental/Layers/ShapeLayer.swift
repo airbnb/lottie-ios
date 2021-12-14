@@ -29,8 +29,16 @@ final class ShapeLayer: CALayer {
       // If so, how does that work?
       if let group = item as? Group {
         let sublayer = ShapeItemLayer(items: group.items)
+
+        // Set the sublayer's anchorPoint to (0, 0) so it has the
+        // same coordinate space at this root layer
+        //  - This allows us to set `layer.bounds = bounds`
+        //    instead of `layer.frame = bounds`
         sublayer.anchorPoint = .zero
+
+        // Sublayers should have the same bounds as this root layer
         sublayer.bounds = bounds
+
         addSublayer(sublayer)
       }
     }
