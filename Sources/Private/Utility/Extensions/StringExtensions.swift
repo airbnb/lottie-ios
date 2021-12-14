@@ -10,6 +10,18 @@ import Foundation
 
 extension String {
 
+  var cgColor: CGColor {
+    let (red, green, blue) = hexColorComponents()
+
+    if #available(iOS 13.0, tvOS 13.0, *) {
+      return CGColor(red: red, green: green, blue: blue, alpha: 1)
+    } else {
+      return CGColor(
+        colorSpace: CGColorSpaceCreateDeviceRGB(),
+        components: [red, green, blue])!
+    }
+  }
+
   func hexColorComponents() -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
 
     var cString: String = trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -30,4 +42,5 @@ extension String {
       green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
       blue: CGFloat(rgbValue & 0x0000FF) / 255.0)
   }
+
 }

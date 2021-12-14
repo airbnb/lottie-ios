@@ -16,15 +16,56 @@ final class ExperimentalAnimationLayer: CALayer {
   init(animation: Animation) {
     self.animation = animation
     super.init()
+
+    setup()
+    setupChildLayers()
+  }
+
+  /// Called by CoreAnimation to create a shadow copy of this layer
+  /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
+  override init(layer: Any) {
+    guard let layer = layer as? ExperimentalAnimationLayer else {
+      fatalError("init(layer:) incorrectly called with \(type(of: layer))")
+    }
+
+    animation = layer.animation
+    super.init()
   }
 
   required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
+  // MARK: Internal
+
+  override func layoutSublayers() {
+    super.layoutSublayers()
+  }
+
   // MARK: Private
 
   private let animation: Animation
+
+  private func setup() {
+    bounds = animation.bounds
+  }
+
+  private func setupChildLayers() {
+    for layerModel in animation.layers.reversed() {
+      if let layer = (layerModel as? LayerConstructing)?.makeLayer() {
+        // Set the sublayer's anchorPoint to (0, 0) so it has the
+        // same coordinate space at this root layer
+        //  - This allows us to set `layer.bounds = bounds`
+        //    instead of `layer.frame = bounds`
+        layer.anchorPoint = .zero
+
+        // Sublayers should have the same bounds as this root layer
+        layer.bounds = bounds
+
+        addSublayer(layer)
+      }
+    }
+  }
 
 }
 
