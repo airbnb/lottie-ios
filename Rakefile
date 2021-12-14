@@ -74,6 +74,11 @@ namespace :lint do
       sh 'mint run SwiftFormat Sources Tests Example Package.swift --config script/lint/airbnb.swiftformat --lint'
     end
   end
+
+  desc 'Lints the CocoaPods podspec'
+  task :podspec do
+    sh 'pod lib lint lottie-ios.podspec'
+  end
 end
 
 namespace :format do
