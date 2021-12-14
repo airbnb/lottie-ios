@@ -784,14 +784,14 @@ final public class AnimationView: LottieView {
       let positionAnimation = animation.copy() as? CABasicAnimation ?? CABasicAnimation(keyPath: "position")
       positionAnimation.keyPath = "position"
       positionAnimation.isAdditive = false
-      positionAnimation.fromValue = animationLayer.position
+      positionAnimation.fromValue = (animationLayer.presentation() ?? animationLayer).position
       positionAnimation.toValue = position
       positionAnimation.isRemovedOnCompletion = true
 
       let xformAnimation = animation.copy() as? CABasicAnimation ?? CABasicAnimation(keyPath: "transform")
       xformAnimation.keyPath = "transform"
       xformAnimation.isAdditive = false
-      xformAnimation.fromValue = animationLayer.transform
+      xformAnimation.fromValue = (animationLayer.presentation() ?? animationLayer).transform
       xformAnimation.toValue = xform
       xformAnimation.isRemovedOnCompletion = true
 
