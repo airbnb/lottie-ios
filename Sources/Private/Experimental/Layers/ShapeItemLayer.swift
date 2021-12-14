@@ -22,6 +22,14 @@ final class ShapeItemLayer: CAShapeLayer {
       fillRule = fill.fillRule.caFillRule
     }
 
+    if let stroke = items.first(Stroke.self) {
+      strokeColor = stroke.color.keyframes.first!.value.cgColorValue.copy(alpha: stroke.opacity.keyframes.first!.value.cgFloatValue)
+      lineWidth = stroke.width.keyframes.first!.value.cgFloatValue
+      lineJoin = stroke.lineJoin.caLineJoin
+      lineCap = stroke.lineCap.caLineCap
+      // TODO: Support `lineDashPhase` and `lineDashPattern`
+    }
+
     if let shapeTransform = items.first(ShapeTransform.self) {
       // TODO: Need to figure out how to handle keyframing
       transform = CATransform3D.makeTransform(

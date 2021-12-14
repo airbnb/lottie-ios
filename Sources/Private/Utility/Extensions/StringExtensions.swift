@@ -17,7 +17,7 @@ extension String {
       return CGColor(red: red, green: green, blue: blue, alpha: 1)
     } else {
       return CGColor(
-        colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!,
+        colorSpace: CGColorSpaceCreateDeviceRGB(),
         components: [red, green, blue])!
     }
   }

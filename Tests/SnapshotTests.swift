@@ -77,6 +77,7 @@ class SnapshotTests: XCTestCase {
 
       /// These samples are known to be supported by the experimental rendering engine
       "Zoom": SnapshotConfiguration(testWithExperimentalRenderingEngine: true),
+      "GeometryTransformTest": SnapshotConfiguration(testWithExperimentalRenderingEngine: true),
     ]
 
     /// The `SnapshotConfiguration` to use for the given sample JSON file name
