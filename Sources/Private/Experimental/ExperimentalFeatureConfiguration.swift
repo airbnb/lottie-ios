@@ -11,7 +11,9 @@ public struct ExperimentalFeatureConfiguration {
   /// which applies to all `AnimationView`s by default.
   public static var shared = ExperimentalFeatureConfiguration()
 
-  /// Whether or not to use the new, experimental, rendering engine
+  /// Whether or not to use the new, experimental, rendering engine,
+  /// which leverages the Core Animation render server to
+  /// animate without executing on the main thread every frame.
   public var useNewRenderingEngine = false
 
 }

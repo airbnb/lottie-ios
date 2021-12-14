@@ -99,14 +99,14 @@ final class SampleListViewController: CollectionViewController {
         title: "Rendering Engine",
         children: [
           UIAction(
-            title: "Standard (CPU)",
+            title: "Standard",
             state: Configuration.useNewRenderingEngine ? .off : .on,
             handler: { [weak self] _ in
               Configuration.useNewRenderingEngine = false
               self?.configureSettingsMenu()
             }),
           UIAction(
-            title: "Experimental (GPU)",
+            title: "Experimental",
             state: Configuration.useNewRenderingEngine ? .on : .off,
             handler: { [weak self] _ in
               Configuration.useNewRenderingEngine = true

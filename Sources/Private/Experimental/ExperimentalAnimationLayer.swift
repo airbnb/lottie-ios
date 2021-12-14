@@ -6,7 +6,9 @@ import QuartzCore
 
 // MARK: - ExperimentalAnimationLayer
 
-/// The root `CALayer` responsible for playing a Lottie animation
+/// The root `CALayer` of the experimental rendering engine,
+/// which leverages the Core Animation render server to
+/// animate without executing on the main thread every frame.
 final class ExperimentalAnimationLayer: CALayer {
 
   // MARK: Lifecycle
