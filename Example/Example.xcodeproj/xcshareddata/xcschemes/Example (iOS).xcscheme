@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+               BlueprintIdentifier = "2E9E77AB27602BD400C84BA3"
                BuildableName = "Example (iOS).app"
                BlueprintName = "Example (iOS)"
                ReferencedContainer = "container:Example.xcodeproj">
@@ -26,16 +26,17 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "607FACE41AFB9204008FA782"
-               BuildableName = "Example_Tests.xctest"
-               BlueprintName = "Example_Tests"
-               ReferencedContainer = "container:Example.xcodeproj">
+               BlueprintIdentifier = "LottieTests"
+               BuildableName = "LottieTests"
+               BlueprintName = "LottieTests"
+               ReferencedContainer = "container:..">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -54,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+            BlueprintIdentifier = "2E9E77AB27602BD400C84BA3"
             BuildableName = "Example (iOS).app"
             BlueprintName = "Example (iOS)"
             ReferencedContainer = "container:Example.xcodeproj">
@@ -71,7 +72,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+            BlueprintIdentifier = "2E9E77AB27602BD400C84BA3"
             BuildableName = "Example (iOS).app"
             BlueprintName = "Example (iOS)"
             ReferencedContainer = "container:Example.xcodeproj">
