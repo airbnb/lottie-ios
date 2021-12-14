@@ -77,7 +77,7 @@ final public class AnimationView: LottieView {
     self.imageProvider = imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = textProvider
     self.fontProvider = fontProvider
-    self.experimentalFeatureConfiguration = _experimentalFeatureConfiguration
+    experimentalFeatureConfiguration = _experimentalFeatureConfiguration
     super.init(frame: .zero)
     commonInit()
     makeAnimationLayer()
