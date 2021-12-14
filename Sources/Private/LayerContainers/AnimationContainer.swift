@@ -16,7 +16,7 @@ import QuartzCore
  This layer holds a single composition container and allows for animation of
  the currentFrame property.
  */
-final class AnimationContainer: CALayer {
+final class AnimationContainer: CALayer, RootAnimationLayer {
 
   // MARK: Lifecycle
 

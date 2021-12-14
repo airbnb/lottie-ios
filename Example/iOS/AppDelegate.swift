@@ -13,6 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?)
     -> Bool
   {
+    Configuration.applyCurrentConfiguration()
+
     let window = UIWindow(frame: UIScreen.main.bounds)
 
     let navigationController = UINavigationController(

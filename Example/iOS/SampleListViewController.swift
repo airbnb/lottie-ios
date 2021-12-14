@@ -22,6 +22,7 @@ final class SampleListViewController: CollectionViewController {
     setItems(items, animated: false)
 
     title = directory
+    configureSettingsMenu()
   }
 
   // MARK: Internal
@@ -88,5 +89,30 @@ final class SampleListViewController: CollectionViewController {
   // MARK: Private
 
   private let directory: String
+
+  private func configureSettingsMenu() {
+    navigationItem.rightBarButtonItem = UIBarButtonItem(
+      title: "Settings",
+      image: .init(systemName: "gear"),
+      primaryAction: nil,
+      menu: UIMenu(
+        title: "Rendering Engine",
+        children: [
+          UIAction(
+            title: "Standard",
+            state: Configuration.useNewRenderingEngine ? .off : .on,
+            handler: { [weak self] _ in
+              Configuration.useNewRenderingEngine = false
+              self?.configureSettingsMenu()
+            }),
+          UIAction(
+            title: "Experimental",
+            state: Configuration.useNewRenderingEngine ? .on : .off,
+            handler: { [weak self] _ in
+              Configuration.useNewRenderingEngine = true
+              self?.configureSettingsMenu()
+            }),
+        ]))
+  }
 
 }
