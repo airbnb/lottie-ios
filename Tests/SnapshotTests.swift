@@ -60,9 +60,6 @@ class SnapshotTests: XCTestCase {
 
   /// Snapshot configuration for an individual test case
   private struct SnapshotConfiguration {
-    var precision: Float = 1
-    var testWithExperimentalRenderingEngine = false
-
     /// The default configuration to use if no custom mapping is provided
     static let `default` = SnapshotConfiguration()
 
@@ -79,6 +76,9 @@ class SnapshotTests: XCTestCase {
       "Zoom": SnapshotConfiguration(testWithExperimentalRenderingEngine: true),
       "GeometryTransformTest": SnapshotConfiguration(testWithExperimentalRenderingEngine: true),
     ]
+
+    var precision: Float = 1
+    var testWithExperimentalRenderingEngine = false
 
     /// The `SnapshotConfiguration` to use for the given sample JSON file name
     static func forSample(named sampleName: String) -> SnapshotConfiguration {
@@ -126,7 +126,11 @@ class SnapshotTests: XCTestCase {
       }
 
       for percent in [0, 0.25, 0.5, 0.75, 1.0] {
-        let animationView = AnimationView(animation: animation)
+        let animationView = AnimationView(
+          animation: animation,
+          _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration(
+            useNewRenderingEngine: usingExperimentalRenderingEngine))
+
         animationView.frame.size = animation.snapshotSize
         animationView.currentProgress = CGFloat(percent)
 

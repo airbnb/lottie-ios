@@ -892,7 +892,9 @@ final public class AnimationView: LottieView {
     }
 
     if experimentalFeatureConfiguration.useNewRenderingEngine {
-      animationLayer = ExperimentalAnimationLayer(animation: animation)
+      let animationLayer = ExperimentalAnimationLayer(animation: animation)
+      viewLayer?.addSublayer(animationLayer)
+      self.animationLayer = animationLayer
     } else {
       let animationLayer = AnimationContainer(
         animation: animation,

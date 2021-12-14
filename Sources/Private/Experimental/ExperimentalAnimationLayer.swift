@@ -47,12 +47,7 @@ final class ExperimentalAnimationLayer: CALayer {
   private let animation: Animation
 
   private func setup() {
-    // TODO: Support `contentMode`
     bounds = animation.bounds
-
-    // For debugging we currently display a black background color on this layer,
-    // but we can remove this whenever
-    backgroundColor = "#000000".cgColor
   }
 
   private func setupChildLayers() {

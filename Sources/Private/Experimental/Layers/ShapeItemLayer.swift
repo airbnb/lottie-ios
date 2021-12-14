@@ -23,7 +23,8 @@ final class ShapeItemLayer: CAShapeLayer {
     }
 
     if let stroke = items.first(Stroke.self) {
-      strokeColor = stroke.color.keyframes.first!.value.cgColorValue.copy(alpha: stroke.opacity.keyframes.first!.value.cgFloatValue)
+      strokeColor = stroke.color.keyframes.first!.value.cgColorValue
+        .copy(alpha: stroke.opacity.keyframes.first!.value.cgFloatValue)
       lineWidth = stroke.width.keyframes.first!.value.cgFloatValue
       lineJoin = stroke.lineJoin.caLineJoin
       lineCap = stroke.lineCap.caLineCap
