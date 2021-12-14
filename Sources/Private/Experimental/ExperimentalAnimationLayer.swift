@@ -16,15 +16,54 @@ final class ExperimentalAnimationLayer: CALayer {
   init(animation: Animation) {
     self.animation = animation
     super.init()
+
+    setup()
+    setupChildLayers()
+  }
+
+  /// Called by CoreAnimation to create a shadow copy of this layer
+  /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
+  override init(layer: Any) {
+    guard let layer = layer as? ExperimentalAnimationLayer else {
+      fatalError("init(layer:) incorrectly called with \(type(of: layer))")
+    }
+
+    animation = layer.animation
+    super.init()
   }
 
   required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
+  // MARK: Internal
+
+  override func layoutSublayers() {
+    super.layoutSublayers()
+  }
+
   // MARK: Private
 
   private let animation: Animation
+
+  private func setup() {
+    // TODO: Support `contentMode`
+    bounds = animation.bounds
+
+    // For debugging we currently display a black background color on this layer,
+    // but we can remove this whenever
+    backgroundColor = "#000000".cgColor
+  }
+
+  private func setupChildLayers() {
+    for layerModel in animation.layers.reversed() {
+      if let layer = (layerModel as? LayerConstructing)?.makeLayer() {
+        layer.anchorPoint = .zero
+        layer.bounds = bounds
+        addSublayer(layer)
+      }
+    }
+  }
 
 }
 
