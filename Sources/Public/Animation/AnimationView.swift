@@ -70,12 +70,14 @@ final public class AnimationView: LottieView {
     animation: Animation?,
     imageProvider: AnimationImageProvider? = nil,
     textProvider: AnimationTextProvider = DefaultTextProvider(),
-    fontProvider: AnimationFontProvider = DefaultFontProvider())
+    fontProvider: AnimationFontProvider = DefaultFontProvider(),
+    _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration = .shared)
   {
     self.animation = animation
     self.imageProvider = imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = textProvider
     self.fontProvider = fontProvider
+    self.experimentalFeatureConfiguration = _experimentalFeatureConfiguration
     super.init(frame: .zero)
     commonInit()
     makeAnimationLayer()
@@ -89,6 +91,7 @@ final public class AnimationView: LottieView {
     imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
+    experimentalFeatureConfiguration = .shared
     super.init(frame: .zero)
     commonInit()
   }
@@ -98,6 +101,7 @@ final public class AnimationView: LottieView {
     imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
+    experimentalFeatureConfiguration = .shared
     super.init(frame: .zero)
     commonInit()
   }
@@ -106,6 +110,7 @@ final public class AnimationView: LottieView {
     imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
+    experimentalFeatureConfiguration = .shared
     super.init(coder: aDecoder)
     commonInit()
   }
@@ -886,7 +891,7 @@ final public class AnimationView: LottieView {
       return
     }
 
-    if ExperimentalFeatureConfiguration.shared.useNewRenderingEngine {
+    if experimentalFeatureConfiguration.useNewRenderingEngine {
       animationLayer = ExperimentalAnimationLayer(animation: animation)
     } else {
       let animationLayer = AnimationContainer(
@@ -1046,4 +1051,8 @@ final public class AnimationView: LottieView {
   // MARK: Private
 
   static private let animationName: String = "Lottie"
+
+  /// The configuration of experimental features that this `AnimationView` uses
+  private let experimentalFeatureConfiguration: ExperimentalFeatureConfiguration
+
 }
