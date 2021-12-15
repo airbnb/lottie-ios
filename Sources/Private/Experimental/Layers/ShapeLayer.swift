@@ -5,6 +5,7 @@ import QuartzCore
 
 // MARK: - ShapeLayer
 
+/// The CALayer type responsible for rendering `ShapeLayerModel`s
 final class ShapeLayer: CALayer {
 
   // MARK: Lifecycle
@@ -24,21 +25,13 @@ final class ShapeLayer: CALayer {
       skew: nil,
       skewAxis: nil)
 
+    opacity = Float(shapeLayer.transform.opacity.keyframes.first!.value.value / 100)
+
     for item in shapeLayer.items {
       // TODO: Can items other than `Group`s appear at the top level?
       // If so, how does that work?
       if let group = item as? Group {
         let sublayer = ShapeItemLayer(items: group.items)
-
-        // Set the sublayer's anchorPoint to (0, 0) so it has the
-        // same coordinate space at this root layer
-        //  - This allows us to set `layer.bounds = bounds`
-        //    instead of `layer.frame = bounds`
-        sublayer.anchorPoint = .zero
-
-        // Sublayers should have the same bounds as this root layer
-        sublayer.bounds = bounds
-
         addSublayer(sublayer)
       }
     }
@@ -48,16 +41,64 @@ final class ShapeLayer: CALayer {
     fatalError("init(coder:) has not been implemented")
   }
 
+  // MARK: Internal
+
+  override func layoutSublayers() {
+    super.layoutSublayers()
+
+    for sublayer in sublayers ?? [] {
+      sublayer.fillBoundsOfSuperlayer()
+    }
+  }
+
   // MARK: Private
 
   private let shapeLayer: ShapeLayerModel
 
 }
 
+// MARK: AnimationLayer
+
+extension ShapeLayer: AnimationLayer {
+  func animations(context: LayerAnimationContext) -> [CAPropertyAnimation] {
+    [
+      shapeLayer.transform.position?.caKeyframes(
+        animating: .position,
+        value: \.pointValue,
+        context: context),
+
+      shapeLayer.transform.scale.caKeyframes(
+        animating: .scaleX,
+        value: { CGFloat($0.x) / 100 },
+        context: context),
+
+      shapeLayer.transform.scale.caKeyframes(
+        animating: .scaleY,
+        value: { CGFloat($0.y) / 100 },
+        context: context),
+
+      shapeLayer.transform.anchorPoint.caKeyframes(
+        animating: .anchorPoint,
+        value: { vector in
+          CGPoint(
+            x: CGFloat(vector.x) / bounds.width,
+            y: CGFloat(vector.y) / bounds.height)
+        },
+        context: context),
+
+      shapeLayer.transform.opacity.caKeyframes(
+        animating: .opacity,
+        value: { $0.cgFloatValue / 100 },
+        context: context),
+    ]
+    .compactMap { $0 }
+  }
+}
+
 // MARK: - ShapeLayerModel + LayerConstructing
 
 extension ShapeLayerModel: LayerConstructing {
-  func makeLayer() -> CALayer {
+  func makeLayer() -> AnimationLayer {
     ShapeLayer(shapeLayer: self)
   }
 }
