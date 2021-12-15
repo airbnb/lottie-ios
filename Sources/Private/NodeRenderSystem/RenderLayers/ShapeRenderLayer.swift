@@ -38,6 +38,7 @@ final class ShapeRenderLayer: ShapeContainerLayer {
       "lineWidth" : NSNull(),
       "miterLimit" : NSNull(),
       "lineDashPhase" : NSNull(),
+      "opacity": NSNull(),
       "hidden" : NSNull(),
     ]
     addSublayer(shapeLayer)
