@@ -9,3 +9,11 @@ build/
 
 # macOS
 .DS_Store
+
+# Swift Package Manager
+.swiftpm
+.build/
+Package.resolved
+
+# Test artifacts
+Tests/Artifacts

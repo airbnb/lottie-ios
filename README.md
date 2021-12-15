@@ -84,8 +84,6 @@ And then import wherever needed: ```import Lottie```
 2. Paste the project URL: https://github.com/airbnb/lottie-ios
 3. Click on next and select the project target
 4. Don't forget to set `DEAD_CODE_STRIPPING = NO` in your `Build Settings` (https://bugs.swift.org/plugins/servlet/mobile#issue/SR-11564)
-  **NOTE: For MacOS you must set the `Branch` field to `lottie/macos-spm`
-  ![Example](_Gifs/spm-branch.png)
 
 If you have doubts, please, check the following links:
 
