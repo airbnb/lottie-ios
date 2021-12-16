@@ -990,9 +990,12 @@ final public class AnimationView: LottieView {
     guard window != nil else { waitingToPlayAnimation = true; return }
 
     // TODO: Improve this integration point with the experimental rendering engine,
-    // and implement support for more configuration points
+    // and implement support for the `AnimationView`'s timing and looping configuration fields
     if let experimentalAnimationLayer = animationlayer as? ExperimentalAnimationLayer {
-      experimentalAnimationLayer.playAnimation()
+      experimentalAnimationLayer.playAnimation(
+        timingConfiguration: .init(
+          autoreverses: true,
+          repeatCount: .greatestFiniteMagnitude))
       return
     }
 
