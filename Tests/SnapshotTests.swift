@@ -81,12 +81,6 @@ class SnapshotTests: XCTestCase {
       ///    but any device with a 2x scale works.
       throw SnapshotError.unsupportedDevice
     }
-    #else
-    // We only run snapshot tests on iOS, since running snapshot tests
-    // for macOS and tvOS would triple the number of snapshot images
-    // we have to check in to the repo.
-    throw SnapshotError.unsupportedPlatform
-    #endif
 
     for sampleAnimationURL in sampleAnimationURLs {
       let sampleAnimationName = sampleAnimationURL.lastPathComponent.replacingOccurrences(of: ".json", with: "")
@@ -130,6 +124,12 @@ class SnapshotTests: XCTestCase {
           testName: testName)
       }
     }
+    #else
+    // We only run snapshot tests on iOS, since running snapshot tests
+    // for macOS and tvOS would triple the number of snapshot images
+    // we have to check in to the repo.
+    throw SnapshotError.unsupportedPlatform
+    #endif
   }
 
 }

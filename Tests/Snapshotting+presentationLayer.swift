@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 12/15/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
+#if os(iOS)
 import SnapshotTesting
 import UIKit
 import XCTest
@@ -43,3 +44,4 @@ extension Snapshotting where Value == UIView, Format == UIImage {
       }
   }
 }
+#endif
