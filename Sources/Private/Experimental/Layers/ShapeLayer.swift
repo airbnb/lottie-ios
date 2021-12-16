@@ -69,26 +69,44 @@ extension ShapeLayer: AnimationLayer {
 
       shapeLayer.transform.scale.caKeyframes(
         animating: .scaleX,
-        value: { CGFloat($0.x) / 100 },
+        value: { scale in
+          // Lottie animation files express scale as a numerical percentage value
+          // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
+          // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
+          CGFloat(scale.x) / 100
+        },
         context: context),
 
       shapeLayer.transform.scale.caKeyframes(
         animating: .scaleY,
-        value: { CGFloat($0.y) / 100 },
+        value: { scale in
+          // Lottie animation files express scale as a numerical percentage value
+          // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
+          // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
+          CGFloat(scale.y) / 100
+        },
         context: context),
 
       shapeLayer.transform.anchorPoint.caKeyframes(
         animating: .anchorPoint,
-        value: { vector in
+        value: { absoluteAnchorPoint in
+          // Lottie animation files express anchorPoint as an absolute point value,
+          // so we have to divide by the width/height of this layer to get the
+          // relative decimal values expected by Core Animation.
           CGPoint(
-            x: CGFloat(vector.x) / bounds.width,
-            y: CGFloat(vector.y) / bounds.height)
+            x: CGFloat(absoluteAnchorPoint.x) / bounds.width,
+            y: CGFloat(absoluteAnchorPoint.y) / bounds.height)
         },
         context: context),
 
       shapeLayer.transform.opacity.caKeyframes(
         animating: .opacity,
-        value: { $0.cgFloatValue / 100 },
+        value: {
+          // Lottie animation files express opacity as a numerical percentage value
+          // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values
+          // expected by Core Animation (e.g. 0.0, 0.5, 1.0).
+          $0.cgFloatValue / 100
+        },
         context: context),
     ]
     .compactMap { $0 }

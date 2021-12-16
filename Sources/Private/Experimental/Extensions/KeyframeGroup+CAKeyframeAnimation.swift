@@ -8,13 +8,9 @@ import QuartzCore
 /// A strongly typed value that can be used as the `keyPath` of a `CAAnimation`
 struct CAKeyPath<ValueRepresentation> {
   let name: String
-}
 
-// MARK: ExpressibleByStringLiteral
-
-extension CAKeyPath: ExpressibleByStringLiteral {
-  init(stringLiteral value: StringLiteralType) {
-    name = value
+  init(_ name: String) {
+    self.name = name
   }
 }
 
@@ -24,13 +20,13 @@ extension CAKeyPath: ExpressibleByStringLiteral {
 /// at https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/AnimatableProperties/AnimatableProperties.html#//apple_ref/doc/uid/TP40004514-CH11-SW1
 /// and https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/Key-ValueCodingExtensions/Key-ValueCodingExtensions.html
 extension CAKeyPath {
-  static var position: CAKeyPath<CGPoint> { "transform.translation" }
-  static var scale: CAKeyPath<CGFloat> { "transform.scale" }
-  static var scaleX: CAKeyPath<CGFloat> { "transform.scale.x" }
-  static var scaleY: CAKeyPath<CGFloat> { "transform.scale.y" }
+  static var position: CAKeyPath<CGPoint> { .init("transform.translation") }
+  static var scale: CAKeyPath<CGFloat> { .init("transform.scale") }
+  static var scaleX: CAKeyPath<CGFloat> { .init("transform.scale.x") }
+  static var scaleY: CAKeyPath<CGFloat> { .init("transform.scale.y") }
 
-  static var anchorPoint: CAKeyPath<CGPoint> { "anchorPoint" }
-  static var opacity: CAKeyPath<CGFloat> { "opacity" }
+  static var anchorPoint: CAKeyPath<CGPoint> { .init(#keyPath(CALayer.anchorPoint)) }
+  static var opacity: CAKeyPath<CGFloat> { .init(#keyPath(CALayer.opacity)) }
 }
 
 // MARK: - KeyframeGroup + CAKeyframeAnimation
@@ -75,7 +71,7 @@ fileprivate struct CAKeyframe<ValueRepresentation> {
   let value: ValueRepresentation
 
   /// The relative time (between 0 and 1) when this keyframe should be applied
-  let keyTime: CGFloat
+  let keyTime: AnimationProgressTime
 
   // TODO: Support other properties like `timingFunctions`
 }
@@ -97,7 +93,7 @@ extension CAKeyframe {
 
 extension LayerAnimationContext {
   /// The relative time (between 0 and 1) of the given absolute time value.
-  fileprivate func relativeTime(of absoluteTime: CGFloat) -> CGFloat {
+  fileprivate func relativeTime(of absoluteTime: AnimationFrameTime) -> AnimationProgressTime {
     (absoluteTime / endFrame) + startFrame
   }
 }

@@ -23,10 +23,10 @@ protocol AnimationLayer: CALayer {
 // Context describing the timing parameters of the current animation
 struct LayerAnimationContext {
   /// The absolute frame number that this animation begins at
-  let startFrame: CGFloat
+  let startFrame: AnimationFrameTime
 
   /// The absolute frame number that this animation ends at
-  let endFrame: CGFloat
+  let endFrame: AnimationFrameTime
 
   /// The frame rate that this animation is played at
   let framerate: CGFloat
