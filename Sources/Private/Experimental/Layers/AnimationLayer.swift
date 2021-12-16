@@ -15,8 +15,6 @@ protocol LayerConstructing {
 /// A type of `CALayer` that can be used in a Lottie animation
 protocol AnimationLayer: CALayer {
   /// The set of `CAAnimation`s  that should be applied to this layer
-  ///  - Animation timings should be expressed in absolute frames.
-  ///    The root-level `CAAnimationGroup` sets a (TODO : EXPLAIN)
   func animations(context: LayerAnimationContext) -> [CAPropertyAnimation]
 }
 
