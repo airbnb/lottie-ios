@@ -144,7 +144,7 @@ final class AnimationContainer: CALayer, RootAnimationLayer {
 
   var animationLayers: ContiguousArray<CompositionLayer>
 
-  var animatingLayers: [CALayer] {
+  var _animationLayers: [CALayer] {
     Array(animationLayers)
   }
 

@@ -109,7 +109,7 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
     set { fatalError("Currently unsupported") }
   }
 
-  var animatingLayers: [CALayer] {
+  var _animationLayers: [CALayer] {
     animationLayers
   }
 
