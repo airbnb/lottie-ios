@@ -5,6 +5,8 @@ import QuartzCore
 
 // MARK: - ShapeItemLayer
 
+/// A CALayer type that renders an array of `[ShapeItem]`s,
+/// from a `Group` in a `ShapeLayerModel`.
 final class ShapeItemLayer: CAShapeLayer {
 
   // MARK: Lifecycle
@@ -51,6 +53,14 @@ final class ShapeItemLayer: CAShapeLayer {
 
   private let items: [ShapeItem]
 
+}
+
+// MARK: AnimationLayer
+
+extension ShapeItemLayer: AnimationLayer {
+  func animations(context _: LayerAnimationContext) -> [CAPropertyAnimation] {
+    [] // TODO: implement
+  }
 }
 
 // MARK: - [ShapeItem] helpers

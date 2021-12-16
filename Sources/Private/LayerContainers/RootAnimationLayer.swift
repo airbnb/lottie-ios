@@ -9,7 +9,7 @@ protocol RootAnimationLayer: CALayer {
   var renderScale: CGFloat { get set }
   var respectAnimationFrameRate: Bool { get set }
 
-  var animationLayers: ContiguousArray<CompositionLayer> { get }
+  var _animationLayers: [CALayer] { get }
   var imageProvider: AnimationImageProvider { get set }
   var textProvider: AnimationTextProvider { get set }
   var fontProvider: AnimationFontProvider { get set }

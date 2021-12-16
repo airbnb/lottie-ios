@@ -144,6 +144,10 @@ final class AnimationContainer: CALayer, RootAnimationLayer {
 
   var animationLayers: ContiguousArray<CompositionLayer>
 
+  var _animationLayers: [CALayer] {
+    Array(animationLayers)
+  }
+
   var imageProvider: AnimationImageProvider {
     get {
       layerImageProvider.imageProvider

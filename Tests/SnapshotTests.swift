@@ -22,6 +22,10 @@ class SnapshotTests: XCTestCase {
   }
 
   /// Snapshots sample animation files using the experimental rendering engine
+  ///  - TODO: We should have a snapshots that test both:
+  ///     1. the `CAKeyframeAnimation`s (which can only be snapshot through `CALayer.presentation()`)
+  ///     2. interactively setting `animationView.currentProgress` (which interpolates manually)
+  ///  - This currently only tests (2), which isn't set up for the experimental rendering engine yet.
   func testExperimentalRenderingEngine() throws {
     try compareSampleSnapshots(usingExperimentalRenderingEngine: true)
   }
@@ -75,6 +79,10 @@ class SnapshotTests: XCTestCase {
       /// These samples are known to be supported by the experimental rendering engine
       "Zoom": SnapshotConfiguration(testWithExperimentalRenderingEngine: true),
       "GeometryTransformTest": SnapshotConfiguration(testWithExperimentalRenderingEngine: true),
+
+      // TODO: The snapshots for this one will need to be regenerated once
+      // we support snapshotting the in-progress `CAKeyframeAnimation`s.
+      "loading_dots_1": SnapshotConfiguration(testWithExperimentalRenderingEngine: true),
     ]
 
     var precision: Float = 1

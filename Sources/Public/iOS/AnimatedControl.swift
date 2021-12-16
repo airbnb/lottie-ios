@@ -143,12 +143,12 @@ open class AnimatedControl: UIControl {
       let layerName = stateMap[state.rawValue],
       let stateLayer = animationLayer.layer(for: AnimationKeypath(keypath: layerName))
     {
-      for layer in animationLayer.animationLayers {
+      for layer in animationLayer._animationLayers {
         layer.isHidden = true
       }
       stateLayer.isHidden = false
     } else {
-      for layer in animationLayer.animationLayers {
+      for layer in animationLayer._animationLayers {
         layer.isHidden = false
       }
     }

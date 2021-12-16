@@ -38,33 +38,54 @@ final class ExperimentalAnimationLayer: CALayer {
 
   // MARK: Internal
 
+  // TODO: Add more configuration, like `loopMode`
+  func playAnimation() {
+    let context = LayerAnimationContext(
+      startFrame: animation.startFrame,
+      endFrame: animation.endFrame,
+      framerate: CGFloat(animation.framerate))
+
+    for animationLayer in animationLayers {
+      for caAnimation in animationLayer.animations(context: context) {
+        // TODO: This should be configurable and not hard-coded
+        caAnimation.repeatCount = .greatestFiniteMagnitude
+        caAnimation.autoreverses = true
+
+        animationLayer.add(caAnimation, forKey: caAnimation.keyPath)
+      }
+    }
+  }
+
   override func layoutSublayers() {
     super.layoutSublayers()
+
+    for animationLayer in animationLayers {
+      animationLayer.fillBoundsOfSuperlayer()
+    }
   }
 
   // MARK: Private
 
   private let animation: Animation
+  private var animationLayers = [AnimationLayer]()
 
   private func setup() {
     bounds = animation.bounds
   }
 
   private func setupChildLayers() {
+    var animationLayers = [AnimationLayer]()
+
     for layerModel in animation.layers.reversed() {
       if let layer = (layerModel as? LayerConstructing)?.makeLayer() {
-        // Set the sublayer's anchorPoint to (0, 0) so it has the
-        // same coordinate space at this root layer
-        //  - This allows us to set `layer.bounds = bounds`
-        //    instead of `layer.frame = bounds`
-        layer.anchorPoint = .zero
-
-        // Sublayers should have the same bounds as this root layer
-        layer.bounds = bounds
-
         addSublayer(layer)
+        animationLayers.append(layer)
       }
+
+      self.animationLayers = animationLayers
     }
+
+    self.animationLayers = animationLayers
   }
 
 }
@@ -88,8 +109,8 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
     set { fatalError("Currently unsupported") }
   }
 
-  var animationLayers: ContiguousArray<CompositionLayer> {
-    []
+  var _animationLayers: [CALayer] {
+    animationLayers
   }
 
   var imageProvider: AnimationImageProvider {
