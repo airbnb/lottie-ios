@@ -40,9 +40,13 @@ extension KeyframeGroup {
     context: LayerAnimationContext)
     -> CAKeyframeAnimation
   {
+    precondition(!keyframes.isEmpty, "Keyframes for \"\(keyPath.name)\" must be non-empty")
+
     let animation = CAKeyframeAnimation(keyPath: keyPath.name)
     animation.duration = context.duration
 
+    // Convert the list of `Keyframe<T>` into
+    // the representation used by `CAKeyframeAnimation`
     var values = [Any]()
     var keyTimes = [NSNumber]()
 
@@ -56,8 +60,27 @@ extension KeyframeGroup {
       keyTimes.append(NSNumber(value: Float(keyframe.keyTime)))
     }
 
+    // Validate that we have correct start (0.0) and end (1.0) keyframes.
+    //
+    // From the documentation of `CAKeyframeAnimation.keyTimes`:
+    //
+    //   If the `calculationMode` is set to `linear` or `cubic`, the first value in the array
+    //   must be 0.0 and the last value must be 1.0. All intermediate values represent
+    //   time points between the start and end times.
+    //
+    if keyTimes.first != 0.0 {
+      keyTimes.insert(0.0, at: 0)
+      values.insert(values.first!, at: 0)
+    }
+
+    if keyTimes.last != 1.0 {
+      keyTimes.append(1.0)
+      values.append(values.last!)
+    }
+
     animation.values = values
     animation.keyTimes = keyTimes
+
     return animation
   }
 

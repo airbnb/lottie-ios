@@ -62,38 +62,6 @@ class SnapshotTests: XCTestCase {
 
   // MARK: Private
 
-  /// Snapshot configuration for an individual test case
-  private struct SnapshotConfiguration {
-    /// The default configuration to use if no custom mapping is provided
-    static let `default` = SnapshotConfiguration()
-
-    /// Custom configurations for individual snapshot tests that
-    /// cannot use the default configuration
-    static let customMapping = [
-      /// These samples appear to render in a slightly non-deterministic way,
-      /// depending on the test environment, so we have to decrease precision a bit.
-      "issue_1407": SnapshotConfiguration(precision: 0.9),
-      "FirstText": SnapshotConfiguration(precision: 0.99),
-      "verifyLineHeight": SnapshotConfiguration(precision: 0.99),
-
-      /// These samples are known to be supported by the experimental rendering engine
-      "Zoom": SnapshotConfiguration(testWithExperimentalRenderingEngine: true),
-      "GeometryTransformTest": SnapshotConfiguration(testWithExperimentalRenderingEngine: true),
-
-      // TODO: The snapshots for this one will need to be regenerated once
-      // we support snapshotting the in-progress `CAKeyframeAnimation`s.
-      "loading_dots_1": SnapshotConfiguration(testWithExperimentalRenderingEngine: true),
-    ]
-
-    var precision: Float = 1
-    var testWithExperimentalRenderingEngine = false
-
-    /// The `SnapshotConfiguration` to use for the given sample JSON file name
-    static func forSample(named sampleName: String) -> SnapshotConfiguration {
-      customMapping[sampleName] ?? .default
-    }
-  }
-
   /// The list of sample animation files in `Tests/Samples`
   private let sampleAnimationURLs = Bundle.module.urls(forResourcesWithExtension: "json", subdirectory: nil)!
 
@@ -113,12 +81,6 @@ class SnapshotTests: XCTestCase {
       ///    but any device with a 2x scale works.
       throw SnapshotError.unsupportedDevice
     }
-    #else
-    // We only run snapshot tests on iOS, since running snapshot tests
-    // for macOS and tvOS would triple the number of snapshot images
-    // we have to check in to the repo.
-    throw SnapshotError.unsupportedPlatform
-    #endif
 
     for sampleAnimationURL in sampleAnimationURLs {
       let sampleAnimationName = sampleAnimationURL.lastPathComponent.replacingOccurrences(of: ".json", with: "")
@@ -139,16 +101,35 @@ class SnapshotTests: XCTestCase {
           _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration(
             useNewRenderingEngine: usingExperimentalRenderingEngine))
 
+        // Set up the animation view with a valid frame and layout
+        // so the geometry is correct when setting up the `CAAnimation`s
         animationView.frame.size = animation.snapshotSize
-        animationView.currentProgress = CGFloat(percent)
+        animationView.layoutIfNeeded()
+
+        if usingExperimentalRenderingEngine {
+          let experimentalAnimationLayer = animationView.animationLayer as! ExperimentalAnimationLayer
+
+          experimentalAnimationLayer.playAnimation(
+            timingConfiguration: .init(
+              speed: 0,
+              timeOffset: animation.duration * percent))
+        } else {
+          animationView.currentProgress = CGFloat(percent)
+        }
 
         assertSnapshot(
           matching: animationView,
-          as: .image(precision: configuration.precision),
+          as: .imageOfPresentationLayer(precision: configuration.precision),
           named: "\(sampleAnimationName) (\(Int(percent * 100))%)",
           testName: testName)
       }
     }
+    #else
+    // We only run snapshot tests on iOS, since running snapshot tests
+    // for macOS and tvOS would triple the number of snapshot images
+    // we have to check in to the repo.
+    throw SnapshotError.unsupportedPlatform
+    #endif
   }
 
 }

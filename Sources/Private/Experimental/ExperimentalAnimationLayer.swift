@@ -24,12 +24,12 @@ final class ExperimentalAnimationLayer: CALayer {
   /// Called by CoreAnimation to create a shadow copy of this layer
   /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
   override init(layer: Any) {
-    guard let layer = layer as? ExperimentalAnimationLayer else {
+    guard let layer = layer as? Self else {
       fatalError("init(layer:) incorrectly called with \(type(of: layer))")
     }
 
     animation = layer.animation
-    super.init()
+    super.init(layer: layer)
   }
 
   required init?(coder _: NSCoder) {
@@ -38,8 +38,16 @@ final class ExperimentalAnimationLayer: CALayer {
 
   // MARK: Internal
 
-  // TODO: Add more configuration, like `loopMode`
-  func playAnimation() {
+  /// Timing-related configuration to apply to this layer's child `CAAnimation`s
+  ///  - This is effectively a configurable subset of `CAMediaTiming`
+  struct TimingConfiguration {
+    var autoreverses = false
+    var repeatCount: Float = 0
+    var speed: Float = 1
+    var timeOffset: TimeInterval = 0
+  }
+
+  func playAnimation(timingConfiguration: TimingConfiguration) {
     let context = LayerAnimationContext(
       startFrame: animation.startFrame,
       endFrame: animation.endFrame,
@@ -47,11 +55,12 @@ final class ExperimentalAnimationLayer: CALayer {
 
     for animationLayer in animationLayers {
       for caAnimation in animationLayer.animations(context: context) {
-        // TODO: This should be configurable and not hard-coded
-        caAnimation.repeatCount = .greatestFiniteMagnitude
-        caAnimation.autoreverses = true
+        caAnimation.repeatCount = timingConfiguration.repeatCount
+        caAnimation.autoreverses = timingConfiguration.autoreverses
+        caAnimation.speed = timingConfiguration.speed
+        caAnimation.timeOffset = timingConfiguration.timeOffset
 
-        animationLayer.add(caAnimation, forKey: caAnimation.keyPath)
+        animationLayer.add(caAnimation, forKey: nil)
       }
     }
   }
