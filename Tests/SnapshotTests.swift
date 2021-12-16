@@ -107,6 +107,8 @@ class SnapshotTests: XCTestCase {
           _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration(
             useNewRenderingEngine: usingExperimentalRenderingEngine))
 
+        // Set up the animation view with a valid frame and layout
+        // so the geometry is correct when setting up the `CAAnimation`s
         animationView.frame.size = animation.snapshotSize
         animationView.layoutIfNeeded()
 

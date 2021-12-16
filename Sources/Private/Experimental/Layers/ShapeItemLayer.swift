@@ -53,7 +53,7 @@ final class ShapeItemLayer: CAShapeLayer {
   /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
   override init(layer: Any) {
     guard let layer = layer as? Self else {
-      fatalError("init(layer:) incorrectly called with \(type(of: layer))")
+      fatalError("\(Self.self).init(layer:) incorrectly called with \(type(of: layer))")
     }
 
     items = layer.items

@@ -13,12 +13,16 @@ extension Snapshotting where Value == UIView, Format == UIImage {
     traits: UITraitCollection = .init())
     -> Snapshotting<UIView, UIImage>
   {
-    SimplySnapshotting
-      .image(precision: precision, scale: traits.displayScale)
+    // Use the SnapshotTesting framework's base `SimplySnapshot.image`
+    // implementation for creating and diffing image files
+    SimplySnapshotting.image(precision: precision, scale: traits.displayScale)
+      // Convert the input `UIView` into a `UIImage`
+      // by creating and then rendering its `layer.presentation()`
       .pullback { (view: UIView) -> UIImage in
         // Place the view in an on-screen window and then
         // have Core Animation update the screen synchronously
         let window = UIWindow()
+        window.bounds = view.bounds
         window.isHidden = false
         window.addSubview(view)
 
