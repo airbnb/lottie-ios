@@ -40,7 +40,7 @@ extension KeyframeGroup {
     context: LayerAnimationContext)
     -> CAKeyframeAnimation
   {
-    precondition(!keyframes.isEmpty)
+    precondition(!keyframes.isEmpty, "Keyframes for \"\(keyPath.name)\" must be non-empty")
 
     let animation = CAKeyframeAnimation(keyPath: keyPath.name)
     animation.duration = context.duration

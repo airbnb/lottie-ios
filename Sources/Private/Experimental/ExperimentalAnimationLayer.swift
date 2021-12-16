@@ -39,6 +39,7 @@ final class ExperimentalAnimationLayer: CALayer {
   // MARK: Internal
 
   /// Timing-related configuration to apply to this layer's child `CAAnimation`s
+  ///  - This is effectively a configurable subset of `CAMediaTiming`
   struct TimingConfiguration {
     var autoreverses = false
     var repeatCount: Float = 0
