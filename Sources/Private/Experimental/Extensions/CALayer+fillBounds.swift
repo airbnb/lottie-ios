@@ -6,6 +6,7 @@ import QuartzCore
 extension CALayer {
   /// Updates the `bounds` of this layer to fill the bounds of its `superlayer`
   /// without setting `frame` (which is not permitted if the layer can rotate)
+  @nonobjc
   func fillBoundsOfSuperlayer() {
     guard let superlayer = superlayer else { return }
 
