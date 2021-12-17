@@ -83,7 +83,14 @@ class SnapshotTests: XCTestCase {
     }
 
     for sampleAnimationURL in sampleAnimationURLs {
-      let sampleAnimationName = sampleAnimationURL.lastPathComponent.replacingOccurrences(of: ".json", with: "")
+      var sampleAnimationName = sampleAnimationURL.lastPathComponent.replacingOccurrences(of: ".json", with: "")
+
+      // If the sample animation is stored `Tests/Samples/Private`, include
+      // `private` in the snapshot file name so it can be `.gitignore`'d.
+      if sampleAnimationURL.pathComponents.contains("Private") {
+        sampleAnimationName += "_private"
+      }
+
       let configuration = SnapshotConfiguration.forSample(named: sampleAnimationName)
 
       if usingExperimentalRenderingEngine, !configuration.testWithExperimentalRenderingEngine {
