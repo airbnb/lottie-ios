@@ -55,34 +55,28 @@ final class ExperimentalAnimationLayer: CALayer {
     self.timingConfiguration = timingConfiguration
 
     let context = LayerAnimationContext(
+      timingConfiguration: timingConfiguration,
       startFrame: animation.startFrame,
       endFrame: animation.endFrame,
       framerate: CGFloat(animation.framerate))
 
     // Remove any existing animations from the layer hierarchy
-    for animationLayer in animationLayers {
-      animationLayer.removeAllAnimations()
+    for sublayer in allSublayers {
+      sublayer.removeAllAnimations()
     }
+
+    // Perform a layout pass if necessary so all of the sublayers
+    // have the most up-to-date sizing information
+    layoutIfNeeded()
+
+    // Set the speed of this layer, which will be inherited
+    // by all sublayers and their animations.
+    //  - This is required to support scrubbing with a speed of 0
+    speed = timingConfiguration.speed
 
     // Set up the new animations with the current `TimingConfiguration`
     for animationLayer in animationLayers {
-
-      // Necessary here and not on animation (why??)
-      animationLayer.speed = timingConfiguration.speed
-
-      // TODO: instead of collecting and applying the animations here,
-      // it would be nice to just build them and apply them in the subclass
-      // (passing `TimingConfiguration` through the context struct)
-
-      for caAnimation in animationLayer.animations(context: context) {
-        caAnimation.duration = animation.duration
-
-        caAnimation.repeatCount = timingConfiguration.repeatCount
-        caAnimation.autoreverses = timingConfiguration.autoreverses
-        caAnimation.timeOffset = timingConfiguration.timeOffset
-
-        animationLayer.add(caAnimation, forKey: caAnimation.keyPath)
-      }
+      animationLayer.setupAnimations(context: context)
     }
   }
 
@@ -91,6 +85,15 @@ final class ExperimentalAnimationLayer: CALayer {
 
     for animationLayer in animationLayers {
       animationLayer.fillBoundsOfSuperlayer()
+    }
+
+    // If no animation has been set up yet, display the first frame
+    // now that the layer hierarchy has been setup and laid out
+    if
+      timingConfiguration == nil,
+      bounds.size != .zero
+    {
+      currentFrame = animation.startFrame
     }
   }
 
@@ -104,18 +107,13 @@ final class ExperimentalAnimationLayer: CALayer {
   }
 
   private func setupChildLayers() {
-    var animationLayers = [AnimationLayer]()
-
-    for layerModel in animation.layers.reversed() {
-      if let layer = (layerModel as? LayerConstructing)?.makeLayer() {
-        addSublayer(layer)
-        animationLayers.append(layer)
-      }
-
-      self.animationLayers = animationLayers
+    animationLayers = animation.layers.reversed().compactMap { layerModel in
+      (layerModel as? LayerConstructing)?.makeLayer()
     }
 
-    self.animationLayers = animationLayers
+    for animationLayer in animationLayers {
+      addSublayer(animationLayer)
+    }
   }
 
 }
@@ -125,7 +123,9 @@ final class ExperimentalAnimationLayer: CALayer {
 extension ExperimentalAnimationLayer: RootAnimationLayer {
 
   var currentFrame: AnimationFrameTime {
-    get { 0 }
+    get {
+      0 // TODO: how do we retrieve the realtime animation progress?
+    }
     set {
       setupAnimation(timingConfiguration: .init(
         speed: 0,
@@ -192,18 +192,12 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
 
 }
 
+// MARK: - CALayer + allSublayers
+
 extension CALayer {
-  var allLayers: [CALayer] {
-    var allLayers: [CALayer] = [self]
-
-    for sublayer in (sublayers ?? []) {
-      allLayers += sublayer.allLayers
-    }
-
-    return allLayers
-  }
-
-  var allSublayers: [CALayer] {
+  /// All of the layers in the layer tree that are descendants from this later
+  @nonobjc
+  fileprivate var allSublayers: [CALayer] {
     var allSublayers: [CALayer] = []
 
     for sublayer in (sublayers ?? []) {
