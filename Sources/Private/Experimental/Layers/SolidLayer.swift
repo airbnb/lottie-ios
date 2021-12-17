@@ -53,8 +53,8 @@ final class SolidLayer: CALayer {
 // MARK: AnimationLayer
 
 extension SolidLayer: AnimationLayer {
-  func animations(context _: LayerAnimationContext) -> [CAPropertyAnimation] {
-    [] // TODO: implement
+  func setupAnimations(context _: LayerAnimationContext) {
+    // TODO: Implement
   }
 }
 

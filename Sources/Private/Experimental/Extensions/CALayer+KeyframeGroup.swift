@@ -29,28 +29,36 @@ extension CAKeyPath {
   static var opacity: CAKeyPath<CGFloat> { .init(#keyPath(CALayer.opacity)) }
 }
 
-// MARK: - KeyframeGroup + CAKeyframeAnimation
+// MARK: - CALayer + KeyframeGroup
 
-extension KeyframeGroup {
-  /// Constructs a `CAKeyframeAnimation` that applies this `KeyframeGroup`
-  /// to the given `keyPath` of a `CALayer`
-  func caKeyframes<ValueRepresentation>(
-    animating keyPath: CAKeyPath<ValueRepresentation>,
-    value keyframeValueMapping: (T) -> ValueRepresentation,
+extension CALayer {
+  /// Constructs a `CAKeyframeAnimation` that reflects the given `KeyframeGroup` data model,
+  /// and adds it to this `CALayer`.
+  func addAnimation<KeyframeValue, ValueRepresentation>(
+    for keyPath: CAKeyPath<ValueRepresentation>,
+    keyframes keyframeGroup: KeyframeGroup<KeyframeValue>?,
+    value keyframeValueMapping: (KeyframeValue) -> ValueRepresentation,
     context: LayerAnimationContext)
-    -> CAKeyframeAnimation
   {
-    precondition(!keyframes.isEmpty, "Keyframes for \"\(keyPath.name)\" must be non-empty")
+    guard let keyframeGroup = keyframeGroup else {
+      return
+    }
+
+    precondition(!keyframeGroup.keyframes.isEmpty, "Keyframes for \"\(keyPath.name)\" must be non-empty")
 
     let animation = CAKeyframeAnimation(keyPath: keyPath.name)
     animation.duration = context.duration
+    animation.repeatCount = context.timingConfiguration.repeatCount
+    animation.autoreverses = context.timingConfiguration.autoreverses
+    animation.timeOffset = context.timingConfiguration.timeOffset
+    animation.isRemovedOnCompletion = false
 
     // Convert the list of `Keyframe<T>` into
     // the representation used by `CAKeyframeAnimation`
     var values = [Any]()
     var keyTimes = [NSNumber]()
 
-    for keyframeModel in keyframes {
+    for keyframeModel in keyframeGroup.keyframes {
       let keyframe = CAKeyframe(
         from: keyframeModel,
         using: keyframeValueMapping,
@@ -81,7 +89,7 @@ extension KeyframeGroup {
     animation.values = values
     animation.keyTimes = keyTimes
 
-    return animation
+    add(animation, forKey: keyPath.name)
   }
 
 }

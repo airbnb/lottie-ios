@@ -14,14 +14,18 @@ protocol LayerConstructing {
 
 /// A type of `CALayer` that can be used in a Lottie animation
 protocol AnimationLayer: CALayer {
-  /// The set of `CAAnimation`s  that should be applied to this layer
-  func animations(context: LayerAnimationContext) -> [CAPropertyAnimation]
+  /// Instructs this layer to setup its `CAAnimation`s
+  /// using the given `LayerAnimationContext`
+  func setupAnimations(context: LayerAnimationContext)
 }
 
 // MARK: - LayerAnimationContext
 
 // Context describing the timing parameters of the current animation
 struct LayerAnimationContext {
+  /// The timing configuration that should be applied to `CAAnimation`s
+  let timingConfiguration: ExperimentalAnimationLayer.TimingConfiguration
+
   /// The absolute frame number that this animation begins at
   let startFrame: AnimationFrameTime
 

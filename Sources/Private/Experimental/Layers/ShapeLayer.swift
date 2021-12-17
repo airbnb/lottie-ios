@@ -14,19 +14,6 @@ final class ShapeLayer: CALayer {
     self.shapeLayer = shapeLayer
     super.init()
 
-    // TODO: On the model side, these fields are part of a `LayerModel` superclass.
-    // We should put this somewhere where it doesn't have to be duplicated by
-    // all layer types.
-    transform = CATransform3D.makeTransform(
-      anchor: shapeLayer.transform.anchorPoint.keyframes.first!.value.pointValue,
-      position: shapeLayer.transform.position?.keyframes.first!.value.pointValue ?? .zero,
-      scale: shapeLayer.transform.scale.keyframes.first!.value.sizeValue,
-      rotation: shapeLayer.transform.rotation.keyframes.first!.value.cgFloatValue,
-      skew: nil,
-      skewAxis: nil)
-
-    opacity = Float(shapeLayer.transform.opacity.keyframes.first!.value.value / 100)
-
     for item in shapeLayer.items {
       // TODO: Can items other than `Group`s appear at the top level?
       // If so, how does that work?
@@ -71,61 +58,63 @@ final class ShapeLayer: CALayer {
 // MARK: AnimationLayer
 
 extension ShapeLayer: AnimationLayer {
-  func animations(context: LayerAnimationContext) -> [CAPropertyAnimation] {
-    [
-      shapeLayer.transform.position?.caKeyframes(
-        animating: .position,
-        value: \.pointValue,
-        context: context),
+  func setupAnimations(context: LayerAnimationContext) {
+    addAnimation(
+      for: .position,
+      keyframes: shapeLayer.transform.position,
+      value: \.pointValue,
+      context: context)
 
-      shapeLayer.transform.scale.caKeyframes(
-        animating: .scaleX,
-        value: { scale in
-          // Lottie animation files express scale as a numerical percentage value
-          // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
-          // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
-          CGFloat(scale.x) / 100
-        },
-        context: context),
+    addAnimation(
+      for: .scaleX,
+      keyframes: shapeLayer.transform.scale,
+      value: { scale in
+        // Lottie animation files express scale as a numerical percentage value
+        // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
+        // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
+        CGFloat(scale.x) / 100
+      },
+      context: context)
 
-      shapeLayer.transform.scale.caKeyframes(
-        animating: .scaleY,
-        value: { scale in
-          // Lottie animation files express scale as a numerical percentage value
-          // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
-          // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
-          CGFloat(scale.y) / 100
-        },
-        context: context),
+    addAnimation(
+      for: .scaleY,
+      keyframes: shapeLayer.transform.scale,
+      value: { scale in
+        // Lottie animation files express scale as a numerical percentage value
+        // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
+        // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
+        CGFloat(scale.y) / 100
+      },
+      context: context)
 
-      shapeLayer.transform.anchorPoint.caKeyframes(
-        animating: .anchorPoint,
-        value: { absoluteAnchorPoint in
-          guard bounds.width > 0, bounds.height > 0 else {
-            assertionFailure("Size must be non-zero before an animation can be played")
-            return .zero
-          }
+    addAnimation(
+      for: .anchorPoint,
+      keyframes: shapeLayer.transform.anchorPoint,
+      value: { absoluteAnchorPoint in
+        guard bounds.width > 0, bounds.height > 0 else {
+          assertionFailure("Size must be non-zero before an animation can be played")
+          return .zero
+        }
 
-          // Lottie animation files express anchorPoint as an absolute point value,
-          // so we have to divide by the width/height of this layer to get the
-          // relative decimal values expected by Core Animation.
-          return CGPoint(
-            x: CGFloat(absoluteAnchorPoint.x) / bounds.width,
-            y: CGFloat(absoluteAnchorPoint.y) / bounds.height)
-        },
-        context: context),
+        // Lottie animation files express anchorPoint as an absolute point value,
+        // so we have to divide by the width/height of this layer to get the
+        // relative decimal values expected by Core Animation.
+        return CGPoint(
+          x: CGFloat(absoluteAnchorPoint.x) / bounds.width,
+          y: CGFloat(absoluteAnchorPoint.y) / bounds.height)
+      },
+      context: context)
 
-      shapeLayer.transform.opacity.caKeyframes(
-        animating: .opacity,
-        value: {
-          // Lottie animation files express opacity as a numerical percentage value
-          // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values
-          // expected by Core Animation (e.g. 0.0, 0.5, 1.0).
-          $0.cgFloatValue / 100
-        },
-        context: context),
-    ]
-    .compactMap { $0 }
+    addAnimation(
+      for: .opacity,
+      keyframes: shapeLayer.transform.opacity,
+      value: {
+        // Lottie animation files express opacity as a numerical percentage value
+        // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values
+        // expected by Core Animation (e.g. 0.0, 0.5, 1.0).
+        $0.cgFloatValue / 100
+      },
+      context: context)
   }
 }
 

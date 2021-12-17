@@ -106,16 +106,7 @@ class SnapshotTests: XCTestCase {
         animationView.frame.size = animation.snapshotSize
         animationView.layoutIfNeeded()
 
-        if usingExperimentalRenderingEngine {
-          let experimentalAnimationLayer = animationView.animationLayer as! ExperimentalAnimationLayer
-
-          experimentalAnimationLayer.playAnimation(
-            timingConfiguration: .init(
-              speed: 0,
-              timeOffset: animation.duration * percent))
-        } else {
-          animationView.currentProgress = CGFloat(percent)
-        }
+        animationView.currentProgress = CGFloat(percent)
 
         assertSnapshot(
           matching: animationView,

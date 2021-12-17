@@ -47,21 +47,33 @@ final class ExperimentalAnimationLayer: CALayer {
     var timeOffset: TimeInterval = 0
   }
 
-  func playAnimation(timingConfiguration: TimingConfiguration) {
+  /// Sets up `CAAnimation`s for each `AnimationLayer` in the layer hierarchy
+  func setupAnimation(timingConfiguration: TimingConfiguration) {
+    self.timingConfiguration = timingConfiguration
+
     let context = LayerAnimationContext(
+      timingConfiguration: timingConfiguration,
       startFrame: animation.startFrame,
       endFrame: animation.endFrame,
       framerate: CGFloat(animation.framerate))
 
-    for animationLayer in animationLayers {
-      for caAnimation in animationLayer.animations(context: context) {
-        caAnimation.repeatCount = timingConfiguration.repeatCount
-        caAnimation.autoreverses = timingConfiguration.autoreverses
-        caAnimation.speed = timingConfiguration.speed
-        caAnimation.timeOffset = timingConfiguration.timeOffset
+    // Remove any existing animations from the layer hierarchy
+    for sublayer in allSublayers {
+      sublayer.removeAllAnimations()
+    }
 
-        animationLayer.add(caAnimation, forKey: nil)
-      }
+    // Perform a layout pass if necessary so all of the sublayers
+    // have the most up-to-date sizing information
+    layoutIfNeeded()
+
+    // Set the speed of this layer, which will be inherited
+    // by all sublayers and their animations.
+    //  - This is required to support scrubbing with a speed of 0
+    speed = timingConfiguration.speed
+
+    // Set up the new animations with the current `TimingConfiguration`
+    for animationLayer in animationLayers {
+      animationLayer.setupAnimations(context: context)
     }
   }
 
@@ -71,9 +83,21 @@ final class ExperimentalAnimationLayer: CALayer {
     for animationLayer in animationLayers {
       animationLayer.fillBoundsOfSuperlayer()
     }
+
+    // If no animation has been set up yet, display the first frame
+    // now that the layer hierarchy has been setup and laid out
+    if
+      timingConfiguration == nil,
+      bounds.size != .zero
+    {
+      currentFrame = animation.startFrame
+    }
   }
 
   // MARK: Private
+
+  /// The timing configuration that is being used for the currently-active animation
+  private var timingConfiguration: TimingConfiguration?
 
   private let animation: Animation
   private var animationLayers = [AnimationLayer]()
@@ -83,18 +107,13 @@ final class ExperimentalAnimationLayer: CALayer {
   }
 
   private func setupChildLayers() {
-    var animationLayers = [AnimationLayer]()
-
-    for layerModel in animation.layers.reversed() {
-      if let layer = (layerModel as? LayerConstructing)?.makeLayer() {
-        addSublayer(layer)
-        animationLayers.append(layer)
-      }
-
-      self.animationLayers = animationLayers
+    animationLayers = animation.layers.reversed().compactMap { layerModel in
+      (layerModel as? LayerConstructing)?.makeLayer()
     }
 
-    self.animationLayers = animationLayers
+    for animationLayer in animationLayers {
+      addSublayer(animationLayer)
+    }
   }
 
 }
@@ -103,9 +122,15 @@ final class ExperimentalAnimationLayer: CALayer {
 
 extension ExperimentalAnimationLayer: RootAnimationLayer {
 
-  var currentFrame: CGFloat {
-    get { 0 }
-    set { /* Currently unsupported */ }
+  var currentFrame: AnimationFrameTime {
+    get {
+      0 // TODO: how do we retrieve the realtime animation progress?
+    }
+    set {
+      setupAnimation(timingConfiguration: .init(
+        speed: 0,
+        timeOffset: animation.time(forFrame: newValue)))
+    }
   }
 
   var renderScale: CGFloat {
@@ -165,4 +190,21 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
     fatalError("Currently unsupported")
   }
 
+}
+
+// MARK: - CALayer + allSublayers
+
+extension CALayer {
+  /// All of the layers in the layer tree that are descendants from this later
+  @nonobjc
+  fileprivate var allSublayers: [CALayer] {
+    var allSublayers: [CALayer] = []
+
+    for sublayer in sublayers ?? [] {
+      allSublayers.append(sublayer)
+      allSublayers.append(contentsOf: sublayer.allSublayers)
+    }
+
+    return allSublayers
+  }
 }

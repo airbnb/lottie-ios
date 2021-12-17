@@ -5,7 +5,7 @@ import QuartzCore
 
 /// A root `CALayer` responsible for playing a Lottie animation
 protocol RootAnimationLayer: CALayer {
-  var currentFrame: CGFloat { get set }
+  var currentFrame: AnimationFrameTime { get set }
   var renderScale: CGFloat { get set }
   var respectAnimationFrameRate: Bool { get set }
 
