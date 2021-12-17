@@ -992,7 +992,7 @@ final public class AnimationView: LottieView {
     // TODO: Improve this integration point with the experimental rendering engine,
     // and implement support for the `AnimationView`'s timing and looping configuration fields
     if let experimentalAnimationLayer = animationlayer as? ExperimentalAnimationLayer {
-      experimentalAnimationLayer.playAnimation(
+      experimentalAnimationLayer.setupAnimation(
         timingConfiguration: .init(
           autoreverses: true,
           repeatCount: .greatestFiniteMagnitude))

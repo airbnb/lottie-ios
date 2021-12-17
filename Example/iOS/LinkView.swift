@@ -51,7 +51,7 @@ final class LinkView: UIView, EpoxyableView {
           setContent: { context, _ in
             context.constrainable.animation = .named(animationName)
             context.constrainable.contentMode = .scaleAspectFit
-            context.constrainable.currentProgress = 0.5
+//            context.constrainable.currentProgress = 0.5
           })
       }
 

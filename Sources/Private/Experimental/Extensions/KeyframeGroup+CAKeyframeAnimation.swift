@@ -43,7 +43,6 @@ extension KeyframeGroup {
     precondition(!keyframes.isEmpty, "Keyframes for \"\(keyPath.name)\" must be non-empty")
 
     let animation = CAKeyframeAnimation(keyPath: keyPath.name)
-    animation.duration = context.duration
 
     // Convert the list of `Keyframe<T>` into
     // the representation used by `CAKeyframeAnimation`

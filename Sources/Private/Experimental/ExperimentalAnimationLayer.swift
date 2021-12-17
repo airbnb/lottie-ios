@@ -47,20 +47,41 @@ final class ExperimentalAnimationLayer: CALayer {
     var timeOffset: TimeInterval = 0
   }
 
-  func playAnimation(timingConfiguration: TimingConfiguration) {
+  /// The timing configuration that is being used for the currently-active animation
+  private var timingConfiguration: TimingConfiguration?
+
+  /// Sets up `CAAnimation`s for each `AnimationLayer` in the layer hierarchy
+  func setupAnimation(timingConfiguration: TimingConfiguration) {
+    self.timingConfiguration = timingConfiguration
+
     let context = LayerAnimationContext(
       startFrame: animation.startFrame,
       endFrame: animation.endFrame,
       framerate: CGFloat(animation.framerate))
 
+    // Remove any existing animations from the layer hierarchy
     for animationLayer in animationLayers {
+      animationLayer.removeAllAnimations()
+    }
+
+    // Set up the new animations with the current `TimingConfiguration`
+    for animationLayer in animationLayers {
+
+      // Necessary here and not on animation (why??)
+      animationLayer.speed = timingConfiguration.speed
+
+      // TODO: instead of collecting and applying the animations here,
+      // it would be nice to just build them and apply them in the subclass
+      // (passing `TimingConfiguration` through the context struct)
+
       for caAnimation in animationLayer.animations(context: context) {
+        caAnimation.duration = animation.duration
+
         caAnimation.repeatCount = timingConfiguration.repeatCount
         caAnimation.autoreverses = timingConfiguration.autoreverses
-        caAnimation.speed = timingConfiguration.speed
         caAnimation.timeOffset = timingConfiguration.timeOffset
 
-        animationLayer.add(caAnimation, forKey: nil)
+        animationLayer.add(caAnimation, forKey: caAnimation.keyPath)
       }
     }
   }
@@ -103,9 +124,22 @@ final class ExperimentalAnimationLayer: CALayer {
 
 extension ExperimentalAnimationLayer: RootAnimationLayer {
 
-  var currentFrame: CGFloat {
+  var currentFrame: AnimationFrameTime {
     get { 0 }
-    set { /* Currently unsupported */ }
+    set {
+      // The animation must have a speed of 0 to be scrubbed interactively
+      if timingConfiguration?.speed != 0 {
+        var updatedTimingConfiguration = timingConfiguration ?? .init()
+        updatedTimingConfiguration.speed = 0
+        setupAnimation(timingConfiguration: updatedTimingConfiguration)
+      }
+
+      let newTimeOffset = animation.time(forFrame: newValue)
+
+      for sublayer in (sublayers ?? []) {
+        sublayer.timeOffset = Double(newTimeOffset)
+      }
+    }
   }
 
   var renderScale: CGFloat {
@@ -165,4 +199,26 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
     fatalError("Currently unsupported")
   }
 
+}
+
+extension CALayer {
+  var allLayers: [CALayer] {
+    var allLayers: [CALayer] = [self]
+
+    for sublayer in (sublayers ?? []) {
+      allLayers += sublayer.allLayers
+    }
+
+    return allLayers
+  }
+
+  var allSublayers: [CALayer] {
+    var allSublayers: [CALayer] = []
+
+    for sublayer in (sublayers ?? []) {
+      allSublayers += [sublayer] + sublayer.allSublayers
+    }
+
+    return allSublayers
+  }
 }
