@@ -127,18 +127,9 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
   var currentFrame: AnimationFrameTime {
     get { 0 }
     set {
-      // The animation must have a speed of 0 to be scrubbed interactively
-      if timingConfiguration?.speed != 0 {
-        var updatedTimingConfiguration = timingConfiguration ?? .init()
-        updatedTimingConfiguration.speed = 0
-        setupAnimation(timingConfiguration: updatedTimingConfiguration)
-      }
-
-      let newTimeOffset = animation.time(forFrame: newValue)
-
-      for sublayer in (sublayers ?? []) {
-        sublayer.timeOffset = Double(newTimeOffset)
-      }
+      setupAnimation(timingConfiguration: .init(
+        speed: 0,
+        timeOffset: animation.time(forFrame: newValue)))
     }
   }
 

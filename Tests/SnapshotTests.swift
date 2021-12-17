@@ -108,19 +108,6 @@ class SnapshotTests: XCTestCase {
 
         animationView.currentProgress = CGFloat(percent)
 
-        // Even though both animation engines support being scrubbed
-        // at runtime by setting `animationView.currentProgress`,
-        // `ExperimentalAnimationLayer`'s animations aren't applied
-        // properly when setting `currentProgress` in a headless environment.
-        //  - Instead, we manually specify the property `timeOffset` to apply
-        //    directly to the the `CAAnimation`s (which is able to be snapshot properly).
-        if usingExperimentalRenderingEngine {
-          (animationView.animationLayer as? ExperimentalAnimationLayer)?
-            .setupAnimation(timingConfiguration: .init(
-              speed: 0,
-              timeOffset: animation.duration * percent))
-        }
-
         assertSnapshot(
           matching: animationView,
           as: .imageOfPresentationLayer(precision: configuration.precision),
