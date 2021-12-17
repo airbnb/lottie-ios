@@ -20,5 +20,5 @@ let package = Package(
       dependencies: ["Lottie", "SnapshotTesting"],
       path: "Tests",
       exclude: ["Artifacts"],
-      resources: [.process("Samples"), .process("__Snapshots__")]),
+      resources: [.copy("Samples"), .process("__Snapshots__")]),
   ])
