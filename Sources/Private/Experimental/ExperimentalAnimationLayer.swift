@@ -201,7 +201,8 @@ extension CALayer {
     var allSublayers: [CALayer] = []
 
     for sublayer in sublayers ?? [] {
-      allSublayers += [sublayer] + sublayer.allSublayers
+      allSublayers.append(sublayer)
+      allSublayers.append(contentsOf: sublayer.allSublayers)
     }
 
     return allSublayers
