@@ -32,8 +32,8 @@ extension CAKeyPath {
 // MARK: - CALayer + KeyframeGroup
 
 extension CALayer {
-  /// Constructs and adds a `CAKeyframeAnimation` that applies this `KeyframeGroup`
-  /// to the given `keyPath` of this layer
+  /// Constructs a `CAKeyframeAnimation` that reflects the given `KeyframeGroup` data model,
+  /// and adds it to this `CALayer`.
   func addAnimation<KeyframeValue, ValueRepresentation>(
     for keyPath: CAKeyPath<ValueRepresentation>,
     keyframes keyframeGroup: KeyframeGroup<KeyframeValue>?,

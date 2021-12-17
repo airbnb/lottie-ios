@@ -47,9 +47,6 @@ final class ExperimentalAnimationLayer: CALayer {
     var timeOffset: TimeInterval = 0
   }
 
-  /// The timing configuration that is being used for the currently-active animation
-  private var timingConfiguration: TimingConfiguration?
-
   /// Sets up `CAAnimation`s for each `AnimationLayer` in the layer hierarchy
   func setupAnimation(timingConfiguration: TimingConfiguration) {
     self.timingConfiguration = timingConfiguration
@@ -98,6 +95,9 @@ final class ExperimentalAnimationLayer: CALayer {
   }
 
   // MARK: Private
+
+  /// The timing configuration that is being used for the currently-active animation
+  private var timingConfiguration: TimingConfiguration?
 
   private let animation: Animation
   private var animationLayers = [AnimationLayer]()
@@ -200,7 +200,7 @@ extension CALayer {
   fileprivate var allSublayers: [CALayer] {
     var allSublayers: [CALayer] = []
 
-    for sublayer in (sublayers ?? []) {
+    for sublayer in sublayers ?? [] {
       allSublayers += [sublayer] + sublayer.allSublayers
     }
 

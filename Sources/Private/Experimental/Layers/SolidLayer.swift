@@ -53,7 +53,7 @@ final class SolidLayer: CALayer {
 // MARK: AnimationLayer
 
 extension SolidLayer: AnimationLayer {
-  func setupAnimations(context: LayerAnimationContext) {
+  func setupAnimations(context _: LayerAnimationContext) {
     // TODO: Implement
   }
 }

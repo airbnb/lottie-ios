@@ -69,7 +69,7 @@ final class ShapeItemLayer: CAShapeLayer {
 // MARK: AnimationLayer
 
 extension ShapeItemLayer: AnimationLayer {
-  func setupAnimations(context: LayerAnimationContext) {
+  func setupAnimations(context _: LayerAnimationContext) {
     // TODO: Implement
   }
 }
