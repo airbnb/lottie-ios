@@ -47,11 +47,7 @@ extension CALayer {
     precondition(!keyframeGroup.keyframes.isEmpty, "Keyframes for \"\(keyPath.name)\" must be non-empty")
 
     let animation = CAKeyframeAnimation(keyPath: keyPath.name)
-    animation.duration = context.duration
-    animation.repeatCount = context.timingConfiguration.repeatCount
-    animation.autoreverses = context.timingConfiguration.autoreverses
-    animation.timeOffset = context.timingConfiguration.timeOffset
-    animation.isRemovedOnCompletion = false
+    animation.configureTiming(with: context)
 
     // Convert the list of `Keyframe<T>` into
     // the representation used by `CAKeyframeAnimation`

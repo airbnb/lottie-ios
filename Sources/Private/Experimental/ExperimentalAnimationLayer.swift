@@ -48,7 +48,10 @@ final class ExperimentalAnimationLayer: CALayer {
   }
 
   /// Sets up `CAAnimation`s for each `AnimationLayer` in the layer hierarchy
-  func setupAnimation(timingConfiguration: TimingConfiguration) {
+  func setupAnimation(
+    timingConfiguration: TimingConfiguration,
+    key: String = "animation")
+  {
     self.timingConfiguration = timingConfiguration
 
     let context = LayerAnimationContext(
@@ -58,6 +61,8 @@ final class ExperimentalAnimationLayer: CALayer {
       framerate: CGFloat(animation.framerate))
 
     // Remove any existing animations from the layer hierarchy
+    removeAllAnimations()
+
     for sublayer in allSublayers {
       sublayer.removeAllAnimations()
     }
@@ -75,6 +80,13 @@ final class ExperimentalAnimationLayer: CALayer {
     for animationLayer in animationLayers {
       animationLayer.setupAnimations(context: context)
     }
+
+    // We also set up a placeholder animation to track the current animation progress
+    let animationProgressTracker = CABasicAnimation(keyPath: #keyPath(animationProgress))
+    animationProgressTracker.configureTiming(with: context)
+    animationProgressTracker.fromValue = 0
+    animationProgressTracker.toValue = 1
+    add(animationProgressTracker, forKey: key)
   }
 
   override func layoutSublayers() {
@@ -90,7 +102,7 @@ final class ExperimentalAnimationLayer: CALayer {
       timingConfiguration == nil,
       bounds.size != .zero
     {
-      currentFrame = animation.startFrame
+      currentFrame = animation.frameTime(forProgress: animationProgress)
     }
   }
 
@@ -98,6 +110,9 @@ final class ExperimentalAnimationLayer: CALayer {
 
   /// The timing configuration that is being used for the currently-active animation
   private var timingConfiguration: TimingConfiguration?
+
+  /// The current progress of the `CAAnimation`
+  @objc private var animationProgress: CGFloat = 0
 
   private let animation: Animation
   private var animationLayers = [AnimationLayer]()
@@ -124,7 +139,7 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
 
   var currentFrame: AnimationFrameTime {
     get {
-      0 // TODO: how do we retrieve the realtime animation progress?
+      animation.frameTime(forProgress: (presentation() ?? self).animationProgress)
     }
     set {
       setupAnimation(timingConfiguration: .init(

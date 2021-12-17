@@ -41,3 +41,18 @@ struct LayerAnimationContext {
     return TimeInterval(frameDuration / framerate)
   }
 }
+
+// MARK: - CAAnimation + LayerAnimationContext
+
+extension CAAnimation {
+  /// Configures the timing properties of this `CAAnimation`
+  /// using the current `LayerAnimationContext`
+  func configureTiming(with context: LayerAnimationContext) {
+    duration = context.duration
+    repeatCount = context.timingConfiguration.repeatCount
+    autoreverses = context.timingConfiguration.autoreverses
+    timeOffset = context.timingConfiguration.timeOffset
+    isRemovedOnCompletion = false
+    fillMode = .both
+  }
+}
