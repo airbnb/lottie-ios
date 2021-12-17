@@ -65,9 +65,9 @@ final class Keyframe<T: Interpolatable> {
   /// The out tangent for the time interpolation curve.
   let outTangent: Vector2D?
 
-  /// The spacial in tangent of the vector.
+  /// The spatial in tangent of the vector.
   let spatialInTangent: Vector3D?
-  /// The spacial out tangent of the vector.
+  /// The spatial out tangent of the vector.
   let spatialOutTangent: Vector3D?
 }
 

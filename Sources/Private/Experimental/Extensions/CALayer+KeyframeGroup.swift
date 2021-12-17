@@ -55,17 +55,31 @@ extension CALayer {
 
     // Convert the list of `Keyframe<T>` into
     // the representation used by `CAKeyframeAnimation`
-    var values = [Any]()
-    var keyTimes = [NSNumber]()
+    var values = keyframeGroup.keyframes.map { keyframeModel in
+      keyframeValueMapping(keyframeModel.value)
+    }
 
-    for keyframeModel in keyframeGroup.keyframes {
-      let keyframe = CAKeyframe(
-        from: keyframeModel,
-        using: keyframeValueMapping,
-        context: context)
+    var keyTimes = keyframeGroup.keyframes.map { keyframeModel in
+      NSNumber(value: Float(context.relativeTime(of: keyframeModel.time)))
+    }
 
-      values.append(keyframe.value)
-      keyTimes.append(NSNumber(value: Float(keyframe.keyTime)))
+    // Compute the timing function between each keyframe and the subsequent keyframe
+    var timingFunctions: [CAMediaTimingFunction] = []
+
+    for (index, keyframe) in keyframeGroup.keyframes.enumerated()
+      where index != keyframeGroup.keyframes.indices.last
+    {
+      let nextKeyframe = keyframeGroup.keyframes[index + 1]
+
+      let controlPoint1 = keyframe.outTangent?.pointValue ?? .zero
+      let controlPoint2 = nextKeyframe.inTangent?.pointValue ?? CGPoint(x: 1, y: 1)
+
+      timingFunctions.append(CAMediaTimingFunction(
+        controlPoints:
+        Float(controlPoint1.x),
+        Float(controlPoint1.y),
+        Float(controlPoint2.x),
+        Float(controlPoint2.y)))
     }
 
     // Validate that we have correct start (0.0) and end (1.0) keyframes.
@@ -79,45 +93,30 @@ extension CALayer {
     if keyTimes.first != 0.0 {
       keyTimes.insert(0.0, at: 0)
       values.insert(values.first!, at: 0)
+      timingFunctions.insert(CAMediaTimingFunction(name: .linear), at: 0)
     }
 
     if keyTimes.last != 1.0 {
       keyTimes.append(1.0)
       values.append(values.last!)
+      timingFunctions.append(CAMediaTimingFunction(name: .linear))
     }
+
+    assert(
+      values.count == keyTimes.count,
+      "`values.count` must exactly equal `keyTimes.count`")
+
+    assert(
+      timingFunctions.count == (values.count - 1),
+      "`timingFunctions.count` must exactly equal `values.count - 1`")
 
     animation.values = values
     animation.keyTimes = keyTimes
+    animation.timingFunctions = timingFunctions
 
     add(animation, forKey: keyPath.name)
   }
 
-}
-
-// MARK: - CAKeyframe
-
-/// All of the information that describes a single keyframe in a `CAKeyframeAnimation`
-fileprivate struct CAKeyframe<ValueRepresentation> {
-  /// The value that will be applied to the keyPath of the layer being animated
-  let value: ValueRepresentation
-
-  /// The relative time (between 0 and 1) when this keyframe should be applied
-  let keyTime: AnimationProgressTime
-
-  // TODO: Support other properties like `timingFunctions`
-}
-
-extension CAKeyframe {
-  /// Converts the given `Keyframe` data model into a `CAKeyframe` representation
-  /// that can be used with a `CAKeyframeAnimation`.
-  init<KeyframeModelValue>(
-    from keyframeModel: Keyframe<KeyframeModelValue>,
-    using mapping: (KeyframeModelValue) -> ValueRepresentation,
-    context: LayerAnimationContext)
-  {
-    value = mapping(keyframeModel.value)
-    keyTime = context.relativeTime(of: keyframeModel.time)
-  }
 }
 
 // MARK: - LayerAnimationContext helpers
