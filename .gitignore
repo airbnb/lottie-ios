@@ -20,3 +20,4 @@ Tests/Artifacts
 
 # Private test animations
 Tests/Samples/Private/*.json
+Tests/__Snapshots__/**/*Private*.png
