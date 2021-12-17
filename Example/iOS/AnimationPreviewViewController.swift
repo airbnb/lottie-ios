@@ -119,7 +119,7 @@ class AnimationPreviewViewController: UIViewController {
   }
 
   private func updateLoopMode(to loopMode: LottieLoopMode) {
-    animationView.loopMode = .playOnce
+    animationView.loopMode = loopMode
     animationView.play()
     configureSettingsMenu()
   }
