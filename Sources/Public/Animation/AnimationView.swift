@@ -994,7 +994,7 @@ final public class AnimationView: LottieView {
     if let experimentalAnimationLayer = animationlayer as? ExperimentalAnimationLayer {
       experimentalAnimationLayer.setupAnimation(
         timingConfiguration: .init(
-          autoreverses: false,
+          autoreverses: true,
           repeatCount: .greatestFiniteMagnitude))
       return
     }
