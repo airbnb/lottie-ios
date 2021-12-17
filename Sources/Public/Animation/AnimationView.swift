@@ -173,7 +173,14 @@ final public class AnimationView: LottieView {
 
   /// Returns `true` if the animation is currently playing.
   public var isAnimationPlaying: Bool {
-    animationLayer?.animation(forKey: activeAnimationName) != nil
+    let caAnimationName: String
+    if animationLayer is ExperimentalAnimationLayer {
+      caAnimationName = "animationProgress"
+    } else {
+      caAnimationName = activeAnimationName
+    }
+
+    return animationLayer?.animation(forKey: caAnimationName) != nil
   }
 
   /// Returns `true` if the animation will start playing when this view is added to a window.
@@ -1000,8 +1007,7 @@ final public class AnimationView: LottieView {
         timingConfiguration: .init(
           autoreverses: loopMode.caAnimationConfiguration.autoreverses,
           repeatCount: loopMode.caAnimationConfiguration.repeatCount,
-          speed: Float(animationSpeed)),
-        key: activeAnimationName)
+          speed: Float(animationSpeed)))
       return
     }
 

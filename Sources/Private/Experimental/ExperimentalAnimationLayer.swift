@@ -48,10 +48,7 @@ final class ExperimentalAnimationLayer: CALayer {
   }
 
   /// Sets up `CAAnimation`s for each `AnimationLayer` in the layer hierarchy
-  func setupAnimation(
-    timingConfiguration: TimingConfiguration,
-    key: String = "animation")
-  {
+  func setupAnimation(timingConfiguration: TimingConfiguration) {
     self.timingConfiguration = timingConfiguration
 
     let context = LayerAnimationContext(
@@ -76,17 +73,13 @@ final class ExperimentalAnimationLayer: CALayer {
     //  - This is required to support scrubbing with a speed of 0
     speed = timingConfiguration.speed
 
+    // Setup a placeholder animation to let us track the realtime animation progress
+    setupPlaceholderAnimation(context: context)
+
     // Set up the new animations with the current `TimingConfiguration`
     for animationLayer in animationLayers {
       animationLayer.setupAnimations(context: context)
     }
-
-    // We also set up a placeholder animation to track the current animation progress
-    let animationProgressTracker = CABasicAnimation(keyPath: #keyPath(animationProgress))
-    animationProgressTracker.configureTiming(with: context)
-    animationProgressTracker.fromValue = 0
-    animationProgressTracker.toValue = 1
-    add(animationProgressTracker, forKey: key)
   }
 
   override func layoutSublayers() {
@@ -111,7 +104,8 @@ final class ExperimentalAnimationLayer: CALayer {
   /// The timing configuration that is being used for the currently-active animation
   private var timingConfiguration: TimingConfiguration?
 
-  /// The current progress of the `CAAnimation`
+  /// The current progress of the placeholder `CAAnimation`,
+  /// which is also the realtime animation progress of this layer's animation
   @objc private var animationProgress: CGFloat = 0
 
   private let animation: Animation
@@ -129,6 +123,17 @@ final class ExperimentalAnimationLayer: CALayer {
     for animationLayer in animationLayers {
       addSublayer(animationLayer)
     }
+  }
+
+  /// Sets up a placeholder `CABasicAnimation` that tracks the current
+  /// progress of this animation (between 0 and 1). This lets us provide
+  /// realtime animation progress via `self.currentFrame`.
+  private func setupPlaceholderAnimation(context: LayerAnimationContext) {
+    let animationProgressTracker = CABasicAnimation(keyPath: #keyPath(animationProgress))
+    animationProgressTracker.configureTiming(with: context)
+    animationProgressTracker.fromValue = 0
+    animationProgressTracker.toValue = 1
+    add(animationProgressTracker, forKey: #keyPath(animationProgress))
   }
 
 }

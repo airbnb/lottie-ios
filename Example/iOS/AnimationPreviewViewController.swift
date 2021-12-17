@@ -101,27 +101,27 @@ class AnimationPreviewViewController: UIViewController {
             title: "Autoreverse",
             state: animationView.loopMode == .autoReverse ? .on : .off,
             handler: { [weak self] _ in
-              self?.animationView.loopMode = .autoReverse
-              self?.animationView.play()
-              self?.configureSettingsMenu()
+              self?.updateLoopMode(to: .autoReverse)
             }),
           UIAction(
             title: "Loop",
             state: animationView.loopMode == .loop ? .on : .off,
             handler: { [weak self] _ in
-              self?.animationView.loopMode = .loop
-              self?.animationView.play()
-              self?.configureSettingsMenu()
+              self?.updateLoopMode(to: .loop)
             }),
           UIAction(
             title: "Play Once",
             state: animationView.loopMode == .playOnce ? .on : .off,
             handler: { [weak self] _ in
-              self?.animationView.loopMode = .playOnce
-              self?.animationView.play()
-              self?.configureSettingsMenu()
+              self?.updateLoopMode(to: .playOnce)
             }),
         ]))
+  }
+
+  private func updateLoopMode(to loopMode: LottieLoopMode) {
+    animationView.loopMode = .playOnce
+    animationView.play()
+    configureSettingsMenu()
   }
 
 }
