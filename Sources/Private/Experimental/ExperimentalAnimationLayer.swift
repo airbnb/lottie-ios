@@ -58,6 +58,8 @@ final class ExperimentalAnimationLayer: CALayer {
       framerate: CGFloat(animation.framerate))
 
     // Remove any existing animations from the layer hierarchy
+    removeAllAnimations()
+
     for sublayer in allSublayers {
       sublayer.removeAllAnimations()
     }
@@ -70,6 +72,9 @@ final class ExperimentalAnimationLayer: CALayer {
     // by all sublayers and their animations.
     //  - This is required to support scrubbing with a speed of 0
     speed = timingConfiguration.speed
+
+    // Setup a placeholder animation to let us track the realtime animation progress
+    setupPlaceholderAnimation(context: context)
 
     // Set up the new animations with the current `TimingConfiguration`
     for animationLayer in animationLayers {
@@ -90,7 +95,7 @@ final class ExperimentalAnimationLayer: CALayer {
       timingConfiguration == nil,
       bounds.size != .zero
     {
-      currentFrame = animation.startFrame
+      currentFrame = animation.frameTime(forProgress: animationProgress)
     }
   }
 
@@ -98,6 +103,10 @@ final class ExperimentalAnimationLayer: CALayer {
 
   /// The timing configuration that is being used for the currently-active animation
   private var timingConfiguration: TimingConfiguration?
+
+  /// The current progress of the placeholder `CAAnimation`,
+  /// which is also the realtime animation progress of this layer's animation
+  @objc private var animationProgress: CGFloat = 0
 
   private let animation: Animation
   private var animationLayers = [AnimationLayer]()
@@ -116,6 +125,17 @@ final class ExperimentalAnimationLayer: CALayer {
     }
   }
 
+  /// Sets up a placeholder `CABasicAnimation` that tracks the current
+  /// progress of this animation (between 0 and 1). This lets us provide
+  /// realtime animation progress via `self.currentFrame`.
+  private func setupPlaceholderAnimation(context: LayerAnimationContext) {
+    let animationProgressTracker = CABasicAnimation(keyPath: #keyPath(animationProgress))
+    animationProgressTracker.configureTiming(with: context)
+    animationProgressTracker.fromValue = 0
+    animationProgressTracker.toValue = 1
+    add(animationProgressTracker, forKey: #keyPath(animationProgress))
+  }
+
 }
 
 // MARK: RootAnimationLayer
@@ -124,7 +144,7 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
 
   var currentFrame: AnimationFrameTime {
     get {
-      0 // TODO: how do we retrieve the realtime animation progress?
+      animation.frameTime(forProgress: (presentation() ?? self).animationProgress)
     }
     set {
       setupAnimation(timingConfiguration: .init(

@@ -12,6 +12,8 @@ class AnimationPreviewViewController: UIViewController {
     self.animationName = animationName
     super.init(nibName: nil, bundle: nil)
     title = animationName.components(separatedBy: "/").last!
+    animationView.loopMode = .autoReverse
+    configureSettingsMenu()
   }
 
   required init?(coder _: NSCoder) {
@@ -76,10 +78,7 @@ class AnimationPreviewViewController: UIViewController {
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    animationView.play(
-      fromProgress: 0,
-      toProgress: 1,
-      loopMode: LottieLoopMode.autoReverse)
+    animationView.play(fromProgress: 0, toProgress: 1)
   }
 
   // MARK: Private
@@ -89,5 +88,40 @@ class AnimationPreviewViewController: UIViewController {
   private let slider = UISlider()
 
   private var displayLink: CADisplayLink?
+
+  private func configureSettingsMenu() {
+    navigationItem.rightBarButtonItem = UIBarButtonItem(
+      title: "Settings",
+      image: .init(systemName: "repeat.circle"),
+      primaryAction: nil,
+      menu: UIMenu(
+        title: "Loop Mode",
+        children: [
+          UIAction(
+            title: "Autoreverse",
+            state: animationView.loopMode == .autoReverse ? .on : .off,
+            handler: { [weak self] _ in
+              self?.updateLoopMode(to: .autoReverse)
+            }),
+          UIAction(
+            title: "Loop",
+            state: animationView.loopMode == .loop ? .on : .off,
+            handler: { [weak self] _ in
+              self?.updateLoopMode(to: .loop)
+            }),
+          UIAction(
+            title: "Play Once",
+            state: animationView.loopMode == .playOnce ? .on : .off,
+            handler: { [weak self] _ in
+              self?.updateLoopMode(to: .playOnce)
+            }),
+        ]))
+  }
+
+  private func updateLoopMode(to loopMode: LottieLoopMode) {
+    animationView.loopMode = loopMode
+    animationView.play()
+    configureSettingsMenu()
+  }
 
 }

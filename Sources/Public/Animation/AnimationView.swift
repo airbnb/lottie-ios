@@ -173,7 +173,14 @@ final public class AnimationView: LottieView {
 
   /// Returns `true` if the animation is currently playing.
   public var isAnimationPlaying: Bool {
-    animationLayer?.animation(forKey: activeAnimationName) != nil
+    let caAnimationName: String
+    if animationLayer is ExperimentalAnimationLayer {
+      caAnimationName = "animationProgress"
+    } else {
+      caAnimationName = activeAnimationName
+    }
+
+    return animationLayer?.animation(forKey: caAnimationName) != nil
   }
 
   /// Returns `true` if the animation will start playing when this view is added to a window.
@@ -989,18 +996,20 @@ final public class AnimationView: LottieView {
 
     guard window != nil else { waitingToPlayAnimation = true; return }
 
-    // TODO: Improve this integration point with the experimental rendering engine,
-    // and implement support for the `AnimationView`'s timing and looping configuration fields
+    animationID = animationID + 1
+    activeAnimationName = AnimationView.animationName + String(animationID)
+
+    // TODO: Improve this integration point with the experimental rendering engine
+    // (e.g. when changing the `loopMode`, the new animation should begin at
+    // `currentFrame` instead of starting from the beginning.)
     if let experimentalAnimationLayer = animationlayer as? ExperimentalAnimationLayer {
       experimentalAnimationLayer.setupAnimation(
         timingConfiguration: .init(
-          autoreverses: true,
-          repeatCount: .greatestFiniteMagnitude))
+          autoreverses: loopMode.caAnimationConfiguration.autoreverses,
+          repeatCount: loopMode.caAnimationConfiguration.repeatCount,
+          speed: Float(animationSpeed)))
       return
     }
-
-    animationID = animationID + 1
-    activeAnimationName = AnimationView.animationName + String(animationID)
 
     /// At this point there is no animation on animationLayer and its state is set.
 
@@ -1031,21 +1040,8 @@ final public class AnimationView: LottieView {
     layerAnimation.speed = Float(animationSpeed)
     layerAnimation.duration = TimeInterval(duration)
     layerAnimation.fillMode = CAMediaTimingFillMode.both
-
-    switch loopMode {
-    case .playOnce:
-      layerAnimation.repeatCount = 1
-    case .loop:
-      layerAnimation.repeatCount = HUGE
-    case .autoReverse:
-      layerAnimation.repeatCount = HUGE
-      layerAnimation.autoreverses = true
-    case .repeat(let amount):
-      layerAnimation.repeatCount = amount
-    case .repeatBackwards(let amount):
-      layerAnimation.repeatCount = amount
-      layerAnimation.autoreverses = true
-    }
+    layerAnimation.repeatCount = loopMode.caAnimationConfiguration.repeatCount
+    layerAnimation.autoreverses = loopMode.caAnimationConfiguration.autoreverses
 
     layerAnimation.isRemovedOnCompletion = false
     if timeOffset != 0 {
@@ -1067,4 +1063,24 @@ final public class AnimationView: LottieView {
   /// The configuration of experimental features that this `AnimationView` uses
   private let experimentalFeatureConfiguration: ExperimentalFeatureConfiguration
 
+}
+
+// MARK: - LottieLoopMode + caAnimationConfiguration
+
+extension LottieLoopMode {
+  /// The `CAAnimation` configuration that reflects this mode
+  var caAnimationConfiguration: (repeatCount: Float, autoreverses: Bool) {
+    switch self {
+    case .playOnce:
+      return (repeatCount: 1, autoreverses: false)
+    case .loop:
+      return (repeatCount: .greatestFiniteMagnitude, autoreverses: false)
+    case .autoReverse:
+      return (repeatCount: .greatestFiniteMagnitude, autoreverses: true)
+    case .repeat(let amount):
+      return (repeatCount: amount, autoreverses: false)
+    case .repeatBackwards(let amount):
+      return (repeatCount: amount, autoreverses: true)
+    }
+  }
 }
