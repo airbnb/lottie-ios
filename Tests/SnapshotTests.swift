@@ -37,15 +37,17 @@ class SnapshotTests: XCTestCase {
       // The snapshot files follow the format `testCaseName.animationName-percentage.png`
       //  - We remove the known prefix and known suffixes to recover the input file name
       //  - `animationName` can contain dashes, so we can't just split the string at each dash
-      let animationName = snapshotURL.lastPathComponent
-        .replacingOccurrences(of: "testExperimentalRenderingEngine.", with: "")
+      var animationName = snapshotURL.lastPathComponent
         .replacingOccurrences(of: "testLottieSnapshots.", with: "")
-        .replacingOccurrences(of: "-0.png", with: "")
-        .replacingOccurrences(of: "-25.png", with: "")
-        .replacingOccurrences(of: "-50.png", with: "")
-        .replacingOccurrences(of: "-75.png", with: "")
-        .replacingOccurrences(of: "-100.png", with: "")
-        .replacingOccurrences(of: "-", with: "/")
+        .replacingOccurrences(of: "testExperimentalRenderingEngine.", with: "")
+
+      for percentage in progressPercentagesToSnapshot {
+        animationName = animationName.replacingOccurrences(
+          of: "-\(Int(percentage * 100)).png",
+          with: "")
+      }
+
+      animationName = animationName.replacingOccurrences(of: "-", with: "/")
 
       XCTAssert(
         sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).json") }),
@@ -74,6 +76,15 @@ class SnapshotTests: XCTestCase {
 
   // MARK: Private
 
+  /// `currentProgress` percentages that should be snapshot in `compareSampleSnapshots`
+  private let progressPercentagesToSnapshot = [0, 0.25, 0.5, 0.75, 1.0]
+
+  /// The name of the directory that contains the sample json files
+  private let samplesDirectoryName = "Samples"
+
+  /// The list of snapshot image files in `Tests/__Snapshots__`
+  private let snapshotURLs = Bundle.module.urls(forResourcesWithExtension: "png", subdirectory: nil)!
+
   /// The list of sample animation files in `Tests/Samples`
   private lazy var sampleAnimationURLs: [URL] = {
     let enumerator = FileManager.default.enumerator(atPath: Bundle.module.bundlePath)!
@@ -82,7 +93,7 @@ class SnapshotTests: XCTestCase {
 
     while let fileSubpath = enumerator.nextObject() as? String {
       if
-        fileSubpath.hasPrefix("Samples"),
+        fileSubpath.hasPrefix(samplesDirectoryName),
         fileSubpath.contains("json")
       {
         let fileURL = Bundle.module.bundleURL.appendingPathComponent(fileSubpath)
@@ -92,9 +103,6 @@ class SnapshotTests: XCTestCase {
 
     return sampleAnimationURLs
   }()
-
-  /// The list of snapshot image files in `Tests/__Snapshots__`
-  private let snapshotURLs = Bundle.module.urls(forResourcesWithExtension: "png", subdirectory: nil)!
 
   /// Captures snapshots of `sampleAnimationURLs` and compares them to the snapshot images stored on disk
   private func compareSampleSnapshots(
@@ -116,7 +124,7 @@ class SnapshotTests: XCTestCase {
       // The sample animation name should include the subfolders
       // (since that helps uniquely identity the animation JSON file).
       let pathComponents = sampleAnimationURL.pathComponents
-      let samplesIndex = pathComponents.lastIndex(of: "Samples")!
+      let samplesIndex = pathComponents.lastIndex(of: samplesDirectoryName)!
       let subpath = pathComponents[(samplesIndex + 1)...]
 
       let sampleAnimationName = subpath
@@ -133,13 +141,13 @@ class SnapshotTests: XCTestCase {
         let animation = Animation.named(
           sampleAnimationName,
           bundle: .module,
-          subdirectory: "Samples")
+          subdirectory: samplesDirectoryName)
       else {
         XCTFail("Could not parse Samples/\(sampleAnimationName).json")
         continue
       }
 
-      for percent in [0, 0.25, 0.5, 0.75, 1.0] {
+      for percent in progressPercentagesToSnapshot {
         let animationView = AnimationView(
           animation: animation,
           _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration(
