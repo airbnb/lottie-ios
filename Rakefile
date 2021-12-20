@@ -56,6 +56,22 @@ namespace :test do
   task :process do
     sh 'mint run ChargePoint/xcparse@2.2.1 xcparse attachments Tests/Artifacts/LottieTests.xcresult Tests/Artifacts/TestAttachments'
   end
+
+  desc 'Tests Carthage support'
+  task :carthage do
+    # Copy the repo to `Carthage/Checkouts/Lottie-ios`
+    sh 'rm -rf script/test-carthage/Carthage'
+    sh 'mkdir script/test-carthage/Carthage script/test-carthage/Carthage/Checkouts script/test-carthage/Carthage/Checkouts/lottie-ios'
+    sh 'cp -R [^script]* script/test-carthage/Carthage/Checkouts/lottie-ios'
+
+    Dir.chdir('script/test-carthage') do
+      # Build the LottieCarthage framework scheme
+      sh 'carthage build --use-xcframeworks'
+
+      # Build a test app that imports and uses the LottieCarthage framework
+      sh 'xcodebuild build -scheme CarthageTest -destination "platform=iOS Simulator,name=iPhone 8"'
+    end
+  end
 end
 
 namespace :lint do

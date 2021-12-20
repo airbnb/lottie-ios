@@ -44,6 +44,13 @@ jobs:
       - uses: actions/checkout@v2
       - name: Lint Cocoapod
         run: bundle install && bundle exec rake lint:podspec
+  carthage:
+    name: "Test Carthage support"
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test Carthage support
+        run: brew install carthage && bundle install && bundle exec rake test:carthage
   swiftlint:
     name: "Lint Swift (SwiftLint)"
     runs-on: macos-latest

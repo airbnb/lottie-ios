@@ -15,6 +15,9 @@ build/
 .build/
 Package.resolved
 
+# Carthage support tests
+script/test-carthage/Carthage
+
 # Test artifacts
 Tests/Artifacts
 
