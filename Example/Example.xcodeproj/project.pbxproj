@@ -33,6 +33,16 @@
 		2EC6E5102763E79F002E091C /* AnimationPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6E50F2763E79F002E091C /* AnimationPreviewViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2ED64E3D2770F911006AA0F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ED64E392770F911006AA0F3 /* CarthageSupport.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2ED64E312770F8EA006AA0F3;
+			remoteInfo = Lottie;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		2E0F2FB627602C1500B65DE3 /* .. */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ..; sourceTree = "<group>"; };
 		2E0F2FBD27602CB300B65DE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,6 +68,7 @@
 		2EA15A122761299C00CE8F1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EC6E5072763D981002E091C /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
 		2EC6E50F2763E79F002E091C /* AnimationPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationPreviewViewController.swift; sourceTree = "<group>"; };
+		2ED64E392770F911006AA0F3 /* CarthageSupport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CarthageSupport.xcodeproj; path = ../CarthageSupport/CarthageSupport.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,9 +142,18 @@
 			path = tvOS;
 			sourceTree = "<group>";
 		};
+		2ED64E3A2770F911006AA0F3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2ED64E3E2770F911006AA0F3 /* Lottie.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				2ED64E392770F911006AA0F3 /* CarthageSupport.xcodeproj */,
 				2E3EEB372763C68C00287EEA /* Samples */,
 				2E9E77AD27602BD400C84BA3 /* iOS */,
 				2EA159EF2761289C00CE8F1F /* macOS */,
@@ -263,6 +283,12 @@
 			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2ED64E3A2770F911006AA0F3 /* Products */;
+					ProjectRef = 2ED64E392770F911006AA0F3 /* CarthageSupport.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2E9E77AB27602BD400C84BA3 /* Example (iOS) */,
@@ -271,6 +297,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		2ED64E3E2770F911006AA0F3 /* Lottie.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Lottie.framework;
+			remoteRef = 2ED64E3D2770F911006AA0F3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2E9E77AA27602BD400C84BA3 /* Resources */ = {
