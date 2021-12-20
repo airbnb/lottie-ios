@@ -60,9 +60,8 @@ namespace :test do
   desc 'Tests Carthage support'
   task :carthage do
     # Copy the repo to `Carthage/Checkouts/Lottie-ios`
-    sh 'rm -rf script/test-carthage/Carthage/Checkouts/lottie-ios'
-    sh 'rm -rf script/test-carthage/Carthage/Build'
-    sh 'mkdir script/test-carthage/Carthage/Checkouts/lottie-ios'
+    sh 'rm -rf script/test-carthage/Carthage'
+    sh 'mkdir script/test-carthage/Carthage script/test-carthage/Carthage/Checkouts script/test-carthage/Carthage/Checkouts/lottie-ios'
     sh 'cp -R [^script]* script/test-carthage/Carthage/Checkouts/lottie-ios'
 
     Dir.chdir('script/test-carthage') do
