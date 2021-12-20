@@ -26,14 +26,14 @@ extension SnapshotConfiguration {
   static let customMapping: [String: SnapshotConfiguration] = [
     /// These samples appear to render in a slightly non-deterministic way,
     /// depending on the test environment, so we have to decrease precision a bit.
-    "issue_1407": .precision(0.9),
-    "FirstText": .precision(0.99),
-    "verifyLineHeight": .precision(0.99),
+    "Issues/issue_1407": .precision(0.9),
+    "Nonanimating/FirstText": .precision(0.99),
+    "Nonanimating/verifyLineHeight": .precision(0.99),
 
     /// These samples are known to be supported by the experimental rendering engine
-    "Zoom": .testWithExperimentalRenderingEngine,
-    "GeometryTransformTest": .testWithExperimentalRenderingEngine,
-    "loading_dots_1": .testWithExperimentalRenderingEngine,
+    "Nonanimating/Zoom": .testWithExperimentalRenderingEngine,
+    "Nonanimating/GeometryTransformTest": .testWithExperimentalRenderingEngine,
+    "LottieFiles/loading_dots_1": .testWithExperimentalRenderingEngine,
   ]
 }
 

@@ -34,11 +34,23 @@ class SnapshotTests: XCTestCase {
   /// a sample JSON file that is visible to this test target.
   func testAllSnapshotsHaveCorrespondingSampleFile() {
     for snapshotURL in snapshotURLs {
-      // The snapshot files follow the format `testLottieSnapshots.NAME-PERCENTAGE.png`
-      let animationName = snapshotURL.lastPathComponent.components(separatedBy: .init(charactersIn: ".-"))[1]
+      // The snapshot files follow the format `testCaseName.animationName-percentage.png`
+      //  - We remove the known prefix and known suffixes to recover the input file name
+      //  - `animationName` can contain dashes, so we can't just split the string at each dash
+      var animationName = snapshotURL.lastPathComponent
+        .replacingOccurrences(of: "testLottieSnapshots.", with: "")
+        .replacingOccurrences(of: "testExperimentalRenderingEngine.", with: "")
+
+      for percentage in progressPercentagesToSnapshot {
+        animationName = animationName.replacingOccurrences(
+          of: "-\(Int(percentage * 100)).png",
+          with: "")
+      }
+
+      animationName = animationName.replacingOccurrences(of: "-", with: "/")
 
       XCTAssert(
-        sampleAnimationURLs.contains(where: { $0.lastPathComponent == "\(animationName).json" }),
+        sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).json") }),
         "Snapshot \"\(snapshotURL.lastPathComponent)\" has no corresponding sample animation")
     }
   }
@@ -47,8 +59,10 @@ class SnapshotTests: XCTestCase {
   /// reference a sample json file that actually exists
   func testCustomSnapshotConfigurationsHaveCorrespondingSampleFile() {
     for (animationName, _) in SnapshotConfiguration.customMapping {
+      let expectedSampleFile = Bundle.module.bundleURL.appendingPathComponent("Samples/\(animationName).json")
+
       XCTAssert(
-        sampleAnimationURLs.contains(where: { $0.lastPathComponent == "\(animationName).json" }),
+        sampleAnimationURLs.contains(expectedSampleFile),
         "Custom configuration for \"\(animationName)\" has no corresponding sample animation")
     }
   }
@@ -62,11 +76,33 @@ class SnapshotTests: XCTestCase {
 
   // MARK: Private
 
-  /// The list of sample animation files in `Tests/Samples`
-  private let sampleAnimationURLs = Bundle.module.urls(forResourcesWithExtension: "json", subdirectory: nil)!
+  /// `currentProgress` percentages that should be snapshot in `compareSampleSnapshots`
+  private let progressPercentagesToSnapshot = [0, 0.25, 0.5, 0.75, 1.0]
+
+  /// The name of the directory that contains the sample json files
+  private let samplesDirectoryName = "Samples"
 
   /// The list of snapshot image files in `Tests/__Snapshots__`
   private let snapshotURLs = Bundle.module.urls(forResourcesWithExtension: "png", subdirectory: nil)!
+
+  /// The list of sample animation files in `Tests/Samples`
+  private lazy var sampleAnimationURLs: [URL] = {
+    let enumerator = FileManager.default.enumerator(atPath: Bundle.module.bundlePath)!
+
+    var sampleAnimationURLs: [URL] = []
+
+    while let fileSubpath = enumerator.nextObject() as? String {
+      if
+        fileSubpath.hasPrefix(samplesDirectoryName),
+        fileSubpath.contains("json")
+      {
+        let fileURL = Bundle.module.bundleURL.appendingPathComponent(fileSubpath)
+        sampleAnimationURLs.append(fileURL)
+      }
+    }
+
+    return sampleAnimationURLs
+  }()
 
   /// Captures snapshots of `sampleAnimationURLs` and compares them to the snapshot images stored on disk
   private func compareSampleSnapshots(
@@ -83,19 +119,35 @@ class SnapshotTests: XCTestCase {
     }
 
     for sampleAnimationURL in sampleAnimationURLs {
-      let sampleAnimationName = sampleAnimationURL.lastPathComponent.replacingOccurrences(of: ".json", with: "")
+      // Each of the sample animation URLs has the format
+      // `.../*.bundle/Samples/{subfolder}/{animationName}.json`.
+      // The sample animation name should include the subfolders
+      // (since that helps uniquely identity the animation JSON file).
+      let pathComponents = sampleAnimationURL.pathComponents
+      let samplesIndex = pathComponents.lastIndex(of: samplesDirectoryName)!
+      let subpath = pathComponents[(samplesIndex + 1)...]
+
+      let sampleAnimationName = subpath
+        .joined(separator: "/")
+        .replacingOccurrences(of: ".json", with: "")
+
       let configuration = SnapshotConfiguration.forSample(named: sampleAnimationName)
 
       if usingExperimentalRenderingEngine, !configuration.testWithExperimentalRenderingEngine {
         continue
       }
 
-      guard let animation = Animation.named(sampleAnimationName, bundle: .module) else {
-        XCTFail("Could not parse \(sampleAnimationName).json")
+      guard
+        let animation = Animation.named(
+          sampleAnimationName,
+          bundle: .module,
+          subdirectory: samplesDirectoryName)
+      else {
+        XCTFail("Could not parse Samples/\(sampleAnimationName).json")
         continue
       }
 
-      for percent in [0, 0.25, 0.5, 0.75, 1.0] {
+      for percent in progressPercentagesToSnapshot {
         let animationView = AnimationView(
           animation: animation,
           _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration(
