@@ -5,22 +5,26 @@ import QuartzCore
 
 // MARK: - ShapeLayer
 
-/// The CALayer type responsible for rendering `ShapeLayerModel`s
-final class ShapeLayer: CALayer {
+/// The `CALayer` type responsible for rendering `PreCompLayerModel`s
+final class PreCompLayer: CALayer {
 
   // MARK: Lifecycle
 
-  init(shapeLayer: ShapeLayerModel) {
-    self.shapeLayer = shapeLayer
+  init(
+    preCompLayer: PreCompLayerModel,
+    context: LayerContext)
+  {
+    self.preCompLayer = preCompLayer
+
+    let preCompLayerModels = context.assetLibrary?.precompAssets[preCompLayer.referenceID]?.layers ?? []
+    animationLayers = preCompLayerModels.compactMap { layerModel in
+      (layerModel as? LayerConstructing)?.makeLayer(context: context)
+    }
+
     super.init()
 
-    for item in shapeLayer.items {
-      // TODO: Can items other than `Group`s appear at the top level?
-      // If so, how does that work?
-      if let group = item as? Group {
-        let sublayer = ShapeItemLayer(items: group.items)
-        addSublayer(sublayer)
-      }
+    for animationLayer in animationLayers {
+      addSublayer(animationLayer)
     }
   }
 
@@ -35,7 +39,8 @@ final class ShapeLayer: CALayer {
       fatalError("\(Self.self).init(layer:) incorrectly called with \(type(of: layer))")
     }
 
-    shapeLayer = layer.shapeLayer
+    preCompLayer = layer.preCompLayer
+    animationLayers = []
     super.init(layer: layer)
   }
 
@@ -51,28 +56,27 @@ final class ShapeLayer: CALayer {
 
   // MARK: Private
 
-  private let shapeLayer: ShapeLayerModel
+  private let preCompLayer: PreCompLayerModel
+  private let animationLayers: [AnimationLayer]
 
 }
 
 // MARK: AnimationLayer
 
-extension ShapeLayer: AnimationLayer {
+extension PreCompLayer: AnimationLayer {
   func setupAnimations(context: LayerAnimationContext) {
-    addBaseAnimations(for: shapeLayer, context: context)
+    addBaseAnimations(for: preCompLayer, context: context)
 
-    for sublayer in (sublayers ?? []) {
-      if let animationLayer = sublayer as? AnimationLayer {
-        animationLayer.setupAnimations(context: context)
-      }
+    for animationLayer in animationLayers {
+      animationLayer.setupAnimations(context: context)
     }
   }
 }
 
 // MARK: - ShapeLayerModel + LayerConstructing
 
-extension ShapeLayerModel: LayerConstructing {
+extension PreCompLayerModel: LayerConstructing {
   func makeLayer(context: LayerContext) -> AnimationLayer {
-    ShapeLayer(shapeLayer: self)
+    PreCompLayer(preCompLayer: self, context: context)
   }
 }

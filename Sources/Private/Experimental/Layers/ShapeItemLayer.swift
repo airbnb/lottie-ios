@@ -18,30 +18,20 @@ final class ShapeItemLayer: CAShapeLayer {
     path = items.path
 
     if let fill = items.first(Fill.self) {
-      // TODO: Need to figure out how to handle keyframing
+      // TODO: animate these properties
       fillColor = fill.color.keyframes.first!.value.cgColorValue
       opacity = Float(fill.opacity.keyframes.first!.value.value)
       fillRule = fill.fillRule.caFillRule
     }
 
     if let stroke = items.first(Stroke.self) {
+      // TODO: animate these properties
       strokeColor = stroke.color.keyframes.first!.value.cgColorValue
         .copy(alpha: stroke.opacity.keyframes.first!.value.cgFloatValue)
       lineWidth = stroke.width.keyframes.first!.value.cgFloatValue
       lineJoin = stroke.lineJoin.caLineJoin
       lineCap = stroke.lineCap.caLineCap
       // TODO: Support `lineDashPhase` and `lineDashPattern`
-    }
-
-    if let shapeTransform = items.first(ShapeTransform.self) {
-      // TODO: Need to figure out how to handle keyframing
-      transform = CATransform3D.makeTransform(
-        anchor: shapeTransform.anchor.keyframes.first!.value.pointValue,
-        position: shapeTransform.position.keyframes.first!.value.pointValue,
-        scale: shapeTransform.scale.keyframes.first!.value.sizeValue,
-        rotation: shapeTransform.rotation.keyframes.first!.value.cgFloatValue,
-        skew: shapeTransform.skew.keyframes.first!.value.cgFloatValue,
-        skewAxis: shapeTransform.skewAxis.keyframes.first!.value.cgFloatValue)
     }
   }
 
@@ -69,8 +59,12 @@ final class ShapeItemLayer: CAShapeLayer {
 // MARK: AnimationLayer
 
 extension ShapeItemLayer: AnimationLayer {
-  func setupAnimations(context _: LayerAnimationContext) {
-    // TODO: Implement
+  func setupAnimations(context: LayerAnimationContext) {
+    if let shapeTransform = items.first(ShapeTransform.self) {
+      addAnimations(for: shapeTransform, context: context)
+    }
+
+    // TODO: animate more properties
   }
 }
 

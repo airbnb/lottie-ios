@@ -116,8 +116,10 @@ final class ExperimentalAnimationLayer: CALayer {
   }
 
   private func setupChildLayers() {
+    let context = LayerContext(assetLibrary: animation.assetLibrary)
+
     animationLayers = animation.layers.reversed().compactMap { layerModel in
-      (layerModel as? LayerConstructing)?.makeLayer()
+      (layerModel as? LayerConstructing)?.makeLayer(context: context)
     }
 
     for animationLayer in animationLayers {
