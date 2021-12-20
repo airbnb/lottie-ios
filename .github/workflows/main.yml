@@ -50,7 +50,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Test Carthage support
-        run: brew install mint && brew install carthage && bundle install && bundle exec rake test:carthage
+        run: brew install carthage && bundle install && bundle exec rake test:carthage
   swiftlint:
     name: "Lint Swift (SwiftLint)"
     runs-on: macos-latest

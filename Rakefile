@@ -69,7 +69,7 @@ namespace :test do
       sh 'carthage build --use-xcframeworks'
 
       # Build a test app that imports and uses the LottieCarthage framework
-      xcodebuild('build -scheme CarthageTest -destination "platform=iOS Simulator,name=iPhone 8"')
+      sh 'xcodebuild build -scheme CarthageTest -destination "platform=iOS Simulator,name=iPhone 8"'
     end
   end
 end
