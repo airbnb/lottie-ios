@@ -26,7 +26,8 @@ Here is just a small sampling of the power of Lottie
 ![Abcs](_Gifs/Examples4.gif)
 
 ## Installing Lottie
-Lottie supports [CocoaPods](https://cocoapods.org/) and [Carthage](https://github.com/Carthage/Carthage) (Both dynamic and static). Lottie is written in ***Swift 4.2***.
+Lottie supports [Swift Package Manager](https://www.swift.org/package-manager/), [CocoaPods](https://cocoapods.org/) and [Carthage](https://github.com/Carthage/Carthage) (Both dynamic and static). Lottie is written in ***Swift 5.4***.
+
 ### Github Repo
 
 You can pull the [Lottie Github Repo](https://github.com/airbnb/lottie-ios/) and include the Lottie.xcodeproj to build a dynamic or static library.
@@ -55,7 +56,10 @@ And then run:
 ```
 carthage update
 ```
-In your application targets “General” tab under the “Linked Frameworks and Libraries” section, drag and drop lottie-ios.framework from the Carthage/Build/iOS directory that `carthage update` produced.
+In your application targets “General” tab under the “Linked Frameworks and Libraries” section, drag and drop lottie-ios.framework from the Carthage/Build/iOS directory that `carthage update` produced. You should now be able to import Lottie with
+```swift
+import LottieCarthage
+```
 
 ### Swift Package Manager
 ``` swift
