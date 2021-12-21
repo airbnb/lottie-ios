@@ -6,7 +6,7 @@ import QuartzCore
 // MARK: - ShapeLayer
 
 /// The `CALayer` type responsible for rendering `PreCompLayerModel`s
-final class PreCompLayer: CALayer {
+final class PreCompLayer: BaseCompositionLayer {
 
   // MARK: Lifecycle
 
@@ -15,16 +15,14 @@ final class PreCompLayer: CALayer {
     context: LayerContext)
   {
     self.preCompLayer = preCompLayer
+    super.init(layerModel: preCompLayer)
 
     let preCompLayerModels = context.assetLibrary?.precompAssets[preCompLayer.referenceID]?.layers ?? []
-    animationLayers = preCompLayerModels.compactMap { layerModel in
-      (layerModel as? LayerConstructing)?.makeLayer(context: context)
-    }
 
-    super.init()
-
-    for animationLayer in animationLayers {
-      addSublayer(animationLayer)
+    for childLayerModel in preCompLayerModels {
+      if let childLayer = childLayerModel.makeAnimationLayer(context: context) {
+        addSublayer(childLayer)
+      }
     }
   }
 
@@ -40,43 +38,11 @@ final class PreCompLayer: CALayer {
     }
 
     preCompLayer = layer.preCompLayer
-    animationLayers = []
     super.init(layer: layer)
-  }
-
-  // MARK: Internal
-
-  override func layoutSublayers() {
-    super.layoutSublayers()
-
-    for sublayer in sublayers ?? [] {
-      sublayer.fillBoundsOfSuperlayer()
-    }
   }
 
   // MARK: Private
 
   private let preCompLayer: PreCompLayerModel
-  private let animationLayers: [AnimationLayer]
 
-}
-
-// MARK: AnimationLayer
-
-extension PreCompLayer: AnimationLayer {
-  func setupAnimations(context: LayerAnimationContext) {
-    addBaseAnimations(for: preCompLayer, context: context)
-
-    for animationLayer in animationLayers {
-      animationLayer.setupAnimations(context: context)
-    }
-  }
-}
-
-// MARK: - ShapeLayerModel + LayerConstructing
-
-extension PreCompLayerModel: LayerConstructing {
-  func makeLayer(context: LayerContext) -> AnimationLayer {
-    PreCompLayer(preCompLayer: self, context: context)
-  }
 }

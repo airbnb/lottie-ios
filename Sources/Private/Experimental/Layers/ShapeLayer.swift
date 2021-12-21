@@ -6,13 +6,13 @@ import QuartzCore
 // MARK: - ShapeLayer
 
 /// The CALayer type responsible for rendering `ShapeLayerModel`s
-final class ShapeLayer: CALayer {
+final class ShapeLayer: BaseCompositionLayer {
 
   // MARK: Lifecycle
 
   init(shapeLayer: ShapeLayerModel) {
     self.shapeLayer = shapeLayer
-    super.init()
+    super.init(layerModel: shapeLayer)
 
     for item in shapeLayer.items {
       // TODO: Can items other than `Group`s appear at the top level?
@@ -39,40 +39,8 @@ final class ShapeLayer: CALayer {
     super.init(layer: layer)
   }
 
-  // MARK: Internal
-
-  override func layoutSublayers() {
-    super.layoutSublayers()
-
-    for sublayer in sublayers ?? [] {
-      sublayer.fillBoundsOfSuperlayer()
-    }
-  }
-
   // MARK: Private
 
   private let shapeLayer: ShapeLayerModel
 
-}
-
-// MARK: AnimationLayer
-
-extension ShapeLayer: AnimationLayer {
-  func setupAnimations(context: LayerAnimationContext) {
-    addBaseAnimations(for: shapeLayer, context: context)
-
-    for sublayer in (sublayers ?? []) {
-      if let animationLayer = sublayer as? AnimationLayer {
-        animationLayer.setupAnimations(context: context)
-      }
-    }
-  }
-}
-
-// MARK: - ShapeLayerModel + LayerConstructing
-
-extension ShapeLayerModel: LayerConstructing {
-  func makeLayer(context: LayerContext) -> AnimationLayer {
-    ShapeLayer(shapeLayer: self)
-  }
 }

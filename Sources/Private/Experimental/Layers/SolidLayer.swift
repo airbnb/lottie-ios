@@ -5,13 +5,14 @@ import QuartzCore
 
 // MARK: - SolidLayer
 
-final class SolidLayer: CALayer {
+final class SolidLayer: BaseCompositionLayer {
 
   // MARK: Lifecycle
 
   init(_ solidLayer: SolidLayerModel) {
     self.solidLayer = solidLayer
-    super.init()
+    super.init(layerModel: solidLayer)
+    
     backgroundColor = solidLayer.colorHex.cgColor
   }
 
@@ -36,18 +37,3 @@ final class SolidLayer: CALayer {
 
 }
 
-// MARK: AnimationLayer
-
-extension SolidLayer: AnimationLayer {
-  func setupAnimations(context: LayerAnimationContext) {
-    addBaseAnimations(for: solidLayer, context: context)
-  }
-}
-
-// MARK: - SolidLayerModel + LayerConstructing
-
-extension SolidLayerModel: LayerConstructing {
-  func makeLayer(context: LayerContext) -> AnimationLayer {
-    SolidLayer(self)
-  }
-}

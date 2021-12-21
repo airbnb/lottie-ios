@@ -77,7 +77,7 @@ final class ExperimentalAnimationLayer: CALayer {
     setupPlaceholderAnimation(context: context)
 
     // Set up the new animations with the current `TimingConfiguration`
-    for animationLayer in animationLayers {
+    for animationLayer in childAnimationLayers {
       animationLayer.setupAnimations(context: context)
     }
   }
@@ -85,7 +85,7 @@ final class ExperimentalAnimationLayer: CALayer {
   override func layoutSublayers() {
     super.layoutSublayers()
 
-    for animationLayer in animationLayers {
+    for animationLayer in childAnimationLayers {
       animationLayer.fillBoundsOfSuperlayer()
     }
 
@@ -109,7 +109,6 @@ final class ExperimentalAnimationLayer: CALayer {
   @objc private var animationProgress: CGFloat = 0
 
   private let animation: Animation
-  private var animationLayers = [AnimationLayer]()
 
   private func setup() {
     bounds = animation.bounds
@@ -118,12 +117,36 @@ final class ExperimentalAnimationLayer: CALayer {
   private func setupChildLayers() {
     let context = LayerContext(assetLibrary: animation.assetLibrary)
 
-    animationLayers = animation.layers.reversed().compactMap { layerModel in
-      (layerModel as? LayerConstructing)?.makeLayer(context: context)
+    var layersByIndex = [Int: CALayer]()
+
+    // First, we build the `AnimationLayer` / `CALayer` for each `LayerModel`
+    for layerModel in animation.layers.reversed() {
+      guard let layer = layerModel.makeAnimationLayer(context: context) else {
+        continue
+      }
+
+      layersByIndex[layerModel.index] = layer
     }
 
-    for animationLayer in animationLayers {
-      addSublayer(animationLayer)
+    // Then we add each `AnimationLayer` to the layer hierarchy
+    for layerModel in animation.layers.reversed() {
+      guard let layer = layersByIndex[layerModel.index] else {
+        continue
+      }
+
+      // If the layer specified a parent index, we look up the parent
+      // and add it as a sublayer of the parent layer
+      if
+        let parentIndex = layerModel.parent,
+        let parentLayer = layersByIndex[parentIndex]
+      {
+        parentLayer.addSublayer(layer)
+      }
+
+      // Otherwise we add it as a top-level sublayer of this container
+      else {
+        addSublayer(layer)
+      }
     }
   }
 
@@ -166,7 +189,7 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
   }
 
   var _animationLayers: [CALayer] {
-    animationLayers
+    childAnimationLayers
   }
 
   var imageProvider: AnimationImageProvider {

@@ -31,6 +31,7 @@ extension Transform: TransformModel {
     return position
   }
 }
+
 extension ShapeTransform: TransformModel {
   var _position: KeyframeGroup<Vector3D> { position }
   var anchorPoint: KeyframeGroup<Vector3D> { anchor }
@@ -40,7 +41,8 @@ extension CALayer {
   /// Adds animations for the given `Transform` to this `CALayer`
   func addAnimations(
     for transformModel: TransformModel,
-    context: LayerAnimationContext)
+    context: LayerAnimationContext,
+    applyOpacity: Bool = true)
   {
     addAnimation(
       for: .position,
@@ -88,15 +90,17 @@ extension CALayer {
       },
       context: context)
 
-    addAnimation(
-      for: .opacity,
-      keyframes: transformModel.opacity,
-      value: {
-        // Lottie animation files express opacity as a numerical percentage value
-        // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values
-        // expected by Core Animation (e.g. 0.0, 0.5, 1.0).
-        $0.cgFloatValue / 100
-      },
-      context: context)
+    if applyOpacity {
+      addAnimation(
+        for: .opacity,
+        keyframes: transformModel.opacity,
+        value: {
+          // Lottie animation files express opacity as a numerical percentage value
+          // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values
+          // expected by Core Animation (e.g. 0.0, 0.5, 1.0).
+          $0.cgFloatValue / 100
+        },
+        context: context)
+    }
   }
 }
