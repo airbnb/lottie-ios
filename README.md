@@ -56,10 +56,7 @@ And then run:
 ```
 carthage update
 ```
-In your application targets “General” tab under the “Linked Frameworks and Libraries” section, drag and drop lottie-ios.framework from the Carthage/Build/iOS directory that `carthage update` produced. You should now be able to import Lottie with
-```swift
-import LottieCarthage
-```
+In your application targets “General” tab under the “Linked Frameworks and Libraries” section, drag and drop lottie-ios.framework from the Carthage/Build/iOS directory that `carthage update` produced.
 
 ### Swift Package Manager
 ``` swift

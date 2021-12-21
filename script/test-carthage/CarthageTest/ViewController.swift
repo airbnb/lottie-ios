@@ -2,7 +2,7 @@
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
 import UIKit
-import LottieCarthage
+import Lottie
 
 class ViewController: UIViewController {
 

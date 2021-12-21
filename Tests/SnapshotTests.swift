@@ -8,7 +8,7 @@ import XCTest
 import UIKit
 #endif
 
-@testable import Lottie
+@testable import LottieCore
 
 // MARK: - SnapshotTests
 
