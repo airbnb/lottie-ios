@@ -15,37 +15,21 @@ struct LayerContext {
 extension LayerModel {
   /// Constructs an `AnimationLayer` / `CALayer` that represents this `LayerModel`
   func makeAnimationLayer(context: LayerContext) -> AnimationLayer? {
-    switch type {
-    case .precomp:
-      guard let preCompLayerModel = self as? PreCompLayerModel else {
-        fatalError("Expected `precomp` layer to be a `PreCompLayerModel`")
-      }
-
+    switch (type, self) {
+    case (.precomp, let preCompLayerModel as PreCompLayerModel):
       return PreCompLayer(preCompLayer: preCompLayerModel, context: context)
 
-    case .solid:
-      guard let solidLayerModel = self as? SolidLayerModel else {
-        fatalError("Expected `solid` layer to be a `SolidLayerModel`")
-      }
-
+    case (.solid, let solidLayerModel as SolidLayerModel):
       return SolidLayer(solidLayerModel)
 
-    case .shape:
-      guard let shapeLayerModel = self as? ShapeLayerModel else {
-        fatalError("Expected `shape` layer to be a `ShapeLayerModel`")
-      }
-
+    case (.shape, let shapeLayerModel as ShapeLayerModel):
       return ShapeLayer(shapeLayer: shapeLayerModel)
 
-    case .null:
+    case (.null, _):
       return NullLayer(layerModel: self)
 
-    case .image:
-      // currently unsupported
-      return nil
-
-    case .text:
-      // currently unsupported
+    default:
+      // Other layer types (text, image) are currently unsupported
       return nil
     }
   }
