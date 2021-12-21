@@ -21,6 +21,9 @@ struct CAKeyPath<ValueRepresentation> {
 /// and https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/Key-ValueCodingExtensions/Key-ValueCodingExtensions.html
 extension CAKeyPath {
   static var position: CAKeyPath<CGPoint> { .init("transform.translation") }
+  static var positionX: CAKeyPath<CGFloat> { .init("transform.translation.y") }
+  static var positionY: CAKeyPath<CGFloat> { .init("transform.translation.x") }
+
   static var scale: CAKeyPath<CGFloat> { .init("transform.scale") }
   static var scaleX: CAKeyPath<CGFloat> { .init("transform.scale.x") }
   static var scaleY: CAKeyPath<CGFloat> { .init("transform.scale.y") }
@@ -28,6 +31,7 @@ extension CAKeyPath {
   static var anchorPoint: CAKeyPath<CGPoint> { .init(#keyPath(CALayer.anchorPoint)) }
   static var opacity: CAKeyPath<CGFloat> { .init(#keyPath(CALayer.opacity)) }
 
+  static var path: CAKeyPath<CGPath> { .init(#keyPath(CAShapeLayer.path)) }
   static var fillColor: CAKeyPath<CGColor> { .init(#keyPath(CAShapeLayer.fillColor)) }
   static var strokeColor: CAKeyPath<CGColor> { .init(#keyPath(CAShapeLayer.strokeColor)) }
   static var lineWidth: CAKeyPath<CGFloat> { .init(#keyPath(CAShapeLayer.lineWidth)) }

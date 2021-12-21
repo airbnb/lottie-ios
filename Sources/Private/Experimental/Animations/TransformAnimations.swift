@@ -3,12 +3,21 @@
 
 import QuartzCore
 
+/// This protocol mirrors the interface of `Transform`,
+/// but it also implemented by `ShapeTransform` to allow
+/// both transform types to share the same animation implementation.
 protocol TransformModel {
   /// The anchor point of the transform.
   var anchorPoint: KeyframeGroup<Vector3D> { get }
 
-  /// The position of the transform.
-  var _position: KeyframeGroup<Vector3D> { get }
+  /// The position of the transform. This is nil if the position data was split.
+  var _position: KeyframeGroup<Vector3D>? { get }
+
+  /// The positionX of the transform. This is nil if the position property is set.
+  var _positionX: KeyframeGroup<Vector1D>? { get }
+
+  /// The positionY of the transform. This is nil if the position property is set.
+  var _positionY: KeyframeGroup<Vector1D>? { get }
 
   /// The scale of the transform
   var scale: KeyframeGroup<Vector3D> { get }
@@ -21,20 +30,16 @@ protocol TransformModel {
 }
 
 extension Transform: TransformModel {
-  var _position: KeyframeGroup<Vector3D> {
-    guard let position = position else {
-      // TODO:
-      fatalError("Need to handle separate positionX and positionY keyframes")
-      // maybe by always using `positionX` and `positionY` and
-      // just mapping `position` to those two?
-    }
-    return position
-  }
+  var _position: KeyframeGroup<Vector3D>? { position }
+  var _positionX: KeyframeGroup<Vector1D>? { positionX }
+  var _positionY: KeyframeGroup<Vector1D>? { positionY }
 }
 
 extension ShapeTransform: TransformModel {
-  var _position: KeyframeGroup<Vector3D> { position }
   var anchorPoint: KeyframeGroup<Vector3D> { anchor }
+  var _position: KeyframeGroup<Vector3D>? { position }
+  var _positionX: KeyframeGroup<Vector1D>? { nil }
+  var _positionY: KeyframeGroup<Vector1D>? { nil }
 }
 
 extension CALayer {
@@ -44,11 +49,30 @@ extension CALayer {
     context: LayerAnimationContext,
     applyOpacity: Bool = true)
   {
-    addAnimation(
-      for: .position,
-      keyframes: transformModel._position.keyframes,
-      value: \.pointValue,
-      context: context)
+    if let positionKeyframes = transformModel._position?.keyframes {
+      addAnimation(
+        for: .position,
+        keyframes: positionKeyframes,
+        value: \.pointValue,
+        context: context)
+    } else if
+      let xKeyframes = transformModel._positionX?.keyframes,
+      let yKeyframes = transformModel._positionY?.keyframes
+    {
+      addAnimation(
+        for: .positionX,
+        keyframes: xKeyframes,
+        value: \.cgFloatValue,
+        context: context)
+
+      addAnimation(
+        for: .positionY,
+        keyframes: yKeyframes,
+        value: \.cgFloatValue,
+        context: context)
+    } else {
+      fatalError("`Transform` values must provide either `position` or `positionX` / `positionY` keyframes")
+    }
 
     addAnimation(
       for: .scaleX,
