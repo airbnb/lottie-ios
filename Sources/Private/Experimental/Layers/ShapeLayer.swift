@@ -20,8 +20,17 @@ final class ShapeLayer: BaseCompositionLayer {
     let otherItems = shapeLayer.items.filter { !($0 is Group) }
 
     for group in groupItems {
-      let sublayer = ShapeItemLayer(items: group.items + otherItems)
-      addSublayer(sublayer)
+      let itemsInGroup = group.items + otherItems
+
+      // Each `ShapeItemLayer` can only render a single `ShapeItem` that draws a `GGPath`,
+      // so we create a separate `ShapeItemLayer` for each path-drawing `ShapeItem`.
+      let pathDrawingItemsInGroup = itemsInGroup.filter { $0.drawsCGPath }
+      let otherItemsInGroup = itemsInGroup.filter { !$0.drawsCGPath }
+
+      for pathDrawingItem in pathDrawingItemsInGroup {
+        let sublayer = ShapeItemLayer(shape: pathDrawingItem, otherItems: otherItemsInGroup)
+        addSublayer(sublayer)
+      }
     }
   }
 
@@ -44,4 +53,18 @@ final class ShapeLayer: BaseCompositionLayer {
 
   private let shapeLayer: ShapeLayerModel
 
+}
+
+extension ShapeItem {
+  /// Whether or not this `ShapeItem` is responsible for rendering a `CGPath`
+  var drawsCGPath: Bool {
+    switch self.type {
+    case .ellipse, .rectangle, .shape, .star:
+      return true
+
+    case .fill, .gradientFill, .group, .gradientStroke, .merge,
+         .repeater, .round, .stroke, .trim, .transform, .unknown:
+      return false
+    }
+  }
 }

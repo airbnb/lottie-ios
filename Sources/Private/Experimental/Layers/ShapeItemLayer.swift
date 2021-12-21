@@ -11,8 +11,25 @@ final class ShapeItemLayer: CAShapeLayer {
 
   // MARK: Lifecycle
 
-  init(items: [ShapeItem]) {
-    self.items = items
+  /// Initializes a `ShapeItemLayer` that renders a `Group` from a `ShapeLayerModel`
+  /// - Parameters:
+  ///   - shape: The `ShapeItem` in this group that renders a `GGPath`
+  ///   - otherItems: Other items in this group that affect the appearance of the shape
+  init(
+    shape: ShapeItem,
+    otherItems: [ShapeItem])
+  {
+    self.shape = shape
+    self.otherItems = otherItems
+
+    assert(
+      shape.drawsCGPath,
+      "`ShapeItemLayer` must contain exactly one `ShapeItem` that draws a `GPPath`")
+
+    assert(
+      !otherItems.contains(where: { $0.drawsCGPath }),
+      "`ShapeItemLayer` must contain exactly one `ShapeItem` that draws a `GPPath`")
+
     super.init()
   }
 
@@ -27,13 +44,18 @@ final class ShapeItemLayer: CAShapeLayer {
       fatalError("\(Self.self).init(layer:) incorrectly called with \(type(of: layer))")
     }
 
-    items = layer.items
+    shape = layer.shape
+    otherItems = layer.otherItems
     super.init(layer: layer)
   }
 
   // MARK: Private
 
-  private let items: [ShapeItem]
+  /// The `ShapeItem` in this group that renders a `GGPath`
+  private let shape: ShapeItem
+
+  /// Other items in this group that affect the appearance of the shape
+  private let otherItems: [ShapeItem]
 
 }
 
@@ -46,21 +68,21 @@ extension ShapeItemLayer: AnimationLayer {
   func setupAnimations(context: LayerAnimationContext) {
     setupPathAnimation(context: context)
 
-    if let shapeTransform = items.first(ShapeTransform.self) {
+    if let shapeTransform = otherItems.first(ShapeTransform.self) {
       addAnimations(for: shapeTransform, context: context)
     }
 
-    if let fill = items.first(Fill.self) {
+    if let fill = otherItems.first(Fill.self) {
       addAnimations(for: fill, context: context)
     } else {
       fillColor = nil
     }
 
-    if let stroke = items.first(Stroke.self) {
+    if let stroke = otherItems.first(Stroke.self) {
       addAnimations(for: stroke, context: context)
     }
 
-    if let trim = items.first(Trim.self) {
+    if let trim = otherItems.first(Trim.self) {
       addAnimations(for: trim, context: context)
     }
 
@@ -70,26 +92,19 @@ extension ShapeItemLayer: AnimationLayer {
   // MARK: Private
 
   private func setupPathAnimation(context: LayerAnimationContext) {
-    // TODO: Shape layers can have multiple path-providing `ShapeItem`s
-    // that are supposed to all be rendered together. How can we support that?
-    //  - This is made somewhat tricky by the fact that each `ShapeItem`
-    //    has its own `KeyframeGroup`, which means we can't combine them
-    //    into a single `CGPath` in the general case.
-    
-    if let shape = items.first(Shape.self) {
-      addAnimations(for: shape, context: context)
-    }
+    switch shape {
+    case let customShape as Shape:
+      addAnimations(for: customShape, context: context)
 
-    else if let ellipse = items.first(Ellipse.self) {
+    case let ellipse as Ellipse:
       addAnimations(for: ellipse, context: context)
-    }
 
-    else if let rectangle = items.first(Rectangle.self) {
+    case let rectangle as Rectangle:
       addAnimations(for: rectangle, context: context)
-    }
 
-    else {
+    default:
       // Other path types are currently unsupported
+      return
     }
   }
 
@@ -110,6 +125,7 @@ extension ShapeItemLayer: AnimationLayer {
   private func addAnimations(for stroke: Stroke, context: LayerAnimationContext) {
     lineJoin = stroke.lineJoin.caLineJoin
     lineCap = stroke.lineCap.caLineCap
+    miterLimit = CGFloat(stroke.miterLimit)
 
     addAnimation(
       for: .strokeColor,
