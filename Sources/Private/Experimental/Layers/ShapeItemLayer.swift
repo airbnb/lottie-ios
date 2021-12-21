@@ -60,6 +60,10 @@ extension ShapeItemLayer: AnimationLayer {
       addAnimations(for: stroke, context: context)
     }
 
+    if let trim = items.first(Trim.self) {
+      addAnimations(for: trim, context: context)
+    }
+
     // TODO: animate more properties
   }
 
@@ -110,6 +114,28 @@ extension ShapeItemLayer: AnimationLayer {
       context: context)
 
     // TODO: Support `lineDashPhase` and `lineDashPattern`
+  }
+
+  private func addAnimations(for trim: Trim, context: LayerAnimationContext) {
+    addAnimation(
+      for: .strokeStart,
+      keyframes: trim.start.keyframes,
+      value: { strokeStart in
+        // Lottie animation files express stoke trims as a numerical percentage value
+        // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
+        // expected by Core Animation (e.g. 0.25, 0.5, 1.0).
+        CGFloat(strokeStart.cgFloatValue) / 100
+      }, context: context)
+
+    addAnimation(
+      for: .strokeEnd,
+      keyframes: trim.end.keyframes,
+      value: { strokeEnd in
+        // Lottie animation files express stoke trims as a numerical percentage value
+        // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
+        // expected by Core Animation (e.g. 0.25, 0.5, 1.0).
+        CGFloat(strokeEnd.cgFloatValue) / 100
+      }, context: context)
   }
 }
 
