@@ -115,12 +115,37 @@ final class ExperimentalAnimationLayer: CALayer {
   }
 
   private func setupChildLayers() {
-    let context = LayerContext(assetLibrary: animation.assetLibrary)
+    setupLayerHierarchy(
+      for: animation.layers,
+      context: LayerContext(assetLibrary: animation.assetLibrary))
+  }
 
+  /// Sets up a placeholder `CABasicAnimation` that tracks the current
+  /// progress of this animation (between 0 and 1). This lets us provide
+  /// realtime animation progress via `self.currentFrame`.
+  private func setupPlaceholderAnimation(context: LayerAnimationContext) {
+    let animationProgressTracker = CABasicAnimation(keyPath: #keyPath(animationProgress))
+    animationProgressTracker.configureTiming(with: context)
+    animationProgressTracker.fromValue = 0
+    animationProgressTracker.toValue = 1
+    add(animationProgressTracker, forKey: #keyPath(animationProgress))
+  }
+
+}
+
+// MARK: - CALayer + setupLayerHierarchy
+
+extension CALayer {
+  /// Sets up an `AnimationLayer` / `CALayer` hierarchy in this layer,
+  /// using the given list of layers.
+  func setupLayerHierarchy(
+    for layers: [LayerModel],
+    context: LayerContext)
+  {
     var layersByIndex = [Int: CALayer]()
 
     // First, we build the `AnimationLayer` / `CALayer` for each `LayerModel`
-    for layerModel in animation.layers.reversed() {
+    for layerModel in layers.reversed() {
       guard let layer = layerModel.makeAnimationLayer(context: context) else {
         continue
       }
@@ -129,7 +154,7 @@ final class ExperimentalAnimationLayer: CALayer {
     }
 
     // Then we add each `AnimationLayer` to the layer hierarchy
-    for layerModel in animation.layers.reversed() {
+    for layerModel in layers.reversed() {
       guard let layer = layersByIndex[layerModel.index] else {
         continue
       }
@@ -149,18 +174,6 @@ final class ExperimentalAnimationLayer: CALayer {
       }
     }
   }
-
-  /// Sets up a placeholder `CABasicAnimation` that tracks the current
-  /// progress of this animation (between 0 and 1). This lets us provide
-  /// realtime animation progress via `self.currentFrame`.
-  private func setupPlaceholderAnimation(context: LayerAnimationContext) {
-    let animationProgressTracker = CABasicAnimation(keyPath: #keyPath(animationProgress))
-    animationProgressTracker.configureTiming(with: context)
-    animationProgressTracker.fromValue = 0
-    animationProgressTracker.toValue = 1
-    add(animationProgressTracker, forKey: #keyPath(animationProgress))
-  }
-
 }
 
 // MARK: RootAnimationLayer

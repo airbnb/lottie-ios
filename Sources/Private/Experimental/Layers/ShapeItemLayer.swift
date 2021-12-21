@@ -15,24 +15,8 @@ final class ShapeItemLayer: CAShapeLayer {
     self.items = items
     super.init()
 
+    // TODO: Support animating path
     path = items.path
-
-    if let fill = items.first(Fill.self) {
-      // TODO: animate these properties
-      fillColor = fill.color.keyframes.first!.value.cgColorValue
-      opacity = Float(fill.opacity.keyframes.first!.value.value)
-      fillRule = fill.fillRule.caFillRule
-    }
-
-    if let stroke = items.first(Stroke.self) {
-      // TODO: animate these properties
-      strokeColor = stroke.color.keyframes.first!.value.cgColorValue
-        .copy(alpha: stroke.opacity.keyframes.first!.value.cgFloatValue)
-      lineWidth = stroke.width.keyframes.first!.value.cgFloatValue
-      lineJoin = stroke.lineJoin.caLineJoin
-      lineCap = stroke.lineCap.caLineCap
-      // TODO: Support `lineDashPhase` and `lineDashPattern`
-    }
   }
 
   required init?(coder _: NSCoder) {
@@ -62,6 +46,39 @@ extension ShapeItemLayer: AnimationLayer {
   func setupAnimations(context: LayerAnimationContext) {
     if let shapeTransform = items.first(ShapeTransform.self) {
       addAnimations(for: shapeTransform, context: context)
+    }
+
+    if let fill = items.first(Fill.self) {
+      fillRule = fill.fillRule.caFillRule
+
+      addAnimation(
+        for: .fillColor,
+        keyframes: fill.color.keyframes,
+        value: \.cgColorValue,
+        context: context)
+
+      // TODO: What's the difference between `fill.opacity` and `transform.opacity`?
+      // We probably can't animate both simultaneously
+      // opacity = Float(fill.opacity.keyframes.first!.value.value)
+    }
+
+    if let stroke = items.first(Stroke.self) {
+      lineJoin = stroke.lineJoin.caLineJoin
+      lineCap = stroke.lineCap.caLineCap
+
+      addAnimation(
+        for: .strokeColor,
+        keyframes: stroke.color.keyframes,
+        value: \.cgColorValue,
+        context: context)
+
+      addAnimation(
+        for: .lineWidth,
+        keyframes: stroke.width.keyframes,
+        value: \.cgFloatValue,
+        context: context)
+
+      // TODO: Support `lineDashPhase` and `lineDashPattern`
     }
 
     // TODO: animate more properties

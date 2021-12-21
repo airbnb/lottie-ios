@@ -46,13 +46,13 @@ extension CALayer {
   {
     addAnimation(
       for: .position,
-      keyframes: transformModel._position,
+      keyframes: transformModel._position.keyframes,
       value: \.pointValue,
       context: context)
 
     addAnimation(
       for: .scaleX,
-      keyframes: transformModel.scale,
+      keyframes: transformModel.scale.keyframes,
       value: { scale in
         // Lottie animation files express scale as a numerical percentage value
         // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
@@ -63,7 +63,7 @@ extension CALayer {
 
     addAnimation(
       for: .scaleY,
-      keyframes: transformModel.scale,
+      keyframes: transformModel.scale.keyframes,
       value: { scale in
         // Lottie animation files express scale as a numerical percentage value
         // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
@@ -74,7 +74,7 @@ extension CALayer {
 
     addAnimation(
       for: .anchorPoint,
-      keyframes: transformModel.anchorPoint,
+      keyframes: transformModel.anchorPoint.keyframes,
       value: { absoluteAnchorPoint in
         guard bounds.width > 0, bounds.height > 0 else {
           assertionFailure("Size must be non-zero before an animation can be played")
@@ -93,7 +93,7 @@ extension CALayer {
     if applyOpacity {
       addAnimation(
         for: .opacity,
-        keyframes: transformModel.opacity,
+        keyframes: transformModel.opacity.keyframes,
         value: {
           // Lottie animation files express opacity as a numerical percentage value
           // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values

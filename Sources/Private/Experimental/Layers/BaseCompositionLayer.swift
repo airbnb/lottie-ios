@@ -59,6 +59,34 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
 
   private let baseLayerModel: LayerModel
 
+  // Debug helper that sets a specific border color for each type of layer
+  //  - Can be called from `layoutSublayers()` when debugging
+  private func setupDebugColors() {
+    borderWidth = 1
+
+    switch baseLayerModel.type {
+    case .precomp:
+      borderColor = "#FF000".cgColor // red
+    case .solid:
+      borderColor = "#FFFF00".cgColor // yellow
+    case .image:
+      borderColor = "#FFA500".cgColor // orange
+    case .null:
+      borderColor = "#0000FF".cgColor // blue
+    case .shape:
+      borderColor = "#00FF00".cgColor // green
+    case .text:
+      borderColor = "#000000".cgColor // black
+    }
+
+    for childLayer in childAnimationLayers {
+      if !(childLayer is BaseCompositionLayer) {
+        childLayer.borderWidth = 1
+        childLayer.borderColor = "#AAAAAA".cgColor // gray
+      }
+    }
+  }
+
 }
 
 // MARK: - CALayer + animationLayers

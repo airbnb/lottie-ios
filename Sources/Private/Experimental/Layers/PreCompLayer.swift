@@ -17,13 +17,9 @@ final class PreCompLayer: BaseCompositionLayer {
     self.preCompLayer = preCompLayer
     super.init(layerModel: preCompLayer)
 
-    let preCompLayerModels = context.assetLibrary?.precompAssets[preCompLayer.referenceID]?.layers ?? []
-
-    for childLayerModel in preCompLayerModels {
-      if let childLayer = childLayerModel.makeAnimationLayer(context: context) {
-        addSublayer(childLayer)
-      }
-    }
+    setupLayerHierarchy(
+      for: context.assetLibrary?.precompAssets[preCompLayer.referenceID]?.layers ?? [],
+      context: context)
   }
 
   required init?(coder _: NSCoder) {
