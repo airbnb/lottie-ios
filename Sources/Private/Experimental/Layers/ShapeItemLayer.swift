@@ -78,8 +78,12 @@ extension ShapeItemLayer: AnimationLayer {
       addAnimations(for: ellipse, context: context)
     }
 
+    else if let rectangle = items.first(Rectangle.self) {
+      addAnimations(for: rectangle, context: context)
+    }
+
     else {
-      // Currently unsupported
+      // Other path types are currently unsupported
     }
   }
 

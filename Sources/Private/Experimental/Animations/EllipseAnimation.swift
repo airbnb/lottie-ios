@@ -21,7 +21,7 @@ extension CALayer {
         //    this will probably have to be reworked to use more sublayers
         let center = ellipse.position.keyframes.first!.value.pointValue
         if ellipse.position.keyframes.count > 1 {
-          fatalError("Ellipse position keyframes are unsupported")
+          fatalError("Ellipse position keyframes are currently unsupported")
         }
 
         var half = ellipseSize * 0.5
