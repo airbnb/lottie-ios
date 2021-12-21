@@ -42,12 +42,60 @@ extension ShapeTransform: TransformModel {
   var _positionY: KeyframeGroup<Vector1D>? { nil }
 }
 
+// MARK: - TransformComponent
+
+/// Individual animatable components within `Transform` values
+enum TransformComponent {
+  case position
+  case anchorPoint
+  case scale
+  case rotation
+  case opacity
+}
+
+extension Array where Element == TransformComponent {
+  static var all: [TransformComponent] {
+    [.position, .anchorPoint, .scale, .rotation, .opacity]
+  }
+
+  static func all(excluding exclude: [TransformComponent]) -> [TransformComponent] {
+    all.filter { !exclude.contains($0) }
+  }
+}
+
+// MARK: - CALayer + TransformModel
+
 extension CALayer {
-  /// Adds animations for the given `Transform` to this `CALayer`
+  /// Adds animations for the listed `components` of the given `Transform` to this `CALayer`
   func addAnimations(
     for transformModel: TransformModel,
-    context: LayerAnimationContext,
-    applyOpacity: Bool = true)
+    components: [TransformComponent] = [TransformComponent].all,
+    context: LayerAnimationContext)
+  {
+    if components.contains(.position) {
+      addPositionAnimations(from: transformModel, context: context)
+    }
+
+    if components.contains(.anchorPoint) {
+      addAnchorPointAnimation(from: transformModel, context: context)
+    }
+
+    if components.contains(.scale) {
+      addScaleAnimations(from: transformModel, context: context)
+    }
+
+    if components.contains(.rotation) {
+      addRotationAnimation(from: transformModel, context: context)
+    }
+
+    if components.contains(.opacity) {
+      addOpacityAnimation(from: transformModel, context: context)
+    }
+  }
+
+  private func addPositionAnimations(
+    from transformModel: TransformModel,
+    context: LayerAnimationContext)
   {
     if let positionKeyframes = transformModel._position?.keyframes {
       addAnimation(
@@ -73,7 +121,35 @@ extension CALayer {
     } else {
       fatalError("`Transform` values must provide either `position` or `positionX` / `positionY` keyframes")
     }
+  }
 
+  private func addAnchorPointAnimation(
+    from transformModel: TransformModel,
+    context: LayerAnimationContext)
+  {
+    addAnimation(
+      for: .anchorPoint,
+      keyframes: transformModel.anchorPoint.keyframes,
+      value: { absoluteAnchorPoint in
+        guard bounds.width > 0, bounds.height > 0 else {
+          assertionFailure("Size must be non-zero before an animation can be played")
+          return .zero
+        }
+
+        // Lottie animation files express anchorPoint as an absolute point value,
+        // so we have to divide by the width/height of this layer to get the
+        // relative decimal values expected by Core Animation.
+        return CGPoint(
+          x: CGFloat(absoluteAnchorPoint.x) / bounds.width,
+          y: CGFloat(absoluteAnchorPoint.y) / bounds.height)
+      },
+      context: context)
+  }
+
+  private func addScaleAnimations(
+    from transformModel: TransformModel,
+    context: LayerAnimationContext)
+  {
     addAnimation(
       for: .scaleX,
       keyframes: transformModel.scale.keyframes,
@@ -95,25 +171,12 @@ extension CALayer {
         CGFloat(scale.y) / 100
       },
       context: context)
+  }
 
-    addAnimation(
-      for: .anchorPoint,
-      keyframes: transformModel.anchorPoint.keyframes,
-      value: { absoluteAnchorPoint in
-        guard bounds.width > 0, bounds.height > 0 else {
-          assertionFailure("Size must be non-zero before an animation can be played")
-          return .zero
-        }
-
-        // Lottie animation files express anchorPoint as an absolute point value,
-        // so we have to divide by the width/height of this layer to get the
-        // relative decimal values expected by Core Animation.
-        return CGPoint(
-          x: CGFloat(absoluteAnchorPoint.x) / bounds.width,
-          y: CGFloat(absoluteAnchorPoint.y) / bounds.height)
-      },
-      context: context)
-
+  private func addRotationAnimation(
+    from transformModel: TransformModel,
+    context: LayerAnimationContext)
+  {
     addAnimation(
       for: .rotation,
       keyframes: transformModel.rotation.keyframes,
@@ -124,18 +187,22 @@ extension CALayer {
         return rotationDegrees.cgFloatValue * .pi / 180
       },
       context: context)
-
-    if applyOpacity {
-      addAnimation(
-        for: .opacity,
-        keyframes: transformModel.opacity.keyframes,
-        value: {
-          // Lottie animation files express opacity as a numerical percentage value
-          // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values
-          // expected by Core Animation (e.g. 0.0, 0.5, 1.0).
-          $0.cgFloatValue / 100
-        },
-        context: context)
-    }
   }
+
+  private func addOpacityAnimation(
+    from transformModel: TransformModel,
+    context: LayerAnimationContext)
+  {
+    addAnimation(
+      for: .opacity,
+      keyframes: transformModel.opacity.keyframes,
+      value: {
+        // Lottie animation files express opacity as a numerical percentage value
+        // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values
+        // expected by Core Animation (e.g. 0.0, 0.5, 1.0).
+        $0.cgFloatValue / 100
+      },
+      context: context)
+  }
+
 }

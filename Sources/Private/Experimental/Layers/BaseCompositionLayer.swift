@@ -30,17 +30,21 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
 
   // MARK: Internal
 
+  // Components of this layer's `Transform` that should not be animated
+  //  - By default, all components are animated
+  //  - Can be overridden by subclasses
+  var transformComponentsToAnimate: [TransformComponent] {
+    .all
+  }
+
   /// Sets up the base `LayerModel` animations for this layer,
   /// and all child `AnimationLayer`s.
   ///  - Can be overridden by subclasses, which much call `super`.
   func setupAnimations(context: LayerAnimationContext) {
     addAnimations(
       for: baseLayerModel.transform,
-      context: context,
-      // `null` layers shouldn't have any visual effect,
-      // so we shouldn't render apply their transform opacity
-      // (since it would affect the opacity of children).
-      applyOpacity: baseLayerModel.type != .null)
+      components: transformComponentsToAnimate,
+      context: context)
 
     for childAnimationLayer in childAnimationLayers {
       childAnimationLayer.setupAnimations(context: context)

@@ -36,7 +36,7 @@ extension LayerModel {
       return ShapeLayer(shapeLayer: shapeLayerModel)
 
     case .null:
-      return BaseCompositionLayer(layerModel: self)
+      return NullLayer(layerModel: self)
 
     case .image:
       // currently unsupported
