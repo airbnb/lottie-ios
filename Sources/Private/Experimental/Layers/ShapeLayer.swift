@@ -14,13 +14,14 @@ final class ShapeLayer: BaseCompositionLayer {
     self.shapeLayer = shapeLayer
     super.init(layerModel: shapeLayer)
 
-    for item in shapeLayer.items {
-      // TODO: Can items other than `Group`s appear at the top level?
-      // If so, how does that work?
-      if let group = item as? Group {
-        let sublayer = ShapeItemLayer(items: group.items)
-        addSublayer(sublayer)
-      }
+    // Each top-level `Group` item becomes its own `ShapeItemLayer` sublayer.
+    // Other top-level `ShapeItem`s are applied to all sublayers.
+    let groupItems = shapeLayer.items.compactMap { $0 as? Group }
+    let otherItems = shapeLayer.items.filter { !($0 is Group) }
+
+    for group in groupItems {
+      let sublayer = ShapeItemLayer(items: group.items + otherItems)
+      addSublayer(sublayer)
     }
   }
 

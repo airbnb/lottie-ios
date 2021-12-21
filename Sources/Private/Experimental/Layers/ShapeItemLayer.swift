@@ -70,6 +70,12 @@ extension ShapeItemLayer: AnimationLayer {
   // MARK: Private
 
   private func setupPathAnimation(context: LayerAnimationContext) {
+    // TODO: Shape layers can have multiple path-providing `ShapeItem`s
+    // that are supposed to all be rendered together. How can we support that?
+    //  - This is made somewhat tricky by the fact that each `ShapeItem`
+    //    has its own `KeyframeGroup`, which means we can't combine them
+    //    into a single `CGPath` in the general case.
+    
     if let shape = items.first(Shape.self) {
       addAnimations(for: shape, context: context)
     }
