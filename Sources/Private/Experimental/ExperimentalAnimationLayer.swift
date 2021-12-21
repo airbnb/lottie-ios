@@ -176,7 +176,7 @@ extension CALayer {
   }
 }
 
-// MARK: RootAnimationLayer
+// MARK: - ExperimentalAnimationLayer + RootAnimationLayer
 
 extension ExperimentalAnimationLayer: RootAnimationLayer {
 

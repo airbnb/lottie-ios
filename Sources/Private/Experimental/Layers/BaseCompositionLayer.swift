@@ -3,13 +3,15 @@
 
 import QuartzCore
 
+// MARK: - BaseCompositionLayer
+
 /// The base type of `AnimationLayer` that can contain other `AnimationLayer`s
 class BaseCompositionLayer: CALayer, AnimationLayer {
 
   // MARK: Lifecycle
 
   init(layerModel: LayerModel) {
-    self.baseLayerModel = layerModel
+    baseLayerModel = layerModel
     super.init()
   }
 
@@ -100,7 +102,7 @@ extension CALayer {
   var childAnimationLayers: [AnimationLayer] {
     var animationLayers = [AnimationLayer]()
 
-    for sublayer in (sublayers ?? []) {
+    for sublayer in sublayers ?? [] {
       if let animationLayer = sublayer as? AnimationLayer {
         animationLayers.append(animationLayer)
       }

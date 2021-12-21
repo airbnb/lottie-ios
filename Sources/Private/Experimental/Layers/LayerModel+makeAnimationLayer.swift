@@ -3,6 +3,8 @@
 
 import QuartzCore
 
+// MARK: - LayerContext
+
 /// Context available when constructing an `AnimationLayer`
 struct LayerContext {
   let assetLibrary: AssetLibrary?

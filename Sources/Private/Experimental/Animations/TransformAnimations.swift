@@ -3,6 +3,8 @@
 
 import QuartzCore
 
+// MARK: - TransformModel
+
 /// This protocol mirrors the interface of `Transform`,
 /// but it also implemented by `ShapeTransform` to allow
 /// both transform types to share the same animation implementation.
@@ -29,11 +31,15 @@ protocol TransformModel {
   var opacity: KeyframeGroup<Vector1D> { get }
 }
 
+// MARK: - Transform + TransformModel
+
 extension Transform: TransformModel {
   var _position: KeyframeGroup<Vector3D>? { position }
   var _positionX: KeyframeGroup<Vector1D>? { positionX }
   var _positionY: KeyframeGroup<Vector1D>? { positionY }
 }
+
+// MARK: - ShapeTransform + TransformModel
 
 extension ShapeTransform: TransformModel {
   var anchorPoint: KeyframeGroup<Vector3D> { anchor }
@@ -66,6 +72,9 @@ extension Array where Element == TransformComponent {
 // MARK: - CALayer + TransformModel
 
 extension CALayer {
+
+  // MARK: Internal
+
   /// Adds animations for the listed `components` of the given `Transform` to this `CALayer`
   func addAnimations(
     for transformModel: TransformModel,
@@ -92,6 +101,8 @@ extension CALayer {
       addOpacityAnimation(from: transformModel, context: context)
     }
   }
+
+  // MARK: Private
 
   private func addPositionAnimations(
     from transformModel: TransformModel,
@@ -184,7 +195,7 @@ extension CALayer {
         // Lottie animation files express rotation in degrees
         // (e.g. 90º, 180º, 360º) so we covert to radians to get the
         // values expected by Core Animation (e.g. π/2, π, 2π)
-        return rotationDegrees.cgFloatValue * .pi / 180
+        rotationDegrees.cgFloatValue * .pi / 180
       },
       context: context)
   }

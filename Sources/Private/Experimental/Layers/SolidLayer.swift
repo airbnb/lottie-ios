@@ -12,7 +12,7 @@ final class SolidLayer: BaseCompositionLayer {
   init(_ solidLayer: SolidLayerModel) {
     self.solidLayer = solidLayer
     super.init(layerModel: solidLayer)
-    
+
     backgroundColor = solidLayer.colorHex.cgColor
   }
 
@@ -36,4 +36,3 @@ final class SolidLayer: BaseCompositionLayer {
   private let solidLayer: SolidLayerModel
 
 }
-

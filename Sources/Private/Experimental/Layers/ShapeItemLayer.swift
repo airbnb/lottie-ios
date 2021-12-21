@@ -40,6 +40,9 @@ final class ShapeItemLayer: CAShapeLayer {
 // MARK: AnimationLayer
 
 extension ShapeItemLayer: AnimationLayer {
+
+  // MARK: Internal
+
   func setupAnimations(context: LayerAnimationContext) {
     setupPathAnimation(context: context)
 
@@ -59,6 +62,8 @@ extension ShapeItemLayer: AnimationLayer {
 
     // TODO: animate more properties
   }
+
+  // MARK: Private
 
   private func setupPathAnimation(context: LayerAnimationContext) {
     if let shape = items.first(Shape.self) {
