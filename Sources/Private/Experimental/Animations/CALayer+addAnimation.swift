@@ -125,7 +125,7 @@ extension CALayer {
 
 extension LayerAnimationContext {
   /// The relative time (between 0 and 1) of the given absolute time value.
-  fileprivate func relativeTime(of absoluteTime: AnimationFrameTime) -> AnimationProgressTime {
+  func relativeTime(of absoluteTime: AnimationFrameTime) -> AnimationProgressTime {
     (absoluteTime / endFrame) + startFrame
   }
 }
