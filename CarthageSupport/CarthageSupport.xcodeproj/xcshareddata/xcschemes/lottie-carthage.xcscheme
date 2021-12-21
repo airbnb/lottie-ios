@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "_LottieCore"
+               BuildableName = "_LottieCore"
+               BlueprintName = "_LottieCore"
+               ReferencedContainer = "container:..">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "2ED64E472770F967006AA0F3"
-               BuildableName = "LottieCarthage.framework"
-               BlueprintName = "LottieCarthage"
+               BuildableName = "Lottie.framework"
+               BlueprintName = "Lottie"
                ReferencedContainer = "container:CarthageSupport.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -51,8 +65,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2ED64E472770F967006AA0F3"
-            BuildableName = "LottieCarthage.framework"
-            BlueprintName = "LottieCarthage"
+            BuildableName = "Lottie.framework"
+            BlueprintName = "Lottie"
             ReferencedContainer = "container:CarthageSupport.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
