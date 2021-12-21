@@ -51,7 +51,7 @@ extension SnapshotConfiguration {
   static let `default` = SnapshotConfiguration()
 
   /// The default configuration to use for samples in `Samples/Private`
-  static let defaultForPrivateSamples = SnapshotConfiguration()
+  static let defaultForPrivateSamples = SnapshotConfiguration.testWithExperimentalRenderingEngine
 
   /// A `SnapshotConfiguration` value with `testWithExperimentalRenderingEngine` customized to `true`
   static var testWithExperimentalRenderingEngine: SnapshotConfiguration {
