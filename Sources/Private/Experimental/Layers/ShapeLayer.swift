@@ -58,7 +58,7 @@ final class ShapeLayer: BaseCompositionLayer {
 extension ShapeItem {
   /// Whether or not this `ShapeItem` is responsible for rendering a `CGPath`
   var drawsCGPath: Bool {
-    switch self.type {
+    switch type {
     case .ellipse, .rectangle, .shape, .star:
       return true
 
