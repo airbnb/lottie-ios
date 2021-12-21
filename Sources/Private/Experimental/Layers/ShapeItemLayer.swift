@@ -49,6 +49,8 @@ extension ShapeItemLayer: AnimationLayer {
 
     if let fill = items.first(Fill.self) {
       addAnimations(for: fill, context: context)
+    } else {
+      fillColor = nil
     }
 
     if let stroke = items.first(Stroke.self) {

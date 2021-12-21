@@ -114,6 +114,17 @@ extension CALayer {
       },
       context: context)
 
+    addAnimation(
+      for: .rotation,
+      keyframes: transformModel.rotation.keyframes,
+      value: { rotationDegrees in
+        // Lottie animation files express rotation in degrees
+        // (e.g. 90º, 180º, 360º) so we covert to radians to get the
+        // values expected by Core Animation (e.g. π/2, π, 2π)
+        return rotationDegrees.cgFloatValue * .pi / 180
+      },
+      context: context)
+
     if applyOpacity {
       addAnimation(
         for: .opacity,

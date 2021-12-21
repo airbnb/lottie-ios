@@ -23,10 +23,10 @@ extension CAKeyPath {
   static var position: CAKeyPath<CGPoint> { .init("transform.translation") }
   static var positionX: CAKeyPath<CGFloat> { .init("transform.translation.y") }
   static var positionY: CAKeyPath<CGFloat> { .init("transform.translation.x") }
-
   static var scale: CAKeyPath<CGFloat> { .init("transform.scale") }
   static var scaleX: CAKeyPath<CGFloat> { .init("transform.scale.x") }
   static var scaleY: CAKeyPath<CGFloat> { .init("transform.scale.y") }
+  static var rotation: CAKeyPath<CGFloat> { .init("transform.rotation") }
 
   static var anchorPoint: CAKeyPath<CGPoint> { .init(#keyPath(CALayer.anchorPoint)) }
   static var opacity: CAKeyPath<CGFloat> { .init(#keyPath(CALayer.opacity)) }
