@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-package:
+    name: "Build Package"
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Package
+        run: brew install mint && bundle install && bundle exec rake build:package:all
+  build-example:
+    name: "Build Example App"
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Example
+        run: brew install mint && bundle install && bundle exec rake build:example:all
+  test-package:
+    name: "Test Package"
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test Package
+        run: brew install mint && bundle install && bundle exec rake test:package
+      - name: Process test artifacts
+        if: always()
+        run: brew install mint && bundle install && bundle exec rake test:process
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: TestArtifacts
+          path: Tests/Artifacts
+  cocoapod:
+    name: "Lint CocoaPods podspec"
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint Cocoapod
+        run: bundle install && bundle exec rake lint:podspec
+  carthage:
+    name: "Test Carthage support"
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test Carthage support
+        run: brew install carthage && bundle install && bundle exec rake test:carthage
+  swiftlint:
+    name: "Lint Swift (SwiftLint)"
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint Swift using SwiftLint
+        run: brew install mint && bundle install && bundle exec rake lint:swift:swiftlint
+  swiftformat:
+    name: "Lint Swift (SwiftFormat)"
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint Swift using SwiftFormat
+        run: brew install mint && bundle install && bundle exec rake lint:swift:swiftformat

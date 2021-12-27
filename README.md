@@ -26,7 +26,8 @@ Here is just a small sampling of the power of Lottie
 ![Abcs](_Gifs/Examples4.gif)
 
 ## Installing Lottie
-Lottie supports [CocoaPods](https://cocoapods.org/) and [Carthage](https://github.com/Carthage/Carthage) (Both dynamic and static). Lottie is written in ***Swift 4.2***.
+Lottie supports [Swift Package Manager](https://www.swift.org/package-manager/), [CocoaPods](https://cocoapods.org/) and [Carthage](https://github.com/Carthage/Carthage) (Both dynamic and static). Lottie is written in ***Swift 5.4***.
+
 ### Github Repo
 
 You can pull the [Lottie Github Repo](https://github.com/airbnb/lottie-ios/) and include the Lottie.xcodeproj to build a dynamic or static library.
@@ -84,8 +85,6 @@ And then import wherever needed: ```import Lottie```
 2. Paste the project URL: https://github.com/airbnb/lottie-ios
 3. Click on next and select the project target
 4. Don't forget to set `DEAD_CODE_STRIPPING = NO` in your `Build Settings` (https://bugs.swift.org/plugins/servlet/mobile#issue/SR-11564)
-  **NOTE: For MacOS you must set the `Branch` field to `lottie/macos-spm`
-  ![Example](_Gifs/spm-branch.png)
 
 If you have doubts, please, check the following links:
 

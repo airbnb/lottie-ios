@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "container:">
+   </FileRef>
+   <FileRef
+      location = "group:Example/Example.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Example/../CarthageSupport/CarthageSupport.xcodeproj">
+   </FileRef>
+</Workspace>
