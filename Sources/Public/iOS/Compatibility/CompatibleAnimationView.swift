@@ -30,6 +30,9 @@ public final class CompatibleAnimation: NSObject {
 		self.animation = animation
 	}
 	
+	public var width: Int { animation?.width ?? -1 }
+	public var height: Int { animation?.height ?? -1 }
+	
 	// MARK: Internal
 	
 	private(set) lazy var animation = Animation.named(name, bundle: bundle)
