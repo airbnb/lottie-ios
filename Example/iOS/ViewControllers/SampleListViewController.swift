@@ -83,12 +83,27 @@ final class SampleListViewController: CollectionViewController {
       ]
     }
 
+    if isTopLevel {
+      items += [
+        LinkView.itemModel(
+          dataID: "Controls Demo",
+          content: .init(animationName: nil, title: "Controls Demo"))
+          .didSelect { [weak self] context in
+            self?.show(ControlsDemoViewController(), sender: context.view)
+          },
+      ]
+    }
+
     return items
   }
 
   // MARK: Private
 
   private let directory: String
+
+  private var isTopLevel: Bool {
+    directory == "Samples"
+  }
 
   private func configureSettingsMenu() {
     navigationItem.rightBarButtonItem = UIBarButtonItem(

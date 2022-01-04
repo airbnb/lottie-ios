@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2E0F2FB827602C2E00B65DE3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 2E0F2FB727602C2E00B65DE3 /* Lottie */; };
 		2E0F2FBE27602CB300B65DE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E0F2FBC27602CB300B65DE3 /* LaunchScreen.storyboard */; };
+		2E1670C32784F009009CDED3 /* ControlsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1670C22784F009009CDED3 /* ControlsDemoViewController.swift */; };
+		2E1670CA2784F123009CDED3 /* AnimatedButtonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1670C92784F123009CDED3 /* AnimatedButtonRow.swift */; };
+		2E1670CC2784F9C1009CDED3 /* AnimatedSwitchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1670CB2784F9C1009CDED3 /* AnimatedSwitchRow.swift */; };
 		2E362A1E2762BA06006AE7D2 /* SampleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E362A1D2762BA06006AE7D2 /* SampleListViewController.swift */; };
 		2E3EEB382763C68C00287EEA /* Samples in Resources */ = {isa = PBXBuildFile; fileRef = 2E3EEB372763C68C00287EEA /* Samples */; };
 		2E3EEB392763C68C00287EEA /* Samples in Resources */ = {isa = PBXBuildFile; fileRef = 2E3EEB372763C68C00287EEA /* Samples */; };
@@ -36,6 +39,9 @@
 /* Begin PBXFileReference section */
 		2E0F2FB627602C1500B65DE3 /* .. */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ..; sourceTree = "<group>"; };
 		2E0F2FBD27602CB300B65DE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2E1670C22784F009009CDED3 /* ControlsDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsDemoViewController.swift; sourceTree = "<group>"; };
+		2E1670C92784F123009CDED3 /* AnimatedButtonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButtonRow.swift; sourceTree = "<group>"; };
+		2E1670CB2784F9C1009CDED3 /* AnimatedSwitchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedSwitchRow.swift; sourceTree = "<group>"; };
 		2E362A1D2762BA06006AE7D2 /* SampleListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleListViewController.swift; sourceTree = "<group>"; };
 		2E3EEB372763C68C00287EEA /* Samples */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Samples; path = ../Tests/Samples; sourceTree = "<group>"; };
 		2E97E3042767E7C600FE22C3 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
@@ -91,15 +97,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E1670C72784F05F009CDED3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2E362A1D2762BA06006AE7D2 /* SampleListViewController.swift */,
+				2EC6E50F2763E79F002E091C /* AnimationPreviewViewController.swift */,
+				2E1670C22784F009009CDED3 /* ControlsDemoViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2E1670C82784F068009CDED3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2EC6E5072763D981002E091C /* LinkView.swift */,
+				2E1670C92784F123009CDED3 /* AnimatedButtonRow.swift */,
+				2E1670CB2784F9C1009CDED3 /* AnimatedSwitchRow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		2E9E77AD27602BD400C84BA3 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				2E1670C72784F05F009CDED3 /* ViewControllers */,
+				2E1670C82784F068009CDED3 /* Views */,
 				2E9E77AE27602BD400C84BA3 /* AppDelegate.swift */,
 				2E0F2FBC27602CB300B65DE3 /* LaunchScreen.storyboard */,
 				2E9E77BC27602BD400C84BA3 /* Info.plist */,
-				2E362A1D2762BA06006AE7D2 /* SampleListViewController.swift */,
-				2EC6E5072763D981002E091C /* LinkView.swift */,
-				2EC6E50F2763E79F002E091C /* AnimationPreviewViewController.swift */,
 				2E97E3042767E7C600FE22C3 /* Configuration.swift */,
 			);
 			path = iOS;
@@ -311,7 +336,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EC6E5102763E79F002E091C /* AnimationPreviewViewController.swift in Sources */,
+				2E1670CC2784F9C1009CDED3 /* AnimatedSwitchRow.swift in Sources */,
 				2E97E3052767E7C600FE22C3 /* Configuration.swift in Sources */,
+				2E1670C32784F009009CDED3 /* ControlsDemoViewController.swift in Sources */,
+				2E1670CA2784F123009CDED3 /* AnimatedButtonRow.swift in Sources */,
 				2E362A1E2762BA06006AE7D2 /* SampleListViewController.swift in Sources */,
 				2E9E77AF27602BD400C84BA3 /* AppDelegate.swift in Sources */,
 				2EC6E5082763D981002E091C /* LinkView.swift in Sources */,
