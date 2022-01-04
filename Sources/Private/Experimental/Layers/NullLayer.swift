@@ -11,8 +11,8 @@ final class NullLayer: BaseCompositionLayer {
   /// Null layers shouldn't have any visual effect,
   /// so we shouldn't render apply their transform opacity
   /// (since it would affect the opacity of children).
-  override var transformComponentsToAnimate: [TransformComponent] {
-    .all(excluding: [.opacity])
+  override var transformComponentsToAnimate: Set<TransformComponent> {
+    .all.subtracting([.opacity])
   }
 
 }

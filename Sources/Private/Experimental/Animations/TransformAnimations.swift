@@ -51,7 +51,7 @@ extension ShapeTransform: TransformModel {
 // MARK: - TransformComponent
 
 /// Individual animatable components within `Transform` values
-enum TransformComponent {
+enum TransformComponent: CaseIterable {
   case position
   case anchorPoint
   case scale
@@ -59,13 +59,9 @@ enum TransformComponent {
   case opacity
 }
 
-extension Array where Element == TransformComponent {
-  static var all: [TransformComponent] {
-    [.position, .anchorPoint, .scale, .rotation, .opacity]
-  }
-
-  static func all(excluding exclude: [TransformComponent]) -> [TransformComponent] {
-    all.filter { !exclude.contains($0) }
+extension Set where Element == TransformComponent {
+  static var all: Set<TransformComponent> {
+    Set(TransformComponent.allCases)
   }
 }
 
@@ -78,7 +74,7 @@ extension CALayer {
   /// Adds animations for the listed `components` of the given `Transform` to this `CALayer`
   func addAnimations(
     for transformModel: TransformModel,
-    components: [TransformComponent] = [TransformComponent].all,
+    components: Set<TransformComponent> = .all,
     context: LayerAnimationContext)
   {
     if components.contains(.position) {

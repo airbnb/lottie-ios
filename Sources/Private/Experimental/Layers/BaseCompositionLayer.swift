@@ -35,7 +35,7 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
   // Components of this layer's `Transform` that should not be animated
   //  - By default, all components are animated
   //  - Can be overridden by subclasses
-  var transformComponentsToAnimate: [TransformComponent] {
+  var transformComponentsToAnimate: Set<TransformComponent> {
     .all
   }
 
