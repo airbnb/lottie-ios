@@ -13,7 +13,7 @@ extension CALayer {
       for: .path,
       keyframes: rectangle.size.keyframes,
       value: { sizeKeyframe in
-        let size = sizeKeyframe.sizeValue * 0.5
+        let size = sizeKeyframe.sizeValue
 
         // TODO: Is there a reasonable way to handle multiple sets
         // of keyframes that apply to the same value (`path`, in this case)?
@@ -29,124 +29,12 @@ extension CALayer {
           fatalError("Rectangle corner cornerRadius keyframes are currently unsupported")
         }
 
-        var bezierPath = BezierPath()
-        let points: [CurveVertex]
-
-        if cornerRadius <= 0 {
-          /// No Corners
-          points = [
-            /// Lead In
-            CurveVertex(
-              point: CGPoint(x: size.width, y: -size.height),
-              inTangentRelative: .zero,
-              outTangentRelative: .zero)
-              .translated(position),
-            /// Corner 1
-            CurveVertex(
-              point: CGPoint(x: size.width, y: size.height),
-              inTangentRelative: .zero,
-              outTangentRelative: .zero)
-              .translated(position),
-            /// Corner 2
-            CurveVertex(
-              point: CGPoint(x: -size.width, y: size.height),
-              inTangentRelative: .zero,
-              outTangentRelative: .zero)
-              .translated(position),
-            /// Corner 3
-            CurveVertex(
-              point: CGPoint(x: -size.width, y: -size.height),
-              inTangentRelative: .zero,
-              outTangentRelative: .zero)
-              .translated(position),
-            /// Corner 4
-            CurveVertex(
-              point: CGPoint(x: size.width, y: -size.height),
-              inTangentRelative: .zero,
-              outTangentRelative: .zero)
-              .translated(position),
-          ]
-        } else {
-          let controlPoint = cornerRadius * EllipseNode.ControlPointConstant
-          points = [
-            /// Lead In
-            CurveVertex(
-              CGPoint(x: cornerRadius, y: 0),
-              CGPoint(x: cornerRadius, y: 0),
-              CGPoint(x: cornerRadius, y: 0))
-              .translated(CGPoint(x: -cornerRadius, y: cornerRadius))
-              .translated(CGPoint(x: size.width, y: -size.height))
-              .translated(position),
-            /// Corner 1
-            CurveVertex(
-              CGPoint(x: cornerRadius, y: 0), // In tangent
-              CGPoint(x: cornerRadius, y: 0), // Point
-              CGPoint(x: cornerRadius, y: controlPoint))
-              .translated(CGPoint(x: -cornerRadius, y: -cornerRadius))
-              .translated(CGPoint(x: size.width, y: size.height))
-              .translated(position),
-            CurveVertex(
-              CGPoint(x: controlPoint, y: cornerRadius), // In tangent
-              CGPoint(x: 0, y: cornerRadius), // Point
-              CGPoint(x: 0, y: cornerRadius)) // Out Tangent
-              .translated(CGPoint(x: -cornerRadius, y: -cornerRadius))
-              .translated(CGPoint(x: size.width, y: size.height))
-              .translated(position),
-            /// Corner 2
-            CurveVertex(
-              CGPoint(x: 0, y: cornerRadius), // In tangent
-              CGPoint(x: 0, y: cornerRadius), // Point
-              CGPoint(x: -controlPoint, y: cornerRadius))// Out tangent
-              .translated(CGPoint(x: cornerRadius, y: -cornerRadius))
-              .translated(CGPoint(x: -size.width, y: size.height))
-              .translated(position),
-            CurveVertex(
-              CGPoint(x: -cornerRadius, y: controlPoint), // In tangent
-              CGPoint(x: -cornerRadius, y: 0), // Point
-              CGPoint(x: -cornerRadius, y: 0)) // Out tangent
-              .translated(CGPoint(x: cornerRadius, y: -cornerRadius))
-              .translated(CGPoint(x: -size.width, y: size.height))
-              .translated(position),
-            /// Corner 3
-            CurveVertex(
-              CGPoint(x: -cornerRadius, y: 0), // In tangent
-              CGPoint(x: -cornerRadius, y: 0), // Point
-              CGPoint(x: -cornerRadius, y: -controlPoint)) // Out tangent
-              .translated(CGPoint(x: cornerRadius, y: cornerRadius))
-              .translated(CGPoint(x: -size.width, y: -size.height))
-              .translated(position),
-            CurveVertex(
-              CGPoint(x: -controlPoint, y: -cornerRadius), // In tangent
-              CGPoint(x: 0, y: -cornerRadius), // Point
-              CGPoint(x: 0, y: -cornerRadius)) // Out tangent
-              .translated(CGPoint(x: cornerRadius, y: cornerRadius))
-              .translated(CGPoint(x: -size.width, y: -size.height))
-              .translated(position),
-            /// Corner 4
-            CurveVertex(
-              CGPoint(x: 0, y: -cornerRadius), // In tangent
-              CGPoint(x: 0, y: -cornerRadius), // Point
-              CGPoint(x: controlPoint, y: -cornerRadius)) // Out tangent
-              .translated(CGPoint(x: -cornerRadius, y: cornerRadius))
-              .translated(CGPoint(x: size.width, y: -size.height))
-              .translated(position),
-            CurveVertex(
-              CGPoint(x: cornerRadius, y: -controlPoint), // In tangent
-              CGPoint(x: cornerRadius, y: 0), // Point
-              CGPoint(x: cornerRadius, y: 0)) // Out tangent
-              .translated(CGPoint(x: -cornerRadius, y: cornerRadius))
-              .translated(CGPoint(x: size.width, y: -size.height))
-              .translated(position),
-          ]
-        }
-        let reversed = rectangle.direction == .counterClockwise
-        let pathPoints = reversed ? points.reversed() : points
-        for point in pathPoints {
-          bezierPath.addVertex(reversed ? point.reversed() : point)
-        }
-        bezierPath.close()
-
-        return bezierPath.cgPath()
+        return BezierPath.rectangle(
+          position: position,
+          size: size,
+          cornerRadius: cornerRadius,
+          direction: rectangle.direction)
+          .cgPath()
       },
       context: context)
   }

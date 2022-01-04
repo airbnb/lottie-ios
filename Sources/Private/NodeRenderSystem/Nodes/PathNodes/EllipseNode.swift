@@ -76,16 +76,30 @@ final class EllipseNode: AnimatorNode, PathNode {
   }
 
   func rebuildOutputs(frame: CGFloat) {
-    let ellipseSize = properties.size.value.sizeValue
-    let center = properties.position.value.pointValue
+    pathOutput.setPath(
+      .ellipse(
+        size: properties.size.value.sizeValue,
+        center: properties.position.value.pointValue,
+        direction: properties.direction),
+      updateFrame: frame)
+  }
 
+}
+
+extension BezierPath {
+  /// Constructs a `BezierPath` in the shape of an ellipse
+  static func ellipse(
+    size: CGSize,
+    center: CGPoint,
+    direction: PathDirection)
+    -> BezierPath
+  {
     // Unfortunately we HAVE to manually build out the ellipse.
     // Every Apple method constructs an ellipse from the 3 o-clock position
     // After effects constructs from the Noon position.
     // After effects does clockwise, but also has a flag for reversed.
-
-    var half = ellipseSize * 0.5
-    if properties.direction == .counterClockwise {
+    var half = size * 0.5
+    if direction == .counterClockwise {
       half.width = half.width * -1
     }
 
@@ -120,7 +134,6 @@ final class EllipseNode: AnimatorNode, PathNode {
       inTangentRelative: CGPoint(x: -cp.width, y: 0),
       outTangentRelative: CGPoint(x: cp.width, y: 0)))
     path.close()
-    pathOutput.setPath(path, updateFrame: frame)
+    return path
   }
-
 }
