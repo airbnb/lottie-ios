@@ -162,9 +162,9 @@ extension CALayer {
 
       if layersByIndex.keys.contains(layerModel.index) {
         fatalError("""
-          Multiple layers have the same index \"\(layerModel.index)\".
-          This is unsupported.
-          """)
+        Multiple layers have the same index \"\(layerModel.index)\".
+        This is unsupported.
+        """)
       }
 
       layersByIndex[layerModel.index] = layer
