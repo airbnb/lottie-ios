@@ -10,7 +10,7 @@ extension CALayer {
     outFrame: AnimationFrameTime,
     context: LayerAnimationContext)
   {
-    let animation = CAKeyframeAnimation(keyPath: "hidden")
+    let animation = CAKeyframeAnimation(keyPath: #keyPath(isHidden))
     animation.calculationMode = .discrete
 
     animation.values = [
@@ -32,6 +32,6 @@ extension CALayer {
     ]
 
     animation.configureTiming(with: context)
-    add(animation, forKey: "hidden")
+    add(animation, forKey: #keyPath(isHidden))
   }
 }
