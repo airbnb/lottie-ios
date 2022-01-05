@@ -173,7 +173,7 @@ final public class AnimationView: LottieView {
 
   /// Returns `true` if the animation is currently playing.
   public var isAnimationPlaying: Bool {
-    return animationLayer?.animation(forKey: activeAnimationName) != nil
+    animationLayer?.animation(forKey: activeAnimationName) != nil
   }
 
   /// Returns `true` if the animation will start playing when this view is added to a window.

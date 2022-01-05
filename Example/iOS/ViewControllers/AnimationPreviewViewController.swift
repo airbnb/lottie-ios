@@ -90,8 +90,8 @@ class AnimationPreviewViewController: UIViewController {
   private var displayLink: CADisplayLink?
 
   private var loopMode = LottieLoopMode.autoReverse
-  private var fromProgress: AnimationProgressTime = 0.75
-  private var toProgress: AnimationProgressTime = 0.25
+  private var fromProgress: AnimationProgressTime = 0
+  private var toProgress: AnimationProgressTime = 1
 
   private func configureSettingsMenu() {
     navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -182,7 +182,7 @@ class AnimationPreviewViewController: UIViewController {
                 toProgress = 1
                 updateAnimation()
               }),
-          ])
+          ]),
       ]))
   }
 

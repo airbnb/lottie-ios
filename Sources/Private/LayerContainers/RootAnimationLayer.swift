@@ -3,6 +3,8 @@
 
 import QuartzCore
 
+// MARK: - RootAnimationLayer
+
 /// A root `CALayer` responsible for playing a Lottie animation
 protocol RootAnimationLayer: CALayer {
   var currentFrame: AnimationFrameTime { get set }
@@ -32,6 +34,8 @@ protocol RootAnimationLayer: CALayer {
   func layer(for keypath: AnimationKeypath) -> CALayer?
   func animatorNodes(for keypath: AnimationKeypath) -> [AnimatorNode]?
 }
+
+// MARK: - AnimationKey
 
 enum AnimationKey {
   /// The primary animation and its key should be managed by `AnimationView`

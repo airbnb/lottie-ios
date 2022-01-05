@@ -282,7 +282,7 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
   }
 
   func removeAnimations() {
-    self.removeAllAnimations()
+    removeAllAnimations()
     for sublayer in allSublayers {
       sublayer.removeAllAnimations()
     }
