@@ -5,28 +5,15 @@ import QuartzCore
 
 // MARK: - SolidLayer
 
-final class SolidLayer: CALayer {
+final class SolidLayer: BaseCompositionLayer {
 
   // MARK: Lifecycle
 
   init(_ solidLayer: SolidLayerModel) {
     self.solidLayer = solidLayer
-    super.init()
+    super.init(layerModel: solidLayer)
 
-    // TODO: We'll of course need some way to handle
-    // converting keyframes to a CA animation of some kind
     backgroundColor = solidLayer.colorHex.cgColor
-
-    // TODO: On the model side, these fields are part of a `LayerModel` superclass.
-    // We should put this somewhere where it doesn't have to be duplicated by
-    // all layer types.
-    transform = CATransform3D.makeTransform(
-      anchor: solidLayer.transform.anchorPoint.keyframes.first!.value.pointValue,
-      position: solidLayer.transform.position?.keyframes.first!.value.pointValue ?? .zero,
-      scale: solidLayer.transform.scale.keyframes.first!.value.sizeValue,
-      rotation: solidLayer.transform.rotation.keyframes.first!.value.cgFloatValue,
-      skew: nil,
-      skewAxis: nil)
   }
 
   required init?(coder _: NSCoder) {
@@ -48,20 +35,4 @@ final class SolidLayer: CALayer {
 
   private let solidLayer: SolidLayerModel
 
-}
-
-// MARK: AnimationLayer
-
-extension SolidLayer: AnimationLayer {
-  func setupAnimations(context _: LayerAnimationContext) {
-    // TODO: Implement
-  }
-}
-
-// MARK: - SolidLayerModel + LayerConstructing
-
-extension SolidLayerModel: LayerConstructing {
-  func makeLayer() -> AnimationLayer {
-    SolidLayer(self)
-  }
 }

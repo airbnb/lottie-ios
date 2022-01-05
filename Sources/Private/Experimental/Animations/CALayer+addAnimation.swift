@@ -21,51 +21,55 @@ struct CAKeyPath<ValueRepresentation> {
 /// and https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/Key-ValueCodingExtensions/Key-ValueCodingExtensions.html
 extension CAKeyPath {
   static var position: CAKeyPath<CGPoint> { .init("transform.translation") }
+  static var positionX: CAKeyPath<CGFloat> { .init("transform.translation.y") }
+  static var positionY: CAKeyPath<CGFloat> { .init("transform.translation.x") }
   static var scale: CAKeyPath<CGFloat> { .init("transform.scale") }
   static var scaleX: CAKeyPath<CGFloat> { .init("transform.scale.x") }
   static var scaleY: CAKeyPath<CGFloat> { .init("transform.scale.y") }
+  static var rotation: CAKeyPath<CGFloat> { .init("transform.rotation") }
 
   static var anchorPoint: CAKeyPath<CGPoint> { .init(#keyPath(CALayer.anchorPoint)) }
   static var opacity: CAKeyPath<CGFloat> { .init(#keyPath(CALayer.opacity)) }
+
+  static var path: CAKeyPath<CGPath> { .init(#keyPath(CAShapeLayer.path)) }
+  static var fillColor: CAKeyPath<CGColor> { .init(#keyPath(CAShapeLayer.fillColor)) }
+  static var strokeColor: CAKeyPath<CGColor> { .init(#keyPath(CAShapeLayer.strokeColor)) }
+  static var lineWidth: CAKeyPath<CGFloat> { .init(#keyPath(CAShapeLayer.lineWidth)) }
 }
 
-// MARK: - CALayer + KeyframeGroup
+// MARK: - CALayer + addAnimation
 
 extension CALayer {
-  /// Constructs a `CAKeyframeAnimation` that reflects the given `KeyframeGroup` data model,
+  /// Constructs a `CAKeyframeAnimation` that reflects the given keyframes,
   /// and adds it to this `CALayer`.
   func addAnimation<KeyframeValue, ValueRepresentation>(
     for keyPath: CAKeyPath<ValueRepresentation>,
-    keyframes keyframeGroup: KeyframeGroup<KeyframeValue>?,
+    keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
     value keyframeValueMapping: (KeyframeValue) -> ValueRepresentation,
     context: LayerAnimationContext)
   {
-    guard let keyframeGroup = keyframeGroup else {
-      return
-    }
-
-    precondition(!keyframeGroup.keyframes.isEmpty, "Keyframes for \"\(keyPath.name)\" must be non-empty")
+    precondition(!keyframes.isEmpty, "Keyframes for \"\(keyPath.name)\" must be non-empty")
 
     let animation = CAKeyframeAnimation(keyPath: keyPath.name)
     animation.configureTiming(with: context)
 
     // Convert the list of `Keyframe<T>` into
     // the representation used by `CAKeyframeAnimation`
-    var values = keyframeGroup.keyframes.map { keyframeModel in
+    var values = keyframes.map { keyframeModel in
       keyframeValueMapping(keyframeModel.value)
     }
 
-    var keyTimes = keyframeGroup.keyframes.map { keyframeModel in
+    var keyTimes = keyframes.map { keyframeModel in
       NSNumber(value: Float(context.relativeTime(of: keyframeModel.time)))
     }
 
     // Compute the timing function between each keyframe and the subsequent keyframe
     var timingFunctions: [CAMediaTimingFunction] = []
 
-    for (index, keyframe) in keyframeGroup.keyframes.enumerated()
-      where index != keyframeGroup.keyframes.indices.last
+    for (index, keyframe) in keyframes.enumerated()
+      where index != keyframes.indices.last
     {
-      let nextKeyframe = keyframeGroup.keyframes[index + 1]
+      let nextKeyframe = keyframes[index + 1]
 
       let controlPoint1 = keyframe.outTangent?.pointValue ?? .zero
       let controlPoint2 = nextKeyframe.inTangent?.pointValue ?? CGPoint(x: 1, y: 1)

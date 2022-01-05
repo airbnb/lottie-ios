@@ -5,23 +5,21 @@ import QuartzCore
 
 // MARK: - ShapeLayer
 
-/// The CALayer type responsible for rendering `ShapeLayerModel`s
-final class ShapeLayer: BaseCompositionLayer {
+/// The `CALayer` type responsible for rendering `PreCompLayerModel`s
+final class PreCompLayer: BaseCompositionLayer {
 
   // MARK: Lifecycle
 
-  init(shapeLayer: ShapeLayerModel) {
-    self.shapeLayer = shapeLayer
-    super.init(layerModel: shapeLayer)
+  init(
+    preCompLayer: PreCompLayerModel,
+    context: LayerContext)
+  {
+    self.preCompLayer = preCompLayer
+    super.init(layerModel: preCompLayer)
 
-    for item in shapeLayer.items {
-      // TODO: Can items other than `Group`s appear at the top level?
-      // If so, how does that work?
-      if let group = item as? Group {
-        let sublayer = ShapeItemLayer(items: group.items)
-        addSublayer(sublayer)
-      }
-    }
+    setupLayerHierarchy(
+      for: context.assetLibrary?.precompAssets[preCompLayer.referenceID]?.layers ?? [],
+      context: context)
   }
 
   required init?(coder _: NSCoder) {
@@ -35,12 +33,12 @@ final class ShapeLayer: BaseCompositionLayer {
       fatalError("\(Self.self).init(layer:) incorrectly called with \(type(of: layer))")
     }
 
-    shapeLayer = layer.shapeLayer
+    preCompLayer = layer.preCompLayer
     super.init(layer: layer)
   }
 
   // MARK: Private
 
-  private let shapeLayer: ShapeLayerModel
+  private let preCompLayer: PreCompLayerModel
 
 }

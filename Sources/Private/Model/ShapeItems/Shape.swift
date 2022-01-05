@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// An item that define an ellipse shape
+/// An item that defines an custom shape
 final class Shape: ShapeItem {
 
   // MARK: Lifecycle

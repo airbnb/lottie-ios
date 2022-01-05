@@ -31,9 +31,16 @@ extension SnapshotConfiguration {
     "Nonanimating/verifyLineHeight": .precision(0.99),
 
     /// These samples are known to be supported by the experimental rendering engine
+    "PinJump": .testWithExperimentalRenderingEngine,
     "Nonanimating/Zoom": .testWithExperimentalRenderingEngine,
     "Nonanimating/GeometryTransformTest": .testWithExperimentalRenderingEngine,
     "LottieFiles/loading_dots_1": .testWithExperimentalRenderingEngine,
+    "LottieFiles/loading_dots_2": .testWithExperimentalRenderingEngine,
+    "LottieFiles/loading_dots_3": .testWithExperimentalRenderingEngine,
+
+    // These samples are not quite perfect yet, but are looking pretty good:
+    "9squares_AlBoardman": .testWithExperimentalRenderingEngine,
+    "HamburgerArrow": .testWithExperimentalRenderingEngine,
   ]
 }
 
@@ -42,6 +49,9 @@ extension SnapshotConfiguration {
 extension SnapshotConfiguration {
   /// The default configuration to use if no custom mapping is provided
   static let `default` = SnapshotConfiguration()
+
+  /// The default configuration to use for samples in `Samples/Private`
+  static let defaultForPrivateSamples = SnapshotConfiguration.testWithExperimentalRenderingEngine
 
   /// A `SnapshotConfiguration` value with `testWithExperimentalRenderingEngine` customized to `true`
   static var testWithExperimentalRenderingEngine: SnapshotConfiguration {
@@ -52,7 +62,13 @@ extension SnapshotConfiguration {
 
   /// The `SnapshotConfiguration` to use for the given sample JSON file name
   static func forSample(named sampleName: String) -> SnapshotConfiguration {
-    customMapping[sampleName] ?? .default
+    if let customConfiguration = customMapping[sampleName] {
+      return customConfiguration
+    } else if sampleName.hasPrefix("Private/") {
+      return .defaultForPrivateSamples
+    } else {
+      return .default
+    }
   }
 
   /// A `SnapshotConfiguration` value with `precision` customized to the given value
