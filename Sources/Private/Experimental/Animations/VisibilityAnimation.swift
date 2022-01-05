@@ -26,12 +26,11 @@ extension CALayer {
     //    there should be three key times.
     animation.keyTimes = [
       NSNumber(value: 0.0),
-      NSNumber(value: Double(context.relativeTime(of: inFrame))),
-      NSNumber(value: Double(context.relativeTime(of: outFrame))),
+      NSNumber(value: Double(context.animation.progressTime(forFrame: inFrame))),
+      NSNumber(value: Double(context.animation.progressTime(forFrame: outFrame))),
       NSNumber(value: 1.0),
     ]
 
-    animation.configureTiming(with: context)
-    add(animation, forKey: #keyPath(isHidden))
+    add(animation.timed(with: context), forKey: #keyPath(isHidden))
   }
 }
