@@ -25,37 +25,19 @@ final class SampleListViewController: CollectionViewController {
     configureSettingsMenu()
   }
 
-  // MARK: Internal
+  // MARK: Private
 
-  var items: [ItemModeling] {
-    var items = [ItemModeling]()
+  private let directory: String
 
-    // Create an link for each sample .json in the current directory
-    let animationsNames = (Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: directory) ?? [])
-      .map { $0.lastPathComponent.replacingOccurrences(of: ".json", with: "") }
-      .sorted(by: { $0.localizedCompare($1) == .orderedAscending })
+  private var isTopLevel: Bool {
+    directory == "Samples"
+  }
 
-    for animationName in animationsNames {
-      let animationPath = "\(directory)/\(animationName)"
-
-      items += [
-        LinkView.itemModel(
-          dataID: animationName,
-          content: .init(
-            animationName: animationPath,
-            title: animationName))
-          .didSelect { [weak self] context in
-            self?.show(
-              AnimationPreviewViewController(animationPath),
-              sender: context.view)
-          },
-      ]
-    }
-
-    // Create a link for each subdirectory in the current directory
+  /// All subdirectories within the current `directory`
+  private var subdirectoryURLs: [URL] {
     let fileManager = FileManager()
 
-    let subdirectoryURLs = ((try? fileManager.contentsOfDirectory(
+    return ((try? fileManager.contentsOfDirectory(
       at: Bundle.main.bundleURL.appendingPathComponent(directory),
       includingPropertiesForKeys: [.isDirectoryKey],
       options: [])) ?? [])
@@ -67,28 +49,65 @@ final class SampleListViewController: CollectionViewController {
       .sorted(by: {
         $0.lastPathComponent.localizedCompare($1.lastPathComponent) == .orderedAscending
       })
-
-    for subdirectoryURL in subdirectoryURLs {
-      items += [
-        LinkView.itemModel(
-          dataID: subdirectoryURL,
-          content: .init(animationName: nil, title: subdirectoryURL.lastPathComponent))
-          .didSelect { [weak self] context in
-            guard let self = self else { return }
-
-            self.show(
-              SampleListViewController(directory: "\(self.directory)/\(subdirectoryURL.lastPathComponent)"),
-              sender: context.view)
-          },
-      ]
-    }
-
-    return items
   }
 
-  // MARK: Private
+  @ItemModelBuilder
+  private var items: [ItemModeling] {
+    sampleAnimationLinks
+    subdirectoryLinks
 
-  private let directory: String
+    if isTopLevel {
+      demoLinks
+    }
+  }
+
+  @ItemModelBuilder
+  private var sampleAnimationLinks: [ItemModeling] {
+    let animationsNames = (Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: directory) ?? [])
+      .map { $0.lastPathComponent.replacingOccurrences(of: ".json", with: "") }
+      .sorted(by: { $0.localizedCompare($1) == .orderedAscending })
+
+    for animationName in animationsNames {
+      let animationPath = "\(directory)/\(animationName)"
+
+      LinkView.itemModel(
+        dataID: animationName,
+        content: .init(
+          animationName: animationPath,
+          title: animationName))
+        .didSelect { [weak self] context in
+          self?.show(
+            AnimationPreviewViewController(animationPath),
+            sender: context.view)
+        }
+    }
+  }
+
+  @ItemModelBuilder
+  private var subdirectoryLinks: [ItemModeling] {
+    for subdirectoryURL in subdirectoryURLs {
+      LinkView.itemModel(
+        dataID: subdirectoryURL,
+        content: .init(animationName: nil, title: subdirectoryURL.lastPathComponent))
+        .didSelect { [weak self] context in
+          guard let self = self else { return }
+
+          self.show(
+            SampleListViewController(directory: "\(self.directory)/\(subdirectoryURL.lastPathComponent)"),
+            sender: context.view)
+        }
+    }
+  }
+
+  @ItemModelBuilder
+  private var demoLinks: [ItemModeling] {
+    LinkView.itemModel(
+      dataID: "Controls Demo",
+      content: .init(animationName: nil, title: "Controls Demo"))
+      .didSelect { [weak self] context in
+        self?.show(ControlsDemoViewController(), sender: context.view)
+      }
+  }
 
   private func configureSettingsMenu() {
     navigationItem.rightBarButtonItem = UIBarButtonItem(
