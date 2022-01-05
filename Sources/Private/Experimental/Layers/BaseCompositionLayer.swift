@@ -43,6 +43,11 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
   /// and all child `AnimationLayer`s.
   ///  - Can be overridden by subclasses, which much call `super`.
   func setupAnimations(context: LayerAnimationContext) {
+    addVisibilityAnimation(
+      inFrame: CGFloat(baseLayerModel.inFrame),
+      outFrame: CGFloat(baseLayerModel.outFrame),
+      context: context)
+
     addAnimations(
       for: baseLayerModel.transform,
       components: transformComponentsToAnimate,

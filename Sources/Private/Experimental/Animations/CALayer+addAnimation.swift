@@ -33,8 +33,10 @@ extension CAKeyPath {
 
   static var path: CAKeyPath<CGPath> { .init(#keyPath(CAShapeLayer.path)) }
   static var fillColor: CAKeyPath<CGColor> { .init(#keyPath(CAShapeLayer.fillColor)) }
-  static var strokeColor: CAKeyPath<CGColor> { .init(#keyPath(CAShapeLayer.strokeColor)) }
   static var lineWidth: CAKeyPath<CGFloat> { .init(#keyPath(CAShapeLayer.lineWidth)) }
+  static var strokeColor: CAKeyPath<CGColor> { .init(#keyPath(CAShapeLayer.strokeColor)) }
+  static var strokeStart: CAKeyPath<CGFloat> { .init(#keyPath(CAShapeLayer.strokeStart)) }
+  static var strokeEnd: CAKeyPath<CGFloat> { .init(#keyPath(CAShapeLayer.strokeEnd)) }
 }
 
 // MARK: - CALayer + addAnimation
@@ -123,7 +125,7 @@ extension CALayer {
 
 extension LayerAnimationContext {
   /// The relative time (between 0 and 1) of the given absolute time value.
-  fileprivate func relativeTime(of absoluteTime: AnimationFrameTime) -> AnimationProgressTime {
+  func relativeTime(of absoluteTime: AnimationFrameTime) -> AnimationProgressTime {
     (absoluteTime / endFrame) + startFrame
   }
 }

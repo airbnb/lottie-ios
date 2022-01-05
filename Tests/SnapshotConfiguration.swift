@@ -32,6 +32,12 @@ extension SnapshotConfiguration {
 
     /// These samples are known to be supported by the experimental rendering engine
     "PinJump": .testWithExperimentalRenderingEngine,
+    "Switch": .testWithExperimentalRenderingEngine,
+    "Switch_States": .testWithExperimentalRenderingEngine,
+    "TwitterHeart": .testWithExperimentalRenderingEngine,
+    "TwitterHeartButton": .testWithExperimentalRenderingEngine,
+    "HamburgerArrow": .testWithExperimentalRenderingEngine,
+    "vcTransition2": .testWithExperimentalRenderingEngine,
     "Nonanimating/Zoom": .testWithExperimentalRenderingEngine,
     "Nonanimating/GeometryTransformTest": .testWithExperimentalRenderingEngine,
     "LottieFiles/loading_dots_1": .testWithExperimentalRenderingEngine,
@@ -40,7 +46,9 @@ extension SnapshotConfiguration {
 
     // These samples are not quite perfect yet, but are looking pretty good:
     "9squares_AlBoardman": .testWithExperimentalRenderingEngine,
-    "HamburgerArrow": .testWithExperimentalRenderingEngine,
+    "vcTransition1": .testWithExperimentalRenderingEngine,
+    "LottieLogo1_masked": .testWithExperimentalRenderingEngine,
+    "MotionCorpse_Jrcanest": .testWithExperimentalRenderingEngine,
   ]
 }
 

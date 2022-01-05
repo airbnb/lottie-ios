@@ -79,10 +79,31 @@ final class RectangleNode: AnimatorNode, PathNode {
   }
 
   func rebuildOutputs(frame: CGFloat) {
+    pathOutput.setPath(
+      .rectangle(
+        position: properties.position.value.pointValue,
+        size: properties.size.value.sizeValue,
+        cornerRadius: properties.cornerRadius.value.cgFloatValue,
+        direction: properties.direction),
+      updateFrame: frame)
+  }
 
-    let size = properties.size.value.sizeValue * 0.5
-    let radius = min(min(properties.cornerRadius.value.cgFloatValue, size.width) , size.height)
-    let position = properties.position.value.pointValue
+}
+
+// MARK: - BezierPath + rectangle
+
+extension BezierPath {
+  /// Constructs a `BezierPath` in the shape of a rectangle, optionally with rounded corners
+  static func rectangle(
+    position: CGPoint,
+    size inputSize: CGSize,
+    cornerRadius: CGFloat,
+    direction: PathDirection)
+    -> BezierPath
+  {
+    let size = inputSize * 0.5
+    let radius = min(min(cornerRadius, size.width) , size.height)
+
     var bezierPath = BezierPath()
     let points: [CurveVertex]
 
@@ -193,13 +214,12 @@ final class RectangleNode: AnimatorNode, PathNode {
           .translated(position),
       ]
     }
-    let reversed = properties.direction == .counterClockwise
+    let reversed = direction == .counterClockwise
     let pathPoints = reversed ? points.reversed() : points
     for point in pathPoints {
       bezierPath.addVertex(reversed ? point.reversed() : point)
     }
     bezierPath.close()
-    pathOutput.setPath(bezierPath, updateFrame: frame)
+    return bezierPath
   }
-
 }
