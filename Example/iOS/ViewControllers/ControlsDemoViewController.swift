@@ -20,10 +20,10 @@ final class ControlsDemoViewController: CollectionViewController {
     title = "Controls Demo"
   }
 
-  // MARK: Internal
+  // MARK: Private
 
   @ItemModelBuilder
-  var items: [ItemModeling] {
+  private var items: [ItemModeling] {
     AnimatedSwitchRow.itemModel(
       dataID: "Switch",
       content: .init(
