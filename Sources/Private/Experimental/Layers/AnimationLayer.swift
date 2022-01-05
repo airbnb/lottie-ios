@@ -48,6 +48,7 @@ extension CAAnimation {
     //
     let baseAnimation = self
     baseAnimation.duration = context.animation.duration
+    baseAnimation.speed = (context.endFrame < context.startFrame) ? -1 : 1
 
     // To select the subrange of the `baseAnimation` that should be played,
     // we create a parent animation with the duration of that subrange
@@ -66,7 +67,7 @@ extension CAAnimation {
     let clippingParent = CAAnimationGroup()
     clippingParent.animations = [baseAnimation]
 
-    clippingParent.duration = context.animation.time(forFrame: context.endFrame - context.startFrame)
+    clippingParent.duration = abs(context.animation.time(forFrame: context.endFrame - context.startFrame))
     baseAnimation.timeOffset = context.animation.time(forFrame: context.startFrame)
 
     clippingParent.autoreverses = context.timingConfiguration.autoreverses
