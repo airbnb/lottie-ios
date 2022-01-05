@@ -22,27 +22,26 @@ final class ControlsDemoViewController: CollectionViewController {
 
   // MARK: Internal
 
+  @ItemModelBuilder
   var items: [ItemModeling] {
-    [
-      AnimatedSwitchRow.itemModel(
-        dataID: "Switch",
-        content: .init(
-          animationName: "Samples/Switch",
-          title: "Switch",
-          onTimeRange: (from: 0.5, to: 1.0),
-          offTimeRange: (from: 0.0, to: 0.5))),
+    AnimatedSwitchRow.itemModel(
+      dataID: "Switch",
+      content: .init(
+        animationName: "Samples/Switch",
+        title: "Switch",
+        onTimeRange: 0.5...1.0,
+        offTimeRange: 0.0...0.5))
 
-      AnimatedButtonRow.itemModel(
-        dataID: "Button",
-        content: .init(
-          animationName: "Samples/TwitterHeartButton",
-          title: "Twitter Heart Button",
-          playRanges: [
-            (fromMarker: "touchDownStart", toMarker: "touchDownEnd", event: .touchDown),
-            (fromMarker: "touchDownEnd", toMarker: "touchUpCancel", event: .touchUpOutside),
-            (fromMarker: "touchDownEnd", toMarker: "touchUpEnd", event: .touchUpInside),
-          ])),
-    ]
+    AnimatedButtonRow.itemModel(
+      dataID: "Button",
+      content: .init(
+        animationName: "Samples/TwitterHeartButton",
+        title: "Twitter Heart Button",
+        playRanges: [
+          .init(fromMarker: "touchDownStart", toMarker: "touchDownEnd", event: .touchDown),
+          .init(fromMarker: "touchDownEnd", toMarker: "touchUpCancel", event: .touchUpOutside),
+          .init(fromMarker: "touchDownEnd", toMarker: "touchUpEnd", event: .touchUpInside),
+        ]))
   }
 
 }

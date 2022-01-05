@@ -29,21 +29,12 @@ final class AnimatedButtonRow: UIView, EpoxyableView {
   struct Content: Equatable {
     var animationName: String
     var title: String
-    var playRanges: [(fromMarker: String, toMarker: String, event: UIControl.Event)]
+    var playRanges: [PlayRange]
 
-    static func == (lhs: Content, rhs: Content) -> Bool {
-      guard
-        lhs.animationName == rhs.animationName,
-        lhs.title == rhs.title
-      else { return false }
-
-      for (lhsRanges, rhsRanges) in zip(lhs.playRanges, rhs.playRanges) {
-        if lhsRanges != rhsRanges {
-          return false
-        }
-      }
-
-      return true
+    struct PlayRange: Equatable {
+      let fromMarker: String
+      let toMarker: String
+      let event: UIControl.Event
     }
   }
 

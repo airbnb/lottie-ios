@@ -29,15 +29,8 @@ final class AnimatedSwitchRow: UIView, EpoxyableView {
   struct Content: Equatable {
     var animationName: String
     var title: String
-    var onTimeRange: (from: CGFloat, to: CGFloat)
-    var offTimeRange: (from: CGFloat, to: CGFloat)
-
-    static func == (lhs: Content, rhs: Content) -> Bool {
-      lhs.animationName == rhs.animationName
-        && lhs.title == rhs.title
-        && lhs.onTimeRange == rhs.onTimeRange
-        && lhs.offTimeRange == rhs.offTimeRange
-    }
+    var onTimeRange: ClosedRange<CGFloat>
+    var offTimeRange: ClosedRange<CGFloat>
   }
 
   func setContent(_ content: Content, animated _: Bool) {
@@ -86,13 +79,13 @@ final class AnimatedSwitchRow: UIView, EpoxyableView {
             context.constrainable.contentMode = .scaleAspectFit
 
             context.constrainable.setProgressForState(
-              fromProgress: content.offTimeRange.from,
-              toProgress: content.offTimeRange.to,
+              fromProgress: content.offTimeRange.lowerBound,
+              toProgress: content.offTimeRange.upperBound,
               forOnState: false)
 
             context.constrainable.setProgressForState(
-              fromProgress: content.onTimeRange.from,
-              toProgress: content.onTimeRange.to,
+              fromProgress: content.onTimeRange.lowerBound,
+              toProgress: content.onTimeRange.upperBound,
               forOnState: true)
           })
       }
