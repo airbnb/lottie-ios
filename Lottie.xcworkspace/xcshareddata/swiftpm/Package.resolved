@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Epoxy",
+        "repositoryURL": "https://github.com/airbnb/epoxy-ios.git",
+        "state": {
+          "branch": null,
+          "revision": "bc53da4def05eff869f96bedefda7e1a8fdcb199",
+          "version": "0.7.0"
+        }
+      },
+      {
+        "package": "SnapshotTesting",
+        "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing.git",
+        "state": {
+          "branch": null,
+          "revision": "0259c2fbd69c7bfaa34b0b86280496f84653e396",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
