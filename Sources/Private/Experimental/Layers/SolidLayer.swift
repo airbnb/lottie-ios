@@ -12,8 +12,7 @@ final class SolidLayer: BaseCompositionLayer {
   init(_ solidLayer: SolidLayerModel) {
     self.solidLayer = solidLayer
     super.init(layerModel: solidLayer)
-
-    backgroundColor = solidLayer.colorHex.cgColor
+    setupContentLayer()
   }
 
   required init?(coder _: NSCoder) {
@@ -34,5 +33,15 @@ final class SolidLayer: BaseCompositionLayer {
   // MARK: Private
 
   private let solidLayer: SolidLayerModel
+
+  private func setupContentLayer() {
+    // Render the fill color in a child `CAShapeLayer`
+    //  - Using a `CAShapeLayer` specifically, instead of a `CALayer` with a `backgroundColor`,
+    //    allows the size of the fill shape to be different from `contentsLayer.size`.
+    let shapeLayer = CAShapeLayer()
+    shapeLayer.fillColor = solidLayer.colorHex.cgColor
+    shapeLayer.path = CGPath(rect: .init(x: 0, y: 0, width: solidLayer.width, height: solidLayer.height), transform: nil)
+    contentsLayer.addSublayer(shapeLayer)
+  }
 
 }
