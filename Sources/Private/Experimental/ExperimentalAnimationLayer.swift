@@ -77,16 +77,16 @@ final class ExperimentalAnimationLayer: CALayer {
     setupPlaceholderAnimation(context: layerContext)
 
     // Set up the new animations with the current `TimingConfiguration`
-    for animationLayer in childAnimationLayers {
-      animationLayer.setupAnimations(context: layerContext)
+    for animationLayer in sublayers ?? [] {
+      (animationLayer as? AnimationLayer)?.setupAnimations(context: layerContext)
     }
   }
 
   override func layoutSublayers() {
     super.layoutSublayers()
 
-    for animationLayer in childAnimationLayers {
-      animationLayer.fillBoundsOfSuperlayer()
+    for sublayer in sublayers ?? [] {
+      sublayer.fillBoundsOfSuperlayer()
     }
 
     // If no animation has been set up yet, display the first frame
@@ -159,7 +159,7 @@ extension CALayer {
     // Since the layers can be listed in any order (e.g. children can
     // come either before or after their children) we have to build
     // all of the layers and _then_ setup the parent/child hierarchy.
-    var layersByIndex = [Int: CALayer]()
+    var layersByIndex = [Int: BaseCompositionLayer]()
 
     // First, we build the `AnimationLayer` / `CALayer` for each `LayerModel
     for layerModel in layersInZAxisOrder {
@@ -189,7 +189,9 @@ extension CALayer {
         let parentIndex = layerModel.parent,
         let parentLayer = layersByIndex[parentIndex]
       {
-        parentLayer.addSublayer(layer)
+        // Add this child layer to the parent's `transformLayer`
+        // so it inherits the parent `LayerModel`'s transform
+        parentLayer.transformLayer.addSublayer(layer)
       }
 
       // Otherwise we add it as a top-level sublayer of this container
@@ -235,7 +237,7 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
   }
 
   var _animationLayers: [CALayer] {
-    childAnimationLayers
+    (sublayers ?? []).filter { $0 is AnimationLayer }
   }
 
   var imageProvider: AnimationImageProvider {
@@ -295,7 +297,7 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
 extension CALayer {
   /// All of the layers in the layer tree that are descendants from this later
   @nonobjc
-  fileprivate var allSublayers: [CALayer] {
+  var allSublayers: [CALayer] {
     var allSublayers: [CALayer] = []
 
     for sublayer in sublayers ?? [] {

@@ -29,7 +29,7 @@ final class ShapeLayer: BaseCompositionLayer {
 
       for pathDrawingItem in pathDrawingItemsInGroup {
         let sublayer = ShapeItemLayer(shape: pathDrawingItem, otherItems: otherItemsInGroup)
-        addSublayer(sublayer)
+        contentsLayer.addSublayer(sublayer)
       }
     }
   }

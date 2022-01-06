@@ -31,6 +31,7 @@ extension SnapshotConfiguration {
     "Nonanimating/verifyLineHeight": .precision(0.99),
 
     /// These samples are known to be supported by the experimental rendering engine
+    "9squares_AlBoardman": .testWithExperimentalRenderingEngine,
     "PinJump": .testWithExperimentalRenderingEngine,
     "Switch": .testWithExperimentalRenderingEngine,
     "Switch_States": .testWithExperimentalRenderingEngine,
@@ -43,12 +44,24 @@ extension SnapshotConfiguration {
     "LottieFiles/loading_dots_1": .testWithExperimentalRenderingEngine,
     "LottieFiles/loading_dots_2": .testWithExperimentalRenderingEngine,
     "LottieFiles/loading_dots_3": .testWithExperimentalRenderingEngine,
+    "TypeFace/B": .testWithExperimentalRenderingEngine,
+    "TypeFace/D": .testWithExperimentalRenderingEngine,
+    "TypeFace/H": .testWithExperimentalRenderingEngine,
+    "TypeFace/J": .testWithExperimentalRenderingEngine,
+    "TypeFace/N": .testWithExperimentalRenderingEngine,
+    "TypeFace/R": .testWithExperimentalRenderingEngine,
+    "TypeFace/W": .testWithExperimentalRenderingEngine,
+    "TypeFace/X": .testWithExperimentalRenderingEngine,
+    "TypeFace/Z": .testWithExperimentalRenderingEngine,
 
     // These samples are not quite perfect yet, but are looking pretty good:
-    "9squares_AlBoardman": .testWithExperimentalRenderingEngine,
     "vcTransition1": .testWithExperimentalRenderingEngine,
+    "LottieLogo1": .testWithExperimentalRenderingEngine,
     "LottieLogo1_masked": .testWithExperimentalRenderingEngine,
+    "LottieLogo2": .testWithExperimentalRenderingEngine,
     "MotionCorpse_Jrcanest": .testWithExperimentalRenderingEngine,
+    "IconTransitions": .testWithExperimentalRenderingEngine,
+    "Watermelon": .testWithExperimentalRenderingEngine,
   ]
 }
 

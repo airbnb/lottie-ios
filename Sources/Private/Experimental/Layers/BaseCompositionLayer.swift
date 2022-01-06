@@ -13,6 +13,7 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
   init(layerModel: LayerModel) {
     baseLayerModel = layerModel
     super.init()
+    setupSublayers()
   }
 
   required init?(coder _: NSCoder) {
@@ -32,11 +33,29 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
 
   // MARK: Internal
 
-  // Components of this layer's `Transform` that should not be animated
-  //  - By default, all components are animated
-  //  - Can be overridden by subclasses
-  var transformComponentsToAnimate: Set<TransformComponent> {
-    .all
+  /// The layer that the `LayerModel.transform` is applied to
+  ///  - Child `LayerModel`s should always be added to this layer,
+  ///    so they inherit the transform of the parent layer.
+  let transformLayer: CALayer = {
+    let layer = CALayer()
+    layer.name = "transform"
+    return layer
+  }()
+
+  /// The layer that should render visible elements displayed by this layer's `LayerModel`
+  ///  - This layer applies `LayerModel.transform.opacity`, which applies to this specific
+  ///    `LayerModel`'s content and not the content of any child `LayerModel`s.
+  let contentsLayer: CALayer = {
+    let layer = CALayer()
+    layer.name = "contents"
+    return layer
+  }()
+
+  override func addSublayer(_: CALayer) {
+    fatalError("""
+    Sublayers should not be added directly to `BaseCompositionLayer`.
+    Instead, add sublayers to either `transformLayer` or `contentsLayer`.
+    """)
   }
 
   /// Sets up the base `LayerModel` animations for this layer,
@@ -48,20 +67,22 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
       outFrame: CGFloat(baseLayerModel.outFrame),
       context: context)
 
-    addAnimations(
-      for: baseLayerModel.transform,
-      components: transformComponentsToAnimate,
-      context: context)
+    transformLayer.addTransformAnimations(for: baseLayerModel.transform, context: context)
 
-    for childAnimationLayer in childAnimationLayers {
-      childAnimationLayer.setupAnimations(context: context)
+    // Add the opacity animation to _only_ the `contentsLayer`
+    //  - The opacity should affect the content rendered directly by this layer,
+    //    but _not_ any child `LayerModel`s.
+    contentsLayer.addOpacityAnimation(from: baseLayerModel.transform, context: context)
+
+    for childAnimationLayer in managedSublayers {
+      (childAnimationLayer as? AnimationLayer)?.setupAnimations(context: context)
     }
   }
 
   override func layoutSublayers() {
     super.layoutSublayers()
 
-    for sublayer in sublayers ?? [] {
+    for sublayer in managedSublayers {
       sublayer.fillBoundsOfSuperlayer()
     }
   }
@@ -70,21 +91,19 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
 
   private let baseLayerModel: LayerModel
 
-}
-
-// MARK: - CALayer + animationLayers
-
-extension CALayer {
-  /// The sublayers of this layer that conform to `AnimationLayer`
-  var childAnimationLayers: [AnimationLayer] {
-    var animationLayers = [AnimationLayer]()
-
-    for sublayer in sublayers ?? [] {
-      if let animationLayer = sublayer as? AnimationLayer {
-        animationLayers.append(animationLayer)
-      }
-    }
-
-    return animationLayers
+  /// All of the sublayers managed by this `BaseCompositionLayer`
+  private var managedSublayers: [CALayer] {
+    (sublayers ?? [])
+      + (transformLayer.sublayers ?? [])
+      + (contentsLayer.sublayers ?? [])
   }
+
+  private func setupSublayers() {
+    super.addSublayer(transformLayer)
+    transformLayer.addSublayer(contentsLayer)
+
+    // TODO: implement Mask support
+    // if let masks = baseLayerModel.masks { ... }
+  }
+
 }

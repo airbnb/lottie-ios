@@ -69,7 +69,8 @@ extension ShapeItemLayer: AnimationLayer {
     setupPathAnimation(context: context)
 
     if let shapeTransform = otherItems.first(ShapeTransform.self) {
-      addAnimations(for: shapeTransform, context: context)
+      addTransformAnimations(for: shapeTransform, context: context)
+      addOpacityAnimation(from: shapeTransform, context: context)
     }
 
     if let fill = otherItems.first(Fill.self) {

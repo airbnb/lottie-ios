@@ -14,7 +14,7 @@ struct LayerContext {
 
 extension LayerModel {
   /// Constructs an `AnimationLayer` / `CALayer` that represents this `LayerModel`
-  func makeAnimationLayer(context: LayerContext) -> AnimationLayer? {
+  func makeAnimationLayer(context: LayerContext) -> BaseCompositionLayer? {
     switch (type, self) {
     case (.precomp, let preCompLayerModel as PreCompLayerModel):
       return PreCompLayer(preCompLayer: preCompLayerModel, context: context)

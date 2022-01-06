@@ -48,54 +48,34 @@ extension ShapeTransform: TransformModel {
   var _positionY: KeyframeGroup<Vector1D>? { nil }
 }
 
-// MARK: - TransformComponent
-
-/// Individual animatable components within `Transform` values
-enum TransformComponent: CaseIterable {
-  case position
-  case anchorPoint
-  case scale
-  case rotation
-  case opacity
-}
-
-extension Set where Element == TransformComponent {
-  static var all: Set<TransformComponent> {
-    Set(TransformComponent.allCases)
-  }
-}
-
 // MARK: - CALayer + TransformModel
 
 extension CALayer {
 
   // MARK: Internal
 
-  /// Adds animations for the listed `components` of the given `Transform` to this `CALayer`
-  func addAnimations(
-    for transformModel: TransformModel,
-    components: Set<TransformComponent> = .all,
-    context: LayerAnimationContext)
-  {
-    if components.contains(.position) {
-      addPositionAnimations(from: transformModel, context: context)
-    }
+  /// Adds transform-related animations from the given `TransformModel` to this layer
+  ///  - This _doesn't_ apply `transform.opacity`, which has to be handled separately
+  ///    since child layers don't inherit the `opacity` of their parent.
+  func addTransformAnimations(for transformModel: TransformModel, context: LayerAnimationContext) {
+    addPositionAnimations(from: transformModel, context: context)
+    addAnchorPointAnimation(from: transformModel, context: context)
+    addScaleAnimations(from: transformModel, context: context)
+    addRotationAnimation(from: transformModel, context: context)
+  }
 
-    if components.contains(.anchorPoint) {
-      addAnchorPointAnimation(from: transformModel, context: context)
-    }
-
-    if components.contains(.scale) {
-      addScaleAnimations(from: transformModel, context: context)
-    }
-
-    if components.contains(.rotation) {
-      addRotationAnimation(from: transformModel, context: context)
-    }
-
-    if components.contains(.opacity) {
-      addOpacityAnimation(from: transformModel, context: context)
-    }
+  /// Adds the opacity animation from the given `TransformModel` to this layer
+  func addOpacityAnimation(from transformModel: TransformModel, context: LayerAnimationContext) {
+    addAnimation(
+      for: .opacity,
+      keyframes: transformModel.opacity.keyframes,
+      value: {
+        // Lottie animation files express opacity as a numerical percentage value
+        // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values
+        // expected by Core Animation (e.g. 0.0, 0.5, 1.0).
+        $0.cgFloatValue / 100
+      },
+      context: context)
   }
 
   // MARK: Private
@@ -192,22 +172,6 @@ extension CALayer {
         // (e.g. 90º, 180º, 360º) so we covert to radians to get the
         // values expected by Core Animation (e.g. π/2, π, 2π)
         rotationDegrees.cgFloatValue * .pi / 180
-      },
-      context: context)
-  }
-
-  private func addOpacityAnimation(
-    from transformModel: TransformModel,
-    context: LayerAnimationContext)
-  {
-    addAnimation(
-      for: .opacity,
-      keyframes: transformModel.opacity.keyframes,
-      value: {
-        // Lottie animation files express opacity as a numerical percentage value
-        // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values
-        // expected by Core Animation (e.g. 0.0, 0.5, 1.0).
-        $0.cgFloatValue / 100
       },
       context: context)
   }
