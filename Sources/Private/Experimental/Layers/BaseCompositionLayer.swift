@@ -13,7 +13,9 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
   init(layerModel: LayerModel) {
     baseLayerModel = layerModel
     super.init()
+
     setupSublayers()
+    name = layerModel.name
   }
 
   required init?(coder _: NSCoder) {
@@ -62,17 +64,17 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
   /// and all child `AnimationLayer`s.
   ///  - Can be overridden by subclasses, which much call `super`.
   func setupAnimations(context: LayerAnimationContext) {
-    addVisibilityAnimation(
+    transformLayer.addTransformAnimations(for: baseLayerModel.transform, context: context)
+
+    // Add the opacity and visibility animations to _only_ the `contentsLayer`
+    //  - These animations should affect the content rendered directly by this layer,
+    //    but _not_ any child `LayerModel`s.
+    contentsLayer.addOpacityAnimation(from: baseLayerModel.transform, context: context)
+
+    contentsLayer.addVisibilityAnimation(
       inFrame: CGFloat(baseLayerModel.inFrame),
       outFrame: CGFloat(baseLayerModel.outFrame),
       context: context)
-
-    transformLayer.addTransformAnimations(for: baseLayerModel.transform, context: context)
-
-    // Add the opacity animation to _only_ the `contentsLayer`
-    //  - The opacity should affect the content rendered directly by this layer,
-    //    but _not_ any child `LayerModel`s.
-    contentsLayer.addOpacityAnimation(from: baseLayerModel.transform, context: context)
 
     for childAnimationLayer in managedSublayers {
       (childAnimationLayer as? AnimationLayer)?.setupAnimations(context: context)
@@ -88,7 +90,7 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
   }
 
   // MARK: Private
-
+  
   private let baseLayerModel: LayerModel
 
   /// All of the sublayers managed by this `BaseCompositionLayer`

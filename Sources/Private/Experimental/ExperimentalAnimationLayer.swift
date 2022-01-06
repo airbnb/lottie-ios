@@ -215,6 +215,13 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
       animation.frameTime(forProgress: (presentation() ?? self).animationProgress)
     }
     set {
+      // Currently, setting `currentFrame` causes the existing layer hierarchy
+      // to be discarded and then completely rebuilt.
+      // This isn't a problem when setting the animation up just once,
+      // but can max out the CPU (causing frame drops / lag) for very-large animations
+      // when interactively controlling the current frame with a user gesture.
+      // TODO: This should be adjusted to use the existing layer hierarchy
+      //       and control something like `layer.timeOffset`.
       setupAnimation(
         context: .init(
           playFrom: animation.startFrame,
