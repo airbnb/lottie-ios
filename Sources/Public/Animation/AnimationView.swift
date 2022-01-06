@@ -137,7 +137,7 @@ final public class AnimationView: LottieView {
       makeAnimationLayer()
     }
   }
-  
+
   /**
    Sets the image provider for the animation view. An image provider provides the
    animation with its required image data.
