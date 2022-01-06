@@ -61,7 +61,7 @@ extension SnapshotConfiguration {
     "LottieLogo2": .testWithExperimentalRenderingEngine,
     "MotionCorpse_Jrcanest": .testWithExperimentalRenderingEngine,
     "IconTransitions": .testWithExperimentalRenderingEngine,
-    "Watermelon": .testWithExperimentalRenderingEngine
+    "Watermelon": .testWithExperimentalRenderingEngine,
   ]
 }
 

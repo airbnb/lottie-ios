@@ -51,7 +51,7 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
     return layer
   }()
 
-  override func addSublayer(_ layer: CALayer) {
+  override func addSublayer(_: CALayer) {
     fatalError("""
     Sublayers should not be added directly to `BaseCompositionLayer`.
     Instead, add sublayers to either `transformLayer` or `contentsLayer`.
