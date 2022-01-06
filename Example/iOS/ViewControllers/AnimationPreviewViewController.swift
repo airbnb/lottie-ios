@@ -55,8 +55,6 @@ class AnimationPreviewViewController: UIViewController {
     slider.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -12).isActive = true
     slider.addTarget(self, action: #selector(updateAnimation(sender:)), for: .valueChanged)
 
-    /// Play Animation
-
     /// Create a display link to make slider track with animation progress.
     displayLink = CADisplayLink(target: self, selector: #selector(animationCallback))
     displayLink?.add(

@@ -1001,16 +1001,38 @@ final public class AnimationView: LottieView {
     animationID = animationID + 1
     _activeAnimationName = AnimationView.animationName + String(animationID)
 
-    // TODO: Improve this integration point with the experimental rendering engine
-    // (e.g. when changing the `loopMode`, the new animation should begin at
-    // `currentFrame` instead of starting from the beginning.)
     if let experimentalAnimationLayer = animationlayer as? ExperimentalAnimationLayer {
+      var animationContext = animationContext
+      var timingConfiguration = ExperimentalAnimationLayer.CAMediaTimingConfiguration(
+        autoreverses: loopMode.caAnimationConfiguration.autoreverses,
+        repeatCount: loopMode.caAnimationConfiguration.repeatCount,
+        speed: Float(animationSpeed))
+
+      // The animation should start playing from the `currentFrame`,
+      // if `currentFrame` is included in the time range being played.
+      // We have to configure this differently depending on the loop mode:
+      if currentFrame.clamp(animationContext.playFrom, animationContext.playTo) == currentFrame {
+        switch loopMode {
+        // When playing exactly once (and not looping), we can just set the
+        // `playFrom` time to be the `currentFrame`. Since the animation duration
+        // is based on `playFrom` and `playTo`, this automatically truncates the
+        // duration (so the animation stops playing at `playFrom`).
+        case .playOnce:
+          animationContext.playFrom = currentFrame
+
+        // When looping, we specifically _don't_ want to affect the duration of the animation,
+        // since that would affect the duration of all subsequent loops. We just want to adjust
+        // the duration of the _first_ loop. Instead of setting `playFrom`, we just add a `timeOffset`
+        // so the first loop begins at `currentTime` but all subsequent loops are the standard duration.
+        default:
+          timingConfiguration.timeOffset = currentTime - animation.time(forFrame: animationContext.playFrom)
+        }
+      }
+
       experimentalAnimationLayer.setupAnimation(
         context: animationContext,
-        timingConfiguration: .init(
-          autoreverses: loopMode.caAnimationConfiguration.autoreverses,
-          repeatCount: loopMode.caAnimationConfiguration.repeatCount,
-          speed: Float(animationSpeed)))
+        timingConfiguration: timingConfiguration)
+
       return
     }
 
