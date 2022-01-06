@@ -184,9 +184,20 @@ extension Animation {
     return marker.frameTime
   }
 
-  /// Converts Frame Time (Seconds * Framerate) into Progress Time (0 to 1).
-  public func progressTime(forFrame frameTime: AnimationFrameTime) -> AnimationProgressTime {
-    ((frameTime - startFrame) / (endFrame - startFrame)).clamp(0, 1)
+  /// Converts Frame Time (Seconds * Framerate) into Progress Time
+  /// (optionally clamped to between 0 and 1).
+  public func progressTime(
+    forFrame frameTime: AnimationFrameTime,
+    clamped: Bool = true)
+    -> AnimationProgressTime
+  {
+    let progressTime = ((frameTime - startFrame) / (endFrame - startFrame))
+
+    if clamped {
+      return progressTime.clamp(0, 1)
+    } else {
+      return progressTime
+    }
   }
 
   /// Converts Progress Time (0 to 1) into Frame Time (Seconds * Framerate)

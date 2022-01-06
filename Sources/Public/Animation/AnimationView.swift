@@ -173,14 +173,7 @@ final public class AnimationView: LottieView {
 
   /// Returns `true` if the animation is currently playing.
   public var isAnimationPlaying: Bool {
-    let caAnimationName: String
-    if animationLayer is ExperimentalAnimationLayer {
-      caAnimationName = "animationProgress"
-    } else {
-      caAnimationName = activeAnimationName
-    }
-
-    return animationLayer?.animation(forKey: caAnimationName) != nil
+    animationLayer?.animation(forKey: activeAnimationName) != nil
   }
 
   /// Returns `true` if the animation will start playing when this view is added to a window.
@@ -876,10 +869,19 @@ final public class AnimationView: LottieView {
   // MARK: Fileprivate
 
   fileprivate var animationContext: AnimationContext?
-  fileprivate var activeAnimationName: String = AnimationView.animationName
+  fileprivate var _activeAnimationName: String = AnimationView.animationName
   fileprivate var animationID: Int = 0
 
   fileprivate var waitingToPlayAnimation: Bool = false
+
+  fileprivate var activeAnimationName: String {
+    switch animationLayer?.primaryAnimationKey {
+    case .specific(let animationKey):
+      return animationKey
+    case .managed, nil:
+      return _activeAnimationName
+    }
+  }
 
   // MARK: - Private (Building Animation View)
 
@@ -997,13 +999,14 @@ final public class AnimationView: LottieView {
     guard window != nil else { waitingToPlayAnimation = true; return }
 
     animationID = animationID + 1
-    activeAnimationName = AnimationView.animationName + String(animationID)
+    _activeAnimationName = AnimationView.animationName + String(animationID)
 
     // TODO: Improve this integration point with the experimental rendering engine
     // (e.g. when changing the `loopMode`, the new animation should begin at
     // `currentFrame` instead of starting from the beginning.)
     if let experimentalAnimationLayer = animationlayer as? ExperimentalAnimationLayer {
       experimentalAnimationLayer.setupAnimation(
+        context: animationContext,
         timingConfiguration: .init(
           autoreverses: loopMode.caAnimationConfiguration.autoreverses,
           repeatCount: loopMode.caAnimationConfiguration.repeatCount,

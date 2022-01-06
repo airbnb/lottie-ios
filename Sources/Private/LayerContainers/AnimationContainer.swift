@@ -144,6 +144,10 @@ final class AnimationContainer: CALayer, RootAnimationLayer {
 
   var animationLayers: ContiguousArray<CompositionLayer>
 
+  var primaryAnimationKey: AnimationKey {
+    .managed
+  }
+
   var _animationLayers: [CALayer] {
     Array(animationLayers)
   }
@@ -175,6 +179,10 @@ final class AnimationContainer: CALayer, RootAnimationLayer {
 
   func reloadImages() {
     layerImageProvider.reloadImages()
+  }
+
+  func removeAnimations() {
+    // no-op, since the primary animation is managed by the `AnimationView`.
   }
 
   /// Forces the view to update its drawing.

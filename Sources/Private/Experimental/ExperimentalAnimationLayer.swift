@@ -40,7 +40,7 @@ final class ExperimentalAnimationLayer: CALayer {
 
   /// Timing-related configuration to apply to this layer's child `CAAnimation`s
   ///  - This is effectively a configurable subset of `CAMediaTiming`
-  struct TimingConfiguration {
+  struct CAMediaTimingConfiguration {
     var autoreverses = false
     var repeatCount: Float = 0
     var speed: Float = 1
@@ -48,21 +48,21 @@ final class ExperimentalAnimationLayer: CALayer {
   }
 
   /// Sets up `CAAnimation`s for each `AnimationLayer` in the layer hierarchy
-  func setupAnimation(timingConfiguration: TimingConfiguration) {
+  func setupAnimation(
+    context: AnimationContext,
+    timingConfiguration: CAMediaTimingConfiguration)
+  {
     self.timingConfiguration = timingConfiguration
+    completionHandlerDelegate = context.closure
 
-    let context = LayerAnimationContext(
+    let layerContext = LayerAnimationContext(
+      animation: animation,
       timingConfiguration: timingConfiguration,
-      startFrame: animation.startFrame,
-      endFrame: animation.endFrame,
-      framerate: CGFloat(animation.framerate))
+      startFrame: context.playFrom,
+      endFrame: context.playTo)
 
     // Remove any existing animations from the layer hierarchy
-    removeAllAnimations()
-
-    for sublayer in allSublayers {
-      sublayer.removeAllAnimations()
-    }
+    removeAnimations()
 
     // Perform a layout pass if necessary so all of the sublayers
     // have the most up-to-date sizing information
@@ -74,11 +74,11 @@ final class ExperimentalAnimationLayer: CALayer {
     speed = timingConfiguration.speed
 
     // Setup a placeholder animation to let us track the realtime animation progress
-    setupPlaceholderAnimation(context: context)
+    setupPlaceholderAnimation(context: layerContext)
 
     // Set up the new animations with the current `TimingConfiguration`
     for animationLayer in childAnimationLayers {
-      animationLayer.setupAnimations(context: context)
+      animationLayer.setupAnimations(context: layerContext)
     }
   }
 
@@ -102,7 +102,12 @@ final class ExperimentalAnimationLayer: CALayer {
   // MARK: Private
 
   /// The timing configuration that is being used for the currently-active animation
-  private var timingConfiguration: TimingConfiguration?
+  private var timingConfiguration: CAMediaTimingConfiguration?
+
+  /// A strong reference to the `AnimationCompletionDelegate`
+  /// that serves as the `CAAnimationDelegate` of our animation
+  /// (so `AnimationView` can attach a completion handler).
+  private var completionHandlerDelegate: AnimationCompletionDelegate?
 
   /// The current progress of the placeholder `CAAnimation`,
   /// which is also the realtime animation progress of this layer's animation
@@ -125,10 +130,12 @@ final class ExperimentalAnimationLayer: CALayer {
   /// realtime animation progress via `self.currentFrame`.
   private func setupPlaceholderAnimation(context: LayerAnimationContext) {
     let animationProgressTracker = CABasicAnimation(keyPath: #keyPath(animationProgress))
-    animationProgressTracker.configureTiming(with: context)
     animationProgressTracker.fromValue = 0
     animationProgressTracker.toValue = 1
-    add(animationProgressTracker, forKey: #keyPath(animationProgress))
+
+    let timedProgressAnimation = animationProgressTracker.timed(with: context)
+    timedProgressAnimation.delegate = completionHandlerDelegate
+    add(timedProgressAnimation, forKey: #keyPath(animationProgress))
   }
 
 }
@@ -197,14 +204,23 @@ extension CALayer {
 
 extension ExperimentalAnimationLayer: RootAnimationLayer {
 
+  var primaryAnimationKey: AnimationKey {
+    .specific(#keyPath(animationProgress))
+  }
+
   var currentFrame: AnimationFrameTime {
     get {
       animation.frameTime(forProgress: (presentation() ?? self).animationProgress)
     }
     set {
-      setupAnimation(timingConfiguration: .init(
-        speed: 0,
-        timeOffset: animation.time(forFrame: newValue)))
+      setupAnimation(
+        context: .init(
+          playFrom: animation.startFrame,
+          playTo: animation.endFrame,
+          closure: nil),
+        timingConfiguration: .init(
+          speed: 0,
+          timeOffset: animation.time(forFrame: newValue)))
     }
   }
 
@@ -263,6 +279,13 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
 
   func animatorNodes(for _: AnimationKeypath) -> [AnimatorNode]? {
     fatalError("Currently unsupported")
+  }
+
+  func removeAnimations() {
+    removeAllAnimations()
+    for sublayer in allSublayers {
+      sublayer.removeAllAnimations()
+    }
   }
 
 }

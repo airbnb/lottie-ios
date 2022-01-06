@@ -53,7 +53,6 @@ extension CALayer {
     precondition(!keyframes.isEmpty, "Keyframes for \"\(keyPath.name)\" must be non-empty")
 
     let animation = CAKeyframeAnimation(keyPath: keyPath.name)
-    animation.configureTiming(with: context)
 
     // Convert the list of `Keyframe<T>` into
     // the representation used by `CAKeyframeAnimation`
@@ -61,8 +60,9 @@ extension CALayer {
       keyframeValueMapping(keyframeModel.value)
     }
 
-    var keyTimes = keyframes.map { keyframeModel in
-      NSNumber(value: Float(context.relativeTime(of: keyframeModel.time)))
+    var keyTimes = keyframes.map { keyframeModel -> NSNumber in
+      let progressTime = context.animation.progressTime(forFrame: keyframeModel.time, clamped: false)
+      return NSNumber(value: Float(progressTime))
     }
 
     // Compute the timing function between each keyframe and the subsequent keyframe
@@ -116,16 +116,7 @@ extension CALayer {
     animation.keyTimes = keyTimes
     animation.timingFunctions = timingFunctions
 
-    add(animation, forKey: keyPath.name)
+    add(animation.timed(with: context), forKey: keyPath.name)
   }
 
-}
-
-// MARK: - LayerAnimationContext helpers
-
-extension LayerAnimationContext {
-  /// The relative time (between 0 and 1) of the given absolute time value.
-  func relativeTime(of absoluteTime: AnimationFrameTime) -> AnimationProgressTime {
-    (absoluteTime / endFrame) + startFrame
-  }
 }

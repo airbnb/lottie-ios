@@ -78,7 +78,7 @@ class AnimationPreviewViewController: UIViewController {
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    animationView.play(fromProgress: 0, toProgress: 1)
+    updateAnimation()
   }
 
   // MARK: Private
@@ -89,38 +89,105 @@ class AnimationPreviewViewController: UIViewController {
 
   private var displayLink: CADisplayLink?
 
+  private var loopMode = LottieLoopMode.autoReverse
+  private var fromProgress: AnimationProgressTime = 0
+  private var toProgress: AnimationProgressTime = 1
+
   private func configureSettingsMenu() {
     navigationItem.rightBarButtonItem = UIBarButtonItem(
       title: "Settings",
       image: .init(systemName: "repeat.circle"),
       primaryAction: nil,
-      menu: UIMenu(
-        title: "Loop Mode",
-        children: [
-          UIAction(
-            title: "Autoreverse",
-            state: animationView.loopMode == .autoReverse ? .on : .off,
-            handler: { [weak self] _ in
-              self?.updateLoopMode(to: .autoReverse)
-            }),
-          UIAction(
-            title: "Loop",
-            state: animationView.loopMode == .loop ? .on : .off,
-            handler: { [weak self] _ in
-              self?.updateLoopMode(to: .loop)
-            }),
-          UIAction(
-            title: "Play Once",
-            state: animationView.loopMode == .playOnce ? .on : .off,
-            handler: { [weak self] _ in
-              self?.updateLoopMode(to: .playOnce)
-            }),
-        ]))
+      menu: UIMenu(children: [
+        UIMenu(
+          title: "Loop Mode...",
+          children: [
+            UIAction(
+              title: "Autoreverse",
+              state: loopMode == .autoReverse ? .on : .off,
+              handler: { [unowned self] _ in
+                loopMode = .autoReverse
+                updateAnimation()
+              }),
+            UIAction(
+              title: "Loop",
+              state: loopMode == .loop ? .on : .off,
+              handler: { [unowned self] _ in
+                loopMode = .loop
+                updateAnimation()
+              }),
+            UIAction(
+              title: "Play Once",
+              state: loopMode == .playOnce ? .on : .off,
+              handler: { [unowned self] _ in
+                loopMode = .playOnce
+                updateAnimation()
+              }),
+          ]),
+
+        UIMenu(
+          title: "From Progress...",
+          children: [
+            UIAction(
+              title: "0%",
+              state: fromProgress == 0 ? .on : .off,
+              handler: { [unowned self] _ in
+                fromProgress = 0
+                updateAnimation()
+              }),
+            UIAction(
+              title: "25%",
+              state: fromProgress == 0.25 ? .on : .off,
+              handler: { [unowned self] _ in
+                fromProgress = 0.25
+                updateAnimation()
+              }),
+            UIAction(
+              title: "50%",
+              state: fromProgress == 0.5 ? .on : .off,
+              handler: { [unowned self] _ in
+                fromProgress = 0.5
+                updateAnimation()
+              }),
+          ]),
+
+        UIMenu(
+          title: "To Progress...",
+          children: [
+            UIAction(
+              title: "0%",
+              state: toProgress == 0 ? .on : .off,
+              handler: { [unowned self] _ in
+                toProgress = 0
+                updateAnimation()
+              }),
+            UIAction(
+              title: "50%",
+              state: toProgress == 0.5 ? .on : .off,
+              handler: { [unowned self] _ in
+                toProgress = 0.5
+                updateAnimation()
+              }),
+            UIAction(
+              title: "75%",
+              state: toProgress == 0.75 ? .on : .off,
+              handler: { [unowned self] _ in
+                toProgress = 0.75
+                updateAnimation()
+              }),
+            UIAction(
+              title: "100%",
+              state: toProgress == 1 ? .on : .off,
+              handler: { [unowned self] _ in
+                toProgress = 1
+                updateAnimation()
+              }),
+          ]),
+      ]))
   }
 
-  private func updateLoopMode(to loopMode: LottieLoopMode) {
-    animationView.loopMode = loopMode
-    animationView.play()
+  private func updateAnimation() {
+    animationView.play(fromProgress: fromProgress, toProgress: toProgress, loopMode: loopMode)
     configureSettingsMenu()
   }
 

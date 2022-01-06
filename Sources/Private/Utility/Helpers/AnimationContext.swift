@@ -17,8 +17,8 @@ public typealias LottieCompletionBlock = (Bool) -> Void
 struct AnimationContext {
 
   init(
-    playFrom: CGFloat,
-    playTo: CGFloat,
+    playFrom: AnimationFrameTime,
+    playTo: AnimationFrameTime,
     closure: LottieCompletionBlock?)
   {
     self.playTo = playTo
@@ -26,8 +26,8 @@ struct AnimationContext {
     self.closure = AnimationCompletionDelegate(completionBlock: closure)
   }
 
-  var playFrom: CGFloat
-  var playTo: CGFloat
+  var playFrom: AnimationFrameTime
+  var playTo: AnimationFrameTime
   var closure: AnimationCompletionDelegate
 
 }
