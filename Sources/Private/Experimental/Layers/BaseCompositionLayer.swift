@@ -90,7 +90,7 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
   }
 
   // MARK: Private
-  
+
   private let baseLayerModel: LayerModel
 
   /// All of the sublayers managed by this `BaseCompositionLayer`
@@ -98,14 +98,16 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
     (sublayers ?? [])
       + (transformLayer.sublayers ?? [])
       + (contentsLayer.sublayers ?? [])
+      + [contentsLayer.mask].compactMap { $0 }
   }
 
   private func setupSublayers() {
     super.addSublayer(transformLayer)
     transformLayer.addSublayer(contentsLayer)
 
-    // TODO: implement Mask support
-    // if let masks = baseLayerModel.masks { ... }
+    if let masks = baseLayerModel.masks {
+      contentsLayer.mask = MaskCompositionLayer(masks: masks)
+    }
   }
 
 }
