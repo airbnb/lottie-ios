@@ -12,14 +12,7 @@ extension String {
 
   var cgColor: CGColor {
     let (red, green, blue) = hexColorComponents()
-
-    if #available(iOS 13.0, tvOS 13.0, *) {
-      return CGColor(red: red, green: green, blue: blue, alpha: 1)
-    } else {
-      return CGColor(
-        colorSpace: CGColorSpaceCreateDeviceRGB(),
-        components: [red, green, blue])!
-    }
+    return .rgb(red, green, blue)
   }
 
   func hexColorComponents() -> (red: CGFloat, green: CGFloat, blue: CGFloat) {

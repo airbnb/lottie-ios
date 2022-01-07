@@ -70,7 +70,7 @@ extension MaskCompositionLayer {
     init(mask: Mask) {
       maskModel = mask
       super.init()
-      fillColor = "#000000".cgColor
+      fillColor = .rgb(0, 0, 0)
     }
 
     required init?(coder _: NSCoder) {
