@@ -33,6 +33,7 @@ extension SnapshotConfiguration {
     /// These samples are known to be supported by the experimental rendering engine
     "9squares_AlBoardman": .testWithExperimentalRenderingEngine,
     "PinJump": .testWithExperimentalRenderingEngine,
+    "IconTransitions": .testWithExperimentalRenderingEngine,
     "LottieLogo1": .testWithExperimentalRenderingEngine,
     "MotionCorpse_Jrcanest": .testWithExperimentalRenderingEngine,
     "Switch": .testWithExperimentalRenderingEngine,
@@ -66,7 +67,6 @@ extension SnapshotConfiguration {
     "vcTransition1": .testWithExperimentalRenderingEngine,
     "LottieLogo1_masked": .testWithExperimentalRenderingEngine,
     "LottieLogo2": .testWithExperimentalRenderingEngine,
-    "IconTransitions": .testWithExperimentalRenderingEngine,
     "Watermelon": .testWithExperimentalRenderingEngine,
   ]
 }

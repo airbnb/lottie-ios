@@ -19,7 +19,11 @@ final class ShapeLayer: BaseCompositionLayer {
     let groupItems = shapeLayer.items.compactMap { $0 as? Group }
     let otherItems = shapeLayer.items.filter { !($0 is Group) }
 
-    for group in groupItems {
+    // Groups are listed from front to back,
+    // but `CALayer.sublayers` are listed from back to front.
+    let groupsInZAxisOrder = groupItems.reversed()
+
+    for group in groupsInZAxisOrder {
       let itemsInGroup = group.items + otherItems
 
       // Each `ShapeItemLayer` can only render a single `ShapeItem` that draws a `GGPath`,
