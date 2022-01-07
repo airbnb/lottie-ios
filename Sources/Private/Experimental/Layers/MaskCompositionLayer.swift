@@ -11,7 +11,7 @@ final class MaskCompositionLayer: CALayer {
   // MARK: Lifecycle
 
   init(masks: [Mask]) {
-    maskLayers = masks.map { MaskLayer(mask: $0) }
+    maskLayers = masks.map(MaskLayer.init(mask:))
     super.init()
 
     for maskLayer in maskLayers {
