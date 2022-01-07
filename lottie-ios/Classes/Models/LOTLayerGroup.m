@@ -38,7 +38,9 @@
                                       withAssetGroup:assetGroup
                                        withFramerate:framerate];
     [layers addObject:layer];
-    modelMap[layer.layerID] = layer;
+    if(layer.layerID) {
+      modelMap[layer.layerID] = layer;
+    }
     if (layer.referenceID) {
       referenceMap[layer.referenceID] = layer;
     }
