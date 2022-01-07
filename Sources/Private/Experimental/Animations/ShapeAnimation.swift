@@ -9,9 +9,17 @@ extension CALayer {
     for shape: Shape,
     context: LayerAnimationContext)
   {
+    addAnimations(for: shape.path, context: context)
+  }
+
+  /// Adds animations for the given path keyframes to this `CALayer`
+  func addAnimations(
+    for path: KeyframeGroup<BezierPath>,
+    context: LayerAnimationContext)
+  {
     addAnimation(
       for: .path,
-      keyframes: shape.path.keyframes,
+      keyframes: path.keyframes,
       value: { pathKeyframe in
         pathKeyframe.cgPath()
       },

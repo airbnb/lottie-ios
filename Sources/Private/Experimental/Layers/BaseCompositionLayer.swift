@@ -13,7 +13,9 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
   init(layerModel: LayerModel) {
     baseLayerModel = layerModel
     super.init()
+
     setupSublayers()
+    name = layerModel.name
   }
 
   required init?(coder _: NSCoder) {
@@ -62,17 +64,17 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
   /// and all child `AnimationLayer`s.
   ///  - Can be overridden by subclasses, which much call `super`.
   func setupAnimations(context: LayerAnimationContext) {
-    addVisibilityAnimation(
+    transformLayer.addTransformAnimations(for: baseLayerModel.transform, context: context)
+
+    // Add the opacity and visibility animations to _only_ the `contentsLayer`
+    //  - These animations should affect the content rendered directly by this layer,
+    //    but _not_ any child `LayerModel`s.
+    contentsLayer.addOpacityAnimation(from: baseLayerModel.transform, context: context)
+
+    contentsLayer.addVisibilityAnimation(
       inFrame: CGFloat(baseLayerModel.inFrame),
       outFrame: CGFloat(baseLayerModel.outFrame),
       context: context)
-
-    transformLayer.addTransformAnimations(for: baseLayerModel.transform, context: context)
-
-    // Add the opacity animation to _only_ the `contentsLayer`
-    //  - The opacity should affect the content rendered directly by this layer,
-    //    but _not_ any child `LayerModel`s.
-    contentsLayer.addOpacityAnimation(from: baseLayerModel.transform, context: context)
 
     for childAnimationLayer in managedSublayers {
       (childAnimationLayer as? AnimationLayer)?.setupAnimations(context: context)
@@ -96,14 +98,16 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
     (sublayers ?? [])
       + (transformLayer.sublayers ?? [])
       + (contentsLayer.sublayers ?? [])
+      + [contentsLayer.mask].compactMap { $0 }
   }
 
   private func setupSublayers() {
     super.addSublayer(transformLayer)
     transformLayer.addSublayer(contentsLayer)
 
-    // TODO: implement Mask support
-    // if let masks = baseLayerModel.masks { ... }
+    if let masks = baseLayerModel.masks {
+      contentsLayer.mask = MaskCompositionLayer(masks: masks)
+    }
   }
 
 }

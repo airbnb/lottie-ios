@@ -33,6 +33,9 @@ extension SnapshotConfiguration {
     /// These samples are known to be supported by the experimental rendering engine
     "9squares_AlBoardman": .testWithExperimentalRenderingEngine,
     "PinJump": .testWithExperimentalRenderingEngine,
+    "IconTransitions": .testWithExperimentalRenderingEngine,
+    "LottieLogo1": .testWithExperimentalRenderingEngine,
+    "MotionCorpse_Jrcanest": .testWithExperimentalRenderingEngine,
     "Switch": .testWithExperimentalRenderingEngine,
     "Switch_States": .testWithExperimentalRenderingEngine,
     "TwitterHeart": .testWithExperimentalRenderingEngine,
@@ -45,9 +48,15 @@ extension SnapshotConfiguration {
     "LottieFiles/loading_dots_2": .testWithExperimentalRenderingEngine,
     "LottieFiles/loading_dots_3": .testWithExperimentalRenderingEngine,
     "TypeFace/B": .testWithExperimentalRenderingEngine,
+    "TypeFace/Colon": .testWithExperimentalRenderingEngine,
+    "TypeFace/Comma": .testWithExperimentalRenderingEngine,
     "TypeFace/D": .testWithExperimentalRenderingEngine,
+    "TypeFace/E": .testWithExperimentalRenderingEngine,
     "TypeFace/H": .testWithExperimentalRenderingEngine,
+    "TypeFace/I": .testWithExperimentalRenderingEngine,
     "TypeFace/J": .testWithExperimentalRenderingEngine,
+    "TypeFace/K": .testWithExperimentalRenderingEngine,
+    "TypeFace/L": .testWithExperimentalRenderingEngine,
     "TypeFace/N": .testWithExperimentalRenderingEngine,
     "TypeFace/R": .testWithExperimentalRenderingEngine,
     "TypeFace/W": .testWithExperimentalRenderingEngine,
@@ -56,11 +65,8 @@ extension SnapshotConfiguration {
 
     // These samples are not quite perfect yet, but are looking pretty good:
     "vcTransition1": .testWithExperimentalRenderingEngine,
-    "LottieLogo1": .testWithExperimentalRenderingEngine,
     "LottieLogo1_masked": .testWithExperimentalRenderingEngine,
     "LottieLogo2": .testWithExperimentalRenderingEngine,
-    "MotionCorpse_Jrcanest": .testWithExperimentalRenderingEngine,
-    "IconTransitions": .testWithExperimentalRenderingEngine,
     "Watermelon": .testWithExperimentalRenderingEngine,
   ]
 }
