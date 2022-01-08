@@ -26,7 +26,7 @@ extension SnapshotConfiguration {
   static let customMapping: [String: SnapshotConfiguration] = [
     /// These samples appear to render in a slightly non-deterministic way,
     /// depending on the test environment, so we have to decrease precision a bit.
-    "Issues/issue_1407": .precision(0.9),
+    "Issues/issue_1407": .init(precision: 0.9, testWithExperimentalRenderingEngine: true),
     "Nonanimating/FirstText": .precision(0.99),
     "Nonanimating/verifyLineHeight": .precision(0.99),
 
@@ -44,9 +44,14 @@ extension SnapshotConfiguration {
     "vcTransition2": .testWithExperimentalRenderingEngine,
     "Nonanimating/Zoom": .testWithExperimentalRenderingEngine,
     "Nonanimating/GeometryTransformTest": .testWithExperimentalRenderingEngine,
+    "Nonanimating/base64Test": .testWithExperimentalRenderingEngine,
     "LottieFiles/loading_dots_1": .testWithExperimentalRenderingEngine,
     "LottieFiles/loading_dots_2": .testWithExperimentalRenderingEngine,
     "LottieFiles/loading_dots_3": .testWithExperimentalRenderingEngine,
+    "LottieFiles/gradient_1": .testWithExperimentalRenderingEngine,
+    "LottieFiles/gradient_2": .testWithExperimentalRenderingEngine,
+    "LottieFiles/gradient_pill": .testWithExperimentalRenderingEngine,
+    "LottieFiles/gradient_square": .testWithExperimentalRenderingEngine,
     "TypeFace/B": .testWithExperimentalRenderingEngine,
     "TypeFace/Colon": .testWithExperimentalRenderingEngine,
     "TypeFace/Comma": .testWithExperimentalRenderingEngine,
@@ -68,6 +73,8 @@ extension SnapshotConfiguration {
     "LottieLogo1_masked": .testWithExperimentalRenderingEngine,
     "LottieLogo2": .testWithExperimentalRenderingEngine,
     "Watermelon": .testWithExperimentalRenderingEngine,
+    "Issues/issue_1403": .testWithExperimentalRenderingEngine,
+    "LottieFiles/gradient_shapes": .testWithExperimentalRenderingEngine,
   ]
 }
 

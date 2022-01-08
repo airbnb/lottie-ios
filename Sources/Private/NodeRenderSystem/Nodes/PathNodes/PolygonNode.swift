@@ -88,14 +88,33 @@ final class PolygonNode: AnimatorNode, PathNode {
   }
 
   func rebuildOutputs(frame: CGFloat) {
-    let outerRadius = properties.outerRadius.value.cgFloatValue
-    let outerRoundedness = properties.outerRoundedness.value.cgFloatValue * 0.01
-    let numberOfPoints = properties.points.value.cgFloatValue
-    let rotation = properties.rotation.value.cgFloatValue
-    let position = properties.position.value.pointValue
+    let path = BezierPath.polygon(
+      position: properties.position.value.pointValue,
+      numberOfPoints: properties.points.value.cgFloatValue,
+      outerRadius: properties.outerRadius.value.cgFloatValue,
+      outerRoundedness: properties.outerRoundedness.value.cgFloatValue,
+      rotation: properties.rotation.value.cgFloatValue,
+      direction: properties.direction)
 
+    pathOutput.setPath(path, updateFrame: frame)
+  }
+
+}
+
+extension BezierPath {
+  /// Creates a `BezierPath` in the shape of a polygon
+  static func polygon(
+    position: CGPoint,
+    numberOfPoints: CGFloat,
+    outerRadius: CGFloat,
+    outerRoundedness inputOuterRoundedness: CGFloat,
+    rotation: CGFloat,
+    direction: PathDirection)
+    -> BezierPath
+  {
     var currentAngle = (rotation - 90).toRadians()
     let anglePerPoint = ((2 * CGFloat.pi) / numberOfPoints)
+    let outerRoundedness = inputOuterRoundedness * 0.01
 
     var point = CGPoint(
       x: outerRadius * cos(currentAngle),
@@ -137,7 +156,7 @@ final class PolygonNode: AnimatorNode, PathNode {
       }
       currentAngle += anglePerPoint;
     }
-    let reverse = properties.direction == .counterClockwise
+    let reverse = direction == .counterClockwise
     if reverse {
       vertices = vertices.reversed()
     }
@@ -146,7 +165,6 @@ final class PolygonNode: AnimatorNode, PathNode {
       path.addVertex(reverse ? vertex.reversed() : vertex)
     }
     path.close()
-    pathOutput.setPath(path, updateFrame: frame)
+    return path
   }
-
 }

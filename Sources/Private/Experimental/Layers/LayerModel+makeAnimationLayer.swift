@@ -8,6 +8,7 @@ import QuartzCore
 /// Context available when constructing an `AnimationLayer`
 struct LayerContext {
   let assetLibrary: AssetLibrary?
+  let imageProvider: AnimationImageProvider
 }
 
 // MARK: - LayerModel + makeAnimationLayer
@@ -25,11 +26,14 @@ extension LayerModel {
     case (.shape, let shapeLayerModel as ShapeLayerModel):
       return ShapeLayer(shapeLayer: shapeLayerModel)
 
+    case (.image, let imageLayerModel as ImageLayerModel):
+      return ImageLayer(imageLayer: imageLayerModel, context: context)
+
     case (.null, _):
       return NullLayer(layerModel: self)
 
     default:
-      // Other layer types (text, image) are currently unsupported
+      // Other layer types (text) are currently unsupported
       return nil
     }
   }

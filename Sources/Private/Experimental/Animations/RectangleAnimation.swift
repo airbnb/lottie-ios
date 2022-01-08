@@ -3,7 +3,7 @@
 
 import QuartzCore
 
-extension CALayer {
+extension CAShapeLayer {
   /// Adds animations for the given `Rectangle` to this `CALayer`
   func addAnimations(
     for rectangle: Rectangle,
