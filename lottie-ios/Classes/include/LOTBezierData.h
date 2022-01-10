@@ -1,0 +1,1 @@
+../AnimatableProperties/LOTBezierData.h
