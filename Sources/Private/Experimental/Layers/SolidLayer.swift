@@ -41,7 +41,7 @@ final class SolidLayer: BaseCompositionLayer {
     let shapeLayer = CAShapeLayer()
     shapeLayer.fillColor = solidLayer.colorHex.cgColor
     shapeLayer.path = CGPath(rect: .init(x: 0, y: 0, width: solidLayer.width, height: solidLayer.height), transform: nil)
-    contentsLayer.addSublayer(shapeLayer)
+    addSublayer(shapeLayer)
   }
 
 }

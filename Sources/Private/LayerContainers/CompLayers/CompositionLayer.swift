@@ -56,6 +56,8 @@ class CompositionLayer: CALayer, KeypathSearchable {
     if let maskLayer = maskLayer {
       contentsLayer.mask = maskLayer
     }
+
+    name = layer.name
   }
 
   override init(layer: Any) {

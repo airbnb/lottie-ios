@@ -15,7 +15,7 @@ final class PreCompLayer: BaseCompositionLayer {
     self.preCompLayer = preCompLayer
     super.init(layerModel: preCompLayer)
 
-    contentsLayer.setupLayerHierarchy(
+    setupLayerHierarchy(
       for: context.assetLibrary?.precompAssets[preCompLayer.referenceID]?.layers ?? [],
       context: context)
   }
