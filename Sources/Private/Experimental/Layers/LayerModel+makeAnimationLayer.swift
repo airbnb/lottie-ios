@@ -30,7 +30,7 @@ extension LayerModel {
       return ImageLayer(imageLayer: imageLayerModel, context: context)
 
     case (.null, _):
-      return NullLayer(layerModel: self)
+      return TransformLayer(layerModel: self)
 
     default:
       // Other layer types (text) are currently unsupported

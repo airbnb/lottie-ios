@@ -142,69 +142,7 @@ final class ExperimentalAnimationLayer: CALayer {
 
 }
 
-// MARK: - CALayer + setupLayerHierarchy
-
-extension CALayer {
-  /// Sets up an `AnimationLayer` / `CALayer` hierarchy in this layer,
-  /// using the given list of layers.
-  func setupLayerHierarchy(
-    for layers: [LayerModel],
-    context: LayerContext)
-  {
-    // An `Animation`'s `LayerModel`s are listed from front to back,
-    // but `CALayer.sublayers` are listed from back to front.
-    // We reverse the layer ordering to match what Core Animation expects.
-    let layersInZAxisOrder = layers.reversed()
-
-    // Each layer has an index value, which must be unique
-    // Layers can optionally specify their parent layer, by index.
-    // Since the layers can be listed in any order (e.g. children can
-    // come either before or after their children) we have to build
-    // all of the layers and _then_ setup the parent/child hierarchy.
-    var layersByIndex = [Int: BaseCompositionLayer]()
-
-    // First, we build the `AnimationLayer` / `CALayer` for each `LayerModel
-    for layerModel in layersInZAxisOrder {
-      guard let layer = layerModel.makeAnimationLayer(context: context) else {
-        continue
-      }
-
-      if layersByIndex.keys.contains(layerModel.index) {
-        LottieLogger.shared.assertionFailure("""
-        Multiple layers have the same index \"\(layerModel.index)\".
-        This is unsupported.
-        """)
-      }
-
-      layersByIndex[layerModel.index] = layer
-    }
-
-    // Then we add each `AnimationLayer` to the layer hierarchy
-    for layerModel in layersInZAxisOrder {
-      guard let layer = layersByIndex[layerModel.index] else {
-        continue
-      }
-
-      // If the layer specified a parent index, we look up the parent
-      // and add it as a sublayer of the parent layer
-      if
-        let parentIndex = layerModel.parent,
-        let parentLayer = layersByIndex[parentIndex]
-      {
-        // Add this child layer to the parent's `transformLayer`
-        // so it inherits the parent `LayerModel`'s transform
-        parentLayer.transformLayer.addSublayer(layer)
-      }
-
-      // Otherwise we add it as a top-level sublayer of this container
-      else {
-        addSublayer(layer)
-      }
-    }
-  }
-}
-
-// MARK: - ExperimentalAnimationLayer + RootAnimationLayer
+// MARK: RootAnimationLayer
 
 extension ExperimentalAnimationLayer: RootAnimationLayer {
 

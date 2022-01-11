@@ -3,49 +3,6 @@
 
 import QuartzCore
 
-// MARK: - CAKeyPath
-
-/// A strongly typed value that can be used as the `keyPath` of a `CAAnimation`
-struct CAKeyPath<ValueRepresentation> {
-  let name: String
-
-  init(_ name: String) {
-    self.name = name
-  }
-}
-
-// MARK: keyPath definitions
-
-/// Supported key paths and their expected value types are described
-/// at https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/AnimatableProperties/AnimatableProperties.html#//apple_ref/doc/uid/TP40004514-CH11-SW1
-/// and https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/Key-ValueCodingExtensions/Key-ValueCodingExtensions.html
-extension CAKeyPath {
-  static var position: CAKeyPath<CGPoint> { .init("transform.translation") }
-  static var positionX: CAKeyPath<CGFloat> { .init("transform.translation.y") }
-  static var positionY: CAKeyPath<CGFloat> { .init("transform.translation.x") }
-  static var scale: CAKeyPath<CGFloat> { .init("transform.scale") }
-  static var scaleX: CAKeyPath<CGFloat> { .init("transform.scale.x") }
-  static var scaleY: CAKeyPath<CGFloat> { .init("transform.scale.y") }
-  static var rotation: CAKeyPath<CGFloat> { .init("transform.rotation") }
-
-  static var anchorPoint: CAKeyPath<CGPoint> { .init(#keyPath(CALayer.anchorPoint)) }
-  static var opacity: CAKeyPath<CGFloat> { .init(#keyPath(CALayer.opacity)) }
-
-  static var path: CAKeyPath<CGPath> { .init(#keyPath(CAShapeLayer.path)) }
-  static var fillColor: CAKeyPath<CGColor> { .init(#keyPath(CAShapeLayer.fillColor)) }
-  static var lineWidth: CAKeyPath<CGFloat> { .init(#keyPath(CAShapeLayer.lineWidth)) }
-  static var strokeColor: CAKeyPath<CGColor> { .init(#keyPath(CAShapeLayer.strokeColor)) }
-  static var strokeStart: CAKeyPath<CGFloat> { .init(#keyPath(CAShapeLayer.strokeStart)) }
-  static var strokeEnd: CAKeyPath<CGFloat> { .init(#keyPath(CAShapeLayer.strokeEnd)) }
-
-  static var colors: CAKeyPath<[CGColor]> { .init(#keyPath(CAGradientLayer.colors)) }
-  static var locations: CAKeyPath<[CGFloat]> { .init(#keyPath(CAGradientLayer.locations)) }
-  static var startPoint: CAKeyPath<CGPoint> { .init(#keyPath(CAGradientLayer.startPoint)) }
-  static var endPoint: CAKeyPath<CGPoint> { .init(#keyPath(CAGradientLayer.endPoint)) }
-}
-
-// MARK: - CALayer + addAnimation
-
 extension CALayer {
   /// Constructs a `CAKeyframeAnimation` that reflects the given keyframes,
   /// and adds it to this `CALayer`.
@@ -58,6 +15,26 @@ extension CALayer {
     precondition(!keyframes.isEmpty, "Keyframes for \"\(keyPath.name)\" must be non-empty")
 
     let animation = CAKeyframeAnimation(keyPath: keyPath.name)
+
+    // Animations using `isHold` should use `CAAnimationCalculationMode.discrete`
+    //
+    //  - Since we currently only create a single `CAKeyframeAnimation`,
+    //    we can currently only correctly support animations where
+    //    `isHold` is either always `true` or always `false`
+    //    (this requirement doesn't apply to the first/last keyframes).
+    //
+    //  - We should be able to support this in the future by creating multiple
+    //    `CAKeyframeAnimation`s with different `calculationMode`s and
+    //    playing them sequentially.
+    //
+    let intermediateKeyframes = keyframes.dropFirst().dropLast()
+    if intermediateKeyframes.contains(where: \.isHold) {
+      if intermediateKeyframes.allSatisfy(\.isHold) {
+        animation.calculationMode = .discrete
+      } else {
+        LottieLogger.shared.warn("Mixed `isHold` / `!isHold` keyframes are currently unsupported")
+      }
+    }
 
     // Convert the list of `Keyframe<T>` into
     // the representation used by `CAKeyframeAnimation`
@@ -90,13 +67,8 @@ extension CALayer {
     }
 
     // Validate that we have correct start (0.0) and end (1.0) keyframes.
-    //
     // From the documentation of `CAKeyframeAnimation.keyTimes`:
-    //
-    //   If the `calculationMode` is set to `linear` or `cubic`, the first value in the array
-    //   must be 0.0 and the last value must be 1.0. All intermediate values represent
-    //   time points between the start and end times.
-    //
+    //  - The first value in the `keyTimes` array must be 0.0 and the last value must be 1.0.
     if keyTimes.first != 0.0 {
       keyTimes.insert(0.0, at: 0)
       values.insert(values[0], at: 0)
@@ -109,13 +81,35 @@ extension CALayer {
       timingFunctions.append(CAMediaTimingFunction(name: .linear))
     }
 
-    LottieLogger.shared.assert(
-      values.count == keyTimes.count,
-      "`values.count` must exactly equal `keyTimes.count`")
+    // Validate that we have the correct number of `values` and `keyTimes`
+    switch animation.calculationMode {
+    case .linear, .cubic:
+      // From the documentation of `CAKeyframeAnimation.keyTimes`:
+      //  - The number of elements in the keyTimes array
+      //    should match the number of elements in the values property
+      LottieLogger.shared.assert(
+        values.count == keyTimes.count,
+        "`values.count` must exactly equal `keyTimes.count`")
 
-    LottieLogger.shared.assert(
-      timingFunctions.count == (values.count - 1),
-      "`timingFunctions.count` must exactly equal `values.count - 1`")
+      LottieLogger.shared.assert(
+        timingFunctions.count == (values.count - 1),
+        "`timingFunctions.count` must exactly equal `values.count - 1`")
+
+    case .discrete:
+      // From the documentation of `CAKeyframeAnimation.keyTimes`:
+      //  - If the calculationMode is set to discrete... the keyTimes array
+      //    should have one more entry than appears in the values array.
+      values.removeLast()
+
+      LottieLogger.shared.assert(
+        keyTimes.count == values.count + 1,
+        "`keyTimes.count` must exactly equal `values.count + 1`")
+
+    default:
+      LottieLogger.shared.assertionFailure("""
+      Unexpected keyframe calculation mode \(animation.calculationMode)
+      """)
+    }
 
     animation.values = values
     animation.keyTimes = keyTimes
