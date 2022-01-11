@@ -24,12 +24,12 @@ final class ExperimentalAnimationLayer: CALayer {
   /// Called by CoreAnimation to create a shadow copy of this layer
   /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
   override init(layer: Any) {
-    guard let layer = layer as? Self else {
+    guard let typedLayer = layer as? Self else {
       fatalError("init(layer:) incorrectly called with \(type(of: layer))")
     }
 
-    animation = layer.animation
-    super.init(layer: layer)
+    animation = typedLayer.animation
+    super.init(layer: typedLayer)
   }
 
   required init?(coder _: NSCoder) {

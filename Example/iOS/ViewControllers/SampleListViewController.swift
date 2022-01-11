@@ -63,29 +63,27 @@ final class SampleListViewController: CollectionViewController {
 
   @ItemModelBuilder
   private var sampleAnimationLinks: [ItemModeling] {
-    let animationsNames = (Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: directory) ?? [])
+    (Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: directory) ?? [])
       .map { $0.lastPathComponent.replacingOccurrences(of: ".json", with: "") }
       .sorted(by: { $0.localizedCompare($1) == .orderedAscending })
-
-    for animationName in animationsNames {
-      let animationPath = "\(directory)/\(animationName)"
-
-      LinkView.itemModel(
-        dataID: animationName,
-        content: .init(
-          animationName: animationPath,
-          title: animationName))
-        .didSelect { [weak self] context in
-          self?.show(
-            AnimationPreviewViewController(animationPath),
-            sender: context.view)
-        }
-    }
+      .map { (name: $0, path: "\(directory)/\($0)") }
+      .map { animationName, animationPath in
+        LinkView.itemModel(
+          dataID: animationName,
+          content: .init(
+            animationName: animationPath,
+            title: animationName))
+          .didSelect { [weak self] context in
+            self?.show(
+              AnimationPreviewViewController(animationPath),
+              sender: context.view)
+          }
+      }
   }
 
   @ItemModelBuilder
   private var subdirectoryLinks: [ItemModeling] {
-    for subdirectoryURL in subdirectoryURLs {
+    subdirectoryURLs.map { subdirectoryURL in
       LinkView.itemModel(
         dataID: subdirectoryURL,
         content: .init(animationName: nil, title: subdirectoryURL.lastPathComponent))
@@ -112,7 +110,7 @@ final class SampleListViewController: CollectionViewController {
   private func configureSettingsMenu() {
     navigationItem.rightBarButtonItem = UIBarButtonItem(
       title: "Settings",
-      image: .init(systemName: "gear"),
+      image: UIImage(systemName: "gear")!,
       primaryAction: nil,
       menu: UIMenu(
         title: "Rendering Engine",

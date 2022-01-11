@@ -10,58 +10,92 @@ jobs:
   build-package:
     name: "Build Package"
     runs-on: macos-latest
+    strategy:
+      matrix:
+        xcode:
+        - '12.4' # Swift 5.3
+        - '12.5.1' # Swift 5.4
+        - '13.2' # Swift 5.5
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          xcode: ${{ matrix.xcode }}
       - name: Build Package
-        run: brew install mint && bundle install && bundle exec rake build:package:all
+        run: bundle exec rake build:package:all
+
   build-example:
     name: "Build Example App"
     runs-on: macos-latest
+    strategy:
+      matrix:
+        xcode:
+        - '12.4' # Swift 5.3
+        - '12.5.1' # Swift 5.4
+        - '13.2' # Swift 5.5
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          xcode: ${{ matrix.xcode }}
       - name: Build Example
-        run: brew install mint && bundle install && bundle exec rake build:example:all
+        run: bundle exec rake build:example:all
+
   test-package:
     name: "Test Package"
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
       - name: Test Package
-        run: brew install mint && bundle install && bundle exec rake test:package
+        run: bundle exec rake test:package
       - name: Process test artifacts
         if: always()
-        run: brew install mint && bundle install && bundle exec rake test:process
+        run: bundle exec rake test:process
       - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v2
         with:
           name: TestArtifacts
           path: Tests/Artifacts
+
   cocoapod:
     name: "Lint CocoaPods podspec"
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Lint Cocoapod
-        run: bundle install && bundle exec rake lint:podspec
+      - uses: ./.github/actions/setup
+        with:
+          install-mint: false
+      - name: Lint CocoaPod Podspec
+        run: bundle exec rake lint:podspec
+
   carthage:
     name: "Test Carthage support"
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          install-mint: false
+          install-carthage: true
       - name: Test Carthage support
-        run: brew install carthage && bundle install && bundle exec rake test:carthage
+        run: bundle exec rake test:carthage
+
   swiftlint:
     name: "Lint Swift (SwiftLint)"
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
       - name: Lint Swift using SwiftLint
-        run: brew install mint && bundle install && bundle exec rake lint:swift:swiftlint
+        run: bundle exec rake lint:swift:swiftlint
+
   swiftformat:
     name: "Lint Swift (SwiftFormat)"
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
       - name: Lint Swift using SwiftFormat
-        run: brew install mint && bundle install && bundle exec rake lint:swift:swiftformat
+        run: bundle exec rake lint:swift:swiftformat

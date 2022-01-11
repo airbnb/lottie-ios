@@ -107,12 +107,12 @@ extension GradientFill {
     for colorIndex in 0..<numberOfColors {
       let colorStartIndex = colorIndex * 4
 
-      let location = colorComponents[colorStartIndex]
+      let location = CGFloat(colorComponents[colorStartIndex])
 
       let color = CGColor.rgb(
-        colorComponents[colorStartIndex + 1],
-        colorComponents[colorStartIndex + 2],
-        colorComponents[colorStartIndex + 3])
+        CGFloat(colorComponents[colorStartIndex + 1]),
+        CGFloat(colorComponents[colorStartIndex + 2]),
+        CGFloat(colorComponents[colorStartIndex + 3]))
 
       cgColors.append((color, location))
     }

@@ -22,12 +22,12 @@ final class SolidLayer: BaseCompositionLayer {
   /// Called by CoreAnimation to create a shadow copy of this layer
   /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
   override init(layer: Any) {
-    guard let layer = layer as? Self else {
+    guard let typedLayer = layer as? Self else {
       fatalError("\(Self.self).init(layer:) incorrectly called with \(type(of: layer))")
     }
 
-    solidLayer = layer.solidLayer
-    super.init(layer: layer)
+    solidLayer = typedLayer.solidLayer
+    super.init(layer: typedLayer)
   }
 
   // MARK: Private
