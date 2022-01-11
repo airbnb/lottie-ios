@@ -21,7 +21,7 @@ extension CAShapeLayer {
         //    this will probably have to be reworked to use more sublayers
         let center = ellipse.position.keyframes[0].value.pointValue
         if ellipse.position.keyframes.count > 1 {
-          fatalError("Ellipse position keyframes are currently unsupported")
+          LottieLogger.shared.assertionFailure("Ellipse position keyframes are currently unsupported")
         }
 
         return BezierPath.ellipse(

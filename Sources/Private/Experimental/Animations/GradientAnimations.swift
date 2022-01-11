@@ -80,7 +80,7 @@ extension GradientRenderLayer {
       gradientFill.startPoint.keyframes.count == 1,
       gradientFill.endPoint.keyframes.count == 1
     else {
-      fatalError("Animating radial gradient `endPoint` point is currently unsupported")
+      LottieLogger.shared.assertionFailure("Animating radial gradient `endPoint` point is currently unsupported")
     }
 
     let absoluteStartPoint = gradientFill.startPoint.keyframes[0].value.pointValue

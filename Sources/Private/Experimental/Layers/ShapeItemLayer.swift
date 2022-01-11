@@ -22,11 +22,11 @@ final class ShapeItemLayer: CALayer {
     self.shape = shape
     self.otherItems = otherItems
 
-    assert(
+    LottieLogger.shared.assert(
       shape.drawsCGPath,
       "`ShapeItemLayer` must contain exactly one `ShapeItem` that draws a `GPPath`")
 
-    assert(
+    LottieLogger.shared.assert(
       !otherItems.contains(where: { $0.drawsCGPath }),
       "`ShapeItemLayer` must contain exactly one `ShapeItem` that draws a `GPPath`")
 

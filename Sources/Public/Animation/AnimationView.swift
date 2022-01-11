@@ -764,7 +764,7 @@ final public class AnimationView: LottieView {
 
       #if os(iOS) || os(tvOS)
       @unknown default:
-        print("unsupported contentMode: \(contentMode.rawValue); please update lottie-ios")
+        LottieLogger.shared.assertionFailure("unsupported contentMode: \(contentMode.rawValue)")
         xform = CATransform3DIdentity
       #endif
       }

@@ -40,7 +40,7 @@ final class GradientRenderLayer: CAGradientLayer {
   ///    with respect to the custom bounds geometry used by this layer type.
   func percentBasedPointInBounds(from referencePoint: CGPoint) -> CGPoint {
     guard bounds.width > 0, bounds.height > 0 else {
-      assertionFailure("Size must be non-zero before an animation can be played")
+      LottieLogger.shared.assertionFailure("Size must be non-zero before an animation can be played")
       return .zero
     }
 
