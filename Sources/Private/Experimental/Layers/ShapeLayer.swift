@@ -45,12 +45,12 @@ final class ShapeLayer: BaseCompositionLayer {
   /// Called by CoreAnimation to create a shadow copy of this layer
   /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
   override init(layer: Any) {
-    guard let layer = layer as? Self else {
+    guard let typedLayer = layer as? Self else {
       fatalError("\(Self.self).init(layer:) incorrectly called with \(type(of: layer))")
     }
 
-    shapeLayer = layer.shapeLayer
-    super.init(layer: layer)
+    shapeLayer = typedLayer.shapeLayer
+    super.init(layer: typedLayer)
   }
 
   // MARK: Private
