@@ -44,17 +44,9 @@ jobs:
   test-package:
     name: "Test Package"
     runs-on: macos-latest
-    strategy:
-      matrix:
-        xcode:
-        - '12.4' # Swift 5.3
-        - '12.5.1' # Swift 5.4
-        - '13.2' # Swift 5.5
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
-        with:
-          xcode: ${{ matrix.xcode }}
       - name: Test Package
         run: bundle exec rake test:package
       - name: Process test artifacts
