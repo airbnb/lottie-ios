@@ -3,8 +3,6 @@
 
 import QuartzCore
 
-// MARK: - ShapeLayer
-
 /// The `CALayer` type responsible for rendering `PreCompLayerModel`s
 final class PreCompLayer: BaseCompositionLayer {
 

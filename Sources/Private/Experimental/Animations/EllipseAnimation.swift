@@ -3,7 +3,7 @@
 
 import QuartzCore
 
-extension CALayer {
+extension CAShapeLayer {
   /// Adds animations for the given `Ellipse` to this `CALayer`
   func addAnimations(
     for ellipse: Ellipse,
@@ -19,7 +19,7 @@ extension CALayer {
         // of keyframes that apply to the same value (`path`, in this case)?
         //  - This seems somewhat unlikely -- if it turns out to be necessary,
         //    this will probably have to be reworked to use more sublayers
-        let center = ellipse.position.keyframes.first!.value.pointValue
+        let center = ellipse.position.keyframes[0].value.pointValue
         if ellipse.position.keyframes.count > 1 {
           fatalError("Ellipse position keyframes are currently unsupported")
         }

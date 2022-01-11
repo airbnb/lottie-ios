@@ -122,7 +122,9 @@ final class ExperimentalAnimationLayer: CALayer {
   private func setupChildLayers() {
     setupLayerHierarchy(
       for: animation.layers,
-      context: LayerContext(assetLibrary: animation.assetLibrary))
+      context: LayerContext(
+        assetLibrary: animation.assetLibrary,
+        imageProvider: imageProvider))
   }
 
   /// Sets up a placeholder `CABasicAnimation` that tracks the current
@@ -248,7 +250,7 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
   }
 
   var imageProvider: AnimationImageProvider {
-    get { fatalError("Currently unsupported") }
+    get { BundleImageProvider(bundle: Bundle.main, searchPath: nil) }
     set { fatalError("Currently unsupported") }
   }
 

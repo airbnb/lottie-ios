@@ -37,6 +37,11 @@ extension CAKeyPath {
   static var strokeColor: CAKeyPath<CGColor> { .init(#keyPath(CAShapeLayer.strokeColor)) }
   static var strokeStart: CAKeyPath<CGFloat> { .init(#keyPath(CAShapeLayer.strokeStart)) }
   static var strokeEnd: CAKeyPath<CGFloat> { .init(#keyPath(CAShapeLayer.strokeEnd)) }
+
+  static var colors: CAKeyPath<[CGColor]> { .init(#keyPath(CAGradientLayer.colors)) }
+  static var locations: CAKeyPath<[CGFloat]> { .init(#keyPath(CAGradientLayer.locations)) }
+  static var startPoint: CAKeyPath<CGPoint> { .init(#keyPath(CAGradientLayer.startPoint)) }
+  static var endPoint: CAKeyPath<CGPoint> { .init(#keyPath(CAGradientLayer.endPoint)) }
 }
 
 // MARK: - CALayer + addAnimation
@@ -94,7 +99,7 @@ extension CALayer {
     //
     if keyTimes.first != 0.0 {
       keyTimes.insert(0.0, at: 0)
-      values.insert(values.first!, at: 0)
+      values.insert(values[0], at: 0)
       timingFunctions.insert(CAMediaTimingFunction(name: .linear), at: 0)
     }
 

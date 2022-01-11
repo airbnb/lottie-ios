@@ -7,7 +7,7 @@ import QuartzCore
 
 /// A CALayer type that renders an array of `[ShapeItem]`s,
 /// from a `Group` in a `ShapeLayerModel`.
-final class ShapeItemLayer: CAShapeLayer {
+final class ShapeItemLayer: CALayer {
 
   // MARK: Lifecycle
 
@@ -49,6 +49,16 @@ final class ShapeItemLayer: CAShapeLayer {
     super.init(layer: layer)
   }
 
+  // MARK: Internal
+
+  override func layoutSublayers() {
+    super.layoutSublayers()
+
+    for managedLayer in managedLayers {
+      managedLayer.fillBoundsOfSuperlayer()
+    }
+  }
+
   // MARK: Private
 
   /// The `ShapeItem` in this group that renders a `GGPath`
@@ -56,6 +66,11 @@ final class ShapeItemLayer: CAShapeLayer {
 
   /// Other items in this group that affect the appearance of the shape
   private let otherItems: [ShapeItem]
+
+  /// Sublayers managed by this layer
+  private var managedLayers: [CALayer] {
+    (sublayers ?? []) + [mask].compactMap { $0 }
+  }
 
 }
 
@@ -66,104 +81,69 @@ extension ShapeItemLayer: AnimationLayer {
   // MARK: Internal
 
   func setupAnimations(context: LayerAnimationContext) {
-    setupPathAnimation(context: context)
+    // We have to build a different layer hierarchy depending on if
+    // we're rendering a gradient (a `CAGradientLayer` masked by a `CAShapeLayer`)
+    // or a solid shape (a simple `CAShapeLayer`).
+    if let gradientFill = otherItems.first(GradientFill.self) {
+      setupAnimations(for: gradientFill, context: context)
+    } else {
+      setupAnimations(for: otherItems.first(Fill.self), context: context)
+    }
 
     if let shapeTransform = otherItems.first(ShapeTransform.self) {
       addTransformAnimations(for: shapeTransform, context: context)
       addOpacityAnimation(from: shapeTransform, context: context)
     }
-
-    if let fill = otherItems.first(Fill.self) {
-      addAnimations(for: fill, context: context)
-    } else {
-      fillColor = nil
-    }
-
-    if let stroke = otherItems.first(Stroke.self) {
-      addAnimations(for: stroke, context: context)
-    }
-
-    if let trim = otherItems.first(Trim.self) {
-      addAnimations(for: trim, context: context)
-    }
-
-    // TODO: animate more properties
   }
 
   // MARK: Private
 
-  private func setupPathAnimation(context: LayerAnimationContext) {
-    switch shape {
-    case let customShape as Shape:
-      addAnimations(for: customShape, context: context)
+  /// Sets up the layer hierarchy and animations for a `CAShapeLayer`
+  /// filled by a solid color specified by the `Fill` item.
+  private func setupAnimations(
+    for fill: Fill?,
+    context: LayerAnimationContext)
+  {
+    let shapeLayer = CAShapeLayer()
+    addSublayer(shapeLayer)
+    shapeLayer.fillBoundsOfSuperlayer()
 
-    case let ellipse as Ellipse:
-      addAnimations(for: ellipse, context: context)
+    shapeLayer.addAnimations(for: shape, context: context)
 
-    case let rectangle as Rectangle:
-      addAnimations(for: rectangle, context: context)
+    if let fill = fill {
+      shapeLayer.addAnimations(for: fill, context: context)
+    } else {
+      shapeLayer.fillColor = nil
+    }
 
-    default:
-      // Other path types are currently unsupported
-      return
+    if let stroke = otherItems.first(Stroke.self) {
+      shapeLayer.addAnimations(for: stroke, context: context)
+    }
+
+    if let trim = otherItems.first(Trim.self) {
+      shapeLayer.addAnimations(for: trim, context: context)
     }
   }
 
-  private func addAnimations(for fill: Fill, context: LayerAnimationContext) {
-    fillRule = fill.fillRule.caFillRule
+  /// Sets up the layer hierarchy and animations for a `CAGradientLayer`
+  /// displaying the given `GradientFill`, masked by a `CAShapeLayer`.
+  private func setupAnimations(
+    for gradientFill: GradientFill,
+    context: LayerAnimationContext)
+  {
+    let pathMask = CAShapeLayer()
+    pathMask.fillColor = .rgb(0, 0, 0)
+    mask = pathMask
+    pathMask.fillBoundsOfSuperlayer()
+    pathMask.addAnimations(for: shape, context: context)
 
-    addAnimation(
-      for: .fillColor,
-      keyframes: fill.color.keyframes,
-      value: \.cgColorValue,
-      context: context)
+    let gradientLayer = GradientRenderLayer()
+    addSublayer(gradientLayer)
+    gradientLayer.layout(superlayerBounds: bounds)
 
-    // TODO: What's the difference between `fill.opacity` and `transform.opacity`?
-    // We probably can't animate both simultaneously
-    // opacity = Float(fill.opacity.keyframes.first!.value.value)
+    gradientLayer.addAnimations(for: gradientFill, context: context)
   }
 
-  private func addAnimations(for stroke: Stroke, context: LayerAnimationContext) {
-    lineJoin = stroke.lineJoin.caLineJoin
-    lineCap = stroke.lineCap.caLineCap
-    miterLimit = CGFloat(stroke.miterLimit)
-
-    addAnimation(
-      for: .strokeColor,
-      keyframes: stroke.color.keyframes,
-      value: \.cgColorValue,
-      context: context)
-
-    addAnimation(
-      for: .lineWidth,
-      keyframes: stroke.width.keyframes,
-      value: \.cgFloatValue,
-      context: context)
-
-    // TODO: Support `lineDashPhase` and `lineDashPattern`
-  }
-
-  private func addAnimations(for trim: Trim, context: LayerAnimationContext) {
-    addAnimation(
-      for: .strokeStart,
-      keyframes: trim.start.keyframes,
-      value: { strokeStart in
-        // Lottie animation files express stoke trims as a numerical percentage value
-        // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
-        // expected by Core Animation (e.g. 0.25, 0.5, 1.0).
-        CGFloat(strokeStart.cgFloatValue) / 100
-      }, context: context)
-
-    addAnimation(
-      for: .strokeEnd,
-      keyframes: trim.end.keyframes,
-      value: { strokeEnd in
-        // Lottie animation files express stoke trims as a numerical percentage value
-        // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
-        // expected by Core Animation (e.g. 0.25, 0.5, 1.0).
-        CGFloat(strokeEnd.cgFloatValue) / 100
-      }, context: context)
-  }
 }
 
 // MARK: - [ShapeItem] helpers

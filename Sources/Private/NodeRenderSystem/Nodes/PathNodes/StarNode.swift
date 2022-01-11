@@ -99,18 +99,40 @@ final class StarNode: AnimatorNode, PathNode {
   }
 
   func rebuildOutputs(frame: CGFloat) {
-    let outerRadius = properties.outerRadius.value.cgFloatValue
-    let innerRadius = properties.innerRadius.value.cgFloatValue
-    let outerRoundedness = properties.outerRoundedness.value.cgFloatValue * 0.01
-    let innerRoundedness = properties.innerRoundedness.value.cgFloatValue * 0.01
-    let numberOfPoints = properties.points.value.cgFloatValue
-    let rotation = properties.rotation.value.cgFloatValue
-    let position = properties.position.value.pointValue
+    let path = BezierPath.star(
+      position: properties.position.value.pointValue,
+      outerRadius: properties.outerRadius.value.cgFloatValue,
+      innerRadius: properties.innerRadius.value.cgFloatValue,
+      outerRoundedness: properties.outerRoundedness.value.cgFloatValue,
+      innerRoundedness: properties.innerRoundedness.value.cgFloatValue,
+      numberOfPoints: properties.points.value.cgFloatValue,
+      rotation: properties.rotation.value.cgFloatValue,
+      direction: properties.direction)
 
+    pathOutput.setPath(path, updateFrame: frame)
+  }
+
+}
+
+extension BezierPath {
+  /// Constructs a `BezierPath` in the shape of a star
+  static func star(
+    position: CGPoint,
+    outerRadius: CGFloat,
+    innerRadius: CGFloat,
+    outerRoundedness inoutOuterRoundedness: CGFloat,
+    innerRoundedness inputInnerRoundedness: CGFloat,
+    numberOfPoints: CGFloat,
+    rotation: CGFloat,
+    direction: PathDirection)
+    -> BezierPath
+  {
     var currentAngle = (rotation - 90).toRadians()
     let anglePerPoint = (2 * CGFloat.pi) / numberOfPoints
     let halfAnglePerPoint = anglePerPoint / 2.0
     let partialPointAmount = numberOfPoints - floor(numberOfPoints)
+    let outerRoundedness = inoutOuterRoundedness * 0.01
+    let innerRoundedness = inputInnerRoundedness * 0.01
 
     var point: CGPoint = .zero
 
@@ -186,7 +208,7 @@ final class StarNode: AnimatorNode, PathNode {
       longSegment = !longSegment
     }
 
-    let reverse = properties.direction == .counterClockwise
+    let reverse = direction == .counterClockwise
     if reverse {
       vertices = vertices.reversed()
     }
@@ -195,7 +217,6 @@ final class StarNode: AnimatorNode, PathNode {
       path.addVertex(reverse ? vertex.reversed() : vertex)
     }
     path.close()
-    pathOutput.setPath(path, updateFrame: frame)
+    return path
   }
-
 }

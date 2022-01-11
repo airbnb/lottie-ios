@@ -3,7 +3,7 @@
 
 import QuartzCore
 
-extension CALayer {
+extension CAShapeLayer {
   /// Adds animations for the given `Rectangle` to this `CALayer`
   func addAnimations(
     for rectangle: Rectangle,
@@ -19,12 +19,12 @@ extension CALayer {
         // of keyframes that apply to the same value (`path`, in this case)?
         //  - This seems somewhat unlikely -- if it turns out to be necessary,
         //    this will probably have to be reworked to use more sublayers
-        let position = rectangle.position.keyframes.first!.value.pointValue
+        let position = rectangle.position.keyframes[0].value.pointValue
         if rectangle.position.keyframes.count > 1 {
           fatalError("Rectangle position keyframes are currently unsupported")
         }
 
-        let cornerRadius = min(min(rectangle.cornerRadius.keyframes.first!.value.cgFloatValue, size.width), size.height)
+        let cornerRadius = min(min(rectangle.cornerRadius.keyframes[0].value.cgFloatValue, size.width), size.height)
         if rectangle.cornerRadius.keyframes.count > 1 {
           fatalError("Rectangle corner cornerRadius keyframes are currently unsupported")
         }
