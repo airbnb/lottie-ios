@@ -106,7 +106,9 @@ extension CALayer {
         value: \.cgFloatValue,
         context: context)
     } else {
-      LottieLogger.shared.assertionFailure("`Transform` values must provide either `position` or `positionX` / `positionY` keyframes")
+      LottieLogger.shared.assertionFailure("""
+      `Transform` values must provide either `position` or `positionX` / `positionY` keyframes
+      """)
     }
   }
 
