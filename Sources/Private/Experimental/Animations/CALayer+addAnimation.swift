@@ -99,7 +99,7 @@ extension CALayer {
     //
     if keyTimes.first != 0.0 {
       keyTimes.insert(0.0, at: 0)
-      values.insert(values.first!, at: 0)
+      values.insert(values[0], at: 0)
       timingFunctions.insert(CAMediaTimingFunction(name: .linear), at: 0)
     }
 

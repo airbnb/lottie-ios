@@ -27,7 +27,9 @@ final class GradientRenderLayer: CAGradientLayer {
   /// `startPoint` and `endPoint` should be calculated relative to
   var gradientReferenceBounds: CGRect = .zero {
     didSet {
-      updateLayout()
+      if oldValue != gradientReferenceBounds {
+        updateLayout()
+      }
     }
   }
 
@@ -68,8 +70,7 @@ final class GradientRenderLayer: CAGradientLayer {
       width: gradientPadding + gradientReferenceBounds.width + gradientPadding,
       height: gradientPadding + gradientReferenceBounds.height + gradientPadding)
 
-    transform = CATransform3DTranslate(
-      CATransform3DIdentity,
+    transform = CATransform3DMakeTranslation(
       -gradientPadding,
       -gradientPadding,
       0)

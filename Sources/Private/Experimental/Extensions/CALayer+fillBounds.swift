@@ -29,7 +29,7 @@ extension CALayer {
 
 // MARK: - CustomLayoutLayer
 
-/// A `CALayer` that sets a custom `bounds` relative to its superlayer
-protocol CustomLayoutLayer {
+/// A `CALayer` that sets a custom `bounds` and `anchorPoint` relative to its superlayer
+protocol CustomLayoutLayer: CALayer {
   func layout(superlayerBounds: CGRect)
 }

@@ -42,9 +42,7 @@ final class ImageLayer: BaseCompositionLayer {
       let image = context.imageProvider.imageForAsset(asset: imageAsset)
     else { return }
 
-    let imageLayer = CALayer()
-    imageLayer.contents = image
-    contentsLayer.addSublayer(imageLayer)
+    contentsLayer.contents = image
   }
 
 }

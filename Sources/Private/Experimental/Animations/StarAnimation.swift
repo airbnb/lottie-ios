@@ -37,12 +37,12 @@ extension CAShapeLayer {
         // TODO: Is there a way to support this properly?
         BezierPath.star(
           position: position.pointValue,
-          outerRadius: star.outerRadius.keyframes.first!.value.cgFloatValue,
-          innerRadius: star.innerRadius?.keyframes.first?.value.cgFloatValue ?? 0,
-          outerRoundedness: star.outerRoundness.keyframes.first!.value.cgFloatValue,
-          innerRoundedness: star.innerRoundness?.keyframes.first?.value.cgFloatValue ?? 0,
-          numberOfPoints: star.points.keyframes.first!.value.cgFloatValue,
-          rotation: star.rotation.keyframes.first!.value.cgFloatValue,
+          outerRadius: star.outerRadius.keyframes[0].value.cgFloatValue,
+          innerRadius: star.innerRadius?.keyframes[0].value.cgFloatValue ?? 0,
+          outerRoundedness: star.outerRoundness.keyframes[0].value.cgFloatValue,
+          innerRoundedness: star.innerRoundness?.keyframes[0].value.cgFloatValue ?? 0,
+          numberOfPoints: star.points.keyframes[0].value.cgFloatValue,
+          rotation: star.rotation.keyframes[0].value.cgFloatValue,
           direction: star.direction)
           .cgPath()
       },
@@ -62,10 +62,10 @@ extension CAShapeLayer {
         // TODO: Is there a way to support this properly?
         BezierPath.polygon(
           position: position.pointValue,
-          numberOfPoints: star.points.keyframes.first!.value.cgFloatValue,
-          outerRadius: star.outerRadius.keyframes.first!.value.cgFloatValue,
-          outerRoundedness: star.outerRoundness.keyframes.first!.value.cgFloatValue,
-          rotation: star.rotation.keyframes.first!.value.cgFloatValue,
+          numberOfPoints: star.points.keyframes[0].value.cgFloatValue,
+          outerRadius: star.outerRadius.keyframes[0].value.cgFloatValue,
+          outerRoundedness: star.outerRoundness.keyframes[0].value.cgFloatValue,
+          rotation: star.rotation.keyframes[0].value.cgFloatValue,
           direction: star.direction)
           .cgPath()
       },

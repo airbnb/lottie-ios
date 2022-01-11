@@ -20,6 +20,7 @@ extension CAShapeLayer {
       addAnimations(for: star, context: context)
 
     default:
+      // None of the other `ShapeItem` subclasses draw a `path`
       return
     }
   }
