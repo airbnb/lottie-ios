@@ -1,11 +1,11 @@
 # Lottie for iOS, macOS (and [Android](https://github.com/airbnb/lottie-android) and [React Native](https://github.com/airbnb/lottie-react-native))
-[![Version](https://img.shields.io/cocoapods/v/lottie-ios.svg?style=flat)](https://cocoapods.org/pods/lottie-ios)[![License](https://img.shields.io/cocoapods/l/lottie-ios.svg?style=flat)](https://cocoapods.org/pods/lottie-ios)[![Platform](https://img.shields.io/cocoapods/p/lottie-ios.svg?style=flat)](https://cocoapods.org/pods/lottie-ios)
+ [![Version](https://img.shields.io/cocoapods/v/lottie-ios.svg?style=flat)](https://cocoapods.org/pods/lottie-ios) [![License](https://img.shields.io/cocoapods/l/lottie-ios.svg?style=flat)](https://cocoapods.org/pods/lottie-ios) [![Platform](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fairbnb%2Flottie-ios%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/airbnb/lottie-ios) [![Swift Versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fairbnb%2Flottie-ios%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/airbnb/lottie-ios)
 
 # View documentation, FAQ, help, examples, and more at [airbnb.io/lottie](http://airbnb.io/lottie/)
 
 Lottie is a mobile library for Android and iOS that natively renders vector based animations and art in realtime with minimal code.
 
-Lottie loads and renders animations and vectors exported in the bodymovin JSON format. Bodymovin JSON can be created and exported from After Effects with [bodymovin](https://github.com/bodymovin/bodymovin), Sketch with [Lottie Sketch Export](https://github.com/buba447/Lottie-Sketch-Export), and from [Haiku](https://www.haiku.ai). 
+Lottie loads and renders animations and vectors exported in the bodymovin JSON format. Bodymovin JSON can be created and exported from After Effects with [bodymovin](https://github.com/bodymovin/bodymovin), Sketch with [Lottie Sketch Export](https://github.com/buba447/Lottie-Sketch-Export), and from [Haiku](https://www.haiku.ai).
 
 For the first time, designers can create **and ship** beautiful animations without an engineer painstakingly recreating it by hand.
 Since the animation is backed by JSON they are extremely small in size but can be large in complexity!
@@ -26,7 +26,7 @@ Here is just a small sampling of the power of Lottie
 ![Abcs](_Gifs/Examples4.gif)
 
 ## Installing Lottie
-Lottie supports [Swift Package Manager](https://www.swift.org/package-manager/), [CocoaPods](https://cocoapods.org/) and [Carthage](https://github.com/Carthage/Carthage) (Both dynamic and static). Lottie is written in ***Swift 5.4***.
+Lottie supports [Swift Package Manager](https://www.swift.org/package-manager/), [CocoaPods](https://cocoapods.org/) and [Carthage](https://github.com/Carthage/Carthage) (Both dynamic and static).
 
 ### Github Repo
 
@@ -42,7 +42,7 @@ And then run:
 ```ruby
 pod install
 ```
-After installing the cocoapod into your project import Lottie with 
+After installing the cocoapod into your project import Lottie with
 ```swift
 import Lottie
 ```
@@ -98,7 +98,7 @@ After successfully retrieved the package and added it to your project, just impo
 
 ### Objective-C Support
 
-As of 3.0 Lottie has been completely rewritten in Swift! 
+As of 3.0 Lottie has been completely rewritten in Swift!
 
 For Objective-C support please use Lottie 2.5.3. Alternatively an Objective-C branch exists and is still active.
 
@@ -106,7 +106,7 @@ The official objective c branch can be found here:
 
 [Objective-C Branch](https://github.com/airbnb/lottie-ios/tree/lottie/objectiveC)
 
-Also check out the documentation regarding it here: 
+Also check out the documentation regarding it here:
 
 [iOS Migration](http://airbnb.io/lottie/#/ios-migration)
 
