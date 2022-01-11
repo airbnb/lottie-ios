@@ -106,7 +106,9 @@ extension CALayer {
         value: \.cgFloatValue,
         context: context)
     } else {
-      fatalError("`Transform` values must provide either `position` or `positionX` / `positionY` keyframes")
+      LottieLogger.shared.assertionFailure("""
+      `Transform` values must provide either `position` or `positionX` / `positionY` keyframes
+      """)
     }
   }
 
@@ -119,7 +121,7 @@ extension CALayer {
       keyframes: transformModel.anchorPoint.keyframes,
       value: { absoluteAnchorPoint in
         guard bounds.width > 0, bounds.height > 0 else {
-          assertionFailure("Size must be non-zero before an animation can be played")
+          LottieLogger.shared.assertionFailure("Size must be non-zero before an animation can be played")
           return .zero
         }
 

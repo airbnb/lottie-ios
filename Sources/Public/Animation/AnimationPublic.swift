@@ -69,7 +69,7 @@ extension Animation {
       return animation
     } catch {
       /// Decoding error.
-      print(error)
+      LottieLogger.shared.warn("Error when decoding animation \"\(name)\": \(error)")
       return nil
     }
   }

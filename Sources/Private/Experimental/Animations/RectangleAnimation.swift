@@ -13,26 +13,10 @@ extension CAShapeLayer {
       for: .path,
       keyframes: rectangle.size.keyframes,
       value: { sizeKeyframe in
-        let size = sizeKeyframe.sizeValue
-
-        // TODO: Is there a reasonable way to handle multiple sets
-        // of keyframes that apply to the same value (`path`, in this case)?
-        //  - This seems somewhat unlikely -- if it turns out to be necessary,
-        //    this will probably have to be reworked to use more sublayers
-        let position = rectangle.position.keyframes[0].value.pointValue
-        if rectangle.position.keyframes.count > 1 {
-          fatalError("Rectangle position keyframes are currently unsupported")
-        }
-
-        let cornerRadius = min(min(rectangle.cornerRadius.keyframes[0].value.cgFloatValue, size.width), size.height)
-        if rectangle.cornerRadius.keyframes.count > 1 {
-          fatalError("Rectangle corner cornerRadius keyframes are currently unsupported")
-        }
-
-        return BezierPath.rectangle(
-          position: position,
-          size: size,
-          cornerRadius: cornerRadius,
+        BezierPath.rectangle(
+          position: rectangle.position.exactlyOneKeyframe.value.pointValue,
+          size: sizeKeyframe.sizeValue,
+          cornerRadius: rectangle.cornerRadius.exactlyOneKeyframe.value.cgFloatValue,
           direction: rectangle.direction)
           .cgPath()
       },

@@ -13,20 +13,9 @@ extension CAShapeLayer {
       for: .path,
       keyframes: ellipse.size.keyframes,
       value: { sizeKeyframe in
-        let size = sizeKeyframe.sizeValue
-
-        // TODO: Is there a reasonable way to handle multiple sets
-        // of keyframes that apply to the same value (`path`, in this case)?
-        //  - This seems somewhat unlikely -- if it turns out to be necessary,
-        //    this will probably have to be reworked to use more sublayers
-        let center = ellipse.position.keyframes[0].value.pointValue
-        if ellipse.position.keyframes.count > 1 {
-          fatalError("Ellipse position keyframes are currently unsupported")
-        }
-
-        return BezierPath.ellipse(
-          size: size,
-          center: center,
+        BezierPath.ellipse(
+          size: sizeKeyframe.sizeValue,
+          center: ellipse.position.exactlyOneKeyframe.value.pointValue,
           direction: ellipse.direction)
           .cgPath()
       },

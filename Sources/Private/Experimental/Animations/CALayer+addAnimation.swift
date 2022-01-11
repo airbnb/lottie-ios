@@ -109,11 +109,11 @@ extension CALayer {
       timingFunctions.append(CAMediaTimingFunction(name: .linear))
     }
 
-    assert(
+    LottieLogger.shared.assert(
       values.count == keyTimes.count,
       "`values.count` must exactly equal `keyTimes.count`")
 
-    assert(
+    LottieLogger.shared.assert(
       timingFunctions.count == (values.count - 1),
       "`timingFunctions.count` must exactly equal `values.count - 1`")
 

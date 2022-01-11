@@ -54,7 +54,7 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
   }()
 
   override func addSublayer(_: CALayer) {
-    fatalError("""
+    LottieLogger.shared.assertionFailure("""
     Sublayers should not be added directly to `BaseCompositionLayer`.
     Instead, add sublayers to either `transformLayer` or `contentsLayer`.
     """)

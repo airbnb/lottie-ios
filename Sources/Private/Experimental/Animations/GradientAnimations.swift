@@ -76,15 +76,8 @@ extension GradientRenderLayer {
     // relative to the `startPoint` value. Since calculating the `endPoint`
     // at any given time requires knowing the current `startPoint`,
     // we can't allow them to animate separately.
-    guard
-      gradientFill.startPoint.keyframes.count == 1,
-      gradientFill.endPoint.keyframes.count == 1
-    else {
-      fatalError("Animating radial gradient `endPoint` point is currently unsupported")
-    }
-
-    let absoluteStartPoint = gradientFill.startPoint.keyframes[0].value.pointValue
-    let absoluteEndPoint = gradientFill.endPoint.keyframes[0].value.pointValue
+    let absoluteStartPoint = gradientFill.startPoint.exactlyOneKeyframe.value.pointValue
+    let absoluteEndPoint = gradientFill.endPoint.exactlyOneKeyframe.value.pointValue
 
     startPoint = percentBasedPointInBounds(from: absoluteStartPoint)
 

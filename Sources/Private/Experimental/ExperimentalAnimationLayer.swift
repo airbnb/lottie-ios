@@ -170,7 +170,7 @@ extension CALayer {
       }
 
       if layersByIndex.keys.contains(layerModel.index) {
-        fatalError("""
+        LottieLogger.shared.assertionFailure("""
         Multiple layers have the same index \"\(layerModel.index)\".
         This is unsupported.
         """)
@@ -237,12 +237,12 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
 
   var renderScale: CGFloat {
     get { 0 }
-    set { fatalError("Currently unsupported") }
+    set { LottieLogger.shared.assertionFailure("`renderScale` is currently unsupported") }
   }
 
   var respectAnimationFrameRate: Bool {
     get { false }
-    set { fatalError("Currently unsupported") }
+    set { LottieLogger.shared.assertionFailure("`respectAnimationFrameRate` is currently unsupported") }
   }
 
   var _animationLayers: [CALayer] {
@@ -251,45 +251,47 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
 
   var imageProvider: AnimationImageProvider {
     get { BundleImageProvider(bundle: Bundle.main, searchPath: nil) }
-    set { fatalError("Currently unsupported") }
+    set { LottieLogger.shared.assertionFailure("Setting `imageProvider` is currently unsupported") }
   }
 
   var textProvider: AnimationTextProvider {
-    get { fatalError("Currently unsupported") }
-    set { fatalError("Currently unsupported") }
+    get { DictionaryTextProvider([:]) }
+    set { LottieLogger.shared.assertionFailure("`textProvider` is currently unsupported") }
   }
 
   var fontProvider: AnimationFontProvider {
-    get { fatalError("Currently unsupported") }
-    set { fatalError("Currently unsupported") }
+    get { DefaultFontProvider() }
+    set { LottieLogger.shared.assertionFailure("`fontProvider` is currently unsupported") }
   }
 
   func reloadImages() {
-    fatalError("Currently unsupported")
+    LottieLogger.shared.assertionFailure("`reloadImages` is currently not implemented")
   }
 
   func forceDisplayUpdate() {
-    // Unimplemented
+    // Unimplemented / unused
   }
 
   func logHierarchyKeypaths() {
-    fatalError("Currently unsupported")
+    // Unimplemented / unused
   }
 
   func setValueProvider(_: AnyValueProvider, keypath _: AnimationKeypath) {
-    fatalError("Currently unsupported")
+    LottieLogger.shared.assertionFailure("`AnimationKeypath`s are currently unsupported")
   }
 
   func getValue(for _: AnimationKeypath, atFrame _: AnimationFrameTime?) -> Any? {
-    fatalError("Currently unsupported")
+    LottieLogger.shared.assertionFailure("`AnimationKeypath`s are currently unsupported")
   }
 
   func layer(for _: AnimationKeypath) -> CALayer? {
-    fatalError("Currently unsupported")
+    LottieLogger.shared.assertionFailure("`AnimationKeypath`s are currently unsupported")
+    return nil
   }
 
   func animatorNodes(for _: AnimationKeypath) -> [AnimatorNode]? {
-    fatalError("Currently unsupported")
+    LottieLogger.shared.assertionFailure("`AnimatorNode`s are not used in this rendering implementation")
+    return nil
   }
 
   func removeAnimations() {
