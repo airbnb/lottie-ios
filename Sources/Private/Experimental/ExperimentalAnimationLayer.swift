@@ -142,7 +142,7 @@ final class ExperimentalAnimationLayer: CALayer {
 
 }
 
-// MARK: - ExperimentalAnimationLayer + RootAnimationLayer
+// MARK: RootAnimationLayer
 
 extension ExperimentalAnimationLayer: RootAnimationLayer {
 

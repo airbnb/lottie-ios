@@ -3,6 +3,8 @@
 
 import QuartzCore
 
+// MARK: - CAKeyPath
+
 /// A strongly typed value that can be used as the `keyPath` of a `CAAnimation`
 struct CAKeyPath<ValueRepresentation> {
   let name: String
