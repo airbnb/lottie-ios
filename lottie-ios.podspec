@@ -26,6 +26,7 @@ For the first time, designers can create and ship beautiful animations without a
   s.osx.deployment_target = '10.9'
   s.tvos.deployment_target = '9.0'
 
+  s.exclude_files = 'lottie-ios/Classes/include/**/*'
   s.source_files = 'lottie-ios/Classes/**/*'
   s.osx.exclude_files = ['lottie-ios/Classes/PublicHeaders/LOTAnimationTransitionController.h',
                          'lottie-ios/Classes/Private/LOTAnimationTransitionController.m',
