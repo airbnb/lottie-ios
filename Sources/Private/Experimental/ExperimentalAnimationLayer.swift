@@ -255,12 +255,12 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
   }
 
   var textProvider: AnimationTextProvider {
-    get { LottieLogger.shared.assertionFailure("`textProvider` is currently unsupported") }
+    get { DictionaryTextProvider([:]) }
     set { LottieLogger.shared.assertionFailure("`textProvider` is currently unsupported") }
   }
 
   var fontProvider: AnimationFontProvider {
-    get { LottieLogger.shared.assertionFailure("`fontProvider` is currently unsupported") }
+    get { DefaultFontProvider() }
     set { LottieLogger.shared.assertionFailure("`fontProvider` is currently unsupported") }
   }
 
@@ -286,6 +286,7 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
 
   func layer(for _: AnimationKeypath) -> CALayer? {
     LottieLogger.shared.assertionFailure("`AnimationKeypath`s are currently unsupported")
+    return nil
   }
 
   func animatorNodes(for _: AnimationKeypath) -> [AnimatorNode]? {

@@ -37,12 +37,12 @@ extension CAShapeLayer {
         // TODO: Is there a way to support this properly?
         BezierPath.star(
           position: position.pointValue,
-          outerRadius: star.outerRadius.keyframes[0].value.cgFloatValue,
-          innerRadius: star.innerRadius?.keyframes[0].value.cgFloatValue ?? 0,
-          outerRoundedness: star.outerRoundness.keyframes[0].value.cgFloatValue,
-          innerRoundedness: star.innerRoundness?.keyframes[0].value.cgFloatValue ?? 0,
-          numberOfPoints: star.points.keyframes[0].value.cgFloatValue,
-          rotation: star.rotation.keyframes[0].value.cgFloatValue,
+          outerRadius: star.outerRadius.exactlyOneKeyframe.value.cgFloatValue,
+          innerRadius: star.innerRadius?.exactlyOneKeyframe.value.cgFloatValue ?? 0,
+          outerRoundedness: star.outerRoundness.exactlyOneKeyframe.value.cgFloatValue,
+          innerRoundedness: star.innerRoundness?.exactlyOneKeyframe.value.cgFloatValue ?? 0,
+          numberOfPoints: star.points.exactlyOneKeyframe.value.cgFloatValue,
+          rotation: star.rotation.exactlyOneKeyframe.value.cgFloatValue,
           direction: star.direction)
           .cgPath()
       },
@@ -62,10 +62,10 @@ extension CAShapeLayer {
         // TODO: Is there a way to support this properly?
         BezierPath.polygon(
           position: position.pointValue,
-          numberOfPoints: star.points.keyframes[0].value.cgFloatValue,
-          outerRadius: star.outerRadius.keyframes[0].value.cgFloatValue,
-          outerRoundedness: star.outerRoundness.keyframes[0].value.cgFloatValue,
-          rotation: star.rotation.keyframes[0].value.cgFloatValue,
+          numberOfPoints: star.points.exactlyOneKeyframe.value.cgFloatValue,
+          outerRadius: star.outerRadius.exactlyOneKeyframe.value.cgFloatValue,
+          outerRoundedness: star.outerRoundness.exactlyOneKeyframe.value.cgFloatValue,
+          rotation: star.rotation.exactlyOneKeyframe.value.cgFloatValue,
           direction: star.direction)
           .cgPath()
       },
