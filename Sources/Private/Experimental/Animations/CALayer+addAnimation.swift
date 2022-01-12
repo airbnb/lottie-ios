@@ -115,7 +115,7 @@ extension CALayer {
     animation.keyTimes = keyTimes
     animation.timingFunctions = timingFunctions
 
-    add(animation.timed(with: context), forKey: keyPath.name)
+    add(animation, timedWith: context)
   }
 
 }

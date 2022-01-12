@@ -31,6 +31,6 @@ extension CALayer {
       NSNumber(value: 1.0),
     ]
 
-    add(animation.timed(with: context), forKey: #keyPath(isHidden))
+    add(animation, timedWith: context)
   }
 }
