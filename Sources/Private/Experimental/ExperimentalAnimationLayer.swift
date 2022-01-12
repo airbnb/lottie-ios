@@ -103,7 +103,7 @@ final class ExperimentalAnimationLayer: CALayer {
 
   // MARK: Private
 
-  private struct AnimationConfiguration {
+  private struct AnimationConfiguration: Equatable {
     let animationContext: AnimationContext
     let timingConfiguration: CAMediaTimingConfiguration
   }
@@ -162,16 +162,17 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
       // with a specific configuration (speed=0, etc) at least once. But if
       // the layer hierarchy is already set up correctly, we can update the
       // `timeOffset` very cheaply.
-      let requiredTimingConfiguration = CAMediaTimingConfiguration(speed: 0)
+      let requiredAnimationConfiguration = AnimationConfiguration(
+        animationContext: AnimationContext(
+          playFrom: animation.startFrame,
+          playTo: animation.endFrame,
+          closure: nil),
+        timingConfiguration: CAMediaTimingConfiguration(speed: 0))
 
-      if
-        currentAnimationConfiguration?.timingConfiguration != requiredTimingConfiguration
-        || currentAnimationConfiguration?.animationContext.playFrom != animation.startFrame
-        || currentAnimationConfiguration?.animationContext.playTo != animation.endFrame
-      {
+      if currentAnimationConfiguration != requiredAnimationConfiguration {
         setupAnimation(
-          context: .init(playFrom: animation.startFrame, playTo: animation.endFrame, closure: nil),
-          timingConfiguration: requiredTimingConfiguration)
+          context: requiredAnimationConfiguration.animationContext,
+          timingConfiguration: requiredAnimationConfiguration.timingConfiguration)
       }
 
       timeOffset = animation.time(forFrame: newValue)
