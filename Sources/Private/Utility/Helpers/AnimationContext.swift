@@ -32,6 +32,19 @@ struct AnimationContext {
 
 }
 
+// MARK: Equatable
+
+extension AnimationContext: Equatable {
+  /// Whether or not the two given `AnimationContext`s are functionally equivalent
+  ///  - This checks whether or not a completion handler was provided,
+  ///    but does not check whether or not the two completion handlers are equivalent.
+  static func == (_ lhs: AnimationContext, _ rhs: AnimationContext) -> Bool {
+    lhs.playTo == rhs.playTo
+      && lhs.playFrom == rhs.playFrom
+      && (lhs.closure.completionBlock == nil) == (rhs.closure.completionBlock == nil)
+  }
+}
+
 // MARK: - AnimationContextState
 
 enum AnimationContextState {

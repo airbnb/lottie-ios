@@ -29,6 +29,7 @@ final class ExperimentalAnimationLayer: CALayer {
     }
 
     animation = typedLayer.animation
+    currentAnimationConfiguration = typedLayer.currentAnimationConfiguration
     super.init(layer: typedLayer)
   }
 
@@ -40,7 +41,7 @@ final class ExperimentalAnimationLayer: CALayer {
 
   /// Timing-related configuration to apply to this layer's child `CAAnimation`s
   ///  - This is effectively a configurable subset of `CAMediaTiming`
-  struct CAMediaTimingConfiguration {
+  struct CAMediaTimingConfiguration: Equatable {
     var autoreverses = false
     var repeatCount: Float = 0
     var speed: Float = 1
@@ -52,17 +53,18 @@ final class ExperimentalAnimationLayer: CALayer {
     context: AnimationContext,
     timingConfiguration: CAMediaTimingConfiguration)
   {
-    self.timingConfiguration = timingConfiguration
-    completionHandlerDelegate = context.closure
+    // Remove any existing animations from the layer hierarchy
+    removeAnimations()
+
+    currentAnimationConfiguration = AnimationConfiguration(
+      animationContext: context,
+      timingConfiguration: timingConfiguration)
 
     let layerContext = LayerAnimationContext(
       animation: animation,
       timingConfiguration: timingConfiguration,
       startFrame: context.playFrom,
       endFrame: context.playTo)
-
-    // Remove any existing animations from the layer hierarchy
-    removeAnimations()
 
     // Perform a layout pass if necessary so all of the sublayers
     // have the most up-to-date sizing information
@@ -92,7 +94,7 @@ final class ExperimentalAnimationLayer: CALayer {
     // If no animation has been set up yet, display the first frame
     // now that the layer hierarchy has been setup and laid out
     if
-      timingConfiguration == nil,
+      currentAnimationConfiguration == nil,
       bounds.size != .zero
     {
       currentFrame = animation.frameTime(forProgress: animationProgress)
@@ -101,13 +103,13 @@ final class ExperimentalAnimationLayer: CALayer {
 
   // MARK: Private
 
-  /// The timing configuration that is being used for the currently-active animation
-  private var timingConfiguration: CAMediaTimingConfiguration?
+  private struct AnimationConfiguration: Equatable {
+    let animationContext: AnimationContext
+    let timingConfiguration: CAMediaTimingConfiguration
+  }
 
-  /// A strong reference to the `AnimationCompletionDelegate`
-  /// that serves as the `CAAnimationDelegate` of our animation
-  /// (so `AnimationView` can attach a completion handler).
-  private var completionHandlerDelegate: AnimationCompletionDelegate?
+  // Configuration for the animation that is currently playing in this layer
+  private var currentAnimationConfiguration: AnimationConfiguration?
 
   /// The current progress of the placeholder `CAAnimation`,
   /// which is also the realtime animation progress of this layer's animation
@@ -135,8 +137,8 @@ final class ExperimentalAnimationLayer: CALayer {
     animationProgressTracker.fromValue = 0
     animationProgressTracker.toValue = 1
 
-    let timedProgressAnimation = animationProgressTracker.timed(with: context)
-    timedProgressAnimation.delegate = completionHandlerDelegate
+    let timedProgressAnimation = animationProgressTracker.timed(with: context, for: self)
+    timedProgressAnimation.delegate = currentAnimationConfiguration?.animationContext.closure
     add(timedProgressAnimation, forKey: #keyPath(animationProgress))
   }
 
@@ -155,21 +157,25 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
       animation.frameTime(forProgress: (presentation() ?? self).animationProgress)
     }
     set {
-      // Currently, setting `currentFrame` causes the existing layer hierarchy
-      // to be discarded and then completely rebuilt.
-      // This isn't a problem when setting the animation up just once,
-      // but can max out the CPU (causing frame drops / lag) for very-large animations
-      // when interactively controlling the current frame with a user gesture.
-      // TODO: This should be adjusted to use the existing layer hierarchy
-      //       and control something like `layer.timeOffset`.
-      setupAnimation(
-        context: .init(
+      // We can display a specific frame of the animation by setting
+      // `timeOffset` of this layer. This requires setting up the layer hierarchy
+      // with a specific configuration (speed=0, etc) at least once. But if
+      // the layer hierarchy is already set up correctly, we can update the
+      // `timeOffset` very cheaply.
+      let requiredAnimationConfiguration = AnimationConfiguration(
+        animationContext: AnimationContext(
           playFrom: animation.startFrame,
           playTo: animation.endFrame,
           closure: nil),
-        timingConfiguration: .init(
-          speed: 0,
-          timeOffset: animation.time(forFrame: newValue)))
+        timingConfiguration: CAMediaTimingConfiguration(speed: 0))
+
+      if currentAnimationConfiguration != requiredAnimationConfiguration {
+        setupAnimation(
+          context: requiredAnimationConfiguration.animationContext,
+          timingConfiguration: requiredAnimationConfiguration.timingConfiguration)
+      }
+
+      timeOffset = animation.time(forFrame: newValue)
     }
   }
 
@@ -233,7 +239,9 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
   }
 
   func removeAnimations() {
+    currentAnimationConfiguration = nil
     removeAllAnimations()
+
     for sublayer in allSublayers {
       sublayer.removeAllAnimations()
     }

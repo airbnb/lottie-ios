@@ -25,7 +25,7 @@ struct LayerAnimationContext {
 extension CAAnimation {
   /// Creates a `CAAnimation` that wraps this animation,
   /// applying timing-related configuration from the given `LayerAnimationContext`
-  func timed(with context: LayerAnimationContext) -> CAAnimation {
+  func timed(with context: LayerAnimationContext, for layer: CALayer) -> CAAnimation {
 
     // The base animation always has the duration of the full animation,
     // since that's the time space where keyframing and interpolating happens.
@@ -68,6 +68,24 @@ extension CAAnimation {
     clippingParent.fillMode = .both
     clippingParent.isRemovedOnCompletion = false
 
+    // We can pause the animation on a specific frame by setting the root layer's
+    // `speed` to 0, and then setting the `timeOffset` for the given frame.
+    //  - For that setup to work properly, we have to set the `beginTime`
+    //    of this animation to a time slightly before the current time.
+    //  - It's not really clear why this is necessary, but `timeOffset`
+    //    is not applied correctly without this configuration.
+    let currentTime = layer.convertTime(CACurrentMediaTime(), from: nil)
+    clippingParent.beginTime = currentTime - .leastNonzeroMagnitude
+
     return clippingParent
+  }
+}
+
+// MARK: - CALayer + addTimedAnimation
+
+extension CALayer {
+  /// Adds the given animation to this layer, timed with the given timing configuration
+  func add(_ animation: CAPropertyAnimation, timedWith context: LayerAnimationContext) {
+    add(animation.timed(with: context, for: self), forKey: animation.keyPath)
   }
 }
