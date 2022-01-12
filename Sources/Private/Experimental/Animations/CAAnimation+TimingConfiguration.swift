@@ -74,8 +74,12 @@ extension CAAnimation {
     //    of this animation to a time slightly before the current time.
     //  - It's not really clear why this is necessary, but `timeOffset`
     //    is not applied correctly without this configuration.
-    let currentTime = layer.convertTime(CACurrentMediaTime(), from: nil)
-    clippingParent.beginTime = currentTime - .leastNonzeroMagnitude
+    //  - We can't do this when playing the animation in real time,
+    //    because it can cause keyframe timings to be incorrect.
+    if context.timingConfiguration.speed == 0 {
+      let currentTime = layer.convertTime(CACurrentMediaTime(), from: nil)
+      clippingParent.beginTime = currentTime - .leastNonzeroMagnitude
+    }
 
     return clippingParent
   }
