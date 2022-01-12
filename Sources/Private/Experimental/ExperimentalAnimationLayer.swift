@@ -159,7 +159,7 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
     set {
       // We can display a specific frame of the animation by setting
       // `timeOffset` of this layer. This requires setting up the layer hierarchy
-      // with a specific configuration (speed=0, etc) at least one. But if
+      // with a specific configuration (speed=0, etc) at least once. But if
       // the layer hierarchy is already set up correctly, we can update the
       // `timeOffset` very cheaply.
       let requiredTimingConfiguration = CAMediaTimingConfiguration(speed: 0)
