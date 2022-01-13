@@ -22,6 +22,11 @@ class AnimationPreviewViewController: UIViewController {
 
   // MARK: Internal
 
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    displayLink?.invalidate()
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground

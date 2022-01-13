@@ -19,7 +19,10 @@ open class AnimatedSwitch: AnimatedControl {
 
   // MARK: Lifecycle
 
-  public override init(animation: Animation) {
+  public override init(
+    animation: Animation,
+    _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration = .shared)
+  {
     /// Generate a haptic generator if available.
     #if os(iOS)
     if #available(iOS 10.0, *) {
@@ -30,7 +33,7 @@ open class AnimatedSwitch: AnimatedControl {
     #else
     hapticGenerator = NullHapticGenerator()
     #endif
-    super.init(animation: animation)
+    super.init(animation: animation, _experimentalFeatureConfiguration: _experimentalFeatureConfiguration)
     updateOnState(isOn: _isOn, animated: false, shouldFireHaptics: false)
     accessibilityTraits = UIAccessibilityTraits.button
   }
@@ -160,11 +163,19 @@ open class AnimatedSwitch: AnimatedControl {
       hapticGenerator.generateImpact()
     }
 
-    animationView.play(fromProgress: startProgress, toProgress: endProgress, loopMode: LottieLoopMode.playOnce) { finished in
-      if finished == true {
-        self.animationView.currentProgress = finalProgress
-      }
-    }
+    animationView.play(
+      fromProgress: startProgress,
+      toProgress: endProgress,
+      loopMode: LottieLoopMode.playOnce,
+      completion: { [weak self] finished in
+        guard let self = self else { return }
+
+        // For the legacy rendering engine, we freeze the animation at the expected final progress
+        // once the animation is complete. This isn't necessary on the new / experimental engine.
+        if finished, !(self.animationView.animationLayer is ExperimentalAnimationLayer) {
+          self.animationView.currentProgress = finalProgress
+        }
+      })
   }
 
   // MARK: Fileprivate

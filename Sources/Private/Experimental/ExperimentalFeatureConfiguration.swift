@@ -16,4 +16,8 @@ public struct ExperimentalFeatureConfiguration {
   /// animate without executing on the main thread every frame.
   public var useNewRenderingEngine = false
 
+  public init(useNewRenderingEngine: Bool = false) {
+    self.useNewRenderingEngine = useNewRenderingEngine
+  }
+
 }
