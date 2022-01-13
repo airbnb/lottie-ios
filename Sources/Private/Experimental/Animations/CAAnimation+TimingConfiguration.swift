@@ -18,6 +18,20 @@ struct LayerAnimationContext {
 
   /// The absolute frame number that this animation ends at
   let endFrame: AnimationFrameTime
+
+  /// The set of custom Value Providers applied to this animation
+  let valueProviderStore: ValueProviderStore
+
+  /// The AnimationKeypath represented by the current layer
+  var currentKeypath: AnimationKeypath
+
+  /// Adds the given component string to the `AnimationKeypath` stored
+  /// that describes the current path being configured by this context value
+  func addingKeypathComponent(_ component: String) -> LayerAnimationContext {
+    var context = self
+    context.currentKeypath.keys.append(component)
+    return context
+  }
 }
 
 // MARK: - CAAnimation + LayerAnimationContext

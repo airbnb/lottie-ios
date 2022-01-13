@@ -9,7 +9,7 @@ import CoreGraphics
 import Foundation
 
 /// A value provider that produces an array of values from an array of Keyframe Interpolators
-final class GroupInterpolator<ValueType>: AnyValueProvider where ValueType: Interpolatable {
+final class GroupInterpolator<ValueType>: ValueProvider where ValueType: Interpolatable {
 
   // MARK: Lifecycle
 
@@ -26,13 +26,14 @@ final class GroupInterpolator<ValueType>: AnyValueProvider where ValueType: Inte
     [ValueType].self
   }
 
+  var storage: ValueProviderStorage<[ValueType]> {
+    .closure { frame in
+      self.keyframeInterpolators.map({ $0.value(frame: frame) as! ValueType })
+    }
+  }
+
   func hasUpdate(frame: CGFloat) -> Bool {
     let updated = keyframeInterpolators.first(where: { $0.hasUpdate(frame: frame) })
     return updated != nil
-  }
-
-  func value(frame: CGFloat) -> Any {
-    let output = keyframeInterpolators.map({ $0.value(frame: frame) as! ValueType })
-    return output
   }
 }

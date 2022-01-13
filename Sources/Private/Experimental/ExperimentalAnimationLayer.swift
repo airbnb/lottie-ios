@@ -64,7 +64,9 @@ final class ExperimentalAnimationLayer: CALayer {
       animation: animation,
       timingConfiguration: timingConfiguration,
       startFrame: context.playFrom,
-      endFrame: context.playTo)
+      endFrame: context.playTo,
+      valueProviderStore: valueProviderStore,
+      currentKeypath: AnimationKeypath(keys: []))
 
     // Perform a layout pass if necessary so all of the sublayers
     // have the most up-to-date sizing information
@@ -116,6 +118,7 @@ final class ExperimentalAnimationLayer: CALayer {
   @objc private var animationProgress: CGFloat = 0
 
   private let animation: Animation
+  private let valueProviderStore = ValueProviderStore()
 
   private func setup() {
     bounds = animation.bounds
@@ -220,12 +223,17 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
     // Unimplemented / unused
   }
 
-  func setValueProvider(_: AnyValueProvider, keypath _: AnimationKeypath) {
-    LottieLogger.shared.assertionFailure("`AnimationKeypath`s are currently unsupported")
+  func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
+    // TODO: We need to rebuild the current animation after registering a value provider,
+    // since any existing `CAAnimation`s could now be out of date.
+    valueProviderStore.setValueProvider(valueProvider, keypath: keypath)
   }
 
   func getValue(for _: AnimationKeypath, atFrame _: AnimationFrameTime?) -> Any? {
-    LottieLogger.shared.assertionFailure("`AnimationKeypath`s are currently unsupported")
+    LottieLogger.shared.assertionFailure("""
+    The new rendering engine doesn't support querying values for individual frames
+    """)
+    return nil
   }
 
   func layer(for _: AnimationKeypath) -> CALayer? {
