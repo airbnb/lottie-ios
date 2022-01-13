@@ -14,7 +14,7 @@ public struct ExperimentalFeatureConfiguration {
   /// Whether or not to use the new, experimental, rendering engine,
   /// which leverages the Core Animation render server to
   /// animate without executing on the main thread every frame.
-  public var useNewRenderingEngine = false
+  public var useNewRenderingEngine: Bool
 
   public init(useNewRenderingEngine: Bool = false) {
     self.useNewRenderingEngine = useNewRenderingEngine
