@@ -15,8 +15,11 @@ open class AnimatedButton: AnimatedControl {
 
   // MARK: Lifecycle
 
-  public override init(animation: Animation) {
-    super.init(animation: animation)
+  public override init(
+    animation: Animation,
+    _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration = .shared)
+  {
+    super.init(animation: animation, _experimentalFeatureConfiguration: _experimentalFeatureConfiguration)
     accessibilityTraits = UIAccessibilityTraits.button
   }
 

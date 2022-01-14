@@ -32,8 +32,14 @@ open class AnimatedControl: UIControl {
 
   // MARK: Initializers
 
-  public init(animation: Animation) {
-    animationView = AnimationView(animation: animation)
+  public init(
+    animation: Animation,
+    _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration = .shared)
+  {
+    animationView = AnimationView(
+      animation: animation,
+      _experimentalFeatureConfiguration: _experimentalFeatureConfiguration)
+
     super.init(frame: animation.bounds)
     commonInit()
   }
