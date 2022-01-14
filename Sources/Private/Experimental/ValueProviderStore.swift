@@ -7,6 +7,8 @@ import QuartzCore
 /// provide custom values for `AnimationKeypath`s within an `Animation`.
 final class ValueProviderStore {
 
+  // MARK: Internal
+
   /// Registers an `AnyValueProvider` for the given `AnimationKeypath`
   func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
     LottieLogger.shared.assert(
@@ -50,6 +52,8 @@ final class ValueProviderStore {
       return nil
     }
   }
+
+  // MARK: Private
 
   private var valueProviders = [AnimationKeypath: AnyValueProvider]()
 

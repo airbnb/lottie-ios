@@ -8,6 +8,8 @@
 import CoreGraphics
 import Foundation
 
+// MARK: - AnyValueProvider
+
 /**
  `AnyValueProvider` is a protocol that return animation data for a property at a
  given time. Every frame an `AnimationView` queries all of its properties and asks
@@ -67,6 +69,8 @@ public enum ValueProviderStorage<T> {
   /// The value provider stores a closure that is invoked on every frame
   ///  - This is only supported by the legacy main-thread rendering engine
   case closure((AnimationFrameTime) -> T)
+
+  // MARK: Internal
 
   var isSingleValue: Bool {
     switch self {

@@ -4,6 +4,9 @@
 import QuartzCore
 
 extension CALayer {
+
+  // MARK: Internal
+
   /// Constructs a `CAKeyframeAnimation` that reflects the given keyframes,
   /// and adds it to this `CALayer`.
   func addAnimation<KeyframeValue, ValueRepresentation>(
@@ -122,6 +125,8 @@ extension CALayer {
 
     add(animation, timedWith: context)
   }
+
+  // MARK: Private
 
   /// A `CAAnimation` that applies the custom value from the `AnyValueProvider`
   /// registered for this specific property's `AnimationKeypath`,

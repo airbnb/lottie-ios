@@ -19,6 +19,8 @@ struct LayerProperty<ValueRepresentation> {
   let customizableProperty: CustomizableProperty<ValueRepresentation>?
 }
 
+// MARK: - CustomizableProperty
+
 /// A description of how a `CALayer` property can be customized dynamically
 /// at runtime using `AnimationView.setValueProvider(_:keypath:)`
 struct CustomizableProperty<ValueRepresentation> {

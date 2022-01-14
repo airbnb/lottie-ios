@@ -6,6 +6,8 @@ import EpoxyCollectionView
 import Lottie
 import UIKit
 
+// MARK: - ControlsDemoViewController
+
 final class ControlsDemoViewController: CollectionViewController {
 
   // MARK: Lifecycle
