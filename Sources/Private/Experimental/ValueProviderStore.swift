@@ -21,11 +21,9 @@ final class ValueProviderStore {
       "The new rendering engine currently does not support wildcard elements")
 
     // TODO: Support more value types
-    if keypath.keys.last != CustomizableProperty<CGColor>.color.name.last {
-      LottieLogger.shared.assertionFailure("""
-      The new rendering engine currently only supports customizing color values
-      """)
-    }
+    LottieLogger.shared.assert(
+      keypath.keys.last == CustomizableProperty<CGColor>.color.name.last,
+      "The new rendering engine currently only supports customizing color values")
 
     valueProviders[keypath] = valueProvider
   }
