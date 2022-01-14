@@ -9,7 +9,7 @@ import CoreGraphics
 import Foundation
 
 /// A `ValueProvider` that returns a Gradient Color Value.
-public final class GradientValueProvider: AnyValueProvider {
+public final class GradientValueProvider: ValueProvider {
 
   // MARK: Lifecycle
 
@@ -64,23 +64,25 @@ public final class GradientValueProvider: AnyValueProvider {
     [Double].self
   }
 
+  public var storage: ValueProviderStorage<[Double]> {
+    .closure { [self] frame in
+      hasUpdate = false
+
+      if let block = block {
+        let newColors = block(frame)
+        let newLocations = locationsBlock?(frame) ?? []
+        value = value(from: newColors, locations: newLocations)
+      }
+
+      return value
+    }
+  }
+
   public func hasUpdate(frame _: CGFloat) -> Bool {
     if block != nil || locationsBlock != nil {
       return true
     }
     return hasUpdate
-  }
-
-  public func value(frame: CGFloat) -> Any {
-    hasUpdate = false
-
-    if let block = block {
-      let newColors = block(frame)
-      let newLocations = locationsBlock?(frame) ?? []
-      value = value(from: newColors, locations: newLocations)
-    }
-
-    return value
   }
 
   // MARK: Private

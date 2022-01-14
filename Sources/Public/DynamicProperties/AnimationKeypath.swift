@@ -29,7 +29,7 @@ import Foundation
  @"**.Stroke 1.Color"
  Represents the color node for every Stroke named "Stroke 1" in the animation.
  */
-public struct AnimationKeypath {
+public struct AnimationKeypath: Hashable {
 
   /// Creates a keypath from a dot separated string. The string is separated by "."
   public init(keypath: String) {
@@ -41,6 +41,6 @@ public struct AnimationKeypath {
     self.keys = keys
   }
 
-  let keys: [String]
+  var keys: [String]
 
 }

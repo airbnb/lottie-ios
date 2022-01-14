@@ -11,7 +11,7 @@ import Foundation
 // MARK: - KeyframeInterpolator
 
 /// A value provider that produces a value at Time from a group of keyframes
-final class KeyframeInterpolator<ValueType>: AnyValueProvider where ValueType: Interpolatable {
+final class KeyframeInterpolator<ValueType>: ValueProvider where ValueType: Interpolatable {
 
   // MARK: Lifecycle
 
@@ -25,6 +25,37 @@ final class KeyframeInterpolator<ValueType>: AnyValueProvider where ValueType: I
 
   var valueType: Any.Type {
     ValueType.self
+  }
+
+  var storage: ValueProviderStorage<ValueType> {
+    .closure { [self] frame in
+      // First set the keyframe span for the frame.
+      updateSpanIndices(frame: frame)
+      lastUpdatedFrame = frame
+      // If only one keyframe return its value
+      let progress: CGFloat
+      let value: ValueType
+
+      if
+        let leading = leadingKeyframe,
+        let trailing = trailingKeyframe
+      {
+        /// We have leading and trailing keyframe.
+        progress = leading.interpolatedProgress(trailing, keyTime: frame)
+        value = leading.interpolate(trailing, progress: progress)
+      } else if let leading = leadingKeyframe {
+        progress = 0
+        value = leading.value
+      } else if let trailing = trailingKeyframe {
+        progress = 1
+        value = trailing.value
+      } else {
+        /// Satisfy the compiler.
+        progress = 0
+        value = keyframes[0].value
+      }
+      return value
+    }
   }
 
   /**
@@ -76,36 +107,6 @@ final class KeyframeInterpolator<ValueType>: AnyValueProvider where ValueType: I
       return false
     }
     return true
-  }
-
-  @discardableResult
-  func value(frame: CGFloat) -> Any {
-    // First set the keyframe span for the frame.
-    updateSpanIndices(frame: frame)
-    lastUpdatedFrame = frame
-    // If only one keyframe return its value
-    let progress: CGFloat
-    let value: ValueType
-
-    if
-      let leading = leadingKeyframe,
-      let trailing = trailingKeyframe
-    {
-      /// We have leading and trailing keyframe.
-      progress = leading.interpolatedProgress(trailing, keyTime: frame)
-      value = leading.interpolate(trailing, progress: progress)
-    } else if let leading = leadingKeyframe {
-      progress = 0
-      value = leading.value
-    } else if let trailing = trailingKeyframe {
-      progress = 1
-      value = trailing.value
-    } else {
-      /// Satisfy the compiler.
-      progress = 0
-      value = keyframes[0].value
-    }
-    return value
   }
 
   // MARK: Fileprivate

@@ -31,6 +31,7 @@ final class AnimatedSwitchRow: UIView, EpoxyableView {
     var title: String
     var onTimeRange: ClosedRange<CGFloat>
     var offTimeRange: ClosedRange<CGFloat>
+    var colorValueProviders: [String: Color] = [:]
   }
 
   func setContent(_ content: Content, animated _: Bool) {
@@ -87,6 +88,12 @@ final class AnimatedSwitchRow: UIView, EpoxyableView {
               fromProgress: content.onTimeRange.lowerBound,
               toProgress: content.onTimeRange.upperBound,
               forOnState: true)
+
+            for (keypath, color) in content.colorValueProviders {
+              context.constrainable.animationView.setValueProvider(
+                ColorValueProvider(color),
+                keypath: AnimationKeypath(keypath: keypath))
+            }
           })
       }
 

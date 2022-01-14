@@ -4,17 +4,25 @@
 import QuartzCore
 
 extension CALayer {
+
+  // MARK: Internal
+
   /// Constructs a `CAKeyframeAnimation` that reflects the given keyframes,
   /// and adds it to this `CALayer`.
   func addAnimation<KeyframeValue, ValueRepresentation>(
-    for keyPath: CAKeyPath<ValueRepresentation>,
+    for property: LayerProperty<ValueRepresentation>,
     keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
     value keyframeValueMapping: (KeyframeValue) -> ValueRepresentation,
     context: LayerAnimationContext)
   {
-    precondition(!keyframes.isEmpty, "Keyframes for \"\(keyPath.name)\" must be non-empty")
+    precondition(!keyframes.isEmpty, "Keyframes for \"\(property.caLayerKeypath)\" must be non-empty")
 
-    let animation = CAKeyframeAnimation(keyPath: keyPath.name)
+    if let customAnimation = customizedAnimation(for: property, context: context) {
+      add(customAnimation, timedWith: context)
+      return
+    }
+
+    let animation = CAKeyframeAnimation(keyPath: property.caLayerKeypath)
 
     // Animations using `isHold` should use `CAAnimationCalculationMode.discrete`
     //
@@ -116,6 +124,32 @@ extension CALayer {
     animation.timingFunctions = timingFunctions
 
     add(animation, timedWith: context)
+  }
+
+  // MARK: Private
+
+  /// A `CAAnimation` that applies the custom value from the `AnyValueProvider`
+  /// registered for this specific property's `AnimationKeypath`,
+  /// if one has been registered using `AnimationView.setValueProvider(_:keypath:)`.
+  private func customizedAnimation<ValueRepresentation>(
+    for property: LayerProperty<ValueRepresentation>,
+    context: LayerAnimationContext)
+    -> CAPropertyAnimation?
+  {
+    guard
+      let customizableProperty = property.customizableProperty,
+      let customValue = context.valueProviderStore.customValue(
+        of: customizableProperty,
+        for: AnimationKeypath(keys: context.currentKeypath.keys + customizableProperty.name.map { $0.rawValue }))
+    else { return nil }
+
+    // Build a `CAAnimation` that sets the `caLayerKeypath` to the custom value.
+    // The simplest way to do this it to just create a `CABasicAnimation` that
+    // uses `customValue` as both the initial and final value.
+    let animation = CABasicAnimation(keyPath: property.caLayerKeypath)
+    animation.fromValue = customValue
+    animation.toValue = customValue
+    return animation
   }
 
 }

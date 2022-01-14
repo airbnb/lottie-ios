@@ -1,6 +1,8 @@
 // Created by Cal Stephens on 12/15/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
+import Lottie
+
 // MARK: - SnapshotConfiguration
 
 /// Snapshot configuration for an individual test case
@@ -16,6 +18,9 @@ struct SnapshotConfiguration {
   ///  - Defaults to false, since the experimental rendering engine
   ///    currently supports a relatively small number of animations.
   var testWithExperimentalRenderingEngine = false
+
+  /// Dynamic value providers that should be applied to the animation
+  var customValueProviders: [AnimationKeypath: AnyValueProvider] = [:]
 }
 
 // MARK: Custom mapping
@@ -37,7 +42,6 @@ extension SnapshotConfiguration {
     "LottieLogo1": .testWithExperimentalRenderingEngine,
     "LottieLogo1_masked": .testWithExperimentalRenderingEngine,
     "MotionCorpse_Jrcanest": .testWithExperimentalRenderingEngine,
-    "Switch": .testWithExperimentalRenderingEngine,
     "Switch_States": .testWithExperimentalRenderingEngine,
     "TwitterHeart": .testWithExperimentalRenderingEngine,
     "TwitterHeartButton": .testWithExperimentalRenderingEngine,
@@ -79,6 +83,16 @@ extension SnapshotConfiguration {
     "LottieFiles/gradient_shapes": .testWithExperimentalRenderingEngine,
     "TypeFace/H": .testWithExperimentalRenderingEngine,
     "TypeFace/O": .testWithExperimentalRenderingEngine,
+
+    /// Test cases for the `AnimationKeypath` / `AnyValueProvider` system
+    "Switch": .init(
+      testWithExperimentalRenderingEngine: true,
+      customValueProviders: [
+        AnimationKeypath(keypath: "Switch Outline Outlines.Fill 1.Color"): ColorValueProvider(.black),
+        AnimationKeypath(keypath: "Checkmark Outlines.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
+        AnimationKeypath(keypath: "Checkmark Outlines 2.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
+        AnimationKeypath(keypath: "X Outlines.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
+      ]),
   ]
 }
 
@@ -114,5 +128,13 @@ extension SnapshotConfiguration {
     var configuration = SnapshotConfiguration.default
     configuration.precision = precision
     return configuration
+  }
+}
+
+// MARK: - Color helpers
+
+extension Color {
+  static var black: Color {
+    .init(r: 0, g: 0, b: 0, a: 1)
   }
 }

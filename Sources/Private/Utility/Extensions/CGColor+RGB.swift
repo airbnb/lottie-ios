@@ -14,4 +14,9 @@ extension CGColor {
         components: [red, green, blue])!
     }
   }
+
+  /// Initializes a `CGColor` using the given `RGBA` values
+  static func rgba(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat) -> CGColor {
+    CGColor.rgb(red, green, blue).copy(alpha: alpha)!
+  }
 }

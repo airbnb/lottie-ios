@@ -9,7 +9,7 @@ import CoreGraphics
 import Foundation
 
 /// A `ValueProvider` that returns a CGColor Value
-public final class ColorValueProvider: AnyValueProvider {
+public final class ColorValueProvider: ValueProvider {
 
   // MARK: Lifecycle
 
@@ -44,22 +44,23 @@ public final class ColorValueProvider: AnyValueProvider {
     Color.self
   }
 
+  public var storage: ValueProviderStorage<Color> {
+    if let block = block {
+      return .closure { frame in
+        self.hasUpdate = false
+        return block(frame)
+      }
+    } else {
+      hasUpdate = false
+      return .singleValue(color)
+    }
+  }
+
   public func hasUpdate(frame _: CGFloat) -> Bool {
     if block != nil {
       return true
     }
     return hasUpdate
-  }
-
-  public func value(frame: CGFloat) -> Any {
-    hasUpdate = false
-    let newColor: Color
-    if let block = block {
-      newColor = block(frame)
-    } else {
-      newColor = color
-    }
-    return newColor
   }
 
   // MARK: Private

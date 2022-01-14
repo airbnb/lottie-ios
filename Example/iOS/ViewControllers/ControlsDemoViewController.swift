@@ -6,6 +6,8 @@ import EpoxyCollectionView
 import Lottie
 import UIKit
 
+// MARK: - ControlsDemoViewController
+
 final class ControlsDemoViewController: CollectionViewController {
 
   // MARK: Lifecycle
@@ -32,6 +34,20 @@ final class ControlsDemoViewController: CollectionViewController {
         onTimeRange: 0.5...1.0,
         offTimeRange: 0.0...0.5))
 
+    AnimatedSwitchRow.itemModel(
+      dataID: "Switch (Custom Colors)",
+      content: .init(
+        animationName: "Samples/Switch",
+        title: "Switch (Custom Colors)",
+        onTimeRange: 0.5...1.0,
+        offTimeRange: 0.0...0.5,
+        colorValueProviders: [
+          "Switch Outline Outlines.Fill 1.Color": .black,
+          "Checkmark Outlines.Group 1.Stroke 1.Color": .black,
+          "Checkmark Outlines 2.Group 1.Stroke 1.Color": .black,
+          "X Outlines.Group 1.Stroke 1.Color": .black,
+        ]))
+
     AnimatedButtonRow.itemModel(
       dataID: "Button",
       content: .init(
@@ -44,4 +60,10 @@ final class ControlsDemoViewController: CollectionViewController {
         ]))
   }
 
+}
+
+extension Color {
+  static var black: Color {
+    .init(r: 0, g: 0, b: 0, a: 1)
+  }
 }

@@ -3,25 +3,6 @@
 
 import QuartzCore
 
-// MARK: - LayerAnimationContext
-
-// Context describing the timing parameters of the current animation
-struct LayerAnimationContext {
-  /// The animation being played
-  let animation: Animation
-
-  /// The timing configuration that should be applied to `CAAnimation`s
-  let timingConfiguration: ExperimentalAnimationLayer.CAMediaTimingConfiguration
-
-  /// The absolute frame number that this animation begins at
-  let startFrame: AnimationFrameTime
-
-  /// The absolute frame number that this animation ends at
-  let endFrame: AnimationFrameTime
-}
-
-// MARK: - CAAnimation + LayerAnimationContext
-
 extension CAAnimation {
   /// Creates a `CAAnimation` that wraps this animation,
   /// applying timing-related configuration from the given `LayerAnimationContext`
@@ -84,8 +65,6 @@ extension CAAnimation {
     return clippingParent
   }
 }
-
-// MARK: - CALayer + addTimedAnimation
 
 extension CALayer {
   /// Adds the given animation to this layer, timed with the given timing configuration

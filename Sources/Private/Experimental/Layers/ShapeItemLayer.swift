@@ -15,19 +15,16 @@ final class ShapeItemLayer: CALayer {
   /// - Parameters:
   ///   - shape: The `ShapeItem` in this group that renders a `GGPath`
   ///   - otherItems: Other items in this group that affect the appearance of the shape
-  init(
-    shape: ShapeItem,
-    otherItems: [ShapeItem])
-  {
+  init(shape: Item, otherItems: [Item]) {
     self.shape = shape
     self.otherItems = otherItems
 
     LottieLogger.shared.assert(
-      shape.drawsCGPath,
+      shape.item.drawsCGPath,
       "`ShapeItemLayer` must contain exactly one `ShapeItem` that draws a `GPPath`")
 
     LottieLogger.shared.assert(
-      !otherItems.contains(where: { $0.drawsCGPath }),
+      !otherItems.contains(where: { $0.item.drawsCGPath }),
       "`ShapeItemLayer` must contain exactly one `ShapeItem` that draws a `GPPath`")
 
     super.init()
@@ -52,6 +49,15 @@ final class ShapeItemLayer: CALayer {
   }
 
   // MARK: Internal
+
+  /// An item that can be displayed by this layer
+  struct Item {
+    /// A `ShapeItem` that should be rendered by this layer
+    let item: ShapeItem
+
+    /// The group that contains this `ShapeItem`, if applicable
+    let parentGroup: Group?
+  }
 
   override func layoutSublayers() {
     super.layoutSublayers()
@@ -82,10 +88,10 @@ final class ShapeItemLayer: CALayer {
   }
 
   /// The `ShapeItem` in this group that renders a `GGPath`
-  private let shape: ShapeItem
+  private let shape: Item
 
   /// Other items in this group that affect the appearance of the shape
-  private let otherItems: [ShapeItem]
+  private let otherItems: [Item]
 
   /// The current configuration of this layer's sublayer(s)
   private var sublayerConfiguration: SublayerConfiguration?
@@ -94,7 +100,7 @@ final class ShapeItemLayer: CALayer {
     // We have to build a different layer hierarchy depending on if
     // we're rendering a gradient (a `CAGradientLayer` masked by a `CAShapeLayer`)
     // or a solid shape (a simple `CAShapeLayer`).
-    if otherItems.first(GradientFill.self) != nil {
+    if otherItems.contains(where: { $0.item is GradientFill }) {
       setupGradientFillLayerHierarchy()
     } else {
       setupSolidFillLayerHierarchy()
@@ -107,7 +113,7 @@ final class ShapeItemLayer: CALayer {
 
     // `CAShapeLayer.fillColor` defaults to black, so we have to
     // nil out the background color if there isn't an expected fill color
-    if otherItems.first(Fill.self) == nil {
+    if !otherItems.contains(where: { $0.item is Fill }) {
       shapeLayer.fillColor = nil
     }
 
@@ -136,7 +142,7 @@ extension ShapeItemLayer: AnimationLayer {
   func setupAnimations(context: LayerAnimationContext) {
     guard let sublayerConfiguration = sublayerConfiguration else { return }
 
-    if let shapeTransform = otherItems.first(ShapeTransform.self) {
+    if let (shapeTransform, context) = otherItems.first(ShapeTransform.self, context: context) {
       addTransformAnimations(for: shapeTransform, context: context)
       addOpacityAnimation(from: shapeTransform, context: context)
     }
@@ -156,17 +162,17 @@ extension ShapeItemLayer: AnimationLayer {
     shapeLayer: CAShapeLayer,
     context: LayerAnimationContext)
   {
-    shapeLayer.addAnimations(for: shape, context: context)
+    shapeLayer.addAnimations(for: shape.item, context: context.for(shape))
 
-    if let fill = otherItems.first(Fill.self) {
+    if let (fill, context) = otherItems.first(Fill.self, context: context) {
       shapeLayer.addAnimations(for: fill, context: context)
     }
 
-    if let stroke = otherItems.first(Stroke.self) {
+    if let (stroke, context) = otherItems.first(Stroke.self, context: context) {
       shapeLayer.addAnimations(for: stroke, context: context)
     }
 
-    if let trim = otherItems.first(Trim.self) {
+    if let (trim, context) = otherItems.first(Trim.self, context: context) {
       shapeLayer.addAnimations(for: trim, context: context)
     }
   }
@@ -176,9 +182,9 @@ extension ShapeItemLayer: AnimationLayer {
     maskLayer: CAShapeLayer,
     context: LayerAnimationContext)
   {
-    maskLayer.addAnimations(for: shape, context: context)
+    maskLayer.addAnimations(for: shape.item, context: context.for(shape))
 
-    if let gradientFill = otherItems.first(GradientFill.self) {
+    if let (gradientFill, context) = otherItems.first(GradientFill.self, context: context) {
       gradientLayer.addAnimations(for: gradientFill, context: context)
     }
   }
@@ -187,15 +193,33 @@ extension ShapeItemLayer: AnimationLayer {
 
 // MARK: - [ShapeItem] helpers
 
-extension Array where Element == ShapeItem {
+extension Array where Element == ShapeItemLayer.Item {
   /// The first `ShapeItem` in this array of the given type
-  fileprivate func first<Item: ShapeItem>(_: Item.Type) -> Item? {
+  fileprivate func first<ItemType: ShapeItem>(
+    _: ItemType.Type, context: LayerAnimationContext)
+    -> (item: ItemType, context: LayerAnimationContext)?
+  {
     for item in self {
-      if let match = item as? Item {
-        return match
+      if let match = item.item as? ItemType {
+        return (match, context.for(item))
       }
     }
 
     return nil
+  }
+}
+
+extension LayerAnimationContext {
+  /// An updated `LayerAnimationContext` with the`AnimationKeypath`
+  /// that refers to this specific `ShapeItem`.
+  fileprivate func `for`(_ item: ShapeItemLayer.Item) -> LayerAnimationContext {
+    var context = self
+
+    if let group = item.parentGroup {
+      context.currentKeypath.keys.append(group.name)
+    }
+
+    context.currentKeypath.keys.append(item.item.name)
+    return context
   }
 }

@@ -42,6 +42,11 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
   /// and all child `AnimationLayer`s.
   ///  - Can be overridden by subclasses, which much call `super`.
   func setupAnimations(context: LayerAnimationContext) {
+    var context = context
+    if renderLayerContents {
+      context = context.addingKeypathComponent(baseLayerModel.name)
+    }
+
     addTransformAnimations(for: baseLayerModel.transform, context: context)
 
     if renderLayerContents {

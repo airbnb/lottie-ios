@@ -17,19 +17,23 @@ final class ShapeLayer: BaseCompositionLayer {
     // Each top-level `Group` item becomes its own `ShapeItemLayer` sublayer.
     // Other top-level `ShapeItem`s are applied to all sublayers.
     let groupItems = shapeLayer.items.compactMap { $0 as? Group }
-    let otherItems = shapeLayer.items.filter { !($0 is Group) }
+
+    let otherItems = shapeLayer.items
+      .filter { !($0 is Group) }
+      .map { ShapeItemLayer.Item(item: $0, parentGroup: nil) }
 
     // Groups are listed from front to back,
     // but `CALayer.sublayers` are listed from back to front.
     let groupsInZAxisOrder = groupItems.reversed()
 
     for group in groupsInZAxisOrder {
-      let itemsInGroup = group.items + otherItems
+      let itemsInGroup = group.items.map { ShapeItemLayer.Item(item: $0, parentGroup: group) }
+        + otherItems
 
       // Each `ShapeItemLayer` can only render a single `ShapeItem` that draws a `GGPath`,
       // so we create a separate `ShapeItemLayer` for each path-drawing `ShapeItem`.
-      let pathDrawingItemsInGroup = itemsInGroup.filter { $0.drawsCGPath }
-      let otherItemsInGroup = itemsInGroup.filter { !$0.drawsCGPath }
+      let pathDrawingItemsInGroup = itemsInGroup.filter { $0.item.drawsCGPath }
+      let otherItemsInGroup = itemsInGroup.filter { !$0.item.drawsCGPath }
 
       for pathDrawingItem in pathDrawingItemsInGroup {
         let sublayer = ShapeItemLayer(shape: pathDrawingItem, otherItems: otherItemsInGroup)
