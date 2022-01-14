@@ -7,6 +7,10 @@
 /// to change or be removed at any time.
 public struct ExperimentalFeatureConfiguration {
 
+  public init(useNewRenderingEngine: Bool = false) {
+    self.useNewRenderingEngine = useNewRenderingEngine
+  }
+
   /// The singleton configuration for experimental features,
   /// which applies to all `AnimationView`s by default.
   public static var shared = ExperimentalFeatureConfiguration()
@@ -15,9 +19,5 @@ public struct ExperimentalFeatureConfiguration {
   /// which leverages the Core Animation render server to
   /// animate without executing on the main thread every frame.
   public var useNewRenderingEngine: Bool
-
-  public init(useNewRenderingEngine: Bool = false) {
-    self.useNewRenderingEngine = useNewRenderingEngine
-  }
 
 }
