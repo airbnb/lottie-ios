@@ -25,6 +25,10 @@ struct LayerProperty<ValueRepresentation> {
 /// at runtime using `AnimationView.setValueProvider(_:keypath:)`
 struct CustomizableProperty<ValueRepresentation> {
   /// The name that `AnimationKeypath`s can use to refer to this property
+  ///  - When building an animation for this property that will be applied
+  ///    to a specific layer, this `name` is appended to the end of that
+  ///    layer's `AnimationKeypath`. The combined keypath is used to query
+  ///    the `ValueProviderStore`.
   let name: [String]
 
   /// A closure that coverts the type-erased value of an `AnyValueProvider`
@@ -165,8 +169,7 @@ extension CustomizableProperty {
     .init(
       name: ["Color"],
       conversion: { typeErasedValue in
-        guard let color = typeErasedValue as? Color else { return nil }
-        return .rgba(CGFloat(color.r), CGFloat(color.g), CGFloat(color.b), CGFloat(color.a))
+        (typeErasedValue as? Color)?.cgColorValue
       })
   }
 }

@@ -75,8 +75,6 @@ extension Color {
   }
 
   var cgColorValue: CGColor {
-    // TODO: Fix color spaces
-    let colorspace = CGColorSpaceCreateDeviceRGB()
-    return CGColor(colorSpace: colorspace, components: [CGFloat(r), CGFloat(g), CGFloat(b), CGFloat(a)]) ?? Color.clearColor
+    .rgba(CGFloat(r), CGFloat(g), CGFloat(b), CGFloat(a))
   }
 }

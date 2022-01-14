@@ -143,9 +143,10 @@ extension CALayer {
         for: AnimationKeypath(keys: context.currentKeypath.keys + customizableProperty.name))
     else { return nil }
 
-    let animation = CABasicAnimation(keyPath: property.caLayerKeypath)
-    animation.fromValue = customValue
-    animation.toValue = customValue
+    let animation = CAKeyframeAnimation(keyPath: property.caLayerKeypath)
+    animation.calculationMode = .discrete
+    animation.values = [customValue]
+    animation.keyTimes = [0, 1]
     return animation
   }
 
