@@ -165,6 +165,10 @@ extension LayerProperty {
 // MARK: - CustomizableProperty types
 
 extension CustomizableProperty {
+  // TODO: It would be nice to have a shared definition (maybe an enum?)
+  // of the property names that is used by both the old and new rendering
+  // engine, so we have a single source of truth for those values
+  // (e.g. "Color", "Transform", "Scale").
   static var color: CustomizableProperty<CGColor> {
     .init(
       name: ["Color"],
