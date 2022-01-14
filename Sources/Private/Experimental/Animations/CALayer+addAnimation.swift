@@ -140,7 +140,7 @@ extension CALayer {
       let customizableProperty = property.customizableProperty,
       let customValue = context.valueProviderStore.customValue(
         of: customizableProperty,
-        for: AnimationKeypath(keys: context.currentKeypath.keys + customizableProperty.name))
+        for: AnimationKeypath(keys: context.currentKeypath.keys + customizableProperty.name.map { $0.rawValue }))
     else { return nil }
 
     let animation = CAKeyframeAnimation(keyPath: property.caLayerKeypath)

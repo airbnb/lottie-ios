@@ -22,7 +22,7 @@ final class ValueProviderStore {
 
     // TODO: Support more value types
     LottieLogger.shared.assert(
-      keypath.keys.last == CustomizableProperty<CGColor>.color.name.last,
+      keypath.keys.last == PropertyName.color.rawValue,
       "The new rendering engine currently only supports customizing color values")
 
     valueProviders[keypath] = valueProvider

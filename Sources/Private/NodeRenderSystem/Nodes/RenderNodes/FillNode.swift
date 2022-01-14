@@ -21,7 +21,7 @@ final class FillNodeProperties: NodePropertyMap, KeypathSearchable {
     type = fill.fillRule
     keypathProperties = [
       "Opacity" : opacity,
-      "Color" : color,
+      PropertyName.color.rawValue : color,
     ]
     properties = Array(keypathProperties.values)
   }

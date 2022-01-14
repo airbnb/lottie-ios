@@ -29,11 +29,20 @@ struct CustomizableProperty<ValueRepresentation> {
   ///    to a specific layer, this `name` is appended to the end of that
   ///    layer's `AnimationKeypath`. The combined keypath is used to query
   ///    the `ValueProviderStore`.
-  let name: [String]
+  let name: [PropertyName]
 
   /// A closure that coverts the type-erased value of an `AnyValueProvider`
   /// to the strongly-typed representation used by this property, if possible.
   let conversion: (Any) -> ValueRepresentation?
+}
+
+// MARK: - PropertyName
+
+/// The name of a customizable property that can be used in an `AnimationKeypath`
+///  - These values should be shared between the two rendering engines,
+///    since they form the public API of the `AnimationKeypath` system.
+enum PropertyName: String {
+  case color = "Color"
 }
 
 // MARK: CALayer properties
@@ -165,15 +174,15 @@ extension LayerProperty {
 // MARK: - CustomizableProperty types
 
 extension CustomizableProperty {
-  // TODO: It would be nice to have a shared definition (maybe an enum?)
-  // of the property names that is used by both the old and new rendering
-  // engine, so we have a single source of truth for those values
-  // (e.g. "Color", "Transform", "Scale").
   static var color: CustomizableProperty<CGColor> {
     .init(
-      name: ["Color"],
+      name: [.color],
       conversion: { typeErasedValue in
-        (typeErasedValue as? Color)?.cgColorValue
+        guard let color = typeErasedValue as? Color else {
+          return nil
+        }
+
+        return .rgba(CGFloat(color.r), CGFloat(color.g), CGFloat(color.b), CGFloat(color.a))
       })
   }
 }
