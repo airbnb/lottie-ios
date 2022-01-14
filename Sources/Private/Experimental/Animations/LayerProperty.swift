@@ -164,7 +164,7 @@ extension CustomizableProperty {
       name: ["Color"],
       conversion: { typeErasedValue in
         guard let color = typeErasedValue as? Color else { return nil }
-        return .rgba(color.r, color.g, color.b, color.a)
+        return .rgba(CGFloat(color.r), CGFloat(color.g), CGFloat(color.b), CGFloat(color.a))
       })
   }
 }
