@@ -43,7 +43,13 @@ final class ValueProviderStore {
 
     switch anyValueProvider.typeErasedStorage {
     case .singleValue(let typeErasedValue):
-      return customizableProperty.conversion(typeErasedValue)
+      let convertedValue = customizableProperty.conversion(typeErasedValue)
+
+      LottieLogger.shared.assert(
+        convertedValue != nil,
+        "Could not convert value of type \(type(of: typeErasedValue)) to expected type \(Value.self)")
+
+      return convertedValue
 
     case .closure:
       LottieLogger.shared.assertionFailure("""
