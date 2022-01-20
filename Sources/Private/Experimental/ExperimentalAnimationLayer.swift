@@ -123,6 +123,13 @@ final class ExperimentalAnimationLayer: CALayer {
   // Configuration for the animation that is currently setup in this layer
   private var currentAnimationConfiguration: AnimationConfiguration?
 
+  /// The current progress of the placeholder `CAAnimation`,
+  /// which is also the realtime animation progress of this layer's animation
+  @objc private var animationProgress: CGFloat = 0
+
+  private let animation: Animation
+  private let valueProviderStore = ValueProviderStore()
+
   // The current state of the animation that is playing in this layer
   private var playbackState: PlaybackState? {
     didSet {
@@ -134,13 +141,6 @@ final class ExperimentalAnimationLayer: CALayer {
       }
     }
   }
-
-  /// The current progress of the placeholder `CAAnimation`,
-  /// which is also the realtime animation progress of this layer's animation
-  @objc private var animationProgress: CGFloat = 0
-
-  private let animation: Animation
-  private let valueProviderStore = ValueProviderStore()
 
   private func setup() {
     bounds = animation.bounds
