@@ -57,7 +57,7 @@ final class ExperimentalAnimationLayer: CALayer {
     // Remove any existing animations from the layer hierarchy
     removeAnimations()
 
-    playbackState = .realtime
+    playbackState = .playing
 
     currentAnimationConfiguration = AnimationConfiguration(
       animationContext: context,
@@ -115,9 +115,9 @@ final class ExperimentalAnimationLayer: CALayer {
 
   private enum PlaybackState: Equatable {
     /// The animation is playing in real-time
-    case realtime
+    case playing
     /// The animation is statically displaying a specific frame
-    case specificFrame(AnimationFrameTime)
+    case paused(frame: AnimationFrameTime)
   }
 
   // Configuration for the animation that is currently setup in this layer
@@ -130,13 +130,15 @@ final class ExperimentalAnimationLayer: CALayer {
   private let animation: Animation
   private let valueProviderStore = ValueProviderStore()
 
-  // The current state of the animation that is playing in this layer
+  // The current playback state of the animation that is displayed in this layer
   private var playbackState: PlaybackState? {
     didSet {
+      guard playbackState != oldValue else { return }
+
       switch playbackState {
-      case .realtime, nil:
+      case .playing, nil:
         timeOffset = 0
-      case .specificFrame(let frame):
+      case .paused(let frame):
         timeOffset = animation.time(forFrame: frame)
       }
     }
@@ -178,10 +180,10 @@ final class ExperimentalAnimationLayer: CALayer {
     removeAnimations()
 
     switch playbackState {
-    case .specificFrame(let frame):
+    case .paused(let frame):
       currentFrame = frame
 
-    case .realtime:
+    case .playing:
       setupAnimation(
         context: currentConfiguration.animationContext,
         timingConfiguration: currentConfiguration.timingConfiguration)
@@ -201,9 +203,9 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
   var currentFrame: AnimationFrameTime {
     get {
       switch playbackState {
-      case .realtime, nil:
+      case .playing, nil:
         return animation.frameTime(forProgress: (presentation() ?? self).animationProgress)
-      case .specificFrame(let frame):
+      case .paused(let frame):
         return frame
       }
     }
@@ -226,7 +228,7 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
           timingConfiguration: requiredAnimationConfiguration.timingConfiguration)
       }
 
-      playbackState = .specificFrame(newValue)
+      playbackState = .paused(frame: newValue)
     }
   }
 
