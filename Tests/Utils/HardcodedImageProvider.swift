@@ -12,7 +12,7 @@ import UIKit
 struct HardcodedImageProvider: AnimationImageProvider {
   func imageForAsset(asset _: ImageAsset) -> CGImage? {
     #if os(iOS)
-    UIImage(named: "Samples/Images/dog.png", in: .module, compatibleWith: nil)?.cgImage
+    return UIImage(named: "Samples/Images/dog.png", in: .module, compatibleWith: nil)?.cgImage
     #else
     return nil
     #endif
