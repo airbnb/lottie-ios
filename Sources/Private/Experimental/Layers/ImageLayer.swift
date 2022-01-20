@@ -32,6 +32,8 @@ final class ImageLayer: BaseCompositionLayer {
     super.init(layer: typedLayer)
   }
 
+  // MARK: Internal
+
   func setupImage(context: LayerContext) {
     guard
       let imageAsset = context.assetLibrary?.imageAssets[imageLayer.referenceID],
