@@ -146,6 +146,7 @@ class SnapshotTests: XCTestCase {
       for percent in progressPercentagesToSnapshot {
         let animationView = AnimationView(
           animation: animation,
+          imageProvider: configuration.customImageProvider,
           _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration(
             useNewRenderingEngine: usingExperimentalRenderingEngine))
 
