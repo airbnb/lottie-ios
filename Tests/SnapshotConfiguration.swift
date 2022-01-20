@@ -100,7 +100,7 @@ extension SnapshotConfiguration {
     // Test cases for `AnimatedImageProvider`
     "Nonanimating/_dog": .init(
       testWithExperimentalRenderingEngine: true,
-      customImageProvider: HardcodedImageProvider()),
+      customImageProvider: HardcodedImageProvider(imageName: "Samples/Images/dog.png")),
   ]
 }
 

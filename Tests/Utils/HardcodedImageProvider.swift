@@ -11,9 +11,11 @@ import UIKit
 
 /// An `AnimationImageProvider` that always returns a specific hardcoded image of a dog (hi Marley)
 struct HardcodedImageProvider: AnimationImageProvider {
+  let imageName: String
+
   func imageForAsset(asset _: ImageAsset) -> CGImage? {
     #if os(iOS)
-    return UIImage(named: "Samples/Images/dog.png", in: .module, compatibleWith: nil)?.cgImage
+    return UIImage(named: imageName, in: .module, compatibleWith: nil)?.cgImage
     #else
     return nil
     #endif

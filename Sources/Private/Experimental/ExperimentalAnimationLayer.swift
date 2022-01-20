@@ -53,7 +53,19 @@ final class ExperimentalAnimationLayer: CALayer {
     var timeOffset: TimeInterval = 0
   }
 
-  var imageProvider: AnimationImageProvider
+  /// The `AnimationImageProvider` that `ImageLayer`s use to retrieve images,
+  /// referenced by name in the animation json.
+  var imageProvider: AnimationImageProvider {
+    didSet {
+      // When the image provider changes, we have to update all `ImageLayer`s
+      // so they can query the most up-to-date image from the new image provider.
+      for sublayer in allSublayers {
+        if let imageLayer = sublayer as? ImageLayer {
+          imageLayer.setupImage(context: layerContext)
+        }
+      }
+    }
+  }
 
   /// Sets up `CAAnimation`s for each `AnimationLayer` in the layer hierarchy,
   /// playing from `currentFrame`.
@@ -151,6 +163,13 @@ final class ExperimentalAnimationLayer: CALayer {
     }
   }
 
+  /// Context used when setting up and configuring sublayers
+  private var layerContext: LayerContext {
+    LayerContext(
+      assetLibrary: animation.assetLibrary,
+      imageProvider: imageProvider)
+  }
+
   private func setup() {
     bounds = animation.bounds
   }
@@ -158,9 +177,7 @@ final class ExperimentalAnimationLayer: CALayer {
   private func setupChildLayers() {
     setupLayerHierarchy(
       for: animation.layers,
-      context: LayerContext(
-        assetLibrary: animation.assetLibrary,
-        imageProvider: imageProvider))
+      context: layerContext)
   }
 
   /// Sets up a placeholder `CABasicAnimation` that tracks the current
