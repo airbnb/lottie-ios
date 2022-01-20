@@ -67,8 +67,14 @@ final class SampleListViewController: CollectionViewController {
       .map { $0.lastPathComponent.replacingOccurrences(of: ".json", with: "") }
       .sorted(by: { $0.localizedCompare($1) == .orderedAscending })
       .map { (name: $0, path: "\(directory)/\($0)") }
-      .map { animationName, animationPath in
-        LinkView.itemModel(
+      .compactMap { animationName, animationPath in
+        // Samples can be excluded from the example app directory
+        // by prefixing their filename with an _
+        if animationName.hasPrefix("_") {
+          return nil
+        }
+
+        return LinkView.itemModel(
           dataID: animationName,
           content: .init(
             animationName: animationPath,

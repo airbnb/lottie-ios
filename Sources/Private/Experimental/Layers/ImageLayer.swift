@@ -14,7 +14,7 @@ final class ImageLayer: BaseCompositionLayer {
   {
     self.imageLayer = imageLayer
     super.init(layerModel: imageLayer)
-    setupSublayers(context: context)
+    setupImage(context: context)
   }
 
   required init?(coder _: NSCoder) {
@@ -32,17 +32,22 @@ final class ImageLayer: BaseCompositionLayer {
     super.init(layer: typedLayer)
   }
 
-  // MARK: Private
+  // MARK: Internal
 
-  private let imageLayer: ImageLayerModel
-
-  private func setupSublayers(context: LayerContext) {
+  func setupImage(context: LayerContext) {
     guard
       let imageAsset = context.assetLibrary?.imageAssets[imageLayer.referenceID],
       let image = context.imageProvider.imageForAsset(asset: imageAsset)
-    else { return }
+    else {
+      contents = nil
+      return
+    }
 
     contents = image
   }
+
+  // MARK: Private
+
+  private let imageLayer: ImageLayerModel
 
 }

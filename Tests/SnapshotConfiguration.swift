@@ -21,6 +21,9 @@ struct SnapshotConfiguration {
 
   /// Dynamic value providers that should be applied to the animation
   var customValueProviders: [AnimationKeypath: AnyValueProvider] = [:]
+
+  /// A custom `AnimationImageProvider` to use when rendering this animation
+  var customImageProvider: AnimationImageProvider?
 }
 
 // MARK: Custom mapping
@@ -93,6 +96,11 @@ extension SnapshotConfiguration {
         AnimationKeypath(keypath: "Checkmark Outlines 2.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
         AnimationKeypath(keypath: "X Outlines.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
       ]),
+
+    // Test cases for `AnimatedImageProvider`
+    "Nonanimating/_dog": .init(
+      testWithExperimentalRenderingEngine: true,
+      customImageProvider: HardcodedImageProvider(imageName: "Samples/Images/dog.png")),
   ]
 }
 

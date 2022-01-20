@@ -29,6 +29,12 @@ class SnapshotTests: XCTestCase {
   /// Validates that all of the snapshots in __Snapshots__ correspond to
   /// a sample JSON file that is visible to this test target.
   func testAllSnapshotsHaveCorrespondingSampleFile() {
+    // We don't want assertions to crash the tests, so we stub out the shared logger singleton
+    LottieLogger.shared = LottieLogger(
+      assert: { _, _, _, _ in },
+      assertionFailure: { _, _, _ in },
+      warn: { _, _, _ in })
+
     for snapshotURL in snapshotURLs {
       // The snapshot files follow the format `testCaseName.animationName-percentage.png`
       //  - We remove the known prefix and known suffixes to recover the input file name
@@ -158,6 +164,10 @@ class SnapshotTests: XCTestCase {
 
         for (keypath, customValueProvider) in configuration.customValueProviders {
           animationView.setValueProvider(customValueProvider, keypath: keypath)
+        }
+
+        if let customImageProvider = configuration.customImageProvider {
+          animationView.imageProvider = customImageProvider
         }
 
         assertSnapshot(

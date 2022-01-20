@@ -13,8 +13,12 @@ final class ExperimentalAnimationLayer: CALayer {
 
   // MARK: Lifecycle
 
-  init(animation: Animation) {
+  init(
+    animation: Animation,
+    imageProvider: AnimationImageProvider)
+  {
     self.animation = animation
+    self.imageProvider = imageProvider
     super.init()
 
     setup()
@@ -30,6 +34,7 @@ final class ExperimentalAnimationLayer: CALayer {
 
     animation = typedLayer.animation
     currentAnimationConfiguration = typedLayer.currentAnimationConfiguration
+    imageProvider = typedLayer.imageProvider
     super.init(layer: typedLayer)
   }
 
@@ -46,6 +51,20 @@ final class ExperimentalAnimationLayer: CALayer {
     var repeatCount: Float = 0
     var speed: Float = 1
     var timeOffset: TimeInterval = 0
+  }
+
+  /// The `AnimationImageProvider` that `ImageLayer`s use to retrieve images,
+  /// referenced by name in the animation json.
+  var imageProvider: AnimationImageProvider {
+    didSet {
+      // When the image provider changes, we have to update all `ImageLayer`s
+      // so they can query the most up-to-date image from the new image provider.
+      for sublayer in allSublayers {
+        if let imageLayer = sublayer as? ImageLayer {
+          imageLayer.setupImage(context: layerContext)
+        }
+      }
+    }
   }
 
   /// Sets up `CAAnimation`s for each `AnimationLayer` in the layer hierarchy,
@@ -144,6 +163,13 @@ final class ExperimentalAnimationLayer: CALayer {
     }
   }
 
+  /// Context used when setting up and configuring sublayers
+  private var layerContext: LayerContext {
+    LayerContext(
+      assetLibrary: animation.assetLibrary,
+      imageProvider: imageProvider)
+  }
+
   private func setup() {
     bounds = animation.bounds
   }
@@ -151,9 +177,7 @@ final class ExperimentalAnimationLayer: CALayer {
   private func setupChildLayers() {
     setupLayerHierarchy(
       for: animation.layers,
-      context: LayerContext(
-        assetLibrary: animation.assetLibrary,
-        imageProvider: imageProvider))
+      context: layerContext)
   }
 
   /// Sets up a placeholder `CABasicAnimation` that tracks the current
@@ -244,11 +268,6 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
 
   var _animationLayers: [CALayer] {
     (sublayers ?? []).filter { $0 is AnimationLayer }
-  }
-
-  var imageProvider: AnimationImageProvider {
-    get { BundleImageProvider(bundle: Bundle.main, searchPath: nil) }
-    set { LottieLogger.shared.assertionFailure("Setting `imageProvider` is currently unsupported") }
   }
 
   var textProvider: AnimationTextProvider {
