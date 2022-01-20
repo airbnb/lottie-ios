@@ -2,6 +2,7 @@
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
 import Lottie
+import QuartzCore
 #if os(iOS)
 import UIKit
 #endif
