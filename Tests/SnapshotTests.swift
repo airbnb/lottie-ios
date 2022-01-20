@@ -149,21 +149,16 @@ class SnapshotTests: XCTestCase {
           _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration(
             useNewRenderingEngine: usingExperimentalRenderingEngine))
 
-        // TODO: If we move this below where we set `animationView.currentProgress`,
-        // the tests for the legacy engine succeed but the tests for the experimental
-        // engine fail. This is because the experimental engine currently doesn't
-        // automatically re-build the animation after registering new value providers,
-        // which needs to be fixed.
-        for (keypath, customValueProvider) in configuration.customValueProviders {
-          animationView.setValueProvider(customValueProvider, keypath: keypath)
-        }
-
         // Set up the animation view with a valid frame and layout
         // so the geometry is correct when setting up the `CAAnimation`s
         animationView.frame.size = animation.snapshotSize
         animationView.layoutIfNeeded()
 
         animationView.currentProgress = CGFloat(percent)
+
+        for (keypath, customValueProvider) in configuration.customValueProviders {
+          animationView.setValueProvider(customValueProvider, keypath: keypath)
+        }
 
         assertSnapshot(
           matching: animationView,
