@@ -1,5 +1,5 @@
 //
-//  LottieView.swift
+//  AnimationViewBase.swift
 //  lottie-swift-iOS
 //
 //  Created by Brandon Withrow on 2/6/19.
@@ -24,9 +24,10 @@ public enum LottieContentMode: Int {
   case bottomRight
 }
 
-/// A wrapper around NSView for cross platform compatibility.
-
-public class LottieView: NSView {
+/// The base view for `AnimationView` on macOs.
+///
+/// Enables the `AnimationView` implementation to be shared across platforms.
+public class AnimationViewBase: NSView {
 
   // MARK: Public
 
@@ -68,11 +69,11 @@ public class LottieView: NSView {
   }
 
   func layoutAnimation() {
-
+    // Implemented by subclasses.
   }
 
   func animationMovedToWindow() {
-
+    // Implemented by subclasses.
   }
 
   func commonInit() {
@@ -84,15 +85,17 @@ public class LottieView: NSView {
   }
 
   func layoutIfNeeded() {
-
+    // Implemented by subclasses.
   }
 
   @objc
   func animationWillMoveToBackground() {
+    // Implemented by subclasses.
   }
 
   @objc
   func animationWillEnterForeground() {
+    // Implemented by subclasses.
   }
 
 }
