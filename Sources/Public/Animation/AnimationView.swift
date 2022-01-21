@@ -900,27 +900,27 @@ final public class AnimationView: AnimationViewBase {
       return
     }
 
+    let animationLayer: RootAnimationLayer
     if experimentalFeatureConfiguration.useNewRenderingEngine {
-      let animationLayer = ExperimentalAnimationLayer(
+      animationLayer = ExperimentalAnimationLayer(
         animation: animation,
         imageProvider: imageProvider)
-
-      viewLayer?.addSublayer(animationLayer)
-      self.animationLayer = animationLayer
     } else {
-      let animationLayer = AnimationContainer(
+      animationLayer = AnimationContainer(
         animation: animation,
         imageProvider: imageProvider,
         textProvider: textProvider,
         fontProvider: fontProvider)
+
       animationLayer.renderScale = screenScale
-      viewLayer?.addSublayer(animationLayer)
-      self.animationLayer = animationLayer
-      reloadImages()
-      animationLayer.setNeedsDisplay()
-      setNeedsLayout()
-      currentFrame = CGFloat(animation.startFrame)
     }
+
+    viewLayer?.addSublayer(animationLayer)
+    self.animationLayer = animationLayer
+    reloadImages()
+    animationLayer.setNeedsDisplay()
+    setNeedsLayout()
+    currentFrame = CGFloat(animation.startFrame)
   }
 
   fileprivate func updateAnimationForBackgroundState() {

@@ -29,12 +29,6 @@ class SnapshotTests: XCTestCase {
   /// Validates that all of the snapshots in __Snapshots__ correspond to
   /// a sample JSON file that is visible to this test target.
   func testAllSnapshotsHaveCorrespondingSampleFile() {
-    // We don't want assertions to crash the tests, so we stub out the shared logger singleton
-    LottieLogger.shared = LottieLogger(
-      assert: { _, _, _, _ in },
-      assertionFailure: { _, _, _ in },
-      warn: { _, _, _ in })
-
     for snapshotURL in snapshotURLs {
       // The snapshot files follow the format `testCaseName.animationName-percentage.png`
       //  - We remove the known prefix and known suffixes to recover the input file name
@@ -74,6 +68,19 @@ class SnapshotTests: XCTestCase {
   func testCanAccessSamplesAndSnapshots() {
     XCTAssert(sampleAnimationURLs.count > 50)
     XCTAssert(snapshotURLs.count > 300)
+  }
+
+  override func setUp() {
+    // We don't want assertions to crash the snapshot tests,
+    // so we stub out the shared logger singleton
+    LottieLogger.shared = LottieLogger(
+      assert: { _, _, _, _ in },
+      assertionFailure: { _, _, _ in },
+      warn: { _, _, _ in })
+  }
+
+  override func tearDown() {
+    LottieLogger.shared = LottieLogger()
   }
 
   // MARK: Private
@@ -155,10 +162,9 @@ class SnapshotTests: XCTestCase {
           _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration(
             useNewRenderingEngine: usingExperimentalRenderingEngine))
 
-        // Set up the animation view with a valid frame and layout
+        // Set up the animation view with a valid frame
         // so the geometry is correct when setting up the `CAAnimation`s
         animationView.frame.size = animation.snapshotSize
-        animationView.layoutIfNeeded()
 
         animationView.currentProgress = CGFloat(percent)
 
