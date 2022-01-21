@@ -128,7 +128,8 @@ final public class AnimationView: AnimationViewBase {
    */
   public var backgroundBehavior: LottieBackgroundBehavior = .pause
 
-  // MARK: - Public Properties
+  /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
+  public private(set) var valueProviders = [AnimationKeypath: AnyValueProvider]()
 
   /**
    Sets the animation backing the animation view. Setting this will clear the
@@ -326,16 +327,12 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  // MARK: - Public (UIView Overrides)
-
   override public var intrinsicContentSize: CGSize {
     if let animation = animation {
       return animation.bounds.size
     }
     return .zero
   }
-
-  // MARK: - Public Functions
 
   /**
    Plays the animation from its current state to the end.
@@ -487,8 +484,6 @@ final public class AnimationView: AnimationViewBase {
     animationLayer?.forceDisplayUpdate()
   }
 
-  // MARK: - Public (Dynamic Properties)
-
   /**
 
    Sets a ValueProvider for the specified keypath. The value provider will be set
@@ -515,7 +510,10 @@ final public class AnimationView: AnimationViewBase {
    ```
    */
   public func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
-    animationLayer?.setValueProvider(valueProvider, keypath: keypath)
+    guard let animationLayer = animationLayer else { return }
+
+    valueProviders[keypath] = valueProvider
+    animationLayer.setValueProvider(valueProvider, keypath: keypath)
   }
 
   /**
@@ -533,8 +531,6 @@ final public class AnimationView: AnimationViewBase {
   public func logHierarchyKeypaths() {
     animationLayer?.logHierarchyKeypaths()
   }
-
-  // MARK: - Public (Add Subview)
 
   /**
    Searches for the nearest child layer to the first Keypath and adds the subview
@@ -618,8 +614,6 @@ final public class AnimationView: AnimationViewBase {
     return animationLayer.convert(point, to: sublayer)
   }
 
-  // MARK: - Public (Animation Contents)
-
   /**
    Sets the enabled state of all animator nodes found with the keypath search.
    This can be used to interactively enable / disable parts of the animation.
@@ -637,8 +631,6 @@ final public class AnimationView: AnimationViewBase {
       forceDisplayUpdate()
     }
   }
-
-  // MARK: - Public (Markers)
 
   /**
    Markers are a way to describe a point in time by a key name.
@@ -675,8 +667,6 @@ final public class AnimationView: AnimationViewBase {
   }
 
   // MARK: Internal
-
-  // MARK: - Private (Properties)
 
   var animationLayer: RootAnimationLayer? = nil
 
@@ -834,8 +824,6 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  // MARK: - Private (Animation Playback)
-
   /// Updates the animation frame. Does not affect any current animations
   func updateAnimationFrame(_ newFrame: CGFloat) {
     CATransaction.begin()
@@ -885,8 +873,6 @@ final public class AnimationView: AnimationViewBase {
       return _activeAnimationName
     }
   }
-
-  // MARK: - Private (Building Animation View)
 
   fileprivate func makeAnimationLayer() {
 
