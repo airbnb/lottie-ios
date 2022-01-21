@@ -55,17 +55,7 @@ final class ExperimentalAnimationLayer: CALayer {
 
   /// The `AnimationImageProvider` that `ImageLayer`s use to retrieve images,
   /// referenced by name in the animation json.
-  var imageProvider: AnimationImageProvider {
-    didSet {
-      // When the image provider changes, we have to update all `ImageLayer`s
-      // so they can query the most up-to-date image from the new image provider.
-      for sublayer in allSublayers {
-        if let imageLayer = sublayer as? ImageLayer {
-          imageLayer.setupImage(context: layerContext)
-        }
-      }
-    }
-  }
+  var imageProvider: AnimationImageProvider
 
   /// Sets up `CAAnimation`s for each `AnimationLayer` in the layer hierarchy,
   /// playing from `currentFrame`.
@@ -281,7 +271,13 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
   }
 
   func reloadImages() {
-    LottieLogger.shared.assertionFailure("`reloadImages` is currently not implemented")
+    // When the image provider changes, we have to update all `ImageLayer`s
+    // so they can query the most up-to-date image from the new image provider.
+    for sublayer in allSublayers {
+      if let imageLayer = sublayer as? ImageLayer {
+        imageLayer.setupImage(context: layerContext)
+      }
+    }
   }
 
   func forceDisplayUpdate() {
