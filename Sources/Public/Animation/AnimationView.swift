@@ -1,5 +1,5 @@
 //
-//  LottieView.swift
+//  AnimationView.swift
 //  lottie-swift
 //
 //  Created by Brandon Withrow on 1/23/19.
@@ -59,13 +59,13 @@ extension LottieLoopMode: Equatable {
 // MARK: - AnimationView
 
 @IBDesignable
-final public class AnimationView: LottieView {
+final public class AnimationView: AnimationViewBase {
 
   // MARK: Lifecycle
 
   // MARK: - Public (Initializers)
 
-  /// Initializes a LottieView with an animation.
+  /// Initializes an AnimationView with an animation.
   public init(
     animation: Animation?,
     imageProvider: AnimationImageProvider? = nil,

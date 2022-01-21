@@ -1,32 +1,32 @@
 //
-//  LottieView.swift
+//  AnimationViewBase.swift
 //  lottie-swift-iOS
 //
 //  Created by Brandon Withrow on 2/6/19.
 //
 
-import Foundation
 #if os(iOS) || os(tvOS) || os(watchOS) || targetEnvironment(macCatalyst)
 import UIKit
 
-//public typealias LottieView = UIView
+/// The base view for `AnimationView` on iOS, tvOS, watchOS, and macCatalyst.
+///
+/// Enables the `AnimationView` implementation to be shared across platforms.
+public class AnimationViewBase: UIView {
 
-open class LottieView: UIView {
+  // MARK: Public
 
-  // MARK: Open
-
-  open override var contentMode: UIView.ContentMode {
+  public override var contentMode: UIView.ContentMode {
     didSet {
       setNeedsLayout()
     }
   }
 
-  open override func didMoveToWindow() {
+  public override func didMoveToWindow() {
     super.didMoveToWindow()
     animationMovedToWindow()
   }
 
-  open override func layoutSubviews() {
+  public override func layoutSubviews() {
     super.layoutSubviews()
     layoutAnimation()
   }
@@ -42,11 +42,11 @@ open class LottieView: UIView {
   }
 
   func layoutAnimation() {
-
+    // Implemented by subclasses.
   }
 
   func animationMovedToWindow() {
-
+    // Implemented by subclasses.
   }
 
   func commonInit() {
@@ -66,10 +66,12 @@ open class LottieView: UIView {
 
   @objc
   func animationWillMoveToBackground() {
+    // Implemented by subclasses.
   }
 
   @objc
   func animationWillEnterForeground() {
+    // Implemented by subclasses.
   }
 
 }
