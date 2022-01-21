@@ -17,13 +17,13 @@ class SnapshotTests: XCTestCase {
   // MARK: Internal
 
   /// Snapshots all of the sample animation JSON files visible to this test target
-  func testLottieSnapshots() throws {
-    try compareSampleSnapshots()
+  func testMainThreadRenderingEngine() throws {
+    try compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .mainThread))
   }
 
   /// Snapshots sample animation files using the experimental rendering engine
-  func testExperimentalRenderingEngine() throws {
-    try compareSampleSnapshots(usingExperimentalRenderingEngine: true)
+  func testCoreAnimationRenderingEngine() throws {
+    try compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .coreAnimation))
   }
 
   /// Validates that all of the snapshots in __Snapshots__ correspond to
@@ -34,8 +34,8 @@ class SnapshotTests: XCTestCase {
       //  - We remove the known prefix and known suffixes to recover the input file name
       //  - `animationName` can contain dashes, so we can't just split the string at each dash
       var animationName = snapshotURL.lastPathComponent
-        .replacingOccurrences(of: "testLottieSnapshots.", with: "")
-        .replacingOccurrences(of: "testExperimentalRenderingEngine.", with: "")
+        .replacingOccurrences(of: "testMainThreadRenderingEngine.", with: "")
+        .replacingOccurrences(of: "testCoreAnimationRenderingEngine.", with: "")
 
       for percentage in progressPercentagesToSnapshot {
         animationName = animationName.replacingOccurrences(
@@ -115,7 +115,7 @@ class SnapshotTests: XCTestCase {
 
   /// Captures snapshots of `sampleAnimationURLs` and compares them to the snapshot images stored on disk
   private func compareSampleSnapshots(
-    usingExperimentalRenderingEngine: Bool = false,
+    configuration: LottieConfiguration,
     testName: String = #function) throws
   {
     #if os(iOS)
@@ -140,11 +140,7 @@ class SnapshotTests: XCTestCase {
         .joined(separator: "/")
         .replacingOccurrences(of: ".json", with: "")
 
-      let configuration = SnapshotConfiguration.forSample(named: sampleAnimationName)
-
-      if usingExperimentalRenderingEngine, !configuration.testWithExperimentalRenderingEngine {
-        continue
-      }
+      let snapshotConfiguration = SnapshotConfiguration.forSample(named: sampleAnimationName)
 
       guard
         let animation = Animation.named(
@@ -159,8 +155,7 @@ class SnapshotTests: XCTestCase {
       for percent in progressPercentagesToSnapshot {
         let animationView = AnimationView(
           animation: animation,
-          _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration(
-            useNewRenderingEngine: usingExperimentalRenderingEngine))
+          configuration: configuration)
 
         // Set up the animation view with a valid frame
         // so the geometry is correct when setting up the `CAAnimation`s
@@ -168,17 +163,17 @@ class SnapshotTests: XCTestCase {
 
         animationView.currentProgress = CGFloat(percent)
 
-        for (keypath, customValueProvider) in configuration.customValueProviders {
+        for (keypath, customValueProvider) in snapshotConfiguration.customValueProviders {
           animationView.setValueProvider(customValueProvider, keypath: keypath)
         }
 
-        if let customImageProvider = configuration.customImageProvider {
+        if let customImageProvider = snapshotConfiguration.customImageProvider {
           animationView.imageProvider = customImageProvider
         }
 
         assertSnapshot(
           matching: animationView,
-          as: .imageOfPresentationLayer(precision: configuration.precision),
+          as: .imageOfPresentationLayer(precision: snapshotConfiguration.precision),
           named: "\(sampleAnimationName) (\(Int(percent * 100))%)",
           testName: testName)
       }
