@@ -11,7 +11,7 @@ import Foundation
 // MARK: - Vector1D + Interpolatable
 
 extension Vector1D: Interpolatable {
-  func interpolateTo(_ to: Vector1D, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> Vector1D {
+  public func interpolateTo(_ to: Vector1D, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> Vector1D {
     value.interpolateTo(to.value, amount: amount).vectorValue
   }
 }
@@ -19,7 +19,7 @@ extension Vector1D: Interpolatable {
 // MARK: - Vector2D + Interpolatable
 
 extension Vector2D: Interpolatable {
-  func interpolateTo(_ to: Vector2D, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> Vector2D {
+  public func interpolateTo(_ to: Vector2D, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> Vector2D {
     pointValue.interpolateTo(
       to.pointValue,
       amount: CGFloat(amount),
@@ -32,7 +32,7 @@ extension Vector2D: Interpolatable {
 // MARK: - Vector3D + Interpolatable
 
 extension Vector3D: Interpolatable {
-  func interpolateTo(_ to: Vector3D, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> Vector3D {
+  public func interpolateTo(_ to: Vector3D, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> Vector3D {
     if spatialInTangent != nil || spatialOutTangent != nil {
       // TODO Support third dimension spatial interpolation
       let point = pointValue.interpolateTo(
@@ -142,7 +142,7 @@ extension Color: Interpolatable {
     return (y: y, u: u, v: v, a: a)
   }
 
-  func interpolateTo(_ to: Color, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> Color {
+  public func interpolateTo(_ to: Color, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> Color {
     Color(
       r: r.interpolateTo(to.r, amount: amount),
       g: g.interpolateTo(to.g, amount: amount),
@@ -205,11 +205,22 @@ extension TextDocument: Interpolatable {
 
 // MARK: - Array + Interpolatable
 
-extension Array: Interpolatable where Element == Double {
-  func interpolateTo(_ to: [Element], amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> [Element] {
-    var returnArray = [Double]()
+extension Array: Interpolatable where Element: Interpolatable {
+  public func interpolateTo(
+    _ to: [Element],
+    amount: CGFloat,
+    spatialOutTangent: CGPoint?,
+    spatialInTangent: CGPoint?)
+    -> [Element]
+  {
+    var returnArray = [Element]()
     for i in 0..<count {
-      returnArray.append(self[i].interpolateTo(to[i], amount: amount))
+      returnArray.append(
+        self[i].interpolateTo(
+          to[i],
+          amount: amount,
+          spatialOutTangent: spatialOutTangent,
+          spatialInTangent: spatialInTangent))
     }
     return returnArray
   }

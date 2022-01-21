@@ -24,7 +24,7 @@ public protocol AnyValueProvider {
   var valueType: Any.Type { get }
 
   /// The type-erased storage for this Value Provider
-  var typeErasedStorage: ValueProviderStorage<Any> { get }
+  var typeErasedStorage: AnyValueProviderStorage { get }
 
   /// Asks the provider if it has an update for the given frame.
   func hasUpdate(frame: AnimationFrameTime) -> Bool
@@ -42,19 +42,23 @@ extension AnyValueProvider {
 
 /// A base protocol for strongly-typed Value Providers
 protocol ValueProvider: AnyValueProvider {
-  associatedtype Value
+  associatedtype Value where Value: Interpolatable
 
   /// The strongly-typed storage for this Value Provider
   var storage: ValueProviderStorage<Value> { get }
 }
 
 extension ValueProvider {
-  public var typeErasedStorage: ValueProviderStorage<Any> {
+  public var typeErasedStorage: AnyValueProviderStorage {
     switch storage {
     case .closure(let typedClosure):
       return .closure(typedClosure)
+
     case .singleValue(let typedValue):
       return .singleValue(typedValue)
+
+    case .keyframes(let keyframes):
+      return .keyframes(keyframes.map { $0 }, interpolate: storage.value(frame:))
     }
   }
 }
@@ -62,31 +66,56 @@ extension ValueProvider {
 // MARK: - ValueProviderStorage
 
 /// The underlying storage of a `ValueProvider`
-public enum ValueProviderStorage<T> {
+public enum ValueProviderStorage<T: Interpolatable> {
   /// The value provider stores a single value that is used on all frames
   case singleValue(T)
 
+  /// The value provider stores a group of keyframes
+  case keyframes(KeyframeGroup<T>)
+
   /// The value provider stores a closure that is invoked on every frame
-  ///  - This is only supported by the legacy main-thread rendering engine
+  ///  - This is only supported by the main-thread rendering engine
   case closure((AnimationFrameTime) -> T)
 
   // MARK: Internal
-
-  var isSingleValue: Bool {
-    switch self {
-    case .singleValue:
-      return true
-    case .closure:
-      return false
-    }
-  }
 
   func value(frame: AnimationFrameTime) -> T {
     switch self {
     case .singleValue(let value):
       return value
+
     case .closure(let closure):
       return closure(frame)
+
+    case .keyframes(let keyframes):
+      return KeyframeInterpolator(keyframes: keyframes.keyframes).storage.value(frame: frame)
+    }
+  }
+}
+
+/// A type-erased representation of `ValueProviderStorage`
+public enum AnyValueProviderStorage {
+  /// The value provider stores a single value that is used on all frames
+  case singleValue(Any)
+
+  /// The value provider stores a group of keyframes
+  ///  - Since we can't interpolate a type-erased `KeyframeGroup`,
+  ///    the interpolation has to be performed in the `interpolate` closure.
+  case keyframes(KeyframeGroup<Any>, interpolate: (AnimationFrameTime) -> Any)
+
+  /// The value provider stores a closure that is invoked on every frame
+  case closure((AnimationFrameTime) -> Any)
+
+  func value(frame: AnimationFrameTime) -> Any {
+    switch self {
+    case .singleValue(let value):
+      return value
+
+    case .closure(let closure):
+      return closure(frame)
+
+    case .keyframes(_, let valueForFrame):
+      return valueForFrame(frame)
     }
   }
 }

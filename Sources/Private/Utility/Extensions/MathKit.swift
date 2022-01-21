@@ -43,7 +43,7 @@ extension CGFloat: Interpolatable {
     self + ((to - self) * CGFloat(amount))
   }
 
-  func interpolateTo(_ to: CGFloat, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> CGFloat {
+  public func interpolateTo(_ to: CGFloat, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> CGFloat {
     interpolateTo(to, amount: amount)
   }
 
@@ -99,7 +99,7 @@ extension Double: Interpolatable {
     self + ((to - self) * Double(amount))
   }
 
-  func interpolateTo(_ to: Double, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> Double {
+  public func interpolateTo(_ to: Double, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> Double {
     interpolateTo(to, amount: amount)
   }
 
@@ -550,7 +550,7 @@ extension CGPoint: Interpolatable {
     return false
   }
 
-  func interpolateTo(_ to: CGPoint, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> CGPoint {
+  public func interpolateTo(_ to: CGPoint, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> CGPoint {
     guard
       let outTan = spatialOutTangent,
       let inTan = spatialInTangent else

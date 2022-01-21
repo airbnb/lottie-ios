@@ -8,7 +8,7 @@
 import CoreGraphics
 import Foundation
 
-extension Keyframe {
+extension Keyframe where T: Interpolatable {
 
   /// Interpolates the keyTime into a value from 0-1
   func interpolatedProgress(_ to: Keyframe, keyTime: CGFloat) -> CGFloat {

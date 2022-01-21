@@ -14,12 +14,12 @@ import Foundation
  Keyframe represents a point in time and is the container for datatypes.
  Note: This is a parent class and should not be used directly.
  */
-final class Keyframe<T: Interpolatable> {
+public final class Keyframe<T> {
 
   // MARK: Lifecycle
 
   /// Initialize a value-only keyframe with no time data.
-  init(
+  public init(
     _ value: T,
     spatialInTangent: Vector3D? = nil,
     spatialOutTangent: Vector3D? = nil)
@@ -34,17 +34,17 @@ final class Keyframe<T: Interpolatable> {
   }
 
   /// Initialize a keyframe
-  init(
+  public init(
     value: T,
-    time: Double,
-    isHold: Bool,
-    inTangent: Vector2D?,
-    outTangent: Vector2D?,
+    time: AnimationFrameTime,
+    isHold: Bool = false,
+    inTangent: Vector2D? = nil,
+    outTangent: Vector2D? = nil,
     spatialInTangent: Vector3D? = nil,
     spatialOutTangent: Vector3D? = nil)
   {
     self.value = value
-    self.time = CGFloat(time)
+    self.time = time
     self.isHold = isHold
     self.outTangent = outTangent
     self.inTangent = inTangent
@@ -55,20 +55,44 @@ final class Keyframe<T: Interpolatable> {
   // MARK: Internal
 
   /// The value of the keyframe
-  let value: T
+  public let value: T
   /// The time in frames of the keyframe.
-  let time: CGFloat
+  public let time: AnimationFrameTime
   /// A hold keyframe freezes interpolation until the next keyframe that is not a hold.
-  let isHold: Bool
+  public let isHold: Bool
   /// The in tangent for the time interpolation curve.
-  let inTangent: Vector2D?
+  public let inTangent: Vector2D?
   /// The out tangent for the time interpolation curve.
-  let outTangent: Vector2D?
+  public let outTangent: Vector2D?
 
   /// The spatial in tangent of the vector.
-  let spatialInTangent: Vector3D?
+  public let spatialInTangent: Vector3D?
   /// The spatial out tangent of the vector.
-  let spatialOutTangent: Vector3D?
+  public let spatialOutTangent: Vector3D?
+}
+
+extension Keyframe: Equatable where T: Equatable {
+  public static func == (lhs: Keyframe<T>, rhs: Keyframe<T>) -> Bool {
+    lhs.value == rhs.value
+      && lhs.time == rhs.time
+      && lhs.isHold == rhs.isHold
+      && lhs.inTangent == rhs.inTangent
+      && lhs.outTangent == rhs.outTangent
+      && lhs.spatialInTangent == rhs.spatialOutTangent
+      && lhs.spatialOutTangent == rhs.spatialOutTangent
+  }
+}
+
+extension Keyframe: Hashable where T: Hashable {
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(value)
+    hasher.combine(time)
+    hasher.combine(isHold)
+    hasher.combine(inTangent)
+    hasher.combine(outTangent)
+    hasher.combine(spatialInTangent)
+    hasher.combine(spatialOutTangent)
+  }
 }
 
 // MARK: - KeyframeData
@@ -80,7 +104,7 @@ final class Keyframe<T: Interpolatable> {
  type of keyframea and also the version of the JSON. By parsing the raw data
  we can reconfigure it into a constant format.
  */
-final class KeyframeData<T: Codable>: Codable {
+final class KeyframeData<T> {
 
   // MARK: Lifecycle
 
@@ -143,3 +167,6 @@ final class KeyframeData<T: Codable>: Codable {
     return false
   }
 }
+
+extension KeyframeData: Encodable where T: Encodable { }
+extension KeyframeData: Decodable where T: Decodable { }
