@@ -18,7 +18,7 @@ final class Configuration {
   /// Applies the current configuration (stored in UserDefaults)
   /// to the singleton `LottieConfiguration.shared`
   static func applyCurrentConfiguration() {
-  LottieConfiguration.shared.renderingEngine = useNewRenderingEngine ? .coreAnimation : .mainThread
+    LottieConfiguration.shared.renderingEngine = useNewRenderingEngine ? .coreAnimation : .mainThread
   }
 
 }
