@@ -34,11 +34,11 @@ open class AnimatedControl: UIControl {
 
   public init(
     animation: Animation,
-    _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration = .shared)
+    configuration: LottieConfiguration = .shared)
   {
     animationView = AnimationView(
       animation: animation,
-      _experimentalFeatureConfiguration: _experimentalFeatureConfiguration)
+      configuration: configuration)
 
     super.init(frame: animation.bounds)
     commonInit()
