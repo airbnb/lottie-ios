@@ -117,6 +117,9 @@ final public class AnimationView: AnimationViewBase {
 
   // MARK: Public
 
+  /// The configuration that this `AnimationView` uses when playing its animation
+  public let configuration: LottieConfiguration
+
   /**
    Describes the behavior of an AnimationView when the app is moved to the background.
 
@@ -1091,9 +1094,6 @@ final public class AnimationView: AnimationViewBase {
   // MARK: Private
 
   static private let animationName: String = "Lottie"
-
-  /// The configuration that this `AnimationView` uses when playing its animation
-  private let configuration: LottieConfiguration
 
 }
 
