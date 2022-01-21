@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - KeyframeGroup
+
 /**
  Used for coding/decoding a group of Keyframes by type.
 
@@ -27,6 +29,8 @@ public final class KeyframeGroup<T> {
     keyframes = [Keyframe(value)]
   }
 
+  // MARK: Public
+
   public let keyframes: ContiguousArray<Keyframe<T>>
 
   // MARK: Private
@@ -35,6 +39,8 @@ public final class KeyframeGroup<T> {
     case keyframeData = "k"
   }
 }
+
+// MARK: Decodable
 
 extension KeyframeGroup: Decodable where T: Decodable {
   convenience public init(from decoder: Decoder) throws {
@@ -93,6 +99,8 @@ extension KeyframeGroup: Decodable where T: Decodable {
   }
 }
 
+// MARK: Encodable
+
 extension KeyframeGroup: Encodable where T: Encodable {
   public func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: KeyframeWrapperKey.self)
@@ -121,11 +129,15 @@ extension KeyframeGroup: Encodable where T: Encodable {
   }
 }
 
+// MARK: Equatable
+
 extension KeyframeGroup: Equatable where T: Equatable {
   public static func == (_ lhs: KeyframeGroup<T>, _ rhs: KeyframeGroup<T>) -> Bool {
     lhs.keyframes == rhs.keyframes
   }
 }
+
+// MARK: Hashable
 
 extension KeyframeGroup: Hashable where T: Hashable {
   public func hash(into hasher: inout Hasher) {

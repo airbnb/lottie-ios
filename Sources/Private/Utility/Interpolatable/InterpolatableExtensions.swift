@@ -11,7 +11,13 @@ import Foundation
 // MARK: - Vector1D + Interpolatable
 
 extension Vector1D: Interpolatable {
-  public func interpolateTo(_ to: Vector1D, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> Vector1D {
+  public func interpolateTo(
+    _ to: Vector1D,
+    amount: CGFloat,
+    spatialOutTangent _: CGPoint?,
+    spatialInTangent _: CGPoint?)
+    -> Vector1D
+  {
     value.interpolateTo(to.value, amount: amount).vectorValue
   }
 }
@@ -19,7 +25,13 @@ extension Vector1D: Interpolatable {
 // MARK: - Vector2D + Interpolatable
 
 extension Vector2D: Interpolatable {
-  public func interpolateTo(_ to: Vector2D, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> Vector2D {
+  public func interpolateTo(
+    _ to: Vector2D,
+    amount: CGFloat,
+    spatialOutTangent: CGPoint?,
+    spatialInTangent: CGPoint?)
+    -> Vector2D
+  {
     pointValue.interpolateTo(
       to.pointValue,
       amount: CGFloat(amount),
@@ -32,7 +44,13 @@ extension Vector2D: Interpolatable {
 // MARK: - Vector3D + Interpolatable
 
 extension Vector3D: Interpolatable {
-  public func interpolateTo(_ to: Vector3D, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> Vector3D {
+  public func interpolateTo(
+    _ to: Vector3D,
+    amount: CGFloat,
+    spatialOutTangent: CGPoint?,
+    spatialInTangent: CGPoint?)
+    -> Vector3D
+  {
     if spatialInTangent != nil || spatialOutTangent != nil {
       // TODO Support third dimension spatial interpolation
       let point = pointValue.interpolateTo(
@@ -108,6 +126,16 @@ extension Color: Interpolatable {
     self.a = a
   }
 
+  // MARK: Public
+
+  public func interpolateTo(_ to: Color, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> Color {
+    Color(
+      r: r.interpolateTo(to.r, amount: amount),
+      g: g.interpolateTo(to.g, amount: amount),
+      b: b.interpolateTo(to.b, amount: amount),
+      a: a.interpolateTo(to.a, amount: amount))
+  }
+
   // MARK: Internal
 
   /// Hue Saturation Value of the color.
@@ -142,13 +170,6 @@ extension Color: Interpolatable {
     return (y: y, u: u, v: v, a: a)
   }
 
-  public func interpolateTo(_ to: Color, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> Color {
-    Color(
-      r: r.interpolateTo(to.r, amount: amount),
-      g: g.interpolateTo(to.g, amount: amount),
-      b: b.interpolateTo(to.b, amount: amount),
-      a: a.interpolateTo(to.a, amount: amount))
-  }
 }
 
 // MARK: - CurveVertex + Interpolatable

@@ -93,6 +93,8 @@ public enum ValueProviderStorage<T: Interpolatable> {
   }
 }
 
+// MARK: - AnyValueProviderStorage
+
 /// A type-erased representation of `ValueProviderStorage`
 public enum AnyValueProviderStorage {
   /// The value provider stores a single value that is used on all frames
@@ -105,6 +107,8 @@ public enum AnyValueProviderStorage {
 
   /// The value provider stores a closure that is invoked on every frame
   case closure((AnimationFrameTime) -> Any)
+
+  // MARK: Internal
 
   func value(frame: AnimationFrameTime) -> Any {
     switch self {

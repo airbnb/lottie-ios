@@ -3,6 +3,8 @@
 
 import QuartzCore
 
+// MARK: - ValueProviderStore
+
 /// Registration and storage for `AnyValueProvider`s that can dynamically
 /// provide custom values for `AnimationKeypath`s within an `Animation`.
 final class ValueProviderStore {
@@ -86,7 +88,7 @@ extension AnyValueProviderStorage {
   var isSupportedByCoreAnimationRenderingEngine: Bool {
     switch self {
     case .singleValue, .keyframes:
-        return true
+      return true
     case .closure:
       return false
     }

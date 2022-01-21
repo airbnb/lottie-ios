@@ -52,7 +52,7 @@ public final class Keyframe<T> {
     self.spatialOutTangent = spatialOutTangent
   }
 
-  // MARK: Internal
+  // MARK: Public
 
   /// The value of the keyframe
   public let value: T
@@ -71,6 +71,8 @@ public final class Keyframe<T> {
   public let spatialOutTangent: Vector3D?
 }
 
+// MARK: Equatable
+
 extension Keyframe: Equatable where T: Equatable {
   public static func == (lhs: Keyframe<T>, rhs: Keyframe<T>) -> Bool {
     lhs.value == rhs.value
@@ -82,6 +84,8 @@ extension Keyframe: Equatable where T: Equatable {
       && lhs.spatialOutTangent == rhs.spatialOutTangent
   }
 }
+
+// MARK: Hashable
 
 extension Keyframe: Hashable where T: Hashable {
   public func hash(into hasher: inout Hasher) {
@@ -168,5 +172,10 @@ final class KeyframeData<T> {
   }
 }
 
+// MARK: Encodable
+
 extension KeyframeData: Encodable where T: Encodable { }
+
+// MARK: Decodable
+
 extension KeyframeData: Decodable where T: Decodable { }

@@ -25,6 +25,20 @@ extension Double {
 
 extension CGFloat: Interpolatable {
 
+  // MARK: Public
+
+  public func interpolateTo(
+    _ to: CGFloat,
+    amount: CGFloat,
+    spatialOutTangent _: CGPoint?,
+    spatialInTangent _: CGPoint?)
+    -> CGFloat
+  {
+    interpolateTo(to, amount: amount)
+  }
+
+  // MARK: Internal
+
   /**
    Interpolates the receiver to the given number by Amount.
    - Parameter toNumber: The number to interpolate to.
@@ -41,10 +55,6 @@ extension CGFloat: Interpolatable {
    */
   func interpolateTo(_ to: CGFloat, amount: CGFloat) -> CGFloat {
     self + ((to - self) * CGFloat(amount))
-  }
-
-  public func interpolateTo(_ to: CGFloat, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> CGFloat {
-    interpolateTo(to, amount: amount)
   }
 
   func remap(fromLow: CGFloat, fromHigh: CGFloat, toLow: CGFloat, toHigh: CGFloat) -> CGFloat {
@@ -81,6 +91,20 @@ extension CGFloat: Interpolatable {
 
 extension Double: Interpolatable {
 
+  // MARK: Public
+
+  public func interpolateTo(
+    _ to: Double,
+    amount: CGFloat,
+    spatialOutTangent _: CGPoint?,
+    spatialInTangent _: CGPoint?)
+    -> Double
+  {
+    interpolateTo(to, amount: amount)
+  }
+
+  // MARK: Internal
+
   /**
    Interpolates the receiver to the given number by Amount.
    - Parameter toNumber: The number to interpolate to.
@@ -97,10 +121,6 @@ extension Double: Interpolatable {
    */
   func interpolateTo(_ to: Double, amount: CGFloat) -> Double {
     self + ((to - self) * Double(amount))
-  }
-
-  public func interpolateTo(_ to: Double, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> Double {
-    interpolateTo(to, amount: amount)
   }
 
   func remap(fromLow: Double, fromHigh: Double, toLow: Double, toHigh: Double) -> Double {
@@ -355,6 +375,23 @@ infix operator +-
 
 extension CGPoint: Interpolatable {
 
+  // MARK: Public
+
+  public func interpolateTo(_ to: CGPoint, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> CGPoint {
+    guard
+      let outTan = spatialOutTangent,
+      let inTan = spatialInTangent else
+    {
+      return interpolate(to, amount: amount)
+    }
+    let cp1 = self + outTan
+    let cp2 = to + inTan
+
+    return interpolate(to, outTangent: cp1, inTangent: cp2, amount: amount)
+  }
+
+  // MARK: Internal
+
   /// Returns the length between the receiver and *CGPoint.zero*
   var vectorLength: CGFloat {
     distanceTo(.zero)
@@ -548,19 +585,6 @@ extension CGPoint: Interpolatable {
       return true
     }
     return false
-  }
-
-  public func interpolateTo(_ to: CGPoint, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> CGPoint {
-    guard
-      let outTan = spatialOutTangent,
-      let inTan = spatialInTangent else
-    {
-      return interpolate(to, amount: amount)
-    }
-    let cp1 = self + outTan
-    let cp2 = to + inTan
-
-    return interpolate(to, outTangent: cp1, inTangent: cp2, amount: amount)
   }
 
   /// Subtracts the given point from the receiving point.

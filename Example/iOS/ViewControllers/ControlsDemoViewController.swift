@@ -48,7 +48,7 @@ final class ControlsDemoViewController: CollectionViewController {
           "Switch Outline Outlines.Fill 1.Color": .init(keyframes: [
             Keyframe(value: Color.black, time: 0),
             Keyframe(value: Color(r: 0.76, g: 0.76, b: 0.76, a: 1), time: 75),
-            Keyframe(value: Color.black, time: 150)
+            Keyframe(value: Color.black, time: 150),
           ]),
         ]))
 

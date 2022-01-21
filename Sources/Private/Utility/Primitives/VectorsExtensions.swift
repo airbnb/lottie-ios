@@ -81,6 +81,14 @@ public struct Vector2D: Codable, Hashable {
     }
   }
 
+  // MARK: Public
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: Vector2D.CodingKeys.self)
+    try container.encode(x, forKey: .x)
+    try container.encode(y, forKey: .y)
+  }
+
   // MARK: Internal
 
   var x: Double
@@ -88,12 +96,6 @@ public struct Vector2D: Codable, Hashable {
 
   var pointValue: CGPoint {
     CGPoint(x: x, y: y)
-  }
-
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: Vector2D.CodingKeys.self)
-    try container.encode(x, forKey: .x)
-    try container.encode(y, forKey: .y)
   }
 
   // MARK: Private
