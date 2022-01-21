@@ -17,9 +17,9 @@ open class AnimatedButton: AnimatedControl {
 
   public override init(
     animation: Animation,
-    _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration = .shared)
+    configuration: LottieConfiguration = .shared)
   {
-    super.init(animation: animation, _experimentalFeatureConfiguration: _experimentalFeatureConfiguration)
+    super.init(animation: animation, configuration: configuration)
     accessibilityTraits = UIAccessibilityTraits.button
   }
 

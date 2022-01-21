@@ -71,13 +71,13 @@ final public class AnimationView: AnimationViewBase {
     imageProvider: AnimationImageProvider? = nil,
     textProvider: AnimationTextProvider = DefaultTextProvider(),
     fontProvider: AnimationFontProvider = DefaultFontProvider(),
-    _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration = .shared)
+    configuration: LottieConfiguration = .shared)
   {
     self.animation = animation
     self.imageProvider = imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = textProvider
     self.fontProvider = fontProvider
-    experimentalFeatureConfiguration = _experimentalFeatureConfiguration
+    self.configuration = configuration
     super.init(frame: .zero)
     commonInit()
     makeAnimationLayer()
@@ -86,12 +86,12 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  public init() {
+  public init(configuration: LottieConfiguration = .shared) {
     animation = nil
     imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
-    experimentalFeatureConfiguration = .shared
+    self.configuration = configuration
     super.init(frame: .zero)
     commonInit()
   }
@@ -101,7 +101,7 @@ final public class AnimationView: AnimationViewBase {
     imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
-    experimentalFeatureConfiguration = .shared
+    configuration = .shared
     super.init(frame: .zero)
     commonInit()
   }
@@ -110,7 +110,7 @@ final public class AnimationView: AnimationViewBase {
     imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
-    experimentalFeatureConfiguration = .shared
+    configuration = .shared
     super.init(coder: aDecoder)
     commonInit()
   }
@@ -901,11 +901,13 @@ final public class AnimationView: AnimationViewBase {
     }
 
     let animationLayer: RootAnimationLayer
-    if experimentalFeatureConfiguration.useNewRenderingEngine {
+    switch configuration.renderingEngine {
+    case .coreAnimation:
       animationLayer = ExperimentalAnimationLayer(
         animation: animation,
         imageProvider: imageProvider)
-    } else {
+
+    case .mainThread:
       animationLayer = AnimationContainer(
         animation: animation,
         imageProvider: imageProvider,
@@ -1088,8 +1090,8 @@ final public class AnimationView: AnimationViewBase {
 
   static private let animationName: String = "Lottie"
 
-  /// The configuration of experimental features that this `AnimationView` uses
-  private let experimentalFeatureConfiguration: ExperimentalFeatureConfiguration
+  /// The configuration that this `AnimationView` uses when playing its animation
+  private let configuration: LottieConfiguration
 
 }
 

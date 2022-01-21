@@ -21,7 +21,7 @@ open class AnimatedSwitch: AnimatedControl {
 
   public override init(
     animation: Animation,
-    _experimentalFeatureConfiguration: ExperimentalFeatureConfiguration = .shared)
+    configuration: LottieConfiguration = .shared)
   {
     /// Generate a haptic generator if available.
     #if os(iOS)
@@ -33,7 +33,7 @@ open class AnimatedSwitch: AnimatedControl {
     #else
     hapticGenerator = NullHapticGenerator()
     #endif
-    super.init(animation: animation, _experimentalFeatureConfiguration: _experimentalFeatureConfiguration)
+    super.init(animation: animation, configuration: configuration)
     updateOnState(isOn: _isOn, animated: false, shouldFireHaptics: false)
     accessibilityTraits = UIAccessibilityTraits.button
   }

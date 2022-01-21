@@ -14,11 +14,6 @@ struct SnapshotConfiguration {
   ///    but should be kept as high as possible (while still permitting the diff to succeed)
   var precision: Float = 1
 
-  /// Whether or not this snapshot should be tested using the experimental rendering engine
-  ///  - Defaults to false, since the experimental rendering engine
-  ///    currently supports a relatively small number of animations.
-  var testWithExperimentalRenderingEngine = false
-
   /// Dynamic value providers that should be applied to the animation
   var customValueProviders: [AnimationKeypath: AnyValueProvider] = [:]
 
@@ -34,73 +29,20 @@ extension SnapshotConfiguration {
   static let customMapping: [String: SnapshotConfiguration] = [
     /// These samples appear to render in a slightly non-deterministic way,
     /// depending on the test environment, so we have to decrease precision a bit.
-    "Issues/issue_1407": .init(precision: 0.9, testWithExperimentalRenderingEngine: true),
+    "Issues/issue_1407": .precision(0.9),
     "Nonanimating/FirstText": .precision(0.99),
     "Nonanimating/verifyLineHeight": .precision(0.99),
 
-    /// These samples are known to be supported by the experimental rendering engine
-    "9squares_AlBoardman": .testWithExperimentalRenderingEngine,
-    "PinJump": .testWithExperimentalRenderingEngine,
-    "IconTransitions": .testWithExperimentalRenderingEngine,
-    "LottieLogo1": .testWithExperimentalRenderingEngine,
-    "LottieLogo1_masked": .testWithExperimentalRenderingEngine,
-    "MotionCorpse_Jrcanest": .testWithExperimentalRenderingEngine,
-    "Switch_States": .testWithExperimentalRenderingEngine,
-    "TwitterHeart": .testWithExperimentalRenderingEngine,
-    "TwitterHeartButton": .testWithExperimentalRenderingEngine,
-    "HamburgerArrow": .testWithExperimentalRenderingEngine,
-    "vcTransition2": .testWithExperimentalRenderingEngine,
-    "Watermelon": .testWithExperimentalRenderingEngine,
-    "Nonanimating/Zoom": .testWithExperimentalRenderingEngine,
-    "Nonanimating/GeometryTransformTest": .testWithExperimentalRenderingEngine,
-    "Nonanimating/base64Test": .testWithExperimentalRenderingEngine,
-    "LottieFiles/loading_dots_1": .testWithExperimentalRenderingEngine,
-    "LottieFiles/loading_dots_2": .testWithExperimentalRenderingEngine,
-    "LottieFiles/loading_dots_3": .testWithExperimentalRenderingEngine,
-    "LottieFiles/gradient_1": .testWithExperimentalRenderingEngine,
-    "LottieFiles/gradient_2": .testWithExperimentalRenderingEngine,
-    "LottieFiles/gradient_pill": .testWithExperimentalRenderingEngine,
-    "LottieFiles/gradient_square": .testWithExperimentalRenderingEngine,
-    "TypeFace/B": .testWithExperimentalRenderingEngine,
-    "TypeFace/Colon": .testWithExperimentalRenderingEngine,
-    "TypeFace/Comma": .testWithExperimentalRenderingEngine,
-    "TypeFace/C": .testWithExperimentalRenderingEngine,
-    "TypeFace/D": .testWithExperimentalRenderingEngine,
-    "TypeFace/E": .testWithExperimentalRenderingEngine,
-    "TypeFace/F": .testWithExperimentalRenderingEngine,
-    "TypeFace/I": .testWithExperimentalRenderingEngine,
-    "TypeFace/J": .testWithExperimentalRenderingEngine,
-    "TypeFace/K": .testWithExperimentalRenderingEngine,
-    "TypeFace/L": .testWithExperimentalRenderingEngine,
-    "TypeFace/N": .testWithExperimentalRenderingEngine,
-    "TypeFace/R": .testWithExperimentalRenderingEngine,
-    "TypeFace/T": .testWithExperimentalRenderingEngine,
-    "TypeFace/W": .testWithExperimentalRenderingEngine,
-    "TypeFace/X": .testWithExperimentalRenderingEngine,
-    "TypeFace/Z": .testWithExperimentalRenderingEngine,
-
-    // These samples are not quite perfect yet, but are looking pretty good:
-    "vcTransition1": .testWithExperimentalRenderingEngine,
-    "LottieLogo2": .testWithExperimentalRenderingEngine,
-    "Issues/issue_1403": .testWithExperimentalRenderingEngine,
-    "LottieFiles/gradient_shapes": .testWithExperimentalRenderingEngine,
-    "TypeFace/H": .testWithExperimentalRenderingEngine,
-    "TypeFace/O": .testWithExperimentalRenderingEngine,
-
     /// Test cases for the `AnimationKeypath` / `AnyValueProvider` system
-    "Switch": .init(
-      testWithExperimentalRenderingEngine: true,
-      customValueProviders: [
-        AnimationKeypath(keypath: "Switch Outline Outlines.Fill 1.Color"): ColorValueProvider(.black),
-        AnimationKeypath(keypath: "Checkmark Outlines.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
-        AnimationKeypath(keypath: "Checkmark Outlines 2.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
-        AnimationKeypath(keypath: "X Outlines.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
-      ]),
+    "Switch": .customValueProviders([
+      AnimationKeypath(keypath: "Switch Outline Outlines.Fill 1.Color"): ColorValueProvider(.black),
+      AnimationKeypath(keypath: "Checkmark Outlines.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
+      AnimationKeypath(keypath: "Checkmark Outlines 2.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
+      AnimationKeypath(keypath: "X Outlines.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
+    ]),
 
     // Test cases for `AnimatedImageProvider`
-    "Nonanimating/_dog": .init(
-      testWithExperimentalRenderingEngine: true,
-      customImageProvider: HardcodedImageProvider(imageName: "Samples/Images/dog.png")),
+    "Nonanimating/_dog": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog.png")),
   ]
 }
 
@@ -110,22 +52,10 @@ extension SnapshotConfiguration {
   /// The default configuration to use if no custom mapping is provided
   static let `default` = SnapshotConfiguration()
 
-  /// The default configuration to use for samples in `Samples/Private`
-  static let defaultForPrivateSamples = SnapshotConfiguration.testWithExperimentalRenderingEngine
-
-  /// A `SnapshotConfiguration` value with `testWithExperimentalRenderingEngine` customized to `true`
-  static var testWithExperimentalRenderingEngine: SnapshotConfiguration {
-    var configuration = SnapshotConfiguration.default
-    configuration.testWithExperimentalRenderingEngine = true
-    return configuration
-  }
-
   /// The `SnapshotConfiguration` to use for the given sample JSON file name
   static func forSample(named sampleName: String) -> SnapshotConfiguration {
     if let customConfiguration = customMapping[sampleName] {
       return customConfiguration
-    } else if sampleName.hasPrefix("Private/") {
-      return .defaultForPrivateSamples
     } else {
       return .default
     }
@@ -135,6 +65,26 @@ extension SnapshotConfiguration {
   static func precision(_ precision: Float) -> SnapshotConfiguration {
     var configuration = SnapshotConfiguration.default
     configuration.precision = precision
+    return configuration
+  }
+
+  /// A `SnapshotConfiguration` value using the given custom value providers
+  static func customValueProviders(
+    _ customValueProviders: [AnimationKeypath: AnyValueProvider])
+    -> SnapshotConfiguration
+  {
+    var configuration = SnapshotConfiguration.default
+    configuration.customValueProviders = customValueProviders
+    return configuration
+  }
+
+  /// A `SnapshotConfiguration` value using the given custom value providers
+  static func customImageProvider(
+    _ customImageProvider: AnimationImageProvider)
+    -> SnapshotConfiguration
+  {
+    var configuration = SnapshotConfiguration.default
+    configuration.customImageProvider = customImageProvider
     return configuration
   }
 }
