@@ -1,6 +1,8 @@
 // Created by Cal Stephens on 12/13/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
+// MARK: - LottieConfiguration
+
 /// Global configuration options for Lottie animations
 public struct LottieConfiguration {
 
@@ -16,6 +18,8 @@ public struct LottieConfiguration {
   public var renderingEngine: RenderingEngine
 
 }
+
+// MARK: - RenderingEngine
 
 /// The rendering engine implementation to use when displaying an animation
 public enum RenderingEngine {

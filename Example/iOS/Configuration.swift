@@ -3,7 +3,6 @@
 
 import Foundation
 import Lottie
-import LottieCore
 
 final class Configuration {
 
