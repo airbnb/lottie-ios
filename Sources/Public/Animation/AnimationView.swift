@@ -86,12 +86,12 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  public init() {
+  public init(configuration: LottieConfiguration = .shared) {
     animation = nil
     imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
-    configuration = .shared
+    self.configuration = configuration
     super.init(frame: .zero)
     commonInit()
   }
