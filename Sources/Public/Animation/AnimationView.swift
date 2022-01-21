@@ -1015,8 +1015,10 @@ final public class AnimationView: AnimationViewBase {
 
       // The animation should start playing from the `currentFrame`,
       // if `currentFrame` is included in the time range being played.
-      // We have to configure this differently depending on the loop mode:
-      if currentFrame.clamp(animationContext.playFrom, animationContext.playTo) == currentFrame {
+      let lowerBoundTime = min(animationContext.playFrom, animationContext.playTo)
+      let upperBoundTime = max(animationContext.playFrom, animationContext.playTo)
+      if (lowerBoundTime ..< upperBoundTime).contains(round(currentFrame)) {
+        // We have to configure this differently depending on the loop mode:
         switch loopMode {
         // When playing exactly once (and not looping), we can just set the
         // `playFrom` time to be the `currentFrame`. Since the animation duration
