@@ -86,7 +86,7 @@ extension KeyframeGroup: Decodable where T: Decodable {
 
         keyframes.append(Keyframe<T>(
           value: value,
-          time: time,
+          time: AnimationFrameTime(time),
           isHold: keyframeData.isHold,
           inTangent: previousKeyframeData?.inTangent,
           outTangent: keyframeData.outTangent,
