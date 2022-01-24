@@ -31,7 +31,7 @@ final class AnimatedSwitchRow: UIView, EpoxyableView {
     var title: String
     var onTimeRange: ClosedRange<CGFloat>
     var offTimeRange: ClosedRange<CGFloat>
-    var colorValueProviders: [String: KeyframeGroup<Color>] = [:]
+    var colorValueProviders: [String: [Keyframe<Color>]] = [:]
   }
 
   func setContent(_ content: Content, animated _: Bool) {

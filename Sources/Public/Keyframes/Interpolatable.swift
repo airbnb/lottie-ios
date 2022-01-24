@@ -228,7 +228,11 @@ extension Vector3D: SpatialInterpolatable {
 
 extension Array: Interpolatable, AnyInterpolatable where Element: Interpolatable {
   public func interpolate(to: [Element], amount: CGFloat) -> [Element] {
-    zip(self, to).map { lhs, rhs in
+    LottieLogger.shared.assert(
+      count == to.count,
+      "When interpolating Arrays, both array sound have the same element count.")
+
+    return zip(self, to).map { lhs, rhs in
       lhs.interpolate(to: rhs, amount: amount)
     }
   }

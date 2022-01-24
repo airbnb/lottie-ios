@@ -45,10 +45,10 @@ final class ValueProviderStore {
     }
 
     // Retrieve the type-erased keyframes from the custom `ValueProvider`
-    let typeErasedKeyframes: KeyframeGroup<Any>
+    let typeErasedKeyframes: [Keyframe<Any>]
     switch anyValueProvider.typeErasedStorage {
     case .singleValue(let typeErasedValue):
-      typeErasedKeyframes = KeyframeGroup(typeErasedValue)
+      typeErasedKeyframes = [Keyframe(typeErasedValue)]
 
     case .keyframes(let keyframes, _):
       typeErasedKeyframes = keyframes
@@ -62,22 +62,23 @@ final class ValueProviderStore {
     }
 
     // Convert the type-erased keyframe values using this `CustomizableProperty`'s conversion closure
-    let typedKeyframes = typeErasedKeyframes.compactMap { typeErasedValue -> Value? in
-      let convertedValue = customizableProperty.conversion(typeErasedValue)
+    let typedKeyframes = typeErasedKeyframes.compactMap { typeErasedKeyframe -> Keyframe<Value>? in
+      guard let convertedValue = customizableProperty.conversion(typeErasedKeyframe.value) else {
+        LottieLogger.shared.assertionFailure("""
+        Could not convert value of type \(type(of: typeErasedKeyframe.value)) to expected type \(Value.self)
+        """)
+        return nil
+      }
 
-      LottieLogger.shared.assert(
-        convertedValue != nil,
-        "Could not convert value of type \(type(of: typeErasedValue)) to expected type \(Value.self)")
-
-      return convertedValue
+      return typeErasedKeyframe.withValue(convertedValue)
     }
 
     // Verify that all of the keyframes were successfully converted to the expected type
-    guard typedKeyframes.keyframes.count == typeErasedKeyframes.keyframes.count else {
+    guard typedKeyframes.count == typeErasedKeyframes.count else {
       return nil
     }
 
-    return typedKeyframes
+    return KeyframeGroup(keyframes: ContiguousArray(typedKeyframes))
   }
 
   // MARK: Private

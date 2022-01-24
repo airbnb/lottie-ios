@@ -29,7 +29,7 @@ public final class ColorValueProvider: ValueProvider {
   }
 
   /// Initializes with multiple colors, with timing information
-  public init(_ keyframes: KeyframeGroup<Color>) {
+  public init(_ keyframes: [Keyframe<Color>]) {
     self.keyframes = keyframes
     color = Color(r: 0, g: 0, b: 0, a: 1)
     block = nil
@@ -80,5 +80,5 @@ public final class ColorValueProvider: ValueProvider {
   private var hasUpdate: Bool = true
 
   private var block: ColorValueBlock?
-  private var keyframes: KeyframeGroup<Color>?
+  private var keyframes: [Keyframe<Color>]?
 }

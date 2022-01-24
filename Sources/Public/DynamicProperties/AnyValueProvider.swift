@@ -58,7 +58,11 @@ extension ValueProvider {
       return .singleValue(typedValue)
 
     case .keyframes(let keyframes):
-      return .keyframes(keyframes.map { $0 }, interpolate: storage.value(frame:))
+      return .keyframes(
+        keyframes.map { keyframe in
+          keyframe.withValue(keyframe.value as Any)
+        },
+        interpolate: storage.value(frame:))
     }
   }
 }
@@ -71,7 +75,7 @@ public enum ValueProviderStorage<T: AnyInterpolatable> {
   case singleValue(T)
 
   /// The value provider stores a group of keyframes
-  case keyframes(KeyframeGroup<T>)
+  case keyframes([Keyframe<T>])
 
   /// The value provider stores a closure that is invoked on every frame
   ///  - This is only supported by the main-thread rendering engine
@@ -88,7 +92,7 @@ public enum ValueProviderStorage<T: AnyInterpolatable> {
       return closure(frame)
 
     case .keyframes(let keyframes):
-      return KeyframeInterpolator(keyframes: keyframes.keyframes).storage.value(frame: frame)
+      return KeyframeInterpolator(keyframes: ContiguousArray(keyframes)).storage.value(frame: frame)
     }
   }
 }
@@ -103,7 +107,7 @@ public enum AnyValueProviderStorage {
   /// The value provider stores a group of keyframes
   ///  - Since we can't interpolate a type-erased `KeyframeGroup`,
   ///    the interpolation has to be performed in the `interpolate` closure.
-  case keyframes(KeyframeGroup<Any>, interpolate: (AnimationFrameTime) -> Any)
+  case keyframes([Keyframe<Any>], interpolate: (AnimationFrameTime) -> Any)
 
   /// The value provider stores a closure that is invoked on every frame
   case closure((AnimationFrameTime) -> Any)

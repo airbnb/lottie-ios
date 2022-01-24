@@ -42,14 +42,14 @@ final class ControlsDemoViewController: CollectionViewController {
         onTimeRange: 0.5...1.0,
         offTimeRange: 0.0...0.5,
         colorValueProviders: [
-          "Checkmark Outlines.Group 1.Stroke 1.Color": .init(.black),
-          "Checkmark Outlines 2.Group 1.Stroke 1.Color": .init(.black),
-          "X Outlines.Group 1.Stroke 1.Color": .init(.black),
-          "Switch Outline Outlines.Fill 1.Color": .init(keyframes: [
+          "Checkmark Outlines.Group 1.Stroke 1.Color": [Keyframe(.black)],
+          "Checkmark Outlines 2.Group 1.Stroke 1.Color": [Keyframe(.black)],
+          "X Outlines.Group 1.Stroke 1.Color": [Keyframe(.black)],
+          "Switch Outline Outlines.Fill 1.Color": [
             Keyframe(value: Color.black, time: 0),
             Keyframe(value: Color(r: 0.76, g: 0.76, b: 0.76, a: 1), time: 75),
             Keyframe(value: Color.black, time: 150),
-          ]),
+          ],
         ]))
 
     AnimatedButtonRow.itemModel(

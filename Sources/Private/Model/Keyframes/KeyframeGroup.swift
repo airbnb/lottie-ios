@@ -17,21 +17,21 @@ import Foundation
  This helper object is needed to properly decode the json.
  */
 
-public final class KeyframeGroup<T> {
+final class KeyframeGroup<T> {
 
   // MARK: Lifecycle
 
-  public init(keyframes: ContiguousArray<Keyframe<T>>) {
+  init(keyframes: ContiguousArray<Keyframe<T>>) {
     self.keyframes = keyframes
   }
 
-  public init(_ value: T) {
+  init(_ value: T) {
     keyframes = [Keyframe(value)]
   }
 
-  // MARK: Public
+  // MARK: Internal
 
-  public let keyframes: ContiguousArray<Keyframe<T>>
+  let keyframes: ContiguousArray<Keyframe<T>>
 
   // MARK: Private
 
@@ -43,7 +43,7 @@ public final class KeyframeGroup<T> {
 // MARK: Decodable
 
 extension KeyframeGroup: Decodable where T: Decodable {
-  convenience public init(from decoder: Decoder) throws {
+  convenience init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: KeyframeWrapperKey.self)
 
     if let keyframeData: T = try? container.decode(T.self, forKey: .keyframeData) {
@@ -99,10 +99,10 @@ extension KeyframeGroup: Decodable where T: Decodable {
   }
 }
 
-// MARK: Encodable
+// MARK: - KeyframeGroup + Encodable
 
 extension KeyframeGroup: Encodable where T: Encodable {
-  public func encode(to encoder: Encoder) throws {
+  func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: KeyframeWrapperKey.self)
 
     if keyframes.count == 1 {
@@ -132,7 +132,7 @@ extension KeyframeGroup: Encodable where T: Encodable {
 // MARK: Equatable
 
 extension KeyframeGroup: Equatable where T: Equatable {
-  public static func == (_ lhs: KeyframeGroup<T>, _ rhs: KeyframeGroup<T>) -> Bool {
+  static func == (_ lhs: KeyframeGroup<T>, _ rhs: KeyframeGroup<T>) -> Bool {
     lhs.keyframes == rhs.keyframes
   }
 }
@@ -140,28 +140,8 @@ extension KeyframeGroup: Equatable where T: Equatable {
 // MARK: Hashable
 
 extension KeyframeGroup: Hashable where T: Hashable {
-  public func hash(into hasher: inout Hasher) {
+  func hash(into hasher: inout Hasher) {
     hasher.combine(keyframes)
-  }
-}
-
-// MARK: - Collection helpers
-
-extension KeyframeGroup {
-  // Maps the value of each individual keyframe in this group using the given closure
-  func map<Result>(_ mapping: (T) -> Result) -> KeyframeGroup<Result> {
-    KeyframeGroup<Result>(keyframes: .init(keyframes.map { keyframe in
-      keyframe.withValue(mapping(keyframe.value))
-    }))
-  }
-
-  // Maps the value of each individual keyframe in this group using the given closure,
-  // filtering out `nil`s.
-  func compactMap<Result>(_ mapping: (T) -> Result?) -> KeyframeGroup<Result> {
-    KeyframeGroup<Result>(keyframes: .init(keyframes.compactMap { keyframe in
-      guard let mappedValue = mapping(keyframe.value) else { return nil }
-      return keyframe.withValue(mappedValue)
-    }))
   }
 }
 
