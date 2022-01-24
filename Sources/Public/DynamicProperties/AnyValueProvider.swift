@@ -42,7 +42,7 @@ extension AnyValueProvider {
 
 /// A base protocol for strongly-typed Value Providers
 protocol ValueProvider: AnyValueProvider {
-  associatedtype Value where Value: Interpolatable
+  associatedtype Value: AnyInterpolatable
 
   /// The strongly-typed storage for this Value Provider
   var storage: ValueProviderStorage<Value> { get }
@@ -66,7 +66,7 @@ extension ValueProvider {
 // MARK: - ValueProviderStorage
 
 /// The underlying storage of a `ValueProvider`
-public enum ValueProviderStorage<T: Interpolatable> {
+public enum ValueProviderStorage<T: AnyInterpolatable> {
   /// The value provider stores a single value that is used on all frames
   case singleValue(T)
 

@@ -15,7 +15,10 @@ final class ValueProviderStore {
   func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
     LottieLogger.shared.assert(
       valueProvider.typeErasedStorage.isSupportedByCoreAnimationRenderingEngine,
-      "The Core Animation rendering engine doesn't support Value Providers that vend a closure.")
+      """
+      The Core Animation rendering engine doesn't support Value Providers that vend a closure,
+      because that would require calling the closure on the main thread once per frame.
+      """)
 
     // TODO: Support wildcard path elements
     LottieLogger.shared.assert(
@@ -52,7 +55,8 @@ final class ValueProviderStore {
 
     case .closure:
       LottieLogger.shared.assertionFailure("""
-      The new rendering engine only supports Value Providers with a single fixed value
+      The Core Animation rendering engine doesn't support Value Providers that vend a closure,
+      because that would require calling the closure on the main thread once per frame.
       """)
       return nil
     }
