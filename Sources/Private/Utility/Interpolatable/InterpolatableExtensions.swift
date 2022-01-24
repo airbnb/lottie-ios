@@ -109,7 +109,7 @@ extension CurveVertex: Interpolatable {
   }
 }
 
-// MARK: - BezierPath + SpatialInterpolatable
+// MARK: - BezierPath + Interpolatable
 
 extension BezierPath: Interpolatable {
   func interpolate(to: BezierPath, amount: CGFloat) -> BezierPath {

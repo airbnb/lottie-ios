@@ -3,6 +3,8 @@
 
 import CoreGraphics
 
+// MARK: - Interpolatable
+
 /// A type that can be interpolated between two values
 public protocol Interpolatable: AnyInterpolatable {
   /// Interpolates the `self` to the given number by `amount`.
@@ -25,6 +27,8 @@ public protocol Interpolatable: AnyInterpolatable {
   ///  ```
   func interpolate(to: Self, amount: CGFloat) -> Self
 }
+
+// MARK: - SpatialInterpolatable
 
 /// A type that can be interpolated between two values,
 /// additionally using optional `spatialOutTangent` and `spatialInTangent` values.
@@ -77,7 +81,7 @@ extension SpatialInterpolatable {
   /// Helper that interpolates this `SpatialInterpolatable`
   /// with `nil` spatial in/out tangents
   public func interpolate(to: Self, amount: CGFloat) -> Self {
-    self.interpolate(
+    interpolate(
       to: to,
       amount: amount,
       spatialOutTangent: nil,
@@ -99,10 +103,16 @@ extension SpatialInterpolatable {
   }
 }
 
-// MARK: - BinaryFloatingPoint + Interpolatable
+// MARK: - Double + Interpolatable
 
 extension Double: Interpolatable { }
+
+// MARK: - CGFloat + Interpolatable
+
 extension CGFloat: Interpolatable { }
+
+// MARK: - Float + Interpolatable
+
 extension Float: Interpolatable { }
 
 extension Interpolatable where Self: BinaryFloatingPoint {
@@ -133,6 +143,8 @@ extension CGSize: Interpolatable {
   }
 }
 
+// MARK: - CGPoint + SpatialInterpolatable
+
 extension CGPoint: SpatialInterpolatable {
   public func interpolate(
     to: CGPoint,
@@ -155,6 +167,8 @@ extension CGPoint: SpatialInterpolatable {
     return interpolate(to, outTangent: cp1, inTangent: cp2, amount: amount)
   }
 }
+
+// MARK: - Color + Interpolatable
 
 extension Color: Interpolatable {
   public func interpolate(to: Color, amount: CGFloat) -> Color {
@@ -224,7 +238,7 @@ extension Vector3D: SpatialInterpolatable {
   }
 }
 
-// MARK: - Array + Interpolatable
+// MARK: - Array + Interpolatable, AnyInterpolatable
 
 extension Array: Interpolatable, AnyInterpolatable where Element: Interpolatable {
   public func interpolate(to: [Element], amount: CGFloat) -> [Element] {

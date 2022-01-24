@@ -99,7 +99,7 @@ extension KeyframeGroup: Decodable where T: Decodable {
   }
 }
 
-// MARK: - KeyframeGroup + Encodable
+// MARK: Encodable
 
 extension KeyframeGroup: Encodable where T: Encodable {
   func encode(to encoder: Encoder) throws {

@@ -267,8 +267,6 @@ infix operator +-
 
 extension CGPoint {
 
-  // MARK: Internal
-
   /// Returns the length between the receiver and *CGPoint.zero*
   var vectorLength: CGFloat {
     distanceTo(.zero)
