@@ -34,6 +34,11 @@ extension SnapshotConfiguration {
     "Nonanimating/verifyLineHeight": .precision(0.99),
 
     /// Test cases for the `AnimationKeypath` / `AnyValueProvider` system
+    "Nonanimating/keypathTest": .customValueProviders([
+      AnimationKeypath(keypath: "**.Stroke 1.Color"): ColorValueProvider(.black),
+      AnimationKeypath(keypath: "**.Fill 1.Color"): ColorValueProvider(.red),
+    ]),
+
     "Switch": .customValueProviders([
       AnimationKeypath(keypath: "Checkmark Outlines.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
       AnimationKeypath(keypath: "Checkmark Outlines 2.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
@@ -96,7 +101,6 @@ extension SnapshotConfiguration {
 // MARK: - Color helpers
 
 extension Color {
-  static var black: Color {
-    .init(r: 0, g: 0, b: 0, a: 1)
-  }
+  static let black = Color(r: 0, g: 0, b: 0, a: 1)
+  static let red = Color(r: 1, g: 0, b: 0, a: 1)
 }

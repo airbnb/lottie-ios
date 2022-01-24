@@ -20,17 +20,12 @@ final class ValueProviderStore {
       because that would require calling the closure on the main thread once per frame.
       """)
 
-    // TODO: Support wildcard path elements
-    LottieLogger.shared.assert(
-      !keypath.fullPath.contains("*"),
-      "The new rendering engine currently does not support wildcard elements")
-
     // TODO: Support more value types
     LottieLogger.shared.assert(
       keypath.keys.last == PropertyName.color.rawValue,
       "The new rendering engine currently only supports customizing color values")
 
-    valueProviders[keypath] = valueProvider
+    valueProviders.append((keypath: keypath, valueProvider: valueProvider))
   }
 
   // Retrieves the custom value keyframes for the given property,
@@ -40,7 +35,7 @@ final class ValueProviderStore {
     for keypath: AnimationKeypath)
     -> KeyframeGroup<Value>?
   {
-    guard let anyValueProvider = valueProviders[keypath] else {
+    guard let anyValueProvider = valueProvider(for: keypath) else {
       return nil
     }
 
@@ -83,7 +78,20 @@ final class ValueProviderStore {
 
   // MARK: Private
 
-  private var valueProviders = [AnimationKeypath: AnyValueProvider]()
+  private var valueProviders = [(keypath: AnimationKeypath, valueProvider: AnyValueProvider)]()
+
+  /// Retrieves the most-recently-registered Value Provider that matches the given keypat
+  private func valueProvider(for keypath: AnimationKeypath) -> AnyValueProvider? {
+    // Iterate backwards though the list of value providers,
+    // so the first match we find is the one that was registered most recently
+    for (registeredKeypath, valueProvider) in valueProviders.reversed() {
+      if registeredKeypath.matches(keypath) {
+        return valueProvider
+      }
+    }
+
+    return nil
+  }
 
 }
 
@@ -97,5 +105,24 @@ extension AnyValueProviderStorage {
     case .closure:
       return false
     }
+  }
+}
+
+extension AnimationKeypath {
+  /// Whether or not this keypath matches the given keypath from the animation hierarchy
+  func matches(_ keypath: AnimationKeypath) -> Bool {
+    var regex = "^" // match the start of the string
+      + keys.joined(separator: "\\.") // match this keypath, escaping "." characters
+      + "$" // match the end of the string
+
+    // ** wildcards match anything
+    //  - "**.Color" matches both "Layer 1.Color" and "Layer 1.Layer 2.Color"
+    regex = regex.replacingOccurrences(of: "**", with: ".+")
+
+    // * wildcards match any individual path component
+    //  - "*.Color" matches "Layer 1.Color" but not "Layer 1.Layer 2.Color"
+    regex = regex.replacingOccurrences(of: "*", with: "[^.]+")
+
+    return keypath.fullPath.range(of: regex, options: .regularExpression) != nil
   }
 }
