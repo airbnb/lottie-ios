@@ -75,6 +75,11 @@ public enum ValueProviderStorage<T: AnyInterpolatable> {
   case singleValue(T)
 
   /// The value provider stores a group of keyframes
+  ///  - The main-thread rendering engine interpolates values in these keyframes
+  ///    using `T`'s `Interpolatable` implementation.
+  ///  - The Core Animation rendering engine constructs a `CAKeyframeAnimation`
+  ///    using these keyframes. The Core Animation render server performs
+  ///    the interpolation, without calling `T`'s `Interpolatable` implementation.
   case keyframes([Keyframe<T>])
 
   /// The value provider stores a closure that is invoked on every frame
