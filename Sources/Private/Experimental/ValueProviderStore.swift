@@ -82,15 +82,11 @@ final class ValueProviderStore {
 
   /// Retrieves the most-recently-registered Value Provider that matches the given keypat
   private func valueProvider(for keypath: AnimationKeypath) -> AnyValueProvider? {
-    // Iterate backwards though the list of value providers,
-    // so the first match we find is the one that was registered most recently
-    for (registeredKeypath, valueProvider) in valueProviders.reversed() {
-      if registeredKeypath.matches(keypath) {
-        return valueProvider
-      }
-    }
-
-    return nil
+    // Find the last keypath matching the given keypath,
+    // so we return the value provider that was registered most-recently
+    valueProviders.last(where: { registeredKeypath, _ in
+      keypath.matches(registeredKeypath)
+    })?.valueProvider
   }
 
 }
@@ -109,10 +105,11 @@ extension AnyValueProviderStorage {
 }
 
 extension AnimationKeypath {
-  /// Whether or not this keypath matches the given keypath from the animation hierarchy
+  /// Whether or not this keypath from the animation hierarchy
+  /// matches the given keypath (which may contain wildcards)
   func matches(_ keypath: AnimationKeypath) -> Bool {
     var regex = "^" // match the start of the string
-      + keys.joined(separator: "\\.") // match this keypath, escaping "." characters
+      + keypath.keys.joined(separator: "\\.") // match this keypath, escaping "." characters
       + "$" // match the end of the string
 
     // ** wildcards match anything
@@ -123,6 +120,6 @@ extension AnimationKeypath {
     //  - "*.Color" matches "Layer 1.Color" but not "Layer 1.Layer 2.Color"
     regex = regex.replacingOccurrences(of: "*", with: "[^.]+")
 
-    return keypath.fullPath.range(of: regex, options: .regularExpression) != nil
+    return fullPath.range(of: regex, options: .regularExpression) != nil
   }
 }
