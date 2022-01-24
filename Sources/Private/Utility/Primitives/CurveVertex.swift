@@ -105,7 +105,7 @@ struct CurveVertex {
 
     if outTangentRelative.isZero && toVertex.inTangentRelative.isZero {
       /// If both tangents are zero, then span to be trimmed is a straight line.
-      let trimPoint = point.interpolate(toVertex.point, amount: position)
+      let trimPoint = point.interpolate(to: toVertex.point, amount: position)
       return (
         start: self,
         trimPoint: CurveVertex(point: trimPoint, inTangentRelative: .zero, outTangentRelative: .zero),
@@ -115,12 +115,12 @@ struct CurveVertex {
     /// One option is to cut by a stride until it gets close then edge it down.
     /// Measuring a percentage of the spans does not equal the same as measuring a percentage of length.
     /// This is where the historical trim path bugs come from.
-    let a = point.interpolate(outTangent, amount: position)
-    let b = outTangent.interpolate(toVertex.inTangent, amount: position)
-    let c = toVertex.inTangent.interpolate(toVertex.point, amount: position)
-    let d = a.interpolate(b, amount: position)
-    let e = b.interpolate(c, amount: position)
-    let f = d.interpolate(e, amount: position)
+    let a = point.interpolate(to: outTangent, amount: position)
+    let b = outTangent.interpolate(to: toVertex.inTangent, amount: position)
+    let c = toVertex.inTangent.interpolate(to: toVertex.point, amount: position)
+    let d = a.interpolate(to: b, amount: position)
+    let e = b.interpolate(to: c, amount: position)
+    let f = d.interpolate(to: e, amount: position)
     return (
       start: CurveVertex(point: point, inTangent: inTangent, outTangent: a),
       trimPoint: CurveVertex(point: f, inTangent: d, outTangent: e),

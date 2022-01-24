@@ -8,8 +8,17 @@
 import CoreGraphics
 import Foundation
 
-extension Keyframe {
+extension Keyframe where T: AnyInterpolatable {
+  func interpolate(to: Keyframe<T>, progress: CGFloat) -> T {
+    value._interpolate(
+      to: to.value,
+      amount: progress,
+      spatialOutTangent: spatialOutTangent?.pointValue,
+      spatialInTangent: to.spatialInTangent?.pointValue)
+  }
+}
 
+extension Keyframe {
   /// Interpolates the keyTime into a value from 0-1
   func interpolatedProgress(_ to: Keyframe, keyTime: CGFloat) -> CGFloat {
     let startTime = time
@@ -34,14 +43,4 @@ extension Keyframe {
     }
     return progress
   }
-
-  /// Interpolates the keyframes' by a progress from 0-1
-  func interpolate(_ to: Keyframe, progress: CGFloat) -> T {
-    value.interpolateTo(
-      to.value,
-      amount: progress,
-      spatialOutTangent: spatialOutTangent?.pointValue,
-      spatialInTangent: to.spatialInTangent?.pointValue)
-  }
-
 }

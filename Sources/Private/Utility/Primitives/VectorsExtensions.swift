@@ -54,7 +54,7 @@ extension Double {
 /**
  Needed for decoding json {x: y:} to a CGPoint
  */
-struct Vector2D: Codable {
+public struct Vector2D: Codable, Hashable {
 
   // MARK: Lifecycle
 
@@ -63,7 +63,7 @@ struct Vector2D: Codable {
     self.y = y
   }
 
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Vector2D.CodingKeys.self)
 
     do {
@@ -81,6 +81,14 @@ struct Vector2D: Codable {
     }
   }
 
+  // MARK: Public
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: Vector2D.CodingKeys.self)
+    try container.encode(x, forKey: .x)
+    try container.encode(y, forKey: .y)
+  }
+
   // MARK: Internal
 
   var x: Double
@@ -88,12 +96,6 @@ struct Vector2D: Codable {
 
   var pointValue: CGPoint {
     CGPoint(x: x, y: y)
-  }
-
-  func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: Vector2D.CodingKeys.self)
-    try container.encode(x, forKey: .x)
-    try container.encode(y, forKey: .y)
   }
 
   // MARK: Private

@@ -15,12 +15,31 @@ extension CALayer {
     value keyframeValueMapping: (KeyframeValue) -> ValueRepresentation,
     context: LayerAnimationContext)
   {
-    precondition(!keyframes.isEmpty, "Keyframes for \"\(property.caLayerKeypath)\" must be non-empty")
-
+    let animation: CAPropertyAnimation
     if let customAnimation = customizedAnimation(for: property, context: context) {
-      add(customAnimation, timedWith: context)
-      return
+      animation = customAnimation
+    } else {
+      animation = defaultAnimation(
+        for: property,
+        keyframes: keyframes,
+        value: keyframeValueMapping,
+        context: context)
     }
+
+    add(animation, timedWith: context)
+  }
+
+  // MARK: Private
+
+  /// Constructs a `CAKeyframeAnimation` that reflects the given keyframes
+  private func defaultAnimation<KeyframeValue, ValueRepresentation>(
+    for property: LayerProperty<ValueRepresentation>,
+    keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
+    value keyframeValueMapping: (KeyframeValue) -> ValueRepresentation,
+    context: LayerAnimationContext)
+    -> CAPropertyAnimation
+  {
+    precondition(!keyframes.isEmpty, "Keyframes for \"\(property.caLayerKeypath)\" must be non-empty")
 
     let animation = CAKeyframeAnimation(keyPath: property.caLayerKeypath)
 
@@ -122,11 +141,8 @@ extension CALayer {
     animation.values = values
     animation.keyTimes = keyTimes
     animation.timingFunctions = timingFunctions
-
-    add(animation, timedWith: context)
+    return animation
   }
-
-  // MARK: Private
 
   /// A `CAAnimation` that applies the custom value from the `AnyValueProvider`
   /// registered for this specific property's `AnimationKeypath`,
@@ -138,18 +154,16 @@ extension CALayer {
   {
     guard
       let customizableProperty = property.customizableProperty,
-      let customValue = context.valueProviderStore.customValue(
+      let customKeyframes = context.valueProviderStore.customKeyframes(
         of: customizableProperty,
         for: AnimationKeypath(keys: context.currentKeypath.keys + customizableProperty.name.map { $0.rawValue }))
     else { return nil }
 
-    // Build a `CAAnimation` that sets the `caLayerKeypath` to the custom value.
-    // The simplest way to do this it to just create a `CABasicAnimation` that
-    // uses `customValue` as both the initial and final value.
-    let animation = CABasicAnimation(keyPath: property.caLayerKeypath)
-    animation.fromValue = customValue
-    animation.toValue = customValue
-    return animation
+    return defaultAnimation(
+      for: property,
+      keyframes: customKeyframes.keyframes,
+      value: { $0 },
+      context: context)
   }
 
 }

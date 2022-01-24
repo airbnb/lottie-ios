@@ -8,69 +8,6 @@
 import CoreGraphics
 import Foundation
 
-// MARK: - Keyframe
-
-/**
- Keyframe represents a point in time and is the container for datatypes.
- Note: This is a parent class and should not be used directly.
- */
-final class Keyframe<T: Interpolatable> {
-
-  // MARK: Lifecycle
-
-  /// Initialize a value-only keyframe with no time data.
-  init(
-    _ value: T,
-    spatialInTangent: Vector3D? = nil,
-    spatialOutTangent: Vector3D? = nil)
-  {
-    self.value = value
-    time = 0
-    isHold = true
-    inTangent = nil
-    outTangent = nil
-    self.spatialInTangent = spatialInTangent
-    self.spatialOutTangent = spatialOutTangent
-  }
-
-  /// Initialize a keyframe
-  init(
-    value: T,
-    time: Double,
-    isHold: Bool,
-    inTangent: Vector2D?,
-    outTangent: Vector2D?,
-    spatialInTangent: Vector3D? = nil,
-    spatialOutTangent: Vector3D? = nil)
-  {
-    self.value = value
-    self.time = CGFloat(time)
-    self.isHold = isHold
-    self.outTangent = outTangent
-    self.inTangent = inTangent
-    self.spatialInTangent = spatialInTangent
-    self.spatialOutTangent = spatialOutTangent
-  }
-
-  // MARK: Internal
-
-  /// The value of the keyframe
-  let value: T
-  /// The time in frames of the keyframe.
-  let time: CGFloat
-  /// A hold keyframe freezes interpolation until the next keyframe that is not a hold.
-  let isHold: Bool
-  /// The in tangent for the time interpolation curve.
-  let inTangent: Vector2D?
-  /// The out tangent for the time interpolation curve.
-  let outTangent: Vector2D?
-
-  /// The spatial in tangent of the vector.
-  let spatialInTangent: Vector3D?
-  /// The spatial out tangent of the vector.
-  let spatialOutTangent: Vector3D?
-}
-
 // MARK: - KeyframeData
 
 /**
@@ -80,7 +17,7 @@ final class Keyframe<T: Interpolatable> {
  type of keyframea and also the version of the JSON. By parsing the raw data
  we can reconfigure it into a constant format.
  */
-final class KeyframeData<T: Codable>: Codable {
+final class KeyframeData<T> {
 
   // MARK: Lifecycle
 
@@ -143,3 +80,11 @@ final class KeyframeData<T: Codable>: Codable {
     return false
   }
 }
+
+// MARK: Encodable
+
+extension KeyframeData: Encodable where T: Encodable { }
+
+// MARK: Decodable
+
+extension KeyframeData: Decodable where T: Decodable { }

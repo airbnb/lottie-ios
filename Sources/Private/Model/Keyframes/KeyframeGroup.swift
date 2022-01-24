@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - KeyframeGroup
+
 /**
  Used for coding/decoding a group of Keyframes by type.
 
@@ -15,7 +17,7 @@ import Foundation
  This helper object is needed to properly decode the json.
  */
 
-final class KeyframeGroup<T>: Codable where T: Codable, T: Interpolatable {
+final class KeyframeGroup<T> {
 
   // MARK: Lifecycle
 
@@ -27,12 +29,26 @@ final class KeyframeGroup<T>: Codable where T: Codable, T: Interpolatable {
     keyframes = [Keyframe(value)]
   }
 
-  required init(from decoder: Decoder) throws {
+  // MARK: Internal
+
+  let keyframes: ContiguousArray<Keyframe<T>>
+
+  // MARK: Private
+
+  private enum KeyframeWrapperKey: String, CodingKey {
+    case keyframeData = "k"
+  }
+}
+
+// MARK: Decodable
+
+extension KeyframeGroup: Decodable where T: Decodable {
+  convenience init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: KeyframeWrapperKey.self)
 
     if let keyframeData: T = try? container.decode(T.self, forKey: .keyframeData) {
       /// Try to decode raw value; No keyframe data.
-      keyframes = [Keyframe<T>(keyframeData)]
+      self.init(keyframes: [Keyframe<T>(keyframeData)])
     } else {
       /**
        Decode and array of keyframes.
@@ -70,7 +86,7 @@ final class KeyframeGroup<T>: Codable where T: Codable, T: Interpolatable {
 
         keyframes.append(Keyframe<T>(
           value: value,
-          time: time,
+          time: AnimationFrameTime(time),
           isHold: keyframeData.isHold,
           inTangent: previousKeyframeData?.inTangent,
           outTangent: keyframeData.outTangent,
@@ -78,14 +94,14 @@ final class KeyframeGroup<T>: Codable where T: Codable, T: Interpolatable {
           spatialOutTangent: keyframeData.spatialOutTangent))
         previousKeyframeData = keyframeData
       }
-      self.keyframes = keyframes
+      self.init(keyframes: keyframes)
     }
   }
+}
 
-  // MARK: Internal
+// MARK: Encodable
 
-  let keyframes: ContiguousArray<Keyframe<T>>
-
+extension KeyframeGroup: Encodable where T: Encodable {
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: KeyframeWrapperKey.self)
 
@@ -111,10 +127,34 @@ final class KeyframeGroup<T>: Codable where T: Codable, T: Interpolatable {
       }
     }
   }
+}
 
-  // MARK: Private
+// MARK: Equatable
 
-  private enum KeyframeWrapperKey: String, CodingKey {
-    case keyframeData = "k"
+extension KeyframeGroup: Equatable where T: Equatable {
+  static func == (_ lhs: KeyframeGroup<T>, _ rhs: KeyframeGroup<T>) -> Bool {
+    lhs.keyframes == rhs.keyframes
+  }
+}
+
+// MARK: Hashable
+
+extension KeyframeGroup: Hashable where T: Hashable {
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(keyframes)
+  }
+}
+
+extension Keyframe {
+  /// Creates a copy of this `Keyframe` with the same timing data, but a different value
+  func withValue<Value>(_ newValue: Value) -> Keyframe<Value> {
+    Keyframe<Value>(
+      value: newValue,
+      time: time,
+      isHold: isHold,
+      inTangent: inTangent,
+      outTangent: outTangent,
+      spatialInTangent: spatialInTangent,
+      spatialOutTangent: spatialOutTangent)
   }
 }

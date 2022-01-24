@@ -11,7 +11,7 @@ import Foundation
 // MARK: - KeyframeInterpolator
 
 /// A value provider that produces a value at Time from a group of keyframes
-final class KeyframeInterpolator<ValueType>: ValueProvider where ValueType: Interpolatable {
+final class KeyframeInterpolator<ValueType>: ValueProvider where ValueType: AnyInterpolatable {
 
   // MARK: Lifecycle
 
@@ -42,7 +42,7 @@ final class KeyframeInterpolator<ValueType>: ValueProvider where ValueType: Inte
       {
         /// We have leading and trailing keyframe.
         progress = leading.interpolatedProgress(trailing, keyTime: frame)
-        value = leading.interpolate(trailing, progress: progress)
+        value = leading.interpolate(to: trailing, progress: progress)
       } else if let leading = leadingKeyframe {
         progress = 0
         value = leading.value

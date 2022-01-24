@@ -8,53 +8,7 @@
 import CoreGraphics
 import Foundation
 
-// MARK: - Vector1D + Interpolatable
-
-extension Vector1D: Interpolatable {
-  func interpolateTo(_ to: Vector1D, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> Vector1D {
-    value.interpolateTo(to.value, amount: amount).vectorValue
-  }
-}
-
-// MARK: - Vector2D + Interpolatable
-
-extension Vector2D: Interpolatable {
-  func interpolateTo(_ to: Vector2D, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> Vector2D {
-    pointValue.interpolateTo(
-      to.pointValue,
-      amount: CGFloat(amount),
-      spatialOutTangent: spatialOutTangent,
-      spatialInTangent: spatialInTangent).vector2dValue
-  }
-
-}
-
-// MARK: - Vector3D + Interpolatable
-
-extension Vector3D: Interpolatable {
-  func interpolateTo(_ to: Vector3D, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> Vector3D {
-    if spatialInTangent != nil || spatialOutTangent != nil {
-      // TODO Support third dimension spatial interpolation
-      let point = pointValue.interpolateTo(
-        to.pointValue,
-        amount: amount,
-        spatialOutTangent: spatialOutTangent,
-        spatialInTangent: spatialInTangent)
-      return Vector3D(
-        x: point.x,
-        y: point.y,
-        z: CGFloat(z.interpolateTo(to.z, amount: amount)))
-    }
-    return Vector3D(
-      x: x.interpolateTo(to.x, amount: amount),
-      y: y.interpolateTo(to.y, amount: amount),
-      z: z.interpolateTo(to.z, amount: amount))
-  }
-}
-
-// MARK: - Color + Interpolatable
-
-extension Color: Interpolatable {
+extension Color {
 
   // MARK: Lifecycle
 
@@ -142,44 +96,28 @@ extension Color: Interpolatable {
     return (y: y, u: u, v: v, a: a)
   }
 
-  func interpolateTo(_ to: Color, amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> Color {
-    Color(
-      r: r.interpolateTo(to.r, amount: amount),
-      g: g.interpolateTo(to.g, amount: amount),
-      b: b.interpolateTo(to.b, amount: amount),
-      a: a.interpolateTo(to.a, amount: amount))
-  }
 }
 
 // MARK: - CurveVertex + Interpolatable
 
 extension CurveVertex: Interpolatable {
-  func interpolateTo(
-    _ to: CurveVertex,
-    amount: CGFloat,
-    spatialOutTangent _: CGPoint?,
-    spatialInTangent _: CGPoint?)
-    -> CurveVertex
-  {
+  func interpolate(to: CurveVertex, amount: CGFloat) -> CurveVertex {
     CurveVertex(
-      point: point.interpolate(to.point, amount: amount),
-      inTangent: inTangent.interpolate(to.inTangent, amount: amount),
-      outTangent: outTangent.interpolate(to.outTangent, amount: amount))
+      point: point.interpolate(to: to.point, amount: amount),
+      inTangent: inTangent.interpolate(to: to.inTangent, amount: amount),
+      outTangent: outTangent.interpolate(to: to.outTangent, amount: amount))
   }
 }
 
 // MARK: - BezierPath + Interpolatable
 
 extension BezierPath: Interpolatable {
-  func interpolateTo(_ to: BezierPath, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> BezierPath {
+  func interpolate(to: BezierPath, amount: CGFloat) -> BezierPath {
     var newPath = BezierPath()
     for i in 0..<min(elements.count, to.elements.count) {
       let fromVertex = elements[i].vertex
       let toVertex = to.elements[i].vertex
-      newPath
-        .addVertex(
-          fromVertex
-            .interpolateTo(toVertex, amount: amount, spatialOutTangent: spatialOutTangent, spatialInTangent: spatialInTangent))
+      newPath.addVertex(fromVertex.interpolate(to: toVertex, amount: amount))
     }
     return newPath
   }
@@ -188,30 +126,10 @@ extension BezierPath: Interpolatable {
 // MARK: - TextDocument + Interpolatable
 
 extension TextDocument: Interpolatable {
-
-  func interpolateTo(
-    _ to: TextDocument,
-    amount: CGFloat,
-    spatialOutTangent _: CGPoint?,
-    spatialInTangent _: CGPoint?)
-    -> TextDocument
-  {
+  func interpolate(to: TextDocument, amount: CGFloat) -> TextDocument {
     if amount == 1 {
       return to
     }
     return self
   }
-}
-
-// MARK: - Array + Interpolatable
-
-extension Array: Interpolatable where Element == Double {
-  func interpolateTo(_ to: [Element], amount: CGFloat, spatialOutTangent _: CGPoint?, spatialInTangent _: CGPoint?) -> [Element] {
-    var returnArray = [Double]()
-    for i in 0..<count {
-      returnArray.append(self[i].interpolateTo(to[i], amount: amount))
-    }
-    return returnArray
-  }
-
 }
