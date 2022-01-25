@@ -68,6 +68,11 @@ namespace :test do
       # Build the LottieCarthage framework scheme
       sh 'carthage build --use-xcframeworks'
 
+      # Delete Carthage's derived data to verify that the built .xcframework doesn't depend on any
+      # side effects from building on this specific machine.
+      # https://github.com/airbnb/lottie-ios/issues/1492
+      sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit/DerivedData'
+
       # Build a test app that imports and uses the LottieCarthage framework
       sh 'xcodebuild build -scheme CarthageTest -destination "platform=iOS Simulator,name=iPhone 8"'
     end
