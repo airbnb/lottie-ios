@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Lottie.xcodeproj">
+      location = "container:Lottie.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Example/Example.xcodeproj">
