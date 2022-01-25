@@ -9,17 +9,17 @@ namespace :build do
 
     desc 'Builds the Lottie package for iOS'
     task :iOS do
-      xcodebuild('build -scheme "Lottie (iOS)" -destination generic/platform=iOS')
+      xcodebuild('build -scheme "Lottie (iOS)" -destination generic/platform=iOS -workspace Lottie.xcworkspace')
     end
 
     desc 'Builds the Lottie package for macOS'
     task :macOS do
-      xcodebuild('build -scheme "Lottie (macOS)" -destination generic/platform=macOS')
+      xcodebuild('build -scheme "Lottie (macOS)" -destination generic/platform=macOS -workspace Lottie.xcworkspace')
     end
 
     desc 'Builds the Lottie package for tvOS'
     task :tvOS do
-      xcodebuild('build -scheme "Lottie (tvOS)" -destination generic/platform=tvOS')
+      xcodebuild('build -scheme "Lottie (tvOS)" -destination generic/platform=tvOS -workspace Lottie.xcworkspace')
     end
   end
 
@@ -30,17 +30,17 @@ namespace :build do
 
     desc 'Builds the iOS Lottie Example app'
     task :iOS do
-      xcodebuild('build -scheme "Example (iOS)" -destination "platform=iOS Simulator,name=iPhone 8"')
+      xcodebuild('build -scheme "Example (iOS)" -destination "platform=iOS Simulator,name=iPhone 8" -workspace Lottie.xcworkspace')
     end
 
     desc 'Builds the macOS Lottie Example app'
     task :macOS do
-      xcodebuild('build -scheme "Example (macOS)"')
+      xcodebuild('build -scheme "Example (macOS)" -workspace Lottie.xcworkspace')
     end
 
     desc 'Builds the tvOS Lottie Example app'
     task :tvOS do
-      xcodebuild('build -scheme "Example (tvOS)" -destination "platform=tvOS Simulator,name=Apple TV"')
+      xcodebuild('build -scheme "Example (tvOS)" -destination "platform=tvOS Simulator,name=Apple TV" -workspace Lottie.xcworkspace')
     end
   end
 end
