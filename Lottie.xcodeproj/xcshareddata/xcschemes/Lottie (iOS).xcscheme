@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2E9E77AB27602BD400C84BA3"
-               BuildableName = "Example (iOS).app"
-               BlueprintName = "Example (iOS)"
-               ReferencedContainer = "container:Example.xcodeproj">
+               BlueprintIdentifier = "2E80409927A0725D006E74CB"
+               BuildableName = "Lottie.framework"
+               BlueprintName = "Lottie-iOS"
+               ReferencedContainer = "container:Lottie.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -26,8 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -36,7 +35,7 @@
                BlueprintIdentifier = "2E8040AB27A072B8006E74CB"
                BuildableName = "LottieTests.xctest"
                BlueprintName = "LottieTests"
-               ReferencedContainer = "container:../Lottie.xcodeproj">
+               ReferencedContainer = "container:Lottie.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -51,16 +50,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2E9E77AB27602BD400C84BA3"
-            BuildableName = "Example (iOS).app"
-            BlueprintName = "Example (iOS)"
-            ReferencedContainer = "container:Example.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -68,16 +57,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2E9E77AB27602BD400C84BA3"
-            BuildableName = "Example (iOS).app"
-            BlueprintName = "Example (iOS)"
-            ReferencedContainer = "container:Example.xcodeproj">
+            BlueprintIdentifier = "2E80409927A0725D006E74CB"
+            BuildableName = "Lottie.framework"
+            BlueprintName = "Lottie-iOS"
+            ReferencedContainer = "container:Lottie.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

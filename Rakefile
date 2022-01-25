@@ -9,17 +9,17 @@ namespace :build do
 
     desc 'Builds the Lottie package for iOS'
     task :iOS do
-      xcodebuild('build -scheme Lottie -destination generic/platform=iOS')
+      xcodebuild('build -scheme "Lottie (iOS)" -destination generic/platform=iOS')
     end
 
     desc 'Builds the Lottie package for macOS'
     task :macOS do
-      xcodebuild('build -scheme Lottie -destination generic/platform=macOS')
+      xcodebuild('build -scheme "Lottie (macOS)" -destination generic/platform=macOS')
     end
 
     desc 'Builds the Lottie package for tvOS'
     task :tvOS do
-      xcodebuild('build -scheme Lottie -destination generic/platform=tvOS')
+      xcodebuild('build -scheme "Lottie (tvOS)" -destination generic/platform=tvOS')
     end
   end
 

@@ -14,24 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "_LottieCore"
-               BuildableName = "_LottieCore"
-               BlueprintName = "_LottieCore"
-               ReferencedContainer = "container:..">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2ED64E472770F967006AA0F3"
-               BuildableName = "Lottie.framework"
-               BlueprintName = "Lottie"
-               ReferencedContainer = "container:CarthageSupport.xcodeproj">
+               BlueprintIdentifier = "2EAF59AC27A0787B00E00531"
+               BuildableName = "Lottie_macOS.framework"
+               BlueprintName = "Lottie-macOS"
+               ReferencedContainer = "container:Lottie.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -64,10 +50,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2ED64E472770F967006AA0F3"
-            BuildableName = "Lottie.framework"
-            BlueprintName = "Lottie"
-            ReferencedContainer = "container:CarthageSupport.xcodeproj">
+            BlueprintIdentifier = "2EAF59AC27A0787B00E00531"
+            BuildableName = "Lottie_macOS.framework"
+            BlueprintName = "Lottie-macOS"
+            ReferencedContainer = "container:Lottie.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

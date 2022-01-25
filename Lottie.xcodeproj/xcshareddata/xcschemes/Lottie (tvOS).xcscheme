@@ -14,24 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Lottie"
-               BuildableName = "Lottie"
-               BlueprintName = "Lottie"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "LottieTests"
-               BuildableName = "LottieTests"
-               BlueprintName = "LottieTests"
-               ReferencedContainer = "container:">
+               BlueprintIdentifier = "2EAF59B827A078E400E00531"
+               BuildableName = "Lottie.framework"
+               BlueprintName = "Lottie-tvOS"
+               ReferencedContainer = "container:Lottie.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -40,19 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "LottieTests"
-               BuildableName = "LottieTests"
-               BlueprintName = "LottieTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -75,10 +50,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Lottie"
-            BuildableName = "Lottie"
-            BlueprintName = "Lottie"
-            ReferencedContainer = "container:">
+            BlueprintIdentifier = "2EAF59B827A078E400E00531"
+            BuildableName = "Lottie.framework"
+            BlueprintName = "Lottie-tvOS"
+            ReferencedContainer = "container:Lottie.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
