@@ -74,7 +74,17 @@ namespace :test do
       sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit/DerivedData'
 
       # Build a test app that imports and uses the LottieCarthage framework
-      sh 'xcodebuild build -scheme CarthageTest -destination "platform=iOS Simulator,name=iPhone 8"'
+      xcodebuild('build -scheme CarthageTest -destination "platform=iOS Simulator,name=iPhone 8"')
+    end
+  end
+
+  desc 'Tests Swift Package Manager support'
+  task :spm do
+    Dir.chdir('script/test-spm') do
+      # Build for iOS, macOS, and tvOS using the targets defined in Package.swift
+      xcodebuild('build -scheme "Lottie" -destination generic/platform=iOS')
+      xcodebuild('build -scheme "Lottie" -destination generic/platform=macOS')
+      xcodebuild('build -scheme "Lottie" -destination generic/platform=tvOS')
     end
   end
 end
