@@ -9,17 +9,17 @@ namespace :build do
 
     desc 'Builds the Lottie package for iOS'
     task :iOS do
-      xcodebuild('build -scheme Lottie -destination generic/platform=iOS')
+      xcodebuild('build -scheme "Lottie (iOS)" -destination generic/platform=iOS -workspace Lottie.xcworkspace')
     end
 
     desc 'Builds the Lottie package for macOS'
     task :macOS do
-      xcodebuild('build -scheme Lottie -destination generic/platform=macOS')
+      xcodebuild('build -scheme "Lottie (macOS)" -destination generic/platform=macOS -workspace Lottie.xcworkspace')
     end
 
     desc 'Builds the Lottie package for tvOS'
     task :tvOS do
-      xcodebuild('build -scheme Lottie -destination generic/platform=tvOS')
+      xcodebuild('build -scheme "Lottie (tvOS)" -destination generic/platform=tvOS -workspace Lottie.xcworkspace')
     end
   end
 
@@ -30,17 +30,17 @@ namespace :build do
 
     desc 'Builds the iOS Lottie Example app'
     task :iOS do
-      xcodebuild('build -scheme "Example (iOS)" -destination "platform=iOS Simulator,name=iPhone 8"')
+      xcodebuild('build -scheme "Example (iOS)" -destination "platform=iOS Simulator,name=iPhone 8" -workspace Lottie.xcworkspace')
     end
 
     desc 'Builds the macOS Lottie Example app'
     task :macOS do
-      xcodebuild('build -scheme "Example (macOS)"')
+      xcodebuild('build -scheme "Example (macOS)" -workspace Lottie.xcworkspace')
     end
 
     desc 'Builds the tvOS Lottie Example app'
     task :tvOS do
-      xcodebuild('build -scheme "Example (tvOS)" -destination "platform=tvOS Simulator,name=Apple TV"')
+      xcodebuild('build -scheme "Example (tvOS)" -destination "platform=tvOS Simulator,name=Apple TV" -workspace Lottie.xcworkspace')
     end
   end
 end
@@ -49,7 +49,7 @@ namespace :test do
   desc 'Tests the Lottie package for iOS'
   task :package do
     sh 'rm -rf Tests/Artifacts'
-    xcodebuild('test -scheme Lottie -destination "platform=iOS Simulator,name=iPhone 8" -resultBundlePath Tests/Artifacts/LottieTests.xcresult')
+    xcodebuild('test -scheme "Lottie (iOS)" -destination "platform=iOS Simulator,name=iPhone 8" -resultBundlePath Tests/Artifacts/LottieTests.xcresult')
   end
 
   desc 'Processes .xcresult artifacts from the most recent test:package execution'
@@ -68,8 +68,23 @@ namespace :test do
       # Build the LottieCarthage framework scheme
       sh 'carthage build --use-xcframeworks'
 
+      # Delete Carthage's derived data to verify that the built .xcframework doesn't depend on any
+      # side effects from building on this specific machine.
+      # https://github.com/airbnb/lottie-ios/issues/1492
+      sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit/DerivedData'
+
       # Build a test app that imports and uses the LottieCarthage framework
-      sh 'xcodebuild build -scheme CarthageTest -destination "platform=iOS Simulator,name=iPhone 8"'
+      xcodebuild('build -scheme CarthageTest -destination "platform=iOS Simulator,name=iPhone 8"')
+    end
+  end
+
+  desc 'Tests Swift Package Manager support'
+  task :spm do
+    Dir.chdir('script/test-spm') do
+      # Build for iOS, macOS, and tvOS using the targets defined in Package.swift
+      xcodebuild('build -scheme "Lottie" -destination generic/platform=iOS')
+      xcodebuild('build -scheme "Lottie" -destination generic/platform=macOS')
+      xcodebuild('build -scheme "Lottie" -destination generic/platform=tvOS')
     end
   end
 end

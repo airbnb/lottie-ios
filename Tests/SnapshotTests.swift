@@ -8,7 +8,7 @@ import XCTest
 import UIKit
 #endif
 
-@testable import LottieCore
+@testable import Lottie
 
 // MARK: - SnapshotTests
 
@@ -92,26 +92,10 @@ class SnapshotTests: XCTestCase {
   private let samplesDirectoryName = "Samples"
 
   /// The list of snapshot image files in `Tests/__Snapshots__`
-  private let snapshotURLs = Bundle.module.urls(forResourcesWithExtension: "png", subdirectory: nil)!
+  private let snapshotURLs = Bundle.module.fileURLs(in: "__Snapshots__", withSuffix: "png")
 
   /// The list of sample animation files in `Tests/Samples`
-  private lazy var sampleAnimationURLs: [URL] = {
-    let enumerator = FileManager.default.enumerator(atPath: Bundle.module.bundlePath)!
-
-    var sampleAnimationURLs: [URL] = []
-
-    while let fileSubpath = enumerator.nextObject() as? String {
-      if
-        fileSubpath.hasPrefix(samplesDirectoryName),
-        fileSubpath.contains("json")
-      {
-        let fileURL = Bundle.module.bundleURL.appendingPathComponent(fileSubpath)
-        sampleAnimationURLs.append(fileURL)
-      }
-    }
-
-    return sampleAnimationURLs
-  }()
+  private lazy var sampleAnimationURLs = Bundle.module.fileURLs(in: "Samples", withSuffix: "json")
 
   /// Captures snapshots of `sampleAnimationURLs` and compares them to the snapshot images stored on disk
   private func compareSampleSnapshots(
