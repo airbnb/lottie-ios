@@ -4,7 +4,7 @@
 // MARK: - LottieConfiguration
 
 /// Global configuration options for Lottie animations
-public struct LottieConfiguration {
+public struct LottieConfiguration: Hashable {
 
   public init(renderingEngine: RenderingEngine = .mainThread) {
     self.renderingEngine = renderingEngine
@@ -22,7 +22,7 @@ public struct LottieConfiguration {
 // MARK: - RenderingEngine
 
 /// The rendering engine implementation to use when displaying an animation
-public enum RenderingEngine {
+public enum RenderingEngine: Hashable {
   /// The original / default rendering engine, which supports all Lottie features
   /// but runs on the main thread, which comes with some CPU overhead.
   case mainThread
