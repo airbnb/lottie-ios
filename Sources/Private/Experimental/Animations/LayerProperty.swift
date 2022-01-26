@@ -130,12 +130,6 @@ extension LayerProperty {
       customizableProperty: nil /* currently unsupported */)
   }
 
-  static var lineDashPattern: LayerProperty<[CGFloat]> {
-    .init(
-      caLayerKeypath: #keyPath(CAShapeLayer.lineDashPattern),
-      customizableProperty: nil /* currently unsupported */)
-  }
-
   static var strokeColor: LayerProperty<CGColor> {
     .init(
       caLayerKeypath: #keyPath(CAShapeLayer.strokeColor),
