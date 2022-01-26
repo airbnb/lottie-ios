@@ -54,7 +54,17 @@ extension CAShapeLayer {
       value: \.cgFloatValue,
       context: context)
 
-    // TODO: Support `lineDashPhase` and `lineDashPattern`
+    if let (dashPattern, dashPhase) = stroke.dashPattern?.shapeLayerConfiguration {
+      lineDashPattern = dashPattern.map {
+        KeyframeGroup(keyframes: $0).exactlyOneKeyframe.value.cgFloatValue as NSNumber
+      }
+
+      addAnimation(
+        for: .lineDashPhase,
+        keyframes: dashPhase,
+        value: \.cgFloatValue,
+        context: context)
+    }
   }
 
   /// Adds animations for `strokeStart` and `strokeEnd` from the given `Trim` object

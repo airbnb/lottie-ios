@@ -24,15 +24,7 @@ final class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
     lineJoin = stroke.lineJoin
 
     if let dashes = stroke.dashPattern {
-      var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>()
-      var dashPhase = ContiguousArray<Keyframe<Vector1D>>()
-      for dash in dashes {
-        if dash.type == .offset {
-          dashPhase = dash.value.keyframes
-        } else {
-          dashPatterns.append(dash.value.keyframes)
-        }
-      }
+      let (dashPatterns, dashPhase) = dashes.shapeLayerConfiguration
       dashPattern = NodeProperty(provider: GroupInterpolator(keyframeGroups: dashPatterns))
       if dashPhase.count == 0 {
         self.dashPhase = NodeProperty(provider: SingleValueProvider(Vector1D(0)))
@@ -135,4 +127,26 @@ final class StrokeNode: AnimatorNode, RenderNode {
     }
   }
 
+}
+
+// MARK: - [DashElement] + shapeLayerConfiguration
+
+extension Array where Element == DashElement {
+  /// Converts the `[DashElement]` data model into `lineDashPattern` and `lineDashPhase`
+  /// representations usable in a `CAShapeLayer`
+  var shapeLayerConfiguration: (
+    dashPatterns: ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>,
+    dashPhase: ContiguousArray<Keyframe<Vector1D>>)
+  {
+    var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>()
+    var dashPhase = ContiguousArray<Keyframe<Vector1D>>()
+    for dash in self {
+      if dash.type == .offset {
+        dashPhase = dash.value.keyframes
+      } else {
+        dashPatterns.append(dash.value.keyframes)
+      }
+    }
+    return (dashPatterns, dashPhase)
+  }
 }
