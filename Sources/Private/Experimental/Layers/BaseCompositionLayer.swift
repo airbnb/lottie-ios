@@ -6,7 +6,7 @@ import QuartzCore
 // MARK: - BaseCompositionLayer
 
 /// The base type of `AnimationLayer` that can contain other `AnimationLayer`s
-class BaseCompositionLayer: CALayer, AnimationLayer {
+class BaseCompositionLayer: BaseAnimationLayer {
 
   // MARK: Lifecycle
 
@@ -41,7 +41,7 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
   /// Sets up the base `LayerModel` animations for this layer,
   /// and all child `AnimationLayer`s.
   ///  - Can be overridden by subclasses, which much call `super`.
-  func setupAnimations(context: LayerAnimationContext) {
+  override func setupAnimations(context: LayerAnimationContext) {
     var context = context
     if renderLayerContents {
       context = context.addingKeypathComponent(baseLayerModel.name)
@@ -58,27 +58,12 @@ class BaseCompositionLayer: CALayer, AnimationLayer {
         context: context)
     }
 
-    for childAnimationLayer in managedSublayers {
-      (childAnimationLayer as? AnimationLayer)?.setupAnimations(context: context)
-    }
-  }
-
-  override func layoutSublayers() {
-    super.layoutSublayers()
-
-    for sublayer in managedSublayers {
-      sublayer.fillBoundsOfSuperlayer()
-    }
+    super.setupAnimations(context: context)
   }
 
   // MARK: Private
 
   private let baseLayerModel: LayerModel
-
-  /// All of the sublayers managed by this `BaseCompositionLayer`
-  private var managedSublayers: [CALayer] {
-    (sublayers ?? []) + [mask].compactMap { $0 }
-  }
 
   private func setupSublayers() {
     if
