@@ -9,7 +9,7 @@ import QuartzCore
 /// The root `CALayer` of the new rendering engine,
 /// which leverages the Core Animation render server to
 /// animate without executing on the main thread every frame.
-final class ExperimentalAnimationLayer: CALayer {
+final class ExperimentalAnimationLayer: BaseAnimationLayer {
 
   // MARK: Lifecycle
 
@@ -93,17 +93,11 @@ final class ExperimentalAnimationLayer: CALayer {
     setupPlaceholderAnimation(context: layerContext)
 
     // Set up the new animations with the current `TimingConfiguration`
-    for animationLayer in sublayers ?? [] {
-      (animationLayer as? AnimationLayer)?.setupAnimations(context: layerContext)
-    }
+    setupAnimations(context: layerContext)
   }
 
   override func layoutSublayers() {
     super.layoutSublayers()
-
-    for sublayer in sublayers ?? [] {
-      sublayer.fillBoundsOfSuperlayer()
-    }
 
     // If no animation has been set up yet, display the first frame
     // now that the layer hierarchy has been setup and laid out

@@ -517,6 +517,9 @@
 		2EAF5C8D27A0798800E00531 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF5A9A27A0798700E00531 /* AnimationContext.swift */; };
 		2EAF5C8E27A0798800E00531 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF5A9A27A0798700E00531 /* AnimationContext.swift */; };
 		2EAF5C8F27A0798800E00531 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF5A9A27A0798700E00531 /* AnimationContext.swift */; };
+		2EE8908127A3179D00354584 /* SublayerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE8908027A3179D00354584 /* SublayerContainer.swift */; };
+		2EE8908227A3179D00354584 /* SublayerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE8908027A3179D00354584 /* SublayerContainer.swift */; };
+		2EE8908327A3179E00354584 /* SublayerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE8908027A3179D00354584 /* SublayerContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -708,6 +711,7 @@
 		2EAF5A9727A0798700E00531 /* InterpolatableExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterpolatableExtensions.swift; sourceTree = "<group>"; };
 		2EAF5A9827A0798700E00531 /* KeyframeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyframeExtensions.swift; sourceTree = "<group>"; };
 		2EAF5A9A27A0798700E00531 /* AnimationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
+		2EE8908027A3179D00354584 /* SublayerContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SublayerContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -981,6 +985,7 @@
 				2EAF59FF27A0798700E00531 /* BaseCompositionLayer.swift */,
 				2EAF5A0027A0798700E00531 /* CALayer+setupLayerHierarchy.swift */,
 				2EAF5A0127A0798700E00531 /* PreCompLayer.swift */,
+				2EE8908027A3179D00354584 /* SublayerContainer.swift */,
 			);
 			path = Layers;
 			sourceTree = "<group>";
@@ -1640,6 +1645,7 @@
 				2EAF5B4927A0798700E00531 /* CustomPathAnimation.swift in Sources */,
 				2EAF5B8827A0798700E00531 /* CompositionLayersInitializer.swift in Sources */,
 				2EAF5B3727A0798700E00531 /* CAAnimation+TimingConfiguration.swift in Sources */,
+				2EE8908127A3179D00354584 /* SublayerContainer.swift in Sources */,
 				2EAF5C6027A0798800E00531 /* LayerDebugging.swift in Sources */,
 				2EAF5C8427A0798800E00531 /* VectorsExtensions.swift in Sources */,
 				2EAF5B4627A0798700E00531 /* StarAnimation.swift in Sources */,
@@ -1826,6 +1832,7 @@
 				2EAF5B4A27A0798700E00531 /* CustomPathAnimation.swift in Sources */,
 				2EAF5B8927A0798700E00531 /* CompositionLayersInitializer.swift in Sources */,
 				2EAF5B3827A0798700E00531 /* CAAnimation+TimingConfiguration.swift in Sources */,
+				2EE8908227A3179D00354584 /* SublayerContainer.swift in Sources */,
 				2EAF5C6127A0798800E00531 /* LayerDebugging.swift in Sources */,
 				2EAF5C8527A0798800E00531 /* VectorsExtensions.swift in Sources */,
 				2EAF5B4727A0798700E00531 /* StarAnimation.swift in Sources */,
@@ -2000,6 +2007,7 @@
 				2EAF5B4B27A0798700E00531 /* CustomPathAnimation.swift in Sources */,
 				2EAF5B8A27A0798700E00531 /* CompositionLayersInitializer.swift in Sources */,
 				2EAF5B3927A0798700E00531 /* CAAnimation+TimingConfiguration.swift in Sources */,
+				2EE8908327A3179E00354584 /* SublayerContainer.swift in Sources */,
 				2EAF5C6227A0798800E00531 /* LayerDebugging.swift in Sources */,
 				2EAF5C8627A0798800E00531 /* VectorsExtensions.swift in Sources */,
 				2EAF5B4827A0798700E00531 /* StarAnimation.swift in Sources */,
