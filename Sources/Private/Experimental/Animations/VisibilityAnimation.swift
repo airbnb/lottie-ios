@@ -5,6 +5,7 @@ import QuartzCore
 
 extension CALayer {
   /// Adds an animation for the given `inTime` and `outTime` to this `CALayer`
+  @nonobjc
   func addVisibilityAnimation(
     inFrame: AnimationFrameTime,
     outFrame: AnimationFrameTime,

@@ -57,6 +57,7 @@ extension CALayer {
   /// Adds transform-related animations from the given `TransformModel` to this layer
   ///  - This _doesn't_ apply `transform.opacity`, which has to be handled separately
   ///    since child layers don't inherit the `opacity` of their parent.
+  @nonobjc
   func addTransformAnimations(for transformModel: TransformModel, context: LayerAnimationContext) {
     addPositionAnimations(from: transformModel, context: context)
     addAnchorPointAnimation(from: transformModel, context: context)
@@ -65,6 +66,7 @@ extension CALayer {
   }
 
   /// Adds the opacity animation from the given `TransformModel` to this layer
+  @nonobjc
   func addOpacityAnimation(from transformModel: TransformModel, context: LayerAnimationContext) {
     addAnimation(
       for: .opacity,
@@ -80,6 +82,7 @@ extension CALayer {
 
   // MARK: Private
 
+  @nonobjc
   private func addPositionAnimations(
     from transformModel: TransformModel,
     context: LayerAnimationContext)
@@ -112,6 +115,7 @@ extension CALayer {
     }
   }
 
+  @nonobjc
   private func addAnchorPointAnimation(
     from transformModel: TransformModel,
     context: LayerAnimationContext)
@@ -135,6 +139,7 @@ extension CALayer {
       context: context)
   }
 
+  @nonobjc
   private func addScaleAnimations(
     from transformModel: TransformModel,
     context: LayerAnimationContext)

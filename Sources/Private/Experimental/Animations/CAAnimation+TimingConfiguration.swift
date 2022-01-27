@@ -6,6 +6,7 @@ import QuartzCore
 extension CAAnimation {
   /// Creates a `CAAnimation` that wraps this animation,
   /// applying timing-related configuration from the given `LayerAnimationContext`
+  @nonobjc
   func timed(with context: LayerAnimationContext, for layer: CALayer) -> CAAnimation {
 
     // The base animation always has the duration of the full animation,
@@ -68,6 +69,7 @@ extension CAAnimation {
 
 extension CALayer {
   /// Adds the given animation to this layer, timed with the given timing configuration
+  @nonobjc
   func add(_ animation: CAPropertyAnimation, timedWith context: LayerAnimationContext) {
     add(animation.timed(with: context, for: self), forKey: animation.keyPath)
   }

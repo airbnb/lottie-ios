@@ -5,6 +5,7 @@ import QuartzCore
 
 extension CAShapeLayer {
   /// Adds animations for the given `Ellipse` to this `CALayer`
+  @nonobjc
   func addAnimations(
     for ellipse: Ellipse,
     context: LayerAnimationContext)

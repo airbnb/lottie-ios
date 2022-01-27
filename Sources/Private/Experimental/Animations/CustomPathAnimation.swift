@@ -5,6 +5,7 @@ import QuartzCore
 
 extension CAShapeLayer {
   /// Adds animations for the given `BezierPath` keyframes to this `CALayer`
+  @nonobjc
   func addAnimations(
     for customPath: KeyframeGroup<BezierPath>,
     context: LayerAnimationContext)

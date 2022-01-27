@@ -5,6 +5,7 @@ import QuartzCore
 
 extension CAShapeLayer {
   /// Adds animations for the given `Rectangle` to this `CALayer`
+  @nonobjc
   func addAnimations(
     for rectangle: Rectangle,
     context: LayerAnimationContext)

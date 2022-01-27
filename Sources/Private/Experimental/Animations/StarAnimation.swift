@@ -8,6 +8,7 @@ extension CAShapeLayer {
   // MARK: Internal
 
   /// Adds animations for the given `Rectangle` to this `CALayer`
+  @nonobjc
   func addAnimations(
     for star: Star,
     context: LayerAnimationContext)
@@ -24,6 +25,7 @@ extension CAShapeLayer {
 
   // MARK: Private
 
+  @nonobjc
   private func addStarAnimation(
     for star: Star,
     context: LayerAnimationContext)
@@ -49,6 +51,7 @@ extension CAShapeLayer {
       context: context)
   }
 
+  @nonobjc
   private func addPolygonAnimation(
     for star: Star,
     context: LayerAnimationContext)

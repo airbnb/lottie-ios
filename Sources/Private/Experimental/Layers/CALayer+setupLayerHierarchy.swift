@@ -6,6 +6,7 @@ import QuartzCore
 extension CALayer {
   /// Sets up an `AnimationLayer` / `CALayer` hierarchy in this layer,
   /// using the given list of layers.
+  @nonobjc
   func setupLayerHierarchy(
     for layers: [LayerModel],
     context: LayerContext)
