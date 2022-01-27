@@ -63,7 +63,8 @@ public class FilepathImageProvider: AnimationImageProvider {
 }
 
 extension NSImage {
-  @objc var CGImage: CGImage? {
+  @nonobjc
+  var CGImage: CGImage? {
     get {
       guard let imageData = tiffRepresentation else { return nil }
       guard let sourceData = CGImageSourceCreateWithData(imageData as CFData, nil) else { return nil }

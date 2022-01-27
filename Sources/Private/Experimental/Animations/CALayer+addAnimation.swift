@@ -9,6 +9,7 @@ extension CALayer {
 
   /// Constructs a `CAKeyframeAnimation` that reflects the given keyframes,
   /// and adds it to this `CALayer`.
+  @nonobjc
   func addAnimation<KeyframeValue, ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
     keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
@@ -32,6 +33,7 @@ extension CALayer {
   // MARK: Private
 
   /// Constructs a `CAKeyframeAnimation` that reflects the given keyframes
+  @nonobjc
   private func defaultAnimation<KeyframeValue, ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
     keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
@@ -147,6 +149,7 @@ extension CALayer {
   /// A `CAAnimation` that applies the custom value from the `AnyValueProvider`
   /// registered for this specific property's `AnimationKeypath`,
   /// if one has been registered using `AnimationView.setValueProvider(_:keypath:)`.
+  @nonobjc
   private func customizedAnimation<ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
     context: LayerAnimationContext)

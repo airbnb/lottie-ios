@@ -5,6 +5,7 @@ import QuartzCore
 
 extension CAShapeLayer {
   /// Adds a `path` animation for the given `ShapeItem`
+  @nonobjc
   func addAnimations(for shape: ShapeItem, context: LayerAnimationContext) {
     switch shape {
     case let customShape as Shape:
@@ -26,6 +27,7 @@ extension CAShapeLayer {
   }
 
   /// Adds a `fillColor` animation for the given `Fill` object
+  @nonobjc
   func addAnimations(for fill: Fill, context: LayerAnimationContext) {
     fillRule = fill.fillRule.caFillRule
 
@@ -37,6 +39,7 @@ extension CAShapeLayer {
   }
 
   /// Adds animations for properties related to the given `Stroke` object (`strokeColor`, `lineWidth`, etc)
+  @nonobjc
   func addAnimations(for stroke: Stroke, context: LayerAnimationContext) {
     lineJoin = stroke.lineJoin.caLineJoin
     lineCap = stroke.lineCap.caLineCap
@@ -68,6 +71,7 @@ extension CAShapeLayer {
   }
 
   /// Adds animations for `strokeStart` and `strokeEnd` from the given `Trim` object
+  @nonobjc
   func addAnimations(for trim: Trim, context: LayerAnimationContext) {
     addAnimation(
       for: .strokeStart,
