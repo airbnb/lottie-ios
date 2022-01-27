@@ -7,6 +7,8 @@ import QuartzCore
 /// of its `sublayers` and `mask`
 class BaseAnimationLayer: CALayer, AnimationLayer {
 
+  // MARK: Internal
+
   override func layoutSublayers() {
     super.layoutSublayers()
 
@@ -20,6 +22,8 @@ class BaseAnimationLayer: CALayer, AnimationLayer {
       (childAnimationLayer as? AnimationLayer)?.setupAnimations(context: context)
     }
   }
+
+  // MARK: Private
 
   /// All of the sublayers managed by this container
   private var managedSublayers: [CALayer] {
