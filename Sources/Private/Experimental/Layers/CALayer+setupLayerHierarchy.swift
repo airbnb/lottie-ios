@@ -14,7 +14,7 @@ extension CALayer {
     // but `CALayer.sublayers` are listed from back to front.
     // We reverse the layer ordering to match what Core Animation expects.
     // The final view hierarchy must display the layers in this exact order.
-    let layersInZAxisOrder = Array(layers.reversed())
+    let layersInZAxisOrder = layers.reversed()
 
     let layersByIndex = Dictionary(grouping: layersInZAxisOrder, by: \.index)
       .compactMapValues(\.first)
@@ -46,7 +46,7 @@ extension CALayer {
     }
 
     // Create an `AnimationLayer` for each `LayerModel`
-    for (layerModel, maskLayerModel) in layersInZAxisOrder.layersAndMasks {
+    for (layerModel, maskLayerModel) in layersInZAxisOrder.pairedLayersAndMasks() {
       guard let layer = layerModel.makeAnimationLayer(context: context) else {
         continue
       }
@@ -89,29 +89,26 @@ extension CALayer {
 
 }
 
-extension Array where Element == LayerModel {
+extension Collection where Element == LayerModel {
   /// Pairs each `LayerModel` within this array with
   /// a `LayerModel` to use as its mask, if applicable
   /// based on the layer's `MatteType` configuration.
   ///  - Assumes the layers are sorted in z-axis order.
-  var layersAndMasks: [(layer: LayerModel, mask: LayerModel?)] {
+  fileprivate func pairedLayersAndMasks() -> [(layer: LayerModel, mask: LayerModel?)] {
     var layersAndMasks = [(layer: LayerModel, mask: LayerModel?)]()
-    var unprocessedLayers = self
+    var unprocessedLayers = reversed()
 
-    while !unprocessedLayers.isEmpty {
-      let layer = unprocessedLayers.removeFirst()
-
+    while let layer = unprocessedLayers.popLast() {
       /// If a layer has a `MatteType`, then the next layer will be used as its `mask`
       if
         let matteType = layer.matte,
         matteType != .none,
-        !unprocessedLayers.isEmpty
+        let maskLayer = unprocessedLayers.popLast()
       {
         LottieLogger.shared.assert(
           matteType == .add,
           "The Core Animation rendering engine currently only supports `MatteMode.add`.")
 
-        let maskLayer = unprocessedLayers.removeFirst()
         layersAndMasks.append((layer: layer, mask: maskLayer))
       }
 
