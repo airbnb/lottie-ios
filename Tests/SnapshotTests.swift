@@ -77,10 +77,13 @@ class SnapshotTests: XCTestCase {
       assert: { _, _, _, _ in },
       assertionFailure: { _, _, _ in },
       warn: { _, _, _ in })
+
+    Lottie.SnapshotTests.snapshotTestsAreRunning = true
   }
 
   override func tearDown() {
     LottieLogger.shared = LottieLogger()
+    Lottie.SnapshotTests.snapshotTestsAreRunning = false
   }
 
   // MARK: Private

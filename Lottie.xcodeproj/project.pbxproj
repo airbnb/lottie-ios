@@ -15,6 +15,9 @@
 		2E80489427A07377006E74CB /* __Snapshots__ in Resources */ = {isa = PBXBuildFile; fileRef = 2E80489227A07377006E74CB /* __Snapshots__ */; };
 		2E80489527A07377006E74CB /* Samples in Resources */ = {isa = PBXBuildFile; fileRef = 2E80489327A07377006E74CB /* Samples */; };
 		2E804A1A27A0740F006E74CB /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2E804A1927A0740F006E74CB /* SnapshotTesting */; };
+		2E923A0B27A49174008CE8C4 /* SnapshotTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E923A0A27A49174008CE8C4 /* SnapshotTestSupport.swift */; };
+		2E923A0C27A49174008CE8C4 /* SnapshotTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E923A0A27A49174008CE8C4 /* SnapshotTestSupport.swift */; };
+		2E923A0D27A49174008CE8C4 /* SnapshotTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E923A0A27A49174008CE8C4 /* SnapshotTestSupport.swift */; };
 		2EAF59A727A076BC00E00531 /* Bundle+Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59A627A076BC00E00531 /* Bundle+Module.swift */; };
 		2EAF5A9B27A0798700E00531 /* BundleImageProvider.macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59C327A0798700E00531 /* BundleImageProvider.macOS.swift */; };
 		2EAF5A9C27A0798700E00531 /* BundleImageProvider.macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59C327A0798700E00531 /* BundleImageProvider.macOS.swift */; };
@@ -541,6 +544,7 @@
 		2E80412527A07343006E74CB /* SnapshotConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotConfiguration.swift; sourceTree = "<group>"; };
 		2E80489227A07377006E74CB /* __Snapshots__ */ = {isa = PBXFileReference; lastKnownFileType = folder; path = __Snapshots__; sourceTree = "<group>"; };
 		2E80489327A07377006E74CB /* Samples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Samples; sourceTree = "<group>"; };
+		2E923A0A27A49174008CE8C4 /* SnapshotTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestSupport.swift; sourceTree = "<group>"; };
 		2EAF59A627A076BC00E00531 /* Bundle+Module.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Module.swift"; sourceTree = "<group>"; };
 		2EAF59AD27A0787B00E00531 /* Lottie_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAF59B927A078E400E00531 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1326,6 +1330,7 @@
 			isa = PBXGroup;
 			children = (
 				2EAF5A8727A0798700E00531 /* LayerDebugging.swift */,
+				2E923A0A27A49174008CE8C4 /* SnapshotTestSupport.swift */,
 				2EAF5A8827A0798700E00531 /* AnimatorNodeDebugging.swift */,
 			);
 			path = Debugging;
@@ -1717,6 +1722,7 @@
 				2EAF5AC827A0798700E00531 /* AnimatedButton.swift in Sources */,
 				2EAF5BE527A0798700E00531 /* ShapeContainerLayer.swift in Sources */,
 				2EAF5B0127A0798700E00531 /* PointValueProvider.swift in Sources */,
+				2E923A0B27A49174008CE8C4 /* SnapshotTestSupport.swift in Sources */,
 				2EAF5BCD27A0798700E00531 /* NodePropertyMap.swift in Sources */,
 				2EAF5AE027A0798700E00531 /* Keyframe.swift in Sources */,
 				2EAF5AB327A0798700E00531 /* AnimationImageProvider.swift in Sources */,
@@ -1904,6 +1910,7 @@
 				2EAF5AC927A0798700E00531 /* AnimatedButton.swift in Sources */,
 				2EAF5BE627A0798700E00531 /* ShapeContainerLayer.swift in Sources */,
 				2EAF5B0227A0798700E00531 /* PointValueProvider.swift in Sources */,
+				2E923A0C27A49174008CE8C4 /* SnapshotTestSupport.swift in Sources */,
 				2EAF5BCE27A0798700E00531 /* NodePropertyMap.swift in Sources */,
 				2EAF5AE127A0798700E00531 /* Keyframe.swift in Sources */,
 				2EAF5AB427A0798700E00531 /* AnimationImageProvider.swift in Sources */,
@@ -2079,6 +2086,7 @@
 				2EAF5ACA27A0798700E00531 /* AnimatedButton.swift in Sources */,
 				2EAF5BE727A0798700E00531 /* ShapeContainerLayer.swift in Sources */,
 				2EAF5B0327A0798700E00531 /* PointValueProvider.swift in Sources */,
+				2E923A0D27A49174008CE8C4 /* SnapshotTestSupport.swift in Sources */,
 				2EAF5BCF27A0798700E00531 /* NodePropertyMap.swift in Sources */,
 				2EAF5AE227A0798700E00531 /* Keyframe.swift in Sources */,
 				2EAF5AB527A0798700E00531 /* AnimationImageProvider.swift in Sources */,

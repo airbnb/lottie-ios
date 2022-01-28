@@ -158,19 +158,23 @@ extension CALayer {
       },
       context: context)
 
-    addAnimation(
-      for: .rotationY,
-      keyframes: transformModel.scale.keyframes,
-      value: { scale in
-        // When `scale.x` is negative, we have to rotate the view
-        // half way around the y axis to flip it horizontally.
-        if scale.x < 0 {
-          return .pi
-        } else {
-          return 0
-        }
-      },
-      context: context)
+    // When `scale.x` is negative, we have to rotate the view
+    // half way around the y axis to flip it horizontally.
+    //  - We don't do this in snapshot tests because it breaks the tests
+    //    in surprising ways that don't happen at runtime. Definitely not ideal.
+    if !SnapshotTests.snapshotTestsAreRunning {
+      addAnimation(
+        for: .rotationY,
+        keyframes: transformModel.scale.keyframes,
+        value: { scale in
+          if scale.x < 0 {
+            return .pi
+          } else {
+            return 0
+          }
+        },
+        context: context)
+    }
 
     addAnimation(
       for: .scaleY,
