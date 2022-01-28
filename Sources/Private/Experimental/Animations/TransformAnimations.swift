@@ -151,7 +151,24 @@ extension CALayer {
         // Lottie animation files express scale as a numerical percentage value
         // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
-        CGFloat(scale.x) / 100
+        //  - For some reason, negative `scaleX` values aren't applied by
+        //    Core Animation. Instead, we set up a `rotationY` animation below
+        //    to flip the view horizontally, which gives us the desired effect.
+        abs(CGFloat(scale.x) / 100)
+      },
+      context: context)
+
+    addAnimation(
+      for: .rotationY,
+      keyframes: transformModel.scale.keyframes,
+      value: { scale in
+        // When `scale.x` is negative, we have to rotate the view
+        // half way around the y axis to flip it horizontally.
+        if scale.x < 0 {
+          return .pi
+        } else {
+          return 0
+        }
       },
       context: context)
 
@@ -162,6 +179,9 @@ extension CALayer {
         // Lottie animation files express scale as a numerical percentage value
         // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
+        //  - Negative `scaleY` values are correctly applied (they flip the view
+        //    vertically), so we don't have to apply an additional rotation animation
+        //    like we do for `scaleX`.
         CGFloat(scale.y) / 100
       },
       context: context)
