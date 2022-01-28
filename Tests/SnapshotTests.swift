@@ -71,13 +71,7 @@ class SnapshotTests: XCTestCase {
   }
 
   override func setUp() {
-    // We don't want assertions to crash the snapshot tests,
-    // so we stub out the shared logger singleton
-    LottieLogger.shared = LottieLogger(
-      assert: { _, _, _, _ in },
-      assertionFailure: { _, _, _ in },
-      warn: { _, _, _ in })
-
+    LottieLogger.shared = .printToConsole
     Lottie.SnapshotTests.snapshotTestsAreRunning = true
   }
 

@@ -16,15 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   {
     // We don't ever want a single animation to crash the Example app,
     // so we stub out `assert` and `assertionFailure` to just `print`.
-    LottieLogger.shared = LottieLogger(
-      assert: { condition, message, _, _ in
-        if !condition() {
-          print(message())
-        }
-      },
-      assertionFailure: { message, _, _ in
-        print(message())
-      })
+    LottieLogger.shared = .printToConsole
 
     Configuration.applyCurrentConfiguration()
 
