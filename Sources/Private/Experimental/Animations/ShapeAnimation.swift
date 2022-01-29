@@ -11,6 +11,9 @@ extension CAShapeLayer {
     case let customShape as Shape:
       addAnimations(for: customShape.path, context: context)
 
+    case let combinedShape as CombinedShapeItem:
+      addAnimations(for: combinedShape, context: context)
+
     case let ellipse as Ellipse:
       addAnimations(for: ellipse, context: context)
 
@@ -22,6 +25,7 @@ extension CAShapeLayer {
 
     default:
       // None of the other `ShapeItem` subclasses draw a `path`
+      LottieLogger.shared.assertionFailure("Unexpected shape type \(type(of: shape))")
       return
     }
   }

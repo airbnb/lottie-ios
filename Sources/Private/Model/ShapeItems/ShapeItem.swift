@@ -86,6 +86,16 @@ class ShapeItem: Codable {
     hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden) ?? false
   }
 
+  init(
+    name: String,
+    type: ShapeType,
+    hidden: Bool)
+  {
+    self.name = name
+    self.type = type
+    self.hidden = hidden
+  }
+
   // MARK: Internal
 
   /// The name of the shape
