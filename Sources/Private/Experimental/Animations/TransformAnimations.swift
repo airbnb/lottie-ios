@@ -151,9 +151,39 @@ extension CALayer {
         // Lottie animation files express scale as a numerical percentage value
         // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
-        CGFloat(scale.x) / 100
+        //  - Negative `scale.x` values aren't applied correctly by Core Animation.
+        //    This appears to be because we animate `transform.scale.x` and `transform.scale.y`
+        //    as separate `CAKeyframeAnimation`s instead of using a single animation of `transform` itself.
+        //    https://openradar.appspot.com/FB9862872
+        //  - To work around this, we set up a `rotationY` animation below
+        //    to flip the view horizontally, which gives us the desired effect.
+        abs(CGFloat(scale.x) / 100)
       },
       context: context)
+
+    // When `scale.x` is negative, we have to rotate the view
+    // half way around the y axis to flip it horizontally.
+    //  - We don't do this in snapshot tests because it breaks the tests
+    //    in surprising ways that don't happen at runtime. Definitely not ideal.
+    if SnapshotTests.snapshotTestsAreRunning {
+      if transformModel.scale.keyframes.contains(where: { $0.value.x < 0 }) {
+        LottieLogger.shared.warn("""
+        Negative `scale.x` values are not displayed correctly in snapshot tests
+        """)
+      }
+    } else {
+      addAnimation(
+        for: .rotationY,
+        keyframes: transformModel.scale.keyframes,
+        value: { scale in
+          if scale.x < 0 {
+            return .pi
+          } else {
+            return 0
+          }
+        },
+        context: context)
+    }
 
     addAnimation(
       for: .scaleY,
@@ -162,6 +192,9 @@ extension CALayer {
         // Lottie animation files express scale as a numerical percentage value
         // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
+        //  - Negative `scaleY` values are correctly applied (they flip the view
+        //    vertically), so we don't have to apply an additional rotation animation
+        //    like we do for `scaleX`.
         CGFloat(scale.y) / 100
       },
       context: context)

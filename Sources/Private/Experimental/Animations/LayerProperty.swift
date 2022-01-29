@@ -90,6 +90,12 @@ extension LayerProperty {
       customizableProperty: nil /* currently unsupported */)
   }
 
+  static var rotationY: LayerProperty<CGFloat> {
+    .init(
+      caLayerKeypath: "transform.rotation.y",
+      customizableProperty: nil /* currently unsupported */)
+  }
+
   static var anchorPoint: LayerProperty<CGPoint> {
     .init(
       caLayerKeypath: #keyPath(CALayer.anchorPoint),

@@ -1,6 +1,8 @@
 // Created by eric_horacek on 12/9/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
+// MARK: - LottieLogger
+
 /// A shared logger that allows consumers to intercept Lottie assertions and warning messages to pipe
 /// into their own logging systems.
 public final class LottieLogger {
@@ -85,4 +87,22 @@ public final class LottieLogger {
   private let _assertionFailure: AssertionFailure
   private let _warn: Warn
 
+}
+
+// MARK: - LottieLogger + printToConsole
+
+extension LottieLogger {
+  /// A `LottieLogger` instance that always prints to the console (by calling `print`)
+  /// instead of calling `assert` / `assertionFailure`, which halt execution in debug builds.
+  public static var printToConsole: LottieLogger {
+    LottieLogger(
+      assert: { condition, message, _, _ in
+        if !condition() {
+          print(message())
+        }
+      },
+      assertionFailure: { message, _, _ in
+        print(message())
+      })
+  }
 }
