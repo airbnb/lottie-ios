@@ -42,14 +42,13 @@ final class ShapeLayer: BaseCompositionLayer {
       // allows `CAShapeLayerFillRule.evenOdd` to be applied if the paths overlap. We just can't do this
       // in all cases, due to limitations of Core Animation.
       if
+        pathDrawingItemsInGroup.count > 1,
         let combinedShapeKeyframes = Keyframes.combinedIfPossible(pathDrawingItemsInGroup.map {
           ($0.item as? Shape)?.path
-        })
-        // TODO: This causes a regression in `IconTransitions`, and I'm not sure why.
-        // I thought it was because of the trim, but that doesn't seem to be the case.
-//        // `Trim`s are currently only applied correctly using individual `ShapeItemLayer`s,
-//        // because each path has to be trimmed separately.
-//        !otherItems.contains(where: { $0.item.type == .trim })
+        }),
+        // `Trim`s are currently only applied correctly using individual `ShapeItemLayer`s,
+        // because each path has to be trimmed separately.
+        !otherItemsInGroup.contains(where: { $0.item.type == .trim })
       {
         let combinedShape = CombinedShapeItem(
           shapes: combinedShapeKeyframes,
