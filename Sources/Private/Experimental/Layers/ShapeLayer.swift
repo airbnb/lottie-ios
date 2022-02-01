@@ -93,7 +93,7 @@ final class GroupLayer: BaseAnimationLayer {
     // into a single `KeyframeGroup<[BezierPath]>`, which can be combined into a single CGPath animation.
     //
     // This is how Groups with multiple path-drawing items are supposed to be rendered,
-    // because combing multiple paths into a single `CGPath` (instead of render them in separate layers)
+    // because combing multiple paths into a single `CGPath` (instead of rendering them in separate layers)
     // allows `CAShapeLayerFillRule.evenOdd` to be applied if the paths overlap. We just can't do this
     // in all cases, due to limitations of Core Animation.
     if
