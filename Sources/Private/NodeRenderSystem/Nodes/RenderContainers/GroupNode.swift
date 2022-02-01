@@ -28,9 +28,9 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
       /// Transform node missing. Default to empty transform.
       anchor = NodeProperty(provider: SingleValueProvider(Vector3D(x: CGFloat(0), y: CGFloat(0), z: CGFloat(0))))
       position = NodeProperty(provider: SingleValueProvider(Vector3D(x: CGFloat(0), y: CGFloat(0), z: CGFloat(0))))
-      scale = NodeProperty(provider: SingleValueProvider(Vector3D(x: CGFloat(1), y: CGFloat(1), z: CGFloat(1))))
+      scale = NodeProperty(provider: SingleValueProvider(Vector3D(x: CGFloat(100), y: CGFloat(100), z: CGFloat(100))))
       rotation = NodeProperty(provider: SingleValueProvider(Vector1D(0)))
-      opacity = NodeProperty(provider: SingleValueProvider(Vector1D(1)))
+      opacity = NodeProperty(provider: SingleValueProvider(Vector1D(100)))
       skew = NodeProperty(provider: SingleValueProvider(Vector1D(0)))
       skewAxis = NodeProperty(provider: SingleValueProvider(Vector1D(0)))
     }
