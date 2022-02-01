@@ -85,15 +85,14 @@ final class GroupLayer: BaseAnimationLayer {
       .map { ShapeItemLayer.Item(item: $0, parentGroup: group) }
       + inheritedItems
 
-    let pathDrawingItemsInGroup = nonGroupItems.filter { $0.item.drawsCGPath }
-    let otherItemsInGroup = nonGroupItems.filter { !$0.item.drawsCGPath }
+    let (pathDrawingItemsInGroup, otherItemsInGroup) = nonGroupItems.grouped(by: \.item.drawsCGPath)
 
     // If all of the path-drawing `ShapeItem`s have keyframes with the same timing information,
     // we can combine the `[KeyframeGroup<BezierPath>]` (which have to animate in separate layers)
     // into a single `KeyframeGroup<[BezierPath]>`, which can be combined into a single CGPath animation.
     //
     // This is how Groups with multiple path-drawing items are supposed to be rendered,
-    // because combing multiple paths into a single `CGPath` (instead of rendering them in separate layers)
+    // because combining multiple paths into a single `CGPath` (instead of rendering them in separate layers)
     // allows `CAShapeLayerFillRule.evenOdd` to be applied if the paths overlap. We just can't do this
     // in all cases, due to limitations of Core Animation.
     if
@@ -133,18 +132,21 @@ extension CALayer {
   ///  - Each `Group` item becomes its own `GroupLayer` sublayer.
   ///  - Other `ShapeItem` are applied to all sublayers
   fileprivate func setupGroups(from items: [ShapeItem], parentGroup: Group?) {
-    let groupItems = items.compactMap { $0 as? Group }
-
-    let otherItems = items
-      .filter { !($0 is Group) }
-      .map { ShapeItemLayer.Item(item: $0, parentGroup: parentGroup) }
+    let (groupItems, otherItems) = items.grouped(by: { $0 is Group })
 
     // Groups are listed from front to back,
     // but `CALayer.sublayers` are listed from back to front.
     let groupsInZAxisOrder = groupItems.reversed()
 
     for group in groupsInZAxisOrder {
-      let groupLayer = GroupLayer(group: group, inheritedItems: otherItems)
+      guard let group = group as? Group else { continue }
+
+      let groupLayer = GroupLayer(
+        group: group,
+        inheritedItems: Array(otherItems.map {
+          ShapeItemLayer.Item(item: $0, parentGroup: parentGroup)
+        }))
+
       addSublayer(groupLayer)
     }
   }
@@ -161,5 +163,23 @@ extension ShapeItem {
          .repeater, .round, .stroke, .trim, .transform, .unknown:
       return false
     }
+  }
+}
+
+extension Collection {
+  /// Splits this collection into two groups, based on the given predicate
+  func grouped(by predicate: (Element) -> Bool) -> (trueElements: [Element], falseElements: [Element]) {
+    var trueElements = [Element]()
+    var falseElements = [Element]()
+
+    for element in self {
+      if predicate(element) {
+        trueElements.append(element)
+      } else {
+        falseElements.append(element)
+      }
+    }
+
+    return (trueElements, falseElements)
   }
 }
