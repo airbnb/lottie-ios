@@ -16,18 +16,19 @@ extension CALayer {
     value keyframeValueMapping: (KeyframeValue) -> ValueRepresentation,
     context: LayerAnimationContext)
   {
-    let animation: CAPropertyAnimation
     if let customAnimation = customizedAnimation(for: property, context: context) {
-      animation = customAnimation
-    } else {
-      animation = defaultAnimation(
+      add(customAnimation, timedWith: context)
+    }
+
+    else if
+      let defaultAnimation = defaultAnimation(
         for: property,
         keyframes: keyframes,
         value: keyframeValueMapping,
         context: context)
+    {
+      add(defaultAnimation, timedWith: context)
     }
-
-    add(animation, timedWith: context)
   }
 
   // MARK: Private
@@ -39,9 +40,9 @@ extension CALayer {
     keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
     value keyframeValueMapping: (KeyframeValue) -> ValueRepresentation,
     context: LayerAnimationContext)
-    -> CAPropertyAnimation
+    -> CAPropertyAnimation?
   {
-    precondition(!keyframes.isEmpty, "Keyframes for \"\(property.caLayerKeypath)\" must be non-empty")
+    guard !keyframes.isEmpty else { return nil }
 
     let animation = CAKeyframeAnimation(keyPath: property.caLayerKeypath)
 
