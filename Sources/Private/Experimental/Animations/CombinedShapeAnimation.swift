@@ -4,7 +4,7 @@
 import QuartzCore
 
 extension CAShapeLayer {
-  /// Adds animations for the given `[BezierPath]` keyframes to this `CALayer`
+  /// Adds animations for the given `CombinedShapeItem` to this `CALayer`
   @nonobjc
   func addAnimations(
     for combinedShapes: CombinedShapeItem,
