@@ -58,6 +58,9 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 /// Tells the animation to loop indefinitely. Defaults to NO.
 @property (nonatomic, assign) BOOL loopAnimation;
 
+//  Number of times the animation plays in a loop. Defaults to 1y
+@property (nonatomic, assign) CGFloat repeatCount;
+
 /// The animation will play forward and then backwards if loopAnimation is also YES
 @property (nonatomic, assign) BOOL autoReverseAnimation;
 
