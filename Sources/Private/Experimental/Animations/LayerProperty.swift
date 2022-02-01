@@ -56,13 +56,13 @@ extension LayerProperty {
 
   static var positionX: LayerProperty<CGFloat> {
     .init(
-      caLayerKeypath: "transform.translation.y",
+      caLayerKeypath: "transform.translation.x",
       customizableProperty: nil /* currently unsupported */)
   }
 
   static var positionY: LayerProperty<CGFloat> {
     .init(
-      caLayerKeypath: "transform.translation.x",
+      caLayerKeypath: "transform.translation.y",
       customizableProperty: nil /* currently unsupported */)
   }
 
