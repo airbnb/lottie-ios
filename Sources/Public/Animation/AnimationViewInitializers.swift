@@ -83,6 +83,25 @@ extension AnimationView {
     }
   }
 
+  /**
+   Loads a Lottie animation from a JSON file located in the Asset catalog of the supplied bundle.
+   - Parameter name: The string name of the lottie animation in the asset catalog.
+   - Parameter bundle: The bundle in which the animation is located.
+   Defaults to the Main bundle.
+   - Parameter imageProvider: An image provider for the animation's image data.
+   If none is supplied Lottie will search in the supplied bundle for images.
+   */
+  public convenience init(
+    asset name: String,
+    bundle: Bundle = Bundle.main,
+    imageProvider: AnimationImageProvider? = nil,
+    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache)
+  {
+    let animation = Animation.asset(name, bundle: bundle, animationCache: animationCache)
+    let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil)
+    self.init(animation: animation, imageProvider: provider)
+  }
+
   // MARK: Public
 
   public typealias DownloadClosure = (Error?) -> Void
