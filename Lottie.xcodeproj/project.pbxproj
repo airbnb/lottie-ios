@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1133E6AD27AA4920000633AC /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133E6AC27AA4920000633AC /* DataExtension.swift */; };
+		1133E6AE27AA4920000633AC /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133E6AC27AA4920000633AC /* DataExtension.swift */; };
+		1133E6AF27AA4920000633AC /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133E6AC27AA4920000633AC /* DataExtension.swift */; };
 		2E8040B027A072B8006E74CB /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E80409A27A0725D006E74CB /* Lottie.framework */; };
 		2E8044AD27A07347006E74CB /* HardcodedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8040BE27A07343006E74CB /* HardcodedImageProvider.swift */; };
 		2E8044AE27A07347006E74CB /* Snapshotting+presentationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8040BF27A07343006E74CB /* Snapshotting+presentationLayer.swift */; };
@@ -542,6 +545,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1133E6AC27AA4920000633AC /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		2E80409A27A0725D006E74CB /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E8040AC27A072B8006E74CB /* LottieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LottieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E8040BE27A07343006E74CB /* HardcodedImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardcodedImageProvider.swift; sourceTree = "<group>"; };
@@ -1349,6 +1353,7 @@
 		2EAF5A8927A0798700E00531 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1133E6AC27AA4920000633AC /* DataExtension.swift */,
 				2EAF5A8A27A0798700E00531 /* CGFloatExtensions.swift */,
 				2EAF5A8B27A0798700E00531 /* CGColor+RGB.swift */,
 				2EAF5A8C27A0798700E00531 /* AnimationKeypathExtension.swift */,
@@ -1609,6 +1614,7 @@
 				2EAF5C5427A0798800E00531 /* ImageAsset.swift in Sources */,
 				2EAF5B9127A0798700E00531 /* GradientFillRenderer.swift in Sources */,
 				2EAF5B1327A0798700E00531 /* SolidLayer.swift in Sources */,
+				1133E6AD27AA4920000633AC /* DataExtension.swift in Sources */,
 				2EAF5AB927A0798700E00531 /* CompatibleAnimationView.swift in Sources */,
 				2EAF5C0327A0798800E00531 /* ShapeTransform.swift in Sources */,
 				2EAF5BD627A0798700E00531 /* KeyframeInterpolator.swift in Sources */,
@@ -1799,6 +1805,7 @@
 				2EAF5C5527A0798800E00531 /* ImageAsset.swift in Sources */,
 				2EAF5B9227A0798700E00531 /* GradientFillRenderer.swift in Sources */,
 				2EAF5B1427A0798700E00531 /* SolidLayer.swift in Sources */,
+				1133E6AE27AA4920000633AC /* DataExtension.swift in Sources */,
 				2EAF5ABA27A0798700E00531 /* CompatibleAnimationView.swift in Sources */,
 				2EAF5C0427A0798800E00531 /* ShapeTransform.swift in Sources */,
 				2EAF5BD727A0798700E00531 /* KeyframeInterpolator.swift in Sources */,
@@ -1977,6 +1984,7 @@
 				2EAF5C5627A0798800E00531 /* ImageAsset.swift in Sources */,
 				2EAF5B9327A0798700E00531 /* GradientFillRenderer.swift in Sources */,
 				2EAF5B1527A0798700E00531 /* SolidLayer.swift in Sources */,
+				1133E6AF27AA4920000633AC /* DataExtension.swift in Sources */,
 				2EAF5ABB27A0798700E00531 /* CompatibleAnimationView.swift in Sources */,
 				2EAF5C0527A0798800E00531 /* ShapeTransform.swift in Sources */,
 				2EAF5BD827A0798700E00531 /* KeyframeInterpolator.swift in Sources */,

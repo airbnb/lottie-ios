@@ -114,7 +114,7 @@ extension Animation {
       - Parameter animationCache: A cache for holding loaded animations. Optional.
       - Returns: Deserialized `Animation`. Optional.
   */
-  static func asset(_ name: String,
+  public static func asset(_ name: String,
                       bundle: Bundle = Bundle.main,
                       animationCache: AnimationCacheProvider? = nil) -> Animation? {
     /// Create a cache key for the animation.
@@ -142,9 +142,6 @@ extension Animation {
       return nil
     }
   }
-
-  /// A closure for an Animation download. The closure is passed `nil` if there was an error.
-  typealias DownloadClosure = (Animation?) -> Void
 
   /**
    Loads a Lottie animation asynchronously from the URL.
