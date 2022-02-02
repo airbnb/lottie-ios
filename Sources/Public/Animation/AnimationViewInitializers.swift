@@ -91,13 +91,15 @@ extension AnimationView {
    - Parameter imageProvider: An image provider for the animation's image data.
    If none is supplied Lottie will search in the supplied bundle for images.
    */
-  public convenience init(asset name: String,
-                          bundle: Bundle = Bundle.main,
-                          imageProvider: AnimationImageProvider? = nil,
-                          animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache) {
-      let animation = Animation.asset(name, bundle: bundle, animationCache: animationCache)
-      let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil)
-      self.init(animation: animation, imageProvider: provider)
+  public convenience init(
+    asset name: String,
+    bundle: Bundle = Bundle.main,
+    imageProvider: AnimationImageProvider? = nil,
+    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache)
+  {
+    let animation = Animation.asset(name, bundle: bundle, animationCache: animationCache)
+    let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil)
+    self.init(animation: animation, imageProvider: provider)
   }
 
   // MARK: Public

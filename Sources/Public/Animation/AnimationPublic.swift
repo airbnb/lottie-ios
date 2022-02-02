@@ -107,29 +107,34 @@ extension Animation {
     }
   }
 
-/**
-      Loads an animation model from the asset catalog by its name. Returns `nil` if an animation is not found.
-      - Parameter name: The name of the json file in the asset catalog. EG "StarAnimation"
-      - Parameter bundle: The bundle in which the animation is located. Defaults to `Bundle.main`
-      - Parameter animationCache: A cache for holding loaded animations. Optional.
-      - Returns: Deserialized `Animation`. Optional.
-  */
-  public static func asset(_ name: String,
-                      bundle: Bundle = Bundle.main,
-                      animationCache: AnimationCacheProvider? = nil) -> Animation? {
+  /**
+       Loads an animation model from the asset catalog by its name. Returns `nil` if an animation is not found.
+       - Parameter name: The name of the json file in the asset catalog. EG "StarAnimation"
+       - Parameter bundle: The bundle in which the animation is located. Defaults to `Bundle.main`
+       - Parameter animationCache: A cache for holding loaded animations. Optional.
+       - Returns: Deserialized `Animation`. Optional.
+   */
+  public static func asset(
+    _ name: String,
+    bundle: Bundle = Bundle.main,
+    animationCache: AnimationCacheProvider? = nil)
+    -> Animation?
+  {
     /// Create a cache key for the animation.
     let cacheKey = bundle.bundlePath + "/" + name
 
     /// Check cache for animation
-    if let animationCache = animationCache,
-        let animation = animationCache.animation(forKey: cacheKey) {
-        /// If found, return the animation.
-        return animation
+    if
+      let animationCache = animationCache,
+      let animation = animationCache.animation(forKey: cacheKey)
+    {
+      /// If found, return the animation.
+      return animation
     }
 
     /// Load jsonData from Asset
     guard let json = Data.jsonData(from: name, in: bundle) else {
-        return nil
+      return nil
     }
 
     do {

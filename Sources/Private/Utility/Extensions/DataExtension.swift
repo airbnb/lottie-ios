@@ -13,15 +13,15 @@ import AppKit
 #endif
 
 extension Data {
-    
-    static func jsonData(from assetName: String, in bundle: Bundle) -> Data? {
-        #if canImport(UIKit)
-            return NSDataAsset.init(name: assetName, bundle: bundle)?.data
-        #else
-        if #available(macOS 10.11, *) {
-            return NSDataAsset.init(name: assetName, bundle: bundle)?.data
-        }
-        return nil
-        #endif
+
+  static func jsonData(from assetName: String, in bundle: Bundle) -> Data? {
+    #if canImport(UIKit)
+    return NSDataAsset(name: assetName, bundle: bundle)?.data
+    #else
+    if #available(macOS 10.11, *) {
+      return NSDataAsset(name: assetName, bundle: bundle)?.data
     }
+    return nil
+    #endif
+  }
 }
