@@ -77,9 +77,24 @@ extension CAShapeLayer {
   /// Adds animations for `strokeStart` and `strokeEnd` from the given `Trim` object
   @nonobjc
   func addAnimations(for trim: Trim, context: LayerAnimationContext) {
+    // `CAShapeLayer` requires that `strokeStart` be less than `strokeEnd`.
+    //  - Since this isn't a requirement in the Lottie schema, there are
+    //    some animations that have `strokeStart` and `strokeEnd` flipped.
+    //  - If we detect that this is the case for this specific `Trim`, then
+    //    we swap the start/end keyframes to match what `CAShapeLayer` expects.
+    let strokeStartKeyframes: KeyframeGroup<Vector1D>
+    let strokeEndKeyframes: KeyframeGroup<Vector1D>
+    if trim.startValueIsAlwaysGreaterThanEndValue() {
+      strokeStartKeyframes = trim.end
+      strokeEndKeyframes = trim.start
+    } else {
+      strokeStartKeyframes = trim.start
+      strokeEndKeyframes = trim.end
+    }
+
     addAnimation(
       for: .strokeStart,
-      keyframes: trim.start.keyframes,
+      keyframes: strokeStartKeyframes.keyframes,
       value: { strokeStart in
         // Lottie animation files express stoke trims as a numerical percentage value
         // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
@@ -89,12 +104,37 @@ extension CAShapeLayer {
 
     addAnimation(
       for: .strokeEnd,
-      keyframes: trim.end.keyframes,
+      keyframes: strokeEndKeyframes.keyframes,
       value: { strokeEnd in
         // Lottie animation files express stoke trims as a numerical percentage value
         // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.25, 0.5, 1.0).
         CGFloat(strokeEnd.cgFloatValue) / 100
       }, context: context)
+  }
+}
+
+extension Trim {
+  /// Checks whether or not the value for `trim.start` is greater
+  /// than the value for every `trim.end` at every keyframe.
+  ///  - When this is the case, the start/end values need to be flipped
+  ///    when applied to a `CAShapeLayer`, which requires that
+  ///    `strokeStart` be less than `strokeEnd`.
+  fileprivate func startValueIsAlwaysGreaterThanEndValue() -> Bool {
+    let keyframeTimes = Set(start.keyframes.map { $0.time } + end.keyframes.map { $0.time })
+
+    let startInterpolator = KeyframeInterpolator(keyframes: start.keyframes)
+    let endInterpolator = KeyframeInterpolator(keyframes: end.keyframes)
+
+    for keyframeTime in keyframeTimes {
+      let startAtTime = startInterpolator.value(frame: keyframeTime) as! Vector1D
+      let endAtTime = endInterpolator.value(frame: keyframeTime) as! Vector1D
+
+      if startAtTime.cgFloatValue < endAtTime.cgFloatValue {
+        return false
+      }
+    }
+
+    return true
   }
 }
