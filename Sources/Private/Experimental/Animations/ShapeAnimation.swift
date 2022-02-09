@@ -77,9 +77,11 @@ extension CAShapeLayer {
   /// Adds animations for `strokeStart` and `strokeEnd` from the given `Trim` object
   @nonobjc
   func addAnimations(for trim: Trim, context: LayerAnimationContext) {
+    let (strokeStartKeyframes, strokeEndKeyframes) = trim.caShapeLayerKeyframes()
+
     addAnimation(
       for: .strokeStart,
-      keyframes: trim.start.keyframes,
+      keyframes: strokeStartKeyframes.keyframes,
       value: { strokeStart in
         // Lottie animation files express stoke trims as a numerical percentage value
         // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
@@ -89,12 +91,52 @@ extension CAShapeLayer {
 
     addAnimation(
       for: .strokeEnd,
-      keyframes: trim.end.keyframes,
+      keyframes: strokeEndKeyframes.keyframes,
       value: { strokeEnd in
         // Lottie animation files express stoke trims as a numerical percentage value
         // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.25, 0.5, 1.0).
         CGFloat(strokeEnd.cgFloatValue) / 100
       }, context: context)
+  }
+}
+
+extension Trim {
+  /// The `strokeStart` and `strokeEnd` keyframes to apply to a `CAShapeLayer`
+  ///  - `CAShapeLayer` requires that `strokeStart` be less than `strokeEnd`.
+  ///  - Since this isn't a requirement in the Lottie schema, there are
+  ///    some animations that have `strokeStart` and `strokeEnd` flipped.
+  ///  - If we detect that this is the case for this specific `Trim`, then
+  ///    we swap the start/end keyframes to match what `CAShapeLayer` expects.
+  fileprivate func caShapeLayerKeyframes()
+    -> (strokeStart: KeyframeGroup<Vector1D>, strokeEnd: KeyframeGroup<Vector1D>)
+  {
+    if startValueIsAlwaysGreaterThanEndValue() {
+      return (strokeStart: end, strokeEnd: start)
+    } else {
+      return (strokeStart: start, strokeEnd: end)
+    }
+  }
+
+  /// Checks whether or not the value for `trim.start` is greater
+  /// than the value for every `trim.end` at every keyframe.
+  fileprivate func startValueIsAlwaysGreaterThanEndValue() -> Bool {
+    let keyframeTimes = Set(start.keyframes.map { $0.time } + end.keyframes.map { $0.time })
+
+    let startInterpolator = KeyframeInterpolator(keyframes: start.keyframes)
+    let endInterpolator = KeyframeInterpolator(keyframes: end.keyframes)
+
+    for keyframeTime in keyframeTimes {
+      guard
+        let startAtTime = startInterpolator.value(frame: keyframeTime) as? Vector1D,
+        let endAtTime = endInterpolator.value(frame: keyframeTime) as? Vector1D
+      else { continue }
+
+      if startAtTime.cgFloatValue < endAtTime.cgFloatValue {
+        return false
+      }
+    }
+
+    return true
   }
 }
