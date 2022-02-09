@@ -77,20 +77,7 @@ extension CAShapeLayer {
   /// Adds animations for `strokeStart` and `strokeEnd` from the given `Trim` object
   @nonobjc
   func addAnimations(for trim: Trim, context: LayerAnimationContext) {
-    // `CAShapeLayer` requires that `strokeStart` be less than `strokeEnd`.
-    //  - Since this isn't a requirement in the Lottie schema, there are
-    //    some animations that have `strokeStart` and `strokeEnd` flipped.
-    //  - If we detect that this is the case for this specific `Trim`, then
-    //    we swap the start/end keyframes to match what `CAShapeLayer` expects.
-    let strokeStartKeyframes: KeyframeGroup<Vector1D>
-    let strokeEndKeyframes: KeyframeGroup<Vector1D>
-    if trim.startValueIsAlwaysGreaterThanEndValue() {
-      strokeStartKeyframes = trim.end
-      strokeEndKeyframes = trim.start
-    } else {
-      strokeStartKeyframes = trim.start
-      strokeEndKeyframes = trim.end
-    }
+    let (strokeStartKeyframes, strokeEndKeyframes) = trim.caShapeLayerKeyframes()
 
     addAnimation(
       for: .strokeStart,
@@ -115,11 +102,24 @@ extension CAShapeLayer {
 }
 
 extension Trim {
+  /// The `strokeStart` and `strokeEnd` keyframes to apply to a `CAShapeLayer`
+  ///  - `CAShapeLayer` requires that `strokeStart` be less than `strokeEnd`.
+  ///  - Since this isn't a requirement in the Lottie schema, there are
+  ///    some animations that have `strokeStart` and `strokeEnd` flipped.
+  ///  - If we detect that this is the case for this specific `Trim`, then
+  ///    we swap the start/end keyframes to match what `CAShapeLayer` expects.
+  fileprivate func caShapeLayerKeyframes()
+    -> (strokeStart: KeyframeGroup<Vector1D>, strokeEnd: KeyframeGroup<Vector1D>)
+  {
+    if startValueIsAlwaysGreaterThanEndValue() {
+      return (strokeStart: end, strokeEnd: start)
+    } else {
+      return (strokeStart: start, strokeEnd: end)
+    }
+  }
+
   /// Checks whether or not the value for `trim.start` is greater
   /// than the value for every `trim.end` at every keyframe.
-  ///  - When this is the case, the start/end values need to be flipped
-  ///    when applied to a `CAShapeLayer`, which requires that
-  ///    `strokeStart` be less than `strokeEnd`.
   fileprivate func startValueIsAlwaysGreaterThanEndValue() -> Bool {
     let keyframeTimes = Set(start.keyframes.map { $0.time } + end.keyframes.map { $0.time })
 
@@ -127,8 +127,10 @@ extension Trim {
     let endInterpolator = KeyframeInterpolator(keyframes: end.keyframes)
 
     for keyframeTime in keyframeTimes {
-      let startAtTime = startInterpolator.value(frame: keyframeTime) as! Vector1D
-      let endAtTime = endInterpolator.value(frame: keyframeTime) as! Vector1D
+      guard
+        let startAtTime = startInterpolator.value(frame: keyframeTime) as? Vector1D,
+        let endAtTime = endInterpolator.value(frame: keyframeTime) as? Vector1D
+      else { continue }
 
       if startAtTime.cgFloatValue < endAtTime.cgFloatValue {
         return false
