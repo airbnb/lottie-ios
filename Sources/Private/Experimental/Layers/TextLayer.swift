@@ -46,15 +46,15 @@ final class TextLayer: BaseCompositionLayer {
 
     let textLayer = CoreTextRenderLayer()
     textLayer.text = text.text
-    textLayer.font = context.fontProvider.fontFor(family: text.fontFamily, size: text.fontSize)
+    textLayer.font = context.fontProvider.fontFor(family: text.fontFamily, size: CGFloat(text.fontSize))
 
     textLayer.alignment = text.justification.textAlignment
     textLayer.tracking = CGFloat(text.tracking)
-    textLayer.lineHeight = text.lineHeight
+    textLayer.lineHeight = CGFloat(text.lineHeight)
 
     textLayer.fillColor = text.fillColorData?.cgColorValue
     textLayer.strokeColor = text.strokeColorData?.cgColorValue
-    textLayer.strokeWidth = text.strokeWidth ?? 0
+    textLayer.strokeWidth = CGFloat(text.strokeWidth ?? 0)
     textLayer.strokeOnTop = text.strokeOverFill ?? false
 
     textLayer.preferredSize = text.textFrameSize?.sizeValue
