@@ -43,13 +43,24 @@ final class TextLayer: BaseCompositionLayer {
     // _animate_ text properties, but it can display static text without any issues.
     let text = textLayerModel.text.exactlyOneKeyframe.value
 
+    // The Core Animation engine doesn't currently support `TextAnimator`s.
+    //  - We could add support for animating the transform-related properties without much trouble.
+    //  - We may be able to support animating `fillColor` by getting clever with layer blend modes
+    //    or masks (e.g. use `CoreTextRenderLayer` to draw black glyphs, and then fill them in
+    //    using a `CAShapeLayer`).
+    if !textLayerModel.animators.isEmpty {
+      LottieLogger.shared.assertionFailure("""
+      The Core Animation rendering engine currently doesn't support text animators.
+      """)
+    }
+
     let textLayer = CoreTextRenderLayer()
     textLayer.text = text.text
     textLayer.font = context.fontProvider.fontFor(family: text.fontFamily, size: CGFloat(text.fontSize))
 
     textLayer.alignment = text.justification.textAlignment
-    textLayer.tracking = CGFloat(text.tracking)
     textLayer.lineHeight = CGFloat(text.lineHeight)
+    textLayer.tracking = (CGFloat(text.fontSize) * CGFloat(text.tracking)) / 1000
 
     textLayer.fillColor = text.fillColorData?.cgColorValue
     textLayer.strokeColor = text.strokeColorData?.cgColorValue
