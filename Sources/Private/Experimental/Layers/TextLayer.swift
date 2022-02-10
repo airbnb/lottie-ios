@@ -2,7 +2,6 @@
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
 import QuartzCore
-import UIKit
 
 /// The `CALayer` type responsible for rendering `TextLayer`s
 final class TextLayer: BaseCompositionLayer {
