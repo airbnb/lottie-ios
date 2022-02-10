@@ -894,7 +894,8 @@ final public class AnimationView: AnimationViewBase {
     case .coreAnimation:
       animationLayer = ExperimentalAnimationLayer(
         animation: animation,
-        imageProvider: imageProvider)
+        imageProvider: imageProvider,
+        fontProvider: fontProvider)
 
     case .mainThread:
       animationLayer = AnimationContainer(
@@ -902,9 +903,9 @@ final public class AnimationView: AnimationViewBase {
         imageProvider: imageProvider,
         textProvider: textProvider,
         fontProvider: fontProvider)
-
-      animationLayer.renderScale = screenScale
     }
+
+    animationLayer.renderScale = screenScale
 
     viewLayer?.addSublayer(animationLayer)
     self.animationLayer = animationLayer
