@@ -149,7 +149,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
     return .solidFill(shapeLayer)
   }
 
-  private func setupGradientFillLayerHierarchy() -> FillLayerConfiguration  {
+  private func setupGradientFillLayerHierarchy() -> FillLayerConfiguration {
     let pathMask = CAShapeLayer()
     pathMask.fillColor = .rgb(0, 0, 0)
     mask = pathMask
@@ -160,7 +160,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
     return .gradientFill(.init(gradientLayer: gradientLayer, maskLayer: pathMask))
   }
 
-  private func setupGradientStrokeLayerHierarchy() -> GradientLayers  {
+  private func setupGradientStrokeLayerHierarchy() -> GradientLayers {
     let container = BaseAnimationLayer()
 
     let pathMask = CAShapeLayer()

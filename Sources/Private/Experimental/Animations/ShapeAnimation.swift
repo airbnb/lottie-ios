@@ -47,7 +47,7 @@ extension CAShapeLayer {
   func addAnimations(for trim: Trim, context: LayerAnimationContext) {
     let (strokeStartKeyframes, strokeEndKeyframes) = trim.caShapeLayerKeyframes()
 
-    if trim.offset.exactlyOneKeyframe.value.cgFloatValue != 0 {
+    if trim.offset.keyframes.contains(where: { $0.value.cgFloatValue != 0 }) {
       LottieLogger.shared.assertionFailure("""
       The CoreAnimation rendering engine doesn't support Trim offsets
       """)

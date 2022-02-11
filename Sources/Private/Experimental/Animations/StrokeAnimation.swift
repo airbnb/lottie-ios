@@ -4,6 +4,8 @@
 import Foundation
 import QuartzCore
 
+// MARK: - StrokeShapeItem
+
 /// A `ShapeItem` that represents a stroke
 protocol StrokeShapeItem {
   var opacity: KeyframeGroup<Vector1D> { get }
@@ -15,9 +17,13 @@ protocol StrokeShapeItem {
   var dashPattern: [DashElement]? { get }
 }
 
+// MARK: - Stroke + StrokeShapeItem
+
 extension Stroke: StrokeShapeItem {
   var strokeColor: KeyframeGroup<Color>? { color }
 }
+
+// MARK: - GradientStroke + StrokeShapeItem
 
 extension GradientStroke: StrokeShapeItem {
   var strokeColor: KeyframeGroup<Color>? { nil }

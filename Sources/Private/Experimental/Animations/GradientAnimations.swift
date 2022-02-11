@@ -15,7 +15,12 @@ protocol GradientShapeItem {
   var colors: KeyframeGroup<[Double]> { get }
 }
 
+// MARK: - GradientFill + GradientShapeItem
+
 extension GradientFill: GradientShapeItem { }
+
+// MARK: - GradientStroke + GradientShapeItem
+
 extension GradientStroke: GradientShapeItem { }
 
 // MARK: - GradientRenderLayer + GradientShapeItem
