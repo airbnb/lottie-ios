@@ -15,10 +15,12 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
 
   init(
     animation: Animation,
-    imageProvider: AnimationImageProvider)
+    imageProvider: AnimationImageProvider,
+    fontProvider: AnimationFontProvider)
   {
     self.animation = animation
     self.imageProvider = imageProvider
+    self.fontProvider = fontProvider
     super.init()
 
     setup()
@@ -35,6 +37,7 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
     animation = typedLayer.animation
     currentAnimationConfiguration = typedLayer.currentAnimationConfiguration
     imageProvider = typedLayer.imageProvider
+    fontProvider = typedLayer.fontProvider
     super.init(layer: typedLayer)
   }
 
@@ -55,7 +58,15 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
 
   /// The `AnimationImageProvider` that `ImageLayer`s use to retrieve images,
   /// referenced by name in the animation json.
-  var imageProvider: AnimationImageProvider
+  var imageProvider: AnimationImageProvider {
+    didSet { reloadImages() }
+  }
+
+  /// The `FontProvider` that `TextLayer`s use to retrieve the `CTFont`
+  /// that they should use to render their text content
+  var fontProvider: AnimationFontProvider {
+    didSet { reloadFonts() }
+  }
 
   /// Sets up `CAAnimation`s for each `AnimationLayer` in the layer hierarchy,
   /// playing from `currentFrame`.
@@ -151,7 +162,8 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
   private var layerContext: LayerContext {
     LayerContext(
       assetLibrary: animation.assetLibrary,
-      imageProvider: imageProvider)
+      imageProvider: imageProvider,
+      fontProvider: fontProvider)
   }
 
   private func setup() {
@@ -241,8 +253,14 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
   }
 
   var renderScale: CGFloat {
-    get { 0 }
-    set { LottieLogger.shared.assertionFailure("`renderScale` is currently unsupported") }
+    get { contentsScale }
+    set {
+      contentsScale = newValue
+
+      for sublayer in allSublayers {
+        sublayer.contentsScale = newValue
+      }
+    }
   }
 
   var respectAnimationFrameRate: Bool {
@@ -259,17 +277,22 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
     set { LottieLogger.shared.assertionFailure("`textProvider` is currently unsupported") }
   }
 
-  var fontProvider: AnimationFontProvider {
-    get { DefaultFontProvider() }
-    set { LottieLogger.shared.assertionFailure("`fontProvider` is currently unsupported") }
-  }
-
   func reloadImages() {
     // When the image provider changes, we have to update all `ImageLayer`s
     // so they can query the most up-to-date image from the new image provider.
     for sublayer in allSublayers {
       if let imageLayer = sublayer as? ImageLayer {
         imageLayer.setupImage(context: layerContext)
+      }
+    }
+  }
+
+  func reloadFonts() {
+    // When the text provider changes, we have to update all `TextLayer`s
+    // so they can query the most up-to-date font from the new font provider.
+    for sublayer in allSublayers {
+      if let textLayer = sublayer as? TextLayer {
+        textLayer.configureRenderLayer(with: layerContext)
       }
     }
   }

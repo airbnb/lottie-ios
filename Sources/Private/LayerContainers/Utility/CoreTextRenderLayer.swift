@@ -16,9 +16,10 @@ import AppKit
 import UIKit
 #endif
 
-// MARK: - TextLayer
+// MARK: - CoreTextRenderLayer
 
-final class TextLayer: CALayer {
+/// A CALayer subclass that renders text content using CoreText
+final class CoreTextRenderLayer: CALayer {
 
   // MARK: Public
 
@@ -122,12 +123,10 @@ final class TextLayer: CALayer {
 
     ctx.textMatrix = .identity
     ctx.setAllowsAntialiasing(true)
-    ctx.setAllowsFontSmoothing(true)
     ctx.setAllowsFontSubpixelPositioning(true)
     ctx.setAllowsFontSubpixelQuantization(true)
 
     ctx.setShouldAntialias(true)
-    ctx.setShouldSmoothFonts(true)
     ctx.setShouldSubpixelPositionFonts(true)
     ctx.setShouldSubpixelQuantizeFonts(true)
 

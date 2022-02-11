@@ -91,7 +91,7 @@ final class TextCompositionLayer: CompositionLayer {
   let rootNode: TextAnimatorNode?
   let textDocument: KeyframeInterpolator<TextDocument>?
 
-  let textLayer = TextLayer()
+  let textLayer = CoreTextRenderLayer()
   var textProvider: AnimationTextProvider
   var fontProvider: AnimationFontProvider
 
