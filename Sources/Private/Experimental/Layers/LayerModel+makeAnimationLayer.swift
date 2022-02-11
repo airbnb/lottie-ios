@@ -9,6 +9,7 @@ import QuartzCore
 struct LayerContext {
   let assetLibrary: AssetLibrary?
   let imageProvider: AnimationImageProvider
+  let fontProvider: AnimationFontProvider
 }
 
 // MARK: - LayerModel + makeAnimationLayer
@@ -29,11 +30,17 @@ extension LayerModel {
     case (.image, let imageLayerModel as ImageLayerModel):
       return ImageLayer(imageLayer: imageLayerModel, context: context)
 
+    case (.text, let textLayerModel as TextLayerModel):
+      return TextLayer(textLayerModel: textLayerModel, context: context)
+
     case (.null, _):
       return TransformLayer(layerModel: self)
 
     default:
-      // Other layer types (text) are currently unsupported
+      LottieLogger.shared.assertionFailure("""
+      Unexpected layer type combination ("\(type)" and "\(Swift.type(of: self))")
+      """)
+
       return nil
     }
   }

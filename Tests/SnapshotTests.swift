@@ -152,6 +152,10 @@ class SnapshotTests: XCTestCase {
           animationView.imageProvider = customImageProvider
         }
 
+        if let customFontProvider = snapshotConfiguration.customFontProvider {
+          animationView.fontProvider = customFontProvider
+        }
+
         assertSnapshot(
           matching: animationView,
           as: .imageOfPresentationLayer(precision: snapshotConfiguration.precision),
