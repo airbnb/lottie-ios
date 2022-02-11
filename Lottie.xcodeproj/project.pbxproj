@@ -10,6 +10,7 @@
 		1133E6AD27AA4920000633AC /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133E6AC27AA4920000633AC /* DataExtension.swift */; };
 		1133E6AE27AA4920000633AC /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133E6AC27AA4920000633AC /* DataExtension.swift */; };
 		1133E6AF27AA4920000633AC /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133E6AC27AA4920000633AC /* DataExtension.swift */; };
+		2E09FA0627B6CEB600BA84E5 /* HardcodedFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */; };
 		2E8040B027A072B8006E74CB /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E80409A27A0725D006E74CB /* Lottie.framework */; };
 		2E8044AD27A07347006E74CB /* HardcodedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8040BE27A07343006E74CB /* HardcodedImageProvider.swift */; };
 		2E8044AE27A07347006E74CB /* Snapshotting+presentationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8040BF27A07343006E74CB /* Snapshotting+presentationLayer.swift */; };
@@ -549,6 +550,7 @@
 
 /* Begin PBXFileReference section */
 		1133E6AC27AA4920000633AC /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
+		2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcodedFontProvider.swift; sourceTree = "<group>"; };
 		2E80409A27A0725D006E74CB /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E8040AC27A072B8006E74CB /* LottieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LottieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E8040BE27A07343006E74CB /* HardcodedImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardcodedImageProvider.swift; sourceTree = "<group>"; };
@@ -806,6 +808,7 @@
 				2E8040BE27A07343006E74CB /* HardcodedImageProvider.swift */,
 				2E8040BF27A07343006E74CB /* Snapshotting+presentationLayer.swift */,
 				2EAF59A627A076BC00E00531 /* Bundle+Module.swift */,
+				2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1768,6 +1771,7 @@
 			files = (
 				2E8044AD27A07347006E74CB /* HardcodedImageProvider.swift in Sources */,
 				2E80450C27A07347006E74CB /* SnapshotTests.swift in Sources */,
+				2E09FA0627B6CEB600BA84E5 /* HardcodedFontProvider.swift in Sources */,
 				2E80450D27A07347006E74CB /* SnapshotConfiguration.swift in Sources */,
 				2EAF59A727A076BC00E00531 /* Bundle+Module.swift in Sources */,
 				2E8044AE27A07347006E74CB /* Snapshotting+presentationLayer.swift in Sources */,

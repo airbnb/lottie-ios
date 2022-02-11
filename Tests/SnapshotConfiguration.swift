@@ -1,7 +1,9 @@
 // Created by Cal Stephens on 12/15/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
+#if canImport(UIKit)
 import Lottie
+import UIKit
 
 // MARK: - SnapshotConfiguration
 
@@ -19,6 +21,9 @@ struct SnapshotConfiguration {
 
   /// A custom `AnimationImageProvider` to use when rendering this animation
   var customImageProvider: AnimationImageProvider?
+
+  /// A custom `AnimationFontProvider` to use when rendering this animation
+  var customFontProvider: AnimationFontProvider?
 }
 
 // MARK: Custom mapping
@@ -52,6 +57,9 @@ extension SnapshotConfiguration {
 
     // Test cases for `AnimatedImageProvider`
     "Nonanimating/_dog": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog.png")),
+
+    // Test cases for `AnimationFontProvider`
+    "Nonanimating/Text_Glyph": .customFontProvider(HardcodedFontProvider(font: UIFont(name: "Chalkduster", size: 36)!)),
   ]
 }
 
@@ -96,6 +104,16 @@ extension SnapshotConfiguration {
     configuration.customImageProvider = customImageProvider
     return configuration
   }
+
+  /// A `SnapshotConfiguration` value using the given custom value providers
+  static func customFontProvider(
+    _ customFontProvider: AnimationFontProvider)
+    -> SnapshotConfiguration
+  {
+    var configuration = SnapshotConfiguration.default
+    configuration.customFontProvider = customFontProvider
+    return configuration
+  }
 }
 
 // MARK: - Color helpers
@@ -104,3 +122,4 @@ extension Color {
   static let black = Color(r: 0, g: 0, b: 0, a: 1)
   static let red = Color(r: 1, g: 0, b: 0, a: 1)
 }
+#endif

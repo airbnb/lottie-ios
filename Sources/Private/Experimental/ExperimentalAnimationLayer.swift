@@ -58,11 +58,15 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
 
   /// The `AnimationImageProvider` that `ImageLayer`s use to retrieve images,
   /// referenced by name in the animation json.
-  var imageProvider: AnimationImageProvider
+  var imageProvider: AnimationImageProvider {
+    didSet { reloadImages() }
+  }
 
   /// The `FontProvider` that `TextLayer`s use to retrieve the `CTFont`
   /// that they should use to render their text content
-  var fontProvider: AnimationFontProvider
+  var fontProvider: AnimationFontProvider {
+    didSet { reloadFonts() }
+  }
 
   /// Sets up `CAAnimation`s for each `AnimationLayer` in the layer hierarchy,
   /// playing from `currentFrame`.
@@ -279,6 +283,16 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
     for sublayer in allSublayers {
       if let imageLayer = sublayer as? ImageLayer {
         imageLayer.setupImage(context: layerContext)
+      }
+    }
+  }
+
+  func reloadFonts() {
+    // When the text provider changes, we have to update all `TextLayer`s
+    // so they can query the most up-to-date font from the new font provider.
+    for sublayer in allSublayers {
+      if let textLayer = sublayer as? TextLayer {
+        textLayer.configureRenderLayer(with: layerContext)
       }
     }
   }

@@ -14,7 +14,8 @@ final class TextLayer: BaseCompositionLayer {
   {
     self.textLayerModel = textLayerModel
     super.init(layerModel: textLayerModel)
-    setupSublayers(context: context)
+    setupSublayers()
+    configureRenderLayer(with: context)
   }
 
   required init?(coder _: NSCoder) {
@@ -32,11 +33,9 @@ final class TextLayer: BaseCompositionLayer {
     super.init(layer: typedLayer)
   }
 
-  // MARK: Private
+  // MARK: Internal
 
-  private let textLayerModel: TextLayerModel
-
-  private func setupSublayers(context: LayerContext) {
+  func configureRenderLayer(with context: LayerContext) {
     // We can't use `CATextLayer`, because it doesn't support enough features we use.
     // Instead, we use the same `CoreTextRenderLayer` (with a custom `draw` implementation)
     // used by the Main Thread rendering engine. This means the Core Animation engine can't
@@ -54,31 +53,37 @@ final class TextLayer: BaseCompositionLayer {
       """)
     }
 
-    let textLayer = CoreTextRenderLayer()
-    textLayer.text = text.text
-    textLayer.font = context.fontProvider.fontFor(family: text.fontFamily, size: CGFloat(text.fontSize))
+    renderLayer.text = text.text
+    renderLayer.font = context.fontProvider.fontFor(family: text.fontFamily, size: CGFloat(text.fontSize))
 
-    textLayer.alignment = text.justification.textAlignment
-    textLayer.lineHeight = CGFloat(text.lineHeight)
-    textLayer.tracking = (CGFloat(text.fontSize) * CGFloat(text.tracking)) / 1000
+    renderLayer.alignment = text.justification.textAlignment
+    renderLayer.lineHeight = CGFloat(text.lineHeight)
+    renderLayer.tracking = (CGFloat(text.fontSize) * CGFloat(text.tracking)) / 1000
 
-    textLayer.fillColor = text.fillColorData?.cgColorValue
-    textLayer.strokeColor = text.strokeColorData?.cgColorValue
-    textLayer.strokeWidth = CGFloat(text.strokeWidth ?? 0)
-    textLayer.strokeOnTop = text.strokeOverFill ?? false
+    renderLayer.fillColor = text.fillColorData?.cgColorValue
+    renderLayer.strokeColor = text.strokeColorData?.cgColorValue
+    renderLayer.strokeWidth = CGFloat(text.strokeWidth ?? 0)
+    renderLayer.strokeOnTop = text.strokeOverFill ?? false
 
-    textLayer.preferredSize = text.textFrameSize?.sizeValue
-    textLayer.sizeToFit()
+    renderLayer.preferredSize = text.textFrameSize?.sizeValue
+    renderLayer.sizeToFit()
 
-    textLayer.transform = CATransform3DIdentity
-    textLayer.position = text.textFramePosition?.pointValue ?? .zero
+    renderLayer.transform = CATransform3DIdentity
+    renderLayer.position = text.textFramePosition?.pointValue ?? .zero
+  }
 
+  // MARK: Private
+
+  private let textLayerModel: TextLayerModel
+  private let renderLayer = CoreTextRenderLayer()
+
+  private func setupSublayers() {
     // Place the text render layer in an additional container
     //  - Direct sublayers of a `BaseCompositionLayer` always fill the bounds
     //    of their superlayer -- so this container will be the bounds of self,
     //    and the text render layer can be positioned anywhere.
     let textContainerLayer = CALayer()
-    textContainerLayer.addSublayer(textLayer)
+    textContainerLayer.addSublayer(renderLayer)
     addSublayer(textContainerLayer)
   }
 
