@@ -10,6 +10,9 @@
 		1133E6AD27AA4920000633AC /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133E6AC27AA4920000633AC /* DataExtension.swift */; };
 		1133E6AE27AA4920000633AC /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133E6AC27AA4920000633AC /* DataExtension.swift */; };
 		1133E6AF27AA4920000633AC /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133E6AC27AA4920000633AC /* DataExtension.swift */; };
+		2E29E51A27B5C072007E25CE /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29E51927B5C072007E25CE /* StrokeAnimation.swift */; };
+		2E29E51B27B5C072007E25CE /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29E51927B5C072007E25CE /* StrokeAnimation.swift */; };
+		2E29E51C27B5C072007E25CE /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29E51927B5C072007E25CE /* StrokeAnimation.swift */; };
 		2E09FA0627B6CEB600BA84E5 /* HardcodedFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */; };
 		2E8040B027A072B8006E74CB /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E80409A27A0725D006E74CB /* Lottie.framework */; };
 		2E8044AD27A07347006E74CB /* HardcodedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8040BE27A07343006E74CB /* HardcodedImageProvider.swift */; };
@@ -550,6 +553,7 @@
 
 /* Begin PBXFileReference section */
 		1133E6AC27AA4920000633AC /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
+		2E29E51927B5C072007E25CE /* StrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeAnimation.swift; sourceTree = "<group>"; };
 		2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcodedFontProvider.swift; sourceTree = "<group>"; };
 		2E80409A27A0725D006E74CB /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E8040AC27A072B8006E74CB /* LottieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LottieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1039,6 +1043,7 @@
 				2EAF5A1027A0798700E00531 /* GradientAnimations.swift */,
 				2EAF5A1127A0798700E00531 /* VisibilityAnimation.swift */,
 				2E923A3227A4BBF6008CE8C4 /* CombinedShapeAnimation.swift */,
+				2E29E51927B5C072007E25CE /* StrokeAnimation.swift */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -1659,6 +1664,7 @@
 				2EAF5AA127A0798700E00531 /* AnimationSubview.macOS.swift in Sources */,
 				2EAF5AF227A0798700E00531 /* AnyValueProvider.swift in Sources */,
 				2EAF5C2A27A0798800E00531 /* ShapeLayerModel.swift in Sources */,
+				2E29E51A27B5C072007E25CE /* StrokeAnimation.swift in Sources */,
 				2EAF5AD727A0798700E00531 /* Vectors.swift in Sources */,
 				2EAF5B7927A0798700E00531 /* CoreTextRenderLayer.swift in Sources */,
 				2EAF5BFA27A0798800E00531 /* ShapeItem.swift in Sources */,
@@ -1852,6 +1858,7 @@
 				2EAF5AA227A0798700E00531 /* AnimationSubview.macOS.swift in Sources */,
 				2EAF5AF327A0798700E00531 /* AnyValueProvider.swift in Sources */,
 				2EAF5C2B27A0798800E00531 /* ShapeLayerModel.swift in Sources */,
+				2E29E51B27B5C072007E25CE /* StrokeAnimation.swift in Sources */,
 				2EAF5AD827A0798700E00531 /* Vectors.swift in Sources */,
 				2EAF5B7A27A0798700E00531 /* CoreTextRenderLayer.swift in Sources */,
 				2EAF5BFB27A0798800E00531 /* ShapeItem.swift in Sources */,
@@ -2032,6 +2039,7 @@
 				2EAF5AA327A0798700E00531 /* AnimationSubview.macOS.swift in Sources */,
 				2EAF5AF427A0798700E00531 /* AnyValueProvider.swift in Sources */,
 				2EAF5C2C27A0798800E00531 /* ShapeLayerModel.swift in Sources */,
+				2E29E51C27B5C072007E25CE /* StrokeAnimation.swift in Sources */,
 				2EAF5AD927A0798700E00531 /* Vectors.swift in Sources */,
 				2EAF5B7B27A0798700E00531 /* CoreTextRenderLayer.swift in Sources */,
 				2EAF5BFC27A0798800E00531 /* ShapeItem.swift in Sources */,

@@ -3,39 +3,61 @@
 
 import QuartzCore
 
+// MARK: - GradientShapeItem
+
+/// A `ShapeItem` that represents a gradient
+protocol GradientShapeItem {
+  var opacity: KeyframeGroup<Vector1D> { get }
+  var startPoint: KeyframeGroup<Vector3D> { get }
+  var endPoint: KeyframeGroup<Vector3D> { get }
+  var gradientType: GradientType { get }
+  var numberOfColors: Int { get }
+  var colors: KeyframeGroup<[Double]> { get }
+}
+
+// MARK: - GradientFill + GradientShapeItem
+
+extension GradientFill: GradientShapeItem { }
+
+// MARK: - GradientStroke + GradientShapeItem
+
+extension GradientStroke: GradientShapeItem { }
+
+// MARK: - GradientRenderLayer + GradientShapeItem
+
 extension GradientRenderLayer {
 
   // MARK: Internal
 
   /// Adds gradient-related animations to this layer, from the given `GradientFill`
-  func addAnimations(for gradientFill: GradientFill, context: LayerAnimationContext) {
+  func addGradientAnimations(for gradient: GradientShapeItem, context: LayerAnimationContext) {
     // We have to set `colors` to a non-nil value with some valid number of colors
     // for the color animation below to have any effect
     colors = .init(
       repeating: CGColor.rgb(0, 0, 0),
-      count: gradientFill.numberOfColors)
+      count: gradient.numberOfColors)
 
     addAnimation(
       for: .colors,
-      keyframes: gradientFill.colors.keyframes,
+      keyframes: gradient.colors.keyframes,
       value: { colorComponents in
-        gradientFill.colorConfiguration(from: colorComponents).map { $0.color }
+        gradient.colorConfiguration(from: colorComponents).map { $0.color }
       },
       context: context)
 
     addAnimation(
       for: .locations,
-      keyframes: gradientFill.colors.keyframes,
+      keyframes: gradient.colors.keyframes,
       value: { colorComponents in
-        gradientFill.colorConfiguration(from: colorComponents).map { $0.location }
+        gradient.colorConfiguration(from: colorComponents).map { $0.location }
       },
       context: context)
 
-    switch gradientFill.gradientType {
+    switch gradient.gradientType {
     case .linear:
-      addLinearGradientAnimations(for: gradientFill, context: context)
+      addLinearGradientAnimations(for: gradient, context: context)
     case .radial:
-      addRadialGradientAnimations(for: gradientFill, context: context)
+      addRadialGradientAnimations(for: gradient)
     case .none:
       break
     }
@@ -44,14 +66,14 @@ extension GradientRenderLayer {
   // MARK: Private
 
   private func addLinearGradientAnimations(
-    for gradientFill: GradientFill,
+    for gradient: GradientShapeItem,
     context: LayerAnimationContext)
   {
     type = .axial
 
     addAnimation(
       for: .startPoint,
-      keyframes: gradientFill.startPoint.keyframes,
+      keyframes: gradient.startPoint.keyframes,
       value: { absoluteStartPoint in
         percentBasedPointInBounds(from: absoluteStartPoint.pointValue)
       },
@@ -59,25 +81,22 @@ extension GradientRenderLayer {
 
     addAnimation(
       for: .endPoint,
-      keyframes: gradientFill.endPoint.keyframes,
+      keyframes: gradient.endPoint.keyframes,
       value: { absoluteEndPoint in
         percentBasedPointInBounds(from: absoluteEndPoint.pointValue)
       },
       context: context)
   }
 
-  private func addRadialGradientAnimations(
-    for gradientFill: GradientFill,
-    context _: LayerAnimationContext)
-  {
+  private func addRadialGradientAnimations(for gradient: GradientShapeItem) {
     type = .radial
 
     // To draw the correct gradients, we have to derive a custom `endPoint`
     // relative to the `startPoint` value. Since calculating the `endPoint`
     // at any given time requires knowing the current `startPoint`,
     // we can't allow them to animate separately.
-    let absoluteStartPoint = gradientFill.startPoint.exactlyOneKeyframe.value.pointValue
-    let absoluteEndPoint = gradientFill.endPoint.exactlyOneKeyframe.value.pointValue
+    let absoluteStartPoint = gradient.startPoint.exactlyOneKeyframe.value.pointValue
+    let absoluteEndPoint = gradient.endPoint.exactlyOneKeyframe.value.pointValue
 
     startPoint = percentBasedPointInBounds(from: absoluteStartPoint)
 
@@ -89,7 +108,7 @@ extension GradientRenderLayer {
   }
 }
 
-extension GradientFill {
+extension GradientShapeItem {
   /// Converts the compact `[Double]` color components representation
   /// into an array of `CGColor`s and the location of those colors within the gradient
   fileprivate func colorConfiguration(

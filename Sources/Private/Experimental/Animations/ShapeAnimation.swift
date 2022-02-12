@@ -42,42 +42,16 @@ extension CAShapeLayer {
       context: context)
   }
 
-  /// Adds animations for properties related to the given `Stroke` object (`strokeColor`, `lineWidth`, etc)
-  @nonobjc
-  func addAnimations(for stroke: Stroke, context: LayerAnimationContext) {
-    lineJoin = stroke.lineJoin.caLineJoin
-    lineCap = stroke.lineCap.caLineCap
-    miterLimit = CGFloat(stroke.miterLimit)
-
-    addAnimation(
-      for: .strokeColor,
-      keyframes: stroke.color.keyframes,
-      value: \.cgColorValue,
-      context: context)
-
-    addAnimation(
-      for: .lineWidth,
-      keyframes: stroke.width.keyframes,
-      value: \.cgFloatValue,
-      context: context)
-
-    if let (dashPattern, dashPhase) = stroke.dashPattern?.shapeLayerConfiguration {
-      lineDashPattern = dashPattern.map {
-        KeyframeGroup(keyframes: $0).exactlyOneKeyframe.value.cgFloatValue as NSNumber
-      }
-
-      addAnimation(
-        for: .lineDashPhase,
-        keyframes: dashPhase,
-        value: \.cgFloatValue,
-        context: context)
-    }
-  }
-
   /// Adds animations for `strokeStart` and `strokeEnd` from the given `Trim` object
   @nonobjc
   func addAnimations(for trim: Trim, context: LayerAnimationContext) {
     let (strokeStartKeyframes, strokeEndKeyframes) = trim.caShapeLayerKeyframes()
+
+    if trim.offset.keyframes.contains(where: { $0.value.cgFloatValue != 0 }) {
+      LottieLogger.shared.assertionFailure("""
+      The CoreAnimation rendering engine doesn't support Trim offsets
+      """)
+    }
 
     addAnimation(
       for: .strokeStart,
