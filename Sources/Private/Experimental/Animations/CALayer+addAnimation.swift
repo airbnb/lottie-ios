@@ -10,7 +10,7 @@ extension CALayer {
   /// Constructs a `CAKeyframeAnimation` that reflects the given keyframes,
   /// and adds it to this `CALayer`.
   @nonobjc
-  func addAnimation<KeyframeValue, ValueRepresentation>(
+  func addAnimation<KeyframeValue, ValueRepresentation: Equatable>(
     for property: LayerProperty<ValueRepresentation>,
     keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
     value keyframeValueMapping: (KeyframeValue) -> ValueRepresentation,
@@ -43,6 +43,27 @@ extension CALayer {
     -> CAPropertyAnimation?
   {
     guard !keyframes.isEmpty else { return nil }
+
+    // If there is exactly one keyframe value, we can create a simple
+    // `CABasicAnimation` instead of going to the trouble of computing
+    // a more complex `CAKeyframeAnimation`
+    guard keyframes.count > 1 else {
+      let value = keyframeValueMapping(keyframes[0].value)
+
+      // If the value is the same as the default value for that CALayer property,
+      // then we can just do nothing.
+      if value == property.defaultValue {
+        return nil
+      }
+
+      // Just calling `setValue(value, forKeyPath: property.caLayerKeypath)`
+      // is even more performant if we can figure out how to get that to work
+      // without introducing artifacts
+      let animation = CABasicAnimation(keyPath: property.caLayerKeypath)
+      animation.fromValue = value
+      animation.toValue = value
+      return animation
+    }
 
     let animation = CAKeyframeAnimation(keyPath: property.caLayerKeypath)
 
