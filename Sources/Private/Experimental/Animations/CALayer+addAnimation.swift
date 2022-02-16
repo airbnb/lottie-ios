@@ -39,29 +39,45 @@ extension CALayer {
     for property: LayerProperty<ValueRepresentation>,
     keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
     value keyframeValueMapping: (KeyframeValue) -> ValueRepresentation,
-    context: LayerAnimationContext)
+    context: LayerAnimationContext,
+    applyDirectlyToLayerIfPossible: Bool = true)
     -> CAPropertyAnimation?
   {
     guard !keyframes.isEmpty else { return nil }
 
-    // If there is exactly one keyframe value, we can create a simple
-    // `CABasicAnimation` instead of going to the trouble of computing
-    // a more complex `CAKeyframeAnimation`
-    guard keyframes.count > 1 else {
-      let value = keyframeValueMapping(keyframes[0].value)
+    // If there is exactly one keyframe value, we can improve performance
+    // by applying that value directly to the layer instead of creating
+    // a relatively expensive `CAKeyframeAnimation`.
+    if
+      keyframes.count == 1,
+      applyDirectlyToLayerIfPossible
+    {
+      let keyframeValue = keyframeValueMapping(keyframes[0].value)
 
-      // If the value is the same as the default value for that CALayer property,
-      // then we can just do nothing.
-      if value == property.defaultValue {
+      // If the keyframe value is the same as the layer's default value for this property,
+      // then we can just ignore this set of keyframes.
+      if keyframeValue == property.defaultValue {
         return nil
       }
 
-      // Just calling `setValue(value, forKeyPath: property.caLayerKeypath)`
-      // is even more performant if we can figure out how to get that to work
-      // without introducing artifacts
+      // If the property on the CALayer being animated hasn't been modified from the default yet,
+      // then we can apply the keyframe value directly to the layer using KVC instead
+      // of creating a `CAAnimation`. (For example, this check prevents us from using
+      // KVC to change the `anchorPoint`, which conflicts with where we set the `anchorPoint`
+      // for our layers to a non-default value in `BaseAnimationLayer` / `fillBoundsOfSuperlayer()`)
+      let currentValue = value(forKey: property.caLayerKeypath) as? ValueRepresentation
+
+      if currentValue == property.defaultValue {
+        setValue(keyframeValue, forKeyPath: property.caLayerKeypath)
+        return nil
+      }
+
+      // Otherwise, we still need to create a `CAAnimation`, but we can
+      // create a simple `CABasicAnimation` that is still less expensive
+      // than computing a `CAKeyframeAnimation`.
       let animation = CABasicAnimation(keyPath: property.caLayerKeypath)
-      animation.fromValue = value
-      animation.toValue = value
+      animation.fromValue = keyframeValue
+      animation.toValue = keyframeValue
       return animation
     }
 
@@ -188,7 +204,10 @@ extension CALayer {
       for: property,
       keyframes: customKeyframes.keyframes,
       value: { $0 },
-      context: context)
+      context: context,
+      // Since custom animations are overriding an existing animation,
+      // we always have to create a CAAnimation for these.
+      applyDirectlyToLayerIfPossible: false)
   }
 
 }

@@ -113,7 +113,7 @@ extension LayerProperty {
   static var anchorPoint: LayerProperty<CGPoint> {
     .init(
       caLayerKeypath: #keyPath(CALayer.anchorPoint),
-      defaultValue: CGPoint(x: 0.5, y: 0.5),
+      defaultValue: nil,
       customizableProperty: nil /* currently unsupported */)
   }
 
