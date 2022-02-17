@@ -10,7 +10,7 @@ extension CALayer {
   /// Constructs a `CAKeyframeAnimation` that reflects the given keyframes,
   /// and adds it to this `CALayer`.
   @nonobjc
-  func addAnimation<KeyframeValue, ValueRepresentation>(
+  func addAnimation<KeyframeValue, ValueRepresentation: Equatable>(
     for property: LayerProperty<ValueRepresentation>,
     keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
     value keyframeValueMapping: (KeyframeValue) -> ValueRepresentation,
@@ -33,7 +33,9 @@ extension CALayer {
 
   // MARK: Private
 
-  /// Constructs a `CAKeyframeAnimation` that reflects the given keyframes
+  /// Constructs a `CAAnimation` that reflects the given keyframes
+  ///  - If the value can be applied directly to the CALayer using KVC,
+  ///    then no `CAAnimation` will be created and the value will be applied directly.
   @nonobjc
   private func defaultAnimation<KeyframeValue, ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
@@ -44,8 +46,109 @@ extension CALayer {
   {
     guard !keyframes.isEmpty else { return nil }
 
-    let animation = CAKeyframeAnimation(keyPath: property.caLayerKeypath)
+    // If there is exactly one keyframe value, we can improve performance
+    // by applying that value directly to the layer instead of creating
+    // a relatively expensive `CAKeyframeAnimation`.
+    if keyframes.count == 1 {
+      let keyframeValue = keyframeValueMapping(keyframes[0].value)
 
+      // If the keyframe value is the same as the layer's default value for this property,
+      // then we can just ignore this set of keyframes.
+      if keyframeValue == property.defaultValue {
+        return nil
+      }
+
+      // If the property on the CALayer being animated hasn't been modified from the default yet,
+      // then we can apply the keyframe value directly to the layer using KVC instead
+      // of creating a `CAAnimation`.
+      if
+        let defaultValue = property.defaultValue,
+        defaultValue == value(forKey: property.caLayerKeypath) as? ValueRepresentation
+      {
+        setValue(keyframeValue, forKeyPath: property.caLayerKeypath)
+        return nil
+      }
+
+      // Otherwise, we still need to create a `CAAnimation`, but we can
+      // create a simple `CABasicAnimation` that is still less expensive
+      // than computing a `CAKeyframeAnimation`.
+      let animation = CABasicAnimation(keyPath: property.caLayerKeypath)
+      animation.fromValue = keyframeValue
+      animation.toValue = keyframeValue
+      return animation
+    }
+
+    return keyframeAnimation(
+      for: property,
+      keyframes: keyframes,
+      value: keyframeValueMapping,
+      context: context)
+  }
+
+  /// A `CAAnimation` that applies the custom value from the `AnyValueProvider`
+  /// registered for this specific property's `AnimationKeypath`,
+  /// if one has been registered using `AnimationView.setValueProvider(_:keypath:)`.
+  @nonobjc
+  private func customizedAnimation<ValueRepresentation>(
+    for property: LayerProperty<ValueRepresentation>,
+    context: LayerAnimationContext)
+    -> CAPropertyAnimation?
+  {
+    guard
+      let customizableProperty = property.customizableProperty,
+      let customKeyframes = context.valueProviderStore.customKeyframes(
+        of: customizableProperty,
+        for: AnimationKeypath(keys: context.currentKeypath.keys + customizableProperty.name.map { $0.rawValue }))
+    else { return nil }
+
+    // Since custom animations are overriding an existing animation,
+    // we always have to create a CAKeyframeAnimation for these instead of
+    // letting `defaultAnimation(...)` try to apply the value using KVC.
+    return keyframeAnimation(
+      for: property,
+      keyframes: customKeyframes.keyframes,
+      value: { $0 },
+      context: context)
+  }
+
+  /// Creates a `CAKeyframeAnimation` for the given keyframes
+  private func keyframeAnimation<KeyframeValue, ValueRepresentation>(
+    for property: LayerProperty<ValueRepresentation>,
+    keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
+    value keyframeValueMapping: (KeyframeValue) -> ValueRepresentation,
+    context: LayerAnimationContext)
+    -> CAKeyframeAnimation
+  {
+    // Convert the list of `Keyframe<T>` into
+    // the representation used by `CAKeyframeAnimation`
+    var values = keyframes.map { keyframeModel in
+      keyframeValueMapping(keyframeModel.value)
+    }
+
+    var keyTimes = keyframes.map { keyframeModel -> NSNumber in
+      let progressTime = context.animation.progressTime(forFrame: keyframeModel.time, clamped: false)
+      return NSNumber(value: Float(progressTime))
+    }
+
+    var timingFunctions = self.timingFunctions(for: keyframes)
+    let calculationMode = self.calculationMode(for: keyframes)
+
+    validate(values: &values, keyTimes: &keyTimes, timingFunctions: &timingFunctions, for: calculationMode)
+
+    let animation = CAKeyframeAnimation(keyPath: property.caLayerKeypath)
+    animation.calculationMode = calculationMode
+    animation.values = values
+    animation.keyTimes = keyTimes
+    animation.timingFunctions = timingFunctions
+    return animation
+  }
+
+  /// The `CAAnimationCalculationMode` that should be used for a `CAKeyframeAnimation`
+  /// animating the given keyframes
+  private func calculationMode<KeyframeValue>(
+    for keyframes: ContiguousArray<Keyframe<KeyframeValue>>)
+    -> CAAnimationCalculationMode
+  {
     // Animations using `isHold` should use `CAAnimationCalculationMode.discrete`
     //
     //  - Since we currently only create a single `CAKeyframeAnimation`,
@@ -60,23 +163,20 @@ extension CALayer {
     let intermediateKeyframes = keyframes.dropFirst().dropLast()
     if intermediateKeyframes.contains(where: \.isHold) {
       if intermediateKeyframes.allSatisfy(\.isHold) {
-        animation.calculationMode = .discrete
+        return .discrete
       } else {
         LottieLogger.shared.warn("Mixed `isHold` / `!isHold` keyframes are currently unsupported")
       }
     }
 
-    // Convert the list of `Keyframe<T>` into
-    // the representation used by `CAKeyframeAnimation`
-    var values = keyframes.map { keyframeModel in
-      keyframeValueMapping(keyframeModel.value)
-    }
+    return .linear
+  }
 
-    var keyTimes = keyframes.map { keyframeModel -> NSNumber in
-      let progressTime = context.animation.progressTime(forFrame: keyframeModel.time, clamped: false)
-      return NSNumber(value: Float(progressTime))
-    }
-
+  /// `timingFunctions` to apply to a `CAKeyframeAnimation` animating the given keyframes
+  private func timingFunctions<KeyframeValue>(
+    for keyframes: ContiguousArray<Keyframe<KeyframeValue>>)
+    -> [CAMediaTimingFunction]
+  {
     // Compute the timing function between each keyframe and the subsequent keyframe
     var timingFunctions: [CAMediaTimingFunction] = []
 
@@ -96,6 +196,16 @@ extension CALayer {
         Float(controlPoint2.y)))
     }
 
+    return timingFunctions
+  }
+
+  /// Validates that the requirements of the `CAKeyframeAnimation` API are met correctly
+  private func validate<ValueRepresentation>(
+    values: inout [ValueRepresentation],
+    keyTimes: inout [NSNumber],
+    timingFunctions: inout [CAMediaTimingFunction],
+    for calculationMode: CAAnimationCalculationMode)
+  {
     // Validate that we have correct start (0.0) and end (1.0) keyframes.
     // From the documentation of `CAKeyframeAnimation.keyTimes`:
     //  - The first value in the `keyTimes` array must be 0.0 and the last value must be 1.0.
@@ -111,8 +221,7 @@ extension CALayer {
       timingFunctions.append(CAMediaTimingFunction(name: .linear))
     }
 
-    // Validate that we have the correct number of `values` and `keyTimes`
-    switch animation.calculationMode {
+    switch calculationMode {
     case .linear, .cubic:
       // From the documentation of `CAKeyframeAnimation.keyTimes`:
       //  - The number of elements in the keyTimes array
@@ -137,37 +246,9 @@ extension CALayer {
 
     default:
       LottieLogger.shared.assertionFailure("""
-      Unexpected keyframe calculation mode \(animation.calculationMode)
+      Unexpected keyframe calculation mode \(calculationMode)
       """)
     }
-
-    animation.values = values
-    animation.keyTimes = keyTimes
-    animation.timingFunctions = timingFunctions
-    return animation
-  }
-
-  /// A `CAAnimation` that applies the custom value from the `AnyValueProvider`
-  /// registered for this specific property's `AnimationKeypath`,
-  /// if one has been registered using `AnimationView.setValueProvider(_:keypath:)`.
-  @nonobjc
-  private func customizedAnimation<ValueRepresentation>(
-    for property: LayerProperty<ValueRepresentation>,
-    context: LayerAnimationContext)
-    -> CAPropertyAnimation?
-  {
-    guard
-      let customizableProperty = property.customizableProperty,
-      let customKeyframes = context.valueProviderStore.customKeyframes(
-        of: customizableProperty,
-        for: AnimationKeypath(keys: context.currentKeypath.keys + customizableProperty.name.map { $0.rawValue }))
-    else { return nil }
-
-    return defaultAnimation(
-      for: property,
-      keyframes: customKeyframes.keyframes,
-      value: { $0 },
-      context: context)
   }
 
 }

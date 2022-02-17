@@ -3,7 +3,7 @@
 
 import XCTest
 
-@testable import LottieCore
+@testable import Lottie
 
 final class AnimationKeypathTests: XCTestCase {
 

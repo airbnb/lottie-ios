@@ -72,12 +72,12 @@ class SnapshotTests: XCTestCase {
 
   override func setUp() {
     LottieLogger.shared = .printToConsole
-    Lottie.SnapshotTests.snapshotTestsAreRunning = true
+    TestHelpers.snapshotTestsAreRunning = true
   }
 
   override func tearDown() {
     LottieLogger.shared = LottieLogger()
-    Lottie.SnapshotTests.snapshotTestsAreRunning = false
+    TestHelpers.snapshotTestsAreRunning = false
   }
 
   // MARK: Private

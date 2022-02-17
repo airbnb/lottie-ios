@@ -826,6 +826,17 @@ final public class AnimationView: AnimationViewBase {
 
   /// Updates the animation frame. Does not affect any current animations
   func updateAnimationFrame(_ newFrame: CGFloat) {
+    // In performance tests, we have to wrap the animation view setup
+    // in a `CATransaction` in order for the layers to be deallocated at
+    // the correct time. The `CATransaction`s in this method interfere
+    // with the ones managed by the performance test, and aren't actually
+    // necessary in a headless environment, so we disable them.
+    if TestHelpers.performanceTestsAreRunning {
+      animationLayer?.currentFrame = newFrame
+      animationLayer?.forceDisplayUpdate()
+      return
+    }
+
     CATransaction.begin()
     CATransaction.setCompletionBlock {
       self.animationLayer?.forceDisplayUpdate()
