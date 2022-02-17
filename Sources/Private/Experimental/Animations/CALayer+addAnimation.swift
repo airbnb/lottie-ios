@@ -65,9 +65,10 @@ extension CALayer {
       // of creating a `CAAnimation`. (For example, this check prevents us from using
       // KVC to change the `anchorPoint`, which conflicts with where we set the `anchorPoint`
       // for our layers to a non-default value in `BaseAnimationLayer` / `fillBoundsOfSuperlayer()`)
-      let currentValue = value(forKey: property.caLayerKeypath) as? ValueRepresentation
-
-      if currentValue == property.defaultValue {
+      if
+        let defaultValue = property.defaultValue,
+        defaultValue == value(forKey: property.caLayerKeypath) as? ValueRepresentation
+      {
         setValue(keyframeValue, forKeyPath: property.caLayerKeypath)
         return nil
       }
