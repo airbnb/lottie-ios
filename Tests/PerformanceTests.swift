@@ -19,7 +19,7 @@ final class PerformanceTests: XCTestCase {
     // This is basically a snapshot test for the performance of the Core Animation engine
     // compared to the Main Thread engine. Currently, the Core Animation engine is
     // about the same speed as the Main Thread engine in this example.
-    XCTAssertEqual(ratio, 1.0, accuracy: 0.1)
+    XCTAssertEqual(ratio, 1.0, accuracy: 0.15)
   }
 
   func testAnimationViewSetup_complexAnimation() {

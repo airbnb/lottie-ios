@@ -130,8 +130,8 @@ extension CALayer {
       return NSNumber(value: Float(progressTime))
     }
 
-    var timingFunctions = timingFunctions(for: keyframes)
-    let calculationMode = calculationMode(for: keyframes)
+    var timingFunctions = self.timingFunctions(for: keyframes)
+    let calculationMode = self.calculationMode(for: keyframes)
 
     validate(values: &values, keyTimes: &keyTimes, timingFunctions: &timingFunctions, for: calculationMode)
 
