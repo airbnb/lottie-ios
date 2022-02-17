@@ -19,25 +19,25 @@ final class PerformanceTests: XCTestCase {
     // This is basically a snapshot test for the performance of the Core Animation engine
     // compared to the Main Thread engine. Currently, the Core Animation engine is
     // about the same speed as the Main Thread engine in this example.
-    XCTAssertEqual(ratio, 1.0, accuracy: 0.15)
+    XCTAssertEqual(ratio, 0.95, accuracy: 0.15)
   }
 
   func testAnimationViewSetup_complexAnimation() {
-    let ratio = compareEngineSetupPerformance(for: complexAnimation, iterations: 500)
+    let ratio = compareEngineSetupPerformance(for: complexAnimation, iterations: 20)
 
     // The Core Animation engine is currently about 1.6x slower than the
     // Main Thread engine in this example.
-    XCTAssertEqual(ratio, 1.6, accuracy: 0.3)
+    XCTAssertEqual(ratio, 1.4, accuracy: 0.3)
   }
 
   func testAnimationViewScrubbing_simpleAnimation() {
     let ratio = compareEngineScrubbingPerformance(for: simpleAnimation, iterations: 2000)
-    XCTAssertEqual(ratio, 0.002, accuracy: 0.001)
+    XCTAssertEqual(ratio, 0.01, accuracy: 0.01)
   }
 
   func testAnimationViewScrubbing_complexAnimation() {
     let ratio = compareEngineScrubbingPerformance(for: complexAnimation, iterations: 2000)
-    XCTAssertEqual(ratio, 0.0005, accuracy: 0.00035)
+    XCTAssertEqual(ratio, 0.01, accuracy: 0.01)
   }
 
   override func setUp() {
@@ -70,7 +70,8 @@ final class PerformanceTests: XCTestCase {
         // the layers aren't deallocated until the end of the test run,
         // which causes memory usage to grow unbounded.
         CATransaction.begin()
-        setupAnimationView(with: animation, configuration: .init(renderingEngine: .mainThread))
+        let animationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: .mainThread))
+        animationView.animationLayer!.display()
         CATransaction.commit()
       }
     }
@@ -80,7 +81,8 @@ final class PerformanceTests: XCTestCase {
     let coreAnimationEnginePerformance = measurePerformance {
       for _ in 0..<iterations {
         CATransaction.begin()
-        setupAnimationView(with: animation, configuration: .init(renderingEngine: .coreAnimation))
+        let animationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: .coreAnimation))
+        animationView.animationLayer!.display()
         CATransaction.commit()
       }
     }
@@ -99,10 +101,6 @@ final class PerformanceTests: XCTestCase {
     let mainThreadEnginePerformance = measurePerformance {
       for i in 0..<iterations {
         mainThreadAnimationView.currentProgress = Double(i) / Double(iterations)
-
-        // Since the main thread engine only re-renders in `display()`, which is normally called by Core Animation,
-        // we have to invoke it manually. This triggers the same code path that would happen when scrubbing in
-        // a real use case.
         mainThreadAnimationView.animationLayer!.display()
       }
     }
@@ -113,6 +111,7 @@ final class PerformanceTests: XCTestCase {
     let coreAnimationEnginePerformance = measurePerformance {
       for i in 0..<iterations {
         coreAnimationView.currentProgress = Double(i) / Double(iterations)
+        coreAnimationView.animationLayer!.display()
       }
     }
 

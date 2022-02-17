@@ -134,7 +134,9 @@ final class AnimationContainer: CALayer, RootAnimationLayer {
     if respectAnimationFrameRate {
       newFrame = floor(newFrame)
     }
-    animationLayers.forEach( { $0.displayWithFrame(frame: newFrame, forceUpdates: false) })
+    animationLayers.forEach {
+      $0.displayWithFrame(frame: newFrame, forceUpdates: false)
+    }
   }
 
   // MARK: Internal

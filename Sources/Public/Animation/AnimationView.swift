@@ -20,6 +20,8 @@ public enum LottieBackgroundBehavior {
   case pauseAndRestore
   /// Stops the animation and sets it to the end of its current play time. The completion block is called.
   case forceFinish
+  /// Does nothing when the animation moves to the background
+  case doNothing
 }
 
 // MARK: - LottieLoopMode
@@ -123,10 +125,24 @@ final public class AnimationView: AnimationViewBase {
   /**
    Describes the behavior of an AnimationView when the app is moved to the background.
 
-   The default is `pause` which pauses the animation when the application moves to
-   the background. The completion block is called with `false` for completed.
+   The default for the Main Thread animation engine is `pause`,
+   which pauses the animation when the application moves to
+   the background. This prevents the animation from consuming CPU
+   resources when not on-screen. The completion block is called with
+   `false` for completed.
+
+   The default for the Core Animation engine is `doNothing`, since
+   the Core Animation engine does not have any CPU overhead.
    */
-  public var backgroundBehavior: LottieBackgroundBehavior = .pause
+  public lazy var backgroundBehavior: LottieBackgroundBehavior = {
+    switch configuration.renderingEngine {
+    case .mainThread:
+      return .pause
+
+    case .coreAnimation:
+      return .doNothing
+    }
+  }()
 
   /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
   public private(set) var valueProviders = [AnimationKeypath: AnyValueProvider]()
@@ -259,7 +275,7 @@ final public class AnimationView: AnimationViewBase {
    */
   public var currentFrame: AnimationFrameTime {
     set {
-      removeCurrentAnimation()
+      removeCurrentAnimationIfNecessary()
       updateAnimationFrame(newValue)
     }
     get {
@@ -349,7 +365,7 @@ final public class AnimationView: AnimationViewBase {
       playFrom: CGFloat(animation.startFrame),
       playTo: CGFloat(animation.endFrame),
       closure: completion)
-    removeCurrentAnimation()
+    removeCurrentAnimationIfNecessary()
     addNewAnimationForContext(context)
   }
 
@@ -371,7 +387,7 @@ final public class AnimationView: AnimationViewBase {
       return
     }
 
-    removeCurrentAnimation()
+    removeCurrentAnimationIfNecessary()
     if let loopMode = loopMode {
       /// Set the loop mode, if one was supplied
       self.loopMode = loopMode
@@ -397,7 +413,7 @@ final public class AnimationView: AnimationViewBase {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
-    removeCurrentAnimation()
+    removeCurrentAnimationIfNecessary()
     if let loopMode = loopMode {
       /// Set the loop mode, if one was supplied
       self.loopMode = loopMode
@@ -435,7 +451,7 @@ final public class AnimationView: AnimationViewBase {
       return
     }
 
-    removeCurrentAnimation()
+    removeCurrentAnimationIfNecessary()
     if let loopMode = loopMode {
       /// Set the loop mode, if one was supplied
       self.loopMode = loopMode
@@ -803,12 +819,22 @@ final public class AnimationView: AnimationViewBase {
       animationLayer.add(positionAnimation, forKey: positionKey)
       animationLayer.add(xformAnimation, forKey: transformKey)
     } else {
-      CATransaction.begin()
-      CATransaction.setAnimationDuration(0.0)
-      CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .linear))
-      animationLayer.position = position
-      animationLayer.transform = xform
-      CATransaction.commit()
+      // In performance tests, we have to wrap the animation view setup
+      // in a `CATransaction` in order for the layers to be deallocated at
+      // the correct time. The `CATransaction`s in this method interfere
+      // with the ones managed by the performance test, and aren't actually
+      // necessary in a headless environment, so we disable them.
+      if TestHelpers.performanceTestsAreRunning {
+        animationLayer.position = position
+        animationLayer.transform = xform
+      } else {
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(0.0)
+        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .linear))
+        animationLayer.position = position
+        animationLayer.transform = xform
+        CATransaction.commit()
+      }
     }
 
     if shouldForceUpdates {
@@ -942,6 +968,8 @@ final public class AnimationView: AnimationViewBase {
       case .forceFinish:
         removeCurrentAnimation()
         updateAnimationFrame(currentContext.playTo)
+      case .doNothing:
+        break
       }
     }
   }
@@ -955,6 +983,20 @@ final public class AnimationView: AnimationViewBase {
         /// Restore animation from saved state
         updateInFlightAnimation()
       }
+    }
+  }
+
+  /// Removes the current animation and pauses the animation at the current frame
+  /// if necessary before setting up a new animation.
+  ///  - This is not necessary with the Core Animation engine, and skipping
+  ///    this step lets us avoid building the animations twice (once paused
+  ///    and once again playing)
+  fileprivate func removeCurrentAnimationIfNecessary() {
+    switch configuration.renderingEngine {
+    case .mainThread:
+      removeCurrentAnimation()
+    case .coreAnimation:
+      break
     }
   }
 
@@ -1037,7 +1079,7 @@ final public class AnimationView: AnimationViewBase {
         }
       }
 
-      experimentalAnimationLayer.setupAnimation(
+      experimentalAnimationLayer.playAnimation(
         context: animationContext,
         timingConfiguration: timingConfiguration)
 
