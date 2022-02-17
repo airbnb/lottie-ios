@@ -113,6 +113,8 @@ extension LayerProperty {
   static var anchorPoint: LayerProperty<CGPoint> {
     .init(
       caLayerKeypath: #keyPath(CALayer.anchorPoint),
+      // This is intentionally not `GGPoint(x: 0.5, y: 0.5)` (the actual default)
+      // to opt `anchorPoint` out of the KVC `setValue` flow, which causes issues.
       defaultValue: nil,
       customizableProperty: nil /* currently unsupported */)
   }

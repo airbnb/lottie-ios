@@ -37,7 +37,7 @@ final class PerformanceTests: XCTestCase {
 
   func testAnimationViewScrubbing_complexAnimation() {
     let ratio = compareEngineScrubbingPerformance(for: complexAnimation, iterations: 2000)
-    XCTAssertEqual(ratio, 0.0005, accuracy: 0.0002)
+    XCTAssertEqual(ratio, 0.0005, accuracy: 0.00035)
   }
 
   override func setUp() {
