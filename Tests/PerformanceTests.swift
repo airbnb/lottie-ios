@@ -18,23 +18,34 @@ final class PerformanceTests: XCTestCase {
 
     // This is basically a snapshot test for the performance of the Core Animation engine
     // compared to the Main Thread engine. Currently, the Core Animation engine is
-    // about 1.6x slower than the Main Thread engine in this example.
-    XCTAssertEqual(ratio, 1.6, accuracy: 0.3)
+    // about the same speed as the Main Thread engine in this example.
+    XCTAssertEqual(ratio, 1.0, accuracy: 0.1)
   }
 
   func testAnimationViewSetup_complexAnimation() {
     let ratio = compareEngineSetupPerformance(for: complexAnimation, iterations: 500)
+
+    // The Core Animation engine is currently about 1.6x slower than the
+    // Main Thread engine in this example.
     XCTAssertEqual(ratio, 1.6, accuracy: 0.3)
   }
 
   func testAnimationViewScrubbing_simpleAnimation() {
-    let ratio = compareEngineScrubbingPerformance(for: simpleAnimation, iterations: 1000)
-    XCTAssertEqual(ratio, 0.1, accuracy: 0.1)
+    let ratio = compareEngineScrubbingPerformance(for: simpleAnimation, iterations: 2000)
+    XCTAssertEqual(ratio, 0.002, accuracy: 0.001)
   }
 
   func testAnimationViewScrubbing_complexAnimation() {
-    let ratio = compareEngineScrubbingPerformance(for: complexAnimation, iterations: 1000)
-    XCTAssertEqual(ratio, 0.1, accuracy: 0.1)
+    let ratio = compareEngineScrubbingPerformance(for: complexAnimation, iterations: 2000)
+    XCTAssertEqual(ratio, 0.0005, accuracy: 0.0002)
+  }
+
+  override func setUp() {
+    TestHelpers.performanceTestsAreRunning = true
+  }
+
+  override func tearDown() {
+    TestHelpers.performanceTestsAreRunning = false
   }
 
   // MARK: Private
@@ -53,23 +64,31 @@ final class PerformanceTests: XCTestCase {
   /// and returns the ratio of how much slower the Core Animation is than the Main Thread engine
   private func compareEngineSetupPerformance(for animation: Animation, iterations: Int) -> Double {
     let mainThreadEnginePerformance = measurePerformance {
-      for _ in 0 ..< iterations {
+      for _ in 0..<iterations {
+        // Each animation setup needs to be wrapped in its own `CATransaction`
+        // in order for the layers to be deallocated immediately. Otherwise
+        // the layers aren't deallocated until the end of the test run,
+        // which causes memory usage to grow unbounded.
+        CATransaction.begin()
         setupAnimationView(with: animation, configuration: .init(renderingEngine: .mainThread))
+        CATransaction.commit()
       }
     }
 
     print("Main thread engine took \(mainThreadEnginePerformance) seconds")
 
     let coreAnimationEnginePerformance = measurePerformance {
-      for _ in 0 ..< iterations {
+      for _ in 0..<iterations {
+        CATransaction.begin()
         setupAnimationView(with: animation, configuration: .init(renderingEngine: .coreAnimation))
+        CATransaction.commit()
       }
     }
 
     print("Core Animation engine took \(coreAnimationEnginePerformance) seconds")
 
     let ratio = coreAnimationEnginePerformance / mainThreadEnginePerformance
-    print("Core Animation engine is \(ratio)x slower than the Main Thread engine")
+    print("Core Animation engine took \(ratio)x as long as the Main Thread engine")
     return ratio
   }
 
@@ -78,7 +97,7 @@ final class PerformanceTests: XCTestCase {
   private func compareEngineScrubbingPerformance(for animation: Animation, iterations: Int) -> Double {
     let mainThreadAnimationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: .mainThread))
     let mainThreadEnginePerformance = measurePerformance {
-      for i in 0 ..< iterations {
+      for i in 0..<iterations {
         mainThreadAnimationView.currentProgress = Double(i) / Double(iterations)
 
         // Since the main thread engine only re-renders in `display()`, which is normally called by Core Animation,
@@ -92,7 +111,7 @@ final class PerformanceTests: XCTestCase {
 
     let coreAnimationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: .coreAnimation))
     let coreAnimationEnginePerformance = measurePerformance {
-      for i in 0 ..< iterations {
+      for i in 0..<iterations {
         coreAnimationView.currentProgress = Double(i) / Double(iterations)
       }
     }
@@ -100,7 +119,7 @@ final class PerformanceTests: XCTestCase {
     print("Core Animation engine took \(coreAnimationEnginePerformance) seconds")
 
     let ratio = coreAnimationEnginePerformance / mainThreadEnginePerformance
-    print("Core Animation engine is \(ratio)x slower than the Main Thread engine")
+    print("Core Animation engine took \(ratio)x as long as the Main Thread engine")
     return ratio
   }
 
@@ -109,7 +128,6 @@ final class PerformanceTests: XCTestCase {
     let animationView = AnimationView(animation: animation, configuration: configuration)
     animationView.frame.size = CGSize(width: animation.width, height: animation.height)
     animationView.layoutIfNeeded()
-    animationView.currentProgress = 0.5
     return animationView
   }
 
