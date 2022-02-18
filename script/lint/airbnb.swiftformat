@@ -25,7 +25,7 @@
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
 --redundanttype inferred # redundantType
---swiftversion 5.5
+--swiftversion 5.3 # Lottie supports Swift 5.3 and later
 
 # We recommend a max width of 100 but _strictly enforce_ a max width of 130
 --maxwidth 130 # wrap
