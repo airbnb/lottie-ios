@@ -1000,7 +1000,7 @@ final public class AnimationView: AnimationViewBase {
       case .forceFinish:
         removeCurrentAnimation()
         updateAnimationFrame(currentContext.playTo)
-      case .doNothing:
+      case .continuePlaying:
         break
       }
     }
