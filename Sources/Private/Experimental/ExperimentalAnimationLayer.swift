@@ -78,7 +78,8 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
   /// Queues the animation with the given timing configuration
   /// to begin playing at the next `display()` call.
   ///   - This batches together animations so that even if `playAnimation`
-  ///     is called multiple times in the same run loop cycle, the animation will only be
+  ///     is called multiple times in the same run loop cycle, the animation
+  ///     will only be set up a single time.
   func playAnimation(
     context: AnimationContext,
     timingConfiguration: CAMediaTimingConfiguration,
@@ -274,21 +275,18 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
           closure: nil),
         timingConfiguration: CAMediaTimingConfiguration(speed: 0))
 
-      if pendingAnimationConfiguration != nil {
-        pendingAnimationConfiguration = (
-          animationConfiguration: requiredAnimationConfiguration,
-          playbackState: .paused(frame: newValue))
+      if
+        pendingAnimationConfiguration == nil,
+        currentAnimationConfiguration == requiredAnimationConfiguration
+      {
+        currentPlaybackState = .paused(frame: newValue)
       }
 
-      else if currentAnimationConfiguration != requiredAnimationConfiguration {
+      else {
         playAnimation(
           context: requiredAnimationConfiguration.animationContext,
           timingConfiguration: requiredAnimationConfiguration.timingConfiguration,
           playbackState: .paused(frame: newValue))
-      }
-
-      else {
-        currentPlaybackState = .paused(frame: newValue)
       }
     }
   }

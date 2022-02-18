@@ -14,14 +14,40 @@ import QuartzCore
 public enum LottieBackgroundBehavior {
   /// Stop the animation and reset it to the beginning of its current play time. The completion block is called.
   case stop
+
   /// Pause the animation in its current state. The completion block is called.
+  ///  - This is the default when using the Main Thread rendering engine.
   case pause
+
   /// Pause the animation and restart it when the application moves to the foreground. The completion block is stored and called when the animation completes.
   case pauseAndRestore
+
   /// Stops the animation and sets it to the end of its current play time. The completion block is called.
   case forceFinish
-  /// Does nothing when the animation moves to the background
-  case doNothing
+
+  /// The animation continues playing in the background.
+  ///  - This is the default when using the Core Animation rendering engine.
+  ///    Playing an animation using the Core Animation engine doesn't come with any CPU overhead,
+  ///    so using `.continuePlaying` avoids the need to stop and then resume the animation
+  ///    (which does come with some CPU overhead).
+  ///  - This mode should not be used with the Main Thread rendering engine.
+  case continuePlaying
+
+  // MARK: Public
+
+  /// The default background behavior, based on the rendering engine being used to play the animation.
+  ///  - Playing an animation using the Main Thread rendering engine comes with CPU overhead,
+  ///    so the animation should be paused or stopped when the `AnimationView` is not visible.
+  ///  - Playing an animation using the Core Animation rendering engine does not come with any
+  ///    CPU overhead, so these animations do not need to be paused in the background.
+  public static func `default`(for renderingEngine: RenderingEngine) -> LottieBackgroundBehavior {
+    switch renderingEngine {
+    case .mainThread:
+      return .pause
+    case .coreAnimation:
+      return .continuePlaying
+    }
+  }
 }
 
 // MARK: - LottieLoopMode
@@ -122,6 +148,9 @@ final public class AnimationView: AnimationViewBase {
   /// The configuration that this `AnimationView` uses when playing its animation
   public let configuration: LottieConfiguration
 
+  /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
+  public private(set) var valueProviders = [AnimationKeypath: AnyValueProvider]()
+
   /**
    Describes the behavior of an AnimationView when the app is moved to the background.
 
@@ -131,21 +160,24 @@ final public class AnimationView: AnimationViewBase {
    resources when not on-screen. The completion block is called with
    `false` for completed.
 
-   The default for the Core Animation engine is `doNothing`, since
-   the Core Animation engine does not have any CPU overhead.
+   The default for the Core Animation engine is `continuePlaying`,
+   since the Core Animation engine does not have any CPU overhead.
    */
-  public lazy var backgroundBehavior: LottieBackgroundBehavior = {
-    switch configuration.renderingEngine {
-    case .mainThread:
-      return .pause
-
-    case .coreAnimation:
-      return .doNothing
+  public lazy var backgroundBehavior: LottieBackgroundBehavior = .default(for: configuration.renderingEngine) {
+    didSet {
+      if
+        configuration.renderingEngine == .mainThread,
+        backgroundBehavior == .continuePlaying
+      {
+        LottieLogger.shared.assertionFailure("""
+        `LottieBackgroundBehavior.continuePlaying` should not be used with the Main Thread
+        rendering engine, since this would waste CPU resources on playing an animation
+        that is not visible. Consider using a different background mode, or switching to
+        the Core Animation rendering engine (which does not have any CPU overhead).
+        """)
+      }
     }
-  }()
-
-  /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
-  public private(set) var valueProviders = [AnimationKeypath: AnyValueProvider]()
+  }
 
   /**
    Sets the animation backing the animation view. Setting this will clear the
