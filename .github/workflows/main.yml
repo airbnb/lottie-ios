@@ -27,17 +27,9 @@ jobs:
   build-example:
     name: "Build Example App"
     runs-on: macos-latest
-    strategy:
-      matrix:
-        xcode:
-        - '12.4' # Swift 5.3
-        - '12.5.1' # Swift 5.4
-        - '13.2' # Swift 5.5
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
-        with:
-          xcode: ${{ matrix.xcode }}
       - name: Build Example
         run: bundle exec rake build:example:all
 
@@ -94,19 +86,10 @@ jobs:
         run: bundle exec rake test:carthage
 
   swiftlint:
-    name: "Lint Swift (SwiftLint)"
+    name: "Lint Swift"
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
-      - name: Lint Swift using SwiftLint
-        run: bundle exec rake lint:swift:swiftlint
-
-  swiftformat:
-    name: "Lint Swift (SwiftFormat)"
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup
-      - name: Lint Swift using SwiftFormat
-        run: bundle exec rake lint:swift:swiftformat
+      - name: Lint Swift
+        run: bundle exec rake lint:swift
