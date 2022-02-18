@@ -19,25 +19,25 @@ final class PerformanceTests: XCTestCase {
     // This is basically a snapshot test for the performance of the Core Animation engine
     // compared to the Main Thread engine. Currently, the Core Animation engine is
     // about the same speed as the Main Thread engine in this example.
-    XCTAssertEqual(ratio, 1.0, accuracy: 0.15)
+    XCTAssertEqual(ratio, 1.0, accuracy: 0.35)
   }
 
   func testAnimationViewSetup_complexAnimation() {
     let ratio = compareEngineSetupPerformance(for: complexAnimation, iterations: 500)
 
-    // The Core Animation engine is currently about 1.6x slower than the
+    // The Core Animation engine is currently about 1.5x slower than the
     // Main Thread engine in this example.
-    XCTAssertEqual(ratio, 1.6, accuracy: 0.3)
+    XCTAssertEqual(ratio, 1.5, accuracy: 0.45)
   }
 
   func testAnimationViewScrubbing_simpleAnimation() {
     let ratio = compareEngineScrubbingPerformance(for: simpleAnimation, iterations: 2000)
-    XCTAssertEqual(ratio, 0.002, accuracy: 0.001)
+    XCTAssertEqual(ratio, 0.01, accuracy: 0.01)
   }
 
   func testAnimationViewScrubbing_complexAnimation() {
     let ratio = compareEngineScrubbingPerformance(for: complexAnimation, iterations: 2000)
-    XCTAssertEqual(ratio, 0.0005, accuracy: 0.00035)
+    XCTAssertEqual(ratio, 0.01, accuracy: 0.01)
   }
 
   override func setUp() {
@@ -70,7 +70,9 @@ final class PerformanceTests: XCTestCase {
         // the layers aren't deallocated until the end of the test run,
         // which causes memory usage to grow unbounded.
         CATransaction.begin()
-        setupAnimationView(with: animation, configuration: .init(renderingEngine: .mainThread))
+        let animationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: .mainThread))
+        // Call `display()` on the layer to make sure any pending setup occurs immediately
+        animationView.animationLayer!.display()
         CATransaction.commit()
       }
     }
@@ -79,8 +81,14 @@ final class PerformanceTests: XCTestCase {
 
     let coreAnimationEnginePerformance = measurePerformance {
       for _ in 0..<iterations {
+        // Each animation setup needs to be wrapped in its own `CATransaction`
+        // in order for the layers to be deallocated immediately. Otherwise
+        // the layers aren't deallocated until the end of the test run,
+        // which causes memory usage to grow unbounded.
         CATransaction.begin()
-        setupAnimationView(with: animation, configuration: .init(renderingEngine: .coreAnimation))
+        let animationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: .coreAnimation))
+        // Call `display()` on the layer to make sure any pending setup occurs immediately
+        animationView.animationLayer!.display()
         CATransaction.commit()
       }
     }
@@ -113,6 +121,9 @@ final class PerformanceTests: XCTestCase {
     let coreAnimationEnginePerformance = measurePerformance {
       for i in 0..<iterations {
         coreAnimationView.currentProgress = Double(i) / Double(iterations)
+
+        // Call `display()` on the layer to make sure any pending setup occurs immediately
+        coreAnimationView.animationLayer!.display()
       }
     }
 

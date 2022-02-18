@@ -56,6 +56,13 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
     var timeOffset: TimeInterval = 0
   }
 
+  enum PlaybackState: Equatable {
+    /// The animation is playing in real-time
+    case playing
+    /// The animation is statically displaying a specific frame
+    case paused(frame: AnimationFrameTime)
+  }
+
   /// The `AnimationImageProvider` that `ImageLayer`s use to retrieve images,
   /// referenced by name in the animation json.
   var imageProvider: AnimationImageProvider {
@@ -68,43 +75,21 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
     didSet { reloadFonts() }
   }
 
-  /// Sets up `CAAnimation`s for each `AnimationLayer` in the layer hierarchy,
-  /// playing from `currentFrame`.
-  func setupAnimation(
+  /// Queues the animation with the given timing configuration
+  /// to begin playing at the next `display()` call.
+  ///   - This batches together animations so that even if `playAnimation`
+  ///     is called multiple times in the same run loop cycle, the animation
+  ///     will only be set up a single time.
+  func playAnimation(
     context: AnimationContext,
-    timingConfiguration: CAMediaTimingConfiguration)
+    timingConfiguration: CAMediaTimingConfiguration,
+    playbackState: PlaybackState = .playing)
   {
-    // Remove any existing animations from the layer hierarchy
-    removeAnimations()
+    pendingAnimationConfiguration = (
+      animationConfiguration: .init(animationContext: context, timingConfiguration: timingConfiguration),
+      playbackState: playbackState)
 
-    playbackState = .playing
-
-    currentAnimationConfiguration = AnimationConfiguration(
-      animationContext: context,
-      timingConfiguration: timingConfiguration)
-
-    let layerContext = LayerAnimationContext(
-      animation: animation,
-      timingConfiguration: timingConfiguration,
-      startFrame: context.playFrom,
-      endFrame: context.playTo,
-      valueProviderStore: valueProviderStore,
-      currentKeypath: AnimationKeypath(keys: []))
-
-    // Perform a layout pass if necessary so all of the sublayers
-    // have the most up-to-date sizing information
-    layoutIfNeeded()
-
-    // Set the speed of this layer, which will be inherited
-    // by all sublayers and their animations.
-    //  - This is required to support scrubbing with a speed of 0
-    speed = timingConfiguration.speed
-
-    // Setup a placeholder animation to let us track the realtime animation progress
-    setupPlaceholderAnimation(context: layerContext)
-
-    // Set up the new animations with the current `TimingConfiguration`
-    setupAnimations(context: layerContext)
+    setNeedsDisplay()
   }
 
   override func layoutSublayers() {
@@ -113,10 +98,21 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
     // If no animation has been set up yet, display the first frame
     // now that the layer hierarchy has been setup and laid out
     if
+      pendingAnimationConfiguration == nil,
       currentAnimationConfiguration == nil,
       bounds.size != .zero
     {
       currentFrame = animation.frameTime(forProgress: animationProgress)
+    }
+  }
+
+  override func display() {
+    super.display()
+
+    if let pendingAnimationConfiguration = pendingAnimationConfiguration {
+      self.pendingAnimationConfiguration = nil
+      setupAnimation(for: pendingAnimationConfiguration.animationConfiguration)
+      currentPlaybackState = pendingAnimationConfiguration.playbackState
     }
   }
 
@@ -127,14 +123,13 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
     let timingConfiguration: CAMediaTimingConfiguration
   }
 
-  private enum PlaybackState: Equatable {
-    /// The animation is playing in real-time
-    case playing
-    /// The animation is statically displaying a specific frame
-    case paused(frame: AnimationFrameTime)
-  }
+  /// The configuration for the most recent animation which has been
+  /// queued by calling `playAnimation` but not yet actually set up
+  private var pendingAnimationConfiguration: (
+    animationConfiguration: AnimationConfiguration,
+    playbackState: PlaybackState)?
 
-  // Configuration for the animation that is currently setup in this layer
+  /// Configuration for the animation that is currently setup in this layer
   private var currentAnimationConfiguration: AnimationConfiguration?
 
   /// The current progress of the placeholder `CAAnimation`,
@@ -144,8 +139,8 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
   private let animation: Animation
   private let valueProviderStore = ValueProviderStore()
 
-  // The current playback state of the animation that is displayed in this layer
-  private var playbackState: PlaybackState? {
+  /// The current playback state of the animation that is displayed in this layer
+  private var currentPlaybackState: PlaybackState? {
     didSet {
       guard playbackState != oldValue else { return }
 
@@ -156,6 +151,11 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
         timeOffset = animation.time(forFrame: frame)
       }
     }
+  }
+
+  /// The current or pending playback state of the animation displayed in this layer
+  private var playbackState: PlaybackState? {
+    pendingAnimationConfiguration?.playbackState ?? currentPlaybackState
   }
 
   /// Context used when setting up and configuring sublayers
@@ -174,6 +174,39 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
     setupLayerHierarchy(
       for: animation.layers,
       context: layerContext)
+  }
+
+  /// Immediately builds and begins playing `CAAnimation`s for each sublayer
+  private func setupAnimation(for configuration: AnimationConfiguration) {
+    // Remove any existing animations from the layer hierarchy
+    removeAnimations()
+
+    currentAnimationConfiguration = configuration
+
+    let layerContext = LayerAnimationContext(
+      animation: animation,
+      timingConfiguration: configuration.timingConfiguration,
+      startFrame: configuration.animationContext.playFrom,
+      endFrame: configuration.animationContext.playTo,
+      valueProviderStore: valueProviderStore,
+      currentKeypath: AnimationKeypath(keys: []))
+
+    // Perform a layout pass if necessary so all of the sublayers
+    // have the most up-to-date sizing information
+    layoutIfNeeded()
+
+    // Set the speed of this layer, which will be inherited
+    // by all sublayers and their animations.
+    //  - This is required to support scrubbing with a speed of 0
+    speed = configuration.timingConfiguration.speed
+
+    // Setup a placeholder animation to let us track the realtime animation progress
+    setupPlaceholderAnimation(context: layerContext)
+
+    // Set up the new animations with the current `TimingConfiguration`
+    for animationLayer in sublayers ?? [] {
+      (animationLayer as? AnimationLayer)?.setupAnimations(context: layerContext)
+    }
   }
 
   /// Sets up a placeholder `CABasicAnimation` that tracks the current
@@ -204,7 +237,7 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
       currentFrame = frame
 
     case .playing:
-      setupAnimation(
+      playAnimation(
         context: currentConfiguration.animationContext,
         timingConfiguration: currentConfiguration.timingConfiguration)
     }
@@ -242,13 +275,19 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
           closure: nil),
         timingConfiguration: CAMediaTimingConfiguration(speed: 0))
 
-      if currentAnimationConfiguration != requiredAnimationConfiguration {
-        setupAnimation(
-          context: requiredAnimationConfiguration.animationContext,
-          timingConfiguration: requiredAnimationConfiguration.timingConfiguration)
+      if
+        pendingAnimationConfiguration == nil,
+        currentAnimationConfiguration == requiredAnimationConfiguration
+      {
+        currentPlaybackState = .paused(frame: newValue)
       }
 
-      playbackState = .paused(frame: newValue)
+      else {
+        playAnimation(
+          context: requiredAnimationConfiguration.animationContext,
+          timingConfiguration: requiredAnimationConfiguration.timingConfiguration,
+          playbackState: .paused(frame: newValue))
+      }
     }
   }
 
@@ -332,7 +371,7 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
 
   func removeAnimations() {
     currentAnimationConfiguration = nil
-    playbackState = nil
+    currentPlaybackState = nil
     removeAllAnimations()
 
     for sublayer in allSublayers {
