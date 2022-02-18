@@ -1076,7 +1076,19 @@ final public class AnimationView: AnimationViewBase {
 
     self.animationContext = animationContext
 
-    guard window != nil else { waitingToPlayAnimation = true; return }
+    switch configuration.renderingEngine {
+    case .mainThread:
+      guard window != nil else {
+        waitingToPlayAnimation = true
+        return
+      }
+
+    case .coreAnimation:
+      // The Core Animation engine automatically batches animation setup to happen
+      // in `CALayer.display()`, which won't be called until the layer is on-screen,
+      // so we don't need to defer animation setup at this layer.
+      break
+    }
 
     animationID = animationID + 1
     _activeAnimationName = AnimationView.animationName + String(animationID)

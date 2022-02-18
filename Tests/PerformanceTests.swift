@@ -71,6 +71,7 @@ final class PerformanceTests: XCTestCase {
         // which causes memory usage to grow unbounded.
         CATransaction.begin()
         let animationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: .mainThread))
+        // Call `display()` on the layer to make sure any pending setup occurs immediately
         animationView.animationLayer!.display()
         CATransaction.commit()
       }
@@ -80,8 +81,13 @@ final class PerformanceTests: XCTestCase {
 
     let coreAnimationEnginePerformance = measurePerformance {
       for _ in 0..<iterations {
+        // Each animation setup needs to be wrapped in its own `CATransaction`
+        // in order for the layers to be deallocated immediately. Otherwise
+        // the layers aren't deallocated until the end of the test run,
+        // which causes memory usage to grow unbounded.
         CATransaction.begin()
         let animationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: .coreAnimation))
+        // Call `display()` on the layer to make sure any pending setup occurs immediately
         animationView.animationLayer!.display()
         CATransaction.commit()
       }
@@ -101,6 +107,10 @@ final class PerformanceTests: XCTestCase {
     let mainThreadEnginePerformance = measurePerformance {
       for i in 0..<iterations {
         mainThreadAnimationView.currentProgress = Double(i) / Double(iterations)
+
+        // Since the main thread engine only re-renders in `display()`, which is normally called by Core Animation,
+        // we have to invoke it manually. This triggers the same code path that would happen when scrubbing in
+        // a real use case.
         mainThreadAnimationView.animationLayer!.display()
       }
     }
@@ -111,6 +121,8 @@ final class PerformanceTests: XCTestCase {
     let coreAnimationEnginePerformance = measurePerformance {
       for i in 0..<iterations {
         coreAnimationView.currentProgress = Double(i) / Double(iterations)
+
+        // Call `display()` on the layer to make sure any pending setup occurs immediately
         coreAnimationView.animationLayer!.display()
       }
     }
