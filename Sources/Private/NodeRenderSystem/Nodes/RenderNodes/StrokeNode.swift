@@ -84,8 +84,8 @@ final class StrokeNode: AnimatorNode, RenderNode {
   let strokeProperties: StrokeNodeProperties
 
   let parentNode: AnimatorNode?
-  var hasLocalUpdates: Bool = false
-  var hasUpstreamUpdates: Bool = false
+  var hasLocalUpdates = false
+  var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
   var renderer: NodeOutput & Renderable {
@@ -98,7 +98,7 @@ final class StrokeNode: AnimatorNode, RenderNode {
     strokeProperties
   }
 
-  var isEnabled: Bool = true {
+  var isEnabled = true {
     didSet {
       strokeRender.isEnabled = isEnabled
     }
@@ -136,17 +136,16 @@ extension Array where Element == DashElement {
   /// representations usable in a `CAShapeLayer`
   var shapeLayerConfiguration: (
     dashPatterns: ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>,
-    dashPhase: ContiguousArray<Keyframe<Vector1D>>)
-  {
-    var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>()
-    var dashPhase = ContiguousArray<Keyframe<Vector1D>>()
-    for dash in self {
-      if dash.type == .offset {
-        dashPhase = dash.value.keyframes
-      } else {
-        dashPatterns.append(dash.value.keyframes)
+    dashPhase: ContiguousArray<Keyframe<Vector1D>>) {
+      var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>()
+      var dashPhase = ContiguousArray<Keyframe<Vector1D>>()
+      for dash in self {
+        if dash.type == .offset {
+          dashPhase = dash.value.keyframes
+        } else {
+          dashPatterns.append(dash.value.keyframes)
+        }
       }
+      return (dashPatterns, dashPhase)
     }
-    return (dashPatterns, dashPhase)
-  }
 }

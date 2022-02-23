@@ -144,7 +144,7 @@ final class TextOutputNode: NodeOutput {
   // MARK: Internal
 
   var parentTextNode: TextOutputNode?
-  var isEnabled: Bool = true
+  var isEnabled = true
 
   var outputPath: CGPath?
 
@@ -240,10 +240,10 @@ class TextAnimatorNode: AnimatorNode {
   let textAnimatorProperties: TextAnimatorNodeProperties
 
   let parentNode: AnimatorNode?
-  var hasLocalUpdates: Bool = false
-  var hasUpstreamUpdates: Bool = false
+  var hasLocalUpdates = false
+  var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
-  var isEnabled: Bool = true
+  var isEnabled = true
 
   var outputNode: NodeOutput {
     textOutputNode

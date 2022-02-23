@@ -223,8 +223,7 @@ public final class CompatibleAnimationView: UIView {
   }
 
   @objc
-  public func setColorValue(_ color: UIColor, forKeypath keypath: CompatibleAnimationKeypath)
-  {
+  public func setColorValue(_ color: UIColor, forKeypath keypath: CompatibleAnimationKeypath) {
     var red: CGFloat = 0
     var green: CGFloat = 0
     var blue: CGFloat = 0
@@ -248,8 +247,7 @@ public final class CompatibleAnimationView: UIView {
   }
 
   @objc
-  public func getColorValue(for keypath: CompatibleAnimationKeypath, atFrame: CGFloat) -> UIColor?
-  {
+  public func getColorValue(for keypath: CompatibleAnimationKeypath, atFrame: CGFloat) -> UIColor? {
     let value = animationView.getValue(for: keypath.animationKeypath, atFrame: atFrame)
     guard let colorValue = value as? Color else {
       return nil;

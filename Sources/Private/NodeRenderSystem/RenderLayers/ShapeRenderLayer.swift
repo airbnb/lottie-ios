@@ -8,9 +8,7 @@
 import Foundation
 import QuartzCore
 
-/**
- The layer responsible for rendering shape objects
- */
+/// The layer responsible for rendering shape objects
 final class ShapeRenderLayer: ShapeContainerLayer {
 
   // MARK: Lifecycle

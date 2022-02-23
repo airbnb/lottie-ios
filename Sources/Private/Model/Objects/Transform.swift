@@ -13,10 +13,8 @@ final class Transform: Codable {
   // MARK: Lifecycle
 
   required init(from decoder: Decoder) throws {
-    /**
-     This manual override of decode is required because we want to throw an error
-     in the case that there is not position data.
-     */
+    /// This manual override of decode is required because we want to throw an error
+    /// in the case that there is not position data.
     let container = try decoder.container(keyedBy: Transform.CodingKeys.self)
 
     // AnchorPoint

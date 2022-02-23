@@ -11,9 +11,7 @@ import QuartzCore
 
 // MARK: - Vector1D + Codable
 
-/**
- Single value container. Needed because lottie sometimes wraps a Double in an array.
- */
+/// Single value container. Needed because lottie sometimes wraps a Double in an array.
 extension Vector1D: Codable {
 
   // MARK: Lifecycle
@@ -51,9 +49,7 @@ extension Double {
 
 // MARK: - Vector2D
 
-/**
- Needed for decoding json {x: y:} to a CGPoint
- */
+/// Needed for decoding json {x: y:} to a CGPoint
 public struct Vector2D: Codable, Hashable {
 
   // MARK: Lifecycle
@@ -118,10 +114,8 @@ extension CGPoint {
 
 // MARK: - Vector3D + Codable
 
-/**
- A three dimensional vector.
- These vectors are encoded and decoded from [Double]
- */
+/// A three dimensional vector.
+/// These vectors are encoded and decoded from [Double]
 
 extension Vector3D: Codable {
 

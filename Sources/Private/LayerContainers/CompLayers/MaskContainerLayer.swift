@@ -39,7 +39,7 @@ final class MaskContainerLayer: CALayer {
     super.init()
     anchorPoint = .zero
     var containerLayer = CALayer()
-    var firstObject: Bool = true
+    var firstObject = true
     for mask in masks {
       let maskLayer = MaskLayer(mask: mask)
       maskLayers.append(maskLayer)
@@ -93,7 +93,7 @@ extension CGRect {
 
 // MARK: - MaskLayer
 
-fileprivate class MaskLayer: CALayer {
+private class MaskLayer: CALayer {
 
   // MARK: Lifecycle
 
@@ -102,8 +102,9 @@ fileprivate class MaskLayer: CALayer {
     super.init()
     addSublayer(maskLayer)
     anchorPoint = .zero
-    maskLayer.fillColor = mask.mode == .add ? CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1, 0, 0, 1]) :
-      CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0, 1, 0, 1])
+    maskLayer.fillColor = mask.mode == .add
+      ? CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1, 0, 0, 1])
+      : CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0, 1, 0, 1])
     maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
     actions = [
       "opacity" : NSNull(),
@@ -157,7 +158,7 @@ fileprivate class MaskLayer: CALayer {
 
 // MARK: - MaskNodeProperties
 
-fileprivate class MaskNodeProperties: NodePropertyMap {
+private class MaskNodeProperties: NodePropertyMap {
 
   // MARK: Lifecycle
 

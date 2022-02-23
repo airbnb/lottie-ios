@@ -59,7 +59,7 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
   // MARK: Internal
 
   let keypathProperties: [String: AnyNodeProperty]
-  var keypathName: String = "Transform"
+  var keypathName = "Transform"
 
   let properties: [AnyNodeProperty]
 
@@ -93,10 +93,10 @@ class LayerTransformNode: AnimatorNode {
   let transformProperties: LayerTransformProperties
 
   var parentNode: AnimatorNode?
-  var hasLocalUpdates: Bool = false
-  var hasUpstreamUpdates: Bool = false
+  var hasLocalUpdates = false
+  var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
-  var isEnabled: Bool = true
+  var isEnabled = true
 
   var opacity: Float = 1
   var localTransform: CATransform3D = CATransform3DIdentity

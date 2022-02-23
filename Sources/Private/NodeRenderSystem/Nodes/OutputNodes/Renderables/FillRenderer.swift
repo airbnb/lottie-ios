@@ -34,7 +34,7 @@ extension FillRule {
 /// A rendered for a Path Fill
 final class FillRenderer: PassThroughOutputNode, Renderable {
 
-  let shouldRenderInContext: Bool = false
+  let shouldRenderInContext = false
 
   var color: CGColor? {
     didSet {

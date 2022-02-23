@@ -20,7 +20,7 @@ final class LayerTextProvider {
 
   // MARK: Internal
 
-  fileprivate(set) var textLayers: [TextCompositionLayer]
+  private(set) var textLayers: [TextCompositionLayer]
 
   var textProvider: AnimationTextProvider {
     didSet {

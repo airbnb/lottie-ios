@@ -33,19 +33,15 @@ extension CGFloat {
     return toLow + (self - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)
   }
 
-  /**
-   Returns a value that is clamped between the two numbers
-
-   1. The order of arguments does not matter.
-   */
+  /// Returns a value that is clamped between the two numbers
+  ///
+  /// 1. The order of arguments does not matter.
   func clamp(_ a: CGFloat, _ b: CGFloat) -> CGFloat {
     CGFloat(Double(self).clamp(Double(a), Double(b)))
   }
 
-  /**
-   Returns the difference between the receiver and the given number.
-   - Parameter absolute: If *true* (Default) the returned value will always be positive.
-   */
+  /// Returns the difference between the receiver and the given number.
+  /// - Parameter absolute: If *true* (Default) the returned value will always be positive.
   func diff(_ a: CGFloat, absolute: Bool = true) -> CGFloat {
     absolute ? abs(a - self) : a - self
   }
@@ -63,11 +59,9 @@ extension Double {
     toLow + (self - fromLow) * (toHigh - toLow) / (fromHigh - fromLow)
   }
 
-  /**
-   Returns a value that is clamped between the two numbers
-
-   1. The order of arguments does not matter.
-   */
+  /// Returns a value that is clamped between the two numbers
+  ///
+  /// 1. The order of arguments does not matter.
   func clamp(_ a: Double, _ b: Double) -> Double {
     let minValue = a <= b ? a : b
     let maxValue = a <= b ? b : a
@@ -347,7 +341,7 @@ extension CGPoint {
     var previousPoint = self
     var previousAmount = CGFloat(0)
 
-    var closestPoint: Int = 0
+    var closestPoint = 0
 
     while previousAmount < 1 {
 
@@ -367,7 +361,7 @@ extension CGPoint {
     let accurateDistance = amount * totalLength
     var point = points[closestPoint]
 
-    var foundPoint: Bool = false
+    var foundPoint = false
 
     var pointAmount = CGFloat(closestPoint) * step
     var nextPointAmount: CGFloat = pointAmount + step

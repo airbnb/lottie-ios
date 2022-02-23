@@ -8,15 +8,13 @@
 import CoreGraphics
 import Foundation
 
-/**
- A path section, containing one point and its length to the previous point.
-
- The relationship between this path element and the previous is implicit.
- Ideally a path section would be defined by two vertices and a length.
- We don't do this however, as it would effectively double the memory footprint
- of path data.
-
- */
+/// A path section, containing one point and its length to the previous point.
+///
+/// The relationship between this path element and the previous is implicit.
+/// Ideally a path section would be defined by two vertices and a length.
+/// We don't do this however, as it would effectively double the memory footprint
+/// of path data.
+///
 struct PathElement {
 
   // MARK: Lifecycle
@@ -28,7 +26,7 @@ struct PathElement {
   }
 
   /// Initializes a new path with length
-  fileprivate init(length: CGFloat, vertex: CurveVertex) {
+  private init(length: CGFloat, vertex: CurveVertex) {
     self.length = length
     self.vertex = vertex
   }

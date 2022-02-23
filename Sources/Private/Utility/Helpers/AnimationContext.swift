@@ -84,7 +84,7 @@ class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
 
   var animationLayer: RootAnimationLayer?
   var animationKey: String?
-  var ignoreDelegate: Bool = false
+  var ignoreDelegate = false
   var animationState: AnimationContextState = .playing
 
   let completionBlock: LottieCompletionBlock?

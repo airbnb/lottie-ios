@@ -21,10 +21,8 @@ public struct Vector1D: Hashable {
 
 // MARK: - Vector3D
 
-/**
- A three dimensional vector.
- These vectors are encoded and decoded from [Double]
- */
+/// A three dimensional vector.
+/// These vectors are encoded and decoded from [Double]
 public struct Vector3D: Hashable {
 
   public let x: Double

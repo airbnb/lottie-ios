@@ -59,10 +59,10 @@ final class TrimPathNode: AnimatorNode {
 
   let parentNode: AnimatorNode?
   let outputNode: NodeOutput
-  var hasLocalUpdates: Bool = false
-  var hasUpstreamUpdates: Bool = false
+  var hasLocalUpdates = false
+  var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
-  var isEnabled: Bool = true
+  var isEnabled = true
 
   // MARK: Animator Node
   var propertyMap: NodePropertyMap & KeypathSearchable {

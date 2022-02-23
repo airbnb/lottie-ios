@@ -52,8 +52,8 @@ final class ShapeNode: AnimatorNode, PathNode {
   let pathOutput: PathOutputNode
 
   let parentNode: AnimatorNode?
-  var hasLocalUpdates: Bool = false
-  var hasUpstreamUpdates: Bool = false
+  var hasLocalUpdates = false
+  var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
   // MARK: Animator Node
@@ -61,8 +61,8 @@ final class ShapeNode: AnimatorNode, PathNode {
     properties
   }
 
-  var isEnabled: Bool = true {
-    didSet{
+  var isEnabled = true {
+    didSet {
       pathOutput.isEnabled = isEnabled
     }
   }

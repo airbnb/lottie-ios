@@ -39,5 +39,5 @@ final class SingleValueProvider<ValueType: AnyInterpolatable>: ValueProvider {
 
   // MARK: Private
 
-  private var hasUpdate: Bool = true
+  private var hasUpdate = true
 }

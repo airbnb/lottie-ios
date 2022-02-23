@@ -49,8 +49,8 @@ final class TextLayer: BaseCompositionLayer {
     //    using a `CAShapeLayer`).
     if !textLayerModel.animators.isEmpty {
       LottieLogger.shared.assertionFailure("""
-      The Core Animation rendering engine currently doesn't support text animators.
-      """)
+        The Core Animation rendering engine currently doesn't support text animators.
+        """)
     }
 
     renderLayer.text = text.text

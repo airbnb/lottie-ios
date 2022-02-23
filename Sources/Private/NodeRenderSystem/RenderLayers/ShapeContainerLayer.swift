@@ -8,9 +8,7 @@
 import Foundation
 import QuartzCore
 
-/**
- The base layer that holds Shapes and Shape Renderers
- */
+/// The base layer that holds Shapes and Shape Renderers
 class ShapeContainerLayer: CALayer {
 
   // MARK: Lifecycle

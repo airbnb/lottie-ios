@@ -8,23 +8,19 @@
 #if os(macOS)
 import AppKit
 
-/**
- Provides an image for a lottie animation from a provided Bundle.
- */
+/// Provides an image for a lottie animation from a provided Bundle.
 public class BundleImageProvider: AnimationImageProvider {
 
   // MARK: Lifecycle
 
-  /**
-   Initializes an image provider with a bundle and an optional subpath.
-
-   Provides images for an animation from a bundle. Additionally the provider can
-   search a specific subpath for the images.
-
-   - Parameter bundle: The bundle containing images for the provider.
-   - Parameter searchPath: The subpath is a path within the bundle to search for image assets.
-
-   */
+  /// Initializes an image provider with a bundle and an optional subpath.
+  ///
+  /// Provides images for an animation from a bundle. Additionally the provider can
+  /// search a specific subpath for the images.
+  ///
+  /// - Parameter bundle: The bundle containing images for the provider.
+  /// - Parameter searchPath: The subpath is a path within the bundle to search for image assets.
+  ///
   public init(bundle: Bundle, searchPath: String?) {
     self.bundle = bundle
     self.searchPath = searchPath

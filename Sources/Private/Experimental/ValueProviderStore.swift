@@ -50,9 +50,9 @@ final class ValueProviderStore {
 
     case .closure:
       LottieLogger.shared.assertionFailure("""
-      The Core Animation rendering engine doesn't support Value Providers that vend a closure,
-      because that would require calling the closure on the main thread once per frame.
-      """)
+        The Core Animation rendering engine doesn't support Value Providers that vend a closure,
+        because that would require calling the closure on the main thread once per frame.
+        """)
       return nil
     }
 
@@ -60,8 +60,8 @@ final class ValueProviderStore {
     let typedKeyframes = typeErasedKeyframes.compactMap { typeErasedKeyframe -> Keyframe<Value>? in
       guard let convertedValue = customizableProperty.conversion(typeErasedKeyframe.value) else {
         LottieLogger.shared.assertionFailure("""
-        Could not convert value of type \(type(of: typeErasedKeyframe.value)) to expected type \(Value.self)
-        """)
+          Could not convert value of type \(type(of: typeErasedKeyframe.value)) to expected type \(Value.self)
+          """)
         return nil
       }
 

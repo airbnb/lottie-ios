@@ -23,7 +23,7 @@ final class GradientStrokeRenderer: PassThroughOutputNode, Renderable {
 
   // MARK: Internal
 
-  var shouldRenderInContext: Bool = true
+  var shouldRenderInContext = true
 
   let strokeRender: StrokeRenderer
   let gradientRender: GradientFillRenderer

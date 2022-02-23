@@ -78,9 +78,7 @@ public enum BlendMode: Int, Codable {
 
 // MARK: - LayerModel
 
-/**
- A base top container for shapes, images, and other view objects.
- */
+/// A base top container for shapes, images, and other view objects.
 class LayerModel: Codable {
 
   // MARK: Lifecycle
@@ -156,7 +154,7 @@ class LayerModel: Codable {
     case outFrame = "op"
     case startTime = "st"
     case transform = "ks"
-    case parent = "parent"
+    case parent
     case blendMode = "bm"
     case masks = "masksProperties"
     case timeStretch = "sr"

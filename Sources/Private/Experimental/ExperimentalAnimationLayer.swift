@@ -354,8 +354,8 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
 
   func getValue(for _: AnimationKeypath, atFrame _: AnimationFrameTime?) -> Any? {
     LottieLogger.shared.assertionFailure("""
-    The new rendering engine doesn't support querying values for individual frames
-    """)
+      The new rendering engine doesn't support querying values for individual frames
+      """)
     return nil
   }
 

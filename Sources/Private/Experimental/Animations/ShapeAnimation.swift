@@ -49,8 +49,8 @@ extension CAShapeLayer {
 
     if trim.offset.keyframes.contains(where: { $0.value.cgFloatValue != 0 }) {
       LottieLogger.shared.assertionFailure("""
-      The CoreAnimation rendering engine doesn't support Trim offsets
-      """)
+        The CoreAnimation rendering engine doesn't support Trim offsets
+        """)
     }
 
     addAnimation(
@@ -76,6 +76,9 @@ extension CAShapeLayer {
 }
 
 extension Trim {
+
+  // MARK: Fileprivate
+
   /// The `strokeStart` and `strokeEnd` keyframes to apply to a `CAShapeLayer`
   ///  - `CAShapeLayer` requires that `strokeStart` be less than `strokeEnd`.
   ///  - Since this isn't a requirement in the Lottie schema, there are
@@ -92,9 +95,11 @@ extension Trim {
     }
   }
 
+  // MARK: Private
+
   /// Checks whether or not the value for `trim.start` is greater
   /// than the value for every `trim.end` at every keyframe.
-  fileprivate func startValueIsAlwaysGreaterThanEndValue() -> Bool {
+  private func startValueIsAlwaysGreaterThanEndValue() -> Bool {
     let keyframeTimes = Set(start.keyframes.map { $0.time } + end.keyframes.map { $0.time })
 
     let startInterpolator = KeyframeInterpolator(keyframes: start.keyframes)

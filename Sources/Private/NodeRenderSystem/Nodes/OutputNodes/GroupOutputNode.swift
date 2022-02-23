@@ -22,7 +22,7 @@ class GroupOutputNode: NodeOutput {
 
   let parent: NodeOutput?
   let rootNode: NodeOutput?
-  var isEnabled: Bool = true
+  var isEnabled = true
 
   private(set) var outputPath: CGPath? = nil
   private(set) var transform: CATransform3D = CATransform3DIdentity
@@ -48,7 +48,7 @@ class GroupOutputNode: NodeOutput {
       outputPath = nil
     }
 
-    var localUpdates: Bool = false
+    var localUpdates = false
     if outputPath == nil {
       localUpdates = true
 

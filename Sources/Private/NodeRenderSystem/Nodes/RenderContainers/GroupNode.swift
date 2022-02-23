@@ -48,7 +48,7 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
 
   // MARK: Internal
 
-  var keypathName: String = "Transform"
+  var keypathName = "Transform"
 
   var childKeypaths: [KeypathSearchable] = []
 
@@ -114,8 +114,8 @@ final class GroupNode: AnimatorNode {
   let childKeypaths: [KeypathSearchable]
 
   let parentNode: AnimatorNode?
-  var hasLocalUpdates: Bool = false
-  var hasUpstreamUpdates: Bool = false
+  var hasLocalUpdates = false
+  var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
   var keypathLayer: CALayer? {
@@ -132,7 +132,7 @@ final class GroupNode: AnimatorNode {
     groupOutput
   }
 
-  var isEnabled: Bool = true {
+  var isEnabled = true {
     didSet {
       container.isHidden = !isEnabled
     }
