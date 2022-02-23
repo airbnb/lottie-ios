@@ -132,20 +132,22 @@ final class StrokeNode: AnimatorNode, RenderNode {
 // MARK: - [DashElement] + shapeLayerConfiguration
 
 extension Array where Element == DashElement {
+  typealias ShapeLayerConfiguration = (
+    dashPatterns: ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>,
+    dashPhase: ContiguousArray<Keyframe<Vector1D>>)
+
   /// Converts the `[DashElement]` data model into `lineDashPattern` and `lineDashPhase`
   /// representations usable in a `CAShapeLayer`
-  var shapeLayerConfiguration: (
-    dashPatterns: ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>,
-    dashPhase: ContiguousArray<Keyframe<Vector1D>>) {
-      var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>()
-      var dashPhase = ContiguousArray<Keyframe<Vector1D>>()
-      for dash in self {
-        if dash.type == .offset {
-          dashPhase = dash.value.keyframes
-        } else {
-          dashPatterns.append(dash.value.keyframes)
-        }
+  var shapeLayerConfiguration: ShapeLayerConfiguration {
+    var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>()
+    var dashPhase = ContiguousArray<Keyframe<Vector1D>>()
+    for dash in self {
+      if dash.type == .offset {
+        dashPhase = dash.value.keyframes
+      } else {
+        dashPatterns.append(dash.value.keyframes)
       }
-      return (dashPatterns, dashPhase)
     }
+    return (dashPatterns, dashPhase)
+  }
 }

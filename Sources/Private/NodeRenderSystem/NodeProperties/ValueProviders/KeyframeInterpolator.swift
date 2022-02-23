@@ -126,17 +126,17 @@ final class KeyframeInterpolator<ValueType>: ValueProvider where ValueType: AnyI
       return
     }
 
-    /// This function searches through the array to find the span of two keyframes
-    /// that contain the current time.
-    ///
-    /// We could use Array.first(where:) but that would search through the entire array
-    /// each frame.
-    /// Instead we track the last used index and search either forwards or
-    /// backwards from there. This reduces the iterations and complexity from
-    ///
-    /// O(n), where n is the length of the sequence to
-    /// O(n), where n is the number of items after or before the last used index.
-    ///
+    // This function searches through the array to find the span of two keyframes
+    // that contain the current time.
+    //
+    // We could use Array.first(where:) but that would search through the entire array
+    // each frame.
+    // Instead we track the last used index and search either forwards or
+    // backwards from there. This reduces the iterations and complexity from
+    //
+    // O(n), where n is the length of the sequence to
+    // O(n), where n is the number of items after or before the last used index.
+    //
 
     if keyframes.count == 1 {
       /// Only one keyframe. Set it as first and move on.

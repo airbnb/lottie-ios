@@ -48,18 +48,18 @@ extension KeyframeGroup: Decodable where T: Decodable {
       /// Try to decode raw value; No keyframe data.
       self.init(keyframes: [Keyframe<T>(keyframeData)])
     } else {
-      /// Decode and array of keyframes.
-      ///
-      /// Body Movin and Lottie deal with keyframes in different ways.
-      ///
-      /// A keyframe object in Body movin defines a span of time with a START
-      /// and an END, from the current keyframe time to the next keyframe time.
-      ///
-      /// A keyframe object in Lottie defines a singular point in time/space.
-      /// This point has an in-tangent and an out-tangent.
-      ///
-      /// To properly decode this we must iterate through keyframes while holding
-      /// reference to the previous keyframe.
+      // Decode and array of keyframes.
+      //
+      // Body Movin and Lottie deal with keyframes in different ways.
+      //
+      // A keyframe object in Body movin defines a span of time with a START
+      // and an END, from the current keyframe time to the next keyframe time.
+      //
+      // A keyframe object in Lottie defines a singular point in time/space.
+      // This point has an in-tangent and an out-tangent.
+      //
+      // To properly decode this we must iterate through keyframes while holding
+      // reference to the previous keyframe.
 
       var keyframesContainer = try container.nestedUnkeyedContainer(forKey: .keyframeData)
       var keyframes = ContiguousArray<Keyframe<T>>()
