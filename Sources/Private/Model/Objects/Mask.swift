@@ -37,7 +37,7 @@ final class Mask: Codable {
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
-    case mode = "mode"
+    case mode
     case opacity = "o"
     case inverted = "inv"
     case shape = "pt"

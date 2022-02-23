@@ -30,16 +30,14 @@ extension Animation {
 
   // MARK: Animation (Loading)
 
-  /**
-   Loads an animation model from a bundle by its name. Returns `nil` if an animation is not found.
-
-   - Parameter name: The name of the json file without the json extension. EG "StarAnimation"
-   - Parameter bundle: The bundle in which the animation is located. Defaults to `Bundle.main`
-   - Parameter subdirectory: A subdirectory in the bundle in which the animation is located. Optional.
-   - Parameter animationCache: A cache for holding loaded animations. Optional.
-
-   - Returns: Deserialized `Animation`. Optional.
-   */
+  /// Loads an animation model from a bundle by its name. Returns `nil` if an animation is not found.
+  ///
+  /// - Parameter name: The name of the json file without the json extension. EG "StarAnimation"
+  /// - Parameter bundle: The bundle in which the animation is located. Defaults to `Bundle.main`
+  /// - Parameter subdirectory: A subdirectory in the bundle in which the animation is located. Optional.
+  /// - Parameter animationCache: A cache for holding loaded animations. Optional.
+  ///
+  /// - Returns: Deserialized `Animation`. Optional.
   public static func named(
     _ name: String,
     bundle: Bundle = Bundle.main,
@@ -74,13 +72,11 @@ extension Animation {
     }
   }
 
-  /**
-   Loads an animation from a specific filepath.
-   - Parameter filepath: The absolute filepath of the animation to load. EG "/User/Me/starAnimation.json"
-   - Parameter animationCache: A cache for holding loaded animations. Optional.
-
-   - Returns: Deserialized `Animation`. Optional.
-   */
+  /// Loads an animation from a specific filepath.
+  /// - Parameter filepath: The absolute filepath of the animation to load. EG "/User/Me/starAnimation.json"
+  /// - Parameter animationCache: A cache for holding loaded animations. Optional.
+  ///
+  /// - Returns: Deserialized `Animation`. Optional.
   public static func filepath(
     _ filepath: String,
     animationCache: AnimationCacheProvider? = nil)
@@ -107,13 +103,11 @@ extension Animation {
     }
   }
 
-  /**
-       Loads an animation model from the asset catalog by its name. Returns `nil` if an animation is not found.
-       - Parameter name: The name of the json file in the asset catalog. EG "StarAnimation"
-       - Parameter bundle: The bundle in which the animation is located. Defaults to `Bundle.main`
-       - Parameter animationCache: A cache for holding loaded animations. Optional.
-       - Returns: Deserialized `Animation`. Optional.
-   */
+  ///    Loads an animation model from the asset catalog by its name. Returns `nil` if an animation is not found.
+  ///    - Parameter name: The name of the json file in the asset catalog. EG "StarAnimation"
+  ///    - Parameter bundle: The bundle in which the animation is located. Defaults to `Bundle.main`
+  ///    - Parameter animationCache: A cache for holding loaded animations. Optional.
+  ///    - Returns: Deserialized `Animation`. Optional.
   public static func asset(
     _ name: String,
     bundle: Bundle = Bundle.main,
@@ -148,14 +142,12 @@ extension Animation {
     }
   }
 
-  /**
-   Loads a Lottie animation asynchronously from the URL.
-
-   - Parameter url: The url to load the animation from.
-   - Parameter closure: A closure to be called when the animation has loaded.
-   - Parameter animationCache: A cache for holding loaded animations.
-
-   */
+  /// Loads a Lottie animation asynchronously from the URL.
+  ///
+  /// - Parameter url: The url to load the animation from.
+  /// - Parameter closure: A closure to be called when the animation has loaded.
+  /// - Parameter animationCache: A cache for holding loaded animations.
+  ///
   public static func loadedFrom(
     url: URL,
     closure: @escaping Animation.DownloadClosure,
@@ -191,16 +183,14 @@ extension Animation {
 
   // MARK: Animation (Helpers)
 
-  /**
-   Markers are a way to describe a point in time by a key name.
-
-   Markers are encoded into animation JSON. By using markers a designer can mark
-   playback points for a developer to use without having to worry about keeping
-   track of animation frames. If the animation file is updated, the developer
-   does not need to update playback code.
-
-   Returns the Progress Time for the marker named. Returns nil if no marker found.
-   */
+  /// Markers are a way to describe a point in time by a key name.
+  ///
+  /// Markers are encoded into animation JSON. By using markers a designer can mark
+  /// playback points for a developer to use without having to worry about keeping
+  /// track of animation frames. If the animation file is updated, the developer
+  /// does not need to update playback code.
+  ///
+  /// Returns the Progress Time for the marker named. Returns nil if no marker found.
   public func progressTime(forMarker named: String) -> AnimationProgressTime? {
     guard let markers = markerMap, let marker = markers[named] else {
       return nil
@@ -208,16 +198,14 @@ extension Animation {
     return progressTime(forFrame: marker.frameTime)
   }
 
-  /**
-   Markers are a way to describe a point in time by a key name.
-
-   Markers are encoded into animation JSON. By using markers a designer can mark
-   playback points for a developer to use without having to worry about keeping
-   track of animation frames. If the animation file is updated, the developer
-   does not need to update playback code.
-
-   Returns the Frame Time for the marker named. Returns nil if no marker found.
-   */
+  /// Markers are a way to describe a point in time by a key name.
+  ///
+  /// Markers are encoded into animation JSON. By using markers a designer can mark
+  /// playback points for a developer to use without having to worry about keeping
+  /// track of animation frames. If the animation file is updated, the developer
+  /// does not need to update playback code.
+  ///
+  /// Returns the Frame Time for the marker named. Returns nil if no marker found.
   public func frameTime(forMarker named: String) -> AnimationFrameTime? {
     guard let markers = markerMap, let marker = markers[named] else {
       return nil

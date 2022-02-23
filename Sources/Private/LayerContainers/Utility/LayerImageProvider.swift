@@ -25,7 +25,7 @@ final class LayerImageProvider {
 
   // MARK: Internal
 
-  fileprivate(set) var imageLayers: [ImageCompositionLayer]
+  private(set) var imageLayers: [ImageCompositionLayer]
   let imageAssets: [String: ImageAsset]
 
   var imageProvider: AnimationImageProvider {

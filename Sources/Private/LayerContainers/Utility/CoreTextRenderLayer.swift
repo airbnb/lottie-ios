@@ -87,7 +87,7 @@ final class CoreTextRenderLayer: CALayer {
     }
   }
 
-  public var strokeOnTop: Bool = false {
+  public var strokeOnTop = false {
     didSet {
       setNeedsLayout()
       setNeedsDisplay()
@@ -171,7 +171,7 @@ final class CoreTextRenderLayer: CALayer {
   private var fillFrameSetter: CTFramesetter?
   private var attributedString: NSAttributedString?
   private var strokeFrameSetter: CTFramesetter?
-  private var needsContentUpdate: Bool = false
+  private var needsContentUpdate = false
 
   // Draws Debug colors for the font alignment.
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)

@@ -246,7 +246,7 @@ extension Array where Element == ShapeItemLayer.Item {
 extension LayerAnimationContext {
   /// An updated `LayerAnimationContext` with the`AnimationKeypath`
   /// that refers to this specific `ShapeItem`.
-  fileprivate func `for`(_ item: ShapeItemLayer.Item) -> LayerAnimationContext {
+  func `for`(_ item: ShapeItemLayer.Item) -> LayerAnimationContext {
     var context = self
 
     if let group = item.parentGroup {

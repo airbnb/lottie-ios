@@ -8,10 +8,8 @@
 import CoreGraphics
 import Foundation
 
-/**
- A collection of BezierPath objects that can be trimmed and added.
-
- */
+/// A collection of BezierPath objects that can be trimmed and added.
+///
 struct CompoundBezierPath {
 
   // MARK: Lifecycle
@@ -117,8 +115,8 @@ struct CompoundBezierPath {
     var trim = positions.remove(at: 0)
     var pathStartPosition: CGFloat = 0
 
-    var finishedTrimming: Bool = false
-    var i: Int = 0
+    var finishedTrimming = false
+    var i = 0
 
     while !finishedTrimming {
       if paths.count <= i {

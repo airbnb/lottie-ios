@@ -110,8 +110,8 @@ extension CALayer {
         context: context)
     } else {
       LottieLogger.shared.assertionFailure("""
-      `Transform` values must provide either `position` or `positionX` / `positionY` keyframes
-      """)
+        `Transform` values must provide either `position` or `positionX` / `positionY` keyframes
+        """)
     }
   }
 
@@ -168,8 +168,8 @@ extension CALayer {
     if TestHelpers.snapshotTestsAreRunning {
       if transformModel.scale.keyframes.contains(where: { $0.value.x < 0 }) {
         LottieLogger.shared.warn("""
-        Negative `scale.x` values are not displayed correctly in snapshot tests
-        """)
+          Negative `scale.x` values are not displayed correctly in snapshot tests
+          """)
       }
     } else {
       addAnimation(

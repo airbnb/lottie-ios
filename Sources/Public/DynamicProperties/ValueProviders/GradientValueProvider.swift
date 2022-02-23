@@ -87,7 +87,7 @@ public final class GradientValueProvider: ValueProvider {
 
   // MARK: Private
 
-  private var hasUpdate: Bool = true
+  private var hasUpdate = true
 
   private var block: ColorsValueBlock?
   private var locationsBlock: ColorLocationsBlock?
@@ -103,8 +103,9 @@ public final class GradientValueProvider: ValueProvider {
 
       if colors[i].a < 1 { shouldAddAlphaValues = true }
 
-      let location = locations.count > i ? locations[i] :
-        (Double(i) / Double(colors.count - 1))
+      let location = locations.count > i
+        ? locations[i]
+        : (Double(i) / Double(colors.count - 1))
 
       colorValues.append(location)
       colorValues.append(colors[i].r)

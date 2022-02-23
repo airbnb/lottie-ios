@@ -11,7 +11,7 @@ import QuartzCore
 /// A rendered for a Path Fill
 final class GradientFillRenderer: PassThroughOutputNode, Renderable {
 
-  var shouldRenderInContext: Bool = true
+  var shouldRenderInContext = true
 
   var start: CGPoint = .zero {
     didSet {
@@ -19,7 +19,7 @@ final class GradientFillRenderer: PassThroughOutputNode, Renderable {
     }
   }
 
-  var numberOfColors: Int = 0 {
+  var numberOfColors = 0 {
     didSet {
       hasUpdate = true
     }

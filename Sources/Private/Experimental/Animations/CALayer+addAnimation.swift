@@ -246,8 +246,8 @@ extension CALayer {
 
     default:
       LottieLogger.shared.assertionFailure("""
-      Unexpected keyframe calculation mode \(calculationMode)
-      """)
+        Unexpected keyframe calculation mode \(calculationMode)
+        """)
     }
   }
 

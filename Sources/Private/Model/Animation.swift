@@ -16,12 +16,10 @@ public enum CoordinateSpace: Int, Codable {
 
 // MARK: - Animation
 
-/**
- The `Animation` model is the top level model object in Lottie.
-
- An `Animation` holds all of the animation data backing a Lottie Animation.
- Codable, see JSON schema [here](https://github.com/airbnb/lottie-web/tree/master/docs/json).
- */
+/// The `Animation` model is the top level model object in Lottie.
+///
+/// An `Animation` holds all of the animation data backing a Lottie Animation.
+/// Codable, see JSON schema [here](https://github.com/airbnb/lottie-web/tree/master/docs/json).
 public final class Animation: Codable {
 
   // MARK: Lifecycle
@@ -79,11 +77,11 @@ public final class Animation: Codable {
     case framerate = "fr"
     case width = "w"
     case height = "h"
-    case layers = "layers"
+    case layers
     case glyphs = "chars"
-    case fonts = "fonts"
+    case fonts
     case assetLibrary = "assets"
-    case markers = "markers"
+    case markers
   }
 
   /// The version of the JSON Schema.

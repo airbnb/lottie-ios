@@ -84,8 +84,8 @@ final class StrokeNode: AnimatorNode, RenderNode {
   let strokeProperties: StrokeNodeProperties
 
   let parentNode: AnimatorNode?
-  var hasLocalUpdates: Bool = false
-  var hasUpstreamUpdates: Bool = false
+  var hasLocalUpdates = false
+  var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
   var renderer: NodeOutput & Renderable {
@@ -98,7 +98,7 @@ final class StrokeNode: AnimatorNode, RenderNode {
     strokeProperties
   }
 
-  var isEnabled: Bool = true {
+  var isEnabled = true {
     didSet {
       strokeRender.isEnabled = isEnabled
     }
@@ -132,12 +132,13 @@ final class StrokeNode: AnimatorNode, RenderNode {
 // MARK: - [DashElement] + shapeLayerConfiguration
 
 extension Array where Element == DashElement {
-  /// Converts the `[DashElement]` data model into `lineDashPattern` and `lineDashPhase`
-  /// representations usable in a `CAShapeLayer`
-  var shapeLayerConfiguration: (
+  typealias ShapeLayerConfiguration = (
     dashPatterns: ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>,
     dashPhase: ContiguousArray<Keyframe<Vector1D>>)
-  {
+
+  /// Converts the `[DashElement]` data model into `lineDashPattern` and `lineDashPhase`
+  /// representations usable in a `CAShapeLayer`
+  var shapeLayerConfiguration: ShapeLayerConfiguration {
     var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>()
     var dashPhase = ContiguousArray<Keyframe<Vector1D>>()
     for dash in self {

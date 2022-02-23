@@ -58,24 +58,22 @@ final class KeyframeInterpolator<ValueType>: ValueProvider where ValueType: AnyI
     }
   }
 
-  /**
-   Returns true to trigger a frame update for this interpolator.
-
-   An interpolator will be asked if it needs to update every frame.
-   If the interpolator needs updating it will be asked to compute its value for
-   the given frame.
-
-   Cases a keyframe should not be updated:
-   - If time is in span and leading keyframe is hold
-   - If time is after the last keyframe.
-   - If time is before the first keyframe
-
-   Cases for updating a keyframe:
-   - If time is in the span, and is not a hold
-   - If time is outside of the span, and there are more keyframes
-   - If a value delegate is set
-   - If leading and trailing are both nil.
-   */
+  /// Returns true to trigger a frame update for this interpolator.
+  ///
+  /// An interpolator will be asked if it needs to update every frame.
+  /// If the interpolator needs updating it will be asked to compute its value for
+  /// the given frame.
+  ///
+  /// Cases a keyframe should not be updated:
+  /// - If time is in span and leading keyframe is hold
+  /// - If time is after the last keyframe.
+  /// - If time is before the first keyframe
+  ///
+  /// Cases for updating a keyframe:
+  /// - If time is in the span, and is not a hold
+  /// - If time is outside of the span, and there are more keyframes
+  /// - If a value delegate is set
+  /// - If leading and trailing are both nil.
   func hasUpdate(frame: CGFloat) -> Bool {
     if lastUpdatedFrame == nil {
       return true
@@ -128,19 +126,17 @@ final class KeyframeInterpolator<ValueType>: ValueProvider where ValueType: AnyI
       return
     }
 
-    /**
-     This function searches through the array to find the span of two keyframes
-     that contain the current time.
-
-     We could use Array.first(where:) but that would search through the entire array
-     each frame.
-     Instead we track the last used index and search either forwards or
-     backwards from there. This reduces the iterations and complexity from
-
-     O(n), where n is the length of the sequence to
-     O(n), where n is the number of items after or before the last used index.
-
-     */
+    // This function searches through the array to find the span of two keyframes
+    // that contain the current time.
+    //
+    // We could use Array.first(where:) but that would search through the entire array
+    // each frame.
+    // Instead we track the last used index and search either forwards or
+    // backwards from there. This reduces the iterations and complexity from
+    //
+    // O(n), where n is the length of the sequence to
+    // O(n), where n is the number of items after or before the last used index.
+    //
 
     if keyframes.count == 1 {
       /// Only one keyframe. Set it as first and move on.
@@ -172,7 +168,7 @@ final class KeyframeInterpolator<ValueType>: ValueProvider where ValueType: AnyI
     {
       /// Time is after the current span. Iterate forward.
       var newLeading = currentTrailing
-      var keyframeFound: Bool = false
+      var keyframeFound = false
       while !keyframeFound {
 
         leadingIndex = newLeading
@@ -200,7 +196,7 @@ final class KeyframeInterpolator<ValueType>: ValueProvider where ValueType: AnyI
       /// Time is before the current span. Iterate backwards
       var newTrailing = currentLeading
 
-      var keyframeFound: Bool = false
+      var keyframeFound = false
       while !keyframeFound {
 
         leadingIndex = keyframes.validIndex(newTrailing - 1)

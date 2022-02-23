@@ -24,7 +24,7 @@ final class Font: Codable {
     case name = "fName"
     case familyName = "fFamily"
     case style = "fStyle"
-    case ascent = "ascent"
+    case ascent
   }
 
 }

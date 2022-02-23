@@ -25,7 +25,7 @@ class PathOutputNode: NodeOutput {
 
   var lastUpdateFrame: CGFloat? = nil
   var lastPathBuildFrame: CGFloat? = nil
-  var isEnabled: Bool = true
+  var isEnabled = true
   fileprivate(set) var totalLength: CGFloat = 0
   fileprivate(set) var pathObjects: [CompoundBezierPath] = []
 

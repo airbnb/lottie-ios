@@ -31,13 +31,13 @@ struct BezierPath {
   // MARK: Internal
 
   /// The elements of the path
-  fileprivate(set) var elements: [PathElement]
+  private(set) var elements: [PathElement]
 
   /// If the path is closed or not.
-  fileprivate(set) var closed: Bool
+  private(set) var closed: Bool
 
   /// The total length of the path.
-  fileprivate(set) var length: CGFloat
+  private(set) var length: CGFloat
 
   mutating func moveToStartPoint(_ vertex: CurveVertex) {
     elements = [PathElement(vertex: vertex)]
@@ -92,7 +92,7 @@ struct BezierPath {
       }
       elements[atIndex] = newElement
 
-      if atIndex + 1 < elements.count{
+      if atIndex + 1 < elements.count {
         let nextElement = elements[atIndex + 1]
         elements[atIndex + 1] = newElement.pathElementTo(nextElement.vertex)
       }
@@ -103,23 +103,21 @@ struct BezierPath {
     }
   }
 
-  /**
-   Trims a path fromLength toLength with an offset.
-
-   Length and offset are defined in the length coordinate space.
-   If any argument is outside the range of this path, then it will be looped over the path from finish to start.
-
-   Cutting the curve when fromLength is less than toLength
-   x                    x                                 x                          x
-   ~~~~~~~~~~~~~~~ooooooooooooooooooooooooooooooooooooooooooooooooo-------------------
-   |Offset        |fromLength                             toLength|                  |
-
-   Cutting the curve when from Length is greater than toLength
-   x                x                    x               x                           x
-   oooooooooooooooooo--------------------~~~~~~~~~~~~~~~~ooooooooooooooooooooooooooooo
-   |        toLength|                    |Offset         |fromLength                 |
-
-   */
+  /// Trims a path fromLength toLength with an offset.
+  ///
+  /// Length and offset are defined in the length coordinate space.
+  /// If any argument is outside the range of this path, then it will be looped over the path from finish to start.
+  ///
+  /// Cutting the curve when fromLength is less than toLength
+  /// x                    x                                 x                          x
+  /// ~~~~~~~~~~~~~~~ooooooooooooooooooooooooooooooooooooooooooooooooo-------------------
+  /// |Offset        |fromLength                             toLength|                  |
+  ///
+  /// Cutting the curve when from Length is greater than toLength
+  /// x                x                    x               x                           x
+  /// oooooooooooooooooo--------------------~~~~~~~~~~~~~~~~ooooooooooooooooooooooooooooo
+  /// |        toLength|                    |Offset         |fromLength                 |
+  ///
   func trim(fromLength: CGFloat, toLength: CGFloat, offsetLength: CGFloat) -> [BezierPath] {
     guard elements.count > 1 else {
       return []
@@ -165,9 +163,9 @@ struct BezierPath {
     return trimPathAtLengths(positions: [(start: start, end: end)])
   }
 
-  // MARK: Fileprivate
+  // MARK: Private
 
-  fileprivate func trimPathAtLengths(positions: [(start: CGFloat, end: CGFloat)]) -> [BezierPath] {
+  private func trimPathAtLengths(positions: [(start: CGFloat, end: CGFloat)]) -> [BezierPath] {
     guard positions.count > 0 else {
       return []
     }
@@ -178,11 +176,11 @@ struct BezierPath {
     var paths = [BezierPath]()
 
     var runningLength: CGFloat = 0
-    var finishedTrimming: Bool = false
+    var finishedTrimming = false
     var pathElements = elements
 
     var currentPath = BezierPath()
-    var i: Int = 0
+    var i = 0
 
     while !finishedTrimming {
       if pathElements.count <= i {
@@ -356,18 +354,16 @@ extension BezierPath: Codable {
 
   // MARK: Internal
 
-  /**
-   The BezierPath container is encoded and decoded from the JSON format
-   that defines points for a lottie animation.
-
-   {
-   "c" = Bool
-   "i" = [[Double]],
-   "o" = [[Double]],
-   "v" = [[Double]]
-   }
-
-   */
+  /// The BezierPath container is encoded and decoded from the JSON format
+  /// that defines points for a lottie animation.
+  ///
+  /// {
+  /// "c" = Bool
+  /// "i" = [[Double]],
+  /// "o" = [[Double]],
+  /// "v" = [[Double]]
+  /// }
+  ///
 
   enum CodingKeys: String, CodingKey {
     case closed = "c"

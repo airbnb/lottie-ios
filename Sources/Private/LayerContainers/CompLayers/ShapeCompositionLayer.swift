@@ -8,9 +8,7 @@
 import CoreGraphics
 import Foundation
 
-/**
- A CompositionLayer responsible for initializing and rendering shapes
- */
+/// A CompositionLayer responsible for initializing and rendering shapes
 final class ShapeCompositionLayer: CompositionLayer {
 
   // MARK: Lifecycle

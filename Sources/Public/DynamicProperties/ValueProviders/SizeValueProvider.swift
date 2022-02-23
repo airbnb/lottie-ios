@@ -64,7 +64,7 @@ public final class SizeValueProvider: ValueProvider {
 
   // MARK: Private
 
-  private var hasUpdate: Bool = true
+  private var hasUpdate = true
 
   private var block: SizeValueBlock?
 }

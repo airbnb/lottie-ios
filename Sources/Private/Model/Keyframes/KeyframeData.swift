@@ -10,13 +10,11 @@ import Foundation
 
 // MARK: - KeyframeData
 
-/**
- A generic class used to parse and remap keyframe json.
-
- Keyframe json has a couple of different variations and formats depending on the
- type of keyframea and also the version of the JSON. By parsing the raw data
- we can reconfigure it into a constant format.
- */
+/// A generic class used to parse and remap keyframe json.
+///
+/// Keyframe json has a couple of different variations and formats depending on the
+/// type of keyframea and also the version of the JSON. By parsing the raw data
+/// we can reconfigure it into a constant format.
 final class KeyframeData<T> {
 
   // MARK: Lifecycle

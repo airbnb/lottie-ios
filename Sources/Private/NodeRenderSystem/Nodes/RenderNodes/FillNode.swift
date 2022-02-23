@@ -58,8 +58,8 @@ final class FillNode: AnimatorNode, RenderNode {
   let fillProperties: FillNodeProperties
 
   let parentNode: AnimatorNode?
-  var hasLocalUpdates: Bool = false
-  var hasUpstreamUpdates: Bool = false
+  var hasLocalUpdates = false
+  var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
   var renderer: NodeOutput & Renderable {
@@ -72,7 +72,7 @@ final class FillNode: AnimatorNode, RenderNode {
     fillProperties
   }
 
-  var isEnabled: Bool = true {
+  var isEnabled = true {
     didSet {
       fillRender.isEnabled = isEnabled
     }

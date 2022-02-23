@@ -21,7 +21,7 @@ class ValueContainer<T>: AnyValueContainer {
 
   private(set) var lastUpdateFrame = CGFloat.infinity
 
-  fileprivate(set) var needsUpdate: Bool = true
+  fileprivate(set) var needsUpdate = true
 
   var value: Any {
     outputValue as Any

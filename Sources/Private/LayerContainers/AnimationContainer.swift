@@ -10,12 +10,10 @@ import QuartzCore
 
 // MARK: - AnimationContainer
 
-/**
- The base animation container.
-
- This layer holds a single composition container and allows for animation of
- the currentFrame property.
- */
+/// The base animation container.
+///
+/// This layer holds a single composition container and allows for animation of
+/// the currentFrame property.
 final class AnimationContainer: CALayer, RootAnimationLayer {
 
   // MARK: Lifecycle
@@ -98,7 +96,7 @@ final class AnimationContainer: CALayer, RootAnimationLayer {
 
   // MARK: Public
 
-  public var respectAnimationFrameRate: Bool = false
+  public var respectAnimationFrameRate = false
 
   // MARK: CALayer Animations
 
@@ -249,7 +247,7 @@ final class AnimationContainer: CALayer, RootAnimationLayer {
 
 // MARK: - BlankImageProvider
 
-fileprivate class BlankImageProvider: AnimationImageProvider {
+private class BlankImageProvider: AnimationImageProvider {
   func imageForAsset(asset _: ImageAsset) -> CGImage? {
     nil
   }

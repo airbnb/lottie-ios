@@ -9,12 +9,10 @@ import Foundation
 #if os(iOS) || os(tvOS) || os(watchOS) || targetEnvironment(macCatalyst)
 import UIKit
 
-/**
- An interactive switch with an 'On' and 'Off' state. When the user taps on the
- switch the state is toggled and the appropriate animation is played.
-
- Both the 'On' and 'Off' have an animation play range associated with their state.
- */
+/// An interactive switch with an 'On' and 'Off' state. When the user taps on the
+/// switch the state is toggled and the appropriate animation is played.
+///
+/// Both the 'On' and 'Off' have an animation play range associated with their state.
 open class AnimatedSwitch: AnimatedControl {
 
   // MARK: Lifecycle
@@ -184,7 +182,7 @@ open class AnimatedSwitch: AnimatedControl {
   fileprivate var onEndProgress: CGFloat = 1
   fileprivate var offStartProgress: CGFloat = 1
   fileprivate var offEndProgress: CGFloat = 0
-  fileprivate var _isOn: Bool = false
+  fileprivate var _isOn = false
   fileprivate var hapticGenerator: ImpactGenerator
 
   // MARK: Private

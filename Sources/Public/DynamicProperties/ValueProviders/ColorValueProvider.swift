@@ -77,7 +77,7 @@ public final class ColorValueProvider: ValueProvider {
 
   // MARK: Private
 
-  private var hasUpdate: Bool = true
+  private var hasUpdate = true
 
   private var block: ColorValueBlock?
   private var keyframes: [Keyframe<Color>]?

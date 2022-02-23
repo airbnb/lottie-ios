@@ -8,11 +8,9 @@
 import Foundation
 import QuartzCore
 
-/**
- A layer that inverses the alpha output of its input layer.
-
- WARNING: This is experimental and probably not very performant.
- */
+/// A layer that inverses the alpha output of its input layer.
+///
+/// WARNING: This is experimental and probably not very performant.
 final class InvertedMatteLayer: CALayer, CompositionLayerDelegate {
 
   // MARK: Lifecycle

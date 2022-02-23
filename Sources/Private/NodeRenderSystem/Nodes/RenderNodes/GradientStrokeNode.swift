@@ -98,8 +98,8 @@ final class GradientStrokeNode: AnimatorNode, RenderNode {
   let strokeProperties: GradientStrokeProperties
 
   let parentNode: AnimatorNode?
-  var hasLocalUpdates: Bool = false
-  var hasUpstreamUpdates: Bool = false
+  var hasLocalUpdates = false
+  var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
   var renderer: NodeOutput & Renderable {
@@ -112,7 +112,7 @@ final class GradientStrokeNode: AnimatorNode, RenderNode {
     strokeProperties
   }
 
-  var isEnabled: Bool = true {
+  var isEnabled = true {
     didSet {
       strokeRender.isEnabled = isEnabled
     }

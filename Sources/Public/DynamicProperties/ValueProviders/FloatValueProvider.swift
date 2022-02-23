@@ -64,7 +64,7 @@ public final class FloatValueProvider: ValueProvider {
 
   // MARK: Private
 
-  private var hasUpdate: Bool = true
+  private var hasUpdate = true
 
   private var block: CGFloatValueBlock?
 }

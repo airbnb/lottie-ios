@@ -20,8 +20,8 @@ class PassThroughOutputNode: NodeOutput {
 
   let parent: NodeOutput?
 
-  var hasUpdate: Bool = false
-  var isEnabled: Bool = true
+  var hasUpdate = false
+  var isEnabled = true
 
   var outputPath: CGPath? {
     if let parent = parent {

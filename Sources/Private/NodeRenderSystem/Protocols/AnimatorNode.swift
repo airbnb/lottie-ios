@@ -10,10 +10,8 @@ import QuartzCore
 
 // MARK: - NodeOutput
 
-/**
- Defines the basic outputs of an animator node.
-
- */
+/// Defines the basic outputs of an animator node.
+///
 protocol NodeOutput {
 
   /// The parent node.
@@ -29,30 +27,26 @@ protocol NodeOutput {
 
 // MARK: - AnimatorNode
 
-/**
- The Animator Node is the base node in the render system tree.
-
- It defines a single node that has an output path and option input node.
- At animation time the root animation node is asked to update its contents for
- the current frame.
- The node reaches up its chain of nodes until the first node that does not need
- updating is found. Then each node updates its contents down the render pipeline.
- Each node adds its local path to its input path and passes it forward.
-
- An animator node holds a group of interpolators. These interpolators determine
- if the node needs an update for the current frame.
-
- */
+/// The Animator Node is the base node in the render system tree.
+///
+/// It defines a single node that has an output path and option input node.
+/// At animation time the root animation node is asked to update its contents for
+/// the current frame.
+/// The node reaches up its chain of nodes until the first node that does not need
+/// updating is found. Then each node updates its contents down the render pipeline.
+/// Each node adds its local path to its input path and passes it forward.
+///
+/// An animator node holds a group of interpolators. These interpolators determine
+/// if the node needs an update for the current frame.
+///
 protocol AnimatorNode: AnyObject, KeypathSearchable {
 
-  /**
-   The available properties of the Node.
-
-   These properties are automatically updated each frame.
-   These properties are also settable and gettable through the dynamic
-   property system.
-
-   */
+  /// The available properties of the Node.
+  ///
+  /// These properties are automatically updated each frame.
+  /// These properties are also settable and gettable through the dynamic
+  /// property system.
+  ///
   var propertyMap: NodePropertyMap & KeypathSearchable { get }
 
   /// The upstream input node

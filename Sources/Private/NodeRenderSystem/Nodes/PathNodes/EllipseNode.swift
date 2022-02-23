@@ -59,8 +59,8 @@ final class EllipseNode: AnimatorNode, PathNode {
   let properties: EllipseNodeProperties
 
   let parentNode: AnimatorNode?
-  var hasLocalUpdates: Bool = false
-  var hasUpstreamUpdates: Bool = false
+  var hasLocalUpdates = false
+  var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
   // MARK: Animator Node
@@ -69,8 +69,8 @@ final class EllipseNode: AnimatorNode, PathNode {
     properties
   }
 
-  var isEnabled: Bool = true {
-    didSet{
+  var isEnabled = true {
+    didSet {
       pathOutput.isEnabled = isEnabled
     }
   }

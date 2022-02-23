@@ -1,4 +1,5 @@
-# Current version of SwiftFormat used at Airbnb: 0.48.16
+# Current version of SwiftFormat used at Airbnb: 
+# https://github.com/calda/SwiftFormat/releases/tag/0.50-beta-1
 
 # options
 --self remove # redundantSelf
@@ -7,20 +8,24 @@
 --trimwhitespace always # trailingSpace
 --indent 2 #indent
 --ifdef no-indent #indent
+--indentstrings true #indent
 --wraparguments before-first # wrapArguments
 --wrapparameters before-first # wrapArguments
 --wrapcollections before-first # wrapArguments
 --wrapconditions before-first # wrapArguments
 --wrapreturntype if-multiline #wrapArguments
 --closingparen same-line # wrapArguments
+--wraptypealiases before-first # wrapArguments
 --funcattributes prev-line # wrapAttributes
 --typeattributes prev-line # wrapAttributes
+--wrapternary before-operators # wrap
 --structthreshold 20 # organizeDeclarations
 --enumthreshold 20 # organizeDeclarations
 --organizetypes class,struct,enum,extension # organizeDeclarations
 --extensionacl on-declarations # extensionAccessControl
 --patternlet inline # hoistPatternLet
---swiftversion 5.1
+--redundanttype inferred # redundantType
+--swiftversion 5.3 # Lottie supports Swift 5.3 and later
 
 # We recommend a max width of 100 but _strictly enforce_ a max width of 130
 --maxwidth 130 # wrap
@@ -39,7 +44,12 @@
 --rules redundantReturn
 --rules redundantSelf
 --rules redundantType
+--rules redundantPattern
+--rules redundantGet
+--rules redundantFileprivate
+--rules redundantRawValues
 --rules sortedImports
+--rules sortDeclarations
 --rules strongifiedSelf
 --rules trailingCommas
 --rules trailingSpace
@@ -47,6 +57,12 @@
 --rules wrap
 --rules wrapArguments
 --rules wrapAttributes
---rules wrapMultilineStatementBraces
+--rules braces
+--rules redundantClosure
 --rules redundantInit
+--rules redundantVoidReturnType
 --rules unusedArguments
+--rules spaceInsideBraces
+--rules spaceAroundBraces
+--rules enumNamespaces
+--rules blockComments

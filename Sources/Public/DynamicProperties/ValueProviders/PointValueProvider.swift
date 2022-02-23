@@ -63,7 +63,7 @@ public final class PointValueProvider: ValueProvider {
 
   // MARK: Private
 
-  private var hasUpdate: Bool = true
+  private var hasUpdate = true
 
   private var block: PointValueBlock?
 }

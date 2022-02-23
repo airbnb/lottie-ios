@@ -151,18 +151,16 @@ final public class AnimationView: AnimationViewBase {
   /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
   public private(set) var valueProviders = [AnimationKeypath: AnyValueProvider]()
 
-  /**
-   Describes the behavior of an AnimationView when the app is moved to the background.
-
-   The default for the Main Thread animation engine is `pause`,
-   which pauses the animation when the application moves to
-   the background. This prevents the animation from consuming CPU
-   resources when not on-screen. The completion block is called with
-   `false` for completed.
-
-   The default for the Core Animation engine is `continuePlaying`,
-   since the Core Animation engine does not have any CPU overhead.
-   */
+  /// Describes the behavior of an AnimationView when the app is moved to the background.
+  ///
+  /// The default for the Main Thread animation engine is `pause`,
+  /// which pauses the animation when the application moves to
+  /// the background. This prevents the animation from consuming CPU
+  /// resources when not on-screen. The completion block is called with
+  /// `false` for completed.
+  ///
+  /// The default for the Core Animation engine is `continuePlaying`,
+  /// since the Core Animation engine does not have any CPU overhead.
   public lazy var backgroundBehavior: LottieBackgroundBehavior = .default(for: configuration.renderingEngine) {
     didSet {
       if
@@ -170,32 +168,28 @@ final public class AnimationView: AnimationViewBase {
         backgroundBehavior == .continuePlaying
       {
         LottieLogger.shared.assertionFailure("""
-        `LottieBackgroundBehavior.continuePlaying` should not be used with the Main Thread
-        rendering engine, since this would waste CPU resources on playing an animation
-        that is not visible. Consider using a different background mode, or switching to
-        the Core Animation rendering engine (which does not have any CPU overhead).
-        """)
+          `LottieBackgroundBehavior.continuePlaying` should not be used with the Main Thread
+          rendering engine, since this would waste CPU resources on playing an animation
+          that is not visible. Consider using a different background mode, or switching to
+          the Core Animation rendering engine (which does not have any CPU overhead).
+          """)
       }
     }
   }
 
-  /**
-   Sets the animation backing the animation view. Setting this will clear the
-   view's contents, completion blocks and current state. The new animation will
-   be loaded up and set to the beginning of its timeline.
-   */
+  /// Sets the animation backing the animation view. Setting this will clear the
+  /// view's contents, completion blocks and current state. The new animation will
+  /// be loaded up and set to the beginning of its timeline.
   public var animation: Animation? {
     didSet {
       makeAnimationLayer()
     }
   }
 
-  /**
-   Sets the image provider for the animation view. An image provider provides the
-   animation with its required image data.
-
-   Setting this will cause the animation to reload its image contents.
-   */
+  /// Sets the image provider for the animation view. An image provider provides the
+  /// animation with its required image data.
+  ///
+  /// Setting this will cause the animation to reload its image contents.
   public var imageProvider: AnimationImageProvider {
     didSet {
       animationLayer?.imageProvider = imageProvider
@@ -203,20 +197,16 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  /**
-   Sets the text provider for animation view. A text provider provides the
-   animation with values for text layers
-   */
+  /// Sets the text provider for animation view. A text provider provides the
+  /// animation with values for text layers
   public var textProvider: AnimationTextProvider {
     didSet {
       animationLayer?.textProvider = textProvider
     }
   }
 
-  /**
-   Sets the text provider for animation view. A text provider provides the
-   animation with values for text layers
-   */
+  /// Sets the text provider for animation view. A text provider provides the
+  /// animation with values for text layers
   public var fontProvider: AnimationFontProvider {
     didSet {
       animationLayer?.fontProvider = fontProvider
@@ -240,26 +230,22 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  /**
-   When `true` the animation view will rasterize its contents when not animating.
-   Rasterizing will improve performance of static animations.
-
-   Note: this will not produce crisp results at resolutions above the animations natural resolution.
-
-   Defaults to `false`
-   */
-  public var shouldRasterizeWhenIdle: Bool = false {
+  /// When `true` the animation view will rasterize its contents when not animating.
+  /// Rasterizing will improve performance of static animations.
+  ///
+  /// Note: this will not produce crisp results at resolutions above the animations natural resolution.
+  ///
+  /// Defaults to `false`
+  public var shouldRasterizeWhenIdle = false {
     didSet {
       updateRasterizationState()
     }
   }
 
-  /**
-   Sets the current animation time with a Progress Time
-
-   Note: Setting this will stop the current animation, if any.
-   Note 2: If `animation` is nil, setting this will fallback to 0
-   */
+  /// Sets the current animation time with a Progress Time
+  ///
+  /// Note: Setting this will stop the current animation, if any.
+  /// Note 2: If `animation` is nil, setting this will fallback to 0
   public var currentProgress: AnimationProgressTime {
     set {
       if let animation = animation {
@@ -277,12 +263,10 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  /**
-   Sets the current animation time with a time in seconds.
-
-   Note: Setting this will stop the current animation, if any.
-   Note 2: If `animation` is nil, setting this will fallback to 0
-   */
+  /// Sets the current animation time with a time in seconds.
+  ///
+  /// Note: Setting this will stop the current animation, if any.
+  /// Note 2: If `animation` is nil, setting this will fallback to 0
   public var currentTime: TimeInterval {
     set {
       if let animation = animation {
@@ -300,11 +284,9 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  /**
-   Sets the current animation time with a frame in the animations framerate.
-
-   Note: Setting this will stop the current animation, if any.
-   */
+  /// Sets the current animation time with a frame in the animations framerate.
+  ///
+  /// Note: Setting this will stop the current animation, if any.
   public var currentFrame: AnimationFrameTime {
     set {
       removeCurrentAnimationIfNecessary()
@@ -335,39 +317,33 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  /**
-   When `true` the animation will play back at the framerate encoded in the
-   `Animation` model. When `false` the animation will play at the framerate
-   of the device.
-
-   Defaults to false
-   */
-  public var respectAnimationFrameRate: Bool = false {
+  /// When `true` the animation will play back at the framerate encoded in the
+  /// `Animation` model. When `false` the animation will play at the framerate
+  /// of the device.
+  ///
+  /// Defaults to false
+  public var respectAnimationFrameRate = false {
     didSet {
       animationLayer?.respectAnimationFrameRate = respectAnimationFrameRate
     }
   }
 
-  /**
-    Controls the cropping of an Animation. Setting this property will crop the animation
-    to the current views bounds by the viewport frame. The coordinate space is specified
-    in the animation's coordinate space.
-
-    Animatable.
-   */
+  /// Controls the cropping of an Animation. Setting this property will crop the animation
+  /// to the current views bounds by the viewport frame. The coordinate space is specified
+  /// in the animation's coordinate space.
+  ///
+  /// Animatable.
   public var viewportFrame: CGRect? = nil {
     didSet {
 
-      /*
-       This is really ugly, but is needed to trigger a layout pass within an animation block.
-       Typically this happens automatically, when layout objects are UIView based.
-       The animation layer is a CALayer which will not implicitly grab the animation
-       duration of a UIView animation block.
-
-       By setting bounds and then resetting bounds the UIView animation block's
-       duration and curve are captured and added to the layer. This is used in the
-       layout block to animate the animationLayer's position and size.
-       */
+      // This is really ugly, but is needed to trigger a layout pass within an animation block.
+      // Typically this happens automatically, when layout objects are UIView based.
+      // The animation layer is a CALayer which will not implicitly grab the animation
+      // duration of a UIView animation block.
+      //
+      // By setting bounds and then resetting bounds the UIView animation block's
+      // duration and curve are captured and added to the layer. This is used in the
+      // layout block to animate the animationLayer's position and size.
       let rect = bounds
       self.bounds = CGRect.zero
       self.bounds = rect
@@ -382,11 +358,9 @@ final public class AnimationView: AnimationViewBase {
     return .zero
   }
 
-  /**
-   Plays the animation from its current state to the end.
-
-   - Parameter completion: An optional completion closure to be called when the animation completes playing.
-   */
+  /// Plays the animation from its current state to the end.
+  ///
+  /// - Parameter completion: An optional completion closure to be called when the animation completes playing.
   public func play(completion: LottieCompletionBlock? = nil) {
     guard let animation = animation else {
       return
@@ -401,14 +375,12 @@ final public class AnimationView: AnimationViewBase {
     addNewAnimationForContext(context)
   }
 
-  /**
-   Plays the animation from a progress (0-1) to a progress (0-1).
-
-   - Parameter fromProgress: The start progress of the animation. If `nil` the animation will start at the current progress.
-   - Parameter toProgress: The end progress of the animation.
-   - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
-   - Parameter completion: An optional completion closure to be called when the animation stops.
-   */
+  /// Plays the animation from a progress (0-1) to a progress (0-1).
+  ///
+  /// - Parameter fromProgress: The start progress of the animation. If `nil` the animation will start at the current progress.
+  /// - Parameter toProgress: The end progress of the animation.
+  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+  /// - Parameter completion: An optional completion closure to be called when the animation stops.
   public func play(
     fromProgress: AnimationProgressTime? = nil,
     toProgress: AnimationProgressTime,
@@ -431,14 +403,12 @@ final public class AnimationView: AnimationViewBase {
     addNewAnimationForContext(context)
   }
 
-  /**
-   Plays the animation from a start frame to an end frame in the animation's framerate.
-
-   - Parameter fromFrame: The start frame of the animation. If `nil` the animation will start at the current frame.
-   - Parameter toFrame: The end frame of the animation.
-   - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
-   - Parameter completion: An optional completion closure to be called when the animation stops.
-   */
+  /// Plays the animation from a start frame to an end frame in the animation's framerate.
+  ///
+  /// - Parameter fromFrame: The start frame of the animation. If `nil` the animation will start at the current frame.
+  /// - Parameter toFrame: The end frame of the animation.
+  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+  /// - Parameter completion: An optional completion closure to be called when the animation stops.
   public func play(
     fromFrame: AnimationFrameTime? = nil,
     toFrame: AnimationFrameTime,
@@ -458,20 +428,18 @@ final public class AnimationView: AnimationViewBase {
     addNewAnimationForContext(context)
   }
 
-  /**
-   Plays the animation from a named marker to another marker.
-
-   Markers are point in time that are encoded into the Animation data and assigned
-   a name.
-
-   NOTE: If markers are not found the play command will exit.
-
-   - Parameter fromMarker: The start marker for the animation playback. If `nil` the
-   animation will start at the current progress.
-   - Parameter toMarker: The end marker for the animation playback.
-   - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
-   - Parameter completion: An optional completion closure to be called when the animation stops.
-   */
+  /// Plays the animation from a named marker to another marker.
+  ///
+  /// Markers are point in time that are encoded into the Animation data and assigned
+  /// a name.
+  ///
+  /// NOTE: If markers are not found the play command will exit.
+  ///
+  /// - Parameter fromMarker: The start marker for the animation playback. If `nil` the
+  /// animation will start at the current progress.
+  /// - Parameter toMarker: The end marker for the animation playback.
+  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+  /// - Parameter completion: An optional completion closure to be called when the animation stops.
   public func play(
     fromMarker: String? = nil,
     toMarker: String,
@@ -503,21 +471,17 @@ final public class AnimationView: AnimationViewBase {
     addNewAnimationForContext(context)
   }
 
-  /**
-   Stops the animation and resets the view to its start frame.
-
-   The completion closure will be called with `false`
-   */
+  /// Stops the animation and resets the view to its start frame.
+  ///
+  /// The completion closure will be called with `false`
   public func stop() {
     removeCurrentAnimation()
     currentFrame = 0
   }
 
-  /**
-   Pauses the animation in its current state.
-
-   The completion closure will be called with `false`
-   */
+  /// Pauses the animation in its current state.
+  ///
+  /// The completion closure will be called with `false`
   public func pause() {
     removeCurrentAnimation()
   }
@@ -532,31 +496,28 @@ final public class AnimationView: AnimationViewBase {
     animationLayer?.forceDisplayUpdate()
   }
 
-  /**
-
-   Sets a ValueProvider for the specified keypath. The value provider will be set
-   on all properties that match the keypath.
-
-   Nearly all properties of a Lottie animation can be changed at runtime using a
-   combination of `Animation Keypaths` and `Value Providers`.
-   Setting a ValueProvider on a keypath will cause the animation to update its
-   contents and read the new Value Provider.
-
-   A value provider provides a typed value on a frame by frame basis.
-
-   - Parameter valueProvider: The new value provider for the properties.
-   - Parameter keypath: The keypath used to search for properties.
-
-   Example:
-   ```
-   /// A keypath that finds the color value for all `Fill 1` nodes.
-   let fillKeypath = AnimationKeypath(keypath: "**.Fill 1.Color")
-   /// A Color Value provider that returns a reddish color.
-   let redValueProvider = ColorValueProvider(Color(r: 1, g: 0.2, b: 0.3, a: 1))
-   /// Set the provider on the animationView.
-   animationView.setValueProvider(redValueProvider, keypath: fillKeypath)
-   ```
-   */
+  /// Sets a ValueProvider for the specified keypath. The value provider will be set
+  /// on all properties that match the keypath.
+  ///
+  /// Nearly all properties of a Lottie animation can be changed at runtime using a
+  /// combination of `Animation Keypaths` and `Value Providers`.
+  /// Setting a ValueProvider on a keypath will cause the animation to update its
+  /// contents and read the new Value Provider.
+  ///
+  /// A value provider provides a typed value on a frame by frame basis.
+  ///
+  /// - Parameter valueProvider: The new value provider for the properties.
+  /// - Parameter keypath: The keypath used to search for properties.
+  ///
+  /// Example:
+  /// ```
+  /// /// A keypath that finds the color value for all `Fill 1` nodes.
+  /// let fillKeypath = AnimationKeypath(keypath: "**.Fill 1.Color")
+  /// /// A Color Value provider that returns a reddish color.
+  /// let redValueProvider = ColorValueProvider(Color(r: 1, g: 0.2, b: 0.3, a: 1))
+  /// /// Set the provider on the animationView.
+  /// animationView.setValueProvider(redValueProvider, keypath: fillKeypath)
+  /// ```
   public func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
     guard let animationLayer = animationLayer else { return }
 
@@ -564,13 +525,11 @@ final public class AnimationView: AnimationViewBase {
     animationLayer.setValueProvider(valueProvider, keypath: keypath)
   }
 
-  /**
-   Reads the value of a property specified by the Keypath.
-   Returns nil if no property is found.
-
-   - Parameter for: The keypath used to search for the property.
-   - Parameter atFrame: The Frame Time of the value to query. If nil then the current frame is used.
-   */
+  /// Reads the value of a property specified by the Keypath.
+  /// Returns nil if no property is found.
+  ///
+  /// - Parameter for: The keypath used to search for the property.
+  /// - Parameter atFrame: The Frame Time of the value to query. If nil then the current frame is used.
   public func getValue(for keypath: AnimationKeypath, atFrame: AnimationFrameTime?) -> Any? {
     animationLayer?.getValue(for: keypath, atFrame: atFrame)
   }
@@ -580,29 +539,27 @@ final public class AnimationView: AnimationViewBase {
     animationLayer?.logHierarchyKeypaths()
   }
 
-  /**
-   Searches for the nearest child layer to the first Keypath and adds the subview
-   to that layer. The subview will move and animate with the child layer.
-   Furthermore the subview will be in the child layers coordinate space.
-
-   Note: if no layer is found for the keypath, then nothing happens.
-
-   - Parameter subview: The subview to add to the found animation layer.
-   - Parameter keypath: The keypath used to find the animation layer.
-
-   Example:
-   ```
-   /// A keypath that finds `Layer 1`
-   let layerKeypath = AnimationKeypath(keypath: "Layer 1")
-
-   /// Wrap the custom view in an `AnimationSubview`
-   let subview = AnimationSubview()
-   subview.addSubview(customView)
-
-   /// Set the provider on the animationView.
-   animationView.addSubview(subview, forLayerAt: layerKeypath)
-   ```
-   */
+  /// Searches for the nearest child layer to the first Keypath and adds the subview
+  /// to that layer. The subview will move and animate with the child layer.
+  /// Furthermore the subview will be in the child layers coordinate space.
+  ///
+  /// Note: if no layer is found for the keypath, then nothing happens.
+  ///
+  /// - Parameter subview: The subview to add to the found animation layer.
+  /// - Parameter keypath: The keypath used to find the animation layer.
+  ///
+  /// Example:
+  /// ```
+  /// /// A keypath that finds `Layer 1`
+  /// let layerKeypath = AnimationKeypath(keypath: "Layer 1")
+  ///
+  /// /// Wrap the custom view in an `AnimationSubview`
+  /// let subview = AnimationSubview()
+  /// subview.addSubview(customView)
+  ///
+  /// /// Set the provider on the animationView.
+  /// animationView.addSubview(subview, forLayerAt: layerKeypath)
+  /// ```
   public func addSubview(_ subview: AnimationSubview, forLayerAt keypath: AnimationKeypath) {
     guard let sublayer = animationLayer?.layer(for: keypath) else {
       return
@@ -616,15 +573,13 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  /**
-   Converts a CGRect from the AnimationView's coordinate space into the
-   coordinate space of the layer found at Keypath.
-
-   If no layer is found, nil is returned
-
-   - Parameter rect: The CGRect to convert.
-   - Parameter toLayerAt: The keypath used to find the layer.
-   */
+  /// Converts a CGRect from the AnimationView's coordinate space into the
+  /// coordinate space of the layer found at Keypath.
+  ///
+  /// If no layer is found, nil is returned
+  ///
+  /// - Parameter rect: The CGRect to convert.
+  /// - Parameter toLayerAt: The keypath used to find the layer.
   public func convert(_ rect: CGRect, toLayerAt keypath: AnimationKeypath?) -> CGRect? {
     guard let animationLayer = animationLayer else { return nil }
     guard let keypath = keypath else {
@@ -639,15 +594,13 @@ final public class AnimationView: AnimationViewBase {
     return animationLayer.convert(rect, to: sublayer)
   }
 
-  /**
-   Converts a CGPoint from the AnimationView's coordinate space into the
-   coordinate space of the layer found at Keypath.
-
-   If no layer is found, nil is returned
-
-   - Parameter point: The CGPoint to convert.
-   - Parameter toLayerAt: The keypath used to find the layer.
-   */
+  /// Converts a CGPoint from the AnimationView's coordinate space into the
+  /// coordinate space of the layer found at Keypath.
+  ///
+  /// If no layer is found, nil is returned
+  ///
+  /// - Parameter point: The CGPoint to convert.
+  /// - Parameter toLayerAt: The keypath used to find the layer.
   public func convert(_ point: CGPoint, toLayerAt keypath: AnimationKeypath?) -> CGPoint? {
     guard let animationLayer = animationLayer else { return nil }
     guard let keypath = keypath else {
@@ -662,13 +615,11 @@ final public class AnimationView: AnimationViewBase {
     return animationLayer.convert(point, to: sublayer)
   }
 
-  /**
-   Sets the enabled state of all animator nodes found with the keypath search.
-   This can be used to interactively enable / disable parts of the animation.
-
-   - Parameter isEnabled: When true the animator nodes affect the rendering tree. When false the node is removed from the tree.
-   - Parameter keypath: The keypath used to find the node(s).
-   */
+  /// Sets the enabled state of all animator nodes found with the keypath search.
+  /// This can be used to interactively enable / disable parts of the animation.
+  ///
+  /// - Parameter isEnabled: When true the animator nodes affect the rendering tree. When false the node is removed from the tree.
+  /// - Parameter keypath: The keypath used to find the node(s).
   public func setNodeIsEnabled(isEnabled: Bool, keypath: AnimationKeypath) {
     guard let animationLayer = animationLayer else { return }
     let nodes = animationLayer.animatorNodes(for: keypath)
@@ -680,16 +631,14 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  /**
-   Markers are a way to describe a point in time by a key name.
-
-   Markers are encoded into animation JSON. By using markers a designer can mark
-   playback points for a developer to use without having to worry about keeping
-   track of animation frames. If the animation file is updated, the developer
-   does not need to update playback code.
-
-   Returns the Progress Time for the marker named. Returns nil if no marker found.
-   */
+  /// Markers are a way to describe a point in time by a key name.
+  ///
+  /// Markers are encoded into animation JSON. By using markers a designer can mark
+  /// playback points for a developer to use without having to worry about keeping
+  /// track of animation frames. If the animation file is updated, the developer
+  /// does not need to update playback code.
+  ///
+  /// Returns the Progress Time for the marker named. Returns nil if no marker found.
   public func progressTime(forMarker named: String) -> AnimationProgressTime? {
     guard let animation = animation else {
       return nil
@@ -697,16 +646,14 @@ final public class AnimationView: AnimationViewBase {
     return animation.progressTime(forMarker: named)
   }
 
-  /**
-   Markers are a way to describe a point in time by a key name.
-
-   Markers are encoded into animation JSON. By using markers a designer can mark
-   playback points for a developer to use without having to worry about keeping
-   track of animation frames. If the animation file is updated, the developer
-   does not need to update playback code.
-
-   Returns the Frame Time for the marker named. Returns nil if no marker found.
-   */
+  /// Markers are a way to describe a point in time by a key name.
+  ///
+  /// Markers are encoded into animation JSON. By using markers a designer can mark
+  /// playback points for a developer to use without having to worry about keeping
+  /// track of animation frames. If the animation file is updated, the developer
+  /// does not need to update playback code.
+  ///
+  /// Returns the Frame Time for the marker named. Returns nil if no marker found.
   public func frameTime(forMarker named: String) -> AnimationFrameTime? {
     guard let animation = animation else {
       return nil
@@ -731,7 +678,7 @@ final public class AnimationView: AnimationViewBase {
     guard let animation = animation, let animationLayer = animationLayer else { return }
     var position = animation.bounds.center
     let xform: CATransform3D
-    var shouldForceUpdates: Bool = false
+    var shouldForceUpdates = false
 
     if let viewportFrame = viewportFrame {
       shouldForceUpdates = contentMode == .redraw
@@ -811,13 +758,11 @@ final public class AnimationView: AnimationViewBase {
       }
     }
 
-    /*
-     UIView Animation does not implicitly set CAAnimation time or timing fuctions.
-     If layout is changed in an animation we must get the current animation duration
-     and timing function and then manually create a CAAnimation to match the UIView animation.
-     If layout is changed without animation, explicitly set animation duration to 0.0
-     inside CATransaction to avoid unwanted artifacts.
-     */
+    // UIView Animation does not implicitly set CAAnimation time or timing fuctions.
+    // If layout is changed in an animation we must get the current animation duration
+    // and timing function and then manually create a CAAnimation to match the UIView animation.
+    // If layout is changed without animation, explicitly set animation duration to 0.0
+    // inside CATransaction to avoid unwanted artifacts.
     /// Check if any animation exist on the view's layer, and match it.
     if let key = viewLayer?.animationKeys()?.first, let animation = viewLayer?.animation(forKey: key) {
       // The layout is happening within an animation block. Grab the animation data.
@@ -930,9 +875,9 @@ final public class AnimationView: AnimationViewBase {
 
   fileprivate var animationContext: AnimationContext?
   fileprivate var _activeAnimationName: String = AnimationView.animationName
-  fileprivate var animationID: Int = 0
+  fileprivate var animationID = 0
 
-  fileprivate var waitingToPlayAnimation: Bool = false
+  fileprivate var waitingToPlayAnimation = false
 
   fileprivate var activeAnimationName: String {
     switch animationLayer?.primaryAnimationKey {
@@ -1149,9 +1094,9 @@ final public class AnimationView: AnimationViewBase {
       startFrame = playFrom
     }
 
-    let timeOffset: TimeInterval = playingForward ?
-      Double(startFrame - min(playFrom, playTo)) / framerate :
-      Double(max(playFrom, playTo) - startFrame) / framerate
+    let timeOffset: TimeInterval = playingForward
+      ? Double(startFrame - min(playFrom, playTo)) / framerate
+      : Double(max(playFrom, playTo) - startFrame) / framerate
 
     let layerAnimation = CABasicAnimation(keyPath: "currentFrame")
     layerAnimation.fromValue = playFrom
@@ -1177,7 +1122,7 @@ final public class AnimationView: AnimationViewBase {
 
   // MARK: Private
 
-  static private let animationName: String = "Lottie"
+  static private let animationName = "Lottie"
 
 }
 

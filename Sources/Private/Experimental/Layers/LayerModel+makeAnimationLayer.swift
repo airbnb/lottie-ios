@@ -38,8 +38,8 @@ extension LayerModel {
 
     default:
       LottieLogger.shared.assertionFailure("""
-      Unexpected layer type combination ("\(type)" and "\(Swift.type(of: self))")
-      """)
+        Unexpected layer type combination ("\(type)" and "\(Swift.type(of: self))")
+        """)
 
       return nil
     }
