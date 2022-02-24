@@ -12,11 +12,11 @@ import XCTest
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
 final class DataURLTests: XCTestCase {
 
-  let red5x5 = "%89%50%4e%47%0d%0a%1a%0a%00%00%00%0d%49%48%44%52%00%00%00%05%00%00%00%05%08%06%00%00%00%8d%6f%26%e5%00%00%00%12%49%44%41%54%78%da%63%fc%cf%c0%00%44%a8%80%91%06%82%00%5c%65%09%fc%86%fe%00%b0%00%00%00%00%49%45%4e%44%ae%42%60%82"
+  let red5x5 =
+    "%89%50%4e%47%0d%0a%1a%0a%00%00%00%0d%49%48%44%52%00%00%00%05%00%00%00%05%08%06%00%00%00%8d%6f%26%e5%00%00%00%12%49%44%41%54%78%da%63%fc%cf%c0%00%44%a8%80%91%06%82%00%5c%65%09%fc%86%fe%00%b0%00%00%00%00%49%45%4e%44%ae%42%60%82"
 
   let red5x5Base64 = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAEklEQVR42mP8z8AARKiAkQaCAFxlCfyG/gCwAAAAAElFTkSuQmCC"
 
-  // MARK: Internal
   func testValidDataURL() {
     let dataString = "data:image/png;base64,\(red5x5Base64)"
 
@@ -51,8 +51,8 @@ final class DataURLTests: XCTestCase {
 
     let data = Data(dataString: dataString)
     let legacyData = Data(dataString: dataString, options: .legacy)
-    XCTAssertNil(data,"Data should be nil because 'INVALIDBASE64' is not valid base64 string.")
-    XCTAssertNil(legacyData,"Data should be nil because 'INVALIDBASE64' is not valid base64 string.")
+    XCTAssertNil(data, "Data should be nil because 'INVALIDBASE64' is not valid base64 string.")
+    XCTAssertNil(legacyData, "Data should be nil because 'INVALIDBASE64' is not valid base64 string.")
   }
 
   func testInvalidDataURL() {
