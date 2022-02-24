@@ -541,6 +541,7 @@
 		2EE8908127A3179D00354584 /* BaseAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE8908027A3179D00354584 /* BaseAnimationLayer.swift */; };
 		2EE8908227A3179D00354584 /* BaseAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE8908027A3179D00354584 /* BaseAnimationLayer.swift */; };
 		2EE8908327A3179E00354584 /* BaseAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE8908027A3179D00354584 /* BaseAnimationLayer.swift */; };
+		A1D5BAAC27C731A500777D06 /* DataURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D5BAAB27C731A500777D06 /* DataURLTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -742,6 +743,7 @@
 		2EAF5A9827A0798700E00531 /* KeyframeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyframeExtensions.swift; sourceTree = "<group>"; };
 		2EAF5A9A27A0798700E00531 /* AnimationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
 		2EE8908027A3179D00354584 /* BaseAnimationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAnimationLayer.swift; sourceTree = "<group>"; };
+		A1D5BAAB27C731A500777D06 /* DataURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataURLTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -807,6 +809,7 @@
 				2E80412527A07343006E74CB /* SnapshotConfiguration.swift */,
 				2E72128227BB329C0027BC56 /* AnimationKeypathTests.swift */,
 				2E72128427BB32DB0027BC56 /* PerformanceTests.swift */,
+				A1D5BAAB27C731A500777D06 /* DataURLTests.swift */,
 				2E8040BD27A07343006E74CB /* Utils */,
 			);
 			path = Tests;
@@ -1781,6 +1784,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1D5BAAC27C731A500777D06 /* DataURLTests.swift in Sources */,
 				2E8044AD27A07347006E74CB /* HardcodedImageProvider.swift in Sources */,
 				2E80450C27A07347006E74CB /* SnapshotTests.swift in Sources */,
 				2E09FA0627B6CEB600BA84E5 /* HardcodedFontProvider.swift in Sources */,

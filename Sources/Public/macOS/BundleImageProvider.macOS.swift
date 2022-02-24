@@ -31,9 +31,7 @@ public class BundleImageProvider: AnimationImageProvider {
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
 
     if
-      asset.name.hasPrefix("data:"),
-      let url = URL(string: asset.name),
-      let data = try? Data(contentsOf: url),
+      let data = Data(imageAsset: asset),
       let image = NSImage(data: data)
     {
       return image.CGImage
