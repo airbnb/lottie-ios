@@ -39,7 +39,7 @@ extension CAAnimation {
     let clippingParent = CAAnimationGroup()
     clippingParent.animations = [baseAnimation]
 
-    clippingParent.duration = abs(context.animation.time(forFrame: context.endFrame - context.startFrame))
+    clippingParent.duration = Double(abs(context.endFrame - context.startFrame)) / context.animation.framerate
     baseAnimation.timeOffset = context.animation.time(forFrame: context.startFrame)
 
     clippingParent.autoreverses = context.timingConfiguration.autoreverses
