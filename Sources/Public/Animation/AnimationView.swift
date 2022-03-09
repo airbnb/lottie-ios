@@ -124,13 +124,13 @@ final public class AnimationView: AnimationViewBase {
     commonInit()
   }
 
-  public override init(frame _: CGRect) {
+  public override init(frame: CGRect) {
     animation = nil
     imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
     configuration = .shared
-    super.init(frame: .zero)
+    super.init(frame: frame)
     commonInit()
   }
 
