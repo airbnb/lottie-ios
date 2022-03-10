@@ -36,7 +36,7 @@ final class ImageLayer: BaseCompositionLayer {
 
   func setupImage(context: LayerContext) {
     guard
-      let imageAsset = context.assetLibrary?.imageAssets[imageLayer.referenceID],
+      let imageAsset = context.animation.assetLibrary?.imageAssets[imageLayer.referenceID],
       let image = context.imageProvider.imageForAsset(asset: imageAsset)
     else {
       contents = nil

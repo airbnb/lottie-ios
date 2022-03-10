@@ -35,11 +35,33 @@ struct LayerAnimationContext {
   /// The AnimationKeypath represented by the current layer
   var currentKeypath: AnimationKeypath
 
+  /// A closure that remaps the given frame in the child layer's local time to a frame
+  /// in the animation's overall global time
+  private(set) var timeRemapping: ((AnimationFrameTime) -> AnimationFrameTime) = { $0 }
+
   /// Adds the given component string to the `AnimationKeypath` stored
   /// that describes the current path being configured by this context value
   func addingKeypathComponent(_ component: String) -> LayerAnimationContext {
     var context = self
     context.currentKeypath.keys.append(component)
     return context
+  }
+
+  /// The `AnimationProgressTime` for the given `AnimationFrameTime` within this layer,
+  /// accounting for the `timeRemapping` applied to this layer
+  func progressTime(for frame: AnimationFrameTime) -> AnimationProgressTime {
+    animation.progressTime(forFrame: timeRemapping(frame), clamped: false)
+  }
+
+  /// Chains an additional `timeRemapping` closure onto this layer context
+  func withTimeRemapping(
+    _ additionalTimeRemapping: @escaping (AnimationFrameTime) -> AnimationFrameTime)
+    -> LayerAnimationContext
+  {
+    var copy = self
+    copy.timeRemapping = { [existingTimeRemapping = timeRemapping] time in
+      existingTimeRemapping(additionalTimeRemapping(time))
+    }
+    return copy
   }
 }
