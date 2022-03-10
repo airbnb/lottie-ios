@@ -27,8 +27,8 @@ extension CALayer {
     //    there should be three key times.
     animation.keyTimes = [
       NSNumber(value: 0.0),
-      NSNumber(value: max(context.progressTime(for: inFrame), 0)),
-      NSNumber(value: min(context.progressTime(for: outFrame), 1)),
+      NSNumber(value: max(Double(context.progressTime(for: inFrame)), 0)),
+      NSNumber(value: min(Double(context.progressTime(for: outFrame)), 1)),
       NSNumber(value: 1.0),
     ]
 

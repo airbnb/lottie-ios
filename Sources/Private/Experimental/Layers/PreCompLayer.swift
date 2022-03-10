@@ -58,7 +58,7 @@ final class PreCompLayer: BaseCompositionLayer {
       if let timeRemappingInterpolator = timeRemappingInterpolator {
         return timeRemappingInterpolator.value(frame: layerLocalFrame) as? AnimationFrameTime ?? layerLocalFrame
       } else {
-        return layerLocalFrame + preCompLayer.startTime
+        return layerLocalFrame + AnimationFrameTime(preCompLayer.startTime)
       }
     }
 
