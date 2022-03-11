@@ -147,7 +147,7 @@ extension LayerProperty {
   static var lineWidth: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: #keyPath(CAShapeLayer.lineWidth),
-      defaultValue: nil,
+      defaultValue: 1,
       customizableProperty: nil /* currently unsupported */)
   }
 

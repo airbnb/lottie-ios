@@ -47,6 +47,11 @@ class BaseCompositionLayer: BaseAnimationLayer {
       context = context.addingKeypathComponent(baseLayerModel.name)
     }
 
+    setupLayerAnimations(context: context)
+    setupChildAnimations(context: context)
+  }
+
+  func setupLayerAnimations(context: LayerAnimationContext) {
     addTransformAnimations(for: baseLayerModel.transform, context: context)
 
     if renderLayerContents {
@@ -57,7 +62,9 @@ class BaseCompositionLayer: BaseAnimationLayer {
         outFrame: CGFloat(baseLayerModel.outFrame),
         context: context)
     }
+  }
 
+  func setupChildAnimations(context: LayerAnimationContext) {
     super.setupAnimations(context: context)
   }
 

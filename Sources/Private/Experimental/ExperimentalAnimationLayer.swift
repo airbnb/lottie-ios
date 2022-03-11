@@ -161,7 +161,7 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
   /// Context used when setting up and configuring sublayers
   private var layerContext: LayerContext {
     LayerContext(
-      assetLibrary: animation.assetLibrary,
+      animation: animation,
       imageProvider: imageProvider,
       fontProvider: fontProvider)
   }

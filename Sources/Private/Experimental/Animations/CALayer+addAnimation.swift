@@ -126,8 +126,7 @@ extension CALayer {
     }
 
     var keyTimes = keyframes.map { keyframeModel -> NSNumber in
-      let progressTime = context.animation.progressTime(forFrame: keyframeModel.time, clamped: false)
-      return NSNumber(value: Float(progressTime))
+      NSNumber(value: Float(context.progressTime(for: keyframeModel.time)))
     }
 
     var timingFunctions = self.timingFunctions(for: keyframes)
