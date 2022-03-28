@@ -149,7 +149,7 @@ extension BezierPath {
         vertices[vertices.endIndex - 1] = CurveVertex(
           previousVertex.inTangent,
           previousVertex.point,
-          previousVertex.point - cp1 + position)
+          previousVertex.point - cp1)
         vertices.append(CurveVertex(point: point + position, inTangentRelative: cp2, outTangentRelative: .zero))
       } else {
         vertices.append(CurveVertex(point: point + position, inTangentRelative: .zero, outTangentRelative: .zero))
