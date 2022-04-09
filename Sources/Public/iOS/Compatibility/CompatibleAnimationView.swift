@@ -23,10 +23,21 @@ public final class CompatibleAnimation: NSObject {
     super.init()
   }
 
+  @objc
+  public init(filePath: String) {
+    self.filePath = filePath
+    super.init()
+  }
+
   // MARK: Internal
 
   internal var animation: Animation? {
-    Animation.named(name, bundle: bundle)
+    if let name = name, let bundle = bundle {
+      return Animation.named(name, bundle: bundle)
+    } else if let filePath = filePath {
+        return Animation.filepath(filePath)
+    }
+    return nil
   }
 
   @objc
@@ -36,8 +47,9 @@ public final class CompatibleAnimation: NSObject {
 
   // MARK: Private
 
-  private let name: String
-  private let bundle: Bundle
+  private let name: String?
+  private let bundle: Bundle?
+  private let filePath: String?
 }
 
 /// An Objective-C compatible wrapper around Lottie's AnimationView.
