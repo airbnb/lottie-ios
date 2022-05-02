@@ -164,6 +164,8 @@ enum SnapshotError: Error {
   case unsupportedDevice
 }
 
+// MARK: - Samples
+
 /// MARK: - Samples
 
 enum Samples {

@@ -4,6 +4,8 @@
 import Foundation
 import Lottie
 
+// MARK: - Configuration
+
 final class Configuration {
 
   /// Whether or not to use the new, experimental rendering engine
@@ -25,17 +27,11 @@ final class Configuration {
 
 }
 
+// MARK: - RenderingEngineOption + RawRepresentable
+
 extension RenderingEngineOption: RawRepresentable {
-  public var rawValue: String {
-    switch self {
-    case .automatic:
-      return "Automatic"
-    case .specific(.mainThread):
-      return "Main Thread"
-    case .specific(.coreAnimation):
-      return "Core Animation"
-    }
-  }
+
+  // MARK: Lifecycle
 
   public init?(rawValue: String) {
     switch rawValue {
@@ -49,4 +45,18 @@ extension RenderingEngineOption: RawRepresentable {
       return nil
     }
   }
+
+  // MARK: Public
+
+  public var rawValue: String {
+    switch self {
+    case .automatic:
+      return "Automatic"
+    case .specific(.mainThread):
+      return "Main Thread"
+    case .specific(.coreAnimation):
+      return "Core Animation"
+    }
+  }
+
 }

@@ -1,11 +1,11 @@
 // Created by Cal Stephens on 5/2/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
-import XCTest
 import UIKit
+import XCTest
 
-@testable import Lottie
 import SnapshotTesting
+@testable import Lottie
 
 final class AutomaticEngineTests: XCTestCase {
 
@@ -15,7 +15,7 @@ final class AutomaticEngineTests: XCTestCase {
   func testAutomaticEngineDetection() {
     // While this feature is still in development, we disable assertions
     // for this test case to keep CI green. TODO: Enable assertions in CI.
-    let emitXCTAssertions = { false }()
+    let emitXCTAssertions = false
 
     for sampleAnimationName in Samples.sampleAnimationNames {
       var logs = [String]()
@@ -53,9 +53,9 @@ final class AutomaticEngineTests: XCTestCase {
             """)
         } else {
           XCTAssert(!logs.isEmpty, """
-          Animation "\(sampleAnimationName)" is listed as not supporting the Core Animation engine,
-          but no assertions were emitted when rendering it.
-          """)
+            Animation "\(sampleAnimationName)" is listed as not supporting the Core Animation engine,
+            but no assertions were emitted when rendering it.
+            """)
         }
       }
 
