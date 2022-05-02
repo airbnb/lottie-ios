@@ -12,7 +12,7 @@ final class AutomaticEngineTests: XCTestCase {
   /// Checks that the result of `animation.supportedByCoreAnimationEngine`
   /// matches whether or not an assertion is emitted when rendering the animation
   /// using the Core Animation engine
-  func testAutomaticEngineDetection() {
+  func testAutomaticEngineDetection() throws {
     // While this feature is still in development, we disable assertions
     // for this test case to keep CI green. TODO: Enable assertions in CI.
     let emitXCTAssertions = false
@@ -23,15 +23,26 @@ final class AutomaticEngineTests: XCTestCase {
       LottieLogger.shared = .init(
         assert: { condition, message, _, _ in
           if !condition() {
+            print(message())
             logs.append(message())
           }
         },
         assertionFailure: { message, _, _ in
+          // Filter out "Could not find image" assertions, since they are
+          // irrelevant to this specific test.
+          if message().contains("Could not find image") {
+            return
+          }
+
+          print(message())
           logs.append(message())
         },
         warn: { message, _, _ in
+          print(message())
           logs.append(message())
         })
+
+      defer { LottieLogger.shared = .init() }
 
       guard
         let (animation, animationView) = SnapshotConfiguration.makeAnimationView(
@@ -42,6 +53,7 @@ final class AutomaticEngineTests: XCTestCase {
       animationView.frame = CGRect(origin: .zero, size: animation.size)
       animationView.layoutIfNeeded()
       animationView.currentProgress = 0.5
+      try XCTUnwrap(animationView.animationLayer).display()
 
       let supportsCoreAnimationEngine = animation.supportedByCoreAnimationEngine
 
