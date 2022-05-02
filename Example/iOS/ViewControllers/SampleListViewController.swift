@@ -78,7 +78,10 @@ final class SampleListViewController: CollectionViewController {
           dataID: animationName,
           content: .init(
             animationName: animationPath,
-            title: animationName))
+            title: animationName,
+            subtitle: Animation.named(animationPath)?.supportedByCoreAnimationEngine == true
+              ? "Supports Core Animation"
+              : nil))
           .didSelect { [weak self] context in
             self?.show(
               AnimationPreviewViewController(animationPath),
@@ -121,21 +124,20 @@ final class SampleListViewController: CollectionViewController {
       menu: UIMenu(
         title: "Rendering Engine",
         children: [
-          UIAction(
-            title: "Standard",
-            state: Configuration.useNewRenderingEngine ? .off : .on,
-            handler: { [weak self] _ in
-              Configuration.useNewRenderingEngine = false
-              self?.configureSettingsMenu()
-            }),
-          UIAction(
-            title: "Experimental",
-            state: Configuration.useNewRenderingEngine ? .on : .off,
-            handler: { [weak self] _ in
-              Configuration.useNewRenderingEngine = true
-              self?.configureSettingsMenu()
-            }),
+          action(for: .automatic),
+          action(for: .mainThread),
+          action(for: .coreAnimation),
         ]))
+  }
+
+  private func action(for renderingEngineOption: RenderingEngineOption) -> UIAction {
+    UIAction(
+      title: renderingEngineOption.rawValue,
+      state: Configuration.renderingEngineOption == renderingEngineOption ? .on : .off,
+      handler: { [weak self] _ in
+        Configuration.renderingEngineOption = renderingEngineOption
+        self?.configureSettingsMenu()
+      })
   }
 
 }
