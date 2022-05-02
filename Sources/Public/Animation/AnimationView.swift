@@ -161,7 +161,7 @@ final public class AnimationView: AnimationViewBase {
   ///
   /// The default for the Core Animation engine is `continuePlaying`,
   /// since the Core Animation engine does not have any CPU overhead.
-  public lazy var backgroundBehavior: LottieBackgroundBehavior = .default(for: configuration.renderingEngine) {
+  public lazy var backgroundBehavior: LottieBackgroundBehavior = .default(for: renderingEngine) {
     didSet {
       if
         configuration.renderingEngine == .mainThread,
@@ -904,7 +904,7 @@ final public class AnimationView: AnimationViewBase {
     }
 
     let animationLayer: RootAnimationLayer
-    switch configuration.renderingEngine {
+    switch configuration.renderingEngine.renderingEngine(for: animation) {
     case .coreAnimation:
       animationLayer = ExperimentalAnimationLayer(
         animation: animation,
@@ -969,7 +969,7 @@ final public class AnimationView: AnimationViewBase {
   ///    this step lets us avoid building the animations twice (once paused
   ///    and once again playing)
   fileprivate func removeCurrentAnimationIfNecessary() {
-    switch configuration.renderingEngine {
+    switch renderingEngine {
     case .mainThread:
       removeCurrentAnimation()
     case .coreAnimation:
@@ -1021,7 +1021,7 @@ final public class AnimationView: AnimationViewBase {
 
     self.animationContext = animationContext
 
-    switch configuration.renderingEngine {
+    switch renderingEngine {
     case .mainThread:
       guard window != nil else {
         waitingToPlayAnimation = true
@@ -1123,6 +1123,10 @@ final public class AnimationView: AnimationViewBase {
   // MARK: Private
 
   static private let animationName = "Lottie"
+
+  private var renderingEngine: RenderingEngine {
+    configuration.renderingEngine.renderingEngine(for: animation) ?? .mainThread
+  }
 
 }
 
