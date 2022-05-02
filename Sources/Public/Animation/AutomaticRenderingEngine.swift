@@ -27,6 +27,6 @@ extension RenderingEngineOption {
 extension Animation {
   /// Whether or not this animation can be rendered by the Core Animation engine
   public var supportedByCoreAnimationEngine: Bool {
-    false // TODO: Implement
+    true // TODO: Implement checks
   }
 }

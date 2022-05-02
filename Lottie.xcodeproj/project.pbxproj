@@ -13,6 +13,7 @@
 		2E044E1E28204C4000FA773B /* AutomaticRenderingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E044E1D28204C4000FA773B /* AutomaticRenderingEngine.swift */; };
 		2E044E1F28204C4000FA773B /* AutomaticRenderingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E044E1D28204C4000FA773B /* AutomaticRenderingEngine.swift */; };
 		2E044E2028204C4000FA773B /* AutomaticRenderingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E044E1D28204C4000FA773B /* AutomaticRenderingEngine.swift */; };
+		2E044E272820536800FA773B /* AutomaticEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E044E262820536800FA773B /* AutomaticEngineTests.swift */; };
 		2E09FA0627B6CEB600BA84E5 /* HardcodedFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */; };
 		2E29E51A27B5C072007E25CE /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29E51927B5C072007E25CE /* StrokeAnimation.swift */; };
 		2E29E51B27B5C072007E25CE /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29E51927B5C072007E25CE /* StrokeAnimation.swift */; };
@@ -560,6 +561,7 @@
 /* Begin PBXFileReference section */
 		1133E6AC27AA4920000633AC /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		2E044E1D28204C4000FA773B /* AutomaticRenderingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticRenderingEngine.swift; sourceTree = "<group>"; };
+		2E044E262820536800FA773B /* AutomaticEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticEngineTests.swift; sourceTree = "<group>"; };
 		2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcodedFontProvider.swift; sourceTree = "<group>"; };
 		2E29E51927B5C072007E25CE /* StrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeAnimation.swift; sourceTree = "<group>"; };
 		2E72128227BB329C0027BC56 /* AnimationKeypathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationKeypathTests.swift; sourceTree = "<group>"; };
@@ -815,6 +817,7 @@
 				2E72128427BB32DB0027BC56 /* PerformanceTests.swift */,
 				A1D5BAAB27C731A500777D06 /* DataURLTests.swift */,
 				2E8040BD27A07343006E74CB /* Utils */,
+				2E044E262820536800FA773B /* AutomaticEngineTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1799,6 +1802,7 @@
 				2E8044AE27A07347006E74CB /* Snapshotting+presentationLayer.swift in Sources */,
 				2E72128527BB32DB0027BC56 /* PerformanceTests.swift in Sources */,
 				2E72128327BB329C0027BC56 /* AnimationKeypathTests.swift in Sources */,
+				2E044E272820536800FA773B /* AutomaticEngineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
