@@ -1,1 +1,1 @@
-Supports Core Animation engine
+Does not support Core Animation engine

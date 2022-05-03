@@ -12,11 +12,7 @@ final class AutomaticEngineTests: XCTestCase {
   /// Snapshot test for the result of `animation.supportedByCoreAnimationEngine`
   func testAutomaticEngineDetection() throws {
     for sampleAnimationName in Samples.sampleAnimationNames {
-      guard
-        let animation = SnapshotConfiguration.makeAnimationView(
-          for: sampleAnimationName,
-          configuration: .init(renderingEngine: .coreAnimation))?.animation
-      else { continue }
+      guard let animation = Samples.animation(named: sampleAnimationName) else { continue }
 
       assertSnapshot(
         matching: animation.supportedByCoreAnimationEngine
@@ -25,6 +21,14 @@ final class AutomaticEngineTests: XCTestCase {
         as: .description,
         named: sampleAnimationName)
     }
+  }
+
+  override func setUp() {
+    LottieLogger.shared = .printToConsole
+  }
+
+  override func tearDown() {
+    LottieLogger.shared = LottieLogger()
   }
 
 }
