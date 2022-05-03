@@ -9,14 +9,15 @@ extension CAShapeLayer {
   func addAnimations(
     for ellipse: Ellipse,
     context: LayerAnimationContext)
+    throws
   {
-    addAnimation(
+    try addAnimation(
       for: .path,
       keyframes: ellipse.size.keyframes,
       value: { sizeKeyframe in
         BezierPath.ellipse(
           size: sizeKeyframe.sizeValue,
-          center: ellipse.position.exactlyOneKeyframe.value.pointValue,
+          center: try context.exactlyOneKeyframe(from: ellipse.position, description: "ellipse position").value.pointValue,
           direction: ellipse.direction)
           .cgPath()
       },

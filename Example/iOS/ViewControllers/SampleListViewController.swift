@@ -3,8 +3,8 @@
 
 import Epoxy
 import EpoxyCollectionView
-import Lottie
 import UIKit
+@testable import Lottie
 
 /// Displays a list of all of the sample Lottie animations
 /// available to be previews in this app's bundle

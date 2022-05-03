@@ -12,12 +12,13 @@ extension CAShapeLayer {
   func addAnimations(
     for star: Star,
     context: LayerAnimationContext)
+    throws
   {
     switch star.starType {
     case .star:
-      addStarAnimation(for: star, context: context)
+      try addStarAnimation(for: star, context: context)
     case .polygon:
-      addPolygonAnimation(for: star, context: context)
+      try addPolygonAnimation(for: star, context: context)
     case .none:
       break
     }
@@ -29,8 +30,9 @@ extension CAShapeLayer {
   private func addStarAnimation(
     for star: Star,
     context: LayerAnimationContext)
+    throws
   {
-    addAnimation(
+    try addAnimation(
       for: .path,
       keyframes: star.position.keyframes,
       value: { position in
@@ -39,12 +41,15 @@ extension CAShapeLayer {
         // TODO: Is there a way to support this properly?
         BezierPath.star(
           position: position.pointValue,
-          outerRadius: star.outerRadius.exactlyOneKeyframe.value.cgFloatValue,
-          innerRadius: star.innerRadius?.exactlyOneKeyframe.value.cgFloatValue ?? 0,
-          outerRoundedness: star.outerRoundness.exactlyOneKeyframe.value.cgFloatValue,
-          innerRoundedness: star.innerRoundness?.exactlyOneKeyframe.value.cgFloatValue ?? 0,
-          numberOfPoints: star.points.exactlyOneKeyframe.value.cgFloatValue,
-          rotation: star.rotation.exactlyOneKeyframe.value.cgFloatValue,
+          outerRadius: try context.exactlyOneKeyframe(from: star.outerRadius, description: "outerRadius").value.cgFloatValue,
+          innerRadius: try context.exactlyOneKeyframe(from: star.innerRadius, description: "innerRadius")?.value
+            .cgFloatValue ?? 0,
+          outerRoundedness: try context.exactlyOneKeyframe(from: star.outerRoundness, description: "outerRoundness").value
+            .cgFloatValue,
+          innerRoundedness: try context.exactlyOneKeyframe(from: star.innerRoundness, description: "innerRoundness")?.value
+            .cgFloatValue ?? 0,
+          numberOfPoints: try context.exactlyOneKeyframe(from: star.points, description: "points").value.cgFloatValue,
+          rotation: try context.exactlyOneKeyframe(from: star.rotation, description: "rotation").value.cgFloatValue,
           direction: star.direction)
           .cgPath()
       },
@@ -55,8 +60,9 @@ extension CAShapeLayer {
   private func addPolygonAnimation(
     for star: Star,
     context: LayerAnimationContext)
+    throws
   {
-    addAnimation(
+    try addAnimation(
       for: .path,
       keyframes: star.position.keyframes,
       value: { position in
@@ -65,10 +71,11 @@ extension CAShapeLayer {
         // TODO: Is there a way to support this properly?
         BezierPath.polygon(
           position: position.pointValue,
-          numberOfPoints: star.points.exactlyOneKeyframe.value.cgFloatValue,
-          outerRadius: star.outerRadius.exactlyOneKeyframe.value.cgFloatValue,
-          outerRoundedness: star.outerRoundness.exactlyOneKeyframe.value.cgFloatValue,
-          rotation: star.rotation.exactlyOneKeyframe.value.cgFloatValue,
+          numberOfPoints: try context.exactlyOneKeyframe(from: star.points, description: "numberOfPoints").value.cgFloatValue,
+          outerRadius: try context.exactlyOneKeyframe(from: star.outerRadius, description: "outerRadius").value.cgFloatValue,
+          outerRoundedness: try context.exactlyOneKeyframe(from: star.outerRoundness, description: "outerRoundedness").value
+            .cgFloatValue,
+          rotation: try context.exactlyOneKeyframe(from: star.rotation, description: "rotation").value.cgFloatValue,
           direction: star.direction)
           .cgPath()
       },

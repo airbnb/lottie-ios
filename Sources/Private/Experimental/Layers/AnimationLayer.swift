@@ -10,7 +10,7 @@ import QuartzCore
 protocol AnimationLayer: CALayer {
   /// Instructs this layer to setup its `CAAnimation`s
   /// using the given `LayerAnimationContext`
-  func setupAnimations(context: LayerAnimationContext)
+  func setupAnimations(context: LayerAnimationContext) throws
 }
 
 // MARK: - LayerAnimationContext
@@ -31,6 +31,9 @@ struct LayerAnimationContext {
 
   /// The set of custom Value Providers applied to this animation
   let valueProviderStore: ValueProviderStore
+
+  /// Information about whether or not an animation is compatible with the Core Animation engine
+  let compatibilityTracker: CompatibilityTracker
 
   /// The AnimationKeypath represented by the current layer
   var currentKeypath: AnimationKeypath
@@ -64,4 +67,66 @@ struct LayerAnimationContext {
     }
     return copy
   }
+}
+
+// MARK: - CompatibilityTracker
+
+/// A type that tracks whether or not an animation is compatible with the Core Animation engine
+struct CompatibilityTracker {
+
+  // MARK: Lifecycle
+
+  init(mode: Mode) {
+    self.mode = mode
+  }
+
+  // MARK: Internal
+
+  /// How compatibility issues should be handled
+  enum Mode {
+    /// When a compatibility issue is encountered, an error will be thrown immediately,
+    /// aborting the animation setup process as soon as possible.
+    case abort
+
+    /// When a compatibility issue is encountered, an assertion will be emitted.
+    case assertionFailure
+  }
+
+  enum Error: Swift.Error {
+    case encounteredCompatibilityIssue(String)
+  }
+
+  /// Records a compatibility issue that will be reported according to `CompatibilityTracker.Mode`
+  func logIssue(
+    _ message: String,
+    fileID: StaticString = #file,
+    line: UInt = #line)
+    throws
+  {
+    switch mode {
+    case .assertionFailure:
+      LottieLogger.shared.assertionFailure(message, fileID: fileID, line: line)
+    case .abort:
+      throw CompatibilityTracker.Error.encounteredCompatibilityIssue(message)
+    }
+  }
+
+  /// Asserts that a condition is true, otherwise logs a compatibility issue that will be reported
+  /// according to `CompatibilityTracker.Mode`
+  func assert(
+    _ condition: Bool,
+    _ message: @autoclosure () -> String,
+    fileID: StaticString = #file,
+    line: UInt = #line)
+    throws
+  {
+    if !condition {
+      try logIssue(message(), fileID: fileID, line: line)
+    }
+  }
+
+  // MARK: Private
+
+  private let mode: Mode
+
 }

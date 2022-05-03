@@ -9,8 +9,9 @@ extension CAShapeLayer {
   func addAnimations(
     for customPath: KeyframeGroup<BezierPath>,
     context: LayerAnimationContext)
+    throws
   {
-    addAnimation(
+    try addAnimation(
       for: .path,
       keyframes: customPath.keyframes,
       value: { pathKeyframe in
