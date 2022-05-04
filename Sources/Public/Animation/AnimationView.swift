@@ -910,71 +910,18 @@ final public class AnimationView: AnimationViewBase {
       return
     }
 
-    let animationLayer: RootAnimationLayer
+    let animationLayer: RootAnimationLayer?
     switch renderingEngine {
     case .automatic:
-      // Handle any compatibility issues with the Core Animation engine
-      // by falling back to the Main Thread engine
-      let didSetUpAnimation = { [weak self] (compatibilityIssues: [CompatibilityIssue]) in
-        guard let self = self else { return }
-
-        if !compatibilityIssues.isEmpty {
-          LottieLogger.shared.warn(
-            compatibilityIssues.compatibilityMessage
-            + "\nFalling back to Main Thread rendering engine.\n")
-
-          self.makeAnimationLayer(usingEngine: .mainThread)
-          // TODO: This needs to support preserving the existing playback configuration.
-          // An example of this is the animation preview in the list rows in the example app.
-        }
-      }
-
-      do {
-        // Attempt to set up the Core Animation layer. This can either throw immediately in `init`,
-        // or throw an error later in `CALayer.display()` that will be reported in `didSetUpAnimation`.
-        let coreAnimationLayer = try CoreAnimationLayer(
-          animation: animation,
-          imageProvider: imageProvider,
-          fontProvider: fontProvider,
-          compatibilityTrackerMode: .abort)
-
-        animationLayer = coreAnimationLayer
-        coreAnimationLayer.didSetUpAnimation = didSetUpAnimation
-      } catch {
-        if case CompatibilityTracker.Error.encounteredCompatibilityIssue(let compatibilityIssue) = error {
-          didSetUpAnimation([compatibilityIssue])
-        } else {
-          didSetUpAnimation([])
-        }
-
-        return
-      }
-
+      animationLayer = makeAutomaticEngineLayer(for: animation)
     case .specific(.coreAnimation):
-      do {
-        let coreAnimationLayer = try CoreAnimationLayer(
-          animation: animation,
-          imageProvider: imageProvider,
-          fontProvider: fontProvider,
-          compatibilityTrackerMode: .track)
-
-        animationLayer = coreAnimationLayer
-        coreAnimationLayer.didSetUpAnimation = { compatibilityIssues in
-          LottieLogger.shared.assert(
-            compatibilityIssues.isEmpty,
-            compatibilityIssues.compatibilityMessage)
-        }
-      } catch {
-        LottieLogger.shared.assertionFailure("Encountered unexpected error \(error)")
-        return
-      }
-
+      animationLayer = makeCoreAnimationLayer(for: animation)
     case .specific(.mainThread):
-      animationLayer = MainThreadAnimationLayer(
-        animation: animation,
-        imageProvider: imageProvider,
-        textProvider: textProvider,
-        fontProvider: fontProvider)
+      animationLayer = makeMainThreadAnimationLayer(for: animation)
+    }
+
+    guard let animationLayer = animationLayer else {
+      return
     }
 
     animationLayer.renderScale = screenScale
@@ -985,6 +932,87 @@ final public class AnimationView: AnimationViewBase {
     animationLayer.setNeedsDisplay()
     setNeedsLayout()
     currentFrame = CGFloat(animation.startFrame)
+  }
+
+  fileprivate func makeMainThreadAnimationLayer(for animation: Animation) -> MainThreadAnimationLayer {
+    MainThreadAnimationLayer(
+      animation: animation,
+      imageProvider: imageProvider,
+      textProvider: textProvider,
+      fontProvider: fontProvider)
+  }
+
+  fileprivate func makeCoreAnimationLayer(for animation: Animation) -> CoreAnimationLayer? {
+    do {
+      let coreAnimationLayer = try CoreAnimationLayer(
+        animation: animation,
+        imageProvider: imageProvider,
+        fontProvider: fontProvider,
+        compatibilityTrackerMode: .track)
+
+      coreAnimationLayer.didSetUpAnimation = { compatibilityIssues in
+        LottieLogger.shared.assert(
+          compatibilityIssues.isEmpty,
+          compatibilityIssues.compatibilityMessage)
+      }
+
+      return coreAnimationLayer
+    } catch {
+      LottieLogger.shared.assertionFailure("Encountered unexpected error \(error)")
+      return nil
+    }
+  }
+
+  fileprivate func makeAutomaticEngineLayer(for animation: Animation) -> CoreAnimationLayer? {
+    do {
+      // Attempt to set up the Core Animation layer. This can either throw immediately in `init`,
+      // or throw an error later in `CALayer.display()` that will be reported in `didSetUpAnimation`.
+      let coreAnimationLayer = try CoreAnimationLayer(
+        animation: animation,
+        imageProvider: imageProvider,
+        fontProvider: fontProvider,
+        compatibilityTrackerMode: .abort)
+
+      coreAnimationLayer.didSetUpAnimation = { [weak self] issues in
+        self?.automaticEngineLayerDidSetUpAnimation(issues)
+      }
+
+      return coreAnimationLayer
+    } catch {
+      if case CompatibilityTracker.Error.encounteredCompatibilityIssue(let compatibilityIssue) = error {
+        automaticEngineLayerDidSetUpAnimation([compatibilityIssue])
+      } else {
+        automaticEngineLayerDidSetUpAnimation([])
+      }
+
+      return nil
+    }
+  }
+
+  // Handles any compatibility issues with the Core Animation engine
+  // by falling back to the Main Thread engine
+  fileprivate func automaticEngineLayerDidSetUpAnimation(_ compatibilityIssues: [CompatibilityIssue]) {
+    // If there weren't any compatibility issues, then there's nothing else to do
+    if compatibilityIssues.isEmpty {
+      return
+    }
+
+    LottieLogger.shared.warn(
+      compatibilityIssues.compatibilityMessage
+      + "\nFalling back to Main Thread rendering engine.\n")
+
+    let animationContext = self.animationContext
+    let currentFrame = self.currentFrame
+
+    self.makeAnimationLayer(usingEngine: .mainThread)
+
+    // Set up the Main Thread animation layer using the same configuration that
+    // was being used by the previous Core Animation layer
+    self.currentFrame = currentFrame
+
+    if let animationContext = animationContext {
+      self.addNewAnimationForContext(animationContext)
+    }
   }
 
   fileprivate func updateAnimationForBackgroundState() {

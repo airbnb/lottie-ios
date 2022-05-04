@@ -124,6 +124,10 @@ final class CoreAnimationLayer: BaseAnimationLayer {
         try setupAnimation(for: pendingAnimationConfiguration.animationConfiguration)
       } catch {
         if case CompatibilityTracker.Error.encounteredCompatibilityIssue(let compatibilityIssue) = error {
+          // Even though the animation setup failed, we still update the layer's playback state
+          // so it can be read by the parent `AnimationView` when handling this error
+          currentPlaybackState = pendingAnimationConfiguration.playbackState
+
           didSetUpAnimation?([compatibilityIssue])
           return
         }

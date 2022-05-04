@@ -26,37 +26,3 @@ final class Configuration {
   }
 
 }
-
-// MARK: - RenderingEngineOption + RawRepresentable
-
-extension RenderingEngineOption: RawRepresentable {
-
-  // MARK: Lifecycle
-
-  public init?(rawValue: String) {
-    switch rawValue {
-    case "Automatic":
-      self = .automatic
-    case "Main Thread":
-      self = .mainThread
-    case "Core Animation":
-      self = .coreAnimation
-    default:
-      return nil
-    }
-  }
-
-  // MARK: Public
-
-  public var rawValue: String {
-    switch self {
-    case .automatic:
-      return "Automatic"
-    case .specific(.mainThread):
-      return "Main Thread"
-    case .specific(.coreAnimation):
-      return "Core Animation"
-    }
-  }
-
-}

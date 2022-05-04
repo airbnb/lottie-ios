@@ -9,21 +9,22 @@ import XCTest
 
 final class AutomaticEngineTests: XCTestCase {
 
-  /// Snapshot test for the result of `animation.supportedByCoreAnimationEngine`
+  /// Snapshot tests for whether or not each sample animation supports the Core Animation engine
   func testAutomaticEngineDetection() throws {
     for sampleAnimationName in Samples.sampleAnimationNames {
       guard let animation = Samples.animation(named: sampleAnimationName) else { continue }
 
       var compatibilityIssues = [CompatibilityIssue]()
 
-      let animationLayer = CoreAnimationLayer(
+      let animationLayer = try XCTUnwrap(CoreAnimationLayer(
         animation: animation,
         imageProvider: BundleImageProvider(bundle: Bundle.main, searchPath: nil),
         fontProvider: DefaultFontProvider(),
-        compatibilityTrackerMode: .track,
-        didSetUpAnimation: { issues in
-          compatibilityIssues = issues
-        })
+        compatibilityTrackerMode: .track))
+
+      animationLayer.didSetUpAnimation = { issues in
+        compatibilityIssues = issues
+      }
 
       animationLayer.bounds = CGRect(origin: .zero, size: animation.size)
       animationLayer.layoutIfNeeded()

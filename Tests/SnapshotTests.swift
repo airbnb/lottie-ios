@@ -26,6 +26,11 @@ class SnapshotTests: XCTestCase {
     try compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .coreAnimation))
   }
 
+  /// Snapshots sample animation files using the automatic rendering engine option
+  func testAutomaticRenderingEngine() throws {
+    try compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .automatic))
+  }
+
   /// Validates that all of the snapshots in __Snapshots__ correspond to
   /// a sample JSON file that is visible to this test target.
   func testAllSnapshotsHaveCorrespondingSampleFile() {
@@ -36,6 +41,7 @@ class SnapshotTests: XCTestCase {
       var animationName = snapshotURL.lastPathComponent
         .replacingOccurrences(of: "testMainThreadRenderingEngine.", with: "")
         .replacingOccurrences(of: "testCoreAnimationRenderingEngine.", with: "")
+        .replacingOccurrences(of: "testAutomaticRenderingEngine.", with: "")
 
       for percentage in progressPercentagesToSnapshot {
         animationName = animationName.replacingOccurrences(
@@ -220,11 +226,12 @@ extension SnapshotConfiguration {
     configuration: LottieConfiguration)
     -> AnimationView?
   {
-    guard let animation = Samples.animation(named: sampleAnimationName) else {
-      return nil
-    }
-
     let snapshotConfiguration = SnapshotConfiguration.forSample(named: sampleAnimationName)
+
+    guard
+      snapshotConfiguration.shouldSnapshot(using: configuration),
+      let animation = Samples.animation(named: sampleAnimationName)
+    else { return nil }
 
     let animationView = AnimationView(
       animation: animation,
