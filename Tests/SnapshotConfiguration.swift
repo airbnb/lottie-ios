@@ -80,6 +80,12 @@ extension SnapshotConfiguration {
   /// The default configuration to use if no custom mapping is provided
   static let `default` = SnapshotConfiguration()
 
+  static var useAutomaticRenderingEngine: SnapshotConfiguration {
+    var configuration = SnapshotConfiguration.default
+    configuration.testWithAutomaticEngine = true
+    return configuration
+  }
+
   /// The `SnapshotConfiguration` to use for the given sample JSON file name
   static func forSample(named sampleName: String) -> SnapshotConfiguration {
     if let customConfiguration = customMapping[sampleName] {
@@ -87,12 +93,6 @@ extension SnapshotConfiguration {
     } else {
       return .default
     }
-  }
-
-  static var useAutomaticRenderingEngine: SnapshotConfiguration {
-    var configuration = SnapshotConfiguration.default
-    configuration.testWithAutomaticEngine = true
-    return configuration
   }
 
   /// A `SnapshotConfiguration` value with `precision` customized to the given value

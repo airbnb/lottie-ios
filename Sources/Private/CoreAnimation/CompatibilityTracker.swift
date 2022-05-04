@@ -130,8 +130,8 @@ extension LayerAnimationContext: CompatibilityTrackerProviding {
 extension Array where Element == CompatibilityIssue {
   var compatibilityMessage: String {
     let lines = ["Encountered Core Animation compatibility issues while setting up animation:"]
-    + map { $0.description }
+      + map { $0.description }
 
-      return lines.joined(separator: "\n")
+    return lines.joined(separator: "\n")
   }
 }

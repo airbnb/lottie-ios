@@ -56,7 +56,7 @@ public enum RenderingEngine: Hashable {
   case coreAnimation
 }
 
-// MARK: - RenderingEngineOption + RawRepresentable
+// MARK: - RenderingEngineOption + RawRepresentable, CustomStringConvertible
 
 extension RenderingEngineOption: RawRepresentable, CustomStringConvertible {
 

@@ -999,19 +999,19 @@ final public class AnimationView: AnimationViewBase {
 
     LottieLogger.shared.warn(
       compatibilityIssues.compatibilityMessage
-      + "\nFalling back to Main Thread rendering engine.\n")
+        + "\nFalling back to Main Thread rendering engine.\n")
 
     let animationContext = self.animationContext
     let currentFrame = self.currentFrame
 
-    self.makeAnimationLayer(usingEngine: .mainThread)
+    makeAnimationLayer(usingEngine: .mainThread)
 
     // Set up the Main Thread animation layer using the same configuration that
     // was being used by the previous Core Animation layer
     self.currentFrame = currentFrame
 
     if let animationContext = animationContext {
-      self.addNewAnimationForContext(animationContext)
+      addNewAnimationForContext(animationContext)
     }
   }
 
@@ -1210,6 +1210,9 @@ final public class AnimationView: AnimationViewBase {
 
   static private let animationName = "Lottie"
 
+  /// The `LottieBackgroundBehavior` that was specified manually by setting `self.backgroundBehavior`
+  private var _backgroundBehavior: LottieBackgroundBehavior?
+
   /// The rendering engine currently being used by this view.
   /// This will be `nil` in cases where the configuration is `automatic`
   /// but a `RootAnimationLayer` hasn't been constructed yet
@@ -1230,9 +1233,6 @@ final public class AnimationView: AnimationViewBase {
       }
     }
   }
-
-  /// The `LottieBackgroundBehavior` that was specified manually by setting `self.backgroundBehavior`
-  private var _backgroundBehavior: LottieBackgroundBehavior?
 
 }
 

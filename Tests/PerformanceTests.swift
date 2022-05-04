@@ -108,7 +108,7 @@ final class PerformanceTests: XCTestCase {
 
     print("\(engineA) engine took \(engineAPerformance) seconds")
 
-    let engineBPerformance  = measurePerformance {
+    let engineBPerformance = measurePerformance {
       for _ in 0..<iterations {
         // Each animation setup needs to be wrapped in its own `CATransaction`
         // in order for the layers to be deallocated immediately. Otherwise
