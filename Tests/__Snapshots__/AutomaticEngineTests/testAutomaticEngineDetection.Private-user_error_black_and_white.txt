@@ -1,1 +1,2 @@
-Supports Core Animation engine
+Does not support Core Animation engine. Encountered compatibility issues:
+[Phone_FLash.Phone_FLash] Mixed `isHold` / `!isHold` keyframes are currently unsupported

@@ -32,7 +32,9 @@ final class ValueProviderStore {
   // if an `AnyValueProvider` was registered for the given keypath.
   func customKeyframes<Value>(
     of customizableProperty: CustomizableProperty<Value>,
-    for keypath: AnimationKeypath)
+    for keypath: AnimationKeypath,
+    context: LayerAnimationContext)
+    throws
     -> KeyframeGroup<Value>?
   {
     guard let anyValueProvider = valueProvider(for: keypath) else {
@@ -49,7 +51,7 @@ final class ValueProviderStore {
       typeErasedKeyframes = keyframes
 
     case .closure:
-      LottieLogger.shared.assertionFailure("""
+      try context.logCompatibilityIssue("""
         The Core Animation rendering engine doesn't support Value Providers that vend a closure,
         because that would require calling the closure on the main thread once per frame.
         """)

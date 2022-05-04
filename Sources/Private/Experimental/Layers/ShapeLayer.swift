@@ -10,10 +10,10 @@ final class ShapeLayer: BaseCompositionLayer {
 
   // MARK: Lifecycle
 
-  init(shapeLayer: ShapeLayerModel) {
+  init(shapeLayer: ShapeLayerModel, context: LayerContext) throws {
     self.shapeLayer = shapeLayer
     super.init(layerModel: shapeLayer)
-    setupGroups(from: shapeLayer.items, parentGroup: nil)
+    try setupGroups(from: shapeLayer.items, parentGroup: nil, context: context)
   }
 
   required init?(coder _: NSCoder) {
@@ -44,11 +44,11 @@ final class GroupLayer: BaseAnimationLayer {
 
   // MARK: Lifecycle
 
-  init(group: Group, inheritedItems: [ShapeItemLayer.Item]) {
+  init(group: Group, inheritedItems: [ShapeItemLayer.Item], context: LayerContext) throws {
     self.group = group
     self.inheritedItems = inheritedItems
     super.init()
-    setupLayerHierarchy()
+    try setupLayerHierarchy(context: context)
   }
 
   required init?(coder _: NSCoder) {
@@ -75,10 +75,10 @@ final class GroupLayer: BaseAnimationLayer {
   ///   - This layer's parent is either the root `ShapeLayerModel` or some other `Group`
   private let inheritedItems: [ShapeItemLayer.Item]
 
-  private func setupLayerHierarchy() {
+  private func setupLayerHierarchy(context: LayerContext) throws {
     // Groups can contain other groups, so we may have to continue
     // recursively creating more `GroupLayer`s
-    setupGroups(from: group.items, parentGroup: group)
+    try setupGroups(from: group.items, parentGroup: group, context: context)
 
     let nonGroupItems = group.items
       .filter { !($0 is Group) }
@@ -108,9 +108,10 @@ final class GroupLayer: BaseAnimationLayer {
         shapes: combinedShapeKeyframes,
         name: group.name)
 
-      let sublayer = ShapeItemLayer(
+      let sublayer = try ShapeItemLayer(
         shape: ShapeItemLayer.Item(item: combinedShape, parentGroup: group),
-        otherItems: otherItemsInGroup)
+        otherItems: otherItemsInGroup,
+        context: context)
 
       addSublayer(sublayer)
     }
@@ -119,7 +120,7 @@ final class GroupLayer: BaseAnimationLayer {
     // we have to create a separate `ShapeItemLayer` for each one.
     else {
       for pathDrawingItem in pathDrawingItemsInGroup {
-        let sublayer = ShapeItemLayer(shape: pathDrawingItem, otherItems: otherItemsInGroup)
+        let sublayer = try ShapeItemLayer(shape: pathDrawingItem, otherItems: otherItemsInGroup, context: context)
         addSublayer(sublayer)
       }
     }
@@ -131,7 +132,7 @@ extension CALayer {
   /// Sets up `GroupLayer`s for each `Group` in the given list of `ShapeItem`s
   ///  - Each `Group` item becomes its own `GroupLayer` sublayer.
   ///  - Other `ShapeItem` are applied to all sublayers
-  fileprivate func setupGroups(from items: [ShapeItem], parentGroup: Group?) {
+  fileprivate func setupGroups(from items: [ShapeItem], parentGroup: Group?, context: LayerContext) throws {
     let (groupItems, otherItems) = items.grouped(by: { $0 is Group })
 
     // Groups are listed from front to back,
@@ -141,11 +142,12 @@ extension CALayer {
     for group in groupsInZAxisOrder {
       guard let group = group as? Group else { continue }
 
-      let groupLayer = GroupLayer(
+      let groupLayer = try GroupLayer(
         group: group,
         inheritedItems: Array(otherItems.map {
           ShapeItemLayer.Item(item: $0, parentGroup: parentGroup)
-        }))
+        }),
+        context: context)
 
       addSublayer(groupLayer)
     }

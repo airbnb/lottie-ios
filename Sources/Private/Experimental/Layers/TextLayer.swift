@@ -11,11 +11,12 @@ final class TextLayer: BaseCompositionLayer {
   init(
     textLayerModel: TextLayerModel,
     context: LayerContext)
+    throws
   {
     self.textLayerModel = textLayerModel
     super.init(layerModel: textLayerModel)
     setupSublayers()
-    configureRenderLayer(with: context)
+    try configureRenderLayer(with: context)
   }
 
   required init?(coder _: NSCoder) {
@@ -35,12 +36,12 @@ final class TextLayer: BaseCompositionLayer {
 
   // MARK: Internal
 
-  func configureRenderLayer(with context: LayerContext) {
+  func configureRenderLayer(with context: LayerContext) throws {
     // We can't use `CATextLayer`, because it doesn't support enough features we use.
     // Instead, we use the same `CoreTextRenderLayer` (with a custom `draw` implementation)
     // used by the Main Thread rendering engine. This means the Core Animation engine can't
     // _animate_ text properties, but it can display static text without any issues.
-    let text = textLayerModel.text.exactlyOneKeyframe.value
+    let text = try textLayerModel.text.exactlyOneKeyframe(context: context, description: "text layer text").value
 
     // The Core Animation engine doesn't currently support `TextAnimator`s.
     //  - We could add support for animating the transform-related properties without much trouble.
@@ -48,7 +49,7 @@ final class TextLayer: BaseCompositionLayer {
     //    or masks (e.g. use `CoreTextRenderLayer` to draw black glyphs, and then fill them in
     //    using a `CAShapeLayer`).
     if !textLayerModel.animators.isEmpty {
-      LottieLogger.shared.assertionFailure("""
+      try context.logCompatibilityIssue("""
         The Core Animation rendering engine currently doesn't support text animators.
         """)
     }

@@ -78,10 +78,7 @@ final class SampleListViewController: CollectionViewController {
           dataID: animationName,
           content: .init(
             animationName: animationPath,
-            title: animationName,
-            subtitle: Animation.named(animationPath)?.supportedByCoreAnimationEngine == true
-              ? "Supports Core Animation"
-              : nil))
+            title: animationName))
           .didSelect { [weak self] context in
             self?.show(
               AnimationPreviewViewController(animationPath),

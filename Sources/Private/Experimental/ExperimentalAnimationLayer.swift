@@ -16,15 +16,29 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
   init(
     animation: Animation,
     imageProvider: AnimationImageProvider,
-    fontProvider: AnimationFontProvider)
+    fontProvider: AnimationFontProvider,
+    compatibilityTrackerMode: CompatibilityTracker.Mode,
+    didSetUpAnimation: (([CompatibilityIssue]) -> Void)? = nil)
   {
     self.animation = animation
     self.imageProvider = imageProvider
     self.fontProvider = fontProvider
+    self.didSetUpAnimation = didSetUpAnimation
+    compatibilityTracker = CompatibilityTracker(mode: compatibilityTrackerMode)
     super.init()
 
     setup()
-    setupChildLayers()
+
+    do {
+      try setupChildLayers()
+    } catch {
+      if case CompatibilityTracker.Error.encounteredCompatibilityIssue(let compatibilityIssue) = error {
+        // If the initial layer setup was successful, then the animation will continue
+        // being setup later in `CALayer.display()` below. If this initial setup failed,
+        // then we report the error now.
+        didSetUpAnimation?([compatibilityIssue])
+      }
+    }
   }
 
   /// Called by CoreAnimation to create a shadow copy of this layer
@@ -38,6 +52,8 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
     currentAnimationConfiguration = typedLayer.currentAnimationConfiguration
     imageProvider = typedLayer.imageProvider
     fontProvider = typedLayer.fontProvider
+    didSetUpAnimation = typedLayer.didSetUpAnimation
+    compatibilityTracker = typedLayer.compatibilityTracker
     super.init(layer: typedLayer)
   }
 
@@ -62,6 +78,11 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
     /// The animation is statically displaying a specific frame
     case paused(frame: AnimationFrameTime)
   }
+
+  /// A closure that is called after this layer sets up its animation.
+  /// If the animation setup was unsuccessful and encountered compatibility issues,
+  /// those issues are included in this call.
+  var didSetUpAnimation: (([CompatibilityIssue]) -> Void)?
 
   /// The `AnimationImageProvider` that `ImageLayer`s use to retrieve images,
   /// referenced by name in the animation json.
@@ -111,8 +132,21 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
 
     if let pendingAnimationConfiguration = pendingAnimationConfiguration {
       self.pendingAnimationConfiguration = nil
-      setupAnimation(for: pendingAnimationConfiguration.animationConfiguration)
+
+      do {
+        try setupAnimation(for: pendingAnimationConfiguration.animationConfiguration)
+      } catch {
+        if case CompatibilityTracker.Error.encounteredCompatibilityIssue(let compatibilityIssue) = error {
+          didSetUpAnimation?([compatibilityIssue])
+          return
+        }
+      }
+
       currentPlaybackState = pendingAnimationConfiguration.playbackState
+
+      compatibilityTracker.reportCompatibilityIssues { compatibilityIssues in
+        didSetUpAnimation?(compatibilityIssues)
+      }
     }
   }
 
@@ -138,6 +172,7 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
 
   private let animation: Animation
   private let valueProviderStore = ValueProviderStore()
+  private let compatibilityTracker: CompatibilityTracker
 
   /// The current playback state of the animation that is displayed in this layer
   private var currentPlaybackState: PlaybackState? {
@@ -163,21 +198,23 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
     LayerContext(
       animation: animation,
       imageProvider: imageProvider,
-      fontProvider: fontProvider)
+      fontProvider: fontProvider,
+      compatibilityTracker: compatibilityTracker,
+      layerName: "root layer")
   }
 
   private func setup() {
     bounds = animation.bounds
   }
 
-  private func setupChildLayers() {
-    setupLayerHierarchy(
+  private func setupChildLayers() throws {
+    try setupLayerHierarchy(
       for: animation.layers,
       context: layerContext)
   }
 
   /// Immediately builds and begins playing `CAAnimation`s for each sublayer
-  private func setupAnimation(for configuration: AnimationConfiguration) {
+  private func setupAnimation(for configuration: AnimationConfiguration) throws {
     // Remove any existing animations from the layer hierarchy
     removeAnimations()
 
@@ -189,6 +226,7 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
       startFrame: configuration.animationContext.playFrom,
       endFrame: configuration.animationContext.playTo,
       valueProviderStore: valueProviderStore,
+      compatibilityTracker: compatibilityTracker,
       currentKeypath: AnimationKeypath(keys: []))
 
     // Perform a layout pass if necessary so all of the sublayers
@@ -205,7 +243,7 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
 
     // Set up the new animations with the current `TimingConfiguration`
     for animationLayer in sublayers ?? [] {
-      (animationLayer as? AnimationLayer)?.setupAnimations(context: layerContext)
+      try (animationLayer as? AnimationLayer)?.setupAnimations(context: layerContext)
     }
   }
 
@@ -331,7 +369,7 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
     // so they can query the most up-to-date font from the new font provider.
     for sublayer in allSublayers {
       if let textLayer = sublayer as? TextLayer {
-        textLayer.configureRenderLayer(with: layerContext)
+        try? textLayer.configureRenderLayer(with: layerContext)
       }
     }
   }

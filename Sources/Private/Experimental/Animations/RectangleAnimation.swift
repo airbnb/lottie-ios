@@ -9,15 +9,18 @@ extension CAShapeLayer {
   func addAnimations(
     for rectangle: Rectangle,
     context: LayerAnimationContext)
+    throws
   {
-    addAnimation(
+    try addAnimation(
       for: .path,
       keyframes: rectangle.size.keyframes,
       value: { sizeKeyframe in
         BezierPath.rectangle(
-          position: rectangle.position.exactlyOneKeyframe.value.pointValue,
+          position: try rectangle.position
+            .exactlyOneKeyframe(context: context, description: "rectangle position").value.pointValue,
           size: sizeKeyframe.sizeValue,
-          cornerRadius: rectangle.cornerRadius.exactlyOneKeyframe.value.cgFloatValue,
+          cornerRadius: try rectangle.cornerRadius
+            .exactlyOneKeyframe(context: context, description: "rectangle cornerRadius").value.cgFloatValue,
           direction: rectangle.direction)
           .cgPath()
       },

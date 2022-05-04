@@ -13,6 +13,7 @@ final class PreCompLayer: BaseCompositionLayer {
   init(
     preCompLayer: PreCompLayerModel,
     context: LayerContext)
+    throws
   {
     self.preCompLayer = preCompLayer
 
@@ -24,7 +25,7 @@ final class PreCompLayer: BaseCompositionLayer {
 
     super.init(layerModel: preCompLayer)
 
-    setupLayerHierarchy(
+    try setupLayerHierarchy(
       for: context.animation.assetLibrary?.precompAssets[preCompLayer.referenceID]?.layers ?? [],
       context: context)
   }
@@ -47,10 +48,10 @@ final class PreCompLayer: BaseCompositionLayer {
 
   // MARK: Internal
 
-  override func setupAnimations(context: LayerAnimationContext) {
+  override func setupAnimations(context: LayerAnimationContext) throws {
     var context = context
     context = context.addingKeypathComponent(preCompLayer.name)
-    setupLayerAnimations(context: context)
+    try setupLayerAnimations(context: context)
 
     // Precomp layers can adjust the local time of their child layers (relative to the
     // animation's global time) via `timeRemapping` or a custom `startTime`
@@ -62,7 +63,7 @@ final class PreCompLayer: BaseCompositionLayer {
       }
     }
 
-    setupChildAnimations(context: contextForChildren)
+    try setupChildAnimations(context: contextForChildren)
   }
 
   // MARK: Private

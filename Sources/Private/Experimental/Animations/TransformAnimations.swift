@@ -58,17 +58,17 @@ extension CALayer {
   ///  - This _doesn't_ apply `transform.opacity`, which has to be handled separately
   ///    since child layers don't inherit the `opacity` of their parent.
   @nonobjc
-  func addTransformAnimations(for transformModel: TransformModel, context: LayerAnimationContext) {
-    addPositionAnimations(from: transformModel, context: context)
-    addAnchorPointAnimation(from: transformModel, context: context)
-    addScaleAnimations(from: transformModel, context: context)
-    addRotationAnimation(from: transformModel, context: context)
+  func addTransformAnimations(for transformModel: TransformModel, context: LayerAnimationContext) throws {
+    try addPositionAnimations(from: transformModel, context: context)
+    try addAnchorPointAnimation(from: transformModel, context: context)
+    try addScaleAnimations(from: transformModel, context: context)
+    try addRotationAnimation(from: transformModel, context: context)
   }
 
   /// Adds the opacity animation from the given `TransformModel` to this layer
   @nonobjc
-  func addOpacityAnimation(from transformModel: TransformModel, context: LayerAnimationContext) {
-    addAnimation(
+  func addOpacityAnimation(from transformModel: TransformModel, context: LayerAnimationContext) throws {
+    try addAnimation(
       for: .opacity,
       keyframes: transformModel.opacity.keyframes,
       value: {
@@ -86,9 +86,10 @@ extension CALayer {
   private func addPositionAnimations(
     from transformModel: TransformModel,
     context: LayerAnimationContext)
+    throws
   {
     if let positionKeyframes = transformModel._position?.keyframes {
-      addAnimation(
+      try addAnimation(
         for: .position,
         keyframes: positionKeyframes,
         value: \.pointValue,
@@ -97,19 +98,19 @@ extension CALayer {
       let xKeyframes = transformModel._positionX?.keyframes,
       let yKeyframes = transformModel._positionY?.keyframes
     {
-      addAnimation(
+      try addAnimation(
         for: .positionX,
         keyframes: xKeyframes,
         value: \.cgFloatValue,
         context: context)
 
-      addAnimation(
+      try addAnimation(
         for: .positionY,
         keyframes: yKeyframes,
         value: \.cgFloatValue,
         context: context)
     } else {
-      LottieLogger.shared.assertionFailure("""
+      try context.logCompatibilityIssue("""
         `Transform` values must provide either `position` or `positionX` / `positionY` keyframes
         """)
     }
@@ -119,8 +120,9 @@ extension CALayer {
   private func addAnchorPointAnimation(
     from transformModel: TransformModel,
     context: LayerAnimationContext)
+    throws
   {
-    addAnimation(
+    try addAnimation(
       for: .anchorPoint,
       keyframes: transformModel.anchorPoint.keyframes,
       value: { absoluteAnchorPoint in
@@ -143,8 +145,9 @@ extension CALayer {
   private func addScaleAnimations(
     from transformModel: TransformModel,
     context: LayerAnimationContext)
+    throws
   {
-    addAnimation(
+    try addAnimation(
       for: .scaleX,
       keyframes: transformModel.scale.keyframes,
       value: { scale in
@@ -172,7 +175,7 @@ extension CALayer {
           """)
       }
     } else {
-      addAnimation(
+      try addAnimation(
         for: .rotationY,
         keyframes: transformModel.scale.keyframes,
         value: { scale in
@@ -185,7 +188,7 @@ extension CALayer {
         context: context)
     }
 
-    addAnimation(
+    try addAnimation(
       for: .scaleY,
       keyframes: transformModel.scale.keyframes,
       value: { scale in
@@ -203,8 +206,9 @@ extension CALayer {
   private func addRotationAnimation(
     from transformModel: TransformModel,
     context: LayerAnimationContext)
+    throws
   {
-    addAnimation(
+    try addAnimation(
       for: .rotation,
       keyframes: transformModel.rotation.keyframes,
       value: { rotationDegrees in

@@ -34,31 +34,32 @@ extension GradientStroke: StrokeShapeItem {
 extension CAShapeLayer {
   /// Adds animations for properties related to the given `Stroke` object (`strokeColor`, `lineWidth`, etc)
   @nonobjc
-  func addStrokeAnimations(for stroke: StrokeShapeItem, context: LayerAnimationContext) {
+  func addStrokeAnimations(for stroke: StrokeShapeItem, context: LayerAnimationContext) throws {
     lineJoin = stroke.lineJoin.caLineJoin
     lineCap = stroke.lineCap.caLineCap
     miterLimit = CGFloat(stroke.miterLimit)
 
     if let strokeColor = stroke.strokeColor {
-      addAnimation(
+      try addAnimation(
         for: .strokeColor,
         keyframes: strokeColor.keyframes,
         value: \.cgColorValue,
         context: context)
     }
 
-    addAnimation(
+    try addAnimation(
       for: .lineWidth,
       keyframes: stroke.width.keyframes,
       value: \.cgFloatValue,
       context: context)
 
     if let (dashPattern, dashPhase) = stroke.dashPattern?.shapeLayerConfiguration {
-      lineDashPattern = dashPattern.map {
-        KeyframeGroup(keyframes: $0).exactlyOneKeyframe.value.cgFloatValue as NSNumber
+      lineDashPattern = try dashPattern.map {
+        try KeyframeGroup(keyframes: $0)
+          .exactlyOneKeyframe(context: context, description: "stroke dashPattern").value.cgFloatValue as NSNumber
       }
 
-      addAnimation(
+      try addAnimation(
         for: .lineDashPhase,
         keyframes: dashPhase,
         value: \.cgFloatValue,

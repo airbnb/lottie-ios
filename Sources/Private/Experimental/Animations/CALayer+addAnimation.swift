@@ -13,15 +13,16 @@ extension CALayer {
   func addAnimation<KeyframeValue, ValueRepresentation: Equatable>(
     for property: LayerProperty<ValueRepresentation>,
     keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
-    value keyframeValueMapping: (KeyframeValue) -> ValueRepresentation,
+    value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
     context: LayerAnimationContext)
+    throws
   {
-    if let customAnimation = customizedAnimation(for: property, context: context) {
+    if let customAnimation = try customizedAnimation(for: property, context: context) {
       add(customAnimation, timedWith: context)
     }
 
     else if
-      let defaultAnimation = defaultAnimation(
+      let defaultAnimation = try defaultAnimation(
         for: property,
         keyframes: keyframes,
         value: keyframeValueMapping,
@@ -40,8 +41,9 @@ extension CALayer {
   private func defaultAnimation<KeyframeValue, ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
     keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
-    value keyframeValueMapping: (KeyframeValue) -> ValueRepresentation,
+    value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
     context: LayerAnimationContext)
+    throws
     -> CAPropertyAnimation?
   {
     guard !keyframes.isEmpty else { return nil }
@@ -50,7 +52,7 @@ extension CALayer {
     // by applying that value directly to the layer instead of creating
     // a relatively expensive `CAKeyframeAnimation`.
     if keyframes.count == 1 {
-      let keyframeValue = keyframeValueMapping(keyframes[0].value)
+      let keyframeValue = try keyframeValueMapping(keyframes[0].value)
 
       // If the keyframe value is the same as the layer's default value for this property,
       // then we can just ignore this set of keyframes.
@@ -78,7 +80,7 @@ extension CALayer {
       return animation
     }
 
-    return keyframeAnimation(
+    return try keyframeAnimation(
       for: property,
       keyframes: keyframes,
       value: keyframeValueMapping,
@@ -92,19 +94,21 @@ extension CALayer {
   private func customizedAnimation<ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
     context: LayerAnimationContext)
+    throws
     -> CAPropertyAnimation?
   {
     guard
       let customizableProperty = property.customizableProperty,
-      let customKeyframes = context.valueProviderStore.customKeyframes(
+      let customKeyframes = try context.valueProviderStore.customKeyframes(
         of: customizableProperty,
-        for: AnimationKeypath(keys: context.currentKeypath.keys + customizableProperty.name.map { $0.rawValue }))
+        for: AnimationKeypath(keys: context.currentKeypath.keys + customizableProperty.name.map { $0.rawValue }),
+        context: context)
     else { return nil }
 
     // Since custom animations are overriding an existing animation,
     // we always have to create a CAKeyframeAnimation for these instead of
     // letting `defaultAnimation(...)` try to apply the value using KVC.
-    return keyframeAnimation(
+    return try keyframeAnimation(
       for: property,
       keyframes: customKeyframes.keyframes,
       value: { $0 },
@@ -115,14 +119,15 @@ extension CALayer {
   private func keyframeAnimation<KeyframeValue, ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
     keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
-    value keyframeValueMapping: (KeyframeValue) -> ValueRepresentation,
+    value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
     context: LayerAnimationContext)
+    throws
     -> CAKeyframeAnimation
   {
     // Convert the list of `Keyframe<T>` into
     // the representation used by `CAKeyframeAnimation`
-    var values = keyframes.map { keyframeModel in
-      keyframeValueMapping(keyframeModel.value)
+    var values = try keyframes.map { keyframeModel in
+      try keyframeValueMapping(keyframeModel.value)
     }
 
     var keyTimes = keyframes.map { keyframeModel -> NSNumber in
@@ -130,7 +135,7 @@ extension CALayer {
     }
 
     var timingFunctions = self.timingFunctions(for: keyframes)
-    let calculationMode = self.calculationMode(for: keyframes)
+    let calculationMode = try self.calculationMode(for: keyframes, context: context)
 
     validate(values: &values, keyTimes: &keyTimes, timingFunctions: &timingFunctions, for: calculationMode)
 
@@ -145,7 +150,9 @@ extension CALayer {
   /// The `CAAnimationCalculationMode` that should be used for a `CAKeyframeAnimation`
   /// animating the given keyframes
   private func calculationMode<KeyframeValue>(
-    for keyframes: ContiguousArray<Keyframe<KeyframeValue>>)
+    for keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
+    context: LayerAnimationContext)
+    throws
     -> CAAnimationCalculationMode
   {
     // Animations using `isHold` should use `CAAnimationCalculationMode.discrete`
@@ -164,7 +171,7 @@ extension CALayer {
       if intermediateKeyframes.allSatisfy(\.isHold) {
         return .discrete
       } else {
-        LottieLogger.shared.warn("Mixed `isHold` / `!isHold` keyframes are currently unsupported")
+        try context.logCompatibilityIssue("Mixed `isHold` / `!isHold` keyframes are currently unsupported")
       }
     }
 

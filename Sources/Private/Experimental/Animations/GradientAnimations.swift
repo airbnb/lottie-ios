@@ -30,14 +30,14 @@ extension GradientRenderLayer {
   // MARK: Internal
 
   /// Adds gradient-related animations to this layer, from the given `GradientFill`
-  func addGradientAnimations(for gradient: GradientShapeItem, context: LayerAnimationContext) {
+  func addGradientAnimations(for gradient: GradientShapeItem, context: LayerAnimationContext) throws {
     // We have to set `colors` to a non-nil value with some valid number of colors
     // for the color animation below to have any effect
     colors = .init(
       repeating: CGColor.rgb(0, 0, 0),
       count: gradient.numberOfColors)
 
-    addAnimation(
+    try addAnimation(
       for: .colors,
       keyframes: gradient.colors.keyframes,
       value: { colorComponents in
@@ -45,7 +45,7 @@ extension GradientRenderLayer {
       },
       context: context)
 
-    addAnimation(
+    try addAnimation(
       for: .locations,
       keyframes: gradient.colors.keyframes,
       value: { colorComponents in
@@ -55,9 +55,9 @@ extension GradientRenderLayer {
 
     switch gradient.gradientType {
     case .linear:
-      addLinearGradientAnimations(for: gradient, context: context)
+      try addLinearGradientAnimations(for: gradient, context: context)
     case .radial:
-      addRadialGradientAnimations(for: gradient)
+      try addRadialGradientAnimations(for: gradient, context: context)
     case .none:
       break
     }
@@ -68,10 +68,11 @@ extension GradientRenderLayer {
   private func addLinearGradientAnimations(
     for gradient: GradientShapeItem,
     context: LayerAnimationContext)
+    throws
   {
     type = .axial
 
-    addAnimation(
+    try addAnimation(
       for: .startPoint,
       keyframes: gradient.startPoint.keyframes,
       value: { absoluteStartPoint in
@@ -79,7 +80,7 @@ extension GradientRenderLayer {
       },
       context: context)
 
-    addAnimation(
+    try addAnimation(
       for: .endPoint,
       keyframes: gradient.endPoint.keyframes,
       value: { absoluteEndPoint in
@@ -88,15 +89,18 @@ extension GradientRenderLayer {
       context: context)
   }
 
-  private func addRadialGradientAnimations(for gradient: GradientShapeItem) {
+  private func addRadialGradientAnimations(for gradient: GradientShapeItem, context: LayerAnimationContext) throws {
     type = .radial
 
     // To draw the correct gradients, we have to derive a custom `endPoint`
     // relative to the `startPoint` value. Since calculating the `endPoint`
     // at any given time requires knowing the current `startPoint`,
     // we can't allow them to animate separately.
-    let absoluteStartPoint = gradient.startPoint.exactlyOneKeyframe.value.pointValue
-    let absoluteEndPoint = gradient.endPoint.exactlyOneKeyframe.value.pointValue
+    let absoluteStartPoint = try gradient.startPoint
+      .exactlyOneKeyframe(context: context, description: "gradient startPoint").value.pointValue
+
+    let absoluteEndPoint = try gradient.endPoint
+      .exactlyOneKeyframe(context: context, description: "gradient endPoint").value.pointValue
 
     startPoint = percentBasedPointInBounds(from: absoluteStartPoint)
 

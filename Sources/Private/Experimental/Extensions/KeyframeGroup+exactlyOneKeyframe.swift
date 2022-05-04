@@ -1,6 +1,8 @@
 // Created by Cal Stephens on 1/11/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+// MARK: - KeyframeGroup + exactlyOneKeyframe
+
 extension KeyframeGroup {
   /// Retrieves the first `Keyframe` from this group,
   /// and asserts that there are not any extra keyframes that would be ignored
@@ -15,12 +17,19 @@ extension KeyframeGroup {
   ///  - In those sorts of cases, we currently choose one one `KeyframeGroup` to provide the
   ///    timing information, and disallow simultaneous animations on the other properties.
   ///
-  var exactlyOneKeyframe: Keyframe<T> {
-    LottieLogger.shared.assert(
+  func exactlyOneKeyframe(
+    context: CompatibilityTrackerProviding,
+    description: String,
+    fileID _: StaticString = #fileID,
+    line _: UInt = #line)
+    throws
+    -> Keyframe<T>
+  {
+    try context.compatibilityAssert(
       keyframes.count == 1,
       """
-      The experimental rendering engine does not support animating multiple keyframes
-      for this value (due to limitations of Core Animation `CAKeyframeAnimation`s).
+      The Core Animation rendering engine does not support animating multiple keyframes
+      for \(description) values (due to limitations of Core Animation `CAKeyframeAnimation`s).
       """)
 
     return keyframes[0]

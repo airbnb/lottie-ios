@@ -102,7 +102,7 @@ class SnapshotTests: XCTestCase {
     for sampleAnimationName in Samples.sampleAnimationNames {
       for percent in progressPercentagesToSnapshot {
         guard
-          let (_, animationView) = SnapshotConfiguration.makeAnimationView(
+          let animationView = SnapshotConfiguration.makeAnimationView(
             for: sampleAnimationName,
             configuration: configuration)
         else { continue }
@@ -197,17 +197,8 @@ enum Samples {
         .joined(separator: "/")
         .replacingOccurrences(of: ".json", with: "")
     }
-}
 
-extension SnapshotConfiguration {
-  /// Creates an `AnimationView` for the sample snapshot with the given name
-  static func makeAnimationView(
-    for sampleAnimationName: String,
-    configuration: LottieConfiguration)
-    -> (animation: Animation, animationView: AnimationView)?
-  {
-    let snapshotConfiguration = SnapshotConfiguration.forSample(named: sampleAnimationName)
-
+  static func animation(named sampleAnimationName: String) -> Animation? {
     guard
       let animation = Animation.named(
         sampleAnimationName,
@@ -217,6 +208,23 @@ extension SnapshotConfiguration {
       XCTFail("Could not parse Samples/\(sampleAnimationName).json")
       return nil
     }
+
+    return animation
+  }
+}
+
+extension SnapshotConfiguration {
+  /// Creates an `AnimationView` for the sample snapshot with the given name
+  static func makeAnimationView(
+    for sampleAnimationName: String,
+    configuration: LottieConfiguration)
+    -> AnimationView?
+  {
+    guard let animation = Samples.animation(named: sampleAnimationName) else {
+      return nil
+    }
+
+    let snapshotConfiguration = SnapshotConfiguration.forSample(named: sampleAnimationName)
 
     let animationView = AnimationView(
       animation: animation,
@@ -238,6 +246,6 @@ extension SnapshotConfiguration {
       animationView.fontProvider = customFontProvider
     }
 
-    return (animation, animationView)
+    return animationView
   }
 }

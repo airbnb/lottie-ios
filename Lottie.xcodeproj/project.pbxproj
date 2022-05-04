@@ -10,9 +10,6 @@
 		1133E6AD27AA4920000633AC /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133E6AC27AA4920000633AC /* DataExtension.swift */; };
 		1133E6AE27AA4920000633AC /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133E6AC27AA4920000633AC /* DataExtension.swift */; };
 		1133E6AF27AA4920000633AC /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133E6AC27AA4920000633AC /* DataExtension.swift */; };
-		2E044E1E28204C4000FA773B /* AutomaticRenderingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E044E1D28204C4000FA773B /* AutomaticRenderingEngine.swift */; };
-		2E044E1F28204C4000FA773B /* AutomaticRenderingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E044E1D28204C4000FA773B /* AutomaticRenderingEngine.swift */; };
-		2E044E2028204C4000FA773B /* AutomaticRenderingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E044E1D28204C4000FA773B /* AutomaticRenderingEngine.swift */; };
 		2E044E272820536800FA773B /* AutomaticEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E044E262820536800FA773B /* AutomaticEngineTests.swift */; };
 		2E09FA0627B6CEB600BA84E5 /* HardcodedFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */; };
 		2E29E51A27B5C072007E25CE /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29E51927B5C072007E25CE /* StrokeAnimation.swift */; };
@@ -37,6 +34,9 @@
 		2E923A3727A4DB01008CE8C4 /* Keyframes+combinedIfPossible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E923A3627A4DB01008CE8C4 /* Keyframes+combinedIfPossible.swift */; };
 		2E923A3827A4DB01008CE8C4 /* Keyframes+combinedIfPossible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E923A3627A4DB01008CE8C4 /* Keyframes+combinedIfPossible.swift */; };
 		2E923A3927A4DB01008CE8C4 /* Keyframes+combinedIfPossible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E923A3627A4DB01008CE8C4 /* Keyframes+combinedIfPossible.swift */; };
+		2E9C95202822E08300677516 /* CompatibilityTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C951F2822E08300677516 /* CompatibilityTracker.swift */; };
+		2E9C95212822E08300677516 /* CompatibilityTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C951F2822E08300677516 /* CompatibilityTracker.swift */; };
+		2E9C95222822E08300677516 /* CompatibilityTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C951F2822E08300677516 /* CompatibilityTracker.swift */; };
 		2EA3E2EE27B486EC0010A0ED /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA3E2ED27B486EC0010A0ED /* TextLayer.swift */; };
 		2EA3E2EF27B486EC0010A0ED /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA3E2ED27B486EC0010A0ED /* TextLayer.swift */; };
 		2EA3E2F027B486EC0010A0ED /* TextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA3E2ED27B486EC0010A0ED /* TextLayer.swift */; };
@@ -560,7 +560,6 @@
 
 /* Begin PBXFileReference section */
 		1133E6AC27AA4920000633AC /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
-		2E044E1D28204C4000FA773B /* AutomaticRenderingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticRenderingEngine.swift; sourceTree = "<group>"; };
 		2E044E262820536800FA773B /* AutomaticEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticEngineTests.swift; sourceTree = "<group>"; };
 		2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcodedFontProvider.swift; sourceTree = "<group>"; };
 		2E29E51927B5C072007E25CE /* StrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeAnimation.swift; sourceTree = "<group>"; };
@@ -577,6 +576,7 @@
 		2E923A0A27A49174008CE8C4 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		2E923A3227A4BBF6008CE8C4 /* CombinedShapeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedShapeAnimation.swift; sourceTree = "<group>"; };
 		2E923A3627A4DB01008CE8C4 /* Keyframes+combinedIfPossible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keyframes+combinedIfPossible.swift"; sourceTree = "<group>"; };
+		2E9C951F2822E08300677516 /* CompatibilityTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibilityTracker.swift; sourceTree = "<group>"; };
 		2EA3E2ED27B486EC0010A0ED /* TextLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLayer.swift; sourceTree = "<group>"; };
 		2EAF59A627A076BC00E00531 /* Bundle+Module.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Module.swift"; sourceTree = "<group>"; };
 		2EAF59AD27A0787B00E00531 /* Lottie_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -878,7 +878,6 @@
 				2EAF59C927A0798700E00531 /* AnimationViewInitializers.swift */,
 				2EAF59CA27A0798700E00531 /* AnimationView.swift */,
 				2EAF59CB27A0798700E00531 /* AnimationPublic.swift */,
-				2E044E1D28204C4000FA773B /* AutomaticRenderingEngine.swift */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -1010,6 +1009,7 @@
 				2EAF5A0727A0798700E00531 /* Animations */,
 				2EAF5A0227A0798700E00531 /* ExperimentalAnimationLayer.swift */,
 				2EAF5A0327A0798700E00531 /* ValueProviderStore.swift */,
+				2E9C951F2822E08300677516 /* CompatibilityTracker.swift */,
 			);
 			path = Experimental;
 			sourceTree = "<group>";
@@ -1667,7 +1667,6 @@
 				2EAF5AAA27A0798700E00531 /* AnimationViewInitializers.swift in Sources */,
 				2EAF5C3F27A0798800E00531 /* Bundle.swift in Sources */,
 				2EAF5B8527A0798700E00531 /* LayerTextProvider.swift in Sources */,
-				2E044E1E28204C4000FA773B /* AutomaticRenderingEngine.swift in Sources */,
 				2EAF5B4F27A0798700E00531 /* GradientAnimations.swift in Sources */,
 				2EAF5C1B27A0798800E00531 /* SolidLayerModel.swift in Sources */,
 				2EAF5BCA27A0798700E00531 /* AnyNodeProperty.swift in Sources */,
@@ -1766,6 +1765,7 @@
 				2EAF5B7027A0798700E00531 /* MaskContainerLayer.swift in Sources */,
 				2EAF5C6C27A0798800E00531 /* AnimationKeypathExtension.swift in Sources */,
 				2EAF5B9A27A0798700E00531 /* StrokeRenderer.swift in Sources */,
+				2E9C95202822E08300677516 /* CompatibilityTracker.swift in Sources */,
 				2EA3E2EE27B486EC0010A0ED /* TextLayer.swift in Sources */,
 				2EAF5C2727A0798800E00531 /* PreCompLayerModel.swift in Sources */,
 				2EAF5BA327A0798700E00531 /* PassThroughOutputNode.swift in Sources */,
@@ -1866,7 +1866,6 @@
 				2EAF5AAB27A0798700E00531 /* AnimationViewInitializers.swift in Sources */,
 				2EAF5C4027A0798800E00531 /* Bundle.swift in Sources */,
 				2EAF5B8627A0798700E00531 /* LayerTextProvider.swift in Sources */,
-				2E044E1F28204C4000FA773B /* AutomaticRenderingEngine.swift in Sources */,
 				2EAF5B5027A0798700E00531 /* GradientAnimations.swift in Sources */,
 				2EAF5C1C27A0798800E00531 /* SolidLayerModel.swift in Sources */,
 				2EAF5BCB27A0798700E00531 /* AnyNodeProperty.swift in Sources */,
@@ -1965,6 +1964,7 @@
 				2EAF5B7127A0798700E00531 /* MaskContainerLayer.swift in Sources */,
 				2EAF5C6D27A0798800E00531 /* AnimationKeypathExtension.swift in Sources */,
 				2EAF5B9B27A0798700E00531 /* StrokeRenderer.swift in Sources */,
+				2E9C95212822E08300677516 /* CompatibilityTracker.swift in Sources */,
 				2EA3E2EF27B486EC0010A0ED /* TextLayer.swift in Sources */,
 				2EAF5C2827A0798800E00531 /* PreCompLayerModel.swift in Sources */,
 				2EAF5BA427A0798700E00531 /* PassThroughOutputNode.swift in Sources */,
@@ -2048,7 +2048,6 @@
 				2EAF5AAC27A0798700E00531 /* AnimationViewInitializers.swift in Sources */,
 				2EAF5C4127A0798800E00531 /* Bundle.swift in Sources */,
 				2EAF5B8727A0798700E00531 /* LayerTextProvider.swift in Sources */,
-				2E044E2028204C4000FA773B /* AutomaticRenderingEngine.swift in Sources */,
 				2EAF5B5127A0798700E00531 /* GradientAnimations.swift in Sources */,
 				2EAF5C1D27A0798800E00531 /* SolidLayerModel.swift in Sources */,
 				2EAF5BCC27A0798700E00531 /* AnyNodeProperty.swift in Sources */,
@@ -2147,6 +2146,7 @@
 				2EAF5B7227A0798700E00531 /* MaskContainerLayer.swift in Sources */,
 				2EAF5C6E27A0798800E00531 /* AnimationKeypathExtension.swift in Sources */,
 				2EAF5B9C27A0798700E00531 /* StrokeRenderer.swift in Sources */,
+				2E9C95222822E08300677516 /* CompatibilityTracker.swift in Sources */,
 				2EA3E2F027B486EC0010A0ED /* TextLayer.swift in Sources */,
 				2EAF5C2927A0798800E00531 /* PreCompLayerModel.swift in Sources */,
 				2EAF5BA527A0798700E00531 /* PassThroughOutputNode.swift in Sources */,

@@ -10,6 +10,7 @@ extension CALayer {
   func setupLayerHierarchy(
     for layers: [LayerModel],
     context: LayerContext)
+    throws
   {
     // An `Animation`'s `LayerModel`s are listed from front to back,
     // but `CALayer.sublayers` are listed from back to front.
@@ -47,8 +48,8 @@ extension CALayer {
     }
 
     // Create an `AnimationLayer` for each `LayerModel`
-    for (layerModel, maskLayerModel) in layersInZAxisOrder.pairedLayersAndMasks() {
-      guard let layer = layerModel.makeAnimationLayer(context: context) else {
+    for (layerModel, maskLayerModel) in try layersInZAxisOrder.pairedLayersAndMasks(context: context) {
+      guard let layer = try layerModel.makeAnimationLayer(context: context) else {
         continue
       }
 
@@ -64,7 +65,7 @@ extension CALayer {
       // Create the `mask` layer for this layer, if it has a `MatteType`
       if
         let maskLayerModel = maskLayerModel,
-        let maskLayer = maskLayerModel.makeAnimationLayer(context: context)
+        let maskLayer = try maskLayerModel.makeAnimationLayer(context: context)
       {
         let maskParentTransformLayer = makeParentTransformLayer(
           childLayerModel: maskLayerModel,
@@ -95,7 +96,7 @@ extension Collection where Element == LayerModel {
   /// a `LayerModel` to use as its mask, if applicable
   /// based on the layer's `MatteType` configuration.
   ///  - Assumes the layers are sorted in z-axis order.
-  fileprivate func pairedLayersAndMasks() -> [(layer: LayerModel, mask: LayerModel?)] {
+  fileprivate func pairedLayersAndMasks(context: LayerContext) throws -> [(layer: LayerModel, mask: LayerModel?)] {
     var layersAndMasks = [(layer: LayerModel, mask: LayerModel?)]()
     var unprocessedLayers = reversed()
 
@@ -106,7 +107,7 @@ extension Collection where Element == LayerModel {
         matteType != .none,
         let maskLayer = unprocessedLayers.popLast()
       {
-        LottieLogger.shared.assert(
+        try context.compatibilityAssert(
           matteType == .add,
           "The Core Animation rendering engine currently only supports `MatteMode.add`.")
 

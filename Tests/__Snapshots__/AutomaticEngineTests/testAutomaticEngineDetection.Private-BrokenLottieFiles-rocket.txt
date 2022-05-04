@@ -1,1 +1,3 @@
-Supports Core Animation engine
+Does not support Core Animation engine. Encountered compatibility issues:
+[Rocket.Path 3.Trim Paths 1] The CoreAnimation rendering engine doesn't support Trim offsets
+[Rocket.Path 3 Copy.Trim Paths 1] The CoreAnimation rendering engine doesn't support Trim offsets

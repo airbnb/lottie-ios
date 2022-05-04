@@ -15,15 +15,15 @@ final class ShapeItemLayer: BaseAnimationLayer {
   /// - Parameters:
   ///   - shape: The `ShapeItem` in this group that renders a `GGPath`
   ///   - otherItems: Other items in this group that affect the appearance of the shape
-  init(shape: Item, otherItems: [Item]) {
+  init(shape: Item, otherItems: [Item], context: LayerContext) throws {
     self.shape = shape
     self.otherItems = otherItems
 
-    LottieLogger.shared.assert(
+    try context.compatibilityAssert(
       shape.item.drawsCGPath,
       "`ShapeItemLayer` must contain exactly one `ShapeItem` that draws a `GPPath`")
 
-    LottieLogger.shared.assert(
+    try context.compatibilityAssert(
       !otherItems.contains(where: { $0.item.drawsCGPath }),
       "`ShapeItemLayer` must contain exactly one `ShapeItem` that draws a `GPPath`")
 
@@ -59,29 +59,29 @@ final class ShapeItemLayer: BaseAnimationLayer {
     let parentGroup: Group?
   }
 
-  override func setupAnimations(context: LayerAnimationContext) {
-    super.setupAnimations(context: context)
+  override func setupAnimations(context: LayerAnimationContext) throws {
+    try super.setupAnimations(context: context)
 
     guard let sublayerConfiguration = sublayerConfiguration else { return }
 
     if let (shapeTransform, context) = otherItems.first(ShapeTransform.self, context: context) {
-      addTransformAnimations(for: shapeTransform, context: context)
-      addOpacityAnimation(from: shapeTransform, context: context)
+      try addTransformAnimations(for: shapeTransform, context: context)
+      try addOpacityAnimation(from: shapeTransform, context: context)
     }
 
     switch sublayerConfiguration.fill {
     case .solidFill(let shapeLayer):
-      setupSolidFillAnimations(shapeLayer: shapeLayer, context: context)
+      try setupSolidFillAnimations(shapeLayer: shapeLayer, context: context)
 
     case .gradientFill(let gradientLayers):
-      setupGradientFillAnimations(
+      try setupGradientFillAnimations(
         gradientLayer: gradientLayers.gradientLayer,
         maskLayer: gradientLayers.maskLayer,
         context: context)
     }
 
     if let gradientStrokeConfiguration = sublayerConfiguration.gradientStroke {
-      setupGradientStrokeAnimations(
+      try setupGradientStrokeAnimations(
         gradientLayer: gradientStrokeConfiguration.gradientLayer,
         maskLayer: gradientStrokeConfiguration.maskLayer,
         context: context)
@@ -178,19 +178,20 @@ final class ShapeItemLayer: BaseAnimationLayer {
   private func setupSolidFillAnimations(
     shapeLayer: CAShapeLayer,
     context: LayerAnimationContext)
+    throws
   {
-    shapeLayer.addAnimations(for: shape.item, context: context.for(shape))
+    try shapeLayer.addAnimations(for: shape.item, context: context.for(shape))
 
     if let (fill, context) = otherItems.first(Fill.self, context: context) {
-      shapeLayer.addAnimations(for: fill, context: context)
+      try shapeLayer.addAnimations(for: fill, context: context)
     }
 
     if let (stroke, context) = otherItems.first(Stroke.self, context: context) {
-      shapeLayer.addStrokeAnimations(for: stroke, context: context)
+      try shapeLayer.addStrokeAnimations(for: stroke, context: context)
     }
 
     if let (trim, context) = otherItems.first(Trim.self, context: context) {
-      shapeLayer.addAnimations(for: trim, context: context)
+      try shapeLayer.addAnimations(for: trim, context: context)
     }
   }
 
@@ -198,11 +199,12 @@ final class ShapeItemLayer: BaseAnimationLayer {
     gradientLayer: GradientRenderLayer,
     maskLayer: CAShapeLayer,
     context: LayerAnimationContext)
+    throws
   {
-    maskLayer.addAnimations(for: shape.item, context: context.for(shape))
+    try maskLayer.addAnimations(for: shape.item, context: context.for(shape))
 
     if let (gradientFill, context) = otherItems.first(GradientFill.self, context: context) {
-      gradientLayer.addGradientAnimations(for: gradientFill, context: context)
+      try gradientLayer.addGradientAnimations(for: gradientFill, context: context)
     }
   }
 
@@ -210,16 +212,17 @@ final class ShapeItemLayer: BaseAnimationLayer {
     gradientLayer: GradientRenderLayer,
     maskLayer: CAShapeLayer,
     context: LayerAnimationContext)
+    throws
   {
-    maskLayer.addAnimations(for: shape.item, context: context.for(shape))
+    try maskLayer.addAnimations(for: shape.item, context: context.for(shape))
 
     if let (gradientStroke, context) = otherItems.first(GradientStroke.self, context: context) {
-      gradientLayer.addGradientAnimations(for: gradientStroke, context: context)
-      maskLayer.addStrokeAnimations(for: gradientStroke, context: context)
+      try gradientLayer.addGradientAnimations(for: gradientStroke, context: context)
+      try maskLayer.addStrokeAnimations(for: gradientStroke, context: context)
     }
 
     if let (trim, context) = otherItems.first(Trim.self, context: context) {
-      maskLayer.addAnimations(for: trim, context: context)
+      try maskLayer.addAnimations(for: trim, context: context)
     }
   }
 

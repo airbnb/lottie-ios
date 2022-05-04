@@ -6,36 +6,36 @@ import QuartzCore
 extension CAShapeLayer {
   /// Adds a `path` animation for the given `ShapeItem`
   @nonobjc
-  func addAnimations(for shape: ShapeItem, context: LayerAnimationContext) {
+  func addAnimations(for shape: ShapeItem, context: LayerAnimationContext) throws {
     switch shape {
     case let customShape as Shape:
-      addAnimations(for: customShape.path, context: context)
+      try addAnimations(for: customShape.path, context: context)
 
     case let combinedShape as CombinedShapeItem:
-      addAnimations(for: combinedShape, context: context)
+      try addAnimations(for: combinedShape, context: context)
 
     case let ellipse as Ellipse:
-      addAnimations(for: ellipse, context: context)
+      try addAnimations(for: ellipse, context: context)
 
     case let rectangle as Rectangle:
-      addAnimations(for: rectangle, context: context)
+      try addAnimations(for: rectangle, context: context)
 
     case let star as Star:
-      addAnimations(for: star, context: context)
+      try addAnimations(for: star, context: context)
 
     default:
       // None of the other `ShapeItem` subclasses draw a `path`
-      LottieLogger.shared.assertionFailure("Unexpected shape type \(type(of: shape))")
+      try context.logCompatibilityIssue("Unexpected shape type \(type(of: shape))")
       return
     }
   }
 
   /// Adds a `fillColor` animation for the given `Fill` object
   @nonobjc
-  func addAnimations(for fill: Fill, context: LayerAnimationContext) {
+  func addAnimations(for fill: Fill, context: LayerAnimationContext) throws {
     fillRule = fill.fillRule.caFillRule
 
-    addAnimation(
+    try addAnimation(
       for: .fillColor,
       keyframes: fill.color.keyframes,
       value: \.cgColorValue,
@@ -44,16 +44,16 @@ extension CAShapeLayer {
 
   /// Adds animations for `strokeStart` and `strokeEnd` from the given `Trim` object
   @nonobjc
-  func addAnimations(for trim: Trim, context: LayerAnimationContext) {
+  func addAnimations(for trim: Trim, context: LayerAnimationContext) throws {
     let (strokeStartKeyframes, strokeEndKeyframes) = trim.caShapeLayerKeyframes()
 
     if trim.offset.keyframes.contains(where: { $0.value.cgFloatValue != 0 }) {
-      LottieLogger.shared.assertionFailure("""
+      try context.logCompatibilityIssue("""
         The CoreAnimation rendering engine doesn't support Trim offsets
         """)
     }
 
-    addAnimation(
+    try addAnimation(
       for: .strokeStart,
       keyframes: strokeStartKeyframes.keyframes,
       value: { strokeStart in
@@ -63,7 +63,7 @@ extension CAShapeLayer {
         CGFloat(strokeStart.cgFloatValue) / 100
       }, context: context)
 
-    addAnimation(
+    try addAnimation(
       for: .strokeEnd,
       keyframes: strokeEndKeyframes.keyframes,
       value: { strokeEnd in

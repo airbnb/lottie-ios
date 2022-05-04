@@ -9,8 +9,9 @@ extension CAShapeLayer {
   func addAnimations(
     for combinedShapes: CombinedShapeItem,
     context: LayerAnimationContext)
+    throws
   {
-    addAnimation(
+    try addAnimation(
       for: .path,
       keyframes: combinedShapes.shapes.keyframes,
       value: { paths in

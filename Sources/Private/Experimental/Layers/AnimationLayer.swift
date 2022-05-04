@@ -10,7 +10,7 @@ import QuartzCore
 protocol AnimationLayer: CALayer {
   /// Instructs this layer to setup its `CAAnimation`s
   /// using the given `LayerAnimationContext`
-  func setupAnimations(context: LayerAnimationContext)
+  func setupAnimations(context: LayerAnimationContext) throws
 }
 
 // MARK: - LayerAnimationContext
@@ -31,6 +31,9 @@ struct LayerAnimationContext {
 
   /// The set of custom Value Providers applied to this animation
   let valueProviderStore: ValueProviderStore
+
+  /// Information about whether or not an animation is compatible with the Core Animation engine
+  let compatibilityTracker: CompatibilityTracker
 
   /// The AnimationKeypath represented by the current layer
   var currentKeypath: AnimationKeypath

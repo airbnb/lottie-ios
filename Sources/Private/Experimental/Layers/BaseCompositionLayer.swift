@@ -41,21 +41,23 @@ class BaseCompositionLayer: BaseAnimationLayer {
   /// Sets up the base `LayerModel` animations for this layer,
   /// and all child `AnimationLayer`s.
   ///  - Can be overridden by subclasses, which much call `super`.
-  override func setupAnimations(context: LayerAnimationContext) {
+  override func setupAnimations(context: LayerAnimationContext) throws {
     var context = context
     if renderLayerContents {
       context = context.addingKeypathComponent(baseLayerModel.name)
     }
 
-    setupLayerAnimations(context: context)
-    setupChildAnimations(context: context)
+    try setupLayerAnimations(context: context)
+    try setupChildAnimations(context: context)
   }
 
-  func setupLayerAnimations(context: LayerAnimationContext) {
-    addTransformAnimations(for: baseLayerModel.transform, context: context)
+  func setupLayerAnimations(context: LayerAnimationContext) throws {
+    let context = context.addingKeypathComponent(baseLayerModel.name)
+
+    try addTransformAnimations(for: baseLayerModel.transform, context: context)
 
     if renderLayerContents {
-      addOpacityAnimation(from: baseLayerModel.transform, context: context)
+      try addOpacityAnimation(from: baseLayerModel.transform, context: context)
 
       addVisibilityAnimation(
         inFrame: CGFloat(baseLayerModel.inFrame),
@@ -64,8 +66,8 @@ class BaseCompositionLayer: BaseAnimationLayer {
     }
   }
 
-  func setupChildAnimations(context: LayerAnimationContext) {
-    super.setupAnimations(context: context)
+  func setupChildAnimations(context: LayerAnimationContext) throws {
+    try super.setupAnimations(context: context)
   }
 
   // MARK: Private

@@ -904,12 +904,22 @@ final public class AnimationView: AnimationViewBase {
     }
 
     let animationLayer: RootAnimationLayer
-    switch configuration.renderingEngine.renderingEngine(for: animation) {
+    switch renderingEngine {
     case .coreAnimation:
+      // TODO: Support `RenderingEngineOption.automatic`, using `CompatibilityTracker.Mode.abort`
       animationLayer = ExperimentalAnimationLayer(
         animation: animation,
         imageProvider: imageProvider,
-        fontProvider: fontProvider)
+        fontProvider: fontProvider,
+        compatibilityTrackerMode: .track,
+        didSetUpAnimation: { compatibilityIssues in
+          LottieLogger.shared.assert(
+            compatibilityIssues.isEmpty,
+            (
+              ["Encountered Core Animation compatibility issues while setting up animation:"]
+                + compatibilityIssues.map { $0.description })
+              .joined(separator: "\n"))
+        })
 
     case .mainThread:
       animationLayer = AnimationContainer(
@@ -1125,7 +1135,12 @@ final public class AnimationView: AnimationViewBase {
   static private let animationName = "Lottie"
 
   private var renderingEngine: RenderingEngine {
-    configuration.renderingEngine.renderingEngine(for: animation) ?? .mainThread
+    switch configuration.renderingEngine {
+    case .automatic:
+      fatalError("Currently unsupported. Check back soon!")
+    case .specific(let engine):
+      return engine
+    }
   }
 
 }

@@ -53,9 +53,9 @@ final class MaskCompositionLayer: CALayer {
 // MARK: AnimationLayer
 
 extension MaskCompositionLayer: AnimationLayer {
-  func setupAnimations(context: LayerAnimationContext) {
+  func setupAnimations(context: LayerAnimationContext) throws {
     for maskLayer in maskLayers {
-      maskLayer.setupAnimations(context: context)
+      try maskLayer.setupAnimations(context: context)
     }
   }
 }
@@ -98,7 +98,7 @@ extension MaskCompositionLayer {
 // MARK: - MaskCompositionLayer.MaskLayer + AnimationLayer
 
 extension MaskCompositionLayer.MaskLayer: AnimationLayer {
-  func setupAnimations(context: LayerAnimationContext) {
-    addAnimations(for: maskModel.shape, context: context)
+  func setupAnimations(context: LayerAnimationContext) throws {
+    try addAnimations(for: maskModel.shape, context: context)
   }
 }
