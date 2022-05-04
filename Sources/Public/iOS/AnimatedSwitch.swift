@@ -168,9 +168,9 @@ open class AnimatedSwitch: AnimatedControl {
       completion: { [weak self] finished in
         guard let self = self else { return }
 
-        // For the legacy rendering engine, we freeze the animation at the expected final progress
-        // once the animation is complete. This isn't necessary on the new / experimental engine.
-        if finished, !(self.animationView.animationLayer is ExperimentalAnimationLayer) {
+        // For the Main Thread rendering engine, we freeze the animation at the expected final progress
+        // once the animation is complete. This isn't necessary on the Core Animation engine.
+        if finished, !(self.animationView.animationLayer is CoreAnimationLayer) {
           self.animationView.currentProgress = finalProgress
         }
       })

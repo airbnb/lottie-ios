@@ -23,7 +23,7 @@ final class ValueProviderStore {
     // TODO: Support more value types
     LottieLogger.shared.assert(
       keypath.keys.last == PropertyName.color.rawValue,
-      "The new rendering engine currently only supports customizing color values")
+      "The Core Animation rendering engine currently only supports customizing color values")
 
     valueProviders.append((keypath: keypath, valueProvider: valueProvider))
   }

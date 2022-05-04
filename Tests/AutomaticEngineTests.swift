@@ -16,7 +16,7 @@ final class AutomaticEngineTests: XCTestCase {
 
       var compatibilityIssues = [CompatibilityIssue]()
 
-      let animationLayer = ExperimentalAnimationLayer(
+      let animationLayer = CoreAnimationLayer(
         animation: animation,
         imageProvider: BundleImageProvider(bundle: Bundle.main, searchPath: nil),
         fontProvider: DefaultFontProvider(),

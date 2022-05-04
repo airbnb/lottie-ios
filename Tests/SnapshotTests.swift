@@ -21,7 +21,7 @@ class SnapshotTests: XCTestCase {
     try compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .mainThread))
   }
 
-  /// Snapshots sample animation files using the experimental rendering engine
+  /// Snapshots sample animation files using the Core Animation rendering engine
   func testCoreAnimationRenderingEngine() throws {
     try compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .coreAnimation))
   }

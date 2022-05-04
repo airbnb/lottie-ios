@@ -4,12 +4,10 @@
 import Foundation
 import QuartzCore
 
-// MARK: - ExperimentalAnimationLayer
+// MARK: - CoreAnimationLayer
 
-/// The root `CALayer` of the new rendering engine,
-/// which leverages the Core Animation render server to
-/// animate without executing on the main thread every frame.
-final class ExperimentalAnimationLayer: BaseAnimationLayer {
+/// The root `CALayer` of the Core Animation rendering engine
+final class CoreAnimationLayer: BaseAnimationLayer {
 
   // MARK: Lifecycle
 
@@ -285,7 +283,7 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
 
 // MARK: RootAnimationLayer
 
-extension ExperimentalAnimationLayer: RootAnimationLayer {
+extension CoreAnimationLayer: RootAnimationLayer {
 
   var primaryAnimationKey: AnimationKey {
     .specific(#keyPath(animationProgress))
@@ -392,7 +390,7 @@ extension ExperimentalAnimationLayer: RootAnimationLayer {
 
   func getValue(for _: AnimationKeypath, atFrame _: AnimationFrameTime?) -> Any? {
     LottieLogger.shared.assertionFailure("""
-      The new rendering engine doesn't support querying values for individual frames
+      The Core Animation rendering engine doesn't support querying values for individual frames
       """)
     return nil
   }

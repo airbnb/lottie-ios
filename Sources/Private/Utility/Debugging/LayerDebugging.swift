@@ -117,9 +117,9 @@ extension CALayer {
   }
 }
 
-// MARK: - AnimationContainer + LayerDebugging
+// MARK: - MainThreadAnimationLayer + LayerDebugging
 
-extension AnimationContainer: LayerDebugging {
+extension MainThreadAnimationLayer: LayerDebugging {
   var debugStyle: LayerDebugStyle {
     LayerDebugStyle.topLayerStyle()
   }
