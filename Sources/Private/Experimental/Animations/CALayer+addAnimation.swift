@@ -171,7 +171,7 @@ extension CALayer {
       if intermediateKeyframes.allSatisfy(\.isHold) {
         return .discrete
       } else {
-        try context.compatibilityTracker.logIssue("Mixed `isHold` / `!isHold` keyframes are currently unsupported")
+        try context.logCompatibilityIssue("Mixed `isHold` / `!isHold` keyframes are currently unsupported")
       }
     }
 

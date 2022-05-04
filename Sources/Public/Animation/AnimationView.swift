@@ -911,7 +911,15 @@ final public class AnimationView: AnimationViewBase {
         animation: animation,
         imageProvider: imageProvider,
         fontProvider: fontProvider,
-        compatibilityTrackerMode: .assertionFailure)
+        compatibilityTrackerMode: .track,
+        didSetUpAnimation: { compatibilityIssues in
+          LottieLogger.shared.assert(
+            compatibilityIssues.isEmpty,
+            (
+              ["Encountered Core Animation compatibility issues while setting up animation:"]
+                + compatibilityIssues.map { $0.description })
+              .joined(separator: "\n"))
+        })
 
     case .mainThread:
       animationLayer = AnimationContainer(

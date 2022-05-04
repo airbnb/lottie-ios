@@ -41,15 +41,18 @@ extension CAShapeLayer {
         // TODO: Is there a way to support this properly?
         BezierPath.star(
           position: position.pointValue,
-          outerRadius: try context.exactlyOneKeyframe(from: star.outerRadius, description: "outerRadius").value.cgFloatValue,
-          innerRadius: try context.exactlyOneKeyframe(from: star.innerRadius, description: "innerRadius")?.value
-            .cgFloatValue ?? 0,
-          outerRoundedness: try context.exactlyOneKeyframe(from: star.outerRoundness, description: "outerRoundness").value
-            .cgFloatValue,
-          innerRoundedness: try context.exactlyOneKeyframe(from: star.innerRoundness, description: "innerRoundness")?.value
-            .cgFloatValue ?? 0,
-          numberOfPoints: try context.exactlyOneKeyframe(from: star.points, description: "points").value.cgFloatValue,
-          rotation: try context.exactlyOneKeyframe(from: star.rotation, description: "rotation").value.cgFloatValue,
+          outerRadius: try star.outerRadius
+            .exactlyOneKeyframe(context: context, description: "outerRadius").value.cgFloatValue,
+          innerRadius: try star.innerRadius?
+            .exactlyOneKeyframe(context: context, description: "innerRadius").value.cgFloatValue ?? 0,
+          outerRoundedness: try star.outerRoundness
+            .exactlyOneKeyframe(context: context, description: "outerRoundness").value.cgFloatValue,
+          innerRoundedness: try star.innerRoundness?
+            .exactlyOneKeyframe(context: context, description: "innerRoundness").value.cgFloatValue ?? 0,
+          numberOfPoints: try star.points
+            .exactlyOneKeyframe(context: context, description: "points").value.cgFloatValue,
+          rotation: try star.rotation
+            .exactlyOneKeyframe(context: context, description: "rotation").value.cgFloatValue,
           direction: star.direction)
           .cgPath()
       },
@@ -71,11 +74,14 @@ extension CAShapeLayer {
         // TODO: Is there a way to support this properly?
         BezierPath.polygon(
           position: position.pointValue,
-          numberOfPoints: try context.exactlyOneKeyframe(from: star.points, description: "numberOfPoints").value.cgFloatValue,
-          outerRadius: try context.exactlyOneKeyframe(from: star.outerRadius, description: "outerRadius").value.cgFloatValue,
-          outerRoundedness: try context.exactlyOneKeyframe(from: star.outerRoundness, description: "outerRoundedness").value
-            .cgFloatValue,
-          rotation: try context.exactlyOneKeyframe(from: star.rotation, description: "rotation").value.cgFloatValue,
+          numberOfPoints: try star.points
+            .exactlyOneKeyframe(context: context, description: "numberOfPoints").value.cgFloatValue,
+          outerRadius: try star.outerRadius
+            .exactlyOneKeyframe(context: context, description: "outerRadius").value.cgFloatValue,
+          outerRoundedness: try star.outerRoundness
+            .exactlyOneKeyframe(context: context, description: "outerRoundedness").value.cgFloatValue,
+          rotation: try star.rotation
+            .exactlyOneKeyframe(context: context, description: "rotation").value.cgFloatValue,
           direction: star.direction)
           .cgPath()
       },

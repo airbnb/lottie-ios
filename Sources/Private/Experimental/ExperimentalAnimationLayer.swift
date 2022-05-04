@@ -18,7 +18,7 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
     imageProvider: AnimationImageProvider,
     fontProvider: AnimationFontProvider,
     compatibilityTrackerMode: CompatibilityTracker.Mode,
-    didSetUpAnimation: ((Error?) -> Void)? = nil)
+    didSetUpAnimation: (([CompatibilityIssue]) -> Void)? = nil)
   {
     self.animation = animation
     self.imageProvider = imageProvider
@@ -32,10 +32,12 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
     do {
       try setupChildLayers()
     } catch {
-      // If the initial layer setup was successful, then the animation will continue
-      // being setup later in `CALayer.display()` below. If this initial setup failed,
-      // then we report the error now.
-      didSetUpAnimation?(error)
+      if case CompatibilityTracker.Error.encounteredCompatibilityIssue(let compatibilityIssue) = error {
+        // If the initial layer setup was successful, then the animation will continue
+        // being setup later in `CALayer.display()` below. If this initial setup failed,
+        // then we report the error now.
+        didSetUpAnimation?([compatibilityIssue])
+      }
     }
   }
 
@@ -78,8 +80,9 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
   }
 
   /// A closure that is called after this layer sets up its animation.
-  /// If the animation setup was unsuccessful and threw an error, the error is included in this call.
-  var didSetUpAnimation: ((Error?) -> Void)?
+  /// If the animation setup was unsuccessful and encountered compatibility issues,
+  /// those issues are included in this call.
+  var didSetUpAnimation: (([CompatibilityIssue]) -> Void)?
 
   /// The `AnimationImageProvider` that `ImageLayer`s use to retrieve images,
   /// referenced by name in the animation json.
@@ -130,15 +133,20 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
     if let pendingAnimationConfiguration = pendingAnimationConfiguration {
       self.pendingAnimationConfiguration = nil
 
-      var setupError: Error?
       do {
         try setupAnimation(for: pendingAnimationConfiguration.animationConfiguration)
       } catch {
-        setupError = error
+        if case CompatibilityTracker.Error.encounteredCompatibilityIssue(let compatibilityIssue) = error {
+          didSetUpAnimation?([compatibilityIssue])
+          return
+        }
       }
 
       currentPlaybackState = pendingAnimationConfiguration.playbackState
-      didSetUpAnimation?(setupError)
+
+      compatibilityTracker.reportCompatibilityIssues { compatibilityIssues in
+        didSetUpAnimation?(compatibilityIssues)
+      }
     }
   }
 
@@ -191,7 +199,8 @@ final class ExperimentalAnimationLayer: BaseAnimationLayer {
       animation: animation,
       imageProvider: imageProvider,
       fontProvider: fontProvider,
-      compatibilityTracker: compatibilityTracker)
+      compatibilityTracker: compatibilityTracker,
+      layerName: "root layer")
   }
 
   private func setup() {

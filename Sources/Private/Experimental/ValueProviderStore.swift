@@ -51,7 +51,7 @@ final class ValueProviderStore {
       typeErasedKeyframes = keyframes
 
     case .closure:
-      try context.compatibilityTracker.logIssue("""
+      try context.logCompatibilityIssue("""
         The Core Animation rendering engine doesn't support Value Providers that vend a closure,
         because that would require calling the closure on the main thread once per frame.
         """)

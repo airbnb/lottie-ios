@@ -52,6 +52,8 @@ class BaseCompositionLayer: BaseAnimationLayer {
   }
 
   func setupLayerAnimations(context: LayerAnimationContext) throws {
+    let context = context.addingKeypathComponent(baseLayerModel.name)
+
     try addTransformAnimations(for: baseLayerModel.transform, context: context)
 
     if renderLayerContents {

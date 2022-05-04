@@ -110,7 +110,7 @@ extension CALayer {
         value: \.cgFloatValue,
         context: context)
     } else {
-      try context.compatibilityTracker.logIssue("""
+      try context.logCompatibilityIssue("""
         `Transform` values must provide either `position` or `positionX` / `positionY` keyframes
         """)
     }

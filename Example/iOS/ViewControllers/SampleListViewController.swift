@@ -3,8 +3,8 @@
 
 import Epoxy
 import EpoxyCollectionView
+import Lottie
 import UIKit
-@testable import Lottie
 
 /// Displays a list of all of the sample Lottie animations
 /// available to be previews in this app's bundle
@@ -78,10 +78,7 @@ final class SampleListViewController: CollectionViewController {
           dataID: animationName,
           content: .init(
             animationName: animationPath,
-            title: animationName,
-            subtitle: Animation.named(animationPath)?.supportedByCoreAnimationEngine == true
-              ? "Supports Core Animation"
-              : nil))
+            title: animationName))
           .didSelect { [weak self] context in
             self?.show(
               AnimationPreviewViewController(animationPath),

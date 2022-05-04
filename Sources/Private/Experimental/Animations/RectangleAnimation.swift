@@ -16,10 +16,11 @@ extension CAShapeLayer {
       keyframes: rectangle.size.keyframes,
       value: { sizeKeyframe in
         BezierPath.rectangle(
-          position: try context.exactlyOneKeyframe(from: rectangle.position, description: "rectangle position").value.pointValue,
+          position: try rectangle.position
+            .exactlyOneKeyframe(context: context, description: "rectangle position").value.pointValue,
           size: sizeKeyframe.sizeValue,
-          cornerRadius: try context.exactlyOneKeyframe(from: rectangle.cornerRadius, description: "rectangle cornerRadius").value
-            .cgFloatValue,
+          cornerRadius: try rectangle.cornerRadius
+            .exactlyOneKeyframe(context: context, description: "rectangle cornerRadius").value.cgFloatValue,
           direction: rectangle.direction)
           .cgPath()
       },

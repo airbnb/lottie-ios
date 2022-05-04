@@ -25,7 +25,7 @@ extension CAShapeLayer {
 
     default:
       // None of the other `ShapeItem` subclasses draw a `path`
-      try context.compatibilityTracker.logIssue("Unexpected shape type \(type(of: shape))")
+      try context.logCompatibilityIssue("Unexpected shape type \(type(of: shape))")
       return
     }
   }
@@ -48,7 +48,7 @@ extension CAShapeLayer {
     let (strokeStartKeyframes, strokeEndKeyframes) = trim.caShapeLayerKeyframes()
 
     if trim.offset.keyframes.contains(where: { $0.value.cgFloatValue != 0 }) {
-      try context.compatibilityTracker.logIssue("""
+      try context.logCompatibilityIssue("""
         The CoreAnimation rendering engine doesn't support Trim offsets
         """)
     }

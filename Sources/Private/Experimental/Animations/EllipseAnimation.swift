@@ -17,7 +17,7 @@ extension CAShapeLayer {
       value: { sizeKeyframe in
         BezierPath.ellipse(
           size: sizeKeyframe.sizeValue,
-          center: try context.exactlyOneKeyframe(from: ellipse.position, description: "ellipse position").value.pointValue,
+          center: try ellipse.position.exactlyOneKeyframe(context: context, description: "ellipse position").value.pointValue,
           direction: ellipse.direction)
           .cgPath()
       },

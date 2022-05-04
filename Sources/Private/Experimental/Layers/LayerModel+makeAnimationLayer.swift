@@ -11,6 +11,13 @@ struct LayerContext {
   let imageProvider: AnimationImageProvider
   let fontProvider: AnimationFontProvider
   let compatibilityTracker: CompatibilityTracker
+  var layerName: String
+
+  func forLayer(_ layer: LayerModel) -> LayerContext {
+    var context = self
+    context.layerName = layer.name
+    return context
+  }
 }
 
 // MARK: - LayerModel + makeAnimationLayer
@@ -18,6 +25,8 @@ struct LayerContext {
 extension LayerModel {
   /// Constructs an `AnimationLayer` / `CALayer` that represents this `LayerModel`
   func makeAnimationLayer(context: LayerContext) throws -> BaseCompositionLayer? {
+    let context = context.forLayer(self)
+
     switch (type, self) {
     case (.precomp, let preCompLayerModel as PreCompLayerModel):
       return try PreCompLayer(preCompLayer: preCompLayerModel, context: context)
@@ -38,7 +47,7 @@ extension LayerModel {
       return TransformLayer(layerModel: self)
 
     default:
-      try context.compatibilityTracker.logIssue("""
+      try context.logCompatibilityIssue("""
         Unexpected layer type combination ("\(type)" and "\(Swift.type(of: self))")
         """)
 

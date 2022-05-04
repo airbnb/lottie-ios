@@ -107,7 +107,7 @@ extension Collection where Element == LayerModel {
         matteType != .none,
         let maskLayer = unprocessedLayers.popLast()
       {
-        try context.compatibilityTracker.assert(
+        try context.compatibilityAssert(
           matteType == .add,
           "The Core Animation rendering engine currently only supports `MatteMode.add`.")
 

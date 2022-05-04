@@ -55,10 +55,8 @@ extension CAShapeLayer {
 
     if let (dashPattern, dashPhase) = stroke.dashPattern?.shapeLayerConfiguration {
       lineDashPattern = try dashPattern.map {
-        try context.exactlyOneKeyframe(
-          from: KeyframeGroup(keyframes: $0),
-          description: "stroke dashPattern")
-          .value.cgFloatValue as NSNumber
+        try KeyframeGroup(keyframes: $0)
+          .exactlyOneKeyframe(context: context, description: "stroke dashPattern").value.cgFloatValue as NSNumber
       }
 
       try addAnimation(

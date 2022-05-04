@@ -96,10 +96,11 @@ extension GradientRenderLayer {
     // relative to the `startPoint` value. Since calculating the `endPoint`
     // at any given time requires knowing the current `startPoint`,
     // we can't allow them to animate separately.
-    let absoluteStartPoint = try context.exactlyOneKeyframe(from: gradient.startPoint, description: "gradient startPoint").value
-      .pointValue
-    let absoluteEndPoint = try context.exactlyOneKeyframe(from: gradient.endPoint, description: "gradient endPoint").value
-      .pointValue
+    let absoluteStartPoint = try gradient.startPoint
+      .exactlyOneKeyframe(context: context, description: "gradient startPoint").value.pointValue
+
+    let absoluteEndPoint = try gradient.endPoint
+      .exactlyOneKeyframe(context: context, description: "gradient endPoint").value.pointValue
 
     startPoint = percentBasedPointInBounds(from: absoluteStartPoint)
 

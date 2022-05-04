@@ -14,10 +14,33 @@ final class AutomaticEngineTests: XCTestCase {
     for sampleAnimationName in Samples.sampleAnimationNames {
       guard let animation = Samples.animation(named: sampleAnimationName) else { continue }
 
+      var compatibilityIssues = [CompatibilityIssue]()
+
+      let animationLayer = ExperimentalAnimationLayer(
+        animation: animation,
+        imageProvider: BundleImageProvider(bundle: Bundle.main, searchPath: nil),
+        fontProvider: DefaultFontProvider(),
+        compatibilityTrackerMode: .track,
+        didSetUpAnimation: { issues in
+          compatibilityIssues = issues
+        })
+
+      animationLayer.bounds = CGRect(origin: .zero, size: animation.size)
+      animationLayer.layoutIfNeeded()
+      animationLayer.display()
+
+      let compatibilityReport: String
+      if compatibilityIssues.isEmpty {
+        compatibilityReport = "Supports Core Animation engine"
+      } else {
+        compatibilityReport = (
+          ["Does not support Core Animation engine. Encountered compatibility issues:"]
+            + compatibilityIssues.map { $0.description })
+          .joined(separator: "\n")
+      }
+
       assertSnapshot(
-        matching: animation.supportedByCoreAnimationEngine
-          ? "Supports Core Animation engine"
-          : "Does not support Core Animation engine",
+        matching: compatibilityReport,
         as: .description,
         named: sampleAnimationName)
     }
