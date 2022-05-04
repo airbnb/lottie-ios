@@ -30,12 +30,14 @@ public enum RenderingEngineOption: Hashable {
   /// Uses the specified rendering engine
   case specific(RenderingEngine)
 
-  /// The original / default rendering engine, which supports all Lottie features
-  /// but runs on the main thread, which comes with some CPU overhead.
+  /// The Main Thread rendering engine, which supports all Lottie features
+  /// but runs on the main thread, which comes with some CPU overhead and
+  /// can cause the animation to play at a low framerate when the CPU is busy.
   public static var mainThread: RenderingEngineOption { .specific(.mainThread) }
 
-  /// The new rendering engine, that animates using Core Animation
-  /// and has no CPU overhead but doesn't support all Lottie features.
+  /// The Core Animation rendering engine, that animates using Core Animation
+  /// and has better performance characteristics than the Main Thread engine,
+  /// but doesn't support all Lottie features.
   public static var coreAnimation: RenderingEngineOption { .specific(.coreAnimation) }
 }
 
@@ -43,11 +45,13 @@ public enum RenderingEngineOption: Hashable {
 
 /// The rendering engine implementation to use when displaying an animation
 public enum RenderingEngine: Hashable {
-  /// The original / default rendering engine, which supports all Lottie features
-  /// but runs on the main thread, which comes with some CPU overhead.
+  /// The Main Thread rendering engine, which supports all Lottie features
+  /// but runs on the main thread, which comes with some CPU overhead and
+  /// can cause the animation to play at a low framerate when the CPU is busy.
   case mainThread
 
-  /// The new rendering engine, that animates using Core Animation
-  /// and has no CPU overhead but doesn't support all Lottie features.
+  /// The Core Animation rendering engine, that animates using Core Animation
+  /// and has better performance characteristics than the Main Thread engine,
+  /// but doesn't support all Lottie features.
   case coreAnimation
 }
