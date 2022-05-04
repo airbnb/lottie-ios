@@ -910,17 +910,17 @@ final public class AnimationView: AnimationViewBase {
       return
     }
 
-    let animationLayer: RootAnimationLayer?
+    let rootAnimationLayer: RootAnimationLayer?
     switch renderingEngine {
     case .automatic:
-      animationLayer = makeAutomaticEngineLayer(for: animation)
+      rootAnimationLayer = makeAutomaticEngineLayer(for: animation)
     case .specific(.coreAnimation):
-      animationLayer = makeCoreAnimationLayer(for: animation)
+      rootAnimationLayer = makeCoreAnimationLayer(for: animation)
     case .specific(.mainThread):
-      animationLayer = makeMainThreadAnimationLayer(for: animation)
+      rootAnimationLayer = makeMainThreadAnimationLayer(for: animation)
     }
 
-    guard let animationLayer = animationLayer else {
+    guard let animationLayer = rootAnimationLayer else {
       return
     }
 
