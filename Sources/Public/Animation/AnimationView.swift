@@ -365,6 +365,27 @@ final public class AnimationView: AnimationViewBase {
     return .zero
   }
 
+  /// The rendering engine currently being used by this view.
+  ///  - This will only be `nil` in cases where the configuration is `automatic`
+  ///    but a `RootAnimationLayer` hasn't been constructed yet
+  public var currentRenderingEngine: RenderingEngine? {
+    switch configuration.renderingEngine {
+    case .specific(let engine):
+      return engine
+
+    case .automatic:
+      guard let animationLayer = animationLayer else {
+        return nil
+      }
+
+      if animationLayer is CoreAnimationLayer {
+        return .coreAnimation
+      } else {
+        return .mainThread
+      }
+    }
+  }
+
   /// Plays the animation from its current state to the end.
   ///
   /// - Parameter completion: An optional completion closure to be called when the animation completes playing.
@@ -1212,27 +1233,6 @@ final public class AnimationView: AnimationViewBase {
 
   /// The `LottieBackgroundBehavior` that was specified manually by setting `self.backgroundBehavior`
   private var _backgroundBehavior: LottieBackgroundBehavior?
-
-  /// The rendering engine currently being used by this view.
-  /// This will be `nil` in cases where the configuration is `automatic`
-  /// but a `RootAnimationLayer` hasn't been constructed yet
-  private var currentRenderingEngine: RenderingEngine? {
-    switch configuration.renderingEngine {
-    case .specific(let engine):
-      return engine
-
-    case .automatic:
-      guard let animationLayer = animationLayer else {
-        return nil
-      }
-
-      if animationLayer is CoreAnimationLayer {
-        return .coreAnimation
-      } else {
-        return .mainThread
-      }
-    }
-  }
 
 }
 
