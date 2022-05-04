@@ -21,7 +21,7 @@ struct LayerAnimationContext {
   let animation: Animation
 
   /// The timing configuration that should be applied to `CAAnimation`s
-  let timingConfiguration: ExperimentalAnimationLayer.CAMediaTimingConfiguration
+  let timingConfiguration: CoreAnimationLayer.CAMediaTimingConfiguration
 
   /// The absolute frame number that this animation begins at
   let startFrame: AnimationFrameTime

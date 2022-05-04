@@ -907,7 +907,7 @@ final public class AnimationView: AnimationViewBase {
     switch renderingEngine {
     case .coreAnimation:
       // TODO: Support `RenderingEngineOption.automatic`, using `CompatibilityTracker.Mode.abort`
-      animationLayer = ExperimentalAnimationLayer(
+      animationLayer = CoreAnimationLayer(
         animation: animation,
         imageProvider: imageProvider,
         fontProvider: fontProvider,
@@ -922,7 +922,7 @@ final public class AnimationView: AnimationViewBase {
         })
 
     case .mainThread:
-      animationLayer = AnimationContainer(
+      animationLayer = MainThreadAnimationLayer(
         animation: animation,
         imageProvider: imageProvider,
         textProvider: textProvider,
@@ -1048,9 +1048,9 @@ final public class AnimationView: AnimationViewBase {
     animationID = animationID + 1
     _activeAnimationName = AnimationView.animationName + String(animationID)
 
-    if let experimentalAnimationLayer = animationlayer as? ExperimentalAnimationLayer {
+    if let coreAnimationLayer = animationlayer as? CoreAnimationLayer {
       var animationContext = animationContext
-      var timingConfiguration = ExperimentalAnimationLayer.CAMediaTimingConfiguration(
+      var timingConfiguration = CoreAnimationLayer.CAMediaTimingConfiguration(
         autoreverses: loopMode.caAnimationConfiguration.autoreverses,
         repeatCount: loopMode.caAnimationConfiguration.repeatCount,
         speed: Float(animationSpeed))
@@ -1078,7 +1078,7 @@ final public class AnimationView: AnimationViewBase {
         }
       }
 
-      experimentalAnimationLayer.playAnimation(
+      coreAnimationLayer.playAnimation(
         context: animationContext,
         timingConfiguration: timingConfiguration)
 

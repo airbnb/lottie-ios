@@ -1,5 +1,5 @@
 //
-//  AnimationContainer.swift
+//  MainThreadAnimationLayer.swift
 //  lottie-swift
 //
 //  Created by Brandon Withrow on 1/24/19.
@@ -8,13 +8,13 @@
 import Foundation
 import QuartzCore
 
-// MARK: - AnimationContainer
+// MARK: - MainThreadAnimationLayer
 
-/// The base animation container.
+/// The base `CALayer` for the Main Thread rendering engine
 ///
 /// This layer holds a single composition container and allows for animation of
 /// the currentFrame property.
-final class AnimationContainer: CALayer, RootAnimationLayer {
+final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
 
   // MARK: Lifecycle
 
@@ -84,7 +84,7 @@ final class AnimationContainer: CALayer, RootAnimationLayer {
     layerFontProvider = LayerFontProvider(fontProvider: DefaultFontProvider())
     super.init(layer: layer)
 
-    guard let animationLayer = layer as? AnimationContainer else { return }
+    guard let animationLayer = layer as? MainThreadAnimationLayer else { return }
 
     currentFrame = animationLayer.currentFrame
 

@@ -8,7 +8,7 @@ import Lottie
 
 final class Configuration {
 
-  /// Whether or not to use the new, experimental rendering engine
+  /// The rendering engine to use
   static var renderingEngineOption: RenderingEngineOption {
     get {
       RenderingEngineOption(rawValue: UserDefaults.standard.string(forKey: #function) ?? "Automatic") ?? .automatic
