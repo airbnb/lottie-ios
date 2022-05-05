@@ -216,6 +216,18 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     return nil
   }
 
+  func getOriginalValue(for keypath: AnimationKeypath, atFrame: AnimationFrameTime?) -> Any? {
+    for layer in animationLayers {
+      if
+        let foundProperties = layer.nodeProperties(for: keypath),
+        let first = foundProperties.first
+      {
+        return first.originalValueProvider.value(frame: atFrame ?? currentFrame)
+      }
+    }
+    return nil
+  }
+
   func layer(for keypath: AnimationKeypath) -> CALayer? {
     for layer in animationLayers {
       if let foundLayer = layer.layer(for: keypath) {

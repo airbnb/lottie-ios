@@ -395,6 +395,13 @@ extension CoreAnimationLayer: RootAnimationLayer {
     return nil
   }
 
+  func getOriginalValue(for _: AnimationKeypath, atFrame _: AnimationFrameTime?) -> Any? {
+    LottieLogger.shared.assertionFailure("""
+      The Core Animation rendering engine doesn't support querying values for individual frames
+      """)
+    return nil
+  }
+
   func layer(for _: AnimationKeypath) -> CALayer? {
     LottieLogger.shared.assertionFailure("`AnimationKeypath`s are currently unsupported")
     return nil
