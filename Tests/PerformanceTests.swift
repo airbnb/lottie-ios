@@ -63,6 +63,18 @@ final class PerformanceTests: XCTestCase {
     XCTAssertEqual(ratio, 0.01, accuracy: 0.01)
   }
 
+  func testParsing_simpleAnimation() throws {
+    let data = try XCTUnwrap(Bundle.module.getAnimationData("loading_dots_1", subdirectory: "Samples/LottieFiles"))
+    let ratio = try compareDeserializationPerformance(data: data, iterations: 2000)
+    XCTAssertEqual(ratio, 2, accuracy: 0.5)
+  }
+
+  func testParsing_complexAnimation() throws {
+    let data = try XCTUnwrap(Bundle.module.getAnimationData("LottieLogo2", subdirectory: "Samples"))
+    let ratio = try compareDeserializationPerformance(data: data, iterations: 500)
+    XCTAssertEqual(ratio, 2, accuracy: 0.5)
+  }
+
   override func setUp() {
     TestHelpers.performanceTestsAreRunning = true
   }
@@ -163,6 +175,27 @@ final class PerformanceTests: XCTestCase {
     return ratio
   }
 
+  private func compareDeserializationPerformance(data: Data, iterations: Int) throws -> Double {
+    let codablePerformance = try measurePerformance {
+      for _ in 0..<iterations {
+        _ = try Animation.from(data: data, strategy: .codable)
+      }
+    }
+
+    print("Codable deserialization took \(codablePerformance) seconds")
+
+    let dictPerformance = try measurePerformance {
+      for _ in 0..<iterations {
+        _ = try Animation.from(data: data, strategy: .dictionaryBased)
+      }
+    }
+
+    print("DictionaryBased deserialization took \(dictPerformance) seconds")
+    let ratio = codablePerformance / dictPerformance
+    print("Codable deserialization took \(ratio)x as long as DictionaryBased")
+    return ratio
+  }
+
   @discardableResult
   private func setupAnimationView(with animation: Animation, configuration: LottieConfiguration) -> AnimationView {
     let animationView = AnimationView(animation: animation, configuration: configuration)
@@ -171,9 +204,9 @@ final class PerformanceTests: XCTestCase {
     return animationView
   }
 
-  private func measurePerformance(_ block : () -> Void) -> TimeInterval {
+  private func measurePerformance(_ block : () throws -> Void) rethrows -> TimeInterval {
     let start = DispatchTime.now()
-    block()
+    try block()
     let end = DispatchTime.now()
     let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
     return Double(nanoTime) / 1_000_000_000
