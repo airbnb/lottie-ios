@@ -20,6 +20,8 @@ public struct LottieConfiguration: Hashable {
 
   /// The rendering engine implementation to use when displaying an animation
   public var renderingEngine: RenderingEngineOption
+
+  /// The decoding implementation to use when parsing an animation JSON file
   public var decodingStrategy: DecodingStrategy
 
 }
