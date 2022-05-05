@@ -30,6 +30,22 @@ final class Fill: ShapeItem {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    let opacityDictionary: [String: Any] = try dictionary.value(for: CodingKeys.opacity)
+    opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
+    let colorDictionary: [String: Any] = try dictionary.value(for: CodingKeys.color)
+    color = try KeyframeGroup<Color>(dictionary: colorDictionary)
+    if
+      let fillRuleRawValue = dictionary[CodingKeys.fillRule.rawValue] as? Int,
+      let fillRule = FillRule(rawValue: fillRuleRawValue)
+    {
+      self.fillRule = fillRule
+    } else {
+      fillRule = .nonZeroWinding
+    }
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   /// The opacity of the fill

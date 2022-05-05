@@ -41,6 +41,10 @@ final class CombinedShapeItem: ShapeItem {
     fatalError("init(from:) has not been implemented")
   }
 
+  required init(dictionary _: [String: Any]) throws {
+    fatalError("init(dictionary:) has not been implemented")
+  }
+
   // MARK: Internal
 
   let shapes: KeyframeGroup<[BezierPath]>

@@ -30,6 +30,22 @@ final class Ellipse: ShapeItem {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    if
+      let directionRawType = dictionary[CodingKeys.direction.rawValue] as? Int,
+      let direction = PathDirection(rawValue: directionRawType)
+    {
+      self.direction = direction
+    } else {
+      direction = .clockwise
+    }
+    let positionDictionary: [String: Any] = try dictionary.value(for: CodingKeys.position)
+    position = try KeyframeGroup<Vector3D>(dictionary: positionDictionary)
+    let sizeDictionary: [String: Any] = try dictionary.value(for: CodingKeys.size)
+    size = try KeyframeGroup<Vector3D>(dictionary: sizeDictionary)
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   /// The direction of the ellipse.

@@ -29,13 +29,12 @@ final class KeyframeGroup<T> {
 
   // MARK: Internal
 
-  let keyframes: ContiguousArray<Keyframe<T>>
-
-  // MARK: Private
-
-  private enum KeyframeWrapperKey: String, CodingKey {
+  enum KeyframeWrapperKey: String, CodingKey {
     case keyframeData = "k"
   }
+
+  let keyframes: ContiguousArray<Keyframe<T>>
+
 }
 
 // MARK: Decodable
@@ -113,7 +112,7 @@ extension KeyframeGroup: Encodable where T: Encodable {
         let keyframeData = KeyframeData<T>(
           startValue: keyframe.value,
           endValue: nextKeyframe.value,
-          time: Double(keyframe.time),
+          time: keyframe.time,
           hold: keyframe.isHold ? 1 : nil,
           inTangent: nextKeyframe.inTangent,
           outTangent: keyframe.outTangent,
@@ -122,6 +121,48 @@ extension KeyframeGroup: Encodable where T: Encodable {
         try keyframeContainer.encode(keyframeData)
       }
     }
+  }
+}
+
+// MARK: DictionaryInitializable
+
+extension KeyframeGroup: DictionaryInitializable where T: AnyInitializable {
+  convenience init(dictionary: [String: Any]) throws {
+    var keyframes = ContiguousArray<Keyframe<T>>()
+    if
+      let rawValue = dictionary[KeyframeWrapperKey.keyframeData.rawValue],
+      let value = try? T(value: rawValue)
+    {
+      keyframes = [Keyframe<T>(value)]
+    } else {
+      var frameDictionaries: [[String: Any]]
+      if let singleFrameDictionary = dictionary[KeyframeWrapperKey.keyframeData.rawValue] as? [String: Any] {
+        frameDictionaries = [singleFrameDictionary]
+      } else {
+        frameDictionaries = try dictionary.value(for: KeyframeWrapperKey.keyframeData)
+      }
+      var previousKeyframeData: KeyframeData<T>?
+      for frameDictionary in frameDictionaries {
+        let data = try KeyframeData<T>(dictionary: frameDictionary)
+        guard
+          let value: T = data.startValue ?? previousKeyframeData?.endValue,
+          let time = data.time else
+        {
+          throw InitializableError.invalidInput
+        }
+        keyframes.append(Keyframe<T>(
+          value: value,
+          time: time,
+          isHold: data.isHold,
+          inTangent: previousKeyframeData?.inTangent,
+          outTangent: data.outTangent,
+          spatialInTangent: previousKeyframeData?.spatialInTangent,
+          spatialOutTangent: data.spatialOutTangent))
+        previousKeyframeData = data
+      }
+    }
+
+    self.init(keyframes: keyframes)
   }
 }
 

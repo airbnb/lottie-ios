@@ -19,6 +19,20 @@ final class Shape: ShapeItem {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    let pathDictionary: [String: Any] = try dictionary.value(for: CodingKeys.path)
+    path = try KeyframeGroup<BezierPath>(dictionary: pathDictionary)
+    if
+      let directionRawValue = dictionary[CodingKeys.direction.rawValue] as? Int,
+      let direction = PathDirection(rawValue: directionRawValue)
+    {
+      self.direction = direction
+    } else {
+      direction = nil
+    }
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   /// The Path

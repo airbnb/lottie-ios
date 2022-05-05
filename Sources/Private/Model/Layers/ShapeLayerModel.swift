@@ -18,6 +18,12 @@ final class ShapeLayerModel: LayerModel {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    let itemDictionaries: [[String: Any]] = try dictionary.value(for: CodingKeys.items)
+    items = try [ShapeItem].fromDictionaries(itemDictionaries)
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   /// A list of shape items.

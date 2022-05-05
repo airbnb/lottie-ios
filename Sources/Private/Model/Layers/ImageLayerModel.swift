@@ -18,6 +18,11 @@ final class ImageLayerModel: LayerModel {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    referenceID = try dictionary.value(for: CodingKeys.referenceID)
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   /// The reference ID of the image.
