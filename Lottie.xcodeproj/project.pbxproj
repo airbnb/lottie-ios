@@ -545,6 +545,9 @@
 		2EAF5B0427A0798700E00531 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */; };
 		2EAF5B0527A0798700E00531 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */; };
 		2EAF5B0627A0798700E00531 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */; };
+		6D99D6432823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
+		6D99D6442823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
+		6D99D6452823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
 		6DB3BDB628243FA5002A276D /* ValueProvidersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3BDB528243FA5002A276D /* ValueProvidersTests.swift */; };
 		A1D5BAAC27C731A500777D06 /* DataURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D5BAAB27C731A500777D06 /* DataURLTests.swift */; };
 /* End PBXBuildFile section */
@@ -750,6 +753,7 @@
 		2EAF59EF27A0798700E00531 /* GradientValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientValueProvider.swift; sourceTree = "<group>"; };
 		2EAF59F027A0798700E00531 /* PointValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointValueProvider.swift; sourceTree = "<group>"; };
 		2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationFontProvider.swift; sourceTree = "<group>"; };
+		6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyGradientFillRenderer.swift; sourceTree = "<group>"; };
 		6DB3BDB528243FA5002A276D /* ValueProvidersTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ValueProvidersTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		A1D5BAAB27C731A500777D06 /* DataURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataURLTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1040,6 +1044,7 @@
 			isa = PBXGroup;
 			children = (
 				2E9C956D2822F43000677516 /* GradientFillRenderer.swift */,
+				6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */,
 				2E9C956E2822F43000677516 /* GradientStrokeRenderer.swift */,
 				2E9C956F2822F43000677516 /* FillRenderer.swift */,
 				2E9C95702822F43000677516 /* StrokeRenderer.swift */,
@@ -1630,6 +1635,7 @@
 				2E9C96212822F43100677516 /* Bundle.swift in Sources */,
 				2E9C96CF2822F43100677516 /* ShapeContainerLayer.swift in Sources */,
 				2E9C973E2822F43100677516 /* LayerDebugging.swift in Sources */,
+				6D99D6432823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */,
 				2EAF5B0427A0798700E00531 /* AnimationFontProvider.swift in Sources */,
 				2E9C96DB2822F43100677516 /* TextLayer.swift in Sources */,
 				2E9C964B2822F43100677516 /* TextCompositionLayer.swift in Sources */,
@@ -1830,6 +1836,7 @@
 				2E9C96222822F43100677516 /* Bundle.swift in Sources */,
 				2E9C96D02822F43100677516 /* ShapeContainerLayer.swift in Sources */,
 				2E9C973F2822F43100677516 /* LayerDebugging.swift in Sources */,
+				6D99D6442823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */,
 				2EAF5B0527A0798700E00531 /* AnimationFontProvider.swift in Sources */,
 				2E9C96DC2822F43100677516 /* TextLayer.swift in Sources */,
 				2E9C964C2822F43100677516 /* TextCompositionLayer.swift in Sources */,
@@ -2012,6 +2019,7 @@
 				2E9C96232822F43100677516 /* Bundle.swift in Sources */,
 				2E9C96D12822F43100677516 /* ShapeContainerLayer.swift in Sources */,
 				2E9C97402822F43100677516 /* LayerDebugging.swift in Sources */,
+				6D99D6452823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */,
 				2EAF5B0627A0798700E00531 /* AnimationFontProvider.swift in Sources */,
 				2E9C96DD2822F43100677516 /* TextLayer.swift in Sources */,
 				2E9C964D2822F43100677516 /* TextCompositionLayer.swift in Sources */,

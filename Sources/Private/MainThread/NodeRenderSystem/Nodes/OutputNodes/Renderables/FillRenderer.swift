@@ -33,8 +33,7 @@ extension FillRule {
 
 /// A rendered for a Path Fill
 final class FillRenderer: PassThroughOutputNode, Renderable {
-
-  let shouldRenderInContext = false
+  var shouldRenderInContext = false
 
   var color: CGColor? {
     didSet {
@@ -54,6 +53,14 @@ final class FillRenderer: PassThroughOutputNode, Renderable {
     }
   }
 
+  func render(_: CGContext) {
+    // do nothing
+  }
+
+  func setupSublayers(layer _: CAShapeLayer) {
+    // do nothing
+  }
+
   func updateShapeLayer(layer: CAShapeLayer) {
     layer.fillColor = color
     layer.opacity = Float(opacity)
@@ -61,14 +68,4 @@ final class FillRenderer: PassThroughOutputNode, Renderable {
     hasUpdate = false
   }
 
-  func render(_ inContext: CGContext) {
-    guard inContext.path != nil && inContext.path!.isEmpty == false else {
-      return
-    }
-    guard let color = color else { return }
-    hasUpdate = false
-    inContext.setAlpha(opacity * 0.01)
-    inContext.setFillColor(color)
-    inContext.fillPath(using: fillRule.cgFillRule)
-  }
 }

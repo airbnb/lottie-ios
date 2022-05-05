@@ -37,6 +37,9 @@ protocol Renderable {
   /// Asks the renderer what the renderable bounds is for the given box.
   func renderBoundsFor(_ boundingBox: CGRect) -> CGRect
 
+  /// Opportunity for renderers to inject sublayers
+  func setupSublayers(layer: CAShapeLayer)
+
   /// Renders the shape in a custom context
   func render(_ inContext: CGContext)
 }

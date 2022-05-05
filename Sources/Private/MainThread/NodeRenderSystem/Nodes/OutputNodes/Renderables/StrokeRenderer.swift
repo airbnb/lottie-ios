@@ -119,6 +119,10 @@ final class StrokeRenderer: PassThroughOutputNode, Renderable {
     }
   }
 
+  func setupSublayers(layer _: CAShapeLayer) {
+    // empty
+  }
+
   func renderBoundsFor(_ boundingBox: CGRect) -> CGRect {
     boundingBox.insetBy(dx: -width, dy: -width)
   }
