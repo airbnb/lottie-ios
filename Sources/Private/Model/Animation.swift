@@ -51,7 +51,7 @@ public final class Animation: Codable, DictionaryInitializable {
   }
 
   public init(dictionary: [String: Any]) throws {
-    version = try dictionary.value(for: CodingKeys.version.rawValue)
+    version = try dictionary.value(for: CodingKeys.version)
     if
       let typeRawValue = dictionary[CodingKeys.type.rawValue] as? Int,
       let type = CoordinateSpace(rawValue: typeRawValue)
@@ -60,12 +60,12 @@ public final class Animation: Codable, DictionaryInitializable {
     } else {
       type = .type2d
     }
-    startFrame = try dictionary.value(for: CodingKeys.startFrame.rawValue)
-    endFrame = try dictionary.value(for: CodingKeys.endFrame.rawValue)
-    framerate = try dictionary.value(for: CodingKeys.framerate.rawValue)
-    width = try dictionary.value(for: CodingKeys.width.rawValue)
-    height = try dictionary.value(for: CodingKeys.height.rawValue)
-    let layerDictionaries: [[String: Any]] = try dictionary.value(for: CodingKeys.layers.rawValue)
+    startFrame = try dictionary.value(for: CodingKeys.startFrame)
+    endFrame = try dictionary.value(for: CodingKeys.endFrame)
+    framerate = try dictionary.value(for: CodingKeys.framerate)
+    width = try dictionary.value(for: CodingKeys.width)
+    height = try dictionary.value(for: CodingKeys.height)
+    let layerDictionaries: [[String: Any]] = try dictionary.value(for: CodingKeys.layers)
     layers = try [LayerModel].fromDictionaries(layerDictionaries)
     if let glyphDictionaries = dictionary[CodingKeys.glyphs.rawValue] as? [[String: Any]] {
       glyphs = try glyphDictionaries.map({ try Glyph(dictionary: $0) })

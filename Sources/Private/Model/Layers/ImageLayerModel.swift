@@ -19,7 +19,7 @@ final class ImageLayerModel: LayerModel {
   }
 
   required init(dictionary: [String: Any]) throws {
-    referenceID = try dictionary.value(for: CodingKeys.referenceID.rawValue)
+    referenceID = try dictionary.value(for: CodingKeys.referenceID)
     try super.init(dictionary: dictionary)
   }
 

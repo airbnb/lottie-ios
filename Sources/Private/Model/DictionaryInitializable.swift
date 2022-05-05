@@ -32,19 +32,19 @@ protocol AnyInitializable {
 extension Dictionary {
 
   @_disfavoredOverload
-  func value<T>(for key: Key) throws -> T {
-    guard let value = self[key] as? T else {
+  func value<T, KeyType: RawRepresentable>(for key: KeyType) throws -> T where KeyType.RawValue == Key {
+    guard let value = self[key.rawValue] as? T else {
       throw InitializableError.invalidInput
     }
     return value
   }
 
-  func value<T: AnyInitializable>(for key: Key) throws -> T {
-    if let value = self[key] as? T {
+  func value<T: AnyInitializable, KeyType: RawRepresentable>(for key: KeyType) throws -> T where KeyType.RawValue == Key {
+    if let value = self[key.rawValue] as? T {
       return value
     }
 
-    if let value = self[key] {
+    if let value = self[key.rawValue] {
       return try T(value: value)
     }
 

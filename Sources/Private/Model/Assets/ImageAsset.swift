@@ -23,10 +23,10 @@ public final class ImageAsset: Asset {
   }
 
   required init(dictionary: [String: Any]) throws {
-    name = try dictionary.value(for: CodingKeys.name.rawValue)
-    directory = try dictionary.value(for: CodingKeys.directory.rawValue)
-    width = try dictionary.value(for: CodingKeys.width.rawValue)
-    height = try dictionary.value(for: CodingKeys.height.rawValue)
+    name = try dictionary.value(for: CodingKeys.name)
+    directory = try dictionary.value(for: CodingKeys.directory)
+    width = try dictionary.value(for: CodingKeys.width)
+    height = try dictionary.value(for: CodingKeys.height)
     try super.init(dictionary: dictionary)
   }
 

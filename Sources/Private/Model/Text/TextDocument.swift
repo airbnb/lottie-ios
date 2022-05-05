@@ -22,17 +22,17 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
   // MARK: Lifecycle
 
   init(dictionary: [String: Any]) throws {
-    text = try dictionary.value(for: CodingKeys.text.rawValue)
-    fontSize = try dictionary.value(for: CodingKeys.fontSize.rawValue)
-    fontFamily = try dictionary.value(for: CodingKeys.fontFamily.rawValue)
-    let justificationValue: Int = try dictionary.value(for: CodingKeys.justification.rawValue)
+    text = try dictionary.value(for: CodingKeys.text)
+    fontSize = try dictionary.value(for: CodingKeys.fontSize)
+    fontFamily = try dictionary.value(for: CodingKeys.fontFamily)
+    let justificationValue: Int = try dictionary.value(for: CodingKeys.justification)
     guard let justification = TextJustification(rawValue: justificationValue) else {
       throw InitializableError.invalidInput
     }
     self.justification = justification
-    tracking = try dictionary.value(for: CodingKeys.tracking.rawValue)
-    lineHeight = try dictionary.value(for: CodingKeys.lineHeight.rawValue)
-    baseline = try dictionary.value(for: CodingKeys.baseline.rawValue)
+    tracking = try dictionary.value(for: CodingKeys.tracking)
+    lineHeight = try dictionary.value(for: CodingKeys.lineHeight)
+    baseline = try dictionary.value(for: CodingKeys.baseline)
     if let fillColorRawValue = dictionary[CodingKeys.fillColorData.rawValue] {
       fillColorData = try? Color(value: fillColorRawValue)
     } else {
@@ -43,8 +43,8 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
     } else {
       strokeColorData = nil
     }
-    strokeWidth = try? dictionary.value(for: CodingKeys.strokeWidth.rawValue)
-    strokeOverFill = try? dictionary.value(for: CodingKeys.strokeOverFill.rawValue)
+    strokeWidth = try? dictionary.value(for: CodingKeys.strokeWidth)
+    strokeOverFill = try? dictionary.value(for: CodingKeys.strokeOverFill)
     if let textFramePositionRawValue = dictionary[CodingKeys.textFramePosition.rawValue] {
       textFramePosition = try? Vector3D(value: textFramePositionRawValue)
     } else {

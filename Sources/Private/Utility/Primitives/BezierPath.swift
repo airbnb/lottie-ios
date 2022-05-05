@@ -408,10 +408,10 @@ extension BezierPath: AnyInitializable {
     } else {
       throw InitializableError.invalidInput
     }
-    closed = (try? pathDictionary.value(for: CodingKeys.closed.rawValue)) ?? true
-    var vertexDictionaries: [Any] = try pathDictionary.value(for: CodingKeys.vertices.rawValue)
-    var inPointsDictionaries: [Any] = try pathDictionary.value(for: CodingKeys.inPoints.rawValue)
-    var outPointsDictionaries: [Any] = try pathDictionary.value(for: CodingKeys.outPoints.rawValue)
+    closed = (try? pathDictionary.value(for: CodingKeys.closed)) ?? true
+    var vertexDictionaries: [Any] = try pathDictionary.value(for: CodingKeys.vertices)
+    var inPointsDictionaries: [Any] = try pathDictionary.value(for: CodingKeys.inPoints)
+    var outPointsDictionaries: [Any] = try pathDictionary.value(for: CodingKeys.outPoints)
     guard
       vertexDictionaries.count == inPointsDictionaries.count,
       inPointsDictionaries.count == outPointsDictionaries.count else

@@ -9,10 +9,12 @@ import CoreGraphics
 
 extension CGPoint: AnyInitializable {
 
+  // MARK: Lifecycle
+
   init(value: Any) throws {
     if let dictionary = value as? [String: CGFloat] {
-      let x: CGFloat = try dictionary.value(for: "x")
-      let y: CGFloat = try dictionary.value(for: "y")
+      let x: CGFloat = try dictionary.value(for: CodingKeys.x)
+      let y: CGFloat = try dictionary.value(for: CodingKeys.y)
       self.init(x: x, y: y)
     } else if
       let array = value as? [CGFloat],
@@ -24,4 +26,10 @@ extension CGPoint: AnyInitializable {
     }
   }
 
+  // MARK: Private
+
+  private enum CodingKeys: String {
+    case x
+    case y
+  }
 }

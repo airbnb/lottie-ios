@@ -18,7 +18,7 @@ final class PrecompAsset: Asset {
   }
 
   required init(dictionary: [String: Any]) throws {
-    let layerDictionaries: [[String: Any]] = try dictionary.value(for: CodingKeys.layers.rawValue)
+    let layerDictionaries: [[String: Any]] = try dictionary.value(for: CodingKeys.layers)
     layers = try [LayerModel].fromDictionaries(layerDictionaries)
     try super.init(dictionary: dictionary)
   }

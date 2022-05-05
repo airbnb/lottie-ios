@@ -20,7 +20,7 @@ final class Shape: ShapeItem {
   }
 
   required init(dictionary: [String: Any]) throws {
-    let pathDictionary: [String: Any] = try dictionary.value(for: CodingKeys.path.rawValue)
+    let pathDictionary: [String: Any] = try dictionary.value(for: CodingKeys.path)
     path = try KeyframeGroup<BezierPath>(dictionary: pathDictionary)
     if
       let directionRawValue = dictionary[CodingKeys.direction.rawValue] as? Int,

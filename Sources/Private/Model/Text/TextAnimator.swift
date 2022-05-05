@@ -30,8 +30,8 @@ final class TextAnimator: Codable, DictionaryInitializable {
   }
 
   init(dictionary: [String: Any]) throws {
-    name = (try? dictionary.value(for: CodingKeys.name.rawValue)) ?? ""
-    let animatorDictionary: [String: Any] = try dictionary.value(for: CodingKeys.textAnimator.rawValue)
+    name = (try? dictionary.value(for: CodingKeys.name)) ?? ""
+    let animatorDictionary: [String: Any] = try dictionary.value(for: CodingKeys.textAnimator)
     if let fillColorDictionary = animatorDictionary[TextAnimatorKeys.fillColor.rawValue] as? [String: Any] {
       fillColor = try? KeyframeGroup<Color>(dictionary: fillColorDictionary)
     } else {

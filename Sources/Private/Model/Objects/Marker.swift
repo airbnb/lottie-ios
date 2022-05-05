@@ -13,8 +13,8 @@ final class Marker: Codable, DictionaryInitializable {
   // MARK: Lifecycle
 
   init(dictionary: [String: Any]) throws {
-    name = try dictionary.value(for: CodingKeys.name.rawValue)
-    frameTime = try dictionary.value(for: CodingKeys.frameTime.rawValue)
+    name = try dictionary.value(for: CodingKeys.name)
+    frameTime = try dictionary.value(for: CodingKeys.frameTime)
   }
 
   // MARK: Internal

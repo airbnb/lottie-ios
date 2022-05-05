@@ -14,10 +14,10 @@ final class Font: Codable, DictionaryInitializable {
   // MARK: Lifecycle
 
   init(dictionary: [String: Any]) throws {
-    name = try dictionary.value(for: CodingKeys.name.rawValue)
-    familyName = try dictionary.value(for: CodingKeys.familyName.rawValue)
-    style = try dictionary.value(for: CodingKeys.style.rawValue)
-    ascent = try dictionary.value(for: CodingKeys.ascent.rawValue)
+    name = try dictionary.value(for: CodingKeys.name)
+    familyName = try dictionary.value(for: CodingKeys.familyName)
+    style = try dictionary.value(for: CodingKeys.style)
+    ascent = try dictionary.value(for: CodingKeys.ascent)
   }
 
   // MARK: Internal
@@ -46,7 +46,7 @@ final class FontList: Codable, DictionaryInitializable {
   // MARK: Lifecycle
 
   init(dictionary: [String: Any]) throws {
-    let fontDictionaries: [[String: Any]] = try dictionary.value(for: CodingKeys.fonts.rawValue)
+    let fontDictionaries: [[String: Any]] = try dictionary.value(for: CodingKeys.fonts)
     fonts = try fontDictionaries.map({ try Font(dictionary: $0) })
   }
 

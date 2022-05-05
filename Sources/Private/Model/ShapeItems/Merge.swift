@@ -32,7 +32,7 @@ final class Merge: ShapeItem {
   }
 
   required init(dictionary: [String: Any]) throws {
-    let modeRawType: Int = try dictionary.value(for: CodingKeys.mode.rawValue)
+    let modeRawType: Int = try dictionary.value(for: CodingKeys.mode)
     guard let mode = MergeMode(rawValue: modeRawType) else {
       throw InitializableError.invalidInput
     }

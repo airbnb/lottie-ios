@@ -22,12 +22,12 @@ final class DashElement: Codable, DictionaryInitializable {
   // MARK: Lifecycle
 
   init(dictionary: [String: Any]) throws {
-    let typeRawValue: String = try dictionary.value(for: CodingKeys.type.rawValue)
+    let typeRawValue: String = try dictionary.value(for: CodingKeys.type)
     guard let type = DashElementType(rawValue: typeRawValue) else {
       throw InitializableError.invalidInput
     }
     self.type = type
-    let valueDictionary: [String: Any] = try dictionary.value(for: CodingKeys.value.rawValue)
+    let valueDictionary: [String: Any] = try dictionary.value(for: CodingKeys.value)
     value = try KeyframeGroup<Vector1D>(dictionary: valueDictionary)
   }
 

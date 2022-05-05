@@ -22,14 +22,14 @@ final class PreCompLayerModel: LayerModel {
   }
 
   required init(dictionary: [String: Any]) throws {
-    referenceID = try dictionary.value(for: CodingKeys.referenceID.rawValue)
+    referenceID = try dictionary.value(for: CodingKeys.referenceID)
     if let timeRemappingDictionary = dictionary[CodingKeys.timeRemapping.rawValue] as? [String: Any] {
       timeRemapping = try KeyframeGroup<Vector1D>(dictionary: timeRemappingDictionary)
     } else {
       timeRemapping = nil
     }
-    width = try dictionary.value(for: CodingKeys.width.rawValue)
-    height = try dictionary.value(for: CodingKeys.height.rawValue)
+    width = try dictionary.value(for: CodingKeys.width)
+    height = try dictionary.value(for: CodingKeys.height)
     try super.init(dictionary: dictionary)
   }
 

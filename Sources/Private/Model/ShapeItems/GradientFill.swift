@@ -37,13 +37,13 @@ final class GradientFill: ShapeItem {
   }
 
   required init(dictionary: [String: Any]) throws {
-    let opacityDictionary: [String: Any] = try dictionary.value(for: CodingKeys.opacity.rawValue)
+    let opacityDictionary: [String: Any] = try dictionary.value(for: CodingKeys.opacity)
     opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
-    let startPointDictionary: [String: Any] = try dictionary.value(for: CodingKeys.startPoint.rawValue)
+    let startPointDictionary: [String: Any] = try dictionary.value(for: CodingKeys.startPoint)
     startPoint = try KeyframeGroup<Vector3D>(dictionary: startPointDictionary)
-    let endPointDictionary: [String: Any] = try dictionary.value(for: CodingKeys.endPoint.rawValue)
+    let endPointDictionary: [String: Any] = try dictionary.value(for: CodingKeys.endPoint)
     endPoint = try KeyframeGroup<Vector3D>(dictionary: endPointDictionary)
-    let gradientRawType: Int = try dictionary.value(for: CodingKeys.gradientType.rawValue)
+    let gradientRawType: Int = try dictionary.value(for: CodingKeys.gradientType)
     guard let gradient = GradientType(rawValue: gradientRawType) else {
       throw InitializableError.invalidInput
     }
@@ -58,10 +58,10 @@ final class GradientFill: ShapeItem {
     } else {
       highlightAngle = nil
     }
-    let colorsDictionary: [String: Any] = try dictionary.value(for: CodingKeys.colors.rawValue)
-    let nestedColorsDictionary: [String: Any] = try colorsDictionary.value(for: GradientDataKeys.colors.rawValue)
+    let colorsDictionary: [String: Any] = try dictionary.value(for: CodingKeys.colors)
+    let nestedColorsDictionary: [String: Any] = try colorsDictionary.value(for: GradientDataKeys.colors)
     colors = try KeyframeGroup<[Double]>(dictionary: nestedColorsDictionary)
-    numberOfColors = try colorsDictionary.value(for: GradientDataKeys.numberOfColors.rawValue)
+    numberOfColors = try colorsDictionary.value(for: GradientDataKeys.numberOfColors)
     try super.init(dictionary: dictionary)
   }
 

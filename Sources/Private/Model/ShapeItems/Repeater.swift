@@ -43,7 +43,7 @@ final class Repeater: ShapeItem {
     } else {
       offset = KeyframeGroup(Vector1D(0))
     }
-    let transformDictionary: [String: Any] = try dictionary.value(for: CodingKeys.transform.rawValue)
+    let transformDictionary: [String: Any] = try dictionary.value(for: CodingKeys.transform)
     if let startOpacityDictionary = transformDictionary[TransformKeys.startOpacity.rawValue] as? [String: Any] {
       startOpacity = try KeyframeGroup<Vector1D>(dictionary: startOpacityDictionary)
     } else {
