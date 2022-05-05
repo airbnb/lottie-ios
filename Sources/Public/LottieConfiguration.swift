@@ -107,7 +107,8 @@ public enum DecodingStrategy: Hashable {
   /// Use Codable. This is the default strategy introduced on Lottie 3.
   case codable
 
-  /// Manually deserialize a dictionary into an Animation. This should be faster,
+  /// Manually deserialize a dictionary into an Animation.
+  /// This should be at least 2-3x faster than using Codable,
   /// but since it's manually implemented, there might be issues while it's experimental.
   case dictionaryBased
 }
