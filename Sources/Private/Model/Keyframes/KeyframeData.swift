@@ -22,7 +22,7 @@ final class KeyframeData<T> {
   init(
     startValue: T?,
     endValue: T?,
-    time: Double?,
+    time: AnimationFrameTime?,
     hold: Int?,
     inTangent: Vector2D?,
     outTangent: Vector2D?,
@@ -57,7 +57,7 @@ final class KeyframeData<T> {
   /// The End value of the keyframe. Note: Newer versions animation json do not have this field.
   let endValue: T?
   /// The time in frames of the keyframe.
-  let time: Double?
+  let time: AnimationFrameTime?
   /// A hold keyframe freezes interpolation until the next keyframe that is not a hold.
   let hold: Int?
 
@@ -93,7 +93,7 @@ extension KeyframeData: DictionaryInitializable where T: AnyInitializable {
   convenience init(dictionary: [String: Any]) throws {
     let startValue = try? dictionary[CodingKeys.startValue.rawValue].flatMap(T.init)
     let endValue = try? dictionary[CodingKeys.endValue.rawValue].flatMap(T.init)
-    let time: Double? = try? dictionary.value(for: CodingKeys.time.rawValue)
+    let time: AnimationFrameTime? = try? dictionary.value(for: CodingKeys.time.rawValue)
     let hold: Int? = try? dictionary.value(for: CodingKeys.hold.rawValue)
     let inTangent: Vector2D? = try? dictionary.value(for: CodingKeys.inTangent.rawValue)
     let outTangent: Vector2D? = try? dictionary.value(for: CodingKeys.outTangent.rawValue)
