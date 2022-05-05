@@ -1062,7 +1062,11 @@ final public class AnimationView: AnimationViewBase {
     self.currentFrame = currentFrame
 
     if let animationContext = animationContext {
-      addNewAnimationForContext(animationContext)
+      // We have to wait until the next run loop cycle to start playing the animation,
+      // or it may not actually start as expected.
+      DispatchQueue.main.async {
+        self.addNewAnimationForContext(animationContext)
+      }
     }
   }
 
