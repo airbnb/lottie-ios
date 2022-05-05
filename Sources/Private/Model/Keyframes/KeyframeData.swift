@@ -93,12 +93,12 @@ extension KeyframeData: DictionaryInitializable where T: AnyInitializable {
   convenience init(dictionary: [String: Any]) throws {
     let startValue = try? dictionary[CodingKeys.startValue.rawValue].flatMap(T.init)
     let endValue = try? dictionary[CodingKeys.endValue.rawValue].flatMap(T.init)
-    let time: Double? = try? dictionary.valueFor(key: CodingKeys.time.rawValue)
-    let hold: Int? = try? dictionary.valueFor(key: CodingKeys.hold.rawValue)
-    let inTangent: Vector2D? = try? dictionary.valueFor(key: CodingKeys.inTangent.rawValue)
-    let outTangent: Vector2D? = try? dictionary.valueFor(key: CodingKeys.outTangent.rawValue)
-    let spatialInTangent: Vector3D? = try? dictionary.valueFor(key: CodingKeys.spatialInTangent.rawValue)
-    let spatialOutTangent: Vector3D? = try? dictionary.valueFor(key: CodingKeys.spatialOutTangent.rawValue)
+    let time: Double? = try? dictionary.value(for: CodingKeys.time.rawValue)
+    let hold: Int? = try? dictionary.value(for: CodingKeys.hold.rawValue)
+    let inTangent: Vector2D? = try? dictionary.value(for: CodingKeys.inTangent.rawValue)
+    let outTangent: Vector2D? = try? dictionary.value(for: CodingKeys.outTangent.rawValue)
+    let spatialInTangent: Vector3D? = try? dictionary.value(for: CodingKeys.spatialInTangent.rawValue)
+    let spatialOutTangent: Vector3D? = try? dictionary.value(for: CodingKeys.spatialOutTangent.rawValue)
 
     self.init(
       startValue: startValue,

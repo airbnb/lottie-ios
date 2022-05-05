@@ -30,11 +30,11 @@ final class Rectangle: ShapeItem {
     } else {
       direction = .clockwise
     }
-    let positionDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.position.rawValue)
+    let positionDictionary: [String: Any] = try dictionary.value(for: CodingKeys.position.rawValue)
     position = try KeyframeGroup<Vector3D>(dictionary: positionDictionary)
-    let sizeDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.size.rawValue)
+    let sizeDictionary: [String: Any] = try dictionary.value(for: CodingKeys.size.rawValue)
     size = try KeyframeGroup<Vector3D>(dictionary: sizeDictionary)
-    let cornerRadiusDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.cornerRadius.rawValue)
+    let cornerRadiusDictionary: [String: Any] = try dictionary.value(for: CodingKeys.cornerRadius.rawValue)
     cornerRadius = try KeyframeGroup<Vector1D>(dictionary: cornerRadiusDictionary)
     try super.init(dictionary: dictionary)
   }

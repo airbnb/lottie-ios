@@ -102,9 +102,9 @@ class LayerModel: Codable, DictionaryInitializable {
   }
 
   required init(dictionary: [String: Any]) throws {
-    name = (try? dictionary.valueFor(key: CodingKeys.name.rawValue)) ?? "Layer"
-    index = try dictionary.valueFor(key: CodingKeys.index.rawValue) ?? .random(in: Int.min...Int.max)
-    type = LayerType(rawValue: try dictionary.valueFor(key: CodingKeys.type.rawValue)) ?? .null
+    name = (try? dictionary.value(for: CodingKeys.name.rawValue)) ?? "Layer"
+    index = try dictionary.value(for: CodingKeys.index.rawValue) ?? .random(in: Int.min...Int.max)
+    type = LayerType(rawValue: try dictionary.value(for: CodingKeys.type.rawValue)) ?? .null
     if
       let coordinateSpaceRawValue = dictionary[CodingKeys.coordinateSpace.rawValue] as? Int,
       let coordinateSpace = CoordinateSpace(rawValue: coordinateSpaceRawValue)
@@ -113,11 +113,11 @@ class LayerModel: Codable, DictionaryInitializable {
     } else {
       coordinateSpace = .type2d
     }
-    inFrame = try dictionary.valueFor(key: CodingKeys.inFrame.rawValue)
-    outFrame = try dictionary.valueFor(key: CodingKeys.outFrame.rawValue)
-    startTime = try dictionary.valueFor(key: CodingKeys.startTime.rawValue)
-    transform = try Transform(dictionary: try dictionary.valueFor(key: CodingKeys.transform.rawValue))
-    parent = try? dictionary.valueFor(key: CodingKeys.parent.rawValue)
+    inFrame = try dictionary.value(for: CodingKeys.inFrame.rawValue)
+    outFrame = try dictionary.value(for: CodingKeys.outFrame.rawValue)
+    startTime = try dictionary.value(for: CodingKeys.startTime.rawValue)
+    transform = try Transform(dictionary: try dictionary.value(for: CodingKeys.transform.rawValue))
+    parent = try? dictionary.value(for: CodingKeys.parent.rawValue)
     if
       let blendModeRawValue = dictionary[CodingKeys.blendMode.rawValue] as? Int,
       let blendMode = BlendMode(rawValue: blendModeRawValue)
@@ -131,13 +131,13 @@ class LayerModel: Codable, DictionaryInitializable {
     } else {
       masks = nil
     }
-    timeStretch = (try? dictionary.valueFor(key: CodingKeys.timeStretch.rawValue)) ?? 1
+    timeStretch = (try? dictionary.value(for: CodingKeys.timeStretch.rawValue)) ?? 1
     if let matteRawValue = dictionary[CodingKeys.matte.rawValue] as? Int {
       matte = MatteType(rawValue: matteRawValue)
     } else {
       matte = nil
     }
-    hidden = (try? dictionary.valueFor(key: CodingKeys.hidden.rawValue)) ?? false
+    hidden = (try? dictionary.value(for: CodingKeys.hidden.rawValue)) ?? false
   }
 
   // MARK: Internal

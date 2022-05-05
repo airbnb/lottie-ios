@@ -53,13 +53,13 @@ final class GradientStroke: ShapeItem {
   }
 
   required init(dictionary: [String: Any]) throws {
-    let opacityDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.opacity.rawValue)
+    let opacityDictionary: [String: Any] = try dictionary.value(for: CodingKeys.opacity.rawValue)
     opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
-    let startPointDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.startPoint.rawValue)
+    let startPointDictionary: [String: Any] = try dictionary.value(for: CodingKeys.startPoint.rawValue)
     startPoint = try KeyframeGroup<Vector3D>(dictionary: startPointDictionary)
-    let endPointDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.endPoint.rawValue)
+    let endPointDictionary: [String: Any] = try dictionary.value(for: CodingKeys.endPoint.rawValue)
     endPoint = try KeyframeGroup<Vector3D>(dictionary: endPointDictionary)
-    let gradientRawType: Int = try dictionary.valueFor(key: CodingKeys.gradientType.rawValue)
+    let gradientRawType: Int = try dictionary.value(for: CodingKeys.gradientType.rawValue)
     guard let gradient = GradientType(rawValue: gradientRawType) else {
       throw InitializableError.invalidInput
     }
@@ -74,7 +74,7 @@ final class GradientStroke: ShapeItem {
     } else {
       highlightAngle = nil
     }
-    let widthDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.width.rawValue)
+    let widthDictionary: [String: Any] = try dictionary.value(for: CodingKeys.width.rawValue)
     width = try KeyframeGroup<Vector1D>(dictionary: widthDictionary)
     if
       let lineCapRawValue = dictionary[CodingKeys.lineCap.rawValue] as? Int,
@@ -92,11 +92,11 @@ final class GradientStroke: ShapeItem {
     } else {
       lineJoin = .round
     }
-    miterLimit = (try? dictionary.valueFor(key: CodingKeys.miterLimit.rawValue)) ?? 4
-    let colorsDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.colors.rawValue)
-    let nestedColorsDictionary: [String: Any] = try colorsDictionary.valueFor(key: GradientDataKeys.colors.rawValue)
+    miterLimit = (try? dictionary.value(for: CodingKeys.miterLimit.rawValue)) ?? 4
+    let colorsDictionary: [String: Any] = try dictionary.value(for: CodingKeys.colors.rawValue)
+    let nestedColorsDictionary: [String: Any] = try colorsDictionary.value(for: GradientDataKeys.colors.rawValue)
     colors = try KeyframeGroup<[Double]>(dictionary: nestedColorsDictionary)
-    numberOfColors = try colorsDictionary.valueFor(key: GradientDataKeys.numberOfColors.rawValue)
+    numberOfColors = try colorsDictionary.value(for: GradientDataKeys.numberOfColors.rawValue)
     let dashPatternDictionaries = dictionary[CodingKeys.dashPattern.rawValue] as? [[String: Any]]
     dashPattern = try? dashPatternDictionaries?.map({ try DashElement(dictionary: $0) })
     try super.init(dictionary: dictionary)

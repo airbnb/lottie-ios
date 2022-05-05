@@ -21,10 +21,10 @@ final class TextLayerModel: LayerModel {
   }
 
   required init(dictionary: [String: Any]) throws {
-    let containerDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.textGroup.rawValue)
-    let textDictionary: [String: Any] = try containerDictionary.valueFor(key: TextCodingKeys.text.rawValue)
+    let containerDictionary: [String: Any] = try dictionary.value(for: CodingKeys.textGroup.rawValue)
+    let textDictionary: [String: Any] = try containerDictionary.value(for: TextCodingKeys.text.rawValue)
     text = try KeyframeGroup<TextDocument>(dictionary: textDictionary)
-    let animatorDictionaries: [[String: Any]] = try containerDictionary.valueFor(key: TextCodingKeys.animators.rawValue)
+    let animatorDictionaries: [[String: Any]] = try containerDictionary.value(for: TextCodingKeys.animators.rawValue)
     animators = try animatorDictionaries.map({ try TextAnimator(dictionary: $0) })
     try super.init(dictionary: dictionary)
   }

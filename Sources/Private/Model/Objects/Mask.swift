@@ -48,9 +48,9 @@ final class Mask: Codable, DictionaryInitializable {
     } else {
       opacity = KeyframeGroup(Vector1D(100))
     }
-    let shapeDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.shape.rawValue)
+    let shapeDictionary: [String: Any] = try dictionary.value(for: CodingKeys.shape.rawValue)
     shape = try KeyframeGroup<BezierPath>(dictionary: shapeDictionary)
-    inverted = (try? dictionary.valueFor(key: CodingKeys.inverted.rawValue)) ?? false
+    inverted = (try? dictionary.value(for: CodingKeys.inverted.rawValue)) ?? false
     if let expansionDictionary = dictionary[CodingKeys.expansion.rawValue] as? [String: Any] {
       expansion = try KeyframeGroup<Vector1D>(dictionary: expansionDictionary)
     } else {

@@ -31,9 +31,9 @@ final class Fill: ShapeItem {
   }
 
   required init(dictionary: [String: Any]) throws {
-    let opacityDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.opacity.rawValue)
+    let opacityDictionary: [String: Any] = try dictionary.value(for: CodingKeys.opacity.rawValue)
     opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
-    let colorDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.color.rawValue)
+    let colorDictionary: [String: Any] = try dictionary.value(for: CodingKeys.color.rawValue)
     color = try KeyframeGroup<Color>(dictionary: colorDictionary)
     if
       let fillRuleRawValue = dictionary[CodingKeys.fillRule.rawValue] as? Int,

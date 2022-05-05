@@ -45,11 +45,11 @@ final class Star: ShapeItem {
     } else {
       direction = .clockwise
     }
-    let positionDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.position.rawValue)
+    let positionDictionary: [String: Any] = try dictionary.value(for: CodingKeys.position.rawValue)
     position = try KeyframeGroup<Vector3D>(dictionary: positionDictionary)
-    let outerRadiusDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.outerRadius.rawValue)
+    let outerRadiusDictionary: [String: Any] = try dictionary.value(for: CodingKeys.outerRadius.rawValue)
     outerRadius = try KeyframeGroup<Vector1D>(dictionary: outerRadiusDictionary)
-    let outerRoundnessDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.outerRoundness.rawValue)
+    let outerRoundnessDictionary: [String: Any] = try dictionary.value(for: CodingKeys.outerRoundness.rawValue)
     outerRoundness = try KeyframeGroup<Vector1D>(dictionary: outerRoundnessDictionary)
     if let innerRadiusDictionary = dictionary[CodingKeys.innerRadius.rawValue] as? [String: Any] {
       innerRadius = try KeyframeGroup<Vector1D>(dictionary: innerRadiusDictionary)
@@ -61,11 +61,11 @@ final class Star: ShapeItem {
     } else {
       innerRoundness = nil
     }
-    let rotationDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.rotation.rawValue)
+    let rotationDictionary: [String: Any] = try dictionary.value(for: CodingKeys.rotation.rawValue)
     rotation = try KeyframeGroup<Vector1D>(dictionary: rotationDictionary)
-    let pointsDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.points.rawValue)
+    let pointsDictionary: [String: Any] = try dictionary.value(for: CodingKeys.points.rawValue)
     points = try KeyframeGroup<Vector1D>(dictionary: pointsDictionary)
-    let starTypeRawValue: Int = try dictionary.valueFor(key: CodingKeys.starType.rawValue)
+    let starTypeRawValue: Int = try dictionary.value(for: CodingKeys.starType.rawValue)
     guard let starType = StarType(rawValue: starTypeRawValue) else {
       throw InitializableError.invalidInput
     }

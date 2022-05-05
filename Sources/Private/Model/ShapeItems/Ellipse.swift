@@ -39,9 +39,9 @@ final class Ellipse: ShapeItem {
     } else {
       direction = .clockwise
     }
-    let positionDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.position.rawValue)
+    let positionDictionary: [String: Any] = try dictionary.value(for: CodingKeys.position.rawValue)
     position = try KeyframeGroup<Vector3D>(dictionary: positionDictionary)
-    let sizeDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.size.rawValue)
+    let sizeDictionary: [String: Any] = try dictionary.value(for: CodingKeys.size.rawValue)
     size = try KeyframeGroup<Vector3D>(dictionary: sizeDictionary)
     try super.init(dictionary: dictionary)
   }

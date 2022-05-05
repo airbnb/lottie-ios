@@ -21,9 +21,9 @@ final class SolidLayerModel: LayerModel {
   }
 
   required init(dictionary: [String: Any]) throws {
-    colorHex = try dictionary.valueFor(key: CodingKeys.colorHex.rawValue)
-    width = try dictionary.valueFor(key: CodingKeys.width.rawValue)
-    height = try dictionary.valueFor(key: CodingKeys.height.rawValue)
+    colorHex = try dictionary.value(for: CodingKeys.colorHex.rawValue)
+    width = try dictionary.value(for: CodingKeys.width.rawValue)
+    height = try dictionary.value(for: CodingKeys.height.rawValue)
     try super.init(dictionary: dictionary)
   }
 

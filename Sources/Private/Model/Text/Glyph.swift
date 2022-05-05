@@ -31,11 +31,11 @@ final class Glyph: Codable, DictionaryInitializable {
   }
 
   init(dictionary: [String: Any]) throws {
-    character = try dictionary.valueFor(key: CodingKeys.character.rawValue)
-    fontSize = try dictionary.valueFor(key: CodingKeys.fontSize.rawValue)
-    fontFamily = try dictionary.valueFor(key: CodingKeys.fontFamily.rawValue)
-    fontStyle = try dictionary.valueFor(key: CodingKeys.fontStyle.rawValue)
-    width = try dictionary.valueFor(key: CodingKeys.width.rawValue)
+    character = try dictionary.value(for: CodingKeys.character.rawValue)
+    fontSize = try dictionary.value(for: CodingKeys.fontSize.rawValue)
+    fontFamily = try dictionary.value(for: CodingKeys.fontFamily.rawValue)
+    fontStyle = try dictionary.value(for: CodingKeys.fontStyle.rawValue)
+    width = try dictionary.value(for: CodingKeys.width.rawValue)
     if
       let shapes = dictionary[CodingKeys.shapeWrapper.rawValue] as? [String: Any],
       let shapeDictionaries = shapes[ShapeKey.shapes.rawValue] as? [[String: Any]]

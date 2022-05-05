@@ -11,8 +11,8 @@ extension CGPoint: AnyInitializable {
 
   init(value: Any) throws {
     if let dictionary = value as? [String: CGFloat] {
-      let x: CGFloat = try dictionary.valueFor(key: "x")
-      let y: CGFloat = try dictionary.valueFor(key: "y")
+      let x: CGFloat = try dictionary.value(for: "x")
+      let y: CGFloat = try dictionary.value(for: "y")
       self.init(x: x, y: y)
     } else if
       let array = value as? [CGFloat],

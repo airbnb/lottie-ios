@@ -22,17 +22,17 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
   // MARK: Lifecycle
 
   init(dictionary: [String: Any]) throws {
-    text = try dictionary.valueFor(key: CodingKeys.text.rawValue)
-    fontSize = try dictionary.valueFor(key: CodingKeys.fontSize.rawValue)
-    fontFamily = try dictionary.valueFor(key: CodingKeys.fontFamily.rawValue)
-    let justificationValue: Int = try dictionary.valueFor(key: CodingKeys.justification.rawValue)
+    text = try dictionary.value(for: CodingKeys.text.rawValue)
+    fontSize = try dictionary.value(for: CodingKeys.fontSize.rawValue)
+    fontFamily = try dictionary.value(for: CodingKeys.fontFamily.rawValue)
+    let justificationValue: Int = try dictionary.value(for: CodingKeys.justification.rawValue)
     guard let justification = TextJustification(rawValue: justificationValue) else {
       throw InitializableError.invalidInput
     }
     self.justification = justification
-    tracking = try dictionary.valueFor(key: CodingKeys.tracking.rawValue)
-    lineHeight = try dictionary.valueFor(key: CodingKeys.lineHeight.rawValue)
-    baseline = try dictionary.valueFor(key: CodingKeys.baseline.rawValue)
+    tracking = try dictionary.value(for: CodingKeys.tracking.rawValue)
+    lineHeight = try dictionary.value(for: CodingKeys.lineHeight.rawValue)
+    baseline = try dictionary.value(for: CodingKeys.baseline.rawValue)
     if let fillColorRawValue = dictionary[CodingKeys.fillColorData.rawValue] {
       fillColorData = try? Color(value: fillColorRawValue)
     } else {
@@ -43,8 +43,8 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
     } else {
       strokeColorData = nil
     }
-    strokeWidth = try? dictionary.valueFor(key: CodingKeys.strokeWidth.rawValue)
-    strokeOverFill = try? dictionary.valueFor(key: CodingKeys.strokeOverFill.rawValue)
+    strokeWidth = try? dictionary.value(for: CodingKeys.strokeWidth.rawValue)
+    strokeOverFill = try? dictionary.value(for: CodingKeys.strokeOverFill.rawValue)
     if let textFramePositionRawValue = dictionary[CodingKeys.textFramePosition.rawValue] {
       textFramePosition = try? Vector3D(value: textFramePositionRawValue)
     } else {

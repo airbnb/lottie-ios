@@ -19,7 +19,7 @@ final class Group: ShapeItem {
   }
 
   required init(dictionary: [String: Any]) throws {
-    let itemDictionaries: [[String: Any]] = try dictionary.valueFor(key: CodingKeys.items.rawValue)
+    let itemDictionaries: [[String: Any]] = try dictionary.value(for: CodingKeys.items.rawValue)
     items = try [ShapeItem].fromDictionaries(itemDictionaries)
     try super.init(dictionary: dictionary)
   }
