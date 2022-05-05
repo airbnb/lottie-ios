@@ -126,12 +126,3 @@ extension LayerAnimationContext: CompatibilityTrackerProviding {
     currentKeypath.fullPath
   }
 }
-
-extension Array where Element == CompatibilityIssue {
-  var compatibilityMessage: String {
-    let lines = ["Encountered Core Animation compatibility issues while setting up animation:"]
-      + map { $0.description }
-
-    return lines.joined(separator: "\n")
-  }
-}

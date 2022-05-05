@@ -974,11 +974,21 @@ final public class AnimationView: AnimationViewBase {
       coreAnimationLayer.didSetUpAnimation = { compatibilityIssues in
         LottieLogger.shared.assert(
           compatibilityIssues.isEmpty,
-          compatibilityIssues.compatibilityMessage)
+          "Encountered Core Animation compatibility issues while setting up animation:\n"
+            + compatibilityIssues.map { $0.description }.joined(separator: "\n") + "\n\n"
+            + """
+              This animation cannot be rendered correctly by the Core Animation engine.
+              To resolve this issue, you can use `RenderingEngineOption.automatic`, which automatically falls back
+              to the Main Thread rendering engine when necessary, or just use `RenderingEngineOption.mainThread`.
+
+              """)
       }
 
       return coreAnimationLayer
     } catch {
+      // This should never happen, because we initialize the `CoreAnimationLayer` with
+      // `CompatibilityTracker.Mode.track` (which reports errors in `didSetUpAnimation`,
+      // not by throwing).
       LottieLogger.shared.assertionFailure("Encountered unexpected error \(error)")
       return nil
     }
@@ -1003,6 +1013,9 @@ final public class AnimationView: AnimationViewBase {
       if case CompatibilityTracker.Error.encounteredCompatibilityIssue(let compatibilityIssue) = error {
         automaticEngineLayerDidSetUpAnimation([compatibilityIssue])
       } else {
+        // This should never happen, because we expect `CoreAnimationLayer` to only throw
+        // `CompatibilityTracker.Error.encounteredCompatibilityIssue` errors.
+        LottieLogger.shared.assertionFailure("Encountered unexpected error \(error)")
         automaticEngineLayerDidSetUpAnimation([])
       }
 
@@ -1019,8 +1032,15 @@ final public class AnimationView: AnimationViewBase {
     }
 
     LottieLogger.shared.warn(
-      compatibilityIssues.compatibilityMessage
-        + "\nFalling back to Main Thread rendering engine.\n")
+      "Encountered Core Animation compatibility issue while setting up animation:\n"
+        + compatibilityIssues.map { $0.description }.joined(separator: "\n") + "\n"
+        + """
+          This animation may have additional compatibility issues, but animation setup was cancelled early to avoid wasted work.
+
+          Automatically falling back to Main Thread rendering engine. This fallback comes with some additional performance
+          overhead, which can be reduced by manually specifying that this animation should always use the Main Thread engine.
+
+          """)
 
     let animationContext = self.animationContext
     let currentFrame = self.currentFrame

@@ -11,6 +11,9 @@ final class CoreAnimationLayer: BaseAnimationLayer {
 
   // MARK: Lifecycle
 
+  /// Initializes a `CALayer` that renders the given animation using `CAAnimation`s.
+  ///  - This initializer is throwing, but will only throw when using
+  ///    `CompatibilityTracker.Mode.abort`.
   init(
     animation: Animation,
     imageProvider: AnimationImageProvider,
