@@ -8,7 +8,7 @@
 import Foundation
 
 /// A model that holds a vector character
-final class Glyph: Codable {
+final class Glyph: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
@@ -27,6 +27,22 @@ final class Glyph: Codable {
       shapes = try shapeContainer.decode([ShapeItem].self, ofFamily: ShapeType.self, forKey: .shapes)
     } else {
       shapes = []
+    }
+  }
+
+  init(dictionary: [String: Any]) throws {
+    character = try dictionary.valueFor(key: CodingKeys.character.rawValue)
+    fontSize = try dictionary.valueFor(key: CodingKeys.fontSize.rawValue)
+    fontFamily = try dictionary.valueFor(key: CodingKeys.fontFamily.rawValue)
+    fontStyle = try dictionary.valueFor(key: CodingKeys.fontStyle.rawValue)
+    width = try dictionary.valueFor(key: CodingKeys.width.rawValue)
+    if
+      let shapes = dictionary[CodingKeys.shapeWrapper.rawValue] as? [String: Any],
+      let shapeDictionaries = shapes[ShapeKey.shapes.rawValue] as? [[String: Any]]
+    {
+      self.shapes = try [ShapeItem].fromDictionaries(shapeDictionaries)
+    } else {
+      shapes = [ShapeItem]()
     }
   }
 

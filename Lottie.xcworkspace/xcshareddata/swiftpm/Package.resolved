@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Difference",
+        "repositoryURL": "https://github.com/krzysztofzablocki/Difference",
+        "state": {
+          "branch": null,
+          "revision": "02fe1111edc8318c4f8a0da96336fcbcc201f38b",
+          "version": "1.0.1"
+        }
+      },
+      {
         "package": "Epoxy",
         "repositoryURL": "https://github.com/airbnb/epoxy-ios.git",
         "state": {

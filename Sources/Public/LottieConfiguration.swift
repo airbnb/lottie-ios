@@ -6,8 +6,12 @@
 /// Global configuration options for Lottie animations
 public struct LottieConfiguration: Hashable {
 
-  public init(renderingEngine: RenderingEngineOption = .mainThread) {
+  public init(
+    renderingEngine: RenderingEngineOption = .mainThread,
+    decodingStrategy: DecodingStrategy = .codable)
+  {
     self.renderingEngine = renderingEngine
+    self.decodingStrategy = decodingStrategy
   }
 
   /// The global configuration of Lottie,
@@ -16,6 +20,7 @@ public struct LottieConfiguration: Hashable {
 
   /// The rendering engine implementation to use when displaying an animation
   public var renderingEngine: RenderingEngineOption
+  public var decodingStrategy: DecodingStrategy
 
 }
 
@@ -91,5 +96,16 @@ extension RenderingEngineOption: RawRepresentable, CustomStringConvertible {
   public var description: String {
     rawValue
   }
+}
 
+// MARK: - DecodingStrategy
+
+/// How animation files should be decoded
+public enum DecodingStrategy: Hashable {
+  /// Use Codable. This is the default strategy introduced on Lottie 3.
+  case codable
+
+  /// Manually deserialize a dictionary into an Animation. This should be faster,
+  /// but since it's manually implemented, there might be issues while it's experimental.
+  case dictionaryBased
 }

@@ -86,3 +86,28 @@ extension KeyframeData: Encodable where T: Encodable { }
 // MARK: Decodable
 
 extension KeyframeData: Decodable where T: Decodable { }
+
+// MARK: DictionaryInitializable
+
+extension KeyframeData: DictionaryInitializable where T: AnyInitializable {
+  convenience init(dictionary: [String: Any]) throws {
+    let startValue = try? dictionary[CodingKeys.startValue.rawValue].flatMap(T.init)
+    let endValue = try? dictionary[CodingKeys.endValue.rawValue].flatMap(T.init)
+    let time: Double? = try? dictionary.valueFor(key: CodingKeys.time.rawValue)
+    let hold: Int? = try? dictionary.valueFor(key: CodingKeys.hold.rawValue)
+    let inTangent: Vector2D? = try? dictionary.valueFor(key: CodingKeys.inTangent.rawValue)
+    let outTangent: Vector2D? = try? dictionary.valueFor(key: CodingKeys.outTangent.rawValue)
+    let spatialInTangent: Vector3D? = try? dictionary.valueFor(key: CodingKeys.spatialInTangent.rawValue)
+    let spatialOutTangent: Vector3D? = try? dictionary.valueFor(key: CodingKeys.spatialOutTangent.rawValue)
+
+    self.init(
+      startValue: startValue,
+      endValue: endValue,
+      time: time,
+      hold: hold,
+      inTangent: inTangent,
+      outTangent: outTangent,
+      spatialInTangent: spatialInTangent,
+      spatialOutTangent: spatialOutTangent)
+  }
+}

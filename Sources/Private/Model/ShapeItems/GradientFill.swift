@@ -36,6 +36,35 @@ final class GradientFill: ShapeItem {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    let opacityDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.opacity.rawValue)
+    opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
+    let startPointDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.startPoint.rawValue)
+    startPoint = try KeyframeGroup<Vector3D>(dictionary: startPointDictionary)
+    let endPointDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.endPoint.rawValue)
+    endPoint = try KeyframeGroup<Vector3D>(dictionary: endPointDictionary)
+    let gradientRawType: Int = try dictionary.valueFor(key: CodingKeys.gradientType.rawValue)
+    guard let gradient = GradientType(rawValue: gradientRawType) else {
+      throw InitializableError.invalidInput
+    }
+    gradientType = gradient
+    if let highlightLengthDictionary = dictionary[CodingKeys.highlightLength.rawValue] as? [String: Any] {
+      highlightLength = try? KeyframeGroup<Vector1D>(dictionary: highlightLengthDictionary)
+    } else {
+      highlightLength = nil
+    }
+    if let highlightAngleDictionary = dictionary[CodingKeys.highlightAngle.rawValue] as? [String: Any] {
+      highlightAngle = try? KeyframeGroup<Vector1D>(dictionary: highlightAngleDictionary)
+    } else {
+      highlightAngle = nil
+    }
+    let colorsDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.colors.rawValue)
+    let nestedColorsDictionary: [String: Any] = try colorsDictionary.valueFor(key: GradientDataKeys.colors.rawValue)
+    colors = try KeyframeGroup<[Double]>(dictionary: nestedColorsDictionary)
+    numberOfColors = try colorsDictionary.valueFor(key: GradientDataKeys.numberOfColors.rawValue)
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   /// The opacity of the fill

@@ -62,7 +62,7 @@ extension Animation {
       guard let json = try bundle.getAnimationData(name, subdirectory: subdirectory) else {
         return nil
       }
-      let animation = try JSONDecoder().decode(Animation.self, from: json)
+      let animation = try Animation.from(data: json)
       animationCache?.setAnimation(animation, forKey: cacheKey)
       return animation
     } catch {
@@ -94,7 +94,7 @@ extension Animation {
     do {
       /// Decode the animation.
       let json = try Data(contentsOf: URL(fileURLWithPath: filepath))
-      let animation = try JSONDecoder().decode(Animation.self, from: json)
+      let animation = try Animation.from(data: json)
       animationCache?.setAnimation(animation, forKey: filepath)
       return animation
     } catch {
@@ -133,7 +133,7 @@ extension Animation {
 
     do {
       /// Decode animation.
-      let animation = try JSONDecoder().decode(Animation.self, from: json)
+      let animation = try Animation.from(data: json)
       animationCache?.setAnimation(animation, forKey: cacheKey)
       return animation
     } catch {
@@ -165,7 +165,7 @@ extension Animation {
           return
         }
         do {
-          let animation = try JSONDecoder().decode(Animation.self, from: jsonData)
+          let animation = try Animation.from(data: jsonData)
           DispatchQueue.main.async {
             animationCache?.setAnimation(animation, forKey: url.absoluteString)
             closure(animation)
@@ -242,5 +242,24 @@ extension Animation {
   /// Converts Time (Seconds) into Frame Time (Seconds * Framerate)
   public func frameTime(forTime time: TimeInterval) -> AnimationFrameTime {
     CGFloat(time * framerate) + startFrame
+  }
+}
+
+extension Animation {
+  internal static func from(
+    data: Data,
+    strategy: DecodingStrategy = LottieConfiguration.shared.decodingStrategy) throws
+    -> Animation
+  {
+    switch strategy {
+    case .codable:
+      return try JSONDecoder().decode(Animation.self, from: data)
+    case .dictionaryBased:
+      let json = try JSONSerialization.jsonObject(with: data)
+      guard let dict = json as? [String: Any] else {
+        throw InitializableError.invalidInput
+      }
+      return try Animation(dictionary: dict)
+    }
   }
 }

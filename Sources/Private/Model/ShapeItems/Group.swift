@@ -18,6 +18,12 @@ final class Group: ShapeItem {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    let itemDictionaries: [[String: Any]] = try dictionary.valueFor(key: CodingKeys.items.rawValue)
+    items = try [ShapeItem].fromDictionaries(itemDictionaries)
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   /// A list of shape items.

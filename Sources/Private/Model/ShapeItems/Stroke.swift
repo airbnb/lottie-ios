@@ -24,6 +24,35 @@ final class Stroke: ShapeItem {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    let opacityDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.opacity.rawValue)
+    opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
+    let colorDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.color.rawValue)
+    color = try KeyframeGroup<Color>(dictionary: colorDictionary)
+    let widthDictionary: [String: Any] = try dictionary.valueFor(key: CodingKeys.width.rawValue)
+    width = try KeyframeGroup<Vector1D>(dictionary: widthDictionary)
+    if
+      let lineCapRawValue = dictionary[CodingKeys.lineCap.rawValue] as? Int,
+      let lineCap = LineCap(rawValue: lineCapRawValue)
+    {
+      self.lineCap = lineCap
+    } else {
+      lineCap = .round
+    }
+    if
+      let lineJoinRawValue = dictionary[CodingKeys.lineJoin.rawValue] as? Int,
+      let lineJoin = LineJoin(rawValue: lineJoinRawValue)
+    {
+      self.lineJoin = lineJoin
+    } else {
+      lineJoin = .round
+    }
+    miterLimit = (try? dictionary.valueFor(key: CodingKeys.miterLimit.rawValue)) ?? 4
+    let dashPatternDictionaries = dictionary[CodingKeys.dashPattern.rawValue] as? [[String: Any]]
+    dashPattern = try? dashPatternDictionaries?.map({ try DashElement(dictionary: $0) })
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   /// The opacity of the stroke
