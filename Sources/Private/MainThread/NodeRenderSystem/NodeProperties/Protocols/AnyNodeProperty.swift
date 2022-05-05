@@ -25,6 +25,9 @@ protocol AnyNodeProperty {
   /// The value provider for the property
   var valueProvider: AnyValueProvider { get }
 
+  /// The original value provider for the property
+  var originalValueProvider: AnyValueProvider { get }
+
   /// The Type of the value provider
   var valueType: Any.Type { get }
 

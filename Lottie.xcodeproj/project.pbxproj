@@ -545,6 +545,7 @@
 		2EAF5B0427A0798700E00531 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */; };
 		2EAF5B0527A0798700E00531 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */; };
 		2EAF5B0627A0798700E00531 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */; };
+		6DB3BDB628243FA5002A276D /* ValueProvidersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3BDB528243FA5002A276D /* ValueProvidersTests.swift */; };
 		A1D5BAAC27C731A500777D06 /* DataURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D5BAAB27C731A500777D06 /* DataURLTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -749,6 +750,7 @@
 		2EAF59EF27A0798700E00531 /* GradientValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientValueProvider.swift; sourceTree = "<group>"; };
 		2EAF59F027A0798700E00531 /* PointValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointValueProvider.swift; sourceTree = "<group>"; };
 		2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationFontProvider.swift; sourceTree = "<group>"; };
+		6DB3BDB528243FA5002A276D /* ValueProvidersTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ValueProvidersTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		A1D5BAAB27C731A500777D06 /* DataURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataURLTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -818,6 +820,7 @@
 				A1D5BAAB27C731A500777D06 /* DataURLTests.swift */,
 				2E8040BD27A07343006E74CB /* Utils */,
 				2E044E262820536800FA773B /* AutomaticEngineTests.swift */,
+				6DB3BDB528243FA5002A276D /* ValueProvidersTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1809,6 +1812,7 @@
 				2EAF59A727A076BC00E00531 /* Bundle+Module.swift in Sources */,
 				2E8044AE27A07347006E74CB /* Snapshotting+presentationLayer.swift in Sources */,
 				2E72128527BB32DB0027BC56 /* PerformanceTests.swift in Sources */,
+				6DB3BDB628243FA5002A276D /* ValueProvidersTests.swift in Sources */,
 				2E72128327BB329C0027BC56 /* AnimationKeypathTests.swift in Sources */,
 				2E044E272820536800FA773B /* AutomaticEngineTests.swift in Sources */,
 			);

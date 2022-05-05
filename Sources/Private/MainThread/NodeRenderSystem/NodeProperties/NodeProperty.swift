@@ -15,6 +15,7 @@ class NodeProperty<T>: AnyNodeProperty {
 
   init(provider: AnyValueProvider) {
     valueProvider = provider
+    originalValueProvider = valueProvider
     typedContainer = ValueContainer<T>(provider.value(frame: 0) as! T)
     typedContainer.setNeedsUpdate()
   }
@@ -22,6 +23,7 @@ class NodeProperty<T>: AnyNodeProperty {
   // MARK: Internal
 
   var valueProvider: AnyValueProvider
+  var originalValueProvider: AnyValueProvider
 
   var valueType: Any.Type { T.self }
 

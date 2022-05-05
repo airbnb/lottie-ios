@@ -534,6 +534,16 @@ final public class AnimationView: AnimationViewBase {
     animationLayer?.getValue(for: keypath, atFrame: atFrame)
   }
 
+  /// Reads the original value of a property specified by the Keypath.
+  /// This will ignore any value providers and can be useful when implementing a value providers that makes change to the original value from the animation.
+  /// Returns nil if no property is found.
+  ///
+  /// - Parameter for: The keypath used to search for the property.
+  /// - Parameter atFrame: The Frame Time of the value to query. If nil then the current frame is used.
+  public func getOriginalValue(for keypath: AnimationKeypath, atFrame: AnimationFrameTime?) -> Any? {
+    animationLayer?.getOriginalValue(for: keypath, atFrame: atFrame)
+  }
+
   /// Logs all child keypaths.
   public func logHierarchyKeypaths() {
     animationLayer?.logHierarchyKeypaths()
