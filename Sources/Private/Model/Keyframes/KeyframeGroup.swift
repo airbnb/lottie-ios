@@ -112,7 +112,7 @@ extension KeyframeGroup: Encodable where T: Encodable {
         let keyframeData = KeyframeData<T>(
           startValue: keyframe.value,
           endValue: nextKeyframe.value,
-          time: Double(keyframe.time),
+          time: keyframe.time,
           hold: keyframe.isHold ? 1 : nil,
           inTangent: nextKeyframe.inTangent,
           outTangent: keyframe.outTangent,
