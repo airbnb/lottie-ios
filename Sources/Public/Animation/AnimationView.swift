@@ -108,7 +108,7 @@ final public class AnimationView: AnimationViewBase {
     self.configuration = configuration
     super.init(frame: .zero)
     commonInit()
-    makeAnimationLayer()
+    makeAnimationLayer(usingEngine: configuration.renderingEngine)
     if let animation = animation {
       frame = animation.bounds
     }
@@ -161,11 +161,13 @@ final public class AnimationView: AnimationViewBase {
   ///
   /// The default for the Core Animation engine is `continuePlaying`,
   /// since the Core Animation engine does not have any CPU overhead.
-  public lazy var backgroundBehavior: LottieBackgroundBehavior = .default(for: renderingEngine) {
-    didSet {
+  public var backgroundBehavior: LottieBackgroundBehavior {
+    get {
+      let currentBackgroundBehavior = _backgroundBehavior ?? .default(for: currentRenderingEngine ?? .mainThread)
+
       if
-        configuration.renderingEngine == .mainThread,
-        backgroundBehavior == .continuePlaying
+        currentRenderingEngine == .mainThread,
+        _backgroundBehavior == .continuePlaying
       {
         LottieLogger.shared.assertionFailure("""
           `LottieBackgroundBehavior.continuePlaying` should not be used with the Main Thread
@@ -174,6 +176,11 @@ final public class AnimationView: AnimationViewBase {
           the Core Animation rendering engine (which does not have any CPU overhead).
           """)
       }
+
+      return currentBackgroundBehavior
+    }
+    set {
+      _backgroundBehavior = newValue
     }
   }
 
@@ -182,7 +189,7 @@ final public class AnimationView: AnimationViewBase {
   /// be loaded up and set to the beginning of its timeline.
   public var animation: Animation? {
     didSet {
-      makeAnimationLayer()
+      makeAnimationLayer(usingEngine: configuration.renderingEngine)
     }
   }
 
@@ -356,6 +363,27 @@ final public class AnimationView: AnimationViewBase {
       return animation.bounds.size
     }
     return .zero
+  }
+
+  /// The rendering engine currently being used by this view.
+  ///  - This will only be `nil` in cases where the configuration is `automatic`
+  ///    but a `RootAnimationLayer` hasn't been constructed yet
+  public var currentRenderingEngine: RenderingEngine? {
+    switch configuration.renderingEngine {
+    case .specific(let engine):
+      return engine
+
+    case .automatic:
+      guard let animationLayer = animationLayer else {
+        return nil
+      }
+
+      if animationLayer is CoreAnimationLayer {
+        return .coreAnimation
+      } else {
+        return .mainThread
+      }
+    }
   }
 
   /// Plays the animation from its current state to the end.
@@ -898,7 +926,7 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  fileprivate func makeAnimationLayer() {
+  fileprivate func makeAnimationLayer(usingEngine renderingEngine: RenderingEngineOption) {
 
     /// Remove current animation if any
     removeCurrentAnimation()
@@ -913,30 +941,18 @@ final public class AnimationView: AnimationViewBase {
       return
     }
 
-    let animationLayer: RootAnimationLayer
+    let rootAnimationLayer: RootAnimationLayer?
     switch renderingEngine {
-    case .coreAnimation:
-      // TODO: Support `RenderingEngineOption.automatic`, using `CompatibilityTracker.Mode.abort`
-      animationLayer = CoreAnimationLayer(
-        animation: animation,
-        imageProvider: imageProvider,
-        fontProvider: fontProvider,
-        compatibilityTrackerMode: .track,
-        didSetUpAnimation: { compatibilityIssues in
-          LottieLogger.shared.assert(
-            compatibilityIssues.isEmpty,
-            (
-              ["Encountered Core Animation compatibility issues while setting up animation:"]
-                + compatibilityIssues.map { $0.description })
-              .joined(separator: "\n"))
-        })
+    case .automatic:
+      rootAnimationLayer = makeAutomaticEngineLayer(for: animation)
+    case .specific(.coreAnimation):
+      rootAnimationLayer = makeCoreAnimationLayer(for: animation)
+    case .specific(.mainThread):
+      rootAnimationLayer = makeMainThreadAnimationLayer(for: animation)
+    }
 
-    case .mainThread:
-      animationLayer = MainThreadAnimationLayer(
-        animation: animation,
-        imageProvider: imageProvider,
-        textProvider: textProvider,
-        fontProvider: fontProvider)
+    guard let animationLayer = rootAnimationLayer else {
+      return
     }
 
     animationLayer.renderScale = screenScale
@@ -947,6 +963,107 @@ final public class AnimationView: AnimationViewBase {
     animationLayer.setNeedsDisplay()
     setNeedsLayout()
     currentFrame = CGFloat(animation.startFrame)
+  }
+
+  fileprivate func makeMainThreadAnimationLayer(for animation: Animation) -> MainThreadAnimationLayer {
+    MainThreadAnimationLayer(
+      animation: animation,
+      imageProvider: imageProvider,
+      textProvider: textProvider,
+      fontProvider: fontProvider)
+  }
+
+  fileprivate func makeCoreAnimationLayer(for animation: Animation) -> CoreAnimationLayer? {
+    do {
+      let coreAnimationLayer = try CoreAnimationLayer(
+        animation: animation,
+        imageProvider: imageProvider,
+        fontProvider: fontProvider,
+        compatibilityTrackerMode: .track)
+
+      coreAnimationLayer.didSetUpAnimation = { compatibilityIssues in
+        LottieLogger.shared.assert(
+          compatibilityIssues.isEmpty,
+          "Encountered Core Animation compatibility issues while setting up animation:\n"
+            + compatibilityIssues.map { $0.description }.joined(separator: "\n") + "\n\n"
+            + """
+              This animation cannot be rendered correctly by the Core Animation engine.
+              To resolve this issue, you can use `RenderingEngineOption.automatic`, which automatically falls back
+              to the Main Thread rendering engine when necessary, or just use `RenderingEngineOption.mainThread`.
+
+              """)
+      }
+
+      return coreAnimationLayer
+    } catch {
+      // This should never happen, because we initialize the `CoreAnimationLayer` with
+      // `CompatibilityTracker.Mode.track` (which reports errors in `didSetUpAnimation`,
+      // not by throwing).
+      LottieLogger.shared.assertionFailure("Encountered unexpected error \(error)")
+      return nil
+    }
+  }
+
+  fileprivate func makeAutomaticEngineLayer(for animation: Animation) -> CoreAnimationLayer? {
+    do {
+      // Attempt to set up the Core Animation layer. This can either throw immediately in `init`,
+      // or throw an error later in `CALayer.display()` that will be reported in `didSetUpAnimation`.
+      let coreAnimationLayer = try CoreAnimationLayer(
+        animation: animation,
+        imageProvider: imageProvider,
+        fontProvider: fontProvider,
+        compatibilityTrackerMode: .abort)
+
+      coreAnimationLayer.didSetUpAnimation = { [weak self] issues in
+        self?.automaticEngineLayerDidSetUpAnimation(issues)
+      }
+
+      return coreAnimationLayer
+    } catch {
+      if case CompatibilityTracker.Error.encounteredCompatibilityIssue(let compatibilityIssue) = error {
+        automaticEngineLayerDidSetUpAnimation([compatibilityIssue])
+      } else {
+        // This should never happen, because we expect `CoreAnimationLayer` to only throw
+        // `CompatibilityTracker.Error.encounteredCompatibilityIssue` errors.
+        LottieLogger.shared.assertionFailure("Encountered unexpected error \(error)")
+        automaticEngineLayerDidSetUpAnimation([])
+      }
+
+      return nil
+    }
+  }
+
+  // Handles any compatibility issues with the Core Animation engine
+  // by falling back to the Main Thread engine
+  fileprivate func automaticEngineLayerDidSetUpAnimation(_ compatibilityIssues: [CompatibilityIssue]) {
+    // If there weren't any compatibility issues, then there's nothing else to do
+    if compatibilityIssues.isEmpty {
+      return
+    }
+
+    LottieLogger.shared.warn(
+      "Encountered Core Animation compatibility issue while setting up animation:\n"
+        + compatibilityIssues.map { $0.description }.joined(separator: "\n") + "\n"
+        + """
+          This animation may have additional compatibility issues, but animation setup was cancelled early to avoid wasted work.
+
+          Automatically falling back to Main Thread rendering engine. This fallback comes with some additional performance
+          overhead, which can be reduced by manually specifying that this animation should always use the Main Thread engine.
+
+          """)
+
+    let animationContext = self.animationContext
+    let currentFrame = self.currentFrame
+
+    makeAnimationLayer(usingEngine: .mainThread)
+
+    // Set up the Main Thread animation layer using the same configuration that
+    // was being used by the previous Core Animation layer
+    self.currentFrame = currentFrame
+
+    if let animationContext = animationContext {
+      addNewAnimationForContext(animationContext)
+    }
   }
 
   fileprivate func updateAnimationForBackgroundState() {
@@ -989,10 +1106,10 @@ final public class AnimationView: AnimationViewBase {
   ///    this step lets us avoid building the animations twice (once paused
   ///    and once again playing)
   fileprivate func removeCurrentAnimationIfNecessary() {
-    switch renderingEngine {
+    switch currentRenderingEngine {
     case .mainThread:
       removeCurrentAnimation()
-    case .coreAnimation:
+    case .coreAnimation, nil:
       break
     }
   }
@@ -1041,14 +1158,14 @@ final public class AnimationView: AnimationViewBase {
 
     self.animationContext = animationContext
 
-    switch renderingEngine {
+    switch currentRenderingEngine {
     case .mainThread:
       guard window != nil else {
         waitingToPlayAnimation = true
         return
       }
 
-    case .coreAnimation:
+    case .coreAnimation, nil:
       // The Core Animation engine automatically batches animation setup to happen
       // in `CALayer.display()`, which won't be called until the layer is on-screen,
       // so we don't need to defer animation setup at this layer.
@@ -1144,14 +1261,8 @@ final public class AnimationView: AnimationViewBase {
 
   static private let animationName = "Lottie"
 
-  private var renderingEngine: RenderingEngine {
-    switch configuration.renderingEngine {
-    case .automatic:
-      fatalError("Currently unsupported. Check back soon!")
-    case .specific(let engine):
-      return engine
-    }
-  }
+  /// The `LottieBackgroundBehavior` that was specified manually by setting `self.backgroundBehavior`
+  private var _backgroundBehavior: LottieBackgroundBehavior?
 
 }
 

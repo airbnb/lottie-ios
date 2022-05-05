@@ -11,32 +11,24 @@ final class CoreAnimationLayer: BaseAnimationLayer {
 
   // MARK: Lifecycle
 
+  /// Initializes a `CALayer` that renders the given animation using `CAAnimation`s.
+  ///  - This initializer is throwing, but will only throw when using
+  ///    `CompatibilityTracker.Mode.abort`.
   init(
     animation: Animation,
     imageProvider: AnimationImageProvider,
     fontProvider: AnimationFontProvider,
-    compatibilityTrackerMode: CompatibilityTracker.Mode,
-    didSetUpAnimation: (([CompatibilityIssue]) -> Void)? = nil)
+    compatibilityTrackerMode: CompatibilityTracker.Mode)
+    throws
   {
     self.animation = animation
     self.imageProvider = imageProvider
     self.fontProvider = fontProvider
-    self.didSetUpAnimation = didSetUpAnimation
     compatibilityTracker = CompatibilityTracker(mode: compatibilityTrackerMode)
     super.init()
 
     setup()
-
-    do {
-      try setupChildLayers()
-    } catch {
-      if case CompatibilityTracker.Error.encounteredCompatibilityIssue(let compatibilityIssue) = error {
-        // If the initial layer setup was successful, then the animation will continue
-        // being setup later in `CALayer.display()` below. If this initial setup failed,
-        // then we report the error now.
-        didSetUpAnimation?([compatibilityIssue])
-      }
-    }
+    try setupChildLayers()
   }
 
   /// Called by CoreAnimation to create a shadow copy of this layer
@@ -135,6 +127,10 @@ final class CoreAnimationLayer: BaseAnimationLayer {
         try setupAnimation(for: pendingAnimationConfiguration.animationConfiguration)
       } catch {
         if case CompatibilityTracker.Error.encounteredCompatibilityIssue(let compatibilityIssue) = error {
+          // Even though the animation setup failed, we still update the layer's playback state
+          // so it can be read by the parent `AnimationView` when handling this error
+          currentPlaybackState = pendingAnimationConfiguration.playbackState
+
           didSetUpAnimation?([compatibilityIssue])
           return
         }

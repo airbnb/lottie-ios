@@ -55,3 +55,41 @@ public enum RenderingEngine: Hashable {
   /// but doesn't support all Lottie features.
   case coreAnimation
 }
+
+// MARK: - RenderingEngineOption + RawRepresentable, CustomStringConvertible
+
+extension RenderingEngineOption: RawRepresentable, CustomStringConvertible {
+
+  // MARK: Lifecycle
+
+  public init?(rawValue: String) {
+    switch rawValue {
+    case "Automatic":
+      self = .automatic
+    case "Main Thread":
+      self = .mainThread
+    case "Core Animation":
+      self = .coreAnimation
+    default:
+      return nil
+    }
+  }
+
+  // MARK: Public
+
+  public var rawValue: String {
+    switch self {
+    case .automatic:
+      return "Automatic"
+    case .specific(.mainThread):
+      return "Main Thread"
+    case .specific(.coreAnimation):
+      return "Core Animation"
+    }
+  }
+
+  public var description: String {
+    rawValue
+  }
+
+}
