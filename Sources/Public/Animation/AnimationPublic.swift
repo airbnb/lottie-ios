@@ -142,6 +142,29 @@ extension Animation {
     }
   }
 
+  /// Loads a Lottie animation from a `Data` object containing a JSON animation.
+  ///
+  /// - Parameter data: The object to load the animation from.
+  /// - Parameter strategy: How the data should be decoded. Defaults to using the strategy set in `LottieConfiguration.shared`.
+  /// - Returns: Deserialized `Animation`. Optional.
+  ///
+  public static func from(
+    data: Data,
+    strategy: DecodingStrategy = LottieConfiguration.shared.decodingStrategy) throws
+    -> Animation
+  {
+    switch strategy {
+    case .codable:
+      return try JSONDecoder().decode(Animation.self, from: data)
+    case .dictionaryBased:
+      let json = try JSONSerialization.jsonObject(with: data)
+      guard let dict = json as? [String: Any] else {
+        throw InitializableError.invalidInput
+      }
+      return try Animation(dictionary: dict)
+    }
+  }
+
   /// Loads a Lottie animation asynchronously from the URL.
   ///
   /// - Parameter url: The url to load the animation from.
@@ -242,24 +265,5 @@ extension Animation {
   /// Converts Time (Seconds) into Frame Time (Seconds * Framerate)
   public func frameTime(forTime time: TimeInterval) -> AnimationFrameTime {
     CGFloat(time * framerate) + startFrame
-  }
-}
-
-extension Animation {
-  internal static func from(
-    data: Data,
-    strategy: DecodingStrategy = LottieConfiguration.shared.decodingStrategy) throws
-    -> Animation
-  {
-    switch strategy {
-    case .codable:
-      return try JSONDecoder().decode(Animation.self, from: data)
-    case .dictionaryBased:
-      let json = try JSONSerialization.jsonObject(with: data)
-      guard let dict = json as? [String: Any] else {
-        throw InitializableError.invalidInput
-      }
-      return try Animation(dictionary: dict)
-    }
   }
 }
