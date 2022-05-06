@@ -126,10 +126,6 @@ extension CALayer {
   {
     // Convert the list of `Keyframe<T>` into
     // the representation used by `CAKeyframeAnimation`
-    var values = try keyframes.map { keyframeModel in
-      try keyframeValueMapping(keyframeModel.value)
-    }
-
     var keyTimes = keyframes.map { keyframeModel -> NSNumber in
       NSNumber(value: Float(context.progressTime(for: keyframeModel.time)))
     }
@@ -137,11 +133,32 @@ extension CALayer {
     var timingFunctions = self.timingFunctions(for: keyframes)
     let calculationMode = try self.calculationMode(for: keyframes, context: context)
 
-    validate(values: &values, keyTimes: &keyTimes, timingFunctions: &timingFunctions, for: calculationMode)
-
     let animation = CAKeyframeAnimation(keyPath: property.caLayerKeypath)
+
+    // Position animations define a `CGPath` curve that should be followed,
+    // instead of animating directly between keyframe point values.
+    if property.caLayerKeypath == LayerProperty<CGPoint>.position.caLayerKeypath {
+      animation.path = try path(keyframes: keyframes, value: { value in
+        guard let point = try keyframeValueMapping(value) as? CGPoint else {
+          LottieLogger.shared.assertionFailure("Cannot create point from keyframe with value \(value)")
+          return .zero
+        }
+
+        return point
+      })
+    }
+
+    // All other types of keyframes provide individual values that are interpolated by Core Animation
+    else {
+      var values = try keyframes.map { keyframeModel in
+        try keyframeValueMapping(keyframeModel.value)
+      }
+
+      validate(values: &values, keyTimes: &keyTimes, timingFunctions: &timingFunctions, for: calculationMode)
+      animation.values = values
+    }
+
     animation.calculationMode = calculationMode
-    animation.values = values
     animation.keyTimes = keyTimes
     animation.timingFunctions = timingFunctions
     return animation
@@ -203,6 +220,44 @@ extension CALayer {
     }
 
     return timingFunctions
+  }
+
+  /// Creates a `CGPath` for the given `position` keyframes,
+  /// which accounts for `spatialInTangent`s and `spatialOutTangents`
+  private func path<KeyframeValue>(
+    keyframes positionKeyframes: ContiguousArray<Keyframe<KeyframeValue>>,
+    value keyframeValueMapping: (KeyframeValue) throws -> CGPoint) rethrows
+    -> CGPath {
+    let path = CGMutablePath()
+
+    for (index, keyframe) in positionKeyframes.enumerated() {
+      if index == positionKeyframes.indices.first {
+        path.move(to: try keyframeValueMapping(keyframe.value))
+      }
+
+      if index != positionKeyframes.indices.last {
+        let nextKeyframe = positionKeyframes[index + 1]
+
+        if
+          let controlPoint1 = keyframe.spatialOutTangent?.pointValue,
+          let controlPoint2 = nextKeyframe.spatialInTangent?.pointValue,
+          controlPoint1 != .zero,
+          controlPoint2 != .zero
+        {
+          path.addCurve(
+            to: try keyframeValueMapping(nextKeyframe.value),
+            control1: try keyframeValueMapping(keyframe.value) + controlPoint1,
+            control2: try keyframeValueMapping(nextKeyframe.value) + controlPoint2)
+        }
+
+        else {
+          path.addLine(to: try keyframeValueMapping(nextKeyframe.value))
+        }
+      }
+    }
+
+    path.closeSubpath()
+    return path
   }
 
   /// Validates that the requirements of the `CAKeyframeAnimation` API are met correctly

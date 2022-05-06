@@ -70,9 +70,40 @@ extension RenderingEngineOption: RawRepresentable, CustomStringConvertible {
   // MARK: Lifecycle
 
   public init?(rawValue: String) {
-    switch rawValue {
-    case "Automatic":
+    if rawValue == "Automatic" {
       self = .automatic
+    } else if let engine = RenderingEngine(rawValue: rawValue) {
+      self = .specific(engine)
+    } else {
+      return nil
+    }
+  }
+
+  // MARK: Public
+
+  public var rawValue: String {
+    switch self {
+    case .automatic:
+      return "Automatic"
+    case .specific(let engine):
+      return engine.rawValue
+    }
+  }
+
+  public var description: String {
+    rawValue
+  }
+
+}
+
+// MARK: - RenderingEngine + RawRepresentable, CustomStringConvertible
+
+extension RenderingEngine: RawRepresentable, CustomStringConvertible {
+
+  // MARK: Lifecycle
+
+  public init?(rawValue: String) {
+    switch rawValue {
     case "Main Thread":
       self = .mainThread
     case "Core Animation":
@@ -86,11 +117,9 @@ extension RenderingEngineOption: RawRepresentable, CustomStringConvertible {
 
   public var rawValue: String {
     switch self {
-    case .automatic:
-      return "Automatic"
-    case .specific(.mainThread):
+    case .mainThread:
       return "Main Thread"
-    case .specific(.coreAnimation):
+    case .coreAnimation:
       return "Core Animation"
     }
   }
