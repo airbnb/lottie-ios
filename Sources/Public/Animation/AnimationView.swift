@@ -1062,11 +1062,14 @@ final public class AnimationView: AnimationViewBase {
     self.currentFrame = currentFrame
 
     if let animationContext = animationContext {
-      // We have to wait until the next run loop cycle to start playing the animation,
-      // or it may not actually start as expected.
-      DispatchQueue.main.async {
-        self.addNewAnimationForContext(animationContext)
-      }
+      // `AnimationContext.closure` (`AnimationCompletionDelegate`) is a reference type
+      // that is the animation layer's `CAAnimationDelegate`, and holds a reference to
+      // the animation layer. Reusing a single instance across different animation layers
+      // can cause the animation setup to fail, so we create a copy of the `animationContext`:
+      addNewAnimationForContext(AnimationContext(
+        playFrom: animationContext.playFrom,
+        playTo: animationContext.playTo,
+        closure: animationContext.closure.completionBlock))
     }
   }
 
