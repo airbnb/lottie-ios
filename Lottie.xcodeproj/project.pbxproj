@@ -557,6 +557,7 @@
 		6DB3BDBD28245A14002A276D /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3BDBB28245A14002A276D /* CGPointExtension.swift */; };
 		6DB3BDBE28245A14002A276D /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3BDBB28245A14002A276D /* CGPointExtension.swift */; };
 		6DB3BDC328245AA2002A276D /* ParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3BDBF28245A6A002A276D /* ParsingTests.swift */; };
+		6DEF696E2824A76C007D640F /* BundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEF696D2824A76C007D640F /* BundleTests.swift */; };
 		A1D5BAAC27C731A500777D06 /* DataURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D5BAAB27C731A500777D06 /* DataURLTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -766,6 +767,7 @@
 		6DB3BDB7282454A6002A276D /* DictionaryInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryInitializable.swift; sourceTree = "<group>"; };
 		6DB3BDBB28245A14002A276D /* CGPointExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
 		6DB3BDBF28245A6A002A276D /* ParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingTests.swift; sourceTree = "<group>"; };
+		6DEF696D2824A76C007D640F /* BundleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleTests.swift; sourceTree = "<group>"; };
 		A1D5BAAB27C731A500777D06 /* DataURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataURLTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -833,6 +835,7 @@
 				2E80412527A07343006E74CB /* SnapshotConfiguration.swift */,
 				2E72128227BB329C0027BC56 /* AnimationKeypathTests.swift */,
 				2E72128427BB32DB0027BC56 /* PerformanceTests.swift */,
+				6DEF696D2824A76C007D640F /* BundleTests.swift */,
 				6DB3BDBF28245A6A002A276D /* ParsingTests.swift */,
 				A1D5BAAB27C731A500777D06 /* DataURLTests.swift */,
 				2E8040BD27A07343006E74CB /* Utils */,
@@ -1834,6 +1837,7 @@
 				2E80450C27A07347006E74CB /* SnapshotTests.swift in Sources */,
 				2E09FA0627B6CEB600BA84E5 /* HardcodedFontProvider.swift in Sources */,
 				2E80450D27A07347006E74CB /* SnapshotConfiguration.swift in Sources */,
+				6DEF696E2824A76C007D640F /* BundleTests.swift in Sources */,
 				2EAF59A727A076BC00E00531 /* Bundle+Module.swift in Sources */,
 				2E8044AE27A07347006E74CB /* Snapshotting+presentationLayer.swift in Sources */,
 				2E72128527BB32DB0027BC56 /* PerformanceTests.swift in Sources */,
