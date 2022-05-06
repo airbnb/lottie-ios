@@ -228,8 +228,7 @@ extension CALayer {
     keyframes positionKeyframes: ContiguousArray<Keyframe<KeyframeValue>>,
     value keyframeValueMapping: (KeyframeValue) throws -> CGPoint)
     rethrows
-    -> CGPath
-  {
+    -> CGPath {
     let path = CGMutablePath()
 
     for (index, keyframe) in positionKeyframes.enumerated() {
