@@ -23,6 +23,8 @@ extension Bundle {
 
 extension String {
   fileprivate func removingJSONSuffix() -> String {
+    // Allow filenames to be passed with a ".json" extension (but not other extensions)
+    // to keep the behavior from Lottie 2.x - instead of failing to load the animation
     guard hasSuffix(".json") else {
       return self
     }
