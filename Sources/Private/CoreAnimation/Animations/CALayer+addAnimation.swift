@@ -137,7 +137,7 @@ extension CALayer {
 
     // Position animations define a `CGPath` curve that should be followed,
     // instead of animating directly between keyframe point values.
-    if ValueRepresentation.self == CGPoint.self {
+    if property.caLayerKeypath == LayerProperty<CGPoint>.position.caLayerKeypath {
       animation.path = try path(keyframes: keyframes, value: { value in
         guard let point = try keyframeValueMapping(value) as? CGPoint else {
           LottieLogger.shared.assertionFailure("Cannot create point from keyframe with value \(value)")
@@ -226,8 +226,7 @@ extension CALayer {
   /// which accounts for `spatialInTangent`s and `spatialOutTangents`
   private func path<KeyframeValue>(
     keyframes positionKeyframes: ContiguousArray<Keyframe<KeyframeValue>>,
-    value keyframeValueMapping: (KeyframeValue) throws -> CGPoint)
-    rethrows
+    value keyframeValueMapping: (KeyframeValue) throws -> CGPoint) rethrows
     -> CGPath {
     let path = CGMutablePath()
 
