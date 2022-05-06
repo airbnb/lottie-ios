@@ -1,0 +1,4 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[Shape Layer 2.Shape Layer 2] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Ball_final.Ball_final] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Ball_final Blue.Ball_final Blue] Mixed `isHold` / `!isHold` keyframes are currently unsupported

@@ -1,0 +1,13 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[H_Mid_02.H_Mid_02] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Nose.Nose] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Nose.Ellipse 1.Path 1] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Nose_Small.Nose_Small] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Eye_02.Eye_02] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Eye_02.Eye_02] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Eye_02.Eye_02] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Eye_02.Eye_02] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Eye_02] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Eye_02] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Eye_02] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Eye_02] Mixed `isHold` / `!isHold` keyframes are currently unsupported
