@@ -259,7 +259,11 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   private func rebuildCurrentAnimation() {
     guard
       let currentConfiguration = currentAnimationConfiguration,
-      let playbackState = playbackState
+      let playbackState = playbackState,
+      // Don't replace any pending animations that are queued to begin
+      // on the next run loop cycle, since an existing pending animation
+      // will cause the animation to be rebuilt anyway.
+      pendingAnimationConfiguration == nil
     else { return }
 
     removeAnimations()
