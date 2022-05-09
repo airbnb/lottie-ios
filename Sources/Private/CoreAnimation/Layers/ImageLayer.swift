@@ -3,6 +3,8 @@
 
 import QuartzCore
 
+// MARK: - ImageLayer
+
 /// The `CALayer` type responsible for rendering `ImageLayerModel`s
 final class ImageLayer: BaseCompositionLayer {
 
@@ -39,15 +41,39 @@ final class ImageLayer: BaseCompositionLayer {
       let imageAsset = context.animation.assetLibrary?.imageAssets[imageLayer.referenceID],
       let image = context.imageProvider.imageForAsset(asset: imageAsset)
     else {
+      self.imageAsset = nil
       contents = nil
       return
     }
 
+    self.imageAsset = imageAsset
     contents = image
+    setNeedsLayout()
   }
 
   // MARK: Private
 
   private let imageLayer: ImageLayerModel
+  private var imageAsset: ImageAsset?
 
+}
+
+// MARK: CustomLayoutLayer
+
+extension ImageLayer: CustomLayoutLayer {
+  func layout(superlayerBounds: CGRect) {
+    anchorPoint = .zero
+
+    guard let imageAsset = imageAsset else {
+      bounds = superlayerBounds
+      return
+    }
+
+    // Image layers specifically need to use the size of the image itself
+    bounds = CGRect(
+      x: superlayerBounds.origin.x,
+      y: superlayerBounds.origin.y,
+      width: CGFloat(imageAsset.width),
+      height: CGFloat(imageAsset.height))
+  }
 }
