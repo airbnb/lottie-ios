@@ -15,6 +15,7 @@ class BaseCompositionLayer: BaseAnimationLayer {
     super.init()
 
     setupSublayers()
+    compositingFilter = layerModel.blendMode.filterName
     name = layerModel.name
   }
 
