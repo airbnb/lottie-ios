@@ -1,0 +1,9 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[Shape Layer 1.Trim Paths 1] The CoreAnimation rendering engine doesn't support Trim offsets
+[Shape Layer 1.Trim Paths 1] The CoreAnimation rendering engine doesn't support Trim offsets
+[Shape Layer 2.Trim Paths 1] The CoreAnimation rendering engine doesn't support Trim offsets
+[Shape Layer 2.Trim Paths 1] The CoreAnimation rendering engine doesn't support Trim offsets
+[Shape Layer 4.Trim Paths 1] The CoreAnimation rendering engine doesn't support Trim offsets
+[Shape Layer 4.Trim Paths 1] The CoreAnimation rendering engine doesn't support Trim offsets
+[Shape Layer 3.Trim Paths 1] The CoreAnimation rendering engine doesn't support Trim offsets
+[Shape Layer 3.Trim Paths 1] The CoreAnimation rendering engine doesn't support Trim offsets

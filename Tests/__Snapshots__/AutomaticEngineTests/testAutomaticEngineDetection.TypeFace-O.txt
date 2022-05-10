@@ -1,0 +1,19 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body.Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body.Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Hamster body] Mixed `isHold` / `!isHold` keyframes are currently unsupported

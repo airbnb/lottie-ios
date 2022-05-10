@@ -62,7 +62,7 @@ extension Animation {
       guard let json = try bundle.getAnimationData(name, subdirectory: subdirectory) else {
         return nil
       }
-      let animation = try JSONDecoder().decode(Animation.self, from: json)
+      let animation = try Animation.from(data: json)
       animationCache?.setAnimation(animation, forKey: cacheKey)
       return animation
     } catch {
@@ -94,7 +94,7 @@ extension Animation {
     do {
       /// Decode the animation.
       let json = try Data(contentsOf: URL(fileURLWithPath: filepath))
-      let animation = try JSONDecoder().decode(Animation.self, from: json)
+      let animation = try Animation.from(data: json)
       animationCache?.setAnimation(animation, forKey: filepath)
       return animation
     } catch {
@@ -133,12 +133,35 @@ extension Animation {
 
     do {
       /// Decode animation.
-      let animation = try JSONDecoder().decode(Animation.self, from: json)
+      let animation = try Animation.from(data: json)
       animationCache?.setAnimation(animation, forKey: cacheKey)
       return animation
     } catch {
       /// Decoding error.
       return nil
+    }
+  }
+
+  /// Loads a Lottie animation from a `Data` object containing a JSON animation.
+  ///
+  /// - Parameter data: The object to load the animation from.
+  /// - Parameter strategy: How the data should be decoded. Defaults to using the strategy set in `LottieConfiguration.shared`.
+  /// - Returns: Deserialized `Animation`. Optional.
+  ///
+  public static func from(
+    data: Data,
+    strategy: DecodingStrategy = LottieConfiguration.shared.decodingStrategy) throws
+    -> Animation
+  {
+    switch strategy {
+    case .codable:
+      return try JSONDecoder().decode(Animation.self, from: data)
+    case .dictionaryBased:
+      let json = try JSONSerialization.jsonObject(with: data)
+      guard let dict = json as? [String: Any] else {
+        throw InitializableError.invalidInput
+      }
+      return try Animation(dictionary: dict)
     }
   }
 
@@ -165,7 +188,7 @@ extension Animation {
           return
         }
         do {
-          let animation = try JSONDecoder().decode(Animation.self, from: jsonData)
+          let animation = try Animation.from(data: jsonData)
           DispatchQueue.main.async {
             animationCache?.setAnimation(animation, forKey: url.absoluteString)
             closure(animation)

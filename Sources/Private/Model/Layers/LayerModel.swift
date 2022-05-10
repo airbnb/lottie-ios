@@ -79,7 +79,7 @@ public enum BlendMode: Int, Codable {
 // MARK: - LayerModel
 
 /// A base top container for shapes, images, and other view objects.
-class LayerModel: Codable {
+class LayerModel: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
@@ -99,6 +99,45 @@ class LayerModel: Codable {
     timeStretch = try container.decodeIfPresent(Double.self, forKey: .timeStretch) ?? 1
     matte = try container.decodeIfPresent(MatteType.self, forKey: .matte)
     hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden) ?? false
+  }
+
+  required init(dictionary: [String: Any]) throws {
+    name = (try? dictionary.value(for: CodingKeys.name)) ?? "Layer"
+    index = try dictionary.value(for: CodingKeys.index) ?? .random(in: Int.min...Int.max)
+    type = LayerType(rawValue: try dictionary.value(for: CodingKeys.type)) ?? .null
+    if
+      let coordinateSpaceRawValue = dictionary[CodingKeys.coordinateSpace.rawValue] as? Int,
+      let coordinateSpace = CoordinateSpace(rawValue: coordinateSpaceRawValue)
+    {
+      self.coordinateSpace = coordinateSpace
+    } else {
+      coordinateSpace = .type2d
+    }
+    inFrame = try dictionary.value(for: CodingKeys.inFrame)
+    outFrame = try dictionary.value(for: CodingKeys.outFrame)
+    startTime = try dictionary.value(for: CodingKeys.startTime)
+    transform = try Transform(dictionary: try dictionary.value(for: CodingKeys.transform))
+    parent = try? dictionary.value(for: CodingKeys.parent)
+    if
+      let blendModeRawValue = dictionary[CodingKeys.blendMode.rawValue] as? Int,
+      let blendMode = BlendMode(rawValue: blendModeRawValue)
+    {
+      self.blendMode = blendMode
+    } else {
+      blendMode = .normal
+    }
+    if let maskDictionaries = dictionary[CodingKeys.masks.rawValue] as? [[String: Any]] {
+      masks = try maskDictionaries.map({ try Mask(dictionary: $0) })
+    } else {
+      masks = nil
+    }
+    timeStretch = (try? dictionary.value(for: CodingKeys.timeStretch)) ?? 1
+    if let matteRawValue = dictionary[CodingKeys.matte.rawValue] as? Int {
+      matte = MatteType(rawValue: matteRawValue)
+    } else {
+      matte = nil
+    }
+    hidden = (try? dictionary.value(for: CodingKeys.hidden)) ?? false
   }
 
   // MARK: Internal
@@ -143,9 +182,9 @@ class LayerModel: Codable {
 
   let hidden: Bool
 
-  // MARK: Private
+  // MARK: Fileprivate
 
-  private enum CodingKeys: String, CodingKey {
+  fileprivate enum CodingKeys: String, CodingKey {
     case name = "nm"
     case index = "ind"
     case type = "ty"
@@ -160,5 +199,30 @@ class LayerModel: Codable {
     case timeStretch = "sr"
     case matte = "tt"
     case hidden = "hd"
+  }
+}
+
+extension Array where Element == LayerModel {
+
+  static func fromDictionaries(_ dictionaries: [[String: Any]]) throws -> [LayerModel] {
+    try dictionaries.compactMap { dictionary in
+      let layerType = dictionary[LayerModel.CodingKeys.type.rawValue] as? Int
+      switch LayerType(rawValue: layerType ?? LayerType.null.rawValue) {
+      case .precomp:
+        return try PreCompLayerModel(dictionary: dictionary)
+      case .solid:
+        return try SolidLayerModel(dictionary: dictionary)
+      case .image:
+        return try ImageLayerModel(dictionary: dictionary)
+      case .null:
+        return try LayerModel(dictionary: dictionary)
+      case .shape:
+        return try ShapeLayerModel(dictionary: dictionary)
+      case .text:
+        return try TextLayerModel(dictionary: dictionary)
+      case .none:
+        return nil
+      }
+    }
   }
 }

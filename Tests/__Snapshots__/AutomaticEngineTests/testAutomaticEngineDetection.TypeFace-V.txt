@@ -1,0 +1,5 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[Shape Layer 13.Shape Layer 13] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Shape Layer 13.Shape Layer 13] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Shape Layer 14.Shape Layer 14] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[Shape Layer 14.Shape Layer 14] Mixed `isHold` / `!isHold` keyframes are currently unsupported

@@ -32,6 +32,51 @@ final class Repeater: ShapeItem {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    if let copiesDictionary = dictionary[CodingKeys.copies.rawValue] as? [String: Any] {
+      copies = try KeyframeGroup<Vector1D>(dictionary: copiesDictionary)
+    } else {
+      copies = KeyframeGroup(Vector1D(0))
+    }
+    if let offsetDictionary = dictionary[CodingKeys.offset.rawValue] as? [String: Any] {
+      offset = try KeyframeGroup<Vector1D>(dictionary: offsetDictionary)
+    } else {
+      offset = KeyframeGroup(Vector1D(0))
+    }
+    let transformDictionary: [String: Any] = try dictionary.value(for: CodingKeys.transform)
+    if let startOpacityDictionary = transformDictionary[TransformKeys.startOpacity.rawValue] as? [String: Any] {
+      startOpacity = try KeyframeGroup<Vector1D>(dictionary: startOpacityDictionary)
+    } else {
+      startOpacity = KeyframeGroup(Vector1D(100))
+    }
+    if let endOpacityDictionary = transformDictionary[TransformKeys.endOpacity.rawValue] as? [String: Any] {
+      endOpacity = try KeyframeGroup<Vector1D>(dictionary: endOpacityDictionary)
+    } else {
+      endOpacity = KeyframeGroup(Vector1D(100))
+    }
+    if let rotationDictionary = transformDictionary[TransformKeys.rotation.rawValue] as? [String: Any] {
+      rotation = try KeyframeGroup<Vector1D>(dictionary: rotationDictionary)
+    } else {
+      rotation = KeyframeGroup(Vector1D(0))
+    }
+    if let positionDictionary = transformDictionary[TransformKeys.position.rawValue] as? [String: Any] {
+      position = try KeyframeGroup<Vector3D>(dictionary: positionDictionary)
+    } else {
+      position = KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+    }
+    if let anchorPointDictionary = transformDictionary[TransformKeys.anchorPoint.rawValue] as? [String: Any] {
+      anchorPoint = try KeyframeGroup<Vector3D>(dictionary: anchorPointDictionary)
+    } else {
+      anchorPoint = KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+    }
+    if let scaleDictionary = transformDictionary[TransformKeys.scale.rawValue] as? [String: Any] {
+      scale = try KeyframeGroup<Vector3D>(dictionary: scaleDictionary)
+    } else {
+      scale = KeyframeGroup(Vector3D(x: Double(100), y: 100, z: 100))
+    }
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   /// The number of copies to repeat

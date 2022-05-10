@@ -22,6 +22,14 @@ public final class ImageAsset: Asset {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    name = try dictionary.value(for: CodingKeys.name)
+    directory = try dictionary.value(for: CodingKeys.directory)
+    width = try dictionary.value(for: CodingKeys.width)
+    height = try dictionary.value(for: CodingKeys.height)
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Public
 
   /// Image name

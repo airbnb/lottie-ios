@@ -20,6 +20,13 @@ final class SolidLayerModel: LayerModel {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    colorHex = try dictionary.value(for: CodingKeys.colorHex)
+    width = try dictionary.value(for: CodingKeys.width)
+    height = try dictionary.value(for: CodingKeys.height)
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   /// The color of the solid in Hex // Change to value provider.

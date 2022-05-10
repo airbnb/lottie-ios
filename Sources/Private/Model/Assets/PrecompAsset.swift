@@ -17,6 +17,12 @@ final class PrecompAsset: Asset {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    let layerDictionaries: [[String: Any]] = try dictionary.value(for: CodingKeys.layers)
+    layers = try [LayerModel].fromDictionaries(layerDictionaries)
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {

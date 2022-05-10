@@ -46,11 +46,19 @@ class AnimationPreviewViewController: UIViewController {
     animationView.backgroundBehavior = .pauseAndRestore
     animationView.translatesAutoresizingMaskIntoConstraints = false
 
+    engineLabel.font = .preferredFont(forTextStyle: .footnote)
+    engineLabel.textColor = .secondaryLabel
+    engineLabel.translatesAutoresizingMaskIntoConstraints = false
+    engineLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+    view.addSubview(engineLabel)
+
     NSLayoutConstraint.activate([
       animationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       animationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      animationView.bottomAnchor.constraint(equalTo: slider.topAnchor, constant: -12),
+      animationView.bottomAnchor.constraint(equalTo: engineLabel.topAnchor, constant: -8),
       animationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      engineLabel.trailingAnchor.constraint(equalTo: slider.trailingAnchor),
+      engineLabel.bottomAnchor.constraint(equalTo: slider.topAnchor),
     ])
 
     /// Slider
@@ -77,6 +85,8 @@ class AnimationPreviewViewController: UIViewController {
     if animationView.isAnimationPlaying {
       slider.value = Float(animationView.realtimeAnimationProgress)
     }
+
+    engineLabel.text = animationView.currentRenderingEngine?.description
   }
 
   override func viewDidAppear(_ animated: Bool) {
@@ -89,6 +99,7 @@ class AnimationPreviewViewController: UIViewController {
   private let animationName: String
   private let animationView = AnimationView()
   private let slider = UISlider()
+  private let engineLabel = UILabel()
 
   private var displayLink: CADisplayLink?
 

@@ -41,6 +41,25 @@ extension Vector1D: Codable {
 
 }
 
+// MARK: - Vector1D + AnyInitializable
+
+extension Vector1D: AnyInitializable {
+
+  init(value: Any) throws {
+    if
+      let array = value as? [Double],
+      let double = array.first
+    {
+      self.value = double
+    } else if let double = value as? Double {
+      self.value = double
+    } else {
+      throw InitializableError.invalidInput
+    }
+  }
+
+}
+
 extension Double {
   var vectorValue: Vector1D {
     Vector1D(self)
@@ -102,8 +121,36 @@ public struct Vector2D: Codable, Hashable {
   }
 }
 
-extension Vector2D {
+// MARK: AnyInitializable
 
+extension Vector2D: AnyInitializable {
+
+  init(value: Any) throws {
+    guard let dictionary = value as? [String: Any] else {
+      throw InitializableError.invalidInput
+    }
+
+    if
+      let array = dictionary[CodingKeys.x.rawValue] as? [Double],
+      let double = array.first
+    {
+      x = double
+    } else if let double = dictionary[CodingKeys.x.rawValue] as? Double {
+      x = double
+    } else {
+      throw InitializableError.invalidInput
+    }
+    if
+      let array = dictionary[CodingKeys.y.rawValue] as? [Double],
+      let double = array.first
+    {
+      y = double
+    } else if let double = dictionary[CodingKeys.y.rawValue] as? Double {
+      y = double
+    } else {
+      throw InitializableError.invalidInput
+    }
+  }
 }
 
 extension CGPoint {
@@ -156,6 +203,21 @@ extension Vector3D: Codable {
     try container.encode(x)
     try container.encode(y)
     try container.encode(z)
+  }
+
+}
+
+// MARK: - Vector3D + AnyInitializable
+
+extension Vector3D: AnyInitializable {
+
+  init(value: Any) throws {
+    guard var array = value as? [Double] else {
+      throw InitializableError.invalidInput
+    }
+    x = array.count > 0 ? array.removeFirst() : 0
+    y = array.count > 0 ? array.removeFirst() : 0
+    z = array.count > 0 ? array.removeFirst() : 0
   }
 
 }

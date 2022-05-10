@@ -30,6 +30,21 @@ final class Trim: ShapeItem {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    let startDictionary: [String: Any] = try dictionary.value(for: CodingKeys.start)
+    start = try KeyframeGroup<Vector1D>(dictionary: startDictionary)
+    let endDictionary: [String: Any] = try dictionary.value(for: CodingKeys.end)
+    end = try KeyframeGroup<Vector1D>(dictionary: endDictionary)
+    let offsetDictionary: [String: Any] = try dictionary.value(for: CodingKeys.offset)
+    offset = try KeyframeGroup<Vector1D>(dictionary: offsetDictionary)
+    let trimTypeRawValue: Int = try dictionary.value(for: CodingKeys.trimType)
+    guard let trimType = TrimType(rawValue: trimTypeRawValue) else {
+      throw InitializableError.invalidInput
+    }
+    self.trimType = trimType
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   /// The start of the trim

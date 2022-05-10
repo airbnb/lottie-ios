@@ -14,7 +14,11 @@ final class PerformanceTests: XCTestCase {
 
   func testAnimationViewSetup_simpleAnimation() {
     // Compare the performance of displaying this simple animation in the two animation engines
-    let ratio = compareEngineSetupPerformance(for: simpleAnimation, iterations: 2000)
+    let ratio = compareEngineSetupPerformance(
+      of: .mainThread,
+      with: .coreAnimation,
+      for: simpleAnimation,
+      iterations: 2000)
 
     // This is basically a snapshot test for the performance of the Core Animation engine
     // compared to the Main Thread engine. Currently, the Core Animation engine is
@@ -23,11 +27,30 @@ final class PerformanceTests: XCTestCase {
   }
 
   func testAnimationViewSetup_complexAnimation() {
-    let ratio = compareEngineSetupPerformance(for: complexAnimation, iterations: 500)
+    // Compare the performance of displaying this simple animation in the two animation engines
+    let ratio = compareEngineSetupPerformance(
+      of: .mainThread,
+      with: .coreAnimation,
+      for: complexAnimation,
+      iterations: 500)
 
     // The Core Animation engine is currently about 1.5x slower than the
     // Main Thread engine in this example.
-    XCTAssertEqual(ratio, 1.5, accuracy: 0.45)
+    XCTAssertEqual(ratio, 1.5, accuracy: 0.6)
+  }
+
+  func testAnimationViewSetup_automaticEngine() {
+    // Compare the performance of displaying this simple animation with the core animation engine
+    // vs with the automatic engine option
+    let ratio = compareEngineSetupPerformance(
+      of: .coreAnimation,
+      with: .automatic,
+      for: simpleAnimation,
+      iterations: 2000)
+
+    // The automatic engine option should have the same performance as the core animation engine,
+    // when rendering an animation supported by the CA engine.
+    XCTAssertEqual(ratio, 1.0, accuracy: 0.2)
   }
 
   func testAnimationViewScrubbing_simpleAnimation() {
@@ -38,6 +61,18 @@ final class PerformanceTests: XCTestCase {
   func testAnimationViewScrubbing_complexAnimation() {
     let ratio = compareEngineScrubbingPerformance(for: complexAnimation, iterations: 2000)
     XCTAssertEqual(ratio, 0.01, accuracy: 0.01)
+  }
+
+  func testParsing_simpleAnimation() throws {
+    let data = try XCTUnwrap(Bundle.module.getAnimationData("loading_dots_1", subdirectory: "Samples/LottieFiles"))
+    let ratio = try compareDeserializationPerformance(data: data, iterations: 2000)
+    XCTAssertEqual(ratio, 2, accuracy: 0.5)
+  }
+
+  func testParsing_complexAnimation() throws {
+    let data = try XCTUnwrap(Bundle.module.getAnimationData("LottieLogo2", subdirectory: "Samples"))
+    let ratio = try compareDeserializationPerformance(data: data, iterations: 500)
+    XCTAssertEqual(ratio, 2, accuracy: 0.5)
   }
 
   override func setUp() {
@@ -60,43 +95,49 @@ final class PerformanceTests: XCTestCase {
     bundle: .module,
     subdirectory: "Samples")!
 
-  /// Compares initializing the given animation with both the Main Thread and Core Animation engine,
-  /// and returns the ratio of how much slower the Core Animation is than the Main Thread engine
-  private func compareEngineSetupPerformance(for animation: Animation, iterations: Int) -> Double {
-    let mainThreadEnginePerformance = measurePerformance {
+  /// Compares initializing the given animation with the two given engines,
+  /// and returns the ratio of how much slower engine B is than engine A.
+  private func compareEngineSetupPerformance(
+    of engineA: RenderingEngineOption,
+    with engineB: RenderingEngineOption,
+    for animation: Animation,
+    iterations: Int)
+    -> Double
+  {
+    let engineAPerformance = measurePerformance {
       for _ in 0..<iterations {
         // Each animation setup needs to be wrapped in its own `CATransaction`
         // in order for the layers to be deallocated immediately. Otherwise
         // the layers aren't deallocated until the end of the test run,
         // which causes memory usage to grow unbounded.
         CATransaction.begin()
-        let animationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: .mainThread))
+        let animationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: engineA))
         // Call `display()` on the layer to make sure any pending setup occurs immediately
         animationView.animationLayer!.display()
         CATransaction.commit()
       }
     }
 
-    print("Main thread engine took \(mainThreadEnginePerformance) seconds")
+    print("\(engineA) engine took \(engineAPerformance) seconds")
 
-    let coreAnimationEnginePerformance = measurePerformance {
+    let engineBPerformance = measurePerformance {
       for _ in 0..<iterations {
         // Each animation setup needs to be wrapped in its own `CATransaction`
         // in order for the layers to be deallocated immediately. Otherwise
         // the layers aren't deallocated until the end of the test run,
         // which causes memory usage to grow unbounded.
         CATransaction.begin()
-        let animationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: .coreAnimation))
+        let animationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: engineB))
         // Call `display()` on the layer to make sure any pending setup occurs immediately
         animationView.animationLayer!.display()
         CATransaction.commit()
       }
     }
 
-    print("Core Animation engine took \(coreAnimationEnginePerformance) seconds")
+    print("\(engineB) engine took \(engineBPerformance) seconds")
 
-    let ratio = coreAnimationEnginePerformance / mainThreadEnginePerformance
-    print("Core Animation engine took \(ratio)x as long as the Main Thread engine")
+    let ratio = engineBPerformance / engineAPerformance
+    print("\(engineB) engine took \(ratio)x as long as \(engineA) engine")
     return ratio
   }
 
@@ -134,6 +175,27 @@ final class PerformanceTests: XCTestCase {
     return ratio
   }
 
+  private func compareDeserializationPerformance(data: Data, iterations: Int) throws -> Double {
+    let codablePerformance = try measurePerformance {
+      for _ in 0..<iterations {
+        _ = try Animation.from(data: data, strategy: .codable)
+      }
+    }
+
+    print("Codable deserialization took \(codablePerformance) seconds")
+
+    let dictPerformance = try measurePerformance {
+      for _ in 0..<iterations {
+        _ = try Animation.from(data: data, strategy: .dictionaryBased)
+      }
+    }
+
+    print("DictionaryBased deserialization took \(dictPerformance) seconds")
+    let ratio = codablePerformance / dictPerformance
+    print("Codable deserialization took \(ratio)x as long as DictionaryBased")
+    return ratio
+  }
+
   @discardableResult
   private func setupAnimationView(with animation: Animation, configuration: LottieConfiguration) -> AnimationView {
     let animationView = AnimationView(animation: animation, configuration: configuration)
@@ -142,9 +204,9 @@ final class PerformanceTests: XCTestCase {
     return animationView
   }
 
-  private func measurePerformance(_ block : () -> Void) -> TimeInterval {
+  private func measurePerformance(_ block : () throws -> Void) rethrows -> TimeInterval {
     let start = DispatchTime.now()
-    block()
+    try block()
     let end = DispatchTime.now()
     let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
     return Double(nanoTime) / 1_000_000_000

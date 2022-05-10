@@ -36,6 +36,43 @@ final class Star: ShapeItem {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    if
+      let directionRawValue = dictionary[CodingKeys.direction.rawValue] as? Int,
+      let direction = PathDirection(rawValue: directionRawValue)
+    {
+      self.direction = direction
+    } else {
+      direction = .clockwise
+    }
+    let positionDictionary: [String: Any] = try dictionary.value(for: CodingKeys.position)
+    position = try KeyframeGroup<Vector3D>(dictionary: positionDictionary)
+    let outerRadiusDictionary: [String: Any] = try dictionary.value(for: CodingKeys.outerRadius)
+    outerRadius = try KeyframeGroup<Vector1D>(dictionary: outerRadiusDictionary)
+    let outerRoundnessDictionary: [String: Any] = try dictionary.value(for: CodingKeys.outerRoundness)
+    outerRoundness = try KeyframeGroup<Vector1D>(dictionary: outerRoundnessDictionary)
+    if let innerRadiusDictionary = dictionary[CodingKeys.innerRadius.rawValue] as? [String: Any] {
+      innerRadius = try KeyframeGroup<Vector1D>(dictionary: innerRadiusDictionary)
+    } else {
+      innerRadius = nil
+    }
+    if let innerRoundnessDictionary = dictionary[CodingKeys.innerRoundness.rawValue] as? [String: Any] {
+      innerRoundness = try KeyframeGroup<Vector1D>(dictionary: innerRoundnessDictionary)
+    } else {
+      innerRoundness = nil
+    }
+    let rotationDictionary: [String: Any] = try dictionary.value(for: CodingKeys.rotation)
+    rotation = try KeyframeGroup<Vector1D>(dictionary: rotationDictionary)
+    let pointsDictionary: [String: Any] = try dictionary.value(for: CodingKeys.points)
+    points = try KeyframeGroup<Vector1D>(dictionary: pointsDictionary)
+    let starTypeRawValue: Int = try dictionary.value(for: CodingKeys.starType)
+    guard let starType = StarType(rawValue: starTypeRawValue) else {
+      throw InitializableError.invalidInput
+    }
+    self.starType = starType
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   /// The direction of the star.

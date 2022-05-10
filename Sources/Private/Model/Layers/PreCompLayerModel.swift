@@ -21,6 +21,18 @@ final class PreCompLayerModel: LayerModel {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    referenceID = try dictionary.value(for: CodingKeys.referenceID)
+    if let timeRemappingDictionary = dictionary[CodingKeys.timeRemapping.rawValue] as? [String: Any] {
+      timeRemapping = try KeyframeGroup<Vector1D>(dictionary: timeRemappingDictionary)
+    } else {
+      timeRemapping = nil
+    }
+    width = try dictionary.value(for: CodingKeys.width)
+    height = try dictionary.value(for: CodingKeys.height)
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   /// The reference ID of the precomp.

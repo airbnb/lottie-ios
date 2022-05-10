@@ -52,6 +52,56 @@ final class GradientStroke: ShapeItem {
     try super.init(from: decoder)
   }
 
+  required init(dictionary: [String: Any]) throws {
+    let opacityDictionary: [String: Any] = try dictionary.value(for: CodingKeys.opacity)
+    opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
+    let startPointDictionary: [String: Any] = try dictionary.value(for: CodingKeys.startPoint)
+    startPoint = try KeyframeGroup<Vector3D>(dictionary: startPointDictionary)
+    let endPointDictionary: [String: Any] = try dictionary.value(for: CodingKeys.endPoint)
+    endPoint = try KeyframeGroup<Vector3D>(dictionary: endPointDictionary)
+    let gradientRawType: Int = try dictionary.value(for: CodingKeys.gradientType)
+    guard let gradient = GradientType(rawValue: gradientRawType) else {
+      throw InitializableError.invalidInput
+    }
+    gradientType = gradient
+    if let highlightLengthDictionary = dictionary[CodingKeys.highlightLength.rawValue] as? [String: Any] {
+      highlightLength = try? KeyframeGroup<Vector1D>(dictionary: highlightLengthDictionary)
+    } else {
+      highlightLength = nil
+    }
+    if let highlightAngleDictionary = dictionary[CodingKeys.highlightAngle.rawValue] as? [String: Any] {
+      highlightAngle = try? KeyframeGroup<Vector1D>(dictionary: highlightAngleDictionary)
+    } else {
+      highlightAngle = nil
+    }
+    let widthDictionary: [String: Any] = try dictionary.value(for: CodingKeys.width)
+    width = try KeyframeGroup<Vector1D>(dictionary: widthDictionary)
+    if
+      let lineCapRawValue = dictionary[CodingKeys.lineCap.rawValue] as? Int,
+      let lineCap = LineCap(rawValue: lineCapRawValue)
+    {
+      self.lineCap = lineCap
+    } else {
+      lineCap = .round
+    }
+    if
+      let lineJoinRawValue = dictionary[CodingKeys.lineJoin.rawValue] as? Int,
+      let lineJoin = LineJoin(rawValue: lineJoinRawValue)
+    {
+      self.lineJoin = lineJoin
+    } else {
+      lineJoin = .round
+    }
+    miterLimit = (try? dictionary.value(for: CodingKeys.miterLimit)) ?? 4
+    let colorsDictionary: [String: Any] = try dictionary.value(for: CodingKeys.colors)
+    let nestedColorsDictionary: [String: Any] = try colorsDictionary.value(for: GradientDataKeys.colors)
+    colors = try KeyframeGroup<[Double]>(dictionary: nestedColorsDictionary)
+    numberOfColors = try colorsDictionary.value(for: GradientDataKeys.numberOfColors)
+    let dashPatternDictionaries = dictionary[CodingKeys.dashPattern.rawValue] as? [[String: Any]]
+    dashPattern = try? dashPatternDictionaries?.map({ try DashElement(dictionary: $0) })
+    try super.init(dictionary: dictionary)
+  }
+
   // MARK: Internal
 
   /// The opacity of the fill

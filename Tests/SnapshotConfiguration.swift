@@ -24,6 +24,12 @@ struct SnapshotConfiguration {
 
   /// A custom `AnimationFontProvider` to use when rendering this animation
   var customFontProvider: AnimationFontProvider?
+
+  /// Whether or not this sample should be tested with the automatic engine
+  ///  - Defaults to `false` since this isn't necessary most of the time
+  ///  - Enabling this for a set of animations gives us a regression suite for
+  ///    the code supporting the automatic engine.
+  var testWithAutomaticEngine = false
 }
 
 // MARK: Custom mapping
@@ -60,6 +66,11 @@ extension SnapshotConfiguration {
 
     // Test cases for `AnimationFontProvider`
     "Nonanimating/Text_Glyph": .customFontProvider(HardcodedFontProvider(font: UIFont(name: "Chalkduster", size: 36)!)),
+
+    // Test cases for `RenderingEngineOption.automatic`
+    "9squares_AlBoardman": .useAutomaticRenderingEngine, // Supports the Core Animation engine
+    "LottieFiles/shop": .useAutomaticRenderingEngine, // Throws a compatibility error in `init`
+    "TypeFace/G": .useAutomaticRenderingEngine, // Throws a compatibility error in `display()`
   ]
 }
 
@@ -68,6 +79,12 @@ extension SnapshotConfiguration {
 extension SnapshotConfiguration {
   /// The default configuration to use if no custom mapping is provided
   static let `default` = SnapshotConfiguration()
+
+  static var useAutomaticRenderingEngine: SnapshotConfiguration {
+    var configuration = SnapshotConfiguration.default
+    configuration.testWithAutomaticEngine = true
+    return configuration
+  }
 
   /// The `SnapshotConfiguration` to use for the given sample JSON file name
   static func forSample(named sampleName: String) -> SnapshotConfiguration {
@@ -113,6 +130,16 @@ extension SnapshotConfiguration {
     var configuration = SnapshotConfiguration.default
     configuration.customFontProvider = customFontProvider
     return configuration
+  }
+
+  /// Whether or not this sample should be included in the snapshot tests for the given configuration
+  func shouldSnapshot(using configuration: LottieConfiguration) -> Bool {
+    switch configuration.renderingEngine {
+    case .automatic:
+      return testWithAutomaticEngine
+    case .specific:
+      return true
+    }
   }
 }
 

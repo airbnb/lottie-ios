@@ -8,7 +8,7 @@
 import Foundation
 
 /// The animatable transform for a layer. Controls position, rotation, scale, and opacity.
-final class Transform: Codable {
+final class Transform: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
@@ -62,6 +62,76 @@ final class Transform: Codable {
 
     // Opacity
     opacity = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .opacity) ?? KeyframeGroup(Vector1D(100))
+  }
+
+  init(dictionary: [String: Any]) throws {
+    if
+      let anchorPointDictionary = dictionary[CodingKeys.anchorPoint.rawValue] as? [String: Any],
+      let anchorPoint = try? KeyframeGroup<Vector3D>(dictionary: anchorPointDictionary)
+    {
+      self.anchorPoint = anchorPoint
+    } else {
+      anchorPoint = KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+    }
+
+    if
+      let xDictionary = dictionary[CodingKeys.positionX.rawValue] as? [String: Any],
+      let yDictionary = dictionary[CodingKeys.positionY.rawValue] as? [String: Any]
+    {
+      positionX = try KeyframeGroup<Vector1D>(dictionary: xDictionary)
+      positionY = try KeyframeGroup<Vector1D>(dictionary: yDictionary)
+      position = nil
+    } else if
+      let positionDictionary = dictionary[CodingKeys.position.rawValue] as? [String: Any],
+      positionDictionary[KeyframeGroup<Vector3D>.KeyframeWrapperKey.keyframeData.rawValue] != nil
+    {
+      position = try KeyframeGroup<Vector3D>(dictionary: positionDictionary)
+      positionX = nil
+      positionY = nil
+    } else if
+      let positionDictionary = dictionary[CodingKeys.position.rawValue] as? [String: Any],
+      let xDictionary = positionDictionary[PositionCodingKeys.positionX.rawValue] as? [String: Any],
+      let yDictionary = positionDictionary[PositionCodingKeys.positionY.rawValue] as? [String: Any]
+    {
+      positionX = try KeyframeGroup<Vector1D>(dictionary: xDictionary)
+      positionY = try KeyframeGroup<Vector1D>(dictionary: yDictionary)
+      position = nil
+    } else {
+      position = KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+      positionX = nil
+      positionY = nil
+    }
+
+    if
+      let scaleDictionary = dictionary[CodingKeys.scale.rawValue] as? [String: Any],
+      let scale = try? KeyframeGroup<Vector3D>(dictionary: scaleDictionary)
+    {
+      self.scale = scale
+    } else {
+      scale = KeyframeGroup(Vector3D(x: Double(100), y: 100, z: 100))
+    }
+    if
+      let rotationDictionary = dictionary[CodingKeys.rotationZ.rawValue] as? [String: Any],
+      let rotation = try? KeyframeGroup<Vector1D>(dictionary: rotationDictionary)
+    {
+      self.rotation = rotation
+    } else if
+      let rotationDictionary = dictionary[CodingKeys.rotation.rawValue] as? [String: Any],
+      let rotation = try? KeyframeGroup<Vector1D>(dictionary: rotationDictionary)
+    {
+      self.rotation = rotation
+    } else {
+      rotation = KeyframeGroup(Vector1D(0))
+    }
+    rotationZ = nil
+    if
+      let opacityDictionary = dictionary[CodingKeys.opacity.rawValue] as? [String: Any],
+      let opacity = try? KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
+    {
+      self.opacity = opacity
+    } else {
+      opacity = KeyframeGroup(Vector1D(100))
+    }
   }
 
   // MARK: Internal

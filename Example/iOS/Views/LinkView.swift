@@ -29,6 +29,7 @@ final class LinkView: UIView, EpoxyableView {
   struct Content: Equatable {
     var animationName: String?
     var title: String
+    var subtitle: String?
   }
 
   func setContent(_ content: Content, animated _: Bool) {
@@ -55,17 +56,38 @@ final class LinkView: UIView, EpoxyableView {
           })
       }
 
-      GroupItem<UILabel>(
-        dataID: DataID.title,
-        content: content.title,
-        make: {
-          let label = UILabel()
-          label.translatesAutoresizingMaskIntoConstraints = false
-          return label
-        },
-        setContent: { context, content in
-          context.constrainable.text = content
-        })
+      VGroupItem(
+        dataID: DataID.titleSubtitleGroup,
+        style: .init(spacing: 4))
+      {
+        GroupItem<UILabel>(
+          dataID: DataID.title,
+          content: content.title,
+          make: {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+          },
+          setContent: { context, content in
+            context.constrainable.text = content
+          })
+
+        if let subtitle = content.subtitle {
+          GroupItem<UILabel>(
+            dataID: DataID.subtitle,
+            content: subtitle,
+            make: {
+              let label = UILabel()
+              label.textColor = .secondaryLabel
+              label.font = .preferredFont(forTextStyle: .caption2)
+              label.translatesAutoresizingMaskIntoConstraints = false
+              return label
+            },
+            setContent: { context, content in
+              context.constrainable.text = content
+            })
+        }
+      }
     }
   }
 
@@ -73,10 +95,12 @@ final class LinkView: UIView, EpoxyableView {
 
   private enum DataID {
     case animationPreview
+    case titleSubtitleGroup
     case title
+    case subtitle
   }
 
-  private let group = HGroup(alignment: .fill, spacing: 24)
+  private let group = HGroup(alignment: .center, spacing: 24)
 }
 
 // MARK: HighlightableView

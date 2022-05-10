@@ -1,0 +1,3 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[DEPTH L.Group 1.T 2] Mixed `isHold` / `!isHold` keyframes are currently unsupported
+[DEPTH R.T.T] Mixed `isHold` / `!isHold` keyframes are currently unsupported
