@@ -25,4 +25,14 @@ final class AnimationKeypathTests: XCTestCase {
     XCTAssertFalse(keypath.matches("Layer.Shape Group.Stroke 1.Color.**"))
   }
 
+  func testLayerForKeypath() {
+    let animationView = AnimationView(
+      animation: Samples.animation(named: "Boat_Loader"),
+      configuration: LottieConfiguration(renderingEngine: .mainThread))
+
+    XCTAssertNotNil(animationView.animationLayer?.layer(for: "Success.FishComplete.Fish1Tail 7"))
+    XCTAssertNotNil(animationView.animationLayer?.layer(for: "Success.FishComplete"))
+    XCTAssertNotNil(animationView.animationLayer?.layer(for: "Success"))
+    XCTAssertNotNil(animationView.animationLayer?.layer(for: "Success.*.Fish1Tail 7"))
+  }
 }
