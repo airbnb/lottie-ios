@@ -79,7 +79,14 @@ extension CALayer {
         let maskContainer = BaseAnimationLayer()
         maskContainer.name = "\(layerModel.name) (parent, masked)"
         maskContainer.addSublayer(parentTransformLayer)
-        maskContainer.mask = maskParentTransformLayer
+
+        // Core Animation will silently fail to apply a mask if a `mask` layer
+        // itself _also_ has a `mask`. As a workaround, we can wrap this layer's
+        // mask in an additional container layer which never has its own `mask`.
+        let additionalMaskParent = BaseAnimationLayer()
+        additionalMaskParent.addSublayer(maskParentTransformLayer)
+        maskContainer.mask = additionalMaskParent
+
         addSublayer(maskContainer)
       }
 

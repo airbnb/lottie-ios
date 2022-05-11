@@ -35,6 +35,11 @@ class SnapshotTests: XCTestCase {
   /// a sample JSON file that is visible to this test target.
   func testAllSnapshotsHaveCorrespondingSampleFile() {
     for snapshotURL in Samples.snapshotURLs {
+      // Exclude snapshots of private samples, since those aren't checked in to the repo
+      if snapshotURL.lastPathComponent.contains("Private") {
+        continue
+      }
+
       // The snapshot files follow the format `testCaseName.animationName-percentage.png`
       //  - We remove the known prefix and known suffixes to recover the input file name
       //  - `animationName` can contain dashes, so we can't just split the string at each dash
