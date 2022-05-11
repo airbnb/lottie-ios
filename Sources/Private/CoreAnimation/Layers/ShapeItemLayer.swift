@@ -64,11 +64,6 @@ final class ShapeItemLayer: BaseAnimationLayer {
 
     guard let sublayerConfiguration = sublayerConfiguration else { return }
 
-    if let (shapeTransform, context) = otherItems.first(ShapeTransform.self, context: context) {
-      try addTransformAnimations(for: shapeTransform, context: context)
-      try addOpacityAnimation(from: shapeTransform, context: context)
-    }
-
     switch sublayerConfiguration.fill {
     case .solidFill(let shapeLayer):
       try setupSolidFillAnimations(shapeLayer: shapeLayer, context: context)
@@ -232,7 +227,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
 
 extension Array where Element == ShapeItemLayer.Item {
   /// The first `ShapeItem` in this array of the given type
-  fileprivate func first<ItemType: ShapeItem>(
+  func first<ItemType: ShapeItem>(
     _: ItemType.Type, context: LayerAnimationContext)
     -> (item: ItemType, context: LayerAnimationContext)?
   {

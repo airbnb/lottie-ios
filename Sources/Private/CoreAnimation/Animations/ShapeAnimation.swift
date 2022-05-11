@@ -40,6 +40,17 @@ extension CAShapeLayer {
       keyframes: fill.color.keyframes,
       value: \.cgColorValue,
       context: context)
+
+    try addAnimation(
+      for: .opacity,
+      keyframes: fill.opacity.keyframes,
+      value: {
+        // Lottie animation files express opacity as a numerical percentage value
+        // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values
+        // expected by Core Animation (e.g. 0.0, 0.5, 1.0).
+        $0.cgFloatValue / 100
+      },
+      context: context)
   }
 
   /// Adds animations for `strokeStart` and `strokeEnd` from the given `Trim` object
