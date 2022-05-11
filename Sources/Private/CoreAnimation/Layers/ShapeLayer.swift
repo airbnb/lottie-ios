@@ -67,6 +67,17 @@ final class GroupLayer: BaseAnimationLayer {
     super.init(layer: typedLayer)
   }
 
+  // MARK: Internal
+
+  override func setupAnimations(context: LayerAnimationContext) throws {
+    try super.setupAnimations(context: context)
+
+    if let (shapeTransform, context) = nonGroupItems.first(ShapeTransform.self, context: context) {
+      try addTransformAnimations(for: shapeTransform, context: context)
+      try addOpacityAnimation(from: shapeTransform, context: context)
+    }
+  }
+
   // MARK: Private
 
   private let group: Group
@@ -75,15 +86,16 @@ final class GroupLayer: BaseAnimationLayer {
   ///   - This layer's parent is either the root `ShapeLayerModel` or some other `Group`
   private let inheritedItems: [ShapeItemLayer.Item]
 
+  /// `ShapeItem`s (other than nested `Group`s) that are included in this group
+  private lazy var nonGroupItems = group.items
+    .filter { !($0 is Group) }
+    .map { ShapeItemLayer.Item(item: $0, parentGroup: group) }
+    + inheritedItems
+
   private func setupLayerHierarchy(context: LayerContext) throws {
     // Groups can contain other groups, so we may have to continue
     // recursively creating more `GroupLayer`s
     try setupGroups(from: group.items, parentGroup: group, context: context)
-
-    let nonGroupItems = group.items
-      .filter { !($0 is Group) }
-      .map { ShapeItemLayer.Item(item: $0, parentGroup: group) }
-      + inheritedItems
 
     let (pathDrawingItemsInGroup, otherItemsInGroup) = nonGroupItems.grouped(by: \.item.drawsCGPath)
 
