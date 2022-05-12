@@ -73,6 +73,24 @@ final class PreCompLayer: BaseCompositionLayer {
 
 }
 
+// MARK: CustomLayoutLayer
+
+extension PreCompLayer: CustomLayoutLayer {
+  func layout(superlayerBounds: CGRect) {
+    anchorPoint = .zero
+
+    // Pre-comp layers use a size specified in the layer model,
+    // and clip the composition to that bounds
+    bounds = CGRect(
+      x: superlayerBounds.origin.x,
+      y: superlayerBounds.origin.y,
+      width: CGFloat(preCompLayer.width),
+      height: CGFloat(preCompLayer.height))
+
+    masksToBounds = true
+  }
+}
+
 extension KeyframeInterpolator where ValueType == AnimationFrameTime {
   /// A `KeyframeInterpolator` for the given `timeRemapping` keyframes
   static func timeRemapping(
