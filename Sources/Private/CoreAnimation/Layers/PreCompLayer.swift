@@ -88,8 +88,6 @@ extension PreCompLayer: CustomLayoutLayer {
       height: CGFloat(preCompLayer.height))
 
     masksToBounds = true
-
-    /// TODO: Tomorrow, add the simplified sample to the Issues folder
   }
 }
 
