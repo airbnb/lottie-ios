@@ -53,6 +53,8 @@ extension GradientRenderLayer {
       },
       context: context)
 
+    try addOpacityAnimation(for: gradient.opacity, context: context)
+
     switch gradient.gradientType {
     case .linear:
       try addLinearGradientAnimations(for: gradient, context: context)

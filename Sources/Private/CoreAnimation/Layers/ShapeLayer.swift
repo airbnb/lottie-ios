@@ -74,7 +74,7 @@ final class GroupLayer: BaseAnimationLayer {
 
     if let (shapeTransform, context) = nonGroupItems.first(ShapeTransform.self, context: context) {
       try addTransformAnimations(for: shapeTransform, context: context)
-      try addOpacityAnimation(from: shapeTransform, context: context)
+      try addOpacityAnimation(for: shapeTransform.opacity, context: context)
     }
   }
 
@@ -97,43 +97,48 @@ final class GroupLayer: BaseAnimationLayer {
     // recursively creating more `GroupLayer`s
     try setupGroups(from: group.items, parentGroup: group, context: context)
 
-    let (pathDrawingItemsInGroup, otherItemsInGroup) = nonGroupItems.grouped(by: \.item.drawsCGPath)
+    // Create `ShapeItemLayer`s for each subgroup of shapes that should be rendered as a single unit
+    //  - These groups are listed from front-to-back, so we have to add the sublayers in reverse order
+    for shapeRenderGroup in nonGroupItems.shapeRenderGroups.reversed() {
+      // If all of the path-drawing `ShapeItem`s have keyframes with the same timing information,
+      // we can combine the `[KeyframeGroup<BezierPath>]` (which have to animate in separate layers)
+      // into a single `KeyframeGroup<[BezierPath]>`, which can be combined into a single CGPath animation.
+      //
+      // This is how Groups with multiple path-drawing items are supposed to be rendered,
+      // because combining multiple paths into a single `CGPath` (instead of rendering them in separate layers)
+      // allows `CAShapeLayerFillRule.evenOdd` to be applied if the paths overlap. We just can't do this
+      // in all cases, due to limitations of Core Animation.
+      if
+        shapeRenderGroup.pathItems.count > 1,
+        let combinedShapeKeyframes = Keyframes.combinedIfPossible(
+          shapeRenderGroup.pathItems.map { ($0.item as? Shape)?.path }),
+        // `Trim`s are currently only applied correctly using individual `ShapeItemLayer`s,
+        // because each path has to be trimmed separately.
+        !shapeRenderGroup.otherItems.contains(where: { $0.item is Trim })
+      {
+        let combinedShape = CombinedShapeItem(
+          shapes: combinedShapeKeyframes,
+          name: group.name)
 
-    // If all of the path-drawing `ShapeItem`s have keyframes with the same timing information,
-    // we can combine the `[KeyframeGroup<BezierPath>]` (which have to animate in separate layers)
-    // into a single `KeyframeGroup<[BezierPath]>`, which can be combined into a single CGPath animation.
-    //
-    // This is how Groups with multiple path-drawing items are supposed to be rendered,
-    // because combining multiple paths into a single `CGPath` (instead of rendering them in separate layers)
-    // allows `CAShapeLayerFillRule.evenOdd` to be applied if the paths overlap. We just can't do this
-    // in all cases, due to limitations of Core Animation.
-    if
-      pathDrawingItemsInGroup.count > 1,
-      let combinedShapeKeyframes = Keyframes.combinedIfPossible(pathDrawingItemsInGroup.map {
-        ($0.item as? Shape)?.path
-      }),
-      // `Trim`s are currently only applied correctly using individual `ShapeItemLayer`s,
-      // because each path has to be trimmed separately.
-      !otherItemsInGroup.contains(where: { $0.item.type == .trim })
-    {
-      let combinedShape = CombinedShapeItem(
-        shapes: combinedShapeKeyframes,
-        name: group.name)
+        let sublayer = try ShapeItemLayer(
+          shape: ShapeItemLayer.Item(item: combinedShape, parentGroup: group),
+          otherItems: shapeRenderGroup.otherItems,
+          context: context)
 
-      let sublayer = try ShapeItemLayer(
-        shape: ShapeItemLayer.Item(item: combinedShape, parentGroup: group),
-        otherItems: otherItemsInGroup,
-        context: context)
-
-      addSublayer(sublayer)
-    }
-
-    // Otherwise, if each `ShapeItem` that draws a `GGPath` animates independently,
-    // we have to create a separate `ShapeItemLayer` for each one.
-    else {
-      for pathDrawingItem in pathDrawingItemsInGroup {
-        let sublayer = try ShapeItemLayer(shape: pathDrawingItem, otherItems: otherItemsInGroup, context: context)
         addSublayer(sublayer)
+      }
+
+      // Otherwise, if each `ShapeItem` that draws a `GGPath` animates independently,
+      // we have to create a separate `ShapeItemLayer` for each one.
+      else {
+        for pathDrawingItem in shapeRenderGroup.pathItems {
+          let sublayer = try ShapeItemLayer(
+            shape: pathDrawingItem,
+            otherItems: shapeRenderGroup.otherItems,
+            context: context)
+
+          addSublayer(sublayer)
+        }
       }
     }
   }
@@ -178,6 +183,18 @@ extension ShapeItem {
       return false
     }
   }
+
+  /// Whether or not this `ShapeItem` provides a fill for a set of shapes
+  var isFill: Bool {
+    switch type {
+    case .fill, .gradientFill:
+      return true
+
+    case .ellipse, .rectangle, .shape, .star, .group, .gradientStroke,
+         .merge, .repeater, .round, .stroke, .trim, .transform, .unknown:
+      return false
+    }
+  }
 }
 
 extension Collection {
@@ -195,5 +212,49 @@ extension Collection {
     }
 
     return (trueElements, falseElements)
+  }
+}
+
+// MARK: - ShapeRenderGroup
+
+/// A group of `ShapeItem`s that should be rendered together as a single unit
+struct ShapeRenderGroup {
+  /// The items in this group that render `CGPath`s
+  var pathItems: [ShapeItemLayer.Item] = []
+  /// Shape items that modify the appearance of the shapes rendered by this group
+  var otherItems: [ShapeItemLayer.Item] = []
+}
+
+extension Array where Element == ShapeItemLayer.Item {
+  /// Splits this list of `ShapeItem`s into groups that should be rendered together as individual units
+  var shapeRenderGroups: [ShapeRenderGroup] {
+    var renderGroups = [ShapeRenderGroup()]
+
+    for item in self {
+      // `renderGroups` is non-empty, so is guaranteed to have a valid end index
+      let lastIndex = renderGroups.indices.last!
+
+      if item.item.drawsCGPath {
+        renderGroups[lastIndex].pathItems.append(item)
+      }
+
+      // `Fill` items are unique, because they specifically only apply to _previous_ shapes in a `Group`
+      //  - For example, with [Rectangle, Fill(Red), Circle, Fill(Blue)], the Rectangle should be Red
+      //    but the Circle should be Blue.
+      //  - To handle this, we create a new `ShapeRenderGroup` when we encounter a `Fill` item
+      else if item.item.isFill {
+        renderGroups[lastIndex].otherItems.append(item)
+        renderGroups.append(ShapeRenderGroup())
+      }
+
+      // Other items in the list are applied to all subgroups
+      else {
+        for index in renderGroups.indices {
+          renderGroups[index].otherItems.append(item)
+        }
+      }
+    }
+
+    return renderGroups
   }
 }

@@ -67,10 +67,10 @@ extension CALayer {
 
   /// Adds the opacity animation from the given `TransformModel` to this layer
   @nonobjc
-  func addOpacityAnimation(from transformModel: TransformModel, context: LayerAnimationContext) throws {
+  func addOpacityAnimation(for opacityKeyframes: KeyframeGroup<Vector1D>, context: LayerAnimationContext) throws {
     try addAnimation(
       for: .opacity,
-      keyframes: transformModel.opacity.keyframes,
+      keyframes: opacityKeyframes.keyframes,
       value: {
         // Lottie animation files express opacity as a numerical percentage value
         // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values
