@@ -74,7 +74,7 @@ final class GroupLayer: BaseAnimationLayer {
 
     if let (shapeTransform, context) = nonGroupItems.first(ShapeTransform.self, context: context) {
       try addTransformAnimations(for: shapeTransform, context: context)
-      try addOpacityAnimation(from: shapeTransform, context: context)
+      try addOpacityAnimation(for: shapeTransform.opacity, context: context)
     }
   }
 
