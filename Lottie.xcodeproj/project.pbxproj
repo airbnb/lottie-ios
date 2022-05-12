@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		197ECB9D282D5D3D00CFA211 /* CachedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197ECB9C282D5D3D00CFA211 /* CachedImageProvider.swift */; };
+		197ECB9E282D5D3D00CFA211 /* CachedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197ECB9C282D5D3D00CFA211 /* CachedImageProvider.swift */; };
+		197ECB9F282D5D3D00CFA211 /* CachedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197ECB9C282D5D3D00CFA211 /* CachedImageProvider.swift */; };
 		2E044E272820536800FA773B /* AutomaticEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E044E262820536800FA773B /* AutomaticEngineTests.swift */; };
 		2E09FA0627B6CEB600BA84E5 /* HardcodedFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */; };
 		2E72128327BB329C0027BC56 /* AnimationKeypathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E72128227BB329C0027BC56 /* AnimationKeypathTests.swift */; };
@@ -572,6 +575,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		197ECB9C282D5D3D00CFA211 /* CachedImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageProvider.swift; sourceTree = "<group>"; };
 		2E044E262820536800FA773B /* AutomaticEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticEngineTests.swift; sourceTree = "<group>"; };
 		2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcodedFontProvider.swift; sourceTree = "<group>"; };
 		2E72128227BB329C0027BC56 /* AnimationKeypathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationKeypathTests.swift; sourceTree = "<group>"; };
@@ -1353,6 +1357,7 @@
 				2EAF59D227A0798700E00531 /* FilepathImageProvider.swift */,
 				2EAF59D327A0798700E00531 /* AnimatedSwitch.swift */,
 				2EAF59D427A0798700E00531 /* BundleImageProvider.swift */,
+				197ECB9C282D5D3D00CFA211 /* CachedImageProvider.swift */,
 				2EAF59D527A0798700E00531 /* UIColorExtension.swift */,
 				2EAF59D627A0798700E00531 /* AnimatedButton.swift */,
 				2EAF59D727A0798700E00531 /* AnimationViewBase.swift */,
@@ -1720,6 +1725,7 @@
 				2EAF5AAD27A0798700E00531 /* AnimationView.swift in Sources */,
 				2E9C95E82822F43100677516 /* Merge.swift in Sources */,
 				2E9C96032822F43100677516 /* ImageLayerModel.swift in Sources */,
+				197ECB9D282D5D3D00CFA211 /* CachedImageProvider.swift in Sources */,
 				2E9C96BA2822F43100677516 /* KeypathSearchable.swift in Sources */,
 				2E9C963C2822F43100677516 /* AssetLibrary.swift in Sources */,
 				2E9C97022822F43100677516 /* PreCompLayer.swift in Sources */,
@@ -1925,6 +1931,7 @@
 				2EAF5AAE27A0798700E00531 /* AnimationView.swift in Sources */,
 				2E9C95E92822F43100677516 /* Merge.swift in Sources */,
 				2E9C96042822F43100677516 /* ImageLayerModel.swift in Sources */,
+				197ECB9E282D5D3D00CFA211 /* CachedImageProvider.swift in Sources */,
 				2E9C96BB2822F43100677516 /* KeypathSearchable.swift in Sources */,
 				2E9C963D2822F43100677516 /* AssetLibrary.swift in Sources */,
 				2E9C97032822F43100677516 /* PreCompLayer.swift in Sources */,
@@ -2110,6 +2117,7 @@
 				2EAF5AAF27A0798700E00531 /* AnimationView.swift in Sources */,
 				2E9C95EA2822F43100677516 /* Merge.swift in Sources */,
 				2E9C96052822F43100677516 /* ImageLayerModel.swift in Sources */,
+				197ECB9F282D5D3D00CFA211 /* CachedImageProvider.swift in Sources */,
 				2E9C96BC2822F43100677516 /* KeypathSearchable.swift in Sources */,
 				2E9C963E2822F43100677516 /* AssetLibrary.swift in Sources */,
 				2E9C97042822F43100677516 /* PreCompLayer.swift in Sources */,

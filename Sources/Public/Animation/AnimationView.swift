@@ -102,7 +102,7 @@ final public class AnimationView: AnimationViewBase {
     configuration: LottieConfiguration = .shared)
   {
     self.animation = animation
-    self.imageProvider = imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
+    self.imageProvider = imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil).cachedImageProvider
     self.textProvider = textProvider
     self.fontProvider = fontProvider
     self.configuration = configuration
@@ -116,7 +116,7 @@ final public class AnimationView: AnimationViewBase {
 
   public init(configuration: LottieConfiguration = .shared) {
     animation = nil
-    imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
+    imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil).cachedImageProvider
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
     self.configuration = configuration
@@ -126,7 +126,7 @@ final public class AnimationView: AnimationViewBase {
 
   public override init(frame: CGRect) {
     animation = nil
-    imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
+    imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil).cachedImageProvider
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
     configuration = .shared
@@ -135,7 +135,7 @@ final public class AnimationView: AnimationViewBase {
   }
 
   required public init?(coder aDecoder: NSCoder) {
-    imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
+    imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil).cachedImageProvider
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
     configuration = .shared

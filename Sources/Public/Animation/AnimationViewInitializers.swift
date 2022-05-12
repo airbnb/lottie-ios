@@ -26,7 +26,7 @@ extension AnimationView {
     animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache)
   {
     let animation = Animation.named(name, bundle: bundle, subdirectory: nil, animationCache: animationCache)
-    let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil)
+    let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil).cachedImageProvider
     self.init(animation: animation, imageProvider: provider)
   }
 
@@ -90,7 +90,7 @@ extension AnimationView {
     animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache)
   {
     let animation = Animation.asset(name, bundle: bundle, animationCache: animationCache)
-    let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil)
+    let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil).cachedImageProvider
     self.init(animation: animation, imageProvider: provider)
   }
 

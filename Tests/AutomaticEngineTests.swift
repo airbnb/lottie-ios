@@ -18,7 +18,7 @@ final class AutomaticEngineTests: XCTestCase {
 
       let animationLayer = try XCTUnwrap(CoreAnimationLayer(
         animation: animation,
-        imageProvider: BundleImageProvider(bundle: Bundle.main, searchPath: nil),
+        imageProvider: BundleImageProvider(bundle: Bundle.main, searchPath: nil).cachedImageProvider,
         fontProvider: DefaultFontProvider(),
         compatibilityTrackerMode: .track))
 
