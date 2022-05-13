@@ -40,6 +40,8 @@ private final class CachedImageProvider: AnimationImageProvider {
 }
 
 extension AnimationImageProvider {
+  /// Create a cache enabled image provider which will reuse the asset image with the same asset id
+  /// It wraps the current provider as image loader, and uses `NSCache` to cache the images for resue.
   public var cachedImageProvider: AnimationImageProvider {
     CachedImageProvider(imageProvider: self)
   }
