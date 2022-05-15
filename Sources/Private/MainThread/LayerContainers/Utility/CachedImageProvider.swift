@@ -3,8 +3,6 @@
 
 import CoreGraphics
 import Foundation
-#if os(iOS) || os(tvOS) || os(watchOS) || targetEnvironment(macCatalyst)
-import UIKit
 
 // MARK: - CachedImageProvider
 
@@ -48,4 +46,3 @@ extension AnimationImageProvider {
   }
 }
 
-#endif
