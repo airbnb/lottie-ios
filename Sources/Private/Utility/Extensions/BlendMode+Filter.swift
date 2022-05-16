@@ -23,7 +23,7 @@ extension BlendMode {
         case .difference: return "differenceBlendMode"
         case .exclusion: return "exclusionBlendMode"
         case .hue: return "hueBlendMode"
-        case .saturation: return "multiplyBlendMode"
+        case .saturation: return "saturationBlendMode"
         case .color: return "colorBlendMode"
         case .luminosity: return "luminosityBlendMode"
         }
