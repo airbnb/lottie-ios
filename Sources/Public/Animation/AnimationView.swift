@@ -199,7 +199,7 @@ final public class AnimationView: AnimationViewBase {
   /// Setting this will cause the animation to reload its image contents.
   public var imageProvider: AnimationImageProvider {
     didSet {
-      animationLayer?.imageProvider = imageProvider
+      animationLayer?.imageProvider = imageProvider.cachedImageProvider
       reloadImages()
     }
   }
@@ -968,7 +968,7 @@ final public class AnimationView: AnimationViewBase {
   fileprivate func makeMainThreadAnimationLayer(for animation: Animation) -> MainThreadAnimationLayer {
     MainThreadAnimationLayer(
       animation: animation,
-      imageProvider: imageProvider,
+      imageProvider: imageProvider.cachedImageProvider,
       textProvider: textProvider,
       fontProvider: fontProvider)
   }
@@ -977,7 +977,7 @@ final public class AnimationView: AnimationViewBase {
     do {
       let coreAnimationLayer = try CoreAnimationLayer(
         animation: animation,
-        imageProvider: imageProvider,
+        imageProvider: imageProvider.cachedImageProvider,
         fontProvider: fontProvider,
         compatibilityTrackerMode: .track)
 
@@ -1010,7 +1010,7 @@ final public class AnimationView: AnimationViewBase {
       // or throw an error later in `CALayer.display()` that will be reported in `didSetUpAnimation`.
       let coreAnimationLayer = try CoreAnimationLayer(
         animation: animation,
-        imageProvider: imageProvider,
+        imageProvider: imageProvider.cachedImageProvider,
         fontProvider: fontProvider,
         compatibilityTrackerMode: .abort)
 
