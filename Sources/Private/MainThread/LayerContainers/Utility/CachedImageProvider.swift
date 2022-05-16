@@ -45,4 +45,3 @@ extension AnimationImageProvider {
     CachedImageProvider(imageProvider: self)
   }
 }
-
