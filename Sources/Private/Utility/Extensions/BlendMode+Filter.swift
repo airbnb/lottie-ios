@@ -6,6 +6,8 @@
 //
 
 extension BlendMode {
+    /// The Core Image filter name for this `BlendMode`, that can be applied to a `CALayer`'s `compositingFilter`.
+    /// Supported compositing filters are defined here: https://developer.apple.com/library/archive/documentation/GraphicsImaging/Reference/CoreImageFilterReference/index.html#//apple_ref/doc/uid/TP30000136-SW71
     var filterName: String? {
         switch self {
         case .normal: return nil
