@@ -159,11 +159,21 @@ extension CALayer {
     for group in groupsInZAxisOrder {
       guard let group = group as? Group else { continue }
 
+      // `ShapeItem`s either draw a path, or modify how a path is rendered.
+      //  - If this group doesn't have any items that draw a path, then its
+      //    items are applied to all of this groups children.
+      let inheritedItems: [ShapeItemLayer.Item]
+      if !otherItems.contains(where: { $0.drawsCGPath }) {
+        inheritedItems = otherItems.map {
+          ShapeItemLayer.Item(item: $0, parentGroup: parentGroup)
+        }
+      } else {
+        inheritedItems = []
+      }
+
       let groupLayer = try GroupLayer(
         group: group,
-        inheritedItems: Array(otherItems.map {
-          ShapeItemLayer.Item(item: $0, parentGroup: parentGroup)
-        }),
+        inheritedItems: inheritedItems,
         context: context)
 
       addSublayer(groupLayer)
