@@ -195,6 +195,18 @@ extension ShapeItem {
       return false
     }
   }
+
+  /// Whether or not this `ShapeItem` provides a stroke for a set of shapes
+  var isStroke: Bool {
+    switch type {
+    case .stroke, .gradientStroke:
+      return true
+
+    case .ellipse, .rectangle, .shape, .star, .group, .gradientFill,
+         .merge, .repeater, .round, .fill, .trim, .transform, .unknown:
+      return false
+    }
+  }
 }
 
 extension Collection {
@@ -255,6 +267,18 @@ extension Array where Element == ShapeItemLayer.Item {
       }
     }
 
-    return renderGroups
+    // `Fill` and `Stroke` items have an `alpha` property that can be animated separately,
+    // but each layer only has a single `opacity` property, so we have to create
+    // separate layers / render groups for each of these.
+    return renderGroups.flatMap { group -> [ShapeRenderGroup] in
+      let (strokesAndFills, otherItems) = group.otherItems.grouped(by: { $0.item.isFill || $0.item.isStroke })
+
+      // Create a new group for each stroke / fill
+      return strokesAndFills.map { strokeOrFill in
+        ShapeRenderGroup(
+          pathItems: group.pathItems,
+          otherItems: [strokeOrFill] + otherItems)
+      }
+    }
   }
 }

@@ -53,6 +53,8 @@ extension CAShapeLayer {
       value: \.cgFloatValue,
       context: context)
 
+    try addOpacityAnimation(for: stroke.opacity, context: context)
+
     if let (dashPattern, dashPhase) = stroke.dashPattern?.shapeLayerConfiguration {
       lineDashPattern = try dashPattern.map {
         try KeyframeGroup(keyframes: $0)
