@@ -41,7 +41,7 @@ extension CAShapeLayer {
       value: \.cgColorValue,
       context: context)
 
-    try addOpacityAnimation(for: fill.opacity, context: context)
+    try addOpacityAnimation(for: fill, context: context)
   }
 
   /// Adds animations for `strokeStart` and `strokeEnd` from the given `Trim` object

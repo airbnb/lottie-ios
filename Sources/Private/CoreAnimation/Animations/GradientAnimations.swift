@@ -6,8 +6,7 @@ import QuartzCore
 // MARK: - GradientShapeItem
 
 /// A `ShapeItem` that represents a gradient
-protocol GradientShapeItem {
-  var opacity: KeyframeGroup<Vector1D> { get }
+protocol GradientShapeItem: OpacityAnimationModel {
   var startPoint: KeyframeGroup<Vector3D> { get }
   var endPoint: KeyframeGroup<Vector3D> { get }
   var gradientType: GradientType { get }
@@ -53,7 +52,7 @@ extension GradientRenderLayer {
       },
       context: context)
 
-    try addOpacityAnimation(for: gradient.opacity, context: context)
+    try addOpacityAnimation(for: gradient, context: context)
 
     switch gradient.gradientType {
     case .linear:

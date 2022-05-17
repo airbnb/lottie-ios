@@ -74,7 +74,7 @@ final class GroupLayer: BaseAnimationLayer {
 
     if let (shapeTransform, context) = nonGroupItems.first(ShapeTransform.self, context: context) {
       try addTransformAnimations(for: shapeTransform, context: context)
-      try addOpacityAnimation(for: shapeTransform.opacity, context: context)
+      try addOpacityAnimation(for: shapeTransform, context: context)
     }
   }
 
@@ -269,9 +269,20 @@ extension Array where Element == ShapeItemLayer.Item {
 
     // `Fill` and `Stroke` items have an `alpha` property that can be animated separately,
     // but each layer only has a single `opacity` property, so we have to create
-    // separate layers / render groups for each of these.
+    // separate layers / render groups for each of these if necessary.
     return renderGroups.flatMap { group -> [ShapeRenderGroup] in
       let (strokesAndFills, otherItems) = group.otherItems.grouped(by: { $0.item.isFill || $0.item.isStroke })
+
+      // However, if all of the strokes / fills have the exact same opacity animation configuration,
+      // then we can continue using a single layer / render group.
+      let allAlphaAnimationsAreIdentical = strokesAndFills.allSatisfy { item in
+        (item.item as? OpacityAnimationModel)?.opacity
+          == (strokesAndFills.first?.item as? OpacityAnimationModel)?.opacity
+      }
+
+      if allAlphaAnimationsAreIdentical {
+        return [group]
+      }
 
       // Create a new group for each stroke / fill
       return strokesAndFills.map { strokeOrFill in
