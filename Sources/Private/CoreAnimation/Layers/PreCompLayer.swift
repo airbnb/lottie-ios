@@ -18,7 +18,7 @@ final class PreCompLayer: BaseCompositionLayer {
     self.preCompLayer = preCompLayer
 
     if let timeRemappingKeyframes = preCompLayer.timeRemapping {
-      timeRemappingInterpolator = .timeRemapping(keyframes: timeRemappingKeyframes, animation: context.animation)
+      timeRemappingInterpolator = try .timeRemapping(keyframes: timeRemappingKeyframes, context: context)
     } else {
       timeRemappingInterpolator = nil
     }
@@ -95,9 +95,17 @@ extension KeyframeInterpolator where ValueType == AnimationFrameTime {
   /// A `KeyframeInterpolator` for the given `timeRemapping` keyframes
   static func timeRemapping(
     keyframes timeRemappingKeyframes: KeyframeGroup<Vector1D>,
-    animation: Animation)
+    context: LayerContext)
+    throws
     -> KeyframeInterpolator<AnimationFrameTime>
   {
+    // The Core Animation engine doesn't support time remapping keyframes that use `isHold = true`
+    //  - We may be able to add support for this in the future
+    if timeRemappingKeyframes.keyframes.contains(where: { $0.isHold }) {
+      try context.logCompatibilityIssue(
+        "The Core Animation rendering engine doesn't support time remapping keyframes with `isHold = true`")
+    }
+
     // `timeRemapping` is a mapping from the animation's global time to the layer's local time.
     // In the Core Animation engine, we need to perform the opposite calculation -- convert
     // the layer's local time into the animation's global time. We can get this by inverting
@@ -105,7 +113,7 @@ extension KeyframeInterpolator where ValueType == AnimationFrameTime {
     let localTimeToGlobalTimeMapping = timeRemappingKeyframes.keyframes.map { keyframe in
       Keyframe(
         value: keyframe.time,
-        time: keyframe.value.cgFloatValue * CGFloat(animation.framerate),
+        time: keyframe.value.cgFloatValue * CGFloat(context.animation.framerate),
         isHold: keyframe.isHold,
         inTangent: keyframe.inTangent,
         outTangent: keyframe.outTangent,
