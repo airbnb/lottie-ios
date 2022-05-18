@@ -7,8 +7,7 @@ import QuartzCore
 // MARK: - StrokeShapeItem
 
 /// A `ShapeItem` that represents a stroke
-protocol StrokeShapeItem {
-  var opacity: KeyframeGroup<Vector1D> { get }
+protocol StrokeShapeItem: OpacityAnimationModel {
   var strokeColor: KeyframeGroup<Color>? { get }
   var width: KeyframeGroup<Vector1D> { get }
   var lineCap: LineCap { get }
@@ -52,6 +51,8 @@ extension CAShapeLayer {
       keyframes: stroke.width.keyframes,
       value: \.cgFloatValue,
       context: context)
+
+    try addOpacityAnimation(for: stroke, context: context)
 
     if let (dashPattern, dashPhase) = stroke.dashPattern?.shapeLayerConfiguration {
       lineDashPattern = try dashPattern.map {

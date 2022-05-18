@@ -26,9 +26,6 @@ protocol TransformModel {
 
   /// The rotation of the transform. Note: This is single dimensional rotation.
   var rotation: KeyframeGroup<Vector1D> { get }
-
-  /// The opacity of the transform.
-  var opacity: KeyframeGroup<Vector1D> { get }
 }
 
 // MARK: - Transform + TransformModel
@@ -63,21 +60,6 @@ extension CALayer {
     try addAnchorPointAnimation(from: transformModel, context: context)
     try addScaleAnimations(from: transformModel, context: context)
     try addRotationAnimation(from: transformModel, context: context)
-  }
-
-  /// Adds the opacity animation from the given `TransformModel` to this layer
-  @nonobjc
-  func addOpacityAnimation(for opacityKeyframes: KeyframeGroup<Vector1D>, context: LayerAnimationContext) throws {
-    try addAnimation(
-      for: .opacity,
-      keyframes: opacityKeyframes.keyframes,
-      value: {
-        // Lottie animation files express opacity as a numerical percentage value
-        // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values
-        // expected by Core Animation (e.g. 0.0, 0.5, 1.0).
-        $0.cgFloatValue / 100
-      },
-      context: context)
   }
 
   // MARK: Private

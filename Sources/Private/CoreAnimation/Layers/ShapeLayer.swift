@@ -74,7 +74,7 @@ final class GroupLayer: BaseAnimationLayer {
 
     if let (shapeTransform, context) = nonGroupItems.first(ShapeTransform.self, context: context) {
       try addTransformAnimations(for: shapeTransform, context: context)
-      try addOpacityAnimation(for: shapeTransform.opacity, context: context)
+      try addOpacityAnimation(for: shapeTransform, context: context)
     }
   }
 
@@ -159,11 +159,21 @@ extension CALayer {
     for group in groupsInZAxisOrder {
       guard let group = group as? Group else { continue }
 
+      // `ShapeItem`s either draw a path, or modify how a path is rendered.
+      //  - If this group doesn't have any items that draw a path, then its
+      //    items are applied to all of this groups children.
+      let inheritedItems: [ShapeItemLayer.Item]
+      if !otherItems.contains(where: { $0.drawsCGPath }) {
+        inheritedItems = otherItems.map {
+          ShapeItemLayer.Item(item: $0, parentGroup: parentGroup)
+        }
+      } else {
+        inheritedItems = []
+      }
+
       let groupLayer = try GroupLayer(
         group: group,
-        inheritedItems: Array(otherItems.map {
-          ShapeItemLayer.Item(item: $0, parentGroup: parentGroup)
-        }),
+        inheritedItems: inheritedItems,
         context: context)
 
       addSublayer(groupLayer)
@@ -192,6 +202,18 @@ extension ShapeItem {
 
     case .ellipse, .rectangle, .shape, .star, .group, .gradientStroke,
          .merge, .repeater, .round, .stroke, .trim, .transform, .unknown:
+      return false
+    }
+  }
+
+  /// Whether or not this `ShapeItem` provides a stroke for a set of shapes
+  var isStroke: Bool {
+    switch type {
+    case .stroke, .gradientStroke:
+      return true
+
+    case .ellipse, .rectangle, .shape, .star, .group, .gradientFill,
+         .merge, .repeater, .round, .fill, .trim, .transform, .unknown:
       return false
     }
   }
@@ -255,6 +277,29 @@ extension Array where Element == ShapeItemLayer.Item {
       }
     }
 
-    return renderGroups
+    // `Fill` and `Stroke` items have an `alpha` property that can be animated separately,
+    // but each layer only has a single `opacity` property, so we have to create
+    // separate layers / render groups for each of these if necessary.
+    return renderGroups.flatMap { group -> [ShapeRenderGroup] in
+      let (strokesAndFills, otherItems) = group.otherItems.grouped(by: { $0.item.isFill || $0.item.isStroke })
+
+      // However, if all of the strokes / fills have the exact same opacity animation configuration,
+      // then we can continue using a single layer / render group.
+      let allAlphaAnimationsAreIdentical = strokesAndFills.allSatisfy { item in
+        (item.item as? OpacityAnimationModel)?.opacity
+          == (strokesAndFills.first?.item as? OpacityAnimationModel)?.opacity
+      }
+
+      if allAlphaAnimationsAreIdentical {
+        return [group]
+      }
+
+      // Create a new group for each stroke / fill
+      return strokesAndFills.map { strokeOrFill in
+        ShapeRenderGroup(
+          pathItems: group.pathItems,
+          otherItems: [strokeOrFill] + otherItems)
+      }
+    }
   }
 }

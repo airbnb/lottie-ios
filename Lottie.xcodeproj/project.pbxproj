@@ -12,6 +12,9 @@
 		19465F54282F998B00BB2C97 /* CachedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19465F51282F998B00BB2C97 /* CachedImageProvider.swift */; };
 		2E044E272820536800FA773B /* AutomaticEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E044E262820536800FA773B /* AutomaticEngineTests.swift */; };
 		2E09FA0627B6CEB600BA84E5 /* HardcodedFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */; };
+		2E450DAC283415D500E56D19 /* OpacityAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E450DAB283415D500E56D19 /* OpacityAnimation.swift */; };
+		2E450DAD283415D500E56D19 /* OpacityAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E450DAB283415D500E56D19 /* OpacityAnimation.swift */; };
+		2E450DAE283415D500E56D19 /* OpacityAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E450DAB283415D500E56D19 /* OpacityAnimation.swift */; };
 		2E72128327BB329C0027BC56 /* AnimationKeypathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E72128227BB329C0027BC56 /* AnimationKeypathTests.swift */; };
 		2E72128527BB32DB0027BC56 /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E72128427BB32DB0027BC56 /* PerformanceTests.swift */; };
 		2E8040B027A072B8006E74CB /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E80409A27A0725D006E74CB /* Lottie.framework */; };
@@ -578,6 +581,7 @@
 		19465F51282F998B00BB2C97 /* CachedImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageProvider.swift; sourceTree = "<group>"; };
 		2E044E262820536800FA773B /* AutomaticEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticEngineTests.swift; sourceTree = "<group>"; };
 		2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcodedFontProvider.swift; sourceTree = "<group>"; };
+		2E450DAB283415D500E56D19 /* OpacityAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpacityAnimation.swift; sourceTree = "<group>"; };
 		2E72128227BB329C0027BC56 /* AnimationKeypathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationKeypathTests.swift; sourceTree = "<group>"; };
 		2E72128427BB32DB0027BC56 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
 		2E80409A27A0725D006E74CB /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1224,6 +1228,7 @@
 				2E9C95B82822F43100677516 /* GradientAnimations.swift */,
 				2E9C95B92822F43100677516 /* VisibilityAnimation.swift */,
 				2E9C95BA2822F43100677516 /* LayerProperty.swift */,
+				2E450DAB283415D500E56D19 /* OpacityAnimation.swift */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -1718,6 +1723,7 @@
 				2E9C96B72822F43100677516 /* NodePropertyMap.swift in Sources */,
 				2E9C97682822F43100677516 /* VectorsExtensions.swift in Sources */,
 				2E9C97232822F43100677516 /* RectangleAnimation.swift in Sources */,
+				2E450DAC283415D500E56D19 /* OpacityAnimation.swift in Sources */,
 				2E9C96FC2822F43100677516 /* CALayer+setupLayerHierarchy.swift in Sources */,
 				2E9C96A52822F43100677516 /* StrokeNode.swift in Sources */,
 				2E9C95E52822F43100677516 /* ShapeTransform.swift in Sources */,
@@ -1924,6 +1930,7 @@
 				2E9C96B82822F43100677516 /* NodePropertyMap.swift in Sources */,
 				2E9C97692822F43100677516 /* VectorsExtensions.swift in Sources */,
 				2E9C97242822F43100677516 /* RectangleAnimation.swift in Sources */,
+				2E450DAD283415D500E56D19 /* OpacityAnimation.swift in Sources */,
 				2E9C96FD2822F43100677516 /* CALayer+setupLayerHierarchy.swift in Sources */,
 				2E9C96A62822F43100677516 /* StrokeNode.swift in Sources */,
 				2E9C95E62822F43100677516 /* ShapeTransform.swift in Sources */,
@@ -2110,6 +2117,7 @@
 				2E9C96B92822F43100677516 /* NodePropertyMap.swift in Sources */,
 				2E9C976A2822F43100677516 /* VectorsExtensions.swift in Sources */,
 				2E9C97252822F43100677516 /* RectangleAnimation.swift in Sources */,
+				2E450DAE283415D500E56D19 /* OpacityAnimation.swift in Sources */,
 				2E9C96FE2822F43100677516 /* CALayer+setupLayerHierarchy.swift in Sources */,
 				2E9C96A72822F43100677516 /* StrokeNode.swift in Sources */,
 				2E9C95E72822F43100677516 /* ShapeTransform.swift in Sources */,
