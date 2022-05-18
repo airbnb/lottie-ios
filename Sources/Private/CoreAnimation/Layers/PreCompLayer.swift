@@ -97,14 +97,13 @@ extension KeyframeInterpolator where ValueType == AnimationFrameTime {
     keyframes timeRemappingKeyframes: KeyframeGroup<Vector1D>,
     context: LayerContext)
     throws
-    -> KeyframeInterpolator<AnimationFrameTime>?
+    -> KeyframeInterpolator<AnimationFrameTime>
   {
     // The Core Animation engine doesn't support time remapping keyframes that use `isHold = true`
     //  - We may be able to add support for this in the future
-    guard !timeRemappingKeyframes.keyframes.contains(where: { $0.isHold }) else {
+    if timeRemappingKeyframes.keyframes.contains(where: { $0.isHold }) {
       try context.logCompatibilityIssue(
         "The Core Animation rendering engine doesn't support time remapping keyframes with `isHold = true`")
-      return nil
     }
 
     // `timeRemapping` is a mapping from the animation's global time to the layer's local time.
