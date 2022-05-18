@@ -1,1 +1,2 @@
-Supports Core Animation engine
+Does not support Core Animation engine. Encountered compatibility issues:
+[Freeze] The Core Animation rendering engine doesn't support time remapping keyframes with `isHold = true`
