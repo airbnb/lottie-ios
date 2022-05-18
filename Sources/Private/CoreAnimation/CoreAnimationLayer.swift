@@ -118,7 +118,12 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   }
 
   override func display() {
-    super.display()
+    // We intentionally don't call `super.display()`, since this layer
+    // doesn't directly render any content.
+    //  - This fixes an issue where certain animations would unexpectedly
+    //    allocate a very large amount of memory (400mb+).
+    //  - Alternatively this layer could subclass `CATransformLayer`,
+    //    but this causes Core Animation to emit unnecessary logs.
 
     if let pendingAnimationConfiguration = pendingAnimationConfiguration {
       self.pendingAnimationConfiguration = nil
