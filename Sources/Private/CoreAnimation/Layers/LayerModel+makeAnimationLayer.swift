@@ -29,7 +29,9 @@ extension LayerModel {
 
     switch (type, self) {
     case (.precomp, let preCompLayerModel as PreCompLayerModel):
-      return try PreCompLayer(preCompLayer: preCompLayerModel, context: context)
+      let preCompLayer = PreCompLayer(preCompLayer: preCompLayerModel)
+      try preCompLayer.setup(context: context)
+      return preCompLayer
 
     case (.solid, let solidLayerModel as SolidLayerModel):
       return SolidLayer(solidLayerModel)

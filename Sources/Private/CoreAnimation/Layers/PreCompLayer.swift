@@ -10,24 +10,9 @@ final class PreCompLayer: BaseCompositionLayer {
 
   // MARK: Lifecycle
 
-  init(
-    preCompLayer: PreCompLayerModel,
-    context: LayerContext)
-    throws
-  {
+  init(preCompLayer: PreCompLayerModel) {
     self.preCompLayer = preCompLayer
-
-    if let timeRemappingKeyframes = preCompLayer.timeRemapping {
-      timeRemappingInterpolator = try .timeRemapping(keyframes: timeRemappingKeyframes, context: context)
-    } else {
-      timeRemappingInterpolator = nil
-    }
-
     super.init(layerModel: preCompLayer)
-
-    try setupLayerHierarchy(
-      for: context.animation.assetLibrary?.precompAssets[preCompLayer.referenceID]?.layers ?? [],
-      context: context)
   }
 
   required init?(coder _: NSCoder) {
@@ -47,6 +32,35 @@ final class PreCompLayer: BaseCompositionLayer {
   }
 
   // MARK: Internal
+
+  /// Post-init setup for `PreCompLayer`s.
+  /// Should always be called after `PreCompLayer.init(preCompLayer:)`.
+  ///
+  /// This is a workaround for a hard-to-reproduce crash that was
+  /// triggered when `PreCompLayer.init` was called reentantly. We didn't
+  /// have any consistent repro steps for this crash (it happened 100% of
+  /// the time for some testers, and 0% of the time for other testers),
+  /// but moving this code out of `PreCompLayer.init` does seem to fix it.
+  ///
+  /// The stack trace looked like:
+  ///  - `_os_unfair_lock_recursive_abort`
+  ///  - `-[CALayerAccessibility__UIKit__QuartzCore dealloc]`
+  ///  - `PreCompLayer.__allocating_init(preCompLayer:context:)` <- reentrant init call
+  ///  - ...
+  ///  - `CALayer.setupLayerHierarchy(for:context:)`
+  ///  - `PreCompLayer.init(preCompLayer:context:)`
+  ///
+  func setup(context: LayerContext) throws {
+    if let timeRemappingKeyframes = preCompLayer.timeRemapping {
+      timeRemappingInterpolator = try .timeRemapping(keyframes: timeRemappingKeyframes, context: context)
+    } else {
+      timeRemappingInterpolator = nil
+    }
+
+    try setupLayerHierarchy(
+      for: context.animation.assetLibrary?.precompAssets[preCompLayer.referenceID]?.layers ?? [],
+      context: context)
+  }
 
   override func setupAnimations(context: LayerAnimationContext) throws {
     var context = context
@@ -69,7 +83,7 @@ final class PreCompLayer: BaseCompositionLayer {
   // MARK: Private
 
   private let preCompLayer: PreCompLayerModel
-  private let timeRemappingInterpolator: KeyframeInterpolator<AnimationFrameTime>?
+  private var timeRemappingInterpolator: KeyframeInterpolator<AnimationFrameTime>?
 
 }
 
