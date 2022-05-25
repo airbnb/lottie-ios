@@ -49,6 +49,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
       "sublayerTransform" : NSNull(),
       "hidden" : NSNull(),
     ]
+    compositingFilter = layer.blendMode.filterName
     addSublayer(contentsLayer)
 
     if let maskLayer = maskLayer {

@@ -565,6 +565,9 @@
 		6DB3BDC328245AA2002A276D /* ParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3BDBF28245A6A002A276D /* ParsingTests.swift */; };
 		6DEF696E2824A76C007D640F /* BundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEF696D2824A76C007D640F /* BundleTests.swift */; };
 		A1D5BAAC27C731A500777D06 /* DataURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D5BAAB27C731A500777D06 /* DataURLTests.swift */; };
+		A40460592832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
+		A404605A2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
+		A404605B2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -777,6 +780,7 @@
 		6DB3BDBF28245A6A002A276D /* ParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingTests.swift; sourceTree = "<group>"; };
 		6DEF696D2824A76C007D640F /* BundleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleTests.swift; sourceTree = "<group>"; };
 		A1D5BAAB27C731A500777D06 /* DataURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataURLTests.swift; sourceTree = "<group>"; };
+		A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlendMode+Filter.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1258,6 +1262,7 @@
 		2E9C95C02822F43100677516 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */,
 				2E9C95C12822F43100677516 /* CGFloatExtensions.swift */,
 				2E9C95C22822F43100677516 /* CGColor+RGB.swift */,
 				2E9C95C32822F43100677516 /* AnimationKeypathExtension.swift */,
@@ -1830,6 +1835,7 @@
 				2EAF5AE027A0798700E00531 /* Keyframe.swift in Sources */,
 				2E9C960F2822F43100677516 /* Animation.swift in Sources */,
 				2E9C969C2822F43100677516 /* StarNode.swift in Sources */,
+				A40460592832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */,
 				2E9C96542822F43100677516 /* ImageCompositionLayer.swift in Sources */,
 				2EAF5AB327A0798700E00531 /* AnimationImageProvider.swift in Sources */,
 				2E9C95F12822F43100677516 /* GradientStroke.swift in Sources */,
@@ -2037,6 +2043,7 @@
 				2EAF5AE127A0798700E00531 /* Keyframe.swift in Sources */,
 				2E9C96102822F43100677516 /* Animation.swift in Sources */,
 				2E9C969D2822F43100677516 /* StarNode.swift in Sources */,
+				A404605A2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */,
 				2E9C96552822F43100677516 /* ImageCompositionLayer.swift in Sources */,
 				2EAF5AB427A0798700E00531 /* AnimationImageProvider.swift in Sources */,
 				2E9C95F22822F43100677516 /* GradientStroke.swift in Sources */,
@@ -2224,6 +2231,7 @@
 				2EAF5AE227A0798700E00531 /* Keyframe.swift in Sources */,
 				2E9C96112822F43100677516 /* Animation.swift in Sources */,
 				2E9C969E2822F43100677516 /* StarNode.swift in Sources */,
+				A404605B2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */,
 				2E9C96562822F43100677516 /* ImageCompositionLayer.swift in Sources */,
 				2EAF5AB527A0798700E00531 /* AnimationImageProvider.swift in Sources */,
 				2E9C95F32822F43100677516 /* GradientStroke.swift in Sources */,
