@@ -1,0 +1,3 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[DEMO - Feature - Payments] The Core Animation rendering engine partially supports time remapping keyframes, but this is somewhat experimental and has some known issues. Since it doesn't work in all cases, we have to fall back to using the main thread engine when using `RenderingEngineOption.automatic`.
+[Folding Bill - Payments Mirror] The Core Animation rendering engine partially supports time remapping keyframes, but this is somewhat experimental and has some known issues. Since it doesn't work in all cases, we have to fall back to using the main thread engine when using `RenderingEngineOption.automatic`.

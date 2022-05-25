@@ -99,12 +99,12 @@ extension KeyframeInterpolator where ValueType == AnimationFrameTime {
     throws
     -> KeyframeInterpolator<AnimationFrameTime>
   {
-    // The Core Animation engine doesn't support time remapping keyframes that use `isHold = true`
-    //  - We may be able to add support for this in the future
-    if timeRemappingKeyframes.keyframes.contains(where: { $0.isHold }) {
-      try context.logCompatibilityIssue(
-        "The Core Animation rendering engine doesn't support time remapping keyframes with `isHold = true`")
-    }
+    try context.logCompatibilityIssue("""
+      The Core Animation rendering engine partially supports time remapping keyframes,
+      but this is somewhat experimental and has some known issues. Since it doesn't work
+      in all cases, we have to fall back to using the main thread engine when using
+      `RenderingEngineOption.automatic`.
+      """)
 
     // `timeRemapping` is a mapping from the animation's global time to the layer's local time.
     // In the Core Animation engine, we need to perform the opposite calculation -- convert
