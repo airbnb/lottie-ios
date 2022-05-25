@@ -222,7 +222,15 @@ final public class AnimationView: AnimationViewBase {
 
   /// Returns `true` if the animation is currently playing.
   public var isAnimationPlaying: Bool {
-    animationLayer?.animation(forKey: activeAnimationName) != nil
+    guard let animationLayer = animationLayer else {
+      return false
+    }
+
+    if let valueFromLayer = animationLayer.isAnimationPlaying {
+      return valueFromLayer
+    } else {
+      return animationLayer.animation(forKey: activeAnimationName) != nil
+    }
   }
 
   /// Returns `true` if the animation will start playing when this view is added to a window.

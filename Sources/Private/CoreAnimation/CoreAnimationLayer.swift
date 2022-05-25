@@ -294,6 +294,15 @@ extension CoreAnimationLayer: RootAnimationLayer {
     .specific(#keyPath(animationProgress))
   }
 
+  var isAnimationPlaying: Bool? {
+    switch playbackState {
+    case .playing:
+      return true
+    case nil, .paused:
+      return false
+    }
+  }
+
   var currentFrame: AnimationFrameTime {
     get {
       switch playbackState {

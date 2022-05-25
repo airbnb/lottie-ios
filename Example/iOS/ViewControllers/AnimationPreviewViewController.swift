@@ -86,7 +86,10 @@ class AnimationPreviewViewController: UIViewController {
       slider.value = Float(animationView.realtimeAnimationProgress)
     }
 
-    engineLabel.text = animationView.currentRenderingEngine?.description
+    engineLabel.text = [
+      animationView.currentRenderingEngine?.description,
+      animationView.isAnimationPlaying ? "Playing" : "Paused",
+    ].compactMap { $0 }.joined(separator: " · ")
   }
 
   override func viewDidAppear(_ animated: Bool) {
