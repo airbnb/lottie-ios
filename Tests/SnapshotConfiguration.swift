@@ -43,6 +43,7 @@ extension SnapshotConfiguration {
     "Issues/issue_1407": .precision(0.9),
     "Nonanimating/FirstText": .precision(0.99),
     "Nonanimating/verifyLineHeight": .precision(0.99),
+    "Nonanimating/blend_mode_test": .precision(0.99),
 
     /// Test cases for the `AnimationKeypath` / `AnyValueProvider` system
     "Nonanimating/keypathTest": .customValueProviders([
