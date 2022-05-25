@@ -146,6 +146,10 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     .managed
   }
 
+  var isAnimationPlaying: Bool? {
+    nil // this state is managed by `AnimationView`
+  }
+
   var _animationLayers: [CALayer] {
     Array(animationLayers)
   }

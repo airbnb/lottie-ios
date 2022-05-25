@@ -20,6 +20,11 @@ protocol RootAnimationLayer: CALayer {
   ///  - `AnimationView` uses this key to check if the animation is still active
   var primaryAnimationKey: AnimationKey { get }
 
+  /// Whether or not this layer is currently playing an animation
+  ///  - If the layer returns `nil`, `AnimationView` determines if an animation
+  ///    is playing by checking if there is an active animation for `primaryAnimationKey`
+  var isAnimationPlaying: Bool? { get }
+
   /// Instructs this layer to remove all `CAAnimation`s,
   /// other than the `CAAnimation` managed by `AnimationView` (if applicable)
   func removeAnimations()
