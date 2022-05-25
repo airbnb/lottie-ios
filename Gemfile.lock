@@ -92,6 +92,7 @@ GEM
     zeitwerk (2.5.1)
 
 PLATFORMS
+  universal-darwin-21
   x86_64-darwin-19
 
 DEPENDENCIES
