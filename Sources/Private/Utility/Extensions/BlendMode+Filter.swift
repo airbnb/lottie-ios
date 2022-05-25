@@ -29,4 +29,3 @@ extension BlendMode {
         }
     }
 }
-
