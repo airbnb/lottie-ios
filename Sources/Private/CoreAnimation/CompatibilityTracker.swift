@@ -20,8 +20,9 @@ final class CompatibilityTracker {
 
   // MARK: Lifecycle
 
-  init(mode: Mode) {
+  init(mode: Mode, logger: LottieLogger) {
     self.mode = mode
+    self.logger = logger
   }
 
   // MARK: Internal
@@ -42,7 +43,7 @@ final class CompatibilityTracker {
 
   /// Records a compatibility issue that will be reported according to `CompatibilityTracker.Mode`
   func logIssue(message: String, context: String) throws {
-    LottieLogger.shared.assert(!context.isEmpty, "Compatibility issue context is unexpectedly empty")
+    logger.assert(!context.isEmpty, "Compatibility issue context is unexpectedly empty")
 
     let issue = CompatibilityIssue(
       // Compatibility messages are usually written in source files using multi-line strings,
@@ -81,6 +82,7 @@ final class CompatibilityTracker {
   // MARK: Private
 
   private let mode: Mode
+  private let logger: LottieLogger
 
   /// Compatibility issues encountered while setting up the animation
   private var issues = [CompatibilityIssue]()

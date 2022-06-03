@@ -9,11 +9,17 @@ import QuartzCore
 /// provide custom values for `AnimationKeypath`s within an `Animation`.
 final class ValueProviderStore {
 
+  // MARK: Lifecycle
+
+  init(logger: LottieLogger) {
+    self.logger = logger
+  }
+
   // MARK: Internal
 
   /// Registers an `AnyValueProvider` for the given `AnimationKeypath`
   func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
-    LottieLogger.shared.assert(
+    logger.assert(
       valueProvider.typeErasedStorage.isSupportedByCoreAnimationRenderingEngine,
       """
       The Core Animation rendering engine doesn't support Value Providers that vend a closure,
@@ -21,7 +27,7 @@ final class ValueProviderStore {
       """)
 
     // TODO: Support more value types
-    LottieLogger.shared.assert(
+    logger.assert(
       keypath.keys.last == PropertyName.color.rawValue,
       "The Core Animation rendering engine currently only supports customizing color values")
 
@@ -61,7 +67,7 @@ final class ValueProviderStore {
     // Convert the type-erased keyframe values using this `CustomizableProperty`'s conversion closure
     let typedKeyframes = typeErasedKeyframes.compactMap { typeErasedKeyframe -> Keyframe<Value>? in
       guard let convertedValue = customizableProperty.conversion(typeErasedKeyframe.value) else {
-        LottieLogger.shared.assertionFailure("""
+        logger.assertionFailure("""
           Could not convert value of type \(type(of: typeErasedKeyframe.value)) to expected type \(Value.self)
           """)
         return nil
@@ -79,6 +85,8 @@ final class ValueProviderStore {
   }
 
   // MARK: Private
+
+  private let logger: LottieLogger
 
   private var valueProviders = [(keypath: AnimationKeypath, valueProvider: AnyValueProvider)]()
 

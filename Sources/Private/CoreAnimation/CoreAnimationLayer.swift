@@ -18,13 +18,16 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     animation: Animation,
     imageProvider: AnimationImageProvider,
     fontProvider: AnimationFontProvider,
-    compatibilityTrackerMode: CompatibilityTracker.Mode)
+    compatibilityTrackerMode: CompatibilityTracker.Mode,
+    logger: LottieLogger)
     throws
   {
     self.animation = animation
     self.imageProvider = imageProvider
     self.fontProvider = fontProvider
-    compatibilityTracker = CompatibilityTracker(mode: compatibilityTrackerMode)
+    self.logger = logger
+    compatibilityTracker = CompatibilityTracker(mode: compatibilityTrackerMode, logger: logger)
+    valueProviderStore = ValueProviderStore(logger: logger)
     super.init()
 
     setup()
@@ -44,6 +47,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     fontProvider = typedLayer.fontProvider
     didSetUpAnimation = typedLayer.didSetUpAnimation
     compatibilityTracker = typedLayer.compatibilityTracker
+    logger = typedLayer.logger
+    valueProviderStore = typedLayer.valueProviderStore
     super.init(layer: typedLayer)
   }
 
@@ -170,8 +175,9 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   @objc private var animationProgress: CGFloat = 0
 
   private let animation: Animation
-  private let valueProviderStore = ValueProviderStore()
+  private let valueProviderStore: ValueProviderStore
   private let compatibilityTracker: CompatibilityTracker
+  private let logger: LottieLogger
 
   /// The current playback state of the animation that is displayed in this layer
   private var currentPlaybackState: PlaybackState? {
@@ -226,6 +232,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
       endFrame: configuration.animationContext.playTo,
       valueProviderStore: valueProviderStore,
       compatibilityTracker: compatibilityTracker,
+      logger: logger,
       currentKeypath: AnimationKeypath(keys: []))
 
     // Perform a layout pass if necessary so all of the sublayers
@@ -354,7 +361,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
 
   var respectAnimationFrameRate: Bool {
     get { false }
-    set { LottieLogger.shared.assertionFailure("`respectAnimationFrameRate` is currently unsupported") }
+    set { logger.assertionFailure("`respectAnimationFrameRate` is currently unsupported") }
   }
 
   var _animationLayers: [CALayer] {
@@ -363,7 +370,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
 
   var textProvider: AnimationTextProvider {
     get { DictionaryTextProvider([:]) }
-    set { LottieLogger.shared.assertionFailure("`textProvider` is currently unsupported") }
+    set { logger.assertionFailure("`textProvider` is currently unsupported") }
   }
 
   func reloadImages() {
@@ -403,26 +410,26 @@ extension CoreAnimationLayer: RootAnimationLayer {
   }
 
   func getValue(for _: AnimationKeypath, atFrame _: AnimationFrameTime?) -> Any? {
-    LottieLogger.shared.assertionFailure("""
+    logger.assertionFailure("""
       The Core Animation rendering engine doesn't support querying values for individual frames
       """)
     return nil
   }
 
   func getOriginalValue(for _: AnimationKeypath, atFrame _: AnimationFrameTime?) -> Any? {
-    LottieLogger.shared.assertionFailure("""
+    logger.assertionFailure("""
       The Core Animation rendering engine doesn't support querying values for individual frames
       """)
     return nil
   }
 
   func layer(for _: AnimationKeypath) -> CALayer? {
-    LottieLogger.shared.assertionFailure("`AnimationKeypath`s are currently unsupported")
+    logger.assertionFailure("`AnimationKeypath`s are currently unsupported")
     return nil
   }
 
   func animatorNodes(for _: AnimationKeypath) -> [AnimatorNode]? {
-    LottieLogger.shared.assertionFailure("`AnimatorNode`s are not used in this rendering implementation")
+    logger.assertionFailure("`AnimatorNode`s are not used in this rendering implementation")
     return nil
   }
 

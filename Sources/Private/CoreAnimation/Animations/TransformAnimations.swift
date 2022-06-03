@@ -109,7 +109,7 @@ extension CALayer {
       keyframes: transformModel.anchorPoint.keyframes,
       value: { absoluteAnchorPoint in
         guard bounds.width > 0, bounds.height > 0 else {
-          LottieLogger.shared.assertionFailure("Size must be non-zero before an animation can be played")
+          context.logger.assertionFailure("Size must be non-zero before an animation can be played")
           return .zero
         }
 
@@ -152,7 +152,7 @@ extension CALayer {
     //    in surprising ways that don't happen at runtime. Definitely not ideal.
     if TestHelpers.snapshotTestsAreRunning {
       if transformModel.scale.keyframes.contains(where: { $0.value.x < 0 }) {
-        LottieLogger.shared.warn("""
+        context.logger.warn("""
           Negative `scale.x` values are not displayed correctly in snapshot tests
           """)
       }
