@@ -20,7 +20,8 @@ final class AutomaticEngineTests: XCTestCase {
         animation: animation,
         imageProvider: BundleImageProvider(bundle: Bundle.main, searchPath: nil),
         fontProvider: DefaultFontProvider(),
-        compatibilityTrackerMode: .track))
+        compatibilityTrackerMode: .track,
+        logger: .shared))
 
       animationLayer.didSetUpAnimation = { issues in
         compatibilityIssues = issues

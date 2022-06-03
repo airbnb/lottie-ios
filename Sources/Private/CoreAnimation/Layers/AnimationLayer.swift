@@ -35,6 +35,9 @@ struct LayerAnimationContext {
   /// Information about whether or not an animation is compatible with the Core Animation engine
   let compatibilityTracker: CompatibilityTracker
 
+  /// The logger that should be used for assertions and warnings
+  let logger: LottieLogger
+
   /// The AnimationKeypath represented by the current layer
   var currentKeypath: AnimationKeypath
 

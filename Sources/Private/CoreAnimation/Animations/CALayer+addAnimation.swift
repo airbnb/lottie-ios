@@ -140,7 +140,7 @@ extension CALayer {
     if property.caLayerKeypath == LayerProperty<CGPoint>.position.caLayerKeypath {
       animation.path = try path(keyframes: keyframes, value: { value in
         guard let point = try keyframeValueMapping(value) as? CGPoint else {
-          LottieLogger.shared.assertionFailure("Cannot create point from keyframe with value \(value)")
+          context.logger.assertionFailure("Cannot create point from keyframe with value \(value)")
           return .zero
         }
 
@@ -154,7 +154,13 @@ extension CALayer {
         try keyframeValueMapping(keyframeModel.value)
       }
 
-      validate(values: &values, keyTimes: &keyTimes, timingFunctions: &timingFunctions, for: calculationMode)
+      validate(
+        values: &values,
+        keyTimes: &keyTimes,
+        timingFunctions: &timingFunctions,
+        for: calculationMode,
+        context: context)
+
       animation.values = values
     }
 
@@ -265,7 +271,8 @@ extension CALayer {
     values: inout [ValueRepresentation],
     keyTimes: inout [NSNumber],
     timingFunctions: inout [CAMediaTimingFunction],
-    for calculationMode: CAAnimationCalculationMode)
+    for calculationMode: CAAnimationCalculationMode,
+    context: LayerAnimationContext)
   {
     // Validate that we have correct start (0.0) and end (1.0) keyframes.
     // From the documentation of `CAKeyframeAnimation.keyTimes`:
@@ -287,11 +294,11 @@ extension CALayer {
       // From the documentation of `CAKeyframeAnimation.keyTimes`:
       //  - The number of elements in the keyTimes array
       //    should match the number of elements in the values property
-      LottieLogger.shared.assert(
+      context.logger.assert(
         values.count == keyTimes.count,
         "`values.count` must exactly equal `keyTimes.count`")
 
-      LottieLogger.shared.assert(
+      context.logger.assert(
         timingFunctions.count == (values.count - 1),
         "`timingFunctions.count` must exactly equal `values.count - 1`")
 
@@ -301,12 +308,12 @@ extension CALayer {
       //    should have one more entry than appears in the values array.
       values.removeLast()
 
-      LottieLogger.shared.assert(
+      context.logger.assert(
         keyTimes.count == values.count + 1,
         "`keyTimes.count` must exactly equal `values.count + 1`")
 
     default:
-      LottieLogger.shared.assertionFailure("""
+      context.logger.assertionFailure("""
         Unexpected keyframe calculation mode \(calculationMode)
         """)
     }

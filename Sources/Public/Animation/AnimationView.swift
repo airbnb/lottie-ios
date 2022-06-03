@@ -99,13 +99,15 @@ final public class AnimationView: AnimationViewBase {
     imageProvider: AnimationImageProvider? = nil,
     textProvider: AnimationTextProvider = DefaultTextProvider(),
     fontProvider: AnimationFontProvider = DefaultFontProvider(),
-    configuration: LottieConfiguration = .shared)
+    configuration: LottieConfiguration = .shared,
+    logger: LottieLogger = .shared)
   {
     self.animation = animation
     self.imageProvider = imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = textProvider
     self.fontProvider = fontProvider
     self.configuration = configuration
+    self.logger = logger
     super.init(frame: .zero)
     commonInit()
     makeAnimationLayer(usingEngine: configuration.renderingEngine)
@@ -114,12 +116,16 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  public init(configuration: LottieConfiguration = .shared) {
+  public init(
+    configuration: LottieConfiguration = .shared,
+    logger: LottieLogger = .shared)
+  {
     animation = nil
     imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
     self.configuration = configuration
+    self.logger = logger
     super.init(frame: .zero)
     commonInit()
   }
@@ -130,6 +136,7 @@ final public class AnimationView: AnimationViewBase {
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
     configuration = .shared
+    logger = .shared
     super.init(frame: frame)
     commonInit()
   }
@@ -139,6 +146,7 @@ final public class AnimationView: AnimationViewBase {
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
     configuration = .shared
+    logger = .shared
     super.init(coder: aDecoder)
     commonInit()
   }
@@ -169,7 +177,7 @@ final public class AnimationView: AnimationViewBase {
         currentRenderingEngine == .mainThread,
         _backgroundBehavior == .continuePlaying
       {
-        LottieLogger.shared.assertionFailure("""
+        logger.assertionFailure("""
           `LottieBackgroundBehavior.continuePlaying` should not be used with the Main Thread
           rendering engine, since this would waste CPU resources on playing an animation
           that is not visible. Consider using a different background mode, or switching to
@@ -798,7 +806,7 @@ final public class AnimationView: AnimationViewBase {
 
       #if os(iOS) || os(tvOS)
       @unknown default:
-        LottieLogger.shared.assertionFailure("unsupported contentMode: \(contentMode.rawValue)")
+        logger.assertionFailure("unsupported contentMode: \(contentMode.rawValue)")
         xform = CATransform3DIdentity
       #endif
       }
@@ -987,10 +995,11 @@ final public class AnimationView: AnimationViewBase {
         animation: animation,
         imageProvider: imageProvider.cachedImageProvider,
         fontProvider: fontProvider,
-        compatibilityTrackerMode: .track)
+        compatibilityTrackerMode: .track,
+        logger: logger)
 
-      coreAnimationLayer.didSetUpAnimation = { compatibilityIssues in
-        LottieLogger.shared.assert(
+      coreAnimationLayer.didSetUpAnimation = { [logger] compatibilityIssues in
+        logger.assert(
           compatibilityIssues.isEmpty,
           "Encountered Core Animation compatibility issues while setting up animation:\n"
             + compatibilityIssues.map { $0.description }.joined(separator: "\n") + "\n\n"
@@ -1007,7 +1016,7 @@ final public class AnimationView: AnimationViewBase {
       // This should never happen, because we initialize the `CoreAnimationLayer` with
       // `CompatibilityTracker.Mode.track` (which reports errors in `didSetUpAnimation`,
       // not by throwing).
-      LottieLogger.shared.assertionFailure("Encountered unexpected error \(error)")
+      logger.assertionFailure("Encountered unexpected error \(error)")
       return nil
     }
   }
@@ -1020,7 +1029,8 @@ final public class AnimationView: AnimationViewBase {
         animation: animation,
         imageProvider: imageProvider.cachedImageProvider,
         fontProvider: fontProvider,
-        compatibilityTrackerMode: .abort)
+        compatibilityTrackerMode: .abort,
+        logger: logger)
 
       coreAnimationLayer.didSetUpAnimation = { [weak self] issues in
         self?.automaticEngineLayerDidSetUpAnimation(issues)
@@ -1033,7 +1043,7 @@ final public class AnimationView: AnimationViewBase {
       } else {
         // This should never happen, because we expect `CoreAnimationLayer` to only throw
         // `CompatibilityTracker.Error.encounteredCompatibilityIssue` errors.
-        LottieLogger.shared.assertionFailure("Encountered unexpected error \(error)")
+        logger.assertionFailure("Encountered unexpected error \(error)")
         automaticEngineLayerDidSetUpAnimation([])
       }
 
@@ -1049,7 +1059,7 @@ final public class AnimationView: AnimationViewBase {
       return
     }
 
-    LottieLogger.shared.warn(
+    logger.warn(
       "Encountered Core Animation compatibility issue while setting up animation:\n"
         + compatibilityIssues.map { $0.description }.joined(separator: "\n") + "\n"
         + """
@@ -1275,6 +1285,8 @@ final public class AnimationView: AnimationViewBase {
   // MARK: Private
 
   static private let animationName = "Lottie"
+
+  private let logger: LottieLogger
 
   /// The `LottieBackgroundBehavior` that was specified manually by setting `self.backgroundBehavior`
   private var _backgroundBehavior: LottieBackgroundBehavior?
