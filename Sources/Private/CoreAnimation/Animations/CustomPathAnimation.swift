@@ -8,15 +8,33 @@ extension CAShapeLayer {
   @nonobjc
   func addAnimations(
     for customPath: KeyframeGroup<BezierPath>,
-    context: LayerAnimationContext)
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier)
     throws
   {
     try addAnimation(
       for: .path,
       keyframes: customPath.keyframes,
       value: { pathKeyframe in
-        pathKeyframe.cgPath()
+        pathKeyframe.cgPath().duplicated(times: pathMultiplier)
       },
       context: context)
+  }
+}
+
+extension CGPath {
+  /// Duplicates this `CGPath` so that it is repeated the given number of times
+  func duplicated(times: Int) -> CGPath {
+    if times <= 1 {
+      return self
+    }
+
+    let cgPath = CGMutablePath()
+
+    for _ in 0..<times {
+      cgPath.addPath(self)
+    }
+
+    return cgPath
   }
 }

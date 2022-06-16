@@ -6,22 +6,26 @@ import QuartzCore
 extension CAShapeLayer {
   /// Adds a `path` animation for the given `ShapeItem`
   @nonobjc
-  func addAnimations(for shape: ShapeItem, context: LayerAnimationContext) throws {
+  func addAnimations(
+    for shape: ShapeItem,
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier) throws
+  {
     switch shape {
     case let customShape as Shape:
-      try addAnimations(for: customShape.path, context: context)
+      try addAnimations(for: customShape.path, context: context, pathMultiplier: pathMultiplier)
 
     case let combinedShape as CombinedShapeItem:
-      try addAnimations(for: combinedShape, context: context)
+      try addAnimations(for: combinedShape, context: context, pathMultiplier: pathMultiplier)
 
     case let ellipse as Ellipse:
-      try addAnimations(for: ellipse, context: context)
+      try addAnimations(for: ellipse, context: context, pathMultiplier: pathMultiplier)
 
     case let rectangle as Rectangle:
-      try addAnimations(for: rectangle, context: context)
+      try addAnimations(for: rectangle, context: context, pathMultiplier: pathMultiplier)
 
     case let star as Star:
-      try addAnimations(for: star, context: context)
+      try addAnimations(for: star, context: context, pathMultiplier: pathMultiplier)
 
     default:
       // None of the other `ShapeItem` subclasses draw a `path`
@@ -46,8 +50,8 @@ extension CAShapeLayer {
 
   /// Adds animations for `strokeStart` and `strokeEnd` from the given `Trim` object
   @nonobjc
-  func addAnimations(for trim: Trim, context: LayerAnimationContext) throws {
-    let (strokeStartKeyframes, strokeEndKeyframes) = try trim.caShapeLayerKeyframes(context: context)
+  func addAnimations(for trim: Trim, context: LayerAnimationContext) throws -> PathMultiplier {
+    let (strokeStartKeyframes, strokeEndKeyframes, pathMultiplier) = try trim.caShapeLayerKeyframes(context: context)
 
     try addAnimation(
       for: .strokeStart,
@@ -56,7 +60,7 @@ extension CAShapeLayer {
         // Lottie animation files express stoke trims as a numerical percentage value
         // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.25, 0.5, 1.0).
-        CGFloat(strokeStart.cgFloatValue) / 100
+        CGFloat(strokeStart.cgFloatValue) / Double(pathMultiplier) / 100
       }, context: context)
 
     try addAnimation(
@@ -66,18 +70,25 @@ extension CAShapeLayer {
         // Lottie animation files express stoke trims as a numerical percentage value
         // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.25, 0.5, 1.0).
-        CGFloat(strokeEnd.cgFloatValue) / 100
+        CGFloat(strokeEnd.cgFloatValue) / Double(pathMultiplier) / 100
       }, context: context)
+
+    return pathMultiplier
   }
 }
+
+/// The number of times that a `CGPath` needs to be duplicated in order to support the animation's `Trim` keyframes
+typealias PathMultiplier = Int
 
 extension Trim {
 
   // MARK: Fileprivate
 
-  /// The `strokeStart` and `strokeEnd` keyframes to apply to a `CAShapeLayer`
+  /// The `strokeStart` and `strokeEnd` keyframes to apply to a `CAShapeLayer`,
+  /// plus a `pathMultiplier` that should be applied to the layer's `path` so that
+  /// trim values larger than 100% can be displayed properly.
   fileprivate func caShapeLayerKeyframes(context: LayerAnimationContext) throws
-    -> (strokeStart: KeyframeGroup<Vector1D>, strokeEnd: KeyframeGroup<Vector1D>) {
+  -> (strokeStart: KeyframeGroup<Vector1D>, strokeEnd: KeyframeGroup<Vector1D>, pathMultiplier: PathMultiplier) {
     let strokeStart: KeyframeGroup<Vector1D>
     let strokeEnd: KeyframeGroup<Vector1D>
 
@@ -104,20 +115,15 @@ extension Trim {
       offsetKeyframes: offset.keyframes,
       context: context)
 
-    // Validate the adjusted keyframes and fallback on original if invalid
-    if
-      (adjustedStrokeStart + adjustedStrokeEnd).contains(where: {
-        $0.value.cgFloatValue < 0 || $0.value.cgFloatValue > 100
-      }) {
-      try context.logCompatibilityIssue("""
-        The CoreAnimation rendering engine doesn't support Trim offsets
-        """)
-      return (strokeStart: strokeStart, strokeEnd: strokeEnd)
-    }
+    // If maximum stroke value is larger than 100%, then we have to create copies of the path
+    // so the total path length includes the maximum stroke
+    let maximumStroke = adjustedStrokeEnd.map { $0.value.cgFloatValue }.max() ?? 100
+    let pathMultiplier = Int(ceil(maximumStroke / 100.0))
 
     return (
       strokeStart: KeyframeGroup<Vector1D>(keyframes: adjustedStrokeStart),
-      strokeEnd: KeyframeGroup<Vector1D>(keyframes: adjustedStrokeEnd))
+      strokeEnd: KeyframeGroup<Vector1D>(keyframes: adjustedStrokeEnd),
+      pathMultiplier: pathMultiplier)
   }
 
   // MARK: Private
