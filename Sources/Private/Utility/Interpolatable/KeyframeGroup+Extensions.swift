@@ -5,6 +5,7 @@
 //  Created by JT Bergman on 6/20/22.
 //
 
+import CoreGraphics
 import Foundation
 
 extension KeyframeGroup where T == Vector1D {
@@ -40,7 +41,7 @@ extension KeyframeGroup where T == Vector1D {
         let progress = timingFunction.value(
           for: CGFloat(t) / CGFloat(duration),
           epsilon: 0.005)
-        let value = startValue + progress * difference
+        let value = startValue + Double(progress) * difference
         output.append(
           Keyframe<Vector1D>(
             value: Vector1D(value),

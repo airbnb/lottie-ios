@@ -60,7 +60,7 @@ extension CAShapeLayer {
         // Lottie animation files express stoke trims as a numerical percentage value
         // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.25, 0.5, 1.0).
-        CGFloat(strokeStart.cgFloatValue) / Double(pathMultiplier) / 100
+        CGFloat(strokeStart.cgFloatValue) / CGFloat(pathMultiplier) / 100
       }, context: context)
 
     try addAnimation(
@@ -70,7 +70,7 @@ extension CAShapeLayer {
         // Lottie animation files express stoke trims as a numerical percentage value
         // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.25, 0.5, 1.0).
-        CGFloat(strokeEnd.cgFloatValue) / Double(pathMultiplier) / 100
+        CGFloat(strokeEnd.cgFloatValue) / CGFloat(pathMultiplier) / 100
       }, context: context)
 
     return pathMultiplier
