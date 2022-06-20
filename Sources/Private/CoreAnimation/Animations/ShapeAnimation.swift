@@ -88,7 +88,8 @@ extension Trim {
   /// plus a `pathMultiplier` that should be applied to the layer's `path` so that
   /// trim values larger than 100% can be displayed properly.
   fileprivate func caShapeLayerKeyframes(context: LayerAnimationContext) throws
-  -> (strokeStart: KeyframeGroup<Vector1D>, strokeEnd: KeyframeGroup<Vector1D>, pathMultiplier: PathMultiplier) {
+    -> (strokeStart: KeyframeGroup<Vector1D>, strokeEnd: KeyframeGroup<Vector1D>, pathMultiplier: PathMultiplier)
+  {
     let strokeStart: KeyframeGroup<Vector1D>
     let strokeEnd: KeyframeGroup<Vector1D>
 
@@ -104,15 +105,29 @@ extension Trim {
       strokeEnd = end
     }
 
-    // Adjust the keyframes to account for trim offsets if possible
+    // If there are no offsets, then the stroke values can be used as-is
+    guard
+      !offset.keyframes.isEmpty,
+      offset.keyframes.contains(where: { $0.value.cgFloatValue != 0 })
+    else {
+      return (strokeStart, strokeEnd, 1)
+    }
+
+    // Otherwise, adjust the stroke values to account for the offsets
+    // 1. Interpolate the keyframes so they are all on a linear timing function
+    // 2. Merge by summing the stroke values with the offset values
+    let interpolatedStrokeStart = strokeStart.manuallyInterpolateKeyframes()
+    let interpolatedStrokeEnd = strokeEnd.manuallyInterpolateKeyframes()
+    let interpolatedStrokeOffset = offset.manuallyInterpolateKeyframes()
+
     let adjustedStrokeStart = try adjustKeyframesForTrimOffsets(
-      strokeKeyframes: strokeStart.keyframes,
-      offsetKeyframes: offset.keyframes,
+      strokeKeyframes: interpolatedStrokeStart,
+      offsetKeyframes: interpolatedStrokeOffset,
       context: context)
 
     let adjustedStrokeEnd = try adjustKeyframesForTrimOffsets(
-      strokeKeyframes: strokeEnd.keyframes,
-      offsetKeyframes: offset.keyframes,
+      strokeKeyframes: interpolatedStrokeEnd,
+      offsetKeyframes: interpolatedStrokeOffset,
       context: context)
 
     // If maximum stroke value is larger than 100%, then we have to create copies of the path
@@ -150,22 +165,26 @@ extension Trim {
     return true
   }
 
-  /// Adjusts a `KeyframeGroup` associated with a `strokeStart` or `strokeEnd` to account
-  /// for trim offsets. The CoreAnimation rendering engine does not fully support trim offsets. If applying
-  /// the offsets results in a `KeyframeGroup` with all values in the range `[0, 1]` then the offsets
-  /// can be supported.
+  /// Adjusted stroke keyframes to account for offset keyframes by merging them into a single keyframe collection
+  ///
+  /// Since stroke keyframes and offset keyframes can be defined on different animation curves, they must be
+  /// manually interpolated prior to invoking this method. Manually interpolating the keyframes will redefine both
+  /// keyframe groups such that they can be interpolated linearly.
+  ///
+  /// - Precondition: The keyframes must be interpolated using `KeyframeGroup.manuallyInterpolateKeyframes()`
   private func adjustKeyframesForTrimOffsets(
     strokeKeyframes: ContiguousArray<Keyframe<Vector1D>>,
     offsetKeyframes: ContiguousArray<Keyframe<Vector1D>>,
-    context _: LayerAnimationContext) throws -> ContiguousArray<Keyframe<Vector1D>> {
+    context _: LayerAnimationContext) throws -> ContiguousArray<Keyframe<Vector1D>>
+  {
     guard
-      !offsetKeyframes.isEmpty,
-      offsetKeyframes.contains(where: { $0.value.cgFloatValue != 0 })
+      !strokeKeyframes.isEmpty,
+      !offsetKeyframes.isEmpty
     else {
       return strokeKeyframes
     }
 
-    // Map each keyframe time to its associated stroke/offset
+    // Map each time to its corresponding stroke/offset keyframe
     var timeMap = [AnimationFrameTime: [Keyframe<Vector1D>?]]()
     for stroke in strokeKeyframes {
       timeMap[stroke.time] = [stroke, nil]
@@ -183,6 +202,7 @@ extension Trim {
     var output = ContiguousArray<Keyframe<Vector1D>>()
     var lastKeyframe: Keyframe<Vector1D>?
     var lastOffset: Keyframe<Vector1D>?
+
     for (time, values) in timeMap.sorted(by: { $0.0 < $1.0 }) {
       // Extract keyframe/offset associated with this timestamp
       let keyframe = values[0]
@@ -208,19 +228,15 @@ extension Trim {
       let offsetValue = currentOffset.value.value
       let adjustedValue = strokeValue + (offsetValue / 360 * 100)
 
-      // Create the adjusted keyframe using the properties of the most recent keyframe
-      let keyframePropertiesToUse = currentKeyframe.time >= currentOffset.time
-        ? currentKeyframe
-        : currentOffset
-
+      // The tangent values are all `nil` as the keyframes should have been manually interpolated
       let adjustedKeyframe = Keyframe<Vector1D>(
         value: Vector1D(adjustedValue),
         time: time,
-        isHold: keyframePropertiesToUse.isHold,
-        inTangent: keyframePropertiesToUse.inTangent,
-        outTangent: keyframePropertiesToUse.outTangent,
-        spatialInTangent: keyframePropertiesToUse.spatialInTangent,
-        spatialOutTangent: keyframePropertiesToUse.spatialOutTangent)
+        isHold: currentKeyframe.isHold,
+        inTangent: nil,
+        outTangent: nil,
+        spatialInTangent: nil,
+        spatialOutTangent: nil)
 
       output.append(adjustedKeyframe)
     }
