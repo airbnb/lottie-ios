@@ -175,7 +175,12 @@ final class ShapeItemLayer: BaseAnimationLayer {
     context: LayerAnimationContext)
     throws
   {
-    try shapeLayer.addAnimations(for: shape.item, context: context.for(shape))
+    var trimPathMultiplier: PathMultiplier? = nil
+    if let (trim, context) = otherItems.first(Trim.self, context: context) {
+      trimPathMultiplier = try shapeLayer.addAnimations(for: trim, context: context)
+    }
+
+    try shapeLayer.addAnimations(for: shape.item, context: context.for(shape), pathMultiplier: trimPathMultiplier ?? 1)
 
     if let (fill, context) = otherItems.first(Fill.self, context: context) {
       try shapeLayer.addAnimations(for: fill, context: context)
@@ -183,10 +188,6 @@ final class ShapeItemLayer: BaseAnimationLayer {
 
     if let (stroke, context) = otherItems.first(Stroke.self, context: context) {
       try shapeLayer.addStrokeAnimations(for: stroke, context: context)
-    }
-
-    if let (trim, context) = otherItems.first(Trim.self, context: context) {
-      try shapeLayer.addAnimations(for: trim, context: context)
     }
   }
 
@@ -196,7 +197,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
     context: LayerAnimationContext)
     throws
   {
-    try maskLayer.addAnimations(for: shape.item, context: context.for(shape))
+    try maskLayer.addAnimations(for: shape.item, context: context.for(shape), pathMultiplier: 1)
 
     if let (gradientFill, context) = otherItems.first(GradientFill.self, context: context) {
       try gradientLayer.addGradientAnimations(for: gradientFill, context: context)
@@ -209,15 +210,16 @@ final class ShapeItemLayer: BaseAnimationLayer {
     context: LayerAnimationContext)
     throws
   {
-    try maskLayer.addAnimations(for: shape.item, context: context.for(shape))
+    var trimPathMultiplier: PathMultiplier? = nil
+    if let (trim, context) = otherItems.first(Trim.self, context: context) {
+      trimPathMultiplier = try maskLayer.addAnimations(for: trim, context: context)
+    }
+
+    try maskLayer.addAnimations(for: shape.item, context: context.for(shape), pathMultiplier: trimPathMultiplier ?? 1)
 
     if let (gradientStroke, context) = otherItems.first(GradientStroke.self, context: context) {
       try gradientLayer.addGradientAnimations(for: gradientStroke, context: context)
       try maskLayer.addStrokeAnimations(for: gradientStroke, context: context)
-    }
-
-    if let (trim, context) = otherItems.first(Trim.self, context: context) {
-      try maskLayer.addAnimations(for: trim, context: context)
     }
   }
 

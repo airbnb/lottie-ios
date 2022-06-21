@@ -8,7 +8,8 @@ extension CAShapeLayer {
   @nonobjc
   func addAnimations(
     for combinedShapes: CombinedShapeItem,
-    context: LayerAnimationContext)
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier)
     throws
   {
     try addAnimation(
@@ -17,7 +18,7 @@ extension CAShapeLayer {
       value: { paths in
         let combinedPath = CGMutablePath()
         for path in paths {
-          combinedPath.addPath(path.cgPath())
+          combinedPath.addPath(path.cgPath().duplicated(times: pathMultiplier))
         }
         return combinedPath
       },

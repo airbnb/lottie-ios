@@ -99,6 +99,6 @@ extension MaskCompositionLayer {
 
 extension MaskCompositionLayer.MaskLayer: AnimationLayer {
   func setupAnimations(context: LayerAnimationContext) throws {
-    try addAnimations(for: maskModel.shape, context: context)
+    try addAnimations(for: maskModel.shape, context: context, pathMultiplier: 1)
   }
 }

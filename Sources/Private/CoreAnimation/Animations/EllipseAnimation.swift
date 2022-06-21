@@ -8,7 +8,8 @@ extension CAShapeLayer {
   @nonobjc
   func addAnimations(
     for ellipse: Ellipse,
-    context: LayerAnimationContext)
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier)
     throws
   {
     try addAnimation(
@@ -20,6 +21,7 @@ extension CAShapeLayer {
           center: try ellipse.position.exactlyOneKeyframe(context: context, description: "ellipse position").value.pointValue,
           direction: ellipse.direction)
           .cgPath()
+          .duplicated(times: pathMultiplier)
       },
       context: context)
   }

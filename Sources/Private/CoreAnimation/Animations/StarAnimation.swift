@@ -11,14 +11,15 @@ extension CAShapeLayer {
   @nonobjc
   func addAnimations(
     for star: Star,
-    context: LayerAnimationContext)
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier)
     throws
   {
     switch star.starType {
     case .star:
-      try addStarAnimation(for: star, context: context)
+      try addStarAnimation(for: star, context: context, pathMultiplier: pathMultiplier)
     case .polygon:
-      try addPolygonAnimation(for: star, context: context)
+      try addPolygonAnimation(for: star, context: context, pathMultiplier: pathMultiplier)
     case .none:
       break
     }
@@ -29,7 +30,8 @@ extension CAShapeLayer {
   @nonobjc
   private func addStarAnimation(
     for star: Star,
-    context: LayerAnimationContext)
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier)
     throws
   {
     try addAnimation(
@@ -55,6 +57,7 @@ extension CAShapeLayer {
             .exactlyOneKeyframe(context: context, description: "rotation").value.cgFloatValue,
           direction: star.direction)
           .cgPath()
+          .duplicated(times: pathMultiplier)
       },
       context: context)
   }
@@ -62,7 +65,8 @@ extension CAShapeLayer {
   @nonobjc
   private func addPolygonAnimation(
     for star: Star,
-    context: LayerAnimationContext)
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier)
     throws
   {
     try addAnimation(
@@ -84,6 +88,7 @@ extension CAShapeLayer {
             .exactlyOneKeyframe(context: context, description: "rotation").value.cgFloatValue,
           direction: star.direction)
           .cgPath()
+          .duplicated(times: pathMultiplier)
       },
       context: context)
   }

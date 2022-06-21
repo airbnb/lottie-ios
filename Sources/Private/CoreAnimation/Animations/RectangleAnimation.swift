@@ -8,7 +8,8 @@ extension CAShapeLayer {
   @nonobjc
   func addAnimations(
     for rectangle: Rectangle,
-    context: LayerAnimationContext)
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier)
     throws
   {
     try addAnimation(
@@ -23,6 +24,7 @@ extension CAShapeLayer {
             .exactlyOneKeyframe(context: context, description: "rectangle cornerRadius").value.cgFloatValue,
           direction: rectangle.direction)
           .cgPath()
+          .duplicated(times: pathMultiplier)
       },
       context: context)
   }

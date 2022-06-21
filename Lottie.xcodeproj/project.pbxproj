@@ -564,6 +564,12 @@
 		6DB3BDBE28245A14002A276D /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3BDBB28245A14002A276D /* CGPointExtension.swift */; };
 		6DB3BDC328245AA2002A276D /* ParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3BDBF28245A6A002A276D /* ParsingTests.swift */; };
 		6DEF696E2824A76C007D640F /* BundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEF696D2824A76C007D640F /* BundleTests.swift */; };
+		7E48BF582860CECF00A39198 /* UnitBezier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48BF572860CECF00A39198 /* UnitBezier.swift */; };
+		7E48BF592860CECF00A39198 /* UnitBezier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48BF572860CECF00A39198 /* UnitBezier.swift */; };
+		7E48BF5A2860CECF00A39198 /* UnitBezier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48BF572860CECF00A39198 /* UnitBezier.swift */; };
+		7E48BF602860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48BF5F2860D4FA00A39198 /* KeyframeGroup+Extensions.swift */; };
+		7E48BF612860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48BF5F2860D4FA00A39198 /* KeyframeGroup+Extensions.swift */; };
+		7E48BF622860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48BF5F2860D4FA00A39198 /* KeyframeGroup+Extensions.swift */; };
 		A1D5BAAC27C731A500777D06 /* DataURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D5BAAB27C731A500777D06 /* DataURLTests.swift */; };
 		A40460592832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
 		A404605A2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
@@ -704,7 +710,7 @@
 		2E9C95AB2822F43100677516 /* Keyframes+combinedIfPossible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Keyframes+combinedIfPossible.swift"; sourceTree = "<group>"; };
 		2E9C95AC2822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyframeGroup+exactlyOneKeyframe.swift"; sourceTree = "<group>"; };
 		2E9C95AE2822F43100677516 /* CAAnimation+TimingConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAAnimation+TimingConfiguration.swift"; sourceTree = "<group>"; };
-		2E9C95AF2822F43100677516 /* ShapeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeAnimation.swift; sourceTree = "<group>"; };
+		2E9C95AF2822F43100677516 /* ShapeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ShapeAnimation.swift; sourceTree = "<group>"; tabWidth = 4; };
 		2E9C95B02822F43100677516 /* CombinedShapeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedShapeAnimation.swift; sourceTree = "<group>"; };
 		2E9C95B12822F43100677516 /* TransformAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformAnimations.swift; sourceTree = "<group>"; };
 		2E9C95B22822F43100677516 /* RectangleAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectangleAnimation.swift; sourceTree = "<group>"; };
@@ -779,6 +785,8 @@
 		6DB3BDBB28245A14002A276D /* CGPointExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
 		6DB3BDBF28245A6A002A276D /* ParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingTests.swift; sourceTree = "<group>"; };
 		6DEF696D2824A76C007D640F /* BundleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleTests.swift; sourceTree = "<group>"; };
+		7E48BF572860CECF00A39198 /* UnitBezier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitBezier.swift; sourceTree = "<group>"; };
+		7E48BF5F2860D4FA00A39198 /* KeyframeGroup+Extensions.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "KeyframeGroup+Extensions.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		A1D5BAAB27C731A500777D06 /* DataURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataURLTests.swift; sourceTree = "<group>"; };
 		A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlendMode+Filter.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1280,6 +1288,7 @@
 				2E9C95C92822F43100677516 /* CompoundBezierPath.swift */,
 				2E9C95CA2822F43100677516 /* ColorExtension.swift */,
 				2E9C95CB2822F43100677516 /* PathElement.swift */,
+				7E48BF572860CECF00A39198 /* UnitBezier.swift */,
 				2E9C95CC2822F43100677516 /* CurveVertex.swift */,
 				2E9C95CD2822F43100677516 /* VectorsExtensions.swift */,
 				6DB3BDBB28245A14002A276D /* CGPointExtension.swift */,
@@ -1292,6 +1301,7 @@
 			children = (
 				2E9C95CF2822F43100677516 /* InterpolatableExtensions.swift */,
 				2E9C95D02822F43100677516 /* KeyframeExtensions.swift */,
+				7E48BF5F2860D4FA00A39198 /* KeyframeGroup+Extensions.swift */,
 			);
 			path = Interpolatable;
 			sourceTree = "<group>";
@@ -1751,6 +1761,7 @@
 				2E9C95DC2822F43100677516 /* ShapeItem.swift in Sources */,
 				2E9C96962822F43100677516 /* RectNode.swift in Sources */,
 				2E9C96272822F43100677516 /* KeyframeData.swift in Sources */,
+				7E48BF582860CECF00A39198 /* UnitBezier.swift in Sources */,
 				2E9C971A2822F43100677516 /* ShapeAnimation.swift in Sources */,
 				2E9C974A2822F43100677516 /* CGColor+RGB.swift in Sources */,
 				2E9C96572822F43100677516 /* ShapeCompositionLayer.swift in Sources */,
@@ -1828,6 +1839,7 @@
 				2E9C962A2822F43100677516 /* TextDocument.swift in Sources */,
 				2EAF5AE627A0798700E00531 /* LRUAnimationCache.swift in Sources */,
 				2EAF5AC827A0798700E00531 /* AnimatedButton.swift in Sources */,
+				7E48BF602860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */,
 				2E9C962D2822F43100677516 /* Glyph.swift in Sources */,
 				2E9C96D52822F43100677516 /* RenderNode.swift in Sources */,
 				2E9C971D2822F43100677516 /* CombinedShapeAnimation.swift in Sources */,
@@ -1959,6 +1971,7 @@
 				2E9C95DD2822F43100677516 /* ShapeItem.swift in Sources */,
 				2E9C96972822F43100677516 /* RectNode.swift in Sources */,
 				2E9C96282822F43100677516 /* KeyframeData.swift in Sources */,
+				7E48BF592860CECF00A39198 /* UnitBezier.swift in Sources */,
 				2E9C971B2822F43100677516 /* ShapeAnimation.swift in Sources */,
 				2E9C974B2822F43100677516 /* CGColor+RGB.swift in Sources */,
 				2E9C96582822F43100677516 /* ShapeCompositionLayer.swift in Sources */,
@@ -2036,6 +2049,7 @@
 				2E9C962B2822F43100677516 /* TextDocument.swift in Sources */,
 				2EAF5AE727A0798700E00531 /* LRUAnimationCache.swift in Sources */,
 				2EAF5AC927A0798700E00531 /* AnimatedButton.swift in Sources */,
+				7E48BF612860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */,
 				2E9C962E2822F43100677516 /* Glyph.swift in Sources */,
 				2E9C96D62822F43100677516 /* RenderNode.swift in Sources */,
 				2E9C971E2822F43100677516 /* CombinedShapeAnimation.swift in Sources */,
@@ -2147,6 +2161,7 @@
 				2E9C95DE2822F43100677516 /* ShapeItem.swift in Sources */,
 				2E9C96982822F43100677516 /* RectNode.swift in Sources */,
 				2E9C96292822F43100677516 /* KeyframeData.swift in Sources */,
+				7E48BF5A2860CECF00A39198 /* UnitBezier.swift in Sources */,
 				2E9C971C2822F43100677516 /* ShapeAnimation.swift in Sources */,
 				2E9C974C2822F43100677516 /* CGColor+RGB.swift in Sources */,
 				2E9C96592822F43100677516 /* ShapeCompositionLayer.swift in Sources */,
@@ -2224,6 +2239,7 @@
 				2E9C962C2822F43100677516 /* TextDocument.swift in Sources */,
 				2EAF5AE827A0798700E00531 /* LRUAnimationCache.swift in Sources */,
 				2EAF5ACA27A0798700E00531 /* AnimatedButton.swift in Sources */,
+				7E48BF622860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */,
 				2E9C962F2822F43100677516 /* Glyph.swift in Sources */,
 				2E9C96D72822F43100677516 /* RenderNode.swift in Sources */,
 				2E9C971F2822F43100677516 /* CombinedShapeAnimation.swift in Sources */,
