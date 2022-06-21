@@ -66,7 +66,7 @@ final class PerformanceTests: XCTestCase {
   func testParsing_simpleAnimation() throws {
     let data = try XCTUnwrap(Bundle.module.getAnimationData("loading_dots_1", subdirectory: "Samples/LottieFiles"))
     let ratio = try compareDeserializationPerformance(data: data, iterations: 2000)
-    XCTAssertEqual(ratio, 2, accuracy: 0.5)
+    XCTAssertEqual(ratio, 2, accuracy: 0.55)
   }
 
   func testParsing_complexAnimation() throws {
