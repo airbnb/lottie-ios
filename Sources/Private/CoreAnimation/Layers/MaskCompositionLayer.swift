@@ -99,6 +99,25 @@ extension MaskCompositionLayer {
 
 extension MaskCompositionLayer.MaskLayer: AnimationLayer {
   func setupAnimations(context: LayerAnimationContext) throws {
-    try addAnimations(for: maskModel.shape, context: context, pathMultiplier: 1)
+    let shouldInvertMask = (maskModel.mode == .subtract && !maskModel.inverted)
+      || (maskModel.mode == .add && maskModel.inverted)
+
+    try addAnimations(
+      for: maskModel.shape,
+      context: context,
+      transformPath: { maskPath in
+        // If the mask is using `MaskMode.subtract` or has `inverted: true`,
+        // we have to invert the area filled by the path. We can do that by
+        // drawing a rectangle, and then adding a path (which is subtracted
+        // from the rectangle based on the .evenOdd fill mode).
+        if shouldInvertMask {
+          let path = CGMutablePath()
+          path.addRect(bounds)
+          path.addPath(maskPath)
+          return path
+        } else {
+          return maskPath
+        }
+      })
   }
 }
