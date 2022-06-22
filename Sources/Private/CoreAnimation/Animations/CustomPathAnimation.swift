@@ -9,14 +9,15 @@ extension CAShapeLayer {
   func addAnimations(
     for customPath: KeyframeGroup<BezierPath>,
     context: LayerAnimationContext,
-    pathMultiplier: PathMultiplier)
+    pathMultiplier: PathMultiplier = 1,
+    transformPath: (CGPath) -> CGPath = { $0 })
     throws
   {
     try addAnimation(
       for: .path,
       keyframes: customPath.keyframes,
       value: { pathKeyframe in
-        pathKeyframe.cgPath().duplicated(times: pathMultiplier)
+        transformPath(pathKeyframe.cgPath().duplicated(times: pathMultiplier))
       },
       context: context)
   }

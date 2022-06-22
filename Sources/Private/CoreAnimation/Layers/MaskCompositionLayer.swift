@@ -14,9 +14,23 @@ final class MaskCompositionLayer: CALayer {
     maskLayers = masks.map(MaskLayer.init(mask:))
     super.init()
 
+    var containerLayer = BaseAnimationLayer()
+    var firstObject = true
     for maskLayer in maskLayers {
-      addSublayer(maskLayer)
+      if maskLayer.maskModel.mode.usableMode == .none {
+        continue
+      } else if maskLayer.maskModel.mode.usableMode == .add || firstObject {
+        firstObject = false
+        containerLayer.addSublayer(maskLayer)
+      } else {
+        containerLayer.mask = maskLayer
+        let newContainer = BaseAnimationLayer()
+        newContainer.addSublayer(containerLayer)
+        containerLayer = newContainer
+      }
     }
+
+    addSublayer(containerLayer)
   }
 
   required init?(coder _: NSCoder) {
@@ -70,7 +84,8 @@ extension MaskCompositionLayer {
     init(mask: Mask) {
       maskModel = mask
       super.init()
-      fillColor = .rgb(0, 0, 0)
+
+      fillRule = .evenOdd
     }
 
     required init?(coder _: NSCoder) {
@@ -88,9 +103,9 @@ extension MaskCompositionLayer {
       super.init(layer: typedLayer)
     }
 
-    // MARK: Private
+    // MARK: Internal
 
-    private let maskModel: Mask
+    let maskModel: Mask
 
   }
 }
@@ -99,6 +114,25 @@ extension MaskCompositionLayer {
 
 extension MaskCompositionLayer.MaskLayer: AnimationLayer {
   func setupAnimations(context: LayerAnimationContext) throws {
-    try addAnimations(for: maskModel.shape, context: context, pathMultiplier: 1)
+    let shouldInvertMask = (maskModel.mode.usableMode == .subtract && !maskModel.inverted)
+      || (maskModel.mode.usableMode == .add && maskModel.inverted)
+
+    try addAnimations(
+      for: maskModel.shape,
+      context: context,
+      transformPath: { maskPath in
+        // If the mask is using `MaskMode.subtract` or has `inverted: true`,
+        // we have to invert the area filled by the path. We can do that by
+        // drawing a rectangle, and then adding a path (which is subtracted
+        // from the rectangle based on the .evenOdd fill mode).
+        if shouldInvertMask {
+          let path = CGMutablePath()
+          path.addRect(.veryLargeRect)
+          path.addPath(maskPath)
+          return path
+        } else {
+          return maskPath
+        }
+      })
   }
 }
