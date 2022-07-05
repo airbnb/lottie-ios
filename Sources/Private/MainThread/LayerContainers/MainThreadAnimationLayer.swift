@@ -22,12 +22,14 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     animation: Animation,
     imageProvider: AnimationImageProvider,
     textProvider: AnimationTextProvider,
-    fontProvider: AnimationFontProvider)
+    fontProvider: AnimationFontProvider,
+    logger: LottieLogger)
   {
     layerImageProvider = LayerImageProvider(imageProvider: imageProvider, assets: animation.assetLibrary?.imageAssets)
     layerTextProvider = LayerTextProvider(textProvider: textProvider)
     layerFontProvider = LayerFontProvider(fontProvider: fontProvider)
     animationLayers = []
+    self.logger = logger
     super.init()
     bounds = animation.bounds
     let layers = animation.layers.initializeCompositionLayers(
@@ -76,17 +78,21 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     setNeedsDisplay()
   }
 
-  /// For CAAnimation Use
-  public override init(layer: Any) {
+  /// Called by CoreAnimation to create a shadow copy of this layer
+  /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
+  override init(layer: Any) {
+    guard let typedLayer = layer as? Self else {
+      fatalError("\(Self.self).init(layer:) incorrectly called with \(type(of: layer))")
+    }
+
     animationLayers = []
     layerImageProvider = LayerImageProvider(imageProvider: BlankImageProvider(), assets: nil)
     layerTextProvider = LayerTextProvider(textProvider: DefaultTextProvider())
     layerFontProvider = LayerFontProvider(fontProvider: DefaultFontProvider())
+    logger = typedLayer.logger
     super.init(layer: layer)
 
-    guard let animationLayer = layer as? MainThreadAnimationLayer else { return }
-
-    currentFrame = animationLayer.currentFrame
+    currentFrame = typedLayer.currentFrame
 
   }
 
@@ -193,8 +199,8 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
   }
 
   func logHierarchyKeypaths() {
-    print("Lottie: Logging Animation Keypaths")
-    animationLayers.forEach({ $0.logKeypaths(for: nil) })
+    logger.info("Lottie: Logging Animation Keypaths")
+    animationLayers.forEach({ $0.logKeypaths(for: nil, logger: self.logger) })
   }
 
   func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
@@ -259,6 +265,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
   fileprivate let layerImageProvider: LayerImageProvider
   fileprivate let layerTextProvider: LayerTextProvider
   fileprivate let layerFontProvider: LayerFontProvider
+  fileprivate let logger: LottieLogger
 }
 
 // MARK: - BlankImageProvider

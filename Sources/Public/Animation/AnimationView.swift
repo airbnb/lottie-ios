@@ -986,7 +986,8 @@ final public class AnimationView: AnimationViewBase {
       animation: animation,
       imageProvider: imageProvider.cachedImageProvider,
       textProvider: textProvider,
-      fontProvider: fontProvider)
+      fontProvider: fontProvider,
+      logger: logger)
   }
 
   fileprivate func makeCoreAnimationLayer(for animation: Animation) -> CoreAnimationLayer? {
@@ -1230,9 +1231,9 @@ final public class AnimationView: AnimationViewBase {
         }
       }
 
-      coreAnimationLayer.playAnimation(
-        context: animationContext,
-        timingConfiguration: timingConfiguration)
+      coreAnimationLayer.playAnimation(configuration: .init(
+        animationContext: animationContext,
+        timingConfiguration: timingConfiguration))
 
       return
     }

@@ -41,6 +41,10 @@ struct LayerAnimationContext {
   /// The AnimationKeypath represented by the current layer
   var currentKeypath: AnimationKeypath
 
+  /// Whether or not to log `AnimationKeypath`s for all of the animation's layers
+  ///  - Used for `CoreAnimationLayer.logHierarchyKeypaths()`
+  var logHierarchyKeypaths: Bool
+
   /// A closure that remaps the given frame in the child layer's local time to a frame
   /// in the animation's overall global time
   private(set) var timeRemapping: ((AnimationFrameTime) -> AnimationFrameTime) = { $0 }

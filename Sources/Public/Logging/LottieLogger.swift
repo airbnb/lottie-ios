@@ -17,11 +17,18 @@ public final class LottieLogger {
       // swiftlint:disable:next no_direct_standard_out_logs
       print(message())
       #endif
+    },
+    info: @escaping Info = { message in
+      #if DEBUG
+      // swiftlint:disable:next no_direct_standard_out_logs
+      print(message())
+      #endif
     })
   {
     _assert = assert
     _assertionFailure = assertionFailure
     _warn = warn
+    _info = info
   }
 
   // MARK: Public
@@ -47,6 +54,9 @@ public final class LottieLogger {
     _ fileID: StaticString,
     _ line: UInt)
     -> Void
+
+  /// Prints a purely informational message.
+  public typealias Info = (_ message: @autoclosure () -> String) -> Void
 
   /// The shared instance used to log Lottie assertions and warnings.
   ///
@@ -81,11 +91,17 @@ public final class LottieLogger {
     _warn(message(), fileID, line)
   }
 
+  /// Logs a purely informational message.
+  public func info(_ message: @autoclosure () -> String = String()) {
+    _info(message())
+  }
+
   // MARK: Private
 
   private let _assert: Assert
   private let _assertionFailure: AssertionFailure
   private let _warn: Warn
+  private let _info: Info
 
 }
 
