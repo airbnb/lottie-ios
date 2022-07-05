@@ -400,9 +400,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
   }
 
   func forceDisplayUpdate() {
-    rebuildCurrentAnimation()
-    setNeedsDisplay()
-    displayIfNeeded()
+    // Unimplemented / unused
   }
 
   func logHierarchyKeypaths() {
@@ -417,7 +415,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
     // This allows the consumer to know what keypaths can be customized in their animation.
     configuration.logHierarchyKeypaths = true
     rebuildCurrentAnimation(with: configuration)
-    forceDisplayUpdate()
+    displayIfNeeded()
   }
 
   func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
