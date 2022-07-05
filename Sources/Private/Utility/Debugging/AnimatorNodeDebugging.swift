@@ -11,14 +11,14 @@ extension AnimatorNode {
 
   func printNodeTree() {
     parentNode?.printNodeTree()
-    print(String(describing: type(of: self)))
+    LottieLogger.shared.print(String(describing: type(of: self)))
 
     if let group = self as? GroupNode {
-      print("* |Children")
+      LottieLogger.shared.print("* |Children")
       group.rootNode?.printNodeTree()
-      print("*")
+      LottieLogger.shared.print("*")
     } else {
-      print("|")
+      LottieLogger.shared.print("|")
     }
   }
 

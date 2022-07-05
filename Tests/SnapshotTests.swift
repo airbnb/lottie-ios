@@ -228,7 +228,8 @@ extension SnapshotConfiguration {
   /// Creates an `AnimationView` for the sample snapshot with the given name
   static func makeAnimationView(
     for sampleAnimationName: String,
-    configuration: LottieConfiguration)
+    configuration: LottieConfiguration,
+    logger: LottieLogger = LottieLogger.shared)
     -> AnimationView?
   {
     let snapshotConfiguration = SnapshotConfiguration.forSample(named: sampleAnimationName)
@@ -240,7 +241,8 @@ extension SnapshotConfiguration {
 
     let animationView = AnimationView(
       animation: animation,
-      configuration: configuration)
+      configuration: configuration,
+      logger: logger)
 
     // Set up the animation view with a valid frame
     // so the geometry is correct when setting up the `CAAnimation`s

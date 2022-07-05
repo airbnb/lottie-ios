@@ -1,0 +1,5 @@
+Checkmark Outlines 2.Group 1.Stroke 1.Color
+Checkmark Outlines.Group 1.Stroke 1.Color
+Switch Outline Outlines.Fill 1.Color
+White BG Outlines.Group 1.Fill 1.Color
+X Outlines.Group 1.Stroke 1.Color

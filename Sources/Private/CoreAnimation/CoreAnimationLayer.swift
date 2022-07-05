@@ -74,6 +74,13 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     case paused(frame: AnimationFrameTime)
   }
 
+  /// Configuration used by the `playAnimation` method
+  struct AnimationConfiguration: Equatable {
+    var animationContext: AnimationContext
+    var timingConfiguration: CAMediaTimingConfiguration
+    var logHierarchyKeypaths = false
+  }
+
   /// A closure that is called after this layer sets up its animation.
   /// If the animation setup was unsuccessful and encountered compatibility issues,
   /// those issues are included in this call.
@@ -97,12 +104,11 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   ///     is called multiple times in the same run loop cycle, the animation
   ///     will only be set up a single time.
   func playAnimation(
-    context: AnimationContext,
-    timingConfiguration: CAMediaTimingConfiguration,
+    configuration: AnimationConfiguration,
     playbackState: PlaybackState = .playing)
   {
     pendingAnimationConfiguration = (
-      animationConfiguration: .init(animationContext: context, timingConfiguration: timingConfiguration),
+      animationConfiguration: configuration,
       playbackState: playbackState)
 
     setNeedsDisplay()
@@ -129,7 +135,6 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     //    allocate a very large amount of memory (400mb+).
     //  - Alternatively this layer could subclass `CATransformLayer`,
     //    but this causes Core Animation to emit unnecessary logs.
-
     if let pendingAnimationConfiguration = pendingAnimationConfiguration {
       self.pendingAnimationConfiguration = nil
 
@@ -155,11 +160,6 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   }
 
   // MARK: Private
-
-  private struct AnimationConfiguration: Equatable {
-    let animationContext: AnimationContext
-    let timingConfiguration: CAMediaTimingConfiguration
-  }
 
   /// The configuration for the most recent animation which has been
   /// queued by calling `playAnimation` but not yet actually set up
@@ -233,7 +233,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
       valueProviderStore: valueProviderStore,
       compatibilityTracker: compatibilityTracker,
       logger: logger,
-      currentKeypath: AnimationKeypath(keys: []))
+      currentKeypath: AnimationKeypath(keys: []),
+      logHierarchyKeypaths: configuration.logHierarchyKeypaths)
 
     // Perform a layout pass if necessary so all of the sublayers
     // have the most up-to-date sizing information
@@ -268,7 +269,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
 
   // Removes the current `CAAnimation`s, and rebuilds new animations
   // using the same configuration as the previous animations.
-  private func rebuildCurrentAnimation() {
+  private func rebuildCurrentAnimation(with newConfiguration: AnimationConfiguration? = nil) {
     guard
       let currentConfiguration = currentAnimationConfiguration,
       let playbackState = playbackState,
@@ -276,7 +277,15 @@ final class CoreAnimationLayer: BaseAnimationLayer {
       // on the next run loop cycle, since an existing pending animation
       // will cause the animation to be rebuilt anyway.
       pendingAnimationConfiguration == nil
-    else { return }
+    else {
+      // If we already have a pending animation setup pass, but a new configuration was provided,
+      // replace the pending configuration with the new configuration
+      if let newConfiguration = newConfiguration {
+        pendingAnimationConfiguration?.animationConfiguration = newConfiguration
+      }
+
+      return
+    }
 
     removeAnimations()
 
@@ -285,9 +294,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
       currentFrame = frame
 
     case .playing:
-      playAnimation(
-        context: currentConfiguration.animationContext,
-        timingConfiguration: currentConfiguration.timingConfiguration)
+      playAnimation(configuration: newConfiguration ?? currentConfiguration)
     }
   }
 
@@ -341,8 +348,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
 
       else {
         playAnimation(
-          context: requiredAnimationConfiguration.animationContext,
-          timingConfiguration: requiredAnimationConfiguration.timingConfiguration,
+          configuration: requiredAnimationConfiguration,
           playbackState: .paused(frame: newValue))
       }
     }
@@ -394,11 +400,24 @@ extension CoreAnimationLayer: RootAnimationLayer {
   }
 
   func forceDisplayUpdate() {
-    // Unimplemented / unused
+    rebuildCurrentAnimation()
+    setNeedsDisplay()
+    displayIfNeeded()
   }
 
   func logHierarchyKeypaths() {
-    // Unimplemented / unused
+    guard var configuration = pendingAnimationConfiguration?.animationConfiguration ?? currentAnimationConfiguration else {
+      logger.print("Cannot log hierarchy keypaths until animation has been set up at least once")
+      return
+    }
+
+    logger.print("Lottie: Rebuilding animation with hierarchy keypath logging enabled")
+
+    // Rebuild the animation with `logHierarchyKeypaths = true` so the `ValueProviderStore` will log any keypath lookups that occur.
+    // This allows the consumer to know what keypaths can be customized in their animation.
+    configuration.logHierarchyKeypaths = true
+    rebuildCurrentAnimation(with: configuration)
+    forceDisplayUpdate()
   }
 
   func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
