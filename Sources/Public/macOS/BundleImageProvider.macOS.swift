@@ -34,7 +34,7 @@ public class BundleImageProvider: AnimationImageProvider {
       let data = Data(imageAsset: asset),
       let image = NSImage(data: data)
     {
-      return image.CGImage
+      return image.lottie_CGImage
     }
 
     let imagePath: String?
@@ -68,7 +68,7 @@ public class BundleImageProvider: AnimationImageProvider {
       LottieLogger.shared.assertionFailure("Could not find image \"\(asset.name)\" in bundle")
       return nil
     }
-    return image.CGImage
+    return image.lottie_CGImage
   }
 
   // MARK: Internal
