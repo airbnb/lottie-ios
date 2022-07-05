@@ -367,7 +367,11 @@ extension CoreAnimationLayer: RootAnimationLayer {
 
   var respectAnimationFrameRate: Bool {
     get { false }
-    set { logger.assertionFailure("`respectAnimationFrameRate` is currently unsupported") }
+    set {
+      logger.assertionFailure("""
+        The Core Animation rendering engine currently doesn't support `respectAnimationFrameRate`)
+        """)
+    }
   }
 
   var _animationLayers: [CALayer] {
@@ -376,7 +380,11 @@ extension CoreAnimationLayer: RootAnimationLayer {
 
   var textProvider: AnimationTextProvider {
     get { DictionaryTextProvider([:]) }
-    set { logger.assertionFailure("`textProvider` is currently unsupported") }
+    set {
+      logger.assertionFailure("""
+        The Core Animation rendering engine currently doesn't support `textProvider`s")
+        """)
+    }
   }
 
   func reloadImages() {
@@ -441,12 +449,16 @@ extension CoreAnimationLayer: RootAnimationLayer {
   }
 
   func layer(for _: AnimationKeypath) -> CALayer? {
-    logger.assertionFailure("`AnimationKeypath`s are currently unsupported")
+    logger.assertionFailure("""
+      The Core Animation rendering engine doesn't support retrieving `CALayer`s by keypath
+      """)
     return nil
   }
 
   func animatorNodes(for _: AnimationKeypath) -> [AnimatorNode]? {
-    logger.assertionFailure("`AnimatorNode`s are not used in this rendering implementation")
+    logger.assertionFailure("""
+      The Core Animation rendering engine does not use `AnimatorNode`s
+      """)
     return nil
   }
 
