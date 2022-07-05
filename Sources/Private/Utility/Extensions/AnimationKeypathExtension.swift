@@ -122,9 +122,9 @@ extension KeypathSearchable {
     } else {
       newKeypath = AnimationKeypath(keys: [keypathName])
     }
-    logger.print(newKeypath.fullPath)
+    logger.info(newKeypath.fullPath)
     for key in keypathProperties.keys {
-      logger.print(newKeypath.appendingKey(key).fullPath)
+      logger.info(newKeypath.appendingKey(key).fullPath)
     }
     for child in childKeypaths {
       child.logKeypaths(for: newKeypath, logger: logger)

@@ -413,11 +413,11 @@ extension CoreAnimationLayer: RootAnimationLayer {
 
   func logHierarchyKeypaths() {
     guard var configuration = pendingAnimationConfiguration?.animationConfiguration ?? currentAnimationConfiguration else {
-      logger.print("Cannot log hierarchy keypaths until animation has been set up at least once")
+      logger.info("Cannot log hierarchy keypaths until animation has been set up at least once")
       return
     }
 
-    logger.print("Lottie: Rebuilding animation with hierarchy keypath logging enabled")
+    logger.info("Lottie: Rebuilding animation with hierarchy keypath logging enabled")
 
     // Rebuild the animation with `logHierarchyKeypaths = true` so the `ValueProviderStore` will log any keypath lookups that occur.
     // This allows the consumer to know what keypaths can be customized in their animation.

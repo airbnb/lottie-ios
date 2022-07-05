@@ -199,7 +199,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
   }
 
   func logHierarchyKeypaths() {
-    logger.print("Lottie: Logging Animation Keypaths")
+    logger.info("Lottie: Logging Animation Keypaths")
     animationLayers.forEach({ $0.logKeypaths(for: nil, logger: self.logger) })
   }
 

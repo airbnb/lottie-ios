@@ -44,7 +44,7 @@ final class ValueProviderStore {
     -> KeyframeGroup<Value>?
   {
     if context.logHierarchyKeypaths {
-      context.logger.print(keypath.fullPath)
+      context.logger.info(keypath.fullPath)
     }
 
     guard let anyValueProvider = valueProvider(for: keypath) else {

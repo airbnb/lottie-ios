@@ -15,20 +15,20 @@ public final class LottieLogger {
     warn: @escaping Warn = { message, _, _ in
       #if DEBUG
       // swiftlint:disable:next no_direct_standard_out_logs
-      Swift.print(message())
+      print(message())
       #endif
     },
-    print: @escaping Print = { message in
+    info: @escaping Info = { message in
       #if DEBUG
       // swiftlint:disable:next no_direct_standard_out_logs
-      Swift.print(message())
+      print(message())
       #endif
     })
   {
     _assert = assert
     _assertionFailure = assertionFailure
     _warn = warn
-    _print = print
+    _info = info
   }
 
   // MARK: Public
@@ -56,7 +56,7 @@ public final class LottieLogger {
     -> Void
 
   /// Prints a purely informational message.
-  public typealias Print = (_ message: @autoclosure () -> String) -> Void
+  public typealias Info = (_ message: @autoclosure () -> String) -> Void
 
   /// The shared instance used to log Lottie assertions and warnings.
   ///
@@ -92,8 +92,8 @@ public final class LottieLogger {
   }
 
   /// Logs a purely informational message.
-  public func print(_ message: @autoclosure () -> String = String()) {
-    _print(message())
+  public func info(_ message: @autoclosure () -> String = String()) {
+    _info(message())
   }
 
   // MARK: Private
@@ -101,7 +101,7 @@ public final class LottieLogger {
   private let _assert: Assert
   private let _assertionFailure: AssertionFailure
   private let _warn: Warn
-  private let _print: Print
+  private let _info: Info
 
 }
 
@@ -114,11 +114,11 @@ extension LottieLogger {
     LottieLogger(
       assert: { condition, message, _, _ in
         if !condition() {
-          Swift.print(message())
+          print(message())
         }
       },
       assertionFailure: { message, _, _ in
-        Swift.print(message())
+        print(message())
       })
   }
 }

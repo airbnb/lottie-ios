@@ -82,7 +82,7 @@ final class AnimationKeypathTests: XCTestCase {
 
   private func hierarchyKeypaths(animationName: String, configuration: LottieConfiguration) -> [String] {
     var printedMessages = [String]()
-    let logger = LottieLogger(print: { message in
+    let logger = LottieLogger(info: { message in
       printedMessages.append(message())
     })
 
