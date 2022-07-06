@@ -3,7 +3,7 @@
 
 **View documentation, FAQ, help, examples, and more at [airbnb.io/lottie](http://airbnb.io/lottie/)**
 
-Lottie is a framework for iOS, macOS, and tvOS that natively renders vector based animations and art in realtime with minimal code.
+Lottie is a cross-platform library for iOS, macOS, tvOS, [Android](https://github.com/airbnb/lottie), and [Web](https://github.com/airbnb/lottie-web) that natively renders vector based animations and art in realtime with minimal code.
 
 Lottie loads and renders animations and vectors exported in the bodymovin JSON format. Bodymovin JSON can be created and exported from After Effects with [bodymovin](https://github.com/bodymovin/bodymovin), Sketch with [Lottie Sketch Export](https://github.com/buba447/Lottie-Sketch-Export), and from [Haiku](https://www.haiku.ai).
 
@@ -29,26 +29,14 @@ Lottie supports [Swift Package Manager](https://www.swift.org/package-manager/),
 
 ### Github Repo
 
-You can pull the [Lottie Github Repo](https://github.com/airbnb/lottie-ios/) and include the Lottie.xcodeproj to build a dynamic or static library.
+You can pull the [Lottie Github Repo](https://github.com/airbnb/lottie-ios/) and include the `Lottie.xcodeproj` to build a dynamic or static library.
 
 ### Swift Package Manager
 
-``` swift
-import PackageDescription
+To install Lottie using [Swift Package Manager](https://github.com/apple/swift-package-manager)  you can follow the [tutorial published by Apple](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) using the URL for the Lottie repo with the current version:
 
-let package = Package(
-  name: "YourApp",
-  platforms: [.iOS(.v15)],
-  dependencies: [
-    .package(name: "Lottie", url: "https://github.com/airbnb/lottie-ios.git", from: "3.4.0")
-  ],
-  targets: [
-    .target(name: "YourApp", dependencies: ["Lottie"])
-  ]
-)
-```
-
-And then import wherever needed: ```import Lottie```
+1. In Xcode, select “File” → “Swift Packages” → “Add Package Dependency”
+1. Enter https://github.com/airbnb/lottie-ios.git
 
 ### CocoaPods
 Add the pod to your Podfile:
