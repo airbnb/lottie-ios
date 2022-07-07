@@ -142,7 +142,7 @@ extension GradientShapeItem {
       var alpha = 1.0
       let alphaIndex = (numberOfColors * 4) + (colorIndex * 2)
       if alphaIndex < colorComponents.count {
-        let alphaLocation = colorComponents[alphaIndex]
+        let alphaLocation = CGFloat(colorComponents[alphaIndex])
         if alphaLocation == colorLocation {
           alpha = colorComponents[alphaIndex + 1]
         } else {
