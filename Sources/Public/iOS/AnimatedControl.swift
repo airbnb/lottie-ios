@@ -132,6 +132,11 @@ open class AnimatedControl: UIControl {
     updateForState()
   }
 
+  public override var accessibilityTraits: UIAccessibilityTraits {
+    set { customAccessibilityTraits = newValue }
+    get { customAccessibilityTraits.union(.button).union(super.accessibilityTraits) }
+  }
+
   /// Sets a ValueProvider for the specified keypath
   public func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
     animationView.setValueProvider(valueProvider, keypath: keypath)
@@ -158,9 +163,12 @@ open class AnimatedControl: UIControl {
     }
   }
 
-  // MARK: Fileprivate
+  // MARK: Private
 
-  fileprivate func commonInit() {
+  private var customAccessibilityTraits: UIAccessibilityTraits = []
+
+  private func commonInit() {
+    isAccessibilityElement = true
     animationView.clipsToBounds = false
     clipsToBounds = true
     animationView.translatesAutoresizingMaskIntoConstraints = false
