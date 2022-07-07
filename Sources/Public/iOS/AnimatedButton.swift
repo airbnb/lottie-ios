@@ -70,9 +70,15 @@ open class AnimatedButton: AnimatedControl {
     }
   }
 
-  // MARK: Fileprivate
+  open override var accessibilityTraits: UIAccessibilityTraits {
+    set { customAccessibilityTraits = newValue }
+    get { customAccessibilityTraits.union(.button).union(super.accessibilityTraits) }
+  }
 
-  fileprivate var rangesForEvents: [UInt : (from: CGFloat, to: CGFloat)] =
+  // MARK: Private
+
+  private var customAccessibilityTraits: UIAccessibilityTraits = []
+  private var rangesForEvents: [UInt : (from: CGFloat, to: CGFloat)] =
     [UIControl.Event.touchUpInside.rawValue : (from: 0, to: 1)]
 }
 #endif
