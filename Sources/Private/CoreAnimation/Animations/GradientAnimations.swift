@@ -40,7 +40,7 @@ extension GradientRenderLayer {
       for: .colors,
       keyframes: gradient.colors.keyframes,
       value: { colorComponents in
-        gradient.colorConfiguration(from: colorComponents).map { $0.color }
+        try gradient.colorConfiguration(from: colorComponents, context: context).map { $0.color }
       },
       context: context)
 
@@ -48,7 +48,7 @@ extension GradientRenderLayer {
       for: .locations,
       keyframes: gradient.colors.keyframes,
       value: { colorComponents in
-        gradient.colorConfiguration(from: colorComponents).map { $0.location }
+        try gradient.colorConfiguration(from: colorComponents, context: context).map { $0.location }
       },
       context: context)
 
@@ -115,9 +115,13 @@ extension GradientRenderLayer {
 
 extension GradientShapeItem {
   /// Converts the compact `[Double]` color components representation
-  /// into an array of `CGColor`s and the location of those colors within the gradient
+  /// into an array of `CGColor`s and the location of those colors within the gradient.
+  ///  - The color components array is a repeating list of `[location, red, green, blue]` values
+  ///    for each color in the gradient, followed by an optional repeating list of
+  ///    `[location, alpha]` values that control the colors' alpha values.
   fileprivate func colorConfiguration(
-    from colorComponents: [Double])
+    from colorComponents: [Double],
+    context: LayerAnimationContext) throws
     -> [(color: CGColor, location: CGFloat)]
   {
     precondition(
@@ -131,14 +135,31 @@ extension GradientShapeItem {
     for colorIndex in 0..<numberOfColors {
       let colorStartIndex = colorIndex * 4
 
-      let location = CGFloat(colorComponents[colorStartIndex])
+      let colorLocation = CGFloat(colorComponents[colorStartIndex])
 
-      let color = CGColor.rgb(
+      // Alpha values aren't stored contiguously with the RGB color components,
+      // but are instead optionally listed at the end of the array
+      var alpha = 1.0
+      let alphaIndex = (numberOfColors * 4) + (colorIndex * 2)
+      if alphaIndex < colorComponents.count {
+        let alphaLocation = CGFloat(colorComponents[alphaIndex])
+        if alphaLocation == colorLocation {
+          alpha = colorComponents[alphaIndex + 1]
+        } else {
+          try context.logCompatibilityIssue("""
+            The Core Animation rendering engine currently expects gradient colors and alpha values
+            to be in the same order, with the same color stops / locations.
+            """)
+        }
+      }
+
+      let color = CGColor.rgba(
         CGFloat(colorComponents[colorStartIndex + 1]),
         CGFloat(colorComponents[colorStartIndex + 2]),
-        CGFloat(colorComponents[colorStartIndex + 3]))
+        CGFloat(colorComponents[colorStartIndex + 3]),
+        CGFloat(alpha))
 
-      cgColors.append((color, location))
+      cgColors.append((color, colorLocation))
     }
 
     return cgColors
