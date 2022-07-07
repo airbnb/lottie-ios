@@ -126,15 +126,15 @@ open class AnimatedControl: UIControl {
     get { animationView.animationSpeed }
   }
 
+  public override var accessibilityTraits: UIAccessibilityTraits {
+    set { super.accessibilityTraits = newValue }
+    get { super.accessibilityTraits.union(.button) }
+  }
+
   /// Sets which Animation Layer should be visible for the given state.
   public func setLayer(named: String, forState: UIControl.State) {
     stateMap[forState.rawValue] = named
     updateForState()
-  }
-
-  public override var accessibilityTraits: UIAccessibilityTraits {
-    set { customAccessibilityTraits = newValue }
-    get { customAccessibilityTraits.union(.button).union(super.accessibilityTraits) }
   }
 
   /// Sets a ValueProvider for the specified keypath
@@ -164,8 +164,6 @@ open class AnimatedControl: UIControl {
   }
 
   // MARK: Private
-
-  private var customAccessibilityTraits: UIAccessibilityTraits = []
 
   private func commonInit() {
     isAccessibilityElement = true
