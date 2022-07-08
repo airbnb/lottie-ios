@@ -11,7 +11,32 @@ import UIKit
 /// An interactive button that plays an animation when pressed.
 open class AnimatedButton: AnimatedControl {
 
+  // MARK: Lifecycle
+
+  public override init(
+    animation: Animation,
+    configuration: LottieConfiguration = .shared)
+  {
+    super.init(animation: animation, configuration: configuration)
+    isAccessibilityElement = true
+  }
+
+  public override init() {
+    super.init()
+    isAccessibilityElement = true
+  }
+
+  required public init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    isAccessibilityElement = true
+  }
+
   // MARK: Public
+
+  public override var accessibilityTraits: UIAccessibilityTraits {
+    set { super.accessibilityTraits = newValue }
+    get { super.accessibilityTraits.union(.button) }
+  }
 
   /// Sets the play range for the given UIControlEvent.
   public func setPlayRange(fromProgress: AnimationProgressTime, toProgress: AnimationProgressTime, event: UIControl.Event) {
