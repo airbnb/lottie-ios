@@ -11,25 +11,6 @@ import UIKit
 /// An interactive button that plays an animation when pressed.
 open class AnimatedButton: AnimatedControl {
 
-  // MARK: Lifecycle
-
-  public override init(
-    animation: Animation,
-    configuration: LottieConfiguration = .shared)
-  {
-    super.init(animation: animation, configuration: configuration)
-    accessibilityTraits = UIAccessibilityTraits.button
-  }
-
-  public override init() {
-    super.init()
-    accessibilityTraits = UIAccessibilityTraits.button
-  }
-
-  required public init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-
   // MARK: Public
 
   /// Sets the play range for the given UIControlEvent.
@@ -70,9 +51,9 @@ open class AnimatedButton: AnimatedControl {
     }
   }
 
-  // MARK: Fileprivate
+  // MARK: Private
 
-  fileprivate var rangesForEvents: [UInt : (from: CGFloat, to: CGFloat)] =
+  private var rangesForEvents: [UInt : (from: CGFloat, to: CGFloat)] =
     [UIControl.Event.touchUpInside.rawValue : (from: 0, to: 1)]
 }
 #endif

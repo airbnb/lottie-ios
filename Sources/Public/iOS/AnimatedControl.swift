@@ -126,6 +126,11 @@ open class AnimatedControl: UIControl {
     get { animationView.animationSpeed }
   }
 
+  public override var accessibilityTraits: UIAccessibilityTraits {
+    set { super.accessibilityTraits = newValue }
+    get { super.accessibilityTraits.union(.button) }
+  }
+
   /// Sets which Animation Layer should be visible for the given state.
   public func setLayer(named: String, forState: UIControl.State) {
     stateMap[forState.rawValue] = named
@@ -158,9 +163,10 @@ open class AnimatedControl: UIControl {
     }
   }
 
-  // MARK: Fileprivate
+  // MARK: Private
 
-  fileprivate func commonInit() {
+  private func commonInit() {
+    isAccessibilityElement = true
     animationView.clipsToBounds = false
     clipsToBounds = true
     animationView.translatesAutoresizingMaskIntoConstraints = false

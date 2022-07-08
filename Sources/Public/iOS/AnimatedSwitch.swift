@@ -33,7 +33,6 @@ open class AnimatedSwitch: AnimatedControl {
     #endif
     super.init(animation: animation, configuration: configuration)
     updateOnState(isOn: _isOn, animated: false, shouldFireHaptics: false)
-    accessibilityTraits = UIAccessibilityTraits.button
   }
 
   public override init() {
@@ -49,7 +48,6 @@ open class AnimatedSwitch: AnimatedControl {
     #endif
     super.init()
     updateOnState(isOn: _isOn, animated: false, shouldFireHaptics: false)
-    accessibilityTraits = UIAccessibilityTraits.button
   }
 
   required public init?(coder aDecoder: NSCoder) {
@@ -64,7 +62,6 @@ open class AnimatedSwitch: AnimatedControl {
     hapticGenerator = NullHapticGenerator()
     #endif
     super.init(coder: aDecoder)
-    accessibilityTraits = UIAccessibilityTraits.button
   }
 
   // MARK: Public
