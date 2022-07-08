@@ -131,15 +131,18 @@ enum GradientContentType {
 typealias GradientColorConfiguration = [(color: CGColor, location: CGFloat)]
 
 extension GradientShapeItem {
+
+  // MARK: Internal
+
   /// Whether or not this `GradientShapeItem` includes an alpha component
   /// that has to be rendered as a separate `CAGradientLayer` from the
   /// layer that renders the rgb color components
   var hasAlphaComponent: Bool {
-    for colorComponentsKeyframe in self.colors.keyframes {
+    for colorComponentsKeyframe in colors.keyframes {
       let colorComponents = colorComponentsKeyframe.value
       let alphaConfiguration = colorConfiguration(from: colorComponents, type: .alpha)
 
-      let notFullyOpaque = alphaConfiguration.contains(where: { (color, _) in
+      let notFullyOpaque = alphaConfiguration.contains(where: { color, _ in
         color.alpha < 0.999
       })
 
@@ -150,6 +153,8 @@ extension GradientShapeItem {
 
     return false
   }
+
+  // MARK: Fileprivate
 
   /// Converts the compact `[Double]` color components representation
   /// into an array of `CGColor`s and the location of those colors within the gradient.
