@@ -46,7 +46,7 @@ extension GradientRenderLayer {
       for: .colors,
       keyframes: gradient.colors.keyframes,
       value: { colorComponents in
-        try gradient.colorConfiguration(from: colorComponents, type: type, context: context).map { $0.color }
+        gradient.colorConfiguration(from: colorComponents, type: type).map { $0.color }
       },
       context: context)
 
@@ -54,7 +54,7 @@ extension GradientRenderLayer {
       for: .locations,
       keyframes: gradient.colors.keyframes,
       value: { colorComponents in
-        try gradient.colorConfiguration(from: colorComponents, type: type, context: context).map { $0.location }
+        gradient.colorConfiguration(from: colorComponents, type: type).map { $0.location }
       },
       context: context)
 
@@ -131,6 +131,26 @@ enum GradientContentType {
 typealias GradientColorConfiguration = [(color: CGColor, location: CGFloat)]
 
 extension GradientShapeItem {
+  /// Whether or not this `GradientShapeItem` includes an alpha component
+  /// that has to be rendered as a separate `CAGradientLayer` from the
+  /// layer that renders the rgb color components
+  var hasAlphaComponent: Bool {
+    for colorComponentsKeyframe in self.colors.keyframes {
+      let colorComponents = colorComponentsKeyframe.value
+      let alphaConfiguration = colorConfiguration(from: colorComponents, type: .alpha)
+
+      let notFullyOpaque = alphaConfiguration.contains(where: { (color, _) in
+        color.alpha < 0.999
+      })
+
+      if notFullyOpaque {
+        return true
+      }
+    }
+
+    return false
+  }
+
   /// Converts the compact `[Double]` color components representation
   /// into an array of `CGColor`s and the location of those colors within the gradient.
   ///  - The color components array is a repeating list of `[location, red, green, blue]` values
@@ -140,16 +160,15 @@ extension GradientShapeItem {
   ///    so each has to be rendered in a separate `CAGradientLayer`.
   fileprivate func colorConfiguration(
     from colorComponents: [Double],
-    type: GradientContentType,
-    context: LayerAnimationContext) throws
+    type: GradientContentType)
     -> GradientColorConfiguration
   {
-    try context.compatibilityAssert(
-      colorComponents.count >= numberOfColors * 4,
-      "Each color must have RGB components and a location component")
-
     switch type {
     case .rgb:
+      precondition(
+        colorComponents.count >= numberOfColors * 4,
+        "Each color must have RGB components and a location component")
+
       // Each group of four `Double` values represents a single `CGColor`,
       // and its relative location within the gradient.
       var colors = GradientColorConfiguration()
