@@ -29,7 +29,13 @@ extension GradientRenderLayer {
   // MARK: Internal
 
   /// Adds gradient-related animations to this layer, from the given `GradientFill`
-  func addGradientAnimations(for gradient: GradientShapeItem, context: LayerAnimationContext) throws {
+  ///  - The RGB components and alpha components can have different color stops / locations,
+  ///    so have to be rendered in separate `CAGradientLayer`s.
+  func addGradientAnimations(
+    for gradient: GradientShapeItem,
+    type: GradientContentType,
+    context: LayerAnimationContext) throws
+  {
     // We have to set `colors` to a non-nil value with some valid number of colors
     // for the color animation below to have any effect
     colors = .init(
@@ -40,7 +46,7 @@ extension GradientRenderLayer {
       for: .colors,
       keyframes: gradient.colors.keyframes,
       value: { colorComponents in
-        try gradient.colorConfiguration(from: colorComponents, context: context).map { $0.color }
+        gradient.colorConfiguration(from: colorComponents, type: type).map { $0.color }
       },
       context: context)
 
@@ -48,7 +54,7 @@ extension GradientRenderLayer {
       for: .locations,
       keyframes: gradient.colors.keyframes,
       value: { colorComponents in
-        try gradient.colorConfiguration(from: colorComponents, context: context).map { $0.location }
+        gradient.colorConfiguration(from: colorComponents, type: type).map { $0.location }
       },
       context: context)
 
@@ -113,55 +119,92 @@ extension GradientRenderLayer {
   }
 }
 
+// MARK: - GradientContentType
+
+/// Each type of gradient that can be constructed from a `GradientShapeItem`
+enum GradientContentType {
+  case rgb
+  case alpha
+}
+
+/// `colors` and `locations` configuration for a `CAGradientLayer`
+typealias GradientColorConfiguration = [(color: CGColor, location: CGFloat)]
+
 extension GradientShapeItem {
+
+  // MARK: Internal
+
+  /// Whether or not this `GradientShapeItem` includes an alpha component
+  /// that has to be rendered as a separate `CAGradientLayer` from the
+  /// layer that renders the rgb color components
+  var hasAlphaComponent: Bool {
+    for colorComponentsKeyframe in colors.keyframes {
+      let colorComponents = colorComponentsKeyframe.value
+      let alphaConfiguration = colorConfiguration(from: colorComponents, type: .alpha)
+
+      let notFullyOpaque = alphaConfiguration.contains(where: { color, _ in
+        color.alpha < 0.999
+      })
+
+      if notFullyOpaque {
+        return true
+      }
+    }
+
+    return false
+  }
+
+  // MARK: Fileprivate
+
   /// Converts the compact `[Double]` color components representation
   /// into an array of `CGColor`s and the location of those colors within the gradient.
   ///  - The color components array is a repeating list of `[location, red, green, blue]` values
   ///    for each color in the gradient, followed by an optional repeating list of
   ///    `[location, alpha]` values that control the colors' alpha values.
+  ///  - The RGB and alpha values can have different color stops / locations,
+  ///    so each has to be rendered in a separate `CAGradientLayer`.
   fileprivate func colorConfiguration(
     from colorComponents: [Double],
-    context: LayerAnimationContext) throws
-    -> [(color: CGColor, location: CGFloat)]
+    type: GradientContentType)
+    -> GradientColorConfiguration
   {
-    precondition(
-      colorComponents.count >= numberOfColors * 4,
-      "Each color must have RGB components and a location component")
+    switch type {
+    case .rgb:
+      precondition(
+        colorComponents.count >= numberOfColors * 4,
+        "Each color must have RGB components and a location component")
 
-    var cgColors = [(color: CGColor, location: CGFloat)]()
+      // Each group of four `Double` values represents a single `CGColor`,
+      // and its relative location within the gradient.
+      var colors = GradientColorConfiguration()
 
-    // Each group of four `Double` values represents a single `CGColor`,
-    // and its relative location within the gradient.
-    for colorIndex in 0..<numberOfColors {
-      let colorStartIndex = colorIndex * 4
+      for colorIndex in 0..<numberOfColors {
+        let colorStartIndex = colorIndex * 4
 
-      let colorLocation = CGFloat(colorComponents[colorStartIndex])
+        let colorLocation = CGFloat(colorComponents[colorStartIndex])
 
-      // Alpha values aren't stored contiguously with the RGB color components,
-      // but are instead optionally listed at the end of the array
-      var alpha = 1.0
-      let alphaIndex = (numberOfColors * 4) + (colorIndex * 2)
-      if alphaIndex < colorComponents.count {
-        let alphaLocation = CGFloat(colorComponents[alphaIndex])
-        if alphaLocation == colorLocation {
-          alpha = colorComponents[alphaIndex + 1]
-        } else {
-          try context.logCompatibilityIssue("""
-            The Core Animation rendering engine currently expects gradient colors and alpha values
-            to be in the same order, with the same color stops / locations.
-            """)
-        }
+        let color = CGColor.rgb(
+          CGFloat(colorComponents[colorStartIndex + 1]),
+          CGFloat(colorComponents[colorStartIndex + 2]),
+          CGFloat(colorComponents[colorStartIndex + 3]))
+
+        colors.append((color: color, location: colorLocation))
       }
 
-      let color = CGColor.rgba(
-        CGFloat(colorComponents[colorStartIndex + 1]),
-        CGFloat(colorComponents[colorStartIndex + 2]),
-        CGFloat(colorComponents[colorStartIndex + 3]),
-        CGFloat(alpha))
+      return colors
 
-      cgColors.append((color, colorLocation))
+    case .alpha:
+      // After the rgb color components, there can be arbitrary number of repeating
+      // `[alphaLocation, alphaValue]` pairs that define a separate alpha gradient.
+      var alphaValues = GradientColorConfiguration()
+
+      for alphaIndex in stride(from: numberOfColors * 4, to: colorComponents.endIndex, by: 2) {
+        let alphaLocation = CGFloat(colorComponents[alphaIndex])
+        let alphaValue = CGFloat(colorComponents[alphaIndex + 1])
+        alphaValues.append((color: .rgba(0, 0, 0, alphaValue), location: alphaLocation))
+      }
+
+      return alphaValues
     }
-
-    return cgColors
   }
 }
