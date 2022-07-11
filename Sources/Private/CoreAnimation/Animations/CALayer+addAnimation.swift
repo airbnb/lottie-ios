@@ -61,7 +61,7 @@ extension CALayer {
 
     // Split the keyframes into segments with the same `CAAnimationCalculationMode` value
     //  - Each of these segments will become their own `CAKeyframeAnimation`
-    let animationSegments = keyframes.calculationModeSegments
+    let animationSegments = keyframes.segmentsSplitByCalculationMode()
 
     // If we only have a single segment, we can just create a single `CAKeyframeAnimation`
     // instead of wrapping it in a `CAAnimationGroup` -- this reduces allocation overhead a bit.
@@ -169,7 +169,8 @@ extension CALayer {
     // with the same `CAAnimationCalculationMode`.
     //  - Here we have a non-zero number of animation segments,
     //    all of which have a non-zero number of keyframes.
-    let segmentAnimations: [CAKeyframeAnimation] = try animationSegments.enumerated().map { index, animationSegment in
+    let segmentAnimations: [CAKeyframeAnimation] = try animationSegments.indices.map { index in
+      let animationSegment = animationSegments[index]
       var segmentStartTime = context.time(for: animationSegment.first!.time)
       var segmentEndTime = context.time(for: animationSegment.last!.time)
 
@@ -408,26 +409,14 @@ extension CALayer {
 
 }
 
-// MARK: - KeyframeProtocol
-
-/// We can't do `extension Array where Element == Keyframe` since we don't have a way
-/// to specify the generic type of the keyframe itself. That would require a syntax
-/// like `extension <T> Array where Element == Keyframe<T>`. Instead we can use
-/// this `KeyframeProtocol` protocol and use `extension Array where Element: KeyframeProtocol`.
-protocol KeyframeProtocol {
-  var isHold: Bool { get }
-}
-
-// MARK: - Keyframe + KeyframeProtocol
-
-extension Keyframe: KeyframeProtocol { }
-
-extension RandomAccessCollection where Element: KeyframeProtocol, Index == Int {
+extension RandomAccessCollection {
   /// Splits this array of `Keyframe`s into segments with the same `CAAnimationCalculationMode`
   ///  - Keyframes with `isHold=true` become `discrete`, and keyframes with `isHold=false`
   ///    become linear. Each `CAKeyframeAnimation` can only be one or the other, so each
   ///    `calculationModeSegment` becomes its own `CAKeyframeAnimation`.
-  var calculationModeSegments: [[Element]] {
+  func segmentsSplitByCalculationMode<KeyframeValue>() -> [[Element]]
+    where Element == Keyframe<KeyframeValue>, Index == Int
+  {
     var segments: [[Element]] = []
     var currentSegment: [Element] = []
 
