@@ -153,7 +153,8 @@ extension CALayer {
     var (groupItems, otherItems) = items.grouped(by: { $0 is Group })
 
     // If this shape doesn't have any groups but just has top-level shape items,
-    // we can create a placeholder group with those items.
+    // we can create a placeholder group with those items. (Otherwise the shape items
+    // would be silently ignored, since we expect all shape layers to have a top-level group).
     if groupItems.isEmpty, parentGroup == nil {
       groupItems = [Group(items: otherItems, name: "Group")]
       otherItems = []
