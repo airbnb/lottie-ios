@@ -248,7 +248,7 @@ extension CALayer {
   /// animating the given keyframes
   private func calculationMode<KeyframeValue>(
     for keyframes: [Keyframe<KeyframeValue>],
-    context: LayerAnimationContext)
+    context _: LayerAnimationContext)
     throws
     -> CAAnimationCalculationMode
   {
@@ -294,8 +294,7 @@ extension CALayer {
   private func path<KeyframeValue>(
     keyframes positionKeyframes: [Keyframe<KeyframeValue>],
     value keyframeValueMapping: (KeyframeValue) throws -> CGPoint) rethrows
-    -> CGPath
-  {
+    -> CGPath {
     let path = CGMutablePath()
 
     for (index, keyframe) in positionKeyframes.enumerated() {
@@ -392,6 +391,8 @@ extension CALayer {
 protocol KeyframeProtocol {
   var isHold: Bool { get }
 }
+
+// MARK: - Keyframe + KeyframeProtocol
 
 extension Keyframe: KeyframeProtocol { }
 
