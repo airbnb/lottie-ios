@@ -55,7 +55,8 @@ extension CALayer {
     if keyframes.count == 1 {
       return singleKeyframeAnimation(
         for: property,
-        keyframeValue: try keyframeValueMapping(keyframes[0].value))
+        keyframeValue: try keyframeValueMapping(keyframes[0].value),
+        writeDirectlyToPropertyIfPossible: true)
     }
 
     // Split the keyframes into segments with the same `CAAnimationCalculationMode` value
@@ -98,8 +99,18 @@ extension CALayer {
     else { return nil }
 
     // Since custom animations are overriding an existing animation,
-    // we always have to create a CAKeyframeAnimation for these instead of
-    // letting `defaultAnimation(...)` try to apply the value using KVC.
+    // we always have to create a CAAnimation and can't write directly
+    // to the layer property
+    if
+      customKeyframes.keyframes.count == 1,
+      let singleKeyframeAnimation = singleKeyframeAnimation(
+        for: property,
+        keyframeValue: customKeyframes.keyframes[0].value,
+        writeDirectlyToPropertyIfPossible: false)
+    {
+      return singleKeyframeAnimation
+    }
+
     return try keyframeAnimation(
       for: property,
       keyframes: Array(customKeyframes.keyframes),
@@ -112,24 +123,27 @@ extension CALayer {
   ///    property can be set directly. In that case, no animation will be created.
   private func singleKeyframeAnimation<ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
-    keyframeValue: ValueRepresentation)
+    keyframeValue: ValueRepresentation,
+    writeDirectlyToPropertyIfPossible: Bool)
     -> CABasicAnimation?
   {
-    // If the keyframe value is the same as the layer's default value for this property,
-    // then we can just ignore this set of keyframes.
-    if keyframeValue == property.defaultValue {
-      return nil
-    }
+    if writeDirectlyToPropertyIfPossible {
+      // If the keyframe value is the same as the layer's default value for this property,
+      // then we can just ignore this set of keyframes.
+      if keyframeValue == property.defaultValue {
+        return nil
+      }
 
-    // If the property on the CALayer being animated hasn't been modified from the default yet,
-    // then we can apply the keyframe value directly to the layer using KVC instead
-    // of creating a `CAAnimation`.
-    if
-      let defaultValue = property.defaultValue,
-      defaultValue == value(forKey: property.caLayerKeypath) as? ValueRepresentation
-    {
-      setValue(keyframeValue, forKeyPath: property.caLayerKeypath)
-      return nil
+      // If the property on the CALayer being animated hasn't been modified from the default yet,
+      // then we can apply the keyframe value directly to the layer using KVC instead
+      // of creating a `CAAnimation`.
+      if
+        let defaultValue = property.defaultValue,
+        defaultValue == value(forKey: property.caLayerKeypath) as? ValueRepresentation
+      {
+        setValue(keyframeValue, forKeyPath: property.caLayerKeypath)
+        return nil
+      }
     }
 
     // Otherwise, we still need to create a `CAAnimation`, but we can
@@ -152,10 +166,27 @@ extension CALayer {
     -> CAAnimationGroup
   {
     // Build the `CAKeyframeAnimation` for each segment of keyframes
-    // with the same `CAAnimationCalculationMode`
-    let segmentAnimations = try animationSegments.map { animationSegment -> CAKeyframeAnimation in
-      let segmentStartTime = context.time(for: animationSegment.first!.time)
-      let segmentEndTime = context.time(for: animationSegment.last!.time)
+    // with the same `CAAnimationCalculationMode`.
+    //  - Here we have a non-zero number of animation segments,
+    //    all of which have a non-zero number of keyframes.
+    let segmentAnimations: [CAKeyframeAnimation] = try animationSegments.enumerated().map { index, animationSegment in
+      var segmentStartTime = context.time(for: animationSegment.first!.time)
+      var segmentEndTime = context.time(for: animationSegment.last!.time)
+
+      // Every portion of the animation timeline has to be covered by a `CAKeyframeAnimation`,
+      // so if this is the first or last segment then the start/end time should be exactly
+      // the start/end time of the animation itself.
+      let isFirstSegment = (index == animationSegments.indices.first!)
+      let isLastSegment = (index == animationSegments.indices.last!)
+
+      if isFirstSegment {
+        segmentStartTime = context.time(for: context.animation.startFrame)
+      }
+
+      if isLastSegment {
+        segmentEndTime = context.time(for: context.animation.endFrame)
+      }
+
       let segmentDuration = segmentEndTime - segmentStartTime
 
       // We're building `CAKeyframeAnimation`s, so the `keyTimes` are expressed
@@ -404,16 +435,6 @@ extension RandomAccessCollection where Element: KeyframeProtocol, Index == Int {
   ///    become linear. Each `CAKeyframeAnimation` can only be one or the other, so each
   ///    `calculationModeSegment` becomes its own `CAKeyframeAnimation`.
   var calculationModeSegments: [[Element]] {
-    // There's an interesting issue in some animations like `Samples/Watermelon`:
-    // The first keyframe is `!isHold` but the others are all `isHold`, but splitting
-    // the keyframes into multiple segments causes the first keyframe to display incorrectly.
-    // In that specific case, we can just render a single animation segment.
-    let intermediateKeyframes = dropFirst()
-    if intermediateKeyframes.allSatisfy(\.isHold) {
-      let singleSegment = [self[0].with(isHold: true)] + self[1...]
-      return [singleSegment]
-    }
-
     var segments: [[Element]] = []
     var currentSegment: [Element] = []
 
