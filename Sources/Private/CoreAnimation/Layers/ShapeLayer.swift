@@ -150,7 +150,14 @@ extension CALayer {
   ///  - Each `Group` item becomes its own `GroupLayer` sublayer.
   ///  - Other `ShapeItem` are applied to all sublayers
   fileprivate func setupGroups(from items: [ShapeItem], parentGroup: Group?, context: LayerContext) throws {
-    let (groupItems, otherItems) = items.grouped(by: { $0 is Group })
+    var (groupItems, otherItems) = items.grouped(by: { $0 is Group })
+
+    // If this shape doesn't have any groups but just has top-level shape items,
+    // we can create a placeholder group with those items.
+    if groupItems.isEmpty, parentGroup == nil {
+      groupItems = [Group(items: otherItems, name: "Group")]
+      otherItems = []
+    }
 
     // Groups are listed from front to back,
     // but `CALayer.sublayers` are listed from back to front.
