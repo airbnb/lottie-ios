@@ -63,6 +63,12 @@ struct LayerAnimationContext {
     animation.progressTime(forFrame: timeRemapping(frame), clamped: false)
   }
 
+  /// The real-time `TimeInterval` for the given `AnimationFrameTime` within this layer,
+  /// accounting for the `timeRemapping` applied to this layer
+  func time(for frame: AnimationFrameTime) -> TimeInterval {
+    animation.time(forFrame: timeRemapping(frame))
+  }
+
   /// Chains an additional `timeRemapping` closure onto this layer context
   func withTimeRemapping(
     _ additionalTimeRemapping: @escaping (AnimationFrameTime) -> AnimationFrameTime)

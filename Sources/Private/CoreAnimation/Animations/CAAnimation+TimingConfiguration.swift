@@ -5,7 +5,10 @@ import QuartzCore
 
 extension CAAnimation {
   /// Creates a `CAAnimation` that wraps this animation,
-  /// applying timing-related configuration from the given `LayerAnimationContext`
+  /// applying timing-related configuration from the given `LayerAnimationContext`.
+  ///  - This animation should start at the beginning of the animation and
+  ///    last the entire duration of the animation. It will be trimmed and retimed
+  ///    to match the current playback state / looping configuration of the animation view.
   @nonobjc
   func timed(with context: LayerAnimationContext, for layer: CALayer) -> CAAnimation {
 
@@ -69,6 +72,9 @@ extension CAAnimation {
 
 extension CALayer {
   /// Adds the given animation to this layer, timed with the given timing configuration
+  ///  - The given animation should start at the beginning of the animation and
+  ///    last the entire duration of the animation. It will be trimmed and retimed
+  ///    to match the current playback state / looping configuration of the animation view.
   @nonobjc
   func add(_ animation: CAPropertyAnimation, timedWith context: LayerAnimationContext) {
     add(animation.timed(with: context, for: self), forKey: animation.keyPath)
