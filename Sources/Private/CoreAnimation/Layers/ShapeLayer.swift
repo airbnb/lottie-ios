@@ -108,6 +108,12 @@ final class GroupLayer: BaseAnimationLayer {
       // because combining multiple paths into a single `CGPath` (instead of rendering them in separate layers)
       // allows `CAShapeLayerFillRule.evenOdd` to be applied if the paths overlap. We just can't do this
       // in all cases, due to limitations of Core Animation.
+      //
+      // As a fall back when this is not possible, we render each shape in its own `CAShapeLayer`,
+      // which causes the `fillRule` to be applied incorrectly in cases where the paths overlap.
+      // We can't really detect when this happens, so this is a case where `RenderingEngineMode.automatic`
+      // can behave incorrectly. In the future we could fix this by precomputing the full combined CGPath for each
+      // individual frame in the animation (like we do for some trim animations as of #1612).
       if
         shapeRenderGroup.pathItems.count > 1,
         let combinedShapeKeyframes = Keyframes.combinedIfPossible(
