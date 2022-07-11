@@ -233,7 +233,7 @@ extension CALayer {
     }
 
     var timingFunctions = self.timingFunctions(for: keyframes)
-    let calculationMode = try self.calculationMode(for: keyframes, context: context)
+    let calculationMode = self.calculationMode(for: keyframes)
 
     let animation = CAKeyframeAnimation(keyPath: property.caLayerKeypath)
 
@@ -275,9 +275,7 @@ extension CALayer {
   /// The `CAAnimationCalculationMode` that should be used for a `CAKeyframeAnimation`
   /// animating the given keyframes
   private func calculationMode<KeyframeValue>(
-    for keyframes: [Keyframe<KeyframeValue>],
-    context: LayerAnimationContext)
-    throws
+    for keyframes: [Keyframe<KeyframeValue>])
     -> CAAnimationCalculationMode
   {
     // At this point we expect all of the animations to have been split in
@@ -418,16 +416,11 @@ extension CALayer {
 /// this `KeyframeProtocol` protocol and use `extension Array where Element: KeyframeProtocol`.
 protocol KeyframeProtocol {
   var isHold: Bool { get }
-  func with(isHold: Bool) -> Self
 }
 
 // MARK: - Keyframe + KeyframeProtocol
 
-extension Keyframe: KeyframeProtocol {
-  func with(isHold: Bool) -> Self {
-    copy(isHold: isHold)
-  }
-}
+extension Keyframe: KeyframeProtocol { }
 
 extension RandomAccessCollection where Element: KeyframeProtocol, Index == Int {
   /// Splits this array of `Keyframe`s into segments with the same `CAAnimationCalculationMode`
