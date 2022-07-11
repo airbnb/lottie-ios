@@ -741,7 +741,7 @@
 		2E9C95D02822F43100677516 /* KeyframeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyframeExtensions.swift; sourceTree = "<group>"; };
 		2E9C95D22822F43100677516 /* AnimationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
 		2EAF59A627A076BC00E00531 /* Bundle+Module.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Module.swift"; sourceTree = "<group>"; };
-		2EAF59AD27A0787B00E00531 /* Lottie_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EAF59AD27A0787B00E00531 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAF59B927A078E400E00531 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAF59C327A0798700E00531 /* BundleImageProvider.macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleImageProvider.macOS.swift; sourceTree = "<group>"; };
 		2EAF59C427A0798700E00531 /* AnimationViewBase.macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationViewBase.macOS.swift; sourceTree = "<group>"; };
@@ -840,7 +840,7 @@
 			children = (
 				2E80409A27A0725D006E74CB /* Lottie.framework */,
 				2E8040AC27A072B8006E74CB /* LottieTests.xctest */,
-				2EAF59AD27A0787B00E00531 /* Lottie_macOS.framework */,
+				2EAF59AD27A0787B00E00531 /* Lottie.framework */,
 				2EAF59B927A078E400E00531 /* Lottie.framework */,
 			);
 			name = Products;
@@ -1564,7 +1564,7 @@
 			);
 			name = "Lottie-macOS";
 			productName = "Lottie-macOS";
-			productReference = 2EAF59AD27A0787B00E00531 /* Lottie_macOS.framework */;
+			productReference = 2EAF59AD27A0787B00E00531 /* Lottie.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		2EAF59B827A078E400E00531 /* Lottie-tvOS */ = {
@@ -2509,7 +2509,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = Lottie;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2539,7 +2539,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = Lottie;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
