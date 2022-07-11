@@ -65,9 +65,6 @@ extension CALayer {
     // If we only have a single segment, we can just create a single `CAKeyframeAnimation`
     // instead of wrapping it in a `CAAnimationGroup` -- this reduces allocation overhead a bit.
     if animationSegments.count == 1 {
-      // TODO: can revert this after running tests etc
-      assert(animationSegments[0].count == keyframes.count)
-
       return try keyframeAnimation(
         for: property,
         keyframes: animationSegments[0],
@@ -248,7 +245,7 @@ extension CALayer {
   /// animating the given keyframes
   private func calculationMode<KeyframeValue>(
     for keyframes: [Keyframe<KeyframeValue>],
-    context _: LayerAnimationContext)
+    context: LayerAnimationContext)
     throws
     -> CAAnimationCalculationMode
   {
@@ -390,18 +387,33 @@ extension CALayer {
 /// this `KeyframeProtocol` protocol and use `extension Array where Element: KeyframeProtocol`.
 protocol KeyframeProtocol {
   var isHold: Bool { get }
+  func with(isHold: Bool) -> Self
 }
 
 // MARK: - Keyframe + KeyframeProtocol
 
-extension Keyframe: KeyframeProtocol { }
+extension Keyframe: KeyframeProtocol {
+  func with(isHold: Bool) -> Self {
+    copy(isHold: isHold)
+  }
+}
 
-extension RandomAccessCollection where Element: KeyframeProtocol {
+extension RandomAccessCollection where Element: KeyframeProtocol, Index == Int {
   /// Splits this array of `Keyframe`s into segments with the same `CAAnimationCalculationMode`
   ///  - Keyframes with `isHold=true` become `discrete`, and keyframes with `isHold=false`
   ///    become linear. Each `CAKeyframeAnimation` can only be one or the other, so each
   ///    `calculationModeSegment` becomes its own `CAKeyframeAnimation`.
   var calculationModeSegments: [[Element]] {
+    // There's an interesting issue in some animations like `Samples/Watermelon`:
+    // The first keyframe is `!isHold` but the others are all `isHold`, but splitting
+    // the keyframes into multiple segments causes the first keyframe to display incorrectly.
+    // In that specific case, we can just render a single animation segment.
+    let intermediateKeyframes = dropFirst()
+    if intermediateKeyframes.allSatisfy(\.isHold) {
+      let singleSegment = [self[0].with(isHold: true)] + self[1...]
+      return [singleSegment]
+    }
+
     var segments: [[Element]] = []
     var currentSegment: [Element] = []
 

@@ -90,3 +90,26 @@ extension Keyframe: Hashable where T: Hashable {
     hasher.combine(spatialOutTangent)
   }
 }
+
+extension Keyframe {
+  /// Initializes a copy of this keyframe with the provided values replacing the current values of this keyframe
+  func copy(
+    time: AnimationFrameTime? = nil,
+    isHold: Bool? = nil,
+    inTangent: Vector2D? = nil,
+    outTangent: Vector2D? = nil,
+    spatialInTangent: Vector3D? = nil,
+    spatialOutTangent: Vector3D? = nil)
+    -> Self
+  {
+    Self.init(
+      value: value,
+      time: time ?? self.time,
+      isHold: isHold ?? self.isHold,
+      inTangent: inTangent ?? self.inTangent,
+      outTangent: outTangent ?? self.outTangent,
+      spatialInTangent: spatialInTangent ?? self.spatialInTangent,
+      spatialOutTangent: spatialOutTangent ?? self.spatialOutTangent)
+  }
+
+}
