@@ -7,17 +7,29 @@ enum Keyframes {
   /// Combines the given `[KeyframeGroup]` of `Keyframe<T>`s
   /// into a single `KeyframeGroup` of `Keyframe<[T]>`s
   /// if all of the `KeyframeGroup`s have the exact same animation timing
-  static func combinedIfPossible<T>(_ groups: [KeyframeGroup<T>]) -> KeyframeGroup<[T]>? {
+  static func combinedIfPossible<T>(_ allGroups: [KeyframeGroup<T>]) -> KeyframeGroup<[T]>? {
+    // Animations with no timing information (e.g. with just a single keyframe)
+    // can be trivially combined with any other set of keyframes, so we don't need
+    // to check those.
+    let animatingKeyframes = allGroups.filter { $0.keyframes.count > 1 }
+
     guard
-      !groups.isEmpty,
-      groups.allSatisfy({ $0.hasSameTimingParameters(as: groups[0]) })
+      !allGroups.isEmpty,
+      animatingKeyframes.allSatisfy({ $0.hasSameTimingParameters(as: animatingKeyframes[0]) })
     else { return nil }
 
     var combinedKeyframes = ContiguousArray<Keyframe<[T]>>()
+    let baseKeyframes = (animatingKeyframes.first ?? allGroups[0]).keyframes
 
-    for index in groups[0].keyframes.indices {
-      let baseKeyframe = groups[0].keyframes[index]
-      let combinedValues = groups.map { $0.keyframes[index].value }
+    for index in baseKeyframes.indices {
+      let baseKeyframe = baseKeyframes[index]
+      let combinedValues = allGroups.map { otherKeyframes -> T in
+        if otherKeyframes.keyframes.count == 1 {
+          return otherKeyframes.keyframes[0].value
+        } else {
+          return otherKeyframes.keyframes[index].value
+        }
+      }
       combinedKeyframes.append(baseKeyframe.withValue(combinedValues))
     }
 
