@@ -3,7 +3,7 @@
 
 **View documentation, FAQ, help, examples, and more at [airbnb.io/lottie](http://airbnb.io/lottie/)**
 
-Lottie is a cross-platform library for iOS, macOS, tvOS, [Android](https://github.com/airbnb/lottie), and [Web](https://github.com/airbnb/lottie-web) that natively renders vector based animations and art in realtime with minimal code.
+Lottie is a cross-platform library for iOS, macOS, tvOS, [Android](https://github.com/airbnb/lottie), and [Web](https://github.com/airbnb/lottie-web) that natively renders vector-based animations and art in realtime with minimal code.
 
 Lottie loads and renders animations and vectors exported in the bodymovin JSON format. Bodymovin JSON can be created and exported from After Effects with [bodymovin](https://github.com/bodymovin/bodymovin), Sketch with [Lottie Sketch Export](https://github.com/buba447/Lottie-Sketch-Export), and from [Haiku](https://www.haiku.ai).
 
@@ -11,7 +11,7 @@ Designers can create **and ship** beautiful animations without an engineer pains
 Since the animation is backed by JSON they are extremely small in size but can be large in complexity!
 Animations can be played, resized, looped, sped up, slowed down, reversed, and even interactively scrubbed.
 Lottie can play or loop just a portion of the animation as well, the possibilities are endless!
-Animations can even be ***changed at runtime*** in various ways! Change the color, position or any keyframable value!
+Animations can even be ***changed at runtime*** in various ways! Change the color, position, or any keyframable value!
 
 Here is just a small sampling of the power of Lottie
 
@@ -25,7 +25,7 @@ Here is just a small sampling of the power of Lottie
 ![Abcs](_Gifs/Examples4.gif)
 
 ## Installing Lottie
-Lottie supports [Swift Package Manager](https://www.swift.org/package-manager/), [CocoaPods](https://cocoapods.org/) and [Carthage](https://github.com/Carthage/Carthage) (Both dynamic and static).
+Lottie supports [Swift Package Manager](https://www.swift.org/package-manager/), [CocoaPods](https://cocoapods.org/), and [Carthage](https://github.com/Carthage/Carthage) (Both dynamic and static).
 
 ### Github Repo
 
@@ -79,7 +79,7 @@ All pull requests with new features or bug fixes that affect how animations rend
   - To add a new sample animation to the snapshot testing suite, you can add the `.json` file to `Tests/Samples`. Re-run the snapshot tests to generate the new snapshot image files.
   - To update existing snapshots after making changes, you can set `isRecording = true` in `SnapshotTests.swift` and then re-run the snapshot tests.
 
-The project also include several helpful commands defined in our [Rakefile](https://github.com/airbnb/lottie-ios/blob/master/Rakefile). To use these, you need to install [Bundler](https://bundler.io/) and [Mint](https://github.com/yonaskolb/Mint):
+The project also includes several helpful commands defined in our [Rakefile](https://github.com/airbnb/lottie-ios/blob/master/Rakefile). To use these, you need to install [Bundler](https://bundler.io/) and [Mint](https://github.com/yonaskolb/Mint):
 
 ```bash
 $ sudo gem install bundle
