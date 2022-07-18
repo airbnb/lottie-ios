@@ -927,7 +927,11 @@ final public class AnimationView: AnimationViewBase {
 
   // MARK: Fileprivate
 
+  /// Context describing the animation that is currently playing in this `AnimationView`
+  ///  - When non-nil, an animation is currently playing in this view. Otherwise,
+  ///    the view is paused on a specific frame.
   fileprivate var animationContext: AnimationContext?
+
   fileprivate var _activeAnimationName: String = AnimationView.animationName
   fileprivate var animationID = 0
 
@@ -1131,12 +1135,18 @@ final public class AnimationView: AnimationViewBase {
   ///  - This is not necessary with the Core Animation engine, and skipping
   ///    this step lets us avoid building the animations twice (once paused
   ///    and once again playing)
+  ///  - This method should only be called immediately before setting up another
+  ///    animation -- otherwise this AnimationView could be put in an inconsistent state.
   fileprivate func removeCurrentAnimationIfNecessary() {
     switch currentRenderingEngine {
     case .mainThread:
       removeCurrentAnimation()
     case .coreAnimation, nil:
-      break
+      // We still need to remove the `animationContext`, since it should only be present
+      // when an animation is actually playing. Without this calling `removeCurrentAnimationIfNecessary()`
+      // and then setting the animation to a specific paused frame would put this
+      // `AnimationView` in an inconsistent state.
+      animationContext = nil
     }
   }
 
