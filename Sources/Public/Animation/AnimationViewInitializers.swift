@@ -23,11 +23,12 @@ extension AnimationView {
     name: String,
     bundle: Bundle = Bundle.main,
     imageProvider: AnimationImageProvider? = nil,
-    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache)
+    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache,
+    configuration: LottieConfiguration = .shared)
   {
     let animation = Animation.named(name, bundle: bundle, subdirectory: nil, animationCache: animationCache)
     let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil)
-    self.init(animation: animation, imageProvider: provider)
+    self.init(animation: animation, imageProvider: provider, configuration: configuration)
   }
 
   /// Loads a Lottie animation from a JSON file in a specific path on disk.
@@ -38,12 +39,13 @@ extension AnimationView {
   public convenience init(
     filePath: String,
     imageProvider: AnimationImageProvider? = nil,
-    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache)
+    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache,
+    configuration: LottieConfiguration = .shared)
   {
     let animation = Animation.filepath(filePath, animationCache: animationCache)
     let provider = imageProvider ??
       FilepathImageProvider(filepath: URL(fileURLWithPath: filePath).deletingLastPathComponent().path)
-    self.init(animation: animation, imageProvider: provider)
+    self.init(animation: animation, imageProvider: provider, configuration: configuration)
   }
 
   /// Loads a Lottie animation asynchronously from the URL
@@ -56,15 +58,16 @@ extension AnimationView {
     url: URL,
     imageProvider: AnimationImageProvider? = nil,
     closure: @escaping AnimationView.DownloadClosure,
-    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache)
+    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache,
+    configuration: LottieConfiguration = .shared)
   {
 
     if let animationCache = animationCache, let animation = animationCache.animation(forKey: url.absoluteString) {
-      self.init(animation: animation, imageProvider: imageProvider)
+      self.init(animation: animation, imageProvider: imageProvider, configuration: configuration)
       closure(nil)
     } else {
 
-      self.init(animation: nil, imageProvider: imageProvider)
+      self.init(animation: nil, imageProvider: imageProvider, configuration: configuration)
 
       Animation.loadedFrom(url: url, closure: { animation in
         if let animation = animation {
@@ -87,11 +90,12 @@ extension AnimationView {
     asset name: String,
     bundle: Bundle = Bundle.main,
     imageProvider: AnimationImageProvider? = nil,
-    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache)
+    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache,
+    configuration: LottieConfiguration = .shared)
   {
     let animation = Animation.asset(name, bundle: bundle, animationCache: animationCache)
     let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil)
-    self.init(animation: animation, imageProvider: provider)
+    self.init(animation: animation, imageProvider: provider, configuration: configuration)
   }
 
   // MARK: Public
