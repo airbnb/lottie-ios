@@ -92,7 +92,7 @@ end
 
 namespace :lint do
   desc 'Lints swift files'
-  task :swiftlint do
+  task :swift do
     sh 'swift package --allow-writing-to-package-directory format --lint'
   end
 
