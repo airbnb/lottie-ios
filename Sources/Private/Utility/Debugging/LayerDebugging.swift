@@ -53,7 +53,7 @@ extension CALayer {
       string = string + "  "
     }
     string = string + "|_" + String(describing: self)
-    print(string)
+    LottieLogger.shared.info(string)
     if let sublayers = sublayers {
       for sublayer in sublayers {
         sublayer.logLayerTree(withIndent: withIndent + 1)
