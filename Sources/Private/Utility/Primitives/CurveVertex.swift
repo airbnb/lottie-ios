@@ -78,7 +78,6 @@ struct CurveVertex {
   func splitCurve(toVertex: CurveVertex, position: CGFloat) ->
     (start: CurveVertex, trimPoint: CurveVertex, end: CurveVertex)
   {
-
     /// If position is less than or equal to 0, trim at start.
     if position <= 0 {
       return (
@@ -101,7 +100,7 @@ struct CurveVertex {
           outTangentRelative: toVertex.outTangentRelative))
     }
 
-    if outTangentRelative.isZero && toVertex.inTangentRelative.isZero {
+    if outTangentRelative.isZero, toVertex.inTangentRelative.isZero {
       /// If both tangents are zero, then span to be trimmed is a straight line.
       let trimPoint = point.interpolate(to: toVertex.point, amount: position)
       return (
@@ -166,8 +165,7 @@ struct CurveVertex {
   /// For curves the curve is iterated over by sample count and the points are measured.
   /// This is ~99% accurate at a sample count of 30
   func distanceTo(_ toVertex: CurveVertex, sampleCount: Int = 25) -> CGFloat {
-
-    if outTangentRelative.isZero && toVertex.inTangentRelative.isZero {
+    if outTangentRelative.isZero, toVertex.inTangentRelative.isZero {
       /// Return a linear distance.
       return point.distanceTo(toVertex.point)
     }

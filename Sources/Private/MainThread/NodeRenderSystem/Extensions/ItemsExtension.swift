@@ -19,7 +19,6 @@ final class NodeTree {
 
 extension Array where Element == ShapeItem {
   func initializeNodeTree() -> NodeTree {
-
     let nodeTree = NodeTree()
 
     for item in self {
@@ -73,7 +72,6 @@ extension Array where Element == ShapeItem {
         nodeTree.transform = xform
         continue
       } else if let group = item as? Group {
-
         let tree = group.items.initializeNodeTree()
         let node = GroupNode(name: group.name, parentNode: nodeTree.rootNode, tree: tree)
         nodeTree.rootNode = node

@@ -58,7 +58,7 @@ final class LegacyGradientFillRenderer: PassThroughOutputNode, Renderable {
   }
 
   func render(_ inContext: CGContext) {
-    guard inContext.path != nil && inContext.path!.isEmpty == false else {
+    guard inContext.path != nil, inContext.path!.isEmpty == false else {
       return
     }
     hasUpdate = false

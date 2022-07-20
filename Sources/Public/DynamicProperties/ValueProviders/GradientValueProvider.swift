@@ -94,13 +94,11 @@ public final class GradientValueProvider: ValueProvider {
   private var value: [Double] = []
 
   private func value(from colors: [Color], locations: [Double]) -> [Double] {
-
     var colorValues = [Double]()
     var alphaValues = [Double]()
     var shouldAddAlphaValues = false
 
     for i in 0..<colors.count {
-
       if colors[i].a < 1 { shouldAddAlphaValues = true }
 
       let location = locations.count > i

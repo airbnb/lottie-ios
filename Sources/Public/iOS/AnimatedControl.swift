@@ -100,9 +100,7 @@ open class AnimatedControl: UIControl {
     super.cancelTracking(with: event)
   }
 
-  open func animationDidSet() {
-
-  }
+  open func animationDidSet() { }
 
   // MARK: Public
 

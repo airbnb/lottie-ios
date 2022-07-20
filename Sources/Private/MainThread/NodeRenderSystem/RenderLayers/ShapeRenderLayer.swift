@@ -69,7 +69,6 @@ final class ShapeRenderLayer: ShapeContainerLayer {
   }
 
   override func rebuildContents(forFrame _: CGFloat) {
-
     if renderer.shouldRenderInContext {
       if let newPath = renderer.outputPath {
         bounds = renderer.renderBoundsFor(newPath.boundingBox)

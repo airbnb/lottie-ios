@@ -109,7 +109,6 @@ private class MaskLayer: CALayer {
     actions = [
       "opacity" : NSNull(),
     ]
-
   }
 
   override init(layer: Any) {
@@ -152,7 +151,6 @@ private class MaskLayer: CALayer {
       }
       maskLayer.path = path
     }
-
   }
 }
 

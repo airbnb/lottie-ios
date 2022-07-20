@@ -16,7 +16,6 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
   // MARK: Lifecycle
 
   init(transform: Transform) {
-
     anchor = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.anchorPoint.keyframes))
     scale = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.scale.keyframes))
     rotation = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.rotation.keyframes))

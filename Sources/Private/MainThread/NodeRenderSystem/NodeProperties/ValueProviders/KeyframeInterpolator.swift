@@ -149,7 +149,7 @@ final class KeyframeInterpolator<ValueType>: ValueProvider where ValueType: AnyI
 
     /// Sets the initial keyframes. This is often only needed for the first check.
     if
-      leadingIndex == nil &&
+      leadingIndex == nil,
       trailingIndex == nil
     {
       if frame < keyframes[0].time {
@@ -170,7 +170,6 @@ final class KeyframeInterpolator<ValueType>: ValueProvider where ValueType: AnyI
       var newLeading = currentTrailing
       var keyframeFound = false
       while !keyframeFound {
-
         leadingIndex = newLeading
         trailingIndex = keyframes.validIndex(newLeading + 1)
 
@@ -192,13 +191,11 @@ final class KeyframeInterpolator<ValueType>: ValueProvider where ValueType: AnyI
       let currentLeading = leadingIndex,
       frame < keyframes[currentLeading].time
     {
-
       /// Time is before the current span. Iterate backwards
       var newTrailing = currentLeading
 
       var keyframeFound = false
       while !keyframeFound {
-
         leadingIndex = keyframes.validIndex(newTrailing - 1)
         trailingIndex = newTrailing
 

@@ -11,7 +11,6 @@ extension CAAnimation {
   ///    to match the current playback state / looping configuration of the animation view.
   @nonobjc
   func timed(with context: LayerAnimationContext, for layer: CALayer) -> CAAnimation {
-
     // The base animation always has the duration of the full animation,
     // since that's the time space where keyframing and interpolating happens.
     // So we start with a simple animation timeline from 0% to 100%:

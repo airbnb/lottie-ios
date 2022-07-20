@@ -321,7 +321,8 @@ extension CALayer {
   private func path<KeyframeValue>(
     keyframes positionKeyframes: [Keyframe<KeyframeValue>],
     value keyframeValueMapping: (KeyframeValue) throws -> CGPoint) rethrows
-    -> CGPath {
+    -> CGPath
+  {
     let path = CGMutablePath()
 
     for (index, keyframe) in positionKeyframes.enumerated() {

@@ -82,7 +82,6 @@ extension Animation {
     animationCache: AnimationCacheProvider? = nil)
     -> Animation?
   {
-
     /// Check cache for animation
     if
       let animationCache = animationCache,
@@ -176,7 +175,6 @@ extension Animation {
     closure: @escaping Animation.DownloadClosure,
     animationCache: AnimationCacheProvider?)
   {
-
     if let animationCache = animationCache, let animation = animationCache.animation(forKey: url.absoluteString) {
       closure(animation)
     } else {
@@ -198,7 +196,6 @@ extension Animation {
             closure(nil)
           }
         }
-
       }
       task.resume()
     }

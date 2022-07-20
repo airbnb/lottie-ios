@@ -93,7 +93,6 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     super.init(layer: layer)
 
     currentFrame = typedLayer.currentFrame
-
   }
 
   required init?(coder _: NSCoder) {
@@ -195,7 +194,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
 
   /// Forces the view to update its drawing.
   func forceDisplayUpdate() {
-    animationLayers.forEach( { $0.displayWithFrame(frame: currentFrame, forceUpdates: true) })
+    animationLayers.forEach({ $0.displayWithFrame(frame: currentFrame, forceUpdates: true) })
   }
 
   func logHierarchyKeypaths() {

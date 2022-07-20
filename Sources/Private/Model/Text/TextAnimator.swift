@@ -26,7 +26,6 @@ final class TextAnimator: Codable, DictionaryInitializable {
     skewAxis = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .skewAxis)
     rotation = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation)
     opacity = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .opacity)
-
   }
 
   init(dictionary: [String: Any]) throws {
