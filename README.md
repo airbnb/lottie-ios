@@ -79,12 +79,11 @@ All pull requests with new features or bug fixes that affect how animations rend
   - To add a new sample animation to the snapshot testing suite, you can add the `.json` file to `Tests/Samples`. Re-run the snapshot tests to generate the new snapshot image files.
   - To update existing snapshots after making changes, you can set `isRecording = true` in `SnapshotTests.swift` and then re-run the snapshot tests.
 
-The project also includes several helpful commands defined in our [Rakefile](https://github.com/airbnb/lottie-ios/blob/master/Rakefile). To use these, you need to install [Bundler](https://bundler.io/) and [Mint](https://github.com/yonaskolb/Mint):
+The project also includes several helpful commands defined in our [Rakefile](https://github.com/airbnb/lottie-ios/blob/master/Rakefile). To use these, you need to install [Bundler](https://bundler.io/):
 
 ```bash
 $ sudo gem install bundle
 $ bundle install
-$ brew install mint
 ```
 
 For example, all Swift code should be formatted according to the [Airbnb Swift Style Guide](https://github.com/airbnb/swift). After making changes, you can reformat the code automatically using [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) and [SwiftLint](https://github.com/realm/SwiftLint) by running `bundle exec rake format:swift`. Other helpful commands include:
