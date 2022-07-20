@@ -16,7 +16,7 @@ jobs:
         - '12.4' # Swift 5.3
         - '12.5.1' # Swift 5.4
         - '13.2' # Swift 5.5
-        - '13.3' # Swift 5.6
+        - '13.3.1' # Swift 5.6
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -92,5 +92,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
+        with:
+          xcode: 13.3.1 # Swift 5.6 is required to use the formatter package plugin
       - name: Lint Swift
         run: bundle exec rake lint:swift
