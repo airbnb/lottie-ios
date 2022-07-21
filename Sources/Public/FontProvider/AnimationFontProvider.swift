@@ -25,7 +25,7 @@ public final class DefaultFontProvider: AnimationFontProvider {
 
   // MARK: Lifecycle
 
-  public init() {}
+  public init() { }
 
   // MARK: Public
 

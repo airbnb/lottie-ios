@@ -358,7 +358,6 @@ final public class AnimationView: AnimationViewBase {
   /// Animatable.
   public var viewportFrame: CGRect? = nil {
     didSet {
-
       // This is really ugly, but is needed to trigger a layout pass within an animation block.
       // Typically this happens automatically, when layout objects are UIView based.
       // The animation layer is a CALayer which will not implicitly grab the animation
@@ -490,7 +489,6 @@ final public class AnimationView: AnimationViewBase {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
-
     guard let animation = animation, let markers = animation.markerMap, let to = markers[toMarker] else {
       return
     }
@@ -947,7 +945,6 @@ final public class AnimationView: AnimationViewBase {
   }
 
   fileprivate func makeAnimationLayer(usingEngine renderingEngine: RenderingEngineOption) {
-
     /// Remove current animation if any
     removeCurrentAnimation()
 

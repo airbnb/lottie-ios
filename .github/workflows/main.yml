@@ -9,7 +9,10 @@ on:
 jobs:
   build-package:
     name: "Build Package"
-    runs-on: macos-latest
+    # The macos-11 image includes Xcode 12 releases, but the macos-12
+    # image only includes Xcode 13 releases. We still need to use macos-11
+    # on this job to build using Swift 5.3 and Swift 5.4.
+    runs-on: macos-11
     strategy:
       matrix:
         xcode:
@@ -26,7 +29,7 @@ jobs:
 
   build-example:
     name: "Build Example App"
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -35,7 +38,7 @@ jobs:
 
   test-package:
     name: "Test Package"
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -53,7 +56,7 @@ jobs:
 
   cocoapod:
     name: "Lint CocoaPods podspec"
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -64,7 +67,7 @@ jobs:
 
   spm:
     name: "Test Swift Package Manager support"
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -75,7 +78,7 @@ jobs:
 
   carthage:
     name: "Test Carthage support"
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -87,7 +90,7 @@ jobs:
 
   swiftlint:
     name: "Lint Swift"
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup

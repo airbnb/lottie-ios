@@ -114,10 +114,12 @@ extension LottieLogger {
     LottieLogger(
       assert: { condition, message, _, _ in
         if !condition() {
+          // swiftlint:disable:next no_direct_standard_out_logs
           print(message())
         }
       },
       assertionFailure: { message, _, _ in
+        // swiftlint:disable:next no_direct_standard_out_logs
         print(message())
       })
   }

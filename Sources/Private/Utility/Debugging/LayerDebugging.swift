@@ -53,7 +53,7 @@ extension CALayer {
       string = string + "  "
     }
     string = string + "|_" + String(describing: self)
-    print(string)
+    LottieLogger.shared.info(string)
     if let sublayers = sublayers {
       for sublayer in sublayers {
         sublayer.logLayerTree(withIndent: withIndent + 1)
@@ -75,7 +75,6 @@ extension CALayer {
 
   @nonobjc
   func setDebuggingState(visible: Bool) {
-
     var sublayers = self.sublayers
     if let cust = self as? CustomLayerDebugging {
       sublayers = cust.layerForDebugging().sublayers

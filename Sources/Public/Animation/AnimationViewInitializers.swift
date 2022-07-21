@@ -61,12 +61,10 @@ extension AnimationView {
     animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache,
     configuration: LottieConfiguration = .shared)
   {
-
     if let animationCache = animationCache, let animation = animationCache.animation(forKey: url.absoluteString) {
       self.init(animation: animation, imageProvider: imageProvider, configuration: configuration)
       closure(nil)
     } else {
-
       self.init(animation: nil, imageProvider: imageProvider, configuration: configuration)
 
       Animation.loadedFrom(url: url, closure: { animation in

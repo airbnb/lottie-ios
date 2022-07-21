@@ -171,7 +171,7 @@ extension BezierPath {
         CurveVertex(
           CGPoint(x: 0, y: radius), // In tangent
           CGPoint(x: 0, y: radius), // Point
-          CGPoint(x: -controlPoint, y: radius))// Out tangent
+          CGPoint(x: -controlPoint, y: radius)) // Out tangent
           .translated(CGPoint(x: radius, y: -radius))
           .translated(CGPoint(x: -size.width, y: size.height))
           .translated(position),

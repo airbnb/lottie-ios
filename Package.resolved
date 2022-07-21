@@ -2,24 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "Difference",
-        "repositoryURL": "https://github.com/krzysztofzablocki/Difference",
-        "state": {
-          "branch": null,
-          "revision": "02fe1111edc8318c4f8a0da96336fcbcc201f38b",
-          "version": "1.0.1"
-        }
-      },
-      {
-        "package": "Epoxy",
-        "repositoryURL": "https://github.com/airbnb/epoxy-ios.git",
-        "state": {
-          "branch": null,
-          "revision": "bc53da4def05eff869f96bedefda7e1a8fdcb199",
-          "version": "0.7.0"
-        }
-      },
-      {
         "package": "SourceKitten",
         "repositoryURL": "https://github.com/jpsim/SourceKitten.git",
         "state": {
@@ -44,15 +26,6 @@
           "branch": null,
           "revision": "e394bf350e38cb100b6bc4172834770ede1b7232",
           "version": "1.0.3"
-        }
-      },
-      {
-        "package": "swift-snapshot-testing",
-        "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing.git",
-        "state": {
-          "branch": "main",
-          "revision": "88f6e2c0afe04221fcfb1601a2ecaad83115a05f",
-          "version": null
         }
       },
       {

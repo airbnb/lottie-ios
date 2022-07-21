@@ -158,17 +158,17 @@ extension BezierPath {
     for i in 0..<numPoints {
       var radius = longSegment ? outerRadius : innerRadius
       var dTheta = halfAnglePerPoint
-      if partialPointRadius != 0 && i == numPoints - 2 {
+      if partialPointRadius != 0, i == numPoints - 2 {
         dTheta = anglePerPoint * partialPointAmount / 2
       }
-      if partialPointRadius != 0 && i == numPoints - 1 {
+      if partialPointRadius != 0, i == numPoints - 1 {
         radius = partialPointRadius
       }
       previousPoint = point
       point.x = (radius * cos(currentAngle))
       point.y = (radius * sin(currentAngle))
 
-      if innerRoundedness == 0 && outerRoundedness == 0 {
+      if innerRoundedness == 0, outerRoundedness == 0 {
         vertices.append(CurveVertex(point: point + position, inTangentRelative: .zero, outTangentRelative: .zero))
       } else {
         let cp1Theta = (atan2(previousPoint.y, previousPoint.x) - CGFloat.pi / 2)

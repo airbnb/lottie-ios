@@ -28,7 +28,6 @@ public class FilepathImageProvider: AnimationImageProvider {
   // MARK: Public
 
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
-
     if
       asset.name.hasPrefix("data:"),
       let url = URL(string: asset.name),
@@ -40,7 +39,6 @@ public class FilepathImageProvider: AnimationImageProvider {
 
     let directPath = filepath.appendingPathComponent(asset.name).path
     if FileManager.default.fileExists(atPath: directPath) {
-
       return NSImage(contentsOfFile: directPath)?.lottie_CGImage
     }
 

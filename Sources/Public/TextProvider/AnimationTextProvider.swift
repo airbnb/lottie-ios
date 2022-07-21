@@ -43,7 +43,7 @@ public final class DefaultTextProvider: AnimationTextProvider {
 
   // MARK: Lifecycle
 
-  public init() {}
+  public init() { }
 
   // MARK: Public
 

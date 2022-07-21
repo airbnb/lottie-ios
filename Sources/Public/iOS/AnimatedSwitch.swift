@@ -208,9 +208,7 @@ protocol ImpactGenerator {
 // MARK: - NullHapticGenerator
 
 class NullHapticGenerator: ImpactGenerator {
-  func generateImpact() {
-
-  }
+  func generateImpact() { }
 }
 
 #if os(iOS)

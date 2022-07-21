@@ -118,7 +118,7 @@ final class PerformanceTests: XCTestCase {
       }
     }
 
-    print("\(engineA) engine took \(engineAPerformance) seconds")
+    LottieLogger.shared.info("\(engineA) engine took \(engineAPerformance) seconds")
 
     let engineBPerformance = measurePerformance {
       for _ in 0..<iterations {
@@ -134,10 +134,10 @@ final class PerformanceTests: XCTestCase {
       }
     }
 
-    print("\(engineB) engine took \(engineBPerformance) seconds")
+    LottieLogger.shared.info("\(engineB) engine took \(engineBPerformance) seconds")
 
     let ratio = engineBPerformance / engineAPerformance
-    print("\(engineB) engine took \(ratio)x as long as \(engineA) engine")
+    LottieLogger.shared.info("\(engineB) engine took \(ratio)x as long as \(engineA) engine")
     return ratio
   }
 
@@ -156,7 +156,7 @@ final class PerformanceTests: XCTestCase {
       }
     }
 
-    print("Main thread engine took \(mainThreadEnginePerformance) seconds")
+    LottieLogger.shared.info("Main thread engine took \(mainThreadEnginePerformance) seconds")
 
     let coreAnimationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: .coreAnimation))
     let coreAnimationEnginePerformance = measurePerformance {
@@ -168,10 +168,10 @@ final class PerformanceTests: XCTestCase {
       }
     }
 
-    print("Core Animation engine took \(coreAnimationEnginePerformance) seconds")
+    LottieLogger.shared.info("Core Animation engine took \(coreAnimationEnginePerformance) seconds")
 
     let ratio = coreAnimationEnginePerformance / mainThreadEnginePerformance
-    print("Core Animation engine took \(ratio)x as long as the Main Thread engine")
+    LottieLogger.shared.info("Core Animation engine took \(ratio)x as long as the Main Thread engine")
     return ratio
   }
 
@@ -182,7 +182,7 @@ final class PerformanceTests: XCTestCase {
       }
     }
 
-    print("Codable deserialization took \(codablePerformance) seconds")
+    LottieLogger.shared.info("Codable deserialization took \(codablePerformance) seconds")
 
     let dictPerformance = try measurePerformance {
       for _ in 0..<iterations {
@@ -190,9 +190,9 @@ final class PerformanceTests: XCTestCase {
       }
     }
 
-    print("DictionaryBased deserialization took \(dictPerformance) seconds")
+    LottieLogger.shared.info("DictionaryBased deserialization took \(dictPerformance) seconds")
     let ratio = codablePerformance / dictPerformance
-    print("Codable deserialization took \(ratio)x as long as DictionaryBased")
+    LottieLogger.shared.info("Codable deserialization took \(ratio)x as long as DictionaryBased")
     return ratio
   }
 

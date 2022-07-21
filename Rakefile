@@ -92,19 +92,8 @@ end
 
 namespace :lint do
   desc 'Lints swift files'
-  task swift: ['swift:swiftlint', 'swift:swiftformat']
-
-  desc 'Lints swift files'
-  namespace :swift do
-    desc 'Lints swift files using SwiftLint'
-    task :swiftlint do
-      sh 'mint run SwiftLint lint Sources Tests Example Package.swift --config script/lint/swiftlint.yml --strict'
-    end
-
-    desc 'Lints swift files using SwiftLint'
-    task :swiftformat do
-      sh 'mint run SwiftFormat Sources Tests Example Package.swift --config script/lint/airbnb.swiftformat --lint'
-    end
+  task :swift do
+    sh 'swift package --allow-writing-to-package-directory format --lint'
   end
 
   desc 'Lints the CocoaPods podspec'
@@ -114,13 +103,19 @@ namespace :lint do
 end
 
 namespace :format do
-  desc 'Runs SwiftFormat'
+  desc 'Formats swift files'
   task :swift do
-    sh 'mint run SwiftLint autocorrect Sources Tests Example Package.swift --config script/lint/swiftlint.yml'
-    sh 'mint run SwiftFormat Sources Tests Example Package.swift --config script/lint/airbnb.swiftformat'
+    sh 'swift package --allow-writing-to-package-directory format'
   end
 end
 
 def xcodebuild(command)
-  sh "set -o pipefail && xcodebuild #{command} | mint run xcbeautify"
+  # Check if the mint tool is installed -- if so, pipe the xcodebuild output through xcbeautify
+  `which mint`
+
+  if $?.success?
+    sh "set -o pipefail && xcodebuild #{command} | mint run thii/xcbeautify@0.10.2"
+  else
+    sh "xcodebuild #{command}"
+  end
 end

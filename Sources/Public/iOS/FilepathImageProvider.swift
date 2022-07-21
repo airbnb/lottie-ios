@@ -29,7 +29,6 @@ public class FilepathImageProvider: AnimationImageProvider {
   // MARK: Public
 
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
-
     if
       asset.name.hasPrefix("data:"),
       let url = URL(string: asset.name),

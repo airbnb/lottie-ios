@@ -311,7 +311,7 @@ final class CoreTextRenderLayer: CALayer {
       x: textAnchor.x.remap(fromLow: 0, fromHigh: drawingRect.size.width, toLow: 0, toHigh: 1),
       y: textAnchor.y.remap(fromLow: 0, fromHigh: drawingRect.size.height, toLow: 0, toHigh: 1))
 
-    if fillFrameSetter != nil && strokeFrameSetter != nil {
+    if fillFrameSetter != nil, strokeFrameSetter != nil {
       drawingRect.size.width += strokeWidth
       drawingRect.size.height += strokeWidth
     }

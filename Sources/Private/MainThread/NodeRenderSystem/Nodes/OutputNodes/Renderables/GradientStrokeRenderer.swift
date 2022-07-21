@@ -42,7 +42,7 @@ final class GradientStrokeRenderer: PassThroughOutputNode, Renderable {
   }
 
   func render(_ inContext: CGContext) {
-    guard inContext.path != nil && inContext.path!.isEmpty == false else {
+    guard inContext.path != nil, inContext.path!.isEmpty == false else {
       return
     }
 
@@ -56,7 +56,6 @@ final class GradientStrokeRenderer: PassThroughOutputNode, Renderable {
 
     /// Now draw the gradient.
     gradientRender.render(inContext)
-
   }
 
   func renderBoundsFor(_ boundingBox: CGRect) -> CGRect {

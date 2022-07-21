@@ -13,7 +13,6 @@ build/
 # Swift Package Manager
 .swiftpm
 .build/
-Package.resolved
 
 # Carthage support tests
 script/test-carthage/Carthage

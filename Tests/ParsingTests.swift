@@ -33,7 +33,8 @@ func XCTAssertNoDiff<T>(
   _ expected: @autoclosure () throws -> T,
   _ received: @autoclosure () throws -> T,
   file: StaticString = #filePath,
-  line: UInt = #line) rethrows {
+  line: UInt = #line) rethrows
+{
   let expected = try expected()
   let received = try received()
   let diff = diff(expected, received)
