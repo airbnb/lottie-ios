@@ -9,7 +9,7 @@ on:
 jobs:
   build-package:
     name: "Build Package"
-    runs-on: macos-latest
+    runs-on: macos-12
     strategy:
       matrix:
         xcode:
@@ -27,7 +27,7 @@ jobs:
 
   build-example:
     name: "Build Example App"
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -36,7 +36,7 @@ jobs:
 
   test-package:
     name: "Test Package"
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -54,7 +54,7 @@ jobs:
 
   cocoapod:
     name: "Lint CocoaPods podspec"
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -65,7 +65,7 @@ jobs:
 
   spm:
     name: "Test Swift Package Manager support"
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -76,7 +76,7 @@ jobs:
 
   carthage:
     name: "Test Carthage support"
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -88,11 +88,9 @@ jobs:
 
   swiftlint:
     name: "Lint Swift"
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
-        with:
-          xcode: 13.3.1 # Swift 5.6 is required to use the formatter package plugin
       - name: Lint Swift
         run: bundle exec rake lint:swift
