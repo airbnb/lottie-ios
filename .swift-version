@@ -1,4 +1,1 @@
 5.3
-# This file specifies the Swift language version that SwiftFormat uses
-# when listing / formatting our code. This is the minimum Swift version
-# that the package can be successfully built with.
