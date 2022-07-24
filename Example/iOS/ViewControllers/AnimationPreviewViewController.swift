@@ -107,6 +107,7 @@ class AnimationPreviewViewController: UIViewController {
   private var displayLink: CADisplayLink?
 
   private var loopMode = LottieLoopMode.autoReverse
+  private var speed: CGFloat = 1
   private var fromProgress: AnimationProgressTime = 0
   private var toProgress: AnimationProgressTime = 1
 
@@ -138,6 +139,35 @@ class AnimationPreviewViewController: UIViewController {
               state: loopMode == .playOnce ? .on : .off,
               handler: { [unowned self] _ in
                 loopMode = .playOnce
+                updateAnimation()
+              }),
+          ]),
+
+        UIMenu(
+          title: "Speed",
+          children: [
+            UIAction(
+              title: "-1",
+              state: speed == -1 ? .on : .off,
+              handler: { [unowned self] _ in
+                speed = -1
+                animationView.animationSpeed = speed
+                updateAnimation()
+              }),
+            UIAction(
+              title: "0",
+              state: speed == 0 ? .on : .off,
+              handler: { [unowned self] _ in
+                speed = 0
+                animationView.animationSpeed = speed
+                updateAnimation()
+              }),
+            UIAction(
+              title: "1",
+              state: speed == 1 ? .on : .off,
+              handler: { [unowned self] _ in
+                speed = 1
+                animationView.animationSpeed = speed
                 updateAnimation()
               }),
           ]),
