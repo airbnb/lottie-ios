@@ -1213,7 +1213,15 @@ final public class AnimationView: AnimationViewBase {
       var timingConfiguration = CoreAnimationLayer.CAMediaTimingConfiguration(
         autoreverses: loopMode.caAnimationConfiguration.autoreverses,
         repeatCount: loopMode.caAnimationConfiguration.repeatCount,
-        speed: Float(animationSpeed))
+        speed: abs(Float(animationSpeed)))
+
+      // Core Animation not supported negative speed to do reverse animation.
+      if animationSpeed < 0 {
+        // Switch startFrame and endFrame in context
+        let temp = animationContext.playFrom
+        animationContext.playFrom = animationContext.playTo
+        animationContext.playTo = temp
+      }
 
       // The animation should start playing from the `currentFrame`,
       // if `currentFrame` is included in the time range being played.
@@ -1234,7 +1242,11 @@ final public class AnimationView: AnimationViewBase {
         // the duration of the _first_ loop. Instead of setting `playFrom`, we just add a `timeOffset`
         // so the first loop begins at `currentTime` but all subsequent loops are the standard duration.
         default:
-          timingConfiguration.timeOffset = currentTime - animation.time(forFrame: animationContext.playFrom)
+          if animationSpeed < 0 {
+            timingConfiguration.timeOffset = animation.time(forFrame: animationContext.playFrom) - currentTime
+          } else {
+            timingConfiguration.timeOffset = currentTime - animation.time(forFrame: animationContext.playFrom)
+          }
         }
       }
 
