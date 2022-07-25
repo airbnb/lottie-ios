@@ -1210,18 +1210,19 @@ final public class AnimationView: AnimationViewBase {
 
     if let coreAnimationLayer = animationlayer as? CoreAnimationLayer {
       var animationContext = animationContext
-      var timingConfiguration = CoreAnimationLayer.CAMediaTimingConfiguration(
-        autoreverses: loopMode.caAnimationConfiguration.autoreverses,
-        repeatCount: loopMode.caAnimationConfiguration.repeatCount,
-        speed: abs(Float(animationSpeed)))
 
-      // Core Animation not supported negative speed to do reverse animation.
+      // Core Animation doesn't natively support negative speed values,
+      // so instead we can swap `playFrom` / `playTo`
       if animationSpeed < 0 {
-        // Switch startFrame and endFrame in context
         let temp = animationContext.playFrom
         animationContext.playFrom = animationContext.playTo
         animationContext.playTo = temp
       }
+
+      var timingConfiguration = CoreAnimationLayer.CAMediaTimingConfiguration(
+        autoreverses: loopMode.caAnimationConfiguration.autoreverses,
+        repeatCount: loopMode.caAnimationConfiguration.repeatCount,
+        speed: abs(Float(animationSpeed)))
 
       // The animation should start playing from the `currentFrame`,
       // if `currentFrame` is included in the time range being played.

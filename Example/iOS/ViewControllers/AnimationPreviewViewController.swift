@@ -147,27 +147,31 @@ class AnimationPreviewViewController: UIViewController {
           title: "Speed",
           children: [
             UIAction(
-              title: "-1",
+              title: "-100%",
               state: speed == -1 ? .on : .off,
               handler: { [unowned self] _ in
                 speed = -1
-                animationView.animationSpeed = speed
                 updateAnimation()
               }),
             UIAction(
-              title: "0",
-              state: speed == 0 ? .on : .off,
+              title: "-50%",
+              state: speed == -0.5 ? .on : .off,
               handler: { [unowned self] _ in
-                speed = 0
-                animationView.animationSpeed = speed
+                speed = -0.5
                 updateAnimation()
               }),
             UIAction(
-              title: "1",
+              title: "50%",
+              state: speed == 0.5 ? .on : .off,
+              handler: { [unowned self] _ in
+                speed = 0.5
+                updateAnimation()
+              }),
+            UIAction(
+              title: "100%",
               state: speed == 1 ? .on : .off,
               handler: { [unowned self] _ in
                 speed = 1
-                animationView.animationSpeed = speed
                 updateAnimation()
               }),
           ]),
@@ -235,6 +239,7 @@ class AnimationPreviewViewController: UIViewController {
 
   private func updateAnimation() {
     animationView.play(fromProgress: fromProgress, toProgress: toProgress, loopMode: loopMode)
+    animationView.animationSpeed = speed
     configureSettingsMenu()
   }
 
