@@ -10,8 +10,19 @@ public final class LottieLogger {
   // MARK: Lifecycle
 
   public init(
-    assert: @escaping Assert = Swift.assert,
-    assertionFailure: @escaping AssertionFailure = Swift.assertionFailure,
+    assert: @escaping Assert = { condition, message, file, line in
+      // If we default to `Swift.assert` directly with `assert: Assert = Swift.assert`,
+      // the call will unexpectedly not respect the -O flag and will crash in release
+      // https://github.com/apple/swift/issues/60249
+      Swift.assert(condition(), message(), file: file, line: line)
+    },
+    assertionFailure: @escaping AssertionFailure = { message, file, line in
+      // If we default to `Swift.assertionFailure` directly with
+      // `assertionFailure: AssertionFailure = Swift.assertionFailure`,
+      // the call will unexpectedly not respect the -O flag and will crash in release
+      // https://github.com/apple/swift/issues/60249
+      Swift.assertionFailure(message(), file: file, line: line)
+    },
     warn: @escaping Warn = { message, _, _ in
       #if DEBUG
       // swiftlint:disable:next no_direct_standard_out_logs
