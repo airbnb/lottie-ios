@@ -5,9 +5,9 @@
         "package": "AirbnbSwift",
         "repositoryURL": "https://github.com/airbnb/swift",
         "state": {
-          "branch": "cal--swiftversion",
-          "revision": "9d1c3caa0918458d829b82337d832cbfa130f891",
-          "version": null
+          "branch": null,
+          "revision": "1bf961396cc9c690db37936bfbdc8b5f29e844af",
+          "version": "1.0.1"
         }
       },
       {
