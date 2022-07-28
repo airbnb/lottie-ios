@@ -74,7 +74,7 @@ extension MaskCompositionLayer: AnimationLayer {
   }
 }
 
-// MARK: - MaskLayer
+// MARK: MaskCompositionLayer.MaskLayer
 
 extension MaskCompositionLayer {
   final class MaskLayer: CAShapeLayer {

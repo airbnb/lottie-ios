@@ -9,5 +9,5 @@ let package = Package(
 
 #if swift(>=5.6)
 // Add the Airbnb Swift formatting plugin if possible
-package.dependencies.append(.package(url: "https://github.com/airbnb/swift", .branch("master")))
+package.dependencies.append(.package(url: "https://github.com/airbnb/swift", .upToNextMajor(from: "1.0.1")))
 #endif
