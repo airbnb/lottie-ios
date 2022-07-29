@@ -47,7 +47,7 @@ public class FilepathImageProvider: AnimationImageProvider {
       return NSImage(contentsOfFile: pathWithDirectory)?.lottie_CGImage
     }
 
-    LottieLogger.shared.assertionFailure("Could not find image \"\(asset.name)\" in bundle")
+    LottieLogger.shared.warn("Could not find image \"\(asset.name)\" in bundle")
     return nil
   }
 
