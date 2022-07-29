@@ -106,15 +106,7 @@ final class PerformanceTests: XCTestCase {
   {
     let engineAPerformance = measurePerformance {
       for _ in 0..<iterations {
-        // Each animation setup needs to be wrapped in its own `CATransaction`
-        // in order for the layers to be deallocated immediately. Otherwise
-        // the layers aren't deallocated until the end of the test run,
-        // which causes memory usage to grow unbounded.
-        CATransaction.begin()
-        let animationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: engineA))
-        // Call `display()` on the layer to make sure any pending setup occurs immediately
-        animationView.animationLayer!.display()
-        CATransaction.commit()
+        setUpAndTearDownAnimationView(with: animation, configuration: .init(renderingEngine: engineA))
       }
     }
 
@@ -122,15 +114,7 @@ final class PerformanceTests: XCTestCase {
 
     let engineBPerformance = measurePerformance {
       for _ in 0..<iterations {
-        // Each animation setup needs to be wrapped in its own `CATransaction`
-        // in order for the layers to be deallocated immediately. Otherwise
-        // the layers aren't deallocated until the end of the test run,
-        // which causes memory usage to grow unbounded.
-        CATransaction.begin()
-        let animationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: engineB))
-        // Call `display()` on the layer to make sure any pending setup occurs immediately
-        animationView.animationLayer!.display()
-        CATransaction.commit()
+        setUpAndTearDownAnimationView(with: animation, configuration: .init(renderingEngine: engineB))
       }
     }
 
@@ -139,6 +123,21 @@ final class PerformanceTests: XCTestCase {
     let ratio = engineBPerformance / engineAPerformance
     LottieLogger.shared.info("\(engineB) engine took \(ratio)x as long as \(engineA) engine")
     return ratio
+  }
+
+  private func setUpAndTearDownAnimationView(with animation: Animation, configuration: LottieConfiguration) {
+    // Each animation setup needs to be wrapped in its own `CATransaction`
+    // in order for the layers to be deallocated immediately. Otherwise
+    // the layers aren't deallocated until the end of the test run,
+    // which causes memory usage to grow unbounded.
+    CATransaction.begin()
+    let animationView = setupAnimationView(with: animation, configuration: configuration)
+    // Call `display()` on the layer to make sure any pending setup occurs immediately
+    animationView.animationLayer!.display()
+    CATransaction.commit()
+
+    /// The view / layer is deallocated when the transaction is flushed
+    CATransaction.flush()
   }
 
   /// Compares performance of scrubbing the given animation with both the Main Thread and Core Animation engine,
