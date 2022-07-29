@@ -1,0 +1,17 @@
+name: 'Close stale issues'
+on:
+  schedule:
+    - cron: '30 1 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v5
+        with:
+          only-labels: >
+            can't reproduce
+          stale-issue-message: >
+            This issue is stale because it is marked "can't reproduce" and has had no activity in the past week. Please comment with additional information, or this issue will be closed due to inactivity in one week.
+          days-before-stale: 7
+          days-before-close: 7
