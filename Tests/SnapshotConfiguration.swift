@@ -61,7 +61,7 @@ extension SnapshotConfiguration {
         Keyframe(value: Color.black, time: 150),
       ]),
     ]),
-    
+
     "Issues/issue_1664": .customValueProviders([
       AnimationKeypath(keypath: "**.base_color.**.Color"): ColorValueProvider(.black),
     ]),
