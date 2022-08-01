@@ -62,6 +62,10 @@ extension SnapshotConfiguration {
       ]),
     ]),
 
+    "Issues/issue_1664": .customValueProviders([
+      AnimationKeypath(keypath: "**.base_color.**.Color"): ColorValueProvider(.black),
+    ]),
+
     // Test cases for `AnimatedImageProvider`
     "Nonanimating/_dog": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog.png")),
 
