@@ -117,7 +117,7 @@ final class StrokeNode: AnimatorNode, RenderNode {
     strokeRender.lineJoin = strokeProperties.lineJoin
 
     /// Get dash lengths
-    let dashLengths = strokeProperties.dashPattern.value.map { $0.cgFloatValue }
+    let dashLengths = strokeProperties.dashPattern.value.map { $0.cgFloatValue }.filter { !$0.isZero }
     if dashLengths.count > 0 {
       strokeRender.dashPhase = strokeProperties.dashPhase.value.cgFloatValue
       strokeRender.dashLengths = dashLengths
