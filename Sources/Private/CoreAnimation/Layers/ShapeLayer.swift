@@ -87,10 +87,11 @@ final class GroupLayer: BaseAnimationLayer {
   private let inheritedItems: [ShapeItemLayer.Item]
 
   /// `ShapeItem`s (other than nested `Group`s) that are included in this group
-  private lazy var nonGroupItems = group.items
+  private lazy var nonGroupItems = (group.items
     .filter { !($0 is Group) }
     .map { ShapeItemLayer.Item(item: $0, parentGroup: group) }
-    + inheritedItems
+    + inheritedItems)
+    .filter { !$0.item.hidden }
 
   private func setupLayerHierarchy(context: LayerContext) throws {
     // Groups can contain other groups, so we may have to continue
@@ -169,6 +170,7 @@ extension CALayer {
     // Groups are listed from front to back,
     // but `CALayer.sublayers` are listed from back to front.
     let groupsInZAxisOrder = groupItems.reversed()
+      .filter { !$0.hidden }
 
     for group in groupsInZAxisOrder {
       guard let group = group as? Group else { continue }
