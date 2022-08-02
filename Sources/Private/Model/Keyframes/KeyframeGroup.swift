@@ -195,3 +195,12 @@ extension Keyframe {
       spatialOutTangent: spatialOutTangent)
   }
 }
+
+extension KeyframeGroup {
+  /// Maps the values of each individual keyframe in this group
+  func map<NewValue>(_ transformation: (T) -> NewValue) -> KeyframeGroup<NewValue> {
+    KeyframeGroup<NewValue>(keyframes: ContiguousArray(keyframes.map { keyframe in
+      keyframe.withValue(transformation(keyframe.value))
+    }))
+  }
+}

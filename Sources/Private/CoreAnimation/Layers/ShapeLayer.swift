@@ -13,7 +13,7 @@ final class ShapeLayer: BaseCompositionLayer {
   init(shapeLayer: ShapeLayerModel, context: LayerContext) throws {
     self.shapeLayer = shapeLayer
     super.init(layerModel: shapeLayer)
-    try setupGroups(from: shapeLayer.items, parentGroup: nil, context: context)
+    try setUpGroups(context: context)
   }
 
   required init?(coder _: NSCoder) {
@@ -34,6 +34,28 @@ final class ShapeLayer: BaseCompositionLayer {
   // MARK: Private
 
   private let shapeLayer: ShapeLayerModel
+
+  private func setUpGroups(context: LayerContext) throws {
+    // If the layer has a `Repeater`, the `Group`s are duplicated and offset
+    // based on the copy count of the repeater.
+    if let repeater = shapeLayer.items.first(where: { $0 is Repeater }) as? Repeater {
+      try setUpRepeater(repeater, context: context)
+    } else {
+      try setupGroups(from: shapeLayer.items, parentGroup: nil, context: context)
+    }
+  }
+
+  private func setUpRepeater(_ repeater: Repeater, context: LayerContext) throws {
+    let items = shapeLayer.items.filter { !($0 is Repeater) }
+    let copyCount = Int(try repeater.copies.exactlyOneKeyframe(context: context, description: "repeater copies").value.value)
+
+    for index in 0..<copyCount {
+      for groupLayer in try makeGroupLayers(from: items, parentGroup: nil, context: context) {
+        let repeatedLayer = RepeaterLayer(repeater: repeater, childLayer: groupLayer, index: index)
+        addSublayer(repeatedLayer)
+      }
+    }
+  }
 
 }
 
@@ -156,6 +178,22 @@ extension CALayer {
   ///  - Each `Group` item becomes its own `GroupLayer` sublayer.
   ///  - Other `ShapeItem` are applied to all sublayers
   fileprivate func setupGroups(from items: [ShapeItem], parentGroup: Group?, context: LayerContext) throws {
+    let groupLayers = try makeGroupLayers(from: items, parentGroup: parentGroup, context: context)
+
+    for groupLayer in groupLayers {
+      addSublayer(groupLayer)
+    }
+  }
+
+  /// Creates a `GroupLayer` for each `Group` in the given list of `ShapeItem`s
+  ///  - Each `Group` item becomes its own `GroupLayer` sublayer.
+  ///  - Other `ShapeItem` are applied to all sublayers
+  fileprivate func makeGroupLayers(
+    from items: [ShapeItem],
+    parentGroup: Group?,
+    context: LayerContext) throws
+    -> [GroupLayer]
+  {
     var (groupItems, otherItems) = items.grouped(by: { $0 is Group })
 
     // If this shape doesn't have any groups but just has top-level shape items,
@@ -170,8 +208,8 @@ extension CALayer {
     // but `CALayer.sublayers` are listed from back to front.
     let groupsInZAxisOrder = groupItems.reversed()
 
-    for group in groupsInZAxisOrder {
-      guard let group = group as? Group else { continue }
+    return try groupsInZAxisOrder.compactMap { group in
+      guard let group = group as? Group else { return nil }
 
       // `ShapeItem`s either draw a path, or modify how a path is rendered.
       //  - If this group doesn't have any items that draw a path, then its
@@ -185,12 +223,10 @@ extension CALayer {
         inheritedItems = []
       }
 
-      let groupLayer = try GroupLayer(
+      return try GroupLayer(
         group: group,
         inheritedItems: inheritedItems,
         context: context)
-
-      addSublayer(groupLayer)
     }
   }
 }

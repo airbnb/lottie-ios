@@ -17,7 +17,6 @@ enum PathDirection: Int, Codable {
 
 // MARK: - Ellipse
 
-/// An item that define an ellipse shape
 final class Ellipse: ShapeItem {
 
   // MARK: Lifecycle

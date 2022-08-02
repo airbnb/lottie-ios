@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08F8B20D2898A7B100CB5323 /* RepeaterLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F8B20C2898A7B100CB5323 /* RepeaterLayer.swift */; };
+		08F8B20E2898A7B100CB5323 /* RepeaterLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F8B20C2898A7B100CB5323 /* RepeaterLayer.swift */; };
+		08F8B20F2898A7B100CB5323 /* RepeaterLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F8B20C2898A7B100CB5323 /* RepeaterLayer.swift */; };
+		08F8B211289990B700CB5323 /* Samples in Resources */ = {isa = PBXBuildFile; fileRef = 08F8B210289990B700CB5323 /* Samples */; };
+		08F8B213289990CB00CB5323 /* SnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F8B212289990CB00CB5323 /* SnapshotTests.swift */; };
 		19465F52282F998B00BB2C97 /* CachedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19465F51282F998B00BB2C97 /* CachedImageProvider.swift */; };
 		19465F53282F998B00BB2C97 /* CachedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19465F51282F998B00BB2C97 /* CachedImageProvider.swift */; };
 		19465F54282F998B00BB2C97 /* CachedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19465F51282F998B00BB2C97 /* CachedImageProvider.swift */; };
@@ -20,10 +25,8 @@
 		2E8040B027A072B8006E74CB /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E80409A27A0725D006E74CB /* Lottie.framework */; };
 		2E8044AD27A07347006E74CB /* HardcodedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8040BE27A07343006E74CB /* HardcodedImageProvider.swift */; };
 		2E8044AE27A07347006E74CB /* Snapshotting+presentationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8040BF27A07343006E74CB /* Snapshotting+presentationLayer.swift */; };
-		2E80450C27A07347006E74CB /* SnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E80412427A07343006E74CB /* SnapshotTests.swift */; };
 		2E80450D27A07347006E74CB /* SnapshotConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E80412527A07343006E74CB /* SnapshotConfiguration.swift */; };
 		2E80489427A07377006E74CB /* __Snapshots__ in Resources */ = {isa = PBXBuildFile; fileRef = 2E80489227A07377006E74CB /* __Snapshots__ */; };
-		2E80489527A07377006E74CB /* Samples in Resources */ = {isa = PBXBuildFile; fileRef = 2E80489327A07377006E74CB /* Samples */; };
 		2E804A1A27A0740F006E74CB /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2E804A1927A0740F006E74CB /* SnapshotTesting */; };
 		2E9C95D32822F43100677516 /* Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95252822F43000677516 /* Fill.swift */; };
 		2E9C95D42822F43100677516 /* Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95252822F43000677516 /* Fill.swift */; };
@@ -587,6 +590,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08F8B20C2898A7B100CB5323 /* RepeaterLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeaterLayer.swift; sourceTree = "<group>"; };
+		08F8B210289990B700CB5323 /* Samples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Samples; sourceTree = "<group>"; };
+		08F8B212289990CB00CB5323 /* SnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTests.swift; sourceTree = "<group>"; };
 		19465F51282F998B00BB2C97 /* CachedImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageProvider.swift; sourceTree = "<group>"; };
 		2E044E262820536800FA773B /* AutomaticEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticEngineTests.swift; sourceTree = "<group>"; };
 		2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcodedFontProvider.swift; sourceTree = "<group>"; };
@@ -597,10 +603,8 @@
 		2E8040AC27A072B8006E74CB /* LottieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LottieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E8040BE27A07343006E74CB /* HardcodedImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardcodedImageProvider.swift; sourceTree = "<group>"; };
 		2E8040BF27A07343006E74CB /* Snapshotting+presentationLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Snapshotting+presentationLayer.swift"; sourceTree = "<group>"; };
-		2E80412427A07343006E74CB /* SnapshotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotTests.swift; sourceTree = "<group>"; };
 		2E80412527A07343006E74CB /* SnapshotConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotConfiguration.swift; sourceTree = "<group>"; };
 		2E80489227A07377006E74CB /* __Snapshots__ */ = {isa = PBXFileReference; lastKnownFileType = folder; path = __Snapshots__; sourceTree = "<group>"; };
-		2E80489327A07377006E74CB /* Samples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Samples; sourceTree = "<group>"; };
 		2E9C95252822F43000677516 /* Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fill.swift; sourceTree = "<group>"; };
 		2E9C95262822F43000677516 /* Ellipse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ellipse.swift; sourceTree = "<group>"; };
 		2E9C95272822F43000677516 /* Trim.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trim.swift; sourceTree = "<group>"; };
@@ -849,9 +853,9 @@
 		2E8040BA27A07343006E74CB /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				08F8B210289990B700CB5323 /* Samples */,
 				2E80489227A07377006E74CB /* __Snapshots__ */,
-				2E80489327A07377006E74CB /* Samples */,
-				2E80412427A07343006E74CB /* SnapshotTests.swift */,
+				08F8B212289990CB00CB5323 /* SnapshotTests.swift */,
 				2E80412527A07343006E74CB /* SnapshotConfiguration.swift */,
 				2E72128227BB329C0027BC56 /* AnimationKeypathTests.swift */,
 				2E72128427BB32DB0027BC56 /* PerformanceTests.swift */,
@@ -1210,6 +1214,7 @@
 				2E9C95A32822F43100677516 /* CALayer+setupLayerHierarchy.swift */,
 				2E9C95A42822F43100677516 /* BaseAnimationLayer.swift */,
 				2E9C95A52822F43100677516 /* PreCompLayer.swift */,
+				08F8B20C2898A7B100CB5323 /* RepeaterLayer.swift */,
 			);
 			path = Layers;
 			sourceTree = "<group>";
@@ -1646,7 +1651,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E80489527A07377006E74CB /* Samples in Resources */,
+				08F8B211289990B700CB5323 /* Samples in Resources */,
 				2E80489427A07377006E74CB /* __Snapshots__ in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1747,6 +1752,7 @@
 				2E9C95E82822F43100677516 /* Merge.swift in Sources */,
 				2E9C96032822F43100677516 /* ImageLayerModel.swift in Sources */,
 				19465F52282F998B00BB2C97 /* CachedImageProvider.swift in Sources */,
+				08F8B20D2898A7B100CB5323 /* RepeaterLayer.swift in Sources */,
 				2E9C96BA2822F43100677516 /* KeypathSearchable.swift in Sources */,
 				2E9C963C2822F43100677516 /* AssetLibrary.swift in Sources */,
 				2E9C97022822F43100677516 /* PreCompLayer.swift in Sources */,
@@ -1862,9 +1868,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08F8B213289990CB00CB5323 /* SnapshotTests.swift in Sources */,
 				A1D5BAAC27C731A500777D06 /* DataURLTests.swift in Sources */,
 				2E8044AD27A07347006E74CB /* HardcodedImageProvider.swift in Sources */,
-				2E80450C27A07347006E74CB /* SnapshotTests.swift in Sources */,
 				2E09FA0627B6CEB600BA84E5 /* HardcodedFontProvider.swift in Sources */,
 				2E80450D27A07347006E74CB /* SnapshotConfiguration.swift in Sources */,
 				6DEF696E2824A76C007D640F /* BundleTests.swift in Sources */,
@@ -1957,6 +1963,7 @@
 				2E9C95E92822F43100677516 /* Merge.swift in Sources */,
 				2E9C96042822F43100677516 /* ImageLayerModel.swift in Sources */,
 				19465F53282F998B00BB2C97 /* CachedImageProvider.swift in Sources */,
+				08F8B20E2898A7B100CB5323 /* RepeaterLayer.swift in Sources */,
 				2E9C96BB2822F43100677516 /* KeypathSearchable.swift in Sources */,
 				2E9C963D2822F43100677516 /* AssetLibrary.swift in Sources */,
 				2E9C97032822F43100677516 /* PreCompLayer.swift in Sources */,
@@ -2147,6 +2154,7 @@
 				2E9C95EA2822F43100677516 /* Merge.swift in Sources */,
 				2E9C96052822F43100677516 /* ImageLayerModel.swift in Sources */,
 				19465F54282F998B00BB2C97 /* CachedImageProvider.swift in Sources */,
+				08F8B20F2898A7B100CB5323 /* RepeaterLayer.swift in Sources */,
 				2E9C96BC2822F43100677516 /* KeypathSearchable.swift in Sources */,
 				2E9C963E2822F43100677516 /* AssetLibrary.swift in Sources */,
 				2E9C97042822F43100677516 /* PreCompLayer.swift in Sources */,
