@@ -198,9 +198,25 @@ extension Keyframe {
 
 extension KeyframeGroup {
   /// Maps the values of each individual keyframe in this group
-  func map<NewValue>(_ transformation: (T) -> NewValue) -> KeyframeGroup<NewValue> {
-    KeyframeGroup<NewValue>(keyframes: ContiguousArray(keyframes.map { keyframe in
-      keyframe.withValue(transformation(keyframe.value))
+  func map<NewValue>(_ transformation: (T) throws -> NewValue) rethrows -> KeyframeGroup<NewValue> {
+    KeyframeGroup<NewValue>(keyframes: ContiguousArray(try keyframes.map { keyframe in
+      keyframe.withValue(try transformation(keyframe.value))
     }))
+  }
+}
+
+// MARK: - AnyKeyframeGroup
+
+/// A type-erased wrapper for `KeyframeGroup`s
+protocol AnyKeyframeGroup {
+  var untyped: KeyframeGroup<Any> { get }
+}
+
+// MARK: - KeyframeGroup + AnyKeyframeGroup
+
+extension KeyframeGroup: AnyKeyframeGroup {
+  /// An untyped copy of these keyframes
+  var untyped: KeyframeGroup<Any> {
+    map { $0 as Any }
   }
 }

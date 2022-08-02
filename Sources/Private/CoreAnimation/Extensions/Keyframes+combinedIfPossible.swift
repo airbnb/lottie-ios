@@ -4,10 +4,31 @@
 // MARK: - Keyframes
 
 enum Keyframes {
-  /// Combines the given `[KeyframeGroup]` of `Keyframe<T>`s
-  /// into a single `KeyframeGroup` of `Keyframe<[T]>`s
-  /// if all of the `KeyframeGroup`s have the exact same animation timing
+  /// Combines the given keyframe groups of `Keyframe<T>`s into a single `KeyframeGroup`
+  /// of `Keyframe<CombinedResult>`s if all of the `KeyframeGroup`s have the exact same animation timing
+  static func combinedIfPossible<CombinedResult>(
+    _ allGroups: AnyKeyframeGroup...,
+    makeCombinedResult: ([Any]) -> CombinedResult)
+    -> KeyframeGroup<CombinedResult>?
+  {
+    combinedIfPossible(
+      allGroups.map { $0.untyped },
+      makeCombinedResult: makeCombinedResult)
+  }
+
+  /// Combines the given `[KeyframeGroup]` of `Keyframe<T>`s into a single `KeyframeGroup`
+  /// of `Keyframe<[T]>`s if all of the `KeyframeGroup`s have the exact same animation timing
   static func combinedIfPossible<T>(_ allGroups: [KeyframeGroup<T>]) -> KeyframeGroup<[T]>? {
+    combinedIfPossible(allGroups, makeCombinedResult: { $0 })
+  }
+
+  /// Combines the given `[KeyframeGroup]` of `Keyframe<T>`s into a single `KeyframeGroup`
+  /// of `Keyframe<CombinedResult>`s if all of the `KeyframeGroup`s have the exact same animation timing
+  static func combinedIfPossible<T, CombinedResult>(
+    _ allGroups: [KeyframeGroup<T>],
+    makeCombinedResult: ([T]) -> CombinedResult)
+    -> KeyframeGroup<CombinedResult>?
+  {
     // Animations with no timing information (e.g. with just a single keyframe)
     // can be trivially combined with any other set of keyframes, so we don't need
     // to check those.
@@ -18,7 +39,7 @@ enum Keyframes {
       animatingKeyframes.allSatisfy({ $0.hasSameTimingParameters(as: animatingKeyframes[0]) })
     else { return nil }
 
-    var combinedKeyframes = ContiguousArray<Keyframe<[T]>>()
+    var combinedKeyframes = ContiguousArray<Keyframe<CombinedResult>>()
     let baseKeyframes = (animatingKeyframes.first ?? allGroups[0]).keyframes
 
     for index in baseKeyframes.indices {
@@ -30,7 +51,7 @@ enum Keyframes {
           return otherKeyframes.keyframes[index].value
         }
       }
-      combinedKeyframes.append(baseKeyframe.withValue(combinedValues))
+      combinedKeyframes.append(baseKeyframe.withValue(makeCombinedResult(combinedValues)))
     }
 
     return KeyframeGroup(keyframes: combinedKeyframes)
@@ -61,13 +82,16 @@ extension KeyframeGroup {
 }
 
 extension Keyframe {
-  /// Whether or not this keyframe has the same timing parameters as the given keyframe
-  func hasSameTimingParameters<T>(as other: Keyframe<T>) -> Bool {
+  /// Whether or not this keyframe has the same timing parameters as the given keyframe,
+  /// excluding `spatialInTangent` and `spatialOutTangent`.
+  fileprivate func hasSameTimingParameters<T>(as other: Keyframe<T>) -> Bool {
     time == other.time
       && isHold == other.isHold
       && inTangent == other.inTangent
       && outTangent == other.outTangent
-      && spatialInTangent == other.spatialInTangent
-      && spatialOutTangent == other.spatialOutTangent
+    // We intentionally don't compare spatial in/out tangents,
+    // since those values are only used in very specific cases
+    // (animating the x/y position of a layer), which aren't ever
+    // combined in this way.
   }
 }

@@ -47,7 +47,7 @@ final class ShapeLayer: BaseCompositionLayer {
 
   private func setUpRepeater(_ repeater: Repeater, context: LayerContext) throws {
     let items = shapeLayer.items.filter { !($0 is Repeater) }
-    let copyCount = Int(try repeater.copies.exactlyOneKeyframe(context: context, description: "repeater copies").value.value)
+    let copyCount = Int(try repeater.copies.exactlyOneKeyframe(context: context, description: "repeater copies").value)
 
     for index in 0..<copyCount {
       for groupLayer in try makeGroupLayers(from: items, parentGroup: nil, context: context) {
