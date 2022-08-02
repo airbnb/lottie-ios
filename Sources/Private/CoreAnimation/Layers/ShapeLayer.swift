@@ -87,10 +87,11 @@ final class GroupLayer: BaseAnimationLayer {
   private let inheritedItems: [ShapeItemLayer.Item]
 
   /// `ShapeItem`s (other than nested `Group`s) that are included in this group
-  private lazy var nonGroupItems = (group.items
-    .filter { !($0 is Group) }
-    .map { ShapeItemLayer.Item(item: $0, parentGroup: group) }
-    + inheritedItems)
+  private lazy var nonGroupItems = (
+    group.items
+      .filter { !($0 is Group) }
+      .map { ShapeItemLayer.Item(item: $0, parentGroup: group) }
+      + inheritedItems)
     .filter { !$0.item.hidden }
 
   private func setupLayerHierarchy(context: LayerContext) throws {
