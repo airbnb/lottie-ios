@@ -91,13 +91,13 @@ extension Star {
   }
 
   /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this star/polygon
-  func combinedKeyframes(context: LayerAnimationContext) throws-> KeyframeGroup<Keyframe> {
-    let combinedKeyframes = try Keyframes.combinedIfPossible(
+  func combinedKeyframes(context: LayerAnimationContext) throws -> KeyframeGroup<Keyframe> {
+    let combinedKeyframes = Keyframes.combinedIfPossible(
       position,
       outerRadius,
-      innerRadius ?? KeyframeGroup(.init(value: Vector1D(0))),
+      innerRadius ?? KeyframeGroup(Vector1D(0)),
       outerRoundness,
-      innerRoundness ?? KeyframeGroup(.init(value: Vector1D(0))),
+      innerRoundness ?? KeyframeGroup(Vector1D(0)),
       points,
       rotation)
     { untypedValues in
