@@ -45,8 +45,8 @@ extension Ellipse {
     if let combinedKeyframes = combinedKeyframes {
       return combinedKeyframes
     } else {
-      // If we weren't able to combine all of the keyframes, we have to take the timing values from one property
-      // use a static value for the other properties
+      // If we weren't able to combine all of the keyframes, we have to take the timing values
+      // from one property and use a fixed value for the other properties.
       return try size.map { sizeValue in
         Keyframe(
           size: sizeValue,
