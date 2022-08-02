@@ -7,7 +7,6 @@
 
 import Foundation
 
-/// An item that define an ellipse shape
 final class Repeater: ShapeItem {
 
   // MARK: Lifecycle

@@ -17,7 +17,6 @@ enum StarType: Int, Codable {
 
 // MARK: - Star
 
-/// An item that define an ellipse shape
 final class Star: ShapeItem {
 
   // MARK: Lifecycle

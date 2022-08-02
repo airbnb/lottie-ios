@@ -17,7 +17,6 @@ enum FillRule: Int, Codable {
 
 // MARK: - Fill
 
-/// An item that defines a fill render
 final class Fill: ShapeItem {
 
   // MARK: Lifecycle

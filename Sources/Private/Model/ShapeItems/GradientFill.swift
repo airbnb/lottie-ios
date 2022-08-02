@@ -17,7 +17,6 @@ enum GradientType: Int, Codable {
 
 // MARK: - GradientFill
 
-/// An item that define a gradient fill
 final class GradientFill: ShapeItem {
 
   // MARK: Lifecycle

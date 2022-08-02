@@ -27,7 +27,6 @@ enum LineJoin: Int, Codable {
 
 // MARK: - GradientStroke
 
-/// An item that define an ellipse shape
 final class GradientStroke: ShapeItem {
 
   // MARK: Lifecycle
