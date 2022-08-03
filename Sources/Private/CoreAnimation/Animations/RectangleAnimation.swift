@@ -16,7 +16,12 @@ extension CAShapeLayer {
       for: .path,
       keyframes: try rectangle.combinedKeyframes(context: context).keyframes,
       value: { keyframe in
-        BezierPath.rectangle(position: keyframe.position.pointValue, size: keyframe.size.sizeValue, cornerRadius: keyframe.cornerRadius.cgFloatValue, direction: rectangle.direction).cgPath()
+        BezierPath.rectangle(
+          position: keyframe.position.pointValue,
+          size: keyframe.size.sizeValue,
+          cornerRadius: keyframe.cornerRadius.cgFloatValue,
+          direction: rectangle.direction)
+          .cgPath()
           .duplicated(times: pathMultiplier)
       },
       context: context)
