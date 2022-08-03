@@ -99,17 +99,8 @@ extension Star {
       outerRoundness,
       innerRoundness ?? KeyframeGroup(Vector1D(0)),
       points,
-      rotation)
-    { untypedValues in
-      Keyframe(
-        position: untypedValues[0] as! Vector3D,
-        outerRadius: untypedValues[1] as! Vector1D,
-        innerRadius: untypedValues[2] as! Vector1D,
-        outerRoundness: untypedValues[3] as! Vector1D,
-        innerRoundness: untypedValues[4] as! Vector1D,
-        points: untypedValues[5] as! Vector1D,
-        rotation: untypedValues[6] as! Vector1D)
-    }
+      rotation,
+      makeCombinedResult: Star.Keyframe.init)
 
     if let combinedKeyframes = combinedKeyframes {
       return combinedKeyframes

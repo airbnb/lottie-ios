@@ -38,12 +38,9 @@ extension Rectangle {
 
   /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this Rectangle
   func combinedKeyframes(context: LayerAnimationContext) throws-> KeyframeGroup<Rectangle.Keyframe> {
-    let combinedKeyframes = Keyframes.combinedIfPossible(size, position, cornerRadius) { untypedValues in
-      Keyframe(
-        size: untypedValues[0] as! Vector3D,
-        position: untypedValues[1] as! Vector3D,
-        cornerRadius: untypedValues[2] as! Vector1D)
-    }
+    let combinedKeyframes = Keyframes.combinedIfPossible(
+      size, position, cornerRadius,
+      makeCombinedResult: Rectangle.Keyframe.init)
 
     if let combinedKeyframes = combinedKeyframes {
       return combinedKeyframes

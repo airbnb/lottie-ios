@@ -36,11 +36,9 @@ extension Ellipse {
 
   /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this Ellipse
   func combinedKeyframes(context: LayerAnimationContext) throws-> KeyframeGroup<Ellipse.Keyframe> {
-    let combinedKeyframes = Keyframes.combinedIfPossible(size, position) { untypedValues in
-      Keyframe(
-        size: untypedValues[0] as! Vector3D,
-        position: untypedValues[1] as! Vector3D)
-    }
+    let combinedKeyframes = Keyframes.combinedIfPossible(
+      size, position,
+      makeCombinedResult: Ellipse.Keyframe.init)
 
     if let combinedKeyframes = combinedKeyframes {
       return combinedKeyframes
