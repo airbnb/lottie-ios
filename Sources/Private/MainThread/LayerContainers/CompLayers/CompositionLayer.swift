@@ -17,7 +17,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
 
   init(layer: LayerModel, size: CGSize) {
     transformNode = LayerTransformNode(transform: layer.transform)
-    if let masks = layer.masks {
+    if let masks = layer.masks?.filter({ $0.mode != .none }), !masks.isEmpty {
       maskLayer = MaskContainerLayer(masks: masks)
     } else {
       maskLayer = nil
