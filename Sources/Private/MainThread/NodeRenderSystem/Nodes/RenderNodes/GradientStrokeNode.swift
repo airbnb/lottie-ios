@@ -140,7 +140,7 @@ final class GradientStrokeNode: AnimatorNode, RenderNode {
 
     /// Get dash lengths
     let dashLengths = strokeProperties.dashPattern.value.map { $0.cgFloatValue }
-    if dashLengths.count > 0 {
+    if dashLengths.count > 0, !dashLengths.allSatisfy({ $0.isZero }) {
       strokeRender.strokeRender.dashPhase = strokeProperties.dashPhase.value.cgFloatValue
       strokeRender.strokeRender.dashLengths = dashLengths
     } else {

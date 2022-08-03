@@ -59,6 +59,9 @@ extension CAShapeLayer {
         try KeyframeGroup(keyframes: $0)
           .exactlyOneKeyframe(context: context, description: "stroke dashPattern").value.cgFloatValue as NSNumber
       }
+      if lineDashPattern?.allSatisfy({ $0.floatValue.isZero }) == true {
+        lineDashPattern = nil
+      }
 
       try addAnimation(
         for: .lineDashPhase,
