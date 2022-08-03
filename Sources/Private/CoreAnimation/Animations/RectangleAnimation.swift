@@ -14,18 +14,45 @@ extension CAShapeLayer {
   {
     try addAnimation(
       for: .path,
-      keyframes: rectangle.size.keyframes,
-      value: { sizeKeyframe in
+      keyframes: try rectangle.combinedKeyframes(context: context).keyframes,
+      value: { keyframe in
         BezierPath.rectangle(
-          position: try rectangle.position
-            .exactlyOneKeyframe(context: context, description: "rectangle position").value.pointValue,
-          size: sizeKeyframe.sizeValue,
-          cornerRadius: try rectangle.cornerRadius
-            .exactlyOneKeyframe(context: context, description: "rectangle cornerRadius").value.cgFloatValue,
+          position: keyframe.position.pointValue,
+          size: keyframe.size.sizeValue,
+          cornerRadius: keyframe.cornerRadius.cgFloatValue,
           direction: rectangle.direction)
           .cgPath()
           .duplicated(times: pathMultiplier)
       },
       context: context)
+  }
+}
+
+extension Rectangle {
+  /// Data that represents how to render a rectangle at a specific point in time
+  struct Keyframe {
+    let size: Vector3D
+    let position: Vector3D
+    let cornerRadius: Vector1D
+  }
+
+  /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this Rectangle
+  func combinedKeyframes(context: LayerAnimationContext) throws-> KeyframeGroup<Rectangle.Keyframe> {
+    let combinedKeyframes = Keyframes.combinedIfPossible(
+      size, position, cornerRadius,
+      makeCombinedResult: Rectangle.Keyframe.init)
+
+    if let combinedKeyframes = combinedKeyframes {
+      return combinedKeyframes
+    } else {
+      // If we weren't able to combine all of the keyframes, we have to take the timing values
+      // from one property and use a fixed value for the other properties.
+      return try size.map { sizeValue in
+        Keyframe(
+          size: sizeValue,
+          position: try position.exactlyOneKeyframe(context: context, description: "rectangle position"),
+          cornerRadius: try cornerRadius.exactlyOneKeyframe(context: context, description: "rectangle cornerRadius"))
+      }
+    }
   }
 }

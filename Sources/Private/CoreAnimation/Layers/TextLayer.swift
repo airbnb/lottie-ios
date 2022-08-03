@@ -41,7 +41,7 @@ final class TextLayer: BaseCompositionLayer {
     // Instead, we use the same `CoreTextRenderLayer` (with a custom `draw` implementation)
     // used by the Main Thread rendering engine. This means the Core Animation engine can't
     // _animate_ text properties, but it can display static text without any issues.
-    let text = try textLayerModel.text.exactlyOneKeyframe(context: context, description: "text layer text").value
+    let text = try textLayerModel.text.exactlyOneKeyframe(context: context, description: "text layer text")
 
     // The Core Animation engine doesn't currently support `TextAnimator`s.
     //  - We could add support for animating the transform-related properties without much trouble.

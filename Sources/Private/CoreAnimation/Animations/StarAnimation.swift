@@ -36,25 +36,16 @@ extension CAShapeLayer {
   {
     try addAnimation(
       for: .path,
-      keyframes: star.position.keyframes,
-      value: { position in
-        // We can only use one set of keyframes to animate a given CALayer keypath,
-        // so we currently animate `position` and ignore any other keyframes.
-        // TODO: Is there a way to support this properly?
+      keyframes: try star.combinedKeyframes(context: context).keyframes,
+      value: { keyframe in
         BezierPath.star(
-          position: position.pointValue,
-          outerRadius: try star.outerRadius
-            .exactlyOneKeyframe(context: context, description: "outerRadius").value.cgFloatValue,
-          innerRadius: try star.innerRadius?
-            .exactlyOneKeyframe(context: context, description: "innerRadius").value.cgFloatValue ?? 0,
-          outerRoundedness: try star.outerRoundness
-            .exactlyOneKeyframe(context: context, description: "outerRoundness").value.cgFloatValue,
-          innerRoundedness: try star.innerRoundness?
-            .exactlyOneKeyframe(context: context, description: "innerRoundness").value.cgFloatValue ?? 0,
-          numberOfPoints: try star.points
-            .exactlyOneKeyframe(context: context, description: "points").value.cgFloatValue,
-          rotation: try star.rotation
-            .exactlyOneKeyframe(context: context, description: "rotation").value.cgFloatValue,
+          position: keyframe.position.pointValue,
+          outerRadius: keyframe.outerRadius.cgFloatValue,
+          innerRadius: keyframe.innerRadius.cgFloatValue,
+          outerRoundedness: keyframe.outerRoundness.cgFloatValue,
+          innerRoundedness: keyframe.innerRoundness.cgFloatValue,
+          numberOfPoints: keyframe.points.cgFloatValue,
+          rotation: keyframe.rotation.cgFloatValue,
           direction: star.direction)
           .cgPath()
           .duplicated(times: pathMultiplier)
@@ -71,25 +62,63 @@ extension CAShapeLayer {
   {
     try addAnimation(
       for: .path,
-      keyframes: star.position.keyframes,
-      value: { position in
-        // We can only use one set of keyframes to animate a given CALayer keypath,
-        // so we currently animate `position` and ignore any other keyframes.
-        // TODO: Is there a way to support this properly?
+      keyframes: try star.combinedKeyframes(context: context).keyframes,
+      value: { keyframe in
         BezierPath.polygon(
-          position: position.pointValue,
-          numberOfPoints: try star.points
-            .exactlyOneKeyframe(context: context, description: "numberOfPoints").value.cgFloatValue,
-          outerRadius: try star.outerRadius
-            .exactlyOneKeyframe(context: context, description: "outerRadius").value.cgFloatValue,
-          outerRoundedness: try star.outerRoundness
-            .exactlyOneKeyframe(context: context, description: "outerRoundedness").value.cgFloatValue,
-          rotation: try star.rotation
-            .exactlyOneKeyframe(context: context, description: "rotation").value.cgFloatValue,
+          position: keyframe.position.pointValue,
+          numberOfPoints: keyframe.points.cgFloatValue,
+          outerRadius: keyframe.outerRadius.cgFloatValue,
+          outerRoundedness: keyframe.outerRoundness.cgFloatValue,
+          rotation: keyframe.rotation.cgFloatValue,
           direction: star.direction)
           .cgPath()
           .duplicated(times: pathMultiplier)
       },
       context: context)
+  }
+}
+
+extension Star {
+  /// Data that represents how to render a star at a specific point in time
+  struct Keyframe {
+    let position: Vector3D
+    let outerRadius: Vector1D
+    let innerRadius: Vector1D
+    let outerRoundness: Vector1D
+    let innerRoundness: Vector1D
+    let points: Vector1D
+    let rotation: Vector1D
+  }
+
+  /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this star/polygon
+  func combinedKeyframes(context: LayerAnimationContext) throws -> KeyframeGroup<Keyframe> {
+    let combinedKeyframes = Keyframes.combinedIfPossible(
+      position,
+      outerRadius,
+      innerRadius ?? KeyframeGroup(Vector1D(0)),
+      outerRoundness,
+      innerRoundness ?? KeyframeGroup(Vector1D(0)),
+      points,
+      rotation,
+      makeCombinedResult: Star.Keyframe.init)
+
+    if let combinedKeyframes = combinedKeyframes {
+      return combinedKeyframes
+    } else {
+      // If we weren't able to combine all of the keyframes, we have to take the timing values
+      // from one property and use a fixed value for the other properties.
+      return try position.map { positionValue in
+        Keyframe(
+          position: positionValue,
+          outerRadius: try outerRadius.exactlyOneKeyframe(context: context, description: "star outerRadius"),
+          innerRadius: try innerRadius?.exactlyOneKeyframe(context: context, description: "star innerRadius")
+            ?? Vector1D(0),
+          outerRoundness: try outerRoundness.exactlyOneKeyframe(context: context, description: "star outerRoundness"),
+          innerRoundness: try innerRoundness?.exactlyOneKeyframe(context: context, description: "star innerRoundness")
+            ?? Vector1D(0),
+          points: try points.exactlyOneKeyframe(context: context, description: "star points"),
+          rotation: try rotation.exactlyOneKeyframe(context: context, description: "star rotation"))
+      }
+    }
   }
 }

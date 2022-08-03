@@ -23,7 +23,7 @@ extension KeyframeGroup {
     fileID _: StaticString = #fileID,
     line _: UInt = #line)
     throws
-    -> Keyframe<T>
+    -> T
   {
     try context.compatibilityAssert(
       keyframes.count == 1,
@@ -32,6 +32,6 @@ extension KeyframeGroup {
       for \(description) values (due to limitations of Core Animation `CAKeyframeAnimation`s).
       """)
 
-    return keyframes[0]
+    return keyframes[0].value
   }
 }

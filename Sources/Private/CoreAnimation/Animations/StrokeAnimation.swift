@@ -57,7 +57,7 @@ extension CAShapeLayer {
     if let (dashPattern, dashPhase) = stroke.dashPattern?.shapeLayerConfiguration {
       lineDashPattern = try dashPattern.map {
         try KeyframeGroup(keyframes: $0)
-          .exactlyOneKeyframe(context: context, description: "stroke dashPattern").value.cgFloatValue as NSNumber
+          .exactlyOneKeyframe(context: context, description: "stroke dashPattern").cgFloatValue as NSNumber
       }
       if lineDashPattern?.allSatisfy({ $0.floatValue.isZero }) == true {
         lineDashPattern = nil
