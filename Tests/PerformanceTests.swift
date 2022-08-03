@@ -50,7 +50,7 @@ final class PerformanceTests: XCTestCase {
 
     // The automatic engine option should have the same performance as the core animation engine,
     // when rendering an animation supported by the CA engine.
-    XCTAssertEqual(ratio, 1.0, accuracy: 0.2)
+    XCTAssertEqual(ratio, 1.0, accuracy: 0.3)
   }
 
   func testAnimationViewScrubbing_simpleAnimation() {
@@ -66,7 +66,7 @@ final class PerformanceTests: XCTestCase {
   func testParsing_simpleAnimation() throws {
     let data = try XCTUnwrap(Bundle.module.getAnimationData("loading_dots_1", subdirectory: "Samples/LottieFiles"))
     let ratio = try compareDeserializationPerformance(data: data, iterations: 2000)
-    XCTAssertEqual(ratio, 2, accuracy: 0.55)
+    XCTAssertEqual(ratio, 2, accuracy: 0.65)
   }
 
   func testParsing_complexAnimation() throws {
