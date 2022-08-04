@@ -53,6 +53,7 @@ final class Fill: ShapeItem {
   /// The color keyframes for the fill
   let color: KeyframeGroup<Color>
 
+  /// The fill rule to use when filling a path
   let fillRule: FillRule
 
   override func encode(to encoder: Encoder) throws {

@@ -227,6 +227,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
       pathMultiplier: 1)
 
     if let (gradientFill, context) = otherItems.first(GradientFill.self, context: context) {
+      layers.shapeMaskLayer.fillRule = gradientFill.fillRule.caFillRule
       try layers.gradientColorLayer.addGradientAnimations(for: gradientFill, type: .rgb, context: context)
       try layers.gradientAlphaLayer?.addGradientAnimations(for: gradientFill, type: .alpha, context: context)
     }
