@@ -124,6 +124,11 @@ final class GroupLayer: BaseAnimationLayer {
     // Create `ShapeItemLayer`s for each subgroup of shapes that should be rendered as a single unit
     //  - These groups are listed from front-to-back, so we have to add the sublayers in reverse order
     for shapeRenderGroup in nonGroupItems.shapeRenderGroups.reversed() {
+      // When there are multiple path-drawing items, they're supposed to be rendered
+      // in a single `CAShapeLayer` (instead of rendering them in separate layers) so
+      // `CAShapeLayerFillRule.evenOdd` can be applied correctly if the paths overlap.
+      // Since a `CAShapeLayer` only supports animating a single `CGPath` from a single `KeyframeGroup<BezierPath>`,
+      // this requires combining all of the path-drawing items into a single set of keyframes.
       if
         shapeRenderGroup.pathItems.count > 1,
         // We currently only support this codepath for `Shape` items that directly contain bezier path keyframes.
@@ -139,10 +144,6 @@ final class GroupLayer: BaseAnimationLayer {
         // If all of the path-drawing `ShapeItem`s have keyframes with the same timing information,
         // we can combine the `[KeyframeGroup<BezierPath>]` (which have to animate in separate layers)
         // into a single `KeyframeGroup<[BezierPath]>`, which can be combined into a single CGPath animation.
-        //
-        // This is how Groups with multiple path-drawing items are supposed to be rendered,
-        // because combining multiple paths into a single `CGPath` (instead of rendering them in separate layers)
-        // allows `CAShapeLayerFillRule.evenOdd` to be applied if the paths overlap.
         if let combinedShapeKeyframes = Keyframes.combinedIfPossible(allPathKeyframes) {
           combinedShape = CombinedShapeItem(shapes: combinedShapeKeyframes, name: group.name)
         }
