@@ -29,6 +29,7 @@ final class GradientFill: ShapeItem {
     gradientType = try container.decode(GradientType.self, forKey: .gradientType)
     highlightLength = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .highlightLength)
     highlightAngle = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .highlightAngle)
+    fillRule = try container.decodeIfPresent(FillRule.self, forKey: .fillRule) ?? .nonZeroWinding
     let colorsContainer = try container.nestedContainer(keyedBy: GradientDataKeys.self, forKey: .colors)
     colors = try colorsContainer.decode(KeyframeGroup<[Double]>.self, forKey: .colors)
     numberOfColors = try colorsContainer.decode(Int.self, forKey: .numberOfColors)
@@ -61,6 +62,14 @@ final class GradientFill: ShapeItem {
     let nestedColorsDictionary: [String: Any] = try colorsDictionary.value(for: GradientDataKeys.colors)
     colors = try KeyframeGroup<[Double]>(dictionary: nestedColorsDictionary)
     numberOfColors = try colorsDictionary.value(for: GradientDataKeys.numberOfColors)
+    if
+      let fillRuleRawValue = dictionary[CodingKeys.fillRule.rawValue] as? Int,
+      let fillRule = FillRule(rawValue: fillRuleRawValue)
+    {
+      self.fillRule = fillRule
+    } else {
+      fillRule = .nonZeroWinding
+    }
     try super.init(dictionary: dictionary)
   }
 
@@ -90,6 +99,9 @@ final class GradientFill: ShapeItem {
   /// The Colors of the gradient.
   let colors: KeyframeGroup<[Double]>
 
+  /// The fill rule to use when filling a path
+  let fillRule: FillRule
+
   override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
@@ -99,6 +111,7 @@ final class GradientFill: ShapeItem {
     try container.encode(gradientType, forKey: .gradientType)
     try container.encodeIfPresent(highlightLength, forKey: .highlightLength)
     try container.encodeIfPresent(highlightAngle, forKey: .highlightAngle)
+    try container.encodeIfPresent(fillRule, forKey: .fillRule)
     var colorsContainer = container.nestedContainer(keyedBy: GradientDataKeys.self, forKey: .colors)
     try colorsContainer.encode(numberOfColors, forKey: .numberOfColors)
     try colorsContainer.encode(colors, forKey: .colors)
@@ -114,6 +127,7 @@ final class GradientFill: ShapeItem {
     case highlightLength = "h"
     case highlightAngle = "a"
     case colors = "g"
+    case fillRule = "r"
   }
 
   private enum GradientDataKeys: String, CodingKey {
