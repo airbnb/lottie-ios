@@ -149,7 +149,7 @@ extension Trim {
     return (
       strokeStart: adjustedStrokeStart,
       strokeEnd: adjustedStrokeEnd,
-      pathMultiplier: Int(maximumStrokeMultiplier - minimumStrokeMultiplier))
+      pathMultiplier: Int(abs(maximumStrokeMultiplier) + abs(minimumStrokeMultiplier)))
   }
 
   // MARK: Private
