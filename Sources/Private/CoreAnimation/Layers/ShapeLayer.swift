@@ -124,31 +124,36 @@ final class GroupLayer: BaseAnimationLayer {
     // Create `ShapeItemLayer`s for each subgroup of shapes that should be rendered as a single unit
     //  - These groups are listed from front-to-back, so we have to add the sublayers in reverse order
     for shapeRenderGroup in nonGroupItems.shapeRenderGroups.reversed() {
-      // If all of the path-drawing `ShapeItem`s have keyframes with the same timing information,
-      // we can combine the `[KeyframeGroup<BezierPath>]` (which have to animate in separate layers)
-      // into a single `KeyframeGroup<[BezierPath]>`, which can be combined into a single CGPath animation.
-      //
-      // This is how Groups with multiple path-drawing items are supposed to be rendered,
-      // because combining multiple paths into a single `CGPath` (instead of rendering them in separate layers)
-      // allows `CAShapeLayerFillRule.evenOdd` to be applied if the paths overlap. We just can't do this
-      // in all cases, due to limitations of Core Animation.
-      //
-      // As a fall back when this is not possible, we render each shape in its own `CAShapeLayer`,
-      // which causes the `fillRule` to be applied incorrectly in cases where the paths overlap.
-      // We can't really detect when this happens, so this is a case where `RenderingEngineMode.automatic`
-      // can behave incorrectly. In the future we could fix this by precomputing the full combined CGPath for each
-      // individual frame in the animation (like we do for some trim animations as of #1612).
+      // When there are multiple path-drawing items, they're supposed to be rendered
+      // in a single `CAShapeLayer` (instead of rendering them in separate layers) so
+      // `CAShapeLayerFillRule.evenOdd` can be applied correctly if the paths overlap.
+      // Since a `CAShapeLayer` only supports animating a single `CGPath` from a single `KeyframeGroup<BezierPath>`,
+      // this requires combining all of the path-drawing items into a single set of keyframes.
       if
         shapeRenderGroup.pathItems.count > 1,
-        let combinedShapeKeyframes = Keyframes.combinedIfPossible(
-          shapeRenderGroup.pathItems.map { ($0.item as? Shape)?.path }),
+        // We currently only support this codepath for `Shape` items that directly contain bezier path keyframes.
+        // We could also support this for other path types like rectangles, ellipses, and polygons with more work.
+        shapeRenderGroup.pathItems.allSatisfy({ $0.item is Shape }),
         // `Trim`s are currently only applied correctly using individual `ShapeItemLayer`s,
         // because each path has to be trimmed separately.
         !shapeRenderGroup.otherItems.contains(where: { $0.item is Trim })
       {
-        let combinedShape = CombinedShapeItem(
-          shapes: combinedShapeKeyframes,
-          name: group.name)
+        let allPathKeyframes = shapeRenderGroup.pathItems.compactMap { ($0.item as? Shape)?.path }
+        let combinedShape: CombinedShapeItem
+
+        // If all of the path-drawing `ShapeItem`s have keyframes with the same timing information,
+        // we can combine the `[KeyframeGroup<BezierPath>]` (which have to animate in separate layers)
+        // into a single `KeyframeGroup<[BezierPath]>`, which can be combined into a single CGPath animation.
+        if let combinedShapeKeyframes = Keyframes.combinedIfPossible(allPathKeyframes) {
+          combinedShape = CombinedShapeItem(shapes: combinedShapeKeyframes, name: group.name)
+        }
+
+        // Otherwise, in order for the path fills to be rendered correctly, we have to manually
+        // interpolate the path for each shape at each frame ahead of time so we can combine them
+        // into a single set of bezier path keyframes.
+        else {
+          combinedShape = .manuallyInterpolating(shapes: allPathKeyframes, name: group.name, context: context)
+        }
 
         let sublayer = try ShapeItemLayer(
           shape: ShapeItemLayer.Item(item: combinedShape, parentGroup: group),
@@ -159,7 +164,8 @@ final class GroupLayer: BaseAnimationLayer {
       }
 
       // Otherwise, if each `ShapeItem` that draws a `GGPath` animates independently,
-      // we have to create a separate `ShapeItemLayer` for each one.
+      // we have to create a separate `ShapeItemLayer` for each one. This may render
+      // incorrectly if there are multiple paths that overlap with each other.
       else {
         for pathDrawingItem in shapeRenderGroup.pathItems {
           let sublayer = try ShapeItemLayer(

@@ -51,3 +51,31 @@ final class CombinedShapeItem: ShapeItem {
   let shapes: KeyframeGroup<[BezierPath]>
 
 }
+
+extension CombinedShapeItem {
+  /// Manually combines the given shape keyframes by manually interpolating at each frame
+  static func manuallyInterpolating(
+    shapes: [KeyframeGroup<BezierPath>],
+    name: String,
+    context: LayerContext)
+    -> CombinedShapeItem
+  {
+    let animationTimeRange = Int(context.animation.startFrame)...Int(context.animation.endFrame)
+
+    let interpolators = shapes.map { shape in
+      KeyframeInterpolator(keyframes: shape.keyframes)
+    }
+
+    let interpolatedKeyframes = animationTimeRange.map { frame in
+      Keyframe(
+        value: interpolators.compactMap { interpolator in
+          interpolator.value(frame: AnimationFrameTime(frame)) as? BezierPath
+        },
+        time: AnimationFrameTime(frame))
+    }
+
+    return CombinedShapeItem(
+      shapes: KeyframeGroup(keyframes: ContiguousArray(interpolatedKeyframes)),
+      name: name)
+  }
+}
