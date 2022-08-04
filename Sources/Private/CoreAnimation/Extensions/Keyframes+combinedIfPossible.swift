@@ -78,15 +78,6 @@ enum Keyframes {
       })
   }
 
-  /// Combines the given `[KeyframeGroup?]` of `Keyframe<T>`s
-  /// into a single `KeyframeGroup` of `Keyframe<[T]>`s
-  /// if all of the `KeyframeGroup`s have the exact same animation timing
-  static func combinedIfPossible<T>(_ groups: [KeyframeGroup<T>?]) -> KeyframeGroup<[T]>? {
-    let nonOptionalGroups = groups.compactMap { $0 }
-    guard nonOptionalGroups.count == groups.count else { return nil }
-    return combinedIfPossible(nonOptionalGroups)
-  }
-
   // MARK: Private
 
   /// Combines the given `[KeyframeGroup]` of `Keyframe<T>`s into a single `KeyframeGroup`
