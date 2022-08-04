@@ -60,12 +60,18 @@ extension CombinedShapeItem {
     context: LayerContext)
     -> CombinedShapeItem
   {
-    let interpolators = shapes.map { KeyframeInterpolator<BezierPath>(keyframes: $0.keyframes) }
-
     let animationTimeRange = Int(context.animation.startFrame)...Int(context.animation.endFrame)
-    let interpolatedKeyframes: [Keyframe<[BezierPath]>] = animationTimeRange.map { frame in
-      let paths = interpolators.compactMap { $0.value(frame: AnimationFrameTime(frame)) as? BezierPath }
-      return Keyframe(value: paths, time: AnimationFrameTime(frame))
+
+    let interpolators = shapes.map { shape in
+      KeyframeInterpolator(keyframes: shape.keyframes)
+    }
+
+    let interpolatedKeyframes = animationTimeRange.map { frame in
+      Keyframe(
+        value: interpolators.compactMap { interpolator in
+          interpolator.value(frame: AnimationFrameTime(frame)) as? BezierPath
+        },
+        time: AnimationFrameTime(frame))
     }
 
     return CombinedShapeItem(

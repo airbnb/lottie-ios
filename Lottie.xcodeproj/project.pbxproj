@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08EF21DC289C643B0097EA47 /* KeyframeInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF21DB289C643B0097EA47 /* KeyframeInterpolator.swift */; };
+		08EF21DD289C643B0097EA47 /* KeyframeInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF21DB289C643B0097EA47 /* KeyframeInterpolator.swift */; };
+		08EF21DE289C643B0097EA47 /* KeyframeInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF21DB289C643B0097EA47 /* KeyframeInterpolator.swift */; };
 		08F8B20D2898A7B100CB5323 /* RepeaterLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F8B20C2898A7B100CB5323 /* RepeaterLayer.swift */; };
 		08F8B20E2898A7B100CB5323 /* RepeaterLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F8B20C2898A7B100CB5323 /* RepeaterLayer.swift */; };
 		08F8B20F2898A7B100CB5323 /* RepeaterLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F8B20C2898A7B100CB5323 /* RepeaterLayer.swift */; };
@@ -265,9 +268,6 @@
 		2E9C96BD2822F43100677516 /* AnyValueContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95882822F43000677516 /* AnyValueContainer.swift */; };
 		2E9C96BE2822F43100677516 /* AnyValueContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95882822F43000677516 /* AnyValueContainer.swift */; };
 		2E9C96BF2822F43100677516 /* AnyValueContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95882822F43000677516 /* AnyValueContainer.swift */; };
-		2E9C96C02822F43100677516 /* KeyframeInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C958A2822F43000677516 /* KeyframeInterpolator.swift */; };
-		2E9C96C12822F43100677516 /* KeyframeInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C958A2822F43000677516 /* KeyframeInterpolator.swift */; };
-		2E9C96C22822F43100677516 /* KeyframeInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C958A2822F43000677516 /* KeyframeInterpolator.swift */; };
 		2E9C96C32822F43100677516 /* SingleValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C958B2822F43000677516 /* SingleValueProvider.swift */; };
 		2E9C96C42822F43100677516 /* SingleValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C958B2822F43000677516 /* SingleValueProvider.swift */; };
 		2E9C96C52822F43100677516 /* SingleValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C958B2822F43000677516 /* SingleValueProvider.swift */; };
@@ -590,6 +590,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08EF21DB289C643B0097EA47 /* KeyframeInterpolator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyframeInterpolator.swift; sourceTree = "<group>"; };
 		08F8B20C2898A7B100CB5323 /* RepeaterLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeaterLayer.swift; sourceTree = "<group>"; };
 		08F8B210289990B700CB5323 /* Samples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Samples; sourceTree = "<group>"; };
 		08F8B212289990CB00CB5323 /* SnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTests.swift; sourceTree = "<group>"; };
@@ -684,7 +685,6 @@
 		2E9C95862822F43000677516 /* NodePropertyMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodePropertyMap.swift; sourceTree = "<group>"; };
 		2E9C95872822F43000677516 /* KeypathSearchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypathSearchable.swift; sourceTree = "<group>"; };
 		2E9C95882822F43000677516 /* AnyValueContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyValueContainer.swift; sourceTree = "<group>"; };
-		2E9C958A2822F43000677516 /* KeyframeInterpolator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyframeInterpolator.swift; sourceTree = "<group>"; };
 		2E9C958B2822F43000677516 /* SingleValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleValueProvider.swift; sourceTree = "<group>"; };
 		2E9C958C2822F43000677516 /* GroupInterpolator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInterpolator.swift; sourceTree = "<group>"; };
 		2E9C958E2822F43000677516 /* ItemsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsExtension.swift; sourceTree = "<group>"; };
@@ -1150,7 +1150,6 @@
 		2E9C95892822F43000677516 /* ValueProviders */ = {
 			isa = PBXGroup;
 			children = (
-				2E9C958A2822F43000677516 /* KeyframeInterpolator.swift */,
 				2E9C958B2822F43000677516 /* SingleValueProvider.swift */,
 				2E9C958C2822F43000677516 /* GroupInterpolator.swift */,
 			);
@@ -1307,6 +1306,7 @@
 				2E9C95CF2822F43100677516 /* InterpolatableExtensions.swift */,
 				2E9C95D02822F43100677516 /* KeyframeExtensions.swift */,
 				7E48BF5F2860D4FA00A39198 /* KeyframeGroup+Extensions.swift */,
+				08EF21DB289C643B0097EA47 /* KeyframeInterpolator.swift */,
 			);
 			path = Interpolatable;
 			sourceTree = "<group>";
@@ -1697,6 +1697,7 @@
 				2EAF5AE927A0798700E00531 /* AnimationTextProvider.swift in Sources */,
 				2E9C96662822F43100677516 /* LayerTransformNode.swift in Sources */,
 				2E9C97412822F43100677516 /* TestHelpers.swift in Sources */,
+				08EF21DC289C643B0097EA47 /* KeyframeInterpolator.swift in Sources */,
 				2E9C96152822F43100677516 /* Transform.swift in Sources */,
 				2E9C97472822F43100677516 /* CGFloatExtensions.swift in Sources */,
 				2EAF5AC527A0798700E00531 /* UIColorExtension.swift in Sources */,
@@ -1711,7 +1712,6 @@
 				2E9C965D2822F43100677516 /* MainThreadAnimationLayer.swift in Sources */,
 				2E9C964E2822F43100677516 /* SolidCompositionLayer.swift in Sources */,
 				2E9C963F2822F43100677516 /* Asset.swift in Sources */,
-				2E9C96C02822F43100677516 /* KeyframeInterpolator.swift in Sources */,
 				2E9C96F92822F43100677516 /* BaseCompositionLayer.swift in Sources */,
 				2EAF5A9B27A0798700E00531 /* BundleImageProvider.macOS.swift in Sources */,
 				2E9C969F2822F43100677516 /* TextAnimatorNode.swift in Sources */,
@@ -1908,6 +1908,7 @@
 				2EAF5AEA27A0798700E00531 /* AnimationTextProvider.swift in Sources */,
 				2E9C96672822F43100677516 /* LayerTransformNode.swift in Sources */,
 				2E9C97422822F43100677516 /* TestHelpers.swift in Sources */,
+				08EF21DD289C643B0097EA47 /* KeyframeInterpolator.swift in Sources */,
 				2E9C96162822F43100677516 /* Transform.swift in Sources */,
 				2E9C97482822F43100677516 /* CGFloatExtensions.swift in Sources */,
 				2EAF5AC627A0798700E00531 /* UIColorExtension.swift in Sources */,
@@ -1922,7 +1923,6 @@
 				2E9C965E2822F43100677516 /* MainThreadAnimationLayer.swift in Sources */,
 				2E9C964F2822F43100677516 /* SolidCompositionLayer.swift in Sources */,
 				2E9C96402822F43100677516 /* Asset.swift in Sources */,
-				2E9C96C12822F43100677516 /* KeyframeInterpolator.swift in Sources */,
 				2E9C96FA2822F43100677516 /* BaseCompositionLayer.swift in Sources */,
 				2EAF5A9C27A0798700E00531 /* BundleImageProvider.macOS.swift in Sources */,
 				2E9C96A02822F43100677516 /* TextAnimatorNode.swift in Sources */,
@@ -2099,6 +2099,7 @@
 				2EAF5AEB27A0798700E00531 /* AnimationTextProvider.swift in Sources */,
 				2E9C96682822F43100677516 /* LayerTransformNode.swift in Sources */,
 				2E9C97432822F43100677516 /* TestHelpers.swift in Sources */,
+				08EF21DE289C643B0097EA47 /* KeyframeInterpolator.swift in Sources */,
 				2E9C96172822F43100677516 /* Transform.swift in Sources */,
 				2E9C97492822F43100677516 /* CGFloatExtensions.swift in Sources */,
 				2EAF5AC727A0798700E00531 /* UIColorExtension.swift in Sources */,
@@ -2113,7 +2114,6 @@
 				2E9C965F2822F43100677516 /* MainThreadAnimationLayer.swift in Sources */,
 				2E9C96502822F43100677516 /* SolidCompositionLayer.swift in Sources */,
 				2E9C96412822F43100677516 /* Asset.swift in Sources */,
-				2E9C96C22822F43100677516 /* KeyframeInterpolator.swift in Sources */,
 				2E9C96FB2822F43100677516 /* BaseCompositionLayer.swift in Sources */,
 				2EAF5A9D27A0798700E00531 /* BundleImageProvider.macOS.swift in Sources */,
 				2E9C96A12822F43100677516 /* TextAnimatorNode.swift in Sources */,
