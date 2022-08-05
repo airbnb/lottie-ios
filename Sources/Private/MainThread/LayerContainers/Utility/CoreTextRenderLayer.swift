@@ -333,11 +333,16 @@ extension CGContext {
 
   fileprivate func adjustWithLineOrigins(in frame: CTFrame, with font: CTFont?) {
     guard let font = font else { return }
-    var o = [CGPoint](repeating: .zero, count: 1)
+
     let count = CFArrayGetCount(CTFrameGetLines(frame))
-    if count > 0 {
-      CTFrameGetLineOrigins(frame, CFRange(location: count - 1, length: 1), &o)
-      let diff = CTFontGetDescent(font) - o[0].y
+
+    guard count > 0 else { return }
+
+    var o = [CGPoint](repeating: .zero, count: 1)
+    CTFrameGetLineOrigins(frame, CFRange(location: count - 1, length: 1), &o)
+
+    let diff = CTFontGetDescent(font) - o[0].y
+    if diff > 0 {
       translateBy(x: 0, y: diff)
     }
   }
