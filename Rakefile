@@ -134,7 +134,9 @@ def formatTool(command)
   package.dependencies.append(
     .package(
       url: "https://github.com/airbnb/swift",
-      .upToNextMajor(from: "1.0.1")))
+      // Since we don't have a Package.resolved for this, we need to reference a specific commit
+      // so changes to the style guide don't cause this repo's checks to start failing.
+      .revision("cec29280c35dd6eccba415fa3bfc24c819eae887")))
   #endif
   EOC
 
