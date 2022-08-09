@@ -203,6 +203,13 @@ final class ShapeItemLayer: BaseAnimationLayer {
     var trimPathMultiplier: PathMultiplier? = nil
     if let (trim, context) = otherItems.first(Trim.self, context: context) {
       trimPathMultiplier = try shapeLayer.addAnimations(for: trim, context: context)
+
+      try context.compatibilityAssert(
+        otherItems.first(Fill.self) == nil,
+        """
+        The Core Animation rendering engine doesn't currently support applying
+        trims to filled shapes (only stroked shapes).
+        """)
     }
 
     try shapeLayer.addAnimations(for: shape.item, context: context.for(shape), pathMultiplier: trimPathMultiplier ?? 1)
