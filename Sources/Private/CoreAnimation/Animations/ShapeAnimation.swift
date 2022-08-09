@@ -134,7 +134,7 @@ extension Trim {
 
     // If maximum stroke value is larger than 100%, then we have to create copies of the path
     // so the total path length includes the maximum stroke
-    let startStrokes = adjustedStrokeEnd.keyframes.map { $0.value.cgFloatValue }
+    let startStrokes = adjustedStrokeStart.keyframes.map { $0.value.cgFloatValue }
     let endStrokes = adjustedStrokeEnd.keyframes.map { $0.value.cgFloatValue }
     let minimumStrokeMultiplier = Double(floor((startStrokes.min() ?? 0) / 100.0))
     let maximumStrokeMultiplier = Double(ceil((endStrokes.max() ?? 100) / 100.0))
