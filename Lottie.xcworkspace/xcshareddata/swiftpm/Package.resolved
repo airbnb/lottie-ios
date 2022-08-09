@@ -20,24 +20,6 @@
         }
       },
       {
-        "package": "AirbnbSwift",
-        "repositoryURL": "https://github.com/airbnb/swift",
-        "state": {
-          "branch": null,
-          "revision": "1bf961396cc9c690db37936bfbdc8b5f29e844af",
-          "version": "1.0.1"
-        }
-      },
-      {
-        "package": "swift-argument-parser",
-        "repositoryURL": "https://github.com/apple/swift-argument-parser.git",
-        "state": {
-          "branch": null,
-          "revision": "e394bf350e38cb100b6bc4172834770ede1b7232",
-          "version": "1.0.3"
-        }
-      },
-      {
         "package": "swift-snapshot-testing",
         "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing.git",
         "state": {
