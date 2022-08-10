@@ -238,9 +238,9 @@ extension CALayer {
 
     let animation = CAKeyframeAnimation(keyPath: property.caLayerKeypath)
 
-    // Point-based animations define a `CGPath` curve that should be followed,
+    // Position animations define a `CGPath` curve that should be followed,
     // instead of animating directly between keyframe point values.
-    if property is LayerProperty<CGPoint> {
+    if property.caLayerKeypath == LayerProperty<CGPoint>.position.caLayerKeypath {
       animation.path = try path(keyframes: keyframes, value: { value in
         guard let point = try keyframeValueMapping(value) as? CGPoint else {
           context.logger.assertionFailure("Cannot create point from keyframe with value \(value)")
@@ -335,7 +335,8 @@ extension CALayer {
 
         if
           let controlPoint1 = keyframe.spatialOutTangent?.pointValue,
-          let controlPoint2 = nextKeyframe.spatialInTangent?.pointValue
+          let controlPoint2 = nextKeyframe.spatialInTangent?.pointValue,
+          !(controlPoint1 == .zero && controlPoint2 == .zero)
         {
           path.addCurve(
             to: try keyframeValueMapping(nextKeyframe.value),
