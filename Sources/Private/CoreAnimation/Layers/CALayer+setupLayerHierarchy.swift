@@ -4,6 +4,9 @@
 import QuartzCore
 
 extension CALayer {
+
+  // MARK: Internal
+
   /// Sets up an `AnimationLayer` / `CALayer` hierarchy in this layer,
   /// using the given list of layers.
   @nonobjc
@@ -96,6 +99,8 @@ extension CALayer {
     }
   }
 
+  // MARK: Fileprivate
+
   /// Creates a mask `CALayer` from the given matte layer model, using the `MatteType`
   /// from the layer that is being masked.
   fileprivate func maskLayer(
@@ -136,7 +141,7 @@ extension Collection where Element == LayerModel {
   /// a `LayerModel` to use as its mask, if applicable
   /// based on the layer's `MatteType` configuration.
   ///  - Assumes the layers are sorted in z-axis order.
-  fileprivate func pairedLayersAndMasks(context: LayerContext) throws
+  fileprivate func pairedLayersAndMasks(context _: LayerContext) throws
     -> [(layer: LayerModel, mask: (model: LayerModel, matteType: MatteType)?)]
   {
     var layersAndMasks = [(layer: LayerModel, mask: (model: LayerModel, matteType: MatteType)?)]()
