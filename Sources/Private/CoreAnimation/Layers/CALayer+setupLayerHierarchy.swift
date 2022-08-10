@@ -4,6 +4,9 @@
 import QuartzCore
 
 extension CALayer {
+
+  // MARK: Internal
+
   /// Sets up an `AnimationLayer` / `CALayer` hierarchy in this layer,
   /// using the given list of layers.
   @nonobjc
@@ -48,7 +51,7 @@ extension CALayer {
     }
 
     // Create an `AnimationLayer` for each `LayerModel`
-    for (layerModel, maskLayerModel) in try layersInZAxisOrder.pairedLayersAndMasks(context: context) {
+    for (layerModel, mask) in try layersInZAxisOrder.pairedLayersAndMasks(context: context) {
       guard let layer = try layerModel.makeAnimationLayer(context: context) else {
         continue
       }
@@ -64,14 +67,14 @@ extension CALayer {
 
       // Create the `mask` layer for this layer, if it has a `MatteType`
       if
-        let maskLayerModel = maskLayerModel,
-        let maskLayer = try maskLayerModel.makeAnimationLayer(context: context)
+        let mask = mask,
+        let maskLayer = try maskLayer(for: mask.model, type: mask.matteType, context: context)
       {
         let maskParentTransformLayer = makeParentTransformLayer(
-          childLayerModel: maskLayerModel,
+          childLayerModel: mask.model,
           childLayer: maskLayer,
           name: { parentLayerModel in
-            "\(maskLayerModel.name) (mask of \(layerModel.name)) (parent, \(parentLayerModel.name))"
+            "\(mask.model.name) (mask of \(layerModel.name)) (parent, \(parentLayerModel.name))"
           })
 
         // Set up a parent container to host both the layer
@@ -96,6 +99,41 @@ extension CALayer {
     }
   }
 
+  // MARK: Fileprivate
+
+  /// Creates a mask `CALayer` from the given matte layer model, using the `MatteType`
+  /// from the layer that is being masked.
+  fileprivate func maskLayer(
+    for matteLayerModel: LayerModel,
+    type: MatteType,
+    context: LayerContext) throws
+    -> CALayer?
+  {
+    switch type {
+    case .add:
+      return try matteLayerModel.makeAnimationLayer(context: context)
+
+    case .invert:
+      guard let maskLayer = try matteLayerModel.makeAnimationLayer(context: context) else {
+        return nil
+      }
+
+      // We can invert the mask layer by having a large solid black layer with the
+      // given mask layer subtracted out using the `xor` blend mode. When applied to the
+      // layer being masked, this creates an inverted mask where only areas _outside_
+      // of the mask layer are visible.
+      // https://developer.apple.com/documentation/coregraphics/cgblendmode/xor
+      let base = BaseAnimationLayer()
+      base.backgroundColor = .rgb(0, 0, 0)
+      base.addSublayer(maskLayer)
+      maskLayer.compositingFilter = "xor"
+      return base
+
+    case .none, .unknown:
+      return nil
+    }
+  }
+
 }
 
 extension Collection where Element == LayerModel {
@@ -103,8 +141,10 @@ extension Collection where Element == LayerModel {
   /// a `LayerModel` to use as its mask, if applicable
   /// based on the layer's `MatteType` configuration.
   ///  - Assumes the layers are sorted in z-axis order.
-  fileprivate func pairedLayersAndMasks(context: LayerContext) throws -> [(layer: LayerModel, mask: LayerModel?)] {
-    var layersAndMasks = [(layer: LayerModel, mask: LayerModel?)]()
+  fileprivate func pairedLayersAndMasks(context _: LayerContext) throws
+    -> [(layer: LayerModel, mask: (model: LayerModel, matteType: MatteType)?)]
+  {
+    var layersAndMasks = [(layer: LayerModel, mask: (model: LayerModel, matteType: MatteType)?)]()
     var unprocessedLayers = reversed()
 
     while let layer = unprocessedLayers.popLast() {
@@ -114,11 +154,7 @@ extension Collection where Element == LayerModel {
         matteType != .none,
         let maskLayer = unprocessedLayers.popLast()
       {
-        try context.compatibilityAssert(
-          matteType == .add,
-          "The Core Animation rendering engine currently only supports `MatteMode.add`.")
-
-        layersAndMasks.append((layer: layer, mask: maskLayer))
+        layersAndMasks.append((layer: layer, mask: (model: maskLayer, matteType: matteType)))
       }
 
       else {

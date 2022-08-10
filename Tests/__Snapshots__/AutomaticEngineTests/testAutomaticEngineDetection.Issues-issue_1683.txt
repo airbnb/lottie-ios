@@ -1,2 +1,1 @@
-Does not support Core Animation engine. Encountered compatibility issues:
-[root layer] The Core Animation rendering engine currently only supports `MatteMode.add`.
+Supports Core Animation engine
