@@ -336,8 +336,7 @@ extension CALayer {
         if
           let controlPoint1 = keyframe.spatialOutTangent?.pointValue,
           let controlPoint2 = nextKeyframe.spatialInTangent?.pointValue,
-          controlPoint1 != .zero,
-          controlPoint2 != .zero
+          !(controlPoint1 == .zero && controlPoint2 == .zero)
         {
           path.addCurve(
             to: try keyframeValueMapping(nextKeyframe.value),
