@@ -41,7 +41,7 @@ final class ShapeLayer: BaseCompositionLayer {
     if let repeater = shapeLayer.items.first(where: { $0 is Repeater }) as? Repeater {
       try setUpRepeater(repeater, context: context)
     } else {
-      try setupGroups(from: shapeLayer.items, parentGroup: nil, context: context)
+      try setupGroups(from: shapeLayer.items, parentGroupPath: [], context: context)
     }
   }
 
@@ -50,7 +50,7 @@ final class ShapeLayer: BaseCompositionLayer {
     let copyCount = Int(try repeater.copies.exactlyOneKeyframe(context: context, description: "repeater copies").value)
 
     for index in 0..<copyCount {
-      for groupLayer in try makeGroupLayers(from: items, parentGroup: nil, context: context) {
+      for groupLayer in try makeGroupLayers(from: items, parentGroupPath: [], context: context) {
         let repeatedLayer = RepeaterLayer(repeater: repeater, childLayer: groupLayer, index: index)
         addSublayer(repeatedLayer)
       }
@@ -66,9 +66,10 @@ final class GroupLayer: BaseAnimationLayer {
 
   // MARK: Lifecycle
 
-  init(group: Group, inheritedItems: [ShapeItemLayer.Item], context: LayerContext) throws {
+  init(group: Group, inheritedItems: [ShapeItemLayer.Item], groupPath: [String], context: LayerContext) throws {
     self.group = group
     self.inheritedItems = inheritedItems
+    self.groupPath = groupPath
     super.init()
     try setupLayerHierarchy(context: context)
   }
@@ -86,14 +87,14 @@ final class GroupLayer: BaseAnimationLayer {
 
     group = typedLayer.group
     inheritedItems = typedLayer.inheritedItems
+    groupPath = typedLayer.groupPath
     super.init(layer: typedLayer)
   }
 
   // MARK: Internal
 
   override func setupAnimations(context: LayerAnimationContext) throws {
-    let contextForChildren = context.addingKeypathComponent(group.name)
-    try super.setupAnimations(context: contextForChildren)
+    try super.setupAnimations(context: context)
 
     if let (shapeTransform, context) = nonGroupItems.first(ShapeTransform.self, context: context) {
       try addTransformAnimations(for: shapeTransform, context: context)
@@ -110,17 +111,24 @@ final class GroupLayer: BaseAnimationLayer {
   private let inheritedItems: [ShapeItemLayer.Item]
 
   /// `ShapeItem`s (other than nested `Group`s) that are included in this group
-  private lazy var nonGroupItems = (
-    group.items
-      .filter { !($0 is Group) }
-      .map { ShapeItemLayer.Item(item: $0, parentGroup: group) }
-      + inheritedItems)
-    .filter { !$0.item.hidden }
+  private lazy var nonGroupItems = group.items
+    .filter { !($0 is Group) }
+    .map { ShapeItemLayer.Item(item: $0, groupPath: groupPath) }
+    + inheritedItems
+
+
+  /// The keypath that represents this group, with respect to the parent `ShapeLayer`
+  ///  - Due to the way `GroupLayer`s are setup, the original `ShapeItem`
+  ///    hierarchy from the `ShapeLayer` data model may no longer exactly
+  ///    match the hierarchy of `GroupLayer` / `ShapeItemLayer`s constructed
+  ///    at runtime. Since animation keypaths need to match the original
+  ///    structure of the `ShapeLayer` data model, we track that info here.
+  private let groupPath: [String]
 
   private func setupLayerHierarchy(context: LayerContext) throws {
     // Groups can contain other groups, so we may have to continue
     // recursively creating more `GroupLayer`s
-    try setupGroups(from: group.items, parentGroup: group, context: context)
+    try setupGroups(from: group.items, parentGroupPath: groupPath, context: context)
 
     // Create `ShapeItemLayer`s for each subgroup of shapes that should be rendered as a single unit
     //  - These groups are listed from front-to-back, so we have to add the sublayers in reverse order
@@ -157,7 +165,7 @@ final class GroupLayer: BaseAnimationLayer {
         }
 
         let sublayer = try ShapeItemLayer(
-          shape: ShapeItemLayer.Item(item: combinedShape, parentGroup: group),
+          shape: ShapeItemLayer.Item(item: combinedShape, groupPath: shapeRenderGroup.pathItems[0].groupPath),
           otherItems: shapeRenderGroup.otherItems,
           context: context)
 
@@ -186,8 +194,15 @@ extension CALayer {
   /// Sets up `GroupLayer`s for each `Group` in the given list of `ShapeItem`s
   ///  - Each `Group` item becomes its own `GroupLayer` sublayer.
   ///  - Other `ShapeItem` are applied to all sublayers
-  fileprivate func setupGroups(from items: [ShapeItem], parentGroup: Group?, context: LayerContext) throws {
-    let groupLayers = try makeGroupLayers(from: items, parentGroup: parentGroup, context: context)
+  fileprivate func setupGroups(
+    from items: [ShapeItem],
+    parentGroupPath: [String],
+    context: LayerContext) throws
+  {
+    let groupLayers = try makeGroupLayers(
+      from: items,
+      parentGroupPath: parentGroupPath,
+      context: context)
 
     for groupLayer in groupLayers {
       addSublayer(groupLayer)
@@ -199,35 +214,41 @@ extension CALayer {
   ///  - Other `ShapeItem` are applied to all sublayers
   fileprivate func makeGroupLayers(
     from items: [ShapeItem],
-    parentGroup: Group?,
+    parentGroupPath: [String],
     context: LayerContext) throws
     -> [GroupLayer]
   {
-    var (groupItems, otherItems) = items.grouped(by: { $0 is Group })
+    var (groupItems, otherItems) = items
+      .filter { !$0.hidden }
+      .grouped(by: { $0 is Group })
 
     // If this shape doesn't have any groups but just has top-level shape items,
     // we can create a placeholder group with those items. (Otherwise the shape items
     // would be silently ignored, since we expect all shape layers to have a top-level group).
-    if groupItems.isEmpty, parentGroup == nil {
-      groupItems = [Group(items: otherItems, name: "Group")]
+    if groupItems.isEmpty, parentGroupPath.isEmpty {
+      groupItems = [Group(items: otherItems, name: "")]
       otherItems = []
     }
 
     // Groups are listed from front to back,
     // but `CALayer.sublayers` are listed from back to front.
     let groupsInZAxisOrder = groupItems.reversed()
-      .filter { !$0.hidden }
 
     return try groupsInZAxisOrder.compactMap { group in
       guard let group = group as? Group else { return nil }
 
+      var pathForChildren = parentGroupPath
+      if !group.name.isEmpty {
+        pathForChildren.append(group.name)
+      }
+
       // `ShapeItem`s either draw a path, or modify how a path is rendered.
       //  - If this group doesn't have any items that draw a path, then its
-      //    items are applied to all of this groups children.
+      //    items are applied to all of this group's children.
       let inheritedItems: [ShapeItemLayer.Item]
       if !otherItems.contains(where: { $0.drawsCGPath }) {
         inheritedItems = otherItems.map {
-          ShapeItemLayer.Item(item: $0, parentGroup: parentGroup)
+          ShapeItemLayer.Item(item: $0, groupPath: parentGroupPath)
         }
       } else {
         inheritedItems = []
@@ -236,6 +257,7 @@ extension CALayer {
       return try GroupLayer(
         group: group,
         inheritedItems: inheritedItems,
+        groupPath: pathForChildren,
         context: context)
     }
   }

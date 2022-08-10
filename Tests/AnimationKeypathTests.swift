@@ -58,7 +58,12 @@ final class AnimationKeypathTests: XCTestCase {
     let coreAnimationKeypaths = hierarchyKeypaths(animationName: "Switch", configuration: .init(renderingEngine: .coreAnimation))
 
     for coreAnimationKeypath in coreAnimationKeypaths {
-      XCTAssert(mainThreadKeypaths.contains(coreAnimationKeypath))
+      XCTAssert(
+        mainThreadKeypaths.contains(coreAnimationKeypath),
+        """
+        \(coreAnimationKeypath) from Core Animation rendering engine
+        is not supported in Main Thread rendering engine
+        """)
     }
   }
 
