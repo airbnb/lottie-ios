@@ -49,6 +49,10 @@ final class AnimationKeypathTests: XCTestCase {
     snapshotHierarchyKeypaths(
       animationName: "Switch",
       configuration: LottieConfiguration(renderingEngine: .coreAnimation))
+
+    snapshotHierarchyKeypaths(
+      animationName: "Issues/issue_1664",
+      configuration: LottieConfiguration(renderingEngine: .coreAnimation))
   }
 
   /// The Core Animation engine supports a subset of the keypaths supported by the Main Thread engine.

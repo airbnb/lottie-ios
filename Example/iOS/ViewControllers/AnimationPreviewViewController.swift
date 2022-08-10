@@ -61,10 +61,6 @@ class AnimationPreviewViewController: UIViewController {
       engineLabel.bottomAnchor.constraint(equalTo: slider.topAnchor),
     ])
 
-    animationView.setValueProvider(
-      ColorValueProvider(.black),
-      keypath: AnimationKeypath(keypath: "**.base_color.**.Color"))
-
     /// Slider
     slider.heightAnchor.constraint(equalToConstant: 40).isActive = true
     slider.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
@@ -243,7 +239,6 @@ class AnimationPreviewViewController: UIViewController {
 
   private func updateAnimation() {
     animationView.play(fromProgress: fromProgress, toProgress: toProgress, loopMode: loopMode)
-    animationView.logHierarchyKeypaths()
     animationView.animationSpeed = speed
     configureSettingsMenu()
   }
