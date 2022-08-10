@@ -92,7 +92,8 @@ final class GroupLayer: BaseAnimationLayer {
   // MARK: Internal
 
   override func setupAnimations(context: LayerAnimationContext) throws {
-    try super.setupAnimations(context: context)
+    let contextForChildren = context.addingKeypathComponent(group.name)
+    try super.setupAnimations(context: contextForChildren)
 
     if let (shapeTransform, context) = nonGroupItems.first(ShapeTransform.self, context: context) {
       try addTransformAnimations(for: shapeTransform, context: context)
