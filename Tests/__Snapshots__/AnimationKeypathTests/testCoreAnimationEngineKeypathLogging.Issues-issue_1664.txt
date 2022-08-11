@@ -1,0 +1,14 @@
+card_depth.base_color.card_depth.Fill 1.Color
+card_depth.base_color.card_depth.Stroke 1.Color
+card_depth_MASK.mask.Fill 1.Color
+card_front.base_color.graph.Fill 1.Color
+card_front.base_color.lines.Stroke 1.Color
+card_front.card_bg.bg.Fill 1.Color
+finger_L.accent_color.circle.Fill 1.Color
+finger_L.accent_color.circle_fade.Fill 1.Color
+finger_L.accent_color.ring_fade.Stroke 1.Color
+finger_L.base_color.ring.Stroke 1.Color
+finger_R.accent_color.circle.Fill 1.Color
+finger_R.accent_color.circle_fade.Fill 1.Color
+finger_R.accent_color.ring_fade.Stroke 1.Color
+finger_R.base_color.ring.Stroke 1.Color

@@ -55,8 +55,13 @@ final class ShapeItemLayer: BaseAnimationLayer {
     /// A `ShapeItem` that should be rendered by this layer
     let item: ShapeItem
 
-    /// The group that contains this `ShapeItem`, if applicable
-    let parentGroup: Group?
+    /// The set of groups that this item descends from
+    ///  - Due to the way `GroupLayer`s are setup, the original `ShapeItem`
+    ///    hierarchy from the `ShapeLayer` data model may no longer exactly
+    ///    match the hierarchy of `GroupLayer` / `ShapeItemLayer`s constructed
+    ///    at runtime. Since animation keypaths need to match the original
+    ///    structure of the `ShapeLayer` data model, we track that info here.
+    let groupPath: [String]
   }
 
   override func setupAnimations(context: LayerAnimationContext) throws {
@@ -300,8 +305,8 @@ extension LayerAnimationContext {
   func `for`(_ item: ShapeItemLayer.Item) -> LayerAnimationContext {
     var context = self
 
-    if let group = item.parentGroup {
-      context.currentKeypath.keys.append(group.name)
+    for parentGroupName in item.groupPath {
+      context.currentKeypath.keys.append(parentGroupName)
     }
 
     context.currentKeypath.keys.append(item.item.name)

@@ -49,6 +49,10 @@ final class AnimationKeypathTests: XCTestCase {
     snapshotHierarchyKeypaths(
       animationName: "Switch",
       configuration: LottieConfiguration(renderingEngine: .coreAnimation))
+
+    snapshotHierarchyKeypaths(
+      animationName: "Issues/issue_1664",
+      configuration: LottieConfiguration(renderingEngine: .coreAnimation))
   }
 
   /// The Core Animation engine supports a subset of the keypaths supported by the Main Thread engine.
@@ -58,7 +62,12 @@ final class AnimationKeypathTests: XCTestCase {
     let coreAnimationKeypaths = hierarchyKeypaths(animationName: "Switch", configuration: .init(renderingEngine: .coreAnimation))
 
     for coreAnimationKeypath in coreAnimationKeypaths {
-      XCTAssert(mainThreadKeypaths.contains(coreAnimationKeypath))
+      XCTAssert(
+        mainThreadKeypaths.contains(coreAnimationKeypath),
+        """
+        \(coreAnimationKeypath) from Core Animation rendering engine \
+        is not supported in Main Thread rendering engine
+        """)
     }
   }
 
