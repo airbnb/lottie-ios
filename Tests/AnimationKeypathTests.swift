@@ -65,7 +65,7 @@ final class AnimationKeypathTests: XCTestCase {
       XCTAssert(
         mainThreadKeypaths.contains(coreAnimationKeypath),
         """
-        \(coreAnimationKeypath) from Core Animation rendering engine
+        \(coreAnimationKeypath) from Core Animation rendering engine \
         is not supported in Main Thread rendering engine
         """)
     }
