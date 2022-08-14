@@ -148,7 +148,7 @@ extension Array where Element == DashElement {
         dashPatterns.append(dash.value.keyframes)
       }
     }
-    
+
     dashPatterns = ContiguousArray(dashPatterns.map { pattern in
       ContiguousArray(pattern.map { keyframe -> Keyframe<Vector1D> in
         // The recommended way to create a stroke of round dots, in theory,
@@ -163,7 +163,7 @@ extension Array where Element == DashElement {
         }
       })
     })
-    
+
     return (dashPatterns, dashPhase)
   }
 }
