@@ -148,6 +148,22 @@ extension Array where Element == DashElement {
         dashPatterns.append(dash.value.keyframes)
       }
     }
+
+    dashPatterns = ContiguousArray(dashPatterns.map { pattern in
+      ContiguousArray(pattern.map { keyframe -> Keyframe<Vector1D> in
+        // The recommended way to create a stroke of round dots, in theory,
+        // is to use a value of 0 followed by the stroke width, but for
+        // some reason Core Animation incorrectly (?) renders these as pills
+        // instead of circles. As a workaround, for parity with Lottie on other
+        // platforms, we can change `0`s to `0.01`: https://stackoverflow.com/a/38036486
+        if keyframe.value.cgFloatValue == 0 {
+          return keyframe.withValue(Vector1D(0.01))
+        } else {
+          return keyframe
+        }
+      })
+    })
+
     return (dashPatterns, dashPhase)
   }
 }

@@ -50,7 +50,7 @@ final class PerformanceTests: XCTestCase {
 
     // The automatic engine option should have the same performance as the core animation engine,
     // when rendering an animation supported by the CA engine.
-    XCTAssertEqual(ratio, 1.0, accuracy: 0.35)
+    XCTAssertEqual(ratio, 1.0, accuracy: 0.4)
   }
 
   func testAnimationViewScrubbing_simpleAnimation() {
