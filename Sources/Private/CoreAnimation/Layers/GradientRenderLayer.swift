@@ -59,7 +59,7 @@ final class GradientRenderLayer: CAGradientLayer {
   ///  - This specific value is arbitrary and can be increased if necessary.
   ///    Theoretically this should be "infinite", to match the behavior of
   ///    `CGContext.drawLinearGradient` with `[.drawsAfterEndLocation, .drawsBeforeStartLocation]`.
-  private let gradientPadding: CGFloat = 2_000
+  private let gradientPadding: CGFloat = 10_000
 
   private func updateLayout() {
     anchorPoint = .zero
