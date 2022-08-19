@@ -55,9 +55,6 @@ final class TextLayer: BaseCompositionLayer {
     //  - We may be able to support animating `fillColor` by getting clever with layer blend modes
     //    or masks (e.g. use `CoreTextRenderLayer` to draw black glyphs, and then fill them in
     //    using a `CAShapeLayer`).
-
-    // Question 3: Should we somehow initialize LayerContextAnimations at this stage
-    // and pass it to `self.setupAnimations(context: layerAnimationsContext)`
     if !textLayerModel.animators.isEmpty {
       try context.logCompatibilityIssue("""
         The Core Animation rendering engine currently doesn't support text animators.
