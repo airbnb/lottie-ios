@@ -41,6 +41,9 @@ struct LayerAnimationContext {
   /// The AnimationKeypath represented by the current layer
   var currentKeypath: AnimationKeypath
 
+  /// The `AnimationTextProvider`
+  var textProvider: AnimationTextProvider
+
   /// Whether or not to log `AnimationKeypath`s for all of the animation's layers
   ///  - Used for `CoreAnimationLayer.logHierarchyKeypaths()`
   var logHierarchyKeypaths: Bool
