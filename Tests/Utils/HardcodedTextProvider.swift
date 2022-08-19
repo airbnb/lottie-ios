@@ -11,12 +11,13 @@ import UIKit
 
 /// An `AnimationTextProvider` that always returns a specific hardcoded text
 class HardcodedTextProvider: AnimationTextProvider {
-  // Question 4: What should we actually return here?
+  private let text: String
+
+  init(text: String) {
+    self.text = text
+  }
+
   func textFor(keypathName: String, sourceText: String) -> String {
-    #if os(iOS)
-    return "text layer text"
-    #else
-    return nil
-    #endif
+    text
   }
 }

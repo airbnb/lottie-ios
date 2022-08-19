@@ -74,7 +74,7 @@ extension SnapshotConfiguration {
     "Nonanimating/_dog": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog.png")),
 
     // Test cases for `AnimatedTextProvider`
-      "": .customTextProvider(HardcodedTextProvider()),
+    "Issues/issue_1722": .customTextProvider(HardcodedTextProvider(text: "Bounce-bounce")),
 
     // Test cases for `AnimationFontProvider`
     "Nonanimating/Text_Glyph": .customFontProvider(HardcodedFontProvider(font: UIFont(name: "Chalkduster", size: 36)!)),
