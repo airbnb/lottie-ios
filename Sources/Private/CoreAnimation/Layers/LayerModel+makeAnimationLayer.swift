@@ -9,6 +9,7 @@ import QuartzCore
 struct LayerContext {
   let animation: Animation
   let imageProvider: AnimationImageProvider
+  let textProvider: AnimationTextProvider
   let fontProvider: AnimationFontProvider
   let compatibilityTracker: CompatibilityTracker
   var layerName: String

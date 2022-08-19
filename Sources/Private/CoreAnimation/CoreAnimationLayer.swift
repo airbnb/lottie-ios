@@ -17,6 +17,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   init(
     animation: Animation,
     imageProvider: AnimationImageProvider,
+    textProvider: AnimationTextProvider,
     fontProvider: AnimationFontProvider,
     compatibilityTrackerMode: CompatibilityTracker.Mode,
     logger: LottieLogger)
@@ -24,6 +25,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   {
     self.animation = animation
     self.imageProvider = imageProvider
+    self.textProvider = textProvider
     self.fontProvider = fontProvider
     self.logger = logger
     compatibilityTracker = CompatibilityTracker(mode: compatibilityTrackerMode, logger: logger)
@@ -44,6 +46,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     animation = typedLayer.animation
     currentAnimationConfiguration = typedLayer.currentAnimationConfiguration
     imageProvider = typedLayer.imageProvider
+    textProvider = typedLayer.textProvider
     fontProvider = typedLayer.fontProvider
     didSetUpAnimation = typedLayer.didSetUpAnimation
     compatibilityTracker = typedLayer.compatibilityTracker
@@ -90,6 +93,16 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   /// referenced by name in the animation json.
   var imageProvider: AnimationImageProvider {
     didSet { reloadImages() }
+  }
+
+  /// The `AnimationTextProvider` that `TextLayer`'s use to retrieve texts,
+  /// that they should use to render their text context
+  var textProvider: AnimationTextProvider {
+    didSet {
+      // We need to rebuild the current animation after updating the text provider,
+      // since this is used in `TextLayer.setupAnimations(context:)`
+      rebuildCurrentAnimation()
+    }
   }
 
   /// The `FontProvider` that `TextLayer`s use to retrieve the `CTFont`
@@ -203,6 +216,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     LayerContext(
       animation: animation,
       imageProvider: imageProvider,
+      textProvider: textProvider,
       fontProvider: fontProvider,
       compatibilityTracker: compatibilityTracker,
       layerName: "root layer")
@@ -234,6 +248,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
       compatibilityTracker: compatibilityTracker,
       logger: logger,
       currentKeypath: AnimationKeypath(keys: []),
+      textProvider: textProvider,
       logHierarchyKeypaths: configuration.logHierarchyKeypaths)
 
     // Perform a layout pass if necessary so all of the sublayers
@@ -381,15 +396,6 @@ extension CoreAnimationLayer: RootAnimationLayer {
 
   var _animationLayers: [CALayer] {
     (sublayers ?? []).filter { $0 is AnimationLayer }
-  }
-
-  var textProvider: AnimationTextProvider {
-    get { DictionaryTextProvider([:]) }
-    set {
-      logger.assertionFailure("""
-        The Core Animation rendering engine currently doesn't support `textProvider`s")
-        """)
-    }
   }
 
   func reloadImages() {

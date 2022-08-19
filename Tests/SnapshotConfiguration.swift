@@ -22,6 +22,9 @@ struct SnapshotConfiguration {
   /// A custom `AnimationImageProvider` to use when rendering this animation
   var customImageProvider: AnimationImageProvider?
 
+  /// A custom `AnimationTextProvider` to use when rendering this animation
+  var customTextProvider: AnimationTextProvider?
+
   /// A custom `AnimationFontProvider` to use when rendering this animation
   var customFontProvider: AnimationFontProvider?
 
@@ -69,6 +72,9 @@ extension SnapshotConfiguration {
 
     // Test cases for `AnimatedImageProvider`
     "Nonanimating/_dog": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog.png")),
+
+    // Test cases for `AnimatedTextProvider`
+    "Issues/issue_1722": .customTextProvider(HardcodedTextProvider(text: "Bounce-bounce")),
 
     // Test cases for `AnimationFontProvider`
     "Nonanimating/Text_Glyph": .customFontProvider(HardcodedFontProvider(font: UIFont(name: "Chalkduster", size: 36)!)),
@@ -125,6 +131,15 @@ extension SnapshotConfiguration {
   {
     var configuration = SnapshotConfiguration.default
     configuration.customImageProvider = customImageProvider
+    return configuration
+  }
+
+  static func customTextProvider(
+    _ customTextProvider: AnimationTextProvider)
+    -> SnapshotConfiguration
+  {
+    var configuration = SnapshotConfiguration.default
+    configuration.customTextProvider = customTextProvider
     return configuration
   }
 

@@ -36,6 +36,21 @@ final class TextLayer: BaseCompositionLayer {
 
   // MARK: Internal
 
+  override func setupAnimations(context: LayerAnimationContext) throws {
+    try super.setupAnimations(context: context)
+    let textAnimationContext = context.addingKeypathComponent(textLayerModel.name)
+
+    let sourceText = try textLayerModel.text.exactlyOneKeyframe(
+      context: textAnimationContext,
+      description: "text layer text")
+
+    renderLayer.text = context.textProvider.textFor(
+      keypathName: textAnimationContext.currentKeypath.fullPath,
+      sourceText: sourceText.text)
+
+    renderLayer.sizeToFit()
+  }
+
   func configureRenderLayer(with context: LayerContext) throws {
     // We can't use `CATextLayer`, because it doesn't support enough features we use.
     // Instead, we use the same `CoreTextRenderLayer` (with a custom `draw` implementation)
@@ -54,7 +69,6 @@ final class TextLayer: BaseCompositionLayer {
         """)
     }
 
-    renderLayer.text = text.text
     renderLayer.font = context.fontProvider.fontFor(family: text.fontFamily, size: CGFloat(text.fontSize))
 
     renderLayer.alignment = text.justification.textAlignment

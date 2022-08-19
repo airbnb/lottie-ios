@@ -996,6 +996,7 @@ final public class AnimationView: AnimationViewBase {
       let coreAnimationLayer = try CoreAnimationLayer(
         animation: animation,
         imageProvider: imageProvider.cachedImageProvider,
+        textProvider: textProvider,
         fontProvider: fontProvider,
         compatibilityTrackerMode: .track,
         logger: logger)
@@ -1030,6 +1031,7 @@ final public class AnimationView: AnimationViewBase {
       let coreAnimationLayer = try CoreAnimationLayer(
         animation: animation,
         imageProvider: imageProvider.cachedImageProvider,
+        textProvider: textProvider,
         fontProvider: fontProvider,
         compatibilityTrackerMode: .abort,
         logger: logger)
