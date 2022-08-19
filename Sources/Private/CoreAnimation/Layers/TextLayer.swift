@@ -25,7 +25,8 @@ final class TextLayer: BaseCompositionLayer {
 
   override func setupAnimations(context: LayerAnimationContext) throws {
     try super.setupAnimations(context: context)
-    let customText = context.textProvider.textFor(keypathName: context.currentKeypath.fullPath, sourceText: "text layer text")
+    let sourceText = try textLayerModel.text.exactlyOneKeyframe(context: context, description: "text layer text")
+    let customText = context.textProvider.textFor(keypathName: context.currentKeypath.fullPath, sourceText: sourceText.text)
     renderLayer.text = customText
   }
 
