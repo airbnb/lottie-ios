@@ -23,13 +23,6 @@ final class TextLayer: BaseCompositionLayer {
     fatalError("init(coder:) has not been implemented")
   }
 
-  override func setupAnimations(context: LayerAnimationContext) throws {
-    try super.setupAnimations(context: context)
-    let sourceText = try textLayerModel.text.exactlyOneKeyframe(context: context, description: "text layer text")
-    let customText = context.textProvider.textFor(keypathName: context.currentKeypath.fullPath, sourceText: sourceText.text)
-    renderLayer.text = customText
-  }
-
   /// Called by CoreAnimation to create a shadow copy of this layer
   /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
   override init(layer: Any) {
@@ -42,6 +35,13 @@ final class TextLayer: BaseCompositionLayer {
   }
 
   // MARK: Internal
+
+  override func setupAnimations(context: LayerAnimationContext) throws {
+    try super.setupAnimations(context: context)
+    let sourceText = try textLayerModel.text.exactlyOneKeyframe(context: context, description: "text layer text")
+    let customText = context.textProvider.textFor(keypathName: context.currentKeypath.fullPath, sourceText: sourceText.text)
+    renderLayer.text = customText
+  }
 
   func configureRenderLayer(with context: LayerContext) throws {
     // We can't use `CATextLayer`, because it doesn't support enough features we use.

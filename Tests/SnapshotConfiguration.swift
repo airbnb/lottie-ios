@@ -136,7 +136,7 @@ extension SnapshotConfiguration {
 
   static func customTextProvider(
     _ customTextProvider: AnimationTextProvider)
-  -> SnapshotConfiguration
+    -> SnapshotConfiguration
   {
     var configuration = SnapshotConfiguration.default
     configuration.customTextProvider = customTextProvider

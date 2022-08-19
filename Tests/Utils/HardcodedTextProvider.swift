@@ -3,17 +3,25 @@
 
 import Lottie
 
-// MARK: - HardcodedImageProvider
+// MARK: - HardcodedTextProvider
 
 /// An `AnimationTextProvider` that always returns a specific hardcoded text
 class HardcodedTextProvider: AnimationTextProvider {
-  private let text: String
+
+  // MARK: Lifecycle
 
   init(text: String) {
     self.text = text
   }
 
-  func textFor(keypathName: String, sourceText: String) -> String {
+  // MARK: Internal
+
+  func textFor(keypathName _: String, sourceText _: String) -> String {
     text
   }
+
+  // MARK: Private
+
+  private let text: String
+
 }
