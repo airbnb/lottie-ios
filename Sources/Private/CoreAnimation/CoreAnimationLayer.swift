@@ -98,13 +98,17 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   /// The `AnimationTextProvider` that `TextLayer`'s use to retrieve texts,
   /// that they should use to render their text context
   var textProvider: AnimationTextProvider {
-    didSet { reloadTexts() }
+    didSet {
+      // We need to rebuild the current animation after registering a value provider,
+      // since any existing `CAAnimation`s could now be out of date.
+      rebuildCurrentAnimation()
+    }
   }
 
   /// The `FontProvider` that `TextLayer`s use to retrieve the `CTFont`
   /// that they should use to render their text content
   var fontProvider: AnimationFontProvider {
-    didSet { reloadTexts() }
+    didSet { reloadFonts() }
   }
 
   /// Queues the animation with the given timing configuration
@@ -404,8 +408,8 @@ extension CoreAnimationLayer: RootAnimationLayer {
     }
   }
 
-  func reloadTexts() {
-    // When the text (or font) provider changes, we have to update all `TextLayer`s
+  func reloadFonts() {
+    // When the text provider changes, we have to update all `TextLayer`s
     // so they can query the most up-to-date font from the new font provider.
     for sublayer in allSublayers {
       if let textLayer = sublayer as? TextLayer {
