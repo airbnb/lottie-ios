@@ -256,6 +256,10 @@ extension SnapshotConfiguration {
       animationView.imageProvider = customImageProvider
     }
 
+    if let customTextProvider = snapshotConfiguration.customTextProvider {
+      animationView.textProvider = customTextProvider
+    }
+
     if let customFontProvider = snapshotConfiguration.customFontProvider {
       animationView.fontProvider = customFontProvider
     }
