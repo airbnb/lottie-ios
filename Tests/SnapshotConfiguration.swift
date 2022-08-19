@@ -22,7 +22,7 @@ struct SnapshotConfiguration {
   /// A custom `AnimationImageProvider` to use when rendering this animation
   var customImageProvider: AnimationImageProvider?
 
-  /// A custom `AnimationTextProvider` to use when rendering this animatino
+  /// A custom `AnimationTextProvider` to use when rendering this animation
   var customTextProvider: AnimationTextProvider?
 
   /// A custom `AnimationFontProvider` to use when rendering this animation
