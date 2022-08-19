@@ -554,6 +554,7 @@
 		2EAF5B0427A0798700E00531 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */; };
 		2EAF5B0527A0798700E00531 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */; };
 		2EAF5B0627A0798700E00531 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */; };
+		36E57EAC28AF7ADF00B7EFDA /* HardcodedTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E57EAB28AF7ADF00B7EFDA /* HardcodedTextProvider.swift */; };
 		6D0E635F28246BD0007C5DB6 /* Difference in Frameworks */ = {isa = PBXBuildFile; productRef = 6D0E635E28246BD0007C5DB6 /* Difference */; };
 		6D99D6432823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
 		6D99D6442823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
@@ -783,6 +784,7 @@
 		2EAF59EF27A0798700E00531 /* GradientValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientValueProvider.swift; sourceTree = "<group>"; };
 		2EAF59F027A0798700E00531 /* PointValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointValueProvider.swift; sourceTree = "<group>"; };
 		2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationFontProvider.swift; sourceTree = "<group>"; };
+		36E57EAB28AF7ADF00B7EFDA /* HardcodedTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcodedTextProvider.swift; sourceTree = "<group>"; };
 		6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyGradientFillRenderer.swift; sourceTree = "<group>"; };
 		6DB3BDB528243FA5002A276D /* ValueProvidersTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ValueProvidersTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		6DB3BDB7282454A6002A276D /* DictionaryInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryInitializable.swift; sourceTree = "<group>"; };
@@ -876,6 +878,7 @@
 				2E8040BF27A07343006E74CB /* Snapshotting+presentationLayer.swift */,
 				2EAF59A627A076BC00E00531 /* Bundle+Module.swift */,
 				2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */,
+				36E57EAB28AF7ADF00B7EFDA /* HardcodedTextProvider.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1876,6 +1879,7 @@
 				6DEF696E2824A76C007D640F /* BundleTests.swift in Sources */,
 				2EAF59A727A076BC00E00531 /* Bundle+Module.swift in Sources */,
 				2E8044AE27A07347006E74CB /* Snapshotting+presentationLayer.swift in Sources */,
+				36E57EAC28AF7ADF00B7EFDA /* HardcodedTextProvider.swift in Sources */,
 				2E72128527BB32DB0027BC56 /* PerformanceTests.swift in Sources */,
 				6DB3BDC328245AA2002A276D /* ParsingTests.swift in Sources */,
 				6DB3BDB628243FA5002A276D /* ValueProvidersTests.swift in Sources */,
