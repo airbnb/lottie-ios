@@ -29,7 +29,6 @@ final class TextLayer: BaseCompositionLayer {
     renderLayer.text = customText
   }
 
-
   /// Called by CoreAnimation to create a shadow copy of this layer
   /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
   override init(layer: Any) {
