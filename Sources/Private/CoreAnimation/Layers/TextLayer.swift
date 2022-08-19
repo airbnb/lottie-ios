@@ -73,7 +73,6 @@ final class TextLayer: BaseCompositionLayer {
         """)
     }
 
-    renderLayer.text = text.text
     renderLayer.font = context.fontProvider.fontFor(family: text.fontFamily, size: CGFloat(text.fontSize))
 
     renderLayer.alignment = text.justification.textAlignment
