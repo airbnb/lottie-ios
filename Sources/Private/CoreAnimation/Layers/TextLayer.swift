@@ -23,6 +23,22 @@ final class TextLayer: BaseCompositionLayer {
     fatalError("init(coder:) has not been implemented")
   }
 
+  override func setupAnimations(context: LayerAnimationContext) throws {
+    try super.setupAnimations(context: context)
+
+    // Question 1: Which keypath to pass?
+    _ = try context.currentKeypath.keys.map { key in
+      // Question 2: Where do we get the text layer text?
+      let customText = context.textProvider.textFor(keypathName: key, sourceText: "text layer text")
+      if customText.isEmpty {
+        renderLayer.text = customText
+      } else {
+        renderLayer.text = try textLayerModel.text.exactlyOneKeyframe(context: context, description: "text layer text").text
+      }
+    }
+  }
+
+
   /// Called by CoreAnimation to create a shadow copy of this layer
   /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
   override init(layer: Any) {
@@ -48,6 +64,9 @@ final class TextLayer: BaseCompositionLayer {
     //  - We may be able to support animating `fillColor` by getting clever with layer blend modes
     //    or masks (e.g. use `CoreTextRenderLayer` to draw black glyphs, and then fill them in
     //    using a `CAShapeLayer`).
+
+    // Question 3: Should we somehow initialize LayerContextAnimations at this stage
+    // and pass it to `self.setupAnimations(context: layerAnimationsContext)`
     if !textLayerModel.animators.isEmpty {
       try context.logCompatibilityIssue("""
         The Core Animation rendering engine currently doesn't support text animators.
