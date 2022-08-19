@@ -211,8 +211,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   private var layerContext: LayerContext {
     LayerContext(
       animation: animation,
-      textProvider: textProvider,
       imageProvider: imageProvider,
+      textProvider: textProvider,
       fontProvider: fontProvider,
       compatibilityTracker: compatibilityTracker,
       layerName: "root layer")
