@@ -99,8 +99,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   /// that they should use to render their text context
   var textProvider: AnimationTextProvider {
     didSet {
-      // We need to rebuild the current animation after registering a value provider,
-      // since any existing `CAAnimation`s could now be out of date.
+      // We need to rebuild the current animation after updating the text provider,
+      // since this is used in `TextLayer.setupAnimations(context:)`
       rebuildCurrentAnimation()
     }
   }
