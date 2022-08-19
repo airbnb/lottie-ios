@@ -26,10 +26,11 @@ final class TextLayer: BaseCompositionLayer {
   override func setupAnimations(context: LayerAnimationContext) throws {
     try super.setupAnimations(context: context)
 
-    // Question 1: Which keypath to pass?
     _ = try context.currentKeypath.keys.map { key in
-      // Question 2: Where do we get the text layer text?
-      let customText = context.textProvider.textFor(keypathName: key, sourceText: "text layer text")
+      // Question 2.1: Should we get from somewhere source text? What if the user has custom name?
+      let customText = context.textProvider.textFor(keypathName: context.currentKeypath.fullPath, sourceText: "text layer text")
+      // Question 2.2: If we don't have this .isEmpty check, then how do we decide when to set our custom text, and when to
+      // set the result of the `exactlyOneKeyFrame()`?
       if customText.isEmpty {
         renderLayer.text = customText
       } else {
