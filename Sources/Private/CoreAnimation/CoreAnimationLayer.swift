@@ -331,7 +331,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
   var isAnimationPlaying: Bool? {
     switch playbackState {
     case .playing:
-      return animation(forKey: #keyPath(animationProgress)) != nil
+      return pendingAnimationConfiguration?.playbackState == .playing || animation(forKey: #keyPath(animationProgress)) != nil
     case nil, .paused:
       return false
     }
