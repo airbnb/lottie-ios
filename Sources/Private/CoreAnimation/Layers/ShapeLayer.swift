@@ -253,9 +253,9 @@ extension CALayer {
         pathForChildren.append(group.name)
       }
 
-      let childItems = group.items.map {
-        ShapeItemLayer.Item(item: $0, groupPath: pathForChildren)
-      }
+      let childItems = group.items
+        .filter { !$0.hidden }
+        .map { ShapeItemLayer.Item(item: $0, groupPath: pathForChildren) }
 
       return try GroupLayer(
         group: group,
