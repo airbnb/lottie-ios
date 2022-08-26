@@ -172,13 +172,14 @@ extension Animation {
   ///
   public static func loadedFrom(
     url: URL,
+    session: URLSession = .shared,
     closure: @escaping Animation.DownloadClosure,
     animationCache: AnimationCacheProvider?)
   {
     if let animationCache = animationCache, let animation = animationCache.animation(forKey: url.absoluteString) {
       closure(animation)
     } else {
-      let task = URLSession.shared.dataTask(with: url) { data, _, error in
+      let task = session.dataTask(with: url) { data, _, error in
         guard error == nil, let jsonData = data else {
           DispatchQueue.main.async {
             closure(nil)
