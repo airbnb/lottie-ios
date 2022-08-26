@@ -36,8 +36,9 @@ extension GradientRenderLayer {
     type: GradientContentType,
     context: LayerAnimationContext) throws
   {
-    // We have to set `colors` to a non-nil value with some valid number of colors
-    // for the color animation below to have any effect
+    // We have to set `colors` and `locations` to non-nil values
+    // for the animations below to actually take effect
+    locations = []
     colors = .init(
       repeating: CGColor.rgb(0, 0, 0),
       count: gradient.numberOfColors)
