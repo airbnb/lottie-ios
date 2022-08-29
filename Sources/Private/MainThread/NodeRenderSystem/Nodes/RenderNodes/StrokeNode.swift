@@ -118,7 +118,7 @@ final class StrokeNode: AnimatorNode, RenderNode {
 
     /// Get dash lengths
     let dashLengths = strokeProperties.dashPattern.value.map { $0.cgFloatValue }
-    if dashLengths.count > 0, !dashLengths.allSatisfy({ $0.isZero }) {
+    if dashLengths.count > 0, dashLengths.isSupportedLayerDashPattern {
       strokeRender.dashPhase = strokeProperties.dashPhase.value.cgFloatValue
       strokeRender.dashLengths = dashLengths
     } else {
@@ -165,5 +165,16 @@ extension Array where Element == DashElement {
     })
 
     return (dashPatterns, dashPhase)
+  }
+}
+
+extension Array where Element == CGFloat {
+  // If all of the items in the dash pattern are zeros, then we shouldn't attempt to render it.
+  // This causes Core Animation to have extremely poor performance for some reason, even though
+  // it doesn't affect the appearance of the animation.
+  //  - We check for `== 0.01` instead of `== 0` because `dashPattern.shapeLayerConfiguration`
+  //    converts all `0` values to `0.01` to work around a different Core Animation rendering issue.
+  var isSupportedLayerDashPattern: Bool {
+    !allSatisfy { $0 == 0.01 }
   }
 }

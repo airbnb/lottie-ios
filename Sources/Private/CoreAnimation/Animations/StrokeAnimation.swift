@@ -55,18 +55,13 @@ extension CAShapeLayer {
     try addOpacityAnimation(for: stroke, context: context)
 
     if let (dashPattern, dashPhase) = stroke.dashPattern?.shapeLayerConfiguration {
-      lineDashPattern = try dashPattern.map {
+      let lineDashPattern = try dashPattern.map {
         try KeyframeGroup(keyframes: $0)
-          .exactlyOneKeyframe(context: context, description: "stroke dashPattern").cgFloatValue as NSNumber
+          .exactlyOneKeyframe(context: context, description: "stroke dashPattern").cgFloatValue
       }
 
-      // If all of the items in the dash pattern are zeros, then we shouldn't attempt to render it.
-      // This causes Core Animation to have extremely poor performance for some reason, even though
-      // it doesn't affect the appearance of the animation.
-      //  - We check for `== 0.01` instead of `== 0` because `dashPattern.shapeLayerConfiguration`
-      //    converts all `0` values to `0.01` to work around a different Core Animation rendering issue.
-      if lineDashPattern?.allSatisfy({ $0.floatValue == 0.01 }) == true {
-        lineDashPattern = nil
+      if lineDashPattern.isSupportedLayerDashPattern {
+        self.lineDashPattern = lineDashPattern as [NSNumber]
       }
 
       try addAnimation(
