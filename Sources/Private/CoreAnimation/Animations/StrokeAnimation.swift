@@ -55,12 +55,13 @@ extension CAShapeLayer {
     try addOpacityAnimation(for: stroke, context: context)
 
     if let (dashPattern, dashPhase) = stroke.dashPattern?.shapeLayerConfiguration {
-      lineDashPattern = try dashPattern.map {
+      let lineDashPattern = try dashPattern.map {
         try KeyframeGroup(keyframes: $0)
-          .exactlyOneKeyframe(context: context, description: "stroke dashPattern").cgFloatValue as NSNumber
+          .exactlyOneKeyframe(context: context, description: "stroke dashPattern").cgFloatValue
       }
-      if lineDashPattern?.allSatisfy({ $0.floatValue.isZero }) == true {
-        lineDashPattern = nil
+
+      if lineDashPattern.isSupportedLayerDashPattern {
+        self.lineDashPattern = lineDashPattern as [NSNumber]
       }
 
       try addAnimation(
