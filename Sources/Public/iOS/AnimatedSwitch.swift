@@ -67,6 +67,12 @@ open class AnimatedSwitch: AnimatedControl {
     isAccessibilityElement = true
   }
 
+  // MARK: Open
+
+  open override func animationDidSet() {
+    updateOnState(isOn: _isOn, animated: true, shouldFireHaptics: false)
+  }
+
   // MARK: Public
 
   /// Defines what happens when the user taps the switch while an
@@ -123,10 +129,6 @@ open class AnimatedSwitch: AnimatedControl {
     super.endTracking(touch, with: event)
     updateOnState(isOn: !_isOn, animated: true, shouldFireHaptics: true)
     sendActions(for: .valueChanged)
-  }
-
-  public override func animationDidSet() {
-    updateOnState(isOn: _isOn, animated: true, shouldFireHaptics: false)
   }
 
   // MARK: Internal
