@@ -73,6 +73,12 @@ open class AnimatedSwitch: AnimatedControl {
     updateOnState(isOn: _isOn, animated: true, shouldFireHaptics: false)
   }
 
+  open override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+    super.endTracking(touch, with: event)
+    updateOnState(isOn: !_isOn, animated: true, shouldFireHaptics: true)
+    sendActions(for: .valueChanged)
+  }
+
   // MARK: Public
 
   /// Defines what happens when the user taps the switch while an
@@ -123,12 +129,6 @@ open class AnimatedSwitch: AnimatedControl {
     }
 
     updateOnState(isOn: _isOn, animated: false, shouldFireHaptics: false)
-  }
-
-  public override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
-    super.endTracking(touch, with: event)
-    updateOnState(isOn: !_isOn, animated: true, shouldFireHaptics: true)
-    sendActions(for: .valueChanged)
   }
 
   // MARK: Internal
