@@ -187,6 +187,16 @@ public final class CompatibleAnimationView: UIView {
   }
 
   @objc
+  public func play(
+    marker: String,
+    completion: ((Bool) -> Void)? = nil)
+  {
+    animationView.play(
+      marker: marker,
+      completion: completion)
+  }
+
+  @objc
   public func stop() {
     animationView.stop()
   }
@@ -300,6 +310,11 @@ public final class CompatibleAnimationView: UIView {
   @objc
   public func frameTime(forMarker named: String) -> CGFloat {
     animationView.frameTime(forMarker: named) ?? 0
+  }
+
+  @objc
+  public func durationFrameTime(forMarker named: String) -> CGFloat {
+    animationView.durationFrameTime(forMarker: named) ?? 0
   }
 
   // MARK: Private

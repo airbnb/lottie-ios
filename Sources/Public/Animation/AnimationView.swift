@@ -513,6 +513,32 @@ final public class AnimationView: AnimationViewBase {
     addNewAnimationForContext(context)
   }
 
+  /// Plays the animation from a named marker to the end of the marker's duration.
+  ///
+  /// A marker is a point in time with an associated duration that is encoded into the
+  /// animation data and assigned a name.
+  ///
+  /// NOTE: If marker is not found the play command will exit.
+  ///
+  /// - Parameter marker: The start marker for the animation playback.
+  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+  /// - Parameter completion: An optional completion closure to be called when the animation stops.
+  public func play(
+    marker: String,
+    loopMode: LottieLoopMode? = nil,
+    completion: LottieCompletionBlock? = nil)
+  {
+    guard let from = animation?.markerMap?[marker] else {
+      return
+    }
+
+    play(
+      fromFrame: from.frameTime,
+      toFrame: from.frameTime + from.durationFrameTime,
+      loopMode: loopMode,
+      completion: completion)
+  }
+
   /// Stops the animation and resets the view to its start frame.
   ///
   /// The completion closure will be called with `false`
@@ -711,6 +737,21 @@ final public class AnimationView: AnimationViewBase {
       return nil
     }
     return animation.frameTime(forMarker: named)
+  }
+
+  /// Markers are a way to describe a point in time and a duration by a key name.
+  ///
+  /// Markers are encoded into animation JSON. By using markers a designer can mark
+  /// playback points for a developer to use without having to worry about keeping
+  /// track of animation frames. If the animation file is updated, the developer
+  /// does not need to update playback code.
+  ///
+  /// - Returns: The duration frame time for the marker, or `nil` if no marker found.
+  public func durationFrameTime(forMarker named: String) -> AnimationFrameTime? {
+    guard let animation = animation else {
+      return nil
+    }
+    return animation.durationFrameTime(forMarker: named)
   }
 
   // MARK: Internal
