@@ -234,6 +234,21 @@ extension Animation {
     return marker.frameTime
   }
 
+  /// Markers are a way to describe a point in time and a duration by a key name.
+  ///
+  /// Markers are encoded into animation JSON. By using markers a designer can mark
+  /// playback points for a developer to use without having to worry about keeping
+  /// track of animation frames. If the animation file is updated, the developer
+  /// does not need to update playback code.
+  ///
+  /// - Returns: The duration frame time for the marker, or `nil` if no marker found.
+  public func durationFrameTime(forMarker named: String) -> AnimationFrameTime? {
+    guard let marker = markerMap?[named] else {
+      return nil
+    }
+    return marker.durationFrameTime
+  }
+
   /// Converts Frame Time (Seconds * Framerate) into Progress Time
   /// (optionally clamped to between 0 and 1).
   public func progressTime(
