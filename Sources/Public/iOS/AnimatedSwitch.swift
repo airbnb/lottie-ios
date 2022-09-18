@@ -70,7 +70,7 @@ open class AnimatedSwitch: AnimatedControl {
   // MARK: Open
 
   open override func animationDidSet() {
-    updateOnState(isOn: _isOn, animated: true, shouldFireHaptics: false)
+    updateOnState(isOn: _isOn, animated: animateUpdateWhenChangingAnimation, shouldFireHaptics: false)
   }
 
   open override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
@@ -90,6 +90,9 @@ open class AnimatedSwitch: AnimatedControl {
 
   /// The cancel behavior for the switch. See CancelBehavior for options
   public var cancelBehavior: CancelBehavior = .reverse
+
+  /// If `false` the switch will not play the animation when changing between animations.
+  public var animateUpdateWhenChangingAnimation = true
 
   public override var accessibilityTraits: UIAccessibilityTraits {
     set { super.accessibilityTraits = newValue }
