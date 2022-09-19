@@ -80,7 +80,7 @@ extension Array where Element == ShapeItem {
         nodeTree.paths.append(contentsOf: tree.paths)
         nodeTree.renderContainers.append(node.container)
       } else if item is Repeater {
-        LottieLogger.shared.assertionFailure("""
+        LottieLogger.shared.warn("""
           The Main Thread rendering engine doesn't currently support repeaters.
           To play an animation with repeaters, you can use the Core Animation rendering engine instead.
           """)
