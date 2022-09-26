@@ -2674,8 +2674,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = revision;
+				revision = 0c2826f26d00ff5ddf2de92cb6b2139b0dd3d1ee;
 			};
 		};
 		6D0E635D28246BD0007C5DB6 /* XCRemoteSwiftPackageReference "Difference" */ = {
