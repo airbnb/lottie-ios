@@ -157,7 +157,7 @@ final class GroupLayer: BaseAnimationLayer {
         // interpolate the path for each shape at each frame ahead of time so we can combine them
         // into a single set of bezier path keyframes.
         else {
-          combinedShape = .manuallyInterpolating(shapes: allPathKeyframes, name: group.name, context: context)
+          combinedShape = .manuallyInterpolating(shapes: allPathKeyframes, name: group.name)
         }
 
         let sublayer = try ShapeItemLayer(
