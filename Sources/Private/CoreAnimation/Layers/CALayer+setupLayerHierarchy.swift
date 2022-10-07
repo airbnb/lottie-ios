@@ -15,7 +15,7 @@ extension CALayer {
     context: LayerContext)
     throws
   {
-    // An `Animation`'s `LayerModel`s are listed from front to back,
+    // A `LottieAnimation`'s `LayerModel`s are listed from front to back,
     // but `CALayer.sublayers` are listed from back to front.
     // We reverse the layer ordering to match what Core Animation expects.
     // The final view hierarchy must display the layers in this exact order.

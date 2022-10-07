@@ -24,7 +24,7 @@ final class Fill: ShapeItem {
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Fill.CodingKeys.self)
     opacity = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .opacity)
-    color = try container.decode(KeyframeGroup<Color>.self, forKey: .color)
+    color = try container.decode(KeyframeGroup<LottieColor>.self, forKey: .color)
     fillRule = try container.decodeIfPresent(FillRule.self, forKey: .fillRule) ?? .nonZeroWinding
     try super.init(from: decoder)
   }
@@ -33,7 +33,7 @@ final class Fill: ShapeItem {
     let opacityDictionary: [String: Any] = try dictionary.value(for: CodingKeys.opacity)
     opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
     let colorDictionary: [String: Any] = try dictionary.value(for: CodingKeys.color)
-    color = try KeyframeGroup<Color>(dictionary: colorDictionary)
+    color = try KeyframeGroup<LottieColor>(dictionary: colorDictionary)
     if
       let fillRuleRawValue = dictionary[CodingKeys.fillRule.rawValue] as? Int,
       let fillRule = FillRule(rawValue: fillRuleRawValue)
@@ -51,7 +51,7 @@ final class Fill: ShapeItem {
   let opacity: KeyframeGroup<Vector1D>
 
   /// The color keyframes for the fill
-  let color: KeyframeGroup<Color>
+  let color: KeyframeGroup<LottieColor>
 
   /// The fill rule to use when filling a path
   let fillRule: FillRule

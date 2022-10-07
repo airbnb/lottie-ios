@@ -31,7 +31,7 @@ public class LRUAnimationCache: AnimationCacheProvider {
     lruList.removeAll()
   }
 
-  public func animation(forKey: String) -> Animation? {
+  public func animation(forKey: String) -> LottieAnimation? {
     guard let animation = cacheMap[forKey] else {
       return nil
     }
@@ -42,7 +42,7 @@ public class LRUAnimationCache: AnimationCacheProvider {
     return animation
   }
 
-  public func setAnimation(_ animation: Animation, forKey: String) {
+  public func setAnimation(_ animation: LottieAnimation, forKey: String) {
     cacheMap[forKey] = animation
     lruList.append(forKey)
     if lruList.count > cacheSize {
@@ -55,7 +55,7 @@ public class LRUAnimationCache: AnimationCacheProvider {
 
   // MARK: Fileprivate
 
-  fileprivate var cacheMap: [String: Animation] = [:]
+  fileprivate var cacheMap: [String: LottieAnimation] = [:]
   fileprivate var lruList: [String] = []
 
 }

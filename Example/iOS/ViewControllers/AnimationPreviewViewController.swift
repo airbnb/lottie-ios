@@ -31,7 +31,7 @@ class AnimationPreviewViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
 
-    let animation = Animation.named(animationName)
+    let animation = LottieAnimation.named(animationName)
 
     animationView.animation = animation
     animationView.contentMode = .scaleAspectFit
@@ -100,7 +100,7 @@ class AnimationPreviewViewController: UIViewController {
   // MARK: Private
 
   private let animationName: String
-  private let animationView = AnimationView()
+  private let animationView = LottieAnimationView()
   private let slider = UISlider()
   private let engineLabel = UILabel()
 

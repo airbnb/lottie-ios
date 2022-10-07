@@ -8,11 +8,11 @@
 import Foundation
 
 /// `AnimationKeypath` is an object that describes a keypath search for nodes in the
-/// animation JSON. `AnimationKeypath` matches views and properties inside of `AnimationView`
-/// to their backing `Animation` model by name.
+/// animation JSON. `AnimationKeypath` matches views and properties inside of `LottieAnimationView`
+/// to their backing `LottieAnimation` model by name.
 ///
 /// A keypath can be used to set properties on an existing animation, or can be validated
-/// with an existing `Animation`.
+/// with an existing `LottieAnimation`.
 ///
 /// `AnimationKeypath` can describe a specific object, or can use wildcards for fuzzy matching
 /// of objects. Acceptable wildcards are either "*" (star) or "**" (double star).

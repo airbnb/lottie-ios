@@ -14,7 +14,7 @@ final class Stroke: ShapeItem {
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Stroke.CodingKeys.self)
     opacity = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .opacity)
-    color = try container.decode(KeyframeGroup<Color>.self, forKey: .color)
+    color = try container.decode(KeyframeGroup<LottieColor>.self, forKey: .color)
     width = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .width)
     lineCap = try container.decodeIfPresent(LineCap.self, forKey: .lineCap) ?? .round
     lineJoin = try container.decodeIfPresent(LineJoin.self, forKey: .lineJoin) ?? .round
@@ -27,7 +27,7 @@ final class Stroke: ShapeItem {
     let opacityDictionary: [String: Any] = try dictionary.value(for: CodingKeys.opacity)
     opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
     let colorDictionary: [String: Any] = try dictionary.value(for: CodingKeys.color)
-    color = try KeyframeGroup<Color>(dictionary: colorDictionary)
+    color = try KeyframeGroup<LottieColor>(dictionary: colorDictionary)
     let widthDictionary: [String: Any] = try dictionary.value(for: CodingKeys.width)
     width = try KeyframeGroup<Vector1D>(dictionary: widthDictionary)
     if
@@ -58,7 +58,7 @@ final class Stroke: ShapeItem {
   let opacity: KeyframeGroup<Vector1D>
 
   /// The Color of the stroke
-  let color: KeyframeGroup<Color>
+  let color: KeyframeGroup<LottieColor>
 
   /// The width of the stroke
   let width: KeyframeGroup<Vector1D>

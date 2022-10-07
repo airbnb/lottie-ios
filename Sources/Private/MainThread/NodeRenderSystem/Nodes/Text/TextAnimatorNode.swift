@@ -112,8 +112,8 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
   let skewAxis: NodeProperty<Vector1D>?
   let rotation: NodeProperty<Vector1D>?
   let opacity: NodeProperty<Vector1D>?
-  let strokeColor: NodeProperty<Color>?
-  let fillColor: NodeProperty<Color>?
+  let strokeColor: NodeProperty<LottieColor>?
+  let fillColor: NodeProperty<LottieColor>?
   let strokeWidth: NodeProperty<Vector1D>?
   let tracking: NodeProperty<Vector1D>?
 

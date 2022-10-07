@@ -34,12 +34,12 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
     lineHeight = try dictionary.value(for: CodingKeys.lineHeight)
     baseline = try dictionary.value(for: CodingKeys.baseline)
     if let fillColorRawValue = dictionary[CodingKeys.fillColorData.rawValue] {
-      fillColorData = try? Color(value: fillColorRawValue)
+      fillColorData = try? LottieColor(value: fillColorRawValue)
     } else {
       fillColorData = nil
     }
     if let strokeColorRawValue = dictionary[CodingKeys.strokeColorData.rawValue] {
-      strokeColorData = try? Color(value: strokeColorRawValue)
+      strokeColorData = try? LottieColor(value: strokeColorRawValue)
     } else {
       strokeColorData = nil
     }
@@ -88,10 +88,10 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
   let baseline: Double?
 
   /// Fill Color data
-  let fillColorData: Color?
+  let fillColorData: LottieColor?
 
   /// Scroke Color data
-  let strokeColorData: Color?
+  let strokeColorData: LottieColor?
 
   /// Stroke Width
   let strokeWidth: Double?

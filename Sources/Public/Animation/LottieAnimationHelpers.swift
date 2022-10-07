@@ -8,10 +8,10 @@
 import CoreGraphics
 import Foundation
 
-extension Animation {
+extension LottieAnimation {
 
   /// A closure for an Animation download. The closure is passed `nil` if there was an error.
-  public typealias DownloadClosure = (Animation?) -> Void
+  public typealias DownloadClosure = (LottieAnimation?) -> Void
 
   /// The duration in seconds of the animation.
   public var duration: TimeInterval {
@@ -37,13 +37,13 @@ extension Animation {
   /// - Parameter subdirectory: A subdirectory in the bundle in which the animation is located. Optional.
   /// - Parameter animationCache: A cache for holding loaded animations. Optional.
   ///
-  /// - Returns: Deserialized `Animation`. Optional.
+  /// - Returns: Deserialized `LottieAnimation`. Optional.
   public static func named(
     _ name: String,
     bundle: Bundle = Bundle.main,
     subdirectory: String? = nil,
     animationCache: AnimationCacheProvider? = nil)
-    -> Animation?
+    -> LottieAnimation?
   {
     /// Create a cache key for the animation.
     let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
@@ -62,7 +62,7 @@ extension Animation {
       guard let json = try bundle.getAnimationData(name, subdirectory: subdirectory) else {
         return nil
       }
-      let animation = try Animation.from(data: json)
+      let animation = try LottieAnimation.from(data: json)
       animationCache?.setAnimation(animation, forKey: cacheKey)
       return animation
     } catch {
@@ -76,11 +76,11 @@ extension Animation {
   /// - Parameter filepath: The absolute filepath of the animation to load. EG "/User/Me/starAnimation.json"
   /// - Parameter animationCache: A cache for holding loaded animations. Optional.
   ///
-  /// - Returns: Deserialized `Animation`. Optional.
+  /// - Returns: Deserialized `LottieAnimation`. Optional.
   public static func filepath(
     _ filepath: String,
     animationCache: AnimationCacheProvider? = nil)
-    -> Animation?
+    -> LottieAnimation?
   {
     /// Check cache for animation
     if
@@ -93,7 +93,7 @@ extension Animation {
     do {
       /// Decode the animation.
       let json = try Data(contentsOf: URL(fileURLWithPath: filepath))
-      let animation = try Animation.from(data: json)
+      let animation = try LottieAnimation.from(data: json)
       animationCache?.setAnimation(animation, forKey: filepath)
       return animation
     } catch {
@@ -106,12 +106,12 @@ extension Animation {
   ///    - Parameter name: The name of the json file in the asset catalog. EG "StarAnimation"
   ///    - Parameter bundle: The bundle in which the animation is located. Defaults to `Bundle.main`
   ///    - Parameter animationCache: A cache for holding loaded animations. Optional.
-  ///    - Returns: Deserialized `Animation`. Optional.
+  ///    - Returns: Deserialized `LottieAnimation`. Optional.
   public static func asset(
     _ name: String,
     bundle: Bundle = Bundle.main,
     animationCache: AnimationCacheProvider? = nil)
-    -> Animation?
+    -> LottieAnimation?
   {
     /// Create a cache key for the animation.
     let cacheKey = bundle.bundlePath + "/" + name
@@ -132,7 +132,7 @@ extension Animation {
 
     do {
       /// Decode animation.
-      let animation = try Animation.from(data: json)
+      let animation = try LottieAnimation.from(data: json)
       animationCache?.setAnimation(animation, forKey: cacheKey)
       return animation
     } catch {
@@ -145,22 +145,22 @@ extension Animation {
   ///
   /// - Parameter data: The object to load the animation from.
   /// - Parameter strategy: How the data should be decoded. Defaults to using the strategy set in `LottieConfiguration.shared`.
-  /// - Returns: Deserialized `Animation`. Optional.
+  /// - Returns: Deserialized `LottieAnimation`. Optional.
   ///
   public static func from(
     data: Data,
     strategy: DecodingStrategy = LottieConfiguration.shared.decodingStrategy) throws
-    -> Animation
+    -> LottieAnimation
   {
     switch strategy {
     case .codable:
-      return try JSONDecoder().decode(Animation.self, from: data)
+      return try JSONDecoder().decode(LottieAnimation.self, from: data)
     case .dictionaryBased:
       let json = try JSONSerialization.jsonObject(with: data)
       guard let dict = json as? [String: Any] else {
         throw InitializableError.invalidInput
       }
-      return try Animation(dictionary: dict)
+      return try LottieAnimation(dictionary: dict)
     }
   }
 
@@ -173,7 +173,7 @@ extension Animation {
   public static func loadedFrom(
     url: URL,
     session: URLSession = .shared,
-    closure: @escaping Animation.DownloadClosure,
+    closure: @escaping LottieAnimation.DownloadClosure,
     animationCache: AnimationCacheProvider?)
   {
     if let animationCache = animationCache, let animation = animationCache.animation(forKey: url.absoluteString) {
@@ -187,7 +187,7 @@ extension Animation {
           return
         }
         do {
-          let animation = try Animation.from(data: jsonData)
+          let animation = try LottieAnimation.from(data: jsonData)
           DispatchQueue.main.async {
             animationCache?.setAnimation(animation, forKey: url.absoluteString)
             closure(animation)

@@ -1,5 +1,5 @@
 //
-//  AnimationViewBase.swift
+//  LottieAnimationViewBase.swift
 //  lottie-swift-iOS
 //
 //  Created by Brandon Withrow on 2/6/19.
@@ -8,10 +8,10 @@
 #if os(iOS) || os(tvOS) || os(watchOS) || targetEnvironment(macCatalyst)
 import UIKit
 
-/// The base view for `AnimationView` on iOS, tvOS, watchOS, and macCatalyst.
+/// The base view for `LottieAnimationView` on iOS, tvOS, watchOS, and macCatalyst.
 ///
-/// Enables the `AnimationView` implementation to be shared across platforms.
-public class AnimationViewBase: UIView {
+/// Enables the `LottieAnimationView` implementation to be shared across platforms.
+public class LottieAnimationViewBase: UIView {
 
   // MARK: Public
 

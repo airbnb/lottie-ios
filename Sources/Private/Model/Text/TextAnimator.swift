@@ -15,8 +15,8 @@ final class TextAnimator: Codable, DictionaryInitializable {
     let container = try decoder.container(keyedBy: TextAnimator.CodingKeys.self)
     name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
     let animatorContainer = try container.nestedContainer(keyedBy: TextAnimatorKeys.self, forKey: .textAnimator)
-    fillColor = try animatorContainer.decodeIfPresent(KeyframeGroup<Color>.self, forKey: .fillColor)
-    strokeColor = try animatorContainer.decodeIfPresent(KeyframeGroup<Color>.self, forKey: .strokeColor)
+    fillColor = try animatorContainer.decodeIfPresent(KeyframeGroup<LottieColor>.self, forKey: .fillColor)
+    strokeColor = try animatorContainer.decodeIfPresent(KeyframeGroup<LottieColor>.self, forKey: .strokeColor)
     strokeWidth = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .strokeWidth)
     tracking = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .tracking)
     anchor = try animatorContainer.decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .anchor)
@@ -32,12 +32,12 @@ final class TextAnimator: Codable, DictionaryInitializable {
     name = (try? dictionary.value(for: CodingKeys.name)) ?? ""
     let animatorDictionary: [String: Any] = try dictionary.value(for: CodingKeys.textAnimator)
     if let fillColorDictionary = animatorDictionary[TextAnimatorKeys.fillColor.rawValue] as? [String: Any] {
-      fillColor = try? KeyframeGroup<Color>(dictionary: fillColorDictionary)
+      fillColor = try? KeyframeGroup<LottieColor>(dictionary: fillColorDictionary)
     } else {
       fillColor = nil
     }
     if let strokeColorDictionary = animatorDictionary[TextAnimatorKeys.strokeColor.rawValue] as? [String: Any] {
-      strokeColor = try? KeyframeGroup<Color>(dictionary: strokeColorDictionary)
+      strokeColor = try? KeyframeGroup<LottieColor>(dictionary: strokeColorDictionary)
     } else {
       strokeColor = nil
     }
@@ -114,10 +114,10 @@ final class TextAnimator: Codable, DictionaryInitializable {
   let opacity: KeyframeGroup<Vector1D>?
 
   /// Stroke Color
-  let strokeColor: KeyframeGroup<Color>?
+  let strokeColor: KeyframeGroup<LottieColor>?
 
   /// Fill Color
-  let fillColor: KeyframeGroup<Color>?
+  let fillColor: KeyframeGroup<LottieColor>?
 
   /// Stroke Width
   let strokeWidth: KeyframeGroup<Vector1D>?

@@ -31,7 +31,7 @@ final class FillNodeProperties: NodePropertyMap, KeypathSearchable {
   var keypathName: String
 
   let opacity: NodeProperty<Vector1D>
-  let color: NodeProperty<Color>
+  let color: NodeProperty<LottieColor>
   let type: FillRule
 
   let keypathProperties: [String: AnyNodeProperty]

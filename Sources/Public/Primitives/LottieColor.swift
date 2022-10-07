@@ -33,7 +33,7 @@ public enum ColorFormatDenominator: Hashable {
   deprecated,
   renamed: "LottieColor",
   message: "`Lottie.Color` has been renamed to `LottieColor`, to prevent conflicts with the `SwiftUI.Color` type.")
-public typealias Color = LottieColor
+public typealias LottieColor = LottieColor
 
 // MARK: - LottieColor
 

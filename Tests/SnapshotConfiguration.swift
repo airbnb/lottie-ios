@@ -59,9 +59,9 @@ extension SnapshotConfiguration {
       AnimationKeypath(keypath: "Checkmark Outlines 2.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
       AnimationKeypath(keypath: "X Outlines.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
       AnimationKeypath(keypath: "Switch Outline Outlines.Fill 1.Color"): ColorValueProvider([
-        Keyframe(value: Color.black, time: 0),
+        Keyframe(value: LottieColor.black, time: 0),
         Keyframe(value: Color(r: 0.76, g: 0.76, b: 0.76, a: 1), time: 75),
-        Keyframe(value: Color.black, time: 150),
+        Keyframe(value: LottieColor.black, time: 150),
       ]),
     ]),
 
@@ -163,9 +163,9 @@ extension SnapshotConfiguration {
   }
 }
 
-// MARK: - Color helpers
+// MARK: - LottieColor helpers
 
-extension Color {
+extension LottieColor {
   static let black = Color(r: 0, g: 0, b: 0, a: 1)
   static let red = Color(r: 1, g: 0, b: 0, a: 1)
 }

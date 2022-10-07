@@ -26,7 +26,7 @@ protocol RootAnimationLayer: CALayer {
   var isAnimationPlaying: Bool? { get }
 
   /// Instructs this layer to remove all `CAAnimation`s,
-  /// other than the `CAAnimation` managed by `AnimationView` (if applicable)
+  /// other than the `CAAnimation` managed by `LottieAnimationView` (if applicable)
   func removeAnimations()
 
   func reloadImages()

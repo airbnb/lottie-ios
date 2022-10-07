@@ -168,11 +168,11 @@ extension CGPoint: SpatialInterpolatable {
   }
 }
 
-// MARK: - Color + Interpolatable
+// MARK: - LottieColor + Interpolatable
 
-extension Color: Interpolatable {
-  public func interpolate(to: Color, amount: CGFloat) -> Color {
-    Color(
+extension LottieColor: Interpolatable {
+  public func interpolate(to: LottieColor, amount: CGFloat) -> LottieColor {
+    LottieColor(
       r: r.interpolate(to: to.r, amount: amount),
       g: g.interpolate(to: to.g, amount: amount),
       b: b.interpolate(to: to.b, amount: amount),

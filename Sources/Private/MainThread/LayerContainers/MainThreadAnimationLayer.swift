@@ -19,7 +19,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
   // MARK: Lifecycle
 
   init(
-    animation: Animation,
+    animation: LottieAnimation,
     imageProvider: AnimationImageProvider,
     textProvider: AnimationTextProvider,
     fontProvider: AnimationFontProvider,
@@ -152,7 +152,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
   }
 
   var isAnimationPlaying: Bool? {
-    nil // this state is managed by `AnimationView`
+    nil // this state is managed by `LottieAnimationView`
   }
 
   var _animationLayers: [CALayer] {
@@ -189,7 +189,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
   }
 
   func removeAnimations() {
-    // no-op, since the primary animation is managed by the `AnimationView`.
+    // no-op, since the primary animation is managed by the `LottieAnimationView`.
   }
 
   /// Forces the view to update its drawing.

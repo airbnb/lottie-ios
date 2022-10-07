@@ -52,7 +52,7 @@ final class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
   let properties: [AnyNodeProperty]
 
   let opacity: NodeProperty<Vector1D>
-  let color: NodeProperty<Color>
+  let color: NodeProperty<LottieColor>
   let width: NodeProperty<Vector1D>
 
   let dashPattern: NodeProperty<[Vector1D]>

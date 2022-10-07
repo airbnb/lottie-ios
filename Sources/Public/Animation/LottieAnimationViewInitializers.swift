@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension AnimationView {
+extension LottieAnimationView {
 
   // MARK: Lifecycle
 
@@ -26,7 +26,7 @@ extension AnimationView {
     animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache,
     configuration: LottieConfiguration = .shared)
   {
-    let animation = Animation.named(name, bundle: bundle, subdirectory: nil, animationCache: animationCache)
+    let animation = LottieAnimation.named(name, bundle: bundle, subdirectory: nil, animationCache: animationCache)
     let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil)
     self.init(animation: animation, imageProvider: provider, configuration: configuration)
   }
@@ -42,7 +42,7 @@ extension AnimationView {
     animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache,
     configuration: LottieConfiguration = .shared)
   {
-    let animation = Animation.filepath(filePath, animationCache: animationCache)
+    let animation = LottieAnimation.filepath(filePath, animationCache: animationCache)
     let provider = imageProvider ??
       FilepathImageProvider(filepath: URL(fileURLWithPath: filePath).deletingLastPathComponent().path)
     self.init(animation: animation, imageProvider: provider, configuration: configuration)
@@ -57,7 +57,7 @@ extension AnimationView {
   public convenience init(
     url: URL,
     imageProvider: AnimationImageProvider? = nil,
-    closure: @escaping AnimationView.DownloadClosure,
+    closure: @escaping LottieAnimationView.DownloadClosure,
     animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache,
     configuration: LottieConfiguration = .shared)
   {
@@ -67,7 +67,7 @@ extension AnimationView {
     } else {
       self.init(animation: nil, imageProvider: imageProvider, configuration: configuration)
 
-      Animation.loadedFrom(url: url, closure: { animation in
+      LottieAnimation.loadedFrom(url: url, closure: { animation in
         if let animation = animation {
           self.animation = animation
           closure(nil)
@@ -91,7 +91,7 @@ extension AnimationView {
     animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache,
     configuration: LottieConfiguration = .shared)
   {
-    let animation = Animation.asset(name, bundle: bundle, animationCache: animationCache)
+    let animation = LottieAnimation.asset(name, bundle: bundle, animationCache: animationCache)
     let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil)
     self.init(animation: animation, imageProvider: provider, configuration: configuration)
   }
