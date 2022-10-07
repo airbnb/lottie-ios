@@ -162,7 +162,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
 
   // MARK: Public
 
-  /// The configuration that this `AnimationView` uses when playing its animation
+  /// The configuration that this `LottieAnimationView` uses when playing its animation
   public let configuration: LottieConfiguration
 
   /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
@@ -975,7 +975,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
 
   // MARK: Fileprivate
 
-  /// Context describing the animation that is currently playing in this `AnimationView`
+  /// Context describing the animation that is currently playing in this `LottieAnimationView`
   ///  - When non-nil, an animation is currently playing in this view. Otherwise,
   ///    the view is paused on a specific frame.
   fileprivate var animationContext: AnimationContext?

@@ -17,11 +17,11 @@ protocol RootAnimationLayer: CALayer {
   var fontProvider: AnimationFontProvider { get set }
 
   /// The `CAAnimation` key corresponding to the primary animation.
-  ///  - `AnimationView` uses this key to check if the animation is still active
+  ///  - `LottieAnimationView` uses this key to check if the animation is still active
   var primaryAnimationKey: AnimationKey { get }
 
   /// Whether or not this layer is currently playing an animation
-  ///  - If the layer returns `nil`, `AnimationView` determines if an animation
+  ///  - If the layer returns `nil`, `LottieAnimationView` determines if an animation
   ///    is playing by checking if there is an active animation for `primaryAnimationKey`
   var isAnimationPlaying: Bool? { get }
 
@@ -44,7 +44,7 @@ protocol RootAnimationLayer: CALayer {
 // MARK: - AnimationKey
 
 enum AnimationKey {
-  /// The primary animation and its key should be managed by `AnimationView`
+  /// The primary animation and its key should be managed by `LottieAnimationView`
   case managed
   /// The primary animation always uses the given key
   case specific(String)

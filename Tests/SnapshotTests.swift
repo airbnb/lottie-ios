@@ -225,7 +225,7 @@ enum Samples {
 }
 
 extension SnapshotConfiguration {
-  /// Creates an `AnimationView` for the sample snapshot with the given name
+  /// Creates a `LottieAnimationView` for the sample snapshot with the given name
   static func makeAnimationView(
     for sampleAnimationName: String,
     configuration: LottieConfiguration,
