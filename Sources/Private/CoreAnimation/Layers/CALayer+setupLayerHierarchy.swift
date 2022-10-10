@@ -126,7 +126,7 @@ extension CALayer {
       //  - The inverted mask is supposed to expand infinitely around the shape,
       //    so we use `InfiniteOpaqueAnimationLayer`
       let base = InfiniteOpaqueAnimationLayer()
-      base.backgroundColor = .rgb(1, 0, 0)
+      base.backgroundColor = .rgb(0, 0, 0)
       base.addSublayer(maskLayer)
       maskLayer.compositingFilter = "xor"
       return base
