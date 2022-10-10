@@ -32,15 +32,15 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
       let positionKeyframesX = transform.positionX?.keyframes,
       let positionKeyframesY = transform.positionY?.keyframes
     {
-      let xPosition: NodeProperty<Vector1D> = NodeProperty(provider: KeyframeInterpolator(keyframes: positionKeyframesX))
-      let yPosition: NodeProperty<Vector1D> = NodeProperty(provider: KeyframeInterpolator(keyframes: positionKeyframesY))
+      let xPosition: NodeProperty<LottieVector1D> = NodeProperty(provider: KeyframeInterpolator(keyframes: positionKeyframesX))
+      let yPosition: NodeProperty<LottieVector1D> = NodeProperty(provider: KeyframeInterpolator(keyframes: positionKeyframesY))
       propertyMap["X Position"] = xPosition
       propertyMap["Y Position"] = yPosition
       positionX = xPosition
       positionY = yPosition
       position = nil
     } else if let positionKeyframes = transform.position?.keyframes {
-      let position: NodeProperty<Vector3D> = NodeProperty(provider: KeyframeInterpolator(keyframes: positionKeyframes))
+      let position: NodeProperty<LottieVector3D> = NodeProperty(provider: KeyframeInterpolator(keyframes: positionKeyframes))
       propertyMap["Position"] = position
       self.position = position
       positionX = nil
@@ -62,13 +62,13 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
 
   let properties: [AnyNodeProperty]
 
-  let anchor: NodeProperty<Vector3D>
-  let scale: NodeProperty<Vector3D>
-  let rotation: NodeProperty<Vector1D>
-  let position: NodeProperty<Vector3D>?
-  let positionX: NodeProperty<Vector1D>?
-  let positionY: NodeProperty<Vector1D>?
-  let opacity: NodeProperty<Vector1D>
+  let anchor: NodeProperty<LottieVector3D>
+  let scale: NodeProperty<LottieVector3D>
+  let rotation: NodeProperty<LottieVector1D>
+  let position: NodeProperty<LottieVector3D>?
+  let positionX: NodeProperty<LottieVector1D>?
+  let positionY: NodeProperty<LottieVector1D>?
+  let opacity: NodeProperty<LottieVector1D>
 
   var childKeypaths: [KeypathSearchable] {
     []

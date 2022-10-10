@@ -31,8 +31,8 @@ final class EllipseNodeProperties: NodePropertyMap, KeypathSearchable {
   var keypathName: String
 
   let direction: PathDirection
-  let position: NodeProperty<Vector3D>
-  let size: NodeProperty<Vector3D>
+  let position: NodeProperty<LottieVector3D>
+  let size: NodeProperty<LottieVector3D>
 
   let keypathProperties: [String: AnyNodeProperty]
   let properties: [AnyNodeProperty]

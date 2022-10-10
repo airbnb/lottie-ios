@@ -1,5 +1,5 @@
 //
-//  Color.swift
+//  LottieColor.swift
 //  lottie-swift
 //
 //  Created by Brandon Withrow on 2/4/19.
@@ -28,7 +28,15 @@ public enum ColorFormatDenominator: Hashable {
 
 // MARK: - Color
 
-public struct Color: Hashable {
+@available(*, deprecated, renamed: "LottieColor", message: """
+  `Lottie.Color` has been renamed to `LottieColor`, to prevent conflicts with \
+  the `SwiftUI.Color` type. This notice will be removed in Lottie 4.0.
+  """)
+public typealias Color = LottieColor
+
+// MARK: - LottieColor
+
+public struct LottieColor: Hashable {
 
   public var r: Double
   public var g: Double

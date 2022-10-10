@@ -42,11 +42,11 @@ final class PolygonNodeProperties: NodePropertyMap, KeypathSearchable {
   let properties: [AnyNodeProperty]
 
   let direction: PathDirection
-  let position: NodeProperty<Vector3D>
-  let outerRadius: NodeProperty<Vector1D>
-  let outerRoundedness: NodeProperty<Vector1D>
-  let rotation: NodeProperty<Vector1D>
-  let points: NodeProperty<Vector1D>
+  let position: NodeProperty<LottieVector3D>
+  let outerRadius: NodeProperty<LottieVector1D>
+  let outerRoundedness: NodeProperty<LottieVector1D>
+  let rotation: NodeProperty<LottieVector1D>
+  let points: NodeProperty<LottieVector1D>
 }
 
 // MARK: - PolygonNode

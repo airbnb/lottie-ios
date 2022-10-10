@@ -10,39 +10,39 @@ import QuartzCore
 /// both transform types to share the same animation implementation.
 protocol TransformModel {
   /// The anchor point of the transform.
-  var anchorPoint: KeyframeGroup<Vector3D> { get }
+  var anchorPoint: KeyframeGroup<LottieVector3D> { get }
 
   /// The position of the transform. This is nil if the position data was split.
-  var _position: KeyframeGroup<Vector3D>? { get }
+  var _position: KeyframeGroup<LottieVector3D>? { get }
 
   /// The positionX of the transform. This is nil if the position property is set.
-  var _positionX: KeyframeGroup<Vector1D>? { get }
+  var _positionX: KeyframeGroup<LottieVector1D>? { get }
 
   /// The positionY of the transform. This is nil if the position property is set.
-  var _positionY: KeyframeGroup<Vector1D>? { get }
+  var _positionY: KeyframeGroup<LottieVector1D>? { get }
 
   /// The scale of the transform
-  var scale: KeyframeGroup<Vector3D> { get }
+  var scale: KeyframeGroup<LottieVector3D> { get }
 
   /// The rotation of the transform. Note: This is single dimensional rotation.
-  var rotation: KeyframeGroup<Vector1D> { get }
+  var rotation: KeyframeGroup<LottieVector1D> { get }
 }
 
 // MARK: - Transform + TransformModel
 
 extension Transform: TransformModel {
-  var _position: KeyframeGroup<Vector3D>? { position }
-  var _positionX: KeyframeGroup<Vector1D>? { positionX }
-  var _positionY: KeyframeGroup<Vector1D>? { positionY }
+  var _position: KeyframeGroup<LottieVector3D>? { position }
+  var _positionX: KeyframeGroup<LottieVector1D>? { positionX }
+  var _positionY: KeyframeGroup<LottieVector1D>? { positionY }
 }
 
 // MARK: - ShapeTransform + TransformModel
 
 extension ShapeTransform: TransformModel {
-  var anchorPoint: KeyframeGroup<Vector3D> { anchor }
-  var _position: KeyframeGroup<Vector3D>? { position }
-  var _positionX: KeyframeGroup<Vector1D>? { nil }
-  var _positionY: KeyframeGroup<Vector1D>? { nil }
+  var anchorPoint: KeyframeGroup<LottieVector3D> { anchor }
+  var _position: KeyframeGroup<LottieVector3D>? { position }
+  var _positionX: KeyframeGroup<LottieVector1D>? { nil }
+  var _positionY: KeyframeGroup<LottieVector1D>? { nil }
 }
 
 // MARK: - CALayer + TransformModel

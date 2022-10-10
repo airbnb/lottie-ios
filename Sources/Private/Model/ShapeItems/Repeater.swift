@@ -13,65 +13,70 @@ final class Repeater: ShapeItem {
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Repeater.CodingKeys.self)
-    copies = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .copies) ?? KeyframeGroup(Vector1D(0))
-    offset = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .offset) ?? KeyframeGroup(Vector1D(0))
+    copies = try container
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .copies) ?? KeyframeGroup(LottieVector1D(0))
+    offset = try container
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .offset) ?? KeyframeGroup(LottieVector1D(0))
     let transformContainer = try container.nestedContainer(keyedBy: TransformKeys.self, forKey: .transform)
     startOpacity = try transformContainer
-      .decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .startOpacity) ?? KeyframeGroup(Vector1D(100))
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .startOpacity) ?? KeyframeGroup(LottieVector1D(100))
     endOpacity = try transformContainer
-      .decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .endOpacity) ?? KeyframeGroup(Vector1D(100))
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .endOpacity) ?? KeyframeGroup(LottieVector1D(100))
     rotation = try transformContainer
-      .decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .rotation) ?? KeyframeGroup(Vector1D(0))
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotation) ?? KeyframeGroup(LottieVector1D(0))
     position = try transformContainer
-      .decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .position) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .position) ??
+      KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
     anchorPoint = try transformContainer
-      .decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .anchorPoint) ?? KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .anchorPoint) ??
+      KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
     scale = try transformContainer
-      .decodeIfPresent(KeyframeGroup<Vector3D>.self, forKey: .scale) ?? KeyframeGroup(Vector3D(x: Double(100), y: 100, z: 100))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .scale) ??
+      KeyframeGroup(LottieVector3D(x: Double(100), y: 100, z: 100))
     try super.init(from: decoder)
   }
 
   required init(dictionary: [String: Any]) throws {
     if let copiesDictionary = dictionary[CodingKeys.copies.rawValue] as? [String: Any] {
-      copies = try KeyframeGroup<Vector1D>(dictionary: copiesDictionary)
+      copies = try KeyframeGroup<LottieVector1D>(dictionary: copiesDictionary)
     } else {
-      copies = KeyframeGroup(Vector1D(0))
+      copies = KeyframeGroup(LottieVector1D(0))
     }
     if let offsetDictionary = dictionary[CodingKeys.offset.rawValue] as? [String: Any] {
-      offset = try KeyframeGroup<Vector1D>(dictionary: offsetDictionary)
+      offset = try KeyframeGroup<LottieVector1D>(dictionary: offsetDictionary)
     } else {
-      offset = KeyframeGroup(Vector1D(0))
+      offset = KeyframeGroup(LottieVector1D(0))
     }
     let transformDictionary: [String: Any] = try dictionary.value(for: CodingKeys.transform)
     if let startOpacityDictionary = transformDictionary[TransformKeys.startOpacity.rawValue] as? [String: Any] {
-      startOpacity = try KeyframeGroup<Vector1D>(dictionary: startOpacityDictionary)
+      startOpacity = try KeyframeGroup<LottieVector1D>(dictionary: startOpacityDictionary)
     } else {
-      startOpacity = KeyframeGroup(Vector1D(100))
+      startOpacity = KeyframeGroup(LottieVector1D(100))
     }
     if let endOpacityDictionary = transformDictionary[TransformKeys.endOpacity.rawValue] as? [String: Any] {
-      endOpacity = try KeyframeGroup<Vector1D>(dictionary: endOpacityDictionary)
+      endOpacity = try KeyframeGroup<LottieVector1D>(dictionary: endOpacityDictionary)
     } else {
-      endOpacity = KeyframeGroup(Vector1D(100))
+      endOpacity = KeyframeGroup(LottieVector1D(100))
     }
     if let rotationDictionary = transformDictionary[TransformKeys.rotation.rawValue] as? [String: Any] {
-      rotation = try KeyframeGroup<Vector1D>(dictionary: rotationDictionary)
+      rotation = try KeyframeGroup<LottieVector1D>(dictionary: rotationDictionary)
     } else {
-      rotation = KeyframeGroup(Vector1D(0))
+      rotation = KeyframeGroup(LottieVector1D(0))
     }
     if let positionDictionary = transformDictionary[TransformKeys.position.rawValue] as? [String: Any] {
-      position = try KeyframeGroup<Vector3D>(dictionary: positionDictionary)
+      position = try KeyframeGroup<LottieVector3D>(dictionary: positionDictionary)
     } else {
-      position = KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+      position = KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
     }
     if let anchorPointDictionary = transformDictionary[TransformKeys.anchorPoint.rawValue] as? [String: Any] {
-      anchorPoint = try KeyframeGroup<Vector3D>(dictionary: anchorPointDictionary)
+      anchorPoint = try KeyframeGroup<LottieVector3D>(dictionary: anchorPointDictionary)
     } else {
-      anchorPoint = KeyframeGroup(Vector3D(x: Double(0), y: 0, z: 0))
+      anchorPoint = KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
     }
     if let scaleDictionary = transformDictionary[TransformKeys.scale.rawValue] as? [String: Any] {
-      scale = try KeyframeGroup<Vector3D>(dictionary: scaleDictionary)
+      scale = try KeyframeGroup<LottieVector3D>(dictionary: scaleDictionary)
     } else {
-      scale = KeyframeGroup(Vector3D(x: Double(100), y: 100, z: 100))
+      scale = KeyframeGroup(LottieVector3D(x: Double(100), y: 100, z: 100))
     }
     try super.init(dictionary: dictionary)
   }
@@ -79,28 +84,28 @@ final class Repeater: ShapeItem {
   // MARK: Internal
 
   /// The number of copies to repeat
-  let copies: KeyframeGroup<Vector1D>
+  let copies: KeyframeGroup<LottieVector1D>
 
   /// The offset of each copy
-  let offset: KeyframeGroup<Vector1D>
+  let offset: KeyframeGroup<LottieVector1D>
 
   /// Start Opacity
-  let startOpacity: KeyframeGroup<Vector1D>
+  let startOpacity: KeyframeGroup<LottieVector1D>
 
   /// End opacity
-  let endOpacity: KeyframeGroup<Vector1D>
+  let endOpacity: KeyframeGroup<LottieVector1D>
 
   /// The rotation
-  let rotation: KeyframeGroup<Vector1D>
+  let rotation: KeyframeGroup<LottieVector1D>
 
   /// Anchor Point
-  let anchorPoint: KeyframeGroup<Vector3D>
+  let anchorPoint: KeyframeGroup<LottieVector3D>
 
   /// Position
-  let position: KeyframeGroup<Vector3D>
+  let position: KeyframeGroup<LottieVector3D>
 
   /// Scale
-  let scale: KeyframeGroup<Vector3D>
+  let scale: KeyframeGroup<LottieVector3D>
 
   override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)

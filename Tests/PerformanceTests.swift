@@ -85,12 +85,12 @@ final class PerformanceTests: XCTestCase {
 
   // MARK: Private
 
-  private let simpleAnimation = Animation.named(
+  private let simpleAnimation = LottieAnimation.named(
     "loading_dots_1",
     bundle: .module,
     subdirectory: "Samples/LottieFiles")!
 
-  private let complexAnimation = Animation.named(
+  private let complexAnimation = LottieAnimation.named(
     "LottieLogo2",
     bundle: .module,
     subdirectory: "Samples")!
@@ -100,7 +100,7 @@ final class PerformanceTests: XCTestCase {
   private func compareEngineSetupPerformance(
     of engineA: RenderingEngineOption,
     with engineB: RenderingEngineOption,
-    for animation: Animation,
+    for animation: LottieAnimation,
     iterations: Int)
     -> Double
   {
@@ -125,7 +125,7 @@ final class PerformanceTests: XCTestCase {
     return ratio
   }
 
-  private func setUpAndTearDownAnimationView(with animation: Animation, configuration: LottieConfiguration) {
+  private func setUpAndTearDownAnimationView(with animation: LottieAnimation, configuration: LottieConfiguration) {
     // Each animation setup needs to be wrapped in its own `CATransaction`
     // in order for the layers to be deallocated immediately. Otherwise
     // the layers aren't deallocated until the end of the test run,
@@ -142,7 +142,7 @@ final class PerformanceTests: XCTestCase {
 
   /// Compares performance of scrubbing the given animation with both the Main Thread and Core Animation engine,
   /// and returns the ratio of how much slower the Core Animation is than the Main Thread engine
-  private func compareEngineScrubbingPerformance(for animation: Animation, iterations: Int) -> Double {
+  private func compareEngineScrubbingPerformance(for animation: LottieAnimation, iterations: Int) -> Double {
     let mainThreadAnimationView = setupAnimationView(with: animation, configuration: .init(renderingEngine: .mainThread))
     let mainThreadEnginePerformance = measurePerformance {
       for i in 0..<iterations {
@@ -177,7 +177,7 @@ final class PerformanceTests: XCTestCase {
   private func compareDeserializationPerformance(data: Data, iterations: Int) throws -> Double {
     let codablePerformance = try measurePerformance {
       for _ in 0..<iterations {
-        _ = try Animation.from(data: data, strategy: .codable)
+        _ = try LottieAnimation.from(data: data, strategy: .codable)
       }
     }
 
@@ -185,7 +185,7 @@ final class PerformanceTests: XCTestCase {
 
     let dictPerformance = try measurePerformance {
       for _ in 0..<iterations {
-        _ = try Animation.from(data: data, strategy: .dictionaryBased)
+        _ = try LottieAnimation.from(data: data, strategy: .dictionaryBased)
       }
     }
 
@@ -196,8 +196,8 @@ final class PerformanceTests: XCTestCase {
   }
 
   @discardableResult
-  private func setupAnimationView(with animation: Animation, configuration: LottieConfiguration) -> AnimationView {
-    let animationView = AnimationView(animation: animation, configuration: configuration)
+  private func setupAnimationView(with animation: LottieAnimation, configuration: LottieConfiguration) -> LottieAnimationView {
+    let animationView = LottieAnimationView(animation: animation, configuration: configuration)
     animationView.frame.size = CGSize(width: animation.width, height: animation.height)
     animationView.layoutIfNeeded()
     return animationView

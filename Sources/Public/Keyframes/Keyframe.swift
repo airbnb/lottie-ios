@@ -13,8 +13,8 @@ public final class Keyframe<T> {
   /// Initialize a value-only keyframe with no time data.
   public init(
     _ value: T,
-    spatialInTangent: Vector3D? = nil,
-    spatialOutTangent: Vector3D? = nil)
+    spatialInTangent: LottieVector3D? = nil,
+    spatialOutTangent: LottieVector3D? = nil)
   {
     self.value = value
     time = 0
@@ -30,10 +30,10 @@ public final class Keyframe<T> {
     value: T,
     time: AnimationFrameTime,
     isHold: Bool = false,
-    inTangent: Vector2D? = nil,
-    outTangent: Vector2D? = nil,
-    spatialInTangent: Vector3D? = nil,
-    spatialOutTangent: Vector3D? = nil)
+    inTangent: LottieVector2D? = nil,
+    outTangent: LottieVector2D? = nil,
+    spatialInTangent: LottieVector3D? = nil,
+    spatialOutTangent: LottieVector3D? = nil)
   {
     self.value = value
     self.time = time
@@ -53,14 +53,14 @@ public final class Keyframe<T> {
   /// A hold keyframe freezes interpolation until the next keyframe that is not a hold.
   public let isHold: Bool
   /// The in tangent for the time interpolation curve.
-  public let inTangent: Vector2D?
+  public let inTangent: LottieVector2D?
   /// The out tangent for the time interpolation curve.
-  public let outTangent: Vector2D?
+  public let outTangent: LottieVector2D?
 
   /// The spatial in tangent of the vector.
-  public let spatialInTangent: Vector3D?
+  public let spatialInTangent: LottieVector3D?
   /// The spatial out tangent of the vector.
-  public let spatialOutTangent: Vector3D?
+  public let spatialOutTangent: LottieVector3D?
 }
 
 // MARK: Equatable

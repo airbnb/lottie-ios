@@ -34,9 +34,9 @@ final class TrimPathProperties: NodePropertyMap, KeypathSearchable {
   let properties: [AnyNodeProperty]
   let keypathName: String
 
-  let start: NodeProperty<Vector1D>
-  let end: NodeProperty<Vector1D>
-  let offset: NodeProperty<Vector1D>
+  let start: NodeProperty<LottieVector1D>
+  let end: NodeProperty<LottieVector1D>
+  let offset: NodeProperty<LottieVector1D>
   let type: TrimType
 }
 

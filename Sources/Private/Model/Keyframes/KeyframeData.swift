@@ -24,10 +24,10 @@ final class KeyframeData<T> {
     endValue: T?,
     time: AnimationFrameTime?,
     hold: Int?,
-    inTangent: Vector2D?,
-    outTangent: Vector2D?,
-    spatialInTangent: Vector3D?,
-    spatialOutTangent: Vector3D?)
+    inTangent: LottieVector2D?,
+    outTangent: LottieVector2D?,
+    spatialInTangent: LottieVector3D?,
+    spatialOutTangent: LottieVector3D?)
   {
     self.startValue = startValue
     self.endValue = endValue
@@ -62,14 +62,14 @@ final class KeyframeData<T> {
   let hold: Int?
 
   /// The in tangent for the time interpolation curve.
-  let inTangent: Vector2D?
+  let inTangent: LottieVector2D?
   /// The out tangent for the time interpolation curve.
-  let outTangent: Vector2D?
+  let outTangent: LottieVector2D?
 
   /// The spacial in tangent of the vector.
-  let spatialInTangent: Vector3D?
+  let spatialInTangent: LottieVector3D?
   /// The spacial out tangent of the vector.
-  let spatialOutTangent: Vector3D?
+  let spatialOutTangent: LottieVector3D?
 
   var isHold: Bool {
     if let hold = hold {
@@ -95,10 +95,10 @@ extension KeyframeData: DictionaryInitializable where T: AnyInitializable {
     let endValue = try? dictionary[CodingKeys.endValue.rawValue].flatMap(T.init)
     let time: AnimationFrameTime? = try? dictionary.value(for: CodingKeys.time)
     let hold: Int? = try? dictionary.value(for: CodingKeys.hold)
-    let inTangent: Vector2D? = try? dictionary.value(for: CodingKeys.inTangent)
-    let outTangent: Vector2D? = try? dictionary.value(for: CodingKeys.outTangent)
-    let spatialInTangent: Vector3D? = try? dictionary.value(for: CodingKeys.spatialInTangent)
-    let spatialOutTangent: Vector3D? = try? dictionary.value(for: CodingKeys.spatialOutTangent)
+    let inTangent: LottieVector2D? = try? dictionary.value(for: CodingKeys.inTangent)
+    let outTangent: LottieVector2D? = try? dictionary.value(for: CodingKeys.outTangent)
+    let spatialInTangent: LottieVector3D? = try? dictionary.value(for: CodingKeys.spatialInTangent)
+    let spatialOutTangent: LottieVector3D? = try? dictionary.value(for: CodingKeys.spatialOutTangent)
 
     self.init(
       startValue: startValue,

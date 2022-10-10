@@ -28,8 +28,8 @@ final class GradientStrokeProperties: NodePropertyMap, KeypathSearchable {
     lineJoin = gradientStroke.lineJoin
 
     if let dashes = gradientStroke.dashPattern {
-      var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>()
-      var dashPhase = ContiguousArray<Keyframe<Vector1D>>()
+      var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<LottieVector1D>>>()
+      var dashPhase = ContiguousArray<Keyframe<LottieVector1D>>()
       for dash in dashes {
         if dash.type == .offset {
           dashPhase = dash.value.keyframes
@@ -40,8 +40,8 @@ final class GradientStrokeProperties: NodePropertyMap, KeypathSearchable {
       dashPattern = NodeProperty(provider: GroupInterpolator(keyframeGroups: dashPatterns))
       self.dashPhase = NodeProperty(provider: KeyframeInterpolator(keyframes: dashPhase))
     } else {
-      dashPattern = NodeProperty(provider: SingleValueProvider([Vector1D]()))
-      dashPhase = NodeProperty(provider: SingleValueProvider(Vector1D(0)))
+      dashPattern = NodeProperty(provider: SingleValueProvider([LottieVector1D]()))
+      dashPhase = NodeProperty(provider: SingleValueProvider(LottieVector1D(0)))
     }
     keypathProperties = [
       "Opacity" : opacity,
@@ -59,14 +59,14 @@ final class GradientStrokeProperties: NodePropertyMap, KeypathSearchable {
 
   var keypathName: String
 
-  let opacity: NodeProperty<Vector1D>
-  let startPoint: NodeProperty<Vector3D>
-  let endPoint: NodeProperty<Vector3D>
+  let opacity: NodeProperty<LottieVector1D>
+  let startPoint: NodeProperty<LottieVector3D>
+  let endPoint: NodeProperty<LottieVector3D>
   let colors: NodeProperty<[Double]>
-  let width: NodeProperty<Vector1D>
+  let width: NodeProperty<LottieVector1D>
 
-  let dashPattern: NodeProperty<[Vector1D]>
-  let dashPhase: NodeProperty<Vector1D>
+  let dashPattern: NodeProperty<[LottieVector1D]>
+  let dashPhase: NodeProperty<LottieVector1D>
 
   let lineCap: LineCap
   let lineJoin: LineJoin

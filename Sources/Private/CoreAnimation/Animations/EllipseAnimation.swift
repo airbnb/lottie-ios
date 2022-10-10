@@ -30,8 +30,8 @@ extension CAShapeLayer {
 extension Ellipse {
   /// Data that represents how to render an ellipse at a specific point in time
   struct Keyframe {
-    let size: Vector3D
-    let position: Vector3D
+    let size: LottieVector3D
+    let position: LottieVector3D
   }
 
   /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this Ellipse

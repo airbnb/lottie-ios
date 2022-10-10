@@ -14,9 +14,9 @@ final class Rectangle: ShapeItem {
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Rectangle.CodingKeys.self)
     direction = try container.decodeIfPresent(PathDirection.self, forKey: .direction) ?? .clockwise
-    position = try container.decode(KeyframeGroup<Vector3D>.self, forKey: .position)
-    size = try container.decode(KeyframeGroup<Vector3D>.self, forKey: .size)
-    cornerRadius = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .cornerRadius)
+    position = try container.decode(KeyframeGroup<LottieVector3D>.self, forKey: .position)
+    size = try container.decode(KeyframeGroup<LottieVector3D>.self, forKey: .size)
+    cornerRadius = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .cornerRadius)
     try super.init(from: decoder)
   }
 
@@ -30,11 +30,11 @@ final class Rectangle: ShapeItem {
       direction = .clockwise
     }
     let positionDictionary: [String: Any] = try dictionary.value(for: CodingKeys.position)
-    position = try KeyframeGroup<Vector3D>(dictionary: positionDictionary)
+    position = try KeyframeGroup<LottieVector3D>(dictionary: positionDictionary)
     let sizeDictionary: [String: Any] = try dictionary.value(for: CodingKeys.size)
-    size = try KeyframeGroup<Vector3D>(dictionary: sizeDictionary)
+    size = try KeyframeGroup<LottieVector3D>(dictionary: sizeDictionary)
     let cornerRadiusDictionary: [String: Any] = try dictionary.value(for: CodingKeys.cornerRadius)
-    cornerRadius = try KeyframeGroup<Vector1D>(dictionary: cornerRadiusDictionary)
+    cornerRadius = try KeyframeGroup<LottieVector1D>(dictionary: cornerRadiusDictionary)
     try super.init(dictionary: dictionary)
   }
 
@@ -44,13 +44,13 @@ final class Rectangle: ShapeItem {
   let direction: PathDirection
 
   /// The position
-  let position: KeyframeGroup<Vector3D>
+  let position: KeyframeGroup<LottieVector3D>
 
   /// The size
-  let size: KeyframeGroup<Vector3D>
+  let size: KeyframeGroup<LottieVector3D>
 
   /// The Corner radius of the rectangle
-  let cornerRadius: KeyframeGroup<Vector1D>
+  let cornerRadius: KeyframeGroup<LottieVector1D>
 
   override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)

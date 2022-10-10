@@ -1,5 +1,5 @@
 //
-//  Animation.swift
+//  LottieAnimation.swift
 //  lottie-swift
 //
 //  Created by Brandon Withrow on 1/7/19.
@@ -16,16 +16,24 @@ public enum CoordinateSpace: Int, Codable {
 
 // MARK: - Animation
 
-/// The `Animation` model is the top level model object in Lottie.
+@available(*, deprecated, renamed: "LottieAnimation", message: """
+  `Lottie.Animation` has been renamed to `LottieAnimation`, to prevent conflicts \
+  with the `SwiftUI.Animation` type. This notice will be removed in Lottie 4.0.
+  """)
+public typealias Animation = LottieAnimation
+
+// MARK: - LottieAnimation
+
+/// The `LottieAnimation` model is the top level model object in Lottie.
 ///
-/// An `Animation` holds all of the animation data backing a Lottie Animation.
+/// A `LottieAnimation` holds all of the animation data backing a Lottie Animation.
 /// Codable, see JSON schema [here](https://github.com/airbnb/lottie-web/tree/master/docs/json).
-public final class Animation: Codable, DictionaryInitializable {
+public final class LottieAnimation: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
   required public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: Animation.CodingKeys.self)
+    let container = try decoder.container(keyedBy: LottieAnimation.CodingKeys.self)
     version = try container.decode(String.self, forKey: .version)
     type = try container.decodeIfPresent(CoordinateSpace.self, forKey: .type) ?? .type2d
     startFrame = try container.decode(AnimationFrameTime.self, forKey: .startFrame)

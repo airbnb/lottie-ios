@@ -82,7 +82,7 @@ extension CALayer {
 
   /// A `CAAnimation` that applies the custom value from the `AnyValueProvider`
   /// registered for this specific property's `AnimationKeypath`,
-  /// if one has been registered using `AnimationView.setValueProvider(_:keypath:)`.
+  /// if one has been registered using `LottieAnimationView.setValueProvider(_:keypath:)`.
   @nonobjc
   private func customizedAnimation<ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,

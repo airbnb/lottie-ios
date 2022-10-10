@@ -35,11 +35,11 @@ final class LinkView: UIView, EpoxyableView {
   func setContent(_ content: Content, animated _: Bool) {
     group.setItems {
       if let animationName = content.animationName {
-        GroupItem<AnimationView>(
+        GroupItem<LottieAnimationView>(
           dataID: DataID.animationPreview,
           content: content.animationName,
           make: {
-            let animationView = AnimationView()
+            let animationView = LottieAnimationView()
             animationView.translatesAutoresizingMaskIntoConstraints = false
 
             NSLayoutConstraint.activate([

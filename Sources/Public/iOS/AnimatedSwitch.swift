@@ -18,7 +18,7 @@ open class AnimatedSwitch: AnimatedControl {
   // MARK: Lifecycle
 
   public override init(
-    animation: Animation,
+    animation: LottieAnimation,
     configuration: LottieConfiguration = .shared)
   {
     /// Generate a haptic generator if available.

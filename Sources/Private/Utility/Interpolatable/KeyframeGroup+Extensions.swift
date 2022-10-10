@@ -8,7 +8,7 @@
 import CoreGraphics
 import Foundation
 
-extension KeyframeGroup where T == Vector1D {
+extension KeyframeGroup where T == LottieVector1D {
   /// Manually interpolates the keyframes so that they are defined linearly
   ///
   /// This method uses `UnitBezier` to perform the interpolation. It will create one keyframe
@@ -19,7 +19,7 @@ extension KeyframeGroup where T == Vector1D {
       return keyframes
     }
 
-    var output = ContiguousArray<Keyframe<Vector1D>>()
+    var output = ContiguousArray<Keyframe<LottieVector1D>>()
 
     for idx in 1 ..< keyframes.count {
       let prev = keyframes[idx - 1]
@@ -43,8 +43,8 @@ extension KeyframeGroup where T == Vector1D {
           epsilon: 0.005)
         let value = startValue + Double(progress) * difference
         output.append(
-          Keyframe<Vector1D>(
-            value: Vector1D(value),
+          Keyframe<LottieVector1D>(
+            value: LottieVector1D(value),
             time: startTime + CGFloat(t),
             isHold: false,
             inTangent: nil,

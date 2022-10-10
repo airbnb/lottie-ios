@@ -34,24 +34,24 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
     lineHeight = try dictionary.value(for: CodingKeys.lineHeight)
     baseline = try dictionary.value(for: CodingKeys.baseline)
     if let fillColorRawValue = dictionary[CodingKeys.fillColorData.rawValue] {
-      fillColorData = try? Color(value: fillColorRawValue)
+      fillColorData = try? LottieColor(value: fillColorRawValue)
     } else {
       fillColorData = nil
     }
     if let strokeColorRawValue = dictionary[CodingKeys.strokeColorData.rawValue] {
-      strokeColorData = try? Color(value: strokeColorRawValue)
+      strokeColorData = try? LottieColor(value: strokeColorRawValue)
     } else {
       strokeColorData = nil
     }
     strokeWidth = try? dictionary.value(for: CodingKeys.strokeWidth)
     strokeOverFill = try? dictionary.value(for: CodingKeys.strokeOverFill)
     if let textFramePositionRawValue = dictionary[CodingKeys.textFramePosition.rawValue] {
-      textFramePosition = try? Vector3D(value: textFramePositionRawValue)
+      textFramePosition = try? LottieVector3D(value: textFramePositionRawValue)
     } else {
       textFramePosition = nil
     }
     if let textFrameSizeRawValue = dictionary[CodingKeys.textFrameSize.rawValue] {
-      textFrameSize = try? Vector3D(value: textFrameSizeRawValue)
+      textFrameSize = try? LottieVector3D(value: textFrameSizeRawValue)
     } else {
       textFrameSize = nil
     }
@@ -88,10 +88,10 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
   let baseline: Double?
 
   /// Fill Color data
-  let fillColorData: Color?
+  let fillColorData: LottieColor?
 
   /// Scroke Color data
-  let strokeColorData: Color?
+  let strokeColorData: LottieColor?
 
   /// Stroke Width
   let strokeWidth: Double?
@@ -99,9 +99,9 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
   /// Stroke Over Fill
   let strokeOverFill: Bool?
 
-  let textFramePosition: Vector3D?
+  let textFramePosition: LottieVector3D?
 
-  let textFrameSize: Vector3D?
+  let textFrameSize: LottieVector3D?
 
   // MARK: Private
 

@@ -8,7 +8,7 @@
 import CoreGraphics
 import Foundation
 
-extension Color {
+extension LottieColor {
 
   // MARK: Lifecycle
 
