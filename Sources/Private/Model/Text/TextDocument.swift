@@ -46,12 +46,12 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
     strokeWidth = try? dictionary.value(for: CodingKeys.strokeWidth)
     strokeOverFill = try? dictionary.value(for: CodingKeys.strokeOverFill)
     if let textFramePositionRawValue = dictionary[CodingKeys.textFramePosition.rawValue] {
-      textFramePosition = try? Vector3D(value: textFramePositionRawValue)
+      textFramePosition = try? LottieVector3D(value: textFramePositionRawValue)
     } else {
       textFramePosition = nil
     }
     if let textFrameSizeRawValue = dictionary[CodingKeys.textFrameSize.rawValue] {
-      textFrameSize = try? Vector3D(value: textFrameSizeRawValue)
+      textFrameSize = try? LottieVector3D(value: textFrameSizeRawValue)
     } else {
       textFrameSize = nil
     }
@@ -99,9 +99,9 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
   /// Stroke Over Fill
   let strokeOverFill: Bool?
 
-  let textFramePosition: Vector3D?
+  let textFramePosition: LottieVector3D?
 
-  let textFrameSize: Vector3D?
+  let textFrameSize: LottieVector3D?
 
   // MARK: Private
 

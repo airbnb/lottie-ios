@@ -28,7 +28,7 @@ final class DashElement: Codable, DictionaryInitializable {
     }
     self.type = type
     let valueDictionary: [String: Any] = try dictionary.value(for: CodingKeys.value)
-    value = try KeyframeGroup<Vector1D>(dictionary: valueDictionary)
+    value = try KeyframeGroup<LottieVector1D>(dictionary: valueDictionary)
   }
 
   // MARK: Internal
@@ -39,6 +39,6 @@ final class DashElement: Codable, DictionaryInitializable {
   }
 
   let type: DashElementType
-  let value: KeyframeGroup<Vector1D>
+  let value: KeyframeGroup<LottieVector1D>
 
 }

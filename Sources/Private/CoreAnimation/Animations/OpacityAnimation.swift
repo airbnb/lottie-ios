@@ -7,7 +7,7 @@ import QuartzCore
 
 protocol OpacityAnimationModel {
   /// The opacity animation to apply to a `CALayer`
-  var opacity: KeyframeGroup<Vector1D> { get }
+  var opacity: KeyframeGroup<LottieVector1D> { get }
 }
 
 // MARK: - Transform + OpacityAnimationModel

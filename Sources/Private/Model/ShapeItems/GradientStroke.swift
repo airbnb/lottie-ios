@@ -33,13 +33,13 @@ final class GradientStroke: ShapeItem {
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: GradientStroke.CodingKeys.self)
-    opacity = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .opacity)
-    startPoint = try container.decode(KeyframeGroup<Vector3D>.self, forKey: .startPoint)
-    endPoint = try container.decode(KeyframeGroup<Vector3D>.self, forKey: .endPoint)
+    opacity = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .opacity)
+    startPoint = try container.decode(KeyframeGroup<LottieVector3D>.self, forKey: .startPoint)
+    endPoint = try container.decode(KeyframeGroup<LottieVector3D>.self, forKey: .endPoint)
     gradientType = try container.decode(GradientType.self, forKey: .gradientType)
-    highlightLength = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .highlightLength)
-    highlightAngle = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .highlightAngle)
-    width = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .width)
+    highlightLength = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .highlightLength)
+    highlightAngle = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .highlightAngle)
+    width = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .width)
     lineCap = try container.decodeIfPresent(LineCap.self, forKey: .lineCap) ?? .round
     lineJoin = try container.decodeIfPresent(LineJoin.self, forKey: .lineJoin) ?? .round
     miterLimit = try container.decodeIfPresent(Double.self, forKey: .miterLimit) ?? 4
@@ -53,28 +53,28 @@ final class GradientStroke: ShapeItem {
 
   required init(dictionary: [String: Any]) throws {
     let opacityDictionary: [String: Any] = try dictionary.value(for: CodingKeys.opacity)
-    opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
+    opacity = try KeyframeGroup<LottieVector1D>(dictionary: opacityDictionary)
     let startPointDictionary: [String: Any] = try dictionary.value(for: CodingKeys.startPoint)
-    startPoint = try KeyframeGroup<Vector3D>(dictionary: startPointDictionary)
+    startPoint = try KeyframeGroup<LottieVector3D>(dictionary: startPointDictionary)
     let endPointDictionary: [String: Any] = try dictionary.value(for: CodingKeys.endPoint)
-    endPoint = try KeyframeGroup<Vector3D>(dictionary: endPointDictionary)
+    endPoint = try KeyframeGroup<LottieVector3D>(dictionary: endPointDictionary)
     let gradientRawType: Int = try dictionary.value(for: CodingKeys.gradientType)
     guard let gradient = GradientType(rawValue: gradientRawType) else {
       throw InitializableError.invalidInput
     }
     gradientType = gradient
     if let highlightLengthDictionary = dictionary[CodingKeys.highlightLength.rawValue] as? [String: Any] {
-      highlightLength = try? KeyframeGroup<Vector1D>(dictionary: highlightLengthDictionary)
+      highlightLength = try? KeyframeGroup<LottieVector1D>(dictionary: highlightLengthDictionary)
     } else {
       highlightLength = nil
     }
     if let highlightAngleDictionary = dictionary[CodingKeys.highlightAngle.rawValue] as? [String: Any] {
-      highlightAngle = try? KeyframeGroup<Vector1D>(dictionary: highlightAngleDictionary)
+      highlightAngle = try? KeyframeGroup<LottieVector1D>(dictionary: highlightAngleDictionary)
     } else {
       highlightAngle = nil
     }
     let widthDictionary: [String: Any] = try dictionary.value(for: CodingKeys.width)
-    width = try KeyframeGroup<Vector1D>(dictionary: widthDictionary)
+    width = try KeyframeGroup<LottieVector1D>(dictionary: widthDictionary)
     if
       let lineCapRawValue = dictionary[CodingKeys.lineCap.rawValue] as? Int,
       let lineCap = LineCap(rawValue: lineCapRawValue)
@@ -104,22 +104,22 @@ final class GradientStroke: ShapeItem {
   // MARK: Internal
 
   /// The opacity of the fill
-  let opacity: KeyframeGroup<Vector1D>
+  let opacity: KeyframeGroup<LottieVector1D>
 
   /// The start of the gradient
-  let startPoint: KeyframeGroup<Vector3D>
+  let startPoint: KeyframeGroup<LottieVector3D>
 
   /// The end of the gradient
-  let endPoint: KeyframeGroup<Vector3D>
+  let endPoint: KeyframeGroup<LottieVector3D>
 
   /// The type of gradient
   let gradientType: GradientType
 
   /// Gradient Highlight Length. Only if type is Radial
-  let highlightLength: KeyframeGroup<Vector1D>?
+  let highlightLength: KeyframeGroup<LottieVector1D>?
 
   /// Highlight Angle. Only if type is Radial
-  let highlightAngle: KeyframeGroup<Vector1D>?
+  let highlightAngle: KeyframeGroup<LottieVector1D>?
 
   /// The number of color points in the gradient
   let numberOfColors: Int
@@ -128,7 +128,7 @@ final class GradientStroke: ShapeItem {
   let colors: KeyframeGroup<[Double]>
 
   /// The width of the stroke
-  let width: KeyframeGroup<Vector1D>
+  let width: KeyframeGroup<LottieVector1D>
 
   /// Line Cap
   let lineCap: LineCap

@@ -9,7 +9,7 @@ import QuartzCore
 /// A `ShapeItem` that represents a stroke
 protocol StrokeShapeItem: OpacityAnimationModel {
   var strokeColor: KeyframeGroup<LottieColor>? { get }
-  var width: KeyframeGroup<Vector1D> { get }
+  var width: KeyframeGroup<LottieVector1D> { get }
   var lineCap: LineCap { get }
   var lineJoin: LineJoin { get }
   var miterLimit: Double { get }

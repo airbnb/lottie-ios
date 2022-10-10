@@ -86,11 +86,10 @@ extension LottieLoopMode: Equatable {
 
 // MARK: - AnimationView
 
-@available(
-  *,
-  deprecated,
-  renamed: "LottieAnimationView",
-  message: "`AnimationView` has been renamed to `LottieAnimationView`, for consistency with the new `LottieAnimation` type.")
+@available(*, deprecated, renamed: "LottieAnimationView", message: """
+  `AnimationView` has been renamed to `LottieAnimationView`, for consistency with \
+  the new `LottieAnimation` type. This notice will be removed in Lottie 4.0.
+  """)
 public typealias AnimationView = LottieAnimationView
 
 // MARK: - LottieAnimationView
