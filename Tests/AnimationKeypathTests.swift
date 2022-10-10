@@ -29,7 +29,7 @@ final class AnimationKeypathTests: XCTestCase {
   }
 
   func testLayerForKeypath() {
-    let animationView = AnimationView(
+    let animationView = LottieAnimationView(
       animation: Samples.animation(named: "Boat_Loader"),
       configuration: LottieConfiguration(renderingEngine: .mainThread))
 

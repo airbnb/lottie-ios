@@ -25,8 +25,8 @@ public final class CompatibleAnimation: NSObject {
 
   // MARK: Internal
 
-  internal var animation: Animation? {
-    Animation.named(name, bundle: bundle)
+  internal var animation: LottieAnimation? {
+    LottieAnimation.named(name, bundle: bundle)
   }
 
   @objc
@@ -40,7 +40,7 @@ public final class CompatibleAnimation: NSObject {
   private let bundle: Bundle
 }
 
-/// An Objective-C compatible wrapper around Lottie's AnimationView.
+/// An Objective-C compatible wrapper around Lottie's LottieAnimationView.
 @objc
 public final class CompatibleAnimationView: UIView {
 
@@ -48,7 +48,7 @@ public final class CompatibleAnimationView: UIView {
 
   @objc
   public init(compatibleAnimation: CompatibleAnimation) {
-    animationView = AnimationView(animation: compatibleAnimation.animation)
+    animationView = LottieAnimationView(animation: compatibleAnimation.animation)
     self.compatibleAnimation = compatibleAnimation
     super.init(frame: .zero)
     commonInit()
@@ -56,7 +56,7 @@ public final class CompatibleAnimationView: UIView {
 
   @objc
   public override init(frame: CGRect) {
-    animationView = AnimationView()
+    animationView = LottieAnimationView()
     super.init(frame: frame)
     commonInit()
   }
@@ -252,14 +252,14 @@ public final class CompatibleAnimationView: UIView {
       color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
     }
 
-    let valueProvider = ColorValueProvider(Color(r: Double(red), g: Double(green), b: Double(blue), a: Double(alpha)))
+    let valueProvider = ColorValueProvider(LottieColor(r: Double(red), g: Double(green), b: Double(blue), a: Double(alpha)))
     animationView.setValueProvider(valueProvider, keypath: keypath.animationKeypath)
   }
 
   @objc
   public func getColorValue(for keypath: CompatibleAnimationKeypath, atFrame: CGFloat) -> UIColor? {
     let value = animationView.getValue(for: keypath.animationKeypath, atFrame: atFrame)
-    guard let colorValue = value as? Color else {
+    guard let colorValue = value as? LottieColor else {
       return nil;
     }
 
@@ -319,7 +319,7 @@ public final class CompatibleAnimationView: UIView {
 
   // MARK: Private
 
-  private let animationView: AnimationView
+  private let animationView: LottieAnimationView
 
   private func commonInit() {
     translatesAutoresizingMaskIntoConstraints = false

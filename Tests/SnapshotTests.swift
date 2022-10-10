@@ -140,7 +140,7 @@ class SnapshotTests: XCTestCase {
 
 // MARK: Animation + snapshotSize
 
-extension Animation {
+extension LottieAnimation {
   /// The size that this animation should be snapshot at
   fileprivate var snapshotSize: CGSize {
     let maxDimension: CGFloat = 500
@@ -209,9 +209,9 @@ enum Samples {
         .replacingOccurrences(of: ".json", with: "")
     }
 
-  static func animation(named sampleAnimationName: String) -> Animation? {
+  static func animation(named sampleAnimationName: String) -> LottieAnimation? {
     guard
-      let animation = Animation.named(
+      let animation = LottieAnimation.named(
         sampleAnimationName,
         bundle: .module,
         subdirectory: Samples.directoryName)
@@ -225,12 +225,12 @@ enum Samples {
 }
 
 extension SnapshotConfiguration {
-  /// Creates an `AnimationView` for the sample snapshot with the given name
+  /// Creates a `LottieAnimationView` for the sample snapshot with the given name
   static func makeAnimationView(
     for sampleAnimationName: String,
     configuration: LottieConfiguration,
     logger: LottieLogger = LottieLogger.shared)
-    -> AnimationView?
+    -> LottieAnimationView?
   {
     let snapshotConfiguration = SnapshotConfiguration.forSample(named: sampleAnimationName)
 
@@ -239,7 +239,7 @@ extension SnapshotConfiguration {
       let animation = Samples.animation(named: sampleAnimationName)
     else { return nil }
 
-    let animationView = AnimationView(
+    let animationView = LottieAnimationView(
       animation: animation,
       configuration: configuration,
       logger: logger)

@@ -9,10 +9,10 @@ import CoreGraphics
 import Foundation
 import QuartzCore
 
-// MARK: - Vector1D + Codable
+// MARK: - LottieVector1D + Codable
 
 /// Single value container. Needed because lottie sometimes wraps a Double in an array.
-extension Vector1D: Codable {
+extension LottieVector1D: Codable {
 
   // MARK: Lifecycle
 
@@ -41,9 +41,9 @@ extension Vector1D: Codable {
 
 }
 
-// MARK: - Vector1D + AnyInitializable
+// MARK: - LottieVector1D + AnyInitializable
 
-extension Vector1D: AnyInitializable {
+extension LottieVector1D: AnyInitializable {
 
   init(value: Any) throws {
     if
@@ -61,15 +61,23 @@ extension Vector1D: AnyInitializable {
 }
 
 extension Double {
-  var vectorValue: Vector1D {
-    Vector1D(self)
+  var vectorValue: LottieVector1D {
+    LottieVector1D(self)
   }
 }
 
 // MARK: - Vector2D
 
+@available(*, deprecated, renamed: "LottieVector2D", message: """
+  `Lottie.Vector2D` has been renamed to `LottieVector2D` for consistency with \
+  the new `LottieVector3D` type. This notice will be removed in Lottie 4.0.
+  """)
+public typealias Vector2D = LottieVector2D
+
+// MARK: - LottieVector2D
+
 /// Needed for decoding json {x: y:} to a CGPoint
-public struct Vector2D: Codable, Hashable {
+public struct LottieVector2D: Codable, Hashable {
 
   // MARK: Lifecycle
 
@@ -79,7 +87,7 @@ public struct Vector2D: Codable, Hashable {
   }
 
   public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: Vector2D.CodingKeys.self)
+    let container = try decoder.container(keyedBy: LottieVector2D.CodingKeys.self)
 
     do {
       let xValue: [Double] = try container.decode([Double].self, forKey: .x)
@@ -99,7 +107,7 @@ public struct Vector2D: Codable, Hashable {
   // MARK: Public
 
   public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: Vector2D.CodingKeys.self)
+    var container = encoder.container(keyedBy: LottieVector2D.CodingKeys.self)
     try container.encode(x, forKey: .x)
     try container.encode(y, forKey: .y)
   }
@@ -123,7 +131,7 @@ public struct Vector2D: Codable, Hashable {
 
 // MARK: AnyInitializable
 
-extension Vector2D: AnyInitializable {
+extension LottieVector2D: AnyInitializable {
 
   init(value: Any) throws {
     guard let dictionary = value as? [String: Any] else {
@@ -154,17 +162,17 @@ extension Vector2D: AnyInitializable {
 }
 
 extension CGPoint {
-  var vector2dValue: Vector2D {
-    Vector2D(x: Double(x), y: Double(y))
+  var vector2dValue: LottieVector2D {
+    LottieVector2D(x: Double(x), y: Double(y))
   }
 }
 
-// MARK: - Vector3D + Codable
+// MARK: - LottieVector3D + Codable
 
 /// A three dimensional vector.
 /// These vectors are encoded and decoded from [Double]
 
-extension Vector3D: Codable {
+extension LottieVector3D: Codable {
 
   // MARK: Lifecycle
 
@@ -207,9 +215,9 @@ extension Vector3D: Codable {
 
 }
 
-// MARK: - Vector3D + AnyInitializable
+// MARK: - LottieVector3D + AnyInitializable
 
-extension Vector3D: AnyInitializable {
+extension LottieVector3D: AnyInitializable {
 
   init(value: Any) throws {
     guard var array = value as? [Double] else {
@@ -222,7 +230,7 @@ extension Vector3D: AnyInitializable {
 
 }
 
-extension Vector3D {
+extension LottieVector3D {
   public var pointValue: CGPoint {
     CGPoint(x: x, y: y)
   }
@@ -233,14 +241,14 @@ extension Vector3D {
 }
 
 extension CGPoint {
-  var vector3dValue: Vector3D {
-    Vector3D(x: x, y: y, z: 0)
+  var vector3dValue: LottieVector3D {
+    LottieVector3D(x: x, y: y, z: 0)
   }
 }
 
 extension CGSize {
-  var vector3dValue: Vector3D {
-    Vector3D(x: width, y: height, z: 1)
+  var vector3dValue: LottieVector3D {
+    LottieVector3D(x: width, y: height, z: 1)
   }
 }
 

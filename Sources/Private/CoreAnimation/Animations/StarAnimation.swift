@@ -81,13 +81,13 @@ extension CAShapeLayer {
 extension Star {
   /// Data that represents how to render a star at a specific point in time
   struct Keyframe {
-    let position: Vector3D
-    let outerRadius: Vector1D
-    let innerRadius: Vector1D
-    let outerRoundness: Vector1D
-    let innerRoundness: Vector1D
-    let points: Vector1D
-    let rotation: Vector1D
+    let position: LottieVector3D
+    let outerRadius: LottieVector1D
+    let innerRadius: LottieVector1D
+    let outerRoundness: LottieVector1D
+    let innerRoundness: LottieVector1D
+    let points: LottieVector1D
+    let rotation: LottieVector1D
   }
 
   /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this star/polygon
@@ -95,9 +95,9 @@ extension Star {
     let combinedKeyframes = Keyframes.combinedIfPossible(
       position,
       outerRadius,
-      innerRadius ?? KeyframeGroup(Vector1D(0)),
+      innerRadius ?? KeyframeGroup(LottieVector1D(0)),
       outerRoundness,
-      innerRoundness ?? KeyframeGroup(Vector1D(0)),
+      innerRoundness ?? KeyframeGroup(LottieVector1D(0)),
       points,
       rotation,
       makeCombinedResult: Star.Keyframe.init)
@@ -112,10 +112,10 @@ extension Star {
           position: positionValue,
           outerRadius: try outerRadius.exactlyOneKeyframe(context: context, description: "star outerRadius"),
           innerRadius: try innerRadius?.exactlyOneKeyframe(context: context, description: "star innerRadius")
-            ?? Vector1D(0),
+            ?? LottieVector1D(0),
           outerRoundness: try outerRoundness.exactlyOneKeyframe(context: context, description: "star outerRoundness"),
           innerRoundness: try innerRoundness?.exactlyOneKeyframe(context: context, description: "star innerRoundness")
-            ?? Vector1D(0),
+            ?? LottieVector1D(0),
           points: try points.exactlyOneKeyframe(context: context, description: "star points"),
           rotation: try rotation.exactlyOneKeyframe(context: context, description: "star rotation"))
       }

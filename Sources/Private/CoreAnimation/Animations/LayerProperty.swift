@@ -28,7 +28,7 @@ struct LayerProperty<ValueRepresentation: Equatable> {
 // MARK: - CustomizableProperty
 
 /// A description of how a `CALayer` property can be customized dynamically
-/// at runtime using `AnimationView.setValueProvider(_:keypath:)`
+/// at runtime using `LottieAnimationView.setValueProvider(_:keypath:)`
 struct CustomizableProperty<ValueRepresentation> {
   /// The name that `AnimationKeypath`s can use to refer to this property
   ///  - When building an animation for this property that will be applied
@@ -219,7 +219,7 @@ extension CustomizableProperty {
     .init(
       name: [.color],
       conversion: { typeErasedValue in
-        guard let color = typeErasedValue as? Color else {
+        guard let color = typeErasedValue as? LottieColor else {
           return nil
         }
 

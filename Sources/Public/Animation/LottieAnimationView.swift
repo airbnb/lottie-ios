@@ -1,5 +1,5 @@
 //
-//  AnimationView.swift
+//  LottieAnimationView.swift
 //  lottie-swift
 //
 //  Created by Brandon Withrow on 1/23/19.
@@ -37,7 +37,7 @@ public enum LottieBackgroundBehavior {
 
   /// The default background behavior, based on the rendering engine being used to play the animation.
   ///  - Playing an animation using the Main Thread rendering engine comes with CPU overhead,
-  ///    so the animation should be paused or stopped when the `AnimationView` is not visible.
+  ///    so the animation should be paused or stopped when the `LottieAnimationView` is not visible.
   ///  - Playing an animation using the Core Animation rendering engine does not come with any
   ///    CPU overhead, so these animations do not need to be paused in the background.
   public static func `default`(for renderingEngine: RenderingEngine) -> LottieBackgroundBehavior {
@@ -86,8 +86,16 @@ extension LottieLoopMode: Equatable {
 
 // MARK: - AnimationView
 
+@available(*, deprecated, renamed: "LottieAnimationView", message: """
+  `AnimationView` has been renamed to `LottieAnimationView`, for consistency with \
+  the new `LottieAnimation` type. This notice will be removed in Lottie 4.0.
+  """)
+public typealias AnimationView = LottieAnimationView
+
+// MARK: - LottieAnimationView
+
 @IBDesignable
-final public class AnimationView: AnimationViewBase {
+final public class LottieAnimationView: LottieAnimationViewBase {
 
   // MARK: Lifecycle
 
@@ -95,7 +103,7 @@ final public class AnimationView: AnimationViewBase {
 
   /// Initializes an AnimationView with an animation.
   public init(
-    animation: Animation?,
+    animation: LottieAnimation?,
     imageProvider: AnimationImageProvider? = nil,
     textProvider: AnimationTextProvider = DefaultTextProvider(),
     fontProvider: AnimationFontProvider = DefaultFontProvider(),
@@ -153,7 +161,7 @@ final public class AnimationView: AnimationViewBase {
 
   // MARK: Public
 
-  /// The configuration that this `AnimationView` uses when playing its animation
+  /// The configuration that this `LottieAnimationView` uses when playing its animation
   public let configuration: LottieConfiguration
 
   /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
@@ -195,7 +203,7 @@ final public class AnimationView: AnimationViewBase {
   /// Sets the animation backing the animation view. Setting this will clear the
   /// view's contents, completion blocks and current state. The new animation will
   /// be loaded up and set to the beginning of its timeline.
-  public var animation: Animation? {
+  public var animation: LottieAnimation? {
     didSet {
       makeAnimationLayer(usingEngine: configuration.renderingEngine)
     }
@@ -341,7 +349,7 @@ final public class AnimationView: AnimationViewBase {
   }
 
   /// When `true` the animation will play back at the framerate encoded in the
-  /// `Animation` model. When `false` the animation will play at the framerate
+  /// `LottieAnimation` model. When `false` the animation will play at the framerate
   /// of the device.
   ///
   /// Defaults to false
@@ -559,7 +567,7 @@ final public class AnimationView: AnimationViewBase {
     animationLayer?.reloadImages()
   }
 
-  /// Forces the AnimationView to redraw its contents.
+  /// Forces the LottieAnimationView to redraw its contents.
   public func forceDisplayUpdate() {
     animationLayer?.forceDisplayUpdate()
   }
@@ -651,7 +659,7 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  /// Converts a CGRect from the AnimationView's coordinate space into the
+  /// Converts a CGRect from the LottieAnimationView's coordinate space into the
   /// coordinate space of the layer found at Keypath.
   ///
   /// If no layer is found, nil is returned
@@ -672,7 +680,7 @@ final public class AnimationView: AnimationViewBase {
     return animationLayer.convert(rect, to: sublayer)
   }
 
-  /// Converts a CGPoint from the AnimationView's coordinate space into the
+  /// Converts a CGPoint from the LottieAnimationView's coordinate space into the
   /// coordinate space of the layer found at Keypath.
   ///
   /// If no layer is found, nil is returned
@@ -762,7 +770,7 @@ final public class AnimationView: AnimationViewBase {
   @IBInspectable var animationName: String? {
     didSet {
       self.animation = animationName.flatMap {
-        Animation.named($0, animationCache: nil)
+        LottieAnimation.named($0, animationCache: nil)
       }
     }
   }
@@ -966,12 +974,12 @@ final public class AnimationView: AnimationViewBase {
 
   // MARK: Fileprivate
 
-  /// Context describing the animation that is currently playing in this `AnimationView`
+  /// Context describing the animation that is currently playing in this `LottieAnimationView`
   ///  - When non-nil, an animation is currently playing in this view. Otherwise,
   ///    the view is paused on a specific frame.
   fileprivate var animationContext: AnimationContext?
 
-  fileprivate var _activeAnimationName: String = AnimationView.animationName
+  fileprivate var _activeAnimationName: String = LottieAnimationView.animationName
   fileprivate var animationID = 0
 
   fileprivate var waitingToPlayAnimation = false
@@ -1023,7 +1031,7 @@ final public class AnimationView: AnimationViewBase {
     currentFrame = CGFloat(animation.startFrame)
   }
 
-  fileprivate func makeMainThreadAnimationLayer(for animation: Animation) -> MainThreadAnimationLayer {
+  fileprivate func makeMainThreadAnimationLayer(for animation: LottieAnimation) -> MainThreadAnimationLayer {
     MainThreadAnimationLayer(
       animation: animation,
       imageProvider: imageProvider.cachedImageProvider,
@@ -1032,7 +1040,7 @@ final public class AnimationView: AnimationViewBase {
       logger: logger)
   }
 
-  fileprivate func makeCoreAnimationLayer(for animation: Animation) -> CoreAnimationLayer? {
+  fileprivate func makeCoreAnimationLayer(for animation: LottieAnimation) -> CoreAnimationLayer? {
     do {
       let coreAnimationLayer = try CoreAnimationLayer(
         animation: animation,
@@ -1065,7 +1073,7 @@ final public class AnimationView: AnimationViewBase {
     }
   }
 
-  fileprivate func makeAutomaticEngineLayer(for animation: Animation) -> CoreAnimationLayer? {
+  fileprivate func makeAutomaticEngineLayer(for animation: LottieAnimation) -> CoreAnimationLayer? {
     do {
       // Attempt to set up the Core Animation layer. This can either throw immediately in `init`,
       // or throw an error later in `CALayer.display()` that will be reported in `didSetUpAnimation`.
@@ -1176,7 +1184,7 @@ final public class AnimationView: AnimationViewBase {
   ///    this step lets us avoid building the animations twice (once paused
   ///    and once again playing)
   ///  - This method should only be called immediately before setting up another
-  ///    animation -- otherwise this AnimationView could be put in an inconsistent state.
+  ///    animation -- otherwise this LottieAnimationView could be put in an inconsistent state.
   fileprivate func removeCurrentAnimationIfNecessary() {
     switch currentRenderingEngine {
     case .mainThread:
@@ -1185,7 +1193,7 @@ final public class AnimationView: AnimationViewBase {
       // We still need to remove the `animationContext`, since it should only be present
       // when an animation is actually playing. Without this calling `removeCurrentAnimationIfNecessary()`
       // and then setting the animation to a specific paused frame would put this
-      // `AnimationView` in an inconsistent state.
+      // `LottieAnimationView` in an inconsistent state.
       animationContext = nil
     }
   }
@@ -1249,7 +1257,7 @@ final public class AnimationView: AnimationViewBase {
     }
 
     animationID = animationID + 1
-    _activeAnimationName = AnimationView.animationName + String(animationID)
+    _activeAnimationName = LottieAnimationView.animationName + String(animationID)
 
     if let coreAnimationLayer = animationlayer as? CoreAnimationLayer {
       var animationContext = animationContext

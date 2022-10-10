@@ -105,17 +105,17 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
 
   let keypathName: String
 
-  let anchor: NodeProperty<Vector3D>?
-  let position: NodeProperty<Vector3D>?
-  let scale: NodeProperty<Vector3D>?
-  let skew: NodeProperty<Vector1D>?
-  let skewAxis: NodeProperty<Vector1D>?
-  let rotation: NodeProperty<Vector1D>?
-  let opacity: NodeProperty<Vector1D>?
-  let strokeColor: NodeProperty<Color>?
-  let fillColor: NodeProperty<Color>?
-  let strokeWidth: NodeProperty<Vector1D>?
-  let tracking: NodeProperty<Vector1D>?
+  let anchor: NodeProperty<LottieVector3D>?
+  let position: NodeProperty<LottieVector3D>?
+  let scale: NodeProperty<LottieVector3D>?
+  let skew: NodeProperty<LottieVector1D>?
+  let skewAxis: NodeProperty<LottieVector1D>?
+  let rotation: NodeProperty<LottieVector1D>?
+  let opacity: NodeProperty<LottieVector1D>?
+  let strokeColor: NodeProperty<LottieColor>?
+  let fillColor: NodeProperty<LottieColor>?
+  let strokeWidth: NodeProperty<LottieVector1D>?
+  let tracking: NodeProperty<LottieVector1D>?
 
   let keypathProperties: [String: AnyNodeProperty]
   let properties: [AnyNodeProperty]

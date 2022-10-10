@@ -108,7 +108,7 @@ extension PreCompLayer: CustomLayoutLayer {
 extension KeyframeInterpolator where ValueType == AnimationFrameTime {
   /// A `KeyframeInterpolator` for the given `timeRemapping` keyframes
   static func timeRemapping(
-    keyframes timeRemappingKeyframes: KeyframeGroup<Vector1D>,
+    keyframes timeRemappingKeyframes: KeyframeGroup<LottieVector1D>,
     context: LayerContext)
     throws
     -> KeyframeInterpolator<AnimationFrameTime>

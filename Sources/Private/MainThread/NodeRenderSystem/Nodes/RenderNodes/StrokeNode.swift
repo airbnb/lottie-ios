@@ -27,13 +27,13 @@ final class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
       let (dashPatterns, dashPhase) = dashes.shapeLayerConfiguration
       dashPattern = NodeProperty(provider: GroupInterpolator(keyframeGroups: dashPatterns))
       if dashPhase.count == 0 {
-        self.dashPhase = NodeProperty(provider: SingleValueProvider(Vector1D(0)))
+        self.dashPhase = NodeProperty(provider: SingleValueProvider(LottieVector1D(0)))
       } else {
         self.dashPhase = NodeProperty(provider: KeyframeInterpolator(keyframes: dashPhase))
       }
     } else {
-      dashPattern = NodeProperty(provider: SingleValueProvider([Vector1D]()))
-      dashPhase = NodeProperty(provider: SingleValueProvider(Vector1D(0)))
+      dashPattern = NodeProperty(provider: SingleValueProvider([LottieVector1D]()))
+      dashPhase = NodeProperty(provider: SingleValueProvider(LottieVector1D(0)))
     }
     keypathProperties = [
       "Opacity" : opacity,
@@ -51,12 +51,12 @@ final class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
   let keypathProperties: [String: AnyNodeProperty]
   let properties: [AnyNodeProperty]
 
-  let opacity: NodeProperty<Vector1D>
-  let color: NodeProperty<Color>
-  let width: NodeProperty<Vector1D>
+  let opacity: NodeProperty<LottieVector1D>
+  let color: NodeProperty<LottieColor>
+  let width: NodeProperty<LottieVector1D>
 
-  let dashPattern: NodeProperty<[Vector1D]>
-  let dashPhase: NodeProperty<Vector1D>
+  let dashPattern: NodeProperty<[LottieVector1D]>
+  let dashPhase: NodeProperty<LottieVector1D>
 
   let lineCap: LineCap
   let lineJoin: LineJoin
@@ -133,14 +133,14 @@ final class StrokeNode: AnimatorNode, RenderNode {
 
 extension Array where Element == DashElement {
   typealias ShapeLayerConfiguration = (
-    dashPatterns: ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>,
-    dashPhase: ContiguousArray<Keyframe<Vector1D>>)
+    dashPatterns: ContiguousArray<ContiguousArray<Keyframe<LottieVector1D>>>,
+    dashPhase: ContiguousArray<Keyframe<LottieVector1D>>)
 
   /// Converts the `[DashElement]` data model into `lineDashPattern` and `lineDashPhase`
   /// representations usable in a `CAShapeLayer`
   var shapeLayerConfiguration: ShapeLayerConfiguration {
-    var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<Vector1D>>>()
-    var dashPhase = ContiguousArray<Keyframe<Vector1D>>()
+    var dashPatterns = ContiguousArray<ContiguousArray<Keyframe<LottieVector1D>>>()
+    var dashPhase = ContiguousArray<Keyframe<LottieVector1D>>()
     for dash in self {
       if dash.type == .offset {
         dashPhase = dash.value.keyframes
@@ -150,14 +150,14 @@ extension Array where Element == DashElement {
     }
 
     dashPatterns = ContiguousArray(dashPatterns.map { pattern in
-      ContiguousArray(pattern.map { keyframe -> Keyframe<Vector1D> in
+      ContiguousArray(pattern.map { keyframe -> Keyframe<LottieVector1D> in
         // The recommended way to create a stroke of round dots, in theory,
         // is to use a value of 0 followed by the stroke width, but for
         // some reason Core Animation incorrectly (?) renders these as pills
         // instead of circles. As a workaround, for parity with Lottie on other
         // platforms, we can change `0`s to `0.01`: https://stackoverflow.com/a/38036486
         if keyframe.value.cgFloatValue == 0 {
-          return keyframe.withValue(Vector1D(0.01))
+          return keyframe.withValue(LottieVector1D(0.01))
         } else {
           return keyframe
         }

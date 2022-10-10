@@ -14,8 +14,8 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let animation = Animation.named("Samples/LottieLogo1")
-    let animationView = AnimationView(animation: animation)
+    let animation = LottieAnimation.named("Samples/LottieLogo1")
+    let animationView = LottieAnimationView(animation: animation)
     view.addSubview(animationView)
     animationView.contentMode = .scaleAspectFill
     animationView.loopMode = .loop

@@ -28,10 +28,12 @@ final class Mask: Codable, DictionaryInitializable {
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Mask.CodingKeys.self)
     mode = try container.decodeIfPresent(MaskMode.self, forKey: .mode) ?? .add
-    opacity = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .opacity) ?? KeyframeGroup(Vector1D(100))
+    opacity = try container
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .opacity) ?? KeyframeGroup(LottieVector1D(100))
     shape = try container.decode(KeyframeGroup<BezierPath>.self, forKey: .shape)
     inverted = try container.decodeIfPresent(Bool.self, forKey: .inverted) ?? false
-    expansion = try container.decodeIfPresent(KeyframeGroup<Vector1D>.self, forKey: .expansion) ?? KeyframeGroup(Vector1D(0))
+    expansion = try container
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .expansion) ?? KeyframeGroup(LottieVector1D(0))
   }
 
   init(dictionary: [String: Any]) throws {
@@ -44,17 +46,17 @@ final class Mask: Codable, DictionaryInitializable {
       mode = .add
     }
     if let opacityDictionary = dictionary[CodingKeys.opacity.rawValue] as? [String: Any] {
-      opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
+      opacity = try KeyframeGroup<LottieVector1D>(dictionary: opacityDictionary)
     } else {
-      opacity = KeyframeGroup(Vector1D(100))
+      opacity = KeyframeGroup(LottieVector1D(100))
     }
     let shapeDictionary: [String: Any] = try dictionary.value(for: CodingKeys.shape)
     shape = try KeyframeGroup<BezierPath>(dictionary: shapeDictionary)
     inverted = (try? dictionary.value(for: CodingKeys.inverted)) ?? false
     if let expansionDictionary = dictionary[CodingKeys.expansion.rawValue] as? [String: Any] {
-      expansion = try KeyframeGroup<Vector1D>(dictionary: expansionDictionary)
+      expansion = try KeyframeGroup<LottieVector1D>(dictionary: expansionDictionary)
     } else {
-      expansion = KeyframeGroup(Vector1D(0))
+      expansion = KeyframeGroup(LottieVector1D(0))
     }
   }
 
@@ -70,11 +72,11 @@ final class Mask: Codable, DictionaryInitializable {
 
   let mode: MaskMode
 
-  let opacity: KeyframeGroup<Vector1D>
+  let opacity: KeyframeGroup<LottieVector1D>
 
   let shape: KeyframeGroup<BezierPath>
 
   let inverted: Bool
 
-  let expansion: KeyframeGroup<Vector1D>
+  let expansion: KeyframeGroup<LottieVector1D>
 }

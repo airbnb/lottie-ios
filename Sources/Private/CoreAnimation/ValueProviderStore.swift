@@ -6,7 +6,7 @@ import QuartzCore
 // MARK: - ValueProviderStore
 
 /// Registration and storage for `AnyValueProvider`s that can dynamically
-/// provide custom values for `AnimationKeypath`s within an `Animation`.
+/// provide custom values for `AnimationKeypath`s within a `LottieAnimation`.
 final class ValueProviderStore {
 
   // MARK: Lifecycle

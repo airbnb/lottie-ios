@@ -23,12 +23,12 @@ final class StarNodeProperties: NodePropertyMap, KeypathSearchable {
     if let innerRadiusKeyframes = star.innerRadius?.keyframes {
       innerRadius = NodeProperty(provider: KeyframeInterpolator(keyframes: innerRadiusKeyframes))
     } else {
-      innerRadius = NodeProperty(provider: SingleValueProvider(Vector1D(0)))
+      innerRadius = NodeProperty(provider: SingleValueProvider(LottieVector1D(0)))
     }
     if let innderRoundedness = star.innerRoundness?.keyframes {
       innerRoundedness = NodeProperty(provider: KeyframeInterpolator(keyframes: innderRoundedness))
     } else {
-      innerRoundedness = NodeProperty(provider: SingleValueProvider(Vector1D(0)))
+      innerRoundedness = NodeProperty(provider: SingleValueProvider(LottieVector1D(0)))
     }
     rotation = NodeProperty(provider: KeyframeInterpolator(keyframes: star.rotation.keyframes))
     points = NodeProperty(provider: KeyframeInterpolator(keyframes: star.points.keyframes))
@@ -52,13 +52,13 @@ final class StarNodeProperties: NodePropertyMap, KeypathSearchable {
   let properties: [AnyNodeProperty]
 
   let direction: PathDirection
-  let position: NodeProperty<Vector3D>
-  let outerRadius: NodeProperty<Vector1D>
-  let outerRoundedness: NodeProperty<Vector1D>
-  let innerRadius: NodeProperty<Vector1D>
-  let innerRoundedness: NodeProperty<Vector1D>
-  let rotation: NodeProperty<Vector1D>
-  let points: NodeProperty<Vector1D>
+  let position: NodeProperty<LottieVector3D>
+  let outerRadius: NodeProperty<LottieVector1D>
+  let outerRoundedness: NodeProperty<LottieVector1D>
+  let innerRadius: NodeProperty<LottieVector1D>
+  let innerRoundedness: NodeProperty<LottieVector1D>
+  let rotation: NodeProperty<LottieVector1D>
+  let points: NodeProperty<LottieVector1D>
 }
 
 // MARK: - StarNode

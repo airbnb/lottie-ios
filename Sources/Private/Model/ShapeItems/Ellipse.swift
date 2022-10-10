@@ -24,8 +24,8 @@ final class Ellipse: ShapeItem {
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Ellipse.CodingKeys.self)
     direction = try container.decodeIfPresent(PathDirection.self, forKey: .direction) ?? .clockwise
-    position = try container.decode(KeyframeGroup<Vector3D>.self, forKey: .position)
-    size = try container.decode(KeyframeGroup<Vector3D>.self, forKey: .size)
+    position = try container.decode(KeyframeGroup<LottieVector3D>.self, forKey: .position)
+    size = try container.decode(KeyframeGroup<LottieVector3D>.self, forKey: .size)
     try super.init(from: decoder)
   }
 
@@ -39,9 +39,9 @@ final class Ellipse: ShapeItem {
       direction = .clockwise
     }
     let positionDictionary: [String: Any] = try dictionary.value(for: CodingKeys.position)
-    position = try KeyframeGroup<Vector3D>(dictionary: positionDictionary)
+    position = try KeyframeGroup<LottieVector3D>(dictionary: positionDictionary)
     let sizeDictionary: [String: Any] = try dictionary.value(for: CodingKeys.size)
-    size = try KeyframeGroup<Vector3D>(dictionary: sizeDictionary)
+    size = try KeyframeGroup<LottieVector3D>(dictionary: sizeDictionary)
     try super.init(dictionary: dictionary)
   }
 
@@ -51,10 +51,10 @@ final class Ellipse: ShapeItem {
   let direction: PathDirection
 
   /// The position of the ellipse
-  let position: KeyframeGroup<Vector3D>
+  let position: KeyframeGroup<LottieVector3D>
 
   /// The size of the ellipse
-  let size: KeyframeGroup<Vector3D>
+  let size: KeyframeGroup<LottieVector3D>
 
   override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)

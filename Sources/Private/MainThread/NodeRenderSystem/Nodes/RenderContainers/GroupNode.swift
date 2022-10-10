@@ -26,13 +26,13 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
       skewAxis = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.skewAxis.keyframes))
     } else {
       /// Transform node missing. Default to empty transform.
-      anchor = NodeProperty(provider: SingleValueProvider(Vector3D(x: CGFloat(0), y: CGFloat(0), z: CGFloat(0))))
-      position = NodeProperty(provider: SingleValueProvider(Vector3D(x: CGFloat(0), y: CGFloat(0), z: CGFloat(0))))
-      scale = NodeProperty(provider: SingleValueProvider(Vector3D(x: CGFloat(100), y: CGFloat(100), z: CGFloat(100))))
-      rotation = NodeProperty(provider: SingleValueProvider(Vector1D(0)))
-      opacity = NodeProperty(provider: SingleValueProvider(Vector1D(100)))
-      skew = NodeProperty(provider: SingleValueProvider(Vector1D(0)))
-      skewAxis = NodeProperty(provider: SingleValueProvider(Vector1D(0)))
+      anchor = NodeProperty(provider: SingleValueProvider(LottieVector3D(x: CGFloat(0), y: CGFloat(0), z: CGFloat(0))))
+      position = NodeProperty(provider: SingleValueProvider(LottieVector3D(x: CGFloat(0), y: CGFloat(0), z: CGFloat(0))))
+      scale = NodeProperty(provider: SingleValueProvider(LottieVector3D(x: CGFloat(100), y: CGFloat(100), z: CGFloat(100))))
+      rotation = NodeProperty(provider: SingleValueProvider(LottieVector1D(0)))
+      opacity = NodeProperty(provider: SingleValueProvider(LottieVector1D(100)))
+      skew = NodeProperty(provider: SingleValueProvider(LottieVector1D(0)))
+      skewAxis = NodeProperty(provider: SingleValueProvider(LottieVector1D(0)))
     }
     keypathProperties = [
       "Anchor Point" : anchor,
@@ -55,13 +55,13 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
   let keypathProperties: [String: AnyNodeProperty]
   let properties: [AnyNodeProperty]
 
-  let anchor: NodeProperty<Vector3D>
-  let position: NodeProperty<Vector3D>
-  let scale: NodeProperty<Vector3D>
-  let rotation: NodeProperty<Vector1D>
-  let opacity: NodeProperty<Vector1D>
-  let skew: NodeProperty<Vector1D>
-  let skewAxis: NodeProperty<Vector1D>
+  let anchor: NodeProperty<LottieVector3D>
+  let position: NodeProperty<LottieVector3D>
+  let scale: NodeProperty<LottieVector3D>
+  let rotation: NodeProperty<LottieVector1D>
+  let opacity: NodeProperty<LottieVector1D>
+  let skew: NodeProperty<LottieVector1D>
+  let skewAxis: NodeProperty<LottieVector1D>
 
   var caTransform: CATransform3D {
     CATransform3D.makeTransform(

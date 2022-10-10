@@ -7,8 +7,8 @@ import QuartzCore
 
 /// A `ShapeItem` that represents a gradient
 protocol GradientShapeItem: OpacityAnimationModel {
-  var startPoint: KeyframeGroup<Vector3D> { get }
-  var endPoint: KeyframeGroup<Vector3D> { get }
+  var startPoint: KeyframeGroup<LottieVector3D> { get }
+  var endPoint: KeyframeGroup<LottieVector3D> { get }
   var gradientType: GradientType { get }
   var numberOfColors: Int { get }
   var colors: KeyframeGroup<[Double]> { get }

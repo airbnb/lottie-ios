@@ -26,7 +26,7 @@ public final class GradientValueProvider: ValueProvider {
 
   /// Initializes with an array of colors.
   public init(
-    _ colors: [Color],
+    _ colors: [LottieColor],
     locations: [Double] = [])
   {
     self.colors = colors
@@ -37,13 +37,13 @@ public final class GradientValueProvider: ValueProvider {
 
   // MARK: Public
 
-  /// Returns a [Color] for a CGFloat(Frame Time).
-  public typealias ColorsValueBlock = (CGFloat) -> [Color]
+  /// Returns a [LottieColor] for a CGFloat(Frame Time).
+  public typealias ColorsValueBlock = (CGFloat) -> [LottieColor]
   /// Returns a [Double](Color locations) for a CGFloat(Frame Time).
   public typealias ColorLocationsBlock = (CGFloat) -> [Double]
 
   /// The colors values of the provider.
-  public var colors: [Color] {
+  public var colors: [LottieColor] {
     didSet {
       updateValueArray()
       hasUpdate = true
@@ -93,7 +93,7 @@ public final class GradientValueProvider: ValueProvider {
   private var locationsBlock: ColorLocationsBlock?
   private var value: [Double] = []
 
-  private func value(from colors: [Color], locations: [Double]) -> [Double] {
+  private func value(from colors: [LottieColor], locations: [Double]) -> [Double] {
     var colorValues = [Double]()
     var alphaValues = [Double]()
     var shouldAddAlphaValues = false

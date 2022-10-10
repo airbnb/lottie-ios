@@ -15,7 +15,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   ///  - This initializer is throwing, but will only throw when using
   ///    `CompatibilityTracker.Mode.abort`.
   init(
-    animation: Animation,
+    animation: LottieAnimation,
     imageProvider: AnimationImageProvider,
     textProvider: AnimationTextProvider,
     fontProvider: AnimationFontProvider,
@@ -156,7 +156,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
       } catch {
         if case CompatibilityTracker.Error.encounteredCompatibilityIssue(let compatibilityIssue) = error {
           // Even though the animation setup failed, we still update the layer's playback state
-          // so it can be read by the parent `AnimationView` when handling this error
+          // so it can be read by the parent `LottieAnimationView` when handling this error
           currentPlaybackState = pendingAnimationConfiguration.playbackState
 
           didSetUpAnimation?([compatibilityIssue])
@@ -187,7 +187,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   /// which is also the realtime animation progress of this layer's animation
   @objc private var animationProgress: CGFloat = 0
 
-  private let animation: Animation
+  private let animation: LottieAnimation
   private let valueProviderStore: ValueProviderStore
   private let compatibilityTracker: CompatibilityTracker
   private let logger: LottieLogger

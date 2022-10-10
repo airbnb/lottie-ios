@@ -90,7 +90,7 @@ final class PreCompositionLayer: CompositionLayer {
   // MARK: Internal
 
   let frameRate: CGFloat
-  let remappingNode: NodeProperty<Vector1D>?
+  let remappingNode: NodeProperty<LottieVector1D>?
 
   override var keypathProperties: [String: AnyNodeProperty] {
     guard let remappingNode = remappingNode else {

@@ -13,9 +13,9 @@ final class Stroke: ShapeItem {
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Stroke.CodingKeys.self)
-    opacity = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .opacity)
-    color = try container.decode(KeyframeGroup<Color>.self, forKey: .color)
-    width = try container.decode(KeyframeGroup<Vector1D>.self, forKey: .width)
+    opacity = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .opacity)
+    color = try container.decode(KeyframeGroup<LottieColor>.self, forKey: .color)
+    width = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .width)
     lineCap = try container.decodeIfPresent(LineCap.self, forKey: .lineCap) ?? .round
     lineJoin = try container.decodeIfPresent(LineJoin.self, forKey: .lineJoin) ?? .round
     miterLimit = try container.decodeIfPresent(Double.self, forKey: .miterLimit) ?? 4
@@ -25,11 +25,11 @@ final class Stroke: ShapeItem {
 
   required init(dictionary: [String: Any]) throws {
     let opacityDictionary: [String: Any] = try dictionary.value(for: CodingKeys.opacity)
-    opacity = try KeyframeGroup<Vector1D>(dictionary: opacityDictionary)
+    opacity = try KeyframeGroup<LottieVector1D>(dictionary: opacityDictionary)
     let colorDictionary: [String: Any] = try dictionary.value(for: CodingKeys.color)
-    color = try KeyframeGroup<Color>(dictionary: colorDictionary)
+    color = try KeyframeGroup<LottieColor>(dictionary: colorDictionary)
     let widthDictionary: [String: Any] = try dictionary.value(for: CodingKeys.width)
-    width = try KeyframeGroup<Vector1D>(dictionary: widthDictionary)
+    width = try KeyframeGroup<LottieVector1D>(dictionary: widthDictionary)
     if
       let lineCapRawValue = dictionary[CodingKeys.lineCap.rawValue] as? Int,
       let lineCap = LineCap(rawValue: lineCapRawValue)
@@ -55,13 +55,13 @@ final class Stroke: ShapeItem {
   // MARK: Internal
 
   /// The opacity of the stroke
-  let opacity: KeyframeGroup<Vector1D>
+  let opacity: KeyframeGroup<LottieVector1D>
 
   /// The Color of the stroke
-  let color: KeyframeGroup<Color>
+  let color: KeyframeGroup<LottieColor>
 
   /// The width of the stroke
-  let width: KeyframeGroup<Vector1D>
+  let width: KeyframeGroup<LottieVector1D>
 
   /// Line Cap
   let lineCap: LineCap

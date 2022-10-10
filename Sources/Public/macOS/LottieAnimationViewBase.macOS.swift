@@ -1,5 +1,5 @@
 //
-//  AnimationViewBase.swift
+//  LottieAnimationViewBase.swift
 //  lottie-swift-iOS
 //
 //  Created by Brandon Withrow on 2/6/19.
@@ -24,10 +24,10 @@ public enum LottieContentMode: Int {
   case bottomRight
 }
 
-/// The base view for `AnimationView` on macOs.
+/// The base view for `LottieAnimationView` on macOs.
 ///
-/// Enables the `AnimationView` implementation to be shared across platforms.
-public class AnimationViewBase: NSView {
+/// Enables the `LottieAnimationView` implementation to be shared across platforms.
+public class LottieAnimationViewBase: NSView {
 
   // MARK: Public
 

@@ -18,7 +18,7 @@ protocol AnimationLayer: CALayer {
 // Context describing the timing parameters of the current animation
 struct LayerAnimationContext {
   /// The animation being played
-  let animation: Animation
+  let animation: LottieAnimation
 
   /// The timing configuration that should be applied to `CAAnimation`s
   let timingConfiguration: CoreAnimationLayer.CAMediaTimingConfiguration

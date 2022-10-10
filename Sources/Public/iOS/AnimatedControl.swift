@@ -31,10 +31,10 @@ open class AnimatedControl: UIControl {
   // MARK: Initializers
 
   public init(
-    animation: Animation,
+    animation: LottieAnimation,
     configuration: LottieConfiguration = .shared)
   {
-    animationView = AnimationView(
+    animationView = LottieAnimationView(
       animation: animation,
       configuration: configuration)
 
@@ -43,13 +43,13 @@ open class AnimatedControl: UIControl {
   }
 
   public init() {
-    animationView = AnimationView()
+    animationView = LottieAnimationView()
     super.init(frame: .zero)
     commonInit()
   }
 
   required public init?(coder aDecoder: NSCoder) {
-    animationView = AnimationView()
+    animationView = LottieAnimationView()
     super.init(coder: aDecoder)
     commonInit()
   }
@@ -105,10 +105,10 @@ open class AnimatedControl: UIControl {
   // MARK: Public
 
   /// The animation view in which the animation is rendered.
-  public let animationView: AnimationView
+  public let animationView: LottieAnimationView
 
   /// The animation backing the animated control.
-  public var animation: Animation? {
+  public var animation: LottieAnimation? {
     didSet {
       animationView.animation = animation
       animationView.bounds = animation?.bounds ?? .zero
