@@ -10,14 +10,18 @@ import QuartzCore
 /// or the bounds of its sublayers
 final class InfiniteOpaqueAnimationLayer: BaseAnimationLayer {
 
+  // MARK: Lifecycle
+
   override init() {
     super.init()
     addSublayer(additionalPaddingLayer)
   }
 
-  required init?(coder: NSCoder) {
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+
+  // MARK: Internal
 
   override func layoutSublayers() {
     super.layoutSublayers()
@@ -38,6 +42,8 @@ final class InfiniteOpaqueAnimationLayer: BaseAnimationLayer {
       scaleRatioY,
       1)
   }
+
+  // MARK: Private
 
   private let additionalPaddingLayer = CALayer()
 
