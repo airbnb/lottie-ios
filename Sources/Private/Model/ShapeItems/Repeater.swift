@@ -13,8 +13,10 @@ final class Repeater: ShapeItem {
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Repeater.CodingKeys.self)
-    copies = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .copies) ?? KeyframeGroup(LottieVector1D(0))
-    offset = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .offset) ?? KeyframeGroup(LottieVector1D(0))
+    copies = try container
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .copies) ?? KeyframeGroup(LottieVector1D(0))
+    offset = try container
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .offset) ?? KeyframeGroup(LottieVector1D(0))
     let transformContainer = try container.nestedContainer(keyedBy: TransformKeys.self, forKey: .transform)
     startOpacity = try transformContainer
       .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .startOpacity) ?? KeyframeGroup(LottieVector1D(100))
@@ -23,11 +25,14 @@ final class Repeater: ShapeItem {
     rotation = try transformContainer
       .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotation) ?? KeyframeGroup(LottieVector1D(0))
     position = try transformContainer
-      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .position) ?? KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .position) ??
+      KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
     anchorPoint = try transformContainer
-      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .anchorPoint) ?? KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .anchorPoint) ??
+      KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
     scale = try transformContainer
-      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .scale) ?? KeyframeGroup(LottieVector3D(x: Double(100), y: 100, z: 100))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .scale) ??
+      KeyframeGroup(LottieVector3D(x: Double(100), y: 100, z: 100))
     try super.init(from: decoder)
   }
 

@@ -15,6 +15,8 @@ import Foundation
   """)
 public typealias Vector1D = LottieVector1D
 
+// MARK: - LottieVector1D
+
 public struct LottieVector1D: Hashable {
 
   public init(_ value: Double) {
@@ -32,6 +34,8 @@ public struct LottieVector1D: Hashable {
   the Apple SDK `Spatial.Vector3D` type. This notice will be removed in Lottie 4.0.
   """)
 public typealias Vector3D = LottieVector3D
+
+// MARK: - LottieVector3D
 
 /// A three dimensional vector.
 /// These vectors are encoded and decoded from [Double]

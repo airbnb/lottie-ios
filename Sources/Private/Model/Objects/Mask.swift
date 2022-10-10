@@ -28,10 +28,12 @@ final class Mask: Codable, DictionaryInitializable {
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Mask.CodingKeys.self)
     mode = try container.decodeIfPresent(MaskMode.self, forKey: .mode) ?? .add
-    opacity = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .opacity) ?? KeyframeGroup(LottieVector1D(100))
+    opacity = try container
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .opacity) ?? KeyframeGroup(LottieVector1D(100))
     shape = try container.decode(KeyframeGroup<BezierPath>.self, forKey: .shape)
     inverted = try container.decodeIfPresent(Bool.self, forKey: .inverted) ?? false
-    expansion = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .expansion) ?? KeyframeGroup(LottieVector1D(0))
+    expansion = try container
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .expansion) ?? KeyframeGroup(LottieVector1D(0))
   }
 
   init(dictionary: [String: Any]) throws {

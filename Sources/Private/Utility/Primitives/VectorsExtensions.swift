@@ -9,7 +9,7 @@ import CoreGraphics
 import Foundation
 import QuartzCore
 
-// MARK: - Vector1D + Codable
+// MARK: - LottieVector1D + Codable
 
 /// Single value container. Needed because lottie sometimes wraps a Double in an array.
 extension LottieVector1D: Codable {
@@ -41,7 +41,7 @@ extension LottieVector1D: Codable {
 
 }
 
-// MARK: - Vector1D + AnyInitializable
+// MARK: - LottieVector1D + AnyInitializable
 
 extension LottieVector1D: AnyInitializable {
 
@@ -73,6 +73,8 @@ extension Double {
   the new `LottieVector3D` type. This notice will be removed in Lottie 4.0.
   """)
 public typealias Vector2D = LottieVector2D
+
+// MARK: - LottieVector2D
 
 /// Needed for decoding json {x: y:} to a CGPoint
 public struct LottieVector2D: Codable, Hashable {
@@ -165,7 +167,7 @@ extension CGPoint {
   }
 }
 
-// MARK: - Vector3D + Codable
+// MARK: - LottieVector3D + Codable
 
 /// A three dimensional vector.
 /// These vectors are encoded and decoded from [Double]
@@ -213,7 +215,7 @@ extension LottieVector3D: Codable {
 
 }
 
-// MARK: - Vector3D + AnyInitializable
+// MARK: - LottieVector3D + AnyInitializable
 
 extension LottieVector3D: AnyInitializable {
 

@@ -180,7 +180,7 @@ extension LottieColor: Interpolatable {
   }
 }
 
-// MARK: - Vector1D + Interpolatable
+// MARK: - LottieVector1D + Interpolatable
 
 extension LottieVector1D: Interpolatable {
   public func interpolate(to: LottieVector1D, amount: CGFloat) -> LottieVector1D {
@@ -188,7 +188,7 @@ extension LottieVector1D: Interpolatable {
   }
 }
 
-// MARK: - Vector2D + SpatialInterpolatable
+// MARK: - LottieVector2D + SpatialInterpolatable
 
 extension LottieVector2D: SpatialInterpolatable {
   public func interpolate(
@@ -207,7 +207,7 @@ extension LottieVector2D: SpatialInterpolatable {
   }
 }
 
-// MARK: - Vector3D + SpatialInterpolatable
+// MARK: - LottieVector3D + SpatialInterpolatable
 
 extension LottieVector3D: SpatialInterpolatable {
   public func interpolate(

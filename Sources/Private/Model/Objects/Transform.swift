@@ -19,7 +19,8 @@ final class Transform: Codable, DictionaryInitializable {
 
     // AnchorPoint
     anchorPoint = try container
-      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .anchorPoint) ?? KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .anchorPoint) ??
+      KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
 
     // Position
     if container.contains(.positionX), container.contains(.positionY) {
@@ -50,18 +51,21 @@ final class Transform: Codable, DictionaryInitializable {
 
     // Scale
     scale = try container
-      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .scale) ?? KeyframeGroup(LottieVector3D(x: Double(100), y: 100, z: 100))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .scale) ??
+      KeyframeGroup(LottieVector3D(x: Double(100), y: 100, z: 100))
 
     // Rotation
     if let rotationZ = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotationZ) {
       rotation = rotationZ
     } else {
-      rotation = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotation) ?? KeyframeGroup(LottieVector1D(0))
+      rotation = try container
+        .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotation) ?? KeyframeGroup(LottieVector1D(0))
     }
     rotationZ = nil
 
     // Opacity
-    opacity = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .opacity) ?? KeyframeGroup(LottieVector1D(100))
+    opacity = try container
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .opacity) ?? KeyframeGroup(LottieVector1D(100))
   }
 
   init(dictionary: [String: Any]) throws {

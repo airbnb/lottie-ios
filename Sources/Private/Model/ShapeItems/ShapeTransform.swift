@@ -14,15 +14,21 @@ final class ShapeTransform: ShapeItem {
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: ShapeTransform.CodingKeys.self)
     anchor = try container
-      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .anchor) ?? KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .anchor) ??
+      KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
     position = try container
-      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .position) ?? KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .position) ??
+      KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
     scale = try container
-      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .scale) ?? KeyframeGroup(LottieVector3D(x: Double(100), y: 100, z: 100))
-    rotation = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotation) ?? KeyframeGroup(LottieVector1D(0))
-    opacity = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .opacity) ?? KeyframeGroup(LottieVector1D(100))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .scale) ??
+      KeyframeGroup(LottieVector3D(x: Double(100), y: 100, z: 100))
+    rotation = try container
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotation) ?? KeyframeGroup(LottieVector1D(0))
+    opacity = try container
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .opacity) ?? KeyframeGroup(LottieVector1D(100))
     skew = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .skew) ?? KeyframeGroup(LottieVector1D(0))
-    skewAxis = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .skewAxis) ?? KeyframeGroup(LottieVector1D(0))
+    skewAxis = try container
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .skewAxis) ?? KeyframeGroup(LottieVector1D(0))
     try super.init(from: decoder)
   }
 
