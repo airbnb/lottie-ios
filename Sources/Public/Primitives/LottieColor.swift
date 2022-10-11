@@ -26,14 +26,6 @@ public enum ColorFormatDenominator: Hashable {
   }
 }
 
-// MARK: - Color
-
-@available(*, deprecated, renamed: "LottieColor", message: """
-  `Lottie.Color` has been renamed to `LottieColor`, to prevent conflicts with \
-  the `SwiftUI.Color` type. This notice will be removed in Lottie 4.0.
-  """)
-public typealias Color = LottieColor
-
 // MARK: - LottieColor
 
 public struct LottieColor: Hashable {

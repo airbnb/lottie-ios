@@ -66,14 +66,6 @@ extension Double {
   }
 }
 
-// MARK: - Vector2D
-
-@available(*, deprecated, renamed: "LottieVector2D", message: """
-  `Lottie.Vector2D` has been renamed to `LottieVector2D` for consistency with \
-  the new `LottieVector3D` type. This notice will be removed in Lottie 4.0.
-  """)
-public typealias Vector2D = LottieVector2D
-
 // MARK: - LottieVector2D
 
 /// Needed for decoding json {x: y:} to a CGPoint
