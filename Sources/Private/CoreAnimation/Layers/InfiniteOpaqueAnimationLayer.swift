@@ -39,11 +39,11 @@ final class InfiniteOpaqueAnimationLayer: BaseAnimationLayer {
     // by `additionalPadding` at each size, and centered at the center
     // of this layer. Since `additionalPadding` is very large, this has
     // the affect of making `additionalPaddingLayer` appear infinite.
-    let scaleRatioX = (bounds.width + (additionalPadding * 2)) / bounds.width
-    let scaleRatioY = (bounds.height + (additionalPadding * 2)) / bounds.height
+    let scaleRatioX = (bounds.width + (CALayer.veryLargeLayerPadding * 2)) / bounds.width
+    let scaleRatioY = (bounds.height + (CALayer.veryLargeLayerPadding * 2)) / bounds.height
 
     additionalPaddingLayer.transform = CATransform3DScale(
-      CATransform3DMakeTranslation(-additionalPadding, -additionalPadding, 0),
+      CATransform3DMakeTranslation(-CALayer.veryLargeLayerPadding, -CALayer.veryLargeLayerPadding, 0),
       scaleRatioX,
       scaleRatioY,
       1)
@@ -52,9 +52,5 @@ final class InfiniteOpaqueAnimationLayer: BaseAnimationLayer {
   // MARK: Private
 
   private let additionalPaddingLayer = CALayer()
-
-  /// Additional padding around `self.bounds` that should be filled in with `self.backgroundColor`
-  ///  - This specific value is arbitrary and can be increased if necessary.
-  private let additionalPadding: CGFloat = 10_000.0
 
 }
