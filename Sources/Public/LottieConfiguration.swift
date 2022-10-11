@@ -6,6 +6,8 @@
 /// Global configuration options for Lottie animations
 public struct LottieConfiguration: Hashable {
 
+  // MARK: Lifecycle
+
   public init(
     renderingEngine: RenderingEngineOption = .automatic,
     decodingStrategy: DecodingStrategy = .codable)
@@ -13,6 +15,8 @@ public struct LottieConfiguration: Hashable {
     self.renderingEngine = renderingEngine
     self.decodingStrategy = decodingStrategy
   }
+
+  // MARK: Public
 
   /// The global configuration of Lottie,
   /// which applies to all `LottieAnimationView`s by default.
@@ -40,6 +44,8 @@ public enum RenderingEngineOption: Hashable {
 
   /// Uses the specified rendering engine
   case specific(RenderingEngine)
+
+  // MARK: Public
 
   /// The Main Thread rendering engine, which supports all Lottie features
   /// but runs on the main thread, which comes with some CPU overhead and
