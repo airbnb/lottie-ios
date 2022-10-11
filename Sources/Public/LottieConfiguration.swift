@@ -7,7 +7,7 @@
 public struct LottieConfiguration: Hashable {
 
   public init(
-    renderingEngine: RenderingEngineOption = .mainThread,
+    renderingEngine: RenderingEngineOption = .automatic,
     decodingStrategy: DecodingStrategy = .codable)
   {
     self.renderingEngine = renderingEngine
@@ -19,6 +19,10 @@ public struct LottieConfiguration: Hashable {
   public static var shared = LottieConfiguration()
 
   /// The rendering engine implementation to use when displaying an animation
+  ///  - Defaults to `RenderingEngineOption.automatic`, which uses the
+  ///    Core Animation rendering engine for supported animations, and
+  ///    falls back to using the Main Thread rendering engine for
+  ///    animations that use features not supported by the Core Animation engine.
   public var renderingEngine: RenderingEngineOption
 
   /// The decoding implementation to use when parsing an animation JSON file
@@ -45,6 +49,12 @@ public enum RenderingEngineOption: Hashable {
   /// The Core Animation rendering engine, that animates using Core Animation
   /// and has better performance characteristics than the Main Thread engine,
   /// but doesn't support all Lottie features.
+  ///  - In general, prefer using `RenderingEngineOption.automatic` over
+  ///    `RenderingEngineOption.coreAnimation`. The Core Animation rendering
+  ///    engine doesn't support all features supported by the Main Thread
+  ///    rendering engine. When using `RenderingEngineOption.automatic`,
+  ///    Lottie will automatically fall back to the Main Thread engine
+  ///    when necessary.
   public static var coreAnimation: RenderingEngineOption { .specific(.coreAnimation) }
 }
 
