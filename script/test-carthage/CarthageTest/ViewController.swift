@@ -8,7 +8,7 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    let animationView = AnimationView()
+    let animationView = LottieAnimationView()
     view.addSubview(animationView)
   }
 
