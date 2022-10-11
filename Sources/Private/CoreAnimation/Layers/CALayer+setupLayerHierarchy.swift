@@ -123,7 +123,9 @@ extension CALayer {
       // layer being masked, this creates an inverted mask where only areas _outside_
       // of the mask layer are visible.
       // https://developer.apple.com/documentation/coregraphics/cgblendmode/xor
-      let base = BaseAnimationLayer()
+      //  - The inverted mask is supposed to expand infinitely around the shape,
+      //    so we use `InfiniteOpaqueAnimationLayer`
+      let base = InfiniteOpaqueAnimationLayer()
       base.backgroundColor = .rgb(0, 0, 0)
       base.addSublayer(maskLayer)
       maskLayer.compositingFilter = "xor"

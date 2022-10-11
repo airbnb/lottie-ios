@@ -30,6 +30,9 @@
 		08F8B20F2898A7B100CB5323 /* RepeaterLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F8B20C2898A7B100CB5323 /* RepeaterLayer.swift */; };
 		08F8B211289990B700CB5323 /* Samples in Resources */ = {isa = PBXBuildFile; fileRef = 08F8B210289990B700CB5323 /* Samples */; };
 		08F8B213289990CB00CB5323 /* SnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F8B212289990CB00CB5323 /* SnapshotTests.swift */; };
+		08FE934E28F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE934D28F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift */; };
+		08FE934F28F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE934D28F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift */; };
+		08FE935028F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE934D28F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift */; };
 		19465F52282F998B00BB2C97 /* CachedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19465F51282F998B00BB2C97 /* CachedImageProvider.swift */; };
 		19465F53282F998B00BB2C97 /* CachedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19465F51282F998B00BB2C97 /* CachedImageProvider.swift */; };
 		19465F54282F998B00BB2C97 /* CachedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19465F51282F998B00BB2C97 /* CachedImageProvider.swift */; };
@@ -600,6 +603,7 @@
 		08F8B20C2898A7B100CB5323 /* RepeaterLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeaterLayer.swift; sourceTree = "<group>"; };
 		08F8B210289990B700CB5323 /* Samples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Samples; sourceTree = "<group>"; };
 		08F8B212289990CB00CB5323 /* SnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTests.swift; sourceTree = "<group>"; };
+		08FE934D28F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteOpaqueAnimationLayer.swift; sourceTree = "<group>"; };
 		19465F51282F998B00BB2C97 /* CachedImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageProvider.swift; sourceTree = "<group>"; };
 		2E044E262820536800FA773B /* AutomaticEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticEngineTests.swift; sourceTree = "<group>"; };
 		2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcodedFontProvider.swift; sourceTree = "<group>"; };
@@ -1216,6 +1220,7 @@
 				2E9C95A42822F43100677516 /* BaseAnimationLayer.swift */,
 				2E9C95A52822F43100677516 /* PreCompLayer.swift */,
 				08F8B20C2898A7B100CB5323 /* RepeaterLayer.swift */,
+				08FE934D28F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift */,
 			);
 			path = Layers;
 			sourceTree = "<group>";
@@ -1815,6 +1820,7 @@
 				2E9C96842822F43100677516 /* StrokeRenderer.swift in Sources */,
 				2E9C965A2822F43100677516 /* MaskContainerLayer.swift in Sources */,
 				2E9C96452822F43100677516 /* CompositionLayer.swift in Sources */,
+				08FE934E28F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift in Sources */,
 				2E9C95F42822F43100677516 /* Stroke.swift in Sources */,
 				2E9C96722822F43100677516 /* CompositionLayersInitializer.swift in Sources */,
 				2EAF5A9E27A0798700E00531 /* LottieAnimationViewBase.macOS.swift in Sources */,
@@ -2027,6 +2033,7 @@
 				2E9C96852822F43100677516 /* StrokeRenderer.swift in Sources */,
 				2E9C965B2822F43100677516 /* MaskContainerLayer.swift in Sources */,
 				2E9C96462822F43100677516 /* CompositionLayer.swift in Sources */,
+				08FE934F28F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift in Sources */,
 				2E9C95F52822F43100677516 /* Stroke.swift in Sources */,
 				2E9C96732822F43100677516 /* CompositionLayersInitializer.swift in Sources */,
 				2EAF5A9F27A0798700E00531 /* LottieAnimationViewBase.macOS.swift in Sources */,
@@ -2218,6 +2225,7 @@
 				2E9C96862822F43100677516 /* StrokeRenderer.swift in Sources */,
 				2E9C965C2822F43100677516 /* MaskContainerLayer.swift in Sources */,
 				2E9C96472822F43100677516 /* CompositionLayer.swift in Sources */,
+				08FE935028F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift in Sources */,
 				2E9C95F62822F43100677516 /* Stroke.swift in Sources */,
 				2E9C96742822F43100677516 /* CompositionLayersInitializer.swift in Sources */,
 				2EAF5AA027A0798700E00531 /* LottieAnimationViewBase.macOS.swift in Sources */,
