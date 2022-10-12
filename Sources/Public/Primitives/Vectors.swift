@@ -7,14 +7,6 @@
 
 import Foundation
 
-// MARK: - Vector1D
-
-@available(*, deprecated, renamed: "LottieVector1D", message: """
-  `Lottie.Vector1D` has been renamed to `LottieVector1D` for consistency with \
-  the new `LottieVector3D` type. This notice will be removed in Lottie 4.0.
-  """)
-public typealias Vector1D = LottieVector1D
-
 // MARK: - LottieVector1D
 
 public struct LottieVector1D: Hashable {
@@ -26,14 +18,6 @@ public struct LottieVector1D: Hashable {
   public let value: Double
 
 }
-
-// MARK: - Vector3D
-
-@available(*, deprecated, renamed: "LottieVector3D", message: """
-  `Lottie.Vector3D` has been renamed to `LottieVector3D`, to prevent conflicts with \
-  the Apple SDK `Spatial.Vector3D` type. This notice will be removed in Lottie 4.0.
-  """)
-public typealias Vector3D = LottieVector3D
 
 // MARK: - LottieVector3D
 

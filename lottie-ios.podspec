@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'lottie-ios'
-  s.version          = '3.5.0'
+  s.version          = '4.0.0'
   s.summary          = 'A library to render native animations from bodymovin json'
 
   s.description = <<-DESC
@@ -19,7 +19,7 @@ Lottie enables designers to create and ship beautiful animations without an engi
 
   s.homepage         = 'https://github.com/airbnb/lottie-ios'
   s.license          = { :type => 'Apache', :file => 'LICENSE' }
-  s.author           = { 'Brandon Withrow' => 'buba447@gmail.com' }
+  s.author           = { 'Brandon Withrow' => 'buba447@gmail.com', 'Cal Stephens' => 'cal.stephens@airbnb.com' }
   s.source           = { :git => 'https://github.com/airbnb/lottie-ios.git', :tag => s.version.to_s }
 
   s.swift_version = '5.3'

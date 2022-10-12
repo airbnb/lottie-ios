@@ -17,11 +17,11 @@ final class ValueProvidersTests: XCTestCase {
 
     let keypath = AnimationKeypath(keypath: "A1.Shape 1.Stroke 1.Color")
     animationView.setValueProvider(ColorValueProvider(.red), keypath: keypath)
-    let updatedColor = try XCTUnwrap(animationView.getValue(for: keypath, atFrame: 0) as? Color)
+    let updatedColor = try XCTUnwrap(animationView.getValue(for: keypath, atFrame: 0) as? LottieColor)
     XCTAssertEqual(updatedColor, .red)
 
-    let originalColor = try XCTUnwrap(animationView.getOriginalValue(for: keypath, atFrame: 0) as? Color)
-    XCTAssertEqual(originalColor, Color(r: 0.4, g: 0.16, b: 0.7, a: 1))
+    let originalColor = try XCTUnwrap(animationView.getOriginalValue(for: keypath, atFrame: 0) as? LottieColor)
+    XCTAssertEqual(originalColor, LottieColor(r: 0.4, g: 0.16, b: 0.7, a: 1))
   }
 
 }
