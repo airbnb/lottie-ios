@@ -16,10 +16,11 @@ public enum LottieBackgroundBehavior {
   case stop
 
   /// Pause the animation in its current state. The completion block is called.
-  ///  - This is the default when using the Main Thread rendering engine.
   case pause
 
-  /// Pause the animation and restart it when the application moves to the foreground. The completion block is stored and called when the animation completes.
+  /// Pause the animation and restart it when the application moves to the foreground.
+  /// The completion block is stored and called when the animation completes.
+  ///  - This is the default when using the Main Thread rendering engine.
   case pauseAndRestore
 
   /// Stops the animation and sets it to the end of its current play time. The completion block is called.
@@ -43,7 +44,7 @@ public enum LottieBackgroundBehavior {
   public static func `default`(for renderingEngine: RenderingEngine) -> LottieBackgroundBehavior {
     switch renderingEngine {
     case .mainThread:
-      return .pause
+      return .pauseAndRestore
     case .coreAnimation:
       return .continuePlaying
     }
