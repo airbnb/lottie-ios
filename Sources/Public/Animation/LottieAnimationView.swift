@@ -482,11 +482,15 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   /// - Parameter fromMarker: The start marker for the animation playback. If `nil` the
   /// animation will start at the current progress.
   /// - Parameter toMarker: The end marker for the animation playback.
+  /// - Parameter playEndMarkerFrame: A flag to determine whether or not to play the frame of the end marker. If the
+  /// end marker represents the end of the section to play, it should be to true. If the provided end marker
+  /// represents the beginning of the next section, it should be false.
   /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
   /// - Parameter completion: An optional completion closure to be called when the animation stops.
   public func play(
     fromMarker: String? = nil,
     toMarker: String,
+    playEndMarkerFrame: Bool = true,
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
@@ -507,9 +511,10 @@ final public class LottieAnimationView: LottieAnimationViewBase {
       fromTime = currentFrame
     }
 
+    let playTo = playEndMarkerFrame ? CGFloat(to.frameTime) : CGFloat(to.frameTime) - 1
     let context = AnimationContext(
       playFrom: fromTime,
-      playTo: CGFloat(to.frameTime),
+      playTo: playTo,
       closure: completion)
     addNewAnimationForContext(context)
   }
