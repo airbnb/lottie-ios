@@ -150,7 +150,7 @@ extension RenderingEngine: RawRepresentable, CustomStringConvertible {
 /// How animation files should be decoded
 public enum DecodingStrategy: Hashable {
   /// Use Codable. This is was the default strategy introduced on Lottie 3, but should be rarely
-  /// used as it's slower than `dictionaryBased`. Kept here for any possible compability issues
+  /// used as it's slower than `dictionaryBased`. Kept here for any possible compatibility issues
   /// that may come up, but consider it soft-deprecated.
   case codable
 
