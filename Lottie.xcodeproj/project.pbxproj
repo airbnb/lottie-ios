@@ -581,6 +581,9 @@
 		A40460592832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
 		A404605A2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
 		A404605B2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
+		D453D8AB28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
+		D453D8AC28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
+		D453D8AD28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -799,6 +802,7 @@
 		7E48BF5F2860D4FA00A39198 /* KeyframeGroup+Extensions.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "KeyframeGroup+Extensions.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		A1D5BAAB27C731A500777D06 /* DataURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataURLTests.swift; sourceTree = "<group>"; };
 		A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlendMode+Filter.swift"; sourceTree = "<group>"; };
+		D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1433,6 +1437,7 @@
 			children = (
 				2EAF59E227A0798700E00531 /* AnimationCacheProvider.swift */,
 				2EAF59E327A0798700E00531 /* LRUAnimationCache.swift */,
+				D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */,
 			);
 			path = AnimationCache;
 			sourceTree = "<group>";
@@ -1695,6 +1700,7 @@
 				2E9C973E2822F43100677516 /* LayerDebugging.swift in Sources */,
 				6D99D6432823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */,
 				2EAF5B0427A0798700E00531 /* AnimationFontProvider.swift in Sources */,
+				D453D8AB28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */,
 				2E9C96DB2822F43100677516 /* TextLayer.swift in Sources */,
 				2E9C964B2822F43100677516 /* TextCompositionLayer.swift in Sources */,
 				2EAF5AA427A0798700E00531 /* FilepathImageProvider.macOS.swift in Sources */,
@@ -1908,6 +1914,7 @@
 				2E9C973F2822F43100677516 /* LayerDebugging.swift in Sources */,
 				6D99D6442823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */,
 				2EAF5B0527A0798700E00531 /* AnimationFontProvider.swift in Sources */,
+				D453D8AC28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */,
 				2E9C96DC2822F43100677516 /* TextLayer.swift in Sources */,
 				2E9C964C2822F43100677516 /* TextCompositionLayer.swift in Sources */,
 				2EAF5AA527A0798700E00531 /* FilepathImageProvider.macOS.swift in Sources */,
@@ -2100,6 +2107,7 @@
 				2E9C97402822F43100677516 /* LayerDebugging.swift in Sources */,
 				6D99D6452823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */,
 				2EAF5B0627A0798700E00531 /* AnimationFontProvider.swift in Sources */,
+				D453D8AD28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */,
 				2E9C96DD2822F43100677516 /* TextLayer.swift in Sources */,
 				2E9C964D2822F43100677516 /* TextCompositionLayer.swift in Sources */,
 				2EAF5AA627A0798700E00531 /* FilepathImageProvider.macOS.swift in Sources */,
