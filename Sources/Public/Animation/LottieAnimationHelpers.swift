@@ -153,7 +153,7 @@ extension LottieAnimation {
     -> LottieAnimation
   {
     switch strategy {
-    case .codable:
+    case .legacyCodable:
       return try JSONDecoder().decode(LottieAnimation.self, from: data)
     case .dictionaryBased:
       let json = try JSONSerialization.jsonObject(with: data)
