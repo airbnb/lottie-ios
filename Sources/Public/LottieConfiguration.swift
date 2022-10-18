@@ -156,6 +156,6 @@ public enum DecodingStrategy: Hashable {
 
   /// Manually deserialize a dictionary into an Animation.
   /// This should be at least 2-3x faster than using Codable and due to that
-  /// it's the new default on Lottie 4.x.
+  /// it's the default as of Lottie 4.x.
   case dictionaryBased
 }
