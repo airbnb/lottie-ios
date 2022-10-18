@@ -23,7 +23,7 @@ extension LottieAnimationView {
     name: String,
     bundle: Bundle = Bundle.main,
     imageProvider: AnimationImageProvider? = nil,
-    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache,
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared,
     configuration: LottieConfiguration = .shared)
   {
     let animation = LottieAnimation.named(name, bundle: bundle, subdirectory: nil, animationCache: animationCache)
@@ -39,7 +39,7 @@ extension LottieAnimationView {
   public convenience init(
     filePath: String,
     imageProvider: AnimationImageProvider? = nil,
-    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache,
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared,
     configuration: LottieConfiguration = .shared)
   {
     let animation = LottieAnimation.filepath(filePath, animationCache: animationCache)
@@ -58,7 +58,7 @@ extension LottieAnimationView {
     url: URL,
     imageProvider: AnimationImageProvider? = nil,
     closure: @escaping LottieAnimationView.DownloadClosure,
-    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache,
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared,
     configuration: LottieConfiguration = .shared)
   {
     if let animationCache = animationCache, let animation = animationCache.animation(forKey: url.absoluteString) {
@@ -88,7 +88,7 @@ extension LottieAnimationView {
     asset name: String,
     bundle: Bundle = Bundle.main,
     imageProvider: AnimationImageProvider? = nil,
-    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache,
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared,
     configuration: LottieConfiguration = .shared)
   {
     let animation = LottieAnimation.asset(name, bundle: bundle, animationCache: animationCache)

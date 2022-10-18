@@ -35,14 +35,14 @@ extension LottieAnimation {
   /// - Parameter name: The name of the json file without the json extension. EG "StarAnimation"
   /// - Parameter bundle: The bundle in which the animation is located. Defaults to `Bundle.main`
   /// - Parameter subdirectory: A subdirectory in the bundle in which the animation is located. Optional.
-  /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LRUAnimationCache.sharedCache`. Optional.
+  /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LottieAnimationCache.shared`. Optional.
   ///
   /// - Returns: Deserialized `LottieAnimation`. Optional.
   public static func named(
     _ name: String,
     bundle: Bundle = Bundle.main,
     subdirectory: String? = nil,
-    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache)
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
     -> LottieAnimation?
   {
     /// Create a cache key for the animation.
@@ -74,12 +74,12 @@ extension LottieAnimation {
 
   /// Loads an animation from a specific filepath.
   /// - Parameter filepath: The absolute filepath of the animation to load. EG "/User/Me/starAnimation.json"
-  /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LRUAnimationCache.sharedCache`. Optional.
+  /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LottieAnimationCache.shared`. Optional.
   ///
   /// - Returns: Deserialized `LottieAnimation`. Optional.
   public static func filepath(
     _ filepath: String,
-    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache)
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
     -> LottieAnimation?
   {
     /// Check cache for animation
@@ -105,12 +105,12 @@ extension LottieAnimation {
   ///    Loads an animation model from the asset catalog by its name. Returns `nil` if an animation is not found.
   ///    - Parameter name: The name of the json file in the asset catalog. EG "StarAnimation"
   ///    - Parameter bundle: The bundle in which the animation is located. Defaults to `Bundle.main`
-  ///    - Parameter animationCache: A cache for holding loaded animations. Defaults to `LRUAnimationCache.sharedCache` Optional.
+  ///    - Parameter animationCache: A cache for holding loaded animations. Defaults to `LottieAnimationCache.shared` Optional.
   ///    - Returns: Deserialized `LottieAnimation`. Optional.
   public static func asset(
     _ name: String,
     bundle: Bundle = Bundle.main,
-    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache)
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
     -> LottieAnimation?
   {
     /// Create a cache key for the animation.
@@ -168,13 +168,13 @@ extension LottieAnimation {
   ///
   /// - Parameter url: The url to load the animation from.
   /// - Parameter closure: A closure to be called when the animation has loaded.
-  /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LRUAnimationCache.sharedCache`. Optional.
+  /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LottieAnimationCache.shared`. Optional.
   ///
   public static func loadedFrom(
     url: URL,
     session: URLSession = .shared,
     closure: @escaping LottieAnimation.DownloadClosure,
-    animationCache: AnimationCacheProvider? = LRUAnimationCache.sharedCache)
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
   {
     if let animationCache = animationCache, let animation = animationCache.animation(forKey: url.absoluteString) {
       closure(animation)
