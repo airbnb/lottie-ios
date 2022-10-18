@@ -18,7 +18,7 @@ final class ParsingTests: XCTestCase {
     for url in Samples.sampleAnimationURLs {
       do {
         let data = try Data(contentsOf: url)
-        let codableAnimation = try LottieAnimation.from(data: data, strategy: .codable)
+        let codableAnimation = try LottieAnimation.from(data: data, strategy: .legacyCodable)
         let dictAnimation = try LottieAnimation.from(data: data, strategy: .dictionaryBased)
 
         XCTAssertNoDiff(codableAnimation, dictAnimation)

@@ -177,7 +177,7 @@ final class PerformanceTests: XCTestCase {
   private func compareDeserializationPerformance(data: Data, iterations: Int) throws -> Double {
     let codablePerformance = try measurePerformance {
       for _ in 0..<iterations {
-        _ = try LottieAnimation.from(data: data, strategy: .codable)
+        _ = try LottieAnimation.from(data: data, strategy: .legacyCodable)
       }
     }
 
