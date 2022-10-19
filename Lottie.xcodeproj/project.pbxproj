@@ -584,6 +584,10 @@
 		D453D8AB28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
 		D453D8AC28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
 		D453D8AD28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
+		D453D8AF28FF9BC600D3F49C /* AnimationCacheProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AE28FF9BC600D3F49C /* AnimationCacheProviderTests.swift */; };
+		D453D8B228FF9EA900D3F49C /* DefaultAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */; };
+		D453D8B328FF9EAA00D3F49C /* DefaultAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */; };
+		D453D8B428FF9EAA00D3F49C /* DefaultAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -803,6 +807,8 @@
 		A1D5BAAB27C731A500777D06 /* DataURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataURLTests.swift; sourceTree = "<group>"; };
 		A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlendMode+Filter.swift"; sourceTree = "<group>"; };
 		D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationCache.swift; sourceTree = "<group>"; };
+		D453D8AE28FF9BC600D3F49C /* AnimationCacheProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationCacheProviderTests.swift; sourceTree = "<group>"; };
+		D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAnimationCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -875,6 +881,7 @@
 				2E8040BD27A07343006E74CB /* Utils */,
 				2E044E262820536800FA773B /* AutomaticEngineTests.swift */,
 				6DB3BDB528243FA5002A276D /* ValueProvidersTests.swift */,
+				D453D8AE28FF9BC600D3F49C /* AnimationCacheProviderTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1438,6 +1445,7 @@
 				2EAF59E227A0798700E00531 /* AnimationCacheProvider.swift */,
 				2EAF59E327A0798700E00531 /* LRUAnimationCache.swift */,
 				D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */,
+				D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */,
 			);
 			path = AnimationCache;
 			sourceTree = "<group>";
@@ -1706,6 +1714,7 @@
 				2EAF5AA427A0798700E00531 /* FilepathImageProvider.macOS.swift in Sources */,
 				2E9C97292822F43100677516 /* EllipseAnimation.swift in Sources */,
 				2E9C96DE2822F43100677516 /* GradientRenderLayer.swift in Sources */,
+				D453D8B428FF9EAA00D3F49C /* DefaultAnimationCache.swift in Sources */,
 				2E9C966C2822F43100677516 /* LayerImageProvider.swift in Sources */,
 				2EAF5ABC27A0798700E00531 /* FilepathImageProvider.swift in Sources */,
 				2EAF5AE927A0798700E00531 /* AnimationTextProvider.swift in Sources */,
@@ -1897,6 +1906,7 @@
 				6DB3BDB628243FA5002A276D /* ValueProvidersTests.swift in Sources */,
 				2E72128327BB329C0027BC56 /* AnimationKeypathTests.swift in Sources */,
 				2E044E272820536800FA773B /* AutomaticEngineTests.swift in Sources */,
+				D453D8AF28FF9BC600D3F49C /* AnimationCacheProviderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1920,6 +1930,7 @@
 				2EAF5AA527A0798700E00531 /* FilepathImageProvider.macOS.swift in Sources */,
 				2E9C972A2822F43100677516 /* EllipseAnimation.swift in Sources */,
 				2E9C96DF2822F43100677516 /* GradientRenderLayer.swift in Sources */,
+				D453D8B228FF9EA900D3F49C /* DefaultAnimationCache.swift in Sources */,
 				2E9C966D2822F43100677516 /* LayerImageProvider.swift in Sources */,
 				2EAF5ABD27A0798700E00531 /* FilepathImageProvider.swift in Sources */,
 				2EAF5AEA27A0798700E00531 /* AnimationTextProvider.swift in Sources */,
@@ -2113,6 +2124,7 @@
 				2EAF5AA627A0798700E00531 /* FilepathImageProvider.macOS.swift in Sources */,
 				2E9C972B2822F43100677516 /* EllipseAnimation.swift in Sources */,
 				2E9C96E02822F43100677516 /* GradientRenderLayer.swift in Sources */,
+				D453D8B328FF9EAA00D3F49C /* DefaultAnimationCache.swift in Sources */,
 				2E9C966E2822F43100677516 /* LayerImageProvider.swift in Sources */,
 				2EAF5ABE27A0798700E00531 /* FilepathImageProvider.swift in Sources */,
 				2EAF5AEB27A0798700E00531 /* AnimationTextProvider.swift in Sources */,
