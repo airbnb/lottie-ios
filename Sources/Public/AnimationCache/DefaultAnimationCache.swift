@@ -1,5 +1,5 @@
 //
-//  ThreadSafeAnimationCache.swift
+//  DefaultAnimationCache.swift
 //  Lottie
 //
 //  Created by Marcelo Fabri on 10/18/22.
@@ -13,7 +13,7 @@ import Foundation
 /// The default size of the cache is 100.
 ///
 /// This cache implementation also responds to memory pressure, as it's backed by `NSCache`.
-public class ThreadSafeAnimationCache: AnimationCacheProvider {
+public class DefaultAnimationCache: AnimationCacheProvider {
 
   // MARK: Lifecycle
 
@@ -24,7 +24,7 @@ public class ThreadSafeAnimationCache: AnimationCacheProvider {
   // MARK: Public
 
   /// The global shared Cache.
-  public static let sharedCache = ThreadSafeAnimationCache()
+  public static let sharedCache = DefaultAnimationCache()
 
   /// The size of the cache.
   public var cacheSize = defaultCacheCountLimit {
