@@ -154,13 +154,21 @@ extension LottieAnimation {
   {
     switch strategy {
     case .legacyCodable:
-      return try JSONDecoder().decode(LottieAnimation.self, from: data)
-    case .dictionaryBased:
-      let json = try JSONSerialization.jsonObject(with: data)
-      guard let dict = json as? [String: Any] else {
-        throw InitializableError.invalidInput
+      do {
+        return try JSONDecoder().decode(LottieAnimation.self, from: data)
+      } catch {
+        return try loadDotLottie(data: data)
       }
-      return try LottieAnimation(dictionary: dict)
+    case .dictionaryBased:
+      do {
+        let json = try JSONSerialization.jsonObject(with: data)
+        guard let dict = json as? [String: Any] else {
+          throw InitializableError.invalidInput
+        }
+        return try LottieAnimation(dictionary: dict)
+      } catch {
+        return try loadDotLottie(data: data)
+      }
     }
   }
 
@@ -205,15 +213,16 @@ extension LottieAnimation {
   /// Loads dotLottie file from data
   /// - Parameters:
   ///   - data: Data of file
-  ///   - url: The url to load the animation from.
+  ///   - url: The url to load the animation from. Optional
   /// - Returns: Deserialized `LottieAnimation`. Optional.
   private static func loadDotLottie(
     data: Data,
-    url: URL) throws
+    url: URL? = nil) throws
     -> LottieAnimation
   {
-    guard let lottie = DotLottieFile(data: data, filename: url.deletingPathExtension().lastPathComponent),
-          let animationUrl = lottie.animationUrl else {
+    guard let lottie = DotLottieFile(data: data,
+                                     filename: url?.deletingPathExtension().lastPathComponent ?? UUID().uuidString),
+          let animationUrl = lottie.animations.first else {
       throw DotLottieError.invalidData
     }
       
