@@ -157,7 +157,7 @@ extension LottieAnimation {
       do {
         return try JSONDecoder().decode(LottieAnimation.self, from: data)
       } catch {
-        return try loadDotLottie(data: data)
+        return try DotLottieFile(data: data).mainAnimation()
       }
     case .dictionaryBased:
       do {
@@ -167,7 +167,7 @@ extension LottieAnimation {
         }
         return try LottieAnimation(dictionary: dict)
       } catch {
-        return try loadDotLottie(data: data)
+        return try DotLottieFile(data: data).mainAnimation()
       }
     }
   }
@@ -208,27 +208,6 @@ extension LottieAnimation {
       }
       task.resume()
     }
-  }
-    
-  /// Loads dotLottie file from data
-  /// - Parameters:
-  ///   - data: Data of file
-  ///   - url: The url to load the animation from. Optional
-  /// - Returns: Deserialized `LottieAnimation`. Optional.
-  private static func loadDotLottie(
-    data: Data,
-    url: URL? = nil) throws
-    -> LottieAnimation
-  {
-    guard let lottie = DotLottieFile(data: data,
-                                     filename: url?.deletingPathExtension().lastPathComponent ?? UUID().uuidString),
-          let animationUrl = lottie.animations.first else {
-      throw DotLottieError.invalidData
-    }
-      
-    let jsonData = try Data(contentsOf: animationUrl)
-    let animation = try LottieAnimation.from(data: jsonData)
-    return animation
   }
 
   // MARK: Animation (Helpers)
