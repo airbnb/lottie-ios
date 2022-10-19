@@ -65,7 +65,6 @@ public struct DotLottieFile {
   /// Returns nil if is not a .lottie file and decompression failed
   /// - Parameters:
   ///  - url: URL to .lottie file
-  ///  - cache: Cache type
   public init(url: URL) throws {
     self.localUrl = DotLottieUtils.animationsDirectoryURL(for: url)
     guard url.isDotLottieFile else {
@@ -77,7 +76,6 @@ public struct DotLottieFile {
   /// Constructor with data
   /// - Parameters:
   ///  - data: Data of .lottie file
-  ///  - cache: Cache type
   public init(data: Data, filename: String = UUID().uuidString) throws {
     self.localUrl = DotLottieUtils.animationsDirectoryURL.appendingPathComponent(filename)
     try decompress(data: data, filename: filename, in: localUrl)
@@ -87,7 +85,6 @@ public struct DotLottieFile {
   /// - Parameters:
   ///  - url: url to .lottie file
   ///  - directory: url to destination of decompression contents
-  ///  - cache: Cache type
   /// - Returns: success true/false
   private func decompress(from url: URL, in directory: URL) throws {
     try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
@@ -99,7 +96,6 @@ public struct DotLottieFile {
   /// - Parameters:
   ///  - data: Data of .lottie file
   ///  - directory: url to destination of decompression contents
-  ///  - cache: Cache type
   /// - Returns: success true/false
   private func decompress(data: Data, filename: String, in directory: URL) throws {
     let url = DotLottieUtils.animationsDirectoryURL.appendingPathComponent("\(filename).lottie")
@@ -107,6 +103,7 @@ public struct DotLottieFile {
     try data.write(to: url)
     try decompress(from: url, in: directory)
     DotLottieUtils.log("File decompressed to \(directory.path)")
+    try? FileManager.default.removeItem(at: url) // removes temp file
   }
 }
 
