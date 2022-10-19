@@ -11,6 +11,8 @@ import Foundation
 ///
 /// Once `cacheSize` is reached, the least recently used animation will be ejected.
 /// The default size of the cache is 100.
+///
+/// Note: this cache doesn't evict entries under memory pressury, nor is thread-safe.
 public class LRUAnimationCache: AnimationCacheProvider {
 
   // MARK: Lifecycle
