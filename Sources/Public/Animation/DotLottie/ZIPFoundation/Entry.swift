@@ -15,9 +15,9 @@ import CoreFoundation
 ///
 /// You can retrieve instances of `Entry` from an `Archive` via subscripting or iteration.
 /// Entries are identified by their `path`.
-public struct Entry: Equatable {
+struct Entry: Equatable {
     /// The type of an `Entry` in a ZIP `Archive`.
-    public enum EntryType: Int {
+    enum EntryType: Int {
         /// Indicates a regular file.
         case file
         /// Indicates a directory.
@@ -114,11 +114,11 @@ public struct Entry: Equatable {
     ///
     /// - Parameters:
     ///   - encoding: `String.Encoding`
-    public func path(using encoding: String.Encoding) -> String {
+    func path(using encoding: String.Encoding) -> String {
         return String(data: self.centralDirectoryStructure.fileNameData, encoding: encoding) ?? ""
     }
     /// The `path` of the receiver within a ZIP `Archive`.
-    public var path: String {
+    var path: String {
         let dosLatinUS = 0x400
         let dosLatinUSEncoding = CFStringEncoding(dosLatinUS)
         let dosLatinUSStringEncoding = CFStringConvertEncodingToNSStringEncoding(dosLatinUSEncoding)
@@ -129,20 +129,20 @@ public struct Entry: Equatable {
     /// The file attributes of the receiver as key/value pairs.
     ///
     /// Contains the modification date and file permissions.
-    public var fileAttributes: [FileAttributeKey: Any] {
+    var fileAttributes: [FileAttributeKey: Any] {
         return FileManager.attributes(from: self)
     }
     /// The `CRC32` checksum of the receiver.
     ///
     /// - Note: Always returns `0` for entries of type `EntryType.directory`.
-    public var checksum: CRC32 {
+    var checksum: CRC32 {
         if self.centralDirectoryStructure.usesDataDescriptor {
             return self.zip64DataDescriptor?.crc32 ?? self.dataDescriptor?.crc32 ?? 0
         }
         return self.centralDirectoryStructure.crc32
     }
     /// The `EntryType` of the receiver.
-    public var type: EntryType {
+    var type: EntryType {
         // OS Type is stored in the upper byte of versionMadeBy
         let osTypeRaw = self.centralDirectoryStructure.versionMadeBy >> 8
         let osType = OSType(rawValue: UInt(osTypeRaw)) ?? .unused
@@ -167,18 +167,18 @@ public struct Entry: Equatable {
         }
     }
     /// Indicates whether or not the receiver is compressed.
-    public var isCompressed: Bool {
+    var isCompressed: Bool {
         self.localFileHeader.compressionMethod != CompressionMethod.none.rawValue
     }
     /// The size of the receiver's compressed data.
-    public var compressedSize: UInt64 {
+    var compressedSize: UInt64 {
         if centralDirectoryStructure.isZIP64 {
             return zip64DataDescriptor?.compressedSize ?? centralDirectoryStructure.effectiveCompressedSize
         }
         return UInt64(dataDescriptor?.compressedSize ?? centralDirectoryStructure.compressedSize)
     }
     /// The size of the receiver's uncompressed data.
-    public var uncompressedSize: UInt64 {
+    var uncompressedSize: UInt64 {
         if centralDirectoryStructure.isZIP64 {
             return zip64DataDescriptor?.uncompressedSize ?? centralDirectoryStructure.effectiveUncompressedSize
         }
@@ -210,7 +210,7 @@ public struct Entry: Equatable {
     let dataDescriptor: DefaultDataDescriptor?
     let zip64DataDescriptor: ZIP64DataDescriptor?
 
-    public static func == (lhs: Entry, rhs: Entry) -> Bool {
+    static func == (lhs: Entry, rhs: Entry) -> Bool {
         return lhs.path == rhs.path
             && lhs.localFileHeader.crc32 == rhs.localFileHeader.crc32
             && lhs.centralDirectoryStructure.effectiveRelativeOffsetOfLocalHeader

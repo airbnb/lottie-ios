@@ -10,7 +10,7 @@
 
 import Foundation
 
-public extension Archive {
+extension Archive {
 
     @available(*, deprecated,
                 message: "Please use `Int` for `bufferSize`.")

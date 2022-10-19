@@ -16,7 +16,7 @@ extension Archive {
     ///
     /// - Parameter entry: The entry that will be removed.
     /// - Returns: The number of the work units.
-    public func totalUnitCountForRemoving(_ entry: Entry) -> Int64 {
+    func totalUnitCountForRemoving(_ entry: Entry) -> Int64 {
         return Int64(self.offsetToStartOfCentralDirectory - entry.localSize)
     }
 
@@ -29,7 +29,7 @@ extension Archive {
     ///
     /// - Parameter entry: The entry that will be read.
     /// - Returns: The number of the work units.
-    public func totalUnitCountForReading(_ entry: Entry) -> Int64 {
+    func totalUnitCountForReading(_ entry: Entry) -> Int64 {
         switch entry.type {
         case .file, .symlink:
             return Int64(entry.uncompressedSize)
@@ -46,7 +46,7 @@ extension Archive {
     /// adding the file at `url` to the receiver.
     /// - Parameter entry: The entry that will be removed.
     /// - Returns: The number of the work units.
-    public func totalUnitCountForAddingItem(at url: URL) -> Int64 {
+    func totalUnitCountForAddingItem(at url: URL) -> Int64 {
         var count = Int64(0)
         do {
             let type = try FileManager.typeForItem(at: url)

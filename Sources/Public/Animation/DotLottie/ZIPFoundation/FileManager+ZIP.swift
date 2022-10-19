@@ -29,7 +29,7 @@ extension FileManager {
     ///                        By default, `zipItem` will create uncompressed archives.
     ///   - progress: A progress object that can be used to track or cancel the zip operation.
     /// - Throws: Throws an error if the source item does not exist or the destination URL is not writable.
-    public func zipItem(at sourceURL: URL, to destinationURL: URL,
+    func zipItem(at sourceURL: URL, to destinationURL: URL,
                         shouldKeepParent: Bool = true, compressionMethod: CompressionMethod = .none,
                         progress: Progress? = nil) throws {
         let fileManager = FileManager()
@@ -89,7 +89,7 @@ extension FileManager {
     ///   - progress: A progress object that can be used to track or cancel the unzip operation.
     ///   - preferredEncoding: Encoding for entry paths. Overrides the encoding specified in the archive.
     /// - Throws: Throws an error if the source item does not exist or the destination URL is not writable.
-    public func unzipItem(at sourceURL: URL, to destinationURL: URL, skipCRC32: Bool = false,
+    func unzipItem(at sourceURL: URL, to destinationURL: URL, skipCRC32: Bool = false,
                           progress: Progress? = nil, preferredEncoding: String.Encoding? = nil) throws {
         let fileManager = FileManager()
         guard fileManager.itemExists(at: sourceURL) else {
@@ -316,8 +316,8 @@ extension Date {
 // error objects from error codes. (https://github.com/apple/swift-corelibs-foundation/pull/1420)
 // We have to provide an implementation for non-Darwin platforms using Swift versions < 4.2.
 
-public extension CocoaError {
-    public static func error(_ code: CocoaError.Code, userInfo: [AnyHashable: Any]? = nil, url: URL? = nil) -> Error {
+extension CocoaError {
+    static func error(_ code: CocoaError.Code, userInfo: [AnyHashable: Any]? = nil, url: URL? = nil) -> Error {
         var info: [String: Any] = userInfo as? [String: Any] ?? [:]
         if let url = url {
             info[NSURLErrorKey] = url
@@ -329,7 +329,7 @@ public extension CocoaError {
 #endif
 #endif
 
-public extension URL {
+extension URL {
     func isContained(in parentDirectoryURL: URL) -> Bool {
         // Ensure this URL is contained in the passed in URL
         let parentDirectoryURL = URL(fileURLWithPath: parentDirectoryURL.path, isDirectory: true).standardized

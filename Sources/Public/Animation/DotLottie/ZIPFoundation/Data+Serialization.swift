@@ -11,9 +11,9 @@
 import Foundation
 
 #if os(Android)
-public typealias FILEPointer = OpaquePointer
+typealias FILEPointer = OpaquePointer
 #else
-public typealias FILEPointer = UnsafeMutablePointer<FILE>
+typealias FILEPointer = UnsafeMutablePointer<FILE>
 #endif
 
 protocol DataSerializable {

@@ -29,7 +29,7 @@ extension Archive {
     ///   - bufferSize: The maximum size of the write buffer and the compression buffer (if needed).
     ///   - progress: A progress object that can be used to track or cancel the add operation.
     /// - Throws: An error if the source file cannot be read or the receiver is not writable.
-    public func addEntry(with path: String, relativeTo baseURL: URL,
+    func addEntry(with path: String, relativeTo baseURL: URL,
                          compressionMethod: CompressionMethod = .none,
                          bufferSize: Int = defaultWriteChunkSize, progress: Progress? = nil) throws {
         let fileURL = baseURL.appendingPathComponent(path)
@@ -48,7 +48,7 @@ extension Archive {
     ///   - bufferSize: The maximum size of the write buffer and the compression buffer (if needed).
     ///   - progress: A progress object that can be used to track or cancel the add operation.
     /// - Throws: An error if the source file cannot be read or the receiver is not writable.
-    public func addEntry(with path: String, fileURL: URL, compressionMethod: CompressionMethod = .none,
+    func addEntry(with path: String, fileURL: URL, compressionMethod: CompressionMethod = .none,
                          bufferSize: Int = defaultWriteChunkSize, progress: Progress? = nil) throws {
         let fileManager = FileManager()
         guard fileManager.itemExists(at: fileURL) else {
@@ -113,7 +113,7 @@ extension Archive {
     ///   - progress: A progress object that can be used to track or cancel the add operation.
     ///   - provider: A closure that accepts a position and a chunk size. Returns a `Data` chunk.
     /// - Throws: An error if the source data is invalid or the receiver is not writable.
-    public func addEntry(with path: String, type: Entry.EntryType, uncompressedSize: Int64,
+    func addEntry(with path: String, type: Entry.EntryType, uncompressedSize: Int64,
                          modificationDate: Date = Date(), permissions: UInt16? = nil,
                          compressionMethod: CompressionMethod = .none, bufferSize: Int = defaultWriteChunkSize,
                          progress: Progress? = nil, provider: Provider) throws {
@@ -173,7 +173,7 @@ extension Archive {
     ///   - bufferSize: The maximum size for the read and write buffers used during removal.
     ///   - progress: A progress object that can be used to track or cancel the remove operation.
     /// - Throws: An error if the `Entry` is malformed or the receiver is not writable.
-    public func remove(_ entry: Entry, bufferSize: Int = defaultReadChunkSize, progress: Progress? = nil) throws {
+    func remove(_ entry: Entry, bufferSize: Int = defaultReadChunkSize, progress: Progress? = nil) throws {
         guard self.accessMode != .read else { throw ArchiveError.unwritableArchive }
         let (tempArchive, tempDir) = try self.makeTempArchive()
         defer { tempDir.map { try? FileManager().removeItem(at: $0) } }

@@ -15,7 +15,7 @@ import zlib
 #endif
 
 /// The compression method of an `Entry` in a ZIP `Archive`.
-public enum CompressionMethod: UInt16 {
+enum CompressionMethod: UInt16 {
     /// Indicates that an `Entry` has no compression applied to its contents.
     case none = 0
     /// Indicates that contents of an `Entry` have been compressed with a zlib compatible Deflate algorithm.
@@ -23,19 +23,19 @@ public enum CompressionMethod: UInt16 {
 }
 
 /// An unsigned 32-Bit Integer representing a checksum.
-public typealias CRC32 = UInt32
+typealias CRC32 = UInt32
 /// A custom handler that consumes a `Data` object containing partial entry data.
 /// - Parameters:
 ///   - data: A chunk of `Data` to consume.
 /// - Throws: Can throw to indicate errors during data consumption.
-public typealias Consumer = (_ data: Data) throws -> Void
+typealias Consumer = (_ data: Data) throws -> Void
 /// A custom handler that receives a position and a size that can be used to provide data from an arbitrary source.
 /// - Parameters:
 ///   - position: The current read position.
 ///   - size: The size of the chunk to provide.
 /// - Returns: A chunk of `Data`.
 /// - Throws: Can throw to indicate errors in the data source.
-public typealias Provider = (_ position: Int64, _ size: Int) throws -> Data
+typealias Provider = (_ position: Int64, _ size: Int) throws -> Data
 
 extension Data {
     enum CompressionError: Error {
@@ -47,7 +47,7 @@ extension Data {
     ///
     /// - Parameter checksum: The starting seed.
     /// - Returns: The checksum calculated from the bytes of the receiver and the starting seed.
-    public func crc32(checksum: CRC32) -> CRC32 {
+    func crc32(checksum: CRC32) -> CRC32 {
         #if canImport(zlib)
         return withUnsafeBytes { bufferPointer in
             let length = UInt32(count)
@@ -65,7 +65,7 @@ extension Data {
     ///   - provider: A closure that accepts a position and a chunk size. Returns a `Data` chunk.
     ///   - consumer: A closure that processes the result of the compress operation.
     /// - Returns: The checksum of the processed content.
-    public static func compress(size: Int64, bufferSize: Int, provider: Provider, consumer: Consumer) throws -> CRC32 {
+    static func compress(size: Int64, bufferSize: Int, provider: Provider, consumer: Consumer) throws -> CRC32 {
         #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
         return try self.process(operation: COMPRESSION_STREAM_ENCODE, size: size, bufferSize: bufferSize,
                                 provider: provider, consumer: consumer)
@@ -82,7 +82,7 @@ extension Data {
     ///   - provider: A closure that accepts a position and a chunk size. Returns a `Data` chunk.
     ///   - consumer: A closure that processes the result of the decompress operation.
     /// - Returns: The checksum of the processed content.
-    public static func decompress(size: Int64, bufferSize: Int, skipCRC32: Bool,
+    static func decompress(size: Int64, bufferSize: Int, skipCRC32: Bool,
                                   provider: Provider, consumer: Consumer) throws -> CRC32 {
         #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
         return try self.process(operation: COMPRESSION_STREAM_DECODE, size: size, bufferSize: bufferSize,

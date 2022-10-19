@@ -10,7 +10,7 @@
 
 import Foundation
 
-public extension Data {
+extension Data {
 
     @available(*, deprecated, message: "Please use `Int64` for `size` and provider `position`.")
     static func compress(size: Int, bufferSize: Int,

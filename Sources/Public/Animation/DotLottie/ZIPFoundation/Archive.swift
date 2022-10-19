@@ -11,13 +11,13 @@
 import Foundation
 
 /// The default chunk size when reading entry data from an archive.
-public let defaultReadChunkSize = Int(16*1024)
+let defaultReadChunkSize = Int(16*1024)
 /// The default chunk size when writing entry data to an archive.
-public let defaultWriteChunkSize = defaultReadChunkSize
+let defaultWriteChunkSize = defaultReadChunkSize
 /// The default permissions for newly added entries.
-public let defaultFilePermissions = UInt16(0o644)
+let defaultFilePermissions = UInt16(0o644)
 /// The default permissions for newly added directories.
-public let defaultDirectoryPermissions = UInt16(0o755)
+let defaultDirectoryPermissions = UInt16(0o755)
 let defaultPOSIXBufferSize = defaultReadChunkSize
 let defaultDirectoryUnitCount = Int64(1)
 let minEndOfCentralDirectoryOffset = Int64(22)
@@ -53,14 +53,14 @@ let memoryURLScheme = "memory"
 ///     var archiveURL = URL(fileURLWithPath: "/path/file.zip")
 ///     var archive = Archive(url: archiveURL, accessMode: .update)
 ///     try archive?.addEntry("test.txt", relativeTo: baseURL, compressionMethod: .deflate)
-public final class Archive: Sequence {
+final class Archive: Sequence {
     typealias LocalFileHeader = Entry.LocalFileHeader
     typealias DataDescriptor = Entry.DefaultDataDescriptor
     typealias ZIP64DataDescriptor = Entry.ZIP64DataDescriptor
     typealias CentralDirectoryStructure = Entry.CentralDirectoryStructure
 
     /// An error that occurs during reading, creating or updating a ZIP file.
-    public enum ArchiveError: Error {
+    enum ArchiveError: Error {
         /// Thrown when an archive file is either damaged or inaccessible.
         case unreadableArchive
         /// Thrown when an archive is either opened with AccessMode.read or the destination file is unwritable.
@@ -92,7 +92,7 @@ public final class Archive: Sequence {
     }
 
     /// The access mode for an `Archive`.
-    public enum AccessMode: UInt {
+    enum AccessMode: UInt {
         /// Indicates that a newly instantiated `Archive` should create its backing file.
         case create
         /// Indicates that a newly instantiated `Archive` should read from an existing backing file.
@@ -123,9 +123,9 @@ public final class Archive: Sequence {
     }
 
     /// URL of an Archive's backing file.
-    public let url: URL
+    let url: URL
     /// Access mode for an archive file.
-    public let accessMode: AccessMode
+    let accessMode: AccessMode
     var archiveFile: FILEPointer
     var endOfCentralDirectoryRecord: EndOfCentralDirectoryRecord
     var zip64EndOfCentralDirectory: ZIP64EndOfCentralDirectory?
@@ -160,7 +160,7 @@ public final class Archive: Sequence {
     ///   - The file URL _must_ point to an existing file for `AccessMode.read`.
     ///   - The file URL _must_ point to a non-existing file for `AccessMode.create`.
     ///   - The file URL _must_ point to an existing file for `AccessMode.update`.
-    public init?(url: URL, accessMode mode: AccessMode, preferredEncoding: String.Encoding? = nil) {
+    init?(url: URL, accessMode mode: AccessMode, preferredEncoding: String.Encoding? = nil) {
         self.url = url
         self.accessMode = mode
         self.preferredEncoding = preferredEncoding
@@ -190,7 +190,7 @@ public final class Archive: Sequence {
     /// - Note:
     ///   - The backing `data` _must_ contain a valid ZIP archive for `AccessMode.read` and `AccessMode.update`.
     ///   - The backing `data` _must_ be empty (or omitted) for `AccessMode.create`.
-    public init?(data: Data = Data(), accessMode mode: AccessMode, preferredEncoding: String.Encoding? = nil) {
+    init?(data: Data = Data(), accessMode mode: AccessMode, preferredEncoding: String.Encoding? = nil) {
         guard let url = URL(string: "\(memoryURLScheme)://"),
             let config = Archive.makeBackingConfiguration(for: data, mode: mode) else {
             return nil
@@ -210,7 +210,7 @@ public final class Archive: Sequence {
         fclose(self.archiveFile)
     }
 
-    public func makeIterator() -> AnyIterator<Entry> {
+    func makeIterator() -> AnyIterator<Entry> {
         let totalNumberOfEntriesInCD = self.totalNumberOfEntriesInCentralDirectory
         var directoryIndex = self.offsetToStartOfCentralDirectory
         var index = 0
@@ -258,7 +258,7 @@ public final class Archive: Sequence {
     ///
     /// - Parameter path: A relative file path identifying the corresponding `Entry`.
     /// - Returns: An `Entry` with the given `path`. Otherwise, `nil`.
-    public subscript(path: String) -> Entry? {
+    subscript(path: String) -> Entry? {
         if let encoding = preferredEncoding {
             return self.first { $0.path(using: encoding) == path }
         }
