@@ -159,5 +159,5 @@ public final class LottieAnimation: Codable, DictionaryInitializable {
   let markerMap: [String: Marker]?
     
   /// DotLottie configuration to setup the player
-  var dotLottie: DotLottieFile?
+  var dotLottieConfiguration: DotLottieConfiguration?
 }

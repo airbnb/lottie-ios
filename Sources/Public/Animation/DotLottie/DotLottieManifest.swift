@@ -19,8 +19,8 @@ public struct DotLottieManifest: Codable {
   /// - Parameter data: Data to decode
   /// - Throws: Error
   /// - Returns: .lottie Manifest model
-  public static func decode(from data: Data) throws -> DotLottieManifest? {
-    try? JSONDecoder().decode(DotLottieManifest.self, from: data)
+  public static func decode(from data: Data) throws -> DotLottieManifest {
+    try JSONDecoder().decode(DotLottieManifest.self, from: data)
   }
   
   /// Encodes to data
@@ -34,9 +34,9 @@ public struct DotLottieManifest: Codable {
   /// Loads manifest from given URL
   /// - Parameter path: URL path to Manifest
   /// - Returns: Manifest Model
-  public static func load(from url: URL) throws -> DotLottieManifest? {
-    guard let data = try? Data(contentsOf: url) else { return nil }
-    return try? decode(from: data)
+  public static func load(from url: URL) throws -> DotLottieManifest {
+    let data = try Data(contentsOf: url)
+    return try decode(from: data)
   }
   
   public init(animations: [DotLottieAnimation], version: String, author: String, generator: String) {

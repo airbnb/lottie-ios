@@ -624,6 +624,9 @@
 		6C48784728FF20140005AF07 /* DotLottieManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877FB28FF20140005AF07 /* DotLottieManifest.swift */; };
 		6C48784828FF20140005AF07 /* DotLottieManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877FB28FF20140005AF07 /* DotLottieManifest.swift */; };
 		6C48784928FF20140005AF07 /* DotLottieManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877FB28FF20140005AF07 /* DotLottieManifest.swift */; };
+		6C48784B29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */; };
+		6C48784C29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */; };
+		6C48784D29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */; };
 		6D0E635F28246BD0007C5DB6 /* Difference in Frameworks */ = {isa = PBXBuildFile; productRef = 6D0E635E28246BD0007C5DB6 /* Difference */; };
 		6D99D6432823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
 		6D99D6442823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
@@ -877,6 +880,7 @@
 		6C4877F928FF20140005AF07 /* FileManager+ZIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+ZIP.swift"; sourceTree = "<group>"; };
 		6C4877FA28FF20140005AF07 /* Archive+Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+Progress.swift"; sourceTree = "<group>"; };
 		6C4877FB28FF20140005AF07 /* DotLottieManifest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotLottieManifest.swift; sourceTree = "<group>"; };
+		6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotLottieConfiguration.swift; sourceTree = "<group>"; };
 		6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyGradientFillRenderer.swift; sourceTree = "<group>"; };
 		6DB3BDB528243FA5002A276D /* ValueProvidersTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ValueProvidersTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		6DB3BDB7282454A6002A276D /* DictionaryInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryInitializable.swift; sourceTree = "<group>"; };
@@ -1590,6 +1594,7 @@
 				6C4877FB28FF20140005AF07 /* DotLottieManifest.swift */,
 				6C4877E228FF20140005AF07 /* DotLottieAnimation.swift */,
 				6C4877E328FF20140005AF07 /* DotLottieFile.swift */,
+				6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */,
 				6C4877E428FF20140005AF07 /* DotLottieUtils.swift */,
 				6C4877E828FF20140005AF07 /* ZIPFoundation */,
 			);
@@ -1950,6 +1955,7 @@
 				6C48782C28FF20140005AF07 /* Entry+Serialization.swift in Sources */,
 				2E9C96B42822F43100677516 /* AnyNodeProperty.swift in Sources */,
 				2EAF5AF827A0798700E00531 /* FloatValueProvider.swift in Sources */,
+				6C48784B29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */,
 				2E9C968D2822F43100677516 /* PassThroughOutputNode.swift in Sources */,
 				2EAF5AB627A0798700E00531 /* CompatibleAnimationKeypath.swift in Sources */,
 				2E9C96872822F43100677516 /* GroupOutputNode.swift in Sources */,
@@ -2185,6 +2191,7 @@
 				6C48782D28FF20140005AF07 /* Entry+Serialization.swift in Sources */,
 				2E9C96B52822F43100677516 /* AnyNodeProperty.swift in Sources */,
 				2EAF5AF927A0798700E00531 /* FloatValueProvider.swift in Sources */,
+				6C48784C29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */,
 				2E9C968E2822F43100677516 /* PassThroughOutputNode.swift in Sources */,
 				2EAF5AB727A0798700E00531 /* CompatibleAnimationKeypath.swift in Sources */,
 				2E9C96882822F43100677516 /* GroupOutputNode.swift in Sources */,
@@ -2399,6 +2406,7 @@
 				6C48782E28FF20140005AF07 /* Entry+Serialization.swift in Sources */,
 				2E9C96B62822F43100677516 /* AnyNodeProperty.swift in Sources */,
 				2EAF5AFA27A0798700E00531 /* FloatValueProvider.swift in Sources */,
+				6C48784D29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */,
 				2E9C968F2822F43100677516 /* PassThroughOutputNode.swift in Sources */,
 				2EAF5AB827A0798700E00531 /* CompatibleAnimationKeypath.swift in Sources */,
 				2E9C96892822F43100677516 /* GroupOutputNode.swift in Sources */,

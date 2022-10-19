@@ -19,7 +19,11 @@ public struct DotLottieFile {
   /// Manifest.json file loading
   public var manifest: DotLottieManifest? {
     let path = localUrl.appendingPathComponent(DotLottieFile.manifestFileName)
-    return try? DotLottieManifest.load(from: path)
+    do {
+      return try DotLottieManifest.load(from: path)
+    } catch {
+      return nil
+    }
   }
   
   /// Animation url for main animation
@@ -51,16 +55,22 @@ public struct DotLottieFile {
   
   /// Returns main (first) lottie animation of file
   public func mainAnimation() throws -> LottieAnimation {
-    guard let animationUrl = animations.first else {
+    guard let dotLottieAnimation = manifest?.animations.first,
+          let animationUrl = animations.first(where: { $0.deletingPathExtension().lastPathComponent == dotLottieAnimation.id }) else {
       throw DotLottieError.animationNotAvailable
     }
     
     let jsonData = try Data(contentsOf: animationUrl)
     let animation = try LottieAnimation.from(data: jsonData)
-    animation.dotLottie = self
+    animation.dotLottieConfiguration = DotLottieConfiguration(file: self, animation: dotLottieAnimation)
     return animation
   }
-  
+
+  /// Image provider for `LottieAnimationView`
+  public var imageProvider: FilepathImageProvider? {
+    !images.isEmpty ? FilepathImageProvider(filepath: imagesUrl) : nil
+  }
+    
   /// Constructor with url.
   /// Returns nil if is not a .lottie file and decompression failed
   /// - Parameters:
