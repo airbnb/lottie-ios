@@ -201,6 +201,26 @@ extension LottieAnimation {
       task.resume()
     }
   }
+    
+  /// Loads dotLottie file from data
+  /// - Parameters:
+  ///   - data: Data of file
+  ///   - url: The url to load the animation from.
+  /// - Returns: Deserialized `LottieAnimation`. Optional.
+  private static func loadDotLottie(
+    data: Data,
+    url: URL) throws
+    -> LottieAnimation
+  {
+    guard let lottie = DotLottieFile(data: data, filename: url.deletingPathExtension().lastPathComponent),
+          let animationUrl = lottie.animationUrl else {
+      throw DotLottieError.invalidData
+    }
+      
+    let jsonData = try Data(contentsOf: animationUrl)
+    let animation = try LottieAnimation.from(data: jsonData)
+    return animation
+  }
 
   // MARK: Animation (Helpers)
 
