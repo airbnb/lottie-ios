@@ -21,26 +21,9 @@ extension DotLottie {
     }) ?? []
   }
 
-  /// Returns the list of `LottieAnimation` in the file
-  public var animations: [LottieAnimation] {
-    dotLottieAnimations.compactMap {
-      let animation = try? $0.animation()
-      animation?.dotLottieConfiguration = DotLottieConfiguration(
-        imageProvider: imageProvider,
-        loopMode: $0.loopMode,
-        speed: $0.animationSpeed)
-      return animation
-    }
-  }
-
   /// Returns the first `LottieAnimation` in the file
   public var animation: LottieAnimation? {
     animations.first
-  }
-
-  /// Image provider for `LottieAnimationView`
-  public var imageProvider: FilepathImageProvider? {
-    !imageUrls.isEmpty ? FilepathImageProvider(filepath: imagesUrl) : nil
   }
 
   // MARK: DotLottie file (Loading)

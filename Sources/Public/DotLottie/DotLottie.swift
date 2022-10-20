@@ -12,7 +12,7 @@ import ZIPFoundation
 // MARK: - DotLottie
 
 /// Detailed .lottie file structure
-public struct DotLottie {
+public final class DotLottie {
 
   // MARK: Lifecycle
 
@@ -36,9 +36,17 @@ public struct DotLottie {
   ///  - filename: Name of .lottie file
   ///  - Returns: Deserialized `DotLottie`. Optional.
   init(data: Data, filename: String) throws {
-    fileUrl = DotLottieUtils.tempDirectoryURL.appendingPathComponent(filename.removingPathExtension())
+    fileUrl = DotLottieUtils.tempDirectoryURL.appendingPathComponent(filename.asFilename())
     try decompress(data: data, to: fileUrl)
   }
+
+  // MARK: Public
+
+  /// List of `LottieAnimation` in the file
+  public var animations: [LottieAnimation] = []
+
+  /// Image provider for animations
+  public var imageProvider: AnimationImageProvider?
 
   // MARK: Internal
 
@@ -91,13 +99,10 @@ public struct DotLottie {
   private func decompress(from url: URL, to destinationURL: URL) throws {
     try? FileManager.default.removeItem(at: destinationURL)
     try FileManager.default.createDirectory(at: destinationURL, withIntermediateDirectories: true, attributes: nil)
-    do {
-      try FileManager.default.unzipItem(at: url, to: destinationURL)
-      try? FileManager.default.removeItem(at: url)
-    } catch {
-      try? FileManager.default.removeItem(at: url)
-      throw error
-    }
+    try FileManager.default.unzipItem(at: url, to: destinationURL)
+    loadContent()
+    try? FileManager.default.removeItem(at: destinationURL)
+    try? FileManager.default.removeItem(at: url)
   }
 
   /// Decompresses .lottie file from `Data` and saves to local temp folder
@@ -111,10 +116,37 @@ public struct DotLottie {
     try data.write(to: url)
     try decompress(from: url, to: destinationURL)
   }
+
+  /// Loads file content to memory
+  private func loadContent() {
+    imageProvider = DotLottieImageProvider(filepath: imagesUrl)
+
+    animations = dotLottieAnimations.compactMap {
+      let animation = try? $0.animation()
+      animation?.dotLottieConfiguration = DotLottieConfiguration(
+        imageProvider: imageProvider,
+        loopMode: $0.loopMode,
+        speed: $0.animationSpeed)
+      return animation
+    }
+  }
 }
 
 extension String {
-  fileprivate func removingPathExtension() -> String {
+
+  // MARK: Fileprivate
+
+  fileprivate func asFilename() -> String {
+    lastPathComponent().removingPathExtension()
+  }
+
+  fileprivate func lastPathComponent() -> String {
+    (self as NSString).lastPathComponent
+  }
+
+  // MARK: Private
+
+  private func removingPathExtension() -> String {
     (self as NSString).deletingPathExtension
   }
 }
