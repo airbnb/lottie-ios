@@ -154,21 +154,13 @@ extension LottieAnimation {
   {
     switch strategy {
     case .legacyCodable:
-      do {
-        return try JSONDecoder().decode(LottieAnimation.self, from: data)
-      } catch {
-        return try DotLottieFile(data: data).mainAnimation()
-      }
+      return try JSONDecoder().decode(LottieAnimation.self, from: data)
     case .dictionaryBased:
-      do {
-        let json = try JSONSerialization.jsonObject(with: data)
-        guard let dict = json as? [String: Any] else {
-          throw InitializableError.invalidInput
-        }
-        return try LottieAnimation(dictionary: dict)
-      } catch {
-        return try DotLottieFile(data: data).mainAnimation()
+      let json = try JSONSerialization.jsonObject(with: data)
+      guard let dict = json as? [String: Any] else {
+        throw InitializableError.invalidInput
       }
+      return try LottieAnimation(dictionary: dict)
     }
   }
 

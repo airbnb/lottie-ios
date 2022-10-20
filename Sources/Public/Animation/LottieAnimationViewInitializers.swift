@@ -46,7 +46,6 @@ extension LottieAnimationView {
     let provider = imageProvider ??
       FilepathImageProvider(filepath: URL(fileURLWithPath: filePath).deletingLastPathComponent().path)
     self.init(animation: animation, imageProvider: provider, configuration: configuration)
-    applySettings(with: animation?.dotLottieConfiguration)
   }
 
   /// Loads a Lottie animation asynchronously from the URL
@@ -71,7 +70,6 @@ extension LottieAnimationView {
       LottieAnimation.loadedFrom(url: url, closure: { animation in
         if let animation = animation {
           self.animation = animation
-          self.applySettings(with: animation.dotLottieConfiguration)
           closure(nil)
         } else {
           closure(LottieDownloadError.downloadFailed)
@@ -96,7 +94,6 @@ extension LottieAnimationView {
     let animation = LottieAnimation.asset(name, bundle: bundle, animationCache: animationCache)
     let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil)
     self.init(animation: animation, imageProvider: provider, configuration: configuration)
-    applySettings(with: animation?.dotLottieConfiguration)
   }
 
   // MARK: Public

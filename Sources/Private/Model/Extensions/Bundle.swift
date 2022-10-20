@@ -7,8 +7,7 @@ extension Bundle {
   func getAnimationData(_ name: String, subdirectory: String? = nil) throws -> Data? {
     // Check for files in the bundle at the given path
     let name = name.removingJSONSuffix()
-    if let url = url(forResource: name, withExtension: "json", subdirectory: subdirectory) ??
-        url(forResource: name, withExtension: "lottie", subdirectory: subdirectory) {
+    if let url = url(forResource: name, withExtension: "json", subdirectory: subdirectory) {
       return try Data(contentsOf: url)
     }
 
@@ -26,7 +25,7 @@ extension String {
   fileprivate func removingJSONSuffix() -> String {
     // Allow filenames to be passed with a ".json" extension (but not other extensions)
     // to keep the behavior from Lottie 2.x - instead of failing to load the animation
-    guard hasSuffix(".json") || hasSuffix(".lottie") else {
+    guard hasSuffix(".json") else {
       return self
     }
 

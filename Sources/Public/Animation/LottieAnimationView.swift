@@ -199,7 +199,6 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   public var animation: LottieAnimation? {
     didSet {
       makeAnimationLayer(usingEngine: configuration.renderingEngine)
-      applySettings(with: animation?.dotLottieConfiguration)
     }
   }
 
