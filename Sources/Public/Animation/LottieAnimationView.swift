@@ -225,6 +225,23 @@ final public class LottieAnimationView: LottieAnimationViewBase {
       makeAnimationLayer(usingEngine: configuration.renderingEngine)
     }
   }
+    
+    /// Sets the lottie file backing the animation view. Setting this will clear the
+    /// view's contents, completion blocks and current state. The new animation will
+    /// be loaded up and set to the beginning of its timeline.
+    /// The loopMode, animationSpeed and imageProvider will be set according
+    /// to lottie file settings
+    public var dotLottie: DotLottieFile? {
+        didSet {
+            guard let animation = dotLottie?.animation else { return }
+            self.animation = animation
+            self.loopMode = animation.dotLottieConfiguration?.loopMode ?? loopMode
+            self.animationSpeed = animation.dotLottieConfiguration?.speed ?? animationSpeed
+            if let imageProvider = dotLottie?.imageProvider {
+                self.imageProvider = imageProvider
+            }
+        }
+    }
 
   /// Sets the image provider for the animation view. An image provider provides the
   /// animation with its required image data.

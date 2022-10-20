@@ -8,21 +8,7 @@
 import Foundation
 
 struct DotLottieConfiguration {
-  var imageProvider: FilepathImageProvider?
+  var imageProvider: AnimationImageProvider?
   var loopMode: LottieLoopMode
   var speed: CGFloat
 }
-
-//extension LottieAnimationView {
-// /// Applies dotLottie configuration to player
-// /// - Parameter lottie: DotLottieSettings to apply
-// func applySettings(with lottie: DotLottieConfiguration?) {
-//   guard let lottie else { return }
-//   loopMode = lottie.loopMode
-//   animationSpeed = lottie.speed
-//
-//   if let bundleURL = lottie.file.imageProvider {
-//     self.imageProvider = imageProvider
-//   }
-// }
-//}

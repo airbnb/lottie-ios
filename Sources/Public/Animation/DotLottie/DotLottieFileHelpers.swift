@@ -71,7 +71,7 @@ extension DotLottieFile {
 
       do {
         /// Decode animation.
-        guard let data = try bundle.getAnimationData(name, subdirectory: subdirectory) else {
+        guard let data = try bundle.getDotLottieData(name, subdirectory: subdirectory) else {
           return nil
         }
         let lottie = try DotLottieFile.from(data: data)
