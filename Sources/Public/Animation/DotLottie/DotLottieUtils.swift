@@ -23,7 +23,7 @@ struct DotLottieUtils {
 
 extension URL {
   /// Checks if url is a lottie file
-  var isDotLottieFile: Bool {
+  var isDotLottie: Bool {
     pathExtension == DotLottieUtils.dotLottieExtension
   }
   

@@ -1,5 +1,5 @@
 //
-//  DotLottieFileHelpers.swift
+//  DotLottieHelpers.swift
 //  Lottie
 //
 //  Created by Evandro Hoffmann on 20/10/22.
@@ -7,10 +7,10 @@
 
 import Foundation
 
-extension DotLottieFile {
+extension DotLottie {
     
       /// A closure for an Animation download. The closure is passed `nil` if there was an error.
-      public typealias DotLottieDownloadClosure = (DotLottieFile?) -> Void
+      public typealias DotLottieDownloadClosure = (DotLottie?) -> Void
     
      /// Returns the list of `DotLottieAnimation` in the file
      public var dotLottieAnimations: [DotLottieAnimation] {
@@ -42,20 +42,20 @@ extension DotLottieFile {
     
     // MARK: DotLottie file (Loading)
 
-    /// Loads a DotLottieFile model from a bundle by its name. Returns `nil` if a file is not found.
+    /// Loads a DotLottie model from a bundle by its name. Returns `nil` if a file is not found.
     ///
     /// - Parameter name: The name of the lottie file without the lottie extension. EG "StarAnimation"
     /// - Parameter bundle: The bundle in which the lottie is located. Defaults to `Bundle.main`
     /// - Parameter subdirectory: A subdirectory in the bundle in which the lottie is located. Optional.
     /// - Parameter dotLottieCache: A cache for holding loaded lotties. Defaults to `LRUDotLottieCache.sharedCache`. Optional.
     ///
-    /// - Returns: Deserialized `DotLottieFile`. Optional.
+    /// - Returns: Deserialized `DotLottie`. Optional.
     public static func named(
       _ name: String,
       bundle: Bundle = Bundle.main,
       subdirectory: String? = nil,
       dotLottieCache: DotLottieCacheProvider? = LRUDotLottieCache.sharedCache)
-      -> DotLottieFile?
+      -> DotLottie?
     {
       /// Create a cache key for the lottie.
       let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
@@ -74,7 +74,7 @@ extension DotLottieFile {
         guard let data = try bundle.getDotLottieData(name, subdirectory: subdirectory) else {
           return nil
         }
-        let lottie = try DotLottieFile.from(data: data)
+        let lottie = try DotLottie.from(data: data)
         dotLottieCache?.setFile(lottie, forKey: cacheKey)
         return lottie
       } catch {
@@ -84,15 +84,15 @@ extension DotLottieFile {
       }
     }
 
-    /// Loads an DotLottieFile from a specific filepath.
+    /// Loads an DotLottie from a specific filepath.
     /// - Parameter filepath: The absolute filepath of the lottie to load. EG "/User/Me/starAnimation.lottie"
     /// - Parameter dotLottieCache: A cache for holding loaded lotties. Defaults to `LRUDotLottieCache.sharedCache`. Optional.
     ///
-    /// - Returns: Deserialized `DotLottieFile`. Optional.
+    /// - Returns: Deserialized `DotLottie`. Optional.
     public static func filepath(
       _ filepath: String,
       dotLottieCache: DotLottieCacheProvider? = LRUDotLottieCache.sharedCache)
-      -> DotLottieFile?
+      -> DotLottie?
     {
       /// Check cache for lottie
       if
@@ -105,7 +105,7 @@ extension DotLottieFile {
       do {
         /// Decode the lottie.
         let data = try Data(contentsOf: URL(fileURLWithPath: filepath))
-        let lottie = try DotLottieFile.from(data: data)
+        let lottie = try DotLottie.from(data: data)
         dotLottieCache?.setFile(lottie, forKey: filepath)
         return lottie
       } catch {
@@ -114,16 +114,16 @@ extension DotLottieFile {
       }
     }
 
-    ///    Loads a DotLottieFile model from the asset catalog by its name. Returns `nil` if a lottie is not found.
+    ///    Loads a DotLottie model from the asset catalog by its name. Returns `nil` if a lottie is not found.
     ///    - Parameter name: The name of the lottie file in the asset catalog. EG "StarAnimation"
     ///    - Parameter bundle: The bundle in which the lottie is located. Defaults to `Bundle.main`
     ///    - Parameter dotLottieCache: A cache for holding loaded lottie files. Defaults to `LRUDotLottieCache.sharedCache` Optional.
-    ///    - Returns: Deserialized `DotLottieFile`. Optional.
+    ///    - Returns: Deserialized `DotLottie`. Optional.
     public static func asset(
       _ name: String,
       bundle: Bundle = Bundle.main,
       dotLottieCache: DotLottieCacheProvider? = LRUDotLottieCache.sharedCache)
-      -> DotLottieFile?
+      -> DotLottie?
     {
       /// Create a cache key for the lottie.
       let cacheKey = bundle.bundlePath + "/" + name
@@ -144,7 +144,7 @@ extension DotLottieFile {
 
       do {
         /// Decode lottie.
-        let lottie = try DotLottieFile.from(data: data)
+        let lottie = try DotLottie.from(data: data)
         dotLottieCache?.setFile(lottie, forKey: cacheKey)
         return lottie
       } catch {
@@ -156,12 +156,12 @@ extension DotLottieFile {
     /// Loads a DotLottie animation from a `Data` object containing a compressed .lottie file.
     ///
     /// - Parameter data: The object to load the file from.
-    /// - Returns: Deserialized `DotLottieFile`. Optional.
+    /// - Returns: Deserialized `DotLottie`. Optional.
     ///
     public static func from(data: Data) throws
-      -> DotLottieFile
+      -> DotLottie
     {
-        try DotLottieFile(data: data)
+        try DotLottie(data: data)
     }
 
     /// Loads a DotLottie animation asynchronously from the URL.
@@ -173,7 +173,7 @@ extension DotLottieFile {
     public static func loadedFrom(
       url: URL,
       session: URLSession = .shared,
-      closure: @escaping DotLottieFile.DotLottieDownloadClosure,
+      closure: @escaping DotLottie.DotLottieDownloadClosure,
       dotLottieCache: DotLottieCacheProvider? = LRUDotLottieCache.sharedCache)
     {
       if let dotLottieCache = dotLottieCache, let animation = dotLottieCache.file(forKey: url.absoluteString) {
@@ -187,7 +187,7 @@ extension DotLottieFile {
             return
           }
           do {
-            let lottie = try DotLottieFile.from(data: data)
+            let lottie = try DotLottie.from(data: data)
             DispatchQueue.main.async {
               dotLottieCache?.setFile(lottie, forKey: url.absoluteString)
               closure(lottie)

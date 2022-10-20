@@ -119,7 +119,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
 
     /// Initializes an AnimationView with an lottie file.
     public init(
-      dotLottie: DotLottieFile?,
+      dotLottie: DotLottie?,
       textProvider: AnimationTextProvider = DefaultTextProvider(),
       fontProvider: AnimationFontProvider = DefaultFontProvider(),
       configuration: LottieConfiguration = .shared,
@@ -231,7 +231,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     /// be loaded up and set to the beginning of its timeline.
     /// The loopMode, animationSpeed and imageProvider will be set according
     /// to lottie file settings
-    public var dotLottie: DotLottieFile? {
+    public var dotLottie: DotLottie? {
         didSet {
             guard let animation = dotLottie?.animation else { return }
             self.animation = animation

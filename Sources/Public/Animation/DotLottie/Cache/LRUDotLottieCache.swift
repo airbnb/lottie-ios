@@ -31,7 +31,7 @@ public class LRUDotLottieCache: DotLottieCacheProvider {
     lruList.removeAll()
   }
 
-  public func file(forKey: String) -> DotLottieFile? {
+  public func file(forKey: String) -> DotLottie? {
     guard let lottie = cacheMap[forKey] else {
       return nil
     }
@@ -42,7 +42,7 @@ public class LRUDotLottieCache: DotLottieCacheProvider {
     return lottie
   }
 
-  public func setFile(_ lottie: DotLottieFile, forKey: String) {
+  public func setFile(_ lottie: DotLottie, forKey: String) {
     cacheMap[forKey] = lottie
     lruList.append(forKey)
     if lruList.count > cacheSize {
@@ -55,7 +55,7 @@ public class LRUDotLottieCache: DotLottieCacheProvider {
 
   // MARK: Fileprivate
 
-  fileprivate var cacheMap: [String: DotLottieFile] = [:]
+  fileprivate var cacheMap: [String: DotLottie] = [:]
   fileprivate var lruList: [String] = []
 
 }
