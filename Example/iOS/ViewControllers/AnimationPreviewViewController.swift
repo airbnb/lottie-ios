@@ -31,12 +31,12 @@ class AnimationPreviewViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
 
-      if let animation = LottieAnimation.named(animationName) {
-          animationView.animation = animation
-      } else if let lottie = DotLottie.named(animationName) {
-          animationView.dotLottie = lottie
-      }
-        
+    if let animation = LottieAnimation.named(animationName) {
+      animationView.animation = animation
+    } else if let lottie = DotLottie.named(animationName) {
+      animationView.dotLottie = lottie
+    }
+
     animationView.contentMode = .scaleAspectFit
     view.addSubview(animationView)
 

@@ -10,25 +10,29 @@ import Foundation
 
 /// Manifest model for .lottie File
 struct DotLottieManifest: Codable {
+
+  // MARK: Lifecycle
+
+  init(animations: [DotLottieAnimation], version: String, author: String, generator: String) {
+    self.animations = animations
+    self.version = version
+    self.author = author
+    self.generator = generator
+  }
+
+  // MARK: Internal
+
   var animations: [DotLottieAnimation]
   var version: String
   var author: String
   var generator: String
-  
+
   /// Decodes data to Manifest model
   /// - Parameter data: Data to decode
   /// - Throws: Error
   /// - Returns: .lottie Manifest model
   static func decode(from data: Data) throws -> DotLottieManifest {
     try JSONDecoder().decode(DotLottieManifest.self, from: data)
-  }
-  
-  /// Encodes to data
-  /// - Parameter encoder: JSONEncoder
-  /// - Throws: Error
-  /// - Returns: encoded Data
-  func encode(with encoder: JSONEncoder = JSONEncoder()) throws -> Data {
-    try encoder.encode(self)
   }
 
   /// Loads manifest from given URL
@@ -38,11 +42,13 @@ struct DotLottieManifest: Codable {
     let data = try Data(contentsOf: url)
     return try decode(from: data)
   }
-  
-  init(animations: [DotLottieAnimation], version: String, author: String, generator: String) {
-    self.animations = animations
-    self.version = version
-    self.author = author
-    self.generator = generator
+
+  /// Encodes to data
+  /// - Parameter encoder: JSONEncoder
+  /// - Throws: Error
+  /// - Returns: encoded Data
+  func encode(with encoder: JSONEncoder = JSONEncoder()) throws -> Data {
+    try encoder.encode(self)
   }
+
 }

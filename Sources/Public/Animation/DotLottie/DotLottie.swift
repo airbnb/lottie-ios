@@ -11,68 +11,75 @@ import ZIPFoundation
 
 /// Detailed .lottie file structure
 public struct DotLottie {
-  let localUrl: URL
-  
-  static let manifestFileName: String = "manifest.json"
-  static let animationsFolderName: String = "animations"
-  static let imagesFolderName: String = "images"
-  
-  /// Manifest.json file loading
-  var manifest: DotLottieManifest? {
-    let path = localUrl.appendingPathComponent(DotLottie.manifestFileName)
-    return try? DotLottieManifest.load(from: path)
-  }
-  
-  /// Animation url for main animation
-  var animationUrl: URL? {
-    guard let animationId = manifest?.animations.first?.id else { return nil }
-    let dotLottieJson = "\(DotLottie.animationsFolderName)/\(animationId).json"
-    return localUrl.appendingPathComponent(dotLottieJson)
-  }
-  
-  /// Animations folder url
-  var animationsUrl: URL {
-    localUrl.appendingPathComponent("\(DotLottie.animationsFolderName)")
-  }
-  
-  /// All files in animations folder
-  var animationUrls: [URL] {
-    FileManager.default.urls(for: animationsUrl) ?? []
-  }
-  
-  /// Images folder url
-  var imagesUrl: URL {
-    localUrl.appendingPathComponent("\(DotLottie.imagesFolderName)")
-  }
-  
-  /// All images in images folder
-  var imageUrls: [URL] {
-    FileManager.default.urls(for: imagesUrl) ?? []
-  }
-    
+
+  // MARK: Lifecycle
+
   /// Loads `DotLottie` from `URL` containing .lottie file.
   ///
   /// - Parameters:
   ///  - url: URL to .lottie file
   ///  - Returns: Deserialized `DotLottie`. Optional.
   init(url: URL) throws {
-    self.localUrl = DotLottieUtils.tempDirectoryURL.appendingPathComponent(url.deletingPathExtension().lastPathComponent)
+    localUrl = DotLottieUtils.tempDirectoryURL.appendingPathComponent(url.deletingPathExtension().lastPathComponent)
     guard url.isDotLottie else {
       throw DotLottieError.invalidFileFormat
     }
     try decompress(from: url, in: localUrl)
   }
-  
+
   /// Loads `DotLottie` from `Data` object containing a compressed animation.
   ///
   /// - Parameters:
   ///  - data: Data of .lottie file
   ///  - Returns: Deserialized `DotLottie`. Optional.
   init(data: Data, filename: String = UUID().uuidString) throws {
-    self.localUrl = DotLottieUtils.tempDirectoryURL.appendingPathComponent(filename)
+    localUrl = DotLottieUtils.tempDirectoryURL.appendingPathComponent(filename)
     try decompress(data: data, filename: filename, in: localUrl)
   }
-  
+
+  // MARK: Internal
+
+  static let manifestFileName = "manifest.json"
+  static let animationsFolderName = "animations"
+  static let imagesFolderName = "images"
+
+  let localUrl: URL
+
+  /// Manifest.json file loading
+  var manifest: DotLottieManifest? {
+    let path = localUrl.appendingPathComponent(DotLottie.manifestFileName)
+    return try? DotLottieManifest.load(from: path)
+  }
+
+  /// Animation url for main animation
+  var animationUrl: URL? {
+    guard let animationId = manifest?.animations.first?.id else { return nil }
+    let dotLottieJson = "\(DotLottie.animationsFolderName)/\(animationId).json"
+    return localUrl.appendingPathComponent(dotLottieJson)
+  }
+
+  /// Animations folder url
+  var animationsUrl: URL {
+    localUrl.appendingPathComponent("\(DotLottie.animationsFolderName)")
+  }
+
+  /// All files in animations folder
+  var animationUrls: [URL] {
+    FileManager.default.urls(for: animationsUrl) ?? []
+  }
+
+  /// Images folder url
+  var imagesUrl: URL {
+    localUrl.appendingPathComponent("\(DotLottie.imagesFolderName)")
+  }
+
+  /// All images in images folder
+  var imageUrls: [URL] {
+    FileManager.default.urls(for: imagesUrl) ?? []
+  }
+
+  // MARK: Private
+
   /// Decompresses .lottie file from `URL` and saves to local temp folder
   ///
   /// - Parameters:
@@ -82,12 +89,12 @@ public struct DotLottie {
     try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
     try FileManager.default.unzipItem(at: url, to: directory)
   }
-    
-    /// Decompresses .lottie file from `Data` and saves to local temp folder
-    ///
-    /// - Parameters:
-    ///  - url: url to .lottie file
-    ///  - directory: url to destination of decompression contents
+
+  /// Decompresses .lottie file from `Data` and saves to local temp folder
+  ///
+  /// - Parameters:
+  ///  - url: url to .lottie file
+  ///  - directory: url to destination of decompression contents
   private func decompress(data: Data, filename: String, in directory: URL) throws {
     let url = DotLottieUtils.tempDirectoryURL.appendingPathComponent("\(filename).lottie")
     try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)

@@ -1534,7 +1534,7 @@
 			isa = PBXGroup;
 			children = (
 				6C4877E328FF20140005AF07 /* DotLottie.swift */,
-				6C4877E428FF20140005AF07 /* DotLottieUtils.swift */,
+				6C4878592901811D0005AF07 /* DotLottieHelpers.swift */,
 				6C48785E2901C26D0005AF07 /* Utility */,
 				6C48785D2901A4110005AF07 /* Cache */,
 			);
@@ -1554,8 +1554,8 @@
 			isa = PBXGroup;
 			children = (
 				6C4877FB28FF20140005AF07 /* DotLottieManifest.swift */,
+				6C4877E428FF20140005AF07 /* DotLottieUtils.swift */,
 				6C4877E228FF20140005AF07 /* DotLottieAnimation.swift */,
-				6C4878592901811D0005AF07 /* DotLottieHelpers.swift */,
 				6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */,
 			);
 			path = Utility;

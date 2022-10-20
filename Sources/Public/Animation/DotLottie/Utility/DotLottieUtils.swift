@@ -8,10 +8,12 @@
 
 import Foundation
 
+// MARK: - DotLottieUtils
+
 struct DotLottieUtils {
   static let dotLottieExtension = "lottie"
   static let jsonExtension = "json"
-  
+
   /// Temp folder to app directory
   static var tempDirectoryURL: URL {
     if #available(iOS 10.0, *) {
@@ -26,12 +28,12 @@ extension URL {
   var isDotLottie: Bool {
     pathExtension == DotLottieUtils.dotLottieExtension
   }
-  
+
   /// Checks if url is a json file
   var isJsonFile: Bool {
     pathExtension == DotLottieUtils.jsonExtension
   }
-    
+
   var urls: [URL] {
     FileManager.default.urls(for: self) ?? []
   }
@@ -43,10 +45,12 @@ extension FileManager {
   ///  - url: URL of directory to search
   ///  - skipsHiddenFiles: If should or not show hidden files
   /// - Returns: Returns urls of all files matching criteria in the directory
-  func urls(for url: URL, skipsHiddenFiles: Bool = true ) -> [URL]? {
+  func urls(for url: URL, skipsHiddenFiles: Bool = true) -> [URL]? {
     try? contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: skipsHiddenFiles ? .skipsHiddenFiles : [])
   }
 }
+
+// MARK: - DotLottieError
 
 public enum DotLottieError: Error {
   case invalidFileFormat

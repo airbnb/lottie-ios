@@ -117,30 +117,30 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     }
   }
 
-    /// Initializes an AnimationView with an lottie file.
-    public init(
-      dotLottie: DotLottie?,
-      textProvider: AnimationTextProvider = DefaultTextProvider(),
-      fontProvider: AnimationFontProvider = DefaultFontProvider(),
-      configuration: LottieConfiguration = .shared,
-      logger: LottieLogger = .shared)
-    {
-      self.animation = dotLottie?.animation
-      self.imageProvider = dotLottie?.imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
-      self.textProvider = textProvider
-      self.fontProvider = fontProvider
-      self.configuration = configuration
-      self.logger = logger
-      super.init(frame: .zero)
-      commonInit()
-      self.loopMode = animation?.dotLottieConfiguration?.loopMode ?? .playOnce
-      self.animationSpeed = animation?.dotLottieConfiguration?.speed ?? 1
-      makeAnimationLayer(usingEngine: configuration.renderingEngine)
-      if let animation = animation {
-        frame = animation.bounds
-      }
+  /// Initializes an AnimationView with an lottie file.
+  public init(
+    dotLottie: DotLottie?,
+    textProvider: AnimationTextProvider = DefaultTextProvider(),
+    fontProvider: AnimationFontProvider = DefaultFontProvider(),
+    configuration: LottieConfiguration = .shared,
+    logger: LottieLogger = .shared)
+  {
+    animation = dotLottie?.animation
+    imageProvider = dotLottie?.imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
+    self.textProvider = textProvider
+    self.fontProvider = fontProvider
+    self.configuration = configuration
+    self.logger = logger
+    super.init(frame: .zero)
+    commonInit()
+    loopMode = animation?.dotLottieConfiguration?.loopMode ?? .playOnce
+    animationSpeed = animation?.dotLottieConfiguration?.speed ?? 1
+    makeAnimationLayer(usingEngine: configuration.renderingEngine)
+    if let animation = animation {
+      frame = animation.bounds
     }
-    
+  }
+
   public init(
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)
@@ -225,23 +225,23 @@ final public class LottieAnimationView: LottieAnimationViewBase {
       makeAnimationLayer(usingEngine: configuration.renderingEngine)
     }
   }
-    
-    /// Sets the lottie file backing the animation view. Setting this will clear the
-    /// view's contents, completion blocks and current state. The new animation will
-    /// be loaded up and set to the beginning of its timeline.
-    /// The loopMode, animationSpeed and imageProvider will be set according
-    /// to lottie file settings
-    public var dotLottie: DotLottie? {
-        didSet {
-            guard let animation = dotLottie?.animation else { return }
-            self.animation = animation
-            self.loopMode = animation.dotLottieConfiguration?.loopMode ?? loopMode
-            self.animationSpeed = animation.dotLottieConfiguration?.speed ?? animationSpeed
-            if let imageProvider = dotLottie?.imageProvider {
-                self.imageProvider = imageProvider
-            }
-        }
+
+  /// Sets the lottie file backing the animation view. Setting this will clear the
+  /// view's contents, completion blocks and current state. The new animation will
+  /// be loaded up and set to the beginning of its timeline.
+  /// The loopMode, animationSpeed and imageProvider will be set according
+  /// to lottie file settings
+  public var dotLottie: DotLottie? {
+    didSet {
+      guard let animation = dotLottie?.animation else { return }
+      self.animation = animation
+      loopMode = animation.dotLottieConfiguration?.loopMode ?? loopMode
+      animationSpeed = animation.dotLottieConfiguration?.speed ?? animationSpeed
+      if let imageProvider = dotLottie?.imageProvider {
+        self.imageProvider = imageProvider
+      }
     }
+  }
 
   /// Sets the image provider for the animation view. An image provider provides the
   /// animation with its required image data.
