@@ -1375,6 +1375,7 @@
 				2EAF59C227A0798700E00531 /* macOS */,
 				2EAF59C727A0798700E00531 /* LottieConfiguration.swift */,
 				2EAF59C827A0798700E00531 /* Animation */,
+				6C4877E028FF20140005AF07 /* DotLottie */,
 				2EAF59CC27A0798700E00531 /* ImageProvider */,
 				2EAF59CE27A0798700E00531 /* iOS */,
 				2EAF59DA27A0798700E00531 /* Primitives */,
@@ -1406,7 +1407,6 @@
 				0887347228F0CCDD00458627 /* LottieAnimationHelpers.swift */,
 				0887347428F0CCDD00458627 /* LottieAnimationView.swift */,
 				0887347328F0CCDD00458627 /* LottieAnimationViewInitializers.swift */,
-				6C4877E028FF20140005AF07 /* DotLottie */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
