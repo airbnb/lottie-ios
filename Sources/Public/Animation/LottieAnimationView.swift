@@ -117,6 +117,30 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     }
   }
 
+    /// Initializes an AnimationView with an lottie file.
+    public init(
+      dotLottie: DotLottieFile?,
+      textProvider: AnimationTextProvider = DefaultTextProvider(),
+      fontProvider: AnimationFontProvider = DefaultFontProvider(),
+      configuration: LottieConfiguration = .shared,
+      logger: LottieLogger = .shared)
+    {
+      self.animation = dotLottie?.animation
+      self.imageProvider = dotLottie?.imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
+      self.textProvider = textProvider
+      self.fontProvider = fontProvider
+      self.configuration = configuration
+      self.logger = logger
+      super.init(frame: .zero)
+      commonInit()
+      self.loopMode = animation?.dotLottieConfiguration?.loopMode ?? .playOnce
+      self.animationSpeed = animation?.dotLottieConfiguration?.speed ?? 1
+      makeAnimationLayer(usingEngine: configuration.renderingEngine)
+      if let animation = animation {
+        frame = animation.bounds
+      }
+    }
+    
   public init(
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)

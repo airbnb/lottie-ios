@@ -96,6 +96,87 @@ extension LottieAnimationView {
     self.init(animation: animation, imageProvider: provider, configuration: configuration)
   }
 
+    // MARK: DotLottie
+
+    /// Loads a Lottie animation from a .lottie file in the supplied bundle.
+    ///
+    /// - Parameter name: The string name of the lottie file with no file
+    /// extension provided.
+    /// - Parameter bundle: The bundle in which the file is located.
+    /// Defaults to the Main bundle.
+    public convenience init(
+      dotLottieName name: String,
+      bundle: Bundle = Bundle.main,
+      dotLottieCache: DotLottieCacheProvider? = LRUDotLottieCache.sharedCache,
+      configuration: LottieConfiguration = .shared)
+    {
+        let lottie = DotLottieFile.named(name, bundle: bundle, subdirectory: nil, dotLottieCache: dotLottieCache)
+        self.init(dotLottie: lottie, configuration: configuration)
+    }
+
+    /// Loads a Lottie from a .lottie file in a specific path on disk.
+    ///
+    /// - Parameter filePath: The absolute path of the Lottie file.
+    public convenience init(
+      dotLottieFilePath filePath: String,
+      dotLottieCache: DotLottieCacheProvider? = LRUDotLottieCache.sharedCache,
+      configuration: LottieConfiguration = .shared)
+    {
+        let lottie = DotLottieFile.filepath(filePath, dotLottieCache: dotLottieCache)
+        self.init(dotLottie: lottie, configuration: configuration)
+    }
+
+    /// Loads a Lottie file asynchronously from the URL
+    ///
+    /// - Parameter dotLottieUrl: The url to load the lottie file from.
+    /// - Parameter closure: A closure to be called when the animation has loaded.
+      public convenience init(
+        dotLottieUrl url: URL,
+        closure: @escaping LottieAnimationView.DownloadClosure,
+        dotLottieCache: DotLottieCacheProvider? = LRUDotLottieCache.sharedCache,
+        configuration: LottieConfiguration = .shared)
+      {
+          if let dotLottieCache = dotLottieCache, let lottie = dotLottieCache.file(forKey: url.absoluteString) {
+              self.init(animation: lottie.animation, imageProvider: nil, configuration: configuration)
+            closure(nil)
+          } else {
+              self.init(dotLottie: nil, configuration: configuration)
+              DotLottieFile.loadedFrom(url: url, closure: { lottie in
+                  if let lottie = lottie {
+                      if let animation = lottie.animation {
+                          self.animation = animation
+                          self.loopMode = animation.dotLottieConfiguration?.loopMode ?? .playOnce
+                          self.animationSpeed = animation.dotLottieConfiguration?.speed ?? 1
+
+                          if let imageProvider = animation.dotLottieConfiguration?.imageProvider {
+                            self.imageProvider = imageProvider
+                          }
+                          
+                          closure(nil)
+                      } else {
+                          closure(DotLottieError.animationNotAvailable)
+                      }
+                  } else {
+                    closure(LottieDownloadError.downloadFailed)
+                  }
+              }, dotLottieCache: dotLottieCache)
+          }
+      }
+
+    /// Loads a Lottie from a .lottie file located in the Asset catalog of the supplied bundle.
+    /// - Parameter name: The string name of the lottie file in the asset catalog.
+    /// - Parameter bundle: The bundle in which the file is located.
+    /// Defaults to the Main bundle.
+    public convenience init(
+      dotLottieAsset name: String,
+      bundle: Bundle = Bundle.main,
+      dotLottieCache: DotLottieCacheProvider? = LRUDotLottieCache.sharedCache,
+      configuration: LottieConfiguration = .shared)
+    {
+      let lottie = DotLottieFile.asset(name, bundle: bundle, dotLottieCache: dotLottieCache)
+      self.init(dotLottie: lottie, configuration: configuration)
+    }
+    
   // MARK: Public
 
   public typealias DownloadClosure = (Error?) -> Void

@@ -8,32 +8,21 @@
 import Foundation
 
 struct DotLottieConfiguration {
-  var file: DotLottieFile
-  var animation: DotLottieAnimation
-  
-  var bounce: Bool {
-    animation.mode == "bounce"
-  }
-  
-  var loopMode: LottieLoopMode {
-    bounce ? .autoReverse : (animation.loop ? .loop : .playOnce)
-  }
-
-  var speed: CGFloat {
-    CGFloat(animation.speed)*CGFloat(animation.direction ?? 1)
-  }
+  var imageProvider: FilepathImageProvider?
+  var loopMode: LottieLoopMode
+  var speed: CGFloat
 }
 
-extension LottieAnimationView {
- /// Applies dotLottie configuration to player
- /// - Parameter lottie: DotLottieSettings to apply
- func applySettings(with lottie: DotLottieConfiguration?) {
-   guard let lottie else { return }
-   loopMode = lottie.loopMode
-   animationSpeed = lottie.speed
-
-   if let imageProvider = lottie.file.imageProvider {
-     self.imageProvider = imageProvider
-   }
- }
-}
+//extension LottieAnimationView {
+// /// Applies dotLottie configuration to player
+// /// - Parameter lottie: DotLottieSettings to apply
+// func applySettings(with lottie: DotLottieConfiguration?) {
+//   guard let lottie else { return }
+//   loopMode = lottie.loopMode
+//   animationSpeed = lottie.speed
+//
+//   if let bundleURL = lottie.file.imageProvider {
+//     self.imageProvider = imageProvider
+//   }
+// }
+//}

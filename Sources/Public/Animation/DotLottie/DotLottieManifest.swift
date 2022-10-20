@@ -9,17 +9,17 @@
 import Foundation
 
 /// Manifest model for .lottie File
-public struct DotLottieManifest: Codable {
-  public var animations: [DotLottieAnimation]
-  public var version: String
-  public var author: String
-  public var generator: String
+struct DotLottieManifest: Codable {
+  var animations: [DotLottieAnimation]
+  var version: String
+  var author: String
+  var generator: String
   
   /// Decodes data to Manifest model
   /// - Parameter data: Data to decode
   /// - Throws: Error
   /// - Returns: .lottie Manifest model
-  public static func decode(from data: Data) throws -> DotLottieManifest {
+  static func decode(from data: Data) throws -> DotLottieManifest {
     try JSONDecoder().decode(DotLottieManifest.self, from: data)
   }
   
@@ -27,19 +27,19 @@ public struct DotLottieManifest: Codable {
   /// - Parameter encoder: JSONEncoder
   /// - Throws: Error
   /// - Returns: encoded Data
-  public func encode(with encoder: JSONEncoder = JSONEncoder()) throws -> Data {
+  func encode(with encoder: JSONEncoder = JSONEncoder()) throws -> Data {
     try encoder.encode(self)
   }
 
   /// Loads manifest from given URL
   /// - Parameter path: URL path to Manifest
   /// - Returns: Manifest Model
-  public static func load(from url: URL) throws -> DotLottieManifest {
+  static func load(from url: URL) throws -> DotLottieManifest {
     let data = try Data(contentsOf: url)
     return try decode(from: data)
   }
   
-  public init(animations: [DotLottieAnimation], version: String, author: String, generator: String) {
+  init(animations: [DotLottieAnimation], version: String, author: String, generator: String) {
     self.animations = animations
     self.version = version
     self.author = author

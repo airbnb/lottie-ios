@@ -9,29 +9,43 @@ import Foundation
 
 public struct DotLottieAnimation: Codable {
   /// Id of Animation
-  public var id: String
+  var id: String
   
   /// Loop enabled
-  public var loop: Bool
+  var loop: Bool
   
   // appearance color in HEX
-  public var themeColor: String
+  var themeColor: String
   
   /// Animation Playback Speed
-  public var speed: Float
+  var speed: Float
   
   /// 1 or -1
-  public var direction: Int? = 1
+  var direction: Int? = 1
   
   /// mode - "bounce" | "normal"
-  public var mode: String? = "normal"
-  
-  public init(id: String, loop: Bool, themeColor: String, speed: Float, direction: Int = 1, mode: String = "normal") {
-    self.id = id
-    self.loop = loop
-    self.themeColor = themeColor
-    self.speed = speed
-    self.direction = direction
-    self.mode = mode
-  }
+  var mode: String? = "normal"
+    
+    /// URL to animation, to be set internally
+    public var animationUrl: URL?
+    
+    /// Loads `LottieAnimation` from `animationUrl`
+    /// - Returns: Deserialized `LottieAnimation`. Optional.
+    public func animation() throws -> LottieAnimation {
+        guard let animationUrl else {
+            throw DotLottieError.animationNotAvailable
+        }
+        let data = try Data(contentsOf: animationUrl)
+        return try LottieAnimation.from(data: data)
+    }
+   
+    /// Loop mode for animation
+    public var loopMode: LottieLoopMode {
+        mode == "bounce" ? .autoReverse : (loop ? .loop : .playOnce)
+    }
+    
+    /// Animation speed
+    public var animationSpeed: CGFloat {
+      CGFloat(speed)*CGFloat(direction ?? 1)
+    }
 }
