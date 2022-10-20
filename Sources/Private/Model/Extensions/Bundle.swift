@@ -49,8 +49,8 @@ extension String {
   }
 
   fileprivate func removingDotLottieSuffix() -> String {
-    // Allow filenames to be passed with a ".json" extension (but not other extensions)
-    // to keep the behavior from Lottie 2.x - instead of failing to load the animation
+    // Allow filenames to be passed with a ".lottie" extension (but not other extensions)
+    // to keep the behavior from Lottie 2.x - instead of failing to load the file
     guard hasSuffix(".lottie") else {
       return self
     }

@@ -77,7 +77,7 @@ extension DotLottie {
       guard let data = try bundle.getDotLottieData(name, subdirectory: subdirectory) else {
         return nil
       }
-      let lottie = try DotLottie.from(data: data)
+      let lottie = try DotLottie.from(data: data, filename: name)
       dotLottieCache?.setFile(lottie, forKey: cacheKey)
       return lottie
     } catch {
@@ -107,8 +107,9 @@ extension DotLottie {
 
     do {
       /// Decode the lottie.
-      let data = try Data(contentsOf: URL(fileURLWithPath: filepath))
-      let lottie = try DotLottie.from(data: data)
+      let url = URL(fileURLWithPath: filepath)
+      let data = try Data(contentsOf: url)
+      let lottie = try DotLottie.from(data: data, filename: url.deletingPathExtension().lastPathComponent)
       dotLottieCache?.setFile(lottie, forKey: filepath)
       return lottie
     } catch {
@@ -147,7 +148,7 @@ extension DotLottie {
 
     do {
       /// Decode lottie.
-      let lottie = try DotLottie.from(data: data)
+      let lottie = try DotLottie.from(data: data, filename: name)
       dotLottieCache?.setFile(lottie, forKey: cacheKey)
       return lottie
     } catch {
@@ -159,12 +160,13 @@ extension DotLottie {
   /// Loads a DotLottie animation from a `Data` object containing a compressed .lottie file.
   ///
   /// - Parameter data: The object to load the file from.
+  /// - Parameter filename: The name of the file.
   /// - Returns: Deserialized `DotLottie`. Optional.
   ///
-  public static func from(data: Data) throws
+  public static func from(data: Data, filename: String) throws
     -> DotLottie
   {
-    try DotLottie(data: data)
+    try DotLottie(data: data, filename: filename)
   }
 
   /// Loads a DotLottie animation asynchronously from the URL.
@@ -190,7 +192,7 @@ extension DotLottie {
           return
         }
         do {
-          let lottie = try DotLottie.from(data: data)
+          let lottie = try DotLottie.from(data: data, filename: url.deletingPathExtension().lastPathComponent)
           DispatchQueue.main.async {
             dotLottieCache?.setFile(lottie, forKey: url.absoluteString)
             closure(lottie)
