@@ -36,7 +36,7 @@ public class DotLottieImageProvider: AnimationImageProvider {
   // MARK: Public
 
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
-    images[asset.name]
+      imageCache.object(forKey: asset.name as NSString)
   }
 
   // MARK: Internal
@@ -45,7 +45,7 @@ public class DotLottieImageProvider: AnimationImageProvider {
 
   // MARK: Private
 
-  private var images: [String: CGImage] = [:]
+  private var imageCache: NSCache<NSString, CGImage> = .init()
 
   private func loadImages() {
     filepath.urls.forEach {
@@ -54,14 +54,14 @@ public class DotLottieImageProvider: AnimationImageProvider {
         let data = try? Data(contentsOf: $0),
         let image = UIImage(data: data)?.cgImage
       {
-        images[$0.lastPathComponent] = image
+        imageCache.setObject(image, forKey: $0.lastPathComponent as NSString)
       }
       #elseif os(macOS)
       if
         let data = try? Data(contentsOf: $0),
         let image = NSImage(data: data)?.lottie_CGImage
       {
-        images[$0.lastPathComponent] = image
+        imageCache.setObject(image, forKey: $0.lastPathComponent as NSString)
       }
       #endif
     }
