@@ -567,66 +567,13 @@
 		6C48780528FF20140005AF07 /* DotLottieUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877E428FF20140005AF07 /* DotLottieUtils.swift */; };
 		6C48780628FF20140005AF07 /* DotLottieUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877E428FF20140005AF07 /* DotLottieUtils.swift */; };
 		6C48780728FF20140005AF07 /* DotLottieUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877E428FF20140005AF07 /* DotLottieUtils.swift */; };
-		6C48781128FF20140005AF07 /* Archive+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877E928FF20140005AF07 /* Archive+Helpers.swift */; };
-		6C48781228FF20140005AF07 /* Archive+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877E928FF20140005AF07 /* Archive+Helpers.swift */; };
-		6C48781328FF20140005AF07 /* Archive+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877E928FF20140005AF07 /* Archive+Helpers.swift */; };
-		6C48781428FF20140005AF07 /* Archive+MemoryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EA28FF20140005AF07 /* Archive+MemoryFile.swift */; };
-		6C48781528FF20140005AF07 /* Archive+MemoryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EA28FF20140005AF07 /* Archive+MemoryFile.swift */; };
-		6C48781628FF20140005AF07 /* Archive+MemoryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EA28FF20140005AF07 /* Archive+MemoryFile.swift */; };
-		6C48781728FF20140005AF07 /* Archive+BackingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EB28FF20140005AF07 /* Archive+BackingConfiguration.swift */; };
-		6C48781828FF20140005AF07 /* Archive+BackingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EB28FF20140005AF07 /* Archive+BackingConfiguration.swift */; };
-		6C48781928FF20140005AF07 /* Archive+BackingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EB28FF20140005AF07 /* Archive+BackingConfiguration.swift */; };
-		6C48781A28FF20140005AF07 /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EC28FF20140005AF07 /* Archive.swift */; };
-		6C48781B28FF20140005AF07 /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EC28FF20140005AF07 /* Archive.swift */; };
-		6C48781C28FF20140005AF07 /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EC28FF20140005AF07 /* Archive.swift */; };
-		6C48781D28FF20140005AF07 /* Archive+Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877ED28FF20140005AF07 /* Archive+Reading.swift */; };
-		6C48781E28FF20140005AF07 /* Archive+Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877ED28FF20140005AF07 /* Archive+Reading.swift */; };
-		6C48781F28FF20140005AF07 /* Archive+Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877ED28FF20140005AF07 /* Archive+Reading.swift */; };
-		6C48782028FF20140005AF07 /* Archive+ZIP64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EE28FF20140005AF07 /* Archive+ZIP64.swift */; };
-		6C48782128FF20140005AF07 /* Archive+ZIP64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EE28FF20140005AF07 /* Archive+ZIP64.swift */; };
-		6C48782228FF20140005AF07 /* Archive+ZIP64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EE28FF20140005AF07 /* Archive+ZIP64.swift */; };
-		6C48782328FF20140005AF07 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EF28FF20140005AF07 /* Entry.swift */; };
-		6C48782428FF20140005AF07 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EF28FF20140005AF07 /* Entry.swift */; };
-		6C48782528FF20140005AF07 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877EF28FF20140005AF07 /* Entry.swift */; };
-		6C48782628FF20140005AF07 /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F028FF20140005AF07 /* Data+Compression.swift */; };
-		6C48782728FF20140005AF07 /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F028FF20140005AF07 /* Data+Compression.swift */; };
-		6C48782828FF20140005AF07 /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F028FF20140005AF07 /* Data+Compression.swift */; };
-		6C48782928FF20140005AF07 /* Archive+WritingDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F128FF20140005AF07 /* Archive+WritingDeprecated.swift */; };
-		6C48782A28FF20140005AF07 /* Archive+WritingDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F128FF20140005AF07 /* Archive+WritingDeprecated.swift */; };
-		6C48782B28FF20140005AF07 /* Archive+WritingDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F128FF20140005AF07 /* Archive+WritingDeprecated.swift */; };
-		6C48782C28FF20140005AF07 /* Entry+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F228FF20140005AF07 /* Entry+Serialization.swift */; };
-		6C48782D28FF20140005AF07 /* Entry+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F228FF20140005AF07 /* Entry+Serialization.swift */; };
-		6C48782E28FF20140005AF07 /* Entry+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F228FF20140005AF07 /* Entry+Serialization.swift */; };
-		6C48782F28FF20140005AF07 /* URL+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F328FF20140005AF07 /* URL+ZIP.swift */; };
-		6C48783028FF20140005AF07 /* URL+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F328FF20140005AF07 /* URL+ZIP.swift */; };
-		6C48783128FF20140005AF07 /* URL+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F328FF20140005AF07 /* URL+ZIP.swift */; };
-		6C48783228FF20140005AF07 /* Archive+Writing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F428FF20140005AF07 /* Archive+Writing.swift */; };
-		6C48783328FF20140005AF07 /* Archive+Writing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F428FF20140005AF07 /* Archive+Writing.swift */; };
-		6C48783428FF20140005AF07 /* Archive+Writing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F428FF20140005AF07 /* Archive+Writing.swift */; };
-		6C48783528FF20140005AF07 /* Data+CompressionDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F528FF20140005AF07 /* Data+CompressionDeprecated.swift */; };
-		6C48783628FF20140005AF07 /* Data+CompressionDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F528FF20140005AF07 /* Data+CompressionDeprecated.swift */; };
-		6C48783728FF20140005AF07 /* Data+CompressionDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F528FF20140005AF07 /* Data+CompressionDeprecated.swift */; };
-		6C48783828FF20140005AF07 /* Entry+ZIP64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F628FF20140005AF07 /* Entry+ZIP64.swift */; };
-		6C48783928FF20140005AF07 /* Entry+ZIP64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F628FF20140005AF07 /* Entry+ZIP64.swift */; };
-		6C48783A28FF20140005AF07 /* Entry+ZIP64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F628FF20140005AF07 /* Entry+ZIP64.swift */; };
-		6C48783B28FF20140005AF07 /* Archive+ReadingDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F728FF20140005AF07 /* Archive+ReadingDeprecated.swift */; };
-		6C48783C28FF20140005AF07 /* Archive+ReadingDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F728FF20140005AF07 /* Archive+ReadingDeprecated.swift */; };
-		6C48783D28FF20140005AF07 /* Archive+ReadingDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F728FF20140005AF07 /* Archive+ReadingDeprecated.swift */; };
-		6C48783E28FF20140005AF07 /* Data+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F828FF20140005AF07 /* Data+Serialization.swift */; };
-		6C48783F28FF20140005AF07 /* Data+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F828FF20140005AF07 /* Data+Serialization.swift */; };
-		6C48784028FF20140005AF07 /* Data+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F828FF20140005AF07 /* Data+Serialization.swift */; };
-		6C48784128FF20140005AF07 /* FileManager+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F928FF20140005AF07 /* FileManager+ZIP.swift */; };
-		6C48784228FF20140005AF07 /* FileManager+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F928FF20140005AF07 /* FileManager+ZIP.swift */; };
-		6C48784328FF20140005AF07 /* FileManager+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877F928FF20140005AF07 /* FileManager+ZIP.swift */; };
-		6C48784428FF20140005AF07 /* Archive+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877FA28FF20140005AF07 /* Archive+Progress.swift */; };
-		6C48784528FF20140005AF07 /* Archive+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877FA28FF20140005AF07 /* Archive+Progress.swift */; };
-		6C48784628FF20140005AF07 /* Archive+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877FA28FF20140005AF07 /* Archive+Progress.swift */; };
 		6C48784728FF20140005AF07 /* DotLottieManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877FB28FF20140005AF07 /* DotLottieManifest.swift */; };
 		6C48784828FF20140005AF07 /* DotLottieManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877FB28FF20140005AF07 /* DotLottieManifest.swift */; };
 		6C48784928FF20140005AF07 /* DotLottieManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877FB28FF20140005AF07 /* DotLottieManifest.swift */; };
 		6C48784B29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */; };
 		6C48784C29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */; };
 		6C48784D29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */; };
+		6C487850290151D10005AF07 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 6C48784F290151D10005AF07 /* ZIPFoundation */; };
 		6D0E635F28246BD0007C5DB6 /* Difference in Frameworks */ = {isa = PBXBuildFile; productRef = 6D0E635E28246BD0007C5DB6 /* Difference */; };
 		6D99D6432823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
 		6D99D6442823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
@@ -861,24 +808,6 @@
 		6C4877E228FF20140005AF07 /* DotLottieAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotLottieAnimation.swift; sourceTree = "<group>"; };
 		6C4877E328FF20140005AF07 /* DotLottieFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotLottieFile.swift; sourceTree = "<group>"; };
 		6C4877E428FF20140005AF07 /* DotLottieUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotLottieUtils.swift; sourceTree = "<group>"; };
-		6C4877E928FF20140005AF07 /* Archive+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+Helpers.swift"; sourceTree = "<group>"; };
-		6C4877EA28FF20140005AF07 /* Archive+MemoryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+MemoryFile.swift"; sourceTree = "<group>"; };
-		6C4877EB28FF20140005AF07 /* Archive+BackingConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+BackingConfiguration.swift"; sourceTree = "<group>"; };
-		6C4877EC28FF20140005AF07 /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
-		6C4877ED28FF20140005AF07 /* Archive+Reading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+Reading.swift"; sourceTree = "<group>"; };
-		6C4877EE28FF20140005AF07 /* Archive+ZIP64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+ZIP64.swift"; sourceTree = "<group>"; };
-		6C4877EF28FF20140005AF07 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
-		6C4877F028FF20140005AF07 /* Data+Compression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Compression.swift"; sourceTree = "<group>"; };
-		6C4877F128FF20140005AF07 /* Archive+WritingDeprecated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+WritingDeprecated.swift"; sourceTree = "<group>"; };
-		6C4877F228FF20140005AF07 /* Entry+Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Entry+Serialization.swift"; sourceTree = "<group>"; };
-		6C4877F328FF20140005AF07 /* URL+ZIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+ZIP.swift"; sourceTree = "<group>"; };
-		6C4877F428FF20140005AF07 /* Archive+Writing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+Writing.swift"; sourceTree = "<group>"; };
-		6C4877F528FF20140005AF07 /* Data+CompressionDeprecated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+CompressionDeprecated.swift"; sourceTree = "<group>"; };
-		6C4877F628FF20140005AF07 /* Entry+ZIP64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Entry+ZIP64.swift"; sourceTree = "<group>"; };
-		6C4877F728FF20140005AF07 /* Archive+ReadingDeprecated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+ReadingDeprecated.swift"; sourceTree = "<group>"; };
-		6C4877F828FF20140005AF07 /* Data+Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Serialization.swift"; sourceTree = "<group>"; };
-		6C4877F928FF20140005AF07 /* FileManager+ZIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+ZIP.swift"; sourceTree = "<group>"; };
-		6C4877FA28FF20140005AF07 /* Archive+Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+Progress.swift"; sourceTree = "<group>"; };
 		6C4877FB28FF20140005AF07 /* DotLottieManifest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotLottieManifest.swift; sourceTree = "<group>"; };
 		6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotLottieConfiguration.swift; sourceTree = "<group>"; };
 		6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyGradientFillRenderer.swift; sourceTree = "<group>"; };
@@ -898,6 +827,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C487850290151D10005AF07 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1596,34 +1526,8 @@
 				6C4877E328FF20140005AF07 /* DotLottieFile.swift */,
 				6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */,
 				6C4877E428FF20140005AF07 /* DotLottieUtils.swift */,
-				6C4877E828FF20140005AF07 /* ZIPFoundation */,
 			);
 			path = DotLottie;
-			sourceTree = "<group>";
-		};
-		6C4877E828FF20140005AF07 /* ZIPFoundation */ = {
-			isa = PBXGroup;
-			children = (
-				6C4877E928FF20140005AF07 /* Archive+Helpers.swift */,
-				6C4877EA28FF20140005AF07 /* Archive+MemoryFile.swift */,
-				6C4877EB28FF20140005AF07 /* Archive+BackingConfiguration.swift */,
-				6C4877EC28FF20140005AF07 /* Archive.swift */,
-				6C4877ED28FF20140005AF07 /* Archive+Reading.swift */,
-				6C4877EE28FF20140005AF07 /* Archive+ZIP64.swift */,
-				6C4877EF28FF20140005AF07 /* Entry.swift */,
-				6C4877F028FF20140005AF07 /* Data+Compression.swift */,
-				6C4877F128FF20140005AF07 /* Archive+WritingDeprecated.swift */,
-				6C4877F228FF20140005AF07 /* Entry+Serialization.swift */,
-				6C4877F328FF20140005AF07 /* URL+ZIP.swift */,
-				6C4877F428FF20140005AF07 /* Archive+Writing.swift */,
-				6C4877F528FF20140005AF07 /* Data+CompressionDeprecated.swift */,
-				6C4877F628FF20140005AF07 /* Entry+ZIP64.swift */,
-				6C4877F728FF20140005AF07 /* Archive+ReadingDeprecated.swift */,
-				6C4877F828FF20140005AF07 /* Data+Serialization.swift */,
-				6C4877F928FF20140005AF07 /* FileManager+ZIP.swift */,
-				6C4877FA28FF20140005AF07 /* Archive+Progress.swift */,
-			);
-			path = ZIPFoundation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1667,6 +1571,9 @@
 			dependencies = (
 			);
 			name = "Lottie-iOS";
+			packageProductDependencies = (
+				6C48784F290151D10005AF07 /* ZIPFoundation */,
+			);
 			productName = Lottie;
 			productReference = 2E80409A27A0725D006E74CB /* Lottie.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1765,6 +1672,7 @@
 			packageReferences = (
 				2E804A1827A0740F006E74CB /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 				6D0E635D28246BD0007C5DB6 /* XCRemoteSwiftPackageReference "Difference" */,
+				6C48784E290151D10005AF07 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
 			productRefGroup = 2E80409B27A0725D006E74CB /* Products */;
 			projectDirPath = "";
@@ -1820,13 +1728,9 @@
 				2E9C96F62822F43100677516 /* ShapeLayer.swift in Sources */,
 				6C48784728FF20140005AF07 /* DotLottieManifest.swift in Sources */,
 				2E9C95D62822F43100677516 /* Ellipse.swift in Sources */,
-				6C48781428FF20140005AF07 /* Archive+MemoryFile.swift in Sources */,
 				2E9C97442822F43100677516 /* AnimatorNodeDebugging.swift in Sources */,
 				2E9C96D82822F43100677516 /* AnimatorNode.swift in Sources */,
-				6C48783E28FF20140005AF07 /* Data+Serialization.swift in Sources */,
 				2E9C96212822F43100677516 /* Bundle.swift in Sources */,
-				6C48783528FF20140005AF07 /* Data+CompressionDeprecated.swift in Sources */,
-				6C48783828FF20140005AF07 /* Entry+ZIP64.swift in Sources */,
 				2E9C96CF2822F43100677516 /* ShapeContainerLayer.swift in Sources */,
 				2E9C973E2822F43100677516 /* LayerDebugging.swift in Sources */,
 				6D99D6432823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */,
@@ -1851,10 +1755,8 @@
 				2E9C96E42822F43100677516 /* MaskCompositionLayer.swift in Sources */,
 				6DB3BDBC28245A14002A276D /* CGPointExtension.swift in Sources */,
 				2EAF5AE327A0798700E00531 /* AnimationCacheProvider.swift in Sources */,
-				6C48783B28FF20140005AF07 /* Archive+ReadingDeprecated.swift in Sources */,
 				2E9C96422822F43100677516 /* RootAnimationLayer.swift in Sources */,
 				2E9C97712822F43100677516 /* AnimationContext.swift in Sources */,
-				6C48781A28FF20140005AF07 /* Archive.swift in Sources */,
 				2E9C96B12822F43100677516 /* NodeProperty.swift in Sources */,
 				2E9C965D2822F43100677516 /* MainThreadAnimationLayer.swift in Sources */,
 				2E9C964E2822F43100677516 /* SolidCompositionLayer.swift in Sources */,
@@ -1867,7 +1769,6 @@
 				2E9C96902822F43100677516 /* EllipseNode.swift in Sources */,
 				2E9C97592822F43100677516 /* BezierPath.swift in Sources */,
 				2EAF5AB927A0798700E00531 /* CompatibleAnimationView.swift in Sources */,
-				6C48782628FF20140005AF07 /* Data+Compression.swift in Sources */,
 				2E9C96062822F43100677516 /* TextLayerModel.swift in Sources */,
 				2E9C96AE2822F43100677516 /* ValueContainer.swift in Sources */,
 				2E9C97322822F43100677516 /* CALayer+addAnimation.swift in Sources */,
@@ -1898,8 +1799,6 @@
 				2E9C96C92822F43100677516 /* ItemsExtension.swift in Sources */,
 				2E9C95E82822F43100677516 /* Merge.swift in Sources */,
 				2E9C96032822F43100677516 /* ImageLayerModel.swift in Sources */,
-				6C48782928FF20140005AF07 /* Archive+WritingDeprecated.swift in Sources */,
-				6C48782328FF20140005AF07 /* Entry.swift in Sources */,
 				19465F52282F998B00BB2C97 /* CachedImageProvider.swift in Sources */,
 				08F8B20D2898A7B100CB5323 /* RepeaterLayer.swift in Sources */,
 				0887347828F0CCDD00458627 /* LottieAnimationViewInitializers.swift in Sources */,
@@ -1928,12 +1827,10 @@
 				2EAF5AF227A0798700E00531 /* AnyValueProvider.swift in Sources */,
 				2E9C96632822F43100677516 /* CoreTextRenderLayer.swift in Sources */,
 				2E9C96092822F43100677516 /* PreCompLayerModel.swift in Sources */,
-				6C48782028FF20140005AF07 /* Archive+ZIP64.swift in Sources */,
 				2E9C96182822F43100677516 /* Mask.swift in Sources */,
 				2E9C97622822F43100677516 /* PathElement.swift in Sources */,
 				2E9C97142822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift in Sources */,
 				2E9C970E2822F43100677516 /* CALayer+fillBounds.swift in Sources */,
-				6C48781D28FF20140005AF07 /* Archive+Reading.swift in Sources */,
 				2E9C95FD2822F43100677516 /* SolidLayerModel.swift in Sources */,
 				2E9C970B2822F43100677516 /* ValueProviderStore.swift in Sources */,
 				6C4877FF28FF20140005AF07 /* DotLottieAnimation.swift in Sources */,
@@ -1952,7 +1849,6 @@
 				2E9C967B2822F43100677516 /* GradientFillRenderer.swift in Sources */,
 				2E9C97352822F43100677516 /* GradientAnimations.swift in Sources */,
 				6C48780528FF20140005AF07 /* DotLottieUtils.swift in Sources */,
-				6C48782C28FF20140005AF07 /* Entry+Serialization.swift in Sources */,
 				2E9C96B42822F43100677516 /* AnyNodeProperty.swift in Sources */,
 				2EAF5AF827A0798700E00531 /* FloatValueProvider.swift in Sources */,
 				6C48784B29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */,
@@ -1967,7 +1863,6 @@
 				2E9C96842822F43100677516 /* StrokeRenderer.swift in Sources */,
 				2E9C965A2822F43100677516 /* MaskContainerLayer.swift in Sources */,
 				2E9C96452822F43100677516 /* CompositionLayer.swift in Sources */,
-				6C48783228FF20140005AF07 /* Archive+Writing.swift in Sources */,
 				08FE934E28F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift in Sources */,
 				2E9C95F42822F43100677516 /* Stroke.swift in Sources */,
 				2E9C96722822F43100677516 /* CompositionLayersInitializer.swift in Sources */,
@@ -1984,7 +1879,6 @@
 				2E9C96602822F43100677516 /* LayerFontProvider.swift in Sources */,
 				2E9C96242822F43100677516 /* KeyframeGroup.swift in Sources */,
 				2E9C96FF2822F43100677516 /* BaseAnimationLayer.swift in Sources */,
-				6C48784128FF20140005AF07 /* FileManager+ZIP.swift in Sources */,
 				2E9C96AB2822F43100677516 /* GradientStrokeNode.swift in Sources */,
 				2EAF5ABF27A0798700E00531 /* AnimatedSwitch.swift in Sources */,
 				2EAF5AC227A0798700E00531 /* BundleImageProvider.swift in Sources */,
@@ -1993,7 +1887,6 @@
 				2EAF5ACE27A0798700E00531 /* AnimationSubview.swift in Sources */,
 				2E9C96302822F43100677516 /* TextAnimator.swift in Sources */,
 				2E9C96E72822F43100677516 /* ImageLayer.swift in Sources */,
-				6C48784428FF20140005AF07 /* Archive+Progress.swift in Sources */,
 				2E9C972C2822F43100677516 /* StarAnimation.swift in Sources */,
 				2E9C96E12822F43100677516 /* LayerModel+makeAnimationLayer.swift in Sources */,
 				2E9C96A82822F43100677516 /* FillNode.swift in Sources */,
@@ -2016,13 +1909,10 @@
 				A40460592832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */,
 				2E9C96542822F43100677516 /* ImageCompositionLayer.swift in Sources */,
 				2EAF5AB327A0798700E00531 /* AnimationImageProvider.swift in Sources */,
-				6C48782F28FF20140005AF07 /* URL+ZIP.swift in Sources */,
 				2E9C95F12822F43100677516 /* GradientStroke.swift in Sources */,
 				2EAF5ADD27A0798700E00531 /* Interpolatable.swift in Sources */,
 				2E9C96122822F43100677516 /* DashPattern.swift in Sources */,
 				2E9C960C2822F43100677516 /* ShapeLayerModel.swift in Sources */,
-				6C48781728FF20140005AF07 /* Archive+BackingConfiguration.swift in Sources */,
-				6C48781128FF20140005AF07 /* Archive+Helpers.swift in Sources */,
 				2E9C97082822F43100677516 /* CompatibilityTracker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2056,13 +1946,9 @@
 				2E9C96F72822F43100677516 /* ShapeLayer.swift in Sources */,
 				6C48784828FF20140005AF07 /* DotLottieManifest.swift in Sources */,
 				2E9C95D72822F43100677516 /* Ellipse.swift in Sources */,
-				6C48781528FF20140005AF07 /* Archive+MemoryFile.swift in Sources */,
 				2E9C97452822F43100677516 /* AnimatorNodeDebugging.swift in Sources */,
 				2E9C96D92822F43100677516 /* AnimatorNode.swift in Sources */,
-				6C48783F28FF20140005AF07 /* Data+Serialization.swift in Sources */,
 				2E9C96222822F43100677516 /* Bundle.swift in Sources */,
-				6C48783628FF20140005AF07 /* Data+CompressionDeprecated.swift in Sources */,
-				6C48783928FF20140005AF07 /* Entry+ZIP64.swift in Sources */,
 				2E9C96D02822F43100677516 /* ShapeContainerLayer.swift in Sources */,
 				2E9C973F2822F43100677516 /* LayerDebugging.swift in Sources */,
 				6D99D6442823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */,
@@ -2087,10 +1973,8 @@
 				2E9C96E52822F43100677516 /* MaskCompositionLayer.swift in Sources */,
 				6DB3BDBD28245A14002A276D /* CGPointExtension.swift in Sources */,
 				2EAF5AE427A0798700E00531 /* AnimationCacheProvider.swift in Sources */,
-				6C48783C28FF20140005AF07 /* Archive+ReadingDeprecated.swift in Sources */,
 				2E9C96432822F43100677516 /* RootAnimationLayer.swift in Sources */,
 				2E9C97722822F43100677516 /* AnimationContext.swift in Sources */,
-				6C48781B28FF20140005AF07 /* Archive.swift in Sources */,
 				2E9C96B22822F43100677516 /* NodeProperty.swift in Sources */,
 				2E9C965E2822F43100677516 /* MainThreadAnimationLayer.swift in Sources */,
 				2E9C964F2822F43100677516 /* SolidCompositionLayer.swift in Sources */,
@@ -2103,7 +1987,6 @@
 				2E9C96912822F43100677516 /* EllipseNode.swift in Sources */,
 				2E9C975A2822F43100677516 /* BezierPath.swift in Sources */,
 				2EAF5ABA27A0798700E00531 /* CompatibleAnimationView.swift in Sources */,
-				6C48782728FF20140005AF07 /* Data+Compression.swift in Sources */,
 				2E9C96072822F43100677516 /* TextLayerModel.swift in Sources */,
 				2E9C96AF2822F43100677516 /* ValueContainer.swift in Sources */,
 				2E9C97332822F43100677516 /* CALayer+addAnimation.swift in Sources */,
@@ -2134,8 +2017,6 @@
 				2E9C96CA2822F43100677516 /* ItemsExtension.swift in Sources */,
 				2E9C95E92822F43100677516 /* Merge.swift in Sources */,
 				2E9C96042822F43100677516 /* ImageLayerModel.swift in Sources */,
-				6C48782A28FF20140005AF07 /* Archive+WritingDeprecated.swift in Sources */,
-				6C48782428FF20140005AF07 /* Entry.swift in Sources */,
 				19465F53282F998B00BB2C97 /* CachedImageProvider.swift in Sources */,
 				08F8B20E2898A7B100CB5323 /* RepeaterLayer.swift in Sources */,
 				0887347928F0CCDD00458627 /* LottieAnimationViewInitializers.swift in Sources */,
@@ -2164,12 +2045,10 @@
 				2EAF5AF327A0798700E00531 /* AnyValueProvider.swift in Sources */,
 				2E9C96642822F43100677516 /* CoreTextRenderLayer.swift in Sources */,
 				2E9C960A2822F43100677516 /* PreCompLayerModel.swift in Sources */,
-				6C48782128FF20140005AF07 /* Archive+ZIP64.swift in Sources */,
 				2E9C96192822F43100677516 /* Mask.swift in Sources */,
 				2E9C97632822F43100677516 /* PathElement.swift in Sources */,
 				2E9C97152822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift in Sources */,
 				2E9C970F2822F43100677516 /* CALayer+fillBounds.swift in Sources */,
-				6C48781E28FF20140005AF07 /* Archive+Reading.swift in Sources */,
 				2E9C95FE2822F43100677516 /* SolidLayerModel.swift in Sources */,
 				2E9C970C2822F43100677516 /* ValueProviderStore.swift in Sources */,
 				6C48780028FF20140005AF07 /* DotLottieAnimation.swift in Sources */,
@@ -2188,7 +2067,6 @@
 				2E9C967C2822F43100677516 /* GradientFillRenderer.swift in Sources */,
 				2E9C97362822F43100677516 /* GradientAnimations.swift in Sources */,
 				6C48780628FF20140005AF07 /* DotLottieUtils.swift in Sources */,
-				6C48782D28FF20140005AF07 /* Entry+Serialization.swift in Sources */,
 				2E9C96B52822F43100677516 /* AnyNodeProperty.swift in Sources */,
 				2EAF5AF927A0798700E00531 /* FloatValueProvider.swift in Sources */,
 				6C48784C29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */,
@@ -2203,7 +2081,6 @@
 				2E9C96852822F43100677516 /* StrokeRenderer.swift in Sources */,
 				2E9C965B2822F43100677516 /* MaskContainerLayer.swift in Sources */,
 				2E9C96462822F43100677516 /* CompositionLayer.swift in Sources */,
-				6C48783328FF20140005AF07 /* Archive+Writing.swift in Sources */,
 				08FE934F28F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift in Sources */,
 				2E9C95F52822F43100677516 /* Stroke.swift in Sources */,
 				2E9C96732822F43100677516 /* CompositionLayersInitializer.swift in Sources */,
@@ -2220,7 +2097,6 @@
 				2E9C96612822F43100677516 /* LayerFontProvider.swift in Sources */,
 				2E9C96252822F43100677516 /* KeyframeGroup.swift in Sources */,
 				2E9C97002822F43100677516 /* BaseAnimationLayer.swift in Sources */,
-				6C48784228FF20140005AF07 /* FileManager+ZIP.swift in Sources */,
 				2E9C96AC2822F43100677516 /* GradientStrokeNode.swift in Sources */,
 				2EAF5AC027A0798700E00531 /* AnimatedSwitch.swift in Sources */,
 				2EAF5AC327A0798700E00531 /* BundleImageProvider.swift in Sources */,
@@ -2229,7 +2105,6 @@
 				2EAF5ACF27A0798700E00531 /* AnimationSubview.swift in Sources */,
 				2E9C96312822F43100677516 /* TextAnimator.swift in Sources */,
 				2E9C96E82822F43100677516 /* ImageLayer.swift in Sources */,
-				6C48784528FF20140005AF07 /* Archive+Progress.swift in Sources */,
 				2E9C972D2822F43100677516 /* StarAnimation.swift in Sources */,
 				2E9C96E22822F43100677516 /* LayerModel+makeAnimationLayer.swift in Sources */,
 				2E9C96A92822F43100677516 /* FillNode.swift in Sources */,
@@ -2252,13 +2127,10 @@
 				A404605A2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */,
 				2E9C96552822F43100677516 /* ImageCompositionLayer.swift in Sources */,
 				2EAF5AB427A0798700E00531 /* AnimationImageProvider.swift in Sources */,
-				6C48783028FF20140005AF07 /* URL+ZIP.swift in Sources */,
 				2E9C95F22822F43100677516 /* GradientStroke.swift in Sources */,
 				2EAF5ADE27A0798700E00531 /* Interpolatable.swift in Sources */,
 				2E9C96132822F43100677516 /* DashPattern.swift in Sources */,
 				2E9C960D2822F43100677516 /* ShapeLayerModel.swift in Sources */,
-				6C48781828FF20140005AF07 /* Archive+BackingConfiguration.swift in Sources */,
-				6C48781228FF20140005AF07 /* Archive+Helpers.swift in Sources */,
 				2E9C97092822F43100677516 /* CompatibilityTracker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2271,13 +2143,9 @@
 				2E9C96F82822F43100677516 /* ShapeLayer.swift in Sources */,
 				6C48784928FF20140005AF07 /* DotLottieManifest.swift in Sources */,
 				2E9C95D82822F43100677516 /* Ellipse.swift in Sources */,
-				6C48781628FF20140005AF07 /* Archive+MemoryFile.swift in Sources */,
 				2E9C97462822F43100677516 /* AnimatorNodeDebugging.swift in Sources */,
 				2E9C96DA2822F43100677516 /* AnimatorNode.swift in Sources */,
-				6C48784028FF20140005AF07 /* Data+Serialization.swift in Sources */,
 				2E9C96232822F43100677516 /* Bundle.swift in Sources */,
-				6C48783728FF20140005AF07 /* Data+CompressionDeprecated.swift in Sources */,
-				6C48783A28FF20140005AF07 /* Entry+ZIP64.swift in Sources */,
 				2E9C96D12822F43100677516 /* ShapeContainerLayer.swift in Sources */,
 				2E9C97402822F43100677516 /* LayerDebugging.swift in Sources */,
 				6D99D6452823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */,
@@ -2302,10 +2170,8 @@
 				2E9C96E62822F43100677516 /* MaskCompositionLayer.swift in Sources */,
 				6DB3BDBE28245A14002A276D /* CGPointExtension.swift in Sources */,
 				2EAF5AE527A0798700E00531 /* AnimationCacheProvider.swift in Sources */,
-				6C48783D28FF20140005AF07 /* Archive+ReadingDeprecated.swift in Sources */,
 				2E9C96442822F43100677516 /* RootAnimationLayer.swift in Sources */,
 				2E9C97732822F43200677516 /* AnimationContext.swift in Sources */,
-				6C48781C28FF20140005AF07 /* Archive.swift in Sources */,
 				2E9C96B32822F43100677516 /* NodeProperty.swift in Sources */,
 				2E9C965F2822F43100677516 /* MainThreadAnimationLayer.swift in Sources */,
 				2E9C96502822F43100677516 /* SolidCompositionLayer.swift in Sources */,
@@ -2318,7 +2184,6 @@
 				2E9C96922822F43100677516 /* EllipseNode.swift in Sources */,
 				2E9C975B2822F43100677516 /* BezierPath.swift in Sources */,
 				2EAF5ABB27A0798700E00531 /* CompatibleAnimationView.swift in Sources */,
-				6C48782828FF20140005AF07 /* Data+Compression.swift in Sources */,
 				2E9C96082822F43100677516 /* TextLayerModel.swift in Sources */,
 				2E9C96B02822F43100677516 /* ValueContainer.swift in Sources */,
 				2E9C97342822F43100677516 /* CALayer+addAnimation.swift in Sources */,
@@ -2349,8 +2214,6 @@
 				2E9C96CB2822F43100677516 /* ItemsExtension.swift in Sources */,
 				2E9C95EA2822F43100677516 /* Merge.swift in Sources */,
 				2E9C96052822F43100677516 /* ImageLayerModel.swift in Sources */,
-				6C48782B28FF20140005AF07 /* Archive+WritingDeprecated.swift in Sources */,
-				6C48782528FF20140005AF07 /* Entry.swift in Sources */,
 				19465F54282F998B00BB2C97 /* CachedImageProvider.swift in Sources */,
 				08F8B20F2898A7B100CB5323 /* RepeaterLayer.swift in Sources */,
 				0887347A28F0CCDD00458627 /* LottieAnimationViewInitializers.swift in Sources */,
@@ -2379,12 +2242,10 @@
 				2EAF5AF427A0798700E00531 /* AnyValueProvider.swift in Sources */,
 				2E9C96652822F43100677516 /* CoreTextRenderLayer.swift in Sources */,
 				2E9C960B2822F43100677516 /* PreCompLayerModel.swift in Sources */,
-				6C48782228FF20140005AF07 /* Archive+ZIP64.swift in Sources */,
 				2E9C961A2822F43100677516 /* Mask.swift in Sources */,
 				2E9C97642822F43100677516 /* PathElement.swift in Sources */,
 				2E9C97162822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift in Sources */,
 				2E9C97102822F43100677516 /* CALayer+fillBounds.swift in Sources */,
-				6C48781F28FF20140005AF07 /* Archive+Reading.swift in Sources */,
 				2E9C95FF2822F43100677516 /* SolidLayerModel.swift in Sources */,
 				2E9C970D2822F43100677516 /* ValueProviderStore.swift in Sources */,
 				6C48780128FF20140005AF07 /* DotLottieAnimation.swift in Sources */,
@@ -2403,7 +2264,6 @@
 				2E9C967D2822F43100677516 /* GradientFillRenderer.swift in Sources */,
 				2E9C97372822F43100677516 /* GradientAnimations.swift in Sources */,
 				6C48780728FF20140005AF07 /* DotLottieUtils.swift in Sources */,
-				6C48782E28FF20140005AF07 /* Entry+Serialization.swift in Sources */,
 				2E9C96B62822F43100677516 /* AnyNodeProperty.swift in Sources */,
 				2EAF5AFA27A0798700E00531 /* FloatValueProvider.swift in Sources */,
 				6C48784D29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */,
@@ -2418,7 +2278,6 @@
 				2E9C96862822F43100677516 /* StrokeRenderer.swift in Sources */,
 				2E9C965C2822F43100677516 /* MaskContainerLayer.swift in Sources */,
 				2E9C96472822F43100677516 /* CompositionLayer.swift in Sources */,
-				6C48783428FF20140005AF07 /* Archive+Writing.swift in Sources */,
 				08FE935028F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift in Sources */,
 				2E9C95F62822F43100677516 /* Stroke.swift in Sources */,
 				2E9C96742822F43100677516 /* CompositionLayersInitializer.swift in Sources */,
@@ -2435,7 +2294,6 @@
 				2E9C96622822F43100677516 /* LayerFontProvider.swift in Sources */,
 				2E9C96262822F43100677516 /* KeyframeGroup.swift in Sources */,
 				2E9C97012822F43100677516 /* BaseAnimationLayer.swift in Sources */,
-				6C48784328FF20140005AF07 /* FileManager+ZIP.swift in Sources */,
 				2E9C96AD2822F43100677516 /* GradientStrokeNode.swift in Sources */,
 				2EAF5AC127A0798700E00531 /* AnimatedSwitch.swift in Sources */,
 				2EAF5AC427A0798700E00531 /* BundleImageProvider.swift in Sources */,
@@ -2444,7 +2302,6 @@
 				2EAF5AD027A0798700E00531 /* AnimationSubview.swift in Sources */,
 				2E9C96322822F43100677516 /* TextAnimator.swift in Sources */,
 				2E9C96E92822F43100677516 /* ImageLayer.swift in Sources */,
-				6C48784628FF20140005AF07 /* Archive+Progress.swift in Sources */,
 				2E9C972E2822F43100677516 /* StarAnimation.swift in Sources */,
 				2E9C96E32822F43100677516 /* LayerModel+makeAnimationLayer.swift in Sources */,
 				2E9C96AA2822F43100677516 /* FillNode.swift in Sources */,
@@ -2467,13 +2324,10 @@
 				A404605B2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */,
 				2E9C96562822F43100677516 /* ImageCompositionLayer.swift in Sources */,
 				2EAF5AB527A0798700E00531 /* AnimationImageProvider.swift in Sources */,
-				6C48783128FF20140005AF07 /* URL+ZIP.swift in Sources */,
 				2E9C95F32822F43100677516 /* GradientStroke.swift in Sources */,
 				2EAF5ADF27A0798700E00531 /* Interpolatable.swift in Sources */,
 				2E9C96142822F43100677516 /* DashPattern.swift in Sources */,
 				2E9C960E2822F43100677516 /* ShapeLayerModel.swift in Sources */,
-				6C48781928FF20140005AF07 /* Archive+BackingConfiguration.swift in Sources */,
-				6C48781328FF20140005AF07 /* Archive+Helpers.swift in Sources */,
 				2E9C970A2822F43100677516 /* CompatibilityTracker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2886,6 +2740,14 @@
 				revision = 0c2826f26d00ff5ddf2de92cb6b2139b0dd3d1ee;
 			};
 		};
+		6C48784E290151D10005AF07 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.9;
+			};
+		};
 		6D0E635D28246BD0007C5DB6 /* XCRemoteSwiftPackageReference "Difference" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/krzysztofzablocki/Difference";
@@ -2901,6 +2763,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2E804A1827A0740F006E74CB /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
+		};
+		6C48784F290151D10005AF07 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6C48784E290151D10005AF07 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
 		};
 		6D0E635E28246BD0007C5DB6 /* Difference */ = {
 			isa = XCSwiftPackageProductDependency;
