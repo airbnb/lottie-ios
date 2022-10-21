@@ -436,9 +436,9 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   ///   - dotLottie: Lottie file to play
   ///   - animationId: Internal animation id to play. Optional
   ///   Defaults to play first animation in file.
-  public func setDotLottie(
-    _ dotLottie: DotLottie?,
-    animationId: String? = nil)
+  public func loadAnimation(
+    _ animationId: String? = nil,
+    from _ dotLottieFile: DotLottie)
   {
     guard let animation = dotLottie?.animation(id: animationId) else { return }
     if let configuration = animation.dotLottieConfiguration {
