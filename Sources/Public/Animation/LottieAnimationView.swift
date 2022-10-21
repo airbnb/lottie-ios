@@ -134,7 +134,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     super.init(frame: .zero)
     commonInit()
     loopMode = animation?.dotLottieConfiguration?.loopMode ?? .playOnce
-    animationSpeed = animation?.dotLottieConfiguration?.speed ?? 1
+    animationSpeed = CGFloat(animation?.dotLottieConfiguration?.speed ?? 1)
     makeAnimationLayer(usingEngine: configuration.renderingEngine)
     if let animation = animation {
       frame = animation.bounds
