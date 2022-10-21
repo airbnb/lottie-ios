@@ -37,9 +37,9 @@ public final class GradientValueProvider: ValueProvider {
 
   // MARK: Public
 
-  /// Returns a [LottieColor] for a Double(Frame Time).
+  /// Returns a [LottieColor] for a CGFloat(Frame Time).
   public typealias ColorsValueBlock = (CGFloat) -> [LottieColor]
-  /// Returns a [Double](Color locations) for a Double(Frame Time).
+  /// Returns a [Double](Color locations) for a CGFloat(Frame Time).
   public typealias ColorLocationsBlock = (CGFloat) -> [Double]
 
   /// The colors values of the provider.

@@ -28,7 +28,7 @@ public final class SizeValueProvider: ValueProvider {
 
   // MARK: Public
 
-  /// Returns a CGSize for a Double(Frame Time)
+  /// Returns a CGSize for a CGFloat(Frame Time)
   public typealias SizeValueBlock = (CGFloat) -> CGSize
 
   public var size: CGSize {

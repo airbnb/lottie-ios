@@ -26,9 +26,9 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
       skewAxis = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.skewAxis.keyframes))
     } else {
       /// Transform node missing. Default to empty transform.
-      anchor = NodeProperty(provider: SingleValueProvider(LottieVector3D(x: Double(0), y: Double(0), z: Double(0))))
-      position = NodeProperty(provider: SingleValueProvider(LottieVector3D(x: Double(0), y: Double(0), z: Double(0))))
-      scale = NodeProperty(provider: SingleValueProvider(LottieVector3D(x: Double(100), y: Double(100), z: Double(100))))
+      anchor = NodeProperty(provider: SingleValueProvider(LottieVector3D(x: CGFloat(0), y: CGFloat(0), z: CGFloat(0))))
+      position = NodeProperty(provider: SingleValueProvider(LottieVector3D(x: CGFloat(0), y: CGFloat(0), z: CGFloat(0))))
+      scale = NodeProperty(provider: SingleValueProvider(LottieVector3D(x: CGFloat(100), y: CGFloat(100), z: CGFloat(100))))
       rotation = NodeProperty(provider: SingleValueProvider(LottieVector1D(0)))
       opacity = NodeProperty(provider: SingleValueProvider(LottieVector1D(100)))
       skew = NodeProperty(provider: SingleValueProvider(LottieVector1D(0)))

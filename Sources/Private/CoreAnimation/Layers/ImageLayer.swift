@@ -73,7 +73,7 @@ extension ImageLayer: CustomLayoutLayer {
     bounds = CGRect(
       x: superlayerBounds.origin.x,
       y: superlayerBounds.origin.y,
-      width: Double(imageAsset.width),
-      height: Double(imageAsset.height))
+      width: CGFloat(imageAsset.width),
+      height: CGFloat(imageAsset.height))
   }
 }

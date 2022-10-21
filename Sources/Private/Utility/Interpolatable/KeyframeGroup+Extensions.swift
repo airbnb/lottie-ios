@@ -39,13 +39,13 @@ extension KeyframeGroup where T == LottieVector1D {
       // Create one interpolated keyframe for each time in the duration
       for t in 0 ... duration {
         let progress = timingFunction.value(
-          for: Double(t) / Double(duration),
+          for: CGFloat(t) / CGFloat(duration),
           epsilon: 0.005)
         let value = startValue + Double(progress) * difference
         output.append(
           Keyframe<LottieVector1D>(
             value: LottieVector1D(value),
-            time: startTime + Double(t),
+            time: startTime + CGFloat(t),
             isHold: false,
             inTangent: nil,
             outTangent: nil,

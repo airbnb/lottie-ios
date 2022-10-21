@@ -49,8 +49,8 @@ final class GradientRenderLayer: CAGradientLayer {
       y: referencePoint.y + CALayer.veryLargeLayerPadding)
 
     return CGPoint(
-      x: Double(pointInBounds.x) / bounds.width,
-      y: Double(pointInBounds.y) / bounds.height)
+      x: CGFloat(pointInBounds.x) / bounds.width,
+      y: CGFloat(pointInBounds.y) / bounds.height)
   }
 
   // MARK: Private

@@ -36,7 +36,7 @@ extension LottieVector1D: Codable {
   // MARK: Internal
 
   var cgFloatValue: CGFloat {
-    Double(value)
+    CGFloat(value)
   }
 
 }
@@ -167,6 +167,12 @@ extension CGPoint {
 extension LottieVector3D: Codable {
 
   // MARK: Lifecycle
+
+  init(x: CGFloat, y: CGFloat, z: CGFloat) {
+    self.x = Double(x)
+    self.y = Double(y)
+    self.z = Double(z)
+  }
 
   public init(from decoder: Decoder) throws {
     var container = try decoder.unkeyedContainer()

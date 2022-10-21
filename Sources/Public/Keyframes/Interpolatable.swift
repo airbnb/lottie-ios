@@ -228,7 +228,7 @@ extension LottieVector3D: SpatialInterpolatable {
       return LottieVector3D(
         x: point.x,
         y: point.y,
-        z: Double(z.interpolate(to: to.z, amount: amount)))
+        z: CGFloat(z.interpolate(to: to.z, amount: amount)))
     }
 
     return LottieVector3D(

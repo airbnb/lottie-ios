@@ -193,12 +193,12 @@ extension GradientShapeItem {
       for colorIndex in 0..<numberOfColors {
         let colorStartIndex = colorIndex * 4
 
-        let colorLocation = Double(colorComponents[colorStartIndex])
+        let colorLocation = CGFloat(colorComponents[colorStartIndex])
 
         let color = CGColor.rgb(
-          Double(colorComponents[colorStartIndex + 1]),
-          Double(colorComponents[colorStartIndex + 2]),
-          Double(colorComponents[colorStartIndex + 3]))
+          CGFloat(colorComponents[colorStartIndex + 1]),
+          CGFloat(colorComponents[colorStartIndex + 2]),
+          CGFloat(colorComponents[colorStartIndex + 3]))
 
         colors.append((color: color, location: colorLocation))
       }
@@ -211,8 +211,8 @@ extension GradientShapeItem {
       var alphaValues = GradientColorConfiguration()
 
       for alphaIndex in stride(from: numberOfColors * 4, to: colorComponents.endIndex, by: 2) {
-        let alphaLocation = Double(colorComponents[alphaIndex])
-        let alphaValue = Double(colorComponents[alphaIndex + 1])
+        let alphaLocation = CGFloat(colorComponents[alphaIndex])
+        let alphaValue = CGFloat(colorComponents[alphaIndex + 1])
         alphaValues.append((color: .rgba(0, 0, 0, alphaValue), location: alphaLocation))
       }
 

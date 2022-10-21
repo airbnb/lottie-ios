@@ -28,7 +28,7 @@ public final class FloatValueProvider: ValueProvider {
 
   // MARK: Public
 
-  /// Returns a CGFloat for a Double(Frame Time)
+  /// Returns a CGFloat for a CGFloat(Frame Time)
   public typealias CGFloatValueBlock = (CGFloat) -> CGFloat
 
   public var float: CGFloat {

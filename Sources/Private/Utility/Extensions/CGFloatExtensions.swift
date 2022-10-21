@@ -21,7 +21,7 @@ extension CGFloat {
   }
 
   var cubicRoot: CGFloat {
-    Double(pow(Double(self), 1.0 / 3.0))
+    CGFloat(pow(Double(self), 1.0 / 3.0))
   }
 
   func isInRangeOrEqual(_ from: CGFloat, _ to: CGFloat) -> Bool {

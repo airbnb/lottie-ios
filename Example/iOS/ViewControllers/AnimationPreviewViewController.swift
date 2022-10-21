@@ -77,7 +77,7 @@ class AnimationPreviewViewController: UIViewController {
 
   @objc
   func updateAnimation(sender: UISlider) {
-    animationView.currentProgress = Double(sender.value)
+    animationView.currentProgress = CGFloat(sender.value)
   }
 
   @objc

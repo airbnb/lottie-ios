@@ -36,7 +36,7 @@ extension CAShapeLayer {
   func addStrokeAnimations(for stroke: StrokeShapeItem, context: LayerAnimationContext) throws {
     lineJoin = stroke.lineJoin.caLineJoin
     lineCap = stroke.lineCap.caLineCap
-    miterLimit = Double(stroke.miterLimit)
+    miterLimit = CGFloat(stroke.miterLimit)
 
     if let strokeColor = stroke.strokeColor {
       try addAnimation(

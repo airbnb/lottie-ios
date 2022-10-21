@@ -11,13 +11,13 @@ import Foundation
 
 extension Int {
   var cgFloat: CGFloat {
-    Double(self)
+    CGFloat(self)
   }
 }
 
 extension Double {
   var cgFloat: CGFloat {
-    Double(self)
+    CGFloat(self)
   }
 }
 
@@ -37,7 +37,7 @@ extension CGFloat {
   ///
   /// 1. The order of arguments does not matter.
   func clamp(_ a: CGFloat, _ b: CGFloat) -> CGFloat {
-    Double(Double(self).clamp(Double(a), Double(b)))
+    CGFloat(Double(self).clamp(Double(a), Double(b)))
   }
 
   /// Returns the difference between the receiver and the given number.
@@ -272,12 +272,12 @@ extension CGPoint {
 
   /// Operator convenience to divide points with /
   static func / (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
-    CGPoint(x: lhs.x / Double(rhs), y: lhs.y / Double(rhs))
+    CGPoint(x: lhs.x / CGFloat(rhs), y: lhs.y / CGFloat(rhs))
   }
 
   /// Operator convenience to multiply points with *
   static func * (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
-    CGPoint(x: lhs.x * Double(rhs), y: lhs.y * Double(rhs))
+    CGPoint(x: lhs.x * CGFloat(rhs), y: lhs.y * CGFloat(rhs))
   }
 
   /// Operator convenience to add points with +
@@ -302,7 +302,7 @@ extension CGPoint {
   func distanceTo(_ a: CGPoint) -> CGFloat {
     let xDist = a.x - x
     let yDist = a.y - y
-    return Double(sqrt((xDist * xDist) + (yDist * yDist)))
+    return CGFloat(sqrt((xDist * xDist) + (yDist * yDist)))
   }
 
   func rounded(decimal: CGFloat) -> CGPoint {
@@ -333,13 +333,13 @@ extension CGPoint {
       return interpolate(to: to, amount: amount)
     }
 
-    let step = 1 / Double(samples)
+    let step = 1 / CGFloat(samples)
 
     var points: [(point: CGPoint, distance: CGFloat)] = [(point: self, distance: 0)]
     var totalLength: CGFloat = 0
 
     var previousPoint = self
-    var previousAmount = Double(0)
+    var previousAmount = CGFloat(0)
 
     var closestPoint = 0
 
@@ -362,7 +362,7 @@ extension CGPoint {
 
     var foundPoint = false
 
-    var pointAmount = Double(closestPoint) * step
+    var pointAmount = CGFloat(closestPoint) * step
     var nextPointAmount: CGFloat = pointAmount + step
 
     var refineIterations = 0
@@ -373,7 +373,7 @@ extension CGPoint {
       if nextPoint.distance < accurateDistance {
         point = nextPoint
         closestPoint = closestPoint + 1
-        pointAmount = Double(closestPoint) * step
+        pointAmount = CGFloat(closestPoint) * step
         nextPointAmount = pointAmount + step
         if closestPoint == points.count {
           foundPoint = true
@@ -387,7 +387,7 @@ extension CGPoint {
           continue
         }
         point = points[closestPoint]
-        pointAmount = Double(closestPoint) * step
+        pointAmount = CGFloat(closestPoint) * step
         nextPointAmount = pointAmount + step
         continue
       }

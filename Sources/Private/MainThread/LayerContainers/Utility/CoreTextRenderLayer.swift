@@ -241,7 +241,7 @@ final class CoreTextRenderLayer: CALayer {
     let minLineHeight = -(ascent + descent + leading)
 
     // Calculate line spacing
-    let lineSpacing = max(Double(minLineHeight) + lineHeight, Double(minLineHeight))
+    let lineSpacing = max(CGFloat(minLineHeight) + lineHeight, CGFloat(minLineHeight))
     // Build Attributes
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.lineSpacing = lineSpacing

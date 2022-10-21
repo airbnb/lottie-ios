@@ -23,7 +23,7 @@ final class GradientStrokeProperties: NodePropertyMap, KeypathSearchable {
     gradientType = gradientStroke.gradientType
     numberOfColors = gradientStroke.numberOfColors
     width = NodeProperty(provider: KeyframeInterpolator(keyframes: gradientStroke.width.keyframes))
-    miterLimit = Double(gradientStroke.miterLimit)
+    miterLimit = CGFloat(gradientStroke.miterLimit)
     lineCap = gradientStroke.lineCap
     lineJoin = gradientStroke.lineJoin
 

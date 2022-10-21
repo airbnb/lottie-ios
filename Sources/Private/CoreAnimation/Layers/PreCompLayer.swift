@@ -98,8 +98,8 @@ extension PreCompLayer: CustomLayoutLayer {
     bounds = CGRect(
       x: superlayerBounds.origin.x,
       y: superlayerBounds.origin.y,
-      width: Double(preCompLayer.width),
-      height: Double(preCompLayer.height))
+      width: CGFloat(preCompLayer.width),
+      height: CGFloat(preCompLayer.height))
 
     masksToBounds = true
   }
@@ -127,7 +127,7 @@ extension KeyframeInterpolator where ValueType == AnimationFrameTime {
     let localTimeToGlobalTimeMapping = timeRemappingKeyframes.keyframes.map { keyframe in
       Keyframe(
         value: keyframe.time,
-        time: keyframe.value.cgFloatValue * Double(context.animation.framerate),
+        time: keyframe.value.cgFloatValue * CGFloat(context.animation.framerate),
         isHold: keyframe.isHold,
         inTangent: keyframe.inTangent,
         outTangent: keyframe.outTangent,
