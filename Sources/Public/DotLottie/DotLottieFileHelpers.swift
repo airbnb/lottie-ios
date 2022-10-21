@@ -1,5 +1,5 @@
 //
-//  DotLottieHelpers.swift
+//  DotLottieFileHelpers.swift
 //  Lottie
 //
 //  Created by Evandro Hoffmann on 20/10/22.
@@ -7,10 +7,10 @@
 
 import Foundation
 
-extension DotLottie {
+extension DotLottieFile {
 
   /// A closure for an Animation download. The closure is passed `nil` if there was an error.
-  public typealias DotLottieDownloadClosure = (DotLottie?) -> Void
+  public typealias DotLottieDownloadClosure = (DotLottieFile?) -> Void
 
   /// Returns the list of `DotLottieAnimation` in the file
   public var dotLottieAnimations: [DotLottieAnimation] {
@@ -36,7 +36,7 @@ extension DotLottie {
     bundle: Bundle = Bundle.main,
     subdirectory: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
-    -> DotLottie?
+    -> DotLottieFile?
   {
     /// Create a cache key for the lottie.
     let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
@@ -55,7 +55,7 @@ extension DotLottie {
       guard let data = try bundle.dotLottieData(name, subdirectory: subdirectory) else {
         return nil
       }
-      let lottie = try DotLottie.from(data: data, filename: name)
+      let lottie = try DotLottieFile.from(data: data, filename: name)
       dotLottieCache?.setFile(lottie, forKey: cacheKey)
       return lottie
     } catch {
@@ -73,7 +73,7 @@ extension DotLottie {
   public static func filepath(
     _ filepath: String,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
-    -> DotLottie?
+    -> DotLottieFile?
   {
     /// Check cache for lottie
     if
@@ -87,7 +87,7 @@ extension DotLottie {
       /// Decode the lottie.
       let url = URL(fileURLWithPath: filepath)
       let data = try Data(contentsOf: url)
-      let lottie = try DotLottie.from(data: data, filename: url.deletingPathExtension().lastPathComponent)
+      let lottie = try DotLottieFile.from(data: data, filename: url.deletingPathExtension().lastPathComponent)
       dotLottieCache?.setFile(lottie, forKey: filepath)
       return lottie
     } catch {
@@ -105,7 +105,7 @@ extension DotLottie {
     _ name: String,
     bundle: Bundle = Bundle.main,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
-    -> DotLottie?
+    -> DotLottieFile?
   {
     /// Create a cache key for the lottie.
     let cacheKey = bundle.bundlePath + "/" + name
@@ -126,7 +126,7 @@ extension DotLottie {
 
     do {
       /// Decode lottie.
-      let lottie = try DotLottie.from(data: data, filename: name)
+      let lottie = try DotLottieFile.from(data: data, filename: name)
       dotLottieCache?.setFile(lottie, forKey: cacheKey)
       return lottie
     } catch {
@@ -142,9 +142,9 @@ extension DotLottie {
   /// - Returns: Deserialized `DotLottie`. Optional.
   ///
   public static func from(data: Data, filename: String) throws
-    -> DotLottie
+    -> DotLottieFile
   {
-    try DotLottie(data: data, filename: filename)
+    try DotLottieFile(data: data, filename: filename)
   }
 
   /// Loads a DotLottie animation asynchronously from the URL.
@@ -156,7 +156,7 @@ extension DotLottie {
   public static func loadedFrom(
     url: URL,
     session: URLSession = .shared,
-    closure: @escaping DotLottie.DotLottieDownloadClosure,
+    closure: @escaping DotLottieFile.DotLottieDownloadClosure,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
   {
     if let dotLottieCache = dotLottieCache, let animation = dotLottieCache.file(forKey: url.absoluteString) {
@@ -170,7 +170,7 @@ extension DotLottie {
           return
         }
         do {
-          let lottie = try DotLottie.from(data: data, filename: url.deletingPathExtension().lastPathComponent)
+          let lottie = try DotLottieFile.from(data: data, filename: url.deletingPathExtension().lastPathComponent)
           DispatchQueue.main.async {
             dotLottieCache?.setFile(lottie, forKey: url.absoluteString)
             closure(lottie)

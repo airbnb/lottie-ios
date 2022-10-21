@@ -13,9 +13,9 @@ import Foundation
 /// Lottie comes with a prebuilt LRU DotLottie Cache.
 public protocol DotLottieCacheProvider {
 
-  func file(forKey: String) -> DotLottie?
+  func file(forKey: String) -> DotLottieFile?
 
-  func setFile(_ lottie: DotLottie, forKey: String)
+  func setFile(_ lottie: DotLottieFile, forKey: String)
 
   func clearCache()
 

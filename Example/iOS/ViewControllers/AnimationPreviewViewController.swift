@@ -33,7 +33,7 @@ class AnimationPreviewViewController: UIViewController {
 
     if let animation = LottieAnimation.named(animationName) {
       animationView.animation = animation
-    } else if let lottie = DotLottie.named(animationName) {
+    } else if let lottie = DotLottieFile.named(animationName) {
       animationView.setDotLottie(lottie)
     }
 

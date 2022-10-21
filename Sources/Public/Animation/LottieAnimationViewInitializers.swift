@@ -113,7 +113,7 @@ extension LottieAnimationView {
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared)
   {
-    let lottie = DotLottie.named(name, bundle: bundle, subdirectory: nil, dotLottieCache: dotLottieCache)
+    let lottie = DotLottieFile.named(name, bundle: bundle, subdirectory: nil, dotLottieCache: dotLottieCache)
     self.init(dotLottie: lottie, animationId: animationId, configuration: configuration)
   }
 
@@ -128,7 +128,7 @@ extension LottieAnimationView {
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared)
   {
-    let lottie = DotLottie.filepath(filePath, dotLottieCache: dotLottieCache)
+    let lottie = DotLottieFile.filepath(filePath, dotLottieCache: dotLottieCache)
     self.init(dotLottie: lottie, animationId: animationId, configuration: configuration)
   }
 
@@ -150,7 +150,7 @@ extension LottieAnimationView {
       closure(nil)
     } else {
       self.init(dotLottie: nil, configuration: configuration)
-      DotLottie.loadedFrom(url: url, closure: { lottie in
+      DotLottieFile.loadedFrom(url: url, closure: { lottie in
         if let lottie = lottie {
           self.setDotLottie(lottie, animationId: animationId)
           closure(nil)
@@ -174,7 +174,7 @@ extension LottieAnimationView {
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared)
   {
-    let lottie = DotLottie.asset(name, bundle: bundle, dotLottieCache: dotLottieCache)
+    let lottie = DotLottieFile.asset(name, bundle: bundle, dotLottieCache: dotLottieCache)
     self.init(dotLottie: lottie, animationId: animationId, configuration: configuration)
   }
 

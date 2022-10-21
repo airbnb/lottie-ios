@@ -36,11 +36,11 @@ public class DotLottieCache: DotLottieCacheProvider {
     cache.removeAllObjects()
   }
 
-  public func file(forKey key: String) -> DotLottie? {
+  public func file(forKey key: String) -> DotLottieFile? {
     cache.object(forKey: key as NSString)
   }
 
-  public func setFile(_ lottie: DotLottie, forKey key: String) {
+  public func setFile(_ lottie: DotLottieFile, forKey key: String) {
     cache.setObject(lottie, forKey: key as NSString)
   }
 
@@ -48,6 +48,6 @@ public class DotLottieCache: DotLottieCacheProvider {
 
   private static let defaultCacheCountLimit = 100
 
-  private var cache = NSCache<NSString, DotLottie>()
+  private var cache = NSCache<NSString, DotLottieFile>()
 
 }

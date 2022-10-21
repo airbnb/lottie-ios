@@ -12,7 +12,7 @@ import ZIPFoundation
 // MARK: - DotLottie
 
 /// Detailed .lottie file structure
-public final class DotLottie {
+public final class DotLottieFile {
 
   // MARK: Lifecycle
 
@@ -52,20 +52,20 @@ public final class DotLottie {
 
   /// Manifest.json file loading
   var manifest: DotLottieManifest? {
-    let path = fileUrl.appendingPathComponent(DotLottie.manifestFileName)
+    let path = fileUrl.appendingPathComponent(DotLottieFile.manifestFileName)
     return try? DotLottieManifest.load(from: path)
   }
 
   /// Animation url for main animation
   var animationUrl: URL? {
     guard let animationId = manifest?.animations.first?.id else { return nil }
-    let dotLottieJson = "\(DotLottie.animationsFolderName)/\(animationId).json"
+    let dotLottieJson = "\(DotLottieFile.animationsFolderName)/\(animationId).json"
     return fileUrl.appendingPathComponent(dotLottieJson)
   }
 
   /// Animations folder url
   var animationsUrl: URL {
-    fileUrl.appendingPathComponent("\(DotLottie.animationsFolderName)")
+    fileUrl.appendingPathComponent("\(DotLottieFile.animationsFolderName)")
   }
 
   /// All files in animations folder
@@ -75,7 +75,7 @@ public final class DotLottie {
 
   /// Images folder url
   var imagesUrl: URL {
-    fileUrl.appendingPathComponent("\(DotLottie.imagesFolderName)")
+    fileUrl.appendingPathComponent("\(DotLottieFile.imagesFolderName)")
   }
 
   /// All images in images folder

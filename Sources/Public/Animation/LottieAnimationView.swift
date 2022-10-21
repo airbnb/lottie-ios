@@ -119,7 +119,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
 
   /// Initializes an AnimationView with a .lottie file.
   public init(
-    dotLottie: DotLottie?,
+    dotLottie: DotLottieFile?,
     animationId: String? = nil,
     textProvider: AnimationTextProvider = DefaultTextProvider(),
     fontProvider: AnimationFontProvider = DefaultFontProvider(),
@@ -437,7 +437,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   ///   - animationId: Internal animation id to play. Optional
   ///   Defaults to play first animation in file.
   public func setDotLottie(
-    _ dotLottie: DotLottie?,
+    _ dotLottie: DotLottieFile?,
     animationId: String? = nil)
   {
     guard let animation = dotLottie?.animation(id: animationId) else { return }

@@ -223,9 +223,9 @@ enum Samples {
     return animation
   }
 
-  static func dotLottie(named sampleDotLottieName: String) -> DotLottie? {
+  static func dotLottie(named sampleDotLottieName: String) -> DotLottieFile? {
     guard
-      let animation = DotLottie.named(
+      let animation = DotLottieFile.named(
         sampleDotLottieName,
         bundle: .module,
         subdirectory: Samples.directoryName)
