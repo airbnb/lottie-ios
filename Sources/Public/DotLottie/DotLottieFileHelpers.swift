@@ -13,7 +13,7 @@ extension DotLottieFile {
   public typealias DotLottieDownloadClosure = (DotLottieFile?) -> Void
 
   /// Returns the list of `DotLottieAnimation` in the file
-  public var dotLottieAnimations: [DotLottieAnimation] {
+  var dotLottieAnimations: [DotLottieAnimation] {
     manifest?.animations.map({
       var animation = $0
       animation.animationUrl = animationsUrl.appendingPathComponent("\($0.id).json")

@@ -15,7 +15,7 @@ import AppKit
 // MARK: - DotLottieImageProvider
 
 /// Provides an image for a lottie animation from a provided Bundle.
-public class DotLottieImageProvider: AnimationImageProvider {
+class DotLottieImageProvider: AnimationImageProvider {
 
   // MARK: Lifecycle
 
@@ -23,19 +23,19 @@ public class DotLottieImageProvider: AnimationImageProvider {
   ///
   /// - Parameter filepath: The absolute filepath containing the images.
   ///
-  public init(filepath: String) {
+  init(filepath: String) {
     self.filepath = URL(fileURLWithPath: filepath)
     loadImages()
   }
 
-  public init(filepath: URL) {
+  init(filepath: URL) {
     self.filepath = filepath
     loadImages()
   }
 
   // MARK: Public
 
-  public func imageForAsset(asset: ImageAsset) -> CGImage? {
+  func imageForAsset(asset: ImageAsset) -> CGImage? {
     imageCache.object(forKey: asset.name as NSString)
   }
 

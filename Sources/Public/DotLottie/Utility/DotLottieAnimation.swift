@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct DotLottieAnimation: Codable {
+struct DotLottieAnimation: Codable {
   /// Id of Animation
   var id: String
 
@@ -27,11 +27,11 @@ public struct DotLottieAnimation: Codable {
   var mode: String? = "normal"
 
   /// URL to animation, to be set internally
-  public var animationUrl: URL?
+  var animationUrl: URL?
 
   /// Loads `LottieAnimation` from `animationUrl`
   /// - Returns: Deserialized `LottieAnimation`. Optional.
-  public func animation() throws -> LottieAnimation {
+  func animation() throws -> LottieAnimation {
     guard let animationUrl = animationUrl else {
       throw DotLottieError.animationNotAvailable
     }
@@ -40,12 +40,12 @@ public struct DotLottieAnimation: Codable {
   }
 
   /// Loop mode for animation
-  public var loopMode: LottieLoopMode {
+  var loopMode: LottieLoopMode {
     mode == "bounce" ? .autoReverse : (loop ? .loop : .playOnce)
   }
 
   /// Animation speed
-  public var animationSpeed: Double {
+  var animationSpeed: Double {
     speed * Double(direction ?? 1)
   }
 }
