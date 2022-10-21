@@ -18,7 +18,7 @@ public struct DotLottieAnimation: Codable {
   var themeColor: String
 
   /// Animation Playback Speed
-  var speed: Float
+  var speed: Double
 
   /// 1 or -1
   var direction: Int? = 1
@@ -45,7 +45,7 @@ public struct DotLottieAnimation: Codable {
   }
 
   /// Animation speed
-  public var animationSpeed: CGFloat {
-    CGFloat(speed) * CGFloat(direction ?? 1)
+  public var animationSpeed: Double {
+    speed * Double(direction ?? 1)
   }
 }

@@ -10,5 +10,5 @@ import Foundation
 struct DotLottieConfiguration {
   var imageProvider: AnimationImageProvider?
   var loopMode: LottieLoopMode
-  var speed: CGFloat
+  var speed: Double
 }
