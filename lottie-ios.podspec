@@ -39,5 +39,5 @@ Lottie enables designers to create and ship beautiful animations without an engi
   s.module_name = 'Lottie'
   s.header_dir = 'Lottie'
   
-  s.dependency 'ZIPFoundation', '~> 0.9', :git => 'https://github.com/weichsel/ZIPFoundation.git
+  s.dependency 'ZIPFoundation', '~> 0.9'
 end

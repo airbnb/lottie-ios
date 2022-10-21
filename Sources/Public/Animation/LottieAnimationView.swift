@@ -234,8 +234,10 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   public var dotLottie: DotLottie? {
     didSet {
       guard let animation = dotLottie?.animation else { return }
-      loopMode = animation.dotLottieConfiguration?.loopMode ?? loopMode
-      animationSpeed = animation.dotLottieConfiguration?.speed ?? animationSpeed
+      if let configuration = animation.dotLottieConfiguration {
+        loopMode = configuration.loopMode
+        animationSpeed = CGFloat(configuration.speed)
+      }
       if let imageProvider = dotLottie?.imageProvider {
         self.imageProvider = imageProvider
       }
