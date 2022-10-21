@@ -20,7 +20,7 @@ extension Bundle {
     #endif
   }
 
-  func getDotLottieData(_ name: String, subdirectory: String? = nil) throws -> Data? {
+  func dotLottieData(_ name: String, subdirectory: String? = nil) throws -> Data? {
     // Check for files in the bundle at the given path
     let name = name.removingDotLottieSuffix()
     if let url = url(forResource: name, withExtension: "lottie", subdirectory: subdirectory) {
