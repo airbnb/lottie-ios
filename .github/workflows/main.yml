@@ -9,16 +9,14 @@ on:
 jobs:
   build-package:
     name: "Build Package"
-    # The macos-11 image includes Xcode 12 releases, but the macos-12
-    # image only includes Xcode 13 releases. We still need to use macos-11
-    # on this job to build using Swift 5.3 and Swift 5.4.
-    runs-on: macos-11
+    runs-on: macos-12
     strategy:
+      fail-fast: false
       matrix:
         xcode:
-        - '12.4' # Swift 5.3
-        - '12.5.1' # Swift 5.4
-        - '13.2' # Swift 5.5
+        - '13.2.1' # Swift 5.5
+        - '13.4.1' # Swift 5.6
+        - '14.0.1' # Swift 5.7
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup

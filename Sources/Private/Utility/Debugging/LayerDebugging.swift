@@ -75,7 +75,7 @@ extension CALayer {
 
   @nonobjc
   func setDebuggingState(visible: Bool) {
-    var sublayers = self.sublayers
+    var sublayers = sublayers
     if let cust = self as? CustomLayerDebugging {
       sublayers = cust.layerForDebugging().sublayers
     }

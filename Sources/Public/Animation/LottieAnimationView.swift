@@ -1121,8 +1121,8 @@ final public class LottieAnimationView: LottieAnimationViewBase {
 
           """)
 
-    let animationContext = self.animationContext
-    let currentFrame = self.currentFrame
+    let animationContext = animationContext
+    let currentFrame = currentFrame
 
     makeAnimationLayer(usingEngine: .mainThread)
 

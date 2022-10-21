@@ -225,8 +225,8 @@ extension String {
     }
     if let index = firstIndex(of: "*") {
       // Wildcard search.
-      let prefix = String(self.prefix(upTo: index))
-      let suffix = String(self.suffix(from: self.index(after: index)))
+      let prefix = String(prefix(upTo: index))
+      let suffix = String(suffix(from: self.index(after: index)))
 
       if prefix.count > 0 {
         // Match prefix.

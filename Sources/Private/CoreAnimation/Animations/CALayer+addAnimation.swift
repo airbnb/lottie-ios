@@ -233,8 +233,8 @@ extension CALayer {
       NSNumber(value: Float(context.progressTime(for: keyframeModel.time)))
     }
 
-    var timingFunctions = self.timingFunctions(for: keyframes)
-    let calculationMode = self.calculationMode(for: keyframes)
+    var timingFunctions = timingFunctions(for: keyframes)
+    let calculationMode = calculationMode(for: keyframes)
 
     let animation = CAKeyframeAnimation(keyPath: property.caLayerKeypath)
 
