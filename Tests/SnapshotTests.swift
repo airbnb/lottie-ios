@@ -222,6 +222,20 @@ enum Samples {
 
     return animation
   }
+
+  static func dotLottie(named sampleDotLottieName: String) -> DotLottie? {
+    guard
+      let animation = DotLottie.named(
+        sampleDotLottieName,
+        bundle: .module,
+        subdirectory: Samples.directoryName)
+    else {
+      XCTFail("Could not parse Samples/\(sampleDotLottieName).lottie")
+      return nil
+    }
+
+    return animation
+  }
 }
 
 extension SnapshotConfiguration {
@@ -235,18 +249,28 @@ extension SnapshotConfiguration {
     let snapshotConfiguration = SnapshotConfiguration.forSample(named: sampleAnimationName)
 
     guard
-      snapshotConfiguration.shouldSnapshot(using: configuration),
-      let animation = Samples.animation(named: sampleAnimationName)
+      snapshotConfiguration.shouldSnapshot(using: configuration)
     else { return nil }
 
-    let animationView = LottieAnimationView(
-      animation: animation,
-      configuration: configuration,
-      logger: logger)
+    var animationView: LottieAnimationView!
+
+    if let animation = Samples.animation(named: sampleAnimationName) {
+      animationView = LottieAnimationView(
+        animation: animation,
+        configuration: configuration,
+        logger: logger)
+      animationView.frame.size = animation.snapshotSize
+    } else if let lottie = Samples.dotLottie(named: sampleAnimationName) {
+      animationView = LottieAnimationView(
+        dotLottie: lottie,
+        configuration: configuration,
+        logger: logger)
+    } else {
+      return nil
+    }
 
     // Set up the animation view with a valid frame
     // so the geometry is correct when setting up the `CAAnimation`s
-    animationView.frame.size = animation.snapshotSize
 
     for (keypath, customValueProvider) in snapshotConfiguration.customValueProviders {
       animationView.setValueProvider(customValueProvider, keypath: keypath)

@@ -36,7 +36,7 @@ public class DotLottieImageProvider: AnimationImageProvider {
   // MARK: Public
 
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
-      imageCache.object(forKey: asset.name as NSString)
+    imageCache.object(forKey: asset.name as NSString)
   }
 
   // MARK: Internal
