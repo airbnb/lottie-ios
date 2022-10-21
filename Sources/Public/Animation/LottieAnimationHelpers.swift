@@ -277,6 +277,6 @@ extension LottieAnimation {
 
   /// Converts Time (Seconds) into Frame Time (Seconds * Framerate)
   public func frameTime(forTime time: TimeInterval) -> AnimationFrameTime {
-    CGFloat(time * framerate) + startFrame
+    Double(time * framerate) + startFrame
   }
 }

@@ -223,7 +223,7 @@ extension CustomizableProperty {
           return nil
         }
 
-        return .rgba(CGFloat(color.r), CGFloat(color.g), CGFloat(color.b), CGFloat(color.a))
+        return .rgba(Double(color.r), Double(color.g), Double(color.b), Double(color.a))
       })
   }
 }

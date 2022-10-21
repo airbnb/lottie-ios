@@ -61,8 +61,8 @@ class BaseCompositionLayer: BaseAnimationLayer {
       try addOpacityAnimation(for: baseLayerModel.transform, context: context)
 
       addVisibilityAnimation(
-        inFrame: CGFloat(baseLayerModel.inFrame),
-        outFrame: CGFloat(baseLayerModel.outFrame),
+        inFrame: Double(baseLayerModel.inFrame),
+        outFrame: Double(baseLayerModel.outFrame),
         context: context)
     }
   }

@@ -19,7 +19,7 @@ final class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
     color = NodeProperty(provider: KeyframeInterpolator(keyframes: stroke.color.keyframes))
     opacity = NodeProperty(provider: KeyframeInterpolator(keyframes: stroke.opacity.keyframes))
     width = NodeProperty(provider: KeyframeInterpolator(keyframes: stroke.width.keyframes))
-    miterLimit = CGFloat(stroke.miterLimit)
+    miterLimit = Double(stroke.miterLimit)
     lineCap = stroke.lineCap
     lineJoin = stroke.lineJoin
 

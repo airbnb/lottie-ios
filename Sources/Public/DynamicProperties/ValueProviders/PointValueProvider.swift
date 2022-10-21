@@ -27,7 +27,7 @@ public final class PointValueProvider: ValueProvider {
 
   // MARK: Public
 
-  /// Returns a CGPoint for a CGFloat(Frame Time)
+  /// Returns a CGPoint for a Double(Frame Time)
   public typealias PointValueBlock = (CGFloat) -> CGPoint
 
   public var point: CGPoint {

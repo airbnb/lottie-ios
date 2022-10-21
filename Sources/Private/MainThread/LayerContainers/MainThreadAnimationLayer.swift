@@ -37,7 +37,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
       layerImageProvider: layerImageProvider,
       textProvider: textProvider,
       fontProvider: fontProvider,
-      frameRate: CGFloat(animation.framerate))
+      frameRate: Double(animation.framerate))
 
     var imageLayers = [ImageCompositionLayer]()
     var textLayers = [TextCompositionLayer]()

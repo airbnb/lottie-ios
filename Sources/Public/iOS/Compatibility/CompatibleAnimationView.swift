@@ -264,10 +264,10 @@ public final class CompatibleAnimationView: UIView {
     }
 
     return UIColor(
-      red: CGFloat(colorValue.r),
-      green: CGFloat(colorValue.g),
-      blue: CGFloat(colorValue.b),
-      alpha: CGFloat(colorValue.a))
+      red: Double(colorValue.r),
+      green: Double(colorValue.g),
+      blue: Double(colorValue.b),
+      alpha: Double(colorValue.a))
   }
 
   @objc

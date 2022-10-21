@@ -69,15 +69,15 @@ final class TextLayer: BaseCompositionLayer {
         """)
     }
 
-    renderLayer.font = context.fontProvider.fontFor(family: text.fontFamily, size: CGFloat(text.fontSize))
+    renderLayer.font = context.fontProvider.fontFor(family: text.fontFamily, size: Double(text.fontSize))
 
     renderLayer.alignment = text.justification.textAlignment
-    renderLayer.lineHeight = CGFloat(text.lineHeight)
-    renderLayer.tracking = (CGFloat(text.fontSize) * CGFloat(text.tracking)) / 1000
+    renderLayer.lineHeight = Double(text.lineHeight)
+    renderLayer.tracking = (Double(text.fontSize) * Double(text.tracking)) / 1000
 
     renderLayer.fillColor = text.fillColorData?.cgColorValue
     renderLayer.strokeColor = text.strokeColorData?.cgColorValue
-    renderLayer.strokeWidth = CGFloat(text.strokeWidth ?? 0)
+    renderLayer.strokeWidth = Double(text.strokeWidth ?? 0)
     renderLayer.strokeOnTop = text.strokeOverFill ?? false
 
     renderLayer.preferredSize = text.textFrameSize?.sizeValue

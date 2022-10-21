@@ -412,8 +412,8 @@ final public class LottieAnimationView: LottieAnimationViewBase {
 
     /// Build a context for the animation.
     let context = AnimationContext(
-      playFrom: CGFloat(animation.startFrame),
-      playTo: CGFloat(animation.endFrame),
+      playFrom: Double(animation.startFrame),
+      playTo: Double(animation.endFrame),
       closure: completion)
     removeCurrentAnimationIfNecessary()
     addNewAnimationForContext(context)
@@ -506,12 +506,12 @@ final public class LottieAnimationView: LottieAnimationViewBase {
 
     let fromTime: CGFloat
     if let fromName = fromMarker, let from = markers[fromName] {
-      fromTime = CGFloat(from.frameTime)
+      fromTime = Double(from.frameTime)
     } else {
       fromTime = currentFrame
     }
 
-    let playTo = playEndMarkerFrame ? CGFloat(to.frameTime) : CGFloat(to.frameTime) - 1
+    let playTo = playEndMarkerFrame ? Double(to.frameTime) : Double(to.frameTime) - 1
     let context = AnimationContext(
       playFrom: fromTime,
       playTo: playTo,
@@ -1026,7 +1026,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     reloadImages()
     animationLayer.setNeedsDisplay()
     setNeedsLayout()
-    currentFrame = CGFloat(animation.startFrame)
+    currentFrame = Double(animation.startFrame)
   }
 
   fileprivate func makeMainThreadAnimationLayer(for animation: LottieAnimation) -> MainThreadAnimationLayer {
@@ -1314,7 +1314,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     let playFrom = animationContext.playFrom.clamp(animation.startFrame, animation.endFrame)
     let playTo = animationContext.playTo.clamp(animation.startFrame, animation.endFrame)
 
-    let duration = ((max(playFrom, playTo) - min(playFrom, playTo)) / CGFloat(framerate))
+    let duration = ((max(playFrom, playTo) - min(playFrom, playTo)) / Double(framerate))
 
     let playingForward: Bool =
       (

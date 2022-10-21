@@ -118,7 +118,7 @@ class SnapshotTests: XCTestCase {
             configuration: configuration)
         else { continue }
 
-        animationView.currentProgress = CGFloat(percent)
+        animationView.currentProgress = Double(percent)
 
         assertSnapshot(
           matching: animationView,
@@ -147,16 +147,16 @@ extension LottieAnimation {
 
     // If this is a landscape aspect ratio, we clamp the width
     if width > height {
-      let newWidth = min(CGFloat(width), maxDimension)
-      let newHeight = newWidth * (CGFloat(height) / CGFloat(width))
+      let newWidth = min(Double(width), maxDimension)
+      let newHeight = newWidth * (Double(height) / Double(width))
       return CGSize(width: newWidth, height: newHeight)
     }
 
     // otherwise, this is either a square or portrait aspect ratio,
     // in which case we clamp the height
     else {
-      let newHeight = min(CGFloat(height), maxDimension)
-      let newWidth = newHeight * (CGFloat(width) / CGFloat(height))
+      let newHeight = min(Double(height), maxDimension)
+      let newWidth = newHeight * (Double(width) / Double(height))
       return CGSize(width: newWidth, height: newHeight)
     }
   }

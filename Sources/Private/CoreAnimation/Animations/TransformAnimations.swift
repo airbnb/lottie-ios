@@ -117,8 +117,8 @@ extension CALayer {
         // so we have to divide by the width/height of this layer to get the
         // relative decimal values expected by Core Animation.
         return CGPoint(
-          x: CGFloat(absoluteAnchorPoint.x) / bounds.width,
-          y: CGFloat(absoluteAnchorPoint.y) / bounds.height)
+          x: Double(absoluteAnchorPoint.x) / bounds.width,
+          y: Double(absoluteAnchorPoint.y) / bounds.height)
       },
       context: context)
   }
@@ -142,7 +142,7 @@ extension CALayer {
         //    https://openradar.appspot.com/FB9862872
         //  - To work around this, we set up a `rotationY` animation below
         //    to flip the view horizontally, which gives us the desired effect.
-        abs(CGFloat(scale.x) / 100)
+        abs(Double(scale.x) / 100)
       },
       context: context)
 
@@ -180,7 +180,7 @@ extension CALayer {
         //  - Negative `scaleY` values are correctly applied (they flip the view
         //    vertically), so we don't have to apply an additional rotation animation
         //    like we do for `scaleX`.
-        CGFloat(scale.y) / 100
+        Double(scale.y) / 100
       },
       context: context)
   }

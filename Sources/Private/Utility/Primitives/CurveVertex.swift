@@ -174,7 +174,7 @@ struct CurveVertex {
 
     var previousPoint = point
     for i in 0..<sampleCount {
-      let pointOnCurve = splitCurve(toVertex: toVertex, position: CGFloat(i) / CGFloat(sampleCount)).trimPoint
+      let pointOnCurve = splitCurve(toVertex: toVertex, position: Double(i) / Double(sampleCount)).trimPoint
       distance = distance + previousPoint.distanceTo(pointOnCurve.point)
       previousPoint = pointOnCurve.point
     }
