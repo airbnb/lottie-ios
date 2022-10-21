@@ -143,19 +143,8 @@ extension LottieAnimationView {
       self.init(dotLottie: nil, configuration: configuration)
       DotLottie.loadedFrom(url: url, closure: { lottie in
         if let lottie = lottie {
-          if let animation = lottie.animation {
-            self.animation = animation
-            self.loopMode = animation.dotLottieConfiguration?.loopMode ?? .playOnce
-            self.animationSpeed = CGFloat(animation.dotLottieConfiguration?.speed ?? 1)
-
-            if let imageProvider = animation.dotLottieConfiguration?.imageProvider {
-              self.imageProvider = imageProvider
-            }
-
-            closure(nil)
-          } else {
-            closure(DotLottieError.animationNotAvailable)
-          }
+          self.dotLottie = lottie
+          closure(nil)
         } else {
           closure(LottieDownloadError.downloadFailed)
         }
