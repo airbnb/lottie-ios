@@ -33,15 +33,13 @@ class DotLottieImageProvider: AnimationImageProvider {
     loadImages()
   }
 
-  // MARK: Public
+  // MARK: Internal
+
+  let filepath: URL
 
   func imageForAsset(asset: ImageAsset) -> CGImage? {
     imageCache.object(forKey: asset.name as NSString)
   }
-
-  // MARK: Internal
-
-  let filepath: URL
 
   // MARK: Private
 

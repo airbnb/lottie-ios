@@ -9,17 +9,10 @@ import Foundation
 
 extension DotLottieFile {
 
+  // MARK: Public
+
   /// A closure for an Animation download. The closure is passed `nil` if there was an error.
   public typealias DotLottieDownloadClosure = (DotLottieFile?) -> Void
-
-  /// Returns the list of `DotLottieAnimation` in the file
-  var dotLottieAnimations: [DotLottieAnimation] {
-    manifest?.animations.map({
-      var animation = $0
-      animation.animationUrl = animationsUrl.appendingPathComponent("\($0.id).json")
-      return animation
-    }) ?? []
-  }
 
   // MARK: DotLottie file (Loading)
 
@@ -195,6 +188,17 @@ extension DotLottieFile {
     } else {
       return animations.first
     }
+  }
+
+  // MARK: Internal
+
+  /// Returns the list of `DotLottieAnimation` in the file
+  var dotLottieAnimations: [DotLottieAnimation] {
+    manifest?.animations.map({
+      var animation = $0
+      animation.animationUrl = animationsUrl.appendingPathComponent("\($0.id).json")
+      return animation
+    }) ?? []
   }
 
 }

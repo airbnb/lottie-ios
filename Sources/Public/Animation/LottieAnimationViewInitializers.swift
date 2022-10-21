@@ -152,7 +152,7 @@ extension LottieAnimationView {
       self.init(dotLottie: nil, configuration: configuration)
       DotLottieFile.loadedFrom(url: url, closure: { lottie in
         if let lottie = lottie {
-          self.setDotLottie(lottie, animationId: animationId)
+          self.loadAnimation(animationId, from: lottie)
           closure(nil)
         } else {
           closure(LottieDownloadError.downloadFailed)

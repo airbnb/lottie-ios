@@ -29,6 +29,16 @@ struct DotLottieAnimation: Codable {
   /// URL to animation, to be set internally
   var animationUrl: URL?
 
+  /// Loop mode for animation
+  var loopMode: LottieLoopMode {
+    mode == "bounce" ? .autoReverse : (loop ? .loop : .playOnce)
+  }
+
+  /// Animation speed
+  var animationSpeed: Double {
+    speed * Double(direction ?? 1)
+  }
+
   /// Loads `LottieAnimation` from `animationUrl`
   /// - Returns: Deserialized `LottieAnimation`. Optional.
   func animation() throws -> LottieAnimation {
@@ -39,13 +49,4 @@ struct DotLottieAnimation: Codable {
     return try LottieAnimation.from(data: data)
   }
 
-  /// Loop mode for animation
-  var loopMode: LottieLoopMode {
-    mode == "bounce" ? .autoReverse : (loop ? .loop : .playOnce)
-  }
-
-  /// Animation speed
-  var animationSpeed: Double {
-    speed * Double(direction ?? 1)
-  }
 }

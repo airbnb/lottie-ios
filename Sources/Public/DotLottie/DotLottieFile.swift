@@ -9,7 +9,7 @@
 import Foundation
 import ZIPFoundation
 
-// MARK: - DotLottie
+// MARK: - DotLottieFile
 
 /// Detailed .lottie file structure
 public final class DotLottieFile {

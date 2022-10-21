@@ -433,19 +433,19 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   /// The loopMode, animationSpeed and imageProvider will be set according
   /// to lottie file settings
   /// - Parameters:
-  ///   - dotLottie: Lottie file to play
   ///   - animationId: Internal animation id to play. Optional
   ///   Defaults to play first animation in file.
+  ///   - dotLottieFile: Lottie file to play
   public func loadAnimation(
     _ animationId: String? = nil,
-    from _ dotLottieFile: DotLottie)
+    from dotLottieFile: DotLottieFile)
   {
-    guard let animation = dotLottie?.animation(id: animationId) else { return }
+    guard let animation = dotLottieFile.animation(id: animationId) else { return }
     if let configuration = animation.dotLottieConfiguration {
       loopMode = configuration.loopMode
       animationSpeed = CGFloat(configuration.speed)
     }
-    if let imageProvider = dotLottie?.imageProvider {
+    if let imageProvider = dotLottieFile.imageProvider {
       self.imageProvider = imageProvider
     }
     self.animation = animation
