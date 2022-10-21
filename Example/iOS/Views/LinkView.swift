@@ -53,7 +53,7 @@ final class LinkView: UIView, EpoxyableView {
             if let animation = LottieAnimation.named(animationName) {
               context.constrainable.animation = animation
             } else if let lottie = DotLottie.named(animationName) {
-              context.constrainable.dotLottie = lottie
+              context.constrainable.setDotLottie(lottie)
             }
             context.constrainable.contentMode = .scaleAspectFit
             context.constrainable.currentProgress = 0.5
