@@ -577,15 +577,15 @@
 		6C48785229017CBF0005AF07 /* DotLottieCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785129017CBF0005AF07 /* DotLottieCacheProvider.swift */; };
 		6C48785329017CBF0005AF07 /* DotLottieCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785129017CBF0005AF07 /* DotLottieCacheProvider.swift */; };
 		6C48785429017CBF0005AF07 /* DotLottieCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785129017CBF0005AF07 /* DotLottieCacheProvider.swift */; };
-		6C48785629017D1D0005AF07 /* LRUDotLottieCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785529017D1D0005AF07 /* LRUDotLottieCache.swift */; };
-		6C48785729017D1D0005AF07 /* LRUDotLottieCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785529017D1D0005AF07 /* LRUDotLottieCache.swift */; };
-		6C48785829017D1D0005AF07 /* LRUDotLottieCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785529017D1D0005AF07 /* LRUDotLottieCache.swift */; };
+		6C48785629017D1D0005AF07 /* DotLottieCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785529017D1D0005AF07 /* DotLottieCache.swift */; };
+		6C48785729017D1D0005AF07 /* DotLottieCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785529017D1D0005AF07 /* DotLottieCache.swift */; };
 		6C48785A2901811D0005AF07 /* DotLottieHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4878592901811D0005AF07 /* DotLottieHelpers.swift */; };
 		6C48785B2901811D0005AF07 /* DotLottieHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4878592901811D0005AF07 /* DotLottieHelpers.swift */; };
 		6C48785C2901811D0005AF07 /* DotLottieHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4878592901811D0005AF07 /* DotLottieHelpers.swift */; };
 		6C4878602901D8C70005AF07 /* DotLottieImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785F2901D8C70005AF07 /* DotLottieImageProvider.swift */; };
 		6C4878612901D8C70005AF07 /* DotLottieImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785F2901D8C70005AF07 /* DotLottieImageProvider.swift */; };
 		6C4878622901D8C70005AF07 /* DotLottieImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785F2901D8C70005AF07 /* DotLottieImageProvider.swift */; };
+		6CC544932902FF7D00212722 /* DotLottieCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785529017D1D0005AF07 /* DotLottieCache.swift */; };
 		6D0E635F28246BD0007C5DB6 /* Difference in Frameworks */ = {isa = PBXBuildFile; productRef = 6D0E635E28246BD0007C5DB6 /* Difference */; };
 		6D99D6432823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
 		6D99D6442823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
@@ -823,7 +823,7 @@
 		6C4877FB28FF20140005AF07 /* DotLottieManifest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotLottieManifest.swift; sourceTree = "<group>"; };
 		6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotLottieConfiguration.swift; sourceTree = "<group>"; };
 		6C48785129017CBF0005AF07 /* DotLottieCacheProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotLottieCacheProvider.swift; sourceTree = "<group>"; };
-		6C48785529017D1D0005AF07 /* LRUDotLottieCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRUDotLottieCache.swift; sourceTree = "<group>"; };
+		6C48785529017D1D0005AF07 /* DotLottieCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotLottieCache.swift; sourceTree = "<group>"; };
 		6C4878592901811D0005AF07 /* DotLottieHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotLottieHelpers.swift; sourceTree = "<group>"; };
 		6C48785F2901D8C70005AF07 /* DotLottieImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotLottieImageProvider.swift; sourceTree = "<group>"; };
 		6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyGradientFillRenderer.swift; sourceTree = "<group>"; };
@@ -1549,7 +1549,7 @@
 			isa = PBXGroup;
 			children = (
 				6C48785129017CBF0005AF07 /* DotLottieCacheProvider.swift */,
-				6C48785529017D1D0005AF07 /* LRUDotLottieCache.swift */,
+				6C48785529017D1D0005AF07 /* DotLottieCache.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -1907,7 +1907,7 @@
 				2E9C96722822F43100677516 /* CompositionLayersInitializer.swift in Sources */,
 				2EAF5A9E27A0798700E00531 /* LottieAnimationViewBase.macOS.swift in Sources */,
 				2E9C975C2822F43100677516 /* CompoundBezierPath.swift in Sources */,
-				6C48785629017D1D0005AF07 /* LRUDotLottieCache.swift in Sources */,
+				6C48785629017D1D0005AF07 /* DotLottieCache.swift in Sources */,
 				2E9C97532822F43100677516 /* DataExtension.swift in Sources */,
 				2E9C95DF2822F43100677516 /* Shape.swift in Sources */,
 				0887347528F0CCDD00458627 /* LottieAnimationHelpers.swift in Sources */,
@@ -2129,7 +2129,7 @@
 				2E9C96732822F43100677516 /* CompositionLayersInitializer.swift in Sources */,
 				2EAF5A9F27A0798700E00531 /* LottieAnimationViewBase.macOS.swift in Sources */,
 				2E9C975D2822F43100677516 /* CompoundBezierPath.swift in Sources */,
-				6C48785729017D1D0005AF07 /* LRUDotLottieCache.swift in Sources */,
+				6C48785729017D1D0005AF07 /* DotLottieCache.swift in Sources */,
 				2E9C97542822F43100677516 /* DataExtension.swift in Sources */,
 				2E9C95E02822F43100677516 /* Shape.swift in Sources */,
 				0887347628F0CCDD00458627 /* LottieAnimationHelpers.swift in Sources */,
@@ -2330,11 +2330,11 @@
 				2E9C96742822F43100677516 /* CompositionLayersInitializer.swift in Sources */,
 				2EAF5AA027A0798700E00531 /* LottieAnimationViewBase.macOS.swift in Sources */,
 				2E9C975E2822F43100677516 /* CompoundBezierPath.swift in Sources */,
-				6C48785829017D1D0005AF07 /* LRUDotLottieCache.swift in Sources */,
 				2E9C97552822F43100677516 /* DataExtension.swift in Sources */,
 				2E9C95E12822F43100677516 /* Shape.swift in Sources */,
 				0887347728F0CCDD00458627 /* LottieAnimationHelpers.swift in Sources */,
 				2E9C96022822F43100677516 /* LayerModel.swift in Sources */,
+				6CC544932902FF7D00212722 /* DotLottieCache.swift in Sources */,
 				2E9C97672822F43100677516 /* CurveVertex.swift in Sources */,
 				2E9C964A2822F43100677516 /* NullCompositionLayer.swift in Sources */,
 				2EAF5B0027A0798700E00531 /* GradientValueProvider.swift in Sources */,

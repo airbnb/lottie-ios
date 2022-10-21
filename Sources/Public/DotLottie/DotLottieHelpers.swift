@@ -35,7 +35,7 @@ extension DotLottie {
     _ name: String,
     bundle: Bundle = Bundle.main,
     subdirectory: String? = nil,
-    dotLottieCache: DotLottieCacheProvider? = LRUDotLottieCache.sharedCache)
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
     -> DotLottie?
   {
     /// Create a cache key for the lottie.
@@ -72,7 +72,7 @@ extension DotLottie {
   /// - Returns: Deserialized `DotLottie`. Optional.
   public static func filepath(
     _ filepath: String,
-    dotLottieCache: DotLottieCacheProvider? = LRUDotLottieCache.sharedCache)
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
     -> DotLottie?
   {
     /// Check cache for lottie
@@ -104,7 +104,7 @@ extension DotLottie {
   public static func asset(
     _ name: String,
     bundle: Bundle = Bundle.main,
-    dotLottieCache: DotLottieCacheProvider? = LRUDotLottieCache.sharedCache)
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
     -> DotLottie?
   {
     /// Create a cache key for the lottie.
@@ -157,7 +157,7 @@ extension DotLottie {
     url: URL,
     session: URLSession = .shared,
     closure: @escaping DotLottie.DotLottieDownloadClosure,
-    dotLottieCache: DotLottieCacheProvider? = LRUDotLottieCache.sharedCache)
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
   {
     if let dotLottieCache = dotLottieCache, let animation = dotLottieCache.file(forKey: url.absoluteString) {
       closure(animation)
