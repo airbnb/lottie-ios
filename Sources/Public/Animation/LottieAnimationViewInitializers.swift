@@ -146,7 +146,7 @@ extension LottieAnimationView {
           if let animation = lottie.animation {
             self.animation = animation
             self.loopMode = animation.dotLottieConfiguration?.loopMode ?? .playOnce
-            self.animationSpeed = animation.dotLottieConfiguration?.speed ?? 1
+            self.animationSpeed = CGFloat(animation.dotLottieConfiguration?.speed ?? 1)
 
             if let imageProvider = animation.dotLottieConfiguration?.imageProvider {
               self.imageProvider = imageProvider
