@@ -32,7 +32,7 @@ public struct DotLottieAnimation: Codable {
   /// Loads `LottieAnimation` from `animationUrl`
   /// - Returns: Deserialized `LottieAnimation`. Optional.
   public func animation() throws -> LottieAnimation {
-    guard let animationUrl else {
+    guard let animationUrl = animationUrl else {
       throw DotLottieError.animationNotAvailable
     }
     let data = try Data(contentsOf: animationUrl)
