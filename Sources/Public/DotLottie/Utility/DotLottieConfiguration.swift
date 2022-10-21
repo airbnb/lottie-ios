@@ -8,6 +8,7 @@
 import Foundation
 
 struct DotLottieConfiguration {
+  var id: String
   var imageProvider: AnimationImageProvider?
   var loopMode: LottieLoopMode
   var speed: Double

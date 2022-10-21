@@ -120,12 +120,13 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   /// Initializes an AnimationView with an lottie file.
   public init(
     dotLottie: DotLottie?,
+    animationId: String? = nil,
     textProvider: AnimationTextProvider = DefaultTextProvider(),
     fontProvider: AnimationFontProvider = DefaultFontProvider(),
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)
   {
-    animation = dotLottie?.animation
+    animation = dotLottie?.animation(id: animationId)
     imageProvider = dotLottie?.imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = textProvider
     self.fontProvider = fontProvider
@@ -223,25 +224,6 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   public var animation: LottieAnimation? {
     didSet {
       makeAnimationLayer(usingEngine: configuration.renderingEngine)
-    }
-  }
-
-  /// Sets the lottie file backing the animation view. Setting this will clear the
-  /// view's contents, completion blocks and current state. The new animation will
-  /// be loaded up and set to the beginning of its timeline.
-  /// The loopMode, animationSpeed and imageProvider will be set according
-  /// to lottie file settings
-  public var dotLottie: DotLottie? {
-    didSet {
-      guard let animation = dotLottie?.animation else { return }
-      if let configuration = animation.dotLottieConfiguration {
-        loopMode = configuration.loopMode
-        animationSpeed = CGFloat(configuration.speed)
-      }
-      if let imageProvider = dotLottie?.imageProvider {
-        self.imageProvider = imageProvider
-      }
-      self.animation = animation
     }
   }
 
@@ -443,6 +425,30 @@ final public class LottieAnimationView: LottieAnimationViewBase {
         return .mainThread
       }
     }
+  }
+
+  /// Sets the lottie file backing the animation view. Setting this will clear the
+  /// view's contents, completion blocks and current state. The new animation will
+  /// be loaded up and set to the beginning of its timeline.
+  /// The loopMode, animationSpeed and imageProvider will be set according
+  /// to lottie file settings
+  /// - Parameters:
+  ///   - dotLottie: Lottie file to play
+  ///   - animationId: Internal animation id to play. Optional
+  ///   Defaults to play first animation in file.
+  public func setDotLottie(
+    _ dotLottie: DotLottie?,
+    animationId: String? = nil)
+  {
+    guard let animation = dotLottie?.animation(id: animationId) else { return }
+    if let configuration = animation.dotLottieConfiguration {
+      loopMode = configuration.loopMode
+      animationSpeed = CGFloat(configuration.speed)
+    }
+    if let imageProvider = dotLottie?.imageProvider {
+      self.imageProvider = imageProvider
+    }
+    self.animation = animation
   }
 
   /// Plays the animation from its current state to the end.

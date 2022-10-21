@@ -21,11 +21,6 @@ extension DotLottie {
     }) ?? []
   }
 
-  /// Returns the first `LottieAnimation` in the file
-  public var animation: LottieAnimation? {
-    animations.first
-  }
-
   // MARK: DotLottie file (Loading)
 
   /// Loads a DotLottie model from a bundle by its name. Returns `nil` if a file is not found.
@@ -189,4 +184,17 @@ extension DotLottie {
       task.resume()
     }
   }
+
+  /// Returns animation with id
+  /// - Parameter id: id to animation. Specified in .lottie file manifest. Optional
+  /// Defaults to first animation
+  /// - Returns: LottieAnimation with id. Optional
+  public func animation(id: String? = nil) -> LottieAnimation? {
+    if let id = id {
+      return animations.first(where: { $0.dotLottieConfiguration?.id == id })
+    } else {
+      return animations.first
+    }
+  }
+
 }

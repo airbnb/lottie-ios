@@ -124,6 +124,7 @@ public final class DotLottie {
     animations = dotLottieAnimations.compactMap {
       let animation = try? $0.animation()
       animation?.dotLottieConfiguration = DotLottieConfiguration(
+        id: $0.id,
         imageProvider: imageProvider,
         loopMode: $0.loopMode,
         speed: $0.animationSpeed)
