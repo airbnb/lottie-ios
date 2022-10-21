@@ -117,7 +117,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     }
   }
 
-  /// Initializes an AnimationView with an lottie file.
+  /// Initializes an AnimationView with a .lottie file.
   public init(
     dotLottie: DotLottie?,
     animationId: String? = nil,
