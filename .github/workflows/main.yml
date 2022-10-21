@@ -11,6 +11,7 @@ jobs:
     name: "Build Package"
     runs-on: macos-12
     strategy:
+      fail-fast: false
       matrix:
         xcode:
         - '13.2.1' # Swift 5.5
