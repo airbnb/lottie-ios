@@ -573,7 +573,6 @@
 		6C48784B29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */; };
 		6C48784C29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */; };
 		6C48784D29008ACF0005AF07 /* DotLottieConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */; };
-		6C487850290151D10005AF07 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 6C48784F290151D10005AF07 /* ZIPFoundation */; };
 		6C48785229017CBF0005AF07 /* DotLottieCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785129017CBF0005AF07 /* DotLottieCacheProvider.swift */; };
 		6C48785329017CBF0005AF07 /* DotLottieCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785129017CBF0005AF07 /* DotLottieCacheProvider.swift */; };
 		6C48785429017CBF0005AF07 /* DotLottieCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785129017CBF0005AF07 /* DotLottieCacheProvider.swift */; };
@@ -586,6 +585,27 @@
 		6C4878612901D8C70005AF07 /* DotLottieImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785F2901D8C70005AF07 /* DotLottieImageProvider.swift */; };
 		6C4878622901D8C70005AF07 /* DotLottieImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785F2901D8C70005AF07 /* DotLottieImageProvider.swift */; };
 		6CC544932902FF7D00212722 /* DotLottieCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C48785529017D1D0005AF07 /* DotLottieCache.swift */; };
+		6CFA107F290B12B900873A98 /* ZipEntry+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA1078290B12B900873A98 /* ZipEntry+Serialization.swift */; };
+		6CFA1080290B12B900873A98 /* ZipEntry+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA1078290B12B900873A98 /* ZipEntry+Serialization.swift */; };
+		6CFA1081290B12B900873A98 /* ZipEntry+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA1078290B12B900873A98 /* ZipEntry+Serialization.swift */; };
+		6CFA1082290B12B900873A98 /* ZipArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA1079290B12B900873A98 /* ZipArchive.swift */; };
+		6CFA1083290B12B900873A98 /* ZipArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA1079290B12B900873A98 /* ZipArchive.swift */; };
+		6CFA1084290B12B900873A98 /* ZipArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA1079290B12B900873A98 /* ZipArchive.swift */; };
+		6CFA1085290B12B900873A98 /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107A290B12B900873A98 /* Data+Compression.swift */; };
+		6CFA1086290B12B900873A98 /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107A290B12B900873A98 /* Data+Compression.swift */; };
+		6CFA1087290B12B900873A98 /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107A290B12B900873A98 /* Data+Compression.swift */; };
+		6CFA1088290B12B900873A98 /* ZipEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107B290B12B900873A98 /* ZipEntry.swift */; };
+		6CFA1089290B12B900873A98 /* ZipEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107B290B12B900873A98 /* ZipEntry.swift */; };
+		6CFA108A290B12B900873A98 /* ZipEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107B290B12B900873A98 /* ZipEntry.swift */; };
+		6CFA108B290B12B900873A98 /* Data+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107C290B12B900873A98 /* Data+Serialization.swift */; };
+		6CFA108C290B12B900873A98 /* Data+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107C290B12B900873A98 /* Data+Serialization.swift */; };
+		6CFA108D290B12B900873A98 /* Data+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107C290B12B900873A98 /* Data+Serialization.swift */; };
+		6CFA108E290B12B900873A98 /* FileManager+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107D290B12B900873A98 /* FileManager+ZIP.swift */; };
+		6CFA108F290B12B900873A98 /* FileManager+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107D290B12B900873A98 /* FileManager+ZIP.swift */; };
+		6CFA1090290B12B900873A98 /* FileManager+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107D290B12B900873A98 /* FileManager+ZIP.swift */; };
+		6CFA1091290B12B900873A98 /* ZipEntry+ZIP64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107E290B12B900873A98 /* ZipEntry+ZIP64.swift */; };
+		6CFA1092290B12B900873A98 /* ZipEntry+ZIP64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107E290B12B900873A98 /* ZipEntry+ZIP64.swift */; };
+		6CFA1093290B12B900873A98 /* ZipEntry+ZIP64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA107E290B12B900873A98 /* ZipEntry+ZIP64.swift */; };
 		6D0E635F28246BD0007C5DB6 /* Difference in Frameworks */ = {isa = PBXBuildFile; productRef = 6D0E635E28246BD0007C5DB6 /* Difference */; };
 		6D99D6432823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
 		6D99D6442823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
@@ -826,6 +846,13 @@
 		6C48785529017D1D0005AF07 /* DotLottieCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotLottieCache.swift; sourceTree = "<group>"; };
 		6C4878592901811D0005AF07 /* DotLottieFileHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotLottieFileHelpers.swift; sourceTree = "<group>"; };
 		6C48785F2901D8C70005AF07 /* DotLottieImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotLottieImageProvider.swift; sourceTree = "<group>"; };
+		6CFA1078290B12B900873A98 /* ZipEntry+Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ZipEntry+Serialization.swift"; sourceTree = "<group>"; };
+		6CFA1079290B12B900873A98 /* ZipArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipArchive.swift; sourceTree = "<group>"; };
+		6CFA107A290B12B900873A98 /* Data+Compression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Compression.swift"; sourceTree = "<group>"; };
+		6CFA107B290B12B900873A98 /* ZipEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipEntry.swift; sourceTree = "<group>"; };
+		6CFA107C290B12B900873A98 /* Data+Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Serialization.swift"; sourceTree = "<group>"; };
+		6CFA107D290B12B900873A98 /* FileManager+ZIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+ZIP.swift"; sourceTree = "<group>"; };
+		6CFA107E290B12B900873A98 /* ZipEntry+ZIP64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ZipEntry+ZIP64.swift"; sourceTree = "<group>"; };
 		6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyGradientFillRenderer.swift; sourceTree = "<group>"; };
 		6DB3BDB528243FA5002A276D /* ValueProvidersTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ValueProvidersTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		6DB3BDB7282454A6002A276D /* DictionaryInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryInitializable.swift; sourceTree = "<group>"; };
@@ -843,7 +870,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C487850290151D10005AF07 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1562,8 +1588,23 @@
 				6C4877E228FF20140005AF07 /* DotLottieAnimation.swift */,
 				6C48784A29008ACF0005AF07 /* DotLottieConfiguration.swift */,
 				6C48785F2901D8C70005AF07 /* DotLottieImageProvider.swift */,
+				6CFA1077290B12B900873A98 /* Zip */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		6CFA1077290B12B900873A98 /* Zip */ = {
+			isa = PBXGroup;
+			children = (
+				6CFA1078290B12B900873A98 /* ZipEntry+Serialization.swift */,
+				6CFA1079290B12B900873A98 /* ZipArchive.swift */,
+				6CFA107A290B12B900873A98 /* Data+Compression.swift */,
+				6CFA107B290B12B900873A98 /* ZipEntry.swift */,
+				6CFA107C290B12B900873A98 /* Data+Serialization.swift */,
+				6CFA107D290B12B900873A98 /* FileManager+ZIP.swift */,
+				6CFA107E290B12B900873A98 /* ZipEntry+ZIP64.swift */,
+			);
+			path = Zip;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1608,7 +1649,6 @@
 			);
 			name = "Lottie-iOS";
 			packageProductDependencies = (
-				6C48784F290151D10005AF07 /* ZIPFoundation */,
 			);
 			productName = Lottie;
 			productReference = 2E80409A27A0725D006E74CB /* Lottie.framework */;
@@ -1708,7 +1748,6 @@
 			packageReferences = (
 				2E804A1827A0740F006E74CB /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 				6D0E635D28246BD0007C5DB6 /* XCRemoteSwiftPackageReference "Difference" */,
-				6C48784E290151D10005AF07 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
 			productRefGroup = 2E80409B27A0725D006E74CB /* Products */;
 			projectDirPath = "";
@@ -1766,6 +1805,7 @@
 				2E9C95D62822F43100677516 /* Ellipse.swift in Sources */,
 				2E9C97442822F43100677516 /* AnimatorNodeDebugging.swift in Sources */,
 				2E9C96D82822F43100677516 /* AnimatorNode.swift in Sources */,
+				6CFA108B290B12B900873A98 /* Data+Serialization.swift in Sources */,
 				2E9C96212822F43100677516 /* Bundle.swift in Sources */,
 				2E9C96CF2822F43100677516 /* ShapeContainerLayer.swift in Sources */,
 				2E9C973E2822F43100677516 /* LayerDebugging.swift in Sources */,
@@ -1818,6 +1858,7 @@
 				2E9C972F2822F43100677516 /* CustomPathAnimation.swift in Sources */,
 				2E9C97502822F43100677516 /* StringExtensions.swift in Sources */,
 				2EAF5AEF27A0798700E00531 /* AnimationKeypath.swift in Sources */,
+				6CFA1082290B12B900873A98 /* ZipArchive.swift in Sources */,
 				2E9C973B2822F43100677516 /* LayerProperty.swift in Sources */,
 				2E9C95F72822F43100677516 /* Rectangle.swift in Sources */,
 				2E9C96812822F43100677516 /* FillRenderer.swift in Sources */,
@@ -1835,6 +1876,7 @@
 				2E9C96C92822F43100677516 /* ItemsExtension.swift in Sources */,
 				2E9C95E82822F43100677516 /* Merge.swift in Sources */,
 				2E9C96032822F43100677516 /* ImageLayerModel.swift in Sources */,
+				6CFA1091290B12B900873A98 /* ZipEntry+ZIP64.swift in Sources */,
 				19465F52282F998B00BB2C97 /* CachedImageProvider.swift in Sources */,
 				08F8B20D2898A7B100CB5323 /* RepeaterLayer.swift in Sources */,
 				0887347828F0CCDD00458627 /* LottieAnimationViewInitializers.swift in Sources */,
@@ -1866,8 +1908,10 @@
 				2E9C96182822F43100677516 /* Mask.swift in Sources */,
 				2E9C97622822F43100677516 /* PathElement.swift in Sources */,
 				2E9C97142822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift in Sources */,
+				6CFA108E290B12B900873A98 /* FileManager+ZIP.swift in Sources */,
 				2E9C970E2822F43100677516 /* CALayer+fillBounds.swift in Sources */,
 				2E9C95FD2822F43100677516 /* SolidLayerModel.swift in Sources */,
+				6CFA1088290B12B900873A98 /* ZipEntry.swift in Sources */,
 				2E9C970B2822F43100677516 /* ValueProviderStore.swift in Sources */,
 				6C4877FF28FF20140005AF07 /* DotLottieAnimation.swift in Sources */,
 				2E9C97262822F43100677516 /* StrokeAnimation.swift in Sources */,
@@ -1942,8 +1986,10 @@
 				7E48BF602860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */,
 				2E9C962D2822F43100677516 /* Glyph.swift in Sources */,
 				2E9C96D52822F43100677516 /* RenderNode.swift in Sources */,
+				6CFA1085290B12B900873A98 /* Data+Compression.swift in Sources */,
 				2E9C971D2822F43100677516 /* CombinedShapeAnimation.swift in Sources */,
 				2EAF5B0127A0798700E00531 /* PointValueProvider.swift in Sources */,
+				6CFA107F290B12B900873A98 /* ZipEntry+Serialization.swift in Sources */,
 				2EAF5AE027A0798700E00531 /* Keyframe.swift in Sources */,
 				2E9C969C2822F43100677516 /* StarNode.swift in Sources */,
 				A40460592832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */,
@@ -1988,6 +2034,7 @@
 				2E9C95D72822F43100677516 /* Ellipse.swift in Sources */,
 				2E9C97452822F43100677516 /* AnimatorNodeDebugging.swift in Sources */,
 				2E9C96D92822F43100677516 /* AnimatorNode.swift in Sources */,
+				6CFA108C290B12B900873A98 /* Data+Serialization.swift in Sources */,
 				2E9C96222822F43100677516 /* Bundle.swift in Sources */,
 				2E9C96D02822F43100677516 /* ShapeContainerLayer.swift in Sources */,
 				2E9C973F2822F43100677516 /* LayerDebugging.swift in Sources */,
@@ -2040,6 +2087,7 @@
 				2E9C97302822F43100677516 /* CustomPathAnimation.swift in Sources */,
 				2E9C97512822F43100677516 /* StringExtensions.swift in Sources */,
 				2EAF5AF027A0798700E00531 /* AnimationKeypath.swift in Sources */,
+				6CFA1083290B12B900873A98 /* ZipArchive.swift in Sources */,
 				2E9C973C2822F43100677516 /* LayerProperty.swift in Sources */,
 				2E9C95F82822F43100677516 /* Rectangle.swift in Sources */,
 				2E9C96822822F43100677516 /* FillRenderer.swift in Sources */,
@@ -2057,6 +2105,7 @@
 				2E9C96CA2822F43100677516 /* ItemsExtension.swift in Sources */,
 				2E9C95E92822F43100677516 /* Merge.swift in Sources */,
 				2E9C96042822F43100677516 /* ImageLayerModel.swift in Sources */,
+				6CFA1092290B12B900873A98 /* ZipEntry+ZIP64.swift in Sources */,
 				19465F53282F998B00BB2C97 /* CachedImageProvider.swift in Sources */,
 				08F8B20E2898A7B100CB5323 /* RepeaterLayer.swift in Sources */,
 				0887347928F0CCDD00458627 /* LottieAnimationViewInitializers.swift in Sources */,
@@ -2088,8 +2137,10 @@
 				2E9C96192822F43100677516 /* Mask.swift in Sources */,
 				2E9C97632822F43100677516 /* PathElement.swift in Sources */,
 				2E9C97152822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift in Sources */,
+				6CFA108F290B12B900873A98 /* FileManager+ZIP.swift in Sources */,
 				2E9C970F2822F43100677516 /* CALayer+fillBounds.swift in Sources */,
 				2E9C95FE2822F43100677516 /* SolidLayerModel.swift in Sources */,
+				6CFA1089290B12B900873A98 /* ZipEntry.swift in Sources */,
 				2E9C970C2822F43100677516 /* ValueProviderStore.swift in Sources */,
 				6C48780028FF20140005AF07 /* DotLottieAnimation.swift in Sources */,
 				2E9C97272822F43100677516 /* StrokeAnimation.swift in Sources */,
@@ -2164,8 +2215,10 @@
 				7E48BF612860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */,
 				2E9C962E2822F43100677516 /* Glyph.swift in Sources */,
 				2E9C96D62822F43100677516 /* RenderNode.swift in Sources */,
+				6CFA1086290B12B900873A98 /* Data+Compression.swift in Sources */,
 				2E9C971E2822F43100677516 /* CombinedShapeAnimation.swift in Sources */,
 				2EAF5B0227A0798700E00531 /* PointValueProvider.swift in Sources */,
+				6CFA1080290B12B900873A98 /* ZipEntry+Serialization.swift in Sources */,
 				2EAF5AE127A0798700E00531 /* Keyframe.swift in Sources */,
 				2E9C969D2822F43100677516 /* StarNode.swift in Sources */,
 				A404605A2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */,
@@ -2189,6 +2242,7 @@
 				2E9C95D82822F43100677516 /* Ellipse.swift in Sources */,
 				2E9C97462822F43100677516 /* AnimatorNodeDebugging.swift in Sources */,
 				2E9C96DA2822F43100677516 /* AnimatorNode.swift in Sources */,
+				6CFA108D290B12B900873A98 /* Data+Serialization.swift in Sources */,
 				2E9C96232822F43100677516 /* Bundle.swift in Sources */,
 				2E9C96D12822F43100677516 /* ShapeContainerLayer.swift in Sources */,
 				2E9C97402822F43100677516 /* LayerDebugging.swift in Sources */,
@@ -2241,6 +2295,7 @@
 				2E9C97312822F43100677516 /* CustomPathAnimation.swift in Sources */,
 				2E9C97522822F43100677516 /* StringExtensions.swift in Sources */,
 				2EAF5AF127A0798700E00531 /* AnimationKeypath.swift in Sources */,
+				6CFA1084290B12B900873A98 /* ZipArchive.swift in Sources */,
 				2E9C973D2822F43100677516 /* LayerProperty.swift in Sources */,
 				2E9C95F92822F43100677516 /* Rectangle.swift in Sources */,
 				2E9C96832822F43100677516 /* FillRenderer.swift in Sources */,
@@ -2258,6 +2313,7 @@
 				2E9C96CB2822F43100677516 /* ItemsExtension.swift in Sources */,
 				2E9C95EA2822F43100677516 /* Merge.swift in Sources */,
 				2E9C96052822F43100677516 /* ImageLayerModel.swift in Sources */,
+				6CFA1093290B12B900873A98 /* ZipEntry+ZIP64.swift in Sources */,
 				19465F54282F998B00BB2C97 /* CachedImageProvider.swift in Sources */,
 				08F8B20F2898A7B100CB5323 /* RepeaterLayer.swift in Sources */,
 				0887347A28F0CCDD00458627 /* LottieAnimationViewInitializers.swift in Sources */,
@@ -2289,8 +2345,10 @@
 				2E9C961A2822F43100677516 /* Mask.swift in Sources */,
 				2E9C97642822F43100677516 /* PathElement.swift in Sources */,
 				2E9C97162822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift in Sources */,
+				6CFA1090290B12B900873A98 /* FileManager+ZIP.swift in Sources */,
 				2E9C97102822F43100677516 /* CALayer+fillBounds.swift in Sources */,
 				2E9C95FF2822F43100677516 /* SolidLayerModel.swift in Sources */,
+				6CFA108A290B12B900873A98 /* ZipEntry.swift in Sources */,
 				2E9C970D2822F43100677516 /* ValueProviderStore.swift in Sources */,
 				6C48780128FF20140005AF07 /* DotLottieAnimation.swift in Sources */,
 				2E9C97282822F43100677516 /* StrokeAnimation.swift in Sources */,
@@ -2365,8 +2423,10 @@
 				7E48BF622860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */,
 				2E9C962F2822F43100677516 /* Glyph.swift in Sources */,
 				2E9C96D72822F43100677516 /* RenderNode.swift in Sources */,
+				6CFA1087290B12B900873A98 /* Data+Compression.swift in Sources */,
 				2E9C971F2822F43100677516 /* CombinedShapeAnimation.swift in Sources */,
 				2EAF5B0327A0798700E00531 /* PointValueProvider.swift in Sources */,
+				6CFA1081290B12B900873A98 /* ZipEntry+Serialization.swift in Sources */,
 				2EAF5AE227A0798700E00531 /* Keyframe.swift in Sources */,
 				2E9C969E2822F43100677516 /* StarNode.swift in Sources */,
 				A404605B2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */,
@@ -2788,14 +2848,6 @@
 				revision = 0c2826f26d00ff5ddf2de92cb6b2139b0dd3d1ee;
 			};
 		};
-		6C48784E290151D10005AF07 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.9;
-			};
-		};
 		6D0E635D28246BD0007C5DB6 /* XCRemoteSwiftPackageReference "Difference" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/krzysztofzablocki/Difference";
@@ -2811,11 +2863,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2E804A1827A0740F006E74CB /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
-		};
-		6C48784F290151D10005AF07 /* ZIPFoundation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6C48784E290151D10005AF07 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
-			productName = ZIPFoundation;
 		};
 		6D0E635E28246BD0007C5DB6 /* Difference */ = {
 			isa = XCSwiftPackageProductDependency;
