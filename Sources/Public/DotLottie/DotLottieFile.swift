@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ZIPFoundation
 
 // MARK: - DotLottieFile
 
