@@ -267,7 +267,7 @@ extension SnapshotConfiguration {
     } else {
       return nil
     }
-      
+
     guard let animationView = animationView else { return nil }
 
     // Set up the animation view with a valid frame
