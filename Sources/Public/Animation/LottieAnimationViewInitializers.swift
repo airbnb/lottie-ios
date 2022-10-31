@@ -113,8 +113,11 @@ extension LottieAnimationView {
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared)
   {
-    let lottie = DotLottieFile.named(name, bundle: bundle, subdirectory: nil, dotLottieCache: dotLottieCache)
-    self.init(dotLottie: lottie, animationId: animationId, configuration: configuration)
+    self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
+    DotLottieFile.named(name, bundle: bundle, subdirectory: nil, closure: { result in
+      guard case Result.success(let lottie) = result else { return }
+      self.loadAnimation(animationId, from: lottie)
+    }, dotLottieCache: dotLottieCache)
   }
 
   /// Loads a Lottie from a .lottie file in a specific path on disk.
@@ -128,8 +131,11 @@ extension LottieAnimationView {
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared)
   {
-    let lottie = DotLottieFile.filepath(filePath, dotLottieCache: dotLottieCache)
-    self.init(dotLottie: lottie, animationId: animationId, configuration: configuration)
+    self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
+    DotLottieFile.filepath(filePath, closure: { result in
+      guard case Result.success(let lottie) = result else { return }
+      self.loadAnimation(animationId, from: lottie)
+    }, dotLottieCache: dotLottieCache)
   }
 
   /// Loads a Lottie file asynchronously from the URL
@@ -150,12 +156,12 @@ extension LottieAnimationView {
       closure(nil)
     } else {
       self.init(dotLottie: nil, configuration: configuration)
-      DotLottieFile.loadedFrom(url: url, closure: { lottie in
-        if let lottie = lottie {
+      DotLottieFile.loadedFrom(url: url, closure: { result in
+        switch result {
+        case .success(let lottie):
           self.loadAnimation(animationId, from: lottie)
-          closure(nil)
-        } else {
-          closure(LottieDownloadError.downloadFailed)
+        case .failure(let error):
+          closure(error)
         }
       }, dotLottieCache: dotLottieCache)
     }
@@ -174,8 +180,11 @@ extension LottieAnimationView {
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared)
   {
-    let lottie = DotLottieFile.asset(name, bundle: bundle, dotLottieCache: dotLottieCache)
-    self.init(dotLottie: lottie, animationId: animationId, configuration: configuration)
+    self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
+    DotLottieFile.asset(name, bundle: bundle, closure: { result in
+      guard case Result.success(let lottie) = result else { return }
+      self.loadAnimation(animationId, from: lottie)
+    }, dotLottieCache: dotLottieCache)
   }
 
   // MARK: Public

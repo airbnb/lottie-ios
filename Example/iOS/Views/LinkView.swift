@@ -52,11 +52,16 @@ final class LinkView: UIView, EpoxyableView {
           setContent: { context, _ in
             if let animation = LottieAnimation.named(animationName) {
               context.constrainable.animation = animation
-            } else if let lottie = DotLottieFile.named(animationName) {
-              context.constrainable.loadAnimation(from: lottie)
+              context.constrainable.contentMode = .scaleAspectFit
+              context.constrainable.currentProgress = 0.5
+            } else {
+              DotLottieFile.named(animationName) { result in
+                guard case Result.success(let lottie) = result else { return }
+                context.constrainable.loadAnimation(from: lottie)
+                context.constrainable.contentMode = .scaleAspectFit
+                context.constrainable.currentProgress = 0.5
+              }
             }
-            context.constrainable.contentMode = .scaleAspectFit
-            context.constrainable.currentProgress = 0.5
           })
       }
 

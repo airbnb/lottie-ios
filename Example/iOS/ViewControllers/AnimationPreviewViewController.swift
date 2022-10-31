@@ -33,8 +33,11 @@ class AnimationPreviewViewController: UIViewController {
 
     if let animation = LottieAnimation.named(animationName) {
       animationView.animation = animation
-    } else if let lottie = DotLottieFile.named(animationName) {
-      animationView.loadAnimation(from: lottie)
+    } else {
+      DotLottieFile.named(animationName) { [animationView] result in
+        guard case Result.success(let lottie) = result else { return }
+        animationView.loadAnimation(from: lottie)
+      }
     }
 
     animationView.contentMode = .scaleAspectFit

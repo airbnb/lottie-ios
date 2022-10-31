@@ -223,18 +223,20 @@ enum Samples {
     return animation
   }
 
-  static func dotLottie(named sampleDotLottieName: String) -> DotLottieFile? {
-    guard
-      let animation = DotLottieFile.named(
-        sampleDotLottieName,
-        bundle: .module,
-        subdirectory: Samples.directoryName)
-    else {
-      XCTFail("Could not parse Samples/\(sampleDotLottieName).lottie")
-      return nil
+  static func dotLottie(named sampleDotLottieName: String, closure: @escaping (DotLottieFile?) -> Void) {
+    DotLottieFile.named(
+      sampleDotLottieName,
+      bundle: .module,
+      subdirectory: Samples.directoryName)
+    { result in
+      switch result {
+      case .success(let lottie):
+        closure(lottie)
+      case .failure:
+        XCTFail("Could not parse Samples/\(sampleDotLottieName).lottie")
+        closure(nil)
+      }
     }
-
-    return animation
   }
 }
 
@@ -259,13 +261,15 @@ extension SnapshotConfiguration {
         configuration: configuration,
         logger: logger)
       animationView?.frame.size = animation.snapshotSize
-    } else if let lottie = Samples.dotLottie(named: sampleAnimationName) {
+    } else {
       animationView = LottieAnimationView(
-        dotLottie: lottie,
+        dotLottie: nil,
         configuration: configuration,
         logger: logger)
-    } else {
-      return nil
+      Samples.dotLottie(named: sampleAnimationName) { lottie in
+        guard let lottie = lottie else { return }
+        animationView?.loadAnimation(from: lottie)
+      }
     }
 
     guard let animationView = animationView else { return nil }
