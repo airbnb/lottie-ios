@@ -954,6 +954,7 @@
 		2E9C95232822F43000677516 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6C58BE3A291023E8005FF0E8 /* DotLottie */,
 				2E9C95242822F43000677516 /* ShapeItems */,
 				2E9C95332822F43000677516 /* Layers */,
 				2E9C953B2822F43000677516 /* Objects */,
@@ -1565,7 +1566,6 @@
 			children = (
 				6C4877E328FF20140005AF07 /* DotLottieFile.swift */,
 				6C4878592901811D0005AF07 /* DotLottieFileHelpers.swift */,
-				6C48785E2901C26D0005AF07 /* Utility */,
 				6C48785D2901A4110005AF07 /* Cache */,
 			);
 			path = DotLottie;
@@ -1580,7 +1580,7 @@
 			path = Cache;
 			sourceTree = "<group>";
 		};
-		6C48785E2901C26D0005AF07 /* Utility */ = {
+		6C58BE3A291023E8005FF0E8 /* DotLottie */ = {
 			isa = PBXGroup;
 			children = (
 				6C4877FB28FF20140005AF07 /* DotLottieManifest.swift */,
@@ -1590,7 +1590,7 @@
 				6C48785F2901D8C70005AF07 /* DotLottieImageProvider.swift */,
 				6CFA1077290B12B900873A98 /* Zip */,
 			);
-			path = Utility;
+			path = DotLottie;
 			sourceTree = "<group>";
 		};
 		6CFA1077290B12B900873A98 /* Zip */ = {

@@ -38,15 +38,13 @@ public final class DotLottieFile {
     try decompress(data: data, to: fileUrl)
   }
 
-  // MARK: Public
+  // MARK: Internal
 
   /// List of `LottieAnimation` in the file
   var animations: [LottieAnimation] = []
 
   /// Image provider for animations
   var imageProvider: AnimationImageProvider?
-
-  // MARK: Internal
 
   /// Manifest.json file loading
   var manifest: DotLottieManifest? {
