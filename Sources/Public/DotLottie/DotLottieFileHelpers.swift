@@ -30,31 +30,41 @@ extension DotLottieFile {
     closure: @escaping DotLottieLoadClosure,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
   {
-    /// Create a cache key for the lottie.
-    let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
+    DispatchQueue.global().async {
+      /// Create a cache key for the lottie.
+      let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
 
-    /// Check cache for lottie
-    if
-      let dotLottieCache = dotLottieCache,
-      let lottie = dotLottieCache.file(forKey: cacheKey)
-    {
-      /// If found, return the lottie.
-      closure(.success(lottie))
-    }
-
-    do {
-      /// Decode animation.
-      guard let data = try bundle.dotLottieData(name, subdirectory: subdirectory) else {
-        closure(.failure(DotLottieError.invalidData))
-        return
+      /// Check cache for lottie
+      if
+        let dotLottieCache = dotLottieCache,
+        let lottie = dotLottieCache.file(forKey: cacheKey)
+      {
+        DispatchQueue.main.async {
+          /// If found, return the lottie.
+          closure(.success(lottie))
+        }
       }
-      let lottie = try DotLottieFile.from(data: data, filename: name)
-      dotLottieCache?.setFile(lottie, forKey: cacheKey)
-      closure(.success(lottie))
-    } catch {
-      /// Decoding error.
-      LottieLogger.shared.warn("Error when decoding lottie \"\(name)\": \(error)")
-      closure(.failure(error))
+
+      do {
+        /// Decode animation.
+        guard let data = try bundle.dotLottieData(name, subdirectory: subdirectory) else {
+          DispatchQueue.main.async {
+            closure(.failure(DotLottieError.invalidData))
+          }
+          return
+        }
+        let lottie = try DotLottieFile.from(data: data, filename: name)
+        dotLottieCache?.setFile(lottie, forKey: cacheKey)
+        DispatchQueue.main.async {
+          closure(.success(lottie))
+        }
+      } catch {
+        /// Decoding error.
+        LottieLogger.shared.warn("Error when decoding lottie \"\(name)\": \(error)")
+        DispatchQueue.main.async {
+          closure(.failure(error))
+        }
+      }
     }
   }
 
@@ -67,24 +77,32 @@ extension DotLottieFile {
     closure: @escaping DotLottieLoadClosure,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
   {
-    /// Check cache for lottie
-    if
-      let dotLottieCache = dotLottieCache,
-      let lottie = dotLottieCache.file(forKey: filepath)
-    {
-      closure(.success(lottie))
-    }
+    DispatchQueue.global().async {
+      /// Check cache for lottie
+      if
+        let dotLottieCache = dotLottieCache,
+        let lottie = dotLottieCache.file(forKey: filepath)
+      {
+        DispatchQueue.main.async {
+          closure(.success(lottie))
+        }
+      }
 
-    do {
-      /// Decode the lottie.
-      let url = URL(fileURLWithPath: filepath)
-      let data = try Data(contentsOf: url)
-      let lottie = try DotLottieFile.from(data: data, filename: url.deletingPathExtension().lastPathComponent)
-      dotLottieCache?.setFile(lottie, forKey: filepath)
-      closure(.success(lottie))
-    } catch {
-      /// Decoding Error.
-      closure(.failure(error))
+      do {
+        /// Decode the lottie.
+        let url = URL(fileURLWithPath: filepath)
+        let data = try Data(contentsOf: url)
+        let lottie = try DotLottieFile.from(data: data, filename: url.deletingPathExtension().lastPathComponent)
+        dotLottieCache?.setFile(lottie, forKey: filepath)
+        DispatchQueue.main.async {
+          closure(.success(lottie))
+        }
+      } catch {
+        /// Decoding Error.
+        DispatchQueue.main.async {
+          closure(.failure(error))
+        }
+      }
     }
   }
 
@@ -99,32 +117,42 @@ extension DotLottieFile {
     closure: @escaping DotLottieLoadClosure,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
   {
-    /// Create a cache key for the lottie.
-    let cacheKey = bundle.bundlePath + "/" + name
+    DispatchQueue.global().async {
+      /// Create a cache key for the lottie.
+      let cacheKey = bundle.bundlePath + "/" + name
 
-    /// Check cache for lottie
-    if
-      let dotLottieCache = dotLottieCache,
-      let lottie = dotLottieCache.file(forKey: cacheKey)
-    {
-      /// If found, return the lottie.
-      closure(.success(lottie))
-    }
+      /// Check cache for lottie
+      if
+        let dotLottieCache = dotLottieCache,
+        let lottie = dotLottieCache.file(forKey: cacheKey)
+      {
+        /// If found, return the lottie.
+        DispatchQueue.main.async {
+          closure(.success(lottie))
+        }
+      }
 
-    /// Load data from Asset
-    guard let data = Data.jsonData(from: name, in: bundle) else {
-      closure(.failure(DotLottieError.invalidData))
-      return
-    }
+      /// Load data from Asset
+      guard let data = Data.jsonData(from: name, in: bundle) else {
+        DispatchQueue.main.async {
+          closure(.failure(DotLottieError.invalidData))
+        }
+        return
+      }
 
-    do {
-      /// Decode lottie.
-      let lottie = try DotLottieFile.from(data: data, filename: name)
-      dotLottieCache?.setFile(lottie, forKey: cacheKey)
-      closure(.success(lottie))
-    } catch {
-      /// Decoding error.
-      closure(.failure(error))
+      do {
+        /// Decode lottie.
+        let lottie = try DotLottieFile.from(data: data, filename: name)
+        dotLottieCache?.setFile(lottie, forKey: cacheKey)
+        DispatchQueue.main.async {
+          closure(.success(lottie))
+        }
+      } catch {
+        /// Decoding error.
+        DispatchQueue.main.async {
+          closure(.failure(error))
+        }
+      }
     }
   }
 
