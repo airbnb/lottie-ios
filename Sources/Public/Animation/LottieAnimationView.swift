@@ -126,7 +126,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)
   {
-    animation = dotLottie?.animation(id: animationId)
+    animation = dotLottie?.animation(for: animationId)
     imageProvider = dotLottie?.imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = textProvider
     self.fontProvider = fontProvider
@@ -440,7 +440,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     _ animationId: String? = nil,
     from dotLottieFile: DotLottieFile)
   {
-    guard let animation = dotLottieFile.animation(id: animationId) else { return }
+    guard let animation = dotLottieFile.animation(for: animationId) else { return }
     if let configuration = animation.dotLottieConfiguration {
       loopMode = configuration.loopMode
       animationSpeed = CGFloat(configuration.speed)

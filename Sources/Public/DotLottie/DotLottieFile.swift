@@ -47,37 +47,33 @@ public final class DotLottieFile {
   var imageProvider: AnimationImageProvider?
 
   /// Manifest.json file loading
-  var manifest: DotLottieManifest? {
+  lazy var manifest: DotLottieManifest? = {
     let path = fileUrl.appendingPathComponent(DotLottieFile.manifestFileName)
     return try? DotLottieManifest.load(from: path)
-  }
+  }()
 
   /// Animation url for main animation
-  var animationUrl: URL? {
+  lazy var animationUrl: URL? = {
     guard let animationId = manifest?.animations.first?.id else { return nil }
     let dotLottieJson = "\(DotLottieFile.animationsFolderName)/\(animationId).json"
     return fileUrl.appendingPathComponent(dotLottieJson)
-  }
+  }()
 
   /// Animations folder url
-  var animationsUrl: URL {
-    fileUrl.appendingPathComponent("\(DotLottieFile.animationsFolderName)")
-  }
+  lazy var animationsUrl: URL = fileUrl.appendingPathComponent("\(DotLottieFile.animationsFolderName)")
 
   /// All files in animations folder
-  var animationUrls: [URL] {
+  lazy var animationUrls: [URL] = {
     FileManager.default.urls(for: animationsUrl) ?? []
-  }
+  }()
 
   /// Images folder url
-  var imagesUrl: URL {
-    fileUrl.appendingPathComponent("\(DotLottieFile.imagesFolderName)")
-  }
+  lazy var imagesUrl: URL = fileUrl.appendingPathComponent("\(DotLottieFile.imagesFolderName)")
 
   /// All images in images folder
-  var imageUrls: [URL] {
+  lazy var imageUrls: [URL] = {
     FileManager.default.urls(for: imagesUrl) ?? []
-  }
+  }()
 
   // MARK: Private
 

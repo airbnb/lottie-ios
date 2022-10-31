@@ -182,7 +182,7 @@ extension DotLottieFile {
   /// - Parameter id: id to animation. Specified in .lottie file manifest. Optional
   /// Defaults to first animation
   /// - Returns: LottieAnimation with id. Optional
-  public func animation(id: String? = nil) -> LottieAnimation? {
+  public func animation(for id: String? = nil) -> LottieAnimation? {
     if let id = id {
       return animations.first(where: { $0.dotLottieConfiguration?.id == id })
     } else {
