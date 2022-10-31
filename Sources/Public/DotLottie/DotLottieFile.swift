@@ -14,19 +14,6 @@ public final class DotLottieFile {
 
   // MARK: Lifecycle
 
-  /// Loads `DotLottie` from `URL` containing .lottie file.
-  ///
-  /// - Parameters:
-  ///  - url: URL to .lottie file
-  ///  - Returns: Deserialized `DotLottie`. Optional.
-  init(url: URL) throws {
-    fileUrl = DotLottieUtils.tempDirectoryURL.appendingPathComponent(url.deletingPathExtension().lastPathComponent)
-    guard url.isDotLottie else {
-      throw DotLottieError.invalidFileFormat
-    }
-    try decompress(from: url, to: fileUrl)
-  }
-
   /// Loads `DotLottie` from `Data` object containing a compressed animation.
   ///
   /// - Parameters:
@@ -133,11 +120,11 @@ extension String {
     lastPathComponent().removingPathExtension()
   }
 
-  fileprivate func lastPathComponent() -> String {
+  // MARK: Private
+
+  private func lastPathComponent() -> String {
     (self as NSString).lastPathComponent
   }
-
-  // MARK: Private
 
   private func removingPathExtension() -> String {
     (self as NSString).deletingPathExtension
