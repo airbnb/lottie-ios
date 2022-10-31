@@ -48,17 +48,17 @@ extension ZipEntry.LocalFileHeader {
   // MARK: Internal
 
   var data: Data {
-    var localFileHeaderSignature = self.localFileHeaderSignature
-    var versionNeededToExtract = self.versionNeededToExtract
-    var generalPurposeBitFlag = self.generalPurposeBitFlag
-    var compressionMethod = self.compressionMethod
-    var lastModFileTime = self.lastModFileTime
-    var lastModFileDate = self.lastModFileDate
-    var crc32 = self.crc32
-    var compressedSize = self.compressedSize
-    var uncompressedSize = self.uncompressedSize
-    var fileNameLength = self.fileNameLength
-    var extraFieldLength = self.extraFieldLength
+    var localFileHeaderSignature = localFileHeaderSignature
+    var versionNeededToExtract = versionNeededToExtract
+    var generalPurposeBitFlag = generalPurposeBitFlag
+    var compressionMethod = compressionMethod
+    var lastModFileTime = lastModFileTime
+    var lastModFileDate = lastModFileDate
+    var crc32 = crc32
+    var compressedSize = compressedSize
+    var uncompressedSize = uncompressedSize
+    var fileNameLength = fileNameLength
+    var extraFieldLength = extraFieldLength
     var data = Data()
     withUnsafePointer(to: &localFileHeaderSignature, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
     withUnsafePointer(to: &versionNeededToExtract, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
@@ -125,23 +125,23 @@ extension ZipEntry.CentralDirectoryStructure {
   // MARK: Internal
 
   var data: Data {
-    var centralDirectorySignature = self.centralDirectorySignature
-    var versionMadeBy = self.versionMadeBy
-    var versionNeededToExtract = self.versionNeededToExtract
-    var generalPurposeBitFlag = self.generalPurposeBitFlag
-    var compressionMethod = self.compressionMethod
-    var lastModFileTime = self.lastModFileTime
-    var lastModFileDate = self.lastModFileDate
-    var crc32 = self.crc32
-    var compressedSize = self.compressedSize
-    var uncompressedSize = self.uncompressedSize
-    var fileNameLength = self.fileNameLength
-    var extraFieldLength = self.extraFieldLength
-    var fileCommentLength = self.fileCommentLength
-    var diskNumberStart = self.diskNumberStart
-    var internalFileAttributes = self.internalFileAttributes
-    var externalFileAttributes = self.externalFileAttributes
-    var relativeOffsetOfLocalHeader = self.relativeOffsetOfLocalHeader
+    var centralDirectorySignature = centralDirectorySignature
+    var versionMadeBy = versionMadeBy
+    var versionNeededToExtract = versionNeededToExtract
+    var generalPurposeBitFlag = generalPurposeBitFlag
+    var compressionMethod = compressionMethod
+    var lastModFileTime = lastModFileTime
+    var lastModFileDate = lastModFileDate
+    var crc32 = crc32
+    var compressedSize = compressedSize
+    var uncompressedSize = uncompressedSize
+    var fileNameLength = fileNameLength
+    var extraFieldLength = extraFieldLength
+    var fileCommentLength = fileCommentLength
+    var diskNumberStart = diskNumberStart
+    var internalFileAttributes = internalFileAttributes
+    var externalFileAttributes = externalFileAttributes
+    var relativeOffsetOfLocalHeader = relativeOffsetOfLocalHeader
     var data = Data()
     withUnsafePointer(to: &centralDirectorySignature, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
     withUnsafePointer(to: &versionMadeBy, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })

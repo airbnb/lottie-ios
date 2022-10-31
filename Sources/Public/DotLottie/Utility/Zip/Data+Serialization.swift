@@ -76,7 +76,7 @@ extension Data {
   }
 
   func scanValue<T>(start: Int) -> T {
-    let subdata = self.subdata(in: start..<start + MemoryLayout<T>.size)
+    let subdata = subdata(in: start..<start + MemoryLayout<T>.size)
     #if swift(>=5.0)
     return subdata.withUnsafeBytes { $0.load(as: T.self) }
     #else

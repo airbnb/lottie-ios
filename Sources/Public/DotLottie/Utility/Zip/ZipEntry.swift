@@ -165,7 +165,7 @@ struct ZipEntry: Equatable {
 
   /// The combined size of the local header, the data and the optional data descriptor.
   var localSize: UInt64 {
-    let localFileHeader = self.localFileHeader
+    let localFileHeader = localFileHeader
     var extraDataLength = Int(localFileHeader.fileNameLength)
     extraDataLength += Int(localFileHeader.extraFieldLength)
     var size = UInt64(LocalFileHeader.size + extraDataLength)

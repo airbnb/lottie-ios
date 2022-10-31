@@ -252,14 +252,13 @@ extension SnapshotConfiguration {
       snapshotConfiguration.shouldSnapshot(using: configuration)
     else { return nil }
 
-    var animationView: LottieAnimationView!
-
+    var animationView: LottieAnimationView?
     if let animation = Samples.animation(named: sampleAnimationName) {
       animationView = LottieAnimationView(
         animation: animation,
         configuration: configuration,
         logger: logger)
-      animationView.frame.size = animation.snapshotSize
+      animationView?.frame.size = animation.snapshotSize
     } else if let lottie = Samples.dotLottie(named: sampleAnimationName) {
       animationView = LottieAnimationView(
         dotLottie: lottie,
@@ -268,6 +267,8 @@ extension SnapshotConfiguration {
     } else {
       return nil
     }
+      
+    guard let animationView = animationView else { return nil }
 
     // Set up the animation view with a valid frame
     // so the geometry is correct when setting up the `CAAnimation`s

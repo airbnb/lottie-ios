@@ -135,12 +135,12 @@ extension ZipEntry.ZIP64ExtendedInformation {
   }
 
   var data: Data {
-    var headerID = self.headerID
-    var dataSize = self.dataSize
-    var uncompressedSize = self.uncompressedSize
-    var compressedSize = self.compressedSize
+    var headerID = headerID
+    var dataSize = dataSize
+    var uncompressedSize = uncompressedSize
+    var compressedSize = compressedSize
     var relativeOffsetOfLFH = relativeOffsetOfLocalHeader
-    var diskNumberStart = self.diskNumberStart
+    var diskNumberStart = diskNumberStart
     var data = Data()
     withUnsafePointer(to: &headerID, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
     withUnsafePointer(to: &dataSize, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })

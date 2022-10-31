@@ -372,13 +372,13 @@ extension ZipArchive.ZIP64EndOfCentralDirectoryRecord {
   // MARK: Internal
 
   var data: Data {
-    var zip64EOCDRecordSignature = self.zip64EOCDRecordSignature
+    var zip64EOCDRecordSignature = zip64EOCDRecordSignature
     var sizeOfZIP64EOCDRecord = sizeOfZIP64EndOfCentralDirectoryRecord
-    var versionMadeBy = self.versionMadeBy
-    var versionNeededToExtract = self.versionNeededToExtract
-    var numberOfDisk = self.numberOfDisk
-    var numberOfDiskStart = self.numberOfDiskStart
-    var totalNumberOfEntriesOnDisk = self.totalNumberOfEntriesOnDisk
+    var versionMadeBy = versionMadeBy
+    var versionNeededToExtract = versionNeededToExtract
+    var numberOfDisk = numberOfDisk
+    var numberOfDiskStart = numberOfDiskStart
+    var totalNumberOfEntriesOnDisk = totalNumberOfEntriesOnDisk
     var totalNumberOfEntriesInCD = totalNumberOfEntriesInCentralDirectory
     var sizeOfCD = sizeOfCentralDirectory
     var offsetToStartOfCD = offsetToStartOfCentralDirectory
@@ -414,10 +414,10 @@ extension ZipArchive.ZIP64EndOfCentralDirectoryLocator {
   // MARK: Internal
 
   var data: Data {
-    var zip64EOCDLocatorSignature = self.zip64EOCDLocatorSignature
+    var zip64EOCDLocatorSignature = zip64EOCDLocatorSignature
     var numberOfDiskWithZIP64EOCD = numberOfDiskWithZIP64EOCDRecordStart
     var offsetOfZIP64EOCDRecord = relativeOffsetOfZIP64EOCDRecord
-    var totalNumberOfDisk = self.totalNumberOfDisk
+    var totalNumberOfDisk = totalNumberOfDisk
     var data = Data()
     withUnsafePointer(to: &zip64EOCDLocatorSignature, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
     withUnsafePointer(to: &numberOfDiskWithZIP64EOCD, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
@@ -451,13 +451,13 @@ extension ZipArchive.EndOfCentralDirectoryRecord {
 
   var data: Data {
     var endOfCDSignature = endOfCentralDirectorySignature
-    var numberOfDisk = self.numberOfDisk
-    var numberOfDiskStart = self.numberOfDiskStart
-    var totalNumberOfEntriesOnDisk = self.totalNumberOfEntriesOnDisk
+    var numberOfDisk = numberOfDisk
+    var numberOfDiskStart = numberOfDiskStart
+    var totalNumberOfEntriesOnDisk = totalNumberOfEntriesOnDisk
     var totalNumberOfEntriesInCD = totalNumberOfEntriesInCentralDirectory
-    var sizeOfCentralDirectory = self.sizeOfCentralDirectory
+    var sizeOfCentralDirectory = sizeOfCentralDirectory
     var offsetToStartOfCD = offsetToStartOfCentralDirectory
-    var zipFileCommentLength = self.zipFileCommentLength
+    var zipFileCommentLength = zipFileCommentLength
     var data = Data()
     withUnsafePointer(to: &endOfCDSignature, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
     withUnsafePointer(to: &numberOfDisk, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
