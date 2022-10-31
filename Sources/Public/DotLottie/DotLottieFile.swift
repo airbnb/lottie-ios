@@ -41,10 +41,10 @@ public final class DotLottieFile {
   // MARK: Public
 
   /// List of `LottieAnimation` in the file
-  public var animations: [LottieAnimation] = []
+  var animations: [LottieAnimation] = []
 
   /// Image provider for animations
-  public var imageProvider: AnimationImageProvider?
+  var imageProvider: AnimationImageProvider?
 
   // MARK: Internal
 
