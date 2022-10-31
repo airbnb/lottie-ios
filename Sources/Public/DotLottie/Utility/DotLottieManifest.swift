@@ -1,9 +1,8 @@
 //
 // DotLottieManifest.swift
-// LottieFiles
+// Lottie
 //
 // Created by Evandro Harrison Hoffmann on 27/06/2020.
-// Copyright © 2020 LottieFiles. All rights reserved.
 //
 
 import Foundation
