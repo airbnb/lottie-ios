@@ -114,10 +114,10 @@ extension LottieAnimationView {
     configuration: LottieConfiguration = .shared)
   {
     self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
-    DotLottieFile.named(name, bundle: bundle, subdirectory: nil, closure: { result in
+    DotLottieFile.named(name, bundle: bundle, dotLottieCache: dotLottieCache) { result in
       guard case Result.success(let lottie) = result else { return }
       self.loadAnimation(animationId, from: lottie)
-    }, dotLottieCache: dotLottieCache)
+    }
   }
 
   /// Loads a Lottie from a .lottie file in a specific path on disk.
@@ -132,10 +132,10 @@ extension LottieAnimationView {
     configuration: LottieConfiguration = .shared)
   {
     self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
-    DotLottieFile.filepath(filePath, closure: { result in
+    DotLottieFile.loadedFrom(filepath: filePath, dotLottieCache: dotLottieCache) { result in
       guard case Result.success(let lottie) = result else { return }
       self.loadAnimation(animationId, from: lottie)
-    }, dotLottieCache: dotLottieCache)
+    }
   }
 
   /// Loads a Lottie file asynchronously from the URL
@@ -156,14 +156,14 @@ extension LottieAnimationView {
       closure(nil)
     } else {
       self.init(dotLottie: nil, configuration: configuration)
-      DotLottieFile.loadedFrom(url: url, closure: { result in
+      DotLottieFile.loadedFrom(url: url, dotLottieCache: dotLottieCache) { result in
         switch result {
         case .success(let lottie):
           self.loadAnimation(animationId, from: lottie)
         case .failure(let error):
           closure(error)
         }
-      }, dotLottieCache: dotLottieCache)
+      }
     }
   }
 
@@ -181,10 +181,10 @@ extension LottieAnimationView {
     configuration: LottieConfiguration = .shared)
   {
     self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
-    DotLottieFile.asset(name, bundle: bundle, closure: { result in
+    DotLottieFile.asset(named: name, bundle: bundle, dotLottieCache: dotLottieCache) { result in
       guard case Result.success(let lottie) = result else { return }
       self.loadAnimation(animationId, from: lottie)
-    }, dotLottieCache: dotLottieCache)
+    }
   }
 
   // MARK: Public

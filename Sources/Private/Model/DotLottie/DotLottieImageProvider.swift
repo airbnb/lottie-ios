@@ -14,7 +14,7 @@ import AppKit
 
 // MARK: - DotLottieImageProvider
 
-/// Provides an image for a lottie animation from a provided Bundle.
+/// An image provide that loads the images from a DotLottieFile into memory
 class DotLottieImageProvider: AnimationImageProvider {
 
   // MARK: Lifecycle
@@ -38,12 +38,12 @@ class DotLottieImageProvider: AnimationImageProvider {
   let filepath: URL
 
   func imageForAsset(asset: ImageAsset) -> CGImage? {
-    imageCache.object(forKey: asset.name as NSString)
+    images[asset.name]
   }
 
   // MARK: Private
 
-  private var imageCache: NSCache<NSString, CGImage> = .init()
+  private var images = [String: CGImage]()
 
   private func loadImages() {
     filepath.urls.forEach {
@@ -52,14 +52,14 @@ class DotLottieImageProvider: AnimationImageProvider {
         let data = try? Data(contentsOf: $0),
         let image = UIImage(data: data)?.cgImage
       {
-        imageCache.setObject(image, forKey: $0.lastPathComponent as NSString)
+        images[$0.lastPathComponent] = image
       }
       #elseif os(macOS)
       if
         let data = try? Data(contentsOf: $0),
         let image = NSImage(data: data)?.lottie_CGImage
       {
-        imageCache.setObject(image, forKey: $0.lastPathComponent as NSString)
+        images[$0.lastPathComponent] = image
       }
       #endif
     }

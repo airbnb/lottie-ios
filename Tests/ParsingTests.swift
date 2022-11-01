@@ -16,6 +16,8 @@ final class ParsingTests: XCTestCase {
 
   func testParsingIsTheSameForBothImplementations() throws {
     for url in Samples.sampleAnimationURLs {
+      guard url.pathExtension == "json" else { continue }
+
       do {
         let data = try Data(contentsOf: url)
         let codableAnimation = try LottieAnimation.from(data: data, strategy: .legacyCodable)
