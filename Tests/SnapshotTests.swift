@@ -222,6 +222,22 @@ enum Samples {
 
     return animation
   }
+
+  static func dotLottie(named sampleDotLottieName: String, closure: @escaping (DotLottieFile?) -> Void) {
+    DotLottieFile.named(
+      sampleDotLottieName,
+      bundle: .module,
+      subdirectory: Samples.directoryName)
+    { result in
+      switch result {
+      case .success(let lottie):
+        closure(lottie)
+      case .failure:
+        XCTFail("Could not parse Samples/\(sampleDotLottieName).lottie")
+        closure(nil)
+      }
+    }
+  }
 }
 
 extension SnapshotConfiguration {
@@ -235,18 +251,31 @@ extension SnapshotConfiguration {
     let snapshotConfiguration = SnapshotConfiguration.forSample(named: sampleAnimationName)
 
     guard
-      snapshotConfiguration.shouldSnapshot(using: configuration),
-      let animation = Samples.animation(named: sampleAnimationName)
+      snapshotConfiguration.shouldSnapshot(using: configuration)
     else { return nil }
 
-    let animationView = LottieAnimationView(
-      animation: animation,
-      configuration: configuration,
-      logger: logger)
+    var animationView: LottieAnimationView?
+    if let animation = Samples.animation(named: sampleAnimationName) {
+      animationView = LottieAnimationView(
+        animation: animation,
+        configuration: configuration,
+        logger: logger)
+      animationView?.frame.size = animation.snapshotSize
+    } else {
+      animationView = LottieAnimationView(
+        dotLottie: nil,
+        configuration: configuration,
+        logger: logger)
+      Samples.dotLottie(named: sampleAnimationName) { lottie in
+        guard let lottie = lottie else { return }
+        animationView?.loadAnimation(from: lottie)
+      }
+    }
+
+    guard let animationView = animationView else { return nil }
 
     // Set up the animation view with a valid frame
     // so the geometry is correct when setting up the `CAAnimation`s
-    animationView.frame.size = animation.snapshotSize
 
     for (keypath, customValueProvider) in snapshotConfiguration.customValueProviders {
       animationView.setValueProvider(customValueProvider, keypath: keypath)
