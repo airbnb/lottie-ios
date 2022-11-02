@@ -558,6 +558,15 @@
 		2EAF5B0527A0798700E00531 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */; };
 		2EAF5B0627A0798700E00531 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */; };
 		36E57EAC28AF7ADF00B7EFDA /* HardcodedTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E57EAB28AF7ADF00B7EFDA /* HardcodedTextProvider.swift */; };
+		57210913291073E400169699 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57210912291073E400169699 /* RoundedCorners.swift */; };
+		57210914291073E400169699 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57210912291073E400169699 /* RoundedCorners.swift */; };
+		57210915291073E400169699 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57210912291073E400169699 /* RoundedCorners.swift */; };
+		5721091B2910874A00169699 /* RoundedCornersNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721091A2910874A00169699 /* RoundedCornersNode.swift */; };
+		5721091C2910874A00169699 /* RoundedCornersNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721091A2910874A00169699 /* RoundedCornersNode.swift */; };
+		5721091D2910874A00169699 /* RoundedCornersNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721091A2910874A00169699 /* RoundedCornersNode.swift */; };
+		5721091F29119F3100169699 /* BezierPathRoundExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721091E29119F3100169699 /* BezierPathRoundExtension.swift */; };
+		5721092029119F3100169699 /* BezierPathRoundExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721091E29119F3100169699 /* BezierPathRoundExtension.swift */; };
+		5721092129119F3100169699 /* BezierPathRoundExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721091E29119F3100169699 /* BezierPathRoundExtension.swift */; };
 		6C4877FF28FF20140005AF07 /* DotLottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877E228FF20140005AF07 /* DotLottieAnimation.swift */; };
 		6C48780028FF20140005AF07 /* DotLottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877E228FF20140005AF07 /* DotLottieAnimation.swift */; };
 		6C48780128FF20140005AF07 /* DotLottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4877E228FF20140005AF07 /* DotLottieAnimation.swift */; };
@@ -844,6 +853,9 @@
 		2EAF59F027A0798700E00531 /* PointValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointValueProvider.swift; sourceTree = "<group>"; };
 		2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationFontProvider.swift; sourceTree = "<group>"; };
 		36E57EAB28AF7ADF00B7EFDA /* HardcodedTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcodedTextProvider.swift; sourceTree = "<group>"; };
+		57210912291073E400169699 /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
+		5721091A2910874A00169699 /* RoundedCornersNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornersNode.swift; sourceTree = "<group>"; };
+		5721091E29119F3100169699 /* BezierPathRoundExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierPathRoundExtension.swift; sourceTree = "<group>"; };
 		6C4877E228FF20140005AF07 /* DotLottieAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotLottieAnimation.swift; sourceTree = "<group>"; };
 		6C4877E328FF20140005AF07 /* DotLottieFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotLottieFile.swift; sourceTree = "<group>"; };
 		6C4877E428FF20140005AF07 /* DotLottieUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotLottieUtils.swift; sourceTree = "<group>"; };
@@ -995,6 +1007,7 @@
 				2E9C95302822F43000677516 /* Stroke.swift */,
 				2E9C95312822F43000677516 /* Rectangle.swift */,
 				2E9C95322822F43000677516 /* Star.swift */,
+				57210912291073E400169699 /* RoundedCorners.swift */,
 			);
 			path = ShapeItems;
 			sourceTree = "<group>";
@@ -1141,6 +1154,7 @@
 			isa = PBXGroup;
 			children = (
 				2E9C95682822F43000677516 /* TrimPathNode.swift */,
+				5721091A2910874A00169699 /* RoundedCornersNode.swift */,
 			);
 			path = ModifierNodes;
 			sourceTree = "<group>";
@@ -1379,6 +1393,7 @@
 				2E9C95CC2822F43100677516 /* CurveVertex.swift */,
 				2E9C95CD2822F43100677516 /* VectorsExtensions.swift */,
 				6DB3BDBB28245A14002A276D /* CGPointExtension.swift */,
+				5721091E29119F3100169699 /* BezierPathRoundExtension.swift */,
 			);
 			path = Primitives;
 			sourceTree = "<group>";
@@ -1900,6 +1915,7 @@
 				2E9C97022822F43100677516 /* PreCompLayer.swift in Sources */,
 				2E9C96EA2822F43100677516 /* SolidLayer.swift in Sources */,
 				2EAF5AA127A0798700E00531 /* AnimationSubview.macOS.swift in Sources */,
+				57210913291073E400169699 /* RoundedCorners.swift in Sources */,
 				2E9C96C62822F43100677516 /* GroupInterpolator.swift in Sources */,
 				2E9C96F02822F43100677516 /* TransformLayer.swift in Sources */,
 				2E9C96332822F43100677516 /* Font.swift in Sources */,
@@ -1914,6 +1930,7 @@
 				2E9C974A2822F43100677516 /* CGColor+RGB.swift in Sources */,
 				2E9C96572822F43100677516 /* ShapeCompositionLayer.swift in Sources */,
 				2E9C96F32822F43100677516 /* AnimationLayer.swift in Sources */,
+				5721091B2910874A00169699 /* RoundedCornersNode.swift in Sources */,
 				2E9C95FA2822F43100677516 /* Star.swift in Sources */,
 				2E9C961E2822F43100677516 /* KeyedDecodingContainerExtensions.swift in Sources */,
 				2E9C96512822F43100677516 /* PreCompositionLayer.swift in Sources */,
@@ -1991,6 +2008,7 @@
 				2E9C96A82822F43100677516 /* FillNode.swift in Sources */,
 				2EAF5ACB27A0798700E00531 /* LottieAnimationViewBase.swift in Sources */,
 				2E9C96CC2822F43100677516 /* ShapeRenderLayer.swift in Sources */,
+				5721091F29119F3100169699 /* BezierPathRoundExtension.swift in Sources */,
 				6C48780228FF20140005AF07 /* DotLottieFile.swift in Sources */,
 				2EAF5AEC27A0798700E00531 /* LottieLogger.swift in Sources */,
 				2E9C976E2822F43100677516 /* KeyframeExtensions.swift in Sources */,
@@ -2132,6 +2150,7 @@
 				2E9C97032822F43100677516 /* PreCompLayer.swift in Sources */,
 				2E9C96EB2822F43100677516 /* SolidLayer.swift in Sources */,
 				2EAF5AA227A0798700E00531 /* AnimationSubview.macOS.swift in Sources */,
+				57210914291073E400169699 /* RoundedCorners.swift in Sources */,
 				2E9C96C72822F43100677516 /* GroupInterpolator.swift in Sources */,
 				2E9C96F12822F43100677516 /* TransformLayer.swift in Sources */,
 				2E9C96342822F43100677516 /* Font.swift in Sources */,
@@ -2146,6 +2165,7 @@
 				2E9C974B2822F43100677516 /* CGColor+RGB.swift in Sources */,
 				2E9C96582822F43100677516 /* ShapeCompositionLayer.swift in Sources */,
 				2E9C96F42822F43100677516 /* AnimationLayer.swift in Sources */,
+				5721091C2910874A00169699 /* RoundedCornersNode.swift in Sources */,
 				2E9C95FB2822F43100677516 /* Star.swift in Sources */,
 				2E9C961F2822F43100677516 /* KeyedDecodingContainerExtensions.swift in Sources */,
 				2E9C96522822F43100677516 /* PreCompositionLayer.swift in Sources */,
@@ -2223,6 +2243,7 @@
 				2E9C96A92822F43100677516 /* FillNode.swift in Sources */,
 				2EAF5ACC27A0798700E00531 /* LottieAnimationViewBase.swift in Sources */,
 				2E9C96CD2822F43100677516 /* ShapeRenderLayer.swift in Sources */,
+				5721092029119F3100169699 /* BezierPathRoundExtension.swift in Sources */,
 				6C48780328FF20140005AF07 /* DotLottieFile.swift in Sources */,
 				2EAF5AED27A0798700E00531 /* LottieLogger.swift in Sources */,
 				2E9C976F2822F43100677516 /* KeyframeExtensions.swift in Sources */,
@@ -2342,6 +2363,7 @@
 				2E9C97042822F43100677516 /* PreCompLayer.swift in Sources */,
 				2E9C96EC2822F43100677516 /* SolidLayer.swift in Sources */,
 				2EAF5AA327A0798700E00531 /* AnimationSubview.macOS.swift in Sources */,
+				57210915291073E400169699 /* RoundedCorners.swift in Sources */,
 				2E9C96C82822F43100677516 /* GroupInterpolator.swift in Sources */,
 				2E9C96F22822F43100677516 /* TransformLayer.swift in Sources */,
 				2E9C96352822F43100677516 /* Font.swift in Sources */,
@@ -2356,6 +2378,7 @@
 				2E9C974C2822F43100677516 /* CGColor+RGB.swift in Sources */,
 				2E9C96592822F43100677516 /* ShapeCompositionLayer.swift in Sources */,
 				2E9C96F52822F43100677516 /* AnimationLayer.swift in Sources */,
+				5721091D2910874A00169699 /* RoundedCornersNode.swift in Sources */,
 				2E9C95FC2822F43100677516 /* Star.swift in Sources */,
 				2E9C96202822F43100677516 /* KeyedDecodingContainerExtensions.swift in Sources */,
 				2E9C96532822F43100677516 /* PreCompositionLayer.swift in Sources */,
@@ -2434,6 +2457,7 @@
 				2EAF5ACD27A0798700E00531 /* LottieAnimationViewBase.swift in Sources */,
 				2E9C96CE2822F43100677516 /* ShapeRenderLayer.swift in Sources */,
 				6C48780428FF20140005AF07 /* DotLottieFile.swift in Sources */,
+				5721092129119F3100169699 /* BezierPathRoundExtension.swift in Sources */,
 				2EAF5AEE27A0798700E00531 /* LottieLogger.swift in Sources */,
 				2E9C97702822F43100677516 /* KeyframeExtensions.swift in Sources */,
 				2E9C963B2822F43100677516 /* PrecompAsset.swift in Sources */,
