@@ -564,6 +564,9 @@
 		5721091B2910874A00169699 /* RoundedCornersNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721091A2910874A00169699 /* RoundedCornersNode.swift */; };
 		5721091C2910874A00169699 /* RoundedCornersNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721091A2910874A00169699 /* RoundedCornersNode.swift */; };
 		5721091D2910874A00169699 /* RoundedCornersNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721091A2910874A00169699 /* RoundedCornersNode.swift */; };
+		5721091F29119F3100169699 /* BezierPathRoundExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721091E29119F3100169699 /* BezierPathRoundExtension.swift */; };
+		5721092029119F3100169699 /* BezierPathRoundExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721091E29119F3100169699 /* BezierPathRoundExtension.swift */; };
+		5721092129119F3100169699 /* BezierPathRoundExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721091E29119F3100169699 /* BezierPathRoundExtension.swift */; };
 		6D0E635F28246BD0007C5DB6 /* Difference in Frameworks */ = {isa = PBXBuildFile; productRef = 6D0E635E28246BD0007C5DB6 /* Difference */; };
 		6D99D6432823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
 		6D99D6442823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */; };
@@ -804,6 +807,7 @@
 		36E57EAB28AF7ADF00B7EFDA /* HardcodedTextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcodedTextProvider.swift; sourceTree = "<group>"; };
 		57210912291073E400169699 /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
 		5721091A2910874A00169699 /* RoundedCornersNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornersNode.swift; sourceTree = "<group>"; };
+		5721091E29119F3100169699 /* BezierPathRoundExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierPathRoundExtension.swift; sourceTree = "<group>"; };
 		6D99D6422823790700E5205B /* LegacyGradientFillRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyGradientFillRenderer.swift; sourceTree = "<group>"; };
 		6DB3BDB528243FA5002A276D /* ValueProvidersTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ValueProvidersTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		6DB3BDB7282454A6002A276D /* DictionaryInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryInitializable.swift; sourceTree = "<group>"; };
@@ -1324,6 +1328,7 @@
 				2E9C95CC2822F43100677516 /* CurveVertex.swift */,
 				2E9C95CD2822F43100677516 /* VectorsExtensions.swift */,
 				6DB3BDBB28245A14002A276D /* CGPointExtension.swift */,
+				5721091E29119F3100169699 /* BezierPathRoundExtension.swift */,
 			);
 			path = Primitives;
 			sourceTree = "<group>";
@@ -1876,6 +1881,7 @@
 				2E9C96A82822F43100677516 /* FillNode.swift in Sources */,
 				2EAF5ACB27A0798700E00531 /* LottieAnimationViewBase.swift in Sources */,
 				2E9C96CC2822F43100677516 /* ShapeRenderLayer.swift in Sources */,
+				5721091F29119F3100169699 /* BezierPathRoundExtension.swift in Sources */,
 				2EAF5AEC27A0798700E00531 /* LottieLogger.swift in Sources */,
 				2E9C976E2822F43100677516 /* KeyframeExtensions.swift in Sources */,
 				2E9C96392822F43100677516 /* PrecompAsset.swift in Sources */,
@@ -2094,6 +2100,7 @@
 				2E9C96A92822F43100677516 /* FillNode.swift in Sources */,
 				2EAF5ACC27A0798700E00531 /* LottieAnimationViewBase.swift in Sources */,
 				2E9C96CD2822F43100677516 /* ShapeRenderLayer.swift in Sources */,
+				5721092029119F3100169699 /* BezierPathRoundExtension.swift in Sources */,
 				2EAF5AED27A0798700E00531 /* LottieLogger.swift in Sources */,
 				2E9C976F2822F43100677516 /* KeyframeExtensions.swift in Sources */,
 				2E9C963A2822F43100677516 /* PrecompAsset.swift in Sources */,
@@ -2290,6 +2297,7 @@
 				2E9C96AA2822F43100677516 /* FillNode.swift in Sources */,
 				2EAF5ACD27A0798700E00531 /* LottieAnimationViewBase.swift in Sources */,
 				2E9C96CE2822F43100677516 /* ShapeRenderLayer.swift in Sources */,
+				5721092129119F3100169699 /* BezierPathRoundExtension.swift in Sources */,
 				2EAF5AEE27A0798700E00531 /* LottieLogger.swift in Sources */,
 				2E9C97702822F43100677516 /* KeyframeExtensions.swift in Sources */,
 				2E9C963B2822F43100677516 /* PrecompAsset.swift in Sources */,

@@ -62,9 +62,16 @@ final class RoundedCornersNode: AnimatorNode {
       hasLocalUpdates || hasUpstreamUpdates
     }
     
-    /// TODO: Implement
     func rebuildOutputs(frame: CGFloat) {
-        return
+        for pathContainer in upstreamPaths {
+            let pathObjects = pathContainer.removePaths(updateFrame: frame)
+            for path in pathObjects {
+                pathContainer.appendPath(
+                    path.roundCorners(
+                        radius: properties.radius.value.cgFloatValue),
+                    updateFrame: frame)
+            }
+        }
     }
     
     // MARK: Fileprivate
