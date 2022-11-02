@@ -16,8 +16,7 @@ extension CAShapeLayer {
   {
     let combinedKeyframes = try BezierPathKeyframe.combining(
       path: customPath,
-      cornerRadius: roundedCorners?.radius,
-      context: context)
+      cornerRadius: roundedCorners?.radius)
 
     try addAnimation(
       for: .path,
@@ -51,16 +50,18 @@ extension CGPath {
   }
 }
 
+// MARK: - BezierPathKeyframe
+
 /// Data that represents how to render a bezier path at a specific point in time
 struct BezierPathKeyframe {
   let path: BezierPath
   let cornerRadius: LottieVector1D?
 
-  /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this Rectangle
+  /// Creates a single array of animatable keyframes from the given sets of keyframes
+  /// that can have different counts / timing parameters
   static func combining(
     path: KeyframeGroup<BezierPath>,
-    cornerRadius: KeyframeGroup<LottieVector1D>?,
-    context: LayerAnimationContext) throws
+    cornerRadius: KeyframeGroup<LottieVector1D>?) throws
     -> KeyframeGroup<BezierPathKeyframe>
   {
     guard
