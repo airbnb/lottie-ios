@@ -65,13 +65,16 @@ extension Array where Element == ShapeItem {
         nodeTree.rootNode = node
         nodeTree.childrenNodes.append(node)
       } else if let trim = item as? Trim {
-          let node = TrimPathNode(parentNode: nodeTree.rootNode, trim: trim, upstreamPaths: nodeTree.paths)
-          nodeTree.rootNode = node
-          nodeTree.childrenNodes.append(node)
+        let node = TrimPathNode(parentNode: nodeTree.rootNode, trim: trim, upstreamPaths: nodeTree.paths)
+        nodeTree.rootNode = node
+        nodeTree.childrenNodes.append(node)
       } else if let roundedCorners = item as? RoundedCorners {
-          let node = RoundedCornersNode(parentNode: nodeTree.rootNode, roundedCorners: roundedCorners, upstreamPaths: nodeTree.paths)
-          nodeTree.rootNode = node
-          nodeTree.childrenNodes.append(node)
+        let node = RoundedCornersNode(
+          parentNode: nodeTree.rootNode,
+          roundedCorners: roundedCorners,
+          upstreamPaths: nodeTree.paths)
+        nodeTree.rootNode = node
+        nodeTree.childrenNodes.append(node)
       } else if let xform = item as? ShapeTransform {
         nodeTree.transform = xform
         continue

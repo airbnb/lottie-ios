@@ -33,7 +33,7 @@ extension ShapeType: ClassFamily {
     case .repeater:
       return Repeater.self
     case .round:
-        return RoundedCorners.self
+      return RoundedCorners.self
     case .shape:
       return Shape.self
     case .star:
@@ -146,7 +146,7 @@ extension Array where Element == ShapeItem {
       case .repeater:
         return try Repeater(dictionary: dictionary)
       case .round:
-          return try RoundedCorners(dictionary: dictionary)
+        return try RoundedCorners(dictionary: dictionary)
       case .shape:
         return try Shape(dictionary: dictionary)
       case .star:
