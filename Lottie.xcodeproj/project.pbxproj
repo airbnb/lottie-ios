@@ -2456,8 +2456,8 @@
 				2E9C96AA2822F43100677516 /* FillNode.swift in Sources */,
 				2EAF5ACD27A0798700E00531 /* LottieAnimationViewBase.swift in Sources */,
 				2E9C96CE2822F43100677516 /* ShapeRenderLayer.swift in Sources */,
-				5721092129119F3100169699 /* BezierPathRoundExtension.swift in Sources */,
 				6C48780428FF20140005AF07 /* DotLottieFile.swift in Sources */
+				5721092129119F3100169699 /* BezierPathRoundExtension.swift in Sources */,
 				2EAF5AEE27A0798700E00531 /* LottieLogger.swift in Sources */,
 				2E9C97702822F43100677516 /* KeyframeExtensions.swift in Sources */,
 				2E9C963B2822F43100677516 /* PrecompAsset.swift in Sources */,
