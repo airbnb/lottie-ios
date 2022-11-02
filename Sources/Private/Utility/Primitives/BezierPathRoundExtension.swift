@@ -49,11 +49,8 @@ extension BezierPath {
         guard radius > 0 else {
             return self
         }
-        
         var newPath = BezierPath()
-        if closed {
-            newPath.close()
-        }
+        var uniquePath = BezierPath()
         
         var currentVertex: CurveVertex
         var closestVertex: CurveVertex
@@ -67,15 +64,29 @@ extension BezierPath {
         var vY: CGFloat
         var oX: CGFloat
         var oY: CGFloat
+
+        var startIndex = 0
         
         let TANGENT_LENGTH = 0.5519
         
-        guard elements.count > 1 else {
+        
+        if elements[0].vertex.point == elements[elements.count - 1].vertex.point &&
+           elements[0].vertex.inTangent == elements[elements.count - 1].vertex.inTangent &&
+            elements[0].vertex.outTangent == elements[elements.count - 1].vertex.outTangent {
+            startIndex = 1
+            newPath.close()
+        }
+        
+        guard elements.count - startIndex > 1 else {
             return self
         }
         
-        for elementIndex in 0..<elements.count {
-            currentVertex = elements[elementIndex].vertex
+        for i in startIndex..<elements.count {
+            uniquePath.addVertex(elements[i].vertex)
+        }
+        
+        for elementIndex in 0..<uniquePath.elements.count {
+            currentVertex = uniquePath.elements[elementIndex].vertex
             
             guard currentVertex.point.x == currentVertex.outTangent.x &&
                   currentVertex.point.y == currentVertex.outTangent.y &&
@@ -86,15 +97,15 @@ extension BezierPath {
             }
 
             // Do not round start and end if not closed
-            if !closed && (elementIndex == 0 || elementIndex == elements.count - 1) {
+            if !newPath.closed && (elementIndex == 0 || elementIndex == uniquePath.elements.count - 1) {
                 newPath.addVertex(currentVertex)
             } else {
                 closestIndex = elementIndex - 1
                 if closestIndex < 0 {
-                    closestIndex = elements.count - 1
+                    closestIndex = uniquePath.elements.count - 1
                 }
                 
-                closestVertex = elements[closestIndex].vertex
+                closestVertex = uniquePath.elements[closestIndex].vertex
                 distance = currentVertex.point.distanceTo(closestVertex.point)
                 newPosPerc = distance != 0 ? min(distance/2, radius) / distance : 0
                 
@@ -110,9 +121,9 @@ extension BezierPath {
                     CGPoint(x: oX, y: oY))
                 )
                 
-                closestIndex = (elementIndex + 1) % elements.count
+                closestIndex = (elementIndex + 1) % uniquePath.elements.count
                 
-                closestVertex = elements[closestIndex].vertex
+                closestVertex = uniquePath.elements[closestIndex].vertex
                 distance = currentVertex.point.distanceTo(closestVertex.point)
                 newPosPerc = distance != 0 ? min(distance/2, radius) / distance : 0
                 
