@@ -46,6 +46,9 @@ extension CompoundBezierPath {
 extension BezierPath {
     // Round corners of a single bezier
     func roundCorners(radius: CGFloat) -> BezierPath {
+        guard radius > 0 else {
+            return self
+        }
         
         var newPath = BezierPath()
         if closed {
