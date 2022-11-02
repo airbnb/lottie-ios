@@ -5,6 +5,7 @@
 //  Created by Duolingo on 11/1/22.
 //
 
+import CoreGraphics
 import Foundation
 
 //    Adapted to Swift from lottie-web & lottie-android:
