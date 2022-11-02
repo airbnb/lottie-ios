@@ -69,7 +69,7 @@ extension BezierPath {
         
         let TANGENT_LENGTH = 0.5519
         
-        
+        // If start and end are the same we close the path
         if elements[0].vertex.point == elements[elements.count - 1].vertex.point &&
            elements[0].vertex.inTangent == elements[elements.count - 1].vertex.inTangent &&
             elements[0].vertex.outTangent == elements[elements.count - 1].vertex.outTangent {
