@@ -17,6 +17,10 @@ extension KeyframeGroup {
   ///  - In those sorts of cases, we currently choose one one `KeyframeGroup` to provide the
   ///    timing information, and disallow simultaneous animations on the other properties.
   ///
+  ///  - We could support animating all of the values simultaneously if we manually
+  ///    interpolated the property for each individual frame, like we do in
+  ///     `CombinedShapeItem.manuallyInterpolating` and `BezierPathKeyframe.combining`
+  ///
   func exactlyOneKeyframe(
     context: CompatibilityTrackerProviding,
     description: String,

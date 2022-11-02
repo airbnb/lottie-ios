@@ -12,12 +12,6 @@ extension CAShapeLayer {
     pathMultiplier: PathMultiplier,
     roundedCorners: RoundedCorners?) throws
   {
-    if roundedCorners != nil {
-      try context.compatibilityAssert(shape is Shape, """
-        Rounded corners support is currently only implemented for Shape items
-        """)
-    }
-
     switch shape {
     case let customShape as Shape:
       try addAnimations(
@@ -28,15 +22,25 @@ extension CAShapeLayer {
 
     case let combinedShape as CombinedShapeItem:
       try addAnimations(for: combinedShape, context: context, pathMultiplier: pathMultiplier)
+      try context.compatibilityAssert(roundedCorners == nil, """
+        Rounded corners support is not currently implemented for combined shape items
+        """)
 
     case let ellipse as Ellipse:
       try addAnimations(for: ellipse, context: context, pathMultiplier: pathMultiplier)
 
     case let rectangle as Rectangle:
-      try addAnimations(for: rectangle, context: context, pathMultiplier: pathMultiplier)
+      try addAnimations(
+        for: rectangle,
+        context: context,
+        pathMultiplier: pathMultiplier,
+        roundedCorners: roundedCorners)
 
     case let star as Star:
       try addAnimations(for: star, context: context, pathMultiplier: pathMultiplier)
+      try context.compatibilityAssert(roundedCorners == nil, """
+        Rounded corners support is currently not implemented for polygon items
+        """)
 
     default:
       // None of the other `ShapeItem` subclasses draw a `path`
