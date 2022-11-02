@@ -217,7 +217,11 @@ final class ShapeItemLayer: BaseAnimationLayer {
         """)
     }
 
-    try shapeLayer.addAnimations(for: shape.item, context: context.for(shape), pathMultiplier: trimPathMultiplier ?? 1)
+    try shapeLayer.addAnimations(
+      for: shape.item,
+      context: context.for(shape),
+      pathMultiplier: trimPathMultiplier ?? 1,
+      roundedCorners: otherItems.first(RoundedCorners.self))
 
     if let (fill, context) = otherItems.first(Fill.self, context: context) {
       try shapeLayer.addAnimations(for: fill, context: context)
@@ -236,7 +240,8 @@ final class ShapeItemLayer: BaseAnimationLayer {
     try layers.shapeMaskLayer.addAnimations(
       for: shape.item,
       context: context.for(shape),
-      pathMultiplier: 1)
+      pathMultiplier: 1,
+      roundedCorners: otherItems.first(RoundedCorners.self))
 
     if let (gradientFill, context) = otherItems.first(GradientFill.self, context: context) {
       layers.shapeMaskLayer.fillRule = gradientFill.fillRule.caFillRule
@@ -258,7 +263,8 @@ final class ShapeItemLayer: BaseAnimationLayer {
     try layers.shapeMaskLayer.addAnimations(
       for: shape.item,
       context: context.for(shape),
-      pathMultiplier: trimPathMultiplier ?? 1)
+      pathMultiplier: trimPathMultiplier ?? 1,
+      roundedCorners: otherItems.first(RoundedCorners.self))
 
     if let (gradientStroke, context) = otherItems.first(GradientStroke.self, context: context) {
       try layers.gradientColorLayer.addGradientAnimations(for: gradientStroke, type: .rgb, context: context)

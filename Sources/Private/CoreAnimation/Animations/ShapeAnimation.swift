@@ -9,11 +9,22 @@ extension CAShapeLayer {
   func addAnimations(
     for shape: ShapeItem,
     context: LayerAnimationContext,
-    pathMultiplier: PathMultiplier) throws
+    pathMultiplier: PathMultiplier,
+    roundedCorners: RoundedCorners?) throws
   {
+    if roundedCorners != nil {
+      try context.compatibilityAssert(shape is Shape, """
+        Rounded corners support is currently only implemented for Shape items
+        """)
+    }
+
     switch shape {
     case let customShape as Shape:
-      try addAnimations(for: customShape.path, context: context, pathMultiplier: pathMultiplier)
+      try addAnimations(
+        for: customShape.path,
+        context: context,
+        pathMultiplier: pathMultiplier,
+        roundedCorners: roundedCorners)
 
     case let combinedShape as CombinedShapeItem:
       try addAnimations(for: combinedShape, context: context, pathMultiplier: pathMultiplier)
