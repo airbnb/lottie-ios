@@ -14,7 +14,7 @@ import AppKit
 
 // MARK: - DotLottieImageProvider
 
-/// Provides an image for a lottie animation from a provided Bundle.
+/// An image provider that loads the images from a DotLottieFile into memory
 class DotLottieImageProvider: AnimationImageProvider {
 
   // MARK: Lifecycle
@@ -38,12 +38,17 @@ class DotLottieImageProvider: AnimationImageProvider {
   let filepath: URL
 
   func imageForAsset(asset: ImageAsset) -> CGImage? {
-    imageCache.object(forKey: asset.name as NSString)
+    images[asset.name]
   }
 
   // MARK: Private
 
-  private var imageCache: NSCache<NSString, CGImage> = .init()
+  /// This is intentionally a Dictionary instead of an NSCache. Files from a decompressed dotLottie zip archive
+  /// are only valid are deleted after being read into memory. If we used an NSCache then the OS could evict
+  /// the cache entries when under memory pressure, and we would have no way to reload them later.
+  ///  - Ideally we would have a way to remove image data when under memory pressure, but this would require
+  ///    re-decompressing the dotLottie file when requesting an image that has been loaded but then removed.
+  private var images = [String: CGImage]()
 
   private func loadImages() {
     filepath.urls.forEach {
@@ -52,14 +57,14 @@ class DotLottieImageProvider: AnimationImageProvider {
         let data = try? Data(contentsOf: $0),
         let image = UIImage(data: data)?.cgImage
       {
-        imageCache.setObject(image, forKey: $0.lastPathComponent as NSString)
+        images[$0.lastPathComponent] = image
       }
       #elseif os(macOS)
       if
         let data = try? Data(contentsOf: $0),
         let image = NSImage(data: data)?.lottie_CGImage
       {
-        imageCache.setObject(image, forKey: $0.lastPathComponent as NSString)
+        images[$0.lastPathComponent] = image
       }
       #endif
     }

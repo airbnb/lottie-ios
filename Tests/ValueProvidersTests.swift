@@ -8,12 +8,15 @@
 import Lottie
 import XCTest
 
+@MainActor
 final class ValueProvidersTests: XCTestCase {
 
-  func testGetValue() throws {
-    let animationView = try XCTUnwrap(SnapshotConfiguration.makeAnimationView(
+  func testGetValue() async throws {
+    let optionalAnimationView = await SnapshotConfiguration.makeAnimationView(
       for: "HamburgerArrow",
-      configuration: .init(renderingEngine: .mainThread)))
+      configuration: .init(renderingEngine: .mainThread))
+
+    let animationView = try XCTUnwrap(optionalAnimationView)
 
     let keypath = AnimationKeypath(keypath: "A1.Shape 1.Stroke 1.Color")
     animationView.setValueProvider(ColorValueProvider(.red), keypath: keypath)

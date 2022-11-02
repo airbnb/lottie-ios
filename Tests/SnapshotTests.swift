@@ -12,23 +12,24 @@ import UIKit
 
 // MARK: - SnapshotTests
 
+@MainActor
 class SnapshotTests: XCTestCase {
 
   // MARK: Internal
 
   /// Snapshots all of the sample animation JSON files visible to this test target
-  func testMainThreadRenderingEngine() throws {
-    try compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .mainThread))
+  func testMainThreadRenderingEngine() async throws {
+    try await compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .mainThread))
   }
 
   /// Snapshots sample animation files using the Core Animation rendering engine
-  func testCoreAnimationRenderingEngine() throws {
-    try compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .coreAnimation))
+  func testCoreAnimationRenderingEngine() async throws {
+    try await compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .coreAnimation))
   }
 
   /// Snapshots sample animation files using the automatic rendering engine option
-  func testAutomaticRenderingEngine() throws {
-    try compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .automatic))
+  func testAutomaticRenderingEngine() async throws {
+    try await compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .automatic))
   }
 
   /// Validates that all of the snapshots in __Snapshots__ correspond to
@@ -57,7 +58,8 @@ class SnapshotTests: XCTestCase {
       animationName = animationName.replacingOccurrences(of: "-", with: "/")
 
       XCTAssert(
-        Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).json") }),
+        Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).json") })
+          || Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).lottie") }),
         "Snapshot \"\(snapshotURL.lastPathComponent)\" has no corresponding sample animation")
     }
   }
@@ -99,7 +101,7 @@ class SnapshotTests: XCTestCase {
   /// Captures snapshots of `sampleAnimationURLs` and compares them to the snapshot images stored on disk
   private func compareSampleSnapshots(
     configuration: LottieConfiguration,
-    testName: String = #function) throws
+    testName: String = #function) async throws
   {
     #if os(iOS)
     guard UIScreen.main.scale == 2 else {
@@ -113,7 +115,7 @@ class SnapshotTests: XCTestCase {
     for sampleAnimationName in Samples.sampleAnimationNames {
       for percent in progressPercentagesToSnapshot {
         guard
-          let animationView = SnapshotConfiguration.makeAnimationView(
+          let animationView = await SnapshotConfiguration.makeAnimationView(
             for: sampleAnimationName,
             configuration: configuration)
         else { continue }
@@ -189,9 +191,8 @@ enum Samples {
     withSuffix: "png")
 
   /// The list of sample animation files in `Tests/Samples`
-  static let sampleAnimationURLs = Bundle.module.fileURLs(
-    in: Samples.directoryName,
-    withSuffix: "json")
+  static let sampleAnimationURLs = Bundle.module.fileURLs(in: Samples.directoryName, withSuffix: "json")
+    + Bundle.module.fileURLs(in: Samples.directoryName, withSuffix: "lottie")
 
   /// The list of sample animation names in `Tests/Samples`
   static let sampleAnimationNames = sampleAnimationURLs.lazy
@@ -207,6 +208,7 @@ enum Samples {
       return subpath
         .joined(separator: "/")
         .replacingOccurrences(of: ".json", with: "")
+        .replacingOccurrences(of: ".lottie", with: "")
     }
 
   static func animation(named sampleAnimationName: String) -> LottieAnimation? {
@@ -215,67 +217,64 @@ enum Samples {
         sampleAnimationName,
         bundle: .module,
         subdirectory: Samples.directoryName)
-    else {
-      XCTFail("Could not parse Samples/\(sampleAnimationName).json")
-      return nil
-    }
+    else { return nil }
 
     return animation
   }
 
-  static func dotLottie(named sampleDotLottieName: String, closure: @escaping (DotLottieFile?) -> Void) {
-    DotLottieFile.named(
-      sampleDotLottieName,
-      bundle: .module,
-      subdirectory: Samples.directoryName)
-    { result in
-      switch result {
-      case .success(let lottie):
-        closure(lottie)
-      case .failure:
-        XCTFail("Could not parse Samples/\(sampleDotLottieName).lottie")
-        closure(nil)
-      }
+  static func dotLottie(named sampleDotLottieName: String) async -> DotLottieFile? {
+    guard
+      let dotLottieFile = try? await DotLottieFile.named(
+        sampleDotLottieName,
+        bundle: .module,
+        subdirectory: Samples.directoryName)
+    else {
+      XCTFail("Could not parse Samples/\(sampleDotLottieName).lottie")
+      return nil
     }
+
+    return dotLottieFile
   }
 }
 
 extension SnapshotConfiguration {
   /// Creates a `LottieAnimationView` for the sample snapshot with the given name
+  @MainActor
   static func makeAnimationView(
     for sampleAnimationName: String,
     configuration: LottieConfiguration,
     logger: LottieLogger = LottieLogger.shared)
-    -> LottieAnimationView?
-  {
+  async -> LottieAnimationView? {
     let snapshotConfiguration = SnapshotConfiguration.forSample(named: sampleAnimationName)
 
-    guard
-      snapshotConfiguration.shouldSnapshot(using: configuration)
-    else { return nil }
+    guard snapshotConfiguration.shouldSnapshot(using: configuration) else {
+      return nil
+    }
 
-    var animationView: LottieAnimationView?
+    let animationView: LottieAnimationView
     if let animation = Samples.animation(named: sampleAnimationName) {
       animationView = LottieAnimationView(
         animation: animation,
         configuration: configuration,
         logger: logger)
-      animationView?.frame.size = animation.snapshotSize
-    } else {
+    } else if let dotLottieFile = await Samples.dotLottie(named: sampleAnimationName) {
       animationView = LottieAnimationView(
-        dotLottie: nil,
+        dotLottie: dotLottieFile,
         configuration: configuration,
         logger: logger)
-      Samples.dotLottie(named: sampleAnimationName) { lottie in
-        guard let lottie = lottie else { return }
-        animationView?.loadAnimation(from: lottie)
-      }
+    } else {
+      XCTFail("Couldn't create Animation View for \(sampleAnimationName)")
+      return nil
     }
 
-    guard let animationView = animationView else { return nil }
+    guard let animation = animationView.animation else {
+      XCTFail("Couldn't create Animation View for \(sampleAnimationName)")
+      return nil
+    }
 
     // Set up the animation view with a valid frame
     // so the geometry is correct when setting up the `CAAnimation`s
+    animationView.frame.size = animation.snapshotSize
 
     for (keypath, customValueProvider) in snapshotConfiguration.customValueProviders {
       animationView.setValueProvider(customValueProvider, keypath: keypath)

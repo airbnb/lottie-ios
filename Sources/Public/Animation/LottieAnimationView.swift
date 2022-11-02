@@ -126,7 +126,8 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)
   {
-    animation = dotLottie?.animation(for: animationId)
+    let dotLottieAnimation = dotLottie?.animation(for: animationId)
+    animation = dotLottieAnimation?.animation
     imageProvider = dotLottie?.imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = textProvider
     self.fontProvider = fontProvider
@@ -134,8 +135,8 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     self.logger = logger
     super.init(frame: .zero)
     commonInit()
-    loopMode = animation?.dotLottieConfiguration?.loopMode ?? .playOnce
-    animationSpeed = CGFloat(animation?.dotLottieConfiguration?.speed ?? 1)
+    loopMode = dotLottieAnimation?.configuration.loopMode ?? .playOnce
+    animationSpeed = CGFloat(dotLottieAnimation?.configuration.speed ?? 1)
     makeAnimationLayer(usingEngine: configuration.renderingEngine)
     if let animation = animation {
       frame = animation.bounds
@@ -440,15 +441,16 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     _ animationId: String? = nil,
     from dotLottieFile: DotLottieFile)
   {
-    guard let animation = dotLottieFile.animation(for: animationId) else { return }
-    if let configuration = animation.dotLottieConfiguration {
-      loopMode = configuration.loopMode
-      animationSpeed = CGFloat(configuration.speed)
-    }
-    if let imageProvider = dotLottieFile.imageProvider {
+    guard let dotLottieAnimation = dotLottieFile.animation(for: animationId) else { return }
+
+    loopMode = dotLottieAnimation.configuration.loopMode
+    animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
+
+    if let imageProvider = dotLottieAnimation.configuration.imageProvider {
       self.imageProvider = imageProvider
     }
-    self.animation = animation
+
+    animation = dotLottieAnimation.animation
   }
 
   /// Plays the animation from its current state to the end.

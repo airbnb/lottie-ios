@@ -6,6 +6,7 @@ import XCTest
 
 @testable import Lottie
 
+@MainActor
 final class AnimationKeypathTests: XCTestCase {
 
   // MARK: Internal
@@ -39,27 +40,30 @@ final class AnimationKeypathTests: XCTestCase {
     XCTAssertNotNil(animationView.animationLayer?.layer(for: "Success.*.Fish1Tail 7"))
   }
 
-  func testMainThreadEngineKeypathLogging() {
-    snapshotHierarchyKeypaths(
+  func testMainThreadEngineKeypathLogging() async {
+    await snapshotHierarchyKeypaths(
       animationName: "Switch",
       configuration: LottieConfiguration(renderingEngine: .mainThread))
   }
 
-  func testCoreAnimationEngineKeypathLogging() {
-    snapshotHierarchyKeypaths(
+  func testCoreAnimationEngineKeypathLogging() async {
+    await snapshotHierarchyKeypaths(
       animationName: "Switch",
       configuration: LottieConfiguration(renderingEngine: .coreAnimation))
 
-    snapshotHierarchyKeypaths(
+    await snapshotHierarchyKeypaths(
       animationName: "Issues/issue_1664",
       configuration: LottieConfiguration(renderingEngine: .coreAnimation))
   }
 
   /// The Core Animation engine supports a subset of the keypaths supported by the Main Thread engine.
   /// All keypaths that are supported in the Core Animation engine should also be supported by the Main Thread engine.
-  func testCoreAnimationEngineKeypathCompatibility() {
-    let mainThreadKeypaths = Set(hierarchyKeypaths(animationName: "Switch", configuration: .init(renderingEngine: .mainThread)))
-    let coreAnimationKeypaths = hierarchyKeypaths(animationName: "Switch", configuration: .init(renderingEngine: .coreAnimation))
+  func testCoreAnimationEngineKeypathCompatibility() async {
+    let mainThreadKeypaths =
+      Set(await hierarchyKeypaths(animationName: "Switch", configuration: .init(renderingEngine: .mainThread)))
+    let coreAnimationKeypaths = await hierarchyKeypaths(
+      animationName: "Switch",
+      configuration: .init(renderingEngine: .coreAnimation))
 
     for coreAnimationKeypath in coreAnimationKeypaths {
       XCTAssert(
@@ -77,9 +81,9 @@ final class AnimationKeypathTests: XCTestCase {
     animationName: String,
     configuration: LottieConfiguration,
     function: String = #function,
-    line: UInt = #line)
+    line: UInt = #line) async
   {
-    let hierarchyKeypaths = hierarchyKeypaths(animationName: animationName, configuration: configuration)
+    let hierarchyKeypaths = await hierarchyKeypaths(animationName: animationName, configuration: configuration)
 
     assertSnapshot(
       matching: hierarchyKeypaths.sorted().joined(separator: "\n"),
@@ -89,13 +93,16 @@ final class AnimationKeypathTests: XCTestCase {
       line: line)
   }
 
-  private func hierarchyKeypaths(animationName: String, configuration: LottieConfiguration) -> [String] {
+  private func hierarchyKeypaths(animationName: String, configuration: LottieConfiguration) async -> [String] {
     var printedMessages = [String]()
     let logger = LottieLogger(info: { message in
       printedMessages.append(message())
     })
 
-    let animationView = SnapshotConfiguration.makeAnimationView(for: animationName, configuration: configuration, logger: logger)
+    let animationView = await SnapshotConfiguration.makeAnimationView(
+      for: animationName,
+      configuration: configuration,
+      logger: logger)
     animationView?.logHierarchyKeypaths()
     return Array(printedMessages[1...])
   }

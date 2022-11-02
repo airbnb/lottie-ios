@@ -7,12 +7,21 @@ import XCTest
 
 @testable import Lottie
 
+@MainActor
 final class AutomaticEngineTests: XCTestCase {
 
   /// Snapshot tests for whether or not each sample animation supports the Core Animation engine
-  func testAutomaticEngineDetection() throws {
+  func testAutomaticEngineDetection() async throws {
     for sampleAnimationName in Samples.sampleAnimationNames {
-      guard let animation = Samples.animation(named: sampleAnimationName) else { continue }
+      var animation = Samples.animation(named: sampleAnimationName)
+      if animation == nil {
+        animation = await Samples.dotLottie(named: sampleAnimationName)?.animations.first?.animation
+      }
+
+      guard let animation = animation else {
+        XCTFail("Couldn't load animation named \(sampleAnimationName)")
+        continue
+      }
 
       var compatibilityIssues = [CompatibilityIssue]()
 

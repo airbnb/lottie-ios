@@ -167,6 +167,29 @@ extension LottieAnimation {
   /// Loads a Lottie animation asynchronously from the URL.
   ///
   /// - Parameter url: The url to load the animation from.
+  /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LottieAnimationCache.shared`. Optional.
+  ///
+  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
+  public static func loadedFrom(
+    url: URL,
+    session: URLSession = .shared,
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared) async
+    -> LottieAnimation?
+  {
+    await withCheckedContinuation { continuation in
+      LottieAnimation.loadedFrom(
+        url: url,
+        session: session,
+        closure: { result in
+          continuation.resume(returning: result)
+        },
+        animationCache: animationCache)
+    }
+  }
+
+  /// Loads a Lottie animation asynchronously from the URL.
+  ///
+  /// - Parameter url: The url to load the animation from.
   /// - Parameter closure: A closure to be called when the animation has loaded.
   /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LottieAnimationCache.shared`. Optional.
   ///
