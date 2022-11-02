@@ -96,6 +96,97 @@ extension LottieAnimationView {
     self.init(animation: animation, imageProvider: provider, configuration: configuration)
   }
 
+  // MARK: DotLottie
+
+  /// Loads a Lottie animation from a .lottie file in the supplied bundle.
+  ///
+  /// - Parameter filePath: The string name of the lottie file with no file
+  /// extension provided.
+  /// - Parameter bundle: The bundle in which the file is located.
+  /// Defaults to the Main bundle.
+  /// - Parameter animationId: Animation id to play. Optional
+  /// Defaults to first animation in file
+  public convenience init(
+    dotLottieName name: String,
+    bundle: Bundle = Bundle.main,
+    animationId: String? = nil,
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
+    configuration: LottieConfiguration = .shared)
+  {
+    self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
+    DotLottieFile.named(name, bundle: bundle, subdirectory: nil, closure: { result in
+      guard case Result.success(let lottie) = result else { return }
+      self.loadAnimation(animationId, from: lottie)
+    }, dotLottieCache: dotLottieCache)
+  }
+
+  /// Loads a Lottie from a .lottie file in a specific path on disk.
+  ///
+  /// - Parameter filePath: The absolute path of the Lottie file.
+  /// - Parameter animationId: Animation id to play. Optional
+  /// Defaults to first animation in file
+  public convenience init(
+    dotLottieFilePath filePath: String,
+    animationId: String? = nil,
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
+    configuration: LottieConfiguration = .shared)
+  {
+    self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
+    DotLottieFile.filepath(filePath, closure: { result in
+      guard case Result.success(let lottie) = result else { return }
+      self.loadAnimation(animationId, from: lottie)
+    }, dotLottieCache: dotLottieCache)
+  }
+
+  /// Loads a Lottie file asynchronously from the URL
+  ///
+  /// - Parameter dotLottieUrl: The url to load the lottie file from.
+  /// - Parameter animationId: Animation id to play. Optional
+  /// Defaults to first animation in file
+  /// - Parameter closure: A closure to be called when the animation has loaded.
+  public convenience init(
+    dotLottieUrl url: URL,
+    animationId: String? = nil,
+    closure: @escaping LottieAnimationView.DownloadClosure,
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
+    configuration: LottieConfiguration = .shared)
+  {
+    if let dotLottieCache = dotLottieCache, let lottie = dotLottieCache.file(forKey: url.absoluteString) {
+      self.init(dotLottie: lottie, animationId: animationId, configuration: configuration)
+      closure(nil)
+    } else {
+      self.init(dotLottie: nil, configuration: configuration)
+      DotLottieFile.loadedFrom(url: url, closure: { result in
+        switch result {
+        case .success(let lottie):
+          self.loadAnimation(animationId, from: lottie)
+        case .failure(let error):
+          closure(error)
+        }
+      }, dotLottieCache: dotLottieCache)
+    }
+  }
+
+  /// Loads a Lottie from a .lottie file located in the Asset catalog of the supplied bundle.
+  /// - Parameter name: The string name of the lottie file in the asset catalog.
+  /// - Parameter bundle: The bundle in which the file is located.
+  /// Defaults to the Main bundle.
+  /// - Parameter animationId: Animation id to play. Optional
+  /// Defaults to first animation in file
+  public convenience init(
+    dotLottieAsset name: String,
+    bundle: Bundle = Bundle.main,
+    animationId: String? = nil,
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
+    configuration: LottieConfiguration = .shared)
+  {
+    self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
+    DotLottieFile.asset(name, bundle: bundle, closure: { result in
+      guard case Result.success(let lottie) = result else { return }
+      self.loadAnimation(animationId, from: lottie)
+    }, dotLottieCache: dotLottieCache)
+  }
+
   // MARK: Public
 
   public typealias DownloadClosure = (Error?) -> Void
