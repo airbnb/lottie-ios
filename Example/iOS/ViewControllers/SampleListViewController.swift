@@ -63,7 +63,9 @@ final class SampleListViewController: CollectionViewController {
 
   @ItemModelBuilder
   private var sampleAnimationLinks: [ItemModeling] {
-    (Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: directory) ?? [])
+    (
+      (Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: directory) ?? []) +
+        (Bundle.main.urls(forResourcesWithExtension: "lottie", subdirectory: directory) ?? []))
       .map { $0.lastPathComponent.replacingOccurrences(of: ".json", with: "") }
       .sorted(by: { $0.localizedCompare($1) == .orderedAscending })
       .map { (name: $0, path: "\(directory)/\($0)") }
