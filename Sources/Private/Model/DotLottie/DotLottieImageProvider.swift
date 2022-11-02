@@ -43,6 +43,11 @@ class DotLottieImageProvider: AnimationImageProvider {
 
   // MARK: Private
 
+  /// This is intentionally a Dictionary instead of an NSCache. Files from a decompressed dotLottie zip archive
+  /// are only valid are deleted after being read into memory. If we used an NSCache then the OS could evict
+  /// the cache entries when under memory pressure, and we would have no way to reload them later.
+  ///  - Ideally we would have a way to remove image data when under memory pressure, but this would require
+  ///    re-decompressing the dotLottie file when requesting an image that has been loaded but then removed.
   private var images = [String: CGImage]()
 
   private func loadImages() {
