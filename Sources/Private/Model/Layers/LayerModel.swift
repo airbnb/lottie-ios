@@ -127,7 +127,7 @@ class LayerModel: Codable, DictionaryInitializable {
       blendMode = .normal
     }
     if let maskDictionaries = dictionary[CodingKeys.masks.rawValue] as? [[String: Any]] {
-      masks = try maskDictionaries.map({ try Mask(dictionary: $0) })
+      masks = try maskDictionaries.map { try Mask(dictionary: $0) }
     } else {
       masks = nil
     }

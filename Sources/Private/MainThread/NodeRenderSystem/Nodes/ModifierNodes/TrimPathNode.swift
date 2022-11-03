@@ -133,7 +133,7 @@ final class TrimPathNode: AnimatorNode {
 
     /// First get the total length of all paths.
     var totalLength: CGFloat = 0
-    upstreamPaths.forEach({ totalLength = totalLength + $0.totalLength })
+    upstreamPaths.forEach { totalLength = totalLength + $0.totalLength }
 
     /// Now determine the start and end cut lengths
     let startLength = startPosition * totalLength

@@ -111,7 +111,7 @@ extension ZipEntry.ZIP64ExtendedInformation {
     diskNumberStart = existingInfo.diskNumberStart
     let tempDataSize = [relativeOffsetOfLocalHeader, uncompressedSize, compressedSize]
       .filter { $0 != 0 }
-      .reduce(UInt16(0), { $0 + UInt16(MemoryLayout.size(ofValue: $1)) })
+      .reduce(UInt16(0)) { $0 + UInt16(MemoryLayout.size(ofValue: $1)) }
     dataSize = tempDataSize + (diskNumberStart > 0 ? UInt16(MemoryLayout.size(ofValue: diskNumberStart)) : 0)
     if dataSize == 0 { return nil }
   }
@@ -142,17 +142,17 @@ extension ZipEntry.ZIP64ExtendedInformation {
     var relativeOffsetOfLFH = relativeOffsetOfLocalHeader
     var diskNumberStart = diskNumberStart
     var data = Data()
-    withUnsafePointer(to: &headerID, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &dataSize, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
+    withUnsafePointer(to: &headerID) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &dataSize) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
     if uncompressedSize != 0 || compressedSize != 0 {
-      withUnsafePointer(to: &uncompressedSize, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-      withUnsafePointer(to: &compressedSize, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
+      withUnsafePointer(to: &uncompressedSize) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+      withUnsafePointer(to: &compressedSize) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
     }
     if relativeOffsetOfLocalHeader != 0 {
-      withUnsafePointer(to: &relativeOffsetOfLFH, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
+      withUnsafePointer(to: &relativeOffsetOfLFH) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
     }
     if diskNumberStart != 0 {
-      withUnsafePointer(to: &diskNumberStart, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
+      withUnsafePointer(to: &diskNumberStart) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
     }
     return data
   }

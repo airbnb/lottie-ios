@@ -244,7 +244,8 @@ extension SnapshotConfiguration {
     for sampleAnimationName: String,
     configuration: LottieConfiguration,
     logger: LottieLogger = LottieLogger.shared)
-  async -> LottieAnimationView? {
+    async -> LottieAnimationView?
+  {
     let snapshotConfiguration = SnapshotConfiguration.forSample(named: sampleAnimationName)
 
     guard snapshotConfiguration.shouldSnapshot(using: configuration) else {

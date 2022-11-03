@@ -48,7 +48,7 @@ final class Stroke: ShapeItem {
     }
     miterLimit = (try? dictionary.value(for: CodingKeys.miterLimit)) ?? 4
     let dashPatternDictionaries = dictionary[CodingKeys.dashPattern.rawValue] as? [[String: Any]]
-    dashPattern = try? dashPatternDictionaries?.map({ try DashElement(dictionary: $0) })
+    dashPattern = try? dashPatternDictionaries?.map { try DashElement(dictionary: $0) }
     try super.init(dictionary: dictionary)
   }
 

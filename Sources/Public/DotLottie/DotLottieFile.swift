@@ -86,11 +86,11 @@ public final class DotLottieFile {
   private let fileUrl: URL
 
   private var dotLottieAnimations: [DotLottieAnimation] {
-    manifest?.animations.map({
+    manifest?.animations.map {
       var animation = $0
       animation.animationUrl = animationsUrl.appendingPathComponent("\($0.id).json")
       return animation
-    }) ?? []
+    } ?? []
   }
 
   /// Decompresses .lottie file from `URL` and saves to local temp folder
