@@ -144,21 +144,9 @@ final class GroupLayer: BaseAnimationLayer {
         !shapeRenderGroup.otherItems.contains(where: { $0.item is Trim })
       {
         let allPathKeyframes = shapeRenderGroup.pathItems.compactMap { ($0.item as? Shape)?.path }
-        let combinedShape: CombinedShapeItem
-
-        // If all of the path-drawing `ShapeItem`s have keyframes with the same timing information,
-        // we can combine the `[KeyframeGroup<BezierPath>]` (which have to animate in separate layers)
-        // into a single `KeyframeGroup<[BezierPath]>`, which can be combined into a single CGPath animation.
-        if let combinedShapeKeyframes = Keyframes.combinedIfPossible(allPathKeyframes) {
-          combinedShape = CombinedShapeItem(shapes: combinedShapeKeyframes, name: group.name)
-        }
-
-        // Otherwise, in order for the path fills to be rendered correctly, we have to manually
-        // interpolate the path for each shape at each frame ahead of time so we can combine them
-        // into a single set of bezier path keyframes.
-        else {
-          combinedShape = .manuallyInterpolating(shapes: allPathKeyframes, name: group.name)
-        }
+        let combinedShape = CombinedShapeItem(
+          shapes: Keyframes.combined(allPathKeyframes),
+          name: group.name)
 
         let sublayer = try ShapeItemLayer(
           shape: ShapeItemLayer.Item(item: combinedShape, groupPath: shapeRenderGroup.pathItems[0].groupPath),

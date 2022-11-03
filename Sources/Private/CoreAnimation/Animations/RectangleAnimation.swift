@@ -48,21 +48,8 @@ extension Rectangle {
     -> KeyframeGroup<Rectangle.Keyframe>
   {
     let cornerRadius = roundedCorners?.radius ?? cornerRadius
-    let combinedKeyframes = Keyframes.combinedIfPossible(
+    return Keyframes.combined(
       size, position, cornerRadius,
       makeCombinedResult: Rectangle.Keyframe.init)
-
-    if let combinedKeyframes = combinedKeyframes {
-      return combinedKeyframes
-    } else {
-      // If we weren't able to combine all of the keyframes, we have to take the timing values
-      // from one property and use a fixed value for the other properties.
-      return try size.map { sizeValue in
-        Keyframe(
-          size: sizeValue,
-          position: try position.exactlyOneKeyframe(context: context, description: "rectangle position"),
-          cornerRadius: try cornerRadius.exactlyOneKeyframe(context: context, description: "rectangle cornerRadius"))
-      }
-    }
   }
 }

@@ -73,37 +73,8 @@ struct BezierPathKeyframe {
       }
     }
 
-    let combinedKeyframes = Keyframes.combinedIfPossible(
+    return Keyframes.combined(
       path, cornerRadius,
       makeCombinedResult: BezierPathKeyframe.init)
-
-    if let combinedKeyframes = combinedKeyframes {
-      return combinedKeyframes
-    }
-
-    // If we weren't able to combine all of the keyframes, then we can manually interpolate
-    // the path and corner radius at each time value
-    let pathInterpolator = KeyframeInterpolator(keyframes: path.keyframes)
-    let cornerRadiusInterpolator = KeyframeInterpolator(keyframes: cornerRadius.keyframes)
-
-    let times = path.keyframes.map { $0.time } + cornerRadius.keyframes.map { $0.time }
-    let minimumTime = times.min() ?? 0
-    let maximumTime = times.max() ?? 0
-    let animationLocalTimeRange = Int(minimumTime)...Int(maximumTime)
-
-    let interpolatedKeyframes = animationLocalTimeRange.compactMap { localTime -> Keyframe<BezierPathKeyframe>? in
-      let frame = AnimationFrameTime(localTime)
-      guard let interpolatedPath = pathInterpolator.value(frame: frame) as? BezierPath else {
-        return nil
-      }
-
-      return Keyframe(
-        value: BezierPathKeyframe(
-          path: interpolatedPath,
-          cornerRadius: cornerRadiusInterpolator.value(frame: frame) as? LottieVector1D),
-        time: frame)
-    }
-
-    return KeyframeGroup(keyframes: ContiguousArray(interpolatedKeyframes))
   }
 }
