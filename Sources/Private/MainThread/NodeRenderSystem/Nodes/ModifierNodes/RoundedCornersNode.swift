@@ -67,10 +67,14 @@ final class RoundedCornersNode: AnimatorNode {
     for pathContainer in upstreamPaths {
       let pathObjects = pathContainer.removePaths(updateFrame: frame)
       for path in pathObjects {
-        pathContainer.appendPath(
-          path.roundCorners(
-            radius: properties.radius.value.cgFloatValue),
-          updateFrame: frame)
+        let cornerRadius = properties.radius.value.cgFloatValue
+        if cornerRadius != 0 {
+          pathContainer.appendPath(
+            path.roundCorners(radius: cornerRadius),
+            updateFrame: frame)
+        } else {
+          pathContainer.appendPath(path, updateFrame: frame)
+        }
       }
     }
   }

@@ -10,14 +10,24 @@ extension CAShapeLayer {
     for customPath: KeyframeGroup<BezierPath>,
     context: LayerAnimationContext,
     pathMultiplier: PathMultiplier = 1,
-    transformPath: (CGPath) -> CGPath = { $0 })
+    transformPath: (CGPath) -> CGPath = { $0 },
+    roundedCorners: RoundedCorners? = nil)
     throws
   {
+    let combinedKeyframes = try BezierPathKeyframe.combining(
+      path: customPath,
+      cornerRadius: roundedCorners?.radius)
+
     try addAnimation(
       for: .path,
-      keyframes: customPath.keyframes,
+      keyframes: combinedKeyframes.keyframes,
       value: { pathKeyframe in
-        transformPath(pathKeyframe.cgPath().duplicated(times: pathMultiplier))
+        var path = pathKeyframe.path
+        if let cornerRadius = pathKeyframe.cornerRadius {
+          path = path.roundCorners(radius: cornerRadius.cgFloatValue)
+        }
+
+        return transformPath(path.cgPath().duplicated(times: pathMultiplier))
       },
       context: context)
   }
@@ -37,5 +47,63 @@ extension CGPath {
     }
 
     return cgPath
+  }
+}
+
+// MARK: - BezierPathKeyframe
+
+/// Data that represents how to render a bezier path at a specific point in time
+struct BezierPathKeyframe {
+  let path: BezierPath
+  let cornerRadius: LottieVector1D?
+
+  /// Creates a single array of animatable keyframes from the given sets of keyframes
+  /// that can have different counts / timing parameters
+  static func combining(
+    path: KeyframeGroup<BezierPath>,
+    cornerRadius: KeyframeGroup<LottieVector1D>?) throws
+    -> KeyframeGroup<BezierPathKeyframe>
+  {
+    guard
+      let cornerRadius = cornerRadius,
+      cornerRadius.keyframes.contains(where: { $0.value.cgFloatValue > 0 })
+    else {
+      return path.map { path in
+        BezierPathKeyframe(path: path, cornerRadius: nil)
+      }
+    }
+
+    let combinedKeyframes = Keyframes.combinedIfPossible(
+      path, cornerRadius,
+      makeCombinedResult: BezierPathKeyframe.init)
+
+    if let combinedKeyframes = combinedKeyframes {
+      return combinedKeyframes
+    }
+
+    // If we weren't able to combine all of the keyframes, then we can manually interpolate
+    // the path and corner radius at each time value
+    let pathInterpolator = KeyframeInterpolator(keyframes: path.keyframes)
+    let cornerRadiusInterpolator = KeyframeInterpolator(keyframes: cornerRadius.keyframes)
+
+    let times = path.keyframes.map { $0.time } + cornerRadius.keyframes.map { $0.time }
+    let minimumTime = times.min() ?? 0
+    let maximumTime = times.max() ?? 0
+    let animationLocalTimeRange = Int(minimumTime)...Int(maximumTime)
+
+    let interpolatedKeyframes = animationLocalTimeRange.compactMap { localTime -> Keyframe<BezierPathKeyframe>? in
+      let frame = AnimationFrameTime(localTime)
+      guard let interpolatedPath = pathInterpolator.value(frame: frame) as? BezierPath else {
+        return nil
+      }
+
+      return Keyframe(
+        value: BezierPathKeyframe(
+          path: interpolatedPath,
+          cornerRadius: cornerRadiusInterpolator.value(frame: frame) as? LottieVector1D),
+        time: frame)
+    }
+
+    return KeyframeGroup(keyframes: ContiguousArray(interpolatedKeyframes))
   }
 }
