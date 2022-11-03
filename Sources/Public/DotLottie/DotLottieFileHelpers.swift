@@ -20,8 +20,8 @@ extension DotLottieFile {
     _ name: String,
     bundle: Bundle = Bundle.main,
     subdirectory: String? = nil,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache) async throws
-    -> DotLottieFile
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
+    async throws -> DotLottieFile
   {
     try await withCheckedThrowingContinuation { continuation in
       DotLottieFile.named(name, bundle: bundle, subdirectory: subdirectory, dotLottieCache: dotLottieCache) { result in
@@ -89,8 +89,8 @@ extension DotLottieFile {
   @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
   public static func loadedFrom(
     filepath: String,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache) async throws
-    -> DotLottieFile
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
+    async throws -> DotLottieFile
   {
     try await withCheckedThrowingContinuation { continuation in
       DotLottieFile.loadedFrom(filepath: filepath, dotLottieCache: dotLottieCache) { result in
@@ -146,8 +146,8 @@ extension DotLottieFile {
   public static func asset(
     named name: String,
     bundle: Bundle = Bundle.main,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache) async throws
-    -> DotLottieFile
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
+    async throws -> DotLottieFile
   {
     try await withCheckedThrowingContinuation { continuation in
       DotLottieFile.asset(named: name, bundle: bundle, dotLottieCache: dotLottieCache) { result in
@@ -215,8 +215,8 @@ extension DotLottieFile {
   public static func loadedFrom(
     url: URL,
     session: URLSession = .shared,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache) async throws
-    -> DotLottieFile
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
+    async throws -> DotLottieFile
   {
     try await withCheckedThrowingContinuation { continuation in
       DotLottieFile.loadedFrom(url: url, session: session, dotLottieCache: dotLottieCache) { result in

@@ -110,8 +110,7 @@ extension KeyframeInterpolator where ValueType == AnimationFrameTime {
   static func timeRemapping(
     keyframes timeRemappingKeyframes: KeyframeGroup<LottieVector1D>,
     context: LayerContext)
-    throws
-    -> KeyframeInterpolator<AnimationFrameTime>
+    throws -> KeyframeInterpolator<AnimationFrameTime>
   {
     try context.logCompatibilityIssue("""
       The Core Animation rendering engine partially supports time remapping keyframes,
