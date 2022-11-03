@@ -97,7 +97,7 @@ final class GradientStroke: ShapeItem {
     colors = try KeyframeGroup<[Double]>(dictionary: nestedColorsDictionary)
     numberOfColors = try colorsDictionary.value(for: GradientDataKeys.numberOfColors)
     let dashPatternDictionaries = dictionary[CodingKeys.dashPattern.rawValue] as? [[String: Any]]
-    dashPattern = try? dashPatternDictionaries?.map({ try DashElement(dictionary: $0) })
+    dashPattern = try? dashPatternDictionaries?.map { try DashElement(dictionary: $0) }
     try super.init(dictionary: dictionary)
   }
 

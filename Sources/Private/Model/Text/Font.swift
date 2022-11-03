@@ -47,7 +47,7 @@ final class FontList: Codable, DictionaryInitializable {
 
   init(dictionary: [String: Any]) throws {
     let fontDictionaries: [[String: Any]] = try dictionary.value(for: CodingKeys.fonts)
-    fonts = try fontDictionaries.map({ try Font(dictionary: $0) })
+    fonts = try fontDictionaries.map { try Font(dictionary: $0) }
   }
 
   // MARK: Internal

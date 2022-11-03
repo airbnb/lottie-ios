@@ -194,7 +194,8 @@ extension CALayer {
     from items: [ShapeItem],
     parentGroup: Group?,
     parentGroupPath: [String],
-    context: LayerContext) throws
+    context: LayerContext)
+    throws
   {
     let groupLayers = try makeGroupLayers(
       from: items,
@@ -214,8 +215,8 @@ extension CALayer {
     from items: [ShapeItem],
     parentGroup: Group?,
     parentGroupPath: [String],
-    context: LayerContext) throws
-    -> [GroupLayer]
+    context: LayerContext)
+    throws -> [GroupLayer]
   {
     var (groupItems, otherItems) = items
       .filter { !$0.hidden }

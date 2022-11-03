@@ -60,17 +60,17 @@ extension ZipEntry.LocalFileHeader {
     var fileNameLength = fileNameLength
     var extraFieldLength = extraFieldLength
     var data = Data()
-    withUnsafePointer(to: &localFileHeaderSignature, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &versionNeededToExtract, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &generalPurposeBitFlag, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &compressionMethod, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &lastModFileTime, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &lastModFileDate, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &crc32, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &compressedSize, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &uncompressedSize, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &fileNameLength, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &extraFieldLength, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
+    withUnsafePointer(to: &localFileHeaderSignature) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &versionNeededToExtract) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &generalPurposeBitFlag) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &compressionMethod) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &lastModFileTime) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &lastModFileDate) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &crc32) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &compressedSize) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &uncompressedSize) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &fileNameLength) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &extraFieldLength) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
     data.append(fileNameData)
     data.append(extraFieldData)
     return data
@@ -143,23 +143,23 @@ extension ZipEntry.CentralDirectoryStructure {
     var externalFileAttributes = externalFileAttributes
     var relativeOffsetOfLocalHeader = relativeOffsetOfLocalHeader
     var data = Data()
-    withUnsafePointer(to: &centralDirectorySignature, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &versionMadeBy, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &versionNeededToExtract, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &generalPurposeBitFlag, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &compressionMethod, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &lastModFileTime, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &lastModFileDate, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &crc32, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &compressedSize, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &uncompressedSize, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &fileNameLength, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &extraFieldLength, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &fileCommentLength, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &diskNumberStart, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &internalFileAttributes, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &externalFileAttributes, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &relativeOffsetOfLocalHeader, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
+    withUnsafePointer(to: &centralDirectorySignature) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &versionMadeBy) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &versionNeededToExtract) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &generalPurposeBitFlag) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &compressionMethod) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &lastModFileTime) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &lastModFileDate) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &crc32) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &compressedSize) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &uncompressedSize) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &fileNameLength) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &extraFieldLength) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &fileCommentLength) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &diskNumberStart) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &internalFileAttributes) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &externalFileAttributes) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &relativeOffsetOfLocalHeader) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
     data.append(fileNameData)
     data.append(extraFieldData)
     data.append(fileCommentData)

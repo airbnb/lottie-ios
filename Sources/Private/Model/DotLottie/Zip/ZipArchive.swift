@@ -383,16 +383,16 @@ extension ZipArchive.ZIP64EndOfCentralDirectoryRecord {
     var sizeOfCD = sizeOfCentralDirectory
     var offsetToStartOfCD = offsetToStartOfCentralDirectory
     var data = Data()
-    withUnsafePointer(to: &zip64EOCDRecordSignature, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &sizeOfZIP64EOCDRecord, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &versionMadeBy, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &versionNeededToExtract, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &numberOfDisk, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &numberOfDiskStart, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &totalNumberOfEntriesOnDisk, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &totalNumberOfEntriesInCD, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &sizeOfCD, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &offsetToStartOfCD, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
+    withUnsafePointer(to: &zip64EOCDRecordSignature) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &sizeOfZIP64EOCDRecord) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &versionMadeBy) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &versionNeededToExtract) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &numberOfDisk) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &numberOfDiskStart) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &totalNumberOfEntriesOnDisk) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &totalNumberOfEntriesInCD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &sizeOfCD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &offsetToStartOfCD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
     data.append(zip64ExtensibleDataSector)
     return data
   }
@@ -419,10 +419,10 @@ extension ZipArchive.ZIP64EndOfCentralDirectoryLocator {
     var offsetOfZIP64EOCDRecord = relativeOffsetOfZIP64EOCDRecord
     var totalNumberOfDisk = totalNumberOfDisk
     var data = Data()
-    withUnsafePointer(to: &zip64EOCDLocatorSignature, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &numberOfDiskWithZIP64EOCD, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &offsetOfZIP64EOCDRecord, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &totalNumberOfDisk, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
+    withUnsafePointer(to: &zip64EOCDLocatorSignature) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &numberOfDiskWithZIP64EOCD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &offsetOfZIP64EOCDRecord) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &totalNumberOfDisk) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
     return data
   }
 
@@ -459,14 +459,14 @@ extension ZipArchive.EndOfCentralDirectoryRecord {
     var offsetToStartOfCD = offsetToStartOfCentralDirectory
     var zipFileCommentLength = zipFileCommentLength
     var data = Data()
-    withUnsafePointer(to: &endOfCDSignature, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &numberOfDisk, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &numberOfDiskStart, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &totalNumberOfEntriesOnDisk, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &totalNumberOfEntriesInCD, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &sizeOfCentralDirectory, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &offsetToStartOfCD, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
-    withUnsafePointer(to: &zipFileCommentLength, { data.append(UnsafeBufferPointer(start: $0, count: 1)) })
+    withUnsafePointer(to: &endOfCDSignature) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &numberOfDisk) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &numberOfDiskStart) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &totalNumberOfEntriesOnDisk) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &totalNumberOfEntriesInCD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &sizeOfCentralDirectory) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &offsetToStartOfCD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+    withUnsafePointer(to: &zipFileCommentLength) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
     data.append(zipFileCommentData)
     return data
   }

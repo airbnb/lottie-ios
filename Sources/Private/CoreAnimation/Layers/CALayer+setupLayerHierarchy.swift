@@ -106,8 +106,8 @@ extension CALayer {
   fileprivate func maskLayer(
     for matteLayerModel: LayerModel,
     type: MatteType,
-    context: LayerContext) throws
-    -> CALayer?
+    context: LayerContext)
+    throws -> CALayer?
   {
     switch type {
     case .add:

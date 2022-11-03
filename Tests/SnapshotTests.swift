@@ -101,7 +101,8 @@ class SnapshotTests: XCTestCase {
   /// Captures snapshots of `sampleAnimationURLs` and compares them to the snapshot images stored on disk
   private func compareSampleSnapshots(
     configuration: LottieConfiguration,
-    testName: String = #function) async throws
+    testName: String = #function)
+    async throws
   {
     #if os(iOS)
     guard UIScreen.main.scale == 2 else {
@@ -244,7 +245,8 @@ extension SnapshotConfiguration {
     for sampleAnimationName: String,
     configuration: LottieConfiguration,
     logger: LottieLogger = LottieLogger.shared)
-  async -> LottieAnimationView? {
+    async -> LottieAnimationView?
+  {
     let snapshotConfiguration = SnapshotConfiguration.forSample(named: sampleAnimationName)
 
     guard snapshotConfiguration.shouldSnapshot(using: configuration) else {

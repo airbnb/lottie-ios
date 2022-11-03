@@ -69,7 +69,7 @@ class ShapeContainerLayer: CALayer {
 
   func updateRenderScale() {
     contentsScale = renderScale
-    renderLayers.forEach({ $0.renderScale = renderScale })
+    renderLayers.forEach { $0.renderScale = renderScale }
   }
 
 }

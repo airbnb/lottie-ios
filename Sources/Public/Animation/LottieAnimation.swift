@@ -68,7 +68,7 @@ public final class LottieAnimation: Codable, DictionaryInitializable {
     let layerDictionaries: [[String: Any]] = try dictionary.value(for: CodingKeys.layers)
     layers = try [LayerModel].fromDictionaries(layerDictionaries)
     if let glyphDictionaries = dictionary[CodingKeys.glyphs.rawValue] as? [[String: Any]] {
-      glyphs = try glyphDictionaries.map({ try Glyph(dictionary: $0) })
+      glyphs = try glyphDictionaries.map { try Glyph(dictionary: $0) }
     } else {
       glyphs = nil
     }
@@ -83,7 +83,7 @@ public final class LottieAnimation: Codable, DictionaryInitializable {
       assetLibrary = nil
     }
     if let markerDictionaries = dictionary[CodingKeys.markers.rawValue] as? [[String: Any]] {
-      let markers = try markerDictionaries.map({ try Marker(dictionary: $0) })
+      let markers = try markerDictionaries.map { try Marker(dictionary: $0) }
       var markerMap: [String: Marker] = [:]
       for marker in markers {
         markerMap[marker.name] = marker

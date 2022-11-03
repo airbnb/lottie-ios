@@ -87,7 +87,8 @@ extension Trim {
   /// The `strokeStart` and `strokeEnd` keyframes to apply to a `CAShapeLayer`,
   /// plus a `pathMultiplier` that should be applied to the layer's `path` so that
   /// trim values larger than 100% can be displayed properly.
-  fileprivate func caShapeLayerKeyframes(context: LayerAnimationContext) throws
+  fileprivate func caShapeLayerKeyframes(context: LayerAnimationContext)
+    throws
     -> (strokeStart: KeyframeGroup<LottieVector1D>, strokeEnd: KeyframeGroup<LottieVector1D>, pathMultiplier: PathMultiplier)
   {
     let strokeStart: KeyframeGroup<LottieVector1D>
@@ -186,7 +187,8 @@ extension Trim {
   private func adjustKeyframesForTrimOffsets(
     strokeKeyframes: ContiguousArray<Keyframe<LottieVector1D>>,
     offsetKeyframes: ContiguousArray<Keyframe<LottieVector1D>>,
-    context _: LayerAnimationContext) throws -> ContiguousArray<Keyframe<LottieVector1D>>
+    context _: LayerAnimationContext)
+    throws -> ContiguousArray<Keyframe<LottieVector1D>>
   {
     guard
       !strokeKeyframes.isEmpty,

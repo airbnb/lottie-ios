@@ -44,8 +44,7 @@ extension CALayer {
     keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
     value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
     context: LayerAnimationContext)
-    throws
-    -> CAAnimation?
+    throws -> CAAnimation?
   {
     guard !keyframes.isEmpty else { return nil }
 
@@ -87,8 +86,7 @@ extension CALayer {
   private func customizedAnimation<ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
     context: LayerAnimationContext)
-    throws
-    -> CAPropertyAnimation?
+    throws -> CAPropertyAnimation?
   {
     guard
       let customizableProperty = property.customizableProperty,
@@ -162,8 +160,7 @@ extension CALayer {
     animationSegments: [[Keyframe<KeyframeValue>]],
     value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
     context: LayerAnimationContext)
-    throws
-    -> CAAnimationGroup
+    throws -> CAAnimationGroup
   {
     // Build the `CAKeyframeAnimation` for each segment of keyframes
     // with the same `CAAnimationCalculationMode`.

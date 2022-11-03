@@ -15,7 +15,7 @@ final class GroupInterpolator<ValueType>: ValueProvider where ValueType: Interpo
 
   /// Initialize with an array of array of keyframes.
   init(keyframeGroups: ContiguousArray<ContiguousArray<Keyframe<ValueType>>>) {
-    keyframeInterpolators = ContiguousArray(keyframeGroups.map({ KeyframeInterpolator(keyframes: $0) }))
+    keyframeInterpolators = ContiguousArray(keyframeGroups.map { KeyframeInterpolator(keyframes: $0) })
   }
 
   // MARK: Internal
@@ -28,7 +28,7 @@ final class GroupInterpolator<ValueType>: ValueProvider where ValueType: Interpo
 
   var storage: ValueProviderStorage<[ValueType]> {
     .closure { frame in
-      self.keyframeInterpolators.map({ $0.value(frame: frame) as! ValueType })
+      self.keyframeInterpolators.map { $0.value(frame: frame) as! ValueType }
     }
   }
 

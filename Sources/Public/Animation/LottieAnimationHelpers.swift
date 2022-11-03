@@ -149,8 +149,8 @@ extension LottieAnimation {
   ///
   public static func from(
     data: Data,
-    strategy: DecodingStrategy = LottieConfiguration.shared.decodingStrategy) throws
-    -> LottieAnimation
+    strategy: DecodingStrategy = LottieConfiguration.shared.decodingStrategy)
+    throws -> LottieAnimation
   {
     switch strategy {
     case .legacyCodable:
