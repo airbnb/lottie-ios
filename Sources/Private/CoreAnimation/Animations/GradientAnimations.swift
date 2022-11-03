@@ -111,23 +111,31 @@ extension GradientRenderLayer {
   private func addRadialGradientAnimations(for gradient: GradientShapeItem, context: LayerAnimationContext) throws {
     type = .radial
 
-    // To draw the correct gradients, we have to derive a custom `endPoint`
-    // relative to the `startPoint` value. Since calculating the `endPoint`
-    // at any given time requires knowing the current `startPoint`,
-    // we can't allow them to animate separately.
-    let absoluteStartPoint = try gradient.startPoint
-      .exactlyOneKeyframe(context: context, description: "gradient startPoint").pointValue
+    let combinedKeyframes = Keyframes.combined(
+      gradient.startPoint, gradient.endPoint,
+      makeCombinedResult: { absoluteStartPoint, absoluteEndPoint -> (startPoint: CGPoint, endPoint: CGPoint) in
+        // Convert the absolute start / end points to the relative structure used by Core Animation
+        let relativeStartPoint = percentBasedPointInBounds(from: absoluteStartPoint.pointValue)
+        let radius = absoluteStartPoint.pointValue.distanceTo(absoluteEndPoint.pointValue)
+        let relativeEndPoint = percentBasedPointInBounds(
+          from: CGPoint(
+            x: absoluteStartPoint.x + radius,
+            y: absoluteStartPoint.y + radius))
 
-    let absoluteEndPoint = try gradient.endPoint
-      .exactlyOneKeyframe(context: context, description: "gradient endPoint").pointValue
+        return (startPoint: relativeStartPoint, endPoint: relativeEndPoint)
+      })
 
-    startPoint = percentBasedPointInBounds(from: absoluteStartPoint)
+    try addAnimation(
+      for: .startPoint,
+      keyframes: combinedKeyframes.keyframes,
+      value: \.startPoint,
+      context: context)
 
-    let radius = absoluteStartPoint.distanceTo(absoluteEndPoint)
-    endPoint = percentBasedPointInBounds(
-      from: CGPoint(
-        x: absoluteStartPoint.x + radius,
-        y: absoluteStartPoint.y + radius))
+    try addAnimation(
+      for: .endPoint,
+      keyframes: combinedKeyframes.keyframes,
+      value: \.endPoint,
+      context: context)
   }
 }
 
