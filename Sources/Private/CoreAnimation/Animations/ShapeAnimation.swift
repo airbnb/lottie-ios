@@ -66,7 +66,7 @@ extension CAShapeLayer {
   /// Adds animations for `strokeStart` and `strokeEnd` from the given `Trim` object
   @nonobjc
   func addAnimations(for trim: Trim, context: LayerAnimationContext) throws -> PathMultiplier {
-    let (strokeStartKeyframes, strokeEndKeyframes, pathMultiplier) = try trim.caShapeLayerKeyframes(context: context)
+    let (strokeStartKeyframes, strokeEndKeyframes, pathMultiplier) = try trim.caShapeLayerKeyframes()
 
     try addAnimation(
       for: .strokeStart,
@@ -102,7 +102,7 @@ extension Trim {
   /// The `strokeStart` and `strokeEnd` keyframes to apply to a `CAShapeLayer`,
   /// plus a `pathMultiplier` that should be applied to the layer's `path` so that
   /// trim values larger than 100% can be displayed properly.
-  fileprivate func caShapeLayerKeyframes(context _: LayerAnimationContext)
+  fileprivate func caShapeLayerKeyframes()
     throws
     -> (strokeStart: KeyframeGroup<LottieVector1D>, strokeEnd: KeyframeGroup<LottieVector1D>, pathMultiplier: PathMultiplier)
   {
