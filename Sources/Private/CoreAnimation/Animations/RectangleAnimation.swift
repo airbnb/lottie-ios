@@ -13,13 +13,9 @@ extension CAShapeLayer {
     roundedCorners: RoundedCorners?)
     throws
   {
-    let combinedKeyframes = try rectangle.combinedKeyframes(
-      context: context,
-      roundedCorners: roundedCorners)
-
     try addAnimation(
       for: .path,
-      keyframes: combinedKeyframes.keyframes,
+      keyframes: try rectangle.combinedKeyframes(roundedCorners: roundedCorners).keyframes,
       value: { keyframe in
         BezierPath.rectangle(
           position: keyframe.position.pointValue,
@@ -42,11 +38,7 @@ extension Rectangle {
   }
 
   /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this Rectangle
-  func combinedKeyframes(
-    context: LayerAnimationContext,
-    roundedCorners: RoundedCorners?) throws
-    -> KeyframeGroup<Rectangle.Keyframe>
-  {
+  func combinedKeyframes(roundedCorners: RoundedCorners?) throws -> KeyframeGroup<Rectangle.Keyframe> {
     let cornerRadius = roundedCorners?.radius ?? cornerRadius
     return Keyframes.combined(
       size, position, cornerRadius,

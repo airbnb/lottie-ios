@@ -78,7 +78,7 @@ enum Keyframes {
     makeCombinedResult: (T1, T2, T3, T4, T5, T6, T7) -> CombinedResult)
     -> KeyframeGroup<CombinedResult>
     where T1: AnyInterpolatable, T2: AnyInterpolatable, T3: AnyInterpolatable, T4: AnyInterpolatable,
-      T5: AnyInterpolatable, T6: AnyInterpolatable, T7: AnyInterpolatable
+    T5: AnyInterpolatable, T6: AnyInterpolatable, T7: AnyInterpolatable
   {
     Keyframes.combined(
       [k1, k2, k3, k4, k5, k6, k7],

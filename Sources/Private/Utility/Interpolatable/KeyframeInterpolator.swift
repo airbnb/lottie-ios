@@ -249,6 +249,6 @@ extension ContiguousArray {
 
 }
 
-protocol AnyKeyframeInterpolator: AnyValueProvider {
-  
-}
+// MARK: - AnyKeyframeInterpolator
+
+protocol AnyKeyframeInterpolator: AnyValueProvider { }

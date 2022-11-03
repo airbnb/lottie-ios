@@ -36,7 +36,7 @@ extension CAShapeLayer {
   {
     try addAnimation(
       for: .path,
-      keyframes: try star.combinedKeyframes(context: context).keyframes,
+      keyframes: try star.combinedKeyframes().keyframes,
       value: { keyframe in
         BezierPath.star(
           position: keyframe.position.pointValue,
@@ -62,7 +62,7 @@ extension CAShapeLayer {
   {
     try addAnimation(
       for: .path,
-      keyframes: try star.combinedKeyframes(context: context).keyframes,
+      keyframes: try star.combinedKeyframes().keyframes,
       value: { keyframe in
         BezierPath.polygon(
           position: keyframe.position.pointValue,
@@ -91,7 +91,7 @@ extension Star {
   }
 
   /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this star/polygon
-  func combinedKeyframes(context: LayerAnimationContext) throws -> KeyframeGroup<Keyframe> {
+  func combinedKeyframes() throws -> KeyframeGroup<Keyframe> {
     Keyframes.combined(
       position,
       outerRadius,
