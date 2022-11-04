@@ -51,7 +51,7 @@ extension CALayer {
     }
 
     // Create an `AnimationLayer` for each `LayerModel`
-    for (layerModel, mask) in try layersInZAxisOrder.pairedLayersAndMasks(context: context) {
+    for (layerModel, mask) in try layersInZAxisOrder.pairedLayersAndMasks() {
       guard let layer = try layerModel.makeAnimationLayer(context: context) else {
         continue
       }
@@ -143,7 +143,7 @@ extension Collection where Element == LayerModel {
   /// a `LayerModel` to use as its mask, if applicable
   /// based on the layer's `MatteType` configuration.
   ///  - Assumes the layers are sorted in z-axis order.
-  fileprivate func pairedLayersAndMasks(context _: LayerContext) throws
+  fileprivate func pairedLayersAndMasks() throws
     -> [(layer: LayerModel, mask: (model: LayerModel, matteType: MatteType)?)]
   {
     var layersAndMasks = [(layer: LayerModel, mask: (model: LayerModel, matteType: MatteType)?)]()

@@ -14,7 +14,7 @@ extension CAShapeLayer {
   {
     try addAnimation(
       for: .path,
-      keyframes: ellipse.combinedKeyframes(context: context).keyframes,
+      keyframes: ellipse.combinedKeyframes().keyframes,
       value: { keyframe in
         BezierPath.ellipse(
           size: keyframe.size.sizeValue,
@@ -35,21 +35,9 @@ extension Ellipse {
   }
 
   /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this Ellipse
-  func combinedKeyframes(context: LayerAnimationContext) throws-> KeyframeGroup<Ellipse.Keyframe> {
-    let combinedKeyframes = Keyframes.combinedIfPossible(
+  func combinedKeyframes() throws -> KeyframeGroup<Ellipse.Keyframe> {
+    Keyframes.combined(
       size, position,
       makeCombinedResult: Ellipse.Keyframe.init)
-
-    if let combinedKeyframes = combinedKeyframes {
-      return combinedKeyframes
-    } else {
-      // If we weren't able to combine all of the keyframes, we have to take the timing values
-      // from one property and use a fixed value for the other properties.
-      return try size.map { sizeValue in
-        Keyframe(
-          size: sizeValue,
-          position: try position.exactlyOneKeyframe(context: context, description: "ellipse position"))
-      }
-    }
   }
 }

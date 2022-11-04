@@ -361,9 +361,9 @@
 		2E9C970E2822F43100677516 /* CALayer+fillBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95AA2822F43100677516 /* CALayer+fillBounds.swift */; };
 		2E9C970F2822F43100677516 /* CALayer+fillBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95AA2822F43100677516 /* CALayer+fillBounds.swift */; };
 		2E9C97102822F43100677516 /* CALayer+fillBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95AA2822F43100677516 /* CALayer+fillBounds.swift */; };
-		2E9C97112822F43100677516 /* Keyframes+combinedIfPossible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95AB2822F43100677516 /* Keyframes+combinedIfPossible.swift */; };
-		2E9C97122822F43100677516 /* Keyframes+combinedIfPossible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95AB2822F43100677516 /* Keyframes+combinedIfPossible.swift */; };
-		2E9C97132822F43100677516 /* Keyframes+combinedIfPossible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95AB2822F43100677516 /* Keyframes+combinedIfPossible.swift */; };
+		2E9C97112822F43100677516 /* Keyframes+combined.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95AB2822F43100677516 /* Keyframes+combined.swift */; };
+		2E9C97122822F43100677516 /* Keyframes+combined.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95AB2822F43100677516 /* Keyframes+combined.swift */; };
+		2E9C97132822F43100677516 /* Keyframes+combined.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95AB2822F43100677516 /* Keyframes+combined.swift */; };
 		2E9C97142822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95AC2822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift */; };
 		2E9C97152822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95AC2822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift */; };
 		2E9C97162822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95AC2822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift */; };
@@ -784,7 +784,7 @@
 		2E9C95A72822F43100677516 /* CompatibilityTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibilityTracker.swift; sourceTree = "<group>"; };
 		2E9C95A82822F43100677516 /* ValueProviderStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueProviderStore.swift; sourceTree = "<group>"; };
 		2E9C95AA2822F43100677516 /* CALayer+fillBounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+fillBounds.swift"; sourceTree = "<group>"; };
-		2E9C95AB2822F43100677516 /* Keyframes+combinedIfPossible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Keyframes+combinedIfPossible.swift"; sourceTree = "<group>"; };
+		2E9C95AB2822F43100677516 /* Keyframes+combined.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Keyframes+combined.swift"; sourceTree = "<group>"; };
 		2E9C95AC2822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyframeGroup+exactlyOneKeyframe.swift"; sourceTree = "<group>"; };
 		2E9C95AE2822F43100677516 /* CAAnimation+TimingConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAAnimation+TimingConfiguration.swift"; sourceTree = "<group>"; };
 		2E9C95AF2822F43100677516 /* ShapeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ShapeAnimation.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -1319,7 +1319,7 @@
 			isa = PBXGroup;
 			children = (
 				2E9C95AA2822F43100677516 /* CALayer+fillBounds.swift */,
-				2E9C95AB2822F43100677516 /* Keyframes+combinedIfPossible.swift */,
+				2E9C95AB2822F43100677516 /* Keyframes+combined.swift */,
 				2E9C95AC2822F43100677516 /* KeyframeGroup+exactlyOneKeyframe.swift */,
 			);
 			path = Extensions;
@@ -1950,7 +1950,7 @@
 				2E9C97382822F43100677516 /* VisibilityAnimation.swift in Sources */,
 				2EAF5AD727A0798700E00531 /* Vectors.swift in Sources */,
 				2E9C95E22822F43100677516 /* Group.swift in Sources */,
-				2E9C97112822F43100677516 /* Keyframes+combinedIfPossible.swift in Sources */,
+				2E9C97112822F43100677516 /* Keyframes+combined.swift in Sources */,
 				0887347B28F0CCDD00458627 /* LottieAnimationView.swift in Sources */,
 				2EAF5AD127A0798700E00531 /* AnimatedControl.swift in Sources */,
 				2E9C966F2822F43100677516 /* LayerTextProvider.swift in Sources */,
@@ -2185,7 +2185,7 @@
 				2E9C97392822F43100677516 /* VisibilityAnimation.swift in Sources */,
 				2EAF5AD827A0798700E00531 /* Vectors.swift in Sources */,
 				2E9C95E32822F43100677516 /* Group.swift in Sources */,
-				2E9C97122822F43100677516 /* Keyframes+combinedIfPossible.swift in Sources */,
+				2E9C97122822F43100677516 /* Keyframes+combined.swift in Sources */,
 				0887347C28F0CCDD00458627 /* LottieAnimationView.swift in Sources */,
 				2EAF5AD227A0798700E00531 /* AnimatedControl.swift in Sources */,
 				2E9C96702822F43100677516 /* LayerTextProvider.swift in Sources */,
@@ -2398,7 +2398,7 @@
 				2E9C973A2822F43100677516 /* VisibilityAnimation.swift in Sources */,
 				2EAF5AD927A0798700E00531 /* Vectors.swift in Sources */,
 				2E9C95E42822F43100677516 /* Group.swift in Sources */,
-				2E9C97132822F43100677516 /* Keyframes+combinedIfPossible.swift in Sources */,
+				2E9C97132822F43100677516 /* Keyframes+combined.swift in Sources */,
 				0887347D28F0CCDD00458627 /* LottieAnimationView.swift in Sources */,
 				2EAF5AD327A0798700E00531 /* AnimatedControl.swift in Sources */,
 				2E9C96712822F43100677516 /* LayerTextProvider.swift in Sources */,

@@ -66,7 +66,7 @@ extension CAShapeLayer {
   /// Adds animations for `strokeStart` and `strokeEnd` from the given `Trim` object
   @nonobjc
   func addAnimations(for trim: Trim, context: LayerAnimationContext) throws -> PathMultiplier {
-    let (strokeStartKeyframes, strokeEndKeyframes, pathMultiplier) = try trim.caShapeLayerKeyframes(context: context)
+    let (strokeStartKeyframes, strokeEndKeyframes, pathMultiplier) = try trim.caShapeLayerKeyframes()
 
     try addAnimation(
       for: .strokeStart,
@@ -102,7 +102,7 @@ extension Trim {
   /// The `strokeStart` and `strokeEnd` keyframes to apply to a `CAShapeLayer`,
   /// plus a `pathMultiplier` that should be applied to the layer's `path` so that
   /// trim values larger than 100% can be displayed properly.
-  fileprivate func caShapeLayerKeyframes(context: LayerAnimationContext)
+  fileprivate func caShapeLayerKeyframes()
     throws
     -> (strokeStart: KeyframeGroup<LottieVector1D>, strokeEnd: KeyframeGroup<LottieVector1D>, pathMultiplier: PathMultiplier)
   {
@@ -139,14 +139,12 @@ extension Trim {
     var adjustedStrokeStart = KeyframeGroup(
       keyframes: try adjustKeyframesForTrimOffsets(
         strokeKeyframes: interpolatedStrokeStart,
-        offsetKeyframes: interpolatedStrokeOffset,
-        context: context))
+        offsetKeyframes: interpolatedStrokeOffset))
 
     var adjustedStrokeEnd = KeyframeGroup(
       keyframes: try adjustKeyframesForTrimOffsets(
         strokeKeyframes: interpolatedStrokeEnd,
-        offsetKeyframes: interpolatedStrokeOffset,
-        context: context))
+        offsetKeyframes: interpolatedStrokeOffset))
 
     // If maximum stroke value is larger than 100%, then we have to create copies of the path
     // so the total path length includes the maximum stroke
@@ -201,8 +199,7 @@ extension Trim {
   /// - Precondition: The keyframes must be interpolated using `KeyframeGroup.manuallyInterpolateKeyframes()`
   private func adjustKeyframesForTrimOffsets(
     strokeKeyframes: ContiguousArray<Keyframe<LottieVector1D>>,
-    offsetKeyframes: ContiguousArray<Keyframe<LottieVector1D>>,
-    context _: LayerAnimationContext)
+    offsetKeyframes: ContiguousArray<Keyframe<LottieVector1D>>)
     throws -> ContiguousArray<Keyframe<LottieVector1D>>
   {
     guard

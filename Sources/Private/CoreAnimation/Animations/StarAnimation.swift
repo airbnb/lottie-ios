@@ -36,7 +36,7 @@ extension CAShapeLayer {
   {
     try addAnimation(
       for: .path,
-      keyframes: try star.combinedKeyframes(context: context).keyframes,
+      keyframes: try star.combinedKeyframes().keyframes,
       value: { keyframe in
         BezierPath.star(
           position: keyframe.position.pointValue,
@@ -62,7 +62,7 @@ extension CAShapeLayer {
   {
     try addAnimation(
       for: .path,
-      keyframes: try star.combinedKeyframes(context: context).keyframes,
+      keyframes: try star.combinedKeyframes().keyframes,
       value: { keyframe in
         BezierPath.polygon(
           position: keyframe.position.pointValue,
@@ -91,8 +91,8 @@ extension Star {
   }
 
   /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this star/polygon
-  func combinedKeyframes(context: LayerAnimationContext) throws -> KeyframeGroup<Keyframe> {
-    let combinedKeyframes = Keyframes.combinedIfPossible(
+  func combinedKeyframes() throws -> KeyframeGroup<Keyframe> {
+    Keyframes.combined(
       position,
       outerRadius,
       innerRadius ?? KeyframeGroup(LottieVector1D(0)),
@@ -101,24 +101,5 @@ extension Star {
       points,
       rotation,
       makeCombinedResult: Star.Keyframe.init)
-
-    if let combinedKeyframes = combinedKeyframes {
-      return combinedKeyframes
-    } else {
-      // If we weren't able to combine all of the keyframes, we have to take the timing values
-      // from one property and use a fixed value for the other properties.
-      return try position.map { positionValue in
-        Keyframe(
-          position: positionValue,
-          outerRadius: try outerRadius.exactlyOneKeyframe(context: context, description: "star outerRadius"),
-          innerRadius: try innerRadius?.exactlyOneKeyframe(context: context, description: "star innerRadius")
-            ?? LottieVector1D(0),
-          outerRoundness: try outerRoundness.exactlyOneKeyframe(context: context, description: "star outerRoundness"),
-          innerRoundness: try innerRoundness?.exactlyOneKeyframe(context: context, description: "star innerRoundness")
-            ?? LottieVector1D(0),
-          points: try points.exactlyOneKeyframe(context: context, description: "star points"),
-          rotation: try rotation.exactlyOneKeyframe(context: context, description: "star rotation"))
-      }
-    }
   }
 }
