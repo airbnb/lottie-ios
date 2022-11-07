@@ -132,7 +132,7 @@ final class LegacyGradientFillRenderer: PassThroughOutputNode, Renderable {
     /// Now draw the gradient
     guard
       let gradient = CGGradient(
-        colorsSpace: gradientColors.first?.colorSpace ?? CGColorSpaceCreateDeviceRGB(),
+        colorsSpace: CGColorSpaceCreateDeviceRGB(),
         colors: gradientColors as CFArray,
         locations: colorLocations)
     else { return }
