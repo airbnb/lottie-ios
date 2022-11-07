@@ -12,6 +12,18 @@ extension CGColor {
       return CGColor(
         colorSpace: CGColorSpaceCreateDeviceRGB(),
         components: [red, green, blue])!
+        .copy(alpha: 1)!
+    }
+  }
+
+  static func gray(_ gray: CGFloat) -> CGColor {
+    if #available(iOS 13.0, tvOS 13.0, macOS 10.5, *) {
+      return CGColor(gray: gray, alpha: 1)
+    } else {
+      return CGColor(
+        colorSpace: CGColorSpaceCreateDeviceGray(),
+        components: [gray])!
+        .copy(alpha: 1)!
     }
   }
 

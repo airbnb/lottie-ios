@@ -103,8 +103,8 @@ private class MaskLayer: CALayer {
     addSublayer(maskLayer)
     anchorPoint = .zero
     maskLayer.fillColor = mask.mode == .add
-      ? CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1, 0, 0, 1])
-      : CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0, 1, 0, 1])
+      ? .rgb(1, 0, 0)
+      : .rgb(0, 1, 0)
     maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
     actions = [
       "opacity" : NSNull(),
