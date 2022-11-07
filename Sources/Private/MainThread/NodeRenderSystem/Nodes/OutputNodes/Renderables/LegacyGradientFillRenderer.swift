@@ -67,15 +67,11 @@ final class LegacyGradientFillRenderer: PassThroughOutputNode, Renderable {
 
     var gradientColors = [CGColor]()
     var colorLocations = [CGFloat]()
-    let colorSpace = CGColorSpaceCreateDeviceRGB()
     let maskColorSpace = CGColorSpaceCreateDeviceGray()
     for i in 0..<numberOfColors {
       let ix = i * 4
-      if
-        colors.count > ix, let color = CGColor(
-          colorSpace: colorSpace,
-          components: [colors[ix + 1], colors[ix + 2], colors[ix + 3], 1])
-      {
+      if colors.count > ix {
+        let color = CGColor.rgb(colors[ix + 1], colors[ix + 2], colors[ix + 3])
         gradientColors.append(color)
         colorLocations.append(colors[ix])
       }
@@ -87,10 +83,8 @@ final class LegacyGradientFillRenderer: PassThroughOutputNode, Renderable {
       if alpha < 1 {
         drawMask = true
       }
-      if let color = CGColor(colorSpace: maskColorSpace, components: [alpha, 1]) {
-        alphaLocations.append(colors[i])
-        alphaColors.append(color)
-      }
+      alphaLocations.append(colors[i])
+      alphaColors.append(.gray(alpha))
     }
 
     inContext.setAlpha(opacity)
@@ -136,8 +130,13 @@ final class LegacyGradientFillRenderer: PassThroughOutputNode, Renderable {
     }
 
     /// Now draw the gradient
-    guard let gradient = CGGradient(colorsSpace: colorSpace, colors: gradientColors as CFArray, locations: colorLocations)
+    guard
+      let gradient = CGGradient(
+        colorsSpace: CGColorSpaceCreateDeviceRGB(),
+        colors: gradientColors as CFArray,
+        locations: colorLocations)
     else { return }
+
     if type == .linear {
       inContext.drawLinearGradient(gradient, start: start, end: end, options: [.drawsAfterEndLocation, .drawsBeforeStartLocation])
     } else {

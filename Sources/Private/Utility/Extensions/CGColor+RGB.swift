@@ -6,13 +6,18 @@ import QuartzCore
 extension CGColor {
   /// Initializes a `CGColor` using the given `RGB` values
   static func rgb(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat) -> CGColor {
-    if #available(iOS 13.0, tvOS 13.0, macOS 10.5, *) {
-      return CGColor(red: red, green: green, blue: blue, alpha: 1)
-    } else {
-      return CGColor(
-        colorSpace: CGColorSpaceCreateDeviceRGB(),
-        components: [red, green, blue])!
-    }
+    CGColor(
+      colorSpace: CGColorSpaceCreateDeviceRGB(),
+      components: [red, green, blue])!
+      .copy(alpha: 1)!
+  }
+
+  /// Initializes a `CGColor` using the given grayscale value
+  static func gray(_ gray: CGFloat) -> CGColor {
+    CGColor(
+      colorSpace: CGColorSpaceCreateDeviceGray(),
+      components: [gray])!
+      .copy(alpha: 1)!
   }
 
   /// Initializes a `CGColor` using the given `RGBA` values

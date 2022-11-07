@@ -150,10 +150,8 @@ extension ShapeRenderLayer: LayerDebugging {
 
 extension LayerDebugStyle {
   static func defaultStyle() -> LayerDebugStyle {
-    let colorSpace = CGColorSpaceCreateDeviceRGB()
-
-    let anchorColor = CGColor(colorSpace: colorSpace, components: [1, 0, 0, 1])!
-    let boundsColor = CGColor(colorSpace: colorSpace, components: [1, 1, 0, 1])!
+    let anchorColor = CGColor.rgb(1, 0, 0)
+    let boundsColor = CGColor.rgb(1, 1, 0)
     return LayerDebugStyle(
       anchorColor: anchorColor,
       boundsColor: boundsColor,
@@ -162,9 +160,8 @@ extension LayerDebugStyle {
   }
 
   static func topLayerStyle() -> LayerDebugStyle {
-    let colorSpace = CGColorSpaceCreateDeviceRGB()
-    let anchorColor = CGColor(colorSpace: colorSpace, components: [1, 0.5, 0, 0])!
-    let boundsColor = CGColor(colorSpace: colorSpace, components: [0, 1, 0, 1])!
+    let anchorColor = CGColor.rgba(1, 0.5, 0, 0)
+    let boundsColor = CGColor.rgb(0, 1, 0)
 
     return LayerDebugStyle(
       anchorColor: anchorColor,
@@ -174,9 +171,8 @@ extension LayerDebugStyle {
   }
 
   static func nullLayerStyle() -> LayerDebugStyle {
-    let colorSpace = CGColorSpaceCreateDeviceRGB()
-    let anchorColor = CGColor(colorSpace: colorSpace, components: [0, 0, 1, 0])!
-    let boundsColor = CGColor(colorSpace: colorSpace, components: [0, 1, 0, 1])!
+    let anchorColor = CGColor.rgba(0, 0, 1, 0)
+    let boundsColor = CGColor.rgb(0, 1, 0)
 
     return LayerDebugStyle(
       anchorColor: anchorColor,
@@ -186,9 +182,8 @@ extension LayerDebugStyle {
   }
 
   static func shapeLayerStyle() -> LayerDebugStyle {
-    let colorSpace = CGColorSpaceCreateDeviceRGB()
-    let anchorColor = CGColor(colorSpace: colorSpace, components: [0, 1, 0, 0])!
-    let boundsColor = CGColor(colorSpace: colorSpace, components: [0, 1, 0, 1])!
+    let anchorColor = CGColor.rgba(0, 1, 0, 0)
+    let boundsColor = CGColor.rgb(0, 1, 0)
 
     return LayerDebugStyle(
       anchorColor: anchorColor,
@@ -198,9 +193,8 @@ extension LayerDebugStyle {
   }
 
   static func shapeRenderLayerStyle() -> LayerDebugStyle {
-    let colorSpace = CGColorSpaceCreateDeviceRGB()
-    let anchorColor = CGColor(colorSpace: colorSpace, components: [0, 1, 1, 0])!
-    let boundsColor = CGColor(colorSpace: colorSpace, components: [0, 1, 0, 1])!
+    let anchorColor = CGColor.rgba(0, 1, 1, 0)
+    let boundsColor = CGColor.rgb(0, 1, 0)
 
     return LayerDebugStyle(
       anchorColor: anchorColor,
