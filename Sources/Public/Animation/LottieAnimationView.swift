@@ -621,7 +621,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   }
 
   /// Method that returns self when animation is set to non-nil value and animation layer is redrawn
-  public func whenAnimationReady(handler: @escaping (LottieAnimationView) -> Void) {
+  public func onAnimationReady(handler: @escaping (LottieAnimationView) -> Void) {
     serialQueue.async {
       if let _ = self.animation {
         DispatchQueue.main.async {
