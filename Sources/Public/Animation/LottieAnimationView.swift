@@ -605,21 +605,6 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     currentFrame = 0
   }
 
-  /// Checks if animation is set, and processes all handlers and resets them.
-  private func processAnimationReadyHandlers() {
-    /// Only when animation set to non-nil value
-    guard animation != nil else { return }
-
-    serialQueue.async {
-      self.animationReadyHandlers.forEach { handler in
-        DispatchQueue.main.async {
-          handler(self)
-        }
-      }
-      self.animationReadyHandlers.removeAll()
-    }
-  }
-
   /// Method that returns self when animation is set to non-nil value and animation layer is redrawn
   public func onAnimationReady(handler: @escaping (LottieAnimationView) -> Void) {
     serialQueue.async {
@@ -1434,6 +1419,8 @@ final public class LottieAnimationView: LottieAnimationViewBase {
 
   // MARK: Private
 
+  private typealias AnimationReadyHandler = (LottieAnimationView) -> Void
+
   static private let animationName = "Lottie"
 
   private let logger: LottieLogger
@@ -1444,9 +1431,23 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   /// Queue for serial access to animationReadyHandlers array to avoid race conditions
   private let serialQueue = DispatchQueue(label: "Animation Ready Handler Queue")
 
-  typealias AnimationReadyHandler = (LottieAnimationView) -> Void
   /// Handlers that will be called when animation set to non-nil value
   private var animationReadyHandlers: [AnimationReadyHandler] = []
+
+  /// Checks if animation is set, and processes all handlers and resets them.
+  private func processAnimationReadyHandlers() {
+    /// Only when animation set to non-nil value
+    guard animation != nil else { return }
+
+    serialQueue.async {
+      self.animationReadyHandlers.forEach { handler in
+        DispatchQueue.main.async {
+          handler(self)
+        }
+      }
+      self.animationReadyHandlers.removeAll()
+    }
+  }
 
 }
 
