@@ -44,8 +44,12 @@ final class AnimationReadyTests: XCTestCase {
   }
 
   // MARK: Private
+
   private func prepareDotLottieAnimationView(filename: String = "animation_inline_image") -> LottieAnimationView {
-    guard let fileUrl = Bundle.module.fileURLs(in: Samples.directoryName, withSuffix: "lottie").first(where: { $0.lastPathComponent.hasPrefix(filename)}) else {
+    guard
+      let fileUrl = Bundle.module.fileURLs(in: Samples.directoryName, withSuffix: "lottie")
+        .first(where: { $0.lastPathComponent.hasPrefix(filename) }) else
+    {
       XCTFail("Lottie file not found: \(filename)")
       return LottieAnimationView()
     }
@@ -57,7 +61,10 @@ final class AnimationReadyTests: XCTestCase {
   }
 
   private func prepareJsonAnimationView(filename: String = "Boat_Loader") -> LottieAnimationView {
-    guard let fileUrl = Bundle.module.fileURLs(in: Samples.directoryName, withSuffix: "json").first(where: { $0.lastPathComponent.hasPrefix(filename)}) else {
+    guard
+      let fileUrl = Bundle.module.fileURLs(in: Samples.directoryName, withSuffix: "json")
+        .first(where: { $0.lastPathComponent.hasPrefix(filename) }) else
+    {
       XCTFail("Json file not found: \(filename)")
       return LottieAnimationView()
     }
@@ -67,4 +74,3 @@ final class AnimationReadyTests: XCTestCase {
     return animationView
   }
 }
-
