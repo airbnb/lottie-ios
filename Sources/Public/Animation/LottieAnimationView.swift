@@ -225,6 +225,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   public var animation: LottieAnimation? {
     didSet {
       makeAnimationLayer(usingEngine: configuration.renderingEngine)
+      processAnimationReadyHandlers()
     }
   }
 
@@ -602,6 +603,30 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   public func stop() {
     removeCurrentAnimation()
     currentFrame = 0
+  }
+
+  /// Checks if animation is set, and processes all handlers and resets them.
+  private func processAnimationReadyHandlers() {
+    /// Only when animation set to non-nil value
+    guard animation != nil else { return }
+
+    serialQueue.async {
+      self.animationReadyHandlers.forEach { handler in
+        handler(self)
+      }
+      self.animationReadyHandlers.removeAll()
+    }
+  }
+
+  /// Method that returns self when animation is set to non-nil value and animation layer is redrawn
+  public func whenAnimationReady(handler: @escaping (LottieAnimationView) -> Void) {
+    serialQueue.async {
+      if let _ = self.animation {
+        handler(self)
+        return
+      }
+      self.animationReadyHandlers.append(handler)
+    }
   }
 
   /// Pauses the animation in its current state.
@@ -1411,6 +1436,13 @@ final public class LottieAnimationView: LottieAnimationViewBase {
 
   /// The `LottieBackgroundBehavior` that was specified manually by setting `self.backgroundBehavior`
   private var _backgroundBehavior: LottieBackgroundBehavior?
+
+  /// Queue for serial access to animationReadyHandlers array to avoid race conditions
+  private let serialQueue = DispatchQueue(label: "Animation Ready Handler Queue")
+
+  typealias AnimationReadyHandler = (LottieAnimationView) -> Void
+  /// Handlers that will be called when animation set to non-nil value
+  private var animationReadyHandlers: [AnimationReadyHandler] = []
 
 }
 
