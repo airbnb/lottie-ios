@@ -15,14 +15,13 @@ final class AnimationReadyTests: XCTestCase {
 
   func test_dotLottieFile_hasAnimation_onAnimationReady() {
     let exp = XCTestExpectation(description: "onAnimationReady expectation")
-    exp.expectedFulfillmentCount = 1
 
     let animationView = prepareDotLottieAnimationView()
     animationView.onAnimationReady { _ in
       XCTAssertNotNil(animationView.animation)
       exp.fulfill()
     }
-    wait(for: [exp], timeout: 0.1)
+    wait(for: [exp], timeout: 0.5)
   }
 
   func test_jsonFile_hasAnimation_onInitialize() {
@@ -32,7 +31,6 @@ final class AnimationReadyTests: XCTestCase {
 
   func test_jsonFile_hasAnimation_onAnimationReady() {
     let exp = XCTestExpectation(description: "onAnimationReady expectation")
-    exp.expectedFulfillmentCount = 1
 
     let animationView = prepareJsonAnimationView()
     animationView.onAnimationReady { _ in
@@ -40,7 +38,7 @@ final class AnimationReadyTests: XCTestCase {
       exp.fulfill()
     }
 
-    wait(for: [exp], timeout: 0.1)
+    wait(for: [exp], timeout: 0.5)
   }
 
   // MARK: Private
