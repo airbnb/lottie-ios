@@ -612,7 +612,9 @@ final public class LottieAnimationView: LottieAnimationViewBase {
 
     serialQueue.async {
       self.animationReadyHandlers.forEach { handler in
-        handler(self)
+        DispatchQueue.main.async {
+          handler(self)
+        }
       }
       self.animationReadyHandlers.removeAll()
     }
@@ -622,7 +624,9 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   public func whenAnimationReady(handler: @escaping (LottieAnimationView) -> Void) {
     serialQueue.async {
       if let _ = self.animation {
-        handler(self)
+        DispatchQueue.main.async {
+          handler(self)
+        }
         return
       }
       self.animationReadyHandlers.append(handler)
