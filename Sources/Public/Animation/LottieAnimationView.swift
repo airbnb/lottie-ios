@@ -225,6 +225,45 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   public var animation: LottieAnimation? {
     didSet {
       makeAnimationLayer(usingEngine: configuration.renderingEngine)
+
+      if let animation = animation {
+        animationLoaded?(self, animation)
+      }
+    }
+  }
+
+  /// A closure that is called when `self.animation` is loaded. When setting this closure,
+  /// it is called immediately if `self.animation` is non-nil.
+  ///
+  /// When initializing a `LottieAnimationView`, the animation will either be loaded
+  /// synchronously (when loading a `LottieAnimation` from a .json file on disk)
+  /// or asynchronously (when loading a `DotLottieFile` from disk, or downloading
+  /// an animation from a URL). This closure is called in both cases once the
+  /// animation is loaded and applied, so can be a useful way to configure this
+  /// `LottieAnimationView` regardless of which initializer was used. For example:
+  ///
+  /// ```
+  /// let animationView: LottieAnimationView
+  ///
+  /// if loadDotLottieFile {
+  ///   // Loads the .lottie file asynchronously
+  ///   animationView = LottieAnimationView(dotLottieName: "animation")
+  /// } else {
+  ///   // Loads the .json file synchronously
+  ///   animationView = LottieAnimationView(name: "animation")
+  /// }
+  ///
+  /// animationView.animationLoaded = { animationView, animation in
+  ///   // If using a .lottie file, this is called once the file finishes loading.
+  ///   // If using a .json file, this is called immediately (since the animation is loaded synchronously).
+  ///   animationView.play()
+  /// }
+  /// ```
+  public var animationLoaded: ((_ animationView: LottieAnimationView, _ animation: LottieAnimation) -> Void)? {
+    didSet {
+      if let animation = animation {
+        animationLoaded?(self, animation)
+      }
     }
   }
 

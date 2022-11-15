@@ -14,6 +14,16 @@ final class AnimationViewTests: XCTestCase {
       subdirectory: Samples.directoryName)
 
     XCTAssertNotNil(animationView.animation)
+
+    let expectation = XCTestExpectation(description: "animationLoaded is called")
+    animationView.animationLoaded = { [weak animationView] view, animation in
+      XCTAssert(animation === view.animation)
+      XCTAssertEqual(view, animationView)
+      XCTAssert(Thread.isMainThread)
+      expectation.fulfill()
+    }
+
+    wait(for: [expectation], timeout: 0.25)
   }
 
   func loadDotLottieFileAsync() async throws {
@@ -25,20 +35,38 @@ final class AnimationViewTests: XCTestCase {
     XCTAssertNotNil(animationView.animation)
   }
 
-  func loadDotLottieFileAsyncWithClosure() {
-    let expectation = XCTestExpectation(description: "DotLottie file is loaded asynchronously")
+  func loadDotLottieFileAsyncWithCompletionClosure() {
+    let expectation = XCTestExpectation(description: "completion closure is called")
 
-    let animationView = LottieAnimationView(
+    _ = LottieAnimationView(
       dotLottieName: "DotLottie/animation",
       bundle: .module,
       subdirectory: Samples.directoryName,
       completion: { animationView, error in
         XCTAssertNil(error)
         XCTAssertNotNil(animationView.animation)
+        XCTAssert(Thread.isMainThread)
         expectation.fulfill()
       })
 
-    XCTAssertNil(animationView.animation)
+    wait(for: [expectation], timeout: 1.0)
+  }
+
+  func loadDotLottieFileAsyncWithDidLoadClosure() {
+    let expectation = XCTestExpectation(description: "animationLoaded closure is called")
+
+    let animationView = LottieAnimationView(
+      dotLottieName: "DotLottie/animation",
+      bundle: .module,
+      subdirectory: Samples.directoryName)
+
+    animationView.animationLoaded = { [weak animationView] view, animation in
+      XCTAssert(view.animation === animation)
+      XCTAssertEqual(view, animationView)
+      XCTAssert(Thread.isMainThread)
+      expectation.fulfill()
+    }
+
     wait(for: [expectation], timeout: 1.0)
   }
 

@@ -165,16 +165,16 @@ extension LottieAnimationView {
     animationId: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared,
-    completion: @escaping (LottieAnimationView, Error?) -> Void)
+    completion: ((LottieAnimationView, Error?) -> Void)? = nil)
   {
     self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
     DotLottieFile.named(name, bundle: bundle, dotLottieCache: dotLottieCache) { result in
       switch result {
       case .success(let dotLottieFile):
         self.loadAnimation(animationId, from: dotLottieFile)
-        completion(self, nil)
+        completion?(self, nil)
       case .failure(let error):
-        completion(self, error)
+        completion?(self, error)
       }
     }
   }
@@ -208,16 +208,16 @@ extension LottieAnimationView {
     animationId: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared,
-    completion: @escaping (LottieAnimationView, Error?) -> Void)
+    completion: ((LottieAnimationView, Error?) -> Void)? = nil)
   {
     self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
     DotLottieFile.loadedFrom(filepath: filePath, dotLottieCache: dotLottieCache) { result in
       switch result {
       case .success(let dotLottieFile):
         self.loadAnimation(animationId, from: dotLottieFile)
-        completion(self, nil)
+        completion?(self, nil)
       case .failure(let error):
-        completion(self, error)
+        completion?(self, error)
       }
     }
   }
@@ -253,20 +253,20 @@ extension LottieAnimationView {
     animationId: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared,
-    completion: @escaping (LottieAnimationView, Error?) -> Void)
+    completion: ((LottieAnimationView, Error?) -> Void)? = nil)
   {
     if let dotLottieCache = dotLottieCache, let lottie = dotLottieCache.file(forKey: url.absoluteString) {
       self.init(dotLottie: lottie, animationId: animationId, configuration: configuration)
-      completion(self, nil)
+      completion?(self, nil)
     } else {
       self.init(dotLottie: nil, configuration: configuration)
       DotLottieFile.loadedFrom(url: url, dotLottieCache: dotLottieCache) { result in
         switch result {
         case .success(let lottie):
           self.loadAnimation(animationId, from: lottie)
-          completion(self, nil)
+          completion?(self, nil)
         case .failure(let error):
-          completion(self, error)
+          completion?(self, error)
         }
       }
     }
@@ -303,16 +303,16 @@ extension LottieAnimationView {
     animationId: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared,
-    completion: @escaping (LottieAnimationView, Error?) -> Void)
+    completion: ((LottieAnimationView, Error?) -> Void)? = nil)
   {
     self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
     DotLottieFile.asset(named: name, bundle: bundle, dotLottieCache: dotLottieCache) { result in
       switch result {
       case .success(let dotLottieFile):
         self.loadAnimation(animationId, from: dotLottieFile)
-        completion(self, nil)
+        completion?(self, nil)
       case .failure(let error):
-        completion(self, error)
+        completion?(self, error)
       }
     }
   }
