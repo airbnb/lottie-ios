@@ -31,7 +31,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     compatibilityTracker = CompatibilityTracker(mode: compatibilityTrackerMode, logger: logger)
     valueProviderStore = ValueProviderStore(logger: logger)
     super.init()
-
+    masksToBounds = true
     setup()
     try setupChildLayers()
   }
