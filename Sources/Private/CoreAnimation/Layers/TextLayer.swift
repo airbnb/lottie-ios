@@ -45,7 +45,7 @@ final class TextLayer: BaseCompositionLayer {
       description: "text layer text")
 
     renderLayer.text = context.textProvider.textFor(
-      keypathName: textAnimationContext.currentKeypath.fullPath,
+      keypathName: textAnimationContext.currentKeypath.keys.last ?? "",
       sourceText: sourceText.text)
 
     renderLayer.sizeToFit()
