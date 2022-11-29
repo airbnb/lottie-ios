@@ -110,14 +110,14 @@ extension LottieAnimationView {
   public convenience init(
     dotLottieName name: String,
     bundle: Bundle = Bundle.main,
-    subdirectory _: String? = nil,
+    subdirectory: String? = nil,
     animationId: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared,
     completion: ((LottieAnimationView, Error?) -> Void)? = nil)
   {
     self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
-    DotLottieFile.named(name, bundle: bundle, dotLottieCache: dotLottieCache) { result in
+    DotLottieFile.named(name, bundle: bundle, subdirectory: subdirectory, dotLottieCache: dotLottieCache) { result in
       switch result {
       case .success(let dotLottieFile):
         self.loadAnimation(animationId, from: dotLottieFile)

@@ -7,7 +7,7 @@ import XCTest
 @MainActor
 final class AnimationViewTests: XCTestCase {
 
-  func loadJsonFile() {
+  func testLoadJsonFile() {
     let animationView = LottieAnimationView(
       name: "LottieLogo1",
       bundle: .module,
@@ -26,16 +26,7 @@ final class AnimationViewTests: XCTestCase {
     wait(for: [expectation], timeout: 0.25)
   }
 
-  func loadDotLottieFileAsync() async throws {
-    let animationView = try await LottieAnimationView(
-      dotLottieName: "DotLottie/animation",
-      bundle: .module,
-      subdirectory: Samples.directoryName)
-
-    XCTAssertNotNil(animationView.animation)
-  }
-
-  func loadDotLottieFileAsyncWithCompletionClosure() {
+  func testLoadDotLottieFileAsyncWithCompletionClosure() {
     let expectation = XCTestExpectation(description: "completion closure is called")
 
     _ = LottieAnimationView(
@@ -52,7 +43,7 @@ final class AnimationViewTests: XCTestCase {
     wait(for: [expectation], timeout: 1.0)
   }
 
-  func loadDotLottieFileAsyncWithDidLoadClosure() {
+  func testLoadDotLottieFileAsyncWithDidLoadClosure() {
     let expectation = XCTestExpectation(description: "animationLoaded closure is called")
 
     let animationView = LottieAnimationView(
