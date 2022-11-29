@@ -57,6 +57,7 @@ extension LottieAnimationView {
   public convenience init(
     url: URL,
     imageProvider: AnimationImageProvider? = nil,
+    session: URLSession = .shared,
     closure: @escaping LottieAnimationView.DownloadClosure,
     animationCache: AnimationCacheProvider? = LottieAnimationCache.shared,
     configuration: LottieConfiguration = .shared)
@@ -67,7 +68,7 @@ extension LottieAnimationView {
     } else {
       self.init(animation: nil, imageProvider: imageProvider, configuration: configuration)
 
-      LottieAnimation.loadedFrom(url: url, closure: { animation in
+      LottieAnimation.loadedFrom(url: url, session: session, closure: { animation in
         if let animation = animation {
           self.animation = animation
           closure(nil)
@@ -75,31 +76,6 @@ extension LottieAnimationView {
           closure(LottieDownloadError.downloadFailed)
         }
       }, animationCache: animationCache)
-    }
-  }
-
-  /// Loads a Lottie animation asynchronously from the URL
-  ///
-  /// - Parameter url: The url to load the animation from.
-  /// - Parameter imageProvider: An image provider for the animation's image data.
-  /// If none is supplied Lottie will search in the main bundle for images.
-  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
-  public convenience init(
-    url: URL,
-    imageProvider: AnimationImageProvider? = nil,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared,
-    configuration: LottieConfiguration = .shared) async throws
-  {
-    if let animationCache = animationCache, let animation = animationCache.animation(forKey: url.absoluteString) {
-      self.init(animation: animation, imageProvider: imageProvider, configuration: configuration)
-    } else {
-      self.init(animation: nil, imageProvider: imageProvider, configuration: configuration)
-
-      guard let animation = await LottieAnimation.loadedFrom(url: url, animationCache: animationCache) else {
-        throw LottieDownloadError.downloadFailed
-      }
-
-      self.animation = animation
     }
   }
 
@@ -122,33 +98,6 @@ extension LottieAnimationView {
   }
 
   // MARK: DotLottie
-
-  /// Loads a Lottie animation from a .lottie file in the supplied bundle.
-  ///
-  /// - Parameter filePath: The name of the lottie file without the lottie extension. EG "StarAnimation"
-  /// - Parameter bundle: The bundle in which the lottie is located. Defaults to `Bundle.main`
-  /// - Parameter subdirectory: A subdirectory in the bundle in which the lottie is located. Optional.
-  /// - Parameter animationId: Animation id to play. Optional
-  /// Defaults to first animation in file
-  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
-  public convenience init(
-    dotLottieName name: String,
-    bundle: Bundle = Bundle.main,
-    subdirectory: String? = nil,
-    animationId: String? = nil,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
-    configuration: LottieConfiguration = .shared) async throws
-  {
-    self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
-
-    let dotLottieFile = try await DotLottieFile.named(
-      name,
-      bundle: bundle,
-      subdirectory: subdirectory,
-      dotLottieCache: dotLottieCache)
-
-    loadAnimation(animationId, from: dotLottieFile)
-  }
 
   /// Loads a Lottie animation from a .lottie file in the supplied bundle.
   ///
@@ -183,24 +132,6 @@ extension LottieAnimationView {
   ///
   /// - Parameter dotLottieFilePath: The absolute path of the Lottie file.
   /// - Parameter animationId: Animation id to play. Optional
-  /// Defaults to first animation in file
-  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
-  public convenience init(
-    dotLottieFilePath filePath: String,
-    animationId: String? = nil,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
-    configuration: LottieConfiguration = .shared) async throws
-  {
-    self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
-
-    let dotLottieFile = try await DotLottieFile.loadedFrom(filepath: filePath, dotLottieCache: dotLottieCache)
-    loadAnimation(animationId, from: dotLottieFile)
-  }
-
-  /// Loads a Lottie from a .lottie file in a specific path on disk.
-  ///
-  /// - Parameter dotLottieFilePath: The absolute path of the Lottie file.
-  /// - Parameter animationId: Animation id to play. Optional
   /// - Parameter completion: A closure that is called when the .lottie file is finished loading
   /// Defaults to first animation in file
   public convenience init(
@@ -226,33 +157,13 @@ extension LottieAnimationView {
   ///
   /// - Parameter dotLottieUrl: The url to load the lottie file from.
   /// - Parameter animationId: Animation id to play. Optional. Defaults to first animation in file.
-  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
-  public convenience init(
-    dotLottieUrl url: URL,
-    animationId: String? = nil,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
-    configuration: LottieConfiguration = .shared) async throws
-  {
-    if let dotLottieCache = dotLottieCache, let lottie = dotLottieCache.file(forKey: url.absoluteString) {
-      self.init(dotLottie: lottie, animationId: animationId, configuration: configuration)
-    } else {
-      self.init(dotLottie: nil, configuration: configuration)
-
-      let dotLottieFile = try await DotLottieFile.loadedFrom(url: url, dotLottieCache: dotLottieCache)
-      loadAnimation(animationId, from: dotLottieFile)
-    }
-  }
-
-  /// Loads a Lottie file asynchronously from the URL
-  ///
-  /// - Parameter dotLottieUrl: The url to load the lottie file from.
-  /// - Parameter animationId: Animation id to play. Optional. Defaults to first animation in file.
   /// - Parameter completion: A closure to be called when the animation has loaded.
   public convenience init(
     dotLottieUrl url: URL,
     animationId: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared,
+    session: URLSession = .shared,
     completion: ((LottieAnimationView, Error?) -> Void)? = nil)
   {
     if let dotLottieCache = dotLottieCache, let lottie = dotLottieCache.file(forKey: url.absoluteString) {
@@ -260,7 +171,7 @@ extension LottieAnimationView {
       completion?(self, nil)
     } else {
       self.init(dotLottie: nil, configuration: configuration)
-      DotLottieFile.loadedFrom(url: url, dotLottieCache: dotLottieCache) { result in
+      DotLottieFile.loadedFrom(url: url, session: session, dotLottieCache: dotLottieCache) { result in
         switch result {
         case .success(let lottie):
           self.loadAnimation(animationId, from: lottie)
@@ -270,25 +181,6 @@ extension LottieAnimationView {
         }
       }
     }
-  }
-
-  /// Loads a Lottie from a .lottie file located in the Asset catalog of the supplied bundle.
-  /// - Parameter name: The string name of the lottie file in the asset catalog.
-  /// - Parameter bundle: The bundle in which the file is located. Defaults to the Main bundle.
-  /// - Parameter animationId: Animation id to play. Optional
-  /// Defaults to first animation in file
-  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
-  public convenience init(
-    dotLottieAsset name: String,
-    bundle: Bundle = Bundle.main,
-    animationId: String? = nil,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
-    configuration: LottieConfiguration = .shared) async throws
-  {
-    self.init(dotLottie: nil, animationId: animationId, configuration: configuration)
-
-    let dotLottieFile = try await DotLottieFile.asset(named: name, bundle: bundle, dotLottieCache: dotLottieCache)
-    loadAnimation(animationId, from: dotLottieFile)
   }
 
   /// Loads a Lottie from a .lottie file located in the Asset catalog of the supplied bundle.
@@ -328,12 +220,3 @@ extension LottieAnimationView {
 enum LottieDownloadError: Error {
   case downloadFailed
 }
-
-// MARK: - Foundation.Bundle + Sendable
-
-/// Necessary to suppress warnings like:
-/// ```
-/// Non-sendable type 'Bundle' exiting main actor-isolated context in call to non-isolated
-/// static method 'named(_:bundle:subdirectory:dotLottieCache:)' cannot cross actor boundary
-/// ```
-extension Foundation.Bundle: @unchecked Sendable { }
