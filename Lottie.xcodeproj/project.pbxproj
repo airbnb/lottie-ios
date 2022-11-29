@@ -19,6 +19,7 @@
 		0887347B28F0CCDD00458627 /* LottieAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887347428F0CCDD00458627 /* LottieAnimationView.swift */; };
 		0887347C28F0CCDD00458627 /* LottieAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887347428F0CCDD00458627 /* LottieAnimationView.swift */; };
 		0887347D28F0CCDD00458627 /* LottieAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887347428F0CCDD00458627 /* LottieAnimationView.swift */; };
+		08CB2681291ED2B700B4F071 /* AnimationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB2680291ED2B700B4F071 /* AnimationViewTests.swift */; };
 		08EED05028F0D2D10057D958 /* LottieColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EED04F28F0D2D10057D958 /* LottieColor.swift */; };
 		08EED05128F0D2D10057D958 /* LottieColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EED04F28F0D2D10057D958 /* LottieColor.swift */; };
 		08EED05228F0D2D10057D958 /* LottieColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EED04F28F0D2D10057D958 /* LottieColor.swift */; };
@@ -662,6 +663,7 @@
 		0887347228F0CCDD00458627 /* LottieAnimationHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimationHelpers.swift; sourceTree = "<group>"; };
 		0887347328F0CCDD00458627 /* LottieAnimationViewInitializers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimationViewInitializers.swift; sourceTree = "<group>"; };
 		0887347428F0CCDD00458627 /* LottieAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimationView.swift; sourceTree = "<group>"; };
+		08CB2680291ED2B700B4F071 /* AnimationViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewTests.swift; sourceTree = "<group>"; };
 		08EED04F28F0D2D10057D958 /* LottieColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieColor.swift; sourceTree = "<group>"; };
 		08EF21DB289C643B0097EA47 /* KeyframeInterpolator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyframeInterpolator.swift; sourceTree = "<group>"; };
 		08F8B20C2898A7B100CB5323 /* RepeaterLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeaterLayer.swift; sourceTree = "<group>"; };
@@ -958,6 +960,7 @@
 				2E044E262820536800FA773B /* AutomaticEngineTests.swift */,
 				6DB3BDB528243FA5002A276D /* ValueProvidersTests.swift */,
 				D453D8AE28FF9BC600D3F49C /* AnimationCacheProviderTests.swift */,
+				08CB2680291ED2B700B4F071 /* AnimationViewTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -2041,6 +2044,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08F8B213289990CB00CB5323 /* SnapshotTests.swift in Sources */,
+				08CB2681291ED2B700B4F071 /* AnimationViewTests.swift in Sources */,
 				A1D5BAAC27C731A500777D06 /* DataURLTests.swift in Sources */,
 				2E8044AD27A07347006E74CB /* HardcodedImageProvider.swift in Sources */,
 				2E09FA0627B6CEB600BA84E5 /* HardcodedFontProvider.swift in Sources */,

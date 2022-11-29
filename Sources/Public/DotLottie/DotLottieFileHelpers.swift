@@ -138,10 +138,10 @@ extension DotLottieFile {
     }
   }
 
-  ///    Loads a DotLottie model from the asset catalog by its name. Returns `nil` if a lottie is not found.
-  ///    - Parameter name: The name of the lottie file in the asset catalog. EG "StarAnimation"
-  ///    - Parameter bundle: The bundle in which the lottie is located. Defaults to `Bundle.main`
-  ///    - Parameter dotLottieCache: A cache for holding loaded lottie files. Defaults to `LRUDotLottieCache.sharedCache` Optional.
+  /// Loads a DotLottie model from the asset catalog by its name. Returns `nil` if a lottie is not found.
+  /// - Parameter name: The name of the lottie file in the asset catalog. EG "StarAnimation"
+  /// - Parameter bundle: The bundle in which the lottie is located. Defaults to `Bundle.main`
+  /// - Parameter dotLottieCache: A cache for holding loaded lottie files. Defaults to `LRUDotLottieCache.sharedCache` Optional.
   @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
   public static func asset(
     named name: String,

@@ -303,3 +303,15 @@ extension LottieAnimation {
     CGFloat(time * framerate) + startFrame
   }
 }
+
+// MARK: - Foundation.Bundle + Sendable
+
+/// Necessary to suppress warnings like:
+/// ```
+/// Non-sendable type 'Bundle' exiting main actor-isolated context in call to non-isolated
+/// static method 'named(_:bundle:subdirectory:dotLottieCache:)' cannot cross actor boundary
+/// ```
+/// This retroactive conformance is safe because Sendable is a marker protocol that doesn't
+/// include any runtime component. Multiple modules in the same package graph can provide this
+/// conformance without causing any conflicts.
+extension Foundation.Bundle: @unchecked Sendable { }
