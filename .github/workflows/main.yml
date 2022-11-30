@@ -39,6 +39,8 @@ jobs:
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
+        with:
+          lfs: 'true'
       - uses: ./.github/actions/setup
       - name: Test Package
         run: bundle exec rake test:package
