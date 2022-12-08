@@ -75,13 +75,6 @@ We always appreciate contributions from the community. To make changes to the pr
  - unit tests and snapshot tests (for iOS, must be run on an iPhone 8 simulator)
  - an Example iOS app that lets you browse and test over 100 sample animations included in the repo
 
-To reduce the size of the repository, snapshot images are stored using [Git Large File Storage](https://git-lfs.github.com/). Before running the snapshot tests, you'll need to install Git LFS:
-
-```bash
-$ brew install git-lfs
-$ git lfs install
-```
-
 All pull requests with new features or bug fixes that affect how animations render should include snapshot test cases that validate the included changes. 
   - To add a new sample animation to the snapshot testing suite, you can add the `.json` file to `Tests/Samples`. Re-run the snapshot tests to generate the new snapshot image files.
   - To update existing snapshots after making changes, you can set `isRecording = true` in `SnapshotTests.swift` and then re-run the snapshot tests.
