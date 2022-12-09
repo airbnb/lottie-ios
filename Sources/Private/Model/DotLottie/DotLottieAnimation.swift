@@ -12,13 +12,10 @@ struct DotLottieAnimation: Codable {
   var id: String
 
   /// Loop enabled
-  var loop: Bool
-
-  // appearance color in HEX
-  var themeColor: String
+  var loop: Bool? = false
 
   /// Animation Playback Speed
-  var speed: Double
+  var speed: Double? = 1
 
   /// 1 or -1
   var direction: Int? = 1
@@ -31,12 +28,12 @@ struct DotLottieAnimation: Codable {
 
   /// Loop mode for animation
   var loopMode: LottieLoopMode {
-    mode == "bounce" ? .autoReverse : (loop ? .loop : .playOnce)
+    mode == "bounce" ? .autoReverse : ((loop ?? false) ? .loop : .playOnce)
   }
 
   /// Animation speed
   var animationSpeed: Double {
-    speed * Double(direction ?? 1)
+    (speed ?? 1) * Double(direction ?? 1)
   }
 
   /// Loads `LottieAnimation` from `animationUrl`
