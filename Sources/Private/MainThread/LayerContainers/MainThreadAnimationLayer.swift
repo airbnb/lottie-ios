@@ -126,6 +126,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
   public override func display() {
     guard Thread.isMainThread else { return }
     var newFrame: CGFloat
+    defer { currentFrame = newFrame }
     if
       let animationKeys = animationKeys(),
       !animationKeys.isEmpty
