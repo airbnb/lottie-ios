@@ -19,7 +19,7 @@ extension CGColor {
   /// Initializes a `CGColor` using the given `RGBA` values
   static func rgba(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat) -> CGColor {
     CGColor(
-      colorSpace: CGColorSpaceCreateDeviceRGB(),
+      colorSpace: LottieConfiguration.shared.colorSpace,
       components: [red, green, blue, alpha])!
   }
 }

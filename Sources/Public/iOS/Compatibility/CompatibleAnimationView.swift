@@ -238,8 +238,8 @@ public final class CompatibleAnimationView: UIView {
     var green: CGFloat = 0
     var blue: CGFloat = 0
     var alpha: CGFloat = 0
-    // TODO: Fix color spaces
-    let colorspace = CGColorSpaceCreateDeviceRGB()
+
+    let colorspace = LottieConfiguration.shared.colorSpace
 
     let convertedColor = color.cgColor.converted(to: colorspace, intent: .defaultIntent, options: nil)
 

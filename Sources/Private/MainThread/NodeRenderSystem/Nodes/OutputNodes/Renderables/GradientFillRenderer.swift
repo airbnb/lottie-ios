@@ -110,7 +110,7 @@ private final class GradientFillLayer: CALayer {
     /// Now draw the gradient
     guard
       let gradient = CGGradient(
-        colorsSpace: CGColorSpaceCreateDeviceRGB(),
+        colorsSpace: LottieConfiguration.shared.colorSpace,
         colors: gradientColors as CFArray,
         locations: colorLocations)
     else { return }
