@@ -8,7 +8,7 @@ extension CGColor {
   static func rgb(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat) -> CGColor {
     CGColor(
       colorSpace: CGColorSpaceCreateDeviceRGB(),
-      components: [red, green, blue])!
+      components: [red, green, blue, 1])! // Fixes heap buffer overflow
       .copy(alpha: 1)!
   }
 
