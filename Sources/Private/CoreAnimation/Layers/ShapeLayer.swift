@@ -246,8 +246,10 @@ extension CALayer {
         .filter { !$0.hidden }
         .map { ShapeItemLayer.Item(item: $0, groupPath: pathForChildren) }
 
-      // For any inherited shape items that are affected by scaling (e.g. strokes but not fills),
-      // any `ShapeTransform` in this group isn't supposed to be applied
+      // Some shape item properties are affected by scaling (e.g. stroke width).
+      // The child group may have a `ShapeTransform` that affects the scale of its items,
+      // but shouldn't affect the scale of any inherited items. To prevent this scale
+      // from affecting inherited items, we have to apply an inverse scale to them.
       let inheritedItems = try inheritedItemsForChildGroups.map { item in
         ShapeItemLayer.Item(
           item: try item.item.scaledCopyForChildGroup(group, context: context),
