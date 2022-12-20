@@ -81,7 +81,8 @@ final class AnimationKeypathTests: XCTestCase {
     animationName: String,
     configuration: LottieConfiguration,
     function: String = #function,
-    line: UInt = #line) async
+    line: UInt = #line)
+    async
   {
     let hierarchyKeypaths = await hierarchyKeypaths(animationName: animationName, configuration: configuration)
 

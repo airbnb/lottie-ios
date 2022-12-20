@@ -173,8 +173,8 @@ extension LottieAnimation {
   public static func loadedFrom(
     url: URL,
     session: URLSession = .shared,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared) async
-    -> LottieAnimation?
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
+    async -> LottieAnimation?
   {
     await withCheckedContinuation { continuation in
       LottieAnimation.loadedFrom(

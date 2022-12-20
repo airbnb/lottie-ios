@@ -74,8 +74,8 @@ extension Data {
     size: Int64,
     bufferSize: Int,
     provider: ZipDataProvider,
-    consumer: ZipDataCallback) throws
-    -> UInt32
+    consumer: ZipDataCallback)
+    throws -> UInt32
   {
     var crc32 = UInt32(0)
     let destPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)

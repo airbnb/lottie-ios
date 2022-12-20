@@ -6,3 +6,8 @@ let package = Package(
   platforms: [.iOS("11.0"), .macOS("10.10"), .tvOS("11.0")],
   products: [.library(name: "Lottie", targets: ["Lottie"])],
   targets: [.target(name: "Lottie", path: "Sources")])
+
+#if swift(>=5.6)
+// Add the Airbnb Swift formatting plugin if possible
+package.dependencies.append(.package(url: "https://github.com/airbnb/swift", .upToNextMajor(from: "1.0.1")))
+#endif

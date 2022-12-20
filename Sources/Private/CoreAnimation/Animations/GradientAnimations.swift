@@ -34,7 +34,8 @@ extension GradientRenderLayer {
   func addGradientAnimations(
     for gradient: GradientShapeItem,
     type: GradientContentType,
-    context: LayerAnimationContext) throws
+    context: LayerAnimationContext)
+    throws
   {
     // We have to set `colors` and `locations` to non-nil values
     // for the animations below to actually take effect
