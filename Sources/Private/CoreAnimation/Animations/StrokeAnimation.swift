@@ -7,25 +7,38 @@ import QuartzCore
 // MARK: - StrokeShapeItem
 
 /// A `ShapeItem` that represents a stroke
-protocol StrokeShapeItem: OpacityAnimationModel {
+protocol StrokeShapeItem: ShapeItem, OpacityAnimationModel {
   var strokeColor: KeyframeGroup<LottieColor>? { get }
   var width: KeyframeGroup<LottieVector1D> { get }
   var lineCap: LineCap { get }
   var lineJoin: LineJoin { get }
   var miterLimit: Double { get }
   var dashPattern: [DashElement]? { get }
+  func copy(width: KeyframeGroup<LottieVector1D>) -> StrokeShapeItem
 }
 
 // MARK: - Stroke + StrokeShapeItem
 
 extension Stroke: StrokeShapeItem {
   var strokeColor: KeyframeGroup<LottieColor>? { color }
+
+  func copy(width: KeyframeGroup<LottieVector1D>) -> StrokeShapeItem {
+    // Type-erase the copy from `Stroke` to `StrokeShapeItem`
+    let copy: Stroke = copy(width: width)
+    return copy
+  }
 }
 
 // MARK: - GradientStroke + StrokeShapeItem
 
 extension GradientStroke: StrokeShapeItem {
   var strokeColor: KeyframeGroup<LottieColor>? { nil }
+
+  func copy(width: KeyframeGroup<LottieVector1D>) -> StrokeShapeItem {
+    // Type-erase the copy from `GradientStroke` to `StrokeShapeItem`
+    let copy: GradientStroke = copy(width: width)
+    return copy
+  }
 }
 
 // MARK: - CAShapeLayer + StrokeShapeItem

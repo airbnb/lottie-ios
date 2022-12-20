@@ -101,6 +101,39 @@ final class GradientStroke: ShapeItem {
     try super.init(dictionary: dictionary)
   }
 
+  init(
+    name: String,
+    hidden: Bool,
+    opacity: KeyframeGroup<LottieVector1D>,
+    startPoint: KeyframeGroup<LottieVector3D>,
+    endPoint: KeyframeGroup<LottieVector3D>,
+    gradientType: GradientType,
+    highlightLength: KeyframeGroup<LottieVector1D>?,
+    highlightAngle: KeyframeGroup<LottieVector1D>?,
+    numberOfColors: Int,
+    colors: KeyframeGroup<[Double]>,
+    width: KeyframeGroup<LottieVector1D>,
+    lineCap: LineCap,
+    lineJoin: LineJoin,
+    miterLimit: Double,
+    dashPattern: [DashElement]?)
+  {
+    self.opacity = opacity
+    self.startPoint = startPoint
+    self.endPoint = endPoint
+    self.gradientType = gradientType
+    self.highlightLength = highlightLength
+    self.highlightAngle = highlightAngle
+    self.numberOfColors = numberOfColors
+    self.colors = colors
+    self.width = width
+    self.lineCap = lineCap
+    self.lineJoin = lineJoin
+    self.miterLimit = miterLimit
+    self.dashPattern = dashPattern
+    super.init(name: name, type: .gradientStroke, hidden: hidden)
+  }
+
   // MARK: Internal
 
   /// The opacity of the fill
@@ -141,6 +174,26 @@ final class GradientStroke: ShapeItem {
 
   /// The dash pattern of the stroke
   let dashPattern: [DashElement]?
+
+  /// Creates a copy of this GradientStroke with the given updated width keyframes
+  func copy(width newWidth: KeyframeGroup<LottieVector1D>) -> GradientStroke {
+    GradientStroke(
+      name: name,
+      hidden: hidden,
+      opacity: opacity,
+      startPoint: startPoint,
+      endPoint: endPoint,
+      gradientType: gradientType,
+      highlightLength: highlightLength,
+      highlightAngle: highlightAngle,
+      numberOfColors: numberOfColors,
+      colors: colors,
+      width: newWidth,
+      lineCap: lineCap,
+      lineJoin: lineJoin,
+      miterLimit: miterLimit,
+      dashPattern: dashPattern)
+  }
 
   override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)
