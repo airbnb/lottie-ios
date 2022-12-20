@@ -60,9 +60,9 @@ final class Trim: ShapeItem {
   /// If this trim doesn't affect the path at all then we can consider it empty
   var isEmpty: Bool {
     start.keyframes.count == 1
-    && start.keyframes[0].value.value == 0
-    && end.keyframes.count == 1
-    && end.keyframes[0].value.value == 100
+      && start.keyframes[0].value.value == 0
+      && end.keyframes.count == 1
+      && end.keyframes[0].value.value == 100
   }
 
   override func encode(to encoder: Encoder) throws {
