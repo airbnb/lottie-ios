@@ -10,7 +10,8 @@ extension CAShapeLayer {
     for shape: ShapeItem,
     context: LayerAnimationContext,
     pathMultiplier: PathMultiplier,
-    roundedCorners: RoundedCorners?) throws
+    roundedCorners: RoundedCorners?)
+    throws
   {
     switch shape {
     case let customShape as Shape:
