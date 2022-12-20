@@ -206,7 +206,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
     throws
   {
     var trimPathMultiplier: PathMultiplier? = nil
-    if let (trim, context) = otherItems.first(Trim.self, context: context) {
+    if let (trim, context) = otherItems.first(Trim.self, where: { !$0.isEmpty }, context: context) {
       trimPathMultiplier = try shapeLayer.addAnimations(for: trim, context: context)
 
       try context.compatibilityAssert(
@@ -281,11 +281,13 @@ final class ShapeItemLayer: BaseAnimationLayer {
 extension Array where Element == ShapeItemLayer.Item {
   /// The first `ShapeItem` in this array of the given type
   func first<ItemType: ShapeItem>(
-    _: ItemType.Type, context: LayerAnimationContext)
+    _: ItemType.Type,
+    where condition: (ItemType) -> Bool = { _ in true },
+    context: LayerAnimationContext)
     -> (item: ItemType, context: LayerAnimationContext)?
   {
     for item in self {
-      if let match = item.item as? ItemType {
+      if let match = item.item as? ItemType, condition(match) {
         return (match, context.for(item))
       }
     }
