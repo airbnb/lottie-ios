@@ -128,7 +128,7 @@ final class GroupLayer: BaseAnimationLayer {
 
     // Create `ShapeItemLayer`s for each subgroup of shapes that should be rendered as a single unit
     //  - These groups are listed from front-to-back, so we have to add the sublayers in reverse order
-    for shapeRenderGroup in nonGroupItems.shapeRenderGroups.groups.reversed() {
+    for shapeRenderGroup in nonGroupItems.shapeRenderGroups.validGroups.reversed() {
       // When there are multiple path-drawing items, they're supposed to be rendered
       // in a single `CAShapeLayer` (instead of rendering them in separate layers) so
       // `CAShapeLayerFillRule.evenOdd` can be applied correctly if the paths overlap.
@@ -360,7 +360,7 @@ struct ShapeRenderGroup {
 extension Array where Element == ShapeItemLayer.Item {
   /// Splits this list of `ShapeItem`s into groups that should be rendered together as individual units,
   /// plus the remaining items that were not included in any group.
-  var shapeRenderGroups: (groups: [ShapeRenderGroup], unusedItems: [ShapeItemLayer.Item]) {
+  var shapeRenderGroups: (validGroups: [ShapeRenderGroup], unusedItems: [ShapeItemLayer.Item]) {
     var renderGroups = [ShapeRenderGroup()]
 
     for item in self {
@@ -414,14 +414,16 @@ extension Array where Element == ShapeItemLayer.Item {
     }
 
     var unusedItems = [ShapeItemLayer.Item]()
-    for renderGroup in renderGroups {
+    for index in renderGroups.indices.reversed() {
+      let renderGroup = renderGroups[index]
+
       // All valid render groups must have a path, otherwise the items wouldn't be rendered
       if renderGroup.pathItems.isEmpty {
         unusedItems.append(contentsOf: renderGroup.otherItems)
+        renderGroups.remove(at: index)
       }
     }
 
-    renderGroups.removeAll(where: { $0.pathItems.isEmpty })
-    return (groups: renderGroups, unusedItems: unusedItems)
+    return (validGroups: renderGroups, unusedItems: unusedItems)
   }
 }
