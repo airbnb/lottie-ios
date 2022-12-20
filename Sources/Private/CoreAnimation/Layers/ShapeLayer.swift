@@ -246,9 +246,19 @@ extension CALayer {
         .filter { !$0.hidden }
         .map { ShapeItemLayer.Item(item: $0, groupPath: pathForChildren) }
 
+      // Some shape item properties are affected by scaling (e.g. stroke width).
+      // The child group may have a `ShapeTransform` that affects the scale of its items,
+      // but shouldn't affect the scale of any inherited items. To prevent this scale
+      // from affecting inherited items, we have to apply an inverse scale to them.
+      let inheritedItems = try inheritedItemsForChildGroups.map { item in
+        ShapeItemLayer.Item(
+          item: try item.item.scaledCopyForChildGroup(group, context: context),
+          groupPath: item.groupPath)
+      }
+
       return try GroupLayer(
         group: group,
-        items: childItems + inheritedItemsForChildGroups,
+        items: childItems + inheritedItems,
         groupPath: pathForChildren,
         context: context)
     }
@@ -290,6 +300,35 @@ extension ShapeItem {
          .merge, .repeater, .round, .fill, .trim, .transform, .unknown:
       return false
     }
+  }
+
+  // For any inherited shape items that are affected by scaling (e.g. strokes but not fills),
+  // any `ShapeTransform` in the given child group isn't supposed to be applied to the item.
+  // To cancel out the effect of the transform, we can apply an inverse transform to the
+  // shape item.
+  func scaledCopyForChildGroup(_ childGroup: Group, context: LayerContext) throws -> ShapeItem {
+    guard
+      // Path-drawing items aren't inherited by child groups in this way
+      !drawsCGPath,
+      // Stroke widths are affected by scaling, but fill colors aren't.
+      // We can expand this to other types of items in the future if necessary.
+      let stroke = self as? StrokeShapeItem,
+      // We only need to handle scaling if there's a `ShapeTransform` present
+      let transform = childGroup.items.first(where: { $0 is ShapeTransform }) as? ShapeTransform
+    else { return self }
+
+    let newWidth = try Keyframes.combined(stroke.width, transform.scale) { strokeWidth, scale -> LottieVector1D in
+      // Since we're applying this scale to a scalar value rather than to a layer,
+      // we can only handle cases where the scale is also a scalar (e.g. the same for both x and y)
+      try context.compatibilityAssert(scale.x == scale.y, """
+        The Core Animation rendering engine doesn't support applying separate x/y scale values \
+        (x: \(scale.x), y: \(scale.y)) to this stroke item (\(self.name)).
+        """)
+
+      return LottieVector1D(strokeWidth.value * (100 / scale.x))
+    }
+
+    return stroke.copy(width: newWidth)
   }
 }
 

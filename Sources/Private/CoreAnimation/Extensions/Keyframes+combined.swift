@@ -24,11 +24,12 @@ enum Keyframes {
   static func combined<T1, T2, CombinedResult>(
     _ k1: KeyframeGroup<T1>,
     _ k2: KeyframeGroup<T2>,
-    makeCombinedResult: (T1, T2) -> CombinedResult)
+    makeCombinedResult: (T1, T2) throws -> CombinedResult)
+    rethrows
     -> KeyframeGroup<CombinedResult>
     where T1: AnyInterpolatable, T2: AnyInterpolatable
   {
-    Keyframes.combined(
+    try Keyframes.combined(
       [k1, k2],
       makeCombinedResult: { untypedValues in
         guard
@@ -36,7 +37,7 @@ enum Keyframes {
           let t2 = untypedValues[1] as? T2
         else { return nil }
 
-        return makeCombinedResult(t1, t2)
+        return try makeCombinedResult(t1, t2)
       })
   }
 
@@ -107,7 +108,8 @@ enum Keyframes {
   /// casts them to the expected type, and combined them into the final resulting keyframe.
   private static func combined<CombinedResult>(
     _ allGroups: [AnyKeyframeGroup],
-    makeCombinedResult: ([Any]) -> CombinedResult?)
+    makeCombinedResult: ([Any]) throws -> CombinedResult?)
+    rethrows
     -> KeyframeGroup<CombinedResult>
   {
     let untypedGroups = allGroups.map { $0.untyped }
@@ -123,7 +125,7 @@ enum Keyframes {
     else {
       // If the keyframes don't all share the same timing information,
       // we have to interpolate the value at each individual frame
-      return Keyframes.manuallyInterpolated(allGroups, makeCombinedResult: makeCombinedResult)
+      return try Keyframes.manuallyInterpolated(allGroups, makeCombinedResult: makeCombinedResult)
     }
 
     var combinedKeyframes = ContiguousArray<Keyframe<CombinedResult>>()
@@ -133,7 +135,7 @@ enum Keyframes {
       let baseKeyframe = baseKeyframes[index]
       let untypedValues = untypedGroups.map { $0.valueForCombinedKeyframes(at: index) }
 
-      if let combinedValue = makeCombinedResult(untypedValues) {
+      if let combinedValue = try makeCombinedResult(untypedValues) {
         combinedKeyframes.append(baseKeyframe.withValue(combinedValue))
       } else {
         LottieLogger.shared.assertionFailure("""
@@ -147,7 +149,8 @@ enum Keyframes {
 
   private static func manuallyInterpolated<CombinedResult>(
     _ allGroups: [AnyKeyframeGroup],
-    makeCombinedResult: ([Any]) -> CombinedResult?)
+    makeCombinedResult: ([Any]) throws -> CombinedResult?)
+    rethrows
     -> KeyframeGroup<CombinedResult>
   {
     let untypedGroups = allGroups.map { $0.untyped }
@@ -159,12 +162,12 @@ enum Keyframes {
     let maximumTime = times.max() ?? 0
     let animationLocalTimeRange = Int(minimumTime)...Int(maximumTime)
 
-    let interpolatedKeyframes = animationLocalTimeRange.compactMap { localTime -> Keyframe<CombinedResult>? in
+    let interpolatedKeyframes = try animationLocalTimeRange.compactMap { localTime -> Keyframe<CombinedResult>? in
       let interpolatedValues = untypedInterpolators.map { interpolator in
         interpolator.value(frame: AnimationFrameTime(localTime))
       }
 
-      guard let combinedResult = makeCombinedResult(interpolatedValues) else {
+      guard let combinedResult = try makeCombinedResult(interpolatedValues) else {
         LottieLogger.shared.assertionFailure("""
           Failed to cast untyped keyframe values to expected type. This is an internal error.
           """)
