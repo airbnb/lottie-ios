@@ -128,7 +128,7 @@ final class GroupLayer: BaseAnimationLayer {
 
     // Create `ShapeItemLayer`s for each subgroup of shapes that should be rendered as a single unit
     //  - These groups are listed from front-to-back, so we have to add the sublayers in reverse order
-    for shapeRenderGroup in nonGroupItems.shapeRenderGroups.reversed() {
+    for shapeRenderGroup in nonGroupItems.shapeRenderGroups.validGroups.reversed() {
       // When there are multiple path-drawing items, they're supposed to be rendered
       // in a single `CAShapeLayer` (instead of rendering them in separate layers) so
       // `CAShapeLayerFillRule.evenOdd` can be applied correctly if the paths overlap.
@@ -210,25 +210,21 @@ extension CALayer {
       .filter { !$0.hidden }
       .grouped(by: { $0 is Group })
 
-    // If this shape doesn't have any groups but just has top-level shape items,
-    // we can create a placeholder group with those items. (Otherwise the shape items
-    // would be silently ignored, since we expect all shape layers to have a top-level group).
-    if groupItems.isEmpty, parentGroup == nil {
-      groupItems = [Group(items: otherItems, name: "")]
+    // Handle the top-level `shapeLayer.items` array. This is typically just a single `Group`,
+    // but in practice can be any combination of items. The implementation expects all path-drawing
+    // shape items to be managed by a `GroupLayer`, so if there's a top-level path item we
+    // have to create a placeholder group.
+    if parentGroup == nil, otherItems.contains(where: { $0.drawsCGPath }) {
+      groupItems = [Group(items: items, name: "")]
       otherItems = []
     }
 
-    // `ShapeItem`s either draw a path, or modify how a path is rendered.
-    //  - If this group doesn't have any items that draw a path, then its
-    //    items are applied to all of this group's children.
-    let inheritedItemsForChildGroups: [ShapeItemLayer.Item]
-    if !otherItems.contains(where: { $0.drawsCGPath }) {
-      inheritedItemsForChildGroups = otherItems.map {
-        ShapeItemLayer.Item(item: $0, groupPath: parentGroupPath)
-      }
-    } else {
-      inheritedItemsForChildGroups = []
-    }
+    // Any child items that wouldn't be included in a valid shape render group
+    // need to be applied to child groups (otherwise they'd be silently ignored).
+    let inheritedItemsForChildGroups = otherItems
+      .map { ShapeItemLayer.Item(item: $0, groupPath: parentGroupPath) }
+      .shapeRenderGroups
+      .unusedItems
 
     // Groups are listed from front to back,
     // but `CALayer.sublayers` are listed from back to front.
@@ -354,15 +350,17 @@ extension Collection {
 
 /// A group of `ShapeItem`s that should be rendered together as a single unit
 struct ShapeRenderGroup {
-  /// The items in this group that render `CGPath`s
+  /// The items in this group that render `CGPath`s.
+  /// Valid shape render groups must have at least one path-drawing item.
   var pathItems: [ShapeItemLayer.Item] = []
   /// Shape items that modify the appearance of the shapes rendered by this group
   var otherItems: [ShapeItemLayer.Item] = []
 }
 
 extension Array where Element == ShapeItemLayer.Item {
-  /// Splits this list of `ShapeItem`s into groups that should be rendered together as individual units
-  var shapeRenderGroups: [ShapeRenderGroup] {
+  /// Splits this list of `ShapeItem`s into groups that should be rendered together as individual units,
+  /// plus the remaining items that were not included in any group.
+  var shapeRenderGroups: (validGroups: [ShapeRenderGroup], unusedItems: [ShapeItemLayer.Item]) {
     var renderGroups = [ShapeRenderGroup()]
 
     for item in self {
@@ -393,7 +391,7 @@ extension Array where Element == ShapeItemLayer.Item {
     // `Fill` and `Stroke` items have an `alpha` property that can be animated separately,
     // but each layer only has a single `opacity` property, so we have to create
     // separate layers / render groups for each of these if necessary.
-    return renderGroups.flatMap { group -> [ShapeRenderGroup] in
+    renderGroups = renderGroups.flatMap { group -> [ShapeRenderGroup] in
       let (strokesAndFills, otherItems) = group.otherItems.grouped(by: { $0.item.isFill || $0.item.isStroke })
 
       // However, if all of the strokes / fills have the exact same opacity animation configuration,
@@ -414,5 +412,18 @@ extension Array where Element == ShapeItemLayer.Item {
           otherItems: [strokeOrFill] + otherItems)
       }
     }
+
+    var unusedItems = [ShapeItemLayer.Item]()
+    for index in renderGroups.indices.reversed() {
+      let renderGroup = renderGroups[index]
+
+      // All valid render groups must have a path, otherwise the items wouldn't be rendered
+      if renderGroup.pathItems.isEmpty {
+        unusedItems.append(contentsOf: renderGroup.otherItems)
+        renderGroups.remove(at: index)
+      }
+    }
+
+    return (validGroups: renderGroups, unusedItems: unusedItems)
   }
 }
