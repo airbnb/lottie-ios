@@ -322,7 +322,7 @@ public final class CompatibleAnimationView: UIView {
   private let animationView: LottieAnimationView
 
   private func commonInit() {
-    translatesAutoresizingMaskIntoConstraints = false
+    translatesAutoresizingMaskIntoConstraints = true
     setUpViews()
   }
 
