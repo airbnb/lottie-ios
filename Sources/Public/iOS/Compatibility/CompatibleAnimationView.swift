@@ -40,16 +40,116 @@ public final class CompatibleAnimation: NSObject {
   private let bundle: Bundle
 }
 
+/// An Objective-C compatible wrapper around Lottie's RenderingEngineOption enum. Pass in an option
+/// to the CompatibleAnimationView initializers to configure the rendering engine for the view.
+@objc
+public enum CompatibleRenderingEngineOption: Int {
+  /// Uses the rendering engine specified in LottieConfiguration.shared.
+  case shared
+
+  /// Uses the library default rendering engine, coreAnimation.
+  case defaultEngine
+
+  /// Optimizes rendering performance by using the Core Animation rendering engine for animations it
+  /// can render while falling back to the main thread renderer for all other animations.
+  case automatic
+
+  /// Only renders animations using the main thread rendering engine.
+  case mainThread
+
+  /// Only renders animations using the Core Animation rendering engine. Those animations that use
+  /// features not yet supported on this renderer will not be rendered.
+  case coreAnimation
+
+  // MARK: Public
+
+  /// Converts a CompatibleRenderingEngineOption to the corresponding LottieConfiguration for
+  /// internal rendering engine configuration.
+  public static func generateLottieConfiguration(
+    _ configuration: CompatibleRenderingEngineOption)
+    -> LottieConfiguration
+  {
+    switch configuration {
+    case .shared:
+      return LottieConfiguration.shared
+    case .defaultEngine:
+      return LottieConfiguration(renderingEngine: .coreAnimation)
+    case .automatic:
+      return LottieConfiguration(renderingEngine: .automatic)
+    case .mainThread:
+      return LottieConfiguration(renderingEngine: .mainThread)
+    case .coreAnimation:
+      return LottieConfiguration(renderingEngine: .coreAnimation)
+    }
+  }
+}
+
 /// An Objective-C compatible wrapper around Lottie's LottieAnimationView.
 @objc
 public final class CompatibleAnimationView: UIView {
 
   // MARK: Lifecycle
 
+  /// Initializes a compatible AnimationView with a given compatible animation. Defaults to using
+  /// the rendering engine specified in LottieConfiguration.shared.
   @objc
-  public init(compatibleAnimation: CompatibleAnimation) {
-    animationView = LottieAnimationView(animation: compatibleAnimation.animation)
+  public convenience init(compatibleAnimation: CompatibleAnimation) {
+    self.init(compatibleAnimation: compatibleAnimation, compatibleRenderingEngineOption: .shared)
+  }
+
+  /// Initializes a compatible AnimationView with a given compatible animation and rendering engine
+  /// configuration.
+  @objc
+  public init(
+    compatibleAnimation: CompatibleAnimation,
+    compatibleRenderingEngineOption: CompatibleRenderingEngineOption)
+  {
+    animationView = LottieAnimationView(
+      animation: compatibleAnimation.animation,
+      configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
     self.compatibleAnimation = compatibleAnimation
+    super.init(frame: .zero)
+    commonInit()
+  }
+
+  /// Initializes a compatible AnimationView with the resources asynchronously loaded from a given
+  /// URL. Defaults to using the rendering engine specified in LottieConfiguration.shared.
+  @objc
+  public convenience init(url: URL) {
+    self.init(url: url, compatibleRenderingEngineOption: .shared)
+  }
+
+  /// Initializes a compatible AnimationView with the resources asynchronously loaded from a given
+  /// URL using the given rendering engine configuration.
+  @objc
+  public init(url: URL, compatibleRenderingEngineOption: CompatibleRenderingEngineOption) {
+    animationView = LottieAnimationView(
+      url: url,
+      closure: { _ in },
+      configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
+    super.init(frame: .zero)
+    commonInit()
+  }
+
+  /// Initializes a compatible AnimationView from a given Data object specifying the Lottie
+  /// animation. Defaults to using the rendering engine specified in LottieConfiguration.shared.
+  @objc
+  public convenience init(data: Data) {
+    self.init(data: data, compatibleRenderingEngineOption: .shared)
+  }
+
+  /// Initializes a compatible AnimationView from a given Data object specifying the Lottie
+  /// animation using the given rendering engine configuration.
+  @objc
+  public init(data: Data, compatibleRenderingEngineOption: CompatibleRenderingEngineOption) {
+    if let animation = try? LottieAnimation.from(data: data) {
+      animationView = LottieAnimationView(
+        animation: animation,
+        configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
+    } else {
+      animationView = LottieAnimationView(
+        configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
+    }
     super.init(frame: .zero)
     commonInit()
   }
@@ -97,6 +197,11 @@ public final class CompatibleAnimationView: UIView {
   public var currentProgress: CGFloat {
     set { animationView.currentProgress = newValue }
     get { animationView.currentProgress }
+  }
+
+  @objc
+  public var duration: CGFloat {
+    animationView.animation?.duration ?? 0.0
   }
 
   @objc
@@ -148,6 +253,8 @@ public final class CompatibleAnimationView: UIView {
     animationView.play(completion: completion)
   }
 
+  /// Note: When calling this code from Objective-C, the method signature is
+  /// playFromProgress:toProgress:completion which drops the standard "With" naming convention.
   @objc
   public func play(
     fromProgress: CGFloat,
@@ -161,6 +268,8 @@ public final class CompatibleAnimationView: UIView {
       completion: completion)
   }
 
+  /// Note: When calling this code from Objective-C, the method signature is
+  /// playFromFrame:toFrame:completion which drops the standard "With" naming convention.
   @objc
   public func play(
     fromFrame: CGFloat,
@@ -174,6 +283,8 @@ public final class CompatibleAnimationView: UIView {
       completion: completion)
   }
 
+  /// Note: When calling this code from Objective-C, the method signature is
+  /// playFromMarker:toMarker:completion which drops the standard "With" naming convention.
   @objc
   public func play(
     fromMarker: String,
