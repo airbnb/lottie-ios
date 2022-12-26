@@ -61,11 +61,14 @@ public enum CompatibleRenderingEngineOption: Int {
   /// features not yet supported on this renderer will not be rendered.
   case coreAnimation
 
+  // MARK: Public
+
   /// Converts a CompatibleRenderingEngineOption to the corresponding LottieConfiguration for
   /// internal rendering engine configuration.
   public static func generateLottieConfiguration(
-    _ configuration: CompatibleRenderingEngineOption
-  ) -> LottieConfiguration {
+    _ configuration: CompatibleRenderingEngineOption)
+    -> LottieConfiguration
+  {
     switch configuration {
     case .shared:
       return LottieConfiguration.shared
@@ -103,8 +106,7 @@ public final class CompatibleAnimationView: UIView {
   {
     animationView = LottieAnimationView(
       animation: compatibleAnimation.animation,
-      configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption)
-    )
+      configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
     self.compatibleAnimation = compatibleAnimation
     super.init(frame: .zero)
     commonInit()
@@ -123,9 +125,8 @@ public final class CompatibleAnimationView: UIView {
   public init(url: URL, compatibleRenderingEngineOption: CompatibleRenderingEngineOption) {
     animationView = LottieAnimationView(
       url: url,
-      closure: { error in },
-      configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption)
-    )
+      closure: { _ in },
+      configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
     super.init(frame: .zero)
     commonInit()
   }
@@ -144,12 +145,10 @@ public final class CompatibleAnimationView: UIView {
     if let animation = try? LottieAnimation.from(data: data) {
       animationView = LottieAnimationView(
         animation: animation,
-        configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption)
-      )
+        configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
     } else {
       animationView = LottieAnimationView(
-        configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption)
-      )
+        configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
     }
     super.init(frame: .zero)
     commonInit()
