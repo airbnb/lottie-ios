@@ -42,6 +42,7 @@
 		2E450DAC283415D500E56D19 /* OpacityAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E450DAB283415D500E56D19 /* OpacityAnimation.swift */; };
 		2E450DAD283415D500E56D19 /* OpacityAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E450DAB283415D500E56D19 /* OpacityAnimation.swift */; };
 		2E450DAE283415D500E56D19 /* OpacityAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E450DAB283415D500E56D19 /* OpacityAnimation.swift */; };
+		2E70F79F295BB6D30089A0EF /* CompatibleAnimationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E70F79E295BB6D30089A0EF /* CompatibleAnimationViewTests.swift */; };
 		2E72128327BB329C0027BC56 /* AnimationKeypathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E72128227BB329C0027BC56 /* AnimationKeypathTests.swift */; };
 		2E72128527BB32DB0027BC56 /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E72128427BB32DB0027BC56 /* PerformanceTests.swift */; };
 		2E8040B027A072B8006E74CB /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E80409A27A0725D006E74CB /* Lottie.framework */; };
@@ -674,6 +675,7 @@
 		2E044E262820536800FA773B /* AutomaticEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticEngineTests.swift; sourceTree = "<group>"; };
 		2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcodedFontProvider.swift; sourceTree = "<group>"; };
 		2E450DAB283415D500E56D19 /* OpacityAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpacityAnimation.swift; sourceTree = "<group>"; };
+		2E70F79E295BB6D30089A0EF /* CompatibleAnimationViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleAnimationViewTests.swift; sourceTree = "<group>"; };
 		2E72128227BB329C0027BC56 /* AnimationKeypathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationKeypathTests.swift; sourceTree = "<group>"; };
 		2E72128427BB32DB0027BC56 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
 		2E80409A27A0725D006E74CB /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -961,6 +963,7 @@
 				6DB3BDB528243FA5002A276D /* ValueProvidersTests.swift */,
 				D453D8AE28FF9BC600D3F49C /* AnimationCacheProviderTests.swift */,
 				08CB2680291ED2B700B4F071 /* AnimationViewTests.swift */,
+				2E70F79E295BB6D30089A0EF /* CompatibleAnimationViewTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -2051,6 +2054,7 @@
 				2E80450D27A07347006E74CB /* SnapshotConfiguration.swift in Sources */,
 				6DEF696E2824A76C007D640F /* BundleTests.swift in Sources */,
 				2EAF59A727A076BC00E00531 /* Bundle+Module.swift in Sources */,
+				2E70F79F295BB6D30089A0EF /* CompatibleAnimationViewTests.swift in Sources */,
 				2E8044AE27A07347006E74CB /* Snapshotting+presentationLayer.swift in Sources */,
 				36E57EAC28AF7ADF00B7EFDA /* HardcodedTextProvider.swift in Sources */,
 				2E72128527BB32DB0027BC56 /* PerformanceTests.swift in Sources */,

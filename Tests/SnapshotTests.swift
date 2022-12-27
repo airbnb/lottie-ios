@@ -17,6 +17,28 @@ class SnapshotTests: XCTestCase {
 
   // MARK: Internal
 
+  /// Whether or not snapshot tests should be enabled for the current build target
+  static var enabled: Bool {
+    get throws {
+      #if os(iOS)
+      if UIScreen.main.scale == 2 {
+        return true
+      } else {
+        /// Snapshots are captured at a 2x scale, so we can only support
+        /// running tests on a device that has a 2x scale.
+        ///  - In CI we run tests on an iPhone 8 simulator,
+        ///    but any device with a 2x scale works.
+        throw SnapshotError.unsupportedDevice
+      }
+      #else
+      // We only run snapshot tests on iOS, since running snapshot tests
+      // for macOS and tvOS would triple the number of snapshot images
+      // we have to check in to the repo.
+      throw SnapshotError.unsupportedPlatform
+      #endif
+    }
+  }
+
   /// Snapshots all of the sample animation JSON files visible to this test target
   func testMainThreadRenderingEngine() async throws {
     try await compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .mainThread))
@@ -104,15 +126,9 @@ class SnapshotTests: XCTestCase {
     testName: String = #function)
     async throws
   {
-    #if os(iOS)
-    guard UIScreen.main.scale == 2 else {
-      /// Snapshots are captured at a 2x scale, so we can only support
-      /// running tests on a device that has a 2x scale.
-      ///  - In CI we run tests on an iPhone 8 simulator,
-      ///    but any device with a 2x scale works.
-      throw SnapshotError.unsupportedDevice
-    }
+    guard try SnapshotTests.enabled else { return }
 
+    #if os(iOS)
     for sampleAnimationName in Samples.sampleAnimationNames {
       for percent in progressPercentagesToSnapshot {
         guard
@@ -131,11 +147,6 @@ class SnapshotTests: XCTestCase {
           testName: testName)
       }
     }
-    #else
-    // We only run snapshot tests on iOS, since running snapshot tests
-    // for macOS and tvOS would triple the number of snapshot images
-    // we have to check in to the repo.
-    throw SnapshotError.unsupportedPlatform
     #endif
   }
 
@@ -145,7 +156,7 @@ class SnapshotTests: XCTestCase {
 
 extension LottieAnimation {
   /// The size that this animation should be snapshot at
-  fileprivate var snapshotSize: CGSize {
+  var snapshotSize: CGSize {
     let maxDimension: CGFloat = 500
 
     // If this is a landscape aspect ratio, we clamp the width
