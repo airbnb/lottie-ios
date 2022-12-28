@@ -92,7 +92,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
     let gradientAlphaLayer: GradientRenderLayer?
     /// The `CAShapeLayer` that clips the gradient layers to the expected shape
     let shapeMaskLayer: CAShapeLayer
-    /// The `CAShapeLayer` that overlays other layers.
+    /// The top-most `CAShapeLayer` used to render `Stroke`s over the gradient if necessary
     let overlayLayer: CAShapeLayer?
   }
 
@@ -154,7 +154,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
   {
     let container = BaseAnimationLayer()
     let pathContainer = BaseAnimationLayer()
-      
+
     let pathMask = CAShapeLayer()
     pathMask.fillColor = .rgb(0, 0, 0)
     pathContainer.mask = pathMask
@@ -162,12 +162,11 @@ final class ShapeItemLayer: BaseAnimationLayer {
     let rgbGradientLayer = GradientRenderLayer()
     pathContainer.addSublayer(rgbGradientLayer)
     container.addSublayer(pathContainer)
-      
+
     let overlayLayer = CAShapeLayer()
     overlayLayer.fillColor = nil
-    overlayLayer.strokeColor = .rgb(0, 0, 0)
     container.addSublayer(overlayLayer)
-      
+
     addSublayer(container)
 
     let alphaGradientLayer: GradientRenderLayer?
@@ -182,8 +181,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
       gradientColorLayer: rgbGradientLayer,
       gradientAlphaLayer: alphaGradientLayer,
       shapeMaskLayer: pathMask,
-      overlayLayer: overlayLayer
-    ))
+      overlayLayer: overlayLayer))
   }
 
   private func setupGradientStrokeLayerHierarchy(
@@ -253,13 +251,13 @@ final class ShapeItemLayer: BaseAnimationLayer {
     context: LayerAnimationContext)
     throws
   {
-    try [layers.shapeMaskLayer, layers.overlayLayer].forEach {
-      try $0?.addAnimations(
+    let pathLayers = [layers.shapeMaskLayer, layers.overlayLayer]
+    for pathLayer in pathLayers {
+      try pathLayer?.addAnimations(
         for: shape.item,
         context: context.for(shape),
         pathMultiplier: 1,
-        roundedCorners: otherItems.first(RoundedCorners.self)
-      )
+        roundedCorners: otherItems.first(RoundedCorners.self))
     }
 
     if let (gradientFill, context) = otherItems.first(GradientFill.self, context: context) {
@@ -267,6 +265,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
       try layers.gradientColorLayer.addGradientAnimations(for: gradientFill, type: .rgb, context: context)
       try layers.gradientAlphaLayer?.addGradientAnimations(for: gradientFill, type: .alpha, context: context)
     }
+    
     if let (stroke, context) = otherItems.first(Stroke.self, context: context) {
       try layers.overlayLayer?.addStrokeAnimations(for: stroke, context: context)
     }
