@@ -17,8 +17,13 @@ public final class CompatibleAnimation: NSObject {
   // MARK: Lifecycle
 
   @objc
-  public init(name: String, bundle: Bundle = Bundle.main) {
+  public init(
+    name: String,
+    subdirectory: String? = nil,
+    bundle: Bundle = Bundle.main)
+  {
     self.name = name
+    self.subdirectory = subdirectory
     self.bundle = bundle
     super.init()
   }
@@ -26,7 +31,7 @@ public final class CompatibleAnimation: NSObject {
   // MARK: Internal
 
   internal var animation: LottieAnimation? {
-    LottieAnimation.named(name, bundle: bundle)
+    LottieAnimation.named(name, bundle: bundle, subdirectory: subdirectory)
   }
 
   @objc
@@ -37,6 +42,7 @@ public final class CompatibleAnimation: NSObject {
   // MARK: Private
 
   private let name: String
+  private let subdirectory: String?
   private let bundle: Bundle
 }
 
@@ -433,7 +439,6 @@ public final class CompatibleAnimationView: UIView {
   private let animationView: LottieAnimationView
 
   private func commonInit() {
-    translatesAutoresizingMaskIntoConstraints = false
     setUpViews()
   }
 
