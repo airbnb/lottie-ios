@@ -265,7 +265,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
       try layers.gradientColorLayer.addGradientAnimations(for: gradientFill, type: .rgb, context: context)
       try layers.gradientAlphaLayer?.addGradientAnimations(for: gradientFill, type: .alpha, context: context)
     }
-    
+
     if let (stroke, context) = otherItems.first(Stroke.self, context: context) {
       try layers.overlayLayer?.addStrokeAnimations(for: stroke, context: context)
     }
