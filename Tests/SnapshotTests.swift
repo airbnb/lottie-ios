@@ -201,7 +201,7 @@ enum Samples {
 
   /// The list of snapshot image files in `Tests/__Snapshots__`
   static let snapshotURLs = Bundle.module.fileURLs(
-    in: "__Snapshots__",
+    in: "__Snapshots__/SnapshotTests",
     withSuffix: "png")
 
   /// The list of sample animation files in `Tests/Samples`
