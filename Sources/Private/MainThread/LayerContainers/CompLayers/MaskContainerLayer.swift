@@ -84,10 +84,10 @@ final class MaskContainerLayer: CALayer {
 extension CGRect {
   static var veryLargeRect: CGRect {
     CGRect(
-      x: -100_000_000,
-      y: -100_000_000,
-      width: 200_000_000,
-      height: 200_000_000)
+      x: -10_000_000,
+      y: -10_000_000,
+      width: 20_000_000,
+      height: 20_000_000)
   }
 }
 
