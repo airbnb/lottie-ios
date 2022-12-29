@@ -377,6 +377,15 @@ extension Array where Element == ShapeItemLayer.Item {
       //  - To handle this, we create a new `ShapeRenderGroup` when we encounter a `Fill` item
       else if item.item.isFill {
         renderGroups[lastIndex].otherItems.append(item)
+
+        // There are cases where the current render group doesn't have a shape yet,
+        // and could just contain the fill. For example, `[Circle, Fill(Red), Fill(Green)]`.
+        // In this case we re-use the previous group's shape items.
+        if renderGroups[lastIndex].pathItems.isEmpty, lastIndex != renderGroups.indices.first {
+          renderGroups[lastIndex].pathItems = renderGroups[lastIndex - 1].pathItems
+        }
+
+        // Finalize the group so the fill item doesn't affect following shape items
         renderGroups.append(ShapeRenderGroup())
       }
 
