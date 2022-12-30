@@ -16,6 +16,8 @@ public enum CoordinateSpace: Int, Codable {
 
 // MARK: - LottieAnimation
 
+public typealias Animation = LottieAnimation
+
 /// The `LottieAnimation` model is the top level model object in Lottie.
 ///
 /// A `LottieAnimation` holds all of the animation data backing a Lottie Animation.
