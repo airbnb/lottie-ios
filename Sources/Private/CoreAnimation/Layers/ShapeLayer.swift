@@ -118,6 +118,9 @@ final class GroupLayer: BaseAnimationLayer {
   ///    structure of the `ShapeLayer` data model, we track that info here.
   private let groupPath: [String]
 
+  /// Child group items contained in this group. Correspond to a child `GroupLayer`
+  private lazy var childGroups = items.filter { $0.item is Group }
+
   /// `ShapeItem`s (other than nested `Group`s) that are rendered by this layer
   private lazy var nonGroupItems = items.filter { !($0.item is Group) }
 
@@ -128,7 +131,8 @@ final class GroupLayer: BaseAnimationLayer {
 
     // Create `ShapeItemLayer`s for each subgroup of shapes that should be rendered as a single unit
     //  - These groups are listed from front-to-back, so we have to add the sublayers in reverse order
-    for shapeRenderGroup in nonGroupItems.shapeRenderGroups.validGroups.reversed() {
+    let renderGroups = items.shapeRenderGroups(groupHasChildGroupsToInheritUnusedItems: !childGroups.isEmpty)
+    for shapeRenderGroup in renderGroups.validGroups.reversed() {
       // When there are multiple path-drawing items, they're supposed to be rendered
       // in a single `CAShapeLayer` (instead of rendering them in separate layers) so
       // `CAShapeLayerFillRule.evenOdd` can be applied correctly if the paths overlap.
@@ -223,7 +227,7 @@ extension CALayer {
     // need to be applied to child groups (otherwise they'd be silently ignored).
     let inheritedItemsForChildGroups = otherItems
       .map { ShapeItemLayer.Item(item: $0, groupPath: parentGroupPath) }
-      .shapeRenderGroups
+      .shapeRenderGroups(groupHasChildGroupsToInheritUnusedItems: !groupItems.isEmpty)
       .unusedItems
 
     // Groups are listed from front to back,
@@ -360,7 +364,11 @@ struct ShapeRenderGroup {
 extension Array where Element == ShapeItemLayer.Item {
   /// Splits this list of `ShapeItem`s into groups that should be rendered together as individual units,
   /// plus the remaining items that were not included in any group.
-  var shapeRenderGroups: (validGroups: [ShapeRenderGroup], unusedItems: [ShapeItemLayer.Item]) {
+  ///  - groupHasChildGroupsToInheritUnusedItems: whether or not this group has child groups
+  ///    that will inherit any items that aren't used as part of a valid render group
+  func shapeRenderGroups(groupHasChildGroupsToInheritUnusedItems: Bool)
+    -> (validGroups: [ShapeRenderGroup], unusedItems: [ShapeItemLayer.Item])
+  {
     var renderGroups = [ShapeRenderGroup()]
 
     for item in self {
@@ -377,6 +385,23 @@ extension Array where Element == ShapeItemLayer.Item {
       //  - To handle this, we create a new `ShapeRenderGroup` when we encounter a `Fill` item
       else if item.item.isFill {
         renderGroups[lastIndex].otherItems.append(item)
+
+        // There are cases where the current render group doesn't have a path-drawing
+        // shape item yet, and could just contain this fill. Some examples:
+        //  - `[Circle, Fill(Red), Fill(Green)]`: In this case, the second fill would
+        //    be unused and silently ignored. To avoid this we render the fill using
+        //    the shape items from the previous group.
+        // - `[Circle, Fill(Red), Group, Fill(Green)]`: In this case, the second fill
+        //   is inherited and rendered by the child group.
+        if
+          renderGroups[lastIndex].pathItems.isEmpty,
+          !groupHasChildGroupsToInheritUnusedItems,
+          lastIndex != renderGroups.indices.first
+        {
+          renderGroups[lastIndex].pathItems = renderGroups[lastIndex - 1].pathItems
+        }
+
+        // Finalize the group so the fill item doesn't affect following shape items
         renderGroups.append(ShapeRenderGroup())
       }
 
