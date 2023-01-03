@@ -70,9 +70,20 @@ class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
     guard ignoreDelegate == false else { return }
     animationState = flag ? .complete : .cancelled
     if let animationLayer = animationLayer, let key = animationKey {
-      animationLayer.removeAnimation(forKey: key)
-      if flag {
-        animationLayer.currentFrame = (anim as! CABasicAnimation).toValue as! CGFloat
+      if let animationLayer = animationLayer as? CoreAnimationLayer {
+        if flag {
+          // We must remove the animation after fetching the currentFrame from the CoreAnimationLayer.
+          // `currentFrame` is calculated based on `animationProgress` of the presentation layer whose
+          // value is reset when the animation is removed.
+          let currentFrame = animationLayer.currentFrame
+          animationLayer.removeAnimation(forKey: key)
+          animationLayer.currentFrame = currentFrame
+        }
+      } else {
+        animationLayer.removeAnimation(forKey: key)
+        if flag {
+          animationLayer.currentFrame = (anim as! CABasicAnimation).toValue as! CGFloat
+        }
       }
     }
     if let completionBlock = completionBlock {

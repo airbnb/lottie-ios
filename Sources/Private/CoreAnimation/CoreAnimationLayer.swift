@@ -278,11 +278,11 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     animationProgressTracker.toValue = 1
 
     let timedProgressAnimation = animationProgressTracker.timed(with: context, for: self)
+    // The placeholder animation will be removed in `animationDidStop(..)`.
+    // We want to give ourselves a chance to fetch `animationProgress` from the presentation layer.
+    currentAnimationConfiguration?.animationContext.closure.animationLayer = self
+    currentAnimationConfiguration?.animationContext.closure.animationKey = #keyPath(animationProgress)
     timedProgressAnimation.delegate = currentAnimationConfiguration?.animationContext.closure
-
-    // Remove the progress animation once complete so we know when the animation
-    // has finished playing (if it doesn't loop infinitely)
-    timedProgressAnimation.isRemovedOnCompletion = true
 
     add(timedProgressAnimation, forKey: #keyPath(animationProgress))
   }

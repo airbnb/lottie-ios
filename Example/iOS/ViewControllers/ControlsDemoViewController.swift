@@ -52,6 +52,12 @@ final class ControlsDemoViewController: CollectionViewController {
           ],
         ]))
 
+    AnimatedSwitchRow.itemModel(
+      dataID: "Issue 1877",
+      content: .init(
+        animationName: "Samples/Issues/issue_1877",
+        title: "Issue 1877"))
+
     AnimatedButtonRow.itemModel(
       dataID: "Button",
       content: .init(
