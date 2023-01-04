@@ -146,8 +146,8 @@ extension CALayer {
       },
       context: context)
 
-    /// iOS 14 and earlier doesn't properly support rendering transforms
-    /// with negative X values: https://github.com/airbnb/lottie-ios/issues/1882
+    /// iOS 14 and earlier doesn't properly support rendering transforms with
+    /// negative `scale.x` values: https://github.com/airbnb/lottie-ios/issues/1882
     let osSupportsNegativeScaleValues: Bool = {
       #if os(iOS) || os(tvOS)
       if #available(iOS 15.0, tvOS 15.0, *) {
