@@ -146,17 +146,42 @@ extension CALayer {
       },
       context: context)
 
+    /// iOS 14 and earlier doesn't properly support rendering transforms with
+    /// negative `scale.x` values: https://github.com/airbnb/lottie-ios/issues/1882
+    let osSupportsNegativeScaleValues: Bool = {
+      #if os(iOS) || os(tvOS)
+      if #available(iOS 15.0, tvOS 15.0, *) {
+        return true
+      } else {
+        return false
+      }
+      #else
+      // We'll assume this works correctly on macOS until told otherwise
+      return true
+      #endif
+    }()
+
+    lazy var hasNegativeXScaleValues = transformModel.scale.keyframes.contains(where: { $0.value.x < 0 })
+
     // When `scale.x` is negative, we have to rotate the view
     // half way around the y axis to flip it horizontally.
     //  - We don't do this in snapshot tests because it breaks the tests
     //    in surprising ways that don't happen at runtime. Definitely not ideal.
+    //  - This isn't supported on iOS 14 and earlier either, so we have to
+    //    log a compatibility error on devices running older OSs.
     if TestHelpers.snapshotTestsAreRunning {
-      if transformModel.scale.keyframes.contains(where: { $0.value.x < 0 }) {
+      if hasNegativeXScaleValues {
         context.logger.warn("""
           Negative `scale.x` values are not displayed correctly in snapshot tests
           """)
       }
     } else {
+      if !osSupportsNegativeScaleValues, hasNegativeXScaleValues {
+        try context.logCompatibilityIssue("""
+          iOS 14 and earlier does not support rendering negative `scale.x` values
+          """)
+      }
+
       try addAnimation(
         for: .rotationY,
         keyframes: transformModel.scale.keyframes,

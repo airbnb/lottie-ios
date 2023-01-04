@@ -120,7 +120,7 @@ class AnimationPreviewViewController: UIViewController {
   private func configureSettingsMenu() {
     navigationItem.rightBarButtonItem = UIBarButtonItem(
       title: "Settings",
-      image: UIImage(systemName: "repeat.circle")!,
+      image: UIImage(systemName: "repeat.circle"),
       primaryAction: nil,
       menu: UIMenu(children: [
         UIMenu(
