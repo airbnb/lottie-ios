@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "container:Lottie.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:Example/Example.xcodeproj">
    </FileRef>
 </Workspace>

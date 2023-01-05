@@ -2,7 +2,11 @@
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
 import SnapshotTesting
+#if os(macOS)
+import AppKit
+#else
 import UIKit
+#endif
 import XCTest
 
 @testable import Lottie
