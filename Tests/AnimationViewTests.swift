@@ -98,12 +98,24 @@ final class AnimationViewTests: XCTestCase {
           XCTAssertTrue(
             finished,
             "Failed case \(test) on engine: \(engine.label)")
+
           XCTAssertEqual(
             animationView.currentFrame,
             values.toFrame,
             accuracy: 0.01,
             "Failed case \(test) on engine: \(engine.label)")
+
+          XCTAssertFalse(
+            animationView.isAnimationPlaying,
+            "Failed case \(test) on engine: \(engine.label)")
+
           expectation.fulfill()
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+          XCTAssertTrue(
+            animationView.isAnimationPlaying,
+            "Failed case \(test) on engine: \(engine.label)")
         }
 
         wait(for: [expectation], timeout: 1.0)
