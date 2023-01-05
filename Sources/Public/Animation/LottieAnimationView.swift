@@ -1390,6 +1390,13 @@ final public class LottieAnimationView: LottieAnimationViewBase {
         }
       }
 
+      // If attempting to play a zero-duration animation, just pause on that single frame instead
+      if animationContext.playFrom == animationContext.playTo {
+        currentFrame = animationContext.playTo
+        animationContext.closure.completionBlock?(true)
+        return
+      }
+
       coreAnimationLayer.playAnimation(configuration: .init(
         animationContext: animationContext,
         timingConfiguration: timingConfiguration))

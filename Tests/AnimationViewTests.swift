@@ -61,4 +61,66 @@ final class AnimationViewTests: XCTestCase {
     wait(for: [expectation], timeout: 1.0)
   }
 
+  func testPlayFromFrameToFrame() {
+    let tests: [(fromFrame: AnimationFrameTime?, toFrame: AnimationFrameTime)] = [
+      (fromFrame: nil, toFrame: 10),
+      (fromFrame: 8, toFrame: 14),
+    ]
+
+    let engineOptions: [(label: String, engine: RenderingEngineOption)] = [
+      ("mainThread", .mainThread),
+      ("coreAnimation", .coreAnimation),
+      ("automatic", .automatic),
+    ]
+
+    let animation = LottieAnimation.named(
+      "Issues/issue_1877",
+      bundle: .module,
+      subdirectory: Samples.directoryName)
+
+    XCTAssertNotNil(animation)
+
+    let window = UIWindow()
+
+    for (test, values) in tests.enumerated() {
+      for engine in engineOptions {
+        let animationView = LottieAnimationView(
+          animation: animation,
+          configuration: .init(renderingEngine: engine.engine))
+
+        window.addSubview(animationView)
+        defer {
+          animationView.removeFromSuperview()
+        }
+
+        let expectation = XCTestExpectation(description: "Finished playing case \(test) on engine: \(engine.label)")
+        animationView.play(fromFrame: values.fromFrame, toFrame: values.toFrame, loopMode: .playOnce) { finished in
+          XCTAssertTrue(
+            finished,
+            "Failed case \(test) on engine: \(engine.label)")
+
+          XCTAssertEqual(
+            animationView.currentFrame,
+            values.toFrame,
+            accuracy: 0.01,
+            "Failed case \(test) on engine: \(engine.label)")
+
+          XCTAssertFalse(
+            animationView.isAnimationPlaying,
+            "Failed case \(test) on engine: \(engine.label)")
+
+          expectation.fulfill()
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+          XCTAssertTrue(
+            animationView.isAnimationPlaying,
+            "Failed case \(test) on engine: \(engine.label)")
+        }
+
+        wait(for: [expectation], timeout: 1.0)
+      }
+    }
+  }
+
 }
