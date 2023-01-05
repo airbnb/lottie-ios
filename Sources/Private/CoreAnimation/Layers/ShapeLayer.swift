@@ -438,17 +438,22 @@ extension Array where Element == ShapeItemLayer.Item {
       }
     }
 
-    var unusedItems = [ShapeItemLayer.Item]()
-    for index in renderGroups.indices.reversed() {
-      let renderGroup = renderGroups[index]
-
-      // All valid render groups must have a path, otherwise the items wouldn't be rendered
-      if renderGroup.pathItems.isEmpty {
-        unusedItems.append(contentsOf: renderGroup.otherItems)
-        renderGroups.remove(at: index)
-      }
+    // All valid render groups must have a path, otherwise the items wouldn't be rendered
+    renderGroups = renderGroups.filter { renderGroup in
+      !renderGroup.pathItems.isEmpty
     }
 
-    return (validGroups: renderGroups, unusedItems: unusedItems)
+    let itemsInValidRenderGroups = NSSet(
+      array: renderGroups.lazy
+        .flatMap { $0.pathItems + $0.otherItems }
+        .map { $0.item })
+
+    // `unusedItems` should only include each original item a single time,
+    // and should preserve the existing order
+    let itemsNotInValidRenderGroups = filter { item in
+      !itemsInValidRenderGroups.contains(item.item)
+    }
+
+    return (validGroups: renderGroups, unusedItems: itemsNotInValidRenderGroups)
   }
 }
