@@ -443,9 +443,10 @@ extension Array where Element == ShapeItemLayer.Item {
       !renderGroup.pathItems.isEmpty
     }
 
-    let itemsInValidRenderGroups = NSSet(array: renderGroups.lazy
-      .flatMap { $0.pathItems + $0.otherItems }
-      .map { $0.item })
+    let itemsInValidRenderGroups = NSSet(
+      array: renderGroups.lazy
+        .flatMap { $0.pathItems + $0.otherItems }
+        .map { $0.item })
 
     // `unusedItems` should only include each original item a single time,
     // and should preserve the existing order
