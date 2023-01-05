@@ -62,6 +62,15 @@ final class ControlsDemoViewController: CollectionViewController {
           .init(fromMarker: "touchDownEnd", toMarker: "touchUpCancel", event: .touchUpOutside),
           .init(fromMarker: "touchDownEnd", toMarker: "touchUpEnd", event: .touchUpInside),
         ]))
+
+    AnimatedSwitchRow.itemModel(
+      dataID: "issue-1877",
+      content: .init(
+        animationName: "Samples/Issues/issue_1877",
+        title: "Issue #1877",
+        onTimeRange: nil, // use the default (0...1)
+        offTimeRange: nil, // use the default (1...0)
+        colorValueProviders: ["**.Color": [Keyframe(.black)]]))
   }
 
 }

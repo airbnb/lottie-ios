@@ -347,10 +347,22 @@ extension CoreAnimationLayer: RootAnimationLayer {
   var currentFrame: AnimationFrameTime {
     get {
       switch playbackState {
-      case .playing, nil:
-        return animation.frameTime(forProgress: (presentation() ?? self).animationProgress)
       case .paused(let frame):
         return frame
+
+      case .playing, nil:
+        // When in the `playing` state, the animation is either actively playing
+        // or is completed on the final frame of a non-repeating animation.
+        // When a non-repeating animation is complete, `animation(forKey: #keyPath(animationProgress))`
+        // is no longer present and the Core-Animation-managed `animationProgress` value is just 0.
+        // In that case, since the animation is complete, we just return the final frame that was played to.
+        let animationCurrentlyPlaying = animation(forKey: #keyPath(animationProgress)) != nil
+
+        if !animationCurrentlyPlaying, let configuration = currentAnimationConfiguration {
+          return configuration.animationContext.playTo
+        } else {
+          return animation.frameTime(forProgress: (presentation() ?? self).animationProgress)
+        }
       }
     }
     set {

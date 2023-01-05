@@ -29,8 +29,8 @@ final class AnimatedSwitchRow: UIView, EpoxyableView {
   struct Content: Equatable {
     var animationName: String
     var title: String
-    var onTimeRange: ClosedRange<CGFloat>
-    var offTimeRange: ClosedRange<CGFloat>
+    var onTimeRange: ClosedRange<CGFloat>?
+    var offTimeRange: ClosedRange<CGFloat>?
     var colorValueProviders: [String: [Keyframe<LottieColor>]] = [:]
   }
 
@@ -79,15 +79,19 @@ final class AnimatedSwitchRow: UIView, EpoxyableView {
             context.constrainable.animation = .named(animationName)
             context.constrainable.contentMode = .scaleAspectFit
 
-            context.constrainable.setProgressForState(
-              fromProgress: content.offTimeRange.lowerBound,
-              toProgress: content.offTimeRange.upperBound,
-              forOnState: false)
+            if let offTimeRange = content.offTimeRange {
+              context.constrainable.setProgressForState(
+                fromProgress: offTimeRange.lowerBound,
+                toProgress: offTimeRange.upperBound,
+                forOnState: false)
+            }
 
-            context.constrainable.setProgressForState(
-              fromProgress: content.onTimeRange.lowerBound,
-              toProgress: content.onTimeRange.upperBound,
-              forOnState: true)
+            if let onTimeRange = content.onTimeRange {
+              context.constrainable.setProgressForState(
+                fromProgress: onTimeRange.lowerBound,
+                toProgress: onTimeRange.upperBound,
+                forOnState: true)
+            }
 
             for (keypath, color) in content.colorValueProviders {
               context.constrainable.animationView.setValueProvider(
