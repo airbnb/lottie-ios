@@ -446,7 +446,7 @@ extension Array where Element == ShapeItemLayer.Item {
       let allAlphaAnimationsAreIdentical = {
         strokesAndFills.allSatisfy { item in
           (item.item as? OpacityAnimationModel)?.opacity
-          == (strokesAndFills.first?.item as? OpacityAnimationModel)?.opacity
+            == (strokesAndFills.first?.item as? OpacityAnimationModel)?.opacity
         }
       }
 
