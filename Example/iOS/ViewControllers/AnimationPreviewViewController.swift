@@ -29,7 +29,7 @@ class AnimationPreviewViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .systemBackground
+    view.backgroundColor = .secondarySystemBackground
 
     if let animation = LottieAnimation.named(animationName) {
       animationView.animation = animation
