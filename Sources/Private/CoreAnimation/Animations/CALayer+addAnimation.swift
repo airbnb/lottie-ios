@@ -178,11 +178,15 @@ extension CALayer {
       let isLastSegment = (index == animationSegments.indices.last!)
 
       if isFirstSegment {
-        segmentStartTime = context.time(for: context.animation.startFrame)
+        segmentStartTime = min(
+          context.time(for: context.animation.startFrame),
+          segmentStartTime)
       }
 
       if isLastSegment {
-        segmentEndTime = context.time(for: context.animation.endFrame)
+        segmentEndTime = max(
+          context.time(for: context.animation.endFrame),
+          segmentEndTime)
       }
 
       let segmentDuration = segmentEndTime - segmentStartTime

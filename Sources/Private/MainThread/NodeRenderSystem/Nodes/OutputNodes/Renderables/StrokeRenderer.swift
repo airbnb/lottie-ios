@@ -152,6 +152,7 @@ final class StrokeRenderer: PassThroughOutputNode, Renderable {
   }
 
   func updateShapeLayer(layer: CAShapeLayer) {
+    layer.name = "Stroke"
     layer.strokeColor = color
     layer.opacity = Float(opacity)
     layer.lineWidth = width

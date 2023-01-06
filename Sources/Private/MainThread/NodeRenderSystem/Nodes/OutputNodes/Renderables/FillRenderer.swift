@@ -62,6 +62,7 @@ final class FillRenderer: PassThroughOutputNode, Renderable {
   }
 
   func updateShapeLayer(layer: CAShapeLayer) {
+    layer.name = "fill"
     layer.fillColor = color
     layer.opacity = Float(opacity)
     layer.fillRule = fillRule.caFillRule
