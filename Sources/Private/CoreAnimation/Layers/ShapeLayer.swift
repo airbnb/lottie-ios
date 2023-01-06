@@ -435,7 +435,7 @@ extension Array where Element == ShapeItemLayer.Item {
         let strokeIndex = strokesAndFills.firstIndex(where: { $0.item.isStroke }),
         let fillIndex = strokesAndFills.firstIndex(where: { $0.item.isFill })
       {
-        strokeDrawnOnTopOfFill = strokeIndex > fillIndex
+        strokeDrawnOnTopOfFill = strokeIndex < fillIndex
       } else {
         strokeDrawnOnTopOfFill = false
       }
