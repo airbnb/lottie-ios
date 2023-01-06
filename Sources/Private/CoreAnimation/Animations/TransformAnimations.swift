@@ -217,7 +217,7 @@ extension CALayer {
   {
     try addAnimation(
       for: .rotation,
-      keyframes: ContiguousArray(transformModel.rotation.keyframes),
+      keyframes: transformModel.rotation.keyframes,
       value: { rotationDegrees in
         // Lottie animation files express rotation in degrees
         // (e.g. 90º, 180º, 360º) so we covert to radians to get the
