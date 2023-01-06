@@ -432,8 +432,8 @@ extension Array where Element == ShapeItemLayer.Item {
       // drawn on top of the stroke, then they have to be rendered as separate layers.
       let strokeDrawnOnTopOfFill: Bool
       if
-        let strokeIndex = group.otherItems.firstIndex(where: { $0.item.isStroke }),
-        let fillIndex = group.otherItems.firstIndex(where: { $0.item.isStroke })
+        let strokeIndex = strokesAndFills.firstIndex(where: { $0.item.isStroke }),
+        let fillIndex = strokesAndFills.firstIndex(where: { $0.item.isFill })
       {
         strokeDrawnOnTopOfFill = strokeIndex > fillIndex
       } else {
