@@ -441,8 +441,8 @@ extension Array where Element == ShapeItemLayer.Item {
       }
 
       // `Fill` and `Stroke` items have an `alpha` property that can be animated separately,
-      // but each layer only has a single `opacity` property, we can only use a single `CAShapeLayer`
-      // when the items have the same
+      // but each layer only has a single `opacity` property. We can only use a single `CAShapeLayer`
+      // when the items have the same `alpha` animations.
       let allAlphaAnimationsAreIdentical = {
         strokesAndFills.allSatisfy { item in
           (item.item as? OpacityAnimationModel)?.opacity
