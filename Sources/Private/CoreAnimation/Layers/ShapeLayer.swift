@@ -413,24 +413,54 @@ extension Array where Element == ShapeItemLayer.Item {
       }
     }
 
-    // `Fill` and `Stroke` items have an `alpha` property that can be animated separately,
-    // but each layer only has a single `opacity` property, so we have to create
-    // separate layers / render groups for each of these if necessary.
+    /// The main thread rendering engine draws each Stroke and Fill as a separate `CAShapeLayer`.
+    /// As an optimization, we can combine them into a single shape layer when a few conditions are met:
+    ///  1. There is at most one stroke and one fill (a `CAShapeLayer` can only render one of each)
+    ///  2. The stroke is drawn on top of the fill (the behavior of a `CAShapeLayer`)
+    ///  3. The fill and stroke have the same `opacity` animations (since a `CAShapeLayer` can only render
+    ///     a single set of `opacity` animations).
+    /// Otherwise, each stroke / fill needs to be split into a separate layer.
     renderGroups = renderGroups.flatMap { group -> [ShapeRenderGroup] in
       let (strokesAndFills, otherItems) = group.otherItems.grouped(by: { $0.item.isFill || $0.item.isStroke })
+      let (strokes, fills) = strokesAndFills.grouped(by: { $0.item.isStroke })
 
-      // However, if all of the strokes / fills have the exact same opacity animation configuration,
-      // then we can continue using a single layer / render group.
-      let allAlphaAnimationsAreIdentical = strokesAndFills.allSatisfy { item in
-        (item.item as? OpacityAnimationModel)?.opacity
-          == (strokesAndFills.first?.item as? OpacityAnimationModel)?.opacity
+      // A `CAShapeLayer` can only draw a single fill and a single stroke
+      let hasAtMostOneFill = fills.count <= 1
+      let hasAtMostOneStroke = strokes.count <= 1
+
+      // A `CAShapeLayer` can only draw a stroke on top of a fill -- if the fill is supposed to be
+      // drawn on top of the stroke, then they have to be rendered as separate layers.
+      let strokeDrawnOnTopOfFill: Bool
+      if
+        let strokeIndex = strokesAndFills.firstIndex(where: { $0.item.isStroke }),
+        let fillIndex = strokesAndFills.firstIndex(where: { $0.item.isFill })
+      {
+        strokeDrawnOnTopOfFill = strokeIndex < fillIndex
+      } else {
+        strokeDrawnOnTopOfFill = false
       }
 
-      if allAlphaAnimationsAreIdentical {
+      // `Fill` and `Stroke` items have an `alpha` property that can be animated separately,
+      // but each layer only has a single `opacity` property. We can only use a single `CAShapeLayer`
+      // when the items have the same `alpha` animations.
+      let allAlphaAnimationsAreIdentical = {
+        strokesAndFills.allSatisfy { item in
+          (item.item as? OpacityAnimationModel)?.opacity
+            == (strokesAndFills.first?.item as? OpacityAnimationModel)?.opacity
+        }
+      }
+
+      // If all the required conditions are met, this group can be rendered using a single `ShapeItemLayer`
+      if
+        hasAtMostOneFill,
+        hasAtMostOneStroke,
+        strokeDrawnOnTopOfFill,
+        allAlphaAnimationsAreIdentical()
+      {
         return [group]
       }
 
-      // Create a new group for each stroke / fill
+      // Otherwise each stroke / fill needs to be rendered as a separate `ShapeItemLayer`
       return strokesAndFills.map { strokeOrFill in
         ShapeRenderGroup(
           pathItems: group.pathItems,
