@@ -1374,8 +1374,13 @@ final public class LottieAnimationView: LottieAnimationViewBase {
         // `playFrom` time to be the `currentFrame`. Since the animation duration
         // is based on `playFrom` and `playTo`, this automatically truncates the
         // duration (so the animation stops playing at `playFrom`).
+        //  - Don't do this if the animation is already at that frame
+        //    (e.g. playing from 100% to 0% when the animation is already at 0%)
+        //    since that would cause the animation to not play at all.
         case .playOnce:
-          animationContext.playFrom = currentFrame
+          if animationContext.playTo != currentFrame {
+            animationContext.playFrom = currentFrame
+          }
 
         // When looping, we specifically _don't_ want to affect the duration of the animation,
         // since that would affect the duration of all subsequent loops. We just want to adjust
