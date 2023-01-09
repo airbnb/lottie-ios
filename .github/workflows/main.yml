@@ -52,6 +52,20 @@ jobs:
           name: TestArtifacts
           path: Tests/Artifacts
 
+  build-xcframework:
+    name: "Build XCFramework"
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+      - name: Build XCFramework
+        run: bundle exec rake build:xcframework
+      - name: Upload XCFramework
+        uses: actions/upload-artifact@v2
+        with:
+          name: Lottie.xcframework
+          path: .build/archives/Lottie.xcframework.zip
+
   cocoapod:
     name: "Lint CocoaPods podspec"
     runs-on: macos-12

@@ -1,6 +1,6 @@
 namespace :build do
   desc 'Builds all packages and executables'
-  task all: ['package:all', 'example:all']
+  task all: ['package:all', 'example:all', 'xcframework']
 
   desc 'Builds the Lottie package for supported platforms'
   namespace :package do
@@ -42,6 +42,30 @@ namespace :build do
     task :tvOS do
       xcodebuild('build -scheme "Example (tvOS)" -destination "platform=tvOS Simulator,name=Apple TV" -workspace Lottie.xcworkspace')
     end
+  end
+
+  desc 'Builds an xcframework for all supported platforms'
+  task :xcframework do
+    sh 'rm -rf .build/archives'
+    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (iOS)" -destination generic/platform=iOS -archivePath ".build/archives/Lottie_iOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES')
+    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (iOS)" -destination "generic/platform=iOS Simulator" -archivePath ".build/archives/Lottie_iOS_Simulator" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES')
+    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (macOS)" -destination generic/platform=macOS -archivePath ".build/archives/Lottie_macOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES')
+    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (tvOS)" -destination generic/platform=tvOS -archivePath ".build/archives/Lottie_tvOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES')
+    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (tvOS)" -destination "generic/platform=tvOS Simulator" -archivePath ".build/archives/Lottie_tvOS_Simulator" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES')
+    xcodebuild(
+      [
+        '-create-xcframework',
+        '-framework .build/archives/Lottie_iOS.xcarchive/Products/Library/Frameworks/Lottie.framework',
+        '-framework .build/archives/Lottie_iOS_Simulator.xcarchive/Products/Library/Frameworks/Lottie.framework',
+        '-framework .build/archives/Lottie_macOS.xcarchive/Products/Library/Frameworks/Lottie.framework',
+        '-framework .build/archives/Lottie_tvOS.xcarchive/Products/Library/Frameworks/Lottie.framework',
+        '-framework .build/archives/Lottie_tvOS_Simulator.xcarchive/Products/Library/Frameworks/Lottie.framework',
+        '-output .build/archives/Lottie.xcframework'
+      ].join(" "))
+    Dir.chdir('.build/archives') do
+      sh 'zip -r Lottie.xcframework.zip Lottie.xcframework'
+    end
+    sh 'swift package compute-checksum .build/archives/Lottie.xcframework.zip'
   end
 end
 
