@@ -92,6 +92,8 @@ Since Lottie 4.0.1, a `Lottie.xcframework.zip` archive is attached to each relea
   path: "path/to/Lottie.xcframework")
 ```
 
+If using Lottie as a remote binary depdenceny, you'll need to specify the checksum of `xcframework` file. The checksum is included in the release notes for each version. You can also calculate this locally by running `swift package compute-checksum Lottie.xcframework.zip`.
+
 ### Data collection
 
 The Lottie SDK does not collect any data. We provide this notice to help you fill out [App Privacy Details](https://developer.apple.com/app-store/app-privacy-details/).
