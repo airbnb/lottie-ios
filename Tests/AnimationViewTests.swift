@@ -65,6 +65,7 @@ final class AnimationViewTests: XCTestCase {
     let tests: [(fromFrame: AnimationFrameTime?, toFrame: AnimationFrameTime)] = [
       (fromFrame: nil, toFrame: 10),
       (fromFrame: 8, toFrame: 14),
+      (fromFrame: 14, toFrame: 0),
     ]
 
     let engineOptions: [(label: String, engine: RenderingEngineOption)] = [
@@ -93,7 +94,12 @@ final class AnimationViewTests: XCTestCase {
           animationView.removeFromSuperview()
         }
 
-        let expectation = XCTestExpectation(description: "Finished playing case \(test) on engine: \(engine.label)")
+        let animationPlayingExpectation = XCTestExpectation(
+          description: "Animation playing case \(test) on engine: \(engine.label)")
+
+        let animationCompleteExpectation = XCTestExpectation(
+          description: "Finished playing case \(test) on engine: \(engine.label)")
+
         animationView.play(fromFrame: values.fromFrame, toFrame: values.toFrame, loopMode: .playOnce) { finished in
           XCTAssertTrue(
             finished,
@@ -109,16 +115,26 @@ final class AnimationViewTests: XCTestCase {
             animationView.isAnimationPlaying,
             "Failed case \(test) on engine: \(engine.label)")
 
-          expectation.fulfill()
+          animationCompleteExpectation.fulfill()
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+          animationPlayingExpectation.fulfill()
+
           XCTAssertTrue(
             animationView.isAnimationPlaying,
             "Failed case \(test) on engine: \(engine.label)")
+
+          // Check that the animation is playing in the correct direction:
+          // After a brief delay we should be closer to the from frame than the to frame
+          let distanceFromStartFrame = abs((values.fromFrame ?? 0) - animationView.realtimeAnimationFrame)
+          let distanceFromEndFrame = abs(values.toFrame - animationView.realtimeAnimationFrame)
+          XCTAssertTrue(
+            distanceFromStartFrame < distanceFromEndFrame,
+            "Failed case \(test) on engine: \(engine.label)")
         }
 
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [animationPlayingExpectation, animationCompleteExpectation], timeout: 1.0)
       }
     }
   }
