@@ -23,7 +23,7 @@ jobs:
         with:
           xcode: ${{ matrix.xcode }}
       - name: Build Package
-        run: bundle exec rake build:xcframework
+        run: bundle exec rake build:package:all
 
   build-example:
     name: "Build Example App"
