@@ -54,6 +54,13 @@ enum PropertyName: String {
 // MARK: CALayer properties
 
 extension LayerProperty {
+  static var transform: LayerProperty<CATransform3D> {
+    .init(
+      caLayerKeypath: #keyPath(CALayer.transform),
+      defaultValue: CATransform3DIdentity,
+      customizableProperty: nil /* currently unsupported */ )
+  }
+
   static var position: LayerProperty<CGPoint> {
     .init(
       caLayerKeypath: "transform.translation",
