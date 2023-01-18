@@ -67,16 +67,6 @@ enum PropertyName: String {
 // MARK: CALayer properties
 
 extension LayerProperty {
-  static var transform: LayerProperty<CATransform3D> {
-    .init(
-      caLayerKeypath: #keyPath(CALayer.transform),
-      isDefaultValue: { transform in
-        guard let transform else { return false }
-        return CATransform3DIsIdentity(transform)
-      },
-      customizableProperty: nil /* currently unsupported */ )
-  }
-
   static var position: LayerProperty<CGPoint> {
     .init(
       caLayerKeypath: "transform.translation",
@@ -146,6 +136,16 @@ extension LayerProperty {
     .init(
       caLayerKeypath: #keyPath(CALayer.opacity),
       defaultValue: 1,
+      customizableProperty: nil /* currently unsupported */ )
+  }
+  
+  static var transform: LayerProperty<CATransform3D> {
+    .init(
+      caLayerKeypath: #keyPath(CALayer.transform),
+      isDefaultValue: { transform in
+        guard let transform else { return false }
+        return CATransform3DIsIdentity(transform)
+      },
       customizableProperty: nil /* currently unsupported */ )
   }
 }
