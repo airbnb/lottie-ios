@@ -2,8 +2,13 @@
 
 Lottie is made available through multiple package managers, each of which has to be updated individually for each release.
 
- 1. Make sure `lottie-ios.podspec` and `package.json` list the correct version number
- 2. Update the [Cocoapod](https://cocoapods.org/pods/lottie-ios) by running `pod trunk push lottie-ios.podspec`
- 3. Update the [npm package](https://www.npmjs.com/package/lottie-ios) by running `npm publish`
- 4. Attach `Lottie.xframework.zip` to the GitHub release and include the checksum in the release notes.
+ 1. Make sure `lottie-ios.podspec` and `package.json` list the correct version number. 
+   - Optionally, consider updating the version number in `README.md` as well.
+ 2. Publish the new release in the [lottie-ios](https://github.com/airbnb/lottie-ios) repo
+ 3. Update the [Cocoapod](https://cocoapods.org/pods/lottie-ios) by running `pod trunk push lottie-ios.podspec`
+ 4. Update the [npm package](https://www.npmjs.com/package/lottie-ios) by running `npm publish`
+ 5. Attach `Lottie.xframework.zip` to the GitHub release
    - For every PR / commit, `Lottie.xcframework.zip` is build by CI and uploaded to the job summary.
+ 6. Update the [lottie-spm](https://github.com/airbnb/lottie-spm) [Package.swift](https://github.com/airbnb/lottie-spm/blob/main/Package.swift) manifest to reference the new version's XCFramework.
+   - Optionally, consider updating the version number in `README.md` as well.
+ 7. Publish the new release in the [lottie-spm](https://github.com/airbnb/lottie-spm) repo
