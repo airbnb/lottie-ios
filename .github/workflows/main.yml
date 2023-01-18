@@ -58,6 +58,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
+        with:
+          # XCFrameworks are forwards-compatible but not backwards-compatible.
+          # The Xcode version we use for this job is that oldest Xcode version that
+          # will be able to use these XCFrameworks and the lottie-spm package.
+          xcode: '13.2.1' # Swift 5.5.2
       - name: Build XCFramework
         run: bundle exec rake build:xcframework
       - name: Upload XCFramework
