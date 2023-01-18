@@ -55,11 +55,28 @@ extension CALayer {
   ///  - This _doesn't_ apply `transform.opacity`, which has to be handled separately
   ///    since child layers don't inherit the `opacity` of their parent.
   @nonobjc
-  func addTransformAnimations(for transformModel: TransformModel, context: LayerAnimationContext) throws {
-    try addPositionAnimations(from: transformModel, context: context)
-    try addAnchorPointAnimation(from: transformModel, context: context)
-    try addScaleAnimations(from: transformModel, context: context)
-    try addRotationAnimation(from: transformModel, context: context)
+  func addTransformAnimations(
+    for transformModel: TransformModel,
+    context: LayerAnimationContext)
+    throws
+  {
+    // CALayers don't support animating skew with its own set of keyframes.
+    // If the transform includes a skew, we have to combine all of the transform
+    // components into a single set of keyframes.
+    // Only `ShapeTransform` supports skews.
+    if
+      let shapeTransform = transformModel as? ShapeTransform,
+      shapeTransform.hasSkew
+    {
+      try addCombinedTransformAnimation(for: shapeTransform, context: context)
+    }
+
+    else {
+      try addPositionAnimations(from: transformModel, context: context)
+      try addAnchorPointAnimation(from: transformModel, context: context)
+      try addScaleAnimations(from: transformModel, context: context)
+      try addRotationAnimation(from: transformModel, context: context)
+    }
   }
 
   // MARK: Private
@@ -224,6 +241,39 @@ extension CALayer {
         // values expected by Core Animation (e.g. π/2, π, 2π)
         rotationDegrees.cgFloatValue * .pi / 180
       },
+      context: context)
+  }
+
+  /// Adds an animation for the entire `transform` key by combining all of the
+  /// position / size / rotation / skew animations into a single set of keyframes.
+  /// This is necessary when there's a skew animation, since skew can only
+  /// be applied via a transform.
+  private func addCombinedTransformAnimation(
+    for transformModel: ShapeTransform,
+    context: LayerAnimationContext)
+    throws
+  {
+    let combinedTransformKeyframes = Keyframes.combined(
+      transformModel.anchor,
+      transformModel.position,
+      transformModel.scale,
+      transformModel.rotation,
+      transformModel.skew,
+      transformModel.skewAxis,
+      makeCombinedResult: { anchor, position, scale, rotation, skew, skewAxis in
+        CATransform3D.makeTransform(
+          anchor: anchor.pointValue,
+          position: position.pointValue,
+          scale: scale.sizeValue,
+          rotation: rotation.cgFloatValue,
+          skew: skew.cgFloatValue,
+          skewAxis: skewAxis.cgFloatValue)
+      })
+
+    try addAnimation(
+      for: .transform,
+      keyframes: combinedTransformKeyframes.keyframes,
+      value: { $0 },
       context: context)
   }
 
