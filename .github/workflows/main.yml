@@ -69,7 +69,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Lottie.xcframework
-          path: .build/archives/Lottie.xcframework.zip
+          path: .build/archives/Lottie.xcframework
 
   cocoapod:
     name: "Lint CocoaPods podspec"

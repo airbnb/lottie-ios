@@ -62,10 +62,6 @@ namespace :build do
         '-framework .build/archives/Lottie_tvOS_Simulator.xcarchive/Products/Library/Frameworks/Lottie.framework',
         '-output .build/archives/Lottie.xcframework'
       ].join(" "))
-    Dir.chdir('.build/archives') do
-      sh 'zip -r Lottie.xcframework.zip Lottie.xcframework'
-    end
-    sh 'swift package compute-checksum .build/archives/Lottie.xcframework.zip'
   end
 end
 
