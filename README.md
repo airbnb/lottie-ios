@@ -36,13 +36,17 @@ You can pull the [Lottie Github Repo](https://github.com/airbnb/lottie-ios/) and
 To install Lottie using [Swift Package Manager](https://github.com/apple/swift-package-manager) you can follow the [tutorial published by Apple](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) using the URL for the Lottie repo with the current version:
 
 1. In Xcode, select “File” → “Add Packages...”
-1. Enter https://github.com/airbnb/lottie-ios.git
+1. Enter https://github.com/airbnb/lottie-spm.git
 
 or you can add the following dependency to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/airbnb/lottie-ios.git", from: "4.0.0")
+.package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.1.0")
 ```
+
+When using Swift Package Manager we recommend using the [lottie-spm](https://github.com/airbnb/lottie-spm) repo instead of the main lottie-ios repo.  The main git repository for [lottie-ios](https://github.com/airbnb/lottie-ios) is somewhat large (300+ MB), and Swift Package Manager always downloads the full repository with all git hsitory. The [lottie-spm](https://github.com/airbnb/lottie-spm) repo is much smaller (less than 500kb), so can be downloaded much more quickly. 
+
+Instead of downloading the full git history of Lottie and building it from source, the lottie-spm repo just contains a pointer to the precompiled XCFramework included in the [latest lottie-ios release](https://github.com/airbnb/lottie-ios/releases/latest) (typically ~8MB). If you prefer to include Lottie source directly your project, you can directly depend on the main lottie-ios repo by referencing `https://github.com/airbnb/lottie-ios.git` instead.
 
 ### CocoaPods
 Add the pod to your Podfile:
@@ -70,29 +74,6 @@ And then run:
 carthage update
 ```
 In your application targets “General” tab under the “Linked Frameworks and Libraries” section, drag and drop lottie-ios.framework from the Carthage/Build/iOS directory that `carthage update` produced.
-
-### Binary dependency (`xcframework`)
-
-Lottie is also available as a `xcframework` binary dependency. Lottie's git repository is somewhat large (300+ MB), so using an `xcframework` (~10MB) reduces the amount of data that needs to be downloaded.
-
-Since Lottie 4.0.1, a `Lottie.xcframework.zip` archive is attached to each release. You can find the latest release [here](https://github.com/airbnb/lottie-ios/releases/latest). 
-
-`xcframework`s can be installed manually in your Xcode project. If using Swift Package Manager, you can add the following dependency to your `Package.swift`:
-
-```swift
-// You can either use a remote binary dependency where SPM downloads the xcframework from GitHub
-.binaryTarget(
-  name: "Lottie",
-  url: "https://github.com/airbnb/lottie-ios/releases/download/4.0.1/Lottie.xcframework.zip",
-  checksum: "b6d8b0b81975d91965b8bb00cffb0eae4b3d94538b6950a90bc1366afd5d4239")
-
-// Or you can download the xcframework locally and include it in your project's git repo:
-.binaryTarget(
-  name: "Lottie",
-  path: "path/to/Lottie.xcframework")
-```
-
-If using Lottie as a remote binary depdenceny, you'll need to specify the checksum of `xcframework` file. The checksum is included in the release notes for each version. You can also calculate this locally by running `swift package compute-checksum Lottie.xcframework.zip`.
 
 ### Data collection
 
