@@ -68,8 +68,14 @@ jobs:
       - name: Upload XCFramework
         uses: actions/upload-artifact@v2
         with:
-          name: Lottie.xcframework
-          path: .build/archives/Lottie.xcframework
+          name: XCFramework
+          # The xcframework is at the path `.build/archives/XCFramework/Lottie.xcframework.zip`.
+          # GitHub always zips the artifacts before uploading, so if we uploaded the .xframework.zip
+          # directly then it would actually upload a double-zip (a .zip containing our `Lottie.xcframework.zip`).
+          # This is confusing especially since macOS Archive Utility automatially unzips both layers at once.
+          # Instead, we upload the entire XCFramework folder, resulting in an `XCFramework.zip` that unzips
+          # to an `XCFramework` directory containing our `Lottie.xcframework.zip`.
+          path: .build/archives/XCFramework
 
   cocoapod:
     name: "Lint CocoaPods podspec"

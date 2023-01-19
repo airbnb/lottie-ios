@@ -60,8 +60,13 @@ namespace :build do
         '-framework .build/archives/Lottie_macOS.xcarchive/Products/Library/Frameworks/Lottie.framework',
         '-framework .build/archives/Lottie_tvOS.xcarchive/Products/Library/Frameworks/Lottie.framework',
         '-framework .build/archives/Lottie_tvOS_Simulator.xcarchive/Products/Library/Frameworks/Lottie.framework',
-        '-output .build/archives/Lottie.xcframework'
+        '-output .build/archives/XCFramework/Lottie.xcframework'
       ].join(" "))
+    Dir.chdir('.build/archives/XCFramework') do
+      sh 'zip -r Lottie.xcframework.zip Lottie.xcframework'
+      sh 'rm -rf Lottie.xcframework'
+    end
+    sh 'swift package compute-checksum .build/archives/XCFramework/Lottie.xcframework.zip'
   end
 end
 
