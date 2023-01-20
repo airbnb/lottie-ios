@@ -64,6 +64,7 @@ namespace :build do
       ].join(" "))
     Dir.chdir('.build/archives') do
       sh 'zip -r Lottie.xcframework.zip Lottie.xcframework'
+      sh 'rm -rf Lottie.xcframework'
     end
     sh 'swift package compute-checksum .build/archives/Lottie.xcframework.zip'
   end
