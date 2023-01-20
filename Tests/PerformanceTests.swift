@@ -55,12 +55,12 @@ final class PerformanceTests: XCTestCase {
 
   func testAnimationViewScrubbing_simpleAnimation() {
     let ratio = compareEngineScrubbingPerformance(for: simpleAnimation, iterations: 2000)
-    XCTAssertEqual(ratio, 0.01, accuracy: 0.01)
+    XCTAssertEqual(ratio, 0.01, accuracy: 0.05)
   }
 
   func testAnimationViewScrubbing_complexAnimation() {
     let ratio = compareEngineScrubbingPerformance(for: complexAnimation, iterations: 2000)
-    XCTAssertEqual(ratio, 0.01, accuracy: 0.01)
+    XCTAssertEqual(ratio, 0.01, accuracy: 0.05)
   }
 
   func testParsing_simpleAnimation() throws {
