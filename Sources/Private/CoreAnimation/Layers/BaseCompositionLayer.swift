@@ -90,7 +90,7 @@ class BaseCompositionLayer: BaseAnimationLayer {
 
   private func setupSublayers() {
     addSublayer(contentsLayer)
-    
+
     if
       renderLayerContents,
       let masks = baseLayerModel.masks?.filter({ $0.mode != .none }),
