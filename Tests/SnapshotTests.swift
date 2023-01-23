@@ -86,6 +86,7 @@ class SnapshotTests: XCTestCase {
   override func setUp() {
     LottieLogger.shared = .printToConsole
     TestHelpers.snapshotTestsAreRunning = true
+    isRecording = false // Change it here to `true` if you want to generate the snapshots
   }
 
   override func tearDown() {
