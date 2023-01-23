@@ -26,6 +26,7 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
     var propertyMap: [String: AnyNodeProperty] = [
       "Anchor Point" : anchor,
       "Scale" : scale,
+      "Rotation": rotationZ,
       "Rotation X" : rotationX,
       "Rotation Y" : rotationY,
       "Rotation Z" : rotationZ,

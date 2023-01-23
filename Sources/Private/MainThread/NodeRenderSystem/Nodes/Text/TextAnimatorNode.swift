@@ -71,6 +71,7 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
     if let keyframeGroup = textAnimator.rotationZ {
       rotationZ = NodeProperty(provider: KeyframeInterpolator(keyframes: keyframeGroup.keyframes))
       properties["Rotation Z"] = rotationZ
+      properties["Rotation"] = rotationZ
     } else {
       rotationZ = nil
     }

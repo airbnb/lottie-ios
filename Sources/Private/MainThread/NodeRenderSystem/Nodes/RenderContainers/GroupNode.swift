@@ -42,6 +42,7 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
       "Anchor Point" : anchor,
       "Position" : position,
       "Scale" : scale,
+      "Rotation" : rotationZ,
       "Rotation X" : rotationX,
       "Rotation Y" : rotationY,
       "Rotation Z" : rotationZ,
