@@ -1,1 +1,5 @@
-Supports Core Animation engine
+Does not support Core Animation engine. Encountered compatibility issues:
+[animation_complete.Animation_LOGO_POST.Logo_détaché.Post_luxembourg_typo.ai.Post_luxembourg_typo.ai] The Core Animation rendering engine doesn't fully-support X / Y rotation.
+[animation_complete.Animation_LOGO_POST.Logo_détaché.Post_luxembourg_typo.ai.Post_luxembourg_typo.ai] The Core Animation rendering engine doesn't fully-support X / Y rotation.
+[animation_complete.Animation_LOGO_POST.Logo_détaché.Post_luxembourg_typo.ai.Post_luxembourg_typo.ai] The Core Animation rendering engine doesn't fully-support X / Y rotation.
+[animation_complete.Animation_LOGO_POST.Logo_détaché.Post_luxembourg_typo.ai.Post_luxembourg_typo.ai] The Core Animation rendering engine doesn't fully-support X / Y rotation.
