@@ -55,7 +55,15 @@ private struct RepeaterTransform {
     anchorPoint = repeater.anchorPoint
     scale = repeater.scale
 
-    rotation = repeater.rotation.map { rotation in
+    rotationX = repeater.rotationX.map { rotation in
+      LottieVector1D(rotation.value * Double(index))
+    }
+
+    rotationY = repeater.rotationY.map { rotation in
+      LottieVector1D(rotation.value * Double(index))
+    }
+
+    rotationZ = repeater.rotationZ.map { rotation in
       LottieVector1D(rotation.value * Double(index))
     }
 
@@ -71,7 +79,10 @@ private struct RepeaterTransform {
 
   let anchorPoint: KeyframeGroup<LottieVector3D>
   let position: KeyframeGroup<LottieVector3D>
-  let rotation: KeyframeGroup<LottieVector1D>
+  let rotationX: KeyframeGroup<LottieVector1D>
+  let rotationY: KeyframeGroup<LottieVector1D>
+  let rotationZ: KeyframeGroup<LottieVector1D>
+
   let scale: KeyframeGroup<LottieVector3D>
 
 }

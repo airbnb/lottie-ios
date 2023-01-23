@@ -24,8 +24,14 @@ protocol TransformModel {
   /// The scale of the transform
   var scale: KeyframeGroup<LottieVector3D> { get }
 
-  /// The rotation of the transform. Note: This is single dimensional rotation.
-  var rotation: KeyframeGroup<LottieVector1D> { get }
+  /// The rotation of the transform on X axis.
+  var rotationX: KeyframeGroup<LottieVector1D> { get }
+
+  /// The rotation of the transform on Y axis.
+  var rotationY: KeyframeGroup<LottieVector1D> { get }
+
+  /// The rotation of the transform on Z axis.
+  var rotationZ: KeyframeGroup<LottieVector1D> { get }
 }
 
 // MARK: - Transform + TransformModel
@@ -232,9 +238,29 @@ extension CALayer {
     context: LayerAnimationContext)
     throws
   {
+    // Lottie animation files express rotation in degrees
+    // (e.g. 90º, 180º, 360º) so we covert to radians to get the
+    // values expected by Core Animation (e.g. π/2, π, 2π)
+
     try addAnimation(
-      for: .rotation,
-      keyframes: transformModel.rotation.keyframes,
+      for: .rotationX,
+      keyframes: transformModel.rotationX.keyframes,
+      value: { rotationDegrees in
+        rotationDegrees.cgFloatValue * .pi / 180
+      },
+      context: context)
+
+    try addAnimation(
+      for: .rotationY,
+      keyframes: transformModel.rotationY.keyframes,
+      value: { rotationDegrees in
+        rotationDegrees.cgFloatValue * .pi / 180
+      },
+      context: context)
+
+    try addAnimation(
+      for: .rotationZ,
+      keyframes: transformModel.rotationZ.keyframes,
       value: { rotationDegrees in
         // Lottie animation files express rotation in degrees
         // (e.g. 90º, 180º, 360º) so we covert to radians to get the
@@ -257,15 +283,19 @@ extension CALayer {
       transformModel.anchor,
       transformModel.position,
       transformModel.scale,
-      transformModel.rotation,
+      transformModel.rotationX,
+      transformModel.rotationY,
+      transformModel.rotationZ,
       transformModel.skew,
       transformModel.skewAxis,
-      makeCombinedResult: { anchor, position, scale, rotation, skew, skewAxis in
+      makeCombinedResult: { anchor, position, scale, rotationX, rotationY, rotationZ, skew, skewAxis in
         CATransform3D.makeTransform(
           anchor: anchor.pointValue,
           position: position.pointValue,
           scale: scale.sizeValue,
-          rotation: rotation.cgFloatValue,
+          rotationX: rotationX.cgFloatValue,
+          rotationY: rotationY.cgFloatValue,
+          rotationZ: rotationZ.cgFloatValue,
           skew: skew.cgFloatValue,
           skewAxis: skewAxis.cgFloatValue)
       })

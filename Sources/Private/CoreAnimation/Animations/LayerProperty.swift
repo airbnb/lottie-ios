@@ -109,9 +109,9 @@ extension LayerProperty {
       customizableProperty: nil /* currently unsupported */ )
   }
 
-  static var rotation: LayerProperty<CGFloat> {
+  static var rotationX: LayerProperty<CGFloat> {
     .init(
-      caLayerKeypath: "transform.rotation",
+      caLayerKeypath: "transform.rotation.x",
       defaultValue: 0,
       customizableProperty: nil /* currently unsupported */ )
   }
@@ -119,6 +119,13 @@ extension LayerProperty {
   static var rotationY: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.rotation.y",
+      defaultValue: 0,
+      customizableProperty: nil /* currently unsupported */ )
+  }
+
+  static var rotationZ: LayerProperty<CGFloat> {
+    .init(
+      caLayerKeypath: "transform.rotation.z",
       defaultValue: 0,
       customizableProperty: nil /* currently unsupported */ )
   }
