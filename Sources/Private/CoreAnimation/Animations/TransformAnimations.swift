@@ -81,7 +81,7 @@ extension CALayer {
       try addPositionAnimations(from: transformModel, context: context)
       try addAnchorPointAnimation(from: transformModel, context: context)
       try addScaleAnimations(from: transformModel, context: context)
-      try addRotationAnimation(from: transformModel, context: context)
+      try addRotationAnimations(from: transformModel, context: context)
     }
   }
 
@@ -233,7 +233,7 @@ extension CALayer {
       context: context)
   }
 
-  private func addRotationAnimation(
+  private func addRotationAnimations(
     from transformModel: TransformModel,
     context: LayerAnimationContext)
     throws
@@ -256,10 +256,6 @@ extension CALayer {
           """)
       }
     }
-    // Due to issues with Samples/Issues/issue_1800.json, we can't enable X/Y rotation by default
-    try context.compatibilityAssert(
-      !containsXRotationValues && !containsYRotationValues,
-      "The Core Animation rendering engine doesn't fully-support X / Y rotation.")
 
     // Lottie animation files express rotation in degrees
     // (e.g. 90º, 180º, 360º) so we covert to radians to get the

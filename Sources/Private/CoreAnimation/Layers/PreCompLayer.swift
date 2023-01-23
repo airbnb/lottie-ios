@@ -101,7 +101,7 @@ extension PreCompLayer: CustomLayoutLayer {
       width: CGFloat(preCompLayer.width),
       height: CGFloat(preCompLayer.height))
 
-    masksToBounds = true
+    contentsLayer.masksToBounds = true
   }
 }
 
