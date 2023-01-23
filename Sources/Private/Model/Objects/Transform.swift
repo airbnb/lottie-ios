@@ -159,7 +159,6 @@ final class Transform: Codable, DictionaryInitializable {
       rotationZ = KeyframeGroup(LottieVector1D(0))
     }
     rotation = nil
-
     if
       let opacityDictionary = dictionary[CodingKeys.opacity.rawValue] as? [String: Any],
       let opacity = try? KeyframeGroup<LottieVector1D>(dictionary: opacityDictionary)
@@ -218,6 +217,8 @@ final class Transform: Codable, DictionaryInitializable {
   /// The opacity of the transform.
   let opacity: KeyframeGroup<LottieVector1D>
 
-  /// Rotation. Will always be nil (It's here for `Codable`)
-  let rotation: KeyframeGroup<LottieVector1D>?
+  // MARK: Private
+
+  /// Here for the CodingKeys.rotation = "r". `r` and `rz` are the same.
+  private let rotation: KeyframeGroup<LottieVector1D>?
 }

@@ -255,6 +255,11 @@ extension CALayer {
           `rotation.y` values are not displayed correctly in snapshot tests
           """)
       }
+    } else {
+      // Due to issues with Samples/Issues/issue_1800.json, we can't enable X/Y rotation by default
+      try context.compatibilityAssert(
+        !containsXRotationValues && !containsYRotationValues,
+        "The Core Animation rendering engine doesn't fully-support X / Y rotation.")
     }
 
     // Lottie animation files express rotation in degrees
