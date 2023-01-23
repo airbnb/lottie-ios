@@ -54,11 +54,26 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
       skewAxis = nil
     }
 
-    if let keyframeGroup = textAnimator.rotation {
-      rotation = NodeProperty(provider: KeyframeInterpolator(keyframes: keyframeGroup.keyframes))
-      properties["Rotation"] = rotation
+    if let keyframeGroup = textAnimator.rotationX {
+      rotationX = NodeProperty(provider: KeyframeInterpolator(keyframes: keyframeGroup.keyframes))
+      properties["Rotation X"] = rotationX
     } else {
-      rotation = nil
+      rotationX = nil
+    }
+
+    if let keyframeGroup = textAnimator.rotationY {
+      rotationY = NodeProperty(provider: KeyframeInterpolator(keyframes: keyframeGroup.keyframes))
+      properties["Rotation Y"] = rotationY
+    } else {
+      rotationY = nil
+    }
+
+    if let keyframeGroup = textAnimator.rotationZ {
+      rotationZ = NodeProperty(provider: KeyframeInterpolator(keyframes: keyframeGroup.keyframes))
+      properties["Rotation Z"] = rotationZ
+      properties["Rotation"] = rotationZ
+    } else {
+      rotationZ = nil
     }
 
     if let keyframeGroup = textAnimator.opacity {
@@ -110,7 +125,9 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
   let scale: NodeProperty<LottieVector3D>?
   let skew: NodeProperty<LottieVector1D>?
   let skewAxis: NodeProperty<LottieVector1D>?
-  let rotation: NodeProperty<LottieVector1D>?
+  let rotationX: NodeProperty<LottieVector1D>?
+  let rotationY: NodeProperty<LottieVector1D>?
+  let rotationZ: NodeProperty<LottieVector1D>?
   let opacity: NodeProperty<LottieVector1D>?
   let strokeColor: NodeProperty<LottieColor>?
   let fillColor: NodeProperty<LottieColor>?
@@ -125,7 +142,9 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
       anchor: anchor?.value.pointValue ?? .zero,
       position: position?.value.pointValue ?? .zero,
       scale: scale?.value.sizeValue ?? CGSize(width: 100, height: 100),
-      rotation: rotation?.value.cgFloatValue ?? 0,
+      rotationX: rotationX?.value.cgFloatValue ?? 0,
+      rotationY: rotationY?.value.cgFloatValue ?? 0,
+      rotationZ: rotationZ?.value.cgFloatValue ?? 0,
       skew: skew?.value.cgFloatValue,
       skewAxis: skewAxis?.value.cgFloatValue)
   }

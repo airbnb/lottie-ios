@@ -60,7 +60,7 @@ class SnapshotTests: XCTestCase {
       XCTAssert(
         Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).json") })
           || Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).lottie") }),
-        "Snapshot \"\(snapshotURL.lastPathComponent)\" has no corresponding sample animation")
+        "Snapshot \"\(snapshotURL.lastPathComponent)\" has no corresponding sample animation. Expecting \(animationName).json|.lottie")
     }
   }
 
@@ -86,6 +86,7 @@ class SnapshotTests: XCTestCase {
   override func setUp() {
     LottieLogger.shared = .printToConsole
     TestHelpers.snapshotTestsAreRunning = true
+    isRecording = false // Change it here to `true` if you want to generate the snapshots
   }
 
   override func tearDown() {

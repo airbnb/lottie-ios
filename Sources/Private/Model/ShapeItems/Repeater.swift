@@ -22,8 +22,19 @@ final class Repeater: ShapeItem {
       .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .startOpacity) ?? KeyframeGroup(LottieVector1D(100))
     endOpacity = try transformContainer
       .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .endOpacity) ?? KeyframeGroup(LottieVector1D(100))
-    rotation = try transformContainer
-      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotation) ?? KeyframeGroup(LottieVector1D(0))
+    if let rotation = try transformContainer.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotation) {
+      rotationZ = rotation
+    } else if let rotation = try transformContainer.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotationZ) {
+      rotationZ = rotation
+    } else {
+      rotationZ = KeyframeGroup(LottieVector1D(0))
+    }
+
+    rotationX = try transformContainer
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotationX) ?? KeyframeGroup(LottieVector1D(0))
+    rotationY = try transformContainer
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotationY) ?? KeyframeGroup(LottieVector1D(0))
+
     position = try transformContainer
       .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .position) ??
       KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
@@ -58,10 +69,22 @@ final class Repeater: ShapeItem {
     } else {
       endOpacity = KeyframeGroup(LottieVector1D(100))
     }
-    if let rotationDictionary = transformDictionary[TransformKeys.rotation.rawValue] as? [String: Any] {
-      rotation = try KeyframeGroup<LottieVector1D>(dictionary: rotationDictionary)
+    if let rotationDictionary = transformDictionary[TransformKeys.rotationX.rawValue] as? [String: Any] {
+      rotationX = try KeyframeGroup<LottieVector1D>(dictionary: rotationDictionary)
     } else {
-      rotation = KeyframeGroup(LottieVector1D(0))
+      rotationX = KeyframeGroup(LottieVector1D(0))
+    }
+    if let rotationDictionary = transformDictionary[TransformKeys.rotationY.rawValue] as? [String: Any] {
+      rotationY = try KeyframeGroup<LottieVector1D>(dictionary: rotationDictionary)
+    } else {
+      rotationY = KeyframeGroup(LottieVector1D(0))
+    }
+    if let rotationDictionary = transformDictionary[TransformKeys.rotation.rawValue] as? [String: Any] {
+      rotationZ = try KeyframeGroup<LottieVector1D>(dictionary: rotationDictionary)
+    } else if let rotationDictionary = transformDictionary[TransformKeys.rotationZ.rawValue] as? [String: Any] {
+      rotationZ = try KeyframeGroup<LottieVector1D>(dictionary: rotationDictionary)
+    } else {
+      rotationZ = KeyframeGroup(LottieVector1D(0))
     }
     if let positionDictionary = transformDictionary[TransformKeys.position.rawValue] as? [String: Any] {
       position = try KeyframeGroup<LottieVector3D>(dictionary: positionDictionary)
@@ -95,8 +118,14 @@ final class Repeater: ShapeItem {
   /// End opacity
   let endOpacity: KeyframeGroup<LottieVector1D>
 
-  /// The rotation
-  let rotation: KeyframeGroup<LottieVector1D>
+  /// The rotation on X axis
+  let rotationX: KeyframeGroup<LottieVector1D>
+
+  /// The rotation on Y axis
+  let rotationY: KeyframeGroup<LottieVector1D>
+
+  /// The rotation on Z axis
+  let rotationZ: KeyframeGroup<LottieVector1D>
 
   /// Anchor Point
   let anchorPoint: KeyframeGroup<LottieVector3D>
@@ -115,7 +144,9 @@ final class Repeater: ShapeItem {
     var transformContainer = container.nestedContainer(keyedBy: TransformKeys.self, forKey: .transform)
     try transformContainer.encode(startOpacity, forKey: .startOpacity)
     try transformContainer.encode(endOpacity, forKey: .endOpacity)
-    try transformContainer.encode(rotation, forKey: .rotation)
+    try transformContainer.encode(rotationX, forKey: .rotationX)
+    try transformContainer.encode(rotationY, forKey: .rotationY)
+    try transformContainer.encode(rotationZ, forKey: .rotationZ)
     try transformContainer.encode(position, forKey: .position)
     try transformContainer.encode(anchorPoint, forKey: .anchorPoint)
     try transformContainer.encode(scale, forKey: .scale)
@@ -131,6 +162,9 @@ final class Repeater: ShapeItem {
 
   private enum TransformKeys: String, CodingKey {
     case rotation = "r"
+    case rotationX = "rx"
+    case rotationY = "ry"
+    case rotationZ = "rz"
     case startOpacity = "so"
     case endOpacity = "eo"
     case anchorPoint = "a"
