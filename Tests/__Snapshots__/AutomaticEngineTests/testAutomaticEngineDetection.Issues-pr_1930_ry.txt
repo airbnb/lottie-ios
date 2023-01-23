@@ -1,2 +1,1 @@
-Does not support Core Animation engine. Encountered compatibility issues:
-[Calque 1.Calque 1] The Core Animation rendering engine doesn't fully-support X / Y rotation.
+Supports Core Animation engine
