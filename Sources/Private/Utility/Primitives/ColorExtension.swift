@@ -86,7 +86,7 @@ extension LottieColor: AnyInitializable {
 
     // The Lottie JSON schema supports alpha values in theory, as the fourth value in this array.
     // We intentionally do not support this, though, for consistency with Lottie on other platforms.
-    self.a = 1
+    a = 1
   }
 
 }
