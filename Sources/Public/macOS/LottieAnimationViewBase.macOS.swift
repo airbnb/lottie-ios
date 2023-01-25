@@ -27,7 +27,7 @@ public enum LottieContentMode: Int {
 /// The base view for `LottieAnimationView` on macOs.
 ///
 /// Enables the `LottieAnimationView` implementation to be shared across platforms.
-public class LottieAnimationViewBase: NSView {
+open class LottieAnimationViewBase: NSView {
 
   // MARK: Public
 
