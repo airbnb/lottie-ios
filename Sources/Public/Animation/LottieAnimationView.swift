@@ -88,7 +88,7 @@ extension LottieLoopMode: Equatable {
 // MARK: - LottieAnimationView
 
 @IBDesignable
-final public class LottieAnimationView: LottieAnimationViewBase {
+open class LottieAnimationView: LottieAnimationViewBase {
 
   // MARK: Lifecycle
 
@@ -495,7 +495,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   /// Plays the animation from its current state to the end.
   ///
   /// - Parameter completion: An optional completion closure to be called when the animation completes playing.
-  public func play(completion: LottieCompletionBlock? = nil) {
+  open func play(completion: LottieCompletionBlock? = nil) {
     guard let animation = animation else {
       return
     }
@@ -515,7 +515,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   /// - Parameter toProgress: The end progress of the animation.
   /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
   /// - Parameter completion: An optional completion closure to be called when the animation stops.
-  public func play(
+  open func play(
     fromProgress: AnimationProgressTime? = nil,
     toProgress: AnimationProgressTime,
     loopMode: LottieLoopMode? = nil,
@@ -543,7 +543,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   /// - Parameter toFrame: The end frame of the animation.
   /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
   /// - Parameter completion: An optional completion closure to be called when the animation stops.
-  public func play(
+  open func play(
     fromFrame: AnimationFrameTime? = nil,
     toFrame: AnimationFrameTime,
     loopMode: LottieLoopMode? = nil,
@@ -577,7 +577,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   /// represents the beginning of the next section, it should be false.
   /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
   /// - Parameter completion: An optional completion closure to be called when the animation stops.
-  public func play(
+  open func play(
     fromMarker: String? = nil,
     toMarker: String,
     playEndMarkerFrame: Bool = true,
@@ -619,7 +619,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   /// - Parameter marker: The start marker for the animation playback.
   /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
   /// - Parameter completion: An optional completion closure to be called when the animation stops.
-  public func play(
+  open func play(
     marker: String,
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
@@ -638,7 +638,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   /// Stops the animation and resets the view to its start frame.
   ///
   /// The completion closure will be called with `false`
-  public func stop() {
+  open func stop() {
     removeCurrentAnimation()
     currentFrame = 0
   }
@@ -646,7 +646,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   /// Pauses the animation in its current state.
   ///
   /// The completion closure will be called with `false`
-  public func pause() {
+  open func pause() {
     removeCurrentAnimation()
   }
 
