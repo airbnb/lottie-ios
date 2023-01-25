@@ -178,158 +178,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
     commonInit()
   }
 
-  // MARK: Public
-
-  /// The configuration that this `LottieAnimationView` uses when playing its animation
-  public let configuration: LottieConfiguration
-
-  /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
-  public private(set) var valueProviders = [AnimationKeypath: AnyValueProvider]()
-
-  /// Describes the behavior of an AnimationView when the app is moved to the background.
-  ///
-  /// The default for the Main Thread animation engine is `pause`,
-  /// which pauses the animation when the application moves to
-  /// the background. This prevents the animation from consuming CPU
-  /// resources when not on-screen. The completion block is called with
-  /// `false` for completed.
-  ///
-  /// The default for the Core Animation engine is `continuePlaying`,
-  /// since the Core Animation engine does not have any CPU overhead.
-  public var backgroundBehavior: LottieBackgroundBehavior {
-    get {
-      let currentBackgroundBehavior = _backgroundBehavior ?? .default(for: currentRenderingEngine ?? .mainThread)
-
-      if
-        currentRenderingEngine == .mainThread,
-        _backgroundBehavior == .continuePlaying
-      {
-        logger.assertionFailure("""
-          `LottieBackgroundBehavior.continuePlaying` should not be used with the Main Thread
-          rendering engine, since this would waste CPU resources on playing an animation
-          that is not visible. Consider using a different background mode, or switching to
-          the Core Animation rendering engine (which does not have any CPU overhead).
-          """)
-      }
-
-      return currentBackgroundBehavior
-    }
-    set {
-      _backgroundBehavior = newValue
-    }
-  }
-
-  /// Sets the animation backing the animation view. Setting this will clear the
-  /// view's contents, completion blocks and current state. The new animation will
-  /// be loaded up and set to the beginning of its timeline.
-  public var animation: LottieAnimation? {
-    didSet {
-      makeAnimationLayer(usingEngine: configuration.renderingEngine)
-
-      if let animation = animation {
-        animationLoaded?(self, animation)
-      }
-    }
-  }
-
-  /// A closure that is called when `self.animation` is loaded. When setting this closure,
-  /// it is called immediately if `self.animation` is non-nil.
-  ///
-  /// When initializing a `LottieAnimationView`, the animation will either be loaded
-  /// synchronously (when loading a `LottieAnimation` from a .json file on disk)
-  /// or asynchronously (when loading a `DotLottieFile` from disk, or downloading
-  /// an animation from a URL). This closure is called in both cases once the
-  /// animation is loaded and applied, so can be a useful way to configure this
-  /// `LottieAnimationView` regardless of which initializer was used. For example:
-  ///
-  /// ```
-  /// let animationView: LottieAnimationView
-  ///
-  /// if loadDotLottieFile {
-  ///   // Loads the .lottie file asynchronously
-  ///   animationView = LottieAnimationView(dotLottieName: "animation")
-  /// } else {
-  ///   // Loads the .json file synchronously
-  ///   animationView = LottieAnimationView(name: "animation")
-  /// }
-  ///
-  /// animationView.animationLoaded = { animationView, animation in
-  ///   // If using a .lottie file, this is called once the file finishes loading.
-  ///   // If using a .json file, this is called immediately (since the animation is loaded synchronously).
-  ///   animationView.play()
-  /// }
-  /// ```
-  public var animationLoaded: ((_ animationView: LottieAnimationView, _ animation: LottieAnimation) -> Void)? {
-    didSet {
-      if let animation = animation {
-        animationLoaded?(self, animation)
-      }
-    }
-  }
-
-  /// Sets the image provider for the animation view. An image provider provides the
-  /// animation with its required image data.
-  ///
-  /// Setting this will cause the animation to reload its image contents.
-  public var imageProvider: AnimationImageProvider {
-    didSet {
-      animationLayer?.imageProvider = imageProvider.cachedImageProvider
-      reloadImages()
-    }
-  }
-
-  /// Sets the text provider for animation view. A text provider provides the
-  /// animation with values for text layers
-  public var textProvider: AnimationTextProvider {
-    didSet {
-      animationLayer?.textProvider = textProvider
-    }
-  }
-
-  /// Sets the text provider for animation view. A text provider provides the
-  /// animation with values for text layers
-  public var fontProvider: AnimationFontProvider {
-    didSet {
-      animationLayer?.fontProvider = fontProvider
-    }
-  }
-
-  /// Returns `true` if the animation is currently playing.
-  public var isAnimationPlaying: Bool {
-    guard let animationLayer = animationLayer else {
-      return false
-    }
-
-    if let valueFromLayer = animationLayer.isAnimationPlaying {
-      return valueFromLayer
-    } else {
-      return animationLayer.animation(forKey: activeAnimationName) != nil
-    }
-  }
-
-  /// Returns `true` if the animation will start playing when this view is added to a window.
-  public var isAnimationQueued: Bool {
-    animationContext != nil && waitingToPlayAnimation
-  }
-
-  /// Sets the loop behavior for `play` calls. Defaults to `playOnce`
-  public var loopMode: LottieLoopMode = .playOnce {
-    didSet {
-      updateInFlightAnimation()
-    }
-  }
-
-  /// When `true` the animation view will rasterize its contents when not animating.
-  /// Rasterizing will improve performance of static animations.
-  ///
-  /// Note: this will not produce crisp results at resolutions above the animations natural resolution.
-  ///
-  /// Defaults to `false`
-  public var shouldRasterizeWhenIdle = false {
-    didSet {
-      updateRasterizationState()
-    }
-  }
+  // MARK: Open
 
   /// Sets the current animation time with a Progress Time
   ///
@@ -384,112 +233,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
     get {
       animationLayer?.currentFrame ?? 0
     }
-  }
-
-  /// Returns the current animation frame while an animation is playing.
-  public var realtimeAnimationFrame: AnimationFrameTime {
-    isAnimationPlaying ? animationLayer?.presentation()?.currentFrame ?? currentFrame : currentFrame
-  }
-
-  /// Returns the current animation frame while an animation is playing.
-  public var realtimeAnimationProgress: AnimationProgressTime {
-    if let animation = animation {
-      return animation.progressTime(forFrame: realtimeAnimationFrame)
-    }
-    return 0
-  }
-
-  /// Sets the speed of the animation playback. Defaults to 1
-  public var animationSpeed: CGFloat = 1 {
-    didSet {
-      updateInFlightAnimation()
-    }
-  }
-
-  /// When `true` the animation will play back at the framerate encoded in the
-  /// `LottieAnimation` model. When `false` the animation will play at the framerate
-  /// of the device.
-  ///
-  /// Defaults to false
-  public var respectAnimationFrameRate = false {
-    didSet {
-      animationLayer?.respectAnimationFrameRate = respectAnimationFrameRate
-    }
-  }
-
-  /// Controls the cropping of an Animation. Setting this property will crop the animation
-  /// to the current views bounds by the viewport frame. The coordinate space is specified
-  /// in the animation's coordinate space.
-  ///
-  /// Animatable.
-  public var viewportFrame: CGRect? = nil {
-    didSet {
-      // This is really ugly, but is needed to trigger a layout pass within an animation block.
-      // Typically this happens automatically, when layout objects are UIView based.
-      // The animation layer is a CALayer which will not implicitly grab the animation
-      // duration of a UIView animation block.
-      //
-      // By setting bounds and then resetting bounds the UIView animation block's
-      // duration and curve are captured and added to the layer. This is used in the
-      // layout block to animate the animationLayer's position and size.
-      let rect = bounds
-      self.bounds = CGRect.zero
-      self.bounds = rect
-      self.setNeedsLayout()
-    }
-  }
-
-  override public var intrinsicContentSize: CGSize {
-    if let animation = animation {
-      return animation.bounds.size
-    }
-    return .zero
-  }
-
-  /// The rendering engine currently being used by this view.
-  ///  - This will only be `nil` in cases where the configuration is `automatic`
-  ///    but a `RootAnimationLayer` hasn't been constructed yet
-  public var currentRenderingEngine: RenderingEngine? {
-    switch configuration.renderingEngine {
-    case .specific(let engine):
-      return engine
-
-    case .automatic:
-      guard let animationLayer = animationLayer else {
-        return nil
-      }
-
-      if animationLayer is CoreAnimationLayer {
-        return .coreAnimation
-      } else {
-        return .mainThread
-      }
-    }
-  }
-
-  /// Sets the lottie file backing the animation view. Setting this will clear the
-  /// view's contents, completion blocks and current state. The new animation will
-  /// be loaded up and set to the beginning of its timeline.
-  /// The loopMode, animationSpeed and imageProvider will be set according
-  /// to lottie file settings
-  /// - Parameters:
-  ///   - animationId: Internal animation id to play. Optional
-  ///   Defaults to play first animation in file.
-  ///   - dotLottieFile: Lottie file to play
-  public func loadAnimation(
-    _ animationId: String? = nil,
-    from dotLottieFile: DotLottieFile)
-  {
-    guard let dotLottieAnimation = dotLottieFile.animation(for: animationId) else { return }
-
-    loopMode = dotLottieAnimation.configuration.loopMode
-    animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
-
-    if let imageProvider = dotLottieAnimation.configuration.imageProvider {
-      self.imageProvider = imageProvider
-    }
-
-    animation = dotLottieAnimation.animation
   }
 
   /// Plays the animation from its current state to the end.
@@ -648,6 +391,265 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// The completion closure will be called with `false`
   open func pause() {
     removeCurrentAnimation()
+  }
+
+  // MARK: Public
+
+  /// The configuration that this `LottieAnimationView` uses when playing its animation
+  public let configuration: LottieConfiguration
+
+  /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
+  public private(set) var valueProviders = [AnimationKeypath: AnyValueProvider]()
+
+  /// Describes the behavior of an AnimationView when the app is moved to the background.
+  ///
+  /// The default for the Main Thread animation engine is `pause`,
+  /// which pauses the animation when the application moves to
+  /// the background. This prevents the animation from consuming CPU
+  /// resources when not on-screen. The completion block is called with
+  /// `false` for completed.
+  ///
+  /// The default for the Core Animation engine is `continuePlaying`,
+  /// since the Core Animation engine does not have any CPU overhead.
+  public var backgroundBehavior: LottieBackgroundBehavior {
+    get {
+      let currentBackgroundBehavior = _backgroundBehavior ?? .default(for: currentRenderingEngine ?? .mainThread)
+
+      if
+        currentRenderingEngine == .mainThread,
+        _backgroundBehavior == .continuePlaying
+      {
+        logger.assertionFailure("""
+          `LottieBackgroundBehavior.continuePlaying` should not be used with the Main Thread
+          rendering engine, since this would waste CPU resources on playing an animation
+          that is not visible. Consider using a different background mode, or switching to
+          the Core Animation rendering engine (which does not have any CPU overhead).
+          """)
+      }
+
+      return currentBackgroundBehavior
+    }
+    set {
+      _backgroundBehavior = newValue
+    }
+  }
+
+  /// Sets the animation backing the animation view. Setting this will clear the
+  /// view's contents, completion blocks and current state. The new animation will
+  /// be loaded up and set to the beginning of its timeline.
+  public var animation: LottieAnimation? {
+    didSet {
+      makeAnimationLayer(usingEngine: configuration.renderingEngine)
+
+      if let animation = animation {
+        animationLoaded?(self, animation)
+      }
+    }
+  }
+
+  /// A closure that is called when `self.animation` is loaded. When setting this closure,
+  /// it is called immediately if `self.animation` is non-nil.
+  ///
+  /// When initializing a `LottieAnimationView`, the animation will either be loaded
+  /// synchronously (when loading a `LottieAnimation` from a .json file on disk)
+  /// or asynchronously (when loading a `DotLottieFile` from disk, or downloading
+  /// an animation from a URL). This closure is called in both cases once the
+  /// animation is loaded and applied, so can be a useful way to configure this
+  /// `LottieAnimationView` regardless of which initializer was used. For example:
+  ///
+  /// ```
+  /// let animationView: LottieAnimationView
+  ///
+  /// if loadDotLottieFile {
+  ///   // Loads the .lottie file asynchronously
+  ///   animationView = LottieAnimationView(dotLottieName: "animation")
+  /// } else {
+  ///   // Loads the .json file synchronously
+  ///   animationView = LottieAnimationView(name: "animation")
+  /// }
+  ///
+  /// animationView.animationLoaded = { animationView, animation in
+  ///   // If using a .lottie file, this is called once the file finishes loading.
+  ///   // If using a .json file, this is called immediately (since the animation is loaded synchronously).
+  ///   animationView.play()
+  /// }
+  /// ```
+  public var animationLoaded: ((_ animationView: LottieAnimationView, _ animation: LottieAnimation) -> Void)? {
+    didSet {
+      if let animation = animation {
+        animationLoaded?(self, animation)
+      }
+    }
+  }
+
+  /// Sets the image provider for the animation view. An image provider provides the
+  /// animation with its required image data.
+  ///
+  /// Setting this will cause the animation to reload its image contents.
+  public var imageProvider: AnimationImageProvider {
+    didSet {
+      animationLayer?.imageProvider = imageProvider.cachedImageProvider
+      reloadImages()
+    }
+  }
+
+  /// Sets the text provider for animation view. A text provider provides the
+  /// animation with values for text layers
+  public var textProvider: AnimationTextProvider {
+    didSet {
+      animationLayer?.textProvider = textProvider
+    }
+  }
+
+  /// Sets the text provider for animation view. A text provider provides the
+  /// animation with values for text layers
+  public var fontProvider: AnimationFontProvider {
+    didSet {
+      animationLayer?.fontProvider = fontProvider
+    }
+  }
+
+  /// Returns `true` if the animation is currently playing.
+  public var isAnimationPlaying: Bool {
+    guard let animationLayer = animationLayer else {
+      return false
+    }
+
+    if let valueFromLayer = animationLayer.isAnimationPlaying {
+      return valueFromLayer
+    } else {
+      return animationLayer.animation(forKey: activeAnimationName) != nil
+    }
+  }
+
+  /// Returns `true` if the animation will start playing when this view is added to a window.
+  public var isAnimationQueued: Bool {
+    animationContext != nil && waitingToPlayAnimation
+  }
+
+  /// Sets the loop behavior for `play` calls. Defaults to `playOnce`
+  public var loopMode: LottieLoopMode = .playOnce {
+    didSet {
+      updateInFlightAnimation()
+    }
+  }
+
+  /// When `true` the animation view will rasterize its contents when not animating.
+  /// Rasterizing will improve performance of static animations.
+  ///
+  /// Note: this will not produce crisp results at resolutions above the animations natural resolution.
+  ///
+  /// Defaults to `false`
+  public var shouldRasterizeWhenIdle = false {
+    didSet {
+      updateRasterizationState()
+    }
+  }
+
+  /// Returns the current animation frame while an animation is playing.
+  public var realtimeAnimationFrame: AnimationFrameTime {
+    isAnimationPlaying ? animationLayer?.presentation()?.currentFrame ?? currentFrame : currentFrame
+  }
+
+  /// Returns the current animation frame while an animation is playing.
+  public var realtimeAnimationProgress: AnimationProgressTime {
+    if let animation = animation {
+      return animation.progressTime(forFrame: realtimeAnimationFrame)
+    }
+    return 0
+  }
+
+  /// Sets the speed of the animation playback. Defaults to 1
+  public var animationSpeed: CGFloat = 1 {
+    didSet {
+      updateInFlightAnimation()
+    }
+  }
+
+  /// When `true` the animation will play back at the framerate encoded in the
+  /// `LottieAnimation` model. When `false` the animation will play at the framerate
+  /// of the device.
+  ///
+  /// Defaults to false
+  public var respectAnimationFrameRate = false {
+    didSet {
+      animationLayer?.respectAnimationFrameRate = respectAnimationFrameRate
+    }
+  }
+
+  /// Controls the cropping of an Animation. Setting this property will crop the animation
+  /// to the current views bounds by the viewport frame. The coordinate space is specified
+  /// in the animation's coordinate space.
+  ///
+  /// Animatable.
+  public var viewportFrame: CGRect? = nil {
+    didSet {
+      // This is really ugly, but is needed to trigger a layout pass within an animation block.
+      // Typically this happens automatically, when layout objects are UIView based.
+      // The animation layer is a CALayer which will not implicitly grab the animation
+      // duration of a UIView animation block.
+      //
+      // By setting bounds and then resetting bounds the UIView animation block's
+      // duration and curve are captured and added to the layer. This is used in the
+      // layout block to animate the animationLayer's position and size.
+      let rect = bounds
+      self.bounds = CGRect.zero
+      self.bounds = rect
+      self.setNeedsLayout()
+    }
+  }
+
+  override public var intrinsicContentSize: CGSize {
+    if let animation = animation {
+      return animation.bounds.size
+    }
+    return .zero
+  }
+
+  /// The rendering engine currently being used by this view.
+  ///  - This will only be `nil` in cases where the configuration is `automatic`
+  ///    but a `RootAnimationLayer` hasn't been constructed yet
+  public var currentRenderingEngine: RenderingEngine? {
+    switch configuration.renderingEngine {
+    case .specific(let engine):
+      return engine
+
+    case .automatic:
+      guard let animationLayer = animationLayer else {
+        return nil
+      }
+
+      if animationLayer is CoreAnimationLayer {
+        return .coreAnimation
+      } else {
+        return .mainThread
+      }
+    }
+  }
+
+  /// Sets the lottie file backing the animation view. Setting this will clear the
+  /// view's contents, completion blocks and current state. The new animation will
+  /// be loaded up and set to the beginning of its timeline.
+  /// The loopMode, animationSpeed and imageProvider will be set according
+  /// to lottie file settings
+  /// - Parameters:
+  ///   - animationId: Internal animation id to play. Optional
+  ///   Defaults to play first animation in file.
+  ///   - dotLottieFile: Lottie file to play
+  public func loadAnimation(
+    _ animationId: String? = nil,
+    from dotLottieFile: DotLottieFile)
+  {
+    guard let dotLottieAnimation = dotLottieFile.animation(for: animationId) else { return }
+
+    loopMode = dotLottieAnimation.configuration.loopMode
+    animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
+
+    if let imageProvider = dotLottieAnimation.configuration.imageProvider {
+      self.imageProvider = imageProvider
+    }
+
+    animation = dotLottieAnimation.animation
   }
 
   /// Reloads the images supplied to the animation from the `imageProvider`
