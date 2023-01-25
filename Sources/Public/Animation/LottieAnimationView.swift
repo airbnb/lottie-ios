@@ -335,7 +335,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   ///
   /// Note: Setting this will stop the current animation, if any.
   /// Note 2: If `animation` is nil, setting this will fallback to 0
-  public var currentProgress: AnimationProgressTime {
+  open var currentProgress: AnimationProgressTime {
     set {
       if let animation = animation {
         currentFrame = animation.frameTime(forProgress: newValue)
@@ -356,7 +356,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   ///
   /// Note: Setting this will stop the current animation, if any.
   /// Note 2: If `animation` is nil, setting this will fallback to 0
-  public var currentTime: TimeInterval {
+  open var currentTime: TimeInterval {
     set {
       if let animation = animation {
         currentFrame = animation.frameTime(forTime: newValue)
@@ -376,7 +376,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// Sets the current animation time with a frame in the animations framerate.
   ///
   /// Note: Setting this will stop the current animation, if any.
-  public var currentFrame: AnimationFrameTime {
+  open var currentFrame: AnimationFrameTime {
     set {
       removeCurrentAnimationIfNecessary()
       updateAnimationFrame(newValue)
