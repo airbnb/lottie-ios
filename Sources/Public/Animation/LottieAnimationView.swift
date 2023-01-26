@@ -346,61 +346,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
   public private(set) var valueProviders = [AnimationKeypath: AnyValueProvider]()
 
-  /// Sets the current animation time with a Progress Time
-  ///
-  /// Note: Setting this will stop the current animation, if any.
-  /// Note 2: If `animation` is nil, setting this will fallback to 0
-  public var currentProgress: AnimationProgressTime {
-    set {
-      if let animation = animation {
-        currentFrame = animation.frameTime(forProgress: newValue)
-      } else {
-        currentFrame = 0
-      }
-    }
-    get {
-      if let animation = animation {
-        return animation.progressTime(forFrame: currentFrame)
-      } else {
-        return 0
-      }
-    }
-  }
-
-  /// Sets the current animation time with a time in seconds.
-  ///
-  /// Note: Setting this will stop the current animation, if any.
-  /// Note 2: If `animation` is nil, setting this will fallback to 0
-  public var currentTime: TimeInterval {
-    set {
-      if let animation = animation {
-        currentFrame = animation.frameTime(forTime: newValue)
-      } else {
-        currentFrame = 0
-      }
-    }
-    get {
-      if let animation = animation {
-        return animation.time(forFrame: currentFrame)
-      } else {
-        return 0
-      }
-    }
-  }
-
-  /// Sets the current animation time with a frame in the animations framerate.
-  ///
-  /// Note: Setting this will stop the current animation, if any.
-  public var currentFrame: AnimationFrameTime {
-    set {
-      removeCurrentAnimationIfNecessary()
-      updateAnimationFrame(newValue)
-    }
-    get {
-      animationLayer?.currentFrame ?? 0
-    }
-  }
-
   /// Describes the behavior of an AnimationView when the app is moved to the background.
   ///
   /// The default for the Main Thread animation engine is `pause`,
@@ -543,6 +488,61 @@ open class LottieAnimationView: LottieAnimationViewBase {
   public var shouldRasterizeWhenIdle = false {
     didSet {
       updateRasterizationState()
+    }
+  }
+
+  /// Sets the current animation time with a Progress Time
+  ///
+  /// Note: Setting this will stop the current animation, if any.
+  /// Note 2: If `animation` is nil, setting this will fallback to 0
+  public var currentProgress: AnimationProgressTime {
+    set {
+      if let animation = animation {
+        currentFrame = animation.frameTime(forProgress: newValue)
+      } else {
+        currentFrame = 0
+      }
+    }
+    get {
+      if let animation = animation {
+        return animation.progressTime(forFrame: currentFrame)
+      } else {
+        return 0
+      }
+    }
+  }
+
+  /// Sets the current animation time with a time in seconds.
+  ///
+  /// Note: Setting this will stop the current animation, if any.
+  /// Note 2: If `animation` is nil, setting this will fallback to 0
+  public var currentTime: TimeInterval {
+    set {
+      if let animation = animation {
+        currentFrame = animation.frameTime(forTime: newValue)
+      } else {
+        currentFrame = 0
+      }
+    }
+    get {
+      if let animation = animation {
+        return animation.time(forFrame: currentFrame)
+      } else {
+        return 0
+      }
+    }
+  }
+
+  /// Sets the current animation time with a frame in the animations framerate.
+  ///
+  /// Note: Setting this will stop the current animation, if any.
+  public var currentFrame: AnimationFrameTime {
+    set {
+      removeCurrentAnimationIfNecessary()
+      updateAnimationFrame(newValue)
+    }
+    get {
+      animationLayer?.currentFrame ?? 0
     }
   }
 
