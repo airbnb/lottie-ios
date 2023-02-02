@@ -188,6 +188,15 @@ public final class CompatibleAnimationView: UIView {
   }
 
   @objc
+  public var compatibleAnimationTextProvider: CompatibleAnimationTextProvider? {
+    didSet {
+      if let textProvider = compatibleAnimationTextProvider?.textProvider {
+        animationView.textProvider = textProvider;
+      }
+    }
+  }
+
+  @objc
   public override var contentMode: UIView.ContentMode {
     set { animationView.contentMode = newValue }
     get { animationView.contentMode }
@@ -450,5 +459,31 @@ public final class CompatibleAnimationView: UIView {
     animationView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     animationView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
   }
+}
+
+/// An Objective-C compatible wrapper around Lottie's AnimationTextProvider.
+/// Use in tandem with CompatibleAnimationView to supply text to LottieAnimationView
+/// when using Lottie in Objective-C.
+@objc
+public final class CompatibleAnimationTextProvider: NSObject {
+
+  // MARK: Lifecycle
+
+  @objc
+  public init(values: [String: String])
+  {
+    self.values = values
+    super.init()
+  }
+
+  // MARK: Internal
+
+  internal var textProvider: AnimationTextProvider? {
+    return DictionaryTextProvider(self.values);
+  }
+
+  // MARK: Private
+
+  private let values: [String: String]
 }
 #endif
