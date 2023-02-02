@@ -191,7 +191,7 @@ public final class CompatibleAnimationView: UIView {
   public var compatibleAnimationTextProvider: CompatibleAnimationTextProvider? {
     didSet {
       if let textProvider = compatibleAnimationTextProvider?.textProvider {
-        animationView.textProvider = textProvider;
+        animationView.textProvider = textProvider
       }
     }
   }
@@ -479,7 +479,7 @@ public final class CompatibleAnimationTextProvider: NSObject {
   // MARK: Internal
 
   internal var textProvider: AnimationTextProvider? {
-    return DictionaryTextProvider(self.values);
+    return DictionaryTextProvider(self.values)
   }
 
   // MARK: Private
