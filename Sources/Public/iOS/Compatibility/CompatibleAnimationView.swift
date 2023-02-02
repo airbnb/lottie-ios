@@ -188,9 +188,9 @@ public final class CompatibleAnimationView: UIView {
   }
 
   @objc
-  public var compatibleAnimationTextProvider: CompatibleAnimationTextProvider? {
+  public var compatibleDictionaryTextProvider: CompatibleDictionaryTextProvider? {
     didSet {
-      animationView.textProvider = compatibleAnimationTextProvider?.textProvider ?? DefaultTextProvider()
+      animationView.textProvider = compatibleDictionaryTextProvider?.textProvider ?? DefaultTextProvider()
     }
   }
 
@@ -459,11 +459,11 @@ public final class CompatibleAnimationView: UIView {
   }
 }
 
-/// An Objective-C compatible wrapper around Lottie's AnimationTextProvider.
+/// An Objective-C compatible wrapper around Lottie's DictionaryTextProvider.
 /// Use in tandem with CompatibleAnimationView to supply text to LottieAnimationView
 /// when using Lottie in Objective-C.
 @objc
-public final class CompatibleAnimationTextProvider: NSObject {
+public final class CompatibleDictionaryTextProvider: NSObject {
 
   // MARK: Lifecycle
 
