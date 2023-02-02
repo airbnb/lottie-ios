@@ -470,8 +470,7 @@ public final class CompatibleAnimationTextProvider: NSObject {
   // MARK: Lifecycle
 
   @objc
-  public init(values: [String: String])
-  {
+  public init(values: [String: String]) {
     self.values = values
     super.init()
   }
@@ -479,7 +478,7 @@ public final class CompatibleAnimationTextProvider: NSObject {
   // MARK: Internal
 
   internal var textProvider: AnimationTextProvider? {
-    return DictionaryTextProvider(self.values)
+    DictionaryTextProvider(values)
   }
 
   // MARK: Private
