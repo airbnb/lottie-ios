@@ -190,9 +190,7 @@ public final class CompatibleAnimationView: UIView {
   @objc
   public var compatibleAnimationTextProvider: CompatibleAnimationTextProvider? {
     didSet {
-      if let textProvider = compatibleAnimationTextProvider?.textProvider {
-        animationView.textProvider = textProvider
-      }
+      animationView.textProvider = compatibleAnimationTextProvider?.textProvider ?? DefaultTextProvider()
     }
   }
 
