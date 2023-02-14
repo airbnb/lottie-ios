@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'lottie-ios'
+  s.name             = 'LottieForAFWP'
   s.version          = '4.1.2'
   s.summary          = 'A library to render native animations from bodymovin json'
 
@@ -24,16 +24,10 @@ Lottie enables designers to create and ship beautiful animations without an engi
 
   s.swift_version = '5.5'
   s.ios.deployment_target = '11.0'
-  s.osx.deployment_target = '10.12'
-  s.tvos.deployment_target = '11.0'
 
   s.source_files = 'Sources/**/*'
   s.ios.exclude_files = 'Sources/Public/MacOS/**/*'
-  s.tvos.exclude_files = 'Sources/Public/MacOS/**/*'
-  s.osx.exclude_files = 'Sources/Public/iOS/**/*'
 
   s.ios.frameworks = ['UIKit', 'CoreGraphics', 'QuartzCore']
-  s.tvos.frameworks = ['UIKit', 'CoreGraphics', 'QuartzCore']
-  s.osx.frameworks = ['AppKit', 'CoreGraphics', 'QuartzCore']
-  s.module_name = 'Lottie'
+  s.module_name = 'LottieForAFWP'
 end
