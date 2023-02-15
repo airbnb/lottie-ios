@@ -8,7 +8,7 @@ Lottie is a cross-platform library for iOS, macOS, tvOS, [Android](https://githu
 Lottie loads and renders animations and vectors exported in the bodymovin JSON format. Bodymovin JSON can be created and exported from After Effects with [bodymovin](https://github.com/bodymovin/bodymovin), Sketch with [Lottie Sketch Export](https://github.com/buba447/Lottie-Sketch-Export), and from [Haiku](https://www.haiku.ai).
 
 Designers can create **and ship** beautiful animations without an engineer painstakingly recreating them by hand.
-Since the animation is backed by JSON they are extremely small in size but can be large in complexity!
+Since the animations are backed by JSON, they are extremely small in size but can be large in complexity!
 Animations can be played, resized, looped, sped up, slowed down, reversed, and even interactively scrubbed.
 Lottie can play or loop just a portion of the animation as well, the possibilities are endless!
 Animations can even be ***changed at runtime*** in various ways! Change the color, position, or any keyframable value!
