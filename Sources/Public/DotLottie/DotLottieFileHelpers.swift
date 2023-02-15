@@ -36,15 +36,17 @@ extension DotLottieFile {
   /// - Parameter bundle: The bundle in which the lottie is located. Defaults to `Bundle.main`
   /// - Parameter subdirectory: A subdirectory in the bundle in which the lottie is located. Optional.
   /// - Parameter dotLottieCache: A cache for holding loaded lotties. Defaults to `LRUDotLottieCache.sharedCache`. Optional.
+  /// - Parameter dispatchQueue: A dispatch queue used to load animations. Defaults to `DispatchQueue.global()`. Optional.
   /// - Parameter handleResult: A closure to be called when the file has loaded.
   public static func named(
     _ name: String,
     bundle: Bundle = Bundle.main,
     subdirectory: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
+    dispatchQueue: DispatchQueue = .global(),
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
-    DispatchQueue.global().async {
+    dispatchQueue.async {
       /// Create a cache key for the lottie.
       let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
 
@@ -102,13 +104,15 @@ extension DotLottieFile {
   /// Loads an DotLottie from a specific filepath.
   /// - Parameter filepath: The absolute filepath of the lottie to load. EG "/User/Me/starAnimation.lottie"
   /// - Parameter dotLottieCache: A cache for holding loaded lotties. Defaults to `LRUDotLottieCache.sharedCache`. Optional.
+  /// - Parameter dispatchQueue: A dispatch queue used to load animations. Defaults to `DispatchQueue.global()`. Optional.
   /// - Parameter handleResult: A closure to be called when the file has loaded.
   public static func loadedFrom(
     filepath: String,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
+    dispatchQueue: DispatchQueue = .global(),
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
-    DispatchQueue.global().async {
+    dispatchQueue.async {
       /// Check cache for lottie
       if
         let dotLottieCache = dotLottieCache,
@@ -160,14 +164,16 @@ extension DotLottieFile {
   ///    - Parameter name: The name of the lottie file in the asset catalog. EG "StarAnimation"
   ///    - Parameter bundle: The bundle in which the lottie is located. Defaults to `Bundle.main`
   ///    - Parameter dotLottieCache: A cache for holding loaded lottie files. Defaults to `LRUDotLottieCache.sharedCache` Optional.
+  ///    - Parameter dispatchQueue: A dispatch queue used to load animations. Defaults to `DispatchQueue.global()`. Optional.
   ///    - Parameter handleResult: A closure to be called when the file has loaded.
   public static func asset(
     named name: String,
     bundle: Bundle = Bundle.main,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
+    dispatchQueue: DispatchQueue = .global(),
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
-    DispatchQueue.global().async {
+    dispatchQueue.async {
       /// Create a cache key for the lottie.
       let cacheKey = bundle.bundlePath + "/" + name
 
