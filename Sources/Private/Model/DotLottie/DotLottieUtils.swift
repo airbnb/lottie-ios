@@ -54,5 +54,4 @@ extension FileManager {
 public enum DotLottieError: Error {
   case invalidFileFormat
   case invalidData
-  case animationNotAvailable
 }
