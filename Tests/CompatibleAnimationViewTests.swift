@@ -12,7 +12,7 @@ final class CompatibleAnimationViewTests: XCTestCase {
     guard try SnapshotTests.enabled else { return }
 
     #if os(iOS)
-    let animation = CompatibleAnimation(name: "LottieLogo2", subdirectory: Samples.directoryName, bundle: .module)
+    let animation = CompatibleAnimation(name: "LottieLogo2", subdirectory: Samples.directoryName, bundle: .lottie)
     let animationView = CompatibleAnimationView(compatibleAnimation: animation)
     animationView.frame.size = animation.animation!.snapshotSize
     animationView.currentProgress = 0.5

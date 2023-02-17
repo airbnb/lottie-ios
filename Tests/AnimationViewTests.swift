@@ -10,7 +10,7 @@ final class AnimationViewTests: XCTestCase {
   func testLoadJsonFile() {
     let animationView = LottieAnimationView(
       name: "LottieLogo1",
-      bundle: .module,
+      bundle: .lottie,
       subdirectory: Samples.directoryName)
 
     XCTAssertNotNil(animationView.animation)
@@ -31,7 +31,7 @@ final class AnimationViewTests: XCTestCase {
 
     _ = LottieAnimationView(
       dotLottieName: "DotLottie/animation",
-      bundle: .module,
+      bundle: .lottie,
       subdirectory: Samples.directoryName,
       completion: { animationView, error in
         XCTAssertNil(error)
@@ -48,7 +48,7 @@ final class AnimationViewTests: XCTestCase {
 
     let animationView = LottieAnimationView(
       dotLottieName: "DotLottie/animation",
-      bundle: .module,
+      bundle: .lottie,
       subdirectory: Samples.directoryName)
 
     animationView.animationLoaded = { [weak animationView] view, animation in
@@ -76,7 +76,7 @@ final class AnimationViewTests: XCTestCase {
 
     let animation = LottieAnimation.named(
       "Issues/issue_1877",
-      bundle: .module,
+      bundle: .lottie,
       subdirectory: Samples.directoryName)
 
     XCTAssertNotNil(animation)
