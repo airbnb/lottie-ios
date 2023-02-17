@@ -5,13 +5,13 @@ import Foundation
 
 extension Bundle {
   /// The Bundle representing files in this module
-  static var module: Bundle {
+  static var lottie: Bundle {
     Bundle(for: SnapshotTests.self)
   }
 
   /// Retrieves URLs for all of the files in the given directory with the given suffix
   func fileURLs(in directory: String, withSuffix suffix: String) -> [URL] {
-    let enumerator = FileManager.default.enumerator(atPath: Bundle.module.bundlePath)!
+    let enumerator = FileManager.default.enumerator(atPath: Bundle.lottie.bundlePath)!
 
     var fileURLs: [URL] = []
 
@@ -20,7 +20,7 @@ extension Bundle {
         fileSubpath.hasPrefix(directory),
         fileSubpath.contains(suffix)
       {
-        let fileURL = Bundle.module.bundleURL.appendingPathComponent(fileSubpath)
+        let fileURL = Bundle.lottie.bundleURL.appendingPathComponent(fileSubpath)
         fileURLs.append(fileURL)
       }
     }

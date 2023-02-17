@@ -64,13 +64,13 @@ final class PerformanceTests: XCTestCase {
   }
 
   func testParsing_simpleAnimation() throws {
-    let data = try XCTUnwrap(Bundle.module.getAnimationData("loading_dots_1", subdirectory: "Samples/LottieFiles"))
+    let data = try XCTUnwrap(Bundle.lottie.getAnimationData("loading_dots_1", subdirectory: "Samples/LottieFiles"))
     let ratio = try compareDeserializationPerformance(data: data, iterations: 2000)
     XCTAssertEqual(ratio, 2, accuracy: 1.0)
   }
 
   func testParsing_complexAnimation() throws {
-    let data = try XCTUnwrap(Bundle.module.getAnimationData("LottieLogo2", subdirectory: "Samples"))
+    let data = try XCTUnwrap(Bundle.lottie.getAnimationData("LottieLogo2", subdirectory: "Samples"))
     let ratio = try compareDeserializationPerformance(data: data, iterations: 500)
     XCTAssertEqual(ratio, 1.7, accuracy: 1.0)
   }
@@ -87,12 +87,12 @@ final class PerformanceTests: XCTestCase {
 
   private let simpleAnimation = LottieAnimation.named(
     "loading_dots_1",
-    bundle: .module,
+    bundle: .lottie,
     subdirectory: "Samples/LottieFiles")!
 
   private let complexAnimation = LottieAnimation.named(
     "LottieLogo2",
-    bundle: .module,
+    bundle: .lottie,
     subdirectory: "Samples")!
 
   /// Compares initializing the given animation with the two given engines,
