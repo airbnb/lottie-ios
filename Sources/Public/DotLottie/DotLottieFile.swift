@@ -42,7 +42,15 @@ public final class DotLottieFile {
   /// Manifest.json file loading
   lazy var manifest: DotLottieManifest? = {
     let path = fileUrl.appendingPathComponent(DotLottieFile.manifestFileName)
-    return try? DotLottieManifest.load(from: path)
+    do {
+        return try DotLottieManifest.load(from: path)
+    } catch {
+      LottieLogger.shared.assertionFailure("""
+        Failed to load manifest at \(path)
+        with underlying error: \(error.localizedDescription)
+        """)
+      return nil
+    }
   }()
 
   /// Animation url for main animation
@@ -124,19 +132,24 @@ public final class DotLottieFile {
     imageProvider = DotLottieImageProvider(filepath: imagesUrl)
 
     animations = dotLottieAnimations.compactMap { dotLottieAnimation -> DotLottieFile.Animation? in
-      guard let animation = try? dotLottieAnimation.animation() else {
+      do {
+        let animation = try dotLottieAnimation.animation()
+        let configuration = DotLottieConfiguration(
+          id: dotLottieAnimation.id,
+          imageProvider: imageProvider,
+          loopMode: dotLottieAnimation.loopMode,
+          speed: dotLottieAnimation.animationSpeed)
+
+        return DotLottieFile.Animation(
+          animation: animation,
+          configuration: configuration)
+      } catch {
+          LottieLogger.shared.assertionFailure("""
+            Failed to load animation at \(dotLottieAnimation.animationUrl)
+            with underlying error: \(error.localizedDescription)
+            """)
         return nil
       }
-
-      let configuration = DotLottieConfiguration(
-        id: dotLottieAnimation.id,
-        imageProvider: imageProvider,
-        loopMode: dotLottieAnimation.loopMode,
-        speed: dotLottieAnimation.animationSpeed)
-
-      return DotLottieFile.Animation(
-        animation: animation,
-        configuration: configuration)
     }
   }
 }
