@@ -59,47 +59,45 @@ final class AnimatedSwitchRow: UIView, EpoxyableView {
     guard let content = content else { return }
 
     group.setItems {
-      if let animationName = content.animationName {
-        GroupItem<AnimatedSwitch>(
-          dataID: DataID.animatedSwitch,
-          content: content,
-          make: {
-            let animatedSwitch = AnimatedSwitch()
-            animatedSwitch.translatesAutoresizingMaskIntoConstraints = false
+      GroupItem<AnimatedSwitch>(
+        dataID: DataID.animatedSwitch,
+        content: content,
+        make: {
+          let animatedSwitch = AnimatedSwitch()
+          animatedSwitch.translatesAutoresizingMaskIntoConstraints = false
 
-            NSLayoutConstraint.activate([
-              animatedSwitch.widthAnchor.constraint(equalToConstant: 80),
-              animatedSwitch.heightAnchor.constraint(equalToConstant: 80),
-            ])
+          NSLayoutConstraint.activate([
+            animatedSwitch.widthAnchor.constraint(equalToConstant: 80),
+            animatedSwitch.heightAnchor.constraint(equalToConstant: 80),
+          ])
 
-            animatedSwitch.addTarget(self, action: #selector(self.switchWasToggled), for: .touchUpInside)
-            return animatedSwitch
-          },
-          setContent: { context, content in
-            context.constrainable.animation = .named(animationName)
-            context.constrainable.contentMode = .scaleAspectFit
+          animatedSwitch.addTarget(self, action: #selector(self.switchWasToggled), for: .touchUpInside)
+          return animatedSwitch
+        },
+        setContent: { context, content in
+          context.constrainable.animation = .named(content.animationName)
+          context.constrainable.contentMode = .scaleAspectFit
 
-            if let offTimeRange = content.offTimeRange {
-              context.constrainable.setProgressForState(
-                fromProgress: offTimeRange.lowerBound,
-                toProgress: offTimeRange.upperBound,
-                forOnState: false)
-            }
+          if let offTimeRange = content.offTimeRange {
+            context.constrainable.setProgressForState(
+              fromProgress: offTimeRange.lowerBound,
+              toProgress: offTimeRange.upperBound,
+              forOnState: false)
+          }
 
-            if let onTimeRange = content.onTimeRange {
-              context.constrainable.setProgressForState(
-                fromProgress: onTimeRange.lowerBound,
-                toProgress: onTimeRange.upperBound,
-                forOnState: true)
-            }
+          if let onTimeRange = content.onTimeRange {
+            context.constrainable.setProgressForState(
+              fromProgress: onTimeRange.lowerBound,
+              toProgress: onTimeRange.upperBound,
+              forOnState: true)
+          }
 
-            for (keypath, color) in content.colorValueProviders {
-              context.constrainable.animationView.setValueProvider(
-                ColorValueProvider(color),
-                keypath: AnimationKeypath(keypath: keypath))
-            }
-          })
-      }
+          for (keypath, color) in content.colorValueProviders {
+            context.constrainable.animationView.setValueProvider(
+              ColorValueProvider(color),
+              keypath: AnimationKeypath(keypath: keypath))
+          }
+        })
 
       GroupItem<UILabel>(
         dataID: DataID.title,

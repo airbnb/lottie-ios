@@ -57,33 +57,31 @@ final class AnimatedButtonRow: UIView, EpoxyableView {
     guard let content = content else { return }
 
     group.setItems {
-      if let animationName = content.animationName {
-        GroupItem<AnimatedButton>(
-          dataID: DataID.animatedButton,
-          content: content,
-          make: {
-            let animatedButton = AnimatedButton()
-            animatedButton.translatesAutoresizingMaskIntoConstraints = false
+      GroupItem<AnimatedButton>(
+        dataID: DataID.animatedButton,
+        content: content,
+        make: {
+          let animatedButton = AnimatedButton()
+          animatedButton.translatesAutoresizingMaskIntoConstraints = false
 
-            NSLayoutConstraint.activate([
-              animatedButton.widthAnchor.constraint(equalToConstant: 80),
-              animatedButton.heightAnchor.constraint(equalToConstant: 80),
-            ])
+          NSLayoutConstraint.activate([
+            animatedButton.widthAnchor.constraint(equalToConstant: 80),
+            animatedButton.heightAnchor.constraint(equalToConstant: 80),
+          ])
 
-            return animatedButton
-          },
-          setContent: { context, content in
-            context.constrainable.animation = .named(animationName)
-            context.constrainable.contentMode = .scaleAspectFit
+          return animatedButton
+        },
+        setContent: { context, content in
+          context.constrainable.animation = .named(content.animationName)
+          context.constrainable.contentMode = .scaleAspectFit
 
-            for playRange in content.playRanges {
-              context.constrainable.setPlayRange(
-                fromMarker: playRange.fromMarker,
-                toMarker: playRange.toMarker,
-                event: playRange.event)
-            }
-          })
-      }
+          for playRange in content.playRanges {
+            context.constrainable.setPlayRange(
+              fromMarker: playRange.fromMarker,
+              toMarker: playRange.toMarker,
+              event: playRange.event)
+          }
+        })
 
       GroupItem<UILabel>(
         dataID: DataID.title,
