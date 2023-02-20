@@ -263,8 +263,9 @@ extension DotLottieFile {
   /// - Parameter dotLottieCache: A cache for holding loaded lotties. Defaults to `LRUDotLottieCache.sharedCache`. Optional.
   public static func loadedFrom(
     filepath: String,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache
-  ) -> Result<DotLottieFile, Error> {
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
+    -> Result<DotLottieFile, Error>
+  {
     /// Check cache for lottie
     if
       let dotLottieCache = dotLottieCache,
@@ -296,8 +297,9 @@ extension DotLottieFile {
     _ name: String,
     bundle: Bundle = Bundle.main,
     subdirectory: String? = nil,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache
-  ) -> Result<DotLottieFile, Error> {
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
+    -> Result<DotLottieFile, Error>
+  {
     /// Create a cache key for the lottie.
     let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
 
