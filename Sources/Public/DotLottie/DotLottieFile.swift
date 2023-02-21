@@ -123,7 +123,7 @@ public final class DotLottieFile {
   private func loadContent() throws {
     imageProvider = DotLottieImageProvider(filepath: imagesUrl)
 
-    animations = try manifest?.animations.map { dotLottieAnimation in
+    animations = try loadManifest().animations.map { dotLottieAnimation in
       let animation = try dotLottieAnimation.animation(url: animationsUrl)
       let configuration = DotLottieConfiguration(
         id: dotLottieAnimation.id,
@@ -134,7 +134,12 @@ public final class DotLottieFile {
       return DotLottieFile.Animation(
         animation: animation,
         configuration: configuration)
-    } ?? []
+    }
+  }
+
+  private func loadManifest() throws -> DotLottieManifest {
+    let path = fileUrl.appendingPathComponent(DotLottieFile.manifestFileName)
+    return try DotLottieManifest.load(from: path)
   }
 }
 
