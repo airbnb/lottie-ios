@@ -58,4 +58,11 @@ public enum DotLottieError: Error {
   case assetNotFound(name: String, bundle: Bundle?)
   /// Animation loading from asset is not supported on macOS 10.10.
   case loadingFromAssetNotSupported
+
+  @available(*, deprecated, message: "Unused")
+  case invalidFileFormat
+  @available(*, deprecated, message: "Unused")
+  case invalidData
+  @available(*, deprecated, message: "Unused")
+  case animationNotAvailable
 }
