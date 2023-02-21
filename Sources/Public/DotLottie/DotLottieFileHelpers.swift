@@ -64,12 +64,7 @@ extension DotLottieFile {
 
       do {
         /// Decode animation.
-        guard let data = try bundle.dotLottieData(name, subdirectory: subdirectory) else {
-          DispatchQueue.main.async {
-            handleResult(.failure(DotLottieError.invalidData))
-          }
-          return
-        }
+        let data = try bundle.dotLottieData(name, subdirectory: subdirectory)
         let lottie = try DotLottieFile(data: data, filename: name)
         dotLottieCache?.setFile(lottie, forKey: cacheKey)
         DispatchQueue.main.async {
@@ -189,15 +184,10 @@ extension DotLottieFile {
         return
       }
 
-      /// Load data from Asset
-      guard let data = Data.jsonData(from: name, in: bundle) else {
-        DispatchQueue.main.async {
-          handleResult(.failure(DotLottieError.invalidData))
-        }
-        return
-      }
-
       do {
+        /// Load data from Asset
+        let data = try Data(assetName: name, in: bundle)
+
         /// Decode lottie.
         let lottie = try DotLottieFile(data: data, filename: name)
         dotLottieCache?.setFile(lottie, forKey: cacheKey)
@@ -246,13 +236,13 @@ extension DotLottieFile {
       handleResult(.success(lottie))
     } else {
       let task = session.dataTask(with: url) { data, _, error in
-        guard error == nil, let data = data else {
-          DispatchQueue.main.async {
-            handleResult(.failure(DotLottieError.invalidData))
-          }
-          return
-        }
         do {
+          if let error = error {
+            throw error
+          }
+          guard let data = data else {
+            throw DotLottieError.noDataLoaded
+          }
           let lottie = try DotLottieFile(data: data, filename: url.deletingPathExtension().lastPathComponent)
           DispatchQueue.main.async {
             dotLottieCache?.setFile(lottie, forKey: url.absoluteString)

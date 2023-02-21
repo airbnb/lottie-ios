@@ -52,7 +52,10 @@ extension FileManager {
 // MARK: - DotLottieError
 
 public enum DotLottieError: Error {
-  case invalidFileFormat
-  case invalidData
-  case animationNotAvailable
+  /// URL response has no data.
+  case noDataLoaded
+  /// Asset with this name was not found in the provided bundle.
+  case assetNotFound(name: String, bundle: Bundle?)
+  /// Animation loading from asset is not supported on macOS 10.10.
+  case loadingFromAssetNotSupported
 }
