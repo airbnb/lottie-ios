@@ -39,42 +39,17 @@ public final class DotLottieFile {
   /// Image provider for animations
   private(set) var imageProvider: AnimationImageProvider?
 
-  /// Manifest.json file loading
-  lazy var manifest: DotLottieManifest? = {
-    let path = fileUrl.appendingPathComponent(DotLottieFile.manifestFileName)
-    do {
-        return try DotLottieManifest.load(from: path)
-    } catch {
-      LottieLogger.shared.assertionFailure("""
-        Failed to load manifest at \(path)
-        with underlying error: \(error.localizedDescription)
-        """)
-      return nil
-    }
-  }()
-
-  /// Animation url for main animation
-  lazy var animationUrl: URL? = {
-    guard let animationId = manifest?.animations.first?.id else { return nil }
-    let dotLottieJson = "\(DotLottieFile.animationsFolderName)/\(animationId).json"
-    return fileUrl.appendingPathComponent(dotLottieJson)
-  }()
-
   /// Animations folder url
   lazy var animationsUrl: URL = fileUrl.appendingPathComponent("\(DotLottieFile.animationsFolderName)")
 
   /// All files in animations folder
-  lazy var animationUrls: [URL] = {
-    FileManager.default.urls(for: animationsUrl) ?? []
-  }()
+  lazy var animationUrls: [URL] = FileManager.default.urls(for: animationsUrl) ?? []
 
   /// Images folder url
   lazy var imagesUrl: URL = fileUrl.appendingPathComponent("\(DotLottieFile.imagesFolderName)")
 
   /// All images in images folder
-  lazy var imageUrls: [URL] = {
-    FileManager.default.urls(for: imagesUrl) ?? []
-  }()
+  lazy var imageUrls: [URL] = FileManager.default.urls(for: imagesUrl) ?? []
 
   /// The `LottieAnimation` and `DotLottieConfiguration` for the given animation ID in this file
   func animation(for id: String? = nil) -> DotLottieFile.Animation? {
