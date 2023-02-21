@@ -47,35 +47,10 @@ extension DotLottieFile {
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
     dispatchQueue.async {
-      /// Create a cache key for the lottie.
-      let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
+      let result = named(name, bundle: bundle, subdirectory: subdirectory, dotLottieCache: dotLottieCache)
 
-      /// Check cache for lottie
-      if
-        let dotLottieCache = dotLottieCache,
-        let lottie = dotLottieCache.file(forKey: cacheKey)
-      {
-        DispatchQueue.main.async {
-          /// If found, return the lottie.
-          handleResult(.success(lottie))
-        }
-        return
-      }
-
-      do {
-        /// Decode animation.
-        let data = try bundle.dotLottieData(name, subdirectory: subdirectory)
-        let lottie = try DotLottieFile(data: data, filename: name)
-        dotLottieCache?.setFile(lottie, forKey: cacheKey)
-        DispatchQueue.main.async {
-          handleResult(.success(lottie))
-        }
-      } catch {
-        /// Decoding error.
-        LottieLogger.shared.warn("Error when decoding lottie \"\(name)\": \(error)")
-        DispatchQueue.main.async {
-          handleResult(.failure(error))
-        }
+      DispatchQueue.main.async {
+        handleResult(result)
       }
     }
   }
@@ -108,31 +83,10 @@ extension DotLottieFile {
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
     dispatchQueue.async {
-      /// Check cache for lottie
-      if
-        let dotLottieCache = dotLottieCache,
-        let lottie = dotLottieCache.file(forKey: filepath)
-      {
-        DispatchQueue.main.async {
-          handleResult(.success(lottie))
-        }
-        return
-      }
+      let result = loadedFrom(filepath: filepath, dotLottieCache: dotLottieCache)
 
-      do {
-        /// Decode the lottie.
-        let url = URL(fileURLWithPath: filepath)
-        let data = try Data(contentsOf: url)
-        let lottie = try DotLottieFile(data: data, filename: url.deletingPathExtension().lastPathComponent)
-        dotLottieCache?.setFile(lottie, forKey: filepath)
-        DispatchQueue.main.async {
-          handleResult(.success(lottie))
-        }
-      } catch {
-        /// Decoding Error.
-        DispatchQueue.main.async {
-          handleResult(.failure(error))
-        }
+      DispatchQueue.main.async {
+        handleResult(result)
       }
     }
   }
