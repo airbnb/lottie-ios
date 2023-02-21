@@ -93,14 +93,6 @@ public final class DotLottieFile {
 
   private let fileUrl: URL
 
-  private var dotLottieAnimations: [DotLottieAnimation] {
-    manifest?.animations.map {
-      var animation = $0
-      animation.animationUrl = animationsUrl.appendingPathComponent("\($0.id).json")
-      return animation
-    } ?? []
-  }
-
   /// Decompresses .lottie file from `URL` and saves to local temp folder
   ///
   /// - Parameters:
@@ -110,7 +102,7 @@ public final class DotLottieFile {
     try? FileManager.default.removeItem(at: destinationURL)
     try FileManager.default.createDirectory(at: destinationURL, withIntermediateDirectories: true, attributes: nil)
     try FileManager.default.unzipItem(at: url, to: destinationURL)
-    loadContent()
+    try loadContent()
     try? FileManager.default.removeItem(at: destinationURL)
     try? FileManager.default.removeItem(at: url)
   }
@@ -128,29 +120,21 @@ public final class DotLottieFile {
   }
 
   /// Loads file content to memory
-  private func loadContent() {
+  private func loadContent() throws {
     imageProvider = DotLottieImageProvider(filepath: imagesUrl)
 
-    animations = dotLottieAnimations.compactMap { dotLottieAnimation -> DotLottieFile.Animation? in
-      do {
-        let animation = try dotLottieAnimation.animation()
-        let configuration = DotLottieConfiguration(
-          id: dotLottieAnimation.id,
-          imageProvider: imageProvider,
-          loopMode: dotLottieAnimation.loopMode,
-          speed: dotLottieAnimation.animationSpeed)
+    animations = try manifest?.animations.map { dotLottieAnimation in
+      let animation = try dotLottieAnimation.animation(url: animationsUrl)
+      let configuration = DotLottieConfiguration(
+        id: dotLottieAnimation.id,
+        imageProvider: imageProvider,
+        loopMode: dotLottieAnimation.loopMode,
+        speed: dotLottieAnimation.animationSpeed)
 
-        return DotLottieFile.Animation(
-          animation: animation,
-          configuration: configuration)
-      } catch {
-          LottieLogger.shared.assertionFailure("""
-            Failed to load animation at \(dotLottieAnimation.animationUrl)
-            with underlying error: \(error.localizedDescription)
-            """)
-        return nil
-      }
-    }
+      return DotLottieFile.Animation(
+        animation: animation,
+        configuration: configuration)
+    } ?? []
   }
 }
 
