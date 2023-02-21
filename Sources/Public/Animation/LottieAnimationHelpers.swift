@@ -95,7 +95,7 @@ extension LottieAnimation {
       animationCache?.setAnimation(animation, forKey: filepath)
       return animation
     } catch {
-      LottieLogger.shared.assertionFailure("""
+      LottieLogger.shared.warn("""
         Failed to load animation from filepath \(filepath)
         with underlying error: \(error.localizedDescription)
         """)
@@ -134,7 +134,7 @@ extension LottieAnimation {
       animationCache?.setAnimation(animation, forKey: cacheKey)
       return animation
     } catch {
-      LottieLogger.shared.assertionFailure("""
+      LottieLogger.shared.warn("""
         Failed to load animation with asset name \(name)
         in \(bundle.bundlePath)
         with underlying error: \(error.localizedDescription)
