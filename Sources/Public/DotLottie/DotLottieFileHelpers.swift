@@ -47,7 +47,7 @@ extension DotLottieFile {
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
     dispatchQueue.async {
-      let result = named(name, bundle: bundle, subdirectory: subdirectory, dotLottieCache: dotLottieCache)
+      let result = SynchronouslyBlockingCurrentThread.named(name, bundle: bundle, subdirectory: subdirectory, dotLottieCache: dotLottieCache)
 
       DispatchQueue.main.async {
         handleResult(result)
@@ -83,7 +83,7 @@ extension DotLottieFile {
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
     dispatchQueue.async {
-      let result = loadedFrom(filepath: filepath, dotLottieCache: dotLottieCache)
+      let result = SynchronouslyBlockingCurrentThread.loadedFrom(filepath: filepath, dotLottieCache: dotLottieCache)
 
       DispatchQueue.main.async {
         handleResult(result)
@@ -212,71 +212,76 @@ extension DotLottieFile {
     }
   }
 
-  /// Loads an DotLottie from a specific filepath synchronously.
-  /// - Parameter filepath: The absolute filepath of the lottie to load. EG "/User/Me/starAnimation.lottie"
-  /// - Parameter dotLottieCache: A cache for holding loaded lotties. Defaults to `LRUDotLottieCache.sharedCache`. Optional.
-  public static func loadedFrom(
-    filepath: String,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
-    -> Result<DotLottieFile, Error>
-  {
-    /// Check cache for lottie
-    if
-      let dotLottieCache = dotLottieCache,
-      let lottie = dotLottieCache.file(forKey: filepath)
+  public enum SynchronouslyBlockingCurrentThread {
+    /// Loads an DotLottie from a specific filepath synchronously. Returns a `Result<DotLottieFile, Error>`
+    /// Please use the asynchronous methods whenever possible. This operation will block the Thread it is running in.
+    ///
+    /// - Parameter filepath: The absolute filepath of the lottie to load. EG "/User/Me/starAnimation.lottie"
+    /// - Parameter dotLottieCache: A cache for holding loaded lotties. Defaults to `LRUDotLottieCache.sharedCache`. Optional.
+    public static func loadedFrom(
+      filepath: String,
+      dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
+      -> Result<DotLottieFile, Error>
     {
-      return .success(lottie)
-    }
-
-    do {
-      /// Decode the lottie.
-      let url = URL(fileURLWithPath: filepath)
-      let data = try Data(contentsOf: url)
-      let lottie = try DotLottieFile(data: data, filename: url.deletingPathExtension().lastPathComponent)
-      dotLottieCache?.setFile(lottie, forKey: filepath)
-      return .success(lottie)
-    } catch {
-      /// Decoding Error.
-      return .failure(error)
-    }
-  }
-
-  /// Loads a DotLottie model from a bundle by its name synchronously. Returns a `Result<DotLottieFile, Error>`
-  ///
-  /// - Parameter name: The name of the lottie file without the lottie extension. EG "StarAnimation"
-  /// - Parameter bundle: The bundle in which the lottie is located. Defaults to `Bundle.main`
-  /// - Parameter subdirectory: A subdirectory in the bundle in which the lottie is located. Optional.
-  /// - Parameter dotLottieCache: A cache for holding loaded lotties. Defaults to `LRUDotLottieCache.sharedCache`. Optional.
-  public static func named(
-    _ name: String,
-    bundle: Bundle = Bundle.main,
-    subdirectory: String? = nil,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
-    -> Result<DotLottieFile, Error>
-  {
-    /// Create a cache key for the lottie.
-    let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
-
-    /// Check cache for lottie
-    if
-      let dotLottieCache = dotLottieCache,
-      let lottie = dotLottieCache.file(forKey: cacheKey)
-    {
-      return .success(lottie)
-    }
-
-    do {
-      /// Decode animation.
-      guard let data = try bundle.dotLottieData(name, subdirectory: subdirectory) else {
-        throw DotLottieError.invalidData
+      /// Check cache for lottie
+      if
+        let dotLottieCache = dotLottieCache,
+        let lottie = dotLottieCache.file(forKey: filepath)
+      {
+        return .success(lottie)
       }
-      let lottie = try DotLottieFile(data: data, filename: name)
-      dotLottieCache?.setFile(lottie, forKey: cacheKey)
-      return .success(lottie)
-    } catch {
-      /// Decoding error.
-      LottieLogger.shared.warn("Error when decoding lottie \"\(name)\": \(error)")
-      return .failure(error)
+
+      do {
+        /// Decode the lottie.
+        let url = URL(fileURLWithPath: filepath)
+        let data = try Data(contentsOf: url)
+        let lottie = try DotLottieFile(data: data, filename: url.deletingPathExtension().lastPathComponent)
+        dotLottieCache?.setFile(lottie, forKey: filepath)
+        return .success(lottie)
+      } catch {
+        /// Decoding Error.
+        return .failure(error)
+      }
+    }
+
+    /// Loads a DotLottie model from a bundle by its name synchronously. Returns a `Result<DotLottieFile, Error>`
+    /// Please use the asynchronous methods whenever possible. This operation will block the Thread it is running in.
+    ///
+    /// - Parameter name: The name of the lottie file without the lottie extension. EG "StarAnimation"
+    /// - Parameter bundle: The bundle in which the lottie is located. Defaults to `Bundle.main`
+    /// - Parameter subdirectory: A subdirectory in the bundle in which the lottie is located. Optional.
+    /// - Parameter dotLottieCache: A cache for holding loaded lotties. Defaults to `LRUDotLottieCache.sharedCache`. Optional.
+    public static func named(
+      _ name: String,
+      bundle: Bundle = Bundle.main,
+      subdirectory: String? = nil,
+      dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
+      -> Result<DotLottieFile, Error>
+    {
+      /// Create a cache key for the lottie.
+      let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
+
+      /// Check cache for lottie
+      if
+        let dotLottieCache = dotLottieCache,
+        let lottie = dotLottieCache.file(forKey: cacheKey)
+      {
+        return .success(lottie)
+      }
+
+      do {
+        /// Decode animation.
+        guard let data = try bundle.dotLottieData(name, subdirectory: subdirectory) else {
+          throw DotLottieError.invalidData
+        }
+        let lottie = try DotLottieFile(data: data, filename: name)
+        dotLottieCache?.setFile(lottie, forKey: cacheKey)
+        return .success(lottie)
+      } catch {
+        /// Decoding error.
+        LottieLogger.shared.warn("Error when decoding lottie \"\(name)\": \(error)")
+        return .failure(error)
+      }
     }
   }
 }
