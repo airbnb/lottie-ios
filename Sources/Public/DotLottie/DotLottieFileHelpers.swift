@@ -241,7 +241,7 @@ extension DotLottieFile {
               throw error
           }
           guard let data = data else {
-            throw DotLottieError.urlLoadingFailed
+            throw DotLottieError.noDataLoaded
           }
           let lottie = try DotLottieFile(data: data, filename: url.deletingPathExtension().lastPathComponent)
           DispatchQueue.main.async {
