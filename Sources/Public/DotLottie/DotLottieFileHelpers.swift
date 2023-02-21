@@ -68,9 +68,7 @@ extension DotLottieFile {
 
       do {
         /// Decode animation.
-        guard let data = try bundle.dotLottieData(name, subdirectory: subdirectory) else {
-          throw DotLottieError.invalidData
-        }
+        let data = try bundle.dotLottieData(name, subdirectory: subdirectory)
         let lottie = try DotLottieFile(data: data, filename: name)
         dotLottieCache?.setFile(lottie, forKey: cacheKey)
         return .success(lottie)
