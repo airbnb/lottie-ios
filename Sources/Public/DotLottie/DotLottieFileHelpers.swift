@@ -238,7 +238,7 @@ extension DotLottieFile {
       let task = session.dataTask(with: url) { data, _, error in
         do {
           if let error = error {
-              throw error
+            throw error
           }
           guard let data = data else {
             throw DotLottieError.noDataLoaded

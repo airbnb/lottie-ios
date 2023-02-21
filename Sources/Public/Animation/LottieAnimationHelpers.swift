@@ -95,10 +95,10 @@ extension LottieAnimation {
       animationCache?.setAnimation(animation, forKey: filepath)
       return animation
     } catch {
-        LottieLogger.shared.assertionFailure("""
-          Failed to load animation from filepath \(filepath)
-          with underlying error: \(error.localizedDescription)
-          """)
+      LottieLogger.shared.assertionFailure("""
+        Failed to load animation from filepath \(filepath)
+        with underlying error: \(error.localizedDescription)
+        """)
       return nil
     }
   }
