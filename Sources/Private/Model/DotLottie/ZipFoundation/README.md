@@ -10,10 +10,6 @@ Due to limitations of these package managers, we can't depend on / import
 a separate ZIPFoundation module / library. Instead, we include the source
 directly within the Lottie library and compile everything as a single unit.
 
-This directory is identical to the `ZIPFoundation/Sources/ZIPFoundation` directory
-in the tag listed above, except with `public` removed from all public declarations 
-(since we don't want the Lottie library to expose any ZIPFoundation APIs).
-
 ### Update instructions
 
 From time to time we may need to update to a more recent version of ZIPFoundation.
@@ -24,4 +20,5 @@ When doing this, follow these steps:
     
  2. Update the URL at the top of this file to indicate what release is being used.
  
- 3. Change all of the `public` symbols defined in this module to instead be `internal`.
+ 3. Change all of the `public` symbols defined in this module to instead be `internal`
+    to prevent Lottie from exposing any ZIPFoundation APIs.
