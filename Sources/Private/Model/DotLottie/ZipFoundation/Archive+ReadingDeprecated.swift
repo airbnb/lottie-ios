@@ -12,18 +12,38 @@ import Foundation
 
 extension Archive {
 
-    @available(*, deprecated,
-                message: "Please use `Int` for `bufferSize`.")
-    func extract(_ entry: Entry, to url: URL, bufferSize: UInt32, skipCRC32: Bool = false,
-                 progress: Progress? = nil) throws -> CRC32 {
-        try self.extract(entry, to: url, bufferSize: Int(bufferSize), skipCRC32: skipCRC32, progress: progress)
-    }
+  @available(
+    *,
+    deprecated,
+    message: "Please use `Int` for `bufferSize`.")
+  func extract(
+    _ entry: Entry,
+    to url: URL,
+    bufferSize: UInt32,
+    skipCRC32: Bool = false,
+    progress: Progress? = nil)
+    throws -> CRC32
+  {
+    try extract(entry, to: url, bufferSize: Int(bufferSize), skipCRC32: skipCRC32, progress: progress)
+  }
 
-    @available(*, deprecated,
-                message: "Please use `Int` for `bufferSize`.")
-    func extract(_ entry: Entry, bufferSize: UInt32, skipCRC32: Bool = false,
-                 progress: Progress? = nil, consumer: Consumer) throws -> CRC32 {
-        try self.extract(entry, bufferSize: Int(bufferSize), skipCRC32: skipCRC32,
-                         progress: progress, consumer: consumer)
-    }
+  @available(
+    *,
+    deprecated,
+    message: "Please use `Int` for `bufferSize`.")
+  func extract(
+    _ entry: Entry,
+    bufferSize: UInt32,
+    skipCRC32: Bool = false,
+    progress: Progress? = nil,
+    consumer: Consumer)
+    throws -> CRC32
+  {
+    try extract(
+      entry,
+      bufferSize: Int(bufferSize),
+      skipCRC32: skipCRC32,
+      progress: progress,
+      consumer: consumer)
+  }
 }
