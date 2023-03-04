@@ -10,7 +10,11 @@
 
 import Foundation
 
+#if os(Android)
+typealias FILEPointer = OpaquePointer
+#else
 typealias FILEPointer = UnsafeMutablePointer<FILE>
+#endif
 
 // MARK: - DataSerializable
 
@@ -40,6 +44,36 @@ extension Data {
     return structure
   }
 
+  static func consumePart(
+    of size: Int64,
+    chunkSize: Int,
+    skipCRC32: Bool = false,
+    provider: Provider,
+    consumer: Consumer)
+    throws -> CRC32
+  {
+    var checksum = CRC32(0)
+    guard size > 0 else {
+      try consumer(Data())
+      return checksum
+    }
+
+    let readInOneChunk = (size < chunkSize)
+    var chunkSize = readInOneChunk ? Int(size) : chunkSize
+    var bytesRead: Int64 = 0
+    while bytesRead < size {
+      let remainingSize = size - bytesRead
+      chunkSize = remainingSize < chunkSize ? Int(remainingSize) : chunkSize
+      let data = try provider(bytesRead, chunkSize)
+      try consumer(data)
+      if !skipCRC32 {
+        checksum = data.crc32(checksum: checksum)
+      }
+      bytesRead += Int64(chunkSize)
+    }
+    return checksum
+  }
+
   static func readChunk(of size: Int, from file: FILEPointer) throws -> Data {
     let alignment = MemoryLayout<UInt>.alignment
     #if swift(>=4.1)
@@ -66,6 +100,34 @@ extension Data {
       if let baseAddress = rawBufferPointer.baseAddress, rawBufferPointer.count > 0 {
         let pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
         sizeWritten = fwrite(pointer, 1, chunk.count, file)
+      }
+    }
+    let error = ferror(file)
+    if error > 0 {
+      throw DataError.unwritableFile
+    }
+    return sizeWritten
+  }
+
+  static func writeLargeChunk(
+    _ chunk: Data,
+    size: UInt64,
+    bufferSize: Int,
+    to file: FILEPointer)
+    throws -> UInt64
+  {
+    var sizeWritten: UInt64 = 0
+    chunk.withUnsafeBytes { rawBufferPointer in
+      if let baseAddress = rawBufferPointer.baseAddress, rawBufferPointer.count > 0 {
+        let pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
+
+        while sizeWritten < size {
+          let remainingSize = size - sizeWritten
+          let chunkSize = Swift.min(Int(remainingSize), bufferSize)
+          let curPointer = pointer.advanced(by: Int(sizeWritten))
+          fwrite(curPointer, 1, chunkSize, file)
+          sizeWritten += UInt64(chunkSize)
+        }
       }
     }
     let error = ferror(file)

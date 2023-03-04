@@ -10,12 +10,12 @@
 
 import Foundation
 
-extension ZipEntry.LocalFileHeader {
+extension Entry.LocalFileHeader {
 
   // MARK: Lifecycle
 
   init?(data: Data, additionalDataProvider provider: (Int) throws -> Data) {
-    guard data.count == ZipEntry.LocalFileHeader.size else { return nil }
+    guard data.count == Entry.LocalFileHeader.size else { return nil }
     guard data.scanValue(start: 0) == localFileHeaderSignature else { return nil }
     versionNeededToExtract = data.scanValue(start: 4)
     generalPurposeBitFlag = data.scanValue(start: 6)
@@ -37,7 +37,7 @@ extension ZipEntry.LocalFileHeader {
     subRangeEnd = subRangeStart + Int(extraFieldLength)
     extraFieldData = additionalData.subdata(in: subRangeStart..<subRangeEnd)
     if
-      let zip64ExtendedInformation = ZipEntry.ZIP64ExtendedInformation.scanForZIP64Field(
+      let zip64ExtendedInformation = Entry.ZIP64ExtendedInformation.scanForZIP64Field(
         in: extraFieldData,
         fields: validFields)
     {
@@ -78,12 +78,12 @@ extension ZipEntry.LocalFileHeader {
 
 }
 
-extension ZipEntry.CentralDirectoryStructure {
+extension Entry.CentralDirectoryStructure {
 
   // MARK: Lifecycle
 
   init?(data: Data, additionalDataProvider provider: (Int) throws -> Data) {
-    guard data.count == ZipEntry.CentralDirectoryStructure.size else { return nil }
+    guard data.count == Entry.CentralDirectoryStructure.size else { return nil }
     guard data.scanValue(start: 0) == centralDirectorySignature else { return nil }
     versionMadeBy = data.scanValue(start: 4)
     versionNeededToExtract = data.scanValue(start: 6)
@@ -114,7 +114,7 @@ extension ZipEntry.CentralDirectoryStructure {
     subRangeEnd = subRangeStart + Int(fileCommentLength)
     fileCommentData = additionalData.subdata(in: subRangeStart..<subRangeEnd)
     if
-      let zip64ExtendedInformation = ZipEntry.ZIP64ExtendedInformation.scanForZIP64Field(
+      let zip64ExtendedInformation = Entry.ZIP64ExtendedInformation.scanForZIP64Field(
         in: extraFieldData,
         fields: validFields)
     {
@@ -168,7 +168,7 @@ extension ZipEntry.CentralDirectoryStructure {
 
 }
 
-extension ZipEntry.DataDescriptor {
+extension Entry.DataDescriptor {
   init?(data: Data, additionalDataProvider _: (Int) throws -> Data) {
     guard data.count == Self.size else { return nil }
     let signature: UInt32 = data.scanValue(start: 0)
