@@ -125,8 +125,10 @@ extension AnimationKeypath {
       + keypath.keys.joined(separator: "\\.") // match this keypath, escaping "." characters
       + "$" // match the end of the string
 
-    let doubleWildcardMarker = "DOUBLE"
-    let singleWildcardMarker = "SINGLE"
+    // Replace the ** and * wildcards with markers that are guaranteed to be unique
+    // and won't conflict with regex syntax (e.g. `.*`).
+    let doubleWildcardMarker = UUID().uuidString
+    let singleWildcardMarker = UUID().uuidString
     regex = regex.replacingOccurrences(of: "**", with: doubleWildcardMarker)
     regex = regex.replacingOccurrences(of: "*", with: singleWildcardMarker)
 
