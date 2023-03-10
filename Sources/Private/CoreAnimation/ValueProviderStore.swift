@@ -129,7 +129,7 @@ extension AnimationKeypath {
     let singleWildcardMarker = "SINGLE"
     regex = regex.replacingOccurrences(of: "**", with: doubleWildcardMarker)
     regex = regex.replacingOccurrences(of: "*", with: singleWildcardMarker)
-    
+
     // "**" wildcards match zero or more path segments separated by "\\."
     //  - "**.Color" matches any of "Color", "Layer 1.Color", and "Layer 1.Layer 2.Color"
     regex = regex.replacingOccurrences(of: "\(doubleWildcardMarker)\\.", with: ".*")

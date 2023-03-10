@@ -33,17 +33,17 @@ final class AnimationKeypathTests: XCTestCase {
     XCTAssertFalse(keypath.matches("*.Layer.Shape Group.Stroke 1.*.Color"))
     XCTAssertFalse(keypath.matches("Layer.Shape Group.Stroke 1.Color.*"))
     XCTAssertFalse(keypath.matches("Layer.Shape Group.Stroke 1.Color.**"))
-    
+
     let keypath2 = AnimationKeypath(keypath: "pin.Group 1.fill-primary.Color")
     XCTAssertTrue(keypath2.matches("**.*primary.**.Color"))
     XCTAssertTrue(keypath2.matches("**.*primary.Color"))
     XCTAssertFalse(keypath2.matches("*primary.**.Color"))
-    
+
     let keypath3 = AnimationKeypath(keypath: "fill-primary.Stroke 1.Color")
     XCTAssertTrue(keypath3.matches("**.*primary.**.Color"))
     XCTAssertFalse(keypath3.matches("**.*primary.Color"))
     XCTAssertTrue(keypath3.matches("*primary.**.Color"))
-    
+
     let keypath4 = AnimationKeypath(keypath: "Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Stroke 1.Color")
     XCTAssertTrue(keypath4.matches("**.Stroke 1.**.Color"))
     XCTAssertTrue(keypath4.matches("**.Stroke 1.Color"))
