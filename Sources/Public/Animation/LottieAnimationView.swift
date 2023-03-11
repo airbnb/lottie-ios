@@ -1216,6 +1216,12 @@ open class LottieAnimationView: LottieAnimationViewBase {
     let animationContext = animationContext
     let currentFrame = currentFrame
 
+    // Disable the completion handler delegate before tearing down the `CoreAnimationLayer`
+    // and building the `MainThreadAnimationLayer`. Otherwise deinitializing the
+    // `CoreAnimationLayer` would trigger the animation completion handler even though
+    // the animation hasn't even started playing yet.
+    animationContext?.closure.ignoreDelegate = true
+
     makeAnimationLayer(usingEngine: .mainThread)
 
     // Set up the Main Thread animation layer using the same configuration that
