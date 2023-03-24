@@ -711,7 +711,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   }
 
   /// Gets all child keypaths.
-  public func getHierarchyKeypaths() -> [String] {
+  public var allAnimationKeypaths: [String] {
     animationLayer != nil ? animationLayer!.getHierarchyKeypaths() : []
   }
 
