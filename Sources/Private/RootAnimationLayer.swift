@@ -31,7 +31,6 @@ protocol RootAnimationLayer: CALayer {
 
   func reloadImages()
   func forceDisplayUpdate()
-  func getHierarchyKeypaths() -> [String]
   func logHierarchyKeypaths()
 
   func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath)

@@ -441,11 +441,6 @@ extension CoreAnimationLayer: RootAnimationLayer {
     // Unimplemented / unused
   }
 
-  func getHierarchyKeypaths() -> [String] {
-    logHierarchyKeypaths()
-    return []
-  }
-
   func logHierarchyKeypaths() {
     guard var configuration = pendingAnimationConfiguration?.animationConfiguration ?? currentAnimationConfiguration else {
       logger.info("Cannot log hierarchy keypaths until animation has been set up at least once")
