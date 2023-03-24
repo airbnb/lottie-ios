@@ -710,6 +710,11 @@ open class LottieAnimationView: LottieAnimationViewBase {
     animationLayer?.getOriginalValue(for: keypath, atFrame: atFrame)
   }
 
+  /// Gets all child keypaths.
+  public func getHierarchyKeypaths() -> [String] {
+    animationLayer != nil ? animationLayer!.getHierarchyKeypaths() : []
+  }
+
   /// Logs all child keypaths.
   public func logHierarchyKeypaths() {
     animationLayer?.logHierarchyKeypaths()
