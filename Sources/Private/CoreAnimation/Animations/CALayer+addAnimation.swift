@@ -49,14 +49,15 @@ extension CALayer {
     let keyframes = keyframeGroup.keyframes
     guard !keyframes.isEmpty else { return nil }
 
-    // Check if this set of keyframes uses javascript expressions, which aren't supported.
-    if let unsupportedJavascriptExpression = keyframeGroup.unsupportedJavascriptExpression {
+    // Check if this set of keyframes uses After Effects expressions, which aren't supported.
+    if let unsupportedAfterEffectsExpression = keyframeGroup.unsupportedAfterEffectsExpression {
       context.logger.info("""
         `\(property.caLayerKeypath)` animation for "\(context.currentKeypath.fullPath)" \
-        includes a javascript expression, which is not supported by lottie-ios \
-        (expressions are only supported by lottie-web). This animation may not play correctly.
+        includes an After Effects expression (https://helpx.adobe.com/after-effects/using/expression-language.html), \
+        which is not supported by lottie-ios (expressions are only supported by lottie-web). \
+        This animation may not play correctly.
 
-          \(unsupportedJavascriptExpression.replacingOccurrences(of: "\n", with: "\n  "))
+          \(unsupportedAfterEffectsExpression.replacingOccurrences(of: "\n", with: "\n  "))
 
         """)
     }

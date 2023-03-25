@@ -21,32 +21,32 @@ final class KeyframeGroup<T> {
 
   init(
     keyframes: ContiguousArray<Keyframe<T>>,
-    unsupportedJavascriptExpression: String? = nil)
+    unsupportedAfterEffectsExpression: String? = nil)
   {
     self.keyframes = keyframes
-    self.unsupportedJavascriptExpression = unsupportedJavascriptExpression
+    self.unsupportedAfterEffectsExpression = unsupportedAfterEffectsExpression
   }
 
   init(
     _ value: T,
-    unsupportedJavascriptExpression: String? = nil)
+    unsupportedAfterEffectsExpression: String? = nil)
   {
     keyframes = [Keyframe(value)]
-    self.unsupportedJavascriptExpression = unsupportedJavascriptExpression
+    self.unsupportedAfterEffectsExpression = unsupportedAfterEffectsExpression
   }
 
   // MARK: Internal
 
   enum KeyframeWrapperKey: String, CodingKey {
     case keyframeData = "k"
-    case unsupportedJavascriptExpression = "x"
+    case unsupportedAfterEffectsExpression = "x"
   }
 
   let keyframes: ContiguousArray<Keyframe<T>>
 
-  /// lottie-ios doesn't support javascript expressions,
-  /// but we parse them so we can log diagnostics.
-  let unsupportedJavascriptExpression: String?
+  /// lottie-ios doesn't support After Effects expressions, but we parse them so we can log diagnostics.
+  /// More info: https://helpx.adobe.com/after-effects/using/expression-basics.html
+  let unsupportedAfterEffectsExpression: String?
 
 }
 
@@ -55,13 +55,13 @@ final class KeyframeGroup<T> {
 extension KeyframeGroup: Decodable where T: Decodable {
   convenience init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: KeyframeWrapperKey.self)
-    let unsupportedJavascriptExpression = try? container.decode(String.self, forKey: .unsupportedJavascriptExpression)
+    let unsupportedAfterEffectsExpression = try? container.decode(String.self, forKey: .unsupportedAfterEffectsExpression)
 
     if let keyframeData: T = try? container.decode(T.self, forKey: .keyframeData) {
       /// Try to decode raw value; No keyframe data.
       self.init(
         keyframes: [Keyframe<T>(keyframeData)],
-        unsupportedJavascriptExpression: unsupportedJavascriptExpression)
+        unsupportedAfterEffectsExpression: unsupportedAfterEffectsExpression)
     } else {
       // Decode and array of keyframes.
       //
@@ -107,7 +107,7 @@ extension KeyframeGroup: Decodable where T: Decodable {
       }
       self.init(
         keyframes: keyframes,
-        unsupportedJavascriptExpression: unsupportedJavascriptExpression)
+        unsupportedAfterEffectsExpression: unsupportedAfterEffectsExpression)
     }
   }
 }
@@ -147,7 +147,7 @@ extension KeyframeGroup: Encodable where T: Encodable {
 extension KeyframeGroup: DictionaryInitializable where T: AnyInitializable {
   convenience init(dictionary: [String: Any]) throws {
     var keyframes = ContiguousArray<Keyframe<T>>()
-    let unsupportedJavascriptExpression = dictionary[KeyframeWrapperKey.unsupportedJavascriptExpression.rawValue] as? String
+    let unsupportedAfterEffectsExpression = dictionary[KeyframeWrapperKey.unsupportedAfterEffectsExpression.rawValue] as? String
     if
       let rawValue = dictionary[KeyframeWrapperKey.keyframeData.rawValue],
       let value = try? T(value: rawValue)
@@ -183,7 +183,7 @@ extension KeyframeGroup: DictionaryInitializable where T: AnyInitializable {
 
     self.init(
       keyframes: keyframes,
-      unsupportedJavascriptExpression: unsupportedJavascriptExpression)
+      unsupportedAfterEffectsExpression: unsupportedAfterEffectsExpression)
   }
 }
 
@@ -224,7 +224,7 @@ extension KeyframeGroup {
       keyframes: ContiguousArray(try keyframes.map { keyframe in
         keyframe.withValue(try transformation(keyframe.value))
       }),
-      unsupportedJavascriptExpression: unsupportedJavascriptExpression)
+      unsupportedAfterEffectsExpression: unsupportedAfterEffectsExpression)
   }
 }
 
