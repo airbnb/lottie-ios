@@ -20,7 +20,7 @@ extension CAShapeLayer {
 
     try addAnimation(
       for: .path,
-      keyframes: combinedKeyframes.keyframes,
+      keyframes: combinedKeyframes,
       value: { pathKeyframe in
         var path = pathKeyframe.path
         if let cornerRadius = pathKeyframe.cornerRadius {
