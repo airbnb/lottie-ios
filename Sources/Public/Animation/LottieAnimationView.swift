@@ -709,25 +709,15 @@ open class LottieAnimationView: LottieAnimationViewBase {
   public func getOriginalValue(for keypath: AnimationKeypath, atFrame: AnimationFrameTime?) -> Any? {
     animationLayer?.getOriginalValue(for: keypath, atFrame: atFrame)
   }
-        
-  /// All child keypaths.
-  public var allAnimationKeypaths: [String] {
-    var printedMessages = [String]()
-
-    let logger = LottieLogger(info: { message in
-      printedMessages.append(message())
-    })
-      
-    //temp: just to see if this works, logger should not be changed, but a copy of it
-    self.logger = logger
-    self.logHierarchyKeypaths()
-
-    return Array(printedMessages[1...])
-  }
 
   /// Logs all child keypaths.
   public func logHierarchyKeypaths() {
     animationLayer?.logHierarchyKeypaths()
+  }
+
+  /// All child keypaths.
+  public var allAnimationKeypaths: [String] {
+    return animationLayer?.allAnimationKeypaths() ?? []
   }
 
   /// Searches for the nearest child layer to the first Keypath and adds the subview

@@ -455,6 +455,18 @@ extension CoreAnimationLayer: RootAnimationLayer {
     rebuildCurrentAnimation(with: configuration)
     displayIfNeeded()
   }
+    
+  func allAnimationKeypaths() -> [String] {
+    var printedMessages = [String]()
+    let logger = LottieLogger(info: { message in
+      printedMessages.append(message())
+    })
+    let existingLogger = self.logger
+    self.logger = logger
+    self.logHierarchyKeypaths()
+    self.logger = existingLogger
+    return Array(printedMessages[1...])
+  }
 
   func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
     valueProviderStore.setValueProvider(valueProvider, keypath: keypath)

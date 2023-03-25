@@ -203,6 +203,12 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     animationLayers.forEach { $0.logKeypaths(for: nil, logger: self.logger) }
   }
 
+  func allAnimationKeypaths() -> [String] {
+    var mainList: [String] = []
+    animationLayers.forEach { mainList.append(contentsOf: $0.getKeypaths(for: nil, logger: self.logger)) }
+    return mainList
+  }
+   
   func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
     for layer in animationLayers {
       if let foundProperties = layer.nodeProperties(for: keypath) {

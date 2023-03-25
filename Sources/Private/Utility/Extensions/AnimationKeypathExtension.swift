@@ -115,6 +115,26 @@ extension KeypathSearchable {
     return nil
   }
 
+  func getKeypaths(for keyPath: AnimationKeypath?, logger: LottieLogger) -> [String] {
+    var paths: [String] = []
+    let newKeypath: AnimationKeypath
+    if let previousKeypath = keyPath {
+      newKeypath = previousKeypath.appendingKey(keypathName)
+    } else {
+      newKeypath = AnimationKeypath(keys: [keypathName])
+    }
+    paths.append(newKeypath.fullPath)
+        
+    for key in keypathProperties.keys {
+      paths.append(newKeypath.appendingKey(key).fullPath)
+    }
+    for child in childKeypaths {
+      let c = child.getKeypaths(for: newKeypath, logger: logger)
+      paths.append(contentsOf: c)
+    }
+    return paths
+  }
+    
   func logKeypaths(for keyPath: AnimationKeypath?, logger: LottieLogger) {
     let newKeypath: AnimationKeypath
     if let previousKeypath = keyPath {
