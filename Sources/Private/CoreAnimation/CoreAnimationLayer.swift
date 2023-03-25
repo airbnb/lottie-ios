@@ -448,12 +448,12 @@ extension CoreAnimationLayer: RootAnimationLayer {
   }
 
   func logHierarchyKeypaths() {
-    for keypath in allAnimationKeypaths() {
+    for keypath in allHierarchyKeypaths() {
       logger.info(keypath)
     }
   }
 
-  func allAnimationKeypaths() -> [String] {
+  func allHierarchyKeypaths() -> [String] {
     guard var configuration = pendingAnimationConfiguration?.animationConfiguration ?? currentAnimationConfiguration else {
       logger.info("Cannot log hierarchy keypaths until animation has been set up at least once")
       return []

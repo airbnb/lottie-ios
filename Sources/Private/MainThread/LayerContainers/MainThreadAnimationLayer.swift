@@ -201,12 +201,12 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
   func logHierarchyKeypaths() {
     logger.info("Lottie: Logging Animation Keypaths")
 
-    for keypath in allAnimationKeypaths() {
+    for keypath in allHierarchyKeypaths() {
       logger.info(keypath)
     }
   }
 
-  func allAnimationKeypaths() -> [String] {
+  func allHierarchyKeypaths() -> [String] {
     animationLayers.flatMap { $0.allKeypaths() }
   }
 
