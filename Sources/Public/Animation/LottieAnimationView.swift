@@ -1473,7 +1473,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   static private let animationName = "Lottie"
 
-  private var logger: LottieLogger
+  private let logger: LottieLogger
 
   /// The `LottieBackgroundBehavior` that was specified manually by setting `self.backgroundBehavior`
   private var _backgroundBehavior: LottieBackgroundBehavior?
