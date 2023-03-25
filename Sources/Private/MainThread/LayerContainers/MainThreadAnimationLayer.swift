@@ -200,7 +200,14 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
 
   func logHierarchyKeypaths() {
     logger.info("Lottie: Logging Animation Keypaths")
-    animationLayers.forEach { $0.logKeypaths(for: nil, logger: self.logger) }
+
+    for keypath in allHierarchyKeypaths() {
+      logger.info(keypath)
+    }
+  }
+
+  func allHierarchyKeypaths() -> [String] {
+    animationLayers.flatMap { $0.allKeypaths() }
   }
 
   func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {

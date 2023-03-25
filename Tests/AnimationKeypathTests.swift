@@ -116,17 +116,10 @@ final class AnimationKeypathTests: XCTestCase {
   }
 
   private func hierarchyKeypaths(animationName: String, configuration: LottieConfiguration) async -> [String] {
-    var printedMessages = [String]()
-    let logger = LottieLogger(info: { message in
-      printedMessages.append(message())
-    })
-
     let animationView = await SnapshotConfiguration.makeAnimationView(
       for: animationName,
-      configuration: configuration,
-      logger: logger)
-    animationView?.logHierarchyKeypaths()
-    return Array(printedMessages[1...])
+      configuration: configuration)
+    return animationView?.allHierarchyKeypaths() ?? []
   }
 
 }

@@ -711,8 +711,15 @@ open class LottieAnimationView: LottieAnimationViewBase {
   }
 
   /// Logs all child keypaths.
+  /// Logs the result of `allHierarchyKeypaths()` to the `LottieLogger`.
   public func logHierarchyKeypaths() {
     animationLayer?.logHierarchyKeypaths()
+  }
+
+  /// Computes and returns a list of all child keypaths in the current animation.
+  /// The returned list is the same as the log output of `logHierarchyKeypaths()`
+  public func allHierarchyKeypaths() -> [String] {
+    animationLayer?.allHierarchyKeypaths() ?? []
   }
 
   /// Searches for the nearest child layer to the first Keypath and adds the subview

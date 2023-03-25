@@ -81,7 +81,13 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   struct AnimationConfiguration: Equatable {
     var animationContext: AnimationContext
     var timingConfiguration: CAMediaTimingConfiguration
-    var logHierarchyKeypaths = false
+    var recordHierarchyKeypath: ((String) -> Void)?
+
+    static func ==(_ lhs: AnimationConfiguration, _ rhs: AnimationConfiguration) -> Bool {
+      lhs.animationContext == rhs.animationContext
+        && lhs.timingConfiguration == rhs.timingConfiguration
+        && ((lhs.recordHierarchyKeypath == nil) == (rhs.recordHierarchyKeypath == nil))
+    }
   }
 
   /// A closure that is called after this layer sets up its animation.
@@ -249,7 +255,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
       logger: logger,
       currentKeypath: AnimationKeypath(keys: []),
       textProvider: textProvider,
-      logHierarchyKeypaths: configuration.logHierarchyKeypaths)
+      recordHierarchyKeypath: configuration.recordHierarchyKeypath)
 
     // Perform a layout pass if necessary so all of the sublayers
     // have the most up-to-date sizing information
@@ -442,18 +448,28 @@ extension CoreAnimationLayer: RootAnimationLayer {
   }
 
   func logHierarchyKeypaths() {
+    for keypath in allHierarchyKeypaths() {
+      logger.info(keypath)
+    }
+  }
+
+  func allHierarchyKeypaths() -> [String] {
     guard var configuration = pendingAnimationConfiguration?.animationConfiguration ?? currentAnimationConfiguration else {
       logger.info("Cannot log hierarchy keypaths until animation has been set up at least once")
-      return
+      return []
     }
 
     logger.info("Lottie: Rebuilding animation with hierarchy keypath logging enabled")
 
-    // Rebuild the animation with `logHierarchyKeypaths = true` so the `ValueProviderStore` will log any keypath lookups that occur.
-    // This allows the consumer to know what keypaths can be customized in their animation.
-    configuration.logHierarchyKeypaths = true
+    var allAnimationKeypaths = [String]()
+    configuration.recordHierarchyKeypath = { keypath in
+      allAnimationKeypaths.append(keypath)
+    }
+
     rebuildCurrentAnimation(with: configuration)
     displayIfNeeded()
+
+    return allAnimationKeypaths
   }
 
   func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
