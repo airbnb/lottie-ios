@@ -42,9 +42,7 @@ final class ValueProviderStore {
     context: LayerAnimationContext)
     throws -> KeyframeGroup<Value>?
   {
-    if context.logHierarchyKeypaths {
-      context.logger.info(keypath.fullPath)
-    }
+    context.recordHierarchyKeypath?(keypath.fullPath)
 
     guard let anyValueProvider = valueProvider(for: keypath) else {
       return nil

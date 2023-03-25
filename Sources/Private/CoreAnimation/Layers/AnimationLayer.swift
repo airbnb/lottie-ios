@@ -44,9 +44,9 @@ struct LayerAnimationContext {
   /// The `AnimationTextProvider`
   var textProvider: AnimationTextProvider
 
-  /// Whether or not to log `AnimationKeypath`s for all of the animation's layers
-  ///  - Used for `CoreAnimationLayer.logHierarchyKeypaths()`
-  var logHierarchyKeypaths: Bool
+  /// Records the given animation keypath so it can be logged or collected into a list
+  ///  - Used for `CoreAnimationLayer.logHierarchyKeypaths()` and `allHierarchyKeypaths()`
+  var recordHierarchyKeypath: ((String) -> Void)?
 
   /// A closure that remaps the given frame in the child layer's local time to a frame
   /// in the animation's overall global time

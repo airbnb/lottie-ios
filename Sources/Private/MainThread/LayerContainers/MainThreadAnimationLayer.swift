@@ -197,18 +197,19 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
   func forceDisplayUpdate() {
     animationLayers.forEach { $0.displayWithFrame(frame: currentFrame, forceUpdates: true) }
   }
-    
+
   func logHierarchyKeypaths() {
     logger.info("Lottie: Logging Animation Keypaths")
-    animationLayers.forEach { $0.logKeypaths(for: nil, logger: self.logger) }
+
+    for keypath in allAnimationKeypaths() {
+      logger.info(keypath)
+    }
   }
 
   func allAnimationKeypaths() -> [String] {
-    var mainList: [String] = []
-    animationLayers.forEach { mainList.append(contentsOf: $0.getKeypaths(for: nil, logger: self.logger)) }
-    return mainList
+    animationLayers.flatMap { $0.allKeypaths() }
   }
-   
+
   func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
     for layer in animationLayers {
       if let foundProperties = layer.nodeProperties(for: keypath) {
