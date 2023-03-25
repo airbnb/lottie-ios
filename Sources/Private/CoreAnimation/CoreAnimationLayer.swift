@@ -190,7 +190,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   private let animation: LottieAnimation
   private let valueProviderStore: ValueProviderStore
   private let compatibilityTracker: CompatibilityTracker
-  private let logger: LottieLogger
+  private var logger: LottieLogger
 
   /// The current playback state of the animation that is displayed in this layer
   private var currentPlaybackState: PlaybackState? {
