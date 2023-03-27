@@ -57,7 +57,7 @@ extension CAShapeLayer {
 
     try addAnimation(
       for: .fillColor,
-      keyframes: fill.color.keyframes,
+      keyframes: fill.color,
       value: \.cgColorValue,
       context: context)
 
@@ -71,7 +71,7 @@ extension CAShapeLayer {
 
     try addAnimation(
       for: .strokeStart,
-      keyframes: strokeStartKeyframes.keyframes,
+      keyframes: strokeStartKeyframes,
       value: { strokeStart in
         // Lottie animation files express stoke trims as a numerical percentage value
         // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
@@ -81,7 +81,7 @@ extension CAShapeLayer {
 
     try addAnimation(
       for: .strokeEnd,
-      keyframes: strokeEndKeyframes.keyframes,
+      keyframes: strokeEndKeyframes,
       value: { strokeEnd in
         // Lottie animation files express stoke trims as a numerical percentage value
         // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values

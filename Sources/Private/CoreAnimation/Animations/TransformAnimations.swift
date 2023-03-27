@@ -93,15 +93,15 @@ extension CALayer {
     context: LayerAnimationContext)
     throws
   {
-    if let positionKeyframes = transformModel._position?.keyframes {
+    if let positionKeyframes = transformModel._position {
       try addAnimation(
         for: .position,
         keyframes: positionKeyframes,
         value: \.pointValue,
         context: context)
     } else if
-      let xKeyframes = transformModel._positionX?.keyframes,
-      let yKeyframes = transformModel._positionY?.keyframes
+      let xKeyframes = transformModel._positionX,
+      let yKeyframes = transformModel._positionY
     {
       try addAnimation(
         for: .positionX,
@@ -129,7 +129,7 @@ extension CALayer {
   {
     try addAnimation(
       for: .anchorPoint,
-      keyframes: transformModel.anchorPoint.keyframes,
+      keyframes: transformModel.anchorPoint,
       value: { absoluteAnchorPoint in
         guard bounds.width > 0, bounds.height > 0 else {
           context.logger.assertionFailure("Size must be non-zero before an animation can be played")
@@ -154,7 +154,7 @@ extension CALayer {
   {
     try addAnimation(
       for: .scaleX,
-      keyframes: transformModel.scale.keyframes,
+      keyframes: transformModel.scale,
       value: { scale in
         // Lottie animation files express scale as a numerical percentage value
         // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
@@ -207,7 +207,7 @@ extension CALayer {
 
       try addAnimation(
         for: .rotationY,
-        keyframes: transformModel.scale.keyframes,
+        keyframes: transformModel.scale,
         value: { scale in
           if scale.x < 0 {
             return .pi
@@ -220,7 +220,7 @@ extension CALayer {
 
     try addAnimation(
       for: .scaleY,
-      keyframes: transformModel.scale.keyframes,
+      keyframes: transformModel.scale,
       value: { scale in
         // Lottie animation files express scale as a numerical percentage value
         // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
@@ -263,7 +263,7 @@ extension CALayer {
 
     try addAnimation(
       for: .rotationX,
-      keyframes: transformModel.rotationX.keyframes,
+      keyframes: transformModel.rotationX,
       value: { rotationDegrees in
         rotationDegrees.cgFloatValue * .pi / 180
       },
@@ -271,7 +271,7 @@ extension CALayer {
 
     try addAnimation(
       for: .rotationY,
-      keyframes: transformModel.rotationY.keyframes,
+      keyframes: transformModel.rotationY,
       value: { rotationDegrees in
         rotationDegrees.cgFloatValue * .pi / 180
       },
@@ -279,7 +279,7 @@ extension CALayer {
 
     try addAnimation(
       for: .rotationZ,
-      keyframes: transformModel.rotationZ.keyframes,
+      keyframes: transformModel.rotationZ,
       value: { rotationDegrees in
         // Lottie animation files express rotation in degrees
         // (e.g. 90º, 180º, 360º) so we covert to radians to get the
@@ -321,7 +321,7 @@ extension CALayer {
 
     try addAnimation(
       for: .transform,
-      keyframes: combinedTransformKeyframes.keyframes,
+      keyframes: combinedTransformKeyframes,
       value: { $0 },
       context: context)
   }

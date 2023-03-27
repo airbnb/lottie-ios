@@ -12,7 +12,7 @@ extension CALayer {
   @nonobjc
   func addAnimation<KeyframeValue, ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
-    keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
+    keyframes: KeyframeGroup<KeyframeValue>,
     value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
     context: LayerAnimationContext)
     throws
@@ -41,12 +41,26 @@ extension CALayer {
   @nonobjc
   private func defaultAnimation<KeyframeValue, ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
-    keyframes: ContiguousArray<Keyframe<KeyframeValue>>,
+    keyframes keyframeGroup: KeyframeGroup<KeyframeValue>,
     value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
     context: LayerAnimationContext)
     throws -> CAAnimation?
   {
+    let keyframes = keyframeGroup.keyframes
     guard !keyframes.isEmpty else { return nil }
+
+    // Check if this set of keyframes uses After Effects expressions, which aren't supported.
+    if let unsupportedAfterEffectsExpression = keyframeGroup.unsupportedAfterEffectsExpression {
+      context.logger.info("""
+        `\(property.caLayerKeypath)` animation for "\(context.currentKeypath.fullPath)" \
+        includes an After Effects expression (https://helpx.adobe.com/after-effects/using/expression-language.html), \
+        which is not supported by lottie-ios (expressions are only supported by lottie-web). \
+        This animation may not play correctly.
+
+          \(unsupportedAfterEffectsExpression.replacingOccurrences(of: "\n", with: "\n  "))
+
+        """)
+    }
 
     // If there is exactly one keyframe value, we can improve performance
     // by applying that value directly to the layer instead of creating
