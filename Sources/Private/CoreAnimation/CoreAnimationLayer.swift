@@ -19,7 +19,6 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     imageProvider: AnimationImageProvider,
     textProvider: AnimationTextProvider,
     fontProvider: AnimationFontProvider,
-    maskAnimationToBounds: Bool,
     compatibilityTrackerMode: CompatibilityTracker.Mode,
     logger: LottieLogger)
     throws
@@ -32,7 +31,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     compatibilityTracker = CompatibilityTracker(mode: compatibilityTrackerMode, logger: logger)
     valueProviderStore = ValueProviderStore(logger: logger)
     super.init()
-    masksToBounds = maskAnimationToBounds
+    masksToBounds = true
     setup()
     try setupChildLayers()
   }

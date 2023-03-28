@@ -1126,6 +1126,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
     }
 
     animationLayer.renderScale = screenScale
+    animationLayer.masksToBounds = maskAnimationToBounds
 
     viewLayer?.addSublayer(animationLayer)
     self.animationLayer = animationLayer
@@ -1141,7 +1142,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
       imageProvider: imageProvider.cachedImageProvider,
       textProvider: textProvider,
       fontProvider: fontProvider,
-      maskAnimationToBounds: maskAnimationToBounds,
       logger: logger)
   }
 
@@ -1152,7 +1152,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
         imageProvider: imageProvider.cachedImageProvider,
         textProvider: textProvider,
         fontProvider: fontProvider,
-        maskAnimationToBounds: maskAnimationToBounds,
         compatibilityTrackerMode: .track,
         logger: logger)
 
@@ -1188,7 +1187,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
         imageProvider: imageProvider.cachedImageProvider,
         textProvider: textProvider,
         fontProvider: fontProvider,
-        maskAnimationToBounds: maskAnimationToBounds,
         compatibilityTrackerMode: .abort,
         logger: logger)
 

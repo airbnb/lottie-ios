@@ -23,7 +23,6 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     imageProvider: AnimationImageProvider,
     textProvider: AnimationTextProvider,
     fontProvider: AnimationFontProvider,
-    maskAnimationToBounds: Bool,
     logger: LottieLogger)
   {
     layerImageProvider = LayerImageProvider(imageProvider: imageProvider, assets: animation.assetLibrary?.imageAssets)
@@ -32,7 +31,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     animationLayers = []
     self.logger = logger
     super.init()
-    masksToBounds = maskAnimationToBounds
+    masksToBounds = true
     bounds = animation.bounds
     let layers = animation.layers.initializeCompositionLayers(
       assetLibrary: animation.assetLibrary,
