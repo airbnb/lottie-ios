@@ -455,7 +455,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   }
 
   /// Whether or not the animation is masked to the bounds. Defaults to true.
-  public var maskAnimationToBounds: Bool = true {
+  public var maskAnimationToBounds = true {
     didSet {
       animationLayer?.masksToBounds = maskAnimationToBounds
     }
