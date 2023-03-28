@@ -454,6 +454,13 @@ open class LottieAnimationView: LottieAnimationViewBase {
     }
   }
 
+  /// Whether or not the animation is masked to the bounds. Defaults to true.
+  public var maskAnimationToBounds = true {
+    didSet {
+      animationLayer?.masksToBounds = maskAnimationToBounds
+    }
+  }
+
   /// Returns `true` if the animation is currently playing.
   public var isAnimationPlaying: Bool {
     guard let animationLayer = animationLayer else {
@@ -1134,6 +1141,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
       imageProvider: imageProvider.cachedImageProvider,
       textProvider: textProvider,
       fontProvider: fontProvider,
+      maskAnimationToBounds: maskAnimationToBounds,
       logger: logger)
   }
 
@@ -1144,6 +1152,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
         imageProvider: imageProvider.cachedImageProvider,
         textProvider: textProvider,
         fontProvider: fontProvider,
+        maskAnimationToBounds: maskAnimationToBounds,
         compatibilityTrackerMode: .track,
         logger: logger)
 
@@ -1179,6 +1188,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
         imageProvider: imageProvider.cachedImageProvider,
         textProvider: textProvider,
         fontProvider: fontProvider,
+        maskAnimationToBounds: maskAnimationToBounds,
         compatibilityTrackerMode: .abort,
         logger: logger)
 
