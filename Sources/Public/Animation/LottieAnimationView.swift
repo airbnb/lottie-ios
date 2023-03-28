@@ -455,11 +455,11 @@ open class LottieAnimationView: LottieAnimationViewBase {
   }
 
   /// Sets if sublayers of the animation are clipped to bounds
-    public var maskAnimationToBounds: Bool = true {
-        didSet {
-            animationLayer?.masksToBounds = maskAnimationToBounds
-        }
+  public var maskAnimationToBounds: Bool = true {
+    didSet {
+      animationLayer?.masksToBounds = maskAnimationToBounds
     }
+  }
 
   /// Returns `true` if the animation is currently playing.
   public var isAnimationPlaying: Bool {
