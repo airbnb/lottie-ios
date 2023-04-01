@@ -80,6 +80,7 @@ extension Data {
   /// - parameter dataString: The data string to parse.
   /// - parameter options: Options for the string parsing. Default value is `[]`.
   internal init?(dataString: String, options: DataURLReadOptions = []) {
+      let trimmedDataString = dataString.trimmingCharacters(in: .whitespacesAndNewlines)
     guard
       dataString.hasPrefix("data:"),
       let url = URL(string: dataString)
