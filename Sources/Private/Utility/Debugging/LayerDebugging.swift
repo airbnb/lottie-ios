@@ -65,11 +65,11 @@ extension CALayer {
 
 // MARK: - CompositionLayer + CustomLayerDebugging
 
-extension CompositionLayer: CustomLayerDebugging {
-  func layerForDebugging() -> CALayer {
-    contentsLayer
-  }
-}
+//extension CompositionLayer: CustomLayerDebugging {
+//  func layerForDebugging() -> CALayer {
+//    contentsLayer
+//  }
+//}
 
 extension CALayer {
 
@@ -118,35 +118,35 @@ extension CALayer {
 
 // MARK: - MainThreadAnimationLayer + LayerDebugging
 
-extension MainThreadAnimationLayer: LayerDebugging {
-  var debugStyle: LayerDebugStyle {
-    LayerDebugStyle.topLayerStyle()
-  }
-}
+//extension MainThreadAnimationLayer: LayerDebugging {
+//  var debugStyle: LayerDebugStyle {
+//    LayerDebugStyle.topLayerStyle()
+//  }
+//}
 
 // MARK: - NullCompositionLayer + LayerDebugging
 
-extension NullCompositionLayer: LayerDebugging {
-  var debugStyle: LayerDebugStyle {
-    LayerDebugStyle.nullLayerStyle()
-  }
-}
+//extension NullCompositionLayer: LayerDebugging {
+//  var debugStyle: LayerDebugStyle {
+//    LayerDebugStyle.nullLayerStyle()
+//  }
+//}
 
 // MARK: - ShapeCompositionLayer + LayerDebugging
 
-extension ShapeCompositionLayer: LayerDebugging {
-  var debugStyle: LayerDebugStyle {
-    LayerDebugStyle.shapeLayerStyle()
-  }
-}
+//extension ShapeCompositionLayer: LayerDebugging {
+//  var debugStyle: LayerDebugStyle {
+//    LayerDebugStyle.shapeLayerStyle()
+//  }
+//}
 
 // MARK: - ShapeRenderLayer + LayerDebugging
 
-extension ShapeRenderLayer: LayerDebugging {
-  var debugStyle: LayerDebugStyle {
-    LayerDebugStyle.shapeRenderLayerStyle()
-  }
-}
+//extension ShapeRenderLayer: LayerDebugging {
+//  var debugStyle: LayerDebugStyle {
+//    LayerDebugStyle.shapeRenderLayerStyle()
+//  }
+//}
 
 extension LayerDebugStyle {
   static func defaultStyle() -> LayerDebugStyle {

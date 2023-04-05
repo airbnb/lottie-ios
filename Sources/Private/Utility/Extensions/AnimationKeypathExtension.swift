@@ -7,7 +7,7 @@
 
 import Foundation
 import QuartzCore
-
+/*
 extension KeypathSearchable {
 
   func animatorNodes(for keyPath: AnimationKeypath) -> [AnimatorNode]? {
@@ -139,7 +139,7 @@ extension KeypathSearchable {
     return allKeypaths
   }
 }
-
+*/
 extension AnimationKeypath {
   var currentKey: String? {
     keys.first
