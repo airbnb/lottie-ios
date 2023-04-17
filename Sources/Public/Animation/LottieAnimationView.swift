@@ -1103,6 +1103,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
     if let oldAnimation = animationLayer {
       oldAnimation.removeFromSuperlayer()
+      animationLayer = nil
     }
 
     invalidateIntrinsicContentSize()
