@@ -1340,7 +1340,7 @@
 		2EAF59F327A0798700E00531 /* Private */ = {
 			isa = PBXGroup;
 			children = (
-				EA638B6829DE2BAF00BE87D3 /* MockMainThread */,
+				EA638B6829DE2BAF00BE87D3 /* SharedComponents */,
 				2E9C95962822F43100677516 /* CoreAnimation */,
 				2E9C95232822F43000677516 /* Model */,
 				2E9C95BB2822F43100677516 /* Utility */,
@@ -1407,13 +1407,13 @@
 			path = ZipFoundation;
 			sourceTree = "<group>";
 		};
-		EA638B6829DE2BAF00BE87D3 /* MockMainThread */ = {
+		EA638B6829DE2BAF00BE87D3 /* SharedComponents */ = {
 			isa = PBXGroup;
 			children = (
 				EA638B7F29DE2EDA00BE87D3 /* LayerContainers */,
 				EA638B6929DE2BD500BE87D3 /* NodeRenderSystem */,
 			);
-			path = MockMainThread;
+			path = SharedComponents;
 			sourceTree = "<group>";
 		};
 		EA638B6929DE2BD500BE87D3 /* NodeRenderSystem */ = {
