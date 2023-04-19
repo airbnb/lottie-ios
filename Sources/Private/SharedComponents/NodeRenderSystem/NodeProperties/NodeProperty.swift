@@ -53,4 +53,3 @@ class NodeProperty<T>: AnyNodeProperty {
 
   fileprivate var typedContainer: ValueContainer<T>
 }
-
