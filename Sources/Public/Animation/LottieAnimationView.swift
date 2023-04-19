@@ -1135,8 +1135,8 @@ open class LottieAnimationView: LottieAnimationViewBase {
     currentFrame = CGFloat(animation.startFrame)
   }
 
-  fileprivate func makeMainThreadAnimationLayer(for animation: LottieAnimation) -> MockMainThreadAnimationLayer {
-    MockMainThreadAnimationLayer(
+  fileprivate func makeMainThreadAnimationLayer(for animation: LottieAnimation) -> MainThreadAnimationLayer {
+    MainThreadAnimationLayer(
       animation: animation,
       imageProvider: imageProvider.cachedImageProvider,
       textProvider: textProvider,
