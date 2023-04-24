@@ -373,9 +373,17 @@ extension Array where Element == ShapeItemLayer.Item {
 
     for item in self {
       // `renderGroups` is non-empty, so is guaranteed to have a valid end index
-      let lastIndex = renderGroups.indices.last!
+      var lastIndex: Int {
+        renderGroups.indices.last!
+      }
 
       if item.item.drawsCGPath {
+        // Trims should only affect paths that precede them in the group,
+        // so if the existing group already has a trim we create a new group for this path item.
+        if renderGroups[lastIndex].otherItems.contains(where: { $0.item is Trim }) {
+          renderGroups.append(ShapeRenderGroup())
+        }
+
         renderGroups[lastIndex].pathItems.append(item)
       }
 
