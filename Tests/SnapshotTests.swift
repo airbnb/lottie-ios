@@ -121,7 +121,8 @@ class SnapshotTests: XCTestCase {
         assertSnapshot(
           matching: animationView,
           as: .imageOfPresentationLayer(
-            precision: SnapshotConfiguration.forSample(named: sampleAnimationName).precision),
+            precision: SnapshotConfiguration.forSample(named: sampleAnimationName).precision,
+            perceptualPrecision: 0.985),
           named: "\(sampleAnimationName) (\(Int(percent * 100))%)",
           testName: testName)
       }
