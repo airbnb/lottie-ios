@@ -96,28 +96,28 @@ extension LayerProperty {
     .init(
       caLayerKeypath: "transform.scale",
       defaultValue: 1,
-      customizableProperty: .scale)
+      customizableProperty: nil /* currently unsupported */ )
   }
 
   static var scaleX: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.scale.x",
       defaultValue: 1,
-      customizableProperty: .scale)
+      customizableProperty: .scaleX)
   }
 
   static var scaleY: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.scale.y",
       defaultValue: 1,
-      customizableProperty: .scale)
+      customizableProperty: .scaleY)
   }
 
   static var rotationX: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.rotation.x",
       defaultValue: 0,
-      customizableProperty: .rotation)
+      customizableProperty: nil /* currently unsupported */ )
   }
 
   static var rotationY: LayerProperty<CGFloat> {
@@ -131,7 +131,7 @@ extension LayerProperty {
     .init(
       caLayerKeypath: "transform.rotation.z",
       defaultValue: 0,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: .rotation)
   }
 
   static var anchorPoint: LayerProperty<CGPoint> {
@@ -264,19 +264,53 @@ extension CustomizableProperty {
   static var opacity: CustomizableProperty<CGFloat> {
     .init(
       name: [.opacity],
-      conversion: { ($0 as? LottieVector1D)?.cgFloatValue })
+      conversion: { typeErasedValue in
+        guard let vector = typeErasedValue as? LottieVector1D else { return nil }
+
+        // Lottie animation files express opacity as a numerical percentage value
+        // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
+        // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
+        return vector.cgFloatValue / 100
+      })
   }
 
-  static var scale: CustomizableProperty<CGFloat> {
+  static var scaleX: CustomizableProperty<CGFloat> {
     .init(
       name: [.scale],
-      conversion: { ($0 as? LottieVector1D)?.cgFloatValue })
+      conversion: { typeErasedValue in
+        guard let vector = typeErasedValue as? LottieVector3D else { return nil }
+
+        // Lottie animation files express scale as a numerical percentage value
+        // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
+        // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
+        return vector.pointValue.x / 100
+      })
+  }
+
+  static var scaleY: CustomizableProperty<CGFloat> {
+    .init(
+      name: [.scale],
+      conversion: { typeErasedValue in
+        guard let vector = typeErasedValue as? LottieVector3D else { return nil }
+
+        // Lottie animation files express scale as a numerical percentage value
+        // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
+        // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
+        return vector.pointValue.y / 100
+      })
   }
 
   static var rotation: CustomizableProperty<CGFloat> {
     .init(
       name: [.rotation],
-      conversion: { ($0 as? LottieVector1D)?.cgFloatValue })
+      conversion: { typeErasedValue in
+        guard let vector = typeErasedValue as? LottieVector1D else { return nil }
+
+        // Lottie animation files express rotation in degrees
+        // (e.g. 90º, 180º, 360º) so we covert to radians to get the
+        // values expected by Core Animation (e.g. π/2, π, 2π)
+        return vector.cgFloatValue * .pi / 180
+      })
   }
 
   static var position: CustomizableProperty<CGPoint> {
