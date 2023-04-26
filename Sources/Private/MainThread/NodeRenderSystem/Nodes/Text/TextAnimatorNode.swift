@@ -28,14 +28,14 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
 
     if let keyframeGroup = textAnimator.position {
       position = NodeProperty(provider: KeyframeInterpolator(keyframes: keyframeGroup.keyframes))
-      properties["Position"] = position
+      properties[PropertyName.position.rawValue] = position
     } else {
       position = nil
     }
 
     if let keyframeGroup = textAnimator.scale {
       scale = NodeProperty(provider: KeyframeInterpolator(keyframes: keyframeGroup.keyframes))
-      properties["Scale"] = scale
+      properties[PropertyName.scale.rawValue] = scale
     } else {
       scale = nil
     }
@@ -71,14 +71,14 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
     if let keyframeGroup = textAnimator.rotationZ {
       rotationZ = NodeProperty(provider: KeyframeInterpolator(keyframes: keyframeGroup.keyframes))
       properties["Rotation Z"] = rotationZ
-      properties["Rotation"] = rotationZ
+      properties[PropertyName.rotation.rawValue] = rotationZ
     } else {
       rotationZ = nil
     }
 
     if let keyframeGroup = textAnimator.opacity {
       opacity = NodeProperty(provider: KeyframeInterpolator(keyframes: keyframeGroup.keyframes))
-      properties["Opacity"] = opacity
+      properties[PropertyName.opacity.rawValue] = opacity
     } else {
       opacity = nil
     }

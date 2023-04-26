@@ -26,10 +26,15 @@ final class ValueProviderStore {
       because that would require calling the closure on the main thread once per frame.
       """)
 
-    // TODO: Support more value types
+    let supportedProperties = PropertyName.allCases.map { $0.rawValue }
+    let propertyBeingCustomized = keypath.keys.last ?? ""
+
     logger.assert(
-      keypath.keys.last == PropertyName.color.rawValue,
-      "The Core Animation rendering engine currently only supports customizing color values")
+      supportedProperties.contains(propertyBeingCustomized),
+      """
+      The Core Animation rendering engine currently doesn't support customizing "\(propertyBeingCustomized)" \
+      properties. Supported properties are: \(supportedProperties.joined(separator: ", ")).
+      """)
 
     valueProviders.append((keypath: keypath, valueProvider: valueProvider))
   }

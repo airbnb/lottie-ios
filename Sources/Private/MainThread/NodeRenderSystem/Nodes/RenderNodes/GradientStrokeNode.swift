@@ -44,7 +44,7 @@ final class GradientStrokeProperties: NodePropertyMap, KeypathSearchable {
       dashPhase = NodeProperty(provider: SingleValueProvider(LottieVector1D(0)))
     }
     keypathProperties = [
-      "Opacity" : opacity,
+      PropertyName.opacity.rawValue : opacity,
       "Start Point" : startPoint,
       "End Point" : endPoint,
       "Colors" : colors,
