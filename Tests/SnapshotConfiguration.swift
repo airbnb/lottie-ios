@@ -65,6 +65,19 @@ extension SnapshotConfiguration {
       ]),
     ]),
 
+    "Issues/issue_1837_opacity": .customValueProviders([
+      AnimationKeypath(keypath: "Dark Gray Solid 1.Dark Gray Solid 1.Opacity"): FloatValueProvider(0),
+    ]),
+
+    "Issues/issue_1837_scale_rotation": .customValueProviders([
+      AnimationKeypath(keypath: "H2.H2.Scale"): FloatValueProvider(2.0),
+      AnimationKeypath(keypath: "H2.H2.Rotation"): FloatValueProvider(.pi),
+    ]),
+
+    "Issues/issue_2042": .customValueProviders([
+      AnimationKeypath(keypath: "MASTER.Position"): PointValueProvider(CGPoint(x: 214, y: 120)),
+    ]),
+
     "Issues/issue_1664": .customValueProviders([
       AnimationKeypath(keypath: "**.base_color.**.Color"): ColorValueProvider(.black),
     ]),

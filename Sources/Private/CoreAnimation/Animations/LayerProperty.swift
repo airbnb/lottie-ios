@@ -60,8 +60,12 @@ struct CustomizableProperty<ValueRepresentation> {
 /// The name of a customizable property that can be used in an `AnimationKeypath`
 ///  - These values should be shared between the two rendering engines,
 ///    since they form the public API of the `AnimationKeypath` system.
-enum PropertyName: String {
+enum PropertyName: String, CaseIterable {
   case color = "Color"
+  case opacity = "Opacity"
+  case scale = "Scale"
+  case position = "Position"
+  case rotation = "Rotation"
 }
 
 // MARK: CALayer properties
@@ -71,7 +75,7 @@ extension LayerProperty {
     .init(
       caLayerKeypath: "transform.translation",
       defaultValue: CGPoint(x: 0, y: 0),
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: .position)
   }
 
   static var positionX: LayerProperty<CGFloat> {
@@ -92,28 +96,28 @@ extension LayerProperty {
     .init(
       caLayerKeypath: "transform.scale",
       defaultValue: 1,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: .scale)
   }
 
   static var scaleX: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.scale.x",
       defaultValue: 1,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: .scale)
   }
 
   static var scaleY: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.scale.y",
       defaultValue: 1,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: .scale)
   }
 
   static var rotationX: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.rotation.x",
       defaultValue: 0,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: .rotation)
   }
 
   static var rotationY: LayerProperty<CGFloat> {
@@ -143,7 +147,7 @@ extension LayerProperty {
     .init(
       caLayerKeypath: #keyPath(CALayer.opacity),
       defaultValue: 1,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: .opacity)
   }
 
   static var transform: LayerProperty<CATransform3D> {
@@ -255,5 +259,29 @@ extension CustomizableProperty {
 
         return .rgba(CGFloat(color.r), CGFloat(color.g), CGFloat(color.b), CGFloat(color.a))
       })
+  }
+
+  static var opacity: CustomizableProperty<CGFloat> {
+    .init(
+      name: [.opacity],
+      conversion: { ($0 as? LottieVector1D)?.cgFloatValue })
+  }
+
+  static var scale: CustomizableProperty<CGFloat> {
+    .init(
+      name: [.scale],
+      conversion: { ($0 as? LottieVector1D)?.cgFloatValue })
+  }
+
+  static var rotation: CustomizableProperty<CGFloat> {
+    .init(
+      name: [.rotation],
+      conversion: { ($0 as? LottieVector1D)?.cgFloatValue })
+  }
+
+  static var position: CustomizableProperty<CGPoint> {
+    .init(
+      name: [.position],
+      conversion: { ($0 as? LottieVector3D)?.pointValue })
   }
 }
