@@ -221,7 +221,7 @@ extension Trim {
     let combinedKeyframes = Keyframes.combined(
       start,
       end,
-      makeCombinedResult: { startValue, endValue in
+      makeCombinedResult: { startValue, endValue -> (start: LottieVector1D, end: LottieVector1D) in
         if startValue.cgFloatValue < endValue.cgFloatValue {
           return (start: startValue, end: endValue)
         } else {
