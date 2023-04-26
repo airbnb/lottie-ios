@@ -24,6 +24,7 @@ class SnapshotTests: XCTestCase {
 
   /// Snapshots sample animation files using the Core Animation rendering engine
   func testCoreAnimationRenderingEngine() async throws {
+    isRecording = true
     try await compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .coreAnimation))
   }
 

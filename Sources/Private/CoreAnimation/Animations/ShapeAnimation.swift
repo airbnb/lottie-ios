@@ -124,8 +124,9 @@ extension Trim {
       strokeStart = start
       strokeEnd = end
     } else {
-      // Otherwise if the start / end values ever places we have to
-      // interpolate at each frame manually
+      // Otherwise if the start / end values ever swap places we have to
+      // fix the order on a per-keyframe basis, which may require manually
+      // interpolating the keyframe values at each frame.
       (strokeStart, strokeEnd) = interpolatedAtEachFrame()
     }
 
@@ -179,56 +180,59 @@ extension Trim {
   /// Checks whether or not the value for `trim.start` is greater
   /// than the value for every `trim.end` at every keyframe.
   private func startValueIsAlwaysGreaterThanEndValue() -> Bool {
-      startAndEndValuesAllSatisfy { startValue, endValue in
-          endValue < startValue
-      }
+    startAndEndValuesAllSatisfy { startValue, endValue in
+      endValue < startValue
+    }
   }
 
-    private func startValueIsLessThanEndValue() -> Bool {
-        startAndEndValuesAllSatisfy { startValue, endValue in
-            startValue < endValue
+  /// Checks whether or not the value for `trim.start` is less than
+  /// or equal to the value for every `trim.end` at every keyframe.
+  private func startValueIsLessThanEndValue() -> Bool {
+    startAndEndValuesAllSatisfy { startValue, endValue in
+      startValue <= endValue
+    }
+  }
+
+  private func startAndEndValuesAllSatisfy(_ condition: (_ start: CGFloat, _ end: CGFloat) -> Bool) -> Bool {
+    let keyframeTimes = Set(start.keyframes.map { $0.time } + end.keyframes.map { $0.time })
+
+    let startInterpolator = KeyframeInterpolator(keyframes: start.keyframes)
+    let endInterpolator = KeyframeInterpolator(keyframes: end.keyframes)
+
+    for keyframeTime in keyframeTimes {
+      guard
+        let startAtTime = startInterpolator.value(frame: keyframeTime) as? LottieVector1D,
+        let endAtTime = endInterpolator.value(frame: keyframeTime) as? LottieVector1D
+      else { continue }
+
+      if !condition(startAtTime.cgFloatValue, endAtTime.cgFloatValue) {
+        return false
+      }
+    }
+
+    return true
+  }
+
+  /// Interpolates the start and end keyframes, at each frame if necessary,
+  /// so that the value of `strokeStart` is always less than `strokeEnd`.
+  private func interpolatedAtEachFrame()
+    -> (strokeStart: KeyframeGroup<LottieVector1D>, strokeEnd: KeyframeGroup<LottieVector1D>)
+  {
+    let combinedKeyframes = Keyframes.combined(
+      start,
+      end,
+      makeCombinedResult: { startValue, endValue in
+        if startValue.cgFloatValue < endValue.cgFloatValue {
+          return (start: startValue, end: endValue)
+        } else {
+          return (start: endValue, end: startValue)
         }
-    }
+      })
 
-    private func startAndEndValuesAllSatisfy(_ condition: (_ start: CGFloat, _ end: CGFloat) -> Bool) -> Bool {
-        let keyframeTimes = Set(start.keyframes.map { $0.time } + end.keyframes.map { $0.time })
-
-        let startInterpolator = KeyframeInterpolator(keyframes: start.keyframes)
-        let endInterpolator = KeyframeInterpolator(keyframes: end.keyframes)
-
-        for keyframeTime in keyframeTimes {
-          guard
-            let startAtTime = startInterpolator.value(frame: keyframeTime) as? LottieVector1D,
-            let endAtTime = endInterpolator.value(frame: keyframeTime) as? LottieVector1D
-          else { continue }
-
-            if !condition(startAtTime.cgFloatValue, endAtTime.cgFloatValue) {
-                return false
-            }
-        }
-
-        return true
-    }
-
-
-    private func interpolatedAtEachFrame()
-        -> (strokeStart: KeyframeGroup<LottieVector1D>, strokeEnd: KeyframeGroup<LottieVector1D>)
-    {
-        let combinedKeyframes = Keyframes.combined(
-            start,
-            end,
-            makeCombinedResult: { startValue, endValue in
-                if startValue.cgFloatValue < endValue.cgFloatValue {
-                    return (start: startValue, end: endValue)
-                } else {
-                    return (start: endValue, end: startValue)
-                }
-            })
-
-        return (
-            strokeStart: combinedKeyframes.map { $0.start },
-            strokeEnd: combinedKeyframes.map { $0.end })
-    }
+    return (
+      strokeStart: combinedKeyframes.map { $0.start },
+      strokeEnd: combinedKeyframes.map { $0.end })
+  }
 
   /// Adjusted stroke keyframes to account for offset keyframes by merging them into a single keyframe collection
   ///
