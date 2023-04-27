@@ -112,17 +112,19 @@ extension Trim {
 
     // CAShapeLayer requires strokeStart to be less than strokeEnd. This
     // isn't required by the Lottie schema, so some animations may have
-    // strokeStart and strokeEnd flipped. If we detect this is the case,
-    // then swap them. This lets us avoid having to create an interpolated
-    // animation, which would be more expensive.
-    if startValueIsAlwaysGreaterThanEndValue() {
-      strokeStart = end
-      strokeEnd = start
-    } else if startValueIsLessThanEndValue() {
-      // If the start value is always less than the end value
+    // strokeStart and strokeEnd flipped.
+    if startValueIsAlwaysLessOrEqualToThanEndValue() {
+      // If the start value is always _less than_ or equal to the end value
       // then we can use the given values without any modifications
       strokeStart = start
       strokeEnd = end
+    } else if startValueIsAlwaysGreaterThanOrEqualToEndValue() {
+      // If the start value is always _greater than_ or equal to the end value,
+      // then we can just swap the start / end keyframes. This lets us avoid
+      // manually interpolating the keyframes values at each frame, which
+      // would be more expensive.
+      strokeStart = end
+      strokeEnd = start
     } else {
       // Otherwise if the start / end values ever swap places we have to
       // fix the order on a per-keyframe basis, which may require manually
@@ -177,19 +179,19 @@ extension Trim {
 
   // MARK: Private
 
-  /// Checks whether or not the value for `trim.start` is greater
-  /// than the value for every `trim.end` at every keyframe.
-  private func startValueIsAlwaysGreaterThanEndValue() -> Bool {
+  /// Checks whether or not the value for `trim.start` is less than
+  /// or equal to the value for every `trim.end` at every frame.
+  private func startValueIsAlwaysLessOrEqualToThanEndValue() -> Bool {
     startAndEndValuesAllSatisfy { startValue, endValue in
-      endValue < startValue
+      startValue <= endValue
     }
   }
 
-  /// Checks whether or not the value for `trim.start` is less than
-  /// or equal to the value for every `trim.end` at every keyframe.
-  private func startValueIsLessThanEndValue() -> Bool {
+  /// Checks whether or not the value for `trim.start` is greater than
+  /// or equal to the value for every `trim.end` at every frame.
+  private func startValueIsAlwaysGreaterThanOrEqualToEndValue() -> Bool {
     startAndEndValuesAllSatisfy { startValue, endValue in
-      startValue <= endValue
+      startValue >= endValue
     }
   }
 
