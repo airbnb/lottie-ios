@@ -142,17 +142,17 @@ extension Trim {
 
     // Apply the offset to the start / end values at each frame
     let offsetStrokeKeyframes = Keyframes.combined(
-        strokeStart,
-        strokeEnd,
-        offset,
-        makeCombinedResult: { start, end, offset -> (start: LottieVector1D, end: LottieVector1D) in
-            let offsetStart = start.cgFloatValue + (offset.cgFloatValue / 360 * 100)
-            let offsetEnd = end.cgFloatValue + (offset.cgFloatValue / 360 * 100)
-            return (start: LottieVector1D(offsetStart), end: LottieVector1D(offsetEnd))
-        })
+      strokeStart,
+      strokeEnd,
+      offset,
+      makeCombinedResult: { start, end, offset -> (start: LottieVector1D, end: LottieVector1D) in
+        let offsetStart = start.cgFloatValue + (offset.cgFloatValue / 360 * 100)
+        let offsetEnd = end.cgFloatValue + (offset.cgFloatValue / 360 * 100)
+        return (start: LottieVector1D(offsetStart), end: LottieVector1D(offsetEnd))
+      })
 
-      var adjustedStrokeStart = offsetStrokeKeyframes.map { $0.start }
-      var adjustedStrokeEnd = offsetStrokeKeyframes.map { $0.end }
+    var adjustedStrokeStart = offsetStrokeKeyframes.map { $0.start }
+    var adjustedStrokeEnd = offsetStrokeKeyframes.map { $0.end }
 
     // If maximum stroke value is larger than 100%, then we have to create copies of the path
     // so the total path length includes the maximum stroke
