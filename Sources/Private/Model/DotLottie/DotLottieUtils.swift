@@ -15,7 +15,7 @@ struct DotLottieUtils {
 
   /// Temp folder to app directory
   static var tempDirectoryURL: URL {
-    if #available(iOS 10.0, *) {
+    if #available(iOS 10.0, macOS 10.12, *) {
       return FileManager.default.temporaryDirectory
     }
     return URL(fileURLWithPath: NSTemporaryDirectory())
