@@ -146,6 +146,7 @@ extension Trim {
       strokeEnd,
       offset,
       makeCombinedResult: { start, end, offset -> (start: LottieVector1D, end: LottieVector1D) in
+        // Compute the adjusted value by converting the offset value to a stroke value
         let offsetStart = start.cgFloatValue + (offset.cgFloatValue / 360 * 100)
         let offsetEnd = end.cgFloatValue + (offset.cgFloatValue / 360 * 100)
         return (start: LottieVector1D(offsetStart), end: LottieVector1D(offsetEnd))
