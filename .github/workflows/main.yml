@@ -56,6 +56,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
+        with:
+          xcode: '14.3' # Swift 5.8
       - name: Test Package
         run: bundle exec rake test:package
       - name: Process test artifacts
