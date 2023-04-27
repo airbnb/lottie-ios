@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build-package:
+  build-package-macos-12:
     name: "Build Package"
     runs-on: macos-12
     strategy:
@@ -16,7 +16,23 @@ jobs:
         xcode:
         - '13.2.1' # Swift 5.5
         - '13.4.1' # Swift 5.6
-        - '14.0.1' # Swift 5.7
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          xcode: ${{ matrix.xcode }}
+      - name: Build Package
+        run: bundle exec rake build:package:all
+
+  build-package-macos-13:
+    name: "Build Package"
+    runs-on: macos-13
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode:
+        - '14.2' # Swift 5.7
+        - '14.3' # Swift 5.8
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -27,7 +43,7 @@ jobs:
 
   build-example:
     name: "Build Example App"
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -36,10 +52,12 @@ jobs:
 
   test-package:
     name: "Test Package"
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
+        with:
+          xcode: '14.3' # Swift 5.8
       - name: Test Package
         run: bundle exec rake test:package
       - name: Process test artifacts
@@ -79,7 +97,7 @@ jobs:
 
   cocoapod:
     name: "Lint CocoaPods podspec"
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -90,7 +108,7 @@ jobs:
 
   spm:
     name: "Test Swift Package Manager support"
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -101,7 +119,7 @@ jobs:
 
   carthage:
     name: "Test Carthage support"
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -113,7 +131,7 @@ jobs:
 
   swiftlint:
     name: "Lint Swift"
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
