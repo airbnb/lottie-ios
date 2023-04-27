@@ -1076,6 +1076,33 @@ open class LottieAnimationView: LottieAnimationViewBase {
     }
   }
 
+  /// Updates an in flight animation.
+  func updateInFlightAnimation() {
+    guard let animationContext = animationContext else { return }
+
+    guard animationContext.closure.animationState != .complete else {
+      // Tried to re-add an already completed animation. Cancel.
+      self.animationContext = nil
+      return
+    }
+
+    /// Tell existing context to ignore its closure
+    animationContext.closure.ignoreDelegate = true
+
+    /// Make a new context, stealing the completion block from the previous.
+    let newContext = AnimationContext(
+      playFrom: animationContext.playFrom,
+      playTo: animationContext.playTo,
+      closure: animationContext.closure.completionBlock)
+
+    /// Remove current animation, and freeze the current frame.
+    let pauseFrame = realtimeAnimationFrame
+    animationLayer?.removeAnimation(forKey: activeAnimationName)
+    animationLayer?.currentFrame = pauseFrame
+
+    addNewAnimationForContext(newContext)
+  }
+
   // MARK: Fileprivate
 
   /// Context describing the animation that is currently playing in this `LottieAnimationView`
@@ -1126,6 +1153,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
       return
     }
 
+    animationLayer.animationView = self
     animationLayer.renderScale = screenScale
 
     viewLayer?.addSublayer(animationLayer)
@@ -1319,33 +1347,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
     animationLayer?.removeAnimation(forKey: activeAnimationName)
     updateAnimationFrame(pauseFrame)
     animationContext = nil
-  }
-
-  /// Updates an in flight animation.
-  fileprivate func updateInFlightAnimation() {
-    guard let animationContext = animationContext else { return }
-
-    guard animationContext.closure.animationState != .complete else {
-      // Tried to re-add an already completed animation. Cancel.
-      self.animationContext = nil
-      return
-    }
-
-    /// Tell existing context to ignore its closure
-    animationContext.closure.ignoreDelegate = true
-
-    /// Make a new context, stealing the completion block from the previous.
-    let newContext = AnimationContext(
-      playFrom: animationContext.playFrom,
-      playTo: animationContext.playTo,
-      closure: animationContext.closure.completionBlock)
-
-    /// Remove current animation, and freeze the current frame.
-    let pauseFrame = realtimeAnimationFrame
-    animationLayer?.removeAnimation(forKey: activeAnimationName)
-    animationLayer?.currentFrame = pauseFrame
-
-    addNewAnimationForContext(newContext)
   }
 
   /// Adds animation to animation layer and sets the delegate. If animation layer or animation are nil, exits.
