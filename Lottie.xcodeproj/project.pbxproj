@@ -669,9 +669,6 @@
 		7E48BF582860CECF00A39198 /* UnitBezier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48BF572860CECF00A39198 /* UnitBezier.swift */; };
 		7E48BF592860CECF00A39198 /* UnitBezier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48BF572860CECF00A39198 /* UnitBezier.swift */; };
 		7E48BF5A2860CECF00A39198 /* UnitBezier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48BF572860CECF00A39198 /* UnitBezier.swift */; };
-		7E48BF602860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48BF5F2860D4FA00A39198 /* KeyframeGroup+Extensions.swift */; };
-		7E48BF612860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48BF5F2860D4FA00A39198 /* KeyframeGroup+Extensions.swift */; };
-		7E48BF622860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48BF5F2860D4FA00A39198 /* KeyframeGroup+Extensions.swift */; };
 		A1D5BAAC27C731A500777D06 /* DataURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D5BAAB27C731A500777D06 /* DataURLTests.swift */; };
 		A40460592832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
 		A404605A2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
@@ -931,7 +928,6 @@
 		6DB3BDBF28245A6A002A276D /* ParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingTests.swift; sourceTree = "<group>"; };
 		6DEF696D2824A76C007D640F /* BundleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleTests.swift; sourceTree = "<group>"; };
 		7E48BF572860CECF00A39198 /* UnitBezier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitBezier.swift; sourceTree = "<group>"; };
-		7E48BF5F2860D4FA00A39198 /* KeyframeGroup+Extensions.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "KeyframeGroup+Extensions.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		A1D5BAAB27C731A500777D06 /* DataURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataURLTests.swift; sourceTree = "<group>"; };
 		A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlendMode+Filter.swift"; sourceTree = "<group>"; };
 		D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationCache.swift; sourceTree = "<group>"; };
@@ -1457,7 +1453,6 @@
 			children = (
 				2E9C95CF2822F43100677516 /* InterpolatableExtensions.swift */,
 				2E9C95D02822F43100677516 /* KeyframeExtensions.swift */,
-				7E48BF5F2860D4FA00A39198 /* KeyframeGroup+Extensions.swift */,
 				08EF21DB289C643B0097EA47 /* KeyframeInterpolator.swift */,
 			);
 			path = Interpolatable;
@@ -2096,7 +2091,6 @@
 				2E9C962A2822F43100677516 /* TextDocument.swift in Sources */,
 				2EAF5AE627A0798700E00531 /* LRUAnimationCache.swift in Sources */,
 				2EAF5AC827A0798700E00531 /* AnimatedButton.swift in Sources */,
-				7E48BF602860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */,
 				087584D229B2BC8200BC168F /* URL+ZIP.swift in Sources */,
 				2E9C962D2822F43100677516 /* Glyph.swift in Sources */,
 				2E9C96D52822F43100677516 /* RenderNode.swift in Sources */,
@@ -2344,7 +2338,6 @@
 				2E9C962B2822F43100677516 /* TextDocument.swift in Sources */,
 				2EAF5AE727A0798700E00531 /* LRUAnimationCache.swift in Sources */,
 				2EAF5AC927A0798700E00531 /* AnimatedButton.swift in Sources */,
-				7E48BF612860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */,
 				087584D329B2BC8200BC168F /* URL+ZIP.swift in Sources */,
 				2E9C962E2822F43100677516 /* Glyph.swift in Sources */,
 				2E9C96D62822F43100677516 /* RenderNode.swift in Sources */,
@@ -2568,7 +2561,6 @@
 				2E9C962C2822F43100677516 /* TextDocument.swift in Sources */,
 				2EAF5AE827A0798700E00531 /* LRUAnimationCache.swift in Sources */,
 				2EAF5ACA27A0798700E00531 /* AnimatedButton.swift in Sources */,
-				7E48BF622860D4FA00A39198 /* KeyframeGroup+Extensions.swift in Sources */,
 				087584D429B2BC8200BC168F /* URL+ZIP.swift in Sources */,
 				2E9C962F2822F43100677516 /* Glyph.swift in Sources */,
 				2E9C96D72822F43100677516 /* RenderNode.swift in Sources */,
