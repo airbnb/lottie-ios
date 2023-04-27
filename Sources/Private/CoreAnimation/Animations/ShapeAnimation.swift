@@ -140,22 +140,20 @@ extension Trim {
       return (strokeStart, strokeEnd, 1)
     }
 
-    // Otherwise, adjust the stroke values to account for the offsets
-    // 1. Interpolate the keyframes so they are all on a linear timing function
-    // 2. Merge by summing the stroke values with the offset values
-    let interpolatedStrokeStart = strokeStart.manuallyInterpolateKeyframes()
-    let interpolatedStrokeEnd = strokeEnd.manuallyInterpolateKeyframes()
-    let interpolatedStrokeOffset = offset.manuallyInterpolateKeyframes()
+    // Apply the offset to the start / end values at each frame
+    let offsetStrokeKeyframes = Keyframes.combined(
+      strokeStart,
+      strokeEnd,
+      offset,
+      makeCombinedResult: { start, end, offset -> (start: LottieVector1D, end: LottieVector1D) in
+        // Compute the adjusted value by converting the offset value to a stroke value
+        let offsetStart = start.cgFloatValue + (offset.cgFloatValue / 360 * 100)
+        let offsetEnd = end.cgFloatValue + (offset.cgFloatValue / 360 * 100)
+        return (start: LottieVector1D(offsetStart), end: LottieVector1D(offsetEnd))
+      })
 
-    var adjustedStrokeStart = KeyframeGroup(
-      keyframes: try adjustKeyframesForTrimOffsets(
-        strokeKeyframes: interpolatedStrokeStart,
-        offsetKeyframes: interpolatedStrokeOffset))
-
-    var adjustedStrokeEnd = KeyframeGroup(
-      keyframes: try adjustKeyframesForTrimOffsets(
-        strokeKeyframes: interpolatedStrokeEnd,
-        offsetKeyframes: interpolatedStrokeOffset))
+    var adjustedStrokeStart = offsetStrokeKeyframes.map { $0.start }
+    var adjustedStrokeEnd = offsetStrokeKeyframes.map { $0.end }
 
     // If maximum stroke value is larger than 100%, then we have to create copies of the path
     // so the total path length includes the maximum stroke
@@ -234,84 +232,5 @@ extension Trim {
     return (
       strokeStart: combinedKeyframes.map { $0.start },
       strokeEnd: combinedKeyframes.map { $0.end })
-  }
-
-  /// Adjusted stroke keyframes to account for offset keyframes by merging them into a single keyframe collection
-  ///
-  /// Since stroke keyframes and offset keyframes can be defined on different animation curves, they must be
-  /// manually interpolated prior to invoking this method. Manually interpolating the keyframes will redefine both
-  /// keyframe groups such that they can be interpolated linearly.
-  ///
-  /// - Precondition: The keyframes must be interpolated using `KeyframeGroup.manuallyInterpolateKeyframes()`
-  private func adjustKeyframesForTrimOffsets(
-    strokeKeyframes: ContiguousArray<Keyframe<LottieVector1D>>,
-    offsetKeyframes: ContiguousArray<Keyframe<LottieVector1D>>)
-    throws -> ContiguousArray<Keyframe<LottieVector1D>>
-  {
-    guard
-      !strokeKeyframes.isEmpty,
-      !offsetKeyframes.isEmpty
-    else {
-      return strokeKeyframes
-    }
-
-    // Map each time to its corresponding stroke/offset keyframe
-    var timeMap = [AnimationFrameTime: [Keyframe<LottieVector1D>?]]()
-    for stroke in strokeKeyframes {
-      timeMap[stroke.time] = [stroke, nil]
-    }
-    for offset in offsetKeyframes {
-      if var existing = timeMap[offset.time] {
-        existing[1] = offset
-        timeMap[offset.time] = existing
-      } else {
-        timeMap[offset.time] = [nil, offset]
-      }
-    }
-
-    // Each time will be mapped to a new, adjusted keyframe
-    var output = ContiguousArray<Keyframe<LottieVector1D>>()
-    var lastKeyframe: Keyframe<LottieVector1D>?
-    var lastOffset: Keyframe<LottieVector1D>?
-
-    for (time, values) in timeMap.sorted(by: { $0.0 < $1.0 }) {
-      // Extract keyframe/offset associated with this timestamp
-      let keyframe = values[0]
-      let offset = values[1]
-      lastKeyframe = keyframe ?? lastKeyframe
-      lastOffset = offset ?? lastOffset
-
-      guard let currentKeyframe = lastKeyframe else {
-        // No keyframes are output until the first keyframe occurs
-        continue
-      }
-
-      guard let currentOffset = lastOffset else {
-        // Scalar isHold keyframes are not output as they offset the offset keyframes
-        if !(strokeKeyframes.count == 1 && currentKeyframe.isHold) {
-          output.append(currentKeyframe)
-        }
-        continue
-      }
-
-      // Compute the adjusted value by converting the offset value to a stroke value
-      let strokeValue = currentKeyframe.value.value
-      let offsetValue = currentOffset.value.value
-      let adjustedValue = strokeValue + (offsetValue / 360 * 100)
-
-      // The tangent values are all `nil` as the keyframes should have been manually interpolated
-      let adjustedKeyframe = Keyframe<LottieVector1D>(
-        value: LottieVector1D(adjustedValue),
-        time: time,
-        isHold: currentKeyframe.isHold,
-        inTangent: nil,
-        outTangent: nil,
-        spatialInTangent: nil,
-        spatialOutTangent: nil)
-
-      output.append(adjustedKeyframe)
-    }
-
-    return output
   }
 }
