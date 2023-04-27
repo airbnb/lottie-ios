@@ -112,14 +112,24 @@ extension Trim {
 
     // CAShapeLayer requires strokeStart to be less than strokeEnd. This
     // isn't required by the Lottie schema, so some animations may have
-    // strokeStart and strokeEnd flipped. If we detect this is the case,
-    // then swap them.
-    if startValueIsAlwaysGreaterThanEndValue() {
+    // strokeStart and strokeEnd flipped.
+    if startValueIsAlwaysLessOrEqualToThanEndValue() {
+      // If the start value is always _less than_ or equal to the end value
+      // then we can use the given values without any modifications
+      strokeStart = start
+      strokeEnd = end
+    } else if startValueIsAlwaysGreaterThanOrEqualToEndValue() {
+      // If the start value is always _greater than_ or equal to the end value,
+      // then we can just swap the start / end keyframes. This lets us avoid
+      // manually interpolating the keyframes values at each frame, which
+      // would be more expensive.
       strokeStart = end
       strokeEnd = start
     } else {
-      strokeStart = start
-      strokeEnd = end
+      // Otherwise if the start / end values ever swap places we have to
+      // fix the order on a per-keyframe basis, which may require manually
+      // interpolating the keyframe values at each frame.
+      (strokeStart, strokeEnd) = interpolatedAtEachFrame()
     }
 
     // If there are no offsets, then the stroke values can be used as-is
@@ -169,9 +179,23 @@ extension Trim {
 
   // MARK: Private
 
-  /// Checks whether or not the value for `trim.start` is greater
-  /// than the value for every `trim.end` at every keyframe.
-  private func startValueIsAlwaysGreaterThanEndValue() -> Bool {
+  /// Checks whether or not the value for `trim.start` is less than
+  /// or equal to the value for every `trim.end` at every frame.
+  private func startValueIsAlwaysLessOrEqualToThanEndValue() -> Bool {
+    startAndEndValuesAllSatisfy { startValue, endValue in
+      startValue <= endValue
+    }
+  }
+
+  /// Checks whether or not the value for `trim.start` is greater than
+  /// or equal to the value for every `trim.end` at every frame.
+  private func startValueIsAlwaysGreaterThanOrEqualToEndValue() -> Bool {
+    startAndEndValuesAllSatisfy { startValue, endValue in
+      startValue >= endValue
+    }
+  }
+
+  private func startAndEndValuesAllSatisfy(_ condition: (_ start: CGFloat, _ end: CGFloat) -> Bool) -> Bool {
     let keyframeTimes = Set(start.keyframes.map { $0.time } + end.keyframes.map { $0.time })
 
     let startInterpolator = KeyframeInterpolator(keyframes: start.keyframes)
@@ -183,12 +207,33 @@ extension Trim {
         let endAtTime = endInterpolator.value(frame: keyframeTime) as? LottieVector1D
       else { continue }
 
-      if startAtTime.cgFloatValue < endAtTime.cgFloatValue {
+      if !condition(startAtTime.cgFloatValue, endAtTime.cgFloatValue) {
         return false
       }
     }
 
     return true
+  }
+
+  /// Interpolates the start and end keyframes, at each frame if necessary,
+  /// so that the value of `strokeStart` is always less than `strokeEnd`.
+  private func interpolatedAtEachFrame()
+    -> (strokeStart: KeyframeGroup<LottieVector1D>, strokeEnd: KeyframeGroup<LottieVector1D>)
+  {
+    let combinedKeyframes = Keyframes.combined(
+      start,
+      end,
+      makeCombinedResult: { startValue, endValue -> (start: LottieVector1D, end: LottieVector1D) in
+        if startValue.cgFloatValue < endValue.cgFloatValue {
+          return (start: startValue, end: endValue)
+        } else {
+          return (start: endValue, end: startValue)
+        }
+      })
+
+    return (
+      strokeStart: combinedKeyframes.map { $0.start },
+      strokeEnd: combinedKeyframes.map { $0.end })
   }
 
   /// Adjusted stroke keyframes to account for offset keyframes by merging them into a single keyframe collection
