@@ -30,7 +30,7 @@ namespace :build do
 
     desc 'Builds the iOS Lottie Example app'
     task :iOS do
-      xcodebuild('build -scheme "Example (iOS)" -destination "platform=iOS Simulator,name=iPhone 8" -workspace Lottie.xcworkspace')
+      xcodebuild('build -scheme "Example (iOS)" -destination "platform=iOS Simulator,name=iPhone SE (3rd generation)" -workspace Lottie.xcworkspace')
     end
 
     desc 'Builds the macOS Lottie Example app'
@@ -78,7 +78,7 @@ namespace :test do
   desc 'Tests the Lottie package for iOS'
   task :package do
     sh 'rm -rf Tests/Artifacts'
-    xcodebuild('test -scheme "Lottie (iOS)" -destination "platform=iOS Simulator,name=iPhone 8" -resultBundlePath Tests/Artifacts/LottieTests.xcresult')
+    xcodebuild('test -scheme "Lottie (iOS)" -destination "platform=iOS Simulator,name=iPhone SE (3rd generation)" -resultBundlePath Tests/Artifacts/LottieTests.xcresult')
   end
 
   desc 'Processes .xcresult artifacts from the most recent test:package execution'
@@ -103,7 +103,7 @@ namespace :test do
       sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit/DerivedData'
 
       # Build a test app that imports and uses the LottieCarthage framework
-      xcodebuild('build -scheme CarthageTest -destination "platform=iOS Simulator,name=iPhone 8"')
+      xcodebuild('build -scheme CarthageTest -destination "platform=iOS Simulator,name=iPhone SE (3rd generation)"')
       xcodebuild('build -scheme CarthageTest-macOS')
     end
   end
