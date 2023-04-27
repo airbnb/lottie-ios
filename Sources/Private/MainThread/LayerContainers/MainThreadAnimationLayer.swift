@@ -147,6 +147,9 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
   /// The animatable Current Frame Property
   @NSManaged var currentFrame: CGFloat
 
+  /// The parent `LottieAnimationView` that manages this layer
+  weak var animationView: LottieAnimationView?
+
   var animationLayers: ContiguousArray<CompositionLayer>
 
   var primaryAnimationKey: AnimationKey {

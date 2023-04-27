@@ -1126,6 +1126,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
       return
     }
 
+    animationLayer.animationView = self
     animationLayer.renderScale = screenScale
 
     viewLayer?.addSublayer(animationLayer)
@@ -1322,7 +1323,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   }
 
   /// Updates an in flight animation.
-  fileprivate func updateInFlightAnimation() {
+  func updateInFlightAnimation() {
     guard let animationContext = animationContext else { return }
 
     guard animationContext.closure.animationState != .complete else {
