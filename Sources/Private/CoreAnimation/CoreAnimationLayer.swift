@@ -318,7 +318,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     if isAnimationPlaying == true {
       animationView?.updateInFlightAnimation()
     } else {
-      let currentFrame = self.currentFrame
+      let currentFrame = currentFrame
       removeAnimations()
       self.currentFrame = currentFrame
     }
