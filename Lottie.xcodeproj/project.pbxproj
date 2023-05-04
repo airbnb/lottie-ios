@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		087584AE29B2BA6C00BC168F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 087584AD29B2BA6C00BC168F /* README.md */; };
-		087584AF29B2BA6C00BC168F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 087584AD29B2BA6C00BC168F /* README.md */; };
-		087584B029B2BA6C00BC168F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 087584AD29B2BA6C00BC168F /* README.md */; };
 		087584C329B2BC8200BC168F /* Archive+BackingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087584B129B2BC8100BC168F /* Archive+BackingConfiguration.swift */; };
 		087584C429B2BC8200BC168F /* Archive+BackingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087584B129B2BC8100BC168F /* Archive+BackingConfiguration.swift */; };
 		087584C529B2BC8200BC168F /* Archive+BackingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087584B129B2BC8100BC168F /* Archive+BackingConfiguration.swift */; };
@@ -1855,7 +1852,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				087584AE29B2BA6C00BC168F /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1872,7 +1868,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				087584AF29B2BA6C00BC168F /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1880,7 +1875,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				087584B029B2BA6C00BC168F /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
