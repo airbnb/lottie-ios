@@ -265,7 +265,8 @@ extension CALayer {
       transformModel._skew ?? KeyframeGroup(LottieVector1D(0)),
       transformModel._skewAxis ?? KeyframeGroup(LottieVector1D(0)),
       makeCombinedResult: {
-        anchor, position, positionX, positionY, scale, rotationX, rotationY, rotationZ, skew, skewAxis in
+        anchor, position, positionX, positionY, scale, rotationX, rotationY, rotationZ, skew, skewAxis
+          -> CATransform3D in
 
         let transformPosition: CGPoint
         if transformModel._positionX != nil, transformModel._positionY != nil {
@@ -298,8 +299,8 @@ extension TransformModel {
   /// Whether or not this transform has a non-zero skew value
   var hasSkew: Bool {
     guard
-      let _skew,
-      let _skewAxis,
+      let _skew = _skew,
+      let _skewAxis = _skewAxis,
       !_skew.keyframes.isEmpty,
       !_skewAxis.keyframes.isEmpty
     else {
