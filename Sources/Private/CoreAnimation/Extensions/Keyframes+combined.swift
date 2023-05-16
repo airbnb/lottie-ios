@@ -165,7 +165,7 @@ enum Keyframes {
           let t6 = untypedValues[5] as? T6,
           let t7 = untypedValues[6] as? T7,
           let t8 = untypedValues[7] as? T8,
-          let t9 = untypedValues[9] as? T9,
+          let t9 = untypedValues[8] as? T9,
           let t10 = untypedValues[9] as? T10
         else { return nil }
 

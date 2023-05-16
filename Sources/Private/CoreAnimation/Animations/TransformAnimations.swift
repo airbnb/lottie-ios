@@ -301,8 +301,8 @@ extension TransformModel {
       let _skew,
       let _skewAxis,
       !_skew.keyframes.isEmpty,
-      !_skewAxis.keyframes.isEmpty else
-    {
+      !_skewAxis.keyframes.isEmpty
+    else {
       return false
     }
 
