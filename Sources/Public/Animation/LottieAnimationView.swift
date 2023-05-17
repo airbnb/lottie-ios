@@ -88,7 +88,7 @@ extension LottieLoopMode: Equatable {
 // MARK: - LottieAnimationView
 
 @IBDesignable
-final public class LottieAnimationView: LottieAnimationViewBase {
+open class LottieAnimationView: LottieAnimationViewBase {
 
   // MARK: Lifecycle
 
@@ -176,6 +176,166 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     logger = .shared
     super.init(coder: aDecoder)
     commonInit()
+  }
+
+  // MARK: Open
+
+  /// Plays the animation from its current state to the end.
+  ///
+  /// - Parameter completion: An optional completion closure to be called when the animation completes playing.
+  open func play(completion: LottieCompletionBlock? = nil) {
+    guard let animation = animation else {
+      return
+    }
+
+    /// Build a context for the animation.
+    let context = AnimationContext(
+      playFrom: CGFloat(animation.startFrame),
+      playTo: CGFloat(animation.endFrame),
+      closure: completion)
+    removeCurrentAnimationIfNecessary()
+    addNewAnimationForContext(context)
+  }
+
+  /// Plays the animation from a progress (0-1) to a progress (0-1).
+  ///
+  /// - Parameter fromProgress: The start progress of the animation. If `nil` the animation will start at the current progress.
+  /// - Parameter toProgress: The end progress of the animation.
+  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+  /// - Parameter completion: An optional completion closure to be called when the animation stops.
+  open func play(
+    fromProgress: AnimationProgressTime? = nil,
+    toProgress: AnimationProgressTime,
+    loopMode: LottieLoopMode? = nil,
+    completion: LottieCompletionBlock? = nil)
+  {
+    guard let animation = animation else {
+      return
+    }
+
+    removeCurrentAnimationIfNecessary()
+    if let loopMode = loopMode {
+      /// Set the loop mode, if one was supplied
+      self.loopMode = loopMode
+    }
+    let context = AnimationContext(
+      playFrom: animation.frameTime(forProgress: fromProgress ?? currentProgress),
+      playTo: animation.frameTime(forProgress: toProgress),
+      closure: completion)
+    addNewAnimationForContext(context)
+  }
+
+  /// Plays the animation from a start frame to an end frame in the animation's framerate.
+  ///
+  /// - Parameter fromFrame: The start frame of the animation. If `nil` the animation will start at the current frame.
+  /// - Parameter toFrame: The end frame of the animation.
+  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+  /// - Parameter completion: An optional completion closure to be called when the animation stops.
+  open func play(
+    fromFrame: AnimationFrameTime? = nil,
+    toFrame: AnimationFrameTime,
+    loopMode: LottieLoopMode? = nil,
+    completion: LottieCompletionBlock? = nil)
+  {
+    removeCurrentAnimationIfNecessary()
+    if let loopMode = loopMode {
+      /// Set the loop mode, if one was supplied
+      self.loopMode = loopMode
+    }
+
+    let context = AnimationContext(
+      playFrom: fromFrame ?? currentFrame,
+      playTo: toFrame,
+      closure: completion)
+    addNewAnimationForContext(context)
+  }
+
+  /// Plays the animation from a named marker to another marker.
+  ///
+  /// Markers are point in time that are encoded into the Animation data and assigned
+  /// a name.
+  ///
+  /// NOTE: If markers are not found the play command will exit.
+  ///
+  /// - Parameter fromMarker: The start marker for the animation playback. If `nil` the
+  /// animation will start at the current progress.
+  /// - Parameter toMarker: The end marker for the animation playback.
+  /// - Parameter playEndMarkerFrame: A flag to determine whether or not to play the frame of the end marker. If the
+  /// end marker represents the end of the section to play, it should be to true. If the provided end marker
+  /// represents the beginning of the next section, it should be false.
+  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+  /// - Parameter completion: An optional completion closure to be called when the animation stops.
+  open func play(
+    fromMarker: String? = nil,
+    toMarker: String,
+    playEndMarkerFrame: Bool = true,
+    loopMode: LottieLoopMode? = nil,
+    completion: LottieCompletionBlock? = nil)
+  {
+    guard let animation = animation, let markers = animation.markerMap, let to = markers[toMarker] else {
+      return
+    }
+
+    removeCurrentAnimationIfNecessary()
+    if let loopMode = loopMode {
+      /// Set the loop mode, if one was supplied
+      self.loopMode = loopMode
+    }
+
+    let fromTime: CGFloat
+    if let fromName = fromMarker, let from = markers[fromName] {
+      fromTime = CGFloat(from.frameTime)
+    } else {
+      fromTime = currentFrame
+    }
+
+    let playTo = playEndMarkerFrame ? CGFloat(to.frameTime) : CGFloat(to.frameTime) - 1
+    let context = AnimationContext(
+      playFrom: fromTime,
+      playTo: playTo,
+      closure: completion)
+    addNewAnimationForContext(context)
+  }
+
+  /// Plays the animation from a named marker to the end of the marker's duration.
+  ///
+  /// A marker is a point in time with an associated duration that is encoded into the
+  /// animation data and assigned a name.
+  ///
+  /// NOTE: If marker is not found the play command will exit.
+  ///
+  /// - Parameter marker: The start marker for the animation playback.
+  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+  /// - Parameter completion: An optional completion closure to be called when the animation stops.
+  open func play(
+    marker: String,
+    loopMode: LottieLoopMode? = nil,
+    completion: LottieCompletionBlock? = nil)
+  {
+    guard let from = animation?.markerMap?[marker] else {
+      return
+    }
+
+    play(
+      fromFrame: from.frameTime,
+      toFrame: from.frameTime + from.durationFrameTime,
+      loopMode: loopMode,
+      completion: completion)
+  }
+
+  /// Stops the animation and resets the view to its start frame.
+  ///
+  /// The completion closure will be called with `false`
+  open func stop() {
+    removeCurrentAnimation()
+    currentFrame = 0
+  }
+
+  /// Pauses the animation in its current state.
+  ///
+  /// The completion closure will be called with `false`
+  open func pause() {
+    removeCurrentAnimation()
   }
 
   // MARK: Public
@@ -291,6 +451,13 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   public var fontProvider: AnimationFontProvider {
     didSet {
       animationLayer?.fontProvider = fontProvider
+    }
+  }
+
+  /// Whether or not the animation is masked to the bounds. Defaults to true.
+  public var maskAnimationToBounds = true {
+    didSet {
+      animationLayer?.masksToBounds = maskAnimationToBounds
     }
   }
 
@@ -492,164 +659,6 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     animation = dotLottieAnimation.animation
   }
 
-  /// Plays the animation from its current state to the end.
-  ///
-  /// - Parameter completion: An optional completion closure to be called when the animation completes playing.
-  public func play(completion: LottieCompletionBlock? = nil) {
-    guard let animation = animation else {
-      return
-    }
-
-    /// Build a context for the animation.
-    let context = AnimationContext(
-      playFrom: CGFloat(animation.startFrame),
-      playTo: CGFloat(animation.endFrame),
-      closure: completion)
-    removeCurrentAnimationIfNecessary()
-    addNewAnimationForContext(context)
-  }
-
-  /// Plays the animation from a progress (0-1) to a progress (0-1).
-  ///
-  /// - Parameter fromProgress: The start progress of the animation. If `nil` the animation will start at the current progress.
-  /// - Parameter toProgress: The end progress of the animation.
-  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
-  /// - Parameter completion: An optional completion closure to be called when the animation stops.
-  public func play(
-    fromProgress: AnimationProgressTime? = nil,
-    toProgress: AnimationProgressTime,
-    loopMode: LottieLoopMode? = nil,
-    completion: LottieCompletionBlock? = nil)
-  {
-    guard let animation = animation else {
-      return
-    }
-
-    removeCurrentAnimationIfNecessary()
-    if let loopMode = loopMode {
-      /// Set the loop mode, if one was supplied
-      self.loopMode = loopMode
-    }
-    let context = AnimationContext(
-      playFrom: animation.frameTime(forProgress: fromProgress ?? currentProgress),
-      playTo: animation.frameTime(forProgress: toProgress),
-      closure: completion)
-    addNewAnimationForContext(context)
-  }
-
-  /// Plays the animation from a start frame to an end frame in the animation's framerate.
-  ///
-  /// - Parameter fromFrame: The start frame of the animation. If `nil` the animation will start at the current frame.
-  /// - Parameter toFrame: The end frame of the animation.
-  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
-  /// - Parameter completion: An optional completion closure to be called when the animation stops.
-  public func play(
-    fromFrame: AnimationFrameTime? = nil,
-    toFrame: AnimationFrameTime,
-    loopMode: LottieLoopMode? = nil,
-    completion: LottieCompletionBlock? = nil)
-  {
-    removeCurrentAnimationIfNecessary()
-    if let loopMode = loopMode {
-      /// Set the loop mode, if one was supplied
-      self.loopMode = loopMode
-    }
-
-    let context = AnimationContext(
-      playFrom: fromFrame ?? currentFrame,
-      playTo: toFrame,
-      closure: completion)
-    addNewAnimationForContext(context)
-  }
-
-  /// Plays the animation from a named marker to another marker.
-  ///
-  /// Markers are point in time that are encoded into the Animation data and assigned
-  /// a name.
-  ///
-  /// NOTE: If markers are not found the play command will exit.
-  ///
-  /// - Parameter fromMarker: The start marker for the animation playback. If `nil` the
-  /// animation will start at the current progress.
-  /// - Parameter toMarker: The end marker for the animation playback.
-  /// - Parameter playEndMarkerFrame: A flag to determine whether or not to play the frame of the end marker. If the
-  /// end marker represents the end of the section to play, it should be to true. If the provided end marker
-  /// represents the beginning of the next section, it should be false.
-  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
-  /// - Parameter completion: An optional completion closure to be called when the animation stops.
-  public func play(
-    fromMarker: String? = nil,
-    toMarker: String,
-    playEndMarkerFrame: Bool = true,
-    loopMode: LottieLoopMode? = nil,
-    completion: LottieCompletionBlock? = nil)
-  {
-    guard let animation = animation, let markers = animation.markerMap, let to = markers[toMarker] else {
-      return
-    }
-
-    removeCurrentAnimationIfNecessary()
-    if let loopMode = loopMode {
-      /// Set the loop mode, if one was supplied
-      self.loopMode = loopMode
-    }
-
-    let fromTime: CGFloat
-    if let fromName = fromMarker, let from = markers[fromName] {
-      fromTime = CGFloat(from.frameTime)
-    } else {
-      fromTime = currentFrame
-    }
-
-    let playTo = playEndMarkerFrame ? CGFloat(to.frameTime) : CGFloat(to.frameTime) - 1
-    let context = AnimationContext(
-      playFrom: fromTime,
-      playTo: playTo,
-      closure: completion)
-    addNewAnimationForContext(context)
-  }
-
-  /// Plays the animation from a named marker to the end of the marker's duration.
-  ///
-  /// A marker is a point in time with an associated duration that is encoded into the
-  /// animation data and assigned a name.
-  ///
-  /// NOTE: If marker is not found the play command will exit.
-  ///
-  /// - Parameter marker: The start marker for the animation playback.
-  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
-  /// - Parameter completion: An optional completion closure to be called when the animation stops.
-  public func play(
-    marker: String,
-    loopMode: LottieLoopMode? = nil,
-    completion: LottieCompletionBlock? = nil)
-  {
-    guard let from = animation?.markerMap?[marker] else {
-      return
-    }
-
-    play(
-      fromFrame: from.frameTime,
-      toFrame: from.frameTime + from.durationFrameTime,
-      loopMode: loopMode,
-      completion: completion)
-  }
-
-  /// Stops the animation and resets the view to its start frame.
-  ///
-  /// The completion closure will be called with `false`
-  public func stop() {
-    removeCurrentAnimation()
-    currentFrame = 0
-  }
-
-  /// Pauses the animation in its current state.
-  ///
-  /// The completion closure will be called with `false`
-  public func pause() {
-    removeCurrentAnimation()
-  }
-
   /// Reloads the images supplied to the animation from the `imageProvider`
   public func reloadImages() {
     animationLayer?.reloadImages()
@@ -709,8 +718,15 @@ final public class LottieAnimationView: LottieAnimationViewBase {
   }
 
   /// Logs all child keypaths.
+  /// Logs the result of `allHierarchyKeypaths()` to the `LottieLogger`.
   public func logHierarchyKeypaths() {
     animationLayer?.logHierarchyKeypaths()
+  }
+
+  /// Computes and returns a list of all child keypaths in the current animation.
+  /// The returned list is the same as the log output of `logHierarchyKeypaths()`
+  public func allHierarchyKeypaths() -> [String] {
+    animationLayer?.allHierarchyKeypaths() ?? []
   }
 
   /// Searches for the nearest child layer to the first Keypath and adds the subview
@@ -1060,6 +1076,33 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     }
   }
 
+  /// Updates an in flight animation.
+  func updateInFlightAnimation() {
+    guard let animationContext = animationContext else { return }
+
+    guard animationContext.closure.animationState != .complete else {
+      // Tried to re-add an already completed animation. Cancel.
+      self.animationContext = nil
+      return
+    }
+
+    /// Tell existing context to ignore its closure
+    animationContext.closure.ignoreDelegate = true
+
+    /// Make a new context, stealing the completion block from the previous.
+    let newContext = AnimationContext(
+      playFrom: animationContext.playFrom,
+      playTo: animationContext.playTo,
+      closure: animationContext.closure.completionBlock)
+
+    /// Remove current animation, and freeze the current frame.
+    let pauseFrame = realtimeAnimationFrame
+    animationLayer?.removeAnimation(forKey: activeAnimationName)
+    animationLayer?.currentFrame = pauseFrame
+
+    addNewAnimationForContext(newContext)
+  }
+
   // MARK: Fileprivate
 
   /// Context describing the animation that is currently playing in this `LottieAnimationView`
@@ -1087,6 +1130,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
 
     if let oldAnimation = animationLayer {
       oldAnimation.removeFromSuperlayer()
+      animationLayer = nil
     }
 
     invalidateIntrinsicContentSize()
@@ -1109,6 +1153,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
       return
     }
 
+    animationLayer.animationView = self
     animationLayer.renderScale = screenScale
 
     viewLayer?.addSublayer(animationLayer)
@@ -1125,6 +1170,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
       imageProvider: imageProvider.cachedImageProvider,
       textProvider: textProvider,
       fontProvider: fontProvider,
+      maskAnimationToBounds: maskAnimationToBounds,
       logger: logger)
   }
 
@@ -1135,6 +1181,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
         imageProvider: imageProvider.cachedImageProvider,
         textProvider: textProvider,
         fontProvider: fontProvider,
+        maskAnimationToBounds: maskAnimationToBounds,
         compatibilityTrackerMode: .track,
         logger: logger)
 
@@ -1170,6 +1217,7 @@ final public class LottieAnimationView: LottieAnimationViewBase {
         imageProvider: imageProvider.cachedImageProvider,
         textProvider: textProvider,
         fontProvider: fontProvider,
+        maskAnimationToBounds: maskAnimationToBounds,
         compatibilityTrackerMode: .abort,
         logger: logger)
 
@@ -1213,6 +1261,12 @@ final public class LottieAnimationView: LottieAnimationViewBase {
 
     let animationContext = animationContext
     let currentFrame = currentFrame
+
+    // Disable the completion handler delegate before tearing down the `CoreAnimationLayer`
+    // and building the `MainThreadAnimationLayer`. Otherwise deinitializing the
+    // `CoreAnimationLayer` would trigger the animation completion handler even though
+    // the animation hasn't even started playing yet.
+    animationContext?.closure.ignoreDelegate = true
 
     makeAnimationLayer(usingEngine: .mainThread)
 
@@ -1295,33 +1349,6 @@ final public class LottieAnimationView: LottieAnimationViewBase {
     animationContext = nil
   }
 
-  /// Updates an in flight animation.
-  fileprivate func updateInFlightAnimation() {
-    guard let animationContext = animationContext else { return }
-
-    guard animationContext.closure.animationState != .complete else {
-      // Tried to re-add an already completed animation. Cancel.
-      self.animationContext = nil
-      return
-    }
-
-    /// Tell existing context to ignore its closure
-    animationContext.closure.ignoreDelegate = true
-
-    /// Make a new context, stealing the completion block from the previous.
-    let newContext = AnimationContext(
-      playFrom: animationContext.playFrom,
-      playTo: animationContext.playTo,
-      closure: animationContext.closure.completionBlock)
-
-    /// Remove current animation, and freeze the current frame.
-    let pauseFrame = realtimeAnimationFrame
-    animationLayer?.removeAnimation(forKey: activeAnimationName)
-    animationLayer?.currentFrame = pauseFrame
-
-    addNewAnimationForContext(newContext)
-  }
-
   /// Adds animation to animation layer and sets the delegate. If animation layer or animation are nil, exits.
   fileprivate func addNewAnimationForContext(_ animationContext: AnimationContext) {
     guard let animationlayer = animationLayer, let animation = animation else {
@@ -1374,8 +1401,13 @@ final public class LottieAnimationView: LottieAnimationViewBase {
         // `playFrom` time to be the `currentFrame`. Since the animation duration
         // is based on `playFrom` and `playTo`, this automatically truncates the
         // duration (so the animation stops playing at `playFrom`).
+        //  - Don't do this if the animation is already at that frame
+        //    (e.g. playing from 100% to 0% when the animation is already at 0%)
+        //    since that would cause the animation to not play at all.
         case .playOnce:
-          animationContext.playFrom = currentFrame
+          if animationContext.playTo != currentFrame {
+            animationContext.playFrom = currentFrame
+          }
 
         // When looping, we specifically _don't_ want to affect the duration of the animation,
         // since that would affect the duration of all subsequent loops. We just want to adjust
@@ -1388,6 +1420,13 @@ final public class LottieAnimationView: LottieAnimationViewBase {
             timingConfiguration.timeOffset = currentTime - animation.time(forFrame: animationContext.playFrom)
           }
         }
+      }
+
+      // If attempting to play a zero-duration animation, just pause on that single frame instead
+      if animationContext.playFrom == animationContext.playTo {
+        currentFrame = animationContext.playTo
+        animationContext.closure.completionBlock?(true)
+        return
       }
 
       coreAnimationLayer.playAnimation(configuration: .init(

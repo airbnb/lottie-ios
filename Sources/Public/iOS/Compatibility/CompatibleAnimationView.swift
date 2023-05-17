@@ -17,8 +17,13 @@ public final class CompatibleAnimation: NSObject {
   // MARK: Lifecycle
 
   @objc
-  public init(name: String, bundle: Bundle = Bundle.main) {
+  public init(
+    name: String,
+    subdirectory: String? = nil,
+    bundle: Bundle = Bundle.main)
+  {
     self.name = name
+    self.subdirectory = subdirectory
     self.bundle = bundle
     super.init()
   }
@@ -26,7 +31,7 @@ public final class CompatibleAnimation: NSObject {
   // MARK: Internal
 
   internal var animation: LottieAnimation? {
-    LottieAnimation.named(name, bundle: bundle)
+    LottieAnimation.named(name, bundle: bundle, subdirectory: subdirectory)
   }
 
   @objc
@@ -37,7 +42,78 @@ public final class CompatibleAnimation: NSObject {
   // MARK: Private
 
   private let name: String
+  private let subdirectory: String?
   private let bundle: Bundle
+}
+
+/// An Objective-C compatible wrapper around Lottie's RenderingEngineOption enum. Pass in an option
+/// to the CompatibleAnimationView initializers to configure the rendering engine for the view.
+@objc
+public enum CompatibleRenderingEngineOption: Int {
+  /// Uses the rendering engine specified in LottieConfiguration.shared.
+  case shared
+
+  /// Uses the library default rendering engine, coreAnimation.
+  case defaultEngine
+
+  /// Optimizes rendering performance by using the Core Animation rendering engine for animations it
+  /// can render while falling back to the main thread renderer for all other animations.
+  case automatic
+
+  /// Only renders animations using the main thread rendering engine.
+  case mainThread
+
+  /// Only renders animations using the Core Animation rendering engine. Those animations that use
+  /// features not yet supported on this renderer will not be rendered.
+  case coreAnimation
+
+  // MARK: Public
+
+  /// Converts a CompatibleRenderingEngineOption to the corresponding LottieConfiguration for
+  /// internal rendering engine configuration.
+  public static func generateLottieConfiguration(
+    _ configuration: CompatibleRenderingEngineOption)
+    -> LottieConfiguration
+  {
+    switch configuration {
+    case .shared:
+      return LottieConfiguration.shared
+    case .defaultEngine:
+      return LottieConfiguration(renderingEngine: .coreAnimation)
+    case .automatic:
+      return LottieConfiguration(renderingEngine: .automatic)
+    case .mainThread:
+      return LottieConfiguration(renderingEngine: .mainThread)
+    case .coreAnimation:
+      return LottieConfiguration(renderingEngine: .coreAnimation)
+    }
+  }
+}
+
+/// An Objective-C compatible version of `LottieBackgroundBehavior`.
+@objc
+public enum CompatibleBackgroundBehavior: Int {
+  /// Stop the animation and reset it to the beginning of its current play time. The completion block is called.
+  case stop
+
+  /// Pause the animation in its current state. The completion block is called.
+  case pause
+
+  /// Pause the animation and restart it when the application moves to the foreground.
+  /// The completion block is stored and called when the animation completes.
+  ///  - This is the default when using the Main Thread rendering engine.
+  case pauseAndRestore
+
+  /// Stops the animation and sets it to the end of its current play time. The completion block is called.
+  case forceFinish
+
+  /// The animation continues playing in the background.
+  ///  - This is the default when using the Core Animation rendering engine.
+  ///    Playing an animation using the Core Animation engine doesn't come with any CPU overhead,
+  ///    so using `.continuePlaying` avoids the need to stop and then resume the animation
+  ///    (which does come with some CPU overhead).
+  ///  - This mode should not be used with the Main Thread rendering engine.
+  case continuePlaying
 }
 
 /// An Objective-C compatible wrapper around Lottie's LottieAnimationView.
@@ -46,10 +122,66 @@ public final class CompatibleAnimationView: UIView {
 
   // MARK: Lifecycle
 
+  /// Initializes a compatible AnimationView with a given compatible animation. Defaults to using
+  /// the rendering engine specified in LottieConfiguration.shared.
   @objc
-  public init(compatibleAnimation: CompatibleAnimation) {
-    animationView = LottieAnimationView(animation: compatibleAnimation.animation)
+  public convenience init(compatibleAnimation: CompatibleAnimation) {
+    self.init(compatibleAnimation: compatibleAnimation, compatibleRenderingEngineOption: .shared)
+  }
+
+  /// Initializes a compatible AnimationView with a given compatible animation and rendering engine
+  /// configuration.
+  @objc
+  public init(
+    compatibleAnimation: CompatibleAnimation,
+    compatibleRenderingEngineOption: CompatibleRenderingEngineOption)
+  {
+    animationView = LottieAnimationView(
+      animation: compatibleAnimation.animation,
+      configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
     self.compatibleAnimation = compatibleAnimation
+    super.init(frame: .zero)
+    commonInit()
+  }
+
+  /// Initializes a compatible AnimationView with the resources asynchronously loaded from a given
+  /// URL. Defaults to using the rendering engine specified in LottieConfiguration.shared.
+  @objc
+  public convenience init(url: URL) {
+    self.init(url: url, compatibleRenderingEngineOption: .shared)
+  }
+
+  /// Initializes a compatible AnimationView with the resources asynchronously loaded from a given
+  /// URL using the given rendering engine configuration.
+  @objc
+  public init(url: URL, compatibleRenderingEngineOption: CompatibleRenderingEngineOption) {
+    animationView = LottieAnimationView(
+      url: url,
+      closure: { _ in },
+      configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
+    super.init(frame: .zero)
+    commonInit()
+  }
+
+  /// Initializes a compatible AnimationView from a given Data object specifying the Lottie
+  /// animation. Defaults to using the rendering engine specified in LottieConfiguration.shared.
+  @objc
+  public convenience init(data: Data) {
+    self.init(data: data, compatibleRenderingEngineOption: .shared)
+  }
+
+  /// Initializes a compatible AnimationView from a given Data object specifying the Lottie
+  /// animation using the given rendering engine configuration.
+  @objc
+  public init(data: Data, compatibleRenderingEngineOption: CompatibleRenderingEngineOption) {
+    if let animation = try? LottieAnimation.from(data: data) {
+      animationView = LottieAnimationView(
+        animation: animation,
+        configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
+    } else {
+      animationView = LottieAnimationView(
+        configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
+    }
     super.init(frame: .zero)
     commonInit()
   }
@@ -82,6 +214,13 @@ public final class CompatibleAnimationView: UIView {
   }
 
   @objc
+  public var compatibleDictionaryTextProvider: CompatibleDictionaryTextProvider? {
+    didSet {
+      animationView.textProvider = compatibleDictionaryTextProvider?.textProvider ?? DefaultTextProvider()
+    }
+  }
+
+  @objc
   public override var contentMode: UIView.ContentMode {
     set { animationView.contentMode = newValue }
     get { animationView.contentMode }
@@ -97,6 +236,11 @@ public final class CompatibleAnimationView: UIView {
   public var currentProgress: CGFloat {
     set { animationView.currentProgress = newValue }
     get { animationView.currentProgress }
+  }
+
+  @objc
+  public var duration: CGFloat {
+    animationView.animation?.duration ?? 0.0
   }
 
   @objc
@@ -139,6 +283,38 @@ public final class CompatibleAnimationView: UIView {
   }
 
   @objc
+  public var backgroundMode: CompatibleBackgroundBehavior {
+    get {
+      switch animationView.backgroundBehavior {
+      case .stop:
+        return .stop
+      case .pause:
+        return .pause
+      case .pauseAndRestore:
+        return .pauseAndRestore
+      case .forceFinish:
+        return .forceFinish
+      case .continuePlaying:
+        return .continuePlaying
+      }
+    }
+    set {
+      switch newValue {
+      case .stop:
+        animationView.backgroundBehavior = .stop
+      case .pause:
+        animationView.backgroundBehavior = .pause
+      case .pauseAndRestore:
+        animationView.backgroundBehavior = .pauseAndRestore
+      case .forceFinish:
+        animationView.backgroundBehavior = .forceFinish
+      case .continuePlaying:
+        animationView.backgroundBehavior = .continuePlaying
+      }
+    }
+  }
+
+  @objc
   public func play() {
     play(completion: nil)
   }
@@ -148,6 +324,8 @@ public final class CompatibleAnimationView: UIView {
     animationView.play(completion: completion)
   }
 
+  /// Note: When calling this code from Objective-C, the method signature is
+  /// playFromProgress:toProgress:completion which drops the standard "With" naming convention.
   @objc
   public func play(
     fromProgress: CGFloat,
@@ -161,6 +339,8 @@ public final class CompatibleAnimationView: UIView {
       completion: completion)
   }
 
+  /// Note: When calling this code from Objective-C, the method signature is
+  /// playFromFrame:toFrame:completion which drops the standard "With" naming convention.
   @objc
   public func play(
     fromFrame: CGFloat,
@@ -174,6 +354,8 @@ public final class CompatibleAnimationView: UIView {
       completion: completion)
   }
 
+  /// Note: When calling this code from Objective-C, the method signature is
+  /// playFromMarker:toMarker:completion which drops the standard "With" naming convention.
   @objc
   public func play(
     fromMarker: String,
@@ -238,8 +420,8 @@ public final class CompatibleAnimationView: UIView {
     var green: CGFloat = 0
     var blue: CGFloat = 0
     var alpha: CGFloat = 0
-    // TODO: Fix color spaces
-    let colorspace = CGColorSpaceCreateDeviceRGB()
+
+    let colorspace = LottieConfiguration.shared.colorSpace
 
     let convertedColor = color.cgColor.converted(to: colorspace, intent: .defaultIntent, options: nil)
 
@@ -322,7 +504,6 @@ public final class CompatibleAnimationView: UIView {
   private let animationView: LottieAnimationView
 
   private func commonInit() {
-    translatesAutoresizingMaskIntoConstraints = false
     setUpViews()
   }
 
@@ -334,5 +515,30 @@ public final class CompatibleAnimationView: UIView {
     animationView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     animationView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
   }
+}
+
+/// An Objective-C compatible wrapper around Lottie's DictionaryTextProvider.
+/// Use in tandem with CompatibleAnimationView to supply text to LottieAnimationView
+/// when using Lottie in Objective-C.
+@objc
+public final class CompatibleDictionaryTextProvider: NSObject {
+
+  // MARK: Lifecycle
+
+  @objc
+  public init(values: [String: String]) {
+    self.values = values
+    super.init()
+  }
+
+  // MARK: Internal
+
+  internal var textProvider: AnimationTextProvider? {
+    DictionaryTextProvider(values)
+  }
+
+  // MARK: Private
+
+  private let values: [String: String]
 }
 #endif

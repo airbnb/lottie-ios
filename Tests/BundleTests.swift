@@ -11,7 +11,7 @@ import XCTest
 
 final class BundleTests: XCTestCase {
 
-  var bundle: Bundle { .module }
+  var bundle: Bundle { .lottie }
 
   func testGetAnimationDataWithSuffix() throws {
     let data = try bundle.getAnimationData("HamburgerArrow.json", subdirectory: "Samples")

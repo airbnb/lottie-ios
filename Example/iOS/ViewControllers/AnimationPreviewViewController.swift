@@ -29,7 +29,7 @@ class AnimationPreviewViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .systemBackground
+    view.backgroundColor = .secondarySystemBackground
 
     if let animation = LottieAnimation.named(animationName) {
       animationView.animation = animation
@@ -120,7 +120,7 @@ class AnimationPreviewViewController: UIViewController {
   private func configureSettingsMenu() {
     navigationItem.rightBarButtonItem = UIBarButtonItem(
       title: "Settings",
-      image: UIImage(systemName: "repeat.circle")!,
+      image: UIImage(systemName: "repeat.circle"),
       primaryAction: nil,
       menu: UIMenu(children: [
         UIMenu(

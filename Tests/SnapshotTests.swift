@@ -60,7 +60,7 @@ class SnapshotTests: XCTestCase {
       XCTAssert(
         Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).json") })
           || Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).lottie") }),
-        "Snapshot \"\(snapshotURL.lastPathComponent)\" has no corresponding sample animation")
+        "Snapshot \"\(snapshotURL.lastPathComponent)\" has no corresponding sample animation. Expecting \(animationName).json|.lottie")
     }
   }
 
@@ -68,7 +68,7 @@ class SnapshotTests: XCTestCase {
   /// reference a sample json file that actually exists
   func testCustomSnapshotConfigurationsHaveCorrespondingSampleFile() {
     for (animationName, _) in SnapshotConfiguration.customMapping {
-      let expectedSampleFile = Bundle.module.bundleURL.appendingPathComponent("Samples/\(animationName).json")
+      let expectedSampleFile = Bundle.lottie.bundleURL.appendingPathComponent("Samples/\(animationName).json")
 
       XCTAssert(
         Samples.sampleAnimationURLs.contains(expectedSampleFile),
@@ -86,6 +86,7 @@ class SnapshotTests: XCTestCase {
   override func setUp() {
     LottieLogger.shared = .printToConsole
     TestHelpers.snapshotTestsAreRunning = true
+    isRecording = false // Change it here to `true` if you want to generate the snapshots
   }
 
   override func tearDown() {
@@ -104,15 +105,9 @@ class SnapshotTests: XCTestCase {
     testName: String = #function)
     async throws
   {
-    #if os(iOS)
-    guard UIScreen.main.scale == 2 else {
-      /// Snapshots are captured at a 2x scale, so we can only support
-      /// running tests on a device that has a 2x scale.
-      ///  - In CI we run tests on an iPhone 8 simulator,
-      ///    but any device with a 2x scale works.
-      throw SnapshotError.unsupportedDevice
-    }
+    guard try SnapshotTests.enabled else { return }
 
+    #if os(iOS)
     for sampleAnimationName in Samples.sampleAnimationNames {
       for percent in progressPercentagesToSnapshot {
         guard
@@ -126,16 +121,12 @@ class SnapshotTests: XCTestCase {
         assertSnapshot(
           matching: animationView,
           as: .imageOfPresentationLayer(
-            precision: SnapshotConfiguration.forSample(named: sampleAnimationName).precision),
+            precision: SnapshotConfiguration.forSample(named: sampleAnimationName).precision,
+            perceptualPrecision: 0.985),
           named: "\(sampleAnimationName) (\(Int(percent * 100))%)",
           testName: testName)
       }
     }
-    #else
-    // We only run snapshot tests on iOS, since running snapshot tests
-    // for macOS and tvOS would triple the number of snapshot images
-    // we have to check in to the repo.
-    throw SnapshotError.unsupportedPlatform
     #endif
   }
 
@@ -145,7 +136,7 @@ class SnapshotTests: XCTestCase {
 
 extension LottieAnimation {
   /// The size that this animation should be snapshot at
-  fileprivate var snapshotSize: CGSize {
+  var snapshotSize: CGSize {
     let maxDimension: CGFloat = 500
 
     // If this is a landscape aspect ratio, we clamp the width
@@ -178,6 +169,30 @@ enum SnapshotError: Error {
   case unsupportedDevice
 }
 
+extension SnapshotTests {
+  /// Whether or not snapshot tests should be enabled for the current build target
+  static var enabled: Bool {
+    get throws {
+      #if os(iOS)
+      if UIScreen.main.scale == 2 {
+        return true
+      } else {
+        /// Snapshots are captured at a 2x scale, so we can only support
+        /// running tests on a device that has a 2x scale.
+        ///  - In CI we run tests on an iPhone 8 simulator,
+        ///    but any device with a 2x scale works.
+        throw SnapshotError.unsupportedDevice
+      }
+      #else
+      // We only run snapshot tests on iOS, since running snapshot tests
+      // for macOS and tvOS would triple the number of snapshot images
+      // we have to check in to the repo.
+      throw SnapshotError.unsupportedPlatform
+      #endif
+    }
+  }
+}
+
 // MARK: - Samples
 
 /// MARK: - Samples
@@ -187,13 +202,13 @@ enum Samples {
   static let directoryName = "Samples"
 
   /// The list of snapshot image files in `Tests/__Snapshots__`
-  static let snapshotURLs = Bundle.module.fileURLs(
-    in: "__Snapshots__",
+  static let snapshotURLs = Bundle.lottie.fileURLs(
+    in: "__Snapshots__/SnapshotTests",
     withSuffix: "png")
 
   /// The list of sample animation files in `Tests/Samples`
-  static let sampleAnimationURLs = Bundle.module.fileURLs(in: Samples.directoryName, withSuffix: "json")
-    + Bundle.module.fileURLs(in: Samples.directoryName, withSuffix: "lottie")
+  static let sampleAnimationURLs = Bundle.lottie.fileURLs(in: Samples.directoryName, withSuffix: "json")
+    + Bundle.lottie.fileURLs(in: Samples.directoryName, withSuffix: "lottie")
 
   /// The list of sample animation names in `Tests/Samples`
   static let sampleAnimationNames = sampleAnimationURLs.lazy
@@ -216,7 +231,7 @@ enum Samples {
     guard
       let animation = LottieAnimation.named(
         sampleAnimationName,
-        bundle: .module,
+        bundle: .lottie,
         subdirectory: Samples.directoryName)
     else { return nil }
 
@@ -227,7 +242,7 @@ enum Samples {
     guard
       let dotLottieFile = try? await DotLottieFile.named(
         sampleDotLottieName,
-        bundle: .module,
+        bundle: .lottie,
         subdirectory: Samples.directoryName)
     else {
       XCTFail("Could not parse Samples/\(sampleDotLottieName).lottie")

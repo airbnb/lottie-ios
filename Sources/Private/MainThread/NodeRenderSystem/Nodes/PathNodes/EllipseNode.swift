@@ -20,7 +20,7 @@ final class EllipseNodeProperties: NodePropertyMap, KeypathSearchable {
     position = NodeProperty(provider: KeyframeInterpolator(keyframes: ellipse.position.keyframes))
     size = NodeProperty(provider: KeyframeInterpolator(keyframes: ellipse.size.keyframes))
     keypathProperties = [
-      "Position" : position,
+      PropertyName.position.rawValue : position,
       "Size" : size,
     ]
     properties = Array(keypathProperties.values)

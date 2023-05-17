@@ -14,14 +14,24 @@ import AppKit
 
 extension Data {
 
-  static func jsonData(from assetName: String, in bundle: Bundle) -> Data? {
+  init(assetName: String, in bundle: Bundle) throws {
     #if canImport(UIKit)
-    return NSDataAsset(name: assetName, bundle: bundle)?.data
+    if let asset = NSDataAsset(name: assetName, bundle: bundle) {
+      self = asset.data
+      return
+    } else {
+      throw DotLottieError.assetNotFound(name: assetName, bundle: bundle)
+    }
     #else
     if #available(macOS 10.11, *) {
-      return NSDataAsset(name: assetName, bundle: bundle)?.data
+      if let asset = NSDataAsset(name: assetName, bundle: bundle) {
+        self = asset.data
+        return
+      } else {
+        throw DotLottieError.assetNotFound(name: assetName, bundle: bundle)
+      }
     }
-    return nil
+    throw DotLottieError.loadingFromAssetNotSupported
     #endif
   }
 }

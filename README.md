@@ -8,7 +8,7 @@ Lottie is a cross-platform library for iOS, macOS, tvOS, [Android](https://githu
 Lottie loads and renders animations and vectors exported in the bodymovin JSON format. Bodymovin JSON can be created and exported from After Effects with [bodymovin](https://github.com/bodymovin/bodymovin), Sketch with [Lottie Sketch Export](https://github.com/buba447/Lottie-Sketch-Export), and from [Haiku](https://www.haiku.ai).
 
 Designers can create **and ship** beautiful animations without an engineer painstakingly recreating them by hand.
-Since the animation is backed by JSON they are extremely small in size but can be large in complexity!
+Since the animations are backed by JSON, they are extremely small in size but can be large in complexity!
 Animations can be played, resized, looped, sped up, slowed down, reversed, and even interactively scrubbed.
 Lottie can play or loop just a portion of the animation as well, the possibilities are endless!
 Animations can even be ***changed at runtime*** in various ways! Change the color, position, or any keyframable value!
@@ -33,10 +33,20 @@ You can pull the [Lottie Github Repo](https://github.com/airbnb/lottie-ios/) and
 
 ### Swift Package Manager
 
-To install Lottie using [Swift Package Manager](https://github.com/apple/swift-package-manager)  you can follow the [tutorial published by Apple](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) using the URL for the Lottie repo with the current version:
+To install Lottie using [Swift Package Manager](https://github.com/apple/swift-package-manager) you can follow the [tutorial published by Apple](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) using the URL for the Lottie repo with the current version:
 
-1. In Xcode, select “File” → “Swift Packages” → “Add Package Dependency”
-1. Enter https://github.com/airbnb/lottie-ios.git
+1. In Xcode, select “File” → “Add Packages...”
+1. Enter https://github.com/airbnb/lottie-spm.git
+
+or you can add the following dependency to your `Package.swift`:
+
+```swift
+.package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.2.0")
+```
+
+When using Swift Package Manager we recommend using the [lottie-spm](https://github.com/airbnb/lottie-spm) repo instead of the main lottie-ios repo.  The main git repository for [lottie-ios](https://github.com/airbnb/lottie-ios) is somewhat large (300+ MB), and Swift Package Manager always downloads the full repository with all git history. The [lottie-spm](https://github.com/airbnb/lottie-spm) repo is much smaller (less than 500kb), so can be downloaded much more quickly. 
+
+Instead of downloading the full git history of Lottie and building it from source, the lottie-spm repo just contains a pointer to the precompiled XCFramework included in the [latest lottie-ios release](https://github.com/airbnb/lottie-ios/releases/latest) (typically ~8MB). If you prefer to include Lottie source directly your project, you can directly depend on the main lottie-ios repo by referencing `https://github.com/airbnb/lottie-ios.git` instead.
 
 ### CocoaPods
 Add the pod to your Podfile:
@@ -52,6 +62,7 @@ After installing the cocoapod into your project import Lottie with
 ```swift
 import Lottie
 ```
+
 ### Carthage
 Add Lottie to your Cartfile:
 ```
@@ -77,7 +88,7 @@ We always appreciate contributions from the community. To make changes to the pr
 
 All pull requests with new features or bug fixes that affect how animations render should include snapshot test cases that validate the included changes. 
   - To add a new sample animation to the snapshot testing suite, you can add the `.json` file to `Tests/Samples`. Re-run the snapshot tests to generate the new snapshot image files.
-  - To update existing snapshots after making changes, you can set `isRecording = true` in `SnapshotTests.swift` and then re-run the snapshot tests.
+  - To update existing snapshots after making changes, you can set `isRecording = true` in `SnapshotTests.swift` `setUp()` method and then re-run the snapshot tests.
 
 The project also includes several helpful commands defined in our [Rakefile](https://github.com/airbnb/lottie-ios/blob/master/Rakefile). To use these, you need to install [Bundler](https://bundler.io/):
 

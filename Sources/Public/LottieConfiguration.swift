@@ -1,6 +1,8 @@
 // Created by Cal Stephens on 12/13/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
+import QuartzCore
+
 // MARK: - LottieConfiguration
 
 /// Global configuration options for Lottie animations
@@ -10,10 +12,12 @@ public struct LottieConfiguration: Hashable {
 
   public init(
     renderingEngine: RenderingEngineOption = .automatic,
-    decodingStrategy: DecodingStrategy = .dictionaryBased)
+    decodingStrategy: DecodingStrategy = .dictionaryBased,
+    colorSpace: CGColorSpace = CGColorSpaceCreateDeviceRGB())
   {
     self.renderingEngine = renderingEngine
     self.decodingStrategy = decodingStrategy
+    self.colorSpace = colorSpace
   }
 
   // MARK: Public
@@ -32,6 +36,9 @@ public struct LottieConfiguration: Hashable {
   /// The decoding implementation to use when parsing an animation JSON file
   public var decodingStrategy: DecodingStrategy
 
+  /// The color space to be used for rendering
+  ///  - Defaults to `CGColorSpaceCreateDeviceRGB()`
+  public var colorSpace: CGColorSpace
 }
 
 // MARK: - RenderingEngineOption

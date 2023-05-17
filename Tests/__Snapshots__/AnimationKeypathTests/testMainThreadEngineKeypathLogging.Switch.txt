@@ -7,6 +7,9 @@ Checkmark Outlines 2.Group 1.Path 1
 Checkmark Outlines 2.Group 1.Path 1.Path
 Checkmark Outlines 2.Group 1.Position
 Checkmark Outlines 2.Group 1.Rotation
+Checkmark Outlines 2.Group 1.Rotation X
+Checkmark Outlines 2.Group 1.Rotation Y
+Checkmark Outlines 2.Group 1.Rotation Z
 Checkmark Outlines 2.Group 1.Scale
 Checkmark Outlines 2.Group 1.Skew
 Checkmark Outlines 2.Group 1.Skew Axis
@@ -21,6 +24,9 @@ Checkmark Outlines 2.Group 1.Transform.Anchor Point
 Checkmark Outlines 2.Group 1.Transform.Opacity
 Checkmark Outlines 2.Group 1.Transform.Position
 Checkmark Outlines 2.Group 1.Transform.Rotation
+Checkmark Outlines 2.Group 1.Transform.Rotation X
+Checkmark Outlines 2.Group 1.Transform.Rotation Y
+Checkmark Outlines 2.Group 1.Transform.Rotation Z
 Checkmark Outlines 2.Group 1.Transform.Scale
 Checkmark Outlines 2.Group 1.Transform.Skew
 Checkmark Outlines 2.Group 1.Transform.Skew Axis
@@ -33,6 +39,9 @@ Checkmark Outlines 2.Transform.Anchor Point
 Checkmark Outlines 2.Transform.Opacity
 Checkmark Outlines 2.Transform.Position
 Checkmark Outlines 2.Transform.Rotation
+Checkmark Outlines 2.Transform.Rotation X
+Checkmark Outlines 2.Transform.Rotation Y
+Checkmark Outlines 2.Transform.Rotation Z
 Checkmark Outlines 2.Transform.Scale
 Checkmark Outlines.Group 1
 Checkmark Outlines.Group 1.Anchor Point
@@ -41,6 +50,9 @@ Checkmark Outlines.Group 1.Path 1
 Checkmark Outlines.Group 1.Path 1.Path
 Checkmark Outlines.Group 1.Position
 Checkmark Outlines.Group 1.Rotation
+Checkmark Outlines.Group 1.Rotation X
+Checkmark Outlines.Group 1.Rotation Y
+Checkmark Outlines.Group 1.Rotation Z
 Checkmark Outlines.Group 1.Scale
 Checkmark Outlines.Group 1.Skew
 Checkmark Outlines.Group 1.Skew Axis
@@ -55,6 +67,9 @@ Checkmark Outlines.Group 1.Transform.Anchor Point
 Checkmark Outlines.Group 1.Transform.Opacity
 Checkmark Outlines.Group 1.Transform.Position
 Checkmark Outlines.Group 1.Transform.Rotation
+Checkmark Outlines.Group 1.Transform.Rotation X
+Checkmark Outlines.Group 1.Transform.Rotation Y
+Checkmark Outlines.Group 1.Transform.Rotation Z
 Checkmark Outlines.Group 1.Transform.Scale
 Checkmark Outlines.Group 1.Transform.Skew
 Checkmark Outlines.Group 1.Transform.Skew Axis
@@ -67,6 +82,9 @@ Checkmark Outlines.Transform.Anchor Point
 Checkmark Outlines.Transform.Opacity
 Checkmark Outlines.Transform.Position
 Checkmark Outlines.Transform.Rotation
+Checkmark Outlines.Transform.Rotation X
+Checkmark Outlines.Transform.Rotation Y
+Checkmark Outlines.Transform.Rotation Z
 Checkmark Outlines.Transform.Scale
 Switch Outline Outlines
 Switch Outline Outlines.Fill 1
@@ -79,6 +97,9 @@ Switch Outline Outlines.Group 1.Path 1
 Switch Outline Outlines.Group 1.Path 1.Path
 Switch Outline Outlines.Group 1.Position
 Switch Outline Outlines.Group 1.Rotation
+Switch Outline Outlines.Group 1.Rotation X
+Switch Outline Outlines.Group 1.Rotation Y
+Switch Outline Outlines.Group 1.Rotation Z
 Switch Outline Outlines.Group 1.Scale
 Switch Outline Outlines.Group 1.Skew
 Switch Outline Outlines.Group 1.Skew Axis
@@ -87,6 +108,9 @@ Switch Outline Outlines.Group 1.Transform.Anchor Point
 Switch Outline Outlines.Group 1.Transform.Opacity
 Switch Outline Outlines.Group 1.Transform.Position
 Switch Outline Outlines.Group 1.Transform.Rotation
+Switch Outline Outlines.Group 1.Transform.Rotation X
+Switch Outline Outlines.Group 1.Transform.Rotation Y
+Switch Outline Outlines.Group 1.Transform.Rotation Z
 Switch Outline Outlines.Group 1.Transform.Scale
 Switch Outline Outlines.Group 1.Transform.Skew
 Switch Outline Outlines.Group 1.Transform.Skew Axis
@@ -95,6 +119,9 @@ Switch Outline Outlines.Transform.Anchor Point
 Switch Outline Outlines.Transform.Opacity
 Switch Outline Outlines.Transform.Position
 Switch Outline Outlines.Transform.Rotation
+Switch Outline Outlines.Transform.Rotation X
+Switch Outline Outlines.Transform.Rotation Y
+Switch Outline Outlines.Transform.Rotation Z
 Switch Outline Outlines.Transform.Scale
 White BG Outlines
 White BG Outlines.Group 1
@@ -107,6 +134,9 @@ White BG Outlines.Group 1.Path 1
 White BG Outlines.Group 1.Path 1.Path
 White BG Outlines.Group 1.Position
 White BG Outlines.Group 1.Rotation
+White BG Outlines.Group 1.Rotation X
+White BG Outlines.Group 1.Rotation Y
+White BG Outlines.Group 1.Rotation Z
 White BG Outlines.Group 1.Scale
 White BG Outlines.Group 1.Skew
 White BG Outlines.Group 1.Skew Axis
@@ -115,6 +145,9 @@ White BG Outlines.Group 1.Transform.Anchor Point
 White BG Outlines.Group 1.Transform.Opacity
 White BG Outlines.Group 1.Transform.Position
 White BG Outlines.Group 1.Transform.Rotation
+White BG Outlines.Group 1.Transform.Rotation X
+White BG Outlines.Group 1.Transform.Rotation Y
+White BG Outlines.Group 1.Transform.Rotation Z
 White BG Outlines.Group 1.Transform.Scale
 White BG Outlines.Group 1.Transform.Skew
 White BG Outlines.Group 1.Transform.Skew Axis
@@ -123,6 +156,9 @@ White BG Outlines.Transform.Anchor Point
 White BG Outlines.Transform.Opacity
 White BG Outlines.Transform.Position
 White BG Outlines.Transform.Rotation
+White BG Outlines.Transform.Rotation X
+White BG Outlines.Transform.Rotation Y
+White BG Outlines.Transform.Rotation Z
 White BG Outlines.Transform.Scale
 X Outlines
 X Outlines.Group 1
@@ -132,6 +168,9 @@ X Outlines.Group 1.Path 1
 X Outlines.Group 1.Path 1.Path
 X Outlines.Group 1.Position
 X Outlines.Group 1.Rotation
+X Outlines.Group 1.Rotation X
+X Outlines.Group 1.Rotation Y
+X Outlines.Group 1.Rotation Z
 X Outlines.Group 1.Scale
 X Outlines.Group 1.Skew
 X Outlines.Group 1.Skew Axis
@@ -146,6 +185,9 @@ X Outlines.Group 1.Transform.Anchor Point
 X Outlines.Group 1.Transform.Opacity
 X Outlines.Group 1.Transform.Position
 X Outlines.Group 1.Transform.Rotation
+X Outlines.Group 1.Transform.Rotation X
+X Outlines.Group 1.Transform.Rotation Y
+X Outlines.Group 1.Transform.Rotation Z
 X Outlines.Group 1.Transform.Scale
 X Outlines.Group 1.Transform.Skew
 X Outlines.Group 1.Transform.Skew Axis
@@ -154,6 +196,9 @@ X Outlines.Transform.Anchor Point
 X Outlines.Transform.Opacity
 X Outlines.Transform.Position
 X Outlines.Transform.Rotation
+X Outlines.Transform.Rotation X
+X Outlines.Transform.Rotation Y
+X Outlines.Transform.Rotation Z
 X Outlines.Transform.Scale
 X Outlines.Trim Paths 1
 X Outlines.Trim Paths 1.End
