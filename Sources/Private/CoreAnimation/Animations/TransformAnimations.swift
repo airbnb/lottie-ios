@@ -32,6 +32,12 @@ protocol TransformModel {
 
   /// The rotation of the transform on Z axis.
   var rotationZ: KeyframeGroup<LottieVector1D> { get }
+
+  /// The skew of the transform (only present on `ShapeTransform`s)
+  var _skew: KeyframeGroup<LottieVector1D>? { get }
+
+  /// The skew axis of the transform (only present on `ShapeTransform`s)
+  var _skewAxis: KeyframeGroup<LottieVector1D>? { get }
 }
 
 // MARK: - Transform + TransformModel
@@ -40,6 +46,8 @@ extension Transform: TransformModel {
   var _position: KeyframeGroup<LottieVector3D>? { position }
   var _positionX: KeyframeGroup<LottieVector1D>? { positionX }
   var _positionY: KeyframeGroup<LottieVector1D>? { positionY }
+  var _skew: KeyframeGroup<LottieVector1D>? { nil }
+  var _skewAxis: KeyframeGroup<LottieVector1D>? { nil }
 }
 
 // MARK: - ShapeTransform + TransformModel
@@ -49,6 +57,8 @@ extension ShapeTransform: TransformModel {
   var _position: KeyframeGroup<LottieVector3D>? { position }
   var _positionX: KeyframeGroup<LottieVector1D>? { nil }
   var _positionY: KeyframeGroup<LottieVector1D>? { nil }
+  var _skew: KeyframeGroup<LottieVector1D>? { skew }
+  var _skewAxis: KeyframeGroup<LottieVector1D>? { skewAxis }
 }
 
 // MARK: - CALayer + TransformModel
@@ -66,15 +76,18 @@ extension CALayer {
     context: LayerAnimationContext)
     throws
   {
-    // CALayers don't support animating skew with its own set of keyframes.
-    // If the transform includes a skew, we have to combine all of the transform
-    // components into a single set of keyframes.
-    // Only `ShapeTransform` supports skews.
     if
-      let shapeTransform = transformModel as? ShapeTransform,
-      shapeTransform.hasSkew
+      // CALayers don't support animating skew with its own set of keyframes.
+      // If the transform includes a skew, we have to combine all of the transform
+      // components into a single set of keyframes.
+      transformModel.hasSkew
+      // Negative `scale.x` values aren't applied correctly by Core Animation when animating
+      // `transform.scale.x` and `transform.scale.y` using separate `CAKeyframeAnimation`s
+      // (https://openradar.appspot.com/FB9862872). If the transform includes negative `scale.x`
+      // values, we have to combine all of the transform components into a single set of keyframes.
+      || transformModel.hasNegativeXScaleValues
     {
-      try addCombinedTransformAnimation(for: shapeTransform, context: context)
+      try addCombinedTransformAnimation(for: transformModel, context: context)
     }
 
     else {
@@ -159,64 +172,9 @@ extension CALayer {
         // Lottie animation files express scale as a numerical percentage value
         // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
-        //  - Negative `scale.x` values aren't applied correctly by Core Animation.
-        //    This appears to be because we animate `transform.scale.x` and `transform.scale.y`
-        //    as separate `CAKeyframeAnimation`s instead of using a single animation of `transform` itself.
-        //    https://openradar.appspot.com/FB9862872
-        //  - To work around this, we set up a `rotationY` animation below
-        //    to flip the view horizontally, which gives us the desired effect.
-        abs(CGFloat(scale.x) / 100)
+        CGFloat(scale.x) / 100
       },
       context: context)
-
-    /// iOS 14 and earlier doesn't properly support rendering transforms with
-    /// negative `scale.x` values: https://github.com/airbnb/lottie-ios/issues/1882
-    let osSupportsNegativeScaleValues: Bool = {
-      #if os(iOS) || os(tvOS)
-      if #available(iOS 15.0, tvOS 15.0, *) {
-        return true
-      } else {
-        return false
-      }
-      #else
-      // We'll assume this works correctly on macOS until told otherwise
-      return true
-      #endif
-    }()
-
-    lazy var hasNegativeXScaleValues = transformModel.scale.keyframes.contains(where: { $0.value.x < 0 })
-
-    // When `scale.x` is negative, we have to rotate the view
-    // half way around the y axis to flip it horizontally.
-    //  - We don't do this in snapshot tests because it breaks the tests
-    //    in surprising ways that don't happen at runtime. Definitely not ideal.
-    //  - This isn't supported on iOS 14 and earlier either, so we have to
-    //    log a compatibility error on devices running older OSs.
-    if TestHelpers.snapshotTestsAreRunning {
-      if hasNegativeXScaleValues {
-        context.logger.warn("""
-          Negative `scale.x` values are not displayed correctly in snapshot tests
-          """)
-      }
-    } else {
-      if !osSupportsNegativeScaleValues, hasNegativeXScaleValues {
-        try context.logCompatibilityIssue("""
-          iOS 14 and earlier does not support rendering negative `scale.x` values
-          """)
-      }
-
-      try addAnimation(
-        for: .rotationY,
-        keyframes: transformModel.scale,
-        value: { scale in
-          if scale.x < 0 {
-            return .pi
-          } else {
-            return 0
-          }
-        },
-        context: context)
-    }
 
     try addAnimation(
       for: .scaleY,
@@ -225,9 +183,6 @@ extension CALayer {
         // Lottie animation files express scale as a numerical percentage value
         // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
-        //  - Negative `scaleY` values are correctly applied (they flip the view
-        //    vertically), so we don't have to apply an additional rotation animation
-        //    like we do for `scaleX`.
         CGFloat(scale.y) / 100
       },
       context: context)
@@ -291,26 +246,38 @@ extension CALayer {
 
   /// Adds an animation for the entire `transform` key by combining all of the
   /// position / size / rotation / skew animations into a single set of keyframes.
-  /// This is necessary when there's a skew animation, since skew can only
-  /// be applied via a transform.
+  /// This is more expensive that animating each component separately, since
+  /// it may require manually interpolating the keyframes at each frame.
   private func addCombinedTransformAnimation(
-    for transformModel: ShapeTransform,
+    for transformModel: TransformModel,
     context: LayerAnimationContext)
     throws
   {
     let combinedTransformKeyframes = Keyframes.combined(
-      transformModel.anchor,
-      transformModel.position,
+      transformModel.anchorPoint,
+      transformModel._position ?? KeyframeGroup(LottieVector3D(x: 0.0, y: 0.0, z: 0.0)),
+      transformModel._positionX ?? KeyframeGroup(LottieVector1D(0)),
+      transformModel._positionY ?? KeyframeGroup(LottieVector1D(0)),
       transformModel.scale,
       transformModel.rotationX,
       transformModel.rotationY,
       transformModel.rotationZ,
-      transformModel.skew,
-      transformModel.skewAxis,
-      makeCombinedResult: { anchor, position, scale, rotationX, rotationY, rotationZ, skew, skewAxis in
-        CATransform3D.makeTransform(
+      transformModel._skew ?? KeyframeGroup(LottieVector1D(0)),
+      transformModel._skewAxis ?? KeyframeGroup(LottieVector1D(0)),
+      makeCombinedResult: {
+        anchor, position, positionX, positionY, scale, rotationX, rotationY, rotationZ, skew, skewAxis
+          -> CATransform3D in
+
+        let transformPosition: CGPoint
+        if transformModel._positionX != nil, transformModel._positionY != nil {
+          transformPosition = CGPoint(x: positionX.cgFloatValue, y: positionY.cgFloatValue)
+        } else {
+          transformPosition = position.pointValue
+        }
+
+        return CATransform3D.makeTransform(
           anchor: anchor.pointValue,
-          position: position.pointValue,
+          position: transformPosition,
           scale: scale.sizeValue,
           rotationX: rotationX.cgFloatValue,
           rotationY: rotationY.cgFloatValue,
@@ -326,4 +293,25 @@ extension CALayer {
       context: context)
   }
 
+}
+
+extension TransformModel {
+  /// Whether or not this transform has a non-zero skew value
+  var hasSkew: Bool {
+    guard
+      let _skew = _skew,
+      let _skewAxis = _skewAxis,
+      !_skew.keyframes.isEmpty,
+      !_skewAxis.keyframes.isEmpty
+    else {
+      return false
+    }
+
+    return _skew.keyframes.contains(where: { $0.value.cgFloatValue != 0 })
+  }
+
+  /// Whether or not this `TransformModel` has any negative X scale values
+  var hasNegativeXScaleValues: Bool {
+    scale.keyframes.contains(where: { $0.value.x < 0 })
+  }
 }
