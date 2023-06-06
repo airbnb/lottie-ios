@@ -262,7 +262,7 @@ enum Keyframes {
 extension KeyframeGroup {
   /// Whether or not all of the keyframes in this `KeyframeGroup` have the same
   /// timing parameters as the corresponding keyframe in the other given `KeyframeGroup`
-  func hasSameTimingParameters<T>(as other: KeyframeGroup<T>) -> Bool {
+  func hasSameTimingParameters<U>(as other: KeyframeGroup<U>) -> Bool {
     guard keyframes.count == other.keyframes.count else {
       return false
     }
@@ -276,7 +276,7 @@ extension KeyframeGroup {
 extension Keyframe {
   /// Whether or not this keyframe has the same timing parameters as the given keyframe,
   /// excluding `spatialInTangent` and `spatialOutTangent`.
-  fileprivate func hasSameTimingParameters<T>(as other: Keyframe<T>) -> Bool {
+  fileprivate func hasSameTimingParameters<U>(as other: Keyframe<U>) -> Bool {
     time == other.time
       && isHold == other.isHold
       && inTangent == other.inTangent
