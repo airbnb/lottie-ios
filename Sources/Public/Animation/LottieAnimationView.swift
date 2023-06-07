@@ -708,7 +708,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
       self.setNeedsLayout()
     }
 
-    lottieAnimationLayer.animationLayerWillLoad = { [weak self] lottieAnimationLayer, _ in
+    lottieAnimationLayer.animationLayerDidLoad = { [weak self] lottieAnimationLayer, _ in
       guard let self = self else { return }
       self.invalidateIntrinsicContentSize()
       self.setNeedsLayout()

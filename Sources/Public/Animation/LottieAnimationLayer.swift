@@ -267,9 +267,9 @@ public class LottieAnimationLayer: CALayer {
   /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
   public private(set) var valueProviders = [AnimationKeypath: AnyValueProvider]()
 
-  /// A closure called when the animation layer will be loaded.
+  /// A closure called when the animation layer has been loaded.
   /// Will inform the receiver the type of rendering engine that is used for the layer.
-  public var animationLayerWillLoad:((_ animationLayer: LottieAnimationLayer, _ renderingEngine: RenderingEngineOption) -> Void)?
+  public var animationLayerDidLoad:((_ animationLayer: LottieAnimationLayer, _ renderingEngine: RenderingEngineOption) -> Void)?
 
   public var screenScale: CGFloat {
     didSet {
@@ -892,7 +892,7 @@ public class LottieAnimationLayer: CALayer {
       return
     }
 
-    animationLayerWillLoad?(self, renderingEngine)
+    animationLayerDidLoad?(self, renderingEngine)
 
     animationLayer.renderScale = screenScale
 
