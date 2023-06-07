@@ -8,7 +8,87 @@
 import Foundation
 import QuartzCore
 
+// MARK: - LottieBackgroundBehavior
+
+/// Describes the behavior of an AnimationView when the app is moved to the background.
+public enum LottieBackgroundBehavior {
+  /// Stop the animation and reset it to the beginning of its current play time. The completion block is called.
+  case stop
+
+  /// Pause the animation in its current state. The completion block is called.
+  case pause
+
+  /// Pause the animation and restart it when the application moves to the foreground.
+  /// The completion block is stored and called when the animation completes.
+  ///  - This is the default when using the Main Thread rendering engine.
+  case pauseAndRestore
+
+  /// Stops the animation and sets it to the end of its current play time. The completion block is called.
+  case forceFinish
+
+  /// The animation continues playing in the background.
+  ///  - This is the default when using the Core Animation rendering engine.
+  ///    Playing an animation using the Core Animation engine doesn't come with any CPU overhead,
+  ///    so using `.continuePlaying` avoids the need to stop and then resume the animation
+  ///    (which does come with some CPU overhead).
+  ///  - This mode should not be used with the Main Thread rendering engine.
+  case continuePlaying
+
+  // MARK: Public
+
+  /// The default background behavior, based on the rendering engine being used to play the animation.
+  ///  - Playing an animation using the Main Thread rendering engine comes with CPU overhead,
+  ///    so the animation should be paused or stopped when the `LottieAnimationView` is not visible.
+  ///  - Playing an animation using the Core Animation rendering engine does not come with any
+  ///    CPU overhead, so these animations do not need to be paused in the background.
+  public static func `default`(for renderingEngine: RenderingEngine) -> LottieBackgroundBehavior {
+    switch renderingEngine {
+    case .mainThread:
+      return .pauseAndRestore
+    case .coreAnimation:
+      return .continuePlaying
+    }
+  }
+}
+
+// MARK: - LottieLoopMode
+
+/// Defines animation loop behavior
+public enum LottieLoopMode {
+  /// Animation is played once then stops.
+  case playOnce
+  /// Animation will loop from beginning to end until stopped.
+  case loop
+  /// Animation will play forward, then backwards and loop until stopped.
+  case autoReverse
+  /// Animation will loop from beginning to end up to defined amount of times.
+  case `repeat`(Float)
+  /// Animation will play forward, then backwards a defined amount of times.
+  case repeatBackwards(Float)
+}
+
+// MARK: Equatable
+
+extension LottieLoopMode: Equatable {
+  public static func == (lhs: LottieLoopMode, rhs: LottieLoopMode) -> Bool {
+    switch (lhs, rhs) {
+    case (.repeat(let lhsAmount), .repeat(let rhsAmount)),
+         (.repeatBackwards(let lhsAmount), .repeatBackwards(let rhsAmount)):
+      return lhsAmount == rhsAmount
+    case (.playOnce, .playOnce),
+         (.loop, .loop),
+         (.autoReverse, .autoReverse):
+      return true
+    default:
+      return false
+    }
+  }
+}
+
 // MARK: - LottieAnimationView
+
+/// A UIView subclass for rendering Lottie animations.
+/// All functionality is also available in a CALayer as `LottieAnimationLayer`.
 
 @IBDesignable
 open class LottieAnimationView: LottieAnimationViewBase {
@@ -39,8 +119,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
     if let animation = animation {
       frame = animation.bounds
     }
-    viewLayer?.addSublayer(lottieAnimationLayer)
-    setNeedsLayout()
   }
 
   /// Initializes an AnimationView with a .lottie file.
@@ -65,8 +143,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
     if let animation = animation {
       frame = animation.bounds
     }
-    viewLayer?.addSublayer(lottieAnimationLayer)
-    setNeedsLayout()
   }
 
   public init(
@@ -77,8 +153,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
     self.logger = logger
     super.init(frame: .zero)
     commonInit()
-    viewLayer?.addSublayer(lottieAnimationLayer)
-    setNeedsLayout()
   }
 
   public override init(frame: CGRect) {
@@ -92,8 +166,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
     logger = .shared
     super.init(frame: frame)
     commonInit()
-    viewLayer?.addSublayer(lottieAnimationLayer)
-    setNeedsLayout()
   }
 
   required public init?(coder aDecoder: NSCoder) {
@@ -107,8 +179,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
     logger = .shared
     super.init(coder: aDecoder)
     commonInit()
-    viewLayer?.addSublayer(lottieAnimationLayer)
-    setNeedsLayout()
   }
 
   // MARK: Open
@@ -117,7 +187,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   ///
   /// - Parameter completion: An optional completion closure to be called when the animation completes playing.
   open func play(completion: LottieCompletionBlock? = nil) {
-    lottieAnimationLayer.play(completion: completion)
+    self.lottieAnimationLayer.play(completion: completion)
   }
 
   /// Plays the animation from a progress (0-1) to a progress (0-1).
@@ -132,7 +202,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
-    lottieAnimationLayer.play(fromProgress: fromProgress, toProgress: toProgress, loopMode: loopMode, completion: completion)
+    self.lottieAnimationLayer.play(fromProgress: fromProgress, toProgress: toProgress, loopMode: loopMode, completion: completion)
   }
 
   /// Plays the animation from a start frame to an end frame in the animation's framerate.
@@ -147,7 +217,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
-    lottieAnimationLayer.play(fromFrame: fromFrame, toFrame: toFrame, loopMode: loopMode, completion: completion)
+    self.lottieAnimationLayer.play(fromFrame: fromFrame, toFrame: toFrame, loopMode: loopMode, completion: completion)
   }
 
   /// Plays the animation from a named marker to another marker.
@@ -172,7 +242,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
-    lottieAnimationLayer.play(
+    self.lottieAnimationLayer.play(
       fromMarker: fromMarker,
       toMarker: toMarker,
       playEndMarkerFrame: playEndMarkerFrame,
@@ -195,27 +265,27 @@ open class LottieAnimationView: LottieAnimationViewBase {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
-    lottieAnimationLayer.play(marker: marker, loopMode: loopMode, completion: completion)
+    self.lottieAnimationLayer.play(marker: marker, loopMode: loopMode, completion: completion)
   }
 
   /// Stops the animation and resets the view to its start frame.
   ///
   /// The completion closure will be called with `false`
   open func stop() {
-    lottieAnimationLayer.stop()
+    self.lottieAnimationLayer.stop()
   }
 
   /// Pauses the animation in its current state.
   ///
   /// The completion closure will be called with `false`
   open func pause() {
-    lottieAnimationLayer.pause()
+    self.lottieAnimationLayer.pause()
   }
 
   // MARK: Public
 
   // The backing CALayer for this animation view.
-  public var lottieAnimationLayer: LottieAnimationLayer;
+  private let lottieAnimationLayer: LottieAnimationLayer
 
   /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
   public private(set) var valueProviders = [AnimationKeypath: AnyValueProvider]()
@@ -231,24 +301,16 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// The default for the Core Animation engine is `continuePlaying`,
   /// since the Core Animation engine does not have any CPU overhead.
   public var backgroundBehavior: LottieBackgroundBehavior {
-    get {
-      lottieAnimationLayer.backgroundBehavior
-    }
-    set(newValue) {
-      lottieAnimationLayer.backgroundBehavior = newValue
-    }
+    get { self.lottieAnimationLayer.backgroundBehavior }
+    set { self.lottieAnimationLayer.backgroundBehavior = newValue }
   }
 
   /// Sets the animation backing the animation view. Setting this will clear the
   /// view's contents, completion blocks and current state. The new animation will
   /// be loaded up and set to the beginning of its timeline.
   public var animation: LottieAnimation? {
-    get {
-      lottieAnimationLayer.animation
-    }
-    set(newValue) {
-      lottieAnimationLayer.animation = newValue
-    }
+    get { self.lottieAnimationLayer.animation }
+    set { self.lottieAnimationLayer.animation = newValue }
   }
 
   /// A closure that is called when `self.animation` is loaded. When setting this closure,
@@ -291,64 +353,44 @@ open class LottieAnimationView: LottieAnimationViewBase {
   ///
   /// Setting this will cause the animation to reload its image contents.
   public var imageProvider: AnimationImageProvider {
-    get {
-      lottieAnimationLayer.imageProvider
-    }
-    set(newValue) {
-      lottieAnimationLayer.imageProvider = newValue
-    }
+    get { self.lottieAnimationLayer.imageProvider }
+    set { self.lottieAnimationLayer.imageProvider = newValue }
   }
 
   /// Sets the text provider for animation view. A text provider provides the
   /// animation with values for text layers
   public var textProvider: AnimationTextProvider {
-    get {
-      lottieAnimationLayer.textProvider
-    }
-    set(newValue) {
-      lottieAnimationLayer.textProvider = newValue
-    }
+    get { self.lottieAnimationLayer.textProvider }
+    set { self.lottieAnimationLayer.textProvider = newValue }
   }
 
   /// Sets the text provider for animation view. A text provider provides the
   /// animation with values for text layers
   public var fontProvider: AnimationFontProvider {
-    get {
-      lottieAnimationLayer.fontProvider
-    }
-    set(newValue) {
-      lottieAnimationLayer.fontProvider = newValue
-    }
+    get { self.lottieAnimationLayer.fontProvider }
+    set { self.lottieAnimationLayer.fontProvider = newValue }
   }
 
   /// Whether or not the animation is masked to the bounds. Defaults to true.
   public var maskAnimationToBounds: Bool {
-    get {
-      lottieAnimationLayer.maskAnimationToBounds
-    }
-    set(newValue) {
-      lottieAnimationLayer.maskAnimationToBounds = newValue
-    }
+    get { self.lottieAnimationLayer.maskAnimationToBounds }
+    set { self.lottieAnimationLayer.maskAnimationToBounds = newValue }
   }
 
   /// Returns `true` if the animation is currently playing.
   public var isAnimationPlaying: Bool {
-    lottieAnimationLayer.isAnimationPlaying
+    self.lottieAnimationLayer.isAnimationPlaying
   }
 
   /// Returns `true` if the animation will start playing when this view is added to a window.
   public var isAnimationQueued: Bool {
-    lottieAnimationLayer.hasAnimationContext && waitingToPlayAnimation
+    self.lottieAnimationLayer.hasAnimationContext && waitingToPlayAnimation
   }
 
   /// Sets the loop behavior for `play` calls. Defaults to `playOnce`
   public var loopMode: LottieLoopMode {
-    get {
-      lottieAnimationLayer.loopMode
-    }
-    set(newValue) {
-      lottieAnimationLayer.loopMode = newValue
-    }
+    get { self.lottieAnimationLayer.loopMode }
+    set { self.lottieAnimationLayer.loopMode = newValue }
   }
 
   /// When `true` the animation view will rasterize its contents when not animating.
@@ -358,12 +400,8 @@ open class LottieAnimationView: LottieAnimationViewBase {
   ///
   /// Defaults to `false`
   public var shouldRasterizeWhenIdle: Bool {
-    get {
-      lottieAnimationLayer.shouldRasterizeWhenIdle
-    }
-    set(newValue) {
-      lottieAnimationLayer.shouldRasterizeWhenIdle = newValue
-    }
+    get { self.lottieAnimationLayer.shouldRasterizeWhenIdle }
+    set { self.lottieAnimationLayer.shouldRasterizeWhenIdle = newValue }
   }
 
   /// Sets the current animation time with a Progress Time
@@ -371,12 +409,8 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// Note: Setting this will stop the current animation, if any.
   /// Note 2: If `animation` is nil, setting this will fallback to 0
   public var currentProgress: AnimationProgressTime {
-    get {
-      lottieAnimationLayer.currentProgress
-    }
-    set(newValue) {
-      lottieAnimationLayer.currentProgress = newValue
-    }
+    get { self.lottieAnimationLayer.currentProgress }
+    set { self.lottieAnimationLayer.currentProgress = newValue }
   }
 
   /// Sets the current animation time with a time in seconds.
@@ -384,44 +418,32 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// Note: Setting this will stop the current animation, if any.
   /// Note 2: If `animation` is nil, setting this will fallback to 0
   public var currentTime: TimeInterval {
-    get {
-      lottieAnimationLayer.currentTime
-    }
-    set(newValue) {
-      lottieAnimationLayer.currentTime = newValue
-    }
+    get { self.lottieAnimationLayer.currentTime }
+    set { self.lottieAnimationLayer.currentTime = newValue }
   }
 
   /// Sets the current animation time with a frame in the animations framerate.
   ///
   /// Note: Setting this will stop the current animation, if any.
   public var currentFrame: AnimationFrameTime {
-    get {
-      lottieAnimationLayer.currentFrame
-    }
-    set(newValue) {
-      lottieAnimationLayer.currentFrame = newValue
-    }
+    get { self.lottieAnimationLayer.currentFrame }
+    set { self.lottieAnimationLayer.currentFrame = newValue }
   }
 
   /// Returns the current animation frame while an animation is playing.
   public var realtimeAnimationFrame: AnimationFrameTime {
-    lottieAnimationLayer.realtimeAnimationFrame
+    self.lottieAnimationLayer.realtimeAnimationFrame
   }
 
   /// Returns the current animation frame while an animation is playing.
   public var realtimeAnimationProgress: AnimationProgressTime {
-    lottieAnimationLayer.realtimeAnimationProgress
+    self.lottieAnimationLayer.realtimeAnimationProgress
   }
 
   /// Sets the speed of the animation playback. Defaults to 1
   public var animationSpeed: CGFloat {
-    get {
-      lottieAnimationLayer.animationSpeed
-    }
-    set(newValue) {
-      lottieAnimationLayer.animationSpeed = newValue
-    }
+    get { self.lottieAnimationLayer.animationSpeed }
+    set { self.lottieAnimationLayer.animationSpeed = newValue }
   }
 
   /// When `true` the animation will play back at the framerate encoded in the
@@ -430,12 +452,8 @@ open class LottieAnimationView: LottieAnimationViewBase {
   ///
   /// Defaults to false
   public var respectAnimationFrameRate: Bool {
-    get {
-      lottieAnimationLayer.respectAnimationFrameRate
-    }
-    set(newValue) {
-      lottieAnimationLayer.respectAnimationFrameRate = newValue
-    }
+    get { self.lottieAnimationLayer.respectAnimationFrameRate }
+    set { self.lottieAnimationLayer.respectAnimationFrameRate = newValue }
   }
 
   /// Controls the cropping of an Animation. Setting this property will crop the animation
@@ -471,7 +489,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   ///  - This will only be `nil` in cases where the configuration is `automatic`
   ///    but a `RootAnimationLayer` hasn't been constructed yet
   public var currentRenderingEngine: RenderingEngine? {
-    lottieAnimationLayer.currentRenderingEngine
+    self.lottieAnimationLayer.currentRenderingEngine
   }
 
   /// Sets the lottie file backing the animation view. Setting this will clear the
@@ -487,17 +505,17 @@ open class LottieAnimationView: LottieAnimationViewBase {
     _ animationId: String? = nil,
     from dotLottieFile: DotLottieFile)
   {
-    lottieAnimationLayer.loadAnimation(animationId, from: dotLottieFile)
+    self.lottieAnimationLayer.loadAnimation(animationId, from: dotLottieFile)
   }
 
   /// Reloads the images supplied to the animation from the `imageProvider`
   public func reloadImages() {
-    lottieAnimationLayer.reloadImages()
+    self.lottieAnimationLayer.reloadImages()
   }
 
   /// Forces the LottieAnimationView to redraw its contents.
   public func forceDisplayUpdate() {
-    lottieAnimationLayer.forceDisplayUpdate()
+    self.lottieAnimationLayer.forceDisplayUpdate()
   }
 
   /// Sets a ValueProvider for the specified keypath. The value provider will be set
@@ -523,7 +541,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// animationView.setValueProvider(redValueProvider, keypath: fillKeypath)
   /// ```
   public func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
-    lottieAnimationLayer.setValueProvider(valueProvider, keypath: keypath)
+    self.lottieAnimationLayer.setValueProvider(valueProvider, keypath: keypath)
   }
 
   /// Reads the value of a property specified by the Keypath.
@@ -532,7 +550,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// - Parameter for: The keypath used to search for the property.
   /// - Parameter atFrame: The Frame Time of the value to query. If nil then the current frame is used.
   public func getValue(for keypath: AnimationKeypath, atFrame: AnimationFrameTime?) -> Any? {
-    lottieAnimationLayer.getValue(for: keypath, atFrame: atFrame)
+    self.lottieAnimationLayer.getValue(for: keypath, atFrame: atFrame)
   }
 
   /// Reads the original value of a property specified by the Keypath.
@@ -542,19 +560,19 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// - Parameter for: The keypath used to search for the property.
   /// - Parameter atFrame: The Frame Time of the value to query. If nil then the current frame is used.
   public func getOriginalValue(for keypath: AnimationKeypath, atFrame: AnimationFrameTime?) -> Any? {
-    lottieAnimationLayer.getOriginalValue(for: keypath, atFrame: atFrame)
+    self.lottieAnimationLayer.getOriginalValue(for: keypath, atFrame: atFrame)
   }
 
   /// Logs all child keypaths.
   /// Logs the result of `allHierarchyKeypaths()` to the `LottieLogger`.
   public func logHierarchyKeypaths() {
-    lottieAnimationLayer.logHierarchyKeypaths()
+    self.lottieAnimationLayer.logHierarchyKeypaths()
   }
 
   /// Computes and returns a list of all child keypaths in the current animation.
   /// The returned list is the same as the log output of `logHierarchyKeypaths()`
   public func allHierarchyKeypaths() -> [String] {
-    lottieAnimationLayer.allHierarchyKeypaths()
+    self.lottieAnimationLayer.allHierarchyKeypaths()
   }
 
   /// Searches for the nearest child layer to the first Keypath and adds the subview
@@ -584,7 +602,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
     }
     setNeedsLayout()
     layoutIfNeeded()
-    lottieAnimationLayer.forceDisplayUpdate()
+    self.lottieAnimationLayer.forceDisplayUpdate()
     addSubview(subview)
     if let subViewLayer = subview.viewLayer {
       sublayer.addSublayer(subViewLayer)
@@ -599,7 +617,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// - Parameter rect: The CGRect to convert.
   /// - Parameter toLayerAt: The keypath used to find the layer.
   public func convert(_ rect: CGRect, toLayerAt keypath: AnimationKeypath?) -> CGRect? {
-    let convertedRect = lottieAnimationLayer.convert(rect, toLayerAt: keypath)
+    let convertedRect = self.lottieAnimationLayer.convert(rect, toLayerAt: keypath)
     setNeedsLayout()
     layoutIfNeeded()
     return convertedRect
@@ -613,7 +631,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// - Parameter point: The CGPoint to convert.
   /// - Parameter toLayerAt: The keypath used to find the layer.
   public func convert(_ point: CGPoint, toLayerAt keypath: AnimationKeypath?) -> CGPoint? {
-    let convertedRect = lottieAnimationLayer.convert(point, toLayerAt: keypath)
+    let convertedRect = self.lottieAnimationLayer.convert(point, toLayerAt: keypath)
     setNeedsLayout()
     layoutIfNeeded()
     return convertedRect
@@ -625,7 +643,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// - Parameter isEnabled: When true the animator nodes affect the rendering tree. When false the node is removed from the tree.
   /// - Parameter keypath: The keypath used to find the node(s).
   public func setNodeIsEnabled(isEnabled: Bool, keypath: AnimationKeypath) {
-    lottieAnimationLayer.setNodeIsEnabled(isEnabled: isEnabled, keypath: keypath)
+    self.lottieAnimationLayer.setNodeIsEnabled(isEnabled: isEnabled, keypath: keypath)
   }
 
   /// Markers are a way to describe a point in time by a key name.
@@ -637,7 +655,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   ///
   /// Returns the Progress Time for the marker named. Returns nil if no marker found.
   public func progressTime(forMarker named: String) -> AnimationProgressTime? {
-    lottieAnimationLayer.progressTime(forMarker: named)
+    self.lottieAnimationLayer.progressTime(forMarker: named)
   }
 
   /// Markers are a way to describe a point in time by a key name.
@@ -649,7 +667,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   ///
   /// Returns the Frame Time for the marker named. Returns nil if no marker found.
   public func frameTime(forMarker named: String) -> AnimationFrameTime? {
-    lottieAnimationLayer.frameTime(forMarker: named)
+    self.lottieAnimationLayer.frameTime(forMarker: named)
   }
 
   /// Markers are a way to describe a point in time and a duration by a key name.
@@ -661,13 +679,13 @@ open class LottieAnimationView: LottieAnimationViewBase {
   ///
   /// - Returns: The duration frame time for the marker, or `nil` if no marker found.
   public func durationFrameTime(forMarker named: String) -> AnimationFrameTime? {
-    lottieAnimationLayer.durationFrameTime(forMarker: named)
+    self.lottieAnimationLayer.durationFrameTime(forMarker: named)
   }
 
   // MARK: Internal
 
   var animationLayer: RootAnimationLayer? {
-    lottieAnimationLayer.animationLayer
+    self.lottieAnimationLayer.animationLayer
   }
 
   /// Set animation name from Interface Builder
@@ -680,7 +698,8 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   override func commonInit() {
     super.commonInit()
-    lottieAnimationLayer.screenScale = screenScale
+    self.lottieAnimationLayer.screenScale = screenScale
+    self.viewLayer?.addSublayer(self.lottieAnimationLayer)
 
     lottieAnimationLayer.animationLoaded = { [weak self] _, animation in
       guard let self = self else { return }
@@ -724,7 +743,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
         xform = CATransform3DMakeScale(
           bounds.size.width / animation.size.width,
           bounds.size.height / animation.size.height,
-          1);
+          1)
       case .scaleAspectFit:
         position = bounds.center
         let compAspect = animation.size.width / animation.size.height
@@ -837,21 +856,21 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
     if shouldForceUpdates {
       animationLayer.forceDisplayUpdate()
-      lottieAnimationLayer.forceDisplayUpdate();
+      self.lottieAnimationLayer.forceDisplayUpdate()
     }
   }
 
   func updateRasterizationState() {
-    if lottieAnimationLayer.isAnimationPlaying {
-      lottieAnimationLayer.animationLayer?.shouldRasterize = false
+    if self.lottieAnimationLayer.isAnimationPlaying {
+      self.lottieAnimationLayer.animationLayer?.shouldRasterize = false
     } else {
-      lottieAnimationLayer.animationLayer?.shouldRasterize = lottieAnimationLayer.shouldRasterizeWhenIdle
+      self.lottieAnimationLayer.animationLayer?.shouldRasterize = self.lottieAnimationLayer.shouldRasterizeWhenIdle
     }
   }
 
   /// Updates the animation frame. Does not affect any current animations
   func updateAnimationFrame(_ newFrame: CGFloat) {
-    lottieAnimationLayer.updateAnimationFrame(newFrame)
+    self.lottieAnimationLayer.updateAnimationFrame(newFrame)
   }
 
   @objc
@@ -877,7 +896,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   }
 
   func updateInFlightAnimation() {
-    lottieAnimationLayer.updateInFlightAnimation()
+    self.lottieAnimationLayer.updateInFlightAnimation()
   }
 
   // MARK: Fileprivate
@@ -885,15 +904,15 @@ open class LottieAnimationView: LottieAnimationViewBase {
   fileprivate var waitingToPlayAnimation = false
 
   fileprivate func updateAnimationForBackgroundState() {
-    lottieAnimationLayer.updateAnimationForBackgroundState()
+    self.lottieAnimationLayer.updateAnimationForBackgroundState()
   }
 
   fileprivate func updateAnimationForForegroundState() {
-    let wasWaitingToPlayAnimation = waitingToPlayAnimation;
+    let wasWaitingToPlayAnimation = waitingToPlayAnimation
     if waitingToPlayAnimation {
-      waitingToPlayAnimation = false;
+      waitingToPlayAnimation = false
     }
-    lottieAnimationLayer.updateAnimationForForegroundState(wasWaitingToPlayAnimation: wasWaitingToPlayAnimation)
+    self.lottieAnimationLayer.updateAnimationForForegroundState(wasWaitingToPlayAnimation: wasWaitingToPlayAnimation)
   }
 
   // MARK: Private

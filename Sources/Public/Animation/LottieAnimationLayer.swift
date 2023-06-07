@@ -6,96 +6,16 @@
 import Foundation
 import QuartzCore
 
-// MARK: - LottieBackgroundBehavior
-
-/// Describes the behavior of an AnimationView when the app is moved to the background.
-public enum LottieBackgroundBehavior {
-  /// Stop the animation and reset it to the beginning of its current play time. The completion block is called.
-  case stop
-
-  /// Pause the animation in its current state. The completion block is called.
-  case pause
-
-  /// Pause the animation and restart it when the application moves to the foreground.
-  /// The completion block is stored and called when the animation completes.
-  ///  - This is the default when using the Main Thread rendering engine.
-  case pauseAndRestore
-
-  /// Stops the animation and sets it to the end of its current play time. The completion block is called.
-  case forceFinish
-
-  /// The animation continues playing in the background.
-  ///  - This is the default when using the Core Animation rendering engine.
-  ///    Playing an animation using the Core Animation engine doesn't come with any CPU overhead,
-  ///    so using `.continuePlaying` avoids the need to stop and then resume the animation
-  ///    (which does come with some CPU overhead).
-  ///  - This mode should not be used with the Main Thread rendering engine.
-  case continuePlaying
-
-  // MARK: Public
-
-  /// The default background behavior, based on the rendering engine being used to play the animation.
-  ///  - Playing an animation using the Main Thread rendering engine comes with CPU overhead,
-  ///    so the animation should be paused or stopped when the `LottieAnimationView` is not visible.
-  ///  - Playing an animation using the Core Animation rendering engine does not come with any
-  ///    CPU overhead, so these animations do not need to be paused in the background.
-  public static func `default`(for renderingEngine: RenderingEngine) -> LottieBackgroundBehavior {
-    switch renderingEngine {
-    case .mainThread:
-      return .pauseAndRestore
-    case .coreAnimation:
-      return .continuePlaying
-    }
-  }
-}
-
-// MARK: - LottieLoopMode
-
-/// Defines animation loop behavior
-public enum LottieLoopMode {
-  /// Animation is played once then stops.
-  case playOnce
-  /// Animation will loop from beginning to end until stopped.
-  case loop
-  /// Animation will play forward, then backwards and loop until stopped.
-  case autoReverse
-  /// Animation will loop from beginning to end up to defined amount of times.
-  case `repeat`(Float)
-  /// Animation will play forward, then backwards a defined amount of times.
-  case repeatBackwards(Float)
-}
-
-// MARK: Equatable
-
-extension LottieLoopMode: Equatable {
-  public static func == (lhs: LottieLoopMode, rhs: LottieLoopMode) -> Bool {
-    switch (lhs, rhs) {
-    case (.repeat(let lhsAmount), .repeat(let rhsAmount)),
-         (.repeatBackwards(let lhsAmount), .repeatBackwards(let rhsAmount)):
-      return lhsAmount == rhsAmount
-    case (.playOnce, .playOnce),
-         (.loop, .loop),
-         (.autoReverse, .autoReverse):
-      return true
-    default:
-      return false
-    }
-  }
-}
-
 // MARK: - LottieAnimationLayer
 
-/// This class will serve as an intermediate layer between a CoreAnimationLayer
-/// and a LottieAnimationView. The motivation behind creating this class is to
-/// have all the functionality of a LottieAnimationView on a CALayer-backed object.
+/// A CALayer subclass for rendering Lottie animations.
+/// All functionality is also available in a UIView as `LottieAnimationView`.
 
 public class LottieAnimationLayer: CALayer {
 
   // MARK: Lifecycle
 
-  // MARK: - Public (Initializers)
-
-  /// Initializes an AnimationView with an animation.
+  /// Initializes a LottieAnimationLayer with an animation.
   public init(
     animation: LottieAnimation?,
     imageProvider: AnimationImageProvider? = nil,
@@ -118,7 +38,7 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
-  /// Initializes an AnimationView with a .lottie file.
+  /// Initializes an LottieAnimationLayer with a .lottie file.
   public init(
     dotLottie: DotLottieFile?,
     animationId: String? = nil,
@@ -158,24 +78,25 @@ public class LottieAnimationLayer: CALayer {
     super.init()
   }
 
-  required public override init(layer: Any) {
-    imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
-    textProvider = DefaultTextProvider()
-    fontProvider = DefaultFontProvider()
-    configuration = .shared
-    screenScale = 1
-    logger = .shared
-    super.init(layer: layer)
-  }
+  /// Called by CoreAnimation to create a shadow copy of this layer
+   /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
+   override init(layer: Any) {
+     guard let typedLayer = layer as? Self else {
+       fatalError("\(Self.self).init(layer:) incorrectly called with \(type(of: layer))")
+     }
+
+     animation = typedLayer.animation
+     imageProvider = typedLayer.imageProvider
+     textProvider = typedLayer.textProvider
+     fontProvider = typedLayer.fontProvider
+     logger = typedLayer.logger
+     screenScale = typedLayer.screenScale
+     configuration = typedLayer.configuration
+     super.init(layer: typedLayer)
+   }
 
   required init?(coder: NSCoder) {
-    imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
-    textProvider = DefaultTextProvider()
-    fontProvider = DefaultFontProvider()
-    configuration = .shared
-    screenScale = 1
-    logger = .shared
-    super.init(coder: coder)
+    fatalError("init(coder:) has not been implemented")
   }
 
   // MARK: Open
@@ -201,7 +122,7 @@ public class LottieAnimationLayer: CALayer {
   ///
   /// - Parameter fromProgress: The start progress of the animation. If `nil` the animation will start at the current progress.
   /// - Parameter toProgress: The end progress of the animation.
-  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the layer's `loopMode` property will be used.
   /// - Parameter completion: An optional completion closure to be called when the animation stops.
   open func play(
     fromProgress: AnimationProgressTime? = nil,
@@ -229,7 +150,7 @@ public class LottieAnimationLayer: CALayer {
   ///
   /// - Parameter fromFrame: The start frame of the animation. If `nil` the animation will start at the current frame.
   /// - Parameter toFrame: The end frame of the animation.
-  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the layer's `loopMode` property will be used.
   /// - Parameter completion: An optional completion closure to be called when the animation stops.
   open func play(
     fromFrame: AnimationFrameTime? = nil,
@@ -263,7 +184,7 @@ public class LottieAnimationLayer: CALayer {
   /// - Parameter playEndMarkerFrame: A flag to determine whether or not to play the frame of the end marker. If the
   /// end marker represents the end of the section to play, it should be to true. If the provided end marker
   /// represents the beginning of the next section, it should be false.
-  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the layer's `loopMode` property will be used.
   /// - Parameter completion: An optional completion closure to be called when the animation stops.
   open func play(
     fromMarker: String? = nil,
@@ -305,7 +226,7 @@ public class LottieAnimationLayer: CALayer {
   /// NOTE: If marker is not found the play command will exit.
   ///
   /// - Parameter marker: The start marker for the animation playback.
-  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the view's `loopMode` property will be used.
+  /// - Parameter loopMode: The loop behavior of the animation. If `nil` the layer's `loopMode` property will be used.
   /// - Parameter completion: An optional completion closure to be called when the animation stops.
   open func play(
     marker: String,
@@ -323,7 +244,7 @@ public class LottieAnimationLayer: CALayer {
       completion: completion)
   }
 
-  /// Stops the animation and resets the view to its start frame.
+  /// Stops the animation and resets the layer to its start frame.
   ///
   /// The completion closure will be called with `false`
   open func stop() {
@@ -389,8 +310,8 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
-  /// Sets the animation backing the animation view. Setting this will clear the
-  /// view's contents, completion blocks and current state. The new animation will
+  /// Sets the animation backing the animation layer. Setting this will clear the
+  /// layer's contents, completion blocks and current state. The new animation will
   /// be loaded up and set to the beginning of its timeline.
   public var animation: LottieAnimation? {
     didSet {
@@ -437,7 +358,7 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
-  /// Sets the image provider for the animation view. An image provider provides the
+  /// Sets the image provider for the animation layer. An image provider provides the
   /// animation with its required image data.
   ///
   /// Setting this will cause the animation to reload its image contents.
@@ -448,7 +369,7 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
-  /// Sets the text provider for animation view. A text provider provides the
+  /// Sets the text provider for animation layer. A text provider provides the
   /// animation with values for text layers
   public var textProvider: AnimationTextProvider {
     didSet {
@@ -456,7 +377,7 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
-  /// Sets the text provider for animation view. A text provider provides the
+  /// Sets the text provider for animation layer. A text provider provides the
   /// animation with values for text layers
   public var fontProvider: AnimationFontProvider {
     didSet {
@@ -491,7 +412,7 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
-  /// When `true` the animation view will rasterize its contents when not animating.
+  /// When `true` the animation layer will rasterize its contents when not animating.
   /// Rasterizing will improve performance of static animations.
   ///
   /// Note: this will not produce crisp results at resolutions above the animations natural resolution.
@@ -589,7 +510,7 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
-  /// The rendering engine currently being used by this view.
+  /// The rendering engine currently being used by this layer.
   ///  - This will only be `nil` in cases where the configuration is `automatic`
   ///    but a `RootAnimationLayer` hasn't been constructed yet
   public var currentRenderingEngine: RenderingEngine? {
@@ -611,20 +532,16 @@ public class LottieAnimationLayer: CALayer {
   }
 
   public var animationView: LottieAnimationView? {
-    set(newValue) {
-      animationLayer?.animationView = newValue
-    }
-    get {
-      animationLayer?.animationView
-    }
+    set { animationLayer?.animationView = newValue }
+    get { animationLayer?.animationView }
   }
 
-  public var hasAnimationContext: Bool {
+  var hasAnimationContext: Bool {
     animationContext != nil
   }
 
-  /// Sets the lottie file backing the animation view. Setting this will clear the
-  /// view's contents, completion blocks and current state. The new animation will
+  /// Sets the lottie file backing the animation layer. Setting this will clear the
+  /// layer's contents, completion blocks and current state. The new animation will
   /// be loaded up and set to the beginning of its timeline.
   /// The loopMode, animationSpeed and imageProvider will be set according
   /// to lottie file settings
@@ -876,7 +793,7 @@ public class LottieAnimationLayer: CALayer {
 
   /// Updates the animation frame. Does not affect any current animations
   func updateAnimationFrame(_ newFrame: CGFloat) {
-    // In performance tests, we have to wrap the animation view setup
+    // In performance tests, we have to wrap the animation layer setup
     // in a `CATransaction` in order for the layers to be deallocated at
     // the correct time. The `CATransaction`s in this method interfere
     // with the ones managed by the performance test, and aren't actually
@@ -926,9 +843,9 @@ public class LottieAnimationLayer: CALayer {
   // MARK: Fileprivate
 
   /// Context describing the animation that is currently playing in this `LottieAnimationView`
-  ///  - When non-nil, an animation is currently playing in this view. Otherwise,
-  ///    the view is paused on a specific frame.
-  fileprivate var animationContext: AnimationContext?
+  ///  - When non-nil, an animation is currently playing in this layer. Otherwise,
+  ///    the layer is paused on a specific frame.
+  fileprivate(set) var animationContext: AnimationContext?
   fileprivate var _activeAnimationName: String = LottieAnimationLayer.animationName
   fileprivate var animationID = 0
 
