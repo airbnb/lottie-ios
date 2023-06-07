@@ -79,23 +79,23 @@ public class LottieAnimationLayer: CALayer {
   }
 
   /// Called by CoreAnimation to create a shadow copy of this layer
-   /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
-   override init(layer: Any) {
-     guard let typedLayer = layer as? Self else {
-       fatalError("\(Self.self).init(layer:) incorrectly called with \(type(of: layer))")
-     }
+  /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
+  override init(layer: Any) {
+    guard let typedLayer = layer as? Self else {
+      fatalError("\(Self.self).init(layer:) incorrectly called with \(type(of: layer))")
+    }
 
-     animation = typedLayer.animation
-     imageProvider = typedLayer.imageProvider
-     textProvider = typedLayer.textProvider
-     fontProvider = typedLayer.fontProvider
-     logger = typedLayer.logger
-     screenScale = typedLayer.screenScale
-     configuration = typedLayer.configuration
-     super.init(layer: typedLayer)
-   }
+    animation = typedLayer.animation
+    imageProvider = typedLayer.imageProvider
+    textProvider = typedLayer.textProvider
+    fontProvider = typedLayer.fontProvider
+    logger = typedLayer.logger
+    screenScale = typedLayer.screenScale
+    configuration = typedLayer.configuration
+    super.init(layer: typedLayer)
+  }
 
-  required init?(coder: NSCoder) {
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
@@ -536,10 +536,6 @@ public class LottieAnimationLayer: CALayer {
     get { animationLayer?.animationView }
   }
 
-  var hasAnimationContext: Bool {
-    animationContext != nil
-  }
-
   /// Sets the lottie file backing the animation layer. Setting this will clear the
   /// layer's contents, completion blocks and current state. The new animation will
   /// be loaded up and set to the beginning of its timeline.
@@ -774,6 +770,15 @@ public class LottieAnimationLayer: CALayer {
 
   var animationLayer: RootAnimationLayer? = nil
 
+  /// Context describing the animation that is currently playing in this `LottieAnimationView`
+  ///  - When non-nil, an animation is currently playing in this layer. Otherwise,
+  ///    the layer is paused on a specific frame.
+  fileprivate(set) var animationContext: AnimationContext?
+
+  var hasAnimationContext: Bool {
+    animationContext != nil
+  }
+
   /// Set animation name from Interface Builder
   var animationName: String? {
     didSet {
@@ -842,10 +847,6 @@ public class LottieAnimationLayer: CALayer {
 
   // MARK: Fileprivate
 
-  /// Context describing the animation that is currently playing in this `LottieAnimationView`
-  ///  - When non-nil, an animation is currently playing in this layer. Otherwise,
-  ///    the layer is paused on a specific frame.
-  fileprivate(set) var animationContext: AnimationContext?
   fileprivate var _activeAnimationName: String = LottieAnimationLayer.animationName
   fileprivate var animationID = 0
 
