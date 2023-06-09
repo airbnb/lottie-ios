@@ -247,14 +247,12 @@ class AnimationPreviewViewController: UIViewController {
             UIAction(
               title: "Next Animation",
               handler: { [unowned self] _ in
-                animationView.nextAnimation()
-                configureSettingsMenu()
+                nextAnimation()
               }),
             UIAction(
               title: "Previous Animation",
               handler: { [unowned self] _ in
-                animationView.previousAnimation()
-                configureSettingsMenu()
+                previousAnimation()
               }),
           ]),
       ]))
@@ -266,4 +264,15 @@ class AnimationPreviewViewController: UIViewController {
     configureSettingsMenu()
   }
 
+  private func nextAnimation() {
+    animationView.nextAnimation()
+    animationView.play()
+    configureSettingsMenu()
+  }
+
+  private func previousAnimation() {
+    animationView.previousAnimation()
+    animationView.play()
+    configureSettingsMenu()
+  }
 }
