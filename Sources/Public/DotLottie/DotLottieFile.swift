@@ -60,6 +60,42 @@ public final class DotLottieFile {
     }
   }
 
+  /// The `LottieAnimation` and `DotLottieConfiguration` for the given animation index in this file
+  func animation(for index: Int) -> DotLottieFile.Animation? {
+    guard index < animations.count else { return nil }
+    return animations[index]
+  }
+
+  /// Returns the next animation in the array. Returns the first animation in case it's the last index
+  /// The next `LottieAnimation` and `DotLottieConfiguration`
+  func nextAnimation(after animationId: String) -> DotLottieFile.Animation? {
+    guard let index = animations.firstIndex(where: { animationId == $0.configuration.id }) else {
+      return nil
+    }
+
+    let nextIndex = index + 1
+    if nextIndex < animations.count {
+      return animations[nextIndex]
+    }
+
+    return animations.first
+  }
+
+  /// Returns the previous animation in the array. Returns the first animation in case it's the last index
+  /// The next `LottieAnimation` and `DotLottieConfiguration`
+  func previousAnimation(before animationId: String) -> DotLottieFile.Animation? {
+    guard let index = animations.firstIndex(where: { animationId == $0.configuration.id }) else {
+      return nil
+    }
+
+    let previousIndex = index - 1
+    if previousIndex > 0 {
+      return animations[previousIndex]
+    }
+
+    return animations.last
+  }
+
   // MARK: Private
 
   private static let manifestFileName = "manifest.json"
@@ -104,7 +140,8 @@ public final class DotLottieFile {
         id: dotLottieAnimation.id,
         imageProvider: imageProvider,
         loopMode: dotLottieAnimation.loopMode,
-        speed: dotLottieAnimation.animationSpeed)
+        speed: dotLottieAnimation.animationSpeed,
+        autoplay: dotLottieAnimation.autoplay ?? false)
 
       return DotLottieFile.Animation(
         animation: animation,

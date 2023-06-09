@@ -12,4 +12,5 @@ struct DotLottieConfiguration {
   var imageProvider: AnimationImageProvider?
   var loopMode: LottieLoopMode
   var speed: Double
+  var autoplay: Bool
 }

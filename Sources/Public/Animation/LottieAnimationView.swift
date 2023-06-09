@@ -648,15 +648,54 @@ open class LottieAnimationView: LottieAnimationViewBase {
     from dotLottieFile: DotLottieFile)
   {
     guard let dotLottieAnimation = dotLottieFile.animation(for: animationId) else { return }
+    loadAnimation(dotLottieAnimation, from: dotLottieFile)
+  }
 
-    loopMode = dotLottieAnimation.configuration.loopMode
-    animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
+  /// Sets the lottie file backing the animation view. Setting this will clear the
+  /// view's contents, completion blocks and current state. The new animation will
+  /// be loaded up and set to the beginning of its timeline.
+  /// The loopMode, animationSpeed and imageProvider will be set according
+  /// to lottie file settings
+  /// - Parameters:
+  ///   - animationIndex: Internal animation index to play. Optional
+  ///   Defaults to play first animation in file.
+  ///   - dotLottieFile: Lottie file to play
+  public func loadAnimation(
+    animationIndex: Int,
+    from dotLottieFile: DotLottieFile)
+  {
+    guard let dotLottieAnimation = dotLottieFile.animation(for: animationIndex) else { return }
+    loadAnimation(dotLottieAnimation, from: dotLottieFile)
+  }
 
-    if let imageProvider = dotLottieAnimation.configuration.imageProvider {
-      self.imageProvider = imageProvider
-    }
+  /// Exclusive for DotLottie animations. This will be ignored if playing json animation.
+  /// Plays the next animation in the array.
+  /// If there are no next animations, will loop back to the first animation in the array.
+  /// If there is only one animation, will reset to the beginning of the current animation.
+  /// Setting this will clear the view's contents, completion blocks and current state.
+  /// The new animation will be loaded up and set to the beginning of its timeline.
+  /// The loopMode, animationSpeed and imageProvider will be set according
+  /// to lottie file settings
+  public func nextAnimation() {
+    guard
+      let activeDotLottieFile, let activeDotLottieAnimationID,
+      let dotLottieAnimation = activeDotLottieFile.nextAnimation(after: activeDotLottieAnimationID) else { return }
+    loadAnimation(dotLottieAnimation, from: activeDotLottieFile)
+  }
 
-    animation = dotLottieAnimation.animation
+  /// Exclusive for DotLottie animations. This will be ignored if playing json animation.
+  /// Plays the previous animation in the array.
+  /// If there are no previous animations, will loop back to the last animation in the array.
+  /// If there is only one animation, will reset to the beginning of the current animation.
+  /// Setting this will clear the view's contents, completion blocks and current state.
+  /// The new animation will be loaded up and set to the beginning of its timeline.
+  /// The loopMode, animationSpeed and imageProvider will be set according
+  /// to lottie file settings
+  public func previousAnimation() {
+    guard
+      let activeDotLottieFile, let activeDotLottieAnimationID,
+      let dotLottieAnimation = activeDotLottieFile.previousAnimation(before: activeDotLottieAnimationID) else { return }
+    loadAnimation(dotLottieAnimation, from: activeDotLottieFile)
   }
 
   /// Reloads the images supplied to the animation from the `imageProvider`
@@ -1103,6 +1142,30 @@ open class LottieAnimationView: LottieAnimationViewBase {
     addNewAnimationForContext(newContext)
   }
 
+  /// Loads view with given DotLottie animation. Setting this will clear the
+  /// view's contents, completion blocks and current state. The new animation will
+  /// be loaded up and set to the beginning of its timeline.
+  /// The loopMode, animationSpeed and imageProvider will be set according
+  /// to lottie file settings
+  /// - Parameter dotLottieAnimation: DotLottieFile.Animation to load the view
+  /// - Parameter dotLottieFile: Lottie file to play
+  func loadAnimation(_ dotLottieAnimation: DotLottieFile.Animation, from dotLottieFile: DotLottieFile) {
+    loopMode = dotLottieAnimation.configuration.loopMode
+    animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
+
+    if let imageProvider = dotLottieAnimation.configuration.imageProvider {
+      self.imageProvider = imageProvider
+    }
+
+    animation = dotLottieAnimation.animation
+    activeDotLottieFile = dotLottieFile
+    activeDotLottieAnimationID = dotLottieAnimation.configuration.id
+
+    if dotLottieAnimation.configuration.autoplay {
+      play()
+    }
+  }
+
   // MARK: Fileprivate
 
   /// Context describing the animation that is currently playing in this `LottieAnimationView`
@@ -1114,6 +1177,9 @@ open class LottieAnimationView: LottieAnimationViewBase {
   fileprivate var animationID = 0
 
   fileprivate var waitingToPlayAnimation = false
+
+  fileprivate var activeDotLottieFile: DotLottieFile?
+  fileprivate var activeDotLottieAnimationID: String?
 
   fileprivate var activeAnimationName: String {
     switch animationLayer?.primaryAnimationKey {
@@ -1347,6 +1413,8 @@ open class LottieAnimationView: LottieAnimationViewBase {
     animationLayer?.removeAnimation(forKey: activeAnimationName)
     updateAnimationFrame(pauseFrame)
     animationContext = nil
+    activeDotLottieFile = nil
+    activeDotLottieAnimationID = nil
   }
 
   /// Adds animation to animation layer and sets the delegate. If animation layer or animation are nil, exits.

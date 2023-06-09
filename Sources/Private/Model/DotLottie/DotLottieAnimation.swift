@@ -20,12 +20,15 @@ struct DotLottieAnimation: Codable {
   /// 1 or -1
   var direction: Int? = 1
 
+  /// Auto plays animation
+  var autoplay: Bool? = false
+
   /// mode - "bounce" | "normal"
-  var mode: String? = "normal"
+  var mode: DotLottieAnimationMode? = .normal
 
   /// Loop mode for animation
   var loopMode: LottieLoopMode {
-    mode == "bounce" ? .autoReverse : ((loop ?? false) ? .loop : .playOnce)
+    mode == .bounce ? .autoReverse : ((loop ?? false) ? .loop : .playOnce)
   }
 
   /// Animation speed
