@@ -33,55 +33,10 @@ public final class DotLottieFile {
     public let configuration: DotLottieConfiguration
   }
 
-  /// The `LottieAnimation` and `DotLottieConfiguration` for the given animation ID in this file
-  public func animation(for id: String? = nil) -> DotLottieFile.Animation? {
-    if let id = id {
-      return animations.first(where: { $0.configuration.id == id })
-    } else {
-      return animations.first
-    }
-  }
-
-  /// The `LottieAnimation` and `DotLottieConfiguration` for the given animation index in this file
-  public func animation(at index: Int) -> DotLottieFile.Animation? {
-    guard index < animations.count else { return nil }
-    return animations[index]
-  }
-
-  /// Returns the next animation in the array. Returns the first animation in case it's the last index
-  /// The next `LottieAnimation` and `DotLottieConfiguration`
-  public func nextAnimation(after animationId: String) -> DotLottieFile.Animation? {
-    guard let index = animations.firstIndex(where: { animationId == $0.configuration.id }) else {
-      return nil
-    }
-
-    let nextIndex = index + 1
-    if nextIndex < animations.count {
-      return animations[nextIndex]
-    }
-
-    return animations.first
-  }
-
-  /// Returns the previous animation in the array. Returns the first animation in case it's the last index
-  /// The next `LottieAnimation` and `DotLottieConfiguration`
-  public func previousAnimation(before animationId: String) -> DotLottieFile.Animation? {
-    guard let index = animations.firstIndex(where: { animationId == $0.configuration.id }) else {
-      return nil
-    }
-
-    let previousIndex = index - 1
-    if previousIndex > 0 {
-      return animations[previousIndex]
-    }
-
-    return animations.last
-  }
+  /// List of `LottieAnimation` in the file
+  public private(set) var animations: [Animation] = []
 
   // MARK: Internal
-
-  /// List of `LottieAnimation` in the file
-  private(set) var animations: [Animation] = []
 
   /// Image provider for animations
   private(set) var imageProvider: AnimationImageProvider?
@@ -97,6 +52,21 @@ public final class DotLottieFile {
 
   /// All images in images folder
   lazy var imageUrls: [URL] = FileManager.default.urls(for: imagesUrl) ?? []
+
+  /// The `LottieAnimation` and `DotLottieConfiguration` for the given animation ID in this file
+  func animation(for id: String? = nil) -> DotLottieFile.Animation? {
+    if let id = id {
+      return animations.first(where: { $0.configuration.id == id })
+    } else {
+      return animations.first
+    }
+  }
+
+  /// The `LottieAnimation` and `DotLottieConfiguration` for the given animation index in this file
+  func animation(at index: Int) -> DotLottieFile.Animation? {
+    guard index < animations.count else { return nil }
+    return animations[index]
+  }
 
   // MARK: Private
 
