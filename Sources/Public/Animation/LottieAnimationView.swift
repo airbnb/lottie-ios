@@ -504,6 +504,22 @@ open class LottieAnimationView: LottieAnimationViewBase {
     lottieAnimationLayer.loadAnimation(animationId, from: dotLottieFile)
   }
 
+  /// Sets the lottie file backing the animation view. Setting this will clear the
+  /// view's contents, completion blocks and current state. The new animation will
+  /// be loaded up and set to the beginning of its timeline.
+  /// The loopMode, animationSpeed and imageProvider will be set according
+  /// to lottie file settings
+  /// - Parameters:
+  ///   - atIndex: Internal animation index to play. Optional
+  ///   Defaults to play first animation in file.
+  ///   - dotLottieFile: Lottie file to play
+  public func loadAnimation(
+    atIndex index: Int,
+    from dotLottieFile: DotLottieFile)
+  {
+    lottieAnimationLayer.loadAnimation(atIndex: index, from: dotLottieFile)
+  }
+
   /// Reloads the images supplied to the animation from the `imageProvider`
   public func reloadImages() {
     lottieAnimationLayer.reloadImages()

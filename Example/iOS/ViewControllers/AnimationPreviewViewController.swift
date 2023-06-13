@@ -248,5 +248,4 @@ class AnimationPreviewViewController: UIViewController {
     animationView.animationSpeed = speed
     configureSettingsMenu()
   }
-
 }

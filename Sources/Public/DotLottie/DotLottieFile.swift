@@ -25,16 +25,18 @@ public final class DotLottieFile {
     try decompress(data: data, to: fileUrl)
   }
 
-  // MARK: Internal
+  // MARK: Public
 
   /// Definition for a single animation within a `DotLottieFile`
-  struct Animation {
-    let animation: LottieAnimation
-    let configuration: DotLottieConfiguration
+  public struct Animation {
+    public let animation: LottieAnimation
+    public let configuration: DotLottieConfiguration
   }
 
   /// List of `LottieAnimation` in the file
-  private(set) var animations: [Animation] = []
+  public private(set) var animations: [Animation] = []
+
+  // MARK: Internal
 
   /// Image provider for animations
   private(set) var imageProvider: AnimationImageProvider?
@@ -58,6 +60,12 @@ public final class DotLottieFile {
     } else {
       return animations.first
     }
+  }
+
+  /// The `LottieAnimation` and `DotLottieConfiguration` for the given animation index in this file
+  func animation(at index: Int) -> DotLottieFile.Animation? {
+    guard index < animations.count else { return nil }
+    return animations[index]
   }
 
   // MARK: Private

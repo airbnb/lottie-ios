@@ -549,15 +549,24 @@ public class LottieAnimationLayer: CALayer {
     from dotLottieFile: DotLottieFile)
   {
     guard let dotLottieAnimation = dotLottieFile.animation(for: animationId) else { return }
+    loadAnimation(dotLottieAnimation)
+  }
 
-    loopMode = dotLottieAnimation.configuration.loopMode
-    animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
-
-    if let imageProvider = dotLottieAnimation.configuration.imageProvider {
-      self.imageProvider = imageProvider
-    }
-
-    animation = dotLottieAnimation.animation
+  /// Sets the lottie file backing the animation layer. Setting this will clear the
+  /// layer's contents, completion blocks and current state. The new animation will
+  /// be loaded up and set to the beginning of its timeline.
+  /// The loopMode, animationSpeed and imageProvider will be set according
+  /// to lottie file settings
+  /// - Parameters:
+  ///   - atIndex: Internal animation index to play.
+  ///   Defaults to play first animation in file.
+  ///   - dotLottieFile: Lottie file to play
+  public func loadAnimation(
+    atIndex index: Int,
+    from dotLottieFile: DotLottieFile)
+  {
+    guard let dotLottieAnimation = dotLottieFile.animation(at: index) else { return }
+    loadAnimation(dotLottieAnimation)
   }
 
   /// Reloads the images supplied to the animation from the `imageProvider`
@@ -1185,6 +1194,17 @@ public class LottieAnimationLayer: CALayer {
 
   /// The `LottieBackgroundBehavior` that was specified manually by setting `self.backgroundBehavior`
   private var _backgroundBehavior: LottieBackgroundBehavior?
+
+  private func loadAnimation(_ dotLottieAnimation: DotLottieFile.Animation) {
+    loopMode = dotLottieAnimation.configuration.loopMode
+    animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
+
+    if let imageProvider = dotLottieAnimation.configuration.imageProvider {
+      self.imageProvider = imageProvider
+    }
+
+    animation = dotLottieAnimation.animation
+  }
 
 }
 
