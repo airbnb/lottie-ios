@@ -796,7 +796,7 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
-  func loadAnimation(_ dotLottieAnimation: DotLottieFile.Animation) {
+  private func loadAnimation(_ dotLottieAnimation: DotLottieFile.Animation) {
     loopMode = dotLottieAnimation.configuration.loopMode
     animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
 
