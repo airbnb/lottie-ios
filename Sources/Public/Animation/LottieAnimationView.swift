@@ -661,7 +661,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   ///   Defaults to play first animation in file.
   ///   - dotLottieFile: Lottie file to play
   public func loadAnimation(
-    animationIndex: Int,
+    atIndex: Int,
     from dotLottieFile: DotLottieFile)
   {
     guard let dotLottieAnimation = dotLottieFile.animation(for: animationIndex) else { return }
