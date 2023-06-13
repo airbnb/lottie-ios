@@ -30,7 +30,7 @@ struct DotLottieAnimation: Codable {
     switch mode {
     case .bounce:
       return .autoReverse
-    default:
+    case .normal, nil:
       return ((loop ?? false) ? .loop : .playOnce)
     }
   }
