@@ -142,7 +142,8 @@ public final class DotLottieFile {
         id: dotLottieAnimation.id,
         imageProvider: imageProvider,
         loopMode: dotLottieAnimation.loopMode,
-        speed: dotLottieAnimation.animationSpeed)
+        speed: dotLottieAnimation.animationSpeed,
+        autoplay: dotLottieAnimation.autoplay ?? false)
 
       return DotLottieFile.Animation(
         animation: animation,

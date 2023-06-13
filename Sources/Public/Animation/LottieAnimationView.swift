@@ -911,6 +911,30 @@ open class LottieAnimationView: LottieAnimationViewBase {
     lottieAnimationLayer.updateInFlightAnimation()
   }
 
+  /// Loads view with given DotLottie animation. Setting this will clear the
+  /// view's contents, completion blocks and current state. The new animation will
+  /// be loaded up and set to the beginning of its timeline.
+  /// The loopMode, animationSpeed and imageProvider will be set according
+  /// to lottie file settings
+  /// - Parameter dotLottieAnimation: DotLottieFile.Animation to load the view
+  /// - Parameter dotLottieFile: Lottie file to play
+  func loadAnimation(_ dotLottieAnimation: DotLottieFile.Animation, from dotLottieFile: DotLottieFile) {
+    loopMode = dotLottieAnimation.configuration.loopMode
+    animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
+
+    if let imageProvider = dotLottieAnimation.configuration.imageProvider {
+      self.imageProvider = imageProvider
+    }
+
+    animation = dotLottieAnimation.animation
+    activeDotLottieFile = dotLottieFile
+    activeDotLottieAnimationID = dotLottieAnimation.configuration.id
+
+    if dotLottieAnimation.configuration.autoplay {
+      play()
+    }
+  }
+
   // MARK: Fileprivate
 
   fileprivate var waitingToPlayAnimation = false
