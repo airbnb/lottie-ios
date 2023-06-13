@@ -22,9 +22,6 @@ struct DotLottieAnimation: Codable {
   /// 1 or -1
   var direction: Int? = 1
 
-  /// Auto plays animation
-  var autoplay: Bool? = false
-
   /// mode - "bounce" | "normal"
   var mode: DotLottieAnimationMode? = .normal
 

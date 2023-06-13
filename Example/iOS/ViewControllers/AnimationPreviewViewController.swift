@@ -240,21 +240,6 @@ class AnimationPreviewViewController: UIViewController {
                 updateAnimation()
               }),
           ]),
-
-        UIMenu(
-          title: "Navigate...",
-          children: [
-            UIAction(
-              title: "Next Animation",
-              handler: { [unowned self] _ in
-                nextAnimation()
-              }),
-            UIAction(
-              title: "Previous Animation",
-              handler: { [unowned self] _ in
-                previousAnimation()
-              }),
-          ]),
       ]))
   }
 
