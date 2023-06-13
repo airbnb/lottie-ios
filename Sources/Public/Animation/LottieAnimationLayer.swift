@@ -796,17 +796,6 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
-  private func loadAnimation(_ dotLottieAnimation: DotLottieFile.Animation) {
-    loopMode = dotLottieAnimation.configuration.loopMode
-    animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
-
-    if let imageProvider = dotLottieAnimation.configuration.imageProvider {
-      self.imageProvider = imageProvider
-    }
-
-    animation = dotLottieAnimation.animation
-  }
-
   func updateRasterizationState() {
     if isAnimationPlaying {
       animationLayer?.shouldRasterize = false
@@ -1205,6 +1194,17 @@ public class LottieAnimationLayer: CALayer {
 
   /// The `LottieBackgroundBehavior` that was specified manually by setting `self.backgroundBehavior`
   private var _backgroundBehavior: LottieBackgroundBehavior?
+
+  private func loadAnimation(_ dotLottieAnimation: DotLottieFile.Animation) {
+    loopMode = dotLottieAnimation.configuration.loopMode
+    animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
+
+    if let imageProvider = dotLottieAnimation.configuration.imageProvider {
+      self.imageProvider = imageProvider
+    }
+
+    animation = dotLottieAnimation.animation
+  }
 
 }
 
