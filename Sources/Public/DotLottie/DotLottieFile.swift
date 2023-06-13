@@ -43,7 +43,7 @@ public final class DotLottieFile {
   }
 
   /// The `LottieAnimation` and `DotLottieConfiguration` for the given animation index in this file
-  public func animation(for index: Int) -> DotLottieFile.Animation? {
+  public func animation(at index: Int) -> DotLottieFile.Animation? {
     guard index < animations.count else { return nil }
     return animations[index]
   }
