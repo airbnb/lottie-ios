@@ -240,39 +240,12 @@ class AnimationPreviewViewController: UIViewController {
                 updateAnimation()
               }),
           ]),
-
-        UIMenu(
-          title: "Navigate...",
-          children: [
-            UIAction(
-              title: "Next Animation",
-              handler: { [unowned self] _ in
-                nextAnimation()
-              }),
-            UIAction(
-              title: "Previous Animation",
-              handler: { [unowned self] _ in
-                previousAnimation()
-              }),
-          ]),
       ]))
   }
 
   private func updateAnimation() {
     animationView.play(fromProgress: fromProgress, toProgress: toProgress, loopMode: loopMode)
     animationView.animationSpeed = speed
-    configureSettingsMenu()
-  }
-
-  private func nextAnimation() {
-    animationView.nextAnimation()
-    animationView.play()
-    configureSettingsMenu()
-  }
-
-  private func previousAnimation() {
-    animationView.previousAnimation()
-    animationView.play()
     configureSettingsMenu()
   }
 }
