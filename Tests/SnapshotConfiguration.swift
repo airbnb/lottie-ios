@@ -186,5 +186,6 @@ extension SnapshotConfiguration {
 extension LottieColor {
   static let black = LottieColor(r: 0, g: 0, b: 0, a: 1)
   static let red = LottieColor(r: 1, g: 0, b: 0, a: 1)
+  static let blue = LottieColor(r: 0, g: 0, b: 1, a: 1)
 }
 #endif
