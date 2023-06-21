@@ -36,9 +36,8 @@ final class ValueProviderStore {
       properties. Supported properties are: \(supportedProperties.joined(separator: ", ")).
       """)
 
-    orderedKeyPaths.remove(keypath)
-    orderedKeyPaths.insert(keypath, at: orderedKeyPaths.count)
-    valueProviders[keypath] = valueProvider
+    valueProviders.removeAll(where: { $0.keypath == keypath })
+    valueProviders.append((keypath: keypath, valueProvider: valueProvider))
   }
 
   // Retrieves the custom value keyframes for the given property,
@@ -95,19 +94,15 @@ final class ValueProviderStore {
   // MARK: Private
 
   private let logger: LottieLogger
-  private var valueProviders = [AnimationKeypath: AnyValueProvider]()
-  private var orderedKeyPaths = NSMutableOrderedSet()
+  private var valueProviders = [(keypath: AnimationKeypath, valueProvider: AnyValueProvider)]()
 
   /// Retrieves the most-recently-registered Value Provider that matches the given keypath.
   private func valueProvider(for keypath: AnimationKeypath) -> AnyValueProvider? {
     // Find the last keypath matching the given keypath,
     // so we return the value provider that was registered most-recently
-    guard
-      let matchingPath = orderedKeyPaths.reversed.first(where: { element in
-        guard let registeredKeypath = (element as? AnimationKeypath) else { return false }
-        return keypath.matches(registeredKeypath)
-      }) as? AnimationKeypath else { return nil }
-    return valueProviders[matchingPath]
+    valueProviders.reversed().first(where: { registeredKeypath, _ in
+      keypath.matches(registeredKeypath)
+    })?.valueProvider
   }
 
 }
