@@ -100,7 +100,7 @@ final class ValueProviderStore {
   private func valueProvider(for keypath: AnimationKeypath) -> AnyValueProvider? {
     // Find the last keypath matching the given keypath,
     // so we return the value provider that was registered most-recently
-    valueProviders.reversed().first(where: { registeredKeypath, _ in
+    valueProviders.last(where: { registeredKeypath, _ in
       keypath.matches(registeredKeypath)
     })?.valueProvider
   }
