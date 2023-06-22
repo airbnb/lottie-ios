@@ -278,6 +278,9 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// If a marker doesn't have a duration value, it will play with a duration of 0
   /// (effectively being skipped).
   ///
+  /// If another animation is played (by calling any `play` method) while this
+  /// marker sequence is playing, the marker sequence will be cancelled.
+  ///
   /// - Parameter markers: The list of markers to play sequentially.
   open func play(markers: [String]) {
     lottieAnimationLayer.play(markers: markers)

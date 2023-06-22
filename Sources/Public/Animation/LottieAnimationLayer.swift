@@ -254,6 +254,9 @@ public class LottieAnimationLayer: CALayer {
   /// If a marker doesn't have a duration value, it will play with a duration of 0
   /// (effectively being skipped).
   ///
+  /// If another animation is played (by calling any `play` method) while this
+  /// marker sequence is playing, the marker sequence will be cancelled.
+  ///
   /// - Parameter markers: The list of markers to play sequentially.
   open func play(markers: [String]) {
     guard !markers.isEmpty else { return }
@@ -267,7 +270,11 @@ public class LottieAnimationLayer: CALayer {
     }
 
     play(marker: markerToPlay, loopMode: .playOnce, completion: { [weak self] success in
+      // If the completion handler is called with `success: false` (which typically means
+      // that another animation was played by calling some `play` method),
+      // we should cancel the marker sequence and not play the next marker.
       guard success, let self = self else { return }
+
       self.play(markers: followingMarkers)
     })
   }
