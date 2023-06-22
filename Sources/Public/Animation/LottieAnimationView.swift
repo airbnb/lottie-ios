@@ -267,6 +267,25 @@ open class LottieAnimationView: LottieAnimationViewBase {
     lottieAnimationLayer.play(marker: marker, loopMode: loopMode, completion: completion)
   }
 
+  /// Plays the given markers sequentially in order.
+  ///
+  /// A marker is a point in time with an associated duration that is encoded into the
+  /// animation data and assigned a name. Multiple markers can be played sequentially
+  /// to create programmable animations.
+  ///
+  /// If a marker is not found, it will be skipped.
+  ///
+  /// If a marker doesn't have a duration value, it will play with a duration of 0
+  /// (effectively being skipped).
+  ///
+  /// If another animation is played (by calling any `play` method) while this
+  /// marker sequence is playing, the marker sequence will be cancelled.
+  ///
+  /// - Parameter markers: The list of markers to play sequentially.
+  open func play(markers: [String]) {
+    lottieAnimationLayer.play(markers: markers)
+  }
+
   /// Stops the animation and resets the view to its start frame.
   ///
   /// The completion closure will be called with `false`

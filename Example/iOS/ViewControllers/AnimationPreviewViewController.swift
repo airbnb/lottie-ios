@@ -240,6 +240,12 @@ class AnimationPreviewViewController: UIViewController {
                 updateAnimation()
               }),
           ]),
+
+        UIAction(
+          title: "Play Markers...",
+          handler: { [unowned self] _ in
+            displayMarkerList()
+          }),
       ]))
   }
 
@@ -248,4 +254,36 @@ class AnimationPreviewViewController: UIViewController {
     animationView.animationSpeed = speed
     configureSettingsMenu()
   }
+
+  private func displayMarkerList() {
+    let markersList: String
+    let markerNames = animationView.animation?.markerNames ?? []
+    if markerNames.isEmpty {
+      markersList = "No markers included in animation"
+    } else {
+      markersList = markerNames.joined(separator: ", ")
+    }
+
+    let alert = UIAlertController(title: "Markers", message: markersList, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+    alert.addTextField { textField in
+      textField.placeholder = "Comma separated list of markers to play in order"
+    }
+
+    alert.addAction(UIAlertAction(title: "Play", style: .default) { [weak alert, weak self] _ in
+      guard
+        let self = self,
+        let textInput = alert?.textFields?.first?.text,
+        !textInput.isEmpty
+      else { return }
+
+      let markersToPlay = textInput.components(separatedBy: ",")
+        .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+
+      self.animationView.play(markers: markersToPlay)
+    })
+    present(alert, animated: true)
+  }
+
 }
