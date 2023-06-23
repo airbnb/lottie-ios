@@ -24,7 +24,7 @@ extension UIViewProtocol {
   /// MyView.swiftUIView(…).sizing(.intrinsicSize)
   /// ```
   /// The sizing defaults to `.automatic`.
-  public static func swiftUIView(makeView: @escaping () -> Self) -> SwiftUIUIView<Self, Void> {
+  internal static func swiftUIView(makeView: @escaping () -> Self) -> SwiftUIUIView<Self, Void> {
     SwiftUIUIView(makeContent: makeView)
   }
 }
@@ -32,7 +32,7 @@ extension UIViewProtocol {
 // MARK: - UIViewProtocol
 
 /// A protocol that all `UIView`s conform to, enabling extensions that have a `Self` reference.
-public protocol UIViewProtocol: UIView { }
+internal protocol UIViewProtocol: UIView { }
 
 // MARK: - UIView + UIViewProtocol
 

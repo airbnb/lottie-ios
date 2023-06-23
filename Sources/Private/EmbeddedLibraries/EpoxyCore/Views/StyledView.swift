@@ -23,7 +23,7 @@ import UIKit
 /// - SeeAlso: `ContentConfigurableView`
 /// - SeeAlso: `BehaviorsConfigurableView`
 /// - SeeAlso: `EpoxyableView`
-public protocol StyledView: UIView {
+internal protocol StyledView: UIView {
   /// The style type of this view, passed into its initializer to configure the resulting instance.
   ///
   /// Defaults to `Never` for views that do not have a `Style`.
@@ -36,7 +36,7 @@ public protocol StyledView: UIView {
 // MARK: Defaults
 
 extension StyledView where Style == Never {
-  public init(style: Never) {
+  internal init(style: Never) {
     // An empty switch is required to silence the "'self.init' isn't called on all paths before
     // returning from initializer" error.
     switch style { }

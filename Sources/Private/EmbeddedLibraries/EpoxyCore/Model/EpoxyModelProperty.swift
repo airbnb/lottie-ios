@@ -11,17 +11,17 @@
 /// For example, to declare a `EpoxyModelProperty` that fulfills the `TitleProviding` protocol:
 ///
 /// ````
-/// public protocol TitleProviding {
+/// internal protocol TitleProviding {
 ///   var title: String? { get }
 /// }
 ///
 /// extension EpoxyModeled where Self: TitleProviding {
-///   public var title: String? {
+///   internal var title: String? {
 ///     get { self[titleProperty] }
 ///     set { self[titleProperty] = newValue }
 ///   }
 ///
-///   public func title(_ value: String?) -> Self {
+///   internal func title(_ value: String?) -> Self {
 ///     copy(updating: titleProperty, to: value)
 ///   }
 ///
@@ -30,7 +30,7 @@
 ///   }
 /// }
 /// ````
-public struct EpoxyModelProperty<Value> {
+internal struct EpoxyModelProperty<Value> {
 
   // MARK: Lifecycle
 
@@ -39,7 +39,7 @@ public struct EpoxyModelProperty<Value> {
   ///
   /// The `updateStrategy` is used to update the value when updating from an old value to a new
   /// value.
-  public init<Model>(
+  internal init<Model>(
     keyPath: KeyPath<Model, Value>,
     defaultValue: @escaping @autoclosure () -> Value,
     updateStrategy: UpdateStrategy)
@@ -52,13 +52,13 @@ public struct EpoxyModelProperty<Value> {
   // MARK: Public
 
   /// The `KeyPath` that uniquely identifies this property.
-  public let keyPath: AnyKeyPath
+  internal let keyPath: AnyKeyPath
 
   /// A closure that produces the default property value when called.
-  public let defaultValue: () -> Value
+  internal let defaultValue: () -> Value
 
   /// A closure used to update an `EpoxyModelProperty` from an old value to a new value.
-  public let updateStrategy: UpdateStrategy
+  internal let updateStrategy: UpdateStrategy
 
 }
 
@@ -66,18 +66,18 @@ public struct EpoxyModelProperty<Value> {
 
 extension EpoxyModelProperty {
   /// A closure used to update an `EpoxyModelProperty` from an old value to a new value.
-  public struct UpdateStrategy {
+  internal struct UpdateStrategy {
 
     // MARK: Lifecycle
 
-    public init(update: @escaping (Value, Value) -> Value) {
+    internal init(update: @escaping (Value, Value) -> Value) {
       self.update = update
     }
 
     // MARK: Public
 
     /// A closure used to update an `EpoxyModelProperty` from an old value to a new value.
-    public var update: (_ old: Value, _ new: Value) -> Value
+    internal var update: (_ old: Value, _ new: Value) -> Value
   }
 }
 
@@ -85,13 +85,13 @@ extension EpoxyModelProperty {
 
 extension EpoxyModelProperty.UpdateStrategy {
   /// Replaces the old value with the new value when an update occurs.
-  public static var replace: Self {
+  internal static var replace: Self {
     .init { _, new in new }
   }
 
   /// Chains the new closure value onto the old closure value, returning a new closure that first
   /// calls the old closure and then subsequently calls the new closure.
-  public static func chain() -> EpoxyModelProperty<(() -> Void)?>.UpdateStrategy {
+  internal static func chain() -> EpoxyModelProperty<(() -> Void)?>.UpdateStrategy {
     .init { old, new in
       guard let new = new else { return old }
       guard let old = old else { return new }
@@ -104,7 +104,7 @@ extension EpoxyModelProperty.UpdateStrategy {
 
   /// Chains the new closure value onto the old closure value, returning a new closure that first
   /// calls the old closure and then subsequently calls the new closure.
-  public static func chain<A>() -> EpoxyModelProperty<((A) -> Void)?>.UpdateStrategy {
+  internal static func chain<A>() -> EpoxyModelProperty<((A) -> Void)?>.UpdateStrategy {
     .init { old, new in
       guard let new = new else { return old }
       guard let old = old else { return new }
@@ -117,7 +117,7 @@ extension EpoxyModelProperty.UpdateStrategy {
 
   /// Chains the new closure value onto the old closure value, returning a new closure that first
   /// calls the old closure and then subsequently calls the new closure.
-  public static func chain<A, B>() -> EpoxyModelProperty<((A, B) -> Void)?>.UpdateStrategy {
+  internal static func chain<A, B>() -> EpoxyModelProperty<((A, B) -> Void)?>.UpdateStrategy {
     .init { old, new in
       guard let new = new else { return old }
       guard let old = old else { return new }
@@ -130,7 +130,7 @@ extension EpoxyModelProperty.UpdateStrategy {
 
   /// Chains the new closure value onto the old closure value, returning a new closure that first
   /// calls the old closure and then subsequently calls the new closure.
-  public static func chain<A, B, C>() -> EpoxyModelProperty<((A, B, C) -> Void)?>.UpdateStrategy {
+  internal static func chain<A, B, C>() -> EpoxyModelProperty<((A, B, C) -> Void)?>.UpdateStrategy {
     .init { old, new in
       guard let new = new else { return old }
       guard let old = old else { return new }
@@ -143,7 +143,7 @@ extension EpoxyModelProperty.UpdateStrategy {
 
   /// Chains the new closure value onto the old closure value, returning a new closure that first
   /// calls the old closure and then subsequently calls the new closure.
-  public static func chain<A, B, C, D>() -> EpoxyModelProperty<((A, B, C, D) -> Void)?>.UpdateStrategy {
+  internal static func chain<A, B, C, D>() -> EpoxyModelProperty<((A, B, C, D) -> Void)?>.UpdateStrategy {
     .init { old, new in
       guard let new = new else { return old }
       guard let old = old else { return new }

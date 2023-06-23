@@ -5,6 +5,7 @@ import SwiftUI
 
 // MARK: - View
 
+@available(iOS 13.0, tvOS 13.0, *)
 extension View {
   /// Applies the layout margins from the parent `EpoxySwiftUIHostingView` to this `View`, if there
   /// are any.
@@ -13,16 +14,17 @@ extension View {
   /// example.
   ///
   /// These margins are propagated via the `EnvironmentValues.epoxyLayoutMargins`.
-  public func epoxyLayoutMargins() -> some View {
+  internal func epoxyLayoutMargins() -> some View {
     modifier(EpoxyLayoutMarginsPadding())
   }
 }
 
 // MARK: - EnvironmentValues
 
+@available(iOS 13.0, tvOS 13.0, *)
 extension EnvironmentValues {
   /// The layout margins of the parent `EpoxySwiftUIHostingView`, else zero if there is none.
-  public var epoxyLayoutMargins: EdgeInsets {
+  internal var epoxyLayoutMargins: EdgeInsets {
     get { self[EpoxyLayoutMarginsKey.self] }
     set { self[EpoxyLayoutMarginsKey.self] = newValue }
   }
@@ -30,6 +32,7 @@ extension EnvironmentValues {
 
 // MARK: - EpoxyLayoutMarginsKey
 
+@available(iOS 13.0, tvOS 13.0, *)
 private struct EpoxyLayoutMarginsKey: EnvironmentKey {
   static let defaultValue = EdgeInsets()
 }
@@ -38,6 +41,7 @@ private struct EpoxyLayoutMarginsKey: EnvironmentKey {
 
 /// A view modifier that applies the layout margins from an enclosing `EpoxySwiftUIHostingView` to
 /// the modified `View`.
+@available(iOS 13.0, tvOS 13.0, *)
 private struct EpoxyLayoutMarginsPadding: ViewModifier {
   @Environment(\.epoxyLayoutMargins) var epoxyLayoutMargins
 

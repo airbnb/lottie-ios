@@ -20,7 +20,7 @@ import UIKit
 /// - SeeAlso: `ContentConfigurableView`
 /// - SeeAlso: `StyledView`
 /// - SeeAlso: `EpoxyableView`
-public protocol BehaviorsConfigurableView: UIView {
+internal protocol BehaviorsConfigurableView: UIView {
   /// The non-`Equatable` properties that can be changed over of the lifecycle this View's
   /// instances, e.g. callback closures or delegates.
   ///
@@ -38,7 +38,7 @@ public protocol BehaviorsConfigurableView: UIView {
 // MARK: Defaults
 
 extension BehaviorsConfigurableView where Behaviors == Never {
-  public func setBehaviors(_ behaviors: Never?) {
+  internal func setBehaviors(_ behaviors: Never?) {
     switch behaviors {
     case nil:
       break

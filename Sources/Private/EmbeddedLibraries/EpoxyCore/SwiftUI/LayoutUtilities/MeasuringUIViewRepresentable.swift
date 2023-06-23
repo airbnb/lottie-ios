@@ -12,7 +12,8 @@ import SwiftUI
 /// `sizeThatFits(…)` method.
 ///
 /// - SeeAlso: ``SwiftUIMeasurementContainer``
-public protocol MeasuringUIViewRepresentable: UIViewRepresentable
+@available(iOS 13.0, tvOS 13.0, *)
+internal protocol MeasuringUIViewRepresentable: UIViewRepresentable
   where
   UIViewType == SwiftUIMeasurementContainer<Content>
 {
@@ -30,9 +31,10 @@ public protocol MeasuringUIViewRepresentable: UIViewRepresentable
 
 // MARK: Extensions
 
+@available(iOS 13.0, tvOS 13.0, *)
 extension MeasuringUIViewRepresentable {
   /// Returns a copy of this view with its sizing strategy updated to the given `sizing` value.
-  public func sizing(_ strategy: SwiftUIMeasurementContainerStrategy) -> Self {
+  internal func sizing(_ strategy: SwiftUIMeasurementContainerStrategy) -> Self {
     var copy = self
     copy.sizing = strategy
     return copy
@@ -41,8 +43,9 @@ extension MeasuringUIViewRepresentable {
 
 // MARK: Defaults
 
+@available(iOS 13.0, tvOS 13.0, *)
 extension MeasuringUIViewRepresentable {
-  public func _overrideSizeThatFits(
+  internal func _overrideSizeThatFits(
     _ size: inout CGSize,
     in proposedSize: _ProposedSize,
     uiView: UIViewType)
@@ -62,8 +65,8 @@ extension MeasuringUIViewRepresentable {
   }
 
   #if swift(>=5.7) // Proxy check for being built with the iOS 15 SDK
-  @available(iOS 16.0, *)
-  public func sizeThatFits(
+  @available(iOS 16.0, tvOS 16.0, *)
+  internal func sizeThatFits(
     _ proposal: ProposedViewSize,
     uiView: UIViewType,
     context _: Context)

@@ -7,7 +7,7 @@ import SwiftUI
 // MARK: - SwiftUIHostingViewReuseBehavior
 
 /// The reuse behavior of an `EpoxySwiftUIHostingView`.
-public enum SwiftUIHostingViewReuseBehavior: Hashable {
+internal enum SwiftUIHostingViewReuseBehavior: Hashable {
   /// Instances of a `EpoxySwiftUIHostingView` with `RootView`s of same type can be reused within
   /// the Epoxy container.
   ///
@@ -30,7 +30,8 @@ extension CallbackContextEpoxyModeled
   ///
   /// - Note: You should only need to call then from the implementation of a concrete
   ///   `EpoxyableModel` convenience vendor method, e.g. `SwiftUI.View.itemModel(…)`.
-  public func linkDisplayLifecycle<RootView: View>() -> Self
+  @available(iOS 13.0, tvOS 13.0, *)
+  internal func linkDisplayLifecycle<RootView: View>() -> Self
     where
     CallbackContext.View == EpoxySwiftUIHostingView<RootView>
   {
@@ -55,11 +56,12 @@ extension CallbackContextEpoxyModeled
 /// the API is private and 3) the `_UIHostingView` doesn't not accept setting a new `View` instance.
 ///
 /// - SeeAlso: `EpoxySwiftUIHostingController`
-public final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
+@available(iOS 13.0, tvOS 13.0, *)
+internal final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
 
   // MARK: Lifecycle
 
-  public init(style: Style) {
+  internal init(style: Style) {
     // Ignore the safe area to ensure the view isn't laid out incorrectly when being sized while
     // overlapping the safe area.
     epoxyContent = EpoxyHostingContent(rootView: style.initialContent.rootView)
@@ -94,41 +96,41 @@ public final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableVie
 
   // MARK: Public
 
-  public struct Style: Hashable {
-    public init(reuseBehavior: SwiftUIHostingViewReuseBehavior, initialContent: Content) {
+  internal struct Style: Hashable {
+    internal init(reuseBehavior: SwiftUIHostingViewReuseBehavior, initialContent: Content) {
       self.reuseBehavior = reuseBehavior
       self.initialContent = initialContent
     }
 
-    public var reuseBehavior: SwiftUIHostingViewReuseBehavior
-    public var initialContent: Content
+    internal var reuseBehavior: SwiftUIHostingViewReuseBehavior
+    internal var initialContent: Content
 
-    public static func == (lhs: Style, rhs: Style) -> Bool {
+    internal static func == (lhs: Style, rhs: Style) -> Bool {
       lhs.reuseBehavior == rhs.reuseBehavior
     }
 
-    public func hash(into hasher: inout Hasher) {
+    internal func hash(into hasher: inout Hasher) {
       hasher.combine(reuseBehavior)
     }
   }
 
-  public struct Content: Equatable {
-    public init(rootView: RootView, dataID: AnyHashable?) {
+  internal struct Content: Equatable {
+    internal init(rootView: RootView, dataID: AnyHashable?) {
       self.rootView = rootView
       self.dataID = dataID
     }
 
-    public var rootView: RootView
-    public var dataID: AnyHashable?
+    internal var rootView: RootView
+    internal var dataID: AnyHashable?
 
-    public static func == (_: Content, _: Content) -> Bool {
+    internal static func == (_: Content, _: Content) -> Bool {
       // The content should never be equal since we need the `rootView` to be updated on every
       // content change.
       false
     }
   }
 
-  public override func didMoveToWindow() {
+  internal override func didMoveToWindow() {
     super.didMoveToWindow()
 
     // We'll only be able to discover a valid parent `viewController` once we're added to a window,
@@ -138,7 +140,7 @@ public final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableVie
     }
   }
 
-  public func setContent(_ content: Content, animated _: Bool) {
+  internal func setContent(_ content: Content, animated _: Bool) {
     // This triggers a change in the observed `EpoxyHostingContent` object and allows the
     // propagation of the SwiftUI transaction, instead of just replacing the `rootView`.
     epoxyContent.rootView = content.rootView
@@ -152,7 +154,7 @@ public final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableVie
     // As of iOS 15.2, `UIHostingController` now renders updated content asynchronously, and as such
     // this view will get sized incorrectly with the previous content when reused unless we invoke
     // this semi-private API. We couldn't find any other method to get the view to resize
-    // synchronously after updating `rootView`, but hopefully this will become a public API soon so
+    // synchronously after updating `rootView`, but hopefully this will become a internal API soon so
     // we can remove this call.
     viewController._render(seconds: 0)
 
@@ -160,7 +162,7 @@ public final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableVie
     viewController.view.invalidateIntrinsicContentSize()
   }
 
-  public override func layoutMarginsDidChange() {
+  internal override func layoutMarginsDidChange() {
     super.layoutMarginsDidChange()
 
     let margins = layoutMargins
@@ -188,13 +190,13 @@ public final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableVie
     }
   }
 
-  public func handleWillDisplay(animated: Bool) {
+  internal func handleWillDisplay(animated: Bool) {
     guard state != .appeared, window != nil else { return }
     transition(to: .appearing(animated: animated))
     transition(to: .appeared)
   }
 
-  public func handleDidEndDisplaying(animated: Bool) {
+  internal func handleDidEndDisplaying(animated: Bool) {
     guard state != .disappeared else { return }
     transition(to: .disappearing(animated: animated))
     transition(to: .disappeared)
@@ -344,6 +346,7 @@ extension UIResponder {
 
 /// The object that is used to communicate changes in the root view to the
 /// `EpoxySwiftUIHostingController`.
+@available(iOS 13.0, tvOS 13.0, *)
 final class EpoxyHostingContent<RootView: View>: ObservableObject {
 
   // MARK: Lifecycle
@@ -361,6 +364,7 @@ final class EpoxyHostingContent<RootView: View>: ObservableObject {
 
 /// The object that is used to communicate values to SwiftUI views within an
 /// `EpoxySwiftUIHostingController`, e.g. layout margins.
+@available(iOS 13.0, tvOS 13.0, *)
 final class EpoxyHostingEnvironment: ObservableObject {
   @Published var layoutMargins = EdgeInsets()
   @Published var intrinsicContentSizeInvalidator = EpoxyIntrinsicContentSizeInvalidator(invalidate: { })
@@ -370,6 +374,7 @@ final class EpoxyHostingEnvironment: ObservableObject {
 
 /// The wrapper view that is used to communicate values to SwiftUI views within an
 /// `EpoxySwiftUIHostingController`, e.g. layout margins.
+@available(iOS 13.0, tvOS 13.0, *)
 struct EpoxyHostingWrapper<Content: View>: View {
   @ObservedObject var content: EpoxyHostingContent<Content>
   @ObservedObject var environment: EpoxyHostingEnvironment

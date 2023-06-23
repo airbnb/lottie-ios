@@ -6,11 +6,11 @@ import Foundation
 // MARK: - IndexChangeset
 
 /// A set of inserts, deletes, updates, and moves that define the changes between two collections.
-public struct IndexChangeset {
+internal struct IndexChangeset {
 
   // MARK: Lifecycle
 
-  public init(
+  internal init(
     inserts: [Int] = [],
     deletes: [Int] = [],
     updates: [(old: Int, new: Int)] = [],
@@ -29,22 +29,22 @@ public struct IndexChangeset {
   // MARK: Public
 
   /// The inserted indices needed to get from the old collection to the new collection.
-  public var inserts: [Int]
+  internal var inserts: [Int]
 
   /// The deleted indices needed to get from the old collection to the new collection.
-  public var deletes: [Int]
+  internal var deletes: [Int]
 
   /// The updated indices needed to get from the old collection to the new collection.
-  public var updates: [(old: Int, new: Int)]
+  internal var updates: [(old: Int, new: Int)]
 
   /// The moved indices needed to get from the old collection to the new collection.
-  public var moves: [(old: Int, new: Int)]
+  internal var moves: [(old: Int, new: Int)]
 
   /// A record for each old collection item to its index (if any) is in the new collection.
   ///
   /// The indexes of this `Array` represent the indexes old collection, with elements of the
   /// corresponding index of the same item in the new collection it exists, else `nil`.
-  public var newIndices: [Int?]
+  internal var newIndices: [Int?]
 
   /// A record of each element in the new collection that has an identical `diffIdentifier` with
   /// another element in the same collection.
@@ -55,10 +55,10 @@ public struct IndexChangeset {
   /// While the diffing algorithm makes a best effort to handle duplicates, they can lead to
   /// unexpected behavior since identity of elements cannot be established and should be avoided if
   /// possible.
-  public var duplicates: [[Int]]
+  internal var duplicates: [[Int]]
 
   /// Whether there are any inserts, deletes, moves, or updates in this changeset.
-  public var isEmpty: Bool {
+  internal var isEmpty: Bool {
     inserts.isEmpty && deletes.isEmpty && updates.isEmpty && moves.isEmpty
   }
 }
@@ -67,11 +67,11 @@ public struct IndexChangeset {
 
 /// A set of inserts, deletes, updates, and moves that define the changes between two collections
 /// with indexes stored as `IndexPath`s.
-public struct IndexPathChangeset {
+internal struct IndexPathChangeset {
 
   // MARK: Lifecycle
 
-  public init(
+  internal init(
     inserts: [IndexPath] = [],
     deletes: [IndexPath] = [],
     updates: [(old: IndexPath, new: IndexPath)] = [],
@@ -88,16 +88,16 @@ public struct IndexPathChangeset {
   // MARK: Public
 
   /// The inserted `IndexPath`s needed to get from the old collection to the new collection.
-  public var inserts: [IndexPath]
+  internal var inserts: [IndexPath]
 
   /// The deleted `IndexPath`s needed to get from the old collection to the new collection.
-  public var deletes: [IndexPath]
+  internal var deletes: [IndexPath]
 
   /// The updated `IndexPath`s needed to get from the old collection to the new collection.
-  public var updates: [(old: IndexPath, new: IndexPath)]
+  internal var updates: [(old: IndexPath, new: IndexPath)]
 
   /// The moved `IndexPath`s needed to get from the old collection to the new collection.
-  public var moves: [(old: IndexPath, new: IndexPath)]
+  internal var moves: [(old: IndexPath, new: IndexPath)]
 
   /// A record for each element in the new collection that has an identical `diffIdentifier` with
   /// another element in the same collection.
@@ -109,14 +109,14 @@ public struct IndexPathChangeset {
   /// While the diffing algorithm makes a best effort to handle duplicates, they can lead to
   /// unexpected behavior since identity of elements cannot be established and should be avoided if
   /// possible.
-  public var duplicates: [[IndexPath]]
+  internal var duplicates: [[IndexPath]]
 
   /// Whether there are any inserts, deletes, moves, or updates in this changeset.
-  public var isEmpty: Bool {
+  internal var isEmpty: Bool {
     inserts.isEmpty && deletes.isEmpty && updates.isEmpty && moves.isEmpty
   }
 
-  public static func += (left: inout IndexPathChangeset, right: IndexPathChangeset) {
+  internal static func += (left: inout IndexPathChangeset, right: IndexPathChangeset) {
     left.inserts += right.inserts
     left.deletes += right.deletes
     left.updates += right.updates
@@ -129,11 +129,11 @@ public struct IndexPathChangeset {
 
 /// A set of inserts, deletes, updates, and moves that define the changes between two collections
 /// with indexes stored as `IndexSet`.
-public struct IndexSetChangeset {
+internal struct IndexSetChangeset {
 
   // MARK: Lifecycle
 
-  public init(
+  internal init(
     inserts: IndexSet = [],
     deletes: IndexSet = [],
     updates: [(old: Int, new: Int)] = [],
@@ -152,22 +152,22 @@ public struct IndexSetChangeset {
   // MARK: Public
 
   /// An `IndexSet` of inserts needed to get from the old collection to the new collection.
-  public var inserts: IndexSet
+  internal var inserts: IndexSet
 
   /// An `IndexSet` of deletes needed to get from the old collection to the new collection.
-  public var deletes: IndexSet
+  internal var deletes: IndexSet
 
   /// The updated indices needed to get from the old collection to the new collection.
-  public var updates: [(old: Int, new: Int)]
+  internal var updates: [(old: Int, new: Int)]
 
   /// The moved indices needed to get from the old collection to the new collection.
-  public var moves: [(old: Int, new: Int)]
+  internal var moves: [(old: Int, new: Int)]
 
   /// A record for each old collection item of what its index (if any) is in the new collection.
   ///
   /// The indexes of this `Array` represent the indexes old collection, with elements of the
   /// corresponding index of the same item in the new collection it exists, else `nil`.
-  public var newIndices: [Int?]
+  internal var newIndices: [Int?]
 
   /// A record for each element in the new collection that has an identical `diffIdentifier` with
   /// another element in the same collection.
@@ -178,10 +178,10 @@ public struct IndexSetChangeset {
   /// While the diffing algorithm makes a best effort to handle duplicates, they can lead to
   /// unexpected behavior since identity of elements cannot be established and should be avoided if
   /// possible.
-  public var duplicates: [IndexSet]
+  internal var duplicates: [IndexSet]
 
   /// Whether there are any inserts, deletes, moves, or updates in this changeset.
-  public var isEmpty: Bool {
+  internal var isEmpty: Bool {
     inserts.isEmpty && deletes.isEmpty && updates.isEmpty && moves.isEmpty
   }
 }

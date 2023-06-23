@@ -12,11 +12,11 @@ import SwiftUI
 /// height through the `SwiftUISizingContext` binding.
 ///
 /// - SeeAlso: ``MeasuringUIViewRepresentable``
-public final class SwiftUIMeasurementContainer<Content: UIView>: UIView {
+internal final class SwiftUIMeasurementContainer<Content: UIView>: UIView {
 
   // MARK: Lifecycle
 
-  public init(content: Content, strategy: SwiftUIMeasurementContainerStrategy) {
+  internal init(content: Content, strategy: SwiftUIMeasurementContainerStrategy) {
     self.content = content
     self.strategy = strategy
 
@@ -36,7 +36,7 @@ public final class SwiftUIMeasurementContainer<Content: UIView>: UIView {
   }
 
   @available(*, unavailable)
-  public required init?(coder _: NSCoder) {
+  internal required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
@@ -48,12 +48,12 @@ public final class SwiftUIMeasurementContainer<Content: UIView>: UIView {
   /// Contains `proposedSize`/`bounds.size` fallbacks for dimensions with no intrinsic size, as
   /// compared to `intrinsicContentSize` which has `UIView.noIntrinsicMetric` fields in the case of
   /// no intrinsic size.
-  public var measuredFittingSize: CGSize {
+  internal var measuredFittingSize: CGSize {
     _measuredFittingSize ?? measureView()
   }
 
   /// The `UIView` content that's being measured by this container.
-  public var content: Content {
+  internal var content: Content {
     didSet {
       guard content !== oldValue else { return }
       oldValue.removeFromSuperview()
@@ -70,7 +70,7 @@ public final class SwiftUIMeasurementContainer<Content: UIView>: UIView {
   /// The proposed size at the time of the latest measurement.
   ///
   /// Has a side-effect of updating the `measuredIntrinsicContentSize` if it's changed.
-  public var proposedSize = CGSize.noIntrinsicMetric {
+  internal var proposedSize = CGSize.noIntrinsicMetric {
     didSet {
       guard oldValue != proposedSize else { return }
       // The proposed size is only used by the measurement, so just re-measure.
@@ -81,7 +81,7 @@ public final class SwiftUIMeasurementContainer<Content: UIView>: UIView {
   /// The measurement strategy of this container.
   ///
   /// Has a side-effect of updating the `measuredIntrinsicContentSize` if it's changed.
-  public var strategy: SwiftUIMeasurementContainerStrategy {
+  internal var strategy: SwiftUIMeasurementContainerStrategy {
     didSet {
       guard oldValue != strategy else { return }
       // Invalidate the resolved strategy since it's derived from this strategy.
@@ -91,11 +91,11 @@ public final class SwiftUIMeasurementContainer<Content: UIView>: UIView {
     }
   }
 
-  public override var intrinsicContentSize: CGSize {
+  internal override var intrinsicContentSize: CGSize {
     _intrinsicContentSize
   }
 
-  public override func layoutSubviews() {
+  internal override func layoutSubviews() {
     super.layoutSubviews()
 
     // We need to re-measure the view whenever the size of the bounds changes, as the previous size
@@ -106,7 +106,7 @@ public final class SwiftUIMeasurementContainer<Content: UIView>: UIView {
     }
   }
 
-  public override func invalidateIntrinsicContentSize() {
+  internal override func invalidateIntrinsicContentSize() {
     super.invalidateIntrinsicContentSize()
 
     // Invalidate the resolved strategy in case it changes with the re-measurement as it relies on
@@ -278,7 +278,7 @@ public final class SwiftUIMeasurementContainer<Content: UIView>: UIView {
 // MARK: - SwiftUIMeasurementContainerStrategy
 
 /// The measurement strategy of a `SwiftUIMeasurementContainer`.
-public enum SwiftUIMeasurementContainerStrategy {
+internal enum SwiftUIMeasurementContainerStrategy {
   /// The container makes a best effort to correctly choose the measurement strategy of the view.
   ///
   /// The best effort is based on a number of heuristics:

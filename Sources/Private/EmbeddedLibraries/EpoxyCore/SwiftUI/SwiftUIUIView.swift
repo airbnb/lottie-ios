@@ -11,7 +11,7 @@ import SwiftUI
 ///
 /// Includes an optional generic `Storage` value, which can be used to compare old and new values
 /// across state changes to prevent redundant view updates.
-public struct SwiftUIUIView<Content: UIView, Storage>: MeasuringUIViewRepresentable,
+internal struct SwiftUIUIView<Content: UIView, Storage>: MeasuringUIViewRepresentable,
   UIViewConfiguringSwiftUIView
 {
 
@@ -33,9 +33,9 @@ public struct SwiftUIUIView<Content: UIView, Storage>: MeasuringUIViewRepresenta
 
   // MARK: Public
 
-  public var configurations: [Configuration] = []
+  internal var configurations: [Configuration] = []
 
-  public var sizing: SwiftUIMeasurementContainerStrategy = .automatic
+  internal var sizing: SwiftUIMeasurementContainerStrategy = .automatic
 
   // MARK: Private
 
@@ -50,15 +50,15 @@ public struct SwiftUIUIView<Content: UIView, Storage>: MeasuringUIViewRepresenta
 // MARK: UIViewRepresentable
 
 extension SwiftUIUIView {
-  public func makeUIView(context _: Context) -> SwiftUIMeasurementContainer<Content> {
+  internal func makeUIView(context _: Context) -> SwiftUIMeasurementContainer<Content> {
     SwiftUIMeasurementContainer(content: makeContent(), strategy: sizing)
   }
 
-  public func makeCoordinator() -> Coordinator {
+  internal func makeCoordinator() -> Coordinator {
     Coordinator(storage: storage)
   }
 
-  public func updateUIView(_ uiView: SwiftUIMeasurementContainer<Content>, context: Context) {
+  internal func updateUIView(_ uiView: SwiftUIMeasurementContainer<Content>, context: Context) {
     let oldStorage = context.coordinator.storage
     context.coordinator.storage = storage
 
@@ -78,27 +78,28 @@ extension SwiftUIUIView {
 extension SwiftUIUIView {
   /// The configuration context that's available to configure the `Content` view whenever the
   /// `updateUIView()` method is invoked via a configuration closure.
-  public struct ConfigurationContext: ViewProviding {
+  internal struct ConfigurationContext: ViewProviding {
     /// The previous value for the `Storage` of this `SwiftUIUIView`, which can be used to store
     /// values across state changes to prevent redundant view updates.
-    public var oldStorage: Storage
+    internal var oldStorage: Storage
 
     /// The `UIViewRepresentable.Context`, with information about the transaction and environment.
-    public var viewRepresentableContext: Context
+    internal var viewRepresentableContext: Context
 
     /// The backing measurement container that contains the `Content`.
-    public var container: SwiftUIMeasurementContainer<Content>
+    internal var container: SwiftUIMeasurementContainer<Content>
 
     /// The `UIView` content that's being configured.
     ///
     /// Setting this to a new value updates the backing measurement container's `content`.
-    public var view: Content {
+    internal var view: Content {
       get { container.content }
       nonmutating set { container.content = newValue }
     }
 
     /// A convenience accessor indicating whether this content update should be animated.
-    public var animated: Bool {
+    @available(iOS 13.0, tvOS 13.0, *)
+    internal var animated: Bool {
       viewRepresentableContext.transaction.animation != nil
     }
   }
@@ -109,7 +110,7 @@ extension SwiftUIUIView {
 extension SwiftUIUIView {
   /// A coordinator that stores the `storage` associated with this view, enabling the old storage
   /// value to be accessed during the `updateUIView(…)`.
-  public final class Coordinator {
+  internal final class Coordinator {
 
     // MARK: Lifecycle
 

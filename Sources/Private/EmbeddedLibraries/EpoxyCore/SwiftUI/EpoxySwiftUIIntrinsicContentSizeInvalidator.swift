@@ -18,19 +18,20 @@ import SwiftUI
 ///   }
 /// }
 /// ```
-public struct EpoxyIntrinsicContentSizeInvalidator {
+internal struct EpoxyIntrinsicContentSizeInvalidator {
   let invalidate: () -> Void
 
-  public func callAsFunction() {
+  internal func callAsFunction() {
     invalidate()
   }
 }
 
 // MARK: - EnvironmentValues
 
+@available(iOS 13.0, tvOS 13.0, *)
 extension EnvironmentValues {
   /// A means of invalidating the intrinsic content size of the parent `EpoxySwiftUIHostingView`.
-  public var epoxyIntrinsicContentSizeInvalidator: EpoxyIntrinsicContentSizeInvalidator {
+  internal var epoxyIntrinsicContentSizeInvalidator: EpoxyIntrinsicContentSizeInvalidator {
     get { self[EpoxyIntrinsicContentSizeInvalidatorKey.self] }
     set { self[EpoxyIntrinsicContentSizeInvalidatorKey.self] = newValue }
   }

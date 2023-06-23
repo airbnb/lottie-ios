@@ -3,11 +3,11 @@
 
 /// A set of the minimum changes to get from one array of `DiffableSection`s to another, used for
 /// diffing.
-public struct SectionedChangeset {
+internal struct SectionedChangeset {
 
   // MARK: Lifecycle
 
-  public init(
+  internal init(
     sectionChangeset: IndexSetChangeset,
     itemChangeset: IndexPathChangeset)
   {
@@ -18,14 +18,14 @@ public struct SectionedChangeset {
   // MARK: Public
 
   /// A set of the minimum changes to get from one set of sections to another.
-  public var sectionChangeset: IndexSetChangeset
+  internal var sectionChangeset: IndexSetChangeset
 
   /// A set of the minimum changes to get from one set of items to another, aggregated across all
   /// sections.
-  public var itemChangeset: IndexPathChangeset
+  internal var itemChangeset: IndexPathChangeset
 
   /// Whether there are any inserts, deletes, moves, or updates in this changeset.
-  public var isEmpty: Bool {
+  internal var isEmpty: Bool {
     sectionChangeset.isEmpty && itemChangeset.isEmpty
   }
 
