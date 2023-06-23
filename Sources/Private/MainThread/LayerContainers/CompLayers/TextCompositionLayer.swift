@@ -113,7 +113,28 @@ final class TextCompositionLayer: CompositionLayer {
     let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
     let matrix = rootNode?.textOutputNode.xform ?? CATransform3DIdentity
     let textString = textProvider.textFor(keypathName: keypathName, sourceText: text.text)
-    let ctFont = fontProvider.fontFor(family: text.fontFamily, size: CGFloat(text.fontSize))
+    
+    var fontSize = CGFloat(text.fontSize)
+
+    if let size = text.textFrameSize?.sizeValue, text.textResize ?? false {
+        let minimumFontSize = CGFloat(text.minimumFontSize ?? 5)
+        var isFitting = false
+        while !isFitting && fontSize > minimumFontSize {
+            let boundingRect = CGSize(width: .greatestFiniteMagnitude, height: size.height)
+            guard let font = UIFont(name: text.fontFamily, size: fontSize) else { break }
+
+            let boundingBox = textString.boundingRect(with: boundingRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
+
+            let width = ceil(boundingBox.width)
+            if width < size.width {
+                isFitting = true
+            } else {
+                fontSize -= 1
+            }
+        }
+    }
+
+    let ctFont = fontProvider.fontFor(family: text.fontFamily, size: fontSize)
 
     // Set all of the text layer options
     textLayer.text = textString

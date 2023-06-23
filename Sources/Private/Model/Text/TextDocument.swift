@@ -55,6 +55,8 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
     } else {
       textFrameSize = nil
     }
+    textResize = try? dictionary.value(for: CodingKeys.textResize)
+    minimumFontSize = try? dictionary.value(for: CodingKeys.minimumFontSize)
   }
 
   convenience init(value: Any) throws {
@@ -102,6 +104,10 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
   let textFramePosition: LottieVector3D?
 
   let textFrameSize: LottieVector3D?
+    
+  let textResize: Bool?
+
+  let minimumFontSize: Int?
 
   // MARK: Private
 
@@ -119,5 +125,7 @@ final class TextDocument: Codable, DictionaryInitializable, AnyInitializable {
     case strokeOverFill = "of"
     case textFramePosition = "ps"
     case textFrameSize = "sz"
+    case textResize = "trf_yubo"
+    case minimumFontSize = "mfs_yubo"
   }
 }
