@@ -49,7 +49,7 @@ internal struct EpoxyModelProperty<Value> {
     self.updateStrategy = updateStrategy
   }
 
-  // MARK: Public
+  // MARK: Internal
 
   /// The `KeyPath` that uniquely identifies this property.
   internal let keyPath: AnyKeyPath

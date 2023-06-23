@@ -21,7 +21,7 @@ internal protocol MakeViewProviding {
 
 extension ViewEpoxyModeled where Self: MakeViewProviding {
 
-  // MARK: Public
+  // MARK: Internal
 
   /// A closure that's called to construct an instance of `View` represented by this model.
   internal var makeView: MakeView {

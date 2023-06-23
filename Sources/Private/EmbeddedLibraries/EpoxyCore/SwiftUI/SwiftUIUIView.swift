@@ -31,7 +31,7 @@ internal struct SwiftUIUIView<Content: UIView, Storage>: MeasuringUIViewRepresen
     self.makeContent = makeContent
   }
 
-  // MARK: Public
+  // MARK: Internal
 
   internal var configurations: [Configuration] = []
 

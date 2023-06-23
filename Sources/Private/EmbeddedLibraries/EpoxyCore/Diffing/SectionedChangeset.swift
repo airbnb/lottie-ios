@@ -15,7 +15,7 @@ internal struct SectionedChangeset {
     self.itemChangeset = itemChangeset
   }
 
-  // MARK: Public
+  // MARK: Internal
 
   /// A set of the minimum changes to get from one set of sections to another.
   internal var sectionChangeset: IndexSetChangeset

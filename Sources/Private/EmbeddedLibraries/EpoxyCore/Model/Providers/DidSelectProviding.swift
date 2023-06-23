@@ -11,7 +11,7 @@ internal protocol DidSelectProviding { }
 
 extension CallbackContextEpoxyModeled where Self: DidSelectProviding {
 
-  // MARK: Public
+  // MARK: Internal
 
   /// A closure that's called to handle this model's view being selected.
   internal typealias DidSelect = (CallbackContext) -> Void

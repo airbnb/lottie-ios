@@ -33,7 +33,7 @@ internal final class EpoxyLogger {
     _warn = warn
   }
 
-  // MARK: Public
+  // MARK: Internal
 
   /// Logs that an assertion occurred.
   internal typealias Assert = (

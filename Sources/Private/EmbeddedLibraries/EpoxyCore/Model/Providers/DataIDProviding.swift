@@ -22,7 +22,7 @@ internal protocol DataIDProviding {
 
 extension EpoxyModeled where Self: DataIDProviding {
 
-  // MARK: Public
+  // MARK: Internal
 
   /// A stable identifier that uniquely identifies this model, with its typed erased.
   internal var dataID: AnyHashable {
