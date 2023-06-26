@@ -138,7 +138,7 @@ jobs:
       - name: Lint Swift
         run: bundle exec rake lint:swift
 
-  swiftlint:
+  embedded-libraries:
     name: "Lint Embedded Libraries"
     runs-on: macos-13
     steps:
