@@ -3,6 +3,7 @@
 
 import Lottie
 import UIKit
+import SwiftUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,11 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let window = UIWindow(frame: UIScreen.main.bounds)
 
-    let navigationController = UINavigationController(
-      rootViewController: SampleListViewController(directory: "Samples"))
+    let hostingController = UIHostingController(rootView: AnimationPreviewView())
+    window.rootViewController = hostingController
 
-    navigationController.navigationBar.prefersLargeTitles = true
-    window.rootViewController = navigationController
+//    let navigationController = UINavigationController(
+//      rootViewController: SampleListViewController(directory: "Samples"))
+
+//    navigationController.navigationBar.prefersLargeTitles = true
+//    window.rootViewController = navigationController
 
     window.makeKeyAndVisible()
     self.window = window
