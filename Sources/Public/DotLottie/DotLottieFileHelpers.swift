@@ -78,6 +78,21 @@ extension DotLottieFile {
         return .failure(error)
       }
     }
+
+    /// Loads an DotLottie from a data synchronously. Returns a `DotLottieFile`. Optional.
+    ///
+    /// Please use the asynchronous methods whenever possible. This operation will block the Thread it is running in.
+    ///
+    /// - Parameters:
+    ///   - data: The data(`Foundation.Data`) object to load DotLottie from
+    ///   - filename: The name of the lottie file without the lottie extension. eg. "StarAnimation"
+    public static func loadedFrom(
+      data: Data,
+      filename: String)
+      throws -> DotLottieFile
+    {
+      return try DotLottieFile(data: data, filename: filename)
+    }
   }
 
   /// Loads a DotLottie model from a bundle by its name. Returns `nil` if a file is not found.
@@ -289,20 +304,6 @@ extension DotLottieFile {
     }
   }
 
-  /// Loads an DotLottie from a data synchronously. Returns a `Result<DotLottieFile, Error>`
-  /// Please use the asynchronous methods whenever possible. This operation will block the Thread it is running in.
-  ///
-  /// - Parameters:
-  ///   - data: The data(`Foundation.Data`) object to load DotLottie from
-  ///   - filename: The name of the lottie file without the lottie extension. eg. "StarAnimation"
-  public static func loadedFrom(
-    data: Data,
-    filename: String)
-    throws -> DotLottieFile
-  {
-    return try DotLottieFile(data: data, filename: filename)
-  }
-
   /// Loads an DotLottie from a data asynchronously.
   ///
   /// - Parameters:
@@ -331,7 +332,7 @@ extension DotLottieFile {
   }
 
   /// Loads an DotLottie from a data asynchronously.
-  /// 
+  ///
   /// - Parameters:
   ///   - data: The data(`Foundation.Data`) object to load DotLottie from
   ///   - filename: The name of the lottie file without the lottie extension. eg. "StarAnimation"
