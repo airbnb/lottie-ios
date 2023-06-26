@@ -24,7 +24,7 @@ When doing this, follow these steps:
     to prevent Lottie from exposing any EpoxyCore APIs.
     
  4. Add `@available` annotations as necessary so the library compiles
-    (Lottie has a lower minimum iOS version that EpoxyCore). 
+    (Lottie has a lower minimum iOS version than EpoxyCore). 
     
  5. Namespace any types that conflict with other existing types.
     For example, the EpoxyCore `Entry` type conflicts with the ZipFoundation `Entry` type,
