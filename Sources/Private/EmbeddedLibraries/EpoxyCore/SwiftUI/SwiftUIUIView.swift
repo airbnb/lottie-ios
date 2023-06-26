@@ -12,6 +12,7 @@ import SwiftUI
 ///
 /// Includes an optional generic `Storage` value, which can be used to compare old and new values
 /// across state changes to prevent redundant view updates.
+@available(iOS 13.0, tvOS 13.0, *)
 internal struct SwiftUIUIView<Content: UIView, Storage>: MeasuringUIViewRepresentable,
   UIViewConfiguringSwiftUIView
 {
@@ -50,6 +51,7 @@ internal struct SwiftUIUIView<Content: UIView, Storage>: MeasuringUIViewRepresen
 
 // MARK: UIViewRepresentable
 
+@available(iOS 13.0, tvOS 13.0, *)
 extension SwiftUIUIView {
   internal func makeUIView(context _: Context) -> SwiftUIMeasurementContainer<Content> {
     SwiftUIMeasurementContainer(content: makeContent(), strategy: sizing)
@@ -76,6 +78,7 @@ extension SwiftUIUIView {
 
 // MARK: SwiftUIUIView.ConfigurationContext
 
+@available(iOS 13.0, tvOS 13.0, *)
 extension SwiftUIUIView {
   /// The configuration context that's available to configure the `Content` view whenever the
   /// `updateUIView()` method is invoked via a configuration closure.
@@ -108,6 +111,7 @@ extension SwiftUIUIView {
 
 // MARK: SwiftUIUIView.Coordinator
 
+@available(iOS 13.0, tvOS 13.0, *)
 extension SwiftUIUIView {
   /// A coordinator that stores the `storage` associated with this view, enabling the old storage
   /// value to be accessed during the `updateUIView(…)`.

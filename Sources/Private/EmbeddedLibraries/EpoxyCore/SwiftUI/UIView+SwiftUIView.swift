@@ -25,6 +25,7 @@ extension UIViewProtocol {
   /// MyView.swiftUIView(…).sizing(.intrinsicSize)
   /// ```
   /// The sizing defaults to `.automatic`.
+  @available(iOS 13.0, tvOS 13.0, *)
   internal static func swiftUIView(makeView: @escaping () -> Self) -> SwiftUIUIView<Self, Void> {
     SwiftUIUIView(makeContent: makeView)
   }
