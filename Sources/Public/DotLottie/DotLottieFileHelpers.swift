@@ -79,7 +79,7 @@ extension DotLottieFile {
       }
     }
 
-    /// Loads an DotLottie from a data synchronously. Returns a `DotLottieFile`. Optional.
+    /// Loads an DotLottie from a data synchronously. Returns a `Result<DotLottieFile, Error>`
     ///
     /// Please use the asynchronous methods whenever possible. This operation will block the Thread it is running in.
     ///
@@ -89,9 +89,14 @@ extension DotLottieFile {
     public static func loadedFrom(
       data: Data,
       filename: String)
-      throws -> DotLottieFile
+      -> Result<DotLottieFile, Error>
     {
-      return try DotLottieFile(data: data, filename: filename)
+      do {
+        let dotLottieFile = try DotLottieFile(data: data, filename: filename)
+        return .success(dotLottieFile)
+      } catch {
+        return .failure(error)
+      }
     }
   }
 
