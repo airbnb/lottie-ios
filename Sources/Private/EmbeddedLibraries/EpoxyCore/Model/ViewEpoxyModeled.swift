@@ -1,3 +1,4 @@
+#if !os(macOS)
 // Created by eric_horacek on 12/4/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -10,3 +11,4 @@ internal protocol ViewEpoxyModeled: EpoxyModeled {
   /// An instance of this view is typically configured by this model.
   associatedtype View: UIView
 }
+#endif

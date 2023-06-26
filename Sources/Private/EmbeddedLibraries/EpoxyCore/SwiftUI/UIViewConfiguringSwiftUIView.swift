@@ -1,3 +1,4 @@
+#if !os(macOS)
 // Created by eric_horacek on 3/4/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
@@ -41,3 +42,4 @@ extension UIViewConfiguringSwiftUIView {
     return copy
   }
 }
+#endif

@@ -1,3 +1,4 @@
+#if !os(macOS)
 //  Created by Laura Skelton on 11/25/16.
 //  Copyright © 2016 Airbnb. All rights reserved.
 
@@ -261,3 +262,4 @@ private struct NewRecord {
   var EpoxyEntry: EpoxyEntry
   var correspondingOldIndex: Int? = nil
 }
+#endif

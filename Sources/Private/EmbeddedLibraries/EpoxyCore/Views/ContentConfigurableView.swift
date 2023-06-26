@@ -1,3 +1,4 @@
+#if !os(macOS)
 //  Created by Laura Skelton on 5/30/17.
 //  Copyright © 2017 Airbnb. All rights reserved.
 
@@ -36,3 +37,4 @@ internal protocol ContentConfigurableView: UIView {
 extension ContentConfigurableView where Content == Never {
   internal func setContent(_: Never, animated _: Bool) { }
 }
+#endif

@@ -1,3 +1,4 @@
+#if !os(macOS)
 // Created by eric_horacek on 12/9/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -14,3 +15,4 @@ internal protocol DiffableSection: Diffable {
   /// The diffable items in this section.
   var diffableItems: DiffableItems { get }
 }
+#endif

@@ -1,3 +1,4 @@
+#if !os(macOS)
 // Created by eric_horacek on 6/22/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
@@ -83,3 +84,4 @@ extension MeasuringUIViewRepresentable {
   }
   #endif
 }
+#endif

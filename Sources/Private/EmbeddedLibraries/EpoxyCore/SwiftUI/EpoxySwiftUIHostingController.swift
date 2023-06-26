@@ -1,3 +1,4 @@
+#if !os(macOS)
 // Created by eric_horacek on 10/8/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
@@ -42,3 +43,4 @@ open class EpoxySwiftUIHostingController<Content: View>: UIHostingController<Con
     view.backgroundColor = .clear
   }
 }
+#endif

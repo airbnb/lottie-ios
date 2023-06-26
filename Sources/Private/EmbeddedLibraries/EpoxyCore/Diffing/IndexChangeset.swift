@@ -1,3 +1,4 @@
+#if !os(macOS)
 //  Created by Laura Skelton on 11/25/16.
 //  Copyright © 2016 Airbnb. All rights reserved.
 
@@ -185,3 +186,4 @@ internal struct IndexSetChangeset {
     inserts.isEmpty && deletes.isEmpty && updates.isEmpty && moves.isEmpty
   }
 }
+#endif

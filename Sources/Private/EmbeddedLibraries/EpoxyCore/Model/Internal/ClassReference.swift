@@ -1,3 +1,4 @@
+#if !os(macOS)
 // Created by Cal Stephens on 10/15/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
@@ -37,3 +38,4 @@ extension ClassReference: CustomStringConvertible {
     String(describing: `class`)
   }
 }
+#endif

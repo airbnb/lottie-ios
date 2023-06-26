@@ -1,3 +1,4 @@
+#if !os(macOS)
 // Created by eric_horacek on 1/6/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
@@ -39,3 +40,4 @@ extension CallbackContextEpoxyModeled where Self: DidDisplayProviding {
     .init(keyPath: \Self.didDisplay, defaultValue: nil, updateStrategy: .chain())
   }
 }
+#endif

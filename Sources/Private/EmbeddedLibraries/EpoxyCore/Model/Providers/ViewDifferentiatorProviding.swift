@@ -1,3 +1,4 @@
+#if !os(macOS)
 // Created by Bryan Keller on 12/17/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -32,3 +33,4 @@ internal struct ViewDifferentiator: Hashable {
   internal var styleID: AnyHashable?
 
 }
+#endif

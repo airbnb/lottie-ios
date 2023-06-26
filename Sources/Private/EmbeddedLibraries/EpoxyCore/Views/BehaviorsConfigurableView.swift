@@ -1,3 +1,4 @@
+#if !os(macOS)
 // Created by Tyler Hedrick on 5/26/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -45,3 +46,4 @@ extension BehaviorsConfigurableView where Behaviors == Never {
     }
   }
 }
+#endif

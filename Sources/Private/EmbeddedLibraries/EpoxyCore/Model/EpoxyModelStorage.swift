@@ -1,3 +1,4 @@
+#if !os(macOS)
 // Created by eric_horacek on 11/18/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -86,3 +87,4 @@ private struct PropertyStorage {
   /// The property's corresponding `EpoxyModelProperty`, erased to an `AnyEpoxyModelProperty`.
   var property: AnyEpoxyModelProperty
 }
+#endif

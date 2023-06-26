@@ -1,3 +1,4 @@
+#if !os(macOS)
 // Created by eric_horacek on 3/3/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
@@ -37,3 +38,4 @@ internal protocol UIViewProtocol: UIView { }
 // MARK: - UIView + UIViewProtocol
 
 extension UIView: UIViewProtocol { }
+#endif

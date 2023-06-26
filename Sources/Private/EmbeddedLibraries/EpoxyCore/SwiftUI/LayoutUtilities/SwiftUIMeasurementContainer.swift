@@ -1,3 +1,4 @@
+#if !os(macOS)
 // Created by Bryn Bodayle on 1/24/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
@@ -412,3 +413,4 @@ extension CGSize {
       height: height == UIView.noIntrinsicMetric ? fallback.height : height)
   }
 }
+#endif

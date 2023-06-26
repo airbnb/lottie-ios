@@ -1,3 +1,4 @@
+#if !os(macOS)
 // Created by eric_horacek on 11/18/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -156,3 +157,4 @@ extension EpoxyModelProperty.UpdateStrategy {
 
   // Add more arities as needed
 }
+#endif
