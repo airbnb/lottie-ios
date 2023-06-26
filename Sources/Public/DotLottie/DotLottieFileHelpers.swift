@@ -289,4 +289,21 @@ extension DotLottieFile {
     }
   }
 
+  /// Loads an DotLottie from a data synchronously. Returns a `Result<DotLottieFile, Error>`
+  /// - Parameters:
+  ///   - data: The data(`Foundation.Data`) object to load DotLottie from
+  ///   - filename: The name of the lottie file without the lottie extension. eg. "StarAnimation"
+  public static func loadedFrom(
+    data: Data,
+    filename: String)
+    -> Result<DotLottieFile, Error>
+  {
+    do {
+      let dotLottieFile = try DotLottieFile(data: data, filename: filename)
+      return .success(dotLottieFile)
+    } catch {
+      return .failure(error)
+    }
+  }
+
 }
