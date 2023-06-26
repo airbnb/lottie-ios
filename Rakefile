@@ -129,6 +129,12 @@ namespace :lint do
   task :podspec do
     sh 'pod lib lint lottie-ios.podspec'
   end
+
+  desc 'Lints the EmbeddedLibraries directory'
+  task :EmbeddedLibraries do
+    sh 'echo "Linting /Sources/Private/EmbeddedLibaries (should not contain any public symbols)"'
+    sh '! grep -r "public" Sources/Private/EmbeddedLibraries --include \*.swift'
+  end
 end
 
 namespace :format do

@@ -125,7 +125,8 @@ extension SwiftUIUIView {
 
     // MARK: Internal
 
-    fileprivate(set) var storage: Storage
+    // TODO: Revert, testing that the new CI job fails
+    public fileprivate(set) var storage: Storage
   }
 }
 #endif
