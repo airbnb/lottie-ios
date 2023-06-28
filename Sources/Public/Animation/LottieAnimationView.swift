@@ -302,8 +302,15 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   // MARK: Public
 
+  /// The configuration that this `LottieAnimationView` uses when playing its animation
+  public var configuration: LottieConfiguration {
+    lottieAnimationLayer.configuration
+  }
+
   /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
-  public private(set) var valueProviders = [AnimationKeypath: AnyValueProvider]()
+  public var valueProviders: [AnimationKeypath: AnyValueProvider] {
+    lottieAnimationLayer.valueProviders
+  }
 
   /// Describes the behavior of an AnimationView when the app is moved to the background.
   ///
