@@ -3,6 +3,8 @@
 
 import SwiftUI
 
+#if !os(macOS)
+
 // MARK: - LottieView
 
 /// A wrapper which exposes Lottie's `LottieAnimationView` to SwiftUI
@@ -97,3 +99,5 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
   private let configuration: LottieConfiguration
   private var sizing = SwiftUIMeasurementContainerStrategy.automatic
 }
+
+#endif
