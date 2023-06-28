@@ -308,7 +308,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   }
 
   /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
-  public var valueProviders = [AnimationKeypath: AnyValueProvider]() {
+  public var valueProviders: [AnimationKeypath: AnyValueProvider] {
     lottieAnimationLayer.valueProviders
   }
 
