@@ -30,8 +30,6 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
 
   // MARK: Public
 
-  var configurations = [SwiftUIUIView<LottieAnimationView, Void>.Configuration]()
-
   public var body: some View {
     LottieAnimationView.swiftUIView {
       LottieAnimationView(
@@ -85,6 +83,10 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
       context.view.backgroundBehavior = value
     }
   }
+
+  // MARK: Internal
+
+  var configurations = [SwiftUIUIView<LottieAnimationView, Void>.Configuration]()
 
   // MARK: Private
 
