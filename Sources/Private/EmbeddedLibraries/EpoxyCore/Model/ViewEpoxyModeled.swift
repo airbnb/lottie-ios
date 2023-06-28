@@ -1,0 +1,14 @@
+#if !os(macOS)
+// Created by eric_horacek on 12/4/20.
+// Copyright © 2020 Airbnb Inc. All rights reserved.
+
+import UIKit
+
+/// An Epoxy model with an associated `UIView` type.
+internal protocol ViewEpoxyModeled: EpoxyModeled {
+  /// The view type associated with this model.
+  ///
+  /// An instance of this view is typically configured by this model.
+  associatedtype View: UIView
+}
+#endif

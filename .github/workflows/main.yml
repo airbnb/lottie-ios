@@ -137,3 +137,12 @@ jobs:
       - uses: ./.github/actions/setup
       - name: Lint Swift
         run: bundle exec rake lint:swift
+
+  embedded-libraries:
+    name: "Lint Embedded Libraries"
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+      - name: Lint Embedded Libraries
+        run: bundle exec rake lint:EmbeddedLibraries
