@@ -2,6 +2,7 @@
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
 import Lottie
+import SwiftUI
 import UIKit
 
 @UIApplicationMain

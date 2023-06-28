@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080864BC2A4C94F700D70F30 /* Samples in Resources */ = {isa = PBXBuildFile; fileRef = 2E3EEB372763C68C00287EEA /* Samples */; };
+		080864BE2A4C955F00D70F30 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080864BD2A4C955F00D70F30 /* Lottie.framework */; };
+		080864BF2A4C955F00D70F30 /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 080864BD2A4C955F00D70F30 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0861BBCD2898964400C3FC66 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0861BBCC2898964400C3FC66 /* Lottie.framework */; };
 		0861BBCE2898964400C3FC66 /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0861BBCC2898964400C3FC66 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		08BBA7442A4C948F00974DA7 /* tvOSExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBA7432A4C948F00974DA7 /* tvOSExampleApp.swift */; };
+		08BBA7462A4C948F00974DA7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBA7452A4C948F00974DA7 /* ContentView.swift */; };
+		08BBA7482A4C949000974DA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BBA7472A4C949000974DA7 /* Assets.xcassets */; };
+		08C002F92A461E3200AB54BA /* AnimationPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C002F82A461E3200AB54BA /* AnimationPreviewView.swift */; };
 		2E0F2FBE27602CB300B65DE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E0F2FBC27602CB300B65DE3 /* LaunchScreen.storyboard */; };
 		2E1670C32784F009009CDED3 /* ControlsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1670C22784F009009CDED3 /* ControlsDemoViewController.swift */; };
 		2E1670CA2784F123009CDED3 /* AnimatedButtonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1670C92784F123009CDED3 /* AnimatedButtonRow.swift */; };
@@ -16,7 +23,6 @@
 		2E362A1E2762BA06006AE7D2 /* SampleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E362A1D2762BA06006AE7D2 /* SampleListViewController.swift */; };
 		2E3EEB382763C68C00287EEA /* Samples in Resources */ = {isa = PBXBuildFile; fileRef = 2E3EEB372763C68C00287EEA /* Samples */; };
 		2E3EEB392763C68C00287EEA /* Samples in Resources */ = {isa = PBXBuildFile; fileRef = 2E3EEB372763C68C00287EEA /* Samples */; };
-		2E3EEB3A2763C68C00287EEA /* Samples in Resources */ = {isa = PBXBuildFile; fileRef = 2E3EEB372763C68C00287EEA /* Samples */; };
 		2E6DBDF727723A7300EBD89E /* Epoxy in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6DBDF627723A7300EBD89E /* Epoxy */; };
 		2E6DBDF927723A7300EBD89E /* EpoxyCollectionView in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6DBDF827723A7300EBD89E /* EpoxyCollectionView */; };
 		2E6DBDFB27723A7300EBD89E /* EpoxyLayoutGroups in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6DBDFA27723A7300EBD89E /* EpoxyLayoutGroups */; };
@@ -27,17 +33,22 @@
 		2EA159F52761289D00CE8F1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA159F42761289D00CE8F1F /* Assets.xcassets */; };
 		2EA159F82761289D00CE8F1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA159F62761289D00CE8F1F /* Main.storyboard */; };
 		2EA159FF276128D100CE8F1F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 2EA159FE276128D100CE8F1F /* Lottie */; };
-		2EA15A072761299B00CE8F1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA15A062761299B00CE8F1F /* AppDelegate.swift */; };
-		2EA15A092761299B00CE8F1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA15A082761299B00CE8F1F /* ViewController.swift */; };
-		2EA15A0C2761299B00CE8F1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA15A0A2761299B00CE8F1F /* Main.storyboard */; };
-		2EA15A0E2761299C00CE8F1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA15A0D2761299C00CE8F1F /* Assets.xcassets */; };
-		2EA15A112761299C00CE8F1F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA15A0F2761299C00CE8F1F /* LaunchScreen.storyboard */; };
-		2EA15B1D27612AE300CE8F1F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 2EA15B1C27612AE300CE8F1F /* Lottie */; };
 		2EC6E5082763D981002E091C /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6E5072763D981002E091C /* LinkView.swift */; };
 		2EC6E5102763E79F002E091C /* AnimationPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6E50F2763E79F002E091C /* AnimationPreviewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		080864C02A4C955F00D70F30 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				080864BF2A4C955F00D70F30 /* Lottie.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0861BBCF2898964400C3FC66 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -52,7 +63,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		080864BD2A4C955F00D70F30 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0861BBCC2898964400C3FC66 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		08BBA7412A4C948F00974DA7 /* Example (tvOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example (tvOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08BBA7432A4C948F00974DA7 /* tvOSExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tvOSExampleApp.swift; sourceTree = "<group>"; };
+		08BBA7452A4C948F00974DA7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		08BBA7472A4C949000974DA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		08C002F82A461E3200AB54BA /* AnimationPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationPreviewView.swift; sourceTree = "<group>"; };
 		2E0F2FB627602C1500B65DE3 /* .. */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ..; sourceTree = "<group>"; };
 		2E0F2FBD27602CB300B65DE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E1670C22784F009009CDED3 /* ControlsDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsDemoViewController.swift; sourceTree = "<group>"; };
@@ -71,18 +88,19 @@
 		2EA159F72761289D00CE8F1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2EA159F92761289D00CE8F1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EA159FA2761289D00CE8F1F /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
-		2EA15A042761299B00CE8F1F /* Example (tvOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example (tvOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2EA15A062761299B00CE8F1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2EA15A082761299B00CE8F1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2EA15A0B2761299B00CE8F1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2EA15A0D2761299C00CE8F1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2EA15A102761299C00CE8F1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		2EA15A122761299C00CE8F1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EC6E5072763D981002E091C /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
 		2EC6E50F2763E79F002E091C /* AnimationPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationPreviewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		08BBA73E2A4C948F00974DA7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				080864BE2A4C955F00D70F30 /* Lottie.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2E9E77A927602BD400C84BA3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -102,17 +120,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2EA15A012761299B00CE8F1F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2EA15B1D27612AE300CE8F1F /* Lottie in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08BBA7422A4C948F00974DA7 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				08BBA7432A4C948F00974DA7 /* tvOSExampleApp.swift */,
+				08BBA7452A4C948F00974DA7 /* ContentView.swift */,
+				08BBA7472A4C949000974DA7 /* Assets.xcassets */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		08C002F72A461E2500AB54BA /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				08C002F82A461E3200AB54BA /* AnimationPreviewView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		2E1670C72784F05F009CDED3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +164,7 @@
 		2E9E77AD27602BD400C84BA3 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				08C002F72A461E2500AB54BA /* SwiftUI */,
 				2E1670C72784F05F009CDED3 /* ViewControllers */,
 				2E1670C82784F068009CDED3 /* Views */,
 				2E9E77AE27602BD400C84BA3 /* AppDelegate.swift */,
@@ -159,26 +188,13 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
-		2EA15A052761299B00CE8F1F /* tvOS */ = {
-			isa = PBXGroup;
-			children = (
-				2EA15A062761299B00CE8F1F /* AppDelegate.swift */,
-				2EA15A082761299B00CE8F1F /* ViewController.swift */,
-				2EA15A0A2761299B00CE8F1F /* Main.storyboard */,
-				2EA15A0D2761299C00CE8F1F /* Assets.xcassets */,
-				2EA15A0F2761299C00CE8F1F /* LaunchScreen.storyboard */,
-				2EA15A122761299C00CE8F1F /* Info.plist */,
-			);
-			path = tvOS;
-			sourceTree = "<group>";
-		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
 				2E3EEB372763C68C00287EEA /* Samples */,
 				2E9E77AD27602BD400C84BA3 /* iOS */,
 				2EA159EF2761289C00CE8F1F /* macOS */,
-				2EA15A052761299B00CE8F1F /* tvOS */,
+				08BBA7422A4C948F00974DA7 /* tvOS */,
 				607FACD11AFB9204008FA782 /* Products */,
 				7E9F75F0414B543D4DE51733 /* Frameworks */,
 			);
@@ -189,7 +205,7 @@
 			children = (
 				2E9E77AC27602BD400C84BA3 /* Example (iOS).app */,
 				2EA159EE2761289C00CE8F1F /* Example (macOS).app */,
-				2EA15A042761299B00CE8F1F /* Example (tvOS).app */,
+				08BBA7412A4C948F00974DA7 /* Example (tvOS).app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -197,6 +213,7 @@
 		7E9F75F0414B543D4DE51733 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				080864BD2A4C955F00D70F30 /* Lottie.framework */,
 				0861BBCC2898964400C3FC66 /* Lottie.framework */,
 				2E0F2FB627602C1500B65DE3 /* .. */,
 			);
@@ -206,6 +223,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		08BBA7402A4C948F00974DA7 /* Example (tvOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08BBA74C2A4C949000974DA7 /* Build configuration list for PBXNativeTarget "Example (tvOS)" */;
+			buildPhases = (
+				08BBA73D2A4C948F00974DA7 /* Sources */,
+				08BBA73E2A4C948F00974DA7 /* Frameworks */,
+				08BBA73F2A4C948F00974DA7 /* Resources */,
+				080864C02A4C955F00D70F30 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Example (tvOS)";
+			productName = "Example (tvOS)";
+			productReference = 08BBA7412A4C948F00974DA7 /* Example (tvOS).app */;
+			productType = "com.apple.product-type.application";
+		};
 		2E9E77AB27602BD400C84BA3 /* Example (iOS) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E9E77BD27602BD400C84BA3 /* Build configuration list for PBXNativeTarget "Example (iOS)" */;
@@ -249,44 +284,24 @@
 			productReference = 2EA159EE2761289C00CE8F1F /* Example (macOS).app */;
 			productType = "com.apple.product-type.application";
 		};
-		2EA15A032761299B00CE8F1F /* Example (tvOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2EA15A132761299C00CE8F1F /* Build configuration list for PBXNativeTarget "Example (tvOS)" */;
-			buildPhases = (
-				2EA15A002761299B00CE8F1F /* Sources */,
-				2EA15A012761299B00CE8F1F /* Frameworks */,
-				2EA15A022761299B00CE8F1F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Example (tvOS)";
-			packageProductDependencies = (
-				2EA15B1C27612AE300CE8F1F /* Lottie */,
-			);
-			productName = tvOS;
-			productReference = 2EA15A042761299B00CE8F1F /* Example (tvOS).app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1320;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
+					08BBA7402A4C948F00974DA7 = {
+						CreatedOnToolsVersion = 14.3;
+					};
 					2E9E77AB27602BD400C84BA3 = {
 						CreatedOnToolsVersion = 12.5.1;
 						ProvisioningStyle = Automatic;
 					};
 					2EA159ED2761289C00CE8F1F = {
-						CreatedOnToolsVersion = 12.5.1;
-					};
-					2EA15A032761299B00CE8F1F = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
 				};
@@ -309,12 +324,21 @@
 			targets = (
 				2E9E77AB27602BD400C84BA3 /* Example (iOS) */,
 				2EA159ED2761289C00CE8F1F /* Example (macOS) */,
-				2EA15A032761299B00CE8F1F /* Example (tvOS) */,
+				08BBA7402A4C948F00974DA7 /* Example (tvOS) */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		08BBA73F2A4C948F00974DA7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				080864BC2A4C94F700D70F30 /* Samples in Resources */,
+				08BBA7482A4C949000974DA7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2E9E77AA27602BD400C84BA3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -334,20 +358,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2EA15A022761299B00CE8F1F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2E3EEB3A2763C68C00287EEA /* Samples in Resources */,
-				2EA15A112761299C00CE8F1F /* LaunchScreen.storyboard in Resources */,
-				2EA15A0E2761299C00CE8F1F /* Assets.xcassets in Resources */,
-				2EA15A0C2761299B00CE8F1F /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		08BBA73D2A4C948F00974DA7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08BBA7462A4C948F00974DA7 /* ContentView.swift in Sources */,
+				08BBA7442A4C948F00974DA7 /* tvOSExampleApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2E9E77A827602BD400C84BA3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -360,6 +382,7 @@
 				2E362A1E2762BA06006AE7D2 /* SampleListViewController.swift in Sources */,
 				2E9E77AF27602BD400C84BA3 /* AppDelegate.swift in Sources */,
 				2EC6E5082763D981002E091C /* LinkView.swift in Sources */,
+				08C002F92A461E3200AB54BA /* AnimationPreviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,15 +392,6 @@
 			files = (
 				2EA159F32761289C00CE8F1F /* ViewController.swift in Sources */,
 				2EA159F12761289C00CE8F1F /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2EA15A002761299B00CE8F1F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2EA15A092761299B00CE8F1F /* ViewController.swift in Sources */,
-				2EA15A072761299B00CE8F1F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,25 +414,82 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		2EA15A0A2761299B00CE8F1F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2EA15A0B2761299B00CE8F1F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		2EA15A0F2761299C00CE8F1F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2EA15A102761299C00CE8F1F /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		08BBA74D2A4C949000974DA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.airbnb.lottie.Example--tvOS-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 16.4;
+			};
+			name = Debug;
+		};
+		08BBA74E2A4C949000974DA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.airbnb.lottie.Example--tvOS-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 16.4;
+			};
+			name = Release;
+		};
 		2E9E77BE27602BD400C84BA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -435,7 +506,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -465,7 +536,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -540,67 +611,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		2EA15A142761299C00CE8F1F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = tvOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.lottie.example.tvOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 15.0;
-			};
-			name = Debug;
-		};
-		2EA15A152761299C00CE8F1F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = tvOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.lottie.example.tvOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 15.0;
 			};
 			name = Release;
 		};
@@ -717,6 +727,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		08BBA74C2A4C949000974DA7 /* Build configuration list for PBXNativeTarget "Example (tvOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08BBA74D2A4C949000974DA7 /* Debug */,
+				08BBA74E2A4C949000974DA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2E9E77BD27602BD400C84BA3 /* Build configuration list for PBXNativeTarget "Example (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -731,15 +750,6 @@
 			buildConfigurations = (
 				2EA159FB2761289D00CE8F1F /* Debug */,
 				2EA159FC2761289D00CE8F1F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2EA15A132761299C00CE8F1F /* Build configuration list for PBXNativeTarget "Example (tvOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2EA15A142761299C00CE8F1F /* Debug */,
-				2EA15A152761299C00CE8F1F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -783,10 +793,6 @@
 			productName = EpoxyLayoutGroups;
 		};
 		2EA159FE276128D100CE8F1F /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Lottie;
-		};
-		2EA15B1C27612AE300CE8F1F /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Lottie;
 		};

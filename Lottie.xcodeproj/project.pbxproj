@@ -199,6 +199,8 @@
 		08C002F02A46196300AB54BA /* Archive+MemoryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E12A46150D00AB54BA /* Archive+MemoryFile.swift */; };
 		08C002F12A46196300AB54BA /* Archive+Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E42A46150D00AB54BA /* Archive+Reading.swift */; };
 		08C002F22A46196300AB54BA /* Archive+ReadingDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001EF2A46150D00AB54BA /* Archive+ReadingDeprecated.swift */; };
+		08C002F52A461D6A00AB54BA /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C002F42A461D6A00AB54BA /* LottieView.swift */; };
+		08C002F62A461D6A00AB54BA /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C002F42A461D6A00AB54BA /* LottieView.swift */; };
 		08CB2681291ED2B700B4F071 /* AnimationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB2680291ED2B700B4F071 /* AnimationViewTests.swift */; };
 		08EED05028F0D2D10057D958 /* LottieColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EED04F28F0D2D10057D958 /* LottieColor.swift */; };
 		08EED05128F0D2D10057D958 /* LottieColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EED04F28F0D2D10057D958 /* LottieColor.swift */; };
@@ -886,6 +888,7 @@
 		08C0024F2A46166400AB54BA /* UIView+SwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SwiftUIView.swift"; sourceTree = "<group>"; };
 		08C002502A46166400AB54BA /* EpoxySwiftUIHostingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpoxySwiftUIHostingView.swift; sourceTree = "<group>"; };
 		08C002F32A461A7300AB54BA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		08C002F42A461D6A00AB54BA /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		08CB2680291ED2B700B4F071 /* AnimationViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewTests.swift; sourceTree = "<group>"; };
 		08EED04F28F0D2D10057D958 /* LottieColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieColor.swift; sourceTree = "<group>"; };
 		08EF21DB289C643B0097EA47 /* KeyframeInterpolator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyframeInterpolator.swift; sourceTree = "<group>"; };
@@ -1837,6 +1840,7 @@
 				0887347228F0CCDD00458627 /* LottieAnimationHelpers.swift */,
 				0887347428F0CCDD00458627 /* LottieAnimationView.swift */,
 				0887347328F0CCDD00458627 /* LottieAnimationViewInitializers.swift */,
+				08C002F42A461D6A00AB54BA /* LottieView.swift */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -2241,6 +2245,7 @@
 				2E9C96422822F43100677516 /* RootAnimationLayer.swift in Sources */,
 				2E9C97712822F43100677516 /* AnimationContext.swift in Sources */,
 				08C002052A46150D00AB54BA /* Archive+Progress.swift in Sources */,
+				08C002F52A461D6A00AB54BA /* LottieView.swift in Sources */,
 				08C002662A46166400AB54BA /* ViewDifferentiatorProviding.swift in Sources */,
 				2E9C96B12822F43100677516 /* NodeProperty.swift in Sources */,
 				2E9C965D2822F43100677516 /* MainThreadAnimationLayer.swift in Sources */,
@@ -2797,6 +2802,7 @@
 				2EAF5AE527A0798700E00531 /* AnimationCacheProvider.swift in Sources */,
 				2E9C96442822F43100677516 /* RootAnimationLayer.swift in Sources */,
 				2E9C97732822F43200677516 /* AnimationContext.swift in Sources */,
+				08C002F62A461D6A00AB54BA /* LottieView.swift in Sources */,
 				2E9C96B32822F43100677516 /* NodeProperty.swift in Sources */,
 				2E9C965F2822F43100677516 /* MainThreadAnimationLayer.swift in Sources */,
 				2E9C96502822F43100677516 /* SolidCompositionLayer.swift in Sources */,
