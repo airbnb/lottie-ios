@@ -19,10 +19,29 @@ final class Configuration {
     }
   }
 
+  /// The rendering engine to use
+  static var previewImplementation: AnimationPreviewImplementation {
+    get {
+      AnimationPreviewImplementation(rawValue: UserDefaults.standard.string(forKey: #function) ?? "SwiftUI") ?? .swiftUI
+    }
+    set {
+      UserDefaults.standard.set(newValue.rawValue, forKey: #function)
+    }
+  }
+
   /// Applies the current configuration (stored in UserDefaults)
   /// to the singleton `LottieConfiguration.shared`
   static func applyCurrentConfiguration() {
     LottieConfiguration.shared.renderingEngine = renderingEngineOption
   }
 
+}
+
+// MARK: - AnimationPreviewImplementation
+
+enum AnimationPreviewImplementation: String, RawRepresentable {
+  /// Preview animations using the UIKit `AnimationPreviewViewController`
+  case uiKit = "UIKit"
+  /// Preview animations using the SwiftUI `AnimationPreviewView`
+  case swiftUI = "SwiftUI"
 }

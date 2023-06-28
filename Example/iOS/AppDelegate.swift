@@ -2,8 +2,8 @@
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
 import Lottie
-import UIKit
 import SwiftUI
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,14 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let window = UIWindow(frame: UIScreen.main.bounds)
 
-    let hostingController = UIHostingController(rootView: AnimationPreviewView())
-    window.rootViewController = hostingController
+    let navigationController = UINavigationController(
+      rootViewController: SampleListViewController(directory: "Samples"))
 
-//    let navigationController = UINavigationController(
-//      rootViewController: SampleListViewController(directory: "Samples"))
-
-//    navigationController.navigationBar.prefersLargeTitles = true
-//    window.rootViewController = navigationController
+    navigationController.navigationBar.prefersLargeTitles = true
+    window.rootViewController = navigationController
 
     window.makeKeyAndVisible()
     self.window = window
