@@ -81,9 +81,9 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
   /// Returns a copy of this animation view that loops its animation whenever visible by playing
   /// whenever it is updated with a `loopMode` of `.loop` if not already playing.
   public func looping() -> Self {
-    configure { context in
-      if !context.view.isAnimationPlaying {
-        context.view.play(fromProgress: 0, toProgress: 1, loopMode: .loop)
+    configure { view in
+      if !view.isAnimationPlaying {
+        view.play(fromProgress: 0, toProgress: 1, loopMode: .loop)
       }
     }
   }
@@ -91,8 +91,8 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
   /// Returns a copy of this animation view with its `AnimationView` updated to have the provided
   /// background behavior.
   public func backgroundBehavior(_ value: LottieBackgroundBehavior) -> Self {
-    configure { context in
-      context.view.backgroundBehavior = value
+    configure { view in
+      view.backgroundBehavior = value
     }
   }
 
