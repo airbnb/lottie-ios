@@ -59,6 +59,17 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
     .configurations(configurations)
   }
 
+  /// Returns a copy of this `LottieView` updated to have the given closure applied to its
+  /// represented `LottieAnimationView` whenever it is updated via the `updateUIView(…)`
+  /// or `updateNSView(…)` method.
+  public func configure(_ configure: @escaping (LottieAnimationView) -> Void) -> Self {
+    var copy = self
+    copy.configurations.append { context in
+      configure(context.view)
+    }
+    return copy
+  }
+
   /// Returns a copy of this view that can be resized by scaling its animation to fit the size
   /// offered by its parent.
   public func resizable() -> Self {
