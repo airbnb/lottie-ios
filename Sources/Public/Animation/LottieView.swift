@@ -59,6 +59,17 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
     .configurations(configurations)
   }
 
+  /// Returns a copy of this `LottieView` updated to have the given closure applied to its
+  /// represented `LottieAnimationView` whenever it is updated via the `updateUIView(…)`
+  /// or `updateNSView(…)` method.
+  public func configure(_ configure: @escaping (LottieAnimationView) -> Void) -> Self {
+    var copy = self
+    copy.configurations.append { context in
+      configure(context.view)
+    }
+    return copy
+  }
+
   /// Returns a copy of this view that can be resized by scaling its animation to fit the size
   /// offered by its parent.
   public func resizable() -> Self {
@@ -70,9 +81,9 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
   /// Returns a copy of this animation view that loops its animation whenever visible by playing
   /// whenever it is updated with a `loopMode` of `.loop` if not already playing.
   public func looping() -> Self {
-    configure { context in
-      if !context.view.isAnimationPlaying {
-        context.view.play(fromProgress: 0, toProgress: 1, loopMode: .loop)
+    configure { view in
+      if !view.isAnimationPlaying {
+        view.play(fromProgress: 0, toProgress: 1, loopMode: .loop)
       }
     }
   }
@@ -80,8 +91,8 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
   /// Returns a copy of this animation view with its `AnimationView` updated to have the provided
   /// background behavior.
   public func backgroundBehavior(_ value: LottieBackgroundBehavior) -> Self {
-    configure { context in
-      context.view.backgroundBehavior = value
+    configure { view in
+      view.backgroundBehavior = value
     }
   }
 
