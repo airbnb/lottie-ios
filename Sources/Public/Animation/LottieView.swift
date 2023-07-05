@@ -14,7 +14,7 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
   // MARK: Lifecycle
 
   public init(
-    animation: LottieAnimation,
+    animation: LottieAnimation?,
     imageProvider: AnimationImageProvider? = nil,
     textProvider: AnimationTextProvider? = nil,
     fontProvider: AnimationFontProvider? = nil,
