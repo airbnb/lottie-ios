@@ -1,12 +1,12 @@
-#if !os(macOS)
 // Created by eric_horacek on 3/3/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
 import SwiftUI
 
-// MARK: - UIViewProtocol + swiftUIView
+// MARK: - ViewTypeProtocol + swiftUIView
 
-extension UIViewProtocol {
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
+extension ViewTypeProtocol {
   /// Returns a SwiftUI `View` representing this `UIView`, constructed with the given `makeView`
   /// closure and sized with the given sizing configuration.
   ///
@@ -25,18 +25,16 @@ extension UIViewProtocol {
   /// MyView.swiftUIView(…).sizing(.intrinsicSize)
   /// ```
   /// The sizing defaults to `.automatic`.
-  @available(iOS 13.0, tvOS 13.0, *)
-  internal static func swiftUIView(makeView: @escaping () -> Self) -> SwiftUIUIView<Self, Void> {
-    SwiftUIUIView(makeContent: makeView)
+  internal static func swiftUIView(makeView: @escaping () -> Self) -> SwiftUIView<Self, Void> {
+    SwiftUIView(makeContent: makeView)
   }
 }
 
-// MARK: - UIViewProtocol
+// MARK: - ViewTypeProtocol
 
 /// A protocol that all `UIView`s conform to, enabling extensions that have a `Self` reference.
-internal protocol UIViewProtocol: UIView { }
+internal protocol ViewTypeProtocol: ViewType { }
 
-// MARK: - UIView + UIViewProtocol
+// MARK: - ViewType + ViewTypeProtocol
 
-extension UIView: UIViewProtocol { }
-#endif
+extension ViewType: ViewTypeProtocol { }

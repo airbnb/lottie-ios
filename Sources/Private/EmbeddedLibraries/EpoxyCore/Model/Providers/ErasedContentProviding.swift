@@ -1,4 +1,3 @@
-#if !os(macOS)
 // Created by eric_horacek on 12/2/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -22,7 +21,7 @@ internal protocol ErasedContentProviding {
 
 extension EpoxyModeled where Self: ErasedContentProviding {
 
-  // MARK: Internal
+  // MARK: Public
 
   /// The type-erased content instance of this model, else `nil` if there is no content.
   internal var erasedContent: Any? {
@@ -48,4 +47,3 @@ extension EpoxyModeled where Self: ErasedContentProviding {
     .init(keyPath: \Self.isErasedContentEqual, defaultValue: nil, updateStrategy: .replace)
   }
 }
-#endif

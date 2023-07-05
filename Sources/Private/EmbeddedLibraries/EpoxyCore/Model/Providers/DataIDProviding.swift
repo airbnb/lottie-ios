@@ -1,4 +1,3 @@
-#if !os(macOS)
 // Created by eric_horacek on 12/1/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -23,7 +22,7 @@ internal protocol DataIDProviding {
 
 extension EpoxyModeled where Self: DataIDProviding {
 
-  // MARK: Internal
+  // MARK: Public
 
   /// A stable identifier that uniquely identifies this model, with its typed erased.
   internal var dataID: AnyHashable {
@@ -56,4 +55,3 @@ internal enum DefaultDataID: Hashable, CustomDebugStringConvertible {
     "DefaultDataID.noneProvided"
   }
 }
-#endif

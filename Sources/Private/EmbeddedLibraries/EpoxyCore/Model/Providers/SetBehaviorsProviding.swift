@@ -1,4 +1,3 @@
-#if !os(macOS)
 // Created by eric_horacek on 12/2/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -12,7 +11,7 @@ internal protocol SetBehaviorsProviding { }
 
 extension CallbackContextEpoxyModeled where Self: SetBehaviorsProviding {
 
-  // MARK: Internal
+  // MARK: Public
 
   /// A closure that's called to set the content on this model's view with behaviors (e.g. tap handler
   /// closures) whenever this model is updated.
@@ -37,4 +36,3 @@ extension CallbackContextEpoxyModeled where Self: SetBehaviorsProviding {
     .init(keyPath: \Self.setBehaviors, defaultValue: nil, updateStrategy: .chain())
   }
 }
-#endif

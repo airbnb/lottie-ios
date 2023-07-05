@@ -1,8 +1,5 @@
-#if !os(macOS)
 //  Created by Laura Skelton on 5/30/17.
 //  Copyright © 2017 Airbnb. All rights reserved.
-
-import UIKit
 
 // MARK: - ContentConfigurableView
 
@@ -20,7 +17,7 @@ import UIKit
 /// - SeeAlso: `BehaviorsConfigurableView`
 /// - SeeAlso: `StyledView`
 /// - SeeAlso: `EpoxyableView`
-internal protocol ContentConfigurableView: UIView {
+internal protocol ContentConfigurableView: ViewType {
   /// The `Equatable` properties that can be updated on instances of this view, e.g. text `String`s
   /// or image `URL`s.
   ///
@@ -37,4 +34,3 @@ internal protocol ContentConfigurableView: UIView {
 extension ContentConfigurableView where Content == Never {
   internal func setContent(_: Never, animated _: Bool) { }
 }
-#endif

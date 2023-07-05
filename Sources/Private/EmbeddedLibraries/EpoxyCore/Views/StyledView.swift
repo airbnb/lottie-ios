@@ -1,8 +1,5 @@
-#if !os(macOS)
 //  Created by Laura Skelton on 4/14/16.
 //  Copyright © 2016 Airbnb. All rights reserved.
-
-import UIKit
 
 // MARK: - StyledView
 
@@ -24,7 +21,7 @@ import UIKit
 /// - SeeAlso: `ContentConfigurableView`
 /// - SeeAlso: `BehaviorsConfigurableView`
 /// - SeeAlso: `EpoxyableView`
-internal protocol StyledView: UIView {
+internal protocol StyledView: ViewType {
   /// The style type of this view, passed into its initializer to configure the resulting instance.
   ///
   /// Defaults to `Never` for views that do not have a `Style`.
@@ -43,4 +40,3 @@ extension StyledView where Style == Never {
     switch style { }
   }
 }
-#endif

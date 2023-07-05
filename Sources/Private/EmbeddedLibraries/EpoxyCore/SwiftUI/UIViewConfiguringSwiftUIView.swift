@@ -1,4 +1,3 @@
-#if !os(macOS)
 // Created by eric_horacek on 3/4/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
@@ -8,7 +7,7 @@ import SwiftUI
 
 /// A protocol describing a SwiftUI `View` that can configure its `UIView` content via an array of
 /// `configuration` closures.
-@available(iOS 13.0, tvOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 internal protocol UIViewConfiguringSwiftUIView: View {
   /// The context available to this configuration, which provides the `UIView` instance at a minimum
   /// but can include additional context as needed.
@@ -24,7 +23,7 @@ internal protocol UIViewConfiguringSwiftUIView: View {
 
 // MARK: Extensions
 
-@available(iOS 13.0, tvOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension UIViewConfiguringSwiftUIView {
   /// Returns a copy of this view updated to have the given closure applied to its represented view
   /// whenever it is updated via the `updateUIView(…)` method.
@@ -42,4 +41,3 @@ extension UIViewConfiguringSwiftUIView {
     return copy
   }
 }
-#endif

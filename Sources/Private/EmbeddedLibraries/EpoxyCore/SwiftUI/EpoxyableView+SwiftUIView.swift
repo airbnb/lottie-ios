@@ -1,4 +1,3 @@
-#if !os(macOS)
 // Created by eric_horacek on 9/13/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
@@ -6,6 +5,7 @@ import SwiftUI
 
 // MARK: - StyledView
 
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension StyledView where Self: ContentConfigurableView & BehaviorsConfigurableView {
   /// Returns a SwiftUI `View` representing this `EpoxyableView`.
   ///
@@ -23,14 +23,13 @@ extension StyledView where Self: ContentConfigurableView & BehaviorsConfigurable
   /// ```
   /// MyView.swiftUIView(…).sizing(.intrinsicSize)
   /// ```
-  @available(iOS 13.0, tvOS 13.0, *)
   internal static func swiftUIView(
     content: Content,
     style: Style,
     behaviors: Behaviors? = nil)
-    -> SwiftUIUIView<Self, (content: Content, style: Style)>
+    -> SwiftUIView<Self, (content: Content, style: Style)>
   {
-    SwiftUIUIView(storage: (content: content, style: style)) {
+    SwiftUIView(storage: (content: content, style: style)) {
       let view = Self(style: style)
       view.setContent(content, animated: false)
       return view
@@ -52,6 +51,7 @@ extension StyledView where Self: ContentConfigurableView & BehaviorsConfigurable
   }
 }
 
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension StyledView
   where
   Self: ContentConfigurableView & BehaviorsConfigurableView,
@@ -73,13 +73,12 @@ extension StyledView
   /// ```
   /// MyView.swiftUIView(…).sizing(.intrinsicSize)
   /// ```
-  @available(iOS 13.0, tvOS 13.0, *)
   internal static func swiftUIView(
     content: Content,
     behaviors: Behaviors? = nil)
-    -> SwiftUIUIView<Self, Content>
+    -> SwiftUIView<Self, Content>
   {
-    SwiftUIUIView(storage: content) {
+    SwiftUIView(storage: content) {
       let view = Self()
       view.setContent(content, animated: false)
       return view
@@ -96,6 +95,7 @@ extension StyledView
   }
 }
 
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension StyledView
   where
   Self: ContentConfigurableView & BehaviorsConfigurableView,
@@ -118,13 +118,12 @@ extension StyledView
   /// MyView.swiftUIView(…).sizing(.intrinsicSize)
   /// ```
   /// The sizing defaults to `.automatic`.
-  @available(iOS 13.0, tvOS 13.0, *)
   internal static func swiftUIView(
     style: Style,
     behaviors: Behaviors? = nil)
-    -> SwiftUIUIView<Self, Style>
+    -> SwiftUIView<Self, Style>
   {
-    SwiftUIUIView(storage: style) {
+    SwiftUIView(storage: style) {
       Self(style: style)
     }
     .configure { context in
@@ -138,6 +137,7 @@ extension StyledView
   }
 }
 
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension StyledView
   where
   Self: ContentConfigurableView & BehaviorsConfigurableView,
@@ -161,9 +161,8 @@ extension StyledView
   /// MyView.swiftUIView(…).sizing(.intrinsicSize)
   /// ```
   /// The sizing defaults to `.automatic`.
-  @available(iOS 13.0, tvOS 13.0, *)
-  internal static func swiftUIView(behaviors: Behaviors? = nil) -> SwiftUIUIView<Self, Void> {
-    SwiftUIUIView {
+  internal static func swiftUIView(behaviors: Behaviors? = nil) -> SwiftUIView<Self, Void> {
+    SwiftUIView {
       Self()
     }
     .configure { context in
@@ -171,4 +170,3 @@ extension StyledView
     }
   }
 }
-#endif

@@ -1,4 +1,3 @@
-#if !os(macOS)
 // Created by eric_horacek on 12/1/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -12,7 +11,7 @@ internal protocol SetContentProviding { }
 
 extension CallbackContextEpoxyModeled where Self: SetContentProviding {
 
-  // MARK: Internal
+  // MARK: Public
 
   /// A closure that's called to set the content on this model's view when it is first created and
   /// subsequently when the content changes.
@@ -37,4 +36,3 @@ extension CallbackContextEpoxyModeled where Self: SetContentProviding {
     .init(keyPath: \Self.setContent, defaultValue: nil, updateStrategy: .chain())
   }
 }
-#endif

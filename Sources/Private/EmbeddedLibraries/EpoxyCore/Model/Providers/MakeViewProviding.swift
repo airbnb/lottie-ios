@@ -1,15 +1,12 @@
-#if !os(macOS)
 // Created by eric_horacek on 12/1/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
-
-import UIKit
 
 // MARK: - MakeViewProviding
 
 /// The capability of constructing a `UIView`.
 internal protocol MakeViewProviding {
   /// The view constructed when the `MakeView` closure is called.
-  associatedtype View: UIView
+  associatedtype View: ViewType
 
   /// A closure that's called to construct an instance of `View`.
   typealias MakeView = () -> View
@@ -22,7 +19,7 @@ internal protocol MakeViewProviding {
 
 extension ViewEpoxyModeled where Self: MakeViewProviding {
 
-  // MARK: Internal
+  // MARK: Public
 
   /// A closure that's called to construct an instance of `View` represented by this model.
   internal var makeView: MakeView {
@@ -61,4 +58,3 @@ extension ViewEpoxyModeled where Self: MakeViewProviding {
       updateStrategy: .replace)
   }
 }
-#endif

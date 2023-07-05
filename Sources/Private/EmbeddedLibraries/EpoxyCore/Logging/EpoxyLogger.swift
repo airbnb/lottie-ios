@@ -1,4 +1,3 @@
-#if !os(macOS)
 // Created by eric_horacek on 12/9/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -34,7 +33,7 @@ internal final class EpoxyLogger {
     _warn = warn
   }
 
-  // MARK: Internal
+  // MARK: Public
 
   /// Logs that an assertion occurred.
   internal typealias Assert = (
@@ -98,4 +97,3 @@ internal final class EpoxyLogger {
   private let _warn: Warn
 
 }
-#endif

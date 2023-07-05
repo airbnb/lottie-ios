@@ -1,4 +1,3 @@
-#if !os(macOS)
 //  Created by Laura Skelton on 5/11/17.
 //  Copyright © 2017 Airbnb. All rights reserved.
 
@@ -16,7 +15,7 @@ internal struct SectionedChangeset {
     self.itemChangeset = itemChangeset
   }
 
-  // MARK: Internal
+  // MARK: Public
 
   /// A set of the minimum changes to get from one set of sections to another.
   internal var sectionChangeset: IndexSetChangeset
@@ -31,4 +30,3 @@ internal struct SectionedChangeset {
   }
 
 }
-#endif

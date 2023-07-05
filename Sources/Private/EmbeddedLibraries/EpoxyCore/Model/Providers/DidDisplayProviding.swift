@@ -1,4 +1,3 @@
-#if !os(macOS)
 // Created by eric_horacek on 1/6/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
@@ -15,7 +14,7 @@ internal protocol DidDisplayProviding { }
 
 extension CallbackContextEpoxyModeled where Self: DidDisplayProviding {
 
-  // MARK: Internal
+  // MARK: Public
 
   /// A closure that's called after a view has been added to the view hierarchy following any
   /// appearance animations.
@@ -40,4 +39,3 @@ extension CallbackContextEpoxyModeled where Self: DidDisplayProviding {
     .init(keyPath: \Self.didDisplay, defaultValue: nil, updateStrategy: .chain())
   }
 }
-#endif

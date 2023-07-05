@@ -1,4 +1,3 @@
-#if !os(macOS)
 //  Created by Laura Skelton on 11/25/16.
 //  Copyright © 2016 Airbnb. All rights reserved.
 
@@ -27,7 +26,7 @@ internal struct IndexChangeset {
     self.duplicates = duplicates
   }
 
-  // MARK: Internal
+  // MARK: Public
 
   /// The inserted indices needed to get from the old collection to the new collection.
   internal var inserts: [Int]
@@ -86,7 +85,7 @@ internal struct IndexPathChangeset {
     self.duplicates = duplicates
   }
 
-  // MARK: Internal
+  // MARK: Public
 
   /// The inserted `IndexPath`s needed to get from the old collection to the new collection.
   internal var inserts: [IndexPath]
@@ -150,7 +149,7 @@ internal struct IndexSetChangeset {
     self.duplicates = duplicates
   }
 
-  // MARK: Internal
+  // MARK: Public
 
   /// An `IndexSet` of inserts needed to get from the old collection to the new collection.
   internal var inserts: IndexSet
@@ -186,4 +185,3 @@ internal struct IndexSetChangeset {
     inserts.isEmpty && deletes.isEmpty && updates.isEmpty && moves.isEmpty
   }
 }
-#endif

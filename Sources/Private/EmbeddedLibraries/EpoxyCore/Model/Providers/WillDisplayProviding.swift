@@ -1,4 +1,3 @@
-#if !os(macOS)
 // Created by eric_horacek on 12/15/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -15,7 +14,7 @@ internal protocol WillDisplayProviding { }
 
 extension CallbackContextEpoxyModeled where Self: WillDisplayProviding {
 
-  // MARK: Internal
+  // MARK: Public
 
   /// A closure that's called when a view is about to be displayed, before it has been added to the
   /// view hierarcy.
@@ -40,4 +39,3 @@ extension CallbackContextEpoxyModeled where Self: WillDisplayProviding {
     .init(keyPath: \Self.willDisplay, defaultValue: nil, updateStrategy: .chain())
   }
 }
-#endif

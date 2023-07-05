@@ -1,9 +1,9 @@
-#if !os(macOS)
 // Created by eric_horacek on 10/8/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
 import SwiftUI
 
+#if !os(macOS)
 // MARK: - EpoxySwiftUIUIHostingController
 
 /// A `UIHostingController` that hosts SwiftUI views within an Epoxy container, e.g. an Epoxy

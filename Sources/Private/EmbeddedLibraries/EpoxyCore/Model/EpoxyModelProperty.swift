@@ -1,4 +1,3 @@
-#if !os(macOS)
 // Created by eric_horacek on 11/18/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -50,7 +49,7 @@ internal struct EpoxyModelProperty<Value> {
     self.updateStrategy = updateStrategy
   }
 
-  // MARK: Internal
+  // MARK: Public
 
   /// The `KeyPath` that uniquely identifies this property.
   internal let keyPath: AnyKeyPath
@@ -157,4 +156,3 @@ extension EpoxyModelProperty.UpdateStrategy {
 
   // Add more arities as needed
 }
-#endif
