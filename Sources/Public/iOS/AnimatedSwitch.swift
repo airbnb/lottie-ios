@@ -22,7 +22,7 @@ open class AnimatedSwitch: AnimatedControl {
     configuration: LottieConfiguration = .shared)
   {
     /// Generate a haptic generator if available.
-    #if os(iOS)
+    #if os(iOS) && !os(xrOS)
     if #available(iOS 10.0, *) {
       self.hapticGenerator = HapticGenerator()
     } else {
@@ -38,7 +38,7 @@ open class AnimatedSwitch: AnimatedControl {
 
   public override init() {
     /// Generate a haptic generator if available.
-    #if os(iOS)
+    #if os(iOS) && !os(xrOS)
     if #available(iOS 10.0, *) {
       self.hapticGenerator = HapticGenerator()
     } else {
@@ -54,8 +54,8 @@ open class AnimatedSwitch: AnimatedControl {
 
   required public init?(coder aDecoder: NSCoder) {
     /// Generate a haptic generator if available.
-    #if os(iOS)
-    if #available(iOS 10.0, *) {
+    #if os(iOS) && !os(xrOS)
+    if #available(iOS 10.0, *)  {
       self.hapticGenerator = HapticGenerator()
     } else {
       hapticGenerator = NullHapticGenerator()
@@ -216,7 +216,7 @@ class NullHapticGenerator: ImpactGenerator {
   func generateImpact() { }
 }
 
-#if os(iOS)
+#if os(iOS) && !os(xrOS)
 @available(iOS 10.0, *)
 class HapticGenerator: ImpactGenerator {
 

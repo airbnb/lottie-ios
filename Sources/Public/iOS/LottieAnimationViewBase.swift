@@ -38,7 +38,11 @@ open class LottieAnimationViewBase: UIView {
   }
 
   var screenScale: CGFloat {
-    UIScreen.main.scale
+      #if !os(xrOS)
+      UIScreen.main.scale
+      #else
+      1.0
+      #endif
   }
 
   func layoutAnimation() {
