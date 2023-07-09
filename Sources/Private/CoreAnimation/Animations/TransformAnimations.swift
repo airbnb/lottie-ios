@@ -213,7 +213,7 @@ extension CALayer {
     }
 
     // Lottie animation files express rotation in degrees
-    // (e.g. 90º, 180º, 360º) so we covert to radians to get the
+    // (e.g. 90º, 180º, 360º) so we convert to radians to get the
     // values expected by Core Animation (e.g. π/2, π, 2π)
 
     try addAnimation(
@@ -237,7 +237,7 @@ extension CALayer {
       keyframes: transformModel.rotationZ,
       value: { rotationDegrees in
         // Lottie animation files express rotation in degrees
-        // (e.g. 90º, 180º, 360º) so we covert to radians to get the
+        // (e.g. 90º, 180º, 360º) so we convert to radians to get the
         // values expected by Core Animation (e.g. π/2, π, 2π)
         rotationDegrees.cgFloatValue * .pi / 180
       },
