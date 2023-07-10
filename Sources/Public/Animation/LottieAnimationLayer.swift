@@ -306,36 +306,13 @@ public class LottieAnimationLayer: CALayer {
   /// Will inform the receiver the type of rendering engine that is used for the layer.
   public var animationLayerDidLoad:((_ animationLayer: LottieAnimationLayer, _ renderingEngine: RenderingEngineOption) -> Void)?
 
+  /// The underlying CALayer created to display the content.
+  /// Use this property to change CALayer props like the content's transform, anchor point, etc.
+  public var animationLayer: CALayer? { rootAnimationLayer }
+
   public var screenScale: CGFloat {
     didSet {
-      animationLayer?.renderScale = screenScale
-    }
-  }
-
-  public override var anchorPoint: CGPoint {
-    get {
-      if let animationLayer = animationLayer {
-        return animationLayer.anchorPoint
-      }
-      return .zero
-    }
-    set {
-      if let animationLayer = animationLayer {
-        animationLayer.anchorPoint = newValue
-      }
-    }
-  }
-
-  /// Setting the frame on this layer will automatically set the inner animation layer content size.
-  public override var frame: CGRect {
-    didSet {
-      guard let animation = animation, let animationLayer = animationLayer else { return }
-      let transform = CATransform3DMakeScale(
-        frame.size.width / animation.size.width,
-        frame.size.height / animation.size.height,
-        1)
-      animationLayer.transform = transform
-      animationLayer.position = frame.origin
+      rootAnimationLayer?.renderScale = screenScale
     }
   }
 
@@ -426,7 +403,7 @@ public class LottieAnimationLayer: CALayer {
   /// Setting this will cause the animation to reload its image contents.
   public var imageProvider: AnimationImageProvider {
     didSet {
-      animationLayer?.imageProvider = imageProvider.cachedImageProvider
+      rootAnimationLayer?.imageProvider = imageProvider.cachedImageProvider
       reloadImages()
     }
   }
@@ -435,7 +412,7 @@ public class LottieAnimationLayer: CALayer {
   /// animation with values for text layers
   public var textProvider: AnimationTextProvider {
     didSet {
-      animationLayer?.textProvider = textProvider
+      rootAnimationLayer?.textProvider = textProvider
     }
   }
 
@@ -443,7 +420,7 @@ public class LottieAnimationLayer: CALayer {
   /// animation with values for text layers
   public var fontProvider: AnimationFontProvider {
     didSet {
-      animationLayer?.fontProvider = fontProvider
+      rootAnimationLayer?.fontProvider = fontProvider
     }
   }
 
@@ -456,7 +433,7 @@ public class LottieAnimationLayer: CALayer {
 
   /// Returns `true` if the animation is currently playing.
   public var isAnimationPlaying: Bool {
-    guard let animationLayer = animationLayer else {
+    guard let animationLayer = rootAnimationLayer else {
       return false
     }
 
@@ -537,13 +514,13 @@ public class LottieAnimationLayer: CALayer {
       updateAnimationFrame(newValue)
     }
     get {
-      animationLayer?.currentFrame ?? 0
+      rootAnimationLayer?.currentFrame ?? 0
     }
   }
 
   /// Returns the current animation frame while an animation is playing.
   public var realtimeAnimationFrame: AnimationFrameTime {
-    isAnimationPlaying ? animationLayer?.presentation()?.currentFrame ?? currentFrame : currentFrame
+    isAnimationPlaying ? rootAnimationLayer?.presentation()?.currentFrame ?? currentFrame : currentFrame
   }
 
   /// Returns the current animation frame while an animation is playing.
@@ -568,7 +545,7 @@ public class LottieAnimationLayer: CALayer {
   /// Defaults to false
   public var respectAnimationFrameRate = false {
     didSet {
-      animationLayer?.respectAnimationFrameRate = respectAnimationFrameRate
+      rootAnimationLayer?.respectAnimationFrameRate = respectAnimationFrameRate
     }
   }
 
@@ -594,8 +571,8 @@ public class LottieAnimationLayer: CALayer {
   }
 
   public var animationView: LottieAnimationView? {
-    set { animationLayer?.animationView = newValue }
-    get { animationLayer?.animationView }
+    set { rootAnimationLayer?.animationView = newValue }
+    get { rootAnimationLayer?.animationView }
   }
 
   /// Sets the lottie file backing the animation layer. Setting this will clear the
@@ -634,12 +611,12 @@ public class LottieAnimationLayer: CALayer {
 
   /// Reloads the images supplied to the animation from the `imageProvider`
   public func reloadImages() {
-    animationLayer?.reloadImages()
+    rootAnimationLayer?.reloadImages()
   }
 
   /// Forces the LottieAnimationView to redraw its contents.
   public func forceDisplayUpdate() {
-    animationLayer?.forceDisplayUpdate()
+    rootAnimationLayer?.forceDisplayUpdate()
   }
 
   /// Sets a ValueProvider for the specified keypath. The value provider will be set
@@ -665,7 +642,7 @@ public class LottieAnimationLayer: CALayer {
   /// animationView.setValueProvider(redValueProvider, keypath: fillKeypath)
   /// ```
   public func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
-    guard let animationLayer = animationLayer else { return }
+    guard let animationLayer = rootAnimationLayer else { return }
 
     valueProviders[keypath] = valueProvider
     animationLayer.setValueProvider(valueProvider, keypath: keypath)
@@ -677,7 +654,7 @@ public class LottieAnimationLayer: CALayer {
   /// - Parameter for: The keypath used to search for the property.
   /// - Parameter atFrame: The Frame Time of the value to query. If nil then the current frame is used.
   public func getValue(for keypath: AnimationKeypath, atFrame: AnimationFrameTime?) -> Any? {
-    animationLayer?.getValue(for: keypath, atFrame: atFrame)
+    rootAnimationLayer?.getValue(for: keypath, atFrame: atFrame)
   }
 
   /// Reads the original value of a property specified by the Keypath.
@@ -687,18 +664,18 @@ public class LottieAnimationLayer: CALayer {
   /// - Parameter for: The keypath used to search for the property.
   /// - Parameter atFrame: The Frame Time of the value to query. If nil then the current frame is used.
   public func getOriginalValue(for keypath: AnimationKeypath, atFrame: AnimationFrameTime?) -> Any? {
-    animationLayer?.getOriginalValue(for: keypath, atFrame: atFrame)
+    rootAnimationLayer?.getOriginalValue(for: keypath, atFrame: atFrame)
   }
 
   /// Logs all child keypaths.
   public func logHierarchyKeypaths() {
-    animationLayer?.logHierarchyKeypaths()
+    rootAnimationLayer?.logHierarchyKeypaths()
   }
 
   /// Computes and returns a list of all child keypaths in the current animation.
   /// The returned list is the same as the log output of `logHierarchyKeypaths()`
   public func allHierarchyKeypaths() -> [String] {
-    animationLayer?.allHierarchyKeypaths() ?? []
+    rootAnimationLayer?.allHierarchyKeypaths() ?? []
   }
 
   /// Converts a CGRect from the LottieAnimationView's coordinate space into the
@@ -709,7 +686,7 @@ public class LottieAnimationLayer: CALayer {
   /// - Parameter rect: The CGRect to convert.
   /// - Parameter toLayerAt: The keypath used to find the layer.
   public func convert(_ rect: CGRect, toLayerAt keypath: AnimationKeypath?) -> CGRect? {
-    guard let animationLayer = animationLayer else { return nil }
+    guard let animationLayer = rootAnimationLayer else { return nil }
     guard let keypath = keypath else {
       return convert(rect, to: animationLayer)
     }
@@ -730,7 +707,7 @@ public class LottieAnimationLayer: CALayer {
   /// - Parameter point: The CGPoint to convert.
   /// - Parameter toLayerAt: The keypath used to find the layer.
   public func convert(_ point: CGPoint, toLayerAt keypath: AnimationKeypath?) -> CGPoint? {
-    guard let animationLayer = animationLayer else { return nil }
+    guard let animationLayer = rootAnimationLayer else { return nil }
     guard let keypath = keypath else {
       return convert(point, to: animationLayer)
     }
@@ -749,7 +726,7 @@ public class LottieAnimationLayer: CALayer {
   /// - Parameter isEnabled: When true the animator nodes affect the rendering tree. When false the node is removed from the tree.
   /// - Parameter keypath: The keypath used to find the node(s).
   public func setNodeIsEnabled(isEnabled: Bool, keypath: AnimationKeypath) {
-    guard let animationLayer = animationLayer else { return }
+    guard let animationLayer = rootAnimationLayer else { return }
     let nodes = animationLayer.animatorNodes(for: keypath)
     if let nodes = nodes {
       for node in nodes {
@@ -839,7 +816,7 @@ public class LottieAnimationLayer: CALayer {
 
   // MARK: Internal
 
-  var animationLayer: RootAnimationLayer? = nil
+  var rootAnimationLayer: RootAnimationLayer? = nil
 
   /// Context describing the animation that is currently playing in this `LottieAnimationView`
   ///  - When non-nil, an animation is currently playing in this layer. Otherwise,
@@ -875,17 +852,17 @@ public class LottieAnimationLayer: CALayer {
     // with the ones managed by the performance test, and aren't actually
     // necessary in a headless environment, so we disable them.
     if TestHelpers.performanceTestsAreRunning {
-      animationLayer?.currentFrame = newFrame
-      animationLayer?.forceDisplayUpdate()
+      rootAnimationLayer?.currentFrame = newFrame
+      rootAnimationLayer?.forceDisplayUpdate()
       return
     }
 
     CATransaction.begin()
     CATransaction.setCompletionBlock {
-      self.animationLayer?.forceDisplayUpdate()
+      self.rootAnimationLayer?.forceDisplayUpdate()
     }
     CATransaction.setDisableActions(true)
-    animationLayer?.currentFrame = newFrame
+    rootAnimationLayer?.currentFrame = newFrame
     CATransaction.commit()
   }
 
@@ -910,8 +887,8 @@ public class LottieAnimationLayer: CALayer {
 
     /// Remove current animation, and freeze the current frame.
     let pauseFrame = realtimeAnimationFrame
-    animationLayer?.removeAnimation(forKey: activeAnimationName)
-    animationLayer?.currentFrame = pauseFrame
+    rootAnimationLayer?.removeAnimation(forKey: activeAnimationName)
+    rootAnimationLayer?.currentFrame = pauseFrame
 
     addNewAnimationForContext(newContext)
   }
@@ -922,7 +899,7 @@ public class LottieAnimationLayer: CALayer {
   fileprivate var animationID = 0
 
   fileprivate var activeAnimationName: String {
-    switch animationLayer?.primaryAnimationKey {
+    switch rootAnimationLayer?.primaryAnimationKey {
     case .specific(let animationKey):
       return animationKey
     case .managed, nil:
@@ -969,7 +946,7 @@ public class LottieAnimationLayer: CALayer {
     animationLayer.renderScale = screenScale
 
     addSublayer(animationLayer)
-    self.animationLayer = animationLayer
+    self.rootAnimationLayer = animationLayer
     reloadImages()
     animationLayer.setNeedsDisplay()
     setNeedsLayout()
@@ -1120,7 +1097,7 @@ public class LottieAnimationLayer: CALayer {
 
   /// Adds animation to animation layer and sets the delegate. If animation layer or animation are nil, exits.
   fileprivate func addNewAnimationForContext(_ animationContext: AnimationContext) {
-    guard let animationlayer = animationLayer, let animation = animation else {
+    guard let animationlayer = rootAnimationLayer, let animation = animation else {
       return
     }
 

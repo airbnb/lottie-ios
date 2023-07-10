@@ -635,7 +635,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// animationView.addSubview(subview, forLayerAt: layerKeypath)
   /// ```
   public func addSubview(_ subview: AnimationSubview, forLayerAt keypath: AnimationKeypath) {
-    guard let sublayer = lottieAnimationLayer.animationLayer?.layer(for: keypath) else {
+    guard let sublayer = lottieAnimationLayer.rootAnimationLayer?.layer(for: keypath) else {
       return
     }
     setNeedsLayout()
@@ -723,7 +723,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   // MARK: Internal
 
   var animationLayer: RootAnimationLayer? {
-    lottieAnimationLayer.animationLayer
+    lottieAnimationLayer.rootAnimationLayer
   }
 
   /// Set animation name from Interface Builder
@@ -893,7 +893,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
     }
 
     if shouldForceUpdates {
-      animationLayer.forceDisplayUpdate()
       lottieAnimationLayer.forceDisplayUpdate()
     }
   }
