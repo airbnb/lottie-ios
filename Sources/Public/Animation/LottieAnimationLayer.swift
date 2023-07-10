@@ -312,6 +312,33 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
+  public override var anchorPoint: CGPoint {
+    get {
+      if let animationLayer = animationLayer {
+        return animationLayer.anchorPoint
+      }
+      return .zero
+    }
+    set {
+      if let animationLayer = animationLayer {
+        animationLayer.anchorPoint = newValue
+      }
+    }
+  }
+
+  /// Setting the frame on this layer will automatically set the inner animation layer content size.
+  public override var frame: CGRect {
+    didSet {
+      guard let animation = animation, let animationLayer = animationLayer else { return }
+      let transform = CATransform3DMakeScale(
+        frame.size.width / animation.size.width,
+        frame.size.height / animation.size.height,
+        1)
+      animationLayer.transform = transform
+      animationLayer.position = frame.origin
+    }
+  }
+
   /// Describes the behavior of an AnimationView when the app is moved to the background.
   ///
   /// The default for the Main Thread animation engine is `pause`,
