@@ -11,9 +11,7 @@ struct AnimationPreviewView: View {
 
   var body: some View {
     VStack {
-      // TODO: Should `LottieView` take an optional `LottieAnimation` so it can support
-      // this sort of spelling without a forced-unwrap?
-      LottieView(animation: LottieAnimation.named(animationName)!)
+      LottieView(animation: .named(animationName))
         .resizable()
         .looping()
     }
