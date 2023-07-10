@@ -96,7 +96,7 @@ internal final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableV
     fatalError("init(coder:) has not been implemented")
   }
 
-  // MARK: Public
+  // MARK: Internal
 
   internal struct Style: Hashable {
     internal init(reuseBehavior: SwiftUIHostingViewReuseBehavior, initialContent: Content) {

@@ -14,7 +14,7 @@ internal protocol DidDisplayProviding { }
 
 extension CallbackContextEpoxyModeled where Self: DidDisplayProviding {
 
-  // MARK: Public
+  // MARK: Internal
 
   /// A closure that's called after a view has been added to the view hierarchy following any
   /// appearance animations.

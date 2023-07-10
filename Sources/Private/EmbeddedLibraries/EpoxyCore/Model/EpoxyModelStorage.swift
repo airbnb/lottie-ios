@@ -14,7 +14,7 @@ internal struct EpoxyModelStorage {
 
   internal init() { }
 
-  // MARK: Public
+  // MARK: Internal
 
   /// Stores or retrieves the value of the specified property.
   internal subscript<Property>(property: EpoxyModelProperty<Property>) -> Property {

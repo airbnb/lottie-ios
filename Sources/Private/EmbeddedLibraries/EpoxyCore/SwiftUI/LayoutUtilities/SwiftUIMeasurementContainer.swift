@@ -41,7 +41,7 @@ internal final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
     fatalError("init(coder:) has not been implemented")
   }
 
-  // MARK: Public
+  // MARK: Internal
 
   /// The  most recently measured fitting size of the `uiView` that fits within the current
   /// `proposedSize`.

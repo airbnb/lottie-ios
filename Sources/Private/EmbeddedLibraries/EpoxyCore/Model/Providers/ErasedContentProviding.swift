@@ -21,7 +21,7 @@ internal protocol ErasedContentProviding {
 
 extension EpoxyModeled where Self: ErasedContentProviding {
 
-  // MARK: Public
+  // MARK: Internal
 
   /// The type-erased content instance of this model, else `nil` if there is no content.
   internal var erasedContent: Any? {

@@ -11,7 +11,7 @@ internal protocol SetContentProviding { }
 
 extension CallbackContextEpoxyModeled where Self: SetContentProviding {
 
-  // MARK: Public
+  // MARK: Internal
 
   /// A closure that's called to set the content on this model's view when it is first created and
   /// subsequently when the content changes.

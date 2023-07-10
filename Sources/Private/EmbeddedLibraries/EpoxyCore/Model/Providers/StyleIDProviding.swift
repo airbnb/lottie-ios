@@ -14,7 +14,7 @@ internal protocol StyleIDProviding {
 
 extension EpoxyModeled where Self: StyleIDProviding {
 
-  // MARK: Public
+  // MARK: Internal
 
   internal var styleID: AnyHashable? {
     get { self[styleIDProperty] }

@@ -26,7 +26,7 @@ internal struct IndexChangeset {
     self.duplicates = duplicates
   }
 
-  // MARK: Public
+  // MARK: Internal
 
   /// The inserted indices needed to get from the old collection to the new collection.
   internal var inserts: [Int]
@@ -85,7 +85,7 @@ internal struct IndexPathChangeset {
     self.duplicates = duplicates
   }
 
-  // MARK: Public
+  // MARK: Internal
 
   /// The inserted `IndexPath`s needed to get from the old collection to the new collection.
   internal var inserts: [IndexPath]
@@ -149,7 +149,7 @@ internal struct IndexSetChangeset {
     self.duplicates = duplicates
   }
 
-  // MARK: Public
+  // MARK: Internal
 
   /// An `IndexSet` of inserts needed to get from the old collection to the new collection.
   internal var inserts: IndexSet

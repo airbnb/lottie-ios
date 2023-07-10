@@ -11,7 +11,7 @@ internal protocol DidEndDisplayingProviding { }
 
 extension CallbackContextEpoxyModeled where Self: DidEndDisplayingProviding {
 
-  // MARK: Public
+  // MARK: Internal
 
   /// A closure that's called when a view is no longer displayed following any disappearance
   /// animations and when it has been removed from the view hierarchy.

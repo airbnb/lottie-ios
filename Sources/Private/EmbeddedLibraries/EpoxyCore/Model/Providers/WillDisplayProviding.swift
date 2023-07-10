@@ -14,7 +14,7 @@ internal protocol WillDisplayProviding { }
 
 extension CallbackContextEpoxyModeled where Self: WillDisplayProviding {
 
-  // MARK: Public
+  // MARK: Internal
 
   /// A closure that's called when a view is about to be displayed, before it has been added to the
   /// view hierarcy.
