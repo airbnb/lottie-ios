@@ -4,6 +4,8 @@
 import Lottie
 import SwiftUI
 
+// MARK: - AnimationPreviewView
+
 /// TODO: Implement functionality from UIKit `AnimationPreviewViewController`
 struct AnimationPreviewView: View {
 
@@ -17,7 +19,17 @@ struct AnimationPreviewView: View {
     }
     .navigationTitle(animationName.components(separatedBy: "/").last!)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .background(Color(uiColor: .secondarySystemBackground))
+    .background(Color.secondaryBackground)
   }
 
+}
+
+extension Color {
+  static var secondaryBackground: Color {
+    #if os(iOS)
+    Color(uiColor: .secondarySystemBackground)
+    #else
+      .clear
+    #endif
+  }
 }

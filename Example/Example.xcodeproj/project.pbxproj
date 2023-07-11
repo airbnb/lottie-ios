@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		085D97852A5DF94C00C78D18 /* AnimationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D97832A5DF76C00C78D18 /* AnimationListView.swift */; };
+		085D97872A5E0DB600C78D18 /* AnimationPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D97862A5E0DB600C78D18 /* AnimationPreviewView.swift */; };
+		085D97892A5E0DBE00C78D18 /* AnimationPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D97862A5E0DB600C78D18 /* AnimationPreviewView.swift */; };
 		0861BBCD2898964400C3FC66 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0861BBCC2898964400C3FC66 /* Lottie.framework */; };
 		0861BBCE2898964400C3FC66 /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0861BBCC2898964400C3FC66 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		08C002F92A461E3200AB54BA /* AnimationPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C002F82A461E3200AB54BA /* AnimationPreviewView.swift */; };
 		08E207602A560251002DCE17 /* Samples in Resources */ = {isa = PBXBuildFile; fileRef = 2E3EEB372763C68C00287EEA /* Samples */; };
 		08E359922A55FFC400141956 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E359912A55FFC400141956 /* ExampleApp.swift */; };
-		08E359942A55FFC400141956 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E359932A55FFC400141956 /* ContentView.swift */; };
+		08E359942A55FFC400141956 /* LottieViewLayoutDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E359932A55FFC400141956 /* LottieViewLayoutDemoView.swift */; };
 		08E3599F2A56004100141956 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 08E3599E2A56004100141956 /* Lottie */; };
 		2E0F2FBE27602CB300B65DE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E0F2FBC27602CB300B65DE3 /* LaunchScreen.storyboard */; };
 		2E1670C32784F009009CDED3 /* ControlsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1670C22784F009009CDED3 /* ControlsDemoViewController.swift */; };
@@ -45,11 +47,12 @@
 
 /* Begin PBXFileReference section */
 		080864BD2A4C955F00D70F30 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		085D97832A5DF76C00C78D18 /* AnimationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationListView.swift; sourceTree = "<group>"; };
+		085D97862A5E0DB600C78D18 /* AnimationPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationPreviewView.swift; sourceTree = "<group>"; };
 		0861BBCC2898964400C3FC66 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		08C002F82A461E3200AB54BA /* AnimationPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationPreviewView.swift; sourceTree = "<group>"; };
 		08E3598F2A55FFC400141956 /* Example (Multiplatform).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example (Multiplatform).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08E359912A55FFC400141956 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
-		08E359932A55FFC400141956 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		08E359932A55FFC400141956 /* LottieViewLayoutDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieViewLayoutDemoView.swift; sourceTree = "<group>"; };
 		08E359972A55FFC600141956 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		2E0F2FB627602C1500B65DE3 /* .. */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ..; sourceTree = "<group>"; };
 		2E0F2FBD27602CB300B65DE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -89,20 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		08C002F72A461E2500AB54BA /* SwiftUI */ = {
-			isa = PBXGroup;
-			children = (
-				08C002F82A461E3200AB54BA /* AnimationPreviewView.swift */,
-			);
-			path = SwiftUI;
-			sourceTree = "<group>";
-		};
 		08E359902A55FFC400141956 /* Example */ = {
 			isa = PBXGroup;
 			children = (
 				08E359912A55FFC400141956 /* ExampleApp.swift */,
-				08E359932A55FFC400141956 /* ContentView.swift */,
+				085D97832A5DF76C00C78D18 /* AnimationListView.swift */,
+				085D97862A5E0DB600C78D18 /* AnimationPreviewView.swift */,
+				08E359932A55FFC400141956 /* LottieViewLayoutDemoView.swift */,
 				08E359972A55FFC600141956 /* Example.entitlements */,
+				607FACD11AFB9204008FA782 /* Products */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -130,7 +128,6 @@
 		2E9E77AD27602BD400C84BA3 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				08C002F72A461E2500AB54BA /* SwiftUI */,
 				2E1670C72784F05F009CDED3 /* ViewControllers */,
 				2E1670C82784F068009CDED3 /* Views */,
 				2E9E77AE27602BD400C84BA3 /* AppDelegate.swift */,
@@ -147,7 +144,6 @@
 				2E3EEB372763C68C00287EEA /* Samples */,
 				2E9E77AD27602BD400C84BA3 /* iOS */,
 				08E359902A55FFC400141956 /* Example */,
-				607FACD11AFB9204008FA782 /* Products */,
 				7E9F75F0414B543D4DE51733 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -159,6 +155,7 @@
 				08E3598F2A55FFC400141956 /* Example (Multiplatform).app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		7E9F75F0414B543D4DE51733 /* Frameworks */ = {
@@ -283,8 +280,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08E359942A55FFC400141956 /* ContentView.swift in Sources */,
+				08E359942A55FFC400141956 /* LottieViewLayoutDemoView.swift in Sources */,
 				08E359922A55FFC400141956 /* ExampleApp.swift in Sources */,
+				085D97872A5E0DB600C78D18 /* AnimationPreviewView.swift in Sources */,
+				085D97852A5DF94C00C78D18 /* AnimationListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +299,7 @@
 				2E362A1E2762BA06006AE7D2 /* SampleListViewController.swift in Sources */,
 				2E9E77AF27602BD400C84BA3 /* AppDelegate.swift in Sources */,
 				2EC6E5082763D981002E091C /* LinkView.swift in Sources */,
-				08C002F92A461E3200AB54BA /* AnimationPreviewView.swift in Sources */,
+				085D97892A5E0DBE00C78D18 /* AnimationPreviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,10 +346,10 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -364,7 +363,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3";
-				TVOS_DEPLOYMENT_TARGET = 14.0;
+				TVOS_DEPLOYMENT_TARGET = 16.0;
 			};
 			name = Debug;
 		};
@@ -396,10 +395,10 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Example;
@@ -411,7 +410,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3";
-				TVOS_DEPLOYMENT_TARGET = 14.0;
+				TVOS_DEPLOYMENT_TARGET = 16.0;
 			};
 			name = Release;
 		};
