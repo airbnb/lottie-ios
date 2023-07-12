@@ -1,9 +1,10 @@
-#if !os(macOS)
 // Created by eric_horacek on 9/16/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
 import Combine
 import SwiftUI
+
+#if !os(macOS)
 
 // MARK: - SwiftUIHostingViewReuseBehavior
 
@@ -21,6 +22,7 @@ internal enum SwiftUIHostingViewReuseBehavior: Hashable {
 
 // MARK: - CallbackContextEpoxyModeled
 
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension CallbackContextEpoxyModeled
   where
   Self: WillDisplayProviding & DidEndDisplayingProviding,
@@ -31,7 +33,6 @@ extension CallbackContextEpoxyModeled
   ///
   /// - Note: You should only need to call then from the implementation of a concrete
   ///   `EpoxyableModel` convenience vendor method, e.g. `SwiftUI.View.itemModel(…)`.
-  @available(iOS 13.0, tvOS 13.0, *)
   internal func linkDisplayLifecycle<RootView: View>() -> Self
     where
     CallbackContext.View == EpoxySwiftUIHostingView<RootView>
@@ -386,4 +387,5 @@ struct EpoxyHostingWrapper<Content: View>: View {
       .environment(\.epoxyIntrinsicContentSizeInvalidator, environment.intrinsicContentSizeInvalidator)
   }
 }
+
 #endif

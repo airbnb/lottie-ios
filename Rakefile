@@ -31,16 +31,17 @@ namespace :build do
     desc 'Builds the iOS Lottie Example app'
     task :iOS do
       xcodebuild('build -scheme "Example (iOS)" -destination "platform=iOS Simulator,name=iPhone SE (3rd generation)" -workspace Lottie.xcworkspace')
+      xcodebuild('build -scheme "Example (Multiplatform)" -destination "platform=iOS Simulator,name=iPhone SE (3rd generation)" -workspace Lottie.xcworkspace')
     end
 
     desc 'Builds the macOS Lottie Example app'
     task :macOS do
-      xcodebuild('build -scheme "Example (macOS)" -workspace Lottie.xcworkspace')
+      xcodebuild('build -scheme "Example (Multiplatform)" -workspace Lottie.xcworkspace')
     end
 
     desc 'Builds the tvOS Lottie Example app'
     task :tvOS do
-      xcodebuild('build -scheme "Example (tvOS)" -destination "platform=tvOS Simulator,name=Apple TV" -workspace Lottie.xcworkspace')
+      xcodebuild('build -scheme "Example (Multiplatform)" -destination "platform=tvOS Simulator,name=Apple TV" -workspace Lottie.xcworkspace')
     end
   end
 

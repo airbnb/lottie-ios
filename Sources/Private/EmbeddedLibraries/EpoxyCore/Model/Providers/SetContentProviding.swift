@@ -1,4 +1,3 @@
-#if !os(macOS)
 // Created by eric_horacek on 12/1/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -37,4 +36,3 @@ extension CallbackContextEpoxyModeled where Self: SetContentProviding {
     .init(keyPath: \Self.setContent, defaultValue: nil, updateStrategy: .chain())
   }
 }
-#endif

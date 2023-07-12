@@ -1,4 +1,3 @@
-#if !os(macOS)
 // Created by eric_horacek on 12/15/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -7,4 +6,3 @@ internal protocol CallbackContextEpoxyModeled: EpoxyModeled {
   /// A context type that's passed into callback closures.
   associatedtype CallbackContext
 }
-#endif

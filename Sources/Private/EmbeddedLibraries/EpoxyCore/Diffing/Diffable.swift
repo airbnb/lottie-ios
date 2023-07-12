@@ -1,4 +1,3 @@
-#if !os(macOS)
 //  Created by Laura Skelton on 5/11/17.
 //  Copyright © 2017 Airbnb. All rights reserved.
 
@@ -17,4 +16,3 @@ internal protocol Diffable {
   /// The identifier to use when checking identity while diffing.
   var diffIdentifier: AnyHashable { get }
 }
-#endif

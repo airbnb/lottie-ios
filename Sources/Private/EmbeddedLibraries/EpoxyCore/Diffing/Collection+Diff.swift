@@ -1,4 +1,3 @@
-#if !os(macOS)
 //  Created by Laura Skelton on 11/25/16.
 //  Copyright © 2016 Airbnb. All rights reserved.
 
@@ -25,12 +24,12 @@ extension Collection where Element: Diffable, Index == Int {
 
     for index in new.indices {
       let id = new[index].diffIdentifier
-      let EpoxyEntry = entries[id, default: EpoxyEntry()]
-      if EpoxyEntry.trackNewIndex(index) {
-        duplicates.append(EpoxyEntry)
+      let entry = entries[id, default: EpoxyEntry()]
+      if entry.trackNewIndex(index) {
+        duplicates.append(entry)
       }
-      entries[id] = EpoxyEntry
-      newResults.append(NewRecord(EpoxyEntry: EpoxyEntry))
+      entries[id] = entry
+      newResults.append(NewRecord(entry: entry))
     }
 
     var oldResults = ContiguousArray<OldRecord>()
@@ -38,19 +37,19 @@ extension Collection where Element: Diffable, Index == Int {
 
     for index in old.indices {
       let id = old[index].diffIdentifier
-      let EpoxyEntry = entries[id]
-      EpoxyEntry?.pushOldIndex(index)
-      oldResults.append(OldRecord(EpoxyEntry: EpoxyEntry))
+      let entry = entries[id]
+      entry?.pushOldIndex(index)
+      oldResults.append(OldRecord(entry: entry))
     }
 
     for newIndex in new.indices {
-      let EpoxyEntry = newResults[newIndex].EpoxyEntry
-      if let oldIndex = EpoxyEntry.popOldIndex() {
+      let entry = newResults[newIndex].entry
+      if let oldIndex = entry.popOldIndex() {
         let newItem = new[newIndex]
         let oldItem = other[oldIndex]
 
         if !oldItem.isDiffableItemEqual(to: newItem) {
-          EpoxyEntry.isUpdated = true
+          entry.isUpdated = true
         }
 
         newResults[newIndex].correspondingOldIndex = oldIndex
@@ -87,7 +86,7 @@ extension Collection where Element: Diffable, Index == Int {
       let record = newResults[index]
 
       if let oldArrayIndex = record.correspondingOldIndex {
-        if record.EpoxyEntry.isUpdated {
+        if record.entry.isUpdated {
           updates.append((oldArrayIndex, index))
         }
 
@@ -213,7 +212,7 @@ private final class EpoxyEntry {
   private(set) var newIndices = [Int]()
   var isUpdated = false
 
-  /// Tracks an index from the new indices, returning `true` if this EpoxyEntry has previously tracked
+  /// Tracks an index from the new indices, returning `true` if this entry has previously tracked
   /// a new index as a means to identify duplicates and `false` otherwise.
   func trackNewIndex(_ index: Int) -> Bool {
     let previouslyEmpty = newIndices.isEmpty
@@ -251,7 +250,7 @@ private final class EpoxyEntry {
 
 /// A bookkeeping type for pairing up an old element with its new index.
 private struct OldRecord {
-  var EpoxyEntry: EpoxyEntry?
+  var entry: EpoxyEntry?
   var correspondingNewIndex: Int? = nil
 }
 
@@ -259,7 +258,6 @@ private struct OldRecord {
 
 /// A bookkeeping type for pairing up a new element with its old index.
 private struct NewRecord {
-  var EpoxyEntry: EpoxyEntry
+  var entry: EpoxyEntry
   var correspondingOldIndex: Int? = nil
 }
-#endif

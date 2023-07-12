@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1320"
+   LastUpgradeVersion = "1430"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2E9E77AB27602BD400C84BA3"
-               BuildableName = "Example (iOS).app"
-               BlueprintName = "Example (iOS)"
-               ReferencedContainer = "container:Example.xcodeproj">
+               BlueprintIdentifier = "2EAF59B827A078E400E00531"
+               BuildableName = "Lottie.framework"
+               BlueprintName = "Lottie-tvOS"
+               ReferencedContainer = "container:../Lottie.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2EAF59AC27A0787B00E00531"
+               BuildableName = "Lottie.framework"
+               BlueprintName = "Lottie-macOS"
+               ReferencedContainer = "container:../Lottie.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -34,14 +48,41 @@
                ReferencedContainer = "container:../Lottie.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "08E3598E2A55FFC400141956"
+               BuildableName = "Example (Multiplatform).app"
+               BlueprintName = "Example (Multiplatform)"
+               ReferencedContainer = "container:Example.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2E8040AB27A072B8006E74CB"
+               BuildableName = "LottieTests.xctest"
+               BlueprintName = "LottieTests"
+               ReferencedContainer = "container:../Lottie.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
             reference = "container:../Tests/LottieTests.xctestplan"
@@ -63,9 +104,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2E9E77AB27602BD400C84BA3"
-            BuildableName = "Example (iOS).app"
-            BlueprintName = "Example (iOS)"
+            BlueprintIdentifier = "08E3598E2A55FFC400141956"
+            BuildableName = "Example (Multiplatform).app"
+            BlueprintName = "Example (Multiplatform)"
             ReferencedContainer = "container:Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -80,9 +121,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2E9E77AB27602BD400C84BA3"
-            BuildableName = "Example (iOS).app"
-            BlueprintName = "Example (iOS)"
+            BlueprintIdentifier = "08E3598E2A55FFC400141956"
+            BuildableName = "Example (Multiplatform).app"
+            BlueprintName = "Example (Multiplatform)"
             ReferencedContainer = "container:Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

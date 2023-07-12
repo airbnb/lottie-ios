@@ -1,8 +1,5 @@
-#if !os(macOS)
 // Created by Tyler Hedrick on 5/26/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
-
-import UIKit
 
 // MARK: - BehaviorsConfigurableView
 
@@ -21,7 +18,7 @@ import UIKit
 /// - SeeAlso: `ContentConfigurableView`
 /// - SeeAlso: `StyledView`
 /// - SeeAlso: `EpoxyableView`
-internal protocol BehaviorsConfigurableView: UIView {
+internal protocol BehaviorsConfigurableView: ViewType {
   /// The non-`Equatable` properties that can be changed over of the lifecycle this View's
   /// instances, e.g. callback closures or delegates.
   ///
@@ -46,4 +43,3 @@ extension BehaviorsConfigurableView where Behaviors == Never {
     }
   }
 }
-#endif

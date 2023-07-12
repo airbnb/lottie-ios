@@ -1,4 +1,3 @@
-#if !os(macOS)
 // Created by eric_horacek on 12/2/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -48,4 +47,3 @@ extension EpoxyModeled where Self: ErasedContentProviding {
     .init(keyPath: \Self.isErasedContentEqual, defaultValue: nil, updateStrategy: .replace)
   }
 }
-#endif

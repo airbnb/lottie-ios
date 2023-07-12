@@ -1,4 +1,3 @@
-#if !os(macOS)
 //  Created by Laura Skelton on 5/11/17.
 //  Copyright © 2017 Airbnb. All rights reserved.
 
@@ -31,4 +30,3 @@ internal struct SectionedChangeset {
   }
 
 }
-#endif

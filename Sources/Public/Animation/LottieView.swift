@@ -3,12 +3,10 @@
 
 import SwiftUI
 
-#if !os(macOS)
-
 // MARK: - LottieView
 
 /// A wrapper which exposes Lottie's `LottieAnimationView` to SwiftUI
-@available(iOS 13.0, tvOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 public struct LottieView: UIViewConfiguringSwiftUIView {
 
   // MARK: Lifecycle
@@ -42,8 +40,13 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
     }
     .sizing(sizing)
     .configure { context in
+      #if os(macOS)
+      context.view.setAccessibilityElement(accessibilityLabel != nil)
+      context.view.setAccessibilityLabel(accessibilityLabel)
+      #else
       context.view.isAccessibilityElement = accessibilityLabel != nil
       context.view.accessibilityLabel = accessibilityLabel
+      #endif
 
       // We check referential equality of the animation before updating as updating the
       // animation has a side-effect of rebuilding the animation layer, and it would be
@@ -98,7 +101,7 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
 
   // MARK: Internal
 
-  var configurations = [SwiftUIUIView<LottieAnimationView, Void>.Configuration]()
+  var configurations = [SwiftUIView<LottieAnimationView, Void>.Configuration]()
 
   // MARK: Private
 
@@ -110,5 +113,3 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
   private let configuration: LottieConfiguration
   private var sizing = SwiftUIMeasurementContainerStrategy.automatic
 }
-
-#endif

@@ -1,4 +1,3 @@
-#if !os(macOS)
 // Created by eric_horacek on 3/15/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
@@ -47,4 +46,3 @@ internal enum EpoxyModelArrayBuilder<Model> {
     components.flatMap { $0 }
   }
 }
-#endif

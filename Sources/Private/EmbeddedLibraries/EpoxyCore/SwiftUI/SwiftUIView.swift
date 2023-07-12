@@ -1,10 +1,9 @@
-#if !os(macOS)
 // Created by eric_horacek on 9/8/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
 import SwiftUI
 
-// MARK: - SwiftUIUIView
+// MARK: - SwiftUIView
 
 /// A `UIViewRepresentable` SwiftUI `View` that wraps its `Content` `UIView` within a
 /// `SwiftUIMeasurementContainer`, used to size a UIKit view correctly within a SwiftUI view
@@ -12,8 +11,8 @@ import SwiftUI
 ///
 /// Includes an optional generic `Storage` value, which can be used to compare old and new values
 /// across state changes to prevent redundant view updates.
-@available(iOS 13.0, tvOS 13.0, *)
-internal struct SwiftUIUIView<Content: UIView, Storage>: MeasuringUIViewRepresentable,
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
+internal struct SwiftUIView<Content: ViewType, Storage>: MeasuringViewRepresentable,
   UIViewConfiguringSwiftUIView
 {
 
@@ -51,14 +50,33 @@ internal struct SwiftUIUIView<Content: UIView, Storage>: MeasuringUIViewRepresen
 
 // MARK: UIViewRepresentable
 
-@available(iOS 13.0, tvOS 13.0, *)
-extension SwiftUIUIView {
-  internal func makeUIView(context _: Context) -> SwiftUIMeasurementContainer<Content> {
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
+extension SwiftUIView {
+  internal func makeCoordinator() -> Coordinator {
+    Coordinator(storage: storage)
+  }
+
+  #if os(macOS)
+  internal func makeNSView(context _: Context) -> SwiftUIMeasurementContainer<Content> {
     SwiftUIMeasurementContainer(content: makeContent(), strategy: sizing)
   }
 
-  internal func makeCoordinator() -> Coordinator {
-    Coordinator(storage: storage)
+  internal func updateNSView(_ uiView: SwiftUIMeasurementContainer<Content>, context: Context) {
+    let oldStorage = context.coordinator.storage
+    context.coordinator.storage = storage
+
+    let configurationContext = ConfigurationContext(
+      oldStorage: oldStorage,
+      viewRepresentableContext: context,
+      container: uiView)
+
+    for configuration in configurations {
+      configuration(configurationContext)
+    }
+  }
+  #else
+  internal func makeUIView(context _: Context) -> SwiftUIMeasurementContainer<Content> {
+    SwiftUIMeasurementContainer(content: makeContent(), strategy: sizing)
   }
 
   internal func updateUIView(_ uiView: SwiftUIMeasurementContainer<Content>, context: Context) {
@@ -74,16 +92,17 @@ extension SwiftUIUIView {
       configuration(configurationContext)
     }
   }
+  #endif
 }
 
-// MARK: SwiftUIUIView.ConfigurationContext
+// MARK: SwiftUIView.ConfigurationContext
 
-@available(iOS 13.0, tvOS 13.0, *)
-extension SwiftUIUIView {
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
+extension SwiftUIView {
   /// The configuration context that's available to configure the `Content` view whenever the
   /// `updateUIView()` method is invoked via a configuration closure.
   internal struct ConfigurationContext: ViewProviding {
-    /// The previous value for the `Storage` of this `SwiftUIUIView`, which can be used to store
+    /// The previous value for the `Storage` of this `SwiftUIView`, which can be used to store
     /// values across state changes to prevent redundant view updates.
     internal var oldStorage: Storage
 
@@ -102,17 +121,16 @@ extension SwiftUIUIView {
     }
 
     /// A convenience accessor indicating whether this content update should be animated.
-    @available(iOS 13.0, tvOS 13.0, *)
     internal var animated: Bool {
       viewRepresentableContext.transaction.animation != nil
     }
   }
 }
 
-// MARK: SwiftUIUIView.Coordinator
+// MARK: SwiftUIView.Coordinator
 
-@available(iOS 13.0, tvOS 13.0, *)
-extension SwiftUIUIView {
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
+extension SwiftUIView {
   /// A coordinator that stores the `storage` associated with this view, enabling the old storage
   /// value to be accessed during the `updateUIView(…)`.
   internal final class Coordinator {
@@ -128,4 +146,3 @@ extension SwiftUIUIView {
     fileprivate(set) var storage: Storage
   }
 }
-#endif

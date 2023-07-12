@@ -1,7 +1,7 @@
 ## EpoxyCore
 
 This directory includes the source code of the EpoxyCore library, from the following release:
-https://github.com/airbnb/epoxy-ios/releases/tag/0.9.0
+https://github.com/airbnb/epoxy-ios/releases/tag/0.10.0
 
 Lottie is distributed via multiple package managers (SPM, Cocoapods, Carthage, and NPM),
 each with different packaging and compilation requirements. 
@@ -29,11 +29,3 @@ When doing this, follow these steps:
  5. Namespace any types that conflict with other existing types.
     For example, the EpoxyCore `Entry` type conflicts with the ZipFoundation `Entry` type,
     so the EpoxyCore type has been renamed to `EpoxyEntry`.
-    
- 6. Since EpoxyCore doesn't support macOS, add `#if !os(macOS)` to all of the files in EpoxyCore.
-    The easiest way to do this is to run this bash command from the root directory:
-    
-    ```bash
-    find Sources/Private/EmbeddedLibraries/EpoxyCore -type f -name "*.swift" | xargs -I{} bash -c \
-    'echo -e "#if !os(macOS)\n$(cat {})\n#endif" > {}'
-    ```
