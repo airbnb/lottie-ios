@@ -8,6 +8,8 @@
 import CoreGraphics
 import Foundation
 
+// MARK: - FloatValueProvider
+
 /// A `ValueProvider` that returns a CGFloat Value
 public final class FloatValueProvider: ValueProvider {
 
@@ -17,6 +19,7 @@ public final class FloatValueProvider: ValueProvider {
   public init(block: @escaping CGFloatValueBlock) {
     self.block = block
     float = 0
+    identity = UUID()
   }
 
   /// Initializes with a single float.
@@ -24,6 +27,7 @@ public final class FloatValueProvider: ValueProvider {
     self.float = float
     block = nil
     hasUpdate = true
+    identity = float
   }
 
   // MARK: Public
@@ -67,4 +71,13 @@ public final class FloatValueProvider: ValueProvider {
   private var hasUpdate = true
 
   private var block: CGFloatValueBlock?
+  private var identity: AnyHashable
+}
+
+// MARK: Equatable
+
+extension FloatValueProvider: Equatable {
+  public static func ==(_ lhs: FloatValueProvider, _ rhs: FloatValueProvider) -> Bool {
+    lhs.identity == rhs.identity
+  }
 }

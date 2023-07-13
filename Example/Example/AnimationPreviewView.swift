@@ -14,6 +14,7 @@ struct AnimationPreviewView: View {
   var body: some View {
     VStack {
       LottieView(animation: .named(animationName))
+        .imageProvider(.exampleAppSampleImages)
         .resizable()
         .looping()
     }
@@ -31,5 +32,11 @@ extension Color {
     #else
       .clear
     #endif
+  }
+}
+
+extension AnimationImageProvider where Self == FilepathImageProvider {
+  static var exampleAppSampleImages: FilepathImageProvider {
+    FilepathImageProvider(filepath: Bundle.main.resourceURL!.appending(path: "Samples/Images"))
   }
 }

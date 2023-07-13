@@ -296,15 +296,21 @@ public class LottieAnimationLayer: CALayer {
 
   // MARK: Public
 
-  /// The configuration that this `LottieAnimationView` uses when playing its animation
-  public let configuration: LottieConfiguration
-
   /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
   public private(set) var valueProviders = [AnimationKeypath: AnyValueProvider]()
 
   /// A closure called when the animation layer has been loaded.
   /// Will inform the receiver the type of rendering engine that is used for the layer.
   public var animationLayerDidLoad:((_ animationLayer: LottieAnimationLayer, _ renderingEngine: RenderingEngineOption) -> Void)?
+
+  /// The configuration that this `LottieAnimationView` uses when playing its animation
+  public var configuration: LottieConfiguration {
+    didSet {
+      if configuration.renderingEngine != oldValue.renderingEngine {
+        makeAnimationLayer(usingEngine: configuration.renderingEngine)
+      }
+    }
+  }
 
   /// The underlying CALayer created to display the content.
   /// Use this property to change CALayer props like the content's transform, anchor point, etc.
