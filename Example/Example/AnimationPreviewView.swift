@@ -10,6 +10,8 @@ import SwiftUI
 struct AnimationPreviewView: View {
 
   let animationName: String
+  @State private var animationPlaying: Bool = true
+  @State private var sliderValue: AnimationProgressTime = 0
 
   var body: some View {
     VStack {
@@ -17,6 +19,17 @@ struct AnimationPreviewView: View {
         .imageProvider(.exampleAppSampleImages)
         .resizable()
         .looping()
+        .currentProgress(sliderValue)
+        .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
+
+      Spacer()
+
+      Slider(value: $sliderValue, in: 0...1, onEditingChanged: { editing in
+        if animationPlaying, editing {
+          animationPlaying = false
+        }
+      })
+      .padding(.all, 16)
     }
     .navigationTitle(animationName.components(separatedBy: "/").last!)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
