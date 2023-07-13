@@ -9,9 +9,9 @@ import SwiftUI
 /// TODO: Implement functionality from UIKit `AnimationPreviewViewController`
 struct AnimationPreviewView: View {
 
+  // MARK: Internal
+
   let animationName: String
-  @State private var animationPlaying: Bool = true
-  @State private var sliderValue: AnimationProgressTime = 0
 
   var body: some View {
     VStack {
@@ -35,6 +35,11 @@ struct AnimationPreviewView: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.secondaryBackground)
   }
+
+  // MARK: Private
+
+  @State private var animationPlaying = true
+  @State private var sliderValue: AnimationProgressTime = 0
 
 }
 
