@@ -304,7 +304,8 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   /// The configuration that this `LottieAnimationView` uses when playing its animation
   public var configuration: LottieConfiguration {
-    lottieAnimationLayer.configuration
+    get { lottieAnimationLayer.configuration }
+    set { lottieAnimationLayer.configuration = newValue }
   }
 
   /// Value Providers that have been registered using `setValueProvider(_:keypath:)`

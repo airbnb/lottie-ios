@@ -11,20 +11,9 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
 
   // MARK: Lifecycle
 
-  public init(
-    animation: LottieAnimation?,
-    imageProvider: AnimationImageProvider? = nil,
-    textProvider: AnimationTextProvider? = nil,
-    fontProvider: AnimationFontProvider? = nil,
-    configuration: LottieConfiguration = .shared,
-    accessibilityLabel: String? = nil)
-  {
+  /// Creates a `LottieView` that displays the given animation
+  public init(animation: LottieAnimation?) {
     self.animation = animation
-    self.imageProvider = imageProvider
-    self.textProvider = textProvider
-    self.fontProvider = fontProvider
-    self.configuration = configuration
-    self.accessibilityLabel = accessibilityLabel
   }
 
   // MARK: Public
@@ -34,30 +23,18 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
       LottieAnimationView(
         animation: animation,
         imageProvider: imageProvider,
-        textProvider: textProvider ?? DefaultTextProvider(),
-        fontProvider: fontProvider ?? DefaultFontProvider(),
+        textProvider: textProvider,
+        fontProvider: fontProvider,
         configuration: configuration)
     }
     .sizing(sizing)
     .configure { context in
-      #if os(macOS)
-      context.view.setAccessibilityElement(accessibilityLabel != nil)
-      context.view.setAccessibilityLabel(accessibilityLabel)
-      #else
-      context.view.isAccessibilityElement = accessibilityLabel != nil
-      context.view.accessibilityLabel = accessibilityLabel
-      #endif
-
       // We check referential equality of the animation before updating as updating the
       // animation has a side-effect of rebuilding the animation layer, and it would be
       // prohibitive to do so on every state update.
       if animation !== context.view.animation {
         context.view.animation = animation
       }
-
-      // Technically the image provider, text provider, font provider, and Lottie configuration
-      // could also need to be updated here, but there's no performant way to check their equality,
-      // so we assume they are not.
     }
     .configurations(configurations)
   }
@@ -99,17 +76,102 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
     }
   }
 
+  /// Returns a copy of this view with its accessibility label updated to the given value.
+  public func accessibilityLabel(_ accessibilityLabel: String?) -> Self {
+    configure { view in
+      #if os(macOS)
+      view.setAccessibilityElement(accessibilityLabel != nil)
+      view.setAccessibilityLabel(accessibilityLabel)
+      #else
+      view.isAccessibilityElement = accessibilityLabel != nil
+      view.accessibilityLabel = accessibilityLabel
+      #endif
+    }
+  }
+
+  /// Returns a copt of this view with its `LottieConfiguration` updated to the given value.
+  public func configuration(_ configuration: LottieConfiguration) -> Self {
+    var copy = self
+    copy.configuration = configuration
+
+    copy = copy.configure { view in
+      if view.configuration != configuration {
+        view.configuration = configuration
+      }
+    }
+
+    return copy
+  }
+
+  /// Returns a copy of this view with its image provider updated to the given value.
+  /// The image provider must be `Equatable` to avoid unnecessary state updates / re-renders.
+  public func imageProvider<ImageProvider: AnimationImageProvider & Equatable>(_ imageProvider: ImageProvider) -> Self {
+    var copy = self
+    copy.imageProvider = imageProvider
+
+    copy = copy.configure { view in
+      if (view.imageProvider as? ImageProvider) != imageProvider {
+        view.imageProvider = imageProvider
+      }
+    }
+
+    return copy
+  }
+
+  /// Returns a copy of this view with its text provider updated to the given value.
+  /// The image provider must be `Equatable` to avoid unnecessary state updates / re-renders.
+  public func textProvider<TextProvider: AnimationTextProvider & Equatable>(_ textProvider: TextProvider) -> Self {
+    var copy = self
+    copy.textProvider = textProvider
+
+    copy = copy.configure { view in
+      if (view.textProvider as? TextProvider) != textProvider {
+        view.textProvider = textProvider
+      }
+    }
+
+    return copy
+  }
+
+  /// Returns a copy of this view with its image provider updated to the given value.
+  /// The image provider must be `Equatable` to avoid unnecessary state updates / re-renders.
+  public func fontProvider<FontProvider: AnimationFontProvider & Equatable>(_ fontProvider: FontProvider) -> Self {
+    var copy = self
+    copy.fontProvider = fontProvider
+
+    copy = configure { view in
+      if (view.fontProvider as? FontProvider) != fontProvider {
+        view.fontProvider = fontProvider
+      }
+    }
+
+    return copy
+  }
+
+  /// Returns a copy of this view using the given value provider for the given keypath.
+  /// The value provider must be `Equatable` to avoid unnecessary state updates / re-renders.
+  public func valueProvider<ValueProvider: AnyValueProvider & Equatable>(
+    _ valueProvider: ValueProvider,
+    for keypath: AnimationKeypath)
+    -> Self
+  {
+    configure { view in
+      if (view.valueProviders[keypath] as? ValueProvider) != valueProvider {
+        view.setValueProvider(valueProvider, keypath: keypath)
+      }
+    }
+  }
+
   // MARK: Internal
 
   var configurations = [SwiftUIView<LottieAnimationView, Void>.Configuration]()
 
   // MARK: Private
 
-  private let accessibilityLabel: String?
   private let animation: LottieAnimation?
-  private let imageProvider: Lottie.AnimationImageProvider?
-  private let textProvider: Lottie.AnimationTextProvider?
-  private let fontProvider: Lottie.AnimationFontProvider?
-  private let configuration: LottieConfiguration
+  private var imageProvider: AnimationImageProvider?
+  private var textProvider: AnimationTextProvider = DefaultTextProvider()
+  private var fontProvider: AnimationFontProvider = DefaultFontProvider()
+  private var configuration: LottieConfiguration = .shared
   private var sizing = SwiftUIMeasurementContainerStrategy.automatic
 }

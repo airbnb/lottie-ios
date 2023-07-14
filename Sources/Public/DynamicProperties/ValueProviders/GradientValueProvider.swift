@@ -8,6 +8,8 @@
 import CoreGraphics
 import Foundation
 
+// MARK: - GradientValueProvider
+
 /// A `ValueProvider` that returns a Gradient Color Value.
 public final class GradientValueProvider: ValueProvider {
 
@@ -22,6 +24,7 @@ public final class GradientValueProvider: ValueProvider {
     locationsBlock = locations
     colors = []
     self.locations = []
+    identity = UUID()
   }
 
   /// Initializes with an array of colors.
@@ -31,6 +34,7 @@ public final class GradientValueProvider: ValueProvider {
   {
     self.colors = colors
     self.locations = locations
+    identity = [AnyHashable(colors), AnyHashable(locations)]
     updateValueArray()
     hasUpdate = true
   }
@@ -93,6 +97,8 @@ public final class GradientValueProvider: ValueProvider {
   private var locationsBlock: ColorLocationsBlock?
   private var value: [Double] = []
 
+  private let identity: AnyHashable
+
   private func value(from colors: [LottieColor], locations: [Double]) -> [Double] {
     var colorValues = [Double]()
     var alphaValues = [Double]()
@@ -119,5 +125,12 @@ public final class GradientValueProvider: ValueProvider {
 
   private func updateValueArray() {
     value = value(from: colors, locations: locations)
+  }
+
+}
+
+extension GradientValueProvider {
+  public static func ==(_ lhs: GradientValueProvider, _ rhs: GradientValueProvider) -> Bool {
+    lhs.identity == rhs.identity
   }
 }

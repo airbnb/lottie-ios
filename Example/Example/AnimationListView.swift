@@ -18,6 +18,7 @@ struct AnimationListView: View {
           case .animation(let animationName, _):
             HStack {
               LottieView(animation: .named(animationName, subdirectory: directory))
+                .imageProvider(.exampleAppSampleImages)
                 .frame(width: 50, height: 50)
                 .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
 

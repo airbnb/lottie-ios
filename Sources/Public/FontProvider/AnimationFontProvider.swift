@@ -33,3 +33,11 @@ public final class DefaultFontProvider: AnimationFontProvider {
     CTFontCreateWithName(family as CFString, size, nil)
   }
 }
+
+// MARK: Equatable
+
+extension DefaultFontProvider: Equatable {
+  public static func ==(_: DefaultFontProvider, _: DefaultFontProvider) -> Bool {
+    true
+  }
+}

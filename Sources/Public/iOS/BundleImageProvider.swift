@@ -86,4 +86,11 @@ public class BundleImageProvider: AnimationImageProvider {
   let bundle: Bundle
   let searchPath: String?
 }
+
+extension BundleImageProvider: Equatable {
+  public static func ==(_ lhs: BundleImageProvider, _ rhs: BundleImageProvider) -> Bool {
+    lhs.bundle == rhs.bundle
+      && lhs.searchPath == rhs.searchPath
+  }
+}
 #endif
