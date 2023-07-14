@@ -1298,7 +1298,7 @@ public class LottieAnimationLayer: CALayer {
 
   /// Plays the marker that corresponds to the current "reduced motion" mode if present.
   private func playReducedMotionAnimation(completion: LottieCompletionBlock?) {
-    guard let reducedMotionMarker else { return }
+    guard let reducedMotionMarker = reducedMotionMarker else { return }
 
     // `play(marker:)` calls the `play(fromFrame:toFrame:)` method which calls this
     // `playReducedMotionAnimation` method when `shouldOverrideWithReducedMotionAnimation`
