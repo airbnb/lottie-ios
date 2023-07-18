@@ -23,11 +23,7 @@ open class AnimatedSwitch: AnimatedControl {
   {
     /// Generate a haptic generator if available.
     #if os(iOS)
-    if #available(iOS 10.0, *) {
-      self.hapticGenerator = HapticGenerator()
-    } else {
-      hapticGenerator = NullHapticGenerator()
-    }
+    hapticGenerator = HapticGenerator()
     #else
     hapticGenerator = NullHapticGenerator()
     #endif
@@ -39,11 +35,7 @@ open class AnimatedSwitch: AnimatedControl {
   public override init() {
     /// Generate a haptic generator if available.
     #if os(iOS)
-    if #available(iOS 10.0, *) {
-      self.hapticGenerator = HapticGenerator()
-    } else {
-      hapticGenerator = NullHapticGenerator()
-    }
+    hapticGenerator = HapticGenerator()
     #else
     hapticGenerator = NullHapticGenerator()
     #endif
@@ -55,11 +47,7 @@ open class AnimatedSwitch: AnimatedControl {
   required public init?(coder aDecoder: NSCoder) {
     /// Generate a haptic generator if available.
     #if os(iOS)
-    if #available(iOS 10.0, *) {
-      self.hapticGenerator = HapticGenerator()
-    } else {
-      hapticGenerator = NullHapticGenerator()
-    }
+    hapticGenerator = HapticGenerator()
     #else
     hapticGenerator = NullHapticGenerator()
     #endif
@@ -210,14 +198,7 @@ protocol ImpactGenerator {
   func generateImpact()
 }
 
-// MARK: - NullHapticGenerator
-
-class NullHapticGenerator: ImpactGenerator {
-  func generateImpact() { }
-}
-
 #if os(iOS)
-@available(iOS 10.0, *)
 class HapticGenerator: ImpactGenerator {
 
   // MARK: Internal
@@ -229,5 +210,11 @@ class HapticGenerator: ImpactGenerator {
   // MARK: Fileprivate
 
   fileprivate let impact = UIImpactFeedbackGenerator(style: .light)
+}
+#else
+// MARK: - NullHapticGenerator
+
+class NullHapticGenerator: ImpactGenerator {
+  func generateImpact() { }
 }
 #endif
