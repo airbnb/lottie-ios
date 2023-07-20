@@ -104,7 +104,10 @@ public class LottieAnimationLayer: CALayer {
   ///
   /// - Parameter completion: An optional completion closure to be called when the animation completes playing.
   open func play(completion: LottieCompletionBlock? = nil) {
-    guard let animation = animation else {
+    guard let animation = animation else { return }
+
+    if shouldOverrideWithReducedMotionAnimation {
+      playReducedMotionAnimation(completion: completion)
       return
     }
 
@@ -129,7 +132,10 @@ public class LottieAnimationLayer: CALayer {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
-    guard let animation = animation else {
+    guard let animation = animation else { return }
+
+    if shouldOverrideWithReducedMotionAnimation {
+      playReducedMotionAnimation(completion: completion)
       return
     }
 
@@ -157,6 +163,11 @@ public class LottieAnimationLayer: CALayer {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
+    if shouldOverrideWithReducedMotionAnimation {
+      playReducedMotionAnimation(completion: completion)
+      return
+    }
+
     removeCurrentAnimationIfNecessary()
     if let loopMode = loopMode {
       /// Set the loop mode, if one was supplied
@@ -192,6 +203,11 @@ public class LottieAnimationLayer: CALayer {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
+    if shouldOverrideWithReducedMotionAnimation {
+      playReducedMotionAnimation(completion: completion)
+      return
+    }
+
     guard let animation = animation, let markers = animation.markerMap, let to = markers[toMarker] else {
       return
     }
@@ -232,6 +248,11 @@ public class LottieAnimationLayer: CALayer {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
+    if shouldOverrideWithReducedMotionAnimation {
+      playReducedMotionAnimation(completion: completion)
+      return
+    }
+
     guard let from = animation?.markerMap?[marker] else {
       return
     }
@@ -259,6 +280,11 @@ public class LottieAnimationLayer: CALayer {
   ///
   /// - Parameter markers: The list of markers to play sequentially.
   open func play(markers: [String]) {
+    if shouldOverrideWithReducedMotionAnimation {
+      playReducedMotionAnimation(completion: nil)
+      return
+    }
+
     guard !markers.isEmpty else { return }
 
     let markerToPlay = markers[0]
@@ -1241,6 +1267,22 @@ public class LottieAnimationLayer: CALayer {
   /// The `LottieBackgroundBehavior` that was specified manually by setting `self.backgroundBehavior`
   private var _backgroundBehavior: LottieBackgroundBehavior?
 
+  /// Whether or not the current animation should be overridden with
+  /// the marker matching the current "reduced motion" mode.
+  private var shouldOverrideWithReducedMotionAnimation: Bool {
+    reducedMotionMarker != nil
+  }
+
+  /// The marker that corresponds to the current "reduced motion" mode.
+  private var reducedMotionMarker: Marker? {
+    switch configuration.reducedMotionOption.currentReducedMotionMode {
+    case .standardMotion:
+      return nil
+    case .reducedMotion:
+      return animation?.reducedMotionMarker
+    }
+  }
+
   private func loadAnimation(_ dotLottieAnimation: DotLottieFile.Animation) {
     loopMode = dotLottieAnimation.configuration.loopMode
     animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
@@ -1250,6 +1292,21 @@ public class LottieAnimationLayer: CALayer {
     }
 
     animation = dotLottieAnimation.animation
+  }
+
+  /// Plays the marker that corresponds to the current "reduced motion" mode if present.
+  private func playReducedMotionAnimation(completion: LottieCompletionBlock?) {
+    guard let reducedMotionMarker = reducedMotionMarker else { return }
+
+    // `play(marker:)` calls the `play(fromFrame:toFrame:)` method which calls this
+    // `playReducedMotionAnimation` method when `shouldOverrideWithReducedMotionAnimation`
+    // is `true`. To prevent infinite recursion, disable the reduced motion functionality
+    // until the end of this function.
+    let currentConfiguration = configuration
+    configuration.reducedMotionOption = .standardMotion
+    defer { configuration = currentConfiguration }
+
+    play(marker: reducedMotionMarker.name, completion: completion)
   }
 
 }

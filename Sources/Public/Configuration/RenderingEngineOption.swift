@@ -1,45 +1,5 @@
-// Created by Cal Stephens on 12/13/21.
-// Copyright © 2021 Airbnb Inc. All rights reserved.
-
-import QuartzCore
-
-// MARK: - LottieConfiguration
-
-/// Global configuration options for Lottie animations
-public struct LottieConfiguration: Hashable {
-
-  // MARK: Lifecycle
-
-  public init(
-    renderingEngine: RenderingEngineOption = .automatic,
-    decodingStrategy: DecodingStrategy = .dictionaryBased,
-    colorSpace: CGColorSpace = CGColorSpaceCreateDeviceRGB())
-  {
-    self.renderingEngine = renderingEngine
-    self.decodingStrategy = decodingStrategy
-    self.colorSpace = colorSpace
-  }
-
-  // MARK: Public
-
-  /// The global configuration of Lottie,
-  /// which applies to all `LottieAnimationView`s by default.
-  public static var shared = LottieConfiguration()
-
-  /// The rendering engine implementation to use when displaying an animation
-  ///  - Defaults to `RenderingEngineOption.automatic`, which uses the
-  ///    Core Animation rendering engine for supported animations, and
-  ///    falls back to using the Main Thread rendering engine for
-  ///    animations that use features not supported by the Core Animation engine.
-  public var renderingEngine: RenderingEngineOption
-
-  /// The decoding implementation to use when parsing an animation JSON file
-  public var decodingStrategy: DecodingStrategy
-
-  /// The color space to be used for rendering
-  ///  - Defaults to `CGColorSpaceCreateDeviceRGB()`
-  public var colorSpace: CGColorSpace
-}
+// Created by Cal Stephens on 7/14/23.
+// Copyright © 2023 Airbnb Inc. All rights reserved.
 
 // MARK: - RenderingEngineOption
 
@@ -150,19 +110,4 @@ extension RenderingEngine: RawRepresentable, CustomStringConvertible {
   public var description: String {
     rawValue
   }
-}
-
-// MARK: - DecodingStrategy
-
-/// How animation files should be decoded
-public enum DecodingStrategy: Hashable {
-  /// Use Codable. This is was the default strategy introduced on Lottie 3, but should be rarely
-  /// used as it's slower than `dictionaryBased`. Kept here for any possible compatibility issues
-  /// that may come up, but consider it soft-deprecated.
-  case legacyCodable
-
-  /// Manually deserialize a dictionary into an Animation.
-  /// This should be at least 2-3x faster than using Codable and due to that
-  /// it's the default as of Lottie 4.x.
-  case dictionaryBased
 }
