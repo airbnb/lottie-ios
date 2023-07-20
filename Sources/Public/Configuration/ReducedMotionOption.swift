@@ -30,11 +30,6 @@ extension ReducedMotionOption {
   ///  - Valid marker names include "reduced motion", "reducedMotion", "reduced_motion" (case insensitive).
   public static var reducedMotion: ReducedMotionOption { .specific(.reducedMotion) }
 
-  /// Lottie animations with a "no motion" marker will play that marker instead of any other animations.
-  /// By default this mode is never used on iOS, but is used on some other platforms.
-  ///  - Valid marker names include "no motion", "noMotion", "no_motion" (case insensitive).
-  public static var noMotion: ReducedMotionOption { .specific(.noMotion) }
-
   /// A `ReducedMotionOptionProvider` that returns `.reducedMotion` when
   /// the system `UIAccessibility.isReduceMotionEnabled` option is `true`.
   /// This is the default option of `LottieConfiguration`.
@@ -89,9 +84,6 @@ public enum ReducedMotionMode: Hashable {
   /// Lottie animations with a "reduced motion" marker will play that marker instead of any other animations.
   /// By default this mode is used when the system "reduced motion" option is enabled.
   case reducedMotion
-
-  /// Lottie animations with a "no motion" marker will play that marker instead of any other animations.
-  case noMotion
 }
 
 // MARK: - ReducedMotionOptionProvider

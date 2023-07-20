@@ -1280,8 +1280,6 @@ public class LottieAnimationLayer: CALayer {
       return nil
     case .reducedMotion:
       return animation?.reducedMotionMarker
-    case .noMotion:
-      return animation?.noMotionMarker
     }
   }
 
