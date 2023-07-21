@@ -30,13 +30,13 @@ platform :ios do
       configuration: "Debug",
       skip_package_ipa: true,
   		scheme: "Example (iOS)")
-    if ENV["PR_NUMBER"] && ENV["PR_NUMBER"] != "false"
+    if ENV["PR_NUMBER"] != "" && ENV["PR_NUMBER"] != "false"
       current_sha = g.log[0].parents[1].sha
       baseBuildId = g.log[0].parent.sha
       emerge(repo_name: "noahsmartin/lottie-ios", pr_number: ENV["PR_NUMBER"], sha: current_sha, base_sha: baseBuildId)
     else
       current_sha = g.log[0].sha
-      emerge(repo_name: "noahsmartin/lottie-ios", build_id: current_sha)
+      emerge(repo_name: "noahsmartin/lottie-ios", sha: current_sha)
     end
   end
 end
