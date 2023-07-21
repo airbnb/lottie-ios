@@ -1,0 +1,42 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+fastlane_require 'git'
+
+default_platform(:ios)
+
+g = Git.open('..')
+
+platform :ios do
+  desc "Description of what the lane does"
+  lane :emerge_upload do
+    build_app(
+      workspace: "./Lottie.xcworkspace",
+      export_method: "ad-hoc",
+      skip_codesigning: true,
+      destination: "generic/platform=iOS Simulator",
+      configuration: "Debug",
+      skip_package_ipa: true,
+  		scheme: "Example (iOS)")
+    if ENV["PR_NUMBER"] && ENV["PR_NUMBER"] != "false"
+      current_sha = g.log[0].parents[1].sha
+      baseBuildId = g.log[0].parent.sha
+      emerge(repo_name: "noahsmartin/lottie-ios", pr_number: ENV["PR_NUMBER"], sha: current_sha, base_sha: baseBuildId)
+    else
+      current_sha = g.log[0].sha
+      emerge(repo_name: "noahsmartin/lottie-ios", build_id: current_sha)
+    end
+  end
+end
