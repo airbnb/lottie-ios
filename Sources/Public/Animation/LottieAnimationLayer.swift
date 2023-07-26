@@ -925,6 +925,17 @@ public class LottieAnimationLayer: CALayer {
     addNewAnimationForContext(newContext)
   }
 
+  func loadAnimation(_ animationSource: LottieAnimationSource?) {
+    switch animationSource {
+    case .lottieAnimation(let animation):
+      self.animation = animation
+    case .dotLottieFile(let dotLottieFile):
+      loadAnimation(from: dotLottieFile)
+    case nil:
+      animation = nil
+    }
+  }
+
   // MARK: Fileprivate
 
   fileprivate var _activeAnimationName: String = LottieAnimationLayer.animationName

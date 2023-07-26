@@ -11,16 +11,34 @@ struct AnimationPreviewView: View {
 
   // MARK: Internal
 
-  let animationName: String
+  enum AnimationSource {
+    case local(animationPath: String)
+    case remote(url: URL, name: String)
+
+    var name: String {
+      switch self {
+      case .local(let name):
+        return name
+      case .remote(_, let name):
+        return name
+      }
+    }
+  }
+
+  let animationSource: AnimationSource
 
   var body: some View {
     VStack {
-      LottieView(animation: .named(animationName))
-        .imageProvider(.exampleAppSampleImages)
-        .resizable()
-        .looping()
-        .currentProgress(animationPlaying ? nil : sliderValue)
-        .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
+      LottieView {
+        try await lottieSource()
+      } placeholder: {
+        LoadingIndicator()
+      }
+      .imageProvider(.exampleAppSampleImages)
+      .resizable()
+      .looping()
+      .currentProgress(animationPlaying ? nil : sliderValue)
+      .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
 
       Spacer()
 
@@ -33,7 +51,7 @@ struct AnimationPreviewView: View {
       .padding(.all, 16)
       #endif
     }
-    .navigationTitle(animationName.components(separatedBy: "/").last!)
+    .navigationTitle(animationSource.name.components(separatedBy: "/").last!)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.secondaryBackground)
   }
@@ -43,6 +61,20 @@ struct AnimationPreviewView: View {
   @State private var animationPlaying = true
   @State private var sliderValue: AnimationProgressTime = 0
 
+  private func lottieSource() async throws -> LottieAnimationSource? {
+    switch animationSource {
+    case .local(let name):
+      if let animation = LottieAnimation.named(name) {
+        return .lottieAnimation(animation)
+      } else {
+        let lottie = try await DotLottieFile.named(name)
+        return .dotLottieFile(lottie)
+      }
+    case .remote(let url, _):
+      let animation = await LottieAnimation.loadedFrom(url: url)
+      return animation.map(LottieAnimationSource.lottieAnimation)
+    }
+  }
 }
 
 extension Color {
@@ -58,5 +90,24 @@ extension Color {
 extension AnimationImageProvider where Self == FilepathImageProvider {
   static var exampleAppSampleImages: FilepathImageProvider {
     FilepathImageProvider(filepath: Bundle.main.resourceURL!.appending(path: "Samples/Images"))
+  }
+}
+
+// MARK: - LoadingIndicator
+
+struct LoadingIndicator: View {
+  @State private var animating = false
+
+  var body: some View {
+    Image(systemName: "rays")
+      .rotationEffect(animating ? Angle.degrees(360) : .zero)
+      .animation(
+        Animation
+          .linear(duration: 2)
+          .repeatForever(autoreverses: false),
+        value: animating)
+      .onAppear {
+        animating = true
+      }
   }
 }

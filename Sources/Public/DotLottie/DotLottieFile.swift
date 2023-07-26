@@ -39,7 +39,7 @@ public final class DotLottieFile {
   // MARK: Internal
 
   /// Image provider for animations
-  private(set) var imageProvider: AnimationImageProvider?
+  private(set) var imageProvider: DotLottieImageProvider?
 
   /// Animations folder url
   lazy var animationsUrl: URL = fileUrl.appendingPathComponent("\(DotLottieFile.animationsFolderName)")

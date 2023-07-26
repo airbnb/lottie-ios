@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0819D2A12A718CAE00D7DE49 /* LottieAnimationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */; };
+		0819D2A22A718CAE00D7DE49 /* LottieAnimationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */; };
+		0819D2A32A718CAE00D7DE49 /* LottieAnimationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */; };
 		0887346F28F0CBDE00458627 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887346E28F0CBDE00458627 /* LottieAnimation.swift */; };
 		0887347028F0CBDE00458627 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887346E28F0CBDE00458627 /* LottieAnimation.swift */; };
 		0887347128F0CBDE00458627 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887346E28F0CBDE00458627 /* LottieAnimation.swift */; };
@@ -833,6 +836,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationSource.swift; sourceTree = "<group>"; };
 		0887346E28F0CBDE00458627 /* LottieAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimation.swift; sourceTree = "<group>"; };
 		0887347228F0CCDD00458627 /* LottieAnimationHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimationHelpers.swift; sourceTree = "<group>"; };
 		0887347328F0CCDD00458627 /* LottieAnimationViewInitializers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimationViewInitializers.swift; sourceTree = "<group>"; };
@@ -1756,6 +1760,7 @@
 				2E9C95C72822F43100677516 /* Primitives */,
 				2E9C95CE2822F43100677516 /* Interpolatable */,
 				2E9C95D12822F43100677516 /* Helpers */,
+				0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -2267,6 +2272,7 @@
 				2E9C96422822F43100677516 /* RootAnimationLayer.swift in Sources */,
 				2E9C97712822F43100677516 /* AnimationContext.swift in Sources */,
 				08C002052A46150D00AB54BA /* Archive+Progress.swift in Sources */,
+				0819D2A12A718CAE00D7DE49 /* LottieAnimationSource.swift in Sources */,
 				08C002F52A461D6A00AB54BA /* LottieView.swift in Sources */,
 				2E9C96B12822F43100677516 /* NodeProperty.swift in Sources */,
 				2E9C965D2822F43100677516 /* MainThreadAnimationLayer.swift in Sources */,
@@ -2615,6 +2621,7 @@
 				2E9C95E92822F43100677516 /* Merge.swift in Sources */,
 				2E9C96042822F43100677516 /* ImageLayerModel.swift in Sources */,
 				19465F53282F998B00BB2C97 /* CachedImageProvider.swift in Sources */,
+				0819D2A22A718CAE00D7DE49 /* LottieAnimationSource.swift in Sources */,
 				08F8B20E2898A7B100CB5323 /* RepeaterLayer.swift in Sources */,
 				0887347928F0CCDD00458627 /* LottieAnimationViewInitializers.swift in Sources */,
 				2E9C96BB2822F43100677516 /* KeypathSearchable.swift in Sources */,
@@ -2832,6 +2839,7 @@
 				2E9C96442822F43100677516 /* RootAnimationLayer.swift in Sources */,
 				2E9C97732822F43200677516 /* AnimationContext.swift in Sources */,
 				08C002F62A461D6A00AB54BA /* LottieView.swift in Sources */,
+				0819D2A32A718CAE00D7DE49 /* LottieAnimationSource.swift in Sources */,
 				2E9C96B32822F43100677516 /* NodeProperty.swift in Sources */,
 				2E9C965F2822F43100677516 /* MainThreadAnimationLayer.swift in Sources */,
 				2E9C96502822F43100677516 /* SolidCompositionLayer.swift in Sources */,
