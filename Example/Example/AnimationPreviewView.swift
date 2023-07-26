@@ -44,7 +44,7 @@ struct AnimationPreviewView: View {
 
   var body: some View {
     VStack {
-      LottieView(loadAnimationReference: loadAnimationReference) {
+      LottieView(loadAnimationTrigger: fetchTrigger) {
         try await lottieSource()
       } placeholder: {
         LoadingIndicator()
@@ -85,15 +85,12 @@ struct AnimationPreviewView: View {
   @State private var sliderValue: AnimationProgressTime = 0
   @State private var currentURLIndex: Int
 
-  private var loadAnimationReference: Binding<AnyHashable> {
+  private var fetchTrigger: Binding<AnyHashable> {
     switch animationSource {
     case .local:
       return .constant(currentURLIndex)
     case .remote:
-      return $currentURLIndex
-        .mapGetter { _ in
-          urls[currentURLIndex]
-        }
+      return $currentURLIndex.mapGetter(transform: AnyHashable.init)
     }
   }
 
