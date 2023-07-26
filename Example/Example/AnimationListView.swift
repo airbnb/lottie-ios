@@ -34,7 +34,7 @@ struct AnimationListView: View {
         .navigationDestination(for: Item.self) { item in
           switch item {
           case .animation(_, let animationPath):
-            AnimationPreviewView(animationName: animationPath)
+            AnimationPreviewView(animationSource: .local(animationPath: animationPath))
           case .subdirectory(let subdirectoryURL):
             AnimationListView(directory: "\(directory)/\(subdirectoryURL.lastPathComponent)")
           }
