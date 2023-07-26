@@ -8,11 +8,9 @@ import SwiftUI
 
 struct AnimationListView: View {
 
-  let directory: String
+  // MARK: Internal
 
-  private var isTopLevel: Bool {
-    directory == "Samples"
-  }
+  let directory: String
 
   var body: some View {
     List {
@@ -52,6 +50,12 @@ struct AnimationListView: View {
       }
     }
     .navigationTitle(directory)
+  }
+
+  // MARK: Private
+
+  private var isTopLevel: Bool {
+    directory == "Samples"
   }
 
 }

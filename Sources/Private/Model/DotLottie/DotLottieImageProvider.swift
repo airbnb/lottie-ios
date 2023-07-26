@@ -72,12 +72,15 @@ class DotLottieImageProvider: AnimationImageProvider {
 
 }
 
+// MARK: Hashable
+
 extension DotLottieImageProvider: Hashable {
+  static func ==(_ lhs: DotLottieImageProvider, _ rhs: DotLottieImageProvider) -> Bool {
+    lhs.filepath == rhs.filepath
+  }
+
   func hash(into hasher: inout Hasher) {
     hasher.combine(filepath)
   }
 
-  static func ==(_ lhs: DotLottieImageProvider, _ rhs: DotLottieImageProvider) -> Bool {
-    lhs.filepath == rhs.filepath
-  }
 }

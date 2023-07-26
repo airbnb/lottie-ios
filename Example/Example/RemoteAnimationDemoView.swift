@@ -8,12 +8,12 @@ import SwiftUI
 
 struct RemoteAnimationsDemoView: View {
 
-  let wrapInNavStack: Bool
-
   struct Item: Hashable {
     let name: String
     let url: URL
   }
+
+  let wrapInNavStack: Bool
 
   var body: some View {
     if wrapInNavStack {
