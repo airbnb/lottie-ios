@@ -17,7 +17,7 @@ struct RemoteAnimationsDemoView: View {
     NavigationStack {
       List {
         ForEach(items, id: \.self) { item in
-          NavigationLink(value: item.url) {
+          NavigationLink(value: item) {
             HStack {
               LottieView {
                 await LottieAnimation.loadedFrom(url: item.url)
@@ -32,8 +32,8 @@ struct RemoteAnimationsDemoView: View {
               Text(item.name)
             }
           }
-          .navigationDestination(for: URL.self) { url in
-            AnimationPreviewView(animationSource: .remote(url: url))
+          .navigationDestination(for: Item.self) { item in
+            AnimationPreviewView(animationSource: .remote(url: item.url, name: item.name))
           }
         }
       }.navigationTitle("Remote Animations")

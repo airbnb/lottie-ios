@@ -13,14 +13,14 @@ struct AnimationPreviewView: View {
 
   enum AnimationSource {
     case local(animationPath: String)
-    case remote(url: URL)
+    case remote(url: URL, name: String)
 
     var name: String {
       switch self {
       case .local(let name):
         return name
-      case .remote:
-        return "Remote animation"
+      case .remote(_, let name):
+        return name
       }
     }
   }
@@ -29,7 +29,16 @@ struct AnimationPreviewView: View {
 
   var body: some View {
     VStack {
-      lottieView
+      LottieView {
+        try await lottieSource()
+      } placeholder: {
+        LoadingIndicator()
+      }
+      .imageProvider(.exampleAppSampleImages)
+      .resizable()
+      .looping()
+      .currentProgress(animationPlaying ? nil : sliderValue)
+      .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
       Spacer()
 
       #if !os(tvOS)
@@ -51,45 +60,18 @@ struct AnimationPreviewView: View {
   @State private var animationPlaying = true
   @State private var sliderValue: AnimationProgressTime = 0
 
-  @ViewBuilder
-  private var lottieView: some View {
+  private func lottieSource() async throws -> LottieAnimationSource? {
     switch animationSource {
     case .local(let name):
-      localAnimation(animationName: name)
-    case .remote(let url):
-      LottieView {
-        await LottieAnimation.loadedFrom(url: url)
-      } placeholder: {
-        LoadingIndicator()
+      if let animation = LottieAnimation.named(name) {
+        return .lottieAnimation(animation)
+      } else {
+        let lottie = try await DotLottieFile.named(name)
+        return .dotLottieFile(lottie)
       }
-      .imageProvider(.exampleAppSampleImages)
-      .resizable()
-      .looping()
-      .currentProgress(animationPlaying ? nil : sliderValue)
-      .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
-    }
-  }
-
-  @ViewBuilder
-  private func localAnimation(animationName: String) -> some View {
-    if let animation = LottieAnimation.named(animationName) {
-      LottieView(animation: animation)
-        .imageProvider(.exampleAppSampleImages)
-        .resizable()
-        .looping()
-        .currentProgress(animationPlaying ? nil : sliderValue)
-        .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
-    } else {
-      LottieView {
-        try await DotLottieFile.named(animationName)
-      } placeholder: {
-        LoadingIndicator()
-      }
-      .imageProvider(.exampleAppSampleImages)
-      .resizable()
-      .looping()
-      .currentProgress(animationPlaying ? nil : sliderValue)
-      .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
+    case .remote(let url, _):
+      let animation = await LottieAnimation.loadedFrom(url: url)
+      return animation.map(LottieAnimationSource.lottieAnimation)
     }
   }
 }

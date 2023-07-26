@@ -67,7 +67,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimationSource`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
-  fileprivate init(
+  public init(
     loadAnimation: @escaping () async throws -> LottieAnimationSource?,
     @ViewBuilder placeholder: @escaping () -> Placeholder)
   {
