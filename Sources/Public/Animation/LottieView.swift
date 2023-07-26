@@ -1,7 +1,6 @@
 // Created by Bryn Bodayle on 1/20/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
-import Combine
 import SwiftUI
 
 // MARK: - LottieView
@@ -16,28 +15,41 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   public init(animation: LottieAnimation?) where Placeholder == EmptyView {
     _animationSource = State(initialValue: animation.map(LottieAnimationSource.lottieAnimation))
     placeholder = nil
+    loadAnimationReference = .constant(LoadReference.constantSource)
   }
 
   /// Creates a `LottieView` that displays the given `DotLottieFile`
   public init(dotLottieFile: DotLottieFile?) where Placeholder == EmptyView {
     _animationSource = State(initialValue: dotLottieFile.map(LottieAnimationSource.dotLottieFile))
     placeholder = nil
+    loadAnimationReference = .constant(LoadReference.constantSource)
   }
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimation`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
-  public init(_ loadAnimation: @escaping () async throws -> LottieAnimation?) where Placeholder == EmptyView {
-    self.init(loadAnimation, placeholder: EmptyView.init)
+  /// - Parameters:
+  ///   - loadAnimationReference: `Binding` to indicate that a new remote animation should be fetched
+  ///   - loadAnimation: Closure that provides an animation asynchronously
+  public init(
+    loadAnimationReference: Binding<AnyHashable> = .constant(LoadReference.constantSource),
+    _ loadAnimation: @escaping () async throws -> LottieAnimation?)
+    where Placeholder == EmptyView
+  {
+    self.init(loadAnimationReference: loadAnimationReference, loadAnimation, placeholder: EmptyView.init)
   }
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimation`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
+  /// - Parameters:
+  ///   - loadAnimationReference: `Binding` to indicate that a new remote animation should be fetched
+  ///   - loadAnimation: Closure that provides an animation asynchronously
   public init(
+    loadAnimationReference: Binding<AnyHashable> = .constant(LoadReference.constantSource),
     _ loadAnimation: @escaping () async throws -> LottieAnimation?,
     @ViewBuilder placeholder: @escaping (() -> Placeholder))
   {
-    self.init {
+    self.init(loadAnimationReference: loadAnimationReference) {
       try await loadAnimation().map(LottieAnimationSource.lottieAnimation)
     } placeholder: {
       placeholder()
@@ -46,18 +58,31 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `DotLottieFile`.
   /// The `loadDotLottieFile` closure is called exactly once in `onAppear`.
-  public init(_ loadDotLottieFile: @escaping () async throws -> DotLottieFile?) where Placeholder == EmptyView {
-    self.init(loadDotLottieFile, placeholder: EmptyView.init)
+  /// - Parameters:
+  ///   - loadAnimationReference: `Binding` to indicate that a new remote animation should be fetched
+  ///   - loadAnimation: Closure that provides an animation asynchronously
+  public init(
+    loadAnimationReference: Binding<AnyHashable> = .constant(LoadReference.constantSource),
+    _ loadDotLottieFile: @escaping () async throws -> DotLottieFile?) where Placeholder == EmptyView
+  {
+    self.init(
+      loadAnimationReference: loadAnimationReference,
+      loadDotLottieFile,
+      placeholder: EmptyView.init)
   }
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `DotLottieFile`.
   /// The `loadDotLottieFile` closure is called exactly once in `onAppear`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
+  /// - Parameters:
+  ///   - loadAnimationReference: `Binding` to indicate that a new remote animation should be fetched
+  ///   - loadAnimation: Closure that provides an animation asynchronously
   public init(
+    loadAnimationReference: Binding<AnyHashable> = .constant(LoadReference.constantSource),
     _ loadDotLottieFile: @escaping () async throws -> DotLottieFile?,
     @ViewBuilder placeholder: @escaping (() -> Placeholder))
   {
-    self.init {
+    self.init(loadAnimationReference: loadAnimationReference) {
       try await loadDotLottieFile().map(LottieAnimationSource.dotLottieFile)
     } placeholder: {
       placeholder()
@@ -67,16 +92,26 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimationSource`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
+  /// - Parameters:
+  ///   - loadAnimationReference: `Binding` to indicate that a new remote animation should be fetched
+  ///   - loadAnimation: Closure that provides an animation asynchronously
   public init(
+    loadAnimationReference: Binding<AnyHashable> = .constant(LoadReference.constantSource),
     loadAnimation: @escaping () async throws -> LottieAnimationSource?,
     @ViewBuilder placeholder: @escaping () -> Placeholder)
   {
     self.loadAnimation = loadAnimation
     self.placeholder = placeholder
+    self.loadAnimationReference = loadAnimationReference
     _animationSource = State(initialValue: nil)
   }
 
   // MARK: Public
+
+  /// Token used when no `loadAnimationReference` is provided
+  public enum LoadReference {
+    case constantSource
+  }
 
   public var body: some View {
     ZStack {
@@ -104,6 +139,9 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
       }
     }
     .onAppear {
+      loadAnimationIfNecessary()
+    }
+    .valueChanged(value: loadAnimationReference.wrappedValue) { _ in
       loadAnimationIfNecessary()
     }
   }
@@ -334,6 +372,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   // MARK: Private
 
   @State private var animationSource: LottieAnimationSource?
+  private var loadAnimationReference: Binding<AnyHashable>
   private var loadAnimation: (() async throws -> LottieAnimationSource?)?
   private var imageProvider: AnimationImageProvider?
   private var textProvider: AnimationTextProvider = DefaultTextProvider()
@@ -344,10 +383,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   private let placeholder: (() -> Placeholder)?
 
   private func loadAnimationIfNecessary() {
-    guard
-      let loadAnimation = loadAnimation,
-      animationSource == nil
-    else { return }
+    guard let loadAnimation = loadAnimation else { return }
 
     Task {
       do {

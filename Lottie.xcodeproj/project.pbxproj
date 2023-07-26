@@ -816,6 +816,8 @@
 		A40460592832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
 		A404605A2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
 		A404605B2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
+		AB3278132A71BA0400A9C9F1 /* View+ValueChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3278122A71BA0400A9C9F1 /* View+ValueChanged.swift */; };
+		AB3278142A71BA3500A9C9F1 /* View+ValueChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3278122A71BA0400A9C9F1 /* View+ValueChanged.swift */; };
 		D453D8AB28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
 		D453D8AC28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
 		D453D8AD28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
@@ -1124,6 +1126,7 @@
 		82A552742A2FD44B00E47AC8 /* LottieAnimationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationLayer.swift; sourceTree = "<group>"; };
 		A1D5BAAB27C731A500777D06 /* DataURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataURLTests.swift; sourceTree = "<group>"; };
 		A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlendMode+Filter.swift"; sourceTree = "<group>"; };
+		AB3278122A71BA0400A9C9F1 /* View+ValueChanged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ValueChanged.swift"; sourceTree = "<group>"; };
 		D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationCache.swift; sourceTree = "<group>"; };
 		D453D8AE28FF9BC600D3F49C /* AnimationCacheProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationCacheProviderTests.swift; sourceTree = "<group>"; };
 		D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAnimationCache.swift; sourceTree = "<group>"; };
@@ -1872,6 +1875,7 @@
 				0887347428F0CCDD00458627 /* LottieAnimationView.swift */,
 				0887347328F0CCDD00458627 /* LottieAnimationViewInitializers.swift */,
 				08C002F42A461D6A00AB54BA /* LottieView.swift */,
+				AB3278122A71BA0400A9C9F1 /* View+ValueChanged.swift */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -2336,6 +2340,7 @@
 				2E9C96BA2822F43100677516 /* KeypathSearchable.swift in Sources */,
 				2E9C963C2822F43100677516 /* AssetLibrary.swift in Sources */,
 				2E9C97022822F43100677516 /* PreCompLayer.swift in Sources */,
+				AB3278132A71BA0400A9C9F1 /* View+ValueChanged.swift in Sources */,
 				2E9C96EA2822F43100677516 /* SolidLayer.swift in Sources */,
 				08E207302A56014E002DCE17 /* WillDisplayProviding.swift in Sources */,
 				08E207482A56014E002DCE17 /* AnimatedProviding.swift in Sources */,
@@ -2903,6 +2908,7 @@
 				2E9C97042822F43100677516 /* PreCompLayer.swift in Sources */,
 				2E9C96EC2822F43100677516 /* SolidLayer.swift in Sources */,
 				08C002E82A46196300AB54BA /* Data+CompressionDeprecated.swift in Sources */,
+				AB3278142A71BA3500A9C9F1 /* View+ValueChanged.swift in Sources */,
 				2EAF5AA327A0798700E00531 /* AnimationSubview.macOS.swift in Sources */,
 				08E207322A56014E002DCE17 /* WillDisplayProviding.swift in Sources */,
 				08E2074A2A56014E002DCE17 /* AnimatedProviding.swift in Sources */,
