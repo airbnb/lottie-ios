@@ -180,6 +180,43 @@ open class LottieAnimationView: LottieAnimationViewBase {
     commonInit()
   }
 
+  convenience init(
+    animationSource: LottieAnimationSource?,
+    imageProvider: AnimationImageProvider? = nil,
+    textProvider: AnimationTextProvider = DefaultTextProvider(),
+    fontProvider: AnimationFontProvider = DefaultFontProvider(),
+    configuration: LottieConfiguration = .shared,
+    logger: LottieLogger = .shared)
+  {
+    switch animationSource {
+    case .lottieAnimation(let animation):
+      self.init(
+        animation: animation,
+        imageProvider: imageProvider,
+        textProvider: textProvider,
+        fontProvider: fontProvider,
+        configuration: configuration,
+        logger: logger)
+
+    case .dotLottieFile(let dotLottieFile):
+      self.init(
+        dotLottie: dotLottieFile,
+        textProvider: textProvider,
+        fontProvider: fontProvider,
+        configuration: configuration,
+        logger: logger)
+
+    case nil:
+      self.init(
+        animation: nil,
+        imageProvider: imageProvider,
+        textProvider: textProvider,
+        fontProvider: fontProvider,
+        configuration: configuration,
+        logger: logger)
+    }
+  }
+
   // MARK: Open
 
   /// Plays the animation from its current state to the end.
@@ -935,6 +972,10 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   func updateInFlightAnimation() {
     lottieAnimationLayer.updateInFlightAnimation()
+  }
+
+  func loadAnimation(_ animationSource: LottieAnimationSource?) {
+    lottieAnimationLayer.loadAnimation(animationSource)
   }
 
   // MARK: Fileprivate
