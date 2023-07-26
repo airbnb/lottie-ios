@@ -1,42 +1,112 @@
 // Created by Bryn Bodayle on 1/20/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+import Combine
 import SwiftUI
 
 // MARK: - LottieView
 
 /// A wrapper which exposes Lottie's `LottieAnimationView` to SwiftUI
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
-public struct LottieView: UIViewConfiguringSwiftUIView {
+public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   // MARK: Lifecycle
 
   /// Creates a `LottieView` that displays the given animation
-  public init(animation: LottieAnimation?) {
-    self.animation = animation
+  public init(animation: LottieAnimation?) where Placeholder == EmptyView {
+    _animationSource = State(initialValue: animation.map(LottieAnimationSource.lottieAnimation))
+    placeholder = nil
+  }
+
+  public init(dotLottieFile: DotLottieFile?) where Placeholder == EmptyView {
+    _animationSource = State(initialValue: dotLottieFile.map(LottieAnimationSource.dotLottieAnimation))
+    placeholder = nil
+  }
+
+  public init(_ lottieAnimationProvider: @escaping () async throws -> LottieAnimation?) where Placeholder == EmptyView {
+    self.init(lottieAnimationProvider, placeholder: EmptyView.init)
+  }
+
+  public init(
+    _ lottieAnimationProvider: @escaping () async throws -> LottieAnimation?,
+    @ViewBuilder placeholder: @escaping (() -> Placeholder))
+  {
+    self.init(animationProvider: {
+      let animation = try await lottieAnimationProvider()
+      return animation.map(LottieAnimationSource.lottieAnimation)
+    }, placeholder: placeholder)
+  }
+
+  public init(_ dotLottieAnimationProvider: @escaping () async throws -> DotLottieFile?) where Placeholder == EmptyView {
+    self.init(
+      dotLottieAnimationProvider,
+      placeholder: EmptyView.init)
+  }
+
+  public init(
+    _ dotLottieAnimationProvider: @escaping () async throws -> DotLottieFile?,
+    @ViewBuilder placeholder: @escaping (() -> Placeholder))
+  {
+    self.init(
+      animationProvider: {
+        let animation = try await dotLottieAnimationProvider()
+        return animation.map(LottieAnimationSource.dotLottieAnimation)
+      },
+      placeholder: placeholder)
+  }
+
+  fileprivate init(
+    animationProvider: @escaping () async throws -> LottieAnimationSource?,
+    @ViewBuilder placeholder: @escaping () -> Placeholder)
+  {
+    self.animationProvider = animationProvider
+    self.placeholder = placeholder
+    _animationSource = State(initialValue: nil)
   }
 
   // MARK: Public
 
   public var body: some View {
-    LottieAnimationView.swiftUIView {
-      LottieAnimationView(
-        animation: animation,
-        imageProvider: imageProvider,
-        textProvider: textProvider,
-        fontProvider: fontProvider,
-        configuration: configuration)
-    }
-    .sizing(sizing)
-    .configure { context in
-      // We check referential equality of the animation before updating as updating the
-      // animation has a side-effect of rebuilding the animation layer, and it would be
-      // prohibitive to do so on every state update.
-      if animation !== context.view.animation {
-        context.view.animation = animation
+    ZStack {
+      switch animationSource {
+      case .lottieAnimation(let animation):
+        LottieAnimationView.swiftUIView {
+          LottieAnimationView(
+            animation: animation,
+            imageProvider: imageProvider,
+            textProvider: textProvider,
+            fontProvider: fontProvider,
+            configuration: configuration)
+        }
+        .sizing(sizing)
+        .configure { context in
+          // We check referential equality of the animation before updating as updating the
+          // animation has a side-effect of rebuilding the animation layer, and it would be
+          // prohibitive to do so on every state update.
+          if animation !== context.view.animation {
+            context.view.animation = animation
+          }
+        }
+        .configurations(configurations)
+      case .dotLottieAnimation(let dotLottieFile):
+        LottieAnimationView.swiftUIView {
+          LottieAnimationView(
+            dotLottie: dotLottieFile,
+            textProvider: textProvider,
+            fontProvider: fontProvider,
+            configuration: configuration)
+        }
+        .sizing(sizing)
+        .configurations(configurations)
+      case .none:
+        if let placeholder {
+          placeholder()
+        }
       }
     }
-    .configurations(configurations)
+    .loadAnimation(
+      animationProvider: animationProvider,
+      animation: $animationSource)
   }
 
   /// Returns a copy of this `LottieView` updated to have the given closure applied to its
@@ -255,10 +325,37 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
 
   // MARK: Private
 
-  private let animation: LottieAnimation?
+  @State private var animationSource: LottieAnimationSource?
   private var imageProvider: AnimationImageProvider?
   private var textProvider: AnimationTextProvider = DefaultTextProvider()
   private var fontProvider: AnimationFontProvider = DefaultFontProvider()
   private var configuration: LottieConfiguration = .shared
   private var sizing = SwiftUIMeasurementContainerStrategy.automatic
+  private var animationProvider: (() async throws -> LottieAnimationSource?)?
+  private let placeholder: (() -> Placeholder)?
+
+}
+
+// MARK: - LottieAnimationSource
+
+private enum LottieAnimationSource {
+  case lottieAnimation(LottieAnimation)
+  case dotLottieAnimation(DotLottieFile)
+}
+
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
+extension View {
+  fileprivate func loadAnimation(
+    animationProvider: (() async throws -> LottieAnimationSource?)?,
+    animation: Binding<LottieAnimationSource?>)
+    -> some View
+  {
+    onAppear {
+      Task {
+        if let animationLoaded = try? await animationProvider?() {
+          animation.wrappedValue = animationLoaded
+        }
+      }
+    }
+  }
 }
