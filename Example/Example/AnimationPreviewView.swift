@@ -39,6 +39,7 @@ struct AnimationPreviewView: View {
       .looping()
       .currentProgress(animationPlaying ? nil : sliderValue)
       .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
+      
       Spacer()
 
       #if !os(tvOS)

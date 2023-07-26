@@ -131,7 +131,7 @@ final class SampleListViewController: CollectionViewController {
       dataID: "Remote animations",
       content: .init(animationName: nil, title: "Remote animations"))
       .didSelect { [weak self] _ in
-        let remoteAnimationsDemo = UIHostingController(rootView: RemoteAnimationsDemoView())
+        let remoteAnimationsDemo = UIHostingController(rootView: RemoteAnimationsDemoView(wrapInNavStack: true))
         self?.present(remoteAnimationsDemo, animated: true)
       }
   }

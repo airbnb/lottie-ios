@@ -10,6 +10,10 @@ struct AnimationListView: View {
 
   let directory: String
 
+  private var isTopLevel: Bool {
+    directory == "Samples"
+  }
+
   var body: some View {
     List {
       ForEach(items, id: \.self) { item in
@@ -29,6 +33,9 @@ struct AnimationListView: View {
           case .subdirectory(let subdirectoryURL):
             Text(subdirectoryURL.lastPathComponent)
               .frame(height: 50)
+          case .remoteDemo:
+            Text("Remote animations")
+              .frame(height: 50)
           }
         }
         .navigationDestination(for: Item.self) { item in
@@ -37,10 +44,14 @@ struct AnimationListView: View {
             AnimationPreviewView(animationSource: .local(animationPath: animationPath))
           case .subdirectory(let subdirectoryURL):
             AnimationListView(directory: "\(directory)/\(subdirectoryURL.lastPathComponent)")
+          case .remoteDemo:
+            // View is already contained in a nav stack
+            RemoteAnimationsDemoView(wrapInNavStack: false)
           }
         }
       }
-    }.navigationTitle(directory)
+    }
+    .navigationTitle(directory)
   }
 
 }
@@ -52,11 +63,13 @@ extension AnimationListView {
   enum Item: Hashable {
     case subdirectory(URL)
     case animation(name: String, path: String)
+    case remoteDemo
   }
 
   var items: [Item] {
     animations.map { .animation(name: $0.name, path: $0.path) }
       + subdirectoryURLs.map { .subdirectory($0) }
+      + customDemos
   }
 
   // MARK: Private
@@ -91,5 +104,9 @@ extension AnimationListView {
   private var animationURLs: [URL] {
     (Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: directory) ?? []) +
       (Bundle.main.urls(forResourcesWithExtension: "lottie", subdirectory: directory) ?? [])
+  }
+
+  private var customDemos: [Item] {
+    isTopLevel ? [.remoteDemo] : []
   }
 }

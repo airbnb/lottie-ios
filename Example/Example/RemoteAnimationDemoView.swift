@@ -8,35 +8,47 @@ import SwiftUI
 
 struct RemoteAnimationsDemoView: View {
 
+  let wrapInNavStack: Bool
+
   struct Item: Hashable {
     let name: String
     let url: URL
   }
 
   var body: some View {
-    NavigationStack {
-      List {
-        ForEach(items, id: \.self) { item in
-          NavigationLink(value: item) {
-            HStack {
-              LottieView {
-                await LottieAnimation.loadedFrom(url: item.url)
-              } placeholder: {
-                LoadingIndicator()
-              }
-              .currentProgress(0.5)
-              .imageProvider(.exampleAppSampleImages)
-              .frame(width: 50, height: 50)
-              .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+    if wrapInNavStack {
+      NavigationStack {
+        listBody
+      }
+    } else {
+      listBody
+    }
+  }
 
-              Text(item.name)
+  var listBody: some View {
+    List {
+      ForEach(items, id: \.self) { item in
+        NavigationLink(value: item) {
+          HStack {
+            LottieView {
+              await LottieAnimation.loadedFrom(url: item.url)
+            } placeholder: {
+              LoadingIndicator()
             }
-          }
-          .navigationDestination(for: Item.self) { item in
-            AnimationPreviewView(animationSource: .remote(url: item.url, name: item.name))
+            .currentProgress(0.5)
+            .imageProvider(.exampleAppSampleImages)
+            .frame(width: 50, height: 50)
+            .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+
+            Text(item.name)
           }
         }
-      }.navigationTitle("Remote Animations")
+        .navigationDestination(for: Item.self) { item in
+          AnimationPreviewView(animationSource: .remote(url: item.url, name: item.name))
+        }
+      }
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .navigationTitle("Remote Animations")
     }
   }
 
