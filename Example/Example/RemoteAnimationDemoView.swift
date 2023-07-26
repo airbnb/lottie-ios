@@ -21,6 +21,8 @@ struct RemoteAnimationsDemoView: View {
             HStack {
               LottieView {
                 await LottieAnimation.loadedFrom(url: item.url)
+              } placeholder: {
+                LoadingIndicator()
               }
               .currentProgress(0.5)
               .imageProvider(.exampleAppSampleImages)
