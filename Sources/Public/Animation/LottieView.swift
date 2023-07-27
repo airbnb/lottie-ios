@@ -1,7 +1,6 @@
 // Created by Bryn Bodayle on 1/20/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
-import Combine
 import SwiftUI
 
 // MARK: - LottieView
@@ -26,12 +25,14 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimation`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
   public init(_ loadAnimation: @escaping () async throws -> LottieAnimation?) where Placeholder == EmptyView {
     self.init(loadAnimation, placeholder: EmptyView.init)
   }
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimation`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
   public init(
     _ loadAnimation: @escaping () async throws -> LottieAnimation?,
@@ -46,12 +47,14 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `DotLottieFile`.
   /// The `loadDotLottieFile` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
   public init(_ loadDotLottieFile: @escaping () async throws -> DotLottieFile?) where Placeholder == EmptyView {
     self.init(loadDotLottieFile, placeholder: EmptyView.init)
   }
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `DotLottieFile`.
   /// The `loadDotLottieFile` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
   public init(
     _ loadDotLottieFile: @escaping () async throws -> DotLottieFile?,
@@ -66,6 +69,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimationSource`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
   public init(
     loadAnimation: @escaping () async throws -> LottieAnimationSource?,
@@ -104,6 +108,10 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
       }
     }
     .onAppear {
+      loadAnimationIfNecessary()
+    }
+    .valueChanged(value: loadAnimationTrigger?.wrappedValue) { _ in
+      animationSource = nil
       loadAnimationIfNecessary()
     }
   }
@@ -287,6 +295,19 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     }
   }
 
+  /// Returns a new instance of this view, which will invoke the provided `loadAnimation` closure
+  /// whenever the `binding` value is updated.
+  ///
+  /// - Note: This function requires a valid `loadAnimation` closure provided during view initialization,
+  ///         otherwise the `loadAnimationTrigger` will have no effect.
+  /// - Note: The existing animation will be removed before calling `loadAnimation`,
+  ///         which will cause the `Placeholder` to be displayed until the new animation finishes loading.
+  public func loadAnimationTrigger<Value: Hashable>(_ binding: Binding<Value>) -> Self {
+    var copy = self
+    copy.loadAnimationTrigger = binding.map(transform: AnyHashable.init)
+    return copy
+  }
+
   /// Returns a view that updates the given binding each frame with the animation's `realtimeAnimationProgress`.
   /// The `LottieView` is wrapped in a `TimelineView` with the `.animation` schedule.
   ///  - This is a one-way binding. Its value is updated but never read.
@@ -334,6 +355,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   // MARK: Private
 
   @State private var animationSource: LottieAnimationSource?
+  private var loadAnimationTrigger: Binding<AnyHashable>?
   private var loadAnimation: (() async throws -> LottieAnimationSource?)?
   private var imageProvider: AnimationImageProvider?
   private var textProvider: AnimationTextProvider = DefaultTextProvider()

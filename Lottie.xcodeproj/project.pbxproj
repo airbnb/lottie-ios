@@ -816,6 +816,12 @@
 		A40460592832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
 		A404605A2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
 		A404605B2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
+		AB3278132A71BA0400A9C9F1 /* View+ValueChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3278122A71BA0400A9C9F1 /* View+ValueChanged.swift */; };
+		AB3278142A71BA3500A9C9F1 /* View+ValueChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3278122A71BA0400A9C9F1 /* View+ValueChanged.swift */; };
+		AB87F02C2A72F5A80091D7B8 /* View+ValueChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3278122A71BA0400A9C9F1 /* View+ValueChanged.swift */; };
+		AB87F02E2A72FA3A0091D7B8 /* Binding+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87F02D2A72FA3A0091D7B8 /* Binding+Map.swift */; };
+		AB87F02F2A72FA3A0091D7B8 /* Binding+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87F02D2A72FA3A0091D7B8 /* Binding+Map.swift */; };
+		AB87F0302A72FA3A0091D7B8 /* Binding+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87F02D2A72FA3A0091D7B8 /* Binding+Map.swift */; };
 		D453D8AB28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
 		D453D8AC28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
 		D453D8AD28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
@@ -1124,6 +1130,8 @@
 		82A552742A2FD44B00E47AC8 /* LottieAnimationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationLayer.swift; sourceTree = "<group>"; };
 		A1D5BAAB27C731A500777D06 /* DataURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataURLTests.swift; sourceTree = "<group>"; };
 		A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlendMode+Filter.swift"; sourceTree = "<group>"; };
+		AB3278122A71BA0400A9C9F1 /* View+ValueChanged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ValueChanged.swift"; sourceTree = "<group>"; };
+		AB87F02D2A72FA3A0091D7B8 /* Binding+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Map.swift"; sourceTree = "<group>"; };
 		D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationCache.swift; sourceTree = "<group>"; };
 		D453D8AE28FF9BC600D3F49C /* AnimationCacheProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationCacheProviderTests.swift; sourceTree = "<group>"; };
 		D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAnimationCache.swift; sourceTree = "<group>"; };
@@ -1818,7 +1826,9 @@
 		2E9C95D12822F43100677516 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				AB3278122A71BA0400A9C9F1 /* View+ValueChanged.swift */,
 				2E9C95D22822F43100677516 /* AnimationContext.swift */,
+				AB87F02D2A72FA3A0091D7B8 /* Binding+Map.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2336,6 +2346,7 @@
 				2E9C96BA2822F43100677516 /* KeypathSearchable.swift in Sources */,
 				2E9C963C2822F43100677516 /* AssetLibrary.swift in Sources */,
 				2E9C97022822F43100677516 /* PreCompLayer.swift in Sources */,
+				AB3278132A71BA0400A9C9F1 /* View+ValueChanged.swift in Sources */,
 				2E9C96EA2822F43100677516 /* SolidLayer.swift in Sources */,
 				08E207302A56014E002DCE17 /* WillDisplayProviding.swift in Sources */,
 				08E207482A56014E002DCE17 /* AnimatedProviding.swift in Sources */,
@@ -2365,6 +2376,7 @@
 				5721091B2910874A00169699 /* RoundedCornersNode.swift in Sources */,
 				2E9C95FA2822F43100677516 /* Star.swift in Sources */,
 				2E9C961E2822F43100677516 /* KeyedDecodingContainerExtensions.swift in Sources */,
+				AB87F02E2A72FA3A0091D7B8 /* Binding+Map.swift in Sources */,
 				08C001F32A46150D00AB54BA /* Archive+Helpers.swift in Sources */,
 				08C002022A46150D00AB54BA /* Archive+ReadingDeprecated.swift in Sources */,
 				2E9C96512822F43100677516 /* PreCompositionLayer.swift in Sources */,
@@ -2573,7 +2585,9 @@
 				2E9C96B22822F43100677516 /* NodeProperty.swift in Sources */,
 				08E2071C2A56014E002DCE17 /* EpoxySwiftUIHostingView.swift in Sources */,
 				2E9C965E2822F43100677516 /* MainThreadAnimationLayer.swift in Sources */,
+				AB87F02C2A72F5A80091D7B8 /* View+ValueChanged.swift in Sources */,
 				2E9C964F2822F43100677516 /* SolidCompositionLayer.swift in Sources */,
+				AB87F02F2A72FA3A0091D7B8 /* Binding+Map.swift in Sources */,
 				2E9C96402822F43100677516 /* Asset.swift in Sources */,
 				2E9C96FA2822F43100677516 /* BaseCompositionLayer.swift in Sources */,
 				2EAF5A9C27A0798700E00531 /* BundleImageProvider.macOS.swift in Sources */,
@@ -2903,6 +2917,7 @@
 				2E9C97042822F43100677516 /* PreCompLayer.swift in Sources */,
 				2E9C96EC2822F43100677516 /* SolidLayer.swift in Sources */,
 				08C002E82A46196300AB54BA /* Data+CompressionDeprecated.swift in Sources */,
+				AB3278142A71BA3500A9C9F1 /* View+ValueChanged.swift in Sources */,
 				2EAF5AA327A0798700E00531 /* AnimationSubview.macOS.swift in Sources */,
 				08E207322A56014E002DCE17 /* WillDisplayProviding.swift in Sources */,
 				08E2074A2A56014E002DCE17 /* AnimatedProviding.swift in Sources */,
@@ -2932,6 +2947,7 @@
 				5721091D2910874A00169699 /* RoundedCornersNode.swift in Sources */,
 				2E9C95FC2822F43100677516 /* Star.swift in Sources */,
 				2E9C96202822F43100677516 /* KeyedDecodingContainerExtensions.swift in Sources */,
+				AB87F0302A72FA3A0091D7B8 /* Binding+Map.swift in Sources */,
 				2E9C96532822F43100677516 /* PreCompositionLayer.swift in Sources */,
 				2EAF5AF427A0798700E00531 /* AnyValueProvider.swift in Sources */,
 				2E9C96652822F43100677516 /* CoreTextRenderLayer.swift in Sources */,

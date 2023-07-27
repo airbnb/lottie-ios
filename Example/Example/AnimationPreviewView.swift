@@ -9,11 +9,26 @@ import SwiftUI
 /// TODO: Implement functionality from UIKit `AnimationPreviewViewController`
 struct AnimationPreviewView: View {
 
+  // MARK: Lifecycle
+
+  init(animationSource: AnimationSource) {
+    self.animationSource = animationSource
+
+    switch animationSource {
+    case .remote(let urls, _):
+      _currentURLIndex = State(initialValue: urls.startIndex)
+      self.urls = urls
+    default:
+      _currentURLIndex = State(initialValue: 0)
+      urls = []
+    }
+  }
+
   // MARK: Internal
 
   enum AnimationSource {
     case local(animationPath: String)
-    case remote(url: URL, name: String)
+    case remote(urls: [URL], name: String)
 
     var name: String {
       switch self {
@@ -33,9 +48,11 @@ struct AnimationPreviewView: View {
         try await lottieSource()
       } placeholder: {
         LoadingIndicator()
+          .frame(width: 50, height: 50)
       }
       .imageProvider(.exampleAppSampleImages)
       .resizable()
+      .loadAnimationTrigger($currentURLIndex)
       .looping()
       .currentProgress(animationPlaying ? nil : sliderValue)
       .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
@@ -54,12 +71,20 @@ struct AnimationPreviewView: View {
     .navigationTitle(animationSource.name.components(separatedBy: "/").last!)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.secondaryBackground)
+    .onReceive(timer) { _ in
+      updateIndex()
+    }
   }
 
   // MARK: Private
 
+  /// Used for remote animations only, when more than one URL is provided we loop over the urls every 2 seconds.
+  private let timer = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
+  private let urls: [URL]
+
   @State private var animationPlaying = true
   @State private var sliderValue: AnimationProgressTime = 0
+  @State private var currentURLIndex: Int
 
   private func lottieSource() async throws -> LottieAnimationSource? {
     switch animationSource {
@@ -70,10 +95,16 @@ struct AnimationPreviewView: View {
         let lottie = try await DotLottieFile.named(name)
         return .dotLottieFile(lottie)
       }
-    case .remote(let url, _):
-      let animation = await LottieAnimation.loadedFrom(url: url)
+    case .remote:
+      let animation = await LottieAnimation.loadedFrom(url: urls[currentURLIndex])
       return animation.map(LottieAnimationSource.lottieAnimation)
     }
+  }
+
+  private func updateIndex() {
+    let currentIndex = currentURLIndex
+    let nextIndex = currentIndex == urls.index(before: urls.endIndex) ? urls.startIndex : currentIndex + 1
+    currentURLIndex = nextIndex
   }
 }
 
