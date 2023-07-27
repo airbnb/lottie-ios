@@ -26,13 +26,8 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimation`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
   /// If you wish to call `loadAnimation` at a different time, you can use the `loadAnimationTrigger` chain function.
-  public init(
-    _ loadAnimation: @escaping () async throws -> LottieAnimation?)
-    where Placeholder == EmptyView
-  {
-    self.init(
-      loadAnimation,
-      placeholder: EmptyView.init)
+  public init(_ loadAnimation: @escaping () async throws -> LottieAnimation?) where Placeholder == EmptyView {
+    self.init(loadAnimation, placeholder: EmptyView.init)
   }
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimation`.
@@ -56,14 +51,12 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   public init(
     _ loadDotLottieFile: @escaping () async throws -> DotLottieFile?) where Placeholder == EmptyView
   {
-    self.init(
-      loadDotLottieFile,
-      placeholder: EmptyView.init)
+    self.init(loadDotLottieFile, placeholder: EmptyView.init)
   }
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `DotLottieFile`.
   /// The `loadDotLottieFile` closure is called exactly once in `onAppear`.
-  /// If you wish to call `loadAnimation` at a different time, you can use the `loadAnimationTrigger` chain function.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
   public init(
     _ loadDotLottieFile: @escaping () async throws -> DotLottieFile?,
@@ -307,9 +300,10 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   /// Returns a new instance of this view, which will invoke the provided `loadAnimation` closure
   /// whenever the `binding` value is updated.
   ///
-  /// - Note: This function requires a valid `loadAnimation` closure provided during view initialization.
-  /// - Warning: The existing animation will be removed before calling `loadAnimation`,
-  ///            potentially rendering the provided `Placeholder`.
+  /// - Note: This function requires a valid `loadAnimation` closure provided during view initialization,
+  ///         otherwise the `loadAnimationTrigger` will have no effect.
+  /// - Note: The existing animation will be removed before calling `loadAnimation`,
+  ///         which will cause the `Placeholder` to be displayed until the new animation finishes loading.
   public func loadAnimationTrigger<Value: Hashable>(_ binding: Binding<Value>) -> Self {
     var copy = self
     copy.loadAnimationTrigger = binding.map(transform: AnyHashable.init)
