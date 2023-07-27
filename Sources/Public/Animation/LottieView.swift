@@ -15,44 +15,35 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   public init(animation: LottieAnimation?) where Placeholder == EmptyView {
     _animationSource = State(initialValue: animation.map(LottieAnimationSource.lottieAnimation))
     placeholder = nil
-    loadAnimationTrigger = .constant(LoadReference.constantSource)
   }
 
   /// Creates a `LottieView` that displays the given `DotLottieFile`
   public init(dotLottieFile: DotLottieFile?) where Placeholder == EmptyView {
     _animationSource = State(initialValue: dotLottieFile.map(LottieAnimationSource.dotLottieFile))
     placeholder = nil
-    loadAnimationTrigger = .constant(LoadReference.constantSource)
   }
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimation`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
-  /// - Parameters:
-  ///   - loadAnimationTrigger: `Binding` that  triggers a new call to `loadAnimation` when a new value is propagated
-  ///   - loadAnimation: Closure that provides an animation asynchronously
+  /// If you wish to call `loadAnimation` at a different time, you can use the `loadAnimationTrigger` chain function.
   public init(
-    loadAnimationTrigger: Binding<AnyHashable> = .constant(LoadReference.constantSource),
     _ loadAnimation: @escaping () async throws -> LottieAnimation?)
     where Placeholder == EmptyView
   {
     self.init(
-      loadAnimationTrigger: loadAnimationTrigger,
       loadAnimation,
       placeholder: EmptyView.init)
   }
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimation`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` at a different time, you can use the `loadAnimationTrigger` chain function.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
-  /// - Parameters:
-  ///   - loadAnimationTrigger: `Binding` that  triggers a new call to `loadAnimation` when a new value is propagated
-  ///   - loadAnimation: Closure that provides an animation asynchronously
   public init(
-    loadAnimationTrigger: Binding<AnyHashable> = .constant(LoadReference.constantSource),
     _ loadAnimation: @escaping () async throws -> LottieAnimation?,
     @ViewBuilder placeholder: @escaping (() -> Placeholder))
   {
-    self.init(loadAnimationTrigger: loadAnimationTrigger) {
+    self.init {
       try await loadAnimation().map(LottieAnimationSource.lottieAnimation)
     } placeholder: {
       placeholder()
@@ -61,31 +52,24 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `DotLottieFile`.
   /// The `loadDotLottieFile` closure is called exactly once in `onAppear`.
-  /// - Parameters:
-  ///   - loadAnimationTrigger: `Binding` that  triggers a new call to `loadAnimation` when a new value is propagated
-  ///   - loadAnimation: Closure that provides an animation asynchronously
+  /// If you wish to call `loadAnimation` at a different time, you can use the `loadAnimationTrigger` chain function.
   public init(
-    loadAnimationTrigger: Binding<AnyHashable> = .constant(LoadReference.constantSource),
     _ loadDotLottieFile: @escaping () async throws -> DotLottieFile?) where Placeholder == EmptyView
   {
     self.init(
-      loadAnimationTrigger: loadAnimationTrigger,
       loadDotLottieFile,
       placeholder: EmptyView.init)
   }
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `DotLottieFile`.
   /// The `loadDotLottieFile` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` at a different time, you can use the `loadAnimationTrigger` chain function.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
-  /// - Parameters:
-  ///   - loadAnimationTrigger: `Binding` that  triggers a new call to `loadAnimation` when a new value is propagated
-  ///   - loadAnimation: Closure that provides an animation asynchronously
   public init(
-    loadAnimationTrigger: Binding<AnyHashable> = .constant(LoadReference.constantSource),
     _ loadDotLottieFile: @escaping () async throws -> DotLottieFile?,
     @ViewBuilder placeholder: @escaping (() -> Placeholder))
   {
-    self.init(loadAnimationTrigger: loadAnimationTrigger) {
+    self.init {
       try await loadDotLottieFile().map(LottieAnimationSource.dotLottieFile)
     } placeholder: {
       placeholder()
@@ -94,26 +78,15 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimationSource`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` at a different time, you can use the `loadAnimationTrigger` chain function.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
-  /// - Parameters:
-  ///   - loadAnimationTrigger: `Binding` that  triggers a new call to `loadAnimation` when a new value is propagated
-  ///   - loadAnimation: Closure that provides an animation asynchronously
   public init(
-    loadAnimationTrigger: Binding<AnyHashable> = .constant(LoadReference.constantSource),
     loadAnimation: @escaping () async throws -> LottieAnimationSource?,
     @ViewBuilder placeholder: @escaping () -> Placeholder)
   {
     self.loadAnimation = loadAnimation
     self.placeholder = placeholder
-    self.loadAnimationTrigger = loadAnimationTrigger
     _animationSource = State(initialValue: nil)
-  }
-
-  // MARK: Public
-
-  /// Token used when no `loadAnimationTrigger` is provided
-  public enum LoadReference {
-    case constantSource
   }
 
   public var body: some View {
@@ -144,7 +117,8 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     .onAppear {
       loadAnimationIfNecessary()
     }
-    .valueChanged(value: loadAnimationTrigger.wrappedValue) { _ in
+    .valueChanged(value: loadAnimationTrigger?.wrappedValue) { _ in
+      animationSource = nil
       loadAnimationIfNecessary()
     }
   }
@@ -328,6 +302,18 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     }
   }
 
+  /// Returns a new instance of this view, which will invoke the provided `loadAnimation` closure
+  /// whenever the `binding` value is updated.
+  ///
+  /// - Note: This function requires a valid `loadAnimation` closure provided during view initialization.
+  /// - Warning: The existing animation will be removed before calling `loadAnimation`,
+  ///            potentially rendering the provided `Placeholder`.
+  public func loadAnimationTrigger<Value: Hashable>(_ binding: Binding<Value>) -> Self {
+    var copy = self
+    copy.loadAnimationTrigger = binding.map(transform: AnyHashable.init)
+    return copy
+  }
+
   /// Returns a view that updates the given binding each frame with the animation's `realtimeAnimationProgress`.
   /// The `LottieView` is wrapped in a `TimelineView` with the `.animation` schedule.
   ///  - This is a one-way binding. Its value is updated but never read.
@@ -375,7 +361,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   // MARK: Private
 
   @State private var animationSource: LottieAnimationSource?
-  private var loadAnimationTrigger: Binding<AnyHashable>
+  private var loadAnimationTrigger: Binding<AnyHashable>?
   private var loadAnimation: (() async throws -> LottieAnimationSource?)?
   private var imageProvider: AnimationImageProvider?
   private var textProvider: AnimationTextProvider = DefaultTextProvider()
@@ -386,7 +372,10 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   private let placeholder: (() -> Placeholder)?
 
   private func loadAnimationIfNecessary() {
-    guard let loadAnimation = loadAnimation else { return }
+    guard
+      let loadAnimation = loadAnimation,
+      animationSource == nil
+    else { return }
 
     Task {
       do {

@@ -44,7 +44,7 @@ struct AnimationPreviewView: View {
 
   var body: some View {
     VStack {
-      LottieView(loadAnimationTrigger: fetchTrigger) {
+      LottieView() {
         try await lottieSource()
       } placeholder: {
         LoadingIndicator()
@@ -52,6 +52,7 @@ struct AnimationPreviewView: View {
       }
       .imageProvider(.exampleAppSampleImages)
       .resizable()
+      .loadAnimationTrigger($currentURLIndex)
       .looping()
       .currentProgress(animationPlaying ? nil : sliderValue)
       .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
@@ -84,15 +85,6 @@ struct AnimationPreviewView: View {
   @State private var animationPlaying = true
   @State private var sliderValue: AnimationProgressTime = 0
   @State private var currentURLIndex: Int
-
-  private var fetchTrigger: Binding<AnyHashable> {
-    switch animationSource {
-    case .local:
-      return .constant(currentURLIndex)
-    case .remote:
-      return $currentURLIndex.mapGetter(transform: AnyHashable.init)
-    }
-  }
 
   private func lottieSource() async throws -> LottieAnimationSource? {
     switch animationSource {
@@ -148,16 +140,5 @@ struct LoadingIndicator: View {
       .onAppear {
         animating = true
       }
-  }
-}
-
-extension Binding {
-
-  func mapGetter<Transformed>(transform: @escaping (Value) -> Transformed) -> Binding<Transformed> {
-    .init {
-      transform(wrappedValue)
-    } set: { _ in
-      fatalError("Mapping a binding is not symmetric")
-    }
   }
 }
