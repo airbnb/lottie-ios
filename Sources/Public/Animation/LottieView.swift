@@ -48,9 +48,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   /// Creates a `LottieView` that asynchronously loads and displays the given `DotLottieFile`.
   /// The `loadDotLottieFile` closure is called exactly once in `onAppear`.
   /// If you wish to call `loadAnimation` at a different time, you can use the `loadAnimationTrigger` chain function.
-  public init(
-    _ loadDotLottieFile: @escaping () async throws -> DotLottieFile?) where Placeholder == EmptyView
-  {
+  public init(_ loadDotLottieFile: @escaping () async throws -> DotLottieFile?) where Placeholder == EmptyView {
     self.init(loadDotLottieFile, placeholder: EmptyView.init)
   }
 
