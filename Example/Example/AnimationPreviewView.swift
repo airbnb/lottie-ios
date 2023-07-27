@@ -44,7 +44,7 @@ struct AnimationPreviewView: View {
 
   var body: some View {
     VStack {
-      LottieView() {
+      LottieView {
         try await lottieSource()
       } placeholder: {
         LoadingIndicator()

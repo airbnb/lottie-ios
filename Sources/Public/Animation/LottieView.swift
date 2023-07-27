@@ -89,6 +89,8 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     _animationSource = State(initialValue: nil)
   }
 
+  // MARK: Public
+
   public var body: some View {
     ZStack {
       if let animationSource = animationSource {
