@@ -22,7 +22,7 @@ final class RectNodeProperties: NodePropertyMap, KeypathSearchable {
     cornerRadius = NodeProperty(provider: KeyframeInterpolator(keyframes: rectangle.cornerRadius.keyframes))
 
     keypathProperties = [
-      "Position" : position,
+      PropertyName.position.rawValue : position,
       "Size" : size,
       "Roundness" : cornerRadius,
     ]

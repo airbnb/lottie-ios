@@ -90,6 +90,32 @@ public enum CompatibleRenderingEngineOption: Int {
   }
 }
 
+/// An Objective-C compatible version of `LottieBackgroundBehavior`.
+@objc
+public enum CompatibleBackgroundBehavior: Int {
+  /// Stop the animation and reset it to the beginning of its current play time. The completion block is called.
+  case stop
+
+  /// Pause the animation in its current state. The completion block is called.
+  case pause
+
+  /// Pause the animation and restart it when the application moves to the foreground.
+  /// The completion block is stored and called when the animation completes.
+  ///  - This is the default when using the Main Thread rendering engine.
+  case pauseAndRestore
+
+  /// Stops the animation and sets it to the end of its current play time. The completion block is called.
+  case forceFinish
+
+  /// The animation continues playing in the background.
+  ///  - This is the default when using the Core Animation rendering engine.
+  ///    Playing an animation using the Core Animation engine doesn't come with any CPU overhead,
+  ///    so using `.continuePlaying` avoids the need to stop and then resume the animation
+  ///    (which does come with some CPU overhead).
+  ///  - This mode should not be used with the Main Thread rendering engine.
+  case continuePlaying
+}
+
 /// An Objective-C compatible wrapper around Lottie's LottieAnimationView.
 @objc
 public final class CompatibleAnimationView: UIView {
@@ -254,6 +280,38 @@ public final class CompatibleAnimationView: UIView {
   @objc
   public var isAnimationPlaying: Bool {
     animationView.isAnimationPlaying
+  }
+
+  @objc
+  public var backgroundMode: CompatibleBackgroundBehavior {
+    get {
+      switch animationView.backgroundBehavior {
+      case .stop:
+        return .stop
+      case .pause:
+        return .pause
+      case .pauseAndRestore:
+        return .pauseAndRestore
+      case .forceFinish:
+        return .forceFinish
+      case .continuePlaying:
+        return .continuePlaying
+      }
+    }
+    set {
+      switch newValue {
+      case .stop:
+        animationView.backgroundBehavior = .stop
+      case .pause:
+        animationView.backgroundBehavior = .pause
+      case .pauseAndRestore:
+        animationView.backgroundBehavior = .pauseAndRestore
+      case .forceFinish:
+        animationView.backgroundBehavior = .forceFinish
+      case .continuePlaying:
+        animationView.backgroundBehavior = .continuePlaying
+      }
+    }
   }
 
   @objc

@@ -164,15 +164,6 @@ final class ShapeTransform: ShapeItem {
   /// Skew Axis
   let skewAxis: KeyframeGroup<LottieVector1D>
 
-  /// Whether or not this transform has a non-zero skew value
-  var hasSkew: Bool {
-    guard !skew.keyframes.isEmpty, !skewAxis.keyframes.isEmpty else {
-      return false
-    }
-
-    return skew.keyframes.contains(where: { $0.value.cgFloatValue != 0 })
-  }
-
   override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)

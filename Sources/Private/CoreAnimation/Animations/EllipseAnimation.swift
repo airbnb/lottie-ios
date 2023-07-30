@@ -14,7 +14,7 @@ extension CAShapeLayer {
   {
     try addAnimation(
       for: .path,
-      keyframes: ellipse.combinedKeyframes().keyframes,
+      keyframes: ellipse.combinedKeyframes(),
       value: { keyframe in
         BezierPath.ellipse(
           size: keyframe.size.sizeValue,

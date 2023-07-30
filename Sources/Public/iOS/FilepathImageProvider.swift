@@ -56,4 +56,10 @@ public class FilepathImageProvider: AnimationImageProvider {
 
   let filepath: URL
 }
+
+extension FilepathImageProvider: Equatable {
+  public static func ==(_ lhs: FilepathImageProvider, _ rhs: FilepathImageProvider) -> Bool {
+    lhs.filepath == rhs.filepath
+  }
+}
 #endif

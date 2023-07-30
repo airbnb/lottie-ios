@@ -40,13 +40,13 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
     }
     keypathProperties = [
       "Anchor Point" : anchor,
-      "Position" : position,
-      "Scale" : scale,
-      "Rotation" : rotationZ,
+      PropertyName.position.rawValue : position,
+      PropertyName.scale.rawValue : scale,
+      PropertyName.rotation.rawValue : rotationZ,
       "Rotation X" : rotationX,
       "Rotation Y" : rotationY,
       "Rotation Z" : rotationZ,
-      "Opacity" : opacity,
+      PropertyName.opacity.rawValue : opacity,
       "Skew" : skew,
       "Skew Axis" : skewAxis,
     ]

@@ -14,7 +14,7 @@ extension CAShapeLayer {
   {
     try addAnimation(
       for: .path,
-      keyframes: combinedShapes.shapes.keyframes,
+      keyframes: combinedShapes.shapes,
       value: { paths in
         let combinedPath = CGMutablePath()
         for path in paths {

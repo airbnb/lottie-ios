@@ -21,12 +21,33 @@ final class AnimationKeypathTests: XCTestCase {
     XCTAssertTrue(keypath.matches("Layer.**.Color"))
     XCTAssertTrue(keypath.matches("Layer.Shape Group.*.Color"))
     XCTAssertTrue(keypath.matches("Layer.*.*.Color"))
+    XCTAssertTrue(keypath.matches("**"))
+    XCTAssertTrue(keypath.matches("Layer.**"))
+    XCTAssertTrue(keypath.matches("Layer.**.Color"))
+    XCTAssertTrue(keypath.matches("Layer.**.Shape Group.**"))
+    XCTAssertTrue(keypath.matches("**.Layer.Shape Group.Stroke 1.Color"))
+    XCTAssertTrue(keypath.matches("**.Layer.Shape Group.Stroke 1.**.Color"))
 
     XCTAssertFalse(keypath.matches("Layer.*.Color"))
-    XCTAssertFalse(keypath.matches("**.Layer.Shape Group.Stroke 1.Color"))
     XCTAssertFalse(keypath.matches("*.Layer.Shape Group.Stroke 1.Color"))
+    XCTAssertFalse(keypath.matches("*.Layer.Shape Group.Stroke 1.*.Color"))
     XCTAssertFalse(keypath.matches("Layer.Shape Group.Stroke 1.Color.*"))
     XCTAssertFalse(keypath.matches("Layer.Shape Group.Stroke 1.Color.**"))
+
+    let keypath2 = AnimationKeypath(keypath: "pin.Group 1.fill-primary.Color")
+    XCTAssertTrue(keypath2.matches("**.*primary.**.Color"))
+    XCTAssertTrue(keypath2.matches("**.*primary.Color"))
+    XCTAssertFalse(keypath2.matches("*primary.**.Color"))
+
+    let keypath3 = AnimationKeypath(keypath: "fill-primary.Stroke 1.Color")
+    XCTAssertTrue(keypath3.matches("**.*primary.**.Color"))
+    XCTAssertFalse(keypath3.matches("**.*primary.Color"))
+    XCTAssertTrue(keypath3.matches("*primary.**.Color"))
+
+    let keypath4 = AnimationKeypath(keypath: "Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Stroke 1.Color")
+    XCTAssertTrue(keypath4.matches("**.Stroke 1.**.Color"))
+    XCTAssertTrue(keypath4.matches("**.Stroke 1.Color"))
+    XCTAssertFalse(keypath4.matches("**.Stroke 1.*.Color"))
   }
 
   func testLayerForKeypath() {
@@ -95,17 +116,10 @@ final class AnimationKeypathTests: XCTestCase {
   }
 
   private func hierarchyKeypaths(animationName: String, configuration: LottieConfiguration) async -> [String] {
-    var printedMessages = [String]()
-    let logger = LottieLogger(info: { message in
-      printedMessages.append(message())
-    })
-
     let animationView = await SnapshotConfiguration.makeAnimationView(
       for: animationName,
-      configuration: configuration,
-      logger: logger)
-    animationView?.logHierarchyKeypaths()
-    return Array(printedMessages[1...])
+      configuration: configuration)
+    return animationView?.allHierarchyKeypaths() ?? []
   }
 
 }

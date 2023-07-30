@@ -47,6 +47,7 @@ extension SnapshotConfiguration {
     "Nonanimating/FirstText": .precision(0.99),
     "Nonanimating/verifyLineHeight": .precision(0.99),
     "Nonanimating/blend_mode_test": .precision(0.99),
+    "Issues/issue_2066": .precision(0.9),
 
     /// Test cases for the `AnimationKeypath` / `AnyValueProvider` system
     "Nonanimating/keypathTest": .customValueProviders([
@@ -65,8 +66,25 @@ extension SnapshotConfiguration {
       ]),
     ]),
 
+    "Issues/issue_1837_opacity": .customValueProviders([
+      AnimationKeypath(keypath: "Dark Gray Solid 1.Transform.Opacity"): FloatValueProvider(10),
+    ]),
+
+    "Issues/issue_1837_scale_rotation": .customValueProviders([
+      AnimationKeypath(keypath: "H2.Transform.Scale"): PointValueProvider(CGPoint(x: 200, y: 150)),
+      AnimationKeypath(keypath: "H2.Transform.Rotation"): FloatValueProvider(90),
+    ]),
+
+    "Issues/issue_2042": .customValueProviders([
+      AnimationKeypath(keypath: "MASTER.Transform.Position"): PointValueProvider(CGPoint(x: 214, y: 120)),
+    ]),
+
     "Issues/issue_1664": .customValueProviders([
       AnimationKeypath(keypath: "**.base_color.**.Color"): ColorValueProvider(.black),
+    ]),
+
+    "Issues/issue_1847": .customValueProviders([
+      AnimationKeypath(keypath: "**.Stroke 1.**.Color"): ColorValueProvider(.red),
     ]),
 
     // Test cases for `AnimatedImageProvider`
@@ -175,5 +193,6 @@ extension SnapshotConfiguration {
 extension LottieColor {
   static let black = LottieColor(r: 0, g: 0, b: 0, a: 1)
   static let red = LottieColor(r: 1, g: 0, b: 0, a: 1)
+  static let blue = LottieColor(r: 0, g: 0, b: 1, a: 1)
 }
 #endif

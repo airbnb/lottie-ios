@@ -40,7 +40,7 @@ extension CALayer {
   func addOpacityAnimation(for opacity: OpacityAnimationModel, context: LayerAnimationContext) throws {
     try addAnimation(
       for: .opacity,
-      keyframes: opacity.opacity.keyframes,
+      keyframes: opacity.opacity,
       value: {
         // Lottie animation files express opacity as a numerical percentage value
         // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values

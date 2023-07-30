@@ -157,4 +157,23 @@ public final class LottieAnimation: Codable, DictionaryInitializable {
   /// Markers
   let markers: [Marker]?
   let markerMap: [String: Marker]?
+
+  /// The marker to use if "reduced motion" is enabled.
+  /// Supported marker names are case insensitive, and include:
+  ///  - reduced motion
+  ///  - reducedMotion
+  ///  - reduced_motion
+  ///  - reduced-motion
+  lazy private(set) var reducedMotionMarker: Marker? = {
+    let allowedReducedMotionMarkerNames = Set([
+      "reduced motion",
+      "reduced_motion",
+      "reduced-motion",
+      "reducedmotion",
+    ])
+
+    return markers?.first(where: { marker in
+      allowedReducedMotionMarkerNames.contains(marker.name.lowercased())
+    })
+  }()
 }

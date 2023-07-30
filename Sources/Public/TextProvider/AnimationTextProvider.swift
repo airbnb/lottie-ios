@@ -40,6 +40,14 @@ public final class DictionaryTextProvider: AnimationTextProvider {
   let values: [String: String]
 }
 
+// MARK: Equatable
+
+extension DictionaryTextProvider: Equatable {
+  public static func ==(_ lhs: DictionaryTextProvider, _ rhs: DictionaryTextProvider) -> Bool {
+    lhs.values == rhs.values
+  }
+}
+
 // MARK: - DefaultTextProvider
 
 /// Default text provider. Uses text in the animation file
@@ -53,5 +61,13 @@ public final class DefaultTextProvider: AnimationTextProvider {
 
   public func textFor(keypathName _: String, sourceText: String) -> String {
     sourceText
+  }
+}
+
+// MARK: Equatable
+
+extension DefaultTextProvider: Equatable {
+  public static func ==(_: DefaultTextProvider, _: DefaultTextProvider) -> Bool {
+    true
   }
 }

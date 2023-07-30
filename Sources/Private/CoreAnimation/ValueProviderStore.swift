@@ -26,11 +26,17 @@ final class ValueProviderStore {
       because that would require calling the closure on the main thread once per frame.
       """)
 
-    // TODO: Support more value types
-    logger.assert(
-      keypath.keys.last == PropertyName.color.rawValue,
-      "The Core Animation rendering engine currently only supports customizing color values")
+    let supportedProperties = PropertyName.allCases.map { $0.rawValue }
+    let propertyBeingCustomized = keypath.keys.last ?? ""
 
+    logger.assert(
+      supportedProperties.contains(propertyBeingCustomized),
+      """
+      The Core Animation rendering engine currently doesn't support customizing "\(propertyBeingCustomized)" \
+      properties. Supported properties are: \(supportedProperties.joined(separator: ", ")).
+      """)
+
+    valueProviders.removeAll(where: { $0.keypath == keypath })
     valueProviders.append((keypath: keypath, valueProvider: valueProvider))
   }
 
@@ -42,9 +48,7 @@ final class ValueProviderStore {
     context: LayerAnimationContext)
     throws -> KeyframeGroup<Value>?
   {
-    if context.logHierarchyKeypaths {
-      context.logger.info(keypath.fullPath)
-    }
+    context.recordHierarchyKeypath?(keypath.fullPath)
 
     guard let anyValueProvider = valueProvider(for: keypath) else {
       return nil
@@ -90,10 +94,9 @@ final class ValueProviderStore {
   // MARK: Private
 
   private let logger: LottieLogger
-
   private var valueProviders = [(keypath: AnimationKeypath, valueProvider: AnyValueProvider)]()
 
-  /// Retrieves the most-recently-registered Value Provider that matches the given keypat
+  /// Retrieves the most-recently-registered Value Provider that matches the given keypath.
   private func valueProvider(for keypath: AnimationKeypath) -> AnyValueProvider? {
     // Find the last keypath matching the given keypath,
     // so we return the value provider that was registered most-recently
@@ -125,13 +128,21 @@ extension AnimationKeypath {
       + keypath.keys.joined(separator: "\\.") // match this keypath, escaping "." characters
       + "$" // match the end of the string
 
-    // ** wildcards match anything
-    //  - "**.Color" matches both "Layer 1.Color" and "Layer 1.Layer 2.Color"
-    regex = regex.replacingOccurrences(of: "**", with: ".+")
+    // Replace the ** and * wildcards with markers that are guaranteed to be unique
+    // and won't conflict with regex syntax (e.g. `.*`).
+    let doubleWildcardMarker = UUID().uuidString
+    let singleWildcardMarker = UUID().uuidString
+    regex = regex.replacingOccurrences(of: "**", with: doubleWildcardMarker)
+    regex = regex.replacingOccurrences(of: "*", with: singleWildcardMarker)
 
-    // * wildcards match any individual path component
+    // "**" wildcards match zero or more path segments separated by "\\."
+    //  - "**.Color" matches any of "Color", "Layer 1.Color", and "Layer 1.Layer 2.Color"
+    regex = regex.replacingOccurrences(of: "\(doubleWildcardMarker)\\.", with: ".*")
+    regex = regex.replacingOccurrences(of: doubleWildcardMarker, with: ".*")
+
+    // "*" wildcards match exactly one path component
     //  - "*.Color" matches "Layer 1.Color" but not "Layer 1.Layer 2.Color"
-    regex = regex.replacingOccurrences(of: "*", with: "[^.]+")
+    regex = regex.replacingOccurrences(of: singleWildcardMarker, with: "[^.]+")
 
     return fullPath.range(of: regex, options: .regularExpression) != nil
   }

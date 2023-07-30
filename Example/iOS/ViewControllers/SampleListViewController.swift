@@ -4,6 +4,7 @@
 import Epoxy
 import EpoxyCollectionView
 import Lottie
+import SwiftUI
 import UIKit
 
 /// Displays a list of all of the sample Lottie animations
@@ -58,6 +59,7 @@ final class SampleListViewController: CollectionViewController {
 
     if isTopLevel {
       demoLinks
+      remoteAnimationLinks
     }
   }
 
@@ -82,9 +84,17 @@ final class SampleListViewController: CollectionViewController {
             animationName: animationPath,
             title: animationName))
           .didSelect { [weak self] context in
-            self?.show(
-              AnimationPreviewViewController(animationPath),
-              sender: context.view)
+            let previewViewController: UIViewController
+            switch Configuration.previewImplementation {
+            case .swiftUI:
+              previewViewController = UIHostingController(
+                rootView: AnimationPreviewView(animationSource: .local(animationPath: animationPath)))
+
+            case .uiKit:
+              previewViewController = AnimationPreviewViewController(animationPath)
+            }
+
+            self?.show(previewViewController, sender: context.view)
           }
       }
   }
@@ -115,18 +125,39 @@ final class SampleListViewController: CollectionViewController {
       }
   }
 
+  @ItemModelBuilder
+  private var remoteAnimationLinks: [ItemModeling] {
+    LinkView.itemModel(
+      dataID: "Remote animations",
+      content: .init(animationName: nil, title: "Remote animations"))
+      .didSelect { [weak self] _ in
+        let remoteAnimationsDemo = UIHostingController(rootView: RemoteAnimationsDemoView(wrapInNavStack: true))
+        self?.present(remoteAnimationsDemo, animated: true)
+      }
+  }
+
   private func configureSettingsMenu() {
     navigationItem.rightBarButtonItem = UIBarButtonItem(
       title: "Settings",
       image: UIImage(systemName: "gear")!,
       primaryAction: nil,
-      menu: UIMenu(
-        title: "Rendering Engine",
-        children: [
-          action(for: .automatic),
-          action(for: .mainThread),
-          action(for: .coreAnimation),
-        ]))
+      menu: UIMenu(children: [
+        UIMenu(
+          title: "Rendering Engine",
+          options: .displayInline,
+          children: [
+            action(for: .automatic),
+            action(for: .mainThread),
+            action(for: .coreAnimation),
+          ]),
+        UIMenu(
+          title: "Framework",
+          options: .displayInline,
+          children: [
+            action(for: .swiftUI),
+            action(for: .uiKit),
+          ]),
+      ]))
   }
 
   private func action(for renderingEngineOption: RenderingEngineOption) -> UIAction {
@@ -135,6 +166,16 @@ final class SampleListViewController: CollectionViewController {
       state: Configuration.renderingEngineOption == renderingEngineOption ? .on : .off,
       handler: { [weak self] _ in
         Configuration.renderingEngineOption = renderingEngineOption
+        self?.configureSettingsMenu()
+      })
+  }
+
+  private func action(for previewImplementation: AnimationPreviewImplementation) -> UIAction {
+    UIAction(
+      title: previewImplementation.rawValue,
+      state: Configuration.previewImplementation == previewImplementation ? .on : .off,
+      handler: { [weak self] _ in
+        Configuration.previewImplementation = previewImplementation
         self?.configureSettingsMenu()
       })
   }

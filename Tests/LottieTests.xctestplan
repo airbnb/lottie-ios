@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "ACF752FE-9CA2-40B2-9FBA-90AD944E5044",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:..\/Lottie.xcodeproj",
+        "identifier" : "2E8040AB27A072B8006E74CB",
+        "name" : "LottieTests"
+      }
+    }
+  ],
+  "version" : 1
+}

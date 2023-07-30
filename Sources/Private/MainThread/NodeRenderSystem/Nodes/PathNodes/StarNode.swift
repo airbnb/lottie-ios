@@ -33,12 +33,12 @@ final class StarNodeProperties: NodePropertyMap, KeypathSearchable {
     rotation = NodeProperty(provider: KeyframeInterpolator(keyframes: star.rotation.keyframes))
     points = NodeProperty(provider: KeyframeInterpolator(keyframes: star.points.keyframes))
     keypathProperties = [
-      "Position" : position,
+      PropertyName.position.rawValue : position,
       "Outer Radius" : outerRadius,
       "Outer Roundedness" : outerRoundedness,
       "Inner Radius" : innerRadius,
       "Inner Roundedness" : innerRoundedness,
-      "Rotation" : rotation,
+      PropertyName.rotation.rawValue : rotation,
       "Points" : points,
     ]
     properties = Array(keypathProperties.values)
