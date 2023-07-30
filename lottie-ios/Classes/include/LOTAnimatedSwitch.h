@@ -1,0 +1,1 @@
+../PublicHeaders/LOTAnimatedSwitch.h
