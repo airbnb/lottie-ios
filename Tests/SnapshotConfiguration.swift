@@ -91,7 +91,14 @@ extension SnapshotConfiguration {
     "Nonanimating/_dog": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog.png")),
 
     // Test cases for `AnimatedTextProvider`
-    "Issues/issue_1722": .customTextProvider(HardcodedTextProvider(text: "Bounce-bounce")),
+    "Issues/issue_1722": .customTextProvider(DictionaryTextProvider([
+      "Animation text layer": "Bounce-bounce"
+    ])),
+    
+    "Issues/issue_1949": .customTextProvider(DictionaryTextProvider([
+      "sender_username": "Marley",
+      "custom_text": "Woof",
+    ])),
 
     // Test cases for `AnimationFontProvider`
     "Nonanimating/Text_Glyph": .customFontProvider(HardcodedFontProvider(font: UIFont(name: "Chalkduster", size: 36)!)),

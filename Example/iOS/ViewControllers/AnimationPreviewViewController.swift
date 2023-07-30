@@ -84,6 +84,7 @@ class AnimationPreviewViewController: UIViewController {
   @objc
   func updateAnimation(sender: UISlider) {
     animationView.currentProgress = CGFloat(sender.value)
+
   }
 
   @objc
@@ -106,7 +107,12 @@ class AnimationPreviewViewController: UIViewController {
   // MARK: Private
 
   private let animationName: String
-  private let animationView = LottieAnimationView()
+  private let animationView = LottieAnimationView(
+    animation: nil,
+    textProvider: DictionaryTextProvider([
+      "sender_username": "Marley",
+      "custom_text": "Woof",
+    ]))
   private let slider = UISlider()
   private let engineLabel = UILabel()
 

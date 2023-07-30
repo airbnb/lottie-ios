@@ -37,6 +37,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     let layers = animation.layers.initializeCompositionLayers(
       assetLibrary: animation.assetLibrary,
       layerImageProvider: layerImageProvider,
+      layerTextProvider: layerTextProvider,
       textProvider: textProvider,
       fontProvider: fontProvider,
       frameRate: CGFloat(animation.framerate))

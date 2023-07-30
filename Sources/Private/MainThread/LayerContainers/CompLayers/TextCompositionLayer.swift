@@ -80,8 +80,8 @@ final class TextCompositionLayer: CompositionLayer {
     rootNode = nil
     textDocument = nil
 
-    textProvider = DefaultTextProvider()
-    fontProvider = DefaultFontProvider()
+    textProvider = layer.textProvider
+    fontProvider = layer.fontProvider
 
     super.init(layer: layer)
   }

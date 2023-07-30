@@ -13,6 +13,7 @@ extension Array where Element == LayerModel {
   func initializeCompositionLayers(
     assetLibrary: AssetLibrary?,
     layerImageProvider: LayerImageProvider,
+    layerTextProvider: LayerTextProvider,
     textProvider: AnimationTextProvider,
     fontProvider: AnimationFontProvider,
     frameRate: CGFloat) -> [CompositionLayer]
@@ -45,6 +46,7 @@ extension Array where Element == LayerModel {
           precomp: precompLayer,
           asset: precompAsset,
           layerImageProvider: layerImageProvider,
+          layerTextProvider: layerTextProvider,
           textProvider: textProvider,
           fontProvider: fontProvider,
           assetLibrary: assetLibrary,
