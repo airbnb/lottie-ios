@@ -40,12 +40,18 @@ final class TextLayer: BaseCompositionLayer {
     try super.setupAnimations(context: context)
     let textAnimationContext = context.addingKeypathComponent(textLayerModel.name)
 
+    // To match the behavior of the Main Thread rendering engine,
+    // we call the `textProvider` with the last keypath path component
+    // (e.g. just the name of this layer).2
+    let keypathName = textAnimationContext.currentKeypath.keys.last
+      ?? textAnimationContext.currentKeypath.fullPath
+    
     let sourceText = try textLayerModel.text.exactlyOneKeyframe(
       context: textAnimationContext,
       description: "text layer text")
 
     renderLayer.text = context.textProvider.textFor(
-      keypathName: textAnimationContext.currentKeypath.fullPath,
+      keypathName: keypathName,
       sourceText: sourceText.text)
 
     renderLayer.sizeToFit()
