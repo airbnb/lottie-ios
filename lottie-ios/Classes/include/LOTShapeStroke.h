@@ -1,0 +1,1 @@
+../Models/LOTShapeStroke.h

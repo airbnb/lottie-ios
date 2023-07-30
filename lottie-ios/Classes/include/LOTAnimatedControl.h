@@ -1,0 +1,1 @@
+../PublicHeaders/LOTAnimatedControl.h
