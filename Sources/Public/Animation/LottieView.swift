@@ -7,36 +7,113 @@ import SwiftUI
 
 /// A wrapper which exposes Lottie's `LottieAnimationView` to SwiftUI
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
-public struct LottieView: UIViewConfiguringSwiftUIView {
+public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   // MARK: Lifecycle
 
   /// Creates a `LottieView` that displays the given animation
-  public init(animation: LottieAnimation?) {
-    self.animation = animation
+  public init(animation: LottieAnimation?) where Placeholder == EmptyView {
+    _animationSource = State(initialValue: animation.map(LottieAnimationSource.lottieAnimation))
+    placeholder = nil
+  }
+
+  /// Creates a `LottieView` that displays the given `DotLottieFile`
+  public init(dotLottieFile: DotLottieFile?) where Placeholder == EmptyView {
+    _animationSource = State(initialValue: dotLottieFile.map(LottieAnimationSource.dotLottieFile))
+    placeholder = nil
+  }
+
+  /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimation`.
+  /// The `loadAnimation` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  public init(_ loadAnimation: @escaping () async throws -> LottieAnimation?) where Placeholder == EmptyView {
+    self.init(loadAnimation, placeholder: EmptyView.init)
+  }
+
+  /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimation`.
+  /// The `loadAnimation` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
+  public init(
+    _ loadAnimation: @escaping () async throws -> LottieAnimation?,
+    @ViewBuilder placeholder: @escaping (() -> Placeholder))
+  {
+    self.init {
+      try await loadAnimation().map(LottieAnimationSource.lottieAnimation)
+    } placeholder: {
+      placeholder()
+    }
+  }
+
+  /// Creates a `LottieView` that asynchronously loads and displays the given `DotLottieFile`.
+  /// The `loadDotLottieFile` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  public init(_ loadDotLottieFile: @escaping () async throws -> DotLottieFile?) where Placeholder == EmptyView {
+    self.init(loadDotLottieFile, placeholder: EmptyView.init)
+  }
+
+  /// Creates a `LottieView` that asynchronously loads and displays the given `DotLottieFile`.
+  /// The `loadDotLottieFile` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
+  public init(
+    _ loadDotLottieFile: @escaping () async throws -> DotLottieFile?,
+    @ViewBuilder placeholder: @escaping (() -> Placeholder))
+  {
+    self.init {
+      try await loadDotLottieFile().map(LottieAnimationSource.dotLottieFile)
+    } placeholder: {
+      placeholder()
+    }
+  }
+
+  /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimationSource`.
+  /// The `loadAnimation` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
+  public init(
+    loadAnimation: @escaping () async throws -> LottieAnimationSource?,
+    @ViewBuilder placeholder: @escaping () -> Placeholder)
+  {
+    self.loadAnimation = loadAnimation
+    self.placeholder = placeholder
+    _animationSource = State(initialValue: nil)
   }
 
   // MARK: Public
 
   public var body: some View {
-    LottieAnimationView.swiftUIView {
-      LottieAnimationView(
-        animation: animation,
-        imageProvider: imageProvider,
-        textProvider: textProvider,
-        fontProvider: fontProvider,
-        configuration: configuration)
-    }
-    .sizing(sizing)
-    .configure { context in
-      // We check referential equality of the animation before updating as updating the
-      // animation has a side-effect of rebuilding the animation layer, and it would be
-      // prohibitive to do so on every state update.
-      if animation !== context.view.animation {
-        context.view.animation = animation
+    ZStack {
+      if let animationSource = animationSource {
+        LottieAnimationView.swiftUIView {
+          LottieAnimationView(
+            animationSource: animationSource,
+            imageProvider: imageProvider,
+            textProvider: textProvider,
+            fontProvider: fontProvider,
+            configuration: configuration)
+        }
+        .sizing(sizing)
+        .configure { context in
+          // We check referential equality of the animation before updating as updating the
+          // animation has a side-effect of rebuilding the animation layer, and it would be
+          // prohibitive to do so on every state update.
+          if animationSource.animation !== context.view.animation {
+            context.view.loadAnimation(animationSource)
+          }
+        }
+        .configurations(configurations)
+      } else {
+        placeholder?()
       }
     }
-    .configurations(configurations)
+    .onAppear {
+      loadAnimationIfNecessary()
+    }
+    .valueChanged(value: loadAnimationTrigger?.wrappedValue) { _ in
+      animationSource = nil
+      loadAnimationIfNecessary()
+    }
   }
 
   /// Returns a copy of this `LottieView` updated to have the given closure applied to its
@@ -88,7 +165,7 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
     }
   }
 
-  /// Returns a copt of this view with its `LottieConfiguration` updated to the given value.
+  /// Returns a copy of this view with its `LottieConfiguration` updated to the given value.
   public func configuration(_ configuration: LottieConfiguration) -> Self {
     var copy = self
     copy.configuration = configuration
@@ -99,6 +176,15 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
       }
     }
 
+    return copy
+  }
+
+  /// Returns a copy of this view with its `LottieLogger` updated to the given value.
+  ///  - The underlying `LottieAnimationView`'s `LottieLogger` is immutable after configured,
+  ///    so this value is only used when initializing the `LottieAnimationView` for the first time.
+  public func logger(_ logger: LottieLogger) -> Self {
+    var copy = self
+    copy.logger = logger
     return copy
   }
 
@@ -209,6 +295,19 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
     }
   }
 
+  /// Returns a new instance of this view, which will invoke the provided `loadAnimation` closure
+  /// whenever the `binding` value is updated.
+  ///
+  /// - Note: This function requires a valid `loadAnimation` closure provided during view initialization,
+  ///         otherwise the `loadAnimationTrigger` will have no effect.
+  /// - Note: The existing animation will be removed before calling `loadAnimation`,
+  ///         which will cause the `Placeholder` to be displayed until the new animation finishes loading.
+  public func loadAnimationTrigger<Value: Hashable>(_ binding: Binding<Value>) -> Self {
+    var copy = self
+    copy.loadAnimationTrigger = binding.map(transform: AnyHashable.init)
+    return copy
+  }
+
   /// Returns a view that updates the given binding each frame with the animation's `realtimeAnimationProgress`.
   /// The `LottieView` is wrapped in a `TimelineView` with the `.animation` schedule.
   ///  - This is a one-way binding. Its value is updated but never read.
@@ -255,10 +354,30 @@ public struct LottieView: UIViewConfiguringSwiftUIView {
 
   // MARK: Private
 
-  private let animation: LottieAnimation?
+  @State private var animationSource: LottieAnimationSource?
+  private var loadAnimationTrigger: Binding<AnyHashable>?
+  private var loadAnimation: (() async throws -> LottieAnimationSource?)?
   private var imageProvider: AnimationImageProvider?
   private var textProvider: AnimationTextProvider = DefaultTextProvider()
   private var fontProvider: AnimationFontProvider = DefaultFontProvider()
   private var configuration: LottieConfiguration = .shared
+  private var logger: LottieLogger = .shared
   private var sizing = SwiftUIMeasurementContainerStrategy.automatic
+  private let placeholder: (() -> Placeholder)?
+
+  private func loadAnimationIfNecessary() {
+    guard
+      let loadAnimation = loadAnimation,
+      animationSource == nil
+    else { return }
+
+    Task {
+      do {
+        animationSource = try await loadAnimation()
+      } catch {
+        logger.warn("Failed to load asynchronous Lottie animation with error: \(error)")
+      }
+    }
+  }
+
 }
