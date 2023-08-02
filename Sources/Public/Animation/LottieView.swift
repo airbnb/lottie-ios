@@ -17,7 +17,11 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     placeholder = nil
   }
 
-  /// Creates a `LottieView` that displays the given `DotLottieFile`
+  /// Initializes a `LottieView` with the provided `DotLottieFile` for display.
+  ///
+  /// - Important: Avoid using this initializer with the `SynchronouslyBlockingCurrentThread` APIs.
+  ///              If decompression of a `.lottie` file is necessary, prefer using the `.init(_ loadAnimation:)`
+  ///              initializer, which decompresses the file asynchronously.
   public init(dotLottieFile: DotLottieFile?) where Placeholder == EmptyView {
     _animationSource = State(initialValue: dotLottieFile.map(LottieAnimationSource.dotLottieFile))
     placeholder = nil
@@ -25,14 +29,14 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimation`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
-  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.reloadAnimationTrigger(...)`.
   public init(_ loadAnimation: @escaping () async throws -> LottieAnimation?) where Placeholder == EmptyView {
     self.init(loadAnimation, placeholder: EmptyView.init)
   }
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimation`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
-  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.reloadAnimationTrigger(...)`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
   public init(
     _ loadAnimation: @escaping () async throws -> LottieAnimation?,
@@ -47,15 +51,29 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `DotLottieFile`.
   /// The `loadDotLottieFile` closure is called exactly once in `onAppear`.
-  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.reloadAnimationTrigger(...)`.
+  /// You can use the `DotLottieFile` static methods API which use Swift concurrency to load your `.lottie` files:
+  /// ```
+  /// LottieView {
+  ///  try await DotLottieFile.named(name)
+  /// }
+  /// ```
   public init(_ loadDotLottieFile: @escaping () async throws -> DotLottieFile?) where Placeholder == EmptyView {
     self.init(loadDotLottieFile, placeholder: EmptyView.init)
   }
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `DotLottieFile`.
   /// The `loadDotLottieFile` closure is called exactly once in `onAppear`.
-  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.reloadAnimationTrigger(...)`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
+  /// You can use the `DotLottieFile` static methods API which use Swift concurrency to load your `.lottie` files:
+  /// ```
+  /// LottieView {
+  ///  try await DotLottieFile.named(name)
+  /// } placeholder: {
+  ///  LoadingView()
+  /// }
+  /// ```
   public init(
     _ loadDotLottieFile: @escaping () async throws -> DotLottieFile?,
     @ViewBuilder placeholder: @escaping (() -> Placeholder))
@@ -69,7 +87,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimationSource`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
-  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.reloadAnimationTrigger(...)`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
   public init(
     loadAnimation: @escaping () async throws -> LottieAnimationSource?,
