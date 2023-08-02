@@ -401,13 +401,15 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   }
 
   private func clearAnimationIfNecessary() {
-    if loadAnimation != nil && showPlaceholderWhileReloading {
+    if loadAnimation != nil, showPlaceholderWhileReloading {
       animationSource = nil
     }
   }
 }
 
+// MARK: - DefaultLoadTrigger
+
 /// The default load animation trigger token
-fileprivate enum DefaultLoadTrigger: Hashable {
+private enum DefaultLoadTrigger: Hashable {
   case noneProvided
 }
