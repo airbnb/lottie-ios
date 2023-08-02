@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class Stroke: ShapeItem, Sendable {
+final class Stroke: ShapeItem {
 
   // MARK: Lifecycle
 

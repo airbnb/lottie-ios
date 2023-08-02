@@ -17,7 +17,7 @@ enum GradientType: Int, Codable, Sendable {
 
 // MARK: - GradientFill
 
-final class GradientFill: ShapeItem, Sendable {
+final class GradientFill: ShapeItem {
 
   // MARK: Lifecycle
 

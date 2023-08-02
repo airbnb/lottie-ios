@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class Rectangle: ShapeItem, Sendable {
+final class Rectangle: ShapeItem {
 
   // MARK: Lifecycle
 

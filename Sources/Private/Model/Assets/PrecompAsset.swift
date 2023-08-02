@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class PrecompAsset: Asset, Sendable {
+final class PrecompAsset: Asset {
 
   // MARK: Lifecycle
 

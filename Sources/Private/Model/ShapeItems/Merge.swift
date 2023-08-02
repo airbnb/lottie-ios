@@ -20,7 +20,7 @@ enum MergeMode: Int, Codable, Sendable {
 
 // MARK: - Merge
 
-final class Merge: ShapeItem, Sendable {
+final class Merge: ShapeItem {
 
   // MARK: Lifecycle
 

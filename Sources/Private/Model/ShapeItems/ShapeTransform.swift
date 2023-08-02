@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class ShapeTransform: ShapeItem, Sendable {
+final class ShapeTransform: ShapeItem {
 
   // MARK: Lifecycle
 

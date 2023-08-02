@@ -8,7 +8,7 @@
 import Foundation
 
 /// A layer that holds another animation composition.
-final class PreCompLayerModel: LayerModel, Sendable {
+final class PreCompLayerModel: LayerModel {
 
   // MARK: Lifecycle
 

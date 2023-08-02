@@ -17,7 +17,7 @@ enum PathDirection: Int, Codable {
 
 // MARK: - Ellipse
 
-final class Ellipse: ShapeItem, Sendable {
+final class Ellipse: ShapeItem {
 
   // MARK: Lifecycle
 

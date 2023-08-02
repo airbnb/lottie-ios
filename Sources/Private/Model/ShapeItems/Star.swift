@@ -17,7 +17,7 @@ enum StarType: Int, Codable, Sendable {
 
 // MARK: - Star
 
-final class Star: ShapeItem, Sendable {
+final class Star: ShapeItem {
 
   // MARK: Lifecycle
 

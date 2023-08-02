@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - RoundedCorners
 
-final class RoundedCorners: ShapeItem, Sendable {
+final class RoundedCorners: ShapeItem {
 
   // MARK: Lifecycle
 

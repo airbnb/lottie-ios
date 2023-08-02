@@ -8,7 +8,7 @@
 import Foundation
 
 /// A layer that holds text.
-final class TextLayerModel: LayerModel, Sendable {
+final class TextLayerModel: LayerModel {
 
   // MARK: Lifecycle
 

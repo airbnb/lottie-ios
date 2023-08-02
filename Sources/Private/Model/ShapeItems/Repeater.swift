@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class Repeater: ShapeItem, Sendable {
+final class Repeater: ShapeItem {
 
   // MARK: Lifecycle
 

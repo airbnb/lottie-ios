@@ -27,7 +27,7 @@ enum LineJoin: Int, Codable, Sendable {
 
 // MARK: - GradientStroke
 
-final class GradientStroke: ShapeItem, Sendable {
+final class GradientStroke: ShapeItem {
 
   // MARK: Lifecycle
 
