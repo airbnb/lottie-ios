@@ -110,8 +110,8 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     .onAppear {
       loadAnimationIfNecessary()
     }
-    .valueChanged(value: loadAnimationTrigger?.wrappedValue) { _ in
-      animationSource = nil
+    .valueChanged(value: reloadAnimationTrigger.wrappedValue) { _ in
+      clearAnimationIfNecessary()
       loadAnimationIfNecessary()
     }
   }
@@ -299,12 +299,16 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   /// whenever the `binding` value is updated.
   ///
   /// - Note: This function requires a valid `loadAnimation` closure provided during view initialization,
-  ///         otherwise the `loadAnimationTrigger` will have no effect.
-  /// - Note: The existing animation will be removed before calling `loadAnimation`,
-  ///         which will cause the `Placeholder` to be displayed until the new animation finishes loading.
-  public func loadAnimationTrigger<Value: Hashable>(_ binding: Binding<Value>) -> Self {
+  ///         otherwise `reloadAnimationTrigger` will have no effect.
+  /// - Parameters:
+  ///   - binding: The binding that triggers the reloading when its value changes.
+  ///   - showPlaceholder: When `true`, the current animation will be removed before invoking `loadAnimation`,
+  ///     displaying the `Placeholder` until the new animation loads.
+  ///     When `false`, the previous animation remains visible while the new one loads.
+  public func reloadAnimationTrigger<Value: Equatable>(_ binding: Binding<Value>, showPlaceholder: Bool = true) -> Self {
     var copy = self
-    copy.loadAnimationTrigger = binding.map(transform: AnyHashable.init)
+    copy.reloadAnimationTrigger = binding.map { $0 as any Equatable }
+    copy.showPlaceholderWhileReloading = showPlaceholder
     return copy
   }
 
@@ -355,8 +359,9 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   // MARK: Private
 
   @State private var animationSource: LottieAnimationSource?
-  private var loadAnimationTrigger: Binding<AnyHashable>?
+  private var reloadAnimationTrigger: Binding<any Equatable> = .constant(DefaultLoadTrigger.noneProvided)
   private var loadAnimation: (() async throws -> LottieAnimationSource?)?
+  private var showPlaceholderWhileReloading = false
   private var imageProvider: AnimationImageProvider?
   private var textProvider: AnimationTextProvider = DefaultTextProvider()
   private var fontProvider: AnimationFontProvider = DefaultFontProvider()
@@ -366,10 +371,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   private let placeholder: (() -> Placeholder)?
 
   private func loadAnimationIfNecessary() {
-    guard
-      let loadAnimation = loadAnimation,
-      animationSource == nil
-    else { return }
+    guard let loadAnimation = loadAnimation else { return }
 
     Task {
       do {
@@ -380,4 +382,14 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     }
   }
 
+  private func clearAnimationIfNecessary() {
+    if loadAnimation != nil && showPlaceholderWhileReloading {
+      animationSource = nil
+    }
+  }
+}
+
+/// The default load animation trigger token
+fileprivate enum DefaultLoadTrigger: Hashable {
+  case noneProvided
 }

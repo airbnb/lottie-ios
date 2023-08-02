@@ -52,7 +52,7 @@ struct AnimationPreviewView: View {
       }
       .imageProvider(.exampleAppSampleImages)
       .resizable()
-      .loadAnimationTrigger($currentURLIndex)
+      .reloadAnimationTrigger($currentURLIndex)
       .looping()
       .currentProgress(animationPlaying ? nil : sliderValue)
       .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)

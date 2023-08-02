@@ -8,7 +8,7 @@ import SwiftUI
 extension View {
   /// A backwards compatible wrapper for iOS 14 `onChange`
   @ViewBuilder
-  func valueChanged<T: Equatable>(value: T, onChange: @escaping (T) -> Void) -> some View {
+  func valueChanged(value: any Equatable, onChange: @escaping (any Equatable) -> Void) -> some View {
     if #available(iOS 14.0, *, macOS 11.0, tvOS 14.0) {
       self.onChange(of: value, perform: onChange)
     } else {
