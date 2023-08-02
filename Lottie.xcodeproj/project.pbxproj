@@ -822,6 +822,9 @@
 		AB87F02E2A72FA3A0091D7B8 /* Binding+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87F02D2A72FA3A0091D7B8 /* Binding+Map.swift */; };
 		AB87F02F2A72FA3A0091D7B8 /* Binding+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87F02D2A72FA3A0091D7B8 /* Binding+Map.swift */; };
 		AB87F0302A72FA3A0091D7B8 /* Binding+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87F02D2A72FA3A0091D7B8 /* Binding+Map.swift */; };
+		ABF033B42A7B0ABA00F8C228 /* AnyEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF033B32A7B0ABA00F8C228 /* AnyEquatable.swift */; };
+		ABF033B52A7B0ABA00F8C228 /* AnyEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF033B32A7B0ABA00F8C228 /* AnyEquatable.swift */; };
+		ABF033B62A7B0ABA00F8C228 /* AnyEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF033B32A7B0ABA00F8C228 /* AnyEquatable.swift */; };
 		D453D8AB28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
 		D453D8AC28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
 		D453D8AD28FE6EE300D3F49C /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
@@ -1132,6 +1135,7 @@
 		A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlendMode+Filter.swift"; sourceTree = "<group>"; };
 		AB3278122A71BA0400A9C9F1 /* View+ValueChanged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ValueChanged.swift"; sourceTree = "<group>"; };
 		AB87F02D2A72FA3A0091D7B8 /* Binding+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Map.swift"; sourceTree = "<group>"; };
+		ABF033B32A7B0ABA00F8C228 /* AnyEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEquatable.swift; sourceTree = "<group>"; };
 		D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationCache.swift; sourceTree = "<group>"; };
 		D453D8AE28FF9BC600D3F49C /* AnimationCacheProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationCacheProviderTests.swift; sourceTree = "<group>"; };
 		D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAnimationCache.swift; sourceTree = "<group>"; };
@@ -1829,6 +1833,7 @@
 				AB3278122A71BA0400A9C9F1 /* View+ValueChanged.swift */,
 				2E9C95D22822F43100677516 /* AnimationContext.swift */,
 				AB87F02D2A72FA3A0091D7B8 /* Binding+Map.swift */,
+				ABF033B32A7B0ABA00F8C228 /* AnyEquatable.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2464,6 +2469,7 @@
 				2EAF5AC227A0798700E00531 /* BundleImageProvider.swift in Sources */,
 				2E9C976B2822F43100677516 /* InterpolatableExtensions.swift in Sources */,
 				2E9C96ED2822F43100677516 /* ShapeItemLayer.swift in Sources */,
+				ABF033B42A7B0ABA00F8C228 /* AnyEquatable.swift in Sources */,
 				2EAF5ACE27A0798700E00531 /* AnimationSubview.swift in Sources */,
 				08E207572A56014E002DCE17 /* EpoxyModelProperty.swift in Sources */,
 				2E9C96302822F43100677516 /* TextAnimator.swift in Sources */,
@@ -2767,6 +2773,7 @@
 				2E9C96CD2822F43100677516 /* ShapeRenderLayer.swift in Sources */,
 				5721092029119F3100169699 /* BezierPathRoundExtension.swift in Sources */,
 				08E207132A56014E002DCE17 /* EpoxySwiftUIHostingController.swift in Sources */,
+				ABF033B52A7B0ABA00F8C228 /* AnyEquatable.swift in Sources */,
 				08E2070A2A56014E002DCE17 /* EpoxyableView+SwiftUIView.swift in Sources */,
 				6C48780328FF20140005AF07 /* DotLottieFile.swift in Sources */,
 				08E2070D2A56014E002DCE17 /* SwiftUIMeasurementContainer.swift in Sources */,
@@ -3035,6 +3042,7 @@
 				2E9C96EF2822F43100677516 /* ShapeItemLayer.swift in Sources */,
 				2EAF5AD027A0798700E00531 /* AnimationSubview.swift in Sources */,
 				2E9C96322822F43100677516 /* TextAnimator.swift in Sources */,
+				ABF033B62A7B0ABA00F8C228 /* AnyEquatable.swift in Sources */,
 				2E9C96E92822F43100677516 /* ImageLayer.swift in Sources */,
 				08E207592A56014E002DCE17 /* EpoxyModelProperty.swift in Sources */,
 				2E9C972E2822F43100677516 /* StarAnimation.swift in Sources */,

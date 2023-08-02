@@ -20,7 +20,9 @@ extension DotLottieFile {
       dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
       -> Result<DotLottieFile, Error>
     {
-      assert(!Thread.isMainThread, "Calling this API in the main thread will affect the performance of your App")
+      LottieLogger.shared.assert(
+        !Thread.isMainThread,
+        "`DotLottieFile.SynchronouslyBlockingCurrentThread` methods shouldn't be called on the main thread.")
 
       /// Check cache for lottie
       if
@@ -57,7 +59,9 @@ extension DotLottieFile {
       dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
       -> Result<DotLottieFile, Error>
     {
-      assert(!Thread.isMainThread, "Calling this API in the main thread will affect the performance of your App")
+      LottieLogger.shared.assert(
+        !Thread.isMainThread,
+        "`DotLottieFile.SynchronouslyBlockingCurrentThread` methods shouldn't be called on the main thread.")
 
       /// Create a cache key for the lottie.
       let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
@@ -95,7 +99,10 @@ extension DotLottieFile {
       filename: String)
       -> Result<DotLottieFile, Error>
     {
-      assert(!Thread.isMainThread, "Calling this API in the main thread will affect the performance of your App")
+      LottieLogger.shared.assert(
+        !Thread.isMainThread,
+        "`DotLottieFile.SynchronouslyBlockingCurrentThread` methods shouldn't be called on the main thread.")
+
       do {
         let dotLottieFile = try DotLottieFile(data: data, filename: filename)
         return .success(dotLottieFile)
