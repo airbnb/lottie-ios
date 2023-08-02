@@ -8,7 +8,7 @@
 import Foundation
 
 /// A model that holds a vector character
-final class Glyph: Codable, DictionaryInitializable {
+final class Glyph: Codable, Sendable, DictionaryInitializable {
 
   // MARK: Lifecycle
 

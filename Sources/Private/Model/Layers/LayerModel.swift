@@ -226,3 +226,9 @@ extension Array where Element == LayerModel {
     }
   }
 }
+
+// MARK: - LayerModel + Sendable
+
+/// Since `LayerModel` isn't `final`, we have to use `@unchecked Sendable` instead of `Sendable.`
+/// All `LayerModel` subclasses are immutable `Sendable` values.
+extension LayerModel: @unchecked Sendable { }

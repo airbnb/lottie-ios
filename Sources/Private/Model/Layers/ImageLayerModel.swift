@@ -8,7 +8,7 @@
 import Foundation
 
 /// A layer that holds an image.
-final class ImageLayerModel: LayerModel {
+final class ImageLayerModel: LayerModel, Sendable {
 
   // MARK: Lifecycle
 

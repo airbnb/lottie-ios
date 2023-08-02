@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - StarType
 
-enum StarType: Int, Codable {
+enum StarType: Int, Codable, Sendable {
   case none
   case star
   case polygon
@@ -17,7 +17,7 @@ enum StarType: Int, Codable {
 
 // MARK: - Star
 
-final class Star: ShapeItem {
+final class Star: ShapeItem, Sendable {
 
   // MARK: Lifecycle
 

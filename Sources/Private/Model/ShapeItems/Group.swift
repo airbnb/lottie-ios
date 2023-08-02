@@ -8,7 +8,7 @@
 import Foundation
 
 /// An item that define a a group of shape items
-final class Group: ShapeItem {
+final class Group: ShapeItem, Sendable {
 
   // MARK: Lifecycle
 

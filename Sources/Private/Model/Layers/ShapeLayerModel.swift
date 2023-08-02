@@ -8,7 +8,7 @@
 import Foundation
 
 /// A layer that holds vector shape objects.
-final class ShapeLayerModel: LayerModel {
+final class ShapeLayerModel: LayerModel, Sendable {
 
   // MARK: Lifecycle
 

@@ -49,5 +49,5 @@ public class DefaultAnimationCache: AnimationCacheProvider, @unchecked Sendable 
 
   private static let defaultCacheCountLimit = 100
 
-  private var cache = NSCache<NSString, LottieAnimation>()
+  private let cache = NSCache<NSString, LottieAnimation>()
 }

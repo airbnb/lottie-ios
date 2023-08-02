@@ -8,7 +8,7 @@
 import Foundation
 
 /// A time marker
-final class Marker: Codable, DictionaryInitializable {
+final class Marker: Codable, Sendable, DictionaryInitializable {
 
   // MARK: Lifecycle
 

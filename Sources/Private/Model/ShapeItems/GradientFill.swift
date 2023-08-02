@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - GradientType
 
-enum GradientType: Int, Codable {
+enum GradientType: Int, Codable, Sendable {
   case none
   case linear
   case radial
@@ -17,7 +17,7 @@ enum GradientType: Int, Codable {
 
 // MARK: - GradientFill
 
-final class GradientFill: ShapeItem {
+final class GradientFill: ShapeItem, Sendable {
 
   // MARK: Lifecycle
 

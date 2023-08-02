@@ -8,7 +8,7 @@
 import Foundation
 
 /// An item that defines an custom shape
-final class Shape: ShapeItem {
+final class Shape: ShapeItem, Sendable {
 
   // MARK: Lifecycle
 

@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - MergeMode
 
-enum MergeMode: Int, Codable {
+enum MergeMode: Int, Codable, Sendable {
   case none
   case merge
   case add
@@ -20,7 +20,7 @@ enum MergeMode: Int, Codable {
 
 // MARK: - Merge
 
-final class Merge: ShapeItem {
+final class Merge: ShapeItem, Sendable {
 
   // MARK: Lifecycle
 

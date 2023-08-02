@@ -8,7 +8,7 @@
 import Foundation
 
 /// A layer that holds a solid color.
-final class SolidLayerModel: LayerModel {
+final class SolidLayerModel: LayerModel, Sendable {
 
   // MARK: Lifecycle
 

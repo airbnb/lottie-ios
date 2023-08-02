@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - LineCap
 
-enum LineCap: Int, Codable {
+enum LineCap: Int, Codable, Sendable {
   case none
   case butt
   case round
@@ -18,7 +18,7 @@ enum LineCap: Int, Codable {
 
 // MARK: - LineJoin
 
-enum LineJoin: Int, Codable {
+enum LineJoin: Int, Codable, Sendable {
   case none
   case miter
   case round
@@ -27,7 +27,7 @@ enum LineJoin: Int, Codable {
 
 // MARK: - GradientStroke
 
-final class GradientStroke: ShapeItem {
+final class GradientStroke: ShapeItem, Sendable {
 
   // MARK: Lifecycle
 

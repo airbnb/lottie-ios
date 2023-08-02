@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - ImageAsset
 
-public final class ImageAsset: Asset {
+public final class ImageAsset: Asset, Sendable {
 
   // MARK: Lifecycle
 

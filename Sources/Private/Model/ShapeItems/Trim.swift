@@ -16,7 +16,7 @@ enum TrimType: Int, Codable {
 
 // MARK: - Trim
 
-final class Trim: ShapeItem {
+final class Trim: ShapeItem, Sendable {
 
   // MARK: Lifecycle
 
