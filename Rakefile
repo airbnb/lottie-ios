@@ -9,17 +9,17 @@ namespace :build do
 
     desc 'Builds the Lottie package for iOS'
     task :iOS do
-      xcodebuild('build -scheme "Lottie (iOS)" -destination generic/platform=iOS -workspace Lottie.xcworkspace')
+      xcodebuild('build -scheme "Lottie (iOS)" -destination generic/platform=iOS -workspace Lottie.xcworkspace OTHER_SWIFT_FLAGS="-warnings-as-errors"')
     end
 
     desc 'Builds the Lottie package for macOS'
     task :macOS do
-      xcodebuild('build -scheme "Lottie (macOS)" -destination generic/platform=macOS -workspace Lottie.xcworkspace')
+      xcodebuild('build -scheme "Lottie (macOS)" -destination generic/platform=macOS -workspace Lottie.xcworkspace OTHER_SWIFT_FLAGS="-warnings-as-errors"')
     end
 
     desc 'Builds the Lottie package for tvOS'
     task :tvOS do
-      xcodebuild('build -scheme "Lottie (tvOS)" -destination generic/platform=tvOS -workspace Lottie.xcworkspace')
+      xcodebuild('build -scheme "Lottie (tvOS)" -destination generic/platform=tvOS -workspace Lottie.xcworkspace OTHER_SWIFT_FLAGS="-warnings-as-errors"')
     end
   end
 

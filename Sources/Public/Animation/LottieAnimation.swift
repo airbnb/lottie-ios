@@ -177,3 +177,7 @@ public final class LottieAnimation: Codable, DictionaryInitializable {
     })
   }()
 }
+
+// MARK: Sendable
+
+extension LottieAnimation: @unchecked Sendable { }

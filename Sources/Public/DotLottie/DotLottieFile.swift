@@ -144,3 +144,7 @@ extension String {
     (self as NSString).deletingPathExtension
   }
 }
+
+// MARK: - DotLottieFile + Sendable
+
+extension DotLottieFile: @unchecked Sendable { }
