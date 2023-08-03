@@ -6,7 +6,7 @@
 /// A data source for a Lottie animation.
 /// Either a `LottieAnimation` loaded from a `.json` file,
 /// or a `DotLottieFile` loaded from a `.lottie` file.
-public enum LottieAnimationSource {
+public enum LottieAnimationSource: Sendable {
   /// A `LottieAnimation` loaded from a `.json` file
   case lottieAnimation(LottieAnimation)
 
