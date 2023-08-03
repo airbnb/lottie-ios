@@ -68,10 +68,12 @@ class SnapshotTests: XCTestCase {
   /// reference a sample json file that actually exists
   func testCustomSnapshotConfigurationsHaveCorrespondingSampleFile() {
     for (animationName, _) in SnapshotConfiguration.customMapping {
-      let expectedSampleFile = Bundle.lottie.bundleURL.appendingPathComponent("Samples/\(animationName).json")
+      let expectedJsonFile = Bundle.lottie.bundleURL.appendingPathComponent("Samples/\(animationName).json")
+      let expectedDotLottieFile = Bundle.lottie.bundleURL.appendingPathComponent("Samples/\(animationName).lottie")
 
       XCTAssert(
-        Samples.sampleAnimationURLs.contains(expectedSampleFile),
+        Samples.sampleAnimationURLs.contains(expectedJsonFile)
+          || Samples.sampleAnimationURLs.contains(expectedDotLottieFile),
         "Custom configuration for \"\(animationName)\" has no corresponding sample animation")
     }
   }

@@ -51,8 +51,8 @@ extension SnapshotConfiguration {
     "LottieFiles/dog_car_ride": .precision(0.95),
     "Issues/issue_1800": .precision(0.95),
     "Issues/issue_1717": .precision(0.95),
-    "DotLottie/animation_external_image.lottie": .precision(0.95),
-    "DotLottie/animation_inline_image.lottie": .precision(0.95),
+    "DotLottie/animation_external_image": .precision(0.95),
+    "DotLottie/animation_inline_image": .precision(0.95),
     "LottieFiles/gradient_shapes": .precision(0.95),
 
     /// Test cases for the `AnimationKeypath` / `AnyValueProvider` system
