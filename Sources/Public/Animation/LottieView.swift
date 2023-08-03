@@ -133,7 +133,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     .onAppear {
       loadAnimationIfNecessary()
     }
-    .valueChanged(value: reloadAnimationTrigger?.wrappedValue) { _ in
+    .valueChanged(value: reloadAnimationTrigger) { _ in
       reloadAnimationTriggerDidChange()
     }
   }
@@ -327,9 +327,9 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   ///   - showPlaceholder: When `true`, the current animation will be removed before invoking `loadAnimation`,
   ///     displaying the `Placeholder` until the new animation loads.
   ///     When `false`, the previous animation remains visible while the new one loads.
-  public func reloadAnimationTrigger<Value: Equatable>(_ binding: Binding<Value>, showPlaceholder: Bool = true) -> Self {
+  public func reloadAnimationTrigger<Value: Equatable>(_ value: Value, showPlaceholder: Bool = true) -> Self {
     var copy = self
-    copy.reloadAnimationTrigger = binding.map(transform: AnyEquatable.init)
+    copy.reloadAnimationTrigger = AnyEquatable(value)
     copy.showPlaceholderWhileReloading = showPlaceholder
     return copy
   }
@@ -381,7 +381,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   // MARK: Private
 
   @State private var animationSource: LottieAnimationSource?
-  private var reloadAnimationTrigger: Binding<AnyEquatable>?
+  private var reloadAnimationTrigger: AnyEquatable?
   private var loadAnimation: (() async throws -> LottieAnimationSource?)?
   private var showPlaceholderWhileReloading = false
   private var imageProvider: AnimationImageProvider?
