@@ -106,6 +106,10 @@ public class LottieAnimationLayer: CALayer {
   open func play(completion: LottieCompletionBlock? = nil) {
     guard let animation = animation else { return }
 
+    defer {
+      currentPlaybackMode = .toProgress(1, loopMode: loopMode)
+    }
+
     if shouldOverrideWithReducedMotionAnimation {
       playReducedMotionAnimation(completion: completion)
       return
@@ -133,6 +137,10 @@ public class LottieAnimationLayer: CALayer {
     completion: LottieCompletionBlock? = nil)
   {
     guard let animation = animation else { return }
+
+    defer {
+      currentPlaybackMode = .fromProgress(fromProgress, toProgress: toProgress, loopMode: loopMode ?? self.loopMode)
+    }
 
     if shouldOverrideWithReducedMotionAnimation {
       playReducedMotionAnimation(completion: completion)
@@ -163,6 +171,10 @@ public class LottieAnimationLayer: CALayer {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
+    defer {
+      currentPlaybackMode = .fromFrame(fromFrame, toFrame: toFrame, loopMode: loopMode ?? self.loopMode)
+    }
+
     if shouldOverrideWithReducedMotionAnimation {
       playReducedMotionAnimation(completion: completion)
       return
@@ -203,6 +215,14 @@ public class LottieAnimationLayer: CALayer {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
+    defer {
+      currentPlaybackMode = .fromMarker(
+        fromMarker,
+        toMarker: toMarker,
+        playEndMarkerFrame: playEndMarkerFrame,
+        loopMode: loopMode ?? self.loopMode)
+    }
+
     if shouldOverrideWithReducedMotionAnimation {
       playReducedMotionAnimation(completion: completion)
       return
@@ -248,12 +268,16 @@ public class LottieAnimationLayer: CALayer {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
-    if shouldOverrideWithReducedMotionAnimation {
-      playReducedMotionAnimation(completion: completion)
+    guard let from = animation?.markerMap?[marker] else {
       return
     }
 
-    guard let from = animation?.markerMap?[marker] else {
+    defer {
+      currentPlaybackMode = .marker(marker, loopMode: loopMode ?? self.loopMode)
+    }
+
+    if shouldOverrideWithReducedMotionAnimation {
+      playReducedMotionAnimation(completion: completion)
       return
     }
 
@@ -280,12 +304,16 @@ public class LottieAnimationLayer: CALayer {
   ///
   /// - Parameter markers: The list of markers to play sequentially.
   open func play(markers: [String]) {
+    guard !markers.isEmpty else { return }
+
+    defer {
+      currentPlaybackMode = .markers(markers)
+    }
+
     if shouldOverrideWithReducedMotionAnimation {
       playReducedMotionAnimation(completion: nil)
       return
     }
-
-    guard !markers.isEmpty else { return }
 
     let markerToPlay = markers[0]
     let followingMarkers = Array(markers.dropFirst())
@@ -320,7 +348,42 @@ public class LottieAnimationLayer: CALayer {
     removeCurrentAnimation()
   }
 
+  /// Applies the given `LottiePlaybackMode` to this layer.
+  open func play(_ playbackMode: LottiePlaybackMode) {
+    switch playbackMode {
+    case .progress(let progress):
+      currentProgress = progress
+
+    case .frame(let frame):
+      currentFrame = frame
+
+    case .time(let time):
+      currentTime = time
+
+    case .pause:
+      pause()
+
+    case .fromProgress(let fromProgress, let toProgress, let loopMode):
+      play(fromProgress: fromProgress, toProgress: toProgress, loopMode: loopMode, completion: nil)
+
+    case .fromFrame(let fromFrame, let toFrame, let loopMode):
+      play(fromFrame: fromFrame, toFrame: toFrame, loopMode: loopMode)
+
+    case .fromMarker(let fromMarker, let toMarker, let playEndMarkerFrame, let loopMode):
+      play(fromMarker: fromMarker, toMarker: toMarker, playEndMarkerFrame: playEndMarkerFrame, loopMode: loopMode)
+
+    case .marker(let marker, let loopMode):
+      play(marker: marker, loopMode: loopMode)
+
+    case .markers(let markers):
+      play(markers: markers)
+    }
+  }
+
   // MARK: Public
+
+  /// The current `LottiePlaybackMode` that is being used
+  public private(set) var currentPlaybackMode: LottiePlaybackMode?
 
   /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
   public private(set) var valueProviders = [AnimationKeypath: AnyValueProvider]()
@@ -503,6 +566,7 @@ public class LottieAnimationLayer: CALayer {
     set {
       if let animation = animation {
         currentFrame = animation.frameTime(forProgress: newValue)
+        currentPlaybackMode = .progress(newValue)
       } else {
         currentFrame = 0
       }
@@ -524,6 +588,7 @@ public class LottieAnimationLayer: CALayer {
     set {
       if let animation = animation {
         currentFrame = animation.frameTime(forTime: newValue)
+        currentPlaybackMode = .time(newValue)
       } else {
         currentFrame = 0
       }
@@ -544,6 +609,7 @@ public class LottieAnimationLayer: CALayer {
     set {
       removeCurrentAnimationIfNecessary()
       updateAnimationFrame(newValue)
+      currentPlaybackMode = .frame(currentFrame)
     }
     get {
       rootAnimationLayer?.currentFrame ?? 0

@@ -53,26 +53,42 @@ struct AnimationPreviewView: View {
       .imageProvider(.exampleAppSampleImages)
       .resizable()
       .reloadAnimationTrigger(currentURLIndex, showPlaceholder: false)
-      .looping()
-      .currentProgress(animationPlaying ? nil : sliderValue)
+      .playbackMode(playbackMode)
       .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
 
       Spacer()
 
-      #if !os(tvOS)
-      Slider(value: $sliderValue, in: 0...1, onEditingChanged: { editing in
-        if animationPlaying, editing {
-          animationPlaying = false
+      HStack {
+        #if !os(tvOS)
+        Slider(value: $sliderValue, in: 0...1, onEditingChanged: { editing in
+          if animationPlaying, editing {
+            animationPlaying = false
+          }
+        })
+
+        Spacer(minLength: 16)
+        #endif
+
+        Button {
+          animationPlaying.toggle()
+        } label: {
+          if animationPlaying {
+            Image(systemName: "pause.fill")
+          } else {
+            Image(systemName: "play.fill")
+          }
         }
-      })
+      }
       .padding(.all, 16)
-      #endif
     }
     .navigationTitle(animationSource.name.components(separatedBy: "/").last!)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.secondaryBackground)
     .onReceive(timer) { _ in
       updateIndex()
+    }
+    .toolbar {
+      optionsMenu
     }
   }
 
@@ -85,6 +101,63 @@ struct AnimationPreviewView: View {
   @State private var animationPlaying = true
   @State private var sliderValue: AnimationProgressTime = 0
   @State private var currentURLIndex: Int
+  @State private var renderingEngine: RenderingEngineOption = .automatic
+  @State private var loopMode: LottieLoopMode = .loop
+  @State private var playFromProgress: AnimationProgressTime = 0
+  @State private var playToProgress: AnimationProgressTime = 1
+
+  private var playbackMode: LottiePlaybackMode {
+    if animationPlaying {
+      return .fromProgress(playFromProgress, toProgress: playToProgress, loopMode: loopMode)
+    } else {
+      return .progress(sliderValue)
+    }
+  }
+
+  @ViewBuilder
+  private var optionsMenu: some View {
+    #if !os(tvOS)
+    Menu {
+      Menu {
+        option("Automatic", keyPath: \.renderingEngine, value: .automatic)
+        option("Core Animaiton", keyPath: \.renderingEngine, value: .coreAnimation)
+        option("Main Thread", keyPath: \.renderingEngine, value: .mainThread)
+      } label: {
+        Text("Rendering Engine")
+      }
+
+      Menu {
+        option("Play Once", keyPath: \.loopMode, value: .playOnce)
+        option("Loop", keyPath: \.loopMode, value: .loop)
+        option("Autoreverse", keyPath: \.loopMode, value: .autoReverse)
+      } label: {
+        Text("Loop Mode")
+      }
+
+      Menu {
+        option("0%", keyPath: \.playFromProgress, value: 0)
+        option("25%", keyPath: \.playFromProgress, value: 0.25)
+        option("50%", keyPath: \.playFromProgress, value: 0.5)
+        option("75%", keyPath: \.playFromProgress, value: 0.75)
+        option("100%", keyPath: \.playFromProgress, value: 1.0)
+      } label: {
+        Text("Play from...")
+      }
+
+      Menu {
+        option("0%", keyPath: \.playToProgress, value: 0)
+        option("25%", keyPath: \.playToProgress, value: 0.25)
+        option("50%", keyPath: \.playToProgress, value: 0.5)
+        option("75%", keyPath: \.playToProgress, value: 0.75)
+        option("100%", keyPath: \.playToProgress, value: 1.0)
+      } label: {
+        Text("Play to...")
+      }
+    } label: {
+      Image(systemName: "gear")
+    }
+    #endif
+  }
 
   private func loadAnimation() async throws -> LottieAnimationSource? {
     switch animationSource {
@@ -104,6 +177,19 @@ struct AnimationPreviewView: View {
     let currentIndex = currentURLIndex
     let nextIndex = currentIndex == urls.index(before: urls.endIndex) ? urls.startIndex : currentIndex + 1
     currentURLIndex = nextIndex
+  }
+
+  /// A `Button` that controls the value of the given keypath
+  private func option<T: Equatable>(_ label: String, keyPath: ReferenceWritableKeyPath<Self, T>, value: T) -> some View {
+    Button {
+      self[keyPath: keyPath] = value
+    } label: {
+      if self[keyPath: keyPath] == value {
+        Text("✔ \(label)")
+      } else {
+        Text(label)
+      }
+    }
   }
 }
 

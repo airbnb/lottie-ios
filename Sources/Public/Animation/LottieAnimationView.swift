@@ -54,7 +54,7 @@ public enum LottieBackgroundBehavior {
 // MARK: - LottieLoopMode
 
 /// Defines animation loop behavior
-public enum LottieLoopMode {
+public enum LottieLoopMode: Hashable {
   /// Animation is played once then stops.
   case playOnce
   /// Animation will loop from beginning to end until stopped.
@@ -337,6 +337,11 @@ open class LottieAnimationView: LottieAnimationViewBase {
     lottieAnimationLayer.pause()
   }
 
+  /// Applies the given `LottiePlaybackMode` to this layer.
+  open func play(_ playbackMode: LottiePlaybackMode) {
+    lottieAnimationLayer.play(playbackMode)
+  }
+
   // MARK: Public
 
   /// The configuration that this `LottieAnimationView` uses when playing its animation
@@ -550,6 +555,11 @@ open class LottieAnimationView: LottieAnimationViewBase {
   ///    but a `RootAnimationLayer` hasn't been constructed yet
   public var currentRenderingEngine: RenderingEngine? {
     lottieAnimationLayer.currentRenderingEngine
+  }
+
+  /// The current `LottiePlaybackMode` that is being used
+  public var currentPlaybackMode: LottiePlaybackMode? {
+    lottieAnimationLayer.currentPlaybackMode
   }
 
   /// Sets the lottie file backing the animation view. Setting this will clear the
