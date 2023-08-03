@@ -17,7 +17,16 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     placeholder = nil
   }
 
-  /// Creates a `LottieView` that displays the given `DotLottieFile`
+  /// Initializes a `LottieView` with the provided `DotLottieFile` for display.
+  ///
+  /// - Important: Avoid using this initializer with the `SynchronouslyBlockingCurrentThread` APIs.
+  ///              If decompression of a `.lottie` file is necessary, prefer using the `.init(_ loadAnimation:)`
+  ///              initializer, which takes an asynchronous closure:
+  /// ```
+  /// LottieView {
+  ///  try await DotLottieFile.named(name)
+  /// }
+  /// ```
   public init(dotLottieFile: DotLottieFile?) where Placeholder == EmptyView {
     _animationSource = State(initialValue: dotLottieFile.map(LottieAnimationSource.dotLottieFile))
     placeholder = nil
@@ -25,14 +34,14 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimation`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
-  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.reloadAnimationTrigger(...)`.
   public init(_ loadAnimation: @escaping () async throws -> LottieAnimation?) where Placeholder == EmptyView {
     self.init(loadAnimation, placeholder: EmptyView.init)
   }
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimation`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
-  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.reloadAnimationTrigger(...)`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
   public init(
     _ loadAnimation: @escaping () async throws -> LottieAnimation?,
@@ -47,15 +56,29 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `DotLottieFile`.
   /// The `loadDotLottieFile` closure is called exactly once in `onAppear`.
-  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.reloadAnimationTrigger(...)`.
+  /// You can use the `DotLottieFile` static methods API which use Swift concurrency to load your `.lottie` files:
+  /// ```
+  /// LottieView {
+  ///  try await DotLottieFile.named(name)
+  /// }
+  /// ```
   public init(_ loadDotLottieFile: @escaping () async throws -> DotLottieFile?) where Placeholder == EmptyView {
     self.init(loadDotLottieFile, placeholder: EmptyView.init)
   }
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `DotLottieFile`.
   /// The `loadDotLottieFile` closure is called exactly once in `onAppear`.
-  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.reloadAnimationTrigger(...)`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
+  /// You can use the `DotLottieFile` static methods API which use Swift concurrency to load your `.lottie` files:
+  /// ```
+  /// LottieView {
+  ///  try await DotLottieFile.named(name)
+  /// } placeholder: {
+  ///  LoadingView()
+  /// }
+  /// ```
   public init(
     _ loadDotLottieFile: @escaping () async throws -> DotLottieFile?,
     @ViewBuilder placeholder: @escaping (() -> Placeholder))
@@ -69,10 +92,18 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimationSource`.
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
-  /// If you wish to call `loadAnimation` again at a different time, you can use `.loadAnimationTrigger(...)`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.reloadAnimationTrigger(...)`.
+  /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
+  public init(_ loadAnimation: @escaping () async throws -> LottieAnimationSource?) where Placeholder == EmptyView {
+    self.init(loadAnimation, placeholder: EmptyView.init)
+  }
+
+  /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimationSource`.
+  /// The `loadAnimation` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.reloadAnimationTrigger(...)`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
   public init(
-    loadAnimation: @escaping () async throws -> LottieAnimationSource?,
+    _ loadAnimation: @escaping () async throws -> LottieAnimationSource?,
     @ViewBuilder placeholder: @escaping () -> Placeholder)
   {
     self.loadAnimation = loadAnimation
@@ -110,9 +141,8 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     .onAppear {
       loadAnimationIfNecessary()
     }
-    .valueChanged(value: loadAnimationTrigger?.wrappedValue) { _ in
-      animationSource = nil
-      loadAnimationIfNecessary()
+    .valueChanged(value: reloadAnimationTrigger) { _ in
+      reloadAnimationTriggerDidChange()
     }
   }
 
@@ -299,12 +329,16 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   /// whenever the `binding` value is updated.
   ///
   /// - Note: This function requires a valid `loadAnimation` closure provided during view initialization,
-  ///         otherwise the `loadAnimationTrigger` will have no effect.
-  /// - Note: The existing animation will be removed before calling `loadAnimation`,
-  ///         which will cause the `Placeholder` to be displayed until the new animation finishes loading.
-  public func loadAnimationTrigger<Value: Hashable>(_ binding: Binding<Value>) -> Self {
+  ///         otherwise `reloadAnimationTrigger` will have no effect.
+  /// - Parameters:
+  ///   - binding: The binding that triggers the reloading when its value changes.
+  ///   - showPlaceholder: When `true`, the current animation will be removed before invoking `loadAnimation`,
+  ///     displaying the `Placeholder` until the new animation loads.
+  ///     When `false`, the previous animation remains visible while the new one loads.
+  public func reloadAnimationTrigger<Value: Equatable>(_ value: Value, showPlaceholder: Bool = true) -> Self {
     var copy = self
-    copy.loadAnimationTrigger = binding.map(transform: AnyHashable.init)
+    copy.reloadAnimationTrigger = AnyEquatable(value)
+    copy.showPlaceholderWhileReloading = showPlaceholder
     return copy
   }
 
@@ -355,8 +389,9 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   // MARK: Private
 
   @State private var animationSource: LottieAnimationSource?
-  private var loadAnimationTrigger: Binding<AnyHashable>?
+  private var reloadAnimationTrigger: AnyEquatable?
   private var loadAnimation: (() async throws -> LottieAnimationSource?)?
+  private var showPlaceholderWhileReloading = false
   private var imageProvider: AnimationImageProvider?
   private var textProvider: AnimationTextProvider = DefaultTextProvider()
   private var fontProvider: AnimationFontProvider = DefaultFontProvider()
@@ -366,10 +401,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   private let placeholder: (() -> Placeholder)?
 
   private func loadAnimationIfNecessary() {
-    guard
-      let loadAnimation = loadAnimation,
-      animationSource == nil
-    else { return }
+    guard let loadAnimation = loadAnimation else { return }
 
     Task {
       do {
@@ -380,4 +412,13 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     }
   }
 
+  private func reloadAnimationTriggerDidChange() {
+    guard loadAnimation != nil else { return }
+
+    if showPlaceholderWhileReloading {
+      animationSource = nil
+    }
+
+    loadAnimationIfNecessary()
+  }
 }

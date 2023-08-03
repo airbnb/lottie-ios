@@ -45,14 +45,14 @@ struct AnimationPreviewView: View {
   var body: some View {
     VStack {
       LottieView {
-        try await lottieSource()
+        try await loadAnimation()
       } placeholder: {
         LoadingIndicator()
           .frame(width: 50, height: 50)
       }
       .imageProvider(.exampleAppSampleImages)
       .resizable()
-      .loadAnimationTrigger($currentURLIndex)
+      .reloadAnimationTrigger(currentURLIndex, showPlaceholder: false)
       .looping()
       .currentProgress(animationPlaying ? nil : sliderValue)
       .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
@@ -86,18 +86,17 @@ struct AnimationPreviewView: View {
   @State private var sliderValue: AnimationProgressTime = 0
   @State private var currentURLIndex: Int
 
-  private func lottieSource() async throws -> LottieAnimationSource? {
+  private func loadAnimation() async throws -> LottieAnimationSource? {
     switch animationSource {
     case .local(let name):
-      if let animation = LottieAnimation.named(name) {
-        return .lottieAnimation(animation)
+      if name.hasSuffix(".lottie") {
+        return try await DotLottieFile.named(name).animationSource
       } else {
-        let lottie = try await DotLottieFile.named(name)
-        return .dotLottieFile(lottie)
+        return LottieAnimation.named(name)?.animationSource
       }
+
     case .remote:
-      let animation = await LottieAnimation.loadedFrom(url: urls[currentURLIndex])
-      return animation.map(LottieAnimationSource.lottieAnimation)
+      return await LottieAnimation.loadedFrom(url: urls[currentURLIndex])?.animationSource
     }
   }
 

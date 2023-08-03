@@ -1,11 +1,21 @@
 // Created by Cal Stephens on 7/26/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
-public enum LottieAnimationSource: Sendable {
-  case lottieAnimation(LottieAnimation)
-  case dotLottieFile(DotLottieFile)
+// MARK: - LottieAnimationSource
 
-  /// The animation displayed by this data source
+/// A data source for a Lottie animation.
+/// Either a `LottieAnimation` loaded from a `.json` file,
+/// or a `DotLottieFile` loaded from a `.lottie` file.
+public enum LottieAnimationSource: Sendable {
+  /// A `LottieAnimation` loaded from a `.json` file
+  case lottieAnimation(LottieAnimation)
+
+  /// A `DotLottieFile` loaded from a `.lottie` file
+  case dotLottieFile(DotLottieFile)
+}
+
+extension LottieAnimationSource {
+  /// The default animation displayed by this data source
   var animation: LottieAnimation? {
     switch self {
     case .lottieAnimation(let animation):
@@ -13,5 +23,19 @@ public enum LottieAnimationSource: Sendable {
     case .dotLottieFile(let dotLottieFile):
       return dotLottieFile.animation()?.animation
     }
+  }
+}
+
+extension LottieAnimation {
+  /// This animation represented as a `LottieAnimationSource`
+  public var animationSource: LottieAnimationSource {
+    .lottieAnimation(self)
+  }
+}
+
+extension DotLottieFile {
+  /// This animation represented as a `LottieAnimationSource`
+  public var animationSource: LottieAnimationSource {
+    .dotLottieFile(self)
   }
 }

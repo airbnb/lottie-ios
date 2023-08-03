@@ -10,29 +10,33 @@ struct AnimationListView: View {
 
   // MARK: Internal
 
-  let directory: String
+  enum Content: Hashable, Sendable {
+    case directory(_ directory: String)
+    case custom(name: String, items: [Item])
+  }
+
+  var content: Content
 
   var body: some View {
     List {
       ForEach(items, id: \.self) { item in
         NavigationLink(value: item) {
           switch item {
-          case .animation(let animationName, _):
+          case .animation, .remoteAnimations:
             HStack {
-              LottieView(animation: .named(animationName, subdirectory: directory))
-                .currentProgress(0.5)
-                .imageProvider(.exampleAppSampleImages)
-                .frame(width: 50, height: 50)
-                .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+              LottieView {
+                try await makeThumbnailAnimation(for: item)
+              }
+              .currentProgress(0.5)
+              .imageProvider(.exampleAppSampleImages)
+              .frame(width: 50, height: 50)
+              .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
 
-              Text(animationName)
+              Text(item.name)
             }
 
-          case .subdirectory(let subdirectoryURL):
-            Text(subdirectoryURL.lastPathComponent)
-              .frame(height: 50)
-          case .remoteDemo:
-            Text("Remote animations")
+          case .animationList:
+            Text(item.name)
               .frame(height: 50)
           }
         }
@@ -40,16 +44,33 @@ struct AnimationListView: View {
           switch item {
           case .animation(_, let animationPath):
             AnimationPreviewView(animationSource: .local(animationPath: animationPath))
-          case .subdirectory(let subdirectoryURL):
-            AnimationListView(directory: "\(directory)/\(subdirectoryURL.lastPathComponent)")
-          case .remoteDemo:
-            // View is already contained in a nav stack
-            RemoteAnimationsDemoView(wrapInNavStack: false)
+          case .remoteAnimations(let name, let urls):
+            AnimationPreviewView(animationSource: .remote(urls: urls, name: name))
+          case .animationList(let listContent):
+            AnimationListView(content: listContent)
           }
         }
       }
     }
-    .navigationTitle(directory)
+    .navigationTitle(content.name)
+  }
+
+  func makeThumbnailAnimation(for item: Item) async throws -> LottieAnimationSource? {
+    switch item {
+    case .animation(let animationName, _):
+      if animationName.hasSuffix(".lottie") {
+        return try await DotLottieFile.named(animationName, subdirectory: directory).animationSource
+      } else {
+        return LottieAnimation.named(animationName, subdirectory: directory)?.animationSource
+      }
+
+    case .remoteAnimations(_, let urls):
+      guard let url = urls.first else { return nil }
+      return await LottieAnimation.loadedFrom(url: url)?.animationSource
+
+    case .animationList:
+      return nil
+    }
   }
 
   // MARK: Private
@@ -58,22 +79,37 @@ struct AnimationListView: View {
     directory == "Samples"
   }
 
+  private var directory: String {
+    switch content {
+    case .directory(let directory):
+      return directory
+    case .custom:
+      return "n/a"
+    }
+  }
+
 }
 
 extension AnimationListView {
 
   // MARK: Internal
 
-  enum Item: Hashable {
-    case subdirectory(URL)
+  enum Item: Hashable, Sendable {
+    case animationList(AnimationListView.Content)
     case animation(name: String, path: String)
-    case remoteDemo
+    case remoteAnimations(name: String, urls: [URL])
   }
 
   var items: [Item] {
-    animations.map { .animation(name: $0.name, path: $0.path) }
-      + subdirectoryURLs.map { .subdirectory($0) }
-      + customDemos
+    switch content {
+    case .directory:
+      return animations.map { .animation(name: $0.name, path: $0.path) }
+        + subdirectoryURLs.map { .animationList(.directory("\(directory)/\($0.lastPathComponent)")) }
+        + customDemos
+
+    case .custom(_, let items):
+      return items
+    }
   }
 
   // MARK: Private
@@ -111,6 +147,48 @@ extension AnimationListView {
   }
 
   private var customDemos: [Item] {
-    isTopLevel ? [.remoteDemo] : []
+    guard isTopLevel else { return [] }
+
+    return [
+      .animationList(.remoteAnimationsDemo),
+    ]
+  }
+}
+
+extension AnimationListView.Item {
+  var name: String {
+    switch self {
+    case .animation(let animationName, _), .remoteAnimations(let animationName, _):
+      return animationName
+    case .animationList(let content):
+      return content.name
+    }
+  }
+}
+
+extension AnimationListView.Content {
+  static var remoteAnimationsDemo: AnimationListView.Content {
+    .custom(
+      name: "Remote Animations",
+      items: [
+        .remoteAnimations(
+          name: "Rooms Animation",
+          urls: [URL(string: "https://a0.muscache.com/pictures/96699af6-b73e-499f-b0f5-3c862ae7d126.json")!]),
+        .remoteAnimations(
+          name: "Multiple Animations",
+          urls: [
+            URL(string: "https://a0.muscache.com/pictures/a7c140ee-6818-4a8a-b3b1-0c785054a611.json")!,
+            URL(string: "https://a0.muscache.com/pictures/96699af6-b73e-499f-b0f5-3c862ae7d126.json")!,
+          ]),
+      ])
+  }
+
+  var name: String {
+    switch self {
+    case .directory(let directory):
+      return directory.components(separatedBy: "/").last ?? directory
+    case .custom(let name, _):
+      return name
+    }
   }
 }

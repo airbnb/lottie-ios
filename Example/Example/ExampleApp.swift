@@ -8,7 +8,7 @@ struct ExampleApp: App {
   var body: some Scene {
     WindowGroup {
       NavigationStack {
-        AnimationListView(directory: "Samples")
+        AnimationListView(content: .directory("Samples"))
       }
     }
   }

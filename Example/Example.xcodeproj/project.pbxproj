@@ -29,8 +29,6 @@
 		2E9E77AF27602BD400C84BA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E77AE27602BD400C84BA3 /* AppDelegate.swift */; };
 		2EC6E5082763D981002E091C /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6E5072763D981002E091C /* LinkView.swift */; };
 		2EC6E5102763E79F002E091C /* AnimationPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6E50F2763E79F002E091C /* AnimationPreviewViewController.swift */; };
-		AB3278112A71A86E00A9C9F1 /* RemoteAnimationDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB82EA9A2A7090B400AEBB48 /* RemoteAnimationDemoView.swift */; };
-		AB82EA9B2A7090B400AEBB48 /* RemoteAnimationDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB82EA9A2A7090B400AEBB48 /* RemoteAnimationDemoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -69,7 +67,6 @@
 		2E9E77BC27602BD400C84BA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EC6E5072763D981002E091C /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
 		2EC6E50F2763E79F002E091C /* AnimationPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationPreviewViewController.swift; sourceTree = "<group>"; };
-		AB82EA9A2A7090B400AEBB48 /* RemoteAnimationDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAnimationDemoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +101,6 @@
 				08E359932A55FFC400141956 /* LottieViewLayoutDemoView.swift */,
 				08E359972A55FFC600141956 /* Example.entitlements */,
 				607FACD11AFB9204008FA782 /* Products */,
-				AB82EA9A2A7090B400AEBB48 /* RemoteAnimationDemoView.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -288,7 +284,6 @@
 				08E359922A55FFC400141956 /* ExampleApp.swift in Sources */,
 				085D97872A5E0DB600C78D18 /* AnimationPreviewView.swift in Sources */,
 				085D97852A5DF94C00C78D18 /* AnimationListView.swift in Sources */,
-				AB3278112A71A86E00A9C9F1 /* RemoteAnimationDemoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +295,6 @@
 				2E1670CC2784F9C1009CDED3 /* AnimatedSwitchRow.swift in Sources */,
 				2E97E3052767E7C600FE22C3 /* Configuration.swift in Sources */,
 				2E1670C32784F009009CDED3 /* ControlsDemoViewController.swift in Sources */,
-				AB82EA9B2A7090B400AEBB48 /* RemoteAnimationDemoView.swift in Sources */,
 				2E1670CA2784F123009CDED3 /* AnimatedButtonRow.swift in Sources */,
 				2E362A1E2762BA06006AE7D2 /* SampleListViewController.swift in Sources */,
 				2E9E77AF27602BD400C84BA3 /* AppDelegate.swift in Sources */,
