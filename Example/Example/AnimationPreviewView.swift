@@ -65,9 +65,9 @@ struct AnimationPreviewView: View {
             animationPlaying = false
           }
         })
-        #endif
 
         Spacer(minLength: 16)
+        #endif
 
         Button {
           animationPlaying.toggle()
@@ -116,6 +116,7 @@ struct AnimationPreviewView: View {
 
   @ViewBuilder
   private var optionsMenu: some View {
+    #if !os(tvOS)
     Menu {
       Menu {
         option("Automatic", keyPath: \.renderingEngine, value: .automatic)
@@ -155,6 +156,7 @@ struct AnimationPreviewView: View {
     } label: {
       Image(systemName: "gear")
     }
+    #endif
   }
 
   private func loadAnimation() async throws -> LottieAnimationSource? {
