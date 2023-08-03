@@ -59,7 +59,6 @@ final class SampleListViewController: CollectionViewController {
 
     if isTopLevel {
       demoLinks
-      remoteAnimationLinks
     }
   }
 
@@ -122,17 +121,6 @@ final class SampleListViewController: CollectionViewController {
       content: .init(animationName: nil, title: "Controls Demo"))
       .didSelect { [weak self] context in
         self?.show(ControlsDemoViewController(), sender: context.view)
-      }
-  }
-
-  @ItemModelBuilder
-  private var remoteAnimationLinks: [ItemModeling] {
-    LinkView.itemModel(
-      dataID: "Remote animations",
-      content: .init(animationName: nil, title: "Remote animations"))
-      .didSelect { [weak self] _ in
-        let remoteAnimationsDemo = UIHostingController(rootView: RemoteAnimationsDemoView(wrapInNavStack: true))
-        self?.present(remoteAnimationsDemo, animated: true)
       }
   }
 

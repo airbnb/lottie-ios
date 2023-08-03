@@ -94,8 +94,16 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   /// The `loadAnimation` closure is called exactly once in `onAppear`.
   /// If you wish to call `loadAnimation` again at a different time, you can use `.reloadAnimationTrigger(...)`.
   /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
+  public init(_ loadAnimation: @escaping () async throws -> LottieAnimationSource?) where Placeholder == EmptyView {
+    self.init(loadAnimation, placeholder: EmptyView.init)
+  }
+
+  /// Creates a `LottieView` that asynchronously loads and displays the given `LottieAnimationSource`.
+  /// The `loadAnimation` closure is called exactly once in `onAppear`.
+  /// If you wish to call `loadAnimation` again at a different time, you can use `.reloadAnimationTrigger(...)`.
+  /// While the animation is loading, the `placeholder` view is shown in place of the `LottieAnimationView`.
   public init(
-    loadAnimation: @escaping () async throws -> LottieAnimationSource?,
+    _ loadAnimation: @escaping () async throws -> LottieAnimationSource?,
     @ViewBuilder placeholder: @escaping () -> Placeholder)
   {
     self.loadAnimation = loadAnimation
