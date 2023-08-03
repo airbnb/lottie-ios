@@ -132,6 +132,13 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
           if animationSource.animation !== context.view.animation {
             context.view.loadAnimation(animationSource)
           }
+
+          if
+            let playbackMode = playbackMode,
+            playbackMode != context.view.currentPlaybackMode
+          {
+            context.view.play(playbackMode)
+          }
         }
         .configurations(configurations)
       } else {
@@ -165,14 +172,21 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     return copy
   }
 
-  /// Returns a copy of this view that loops its animation whenever visible by playing
-  /// whenever it is updated with a `loopMode` of `.loop` if not already playing.
+  /// Returns a copy of this view that loops its animation whenever visible
   public func looping() -> Self {
-    configure { view in
-      if !view.isAnimationPlaying {
-        view.play(fromProgress: 0, toProgress: 1, loopMode: .loop)
-      }
-    }
+    play(.fromProgress(0, toProgress: 1, loopMode: .loop))
+  }
+
+  /// Returns a copy of this view playing with the given `LottiePlaybackMode`
+  public func play(_ playbackMode: LottiePlaybackMode) -> Self {
+    self.playbackMode(playbackMode)
+  }
+
+  /// Returns a copy of this view using the given `LottiePlaybackMode`
+  public func playbackMode(_ playbackMode: LottiePlaybackMode) -> Self {
+    var copy = self
+    copy.playbackMode = playbackMode
+    return copy
   }
 
   /// Returns a copy of this view updated to have the provided background behavior.
@@ -283,14 +297,10 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   ///  - If the `animationProgress` is `nil`, no changes will be made and any existing animations
   ///    will continue playing uninterrupted.
   public func currentProgress(_ currentProgress: AnimationProgressTime?) -> Self {
-    configure { view in
-      if
-        let currentProgress = currentProgress,
-        view.currentProgress != currentProgress
-      {
-        view.currentProgress = currentProgress
-      }
-    }
+    guard let currentProgress = currentProgress else { return self }
+    var copy = self
+    copy.playbackMode = .progress(currentProgress)
+    return copy
   }
 
   /// Returns a copy of this view updated to display the given `AnimationFrameTime`.
@@ -299,14 +309,10 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   ///  - If the `currentFrame` is `nil`, no changes will be made and any existing animations
   ///    will continue playing uninterrupted.
   public func currentFrame(_ currentFrame: AnimationFrameTime?) -> Self {
-    configure { view in
-      if
-        let currentFrame = currentFrame,
-        view.currentFrame != currentFrame
-      {
-        view.currentFrame = currentFrame
-      }
-    }
+    guard let currentFrame = currentFrame else { return self }
+    var copy = self
+    copy.playbackMode = .frame(currentFrame)
+    return copy
   }
 
   /// Returns a copy of this view updated to display the given time value.
@@ -315,14 +321,10 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   ///  - If the `currentTime` is `nil`, no changes will be made and any existing animations
   ///    will continue playing uninterrupted.
   public func currentTime(_ currentTime: TimeInterval?) -> Self {
-    configure { view in
-      if
-        let currentTime = currentTime,
-        view.currentTime != currentTime
-      {
-        view.currentTime = currentTime
-      }
-    }
+    guard let currentTime = currentTime else { return self }
+    var copy = self
+    copy.playbackMode = .time(currentTime)
+    return copy
   }
 
   /// Returns a new instance of this view, which will invoke the provided `loadAnimation` closure
@@ -389,6 +391,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   // MARK: Private
 
   @State private var animationSource: LottieAnimationSource?
+  private var playbackMode: LottiePlaybackMode?
   private var reloadAnimationTrigger: AnyEquatable?
   private var loadAnimation: (() async throws -> LottieAnimationSource?)?
   private var showPlaceholderWhileReloading = false

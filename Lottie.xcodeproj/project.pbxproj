@@ -88,6 +88,9 @@
 		08C002F52A461D6A00AB54BA /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C002F42A461D6A00AB54BA /* LottieView.swift */; };
 		08C002F62A461D6A00AB54BA /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C002F42A461D6A00AB54BA /* LottieView.swift */; };
 		08CB2681291ED2B700B4F071 /* AnimationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB2680291ED2B700B4F071 /* AnimationViewTests.swift */; };
+		08CD109C2A7C2D9F0043A1A9 /* LottiePlaybackMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CD109B2A7C2D9F0043A1A9 /* LottiePlaybackMode.swift */; };
+		08CD109D2A7C2D9F0043A1A9 /* LottiePlaybackMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CD109B2A7C2D9F0043A1A9 /* LottiePlaybackMode.swift */; };
+		08CD109E2A7C2D9F0043A1A9 /* LottiePlaybackMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CD109B2A7C2D9F0043A1A9 /* LottiePlaybackMode.swift */; };
 		08E206DF2A56014E002DCE17 /* StyledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E206AD2A56014E002DCE17 /* StyledView.swift */; };
 		08E206E02A56014E002DCE17 /* StyledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E206AD2A56014E002DCE17 /* StyledView.swift */; };
 		08E206E12A56014E002DCE17 /* StyledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E206AD2A56014E002DCE17 /* StyledView.swift */; };
@@ -876,6 +879,7 @@
 		08C002F32A461A7300AB54BA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		08C002F42A461D6A00AB54BA /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		08CB2680291ED2B700B4F071 /* AnimationViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewTests.swift; sourceTree = "<group>"; };
+		08CD109B2A7C2D9F0043A1A9 /* LottiePlaybackMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottiePlaybackMode.swift; sourceTree = "<group>"; };
 		08E206AD2A56014E002DCE17 /* StyledView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledView.swift; sourceTree = "<group>"; };
 		08E206AE2A56014E002DCE17 /* ViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewType.swift; sourceTree = "<group>"; };
 		08E206AF2A56014E002DCE17 /* ContentConfigurableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentConfigurableView.swift; sourceTree = "<group>"; };
@@ -1887,6 +1891,7 @@
 				0887347428F0CCDD00458627 /* LottieAnimationView.swift */,
 				0887347328F0CCDD00458627 /* LottieAnimationViewInitializers.swift */,
 				08C002F42A461D6A00AB54BA /* LottieView.swift */,
+				08CD109B2A7C2D9F0043A1A9 /* LottiePlaybackMode.swift */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -2332,6 +2337,7 @@
 				2E9C95D32822F43100677516 /* Fill.swift in Sources */,
 				6DB3BDB8282454A6002A276D /* DictionaryInitializable.swift in Sources */,
 				08E207002A56014E002DCE17 /* UIViewConfiguringSwiftUIView.swift in Sources */,
+				08CD109C2A7C2D9F0043A1A9 /* LottiePlaybackMode.swift in Sources */,
 				2E9C96B72822F43100677516 /* NodePropertyMap.swift in Sources */,
 				2E9C97682822F43100677516 /* VectorsExtensions.swift in Sources */,
 				2E9C97232822F43100677516 /* RectangleAnimation.swift in Sources */,
@@ -2715,6 +2721,7 @@
 				2EAF5AF927A0798700E00531 /* FloatValueProvider.swift in Sources */,
 				2E9C968E2822F43100677516 /* PassThroughOutputNode.swift in Sources */,
 				08E207402A56014E002DCE17 /* SetBehaviorsProviding.swift in Sources */,
+				08CD109D2A7C2D9F0043A1A9 /* LottiePlaybackMode.swift in Sources */,
 				2EAF5AB727A0798700E00531 /* CompatibleAnimationKeypath.swift in Sources */,
 				2E9C96882822F43100677516 /* GroupOutputNode.swift in Sources */,
 				2E9C966A2822F43100677516 /* InvertedMatteLayer.swift in Sources */,
@@ -2905,6 +2912,7 @@
 				2E9C96B92822F43100677516 /* NodePropertyMap.swift in Sources */,
 				2E9C976A2822F43100677516 /* VectorsExtensions.swift in Sources */,
 				08E207022A56014E002DCE17 /* UIViewConfiguringSwiftUIView.swift in Sources */,
+				08CD109E2A7C2D9F0043A1A9 /* LottiePlaybackMode.swift in Sources */,
 				2E9C97252822F43100677516 /* RectangleAnimation.swift in Sources */,
 				2E450DAE283415D500E56D19 /* OpacityAnimation.swift in Sources */,
 				2E9C96FE2822F43100677516 /* CALayer+setupLayerHierarchy.swift in Sources */,
