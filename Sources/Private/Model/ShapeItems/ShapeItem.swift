@@ -52,7 +52,7 @@ extension ShapeType: ClassFamily {
 
 // MARK: - ShapeType
 
-enum ShapeType: String, Codable {
+enum ShapeType: String, Codable, Sendable {
   case ellipse = "el"
   case fill = "fl"
   case gradientFill = "gf"
@@ -165,3 +165,9 @@ extension Array where Element == ShapeItem {
     }
   }
 }
+
+// MARK: - ShapeItem + Sendable
+
+/// Since `ShapeItem` isn't `final`, we have to use `@unchecked Sendable` instead of `Sendable.`
+/// All `ShapeItem` subclasses are immutable `Sendable` values.
+extension ShapeItem: @unchecked Sendable { }

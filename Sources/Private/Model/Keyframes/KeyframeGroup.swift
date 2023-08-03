@@ -203,6 +203,10 @@ extension KeyframeGroup: Hashable where T: Hashable {
   }
 }
 
+// MARK: Sendable
+
+extension KeyframeGroup: Sendable where T: Sendable { }
+
 extension Keyframe {
   /// Creates a copy of this `Keyframe` with the same timing data, but a different value
   func withValue<Value>(_ newValue: Value) -> Keyframe<Value> {

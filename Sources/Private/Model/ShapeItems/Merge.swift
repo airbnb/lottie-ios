@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - MergeMode
 
-enum MergeMode: Int, Codable {
+enum MergeMode: Int, Codable, Sendable {
   case none
   case merge
   case add

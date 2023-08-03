@@ -13,7 +13,7 @@ import Foundation
 /// The default size of the cache is 100.
 ///
 /// This cache implementation also responds to memory pressure, as it's backed by `NSCache`.
-public class DefaultAnimationCache: AnimationCacheProvider {
+public class DefaultAnimationCache: AnimationCacheProvider, @unchecked Sendable {
 
   // MARK: Lifecycle
 
@@ -27,10 +27,9 @@ public class DefaultAnimationCache: AnimationCacheProvider {
   public static let sharedCache = DefaultAnimationCache()
 
   /// The size of the cache.
-  public var cacheSize = defaultCacheCountLimit {
-    didSet {
-      cache.countLimit = cacheSize
-    }
+  public var cacheSize: Int {
+    get { cache.countLimit }
+    set { cache.countLimit = newValue }
   }
 
   /// Clears the Cache.
@@ -50,5 +49,5 @@ public class DefaultAnimationCache: AnimationCacheProvider {
 
   private static let defaultCacheCountLimit = 100
 
-  private var cache = NSCache<NSString, LottieAnimation>()
+  private let cache = NSCache<NSString, LottieAnimation>()
 }

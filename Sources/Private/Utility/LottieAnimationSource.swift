@@ -1,7 +1,7 @@
 // Created by Cal Stephens on 7/26/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
-public enum LottieAnimationSource {
+public enum LottieAnimationSource: Sendable {
   case lottieAnimation(LottieAnimation)
   case dotLottieFile(DotLottieFile)
 

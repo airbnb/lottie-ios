@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Font
 
-final class Font: Codable, DictionaryInitializable {
+final class Font: Codable, Sendable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
@@ -41,7 +41,7 @@ final class Font: Codable, DictionaryInitializable {
 // MARK: - FontList
 
 /// A list of fonts
-final class FontList: Codable, DictionaryInitializable {
+final class FontList: Codable, Sendable, DictionaryInitializable {
 
   // MARK: Lifecycle
 

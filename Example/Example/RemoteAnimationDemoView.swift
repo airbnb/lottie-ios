@@ -6,6 +6,7 @@ import SwiftUI
 
 // MARK: - AnimationListView
 
+@MainActor
 struct RemoteAnimationsDemoView: View {
 
   struct Item: Hashable {

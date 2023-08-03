@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class AssetLibrary: Codable, AnyInitializable {
+final class AssetLibrary: Codable, AnyInitializable, Sendable {
 
   // MARK: Lifecycle
 

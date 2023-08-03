@@ -69,7 +69,7 @@ extension Double {
 // MARK: - LottieVector2D
 
 /// Needed for decoding json {x: y:} to a CGPoint
-public struct LottieVector2D: Codable, Hashable {
+public struct LottieVector2D: Codable, Hashable, Sendable {
 
   // MARK: Lifecycle
 

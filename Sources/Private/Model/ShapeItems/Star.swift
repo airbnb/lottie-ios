@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - StarType
 
-enum StarType: Int, Codable {
+enum StarType: Int, Codable, Sendable {
   case none
   case star
   case polygon
