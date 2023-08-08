@@ -86,8 +86,8 @@ extension KeyframeGroup: Decodable where T: Decodable {
 
         guard
           let value: T = keyframeData.startValue ?? previousKeyframeData?.endValue,
-          let time = keyframeData.time else
-        {
+          let time = keyframeData.time
+        else {
           /// Missing keyframe data. JSON must be corrupt.
           throw DecodingError.dataCorruptedError(
             forKey: KeyframeWrapperKey.keyframeData,
@@ -165,8 +165,8 @@ extension KeyframeGroup: DictionaryInitializable where T: AnyInitializable {
         let data = try KeyframeData<T>(dictionary: frameDictionary)
         guard
           let value: T = data.startValue ?? previousKeyframeData?.endValue,
-          let time = data.time else
-        {
+          let time = data.time
+        else {
           throw InitializableError.invalidInput
         }
         keyframes.append(Keyframe<T>(

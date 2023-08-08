@@ -5,7 +5,7 @@
 
 /// A protocol that allows us to check identity and equality between items for the purposes of
 /// diffing.
-internal protocol Diffable {
+protocol Diffable {
 
   /// Checks for equality between items when diffing.
   ///

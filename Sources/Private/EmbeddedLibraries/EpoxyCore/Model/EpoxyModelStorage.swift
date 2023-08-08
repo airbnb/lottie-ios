@@ -8,16 +8,16 @@
 ///
 /// Supports being extended with additional storage capabilities in other modules and conditionally
 /// based on the provider capabilities that the content containing this storage conforms to.
-internal struct EpoxyModelStorage {
+struct EpoxyModelStorage {
 
   // MARK: Lifecycle
 
-  internal init() { }
+  init() { }
 
   // MARK: Internal
 
   /// Stores or retrieves the value of the specified property.
-  internal subscript<Property>(property: EpoxyModelProperty<Property>) -> Property {
+  subscript<Property>(property: EpoxyModelProperty<Property>) -> Property {
     get {
       guard let propertyStorage = storage[property.keyPath] else {
         return property.defaultValue()
@@ -51,7 +51,7 @@ internal struct EpoxyModelStorage {
   ///
   /// In the case of a collision, the `UpdateStrategy` of the property is used to determine the
   /// resulting value in this storage.
-  internal mutating func merge(_ other: Self) {
+  mutating func merge(_ other: Self) {
     for (key, otherValue) in other.storage {
       // We first update the value without using the `updateStrategy` since the likely scenario
       // is that there won't be a collision that requires the `updateStrategy`, and we'll be able to

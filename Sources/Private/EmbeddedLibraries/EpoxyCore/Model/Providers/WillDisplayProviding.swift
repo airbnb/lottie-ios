@@ -8,7 +8,7 @@
 ///
 /// - SeeAlso: `DidDisplayProviding`
 /// - SeeAlso: `DidEndDisplayingProviding`
-internal protocol WillDisplayProviding { }
+protocol WillDisplayProviding { }
 
 // MARK: - CallbackContextEpoxyModeled
 
@@ -18,18 +18,18 @@ extension CallbackContextEpoxyModeled where Self: WillDisplayProviding {
 
   /// A closure that's called when a view is about to be displayed, before it has been added to the
   /// view hierarcy.
-  internal typealias WillDisplay = (_ context: CallbackContext) -> Void
+  typealias WillDisplay = (_ context: CallbackContext) -> Void
 
   /// A closure that's called when the view is about to be displayed, before it has been added to
   /// the view hierarcy.
-  internal var willDisplay: WillDisplay? {
+  var willDisplay: WillDisplay? {
     get { self[willDisplayProperty] }
     set { self[willDisplayProperty] = newValue }
   }
 
   /// Returns a copy of this model with the given will display closure called after the current will
   /// display closure of this model, if there is one.
-  internal func willDisplay(_ value: WillDisplay?) -> Self {
+  func willDisplay(_ value: WillDisplay?) -> Self {
     copy(updating: willDisplayProperty, to: value)
   }
 

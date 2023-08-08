@@ -56,7 +56,9 @@ class ShapeContainerLayer: CALayer {
       rebuildContents(forFrame: forFrame)
     }
     guard isHidden == false else { return }
-    renderLayers.forEach { $0.markRenderUpdates(forFrame: forFrame) }
+    for renderLayer in renderLayers {
+      renderLayer.markRenderUpdates(forFrame: forFrame)
+    }
   }
 
   func hasRenderUpdate(forFrame _: CGFloat) -> Bool {
@@ -69,7 +71,9 @@ class ShapeContainerLayer: CALayer {
 
   func updateRenderScale() {
     contentsScale = renderScale
-    renderLayers.forEach { $0.renderScale = renderScale }
+    for renderLayer in renderLayers {
+      renderLayer.renderScale = renderScale
+    }
   }
 
 }

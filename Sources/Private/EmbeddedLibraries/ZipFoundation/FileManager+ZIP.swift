@@ -307,7 +307,7 @@ extension Date {
   // MARK: Internal
 
   var fileModificationDateTime: (UInt16, UInt16) {
-    return (self.fileModificationDate, self.fileModificationTime)
+    (self.fileModificationDate, self.fileModificationTime)
   }
 
   var fileModificationDate: UInt16 {
@@ -321,7 +321,7 @@ extension Date {
     year = year <= 2099 ? year : 2099
     let month = unixTime.pointee.tm_mon + 1 // UNIX time struct month entries are zero based.
     let day = unixTime.pointee.tm_mday
-    return (UInt16)(day + (month * 32) + ((year - 1980) * 512))
+    return UInt16(day + (month * 32) + ((year - 1980) * 512))
   }
 
   var fileModificationTime: UInt16 {
@@ -332,7 +332,7 @@ extension Date {
     let hour = unixTime.pointee.tm_hour
     let minute = unixTime.pointee.tm_min
     let second = unixTime.pointee.tm_sec
-    return (UInt16)((second / 2) + (minute * 32) + (hour * 2048))
+    return UInt16((second / 2) + (minute * 32) + (hour * 2048))
   }
 }
 

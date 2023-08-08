@@ -139,7 +139,9 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     if respectAnimationFrameRate {
       newFrame = floor(newFrame)
     }
-    animationLayers.forEach { $0.displayWithFrame(frame: newFrame, forceUpdates: false) }
+    for animationLayer in animationLayers {
+      animationLayer.displayWithFrame(frame: newFrame, forceUpdates: false)
+    }
   }
 
   // MARK: Internal
@@ -175,7 +177,9 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
 
   var renderScale: CGFloat = 1 {
     didSet {
-      animationLayers.forEach { $0.renderScale = renderScale }
+      for animationLayer in animationLayers {
+        animationLayer.renderScale = renderScale
+      }
     }
   }
 
@@ -199,7 +203,9 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
 
   /// Forces the view to update its drawing.
   func forceDisplayUpdate() {
-    animationLayers.forEach { $0.displayWithFrame(frame: currentFrame, forceUpdates: true) }
+    for animationLayer in animationLayers {
+      animationLayer.displayWithFrame(frame: currentFrame, forceUpdates: true)
+    }
   }
 
   func logHierarchyKeypaths() {

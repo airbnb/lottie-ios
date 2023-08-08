@@ -413,8 +413,8 @@ extension BezierPath: AnyInitializable {
     var outPointsDictionaries: [Any] = try pathDictionary.value(for: CodingKeys.outPoints)
     guard
       vertexDictionaries.count == inPointsDictionaries.count,
-      inPointsDictionaries.count == outPointsDictionaries.count else
-    {
+      inPointsDictionaries.count == outPointsDictionaries.count
+    else {
       throw InitializableError.invalidInput
     }
     guard vertexDictionaries.count > 0 else {

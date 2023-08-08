@@ -92,8 +92,8 @@ extension BezierPath {
         currentVertex.point.x == currentVertex.outTangent.x,
         currentVertex.point.y == currentVertex.outTangent.y,
         currentVertex.point.x == currentVertex.inTangent.x,
-        currentVertex.point.y == currentVertex.inTangent.y else
-      {
+        currentVertex.point.y == currentVertex.inTangent.y
+      else {
         newPath.addVertex(currentVertex)
         continue
       }

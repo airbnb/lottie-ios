@@ -33,8 +33,8 @@ final class LayerTextProvider {
   }
 
   func reloadTexts() {
-    textLayers.forEach {
-      $0.textProvider = textProvider
+    for textLayer in textLayers {
+      textLayer.textProvider = textProvider
     }
   }
 }

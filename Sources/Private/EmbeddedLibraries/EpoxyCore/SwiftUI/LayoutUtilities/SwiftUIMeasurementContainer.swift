@@ -13,11 +13,11 @@ import SwiftUI
 ///
 /// - SeeAlso: ``MeasuringViewRepresentable``
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
-internal final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
+final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
 
   // MARK: Lifecycle
 
-  internal init(content: Content, strategy: SwiftUIMeasurementContainerStrategy) {
+  init(content: Content, strategy: SwiftUIMeasurementContainerStrategy) {
     self.content = content
     self.strategy = strategy
 
@@ -37,7 +37,7 @@ internal final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
   }
 
   @available(*, unavailable)
-  internal required init?(coder _: NSCoder) {
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
@@ -49,12 +49,12 @@ internal final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
   /// Contains `proposedSize`/`bounds.size` fallbacks for dimensions with no intrinsic size, as
   /// compared to `intrinsicContentSize` which has `UIView.noIntrinsicMetric` fields in the case of
   /// no intrinsic size.
-  internal var measuredFittingSize: CGSize {
+  var measuredFittingSize: CGSize {
     _measuredFittingSize ?? measureView()
   }
 
   /// The `UIView` content that's being measured by this container.
-  internal var content: Content {
+  var content: Content {
     didSet {
       guard content !== oldValue else { return }
       oldValue.removeFromSuperview()
@@ -71,7 +71,7 @@ internal final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
   /// The proposed size at the time of the latest measurement.
   ///
   /// Has a side-effect of updating the `measuredIntrinsicContentSize` if it's changed.
-  internal var proposedSize = CGSize.noIntrinsicMetric {
+  var proposedSize = CGSize.noIntrinsicMetric {
     didSet {
       guard oldValue != proposedSize else { return }
       // The proposed size is only used by the measurement, so just re-measure.
@@ -82,7 +82,7 @@ internal final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
   /// The measurement strategy of this container.
   ///
   /// Has a side-effect of updating the `measuredIntrinsicContentSize` if it's changed.
-  internal var strategy: SwiftUIMeasurementContainerStrategy {
+  var strategy: SwiftUIMeasurementContainerStrategy {
     didSet {
       guard oldValue != strategy else { return }
       // Invalidate the resolved strategy since it's derived from this strategy.
@@ -92,12 +92,12 @@ internal final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
     }
   }
 
-  internal override var intrinsicContentSize: CGSize {
+  override var intrinsicContentSize: CGSize {
     _intrinsicContentSize
   }
 
   #if os(macOS)
-  internal override func layout() {
+  override func layout() {
     super.layout()
 
     // We need to re-measure the view whenever the size of the bounds changes, as the previous size
@@ -108,7 +108,7 @@ internal final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
     }
   }
   #else
-  internal override func layoutSubviews() {
+  override func layoutSubviews() {
     super.layoutSubviews()
 
     // We need to re-measure the view whenever the size of the bounds changes, as the previous size
@@ -120,7 +120,7 @@ internal final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
   }
   #endif
 
-  internal override func invalidateIntrinsicContentSize() {
+  override func invalidateIntrinsicContentSize() {
     super.invalidateIntrinsicContentSize()
 
     // Invalidate the resolved strategy in case it changes with the re-measurement as it relies on
@@ -300,7 +300,7 @@ internal final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
 // MARK: - SwiftUIMeasurementContainerStrategy
 
 /// The measurement strategy of a `SwiftUIMeasurementContainer`.
-internal enum SwiftUIMeasurementContainerStrategy {
+enum SwiftUIMeasurementContainerStrategy {
   /// The container makes a best effort to correctly choose the measurement strategy of the view.
   ///
   /// The best effort is based on a number of heuristics:

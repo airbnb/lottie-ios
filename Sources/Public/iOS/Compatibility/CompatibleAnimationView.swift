@@ -30,7 +30,7 @@ public final class CompatibleAnimation: NSObject {
 
   // MARK: Internal
 
-  internal var animation: LottieAnimation? {
+  var animation: LottieAnimation? {
     LottieAnimation.named(name, bundle: bundle, subdirectory: subdirectory)
   }
 
@@ -533,7 +533,7 @@ public final class CompatibleDictionaryTextProvider: NSObject {
 
   // MARK: Internal
 
-  internal var textProvider: AnimationTextProvider? {
+  var textProvider: AnimationTextProvider? {
     DictionaryTextProvider(values)
   }
 

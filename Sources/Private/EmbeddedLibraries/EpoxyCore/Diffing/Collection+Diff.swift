@@ -10,7 +10,7 @@ extension Collection where Element: Diffable, Index == Int {
   ///
   /// - Parameters:
   ///     - from other: The collection of old data.
-  internal func makeChangeset(from other: Self) -> IndexChangeset {
+  func makeChangeset(from other: Self) -> IndexChangeset {
     // Arranging the elements contiguously prior to diffing improves performance by ~40%.
     let new = ContiguousArray(self)
     let old = ContiguousArray(other)
@@ -122,7 +122,7 @@ extension Collection where Element: Diffable, Index == Int {
   ///     - from other: The collection of old data.
   ///     - fromSection: The section the other collection's data exists within. Defaults to `0`.
   ///     - toSection: The section this collection's data exists within. Defaults to `0`.
-  internal func makeIndexPathChangeset(
+  func makeIndexPathChangeset(
     from other: Self,
     fromSection: Int = 0,
     toSection: Int = 0)
@@ -156,7 +156,7 @@ extension Collection where Element: Diffable, Index == Int {
   ///
   /// - Parameters:
   ///     - from other: The collection of old data.
-  internal func makeIndexSetChangeset(from other: Self) -> IndexSetChangeset {
+  func makeIndexSetChangeset(from other: Self) -> IndexSetChangeset {
     let indexChangeset = makeChangeset(from: other)
 
     return IndexSetChangeset(
@@ -177,7 +177,7 @@ extension Collection where Element: DiffableSection, Index == Int {
   ///
   /// - Parameters:
   ///     - from other: The collection of old data.
-  internal func makeSectionedChangeset(from other: Self) -> SectionedChangeset {
+  func makeSectionedChangeset(from other: Self) -> SectionedChangeset {
     let sectionChangeset = makeIndexSetChangeset(from: other)
     var itemChangeset = IndexPathChangeset()
 

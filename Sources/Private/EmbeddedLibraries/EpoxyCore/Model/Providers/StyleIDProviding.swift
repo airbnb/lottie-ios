@@ -3,7 +3,7 @@
 
 // MARK: - StyleIDProviding
 
-internal protocol StyleIDProviding {
+protocol StyleIDProviding {
   /// An optional ID for a style type to use for reuse of a view.
   ///
   /// Use this to differentiate between different styling configurations.
@@ -16,13 +16,13 @@ extension EpoxyModeled where Self: StyleIDProviding {
 
   // MARK: Internal
 
-  internal var styleID: AnyHashable? {
+  var styleID: AnyHashable? {
     get { self[styleIDProperty] }
     set { self[styleIDProperty] = newValue }
   }
 
   /// Returns a copy of this model with the `styleID` replaced with the provided `value`.
-  internal func styleID(_ value: AnyHashable?) -> Self {
+  func styleID(_ value: AnyHashable?) -> Self {
     copy(updating: styleIDProperty, to: value)
   }
 

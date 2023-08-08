@@ -8,7 +8,7 @@
 ///
 /// - SeeAlso: `WillDisplayProviding`
 /// - SeeAlso: `DidEndDisplayingProviding`
-internal protocol DidDisplayProviding { }
+protocol DidDisplayProviding { }
 
 // MARK: - CallbackContextEpoxyModeled
 
@@ -18,18 +18,18 @@ extension CallbackContextEpoxyModeled where Self: DidDisplayProviding {
 
   /// A closure that's called after a view has been added to the view hierarchy following any
   /// appearance animations.
-  internal typealias DidDisplay = (_ context: CallbackContext) -> Void
+  typealias DidDisplay = (_ context: CallbackContext) -> Void
 
   /// A closure that's called after the view has been added to the view hierarchy following any
   /// appearance animations.
-  internal var didDisplay: DidDisplay? {
+  var didDisplay: DidDisplay? {
     get { self[didDisplayProperty] }
     set { self[didDisplayProperty] = newValue }
   }
 
   /// Returns a copy of this model with the given did display closure called after the current did
   /// display closure of this model, if there is one.
-  internal func didDisplay(_ value: DidDisplay?) -> Self {
+  func didDisplay(_ value: DidDisplay?) -> Self {
     copy(updating: didDisplayProperty, to: value)
   }
 

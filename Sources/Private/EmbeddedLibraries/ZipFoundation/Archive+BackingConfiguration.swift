@@ -54,8 +54,8 @@ extension Archive {
       let fileSystemRepresentation = fileManager.fileSystemRepresentation(withPath: url.path)
       guard
         let archiveFile = fopen(fileSystemRepresentation, "rb"),
-        let (eocdRecord, zip64EOCD) = Archive.scanForEndOfCentralDirectoryRecord(in: archiveFile) else
-      {
+        let (eocdRecord, zip64EOCD) = Archive.scanForEndOfCentralDirectoryRecord(in: archiveFile)
+      else {
         return nil
       }
       return BackingConfiguration(
@@ -80,8 +80,8 @@ extension Archive {
       let fileSystemRepresentation = fileManager.fileSystemRepresentation(withPath: url.path)
       guard
         let archiveFile = fopen(fileSystemRepresentation, "rb+"),
-        let (eocdRecord, zip64EOCD) = Archive.scanForEndOfCentralDirectoryRecord(in: archiveFile) else
-      {
+        let (eocdRecord, zip64EOCD) = Archive.scanForEndOfCentralDirectoryRecord(in: archiveFile)
+      else {
         return nil
       }
       fseeko(archiveFile, 0, SEEK_SET)

@@ -21,7 +21,7 @@
 /// - SeeAlso: `ContentConfigurableView`
 /// - SeeAlso: `BehaviorsConfigurableView`
 /// - SeeAlso: `EpoxyableView`
-internal protocol StyledView: ViewType {
+protocol StyledView: ViewType {
   /// The style type of this view, passed into its initializer to configure the resulting instance.
   ///
   /// Defaults to `Never` for views that do not have a `Style`.
@@ -34,7 +34,7 @@ internal protocol StyledView: ViewType {
 // MARK: Defaults
 
 extension StyledView where Style == Never {
-  internal init(style: Never) {
+  init(style: Never) {
     // An empty switch is required to silence the "'self.init' isn't called on all paths before
     // returning from initializer" error.
     switch style { }

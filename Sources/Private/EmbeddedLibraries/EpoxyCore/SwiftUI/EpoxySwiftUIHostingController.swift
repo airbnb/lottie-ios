@@ -20,7 +20,7 @@ open class EpoxySwiftUIHostingController<Content: View>: UIHostingController<Con
 
   /// Creates a `UIHostingController` that optionally ignores the `safeAreaInsets` when laying out
   /// its contained `RootView`.
-  internal convenience init(rootView: Content, ignoreSafeArea: Bool) {
+  convenience init(rootView: Content, ignoreSafeArea: Bool) {
     self.init(rootView: rootView)
 
     // We unfortunately need to call a private API to disable the safe area. We can also accomplish
