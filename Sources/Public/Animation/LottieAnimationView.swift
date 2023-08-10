@@ -319,8 +319,12 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// marker sequence is playing, the marker sequence will be cancelled.
   ///
   /// - Parameter markers: The list of markers to play sequentially.
-  open func play(markers: [String]) {
-    lottieAnimationLayer.play(markers: markers)
+  /// - Parameter completion: An optional completion closure to be called when the animation stops.
+  open func play(
+    markers: [String],
+    completion: LottieCompletionBlock? = nil)
+  {
+    lottieAnimationLayer.play(markers: markers, completion: completion)
   }
 
   /// Stops the animation and resets the view to its start frame.
@@ -338,8 +342,15 @@ open class LottieAnimationView: LottieAnimationViewBase {
   }
 
   /// Applies the given `LottiePlaybackMode` to this layer.
-  open func play(_ playbackMode: LottiePlaybackMode) {
-    lottieAnimationLayer.play(playbackMode)
+  /// - Parameter animationCompletionHandler: A closure that is called after
+  ///   an animation triggered by this method completes. This completion
+  ///   handler is **not called** after setting the playback mode to a
+  ///   mode that doesn't animate (e.g. `progress`, `frame`, `time`, or `pause`).
+  open func play(
+    _ playbackMode: LottiePlaybackMode,
+    animationCompletionHandler: LottieCompletionBlock? = nil)
+  {
+    lottieAnimationLayer.play(playbackMode, animationCompletionHandler: animationCompletionHandler)
   }
 
   // MARK: Public

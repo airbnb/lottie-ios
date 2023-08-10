@@ -54,6 +54,11 @@ struct AnimationPreviewView: View {
       .resizable()
       .reloadAnimationTrigger(currentURLIndex, showPlaceholder: false)
       .playbackMode(playbackMode)
+      .animationDidFinish { completed in
+        if completed {
+          animationPlaying = false
+        }
+      }
       .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
 
       Spacer()
