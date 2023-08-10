@@ -5,7 +5,7 @@
 
 /// A protocol that allows us to check identity and equality between sections of `Diffable` items
 /// for the purposes of diffing.
-internal protocol DiffableSection: Diffable {
+protocol DiffableSection: Diffable {
   /// The diffable items in this section.
   associatedtype DiffableItems: Collection where
     DiffableItems.Index == Int,

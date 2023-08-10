@@ -173,8 +173,8 @@ extension AnimationKeypath {
     guard
       let currentKey = currentKey,
       currentKey.equalsKeypath(keyname),
-      keys.count > 1 else
-    {
+      keys.count > 1
+    else {
       // Current key either doesnt match or we are on the last key.
       return nil
     }

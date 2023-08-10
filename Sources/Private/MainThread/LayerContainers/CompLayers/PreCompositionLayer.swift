@@ -107,12 +107,16 @@ final class PreCompositionLayer: CompositionLayer {
     } else {
       localFrame = (frame - startFrame) / timeStretch
     }
-    animationLayers.forEach { $0.displayWithFrame(frame: localFrame, forceUpdates: forceUpdates) }
+    for animationLayer in animationLayers {
+      animationLayer.displayWithFrame(frame: localFrame, forceUpdates: forceUpdates)
+    }
   }
 
   override func updateRenderScale() {
     super.updateRenderScale()
-    animationLayers.forEach { $0.renderScale = renderScale }
+    for animationLayer in animationLayers {
+      animationLayer.renderScale = renderScale
+    }
   }
 
   // MARK: Fileprivate

@@ -73,7 +73,9 @@ final class MaskContainerLayer: CALayer {
   // MARK: Internal
 
   func updateWithFrame(frame: CGFloat, forceUpdates: Bool) {
-    maskLayers.forEach { $0.updateWithFrame(frame: frame, forceUpdates: forceUpdates) }
+    for maskLayer in maskLayers {
+      maskLayer.updateWithFrame(frame: frame, forceUpdates: forceUpdates)
+    }
   }
 
   // MARK: Fileprivate

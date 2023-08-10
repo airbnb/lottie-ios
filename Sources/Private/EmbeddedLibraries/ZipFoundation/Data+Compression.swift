@@ -277,8 +277,8 @@ extension Data {
               guard
                 result != Z_NEED_DICT,
                 result != Z_DATA_ERROR,
-                result != Z_MEM_ERROR else
-              {
+                result != Z_MEM_ERROR
+              else {
                 throw CompressionError.corruptedData
               }
             }

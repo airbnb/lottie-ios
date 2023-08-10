@@ -51,20 +51,20 @@ class DotLottieImageProvider: AnimationImageProvider {
   private var images = [String: CGImage]()
 
   private func loadImages() {
-    filepath.urls.forEach {
+    for url in filepath.urls {
       #if os(iOS) || os(tvOS) || os(watchOS) || targetEnvironment(macCatalyst)
       if
-        let data = try? Data(contentsOf: $0),
+        let data = try? Data(contentsOf: url),
         let image = UIImage(data: data)?.cgImage
       {
-        images[$0.lastPathComponent] = image
+        images[url.lastPathComponent] = image
       }
       #elseif os(macOS)
       if
-        let data = try? Data(contentsOf: $0),
+        let data = try? Data(contentsOf: url),
         let image = NSImage(data: data)?.lottie_CGImage
       {
-        images[$0.lastPathComponent] = image
+        images[url.lastPathComponent] = image
       }
       #endif
     }

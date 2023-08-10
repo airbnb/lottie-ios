@@ -12,7 +12,7 @@ import SwiftUI
 /// Includes an optional generic `Storage` value, which can be used to compare old and new values
 /// across state changes to prevent redundant view updates.
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
-internal struct SwiftUIView<Content: ViewType, Storage>: MeasuringViewRepresentable,
+struct SwiftUIView<Content: ViewType, Storage>: MeasuringViewRepresentable,
   UIViewConfiguringSwiftUIView
 {
 
@@ -34,9 +34,9 @@ internal struct SwiftUIView<Content: ViewType, Storage>: MeasuringViewRepresenta
 
   // MARK: Internal
 
-  internal var configurations: [Configuration] = []
+  var configurations: [Configuration] = []
 
-  internal var sizing: SwiftUIMeasurementContainerStrategy = .automatic
+  var sizing: SwiftUIMeasurementContainerStrategy = .automatic
 
   // MARK: Private
 
@@ -52,16 +52,16 @@ internal struct SwiftUIView<Content: ViewType, Storage>: MeasuringViewRepresenta
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension SwiftUIView {
-  internal func makeCoordinator() -> Coordinator {
+  func makeCoordinator() -> Coordinator {
     Coordinator(storage: storage)
   }
 
   #if os(macOS)
-  internal func makeNSView(context _: Context) -> SwiftUIMeasurementContainer<Content> {
+  func makeNSView(context _: Context) -> SwiftUIMeasurementContainer<Content> {
     SwiftUIMeasurementContainer(content: makeContent(), strategy: sizing)
   }
 
-  internal func updateNSView(_ uiView: SwiftUIMeasurementContainer<Content>, context: Context) {
+  func updateNSView(_ uiView: SwiftUIMeasurementContainer<Content>, context: Context) {
     let oldStorage = context.coordinator.storage
     context.coordinator.storage = storage
 
@@ -75,11 +75,11 @@ extension SwiftUIView {
     }
   }
   #else
-  internal func makeUIView(context _: Context) -> SwiftUIMeasurementContainer<Content> {
+  func makeUIView(context _: Context) -> SwiftUIMeasurementContainer<Content> {
     SwiftUIMeasurementContainer(content: makeContent(), strategy: sizing)
   }
 
-  internal func updateUIView(_ uiView: SwiftUIMeasurementContainer<Content>, context: Context) {
+  func updateUIView(_ uiView: SwiftUIMeasurementContainer<Content>, context: Context) {
     let oldStorage = context.coordinator.storage
     context.coordinator.storage = storage
 
@@ -101,27 +101,27 @@ extension SwiftUIView {
 extension SwiftUIView {
   /// The configuration context that's available to configure the `Content` view whenever the
   /// `updateUIView()` method is invoked via a configuration closure.
-  internal struct ConfigurationContext: ViewProviding {
+  struct ConfigurationContext: ViewProviding {
     /// The previous value for the `Storage` of this `SwiftUIView`, which can be used to store
     /// values across state changes to prevent redundant view updates.
-    internal var oldStorage: Storage
+    var oldStorage: Storage
 
     /// The `UIViewRepresentable.Context`, with information about the transaction and environment.
-    internal var viewRepresentableContext: Context
+    var viewRepresentableContext: Context
 
     /// The backing measurement container that contains the `Content`.
-    internal var container: SwiftUIMeasurementContainer<Content>
+    var container: SwiftUIMeasurementContainer<Content>
 
     /// The `UIView` content that's being configured.
     ///
     /// Setting this to a new value updates the backing measurement container's `content`.
-    internal var view: Content {
+    var view: Content {
       get { container.content }
       nonmutating set { container.content = newValue }
     }
 
     /// A convenience accessor indicating whether this content update should be animated.
-    internal var animated: Bool {
+    var animated: Bool {
       viewRepresentableContext.transaction.animation != nil
     }
   }
@@ -133,7 +133,7 @@ extension SwiftUIView {
 extension SwiftUIView {
   /// A coordinator that stores the `storage` associated with this view, enabling the old storage
   /// value to be accessed during the `updateUIView(…)`.
-  internal final class Coordinator {
+  final class Coordinator {
 
     // MARK: Lifecycle
 

@@ -206,8 +206,8 @@ final class Archive: Sequence {
   init?(data: Data = Data(), accessMode mode: AccessMode, preferredEncoding: String.Encoding? = nil) {
     guard
       let url = URL(string: "\(memoryURLScheme)://"),
-      let config = Archive.makeBackingConfiguration(for: data, mode: mode) else
-    {
+      let config = Archive.makeBackingConfiguration(for: data, mode: mode)
+    else {
       return nil
     }
 
@@ -256,15 +256,16 @@ final class Archive: Sequence {
       guard
         let centralDirStruct: CentralDirectoryStructure = Data.readStruct(
           from: self.archiveFile,
-          at: directoryIndex) else
-      {
+          at: directoryIndex)
+      else {
         return nil
       }
       let offset = UInt64(centralDirStruct.effectiveRelativeOffsetOfLocalHeader)
       guard
         let localFileHeader: LocalFileHeader = Data.readStruct(
           from: self.archiveFile,
-          at: offset) else { return nil }
+          at: offset)
+      else { return nil }
       var dataDescriptor: DataDescriptor?
       var zip64DataDescriptor: ZIP64DataDescriptor?
       if centralDirStruct.usesDataDescriptor {
@@ -326,8 +327,8 @@ final class Archive: Sequence {
     let recordOffset = locatorOffset - UInt64(ZIP64EndOfCentralDirectoryRecord.size)
     guard
       let locator: ZIP64EndOfCentralDirectoryLocator = Data.readStruct(from: file, at: locatorOffset),
-      let record: ZIP64EndOfCentralDirectoryRecord = Data.readStruct(from: file, at: recordOffset) else
-    {
+      let record: ZIP64EndOfCentralDirectoryRecord = Data.readStruct(from: file, at: recordOffset)
+    else {
       return nil
     }
     return ZIP64EndOfCentralDirectory(record: record, locator: locator)

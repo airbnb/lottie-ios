@@ -5,7 +5,7 @@
 
 /// A sentinel protocol for enabling an `CallbackContextEpoxyModeled` to provide a `didSelect`
 /// closure property.
-internal protocol DidSelectProviding { }
+protocol DidSelectProviding { }
 
 // MARK: - CallbackContextEpoxyModeled
 
@@ -14,17 +14,17 @@ extension CallbackContextEpoxyModeled where Self: DidSelectProviding {
   // MARK: Internal
 
   /// A closure that's called to handle this model's view being selected.
-  internal typealias DidSelect = (CallbackContext) -> Void
+  typealias DidSelect = (CallbackContext) -> Void
 
   /// A closure that's called to handle this model's view being selected.
-  internal var didSelect: DidSelect? {
+  var didSelect: DidSelect? {
     get { self[didSelectProperty] }
     set { self[didSelectProperty] = newValue }
   }
 
   /// Returns a copy of this model with the given did select closure called after the current did
   /// select closure of this model, if there is one.
-  internal func didSelect(_ value: DidSelect?) -> Self {
+  func didSelect(_ value: DidSelect?) -> Self {
     copy(updating: didSelectProperty, to: value)
   }
 

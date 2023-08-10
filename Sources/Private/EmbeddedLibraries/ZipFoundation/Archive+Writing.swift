@@ -281,8 +281,8 @@ extension Archive {
       #if swift(>=5.0)
       guard
         let data = archive.data,
-        let config = Archive.makeBackingConfiguration(for: data, mode: .update) else
-      {
+        let config = Archive.makeBackingConfiguration(for: data, mode: .update)
+      else {
         throw ArchiveError.unwritableArchive
       }
       archiveFile = config.file
@@ -360,8 +360,8 @@ extension Archive {
         let tempArchive = Archive(
           data: Data(),
           accessMode: .create,
-          preferredEncoding: preferredEncoding) else
-      {
+          preferredEncoding: preferredEncoding)
+      else {
         throw ArchiveError.unwritableArchive
       }
       archive = tempArchive

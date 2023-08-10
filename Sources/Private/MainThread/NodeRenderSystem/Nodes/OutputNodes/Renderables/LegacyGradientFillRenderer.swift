@@ -104,7 +104,8 @@ final class LegacyGradientFillRenderer: PassThroughOutputNode, Renderable {
           bitsPerComponent: 8,
           bytesPerRow: inContext.width,
           space: maskColorSpace,
-          bitmapInfo: 0) else { return }
+          bitmapInfo: 0)
+      else { return }
       let flipVertical = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: CGFloat(maskContext.height))
       maskContext.concatenate(flipVertical)
       maskContext.concatenate(inContext.ctm)

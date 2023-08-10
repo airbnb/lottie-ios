@@ -198,7 +198,7 @@ extension Color {
     #if os(iOS)
     Color(uiColor: .secondarySystemBackground)
     #else
-      .clear
+    .clear
     #endif
   }
 }
