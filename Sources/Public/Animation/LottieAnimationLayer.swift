@@ -303,7 +303,11 @@ public class LottieAnimationLayer: CALayer {
   /// marker sequence is playing, the marker sequence will be cancelled.
   ///
   /// - Parameter markers: The list of markers to play sequentially.
-  open func play(markers: [String]) {
+  /// - Parameter completion: An optional completion closure to be called when the animation stops.
+  open func play(
+    markers: [String],
+    completion: LottieCompletionBlock? = nil)
+  {
     guard !markers.isEmpty else { return }
 
     defer {
@@ -319,17 +323,25 @@ public class LottieAnimationLayer: CALayer {
     let followingMarkers = Array(markers.dropFirst())
 
     guard animation?.markerMap?[markerToPlay] != nil else {
-      play(markers: followingMarkers)
+      play(markers: followingMarkers, completion: completion)
       return
     }
 
-    play(marker: markerToPlay, loopMode: .playOnce, completion: { [weak self] success in
-      // If the completion handler is called with `success: false` (which typically means
+    play(marker: markerToPlay, loopMode: .playOnce, completion: { [weak self] completed in
+      // If the completion handler is called with `completed: false` (which typically means
       // that another animation was played by calling some `play` method),
       // we should cancel the marker sequence and not play the next marker.
-      guard success, let self = self else { return }
+      guard completed, let self = self else {
+        completion?(false)
+        return
+      }
 
-      self.play(markers: followingMarkers)
+      if followingMarkers.isEmpty {
+        // If we don't have any more markers to play, then the marker sequence has completed.
+        completion?(completed)
+      } else {
+        self.play(markers: followingMarkers, completion: completion)
+      }
     })
   }
 
@@ -349,7 +361,14 @@ public class LottieAnimationLayer: CALayer {
   }
 
   /// Applies the given `LottiePlaybackMode` to this layer.
-  open func play(_ playbackMode: LottiePlaybackMode) {
+  /// - Parameter animationCompletionHandler: A closure that is called after
+  ///   an animation triggered by this method completes. This completion
+  ///   handler is **not called** after setting the playback mode to a
+  ///   mode that doesn't animate (e.g. `progress`, `frame`, `time`, or `pause`).
+  open func play(
+    _ playbackMode: LottiePlaybackMode,
+    animationCompletionHandler: LottieCompletionBlock? = nil)
+  {
     switch playbackMode {
     case .progress(let progress):
       currentProgress = progress
@@ -364,19 +383,35 @@ public class LottieAnimationLayer: CALayer {
       pause()
 
     case .fromProgress(let fromProgress, let toProgress, let loopMode):
-      play(fromProgress: fromProgress, toProgress: toProgress, loopMode: loopMode, completion: nil)
+      play(
+        fromProgress: fromProgress,
+        toProgress: toProgress,
+        loopMode: loopMode,
+        completion: animationCompletionHandler)
 
     case .fromFrame(let fromFrame, let toFrame, let loopMode):
-      play(fromFrame: fromFrame, toFrame: toFrame, loopMode: loopMode)
+      play(
+        fromFrame: fromFrame,
+        toFrame: toFrame,
+        loopMode: loopMode,
+        completion: animationCompletionHandler)
 
     case .fromMarker(let fromMarker, let toMarker, let playEndMarkerFrame, let loopMode):
-      play(fromMarker: fromMarker, toMarker: toMarker, playEndMarkerFrame: playEndMarkerFrame, loopMode: loopMode)
+      play(
+        fromMarker: fromMarker,
+        toMarker: toMarker,
+        playEndMarkerFrame: playEndMarkerFrame,
+        loopMode: loopMode,
+        completion: animationCompletionHandler)
 
     case .marker(let marker, let loopMode):
-      play(marker: marker, loopMode: loopMode)
+      play(
+        marker: marker,
+        loopMode: loopMode,
+        completion: animationCompletionHandler)
 
     case .markers(let markers):
-      play(markers: markers)
+      play(markers: markers, completion: animationCompletionHandler)
     }
   }
 

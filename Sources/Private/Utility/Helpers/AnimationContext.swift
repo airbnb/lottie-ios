@@ -9,8 +9,10 @@ import CoreGraphics
 import Foundation
 import QuartzCore
 
-/// A completion block for animations. `true` is passed in if the animation completed playing.
-public typealias LottieCompletionBlock = (Bool) -> Void
+/// A completion block for animations.
+///  - `true` is passed in if the animation completed playing.
+///  - `false` is passed in if the animation was interrupted and did not complete playing.
+public typealias LottieCompletionBlock = (_ completed: Bool) -> Void
 
 // MARK: - AnimationContext
 

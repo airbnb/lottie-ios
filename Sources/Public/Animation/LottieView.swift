@@ -137,7 +137,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
             let playbackMode = playbackMode,
             playbackMode != context.view.currentPlaybackMode
           {
-            context.view.play(playbackMode)
+            context.view.play(playbackMode, animationCompletionHandler: animationCompletionHandler)
           }
         }
         .configurations(configurations)
@@ -186,6 +186,17 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   public func playbackMode(_ playbackMode: LottiePlaybackMode) -> Self {
     var copy = self
     copy.playbackMode = playbackMode
+    return copy
+  }
+
+  /// Returns a copy of this view with the given `LottieCompletionBlock` that is called
+  /// when an animation finishes playing.
+  public func animationDidFinish(_ animationCompletionHandler: LottieCompletionBlock?) -> Self {
+    var copy = self
+    copy.animationCompletionHandler = { completed in
+      animationCompletionHandler?(completed)
+      copy.animationCompletionHandler?(completed)
+    }
     return copy
   }
 
@@ -394,6 +405,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   private var playbackMode: LottiePlaybackMode?
   private var reloadAnimationTrigger: AnyEquatable?
   private var loadAnimation: (() async throws -> LottieAnimationSource?)?
+  private var animationCompletionHandler: LottieCompletionBlock?
   private var showPlaceholderWhileReloading = false
   private var imageProvider: AnimationImageProvider?
   private var textProvider: AnimationTextProvider = DefaultTextProvider()
