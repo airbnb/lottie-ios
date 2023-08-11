@@ -193,7 +193,10 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   /// when an animation finishes playing.
   public func animationDidFinish(_ animationCompletionHandler: LottieCompletionBlock?) -> Self {
     var copy = self
-    copy.animationCompletionHandler = animationCompletionHandler
+    copy.animationCompletionHandler = { completed in
+      animationCompletionHandler?(completed)
+      copy.animationCompletionHandler?(completed)
+    }
     return copy
   }
 
