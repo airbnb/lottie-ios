@@ -35,7 +35,7 @@ struct AnimationListView: View {
               Text(item.name)
             }
 
-          case .animationList:
+          case .animationList, .controlsDemo:
             Text(item.name)
               .frame(height: 50)
           }
@@ -48,6 +48,8 @@ struct AnimationListView: View {
             AnimationPreviewView(animationSource: .remote(urls: urls, name: name))
           case .animationList(let listContent):
             AnimationListView(content: listContent)
+          case .controlsDemo:
+            ControlsDemoView()
           }
         }
       }
@@ -68,7 +70,7 @@ struct AnimationListView: View {
       guard let url = urls.first else { return nil }
       return await LottieAnimation.loadedFrom(url: url)?.animationSource
 
-    case .animationList:
+    case .animationList, .controlsDemo:
       return nil
     }
   }
@@ -98,6 +100,7 @@ extension AnimationListView {
     case animationList(AnimationListView.Content)
     case animation(name: String, path: String)
     case remoteAnimations(name: String, urls: [URL])
+    case controlsDemo
   }
 
   var items: [Item] {
@@ -151,6 +154,7 @@ extension AnimationListView {
 
     return [
       .animationList(.remoteAnimationsDemo),
+      .controlsDemo,
     ]
   }
 }
@@ -162,6 +166,8 @@ extension AnimationListView.Item {
       return animationName
     case .animationList(let content):
       return content.name
+    case .controlsDemo:
+      return "Controls Demo"
     }
   }
 }
