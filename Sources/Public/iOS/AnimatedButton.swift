@@ -14,7 +14,7 @@ open class AnimatedButton: AnimatedControl {
   // MARK: Lifecycle
 
   public override init(
-    animation: LottieAnimation,
+    animation: LottieAnimation?,
     configuration: LottieConfiguration = .shared)
   {
     super.init(animation: animation, configuration: configuration)
