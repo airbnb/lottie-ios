@@ -9,7 +9,7 @@ import QuartzCore
 // MARK: - LottieAnimationLayer
 
 /// A CALayer subclass for rendering Lottie animations.
-/// All functionality is also available in a UIView as `LottieAnimationView`.
+///  - Also available as a SwiftUI view (`LottieView`) and a UIView subclass (`LottieAnimationView`)
 public class LottieAnimationLayer: CALayer {
 
   // MARK: Lifecycle

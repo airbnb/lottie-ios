@@ -110,11 +110,12 @@ open class AnimatedControl: LottieControlType {
   }
 
   #elseif canImport(AppKit)
-  open override func mouseDown(with _: NSEvent) {
+  open override func mouseDown(with mouseDownEvent: NSEvent) {
     guard let window = window else { return }
 
     currentState = .highlighted
     updateForState()
+    handle(LottieControlEvent(mouseDownEvent.type, inside: eventIsInside(mouseDownEvent)))
 
     // AppKit mouse-tracking loop from:
     // https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/EventOverview/HandlingMouseEvents/HandlingMouseEvents.html#//apple_ref/doc/uid/10000060i-CH6-SW4
@@ -122,23 +123,19 @@ open class AnimatedControl: LottieControlType {
     while
       keepOn,
       let event = window.nextEvent(
-        matching: [.leftMouseUp, .leftMouseDragged],
+        matching: .any,
         until: .distantFuture,
         inMode: .eventTracking,
         dequeue: true)
     {
-      let mouseLocation = convert(event.locationInWindow, from: nil)
-      let isInside = isMousePoint(mouseLocation, in: bounds)
-
       if event.type == .leftMouseUp {
         keepOn = false
-
-        if isInside {
-          handleMouseUp()
-        }
       }
 
-      let expectedState = (isInside && keepOn) ? LottieNSLottieControlState.highlighted : .normal
+      let isInside = eventIsInside(event)
+      handle(LottieControlEvent(event.type, inside: isInside))
+
+      let expectedState = (isInside && keepOn) ? LottieNSControlState.highlighted : .normal
       if currentState != expectedState {
         currentState = expectedState
         updateForState()
@@ -146,9 +143,13 @@ open class AnimatedControl: LottieControlType {
     }
   }
 
-  @objc
-  func handleMouseUp() {
+  func handle(_: LottieNSControlEvent) {
     // To be overridden in subclasses
+  }
+
+  private func eventIsInside(_ event: NSEvent) -> Bool {
+    let mouseLocation = convert(event.locationInWindow, from: nil)
+    return isMousePoint(mouseLocation, in: bounds)
   }
   #endif
 

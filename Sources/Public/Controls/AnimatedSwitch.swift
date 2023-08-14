@@ -19,6 +19,8 @@ import AppKit
 /// switch the state is toggled and the appropriate animation is played.
 ///
 /// Both the 'On' and 'Off' have an animation play range associated with their state.
+///
+/// Also available as a SwiftUI view (`LottieSwitch`).
 open class AnimatedSwitch: AnimatedControl {
 
   // MARK: Lifecycle
@@ -93,9 +95,12 @@ open class AnimatedSwitch: AnimatedControl {
   }
 
   #elseif canImport(AppKit)
-  open override func handleMouseUp() {
-    super.handleMouseUp()
-    updateOnState(isOn: !_isOn, animated: true, shouldFireHaptics: true)
+  open override func handle(_ event: LottieNSControlEvent) {
+    super.handle(event)
+
+    if event == .touchUpInside {
+      updateOnState(isOn: !_isOn, animated: true, shouldFireHaptics: true)
+    }
   }
   #endif
 

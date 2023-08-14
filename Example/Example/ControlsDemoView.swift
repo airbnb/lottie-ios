@@ -32,15 +32,13 @@ struct ControlsDemoView: View {
           ],
         ])
 
-      // TODO: Add SwiftUI support for AnimatedButton
-      // AnimatedButtonRow(
-      //   animationName: "Samples/TwitterHeartButton",
-      //   title: "Twitter Heart Button",
-      //   playRanges: [
-      //     .init(fromMarker: "touchDownStart", toMarker: "touchDownEnd", event: .touchDown),
-      //     .init(fromMarker: "touchDownEnd", toMarker: "touchUpCancel", event: .touchUpOutside),
-      //     .init(fromMarker: "touchDownEnd", toMarker: "touchUpEnd", event: .touchUpInside),
-      //   ]))
+      LottieButtonRow(
+        animationName: "Samples/TwitterHeartButton",
+        title: "Twitter Heart Button")
+
+      LottieButtonRow(
+        animationName: "Samples/Switch",
+        title: "Switch as Button")
 
       LottieSwitchRow(
         animationName: "Samples/Issues/issue_1877",
