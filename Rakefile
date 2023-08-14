@@ -162,11 +162,7 @@ namespace :emerge do
     }
     if ENV["PR_NUMBER"] != "" && ENV["PR_NUMBER"] != "false"
       # TODO: Enable PR uploads
-      # return
-      upload_data[:sha] = g.log[0].parents[1].sha
-      upload_data[:baseSha] = g.log[0].parent.sha
-      upload_data[:prNumber] = ENV["PR_NUMBER"]
-      upload_data[:buildType] = 'pull_request'
+      next
     else
       upload_data[:sha] = g.log[0].sha
       upload_data[:buildType] = 'master'
