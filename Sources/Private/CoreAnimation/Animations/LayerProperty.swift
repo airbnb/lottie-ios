@@ -159,6 +159,34 @@ extension LayerProperty {
       },
       customizableProperty: nil /* currently unsupported */ )
   }
+
+  static var shadowOpacity: LayerProperty<CGFloat> {
+    .init(
+      caLayerKeypath: #keyPath(CALayer.shadowOpacity),
+      defaultValue: 0,
+      customizableProperty: nil /* currently unsupported */ )
+  }
+
+  static var shadowColor: LayerProperty<CGColor> {
+    .init(
+      caLayerKeypath: #keyPath(CALayer.shadowColor),
+      defaultValue: .rgb(0, 0, 0),
+      customizableProperty: nil /* currently unsupported */ )
+  }
+
+  static var shadowRadius: LayerProperty<CGFloat> {
+    .init(
+      caLayerKeypath: #keyPath(CALayer.shadowRadius),
+      defaultValue: 3.0,
+      customizableProperty: nil /* currently unsupported */ )
+  }
+
+  static var shadowOffset: LayerProperty<CGSize> {
+    .init(
+      caLayerKeypath: #keyPath(CALayer.shadowOffset),
+      defaultValue: CGSize(width: 0, height: -3.0),
+      customizableProperty: nil /* currently unsupported */ )
+  }
 }
 
 // MARK: CAShapeLayer properties

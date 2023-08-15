@@ -6,7 +6,7 @@ import QuartzCore
 // MARK: - TransformModel
 
 /// This protocol mirrors the interface of `Transform`,
-/// but it also implemented by `ShapeTransform` to allow
+/// but is also implemented by `ShapeTransform` to allow
 /// both transform types to share the same animation implementation.
 protocol TransformModel {
   /// The anchor point of the transform.

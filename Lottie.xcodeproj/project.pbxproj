@@ -16,6 +16,30 @@
 		0820D5972A8ACDD8007D705C /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5962A8ACDD7007D705C /* AnimatedButton.swift */; };
 		0820D5982A8ACDD8007D705C /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5962A8ACDD7007D705C /* AnimatedButton.swift */; };
 		0820D5992A8ACDD8007D705C /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5962A8ACDD7007D705C /* AnimatedButton.swift */; };
+		0820D59E2A8AE879007D705C /* LayerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D59D2A8AE879007D705C /* LayerStyle.swift */; };
+		0820D59F2A8AE879007D705C /* LayerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D59D2A8AE879007D705C /* LayerStyle.swift */; };
+		0820D5A02A8AE879007D705C /* LayerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D59D2A8AE879007D705C /* LayerStyle.swift */; };
+		0820D5B12A8BF14E007D705C /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5AF2A8BF14E007D705C /* DropShadowEffect.swift */; };
+		0820D5B22A8BF14E007D705C /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5AF2A8BF14E007D705C /* DropShadowEffect.swift */; };
+		0820D5B32A8BF14E007D705C /* DropShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5AF2A8BF14E007D705C /* DropShadowEffect.swift */; };
+		0820D5B42A8BF14E007D705C /* LayerEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5B02A8BF14E007D705C /* LayerEffect.swift */; };
+		0820D5B52A8BF14E007D705C /* LayerEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5B02A8BF14E007D705C /* LayerEffect.swift */; };
+		0820D5B62A8BF14E007D705C /* LayerEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5B02A8BF14E007D705C /* LayerEffect.swift */; };
+		0820D5B82A8BF159007D705C /* DropShadowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5B72A8BF159007D705C /* DropShadowStyle.swift */; };
+		0820D5B92A8BF159007D705C /* DropShadowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5B72A8BF159007D705C /* DropShadowStyle.swift */; };
+		0820D5BA2A8BF159007D705C /* DropShadowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5B72A8BF159007D705C /* DropShadowStyle.swift */; };
+		0820D5C22A8BF60F007D705C /* Vector1DEffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5C02A8BF60F007D705C /* Vector1DEffectValue.swift */; };
+		0820D5C32A8BF60F007D705C /* Vector1DEffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5C02A8BF60F007D705C /* Vector1DEffectValue.swift */; };
+		0820D5C42A8BF60F007D705C /* Vector1DEffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5C02A8BF60F007D705C /* Vector1DEffectValue.swift */; };
+		0820D5C52A8BF60F007D705C /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5C12A8BF60F007D705C /* EffectValue.swift */; };
+		0820D5C62A8BF60F007D705C /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5C12A8BF60F007D705C /* EffectValue.swift */; };
+		0820D5C72A8BF60F007D705C /* EffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5C12A8BF60F007D705C /* EffectValue.swift */; };
+		0820D5CD2A8BF6FF007D705C /* ColorEffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5CC2A8BF6FF007D705C /* ColorEffectValue.swift */; };
+		0820D5CE2A8BF6FF007D705C /* ColorEffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5CC2A8BF6FF007D705C /* ColorEffectValue.swift */; };
+		0820D5CF2A8BF6FF007D705C /* ColorEffectValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5CC2A8BF6FF007D705C /* ColorEffectValue.swift */; };
+		0820D5D12A8C006E007D705C /* DropShadowAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5D02A8C006E007D705C /* DropShadowAnimation.swift */; };
+		0820D5D22A8C006E007D705C /* DropShadowAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5D02A8C006E007D705C /* DropShadowAnimation.swift */; };
+		0820D5D32A8C006E007D705C /* DropShadowAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5D02A8C006E007D705C /* DropShadowAnimation.swift */; };
 		0887346F28F0CBDE00458627 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887346E28F0CBDE00458627 /* LottieAnimation.swift */; };
 		0887347028F0CBDE00458627 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887346E28F0CBDE00458627 /* LottieAnimation.swift */; };
 		0887347128F0CBDE00458627 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887346E28F0CBDE00458627 /* LottieAnimation.swift */; };
@@ -860,6 +884,14 @@
 		0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationSource.swift; sourceTree = "<group>"; };
 		0820D5922A8ACD67007D705C /* LottieButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieButton.swift; sourceTree = "<group>"; };
 		0820D5962A8ACDD7007D705C /* AnimatedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
+		0820D59D2A8AE879007D705C /* LayerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerStyle.swift; sourceTree = "<group>"; };
+		0820D5AF2A8BF14E007D705C /* DropShadowEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropShadowEffect.swift; sourceTree = "<group>"; };
+		0820D5B02A8BF14E007D705C /* LayerEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerEffect.swift; sourceTree = "<group>"; };
+		0820D5B72A8BF159007D705C /* DropShadowStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropShadowStyle.swift; sourceTree = "<group>"; };
+		0820D5C02A8BF60F007D705C /* Vector1DEffectValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector1DEffectValue.swift; sourceTree = "<group>"; };
+		0820D5C12A8BF60F007D705C /* EffectValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectValue.swift; sourceTree = "<group>"; };
+		0820D5CC2A8BF6FF007D705C /* ColorEffectValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorEffectValue.swift; sourceTree = "<group>"; };
+		0820D5D02A8C006E007D705C /* DropShadowAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadowAnimation.swift; sourceTree = "<group>"; };
 		0887346E28F0CBDE00458627 /* LottieAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimation.swift; sourceTree = "<group>"; };
 		0887347228F0CCDD00458627 /* LottieAnimationHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimationHelpers.swift; sourceTree = "<group>"; };
 		0887347328F0CCDD00458627 /* LottieAnimationViewInitializers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimationViewInitializers.swift; sourceTree = "<group>"; };
@@ -1192,6 +1224,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0820D59C2A8AE860007D705C /* LayerStyles */ = {
+			isa = PBXGroup;
+			children = (
+				0820D59D2A8AE879007D705C /* LayerStyle.swift */,
+				0820D5B72A8BF159007D705C /* DropShadowStyle.swift */,
+			);
+			path = LayerStyles;
+			sourceTree = "<group>";
+		};
+		0820D5AE2A8BF14E007D705C /* LayerEffects */ = {
+			isa = PBXGroup;
+			children = (
+				0820D5BF2A8BF5DB007D705C /* EffectValues */,
+				0820D5AF2A8BF14E007D705C /* DropShadowEffect.swift */,
+				0820D5B02A8BF14E007D705C /* LayerEffect.swift */,
+			);
+			path = LayerEffects;
+			sourceTree = "<group>";
+		};
+		0820D5BF2A8BF5DB007D705C /* EffectValues */ = {
+			isa = PBXGroup;
+			children = (
+				0820D5C12A8BF60F007D705C /* EffectValue.swift */,
+				0820D5C02A8BF60F007D705C /* Vector1DEffectValue.swift */,
+				0820D5CC2A8BF6FF007D705C /* ColorEffectValue.swift */,
+			);
+			path = EffectValues;
+			sourceTree = "<group>";
+		};
 		08AB05532A61C1F000DE86FD /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -1432,6 +1493,8 @@
 				2E9C95432822F43000677516 /* Keyframes */,
 				2E9C95462822F43000677516 /* Text */,
 				2E9C954B2822F43000677516 /* Assets */,
+				0820D5AE2A8BF14E007D705C /* LayerEffects */,
+				0820D59C2A8AE860007D705C /* LayerStyles */,
 				6DB3BDB7282454A6002A276D /* DictionaryInitializable.swift */,
 			);
 			path = Model;
@@ -1789,6 +1852,7 @@
 				2E9C95B92822F43100677516 /* VisibilityAnimation.swift */,
 				2E9C95BA2822F43100677516 /* LayerProperty.swift */,
 				2E450DAB283415D500E56D19 /* OpacityAnimation.swift */,
+				0820D5D02A8C006E007D705C /* DropShadowAnimation.swift */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -2279,6 +2343,7 @@
 				2E9C96212822F43100677516 /* Bundle.swift in Sources */,
 				2E9C96CF2822F43100677516 /* ShapeContainerLayer.swift in Sources */,
 				08E2073F2A56014E002DCE17 /* SetBehaviorsProviding.swift in Sources */,
+				0820D5D12A8C006E007D705C /* DropShadowAnimation.swift in Sources */,
 				2E9C973E2822F43100677516 /* LayerDebugging.swift in Sources */,
 				08E2071E2A56014E002DCE17 /* EpoxyModelStorage.swift in Sources */,
 				6D99D6432823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */,
@@ -2300,6 +2365,7 @@
 				08C001F52A46150D00AB54BA /* Archive+BackingConfiguration.swift in Sources */,
 				0887346F28F0CBDE00458627 /* LottieAnimation.swift in Sources */,
 				08C002002A46150D00AB54BA /* Data+CompressionDeprecated.swift in Sources */,
+				0820D5B82A8BF159007D705C /* DropShadowStyle.swift in Sources */,
 				2E9C97412822F43100677516 /* TestHelpers.swift in Sources */,
 				08EF21DC289C643B0097EA47 /* KeyframeInterpolator.swift in Sources */,
 				2E9C96152822F43100677516 /* Transform.swift in Sources */,
@@ -2351,6 +2417,7 @@
 				2E9C972F2822F43100677516 /* CustomPathAnimation.swift in Sources */,
 				2E9C97502822F43100677516 /* StringExtensions.swift in Sources */,
 				2EAF5AEF27A0798700E00531 /* AnimationKeypath.swift in Sources */,
+				0820D5B42A8BF14E007D705C /* LayerEffect.swift in Sources */,
 				2E9C973B2822F43100677516 /* LayerProperty.swift in Sources */,
 				2E9C95F72822F43100677516 /* Rectangle.swift in Sources */,
 				2E9C96812822F43100677516 /* FillRenderer.swift in Sources */,
@@ -2442,6 +2509,7 @@
 				08E2075D2A56014E002DCE17 /* EpoxyModeled.swift in Sources */,
 				6C4878602901D8C70005AF07 /* DotLottieImageProvider.swift in Sources */,
 				08E206F42A56014E002DCE17 /* SectionedChangeset.swift in Sources */,
+				0820D59E2A8AE879007D705C /* LayerStyle.swift in Sources */,
 				2E9C95EE2822F43100677516 /* GradientFill.swift in Sources */,
 				2E9C95D92822F43100677516 /* Trim.swift in Sources */,
 				2E9C96C32822F43100677516 /* SingleValueProvider.swift in Sources */,
@@ -2483,8 +2551,10 @@
 				08E2075A2A56014E002DCE17 /* EpoxyModelArrayBuilder.swift in Sources */,
 				2E9C96002822F43100677516 /* LayerModel.swift in Sources */,
 				2E9C97652822F43100677516 /* CurveVertex.swift in Sources */,
+				0820D5C52A8BF60F007D705C /* EffectValue.swift in Sources */,
 				08C002042A46150D00AB54BA /* FileManager+ZIP.swift in Sources */,
 				08E2072A2A56014E002DCE17 /* DidSelectProviding.swift in Sources */,
+				0820D5CD2A8BF6FF007D705C /* ColorEffectValue.swift in Sources */,
 				2E9C96482822F43100677516 /* NullCompositionLayer.swift in Sources */,
 				2EAF5AFE27A0798700E00531 /* GradientValueProvider.swift in Sources */,
 				08C002032A46150D00AB54BA /* Data+Serialization.swift in Sources */,
@@ -2514,6 +2584,7 @@
 				2E9C96CC2822F43100677516 /* ShapeRenderLayer.swift in Sources */,
 				08C001FA2A46150D00AB54BA /* Data+Compression.swift in Sources */,
 				5721091F29119F3100169699 /* BezierPathRoundExtension.swift in Sources */,
+				0820D5B12A8BF14E007D705C /* DropShadowEffect.swift in Sources */,
 				6C48780228FF20140005AF07 /* DotLottieFile.swift in Sources */,
 				2EAF5AEC27A0798700E00531 /* LottieLogger.swift in Sources */,
 				2E9C976E2822F43100677516 /* KeyframeExtensions.swift in Sources */,
@@ -2531,6 +2602,7 @@
 				A40460592832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */,
 				2E9C96542822F43100677516 /* ImageCompositionLayer.swift in Sources */,
 				2EAF5AB327A0798700E00531 /* AnimationImageProvider.swift in Sources */,
+				0820D5C22A8BF60F007D705C /* Vector1DEffectValue.swift in Sources */,
 				2E9C95F12822F43100677516 /* GradientStroke.swift in Sources */,
 				2EAF5ADD27A0798700E00531 /* Interpolatable.swift in Sources */,
 				2E9C96122822F43100677516 /* DashPattern.swift in Sources */,
@@ -2573,6 +2645,7 @@
 				08E6CF942A86E29100A6D92F /* LottieViewType.swift in Sources */,
 				2E9C96F72822F43100677516 /* ShapeLayer.swift in Sources */,
 				6C48784828FF20140005AF07 /* DotLottieManifest.swift in Sources */,
+				0820D5B92A8BF159007D705C /* DropShadowStyle.swift in Sources */,
 				08E206EF2A56014E002DCE17 /* EpoxyLogger.swift in Sources */,
 				2E9C95D72822F43100677516 /* Ellipse.swift in Sources */,
 				82A552762A2FD44B00E47AC8 /* LottieAnimationLayer.swift in Sources */,
@@ -2621,6 +2694,7 @@
 				6DB3BDBD28245A14002A276D /* CGPointExtension.swift in Sources */,
 				2EAF5AE427A0798700E00531 /* AnimationCacheProvider.swift in Sources */,
 				2E9C96432822F43100677516 /* RootAnimationLayer.swift in Sources */,
+				0820D5D22A8C006E007D705C /* DropShadowAnimation.swift in Sources */,
 				2E9C97722822F43100677516 /* AnimationContext.swift in Sources */,
 				2E9C96B22822F43100677516 /* NodeProperty.swift in Sources */,
 				08E6CF8A2A86E26F00A6D92F /* AnimatedSwitch.swift in Sources */,
@@ -2640,6 +2714,7 @@
 				2E9C975A2822F43100677516 /* BezierPath.swift in Sources */,
 				2EAF5ABA27A0798700E00531 /* CompatibleAnimationView.swift in Sources */,
 				08C002CF2A46196300AB54BA /* Data+Compression.swift in Sources */,
+				0820D59F2A8AE879007D705C /* LayerStyle.swift in Sources */,
 				2E9C96072822F43100677516 /* TextLayerModel.swift in Sources */,
 				2E9C96AF2822F43100677516 /* ValueContainer.swift in Sources */,
 				2E9C97332822F43100677516 /* CALayer+addAnimation.swift in Sources */,
@@ -2651,6 +2726,7 @@
 				08C002D72A46196300AB54BA /* Entry+ZIP64.swift in Sources */,
 				2E9C96762822F43100677516 /* TrimPathNode.swift in Sources */,
 				2E9C974E2822F43100677516 /* AnimationKeypathExtension.swift in Sources */,
+				0820D5CE2A8BF6FF007D705C /* ColorEffectValue.swift in Sources */,
 				08E207222A56014E002DCE17 /* CallbackContextEpoxyModeled.swift in Sources */,
 				2E9C97062822F43100677516 /* CoreAnimationLayer.swift in Sources */,
 				08EED05128F0D2D10057D958 /* LottieColor.swift in Sources */,
@@ -2664,6 +2740,7 @@
 				2E9C95EC2822F43100677516 /* Repeater.swift in Sources */,
 				2EAF5AA827A0798700E00531 /* LottieConfiguration.swift in Sources */,
 				2E9C95D42822F43100677516 /* Fill.swift in Sources */,
+				0820D5C32A8BF60F007D705C /* Vector1DEffectValue.swift in Sources */,
 				6DB3BDB9282454A6002A276D /* DictionaryInitializable.swift in Sources */,
 				2E9C96B82822F43100677516 /* NodePropertyMap.swift in Sources */,
 				2E9C97692822F43100677516 /* VectorsExtensions.swift in Sources */,
@@ -2685,6 +2762,7 @@
 				2E9C963D2822F43100677516 /* AssetLibrary.swift in Sources */,
 				2E9C97032822F43100677516 /* PreCompLayer.swift in Sources */,
 				2E9C96EB2822F43100677516 /* SolidLayer.swift in Sources */,
+				0820D5C62A8BF60F007D705C /* EffectValue.swift in Sources */,
 				2EAF5AA227A0798700E00531 /* AnimationSubview.macOS.swift in Sources */,
 				08E2073A2A56014E002DCE17 /* TraitCollectionProviding.swift in Sources */,
 				57210914291073E400169699 /* RoundedCorners.swift in Sources */,
@@ -2715,6 +2793,7 @@
 				2E9C96522822F43100677516 /* PreCompositionLayer.swift in Sources */,
 				08C002DB2A46196300AB54BA /* Archive+Helpers.swift in Sources */,
 				2EAF5AF327A0798700E00531 /* AnyValueProvider.swift in Sources */,
+				0820D5B22A8BF14E007D705C /* DropShadowEffect.swift in Sources */,
 				2E9C96642822F43100677516 /* CoreTextRenderLayer.swift in Sources */,
 				2E9C960A2822F43100677516 /* PreCompLayerModel.swift in Sources */,
 				2E9C96192822F43100677516 /* Mask.swift in Sources */,
@@ -2729,6 +2808,7 @@
 				2E9C97272822F43100677516 /* StrokeAnimation.swift in Sources */,
 				2E9C97392822F43100677516 /* VisibilityAnimation.swift in Sources */,
 				08E207192A56014E002DCE17 /* SwiftUIView.swift in Sources */,
+				0820D5B52A8BF14E007D705C /* LayerEffect.swift in Sources */,
 				08E2075B2A56014E002DCE17 /* EpoxyModelArrayBuilder.swift in Sources */,
 				2EAF5AD827A0798700E00531 /* Vectors.swift in Sources */,
 				2E9C95E32822F43100677516 /* Group.swift in Sources */,
@@ -2860,6 +2940,7 @@
 				2E9C96232822F43100677516 /* Bundle.swift in Sources */,
 				2E9C96D12822F43100677516 /* ShapeContainerLayer.swift in Sources */,
 				08E207412A56014E002DCE17 /* SetBehaviorsProviding.swift in Sources */,
+				0820D5D32A8C006E007D705C /* DropShadowAnimation.swift in Sources */,
 				2E9C97402822F43100677516 /* LayerDebugging.swift in Sources */,
 				08E207202A56014E002DCE17 /* EpoxyModelStorage.swift in Sources */,
 				6D99D6452823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */,
@@ -2881,6 +2962,7 @@
 				2E9C96682822F43100677516 /* LayerTransformNode.swift in Sources */,
 				0887347128F0CBDE00458627 /* LottieAnimation.swift in Sources */,
 				2E9C97432822F43100677516 /* TestHelpers.swift in Sources */,
+				0820D5BA2A8BF159007D705C /* DropShadowStyle.swift in Sources */,
 				08EF21DE289C643B0097EA47 /* KeyframeInterpolator.swift in Sources */,
 				2E9C96172822F43100677516 /* Transform.swift in Sources */,
 				2E9C97492822F43100677516 /* CGFloatExtensions.swift in Sources */,
@@ -2932,6 +3014,7 @@
 				2E9C97522822F43100677516 /* StringExtensions.swift in Sources */,
 				2EAF5AF127A0798700E00531 /* AnimationKeypath.swift in Sources */,
 				2E9C973D2822F43100677516 /* LayerProperty.swift in Sources */,
+				0820D5B62A8BF14E007D705C /* LayerEffect.swift in Sources */,
 				2E9C95F92822F43100677516 /* Rectangle.swift in Sources */,
 				2E9C96832822F43100677516 /* FillRenderer.swift in Sources */,
 				2E9C95ED2822F43100677516 /* Repeater.swift in Sources */,
@@ -3023,6 +3106,7 @@
 				08E2075F2A56014E002DCE17 /* EpoxyModeled.swift in Sources */,
 				2E9C95F02822F43100677516 /* GradientFill.swift in Sources */,
 				08E206F62A56014E002DCE17 /* SectionedChangeset.swift in Sources */,
+				0820D5A02A8AE879007D705C /* LayerStyle.swift in Sources */,
 				2E9C95DB2822F43100677516 /* Trim.swift in Sources */,
 				2E9C96C52822F43100677516 /* SingleValueProvider.swift in Sources */,
 				2E9C967D2822F43100677516 /* GradientFillRenderer.swift in Sources */,
@@ -3064,8 +3148,10 @@
 				08E2075C2A56014E002DCE17 /* EpoxyModelArrayBuilder.swift in Sources */,
 				6CC544932902FF7D00212722 /* DotLottieCache.swift in Sources */,
 				2E9C97672822F43100677516 /* CurveVertex.swift in Sources */,
+				0820D5C72A8BF60F007D705C /* EffectValue.swift in Sources */,
 				2E9C964A2822F43100677516 /* NullCompositionLayer.swift in Sources */,
 				08E2072C2A56014E002DCE17 /* DidSelectProviding.swift in Sources */,
+				0820D5CF2A8BF6FF007D705C /* ColorEffectValue.swift in Sources */,
 				08C002ED2A46196300AB54BA /* Archive+Helpers.swift in Sources */,
 				2EAF5B0027A0798700E00531 /* GradientValueProvider.swift in Sources */,
 				2E9C96BF2822F43100677516 /* AnyValueContainer.swift in Sources */,
@@ -3095,6 +3181,7 @@
 				5721092129119F3100169699 /* BezierPathRoundExtension.swift in Sources */,
 				2EAF5AEE27A0798700E00531 /* LottieLogger.swift in Sources */,
 				2E9C97702822F43100677516 /* KeyframeExtensions.swift in Sources */,
+				0820D5B32A8BF14E007D705C /* DropShadowEffect.swift in Sources */,
 				2E9C963B2822F43100677516 /* PrecompAsset.swift in Sources */,
 				2E9C962C2822F43100677516 /* TextDocument.swift in Sources */,
 				2EAF5AE827A0798700E00531 /* LRUAnimationCache.swift in Sources */,
@@ -3112,6 +3199,7 @@
 				08C002EA2A46196300AB54BA /* Data+Serialization.swift in Sources */,
 				2E9C95F32822F43100677516 /* GradientStroke.swift in Sources */,
 				2EAF5ADF27A0798700E00531 /* Interpolatable.swift in Sources */,
+				0820D5C42A8BF60F007D705C /* Vector1DEffectValue.swift in Sources */,
 				2E9C96142822F43100677516 /* DashPattern.swift in Sources */,
 				2E9C960E2822F43100677516 /* ShapeLayerModel.swift in Sources */,
 				08C002F22A46196300AB54BA /* Archive+ReadingDeprecated.swift in Sources */,
