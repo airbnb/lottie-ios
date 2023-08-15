@@ -161,13 +161,20 @@ namespace :emerge do
       filename: 'test.zip'
     }
     if ENV["PR_NUMBER"] != "" && ENV["PR_NUMBER"] != "false"
-      # TODO: Enable PR uploads
-      next
+      upload_data[:sha] = g.log[0].parents[1].sha
+      upload_data[:baseSha] = g.log[0].parent.sha
+      upload_data[:prNumber] = ENV["PR_NUMBER"]
+      upload_data[:buildType] = 'pull_request'
     else
       upload_data[:sha] = g.log[0].sha
       upload_data[:buildType] = 'master'
     end
-    api_token_header = "X-API-Token: #{ENV['EMERGE_API_TOKEN']}"
+    api_token = ENV['EMERGE_API_TOKEN']
+    if api_token.nil? || api_token.empty?
+      puts "Skipping Emerge upload because API token was not provided."
+      next
+    end
+    api_token_header = "X-API-Token: #{api_token}"
     url = "https://api.emergetools.com/upload"
     cmd = "curl --fail -s --request POST --url #{url} --header 'Accept: application/json' --header 'Content-Type: application/json' --header '#{api_token_header}' --data '#{upload_data.to_json}'"
     upload_json = %x(#{cmd})
