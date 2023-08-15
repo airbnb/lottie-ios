@@ -1,3 +1,6 @@
+require 'json'
+require 'git'
+
 namespace :build do
   desc 'Builds all packages and executables'
   task all: ['package:all', 'example:all', 'xcframework']
@@ -142,6 +145,34 @@ namespace :format do
   desc 'Formats swift files'
   task :swift do
     sh 'swift package --allow-writing-to-package-directory format'
+  end
+end
+
+namespace :emerge do
+  desc 'Uploads to emerge'
+  task :upload do
+    xcodebuild('build -scheme "SizeTest" -destination generic/platform=iOS -project script/SizeTest/SizeTest.xcodeproj -archivePath test.xcarchive archive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO')
+    sh "zip -r -qq test.zip test.xcarchive"
+
+    g = Git.open('.')
+
+    upload_data = {
+      repoName: 'airbnb/lottie-ios',
+      filename: 'test.zip'
+    }
+    if ENV["PR_NUMBER"] != "" && ENV["PR_NUMBER"] != "false"
+      # TODO: Enable PR uploads
+      next
+    else
+      upload_data[:sha] = g.log[0].sha
+      upload_data[:buildType] = 'master'
+    end
+    api_token_header = "X-API-Token: #{ENV['EMERGE_API_TOKEN']}"
+    url = "https://api.emergetools.com/upload"
+    cmd = "curl --fail -s --request POST --url #{url} --header 'Accept: application/json' --header 'Content-Type: application/json' --header '#{api_token_header}' --data '#{upload_data.to_json}'"
+    upload_json = %x(#{cmd})
+    upload_url = JSON.parse(upload_json)['uploadURL']
+    %x(curl --fail -s -H 'Content-Type: application/zip' -T test.zip '#{upload_url}')
   end
 end
 

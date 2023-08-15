@@ -72,6 +72,18 @@ jobs:
           name: TestArtifacts
           path: Tests/Artifacts
 
+  emerge-upload:
+    name: "Emerge Upload"
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+      - name: Build Package
+        run: bundle exec rake emerge:upload
+        env:
+          EMERGE_API_TOKEN: ${{ secrets.EMERGE_API_TOKEN }}
+          PR_NUMBER: ${{ github.event.number }}
+
   build-xcframework:
     name: "Build XCFramework"
     runs-on: macos-12
