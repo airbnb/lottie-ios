@@ -10,6 +10,12 @@
 		0819D2A12A718CAE00D7DE49 /* LottieAnimationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */; };
 		0819D2A22A718CAE00D7DE49 /* LottieAnimationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */; };
 		0819D2A32A718CAE00D7DE49 /* LottieAnimationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */; };
+		0820D5932A8ACD67007D705C /* LottieButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5922A8ACD67007D705C /* LottieButton.swift */; };
+		0820D5942A8ACD67007D705C /* LottieButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5922A8ACD67007D705C /* LottieButton.swift */; };
+		0820D5952A8ACD67007D705C /* LottieButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5922A8ACD67007D705C /* LottieButton.swift */; };
+		0820D5972A8ACDD8007D705C /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5962A8ACDD7007D705C /* AnimatedButton.swift */; };
+		0820D5982A8ACDD8007D705C /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5962A8ACDD7007D705C /* AnimatedButton.swift */; };
+		0820D5992A8ACDD8007D705C /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D5962A8ACDD7007D705C /* AnimatedButton.swift */; };
 		0887346F28F0CBDE00458627 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887346E28F0CBDE00458627 /* LottieAnimation.swift */; };
 		0887347028F0CBDE00458627 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887346E28F0CBDE00458627 /* LottieAnimation.swift */; };
 		0887347128F0CBDE00458627 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887346E28F0CBDE00458627 /* LottieAnimation.swift */; };
@@ -708,9 +714,6 @@
 		2EAF5AC527A0798700E00531 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59D527A0798700E00531 /* UIColorExtension.swift */; };
 		2EAF5AC627A0798700E00531 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59D527A0798700E00531 /* UIColorExtension.swift */; };
 		2EAF5AC727A0798700E00531 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59D527A0798700E00531 /* UIColorExtension.swift */; };
-		2EAF5AC827A0798700E00531 /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59D627A0798700E00531 /* AnimatedButton.swift */; };
-		2EAF5AC927A0798700E00531 /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59D627A0798700E00531 /* AnimatedButton.swift */; };
-		2EAF5ACA27A0798700E00531 /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59D627A0798700E00531 /* AnimatedButton.swift */; };
 		2EAF5ACB27A0798700E00531 /* LottieAnimationViewBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59D727A0798700E00531 /* LottieAnimationViewBase.swift */; };
 		2EAF5ACC27A0798700E00531 /* LottieAnimationViewBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59D727A0798700E00531 /* LottieAnimationViewBase.swift */; };
 		2EAF5ACD27A0798700E00531 /* LottieAnimationViewBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59D727A0798700E00531 /* LottieAnimationViewBase.swift */; };
@@ -855,6 +858,8 @@
 
 /* Begin PBXFileReference section */
 		0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationSource.swift; sourceTree = "<group>"; };
+		0820D5922A8ACD67007D705C /* LottieButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieButton.swift; sourceTree = "<group>"; };
+		0820D5962A8ACDD7007D705C /* AnimatedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
 		0887346E28F0CBDE00458627 /* LottieAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimation.swift; sourceTree = "<group>"; };
 		0887347228F0CCDD00458627 /* LottieAnimationHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimationHelpers.swift; sourceTree = "<group>"; };
 		0887347328F0CCDD00458627 /* LottieAnimationViewInitializers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimationViewInitializers.swift; sourceTree = "<group>"; };
@@ -1103,7 +1108,6 @@
 		2EAF59D227A0798700E00531 /* FilepathImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilepathImageProvider.swift; sourceTree = "<group>"; };
 		2EAF59D427A0798700E00531 /* BundleImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleImageProvider.swift; sourceTree = "<group>"; };
 		2EAF59D527A0798700E00531 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
-		2EAF59D627A0798700E00531 /* AnimatedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
 		2EAF59D727A0798700E00531 /* LottieAnimationViewBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimationViewBase.swift; sourceTree = "<group>"; };
 		2EAF59D827A0798700E00531 /* AnimationSubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationSubview.swift; sourceTree = "<group>"; };
 		2EAF59DB27A0798700E00531 /* AnimationTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationTime.swift; sourceTree = "<group>"; };
@@ -1353,9 +1357,11 @@
 		08E6CF852A86E26F00A6D92F /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				08E6CF862A86E26F00A6D92F /* AnimatedSwitch.swift */,
-				08E6CF872A86E26F00A6D92F /* LottieSwitch.swift */,
 				08E6CF882A86E26F00A6D92F /* AnimatedControl.swift */,
+				08E6CF862A86E26F00A6D92F /* AnimatedSwitch.swift */,
+				0820D5962A8ACDD7007D705C /* AnimatedButton.swift */,
+				08E6CF872A86E26F00A6D92F /* LottieSwitch.swift */,
+				0820D5922A8ACD67007D705C /* LottieButton.swift */,
 				08E6CF922A86E29100A6D92F /* LottieViewType.swift */,
 			);
 			path = Controls;
@@ -1931,7 +1937,6 @@
 				2EAF59D227A0798700E00531 /* FilepathImageProvider.swift */,
 				2EAF59D427A0798700E00531 /* BundleImageProvider.swift */,
 				2EAF59D527A0798700E00531 /* UIColorExtension.swift */,
-				2EAF59D627A0798700E00531 /* AnimatedButton.swift */,
 				2EAF59D727A0798700E00531 /* LottieAnimationViewBase.swift */,
 				2EAF59D827A0798700E00531 /* AnimationSubview.swift */,
 			);
@@ -2269,6 +2274,7 @@
 				82A552752A2FD44B00E47AC8 /* LottieAnimationLayer.swift in Sources */,
 				08C001FF2A46150D00AB54BA /* Archive+Writing.swift in Sources */,
 				2E9C97442822F43100677516 /* AnimatorNodeDebugging.swift in Sources */,
+				0820D5932A8ACD67007D705C /* LottieButton.swift in Sources */,
 				2E9C96D82822F43100677516 /* AnimatorNode.swift in Sources */,
 				2E9C96212822F43100677516 /* Bundle.swift in Sources */,
 				2E9C96CF2822F43100677516 /* ShapeContainerLayer.swift in Sources */,
@@ -2400,6 +2406,7 @@
 				08E206F12A56014E002DCE17 /* IndexChangeset.swift in Sources */,
 				7E48BF582860CECF00A39198 /* UnitBezier.swift in Sources */,
 				2E9C971A2822F43100677516 /* ShapeAnimation.swift in Sources */,
+				0820D5972A8ACDD8007D705C /* AnimatedButton.swift in Sources */,
 				2E9C974A2822F43100677516 /* CGColor+RGB.swift in Sources */,
 				2E9C96572822F43100677516 /* ShapeCompositionLayer.swift in Sources */,
 				08E207512A56014E002DCE17 /* ClassReference.swift in Sources */,
@@ -2514,7 +2521,6 @@
 				2E9C962A2822F43100677516 /* TextDocument.swift in Sources */,
 				08E206FA2A56014E002DCE17 /* DiffableSection.swift in Sources */,
 				2EAF5AE627A0798700E00531 /* LRUAnimationCache.swift in Sources */,
-				2EAF5AC827A0798700E00531 /* AnimatedButton.swift in Sources */,
 				08C001FD2A46150D00AB54BA /* URL+ZIP.swift in Sources */,
 				2E9C962D2822F43100677516 /* Glyph.swift in Sources */,
 				2E9C96D52822F43100677516 /* RenderNode.swift in Sources */,
@@ -2605,6 +2611,7 @@
 				08EF21DD289C643B0097EA47 /* KeyframeInterpolator.swift in Sources */,
 				2E9C96162822F43100677516 /* Transform.swift in Sources */,
 				2E9C97482822F43100677516 /* CGFloatExtensions.swift in Sources */,
+				0820D5942A8ACD67007D705C /* LottieButton.swift in Sources */,
 				2EAF5AC627A0798700E00531 /* UIColorExtension.swift in Sources */,
 				08E207072A56014E002DCE17 /* EpoxySwiftUIIntrinsicContentSizeInvalidator.swift in Sources */,
 				2E9C967F2822F43100677516 /* GradientStrokeRenderer.swift in Sources */,
@@ -2638,6 +2645,7 @@
 				2E9C97332822F43100677516 /* CALayer+addAnimation.swift in Sources */,
 				2E9C969A2822F43100677516 /* ShapeNode.swift in Sources */,
 				08E206E32A56014E002DCE17 /* ViewType.swift in Sources */,
+				0820D5982A8ACDD8007D705C /* AnimatedButton.swift in Sources */,
 				2EAF5AD527A0798700E00531 /* AnimationTime.swift in Sources */,
 				08E207552A56014E002DCE17 /* AnyEpoxyModelProperty.swift in Sources */,
 				08C002D72A46196300AB54BA /* Entry+ZIP64.swift in Sources */,
@@ -2813,7 +2821,6 @@
 				2E9C962B2822F43100677516 /* TextDocument.swift in Sources */,
 				08E207012A56014E002DCE17 /* UIViewConfiguringSwiftUIView.swift in Sources */,
 				2EAF5AE727A0798700E00531 /* LRUAnimationCache.swift in Sources */,
-				2EAF5AC927A0798700E00531 /* AnimatedButton.swift in Sources */,
 				08C002D92A46196300AB54BA /* URL+ZIP.swift in Sources */,
 				2E9C962E2822F43100677516 /* Glyph.swift in Sources */,
 				2E9C96D62822F43100677516 /* RenderNode.swift in Sources */,
@@ -2848,6 +2855,7 @@
 				82A552772A2FD44B00E47AC8 /* LottieAnimationLayer.swift in Sources */,
 				2E9C97462822F43100677516 /* AnimatorNodeDebugging.swift in Sources */,
 				2E9C96DA2822F43100677516 /* AnimatorNode.swift in Sources */,
+				0820D5952A8ACD67007D705C /* LottieButton.swift in Sources */,
 				08C002E92A46196300AB54BA /* Entry+ZIP64.swift in Sources */,
 				2E9C96232822F43100677516 /* Bundle.swift in Sources */,
 				2E9C96D12822F43100677516 /* ShapeContainerLayer.swift in Sources */,
@@ -2979,6 +2987,7 @@
 				08E206F32A56014E002DCE17 /* IndexChangeset.swift in Sources */,
 				7E48BF5A2860CECF00A39198 /* UnitBezier.swift in Sources */,
 				2E9C971C2822F43100677516 /* ShapeAnimation.swift in Sources */,
+				0820D5992A8ACDD8007D705C /* AnimatedButton.swift in Sources */,
 				2E9C974C2822F43100677516 /* CGColor+RGB.swift in Sources */,
 				2E9C96592822F43100677516 /* ShapeCompositionLayer.swift in Sources */,
 				08E207532A56014E002DCE17 /* ClassReference.swift in Sources */,
@@ -3089,7 +3098,6 @@
 				2E9C963B2822F43100677516 /* PrecompAsset.swift in Sources */,
 				2E9C962C2822F43100677516 /* TextDocument.swift in Sources */,
 				2EAF5AE827A0798700E00531 /* LRUAnimationCache.swift in Sources */,
-				2EAF5ACA27A0798700E00531 /* AnimatedButton.swift in Sources */,
 				2E9C962F2822F43100677516 /* Glyph.swift in Sources */,
 				08E206FC2A56014E002DCE17 /* DiffableSection.swift in Sources */,
 				2E9C96D72822F43100677516 /* RenderNode.swift in Sources */,

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0820D59B2A8ACE64007D705C /* LottieButtonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D59A2A8ACE64007D705C /* LottieButtonRow.swift */; };
 		085D97852A5DF94C00C78D18 /* AnimationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D97832A5DF76C00C78D18 /* AnimationListView.swift */; };
 		085D97872A5E0DB600C78D18 /* AnimationPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D97862A5E0DB600C78D18 /* AnimationPreviewView.swift */; };
 		085D97892A5E0DBE00C78D18 /* AnimationPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D97862A5E0DB600C78D18 /* AnimationPreviewView.swift */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		080864BD2A4C955F00D70F30 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0820D59A2A8ACE64007D705C /* LottieButtonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieButtonRow.swift; sourceTree = "<group>"; };
 		085D97832A5DF76C00C78D18 /* AnimationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationListView.swift; sourceTree = "<group>"; };
 		085D97862A5E0DB600C78D18 /* AnimationPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationPreviewView.swift; sourceTree = "<group>"; };
 		0861BBCC2898964400C3FC66 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,10 +105,11 @@
 				085D97832A5DF76C00C78D18 /* AnimationListView.swift */,
 				085D97862A5E0DB600C78D18 /* AnimationPreviewView.swift */,
 				08E359932A55FFC400141956 /* LottieViewLayoutDemoView.swift */,
+				08E6CF832A86C49300A6D92F /* ControlsDemoView.swift */,
+				08E6CF812A86C35B00A6D92F /* LottieSwitchRow.swift */,
+				0820D59A2A8ACE64007D705C /* LottieButtonRow.swift */,
 				08E359972A55FFC600141956 /* Example.entitlements */,
 				607FACD11AFB9204008FA782 /* Products */,
-				08E6CF812A86C35B00A6D92F /* LottieSwitchRow.swift */,
-				08E6CF832A86C49300A6D92F /* ControlsDemoView.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0820D59B2A8ACE64007D705C /* LottieButtonRow.swift in Sources */,
 				08E359942A55FFC400141956 /* LottieViewLayoutDemoView.swift in Sources */,
 				08E359922A55FFC400141956 /* ExampleApp.swift in Sources */,
 				085D97872A5E0DB600C78D18 /* AnimationPreviewView.swift in Sources */,
