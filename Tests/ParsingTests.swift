@@ -7,8 +7,8 @@
 
 import Difference
 import Foundation
-import Lottie
 import XCTest
+@testable import Lottie
 
 // MARK: - ParsingTests
 

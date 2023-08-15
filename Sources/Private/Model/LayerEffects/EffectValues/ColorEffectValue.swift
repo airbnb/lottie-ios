@@ -9,7 +9,7 @@ final class ColorEffectValue: EffectValue {
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    value = try container.decode(KeyframeGroup<LottieColor>.self, forKey: .value)
+    value = try? container.decode(KeyframeGroup<LottieColor>.self, forKey: .value)
     try super.init(from: decoder)
   }
 
@@ -22,7 +22,7 @@ final class ColorEffectValue: EffectValue {
   // MARK: Internal
 
   /// The value of the color
-  let value: KeyframeGroup<LottieColor>
+  let value: KeyframeGroup<LottieColor>?
 
   override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)

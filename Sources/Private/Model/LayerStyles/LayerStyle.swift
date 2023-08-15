@@ -47,15 +47,6 @@ class LayerStyle: Codable, DictionaryInitializable {
     type = LayerStyleType(rawValue: try dictionary.value(for: CodingKeys.type)) ?? .unknown
   }
 
-  init(
-    name: String,
-    type: LayerStyleType,
-    hidden _: Bool)
-  {
-    self.name = name
-    self.type = type
-  }
-
   // MARK: Internal
 
   /// The name of the style
@@ -79,11 +70,9 @@ extension Array where Element == LayerStyle {
       switch LayerStyleType(rawValue: shapeType ?? LayerStyleType.unknown.rawValue) {
       case .dropShadow:
         return try DropShadowStyle(dictionary: dictionary)
-      case .unknown:
+      case .unknown, nil:
         // Unsupported
         return try LayerStyle(dictionary: dictionary)
-      case nil:
-        return nil
       }
     }
   }

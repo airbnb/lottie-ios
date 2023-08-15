@@ -41,7 +41,7 @@ class LayerEffect: Codable, DictionaryInitializable {
     let container = try decoder.container(keyedBy: LayerEffect.CodingKeys.self)
     name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Effect"
     type = try container.decode(LayerEffectType.self, forKey: .type)
-    effects = try container.decodeIfPresent([EffectValue].self, forKey: .effects) ?? []
+    effects = try container.decodeIfPresent([EffectValue].self, ofFamily: EffectValueType.self, forKey: .effects) ?? []
   }
 
   required init(dictionary: [String: Any]) throws {
@@ -88,11 +88,9 @@ extension Array where Element == LayerEffect {
       switch LayerEffectType(rawValue: shapeType ?? LayerEffectType.unknown.rawValue) {
       case .dropShadow:
         return try DropShadowEffect(dictionary: dictionary)
-      case .unknown:
+      case .unknown, nil:
         // Unsupported
         return try LayerEffect(dictionary: dictionary)
-      case nil:
-        return nil
       }
     }
   }

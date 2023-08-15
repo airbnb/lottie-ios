@@ -9,7 +9,7 @@ final class Vector1DEffectValue: EffectValue {
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    value = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .value)
+    value = try? container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .value)
     try super.init(from: decoder)
   }
 
@@ -22,7 +22,7 @@ final class Vector1DEffectValue: EffectValue {
   // MARK: Internal
 
   /// The value of the slider
-  let value: KeyframeGroup<LottieVector1D>
+  let value: KeyframeGroup<LottieVector1D>?
 
   override func encode(to encoder: Encoder) throws {
     try super.encode(to: encoder)

@@ -48,7 +48,7 @@ extension DropShadowEffect: DropShadowModel {
   var _color: KeyframeGroup<LottieColor>? { color?.value }
 
   var _distance: KeyframeGroup<LottieVector1D>? {
-    distance?.value.map { distanceValue in
+    distance?.value?.map { distanceValue in
       // `DropShadowEffect.distance` doesn't seem to map cleanly to
       // `CALayer.shadowOffset` (e.g. with a simple multiplier).
       // Instead, this uses a custom quadratic regression eyeballed
@@ -65,7 +65,7 @@ extension DropShadowEffect: DropShadowModel {
   }
 
   var _radius: KeyframeGroup<LottieVector1D>? {
-    softness?.value.map { softnessValue in
+    softness?.value?.map { softnessValue in
       // `DropShadowEffect.softness` doesn't seem to map cleanly to
       // `CALayer.cornerRadius` (e.g. with a simple multiplier).
       // Instead, this uses a custom quadratic regression eyeballed
@@ -82,7 +82,7 @@ extension DropShadowEffect: DropShadowModel {
   }
 
   var _opacity: KeyframeGroup<LottieVector1D>? {
-    opacity?.value.map { originalOpacityValue in
+    opacity?.value?.map { originalOpacityValue in
       // `DropShadowEffect.opacity` is a value between 0 and 255,
       // but `DropShadowModel._opacity` expects a value between 0 and 100.
       LottieVector1D((originalOpacityValue.value / 255.0) * 100)
@@ -90,7 +90,7 @@ extension DropShadowEffect: DropShadowModel {
   }
 
   var _angle: KeyframeGroup<LottieVector1D>? {
-    direction?.value.map { originalAngleValue in
+    direction?.value?.map { originalAngleValue in
       // `DropShadowEffect.distance` is rotated 90º from the
       // angle value representation expected by `DropShadowModel._angle`
       LottieVector1D(originalAngleValue.value - 90)

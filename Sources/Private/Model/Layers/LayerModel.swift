@@ -99,8 +99,8 @@ class LayerModel: Codable, DictionaryInitializable {
     timeStretch = try container.decodeIfPresent(Double.self, forKey: .timeStretch) ?? 1
     matte = try container.decodeIfPresent(MatteType.self, forKey: .matte)
     hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden) ?? false
-    styles = try container.decodeIfPresent([LayerStyle].self, forKey: .styles) ?? []
-    effects = try container.decodeIfPresent([LayerEffect].self, forKey: .effects) ?? []
+    styles = try container.decodeIfPresent([LayerStyle].self, ofFamily: LayerStyleType.self, forKey: .styles) ?? []
+    effects = try container.decodeIfPresent([LayerEffect].self, ofFamily: LayerEffectType.self, forKey: .effects) ?? []
   }
 
   required init(dictionary: [String: Any]) throws {
