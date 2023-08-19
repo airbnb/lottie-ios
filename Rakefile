@@ -136,7 +136,7 @@ namespace :lint do
 
   desc 'Lints the EmbeddedLibraries directory'
   task :EmbeddedLibraries do
-    sh 'echo "Linting /Sources/Private/EmbeddedLibaries (should not contain any public symbols)"'
+    sh 'echo "Linting /Sources/Private/EmbeddedLibraries (should not contain any public symbols)"'
     sh '! grep -r "public" Sources/Private/EmbeddedLibraries --include \*.swift'
   end
 end
