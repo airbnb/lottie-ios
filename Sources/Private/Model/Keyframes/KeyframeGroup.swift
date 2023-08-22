@@ -14,7 +14,6 @@ import Foundation
 /// Keyframe data is wrapped in a dictionary { "k" : KeyframeData }.
 /// The keyframe data can either be an array of keyframes or, if no animation is present, the raw value.
 /// This helper object is needed to properly decode the json.
-
 final class KeyframeGroup<T> {
 
   // MARK: Lifecycle

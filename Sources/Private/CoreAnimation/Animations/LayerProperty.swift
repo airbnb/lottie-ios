@@ -26,6 +26,16 @@ struct LayerProperty<ValueRepresentation> {
 }
 
 extension LayerProperty where ValueRepresentation: Equatable {
+  /// Initializes a `LayerProperty` that corresponds to a property on `CALayer`
+  /// or some other `CALayer` subclass like `CAShapeLayer`.
+  /// - Parameters:
+  ///   - caLayerKeypath: The Objective-C `#keyPath` to the `CALayer` property,
+  ///     e.g. `#keyPath(CALayer.opacity)` or `#keyPath(CAShapeLayer.path)`.
+  ///   - defaultValue: The default value of the property (e.g. the value of the
+  ///     property immediately after calling `CALayer.init()`). Knowing this value
+  ///     lets us perform some optimizations in `CALayer+addAnimation`.
+  ///   - customizableProperty: A description of how this property can be customized
+  ///     dynamically at runtime using `AnimationView.setValueProvider(_:keypath:)`.
   init(
     caLayerKeypath: String,
     defaultValue: ValueRepresentation?,
@@ -157,6 +167,34 @@ extension LayerProperty {
         guard let transform = transform else { return false }
         return CATransform3DIsIdentity(transform)
       },
+      customizableProperty: nil /* currently unsupported */ )
+  }
+
+  static var shadowOpacity: LayerProperty<CGFloat> {
+    .init(
+      caLayerKeypath: #keyPath(CALayer.shadowOpacity),
+      defaultValue: 0,
+      customizableProperty: nil /* currently unsupported */ )
+  }
+
+  static var shadowColor: LayerProperty<CGColor> {
+    .init(
+      caLayerKeypath: #keyPath(CALayer.shadowColor),
+      defaultValue: .rgb(0, 0, 0),
+      customizableProperty: nil /* currently unsupported */ )
+  }
+
+  static var shadowRadius: LayerProperty<CGFloat> {
+    .init(
+      caLayerKeypath: #keyPath(CALayer.shadowRadius),
+      defaultValue: 3.0,
+      customizableProperty: nil /* currently unsupported */ )
+  }
+
+  static var shadowOffset: LayerProperty<CGSize> {
+    .init(
+      caLayerKeypath: #keyPath(CALayer.shadowOffset),
+      defaultValue: CGSize(width: 0, height: -3.0),
       customizableProperty: nil /* currently unsupported */ )
   }
 }
