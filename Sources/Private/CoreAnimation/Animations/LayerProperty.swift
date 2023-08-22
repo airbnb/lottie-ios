@@ -26,6 +26,16 @@ struct LayerProperty<ValueRepresentation> {
 }
 
 extension LayerProperty where ValueRepresentation: Equatable {
+  /// Initializes a `LayerProperty` that corresponds to a property on `CALayer`
+  /// or some other `CALayer` subclass like `CAShapeLayer`.
+  /// - Parameters:
+  ///   - caLayerKeypath: The Objective-C `#keyPath` to the `CALayer` property,
+  ///     e.g. `#keyPath(CALayer.opacity)` or `#keyPath(CAShapeLayer.path)`.
+  ///   - defaultValue: The default value of the property (e.g. the value of the
+  ///     property immediately after calling `CALayer.init()`). Knowing this value
+  ///     lets us perform some optimizations in `CALayer+addAnimation`.
+  ///   - customizableProperty: A description of how this property can be customized
+  ///     dynamically at runtime using `AnimationView.setValueProvider(_:keypath:)`.
   init(
     caLayerKeypath: String,
     defaultValue: ValueRepresentation?,
