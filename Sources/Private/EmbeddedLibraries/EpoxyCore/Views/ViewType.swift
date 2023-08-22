@@ -3,7 +3,7 @@
 
 import SwiftUI
 
-#if os(iOS) || os(tvOS)
+#if canImport(UIKit)
 import UIKit
 
 /// The platform's main view type.
@@ -26,7 +26,7 @@ extension ViewRepresentableType {
   typealias RepresentableViewType = UIViewType
 }
 
-#elseif os(macOS)
+#elseif canImport(AppKit)
 import AppKit
 
 /// The platform's main view type.

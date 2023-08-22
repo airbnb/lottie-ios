@@ -81,7 +81,7 @@ extension FileManager {
     let entryFileSystemRepresentation = fileManager.fileSystemRepresentation(withPath: url.path)
     var fileStat = stat()
     lstat(entryFileSystemRepresentation, &fileStat)
-    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+    #if os(macOS) || canImport(UIKit)
     let modTimeSpec = fileStat.st_mtimespec
     #else
     let modTimeSpec = fileStat.st_mtim
