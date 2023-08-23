@@ -222,6 +222,7 @@ jobs:
         with:
           install-mint: true
           install-carthage: true
+          xcode: '14.3' # Swift 5.8
       - name: Test Carthage support
         run: bundle exec rake test:carthage
 
