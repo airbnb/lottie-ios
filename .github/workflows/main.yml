@@ -117,6 +117,7 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           install-mint: false
+          xcode: '14.3' # Swift 5.8
       - name: Lint CocoaPod Podspec
         run: bundle exec rake lint:podspec
 
@@ -140,6 +141,7 @@ jobs:
         with:
           install-mint: true
           install-carthage: true
+          xcode: '14.3' # Swift 5.8
       - name: Test Carthage support
         run: bundle exec rake test:carthage
 
