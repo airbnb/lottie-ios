@@ -111,7 +111,7 @@ jobs:
           # will be able to use these XCFrameworks and the lottie-spm package.
           xcode: '13.4.1' # Swift 5.6.1
       - name: Build XCFramework
-        run: SKIP_VISION_OS=true bundle exec rake build:xcframework[Lottie-Xcode-13.2.1]
+        run: SKIP_VISION_OS=true bundle exec rake build:xcframework[Lottie-Xcode-${{ matrix.xcode }}]
       - name: Upload XCFramework
         uses: actions/upload-artifact@v2
         with:
@@ -133,7 +133,7 @@ jobs:
         with:
           xcode: '15.0' # Swift 5.9, first version that includes visionOS SDK.
       - name: Build XCFramework
-        run: bundle exec rake build:xcframework[Lottie-Xcode-15.0]
+        run: bundle exec rake build:xcframework[Lottie-${{ matrix.xcode }}]
       - name: Upload XCFramework
         uses: actions/upload-artifact@v2
         with:
