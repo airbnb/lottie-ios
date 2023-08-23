@@ -54,7 +54,7 @@ namespace :build do
     end
 
     desc 'Builds the visionOS Lottie Example app'
-    task :visonOS do
+    task :visionOS do
       ifVisionOSEnabled {
         xcodebuild('build -scheme "Example (Multiplatform)" -destination "platform=visionOS Simulator,name=Apple Vision Pro" -workspace Lottie.xcworkspace')
       }
