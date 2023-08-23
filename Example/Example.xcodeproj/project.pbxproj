@@ -10,43 +10,13 @@
 		0820D59B2A8ACE64007D705C /* LottieButtonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820D59A2A8ACE64007D705C /* LottieButtonRow.swift */; };
 		085D97852A5DF94C00C78D18 /* AnimationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D97832A5DF76C00C78D18 /* AnimationListView.swift */; };
 		085D97872A5E0DB600C78D18 /* AnimationPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D97862A5E0DB600C78D18 /* AnimationPreviewView.swift */; };
-		085D97892A5E0DBE00C78D18 /* AnimationPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D97862A5E0DB600C78D18 /* AnimationPreviewView.swift */; };
-		0861BBCD2898964400C3FC66 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0861BBCC2898964400C3FC66 /* Lottie.framework */; };
-		0861BBCE2898964400C3FC66 /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0861BBCC2898964400C3FC66 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		08E207602A560251002DCE17 /* Samples in Resources */ = {isa = PBXBuildFile; fileRef = 2E3EEB372763C68C00287EEA /* Samples */; };
 		08E359922A55FFC400141956 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E359912A55FFC400141956 /* ExampleApp.swift */; };
 		08E359942A55FFC400141956 /* LottieViewLayoutDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E359932A55FFC400141956 /* LottieViewLayoutDemoView.swift */; };
 		08E3599F2A56004100141956 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 08E3599E2A56004100141956 /* Lottie */; };
 		08E6CF822A86C35B00A6D92F /* LottieSwitchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6CF812A86C35B00A6D92F /* LottieSwitchRow.swift */; };
 		08E6CF842A86C49300A6D92F /* ControlsDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6CF832A86C49300A6D92F /* ControlsDemoView.swift */; };
-		2E0F2FBE27602CB300B65DE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E0F2FBC27602CB300B65DE3 /* LaunchScreen.storyboard */; };
-		2E1670C32784F009009CDED3 /* ControlsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1670C22784F009009CDED3 /* ControlsDemoViewController.swift */; };
-		2E1670CA2784F123009CDED3 /* AnimatedButtonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1670C92784F123009CDED3 /* AnimatedButtonRow.swift */; };
-		2E1670CC2784F9C1009CDED3 /* AnimatedSwitchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1670CB2784F9C1009CDED3 /* AnimatedSwitchRow.swift */; };
-		2E362A1E2762BA06006AE7D2 /* SampleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E362A1D2762BA06006AE7D2 /* SampleListViewController.swift */; };
-		2E3EEB382763C68C00287EEA /* Samples in Resources */ = {isa = PBXBuildFile; fileRef = 2E3EEB372763C68C00287EEA /* Samples */; };
-		2E6DBDF727723A7300EBD89E /* Epoxy in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6DBDF627723A7300EBD89E /* Epoxy */; };
-		2E6DBDF927723A7300EBD89E /* EpoxyCollectionView in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6DBDF827723A7300EBD89E /* EpoxyCollectionView */; };
-		2E6DBDFB27723A7300EBD89E /* EpoxyLayoutGroups in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6DBDFA27723A7300EBD89E /* EpoxyLayoutGroups */; };
-		2E97E3052767E7C600FE22C3 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E97E3042767E7C600FE22C3 /* Configuration.swift */; };
-		2E9E77AF27602BD400C84BA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E77AE27602BD400C84BA3 /* AppDelegate.swift */; };
-		2EC6E5082763D981002E091C /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6E5072763D981002E091C /* LinkView.swift */; };
-		2EC6E5102763E79F002E091C /* AnimationPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6E50F2763E79F002E091C /* AnimationPreviewViewController.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		0861BBCF2898964400C3FC66 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				0861BBCE2898964400C3FC66 /* Lottie.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		080864BD2A4C955F00D70F30 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,18 +31,7 @@
 		08E6CF812A86C35B00A6D92F /* LottieSwitchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieSwitchRow.swift; sourceTree = "<group>"; };
 		08E6CF832A86C49300A6D92F /* ControlsDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsDemoView.swift; sourceTree = "<group>"; };
 		2E0F2FB627602C1500B65DE3 /* .. */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ..; sourceTree = "<group>"; };
-		2E0F2FBD27602CB300B65DE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		2E1670C22784F009009CDED3 /* ControlsDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsDemoViewController.swift; sourceTree = "<group>"; };
-		2E1670C92784F123009CDED3 /* AnimatedButtonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButtonRow.swift; sourceTree = "<group>"; };
-		2E1670CB2784F9C1009CDED3 /* AnimatedSwitchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedSwitchRow.swift; sourceTree = "<group>"; };
-		2E362A1D2762BA06006AE7D2 /* SampleListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleListViewController.swift; sourceTree = "<group>"; };
 		2E3EEB372763C68C00287EEA /* Samples */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Samples; path = ../Tests/Samples; sourceTree = "<group>"; };
-		2E97E3042767E7C600FE22C3 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
-		2E9E77AC27602BD400C84BA3 /* Example (iOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example (iOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E9E77AE27602BD400C84BA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2E9E77BC27602BD400C84BA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2EC6E5072763D981002E091C /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
-		2EC6E50F2763E79F002E091C /* AnimationPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationPreviewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,17 +40,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				08E3599F2A56004100141956 /* Lottie in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2E9E77A927602BD400C84BA3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2E6DBDFB27723A7300EBD89E /* EpoxyLayoutGroups in Frameworks */,
-				0861BBCD2898964400C3FC66 /* Lottie.framework in Frameworks */,
-				2E6DBDF727723A7300EBD89E /* Epoxy in Frameworks */,
-				2E6DBDF927723A7300EBD89E /* EpoxyCollectionView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,44 +62,10 @@
 			path = Example;
 			sourceTree = "<group>";
 		};
-		2E1670C72784F05F009CDED3 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				2E362A1D2762BA06006AE7D2 /* SampleListViewController.swift */,
-				2EC6E50F2763E79F002E091C /* AnimationPreviewViewController.swift */,
-				2E1670C22784F009009CDED3 /* ControlsDemoViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		2E1670C82784F068009CDED3 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				2EC6E5072763D981002E091C /* LinkView.swift */,
-				2E1670C92784F123009CDED3 /* AnimatedButtonRow.swift */,
-				2E1670CB2784F9C1009CDED3 /* AnimatedSwitchRow.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		2E9E77AD27602BD400C84BA3 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				2E1670C72784F05F009CDED3 /* ViewControllers */,
-				2E1670C82784F068009CDED3 /* Views */,
-				2E9E77AE27602BD400C84BA3 /* AppDelegate.swift */,
-				2E0F2FBC27602CB300B65DE3 /* LaunchScreen.storyboard */,
-				2E9E77BC27602BD400C84BA3 /* Info.plist */,
-				2E97E3042767E7C600FE22C3 /* Configuration.swift */,
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
 				2E3EEB372763C68C00287EEA /* Samples */,
-				2E9E77AD27602BD400C84BA3 /* iOS */,
 				08E359902A55FFC400141956 /* Example */,
 				7E9F75F0414B543D4DE51733 /* Frameworks */,
 			);
@@ -160,7 +74,6 @@
 		607FACD11AFB9204008FA782 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2E9E77AC27602BD400C84BA3 /* Example (iOS).app */,
 				08E3598F2A55FFC400141956 /* Example (Multiplatform).app */,
 			);
 			name = Products;
@@ -200,29 +113,6 @@
 			productReference = 08E3598F2A55FFC400141956 /* Example (Multiplatform).app */;
 			productType = "com.apple.product-type.application";
 		};
-		2E9E77AB27602BD400C84BA3 /* Example (iOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2E9E77BD27602BD400C84BA3 /* Build configuration list for PBXNativeTarget "Example (iOS)" */;
-			buildPhases = (
-				2E9E77A827602BD400C84BA3 /* Sources */,
-				2E9E77A927602BD400C84BA3 /* Frameworks */,
-				2E9E77AA27602BD400C84BA3 /* Resources */,
-				0861BBCF2898964400C3FC66 /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Example (iOS)";
-			packageProductDependencies = (
-				2E6DBDF627723A7300EBD89E /* Epoxy */,
-				2E6DBDF827723A7300EBD89E /* EpoxyCollectionView */,
-				2E6DBDFA27723A7300EBD89E /* EpoxyLayoutGroups */,
-			);
-			productName = iOS;
-			productReference = 2E9E77AC27602BD400C84BA3 /* Example (iOS).app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -236,10 +126,6 @@
 					08E3598E2A55FFC400141956 = {
 						CreatedOnToolsVersion = 14.3;
 					};
-					2E9E77AB27602BD400C84BA3 = {
-						CreatedOnToolsVersion = 12.5.1;
-						ProvisioningStyle = Automatic;
-					};
 				};
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "Example" */;
@@ -252,13 +138,11 @@
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
 			packageReferences = (
-				2EC6E5042763D8FF002E091C /* XCRemoteSwiftPackageReference "epoxy-ios" */,
 			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2E9E77AB27602BD400C84BA3 /* Example (iOS) */,
 				08E3598E2A55FFC400141956 /* Example (Multiplatform) */,
 			);
 		};
@@ -270,15 +154,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				08E207602A560251002DCE17 /* Samples in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2E9E77AA27602BD400C84BA3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2E3EEB382763C68C00287EEA /* Samples in Resources */,
-				2E0F2FBE27602CB300B65DE3 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,34 +174,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2E9E77A827602BD400C84BA3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2EC6E5102763E79F002E091C /* AnimationPreviewViewController.swift in Sources */,
-				2E1670CC2784F9C1009CDED3 /* AnimatedSwitchRow.swift in Sources */,
-				2E97E3052767E7C600FE22C3 /* Configuration.swift in Sources */,
-				2E1670C32784F009009CDED3 /* ControlsDemoViewController.swift in Sources */,
-				2E1670CA2784F123009CDED3 /* AnimatedButtonRow.swift in Sources */,
-				2E362A1E2762BA06006AE7D2 /* SampleListViewController.swift in Sources */,
-				2E9E77AF27602BD400C84BA3 /* AppDelegate.swift in Sources */,
-				2EC6E5082763D981002E091C /* LinkView.swift in Sources */,
-				085D97892A5E0DBE00C78D18 /* AnimationPreviewView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		2E0F2FBC27602CB300B65DE3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2E0F2FBD27602CB300B65DE3 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		08E3599C2A55FFC600141956 /* Debug */ = {
@@ -425,69 +273,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3";
 				TVOS_DEPLOYMENT_TARGET = 16.0;
-			};
-			name = Release;
-		};
-		2E9E77BE27602BD400C84BA3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				OTHER_SWIFT_FLAGS = "-enable-upcoming-feature StrictConcurrency -warn-concurrency";
-				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.lottie.example.iOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		2E9E77BF27602BD400C84BA3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MTL_FAST_MATH = YES;
-				OTHER_SWIFT_FLAGS = "-enable-upcoming-feature StrictConcurrency -warn-concurrency";
-				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.lottie.example.iOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -613,15 +398,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2E9E77BD27602BD400C84BA3 /* Build configuration list for PBXNativeTarget "Example (iOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2E9E77BE27602BD400C84BA3 /* Debug */,
-				2E9E77BF27602BD400C84BA3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -633,36 +409,10 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		2EC6E5042763D8FF002E091C /* XCRemoteSwiftPackageReference "epoxy-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/epoxy-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.7.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
 		08E3599E2A56004100141956 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Lottie;
-		};
-		2E6DBDF627723A7300EBD89E /* Epoxy */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2EC6E5042763D8FF002E091C /* XCRemoteSwiftPackageReference "epoxy-ios" */;
-			productName = Epoxy;
-		};
-		2E6DBDF827723A7300EBD89E /* EpoxyCollectionView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2EC6E5042763D8FF002E091C /* XCRemoteSwiftPackageReference "epoxy-ios" */;
-			productName = EpoxyCollectionView;
-		};
-		2E6DBDFA27723A7300EBD89E /* EpoxyLayoutGroups */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2EC6E5042763D8FF002E091C /* XCRemoteSwiftPackageReference "epoxy-ios" */;
-			productName = EpoxyLayoutGroups;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
