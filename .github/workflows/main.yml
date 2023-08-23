@@ -102,14 +102,18 @@ jobs:
   build-xcframework-macos-12:
     name: "Build XCFramework"
     runs-on: macos-12
+    strategy:
+      matrix:
+        xcode:
+          # XCFrameworks are forwards-compatible but not backwards-compatible.
+          # The Xcode version we use for this job is that oldest Xcode version that
+          # will be able to use these XCFrameworks and the lottie-spm package.
+          - '13.4.1' # Swift 5.6.1
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
         with:
-          # XCFrameworks are forwards-compatible but not backwards-compatible.
-          # The Xcode version we use for this job is that oldest Xcode version that
-          # will be able to use these XCFrameworks and the lottie-spm package.
-          xcode: '13.4.1' # Swift 5.6.1
+          xcode: ${{ matrix.xcode }}
       - name: Build XCFramework
         run: SKIP_VISION_OS=true bundle exec rake build:xcframework[Lottie-Xcode-${{ matrix.xcode }}]
       - name: Upload XCFramework
@@ -127,13 +131,17 @@ jobs:
   build-xcframework-macos-13:
     name: "Build XCFramework"
     runs-on: macos-13
+    strategy:
+      matrix:
+        xcode:
+        - '15.0' # Swift 5.9, and the first Xcode version with the visionOS SDK.
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
         with:
-          xcode: '15.0' # Swift 5.9, first version that includes visionOS SDK.
+          xcode: ${{ matrix.xcode }}
       - name: Build XCFramework
-        run: bundle exec rake build:xcframework[Lottie-${{ matrix.xcode }}]
+        run: bundle exec rake build:xcframework[Lottie-Xcode-${{ matrix.xcode }}]
       - name: Upload XCFramework
         uses: actions/upload-artifact@v2
         with:
@@ -158,7 +166,7 @@ jobs:
         run: bundle exec rake lint:podspec
 
   spm-xcode-15:
-    name: "Test Swift Package Manager support"
+    name: "Test Swift Package Manager"
     runs-on: macos-13
     strategy:
       matrix:
@@ -174,7 +182,7 @@ jobs:
         run: bundle exec rake test:spm
 
   spm-xcode-14:
-    name: "Test Swift Package Manager support"
+    name: "Test Swift Package Manager"
     runs-on: macos-13
     strategy:
       matrix:
@@ -190,12 +198,12 @@ jobs:
         run: SKIP_VISION_OS=true bundle exec rake test:spm
 
   spm-xcode-13:
-    name: "Test Swift Package Manager support"
+    name: "Test Swift Package Manager"
     runs-on: macos-12
     strategy:
       matrix:
         xcode:
-        - '13.2.1' # Swift 5.6
+        - '13.4.1' # Swift 5.6
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup

@@ -107,7 +107,7 @@ namespace :build do
       sh "zip -r --symlinks #{args[:zip_archive_name]}.xcframework.zip Lottie.xcframework"
       sh 'rm -rf Lottie.xcframework'
     end
-    sh 'swift package compute-checksum .build/archives/Lottie.xcframework.zip'
+    sh "swift package compute-checksum .build/archives/#{args[:zip_archive_name]}.xcframework.zip"
   end
 end
 
