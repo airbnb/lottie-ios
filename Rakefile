@@ -28,7 +28,7 @@ namespace :build do
     desc 'Builds the Lottie package for visionOS'
     task :visionOS do
       ifVisionOSEnabled {
-        xcodebuild('build -scheme "Lottie (visionOS)" -destination generic/platform=xrOS -workspace Lottie.xcworkspace')
+        xcodebuild('build -scheme "Lottie (visionOS)" -destination generic/platform=visionOS -workspace Lottie.xcworkspace')
       }
     end
   end
@@ -56,7 +56,7 @@ namespace :build do
     desc 'Builds the visionOS Lottie Example app'
     task :visionOS do
       ifVisionOSEnabled {
-        xcodebuild('build -scheme "Example (Multiplatform)" -destination "platform=xrOS Simulator,name=Apple Vision Pro" -workspace Lottie.xcworkspace')
+        xcodebuild('build -scheme "Example (Multiplatform)" -destination "platform=visionOS Simulator,name=Apple Vision Pro" -workspace Lottie.xcworkspace')
       }
     end
   end
@@ -76,8 +76,8 @@ namespace :build do
     xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (tvOS)" -destination "generic/platform=tvOS Simulator" -archivePath ".build/archives/Lottie_tvOS_Simulator" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
 
     ifVisionOSEnabled {
-      xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (visionOS)" -destination generic/platform=xrOS -archivePath ".build/archives/Lottie_visionOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
-      xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (visionOS)" -destination "generic/platform=xrOS Simulator" -archivePath ".build/archives/Lottie_visionOS_Simulator" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
+      xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (visionOS)" -destination generic/platform=visionOS -archivePath ".build/archives/Lottie_visionOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
+      xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (visionOS)" -destination "generic/platform=visionOS Simulator" -archivePath ".build/archives/Lottie_visionOS_Simulator" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
     }
 
     # Combine all of the platforms into a single XCFramework
@@ -154,7 +154,7 @@ namespace :test do
       xcodebuild('build -scheme "Lottie" -destination generic/platform=tvOS')
 
       ifVisionOSEnabled {
-        xcodebuild('build -scheme "Lottie" -destination generic/platform=xrOS')
+        xcodebuild('build -scheme "Lottie" -destination generic/platform=visionOS')
       }
     end
   end
