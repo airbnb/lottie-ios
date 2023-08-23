@@ -163,7 +163,7 @@ end
 namespace :lint do
   desc 'Lints swift files'
   task :swift do
-    sh 'swift package --allow-writing-to-package-directory format --lint --swift-version 5.5'
+    sh 'swift package --allow-writing-to-package-directory format --lint'
   end
 
   desc 'Lints the CocoaPods podspec'
@@ -181,7 +181,7 @@ end
 namespace :format do
   desc 'Formats swift files'
   task :swift do
-    sh 'swift package --allow-writing-to-package-directory format --swift-version 5.5'
+    sh 'swift package --allow-writing-to-package-directory format'
   end
 end
 
