@@ -152,6 +152,10 @@ namespace :test do
       xcodebuild('build -scheme "Lottie" -destination generic/platform=iOS')
       xcodebuild('build -scheme "Lottie" -destination generic/platform=macOS')
       xcodebuild('build -scheme "Lottie" -destination generic/platform=tvOS')
+
+      ifVisionOSEnabled {
+        xcodebuild('build -scheme "Lottie" -destination generic/platform=visionOS')
+      }
     end
   end
 end

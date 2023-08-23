@@ -155,21 +155,56 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           install-mint: false
-          xcode: '15.0' # Swift 5.9
       - name: Lint CocoaPod Podspec
         run: bundle exec rake lint:podspec
 
   spm:
     name: "Test Swift Package Manager support"
     runs-on: macos-13
+    strategy:
+      matrix:
+        xcode:
+        - '15.0' # Swift 5.9, first version with visionOS SDK.
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
         with:
           install-mint: true
-          xcode: '15.0' # Swift 5.9
+          xcode: ${{ matrix.xcode }}
       - name: Test Swift Package Manager support
         run: bundle exec rake test:spm
+
+  spm:
+    name: "Test Swift Package Manager support"
+    runs-on: macos-13
+    strategy:
+      matrix:
+        xcode:
+        - '14.3' # Swift 5.8
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          install-mint: true
+          xcode: ${{ matrix.xcode }}
+      - name: Test Swift Package Manager support
+        run: SKIP_VISION_OS=true bundle exec rake test:spm
+
+  spm:
+    name: "Test Swift Package Manager support"
+    runs-on: macos-12
+    strategy:
+      matrix:
+        xcode:
+        - '13.2.1' # Swift 5.5
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          install-mint: true
+          xcode: ${{ matrix.xcode }}
+      - name: Test Swift Package Manager support
+        run: SKIP_VISION_OS=true bundle exec rake test:spm
 
   carthage:
     name: "Test Carthage support"
@@ -180,7 +215,6 @@ jobs:
         with:
           install-mint: true
           install-carthage: true
-          xcode: '15.0' # Swift 5.9
       - name: Test Carthage support
         run: bundle exec rake test:carthage
 
