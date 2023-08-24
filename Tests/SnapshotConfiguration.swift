@@ -95,6 +95,10 @@ extension SnapshotConfiguration {
       AnimationKeypath(keypath: "**.Stroke 1.**.Color"): ColorValueProvider(.red),
     ]),
 
+    "Issues/issue_2150": .customValueProviders([
+      AnimationKeypath(keypath: "**.Color"): ColorValueProvider(.red),
+    ]),
+
     // Test cases for `AnimatedImageProvider`
     "Nonanimating/_dog": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog.png")),
 
