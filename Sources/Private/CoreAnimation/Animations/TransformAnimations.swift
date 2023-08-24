@@ -253,6 +253,11 @@ extension CALayer {
     context: LayerAnimationContext)
     throws
   {
+    // Core Animation doesn't animate skew changes properly. If the skew value
+    // changes over the course of the animation then we have to manually
+    // compute the `CATransform3D` for each frame individually.
+    let requiresManualInterpolation = transformModel.hasSkewAnimation
+
     let combinedTransformKeyframes = Keyframes.combined(
       transformModel.anchorPoint,
       transformModel._position ?? KeyframeGroup(LottieVector3D(x: 0.0, y: 0.0, z: 0.0)),
@@ -264,6 +269,7 @@ extension CALayer {
       transformModel.rotationZ,
       transformModel._skew ?? KeyframeGroup(LottieVector1D(0)),
       transformModel._skewAxis ?? KeyframeGroup(LottieVector1D(0)),
+      requiresManualInterpolation: requiresManualInterpolation,
       makeCombinedResult: {
         anchor, position, positionX, positionY, scale, rotationX, rotationY, rotationZ, skew, skewAxis
           -> CATransform3D in
@@ -308,6 +314,18 @@ extension TransformModel {
     }
 
     return _skew.keyframes.contains(where: { $0.value.cgFloatValue != 0 })
+  }
+
+  /// Whether or not this transform has a non-zero skew value which animates
+  var hasSkewAnimation: Bool {
+    guard
+      hasSkew,
+      let _skew = _skew,
+      let _skewAxis = _skewAxis
+    else { return false }
+
+    return _skew.keyframes.count > 1
+      || _skewAxis.keyframes.count > 1
   }
 
   /// Whether or not this `TransformModel` has any negative X scale values
