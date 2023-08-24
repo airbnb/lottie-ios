@@ -50,6 +50,7 @@ struct AnimationPreviewView: View {
         LoadingIndicator()
           .frame(width: 50, height: 50)
       }
+      .configuration(LottieConfiguration(renderingEngine: renderingEngine))
       .imageProvider(.exampleAppSampleImages)
       .resizable()
       .reloadAnimationTrigger(currentURLIndex, showPlaceholder: false)
