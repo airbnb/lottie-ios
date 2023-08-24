@@ -41,7 +41,8 @@ final class ShapeLayer: BaseCompositionLayer {
     if let repeater = shapeLayer.items.first(where: { $0 is Repeater }) as? Repeater {
       try setUpRepeater(repeater, context: context)
     } else {
-      try setupGroups(from: shapeLayer.items, parentGroup: nil, parentGroupPath: [], context: context)
+      let shapeItems = shapeLayer.items.map { ShapeItemLayer.Item(item: $0, groupPath: []) }
+      try setupGroups(from: shapeItems, parentGroup: nil, parentGroupPath: [], context: context)
     }
   }
 
@@ -50,7 +51,8 @@ final class ShapeLayer: BaseCompositionLayer {
     let copyCount = Int(try repeater.copies.exactlyOneKeyframe(context: context, description: "repeater copies").value)
 
     for index in 0..<copyCount {
-      for groupLayer in try makeGroupLayers(from: items, parentGroup: nil, parentGroupPath: [], context: context) {
+      let shapeItems = items.map { ShapeItemLayer.Item(item: $0, groupPath: []) }
+      for groupLayer in try makeGroupLayers(from: shapeItems, parentGroup: nil, parentGroupPath: [], context: context) {
         let repeatedLayer = RepeaterLayer(repeater: repeater, childLayer: groupLayer, index: index)
         addSublayer(repeatedLayer)
       }
@@ -127,7 +129,7 @@ final class GroupLayer: BaseAnimationLayer {
   private func setupLayerHierarchy(context: LayerContext) throws {
     // Groups can contain other groups, so we may have to continue
     // recursively creating more `GroupLayer`s
-    try setupGroups(from: group.items, parentGroup: group, parentGroupPath: groupPath, context: context)
+    try setupGroups(from: items, parentGroup: group, parentGroupPath: groupPath, context: context)
 
     // Create `ShapeItemLayer`s for each subgroup of shapes that should be rendered as a single unit
     //  - These groups are listed from front-to-back, so we have to add the sublayers in reverse order
@@ -183,7 +185,7 @@ extension CALayer {
   ///  - Each `Group` item becomes its own `GroupLayer` sublayer.
   ///  - Other `ShapeItem` are applied to all sublayers
   fileprivate func setupGroups(
-    from items: [ShapeItem],
+    from items: [ShapeItemLayer.Item],
     parentGroup: Group?,
     parentGroupPath: [String],
     context: LayerContext)
@@ -204,29 +206,27 @@ extension CALayer {
   ///  - Each `Group` item becomes its own `GroupLayer` sublayer.
   ///  - Other `ShapeItem` are applied to all sublayers
   fileprivate func makeGroupLayers(
-    from items: [ShapeItem],
+    from items: [ShapeItemLayer.Item],
     parentGroup: Group?,
     parentGroupPath: [String],
     context: LayerContext)
     throws -> [GroupLayer]
   {
-    var (groupItems, otherItems) = items
-      .filter { !$0.hidden }
-      .grouped(by: { $0 is Group })
+    var groupItems = items.compactMap { $0.item as? Group }.filter { !$0.hidden }
+    var otherItems = items.filter { !($0.item is Group) && !$0.item.hidden }
 
     // Handle the top-level `shapeLayer.items` array. This is typically just a single `Group`,
     // but in practice can be any combination of items. The implementation expects all path-drawing
     // shape items to be managed by a `GroupLayer`, so if there's a top-level path item we
     // have to create a placeholder group.
-    if parentGroup == nil, otherItems.contains(where: { $0.drawsCGPath }) {
-      groupItems = [Group(items: items, name: "")]
+    if parentGroup == nil, otherItems.contains(where: { $0.item.drawsCGPath }) {
+      groupItems = [Group(items: items.map { $0.item }, name: "")]
       otherItems = []
     }
 
     // Any child items that wouldn't be included in a valid shape render group
     // need to be applied to child groups (otherwise they'd be silently ignored).
     let inheritedItemsForChildGroups = otherItems
-      .map { ShapeItemLayer.Item(item: $0, groupPath: parentGroupPath) }
       .shapeRenderGroups(groupHasChildGroupsToInheritUnusedItems: !groupItems.isEmpty)
       .unusedItems
 
@@ -235,8 +235,6 @@ extension CALayer {
     let groupsInZAxisOrder = groupItems.reversed()
 
     return try groupsInZAxisOrder.compactMap { group in
-      guard let group = group as? Group else { return nil }
-
       var pathForChildren = parentGroupPath
       if !group.name.isEmpty {
         pathForChildren.append(group.name)

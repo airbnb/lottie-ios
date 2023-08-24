@@ -1,0 +1,4 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[surface1542.Layer] The Core Animation rendering engine doesn't currently support applying trims to filled shapes (only stroked shapes).
+[surface1542.Layer] The Core Animation rendering engine doesn't currently support applying trims to filled shapes (only stroked shapes).
+[surface1542.Layer] The Core Animation rendering engine doesn't currently support applying trims to filled shapes (only stroked shapes).
