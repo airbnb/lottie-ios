@@ -122,7 +122,8 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
             imageProvider: imageProvider,
             textProvider: textProvider,
             fontProvider: fontProvider,
-            configuration: configuration)
+            configuration: configuration,
+            logger: logger)
         }
         .sizing(sizing)
         .configure { context in

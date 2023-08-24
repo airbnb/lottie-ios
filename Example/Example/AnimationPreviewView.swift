@@ -52,6 +52,7 @@ struct AnimationPreviewView: View {
       }
       .configuration(LottieConfiguration(renderingEngine: renderingEngine))
       .imageProvider(.exampleAppSampleImages)
+      .logger(.printToConsole)
       .resizable()
       .reloadAnimationTrigger(currentURLIndex, showPlaceholder: false)
       .playbackMode(playbackMode)
