@@ -10,12 +10,18 @@ enum Keyframes {
   /// Combines the given keyframe groups of `Keyframe<T>`s into a single keyframe group of of `Keyframe<[T]>`s
   ///  - If all of the `KeyframeGroup`s have the exact same animation timing, the keyframes are merged
   ///  - Otherwise, the keyframes are manually interpolated at each frame in the animation
-  static func combined<T>(_ allGroups: [KeyframeGroup<T>]) -> KeyframeGroup<[T]>
+  static func combined<T>(
+    _ allGroups: [KeyframeGroup<T>],
+    requiresManualInterpolation: Bool = false)
+    -> KeyframeGroup<[T]>
     where T: AnyInterpolatable
   {
-    Keyframes.combined(allGroups, makeCombinedResult: { untypedValues in
-      untypedValues.compactMap { $0 as? T }
-    })
+    Keyframes.combined(
+      allGroups,
+      requiresManualInterpolation: requiresManualInterpolation,
+      makeCombinedResult: { untypedValues in
+        untypedValues.compactMap { $0 as? T }
+      })
   }
 
   /// Combines the given keyframe groups of `Keyframe<T>`s into a single keyframe group of of `Keyframe<[T]>`s
@@ -24,6 +30,7 @@ enum Keyframes {
   static func combined<T1, T2, CombinedResult>(
     _ k1: KeyframeGroup<T1>,
     _ k2: KeyframeGroup<T2>,
+    requiresManualInterpolation: Bool = false,
     makeCombinedResult: (T1, T2) throws -> CombinedResult)
     rethrows
     -> KeyframeGroup<CombinedResult>
@@ -31,6 +38,7 @@ enum Keyframes {
   {
     try Keyframes.combined(
       [k1, k2],
+      requiresManualInterpolation: requiresManualInterpolation,
       makeCombinedResult: { untypedValues in
         guard
           let t1 = untypedValues[0] as? T1,
@@ -48,12 +56,14 @@ enum Keyframes {
     _ k1: KeyframeGroup<T1>,
     _ k2: KeyframeGroup<T2>,
     _ k3: KeyframeGroup<T3>,
+    requiresManualInterpolation: Bool = false,
     makeCombinedResult: (T1, T2, T3) -> CombinedResult)
     -> KeyframeGroup<CombinedResult>
     where T1: AnyInterpolatable, T2: AnyInterpolatable, T3: AnyInterpolatable
   {
     Keyframes.combined(
       [k1, k2, k3],
+      requiresManualInterpolation: requiresManualInterpolation,
       makeCombinedResult: { untypedValues in
         guard
           let t1 = untypedValues[0] as? T1,
@@ -76,6 +86,7 @@ enum Keyframes {
     _ k5: KeyframeGroup<T5>,
     _ k6: KeyframeGroup<T6>,
     _ k7: KeyframeGroup<T7>,
+    requiresManualInterpolation: Bool = false,
     makeCombinedResult: (T1, T2, T3, T4, T5, T6, T7) -> CombinedResult)
     -> KeyframeGroup<CombinedResult>
     where T1: AnyInterpolatable, T2: AnyInterpolatable, T3: AnyInterpolatable, T4: AnyInterpolatable,
@@ -83,6 +94,7 @@ enum Keyframes {
   {
     Keyframes.combined(
       [k1, k2, k3, k4, k5, k6, k7],
+      requiresManualInterpolation: requiresManualInterpolation,
       makeCombinedResult: { untypedValues in
         guard
           let t1 = untypedValues[0] as? T1,
@@ -110,6 +122,7 @@ enum Keyframes {
     _ k6: KeyframeGroup<T6>,
     _ k7: KeyframeGroup<T7>,
     _ k8: KeyframeGroup<T8>,
+    requiresManualInterpolation: Bool = false,
     makeCombinedResult: (T1, T2, T3, T4, T5, T6, T7, T8) -> CombinedResult)
     -> KeyframeGroup<CombinedResult>
     where T1: AnyInterpolatable, T2: AnyInterpolatable, T3: AnyInterpolatable, T4: AnyInterpolatable,
@@ -117,6 +130,7 @@ enum Keyframes {
   {
     Keyframes.combined(
       [k1, k2, k3, k4, k5, k6, k7, k8],
+      requiresManualInterpolation: requiresManualInterpolation,
       makeCombinedResult: { untypedValues in
         guard
           let t1 = untypedValues[0] as? T1,
@@ -147,6 +161,7 @@ enum Keyframes {
     _ k8: KeyframeGroup<T8>,
     _ k9: KeyframeGroup<T9>,
     _ k10: KeyframeGroup<T10>,
+    requiresManualInterpolation: Bool = false,
     makeCombinedResult: (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10) -> CombinedResult)
     -> KeyframeGroup<CombinedResult>
     where T1: AnyInterpolatable, T2: AnyInterpolatable, T3: AnyInterpolatable, T4: AnyInterpolatable,
@@ -155,6 +170,7 @@ enum Keyframes {
   {
     Keyframes.combined(
       [k1, k2, k3, k4, k5, k6, k7, k8, k9, k10],
+      requiresManualInterpolation: requiresManualInterpolation,
       makeCombinedResult: { untypedValues in
         guard
           let t1 = untypedValues[0] as? T1,
@@ -181,8 +197,12 @@ enum Keyframes {
   ///
   /// `makeCombinedResult` is a closure that takes an array of keyframe values (with the exact same length as `AnyKeyframeGroup`),
   /// casts them to the expected type, and combined them into the final resulting keyframe.
+  ///
+  /// `requiresManualInterpolation` determines whether the keyframes must be computed using `Keyframes.manuallyInterpolated`,
+  /// which interpolates the value at each frame, or if the keyframes can simply be combined.
   private static func combined<CombinedResult>(
     _ allGroups: [AnyKeyframeGroup],
+    requiresManualInterpolation: Bool,
     makeCombinedResult: ([Any]) throws -> CombinedResult?)
     rethrows
     -> KeyframeGroup<CombinedResult>
@@ -195,6 +215,7 @@ enum Keyframes {
     let animatingKeyframes = untypedGroups.filter { $0.keyframes.count > 1 }
 
     guard
+      !requiresManualInterpolation,
       !allGroups.isEmpty,
       animatingKeyframes.allSatisfy({ $0.hasSameTimingParameters(as: animatingKeyframes[0]) })
     else {
