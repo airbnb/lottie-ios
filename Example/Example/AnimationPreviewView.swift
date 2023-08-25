@@ -51,7 +51,7 @@ struct AnimationPreviewView: View {
           .frame(width: 50, height: 50)
       }
       .configuration(LottieConfiguration(renderingEngine: renderingEngine))
-      .imageProvider(.exampleAppSampleImages)
+      .imageProvider(.exampleAppSampleImages.asyncImageProvider(makePlaceholder: { _ in .color(CGColor(gray: 0.5, alpha: 1)) }))
       .logger(.printToConsole)
       .resizable()
       .reloadAnimationTrigger(currentURLIndex, showPlaceholder: false)
