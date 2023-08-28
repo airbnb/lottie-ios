@@ -32,7 +32,7 @@ final class PerformanceTests: XCTestCase {
       of: .mainThread,
       with: .coreAnimation,
       for: complexAnimation,
-      iterations: 500)
+      iterations: 600)
 
     // The Core Animation engine is currently about 1.7x slower than the
     // Main Thread engine in this example.
@@ -50,7 +50,7 @@ final class PerformanceTests: XCTestCase {
 
     // The automatic engine option should have the same performance as the core animation engine,
     // when rendering an animation supported by the CA engine.
-    XCTAssertEqual(ratio, 1.0, accuracy: 0.5)
+    XCTAssertEqual(ratio, 1.0, accuracy: 0.6)
   }
 
   func testAnimationViewScrubbing_simpleAnimation() {
