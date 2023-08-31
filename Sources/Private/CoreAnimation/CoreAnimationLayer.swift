@@ -94,8 +94,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     }
   }
 
-  /// The parent `LottieAnimationView` that manages this layer
-  weak var animationView: LottieAnimationView?
+  /// The parent `LottieAnimationLayer` that manages this layer
+  weak var lottieAnimationLayer: LottieAnimationLayer?
 
   /// A closure that is called after this layer sets up its animation.
   /// If the animation setup was unsuccessful and encountered compatibility issues,
@@ -316,7 +316,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     else { return }
 
     if isAnimationPlaying == true {
-      animationView?.updateInFlightAnimation()
+      lottieAnimationLayer?.updateInFlightAnimation()
     } else {
       let currentFrame = currentFrame
       removeAnimations()

@@ -140,7 +140,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
       newFrame = floor(newFrame)
     }
     for animationLayer in animationLayers {
-      animationLayer.displayWithFrame(frame: newFrame, forceUpdates: false)
+      animationLayer.displayWithFrame(frame: newFrame, forceUpdates: forceDisplayUpdateOnEachFrame)
     }
   }
 
@@ -149,8 +149,16 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
   /// The animatable Current Frame Property
   @NSManaged var currentFrame: CGFloat
 
-  /// The parent `LottieAnimationView` that manages this layer
-  weak var animationView: LottieAnimationView?
+  /// The parent `LottieAnimationLayer` that manages this layer
+  weak var lottieAnimationLayer: LottieAnimationLayer?
+
+  /// Whether or not to use `forceDisplayUpdate()` when rendering each individual frame.
+  ///  - The main thread rendering engine implements optimizations to decrease the amount
+  ///    of properties that have to be re-rendered on each frame. There are some cases
+  ///    where this can result in bugs / incorrect behavior, so we allow it to be disabled.
+  ///  - Forcing a full render on every frame will decrease performance, and is not recommended
+  ///    except as a workaround to a bug in the main thread rendering engine.
+  var forceDisplayUpdateOnEachFrame = false
 
   var animationLayers: ContiguousArray<CompositionLayer>
 

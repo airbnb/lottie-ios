@@ -703,9 +703,19 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
-  public var animationView: LottieAnimationView? {
-    set { rootAnimationLayer?.animationView = newValue }
-    get { rootAnimationLayer?.animationView }
+  /// Whether or not the Main Thread rendering engine should use `forceDisplayUpdate()`
+  /// when rendering each individual frame.
+  ///  - The main thread rendering engine implements optimizations to decrease the amount
+  ///    of properties that have to be re-rendered on each frame. There are some cases
+  ///    where this can result in bugs / incorrect behavior, so we allow it to be disabled.
+  ///  - Forcing a full render on every frame will decrease performance, and is not recommended
+  ///    except as a workaround to a bug in the main thread rendering engine.
+  ///  - Has no effect when using the Core Animation rendering engine.
+  public var mainThreadRenderingEngineShouldForceDisplayUpdateOnEachFrame = false {
+    didSet {
+      (rootAnimationLayer as? MainThreadAnimationLayer)?.forceDisplayUpdateOnEachFrame
+        = mainThreadRenderingEngineShouldForceDisplayUpdateOnEachFrame
+    }
   }
 
   /// Sets the lottie file backing the animation layer. Setting this will clear the
@@ -1085,6 +1095,8 @@ public class LottieAnimationLayer: CALayer {
       return
     }
 
+    animationLayer.lottieAnimationLayer = self
+
     animationLayerDidLoad?(self, renderingEngine)
 
     animationLayer.renderScale = screenScale
@@ -1098,13 +1110,16 @@ public class LottieAnimationLayer: CALayer {
   }
 
   fileprivate func makeMainThreadAnimationLayer(for animation: LottieAnimation) -> MainThreadAnimationLayer {
-    MainThreadAnimationLayer(
+    let mainThreadAnimationLayer = MainThreadAnimationLayer(
       animation: animation,
       imageProvider: imageProvider.cachedImageProvider,
       textProvider: textProvider,
       fontProvider: fontProvider,
       maskAnimationToBounds: maskAnimationToBounds,
       logger: logger)
+
+    mainThreadAnimationLayer.forceDisplayUpdateOnEachFrame = mainThreadRenderingEngineShouldForceDisplayUpdateOnEachFrame
+    return mainThreadAnimationLayer
   }
 
   fileprivate func makeCoreAnimationLayer(for animation: LottieAnimation) -> CoreAnimationLayer? {

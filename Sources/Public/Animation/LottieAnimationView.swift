@@ -573,6 +573,19 @@ open class LottieAnimationView: LottieAnimationViewBase {
     lottieAnimationLayer.currentPlaybackMode
   }
 
+  /// Whether or not the Main Thread rendering engine should use `forceDisplayUpdate()`
+  /// when rendering each individual frame.
+  ///  - The main thread rendering engine implements optimizations to decrease the amount
+  ///    of properties that have to be re-rendered on each frame. There are some cases
+  ///    where this can result in bugs / incorrect behavior, so we allow it to be disabled.
+  ///  - Forcing a full render on every frame will decrease performance, and is not recommended
+  ///    except as a workaround to a bug in the main thread rendering engine.
+  ///  - Has no effect when using the Core Animation rendering engine.
+  public var mainThreadRenderingEngineShouldForceDisplayUpdateOnEachFrame: Bool {
+    get { lottieAnimationLayer.mainThreadRenderingEngineShouldForceDisplayUpdateOnEachFrame }
+    set { lottieAnimationLayer.mainThreadRenderingEngineShouldForceDisplayUpdateOnEachFrame = newValue }
+  }
+
   /// Sets the lottie file backing the animation view. Setting this will clear the
   /// view's contents, completion blocks and current state. The new animation will
   /// be loaded up and set to the beginning of its timeline.
@@ -805,11 +818,10 @@ open class LottieAnimationView: LottieAnimationViewBase {
       self.setNeedsLayout()
     }
 
-    lottieAnimationLayer.animationLayerDidLoad = { [weak self] lottieAnimationLayer, _ in
+    lottieAnimationLayer.animationLayerDidLoad = { [weak self] _, _ in
       guard let self = self else { return }
       self.invalidateIntrinsicContentSize()
       self.setNeedsLayout()
-      lottieAnimationLayer.animationView = self
     }
   }
 
