@@ -427,9 +427,6 @@ public class LottieAnimationLayer: CALayer {
   /// Will inform the receiver the type of rendering engine that is used for the layer.
   public var animationLayerDidLoad:((_ animationLayer: LottieAnimationLayer, _ renderingEngine: RenderingEngineOption) -> Void)?
 
-  /// The parent `LottieAnimationView` of this layer, if applicable.
-  public internal(set) weak var animationView: LottieAnimationView?
-
   /// The configuration that this `LottieAnimationView` uses when playing its animation
   public var configuration: LottieConfiguration {
     didSet {

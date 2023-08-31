@@ -808,7 +808,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   override func commonInit() {
     super.commonInit()
-    lottieAnimationLayer.animationView = self
     lottieAnimationLayer.screenScale = screenScale
     viewLayer?.addSublayer(lottieAnimationLayer)
 
