@@ -237,6 +237,9 @@ def ifVisionOSEnabled
   if ENV["SKIP_VISION_OS"] == "true"
     puts "Skipping visionOS build"
   else
+    # As of 9/5/23 the GitHub Actions runner doesn't include the visionOS SDK by default,
+    # so we have to download it manually.
+    sh "xcodebuild -downloadPlatform visionOS"
     yield
   end
 end
