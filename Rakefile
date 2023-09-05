@@ -240,8 +240,8 @@ def ifVisionOSEnabled
     # As of 9/5/23 the GitHub Actions runner doesn't include the visionOS SDK by default,
     # so we have to download it manually. Following the suggested workaround from
     # https://github.com/actions/runner-images/issues/8144#issuecomment-1702786388
-    sh "brew install xcodesorg/made/xcodes"
-    sh "xcodes runtimes install 'visionOS 1.0-beta3'"
+    `brew install xcodesorg/made/xcodes`
+    `xcodes runtimes install 'visionOS 1.0-beta3'`
     yield
   end
 end
