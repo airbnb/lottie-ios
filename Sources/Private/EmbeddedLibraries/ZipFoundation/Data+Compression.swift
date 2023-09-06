@@ -53,7 +53,7 @@ extension Data {
   ///   - consumer: A closure that processes the result of the compress operation.
   /// - Returns: The checksum of the processed content.
   static func compress(size: Int64, bufferSize: Int, provider: Provider, consumer: Consumer) throws -> CRC32 {
-    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+    #if os(macOS) || canImport(UIKit)
     return try process(
       operation: COMPRESSION_STREAM_ENCODE,
       size: size,
@@ -81,7 +81,7 @@ extension Data {
     consumer: Consumer)
     throws -> CRC32
   {
-    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+    #if os(macOS) || canImport(UIKit)
     return try process(
       operation: COMPRESSION_STREAM_DECODE,
       size: size,
@@ -113,7 +113,7 @@ extension Data {
 
 // MARK: - Apple Platforms
 
-#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || canImport(UIKit)
 import Compression
 
 extension Data {

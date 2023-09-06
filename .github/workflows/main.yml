@@ -14,7 +14,6 @@ jobs:
       fail-fast: false
       matrix:
         xcode:
-        - '13.2.1' # Swift 5.5
         - '13.4.1' # Swift 5.6
     steps:
       - uses: actions/checkout@v2
@@ -22,7 +21,7 @@ jobs:
         with:
           xcode: ${{ matrix.xcode }}
       - name: Build Package
-        run: bundle exec rake build:package:all
+        run: SKIP_VISION_OS=true bundle exec rake build:package:all
 
   build-package-macos-13:
     name: "Build Package"
@@ -39,6 +38,22 @@ jobs:
         with:
           xcode: ${{ matrix.xcode }}
       - name: Build Package
+        run: SKIP_VISION_OS=true bundle exec rake build:package:all
+
+  build-package-macos-13-xcode-15:
+    name: "Build Package"
+    runs-on: macos-13
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode:
+        - '15.0' # Swift 5.9, first version that includes visionOS SDK.
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          xcode: ${{ matrix.xcode }}
+      - name: Build Package
         run: bundle exec rake build:package:all
 
   build-example:
@@ -48,7 +63,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
         with:
-          xcode: '14.3' # Swift 5.8
+          xcode: '15.0' # Swift 5.9
       - name: Build Example
         run: bundle exec rake build:example:all
 
@@ -84,19 +99,49 @@ jobs:
           EMERGE_API_TOKEN: ${{ secrets.EMERGE_API_TOKEN }}
           PR_NUMBER: ${{ github.event.number }}
 
-  build-xcframework:
+  build-xcframework-macos-12:
     name: "Build XCFramework"
     runs-on: macos-12
+    strategy:
+      matrix:
+        xcode:
+          # XCFrameworks are forwards-compatible but not backwards-compatible.
+          # The Xcode version we use for this job is that oldest Xcode version that
+          # will be able to use these XCFrameworks and the lottie-spm package.
+          - '13.4.1' # Swift 5.6.1
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
         with:
-          # XCFrameworks are forwards-compatible but not backwards-compatible.
-          # The Xcode version we use for this job is that oldest Xcode version that
-          # will be able to use these XCFrameworks and the lottie-spm package.
-          xcode: '13.2.1' # Swift 5.5.2
+          xcode: ${{ matrix.xcode }}
       - name: Build XCFramework
-        run: bundle exec rake build:xcframework
+        run: SKIP_VISION_OS=true bundle exec rake build:xcframework[Lottie-Xcode-${{ matrix.xcode }}]
+      - name: Upload XCFramework
+        uses: actions/upload-artifact@v2
+        with:
+          name: BuildProducts
+          # The xcframework is at the path `.build/archives/Lottie.xcframework.zip`.
+          # GitHub always zips the artifacts before uploading, so if we uploaded the .xframework.zip
+          # directly then it would actually upload a double-zip (a .zip containing our `Lottie.xcframework.zip`).
+          # This is confusing especially since macOS Archive Utility automatially unzips both layers at once.
+          # Instead, we upload the entire archives folder, resulting in an `XCFramework.zip` that unzips
+          # to an `archives` directory containing our `Lottie.xcframework.zip`.
+          path: .build/archives
+
+  build-xcframework-macos-13:
+    name: "Build XCFramework"
+    runs-on: macos-13
+    strategy:
+      matrix:
+        xcode:
+        - '15.0' # Swift 5.9, and the first Xcode version with the visionOS SDK.
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          xcode: ${{ matrix.xcode }}
+      - name: Build XCFramework
+        run: bundle exec rake build:xcframework[Lottie-Xcode-${{ matrix.xcode }}]
       - name: Upload XCFramework
         uses: actions/upload-artifact@v2
         with:
@@ -117,20 +162,56 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           install-mint: false
-          xcode: '14.3' # Swift 5.8
       - name: Lint CocoaPod Podspec
         run: bundle exec rake lint:podspec
 
-  spm:
-    name: "Test Swift Package Manager support"
+  spm-xcode-15:
+    name: "Test Swift Package Manager"
     runs-on: macos-13
+    strategy:
+      matrix:
+        xcode:
+        - '15.0' # Swift 5.9, first version with visionOS SDK.
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
         with:
           install-mint: true
+          xcode: ${{ matrix.xcode }}
       - name: Test Swift Package Manager support
         run: bundle exec rake test:spm
+
+  spm-xcode-14:
+    name: "Test Swift Package Manager"
+    runs-on: macos-13
+    strategy:
+      matrix:
+        xcode:
+        - '14.3' # Swift 5.8
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          install-mint: true
+          xcode: ${{ matrix.xcode }}
+      - name: Test Swift Package Manager support
+        run: SKIP_VISION_OS=true bundle exec rake test:spm
+
+  spm-xcode-13:
+    name: "Test Swift Package Manager"
+    runs-on: macos-12
+    strategy:
+      matrix:
+        xcode:
+        - '13.4.1' # Swift 5.6
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          install-mint: true
+          xcode: ${{ matrix.xcode }}
+      - name: Test Swift Package Manager support
+        run: SKIP_VISION_OS=true bundle exec rake test:spm
 
   carthage:
     name: "Test Carthage support"
