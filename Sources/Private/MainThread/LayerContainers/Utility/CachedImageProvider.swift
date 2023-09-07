@@ -21,7 +21,7 @@ private final class CachedImageProvider: AnimationImageProvider {
   // MARK: Public
 
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
-    if imageProvider.ignoreInternalImageCache == false, let image = imageCache.object(forKey: asset.id as NSString) {
+    if imageProvider.cacheEligible, let image = imageCache.object(forKey: asset.id as NSString) {
       return image
     }
     if let image = imageProvider.imageForAsset(asset: asset) {

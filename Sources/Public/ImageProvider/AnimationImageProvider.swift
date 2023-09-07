@@ -8,6 +8,8 @@
 import CoreGraphics
 import Foundation
 
+// MARK: - AnimationImageProvider
+
 /// Image provider is a protocol that is used to supply images to `LottieAnimationView`.
 ///
 /// Some animations require a reference to an image. The image provider loads and
@@ -17,15 +19,17 @@ import Foundation
 /// Additionally custom Image Providers can be made to load images from a URL,
 /// or to Cache images.
 public protocol AnimationImageProvider {
-    
-  var ignoreInternalImageCache: Bool { get set }
-    
+
+  /// Whether or not the resulting image of this image provider can be cached by Lottie. Defaults to true.
+  /// If true, Lottie may internally cache the result of `imageForAsset`
+  var cacheEligible: Bool { get set }
+
   func imageForAsset(asset: ImageAsset) -> CGImage?
 }
 
-public extension AnimationImageProvider {
-    var ignoreInternalImageCache: Bool {
-        get { return false }
-        set { }
-    }
+extension AnimationImageProvider {
+  public var cacheEligible: Bool {
+    get { true }
+    set { }
+  }
 }
