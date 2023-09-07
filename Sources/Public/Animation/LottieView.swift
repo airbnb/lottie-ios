@@ -193,7 +193,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   }
 
   /// Returns a copy of this view with the given closure that is called whenever the
-  /// `LottieAnimationSource` of the underlying `LottieAnimationView` is updated.
+  /// `LottieAnimationSource` provided via `init` is loaded and applied to the underlying `LottieAnimationView`.
   public func animationDidLoad(_ animationDidLoad: @escaping (LottieAnimationSource) -> Void) -> Self {
     var copy = self
     copy.animationDidLoad = animationDidLoad
