@@ -24,6 +24,7 @@ public protocol AnimationImageProvider {
   /// If true, Lottie may internally cache the result of `imageForAsset`
   var cacheEligible: Bool { get set }
 
+  /// The image to display for the given `ImageAsset` defined in the `LottieAnimation` JSON file.
   func imageForAsset(asset: ImageAsset) -> CGImage?
 }
 
