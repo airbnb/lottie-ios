@@ -117,7 +117,8 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     ZStack {
       if let animationSource = animationSource {
         LottieAnimationView.swiftUIView {
-          LottieAnimationView(
+          defer { animationDidLoad?(animationSource) }
+          return LottieAnimationView(
             animationSource: animationSource,
             imageProvider: imageProvider,
             textProvider: textProvider,
@@ -132,6 +133,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
           // prohibitive to do so on every state update.
           if animationSource.animation !== context.view.animation {
             context.view.loadAnimation(animationSource)
+            animationDidLoad?(animationSource)
           }
 
           if
@@ -187,6 +189,14 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   public func playbackMode(_ playbackMode: LottiePlaybackMode) -> Self {
     var copy = self
     copy.playbackMode = playbackMode
+    return copy
+  }
+
+  /// Returns a copy of this view with the given closure that is called whenever the
+  /// `LottieAnimationSource` provided via `init` is loaded and applied to the underlying `LottieAnimationView`.
+  public func animationDidLoad(_ animationDidLoad: @escaping (LottieAnimationSource) -> Void) -> Self {
+    var copy = self
+    copy.animationDidLoad = animationDidLoad
     return copy
   }
 
@@ -406,6 +416,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   private var playbackMode: LottiePlaybackMode?
   private var reloadAnimationTrigger: AnyEquatable?
   private var loadAnimation: (() async throws -> LottieAnimationSource?)?
+  private var animationDidLoad: ((LottieAnimationSource) -> Void)?
   private var animationCompletionHandler: LottieCompletionBlock?
   private var showPlaceholderWhileReloading = false
   private var imageProvider: AnimationImageProvider?
