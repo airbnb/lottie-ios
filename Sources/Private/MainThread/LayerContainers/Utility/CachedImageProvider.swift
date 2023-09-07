@@ -42,6 +42,7 @@ extension AnimationImageProvider {
   /// It wraps the current provider as image loader, and uses `NSCache` to cache the images for resue.
   /// The cache will be reset when the `animation` is reset.
   var cachedImageProvider: AnimationImageProvider {
-    CachedImageProvider(imageProvider: self)
+    guard cacheEligible else { return self }
+    return CachedImageProvider(imageProvider: self)
   }
 }
