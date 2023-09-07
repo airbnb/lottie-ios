@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "080DEF612A95707B00BE2D96"
-               BuildableName = "Lottie_visionOS.framework"
+               BuildableName = "Lottie.framework"
                BlueprintName = "Lottie-visionOS"
                ReferencedContainer = "container:Lottie.xcodeproj">
             </BuildableReference>
@@ -50,7 +50,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "080DEF612A95707B00BE2D96"
-            BuildableName = "Lottie_visionOS.framework"
+            BuildableName = "Lottie.framework"
             BlueprintName = "Lottie-visionOS"
             ReferencedContainer = "container:Lottie.xcodeproj">
          </BuildableReference>

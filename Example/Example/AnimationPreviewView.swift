@@ -6,7 +6,6 @@ import SwiftUI
 
 // MARK: - AnimationPreviewView
 
-/// TODO: Implement functionality from UIKit `AnimationPreviewViewController`
 struct AnimationPreviewView: View {
 
   // MARK: Lifecycle
