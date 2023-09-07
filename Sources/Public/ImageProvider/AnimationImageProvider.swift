@@ -22,14 +22,13 @@ public protocol AnimationImageProvider {
 
   /// Whether or not the resulting image of this image provider can be cached by Lottie. Defaults to true.
   /// If true, Lottie may internally cache the result of `imageForAsset`
-  var cacheEligible: Bool { get set }
+  var cacheEligible: Bool { get }
 
   func imageForAsset(asset: ImageAsset) -> CGImage?
 }
 
 extension AnimationImageProvider {
   public var cacheEligible: Bool {
-    get { true }
-    set { }
+    true
   }
 }
