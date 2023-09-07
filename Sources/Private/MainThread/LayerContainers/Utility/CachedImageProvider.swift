@@ -21,7 +21,7 @@ private final class CachedImageProvider: AnimationImageProvider {
   // MARK: Public
 
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
-    if imageProvider.cacheEligible, let image = imageCache.object(forKey: asset.id as NSString) {
+    if let image = imageCache.object(forKey: asset.id as NSString) {
       return image
     }
     if let image = imageProvider.imageForAsset(asset: asset) {
@@ -42,6 +42,7 @@ extension AnimationImageProvider {
   /// It wraps the current provider as image loader, and uses `NSCache` to cache the images for resue.
   /// The cache will be reset when the `animation` is reset.
   var cachedImageProvider: AnimationImageProvider {
-    CachedImageProvider(imageProvider: self)
+    guard cacheEligible else { return self }
+    return CachedImageProvider(imageProvider: self)
   }
 }
