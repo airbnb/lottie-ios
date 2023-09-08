@@ -35,8 +35,9 @@ extension DropShadowStyle: DropShadowModel {
 
   var _radius: KeyframeGroup<LottieVector1D>? {
     size.map { sizeValue in
-      // `DropShadowStyle.size` is approximately double as large
-      // as the visually-equivalent `cornerRadius` value
+      // After Effects shadow softness uses a different range of values than CALayer.shadowRadius,
+      // so shadows render too softly if we directly use the value from After Effects. We find that
+      // dividing this value from After Effects by 2 produces results that are visually similar.
       LottieVector1D(sizeValue.cgFloatValue / 2)
     }
   }
@@ -50,11 +51,10 @@ extension DropShadowEffect: DropShadowModel {
 
   var _radius: KeyframeGroup<LottieVector1D>? {
     softness?.value?.map { softnessValue in
-      // After Effects and Core Animation use different scales to represent
-      // corner radius. We find that dividing the After Effects value by 4
-      // produces results that are visually similar most of the time.
-      let cornerRadiusMapping = softnessValue.cgFloatValue / 4
-      return LottieVector1D(cornerRadiusMapping)
+      // After Effects shadow softness uses a different range of values than CALayer.shadowRadius,
+      // so shadows render too softly if we directly use the value from After Effects. We find that
+      // dividing this value from After Effects by 5 produces results that are visually similar.
+      LottieVector1D(softnessValue.cgFloatValue / 5)
     }
   }
 

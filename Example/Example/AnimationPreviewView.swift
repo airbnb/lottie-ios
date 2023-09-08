@@ -94,7 +94,7 @@ struct AnimationPreviewView: View {
     }
     .navigationTitle(animationSource.name.components(separatedBy: "/").last!)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .background(Color.secondaryBackground)
+    .background(Color.white) // todo: revert
     .onReceive(timer) { _ in
       updateIndex()
     }
