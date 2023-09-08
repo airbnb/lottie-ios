@@ -111,7 +111,15 @@ extension SnapshotConfiguration {
     // Test cases for `RenderingEngineOption.automatic`
     "9squares_AlBoardman": .useAutomaticRenderingEngine, // Supports the Core Animation engine
     "LottieFiles/shop": .useAutomaticRenderingEngine, // Throws a compatibility error in `init`
-    "TypeFace/G": .useAutomaticRenderingEngine, // Throws a compatibility error in `display()`
+    "TypeFace/G": { // Throws a compatibility error in `display()`
+      var configuration = SnapshotConfiguration.useAutomaticRenderingEngine
+      configuration.customValueProviders = [
+        "G 2.Ellipse 1.Stroke 1.Color": ColorValueProvider(.red),
+        "G Outlines 3.G.Fill 1.Color": ColorValueProvider(.red),
+        "Shape Layer 18.Shape 1.Stroke 2.Color": ColorValueProvider(.red),
+      ]
+      return configuration
+    }(),
   ]
 }
 

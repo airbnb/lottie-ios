@@ -60,6 +60,11 @@ struct AnimationPreviewView: View {
           animationPlaying = false
         }
       }
+      .configure { animationView in
+        DispatchQueue.main.async {
+          currentRenderingEngine = animationView.currentRenderingEngine
+        }
+      }
       .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
 
       Spacer()
@@ -94,6 +99,7 @@ struct AnimationPreviewView: View {
       updateIndex()
     }
     .toolbar {
+      Text((currentRenderingEngine ?? .coreAnimation).description)
       optionsMenu
     }
   }
@@ -111,6 +117,7 @@ struct AnimationPreviewView: View {
   @State private var loopMode: LottieLoopMode = .loop
   @State private var playFromProgress: AnimationProgressTime = 0
   @State private var playToProgress: AnimationProgressTime = 1
+  @State private var currentRenderingEngine: RenderingEngine?
 
   private var playbackMode: LottiePlaybackMode {
     if animationPlaying {
