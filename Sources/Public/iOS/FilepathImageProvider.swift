@@ -30,8 +30,6 @@ public class FilepathImageProvider: AnimationImageProvider {
 
   // MARK: Public
 
-  public var contentsGravity: CALayerContentsGravity
-
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
     if
       asset.name.hasPrefix("data:"),
@@ -63,6 +61,7 @@ public class FilepathImageProvider: AnimationImageProvider {
   // MARK: Internal
 
   let filepath: URL
+  let contentsGravity: CALayerContentsGravity
 }
 
 extension FilepathImageProvider: Equatable {

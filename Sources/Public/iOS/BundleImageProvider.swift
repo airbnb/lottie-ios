@@ -32,8 +32,6 @@ public class BundleImageProvider: AnimationImageProvider {
 
   // MARK: Public
 
-  public var contentsGravity: CALayerContentsGravity
-
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
     if
       let data = Data(imageAsset: asset),
@@ -92,6 +90,7 @@ public class BundleImageProvider: AnimationImageProvider {
 
   let bundle: Bundle
   let searchPath: String?
+  let contentsGravity: CALayerContentsGravity
 }
 
 extension BundleImageProvider: Equatable {
