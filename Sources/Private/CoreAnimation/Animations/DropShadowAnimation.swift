@@ -35,8 +35,9 @@ extension DropShadowStyle: DropShadowModel {
 
   var _radius: KeyframeGroup<LottieVector1D>? {
     size.map { sizeValue in
-      // `DropShadowStyle.size` is approximately double as large
-      // as the visually-equivalent `cornerRadius` value
+      // After Effects shadow softness uses a different range of values than CALayer.shadowRadius,
+      // so shadows render too softly if we directly use the value from After Effects. We find that
+      // dividing this value from After Effects by 2 produces results that are visually similar.
       LottieVector1D(sizeValue.cgFloatValue / 2)
     }
   }
@@ -46,38 +47,14 @@ extension DropShadowStyle: DropShadowModel {
 
 extension DropShadowEffect: DropShadowModel {
   var _color: KeyframeGroup<LottieColor>? { color?.value }
-
-  var _distance: KeyframeGroup<LottieVector1D>? {
-    distance?.value?.map { distanceValue in
-      // `DropShadowEffect.distance` doesn't seem to map cleanly to
-      // `CALayer.shadowOffset` (e.g. with a simple multiplier).
-      // Instead, this uses a custom quadratic regression eyeballed
-      // to match the expected appearance of the start / end of the
-      // `issue_1169_shadow_effect_animated.json` sample animation:
-      //  - `distance=5` roughly corresponds to an offset value of 4
-      //  - `distance=10` roughly corresponds to an offset value of 5
-      // This could probably be improved with more examples.
-      let x = distanceValue.cgFloatValue
-      let cornerRadiusMapping = (-0.06 * pow(x, 2)) + (1.1 * x)
-
-      return LottieVector1D(cornerRadiusMapping)
-    }
-  }
+  var _distance: KeyframeGroup<LottieVector1D>? { distance?.value }
 
   var _radius: KeyframeGroup<LottieVector1D>? {
     softness?.value?.map { softnessValue in
-      // `DropShadowEffect.softness` doesn't seem to map cleanly to
-      // `CALayer.cornerRadius` (e.g. with a simple multiplier).
-      // Instead, this uses a custom quadratic regression eyeballed
-      // to match the expected appearance of the start / end of the
-      // `issue_1169_shadow_effect_animated.json` sample animation:
-      //  - `softness=10` roughly corresponds to `cornerRadius=2.5`
-      //  - `softness=50` roughly corresponds to `cornerRadius=6.25`
-      // This could probably be improved with more examples.
-      let x = softnessValue.cgFloatValue
-      let cornerRadiusMapping = (-0.003 * pow(x, 2)) + (0.281 * x)
-
-      return LottieVector1D(cornerRadiusMapping)
+      // After Effects shadow softness uses a different range of values than CALayer.shadowRadius,
+      // so shadows render too softly if we directly use the value from After Effects. We find that
+      // dividing this value from After Effects by 5 produces results that are visually similar.
+      LottieVector1D(softnessValue.cgFloatValue / 5)
     }
   }
 
