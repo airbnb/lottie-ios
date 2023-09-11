@@ -100,7 +100,8 @@ extension SnapshotConfiguration {
     ]),
 
     // Test cases for `AnimatedImageProvider`
-    "Nonanimating/_dog": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog.png")),
+    "Nonanimating/dog": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog.png")),
+    "Nonanimating/dog_landscape": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog-landscape.jpeg")),
 
     // Test cases for `AnimatedTextProvider`
     "Issues/issue_1722": .customTextProvider(HardcodedTextProvider(text: "Bounce-bounce")),
