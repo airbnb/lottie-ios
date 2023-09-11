@@ -29,6 +29,7 @@ public protocol AnimationImageProvider {
   func imageForAsset(asset: ImageAsset) -> CGImage?
 
   /// Specifies how the layer's contents are positioned or scaled within its bounds for a given asset.
+  /// Defaults to `.resize`, which stretches the image to fill the layer.
   func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity?
 }
 
@@ -38,7 +39,7 @@ extension AnimationImageProvider {
   }
 
   /// The default value is `.resize`, similar to that of `CALayer`.
-  public func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity? {
-    nil
+  public func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity {
+    .resize
   }
 }
