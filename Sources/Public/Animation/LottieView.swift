@@ -182,7 +182,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   /// Returns a copy of this view that loops its animation from the start to end whenever visible
   public func looping() -> Self {
-    play(loopMode: .loop)
+    play(.fromProgress(0, toProgress: 1, loopMode: .loop))
   }
 
   /// Returns a copy of this view playing from the current frame to the end frame,
