@@ -39,7 +39,7 @@ extension AnimationImageProvider {
   }
 
   /// The default value is `.resize`, similar to that of `CALayer`.
-  public func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity {
+  public func contentsGravity(for _: ImageAsset) -> CALayerContentsGravity {
     .resize
   }
 }

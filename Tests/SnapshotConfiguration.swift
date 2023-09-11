@@ -33,6 +33,12 @@ struct SnapshotConfiguration {
   ///  - Enabling this for a set of animations gives us a regression suite for
   ///    the code supporting the automatic engine.
   var testWithAutomaticEngine = false
+
+  /// Whether or not this snapshot doesn't animate, so only needs to be snapshot once.
+  var nonanimating = false
+
+  /// The maximum size to allow for the resulting snapshot image
+  var maxSnapshotDimension: CGFloat = 500
 }
 
 // MARK: Custom mapping
@@ -100,8 +106,13 @@ extension SnapshotConfiguration {
     ]),
 
     // Test cases for `AnimatedImageProvider`
-    "Nonanimating/dog": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog.png")),
-    "Nonanimating/dog_landscape": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog-landscape.jpeg")),
+    //  - These snapshots are pretty large (2 MB) by default, so we limit their number and size.
+    "Nonanimating/dog": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog.png"))
+      .nonanimating()
+      .maxSnapshotDimension(100),
+    "Nonanimating/dog_landscape": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog-landscape.jpeg"))
+      .nonanimating()
+      .maxSnapshotDimension(100),
 
     // Test cases for `AnimatedTextProvider`
     "Issues/issue_1722": .customTextProvider(HardcodedTextProvider(text: "Bounce-bounce")),
@@ -189,6 +200,20 @@ extension SnapshotConfiguration {
     var configuration = SnapshotConfiguration.default
     configuration.customFontProvider = customFontProvider
     return configuration
+  }
+
+  /// A copy of this `SnapshotConfiguration` with `nonanimating` set to `true`
+  func nonanimating(_ value: Bool = true) -> SnapshotConfiguration {
+    var copy = self
+    copy.nonanimating = value
+    return copy
+  }
+
+  /// A copy of this `SnapshotConfiguration` with `maxSnapshotDimension` set to the given value
+  func maxSnapshotDimension(_ maxSnapshotDimension: CGFloat) -> SnapshotConfiguration {
+    var copy = self
+    copy.maxSnapshotDimension = maxSnapshotDimension
+    return copy
   }
 
   /// Whether or not this sample should be included in the snapshot tests for the given configuration

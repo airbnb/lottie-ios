@@ -14,7 +14,7 @@ final class CompatibleAnimationViewTests: XCTestCase {
     #if os(iOS)
     let animation = CompatibleAnimation(name: "LottieLogo2", subdirectory: Samples.directoryName, bundle: .lottie)
     let animationView = CompatibleAnimationView(compatibleAnimation: animation)
-    animationView.frame.size = animation.animation!.snapshotSize
+    animationView.frame.size = animation.animation!.snapshotSize(for: .default)
     animationView.currentProgress = 0.5
     assertSnapshot(matching: animationView, as: .imageOfPresentationLayer())
     #endif

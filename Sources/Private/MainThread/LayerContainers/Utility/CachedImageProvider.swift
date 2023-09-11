@@ -32,14 +32,15 @@ private final class CachedImageProvider: AnimationImageProvider {
     return nil
   }
 
-  func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity {
-    imageProvider.contentsGravity(for: asset)
-  }
-
   // MARK: Internal
 
   let imageCache: NSCache<NSString, CGImage> = .init()
   let imageProvider: AnimationImageProvider
+
+  func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity {
+    imageProvider.contentsGravity(for: asset)
+  }
+
 }
 
 extension AnimationImageProvider {

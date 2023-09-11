@@ -21,7 +21,7 @@ struct HardcodedImageProvider: AnimationImageProvider {
     #endif
   }
 
-  func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity? {
+  func contentsGravity(for _: ImageAsset) -> CALayerContentsGravity {
     .resizeAspectFill
   }
 }

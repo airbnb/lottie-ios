@@ -49,7 +49,7 @@ class SnapshotTests: XCTestCase {
         .replacingOccurrences(of: "testCoreAnimationRenderingEngine.", with: "")
         .replacingOccurrences(of: "testAutomaticRenderingEngine.", with: "")
 
-      for percentage in progressPercentagesToSnapshot {
+      for percentage in progressPercentagesToSnapshot(for: .default) {
         animationName = animationName.replacingOccurrences(
           of: "-\(Int(percentage * 100)).png",
           with: "")
@@ -99,7 +99,13 @@ class SnapshotTests: XCTestCase {
   // MARK: Private
 
   /// `currentProgress` percentages that should be snapshot in `compareSampleSnapshots`
-  private let progressPercentagesToSnapshot = [0, 0.25, 0.5, 0.75, 1.0]
+  private func progressPercentagesToSnapshot(for snapshotConfiguration: SnapshotConfiguration) -> [Double] {
+    if snapshotConfiguration.nonanimating {
+      return [0]
+    } else {
+      return [0, 0.25, 0.5, 0.75, 1.0]
+    }
+  }
 
   /// Captures snapshots of `sampleAnimationURLs` and compares them to the snapshot images stored on disk
   private func compareSampleSnapshots(
@@ -111,7 +117,7 @@ class SnapshotTests: XCTestCase {
 
     #if os(iOS)
     for sampleAnimationName in Samples.sampleAnimationNames {
-      for percent in progressPercentagesToSnapshot {
+      for percent in progressPercentagesToSnapshot(for: SnapshotConfiguration.forSample(named: sampleAnimationName)) {
         guard
           let animationView = await SnapshotConfiguration.makeAnimationView(
             for: sampleAnimationName,
@@ -138,8 +144,8 @@ class SnapshotTests: XCTestCase {
 
 extension LottieAnimation {
   /// The size that this animation should be snapshot at
-  var snapshotSize: CGSize {
-    let maxDimension: CGFloat = 500
+  func snapshotSize(for configuration: SnapshotConfiguration) -> CGSize {
+    let maxDimension: CGFloat = configuration.maxSnapshotDimension
 
     // If this is a landscape aspect ratio, we clamp the width
     if width > height {
@@ -293,7 +299,7 @@ extension SnapshotConfiguration {
 
     // Set up the animation view with a valid frame
     // so the geometry is correct when setting up the `CAAnimation`s
-    animationView.frame.size = animation.snapshotSize
+    animationView.frame.size = animation.snapshotSize(for: snapshotConfiguration)
 
     for (keypath, customValueProvider) in snapshotConfiguration.customValueProviders {
       animationView.setValueProvider(customValueProvider, keypath: keypath)

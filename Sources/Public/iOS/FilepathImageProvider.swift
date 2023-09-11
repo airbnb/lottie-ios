@@ -17,12 +17,18 @@ public class FilepathImageProvider: AnimationImageProvider {
   /// Initializes an image provider with a specific filepath.
   ///
   /// - Parameter filepath: The absolute filepath containing the images.
+  /// - Parameter contentsGravity: The contents gravity to use when rendering the images.
   ///
   public init(filepath: String, contentsGravity: CALayerContentsGravity = .resize) {
     self.filepath = URL(fileURLWithPath: filepath)
     self.contentsGravity = contentsGravity
   }
 
+  /// Initializes an image provider with a specific filepath.
+  ///
+  /// - Parameter filepath: The absolute filepath containing the images.
+  /// - Parameter contentsGravity: The contents gravity to use when rendering the images.
+  ///
   public init(filepath: URL, contentsGravity: CALayerContentsGravity = .resize) {
     self.filepath = filepath
     self.contentsGravity = contentsGravity
@@ -54,7 +60,7 @@ public class FilepathImageProvider: AnimationImageProvider {
     return nil
   }
 
-  public func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity {
+  public func contentsGravity(for _: ImageAsset) -> CALayerContentsGravity {
     contentsGravity
   }
 
