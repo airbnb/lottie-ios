@@ -30,7 +30,7 @@ public protocol AnimationImageProvider {
 
   /// Specifies how the layer's contents are positioned or scaled within its bounds for a given asset.
   /// Defaults to `.resize`, which stretches the image to fill the layer.
-  func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity?
+  func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity
 }
 
 extension AnimationImageProvider {
