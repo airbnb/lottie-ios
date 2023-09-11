@@ -175,9 +175,20 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     return copy
   }
 
-  /// Returns a copy of this view that loops its animation whenever visible
+  // Returns a copy of this view playing once from the current frame to the end frame
+  public func play() -> Self {
+    play(loopMode: .playOnce)
+  }
+
+  /// Returns a copy of this view that loops its animation from the start to end whenever visible
   public func looping() -> Self {
     play(.fromProgress(0, toProgress: 1, loopMode: .loop))
+  }
+
+  /// Returns a copy of this view playing from the current frame to the end frame,
+  /// with the given `LottiePlaybackMode`.
+  public func play(loopMode: LottieLoopMode = .playOnce) -> Self {
+    play(.toProgress(1, loopMode: loopMode))
   }
 
   /// Returns a copy of this view playing with the given `LottiePlaybackMode`
