@@ -3,6 +3,7 @@
 
 import CoreGraphics
 import Foundation
+import QuartzCore
 
 // MARK: - CachedImageProvider
 
@@ -29,6 +30,10 @@ private final class CachedImageProvider: AnimationImageProvider {
       return image
     }
     return nil
+  }
+
+  func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity {
+    imageProvider.contentsGravity(for: asset)
   }
 
   // MARK: Internal

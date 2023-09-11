@@ -24,12 +24,15 @@ public class BundleImageProvider: AnimationImageProvider {
   /// - Parameter bundle: The bundle containing images for the provider.
   /// - Parameter searchPath: The subpath is a path within the bundle to search for image assets.
   ///
-  public init(bundle: Bundle, searchPath: String?) {
+  public init(bundle: Bundle, searchPath: String?, contentsGravity: CALayerContentsGravity = .resize) {
     self.bundle = bundle
     self.searchPath = searchPath
+    self.contentsGravity = contentsGravity
   }
 
   // MARK: Public
+
+  public var contentsGravity: CALayerContentsGravity
 
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
     if
@@ -79,6 +82,10 @@ public class BundleImageProvider: AnimationImageProvider {
       return nil
     }
     return image.cgImage
+  }
+
+  public func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity {
+    contentsGravity
   }
 
   // MARK: Internal

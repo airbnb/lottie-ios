@@ -18,15 +18,19 @@ public class FilepathImageProvider: AnimationImageProvider {
   ///
   /// - Parameter filepath: The absolute filepath containing the images.
   ///
-  public init(filepath: String) {
+  public init(filepath: String, contentsGravity: CALayerContentsGravity = .resize) {
     self.filepath = URL(fileURLWithPath: filepath)
+    self.contentsGravity = contentsGravity
   }
 
-  public init(filepath: URL) {
+  public init(filepath: URL, contentsGravity: CALayerContentsGravity = .resize) {
     self.filepath = filepath
+    self.contentsGravity = contentsGravity
   }
 
   // MARK: Public
+
+  public var contentsGravity: CALayerContentsGravity
 
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
     if
@@ -50,6 +54,10 @@ public class FilepathImageProvider: AnimationImageProvider {
 
     LottieLogger.shared.warn("Could not find image \"\(asset.name)\" in bundle")
     return nil
+  }
+
+  public func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity {
+    contentsGravity
   }
 
   // MARK: Internal
