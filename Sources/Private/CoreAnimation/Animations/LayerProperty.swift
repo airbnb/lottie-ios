@@ -76,6 +76,7 @@ enum PropertyName: String, CaseIterable {
   case scale = "Scale"
   case position = "Position"
   case rotation = "Rotation"
+  case strokeWidth = "Stroke Width"
 }
 
 // MARK: CALayer properties
@@ -220,7 +221,7 @@ extension LayerProperty {
     .init(
       caLayerKeypath: #keyPath(CAShapeLayer.lineWidth),
       defaultValue: 1,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: .floatValue(.strokeWidth))
   }
 
   static var lineDashPhase: LayerProperty<CGFloat> {
@@ -355,5 +356,14 @@ extension CustomizableProperty {
     .init(
       name: [.position],
       conversion: { ($0 as? LottieVector3D)?.pointValue })
+  }
+
+  static func floatValue(_ name: PropertyName...) -> CustomizableProperty<CGFloat> {
+    .init(
+      name: name,
+      conversion: { typeErasedValue in
+        guard let vector = typeErasedValue as? LottieVector1D else { return nil }
+        return vector.cgFloatValue
+      })
   }
 }

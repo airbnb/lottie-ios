@@ -105,6 +105,10 @@ extension SnapshotConfiguration {
       AnimationKeypath(keypath: "**.Color"): ColorValueProvider(.red),
     ]),
 
+    "Issues/issue_2094": .customValueProviders([
+      AnimationKeypath(keypath: "**.Stroke Width"): FloatValueProvider(2),
+    ]),
+
     // Test cases for `AnimatedImageProvider`
     //  - These snapshots are pretty large (2 MB) by default, so we limit their number and size.
     "Nonanimating/dog": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog.png"))
