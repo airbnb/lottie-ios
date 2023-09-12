@@ -109,12 +109,10 @@ extension SnapshotConfiguration {
     //  - These snapshots are pretty large (2 MB) by default, so we limit their number and size.
     "Nonanimating/dog": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog.png"))
       .nonanimating()
-      .maxSnapshotDimension(100)
-      .precision(0.85),
+      .precision(0.9),
     "Nonanimating/dog_landscape": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog-landscape.jpeg"))
       .nonanimating()
-      .maxSnapshotDimension(100)
-      .precision(0.85),
+      .precision(0.9),
 
     // Test cases for `AnimatedTextProvider`
     "Issues/issue_1722": .customTextProvider(HardcodedTextProvider(text: "Bounce-bounce")),
