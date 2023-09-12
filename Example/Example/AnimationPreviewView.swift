@@ -218,7 +218,9 @@ extension Color {
 
 extension AnimationImageProvider where Self == FilepathImageProvider {
   static var exampleAppSampleImages: FilepathImageProvider {
-    FilepathImageProvider(filepath: Bundle.main.resourceURL!.appending(path: "Samples/Images"))
+    FilepathImageProvider(
+      filepath: Bundle.main.resourceURL!.appending(path: "Samples/Images"),
+      contentsGravity: .resizeAspect)
   }
 }
 

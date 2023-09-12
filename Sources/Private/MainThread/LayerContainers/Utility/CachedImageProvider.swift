@@ -3,6 +3,7 @@
 
 import CoreGraphics
 import Foundation
+import QuartzCore
 
 // MARK: - CachedImageProvider
 
@@ -35,6 +36,11 @@ private final class CachedImageProvider: AnimationImageProvider {
 
   let imageCache: NSCache<NSString, CGImage> = .init()
   let imageProvider: AnimationImageProvider
+
+  func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity {
+    imageProvider.contentsGravity(for: asset)
+  }
+
 }
 
 extension AnimationImageProvider {

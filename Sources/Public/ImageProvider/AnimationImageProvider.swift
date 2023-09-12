@@ -7,6 +7,7 @@
 
 import CoreGraphics
 import Foundation
+import QuartzCore
 
 // MARK: - AnimationImageProvider
 
@@ -26,10 +27,19 @@ public protocol AnimationImageProvider {
 
   /// The image to display for the given `ImageAsset` defined in the `LottieAnimation` JSON file.
   func imageForAsset(asset: ImageAsset) -> CGImage?
+
+  /// Specifies how the layer's contents are positioned or scaled within its bounds for a given asset.
+  /// Defaults to `.resize`, which stretches the image to fill the layer.
+  func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity
 }
 
 extension AnimationImageProvider {
   public var cacheEligible: Bool {
     true
+  }
+
+  /// The default value is `.resize`, similar to that of `CALayer`.
+  public func contentsGravity(for _: ImageAsset) -> CALayerContentsGravity {
+    .resize
   }
 }

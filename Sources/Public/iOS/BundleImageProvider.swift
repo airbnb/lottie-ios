@@ -23,10 +23,12 @@ public class BundleImageProvider: AnimationImageProvider {
   ///
   /// - Parameter bundle: The bundle containing images for the provider.
   /// - Parameter searchPath: The subpath is a path within the bundle to search for image assets.
+  /// - Parameter contentsGravity: The contents gravity to use when rendering the image.
   ///
-  public init(bundle: Bundle, searchPath: String?) {
+  public init(bundle: Bundle, searchPath: String?, contentsGravity: CALayerContentsGravity = .resize) {
     self.bundle = bundle
     self.searchPath = searchPath
+    self.contentsGravity = contentsGravity
   }
 
   // MARK: Public
@@ -81,10 +83,15 @@ public class BundleImageProvider: AnimationImageProvider {
     return image.cgImage
   }
 
+  public func contentsGravity(for _: ImageAsset) -> CALayerContentsGravity {
+    contentsGravity
+  }
+
   // MARK: Internal
 
   let bundle: Bundle
   let searchPath: String?
+  let contentsGravity: CALayerContentsGravity
 }
 
 extension BundleImageProvider: Equatable {
