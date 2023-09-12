@@ -6,7 +6,7 @@ import Lottie
 // MARK: - HardcodedTextProvider
 
 /// An `AnimationTextProvider` that always returns a specific hardcoded text
-class HardcodedTextProvider: AnimationTextProvider {
+class HardcodedTextProvider: AnimationKeypathTextProvider {
 
   // MARK: Lifecycle
 
@@ -16,7 +16,7 @@ class HardcodedTextProvider: AnimationTextProvider {
 
   // MARK: Internal
 
-  func textFor(keypathName _: String, sourceText _: String) -> String {
+  func text(for _: AnimationKeypath, sourceText _: String) -> String? {
     text
   }
 

@@ -29,6 +29,8 @@ import Foundation
 /// Represents the color node for every Stroke named "Stroke 1" in the animation.
 public struct AnimationKeypath: Hashable, ExpressibleByStringLiteral {
 
+  // MARK: Lifecycle
+
   /// Creates a keypath from a dot-separated string. The string is separated by "."
   public init(keypath: String) {
     keys = keypath.components(separatedBy: ".")
@@ -44,6 +46,14 @@ public struct AnimationKeypath: Hashable, ExpressibleByStringLiteral {
     self.keys = keys
   }
 
-  var keys: [String]
+  // MARK: Public
+
+  /// The dot-separated key values that represent this keypath.
+  public internal(set) var keys: [String]
+
+  /// The `String` representation of this keypath
+  public var string: String {
+    keys.joined(separator: ".")
+  }
 
 }

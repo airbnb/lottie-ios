@@ -284,6 +284,7 @@
 		080DF07F2A95718200BE2D96 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95D22822F43100677516 /* AnimationContext.swift */; };
 		080DF0802A95718200BE2D96 /* AnyEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF033B32A7B0ABA00F8C228 /* AnyEquatable.swift */; };
 		080DF0812A95718200BE2D96 /* LottieAnimationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */; };
+		080F5FDC2AB1075000ADC32C /* TextProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F5FDB2AB1075000ADC32C /* TextProviderTests.swift */; };
 		0819D2A12A718CAE00D7DE49 /* LottieAnimationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */; };
 		0819D2A22A718CAE00D7DE49 /* LottieAnimationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */; };
 		0819D2A32A718CAE00D7DE49 /* LottieAnimationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */; };
@@ -1159,6 +1160,7 @@
 
 /* Begin PBXFileReference section */
 		080DEF622A95707B00BE2D96 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		080F5FDB2AB1075000ADC32C /* TextProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextProviderTests.swift; sourceTree = "<group>"; };
 		0819D2A02A718CAE00D7DE49 /* LottieAnimationSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationSource.swift; sourceTree = "<group>"; };
 		0820D5922A8ACD67007D705C /* LottieButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieButton.swift; sourceTree = "<group>"; };
 		0820D5962A8ACDD7007D705C /* AnimatedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
@@ -1752,6 +1754,7 @@
 				D453D8AE28FF9BC600D3F49C /* AnimationCacheProviderTests.swift */,
 				08CB2680291ED2B700B4F071 /* AnimationViewTests.swift */,
 				2E70F79E295BB6D30089A0EF /* CompatibleAnimationViewTests.swift */,
+				080F5FDB2AB1075000ADC32C /* TextProviderTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -3233,6 +3236,7 @@
 				36E57EAC28AF7ADF00B7EFDA /* HardcodedTextProvider.swift in Sources */,
 				2E72128527BB32DB0027BC56 /* PerformanceTests.swift in Sources */,
 				6DB3BDC328245AA2002A276D /* ParsingTests.swift in Sources */,
+				080F5FDC2AB1075000ADC32C /* TextProviderTests.swift in Sources */,
 				6DB3BDB628243FA5002A276D /* ValueProvidersTests.swift in Sources */,
 				2E72128327BB329C0027BC56 /* AnimationKeypathTests.swift in Sources */,
 				2E044E272820536800FA773B /* AutomaticEngineTests.swift in Sources */,

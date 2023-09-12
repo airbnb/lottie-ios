@@ -15,7 +15,7 @@ protocol RootAnimationLayer: CALayer {
 
   var _animationLayers: [CALayer] { get }
   var imageProvider: AnimationImageProvider { get set }
-  var textProvider: AnimationTextProvider { get set }
+  var textProvider: AnimationKeypathTextProvider { get set }
   var fontProvider: AnimationFontProvider { get set }
 
   /// The `CAAnimation` key corresponding to the primary animation.

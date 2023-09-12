@@ -100,11 +100,7 @@ class SnapshotTests: XCTestCase {
 
   /// `currentProgress` percentages that should be snapshot in `compareSampleSnapshots`
   private func progressPercentagesToSnapshot(for snapshotConfiguration: SnapshotConfiguration) -> [Double] {
-    if snapshotConfiguration.nonanimating {
-      return [0]
-    } else {
-      return [0, 0.25, 0.5, 0.75, 1.0]
-    }
+    snapshotConfiguration.customProgressValuesToSnapshot ?? [0, 0.25, 0.5, 0.75, 1.0]
   }
 
   /// Captures snapshots of `sampleAnimationURLs` and compares them to the snapshot images stored on disk
@@ -267,10 +263,11 @@ extension SnapshotConfiguration {
   static func makeAnimationView(
     for sampleAnimationName: String,
     configuration: LottieConfiguration,
-    logger: LottieLogger = LottieLogger.shared)
+    logger: LottieLogger = LottieLogger.shared,
+    customSnapshotConfiguration: SnapshotConfiguration? = nil)
     async -> LottieAnimationView?
   {
-    let snapshotConfiguration = SnapshotConfiguration.forSample(named: sampleAnimationName)
+    let snapshotConfiguration = customSnapshotConfiguration ?? SnapshotConfiguration.forSample(named: sampleAnimationName)
 
     guard snapshotConfiguration.shouldSnapshot(using: configuration) else {
       return nil
