@@ -49,7 +49,7 @@ class SnapshotTests: XCTestCase {
         .replacingOccurrences(of: "testCoreAnimationRenderingEngine.", with: "")
         .replacingOccurrences(of: "testAutomaticRenderingEngine.", with: "")
 
-      for percentage in progressPercentagesToSnapshot(for: .default) {
+      for percentage in knownProgressPercentageValues {
         animationName = animationName.replacingOccurrences(
           of: "-\(Int(percentage * 100)).png",
           with: "")
@@ -98,9 +98,22 @@ class SnapshotTests: XCTestCase {
 
   // MARK: Private
 
+  /// All of the `progressPercentagesToSnapshot` values used in the snapshot tests
+  private let knownProgressPercentageValues = Set([0, 0.25, 0.3, 0.5, 0.75, 1.0])
+
   /// `currentProgress` percentages that should be snapshot in `compareSampleSnapshots`
   private func progressPercentagesToSnapshot(for snapshotConfiguration: SnapshotConfiguration) -> [Double] {
-    snapshotConfiguration.customProgressValuesToSnapshot ?? [0, 0.25, 0.5, 0.75, 1.0]
+    if let customProgressValuesToSnapshot = snapshotConfiguration.customProgressValuesToSnapshot {
+      for customProgressValue in customProgressValuesToSnapshot {
+        assert(
+          knownProgressPercentageValues.contains(customProgressValue),
+          "All progress values being used must be listed in `knownProgressPercentageValues`")
+      }
+
+      return customProgressValuesToSnapshot
+    }
+
+    return [0, 0.25, 0.5, 0.75, 1.0]
   }
 
   /// Captures snapshots of `sampleAnimationURLs` and compares them to the snapshot images stored on disk
