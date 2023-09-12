@@ -62,7 +62,10 @@ struct CustomizableProperty<ValueRepresentation> {
 
   /// A closure that coverts the type-erased value of an `AnyValueProvider`
   /// to the strongly-typed representation used by this property, if possible.
-  let conversion: (Any) -> ValueRepresentation?
+  ///  - `value` is the value for the current frame that should be converted,
+  ///    as returned by `AnyValueProvider.typeErasedStorage`.
+  ///  - `valueProvider` is the `AnyValueProvider` that returned the type-erased value.
+  let conversion: (_ value: Any, _ valueProvider: AnyValueProvider) -> ValueRepresentation?
 }
 
 // MARK: - PropertyName
@@ -77,6 +80,7 @@ enum PropertyName: String, CaseIterable {
   case position = "Position"
   case rotation = "Rotation"
   case strokeWidth = "Stroke Width"
+  case gradientColors = "Colors"
 }
 
 // MARK: CALayer properties
@@ -260,14 +264,14 @@ extension LayerProperty {
     .init(
       caLayerKeypath: #keyPath(CAGradientLayer.colors),
       defaultValue: nil,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: .gradientColors)
   }
 
   static var locations: LayerProperty<[CGFloat]> {
     .init(
       caLayerKeypath: #keyPath(CAGradientLayer.locations),
       defaultValue: nil,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: .gradientLocations)
   }
 
   static var startPoint: LayerProperty<CGPoint> {
@@ -291,7 +295,7 @@ extension CustomizableProperty {
   static var color: CustomizableProperty<CGColor> {
     .init(
       name: [.color],
-      conversion: { typeErasedValue in
+      conversion: { typeErasedValue, _ in
         guard let color = typeErasedValue as? LottieColor else {
           return nil
         }
@@ -303,7 +307,7 @@ extension CustomizableProperty {
   static var opacity: CustomizableProperty<CGFloat> {
     .init(
       name: [.opacity],
-      conversion: { typeErasedValue in
+      conversion: { typeErasedValue, _ in
         guard let vector = typeErasedValue as? LottieVector1D else { return nil }
 
         // Lottie animation files express opacity as a numerical percentage value
@@ -316,7 +320,7 @@ extension CustomizableProperty {
   static var scaleX: CustomizableProperty<CGFloat> {
     .init(
       name: [.scale],
-      conversion: { typeErasedValue in
+      conversion: { typeErasedValue, _ in
         guard let vector = typeErasedValue as? LottieVector3D else { return nil }
 
         // Lottie animation files express scale as a numerical percentage value
@@ -329,7 +333,7 @@ extension CustomizableProperty {
   static var scaleY: CustomizableProperty<CGFloat> {
     .init(
       name: [.scale],
-      conversion: { typeErasedValue in
+      conversion: { typeErasedValue, _ in
         guard let vector = typeErasedValue as? LottieVector3D else { return nil }
 
         // Lottie animation files express scale as a numerical percentage value
@@ -342,7 +346,7 @@ extension CustomizableProperty {
   static var rotation: CustomizableProperty<CGFloat> {
     .init(
       name: [.rotation],
-      conversion: { typeErasedValue in
+      conversion: { typeErasedValue, _ in
         guard let vector = typeErasedValue as? LottieVector1D else { return nil }
 
         // Lottie animation files express rotation in degrees
@@ -355,13 +359,34 @@ extension CustomizableProperty {
   static var position: CustomizableProperty<CGPoint> {
     .init(
       name: [.position],
-      conversion: { ($0 as? LottieVector3D)?.pointValue })
+      conversion: { typeErasedValue, _ in
+        guard let vector = typeErasedValue as? LottieVector3D else { return nil }
+        return vector.pointValue
+      })
+  }
+
+  static var gradientColors: CustomizableProperty<[CGColor]> {
+    .init(
+      name: [.gradientColors],
+      conversion: { _, typeErasedValueProvider in
+        guard let gradientValueProvider = typeErasedValueProvider as? GradientValueProvider else { return nil }
+        return gradientValueProvider.colors.map { $0.cgColorValue }
+      })
+  }
+
+  static var gradientLocations: CustomizableProperty<[CGFloat]> {
+    .init(
+      name: [.gradientColors],
+      conversion: { _, typeErasedValueProvider in
+        guard let gradientValueProvider = typeErasedValueProvider as? GradientValueProvider else { return nil }
+        return gradientValueProvider.locations.map { CGFloat($0) }
+      })
   }
 
   static func floatValue(_ name: PropertyName...) -> CustomizableProperty<CGFloat> {
     .init(
       name: name,
-      conversion: { typeErasedValue in
+      conversion: { typeErasedValue, _ in
         guard let vector = typeErasedValue as? LottieVector1D else { return nil }
         return vector.cgFloatValue
       })

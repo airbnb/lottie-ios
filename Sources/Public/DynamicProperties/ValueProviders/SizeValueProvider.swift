@@ -74,7 +74,9 @@ public final class SizeValueProvider: ValueProvider {
   private let identity: AnyHashable
 }
 
-extension SizeValueProvider {
+// MARK: Equatable
+
+extension SizeValueProvider: Equatable {
   public static func ==(_ lhs: SizeValueProvider, _ rhs: SizeValueProvider) -> Bool {
     lhs.identity == rhs.identity
   }

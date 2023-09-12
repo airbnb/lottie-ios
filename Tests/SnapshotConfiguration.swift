@@ -97,6 +97,16 @@ extension SnapshotConfiguration {
       AnimationKeypath(keypath: "**.base_color.**.Color"): ColorValueProvider(.black),
     ]),
 
+    "Issues/issue_1854": .customValueProviders([
+      AnimationKeypath(keypath: "**.Colors"): GradientValueProvider(
+        [
+          LottieColor(r: 0, g: 0, b: 0, a: 0),
+          LottieColor(r: 1, g: 1, b: 1, a: 0.5),
+          LottieColor(r: 1, g: 1, b: 1, a: 1),
+        ],
+        locations: [0, 0.3, 1.0]),
+    ]),
+
     "Issues/issue_1847": .customValueProviders([
       AnimationKeypath(keypath: "**.Stroke 1.**.Color"): ColorValueProvider(.red),
     ]),

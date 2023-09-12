@@ -73,9 +73,11 @@ final class ValueProviderStore {
 
     // Convert the type-erased keyframe values using this `CustomizableProperty`'s conversion closure
     let typedKeyframes = typeErasedKeyframes.compactMap { typeErasedKeyframe -> Keyframe<Value>? in
-      guard let convertedValue = customizableProperty.conversion(typeErasedKeyframe.value) else {
+      guard let convertedValue = customizableProperty.conversion(typeErasedKeyframe.value, anyValueProvider) else {
         logger.assertionFailure("""
-          Could not convert value of type \(type(of: typeErasedKeyframe.value)) to expected type \(Value.self)
+          Could not convert value of type \(type(of: typeErasedKeyframe.value)) from \(anyValueProvider) to expected type \(
+          Value
+          .self)
           """)
         return nil
       }

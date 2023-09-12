@@ -74,7 +74,9 @@ public final class PointValueProvider: ValueProvider {
   private let identity: AnyHashable
 }
 
-extension PointValueProvider {
+// MARK: Equatable
+
+extension PointValueProvider: Equatable {
   public static func ==(_ lhs: PointValueProvider, _ rhs: PointValueProvider) -> Bool {
     lhs.identity == rhs.identity
   }
