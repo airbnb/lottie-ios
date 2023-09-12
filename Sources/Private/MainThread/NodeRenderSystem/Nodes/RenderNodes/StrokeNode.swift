@@ -38,7 +38,7 @@ final class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
     keypathProperties = [
       PropertyName.opacity.rawValue : opacity,
       PropertyName.color.rawValue : color,
-      "Stroke Width" : width,
+      PropertyName.strokeWidth.rawValue : width,
       "Dashes" : dashPattern,
       "Dash Phase" : dashPhase,
     ]

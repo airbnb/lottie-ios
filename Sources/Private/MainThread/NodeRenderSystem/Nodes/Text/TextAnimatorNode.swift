@@ -99,7 +99,7 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
 
     if let keyframeGroup = textAnimator.strokeWidth {
       strokeWidth = NodeProperty(provider: KeyframeInterpolator(keyframes: keyframeGroup.keyframes))
-      properties["Stroke Width"] = strokeWidth
+      properties[PropertyName.strokeWidth.rawValue] = strokeWidth
     } else {
       strokeWidth = nil
     }
