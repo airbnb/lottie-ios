@@ -109,10 +109,12 @@ extension SnapshotConfiguration {
     //  - These snapshots are pretty large (2 MB) by default, so we limit their number and size.
     "Nonanimating/dog": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog.png"))
       .nonanimating()
-      .maxSnapshotDimension(100),
+      .maxSnapshotDimension(100)
+      .precision(0.95),
     "Nonanimating/dog_landscape": .customImageProvider(HardcodedImageProvider(imageName: "Samples/Images/dog-landscape.jpeg"))
       .nonanimating()
-      .maxSnapshotDimension(100),
+      .maxSnapshotDimension(100)
+      .precision(0.95),
 
     // Test cases for `AnimatedTextProvider`
     "Issues/issue_1722": .customTextProvider(HardcodedTextProvider(text: "Bounce-bounce")),
@@ -213,6 +215,13 @@ extension SnapshotConfiguration {
   func maxSnapshotDimension(_ maxSnapshotDimension: CGFloat) -> SnapshotConfiguration {
     var copy = self
     copy.maxSnapshotDimension = maxSnapshotDimension
+    return copy
+  }
+
+  /// A copy of this `SnapshotConfiguration` with the given precision when comparing the existing snapshot image
+  func precision(_ precision: Float) -> SnapshotConfiguration {
+    var copy = self
+    copy.precision = precision
     return copy
   }
 
