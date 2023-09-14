@@ -358,6 +358,7 @@ public class LottieAnimationLayer: CALayer {
   /// The completion closure will be called with `false`
   open func pause() {
     removeCurrentAnimation()
+    currentPlaybackMode = .pause
   }
 
   /// Applies the given `LottiePlaybackMode` to this layer.
