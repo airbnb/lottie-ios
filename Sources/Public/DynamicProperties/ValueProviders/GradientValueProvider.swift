@@ -69,16 +69,18 @@ public final class GradientValueProvider: ValueProvider {
   }
 
   public var storage: ValueProviderStorage<[Double]> {
-    .closure { [self] frame in
-      hasUpdate = false
+    if let block = block {
+      return .closure { [self] frame in
+        hasUpdate = false
 
-      if let block = block {
         let newColors = block(frame)
         let newLocations = locationsBlock?(frame) ?? []
         value = value(from: newColors, locations: newLocations)
-      }
 
-      return value
+        return value
+      }
+    } else {
+      return .singleValue(value)
     }
   }
 
@@ -129,7 +131,9 @@ public final class GradientValueProvider: ValueProvider {
 
 }
 
-extension GradientValueProvider {
+// MARK: Equatable
+
+extension GradientValueProvider: Equatable {
   public static func ==(_ lhs: GradientValueProvider, _ rhs: GradientValueProvider) -> Bool {
     lhs.identity == rhs.identity
   }
