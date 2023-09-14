@@ -1,0 +1,4 @@
+text(for: "ENVELOPE-BACK-TEXTBOX.LETTER-TEXTBOX.custom_text", sourceText: "custom_text")
+text(for: "ENVELOPE-BACK-TEXTBOX.LETTER-TEXTBOX.sender_username", sourceText: "sender_username")
+text(for: "ENVELOPE-FRONT.From", sourceText: "From:")
+text(for: "ENVELOPE-FRONT.sender_username", sourceText: "sender_username")

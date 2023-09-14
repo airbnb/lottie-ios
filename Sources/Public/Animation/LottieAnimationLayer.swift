@@ -18,7 +18,7 @@ public class LottieAnimationLayer: CALayer {
   public init(
     animation: LottieAnimation?,
     imageProvider: AnimationImageProvider? = nil,
-    textProvider: AnimationTextProvider = DefaultTextProvider(),
+    textProvider: AnimationKeypathTextProvider = DefaultTextProvider(),
     fontProvider: AnimationFontProvider = DefaultFontProvider(),
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)
@@ -41,7 +41,7 @@ public class LottieAnimationLayer: CALayer {
   public init(
     dotLottie: DotLottieFile?,
     animationId: String? = nil,
-    textProvider: AnimationTextProvider = DefaultTextProvider(),
+    textProvider: AnimationKeypathTextProvider = DefaultTextProvider(),
     fontProvider: AnimationFontProvider = DefaultFontProvider(),
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)
@@ -540,7 +540,7 @@ public class LottieAnimationLayer: CALayer {
 
   /// Sets the text provider for animation layer. A text provider provides the
   /// animation with values for text layers
-  public var textProvider: AnimationTextProvider {
+  public var textProvider: AnimationKeypathTextProvider {
     didSet {
       rootAnimationLayer?.textProvider = textProvider
     }

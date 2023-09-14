@@ -1,0 +1,4 @@
+textFor(keypathName: "ENVELOPE-BACK-TEXTBOX.LETTER-TEXTBOX.custom_text", sourceText: "custom_text")
+textFor(keypathName: "ENVELOPE-BACK-TEXTBOX.LETTER-TEXTBOX.sender_username", sourceText: "sender_username")
+textFor(keypathName: "ENVELOPE-FRONT.From", sourceText: "From:")
+textFor(keypathName: "ENVELOPE-FRONT.sender_username", sourceText: "sender_username")

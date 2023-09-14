@@ -47,7 +47,12 @@ final class TextCompositionLayer: CompositionLayer {
 
   // MARK: Lifecycle
 
-  init(textLayer: TextLayerModel, textProvider: AnimationTextProvider, fontProvider: AnimationFontProvider) {
+  init(
+    textLayer: TextLayerModel,
+    textProvider: AnimationKeypathTextProvider,
+    fontProvider: AnimationFontProvider,
+    rootAnimationLayer: MainThreadAnimationLayer?)
+  {
     var rootNode: TextAnimatorNode?
     for animator in textLayer.animators {
       rootNode = TextAnimatorNode(parentNode: rootNode, textAnimator: animator)
@@ -57,6 +62,7 @@ final class TextCompositionLayer: CompositionLayer {
 
     self.textProvider = textProvider
     self.fontProvider = fontProvider
+    self.rootAnimationLayer = rootAnimationLayer
 
     super.init(layer: textLayer, size: .zero)
     contentsLayer.addSublayer(self.textLayer)
@@ -92,8 +98,18 @@ final class TextCompositionLayer: CompositionLayer {
   let textDocument: KeyframeInterpolator<TextDocument>?
 
   let textLayer = CoreTextRenderLayer()
-  var textProvider: AnimationTextProvider
+  var textProvider: AnimationKeypathTextProvider
   var fontProvider: AnimationFontProvider
+  weak var rootAnimationLayer: MainThreadAnimationLayer?
+
+  lazy var fullAnimationKeypath: AnimationKeypath = {
+    // Individual layers don't know their full keypaths, so we have to delegate
+    // to the `MainThreadAnimationLayer` to search the layer hierarchy and find
+    // the full keypath (which includes this layer's parent layers)
+    rootAnimationLayer?.keypath(for: self)
+      // If that failed for some reason, just use the last path component (which we do have here)
+      ?? AnimationKeypath(keypath: keypathName)
+  }()
 
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
     guard let textDocument = textDocument else { return }
@@ -108,11 +124,23 @@ final class TextCompositionLayer: CompositionLayer {
 
     // Get Text Attributes
     let text = textDocument.value(frame: frame) as! TextDocument
+
+    // Prior to Lottie 4.3.0 the Main Thread rendering engine always just used `LegacyAnimationTextProvider`
+    // and called it with the `keypathName` (only the last path component of the full keypath).
+    // Starting in Lottie 4.3.0 we use `AnimationKeypathTextProvider` instead if implemented.
+    let textString: String
+    if let keypathTextValue = textProvider.text(for: fullAnimationKeypath, sourceText: text.text) {
+      textString = keypathTextValue
+    } else if let legacyTextProvider = textProvider as? LegacyAnimationTextProvider {
+      textString = legacyTextProvider.textFor(keypathName: keypathName, sourceText: text.text)
+    } else {
+      textString = text.text
+    }
+
     let strokeColor = rootNode?.textOutputNode.strokeColor ?? text.strokeColorData?.cgColorValue
     let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
     let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
     let matrix = rootNode?.textOutputNode.xform ?? CATransform3DIdentity
-    let textString = textProvider.textFor(keypathName: keypathName, sourceText: text.text)
     let ctFont = fontProvider.fontFor(family: text.fontFamily, size: CGFloat(text.fontSize))
 
     // Set all of the text layer options

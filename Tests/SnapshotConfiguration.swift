@@ -22,8 +22,8 @@ struct SnapshotConfiguration {
   /// A custom `AnimationImageProvider` to use when rendering this animation
   var customImageProvider: AnimationImageProvider?
 
-  /// A custom `AnimationTextProvider` to use when rendering this animation
-  var customTextProvider: AnimationTextProvider?
+  /// A custom `AnimationKeypathTextProvider` to use when rendering this animation
+  var customTextProvider: AnimationKeypathTextProvider?
 
   /// A custom `AnimationFontProvider` to use when rendering this animation
   var customFontProvider: AnimationFontProvider?
@@ -35,7 +35,7 @@ struct SnapshotConfiguration {
   var testWithAutomaticEngine = false
 
   /// Whether or not this snapshot doesn't animate, so only needs to be snapshot once.
-  var nonanimating = false
+  var customProgressValuesToSnapshot: [Double]?
 
   /// The maximum size to allow for the resulting snapshot image
   var maxSnapshotDimension: CGFloat = 500
@@ -128,8 +128,25 @@ extension SnapshotConfiguration {
       .nonanimating()
       .precision(0.9),
 
-    // Test cases for `AnimatedTextProvider`
+    // Test cases for `AnimationTextProvider`
     "Issues/issue_1722": .customTextProvider(HardcodedTextProvider(text: "Bounce-bounce")),
+
+    "Issues/issue_1949_full_paths": SnapshotConfiguration
+      .customTextProvider(DictionaryTextProvider([
+        "ENVELOPE-FRONT.sender_username": "Lottie",
+        "ENVELOPE-FRONT.From": "Airbnb (front)",
+        "ENVELOPE-BACK-TEXTBOX.LETTER-TEXTBOX.sender_username": "Airbnb (back)",
+        "ENVELOPE-BACK-TEXTBOX.LETTER-TEXTBOX.custom_text": "Text providers are cool!",
+      ]))
+      .progressValuesToSnapshot([0.3, 0.75]),
+
+    "Issues/issue_1949_short_paths": SnapshotConfiguration
+      .customTextProvider(DictionaryTextProvider([
+        "sender_username": "Lottie",
+        "From": "Airbnb",
+        "custom_text": "Text providers are cool!",
+      ]))
+      .progressValuesToSnapshot([0.3, 0.75]),
 
     // Test cases for `AnimationFontProvider`
     "Nonanimating/Text_Glyph": .customFontProvider(HardcodedFontProvider(font: UIFont(name: "Chalkduster", size: 36)!)),
@@ -198,7 +215,7 @@ extension SnapshotConfiguration {
   }
 
   static func customTextProvider(
-    _ customTextProvider: AnimationTextProvider)
+    _ customTextProvider: AnimationKeypathTextProvider)
     -> SnapshotConfiguration
   {
     var configuration = SnapshotConfiguration.default
@@ -216,10 +233,17 @@ extension SnapshotConfiguration {
     return configuration
   }
 
-  /// A copy of this `SnapshotConfiguration` with `nonanimating` set to `true`
-  func nonanimating(_ value: Bool = true) -> SnapshotConfiguration {
+  /// A copy of this `SnapshotConfiguration` with `customProgressValuesToSnapshot` updated to `[0]`
+  func nonanimating(_ isNonanimating: Bool = true) -> SnapshotConfiguration {
     var copy = self
-    copy.nonanimating = value
+    copy.customProgressValuesToSnapshot = isNonanimating ? [0] : nil
+    return copy
+  }
+
+  /// A copy of this `SnapshotConfiguration` with `customProgressValuesToSnapshot` set to the given value
+  func progressValuesToSnapshot(_ progressValuesToSnapshot: [Double]) -> SnapshotConfiguration {
+    var copy = self
+    copy.customProgressValuesToSnapshot = progressValuesToSnapshot
     return copy
   }
 

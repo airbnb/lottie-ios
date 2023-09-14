@@ -282,7 +282,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   /// Returns a copy of this view with its text provider updated to the given value.
   /// The image provider must be `Equatable` to avoid unnecessary state updates / re-renders.
-  public func textProvider<TextProvider: AnimationTextProvider & Equatable>(_ textProvider: TextProvider) -> Self {
+  public func textProvider<TextProvider: AnimationKeypathTextProvider & Equatable>(_ textProvider: TextProvider) -> Self {
     var copy = self
     copy.textProvider = textProvider
 
@@ -431,7 +431,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   private var animationCompletionHandler: LottieCompletionBlock?
   private var showPlaceholderWhileReloading = false
   private var imageProvider: AnimationImageProvider?
-  private var textProvider: AnimationTextProvider = DefaultTextProvider()
+  private var textProvider: AnimationKeypathTextProvider = DefaultTextProvider()
   private var fontProvider: AnimationFontProvider = DefaultFontProvider()
   private var configuration: LottieConfiguration = .shared
   private var logger: LottieLogger = .shared

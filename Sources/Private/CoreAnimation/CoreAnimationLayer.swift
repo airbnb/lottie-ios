@@ -17,7 +17,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   init(
     animation: LottieAnimation,
     imageProvider: AnimationImageProvider,
-    textProvider: AnimationTextProvider,
+    textProvider: AnimationKeypathTextProvider,
     fontProvider: AnimationFontProvider,
     maskAnimationToBounds: Bool,
     compatibilityTrackerMode: CompatibilityTracker.Mode,
@@ -108,9 +108,9 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     didSet { reloadImages() }
   }
 
-  /// The `AnimationTextProvider` that `TextLayer`'s use to retrieve texts,
+  /// The `AnimationKeypathTextProvider` that `TextLayer`'s use to retrieve texts,
   /// that they should use to render their text context
-  var textProvider: AnimationTextProvider {
+  var textProvider: AnimationKeypathTextProvider {
     didSet {
       // We need to rebuild the current animation after updating the text provider,
       // since this is used in `TextLayer.setupAnimations(context:)`
@@ -449,7 +449,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
   }
 
   func forceDisplayUpdate() {
-    // Unimplemented / unused
+    display()
   }
 
   func logHierarchyKeypaths() {

@@ -21,7 +21,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
   init(
     animation: LottieAnimation,
     imageProvider: AnimationImageProvider,
-    textProvider: AnimationTextProvider,
+    textProvider: AnimationKeypathTextProvider,
     fontProvider: AnimationFontProvider,
     maskAnimationToBounds: Bool,
     logger: LottieLogger)
@@ -37,9 +37,11 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     let layers = animation.layers.initializeCompositionLayers(
       assetLibrary: animation.assetLibrary,
       layerImageProvider: layerImageProvider,
+      layerTextProvider: layerTextProvider,
       textProvider: textProvider,
       fontProvider: fontProvider,
-      frameRate: CGFloat(animation.framerate))
+      frameRate: CGFloat(animation.framerate),
+      rootAnimationLayer: self)
 
     var imageLayers = [ImageCompositionLayer]()
     var textLayers = [TextCompositionLayer]()
@@ -191,7 +193,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     }
   }
 
-  var textProvider: AnimationTextProvider {
+  var textProvider: AnimationKeypathTextProvider {
     get { layerTextProvider.textProvider }
     set { layerTextProvider.textProvider = newValue }
   }
@@ -267,6 +269,15 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     for layer in animationLayers {
       if let foundLayer = layer.layer(for: keypath) {
         return foundLayer
+      }
+    }
+    return nil
+  }
+
+  func keypath(for layerToFind: CALayer) -> AnimationKeypath? {
+    for layer in animationLayers {
+      if let foundKeypath = layer.keypath(for: layerToFind) {
+        return foundKeypath
       }
     }
     return nil

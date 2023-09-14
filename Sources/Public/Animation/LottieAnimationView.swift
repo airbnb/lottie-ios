@@ -100,7 +100,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   public init(
     animation: LottieAnimation?,
     imageProvider: AnimationImageProvider? = nil,
-    textProvider: AnimationTextProvider = DefaultTextProvider(),
+    textProvider: AnimationKeypathTextProvider = DefaultTextProvider(),
     fontProvider: AnimationFontProvider = DefaultFontProvider(),
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)
@@ -124,7 +124,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   public init(
     dotLottie: DotLottieFile?,
     animationId: String? = nil,
-    textProvider: AnimationTextProvider = DefaultTextProvider(),
+    textProvider: AnimationKeypathTextProvider = DefaultTextProvider(),
     fontProvider: AnimationFontProvider = DefaultFontProvider(),
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)
@@ -183,7 +183,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   convenience init(
     animationSource: LottieAnimationSource?,
     imageProvider: AnimationImageProvider? = nil,
-    textProvider: AnimationTextProvider = DefaultTextProvider(),
+    textProvider: AnimationKeypathTextProvider = DefaultTextProvider(),
     fontProvider: AnimationFontProvider = DefaultFontProvider(),
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)
@@ -435,7 +435,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   /// Sets the text provider for animation view. A text provider provides the
   /// animation with values for text layers
-  public var textProvider: AnimationTextProvider {
+  public var textProvider: AnimationKeypathTextProvider {
     get { lottieAnimationLayer.textProvider }
     set { lottieAnimationLayer.textProvider = newValue }
   }
