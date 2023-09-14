@@ -4,6 +4,7 @@ Lottie is made available through multiple package managers, each of which has to
 
  1. Make sure `lottie-ios.podspec` and `package.json` list the correct version number. 
    - Optionally, consider updating the version number in `README.md` as well.
+   - Also consider updating the version number referenced here: https://airbnb.io/lottie/#/ios?id=swift-package-manager
  2. Publish the new release in the [lottie-ios](https://github.com/airbnb/lottie-ios) repo
  3. Update the [Cocoapod](https://cocoapods.org/pods/lottie-ios) by running `pod trunk push lottie-ios.podspec`
  4. Update the [npm package](https://www.npmjs.com/package/lottie-ios) by running `npm publish`
