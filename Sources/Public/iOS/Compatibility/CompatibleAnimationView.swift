@@ -193,8 +193,10 @@ public final class CompatibleAnimationView: UIView {
     commonInit()
   }
 
-  required init?(coder _: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+  required init?(coder: NSCoder) {
+    animationView = LottieAnimationView()
+    super.init(coder: coder)
+    commonInit()
   }
 
   // MARK: Public
