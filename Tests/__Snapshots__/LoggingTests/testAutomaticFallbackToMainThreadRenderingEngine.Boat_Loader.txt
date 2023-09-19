@@ -1,0 +1,6 @@
+[warning] Encountered Core Animation compatibility issue while setting up animation:
+[Chest] The Core Animation rendering engine partially supports time remapping keyframes, but this is somewhat experimental and has some known issues. Since it doesn't work in all cases, we have to fall back to using the main thread engine when using `RenderingEngineOption.automatic`.
+This animation may have additional compatibility issues, but animation setup was cancelled early to avoid wasted work.
+
+Automatically falling back to Main Thread rendering engine. This fallback comes with some additional performance
+overhead, which can be reduced by manually specifying that this animation should always use the Main Thread engine.
