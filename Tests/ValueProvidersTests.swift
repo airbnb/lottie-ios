@@ -42,6 +42,7 @@ final class ValueProvidersTests: XCTestCase {
       valueProviderStore: store,
       compatibilityTracker: .init(mode: .track, logger: .printToConsole),
       logger: .printToConsole,
+      loggingState: LoggingState(),
       currentKeypath: .init(keys: []),
       textProvider: DictionaryTextProvider([:]))
 

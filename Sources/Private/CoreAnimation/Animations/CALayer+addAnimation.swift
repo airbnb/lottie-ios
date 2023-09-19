@@ -50,15 +50,14 @@ extension CALayer {
     guard !keyframes.isEmpty else { return nil }
 
     // Check if this set of keyframes uses After Effects expressions, which aren't supported.
-    if let unsupportedAfterEffectsExpression = keyframeGroup.unsupportedAfterEffectsExpression {
+    //  - We only log this once per `CoreAnimationLayer` instance.
+    if keyframeGroup.unsupportedAfterEffectsExpression != nil, !context.loggingState.hasLoggedAfterEffectsExpressionsWarning {
+      context.loggingState.hasLoggedAfterEffectsExpressionsWarning = true
       context.logger.info("""
         `\(property.caLayerKeypath)` animation for "\(context.currentKeypath.fullPath)" \
         includes an After Effects expression (https://helpx.adobe.com/after-effects/using/expression-language.html), \
         which is not supported by lottie-ios (expressions are only supported by lottie-web). \
         This animation may not play correctly.
-
-          \(unsupportedAfterEffectsExpression.replacingOccurrences(of: "\n", with: "\n  "))
-
         """)
     }
 
