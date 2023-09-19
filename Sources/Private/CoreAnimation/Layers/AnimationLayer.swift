@@ -88,10 +88,17 @@ struct LayerAnimationContext {
   }
 }
 
+// MARK: - LoggingState
+
 /// Mutable state related to log events, stored on the `CoreAnimationLayer`.
 final class LoggingState {
+
+  // MARK: Lifecycle
+
   init() { }
-  
+
+  // MARK: Internal
+
   /// Whether or not the warning about unsupported After Effects expressions
   /// has been logged yet for this layer.
   var hasLoggedAfterEffectsExpressionsWarning = false

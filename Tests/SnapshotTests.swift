@@ -127,7 +127,6 @@ class SnapshotTests: XCTestCase {
     #if os(iOS)
     for sampleAnimationName in Samples.sampleAnimationNames {
       for percent in progressPercentagesToSnapshot(for: SnapshotConfiguration.forSample(named: sampleAnimationName)) {
-
         guard SnapshotConfiguration.forSample(named: sampleAnimationName).shouldSnapshot(using: configuration) else {
           continue
         }
