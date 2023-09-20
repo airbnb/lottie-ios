@@ -209,6 +209,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   private let valueProviderStore: ValueProviderStore
   private let compatibilityTracker: CompatibilityTracker
   private let logger: LottieLogger
+  private let loggingState = LoggingState()
 
   /// The current playback state of the animation that is displayed in this layer
   private var currentPlaybackState: PlaybackState? {
@@ -265,6 +266,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
       valueProviderStore: valueProviderStore,
       compatibilityTracker: compatibilityTracker,
       logger: logger,
+      loggingState: loggingState,
       currentKeypath: AnimationKeypath(keys: []),
       textProvider: textProvider,
       recordHierarchyKeypath: configuration.recordHierarchyKeypath)

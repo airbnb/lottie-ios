@@ -1,0 +1,1 @@
+[info] `transform.rotation.z` animation for "men.man 1.hand 2.Transform" includes an After Effects expression (https://helpx.adobe.com/after-effects/using/expression-language.html), which is not supported by lottie-ios (expressions are only supported by lottie-web). This animation may not play correctly.

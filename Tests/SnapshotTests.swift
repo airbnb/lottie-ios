@@ -127,6 +127,10 @@ class SnapshotTests: XCTestCase {
     #if os(iOS)
     for sampleAnimationName in Samples.sampleAnimationNames {
       for percent in progressPercentagesToSnapshot(for: SnapshotConfiguration.forSample(named: sampleAnimationName)) {
+        guard SnapshotConfiguration.forSample(named: sampleAnimationName).shouldSnapshot(using: configuration) else {
+          continue
+        }
+
         guard
           let animationView = await SnapshotConfiguration.makeAnimationView(
             for: sampleAnimationName,
@@ -281,10 +285,6 @@ extension SnapshotConfiguration {
     async -> LottieAnimationView?
   {
     let snapshotConfiguration = customSnapshotConfiguration ?? SnapshotConfiguration.forSample(named: sampleAnimationName)
-
-    guard snapshotConfiguration.shouldSnapshot(using: configuration) else {
-      return nil
-    }
 
     let animationView: LottieAnimationView
     if let animation = Samples.animation(named: sampleAnimationName) {

@@ -1,0 +1,1 @@
+Animation setup did not emit any logs
