@@ -1,9 +1,6 @@
 // Created by Cal Stephens on 9/12/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
-// Created by Cal Stephens on 5/2/22.
-// Copyright © 2022 Airbnb Inc. All rights reserved.
-
 import SnapshotTesting
 import UIKit
 import XCTest
@@ -79,7 +76,7 @@ final class TextProviderTests: XCTestCase {
       configuration: configuration,
       customSnapshotConfiguration: .customTextProvider(textProvider))!
 
-    animationView.forceDisplayUpdate()
+    animationView.renderContentsForUnitTests()
 
     return textProvider.methodCalls
   }
@@ -128,5 +125,18 @@ private final class LoggingAnimationKeypathTextProvider: AnimationKeypathTextPro
     let keypathString = keypath.keys.joined(separator: ".")
     methodCalls.append("text(for: \"\(keypathString)\", sourceText: \"\(sourceText)\")")
     return nil
+  }
+}
+
+extension LottieAnimationView {
+  // Causes this `LottieAnimationView` to render its contents immediately
+  func renderContentsForUnitTests() {
+    if let mainThreadAnimationLayer = lottieAnimationLayer.animationLayer as? MainThreadAnimationLayer {
+      mainThreadAnimationLayer.forceDisplayUpdate()
+    } else if let coreAnimationLayer = lottieAnimationLayer.animationLayer as? CoreAnimationLayer {
+      // `forceDisplayUpdate()` is not implemented for `CoreAnimationLayer`, so instead we call
+      // `display()` to force it to render any pending animation configurations.
+      coreAnimationLayer.display()
+    }
   }
 }

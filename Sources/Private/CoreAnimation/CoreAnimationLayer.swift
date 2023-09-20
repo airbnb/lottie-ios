@@ -449,7 +449,9 @@ extension CoreAnimationLayer: RootAnimationLayer {
   }
 
   func forceDisplayUpdate() {
-    display()
+    // Unimplemented
+    //  - We can't call `display()` here, because it would cause unexpected frame animations:
+    //    https://github.com/airbnb/lottie-ios/issues/2193
   }
 
   func logHierarchyKeypaths() {

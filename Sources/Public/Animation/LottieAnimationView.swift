@@ -794,6 +794,9 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   // MARK: Internal
 
+  // The backing CALayer for this animation view.
+  let lottieAnimationLayer: LottieAnimationLayer
+
   var animationLayer: RootAnimationLayer? {
     lottieAnimationLayer.rootAnimationLayer
   }
@@ -1028,9 +1031,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
   }
 
   // MARK: Private
-
-  // The backing CALayer for this animation view.
-  private let lottieAnimationLayer: LottieAnimationLayer
 
   private let logger: LottieLogger
 }
