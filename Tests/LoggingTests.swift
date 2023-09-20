@@ -95,7 +95,7 @@ final class LoggingTests: XCTestCase {
       configuration: configuration,
       logger: logger)!
 
-    animationView.forceDisplayUpdate()
+    animationView.renderContentsForUnitTests()
 
     if logMessages.isEmpty {
       return ["Animation setup did not emit any logs"]
