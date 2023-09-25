@@ -32,29 +32,16 @@ jobs:
         xcode:
         - '14.2' # Swift 5.7
         - '14.3' # Swift 5.8
+        - '15.0' # Swift 5.9
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
         with:
           xcode: ${{ matrix.xcode }}
       - name: Build Package
+        # Once there is a production Xcode version with the visionOS SDK,
+        # we will want to use that version without `SKIP_VISION_OS=true`
         run: SKIP_VISION_OS=true bundle exec rake build:package:all
-
-  build-package-macos-13-xcode-15:
-    name: "Build Package"
-    runs-on: macos-13
-    strategy:
-      fail-fast: false
-      matrix:
-        xcode:
-        - '15.0' # Swift 5.9, first version that includes visionOS SDK.
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup
-        with:
-          xcode: ${{ matrix.xcode }}
-      - name: Build Package
-        run: bundle exec rake build:package:all
 
   build-example:
     name: "Build Example App"
@@ -65,7 +52,9 @@ jobs:
         with:
           xcode: '15.0' # Swift 5.9
       - name: Build Example
-        run: bundle exec rake build:example:all
+        # Once there is a production Xcode version with the visionOS SDK,
+        # we will want to remove `SKIP_VISION_OS=true`
+        run: SKIP_VISION_OS=true bundle exec rake build:example:all
 
   test-package:
     name: "Test Package"
@@ -115,33 +104,9 @@ jobs:
         with:
           xcode: ${{ matrix.xcode }}
       - name: Build XCFramework
+        # Once there is a production Xcode version with the visionOS SDK, we will 
+        # need to also build an XCFramework using that version but without `SKIP_VISION_OS=true`
         run: SKIP_VISION_OS=true bundle exec rake build:xcframework[Lottie-Xcode-${{ matrix.xcode }}]
-      - name: Upload XCFramework
-        uses: actions/upload-artifact@v2
-        with:
-          name: BuildProducts
-          # The xcframework is at the path `.build/archives/Lottie.xcframework.zip`.
-          # GitHub always zips the artifacts before uploading, so if we uploaded the .xframework.zip
-          # directly then it would actually upload a double-zip (a .zip containing our `Lottie.xcframework.zip`).
-          # This is confusing especially since macOS Archive Utility automatially unzips both layers at once.
-          # Instead, we upload the entire archives folder, resulting in an `XCFramework.zip` that unzips
-          # to an `archives` directory containing our `Lottie.xcframework.zip`.
-          path: .build/archives
-
-  build-xcframework-macos-13:
-    name: "Build XCFramework"
-    runs-on: macos-13
-    strategy:
-      matrix:
-        xcode:
-        - '15.0' # Swift 5.9, and the first Xcode version with the visionOS SDK.
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup
-        with:
-          xcode: ${{ matrix.xcode }}
-      - name: Build XCFramework
-        run: bundle exec rake build:xcframework[Lottie-Xcode-${{ matrix.xcode }}]
       - name: Upload XCFramework
         uses: actions/upload-artifact@v2
         with:
@@ -171,7 +136,7 @@ jobs:
     strategy:
       matrix:
         xcode:
-        - '15.0' # Swift 5.9, first version with visionOS SDK.
+        - '15.0' # Swift 5.9
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
