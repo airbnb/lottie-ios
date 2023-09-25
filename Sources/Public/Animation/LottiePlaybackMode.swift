@@ -7,6 +7,13 @@ import Foundation
 
 /// Configuration for how a Lottie animation should be played
 public enum LottiePlaybackMode: Hashable {
+
+  /// The position within a marker.
+  public enum MarkerPosition: Hashable {
+    case start
+    case end
+  }
+
   /// The animation is paused at the given progress value,
   /// a value between 0.0 (0% progress) and 1.0 (100% progress).
   case progress(_ progress: AnimationProgressTime)
@@ -19,6 +26,9 @@ public enum LottiePlaybackMode: Hashable {
 
   /// Any existing animation will be paused at the current frame.
   case pause
+
+  /// Pauses the animation at a given marker and position
+  case pausedAtMarker(_ marker: String, position: MarkerPosition)
 
   /// Plays the animation from a progress (0-1) to a progress (0-1).
   /// - Parameter fromProgress: The start progress of the animation. If `nil` the animation will start at the current progress.

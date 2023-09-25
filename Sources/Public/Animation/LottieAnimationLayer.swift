@@ -345,6 +345,25 @@ public class LottieAnimationLayer: CALayer {
     })
   }
 
+  /// Pauses the animation at a given marker and position
+  open func pause(at marker: String, position: LottiePlaybackMode.MarkerPosition)
+  {
+    guard let from = animation?.markerMap?[marker] else {
+      return
+    }
+
+    defer {
+      currentPlaybackMode = .pausedAtMarker(marker, position: position)
+    }
+
+    switch position {
+    case .start:
+      currentTime = from.frameTime
+    case .end:
+      currentTime = from.frameTime + from.durationFrameTime
+    }
+  }
+
   /// Stops the animation and resets the layer to its start frame.
   ///
   /// The completion closure will be called with `false`
@@ -382,6 +401,9 @@ public class LottieAnimationLayer: CALayer {
 
     case .pause:
       pause()
+
+    case .pausedAtMarker(let marker, let position):
+      pause(at: marker, position: position)
 
     case .fromProgress(let fromProgress, let toProgress, let loopMode):
       play(
