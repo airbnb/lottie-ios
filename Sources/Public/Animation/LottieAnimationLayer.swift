@@ -346,8 +346,7 @@ public class LottieAnimationLayer: CALayer {
   }
 
   /// Pauses the animation at a given marker and position
-  open func pause(at marker: String, position: LottiePlaybackMode.MarkerPosition)
-  {
+  open func pause(at marker: String, position: LottiePlaybackMode.MarkerPosition) {
     guard let from = animation?.markerMap?[marker] else {
       return
     }
