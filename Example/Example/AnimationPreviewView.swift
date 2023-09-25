@@ -121,9 +121,9 @@ struct AnimationPreviewView: View {
 
   private var playbackMode: LottiePlaybackMode {
     if animationPlaying {
-      return .fromProgress(playFromProgress, toProgress: playToProgress, loopMode: loopMode)
+      return .play(.progress(from: playFromProgress, to: playToProgress, loopMode: loopMode))
     } else {
-      return .progress(sliderValue)
+      return .paused(at: .progress(sliderValue))
     }
   }
 
