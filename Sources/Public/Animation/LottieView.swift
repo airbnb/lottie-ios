@@ -177,17 +177,17 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   @available(*, deprecated, renamed: "playing(_:)", message: "Will be removed in a future major release.")
   public func play() -> Self {
-    playbackMode(.play(.progress(to: 1, loopMode: .playOnce)))
+    playbackMode(.play(.fromProgress(nil, toProgress: 1, loopMode: .playOnce)))
   }
 
   /// Returns a copy of this view that loops its animation from the start to end whenever visible
   public func looping() -> Self {
-    playbackMode(.play(.progress(from: 0, to: 1, loopMode: .loop)))
+    playbackMode(.play(.fromProgress(0, toProgress: 1, loopMode: .loop)))
   }
 
   @available(*, deprecated, renamed: "playbackMode(_:)", message: "Will be removed in a future major release.")
   public func play(loopMode: LottieLoopMode = .playOnce) -> Self {
-    playbackMode(.play(.progress(to: 1, loopMode: loopMode)))
+    playbackMode(.play(.fromProgress(nil, toProgress: 1, loopMode: loopMode)))
   }
 
   @available(*, deprecated, renamed: "playbackMode(_:)", message: "Will be removed in a future major release.")
@@ -196,13 +196,33 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   }
 
   /// Returns a copy of this view playing with the given playback mode
-  public func playing(_ playbackMode: LottiePlaybackMode.PlaybackMode = .progress(to: 1, loopMode: .playOnce)) -> Self {
+  public func playing(
+    _ playbackMode: LottiePlaybackMode
+      .PlaybackMode = .fromProgress(nil, toProgress: 1, loopMode: .playOnce))
+    -> Self
+  {
     self.playbackMode(.play(playbackMode))
+  }
+
+  /// Returns a copy of this view playing from the current frame to the end frame,
+  /// with the given `LottiePlaybackMode`.
+  public func playing(loopMode: LottieLoopMode = .playOnce) -> Self {
+    playbackMode(.play(.fromProgress(nil, toProgress: 1, loopMode: loopMode)))
+  }
+
+  // Returns a copy of this view playing once from the current frame to the end frame
+  public func playing() -> Self {
+    playbackMode(.play(.fromProgress(nil, toProgress: 1, loopMode: .playOnce)))
   }
 
   /// Returns a copy of this view paused with the given state
   public func paused(at state: LottiePlaybackMode.PausedState = .currentFrame) -> Self {
     playbackMode(.paused(at: state))
+  }
+
+  /// Returns a copy of this view paused with the current frame
+  public func paused() -> Self {
+    playbackMode(.paused(at: .currentFrame))
   }
 
   /// Returns a copy of this view using the given `LottiePlaybackMode`
@@ -365,7 +385,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   public func currentTime(_ currentTime: TimeInterval?) -> Self {
     guard let currentTime = currentTime else { return self }
     var copy = self
-    copy.playbackMode = .paused(at: .timestamp(currentTime))
+    copy.playbackMode = .paused(at: .time(currentTime))
     return copy
   }
 

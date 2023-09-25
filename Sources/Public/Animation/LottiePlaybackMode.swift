@@ -3,14 +3,6 @@
 
 import Foundation
 
-// MARK: - LottieMarkerPosition
-
-/// The position within a marker.
-public enum LottieMarkerPosition: Hashable {
-  case start
-  case end
-}
-
 // MARK: - LottiePlaybackMode
 
 /// Configuration for how a Lottie animation should be played
@@ -65,7 +57,7 @@ public enum LottiePlaybackMode: Hashable {
     case frame(_ frame: AnimationFrameTime)
 
     /// The animation is paused at the given time value from the start of the animation.
-    case timestamp(_ time: TimeInterval)
+    case time(_ time: TimeInterval)
 
     /// Pauses the animation at a given marker and position
     case marker(_ name: String, position: LottieMarkerPosition = .start)
@@ -73,16 +65,22 @@ public enum LottiePlaybackMode: Hashable {
 
   public enum PlaybackMode: Hashable {
     /// Plays the animation from a progress (0-1) to a progress (0-1).
-    /// - Parameter from: The start progress of the animation. If `nil` the animation will start at the current progress.
-    /// - Parameter to: The end progress of the animation.
+    /// - Parameter fromProgress: The start progress of the animation. If `nil` the animation will start at the current progress.
+    /// - Parameter toProgress: The end progress of the animation.
     /// - Parameter loopMode: The loop behavior of the animation.
-    case progress(from: AnimationProgressTime? = nil, to: AnimationProgressTime, loopMode: LottieLoopMode)
+    case fromProgress(
+      _ fromProgress: AnimationProgressTime?,
+      toProgress: AnimationProgressTime,
+      loopMode: LottieLoopMode)
 
     /// The animation plays from the given `fromFrame` to the given `toFrame`.
-    /// - Parameter from: The start frame of the animation. If `nil` the animation will start at the current frame.
-    /// - Parameter to: The end frame of the animation.
+    /// - Parameter fromFrame: The start frame of the animation. If `nil` the animation will start at the current frame.
+    /// - Parameter toFrame: The end frame of the animation.
     /// - Parameter loopMode: The loop behavior of the animation.
-    case frames(from: AnimationFrameTime? = nil, to: AnimationFrameTime, loopMode: LottieLoopMode)
+    case fromFrame(
+      _ fromFrame: AnimationFrameTime?,
+      toFrame: AnimationFrameTime,
+      loopMode: LottieLoopMode)
 
     /// Plays the animation from a named marker to another marker.
     ///
@@ -90,14 +88,18 @@ public enum LottiePlaybackMode: Hashable {
     ///
     /// NOTE: If markers are not found the play command will exit.
     ///
-    /// - Parameter from: The start marker for the animation playback. If `nil` the
+    /// - Parameter fromMarker: The start marker for the animation playback. If `nil` the
     /// animation will start at the current progress.
-    /// - Parameter to: The end marker for the animation playback.
+    /// - Parameter toMarker: The end marker for the animation playback.
     /// - Parameter playEndMarkerFrame: A flag to determine whether or not to play the frame of the end marker. If the
     /// end marker represents the end of the section to play, it should be to true. If the provided end marker
     /// represents the beginning of the next section, it should be false.
     /// - Parameter loopMode: The loop behavior of the animation.
-    case markers(from: String? = nil, to: String, playEndMarkerFrame: Bool = true, loopMode: LottieLoopMode)
+    case fromMarker(
+      _ fromMarker: String?,
+      toMarker: String,
+      playEndMarkerFrame: Bool = true,
+      loopMode: LottieLoopMode)
 
     /// Plays the animation from a named marker to the end of the marker's duration.
     ///
@@ -108,7 +110,9 @@ public enum LottiePlaybackMode: Hashable {
     ///
     /// - Parameter marker: The start marker for the animation playback.
     /// - Parameter loopMode: The loop behavior of the animation.
-    case marker(_ name: String, loopMode: LottieLoopMode)
+    case marker(
+      _ marker: String,
+      loopMode: LottieLoopMode)
 
     /// Plays the given markers sequentially in order.
     ///
@@ -124,8 +128,8 @@ public enum LottiePlaybackMode: Hashable {
     /// If another animation is played (by calling any `play` method) while this
     /// marker sequence is playing, the marker sequence will be cancelled.
     ///
-    /// - Parameter names: The list of markers to play sequentially.
-    case markerList(_ names: [String])
+    /// - Parameter markers: The list of markers to play sequentially.
+    case markers(_ markers: [String])
   }
 
 }
@@ -137,12 +141,12 @@ extension LottiePlaybackMode {
 
   @available(*, deprecated, renamed: "LottiePlaybackMode.play(_:)", message: "Will be removed in a future major release.")
   public static func toProgress(_ toProgress: AnimationProgressTime, loopMode: LottieLoopMode) -> LottiePlaybackMode {
-    .play(.progress(from: nil, to: toProgress, loopMode: loopMode))
+    .play(.fromProgress(nil, toProgress: toProgress, loopMode: loopMode))
   }
 
   @available(*, deprecated, renamed: "LottiePlaybackMode.play(_:)", message: "Will be removed in a future major release.")
   public static func toFrame(_ toFrame: AnimationFrameTime, loopMode: LottieLoopMode) -> LottiePlaybackMode {
-    .play(.frames(from: nil, to: toFrame, loopMode: loopMode))
+    .play(.fromFrame(nil, toFrame: toFrame, loopMode: loopMode))
   }
 
   @available(*, deprecated, renamed: "LottiePlaybackMode.play(_:)", message: "Will be removed in a future major release.")
@@ -152,6 +156,14 @@ extension LottiePlaybackMode {
     loopMode: LottieLoopMode)
     -> LottiePlaybackMode
   {
-    .play(.markers(from: nil, to: toMarker, playEndMarkerFrame: playEndMarkerFrame, loopMode: loopMode))
+    .play(.fromMarker(nil, toMarker: toMarker, playEndMarkerFrame: playEndMarkerFrame, loopMode: loopMode))
   }
+}
+
+// MARK: - LottieMarkerPosition
+
+/// The position within a marker.
+public enum LottieMarkerPosition: Hashable {
+  case start
+  case end
 }

@@ -107,7 +107,7 @@ public class LottieAnimationLayer: CALayer {
     guard let animation = animation else { return }
 
     defer {
-      currentPlaybackMode = .play(.progress(to: 1, loopMode: loopMode))
+      currentPlaybackMode = .play(.fromProgress(nil, toProgress: 1, loopMode: loopMode))
     }
 
     if shouldOverrideWithReducedMotionAnimation {
@@ -139,7 +139,7 @@ public class LottieAnimationLayer: CALayer {
     guard let animation = animation else { return }
 
     defer {
-      currentPlaybackMode = .play(.progress(from: fromProgress, to: toProgress, loopMode: loopMode ?? self.loopMode))
+      currentPlaybackMode = .play(.fromProgress(fromProgress, toProgress: toProgress, loopMode: loopMode ?? self.loopMode))
     }
 
     if shouldOverrideWithReducedMotionAnimation {
@@ -172,7 +172,7 @@ public class LottieAnimationLayer: CALayer {
     completion: LottieCompletionBlock? = nil)
   {
     defer {
-      currentPlaybackMode = .play(.frames(from: fromFrame, to: toFrame, loopMode: loopMode ?? self.loopMode))
+      currentPlaybackMode = .play(.fromFrame(fromFrame, toFrame: toFrame, loopMode: loopMode ?? self.loopMode))
     }
 
     if shouldOverrideWithReducedMotionAnimation {
@@ -216,9 +216,9 @@ public class LottieAnimationLayer: CALayer {
     completion: LottieCompletionBlock? = nil)
   {
     defer {
-      currentPlaybackMode = .play(.markers(
-        from: fromMarker,
-        to: toMarker,
+      currentPlaybackMode = .play(.fromMarker(
+        fromMarker,
+        toMarker: toMarker,
         playEndMarkerFrame: playEndMarkerFrame,
         loopMode: loopMode ?? self.loopMode))
     }
@@ -311,7 +311,7 @@ public class LottieAnimationLayer: CALayer {
     guard !markers.isEmpty else { return }
 
     defer {
-      currentPlaybackMode = .play(.markerList(markers))
+      currentPlaybackMode = .play(.markers(markers))
     }
 
     if shouldOverrideWithReducedMotionAnimation {
@@ -371,7 +371,7 @@ public class LottieAnimationLayer: CALayer {
 
     case .frame(let animationFrameTime):
       currentFrame = animationFrameTime
-    case .timestamp(let timeInterval):
+    case .time(let timeInterval):
       currentTime = timeInterval
 
     case .marker(let name, let position):
@@ -399,6 +399,7 @@ public class LottieAnimationLayer: CALayer {
   }
 
   /// Applies the given `LottiePlaybackMode` to this layer.
+  /// - Parameter playbackMode: The playback mode to apply
   /// - Parameter completion: A closure that is called after
   ///   an animation triggered by this method completes.
   open func setPlaybackMode(
@@ -419,45 +420,49 @@ public class LottieAnimationLayer: CALayer {
       pause(at: .frame(frame))
 
     case .time(let time):
-      pause(at: .timestamp(time))
+      pause(at: .time(time))
 
     case .pause:
       pause(at: .currentFrame)
 
     case .fromProgress(let from, let to, let loopMode):
-      play(.progress(from: from, to: to, loopMode: loopMode), completion: completion)
+      play(.fromProgress(from, toProgress: to, loopMode: loopMode), completion: completion)
 
     case .fromFrame(let from, let to, let loopMode):
-      play(.frames(from: from, to: to, loopMode: loopMode), completion: completion)
+      play(.fromFrame(from, toFrame: to, loopMode: loopMode), completion: completion)
 
     case .fromMarker(let from, let to, let playEndMarkerFrame, let loopMode):
-      play(.markers(from: from, to: to, playEndMarkerFrame: playEndMarkerFrame, loopMode: loopMode), completion: completion)
+      play(.fromMarker(from, toMarker: to, playEndMarkerFrame: playEndMarkerFrame, loopMode: loopMode), completion: completion)
 
     case .marker(let name, let loopMode):
       play(.marker(name, loopMode: loopMode), completion: completion)
 
     case .markers(let names):
-      play(.markerList(names), completion: completion)
+      play(.markers(names), completion: completion)
     }
   }
 
-  open func play(_ mode: LottiePlaybackMode.PlaybackMode, completion: LottieCompletionBlock? = nil) {
-    switch mode {
-    case .progress(from: let from, to: let to, loopMode: let loopMode):
+  /// Applies the given `LottiePlaybackMode` to this layer.
+  /// - Parameter playbackMode: The playback mode to apply
+  /// - Parameter completion: A closure that is called after
+  ///   an animation triggered by this method completes.
+  open func play(_ playbackMode: LottiePlaybackMode.PlaybackMode, completion: LottieCompletionBlock? = nil) {
+    switch playbackMode {
+    case .fromProgress(let from, let to, let loopMode):
       play(
         fromProgress: from,
         toProgress: to,
         loopMode: loopMode,
         completion: completion)
 
-    case .frames(from: let from, to: let to, loopMode: let loopMode):
+    case .fromFrame(let from, let to, let loopMode):
       play(
         fromFrame: from,
         toFrame: to,
         loopMode: loopMode,
         completion: completion)
 
-    case .markers(let from, let to, let playEndMarkerFrame, let loopMode):
+    case .fromMarker(let from, let to, let playEndMarkerFrame, let loopMode):
       play(
         fromMarker: from,
         toMarker: to,
@@ -468,7 +473,7 @@ public class LottieAnimationLayer: CALayer {
     case .marker(let name, loopMode: let loopMode):
       play(marker: name, loopMode: loopMode, completion: completion)
 
-    case .markerList(let names):
+    case .markers(let names):
       play(markers: names, completion: completion)
     }
   }
@@ -681,7 +686,7 @@ public class LottieAnimationLayer: CALayer {
     set {
       if let animation = animation {
         currentFrame = animation.frameTime(forTime: newValue)
-        currentPlaybackMode = .paused(at: .timestamp(newValue))
+        currentPlaybackMode = .paused(at: .time(newValue))
       } else {
         currentFrame = 0
       }
