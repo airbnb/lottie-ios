@@ -41,7 +41,7 @@ To install Lottie using [Swift Package Manager](https://github.com/apple/swift-p
 or you can add the following dependency to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.3.1")
+.package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.3.2")
 ```
 
 When using Swift Package Manager we recommend using the [lottie-spm](https://github.com/airbnb/lottie-spm) repo instead of the main lottie-ios repo.  The main git repository for [lottie-ios](https://github.com/airbnb/lottie-ios) is somewhat large (300+ MB), and Swift Package Manager always downloads the full repository with all git history. The [lottie-spm](https://github.com/airbnb/lottie-spm) repo is much smaller (less than 500kb), so can be downloaded much more quickly. 
