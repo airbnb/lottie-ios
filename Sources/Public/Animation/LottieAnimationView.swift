@@ -219,6 +219,13 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   // MARK: Open
 
+  /// Applies the given `LottiePlaybackMode` to this layer.
+  /// - Parameter completion: A closure that is called after
+  ///   an animation triggered by this method completes.
+  open func play(_ mode: LottiePlaybackMode.PlaybackMode, completion: LottieCompletionBlock? = nil) {
+    lottieAnimationLayer.play(mode, completion: completion)
+  }
+
   /// Plays the animation from its current state to the end.
   ///
   /// - Parameter completion: An optional completion closure to be called when the animation completes playing.
@@ -341,16 +348,22 @@ open class LottieAnimationView: LottieAnimationViewBase {
     lottieAnimationLayer.pause()
   }
 
-  /// Applies the given `LottiePlaybackMode` to this layer.
-  /// - Parameter animationCompletionHandler: A closure that is called after
-  ///   an animation triggered by this method completes. This completion
-  ///   handler is **not called** after setting the playback mode to a
-  ///   mode that doesn't animate (e.g. `progress`, `frame`, `time`, or `pause`).
+  @available(*, deprecated, renamed: "setPlaybackMode(_:completion:)", message: "Will be removed in a future major release.")
   open func play(
     _ playbackMode: LottiePlaybackMode,
     animationCompletionHandler: LottieCompletionBlock? = nil)
   {
-    lottieAnimationLayer.play(playbackMode, animationCompletionHandler: animationCompletionHandler)
+    lottieAnimationLayer.setPlaybackMode(playbackMode, completion: animationCompletionHandler)
+  }
+
+  /// Applies the given `LottiePlaybackMode` to this layer.
+  /// - Parameter completion: A closure that is called after
+  ///   an animation triggered by this method completes.
+  open func setPlaybackMode(
+    _ playbackMode: LottiePlaybackMode,
+    completion: LottieCompletionBlock? = nil)
+  {
+    lottieAnimationLayer.setPlaybackMode(playbackMode, completion: completion)
   }
 
   // MARK: Public

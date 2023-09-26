@@ -140,7 +140,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
             let playbackMode = playbackMode,
             playbackMode != context.view.currentPlaybackMode
           {
-            context.view.play(playbackMode, animationCompletionHandler: animationCompletionHandler)
+            context.view.setPlaybackMode(playbackMode, completion: animationCompletionHandler)
           }
         }
         .configurations(configurations)
@@ -175,25 +175,45 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     return copy
   }
 
-  // Returns a copy of this view playing once from the current frame to the end frame
+  @available(*, deprecated, renamed: "playing()", message: "Will be removed in a future major release.")
   public func play() -> Self {
-    play(loopMode: .playOnce)
+    playbackMode(.playing(.fromProgress(nil, toProgress: 1, loopMode: .playOnce)))
   }
 
   /// Returns a copy of this view that loops its animation from the start to end whenever visible
   public func looping() -> Self {
-    play(.fromProgress(0, toProgress: 1, loopMode: .loop))
+    playbackMode(.playing(.fromProgress(0, toProgress: 1, loopMode: .loop)))
+  }
+
+  @available(*, deprecated, renamed: "playing(_:)", message: "Will be removed in a future major release.")
+  public func play(loopMode: LottieLoopMode = .playOnce) -> Self {
+    playbackMode(.playing(.fromProgress(nil, toProgress: 1, loopMode: loopMode)))
+  }
+
+  @available(*, deprecated, renamed: "playbackMode(_:)", message: "Will be removed in a future major release.")
+  public func play(_ playbackMode: LottiePlaybackMode) -> Self {
+    self.playbackMode(playbackMode)
+  }
+
+  /// Returns a copy of this view playing with the given playback mode
+  public func playing(_ mode: LottiePlaybackMode.PlaybackMode) -> Self {
+    playbackMode(.playing(mode))
   }
 
   /// Returns a copy of this view playing from the current frame to the end frame,
   /// with the given `LottiePlaybackMode`.
-  public func play(loopMode: LottieLoopMode = .playOnce) -> Self {
-    play(.toProgress(1, loopMode: loopMode))
+  public func playing(loopMode: LottieLoopMode) -> Self {
+    playbackMode(.playing(.fromProgress(nil, toProgress: 1, loopMode: loopMode)))
   }
 
-  /// Returns a copy of this view playing with the given `LottiePlaybackMode`
-  public func play(_ playbackMode: LottiePlaybackMode) -> Self {
-    self.playbackMode(playbackMode)
+  // Returns a copy of this view playing once from the current frame to the end frame
+  public func playing() -> Self {
+    playbackMode(.playing(.fromProgress(nil, toProgress: 1, loopMode: .playOnce)))
+  }
+
+  /// Returns a copy of this view paused with the given state
+  public func paused(at state: LottiePlaybackMode.PausedState = .currentFrame) -> Self {
+    playbackMode(.paused(at: state))
   }
 
   /// Returns a copy of this view using the given `LottiePlaybackMode`
@@ -332,7 +352,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   public func currentProgress(_ currentProgress: AnimationProgressTime?) -> Self {
     guard let currentProgress = currentProgress else { return self }
     var copy = self
-    copy.playbackMode = .progress(currentProgress)
+    copy.playbackMode = .paused(at: .progress(currentProgress))
     return copy
   }
 
@@ -344,7 +364,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   public func currentFrame(_ currentFrame: AnimationFrameTime?) -> Self {
     guard let currentFrame = currentFrame else { return self }
     var copy = self
-    copy.playbackMode = .frame(currentFrame)
+    copy.playbackMode = .paused(at: .frame(currentFrame))
     return copy
   }
 
@@ -356,7 +376,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   public func currentTime(_ currentTime: TimeInterval?) -> Self {
     guard let currentTime = currentTime else { return self }
     var copy = self
-    copy.playbackMode = .time(currentTime)
+    copy.playbackMode = .paused(at: .time(currentTime))
     return copy
   }
 
