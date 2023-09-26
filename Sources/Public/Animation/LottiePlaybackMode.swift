@@ -10,7 +10,7 @@ public enum LottiePlaybackMode: Hashable {
 
   case paused(at: PausedState)
 
-  case play(_ mode: PlaybackMode)
+  case playing(_ mode: PlaybackMode)
 
   @available(*, deprecated, renamed: "LottiePlaybackMode.paused(at:)", message: "Will be removed in a future major release.")
   case progress(_ progress: AnimationProgressTime)
@@ -141,12 +141,12 @@ extension LottiePlaybackMode {
 
   @available(*, deprecated, renamed: "LottiePlaybackMode.play(_:)", message: "Will be removed in a future major release.")
   public static func toProgress(_ toProgress: AnimationProgressTime, loopMode: LottieLoopMode) -> LottiePlaybackMode {
-    .play(.fromProgress(nil, toProgress: toProgress, loopMode: loopMode))
+    .playing(.fromProgress(nil, toProgress: toProgress, loopMode: loopMode))
   }
 
   @available(*, deprecated, renamed: "LottiePlaybackMode.play(_:)", message: "Will be removed in a future major release.")
   public static func toFrame(_ toFrame: AnimationFrameTime, loopMode: LottieLoopMode) -> LottiePlaybackMode {
-    .play(.fromFrame(nil, toFrame: toFrame, loopMode: loopMode))
+    .playing(.fromFrame(nil, toFrame: toFrame, loopMode: loopMode))
   }
 
   @available(*, deprecated, renamed: "LottiePlaybackMode.play(_:)", message: "Will be removed in a future major release.")
@@ -156,7 +156,7 @@ extension LottiePlaybackMode {
     loopMode: LottieLoopMode)
     -> LottiePlaybackMode
   {
-    .play(.fromMarker(nil, toMarker: toMarker, playEndMarkerFrame: playEndMarkerFrame, loopMode: loopMode))
+    .playing(.fromMarker(nil, toMarker: toMarker, playEndMarkerFrame: playEndMarkerFrame, loopMode: loopMode))
   }
 }
 

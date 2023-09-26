@@ -177,17 +177,17 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   @available(*, deprecated, renamed: "playing(_:)", message: "Will be removed in a future major release.")
   public func play() -> Self {
-    playbackMode(.play(.fromProgress(nil, toProgress: 1, loopMode: .playOnce)))
+    playbackMode(.playing(.fromProgress(nil, toProgress: 1, loopMode: .playOnce)))
   }
 
   /// Returns a copy of this view that loops its animation from the start to end whenever visible
   public func looping() -> Self {
-    playbackMode(.play(.fromProgress(0, toProgress: 1, loopMode: .loop)))
+    playbackMode(.playing(.fromProgress(0, toProgress: 1, loopMode: .loop)))
   }
 
   @available(*, deprecated, renamed: "playbackMode(_:)", message: "Will be removed in a future major release.")
   public func play(loopMode: LottieLoopMode = .playOnce) -> Self {
-    playbackMode(.play(.fromProgress(nil, toProgress: 1, loopMode: loopMode)))
+    playbackMode(.playing(.fromProgress(nil, toProgress: 1, loopMode: loopMode)))
   }
 
   @available(*, deprecated, renamed: "playbackMode(_:)", message: "Will be removed in a future major release.")
@@ -201,18 +201,18 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
       .PlaybackMode = .fromProgress(nil, toProgress: 1, loopMode: .playOnce))
     -> Self
   {
-    self.playbackMode(.play(playbackMode))
+    self.playbackMode(.playing(playbackMode))
   }
 
   /// Returns a copy of this view playing from the current frame to the end frame,
   /// with the given `LottiePlaybackMode`.
   public func playing(loopMode: LottieLoopMode = .playOnce) -> Self {
-    playbackMode(.play(.fromProgress(nil, toProgress: 1, loopMode: loopMode)))
+    playbackMode(.playing(.fromProgress(nil, toProgress: 1, loopMode: loopMode)))
   }
 
   // Returns a copy of this view playing once from the current frame to the end frame
   public func playing() -> Self {
-    playbackMode(.play(.fromProgress(nil, toProgress: 1, loopMode: .playOnce)))
+    playbackMode(.playing(.fromProgress(nil, toProgress: 1, loopMode: .playOnce)))
   }
 
   /// Returns a copy of this view paused with the given state

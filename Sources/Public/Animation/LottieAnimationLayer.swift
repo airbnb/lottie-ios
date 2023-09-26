@@ -107,7 +107,7 @@ public class LottieAnimationLayer: CALayer {
     guard let animation = animation else { return }
 
     defer {
-      currentPlaybackMode = .play(.fromProgress(nil, toProgress: 1, loopMode: loopMode))
+      currentPlaybackMode = .playing(.fromProgress(nil, toProgress: 1, loopMode: loopMode))
     }
 
     if shouldOverrideWithReducedMotionAnimation {
@@ -139,7 +139,7 @@ public class LottieAnimationLayer: CALayer {
     guard let animation = animation else { return }
 
     defer {
-      currentPlaybackMode = .play(.fromProgress(fromProgress, toProgress: toProgress, loopMode: loopMode ?? self.loopMode))
+      currentPlaybackMode = .playing(.fromProgress(fromProgress, toProgress: toProgress, loopMode: loopMode ?? self.loopMode))
     }
 
     if shouldOverrideWithReducedMotionAnimation {
@@ -172,7 +172,7 @@ public class LottieAnimationLayer: CALayer {
     completion: LottieCompletionBlock? = nil)
   {
     defer {
-      currentPlaybackMode = .play(.fromFrame(fromFrame, toFrame: toFrame, loopMode: loopMode ?? self.loopMode))
+      currentPlaybackMode = .playing(.fromFrame(fromFrame, toFrame: toFrame, loopMode: loopMode ?? self.loopMode))
     }
 
     if shouldOverrideWithReducedMotionAnimation {
@@ -216,7 +216,7 @@ public class LottieAnimationLayer: CALayer {
     completion: LottieCompletionBlock? = nil)
   {
     defer {
-      currentPlaybackMode = .play(.fromMarker(
+      currentPlaybackMode = .playing(.fromMarker(
         fromMarker,
         toMarker: toMarker,
         playEndMarkerFrame: playEndMarkerFrame,
@@ -273,7 +273,7 @@ public class LottieAnimationLayer: CALayer {
     }
 
     defer {
-      currentPlaybackMode = .play(.marker(marker, loopMode: loopMode ?? self.loopMode))
+      currentPlaybackMode = .playing(.marker(marker, loopMode: loopMode ?? self.loopMode))
     }
 
     if shouldOverrideWithReducedMotionAnimation {
@@ -311,7 +311,7 @@ public class LottieAnimationLayer: CALayer {
     guard !markers.isEmpty else { return }
 
     defer {
-      currentPlaybackMode = .play(.markers(markers))
+      currentPlaybackMode = .playing(.markers(markers))
     }
 
     if shouldOverrideWithReducedMotionAnimation {
@@ -410,7 +410,7 @@ public class LottieAnimationLayer: CALayer {
     case .paused(at: let state):
       pause(at: state)
 
-    case .play(let mode):
+    case .playing(let mode):
       play(mode, completion: completion)
 
     case .progress(let progress):
