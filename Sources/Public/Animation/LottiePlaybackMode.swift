@@ -8,8 +8,10 @@ import Foundation
 /// Configuration for how a Lottie animation should be played
 public enum LottiePlaybackMode: Hashable {
 
+  /// The animation is paused at the given state (e.g. paused at a specific frame)
   case paused(at: PausedState)
 
+  /// The animation is playing using the given playback mode (e.g. looping from the start to the end)
   case playing(_ mode: PlaybackMode)
 
   @available(*, deprecated, renamed: "LottiePlaybackMode.paused(at:)", message: "Will be removed in a future major release.")
@@ -24,23 +26,23 @@ public enum LottiePlaybackMode: Hashable {
   @available(*, deprecated, renamed: "LottiePlaybackMode.paused(at:)", message: "Will be removed in a future major release.")
   case pause
 
-  @available(*, deprecated, renamed: "LottiePlaybackMode.play(_:)", message: "Will be removed in a future major release.")
+  @available(*, deprecated, renamed: "LottiePlaybackMode.playing(_:)", message: "Will be removed in a future major release.")
   case fromProgress(_ fromProgress: AnimationProgressTime?, toProgress: AnimationProgressTime, loopMode: LottieLoopMode)
 
-  @available(*, deprecated, renamed: "LottiePlaybackMode.play(_:)", message: "Will be removed in a future major release.")
+  @available(*, deprecated, renamed: "LottiePlaybackMode.playing(_:)", message: "Will be removed in a future major release.")
   case fromFrame(_ fromFrame: AnimationFrameTime?, toFrame: AnimationFrameTime, loopMode: LottieLoopMode)
 
-  @available(*, deprecated, renamed: "LottiePlaybackMode.play(_:)", message: "Will be removed in a future major release.")
+  @available(*, deprecated, renamed: "LottiePlaybackMode.playing(_:)", message: "Will be removed in a future major release.")
   case fromMarker(
     _ fromMarker: String?,
     toMarker: String,
     playEndMarkerFrame: Bool = true,
     loopMode: LottieLoopMode)
 
-  @available(*, deprecated, renamed: "LottiePlaybackMode.play(_:)", message: "Will be removed in a future major release.")
+  @available(*, deprecated, renamed: "LottiePlaybackMode.playing(_:)", message: "Will be removed in a future major release.")
   case marker(_ marker: String, loopMode: LottieLoopMode)
 
-  @available(*, deprecated, renamed: "LottiePlaybackMode.play(_:)", message: "Will be removed in a future major release.")
+  @available(*, deprecated, renamed: "LottiePlaybackMode.playing(_:)", message: "Will be removed in a future major release.")
   case markers(_ markers: [String])
 
   // MARK: Public
@@ -139,17 +141,17 @@ extension LottiePlaybackMode {
     .paused(at: .currentFrame)
   }
 
-  @available(*, deprecated, renamed: "LottiePlaybackMode.play(_:)", message: "Will be removed in a future major release.")
+  @available(*, deprecated, renamed: "LottiePlaybackMode.playing(_:)", message: "Will be removed in a future major release.")
   public static func toProgress(_ toProgress: AnimationProgressTime, loopMode: LottieLoopMode) -> LottiePlaybackMode {
     .playing(.fromProgress(nil, toProgress: toProgress, loopMode: loopMode))
   }
 
-  @available(*, deprecated, renamed: "LottiePlaybackMode.play(_:)", message: "Will be removed in a future major release.")
+  @available(*, deprecated, renamed: "LottiePlaybackMode.playing(_:)", message: "Will be removed in a future major release.")
   public static func toFrame(_ toFrame: AnimationFrameTime, loopMode: LottieLoopMode) -> LottiePlaybackMode {
     .playing(.fromFrame(nil, toFrame: toFrame, loopMode: loopMode))
   }
 
-  @available(*, deprecated, renamed: "LottiePlaybackMode.play(_:)", message: "Will be removed in a future major release.")
+  @available(*, deprecated, renamed: "LottiePlaybackMode.playing(_:)", message: "Will be removed in a future major release.")
   public static func toMarker(
     _ toMarker: String,
     playEndMarkerFrame: Bool = true,
@@ -157,6 +159,42 @@ extension LottiePlaybackMode {
     -> LottiePlaybackMode
   {
     .playing(.fromMarker(nil, toMarker: toMarker, playEndMarkerFrame: playEndMarkerFrame, loopMode: loopMode))
+  }
+}
+
+extension LottiePlaybackMode.PlaybackMode {
+  /// Plays the animation from the current progress to a progress value (0-1).
+  /// - Parameter toProgress: The end progress of the animation.
+  /// - Parameter loopMode: The loop behavior of the animation.
+  public static func toProgress(_ toProgress: AnimationProgressTime, loopMode: LottieLoopMode) -> Self {
+    .fromProgress(nil, toProgress: toProgress, loopMode: loopMode)
+  }
+
+  // Plays the animation from the current frame to the given frame.
+  /// - Parameter toFrame: The end frame of the animation.
+  /// - Parameter loopMode: The loop behavior of the animation.
+  public static func toFrame(_ toFrame: AnimationFrameTime, loopMode: LottieLoopMode) -> Self {
+    .fromFrame(nil, toFrame: toFrame, loopMode: loopMode)
+  }
+
+  /// Plays the animation from the current frame to some marker.
+  ///
+  /// Markers are point in time that are encoded into the Animation data and assigned a name.
+  ///
+  /// NOTE: If the marker isn't found the play command will exit.
+  ///
+  /// - Parameter toMarker: The end marker for the animation playback.
+  /// - Parameter playEndMarkerFrame: A flag to determine whether or not to play the frame of the end marker. If the
+  /// end marker represents the end of the section to play, it should be to true. If the provided end marker
+  /// represents the beginning of the next section, it should be false.
+  /// - Parameter loopMode: The loop behavior of the animation.
+  public static func toMarker(
+    _ toMarker: String,
+    playEndMarkerFrame: Bool = true,
+    loopMode: LottieLoopMode)
+    -> Self
+  {
+    .fromMarker(nil, toMarker: toMarker, playEndMarkerFrame: playEndMarkerFrame, loopMode: loopMode)
   }
 }
 
