@@ -1134,6 +1134,10 @@ public class LottieAnimationLayer: CALayer {
   }
 
   fileprivate func makeAnimationLayer(usingEngine renderingEngine: RenderingEngineOption) {
+    /// Disable the default implicit crossfade animation Core Animation creates
+    /// when adding or removing sublayers.
+    actions = ["sublayers": NSNull()]
+
     /// Remove current animation if any
     removeCurrentAnimation()
 
