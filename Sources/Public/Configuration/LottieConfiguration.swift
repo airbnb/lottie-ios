@@ -10,7 +10,7 @@ public struct LottieConfiguration: Hashable {
 
   public init(
     renderingEngine: RenderingEngineOption = .automatic,
-    decodingStrategy: DecodingStrategy = .dictionaryBased,
+    decodingStrategy: DecodingStrategy = .legacyCodable,
     colorSpace: CGColorSpace = CGColorSpaceCreateDeviceRGB(),
     reducedMotionOption: ReducedMotionOption = .systemReducedMotionToggle)
   {

@@ -50,8 +50,8 @@ class EffectValue: Codable, DictionaryInitializable {
   }
 
   required init(dictionary: [String: Any]) throws {
-    type = EffectValueType(rawValue: try dictionary.value(for: CodingKeys.type)) ?? .unknown
-    name = try dictionary.value(for: CodingKeys.name) ?? "Effect"
+    type = (try? dictionary.value(for: CodingKeys.type)).flatMap(EffectValueType.init(rawValue:)) ?? .unknown
+    name = (try? dictionary.value(for: CodingKeys.name)) ?? "Effect"
   }
 
   // MARK: Internal
