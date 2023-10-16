@@ -27,6 +27,8 @@ extension LayerType: ClassFamily {
       return ShapeLayerModel.self
     case .text:
       return TextLayerModel.self
+    case .unknown:
+      return LayerModel.self
     }
   }
 }
@@ -40,6 +42,7 @@ public enum LayerType: Int, Codable {
   case null
   case shape
   case text
+  case unknown
 
   public init(from decoder: Decoder) throws {
     self = try LayerType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .null
@@ -241,6 +244,8 @@ extension Array where Element == LayerModel {
         return try ShapeLayerModel(dictionary: dictionary)
       case .text:
         return try TextLayerModel(dictionary: dictionary)
+      case .unknown:
+        return try LayerModel(dictionary: dictionary)
       case .none:
         return nil
       }
