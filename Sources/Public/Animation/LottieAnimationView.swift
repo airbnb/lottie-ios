@@ -368,6 +368,13 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   // MARK: Public
 
+  /// Whether or not transform and position changes of the view should animate alongside
+  /// any existing animation context.
+  ///  - Defaults to `true` which will grab the current animation context and animate position and
+  ///    transform changes matching the current context's curve and duration.
+  ///    `false` will cause transform and position changes to happen unanimated
+  public var animateLayoutChangesWithCurrentCoreAnimationContext = true
+
   /// The configuration that this `LottieAnimationView` uses when playing its animation
   public var configuration: LottieConfiguration {
     get { lottieAnimationLayer.configuration }
@@ -933,7 +940,11 @@ open class LottieAnimationView: LottieAnimationViewBase {
     // If layout is changed without animation, explicitly set animation duration to 0.0
     // inside CATransaction to avoid unwanted artifacts.
     /// Check if any animation exist on the view's layer, and match it.
-    if let key = lottieAnimationLayer.animationKeys()?.first, let animation = lottieAnimationLayer.animation(forKey: key) {
+    if
+      let key = lottieAnimationLayer.animationKeys()?.first,
+      let animation = lottieAnimationLayer.animation(forKey: key),
+      animateLayoutChangesWithCurrentCoreAnimationContext
+    {
       // The layout is happening within an animation block. Grab the animation data.
 
       let positionKey = "LayoutPositionAnimation"
