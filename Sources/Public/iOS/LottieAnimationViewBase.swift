@@ -40,7 +40,7 @@ open class LottieAnimationViewBase: UIView {
   var screenScale: CGFloat {
     #if os(iOS) || os(tvOS)
     if #available(iOS 13.0, tvOS 13.0, *) {
-        return window?.windowScene?.screen.scale ?? .zero
+        return window?.windowScene?.screen.scale ?? 1.0
     } else {
         return UIScreen.main.scale
     }
