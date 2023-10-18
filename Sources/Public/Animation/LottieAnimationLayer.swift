@@ -1143,6 +1143,7 @@ public class LottieAnimationLayer: CALayer {
 
     if let oldAnimation = animationLayer {
       oldAnimation.removeFromSuperlayer()
+      rootAnimationLayer = nil
     }
 
     guard let animation = animation else {
