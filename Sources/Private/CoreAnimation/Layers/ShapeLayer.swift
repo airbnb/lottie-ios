@@ -36,27 +36,8 @@ final class ShapeLayer: BaseCompositionLayer {
   private let shapeLayer: ShapeLayerModel
 
   private func setUpGroups(context: LayerContext) throws {
-    // If the layer has a `Repeater`, the `Group`s are duplicated and offset
-    // based on the copy count of the repeater.
-    if let repeater = shapeLayer.items.first(where: { $0 is Repeater }) as? Repeater {
-      try setUpRepeater(repeater, context: context)
-    } else {
-      let shapeItems = shapeLayer.items.map { ShapeItemLayer.Item(item: $0, groupPath: []) }
-      try setupGroups(from: shapeItems, parentGroup: nil, parentGroupPath: [], context: context)
-    }
-  }
-
-  private func setUpRepeater(_ repeater: Repeater, context: LayerContext) throws {
-    let items = shapeLayer.items.filter { !($0 is Repeater) }
-    let copyCount = Int(try repeater.copies.exactlyOneKeyframe(context: context, description: "repeater copies").value)
-
-    for index in 0..<copyCount {
-      let shapeItems = items.map { ShapeItemLayer.Item(item: $0, groupPath: []) }
-      for groupLayer in try makeGroupLayers(from: shapeItems, parentGroup: nil, parentGroupPath: [], context: context) {
-        let repeatedLayer = RepeaterLayer(repeater: repeater, childLayer: groupLayer, index: index)
-        addSublayer(repeatedLayer)
-      }
-    }
+    let shapeItems = shapeLayer.items.map { ShapeItemLayer.Item(item: $0, groupPath: []) }
+    try setupGroups(from: shapeItems, parentGroup: nil, parentGroupPath: [], context: context)
   }
 
 }
@@ -191,14 +172,70 @@ extension CALayer {
     context: LayerContext)
     throws
   {
-    let groupLayers = try makeGroupLayers(
-      from: items,
-      parentGroup: parentGroup,
-      parentGroupPath: parentGroupPath,
-      context: context)
+    // If the layer has any `Repeater`s, set up each repeater
+    // and then handle any remaining groups like normal.
+    if items.contains(where: { $0.item is Repeater }) {
+      let repeaterGroupings = items.split(whereSeparator: { $0.item is Repeater })
+      
+      // Iterate through the groupings backwards to preserve the expected rendering order
+      for repeaterGrouping in repeaterGroupings.reversed() {
+        // Each repeater applies to the previous items in the list
+        if let repeater = repeaterGrouping.trailingSeparator?.item as? Repeater {
+          try setUpRepeater(
+            repeater,
+            items: repeaterGrouping.grouping,
+            parentGroup: parentGroup,
+            parentGroupPath: parentGroupPath,
+            context: context)
+        }
+        
+        // Any remaining items after the last repeater are handled like normal
+        else {
+          try setupGroups(
+            from: repeaterGrouping.grouping,
+            parentGroup: parentGroup,
+            parentGroupPath: parentGroupPath,
+            context: context)
+        }
+      }
+    }
+    
+    else {
+      let groupLayers = try makeGroupLayers(
+        from: items,
+        parentGroup: parentGroup,
+        parentGroupPath: parentGroupPath,
+        context: context)
+      
+      for groupLayer in groupLayers {
+        addSublayer(groupLayer)
+      }
+    }
+  }
+  
+  /// Sets up this layer using the given `Repeater`
+  private func setUpRepeater(
+    _ repeater: Repeater,
+    items allItems: [ShapeItemLayer.Item],
+    parentGroup: Group?,
+    parentGroupPath: [String],
+    context: LayerContext)
+    throws
+  {
+    let items = allItems.filter { !($0.item is Repeater) }
+    let copyCount = Int(try repeater.copies.exactlyOneKeyframe(context: context, description: "repeater copies").value)
 
-    for groupLayer in groupLayers {
-      addSublayer(groupLayer)
+    for index in 0..<copyCount {
+      let groupLayers = try makeGroupLayers(
+        from: items,
+        parentGroup: parentGroup,
+        parentGroupPath: parentGroupPath,
+        context: context)
+      
+      for groupLayer in groupLayers {
+        let repeatedLayer = RepeaterLayer(repeater: repeater, childLayer: groupLayer, index: index)
+        addSublayer(repeatedLayer)
+      }
     }
   }
 
@@ -345,6 +382,32 @@ extension Collection {
     }
 
     return (trueElements, falseElements)
+  }
+  
+  /// Splits this collection into an array of grouping separated by the given separator.
+  /// For example, `[A, B, C]` split by `B` returns an array with two elements:
+  ///  1. `(grouping: [A], trailingSeparator: B)`
+  ///  2. `(grouping: [C], trailingSeparator: nil)`
+  func split(whereSeparator separatorPredicate: (Element) -> Bool)
+    -> [(grouping: [Element], trailingSeparator: Element?)]
+  {
+    guard !isEmpty else { return [] }
+    
+    var groupings: [(grouping: [Element], trailingSeparator: Element?)] = []
+    
+    for element in self {
+      if groupings.isEmpty || groupings.last?.trailingSeparator != nil {
+        groupings.append((grouping: [], trailingSeparator: nil))
+      }
+      
+      if separatorPredicate(element) {
+        groupings[groupings.indices.last!].trailingSeparator = element
+      } else {
+        groupings[groupings.indices.last!].grouping.append(element)
+      }
+    }
+    
+    return groupings
   }
 }
 
