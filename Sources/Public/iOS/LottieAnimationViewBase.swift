@@ -94,8 +94,8 @@ open class LottieAnimationViewBase: UIView {
     // Implemented by subclasses.
   }
 
-  // MARK: - Private
-  
+  // MARK: Private
+
   private var _screenScale: CGFloat = .zero
 }
 #endif
