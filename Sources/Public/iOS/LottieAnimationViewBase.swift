@@ -46,9 +46,9 @@ open class LottieAnimationViewBase: UIView {
     get {
       #if os(iOS) || os(tvOS)
       if #available(iOS 13.0, tvOS 13.0, *) {
-        window?.windowScene?.screen.scale ?? 1.0
+        return window?.windowScene?.screen.scale ?? 1.0
       } else {
-        UIScreen.main.scale
+        return UIScreen.main.scale
       }
       #else // if os(visionOS)
       // We intentionally don't check `#if os(visionOS)`, because that emits
