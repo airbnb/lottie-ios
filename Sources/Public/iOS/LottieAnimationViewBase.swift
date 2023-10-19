@@ -24,6 +24,11 @@ open class LottieAnimationViewBase: UIView {
   public override func didMoveToWindow() {
     super.didMoveToWindow()
     animationMovedToWindow()
+    #if os(iOS) || os(tvOS)
+    if #available(iOS 13.0, tvOS 13.0, *) {
+      screenScale = window?.windowScene?.screen.scale ?? 1.0
+    }
+    #endif
   }
 
   public override func layoutSubviews() {
@@ -38,17 +43,22 @@ open class LottieAnimationViewBase: UIView {
   }
 
   var screenScale: CGFloat {
-    #if os(iOS) || os(tvOS)
-    if #available(iOS 13.0, tvOS 13.0, *) {
-      return window?.windowScene?.screen.scale ?? 1.0
-    } else {
-      return UIScreen.main.scale
+    get {
+      #if os(iOS) || os(tvOS)
+      if #available(iOS 13.0, tvOS 13.0, *) {
+        window?.windowScene?.screen.scale ?? 1.0
+      } else {
+        UIScreen.main.scale
+      }
+      #else // if os(visionOS)
+      // We intentionally don't check `#if os(visionOS)`, because that emits
+      // a warning when building on Xcode 14 and earlier.
+      1.0
+      #endif
     }
-    #else // if os(visionOS)
-    // We intentionally don't check `#if os(visionOS)`, because that emits
-    // a warning when building on Xcode 14 and earlier.
-    1.0
-    #endif
+    set {
+      _screenScale = newValue
+    }
   }
 
   func layoutAnimation() {
@@ -84,5 +94,8 @@ open class LottieAnimationViewBase: UIView {
     // Implemented by subclasses.
   }
 
+  // MARK: - Private
+  
+  private var _screenScale: CGFloat = .zero
 }
 #endif
