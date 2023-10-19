@@ -24,11 +24,6 @@ open class LottieAnimationViewBase: UIView {
   public override func didMoveToWindow() {
     super.didMoveToWindow()
     animationMovedToWindow()
-    #if os(iOS) || os(tvOS)
-    if #available(iOS 13.0, tvOS 13.0, *) {
-      screenScale = window?.windowScene?.screen.scale ?? 1.0
-    }
-    #endif
   }
 
   public override func layoutSubviews() {
@@ -43,22 +38,18 @@ open class LottieAnimationViewBase: UIView {
   }
 
   var screenScale: CGFloat {
-    get {
-      #if os(iOS) || os(tvOS)
-      if #available(iOS 13.0, tvOS 13.0, *) {
-        return window?.windowScene?.screen.scale ?? 1.0
-      } else {
-        return UIScreen.main.scale
-      }
-      #else // if os(visionOS)
-      // We intentionally don't check `#if os(visionOS)`, because that emits
-      // a warning when building on Xcode 14 and earlier.
-      1.0
-      #endif
+    #if os(iOS) || os(tvOS)
+    if #available(iOS 13.0, tvOS 13.0, *) {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        return windowScene?.screen.scale ?? 1.0
+    } else {
+      return UIScreen.main.scale
     }
-    set {
-      _screenScale = newValue
-    }
+    #else // if os(visionOS)
+    // We intentionally don't check `#if os(visionOS)`, because that emits
+    // a warning when building on Xcode 14 and earlier.
+    1.0
+    #endif
   }
 
   func layoutAnimation() {
@@ -93,9 +84,5 @@ open class LottieAnimationViewBase: UIView {
   func animationWillEnterForeground() {
     // Implemented by subclasses.
   }
-
-  // MARK: Private
-
-  private var _screenScale: CGFloat = .zero
 }
 #endif
