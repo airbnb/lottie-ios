@@ -1,8 +1,8 @@
 // Created by Cal Stephens on 6/26/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
+#if canImport(SwiftUI)
 import SwiftUI
-
 #if canImport(UIKit)
 import UIKit
 
@@ -48,4 +48,5 @@ extension ViewRepresentableType {
   /// Either `UIViewType` on iOS/tvOS or `NSViewType` on macOS.
   typealias RepresentableViewType = NSViewType
 }
+#endif
 #endif
