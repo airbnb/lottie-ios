@@ -162,6 +162,9 @@ final class GroupLayer: BaseAnimationLayer {
 }
 
 extension CALayer {
+
+  // MARK: Fileprivate
+
   /// Sets up `GroupLayer`s for each `Group` in the given list of `ShapeItem`s
   ///  - Each `Group` item becomes its own `GroupLayer` sublayer.
   ///  - Other `ShapeItem` are applied to all sublayers
@@ -176,7 +179,7 @@ extension CALayer {
     // and then handle any remaining groups like normal.
     if items.contains(where: { $0.item is Repeater }) {
       let repeaterGroupings = items.split(whereSeparator: { $0.item is Repeater })
-      
+
       // Iterate through the groupings backwards to preserve the expected rendering order
       for repeaterGrouping in repeaterGroupings.reversed() {
         // Each repeater applies to the previous items in the list
@@ -188,7 +191,7 @@ extension CALayer {
             parentGroupPath: parentGroupPath,
             context: context)
         }
-        
+
         // Any remaining items after the last repeater are handled like normal
         else {
           try setupGroups(
@@ -199,20 +202,22 @@ extension CALayer {
         }
       }
     }
-    
+
     else {
       let groupLayers = try makeGroupLayers(
         from: items,
         parentGroup: parentGroup,
         parentGroupPath: parentGroupPath,
         context: context)
-      
+
       for groupLayer in groupLayers {
         addSublayer(groupLayer)
       }
     }
   }
-  
+
+  // MARK: Private
+
   /// Sets up this layer using the given `Repeater`
   private func setUpRepeater(
     _ repeater: Repeater,
@@ -231,7 +236,7 @@ extension CALayer {
         parentGroup: parentGroup,
         parentGroupPath: parentGroupPath,
         context: context)
-      
+
       for groupLayer in groupLayers {
         let repeatedLayer = RepeaterLayer(repeater: repeater, childLayer: groupLayer, index: index)
         addSublayer(repeatedLayer)
@@ -242,7 +247,7 @@ extension CALayer {
   /// Creates a `GroupLayer` for each `Group` in the given list of `ShapeItem`s
   ///  - Each `Group` item becomes its own `GroupLayer` sublayer.
   ///  - Other `ShapeItem` are applied to all sublayers
-  fileprivate func makeGroupLayers(
+  private func makeGroupLayers(
     from items: [ShapeItemLayer.Item],
     parentGroup: Group?,
     parentGroupPath: [String],
@@ -383,7 +388,7 @@ extension Collection {
 
     return (trueElements, falseElements)
   }
-  
+
   /// Splits this collection into an array of grouping separated by the given separator.
   /// For example, `[A, B, C]` split by `B` returns an array with two elements:
   ///  1. `(grouping: [A], trailingSeparator: B)`
@@ -392,21 +397,21 @@ extension Collection {
     -> [(grouping: [Element], trailingSeparator: Element?)]
   {
     guard !isEmpty else { return [] }
-    
+
     var groupings: [(grouping: [Element], trailingSeparator: Element?)] = []
-    
+
     for element in self {
       if groupings.isEmpty || groupings.last?.trailingSeparator != nil {
         groupings.append((grouping: [], trailingSeparator: nil))
       }
-      
+
       if separatorPredicate(element) {
         groupings[groupings.indices.last!].trailingSeparator = element
       } else {
         groupings[groupings.indices.last!].grouping.append(element)
       }
     }
-    
+
     return groupings
   }
 }
