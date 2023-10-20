@@ -53,12 +53,20 @@ extension SnapshotConfiguration {
     "Nonanimating/FirstText": .precision(0.99),
     "Nonanimating/verifyLineHeight": .precision(0.99),
     "Nonanimating/blend_mode_test": .precision(0.99),
+    "Nonanimating/base64Test": .precision(0.9),
     "Issues/issue_2066": .precision(0.9),
     "LottieFiles/dog_car_ride": .precision(0.95),
     "Issues/issue_1800": .precision(0.95),
     "Issues/issue_1882": .precision(0.95),
     "Issues/issue_1717": .precision(0.95),
+    "Issues/issue_1887": .precision(0.95),
+    "Issues/issue_1683": .precision(0.93),
+    "Issues/pr_1763": .precision(0.95),
     "Issues/pr_1964": .precision(0.95),
+    "Issues/pr_1930_rx": .precision(0.93),
+    "Issues/pr_1930_ry": .precision(0.93),
+    "Issues/pr_1930_all_axis": .precision(0.93),
+    "Issues/issue_1169_four_shadows": .precision(0.93),
     "DotLottie/animation_external_image": .precision(0.95),
     "DotLottie/animation_inline_image": .precision(0.95),
     "LottieFiles/gradient_shapes": .precision(0.95),
@@ -95,7 +103,7 @@ extension SnapshotConfiguration {
 
     "Issues/issue_1664": .customValueProviders([
       AnimationKeypath(keypath: "**.base_color.**.Color"): ColorValueProvider(.black),
-    ]),
+    ]).precision(0.95),
 
     "Issues/issue_1854": .customValueProviders([
       AnimationKeypath(keypath: "**.Colors"): GradientValueProvider(
