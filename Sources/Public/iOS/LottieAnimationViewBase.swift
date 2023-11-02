@@ -39,7 +39,11 @@ open class LottieAnimationViewBase: UIView {
 
   var screenScale: CGFloat {
     #if os(iOS) || os(tvOS)
-    UIScreen.main.scale
+    if #available(iOS 13.0, tvOS 13.0, *) {
+      return max(UITraitCollection.current.displayScale, 1)
+    } else {
+      return UIScreen.main.scale
+    }
     #else // if os(visionOS)
     // We intentionally don't check `#if os(visionOS)`, because that emits
     // a warning when building on Xcode 14 and earlier.
@@ -79,6 +83,5 @@ open class LottieAnimationViewBase: UIView {
   func animationWillEnterForeground() {
     // Implemented by subclasses.
   }
-
 }
 #endif
