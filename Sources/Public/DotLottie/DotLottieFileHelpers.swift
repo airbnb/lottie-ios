@@ -146,7 +146,7 @@ extension DotLottieFile {
     bundle: Bundle = Bundle.main,
     subdirectory: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
-    dispatchQueue: DispatchQueue = .global(),
+    dispatchQueue: DispatchQueue = .dotLottie,
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
     dispatchQueue.async {
@@ -186,7 +186,7 @@ extension DotLottieFile {
   public static func loadedFrom(
     filepath: String,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
-    dispatchQueue: DispatchQueue = .global(),
+    dispatchQueue: DispatchQueue = .dotLottie,
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
     dispatchQueue.async {
@@ -228,7 +228,7 @@ extension DotLottieFile {
     named name: String,
     bundle: Bundle = Bundle.main,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
-    dispatchQueue: DispatchQueue = .global(),
+    dispatchQueue: DispatchQueue = .dotLottie,
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
     dispatchQueue.async {
@@ -331,7 +331,7 @@ extension DotLottieFile {
   public static func loadedFrom(
     data: Data,
     filename: String,
-    dispatchQueue: DispatchQueue = .global(),
+    dispatchQueue: DispatchQueue = .dotLottie,
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
     dispatchQueue.async {
@@ -358,7 +358,7 @@ extension DotLottieFile {
   public static func loadedFrom(
     data: Data,
     filename: String,
-    dispatchQueue: DispatchQueue = .global())
+    dispatchQueue: DispatchQueue = .dotLottie)
     async throws -> DotLottieFile
   {
     try await withCheckedThrowingContinuation { continuation in
@@ -367,5 +367,12 @@ extension DotLottieFile {
       }
     }
   }
+}
 
+extension DispatchQueue {
+  /// A serial dispatch queue ensures that IO related to loading dot Lottie files don't overlap,
+  /// which can trigger file loading errors due to concurrent unzipping on a single archive.
+  public static let dotLottie = DispatchQueue(
+    label: "com.airbnb.lottie.dot-lottie",
+    qos: .userInitiated)
 }
