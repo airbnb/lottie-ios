@@ -22,11 +22,11 @@ private final class CachedImageProvider: AnimationImageProvider {
   // MARK: Public
 
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
-    if let image = imageCache.object(forKey: asset.id as NSString) {
+    if let image = imageCache.value(forKey: asset.id) {
       return image
     }
     if let image = imageProvider.imageForAsset(asset: asset) {
-      imageCache.setObject(image, forKey: asset.id as NSString)
+      imageCache.setValue(image, forKey: asset.id)
       return image
     }
     return nil
@@ -34,12 +34,18 @@ private final class CachedImageProvider: AnimationImageProvider {
 
   // MARK: Internal
 
-  let imageCache: NSCache<NSString, CGImage> = .init()
-  let imageProvider: AnimationImageProvider
-
   func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity {
     imageProvider.contentsGravity(for: asset)
   }
+
+  // MARK: Private
+
+  /// The underlying storage of this cache.
+  ///  - We use the `LRUCache` library instead of `NSCache`, because `NSCache`
+  ///    clears all cached values when the app is backgrounded instead of
+  ///    only when the app receives a memory warning notification.
+  private var imageCache = LRUCache<String, CGImage>()
+  private let imageProvider: AnimationImageProvider
 
 }
 
