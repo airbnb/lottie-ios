@@ -340,6 +340,10 @@
 		08AB055D2A61C5CC00DE86FD /* RenderingEngineOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB055C2A61C5CC00DE86FD /* RenderingEngineOption.swift */; };
 		08AB055E2A61C5CC00DE86FD /* RenderingEngineOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB055C2A61C5CC00DE86FD /* RenderingEngineOption.swift */; };
 		08AB055F2A61C5CC00DE86FD /* RenderingEngineOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB055C2A61C5CC00DE86FD /* RenderingEngineOption.swift */; };
+		08BCA8472B0E8E0B00594EEB /* LRUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCA8452B0E8E0B00594EEB /* LRUCache.swift */; };
+		08BCA8482B0E8E0B00594EEB /* LRUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCA8452B0E8E0B00594EEB /* LRUCache.swift */; };
+		08BCA8492B0E8E0B00594EEB /* LRUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCA8452B0E8E0B00594EEB /* LRUCache.swift */; };
+		08BCA84A2B0E8E0B00594EEB /* LRUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCA8452B0E8E0B00594EEB /* LRUCache.swift */; };
 		08C001F32A46150D00AB54BA /* Archive+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E02A46150D00AB54BA /* Archive+Helpers.swift */; };
 		08C001F42A46150D00AB54BA /* Archive+MemoryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E12A46150D00AB54BA /* Archive+MemoryFile.swift */; };
 		08C001F52A46150D00AB54BA /* Archive+BackingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E22A46150D00AB54BA /* Archive+BackingConfiguration.swift */; };
@@ -1181,6 +1185,8 @@
 		08AB05542A61C20400DE86FD /* ReducedMotionOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReducedMotionOption.swift; sourceTree = "<group>"; };
 		08AB05582A61C5B700DE86FD /* DecodingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingStrategy.swift; sourceTree = "<group>"; };
 		08AB055C2A61C5CC00DE86FD /* RenderingEngineOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingEngineOption.swift; sourceTree = "<group>"; };
+		08BCA8452B0E8E0B00594EEB /* LRUCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRUCache.swift; sourceTree = "<group>"; };
+		08BCA8462B0E8E0B00594EEB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		08C001E02A46150D00AB54BA /* Archive+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+Helpers.swift"; sourceTree = "<group>"; };
 		08C001E12A46150D00AB54BA /* Archive+MemoryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+MemoryFile.swift"; sourceTree = "<group>"; };
 		08C001E22A46150D00AB54BA /* Archive+BackingConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+BackingConfiguration.swift"; sourceTree = "<group>"; };
@@ -1553,12 +1559,22 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
+		08BCA8442B0E8E0B00594EEB /* LRUCache */ = {
+			isa = PBXGroup;
+			children = (
+				08BCA8452B0E8E0B00594EEB /* LRUCache.swift */,
+				08BCA8462B0E8E0B00594EEB /* README.md */,
+			);
+			path = LRUCache;
+			sourceTree = "<group>";
+		};
 		08C001DE2A4614CF00AB54BA /* EmbeddedLibraries */ = {
 			isa = PBXGroup;
 			children = (
 				08C002062A46152200AB54BA /* README.md */,
 				08C0021E2A46166400AB54BA /* EpoxyCore */,
 				08C001DF2A46150D00AB54BA /* ZipFoundation */,
+				08BCA8442B0E8E0B00594EEB /* LRUCache */,
 			);
 			path = EmbeddedLibraries;
 			sourceTree = "<group>";
@@ -2876,6 +2892,7 @@
 				080DEFFE2A95712400BE2D96 /* GradientAnimations.swift in Sources */,
 				080DF03C2A95715900BE2D96 /* Star.swift in Sources */,
 				080DEFD32A95711400BE2D96 /* Entry+Serialization.swift in Sources */,
+				08BCA84A2B0E8E0B00594EEB /* LRUCache.swift in Sources */,
 				080DF01D2A95713B00BE2D96 /* StarNode.swift in Sources */,
 				080DEFB02A9570FE00BE2D96 /* AnimatedProviding.swift in Sources */,
 				080DEFC72A95710F00BE2D96 /* EpoxyableView.swift in Sources */,
@@ -3175,6 +3192,7 @@
 				2E9C96242822F43100677516 /* KeyframeGroup.swift in Sources */,
 				2E9C96FF2822F43100677516 /* BaseAnimationLayer.swift in Sources */,
 				08E206F72A56014E002DCE17 /* Collection+Diff.swift in Sources */,
+				08BCA8472B0E8E0B00594EEB /* LRUCache.swift in Sources */,
 				08C001F62A46150D00AB54BA /* Archive.swift in Sources */,
 				2E9C96AB2822F43100677516 /* GradientStrokeNode.swift in Sources */,
 				08E2071B2A56014E002DCE17 /* EpoxySwiftUIHostingView.swift in Sources */,
@@ -3488,6 +3506,7 @@
 				2EAF5AC327A0798700E00531 /* BundleImageProvider.swift in Sources */,
 				08AB055A2A61C5B700DE86FD /* DecodingStrategy.swift in Sources */,
 				08E207492A56014E002DCE17 /* AnimatedProviding.swift in Sources */,
+				08BCA8482B0E8E0B00594EEB /* LRUCache.swift in Sources */,
 				2E9C976C2822F43100677516 /* InterpolatableExtensions.swift in Sources */,
 				2E9C96EE2822F43100677516 /* ShapeItemLayer.swift in Sources */,
 				08C002D62A46196300AB54BA /* Data+CompressionDeprecated.swift in Sources */,
@@ -3775,6 +3794,7 @@
 				2E9C97012822F43100677516 /* BaseAnimationLayer.swift in Sources */,
 				2E9C96AD2822F43100677516 /* GradientStrokeNode.swift in Sources */,
 				08E206F92A56014E002DCE17 /* Collection+Diff.swift in Sources */,
+				08BCA8492B0E8E0B00594EEB /* LRUCache.swift in Sources */,
 				2EAF5AC427A0798700E00531 /* BundleImageProvider.swift in Sources */,
 				08E2071D2A56014E002DCE17 /* EpoxySwiftUIHostingView.swift in Sources */,
 				2E9C976D2822F43100677516 /* InterpolatableExtensions.swift in Sources */,

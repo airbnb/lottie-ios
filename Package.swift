@@ -17,5 +17,6 @@ let package = Package(
         "Private/EmbeddedLibraries/README.md",
         "Private/EmbeddedLibraries/ZipFoundation/README.md",
         "Private/EmbeddedLibraries/EpoxyCore/README.md",
+        "Private/EmbeddedLibraries/LRUCache/README.md",
       ]),
   ])
