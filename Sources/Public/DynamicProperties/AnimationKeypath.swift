@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 2/4/19.
 //
 
-import Foundation
-
 /// `AnimationKeypath` is an object that describes a keypath search for nodes in the
 /// animation JSON. `AnimationKeypath` matches views and properties inside of `LottieAnimationView`
 /// to their backing `LottieAnimation` model by name.

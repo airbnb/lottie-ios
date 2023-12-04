@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/24/19.
 //
 
-import Foundation
 import QuartzCore
 
 // MARK: - MainThreadAnimationLayer

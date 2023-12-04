@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
-import Foundation
-
 /// A layer that holds vector shape objects.
 final class ShapeLayerModel: LayerModel {
 

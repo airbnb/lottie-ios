@@ -5,9 +5,6 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
-import CoreGraphics
-import Foundation
-
 // MARK: - AnyValueProvider
 
 /// `AnyValueProvider` is a protocol that return animation data for a property at a

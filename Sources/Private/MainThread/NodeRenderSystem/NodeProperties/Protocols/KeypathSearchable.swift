@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 2/4/19.
 //
 
-import Foundation
 import QuartzCore
 
 /// Protocol that provides keypath search functionality. Returns all node properties associated with a keypath.

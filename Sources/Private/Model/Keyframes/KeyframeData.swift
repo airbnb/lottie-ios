@@ -5,9 +5,6 @@
 //  Created by Brandon Withrow on 1/7/19.
 //
 
-import CoreGraphics
-import Foundation
-
 // MARK: - KeyframeData
 
 /// A generic class used to parse and remap keyframe json.

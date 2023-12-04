@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/21/19.
 //
 
-import Foundation
 import QuartzCore
 
 // MARK: - NodePropertyMap

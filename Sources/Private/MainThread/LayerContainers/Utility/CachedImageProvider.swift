@@ -1,8 +1,6 @@
 // Created by Jianjun Wu on 2022/5/12.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
-import CoreGraphics
-import Foundation
 import QuartzCore
 
 // MARK: - CachedImageProvider

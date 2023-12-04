@@ -3,7 +3,6 @@
 //  Lottie
 //
 
-import Foundation
 import QuartzCore
 
 // MARK: - LottieAnimationLayer

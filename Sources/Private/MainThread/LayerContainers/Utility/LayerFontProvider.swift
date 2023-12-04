@@ -6,8 +6,6 @@
 //  Copyright © 2020 YurtvilleProds. All rights reserved.
 //
 
-import Foundation
-
 /// Connects a LottieFontProvider to a group of text layers
 final class LayerFontProvider {
 

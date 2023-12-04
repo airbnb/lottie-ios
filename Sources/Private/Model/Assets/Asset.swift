@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/9/19.
 //
 
-import Foundation
-
 // MARK: - Asset
 
 public class Asset: Codable, DictionaryInitializable {
