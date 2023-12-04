@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/11/19.
 //
 
-import CoreGraphics
 import Foundation
 
 /// A path section, containing one point and its length to the previous point.

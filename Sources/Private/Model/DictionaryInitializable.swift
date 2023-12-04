@@ -5,8 +5,6 @@
 //  Created by Marcelo Fabri on 5/5/22.
 //
 
-import Foundation
-
 // MARK: - InitializableError
 
 enum InitializableError: Error {

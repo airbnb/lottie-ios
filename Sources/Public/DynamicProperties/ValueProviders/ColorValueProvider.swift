@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 2/4/19.
 //
 
-import CoreGraphics
 import Foundation
 
 // MARK: - ColorValueProvider

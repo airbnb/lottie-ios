@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/7/19.
 //
 
-import Foundation
-
 // MARK: - CoordinateSpace
 
 public enum CoordinateSpace: Int, Codable, Sendable {

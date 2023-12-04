@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/14/19.
 //
 
-import CoreGraphics
 import Foundation
 
 /// A collection of BezierPath objects that can be trimmed and added.

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import QuartzCore
 
 // MARK: - RoundedCornersProperties
 

@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/16/19.
 //
 
-import CoreGraphics
 import Foundation
 
 // MARK: - ShapeNodeProperties

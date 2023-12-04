@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
-import Foundation
-
 final class Rectangle: ShapeItem {
 
   // MARK: Lifecycle

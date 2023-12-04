@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 2/6/19.
 //
 
-import CoreGraphics
 import Foundation
 
 /// Defines animation time in Frames (Seconds * Framerate).

@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/18/19.
 //
 
-import Foundation
 import QuartzCore
 
 /// The layer responsible for rendering shape objects

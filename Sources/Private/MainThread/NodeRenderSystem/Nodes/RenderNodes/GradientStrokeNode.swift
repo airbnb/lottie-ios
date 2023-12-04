@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/23/19.
 //
 
-import CoreGraphics
 import Foundation
 
 // MARK: - GradientStrokeProperties

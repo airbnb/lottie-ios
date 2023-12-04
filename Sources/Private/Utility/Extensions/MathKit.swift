@@ -6,7 +6,6 @@
 //
 // From https://github.com/buba447/UIToolBox
 
-import CoreGraphics
 import Foundation
 
 extension Int {

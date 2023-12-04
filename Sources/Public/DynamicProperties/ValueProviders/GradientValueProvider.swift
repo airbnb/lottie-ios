@@ -5,7 +5,6 @@
 //  Created by Enrique Bermúdez on 10/27/19.
 //
 
-import CoreGraphics
 import Foundation
 
 // MARK: - GradientValueProvider

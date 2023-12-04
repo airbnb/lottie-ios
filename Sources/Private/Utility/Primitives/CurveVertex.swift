@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/11/19.
 //
 
-import CoreGraphics
 import Foundation
 
 /// A single vertex with an in and out tangent

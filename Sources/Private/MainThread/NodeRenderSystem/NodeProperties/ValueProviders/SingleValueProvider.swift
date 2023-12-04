@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import QuartzCore
 
 /// Returns a value for every frame.
 final class SingleValueProvider<ValueType: AnyInterpolatable>: ValueProvider {

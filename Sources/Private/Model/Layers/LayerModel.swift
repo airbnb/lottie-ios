@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/7/19.
 //
 
-import Foundation
-
 // MARK: - LayerType + ClassFamily
 
 /// Used for mapping a heterogeneous list to classes for parsing.

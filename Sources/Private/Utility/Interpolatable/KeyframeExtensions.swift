@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/14/19.
 //
 
-import CoreGraphics
 import Foundation
 
 extension Keyframe where T: AnyInterpolatable {

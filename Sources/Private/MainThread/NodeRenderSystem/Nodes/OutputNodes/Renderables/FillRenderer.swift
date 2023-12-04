@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
-import CoreGraphics
-import Foundation
 import QuartzCore
 
 extension FillRule {

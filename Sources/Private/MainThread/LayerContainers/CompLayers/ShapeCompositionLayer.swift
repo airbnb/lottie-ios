@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/22/19.
 //
 
-import CoreGraphics
 import Foundation
 
 /// A CompositionLayer responsible for initializing and rendering shapes

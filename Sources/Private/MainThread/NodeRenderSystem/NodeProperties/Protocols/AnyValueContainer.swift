@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
-import CoreGraphics
 import Foundation
 
 /// The container for the value of a property.

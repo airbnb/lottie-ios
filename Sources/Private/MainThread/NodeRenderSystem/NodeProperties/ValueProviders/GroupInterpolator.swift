@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/22/19.
 //
 
-import CoreGraphics
 import Foundation
 
 /// A value provider that produces an array of values from an array of Keyframe Interpolators

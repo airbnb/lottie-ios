@@ -5,11 +5,6 @@
 //  Created by Brandon Withrow on 1/25/19.
 //
 
-import CoreGraphics
-import CoreText
-import Foundation
-import QuartzCore
-
 /// Needed for NSMutableParagraphStyle...
 #if os(OSX)
 import AppKit

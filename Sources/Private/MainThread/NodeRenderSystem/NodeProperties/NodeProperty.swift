@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
-import CoreGraphics
 import Foundation
 
 /// A node property that holds a reference to a T ValueProvider and a T ValueContainer.

@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/17/19.
 //
 
-import Foundation
-
 // MARK: - PathNode
 
 protocol PathNode {

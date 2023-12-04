@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
-import Foundation
 import QuartzCore
 
 /// A rendered for a Path Fill
