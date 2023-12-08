@@ -39,3 +39,5 @@ When doing this, follow these steps:
 
  5. Change all of the `public` symbols defined in the module to instead be `internal`
     to prevent Lottie from exposing any APIs from other libraries.
+    
+ 6. If the dependency provides a privacy manifest, incorporate content from that dependency's privacy manifest into Lottie's privacy manifest.
