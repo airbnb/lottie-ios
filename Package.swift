@@ -18,5 +18,6 @@ let package = Package(
         "Private/EmbeddedLibraries/ZipFoundation/README.md",
         "Private/EmbeddedLibraries/EpoxyCore/README.md",
         "Private/EmbeddedLibraries/LRUCache/README.md",
-      ]),
+      ],
+      resources: [.copy("../PrivacyInfo.xcprivacy")]),
   ])
