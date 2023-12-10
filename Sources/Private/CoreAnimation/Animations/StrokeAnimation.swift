@@ -1,7 +1,6 @@
 // Created by Cal Stephens on 2/10/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
-import Foundation
 import QuartzCore
 
 // MARK: - StrokeShapeItem

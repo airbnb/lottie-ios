@@ -11,8 +11,6 @@ import UIKit
 import AppKit
 #endif
 
-import Foundation
-
 // MARK: - AnimatedControl
 
 /// Lottie comes prepacked with a two Animated Controls, `AnimatedSwitch` and

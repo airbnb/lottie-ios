@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/28/19.
 //
 
-import Foundation
 import QuartzCore
 
 /// A layer that inverses the alpha output of its input layer.

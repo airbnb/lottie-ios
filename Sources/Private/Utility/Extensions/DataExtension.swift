@@ -5,7 +5,6 @@
 //  Created by René Fouquet on 03.05.21.
 //
 
-import Foundation
 #if canImport(UIKit)
 import UIKit
 #elseif canImport(AppKit)

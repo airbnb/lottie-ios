@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/7/19.
 //
 
-import Foundation
-
 /// The animatable transform for a layer. Controls position, rotation, scale, and opacity.
 final class Transform: Codable, DictionaryInitializable {
 

@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/25/19.
 //
 
-import Foundation
 import QuartzCore
 
 final class PreCompositionLayer: CompositionLayer {

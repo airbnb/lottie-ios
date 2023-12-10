@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
-import Foundation
-
 // MARK: - GradientType
 
 enum GradientType: Int, Codable, Sendable {

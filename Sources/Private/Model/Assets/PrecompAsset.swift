@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/9/19.
 //
 
-import Foundation
-
 final class PrecompAsset: Asset {
 
   // MARK: Lifecycle

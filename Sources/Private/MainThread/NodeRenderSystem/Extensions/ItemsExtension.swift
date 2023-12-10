@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/18/19.
 //
 
-import Foundation
-
 // MARK: - NodeTree
 
 final class NodeTree {

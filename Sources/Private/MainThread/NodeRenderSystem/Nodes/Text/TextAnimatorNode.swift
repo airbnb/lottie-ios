@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 2/19/19.
 //
 
-import CoreGraphics
-import Foundation
 import QuartzCore
 
 // MARK: - TextAnimatorNodeProperties

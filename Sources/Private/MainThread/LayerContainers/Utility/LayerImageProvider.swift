@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/25/19.
 //
 
-import Foundation
-
 /// Connects a LottieImageProvider to a group of image layers
 final class LayerImageProvider {
 

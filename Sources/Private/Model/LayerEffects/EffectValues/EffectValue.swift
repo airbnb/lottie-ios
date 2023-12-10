@@ -1,8 +1,6 @@
 // Created by Cal Stephens on 8/15/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
-import Foundation
-
 // MARK: - EffectValueType
 
 /// https://lottiefiles.github.io/lottie-docs/schema/#/$defs/effect-values

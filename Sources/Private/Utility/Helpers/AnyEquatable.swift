@@ -1,8 +1,6 @@
 // Created by miguel_jimenez on 8/2/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
-import Foundation
-
 // MARK: - AnyEquatable
 
 struct AnyEquatable {

@@ -5,7 +5,6 @@
 //  Created by Brandon Withrow on 1/22/19.
 //
 
-import Foundation
 import QuartzCore
 
 // MARK: - CompositionLayer

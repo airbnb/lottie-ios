@@ -5,8 +5,6 @@
 //  Created by Brandon Withrow on 1/18/19.
 //
 
-import Foundation
-
 extension AnimatorNode {
 
   func printNodeTree() {
