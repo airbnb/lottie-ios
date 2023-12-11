@@ -17,9 +17,6 @@ class SnapshotTests: XCTestCase {
 
   // MARK: Internal
 
-  /// The progress percentage values that are snapshot by default
-  static let defaultProgressPercentageValues: [Double] = [0, 0.25, 0.5, 0.75, 1.0]
-
   /// Snapshots all of the sample animation JSON files visible to this test target
   func testMainThreadRenderingEngine() async throws {
     try await compareSampleSnapshots(configuration: LottieConfiguration(renderingEngine: .mainThread))
@@ -106,6 +103,9 @@ class SnapshotTests: XCTestCase {
   }
 
   // MARK: Private
+
+  /// The progress percentage values that are snapshot by default
+  private static let defaultProgressPercentageValues: [Double] = [0, 0.25, 0.5, 0.75, 1.0]
 
   /// All of the `progressPercentagesToSnapshot` values used in the snapshot tests
   private let knownProgressPercentageValues: Set<Double> = Set(Samples.sampleAnimationNames.flatMap {
