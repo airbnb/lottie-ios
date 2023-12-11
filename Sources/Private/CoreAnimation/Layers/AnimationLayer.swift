@@ -51,6 +51,10 @@ struct LayerAnimationContext {
   ///  - Used for `CoreAnimationLayer.logHierarchyKeypaths()` and `allHierarchyKeypaths()`
   var recordHierarchyKeypath: ((String) -> Void)?
 
+  /// A closure that remaps the given frame in the child layer's local time to a frame
+  /// in the animation's overall global time
+  private(set) var timeRemapping: ((AnimationFrameTime) -> AnimationFrameTime) = { $0 }
+
   /// The duration of the animation
   var animationDuration: AnimationFrameTime {
     // Normal animation playback (like when looping) skips the last frame.
@@ -65,10 +69,6 @@ struct LayerAnimationContext {
 
     return Double(animationEndFrame - animation.startFrame) / animation.framerate
   }
-
-  /// A closure that remaps the given frame in the child layer's local time to a frame
-  /// in the animation's overall global time
-  private(set) var timeRemapping: ((AnimationFrameTime) -> AnimationFrameTime) = { $0 }
 
   /// Adds the given component string to the `AnimationKeypath` stored
   /// that describes the current path being configured by this context value

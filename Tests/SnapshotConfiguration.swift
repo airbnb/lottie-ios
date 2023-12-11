@@ -164,7 +164,7 @@ extension SnapshotConfiguration {
         4.999, // Should show frame 4
         5.0, // Should show frame 5
         9.9999999, // Should show frame 9
-        10 // Should show frame 10
+        10, // Should show frame 10
       ]),
 
     // Test cases for `AnimationFontProvider`
