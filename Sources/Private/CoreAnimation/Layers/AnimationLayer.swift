@@ -51,6 +51,21 @@ struct LayerAnimationContext {
   ///  - Used for `CoreAnimationLayer.logHierarchyKeypaths()` and `allHierarchyKeypaths()`
   var recordHierarchyKeypath: ((String) -> Void)?
 
+  /// The duration of the animation
+  var animationDuration: AnimationFrameTime {
+    // Normal animation playback (like when looping) skips the last frame.
+    // However when the animation is paused, we need to be able to render the final frame.
+    // To allow this we have to extend the length of the animation by one frame.
+    let animationEndFrame: AnimationFrameTime
+    if timingConfiguration.speed == 0 {
+      animationEndFrame = animation.endFrame + 1
+    } else {
+      animationEndFrame = animation.endFrame
+    }
+
+    return Double(animationEndFrame - animation.startFrame) / animation.framerate
+  }
+
   /// A closure that remaps the given frame in the child layer's local time to a frame
   /// in the animation's overall global time
   private(set) var timeRemapping: ((AnimationFrameTime) -> AnimationFrameTime) = { $0 }
@@ -66,7 +81,8 @@ struct LayerAnimationContext {
   /// The `AnimationProgressTime` for the given `AnimationFrameTime` within this layer,
   /// accounting for the `timeRemapping` applied to this layer
   func progressTime(for frame: AnimationFrameTime) -> AnimationProgressTime {
-    animation.progressTime(forFrame: timeRemapping(frame), clamped: false)
+    let animationFrameCount = animationDuration * animation.framerate
+    return (timeRemapping(frame) - animation.startFrame) / animationFrameCount
   }
 
   /// The real-time `TimeInterval` for the given `AnimationFrameTime` within this layer,
