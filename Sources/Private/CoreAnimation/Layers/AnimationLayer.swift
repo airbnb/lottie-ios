@@ -55,6 +55,21 @@ struct LayerAnimationContext {
   /// in the animation's overall global time
   private(set) var timeRemapping: ((AnimationFrameTime) -> AnimationFrameTime) = { $0 }
 
+  /// The duration of the animation
+  var animationDuration: AnimationFrameTime {
+    // Normal animation playback (like when looping) skips the last frame.
+    // However when the animation is paused, we need to be able to render the final frame.
+    // To allow this we have to extend the length of the animation by one frame.
+    let animationEndFrame: AnimationFrameTime
+    if timingConfiguration.speed == 0 {
+      animationEndFrame = animation.endFrame + 1
+    } else {
+      animationEndFrame = animation.endFrame
+    }
+
+    return Double(animationEndFrame - animation.startFrame) / animation.framerate
+  }
+
   /// Adds the given component string to the `AnimationKeypath` stored
   /// that describes the current path being configured by this context value
   func addingKeypathComponent(_ component: String) -> LayerAnimationContext {
@@ -66,7 +81,8 @@ struct LayerAnimationContext {
   /// The `AnimationProgressTime` for the given `AnimationFrameTime` within this layer,
   /// accounting for the `timeRemapping` applied to this layer
   func progressTime(for frame: AnimationFrameTime) -> AnimationProgressTime {
-    animation.progressTime(forFrame: timeRemapping(frame), clamped: false)
+    let animationFrameCount = animationDuration * animation.framerate
+    return (timeRemapping(frame) - animation.startFrame) / animationFrameCount
   }
 
   /// The real-time `TimeInterval` for the given `AnimationFrameTime` within this layer,

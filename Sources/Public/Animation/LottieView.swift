@@ -426,7 +426,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   ///    a state update every frame.
   ///  - If the binding is `nil`, the `TimelineView` will be paused and no updates will occur to the binding.
   @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
-  public func getRealtimeAnimationFrame(_ realtimeAnimationFrame: Binding<AnimationProgressTime>?) -> some View {
+  public func getRealtimeAnimationFrame(_ realtimeAnimationFrame: Binding<AnimationFrameTime>?) -> some View {
     TimelineView(.animation(paused: realtimeAnimationFrame == nil)) { _ in
       configure { view in
         if let realtimeAnimationFrame = realtimeAnimationFrame {

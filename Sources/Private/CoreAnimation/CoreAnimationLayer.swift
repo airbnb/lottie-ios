@@ -386,7 +386,10 @@ extension CoreAnimationLayer: RootAnimationLayer {
       let requiredAnimationConfiguration = AnimationConfiguration(
         animationContext: AnimationContext(
           playFrom: animation.startFrame,
-          playTo: animation.endFrame,
+          // Normal animation playback (like when looping) skips the last frame.
+          // However when the animation is paused, we need to be able to render the final frame.
+          // To allow this we have to extend the length of the animation by one frame.
+          playTo: animation.endFrame + 1,
           closure: nil),
         timingConfiguration: CAMediaTimingConfiguration(speed: 0))
 

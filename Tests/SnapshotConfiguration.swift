@@ -34,8 +34,11 @@ struct SnapshotConfiguration {
   ///    the code supporting the automatic engine.
   var testWithAutomaticEngine = false
 
-  /// Whether or not this snapshot doesn't animate, so only needs to be snapshot once.
+  /// Custom progress values (from 0 to 1) that should be screenshot
   var customProgressValuesToSnapshot: [Double]?
+
+  /// Custom frame values that should be screenshot
+  var customFramesToSnapshot: [Double]?
 
   /// The maximum size to allow for the resulting snapshot image
   var maxSnapshotDimension: CGFloat = 500
@@ -156,6 +159,14 @@ extension SnapshotConfiguration {
       ]))
       .progressValuesToSnapshot([0.3, 0.75]),
 
+    "Issues/issue_2209": SnapshotConfiguration.default
+      .framesToSnapshot([
+        4.999, // Should show frame 4
+        5.0, // Should show frame 5
+        9.9999999, // Should show frame 9
+        10, // Should show frame 10
+      ]),
+
     // Test cases for `AnimationFontProvider`
     "Nonanimating/Text_Glyph": .customFontProvider(HardcodedFontProvider(font: UIFont(name: "Chalkduster", size: 36)!)),
 
@@ -252,6 +263,13 @@ extension SnapshotConfiguration {
   func progressValuesToSnapshot(_ progressValuesToSnapshot: [Double]) -> SnapshotConfiguration {
     var copy = self
     copy.customProgressValuesToSnapshot = progressValuesToSnapshot
+    return copy
+  }
+
+  /// A copy of this `SnapshotConfiguration` with `customFramesToSnapshot` set to the given value
+  func framesToSnapshot(_ framesToSnapshot: [Double]) -> SnapshotConfiguration {
+    var copy = self
+    copy.customFramesToSnapshot = framesToSnapshot
     return copy
   }
 

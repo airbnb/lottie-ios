@@ -28,7 +28,11 @@ extension CALayer {
     animation.keyTimes = [
       NSNumber(value: 0.0),
       NSNumber(value: max(Double(context.progressTime(for: inFrame)), 0)),
-      NSNumber(value: min(Double(context.progressTime(for: outFrame)), 1)),
+      // Anything visible during the last frame should stay visible until the absolute end of the animation.
+      //  - This matches the behavior of the main thread rendering engine.
+      context.timeRemapping(outFrame) == context.animation.endFrame
+        ? NSNumber(value: Double(1.0))
+        : NSNumber(value: min(Double(context.progressTime(for: outFrame)), 1)),
       NSNumber(value: 1.0),
     ]
 

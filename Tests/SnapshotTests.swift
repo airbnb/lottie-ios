@@ -55,6 +55,12 @@ class SnapshotTests: XCTestCase {
           with: "")
       }
 
+      for frame in knownFrameValues {
+        animationName = animationName.replacingOccurrences(
+          of: "-Frame-\(Int(frame)).png",
+          with: "")
+      }
+
       animationName = animationName.replacingOccurrences(of: "-", with: "/")
 
       XCTAssert(
@@ -98,11 +104,25 @@ class SnapshotTests: XCTestCase {
 
   // MARK: Private
 
-  /// All of the `progressPercentagesToSnapshot` values used in the snapshot tests
-  private let knownProgressPercentageValues = Set([0, 0.25, 0.3, 0.5, 0.75, 1.0])
+  /// The progress percentage values that are snapshot by default
+  private static let defaultProgressPercentageValues: [Double] = [0, 0.25, 0.5, 0.75, 1.0]
 
-  /// `currentProgress` percentages that should be snapshot in `compareSampleSnapshots`
-  private func progressPercentagesToSnapshot(for snapshotConfiguration: SnapshotConfiguration) -> [Double] {
+  /// All of the `progressPercentagesToSnapshot` values used in the snapshot tests
+  private let knownProgressPercentageValues: Set<Double> = Set(Samples.sampleAnimationNames.flatMap {
+    SnapshotConfiguration.forSample(named: $0).customProgressValuesToSnapshot ?? defaultProgressPercentageValues
+  })
+
+  /// All of the `customFramesToSnapshot` values used in the snapshot tests
+  private let knownFrameValues: Set<Double> = Set(Samples.sampleAnimationNames.flatMap {
+    SnapshotConfiguration.forSample(named: $0).customFramesToSnapshot ?? []
+  })
+
+  /// Progress values or frames that should be snapshot in `compareSampleSnapshots`
+  private func pausedStatesToSnapshot(for snapshotConfiguration: SnapshotConfiguration) -> [LottiePlaybackMode.PausedState] {
+    if let customFramesToSnapshot = snapshotConfiguration.customFramesToSnapshot {
+      return customFramesToSnapshot.map { .frame($0) }
+    }
+
     if let customProgressValuesToSnapshot = snapshotConfiguration.customProgressValuesToSnapshot {
       for customProgressValue in customProgressValuesToSnapshot {
         assert(
@@ -110,10 +130,10 @@ class SnapshotTests: XCTestCase {
           "All progress values being used must be listed in `knownProgressPercentageValues`")
       }
 
-      return customProgressValuesToSnapshot
+      return customProgressValuesToSnapshot.map { .progress($0) }
     }
 
-    return [0, 0.25, 0.5, 0.75, 1.0]
+    return SnapshotTests.defaultProgressPercentageValues.map { .progress($0) }
   }
 
   /// Captures snapshots of `sampleAnimationURLs` and compares them to the snapshot images stored on disk
@@ -126,7 +146,7 @@ class SnapshotTests: XCTestCase {
 
     #if os(iOS)
     for sampleAnimationName in Samples.sampleAnimationNames {
-      for percent in progressPercentagesToSnapshot(for: SnapshotConfiguration.forSample(named: sampleAnimationName)) {
+      for pauseState in pausedStatesToSnapshot(for: SnapshotConfiguration.forSample(named: sampleAnimationName)) {
         guard SnapshotConfiguration.forSample(named: sampleAnimationName).shouldSnapshot(using: configuration) else {
           continue
         }
@@ -137,14 +157,28 @@ class SnapshotTests: XCTestCase {
             configuration: configuration)
         else { continue }
 
-        animationView.currentProgress = CGFloat(percent)
+        animationView.setPlaybackMode(.paused(at: pauseState))
+
+        let pauseStateDescription: String
+        switch pauseState {
+        case .progress(let percent):
+          pauseStateDescription = "\(Int(percent * 100))%"
+        case .frame(let frame):
+          pauseStateDescription = "Frame \(Int(frame))"
+        case .time(let time):
+          pauseStateDescription = "Time \(time))"
+        case .marker(let markerName, position: _):
+          pauseStateDescription = markerName
+        case .currentFrame:
+          pauseStateDescription = "Current Frame"
+        }
 
         assertSnapshot(
           matching: animationView,
           as: .imageOfPresentationLayer(
             precision: SnapshotConfiguration.forSample(named: sampleAnimationName).precision,
             perceptualPrecision: 0.97),
-          named: "\(sampleAnimationName) (\(Int(percent * 100))%)",
+          named: "\(sampleAnimationName) (\(pauseStateDescription))",
           testName: testName)
       }
     }
