@@ -88,16 +88,17 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install self-signing certificate
         env:
-          LOTTIE_IOS_SIGNING_CERTIFICATE_BASE_64: ${{ secrets.LOTTIE_IOS_SIGNING_CERTIFICATE_BASE_64 }}
+          LOTTIE_SIGNING_CERTIFICATE_BASE_64: ${{ secrets.LOTTIE_SIGNING_CERTIFICATE_BASE_64 }}
+          LOTTIE_SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.LOTTIE_SIGNING_CERTIFICATE_PASSWORD }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
-          # Adapted from https://docs.github.com/en/actions/deployment/deploying-xcode-applications/installing-an-apple-certificate-on-macos-runners-for-xcode-development
+          # From https://docs.github.com/en/actions/deployment/deploying-xcode-applications/installing-an-apple-certificate-on-macos-runners-for-xcode-development
           # create variables
-          CERTIFICATE_PATH=$RUNNER_TEMP/Lottie_iOS.cer
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
-          # import certificate from secrets
-          echo -n "$LOTTIE_IOS_SIGNING_CERTIFICATE_BASE_64" | base64 --decode -o $CERTIFICATE_PATH
+          # import certificate and provisioning profile from secrets
+          echo -n "$LOTTIE_SIGNING_CERTIFICATE_BASE_64" | base64 --decode -o $CERTIFICATE_PATH
 
           # create temporary keychain
           security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
@@ -105,17 +106,23 @@ jobs:
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
           # import certificate to keychain
-          echo "Importing Lottie iOS self-signing certificate into keychain..."
-          security import $CERTIFICATE_PATH -k $KEYCHAIN_PATH
+          echo "Importing 'Lottie iOS Code Signing' self-signing certificate into keychain..."
+          security import $CERTIFICATE_PATH -P "$LOTTIE_SIGNING_CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
           echo "Successfully imported certificate."
       - uses: ./.github/actions/setup
         with:
           xcode: ${{ matrix.xcode }}
       - name: Build XCFramework
-        # Once there is a production Xcode version with the visionOS SDK, we will 
-        # need to also build an XCFramework using that version but without `SKIP_VISION_OS=true`
-        run: SKIP_VISION_OS=true bundle exec rake build:xcframework[Lottie-Xcode-${{ matrix.xcode }}]
+        run: |
+          # Once there is a production Xcode version with the visionOS SDK, we will 
+          # need to also build an XCFramework using that version but without `SKIP_VISION_OS=true`.
+          SKIP_VISION_OS=true 
+
+          # Codesign using the unlocked custom keychain created in the previous step.
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+
+          bundle exec rake build:xcframework[Lottie-Xcode-${{ matrix.xcode }}]
       - name: Upload XCFramework
         uses: actions/upload-artifact@v2
         with:

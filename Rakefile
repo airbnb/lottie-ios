@@ -104,14 +104,24 @@ namespace :build do
     xcodebuild(xcframeworkInvocation.join(" "))
 
     Dir.chdir('.build/archives') do
-      # Codesign the XCFramework using the "Lottie iOS" certificate installed as a secret in the lottie-ios repo.
-      # First we check to make sure the certificate is installed. In GitHub actions CI, only jobs run by contibutors have access
-      # to repo secrets, so PR jobs from external contributors won't have access to this certificate.
+      # Codesign the XCFramework using the "Lottie iOS Code Signing" certificate, which should be installed in the keychain.
+      #  - Check to make sure the certificate is installed before attemtping to codesign.
+      #  - In GitHub actions CI, only jobs run by contibutors have access to repo secrets,
+      #    so PR jobs from external contributors won't have access to this certificate.
+      #    In that case we skip codesigning so the job doesn't fail.
       puts "Checking if signing certificate is installed..."
-      `security find-certificate -c 'Lottie iOS'`
+      `security find-certificate -c 'Lottie iOS Code Signing'`
       if $?.success?
         puts "Signing certificate is installed. Code signing Lottie.xcframework."
-        sh 'codesign --timestamp -v --sign "Lottie iOS" Lottie.xcframework'
+
+        # In GitHub actions the certificate is in a custom keychain, which we have to pass when codesigning.
+        custom_keychain_path = ENV['KEYCHAIN_PATH']
+        if !custom_keychain_path.nil? && !custom_keychain_path.empty?
+          sh 'codesign --timestamp -v --sign "Lottie iOS Code Signing" --keychain ' + custom_keychain_path + ' Lottie.xcframework'
+        else
+          sh 'codesign --timestamp -v --sign "Lottie iOS Code Signing" Lottie.xcframework '
+        end
+
       else
         puts "Signing certificate is not installed. Lottie.xcframework will not be code signed."
       end
