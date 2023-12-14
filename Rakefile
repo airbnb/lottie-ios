@@ -113,15 +113,7 @@ namespace :build do
       `security find-certificate -c 'Lottie iOS Code Signing'`
       if $?.success?
         puts "Signing certificate is installed. Code signing Lottie.xcframework."
-
-        # In GitHub actions the certificate is in a custom keychain, which we have to pass when codesigning.
-        custom_keychain_path = ENV['KEYCHAIN_PATH']
-        if !custom_keychain_path.nil? && !custom_keychain_path.empty?
-          sh 'codesign --timestamp -v --sign "Lottie iOS Code Signing" --keychain ' + custom_keychain_path + ' Lottie.xcframework'
-        else
-          sh 'codesign --timestamp -v --sign "Lottie iOS Code Signing" Lottie.xcframework '
-        end
-
+        sh 'codesign --timestamp -v --sign "Lottie iOS Code Signing" Lottie.xcframework '
       else
         puts "Signing certificate is not installed. Lottie.xcframework will not be code signed."
       end
