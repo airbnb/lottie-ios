@@ -69,44 +69,60 @@ namespace :build do
 
     # Build the framework for each supported platform, including simulators
     xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (iOS)" -destination generic/platform=iOS -archivePath ".build/archives/Lottie_iOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
-    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (iOS)" -destination "generic/platform=iOS Simulator" -archivePath ".build/archives/Lottie_iOS_Simulator" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
-    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (iOS)" -destination "generic/platform=macOS,variant=Mac Catalyst" -archivePath ".build/archives/Lottie_Mac_Catalyst" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
-    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (macOS)" -destination generic/platform=macOS -archivePath ".build/archives/Lottie_macOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
-    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (tvOS)" -destination generic/platform=tvOS -archivePath ".build/archives/Lottie_tvOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
-    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (tvOS)" -destination "generic/platform=tvOS Simulator" -archivePath ".build/archives/Lottie_tvOS_Simulator" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
 
-    ifVisionOSEnabled {
-      xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (visionOS)" -destination generic/platform=visionOS -archivePath ".build/archives/Lottie_visionOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
-      xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (visionOS)" -destination "generic/platform=visionOS Simulator" -archivePath ".build/archives/Lottie_visionOS_Simulator" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
-    }
+    # TODO: REVERT. Just making the job shorter to help debug more quickly.
+    #xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (iOS)" -destination "generic/platform=iOS Simulator" -archivePath ".build/archives/Lottie_iOS_Simulator" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
+    #xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (iOS)" -destination "generic/platform=macOS,variant=Mac Catalyst" -archivePath ".build/archives/Lottie_Mac_Catalyst" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
+    #xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (macOS)" -destination generic/platform=macOS -archivePath ".build/archives/Lottie_macOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
+    #xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (tvOS)" -destination generic/platform=tvOS -archivePath ".build/archives/Lottie_tvOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
+    #xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (tvOS)" -destination "generic/platform=tvOS Simulator" -archivePath ".build/archives/Lottie_tvOS_Simulator" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
+
+    #ifVisionOSEnabled {
+    #  xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (visionOS)" -destination generic/platform=visionOS -archivePath ".build/archives/Lottie_visionOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
+    #  xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (visionOS)" -destination "generic/platform=visionOS Simulator" -archivePath ".build/archives/Lottie_visionOS_Simulator" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO')
+    #}
 
     # Combine all of the platforms into a single XCFramework
     xcframeworkInvocation = [
       '-create-xcframework',
       '-framework .build/archives/Lottie_iOS.xcarchive/Products/Library/Frameworks/Lottie.framework',
-      '-framework .build/archives/Lottie_iOS_Simulator.xcarchive/Products/Library/Frameworks/Lottie.framework',
-      '-framework .build/archives/Lottie_Mac_Catalyst.xcarchive/Products/Library/Frameworks/Lottie.framework',
-      '-framework .build/archives/Lottie_tvOS.xcarchive/Products/Library/Frameworks/Lottie.framework',
-      '-framework .build/archives/Lottie_tvOS_Simulator.xcarchive/Products/Library/Frameworks/Lottie.framework',
-      '-framework .build/archives/Lottie_macOS.xcarchive/Products/Library/Frameworks/Lottie.framework',
+      # TODO: REVERT. Just making the job shorter to help debug more quickly.
+      #'-framework .build/archives/Lottie_iOS_Simulator.xcarchive/Products/Library/Frameworks/Lottie.framework',
+      #'-framework .build/archives/Lottie_Mac_Catalyst.xcarchive/Products/Library/Frameworks/Lottie.framework',
+      #'-framework .build/archives/Lottie_tvOS.xcarchive/Products/Library/Frameworks/Lottie.framework',
+      #'-framework .build/archives/Lottie_tvOS_Simulator.xcarchive/Products/Library/Frameworks/Lottie.framework',
+      #'-framework .build/archives/Lottie_macOS.xcarchive/Products/Library/Frameworks/Lottie.framework',
     ]
 
-    ifVisionOSEnabled {
-      xcframeworkInvocation.push('-framework .build/archives/Lottie_visionOS.xcarchive/Products/Library/Frameworks/Lottie.framework')
-      xcframeworkInvocation.push('-framework .build/archives/Lottie_visionOS_Simulator.xcarchive/Products/Library/Frameworks/Lottie.framework')
-    }
+    #ifVisionOSEnabled {
+    #  xcframeworkInvocation.push('-framework .build/archives/Lottie_visionOS.xcarchive/Products/Library/Frameworks/Lottie.framework')
+    #  xcframeworkInvocation.push('-framework .build/archives/Lottie_visionOS_Simulator.xcarchive/Products/Library/Frameworks/Lottie.framework')
+    #}
 
     xcframeworkInvocation.push('-output .build/archives/Lottie.xcframework')
 
     xcodebuild(xcframeworkInvocation.join(" "))
 
-    # Archive the XCFramework into a zip file
     Dir.chdir('.build/archives') do
+      # Codesign the XCFramework using the "Lottie iOS" certificate installed as a secret in the lottie-ios repo.
+      # First we check to make sure the certificate is installed. In GitHub actions CI, only jobs run by contibutors have access
+      # to repo secrets, so PR jobs from external contributors won't have access to this certificate.
+      puts "Checking if signing certificate is installed..."
+      `security find-certificate -c 'Lottie iOS'`
+      if $?.success?
+        puts "Signing certificate is installed. Code signing Lottie.xcframework."
+        sh 'codesign --timestamp -v --sign "Lottie iOS" Lottie.xcframework'
+      else
+        puts "Signing certificate is not installed. Lottie.xcframework will not be code signed."
+      end
+
+      # Archive the XCFramework into a zip file
       # Use --symlinks to avoid "Multiple binaries share the same codesign path. This can happen if your build process copies frameworks by following symlinks." 
       # error when validating macOS apps (#1948)
       sh "zip -r --symlinks #{args[:zip_archive_name]}.xcframework.zip Lottie.xcframework"
       sh 'rm -rf Lottie.xcframework'
     end
+
     sh "swift package compute-checksum .build/archives/#{args[:zip_archive_name]}.xcframework.zip"
   end
 end
