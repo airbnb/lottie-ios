@@ -322,7 +322,7 @@ extension CATransform3D {
     skewAxis: CGFloat?)
     -> CATransform3D
   {
-    if let skew = skew, let skewAxis = skewAxis {
+    if let skew, let skewAxis {
       return CATransform3DMakeTranslation(position.x, position.y, 0)
         .rotated(rotationX, axis: .x)
         .rotated(rotationY, axis: .y)

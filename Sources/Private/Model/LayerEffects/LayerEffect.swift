@@ -79,7 +79,7 @@ class LayerEffect: Codable, DictionaryInitializable {
   }
 }
 
-extension Array where Element == LayerEffect {
+extension [LayerEffect] {
   static func fromDictionaries(_ dictionaries: [[String: Any]]) throws -> [LayerEffect] {
     try dictionaries.compactMap { dictionary in
       let shapeType = dictionary[LayerEffect.CodingKeys.type.rawValue] as? Int

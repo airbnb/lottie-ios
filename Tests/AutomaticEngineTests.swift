@@ -18,7 +18,7 @@ final class AutomaticEngineTests: XCTestCase {
         animation = await Samples.dotLottie(named: sampleAnimationName)?.animations.first?.animation
       }
 
-      guard let animation = animation else {
+      guard let animation else {
         XCTFail("Couldn't load animation named \(sampleAnimationName)")
         continue
       }

@@ -74,7 +74,7 @@ final class LRUCache<Key: Hashable, Value> {
   }
 
   deinit {
-    if let token = token {
+    if let token {
       notificationCenter.removeObserver(token)
     }
   }
@@ -131,7 +131,7 @@ extension LRUCache {
 
   /// Insert a value into the cache with optional `cost`
   func setValue(_ value: Value?, forKey key: Key, cost: Int = 0) {
-    guard let value = value else {
+    guard let value else {
       removeValue(forKey: key)
       return
     }

@@ -70,13 +70,13 @@ class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
   public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
     guard ignoreDelegate == false else { return }
     animationState = flag ? .complete : .cancelled
-    if let animationLayer = animationLayer, let key = animationKey {
+    if let animationLayer, let key = animationKey {
       animationLayer.removeAnimation(forKey: key)
       if flag {
         animationLayer.currentFrame = (anim as! CABasicAnimation).toValue as! CGFloat
       }
     }
-    if let completionBlock = completionBlock {
+    if let completionBlock {
       completionBlock(flag)
     }
   }

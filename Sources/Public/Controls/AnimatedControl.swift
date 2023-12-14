@@ -109,7 +109,7 @@ open class AnimatedControl: LottieControlType {
 
   #elseif canImport(AppKit)
   open override func mouseDown(with mouseDownEvent: NSEvent) {
-    guard let window = window else { return }
+    guard let window else { return }
 
     currentState = .highlighted
     updateForState()

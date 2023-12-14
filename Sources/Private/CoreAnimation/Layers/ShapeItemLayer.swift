@@ -67,7 +67,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
   override func setupAnimations(context: LayerAnimationContext) throws {
     try super.setupAnimations(context: context)
 
-    guard let sublayerConfiguration = sublayerConfiguration else { return }
+    guard let sublayerConfiguration else { return }
 
     switch sublayerConfiguration.fill {
     case .solidFill(let shapeLayer):
@@ -299,7 +299,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
 
 // MARK: - [ShapeItem] helpers
 
-extension Array where Element == ShapeItemLayer.Item {
+extension [ShapeItemLayer.Item] {
   /// The first `ShapeItem` in this array of the given type
   func first<ItemType: ShapeItem>(
     _: ItemType.Type,

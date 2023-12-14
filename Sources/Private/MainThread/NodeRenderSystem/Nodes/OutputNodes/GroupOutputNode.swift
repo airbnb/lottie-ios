@@ -57,7 +57,7 @@ class GroupOutputNode: NodeOutput {
       }
       var xform = CATransform3DGetAffineTransform(transform)
       if
-        let rootNode = rootNode,
+        let rootNode,
         let rootPath = rootNode.outputPath,
         let xformedPath = rootPath.copy(using: &xform)
       {

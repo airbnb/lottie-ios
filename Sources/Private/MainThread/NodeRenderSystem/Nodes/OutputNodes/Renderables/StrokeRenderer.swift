@@ -131,7 +131,7 @@ final class StrokeRenderer: PassThroughOutputNode, Renderable {
     inContext.setMiterLimit(miterLimit)
     inContext.setLineCap(lineCap.cgLineCap)
     inContext.setLineJoin(lineJoin.cgLineJoin)
-    if let dashPhase = dashPhase, let lengths = dashLengths {
+    if let dashPhase, let lengths = dashLengths {
       inContext.setLineDash(phase: dashPhase, lengths: lengths)
     } else {
       inContext.setLineDash(phase: 0, lengths: [])
@@ -142,7 +142,7 @@ final class StrokeRenderer: PassThroughOutputNode, Renderable {
     guard inContext.path != nil, inContext.path!.isEmpty == false else {
       return
     }
-    guard let color = color else { return }
+    guard let color else { return }
     hasUpdate = false
     setupForStroke(inContext)
     inContext.setAlpha(opacity)

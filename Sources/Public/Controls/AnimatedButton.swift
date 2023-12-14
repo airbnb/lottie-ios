@@ -66,7 +66,7 @@ open class AnimatedButton: AnimatedControl {
   open override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
     super.endTracking(touch, with: event)
     let touchEvent: UIControl.Event
-    if let touch = touch, bounds.contains(touch.location(in: self)) {
+    if let touch, bounds.contains(touch.location(in: self)) {
       touchEvent = UIControl.Event.touchUpInside
       performAction?()
     } else {

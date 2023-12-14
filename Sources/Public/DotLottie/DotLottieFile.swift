@@ -55,7 +55,7 @@ public final class DotLottieFile {
 
   /// The `LottieAnimation` and `DotLottieConfiguration` for the given animation ID in this file
   func animation(for id: String? = nil) -> DotLottieFile.Animation? {
-    if let id = id {
+    if let id {
       return animations.first(where: { $0.configuration.id == id })
     } else {
       return animations.first

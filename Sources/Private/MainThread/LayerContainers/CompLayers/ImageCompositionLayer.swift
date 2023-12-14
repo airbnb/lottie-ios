@@ -38,7 +38,7 @@ final class ImageCompositionLayer: CompositionLayer {
 
   var image: CGImage? = nil {
     didSet {
-      if let image = image {
+      if let image {
         contentsLayer.contents = image
       } else {
         contentsLayer.contents = nil

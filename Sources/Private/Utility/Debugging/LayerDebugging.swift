@@ -53,7 +53,7 @@ extension CALayer {
     }
     string = string + "|_" + String(describing: self)
     LottieLogger.shared.info(string)
-    if let sublayers = sublayers {
+    if let sublayers {
       for sublayer in sublayers {
         sublayer.logLayerTree(withIndent: withIndent + 1)
       }
@@ -79,7 +79,7 @@ extension CALayer {
       sublayers = cust.layerForDebugging().sublayers
     }
 
-    if let sublayers = sublayers {
+    if let sublayers {
       for i in 0..<sublayers.count {
         if let debugLayer = sublayers[i] as? DebugLayer {
           debugLayer.removeFromSuperlayer()
@@ -88,7 +88,7 @@ extension CALayer {
       }
     }
 
-    if let sublayers = sublayers {
+    if let sublayers {
       for sublayer in sublayers {
         sublayer.setDebuggingState(visible: visible)
       }
@@ -205,7 +205,7 @@ extension LayerDebugStyle {
   }
 }
 
-extension Array where Element == LayerModel {
+extension [LayerModel] {
 
   var parents: [Int] {
     var array = [Int]()

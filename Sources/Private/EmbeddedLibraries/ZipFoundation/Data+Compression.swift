@@ -149,7 +149,7 @@ extension Data {
           position += Int64(stream.prepare(for: sourceData))
         } catch { throw error }
       }
-      if let sourceData = sourceData {
+      if let sourceData {
         sourceData.withUnsafeBytes { rawBufferPointer in
           if let baseAddress = rawBufferPointer.baseAddress {
             let pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
@@ -179,7 +179,7 @@ extension Data {
 extension compression_stream {
 
   fileprivate mutating func prepare(for sourceData: Data?) -> Int {
-    guard let sourceData = sourceData else { return 0 }
+    guard let sourceData else { return 0 }
 
     src_size = sourceData.count
     return sourceData.count

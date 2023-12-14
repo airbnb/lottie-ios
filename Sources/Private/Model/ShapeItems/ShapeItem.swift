@@ -120,7 +120,7 @@ class ShapeItem: Codable, DictionaryInitializable {
   }
 }
 
-extension Array where Element == ShapeItem {
+extension [ShapeItem] {
 
   static func fromDictionaries(_ dictionaries: [[String: Any]]) throws -> [ShapeItem] {
     try dictionaries.compactMap { dictionary in

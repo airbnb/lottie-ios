@@ -116,7 +116,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   public var body: some View {
     ZStack {
-      if let animationSource = animationSource {
+      if let animationSource {
         LottieAnimationView.swiftUIView {
           defer { animationDidLoad?(animationSource) }
           return LottieAnimationView(
@@ -138,7 +138,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
           }
 
           if
-            let playbackMode = playbackMode,
+            let playbackMode,
             playbackMode != context.view.currentPlaybackMode
           {
             context.view.setPlaybackMode(playbackMode, completion: animationCompletionHandler)
@@ -351,7 +351,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   ///  - If the `animationProgress` is `nil`, no changes will be made and any existing animations
   ///    will continue playing uninterrupted.
   public func currentProgress(_ currentProgress: AnimationProgressTime?) -> Self {
-    guard let currentProgress = currentProgress else { return self }
+    guard let currentProgress else { return self }
     var copy = self
     copy.playbackMode = .paused(at: .progress(currentProgress))
     return copy
@@ -363,7 +363,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   ///  - If the `currentFrame` is `nil`, no changes will be made and any existing animations
   ///    will continue playing uninterrupted.
   public func currentFrame(_ currentFrame: AnimationFrameTime?) -> Self {
-    guard let currentFrame = currentFrame else { return self }
+    guard let currentFrame else { return self }
     var copy = self
     copy.playbackMode = .paused(at: .frame(currentFrame))
     return copy
@@ -375,7 +375,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   ///  - If the `currentTime` is `nil`, no changes will be made and any existing animations
   ///    will continue playing uninterrupted.
   public func currentTime(_ currentTime: TimeInterval?) -> Self {
-    guard let currentTime = currentTime else { return self }
+    guard let currentTime else { return self }
     var copy = self
     copy.playbackMode = .paused(at: .time(currentTime))
     return copy
@@ -391,7 +391,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   ///   - showPlaceholder: When `true`, the current animation will be removed before invoking `loadAnimation`,
   ///     displaying the `Placeholder` until the new animation loads.
   ///     When `false`, the previous animation remains visible while the new one loads.
-  public func reloadAnimationTrigger<Value: Equatable>(_ value: Value, showPlaceholder: Bool = true) -> Self {
+  public func reloadAnimationTrigger(_ value: some Equatable, showPlaceholder: Bool = true) -> Self {
     var copy = self
     copy.reloadAnimationTrigger = AnyEquatable(value)
     copy.showPlaceholderWhileReloading = showPlaceholder
@@ -409,7 +409,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   public func getRealtimeAnimationProgress(_ realtimeAnimationProgress: Binding<AnimationProgressTime>?) -> some View {
     TimelineView(.animation(paused: realtimeAnimationProgress == nil)) { _ in
       configure { view in
-        if let realtimeAnimationProgress = realtimeAnimationProgress {
+        if let realtimeAnimationProgress {
           DispatchQueue.main.async {
             realtimeAnimationProgress.wrappedValue = view.realtimeAnimationProgress
           }
@@ -429,7 +429,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   public func getRealtimeAnimationFrame(_ realtimeAnimationFrame: Binding<AnimationFrameTime>?) -> some View {
     TimelineView(.animation(paused: realtimeAnimationFrame == nil)) { _ in
       configure { view in
-        if let realtimeAnimationFrame = realtimeAnimationFrame {
+        if let realtimeAnimationFrame {
           DispatchQueue.main.async {
             realtimeAnimationFrame.wrappedValue = view.realtimeAnimationFrame
           }
@@ -460,7 +460,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   private let placeholder: (() -> Placeholder)?
 
   private func loadAnimationIfNecessary() {
-    guard let loadAnimation = loadAnimation else { return }
+    guard let loadAnimation else { return }
 
     Task {
       do {

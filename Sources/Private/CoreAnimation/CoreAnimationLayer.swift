@@ -160,7 +160,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     //    allocate a very large amount of memory (400mb+).
     //  - Alternatively this layer could subclass `CATransformLayer`,
     //    but this causes Core Animation to emit unnecessary logs.
-    if var pendingAnimationConfiguration = pendingAnimationConfiguration {
+    if var pendingAnimationConfiguration {
       pendingAnimationConfigurationModification?(&pendingAnimationConfiguration.animationConfiguration)
       pendingAnimationConfigurationModification = nil
       self.pendingAnimationConfiguration = nil

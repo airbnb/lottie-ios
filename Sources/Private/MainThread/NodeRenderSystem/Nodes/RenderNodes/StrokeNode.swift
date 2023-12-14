@@ -131,7 +131,7 @@ final class StrokeNode: AnimatorNode, RenderNode {
 
 // MARK: - [DashElement] + shapeLayerConfiguration
 
-extension Array where Element == DashElement {
+extension [DashElement] {
   typealias ShapeLayerConfiguration = (
     dashPatterns: ContiguousArray<ContiguousArray<Keyframe<LottieVector1D>>>,
     dashPhase: ContiguousArray<Keyframe<LottieVector1D>>)
@@ -168,7 +168,7 @@ extension Array where Element == DashElement {
   }
 }
 
-extension Array where Element == CGFloat {
+extension [CGFloat] {
   // If all of the items in the dash pattern are zeros, then we shouldn't attempt to render it.
   // This causes Core Animation to have extremely poor performance for some reason, even though
   // it doesn't affect the appearance of the animation.

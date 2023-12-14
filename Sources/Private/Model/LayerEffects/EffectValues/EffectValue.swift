@@ -68,7 +68,7 @@ class EffectValue: Codable, DictionaryInitializable {
   }
 }
 
-extension Array where Element == EffectValue {
+extension [EffectValue] {
   static func fromDictionaries(_ dictionaries: [[String: Any]]) throws -> [EffectValue] {
     try dictionaries.compactMap { dictionary in
       let shapeType = dictionary[EffectValue.CodingKeys.type.rawValue] as? Int

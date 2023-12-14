@@ -53,7 +53,7 @@ extension Dictionary {
 
 // MARK: - Array + AnyInitializable
 
-extension Array: AnyInitializable where Element == Double {
+extension [Double]: AnyInitializable {
 
   init(value: Any) throws {
     guard let array = value as? [Double] else {

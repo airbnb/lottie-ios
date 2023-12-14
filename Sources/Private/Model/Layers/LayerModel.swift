@@ -224,7 +224,7 @@ class LayerModel: Codable, DictionaryInitializable {
   }
 }
 
-extension Array where Element == LayerModel {
+extension [LayerModel] {
 
   static func fromDictionaries(_ dictionaries: [[String: Any]]) throws -> [LayerModel] {
     try dictionaries.compactMap { dictionary in

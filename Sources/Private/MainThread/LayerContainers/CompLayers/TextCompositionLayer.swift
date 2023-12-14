@@ -64,7 +64,7 @@ final class TextCompositionLayer: CompositionLayer {
     self.textLayer.masksToBounds = false
     self.textLayer.isGeometryFlipped = true
 
-    if let rootNode = rootNode {
+    if let rootNode {
       childKeypaths.append(rootNode)
     }
   }
@@ -107,7 +107,7 @@ final class TextCompositionLayer: CompositionLayer {
   }()
 
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
-    guard let textDocument = textDocument else { return }
+    guard let textDocument else { return }
 
     textLayer.contentsScale = renderScale
 

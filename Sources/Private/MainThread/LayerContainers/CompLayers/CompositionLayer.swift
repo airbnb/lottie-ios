@@ -51,7 +51,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
     compositingFilter = layer.blendMode.filterName
     addSublayer(contentsLayer)
 
-    if let maskLayer = maskLayer {
+    if let maskLayer {
       contentsLayer.mask = maskLayer
     }
 

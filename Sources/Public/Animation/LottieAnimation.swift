@@ -37,7 +37,7 @@ public final class LottieAnimation: Codable, Sendable, DictionaryInitializable {
     assetLibrary = try container.decodeIfPresent(AssetLibrary.self, forKey: .assetLibrary)
     markers = try container.decodeIfPresent([Marker].self, forKey: .markers)
 
-    if let markers = markers {
+    if let markers {
       var markerMap: [String: Marker] = [:]
       for marker in markers {
         markerMap[marker.name] = marker
@@ -107,7 +107,7 @@ public final class LottieAnimation: Codable, Sendable, DictionaryInitializable {
 
   /// Return all marker names, in order, or an empty list if none are specified
   public var markerNames: [String] {
-    guard let markers = markers else { return [] }
+    guard let markers else { return [] }
     return markers.map { $0.name }
   }
 
