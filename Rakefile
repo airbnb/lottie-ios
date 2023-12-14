@@ -107,10 +107,10 @@ namespace :build do
       #    so PR jobs from external contributors won't have access to this certificate.
       #    In that case we skip codesigning so the job doesn't fail.
       puts "Checking if signing certificate is installed..."
-      `security find-certificate -c 'Lottie iOS Code Signing'`
+      `security find-certificate -c 'Lottie iOS'`
       if $?.success?
         puts "Signing certificate is installed. Code signing Lottie.xcframework."
-        sh 'codesign --timestamp -v --sign "Lottie iOS Code Signing" Lottie.xcframework '
+        sh 'codesign --timestamp -v --sign "Lottie iOS" Lottie.xcframework'
       else
         puts "Signing certificate is not installed. Lottie.xcframework will not be code signed."
       end
