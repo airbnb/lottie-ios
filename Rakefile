@@ -114,20 +114,16 @@ namespace :build do
       if $?.success?
         puts "Signing certificate is installed. Code signing Lottie.xcframework."
 
-        # In GitHub actions the certificate is in a custom keychain, which we have to unlock and use when codesigning.
+        # In GitHub actions the certificate is in a custom keychain, which we have to pass when codesigning.
         custom_keychain_path = ENV['KEYCHAIN_PATH']
-        custom_keychain_password = ENV['KEYCHAIN_PASSWORD']
-        if !custom_keychain_path.nil? && !custom_keychain_path.empty? && !custom_keychain_password.nil? && !custom_keychain_password.empty?
-          puts "Unlocking and using custom keychain..."
-          sh 'security unlock-keychain -p "' + custom_keychain_password + '" ' + custom_keychain_path
+        if !custom_keychain_path.nil? && !custom_keychain_path.empty?
           sh 'codesign --timestamp -v --sign "Lottie iOS Code Signing" --keychain ' + custom_keychain_path + ' Lottie.xcframework'
         else
           sh 'codesign --timestamp -v --sign "Lottie iOS Code Signing" Lottie.xcframework '
         end
 
-        puts "Successfully codesigned Lottie.xcframework."
       else
-        puts "Signing certificate is not installed. Lottie.xcframework will not be codesigned."
+        puts "Signing certificate is not installed. Lottie.xcframework will not be code signed."
       end
 
       # Archive the XCFramework into a zip file
