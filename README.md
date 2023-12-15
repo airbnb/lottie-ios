@@ -90,8 +90,7 @@ Lottie does not collect any data. We provide this notice to help you fill out [A
 We distribute XCFramework bundles for each release on [GitHub](https://github.com/airbnb/lottie-ios/releases/latest). In Lottie 4.4.0 and later, these XCFramework bundles include a [code signature](https://developer.apple.com/documentation/xcode/verifying-the-origin-of-your-xcframeworks). These bundles are self-signed under the name "Lottie iOS" and have the following fingerprint:
 
 ```
-89 2F 1B 43 04 7B 50 53 8F 2F 46 EA D9 29 00 DD
-3D 48 11 F358 21 78 C0 61 A5 FB 20 F1 11 CB 26
+89 2F 1B 43 04 7B 50 53 8F 2F 46 EA D9 29 00 DD 3D 48 11 F358 21 78 C0 61 A5 FB 20 F1 11 CB 26
 ```
 
 ## Contributing
