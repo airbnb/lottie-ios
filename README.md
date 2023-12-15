@@ -93,6 +93,10 @@ We distribute XCFramework bundles for each release on [GitHub](https://github.co
 89 2F 1B 43 04 7B 50 53 8F 2F 46 EA D9 29 00 DD 3D 48 11 F358 21 78 C0 61 A5 FB 20 F1 11 CB 26
 ```
 
+In Xcode you can verify this by selecting `Lottie.xcframework` and confirming that it shows the following information:
+
+![Code Signature in Xcode](_Gifs/code_signature.png)
+
 ## Contributing
 
 We always appreciate contributions from the community. To make changes to the project, you can clone the repo and open `Lottie.xcworkspace`. This workspace includes:
