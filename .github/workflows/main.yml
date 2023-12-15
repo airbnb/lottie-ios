@@ -86,11 +86,15 @@ jobs:
           - '14.1' # Swift 5.7.1
     steps:
       - uses: actions/checkout@v2
+      - uses: apple-actions/import-codesign-certs@v2
+        with:
+          p12-file-base64: ${{ secrets.SIGNING_CERTIFICATE_BASE_64 }}
+          p12-password: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
       - uses: ./.github/actions/setup
         with:
           xcode: ${{ matrix.xcode }}
       - name: Build XCFramework
-        # Once there is a production Xcode version with the visionOS SDK, we will 
+        # Once there is a production Xcode version with the visionOS SDK, we will
         # need to also build an XCFramework using that version but without `SKIP_VISION_OS=true`
         run: SKIP_VISION_OS=true bundle exec rake build:xcframework[Lottie-Xcode-${{ matrix.xcode }}]
       - name: Upload XCFramework

@@ -100,13 +100,28 @@ namespace :build do
 
     xcodebuild(xcframeworkInvocation.join(" "))
 
-    # Archive the XCFramework into a zip file
     Dir.chdir('.build/archives') do
+      # Codesign the XCFramework using the "Lottie iOS" certificate, which should be installed in the keychain.
+      #  - Check to make sure the certificate is installed before attemtping to codesign.
+      #  - In GitHub actions CI, only jobs run by contibutors have access to repo secrets,
+      #    so PR jobs from external contributors won't have access to this certificate.
+      #    In that case we skip codesigning so the job doesn't fail.
+      puts "Checking if signing certificate is installed..."
+      `security find-certificate -c 'Lottie iOS'`
+      if $?.success?
+        puts "Signing certificate is installed. Code signing Lottie.xcframework."
+        sh 'codesign --timestamp -v --sign "Lottie iOS" Lottie.xcframework'
+      else
+        puts "Signing certificate is not installed. Lottie.xcframework will not be code signed."
+      end
+
+      # Archive the XCFramework into a zip file
       # Use --symlinks to avoid "Multiple binaries share the same codesign path. This can happen if your build process copies frameworks by following symlinks." 
       # error when validating macOS apps (#1948)
       sh "zip -r --symlinks #{args[:zip_archive_name]}.xcframework.zip Lottie.xcframework"
       sh 'rm -rf Lottie.xcframework'
     end
+
     sh "swift package compute-checksum .build/archives/#{args[:zip_archive_name]}.xcframework.zip"
   end
 end
