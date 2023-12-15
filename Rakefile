@@ -101,7 +101,7 @@ namespace :build do
     xcodebuild(xcframeworkInvocation.join(" "))
 
     Dir.chdir('.build/archives') do
-      # Codesign the XCFramework using the "Lottie iOS Code Signing" certificate, which should be installed in the keychain.
+      # Codesign the XCFramework using the "Lottie iOS" certificate, which should be installed in the keychain.
       #  - Check to make sure the certificate is installed before attemtping to codesign.
       #  - In GitHub actions CI, only jobs run by contibutors have access to repo secrets,
       #    so PR jobs from external contributors won't have access to this certificate.
