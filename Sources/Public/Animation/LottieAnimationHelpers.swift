@@ -316,4 +316,6 @@ extension LottieAnimation {
 /// This retroactive conformance is safe because Sendable is a marker protocol that doesn't
 /// include any runtime component. Multiple modules in the same package graph can provide this
 /// conformance without causing any conflicts.
+///
+// swiftlint:disable:next no_unchecked_sendable
 extension Foundation.Bundle: @unchecked Sendable { }

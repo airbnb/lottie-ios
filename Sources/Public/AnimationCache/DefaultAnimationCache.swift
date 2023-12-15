@@ -7,13 +7,15 @@
 
 import Foundation
 
+// MARK: - DefaultAnimationCache
+
 /// A thread-safe Animation Cache that will store animations up to `cacheSize`.
 ///
 /// Once `cacheSize` is reached, animations can be ejected.
 /// The default size of the cache is 100.
 ///
 /// This cache implementation also responds to memory pressure.
-public class DefaultAnimationCache: AnimationCacheProvider, @unchecked Sendable {
+public class DefaultAnimationCache: AnimationCacheProvider {
 
   // MARK: Lifecycle
 
@@ -55,3 +57,11 @@ public class DefaultAnimationCache: AnimationCacheProvider, @unchecked Sendable 
   ///    only when the app receives a memory warning notification.
   private let cache = LRUCache<String, LottieAnimation>()
 }
+
+// MARK: Sendable
+
+// LottieAnimationCache has a Sendable requirement, but we can't
+// redesign DefaultAnimationCache to be properly Sendable without
+// making breaking changes.
+// swiftlint:disable:next no_unchecked_sendable
+extension DefaultAnimationCache: @unchecked Sendable { }

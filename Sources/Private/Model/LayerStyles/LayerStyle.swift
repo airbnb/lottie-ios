@@ -80,4 +80,5 @@ extension [LayerStyle] {
 
 /// Since `LayerStyle` isn't `final`, we have to use `@unchecked Sendable` instead of `Sendable.`
 /// All `LayerStyle` subclasses are immutable `Sendable` values.
+// swiftlint:disable:next no_unchecked_sendable
 extension LayerStyle: @unchecked Sendable { }

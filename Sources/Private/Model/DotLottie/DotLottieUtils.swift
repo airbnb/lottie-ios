@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - DotLottieUtils
 
-struct DotLottieUtils {
+enum DotLottieUtils {
   static let dotLottieExtension = "lottie"
   static let jsonExtension = "json"
 

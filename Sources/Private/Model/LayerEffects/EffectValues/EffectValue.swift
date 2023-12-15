@@ -93,4 +93,5 @@ extension [EffectValue] {
 
 /// Since `EffectValue` isn't `final`, we have to use `@unchecked Sendable` instead of `Sendable.`
 /// All `EffectValue` subclasses are immutable `Sendable` values.
+// swiftlint:disable:next no_unchecked_sendable
 extension EffectValue: @unchecked Sendable { }

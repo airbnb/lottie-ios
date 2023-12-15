@@ -217,7 +217,7 @@ final class PerformanceTests: XCTestCase {
     return animationView
   }
 
-  private func measurePerformance(_ block : () throws -> Void) rethrows -> TimeInterval {
+  private func measurePerformance(_ block: () throws -> Void) rethrows -> TimeInterval {
     let start = DispatchTime.now()
     try block()
     let end = DispatchTime.now()

@@ -121,7 +121,7 @@ open class AnimatedButton: AnimatedControl {
 
   // MARK: Private
 
-  private var rangesForEvents: [AnyHashable : (from: CGFloat, to: CGFloat)] = {
-    [LottieControlEvent.touchUpInside.id: (from: 0, to: 1)]
-  }()
+  private var rangesForEvents: [AnyHashable: (from: CGFloat, to: CGFloat)] = [LottieControlEvent.touchUpInside.id: (
+    from: 0,
+    to: 1)]
 }

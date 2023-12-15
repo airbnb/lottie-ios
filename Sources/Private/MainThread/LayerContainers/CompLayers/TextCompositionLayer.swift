@@ -97,14 +97,12 @@ final class TextCompositionLayer: CompositionLayer {
   var fontProvider: AnimationFontProvider
   weak var rootAnimationLayer: MainThreadAnimationLayer?
 
-  lazy var fullAnimationKeypath: AnimationKeypath = {
-    // Individual layers don't know their full keypaths, so we have to delegate
+  lazy var fullAnimationKeypath: AnimationKeypath = // Individual layers don't know their full keypaths, so we have to delegate
     // to the `MainThreadAnimationLayer` to search the layer hierarchy and find
     // the full keypath (which includes this layer's parent layers)
     rootAnimationLayer?.keypath(for: self)
-      // If that failed for some reason, just use the last path component (which we do have here)
-      ?? AnimationKeypath(keypath: keypathName)
-  }()
+    // If that failed for some reason, just use the last path component (which we do have here)
+    ?? AnimationKeypath(keypath: keypathName)
 
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
     guard let textDocument else { return }

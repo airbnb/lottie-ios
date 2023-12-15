@@ -150,4 +150,5 @@ extension String {
 // Mark `DotLottieFile` as `@unchecked Sendable` to allow it to be used when strict concurrency is enabled.
 // In the future, it may be necessary to make changes to the internal implementation of `DotLottieFile`
 // to make it truly thread-safe.
+// swiftlint:disable:next no_unchecked_sendable
 extension DotLottieFile: @unchecked Sendable { }

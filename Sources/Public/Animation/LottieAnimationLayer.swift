@@ -487,7 +487,7 @@ public class LottieAnimationLayer: CALayer {
 
   /// A closure called when the animation layer has been loaded.
   /// Will inform the receiver the type of rendering engine that is used for the layer.
-  public var animationLayerDidLoad:((_ animationLayer: LottieAnimationLayer, _ renderingEngine: RenderingEngineOption) -> Void)?
+  public var animationLayerDidLoad: ((_ animationLayer: LottieAnimationLayer, _ renderingEngine: RenderingEngineOption) -> Void)?
 
   /// The configuration that this `LottieAnimationView` uses when playing its animation
   public var configuration: LottieConfiguration {
