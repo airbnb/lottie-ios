@@ -305,8 +305,8 @@ extension TransformModel {
   /// Whether or not this transform has a non-zero skew value
   var hasSkew: Bool {
     guard
-      let _skew = _skew,
-      let _skewAxis = _skewAxis,
+      let _skew,
+      let _skewAxis,
       !_skew.keyframes.isEmpty,
       !_skewAxis.keyframes.isEmpty
     else {
@@ -320,8 +320,8 @@ extension TransformModel {
   var hasSkewAnimation: Bool {
     guard
       hasSkew,
-      let _skew = _skew,
-      let _skewAxis = _skewAxis
+      let _skew,
+      let _skewAxis
     else { return false }
 
     return _skew.keyframes.count > 1

@@ -7,22 +7,6 @@ on:
     branches: [ master ]
 
 jobs:
-  build-package-macos-12:
-    name: "Build Package"
-    runs-on: macos-12
-    strategy:
-      fail-fast: false
-      matrix:
-        xcode:
-        - '13.4.1' # Swift 5.6
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup
-        with:
-          xcode: ${{ matrix.xcode }}
-      - name: Build Package
-        run: SKIP_VISION_OS=true bundle exec rake build:package:all
-
   build-package-macos-13:
     name: "Build Package"
     runs-on: macos-13
@@ -30,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         xcode:
-        - '14.2' # Swift 5.7
+        - '14.1' # Swift 5.7
         - '14.3' # Swift 5.8
         - '15.0' # Swift 5.9
     steps:
@@ -88,16 +72,18 @@ jobs:
           EMERGE_API_TOKEN: ${{ secrets.EMERGE_API_TOKEN }}
           PR_NUMBER: ${{ github.event.number }}
 
-  build-xcframework-macos-12:
+  build-xcframework-macos-13:
     name: "Build XCFramework"
-    runs-on: macos-12
+    runs-on: macos-13
     strategy:
       matrix:
         xcode:
           # XCFrameworks are forwards-compatible but not backwards-compatible.
           # The Xcode version we use for this job is that oldest Xcode version that
           # will be able to use these XCFrameworks and the lottie-spm package.
-          - '13.4.1' # Swift 5.6.1
+          # This should be the minimum Xcode version permitted by the App Store.
+          # As of April 2023, this is Xcode 14.1: https://developer.apple.com/news/?id=jd9wcyov
+          - '14.1' # Swift 5.7.1
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -153,22 +139,6 @@ jobs:
       matrix:
         xcode:
         - '14.3' # Swift 5.8
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup
-        with:
-          install-mint: true
-          xcode: ${{ matrix.xcode }}
-      - name: Test Swift Package Manager support
-        run: SKIP_VISION_OS=true bundle exec rake test:spm
-
-  spm-xcode-13:
-    name: "Test Swift Package Manager"
-    runs-on: macos-12
-    strategy:
-      matrix:
-        xcode:
-        - '13.4.1' # Swift 5.6
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup

@@ -427,7 +427,7 @@ struct ShapeRenderGroup {
   var otherItems: [ShapeItemLayer.Item] = []
 }
 
-extension Array where Element == ShapeItemLayer.Item {
+extension [ShapeItemLayer.Item] {
   /// Splits this list of `ShapeItem`s into groups that should be rendered together as individual units,
   /// plus the remaining items that were not included in any group.
   ///  - groupHasChildGroupsToInheritUnusedItems: whether or not this group has child groups

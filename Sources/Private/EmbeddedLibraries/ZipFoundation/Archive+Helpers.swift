@@ -92,13 +92,13 @@ extension Archive {
       }
     case .directory:
       _ = try provider(0, 0)
-      if let progress = progress { progress.completedUnitCount = progress.totalUnitCount }
+      if let progress { progress.completedUnitCount = progress.totalUnitCount }
     case .symlink:
       let (linkSizeWritten, linkChecksum) = try writeSymbolicLink(
         size: Int(uncompressedSize),
         provider: provider)
       (sizeWritten, checksum) = (Int64(linkSizeWritten), linkChecksum)
-      if let progress = progress { progress.completedUnitCount = progress.totalUnitCount }
+      if let progress { progress.completedUnitCount = progress.totalUnitCount }
     }
     return (sizeWritten, checksum)
   }

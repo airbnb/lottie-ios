@@ -224,7 +224,7 @@ class LayerModel: Codable, DictionaryInitializable {
   }
 }
 
-extension Array where Element == LayerModel {
+extension [LayerModel] {
 
   static func fromDictionaries(_ dictionaries: [[String: Any]]) throws -> [LayerModel] {
     try dictionaries.compactMap { dictionary in
@@ -255,4 +255,5 @@ extension Array where Element == LayerModel {
 
 /// Since `LayerModel` isn't `final`, we have to use `@unchecked Sendable` instead of `Sendable.`
 /// All `LayerModel` subclasses are immutable `Sendable` values.
+// swiftlint:disable:next no_unchecked_sendable
 extension LayerModel: @unchecked Sendable { }

@@ -26,7 +26,7 @@ extension DotLottieFile {
 
       /// Check cache for lottie
       if
-        let dotLottieCache = dotLottieCache,
+        let dotLottieCache,
         let lottie = dotLottieCache.file(forKey: filepath)
       {
         return .success(lottie)
@@ -68,7 +68,7 @@ extension DotLottieFile {
 
       /// Check cache for lottie
       if
-        let dotLottieCache = dotLottieCache,
+        let dotLottieCache,
         let lottie = dotLottieCache.file(forKey: cacheKey)
       {
         return .success(lottie)
@@ -237,7 +237,7 @@ extension DotLottieFile {
 
       /// Check cache for lottie
       if
-        let dotLottieCache = dotLottieCache,
+        let dotLottieCache,
         let lottie = dotLottieCache.file(forKey: cacheKey)
       {
         /// If found, return the lottie.
@@ -295,15 +295,15 @@ extension DotLottieFile {
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
-    if let dotLottieCache = dotLottieCache, let lottie = dotLottieCache.file(forKey: url.absoluteString) {
+    if let dotLottieCache, let lottie = dotLottieCache.file(forKey: url.absoluteString) {
       handleResult(.success(lottie))
     } else {
       let task = session.dataTask(with: url) { data, _, error in
         do {
-          if let error = error {
+          if let error {
             throw error
           }
-          guard let data = data else {
+          guard let data else {
             throw DotLottieError.noDataLoaded
           }
           let lottie = try DotLottieFile(data: data, filename: url.deletingPathExtension().lastPathComponent)

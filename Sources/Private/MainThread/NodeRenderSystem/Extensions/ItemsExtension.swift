@@ -15,7 +15,7 @@ final class NodeTree {
   var childrenNodes: [AnimatorNode] = []
 }
 
-extension Array where Element == ShapeItem {
+extension [ShapeItem] {
   func initializeNodeTree() -> NodeTree {
     let nodeTree = NodeTree()
 

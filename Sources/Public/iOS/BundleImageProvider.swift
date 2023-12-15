@@ -41,7 +41,7 @@ public class BundleImageProvider: AnimationImageProvider {
 
     let imagePath: String?
     /// Try to find the image in the bundle.
-    if let searchPath = searchPath {
+    if let searchPath {
       /// Search in the provided search path for the image
       var directoryPath = URL(fileURLWithPath: searchPath)
       directoryPath.appendPathComponent(asset.directory)

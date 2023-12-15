@@ -66,7 +66,7 @@ open class AnimatedButton: AnimatedControl {
   open override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
     super.endTracking(touch, with: event)
     let touchEvent: UIControl.Event
-    if let touch = touch, bounds.contains(touch.location(in: self)) {
+    if let touch, bounds.contains(touch.location(in: self)) {
       touchEvent = UIControl.Event.touchUpInside
       performAction?()
     } else {
@@ -121,7 +121,7 @@ open class AnimatedButton: AnimatedControl {
 
   // MARK: Private
 
-  private var rangesForEvents: [AnyHashable : (from: CGFloat, to: CGFloat)] = {
-    [LottieControlEvent.touchUpInside.id: (from: 0, to: 1)]
-  }()
+  private var rangesForEvents: [AnyHashable: (from: CGFloat, to: CGFloat)] = [LottieControlEvent.touchUpInside.id: (
+    from: 0,
+    to: 1)]
 }

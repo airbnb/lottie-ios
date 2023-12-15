@@ -65,7 +65,7 @@ struct BezierPathKeyframe {
     -> KeyframeGroup<BezierPathKeyframe>
   {
     guard
-      let cornerRadius = cornerRadius,
+      let cornerRadius,
       cornerRadius.keyframes.contains(where: { $0.value.cgFloatValue > 0 })
     else {
       return path.map { path in

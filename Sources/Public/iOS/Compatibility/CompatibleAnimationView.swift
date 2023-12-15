@@ -201,29 +201,25 @@ public final class CompatibleAnimationView: UIView {
 
   // MARK: Public
 
-  @objc
-  public var compatibleAnimation: CompatibleAnimation? {
+  @objc public var compatibleAnimation: CompatibleAnimation? {
     didSet {
       animationView.animation = compatibleAnimation?.animation
     }
   }
 
-  @objc
-  public var loopAnimationCount: CGFloat = 0 {
+  @objc public var loopAnimationCount: CGFloat = 0 {
     didSet {
       animationView.loopMode = loopAnimationCount == -1 ? .loop : .repeat(Float(loopAnimationCount))
     }
   }
 
-  @objc
-  public var compatibleDictionaryTextProvider: CompatibleDictionaryTextProvider? {
+  @objc public var compatibleDictionaryTextProvider: CompatibleDictionaryTextProvider? {
     didSet {
       animationView.textProvider = compatibleDictionaryTextProvider?.textProvider ?? DefaultTextProvider()
     }
   }
 
-  @objc
-  public override var contentMode: UIView.ContentMode {
+  @objc public override var contentMode: UIView.ContentMode {
     set { animationView.contentMode = newValue }
     get { animationView.contentMode }
   }

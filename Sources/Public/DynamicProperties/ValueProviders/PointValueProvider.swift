@@ -48,7 +48,7 @@ public final class PointValueProvider: ValueProvider {
   }
 
   public var storage: ValueProviderStorage<LottieVector3D> {
-    if let block = block {
+    if let block {
       return .closure { frame in
         self.hasUpdate = false
         return block(frame).vector3dValue

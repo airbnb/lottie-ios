@@ -14,7 +14,7 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
   // MARK: Lifecycle
 
   init(transform: ShapeTransform?) {
-    if let transform = transform {
+    if let transform {
       anchor = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.anchor.keyframes))
       position = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.position.keyframes))
       scale = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.scale.keyframes))

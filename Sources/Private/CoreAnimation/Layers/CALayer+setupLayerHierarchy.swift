@@ -67,7 +67,7 @@ extension CALayer {
 
       // Create the `mask` layer for this layer, if it has a `MatteType`
       if
-        let mask = mask,
+        let mask,
         let maskLayer = try maskLayer(for: mask.model, type: mask.matteType, context: context)
       {
         let maskParentTransformLayer = makeParentTransformLayer(
@@ -138,7 +138,7 @@ extension CALayer {
 
 }
 
-extension Collection where Element == LayerModel {
+extension Collection<LayerModel> {
   /// Pairs each `LayerModel` within this array with
   /// a `LayerModel` to use as its mask, if applicable
   /// based on the layer's `MatteType` configuration.

@@ -69,7 +69,7 @@ public final class GradientValueProvider: ValueProvider {
   }
 
   public var storage: ValueProviderStorage<[Double]> {
-    if let block = block {
+    if let block {
       return .closure { [self] frame in
         hasUpdate = false
 

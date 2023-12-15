@@ -70,7 +70,7 @@ final class PreCompLayer: BaseCompositionLayer {
     // Precomp layers can adjust the local time of their child layers (relative to the
     // animation's global time) via `timeRemapping` or a custom `startTime` / `timeStretch`
     let contextForChildren = context.withTimeRemapping { [preCompLayer, timeRemappingInterpolator] layerLocalFrame in
-      if let timeRemappingInterpolator = timeRemappingInterpolator {
+      if let timeRemappingInterpolator {
         return timeRemappingInterpolator.value(frame: layerLocalFrame) as? AnimationFrameTime ?? layerLocalFrame
       } else {
         return (layerLocalFrame * AnimationFrameTime(preCompLayer.timeStretch)) + AnimationFrameTime(preCompLayer.startTime)

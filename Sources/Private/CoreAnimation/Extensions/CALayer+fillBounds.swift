@@ -10,7 +10,7 @@ extension CALayer {
   /// without setting `frame` (which is not permitted if the layer can rotate)
   @nonobjc
   func fillBoundsOfSuperlayer() {
-    guard let superlayer = superlayer else { return }
+    guard let superlayer else { return }
 
     if let customLayerLayer = self as? CustomLayoutLayer {
       customLayerLayer.layout(superlayerBounds: superlayer.bounds)

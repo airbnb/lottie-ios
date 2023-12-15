@@ -13,7 +13,7 @@ final class LayerImageProvider {
   init(imageProvider: AnimationImageProvider, assets: [String: ImageAsset]?) {
     self.imageProvider = imageProvider
     imageLayers = [ImageCompositionLayer]()
-    if let assets = assets {
+    if let assets {
       imageAssets = assets
     } else {
       imageAssets = [:]
