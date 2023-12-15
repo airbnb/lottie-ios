@@ -51,7 +51,7 @@ extension Dictionary {
 
 }
 
-// MARK: - Array + AnyInitializable
+// MARK: - AnyInitializable + AnyInitializable
 
 extension [Double]: AnyInitializable {
 
