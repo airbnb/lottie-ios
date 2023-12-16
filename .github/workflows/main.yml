@@ -87,6 +87,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: apple-actions/import-codesign-certs@v2
+        continue-on-error: true
         with:
           p12-file-base64: ${{ secrets.SIGNING_CERTIFICATE_BASE_64 }}
           p12-password: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
