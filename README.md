@@ -83,7 +83,7 @@ Lottie supports Swift / Xcode versions back to the minimum version that is permi
 
 ## Privacy
 
-Lottie does not collect any data. We provide this notice to help you fill out [App Privacy Details](https://developer.apple.com/app-store/app-privacy-details/). We additionally provide a [privacy manifest](https://github.com/airbnb/lottie-ios/blob/master/PrivacyInfo.xcprivacy) which can be included in your app.
+Lottie does not collect any data. We provide this notice to help you fill out [App Privacy Details](https://developer.apple.com/app-store/app-privacy-details/). We additionally provide a [privacy manifest](https://github.com/airbnb/lottie-ios/blob/master/Sources/PrivacyInfo.xcprivacy) which can be included in your app.
 
 ## Security
 
