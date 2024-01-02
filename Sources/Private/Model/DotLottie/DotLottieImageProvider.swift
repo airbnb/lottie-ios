@@ -22,12 +22,12 @@ class DotLottieImageProvider: AnimationImageProvider {
   ///
   /// - Parameter filepath: The absolute filepath containing the images.
   ///
-  init(filepath: String) {
-    self.filepath = URL(fileURLWithPath: filepath)
-    loadImages()
+  convenience init?(filepath: String) {
+    self.init(filepath: URL(fileURLWithPath: filepath))
   }
 
-  init(filepath: URL) {
+  init?(filepath: URL) {
+    guard filepath.urls.count > 0 else { return nil }
     self.filepath = filepath
     loadImages()
   }
