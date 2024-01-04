@@ -1,0 +1,13 @@
+{
+  "animations" : [
+    {
+      "loop" : true,
+      "themeColor" : "#ffcc00",
+      "speed" : 1,
+      "id" : "issue_2269"
+    }
+  ],
+  "version" : "1.0",
+  "author" : "LottieFiles",
+  "generator" : "LottieFiles dotLottie Exporter 0.1"
+}

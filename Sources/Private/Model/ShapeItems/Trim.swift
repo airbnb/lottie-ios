@@ -36,7 +36,7 @@ final class Trim: ShapeItem {
     offset = try KeyframeGroup<LottieVector1D>(dictionary: offsetDictionary)
     let trimTypeRawValue: Int = try dictionary.value(for: CodingKeys.trimType)
     guard let trimType = TrimType(rawValue: trimTypeRawValue) else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
     self.trimType = trimType
     try super.init(dictionary: dictionary)

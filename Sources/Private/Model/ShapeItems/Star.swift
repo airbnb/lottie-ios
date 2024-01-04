@@ -64,7 +64,7 @@ final class Star: ShapeItem {
     points = try KeyframeGroup<LottieVector1D>(dictionary: pointsDictionary)
     let starTypeRawValue: Int = try dictionary.value(for: CodingKeys.starType)
     guard let starType = StarType(rawValue: starTypeRawValue) else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
     self.starType = starType
     try super.init(dictionary: dictionary)

@@ -404,7 +404,7 @@ extension BezierPath: AnyInitializable {
     } else if let dictionary = value as? [String: Any] {
       pathDictionary = dictionary
     } else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
     closed = (try? pathDictionary.value(for: CodingKeys.closed)) ?? true
     var vertexDictionaries: [Any] = try pathDictionary.value(for: CodingKeys.vertices)
@@ -414,7 +414,7 @@ extension BezierPath: AnyInitializable {
       vertexDictionaries.count == inPointsDictionaries.count,
       inPointsDictionaries.count == outPointsDictionaries.count
     else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
     guard vertexDictionaries.count > 0 else {
       length = 0

@@ -8,7 +8,7 @@
 // MARK: - InitializableError
 
 enum InitializableError: Error {
-  case invalidInput
+  case invalidInput(file: StaticString = #file, line: UInt = #line)
 }
 
 // MARK: - DictionaryInitializable
@@ -30,14 +30,24 @@ protocol AnyInitializable {
 extension Dictionary {
 
   @_disfavoredOverload
-  func value<T, KeyType: RawRepresentable>(for key: KeyType) throws -> T where KeyType.RawValue == Key {
+  func value<T, KeyType: RawRepresentable>(
+    for key: KeyType,
+    file: StaticString = #file,
+    line: UInt = #line)
+    throws -> T where KeyType.RawValue == Key
+  {
     guard let value = self[key.rawValue] as? T else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput(file: file, line: line)
     }
     return value
   }
 
-  func value<T: AnyInitializable, KeyType: RawRepresentable>(for key: KeyType) throws -> T where KeyType.RawValue == Key {
+  func value<T: AnyInitializable, KeyType: RawRepresentable>(
+    for key: KeyType,
+    file: StaticString = #file,
+    line: UInt = #line)
+    throws -> T where KeyType.RawValue == Key
+  {
     if let value = self[key.rawValue] as? T {
       return value
     }
@@ -46,7 +56,7 @@ extension Dictionary {
       return try T(value: value)
     }
 
-    throw InitializableError.invalidInput
+    throw InitializableError.invalidInput(file: file, line: line)
   }
 
 }
@@ -57,7 +67,7 @@ extension [Double]: AnyInitializable {
 
   init(value: Any) throws {
     guard let array = value as? [Double] else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
     self = array
   }

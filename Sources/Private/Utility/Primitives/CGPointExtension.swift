@@ -22,7 +22,7 @@ extension CGPoint: AnyInitializable {
     {
       self.init(x: array[0], y: array[1])
     } else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
   }
 

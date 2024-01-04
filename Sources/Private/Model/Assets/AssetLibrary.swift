@@ -18,14 +18,17 @@ final class AssetLibrary: Codable, AnyInitializable, Sendable {
     var imageAssets = [String : ImageAsset]()
     var precompAssets = [String : PrecompAsset]()
 
-    while !container.isAtEnd {
-      let keyContainer = try containerForKeys.nestedContainer(keyedBy: PrecompAsset.CodingKeys.self)
-      if keyContainer.contains(.layers) {
-        let precompAsset = try container.decode(PrecompAsset.self)
+    while
+      !container.isAtEnd,
+      let keyContainer = try? containerForKeys.nestedContainer(keyedBy: PrecompAsset.CodingKeys.self)
+    {
+      if
+        keyContainer.contains(.layers),
+        let precompAsset = try? container.decode(PrecompAsset.self)
+      {
         decodedAssets[precompAsset.id] = precompAsset
         precompAssets[precompAsset.id] = precompAsset
-      } else {
-        let imageAsset = try container.decode(ImageAsset.self)
+      } else if let imageAsset = try? container.decode(ImageAsset.self) {
         decodedAssets[imageAsset.id] = imageAsset
         imageAssets[imageAsset.id] = imageAsset
       }
@@ -37,7 +40,7 @@ final class AssetLibrary: Codable, AnyInitializable, Sendable {
 
   init(value: Any) throws {
     guard let dictionaries = value as? [[String: Any]] else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
     var decodedAssets = [String : Asset]()
     var imageAssets = [String : ImageAsset]()
@@ -47,8 +50,7 @@ final class AssetLibrary: Codable, AnyInitializable, Sendable {
         let asset = try PrecompAsset(dictionary: dictionary)
         decodedAssets[asset.id] = asset
         precompAssets[asset.id] = asset
-      } else {
-        let asset = try ImageAsset(dictionary: dictionary)
+      } else if let asset = try? ImageAsset(dictionary: dictionary) {
         decodedAssets[asset.id] = asset
         imageAssets[asset.id] = asset
       }

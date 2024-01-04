@@ -145,6 +145,17 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
           }
         }
         .configurations(configurations)
+        // Any following configurations override user-provided configurations:
+        .configure { context in
+          switch animationSource {
+          case .dotLottieFile(let dotLottieFile):
+            // TODO: This doesn't really work because it also totally overrides the loop mode.
+            // We need to make this opt-in for the loop mode and speed probably.
+            context.view.lottieAnimationLayer.applyAnimationConfiguration(from: dotLottieFile.animation())
+          case .lottieAnimation:
+            break
+          }
+        }
       } else {
         placeholder?()
       }

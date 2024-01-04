@@ -93,7 +93,7 @@ class LayerModel: Codable, DictionaryInitializable {
     inFrame = try container.decode(Double.self, forKey: .inFrame)
     outFrame = try container.decode(Double.self, forKey: .outFrame)
     startTime = try container.decode(Double.self, forKey: .startTime)
-    transform = try container.decode(Transform.self, forKey: .transform)
+    transform = try container.decodeIfPresent(Transform.self, forKey: .transform) ?? .default
     parent = try container.decodeIfPresent(Int.self, forKey: .parent)
     blendMode = try container.decodeIfPresent(BlendMode.self, forKey: .blendMode) ?? .normal
     masks = try container.decodeIfPresent([Mask].self, forKey: .masks)
@@ -119,8 +119,15 @@ class LayerModel: Codable, DictionaryInitializable {
     inFrame = try dictionary.value(for: CodingKeys.inFrame)
     outFrame = try dictionary.value(for: CodingKeys.outFrame)
     startTime = try dictionary.value(for: CodingKeys.startTime)
-    transform = try Transform(dictionary: try dictionary.value(for: CodingKeys.transform))
     parent = try? dictionary.value(for: CodingKeys.parent)
+    if
+      let transformDictionary: [String: Any] = try dictionary.value(for: CodingKeys.transform),
+      let transform = try? Transform(dictionary: transformDictionary)
+    {
+      self.transform = transform
+    } else {
+      transform = .default
+    }
     if
       let blendModeRawValue = dictionary[CodingKeys.blendMode.rawValue] as? Int,
       let blendMode = BlendMode(rawValue: blendModeRawValue)

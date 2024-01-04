@@ -26,7 +26,7 @@ public class Asset: Codable, DictionaryInitializable {
     } else if let id = dictionary[CodingKeys.id.rawValue] as? Int {
       self.id = String(id)
     } else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
   }
 
