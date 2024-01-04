@@ -187,7 +187,6 @@ extension CALayer {
           try setUpRepeater(
             repeater,
             items: repeaterGrouping.grouping,
-            parentGroup: parentGroup,
             parentGroupPath: parentGroupPath,
             context: context)
         }
@@ -222,7 +221,6 @@ extension CALayer {
   private func setUpRepeater(
     _ repeater: Repeater,
     items allItems: [ShapeItemLayer.Item],
-    parentGroup: Group?,
     parentGroupPath: [String],
     context: LayerContext)
     throws
@@ -233,7 +231,7 @@ extension CALayer {
     for index in 0..<copyCount {
       let groupLayers = try makeGroupLayers(
         from: items,
-        parentGroup: parentGroup,
+        parentGroup: nil, // The repeater layer acts as the parent of its sublayers
         parentGroupPath: parentGroupPath,
         context: context)
 
