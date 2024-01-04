@@ -691,7 +691,11 @@ static NSString * const kCompContainerAnimationKey = @"play";
 }
 
 - (void)didMoveToWindow {
+#if TARGET_OS_IOS
     _compContainer.rasterizationScale = self.window.screen.scale;
+#elif TARGET_OS_VISION
+    _compContainer.rasterizationScale = 2;
+#endif
 }
 
 - (void)setContentMode:(LOTViewContentMode)contentMode {

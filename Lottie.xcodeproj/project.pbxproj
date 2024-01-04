@@ -1823,6 +1823,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
 				PRODUCT_NAME = Lottie;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos xrsimulator xros";
 				WARNING_CFLAGS = "";
 			};
 			name = Debug;
@@ -1844,6 +1845,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
 				PRODUCT_NAME = Lottie;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos xrsimulator xros";
 				WARNING_CFLAGS = "";
 			};
 			name = Release;
@@ -1877,6 +1879,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Lottie;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos xrsimulator xros";
 			};
 			name = Debug;
 		};
@@ -1887,6 +1890,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Lottie;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos xrsimulator xros";
 			};
 			name = Release;
 		};
