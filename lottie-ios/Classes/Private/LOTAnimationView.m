@@ -691,10 +691,10 @@ static NSString * const kCompContainerAnimationKey = @"play";
 }
 
 - (void)didMoveToWindow {
-#if TARGET_OS_IOS
-    _compContainer.rasterizationScale = self.window.screen.scale;
-#elif TARGET_OS_VISION
+#if TARGET_OS_VISION
     _compContainer.rasterizationScale = 2;
+#else
+    _compContainer.rasterizationScale = self.window.screen.scale;
 #endif
 }
 
