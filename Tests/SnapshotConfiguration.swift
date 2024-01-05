@@ -76,15 +76,15 @@ extension SnapshotConfiguration {
 
     /// Test cases for the `AnimationKeypath` / `AnyValueProvider` system
     "Nonanimating/keypathTest": .customValueProviders([
-      AnimationKeypath(keypath: "**.Stroke 1.Color"): ColorValueProvider(.black),
-      AnimationKeypath(keypath: "**.Fill 1.Color"): ColorValueProvider(.red),
+      "**.Stroke 1.Color": ColorValueProvider(.black),
+      "**.Fill 1.Color": ColorValueProvider(.red),
     ]),
 
     "Switch": .customValueProviders([
-      AnimationKeypath(keypath: "Checkmark Outlines.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
-      AnimationKeypath(keypath: "Checkmark Outlines 2.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
-      AnimationKeypath(keypath: "X Outlines.Group 1.Stroke 1.Color"): ColorValueProvider(.black),
-      AnimationKeypath(keypath: "Switch Outline Outlines.Fill 1.Color"): ColorValueProvider([
+      "Checkmark Outlines.Group 1.Stroke 1.Color": ColorValueProvider(.black),
+      "Checkmark Outlines 2.Group 1.Stroke 1.Color": ColorValueProvider(.black),
+      "X Outlines.Group 1.Stroke 1.Color": ColorValueProvider(.black),
+      "Switch Outline Outlines.Fill 1.Color": ColorValueProvider([
         Keyframe(value: LottieColor.black, time: 0),
         Keyframe(value: LottieColor(r: 0.76, g: 0.76, b: 0.76, a: 1), time: 75),
         Keyframe(value: LottieColor.black, time: 150),
@@ -92,24 +92,24 @@ extension SnapshotConfiguration {
     ]),
 
     "Issues/issue_1837_opacity": .customValueProviders([
-      AnimationKeypath(keypath: "Dark Gray Solid 1.Transform.Opacity"): FloatValueProvider(10),
+      "Dark Gray Solid 1.Transform.Opacity": FloatValueProvider(10),
     ]),
 
     "Issues/issue_1837_scale_rotation": .customValueProviders([
-      AnimationKeypath(keypath: "H2.Transform.Scale"): PointValueProvider(CGPoint(x: 200, y: 150)),
-      AnimationKeypath(keypath: "H2.Transform.Rotation"): FloatValueProvider(90),
+      "H2.Transform.Scale": PointValueProvider(CGPoint(x: 200, y: 150)),
+      "H2.Transform.Rotation": FloatValueProvider(90),
     ]),
 
     "Issues/issue_2042": .customValueProviders([
-      AnimationKeypath(keypath: "MASTER.Transform.Position"): PointValueProvider(CGPoint(x: 214, y: 120)),
+      "MASTER.Transform.Position": PointValueProvider(CGPoint(x: 214, y: 120)),
     ]),
 
     "Issues/issue_1664": .customValueProviders([
-      AnimationKeypath(keypath: "**.base_color.**.Color"): ColorValueProvider(.black),
+      "**.base_color.**.Color": ColorValueProvider(.black),
     ]).precision(0.95),
 
     "Issues/issue_1854": .customValueProviders([
-      AnimationKeypath(keypath: "**.Colors"): GradientValueProvider(
+      "**.Colors": GradientValueProvider(
         [
           LottieColor(r: 0, g: 0, b: 0, a: 0),
           LottieColor(r: 1, g: 1, b: 1, a: 0.5),
@@ -119,15 +119,19 @@ extension SnapshotConfiguration {
     ]),
 
     "Issues/issue_1847": .customValueProviders([
-      AnimationKeypath(keypath: "**.Stroke 1.**.Color"): ColorValueProvider(.red),
+      "**.Stroke 1.**.Color": ColorValueProvider(.red),
     ]),
 
     "Issues/issue_2150": .customValueProviders([
-      AnimationKeypath(keypath: "**.Color"): ColorValueProvider(.red),
+      "**.Color": ColorValueProvider(.red),
     ]),
 
     "Issues/issue_2094": .customValueProviders([
-      AnimationKeypath(keypath: "**.Stroke Width"): FloatValueProvider(2),
+      "**.Stroke Width": FloatValueProvider(2),
+    ]),
+
+    "Issues/issue_2262": .customValueProviders([
+      "**.Accent.**.Color": ColorValueProvider(.black),
     ]),
 
     // Test cases for `AnimatedImageProvider`
