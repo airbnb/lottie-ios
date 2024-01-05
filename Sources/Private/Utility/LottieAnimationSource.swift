@@ -34,11 +34,6 @@ extension LottieAnimationSource {
       return dotLottieFile.animation()
     }
   }
-
-  /// The `DotLottieConfiguration`, if this is a dotLottie animation
-  var dotLottieConfiguration: DotLottieConfiguration? {
-    dotLottieAnimation?.configuration
-  }
 }
 
 extension LottieAnimation {

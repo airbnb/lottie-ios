@@ -507,7 +507,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
     // When playing a dotLottie animation, its `DotLottieConfiguration`
     // can override some behavior of the animation.
-    if let dotLottieConfiguration = animationSource.dotLottieConfiguration {
+    if let dotLottieConfiguration = animationSource.dotLottieAnimation?.configuration {
       // Only use the value from the `DotLottieConfiguration` is that component
       // is specified in the list of `dotLottieConfigurationComponents`.
       if dotLottieConfigurationComponents.contains(.loopMode) {
