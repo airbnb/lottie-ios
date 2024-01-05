@@ -1,0 +1,84 @@
+Accent.Color
+Accent.Transform.Opacity
+Accent.Transform.Position
+Accent.Transform.Rotation
+Accent.Transform.Scale
+Accent.Transform.Scale
+AccentContrast.Shape 1.Stroke 1.Color
+AccentContrast.Shape 1.Stroke 1.Color
+AccentContrast.Shape 1.Stroke 1.Color
+AccentContrast.Shape 1.Stroke 1.Color
+AccentContrast.Shape 1.Stroke 1.Color
+AccentContrast.Shape 1.Stroke 1.Color
+AccentContrast.Shape 1.Stroke 1.Opacity
+AccentContrast.Shape 1.Stroke 1.Opacity
+AccentContrast.Shape 1.Stroke 1.Opacity
+AccentContrast.Shape 1.Stroke 1.Opacity
+AccentContrast.Shape 1.Stroke 1.Opacity
+AccentContrast.Shape 1.Stroke 1.Opacity
+AccentContrast.Shape 1.Stroke 1.Stroke Width
+AccentContrast.Shape 1.Stroke 1.Stroke Width
+AccentContrast.Shape 1.Stroke 1.Stroke Width
+AccentContrast.Shape 1.Stroke 1.Stroke Width
+AccentContrast.Shape 1.Stroke 1.Stroke Width
+AccentContrast.Shape 1.Stroke 1.Stroke Width
+AccentContrast.Shape 1.Transform.Opacity
+AccentContrast.Shape 1.Transform.Opacity
+AccentContrast.Shape 1.Transform.Opacity
+AccentContrast.Shape 1.Transform.Opacity
+AccentContrast.Shape 1.Transform.Opacity
+AccentContrast.Shape 1.Transform.Opacity
+AccentContrast.Shape 1.Transform.Position
+AccentContrast.Shape 1.Transform.Position
+AccentContrast.Shape 1.Transform.Position
+AccentContrast.Shape 1.Transform.Position
+AccentContrast.Shape 1.Transform.Position
+AccentContrast.Shape 1.Transform.Position
+AccentContrast.Shape 1.Transform.Rotation
+AccentContrast.Shape 1.Transform.Rotation
+AccentContrast.Shape 1.Transform.Rotation
+AccentContrast.Shape 1.Transform.Rotation
+AccentContrast.Shape 1.Transform.Rotation
+AccentContrast.Shape 1.Transform.Rotation
+AccentContrast.Shape 1.Transform.Scale
+AccentContrast.Shape 1.Transform.Scale
+AccentContrast.Shape 1.Transform.Scale
+AccentContrast.Shape 1.Transform.Scale
+AccentContrast.Shape 1.Transform.Scale
+AccentContrast.Shape 1.Transform.Scale
+AccentContrast.Shape 1.Transform.Scale
+AccentContrast.Shape 1.Transform.Scale
+AccentContrast.Shape 1.Transform.Scale
+AccentContrast.Shape 1.Transform.Scale
+AccentContrast.Shape 1.Transform.Scale
+AccentContrast.Shape 1.Transform.Scale
+AccentContrast.Transform.Opacity
+AccentContrast.Transform.Opacity
+AccentContrast.Transform.Opacity
+AccentContrast.Transform.Opacity
+AccentContrast.Transform.Opacity
+AccentContrast.Transform.Opacity
+AccentContrast.Transform.Position
+AccentContrast.Transform.Position
+AccentContrast.Transform.Position
+AccentContrast.Transform.Position
+AccentContrast.Transform.Position
+AccentContrast.Transform.Position
+AccentContrast.Transform.Rotation
+AccentContrast.Transform.Rotation
+AccentContrast.Transform.Rotation
+AccentContrast.Transform.Rotation
+AccentContrast.Transform.Rotation
+AccentContrast.Transform.Rotation
+AccentContrast.Transform.Scale
+AccentContrast.Transform.Scale
+AccentContrast.Transform.Scale
+AccentContrast.Transform.Scale
+AccentContrast.Transform.Scale
+AccentContrast.Transform.Scale
+AccentContrast.Transform.Scale
+AccentContrast.Transform.Scale
+AccentContrast.Transform.Scale
+AccentContrast.Transform.Scale
+AccentContrast.Transform.Scale
+AccentContrast.Transform.Scale

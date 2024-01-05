@@ -33,9 +33,10 @@ final class SolidLayer: BaseCompositionLayer {
   // MARK: Internal
 
   override func setupAnimations(context: LayerAnimationContext) throws {
+    try super.setupAnimations(context: context)
+
     var context = context
     context = context.addingKeypathComponent(solidLayer.name)
-    try super.setupAnimations(context: context)
 
     // Even though the Lottie json schema provides a fixed `solidLayer.colorHex` value,
     // we still need to create a set of keyframes and go through the standard `CAAnimation`

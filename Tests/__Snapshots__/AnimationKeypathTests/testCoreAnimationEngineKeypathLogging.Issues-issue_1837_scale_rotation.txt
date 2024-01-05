@@ -1,0 +1,231 @@
+C1.Ellipse 1.Fill 1.Color
+C1.Ellipse 1.Fill 1.Opacity
+C1.Ellipse 1.Transform.Opacity
+C1.Ellipse 1.Transform.Position
+C1.Ellipse 1.Transform.Rotation
+C1.Ellipse 1.Transform.Scale
+C1.Ellipse 1.Transform.Scale
+C1.Transform.Opacity
+C1.Transform.Position
+C1.Transform.Rotation
+C1.Transform.Scale
+C1.Transform.Scale
+C2.Ellipse 1.Stroke 1.Color
+C2.Ellipse 1.Stroke 1.Opacity
+C2.Ellipse 1.Stroke 1.Stroke Width
+C2.Ellipse 1.Transform.Opacity
+C2.Ellipse 1.Transform.Position
+C2.Ellipse 1.Transform.Rotation
+C2.Ellipse 1.Transform.Scale
+C2.Ellipse 1.Transform.Scale
+C2.Transform.Opacity
+C2.Transform.Position
+C2.Transform.Rotation
+C2.Transform.Scale
+C2.Transform.Scale
+Dot1.Shape 1.Stroke 1.Color
+Dot1.Shape 1.Stroke 1.Opacity
+Dot1.Shape 1.Stroke 1.Stroke Width
+Dot1.Shape 1.Transform.Opacity
+Dot1.Shape 1.Transform.Position
+Dot1.Shape 1.Transform.Rotation
+Dot1.Shape 1.Transform.Scale
+Dot1.Shape 1.Transform.Scale
+Dot1.Transform.Opacity
+Dot1.Transform.Position
+Dot1.Transform.Rotation
+Dot1.Transform.Scale
+Dot1.Transform.Scale
+Dot10.Shape 1.Stroke 1.Color
+Dot10.Shape 1.Stroke 1.Opacity
+Dot10.Shape 1.Stroke 1.Stroke Width
+Dot10.Shape 1.Transform.Opacity
+Dot10.Shape 1.Transform.Position
+Dot10.Shape 1.Transform.Rotation
+Dot10.Shape 1.Transform.Scale
+Dot10.Shape 1.Transform.Scale
+Dot10.Transform.Opacity
+Dot10.Transform.Position
+Dot10.Transform.Rotation
+Dot10.Transform.Scale
+Dot10.Transform.Scale
+Dot11.Shape 1.Stroke 1.Color
+Dot11.Shape 1.Stroke 1.Opacity
+Dot11.Shape 1.Stroke 1.Stroke Width
+Dot11.Shape 1.Transform.Opacity
+Dot11.Shape 1.Transform.Position
+Dot11.Shape 1.Transform.Rotation
+Dot11.Shape 1.Transform.Scale
+Dot11.Shape 1.Transform.Scale
+Dot11.Transform.Opacity
+Dot11.Transform.Position
+Dot11.Transform.Rotation
+Dot11.Transform.Scale
+Dot11.Transform.Scale
+Dot12.Shape 1.Stroke 1.Color
+Dot12.Shape 1.Stroke 1.Opacity
+Dot12.Shape 1.Stroke 1.Stroke Width
+Dot12.Shape 1.Transform.Opacity
+Dot12.Shape 1.Transform.Position
+Dot12.Shape 1.Transform.Rotation
+Dot12.Shape 1.Transform.Scale
+Dot12.Shape 1.Transform.Scale
+Dot12.Transform.Opacity
+Dot12.Transform.Position
+Dot12.Transform.Rotation
+Dot12.Transform.Scale
+Dot12.Transform.Scale
+Dot13.Shape 1.Stroke 1.Color
+Dot13.Shape 1.Stroke 1.Opacity
+Dot13.Shape 1.Stroke 1.Stroke Width
+Dot13.Shape 1.Transform.Opacity
+Dot13.Shape 1.Transform.Position
+Dot13.Shape 1.Transform.Rotation
+Dot13.Shape 1.Transform.Scale
+Dot13.Shape 1.Transform.Scale
+Dot13.Transform.Opacity
+Dot13.Transform.Position
+Dot13.Transform.Rotation
+Dot13.Transform.Scale
+Dot13.Transform.Scale
+Dot14.Shape 1.Stroke 1.Color
+Dot14.Shape 1.Stroke 1.Opacity
+Dot14.Shape 1.Stroke 1.Stroke Width
+Dot14.Shape 1.Transform.Opacity
+Dot14.Shape 1.Transform.Position
+Dot14.Shape 1.Transform.Rotation
+Dot14.Shape 1.Transform.Scale
+Dot14.Shape 1.Transform.Scale
+Dot14.Transform.Opacity
+Dot14.Transform.Position
+Dot14.Transform.Rotation
+Dot14.Transform.Scale
+Dot14.Transform.Scale
+Dot2.Shape 1.Stroke 1.Color
+Dot2.Shape 1.Stroke 1.Opacity
+Dot2.Shape 1.Stroke 1.Stroke Width
+Dot2.Shape 1.Transform.Opacity
+Dot2.Shape 1.Transform.Position
+Dot2.Shape 1.Transform.Rotation
+Dot2.Shape 1.Transform.Scale
+Dot2.Shape 1.Transform.Scale
+Dot2.Transform.Opacity
+Dot2.Transform.Position
+Dot2.Transform.Rotation
+Dot2.Transform.Scale
+Dot2.Transform.Scale
+Dot3.Shape 1.Stroke 1.Color
+Dot3.Shape 1.Stroke 1.Opacity
+Dot3.Shape 1.Stroke 1.Stroke Width
+Dot3.Shape 1.Transform.Opacity
+Dot3.Shape 1.Transform.Position
+Dot3.Shape 1.Transform.Rotation
+Dot3.Shape 1.Transform.Scale
+Dot3.Shape 1.Transform.Scale
+Dot3.Transform.Opacity
+Dot3.Transform.Position
+Dot3.Transform.Rotation
+Dot3.Transform.Scale
+Dot3.Transform.Scale
+Dot4.Shape 1.Stroke 1.Color
+Dot4.Shape 1.Stroke 1.Opacity
+Dot4.Shape 1.Stroke 1.Stroke Width
+Dot4.Shape 1.Transform.Opacity
+Dot4.Shape 1.Transform.Position
+Dot4.Shape 1.Transform.Rotation
+Dot4.Shape 1.Transform.Scale
+Dot4.Shape 1.Transform.Scale
+Dot4.Transform.Opacity
+Dot4.Transform.Position
+Dot4.Transform.Rotation
+Dot4.Transform.Scale
+Dot4.Transform.Scale
+Dot5.Shape 1.Stroke 1.Color
+Dot5.Shape 1.Stroke 1.Opacity
+Dot5.Shape 1.Stroke 1.Stroke Width
+Dot5.Shape 1.Transform.Opacity
+Dot5.Shape 1.Transform.Position
+Dot5.Shape 1.Transform.Rotation
+Dot5.Shape 1.Transform.Scale
+Dot5.Shape 1.Transform.Scale
+Dot5.Transform.Opacity
+Dot5.Transform.Position
+Dot5.Transform.Rotation
+Dot5.Transform.Scale
+Dot5.Transform.Scale
+Dot6.Shape 1.Stroke 1.Color
+Dot6.Shape 1.Stroke 1.Opacity
+Dot6.Shape 1.Stroke 1.Stroke Width
+Dot6.Shape 1.Transform.Opacity
+Dot6.Shape 1.Transform.Position
+Dot6.Shape 1.Transform.Rotation
+Dot6.Shape 1.Transform.Scale
+Dot6.Shape 1.Transform.Scale
+Dot6.Transform.Opacity
+Dot6.Transform.Position
+Dot6.Transform.Rotation
+Dot6.Transform.Scale
+Dot6.Transform.Scale
+Dot7.Shape 1.Stroke 1.Color
+Dot7.Shape 1.Stroke 1.Opacity
+Dot7.Shape 1.Stroke 1.Stroke Width
+Dot7.Shape 1.Transform.Opacity
+Dot7.Shape 1.Transform.Position
+Dot7.Shape 1.Transform.Rotation
+Dot7.Shape 1.Transform.Scale
+Dot7.Shape 1.Transform.Scale
+Dot7.Transform.Opacity
+Dot7.Transform.Position
+Dot7.Transform.Rotation
+Dot7.Transform.Scale
+Dot7.Transform.Scale
+Dot8.Shape 1.Stroke 1.Color
+Dot8.Shape 1.Stroke 1.Opacity
+Dot8.Shape 1.Stroke 1.Stroke Width
+Dot8.Shape 1.Transform.Opacity
+Dot8.Shape 1.Transform.Position
+Dot8.Shape 1.Transform.Rotation
+Dot8.Shape 1.Transform.Scale
+Dot8.Shape 1.Transform.Scale
+Dot8.Transform.Opacity
+Dot8.Transform.Position
+Dot8.Transform.Rotation
+Dot8.Transform.Scale
+Dot8.Transform.Scale
+Dot9.Shape 1.Stroke 1.Color
+Dot9.Shape 1.Stroke 1.Opacity
+Dot9.Shape 1.Stroke 1.Stroke Width
+Dot9.Shape 1.Transform.Opacity
+Dot9.Shape 1.Transform.Position
+Dot9.Shape 1.Transform.Rotation
+Dot9.Shape 1.Transform.Scale
+Dot9.Shape 1.Transform.Scale
+Dot9.Transform.Opacity
+Dot9.Transform.Position
+Dot9.Transform.Rotation
+Dot9.Transform.Scale
+Dot9.Transform.Scale
+H1.Shape 1.Fill 1.Color
+H1.Shape 1.Fill 1.Opacity
+H1.Shape 1.Transform.Opacity
+H1.Shape 1.Transform.Position
+H1.Shape 1.Transform.Rotation
+H1.Shape 1.Transform.Scale
+H1.Shape 1.Transform.Scale
+H1.Transform.Opacity
+H1.Transform.Position
+H1.Transform.Rotation
+H1.Transform.Scale
+H1.Transform.Scale
+H2.Shape 1.Fill 1.Color
+H2.Shape 1.Fill 1.Opacity
+H2.Shape 1.Transform.Opacity
+H2.Shape 1.Transform.Position
+H2.Shape 1.Transform.Rotation
+H2.Shape 1.Transform.Scale
+H2.Shape 1.Transform.Scale
+H2.Transform.Opacity
+H2.Transform.Position
+H2.Transform.Rotation
+H2.Transform.Scale
+H2.Transform.Scale

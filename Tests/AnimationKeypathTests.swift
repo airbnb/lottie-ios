@@ -11,6 +11,30 @@ final class AnimationKeypathTests: XCTestCase {
 
   // MARK: Internal
 
+  /// All of the sample animations with custom value providers defined in `SnapshotConfiguration.swift`
+  /// should also participate in more in-depth tests for `AnimationKeypath` generation.
+  var animationKeypathTestAnimations: [String] {
+    Samples.sampleAnimationNames.filter { sampleAnimationName in
+      !SnapshotConfiguration.forSample(named: sampleAnimationName).customValueProviders.isEmpty
+    }
+  }
+
+  func testMainThreadEngineKeypathLogging() async {
+    for animationKeypathTestAnimation in animationKeypathTestAnimations {
+      await snapshotHierarchyKeypaths(
+        animationName: animationKeypathTestAnimation,
+        configuration: LottieConfiguration(renderingEngine: .mainThread))
+    }
+  }
+
+  func testCoreAnimationEngineKeypathLogging() async {
+    for animationKeypathTestAnimation in animationKeypathTestAnimations {
+      await snapshotHierarchyKeypaths(
+        animationName: animationKeypathTestAnimation,
+        configuration: LottieConfiguration(renderingEngine: .coreAnimation))
+    }
+  }
+
   func testKeypathMatches() {
     let keypath = AnimationKeypath(keypath: "Layer.Shape Group.Stroke 1.Color")
 
@@ -61,39 +85,35 @@ final class AnimationKeypathTests: XCTestCase {
     XCTAssertNotNil(animationView.animationLayer?.layer(for: "Success.*.Fish1Tail 7"))
   }
 
-  func testMainThreadEngineKeypathLogging() async {
-    await snapshotHierarchyKeypaths(
-      animationName: "Switch",
-      configuration: LottieConfiguration(renderingEngine: .mainThread))
-  }
-
-  func testCoreAnimationEngineKeypathLogging() async {
-    await snapshotHierarchyKeypaths(
-      animationName: "Switch",
-      configuration: LottieConfiguration(renderingEngine: .coreAnimation))
-
-    await snapshotHierarchyKeypaths(
-      animationName: "Issues/issue_1664",
-      configuration: LottieConfiguration(renderingEngine: .coreAnimation))
-  }
-
   /// The Core Animation engine supports a subset of the keypaths supported by the Main Thread engine.
   /// All keypaths that are supported in the Core Animation engine should also be supported by the Main Thread engine.
   func testCoreAnimationEngineKeypathCompatibility() async {
-    let mainThreadKeypaths =
-      Set(await hierarchyKeypaths(animationName: "Switch", configuration: .init(renderingEngine: .mainThread)))
-    let coreAnimationKeypaths = await hierarchyKeypaths(
-      animationName: "Switch",
-      configuration: .init(renderingEngine: .coreAnimation))
+    for animationName in animationKeypathTestAnimations {
+      let mainThreadKeypaths = Set(await hierarchyKeypaths(
+        animationName: animationName,
+        configuration: .init(renderingEngine: .mainThread)))
 
-    for coreAnimationKeypath in coreAnimationKeypaths {
-      XCTAssert(
-        mainThreadKeypaths.contains(coreAnimationKeypath),
-        """
-        \(coreAnimationKeypath) from Core Animation rendering engine \
-        is not supported in Main Thread rendering engine
-        """)
+      let coreAnimationKeypaths = await hierarchyKeypaths(
+        animationName: animationName,
+        configuration: .init(renderingEngine: .coreAnimation))
+
+      for coreAnimationKeypath in coreAnimationKeypaths {
+        XCTAssert(
+          mainThreadKeypaths.contains(coreAnimationKeypath),
+          """
+          [\(animationName)] "\(coreAnimationKeypath)" from Core Animation rendering engine \
+          is not supported in Main Thread rendering engine
+          """)
+      }
     }
+  }
+
+  override func setUp() {
+    LottieLogger.shared = .printToConsole
+  }
+
+  override func tearDown() {
+    LottieLogger.shared = LottieLogger()
   }
 
   // MARK: Private
