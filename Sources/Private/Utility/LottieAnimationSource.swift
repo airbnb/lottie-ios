@@ -20,9 +20,24 @@ extension LottieAnimationSource {
     switch self {
     case .lottieAnimation(let animation):
       return animation
-    case .dotLottieFile(let dotLottieFile):
-      return dotLottieFile.animation()?.animation
+    case .dotLottieFile:
+      return dotLottieAnimation?.animation
     }
+  }
+
+  /// The `DotLottieFile.Animation`, if this is a dotLottie animation
+  var dotLottieAnimation: DotLottieFile.Animation? {
+    switch self {
+    case .lottieAnimation:
+      return nil
+    case .dotLottieFile(let dotLottieFile):
+      return dotLottieFile.animation()
+    }
+  }
+
+  /// The `DotLottieConfiguration`, if this is a dotLottie animation
+  var dotLottieConfiguration: DotLottieConfiguration? {
+    dotLottieAnimation?.configuration
   }
 }
 

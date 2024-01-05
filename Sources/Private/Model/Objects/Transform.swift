@@ -170,13 +170,13 @@ final class Transform: Codable, DictionaryInitializable {
     anchorPoint: KeyframeGroup<LottieVector3D>,
     position: KeyframeGroup<LottieVector3D>?,
     positionX: KeyframeGroup<LottieVector1D>?,
-    positionY: KeyframeGroup<LottieVector1D>?, 
+    positionY: KeyframeGroup<LottieVector1D>?,
     scale: KeyframeGroup<LottieVector3D>,
     rotationX: KeyframeGroup<LottieVector1D>,
-    rotationY: KeyframeGroup<LottieVector1D>, 
+    rotationY: KeyframeGroup<LottieVector1D>,
     rotationZ: KeyframeGroup<LottieVector1D>,
     opacity: KeyframeGroup<LottieVector1D>,
-    rotation: KeyframeGroup<LottieVector1D>?) 
+    rotation: KeyframeGroup<LottieVector1D>?)
   {
     self.anchorPoint = anchorPoint
     self.position = position
@@ -188,21 +188,6 @@ final class Transform: Codable, DictionaryInitializable {
     self.rotationZ = rotationZ
     self.opacity = opacity
     self.rotation = rotation
-  }
-
-  /// Default transform values to use if no transform is provided
-  static var `default`: Transform {
-    Transform(
-      anchorPoint: KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0)),
-      position: KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0)),
-      positionX: nil,
-      positionY: nil,
-      scale: KeyframeGroup(LottieVector3D(x: Double(100), y: 100, z: 100)),
-      rotationX: KeyframeGroup(LottieVector1D(0)),
-      rotationY: KeyframeGroup(LottieVector1D(0)),
-      rotationZ: KeyframeGroup(LottieVector1D(0)),
-      opacity: KeyframeGroup(LottieVector1D(100)),
-      rotation: nil)
   }
 
   // MARK: Internal
@@ -224,6 +209,21 @@ final class Transform: Codable, DictionaryInitializable {
     case split = "s"
     case positionX = "x"
     case positionY = "y"
+  }
+
+  /// Default transform values to use if no transform is provided
+  static var `default`: Transform {
+    Transform(
+      anchorPoint: KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0)),
+      position: KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0)),
+      positionX: nil,
+      positionY: nil,
+      scale: KeyframeGroup(LottieVector3D(x: Double(100), y: 100, z: 100)),
+      rotationX: KeyframeGroup(LottieVector1D(0)),
+      rotationY: KeyframeGroup(LottieVector1D(0)),
+      rotationZ: KeyframeGroup(LottieVector1D(0)),
+      opacity: KeyframeGroup(LottieVector1D(100)),
+      rotation: nil)
   }
 
   /// The anchor point of the transform.

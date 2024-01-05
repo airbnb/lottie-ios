@@ -1482,19 +1482,14 @@ public class LottieAnimationLayer: CALayer {
   }
 
   private func loadAnimation(_ dotLottieAnimation: DotLottieFile.Animation) {
-    applyAnimationConfiguration(from: dotLottieAnimation)
-    animation = dotLottieAnimation.animation
-  }
-
-  /// Applies the animation configuration provided by this DotLottieFile
-  func applyAnimationConfiguration(from dotLottieAnimation: DotLottieFile.Animation?) {
-    guard let dotLottieAnimation else { return }
     loopMode = dotLottieAnimation.configuration.loopMode
     animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
 
     if let imageProvider = dotLottieAnimation.configuration.imageProvider {
       self.imageProvider = imageProvider
     }
+
+    animation = dotLottieAnimation.animation
   }
 
   /// Plays the marker that corresponds to the current "reduced motion" mode if present.

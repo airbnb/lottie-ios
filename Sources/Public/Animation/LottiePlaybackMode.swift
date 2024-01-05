@@ -205,3 +205,56 @@ public enum LottieMarkerPosition: Hashable {
   case start
   case end
 }
+
+extension LottiePlaybackMode {
+  /// Returns a copy of this `PlaybackMode` with the `LottieLoopMode` updated to the given value
+  func loopMode(_ updatedLoopMode: LottieLoopMode) -> LottiePlaybackMode {
+    switch self {
+    case .playing(let playbackMode):
+      return .playing(playbackMode.loopMode(updatedLoopMode))
+
+    case .fromProgress(let fromProgress, toProgress: let toProgress, _):
+      return .playing(.fromProgress(
+        fromProgress,
+        toProgress: toProgress,
+        loopMode: updatedLoopMode))
+
+    case .fromFrame(let fromFrame, toFrame: let toFrame, _):
+      return .playing(.fromFrame(
+        fromFrame,
+        toFrame: toFrame,
+        loopMode: updatedLoopMode))
+
+    case .fromMarker(let fromMarker, let toMarker, let playEndMarkerFrame, _):
+      return .playing(.fromMarker(
+        fromMarker,
+        toMarker: toMarker,
+        playEndMarkerFrame: playEndMarkerFrame,
+        loopMode: updatedLoopMode))
+
+    case .marker(let marker, _):
+      return .playing(.marker(marker, loopMode: updatedLoopMode))
+
+    case .pause, .paused, .progress(_), .time(_), .frame(_), .markers:
+      return self
+    }
+  }
+}
+
+extension LottiePlaybackMode.PlaybackMode {
+  /// Returns a copy of this `PlaybackMode` with the `LottieLoopMode` updated to the given value
+  func loopMode(_ updatedLoopMode: LottieLoopMode) -> LottiePlaybackMode.PlaybackMode {
+    switch self {
+    case .fromProgress(let fromProgress, let toProgress, _):
+      return .fromProgress(fromProgress, toProgress: toProgress, loopMode: updatedLoopMode)
+    case .fromFrame(let fromFrame, let toFrame, _):
+      return .fromFrame(fromFrame, toFrame: toFrame, loopMode: updatedLoopMode)
+    case .fromMarker(let fromMarker, let toMarker, let playEndMarkerFrame, _):
+      return .fromMarker(fromMarker, toMarker: toMarker, playEndMarkerFrame: playEndMarkerFrame, loopMode: updatedLoopMode)
+    case .marker(let marker, _):
+      return .marker(marker, loopMode: updatedLoopMode)
+    case .markers:
+      return self
+    }
+  }
+}
