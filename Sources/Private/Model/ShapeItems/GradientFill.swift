@@ -43,7 +43,7 @@ final class GradientFill: ShapeItem {
     endPoint = try KeyframeGroup<LottieVector3D>(dictionary: endPointDictionary)
     let gradientRawType: Int = try dictionary.value(for: CodingKeys.gradientType)
     guard let gradient = GradientType(rawValue: gradientRawType) else {
-      throw InitializableError.invalidInput
+      throw InitializableError.invalidInput()
     }
     gradientType = gradient
     if let highlightLengthDictionary = dictionary[CodingKeys.highlightLength.rawValue] as? [String: Any] {

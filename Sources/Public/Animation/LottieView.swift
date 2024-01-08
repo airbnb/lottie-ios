@@ -121,7 +121,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
           defer { animationDidLoad?(animationSource) }
           return LottieAnimationView(
             animationSource: animationSource,
-            imageProvider: imageProvider,
+            imageProvider: imageProviderConfiguration?.imageProvider,
             textProvider: textProvider,
             fontProvider: fontProvider,
             configuration: configuration,
@@ -129,20 +129,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
         }
         .sizing(sizing)
         .configure { context in
-          // We check referential equality of the animation before updating as updating the
-          // animation has a side-effect of rebuilding the animation layer, and it would be
-          // prohibitive to do so on every state update.
-          if animationSource.animation !== context.view.animation {
-            context.view.loadAnimation(animationSource)
-            animationDidLoad?(animationSource)
-          }
-
-          if
-            let playbackMode,
-            playbackMode != context.view.currentPlaybackMode
-          {
-            context.view.setPlaybackMode(playbackMode, completion: animationCompletionHandler)
-          }
+          applyCurrentAnimationConfiguration(to: context.view)
         }
         .configurations(configurations)
       } else {
@@ -224,6 +211,13 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     return copy
   }
 
+  /// Returns a copy of this view playing its animation at the given speed
+  public func animationSpeed(_ animationSpeed: Double) -> Self {
+    var copy = self
+    copy.animationSpeed = animationSpeed
+    return copy
+  }
+
   /// Returns a copy of this view with the given closure that is called whenever the
   /// `LottieAnimationSource` provided via `init` is loaded and applied to the underlying `LottieAnimationView`.
   public func animationDidLoad(_ animationDidLoad: @escaping (LottieAnimationSource) -> Void) -> Self {
@@ -290,13 +284,17 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   /// The image provider must be `Equatable` to avoid unnecessary state updates / re-renders.
   public func imageProvider<ImageProvider: AnimationImageProvider & Equatable>(_ imageProvider: ImageProvider) -> Self {
     var copy = self
-    copy.imageProvider = imageProvider
 
-    copy = copy.configure { view in
-      if (view.imageProvider as? ImageProvider) != imageProvider {
-        view.imageProvider = imageProvider
-      }
-    }
+    copy.imageProviderConfiguration = (
+      imageProvider: imageProvider,
+      imageProvidersAreEqual: { untypedLHS, untypedRHS in
+        guard
+          let lhs = untypedLHS as? ImageProvider,
+          let rhs = untypedRHS as? ImageProvider
+        else { return false }
+
+        return lhs == rhs
+      })
 
     return copy
   }
@@ -438,6 +436,20 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     }
   }
 
+  /// Returns a copy of this view with the `DotLottieConfigurationComponents`
+  /// updated to the given value.
+  ///  - Defaults to `[.imageProvider]`
+  ///  - If a component is specified here, that value in the `DotLottieConfiguration`
+  ///    of an active dotLottie animation will override any value provided via other methods.
+  public func dotLottieConfigurationComponents(
+    _ dotLottieConfigurationComponents: DotLottieConfigurationComponents)
+    -> Self
+  {
+    var copy = self
+    copy.dotLottieConfigurationComponents = dotLottieConfigurationComponents
+    return copy
+  }
+
   // MARK: Internal
 
   var configurations = [SwiftUIView<LottieAnimationView, Void>.Configuration]()
@@ -446,18 +458,23 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   @State private var animationSource: LottieAnimationSource?
   private var playbackMode: LottiePlaybackMode?
+  private var animationSpeed: Double?
   private var reloadAnimationTrigger: AnyEquatable?
   private var loadAnimation: (() async throws -> LottieAnimationSource?)?
   private var animationDidLoad: ((LottieAnimationSource) -> Void)?
   private var animationCompletionHandler: LottieCompletionBlock?
   private var showPlaceholderWhileReloading = false
-  private var imageProvider: AnimationImageProvider?
   private var textProvider: AnimationKeypathTextProvider = DefaultTextProvider()
   private var fontProvider: AnimationFontProvider = DefaultFontProvider()
   private var configuration: LottieConfiguration = .shared
+  private var dotLottieConfigurationComponents: DotLottieConfigurationComponents = .imageProvider
   private var logger: LottieLogger = .shared
   private var sizing = SwiftUIMeasurementContainerStrategy.automatic
   private let placeholder: (() -> Placeholder)?
+
+  private var imageProviderConfiguration: (
+    imageProvider: AnimationImageProvider,
+    imageProvidersAreEqual: (AnimationImageProvider, AnimationImageProvider) -> Bool)?
 
   private func loadAnimationIfNecessary() {
     guard let loadAnimation else { return }
@@ -479,6 +496,73 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     }
 
     loadAnimationIfNecessary()
+  }
+
+  /// Applies playback configuration for the current animation to the `LottieAnimationView`
+  private func applyCurrentAnimationConfiguration(to view: LottieAnimationView) {
+    guard let animationSource else { return }
+    var imageProviderConfiguration = imageProviderConfiguration
+    var playbackMode = playbackMode
+    var animationSpeed = animationSpeed
+
+    // When playing a dotLottie animation, its `DotLottieConfiguration`
+    // can override some behavior of the animation.
+    if let dotLottieConfiguration = animationSource.dotLottieAnimation?.configuration {
+      // Only use the value from the `DotLottieConfiguration` is that component
+      // is specified in the list of `dotLottieConfigurationComponents`.
+      if dotLottieConfigurationComponents.contains(.loopMode) {
+        playbackMode = playbackMode?.loopMode(dotLottieConfiguration.loopMode)
+      }
+
+      if dotLottieConfigurationComponents.contains(.animationSpeed) {
+        animationSpeed = dotLottieConfiguration.speed
+      }
+
+      if
+        dotLottieConfigurationComponents.contains(.imageProvider),
+        let dotLottieImageProvider = dotLottieConfiguration.dotLottieImageProvider
+      {
+        imageProviderConfiguration = (
+          imageProvider: dotLottieImageProvider,
+          imageProvidersAreEqual: { untypedLHS, untypedRHS in
+            guard
+              let lhs = untypedLHS as? DotLottieImageProvider,
+              let rhs = untypedRHS as? DotLottieImageProvider
+            else { return false }
+
+            return lhs == rhs
+          })
+      }
+    }
+
+    // We check referential equality of the animation before updating as updating the
+    // animation has a side-effect of rebuilding the animation layer, and it would be
+    // prohibitive to do so on every state update.
+    if animationSource.animation !== view.animation {
+      view.loadAnimation(animationSource)
+      animationDidLoad?(animationSource)
+    }
+
+    if 
+      let playbackMode,
+      playbackMode != view.currentPlaybackMode
+    {
+      view.setPlaybackMode(playbackMode, completion: animationCompletionHandler)
+    }
+
+    if
+      let (imageProvider, imageProvidersAreEqual) = imageProviderConfiguration,
+      !imageProvidersAreEqual(imageProvider, view.imageProvider)
+    {
+      view.imageProvider = imageProvider
+    }
+
+    if
+      let animationSpeed,
+      animationSpeed != view.animationSpeed
+    {
+      view.animationSpeed = animationSpeed
+    }
   }
 }
 #endif

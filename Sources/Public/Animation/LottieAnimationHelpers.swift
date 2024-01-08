@@ -160,7 +160,7 @@ extension LottieAnimation {
     case .dictionaryBased:
       let json = try JSONSerialization.jsonObject(with: data)
       guard let dict = json as? [String: Any] else {
-        throw InitializableError.invalidInput
+        throw InitializableError.invalidInput()
       }
       return try LottieAnimation(dictionary: dict)
     }

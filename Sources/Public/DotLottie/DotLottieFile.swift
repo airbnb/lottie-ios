@@ -110,9 +110,9 @@ public final class DotLottieFile {
       let animation = try dotLottieAnimation.animation(url: animationsUrl)
       let configuration = DotLottieConfiguration(
         id: dotLottieAnimation.id,
-        imageProvider: imageProvider,
         loopMode: dotLottieAnimation.loopMode,
-        speed: dotLottieAnimation.animationSpeed)
+        speed: dotLottieAnimation.animationSpeed,
+        dotLottieImageProvider: imageProvider)
 
       return DotLottieFile.Animation(
         animation: animation,

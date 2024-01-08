@@ -51,11 +51,7 @@ extension LayerModel {
     case (.null, _):
       return TransformLayer(layerModel: self)
 
-    default:
-      try context.logCompatibilityIssue("""
-        Unexpected layer type combination ("\(type)" and "\(Swift.type(of: self))")
-        """)
-
+    case (.unknown, _), (.precomp, _), (.solid, _), (.image, _), (.shape, _), (.text, _):
       return nil
     }
   }
