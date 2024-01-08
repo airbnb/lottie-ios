@@ -32,11 +32,8 @@ public class BundleImageProvider: AnimationImageProvider {
   // MARK: Public
 
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
-    if
-      let data = Data(imageAsset: asset),
-      let image = UIImage(data: data)
-    {
-      return image.cgImage
+    if let base64Image = asset.base64Image {
+      return base64Image
     }
 
     let imagePath: String?

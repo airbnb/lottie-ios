@@ -37,7 +37,11 @@ class DotLottieImageProvider: AnimationImageProvider {
   let filepath: URL
 
   func imageForAsset(asset: ImageAsset) -> CGImage? {
-    images[asset.name]
+    if let base64Image = asset.base64Image {
+      return base64Image
+    }
+
+    return images[asset.name]
   }
 
   // MARK: Private
