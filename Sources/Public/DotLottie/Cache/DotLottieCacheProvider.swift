@@ -10,7 +10,7 @@
 /// can increase performance when loading an animation multiple times.
 ///
 /// Lottie comes with a prebuilt LRU DotLottie Cache.
-public protocol DotLottieCacheProvider {
+public protocol DotLottieCacheProvider: Sendable {
 
   func file(forKey: String) -> DotLottieFile?
 
