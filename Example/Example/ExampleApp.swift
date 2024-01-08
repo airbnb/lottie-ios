@@ -10,7 +10,7 @@ struct ExampleApp: App {
 
   init() {
     // Register fonts from the Samples/Fonts directory
-    for fontAssetURL in (Bundle.main.urls(forResourcesWithExtension: "ttf", subdirectory: "Samples/Fonts") ?? []) {
+    for fontAssetURL in Bundle.main.urls(forResourcesWithExtension: "ttf", subdirectory: "Samples/Fonts") ?? [] {
       CTFontManagerRegisterFontsForURL(fontAssetURL as CFURL, .process, nil)
     }
   }

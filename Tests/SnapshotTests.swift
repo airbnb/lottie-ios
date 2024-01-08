@@ -93,7 +93,7 @@ class SnapshotTests: XCTestCase {
 
   override func setUp() {
     // Register fonts from the Samples/Fonts directory
-    for fontAssetURL in (Bundle.lottie.urls(forResourcesWithExtension: "ttf", subdirectory: "Samples/Fonts") ?? []) {
+    for fontAssetURL in Bundle.lottie.urls(forResourcesWithExtension: "ttf", subdirectory: "Samples/Fonts") ?? [] {
       CTFontManagerRegisterFontsForURL(fontAssetURL as CFURL, .process, nil)
     }
 
