@@ -31,11 +31,8 @@ public class BundleImageProvider: AnimationImageProvider {
   // MARK: Public
 
   public func imageForAsset(asset: ImageAsset) -> CGImage? {
-    if
-      let data = Data(imageAsset: asset),
-      let image = NSImage(data: data)
-    {
-      return image.lottie_CGImage
+    if let base64Image = asset.base64Image {
+      return base64Image
     }
 
     let imagePath: String?

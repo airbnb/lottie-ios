@@ -5,7 +5,14 @@
 //  Created by Brandon Withrow on 1/9/19.
 //
 
+import CoreGraphics
 import Foundation
+
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 
 // MARK: - ImageAsset
 
@@ -110,4 +117,17 @@ extension Data {
     static let legacy = DataURLReadOptions(rawValue: 1 << 0)
   }
 
+}
+
+extension ImageAsset {
+  /// A `CGImage` loaded from this asset if represented using a Base 64 encoding
+  var base64Image: CGImage? {
+    guard let data = Data(imageAsset: self) else { return nil }
+
+    #if canImport(UIKit)
+    return UIImage(data: data)?.cgImage
+    #elseif canImport(AppKit)
+    return NSImage(data: data)?.lottie_CGImage
+    #endif
+  }
 }

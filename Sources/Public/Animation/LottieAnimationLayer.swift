@@ -1333,19 +1333,6 @@ public class LottieAnimationLayer: CALayer {
 
     self.animationContext = animationContext
 
-    switch currentRenderingEngine {
-    case .mainThread:
-      // On the CALayer side, just play all animations immediately. The UIView side
-      // will handle queueing animations.
-      break
-
-    case .coreAnimation, nil:
-      // The Core Animation engine automatically batches animation setup to happen
-      // in `CALayer.display()`, which won't be called until the layer is on-screen,
-      // so we don't need to defer animation setup at this layer.
-      break
-    }
-
     animationID = animationID + 1
     _activeAnimationName = LottieAnimationLayer.animationName + String(animationID)
 
