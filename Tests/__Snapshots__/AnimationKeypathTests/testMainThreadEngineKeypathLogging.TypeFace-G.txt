@@ -1,0 +1,1314 @@
+Dotted_lines
+Dotted_lines.Ellipse 1
+Dotted_lines.Ellipse 1.Anchor Point
+Dotted_lines.Ellipse 1.Ellipse Path 1
+Dotted_lines.Ellipse 1.Ellipse Path 1.Position
+Dotted_lines.Ellipse 1.Ellipse Path 1.Size
+Dotted_lines.Ellipse 1.Opacity
+Dotted_lines.Ellipse 1.Position
+Dotted_lines.Ellipse 1.Rotation
+Dotted_lines.Ellipse 1.Rotation X
+Dotted_lines.Ellipse 1.Rotation Y
+Dotted_lines.Ellipse 1.Rotation Z
+Dotted_lines.Ellipse 1.Scale
+Dotted_lines.Ellipse 1.Skew
+Dotted_lines.Ellipse 1.Skew Axis
+Dotted_lines.Ellipse 1.Stroke 1
+Dotted_lines.Ellipse 1.Stroke 1.Color
+Dotted_lines.Ellipse 1.Stroke 1.Dash Phase
+Dotted_lines.Ellipse 1.Stroke 1.Dashes
+Dotted_lines.Ellipse 1.Stroke 1.Opacity
+Dotted_lines.Ellipse 1.Stroke 1.Stroke Width
+Dotted_lines.Ellipse 1.Transform
+Dotted_lines.Ellipse 1.Transform.Anchor Point
+Dotted_lines.Ellipse 1.Transform.Opacity
+Dotted_lines.Ellipse 1.Transform.Position
+Dotted_lines.Ellipse 1.Transform.Rotation
+Dotted_lines.Ellipse 1.Transform.Rotation X
+Dotted_lines.Ellipse 1.Transform.Rotation Y
+Dotted_lines.Ellipse 1.Transform.Rotation Z
+Dotted_lines.Ellipse 1.Transform.Scale
+Dotted_lines.Ellipse 1.Transform.Skew
+Dotted_lines.Ellipse 1.Transform.Skew Axis
+Dotted_lines.Ellipse 1.Trim Paths 1
+Dotted_lines.Ellipse 1.Trim Paths 1.End
+Dotted_lines.Ellipse 1.Trim Paths 1.Offset
+Dotted_lines.Ellipse 1.Trim Paths 1.Start
+Dotted_lines.Transform
+Dotted_lines.Transform.Anchor Point
+Dotted_lines.Transform.Opacity
+Dotted_lines.Transform.Position
+Dotted_lines.Transform.Rotation
+Dotted_lines.Transform.Rotation X
+Dotted_lines.Transform.Rotation Y
+Dotted_lines.Transform.Rotation Z
+Dotted_lines.Transform.Scale
+Dotted_lines_Null
+Dotted_lines_Null.Transform
+Dotted_lines_Null.Transform.Anchor Point
+Dotted_lines_Null.Transform.Opacity
+Dotted_lines_Null.Transform.Position
+Dotted_lines_Null.Transform.Rotation
+Dotted_lines_Null.Transform.Rotation X
+Dotted_lines_Null.Transform.Rotation Y
+Dotted_lines_Null.Transform.Rotation Z
+Dotted_lines_Null.Transform.Scale
+G
+G 2
+G 2.Ellipse 1
+G 2.Ellipse 1.Anchor Point
+G 2.Ellipse 1.Opacity
+G 2.Ellipse 1.Path 1
+G 2.Ellipse 1.Path 1.Path
+G 2.Ellipse 1.Position
+G 2.Ellipse 1.Rotation
+G 2.Ellipse 1.Rotation X
+G 2.Ellipse 1.Rotation Y
+G 2.Ellipse 1.Rotation Z
+G 2.Ellipse 1.Scale
+G 2.Ellipse 1.Skew
+G 2.Ellipse 1.Skew Axis
+G 2.Ellipse 1.Stroke 1
+G 2.Ellipse 1.Stroke 1.Color
+G 2.Ellipse 1.Stroke 1.Dash Phase
+G 2.Ellipse 1.Stroke 1.Dashes
+G 2.Ellipse 1.Stroke 1.Opacity
+G 2.Ellipse 1.Stroke 1.Stroke Width
+G 2.Ellipse 1.Transform
+G 2.Ellipse 1.Transform.Anchor Point
+G 2.Ellipse 1.Transform.Opacity
+G 2.Ellipse 1.Transform.Position
+G 2.Ellipse 1.Transform.Rotation
+G 2.Ellipse 1.Transform.Rotation X
+G 2.Ellipse 1.Transform.Rotation Y
+G 2.Ellipse 1.Transform.Rotation Z
+G 2.Ellipse 1.Transform.Scale
+G 2.Ellipse 1.Transform.Skew
+G 2.Ellipse 1.Transform.Skew Axis
+G 2.Transform
+G 2.Transform.Anchor Point
+G 2.Transform.Opacity
+G 2.Transform.Position
+G 2.Transform.Rotation
+G 2.Transform.Rotation X
+G 2.Transform.Rotation Y
+G 2.Transform.Rotation Z
+G 2.Transform.Scale
+G 2.Trim Paths 1
+G 2.Trim Paths 1.End
+G 2.Trim Paths 1.Offset
+G 2.Trim Paths 1.Start
+G Outlines 3
+G Outlines 3.G
+G Outlines 3.G.Anchor Point
+G Outlines 3.G.Fill 1
+G Outlines 3.G.Fill 1.Color
+G Outlines 3.G.Fill 1.Opacity
+G Outlines 3.G.G
+G Outlines 3.G.G.Path
+G Outlines 3.G.Opacity
+G Outlines 3.G.Position
+G Outlines 3.G.Rotation
+G Outlines 3.G.Rotation X
+G Outlines 3.G.Rotation Y
+G Outlines 3.G.Rotation Z
+G Outlines 3.G.Scale
+G Outlines 3.G.Skew
+G Outlines 3.G.Skew Axis
+G Outlines 3.G.Transform
+G Outlines 3.G.Transform.Anchor Point
+G Outlines 3.G.Transform.Opacity
+G Outlines 3.G.Transform.Position
+G Outlines 3.G.Transform.Rotation
+G Outlines 3.G.Transform.Rotation X
+G Outlines 3.G.Transform.Rotation Y
+G Outlines 3.G.Transform.Rotation Z
+G Outlines 3.G.Transform.Scale
+G Outlines 3.G.Transform.Skew
+G Outlines 3.G.Transform.Skew Axis
+G Outlines 3.Transform
+G Outlines 3.Transform.Anchor Point
+G Outlines 3.Transform.Opacity
+G Outlines 3.Transform.Position
+G Outlines 3.Transform.Rotation
+G Outlines 3.Transform.Rotation X
+G Outlines 3.Transform.Rotation Y
+G Outlines 3.Transform.Rotation Z
+G Outlines 3.Transform.Scale
+G.Ellipse 1
+G.Ellipse 1.Anchor Point
+G.Ellipse 1.Opacity
+G.Ellipse 1.Path 1
+G.Ellipse 1.Path 1.Path
+G.Ellipse 1.Position
+G.Ellipse 1.Rotation
+G.Ellipse 1.Rotation X
+G.Ellipse 1.Rotation Y
+G.Ellipse 1.Rotation Z
+G.Ellipse 1.Scale
+G.Ellipse 1.Skew
+G.Ellipse 1.Skew Axis
+G.Ellipse 1.Stroke 1
+G.Ellipse 1.Stroke 1.Color
+G.Ellipse 1.Stroke 1.Dash Phase
+G.Ellipse 1.Stroke 1.Dashes
+G.Ellipse 1.Stroke 1.Opacity
+G.Ellipse 1.Stroke 1.Stroke Width
+G.Ellipse 1.Transform
+G.Ellipse 1.Transform.Anchor Point
+G.Ellipse 1.Transform.Opacity
+G.Ellipse 1.Transform.Position
+G.Ellipse 1.Transform.Rotation
+G.Ellipse 1.Transform.Rotation X
+G.Ellipse 1.Transform.Rotation Y
+G.Ellipse 1.Transform.Rotation Z
+G.Ellipse 1.Transform.Scale
+G.Ellipse 1.Transform.Skew
+G.Ellipse 1.Transform.Skew Axis
+G.Transform
+G.Transform.Anchor Point
+G.Transform.Opacity
+G.Transform.Position
+G.Transform.Rotation
+G.Transform.Rotation X
+G.Transform.Rotation Y
+G.Transform.Rotation Z
+G.Transform.Scale
+G.Trim Paths 1
+G.Trim Paths 1.End
+G.Trim Paths 1.Offset
+G.Trim Paths 1.Start
+Null 3
+Null 3
+Null 3
+Null 3
+Null 3
+Null 3.Transform
+Null 3.Transform
+Null 3.Transform
+Null 3.Transform
+Null 3.Transform
+Null 3.Transform.Anchor Point
+Null 3.Transform.Anchor Point
+Null 3.Transform.Anchor Point
+Null 3.Transform.Anchor Point
+Null 3.Transform.Anchor Point
+Null 3.Transform.Opacity
+Null 3.Transform.Opacity
+Null 3.Transform.Opacity
+Null 3.Transform.Opacity
+Null 3.Transform.Opacity
+Null 3.Transform.Position
+Null 3.Transform.Position
+Null 3.Transform.Position
+Null 3.Transform.Position
+Null 3.Transform.Position
+Null 3.Transform.Rotation
+Null 3.Transform.Rotation
+Null 3.Transform.Rotation
+Null 3.Transform.Rotation
+Null 3.Transform.Rotation
+Null 3.Transform.Rotation X
+Null 3.Transform.Rotation X
+Null 3.Transform.Rotation X
+Null 3.Transform.Rotation X
+Null 3.Transform.Rotation X
+Null 3.Transform.Rotation Y
+Null 3.Transform.Rotation Y
+Null 3.Transform.Rotation Y
+Null 3.Transform.Rotation Y
+Null 3.Transform.Rotation Y
+Null 3.Transform.Rotation Z
+Null 3.Transform.Rotation Z
+Null 3.Transform.Rotation Z
+Null 3.Transform.Rotation Z
+Null 3.Transform.Rotation Z
+Null 3.Transform.Scale
+Null 3.Transform.Scale
+Null 3.Transform.Scale
+Null 3.Transform.Scale
+Null 3.Transform.Scale
+Outer_circles
+Outer_circles
+Outer_circles
+Outer_circles
+Outer_circles.Ellipse 1
+Outer_circles.Ellipse 1
+Outer_circles.Ellipse 1.Anchor Point
+Outer_circles.Ellipse 1.Anchor Point
+Outer_circles.Ellipse 1.Ellipse Path 1
+Outer_circles.Ellipse 1.Ellipse Path 1
+Outer_circles.Ellipse 1.Ellipse Path 1.Position
+Outer_circles.Ellipse 1.Ellipse Path 1.Position
+Outer_circles.Ellipse 1.Ellipse Path 1.Size
+Outer_circles.Ellipse 1.Ellipse Path 1.Size
+Outer_circles.Ellipse 1.Opacity
+Outer_circles.Ellipse 1.Opacity
+Outer_circles.Ellipse 1.Position
+Outer_circles.Ellipse 1.Position
+Outer_circles.Ellipse 1.Rotation
+Outer_circles.Ellipse 1.Rotation
+Outer_circles.Ellipse 1.Rotation X
+Outer_circles.Ellipse 1.Rotation X
+Outer_circles.Ellipse 1.Rotation Y
+Outer_circles.Ellipse 1.Rotation Y
+Outer_circles.Ellipse 1.Rotation Z
+Outer_circles.Ellipse 1.Rotation Z
+Outer_circles.Ellipse 1.Scale
+Outer_circles.Ellipse 1.Scale
+Outer_circles.Ellipse 1.Skew
+Outer_circles.Ellipse 1.Skew
+Outer_circles.Ellipse 1.Skew Axis
+Outer_circles.Ellipse 1.Skew Axis
+Outer_circles.Ellipse 1.Stroke 1
+Outer_circles.Ellipse 1.Stroke 1
+Outer_circles.Ellipse 1.Stroke 1.Color
+Outer_circles.Ellipse 1.Stroke 1.Color
+Outer_circles.Ellipse 1.Stroke 1.Dash Phase
+Outer_circles.Ellipse 1.Stroke 1.Dash Phase
+Outer_circles.Ellipse 1.Stroke 1.Dashes
+Outer_circles.Ellipse 1.Stroke 1.Dashes
+Outer_circles.Ellipse 1.Stroke 1.Opacity
+Outer_circles.Ellipse 1.Stroke 1.Opacity
+Outer_circles.Ellipse 1.Stroke 1.Stroke Width
+Outer_circles.Ellipse 1.Stroke 1.Stroke Width
+Outer_circles.Ellipse 1.Transform
+Outer_circles.Ellipse 1.Transform
+Outer_circles.Ellipse 1.Transform.Anchor Point
+Outer_circles.Ellipse 1.Transform.Anchor Point
+Outer_circles.Ellipse 1.Transform.Opacity
+Outer_circles.Ellipse 1.Transform.Opacity
+Outer_circles.Ellipse 1.Transform.Position
+Outer_circles.Ellipse 1.Transform.Position
+Outer_circles.Ellipse 1.Transform.Rotation
+Outer_circles.Ellipse 1.Transform.Rotation
+Outer_circles.Ellipse 1.Transform.Rotation X
+Outer_circles.Ellipse 1.Transform.Rotation X
+Outer_circles.Ellipse 1.Transform.Rotation Y
+Outer_circles.Ellipse 1.Transform.Rotation Y
+Outer_circles.Ellipse 1.Transform.Rotation Z
+Outer_circles.Ellipse 1.Transform.Rotation Z
+Outer_circles.Ellipse 1.Transform.Scale
+Outer_circles.Ellipse 1.Transform.Scale
+Outer_circles.Ellipse 1.Transform.Skew
+Outer_circles.Ellipse 1.Transform.Skew
+Outer_circles.Ellipse 1.Transform.Skew Axis
+Outer_circles.Ellipse 1.Transform.Skew Axis
+Outer_circles.Shape 1
+Outer_circles.Shape 1
+Outer_circles.Shape 1.Anchor Point
+Outer_circles.Shape 1.Anchor Point
+Outer_circles.Shape 1.Opacity
+Outer_circles.Shape 1.Opacity
+Outer_circles.Shape 1.Path 1
+Outer_circles.Shape 1.Path 1
+Outer_circles.Shape 1.Path 1.Path
+Outer_circles.Shape 1.Path 1.Path
+Outer_circles.Shape 1.Position
+Outer_circles.Shape 1.Position
+Outer_circles.Shape 1.Rotation
+Outer_circles.Shape 1.Rotation
+Outer_circles.Shape 1.Rotation X
+Outer_circles.Shape 1.Rotation X
+Outer_circles.Shape 1.Rotation Y
+Outer_circles.Shape 1.Rotation Y
+Outer_circles.Shape 1.Rotation Z
+Outer_circles.Shape 1.Rotation Z
+Outer_circles.Shape 1.Scale
+Outer_circles.Shape 1.Scale
+Outer_circles.Shape 1.Skew
+Outer_circles.Shape 1.Skew
+Outer_circles.Shape 1.Skew Axis
+Outer_circles.Shape 1.Skew Axis
+Outer_circles.Shape 1.Stroke 1
+Outer_circles.Shape 1.Stroke 1
+Outer_circles.Shape 1.Stroke 1.Color
+Outer_circles.Shape 1.Stroke 1.Color
+Outer_circles.Shape 1.Stroke 1.Dash Phase
+Outer_circles.Shape 1.Stroke 1.Dash Phase
+Outer_circles.Shape 1.Stroke 1.Dashes
+Outer_circles.Shape 1.Stroke 1.Dashes
+Outer_circles.Shape 1.Stroke 1.Opacity
+Outer_circles.Shape 1.Stroke 1.Opacity
+Outer_circles.Shape 1.Stroke 1.Stroke Width
+Outer_circles.Shape 1.Stroke 1.Stroke Width
+Outer_circles.Shape 1.Transform
+Outer_circles.Shape 1.Transform
+Outer_circles.Shape 1.Transform.Anchor Point
+Outer_circles.Shape 1.Transform.Anchor Point
+Outer_circles.Shape 1.Transform.Opacity
+Outer_circles.Shape 1.Transform.Opacity
+Outer_circles.Shape 1.Transform.Position
+Outer_circles.Shape 1.Transform.Position
+Outer_circles.Shape 1.Transform.Rotation
+Outer_circles.Shape 1.Transform.Rotation
+Outer_circles.Shape 1.Transform.Rotation X
+Outer_circles.Shape 1.Transform.Rotation X
+Outer_circles.Shape 1.Transform.Rotation Y
+Outer_circles.Shape 1.Transform.Rotation Y
+Outer_circles.Shape 1.Transform.Rotation Z
+Outer_circles.Shape 1.Transform.Rotation Z
+Outer_circles.Shape 1.Transform.Scale
+Outer_circles.Shape 1.Transform.Scale
+Outer_circles.Shape 1.Transform.Skew
+Outer_circles.Shape 1.Transform.Skew
+Outer_circles.Shape 1.Transform.Skew Axis
+Outer_circles.Shape 1.Transform.Skew Axis
+Outer_circles.Shape 1.Trim Paths 1
+Outer_circles.Shape 1.Trim Paths 1
+Outer_circles.Shape 1.Trim Paths 1.End
+Outer_circles.Shape 1.Trim Paths 1.End
+Outer_circles.Shape 1.Trim Paths 1.Offset
+Outer_circles.Shape 1.Trim Paths 1.Offset
+Outer_circles.Shape 1.Trim Paths 1.Start
+Outer_circles.Shape 1.Trim Paths 1.Start
+Outer_circles.Transform
+Outer_circles.Transform
+Outer_circles.Transform
+Outer_circles.Transform
+Outer_circles.Transform.Anchor Point
+Outer_circles.Transform.Anchor Point
+Outer_circles.Transform.Anchor Point
+Outer_circles.Transform.Anchor Point
+Outer_circles.Transform.Opacity
+Outer_circles.Transform.Opacity
+Outer_circles.Transform.Opacity
+Outer_circles.Transform.Opacity
+Outer_circles.Transform.Position
+Outer_circles.Transform.Position
+Outer_circles.Transform.Position
+Outer_circles.Transform.Position
+Outer_circles.Transform.Rotation
+Outer_circles.Transform.Rotation
+Outer_circles.Transform.Rotation
+Outer_circles.Transform.Rotation
+Outer_circles.Transform.Rotation X
+Outer_circles.Transform.Rotation X
+Outer_circles.Transform.Rotation X
+Outer_circles.Transform.Rotation X
+Outer_circles.Transform.Rotation Y
+Outer_circles.Transform.Rotation Y
+Outer_circles.Transform.Rotation Y
+Outer_circles.Transform.Rotation Y
+Outer_circles.Transform.Rotation Z
+Outer_circles.Transform.Rotation Z
+Outer_circles.Transform.Rotation Z
+Outer_circles.Transform.Rotation Z
+Outer_circles.Transform.Scale
+Outer_circles.Transform.Scale
+Outer_circles.Transform.Scale
+Outer_circles.Transform.Scale
+ResizerTemp
+ResizerTemp.Color
+ResizerTemp.Transform
+ResizerTemp.Transform.Anchor Point
+ResizerTemp.Transform.Opacity
+ResizerTemp.Transform.Position
+ResizerTemp.Transform.Rotation
+ResizerTemp.Transform.Rotation X
+ResizerTemp.Transform.Rotation Y
+ResizerTemp.Transform.Rotation Z
+ResizerTemp.Transform.Scale
+Shape Layer 12
+Shape Layer 12.Ellipse 1
+Shape Layer 12.Ellipse 1.Anchor Point
+Shape Layer 12.Ellipse 1.Ellipse Path 1
+Shape Layer 12.Ellipse 1.Ellipse Path 1.Position
+Shape Layer 12.Ellipse 1.Ellipse Path 1.Size
+Shape Layer 12.Ellipse 1.Opacity
+Shape Layer 12.Ellipse 1.Position
+Shape Layer 12.Ellipse 1.Rotation
+Shape Layer 12.Ellipse 1.Rotation X
+Shape Layer 12.Ellipse 1.Rotation Y
+Shape Layer 12.Ellipse 1.Rotation Z
+Shape Layer 12.Ellipse 1.Scale
+Shape Layer 12.Ellipse 1.Skew
+Shape Layer 12.Ellipse 1.Skew Axis
+Shape Layer 12.Ellipse 1.Stroke 1
+Shape Layer 12.Ellipse 1.Stroke 1.Color
+Shape Layer 12.Ellipse 1.Stroke 1.Dash Phase
+Shape Layer 12.Ellipse 1.Stroke 1.Dashes
+Shape Layer 12.Ellipse 1.Stroke 1.Opacity
+Shape Layer 12.Ellipse 1.Stroke 1.Stroke Width
+Shape Layer 12.Ellipse 1.Transform
+Shape Layer 12.Ellipse 1.Transform.Anchor Point
+Shape Layer 12.Ellipse 1.Transform.Opacity
+Shape Layer 12.Ellipse 1.Transform.Position
+Shape Layer 12.Ellipse 1.Transform.Rotation
+Shape Layer 12.Ellipse 1.Transform.Rotation X
+Shape Layer 12.Ellipse 1.Transform.Rotation Y
+Shape Layer 12.Ellipse 1.Transform.Rotation Z
+Shape Layer 12.Ellipse 1.Transform.Scale
+Shape Layer 12.Ellipse 1.Transform.Skew
+Shape Layer 12.Ellipse 1.Transform.Skew Axis
+Shape Layer 12.Transform
+Shape Layer 12.Transform.Anchor Point
+Shape Layer 12.Transform.Opacity
+Shape Layer 12.Transform.Position
+Shape Layer 12.Transform.Rotation
+Shape Layer 12.Transform.Rotation X
+Shape Layer 12.Transform.Rotation Y
+Shape Layer 12.Transform.Rotation Z
+Shape Layer 12.Transform.Scale
+Shape Layer 13
+Shape Layer 13.Ellipse 1
+Shape Layer 13.Ellipse 1.Anchor Point
+Shape Layer 13.Ellipse 1.Ellipse Path 1
+Shape Layer 13.Ellipse 1.Ellipse Path 1.Position
+Shape Layer 13.Ellipse 1.Ellipse Path 1.Size
+Shape Layer 13.Ellipse 1.Opacity
+Shape Layer 13.Ellipse 1.Position
+Shape Layer 13.Ellipse 1.Rotation
+Shape Layer 13.Ellipse 1.Rotation X
+Shape Layer 13.Ellipse 1.Rotation Y
+Shape Layer 13.Ellipse 1.Rotation Z
+Shape Layer 13.Ellipse 1.Scale
+Shape Layer 13.Ellipse 1.Skew
+Shape Layer 13.Ellipse 1.Skew Axis
+Shape Layer 13.Ellipse 1.Stroke 1
+Shape Layer 13.Ellipse 1.Stroke 1.Color
+Shape Layer 13.Ellipse 1.Stroke 1.Dash Phase
+Shape Layer 13.Ellipse 1.Stroke 1.Dashes
+Shape Layer 13.Ellipse 1.Stroke 1.Opacity
+Shape Layer 13.Ellipse 1.Stroke 1.Stroke Width
+Shape Layer 13.Ellipse 1.Transform
+Shape Layer 13.Ellipse 1.Transform.Anchor Point
+Shape Layer 13.Ellipse 1.Transform.Opacity
+Shape Layer 13.Ellipse 1.Transform.Position
+Shape Layer 13.Ellipse 1.Transform.Rotation
+Shape Layer 13.Ellipse 1.Transform.Rotation X
+Shape Layer 13.Ellipse 1.Transform.Rotation Y
+Shape Layer 13.Ellipse 1.Transform.Rotation Z
+Shape Layer 13.Ellipse 1.Transform.Scale
+Shape Layer 13.Ellipse 1.Transform.Skew
+Shape Layer 13.Ellipse 1.Transform.Skew Axis
+Shape Layer 13.Transform
+Shape Layer 13.Transform.Anchor Point
+Shape Layer 13.Transform.Opacity
+Shape Layer 13.Transform.Position
+Shape Layer 13.Transform.Rotation
+Shape Layer 13.Transform.Rotation X
+Shape Layer 13.Transform.Rotation Y
+Shape Layer 13.Transform.Rotation Z
+Shape Layer 13.Transform.Scale
+Shape Layer 14
+Shape Layer 14.Rectangle 1
+Shape Layer 14.Rectangle 1.Anchor Point
+Shape Layer 14.Rectangle 1.Opacity
+Shape Layer 14.Rectangle 1.Position
+Shape Layer 14.Rectangle 1.Rectangle Path 1
+Shape Layer 14.Rectangle 1.Rectangle Path 1.Position
+Shape Layer 14.Rectangle 1.Rectangle Path 1.Roundness
+Shape Layer 14.Rectangle 1.Rectangle Path 1.Size
+Shape Layer 14.Rectangle 1.Rotation
+Shape Layer 14.Rectangle 1.Rotation X
+Shape Layer 14.Rectangle 1.Rotation Y
+Shape Layer 14.Rectangle 1.Rotation Z
+Shape Layer 14.Rectangle 1.Scale
+Shape Layer 14.Rectangle 1.Skew
+Shape Layer 14.Rectangle 1.Skew Axis
+Shape Layer 14.Rectangle 1.Stroke 1
+Shape Layer 14.Rectangle 1.Stroke 1.Color
+Shape Layer 14.Rectangle 1.Stroke 1.Dash Phase
+Shape Layer 14.Rectangle 1.Stroke 1.Dashes
+Shape Layer 14.Rectangle 1.Stroke 1.Opacity
+Shape Layer 14.Rectangle 1.Stroke 1.Stroke Width
+Shape Layer 14.Rectangle 1.Transform
+Shape Layer 14.Rectangle 1.Transform.Anchor Point
+Shape Layer 14.Rectangle 1.Transform.Opacity
+Shape Layer 14.Rectangle 1.Transform.Position
+Shape Layer 14.Rectangle 1.Transform.Rotation
+Shape Layer 14.Rectangle 1.Transform.Rotation X
+Shape Layer 14.Rectangle 1.Transform.Rotation Y
+Shape Layer 14.Rectangle 1.Transform.Rotation Z
+Shape Layer 14.Rectangle 1.Transform.Scale
+Shape Layer 14.Rectangle 1.Transform.Skew
+Shape Layer 14.Rectangle 1.Transform.Skew Axis
+Shape Layer 14.Transform
+Shape Layer 14.Transform.Anchor Point
+Shape Layer 14.Transform.Opacity
+Shape Layer 14.Transform.Position
+Shape Layer 14.Transform.Rotation
+Shape Layer 14.Transform.Rotation X
+Shape Layer 14.Transform.Rotation Y
+Shape Layer 14.Transform.Rotation Z
+Shape Layer 14.Transform.Scale
+Shape Layer 15
+Shape Layer 15.Rectangle 1
+Shape Layer 15.Rectangle 1.Anchor Point
+Shape Layer 15.Rectangle 1.Opacity
+Shape Layer 15.Rectangle 1.Position
+Shape Layer 15.Rectangle 1.Rectangle Path 1
+Shape Layer 15.Rectangle 1.Rectangle Path 1.Position
+Shape Layer 15.Rectangle 1.Rectangle Path 1.Roundness
+Shape Layer 15.Rectangle 1.Rectangle Path 1.Size
+Shape Layer 15.Rectangle 1.Rotation
+Shape Layer 15.Rectangle 1.Rotation X
+Shape Layer 15.Rectangle 1.Rotation Y
+Shape Layer 15.Rectangle 1.Rotation Z
+Shape Layer 15.Rectangle 1.Scale
+Shape Layer 15.Rectangle 1.Skew
+Shape Layer 15.Rectangle 1.Skew Axis
+Shape Layer 15.Rectangle 1.Stroke 1
+Shape Layer 15.Rectangle 1.Stroke 1.Color
+Shape Layer 15.Rectangle 1.Stroke 1.Dash Phase
+Shape Layer 15.Rectangle 1.Stroke 1.Dashes
+Shape Layer 15.Rectangle 1.Stroke 1.Opacity
+Shape Layer 15.Rectangle 1.Stroke 1.Stroke Width
+Shape Layer 15.Rectangle 1.Transform
+Shape Layer 15.Rectangle 1.Transform.Anchor Point
+Shape Layer 15.Rectangle 1.Transform.Opacity
+Shape Layer 15.Rectangle 1.Transform.Position
+Shape Layer 15.Rectangle 1.Transform.Rotation
+Shape Layer 15.Rectangle 1.Transform.Rotation X
+Shape Layer 15.Rectangle 1.Transform.Rotation Y
+Shape Layer 15.Rectangle 1.Transform.Rotation Z
+Shape Layer 15.Rectangle 1.Transform.Scale
+Shape Layer 15.Rectangle 1.Transform.Skew
+Shape Layer 15.Rectangle 1.Transform.Skew Axis
+Shape Layer 15.Transform
+Shape Layer 15.Transform.Anchor Point
+Shape Layer 15.Transform.Opacity
+Shape Layer 15.Transform.Position
+Shape Layer 15.Transform.Rotation
+Shape Layer 15.Transform.Rotation X
+Shape Layer 15.Transform.Rotation Y
+Shape Layer 15.Transform.Rotation Z
+Shape Layer 15.Transform.Scale
+Shape Layer 16
+Shape Layer 16.Ellipse 1
+Shape Layer 16.Ellipse 1.Anchor Point
+Shape Layer 16.Ellipse 1.Ellipse Path 1
+Shape Layer 16.Ellipse 1.Ellipse Path 1.Position
+Shape Layer 16.Ellipse 1.Ellipse Path 1.Size
+Shape Layer 16.Ellipse 1.Opacity
+Shape Layer 16.Ellipse 1.Position
+Shape Layer 16.Ellipse 1.Rotation
+Shape Layer 16.Ellipse 1.Rotation X
+Shape Layer 16.Ellipse 1.Rotation Y
+Shape Layer 16.Ellipse 1.Rotation Z
+Shape Layer 16.Ellipse 1.Scale
+Shape Layer 16.Ellipse 1.Skew
+Shape Layer 16.Ellipse 1.Skew Axis
+Shape Layer 16.Ellipse 1.Stroke 1
+Shape Layer 16.Ellipse 1.Stroke 1.Color
+Shape Layer 16.Ellipse 1.Stroke 1.Dash Phase
+Shape Layer 16.Ellipse 1.Stroke 1.Dashes
+Shape Layer 16.Ellipse 1.Stroke 1.Opacity
+Shape Layer 16.Ellipse 1.Stroke 1.Stroke Width
+Shape Layer 16.Ellipse 1.Transform
+Shape Layer 16.Ellipse 1.Transform.Anchor Point
+Shape Layer 16.Ellipse 1.Transform.Opacity
+Shape Layer 16.Ellipse 1.Transform.Position
+Shape Layer 16.Ellipse 1.Transform.Rotation
+Shape Layer 16.Ellipse 1.Transform.Rotation X
+Shape Layer 16.Ellipse 1.Transform.Rotation Y
+Shape Layer 16.Ellipse 1.Transform.Rotation Z
+Shape Layer 16.Ellipse 1.Transform.Scale
+Shape Layer 16.Ellipse 1.Transform.Skew
+Shape Layer 16.Ellipse 1.Transform.Skew Axis
+Shape Layer 16.Ellipse 1.Trim Paths 1
+Shape Layer 16.Ellipse 1.Trim Paths 1.End
+Shape Layer 16.Ellipse 1.Trim Paths 1.Offset
+Shape Layer 16.Ellipse 1.Trim Paths 1.Start
+Shape Layer 16.Transform
+Shape Layer 16.Transform.Anchor Point
+Shape Layer 16.Transform.Opacity
+Shape Layer 16.Transform.Position
+Shape Layer 16.Transform.Rotation
+Shape Layer 16.Transform.Rotation X
+Shape Layer 16.Transform.Rotation Y
+Shape Layer 16.Transform.Rotation Z
+Shape Layer 16.Transform.Scale
+Shape Layer 17
+Shape Layer 17.Ellipse 1
+Shape Layer 17.Ellipse 1.Anchor Point
+Shape Layer 17.Ellipse 1.Ellipse Path 1
+Shape Layer 17.Ellipse 1.Ellipse Path 1.Position
+Shape Layer 17.Ellipse 1.Ellipse Path 1.Size
+Shape Layer 17.Ellipse 1.Opacity
+Shape Layer 17.Ellipse 1.Position
+Shape Layer 17.Ellipse 1.Rotation
+Shape Layer 17.Ellipse 1.Rotation X
+Shape Layer 17.Ellipse 1.Rotation Y
+Shape Layer 17.Ellipse 1.Rotation Z
+Shape Layer 17.Ellipse 1.Scale
+Shape Layer 17.Ellipse 1.Skew
+Shape Layer 17.Ellipse 1.Skew Axis
+Shape Layer 17.Ellipse 1.Stroke 1
+Shape Layer 17.Ellipse 1.Stroke 1.Color
+Shape Layer 17.Ellipse 1.Stroke 1.Dash Phase
+Shape Layer 17.Ellipse 1.Stroke 1.Dashes
+Shape Layer 17.Ellipse 1.Stroke 1.Opacity
+Shape Layer 17.Ellipse 1.Stroke 1.Stroke Width
+Shape Layer 17.Ellipse 1.Transform
+Shape Layer 17.Ellipse 1.Transform.Anchor Point
+Shape Layer 17.Ellipse 1.Transform.Opacity
+Shape Layer 17.Ellipse 1.Transform.Position
+Shape Layer 17.Ellipse 1.Transform.Rotation
+Shape Layer 17.Ellipse 1.Transform.Rotation X
+Shape Layer 17.Ellipse 1.Transform.Rotation Y
+Shape Layer 17.Ellipse 1.Transform.Rotation Z
+Shape Layer 17.Ellipse 1.Transform.Scale
+Shape Layer 17.Ellipse 1.Transform.Skew
+Shape Layer 17.Ellipse 1.Transform.Skew Axis
+Shape Layer 17.Ellipse 1.Trim Paths 1
+Shape Layer 17.Ellipse 1.Trim Paths 1.End
+Shape Layer 17.Ellipse 1.Trim Paths 1.Offset
+Shape Layer 17.Ellipse 1.Trim Paths 1.Start
+Shape Layer 17.Transform
+Shape Layer 17.Transform.Anchor Point
+Shape Layer 17.Transform.Opacity
+Shape Layer 17.Transform.Position
+Shape Layer 17.Transform.Rotation
+Shape Layer 17.Transform.Rotation X
+Shape Layer 17.Transform.Rotation Y
+Shape Layer 17.Transform.Rotation Z
+Shape Layer 17.Transform.Scale
+Shape Layer 18
+Shape Layer 18.Shape 1
+Shape Layer 18.Shape 1.Anchor Point
+Shape Layer 18.Shape 1.Opacity
+Shape Layer 18.Shape 1.Path 1
+Shape Layer 18.Shape 1.Path 1.Path
+Shape Layer 18.Shape 1.Position
+Shape Layer 18.Shape 1.Rotation
+Shape Layer 18.Shape 1.Rotation X
+Shape Layer 18.Shape 1.Rotation Y
+Shape Layer 18.Shape 1.Rotation Z
+Shape Layer 18.Shape 1.Scale
+Shape Layer 18.Shape 1.Skew
+Shape Layer 18.Shape 1.Skew Axis
+Shape Layer 18.Shape 1.Stroke 2
+Shape Layer 18.Shape 1.Stroke 2.Color
+Shape Layer 18.Shape 1.Stroke 2.Dash Phase
+Shape Layer 18.Shape 1.Stroke 2.Dashes
+Shape Layer 18.Shape 1.Stroke 2.Opacity
+Shape Layer 18.Shape 1.Stroke 2.Stroke Width
+Shape Layer 18.Shape 1.Transform
+Shape Layer 18.Shape 1.Transform.Anchor Point
+Shape Layer 18.Shape 1.Transform.Opacity
+Shape Layer 18.Shape 1.Transform.Position
+Shape Layer 18.Shape 1.Transform.Rotation
+Shape Layer 18.Shape 1.Transform.Rotation X
+Shape Layer 18.Shape 1.Transform.Rotation Y
+Shape Layer 18.Shape 1.Transform.Rotation Z
+Shape Layer 18.Shape 1.Transform.Scale
+Shape Layer 18.Shape 1.Transform.Skew
+Shape Layer 18.Shape 1.Transform.Skew Axis
+Shape Layer 18.Shape 1.Trim Paths 1
+Shape Layer 18.Shape 1.Trim Paths 1.End
+Shape Layer 18.Shape 1.Trim Paths 1.Offset
+Shape Layer 18.Shape 1.Trim Paths 1.Start
+Shape Layer 18.Transform
+Shape Layer 18.Transform.Anchor Point
+Shape Layer 18.Transform.Opacity
+Shape Layer 18.Transform.Position
+Shape Layer 18.Transform.Rotation
+Shape Layer 18.Transform.Rotation X
+Shape Layer 18.Transform.Rotation Y
+Shape Layer 18.Transform.Rotation Z
+Shape Layer 18.Transform.Scale
+Shape Layer 6
+Shape Layer 6.Ellipse 1
+Shape Layer 6.Ellipse 1.Anchor Point
+Shape Layer 6.Ellipse 1.Ellipse Path 1
+Shape Layer 6.Ellipse 1.Ellipse Path 1.Position
+Shape Layer 6.Ellipse 1.Ellipse Path 1.Size
+Shape Layer 6.Ellipse 1.Opacity
+Shape Layer 6.Ellipse 1.Position
+Shape Layer 6.Ellipse 1.Rotation
+Shape Layer 6.Ellipse 1.Rotation X
+Shape Layer 6.Ellipse 1.Rotation Y
+Shape Layer 6.Ellipse 1.Rotation Z
+Shape Layer 6.Ellipse 1.Scale
+Shape Layer 6.Ellipse 1.Skew
+Shape Layer 6.Ellipse 1.Skew Axis
+Shape Layer 6.Ellipse 1.Stroke 1
+Shape Layer 6.Ellipse 1.Stroke 1.Color
+Shape Layer 6.Ellipse 1.Stroke 1.Dash Phase
+Shape Layer 6.Ellipse 1.Stroke 1.Dashes
+Shape Layer 6.Ellipse 1.Stroke 1.Opacity
+Shape Layer 6.Ellipse 1.Stroke 1.Stroke Width
+Shape Layer 6.Ellipse 1.Transform
+Shape Layer 6.Ellipse 1.Transform.Anchor Point
+Shape Layer 6.Ellipse 1.Transform.Opacity
+Shape Layer 6.Ellipse 1.Transform.Position
+Shape Layer 6.Ellipse 1.Transform.Rotation
+Shape Layer 6.Ellipse 1.Transform.Rotation X
+Shape Layer 6.Ellipse 1.Transform.Rotation Y
+Shape Layer 6.Ellipse 1.Transform.Rotation Z
+Shape Layer 6.Ellipse 1.Transform.Scale
+Shape Layer 6.Ellipse 1.Transform.Skew
+Shape Layer 6.Ellipse 1.Transform.Skew Axis
+Shape Layer 6.Ellipse 1.Trim Paths 1
+Shape Layer 6.Ellipse 1.Trim Paths 1.End
+Shape Layer 6.Ellipse 1.Trim Paths 1.Offset
+Shape Layer 6.Ellipse 1.Trim Paths 1.Start
+Shape Layer 6.Transform
+Shape Layer 6.Transform.Anchor Point
+Shape Layer 6.Transform.Opacity
+Shape Layer 6.Transform.Position
+Shape Layer 6.Transform.Rotation
+Shape Layer 6.Transform.Rotation X
+Shape Layer 6.Transform.Rotation Y
+Shape Layer 6.Transform.Rotation Z
+Shape Layer 6.Transform.Scale
+Shape Layer 7
+Shape Layer 7.Ellipse 1
+Shape Layer 7.Ellipse 1.Anchor Point
+Shape Layer 7.Ellipse 1.Ellipse Path 1
+Shape Layer 7.Ellipse 1.Ellipse Path 1.Position
+Shape Layer 7.Ellipse 1.Ellipse Path 1.Size
+Shape Layer 7.Ellipse 1.Opacity
+Shape Layer 7.Ellipse 1.Position
+Shape Layer 7.Ellipse 1.Rotation
+Shape Layer 7.Ellipse 1.Rotation X
+Shape Layer 7.Ellipse 1.Rotation Y
+Shape Layer 7.Ellipse 1.Rotation Z
+Shape Layer 7.Ellipse 1.Scale
+Shape Layer 7.Ellipse 1.Skew
+Shape Layer 7.Ellipse 1.Skew Axis
+Shape Layer 7.Ellipse 1.Stroke 1
+Shape Layer 7.Ellipse 1.Stroke 1.Color
+Shape Layer 7.Ellipse 1.Stroke 1.Dash Phase
+Shape Layer 7.Ellipse 1.Stroke 1.Dashes
+Shape Layer 7.Ellipse 1.Stroke 1.Opacity
+Shape Layer 7.Ellipse 1.Stroke 1.Stroke Width
+Shape Layer 7.Ellipse 1.Transform
+Shape Layer 7.Ellipse 1.Transform.Anchor Point
+Shape Layer 7.Ellipse 1.Transform.Opacity
+Shape Layer 7.Ellipse 1.Transform.Position
+Shape Layer 7.Ellipse 1.Transform.Rotation
+Shape Layer 7.Ellipse 1.Transform.Rotation X
+Shape Layer 7.Ellipse 1.Transform.Rotation Y
+Shape Layer 7.Ellipse 1.Transform.Rotation Z
+Shape Layer 7.Ellipse 1.Transform.Scale
+Shape Layer 7.Ellipse 1.Transform.Skew
+Shape Layer 7.Ellipse 1.Transform.Skew Axis
+Shape Layer 7.Ellipse 1.Trim Paths 1
+Shape Layer 7.Ellipse 1.Trim Paths 1.End
+Shape Layer 7.Ellipse 1.Trim Paths 1.Offset
+Shape Layer 7.Ellipse 1.Trim Paths 1.Start
+Shape Layer 7.Transform
+Shape Layer 7.Transform.Anchor Point
+Shape Layer 7.Transform.Opacity
+Shape Layer 7.Transform.Position
+Shape Layer 7.Transform.Rotation
+Shape Layer 7.Transform.Rotation X
+Shape Layer 7.Transform.Rotation Y
+Shape Layer 7.Transform.Rotation Z
+Shape Layer 7.Transform.Scale
+White Solid 20
+White Solid 20.Color
+White Solid 20.Transform
+White Solid 20.Transform.Anchor Point
+White Solid 20.Transform.Opacity
+White Solid 20.Transform.Position
+White Solid 20.Transform.Rotation
+White Solid 20.Transform.Rotation X
+White Solid 20.Transform.Rotation Y
+White Solid 20.Transform.Rotation Z
+White Solid 20.Transform.Scale
+action_strokes
+action_strokes
+action_strokes
+action_strokes
+action_strokes
+action_strokes.Ellipse 1
+action_strokes.Ellipse 1
+action_strokes.Ellipse 1
+action_strokes.Ellipse 1
+action_strokes.Ellipse 1
+action_strokes.Ellipse 1.Anchor Point
+action_strokes.Ellipse 1.Anchor Point
+action_strokes.Ellipse 1.Anchor Point
+action_strokes.Ellipse 1.Anchor Point
+action_strokes.Ellipse 1.Anchor Point
+action_strokes.Ellipse 1.Ellipse Path 1
+action_strokes.Ellipse 1.Ellipse Path 1
+action_strokes.Ellipse 1.Ellipse Path 1
+action_strokes.Ellipse 1.Ellipse Path 1
+action_strokes.Ellipse 1.Ellipse Path 1
+action_strokes.Ellipse 1.Ellipse Path 1.Position
+action_strokes.Ellipse 1.Ellipse Path 1.Position
+action_strokes.Ellipse 1.Ellipse Path 1.Position
+action_strokes.Ellipse 1.Ellipse Path 1.Position
+action_strokes.Ellipse 1.Ellipse Path 1.Position
+action_strokes.Ellipse 1.Ellipse Path 1.Size
+action_strokes.Ellipse 1.Ellipse Path 1.Size
+action_strokes.Ellipse 1.Ellipse Path 1.Size
+action_strokes.Ellipse 1.Ellipse Path 1.Size
+action_strokes.Ellipse 1.Ellipse Path 1.Size
+action_strokes.Ellipse 1.Opacity
+action_strokes.Ellipse 1.Opacity
+action_strokes.Ellipse 1.Opacity
+action_strokes.Ellipse 1.Opacity
+action_strokes.Ellipse 1.Opacity
+action_strokes.Ellipse 1.Position
+action_strokes.Ellipse 1.Position
+action_strokes.Ellipse 1.Position
+action_strokes.Ellipse 1.Position
+action_strokes.Ellipse 1.Position
+action_strokes.Ellipse 1.Rotation
+action_strokes.Ellipse 1.Rotation
+action_strokes.Ellipse 1.Rotation
+action_strokes.Ellipse 1.Rotation
+action_strokes.Ellipse 1.Rotation
+action_strokes.Ellipse 1.Rotation X
+action_strokes.Ellipse 1.Rotation X
+action_strokes.Ellipse 1.Rotation X
+action_strokes.Ellipse 1.Rotation X
+action_strokes.Ellipse 1.Rotation X
+action_strokes.Ellipse 1.Rotation Y
+action_strokes.Ellipse 1.Rotation Y
+action_strokes.Ellipse 1.Rotation Y
+action_strokes.Ellipse 1.Rotation Y
+action_strokes.Ellipse 1.Rotation Y
+action_strokes.Ellipse 1.Rotation Z
+action_strokes.Ellipse 1.Rotation Z
+action_strokes.Ellipse 1.Rotation Z
+action_strokes.Ellipse 1.Rotation Z
+action_strokes.Ellipse 1.Rotation Z
+action_strokes.Ellipse 1.Scale
+action_strokes.Ellipse 1.Scale
+action_strokes.Ellipse 1.Scale
+action_strokes.Ellipse 1.Scale
+action_strokes.Ellipse 1.Scale
+action_strokes.Ellipse 1.Skew
+action_strokes.Ellipse 1.Skew
+action_strokes.Ellipse 1.Skew
+action_strokes.Ellipse 1.Skew
+action_strokes.Ellipse 1.Skew
+action_strokes.Ellipse 1.Skew Axis
+action_strokes.Ellipse 1.Skew Axis
+action_strokes.Ellipse 1.Skew Axis
+action_strokes.Ellipse 1.Skew Axis
+action_strokes.Ellipse 1.Skew Axis
+action_strokes.Ellipse 1.Stroke 1
+action_strokes.Ellipse 1.Stroke 1
+action_strokes.Ellipse 1.Stroke 1
+action_strokes.Ellipse 1.Stroke 1
+action_strokes.Ellipse 1.Stroke 1
+action_strokes.Ellipse 1.Stroke 1.Color
+action_strokes.Ellipse 1.Stroke 1.Color
+action_strokes.Ellipse 1.Stroke 1.Color
+action_strokes.Ellipse 1.Stroke 1.Color
+action_strokes.Ellipse 1.Stroke 1.Color
+action_strokes.Ellipse 1.Stroke 1.Dash Phase
+action_strokes.Ellipse 1.Stroke 1.Dash Phase
+action_strokes.Ellipse 1.Stroke 1.Dash Phase
+action_strokes.Ellipse 1.Stroke 1.Dash Phase
+action_strokes.Ellipse 1.Stroke 1.Dash Phase
+action_strokes.Ellipse 1.Stroke 1.Dashes
+action_strokes.Ellipse 1.Stroke 1.Dashes
+action_strokes.Ellipse 1.Stroke 1.Dashes
+action_strokes.Ellipse 1.Stroke 1.Dashes
+action_strokes.Ellipse 1.Stroke 1.Dashes
+action_strokes.Ellipse 1.Stroke 1.Opacity
+action_strokes.Ellipse 1.Stroke 1.Opacity
+action_strokes.Ellipse 1.Stroke 1.Opacity
+action_strokes.Ellipse 1.Stroke 1.Opacity
+action_strokes.Ellipse 1.Stroke 1.Opacity
+action_strokes.Ellipse 1.Stroke 1.Stroke Width
+action_strokes.Ellipse 1.Stroke 1.Stroke Width
+action_strokes.Ellipse 1.Stroke 1.Stroke Width
+action_strokes.Ellipse 1.Stroke 1.Stroke Width
+action_strokes.Ellipse 1.Stroke 1.Stroke Width
+action_strokes.Ellipse 1.Transform
+action_strokes.Ellipse 1.Transform
+action_strokes.Ellipse 1.Transform
+action_strokes.Ellipse 1.Transform
+action_strokes.Ellipse 1.Transform
+action_strokes.Ellipse 1.Transform.Anchor Point
+action_strokes.Ellipse 1.Transform.Anchor Point
+action_strokes.Ellipse 1.Transform.Anchor Point
+action_strokes.Ellipse 1.Transform.Anchor Point
+action_strokes.Ellipse 1.Transform.Anchor Point
+action_strokes.Ellipse 1.Transform.Opacity
+action_strokes.Ellipse 1.Transform.Opacity
+action_strokes.Ellipse 1.Transform.Opacity
+action_strokes.Ellipse 1.Transform.Opacity
+action_strokes.Ellipse 1.Transform.Opacity
+action_strokes.Ellipse 1.Transform.Position
+action_strokes.Ellipse 1.Transform.Position
+action_strokes.Ellipse 1.Transform.Position
+action_strokes.Ellipse 1.Transform.Position
+action_strokes.Ellipse 1.Transform.Position
+action_strokes.Ellipse 1.Transform.Rotation
+action_strokes.Ellipse 1.Transform.Rotation
+action_strokes.Ellipse 1.Transform.Rotation
+action_strokes.Ellipse 1.Transform.Rotation
+action_strokes.Ellipse 1.Transform.Rotation
+action_strokes.Ellipse 1.Transform.Rotation X
+action_strokes.Ellipse 1.Transform.Rotation X
+action_strokes.Ellipse 1.Transform.Rotation X
+action_strokes.Ellipse 1.Transform.Rotation X
+action_strokes.Ellipse 1.Transform.Rotation X
+action_strokes.Ellipse 1.Transform.Rotation Y
+action_strokes.Ellipse 1.Transform.Rotation Y
+action_strokes.Ellipse 1.Transform.Rotation Y
+action_strokes.Ellipse 1.Transform.Rotation Y
+action_strokes.Ellipse 1.Transform.Rotation Y
+action_strokes.Ellipse 1.Transform.Rotation Z
+action_strokes.Ellipse 1.Transform.Rotation Z
+action_strokes.Ellipse 1.Transform.Rotation Z
+action_strokes.Ellipse 1.Transform.Rotation Z
+action_strokes.Ellipse 1.Transform.Rotation Z
+action_strokes.Ellipse 1.Transform.Scale
+action_strokes.Ellipse 1.Transform.Scale
+action_strokes.Ellipse 1.Transform.Scale
+action_strokes.Ellipse 1.Transform.Scale
+action_strokes.Ellipse 1.Transform.Scale
+action_strokes.Ellipse 1.Transform.Skew
+action_strokes.Ellipse 1.Transform.Skew
+action_strokes.Ellipse 1.Transform.Skew
+action_strokes.Ellipse 1.Transform.Skew
+action_strokes.Ellipse 1.Transform.Skew
+action_strokes.Ellipse 1.Transform.Skew Axis
+action_strokes.Ellipse 1.Transform.Skew Axis
+action_strokes.Ellipse 1.Transform.Skew Axis
+action_strokes.Ellipse 1.Transform.Skew Axis
+action_strokes.Ellipse 1.Transform.Skew Axis
+action_strokes.Transform
+action_strokes.Transform
+action_strokes.Transform
+action_strokes.Transform
+action_strokes.Transform
+action_strokes.Transform.Anchor Point
+action_strokes.Transform.Anchor Point
+action_strokes.Transform.Anchor Point
+action_strokes.Transform.Anchor Point
+action_strokes.Transform.Anchor Point
+action_strokes.Transform.Opacity
+action_strokes.Transform.Opacity
+action_strokes.Transform.Opacity
+action_strokes.Transform.Opacity
+action_strokes.Transform.Opacity
+action_strokes.Transform.Position
+action_strokes.Transform.Position
+action_strokes.Transform.Position
+action_strokes.Transform.Position
+action_strokes.Transform.Position
+action_strokes.Transform.Rotation
+action_strokes.Transform.Rotation
+action_strokes.Transform.Rotation
+action_strokes.Transform.Rotation
+action_strokes.Transform.Rotation
+action_strokes.Transform.Rotation X
+action_strokes.Transform.Rotation X
+action_strokes.Transform.Rotation X
+action_strokes.Transform.Rotation X
+action_strokes.Transform.Rotation X
+action_strokes.Transform.Rotation Y
+action_strokes.Transform.Rotation Y
+action_strokes.Transform.Rotation Y
+action_strokes.Transform.Rotation Y
+action_strokes.Transform.Rotation Y
+action_strokes.Transform.Rotation Z
+action_strokes.Transform.Rotation Z
+action_strokes.Transform.Rotation Z
+action_strokes.Transform.Rotation Z
+action_strokes.Transform.Rotation Z
+action_strokes.Transform.Scale
+action_strokes.Transform.Scale
+action_strokes.Transform.Scale
+action_strokes.Transform.Scale
+action_strokes.Transform.Scale
+action_strokes_mask
+action_strokes_mask
+action_strokes_mask
+action_strokes_mask
+action_strokes_mask.Ellipse 1
+action_strokes_mask.Ellipse 1
+action_strokes_mask.Ellipse 1
+action_strokes_mask.Ellipse 1
+action_strokes_mask.Ellipse 1.Anchor Point
+action_strokes_mask.Ellipse 1.Anchor Point
+action_strokes_mask.Ellipse 1.Anchor Point
+action_strokes_mask.Ellipse 1.Anchor Point
+action_strokes_mask.Ellipse 1.Ellipse Path 1
+action_strokes_mask.Ellipse 1.Ellipse Path 1
+action_strokes_mask.Ellipse 1.Ellipse Path 1
+action_strokes_mask.Ellipse 1.Ellipse Path 1
+action_strokes_mask.Ellipse 1.Ellipse Path 1.Position
+action_strokes_mask.Ellipse 1.Ellipse Path 1.Position
+action_strokes_mask.Ellipse 1.Ellipse Path 1.Position
+action_strokes_mask.Ellipse 1.Ellipse Path 1.Position
+action_strokes_mask.Ellipse 1.Ellipse Path 1.Size
+action_strokes_mask.Ellipse 1.Ellipse Path 1.Size
+action_strokes_mask.Ellipse 1.Ellipse Path 1.Size
+action_strokes_mask.Ellipse 1.Ellipse Path 1.Size
+action_strokes_mask.Ellipse 1.Opacity
+action_strokes_mask.Ellipse 1.Opacity
+action_strokes_mask.Ellipse 1.Opacity
+action_strokes_mask.Ellipse 1.Opacity
+action_strokes_mask.Ellipse 1.Position
+action_strokes_mask.Ellipse 1.Position
+action_strokes_mask.Ellipse 1.Position
+action_strokes_mask.Ellipse 1.Position
+action_strokes_mask.Ellipse 1.Rotation
+action_strokes_mask.Ellipse 1.Rotation
+action_strokes_mask.Ellipse 1.Rotation
+action_strokes_mask.Ellipse 1.Rotation
+action_strokes_mask.Ellipse 1.Rotation X
+action_strokes_mask.Ellipse 1.Rotation X
+action_strokes_mask.Ellipse 1.Rotation X
+action_strokes_mask.Ellipse 1.Rotation X
+action_strokes_mask.Ellipse 1.Rotation Y
+action_strokes_mask.Ellipse 1.Rotation Y
+action_strokes_mask.Ellipse 1.Rotation Y
+action_strokes_mask.Ellipse 1.Rotation Y
+action_strokes_mask.Ellipse 1.Rotation Z
+action_strokes_mask.Ellipse 1.Rotation Z
+action_strokes_mask.Ellipse 1.Rotation Z
+action_strokes_mask.Ellipse 1.Rotation Z
+action_strokes_mask.Ellipse 1.Scale
+action_strokes_mask.Ellipse 1.Scale
+action_strokes_mask.Ellipse 1.Scale
+action_strokes_mask.Ellipse 1.Scale
+action_strokes_mask.Ellipse 1.Skew
+action_strokes_mask.Ellipse 1.Skew
+action_strokes_mask.Ellipse 1.Skew
+action_strokes_mask.Ellipse 1.Skew
+action_strokes_mask.Ellipse 1.Skew Axis
+action_strokes_mask.Ellipse 1.Skew Axis
+action_strokes_mask.Ellipse 1.Skew Axis
+action_strokes_mask.Ellipse 1.Skew Axis
+action_strokes_mask.Ellipse 1.Stroke 1
+action_strokes_mask.Ellipse 1.Stroke 1
+action_strokes_mask.Ellipse 1.Stroke 1
+action_strokes_mask.Ellipse 1.Stroke 1
+action_strokes_mask.Ellipse 1.Stroke 1.Color
+action_strokes_mask.Ellipse 1.Stroke 1.Color
+action_strokes_mask.Ellipse 1.Stroke 1.Color
+action_strokes_mask.Ellipse 1.Stroke 1.Color
+action_strokes_mask.Ellipse 1.Stroke 1.Dash Phase
+action_strokes_mask.Ellipse 1.Stroke 1.Dash Phase
+action_strokes_mask.Ellipse 1.Stroke 1.Dash Phase
+action_strokes_mask.Ellipse 1.Stroke 1.Dash Phase
+action_strokes_mask.Ellipse 1.Stroke 1.Dashes
+action_strokes_mask.Ellipse 1.Stroke 1.Dashes
+action_strokes_mask.Ellipse 1.Stroke 1.Dashes
+action_strokes_mask.Ellipse 1.Stroke 1.Dashes
+action_strokes_mask.Ellipse 1.Stroke 1.Opacity
+action_strokes_mask.Ellipse 1.Stroke 1.Opacity
+action_strokes_mask.Ellipse 1.Stroke 1.Opacity
+action_strokes_mask.Ellipse 1.Stroke 1.Opacity
+action_strokes_mask.Ellipse 1.Stroke 1.Stroke Width
+action_strokes_mask.Ellipse 1.Stroke 1.Stroke Width
+action_strokes_mask.Ellipse 1.Stroke 1.Stroke Width
+action_strokes_mask.Ellipse 1.Stroke 1.Stroke Width
+action_strokes_mask.Ellipse 1.Transform
+action_strokes_mask.Ellipse 1.Transform
+action_strokes_mask.Ellipse 1.Transform
+action_strokes_mask.Ellipse 1.Transform
+action_strokes_mask.Ellipse 1.Transform.Anchor Point
+action_strokes_mask.Ellipse 1.Transform.Anchor Point
+action_strokes_mask.Ellipse 1.Transform.Anchor Point
+action_strokes_mask.Ellipse 1.Transform.Anchor Point
+action_strokes_mask.Ellipse 1.Transform.Opacity
+action_strokes_mask.Ellipse 1.Transform.Opacity
+action_strokes_mask.Ellipse 1.Transform.Opacity
+action_strokes_mask.Ellipse 1.Transform.Opacity
+action_strokes_mask.Ellipse 1.Transform.Position
+action_strokes_mask.Ellipse 1.Transform.Position
+action_strokes_mask.Ellipse 1.Transform.Position
+action_strokes_mask.Ellipse 1.Transform.Position
+action_strokes_mask.Ellipse 1.Transform.Rotation
+action_strokes_mask.Ellipse 1.Transform.Rotation
+action_strokes_mask.Ellipse 1.Transform.Rotation
+action_strokes_mask.Ellipse 1.Transform.Rotation
+action_strokes_mask.Ellipse 1.Transform.Rotation X
+action_strokes_mask.Ellipse 1.Transform.Rotation X
+action_strokes_mask.Ellipse 1.Transform.Rotation X
+action_strokes_mask.Ellipse 1.Transform.Rotation X
+action_strokes_mask.Ellipse 1.Transform.Rotation Y
+action_strokes_mask.Ellipse 1.Transform.Rotation Y
+action_strokes_mask.Ellipse 1.Transform.Rotation Y
+action_strokes_mask.Ellipse 1.Transform.Rotation Y
+action_strokes_mask.Ellipse 1.Transform.Rotation Z
+action_strokes_mask.Ellipse 1.Transform.Rotation Z
+action_strokes_mask.Ellipse 1.Transform.Rotation Z
+action_strokes_mask.Ellipse 1.Transform.Rotation Z
+action_strokes_mask.Ellipse 1.Transform.Scale
+action_strokes_mask.Ellipse 1.Transform.Scale
+action_strokes_mask.Ellipse 1.Transform.Scale
+action_strokes_mask.Ellipse 1.Transform.Scale
+action_strokes_mask.Ellipse 1.Transform.Skew
+action_strokes_mask.Ellipse 1.Transform.Skew
+action_strokes_mask.Ellipse 1.Transform.Skew
+action_strokes_mask.Ellipse 1.Transform.Skew
+action_strokes_mask.Ellipse 1.Transform.Skew Axis
+action_strokes_mask.Ellipse 1.Transform.Skew Axis
+action_strokes_mask.Ellipse 1.Transform.Skew Axis
+action_strokes_mask.Ellipse 1.Transform.Skew Axis
+action_strokes_mask.Transform
+action_strokes_mask.Transform
+action_strokes_mask.Transform
+action_strokes_mask.Transform
+action_strokes_mask.Transform.Anchor Point
+action_strokes_mask.Transform.Anchor Point
+action_strokes_mask.Transform.Anchor Point
+action_strokes_mask.Transform.Anchor Point
+action_strokes_mask.Transform.Opacity
+action_strokes_mask.Transform.Opacity
+action_strokes_mask.Transform.Opacity
+action_strokes_mask.Transform.Opacity
+action_strokes_mask.Transform.Position
+action_strokes_mask.Transform.Position
+action_strokes_mask.Transform.Position
+action_strokes_mask.Transform.Position
+action_strokes_mask.Transform.Rotation
+action_strokes_mask.Transform.Rotation
+action_strokes_mask.Transform.Rotation
+action_strokes_mask.Transform.Rotation
+action_strokes_mask.Transform.Rotation X
+action_strokes_mask.Transform.Rotation X
+action_strokes_mask.Transform.Rotation X
+action_strokes_mask.Transform.Rotation X
+action_strokes_mask.Transform.Rotation Y
+action_strokes_mask.Transform.Rotation Y
+action_strokes_mask.Transform.Rotation Y
+action_strokes_mask.Transform.Rotation Y
+action_strokes_mask.Transform.Rotation Z
+action_strokes_mask.Transform.Rotation Z
+action_strokes_mask.Transform.Rotation Z
+action_strokes_mask.Transform.Rotation Z
+action_strokes_mask.Transform.Scale
+action_strokes_mask.Transform.Scale
+action_strokes_mask.Transform.Scale
+action_strokes_mask.Transform.Scale
+dotted_lines
+dotted_lines.Ellipse 1
+dotted_lines.Ellipse 1.Anchor Point
+dotted_lines.Ellipse 1.Ellipse Path 1
+dotted_lines.Ellipse 1.Ellipse Path 1.Position
+dotted_lines.Ellipse 1.Ellipse Path 1.Size
+dotted_lines.Ellipse 1.Opacity
+dotted_lines.Ellipse 1.Position
+dotted_lines.Ellipse 1.Rotation
+dotted_lines.Ellipse 1.Rotation X
+dotted_lines.Ellipse 1.Rotation Y
+dotted_lines.Ellipse 1.Rotation Z
+dotted_lines.Ellipse 1.Scale
+dotted_lines.Ellipse 1.Skew
+dotted_lines.Ellipse 1.Skew Axis
+dotted_lines.Ellipse 1.Stroke 1
+dotted_lines.Ellipse 1.Stroke 1.Color
+dotted_lines.Ellipse 1.Stroke 1.Dash Phase
+dotted_lines.Ellipse 1.Stroke 1.Dashes
+dotted_lines.Ellipse 1.Stroke 1.Opacity
+dotted_lines.Ellipse 1.Stroke 1.Stroke Width
+dotted_lines.Ellipse 1.Transform
+dotted_lines.Ellipse 1.Transform.Anchor Point
+dotted_lines.Ellipse 1.Transform.Opacity
+dotted_lines.Ellipse 1.Transform.Position
+dotted_lines.Ellipse 1.Transform.Rotation
+dotted_lines.Ellipse 1.Transform.Rotation X
+dotted_lines.Ellipse 1.Transform.Rotation Y
+dotted_lines.Ellipse 1.Transform.Rotation Z
+dotted_lines.Ellipse 1.Transform.Scale
+dotted_lines.Ellipse 1.Transform.Skew
+dotted_lines.Ellipse 1.Transform.Skew Axis
+dotted_lines.Ellipse 1.Trim Paths 1
+dotted_lines.Ellipse 1.Trim Paths 1.End
+dotted_lines.Ellipse 1.Trim Paths 1.Offset
+dotted_lines.Ellipse 1.Trim Paths 1.Start
+dotted_lines.Transform
+dotted_lines.Transform.Anchor Point
+dotted_lines.Transform.Opacity
+dotted_lines.Transform.Position
+dotted_lines.Transform.Rotation
+dotted_lines.Transform.Rotation X
+dotted_lines.Transform.Rotation Y
+dotted_lines.Transform.Rotation Z
+dotted_lines.Transform.Scale
+pauw
+pauw.Ellipse 1
+pauw.Ellipse 1.Anchor Point
+pauw.Ellipse 1.Ellipse Path 1
+pauw.Ellipse 1.Ellipse Path 1.Position
+pauw.Ellipse 1.Ellipse Path 1.Size
+pauw.Ellipse 1.Fill 1
+pauw.Ellipse 1.Fill 1.Color
+pauw.Ellipse 1.Fill 1.Opacity
+pauw.Ellipse 1.Opacity
+pauw.Ellipse 1.Position
+pauw.Ellipse 1.Rotation
+pauw.Ellipse 1.Rotation X
+pauw.Ellipse 1.Rotation Y
+pauw.Ellipse 1.Rotation Z
+pauw.Ellipse 1.Scale
+pauw.Ellipse 1.Skew
+pauw.Ellipse 1.Skew Axis
+pauw.Ellipse 1.Stroke 1
+pauw.Ellipse 1.Stroke 1.Color
+pauw.Ellipse 1.Stroke 1.Dash Phase
+pauw.Ellipse 1.Stroke 1.Dashes
+pauw.Ellipse 1.Stroke 1.Opacity
+pauw.Ellipse 1.Stroke 1.Stroke Width
+pauw.Ellipse 1.Transform
+pauw.Ellipse 1.Transform.Anchor Point
+pauw.Ellipse 1.Transform.Opacity
+pauw.Ellipse 1.Transform.Position
+pauw.Ellipse 1.Transform.Rotation
+pauw.Ellipse 1.Transform.Rotation X
+pauw.Ellipse 1.Transform.Rotation Y
+pauw.Ellipse 1.Transform.Rotation Z
+pauw.Ellipse 1.Transform.Scale
+pauw.Ellipse 1.Transform.Skew
+pauw.Ellipse 1.Transform.Skew Axis
+pauw.Transform
+pauw.Transform.Anchor Point
+pauw.Transform.Opacity
+pauw.Transform.Position
+pauw.Transform.Rotation
+pauw.Transform.Rotation X
+pauw.Transform.Rotation Y
+pauw.Transform.Rotation Z
+pauw.Transform.Scale
+piew
+piew.Ellipse 1
+piew.Ellipse 1.Anchor Point
+piew.Ellipse 1.Ellipse Path 1
+piew.Ellipse 1.Ellipse Path 1.Position
+piew.Ellipse 1.Ellipse Path 1.Size
+piew.Ellipse 1.Fill 1
+piew.Ellipse 1.Fill 1.Color
+piew.Ellipse 1.Fill 1.Opacity
+piew.Ellipse 1.Opacity
+piew.Ellipse 1.Position
+piew.Ellipse 1.Rotation
+piew.Ellipse 1.Rotation X
+piew.Ellipse 1.Rotation Y
+piew.Ellipse 1.Rotation Z
+piew.Ellipse 1.Scale
+piew.Ellipse 1.Skew
+piew.Ellipse 1.Skew Axis
+piew.Ellipse 1.Stroke 1
+piew.Ellipse 1.Stroke 1.Color
+piew.Ellipse 1.Stroke 1.Dash Phase
+piew.Ellipse 1.Stroke 1.Dashes
+piew.Ellipse 1.Stroke 1.Opacity
+piew.Ellipse 1.Stroke 1.Stroke Width
+piew.Ellipse 1.Transform
+piew.Ellipse 1.Transform.Anchor Point
+piew.Ellipse 1.Transform.Opacity
+piew.Ellipse 1.Transform.Position
+piew.Ellipse 1.Transform.Rotation
+piew.Ellipse 1.Transform.Rotation X
+piew.Ellipse 1.Transform.Rotation Y
+piew.Ellipse 1.Transform.Rotation Z
+piew.Ellipse 1.Transform.Scale
+piew.Ellipse 1.Transform.Skew
+piew.Ellipse 1.Transform.Skew Axis
+piew.Transform
+piew.Transform.Anchor Point
+piew.Transform.Opacity
+piew.Transform.Position
+piew.Transform.Rotation
+piew.Transform.Rotation X
+piew.Transform.Rotation Y
+piew.Transform.Rotation Z
+piew.Transform.Scale

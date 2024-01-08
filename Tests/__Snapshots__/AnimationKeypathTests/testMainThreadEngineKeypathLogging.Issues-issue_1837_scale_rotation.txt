@@ -1,0 +1,777 @@
+C1
+C1.Ellipse 1
+C1.Ellipse 1.Anchor Point
+C1.Ellipse 1.Ellipse Path 1
+C1.Ellipse 1.Ellipse Path 1.Position
+C1.Ellipse 1.Ellipse Path 1.Size
+C1.Ellipse 1.Fill 1
+C1.Ellipse 1.Fill 1.Color
+C1.Ellipse 1.Fill 1.Opacity
+C1.Ellipse 1.Opacity
+C1.Ellipse 1.Position
+C1.Ellipse 1.Rotation
+C1.Ellipse 1.Rotation X
+C1.Ellipse 1.Rotation Y
+C1.Ellipse 1.Rotation Z
+C1.Ellipse 1.Scale
+C1.Ellipse 1.Skew
+C1.Ellipse 1.Skew Axis
+C1.Ellipse 1.Transform
+C1.Ellipse 1.Transform.Anchor Point
+C1.Ellipse 1.Transform.Opacity
+C1.Ellipse 1.Transform.Position
+C1.Ellipse 1.Transform.Rotation
+C1.Ellipse 1.Transform.Rotation X
+C1.Ellipse 1.Transform.Rotation Y
+C1.Ellipse 1.Transform.Rotation Z
+C1.Ellipse 1.Transform.Scale
+C1.Ellipse 1.Transform.Skew
+C1.Ellipse 1.Transform.Skew Axis
+C1.Transform
+C1.Transform.Anchor Point
+C1.Transform.Opacity
+C1.Transform.Position
+C1.Transform.Rotation
+C1.Transform.Rotation X
+C1.Transform.Rotation Y
+C1.Transform.Rotation Z
+C1.Transform.Scale
+C2
+C2.Ellipse 1
+C2.Ellipse 1.Anchor Point
+C2.Ellipse 1.Ellipse Path 1
+C2.Ellipse 1.Ellipse Path 1.Position
+C2.Ellipse 1.Ellipse Path 1.Size
+C2.Ellipse 1.Opacity
+C2.Ellipse 1.Position
+C2.Ellipse 1.Rotation
+C2.Ellipse 1.Rotation X
+C2.Ellipse 1.Rotation Y
+C2.Ellipse 1.Rotation Z
+C2.Ellipse 1.Scale
+C2.Ellipse 1.Skew
+C2.Ellipse 1.Skew Axis
+C2.Ellipse 1.Stroke 1
+C2.Ellipse 1.Stroke 1.Color
+C2.Ellipse 1.Stroke 1.Dash Phase
+C2.Ellipse 1.Stroke 1.Dashes
+C2.Ellipse 1.Stroke 1.Opacity
+C2.Ellipse 1.Stroke 1.Stroke Width
+C2.Ellipse 1.Transform
+C2.Ellipse 1.Transform.Anchor Point
+C2.Ellipse 1.Transform.Opacity
+C2.Ellipse 1.Transform.Position
+C2.Ellipse 1.Transform.Rotation
+C2.Ellipse 1.Transform.Rotation X
+C2.Ellipse 1.Transform.Rotation Y
+C2.Ellipse 1.Transform.Rotation Z
+C2.Ellipse 1.Transform.Scale
+C2.Ellipse 1.Transform.Skew
+C2.Ellipse 1.Transform.Skew Axis
+C2.Transform
+C2.Transform.Anchor Point
+C2.Transform.Opacity
+C2.Transform.Position
+C2.Transform.Rotation
+C2.Transform.Rotation X
+C2.Transform.Rotation Y
+C2.Transform.Rotation Z
+C2.Transform.Scale
+Dot1
+Dot1.Shape 1
+Dot1.Shape 1.Anchor Point
+Dot1.Shape 1.Opacity
+Dot1.Shape 1.Path 1
+Dot1.Shape 1.Path 1.Path
+Dot1.Shape 1.Position
+Dot1.Shape 1.Rotation
+Dot1.Shape 1.Rotation X
+Dot1.Shape 1.Rotation Y
+Dot1.Shape 1.Rotation Z
+Dot1.Shape 1.Scale
+Dot1.Shape 1.Skew
+Dot1.Shape 1.Skew Axis
+Dot1.Shape 1.Stroke 1
+Dot1.Shape 1.Stroke 1.Color
+Dot1.Shape 1.Stroke 1.Dash Phase
+Dot1.Shape 1.Stroke 1.Dashes
+Dot1.Shape 1.Stroke 1.Opacity
+Dot1.Shape 1.Stroke 1.Stroke Width
+Dot1.Shape 1.Transform
+Dot1.Shape 1.Transform.Anchor Point
+Dot1.Shape 1.Transform.Opacity
+Dot1.Shape 1.Transform.Position
+Dot1.Shape 1.Transform.Rotation
+Dot1.Shape 1.Transform.Rotation X
+Dot1.Shape 1.Transform.Rotation Y
+Dot1.Shape 1.Transform.Rotation Z
+Dot1.Shape 1.Transform.Scale
+Dot1.Shape 1.Transform.Skew
+Dot1.Shape 1.Transform.Skew Axis
+Dot1.Shape 1.Trim Paths 1
+Dot1.Shape 1.Trim Paths 1.End
+Dot1.Shape 1.Trim Paths 1.Offset
+Dot1.Shape 1.Trim Paths 1.Start
+Dot1.Transform
+Dot1.Transform.Anchor Point
+Dot1.Transform.Opacity
+Dot1.Transform.Position
+Dot1.Transform.Rotation
+Dot1.Transform.Rotation X
+Dot1.Transform.Rotation Y
+Dot1.Transform.Rotation Z
+Dot1.Transform.Scale
+Dot10
+Dot10.Shape 1
+Dot10.Shape 1.Anchor Point
+Dot10.Shape 1.Opacity
+Dot10.Shape 1.Path 1
+Dot10.Shape 1.Path 1.Path
+Dot10.Shape 1.Position
+Dot10.Shape 1.Rotation
+Dot10.Shape 1.Rotation X
+Dot10.Shape 1.Rotation Y
+Dot10.Shape 1.Rotation Z
+Dot10.Shape 1.Scale
+Dot10.Shape 1.Skew
+Dot10.Shape 1.Skew Axis
+Dot10.Shape 1.Stroke 1
+Dot10.Shape 1.Stroke 1.Color
+Dot10.Shape 1.Stroke 1.Dash Phase
+Dot10.Shape 1.Stroke 1.Dashes
+Dot10.Shape 1.Stroke 1.Opacity
+Dot10.Shape 1.Stroke 1.Stroke Width
+Dot10.Shape 1.Transform
+Dot10.Shape 1.Transform.Anchor Point
+Dot10.Shape 1.Transform.Opacity
+Dot10.Shape 1.Transform.Position
+Dot10.Shape 1.Transform.Rotation
+Dot10.Shape 1.Transform.Rotation X
+Dot10.Shape 1.Transform.Rotation Y
+Dot10.Shape 1.Transform.Rotation Z
+Dot10.Shape 1.Transform.Scale
+Dot10.Shape 1.Transform.Skew
+Dot10.Shape 1.Transform.Skew Axis
+Dot10.Shape 1.Trim Paths 1
+Dot10.Shape 1.Trim Paths 1.End
+Dot10.Shape 1.Trim Paths 1.Offset
+Dot10.Shape 1.Trim Paths 1.Start
+Dot10.Transform
+Dot10.Transform.Anchor Point
+Dot10.Transform.Opacity
+Dot10.Transform.Position
+Dot10.Transform.Rotation
+Dot10.Transform.Rotation X
+Dot10.Transform.Rotation Y
+Dot10.Transform.Rotation Z
+Dot10.Transform.Scale
+Dot11
+Dot11.Shape 1
+Dot11.Shape 1.Anchor Point
+Dot11.Shape 1.Opacity
+Dot11.Shape 1.Path 1
+Dot11.Shape 1.Path 1.Path
+Dot11.Shape 1.Position
+Dot11.Shape 1.Rotation
+Dot11.Shape 1.Rotation X
+Dot11.Shape 1.Rotation Y
+Dot11.Shape 1.Rotation Z
+Dot11.Shape 1.Scale
+Dot11.Shape 1.Skew
+Dot11.Shape 1.Skew Axis
+Dot11.Shape 1.Stroke 1
+Dot11.Shape 1.Stroke 1.Color
+Dot11.Shape 1.Stroke 1.Dash Phase
+Dot11.Shape 1.Stroke 1.Dashes
+Dot11.Shape 1.Stroke 1.Opacity
+Dot11.Shape 1.Stroke 1.Stroke Width
+Dot11.Shape 1.Transform
+Dot11.Shape 1.Transform.Anchor Point
+Dot11.Shape 1.Transform.Opacity
+Dot11.Shape 1.Transform.Position
+Dot11.Shape 1.Transform.Rotation
+Dot11.Shape 1.Transform.Rotation X
+Dot11.Shape 1.Transform.Rotation Y
+Dot11.Shape 1.Transform.Rotation Z
+Dot11.Shape 1.Transform.Scale
+Dot11.Shape 1.Transform.Skew
+Dot11.Shape 1.Transform.Skew Axis
+Dot11.Shape 1.Trim Paths 1
+Dot11.Shape 1.Trim Paths 1.End
+Dot11.Shape 1.Trim Paths 1.Offset
+Dot11.Shape 1.Trim Paths 1.Start
+Dot11.Transform
+Dot11.Transform.Anchor Point
+Dot11.Transform.Opacity
+Dot11.Transform.Position
+Dot11.Transform.Rotation
+Dot11.Transform.Rotation X
+Dot11.Transform.Rotation Y
+Dot11.Transform.Rotation Z
+Dot11.Transform.Scale
+Dot12
+Dot12.Shape 1
+Dot12.Shape 1.Anchor Point
+Dot12.Shape 1.Opacity
+Dot12.Shape 1.Path 1
+Dot12.Shape 1.Path 1.Path
+Dot12.Shape 1.Position
+Dot12.Shape 1.Rotation
+Dot12.Shape 1.Rotation X
+Dot12.Shape 1.Rotation Y
+Dot12.Shape 1.Rotation Z
+Dot12.Shape 1.Scale
+Dot12.Shape 1.Skew
+Dot12.Shape 1.Skew Axis
+Dot12.Shape 1.Stroke 1
+Dot12.Shape 1.Stroke 1.Color
+Dot12.Shape 1.Stroke 1.Dash Phase
+Dot12.Shape 1.Stroke 1.Dashes
+Dot12.Shape 1.Stroke 1.Opacity
+Dot12.Shape 1.Stroke 1.Stroke Width
+Dot12.Shape 1.Transform
+Dot12.Shape 1.Transform.Anchor Point
+Dot12.Shape 1.Transform.Opacity
+Dot12.Shape 1.Transform.Position
+Dot12.Shape 1.Transform.Rotation
+Dot12.Shape 1.Transform.Rotation X
+Dot12.Shape 1.Transform.Rotation Y
+Dot12.Shape 1.Transform.Rotation Z
+Dot12.Shape 1.Transform.Scale
+Dot12.Shape 1.Transform.Skew
+Dot12.Shape 1.Transform.Skew Axis
+Dot12.Shape 1.Trim Paths 1
+Dot12.Shape 1.Trim Paths 1.End
+Dot12.Shape 1.Trim Paths 1.Offset
+Dot12.Shape 1.Trim Paths 1.Start
+Dot12.Transform
+Dot12.Transform.Anchor Point
+Dot12.Transform.Opacity
+Dot12.Transform.Position
+Dot12.Transform.Rotation
+Dot12.Transform.Rotation X
+Dot12.Transform.Rotation Y
+Dot12.Transform.Rotation Z
+Dot12.Transform.Scale
+Dot13
+Dot13.Shape 1
+Dot13.Shape 1.Anchor Point
+Dot13.Shape 1.Opacity
+Dot13.Shape 1.Path 1
+Dot13.Shape 1.Path 1.Path
+Dot13.Shape 1.Position
+Dot13.Shape 1.Rotation
+Dot13.Shape 1.Rotation X
+Dot13.Shape 1.Rotation Y
+Dot13.Shape 1.Rotation Z
+Dot13.Shape 1.Scale
+Dot13.Shape 1.Skew
+Dot13.Shape 1.Skew Axis
+Dot13.Shape 1.Stroke 1
+Dot13.Shape 1.Stroke 1.Color
+Dot13.Shape 1.Stroke 1.Dash Phase
+Dot13.Shape 1.Stroke 1.Dashes
+Dot13.Shape 1.Stroke 1.Opacity
+Dot13.Shape 1.Stroke 1.Stroke Width
+Dot13.Shape 1.Transform
+Dot13.Shape 1.Transform.Anchor Point
+Dot13.Shape 1.Transform.Opacity
+Dot13.Shape 1.Transform.Position
+Dot13.Shape 1.Transform.Rotation
+Dot13.Shape 1.Transform.Rotation X
+Dot13.Shape 1.Transform.Rotation Y
+Dot13.Shape 1.Transform.Rotation Z
+Dot13.Shape 1.Transform.Scale
+Dot13.Shape 1.Transform.Skew
+Dot13.Shape 1.Transform.Skew Axis
+Dot13.Shape 1.Trim Paths 1
+Dot13.Shape 1.Trim Paths 1.End
+Dot13.Shape 1.Trim Paths 1.Offset
+Dot13.Shape 1.Trim Paths 1.Start
+Dot13.Transform
+Dot13.Transform.Anchor Point
+Dot13.Transform.Opacity
+Dot13.Transform.Position
+Dot13.Transform.Rotation
+Dot13.Transform.Rotation X
+Dot13.Transform.Rotation Y
+Dot13.Transform.Rotation Z
+Dot13.Transform.Scale
+Dot14
+Dot14.Shape 1
+Dot14.Shape 1.Anchor Point
+Dot14.Shape 1.Opacity
+Dot14.Shape 1.Path 1
+Dot14.Shape 1.Path 1.Path
+Dot14.Shape 1.Position
+Dot14.Shape 1.Rotation
+Dot14.Shape 1.Rotation X
+Dot14.Shape 1.Rotation Y
+Dot14.Shape 1.Rotation Z
+Dot14.Shape 1.Scale
+Dot14.Shape 1.Skew
+Dot14.Shape 1.Skew Axis
+Dot14.Shape 1.Stroke 1
+Dot14.Shape 1.Stroke 1.Color
+Dot14.Shape 1.Stroke 1.Dash Phase
+Dot14.Shape 1.Stroke 1.Dashes
+Dot14.Shape 1.Stroke 1.Opacity
+Dot14.Shape 1.Stroke 1.Stroke Width
+Dot14.Shape 1.Transform
+Dot14.Shape 1.Transform.Anchor Point
+Dot14.Shape 1.Transform.Opacity
+Dot14.Shape 1.Transform.Position
+Dot14.Shape 1.Transform.Rotation
+Dot14.Shape 1.Transform.Rotation X
+Dot14.Shape 1.Transform.Rotation Y
+Dot14.Shape 1.Transform.Rotation Z
+Dot14.Shape 1.Transform.Scale
+Dot14.Shape 1.Transform.Skew
+Dot14.Shape 1.Transform.Skew Axis
+Dot14.Shape 1.Trim Paths 1
+Dot14.Shape 1.Trim Paths 1.End
+Dot14.Shape 1.Trim Paths 1.Offset
+Dot14.Shape 1.Trim Paths 1.Start
+Dot14.Transform
+Dot14.Transform.Anchor Point
+Dot14.Transform.Opacity
+Dot14.Transform.Position
+Dot14.Transform.Rotation
+Dot14.Transform.Rotation X
+Dot14.Transform.Rotation Y
+Dot14.Transform.Rotation Z
+Dot14.Transform.Scale
+Dot2
+Dot2.Shape 1
+Dot2.Shape 1.Anchor Point
+Dot2.Shape 1.Opacity
+Dot2.Shape 1.Path 1
+Dot2.Shape 1.Path 1.Path
+Dot2.Shape 1.Position
+Dot2.Shape 1.Rotation
+Dot2.Shape 1.Rotation X
+Dot2.Shape 1.Rotation Y
+Dot2.Shape 1.Rotation Z
+Dot2.Shape 1.Scale
+Dot2.Shape 1.Skew
+Dot2.Shape 1.Skew Axis
+Dot2.Shape 1.Stroke 1
+Dot2.Shape 1.Stroke 1.Color
+Dot2.Shape 1.Stroke 1.Dash Phase
+Dot2.Shape 1.Stroke 1.Dashes
+Dot2.Shape 1.Stroke 1.Opacity
+Dot2.Shape 1.Stroke 1.Stroke Width
+Dot2.Shape 1.Transform
+Dot2.Shape 1.Transform.Anchor Point
+Dot2.Shape 1.Transform.Opacity
+Dot2.Shape 1.Transform.Position
+Dot2.Shape 1.Transform.Rotation
+Dot2.Shape 1.Transform.Rotation X
+Dot2.Shape 1.Transform.Rotation Y
+Dot2.Shape 1.Transform.Rotation Z
+Dot2.Shape 1.Transform.Scale
+Dot2.Shape 1.Transform.Skew
+Dot2.Shape 1.Transform.Skew Axis
+Dot2.Shape 1.Trim Paths 1
+Dot2.Shape 1.Trim Paths 1.End
+Dot2.Shape 1.Trim Paths 1.Offset
+Dot2.Shape 1.Trim Paths 1.Start
+Dot2.Transform
+Dot2.Transform.Anchor Point
+Dot2.Transform.Opacity
+Dot2.Transform.Position
+Dot2.Transform.Rotation
+Dot2.Transform.Rotation X
+Dot2.Transform.Rotation Y
+Dot2.Transform.Rotation Z
+Dot2.Transform.Scale
+Dot3
+Dot3.Shape 1
+Dot3.Shape 1.Anchor Point
+Dot3.Shape 1.Opacity
+Dot3.Shape 1.Path 1
+Dot3.Shape 1.Path 1.Path
+Dot3.Shape 1.Position
+Dot3.Shape 1.Rotation
+Dot3.Shape 1.Rotation X
+Dot3.Shape 1.Rotation Y
+Dot3.Shape 1.Rotation Z
+Dot3.Shape 1.Scale
+Dot3.Shape 1.Skew
+Dot3.Shape 1.Skew Axis
+Dot3.Shape 1.Stroke 1
+Dot3.Shape 1.Stroke 1.Color
+Dot3.Shape 1.Stroke 1.Dash Phase
+Dot3.Shape 1.Stroke 1.Dashes
+Dot3.Shape 1.Stroke 1.Opacity
+Dot3.Shape 1.Stroke 1.Stroke Width
+Dot3.Shape 1.Transform
+Dot3.Shape 1.Transform.Anchor Point
+Dot3.Shape 1.Transform.Opacity
+Dot3.Shape 1.Transform.Position
+Dot3.Shape 1.Transform.Rotation
+Dot3.Shape 1.Transform.Rotation X
+Dot3.Shape 1.Transform.Rotation Y
+Dot3.Shape 1.Transform.Rotation Z
+Dot3.Shape 1.Transform.Scale
+Dot3.Shape 1.Transform.Skew
+Dot3.Shape 1.Transform.Skew Axis
+Dot3.Shape 1.Trim Paths 1
+Dot3.Shape 1.Trim Paths 1.End
+Dot3.Shape 1.Trim Paths 1.Offset
+Dot3.Shape 1.Trim Paths 1.Start
+Dot3.Transform
+Dot3.Transform.Anchor Point
+Dot3.Transform.Opacity
+Dot3.Transform.Position
+Dot3.Transform.Rotation
+Dot3.Transform.Rotation X
+Dot3.Transform.Rotation Y
+Dot3.Transform.Rotation Z
+Dot3.Transform.Scale
+Dot4
+Dot4.Shape 1
+Dot4.Shape 1.Anchor Point
+Dot4.Shape 1.Opacity
+Dot4.Shape 1.Path 1
+Dot4.Shape 1.Path 1.Path
+Dot4.Shape 1.Position
+Dot4.Shape 1.Rotation
+Dot4.Shape 1.Rotation X
+Dot4.Shape 1.Rotation Y
+Dot4.Shape 1.Rotation Z
+Dot4.Shape 1.Scale
+Dot4.Shape 1.Skew
+Dot4.Shape 1.Skew Axis
+Dot4.Shape 1.Stroke 1
+Dot4.Shape 1.Stroke 1.Color
+Dot4.Shape 1.Stroke 1.Dash Phase
+Dot4.Shape 1.Stroke 1.Dashes
+Dot4.Shape 1.Stroke 1.Opacity
+Dot4.Shape 1.Stroke 1.Stroke Width
+Dot4.Shape 1.Transform
+Dot4.Shape 1.Transform.Anchor Point
+Dot4.Shape 1.Transform.Opacity
+Dot4.Shape 1.Transform.Position
+Dot4.Shape 1.Transform.Rotation
+Dot4.Shape 1.Transform.Rotation X
+Dot4.Shape 1.Transform.Rotation Y
+Dot4.Shape 1.Transform.Rotation Z
+Dot4.Shape 1.Transform.Scale
+Dot4.Shape 1.Transform.Skew
+Dot4.Shape 1.Transform.Skew Axis
+Dot4.Shape 1.Trim Paths 1
+Dot4.Shape 1.Trim Paths 1.End
+Dot4.Shape 1.Trim Paths 1.Offset
+Dot4.Shape 1.Trim Paths 1.Start
+Dot4.Transform
+Dot4.Transform.Anchor Point
+Dot4.Transform.Opacity
+Dot4.Transform.Position
+Dot4.Transform.Rotation
+Dot4.Transform.Rotation X
+Dot4.Transform.Rotation Y
+Dot4.Transform.Rotation Z
+Dot4.Transform.Scale
+Dot5
+Dot5.Shape 1
+Dot5.Shape 1.Anchor Point
+Dot5.Shape 1.Opacity
+Dot5.Shape 1.Path 1
+Dot5.Shape 1.Path 1.Path
+Dot5.Shape 1.Position
+Dot5.Shape 1.Rotation
+Dot5.Shape 1.Rotation X
+Dot5.Shape 1.Rotation Y
+Dot5.Shape 1.Rotation Z
+Dot5.Shape 1.Scale
+Dot5.Shape 1.Skew
+Dot5.Shape 1.Skew Axis
+Dot5.Shape 1.Stroke 1
+Dot5.Shape 1.Stroke 1.Color
+Dot5.Shape 1.Stroke 1.Dash Phase
+Dot5.Shape 1.Stroke 1.Dashes
+Dot5.Shape 1.Stroke 1.Opacity
+Dot5.Shape 1.Stroke 1.Stroke Width
+Dot5.Shape 1.Transform
+Dot5.Shape 1.Transform.Anchor Point
+Dot5.Shape 1.Transform.Opacity
+Dot5.Shape 1.Transform.Position
+Dot5.Shape 1.Transform.Rotation
+Dot5.Shape 1.Transform.Rotation X
+Dot5.Shape 1.Transform.Rotation Y
+Dot5.Shape 1.Transform.Rotation Z
+Dot5.Shape 1.Transform.Scale
+Dot5.Shape 1.Transform.Skew
+Dot5.Shape 1.Transform.Skew Axis
+Dot5.Shape 1.Trim Paths 1
+Dot5.Shape 1.Trim Paths 1.End
+Dot5.Shape 1.Trim Paths 1.Offset
+Dot5.Shape 1.Trim Paths 1.Start
+Dot5.Transform
+Dot5.Transform.Anchor Point
+Dot5.Transform.Opacity
+Dot5.Transform.Position
+Dot5.Transform.Rotation
+Dot5.Transform.Rotation X
+Dot5.Transform.Rotation Y
+Dot5.Transform.Rotation Z
+Dot5.Transform.Scale
+Dot6
+Dot6.Shape 1
+Dot6.Shape 1.Anchor Point
+Dot6.Shape 1.Opacity
+Dot6.Shape 1.Path 1
+Dot6.Shape 1.Path 1.Path
+Dot6.Shape 1.Position
+Dot6.Shape 1.Rotation
+Dot6.Shape 1.Rotation X
+Dot6.Shape 1.Rotation Y
+Dot6.Shape 1.Rotation Z
+Dot6.Shape 1.Scale
+Dot6.Shape 1.Skew
+Dot6.Shape 1.Skew Axis
+Dot6.Shape 1.Stroke 1
+Dot6.Shape 1.Stroke 1.Color
+Dot6.Shape 1.Stroke 1.Dash Phase
+Dot6.Shape 1.Stroke 1.Dashes
+Dot6.Shape 1.Stroke 1.Opacity
+Dot6.Shape 1.Stroke 1.Stroke Width
+Dot6.Shape 1.Transform
+Dot6.Shape 1.Transform.Anchor Point
+Dot6.Shape 1.Transform.Opacity
+Dot6.Shape 1.Transform.Position
+Dot6.Shape 1.Transform.Rotation
+Dot6.Shape 1.Transform.Rotation X
+Dot6.Shape 1.Transform.Rotation Y
+Dot6.Shape 1.Transform.Rotation Z
+Dot6.Shape 1.Transform.Scale
+Dot6.Shape 1.Transform.Skew
+Dot6.Shape 1.Transform.Skew Axis
+Dot6.Shape 1.Trim Paths 1
+Dot6.Shape 1.Trim Paths 1.End
+Dot6.Shape 1.Trim Paths 1.Offset
+Dot6.Shape 1.Trim Paths 1.Start
+Dot6.Shape 1.Trim Paths 2
+Dot6.Shape 1.Trim Paths 2.End
+Dot6.Shape 1.Trim Paths 2.Offset
+Dot6.Shape 1.Trim Paths 2.Start
+Dot6.Transform
+Dot6.Transform.Anchor Point
+Dot6.Transform.Opacity
+Dot6.Transform.Position
+Dot6.Transform.Rotation
+Dot6.Transform.Rotation X
+Dot6.Transform.Rotation Y
+Dot6.Transform.Rotation Z
+Dot6.Transform.Scale
+Dot7
+Dot7.Shape 1
+Dot7.Shape 1.Anchor Point
+Dot7.Shape 1.Opacity
+Dot7.Shape 1.Path 1
+Dot7.Shape 1.Path 1.Path
+Dot7.Shape 1.Position
+Dot7.Shape 1.Rotation
+Dot7.Shape 1.Rotation X
+Dot7.Shape 1.Rotation Y
+Dot7.Shape 1.Rotation Z
+Dot7.Shape 1.Scale
+Dot7.Shape 1.Skew
+Dot7.Shape 1.Skew Axis
+Dot7.Shape 1.Stroke 1
+Dot7.Shape 1.Stroke 1.Color
+Dot7.Shape 1.Stroke 1.Dash Phase
+Dot7.Shape 1.Stroke 1.Dashes
+Dot7.Shape 1.Stroke 1.Opacity
+Dot7.Shape 1.Stroke 1.Stroke Width
+Dot7.Shape 1.Transform
+Dot7.Shape 1.Transform.Anchor Point
+Dot7.Shape 1.Transform.Opacity
+Dot7.Shape 1.Transform.Position
+Dot7.Shape 1.Transform.Rotation
+Dot7.Shape 1.Transform.Rotation X
+Dot7.Shape 1.Transform.Rotation Y
+Dot7.Shape 1.Transform.Rotation Z
+Dot7.Shape 1.Transform.Scale
+Dot7.Shape 1.Transform.Skew
+Dot7.Shape 1.Transform.Skew Axis
+Dot7.Shape 1.Trim Paths 1
+Dot7.Shape 1.Trim Paths 1.End
+Dot7.Shape 1.Trim Paths 1.Offset
+Dot7.Shape 1.Trim Paths 1.Start
+Dot7.Transform
+Dot7.Transform.Anchor Point
+Dot7.Transform.Opacity
+Dot7.Transform.Position
+Dot7.Transform.Rotation
+Dot7.Transform.Rotation X
+Dot7.Transform.Rotation Y
+Dot7.Transform.Rotation Z
+Dot7.Transform.Scale
+Dot8
+Dot8.Shape 1
+Dot8.Shape 1.Anchor Point
+Dot8.Shape 1.Opacity
+Dot8.Shape 1.Path 1
+Dot8.Shape 1.Path 1.Path
+Dot8.Shape 1.Position
+Dot8.Shape 1.Rotation
+Dot8.Shape 1.Rotation X
+Dot8.Shape 1.Rotation Y
+Dot8.Shape 1.Rotation Z
+Dot8.Shape 1.Scale
+Dot8.Shape 1.Skew
+Dot8.Shape 1.Skew Axis
+Dot8.Shape 1.Stroke 1
+Dot8.Shape 1.Stroke 1.Color
+Dot8.Shape 1.Stroke 1.Dash Phase
+Dot8.Shape 1.Stroke 1.Dashes
+Dot8.Shape 1.Stroke 1.Opacity
+Dot8.Shape 1.Stroke 1.Stroke Width
+Dot8.Shape 1.Transform
+Dot8.Shape 1.Transform.Anchor Point
+Dot8.Shape 1.Transform.Opacity
+Dot8.Shape 1.Transform.Position
+Dot8.Shape 1.Transform.Rotation
+Dot8.Shape 1.Transform.Rotation X
+Dot8.Shape 1.Transform.Rotation Y
+Dot8.Shape 1.Transform.Rotation Z
+Dot8.Shape 1.Transform.Scale
+Dot8.Shape 1.Transform.Skew
+Dot8.Shape 1.Transform.Skew Axis
+Dot8.Shape 1.Trim Paths 1
+Dot8.Shape 1.Trim Paths 1.End
+Dot8.Shape 1.Trim Paths 1.Offset
+Dot8.Shape 1.Trim Paths 1.Start
+Dot8.Transform
+Dot8.Transform.Anchor Point
+Dot8.Transform.Opacity
+Dot8.Transform.Position
+Dot8.Transform.Rotation
+Dot8.Transform.Rotation X
+Dot8.Transform.Rotation Y
+Dot8.Transform.Rotation Z
+Dot8.Transform.Scale
+Dot9
+Dot9.Shape 1
+Dot9.Shape 1.Anchor Point
+Dot9.Shape 1.Opacity
+Dot9.Shape 1.Path 1
+Dot9.Shape 1.Path 1.Path
+Dot9.Shape 1.Position
+Dot9.Shape 1.Rotation
+Dot9.Shape 1.Rotation X
+Dot9.Shape 1.Rotation Y
+Dot9.Shape 1.Rotation Z
+Dot9.Shape 1.Scale
+Dot9.Shape 1.Skew
+Dot9.Shape 1.Skew Axis
+Dot9.Shape 1.Stroke 1
+Dot9.Shape 1.Stroke 1.Color
+Dot9.Shape 1.Stroke 1.Dash Phase
+Dot9.Shape 1.Stroke 1.Dashes
+Dot9.Shape 1.Stroke 1.Opacity
+Dot9.Shape 1.Stroke 1.Stroke Width
+Dot9.Shape 1.Transform
+Dot9.Shape 1.Transform.Anchor Point
+Dot9.Shape 1.Transform.Opacity
+Dot9.Shape 1.Transform.Position
+Dot9.Shape 1.Transform.Rotation
+Dot9.Shape 1.Transform.Rotation X
+Dot9.Shape 1.Transform.Rotation Y
+Dot9.Shape 1.Transform.Rotation Z
+Dot9.Shape 1.Transform.Scale
+Dot9.Shape 1.Transform.Skew
+Dot9.Shape 1.Transform.Skew Axis
+Dot9.Shape 1.Trim Paths 1
+Dot9.Shape 1.Trim Paths 1.End
+Dot9.Shape 1.Trim Paths 1.Offset
+Dot9.Shape 1.Trim Paths 1.Start
+Dot9.Shape 1.Trim Paths 2
+Dot9.Shape 1.Trim Paths 2.End
+Dot9.Shape 1.Trim Paths 2.Offset
+Dot9.Shape 1.Trim Paths 2.Start
+Dot9.Transform
+Dot9.Transform.Anchor Point
+Dot9.Transform.Opacity
+Dot9.Transform.Position
+Dot9.Transform.Rotation
+Dot9.Transform.Rotation X
+Dot9.Transform.Rotation Y
+Dot9.Transform.Rotation Z
+Dot9.Transform.Scale
+H1
+H1.Shape 1
+H1.Shape 1.Anchor Point
+H1.Shape 1.Fill 1
+H1.Shape 1.Fill 1.Color
+H1.Shape 1.Fill 1.Opacity
+H1.Shape 1.Opacity
+H1.Shape 1.Path 1
+H1.Shape 1.Path 1.Path
+H1.Shape 1.Position
+H1.Shape 1.Rotation
+H1.Shape 1.Rotation X
+H1.Shape 1.Rotation Y
+H1.Shape 1.Rotation Z
+H1.Shape 1.Scale
+H1.Shape 1.Skew
+H1.Shape 1.Skew Axis
+H1.Shape 1.Transform
+H1.Shape 1.Transform.Anchor Point
+H1.Shape 1.Transform.Opacity
+H1.Shape 1.Transform.Position
+H1.Shape 1.Transform.Rotation
+H1.Shape 1.Transform.Rotation X
+H1.Shape 1.Transform.Rotation Y
+H1.Shape 1.Transform.Rotation Z
+H1.Shape 1.Transform.Scale
+H1.Shape 1.Transform.Skew
+H1.Shape 1.Transform.Skew Axis
+H1.Transform
+H1.Transform.Anchor Point
+H1.Transform.Opacity
+H1.Transform.Position
+H1.Transform.Rotation
+H1.Transform.Rotation X
+H1.Transform.Rotation Y
+H1.Transform.Rotation Z
+H1.Transform.Scale
+H2
+H2.Shape 1
+H2.Shape 1.Anchor Point
+H2.Shape 1.Fill 1
+H2.Shape 1.Fill 1.Color
+H2.Shape 1.Fill 1.Opacity
+H2.Shape 1.Opacity
+H2.Shape 1.Path 1
+H2.Shape 1.Path 1.Path
+H2.Shape 1.Position
+H2.Shape 1.Rotation
+H2.Shape 1.Rotation X
+H2.Shape 1.Rotation Y
+H2.Shape 1.Rotation Z
+H2.Shape 1.Scale
+H2.Shape 1.Skew
+H2.Shape 1.Skew Axis
+H2.Shape 1.Transform
+H2.Shape 1.Transform.Anchor Point
+H2.Shape 1.Transform.Opacity
+H2.Shape 1.Transform.Position
+H2.Shape 1.Transform.Rotation
+H2.Shape 1.Transform.Rotation X
+H2.Shape 1.Transform.Rotation Y
+H2.Shape 1.Transform.Rotation Z
+H2.Shape 1.Transform.Scale
+H2.Shape 1.Transform.Skew
+H2.Shape 1.Transform.Skew Axis
+H2.Transform
+H2.Transform.Anchor Point
+H2.Transform.Opacity
+H2.Transform.Position
+H2.Transform.Rotation
+H2.Transform.Rotation X
+H2.Transform.Rotation Y
+H2.Transform.Rotation Z
+H2.Transform.Scale

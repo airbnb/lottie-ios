@@ -1,0 +1,63 @@
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Fill 1.Color
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Fill 1.Opacity
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Opacity
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Position
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Scale
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Scale
+Ellipse 1-composition.Ellipse 1-content.Transform.Opacity
+Ellipse 1-composition.Ellipse 1-content.Transform.Position
+Ellipse 1-composition.Ellipse 1-content.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-content.Transform.Scale
+Ellipse 1-composition.Ellipse 1-content.Transform.Scale
+Ellipse 1-composition.Ellipse 1-null.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-null.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-null.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-null.Transform.Scale
+Ellipse 1-composition.Ellipse 1-null.Transform.Scale
+Ellipse 1-composition.Ellipse 1-null.Transform.Scale
+Ellipse 1-composition.Ellipse 1-null.Transform.Scale
+Ellipse 1-composition.Ellipse 1-null.Transform.Scale
+Ellipse 1-composition.Ellipse 1-null.Transform.Scale
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Fill 1.Color
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Fill 1.Opacity
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Opacity
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Position
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Scale
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Scale
+Ellipse 1-composition.Ellipse 1-size.Transform.Opacity
+Ellipse 1-composition.Ellipse 1-size.Transform.Position
+Ellipse 1-composition.Ellipse 1-size.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-size.Transform.Scale
+Ellipse 1-composition.Ellipse 1-size.Transform.Scale
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Stroke 1.Color
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Stroke 1.Opacity
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Stroke 1.Stroke Width
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Opacity
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Position
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Scale
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Scale
+Ellipse 1-composition.Ellipse 1-stroke.Transform.Opacity
+Ellipse 1-composition.Ellipse 1-stroke.Transform.Position
+Ellipse 1-composition.Ellipse 1-stroke.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-stroke.Transform.Scale
+Ellipse 1-composition.Ellipse 1-stroke.Transform.Scale
+Ellipse 1-composition.Transform.Opacity
+Ellipse 1-composition.Transform.Position
+Ellipse 1-composition.Transform.Rotation
+Ellipse 1-composition.Transform.Scale
+Ellipse 1-composition.Transform.Scale
+Frame 1-background.Frame 1-background.Fill 1.Color
+Frame 1-background.Frame 1-background.Fill 1.Opacity
+Frame 1-background.Frame 1-background.Transform.Opacity
+Frame 1-background.Frame 1-background.Transform.Position
+Frame 1-background.Frame 1-background.Transform.Rotation
+Frame 1-background.Frame 1-background.Transform.Scale
+Frame 1-background.Frame 1-background.Transform.Scale
+Frame 1-background.Transform.Opacity
+Frame 1-background.Transform.Position
+Frame 1-background.Transform.Rotation
+Frame 1-background.Transform.Scale
+Frame 1-background.Transform.Scale

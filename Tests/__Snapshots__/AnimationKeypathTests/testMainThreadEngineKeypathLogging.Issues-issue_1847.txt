@@ -1,0 +1,180 @@
+Ellipse 1-composition
+Ellipse 1-composition.Ellipse 1-content
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Anchor Point
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Ellipse 1-path
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Ellipse 1-path.Path
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Fill 1
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Fill 1.Color
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Fill 1.Opacity
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Opacity
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Position
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Rotation
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Rotation X
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Rotation Y
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Rotation Z
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Scale
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Skew
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Skew Axis
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Anchor Point
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Opacity
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Position
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Rotation X
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Rotation Y
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Rotation Z
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Scale
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Skew
+Ellipse 1-composition.Ellipse 1-content.Ellipse 1-content.Transform.Skew Axis
+Ellipse 1-composition.Ellipse 1-content.Transform
+Ellipse 1-composition.Ellipse 1-content.Transform.Anchor Point
+Ellipse 1-composition.Ellipse 1-content.Transform.Opacity
+Ellipse 1-composition.Ellipse 1-content.Transform.Position
+Ellipse 1-composition.Ellipse 1-content.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-content.Transform.Rotation X
+Ellipse 1-composition.Ellipse 1-content.Transform.Rotation Y
+Ellipse 1-composition.Ellipse 1-content.Transform.Rotation Z
+Ellipse 1-composition.Ellipse 1-content.Transform.Scale
+Ellipse 1-composition.Ellipse 1-null
+Ellipse 1-composition.Ellipse 1-null.Transform
+Ellipse 1-composition.Ellipse 1-null.Transform.Anchor Point
+Ellipse 1-composition.Ellipse 1-null.Transform.Opacity
+Ellipse 1-composition.Ellipse 1-null.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-null.Transform.Rotation X
+Ellipse 1-composition.Ellipse 1-null.Transform.Rotation Y
+Ellipse 1-composition.Ellipse 1-null.Transform.Rotation Z
+Ellipse 1-composition.Ellipse 1-null.Transform.Scale
+Ellipse 1-composition.Ellipse 1-null.Transform.X Position
+Ellipse 1-composition.Ellipse 1-null.Transform.Y Position
+Ellipse 1-composition.Ellipse 1-size
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Anchor Point
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Fill 1
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Fill 1.Color
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Fill 1.Opacity
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Opacity
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Position
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Rotation
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Rotation X
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Rotation Y
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Rotation Z
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Scale
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Skew
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Skew Axis
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Anchor Point
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Opacity
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Position
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Rotation X
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Rotation Y
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Rotation Z
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Scale
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Skew
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.Transform.Skew Axis
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.sizeElement
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.sizeElement.Position
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.sizeElement.Roundness
+Ellipse 1-composition.Ellipse 1-size.Ellipse 1-size.sizeElement.Size
+Ellipse 1-composition.Ellipse 1-size.Transform
+Ellipse 1-composition.Ellipse 1-size.Transform.Anchor Point
+Ellipse 1-composition.Ellipse 1-size.Transform.Opacity
+Ellipse 1-composition.Ellipse 1-size.Transform.Position
+Ellipse 1-composition.Ellipse 1-size.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-size.Transform.Rotation X
+Ellipse 1-composition.Ellipse 1-size.Transform.Rotation Y
+Ellipse 1-composition.Ellipse 1-size.Transform.Rotation Z
+Ellipse 1-composition.Ellipse 1-size.Transform.Scale
+Ellipse 1-composition.Ellipse 1-stroke
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Anchor Point
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Ellipse 1-path
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Ellipse 1-path.Path
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Opacity
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Position
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Rotation
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Rotation X
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Rotation Y
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Rotation Z
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Scale
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Skew
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Skew Axis
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Stroke 1
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Stroke 1.Color
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Stroke 1.Dash Phase
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Stroke 1.Dashes
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Stroke 1.Opacity
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Stroke 1.Stroke Width
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Anchor Point
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Opacity
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Position
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Rotation X
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Rotation Y
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Rotation Z
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Scale
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Skew
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Transform.Skew Axis
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Trim Paths 1
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Trim Paths 1.End
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Trim Paths 1.Offset
+Ellipse 1-composition.Ellipse 1-stroke.Ellipse 1-stroke.Trim Paths 1.Start
+Ellipse 1-composition.Ellipse 1-stroke.Transform
+Ellipse 1-composition.Ellipse 1-stroke.Transform.Anchor Point
+Ellipse 1-composition.Ellipse 1-stroke.Transform.Opacity
+Ellipse 1-composition.Ellipse 1-stroke.Transform.Position
+Ellipse 1-composition.Ellipse 1-stroke.Transform.Rotation
+Ellipse 1-composition.Ellipse 1-stroke.Transform.Rotation X
+Ellipse 1-composition.Ellipse 1-stroke.Transform.Rotation Y
+Ellipse 1-composition.Ellipse 1-stroke.Transform.Rotation Z
+Ellipse 1-composition.Ellipse 1-stroke.Transform.Scale
+Ellipse 1-composition.Transform
+Ellipse 1-composition.Transform.Anchor Point
+Ellipse 1-composition.Transform.Opacity
+Ellipse 1-composition.Transform.Position
+Ellipse 1-composition.Transform.Rotation
+Ellipse 1-composition.Transform.Rotation X
+Ellipse 1-composition.Transform.Rotation Y
+Ellipse 1-composition.Transform.Rotation Z
+Ellipse 1-composition.Transform.Scale
+Frame 1-background
+Frame 1-background.Frame 1-background
+Frame 1-background.Frame 1-background.Anchor Point
+Frame 1-background.Frame 1-background.Fill 1
+Frame 1-background.Frame 1-background.Fill 1.Color
+Frame 1-background.Frame 1-background.Fill 1.Opacity
+Frame 1-background.Frame 1-background.Frame 1-background
+Frame 1-background.Frame 1-background.Frame 1-background.Position
+Frame 1-background.Frame 1-background.Frame 1-background.Roundness
+Frame 1-background.Frame 1-background.Frame 1-background.Size
+Frame 1-background.Frame 1-background.Opacity
+Frame 1-background.Frame 1-background.Position
+Frame 1-background.Frame 1-background.Rotation
+Frame 1-background.Frame 1-background.Rotation X
+Frame 1-background.Frame 1-background.Rotation Y
+Frame 1-background.Frame 1-background.Rotation Z
+Frame 1-background.Frame 1-background.Scale
+Frame 1-background.Frame 1-background.Skew
+Frame 1-background.Frame 1-background.Skew Axis
+Frame 1-background.Frame 1-background.Transform
+Frame 1-background.Frame 1-background.Transform.Anchor Point
+Frame 1-background.Frame 1-background.Transform.Opacity
+Frame 1-background.Frame 1-background.Transform.Position
+Frame 1-background.Frame 1-background.Transform.Rotation
+Frame 1-background.Frame 1-background.Transform.Rotation X
+Frame 1-background.Frame 1-background.Transform.Rotation Y
+Frame 1-background.Frame 1-background.Transform.Rotation Z
+Frame 1-background.Frame 1-background.Transform.Scale
+Frame 1-background.Frame 1-background.Transform.Skew
+Frame 1-background.Frame 1-background.Transform.Skew Axis
+Frame 1-background.Transform
+Frame 1-background.Transform.Anchor Point
+Frame 1-background.Transform.Opacity
+Frame 1-background.Transform.Position
+Frame 1-background.Transform.Rotation
+Frame 1-background.Transform.Rotation X
+Frame 1-background.Transform.Rotation Y
+Frame 1-background.Transform.Rotation Z
+Frame 1-background.Transform.Scale

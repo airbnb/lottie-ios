@@ -1,0 +1,35 @@
+inner circle 1.Ellipse 1.Stroke 1.Color
+inner circle 1.Ellipse 1.Stroke 1.Opacity
+inner circle 1.Ellipse 1.Stroke 1.Stroke Width
+inner circle 1.Ellipse 1.Transform.Opacity
+inner circle 1.Ellipse 1.Transform.Position
+inner circle 1.Ellipse 1.Transform.Rotation
+inner circle 1.Ellipse 1.Transform.Scale
+inner circle 1.Ellipse 1.Transform.Scale
+inner circle 1.Transform.Opacity
+inner circle 2.Ellipse 1.Stroke 1.Color
+inner circle 2.Ellipse 1.Stroke 1.Opacity
+inner circle 2.Ellipse 1.Stroke 1.Stroke Width
+inner circle 2.Ellipse 1.Transform.Opacity
+inner circle 2.Ellipse 1.Transform.Position
+inner circle 2.Ellipse 1.Transform.Rotation
+inner circle 2.Ellipse 1.Transform.Scale
+inner circle 2.Ellipse 1.Transform.Scale
+inner circle 2.Transform.Opacity
+inner circle 2.Transform.Position
+inner circle 2.Transform.Rotation
+inner circle 2.Transform.Scale
+inner circle 2.Transform.Scale
+outer circle.Ellipse 1.Stroke 1.Color
+outer circle.Ellipse 1.Stroke 1.Opacity
+outer circle.Ellipse 1.Stroke 1.Stroke Width
+outer circle.Ellipse 1.Transform.Opacity
+outer circle.Ellipse 1.Transform.Position
+outer circle.Ellipse 1.Transform.Rotation
+outer circle.Ellipse 1.Transform.Scale
+outer circle.Ellipse 1.Transform.Scale
+outer circle.Transform.Opacity
+outer circle.Transform.Position
+outer circle.Transform.Rotation
+outer circle.Transform.Scale
+outer circle.Transform.Scale

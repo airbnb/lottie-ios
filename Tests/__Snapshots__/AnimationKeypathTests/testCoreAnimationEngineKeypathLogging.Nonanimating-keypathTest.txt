@@ -1,0 +1,208 @@
+GroupShapeLayer.Group 1.Shape 1.Fill 1.Color
+GroupShapeLayer.Group 1.Shape 1.Fill 1.Opacity
+GroupShapeLayer.Group 1.Shape 1.Stroke 1.Color
+GroupShapeLayer.Group 1.Shape 1.Stroke 1.Opacity
+GroupShapeLayer.Group 1.Shape 1.Stroke 1.Stroke Width
+GroupShapeLayer.Group 1.Shape 1.Transform.Opacity
+GroupShapeLayer.Group 1.Shape 1.Transform.Position
+GroupShapeLayer.Group 1.Shape 1.Transform.Rotation
+GroupShapeLayer.Group 1.Shape 1.Transform.Scale
+GroupShapeLayer.Group 1.Shape 1.Transform.Scale
+GroupShapeLayer.Group 1.Shape 2.Fill 1.Color
+GroupShapeLayer.Group 1.Shape 2.Fill 1.Opacity
+GroupShapeLayer.Group 1.Shape 2.Stroke 1.Color
+GroupShapeLayer.Group 1.Shape 2.Stroke 1.Opacity
+GroupShapeLayer.Group 1.Shape 2.Stroke 1.Stroke Width
+GroupShapeLayer.Group 1.Shape 2.Transform.Opacity
+GroupShapeLayer.Group 1.Shape 2.Transform.Position
+GroupShapeLayer.Group 1.Shape 2.Transform.Rotation
+GroupShapeLayer.Group 1.Shape 2.Transform.Scale
+GroupShapeLayer.Group 1.Shape 2.Transform.Scale
+GroupShapeLayer.Group 1.Transform.Opacity
+GroupShapeLayer.Group 1.Transform.Position
+GroupShapeLayer.Group 1.Transform.Rotation
+GroupShapeLayer.Group 1.Transform.Scale
+GroupShapeLayer.Group 1.Transform.Scale
+GroupShapeLayer.Transform.Opacity
+GroupShapeLayer.Transform.Position
+GroupShapeLayer.Transform.Rotation
+GroupShapeLayer.Transform.Scale
+GroupShapeLayer.Transform.Scale
+LoopLayer.LoopShape.Fill 1.Color
+LoopLayer.LoopShape.Fill 1.Opacity
+LoopLayer.LoopShape.Stroke 1.Color
+LoopLayer.LoopShape.Stroke 1.Opacity
+LoopLayer.LoopShape.Stroke 1.Stroke Width
+LoopLayer.LoopShape.Transform.Opacity
+LoopLayer.LoopShape.Transform.Position
+LoopLayer.LoopShape.Transform.Rotation
+LoopLayer.LoopShape.Transform.Scale
+LoopLayer.LoopShape.Transform.Scale
+LoopLayer.Transform.Opacity
+LoopLayer.Transform.Position
+LoopLayer.Transform.Rotation
+LoopLayer.Transform.Scale
+LoopLayer.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Fill 1.Color
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Fill 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Fill 1.Color
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Fill 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Stroke 1.Color
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Stroke 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Stroke 1.Stroke Width
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Fill 1.Color
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Fill 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Fill 1.Color
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Fill 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Stroke 1.Color
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Stroke 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Stroke 1.Stroke Width
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Transform.Scale
+Precomp.DoubleGroupShape.Transform.Opacity
+Precomp.DoubleGroupShape.Transform.Position
+Precomp.DoubleGroupShape.Transform.Rotation
+Precomp.DoubleGroupShape.Transform.Scale
+Precomp.DoubleGroupShape.Transform.Scale
+Precomp.GroupShape.Group 1.Shape 1.Fill 1.Color
+Precomp.GroupShape.Group 1.Shape 1.Fill 1.Opacity
+Precomp.GroupShape.Group 1.Shape 1.Transform.Opacity
+Precomp.GroupShape.Group 1.Shape 1.Transform.Position
+Precomp.GroupShape.Group 1.Shape 1.Transform.Rotation
+Precomp.GroupShape.Group 1.Shape 1.Transform.Scale
+Precomp.GroupShape.Group 1.Shape 1.Transform.Scale
+Precomp.GroupShape.Group 1.Shape 2.Fill 1.Color
+Precomp.GroupShape.Group 1.Shape 2.Fill 1.Opacity
+Precomp.GroupShape.Group 1.Shape 2.Stroke 1.Color
+Precomp.GroupShape.Group 1.Shape 2.Stroke 1.Opacity
+Precomp.GroupShape.Group 1.Shape 2.Stroke 1.Stroke Width
+Precomp.GroupShape.Group 1.Shape 2.Transform.Opacity
+Precomp.GroupShape.Group 1.Shape 2.Transform.Position
+Precomp.GroupShape.Group 1.Shape 2.Transform.Rotation
+Precomp.GroupShape.Group 1.Shape 2.Transform.Scale
+Precomp.GroupShape.Group 1.Shape 2.Transform.Scale
+Precomp.GroupShape.Group 1.Transform.Opacity
+Precomp.GroupShape.Group 1.Transform.Position
+Precomp.GroupShape.Group 1.Transform.Rotation
+Precomp.GroupShape.Group 1.Transform.Scale
+Precomp.GroupShape.Group 1.Transform.Scale
+Precomp.GroupShape.Transform.Opacity
+Precomp.GroupShape.Transform.Position
+Precomp.GroupShape.Transform.Rotation
+Precomp.GroupShape.Transform.Scale
+Precomp.GroupShape.Transform.Scale
+Precomp.SingleShape.Shape 1.Fill 1.Color
+Precomp.SingleShape.Shape 1.Fill 1.Opacity
+Precomp.SingleShape.Shape 1.Transform.Opacity
+Precomp.SingleShape.Shape 1.Transform.Position
+Precomp.SingleShape.Shape 1.Transform.Rotation
+Precomp.SingleShape.Shape 1.Transform.Scale
+Precomp.SingleShape.Shape 1.Transform.Scale
+Precomp.SingleShape.Transform.Opacity
+Precomp.SingleShape.Transform.Position
+Precomp.SingleShape.Transform.Rotation
+Precomp.SingleShape.Transform.Scale
+Precomp.SingleShape.Transform.Scale
+Precomp.Transform.Opacity
+Precomp.Transform.Position
+Precomp.Transform.Rotation
+Precomp.Transform.Scale
+Precomp.Transform.Scale
+Shape Layer 1.Shape 1.Fill 1.Color
+Shape Layer 1.Shape 1.Fill 1.Opacity
+Shape Layer 1.Shape 1.Stroke 1.Color
+Shape Layer 1.Shape 1.Stroke 1.Opacity
+Shape Layer 1.Shape 1.Stroke 1.Stroke Width
+Shape Layer 1.Shape 1.Transform.Opacity
+Shape Layer 1.Shape 1.Transform.Position
+Shape Layer 1.Shape 1.Transform.Rotation
+Shape Layer 1.Shape 1.Transform.Scale
+Shape Layer 1.Shape 1.Transform.Scale
+Shape Layer 1.Transform.Opacity
+Shape Layer 1.Transform.Position
+Shape Layer 1.Transform.Rotation
+Shape Layer 1.Transform.Scale
+Shape Layer 1.Transform.Scale
+TwoShapeLayer.Shape 1.Fill 1.Color
+TwoShapeLayer.Shape 1.Fill 1.Opacity
+TwoShapeLayer.Shape 1.Stroke 1.Color
+TwoShapeLayer.Shape 1.Stroke 1.Opacity
+TwoShapeLayer.Shape 1.Stroke 1.Stroke Width
+TwoShapeLayer.Shape 1.Transform.Opacity
+TwoShapeLayer.Shape 1.Transform.Position
+TwoShapeLayer.Shape 1.Transform.Rotation
+TwoShapeLayer.Shape 1.Transform.Scale
+TwoShapeLayer.Shape 1.Transform.Scale
+TwoShapeLayer.Shape 2.Fill 1.Color
+TwoShapeLayer.Shape 2.Fill 1.Opacity
+TwoShapeLayer.Shape 2.Stroke 1.Color
+TwoShapeLayer.Shape 2.Stroke 1.Opacity
+TwoShapeLayer.Shape 2.Stroke 1.Stroke Width
+TwoShapeLayer.Shape 2.Transform.Opacity
+TwoShapeLayer.Shape 2.Transform.Position
+TwoShapeLayer.Shape 2.Transform.Rotation
+TwoShapeLayer.Shape 2.Transform.Scale
+TwoShapeLayer.Shape 2.Transform.Scale
+TwoShapeLayer.Transform.Opacity
+TwoShapeLayer.Transform.Position
+TwoShapeLayer.Transform.Rotation
+TwoShapeLayer.Transform.Scale
+TwoShapeLayer.Transform.Scale
+WiggleLayer.Shape 1.Fill 1.Color
+WiggleLayer.Shape 1.Fill 1.Opacity
+WiggleLayer.Shape 1.Stroke 1.Color
+WiggleLayer.Shape 1.Stroke 1.Opacity
+WiggleLayer.Shape 1.Stroke 1.Stroke Width
+WiggleLayer.Shape 1.Transform.Opacity
+WiggleLayer.Shape 1.Transform.Position
+WiggleLayer.Shape 1.Transform.Rotation
+WiggleLayer.Shape 1.Transform.Scale
+WiggleLayer.Shape 1.Transform.Scale
+WiggleLayer.Transform.Opacity
+WiggleLayer.Transform.Position
+WiggleLayer.Transform.Rotation
+WiggleLayer.Transform.Scale
+WiggleLayer.Transform.Scale
