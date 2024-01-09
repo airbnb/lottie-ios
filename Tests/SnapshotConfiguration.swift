@@ -34,6 +34,10 @@ struct SnapshotConfiguration {
   ///    the code supporting the automatic engine.
   var testWithAutomaticEngine = false
 
+  /// Whether or not this sample should be excluded from testing with the Core Animation rendering engine
+  ///  - Can be used for animations that are very expensive to render with the CA engine
+  var excludeCoreAnimationRenderingEngine = false
+
   /// Custom progress values (from 0 to 1) that should be screenshot
   var customProgressValuesToSnapshot: [Double]?
 
@@ -192,6 +196,10 @@ extension SnapshotConfiguration {
       ]
       return configuration
     }(),
+
+    /// Animations which are very expensive to render using the Core Animation rendering engine,
+    /// and should fall back to the Main Thread engine when using `RenderingEngineOption.automatic`.
+    "Issues/pr_2286": .excludeCoreAnimationRenderingEngine,
   ]
 }
 
@@ -201,8 +209,18 @@ extension SnapshotConfiguration {
   /// The default configuration to use if no custom mapping is provided
   static let `default` = SnapshotConfiguration()
 
+  /// Opts this snapshot in to being tested with the automatic rendering engine option
   static var useAutomaticRenderingEngine: SnapshotConfiguration {
     var configuration = SnapshotConfiguration.default
+    configuration.testWithAutomaticEngine = true
+    return configuration
+  }
+
+  /// Excludes this snapshot from being tested with the Core Animation rendering engine.
+  /// If this is the case then using the automatic engine should fall back to the main thread engine.
+  static var excludeCoreAnimationRenderingEngine: SnapshotConfiguration {
+    var configuration = SnapshotConfiguration.default
+    configuration.excludeCoreAnimationRenderingEngine = true
     configuration.testWithAutomaticEngine = true
     return configuration
   }
@@ -302,7 +320,9 @@ extension SnapshotConfiguration {
     switch configuration.renderingEngine {
     case .automatic:
       return testWithAutomaticEngine
-    case .specific:
+    case .specific(.coreAnimation):
+      return !excludeCoreAnimationRenderingEngine
+    case .specific(.mainThread):
       return true
     }
   }

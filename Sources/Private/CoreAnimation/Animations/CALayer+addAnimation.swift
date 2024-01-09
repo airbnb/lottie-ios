@@ -10,13 +10,12 @@ extension CALayer {
   /// Constructs a `CAKeyframeAnimation` that reflects the given keyframes,
   /// and adds it to this `CALayer`.
   @nonobjc
-  func addAnimation<KeyframeValue, ValueRepresentation>(
+  func addAnimation<KeyframeValue: AnyInterpolatable, ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
     keyframes: KeyframeGroup<KeyframeValue>,
     value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
     context: LayerAnimationContext)
     throws
-    where KeyframeValue: AnyInterpolatable
   {
     if let customAnimation = try customizedAnimation(for: property, context: context) {
       add(customAnimation, timedWith: context)
@@ -40,14 +39,12 @@ extension CALayer {
   ///  - If the value can be applied directly to the CALayer using KVC,
   ///    then no `CAAnimation` will be created and the value will be applied directly.
   @nonobjc
-  private func defaultAnimation<KeyframeValue, ValueRepresentation>(
+  private func defaultAnimation<KeyframeValue: AnyInterpolatable, ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
     keyframes keyframeGroup: KeyframeGroup<KeyframeValue>,
     value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
     context: LayerAnimationContext)
-    throws
-    -> CAAnimation?
-    where KeyframeValue: AnyInterpolatable
+    throws -> CAAnimation?
   {
     let keyframes = keyframeGroup.keyframes
     guard !keyframes.isEmpty else { return nil }

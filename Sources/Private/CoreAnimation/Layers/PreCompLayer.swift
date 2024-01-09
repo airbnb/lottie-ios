@@ -27,7 +27,6 @@ final class PreCompLayer: BaseCompositionLayer {
     }
 
     preCompLayer = typedLayer.preCompLayer
-    timeRemappingInterpolator = typedLayer.timeRemappingInterpolator
     super.init(layer: typedLayer)
   }
 
@@ -84,10 +83,6 @@ final class PreCompLayer: BaseCompositionLayer {
 
     try setupChildAnimations(context: contextForChildren)
   }
-
-  // MARK: Private
-
-  private var timeRemappingInterpolator: KeyframeInterpolator<AnimationFrameTime>?
 
 }
 
