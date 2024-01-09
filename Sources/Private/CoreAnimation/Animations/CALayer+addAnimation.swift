@@ -16,6 +16,7 @@ extension CALayer {
     value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
     context: LayerAnimationContext)
     throws
+    where KeyframeValue: AnyInterpolatable
   {
     if let customAnimation = try customizedAnimation(for: property, context: context) {
       add(customAnimation, timedWith: context)
@@ -44,8 +45,18 @@ extension CALayer {
     keyframes keyframeGroup: KeyframeGroup<KeyframeValue>,
     value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
     context: LayerAnimationContext)
-    throws -> CAAnimation?
+    throws 
+    -> CAAnimation?
+    where KeyframeValue: AnyInterpolatable
   {
+    if context.mustUseComplexTimeRemapping {
+      let manuallyInterpolatedKeyframes = Keyframes.timeRemapped(keyframeGroup, context: context)
+
+      var context = context
+      context.mustUseComplexTimeRemapping = false
+      return try defaultAnimation(for: property, keyframes: manuallyInterpolatedKeyframes, value: keyframeValueMapping, context: context)
+    }
+
     let keyframes = keyframeGroup.keyframes
     guard !keyframes.isEmpty else { return nil }
 

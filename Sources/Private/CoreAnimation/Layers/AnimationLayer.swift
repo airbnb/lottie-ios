@@ -53,7 +53,13 @@ struct LayerAnimationContext {
 
   /// A closure that remaps the given frame in the child layer's local time to a frame
   /// in the animation's overall global time
-  private(set) var timeRemapping: ((AnimationFrameTime) -> AnimationFrameTime) = { $0 }
+  private(set) var simpleTimeRemapping: ((_ localTime: AnimationFrameTime) -> AnimationFrameTime) = { $0 }
+
+  /// A complex time remapping closure that remaps the given frame in the animation's overall global time
+  /// into the child layer's local time
+  private(set) var complexTimeRemapping: ((_ globalTime: AnimationFrameTime) -> AnimationFrameTime) = { $0 }
+
+  var mustUseComplexTimeRemapping: Bool = false
 
   /// The duration of the animation
   var animationDuration: AnimationFrameTime {
@@ -82,23 +88,36 @@ struct LayerAnimationContext {
   /// accounting for the `timeRemapping` applied to this layer
   func progressTime(for frame: AnimationFrameTime) -> AnimationProgressTime {
     let animationFrameCount = animationDuration * animation.framerate
-    return (timeRemapping(frame) - animation.startFrame) / animationFrameCount
+    return (simpleTimeRemapping(frame) - animation.startFrame) / animationFrameCount
   }
 
   /// The real-time `TimeInterval` for the given `AnimationFrameTime` within this layer,
   /// accounting for the `timeRemapping` applied to this layer
   func time(for frame: AnimationFrameTime) -> TimeInterval {
-    animation.time(forFrame: timeRemapping(frame))
+    animation.time(forFrame: simpleTimeRemapping(frame))
   }
 
   /// Chains an additional `timeRemapping` closure onto this layer context
-  func withTimeRemapping(
-    _ additionalTimeRemapping: @escaping (AnimationFrameTime) -> AnimationFrameTime)
+  func withSimpleTimeRemapping(
+    _ additionalSimpleTimeRemapping: @escaping (_ localTime: AnimationFrameTime) -> AnimationFrameTime)
     -> LayerAnimationContext
   {
     var copy = self
-    copy.timeRemapping = { [existingTimeRemapping = timeRemapping] time in
-      existingTimeRemapping(additionalTimeRemapping(time))
+    copy.simpleTimeRemapping = { [existingSimpleTimeRemapping = simpleTimeRemapping] time in
+      existingSimpleTimeRemapping(additionalSimpleTimeRemapping(time))
+    }
+    return copy
+  }
+
+  func withComplexTimeRemapping(
+    required: Bool,
+    _ additionalComplexTimeRemapping: @escaping (_ globalTime: AnimationFrameTime) -> AnimationFrameTime)
+    -> LayerAnimationContext
+  {
+    var copy = self
+    copy.mustUseComplexTimeRemapping = copy.mustUseComplexTimeRemapping || required
+    copy.complexTimeRemapping = { [existingComplexTimeRemapping = complexTimeRemapping] time in
+      existingComplexTimeRemapping(additionalComplexTimeRemapping(time))
     }
     return copy
   }

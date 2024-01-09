@@ -256,7 +256,7 @@ extension CALayer {
     // Core Animation doesn't animate skew changes properly. If the skew value
     // changes over the course of the animation then we have to manually
     // compute the `CATransform3D` for each frame individually.
-    let requiresManualInterpolation = transformModel.hasSkewAnimation
+    let requiresManualInterpolation = transformModel.hasSkewAnimation || context.mustUseComplexTimeRemapping
 
     let combinedTransformKeyframes = Keyframes.combined(
       transformModel.anchorPoint,
@@ -331,5 +331,12 @@ extension TransformModel {
   /// Whether or not this `TransformModel` has any negative X scale values
   var hasNegativeXScaleValues: Bool {
     scale.keyframes.contains(where: { $0.value.x < 0 })
+  }
+}
+
+extension CATransform3D: AnyInterpolatable {
+  @available(*, deprecated)
+  public func _interpolate(to: CATransform3D, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> CATransform3D {
+    fatalError("Unused, only present to satisfy the compiler. Do not call.")
   }
 }

@@ -251,3 +251,10 @@ extension Array: Interpolatable, AnyInterpolatable where Element: Interpolatable
     }
   }
 }
+
+extension Optional: Interpolatable, AnyInterpolatable where Wrapped: Interpolatable {
+  public func interpolate(to: Wrapped?, amount: CGFloat) -> Wrapped? {
+    guard let self, let to else { return nil }
+    return self.interpolate(to: to, amount: amount)
+  }
+}
