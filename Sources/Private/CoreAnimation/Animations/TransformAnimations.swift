@@ -334,9 +334,17 @@ extension TransformModel {
   }
 }
 
+// MARK: - CATransform3D + AnyInterpolatable
+
 extension CATransform3D: AnyInterpolatable {
   @available(*, deprecated)
-  public func _interpolate(to: CATransform3D, amount: CGFloat, spatialOutTangent: CGPoint?, spatialInTangent: CGPoint?) -> CATransform3D {
+  public func _interpolate(
+    to _: CATransform3D,
+    amount _: CGFloat,
+    spatialOutTangent _: CGPoint?,
+    spatialInTangent _: CGPoint?)
+    -> CATransform3D
+  {
     fatalError("Unused, only present to satisfy the compiler. Do not call.")
   }
 }

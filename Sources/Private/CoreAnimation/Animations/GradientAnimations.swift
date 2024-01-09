@@ -140,6 +140,8 @@ extension GradientRenderLayer {
   }
 }
 
+// MARK: - RadialGradientKeyframes
+
 private struct RadialGradientKeyframes: Interpolatable {
   let startPoint: CGPoint
   let endPoint: CGPoint

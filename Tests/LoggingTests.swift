@@ -21,27 +21,28 @@ final class LoggingTests: XCTestCase {
   }
 
   func testAutomaticFallbackToMainThreadRenderingEngine() async {
-    // This animation is not supported by the Core Animation rendering engine
-    // because it uses time remapping
+    // This animation is not supported by the Core Animation rendering engine:
+    //  > The Core Animation rendering engine does not support animating multiple keyframes
+    //  > for stroke dashPattern values, due to limitations of Core Animation.
     await snapshotLoggedMessages(
-      animationName: "Boat_Loader",
+      animationName: "TypeFace/G",
       configuration: LottieConfiguration(renderingEngine: .automatic))
   }
 
   func testCoreAnimationRenderingEngineUnsupportedAnimation() async {
-    // This animation is not supported by the Core Animation rendering engine
-    // because it uses time remapping
+    // This animation is not supported by the Core Animation rendering engine:
+    //  > The Core Animation rendering engine does not support animating multiple keyframes
+    //  > for stroke dashPattern values, due to limitations of Core Animation.
     await snapshotLoggedMessages(
-      animationName: "Boat_Loader",
+      animationName: "TypeFace/G",
       configuration: LottieConfiguration(renderingEngine: .coreAnimation))
   }
 
   func testExplicitMainThreadRenderingEngine() async {
-    // This animation is not supported by the Core Animation rendering engine
-    // because it uses time remapping. Manually specifying the Main Thread
-    // rendering engine should silence the log messages.
+    // This animation is not supported by the Core Animation rendering engine.
+    // Manually specifying the Main Thread rendering engine should silence the log messages.
     await snapshotLoggedMessages(
-      animationName: "Boat_Loader",
+      animationName: "TypeFace/G",
       configuration: LottieConfiguration(renderingEngine: .mainThread))
   }
 

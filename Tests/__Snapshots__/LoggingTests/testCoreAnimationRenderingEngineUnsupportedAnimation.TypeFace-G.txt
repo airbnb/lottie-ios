@@ -1,0 +1,10 @@
+[info] `strokeStart` animation for "Shape Layer 17.Ellipse 1.Trim Paths 1" includes an After Effects expression (https://helpx.adobe.com/after-effects/using/expression-language.html), which is not supported by lottie-ios (expressions are only supported by lottie-web). This animation may not play correctly.
+[assertionFailure] Encountered Core Animation compatibility issues while setting up animation:
+[dotted_lines.Ellipse 1.Stroke 1] The Core Animation rendering engine does not support animating multiple keyframes for stroke dashPattern values, due to limitations of Core Animation.
+[dotted_lines.Ellipse 1.Stroke 1] The Core Animation rendering engine does not support animating multiple keyframes for stroke dashPattern values, due to limitations of Core Animation.
+[Dotted_lines.Ellipse 1.Stroke 1] The Core Animation rendering engine does not support animating multiple keyframes for stroke dashPattern values, due to limitations of Core Animation.
+[Dotted_lines.Ellipse 1.Stroke 1] The Core Animation rendering engine does not support animating multiple keyframes for stroke dashPattern values, due to limitations of Core Animation.
+
+This animation cannot be rendered correctly by the Core Animation engine.
+To resolve this issue, you can use `RenderingEngineOption.automatic`, which automatically falls back
+to the Main Thread rendering engine when necessary, or just use `RenderingEngineOption.mainThread`.

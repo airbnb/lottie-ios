@@ -33,6 +33,8 @@ final class PreCompLayer: BaseCompositionLayer {
 
   // MARK: Internal
 
+  let preCompLayer: PreCompLayerModel
+
   /// Post-init setup for `PreCompLayer`s.
   /// Should always be called after `PreCompLayer.init(preCompLayer:)`.
   ///
@@ -63,18 +65,20 @@ final class PreCompLayer: BaseCompositionLayer {
 
     let timeRemappingInterpolator = preCompLayer.timeRemapping.flatMap { KeyframeInterpolator(keyframes: $0.keyframes) }
 
-    // Precomp layers can adjust the local time of their child layers (relative to the
-    // animation's global time) via `timeRemapping` or a custom `startTime` / `timeStretch`
     let contextForChildren = context
+      // `timeStretch` and `startTime` are a simple linear function so can be inverted from a
+      // "global time to local time" function into the simpler "local time to global time".
       .withSimpleTimeRemapping { [preCompLayer] layerLocalFrame in
         (layerLocalFrame * AnimationFrameTime(preCompLayer.timeStretch)) + AnimationFrameTime(preCompLayer.startTime)
       }
-      .withComplexTimeRemapping(required: preCompLayer.timeRemapping != nil) { [preCompLayer] globalFrame in
+      // `timeRemappingInterpolator` is arbitrarily complex and cannot be inverted,
+      // so can only be applied via `complexTimeRemapping` from global time to local time.
+      .withComplexTimeRemapping(required: preCompLayer.timeRemapping != nil) { [preCompLayer] globalTime in
         if let timeRemappingInterpolator {
-          let remappedTime = timeRemappingInterpolator.value(frame: globalFrame) as! LottieVector1D
-          return remappedTime.cgFloatValue * context.animation.framerate
+          let remappedLocalTime = timeRemappingInterpolator.value(frame: globalTime) as! LottieVector1D
+          return remappedLocalTime.cgFloatValue * context.animation.framerate
         } else {
-          return (globalFrame - preCompLayer.startTime) / preCompLayer.timeStretch
+          return (globalTime - preCompLayer.startTime) / preCompLayer.timeStretch
         }
       }
 
@@ -83,7 +87,6 @@ final class PreCompLayer: BaseCompositionLayer {
 
   // MARK: Private
 
-  private let preCompLayer: PreCompLayerModel
   private var timeRemappingInterpolator: KeyframeInterpolator<AnimationFrameTime>?
 
 }

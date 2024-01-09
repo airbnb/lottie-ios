@@ -90,7 +90,14 @@ extension Star {
     let rotation: LottieVector1D
 
     func interpolate(to: Star.Keyframe, amount: CGFloat) -> Star.Keyframe {
-      fatalError("TODO")
+      Star.Keyframe(
+        position: position.interpolate(to: to.position, amount: amount),
+        outerRadius: outerRadius.interpolate(to: to.outerRadius, amount: amount),
+        innerRadius: innerRadius.interpolate(to: to.innerRadius, amount: amount),
+        outerRoundness: outerRoundness.interpolate(to: to.outerRoundness, amount: amount),
+        innerRoundness: innerRoundness.interpolate(to: to.innerRoundness, amount: amount),
+        points: points.interpolate(to: to.points, amount: amount),
+        rotation: rotation.interpolate(to: to.rotation, amount: amount))
     }
   }
 
