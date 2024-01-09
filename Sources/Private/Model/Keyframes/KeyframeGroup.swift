@@ -227,15 +227,6 @@ extension KeyframeGroup {
       }),
       unsupportedAfterEffectsExpression: unsupportedAfterEffectsExpression)
   }
-
-  /// Maps the values of each individual keyframe in this group
-  func map<NewValue>(_ transformation: (T, AnimationFrameTime) throws -> NewValue) rethrows -> KeyframeGroup<NewValue> {
-    KeyframeGroup<NewValue>(
-      keyframes: ContiguousArray(try keyframes.map { keyframe in
-        keyframe.withValue(try transformation(keyframe.value, keyframe.time))
-      }),
-      unsupportedAfterEffectsExpression: unsupportedAfterEffectsExpression)
-  }
 }
 
 // MARK: - AnyKeyframeGroup
