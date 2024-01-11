@@ -28,7 +28,7 @@ extension CALayer {
         context: context)
     }
 
-    /// Otherwise continue using the previous codepath that doesn't support complex time remapping.
+    /// Otherwise continue using the legacy codepath that doesn't support complex time remapping.
     ///  - TODO: We could remove this codepath in favor of always using the simpler codepath above,
     ///    but would have to solve https://github.com/airbnb/lottie-ios/pull/2254 for that codepath.
     else {
@@ -58,23 +58,6 @@ extension CALayer {
       ]
 
       add(animation, timedWith: context)
-    }
-  }
-}
-
-// MARK: - Hold
-
-/// An `Interpolatable` container that animates using "hold" keyframes.
-/// The keyframes do not animate, and instead always display the value from the most recent keyframe.
-/// This is necessary when passing non-interpolatable values to a method that requires an `Interpolatable` conformance.
-struct Hold<T>: Interpolatable {
-  let value: T
-
-  func interpolate(to: Hold<T>, amount: CGFloat) -> Hold<T> {
-    if amount < 1 {
-      return self
-    } else {
-      return to
     }
   }
 }
