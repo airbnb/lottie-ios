@@ -256,7 +256,11 @@ enum Keyframes {
 
     let minimumTime = times.min() ?? 0
     let maximumTime = times.max() ?? 0
-    let animationLocalTimeRange = Int(minimumTime)...Int(maximumTime)
+
+    // We disable Core Animation interpolation when using manually interpolated keyframes,
+    // so we don't animate between these values. To prevent the animation from being choppy
+    // even at low playback speed, we have to interpolate at a very high fidelity.
+    let animationLocalTimeRange = stride(from: minimumTime, to: maximumTime, by: 0.1)
 
     let interpolatedKeyframes = try animationLocalTimeRange.compactMap { localTime -> Keyframe<CombinedResult>? in
       let interpolatedValues = untypedInterpolators.map { interpolator in
@@ -272,7 +276,10 @@ enum Keyframes {
 
       return Keyframe(
         value: combinedResult,
-        time: AnimationFrameTime(localTime))
+        time: AnimationFrameTime(localTime),
+        // Since we already manually interpolated the keyframes, have Core Animation display
+        // each value as a static keyframe rather than trying to interpolate between them.
+        isHold: true)
     }
 
     return KeyframeGroup(keyframes: ContiguousArray(interpolatedKeyframes))

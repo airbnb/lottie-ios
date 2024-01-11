@@ -92,6 +92,11 @@ class SnapshotTests: XCTestCase {
   }
 
   override func setUp() {
+    // Register fonts from the Samples/Fonts directory
+    for fontAssetURL in Bundle.lottie.urls(forResourcesWithExtension: "ttf", subdirectory: "Samples/Fonts") ?? [] {
+      CTFontManagerRegisterFontsForURL(fontAssetURL as CFURL, .process, nil)
+    }
+
     LottieLogger.shared = .printToConsole
     TestHelpers.snapshotTestsAreRunning = true
     isRecording = false // Change it here to `true` if you want to generate the snapshots

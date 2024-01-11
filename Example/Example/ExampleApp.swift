@@ -5,6 +5,18 @@ import SwiftUI
 
 @main
 struct ExampleApp: App {
+
+  // MARK: Lifecycle
+
+  init() {
+    // Register fonts from the Samples/Fonts directory
+    for fontAssetURL in Bundle.main.urls(forResourcesWithExtension: "ttf", subdirectory: "Samples/Fonts") ?? [] {
+      CTFontManagerRegisterFontsForURL(fontAssetURL as CFURL, .process, nil)
+    }
+  }
+
+  // MARK: Internal
+
   var body: some Scene {
     WindowGroup {
       NavigationStack {
@@ -12,4 +24,5 @@ struct ExampleApp: App {
       }
     }
   }
+
 }

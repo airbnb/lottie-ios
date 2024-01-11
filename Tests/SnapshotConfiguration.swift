@@ -171,6 +171,12 @@ extension SnapshotConfiguration {
         10, // Should show frame 10
       ]),
 
+    "Issues/issue_2226": SnapshotConfiguration.default
+      .framesToSnapshot([
+        19.25,
+        113,
+      ]),
+
     // Test cases for `AnimationFontProvider`
     "Nonanimating/Text_Glyph": .customFontProvider(HardcodedFontProvider(font: UIFont(name: "Chalkduster", size: 36)!)),
 
