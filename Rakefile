@@ -239,14 +239,11 @@ def xcodebuild(command)
   # Check if the mint tool is installed -- if so, pipe the xcodebuild output through xcbeautify
   `which mint`
 
-  ##
-  ## TODO: REVERT, TESTING WITH VERBOSE LOGGING
-  ##
-  # if $?.success?
-    # sh "set -o pipefail && xcodebuild #{command} | mint run thii/xcbeautify@0.10.2"
-  # else
+  if $?.success?
+    sh "set -o pipefail && xcodebuild #{command} | mint run thii/xcbeautify@0.10.2"
+  else
     sh "xcodebuild #{command}"
-  # end
+  end
 end
 
 # Runs the given code block, unless `SKIP_VISION_OS=true`.
