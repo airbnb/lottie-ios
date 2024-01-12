@@ -251,3 +251,29 @@ extension Array: Interpolatable, AnyInterpolatable where Element: Interpolatable
     }
   }
 }
+
+// MARK: - Optional + Interpolatable, AnyInterpolatable
+
+extension Optional: Interpolatable, AnyInterpolatable where Wrapped: Interpolatable {
+  public func interpolate(to: Wrapped?, amount: CGFloat) -> Wrapped? {
+    guard let self, let to else { return nil }
+    return self.interpolate(to: to, amount: amount)
+  }
+}
+
+// MARK: - Hold
+
+/// An `Interpolatable` container that animates using "hold" keyframes.
+/// The keyframes do not animate, and instead always display the value from the most recent keyframe.
+/// This is necessary when passing non-interpolatable values to a method that requires an `Interpolatable` conformance.
+struct Hold<T>: Interpolatable {
+  let value: T
+
+  func interpolate(to: Hold<T>, amount: CGFloat) -> Hold<T> {
+    if amount < 1 {
+      return self
+    } else {
+      return to
+    }
+  }
+}

@@ -80,7 +80,7 @@ extension CAShapeLayer {
 
 extension Star {
   /// Data that represents how to render a star at a specific point in time
-  struct Keyframe {
+  struct Keyframe: Interpolatable {
     let position: LottieVector3D
     let outerRadius: LottieVector1D
     let innerRadius: LottieVector1D
@@ -88,6 +88,17 @@ extension Star {
     let innerRoundness: LottieVector1D
     let points: LottieVector1D
     let rotation: LottieVector1D
+
+    func interpolate(to: Star.Keyframe, amount: CGFloat) -> Star.Keyframe {
+      Star.Keyframe(
+        position: position.interpolate(to: to.position, amount: amount),
+        outerRadius: outerRadius.interpolate(to: to.outerRadius, amount: amount),
+        innerRadius: innerRadius.interpolate(to: to.innerRadius, amount: amount),
+        outerRoundness: outerRoundness.interpolate(to: to.outerRoundness, amount: amount),
+        innerRoundness: innerRoundness.interpolate(to: to.innerRoundness, amount: amount),
+        points: points.interpolate(to: to.points, amount: amount),
+        rotation: rotation.interpolate(to: to.rotation, amount: amount))
+    }
   }
 
   /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this star/polygon

@@ -31,10 +31,17 @@ extension CAShapeLayer {
 
 extension Rectangle {
   /// Data that represents how to render a rectangle at a specific point in time
-  struct Keyframe {
+  struct Keyframe: Interpolatable {
     let size: LottieVector3D
     let position: LottieVector3D
     let cornerRadius: LottieVector1D
+
+    func interpolate(to: Rectangle.Keyframe, amount: CGFloat) -> Rectangle.Keyframe {
+      Rectangle.Keyframe(
+        size: size.interpolate(to: to.size, amount: amount),
+        position: position.interpolate(to: to.position, amount: amount),
+        cornerRadius: cornerRadius.interpolate(to: to.cornerRadius, amount: amount))
+    }
   }
 
   /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this Rectangle

@@ -248,6 +248,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     try setupLayerHierarchy(
       for: animation.layers,
       context: layerContext)
+
+    try validateReasonableNumberOfTimeRemappingLayers()
   }
 
   /// Immediately builds and begins playing `CAAnimation`s for each sublayer
@@ -531,6 +533,18 @@ extension CoreAnimationLayer: RootAnimationLayer {
     }
   }
 
+  /// Time remapping in the Core Animation rendering engine requires manually interpolating
+  /// every frame of every animation. For very large animations with a huge number of layers,
+  /// this can be prohibitively expensive.
+  func validateReasonableNumberOfTimeRemappingLayers() throws {
+    try layerContext.compatibilityAssert(
+      numberOfLayersWithTimeRemapping < 500,
+      """
+      This animation has a very large number of layers with time remapping (\(numberOfLayersWithTimeRemapping)),
+      so will perform poorly with the Core Animation rendering engine.
+      """)
+  }
+
 }
 
 // MARK: - CALayer + allSublayers
@@ -547,5 +561,24 @@ extension CALayer {
     }
 
     return allSublayers
+  }
+
+  /// The number of layers in this layer hierarchy that have a time remapping applied
+  @nonobjc
+  var numberOfLayersWithTimeRemapping: Int {
+    var numberOfSublayersWithTimeRemapping = 0
+
+    for sublayer in sublayers ?? [] {
+      if 
+        let preCompLayer = sublayer as? PreCompLayer,
+        preCompLayer.preCompLayer.timeRemapping != nil
+      {
+        numberOfSublayersWithTimeRemapping += preCompLayer.allSublayers.count
+      } else {
+        numberOfSublayersWithTimeRemapping += sublayer.numberOfLayersWithTimeRemapping
+      }
+    }
+
+    return numberOfSublayersWithTimeRemapping
   }
 }

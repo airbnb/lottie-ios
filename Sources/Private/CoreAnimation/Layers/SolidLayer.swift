@@ -43,8 +43,8 @@ final class SolidLayer: BaseCompositionLayer {
     // codepath so that this value can be customized using the custom `ValueProvider`s API.
     try shapeLayer.addAnimation(
       for: .fillColor,
-      keyframes: KeyframeGroup(solidLayer.colorHex.cgColor),
-      value: { $0 },
+      keyframes: KeyframeGroup(solidLayer.colorHex.lottieColor),
+      value: { $0.cgColorValue },
       context: context)
   }
 

@@ -253,10 +253,16 @@ extension CALayer {
     context: LayerAnimationContext)
     throws
   {
-    // Core Animation doesn't animate skew changes properly. If the skew value
-    // changes over the course of the animation then we have to manually
-    // compute the `CATransform3D` for each frame individually.
-    let requiresManualInterpolation = transformModel.hasSkewAnimation
+    let requiresManualInterpolation =
+      // Core Animation doesn't animate skew changes properly. If the skew value
+      // changes over the course of the animation then we have to manually
+      // compute the `CATransform3D` for each frame individually.
+      transformModel.hasSkewAnimation
+      // `addAnimation` requires that we use an `Interpolatable` value, but we can't interpolate a `CATransform3D`.
+      // Since this is only necessary when using `complexTimeRemapping`, we can avoid this by manually interpolating
+      // when `context.mustUseComplexTimeRemapping` is true and just returning a `Hold` container.
+      // Since our keyframes are already manually interpolated, they won't need to be interpolated again.
+      || context.mustUseComplexTimeRemapping
 
     let combinedTransformKeyframes = Keyframes.combined(
       transformModel.anchorPoint,
@@ -272,7 +278,7 @@ extension CALayer {
       requiresManualInterpolation: requiresManualInterpolation,
       makeCombinedResult: {
         anchor, position, positionX, positionY, scale, rotationX, rotationY, rotationZ, skew, skewAxis
-          -> CATransform3D in
+          -> Hold<CATransform3D> in
 
         let transformPosition: CGPoint
         if transformModel._positionX != nil, transformModel._positionY != nil {
@@ -281,7 +287,7 @@ extension CALayer {
           transformPosition = position.pointValue
         }
 
-        return CATransform3D.makeTransform(
+        let transform = CATransform3D.makeTransform(
           anchor: anchor.pointValue,
           position: transformPosition,
           scale: scale.sizeValue,
@@ -290,12 +296,14 @@ extension CALayer {
           rotationZ: rotationZ.cgFloatValue,
           skew: skew.cgFloatValue,
           skewAxis: skewAxis.cgFloatValue)
+
+        return Hold(value: transform)
       })
 
     try addAnimation(
       for: .transform,
       keyframes: combinedTransformKeyframes,
-      value: { $0 },
+      value: { $0.value },
       context: context)
   }
 
