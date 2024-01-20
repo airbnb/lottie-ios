@@ -22,16 +22,21 @@ struct SwiftUIInteroperabilityDemoView: View {
   }
 }
 
+// MARK: - Demo
+
 struct Demo<Content: View>: View {
 
-  init(name: String, @ViewBuilder content:  () -> Content) {
+  // MARK: Lifecycle
+
+  init(name: String, @ViewBuilder content: () -> Content) {
     self.name = name
     self.content = content()
   }
 
+  // MARK: Internal
+
   let name: String
   let content: Content
-  @State private var show: Bool = false
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -50,7 +55,14 @@ struct Demo<Content: View>: View {
     }
     .frame(height: 150)
   }
+
+  // MARK: Private
+
+  @State private var show = false
+
 }
+
+// MARK: - OnAppearOffsetAnimation
 
 /// Demonstrates how `LottieView` is animated by the `.offset` modifier.
 struct OnAppearOffsetAnimation: View {
@@ -75,13 +87,16 @@ struct OnAppearOffsetAnimation: View {
   }
 }
 
+// MARK: - PlaceholderSizeInheritance
+
 /// Demonstrates how the placeholder's `Rectangle` get's its size from it's parent.
 struct PlaceholderSizeInheritance: View {
 
   var body: some View {
     HStack(alignment: .top) {
       LottieView {
-        await LottieAnimation.loadedFrom(url: URL(string: "https://a0.muscache.com/pictures/96699af6-b73e-499f-b0f5-3c862ae7d126.json")!)
+        await LottieAnimation
+          .loadedFrom(url: URL(string: "https://a0.muscache.com/pictures/96699af6-b73e-499f-b0f5-3c862ae7d126.json")!)
       } placeholder: {
         Rectangle()
           .fill(.red)
@@ -91,7 +106,8 @@ struct PlaceholderSizeInheritance: View {
       .frame(width: 100, height: 100)
 
       LottieView {
-        await LottieAnimation.loadedFrom(url: URL(string: "https://a0.muscache.com/pictures/96699af6-b73e-499f-b0f5-3c862ae7d126.json")!)
+        await LottieAnimation
+          .loadedFrom(url: URL(string: "https://a0.muscache.com/pictures/96699af6-b73e-499f-b0f5-3c862ae7d126.json")!)
       } placeholder: {
         Rectangle()
           .fill(.red)
@@ -101,7 +117,8 @@ struct PlaceholderSizeInheritance: View {
       .frame(width: 50, height: 50)
 
       LottieView {
-        await LottieAnimation.loadedFrom(url: URL(string: "https://a0.muscache.com/pictures/96699af6-b73e-499f-b0f5-3c862ae7d126.json")!)
+        await LottieAnimation
+          .loadedFrom(url: URL(string: "https://a0.muscache.com/pictures/96699af6-b73e-499f-b0f5-3c862ae7d126.json")!)
       } placeholder: {
         Rectangle()
           .fill(.red)
@@ -110,6 +127,5 @@ struct PlaceholderSizeInheritance: View {
       .resizable()
       .frame(width: 10, height: 10)
     }
-
   }
 }

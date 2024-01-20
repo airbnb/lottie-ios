@@ -129,6 +129,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
       applyCurrentAnimationConfiguration(to: context.view)
     }
     .configurations(configurations)
+    .opacity(animationSource == nil ? 0 : 1)
     .overlay {
       placeholder?()
         .opacity(animationSource == nil ? 1 : 0)
@@ -565,12 +566,13 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension View {
-  
+
   /// The `.overlay` modifier that uses a `ViewBuilder` is available in iOS 15+, this helper function helps us to use the same API in older OSs
-  fileprivate func overlay<V>(
-    @ViewBuilder content: () -> V
-  ) -> some View where V : View {
-    self.overlay(content(), alignment: .center)
+  fileprivate func overlay(
+    @ViewBuilder content: () -> some View)
+    -> some View
+  {
+    overlay(content(), alignment: .center)
   }
 }
 
