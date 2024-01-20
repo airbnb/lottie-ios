@@ -252,8 +252,14 @@ def ifVisionOSEnabled
   if ENV["SKIP_VISION_OS"] == "true"
     puts "Skipping visionOS build"
   else
+    # visionOS is unsupported by default on Intel, but we can override this
+    # https://github.com/actions/runner-images/issues/8144#issuecomment-1902072070
+    sh 'defaults write com.apple.dt.Xcode AllowUnsupportedVisionOSHost -bool YES'
+    sh 'defaults write com.apple.CoreSimulator AllowUnsupportedVisionOSHost -bool YES'
+
     # Download visionOS SDK if necessary
     xcodebuild("-downloadPlatform visionOS")
+
     yield
   end
 end
