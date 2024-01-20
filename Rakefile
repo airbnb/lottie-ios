@@ -146,7 +146,9 @@ namespace :test do
     sh 'cp -R [^script]* script/test-carthage/Carthage/Checkouts/lottie-ios'
 
     Dir.chdir('script/test-carthage') do
-      # Build the LottieCarthage framework scheme
+      installVisionOSIfNecessary()
+
+      # Build the Lottie framework scheme
       sh 'carthage build --use-xcframeworks'
 
       # Delete Carthage's derived data to verify that the built .xcframework doesn't depend on any
@@ -154,9 +156,11 @@ namespace :test do
       # https://github.com/airbnb/lottie-ios/issues/1492
       sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit/DerivedData'
 
-      # Build a test app that imports and uses the LottieCarthage framework
-      xcodebuild('build -scheme CarthageTest -destination "platform=iOS Simulator,name=iPhone SE (3rd generation)"')
-      xcodebuild('build -scheme CarthageTest-macOS')
+      # Build a test app that imports and uses the Lottie framework built via Carthage
+      xcodebuild('build -scheme CarthageTest -destination generic/platform=iOS')
+      xcodebuild('build -scheme CarthageTest -destination generic/platform=macOS')
+      xcodebuild('build -scheme CarthageTest -destination generic/platform=tvOS')
+      xcodebuild('build -scheme CarthageTest -destination generic/platform=visionOS')
     end
   end
 
@@ -252,14 +256,16 @@ def ifVisionOSEnabled
   if ENV["SKIP_VISION_OS"] == "true"
     puts "Skipping visionOS build"
   else
-    # visionOS is unsupported by default on Intel, but we can override this
-    # https://github.com/actions/runner-images/issues/8144#issuecomment-1902072070
-    sh 'defaults write com.apple.dt.Xcode AllowUnsupportedVisionOSHost -bool YES'
-    sh 'defaults write com.apple.CoreSimulator AllowUnsupportedVisionOSHost -bool YES'
-
-    # Download visionOS SDK if necessary
-    xcodebuild("-downloadPlatform visionOS")
-
+    installVisionOSIfNecessary()
     yield
   end
+end
+
+def installVisionOSIfNecessary
+  # visionOS is unsupported by default on Intel, but we can override this
+  # https://github.com/actions/runner-images/issues/8144#issuecomment-1902072070
+  sh 'defaults write com.apple.dt.Xcode AllowUnsupportedVisionOSHost -bool YES'
+  sh 'defaults write com.apple.CoreSimulator AllowUnsupportedVisionOSHost -bool YES'
+
+  xcodebuild("-downloadPlatform visionOS")
 end
