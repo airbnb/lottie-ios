@@ -115,26 +115,24 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   // MARK: Public
 
   public var body: some View {
-    ZStack {
-      if let animationSource {
-        LottieAnimationView.swiftUIView {
-          defer { animationDidLoad?(animationSource) }
-          return LottieAnimationView(
-            animationSource: animationSource,
-            imageProvider: imageProviderConfiguration?.imageProvider,
-            textProvider: textProvider,
-            fontProvider: fontProvider,
-            configuration: configuration,
-            logger: logger)
-        }
-        .sizing(sizing)
-        .configure { context in
-          applyCurrentAnimationConfiguration(to: context.view)
-        }
-        .configurations(configurations)
-      } else {
-        placeholder?()
-      }
+    LottieAnimationView.swiftUIView {
+      LottieAnimationView(
+        animationSource: animationSource,
+        imageProvider: imageProviderConfiguration?.imageProvider,
+        textProvider: textProvider,
+        fontProvider: fontProvider,
+        configuration: configuration,
+        logger: logger)
+    }
+    .sizing(sizing)
+    .configure { context in
+      applyCurrentAnimationConfiguration(to: context.view)
+    }
+    .configurations(configurations)
+    .opacity(animationSource == nil ? 0 : 1)
+    .overlay {
+      placeholder?()
+        .opacity(animationSource == nil ? 1 : 0)
     }
     .onAppear {
       loadAnimationIfNecessary()
@@ -565,4 +563,17 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     }
   }
 }
+
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
+extension View {
+
+  /// The `.overlay` modifier that uses a `ViewBuilder` is available in iOS 15+, this helper function helps us to use the same API in older OSs
+  fileprivate func overlay(
+    @ViewBuilder content: () -> some View)
+    -> some View
+  {
+    overlay(content(), alignment: .center)
+  }
+}
+
 #endif
