@@ -16,6 +16,7 @@
 		08E3599F2A56004100141956 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 08E3599E2A56004100141956 /* Lottie */; };
 		08E6CF822A86C35B00A6D92F /* LottieSwitchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6CF812A86C35B00A6D92F /* LottieSwitchRow.swift */; };
 		08E6CF842A86C49300A6D92F /* ControlsDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6CF832A86C49300A6D92F /* ControlsDemoView.swift */; };
+		ABD0BC842B5B451C003D7587 /* SwiftUIInteroperabilityDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD0BC832B5B451C003D7587 /* SwiftUIInteroperabilityDemoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		08E6CF832A86C49300A6D92F /* ControlsDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsDemoView.swift; sourceTree = "<group>"; };
 		2E0F2FB627602C1500B65DE3 /* .. */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ..; sourceTree = "<group>"; };
 		2E3EEB372763C68C00287EEA /* Samples */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Samples; path = ../Tests/Samples; sourceTree = "<group>"; };
+		ABD0BC832B5B451C003D7587 /* SwiftUIInteroperabilityDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIInteroperabilityDemoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +51,7 @@
 		08E359902A55FFC400141956 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				ABD0BC832B5B451C003D7587 /* SwiftUIInteroperabilityDemoView.swift */,
 				08E359912A55FFC400141956 /* ExampleApp.swift */,
 				085D97832A5DF76C00C78D18 /* AnimationListView.swift */,
 				085D97862A5E0DB600C78D18 /* AnimationPreviewView.swift */,
@@ -165,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0820D59B2A8ACE64007D705C /* LottieButtonRow.swift in Sources */,
+				ABD0BC842B5B451C003D7587 /* SwiftUIInteroperabilityDemoView.swift in Sources */,
 				08E359942A55FFC400141956 /* LottieViewLayoutDemoView.swift in Sources */,
 				08E359922A55FFC400141956 /* ExampleApp.swift in Sources */,
 				085D97872A5E0DB600C78D18 /* AnimationPreviewView.swift in Sources */,
