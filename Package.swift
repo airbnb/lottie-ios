@@ -16,8 +16,7 @@ let package = Package(
       exclude: [
         "Private/EmbeddedLibraries/README.md",
         "Private/EmbeddedLibraries/ZipFoundation/README.md",
-        "Private/EmbeddedLibraries/EpoxyCore/README.md",
-        "Private/EmbeddedLibraries/LRUCache/README.md",
+        "Private/EmbeddedLibraries/EpoxyCore/README.md"
       ],
       resources: [.copy("PrivacyInfo.xcprivacy")]),
   ])
