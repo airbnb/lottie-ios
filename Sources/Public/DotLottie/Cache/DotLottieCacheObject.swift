@@ -24,4 +24,3 @@ final class DotLottieCacheObject: NSObject, NSDiscardableContent {
     return lottie == nil
   }
 }
-
