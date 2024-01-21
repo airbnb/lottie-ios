@@ -43,7 +43,6 @@
 		080DEF8E2A9570D500BE2D96 /* LottieColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EED04F28F0D2D10057D958 /* LottieColor.swift */; };
 		080DEF8F2A9570DB00BE2D96 /* Keyframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59E027A0798700E00531 /* Keyframe.swift */; };
 		080DEF902A9570DB00BE2D96 /* Interpolatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59DF27A0798700E00531 /* Interpolatable.swift */; };
-		080DEF912A9570DD00BE2D96 /* LRUAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59E327A0798700E00531 /* LRUAnimationCache.swift */; };
 		080DEF922A9570DD00BE2D96 /* LottieAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */; };
 		080DEF932A9570DD00BE2D96 /* DefaultAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */; };
 		080DEF942A9570DD00BE2D96 /* AnimationCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59E227A0798700E00531 /* AnimationCacheProvider.swift */; };
@@ -344,10 +343,6 @@
 		08AB055D2A61C5CC00DE86FD /* RenderingEngineOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB055C2A61C5CC00DE86FD /* RenderingEngineOption.swift */; };
 		08AB055E2A61C5CC00DE86FD /* RenderingEngineOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB055C2A61C5CC00DE86FD /* RenderingEngineOption.swift */; };
 		08AB055F2A61C5CC00DE86FD /* RenderingEngineOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB055C2A61C5CC00DE86FD /* RenderingEngineOption.swift */; };
-		08BCA8472B0E8E0B00594EEB /* LRUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCA8452B0E8E0B00594EEB /* LRUCache.swift */; };
-		08BCA8482B0E8E0B00594EEB /* LRUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCA8452B0E8E0B00594EEB /* LRUCache.swift */; };
-		08BCA8492B0E8E0B00594EEB /* LRUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCA8452B0E8E0B00594EEB /* LRUCache.swift */; };
-		08BCA84A2B0E8E0B00594EEB /* LRUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BCA8452B0E8E0B00594EEB /* LRUCache.swift */; };
 		08C001F32A46150D00AB54BA /* Archive+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E02A46150D00AB54BA /* Archive+Helpers.swift */; };
 		08C001F42A46150D00AB54BA /* Archive+MemoryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E12A46150D00AB54BA /* Archive+MemoryFile.swift */; };
 		08C001F52A46150D00AB54BA /* Archive+BackingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E22A46150D00AB54BA /* Archive+BackingConfiguration.swift */; };
@@ -1050,9 +1045,6 @@
 		2EAF5AE327A0798700E00531 /* AnimationCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59E227A0798700E00531 /* AnimationCacheProvider.swift */; };
 		2EAF5AE427A0798700E00531 /* AnimationCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59E227A0798700E00531 /* AnimationCacheProvider.swift */; };
 		2EAF5AE527A0798700E00531 /* AnimationCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59E227A0798700E00531 /* AnimationCacheProvider.swift */; };
-		2EAF5AE627A0798700E00531 /* LRUAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59E327A0798700E00531 /* LRUAnimationCache.swift */; };
-		2EAF5AE727A0798700E00531 /* LRUAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59E327A0798700E00531 /* LRUAnimationCache.swift */; };
-		2EAF5AE827A0798700E00531 /* LRUAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59E327A0798700E00531 /* LRUAnimationCache.swift */; };
 		2EAF5AE927A0798700E00531 /* AnimationTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59E527A0798700E00531 /* AnimationTextProvider.swift */; };
 		2EAF5AEA27A0798700E00531 /* AnimationTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59E527A0798700E00531 /* AnimationTextProvider.swift */; };
 		2EAF5AEB27A0798700E00531 /* AnimationTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59E527A0798700E00531 /* AnimationTextProvider.swift */; };
@@ -1202,8 +1194,6 @@
 		08AB05542A61C20400DE86FD /* ReducedMotionOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReducedMotionOption.swift; sourceTree = "<group>"; };
 		08AB05582A61C5B700DE86FD /* DecodingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingStrategy.swift; sourceTree = "<group>"; };
 		08AB055C2A61C5CC00DE86FD /* RenderingEngineOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingEngineOption.swift; sourceTree = "<group>"; };
-		08BCA8452B0E8E0B00594EEB /* LRUCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRUCache.swift; sourceTree = "<group>"; };
-		08BCA8462B0E8E0B00594EEB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		08C001E02A46150D00AB54BA /* Archive+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+Helpers.swift"; sourceTree = "<group>"; };
 		08C001E12A46150D00AB54BA /* Archive+MemoryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+MemoryFile.swift"; sourceTree = "<group>"; };
 		08C001E22A46150D00AB54BA /* Archive+BackingConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+BackingConfiguration.swift"; sourceTree = "<group>"; };
@@ -1453,7 +1443,6 @@
 		2EAF59DF27A0798700E00531 /* Interpolatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interpolatable.swift; sourceTree = "<group>"; };
 		2EAF59E027A0798700E00531 /* Keyframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyframe.swift; sourceTree = "<group>"; };
 		2EAF59E227A0798700E00531 /* AnimationCacheProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationCacheProvider.swift; sourceTree = "<group>"; };
-		2EAF59E327A0798700E00531 /* LRUAnimationCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRUAnimationCache.swift; sourceTree = "<group>"; };
 		2EAF59E527A0798700E00531 /* AnimationTextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationTextProvider.swift; sourceTree = "<group>"; };
 		2EAF59E727A0798700E00531 /* LottieLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieLogger.swift; sourceTree = "<group>"; };
 		2EAF59E927A0798700E00531 /* AnimationKeypath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationKeypath.swift; sourceTree = "<group>"; };
@@ -1579,22 +1568,12 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
-		08BCA8442B0E8E0B00594EEB /* LRUCache */ = {
-			isa = PBXGroup;
-			children = (
-				08BCA8452B0E8E0B00594EEB /* LRUCache.swift */,
-				08BCA8462B0E8E0B00594EEB /* README.md */,
-			);
-			path = LRUCache;
-			sourceTree = "<group>";
-		};
 		08C001DE2A4614CF00AB54BA /* EmbeddedLibraries */ = {
 			isa = PBXGroup;
 			children = (
 				08C002062A46152200AB54BA /* README.md */,
 				08C0021E2A46166400AB54BA /* EpoxyCore */,
 				08C001DF2A46150D00AB54BA /* ZipFoundation */,
-				08BCA8442B0E8E0B00594EEB /* LRUCache */,
 			);
 			path = EmbeddedLibraries;
 			sourceTree = "<group>";
@@ -2369,7 +2348,6 @@
 			isa = PBXGroup;
 			children = (
 				2EAF59E227A0798700E00531 /* AnimationCacheProvider.swift */,
-				2EAF59E327A0798700E00531 /* LRUAnimationCache.swift */,
 				D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */,
 				EFFA55F82B5D4DC2006AEE30 /* LottieAnimationCacheObject.swift */,
 				D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */,
@@ -2736,7 +2714,6 @@
 				080DF0162A95713800BE2D96 /* PathOutputNode.swift in Sources */,
 				080DF00A2A95713000BE2D96 /* InvertedMatteLayer.swift in Sources */,
 				080DEFCD2A95711400BE2D96 /* Archive.swift in Sources */,
-				080DEF912A9570DD00BE2D96 /* LRUAnimationCache.swift in Sources */,
 				080DF05D2A95716A00BE2D96 /* ImageAsset.swift in Sources */,
 				080DF0722A95717D00BE2D96 /* UnitBezier.swift in Sources */,
 				080DF05E2A95716D00BE2D96 /* EffectValue.swift in Sources */,
@@ -2920,7 +2897,6 @@
 				080DEFFE2A95712400BE2D96 /* GradientAnimations.swift in Sources */,
 				080DF03C2A95715900BE2D96 /* Star.swift in Sources */,
 				080DEFD32A95711400BE2D96 /* Entry+Serialization.swift in Sources */,
-				08BCA84A2B0E8E0B00594EEB /* LRUCache.swift in Sources */,
 				080DF01D2A95713B00BE2D96 /* StarNode.swift in Sources */,
 				080DEFB02A9570FE00BE2D96 /* AnimatedProviding.swift in Sources */,
 				080DEFC72A95710F00BE2D96 /* EpoxyableView.swift in Sources */,
@@ -3226,7 +3202,6 @@
 				2E9C96242822F43100677516 /* KeyframeGroup.swift in Sources */,
 				2E9C96FF2822F43100677516 /* BaseAnimationLayer.swift in Sources */,
 				08E206F72A56014E002DCE17 /* Collection+Diff.swift in Sources */,
-				08BCA8472B0E8E0B00594EEB /* LRUCache.swift in Sources */,
 				08C001F62A46150D00AB54BA /* Archive.swift in Sources */,
 				2E9C96AB2822F43100677516 /* GradientStrokeNode.swift in Sources */,
 				08E2071B2A56014E002DCE17 /* EpoxySwiftUIHostingView.swift in Sources */,
@@ -3254,7 +3229,6 @@
 				2E9C96392822F43100677516 /* PrecompAsset.swift in Sources */,
 				2E9C962A2822F43100677516 /* TextDocument.swift in Sources */,
 				08E206FA2A56014E002DCE17 /* DiffableSection.swift in Sources */,
-				2EAF5AE627A0798700E00531 /* LRUAnimationCache.swift in Sources */,
 				08C001FD2A46150D00AB54BA /* URL+ZIP.swift in Sources */,
 				2E9C962D2822F43100677516 /* Glyph.swift in Sources */,
 				2E9C96D52822F43100677516 /* RenderNode.swift in Sources */,
@@ -3543,7 +3517,6 @@
 				2EAF5AC327A0798700E00531 /* BundleImageProvider.swift in Sources */,
 				08AB055A2A61C5B700DE86FD /* DecodingStrategy.swift in Sources */,
 				08E207492A56014E002DCE17 /* AnimatedProviding.swift in Sources */,
-				08BCA8482B0E8E0B00594EEB /* LRUCache.swift in Sources */,
 				2E9C976C2822F43100677516 /* InterpolatableExtensions.swift in Sources */,
 				2E9C96EE2822F43100677516 /* ShapeItemLayer.swift in Sources */,
 				08C002D62A46196300AB54BA /* Data+CompressionDeprecated.swift in Sources */,
@@ -3570,7 +3543,6 @@
 				2E9C963A2822F43100677516 /* PrecompAsset.swift in Sources */,
 				2E9C962B2822F43100677516 /* TextDocument.swift in Sources */,
 				08E207012A56014E002DCE17 /* UIViewConfiguringSwiftUIView.swift in Sources */,
-				2EAF5AE727A0798700E00531 /* LRUAnimationCache.swift in Sources */,
 				08C002D92A46196300AB54BA /* URL+ZIP.swift in Sources */,
 				2E9C962E2822F43100677516 /* Glyph.swift in Sources */,
 				2E9C96D62822F43100677516 /* RenderNode.swift in Sources */,
@@ -3834,7 +3806,6 @@
 				2E9C97012822F43100677516 /* BaseAnimationLayer.swift in Sources */,
 				2E9C96AD2822F43100677516 /* GradientStrokeNode.swift in Sources */,
 				08E206F92A56014E002DCE17 /* Collection+Diff.swift in Sources */,
-				08BCA8492B0E8E0B00594EEB /* LRUCache.swift in Sources */,
 				2EAF5AC427A0798700E00531 /* BundleImageProvider.swift in Sources */,
 				08E2071D2A56014E002DCE17 /* EpoxySwiftUIHostingView.swift in Sources */,
 				2E9C976D2822F43100677516 /* InterpolatableExtensions.swift in Sources */,
@@ -3858,7 +3829,6 @@
 				0820D5B32A8BF14E007D705C /* DropShadowEffect.swift in Sources */,
 				2E9C963B2822F43100677516 /* PrecompAsset.swift in Sources */,
 				2E9C962C2822F43100677516 /* TextDocument.swift in Sources */,
-				2EAF5AE827A0798700E00531 /* LRUAnimationCache.swift in Sources */,
 				2E9C962F2822F43100677516 /* Glyph.swift in Sources */,
 				08E206FC2A56014E002DCE17 /* DiffableSection.swift in Sources */,
 				2E9C96D72822F43100677516 /* RenderNode.swift in Sources */,
