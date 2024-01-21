@@ -1,5 +1,5 @@
 //
-//  LRUDotLottieCache.swift
+//  DotLottieCache.swift
 //  Lottie
 //
 //  Created by Evandro Hoffmann on 20/10/22.

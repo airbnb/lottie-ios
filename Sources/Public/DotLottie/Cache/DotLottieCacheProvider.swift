@@ -9,7 +9,7 @@
 /// DotLottie Cache is used when loading `DotLottie` models. Using a DotLottie Cache
 /// can increase performance when loading an animation multiple times.
 ///
-/// Lottie comes with a prebuilt LRU DotLottie Cache.
+/// Lottie comes with a prebuilt DotLottie Cache.
 public protocol DotLottieCacheProvider: Sendable {
 
   func file(forKey: String) -> DotLottieFile?

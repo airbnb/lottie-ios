@@ -5,7 +5,6 @@ This directory includes the source code of libraries that are embedded within lo
 This includes:
  - ZipFoundation (https://github.com/weichsel/ZIPFoundation)
  - EpoxyCore (https://github.com/airbnb/epoxy-ios)
- - LRUCache (https://github.com/nicklockwood/LRUCache)
 
 Lottie is distributed via multiple package managers (SPM, Cocoapods, Carthage, and NPM),
 each with different packaging and compilation requirements. 
