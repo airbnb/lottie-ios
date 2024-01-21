@@ -46,7 +46,7 @@ public class DotLottieCache: DotLottieCacheProvider {
   public func setFile(_ lottie: DotLottieFile, forKey key: String) {
     let dotLottieCache = DotLottieCacheObject()
     dotLottieCache.lottie = lottie
-    cache.setValue(dotLottieCache, forKey: key)
+    cache.setObject(dotLottieCache, forKey: key as NSString)
   }
 
   // MARK: Private
