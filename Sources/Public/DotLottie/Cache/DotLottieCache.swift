@@ -35,27 +35,25 @@ public class DotLottieCache: DotLottieCacheProvider {
 
   /// Clears the Cache.
   public func clearCache() {
-    cache.removeAllValues()
+    cache.removeAllObjects()
   }
 
   public func file(forKey key: String) -> DotLottieFile? {
-    cache.value(forKey: key)
+    let object = cache.object(forKey: key as NSString)
+    return object?.lottie
   }
 
   public func setFile(_ lottie: DotLottieFile, forKey key: String) {
-    cache.setValue(lottie, forKey: key)
+    let dotLottieCache = DotLottieCacheObject()
+    dotLottieCache.lottie = lottie
+    cache.setValue(dotLottieCache, forKey: key)
   }
 
   // MARK: Private
 
   private static let defaultCacheCountLimit = 100
 
-  /// The underlying storage of this cache.
-  ///  - We use the `LRUCache` library instead of `NSCache`, because `NSCache`
-  ///    clears all cached values when the app is backgrounded instead of
-  ///    only when the app receives a memory warning notification.
-  private var cache = LRUCache<String, DotLottieFile>()
-
+  private let cache = NSCache<NSString, DotLottieCacheObject>()
 }
 
 // MARK: Sendable

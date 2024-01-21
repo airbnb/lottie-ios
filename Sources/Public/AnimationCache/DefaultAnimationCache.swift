@@ -36,26 +36,24 @@ public class DefaultAnimationCache: AnimationCacheProvider {
 
   /// Clears the Cache.
   public func clearCache() {
-    cache.removeAllValues()
+    cache.removeAllObjects()
   }
 
   public func animation(forKey key: String) -> LottieAnimation? {
-    cache.value(forKey: key)
+    let object = cache.object(forKey: key as NSString)
+    return object?.animation
   }
 
   public func setAnimation(_ animation: LottieAnimation, forKey key: String) {
-    cache.setValue(animation, forKey: key)
+    let lottieAnimationCache = LottieAnimationCacheObject()
+    lottieAnimationCache.animation = animation
+    cache.setObject(lottieAnimationCache, forKey: key as NSString)
   }
 
   // MARK: Private
 
   private static let defaultCacheCountLimit = 100
-
-  /// The underlying storage of this cache.
-  ///  - We use the `LRUCache` library instead of `NSCache`, because `NSCache`
-  ///    clears all cached values when the app is backgrounded instead of
-  ///    only when the app receives a memory warning notification.
-  private let cache = LRUCache<String, LottieAnimation>()
+  private let cache = NSCache<NSString, LottieAnimationCacheObject>()
 }
 
 // MARK: Sendable
