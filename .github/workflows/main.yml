@@ -96,8 +96,10 @@ jobs:
           # will be able to use these XCFrameworks and the lottie-spm package.
           # This should be the minimum Xcode version permitted by the App Store.
           # As of April 2023, this is Xcode 14.1: https://developer.apple.com/news/?id=jd9wcyov
-          #  - TODO: Once this minimum supported Xcode version is 15.2 or later,
-          #    we can remove the `build-xcframework-with-visionOS-support` job below.
+          #  - TODO: Once this minimum supported Xcode version is 15.0 or later,
+          #    we can use Xcode 15.2 here and remove the `build-xcframework-with-visionOS-support` job.
+          #    Testing in https://github.com/airbnb/lottie-spm/pull/12 shows that Xcode 15.0 can
+          #    use an XCFramework built by Xcode 15.2.
           - '14.1' # Swift 5.7.1
     steps:
       - uses: actions/checkout@v2
@@ -123,7 +125,7 @@ jobs:
     strategy:
       matrix:
         xcode:
-          - '15.2' # Swift 5.9.2, first Xcode version with visionOS support.
+          - '15.2' # Swift 5.9, first Xcode version with visionOS support.
     steps:
       - uses: actions/checkout@v2
       - uses: apple-actions/import-codesign-certs@v2
