@@ -157,10 +157,10 @@ namespace :test do
       sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit/DerivedData'
 
       # Build a test app that imports and uses the Lottie framework built via Carthage
-      xcodebuild('build -scheme CarthageTest -destination generic/platform=iOS')
+      xcodebuild('build -scheme CarthageTest  -destination "platform=iOS Simulator,name=iPhone SE (3rd generation)"')
       xcodebuild('build -scheme CarthageTest -destination generic/platform=macOS')
-      xcodebuild('build -scheme CarthageTest -destination generic/platform=tvOS')
-      xcodebuild('build -scheme CarthageTest -destination generic/platform=visionOS')
+      xcodebuild('build -scheme CarthageTest -destination "platform=tvOS Simulator,name=Apple TV"')
+      xcodebuild('build -scheme CarthageTest -destination "platform=visionOS Simulator,name=Apple Vision Pro"')
     end
   end
 
