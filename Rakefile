@@ -146,7 +146,9 @@ namespace :test do
     sh 'cp -R [^script]* script/test-carthage/Carthage/Checkouts/lottie-ios'
 
     Dir.chdir('script/test-carthage') do
-      # Build the LottieCarthage framework scheme
+      installVisionOSIfNecessary()
+
+      # Build the Lottie framework scheme
       sh 'carthage build --use-xcframeworks'
 
       # Delete Carthage's derived data to verify that the built .xcframework doesn't depend on any
@@ -154,9 +156,11 @@ namespace :test do
       # https://github.com/airbnb/lottie-ios/issues/1492
       sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit/DerivedData'
 
-      # Build a test app that imports and uses the LottieCarthage framework
-      xcodebuild('build -scheme CarthageTest -destination "platform=iOS Simulator,name=iPhone SE (3rd generation)"')
-      xcodebuild('build -scheme CarthageTest-macOS')
+      # Build a test app that imports and uses the Lottie framework built via Carthage
+      xcodebuild('build -scheme CarthageTest  -destination "platform=iOS Simulator,name=iPhone SE (3rd generation)"')
+      xcodebuild('build -scheme CarthageTest -destination generic/platform=macOS')
+      xcodebuild('build -scheme CarthageTest -destination "platform=tvOS Simulator,name=Apple TV"')
+      xcodebuild('build -scheme CarthageTest -destination "platform=visionOS Simulator,name=Apple Vision Pro"')
     end
   end
 
@@ -247,16 +251,21 @@ def xcodebuild(command)
 end
 
 # Runs the given code block, unless `SKIP_VISION_OS=true`.
-# This can be removed once CI only uses Xcode 15+.
+# TODO: Remove this once CI only uses Xcode 15.2+.
 def ifVisionOSEnabled
   if ENV["SKIP_VISION_OS"] == "true"
     puts "Skipping visionOS build"
   else
-    # As of 9/5/23 the GitHub Actions runner doesn't include the visionOS SDK by default,
-    # so we have to download it manually. Following the suggested workaround from
-    # https://github.com/actions/runner-images/issues/8144#issuecomment-1702786388
-    `brew install xcodesorg/made/xcodes`
-    `xcodes runtimes install 'visionOS 1.0-beta3'`
+    installVisionOSIfNecessary()
     yield
   end
+end
+
+def installVisionOSIfNecessary
+  # visionOS is unsupported by default on Intel, but we can override this
+  # https://github.com/actions/runner-images/issues/8144#issuecomment-1902072070
+  sh 'defaults write com.apple.dt.Xcode AllowUnsupportedVisionOSHost -bool YES'
+  sh 'defaults write com.apple.CoreSimulator AllowUnsupportedVisionOSHost -bool YES'
+
+  xcodebuild("-downloadPlatform visionOS")
 end
