@@ -1041,14 +1041,6 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
-  func updateRasterizationState() {
-    if isAnimationPlaying {
-      animationLayer?.shouldRasterize = false
-    } else {
-      animationLayer?.shouldRasterize = shouldRasterizeWhenIdle
-    }
-  }
-
   /// Updates the animation frame. Does not affect any current animations
   func updateAnimationFrame(_ newFrame: CGFloat) {
     // In performance tests, we have to wrap the animation layer setup
@@ -1468,6 +1460,14 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
+  private func updateRasterizationState() {
+    if isAnimationPlaying {
+      animationLayer?.shouldRasterize = false
+    } else {
+      animationLayer?.shouldRasterize = shouldRasterizeWhenIdle
+    }
+  }
+  
   private func loadAnimation(_ dotLottieAnimation: DotLottieFile.Animation) {
     loopMode = dotLottieAnimation.configuration.loopMode
     animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
