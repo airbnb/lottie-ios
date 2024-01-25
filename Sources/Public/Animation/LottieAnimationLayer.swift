@@ -1089,7 +1089,7 @@ public class LottieAnimationLayer: CALayer {
 
     addNewAnimationForContext(newContext)
   }
-  
+
   func updateRasterizationState() {
     if isAnimationPlaying {
       animationLayer?.shouldRasterize = false
