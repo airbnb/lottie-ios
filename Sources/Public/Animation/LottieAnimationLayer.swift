@@ -1467,6 +1467,7 @@ public class LottieAnimationLayer: CALayer {
       return animation?.reducedMotionMarker
     }
   }
+
   private func loadAnimation(_ dotLottieAnimation: DotLottieFile.Animation) {
     loopMode = dotLottieAnimation.configuration.loopMode
     animationSpeed = CGFloat(dotLottieAnimation.configuration.speed)
