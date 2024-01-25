@@ -1007,6 +1007,7 @@ public class LottieAnimationLayer: CALayer {
       }
     }
   }
+
   public func updateAnimationForForegroundState(wasWaitingToPlayAnimation: Bool) {
     if let currentContext = animationContext {
       if wasWaitingToPlayAnimation {
