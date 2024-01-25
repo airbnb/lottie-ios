@@ -1008,6 +1008,14 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
+  public func updateRasterizationState() {
+    if isAnimationPlaying {
+      animationLayer?.shouldRasterize = false
+    } else {
+      animationLayer?.shouldRasterize = shouldRasterizeWhenIdle
+    }
+  }
+  
   public func updateAnimationForForegroundState(wasWaitingToPlayAnimation: Bool) {
     if let currentContext = animationContext {
       if wasWaitingToPlayAnimation {
@@ -1457,14 +1465,6 @@ public class LottieAnimationLayer: CALayer {
       return nil
     case .reducedMotion:
       return animation?.reducedMotionMarker
-    }
-  }
-
-  private func updateRasterizationState() {
-    if isAnimationPlaying {
-      animationLayer?.shouldRasterize = false
-    } else {
-      animationLayer?.shouldRasterize = shouldRasterizeWhenIdle
     }
   }
   
