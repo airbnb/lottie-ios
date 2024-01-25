@@ -1007,14 +1007,6 @@ public class LottieAnimationLayer: CALayer {
       }
     }
   }
-
-  public func updateRasterizationState() {
-    if isAnimationPlaying {
-      animationLayer?.shouldRasterize = false
-    } else {
-      animationLayer?.shouldRasterize = shouldRasterizeWhenIdle
-    }
-  }
   
   public func updateAnimationForForegroundState(wasWaitingToPlayAnimation: Bool) {
     if let currentContext = animationContext {
@@ -1096,6 +1088,14 @@ public class LottieAnimationLayer: CALayer {
     rootAnimationLayer?.currentFrame = pauseFrame
 
     addNewAnimationForContext(newContext)
+  }
+  
+  func updateRasterizationState() {
+    if isAnimationPlaying {
+      animationLayer?.shouldRasterize = false
+    } else {
+      animationLayer?.shouldRasterize = shouldRasterizeWhenIdle
+    }
   }
 
   func loadAnimation(_ animationSource: LottieAnimationSource?) {
