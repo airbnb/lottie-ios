@@ -369,7 +369,7 @@ extension CGPoint {
     while foundPoint == false {
       refineIterations = refineIterations + 1
       /// First see if the next point is still less than the projected length.
-      let nextPoint = points[closestPoint + 1]
+      let nextPoint = points[min(closestPoint + 1, points.indices.last!)]
       if nextPoint.distance < accurateDistance {
         point = nextPoint
         closestPoint = closestPoint + 1
