@@ -262,10 +262,5 @@ def ifVisionOSEnabled
 end
 
 def installVisionOSIfNecessary
-  # visionOS is unsupported by default on Intel, but we can override this
-  # https://github.com/actions/runner-images/issues/8144#issuecomment-1902072070
-  sh 'defaults write com.apple.dt.Xcode AllowUnsupportedVisionOSHost -bool YES'
-  sh 'defaults write com.apple.CoreSimulator AllowUnsupportedVisionOSHost -bool YES'
-
   xcodebuild("-downloadPlatform visionOS")
 end
