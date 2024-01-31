@@ -9,7 +9,7 @@ on:
 jobs:
   build-package-no-visionOS:
     name: "Build Package"
-    runs-on: macos-14
+    runs-on: macos-13
     strategy:
       fail-fast: false
       matrix:
@@ -87,7 +87,7 @@ jobs:
 
   build-xcframework-minimum-supported-version:
     name: "Build XCFramework"
-    runs-on: macos-14
+    runs-on: macos-13
     strategy:
       matrix:
         xcode:
