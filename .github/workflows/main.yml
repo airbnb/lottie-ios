@@ -27,7 +27,7 @@ jobs:
 
   build-package:
     name: "Build Package"
-    runs-on: macos-13
+    runs-on: macos-14
     strategy:
       fail-fast: false
       matrix:
@@ -44,7 +44,7 @@ jobs:
 
   build-example:
     name: "Build Example App"
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -55,7 +55,7 @@ jobs:
 
   test-package:
     name: "Test Package"
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -75,7 +75,7 @@ jobs:
 
   emerge-upload:
     name: "Emerge Upload"
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -121,7 +121,7 @@ jobs:
 
   build-xcframework-with-visionOS-support:
     name: "Build XCFramework"
-    runs-on: macos-13
+    runs-on: macos-14
     strategy:
       matrix:
         xcode:
@@ -146,7 +146,7 @@ jobs:
 
   cocoapod:
     name: "Lint CocoaPods podspec"
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -157,7 +157,7 @@ jobs:
 
   spm-xcode-15:
     name: "Test Swift Package Manager"
-    runs-on: macos-13
+    runs-on: macos-14
     strategy:
       matrix:
         xcode:
@@ -173,7 +173,7 @@ jobs:
 
   carthage:
     name: "Test Carthage support"
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -186,7 +186,7 @@ jobs:
 
   swiftlint:
     name: "Lint Swift"
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -195,7 +195,7 @@ jobs:
 
   embedded-libraries:
     name: "Lint Embedded Libraries"
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
