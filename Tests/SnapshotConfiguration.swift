@@ -46,6 +46,9 @@ struct SnapshotConfiguration {
 
   /// The maximum size to allow for the resulting snapshot image
   var maxSnapshotDimension: CGFloat = 500
+
+  /// A `viewportFrame` value to apply to the `LottieAnimationView`, which crops the animation
+  var customViewportFrame: CGRect?
 }
 
 // MARK: Custom mapping
@@ -200,6 +203,10 @@ extension SnapshotConfiguration {
     /// Animations which are very expensive to render using the Core Animation rendering engine,
     /// and should fall back to the Main Thread engine when using `RenderingEngineOption.automatic`.
     "Issues/pr_2286": .excludeCoreAnimationRenderingEngine,
+
+    // Other misc test cases
+    "Issues/issue_2310": .customViewportFrame(
+      CGRect(x: 0, y: 0, width: 85, height: 85).insetBy(dx: 10, dy: 10)),
   ]
 }
 
@@ -277,6 +284,13 @@ extension SnapshotConfiguration {
   {
     var configuration = SnapshotConfiguration.default
     configuration.customFontProvider = customFontProvider
+    return configuration
+  }
+
+  /// A `SnapshotConfiguration` using the given custom `viewportFrame`
+  static func customViewportFrame(_ viewportFrame: CGRect) -> SnapshotConfiguration {
+    var configuration = SnapshotConfiguration.default
+    configuration.customViewportFrame = viewportFrame
     return configuration
   }
 
