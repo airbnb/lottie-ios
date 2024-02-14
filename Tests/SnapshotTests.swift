@@ -366,6 +366,10 @@ extension SnapshotConfiguration {
       animationView.fontProvider = customFontProvider
     }
 
+    if let customViewportFrame = snapshotConfiguration.customViewportFrame {
+      animationView.viewportFrame = customViewportFrame
+    }
+
     return animationView
   }
 }

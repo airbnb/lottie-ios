@@ -855,7 +855,6 @@ open class LottieAnimationView: LottieAnimationViewBase {
     var shouldForceUpdates = false
 
     if let viewportFrame {
-      setNeedsLayout()
       shouldForceUpdates = contentMode == .redraw
 
       let compAspect = viewportFrame.size.width / viewportFrame.size.height
