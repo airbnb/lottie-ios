@@ -13,6 +13,7 @@
 #import "LOTValueDelegate.h"
 
 typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
+typedef void (^LOTInitializationErrorBlock)(NSError *error);
 
 @interface LOTAnimationView : LOTView
 
@@ -36,6 +37,11 @@ typedef void (^LOTAnimationCompletionBlock)(BOOL animationFinished);
 
 /// Loads animation asynchronously from the specified URL
 - (nonnull instancetype)initWithContentsOfURL:(nonnull NSURL *)url;
+
+/// Loads animation asynchronously from the specified URL. Calls the specified errorBlock if the
+/// animation cannot be initialized from the contents of the URL.
+- (nonnull instancetype)initWithContentsOfURL:(NSURL *)url
+                                   errorBlock:(nullable LOTInitializationErrorBlock)errorBlock;
 
 /// Set animation name from Interface Builder
 @property (nonatomic, strong) IBInspectable NSString * _Nullable animation;

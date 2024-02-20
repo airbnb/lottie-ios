@@ -60,6 +60,11 @@ static NSString * const kCompContainerAnimationKey = @"play";
 # pragma mark - Initializers
 
 - (instancetype)initWithContentsOfURL:(NSURL *)url {
+  return [self initWithContentsOfURL:url errorBlock:nil];
+}
+
+- (instancetype)initWithContentsOfURL:(NSURL *)url
+                           errorBlock:(nullable LOTInitializationErrorBlock)errorBlock {
   self = [self initWithFrame:CGRectZero];
   if (self) {
     LOTComposition *laScene = [[LOTAnimationCache sharedCache] animationForKey:url.absoluteString];
@@ -69,14 +74,20 @@ static NSString * const kCompContainerAnimationKey = @"play";
       [self _setupWithSceneModel:laScene];
     } else {
       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        NSData *animationData = [NSData dataWithContentsOfURL:url];
-        if (!animationData) {
+        NSError *error;
+        NSData *animationData = [NSData dataWithContentsOfURL:url options:0 error:&error];
+        if (error || !animationData) {
+          if (errorBlock) {
+            errorBlock(error);
+          }
           return;
         }
-        NSError *error;
         NSDictionary  *animationJSON = [NSJSONSerialization JSONObjectWithData:animationData
                                                                        options:0 error:&error];
         if (error || !animationJSON) {
+          if (errorBlock) {
+            errorBlock(error);
+          }
           return;
         }
         
