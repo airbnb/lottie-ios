@@ -4,7 +4,7 @@
 import Lottie
 import SwiftUI
 
-struct ContentView: View {
+struct LottieViewLayoutDemoView: View {
   var body: some View {
     HStack {
       VStack {
