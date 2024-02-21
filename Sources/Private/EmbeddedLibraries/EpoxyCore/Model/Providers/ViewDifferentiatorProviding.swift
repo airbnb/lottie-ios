@@ -5,7 +5,7 @@
 
 /// The capability of providing a view differentiator that facilitates generating collection view
 /// cell reuse identifiers.
-protocol ViewDifferentiatorProviding {
+public protocol ViewDifferentiatorProviding {
   /// The view differentiator for the item model.
   var viewDifferentiator: ViewDifferentiator { get }
 }
@@ -17,18 +17,18 @@ protocol ViewDifferentiatorProviding {
 /// view differentiator, then they're compatible with one another for element reuse. If two models
 /// have different view differentiators, then they're incompatible with one another for element
 /// reuse.
-struct ViewDifferentiator: Hashable {
+public struct ViewDifferentiator: Hashable {
 
   // MARK: Lifecycle
 
-  init(viewType: AnyClass, styleID: AnyHashable?) {
+  public init(viewType: AnyClass, styleID: AnyHashable?) {
     viewTypeDescription = "\(type(of: viewType.self))"
     self.styleID = styleID
   }
 
   // MARK: Public
 
-  var viewTypeDescription: String
-  var styleID: AnyHashable?
+  public var viewTypeDescription: String
+  public var styleID: AnyHashable?
 
 }

@@ -1,26 +1,25 @@
 // Created by eric_horacek on 10/8/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
-#if canImport(SwiftUI) && !os(macOS)
 import SwiftUI
 
+#if !os(macOS)
 // MARK: - EpoxySwiftUIUIHostingController
 
 /// A `UIHostingController` that hosts SwiftUI views within an Epoxy container, e.g. an Epoxy
 /// `CollectionView`.
 ///
-/// Exposed internally to allow consumers to reason about these view controllers, e.g. to opt
+/// Exposed publicly to allow consumers to reason about these view controllers, e.g. to opt
 /// collection view cells out of automated view controller impression tracking.
 ///
 /// - SeeAlso: `EpoxySwiftUIHostingView`
-@available(iOS 13.0, tvOS 13.0, *)
 open class EpoxySwiftUIHostingController<Content: View>: UIHostingController<Content> {
 
   // MARK: Lifecycle
 
   /// Creates a `UIHostingController` that optionally ignores the `safeAreaInsets` when laying out
   /// its contained `RootView`.
-  convenience init(rootView: Content, ignoreSafeArea: Bool) {
+  public convenience init(rootView: Content, ignoreSafeArea: Bool) {
     self.init(rootView: rootView)
 
     // We unfortunately need to call a private API to disable the safe area. We can also accomplish

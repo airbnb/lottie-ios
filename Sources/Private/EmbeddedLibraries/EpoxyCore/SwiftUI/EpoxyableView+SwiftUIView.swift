@@ -1,12 +1,10 @@
 // Created by eric_horacek on 9/13/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
-#if canImport(SwiftUI)
 import SwiftUI
 
 // MARK: - StyledView
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension StyledView where Self: ContentConfigurableView & BehaviorsConfigurableView {
   /// Returns a SwiftUI `View` representing this `EpoxyableView`.
   ///
@@ -24,7 +22,7 @@ extension StyledView where Self: ContentConfigurableView & BehaviorsConfigurable
   /// ```
   /// MyView.swiftUIView(…).sizing(.intrinsicSize)
   /// ```
-  static func swiftUIView(
+  public static func swiftUIView(
     content: Content,
     style: Style,
     behaviors: Behaviors? = nil)
@@ -52,7 +50,6 @@ extension StyledView where Self: ContentConfigurableView & BehaviorsConfigurable
   }
 }
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension StyledView
   where
   Self: ContentConfigurableView & BehaviorsConfigurableView,
@@ -74,7 +71,7 @@ extension StyledView
   /// ```
   /// MyView.swiftUIView(…).sizing(.intrinsicSize)
   /// ```
-  static func swiftUIView(
+  public static func swiftUIView(
     content: Content,
     behaviors: Behaviors? = nil)
     -> SwiftUIView<Self, Content>
@@ -96,7 +93,6 @@ extension StyledView
   }
 }
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension StyledView
   where
   Self: ContentConfigurableView & BehaviorsConfigurableView,
@@ -119,7 +115,7 @@ extension StyledView
   /// MyView.swiftUIView(…).sizing(.intrinsicSize)
   /// ```
   /// The sizing defaults to `.automatic`.
-  static func swiftUIView(
+  public static func swiftUIView(
     style: Style,
     behaviors: Behaviors? = nil)
     -> SwiftUIView<Self, Style>
@@ -138,7 +134,6 @@ extension StyledView
   }
 }
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension StyledView
   where
   Self: ContentConfigurableView & BehaviorsConfigurableView,
@@ -162,7 +157,7 @@ extension StyledView
   /// MyView.swiftUIView(…).sizing(.intrinsicSize)
   /// ```
   /// The sizing defaults to `.automatic`.
-  static func swiftUIView(behaviors: Behaviors? = nil) -> SwiftUIView<Self, Void> {
+  public static func swiftUIView(behaviors: Behaviors? = nil) -> SwiftUIView<Self, Void> {
     SwiftUIView {
       Self()
     }
@@ -171,4 +166,3 @@ extension StyledView
     }
   }
 }
-#endif

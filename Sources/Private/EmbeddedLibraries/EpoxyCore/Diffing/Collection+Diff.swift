@@ -10,21 +10,21 @@ extension Collection where Element: Diffable, Index == Int {
   ///
   /// - Parameters:
   ///     - from other: The collection of old data.
-  func makeChangeset(from other: Self) -> IndexChangeset {
+  public func makeChangeset(from other: Self) -> IndexChangeset {
     // Arranging the elements contiguously prior to diffing improves performance by ~40%.
     let new = ContiguousArray(self)
     let old = ContiguousArray(other)
 
     /// The entries in both this and the other collection, keyed by their `dataID`s.
-    var entries = [AnyHashable: EpoxyEntry](minimumCapacity: new.count)
-    var duplicates = [EpoxyEntry]()
+    var entries = [AnyHashable: Entry](minimumCapacity: new.count)
+    var duplicates = [Entry]()
 
     var newResults = ContiguousArray<NewRecord>()
     newResults.reserveCapacity(new.count)
 
     for index in new.indices {
       let id = new[index].diffIdentifier
-      let entry = entries[id, default: EpoxyEntry()]
+      let entry = entries[id, default: Entry()]
       if entry.trackNewIndex(index) {
         duplicates.append(entry)
       }
@@ -122,7 +122,7 @@ extension Collection where Element: Diffable, Index == Int {
   ///     - from other: The collection of old data.
   ///     - fromSection: The section the other collection's data exists within. Defaults to `0`.
   ///     - toSection: The section this collection's data exists within. Defaults to `0`.
-  func makeIndexPathChangeset(
+  public func makeIndexPathChangeset(
     from other: Self,
     fromSection: Int = 0,
     toSection: Int = 0)
@@ -156,7 +156,7 @@ extension Collection where Element: Diffable, Index == Int {
   ///
   /// - Parameters:
   ///     - from other: The collection of old data.
-  func makeIndexSetChangeset(from other: Self) -> IndexSetChangeset {
+  public func makeIndexSetChangeset(from other: Self) -> IndexSetChangeset {
     let indexChangeset = makeChangeset(from: other)
 
     return IndexSetChangeset(
@@ -177,7 +177,7 @@ extension Collection where Element: DiffableSection, Index == Int {
   ///
   /// - Parameters:
   ///     - from other: The collection of old data.
-  func makeSectionedChangeset(from other: Self) -> SectionedChangeset {
+  public func makeSectionedChangeset(from other: Self) -> SectionedChangeset {
     let sectionChangeset = makeIndexSetChangeset(from: other)
     var itemChangeset = IndexPathChangeset()
 
@@ -201,10 +201,10 @@ extension Collection where Element: DiffableSection, Index == Int {
   }
 }
 
-// MARK: - EpoxyEntry
+// MARK: - Entry
 
 /// A bookkeeping refrence type for the diffing algorithm.
-private final class EpoxyEntry {
+private final class Entry {
 
   // MARK: Internal
 
@@ -250,7 +250,7 @@ private final class EpoxyEntry {
 
 /// A bookkeeping type for pairing up an old element with its new index.
 private struct OldRecord {
-  var entry: EpoxyEntry?
+  var entry: Entry?
   var correspondingNewIndex: Int? = nil
 }
 
@@ -258,6 +258,6 @@ private struct OldRecord {
 
 /// A bookkeeping type for pairing up a new element with its old index.
 private struct NewRecord {
-  var entry: EpoxyEntry
+  var entry: Entry
   var correspondingOldIndex: Int? = nil
 }

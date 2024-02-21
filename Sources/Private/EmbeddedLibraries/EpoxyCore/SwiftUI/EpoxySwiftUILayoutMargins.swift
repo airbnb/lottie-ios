@@ -1,12 +1,10 @@
 // Created by eric_horacek on 10/8/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
-#if canImport(SwiftUI)
 import SwiftUI
 
 // MARK: - View
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension View {
   /// Applies the layout margins from the parent `EpoxySwiftUIHostingView` to this `View`, if there
   /// are any.
@@ -15,17 +13,16 @@ extension View {
   /// example.
   ///
   /// These margins are propagated via the `EnvironmentValues.epoxyLayoutMargins`.
-  func epoxyLayoutMargins() -> some View {
+  public func epoxyLayoutMargins() -> some View {
     modifier(EpoxyLayoutMarginsPadding())
   }
 }
 
 // MARK: - EnvironmentValues
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension EnvironmentValues {
   /// The layout margins of the parent `EpoxySwiftUIHostingView`, else zero if there is none.
-  var epoxyLayoutMargins: EdgeInsets {
+  public var epoxyLayoutMargins: EdgeInsets {
     get { self[EpoxyLayoutMarginsKey.self] }
     set { self[EpoxyLayoutMarginsKey.self] = newValue }
   }
@@ -33,7 +30,6 @@ extension EnvironmentValues {
 
 // MARK: - EpoxyLayoutMarginsKey
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 private struct EpoxyLayoutMarginsKey: EnvironmentKey {
   static let defaultValue = EdgeInsets()
 }
@@ -42,7 +38,6 @@ private struct EpoxyLayoutMarginsKey: EnvironmentKey {
 
 /// A view modifier that applies the layout margins from an enclosing `EpoxySwiftUIHostingView` to
 /// the modified `View`.
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 private struct EpoxyLayoutMarginsPadding: ViewModifier {
   @Environment(\.epoxyLayoutMargins) var epoxyLayoutMargins
 
@@ -50,4 +45,3 @@ private struct EpoxyLayoutMarginsPadding: ViewModifier {
     content.padding(epoxyLayoutMargins)
   }
 }
-#endif

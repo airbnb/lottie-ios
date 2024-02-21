@@ -4,7 +4,7 @@
 // MARK: - ErasedContentProviding
 
 /// The capability of providing an type-erased `Equatable` content instance.
-protocol ErasedContentProviding {
+public protocol ErasedContentProviding {
   /// The type-erased content instance of this model, else `nil` if there is no content.
   ///
   /// If there was an `AnyEquatable` type, we could store this property using it. Instead we need
@@ -14,17 +14,17 @@ protocol ErasedContentProviding {
   /// A closure that can be called to determine whether the given `model`'s `erasedContent` is equal
   /// to this model's `erasedContent`, else `nil` if there is no content or the content is always
   /// equal.
-  var isErasedContentEqual: ((Self) -> Bool)? { get }
+  var isErasedContentEqual: ((ErasedContentProviding) -> Bool)? { get }
 }
 
 // MARK: - EpoxyModeled
 
 extension EpoxyModeled where Self: ErasedContentProviding {
 
-  // MARK: Internal
+  // MARK: Public
 
   /// The type-erased content instance of this model, else `nil` if there is no content.
-  var erasedContent: Any? {
+  public var erasedContent: Any? {
     get { self[contentProperty] }
     set { self[contentProperty] = newValue }
   }
@@ -32,7 +32,7 @@ extension EpoxyModeled where Self: ErasedContentProviding {
   /// A closure that can be called to determine whether the given `model`'s `erasedContent` is equal
   /// to this model's `erasedContent`, else `nil` if there is no content or the content is always
   /// equal.
-  var isErasedContentEqual: ((Self) -> Bool)? {
+  public var isErasedContentEqual: ((ErasedContentProviding) -> Bool)? {
     get { self[isContentEqualProperty] }
     set { self[isContentEqualProperty] = newValue }
   }
@@ -40,10 +40,10 @@ extension EpoxyModeled where Self: ErasedContentProviding {
   // MARK: Private
 
   private var contentProperty: EpoxyModelProperty<Any?> {
-    .init(keyPath: \Self.erasedContent, defaultValue: nil, updateStrategy: .replace)
+    .init(keyPath: \ErasedContentProviding.erasedContent, defaultValue: nil, updateStrategy: .replace)
   }
 
-  private var isContentEqualProperty: EpoxyModelProperty<((Self) -> Bool)?> {
-    .init(keyPath: \Self.isErasedContentEqual, defaultValue: nil, updateStrategy: .replace)
+  private var isContentEqualProperty: EpoxyModelProperty<((ErasedContentProviding) -> Bool)?> {
+    .init(keyPath: \ErasedContentProviding.isErasedContentEqual, defaultValue: nil, updateStrategy: .replace)
   }
 }

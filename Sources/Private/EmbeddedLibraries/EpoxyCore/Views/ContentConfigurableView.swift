@@ -17,7 +17,7 @@
 /// - SeeAlso: `BehaviorsConfigurableView`
 /// - SeeAlso: `StyledView`
 /// - SeeAlso: `EpoxyableView`
-protocol ContentConfigurableView: ViewType {
+public protocol ContentConfigurableView: ViewType {
   /// The `Equatable` properties that can be updated on instances of this view, e.g. text `String`s
   /// or image `URL`s.
   ///
@@ -32,5 +32,5 @@ protocol ContentConfigurableView: ViewType {
 // MARK: Defaults
 
 extension ContentConfigurableView where Content == Never {
-  func setContent(_: Never, animated _: Bool) { }
+  public func setContent(_: Never, animated _: Bool) { }
 }

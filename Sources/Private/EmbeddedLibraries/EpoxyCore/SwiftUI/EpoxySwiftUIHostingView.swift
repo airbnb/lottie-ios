@@ -1,14 +1,15 @@
 // Created by eric_horacek on 9/16/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
-#if canImport(Combine) && canImport(SwiftUI) && !os(macOS)
 import Combine
 import SwiftUI
+
+#if !os(macOS)
 
 // MARK: - SwiftUIHostingViewReuseBehavior
 
 /// The reuse behavior of an `EpoxySwiftUIHostingView`.
-enum SwiftUIHostingViewReuseBehavior: Hashable {
+public enum SwiftUIHostingViewReuseBehavior: Hashable {
   /// Instances of a `EpoxySwiftUIHostingView` with `RootView`s of same type can be reused within
   /// the Epoxy container.
   ///
@@ -21,7 +22,6 @@ enum SwiftUIHostingViewReuseBehavior: Hashable {
 
 // MARK: - CallbackContextEpoxyModeled
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension CallbackContextEpoxyModeled
   where
   Self: WillDisplayProviding & DidEndDisplayingProviding,
@@ -32,7 +32,7 @@ extension CallbackContextEpoxyModeled
   ///
   /// - Note: You should only need to call then from the implementation of a concrete
   ///   `EpoxyableModel` convenience vendor method, e.g. `SwiftUI.View.itemModel(…)`.
-  func linkDisplayLifecycle<RootView: View>() -> Self
+  public func linkDisplayLifecycle<RootView: View>() -> Self
     where
     CallbackContext.View == EpoxySwiftUIHostingView<RootView>
   {
@@ -57,18 +57,17 @@ extension CallbackContextEpoxyModeled
 /// the API is private and 3) the `_UIHostingView` doesn't not accept setting a new `View` instance.
 ///
 /// - SeeAlso: `EpoxySwiftUIHostingController`
-@available(iOS 13.0, tvOS 13.0, *)
-final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
+public final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
 
   // MARK: Lifecycle
 
-  init(style: Style) {
+  public init(style: Style) {
     // Ignore the safe area to ensure the view isn't laid out incorrectly when being sized while
     // overlapping the safe area.
     epoxyContent = EpoxyHostingContent(rootView: style.initialContent.rootView)
     viewController = EpoxySwiftUIHostingController(
       rootView: .init(content: epoxyContent, environment: epoxyEnvironment),
-      ignoreSafeArea: true)
+      ignoreSafeArea: style.ignoreSafeArea)
 
     dataID = style.initialContent.dataID ?? DefaultDataID.noneProvided as AnyHashable
 
@@ -95,75 +94,115 @@ final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
     fatalError("init(coder:) has not been implemented")
   }
 
-  // MARK: Internal
+  // MARK: Public
 
-  struct Style: Hashable {
-    init(reuseBehavior: SwiftUIHostingViewReuseBehavior, initialContent: Content) {
+  public struct Style: Hashable {
+
+    // MARK: Lifecycle
+
+    public init(
+      reuseBehavior: SwiftUIHostingViewReuseBehavior,
+      initialContent: Content,
+      ignoreSafeArea: Bool = true)
+    {
       self.reuseBehavior = reuseBehavior
       self.initialContent = initialContent
+      self.ignoreSafeArea = ignoreSafeArea
     }
 
-    var reuseBehavior: SwiftUIHostingViewReuseBehavior
-    var initialContent: Content
+    // MARK: Public
 
-    static func == (lhs: Style, rhs: Style) -> Bool {
+    public var reuseBehavior: SwiftUIHostingViewReuseBehavior
+    public var initialContent: Content
+    public var ignoreSafeArea: Bool
+
+    public static func == (lhs: Style, rhs: Style) -> Bool {
       lhs.reuseBehavior == rhs.reuseBehavior
     }
 
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
       hasher.combine(reuseBehavior)
     }
   }
 
-  struct Content: Equatable {
-    init(rootView: RootView, dataID: AnyHashable?) {
+  public struct Content: Equatable {
+    public init(rootView: RootView, dataID: AnyHashable?) {
       self.rootView = rootView
       self.dataID = dataID
     }
 
-    var rootView: RootView
-    var dataID: AnyHashable?
+    public var rootView: RootView
+    public var dataID: AnyHashable?
 
-    static func == (_: Content, _: Content) -> Bool {
+    public static func == (_: Content, _: Content) -> Bool {
       // The content should never be equal since we need the `rootView` to be updated on every
       // content change.
       false
     }
   }
 
-  override func didMoveToWindow() {
+  public override func didMoveToWindow() {
     super.didMoveToWindow()
 
-    // We'll only be able to discover a valid parent `viewController` once we're added to a window,
-    // so we do so here in addition to the `handleWillDisplay(…)` method.
-    if window != nil {
-      addViewControllerIfNeeded()
-    }
+    // Having our window set is an indicator that we should try adding our `viewController` as a
+    // child. We try this from a few other places to cover all of our bases.
+    addViewControllerIfNeededAndReady()
   }
 
-  func setContent(_ content: Content, animated _: Bool) {
+  public override func didMoveToSuperview() {
+    super.didMoveToSuperview()
+
+    // Having our superview set is an indicator that we should try adding our `viewController` as a
+    // child. We try this from a few other places to cover all of our bases.
+    //
+    // Previously, we did not implement this function, and instead relied on `didMoveToWindow` being
+    // called to know when to attempt adding our `viewController` as a child. This resulted in a
+    // cell sizing issue, where the cell would return an estimated size. This was due to a timing
+    // issue with adding our `viewController` as a child. The order of events that caused the bug is
+    // as follows:
+    // 1. `collectionView(_:cellForItemAt:)` is called
+    // 2. An `EpoxySwiftUIHostingView` is created via `makeView()`
+    // 3. The hosting view is added as a subview of, and constrained to, the cell's `contentView`
+    // via a call to `setViewIfNeeded(view:)`
+    // 4. The hosting view's `didMoveToSuperview` function is called, but prior to this change, we
+    //    did nothing in this function
+    // 5. We return from `collectionView(_:cellForItemAt:)`
+    // 6. `UICollectionView` calls the cell's `preferredLayoutAttributesFitting:` function, which
+    //    returns an estimated size
+    // 7. The hosting view's `didMoveToWindow` function is called, and we finally add our
+    //    `viewController` as a child
+    // 8. No additional sizing attempt is made by `UICollectionViewFlowLayout` or `MagazineLayout`
+    //    (for some reason compositional layout recovers)
+    //
+    // A reliable repro case for this bug is the following setup:
+    // 1. Have a tab bar controller with two tabs - the first containing an Epoxy collection view,
+    //    the second containing nothing
+    // 2. Have a reload function on the first view controller that sets one section with a few
+    //    SwiftUI items (`Color.red.frame(width: 300, height: 300`).itemModel(dataID: ...)`)
+    // 3. Switch away from the tab containing the collection view
+    // 4. Call the reload function on the collection view on the tab that's no longer visible
+    // 4. Upon returning to the first tab, the collection view will contain incorrectly sized cells
+    addViewControllerIfNeededAndReady()
+  }
+
+  public func setContent(_ content: Content, animated _: Bool) {
     // This triggers a change in the observed `EpoxyHostingContent` object and allows the
     // propagation of the SwiftUI transaction, instead of just replacing the `rootView`.
     epoxyContent.rootView = content.rootView
     dataID = content.dataID ?? DefaultDataID.noneProvided as AnyHashable
 
     // The view controller must be added to the view controller hierarchy to measure its content.
-    if window != nil {
-      addViewControllerIfNeeded()
-    }
+    addViewControllerIfNeededAndReady()
 
-    // As of iOS 15.2, `UIHostingController` now renders updated content asynchronously, and as such
-    // this view will get sized incorrectly with the previous content when reused unless we invoke
-    // this semi-private API. We couldn't find any other method to get the view to resize
-    // synchronously after updating `rootView`, but hopefully this will become a internal API soon so
-    // we can remove this call.
-    viewController._render(seconds: 0)
+    // We need to layout the view to ensure it gets resized properly when cells are re-used
+    viewController.view.setNeedsLayout()
+    viewController.view.layoutIfNeeded()
 
     // This is required to ensure that views with new content are properly resized.
     viewController.view.invalidateIntrinsicContentSize()
   }
 
-  override func layoutMarginsDidChange() {
+  public override func layoutMarginsDidChange() {
     super.layoutMarginsDidChange()
 
     let margins = layoutMargins
@@ -191,13 +230,13 @@ final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
     }
   }
 
-  func handleWillDisplay(animated: Bool) {
+  public func handleWillDisplay(animated: Bool) {
     guard state != .appeared, window != nil else { return }
     transition(to: .appearing(animated: animated))
     transition(to: .appeared)
   }
 
-  func handleDidEndDisplaying(animated: Bool) {
+  public func handleDidEndDisplaying(animated: Bool) {
     guard state != .disappeared else { return }
     transition(to: .disappearing(animated: animated))
     transition(to: .disappeared)
@@ -220,7 +259,7 @@ final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
     switch (to: state, from: self.state) {
     case (to: .appearing(let animated), from: .disappeared):
       viewController.beginAppearanceTransition(true, animated: animated)
-      addViewControllerIfNeeded()
+      addViewControllerIfNeededAndReady()
     case (to: .disappearing(let animated), from: .appeared):
       viewController.beginAppearanceTransition(false, animated: animated)
     case (to: .disappeared, from: .disappearing):
@@ -238,7 +277,7 @@ final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
       removeViewControllerIfNeeded()
     case (to: .appeared, from: .disappeared):
       viewController.beginAppearanceTransition(true, animated: false)
-      addViewControllerIfNeeded()
+      addViewControllerIfNeededAndReady()
       viewController.endAppearanceTransition()
     case (to: .appearing(let animated), from: .appeared):
       viewController.beginAppearanceTransition(false, animated: animated)
@@ -247,7 +286,7 @@ final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
       viewController.beginAppearanceTransition(true, animated: animated)
     case (to: .disappearing(let animated), from: .disappeared):
       viewController.beginAppearanceTransition(true, animated: animated)
-      addViewControllerIfNeeded()
+      addViewControllerIfNeededAndReady()
       viewController.beginAppearanceTransition(false, animated: animated)
     case (to: .disappearing(let animated), from: .appearing):
       viewController.beginAppearanceTransition(false, animated: animated)
@@ -262,13 +301,29 @@ final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
     self.state = state
   }
 
-  private func addViewControllerIfNeeded() {
+  private func addViewControllerIfNeededAndReady() {
+    guard let superview = superview else {
+      // If our superview is nil, we're too early and have no chance of finding a view controller
+      // up the responder chain.
+      return
+    }
+
     // This isn't great, and means that we're going to add this view controller as a child view
     // controller of a view controller somewhere else in the hierarchy, which the author of that
     // view controller may not be expecting. However there's not really a better pathway forward
     // here without requiring a view controller instance to be passed all the way through, which is
     // both burdensome and error-prone.
-    guard let nextViewController = superview?.next(UIViewController.self) else {
+    let nextViewController = superview.next(UIViewController.self)
+
+    if nextViewController == nil, window == nil {
+      // If the view controller is nil, but our window is also nil, we're a bit too early. It's
+      // possible to find a view controller up the responder chain without having a window, which is
+      // why we don't guard or assert on having a window.
+      return
+    }
+
+    guard let nextViewController = nextViewController else {
+      // One of the two previous early returns should have prevented us from getting here.
       EpoxyLogger.shared.assertionFailure(
         """
         Unable to add a UIHostingController view, could not locate a UIViewController in the \
@@ -296,15 +351,15 @@ final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
 
     addSubview(viewController.view)
 
-    // Get the view controller's view to be sized correctly so that we don't have to wait for
-    // autolayout to perform a pass to do so.
-    viewController.view.frame = bounds
-
     viewController.view.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
       viewController.view.leadingAnchor.constraint(equalTo: leadingAnchor),
+      // Pining the hosting view controller to layoutMarginsGuide ensures the content respects the top safe area
+      // when installed inside a `TopBarContainer`
       viewController.view.topAnchor.constraint(equalTo: topAnchor),
       viewController.view.trailingAnchor.constraint(equalTo: trailingAnchor),
+      // Pining the hosting view controller to layoutMarginsGuide ensures the content respects the bottom safe area
+      // when installed inside a `BottomBarContainer`
       viewController.view.bottomAnchor.constraint(equalTo: bottomAnchor),
     ])
 
@@ -347,7 +402,6 @@ extension UIResponder {
 
 /// The object that is used to communicate changes in the root view to the
 /// `EpoxySwiftUIHostingController`.
-@available(iOS 13.0, tvOS 13.0, *)
 final class EpoxyHostingContent<RootView: View>: ObservableObject {
 
   // MARK: Lifecycle
@@ -365,7 +419,6 @@ final class EpoxyHostingContent<RootView: View>: ObservableObject {
 
 /// The object that is used to communicate values to SwiftUI views within an
 /// `EpoxySwiftUIHostingController`, e.g. layout margins.
-@available(iOS 13.0, tvOS 13.0, *)
 final class EpoxyHostingEnvironment: ObservableObject {
   @Published var layoutMargins = EdgeInsets()
   @Published var intrinsicContentSizeInvalidator = EpoxyIntrinsicContentSizeInvalidator(invalidate: { })
@@ -375,7 +428,6 @@ final class EpoxyHostingEnvironment: ObservableObject {
 
 /// The wrapper view that is used to communicate values to SwiftUI views within an
 /// `EpoxySwiftUIHostingController`, e.g. layout margins.
-@available(iOS 13.0, tvOS 13.0, *)
 struct EpoxyHostingWrapper<Content: View>: View {
   @ObservedObject var content: EpoxyHostingContent<Content>
   @ObservedObject var environment: EpoxyHostingEnvironment
@@ -386,4 +438,5 @@ struct EpoxyHostingWrapper<Content: View>: View {
       .environment(\.epoxyIntrinsicContentSizeInvalidator, environment.intrinsicContentSizeInvalidator)
   }
 }
+
 #endif

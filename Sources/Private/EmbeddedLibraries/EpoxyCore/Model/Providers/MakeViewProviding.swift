@@ -4,7 +4,7 @@
 // MARK: - MakeViewProviding
 
 /// The capability of constructing a `UIView`.
-protocol MakeViewProviding {
+public protocol MakeViewProviding {
   /// The view constructed when the `MakeView` closure is called.
   associatedtype View: ViewType
 
@@ -19,16 +19,16 @@ protocol MakeViewProviding {
 
 extension ViewEpoxyModeled where Self: MakeViewProviding {
 
-  // MARK: Internal
+  // MARK: Public
 
   /// A closure that's called to construct an instance of `View` represented by this model.
-  var makeView: MakeView {
+  public var makeView: MakeView {
     get { self[makeViewProperty] }
     set { self[makeViewProperty] = newValue }
   }
 
   /// Replaces the default closure to construct the view with the given closure.
-  func makeView(_ value: @escaping MakeView) -> Self {
+  public func makeView(_ value: @escaping MakeView) -> Self {
     copy(updating: makeViewProperty, to: value)
   }
 

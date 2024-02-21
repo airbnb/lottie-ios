@@ -11,7 +11,7 @@
 /// different for each type.
 ///
 /// - SeeAlso: `Identifiable`.
-protocol DataIDProviding {
+public protocol DataIDProviding {
   /// A stable identifier that uniquely identifies this instance, with its typed erased.
   ///
   /// Defaults to `DefaultDataID.noneProvided` if no data ID is provided.
@@ -22,16 +22,16 @@ protocol DataIDProviding {
 
 extension EpoxyModeled where Self: DataIDProviding {
 
-  // MARK: Internal
+  // MARK: Public
 
   /// A stable identifier that uniquely identifies this model, with its typed erased.
-  var dataID: AnyHashable {
+  public var dataID: AnyHashable {
     get { self[dataIDProperty] }
     set { self[dataIDProperty] = newValue }
   }
 
   /// Returns a copy of this model with the ID replaced with the provided ID.
-  func dataID(_ value: AnyHashable) -> Self {
+  public func dataID(_ value: AnyHashable) -> Self {
     copy(updating: dataIDProperty, to: value)
   }
 
@@ -48,10 +48,10 @@ extension EpoxyModeled where Self: DataIDProviding {
 // MARK: - DefaultDataID
 
 /// The default data ID when none is provided.
-enum DefaultDataID: Hashable, CustomDebugStringConvertible {
+public enum DefaultDataID: Hashable, CustomDebugStringConvertible {
   case noneProvided
 
-  var debugDescription: String {
+  public var debugDescription: String {
     "DefaultDataID.noneProvided"
   }
 }

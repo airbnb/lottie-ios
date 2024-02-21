@@ -5,28 +5,28 @@
 
 /// A sentinel protocol for enabling an `CallbackContextEpoxyModeled` to provide a `setBehaviors`
 /// closure property.
-protocol SetBehaviorsProviding { }
+public protocol SetBehaviorsProviding { }
 
 // MARK: - CallbackContextEpoxyModeled
 
 extension CallbackContextEpoxyModeled where Self: SetBehaviorsProviding {
 
-  // MARK: Internal
+  // MARK: Public
 
   /// A closure that's called to set the content on this model's view with behaviors (e.g. tap handler
   /// closures) whenever this model is updated.
-  typealias SetBehaviors = (CallbackContext) -> Void
+  public typealias SetBehaviors = (CallbackContext) -> Void
 
   /// A closure that's called to set the content on this model's view with behaviors (e.g. tap handler
   /// closures) whenever this model is updated.
-  var setBehaviors: SetBehaviors? {
+  public var setBehaviors: SetBehaviors? {
     get { self[setBehaviorsProperty] }
     set { self[setBehaviorsProperty] = newValue }
   }
 
   /// Returns a copy of this model with the set behaviors closure called after the current set
   /// behaviors closure of this model, if there is one.
-  func setBehaviors(_ value: SetBehaviors?) -> Self {
+  public func setBehaviors(_ value: SetBehaviors?) -> Self {
     copy(updating: setBehaviorsProperty, to: value)
   }
 

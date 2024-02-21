@@ -3,11 +3,11 @@
 
 /// A shared logger that allows consumers to intercept Epoxy assertions and warning messages to pipe
 /// into their own logging systems.
-final class EpoxyLogger {
+public final class EpoxyLogger {
 
   // MARK: Lifecycle
 
-  init(
+  public init(
     assert: @escaping Assert = { condition, message, file, line in
       // If we default to `Swift.assert` directly with `assert: Assert = Swift.assert`,
       // the call will unexpectedly not respect the -O flag and will crash in release
@@ -33,10 +33,10 @@ final class EpoxyLogger {
     _warn = warn
   }
 
-  // MARK: Internal
+  // MARK: Public
 
   /// Logs that an assertion occurred.
-  typealias Assert = (
+  public typealias Assert = (
     _ condition: @autoclosure () -> Bool,
     _ message: @autoclosure () -> String,
     _ fileID: StaticString,
@@ -44,14 +44,14 @@ final class EpoxyLogger {
     -> Void
 
   /// Logs that an assertion failure occurred.
-  typealias AssertionFailure = (
+  public typealias AssertionFailure = (
     _ message: @autoclosure () -> String,
     _ fileID: StaticString,
     _ line: UInt)
     -> Void
 
   /// Logs a warning message.
-  typealias Warn = (
+  public typealias Warn = (
     _ message: @autoclosure () -> String,
     _ fileID: StaticString,
     _ line: UInt)
@@ -60,10 +60,10 @@ final class EpoxyLogger {
   /// The shared instance used to log Epoxy assertions and warnings.
   ///
   /// Set this to a new logger instance to intercept assertions and warnings logged by Epoxy.
-  static var shared = EpoxyLogger()
+  public static var shared = EpoxyLogger()
 
   /// Logs that an assertion occurred.
-  func assert(
+  public func assert(
     _ condition: @autoclosure () -> Bool,
     _ message: @autoclosure () -> String = String(),
     fileID: StaticString = #fileID,
@@ -73,7 +73,7 @@ final class EpoxyLogger {
   }
 
   /// Logs that an assertion failure occurred.
-  func assertionFailure(
+  public func assertionFailure(
     _ message: @autoclosure () -> String = String(),
     fileID: StaticString = #fileID,
     line: UInt = #line)
@@ -82,7 +82,7 @@ final class EpoxyLogger {
   }
 
   /// Logs a warning message.
-  func warn(
+  public func warn(
     _ message: @autoclosure () -> String = String(),
     fileID: StaticString = #fileID,
     line: UInt = #line)

@@ -18,7 +18,7 @@
 /// - SeeAlso: `ContentConfigurableView`
 /// - SeeAlso: `StyledView`
 /// - SeeAlso: `EpoxyableView`
-protocol BehaviorsConfigurableView: ViewType {
+public protocol BehaviorsConfigurableView: ViewType {
   /// The non-`Equatable` properties that can be changed over of the lifecycle this View's
   /// instances, e.g. callback closures or delegates.
   ///
@@ -36,7 +36,7 @@ protocol BehaviorsConfigurableView: ViewType {
 // MARK: Defaults
 
 extension BehaviorsConfigurableView where Behaviors == Never {
-  func setBehaviors(_ behaviors: Never?) {
+  public func setBehaviors(_ behaviors: Never?) {
     switch behaviors {
     case nil:
       break

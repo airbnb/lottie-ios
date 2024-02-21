@@ -8,7 +8,7 @@
 /// This protocol should be conditionally extended to fulfill provider protocols and with chainable
 /// setters for those providers that concrete model types can receive by declaring conformance to
 /// provider protocols.
-protocol EpoxyModeled {
+public protocol EpoxyModeled {
   /// The underlying storage of this model that stores the current property values.
   var storage: EpoxyModelStorage { get set }
 }
@@ -20,7 +20,7 @@ extension EpoxyModeled {
   ///
   /// If the value was set previously for the given `property`, the conflict is resolved using the
   /// `EpoxyModelProperty.UpdateStrategy` of the `property`.
-  subscript<Property>(property: EpoxyModelProperty<Property>) -> Property {
+  public subscript<Property>(property: EpoxyModelProperty<Property>) -> Property {
     get { storage[property] }
     set { storage[property] = newValue }
   }
@@ -31,14 +31,14 @@ extension EpoxyModeled {
   /// property, e.g.:
   ///
   /// ````
-  /// internal func title(_ value: String?) -> Self {
+  /// public func title(_ value: String?) -> Self {
   ///   copy(updating: titleProperty, to: value)
   /// }
   /// ````
   ///
   /// If a `value` was set previously for the given `property`, the conflict is resolved using the
   /// `EpoxyModelProperty.UpdateStrategy` of the `property`.
-  func copy<Value>(updating property: EpoxyModelProperty<Value>, to value: Value) -> Self {
+  public func copy<Value>(updating property: EpoxyModelProperty<Value>, to value: Value) -> Self {
     var copy = self
     copy.storage[property] = value
     return copy
@@ -46,7 +46,7 @@ extension EpoxyModeled {
 
   /// Returns a copy of this model produced by merging the given `other` model's storage into this
   /// model's storage.
-  func merging(_ other: EpoxyModeled) -> Self {
+  public func merging(_ other: EpoxyModeled) -> Self {
     var copy = self
     copy.storage.merge(other.storage)
     return copy
