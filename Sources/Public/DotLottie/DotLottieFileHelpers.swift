@@ -118,7 +118,6 @@ extension DotLottieFile {
   /// - Parameter bundle: The bundle in which the lottie is located. Defaults to `Bundle.main`
   /// - Parameter subdirectory: A subdirectory in the bundle in which the lottie is located. Optional.
   /// - Parameter dotLottieCache: A cache for holding loaded lotties. Defaults to `LRUDotLottieCache.sharedCache`. Optional.
-  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
   public static func named(
     _ name: String,
     bundle: Bundle = Bundle.main,
@@ -165,7 +164,6 @@ extension DotLottieFile {
   /// Loads an DotLottie from a specific filepath.
   /// - Parameter filepath: The absolute filepath of the lottie to load. EG "/User/Me/starAnimation.lottie"
   /// - Parameter dotLottieCache: A cache for holding loaded lotties. Defaults to `LRUDotLottieCache.sharedCache`. Optional.
-  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
   public static func loadedFrom(
     filepath: String,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
@@ -204,7 +202,6 @@ extension DotLottieFile {
   /// - Parameter name: The name of the lottie file in the asset catalog. EG "StarAnimation"
   /// - Parameter bundle: The bundle in which the lottie is located. Defaults to `Bundle.main`
   /// - Parameter dotLottieCache: A cache for holding loaded lottie files. Defaults to `LRUDotLottieCache.sharedCache` Optional.
-  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
   public static func asset(
     named name: String,
     bundle: Bundle = Bundle.main,
@@ -270,7 +267,6 @@ extension DotLottieFile {
   ///
   /// - Parameter url: The url to load the animation from.
   /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LRUAnimationCache.sharedCache`. Optional.
-  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
   public static func loadedFrom(
     url: URL,
     session: URLSession = .shared,
@@ -354,7 +350,6 @@ extension DotLottieFile {
   ///   - data: The data(`Foundation.Data`) object to load DotLottie from
   ///   - filename: The name of the lottie file without the lottie extension. eg. "StarAnimation"
   ///   - dispatchQueue: A dispatch queue used to load animations. Defaults to `DispatchQueue.global()`. Optional.
-  @available(iOS 13.0, macOS 10.15, tvOS 13.0, *)
   public static func loadedFrom(
     data: Data,
     filename: String,

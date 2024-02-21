@@ -29,7 +29,6 @@ struct EpoxyIntrinsicContentSizeInvalidator {
 
 // MARK: - EnvironmentValues
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension EnvironmentValues {
   /// A means of invalidating the intrinsic content size of the parent `EpoxySwiftUIHostingView`.
   var epoxyIntrinsicContentSizeInvalidator: EpoxyIntrinsicContentSizeInvalidator {

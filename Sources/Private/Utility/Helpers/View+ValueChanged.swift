@@ -5,7 +5,6 @@
 import Combine
 import SwiftUI
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension View {
   /// A backwards compatible wrapper for iOS 14 `onChange`
   @ViewBuilder

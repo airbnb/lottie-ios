@@ -184,7 +184,6 @@ final class CoreTextRenderLayer: CALayer {
   private var needsContentUpdate = false
 
   // Draws Debug colors for the font alignment.
-  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
   private func drawDebug(_ ctx: CGContext) {
     if let font {
       let ascent = CTFontGetAscent(font)
