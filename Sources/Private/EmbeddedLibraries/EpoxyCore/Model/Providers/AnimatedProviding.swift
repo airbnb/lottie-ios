@@ -4,7 +4,7 @@
 /// The capability of providing a flag indicating whether an operation should be animated.
 ///
 /// Typically conformed to by the `CallbackContext` of a `CallbackContextEpoxyModeled`.
-public protocol AnimatedProviding {
+internal protocol AnimatedProviding {
   /// Whether this operation should be animated.
   var animated: Bool { get }
 }

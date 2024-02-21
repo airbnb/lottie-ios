@@ -7,7 +7,7 @@ import SwiftUI
 
 /// A protocol describing a SwiftUI `View` that can configure its `UIView` content via an array of
 /// `configuration` closures.
-public protocol UIViewConfiguringSwiftUIView: View {
+internal protocol UIViewConfiguringSwiftUIView: View {
   /// The context available to this configuration, which provides the `UIView` instance at a minimum
   /// but can include additional context as needed.
   associatedtype ConfigurationContext: ViewProviding
@@ -25,7 +25,7 @@ public protocol UIViewConfiguringSwiftUIView: View {
 extension UIViewConfiguringSwiftUIView {
   /// Returns a copy of this view updated to have the given closure applied to its represented view
   /// whenever it is updated via the `updateUIView(…)` method.
-  public func configure(_ configure: @escaping Configuration) -> Self {
+  internal func configure(_ configure: @escaping Configuration) -> Self {
     var copy = self
     copy.configurations.append(configure)
     return copy
@@ -33,7 +33,7 @@ extension UIViewConfiguringSwiftUIView {
 
   /// Returns a copy of this view updated to have the given closures applied to its represented view
   /// whenever it is updated via the `updateUIView(…)` method.
-  public func configurations(_ configurations: [Configuration]) -> Self {
+  internal func configurations(_ configurations: [Configuration]) -> Self {
     var copy = self
     copy.configurations.append(contentsOf: configurations)
     return copy

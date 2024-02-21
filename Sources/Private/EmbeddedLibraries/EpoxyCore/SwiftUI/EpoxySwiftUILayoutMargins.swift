@@ -13,7 +13,7 @@ extension View {
   /// example.
   ///
   /// These margins are propagated via the `EnvironmentValues.epoxyLayoutMargins`.
-  public func epoxyLayoutMargins() -> some View {
+  internal func epoxyLayoutMargins() -> some View {
     modifier(EpoxyLayoutMarginsPadding())
   }
 }
@@ -22,7 +22,7 @@ extension View {
 
 extension EnvironmentValues {
   /// The layout margins of the parent `EpoxySwiftUIHostingView`, else zero if there is none.
-  public var epoxyLayoutMargins: EdgeInsets {
+  internal var epoxyLayoutMargins: EdgeInsets {
     get { self[EpoxyLayoutMarginsKey.self] }
     set { self[EpoxyLayoutMarginsKey.self] = newValue }
   }

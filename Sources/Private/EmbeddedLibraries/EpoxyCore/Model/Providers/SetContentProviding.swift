@@ -5,7 +5,7 @@
 
 /// A sentinel protocol for enabling an `CallbackContextEpoxyModeled` to provide a `setContent`
 /// closure property.
-public protocol SetContentProviding { }
+internal protocol SetContentProviding { }
 
 // MARK: - CallbackContextEpoxyModeled
 
@@ -15,18 +15,18 @@ extension CallbackContextEpoxyModeled where Self: SetContentProviding {
 
   /// A closure that's called to set the content on this model's view when it is first created and
   /// subsequently when the content changes.
-  public typealias SetContent = (CallbackContext) -> Void
+  internal typealias SetContent = (CallbackContext) -> Void
 
   /// A closure that's called to set the content on this model's view when it is first created and
   /// subsequently when the content changes.
-  public var setContent: SetContent? {
+  internal var setContent: SetContent? {
     get { self[setContentProperty] }
     set { self[setContentProperty] = newValue }
   }
 
   /// Returns a copy of this model with the given setContent view closure called after the current
   /// setContent view closure of this model, if there is one.
-  public func setContent(_ value: SetContent?) -> Self {
+  internal func setContent(_ value: SetContent?) -> Self {
     copy(updating: setContentProperty, to: value)
   }
 

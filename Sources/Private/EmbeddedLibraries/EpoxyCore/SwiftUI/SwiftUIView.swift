@@ -11,7 +11,7 @@ import SwiftUI
 ///
 /// Includes an optional generic `Storage` value, which can be used to compare old and new values
 /// across state changes to prevent redundant view updates.
-public struct SwiftUIView<Content: ViewType, Storage>: MeasuringViewRepresentable,
+internal struct SwiftUIView<Content: ViewType, Storage>: MeasuringViewRepresentable,
   UIViewConfiguringSwiftUIView
 {
 
@@ -33,9 +33,9 @@ public struct SwiftUIView<Content: ViewType, Storage>: MeasuringViewRepresentabl
 
   // MARK: Public
 
-  public var configurations: [Configuration] = []
+  internal var configurations: [Configuration] = []
 
-  public var sizing: SwiftUIMeasurementContainerStrategy = .automatic
+  internal var sizing: SwiftUIMeasurementContainerStrategy = .automatic
 
   // MARK: Private
 
@@ -50,16 +50,16 @@ public struct SwiftUIView<Content: ViewType, Storage>: MeasuringViewRepresentabl
 // MARK: UIViewRepresentable
 
 extension SwiftUIView {
-  public func makeCoordinator() -> Coordinator {
+  internal func makeCoordinator() -> Coordinator {
     Coordinator(storage: storage)
   }
 
   #if os(macOS)
-  public func makeNSView(context _: Context) -> SwiftUIMeasurementContainer<Content> {
+  internal func makeNSView(context _: Context) -> SwiftUIMeasurementContainer<Content> {
     SwiftUIMeasurementContainer(content: makeContent(), strategy: sizing)
   }
 
-  public func updateNSView(_ uiView: SwiftUIMeasurementContainer<Content>, context: Context) {
+  internal func updateNSView(_ uiView: SwiftUIMeasurementContainer<Content>, context: Context) {
     let oldStorage = context.coordinator.storage
     context.coordinator.storage = storage
 
@@ -73,11 +73,11 @@ extension SwiftUIView {
     }
   }
   #else
-  public func makeUIView(context _: Context) -> SwiftUIMeasurementContainer<Content> {
+  internal func makeUIView(context _: Context) -> SwiftUIMeasurementContainer<Content> {
     SwiftUIMeasurementContainer(content: makeContent(), strategy: sizing)
   }
 
-  public func updateUIView(_ uiView: SwiftUIMeasurementContainer<Content>, context: Context) {
+  internal func updateUIView(_ uiView: SwiftUIMeasurementContainer<Content>, context: Context) {
     let oldStorage = context.coordinator.storage
     context.coordinator.storage = storage
 
@@ -98,27 +98,27 @@ extension SwiftUIView {
 extension SwiftUIView {
   /// The configuration context that's available to configure the `Content` view whenever the
   /// `updateUIView()` method is invoked via a configuration closure.
-  public struct ConfigurationContext: ViewProviding {
+  internal struct ConfigurationContext: ViewProviding {
     /// The previous value for the `Storage` of this `SwiftUIView`, which can be used to store
     /// values across state changes to prevent redundant view updates.
-    public var oldStorage: Storage
+    internal var oldStorage: Storage
 
     /// The `UIViewRepresentable.Context`, with information about the transaction and environment.
-    public var viewRepresentableContext: Context
+    internal var viewRepresentableContext: Context
 
     /// The backing measurement container that contains the `Content`.
-    public var container: SwiftUIMeasurementContainer<Content>
+    internal var container: SwiftUIMeasurementContainer<Content>
 
     /// The `UIView` content that's being configured.
     ///
     /// Setting this to a new value updates the backing measurement container's `content`.
-    public var view: Content {
+    internal var view: Content {
       get { container.content }
       nonmutating set { container.content = newValue }
     }
 
     /// A convenience accessor indicating whether this content update should be animated.
-    public var animated: Bool {
+    internal var animated: Bool {
       viewRepresentableContext.transaction.animation != nil
     }
   }
@@ -129,7 +129,7 @@ extension SwiftUIView {
 extension SwiftUIView {
   /// A coordinator that stores the `storage` associated with this view, enabling the old storage
   /// value to be accessed during the `updateUIView(…)`.
-  public final class Coordinator {
+  internal final class Coordinator {
 
     // MARK: Lifecycle
 

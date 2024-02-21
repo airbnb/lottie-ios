@@ -9,7 +9,7 @@ import SwiftUI
 // MARK: - SwiftUIHostingViewReuseBehavior
 
 /// The reuse behavior of an `EpoxySwiftUIHostingView`.
-public enum SwiftUIHostingViewReuseBehavior: Hashable {
+internal enum SwiftUIHostingViewReuseBehavior: Hashable {
   /// Instances of a `EpoxySwiftUIHostingView` with `RootView`s of same type can be reused within
   /// the Epoxy container.
   ///
@@ -32,7 +32,7 @@ extension CallbackContextEpoxyModeled
   ///
   /// - Note: You should only need to call then from the implementation of a concrete
   ///   `EpoxyableModel` convenience vendor method, e.g. `SwiftUI.View.itemModel(…)`.
-  public func linkDisplayLifecycle<RootView: View>() -> Self
+  internal func linkDisplayLifecycle<RootView: View>() -> Self
     where
     CallbackContext.View == EpoxySwiftUIHostingView<RootView>
   {
@@ -57,11 +57,11 @@ extension CallbackContextEpoxyModeled
 /// the API is private and 3) the `_UIHostingView` doesn't not accept setting a new `View` instance.
 ///
 /// - SeeAlso: `EpoxySwiftUIHostingController`
-public final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
+internal final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
 
   // MARK: Lifecycle
 
-  public init(style: Style) {
+  internal init(style: Style) {
     // Ignore the safe area to ensure the view isn't laid out incorrectly when being sized while
     // overlapping the safe area.
     epoxyContent = EpoxyHostingContent(rootView: style.initialContent.rootView)
@@ -96,11 +96,11 @@ public final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableVie
 
   // MARK: Public
 
-  public struct Style: Hashable {
+  internal struct Style: Hashable {
 
     // MARK: Lifecycle
 
-    public init(
+    internal init(
       reuseBehavior: SwiftUIHostingViewReuseBehavior,
       initialContent: Content,
       ignoreSafeArea: Bool = true)
@@ -112,36 +112,36 @@ public final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableVie
 
     // MARK: Public
 
-    public var reuseBehavior: SwiftUIHostingViewReuseBehavior
-    public var initialContent: Content
-    public var ignoreSafeArea: Bool
+    internal var reuseBehavior: SwiftUIHostingViewReuseBehavior
+    internal var initialContent: Content
+    internal var ignoreSafeArea: Bool
 
-    public static func == (lhs: Style, rhs: Style) -> Bool {
+    internal static func == (lhs: Style, rhs: Style) -> Bool {
       lhs.reuseBehavior == rhs.reuseBehavior
     }
 
-    public func hash(into hasher: inout Hasher) {
+    internal func hash(into hasher: inout Hasher) {
       hasher.combine(reuseBehavior)
     }
   }
 
-  public struct Content: Equatable {
-    public init(rootView: RootView, dataID: AnyHashable?) {
+  internal struct Content: Equatable {
+    internal init(rootView: RootView, dataID: AnyHashable?) {
       self.rootView = rootView
       self.dataID = dataID
     }
 
-    public var rootView: RootView
-    public var dataID: AnyHashable?
+    internal var rootView: RootView
+    internal var dataID: AnyHashable?
 
-    public static func == (_: Content, _: Content) -> Bool {
+    internal static func == (_: Content, _: Content) -> Bool {
       // The content should never be equal since we need the `rootView` to be updated on every
       // content change.
       false
     }
   }
 
-  public override func didMoveToWindow() {
+  internal override func didMoveToWindow() {
     super.didMoveToWindow()
 
     // Having our window set is an indicator that we should try adding our `viewController` as a
@@ -149,7 +149,7 @@ public final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableVie
     addViewControllerIfNeededAndReady()
   }
 
-  public override func didMoveToSuperview() {
+  internal override func didMoveToSuperview() {
     super.didMoveToSuperview()
 
     // Having our superview set is an indicator that we should try adding our `viewController` as a
@@ -185,7 +185,7 @@ public final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableVie
     addViewControllerIfNeededAndReady()
   }
 
-  public func setContent(_ content: Content, animated _: Bool) {
+  internal func setContent(_ content: Content, animated _: Bool) {
     // This triggers a change in the observed `EpoxyHostingContent` object and allows the
     // propagation of the SwiftUI transaction, instead of just replacing the `rootView`.
     epoxyContent.rootView = content.rootView
@@ -202,7 +202,7 @@ public final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableVie
     viewController.view.invalidateIntrinsicContentSize()
   }
 
-  public override func layoutMarginsDidChange() {
+  internal override func layoutMarginsDidChange() {
     super.layoutMarginsDidChange()
 
     let margins = layoutMargins
@@ -230,13 +230,13 @@ public final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableVie
     }
   }
 
-  public func handleWillDisplay(animated: Bool) {
+  internal func handleWillDisplay(animated: Bool) {
     guard state != .appeared, window != nil else { return }
     transition(to: .appearing(animated: animated))
     transition(to: .appeared)
   }
 
-  public func handleDidEndDisplaying(animated: Bool) {
+  internal func handleDidEndDisplaying(animated: Bool) {
     guard state != .disappeared else { return }
     transition(to: .disappearing(animated: animated))
     transition(to: .disappeared)
