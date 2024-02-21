@@ -23,9 +23,6 @@ When doing this, follow these steps:
  3. Change all of the `public` symbols defined in this module to instead be `internal`
     to prevent Lottie from exposing any EpoxyCore APIs.
     
- 4. Add `@available` annotations as necessary so the library compiles
-    (Lottie has a lower minimum iOS version than EpoxyCore). 
-    
- 5. Namespace any types that conflict with other existing types.
+ 4. Namespace any types that conflict with other existing types.
     For example, the EpoxyCore `Entry` type conflicts with the ZipFoundation `Entry` type,
     so the EpoxyCore type has been renamed to `EpoxyEntry`.
