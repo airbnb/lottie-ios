@@ -21,7 +21,6 @@ enum SwiftUIHostingViewReuseBehavior: Hashable {
 
 // MARK: - CallbackContextEpoxyModeled
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension CallbackContextEpoxyModeled
   where
   Self: WillDisplayProviding & DidEndDisplayingProviding,
@@ -57,7 +56,6 @@ extension CallbackContextEpoxyModeled
 /// the API is private and 3) the `_UIHostingView` doesn't not accept setting a new `View` instance.
 ///
 /// - SeeAlso: `EpoxySwiftUIHostingController`
-@available(iOS 13.0, tvOS 13.0, *)
 final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
 
   // MARK: Lifecycle
@@ -347,7 +345,6 @@ extension UIResponder {
 
 /// The object that is used to communicate changes in the root view to the
 /// `EpoxySwiftUIHostingController`.
-@available(iOS 13.0, tvOS 13.0, *)
 final class EpoxyHostingContent<RootView: View>: ObservableObject {
 
   // MARK: Lifecycle
@@ -365,7 +362,6 @@ final class EpoxyHostingContent<RootView: View>: ObservableObject {
 
 /// The object that is used to communicate values to SwiftUI views within an
 /// `EpoxySwiftUIHostingController`, e.g. layout margins.
-@available(iOS 13.0, tvOS 13.0, *)
 final class EpoxyHostingEnvironment: ObservableObject {
   @Published var layoutMargins = EdgeInsets()
   @Published var intrinsicContentSizeInvalidator = EpoxyIntrinsicContentSizeInvalidator(invalidate: { })
@@ -375,7 +371,6 @@ final class EpoxyHostingEnvironment: ObservableObject {
 
 /// The wrapper view that is used to communicate values to SwiftUI views within an
 /// `EpoxySwiftUIHostingController`, e.g. layout margins.
-@available(iOS 13.0, tvOS 13.0, *)
 struct EpoxyHostingWrapper<Content: View>: View {
   @ObservedObject var content: EpoxyHostingContent<Content>
   @ObservedObject var environment: EpoxyHostingEnvironment

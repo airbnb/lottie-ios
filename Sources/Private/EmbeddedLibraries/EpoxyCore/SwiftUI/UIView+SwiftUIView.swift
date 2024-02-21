@@ -6,7 +6,6 @@ import SwiftUI
 
 // MARK: - ViewTypeProtocol + swiftUIView
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension ViewTypeProtocol {
   /// Returns a SwiftUI `View` representing this `UIView`, constructed with the given `makeView`
   /// closure and sized with the given sizing configuration.

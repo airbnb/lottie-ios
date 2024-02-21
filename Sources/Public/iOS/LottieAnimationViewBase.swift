@@ -39,11 +39,7 @@ open class LottieAnimationViewBase: UIView {
 
   var screenScale: CGFloat {
     #if os(iOS) || os(tvOS)
-    if #available(iOS 13.0, tvOS 13.0, *) {
-      return max(UITraitCollection.current.displayScale, 1)
-    } else {
-      return UIScreen.main.scale
-    }
+    max(UITraitCollection.current.displayScale, 1)
     #else // if os(visionOS)
     // We intentionally don't check `#if os(visionOS)`, because that emits
     // a warning when building on Xcode 14 and earlier.

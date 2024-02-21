@@ -13,7 +13,6 @@ import SwiftUI
 /// height through the `SwiftUISizingContext` binding.
 ///
 /// - SeeAlso: ``MeasuringViewRepresentable``
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
 
   // MARK: Lifecycle

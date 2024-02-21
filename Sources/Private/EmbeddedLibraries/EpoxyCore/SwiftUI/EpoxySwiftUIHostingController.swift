@@ -13,7 +13,6 @@ import SwiftUI
 /// collection view cells out of automated view controller impression tracking.
 ///
 /// - SeeAlso: `EpoxySwiftUIHostingView`
-@available(iOS 13.0, tvOS 13.0, *)
 open class EpoxySwiftUIHostingController<Content: View>: UIHostingController<Content> {
 
   // MARK: Lifecycle

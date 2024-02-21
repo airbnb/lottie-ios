@@ -5,7 +5,6 @@
 import SwiftUI
 
 /// A wrapper which exposes Lottie's `AnimatedSwitch` to SwiftUI
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 public struct LottieSwitch: UIViewConfiguringSwiftUIView {
 
   // MARK: Lifecycle

@@ -6,7 +6,6 @@ import SwiftUI
 
 // MARK: - StyledView
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension StyledView where Self: ContentConfigurableView & BehaviorsConfigurableView {
   /// Returns a SwiftUI `View` representing this `EpoxyableView`.
   ///
@@ -52,7 +51,6 @@ extension StyledView where Self: ContentConfigurableView & BehaviorsConfigurable
   }
 }
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension StyledView
   where
   Self: ContentConfigurableView & BehaviorsConfigurableView,
@@ -96,7 +94,6 @@ extension StyledView
   }
 }
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension StyledView
   where
   Self: ContentConfigurableView & BehaviorsConfigurableView,
@@ -138,7 +135,6 @@ extension StyledView
   }
 }
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
 extension StyledView
   where
   Self: ContentConfigurableView & BehaviorsConfigurableView,
