@@ -6,18 +6,18 @@
 /// A `Hashable` value wrapper around an `AnyClass` value
 ///  - Unlike `ObjectIdentifier(class)`, `ClassReference(class)`
 ///    preserves the `AnyClass` value and is more human-readable.
-internal struct ClassReference {
-  internal init(_ class: AnyClass) {
+struct ClassReference {
+  init(_ class: AnyClass) {
     self.class = `class`
   }
 
-  internal let `class`: AnyClass
+  let `class`: AnyClass
 }
 
 // MARK: Equatable
 
 extension ClassReference: Equatable {
-  internal static func ==(_ lhs: Self, _ rhs: Self) -> Bool {
+  static func ==(_ lhs: Self, _ rhs: Self) -> Bool {
     ObjectIdentifier(lhs.class) == ObjectIdentifier(rhs.class)
   }
 }
@@ -25,7 +25,7 @@ extension ClassReference: Equatable {
 // MARK: Hashable
 
 extension ClassReference: Hashable {
-  internal func hash(into hasher: inout Hasher) {
+  func hash(into hasher: inout Hasher) {
     hasher.combine(ObjectIdentifier(`class`))
   }
 }
@@ -33,7 +33,7 @@ extension ClassReference: Hashable {
 // MARK: CustomStringConvertible
 
 extension ClassReference: CustomStringConvertible {
-  internal var description: String {
+  var description: String {
     String(describing: `class`)
   }
 }

@@ -18,10 +18,10 @@ import SwiftUI
 ///   }
 /// }
 /// ```
-internal struct EpoxyIntrinsicContentSizeInvalidator {
+struct EpoxyIntrinsicContentSizeInvalidator {
   let invalidate: () -> Void
 
-  internal func callAsFunction() {
+  func callAsFunction() {
     invalidate()
   }
 }
@@ -30,7 +30,7 @@ internal struct EpoxyIntrinsicContentSizeInvalidator {
 
 extension EnvironmentValues {
   /// A means of invalidating the intrinsic content size of the parent `EpoxySwiftUIHostingView`.
-  internal var epoxyIntrinsicContentSizeInvalidator: EpoxyIntrinsicContentSizeInvalidator {
+  var epoxyIntrinsicContentSizeInvalidator: EpoxyIntrinsicContentSizeInvalidator {
     get { self[EpoxyIntrinsicContentSizeInvalidatorKey.self] }
     set { self[EpoxyIntrinsicContentSizeInvalidatorKey.self] = newValue }
   }

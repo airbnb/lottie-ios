@@ -12,7 +12,7 @@ import SwiftUI
 /// `sizeThatFits(…)` method.
 ///
 /// - SeeAlso: ``SwiftUIMeasurementContainer``
-internal protocol MeasuringViewRepresentable: ViewRepresentableType
+protocol MeasuringViewRepresentable: ViewRepresentableType
   where
   RepresentableViewType == SwiftUIMeasurementContainer<Content>
 {
@@ -32,7 +32,7 @@ internal protocol MeasuringViewRepresentable: ViewRepresentableType
 
 extension MeasuringViewRepresentable {
   /// Returns a copy of this view with its sizing strategy updated to the given `sizing` value.
-  internal func sizing(_ strategy: SwiftUIMeasurementContainerStrategy) -> Self {
+  func sizing(_ strategy: SwiftUIMeasurementContainerStrategy) -> Self {
     var copy = self
     copy.sizing = strategy
     return copy
@@ -43,7 +43,7 @@ extension MeasuringViewRepresentable {
 
 #if os(iOS) || os(tvOS)
 extension MeasuringViewRepresentable {
-  internal func _overrideSizeThatFits(
+  func _overrideSizeThatFits(
     _ size: inout CGSize,
     in proposedSize: _ProposedSize,
     uiView: UIViewType)
@@ -67,7 +67,7 @@ extension MeasuringViewRepresentable {
 
   #if swift(>=5.7.1) // Proxy check for being built with the iOS 15 SDK
   @available(iOS 16.0, tvOS 16.0, macOS 13.0, *)
-  internal func sizeThatFits(
+  func sizeThatFits(
     _ proposal: ProposedViewSize,
     uiView: UIViewType,
     context _: Context)
@@ -83,7 +83,7 @@ extension MeasuringViewRepresentable {
 #elseif os(macOS)
 @available(macOS 10.15, *)
 extension MeasuringViewRepresentable {
-  internal func _overrideSizeThatFits(
+  func _overrideSizeThatFits(
     _ size: inout CGSize,
     in proposedSize: _ProposedSize,
     nsView: NSViewType)
@@ -103,7 +103,7 @@ extension MeasuringViewRepresentable {
   // Proxy check for being built with the macOS 13 SDK.
   #if swift(>=5.7.1)
   @available(macOS 13.0, *)
-  internal func sizeThatFits(
+  func sizeThatFits(
     _ proposal: ProposedViewSize,
     nsView: NSViewType,
     context _: Context)

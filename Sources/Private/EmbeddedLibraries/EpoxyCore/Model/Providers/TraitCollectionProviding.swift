@@ -7,7 +7,7 @@ import UIKit
 /// The capability of providing a `UITraitCollection` instance.
 ///
 /// Typically conformed to by the `CallbackContext` of a `CallbackContextEpoxyModeled`.
-internal protocol TraitCollectionProviding {
+protocol TraitCollectionProviding {
   /// The `UITraitCollection` instance provided by this type.
   var traitCollection: UITraitCollection { get }
 }

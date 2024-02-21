@@ -9,7 +9,7 @@ import SwiftUI
 // MARK: - SwiftUIHostingViewReuseBehavior
 
 /// The reuse behavior of an `EpoxySwiftUIHostingView`.
-internal enum SwiftUIHostingViewReuseBehavior: Hashable {
+enum SwiftUIHostingViewReuseBehavior: Hashable {
   /// Instances of a `EpoxySwiftUIHostingView` with `RootView`s of same type can be reused within
   /// the Epoxy container.
   ///
@@ -32,7 +32,7 @@ extension CallbackContextEpoxyModeled
   ///
   /// - Note: You should only need to call then from the implementation of a concrete
   ///   `EpoxyableModel` convenience vendor method, e.g. `SwiftUI.View.itemModel(…)`.
-  internal func linkDisplayLifecycle<RootView: View>() -> Self
+  func linkDisplayLifecycle<RootView: View>() -> Self
     where
     CallbackContext.View == EpoxySwiftUIHostingView<RootView>
   {
@@ -57,11 +57,11 @@ extension CallbackContextEpoxyModeled
 /// the API is private and 3) the `_UIHostingView` doesn't not accept setting a new `View` instance.
 ///
 /// - SeeAlso: `EpoxySwiftUIHostingController`
-internal final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
+final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableView {
 
   // MARK: Lifecycle
 
-  internal init(style: Style) {
+  init(style: Style) {
     // Ignore the safe area to ensure the view isn't laid out incorrectly when being sized while
     // overlapping the safe area.
     epoxyContent = EpoxyHostingContent(rootView: style.initialContent.rootView)
@@ -94,13 +94,13 @@ internal final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableV
     fatalError("init(coder:) has not been implemented")
   }
 
-  // MARK: Public
+  // MARK: Internal
 
-  internal struct Style: Hashable {
+  struct Style: Hashable {
 
     // MARK: Lifecycle
 
-    internal init(
+    init(
       reuseBehavior: SwiftUIHostingViewReuseBehavior,
       initialContent: Content,
       ignoreSafeArea: Bool = true)
@@ -110,38 +110,38 @@ internal final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableV
       self.ignoreSafeArea = ignoreSafeArea
     }
 
-    // MARK: Public
+    // MARK: Internal
 
-    internal var reuseBehavior: SwiftUIHostingViewReuseBehavior
-    internal var initialContent: Content
-    internal var ignoreSafeArea: Bool
+    var reuseBehavior: SwiftUIHostingViewReuseBehavior
+    var initialContent: Content
+    var ignoreSafeArea: Bool
 
-    internal static func == (lhs: Style, rhs: Style) -> Bool {
+    static func == (lhs: Style, rhs: Style) -> Bool {
       lhs.reuseBehavior == rhs.reuseBehavior
     }
 
-    internal func hash(into hasher: inout Hasher) {
+    func hash(into hasher: inout Hasher) {
       hasher.combine(reuseBehavior)
     }
   }
 
-  internal struct Content: Equatable {
-    internal init(rootView: RootView, dataID: AnyHashable?) {
+  struct Content: Equatable {
+    init(rootView: RootView, dataID: AnyHashable?) {
       self.rootView = rootView
       self.dataID = dataID
     }
 
-    internal var rootView: RootView
-    internal var dataID: AnyHashable?
+    var rootView: RootView
+    var dataID: AnyHashable?
 
-    internal static func == (_: Content, _: Content) -> Bool {
+    static func == (_: Content, _: Content) -> Bool {
       // The content should never be equal since we need the `rootView` to be updated on every
       // content change.
       false
     }
   }
 
-  internal override func didMoveToWindow() {
+  override func didMoveToWindow() {
     super.didMoveToWindow()
 
     // Having our window set is an indicator that we should try adding our `viewController` as a
@@ -149,7 +149,7 @@ internal final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableV
     addViewControllerIfNeededAndReady()
   }
 
-  internal override func didMoveToSuperview() {
+  override func didMoveToSuperview() {
     super.didMoveToSuperview()
 
     // Having our superview set is an indicator that we should try adding our `viewController` as a
@@ -185,7 +185,7 @@ internal final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableV
     addViewControllerIfNeededAndReady()
   }
 
-  internal func setContent(_ content: Content, animated _: Bool) {
+  func setContent(_ content: Content, animated _: Bool) {
     // This triggers a change in the observed `EpoxyHostingContent` object and allows the
     // propagation of the SwiftUI transaction, instead of just replacing the `rootView`.
     epoxyContent.rootView = content.rootView
@@ -202,7 +202,7 @@ internal final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableV
     viewController.view.invalidateIntrinsicContentSize()
   }
 
-  internal override func layoutMarginsDidChange() {
+  override func layoutMarginsDidChange() {
     super.layoutMarginsDidChange()
 
     let margins = layoutMargins
@@ -230,13 +230,13 @@ internal final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableV
     }
   }
 
-  internal func handleWillDisplay(animated: Bool) {
+  func handleWillDisplay(animated: Bool) {
     guard state != .appeared, window != nil else { return }
     transition(to: .appearing(animated: animated))
     transition(to: .appeared)
   }
 
-  internal func handleDidEndDisplaying(animated: Bool) {
+  func handleDidEndDisplaying(animated: Bool) {
     guard state != .disappeared else { return }
     transition(to: .disappearing(animated: animated))
     transition(to: .disappeared)
@@ -302,7 +302,7 @@ internal final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableV
   }
 
   private func addViewControllerIfNeededAndReady() {
-    guard let superview = superview else {
+    guard let superview else {
       // If our superview is nil, we're too early and have no chance of finding a view controller
       // up the responder chain.
       return
@@ -322,7 +322,7 @@ internal final class EpoxySwiftUIHostingView<RootView: View>: UIView, EpoxyableV
       return
     }
 
-    guard let nextViewController = nextViewController else {
+    guard let nextViewController else {
       // One of the two previous early returns should have prevented us from getting here.
       EpoxyLogger.shared.assertionFailure(
         """
