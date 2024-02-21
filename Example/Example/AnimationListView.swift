@@ -35,7 +35,7 @@ struct AnimationListView: View {
               Text(item.name)
             }
 
-          case .animationList, .controlsDemo, .swiftUIInteroperability:
+          case .animationList, .controlsDemo, .swiftUIInteroperability, .lottieViewLayoutDemo:
             Text(item.name)
               .frame(height: 50)
           }
@@ -52,6 +52,8 @@ struct AnimationListView: View {
             ControlsDemoView()
           case .swiftUIInteroperability:
             SwiftUIInteroperabilityDemoView()
+          case .lottieViewLayoutDemo:
+            LottieViewLayoutDemoView()
           }
         }
       }
@@ -72,7 +74,7 @@ struct AnimationListView: View {
       guard let url = urls.first else { return nil }
       return await LottieAnimation.loadedFrom(url: url)?.animationSource
 
-    case .animationList, .controlsDemo, .swiftUIInteroperability:
+    case .animationList, .controlsDemo, .swiftUIInteroperability, .lottieViewLayoutDemo:
       return nil
     }
   }
@@ -104,6 +106,7 @@ extension AnimationListView {
     case remoteAnimations(name: String, urls: [URL])
     case controlsDemo
     case swiftUIInteroperability
+    case lottieViewLayoutDemo
   }
 
   var items: [Item] {
@@ -159,6 +162,7 @@ extension AnimationListView {
       .animationList(.remoteAnimationsDemo),
       .controlsDemo,
       .swiftUIInteroperability,
+      .lottieViewLayoutDemo,
     ]
   }
 }
@@ -174,6 +178,8 @@ extension AnimationListView.Item {
       return "Controls Demo"
     case .swiftUIInteroperability:
       return "SwiftUI Interoperability Demo"
+    case .lottieViewLayoutDemo:
+      return "LottieView Layout Demo"
     }
   }
 }
