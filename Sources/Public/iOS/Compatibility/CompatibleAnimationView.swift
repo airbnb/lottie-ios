@@ -28,11 +28,17 @@ public final class CompatibleAnimation: NSObject {
     super.init()
   }
 
+  public init(animation: LottieAnimation) {
+    name = ""
+    subdirectory = nil
+    bundle = Bundle.main
+    super.init()
+    self.animation = animation
+  }
+
   // MARK: Internal
 
-  var animation: LottieAnimation? {
-    LottieAnimation.named(name, bundle: bundle, subdirectory: subdirectory)
-  }
+  private(set) lazy var animation = LottieAnimation.named(name, bundle: bundle, subdirectory: subdirectory)
 
   @objc
   static func named(_ name: String) -> CompatibleAnimation {
@@ -44,6 +50,12 @@ public final class CompatibleAnimation: NSObject {
   private let name: String
   private let subdirectory: String?
   private let bundle: Bundle
+}
+
+public extension LottieAnimation {
+  func ocCompatible() -> CompatibleAnimation {
+    CompatibleAnimation(animation: self)
+  }
 }
 
 /// An Objective-C compatible wrapper around Lottie's RenderingEngineOption enum. Pass in an option
