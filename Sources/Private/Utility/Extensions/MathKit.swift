@@ -272,12 +272,12 @@ extension CGPoint {
 
   /// Operator convenience to divide points with /
   static func / (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
-    CGPoint(x: lhs.x / CGFloat(rhs), y: lhs.y / CGFloat(rhs))
+    CGPoint(x: lhs.x / rhs, y: lhs.y / rhs)
   }
 
   /// Operator convenience to multiply points with *
   static func * (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
-    CGPoint(x: lhs.x * CGFloat(rhs), y: lhs.y * CGFloat(rhs))
+    CGPoint(x: lhs.x * rhs, y: lhs.y * rhs)
   }
 
   /// Operator convenience to add points with +
