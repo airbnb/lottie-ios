@@ -26,7 +26,6 @@ Lottie enables designers to create and ship beautiful animations without an engi
   s.ios.deployment_target = '13.0'
   s.osx.deployment_target = '10.15'
   s.tvos.deployment_target = '13.0'
-  # === visionOS
   s.visionos.deployment_target = "1.0"
 
   s.source_files = 'Sources/**/*.swift'
