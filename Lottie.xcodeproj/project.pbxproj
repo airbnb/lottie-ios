@@ -1177,6 +1177,7 @@
 		0820D5C12A8BF60F007D705C /* EffectValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectValue.swift; sourceTree = "<group>"; };
 		0820D5CC2A8BF6FF007D705C /* ColorEffectValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorEffectValue.swift; sourceTree = "<group>"; };
 		0820D5D02A8C006E007D705C /* DropShadowAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadowAnimation.swift; sourceTree = "<group>"; };
+		086DFA8A2BA0D46900CE8687 /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
 		0887346E28F0CBDE00458627 /* LottieAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimation.swift; sourceTree = "<group>"; };
 		0887347228F0CCDD00458627 /* LottieAnimationHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimationHelpers.swift; sourceTree = "<group>"; };
 		0887347328F0CCDD00458627 /* LottieAnimationViewInitializers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimationViewInitializers.swift; sourceTree = "<group>"; };
@@ -1737,6 +1738,7 @@
 				2EAF59C027A0798600E00531 /* Sources */,
 				2E8040BA27A07343006E74CB /* Tests */,
 				08FB47C52B23B86500744478 /* PrivacyInfo.xcprivacy */,
+				086DFA8A2BA0D46900CE8687 /* Version.xcconfig */,
 				2E80409B27A0725D006E74CB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -3855,11 +3857,12 @@
 /* Begin XCBuildConfiguration section */
 		080DEF662A95707C00BE2D96 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 086DFA8A2BA0D46900CE8687 /* Version.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "${CURRENT_PROJECT_VERSION}";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3876,7 +3879,7 @@
 					"@loader_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "${MARKETING_VERSION}";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
@@ -3894,11 +3897,12 @@
 		};
 		080DEF672A95707C00BE2D96 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 086DFA8A2BA0D46900CE8687 /* Version.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "${CURRENT_PROJECT_VERSION}";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3915,7 +3919,7 @@
 					"@loader_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "${MARKETING_VERSION}";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
@@ -3932,6 +3936,7 @@
 		};
 		2E80409F27A0725D006E74CB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 086DFA8A2BA0D46900CE8687 /* Version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -3964,7 +3969,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "${CURRENT_PROJECT_VERSION}";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -3983,6 +3988,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = "${MARKETING_VERSION}";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3996,6 +4002,7 @@
 		};
 		2E8040A027A0725D006E74CB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 086DFA8A2BA0D46900CE8687 /* Version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -4028,7 +4035,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "${CURRENT_PROJECT_VERSION}";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4041,6 +4048,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = "${MARKETING_VERSION}";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -4054,11 +4062,12 @@
 		};
 		2E8040A227A0725D006E74CB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 086DFA8A2BA0D46900CE8687 /* Version.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "${CURRENT_PROJECT_VERSION}";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4073,7 +4082,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "${MARKETING_VERSION}";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
@@ -4087,11 +4096,12 @@
 		};
 		2E8040A327A0725D006E74CB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 086DFA8A2BA0D46900CE8687 /* Version.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "${CURRENT_PROJECT_VERSION}";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4106,7 +4116,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "${MARKETING_VERSION}";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
@@ -4120,6 +4130,7 @@
 		};
 		2E8040B427A072B8006E74CB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 086DFA8A2BA0D46900CE8687 /* Version.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -4139,6 +4150,7 @@
 		};
 		2E8040B527A072B8006E74CB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 086DFA8A2BA0D46900CE8687 /* Version.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -4158,11 +4170,12 @@
 		};
 		2EAF59B227A0787B00E00531 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 086DFA8A2BA0D46900CE8687 /* Version.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "${CURRENT_PROJECT_VERSION}";
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -4178,7 +4191,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "${MARKETING_VERSION}";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
@@ -4192,11 +4205,12 @@
 		};
 		2EAF59B327A0787B00E00531 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 086DFA8A2BA0D46900CE8687 /* Version.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "${CURRENT_PROJECT_VERSION}";
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -4212,7 +4226,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "${MARKETING_VERSION}";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
@@ -4226,11 +4240,12 @@
 		};
 		2EAF59BE27A078E400E00531 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 086DFA8A2BA0D46900CE8687 /* Version.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "${CURRENT_PROJECT_VERSION}";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4244,7 +4259,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "${MARKETING_VERSION}";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
@@ -4260,11 +4275,12 @@
 		};
 		2EAF59BF27A078E400E00531 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 086DFA8A2BA0D46900CE8687 /* Version.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "${CURRENT_PROJECT_VERSION}";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4278,7 +4294,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "${MARKETING_VERSION}";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				PRODUCT_BUNDLE_IDENTIFIER = com.airbnb.Lottie;
