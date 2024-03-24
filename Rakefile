@@ -187,6 +187,7 @@ namespace :lint do
 
   desc 'Lints the CocoaPods podspec'
   task :podspec do
+    installVisionOSIfNecessary()
     sh 'pod lib lint lottie-ios.podspec'
   end
 
