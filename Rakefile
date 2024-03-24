@@ -146,8 +146,6 @@ namespace :test do
     sh 'cp -R [^script]* script/test-carthage/Carthage/Checkouts/lottie-ios'
 
     Dir.chdir('script/test-carthage') do
-      installVisionOSIfNecessary()
-
       # Build the Lottie framework scheme
       sh 'carthage build --use-xcframeworks'
 
@@ -187,7 +185,6 @@ namespace :lint do
 
   desc 'Lints the CocoaPods podspec'
   task :podspec do
-    installVisionOSIfNecessary()
     sh 'pod lib lint lottie-ios.podspec'
   end
 
@@ -257,11 +254,6 @@ def ifVisionOSEnabled
   if ENV["SKIP_VISION_OS"] == "true"
     puts "Skipping visionOS build"
   else
-    installVisionOSIfNecessary()
     yield
   end
-end
-
-def installVisionOSIfNecessary
-  xcodebuild("-downloadPlatform visionOS")
 end
