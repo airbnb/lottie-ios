@@ -26,3 +26,5 @@ When doing this, follow these steps:
  4. Namespace any types that conflict with other existing types.
     For example, the EpoxyCore `Entry` type conflicts with the ZipFoundation `Entry` type,
     so the EpoxyCore type has been renamed to `EpoxyEntry`.
+    
+ 5. Delete `EpoxySwiftUIHostingController.swift` and `EpoxySwiftUIHostingView.swift`, which are not used by Lottie, and emit deprecation warnings when building for visionOS.

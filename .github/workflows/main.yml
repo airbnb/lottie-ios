@@ -147,11 +147,16 @@ jobs:
   cocoapod:
     name: "Lint CocoaPods podspec"
     runs-on: macos-14
+    strategy:
+      matrix:
+        xcode:
+          - '15.2' # Swift 5.9, first Xcode version with visionOS
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
         with:
           install-mint: false
+          xcode: ${{ matrix.xcode }}
       - name: Lint CocoaPod Podspec
         run: bundle exec rake lint:podspec
 
