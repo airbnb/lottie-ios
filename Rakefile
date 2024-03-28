@@ -157,12 +157,14 @@ namespace :emerge do
     g = Git.open('.')
 
     upload_data = {
-      repoName: 'airbnb/lottie-ios',
+      repoName: 'noahsmartin/lottie-ios',
       filename: 'test.zip'
     }
     if ENV["PR_NUMBER"] != "" && ENV["PR_NUMBER"] != "false"
-      # TODO: Enable PR uploads
-      next
+      upload_data[:sha] = g.log[0].parents[1].sha
+      upload_data[:baseSha] = g.log[0].parent.sha
+      upload_data[:prNumber] = ENV["PR_NUMBER"]
+      upload_data[:buildType] = 'pull_request'
     else
       upload_data[:sha] = g.log[0].sha
       upload_data[:buildType] = 'master'
