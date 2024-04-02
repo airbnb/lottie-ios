@@ -44,7 +44,10 @@ struct AnimationPreviewView: View {
   var body: some View {
     VStack {
       LottieView {
-        try await loadAnimation()
+        try await Self.loadAnimation(
+          from: animationSource,
+          urls: urls,
+          currentURLIndex: currentURLIndex)
       } placeholder: {
         LoadingIndicator()
           .frame(width: 50, height: 50)
@@ -172,7 +175,12 @@ struct AnimationPreviewView: View {
     #endif
   }
 
-  private func loadAnimation() async throws -> LottieAnimationSource? {
+  private static func loadAnimation(
+    from animationSource: AnimationSource,
+    urls: [URL],
+    currentURLIndex: Int)
+    async throws -> LottieAnimationSource?
+  {
     switch animationSource {
     case .local(let name):
       if name.hasSuffix(".lottie") {

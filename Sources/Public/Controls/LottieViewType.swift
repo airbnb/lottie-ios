@@ -44,7 +44,7 @@ public enum LottieNSControlState: UInt, RawRepresentable {
 ///  - `UIControl.Event` on iOS / tvOS and `LottieNSControlEvent` on macOS.
 public typealias LottieControlEvent = LottieNSControlEvent
 
-public struct LottieNSControlEvent: Equatable {
+public struct LottieNSControlEvent: Equatable, Sendable {
 
   // MARK: Lifecycle
 
