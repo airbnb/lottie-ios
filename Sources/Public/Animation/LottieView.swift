@@ -106,9 +106,8 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     _ loadAnimation: @escaping () async throws -> LottieAnimationSource?,
     @ViewBuilder placeholder: @escaping () -> Placeholder)
   {
-
+    localAnimation = nil
     self.loadAnimation = loadAnimation
-    self.localAnimation = nil
     self.placeholder = placeholder
   }
 
