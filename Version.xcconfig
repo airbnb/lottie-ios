@@ -2,5 +2,5 @@
 // Copyright © 2024 Airbnb Inc. All rights reserved.
 
 // The version numbers used when building Lottie.xcframework
-MARKETING_VERSION = 4.4.1
-CURRENT_PROJECT_VERSION = 441 // a three-digit representation of the marketing version, without dots.
+MARKETING_VERSION = 4.4.2
+CURRENT_PROJECT_VERSION = 442 // a three-digit representation of the marketing version, without dots.
