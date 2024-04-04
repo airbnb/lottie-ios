@@ -502,6 +502,9 @@
 		8C5379711FB471D100C1BC65 /* LOTAnimationView_Compat.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DBA16351B4FA408937A16CE /* LOTAnimationView_Compat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A874744D204EC2E300E5C62C /* LOTKeypath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6279981A1FE1D04600B2DDD9 /* LOTKeypath.m */; };
 		A874744E204EC2ED00E5C62C /* LOTKeypath.h in Headers */ = {isa = PBXBuildFile; fileRef = 627998191FE1D04600B2DDD9 /* LOTKeypath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E5BC622F2BBE7566000E9D60 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E5BC622E2BBE7566000E9D60 /* PrivacyInfo.xcprivacy */; };
+		E5BC62302BBE7566000E9D60 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E5BC622E2BBE7566000E9D60 /* PrivacyInfo.xcprivacy */; };
+		E5BC62312BBE7566000E9D60 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E5BC622E2BBE7566000E9D60 /* PrivacyInfo.xcprivacy */; };
 		EE498E3C1F336A3B00D1DFCD /* LOTCacheProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = EE498E3B1F336A3B00D1DFCD /* LOTCacheProvider.m */; };
 		EE498E3E1F336A4900D1DFCD /* LOTCacheProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = EE498E3D1F336A4900D1DFCD /* LOTCacheProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EE498E3F1F336B0400D1DFCD /* LOTCacheProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = EE498E3B1F336A3B00D1DFCD /* LOTCacheProvider.m */; };
@@ -687,6 +690,7 @@
 		6445B0D5207E0D4D00D84F6A /* libLottie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLottie.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		84FE12EF1E4C1485009B157C /* libLottie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLottie.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C5379761FB471D100C1BC65 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5BC622E2BBE7566000E9D60 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		EE498E3B1F336A3B00D1DFCD /* LOTCacheProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTCacheProvider.m; sourceTree = "<group>"; };
 		EE498E3D1F336A4900D1DFCD /* LOTCacheProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTCacheProvider.h; sourceTree = "<group>"; };
 		FA1F5A9F1E42B52800FF36BF /* LOTAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAnimationView.h; sourceTree = "<group>"; };
@@ -834,7 +838,7 @@
 				481A4A5A1E4A7885003CF62B /* LOTAnimationView_Internal.h */,
 			);
 			name = Private;
-			path = "lottie-ios/Classes/Private";
+			path = Lottie/Sources/Private;
 			sourceTree = SOURCE_ROOT;
 		};
 		481A4AD71E4A78A0003CF62B /* MacCompatibility */ = {
@@ -958,13 +962,12 @@
 		62CA59BA1E3C173B002D7188 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				E5BC622D2BBE753E000E9D60 /* Sources */,
 				62BFC2CF1F1428E80068A342 /* RenderSystem */,
 				481A4AD71E4A78A0003CF62B /* MacCompatibility */,
 				481A4A171E4A7885003CF62B /* AnimatableLayers */,
 				481A4A371E4A7885003CF62B /* Extensions */,
 				481A4A3F1E4A7885003CF62B /* Models */,
-				481A4A571E4A7885003CF62B /* Private */,
-				62CA59C31E3C179F002D7188 /* PublicHeaders */,
 				62CA59BC1E3C173B002D7188 /* Info.plist */,
 			);
 			path = Lottie;
@@ -989,8 +992,18 @@
 				62CA59C61E3C179F002D7188 /* Lottie.h */,
 			);
 			name = PublicHeaders;
-			path = "lottie-ios/Classes/PublicHeaders";
+			path = Lottie/Sources/PublicHeaders;
 			sourceTree = SOURCE_ROOT;
+		};
+		E5BC622D2BBE753E000E9D60 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				481A4A571E4A7885003CF62B /* Private */,
+				62CA59C31E3C179F002D7188 /* PublicHeaders */,
+				E5BC622E2BBE7566000E9D60 /* PrivacyInfo.xcprivacy */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -1349,6 +1362,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5BC622F2BBE7566000E9D60 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1356,6 +1370,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5BC62312BBE7566000E9D60 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1363,6 +1378,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5BC62302BBE7566000E9D60 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
