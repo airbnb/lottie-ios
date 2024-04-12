@@ -37,7 +37,7 @@ For the first time, designers can create and ship beautiful animations without a
                           'lottie-ios/Classes/PublicHeaders/LOTAnimatedControl.h',
                           'lottie-ios/Classes/Private/LOTAnimatedControl.m']
   s.resource_bundles = {
-'LottiePrivacyInfo' => ['Lottie/PrivacyInfo.xcprivacy'],
+'LottiePrivacyInfo' => ['Lottie/PrivacyInfo.xcprivacy']
 }
 
   s.public_header_files = 'lottie-ios/Classes/PublicHeaders/*.h'
