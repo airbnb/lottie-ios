@@ -1,5 +1,5 @@
 //
-//  PointValueProvider.swift
+//  PathValueProvider.swift
 //  lottie-swift
 //
 //  Created by Yuval Kalugny on 13/04/2024
