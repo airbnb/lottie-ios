@@ -10,7 +10,7 @@ import CoreGraphics
 // MARK: - BezierPath
 
 /// A container that holds instructions for creating a single, unbroken Bezier Path.
-struct BezierPath {
+public struct BezierPath {
 
   // MARK: Lifecycle
 
