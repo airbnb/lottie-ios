@@ -111,7 +111,7 @@ extension CurveVertex: Interpolatable {
 // MARK: - BezierPath + Interpolatable
 
 extension BezierPath: Interpolatable {
-  func interpolate(to: BezierPath, amount: CGFloat) -> BezierPath {
+  public func interpolate(to: BezierPath, amount: CGFloat) -> BezierPath {
     var newPath = BezierPath()
     for i in 0..<min(elements.count, to.elements.count) {
       let fromVertex = elements[i].vertex
