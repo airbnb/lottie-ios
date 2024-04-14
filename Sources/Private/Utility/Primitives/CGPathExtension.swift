@@ -7,7 +7,6 @@
 
 import CoreGraphics
 
-
 extension CGPath {
 
   var bezierPath: BezierPath {
@@ -25,11 +24,11 @@ extension CGPath {
         let controlPoint = element.pointee.points[0]
         let endPoint = element.pointee.points[1]
         let controlPoint1 = CGPoint(
-                x: (2.0 / 3.0) * (controlPoint.x - element.pointee.points[-1].x) + element.pointee.points[-1].x,
-                y: (2.0 / 3.0) * (controlPoint.y - element.pointee.points[-1].y) + element.pointee.points[-1].y)
+          x: (2.0 / 3.0) * (controlPoint.x - element.pointee.points[-1].x) + element.pointee.points[-1].x,
+          y: (2.0 / 3.0) * (controlPoint.y - element.pointee.points[-1].y) + element.pointee.points[-1].y)
         let controlPoint2 = CGPoint(
-                x: (2.0 / 3.0) * (controlPoint.x - endPoint.x) + endPoint.x,
-                y: (2.0 / 3.0) * (controlPoint.y - endPoint.y) + endPoint.y)
+          x: (2.0 / 3.0) * (controlPoint.x - endPoint.x) + endPoint.x,
+          y: (2.0 / 3.0) * (controlPoint.y - endPoint.y) + endPoint.y)
         path.addCurve(toPoint: endPoint, outTangent: controlPoint1, inTangent: controlPoint2)
       case .addCurveToPoint:
         let controlPoint1 = element.pointee.points[0]

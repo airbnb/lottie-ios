@@ -351,6 +351,26 @@ extension BezierPath: Codable {
     elements = decodedElements
   }
 
+  // MARK: Public
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: BezierPath.CodingKeys.self)
+    try container.encode(closed, forKey: .closed)
+
+    var vertexContainer = container.nestedUnkeyedContainer(forKey: .vertices)
+    var inPointsContainer = container.nestedUnkeyedContainer(forKey: .inPoints)
+    var outPointsContainer = container.nestedUnkeyedContainer(forKey: .outPoints)
+
+    /// If closed path, ignore the final element.
+    let finalIndex = closed ? elements.endIndex - 1 : elements.endIndex
+    for i in 0..<finalIndex {
+      let element = elements[i]
+      try vertexContainer.encode(element.vertex.point)
+      try inPointsContainer.encode(element.vertex.inTangentRelative)
+      try outPointsContainer.encode(element.vertex.outTangentRelative)
+    }
+  }
+
   // MARK: Internal
 
   /// The BezierPath container is encoded and decoded from the JSON format
@@ -371,23 +391,6 @@ extension BezierPath: Codable {
     case vertices = "v"
   }
 
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: BezierPath.CodingKeys.self)
-    try container.encode(closed, forKey: .closed)
-
-    var vertexContainer = container.nestedUnkeyedContainer(forKey: .vertices)
-    var inPointsContainer = container.nestedUnkeyedContainer(forKey: .inPoints)
-    var outPointsContainer = container.nestedUnkeyedContainer(forKey: .outPoints)
-
-    /// If closed path, ignore the final element.
-    let finalIndex = closed ? elements.endIndex - 1 : elements.endIndex
-    for i in 0..<finalIndex {
-      let element = elements[i]
-      try vertexContainer.encode(element.vertex.point)
-      try inPointsContainer.encode(element.vertex.inTangentRelative)
-      try outPointsContainer.encode(element.vertex.outTangentRelative)
-    }
-  }
 }
 
 // MARK: AnyInitializable
