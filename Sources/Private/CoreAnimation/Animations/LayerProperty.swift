@@ -81,6 +81,7 @@ enum PropertyName: String, CaseIterable {
   case rotation = "Rotation"
   case strokeWidth = "Stroke Width"
   case gradientColors = "Colors"
+  case path = "Path"
 }
 
 // MARK: CALayer properties
@@ -218,7 +219,7 @@ extension LayerProperty {
     .init(
       caLayerKeypath: #keyPath(CAShapeLayer.path),
       defaultValue: nil,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: .path )
   }
 
   static var fillColor: LayerProperty<CGColor> {
@@ -387,6 +388,15 @@ extension CustomizableProperty {
       conversion: { _, typeErasedValueProvider in
         guard let gradientValueProvider = typeErasedValueProvider as? GradientValueProvider else { return nil }
         return gradientValueProvider.locations.map { CGFloat($0) }
+      })
+  }
+
+  static var path: CustomizableProperty<CGPath> {
+    .init(
+      name: [.path],
+      conversion: { typeErasedValue, _ in
+        guard let path = typeErasedValue as? BezierPath else { return nil }
+        return path.cgPath()
       })
   }
 
