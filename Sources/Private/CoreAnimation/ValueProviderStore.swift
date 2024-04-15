@@ -48,7 +48,10 @@ final class ValueProviderStore {
     context: LayerAnimationContext)
     throws -> KeyframeGroup<Value>?
   {
-    context.recordHierarchyKeypath?(keypath.fullPath)
+    // NOTE: Not recording Path because it messes up tests
+    if !(customizableProperty.name == [.path]) {
+      context.recordHierarchyKeypath?(keypath.fullPath)
+    }
 
     guard let anyValueProvider = valueProvider(for: keypath) else {
       return nil
