@@ -125,7 +125,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     }
     .sizing(sizing)
     .configure { context in
-      applyCurrentAnimationConfiguration(to: context.view)
+      applyCurrentAnimationConfiguration(to: context.view, in: context.container)
     }
     .configurations(configurations)
     .opacity(animationSource == nil ? 0 : 1)
@@ -152,11 +152,19 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     return copy
   }
 
-  /// Returns a copy of this view that can be resized by scaling its animation to fit the size
-  /// offered by its parent.
+  /// Returns a copy of this view that can be resized by scaling its animation
+  /// to always fit the size offered by its parent.
   public func resizable() -> Self {
     var copy = self
     copy.sizing = .proposed
+    return copy
+  }
+
+  /// Returns a copy of this view that adopts the intrinsic size of the animation,
+  /// up to the proposed size.
+  public func intrinsicSize() -> Self {
+    var copy = self
+    copy.sizing = .intrinsic
     return copy
   }
 
@@ -501,7 +509,10 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   }
 
   /// Applies playback configuration for the current animation to the `LottieAnimationView`
-  private func applyCurrentAnimationConfiguration(to view: LottieAnimationView) {
+  private func applyCurrentAnimationConfiguration(
+    to view: LottieAnimationView,
+    in container: SwiftUIMeasurementContainer<LottieAnimationView>)
+  {
     guard let animationSource else { return }
     var imageProviderConfiguration = imageProviderConfiguration
     var playbackMode = playbackMode
@@ -543,6 +554,10 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     if animationSource.animation !== view.animation {
       view.loadAnimation(animationSource)
       animationDidLoad?(animationSource)
+
+      // Invalidate the intrinsic size of the SwiftUI measurement container,
+      // since any cached measurements will be out of date after updating the animation.
+      container.invalidateIntrinsicContentSize()
     }
 
     if 

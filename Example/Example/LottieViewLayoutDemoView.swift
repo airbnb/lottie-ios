@@ -35,7 +35,18 @@ struct LottieViewLayoutDemoView: View {
         LottieView(animation: .named("Samples/LottieLogo1"))
           .looping()
 
-        Text("intrinsic content size")
+        Text("automatic size")
+      }
+
+      VStack {
+        LottieView {
+          try await Task.sleep(for: .seconds(1))
+          return LottieAnimation.named("Samples/LottieLogo1")
+        }
+        .intrinsicSize()
+        .looping()
+
+        Text("intrinsic size, async")
       }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
