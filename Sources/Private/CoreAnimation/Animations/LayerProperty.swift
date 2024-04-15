@@ -219,7 +219,7 @@ extension LayerProperty {
     .init(
       caLayerKeypath: #keyPath(CAShapeLayer.path),
       defaultValue: nil,
-      customizableProperty: .path )
+      customizableProperty: .path)
   }
 
   static var fillColor: LayerProperty<CGColor> {
