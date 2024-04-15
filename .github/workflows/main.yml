@@ -33,6 +33,7 @@ jobs:
       matrix:
         xcode:
         - '15.2' # Swift 5.9
+        - '15.3' # Swift 5.10
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -49,7 +50,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
         with:
-          xcode: '15.2' # Swift 5.9
+          xcode: '15.3' # Swift 5.10
       - name: Build Example
         run: bundle exec rake build:example:all
 
@@ -60,7 +61,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
         with:
-          xcode: '15.2' # Swift 5.9
+          xcode: '15.3' # Swift 5.10
       - name: Test Package
         run: bundle exec rake test:package
       - name: Process test artifacts
@@ -150,7 +151,7 @@ jobs:
     strategy:
       matrix:
         xcode:
-          - '15.2' # Swift 5.9, first Xcode version with visionOS
+          - '15.3' # Swift 5.10
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -166,7 +167,7 @@ jobs:
     strategy:
       matrix:
         xcode:
-        - '15.2' # Swift 5.9
+        - '15.3' # Swift 5.10
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -185,7 +186,7 @@ jobs:
         with:
           install-mint: true
           install-carthage: true
-          xcode: '15.2' # Swift 5.9
+          xcode: '15.3' # Swift 5.10
       - name: Test Carthage support
         run: bundle exec rake test:carthage
 

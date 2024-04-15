@@ -4,7 +4,7 @@
 import Lottie
 import SwiftUI
 
-struct ContentView: View {
+struct LottieViewLayoutDemoView: View {
   var body: some View {
     HStack {
       VStack {
@@ -35,7 +35,18 @@ struct ContentView: View {
         LottieView(animation: .named("Samples/LottieLogo1"))
           .looping()
 
-        Text("intrinsic content size")
+        Text("automatic size")
+      }
+
+      VStack {
+        LottieView {
+          try await Task.sleep(for: .seconds(1))
+          return LottieAnimation.named("Samples/LottieLogo1")
+        }
+        .intrinsicSize()
+        .looping()
+
+        Text("intrinsic size, async")
       }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
