@@ -82,6 +82,7 @@ enum PropertyName: String, CaseIterable {
   case strokeWidth = "Stroke Width"
   case gradientColors = "Colors"
   case path = "Path"
+  case maskPath = "Mask Path"
 }
 
 // MARK: CALayer properties
@@ -393,7 +394,7 @@ extension CustomizableProperty {
 
   static var path: CustomizableProperty<CGPath> {
     .init(
-      name: [.path],
+      name: [.path, .maskPath],
       conversion: { typeErasedValue, _ in
         guard let path = typeErasedValue as? BezierPath else { return nil }
         return path.cgPath()
