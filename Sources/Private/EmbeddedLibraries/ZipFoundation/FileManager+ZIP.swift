@@ -51,7 +51,7 @@ extension FileManager {
   }
 
   class func externalFileAttributesForEntry(of type: Entry.EntryType, permissions: UInt16) -> UInt32 {
-    var typeInt =
+    let typeInt =
       switch type {
       case .file:
         UInt16(S_IFREG)

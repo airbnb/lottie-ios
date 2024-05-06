@@ -151,7 +151,7 @@ extension KeyframeGroup: DictionaryInitializable where T: AnyInitializable {
     {
       keyframes = [Keyframe<T>(value)]
     } else {
-      var frameDictionaries: [[String: Any]] =
+      let frameDictionaries: [[String: Any]] =
         if
           let singleFrameDictionary =
           dictionary[KeyframeWrapperKey.keyframeData.rawValue] as? [String: Any]
