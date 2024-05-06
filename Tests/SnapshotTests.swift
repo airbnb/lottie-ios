@@ -13,7 +13,7 @@ import UIKit
 // MARK: - SnapshotTests
 
 @MainActor
-class SnapshotTests: XCTestCase {
+final class SnapshotTests: XCTestCase {
 
   // MARK: Internal
 
