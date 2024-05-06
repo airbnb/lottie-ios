@@ -17,6 +17,7 @@ struct AnimationPreviewView: View {
     case .remote(let urls, _):
       _currentURLIndex = State(initialValue: urls.startIndex)
       self.urls = urls
+
     default:
       _currentURLIndex = State(initialValue: 0)
       urls = []
@@ -32,9 +33,9 @@ struct AnimationPreviewView: View {
     var name: String {
       switch self {
       case .local(let name):
-        return name
+        name
       case .remote(_, let name):
-        return name
+        name
       }
     }
   }
@@ -124,9 +125,9 @@ struct AnimationPreviewView: View {
 
   private var playbackMode: LottiePlaybackMode {
     if animationPlaying {
-      return .playing(.fromProgress(playFromProgress, toProgress: playToProgress, loopMode: loopMode))
+      .playing(.fromProgress(playFromProgress, toProgress: playToProgress, loopMode: loopMode))
     } else {
-      return .paused(at: .progress(sliderValue))
+      .paused(at: .progress(sliderValue))
     }
   }
 
@@ -184,13 +185,13 @@ struct AnimationPreviewView: View {
     switch animationSource {
     case .local(let name):
       if name.hasSuffix(".lottie") {
-        return try await DotLottieFile.named(name).animationSource
+        try await DotLottieFile.named(name).animationSource
       } else {
-        return LottieAnimation.named(name)?.animationSource
+        LottieAnimation.named(name)?.animationSource
       }
 
     case .remote:
-      return await LottieAnimation.loadedFrom(url: urls[currentURLIndex])?.animationSource
+      await LottieAnimation.loadedFrom(url: urls[currentURLIndex])?.animationSource
     }
   }
 

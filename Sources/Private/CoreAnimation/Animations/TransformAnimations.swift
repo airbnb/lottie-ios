@@ -280,12 +280,12 @@ extension CALayer {
         anchor, position, positionX, positionY, scale, rotationX, rotationY, rotationZ, skew, skewAxis
           -> Hold<CATransform3D> in
 
-        let transformPosition: CGPoint
-        if transformModel._positionX != nil, transformModel._positionY != nil {
-          transformPosition = CGPoint(x: positionX.cgFloatValue, y: positionY.cgFloatValue)
-        } else {
-          transformPosition = position.pointValue
-        }
+        let transformPosition: CGPoint =
+          if transformModel._positionX != nil, transformModel._positionY != nil {
+            CGPoint(x: positionX.cgFloatValue, y: positionY.cgFloatValue)
+          } else {
+            position.pointValue
+          }
 
         let transform = CATransform3D.makeTransform(
           anchor: anchor.pointValue,

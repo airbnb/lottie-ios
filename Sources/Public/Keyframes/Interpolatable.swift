@@ -271,9 +271,9 @@ struct Hold<T>: Interpolatable {
 
   func interpolate(to: Hold<T>, amount: CGFloat) -> Hold<T> {
     if amount < 1 {
-      return self
+      self
     } else {
-      return to
+      to
     }
   }
 }

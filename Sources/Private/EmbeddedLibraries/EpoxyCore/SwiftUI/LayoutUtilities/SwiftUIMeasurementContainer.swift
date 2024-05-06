@@ -24,12 +24,12 @@ final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
     // On iOS 15 and below, passing zero can result in a constraint failure the first time a view
     // is displayed, but the system gracefully recovers afterwards. On iOS 16, it's fine to pass
     // zero.
-    let initialSize: CGSize
-    if #available(iOS 16, tvOS 16, macOS 13, *) {
-      initialSize = .zero
-    } else {
-      initialSize = .init(width: 375, height: 150)
-    }
+    let initialSize: CGSize =
+      if #available(iOS 16, tvOS 16, macOS 13, *) {
+        .zero
+      } else {
+        .init(width: 375, height: 150)
+      }
     super.init(frame: .init(origin: .zero, size: initialSize))
 
     addSubview(content)
@@ -180,12 +180,16 @@ final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
           resolved = .intrinsic(intrinsicSize)
         }
       }
+
     case .proposed:
       resolved = .proposed
+
     case .intrinsicHeightProposedWidth:
       resolved = .intrinsicHeightProposedWidth
+
     case .intrinsicWidthProposedHeight:
       resolved = .intrinsicWidthProposedHeight
+
     case .intrinsic:
       resolved = .intrinsic(content.systemLayoutFittingIntrinsicSize())
     }
@@ -223,12 +227,15 @@ final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
     case .proposed:
       constraints[.trailing]?.priority = .required
       constraints[.bottom]?.priority = .required
+
     case .intrinsicHeightProposedWidth:
       constraints[.trailing]?.priority = .required
       constraints[.bottom]?.priority = .almostRequired
+
     case .intrinsicWidthProposedHeight:
       constraints[.trailing]?.priority = .almostRequired
       constraints[.bottom]?.priority = .required
+
     case .intrinsic:
       constraints[.trailing]?.priority = .almostRequired
       constraints[.bottom]?.priority = .almostRequired

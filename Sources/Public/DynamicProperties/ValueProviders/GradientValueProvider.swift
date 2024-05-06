@@ -70,7 +70,7 @@ public final class GradientValueProvider: ValueProvider {
 
   public var storage: ValueProviderStorage<[Double]> {
     if let block {
-      return .closure { [self] frame in
+      .closure { [self] frame in
         hasUpdate = false
 
         let newColors = block(frame)
@@ -80,7 +80,7 @@ public final class GradientValueProvider: ValueProvider {
         return value
       }
     } else {
-      return .singleValue(value)
+      .singleValue(value)
     }
   }
 

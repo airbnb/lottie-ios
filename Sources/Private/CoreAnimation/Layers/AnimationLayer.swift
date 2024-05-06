@@ -15,7 +15,7 @@ protocol AnimationLayer: CALayer {
 
 // MARK: - LayerAnimationContext
 
-// Context describing the timing parameters of the current animation
+/// Context describing the timing parameters of the current animation
 struct LayerAnimationContext {
   /// The animation being played
   let animation: LottieAnimation
@@ -74,12 +74,12 @@ struct LayerAnimationContext {
     // Normal animation playback (like when looping) skips the last frame.
     // However when the animation is paused, we need to be able to render the final frame.
     // To allow this we have to extend the length of the animation by one frame.
-    let animationEndFrame: AnimationFrameTime
-    if timingConfiguration.speed == 0 {
-      animationEndFrame = animation.endFrame + 1
-    } else {
-      animationEndFrame = animation.endFrame
-    }
+    let animationEndFrame: AnimationFrameTime =
+      if timingConfiguration.speed == 0 {
+        animation.endFrame + 1
+      } else {
+        animation.endFrame
+      }
 
     return Double(animationEndFrame - animation.startFrame) / animation.framerate
   }

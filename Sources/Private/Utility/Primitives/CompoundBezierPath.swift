@@ -101,15 +101,15 @@ struct CompoundBezierPath {
       return self
     }
 
-    var positions: [(start: CGFloat, end: CGFloat)]
-    if endPosition < startPosition {
-      positions = [
-        (start: 0, end: endPosition * length),
-        (start: startPosition * length, end: length),
-      ]
-    } else {
-      positions = [(start: startPosition * length, end: endPosition * length)]
-    }
+    var positions: [(start: CGFloat, end: CGFloat)] =
+      if endPosition < startPosition {
+        [
+          (start: 0, end: endPosition * length),
+          (start: startPosition * length, end: length),
+        ]
+      } else {
+        [(start: startPosition * length, end: endPosition * length)]
+      }
 
     var compoundPath = CompoundBezierPath()
     var trim = positions.remove(at: 0)

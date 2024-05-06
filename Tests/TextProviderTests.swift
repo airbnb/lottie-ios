@@ -129,7 +129,7 @@ private final class LoggingAnimationKeypathTextProvider: AnimationKeypathTextPro
 }
 
 extension LottieAnimationView {
-  // Causes this `LottieAnimationView` to render its contents immediately
+  /// Causes this `LottieAnimationView` to render its contents immediately
   func renderContentsForUnitTests() {
     if let mainThreadAnimationLayer = lottieAnimationLayer.animationLayer as? MainThreadAnimationLayer {
       mainThreadAnimationLayer.forceDisplayUpdate()

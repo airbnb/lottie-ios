@@ -199,7 +199,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     playbackMode(.playing(.fromProgress(nil, toProgress: 1, loopMode: loopMode)))
   }
 
-  // Returns a copy of this view playing once from the current frame to the end frame
+  /// Returns a copy of this view playing once from the current frame to the end frame
   public func playing() -> Self {
     playbackMode(.playing(.fromProgress(nil, toProgress: 1, loopMode: .playOnce)))
   }

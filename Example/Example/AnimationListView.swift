@@ -88,9 +88,9 @@ struct AnimationListView: View {
   private var directory: String {
     switch content {
     case .directory(let directory):
-      return directory
+      directory
     case .custom:
-      return "n/a"
+      "n/a"
     }
   }
 
@@ -112,12 +112,12 @@ extension AnimationListView {
   var items: [Item] {
     switch content {
     case .directory:
-      return animations.map { .animation(name: $0.name, path: $0.path) }
+      animations.map { .animation(name: $0.name, path: $0.path) }
         + subdirectoryURLs.map { .animationList(.directory("\(directory)/\($0.lastPathComponent)")) }
         + customDemos
 
     case .custom(_, let items):
-      return items
+      items
     }
   }
 
@@ -171,15 +171,15 @@ extension AnimationListView.Item {
   var name: String {
     switch self {
     case .animation(let animationName, _), .remoteAnimations(let animationName, _):
-      return animationName
+      animationName
     case .animationList(let content):
-      return content.name
+      content.name
     case .controlsDemo:
-      return "Controls Demo"
+      "Controls Demo"
     case .swiftUIInteroperability:
-      return "SwiftUI Interoperability Demo"
+      "SwiftUI Interoperability Demo"
     case .lottieViewLayoutDemo:
-      return "LottieView Layout Demo"
+      "LottieView Layout Demo"
     }
   }
 }
@@ -204,9 +204,9 @@ extension AnimationListView.Content {
   var name: String {
     switch self {
     case .directory(let directory):
-      return directory.components(separatedBy: "/").last ?? directory
+      directory.components(separatedBy: "/").last ?? directory
     case .custom(let name, _):
-      return name
+      name
     }
   }
 }

@@ -213,8 +213,8 @@ open class AnimatedSwitch: AnimatedControl {
 
         // For the Main Thread rendering engine, we freeze the animation at the expected final progress
         // once the animation is complete. This isn't necessary on the Core Animation engine.
-        if finished, !(self.animationView.animationLayer is CoreAnimationLayer) {
-          self.animationView.currentProgress = finalProgress
+        if finished, !(animationView.animationLayer is CoreAnimationLayer) {
+          animationView.currentProgress = finalProgress
         }
       })
   }

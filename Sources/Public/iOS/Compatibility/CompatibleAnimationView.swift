@@ -77,15 +77,15 @@ public enum CompatibleRenderingEngineOption: Int {
   {
     switch configuration {
     case .shared:
-      return LottieConfiguration.shared
+      LottieConfiguration.shared
     case .defaultEngine:
-      return LottieConfiguration(renderingEngine: .coreAnimation)
+      LottieConfiguration(renderingEngine: .coreAnimation)
     case .automatic:
-      return LottieConfiguration(renderingEngine: .automatic)
+      LottieConfiguration(renderingEngine: .automatic)
     case .mainThread:
-      return LottieConfiguration(renderingEngine: .mainThread)
+      LottieConfiguration(renderingEngine: .mainThread)
     case .coreAnimation:
-      return LottieConfiguration(renderingEngine: .coreAnimation)
+      LottieConfiguration(renderingEngine: .coreAnimation)
     }
   }
 }
@@ -219,7 +219,8 @@ public final class CompatibleAnimationView: UIView {
     }
   }
 
-  @objc public override var contentMode: UIView.ContentMode {
+  @objc
+  public override var contentMode: UIView.ContentMode {
     set { animationView.contentMode = newValue }
     get { animationView.contentMode }
   }
@@ -285,15 +286,15 @@ public final class CompatibleAnimationView: UIView {
     get {
       switch animationView.backgroundBehavior {
       case .stop:
-        return .stop
+        .stop
       case .pause:
-        return .pause
+        .pause
       case .pauseAndRestore:
-        return .pauseAndRestore
+        .pauseAndRestore
       case .forceFinish:
-        return .forceFinish
+        .forceFinish
       case .continuePlaying:
-        return .continuePlaying
+        .continuePlaying
       }
     }
     set {
@@ -440,7 +441,7 @@ public final class CompatibleAnimationView: UIView {
   public func getColorValue(for keypath: CompatibleAnimationKeypath, atFrame: CGFloat) -> UIColor? {
     let value = animationView.getValue(for: keypath.animationKeypath, atFrame: atFrame)
     guard let colorValue = value as? LottieColor else {
-      return nil;
+      return nil
     }
 
     return UIColor(

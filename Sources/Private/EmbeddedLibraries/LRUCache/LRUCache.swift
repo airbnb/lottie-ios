@@ -216,7 +216,7 @@ extension LRUCache {
 
   // MARK: Private
 
-  // Remove container from list (must be called inside lock)
+  /// Remove container from list (must be called inside lock)
   private func remove(_ container: Container) {
     if head === container {
       head = container.next
@@ -229,7 +229,7 @@ extension LRUCache {
     container.next = nil
   }
 
-  // Append container to list (must be called inside lock)
+  /// Append container to list (must be called inside lock)
   private func append(_ container: Container) {
     assert(container.next == nil)
     if head == nil {
@@ -240,7 +240,7 @@ extension LRUCache {
     tail = container
   }
 
-  // Remove expired values (must be called outside lock)
+  /// Remove expired values (must be called outside lock)
   private func clean() {
     lock.lock()
     defer { lock.unlock() }

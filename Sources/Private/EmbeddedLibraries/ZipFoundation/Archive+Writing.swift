@@ -96,6 +96,7 @@ extension Archive {
         bufferSize: bufferSize,
         progress: progress,
         provider: provider)
+
     case .directory:
       provider = { _, _ in Data() }
       try addEntry(
@@ -108,6 +109,7 @@ extension Archive {
         bufferSize: bufferSize,
         progress: progress,
         provider: provider)
+
     case .symlink:
       provider = { _, _ -> Data in
         let linkDestination = try fileManager.destinationOfSymbolicLink(atPath: fileURL.path)

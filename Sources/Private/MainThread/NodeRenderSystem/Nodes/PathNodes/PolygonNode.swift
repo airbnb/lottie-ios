@@ -122,7 +122,7 @@ extension BezierPath {
     var vertices = [CurveVertex(point: point + position, inTangentRelative: .zero, outTangentRelative: .zero)]
 
     var previousPoint = point
-    currentAngle += anglePerPoint;
+    currentAngle += anglePerPoint
     for _ in 0..<Int(ceil(numberOfPoints)) {
       previousPoint = point
       point = CGPoint(
@@ -131,8 +131,8 @@ extension BezierPath {
 
       if outerRoundedness != 0 {
         let cp1Theta = (atan2(previousPoint.y, previousPoint.x) - CGFloat.pi / 2)
-        let cp1Dx = cos(cp1Theta);
-        let cp1Dy = sin(cp1Theta);
+        let cp1Dx = cos(cp1Theta)
+        let cp1Dy = sin(cp1Theta)
 
         let cp2Theta = (atan2(point.y, point.x) - CGFloat.pi / 2)
         let cp2Dx = cos(cp2Theta)
@@ -154,7 +154,7 @@ extension BezierPath {
       } else {
         vertices.append(CurveVertex(point: point + position, inTangentRelative: .zero, outTangentRelative: .zero))
       }
-      currentAngle += anglePerPoint;
+      currentAngle += anglePerPoint
     }
     let reverse = direction == .counterClockwise
     if reverse {

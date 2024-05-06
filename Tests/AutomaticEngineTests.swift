@@ -42,13 +42,13 @@ final class AutomaticEngineTests: XCTestCase {
       animationLayer.layoutIfNeeded()
       animationLayer.display()
 
-      let compatibilityReport: String
-      if compatibilityIssues.isEmpty {
-        compatibilityReport = "Supports Core Animation engine"
-      } else {
-        compatibilityReport = "Does not support Core Animation engine. Encountered compatibility issues:\n"
-          + compatibilityIssues.map { $0.description }.joined(separator: "\n")
-      }
+      let compatibilityReport =
+        if compatibilityIssues.isEmpty {
+          "Supports Core Animation engine"
+        } else {
+          "Does not support Core Animation engine. Encountered compatibility issues:\n"
+            + compatibilityIssues.map { $0.description }.joined(separator: "\n")
+        }
 
       assertSnapshot(
         matching: compatibilityReport,

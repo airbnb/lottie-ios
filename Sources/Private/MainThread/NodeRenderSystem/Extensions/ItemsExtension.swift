@@ -49,10 +49,12 @@ extension [ShapeItem] {
         switch star.starType {
         case .none:
           continue
+
         case .polygon:
           let node = PolygonNode(parentNode: nodeTree.rootNode, star: star)
           nodeTree.rootNode = node
           nodeTree.childrenNodes.append(node)
+
         case .star:
           let node = StarNode(parentNode: nodeTree.rootNode, star: star)
           nodeTree.rootNode = node

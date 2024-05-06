@@ -8,8 +8,8 @@ import XCTest
 
 // MARK: - DataURLTests
 
-// Tests are based on implementation found here
-// https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
+/// Tests are based on implementation found here
+/// https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
 final class DataURLTests: XCTestCase {
 
   let red5x5 =

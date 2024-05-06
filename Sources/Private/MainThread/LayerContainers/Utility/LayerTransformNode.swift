@@ -119,17 +119,17 @@ class LayerTransformNode: AnimatorNode {
   func rebuildOutputs(frame _: CGFloat) {
     opacity = Float(transformProperties.opacity.value.cgFloatValue) * 0.01
 
-    let position: CGPoint
-    if let point = transformProperties.position?.value.pointValue {
-      position = point
-    } else if
-      let xPos = transformProperties.positionX?.value.cgFloatValue,
-      let yPos = transformProperties.positionY?.value.cgFloatValue
-    {
-      position = CGPoint(x: xPos, y: yPos)
-    } else {
-      position = .zero
-    }
+    let position: CGPoint =
+      if let point = transformProperties.position?.value.pointValue {
+        point
+      } else if
+        let xPos = transformProperties.positionX?.value.cgFloatValue,
+        let yPos = transformProperties.positionY?.value.cgFloatValue
+      {
+        CGPoint(x: xPos, y: yPos)
+      } else {
+        .zero
+      }
 
     localTransform = CATransform3D.makeTransform(
       anchor: transformProperties.anchor.value.pointValue,
