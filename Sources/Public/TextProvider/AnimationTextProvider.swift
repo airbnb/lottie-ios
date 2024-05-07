@@ -62,22 +62,22 @@ public final class DictionaryTextProvider: AnimationKeypathTextProvider, LegacyA
 
   public func text(for keypath: AnimationKeypath, sourceText: String) -> String? {
     if let valueForFullKeypath = values[keypath.fullPath] {
-      return valueForFullKeypath
+      valueForFullKeypath
     }
 
     else if
       let lastKeypathComponent = keypath.keys.last,
       let valueForLastComponent = values[lastKeypathComponent]
     {
-      return valueForLastComponent
+      valueForLastComponent
     }
 
     else {
-      return sourceText
+      sourceText
     }
   }
 
-  // Never called directly by Lottie, but we continue to implement this conformance for backwards compatibility.
+  /// Never called directly by Lottie, but we continue to implement this conformance for backwards compatibility.
   public func textFor(keypathName: String, sourceText: String) -> String {
     values[keypathName] ?? sourceText
   }

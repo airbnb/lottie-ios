@@ -67,9 +67,9 @@ extension RenderingEngineOption: RawRepresentable, CustomStringConvertible {
   public var rawValue: String {
     switch self {
     case .automatic:
-      return "Automatic"
+      "Automatic"
     case .specific(let engine):
-      return engine.rawValue
+      engine.rawValue
     }
   }
 
@@ -101,9 +101,9 @@ extension RenderingEngine: RawRepresentable, CustomStringConvertible {
   public var rawValue: String {
     switch self {
     case .mainThread:
-      return "Main Thread"
+      "Main Thread"
     case .coreAnimation:
-      return "Core Animation"
+      "Core Animation"
     }
   }
 

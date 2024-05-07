@@ -38,35 +38,35 @@ extension ShapeType: ClassFamily {
   func getType() -> AnyObject.Type {
     switch self {
     case .ellipse:
-      return Ellipse.self
+      Ellipse.self
     case .fill:
-      return Fill.self
+      Fill.self
     case .gradientFill:
-      return GradientFill.self
+      GradientFill.self
     case .group:
-      return Group.self
+      Group.self
     case .gradientStroke:
-      return GradientStroke.self
+      GradientStroke.self
     case .merge:
-      return Merge.self
+      Merge.self
     case .rectangle:
-      return Rectangle.self
+      Rectangle.self
     case .repeater:
-      return Repeater.self
+      Repeater.self
     case .round:
-      return RoundedCorners.self
+      RoundedCorners.self
     case .shape:
-      return Shape.self
+      Shape.self
     case .star:
-      return Star.self
+      Star.self
     case .stroke:
-      return Stroke.self
+      Stroke.self
     case .trim:
-      return Trim.self
+      Trim.self
     case .transform:
-      return ShapeTransform.self
+      ShapeTransform.self
     default:
-      return ShapeItem.self
+      ShapeItem.self
     }
   }
 }

@@ -164,19 +164,19 @@ final class SnapshotTests: XCTestCase {
 
         animationView.setPlaybackMode(.paused(at: pauseState))
 
-        let pauseStateDescription: String
-        switch pauseState {
-        case .progress(let percent):
-          pauseStateDescription = "\(Int(percent * 100))%"
-        case .frame(let frame):
-          pauseStateDescription = "Frame \(Int(frame))"
-        case .time(let time):
-          pauseStateDescription = "Time \(time))"
-        case .marker(let markerName, position: _):
-          pauseStateDescription = markerName
-        case .currentFrame:
-          pauseStateDescription = "Current Frame"
-        }
+        let pauseStateDescription: String =
+          switch pauseState {
+          case .progress(let percent):
+            "\(Int(percent * 100))%"
+          case .frame(let frame):
+            "Frame \(Int(frame))"
+          case .time(let time):
+            "Time \(time))"
+          case .marker(let markerName, position: _):
+            markerName
+          case .currentFrame:
+            "Current Frame"
+          }
 
         assertSnapshot(
           matching: animationView,

@@ -9,13 +9,12 @@ on:
 jobs:
   build-package-no-visionOS:
     name: "Build Package"
-    runs-on: macos-13
+    runs-on: macos-14
     strategy:
       fail-fast: false
       matrix:
         xcode:
-        - '14.1' # Swift 5.7
-        - '14.3' # Swift 5.8
+        - '15.0.1' # Swift 5.9, but no visionOS support
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
@@ -88,7 +87,7 @@ jobs:
 
   build-xcframework-minimum-supported-version:
     name: "Build XCFramework"
-    runs-on: macos-13
+    runs-on: macos-14
     strategy:
       matrix:
         xcode:
@@ -96,36 +95,9 @@ jobs:
           # The Xcode version we use for this job is that oldest Xcode version that
           # will be able to use these XCFrameworks and the lottie-spm package.
           # This should be the minimum Xcode version permitted by the App Store.
-          # As of April 2023, this is Xcode 14.1: https://developer.apple.com/news/?id=jd9wcyov
-          #  - TODO: Once this minimum supported Xcode version is 15.0 or later,
-          #    we can use Xcode 15.2 here and remove the `build-xcframework-with-visionOS-support` job.
-          #    Testing in https://github.com/airbnb/lottie-spm/pull/12 shows that Xcode 15.0 can
-          #    use an XCFramework built by Xcode 15.2.
-          - '14.1' # Swift 5.7.1
-    steps:
-      - uses: actions/checkout@v2
-      - uses: apple-actions/import-codesign-certs@v2
-        continue-on-error: true
-        with:
-          p12-file-base64: ${{ secrets.SIGNING_CERTIFICATE_BASE_64 }}
-          p12-password: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
-      - uses: ./.github/actions/setup
-        with:
-          xcode: ${{ matrix.xcode }}
-      - name: Build XCFramework
-        run: SKIP_VISION_OS=true bundle exec rake build:xcframework[Lottie-Xcode-${{ matrix.xcode }}]
-      - name: Upload XCFramework
-        uses: actions/upload-artifact@v2
-        with:
-          name: BuildProducts
-          path: .build/archives
-
-  build-xcframework-with-visionOS-support:
-    name: "Build XCFramework"
-    runs-on: macos-14
-    strategy:
-      matrix:
-        xcode:
+          # As of April 2024, this is Xcode 15.0: https://developer.apple.com/news/?id=fxu2qp7b
+          #  - However, testing in https://github.com/airbnb/lottie-spm/pull/12 shows that
+          #    Xcode 15.0 can use an XCFramework built by Xcode 15.2.
           - '15.2' # Swift 5.9, first Xcode version with visionOS support.
     steps:
       - uses: actions/checkout@v2

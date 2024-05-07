@@ -122,6 +122,7 @@ extension LottieAnimationView {
       case .success(let dotLottieFile):
         self.loadAnimation(animationId, from: dotLottieFile)
         completion?(self, nil)
+
       case .failure(let error):
         completion?(self, error)
       }
@@ -147,6 +148,7 @@ extension LottieAnimationView {
       case .success(let dotLottieFile):
         self.loadAnimation(animationId, from: dotLottieFile)
         completion?(self, nil)
+
       case .failure(let error):
         completion?(self, error)
       }
@@ -176,6 +178,7 @@ extension LottieAnimationView {
         case .success(let lottie):
           self.loadAnimation(animationId, from: lottie)
           completion?(self, nil)
+
         case .failure(let error):
           completion?(self, error)
         }
@@ -203,6 +206,7 @@ extension LottieAnimationView {
       case .success(let dotLottieFile):
         self.loadAnimation(animationId, from: dotLottieFile)
         completion?(self, nil)
+
       case .failure(let error):
         completion?(self, error)
       }

@@ -118,19 +118,19 @@ final class ShapeItemLayer: BaseAnimationLayer {
     // We have to build a different layer hierarchy depending on if
     // we're rendering a gradient (a `CAGradientLayer` masked by a `CAShapeLayer`)
     // or a solid shape (a simple `CAShapeLayer`).
-    let fillLayerConfiguration: FillLayerConfiguration
-    if let gradientFill = otherItems.first(GradientFill.self) {
-      fillLayerConfiguration = setupGradientFillLayerHierarchy(for: gradientFill)
-    } else {
-      fillLayerConfiguration = setupSolidFillLayerHierarchy()
-    }
+    let fillLayerConfiguration: FillLayerConfiguration =
+      if let gradientFill = otherItems.first(GradientFill.self) {
+        setupGradientFillLayerHierarchy(for: gradientFill)
+      } else {
+        setupSolidFillLayerHierarchy()
+      }
 
-    let gradientStrokeConfiguration: GradientLayers?
-    if let gradientStroke = otherItems.first(GradientStroke.self) {
-      gradientStrokeConfiguration = setupGradientStrokeLayerHierarchy(for: gradientStroke)
-    } else {
-      gradientStrokeConfiguration = nil
-    }
+    let gradientStrokeConfiguration: GradientLayers? =
+      if let gradientStroke = otherItems.first(GradientStroke.self) {
+        setupGradientStrokeLayerHierarchy(for: gradientStroke)
+      } else {
+        nil
+      }
 
     sublayerConfiguration = (fillLayerConfiguration, gradientStrokeConfiguration)
   }

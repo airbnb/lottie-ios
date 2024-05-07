@@ -41,19 +41,19 @@ extension CGFloat {
       t = 1
     } else {
       // Calculate t
-      let a = -P0.x + 3 * P1.x - 3 * P2.x + P3.x;
-      let b = 3 * P0.x - 6 * P1.x + 3 * P2.x;
-      let c = -3 * P0.x + 3 * P1.x;
-      let d = P0.x - self;
-      let tTemp = CGFloat.SolveCubic(a, b, c, d);
+      let a = -P0.x + 3 * P1.x - 3 * P2.x + P3.x
+      let b = 3 * P0.x - 6 * P1.x + 3 * P2.x
+      let c = -3 * P0.x + 3 * P1.x
+      let d = P0.x - self
+      let tTemp = CGFloat.SolveCubic(a, b, c, d)
       if tTemp == -1 {
-        return -1;
+        return -1
       }
       t = tTemp
     }
 
     // Calculate y from t
-    return (1 - t).cubed * P0.y + 3 * t * (1 - t).squared * P1.y + 3 * t.squared * (1 - t) * P2.y + t.cubed * P3.y;
+    return (1 - t).cubed * P0.y + 3 * t * (1 - t).squared * P1.y + 3 * t.squared * (1 - t) * P2.y + t.cubed * P3.y
   }
 
   func cubicBezier(_ t: CGFloat, _ c1: CGFloat, _ c2: CGFloat, _ end: CGFloat) -> CGFloat {
@@ -66,23 +66,23 @@ extension CGFloat {
     return self * ttt_
       + 3.0 * c1 * tt_ * t
       + 3.0 * c2 * t_ * tt
-      + end * ttt;
+      + end * ttt
   }
 
   // MARK: Fileprivate
 
   fileprivate static func SolveQuadratic(_ a: CGFloat, _ b: CGFloat, _ c: CGFloat) -> CGFloat {
-    var result = (-b + sqrt(b.squared - 4 * a * c)) / (2 * a);
+    var result = (-b + sqrt(b.squared - 4 * a * c)) / (2 * a)
     guard !result.isInRangeOrEqual(0, 1) else {
       return result
     }
 
-    result = (-b - sqrt(b.squared - 4 * a * c)) / (2 * a);
+    result = (-b - sqrt(b.squared - 4 * a * c)) / (2 * a)
     guard !result.isInRangeOrEqual(0, 1) else {
       return result
     }
 
-    return -1;
+    return -1
   }
 
   fileprivate static func SolveCubic(_ a: CGFloat, _ b: CGFloat, _ c: CGFloat, _ d: CGFloat) -> CGFloat {
@@ -110,43 +110,43 @@ extension CGFloat {
       var t = r - sqrt(disc)
       t = (t < 0) ? -((-t).cubicRoot) : t.cubicRoot
 
-      let result = -term1 + s + t;
+      let result = -term1 + s + t
       if result.isInRangeOrEqual(0, 1) {
         return result
       }
     } else if disc == 0 {
-      let r13 = (r < 0) ? -((-r).cubicRoot) : r.cubicRoot;
+      let r13 = (r < 0) ? -((-r).cubicRoot) : r.cubicRoot
 
-      var result = -term1 + 2.0 * r13;
+      var result = -term1 + 2.0 * r13
       if result.isInRangeOrEqual(0, 1) {
         return result
       }
 
-      result = -(r13 + term1);
+      result = -(r13 + term1)
       if result.isInRangeOrEqual(0, 1) {
         return result
       }
 
     } else {
-      q = -q;
-      var dum1 = q * q * q;
-      dum1 = acos(r / sqrt(dum1));
-      let r13 = 2.0 * sqrt(q);
+      q = -q
+      var dum1 = q * q * q
+      dum1 = acos(r / sqrt(dum1))
+      let r13 = 2.0 * sqrt(q)
 
-      var result = -term1 + r13 * cos(dum1 / 3.0);
+      var result = -term1 + r13 * cos(dum1 / 3.0)
       if result.isInRangeOrEqual(0, 1) {
         return result
       }
-      result = -term1 + r13 * cos((dum1 + 2.0 * .pi) / 3.0);
+      result = -term1 + r13 * cos((dum1 + 2.0 * .pi) / 3.0)
       if result.isInRangeOrEqual(0, 1) {
         return result
       }
-      result = -term1 + r13 * cos((dum1 + 4.0 * .pi) / 3.0);
+      result = -term1 + r13 * cos((dum1 + 4.0 * .pi) / 3.0)
       if result.isInRangeOrEqual(0, 1) {
         return result
       }
     }
 
-    return -1;
+    return -1
   }
 }

@@ -62,6 +62,7 @@ extension Archive {
         file: archiveFile,
         endOfCentralDirectoryRecord: eocdRecord,
         zip64EndOfCentralDirectory: zip64EOCD)
+
     case .create:
       let endOfCentralDirectoryRecord = EndOfCentralDirectoryRecord(
         numberOfDisk: 0,
@@ -76,6 +77,7 @@ extension Archive {
         try endOfCentralDirectoryRecord.data.write(to: url, options: .withoutOverwriting)
       } catch { return nil }
       fallthrough
+
     case .update:
       let fileSystemRepresentation = fileManager.fileSystemRepresentation(withPath: url.path)
       guard
@@ -96,12 +98,12 @@ extension Archive {
   static func makeBackingConfiguration(for data: Data, mode: AccessMode)
     -> BackingConfiguration?
   {
-    let posixMode: String
-    switch mode {
-    case .read: posixMode = "rb"
-    case .create: posixMode = "wb+"
-    case .update: posixMode = "rb+"
-    }
+    let posixMode =
+      switch mode {
+      case .read: "rb"
+      case .create: "wb+"
+      case .update: "rb+"
+      }
     let memoryFile = MemoryFile(data: data)
     guard let archiveFile = memoryFile.open(mode: posixMode) else { return nil }
 
@@ -116,6 +118,7 @@ extension Archive {
         endOfCentralDirectoryRecord: eocdRecord,
         zip64EndOfCentralDirectory: zip64EOCD,
         memoryFile: memoryFile)
+
     case .create:
       let endOfCentralDirectoryRecord = EndOfCentralDirectoryRecord(
         numberOfDisk: 0,
@@ -130,6 +133,7 @@ extension Archive {
         fwrite(buffer.baseAddress, buffer.count, 1, archiveFile) // Errors handled during read
       }
       fallthrough
+
     case .update:
       guard let (eocdRecord, zip64EOCD) = Archive.scanForEndOfCentralDirectoryRecord(in: archiveFile) else {
         return nil

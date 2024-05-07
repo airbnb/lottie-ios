@@ -249,7 +249,7 @@ def xcodebuild(command)
 end
 
 # Runs the given code block, unless `SKIP_VISION_OS=true`.
-# TODO: Remove this once CI only uses Xcode 15.2+.
+# TODO: Remove this once Lottie only supports Xcode 15.2+.
 def ifVisionOSEnabled
   if ENV["SKIP_VISION_OS"] == "true"
     puts "Skipping visionOS build"

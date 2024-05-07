@@ -16,26 +16,26 @@ extension LottieColor: Codable {
   public init(from decoder: Decoder) throws {
     var container = try decoder.unkeyedContainer()
 
-    var r1: Double
-    if !container.isAtEnd {
-      r1 = try container.decode(Double.self)
-    } else {
-      r1 = 0
-    }
+    var r1: Double =
+      if !container.isAtEnd {
+        try container.decode(Double.self)
+      } else {
+        0
+      }
 
-    var g1: Double
-    if !container.isAtEnd {
-      g1 = try container.decode(Double.self)
-    } else {
-      g1 = 0
-    }
+    var g1: Double =
+      if !container.isAtEnd {
+        try container.decode(Double.self)
+      } else {
+        0
+      }
 
-    var b1: Double
-    if !container.isAtEnd {
-      b1 = try container.decode(Double.self)
-    } else {
-      b1 = 0
-    }
+    var b1: Double =
+      if !container.isAtEnd {
+        try container.decode(Double.self)
+      } else {
+        0
+      }
 
     if r1 > 1, g1 > 1, b1 > 1 {
       r1 = r1 / 255

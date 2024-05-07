@@ -40,8 +40,8 @@ final class ValueProviderStore {
     valueProviders.append((keypath: keypath, valueProvider: valueProvider))
   }
 
-  // Retrieves the custom value keyframes for the given property,
-  // if an `AnyValueProvider` was registered for the given keypath.
+  /// Retrieves the custom value keyframes for the given property,
+  /// if an `AnyValueProvider` was registered for the given keypath.
   func customKeyframes<Value>(
     of customizableProperty: CustomizableProperty<Value>,
     for keypath: AnimationKeypath,
@@ -115,9 +115,9 @@ extension AnyValueProviderStorage {
   var isSupportedByCoreAnimationRenderingEngine: Bool {
     switch self {
     case .singleValue, .keyframes:
-      return true
+      true
     case .closure:
-      return false
+      false
     }
   }
 }

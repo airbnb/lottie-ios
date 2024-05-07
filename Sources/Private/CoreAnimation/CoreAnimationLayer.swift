@@ -308,8 +308,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     add(timedProgressAnimation, forKey: #keyPath(animationProgress))
   }
 
-  // Removes the current `CAAnimation`s, and rebuilds new animations
-  // using the same configuration as the previous animations.
+  /// Removes the current `CAAnimation`s, and rebuilds new animations
+  /// using the same configuration as the previous animations.
   private func rebuildCurrentAnimation() {
     guard
       // Don't replace any pending animations that are queued to begin
@@ -343,15 +343,15 @@ extension CoreAnimationLayer: RootAnimationLayer {
   var isAnimationPlaying: Bool? {
     switch pendingAnimationConfiguration?.playbackState {
     case .playing:
-      return true
+      true
     case .paused:
-      return false
+      false
     case nil:
       switch playbackState {
       case .playing:
-        return animation(forKey: #keyPath(animationProgress)) != nil
+        animation(forKey: #keyPath(animationProgress)) != nil
       case nil, .paused:
-        return false
+        false
       }
     }
   }

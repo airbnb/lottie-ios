@@ -11,26 +11,26 @@ extension LineJoin {
   var cgLineJoin: CGLineJoin {
     switch self {
     case .bevel:
-      return .bevel
+      .bevel
     case .none:
-      return .miter
+      .miter
     case .miter:
-      return .miter
+      .miter
     case .round:
-      return .round
+      .round
     }
   }
 
   var caLineJoin: CAShapeLayerLineJoin {
     switch self {
     case .none:
-      return CAShapeLayerLineJoin.miter
+      CAShapeLayerLineJoin.miter
     case .miter:
-      return CAShapeLayerLineJoin.miter
+      CAShapeLayerLineJoin.miter
     case .round:
-      return CAShapeLayerLineJoin.round
+      CAShapeLayerLineJoin.round
     case .bevel:
-      return CAShapeLayerLineJoin.bevel
+      CAShapeLayerLineJoin.bevel
     }
   }
 }
@@ -39,26 +39,26 @@ extension LineCap {
   var cgLineCap: CGLineCap {
     switch self {
     case .none:
-      return .butt
+      .butt
     case .butt:
-      return .butt
+      .butt
     case .round:
-      return .round
+      .round
     case .square:
-      return .square
+      .square
     }
   }
 
   var caLineCap: CAShapeLayerLineCap {
     switch self {
     case .none:
-      return CAShapeLayerLineCap.butt
+      CAShapeLayerLineCap.butt
     case .butt:
-      return CAShapeLayerLineCap.butt
+      CAShapeLayerLineCap.butt
     case .round:
-      return CAShapeLayerLineCap.round
+      CAShapeLayerLineCap.round
     case .square:
-      return CAShapeLayerLineCap.square
+      CAShapeLayerLineCap.square
     }
   }
 }

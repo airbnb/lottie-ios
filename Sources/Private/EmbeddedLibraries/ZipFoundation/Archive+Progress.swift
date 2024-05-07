@@ -32,9 +32,9 @@ extension Archive {
   func totalUnitCountForReading(_ entry: Entry) -> Int64 {
     switch entry.type {
     case .file, .symlink:
-      return Int64(entry.uncompressedSize)
+      Int64(entry.uncompressedSize)
     case .directory:
-      return defaultDirectoryUnitCount
+      defaultDirectoryUnitCount
     }
   }
 

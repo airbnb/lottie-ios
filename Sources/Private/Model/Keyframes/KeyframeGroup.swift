@@ -151,12 +151,15 @@ extension KeyframeGroup: DictionaryInitializable where T: AnyInitializable {
     {
       keyframes = [Keyframe<T>(value)]
     } else {
-      var frameDictionaries: [[String: Any]]
-      if let singleFrameDictionary = dictionary[KeyframeWrapperKey.keyframeData.rawValue] as? [String: Any] {
-        frameDictionaries = [singleFrameDictionary]
-      } else {
-        frameDictionaries = try dictionary.value(for: KeyframeWrapperKey.keyframeData)
-      }
+      let frameDictionaries: [[String: Any]] =
+        if
+          let singleFrameDictionary =
+          dictionary[KeyframeWrapperKey.keyframeData.rawValue] as? [String: Any]
+        {
+          [singleFrameDictionary]
+        } else {
+          try dictionary.value(for: KeyframeWrapperKey.keyframeData)
+        }
       var previousKeyframeData: KeyframeData<T>?
       for frameDictionary in frameDictionaries {
         let data = try KeyframeData<T>(dictionary: frameDictionary)

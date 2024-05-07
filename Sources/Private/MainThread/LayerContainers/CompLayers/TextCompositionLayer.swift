@@ -16,22 +16,22 @@ extension TextJustification {
   var textAlignment: NSTextAlignment {
     switch self {
     case .left:
-      return .left
+      .left
     case .right:
-      return .right
+      .right
     case .center:
-      return .center
+      .center
     }
   }
 
   var caTextAlignement: CATextLayerAlignmentMode {
     switch self {
     case .left:
-      return .left
+      .left
     case .right:
-      return .right
+      .right
     case .center:
-      return .center
+      .center
     }
   }
 }
@@ -121,14 +121,14 @@ final class TextCompositionLayer: CompositionLayer {
     // Prior to Lottie 4.3.0 the Main Thread rendering engine always just used `LegacyAnimationTextProvider`
     // and called it with the `keypathName` (only the last path component of the full keypath).
     // Starting in Lottie 4.3.0 we use `AnimationKeypathTextProvider` instead if implemented.
-    let textString: String
-    if let keypathTextValue = textProvider.text(for: fullAnimationKeypath, sourceText: text.text) {
-      textString = keypathTextValue
-    } else if let legacyTextProvider = textProvider as? LegacyAnimationTextProvider {
-      textString = legacyTextProvider.textFor(keypathName: keypathName, sourceText: text.text)
-    } else {
-      textString = text.text
-    }
+    let textString: String =
+      if let keypathTextValue = textProvider.text(for: fullAnimationKeypath, sourceText: text.text) {
+        keypathTextValue
+      } else if let legacyTextProvider = textProvider as? LegacyAnimationTextProvider {
+        legacyTextProvider.textFor(keypathName: keypathName, sourceText: text.text)
+      } else {
+        text.text
+      }
 
     let strokeColor = rootNode?.textOutputNode.strokeColor ?? text.strokeColorData?.cgColorValue
     let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)

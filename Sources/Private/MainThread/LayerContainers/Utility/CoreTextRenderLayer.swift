@@ -137,19 +137,19 @@ final class CoreTextRenderLayer: CALayer {
 
     let drawingPath = CGPath(rect: drawingRect, transform: nil)
 
-    let fillFrame: CTFrame?
-    if let setter = fillFrameSetter {
-      fillFrame = CTFramesetterCreateFrame(setter, CFRangeMake(0, attributedString.length), drawingPath, nil)
-    } else {
-      fillFrame = nil
-    }
+    let fillFrame: CTFrame? =
+      if let setter = fillFrameSetter {
+        CTFramesetterCreateFrame(setter, CFRangeMake(0, attributedString.length), drawingPath, nil)
+      } else {
+        nil
+      }
 
-    let strokeFrame: CTFrame?
-    if let setter = strokeFrameSetter {
-      strokeFrame = CTFramesetterCreateFrame(setter, CFRangeMake(0, attributedString.length), drawingPath, nil)
-    } else {
-      strokeFrame = nil
-    }
+    let strokeFrame: CTFrame? =
+      if let setter = strokeFrameSetter {
+        CTFramesetterCreateFrame(setter, CFRangeMake(0, attributedString.length), drawingPath, nil)
+      } else {
+        nil
+      }
 
     // This fixes a vertical padding issue that arises when drawing some fonts.
     // For some reason some fonts, such as Helvetica draw with and ascender that is greater than the one reported by CTFontGetAscender.
@@ -183,7 +183,7 @@ final class CoreTextRenderLayer: CALayer {
   private var strokeFrameSetter: CTFramesetter?
   private var needsContentUpdate = false
 
-  // Draws Debug colors for the font alignment.
+  /// Draws Debug colors for the font alignment.
   private func drawDebug(_ ctx: CGContext) {
     if let font {
       let ascent = CTFontGetAscent(font)

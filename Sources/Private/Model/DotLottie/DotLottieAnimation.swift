@@ -29,9 +29,9 @@ struct DotLottieAnimation: Codable {
   var loopMode: LottieLoopMode {
     switch mode {
     case .bounce:
-      return .autoReverse
+      .autoReverse
     case .normal, nil:
-      return (loop ?? false) ? .loop : .playOnce
+      (loop ?? false) ? .loop : .playOnce
     }
   }
 

@@ -10,22 +10,22 @@ extension BlendMode {
   /// Supported compositing filters are defined here: https://developer.apple.com/library/archive/documentation/GraphicsImaging/Reference/CoreImageFilterReference/index.html#//apple_ref/doc/uid/TP30000136-SW71
   var filterName: String? {
     switch self {
-    case .normal: return nil
-    case .multiply: return "multiplyBlendMode"
-    case .screen: return "screenBlendMode"
-    case .overlay: return "overlayBlendMode"
-    case .darken: return "darkenBlendMode"
-    case .lighten: return "lightenBlendMode"
-    case .colorDodge: return "colorDodgeBlendMode"
-    case .colorBurn: return "colorBurnBlendMode"
-    case .hardLight: return "hardLightBlendMode"
-    case .softLight: return "softLightBlendMode"
-    case .difference: return "differenceBlendMode"
-    case .exclusion: return "exclusionBlendMode"
-    case .hue: return "hueBlendMode"
-    case .saturation: return "saturationBlendMode"
-    case .color: return "colorBlendMode"
-    case .luminosity: return "luminosityBlendMode"
+    case .normal: nil
+    case .multiply: "multiplyBlendMode"
+    case .screen: "screenBlendMode"
+    case .overlay: "overlayBlendMode"
+    case .darken: "darkenBlendMode"
+    case .lighten: "lightenBlendMode"
+    case .colorDodge: "colorDodgeBlendMode"
+    case .colorBurn: "colorBurnBlendMode"
+    case .hardLight: "hardLightBlendMode"
+    case .softLight: "softLightBlendMode"
+    case .difference: "differenceBlendMode"
+    case .exclusion: "exclusionBlendMode"
+    case .hue: "hueBlendMode"
+    case .saturation: "saturationBlendMode"
+    case .color: "colorBlendMode"
+    case .luminosity: "luminosityBlendMode"
     }
   }
 }

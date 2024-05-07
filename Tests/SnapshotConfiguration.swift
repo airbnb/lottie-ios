@@ -235,9 +235,9 @@ extension SnapshotConfiguration {
   /// The `SnapshotConfiguration` to use for the given sample JSON file name
   static func forSample(named sampleName: String) -> SnapshotConfiguration {
     if let customConfiguration = customMapping[sampleName] {
-      return customConfiguration
+      customConfiguration
     } else {
-      return .default
+      .default
     }
   }
 
@@ -333,11 +333,11 @@ extension SnapshotConfiguration {
   func shouldSnapshot(using configuration: LottieConfiguration) -> Bool {
     switch configuration.renderingEngine {
     case .automatic:
-      return testWithAutomaticEngine
+      testWithAutomaticEngine
     case .specific(.coreAnimation):
-      return !excludeCoreAnimationRenderingEngine
+      !excludeCoreAnimationRenderingEngine
     case .specific(.mainThread):
-      return true
+      true
     }
   }
 }

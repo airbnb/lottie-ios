@@ -11,19 +11,19 @@ extension MaskMode {
   var usableMode: MaskMode {
     switch self {
     case .add:
-      return .add
+      .add
     case .subtract:
-      return .subtract
+      .subtract
     case .intersect:
-      return .intersect
+      .intersect
     case .lighten:
-      return .add
+      .add
     case .darken:
-      return .darken
+      .darken
     case .difference:
-      return .intersect
+      .intersect
     case .none:
-      return .none
+      .none
     }
   }
 }

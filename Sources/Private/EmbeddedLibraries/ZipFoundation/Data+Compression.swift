@@ -169,6 +169,7 @@ extension Data {
         if operation == COMPRESSION_STREAM_DECODE, !skipCRC32 { crc32 = outputData.crc32(checksum: crc32) }
         stream.dst_ptr = destPointer
         stream.dst_size = bufferSize
+
       default: throw CompressionError.corruptedData
       }
     } while status == COMPRESSION_STATUS_OK
