@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'lottie-ios'
+  s.name             = 'tmg-lottie-ios'
   s.version          = '4.4.3'
   s.summary          = 'A library to render native animations from bodymovin json'
 
@@ -20,7 +20,7 @@ Lottie enables designers to create and ship beautiful animations without an engi
   s.homepage         = 'https://github.com/airbnb/lottie-ios'
   s.license          = { :type => 'Apache', :file => 'LICENSE' }
   s.author           = { 'Brandon Withrow' => 'buba447@gmail.com', 'Cal Stephens' => 'cal.stephens@airbnb.com' }
-  s.source           = { :git => 'https://github.com/airbnb/lottie-ios.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/themeetgroup/lottie-ios.git', :tag => s.version.to_s }
 
   s.swift_version = '5.9'
   s.ios.deployment_target = '13.0'
@@ -40,5 +40,6 @@ Lottie enables designers to create and ship beautiful animations without an engi
   s.tvos.frameworks = ['UIKit', 'CoreGraphics', 'QuartzCore']
   s.osx.frameworks = ['AppKit', 'CoreGraphics', 'QuartzCore']
   s.weak_frameworks = ['SwiftUI', 'Combine']
-  s.module_name = 'Lottie'
+  s.module_name = 'TMGLottie'
+  s.header_dir = 'TMGLottie'
 end
