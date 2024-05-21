@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 2/4/19.
 //
 
+#if canImport(QuartzCore)
 import CoreGraphics
 import Foundation
 
@@ -81,3 +82,4 @@ extension PointValueProvider: Equatable {
     lhs.identity == rhs.identity
   }
 }
+#endif

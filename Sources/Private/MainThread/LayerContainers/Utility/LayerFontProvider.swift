@@ -6,6 +6,7 @@
 //  Copyright © 2020 YurtvilleProds. All rights reserved.
 //
 
+#if canImport(QuartzCore)
 /// Connects a LottieFontProvider to a group of text layers
 final class LayerFontProvider {
 
@@ -37,3 +38,4 @@ final class LayerFontProvider {
     }
   }
 }
+#endif

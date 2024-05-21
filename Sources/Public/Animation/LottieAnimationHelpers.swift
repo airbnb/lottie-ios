@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 2/5/19.
 //
 
+#if canImport(QuartzCore)
 import CoreGraphics
 import Foundation
 
@@ -318,3 +319,4 @@ extension LottieAnimation {
 ///
 // swiftlint:disable:next no_unchecked_sendable
 extension Foundation.Bundle: @unchecked Sendable { }
+#endif

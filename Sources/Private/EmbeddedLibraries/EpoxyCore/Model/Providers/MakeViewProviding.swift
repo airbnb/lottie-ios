@@ -1,6 +1,7 @@
 // Created by eric_horacek on 12/1/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 // MARK: - MakeViewProviding
 
 /// The capability of constructing a `UIView`.
@@ -58,3 +59,4 @@ extension ViewEpoxyModeled where Self: MakeViewProviding {
       updateStrategy: .replace)
   }
 }
+#endif

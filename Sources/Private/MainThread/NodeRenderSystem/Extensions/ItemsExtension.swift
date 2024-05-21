@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/18/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - NodeTree
 
 final class NodeTree {
@@ -105,3 +106,4 @@ extension [ShapeItem] {
     return nodeTree
   }
 }
+#endif

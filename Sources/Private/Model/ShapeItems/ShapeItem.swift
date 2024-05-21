@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - ShapeType
 
 enum ShapeType: String, Codable, Sendable {
@@ -169,3 +170,4 @@ extension [ShapeItem] {
 /// All `ShapeItem` subclasses are immutable `Sendable` values.
 // swiftlint:disable:next no_unchecked_sendable
 extension ShapeItem: @unchecked Sendable { }
+#endif

@@ -1,7 +1,7 @@
 // Created by Bryn Bodayle on 1/20/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
-#if canImport(SwiftUI)
+#if canImport(SwiftUI) && canImport(QuartzCore)
 import SwiftUI
 
 // MARK: - LottieView

@@ -5,6 +5,7 @@
 // Created by Evandro Harrison Hoffmann on 28/06/2021.
 //
 
+#if canImport(QuartzCore)
 import Foundation
 
 // MARK: - DotLottieAnimation
@@ -55,3 +56,4 @@ enum DotLottieAnimationMode: String, Codable {
   case normal
   case bounce
 }
+#endif

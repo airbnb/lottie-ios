@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - GradientFillLayer
@@ -244,3 +245,4 @@ final class GradientFillRenderer: PassThroughOutputNode, Renderable {
   private let maskLayer = CAShapeLayer()
 
 }
+#endif

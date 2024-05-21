@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 /// The base layer that holds Shapes and Shape Renderers
@@ -76,3 +77,4 @@ class ShapeContainerLayer: CALayer {
   }
 
 }
+#endif

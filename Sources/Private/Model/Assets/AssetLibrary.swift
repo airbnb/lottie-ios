@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/9/19.
 //
 
+#if canImport(QuartzCore)
 final class AssetLibrary: Codable, AnyInitializable, Sendable {
 
   // MARK: Lifecycle
@@ -73,3 +74,4 @@ final class AssetLibrary: Codable, AnyInitializable, Sendable {
     try container.encode(contentsOf: Array(assets.values))
   }
 }
+#endif

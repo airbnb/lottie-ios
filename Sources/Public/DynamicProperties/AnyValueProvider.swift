@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
+#if canImport(QuartzCore)
 import Foundation
 
 // MARK: - AnyValueProvider
@@ -129,3 +130,4 @@ public enum AnyValueProviderStorage {
     }
   }
 }
+#endif

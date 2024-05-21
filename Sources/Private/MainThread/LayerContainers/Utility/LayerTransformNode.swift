@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 2/4/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - LayerTransformProperties
@@ -148,3 +149,4 @@ class LayerTransformNode: AnimatorNode {
     }
   }
 }
+#endif

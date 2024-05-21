@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/7/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - LayerType + ClassFamily
 
 /// Used for mapping a heterogeneous list to classes for parsing.
@@ -264,3 +265,4 @@ extension [LayerModel] {
 /// All `LayerModel` subclasses are immutable `Sendable` values.
 // swiftlint:disable:next no_unchecked_sendable
 extension LayerModel: @unchecked Sendable { }
+#endif

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - TrimPathProperties
@@ -278,3 +279,4 @@ final class TrimPathNode: AnimatorNode {
 
   fileprivate let upstreamPaths: [PathOutputNode]
 }
+#endif

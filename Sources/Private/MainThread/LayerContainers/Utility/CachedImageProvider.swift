@@ -1,6 +1,7 @@
 // Created by Jianjun Wu on 2022/5/12.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - CachedImageProvider
@@ -56,3 +57,4 @@ extension AnimationImageProvider {
     return CachedImageProvider(imageProvider: self)
   }
 }
+#endif

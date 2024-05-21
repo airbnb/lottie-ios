@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if canImport(QuartzCore)
 import QuartzCore
 
 extension CGFloat {
@@ -150,3 +151,4 @@ extension CGFloat {
     return -1
   }
 }
+#endif

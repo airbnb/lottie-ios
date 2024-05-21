@@ -7,6 +7,7 @@
 
 import CoreGraphics
 import Foundation
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - LottieVector1D + Codable
@@ -361,3 +362,4 @@ extension CATransform3D {
   }
 
 }
+#endif

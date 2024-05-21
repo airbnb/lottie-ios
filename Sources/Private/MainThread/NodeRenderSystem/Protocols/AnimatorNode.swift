@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/15/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - NodeOutput
@@ -195,3 +196,4 @@ extension AnimatorNode {
   }
 
 }
+#endif

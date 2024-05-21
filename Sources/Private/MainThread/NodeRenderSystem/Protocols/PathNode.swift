@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/17/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - PathNode
 
 protocol PathNode {
@@ -18,3 +19,4 @@ extension PathNode where Self: AnimatorNode {
   }
 
 }
+#endif

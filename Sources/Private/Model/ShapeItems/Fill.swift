@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - FillRule
 
 enum FillRule: Int, Codable {
@@ -70,3 +71,4 @@ final class Fill: ShapeItem {
     case fillRule = "r"
   }
 }
+#endif

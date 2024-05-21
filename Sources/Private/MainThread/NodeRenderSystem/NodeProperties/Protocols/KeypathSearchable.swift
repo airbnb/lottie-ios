@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 2/4/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 /// Protocol that provides keypath search functionality. Returns all node properties associated with a keypath.
@@ -21,3 +22,4 @@ protocol KeypathSearchable {
 
   var keypathLayer: CALayer? { get }
 }
+#endif

@@ -5,7 +5,7 @@
 //  Created by Brandon Withrow on 2/6/19.
 //
 
-#if canImport(UIKit)
+#if canImport(UIKit) && canImport(QuartzCore)
 import UIKit
 
 /// The base view for `LottieAnimationView` on iOS, tvOS, watchOS, and macCatalyst.

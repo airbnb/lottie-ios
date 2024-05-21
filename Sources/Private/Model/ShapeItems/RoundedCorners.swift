@@ -5,6 +5,7 @@
 //  Created by Duolingo on 10/31/22.
 //
 
+#if canImport(QuartzCore)
 // MARK: - RoundedCorners
 
 final class RoundedCorners: ShapeItem {
@@ -43,3 +44,4 @@ final class RoundedCorners: ShapeItem {
     case radius = "r"
   }
 }
+#endif

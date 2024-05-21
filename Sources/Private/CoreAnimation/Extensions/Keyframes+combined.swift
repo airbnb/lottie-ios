@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 1/28/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 // MARK: - Keyframes
 
 enum Keyframes {
@@ -326,3 +327,4 @@ extension KeyframeGroup {
     }
   }
 }
+#endif

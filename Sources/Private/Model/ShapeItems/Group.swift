@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 /// An item that define a a group of shape items
 final class Group: ShapeItem {
 
@@ -44,3 +45,4 @@ final class Group: ShapeItem {
     case items = "it"
   }
 }
+#endif

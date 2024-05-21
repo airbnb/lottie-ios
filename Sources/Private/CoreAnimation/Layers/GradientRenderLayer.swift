@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 1/10/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - GradientRenderLayer
@@ -95,3 +96,4 @@ extension CALayer {
   ///    `CGContext.drawLinearGradient` with `[.drawsAfterEndLocation, .drawsBeforeStartLocation]` etc.
   static let veryLargeLayerPadding: CGFloat = 10_000
 }
+#endif

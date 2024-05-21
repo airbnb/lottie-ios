@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/15/19.
 //
 
+#if canImport(QuartzCore)
 import CoreGraphics
 import Foundation
 
@@ -248,3 +249,4 @@ extension ContiguousArray {
   }
 
 }
+#endif

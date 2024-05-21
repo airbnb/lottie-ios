@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - TrimType
 
 enum TrimType: Int, Codable {
@@ -81,3 +82,4 @@ final class Trim: ShapeItem {
     case trimType = "m"
   }
 }
+#endif

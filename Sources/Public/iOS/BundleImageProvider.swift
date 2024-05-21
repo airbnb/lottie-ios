@@ -5,7 +5,7 @@
 //  Created by Brandon Withrow on 1/25/19.
 //
 
-#if canImport(UIKit)
+#if canImport(UIKit) && canImport(QuartzCore)
 import UIKit
 
 /// An `AnimationImageProvider` that provides images by name from a specific bundle.

@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 2/6/19.
 //
 
+#if canImport(QuartzCore)
 import Foundation
 
 extension LottieAnimationView {
@@ -224,3 +225,4 @@ extension LottieAnimationView {
 enum LottieDownloadError: Error {
   case downloadFailed
 }
+#endif

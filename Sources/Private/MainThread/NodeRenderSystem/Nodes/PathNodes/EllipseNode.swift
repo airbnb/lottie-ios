@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - EllipseNodeProperties
@@ -137,3 +138,4 @@ extension BezierPath {
     return path
   }
 }
+#endif

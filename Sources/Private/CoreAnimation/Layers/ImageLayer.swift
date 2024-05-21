@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 1/10/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - ImageLayer
@@ -78,3 +79,4 @@ extension ImageLayer: CustomLayoutLayer {
       height: CGFloat(imageAsset.height))
   }
 }
+#endif

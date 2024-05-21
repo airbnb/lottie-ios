@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - Renderer
@@ -62,3 +63,4 @@ final class GradientStrokeRenderer: PassThroughOutputNode, Renderable {
   }
 
 }
+#endif

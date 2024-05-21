@@ -5,7 +5,7 @@
 //  Created by Brandon Withrow on 2/4/19.
 //
 
-#if canImport(UIKit)
+#if canImport(UIKit) && canImport(QuartzCore)
 import UIKit
 
 /// A view that can be added to a keypath of an AnimationView

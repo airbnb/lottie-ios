@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - PathDirection
 
 enum PathDirection: Int, Codable {
@@ -70,3 +71,4 @@ final class Ellipse: ShapeItem {
     case size = "s"
   }
 }
+#endif

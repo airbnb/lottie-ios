@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/9/19.
 //
 
+#if canImport(QuartzCore)
 /// A model that holds a vector character
 final class Glyph: Codable, Sendable, DictionaryInitializable {
 
@@ -92,3 +93,4 @@ final class Glyph: Codable, Sendable, DictionaryInitializable {
     case shapes
   }
 }
+#endif

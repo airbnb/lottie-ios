@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 final class Stroke: ShapeItem {
 
   // MARK: Lifecycle
@@ -132,3 +133,4 @@ final class Stroke: ShapeItem {
     case dashPattern = "d"
   }
 }
+#endif

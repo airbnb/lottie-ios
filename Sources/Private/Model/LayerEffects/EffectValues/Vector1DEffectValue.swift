@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 8/14/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 final class Vector1DEffectValue: EffectValue {
 
   // MARK: Lifecycle
@@ -34,3 +35,4 @@ final class Vector1DEffectValue: EffectValue {
     case value = "v"
   }
 }
+#endif

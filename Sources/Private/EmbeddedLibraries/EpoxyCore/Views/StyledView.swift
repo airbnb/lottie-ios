@@ -1,6 +1,7 @@
 //  Created by Laura Skelton on 4/14/16.
 //  Copyright © 2016 Airbnb. All rights reserved.
 
+#if canImport(QuartzCore)
 // MARK: - StyledView
 
 /// A view that can be initialized with a `Style` instance that contains the view's invariant
@@ -40,3 +41,4 @@ extension StyledView where Style == Never {
     switch style { }
   }
 }
+#endif

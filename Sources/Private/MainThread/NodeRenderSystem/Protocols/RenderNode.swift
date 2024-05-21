@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/17/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - RenderNode
@@ -58,3 +59,4 @@ extension Renderable {
   }
 
 }
+#endif

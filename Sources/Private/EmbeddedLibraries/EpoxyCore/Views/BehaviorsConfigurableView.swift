@@ -1,6 +1,7 @@
 // Created by Tyler Hedrick on 5/26/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 // MARK: - BehaviorsConfigurableView
 
 /// A view that can be configured with a `Behaviors` instance that contains the view's non-
@@ -43,3 +44,4 @@ extension BehaviorsConfigurableView where Behaviors == Never {
     }
   }
 }
+#endif

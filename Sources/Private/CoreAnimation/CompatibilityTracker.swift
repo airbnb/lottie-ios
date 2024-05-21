@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 5/4/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 // MARK: - CompatibilityIssue
 
 /// A compatibility issue that was encountered while setting up an animation with the Core Animation engine
@@ -128,3 +129,4 @@ extension LayerAnimationContext: CompatibilityTrackerProviding {
     currentKeypath.fullPath
   }
 }
+#endif

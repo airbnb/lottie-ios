@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 5/17/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - OpacityAnimationModel
@@ -50,3 +51,4 @@ extension CALayer {
       context: context)
   }
 }
+#endif

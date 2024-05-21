@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/25/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 extension MaskMode {
@@ -188,3 +189,4 @@ private class MaskNodeProperties: NodePropertyMap {
   let shape: NodeProperty<BezierPath>
   let expansion: NodeProperty<LottieVector1D>
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 2/4/19.
 //
 
+#if canImport(QuartzCore)
 #if canImport(UIKit)
 import UIKit
 #elseif canImport(AppKit)
@@ -243,3 +244,4 @@ open class AnimatedControl: LottieControlType {
     animationView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
   }
 }
+#endif

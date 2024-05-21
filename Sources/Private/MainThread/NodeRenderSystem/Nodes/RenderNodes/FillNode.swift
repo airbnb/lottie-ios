@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/17/19.
 //
 
+#if canImport(QuartzCore)
 import CoreGraphics
 import Foundation
 
@@ -88,3 +89,4 @@ final class FillNode: AnimatorNode, RenderNode {
     fillRender.fillRule = fillProperties.type
   }
 }
+#endif

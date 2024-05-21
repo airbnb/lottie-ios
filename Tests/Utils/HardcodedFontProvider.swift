@@ -2,6 +2,7 @@
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
 import Lottie
+#if canImport(QuartzCore)
 import QuartzCore
 #if os(iOS)
 import UIKit
@@ -17,3 +18,4 @@ struct HardcodedFontProvider: AnimationFontProvider {
     font
   }
 }
+#endif

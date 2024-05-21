@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 final class Rectangle: ShapeItem {
 
   // MARK: Lifecycle
@@ -68,3 +69,4 @@ final class Rectangle: ShapeItem {
     case cornerRadius = "r"
   }
 }
+#endif

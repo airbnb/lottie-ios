@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 1/11/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 // MARK: - KeyframeGroup + exactlyOneKeyframe
 
 extension KeyframeGroup {
@@ -27,3 +28,4 @@ extension KeyframeGroup {
     return keyframes[0].value
   }
 }
+#endif

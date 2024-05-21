@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/22/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - DashElementType
 
 enum DashElementType: String, Codable {
@@ -40,3 +41,4 @@ final class DashElement: Codable, DictionaryInitializable {
   let value: KeyframeGroup<LottieVector1D>
 
 }
+#endif

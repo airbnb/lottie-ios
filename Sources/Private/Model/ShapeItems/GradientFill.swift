@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - GradientType
 
 enum GradientType: Int, Codable, Sendable {
@@ -133,3 +134,4 @@ final class GradientFill: ShapeItem {
     case colors = "k"
   }
 }
+#endif

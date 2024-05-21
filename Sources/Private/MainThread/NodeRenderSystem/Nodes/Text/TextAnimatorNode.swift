@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 2/19/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - TextAnimatorNodeProperties
@@ -285,3 +286,4 @@ class TextAnimatorNode: AnimatorNode {
     textOutputNode.strokeWidth = textAnimatorProperties.strokeWidth?.value.cgFloatValue ?? 0
   }
 }
+#endif

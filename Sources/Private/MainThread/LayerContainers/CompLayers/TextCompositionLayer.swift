@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/25/19.
 //
 
+#if canImport(QuartzCore)
 /// Needed for NSMutableParagraphStyle...
 #if os(OSX)
 import AppKit
@@ -168,3 +169,4 @@ final class TextCompositionLayer: CompositionLayer {
     textLayer.contentsScale = renderScale
   }
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - StarType
 
 enum StarType: Int, Codable, Sendable {
@@ -127,3 +128,4 @@ final class Star: ShapeItem {
     case starType = "sy"
   }
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/9/19.
 //
 
+#if canImport(QuartzCore)
 final class TextAnimator: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
@@ -192,3 +193,4 @@ final class TextAnimator: Codable, DictionaryInitializable {
     case opacity = "o"
   }
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/7/19.
 //
 
+#if canImport(QuartzCore)
 /// The animatable transform for a layer. Controls position, rotation, scale, and opacity.
 final class Transform: Codable, DictionaryInitializable {
 
@@ -258,3 +259,4 @@ final class Transform: Codable, DictionaryInitializable {
   /// Here for the CodingKeys.rotation = "r". `r` and `rz` are the same.
   private let rotation: KeyframeGroup<LottieVector1D>?
 }
+#endif

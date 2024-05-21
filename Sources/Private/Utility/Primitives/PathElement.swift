@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/11/19.
 //
 
+#if canImport(QuartzCore)
 import CoreGraphics
 import Foundation
 
@@ -73,3 +74,4 @@ struct PathElement {
   }
 
 }
+#endif

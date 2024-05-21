@@ -33,7 +33,7 @@
 
 import Foundation
 
-#if canImport(UIKit)
+#if canImport(UIKit) && canImport(QuartzCore)
 import UIKit
 
 /// Notification that cache should be cleared

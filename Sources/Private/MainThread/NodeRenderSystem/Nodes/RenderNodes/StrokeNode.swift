@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - StrokeNodeProperties
@@ -178,3 +179,4 @@ extension [CGFloat] {
     !allSatisfy { $0 == 0.01 }
   }
 }
+#endif

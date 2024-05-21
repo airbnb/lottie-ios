@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/23/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - LottieBackgroundBehavior
@@ -1052,3 +1053,4 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   private let logger: LottieLogger
 }
+#endif

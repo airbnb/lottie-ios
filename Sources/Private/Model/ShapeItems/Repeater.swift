@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 final class Repeater: ShapeItem {
 
   // MARK: Lifecycle
@@ -170,3 +171,4 @@ final class Repeater: ShapeItem {
     case scale = "s"
   }
 }
+#endif

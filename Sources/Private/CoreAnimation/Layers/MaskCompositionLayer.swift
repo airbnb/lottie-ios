@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 1/6/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - MaskCompositionLayer
@@ -136,3 +137,4 @@ extension MaskCompositionLayer.MaskLayer: AnimationLayer {
       })
   }
 }
+#endif

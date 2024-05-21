@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 /// A rendered for a Path Fill
@@ -150,3 +151,4 @@ final class LegacyGradientFillRenderer: PassThroughOutputNode, Renderable {
     }
   }
 }
+#endif

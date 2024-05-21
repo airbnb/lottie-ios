@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/22/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - CompositionLayer
@@ -158,3 +159,4 @@ class CompositionLayer: CALayer, KeypathSearchable {
 protocol CompositionLayerDelegate: AnyObject {
   func frameUpdated(frame: CGFloat)
 }
+#endif

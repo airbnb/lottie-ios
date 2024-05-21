@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/14/19.
 //
 
+#if canImport(QuartzCore)
 import CoreGraphics
 
 // MARK: - LottieColor + Codable
@@ -99,3 +100,4 @@ extension LottieColor {
     .rgba(CGFloat(r), CGFloat(g), CGFloat(b), CGFloat(a))
   }
 }
+#endif

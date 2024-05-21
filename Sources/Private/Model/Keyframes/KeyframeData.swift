@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/7/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - KeyframeData
 
 /// A generic class used to parse and remap keyframe json.
@@ -108,3 +109,4 @@ extension KeyframeData: DictionaryInitializable where T: AnyInitializable {
       spatialOutTangent: spatialOutTangent)
   }
 }
+#endif

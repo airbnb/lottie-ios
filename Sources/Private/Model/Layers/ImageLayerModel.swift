@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 /// A layer that holds an image.
 final class ImageLayerModel: LayerModel {
 
@@ -38,3 +39,4 @@ final class ImageLayerModel: LayerModel {
     case referenceID = "refId"
   }
 }
+#endif

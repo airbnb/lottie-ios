@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/9/19.
 //
 
+#if canImport(QuartzCore)
 final class PrecompAsset: Asset {
 
   // MARK: Lifecycle
@@ -36,3 +37,4 @@ final class PrecompAsset: Asset {
     try container.encode(layers, forKey: .layers)
   }
 }
+#endif

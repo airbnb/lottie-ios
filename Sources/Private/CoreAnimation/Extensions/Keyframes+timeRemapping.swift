@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 1/8/24.
 // Copyright © 2024 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 extension Keyframes {
   /// Manually interpolates the given keyframes, and applies `context.complexTimeRemapping`.
   ///  - Since `complexTimeRemapping` is a mapping from "global time" to "local time",
@@ -44,3 +45,4 @@ extension Keyframes {
     return KeyframeGroup(keyframes: ContiguousArray(interpolatedRemappedKeyframes))
   }
 }
+#endif

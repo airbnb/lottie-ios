@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 2/5/19.
 //
 
+#if canImport(QuartzCore)
 /// `AnimationCacheProvider` is a protocol that describes an Animation Cache.
 /// Animation Cache is used when loading `LottieAnimation` models. Using an Animation Cache
 /// can increase performance when loading an animation multiple times.
@@ -19,3 +20,4 @@ public protocol AnimationCacheProvider: AnyObject, Sendable {
   func clearCache()
 
 }
+#endif

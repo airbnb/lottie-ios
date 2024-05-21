@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 /// A layer that holds text.
 final class TextLayerModel: LayerModel {
 
@@ -54,3 +55,4 @@ final class TextLayerModel: LayerModel {
     case animators = "a"
   }
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 /// An item that defines an custom shape
 final class Shape: ShapeItem {
 
@@ -52,3 +53,4 @@ final class Shape: ShapeItem {
     case direction = "d"
   }
 }
+#endif

@@ -1,7 +1,7 @@
 // Created by eric_horacek on 9/8/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
-#if canImport(SwiftUI)
+#if canImport(SwiftUI) && canImport(QuartzCore)
 import SwiftUI
 
 // MARK: - SwiftUIView

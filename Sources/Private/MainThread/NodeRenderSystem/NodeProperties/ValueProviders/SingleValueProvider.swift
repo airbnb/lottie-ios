@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if canImport(QuartzCore)
 import QuartzCore
 
 /// Returns a value for every frame.
@@ -41,3 +42,4 @@ final class SingleValueProvider<ValueType: AnyInterpolatable>: ValueProvider {
 
   private var hasUpdate = true
 }
+#endif

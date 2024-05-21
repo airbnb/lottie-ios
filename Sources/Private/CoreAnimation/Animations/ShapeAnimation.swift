@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 1/7/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 extension CAShapeLayer {
@@ -234,3 +235,4 @@ extension Trim {
       strokeEnd: combinedKeyframes.map { $0.end })
   }
 }
+#endif

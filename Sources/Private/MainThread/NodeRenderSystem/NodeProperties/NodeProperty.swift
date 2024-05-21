@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
+#if canImport(QuartzCore)
 import CoreGraphics
 import Foundation
 
@@ -53,3 +54,4 @@ class NodeProperty<T>: AnyNodeProperty {
 
   fileprivate var typedContainer: ValueContainer<T>
 }
+#endif

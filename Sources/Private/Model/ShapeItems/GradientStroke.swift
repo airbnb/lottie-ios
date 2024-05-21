@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - LineCap
 
 enum LineCap: Int, Codable, Sendable {
@@ -234,3 +235,4 @@ final class GradientStroke: ShapeItem {
     case colors = "k"
   }
 }
+#endif

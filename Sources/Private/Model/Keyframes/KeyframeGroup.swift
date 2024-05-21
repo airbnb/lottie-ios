@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/14/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - KeyframeGroup
 
 /// Used for coding/decoding a group of Keyframes by type.
@@ -254,3 +255,4 @@ extension KeyframeGroup: AnyKeyframeGroup where T: AnyInterpolatable {
     KeyframeInterpolator(keyframes: keyframes)
   }
 }
+#endif

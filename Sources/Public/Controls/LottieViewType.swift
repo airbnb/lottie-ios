@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 8/11/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 #if canImport(UIKit)
 import UIKit
 
@@ -76,4 +77,5 @@ public struct LottieNSControlEvent: Equatable, Sendable {
     [AnyHashable(event.rawValue), AnyHashable(inside)]
   }
 }
+#endif
 #endif

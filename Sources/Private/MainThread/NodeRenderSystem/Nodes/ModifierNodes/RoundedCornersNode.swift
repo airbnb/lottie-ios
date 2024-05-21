@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - RoundedCornersProperties
@@ -83,3 +84,4 @@ final class RoundedCornersNode: AnimatorNode {
 
   fileprivate let upstreamPaths: [PathOutputNode]
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Alexandr Goncharov on 07/06/2019.
 //
 
+#if canImport(QuartzCore)
 // MARK: - AnimationKeypathTextProvider
 
 /// Protocol for providing dynamic text to for a Lottie animation.
@@ -122,3 +123,4 @@ extension DefaultTextProvider: Equatable {
     true
   }
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/22/19.
 //
 
+#if canImport(QuartzCore)
 import CoreGraphics
 import Foundation
 
@@ -37,3 +38,4 @@ final class GroupInterpolator<ValueType>: ValueProvider where ValueType: Interpo
     return updated != nil
   }
 }
+#endif

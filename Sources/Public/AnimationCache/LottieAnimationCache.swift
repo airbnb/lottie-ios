@@ -5,6 +5,7 @@
 //  Created by Marcelo Fabri on 10/17/22.
 //
 
+#if canImport(QuartzCore)
 /// A customization point to configure which `AnimationCacheProvider` will be used.
 public enum LottieAnimationCache {
 
@@ -13,3 +14,4 @@ public enum LottieAnimationCache {
   /// Defaults to DefaultAnimationCache.sharedCache.
   public static var shared: AnimationCacheProvider? = DefaultAnimationCache.sharedCache
 }
+#endif

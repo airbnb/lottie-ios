@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 final class ShapeTransform: ShapeItem {
 
   // MARK: Lifecycle
@@ -191,3 +192,4 @@ final class ShapeTransform: ShapeItem {
     case skewAxis = "sa"
   }
 }
+#endif

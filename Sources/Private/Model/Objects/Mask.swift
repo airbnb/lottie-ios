@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - MaskMode
 
 enum MaskMode: String, Codable {
@@ -78,3 +79,4 @@ final class Mask: Codable, DictionaryInitializable {
 
   let expansion: KeyframeGroup<LottieVector1D>
 }
+#endif

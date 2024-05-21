@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/7/19.
 //
 
+#if canImport(QuartzCore)
 import Foundation
 
 // MARK: - CoordinateSpace
@@ -177,3 +178,4 @@ public final class LottieAnimation: Codable, Sendable, DictionaryInitializable {
     })
   }
 }
+#endif

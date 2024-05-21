@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 // MARK: - MergeMode
 
 enum MergeMode: Int, Codable, Sendable {
@@ -54,3 +55,4 @@ final class Merge: ShapeItem {
     case mode = "mm"
   }
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/25/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - AnimationImageProvider
@@ -41,3 +42,4 @@ extension AnimationImageProvider {
     .resize
   }
 }
+#endif

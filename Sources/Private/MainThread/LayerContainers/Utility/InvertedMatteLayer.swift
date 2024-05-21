@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/28/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 /// A layer that inverses the alpha output of its input layer.
@@ -53,3 +54,4 @@ final class InvertedMatteLayer: CALayer, CompositionLayerDelegate {
   }
 
 }
+#endif

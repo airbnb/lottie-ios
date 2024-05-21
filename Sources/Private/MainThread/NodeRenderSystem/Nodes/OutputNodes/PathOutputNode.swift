@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
+#if canImport(QuartzCore)
 import CoreGraphics
 
 /// A node that has an output of a BezierPath
@@ -87,3 +88,4 @@ class PathOutputNode: NodeOutput {
   }
 
 }
+#endif

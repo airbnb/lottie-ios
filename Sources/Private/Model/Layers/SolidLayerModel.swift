@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 /// A layer that holds a solid color.
 final class SolidLayerModel: LayerModel {
 
@@ -52,3 +53,4 @@ final class SolidLayerModel: LayerModel {
     case height = "sh"
   }
 }
+#endif

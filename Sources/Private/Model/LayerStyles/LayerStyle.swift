@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 8/14/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 // MARK: - LayerStyleType
 
 enum LayerStyleType: Int, Codable, Sendable {
@@ -82,3 +83,4 @@ extension [LayerStyle] {
 /// All `LayerStyle` subclasses are immutable `Sendable` values.
 // swiftlint:disable:next no_unchecked_sendable
 extension LayerStyle: @unchecked Sendable { }
+#endif

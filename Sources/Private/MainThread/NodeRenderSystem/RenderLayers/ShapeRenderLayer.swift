@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/18/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 /// The layer responsible for rendering shape objects
@@ -96,3 +97,4 @@ final class ShapeRenderLayer: ShapeContainerLayer {
     shapeLayer.contentsScale = renderScale
   }
 }
+#endif

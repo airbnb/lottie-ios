@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - GradientFillProperties
@@ -103,3 +104,4 @@ final class GradientFillNode: AnimatorNode, RenderNode {
     fillRender.fillRule = fillProperties.fillRule.caFillRule
   }
 }
+#endif

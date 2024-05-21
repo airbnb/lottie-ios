@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+#if canImport(QuartzCore)
 /// A layer that holds another animation composition.
 final class PreCompLayerModel: LayerModel {
 
@@ -63,3 +64,4 @@ final class PreCompLayerModel: LayerModel {
     case height = "h"
   }
 }
+#endif

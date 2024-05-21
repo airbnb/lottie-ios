@@ -6,7 +6,7 @@
 //
 
 import Foundation
-#if canImport(UIKit)
+#if canImport(UIKit) && canImport(QuartzCore)
 import UIKit
 
 /// Provides an image for a lottie animation from a provided Bundle.

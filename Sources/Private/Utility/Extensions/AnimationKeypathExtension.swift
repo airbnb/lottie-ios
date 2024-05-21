@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 2/4/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 extension KeypathSearchable {
@@ -301,3 +302,4 @@ enum KeyType {
   case wildcard
   case fuzzyWildcard
 }
+#endif

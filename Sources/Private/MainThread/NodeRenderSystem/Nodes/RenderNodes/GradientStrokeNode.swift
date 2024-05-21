@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/23/19.
 //
 
+#if canImport(QuartzCore)
 import CoreGraphics
 import Foundation
 
@@ -149,3 +150,4 @@ final class GradientStrokeNode: AnimatorNode, RenderNode {
     }
   }
 }
+#endif

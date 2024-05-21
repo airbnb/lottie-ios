@@ -5,6 +5,7 @@
 //  Created by Denis Koryttsev on 10.05.2022.
 //
 
+#if canImport(QuartzCore)
 extension BlendMode {
   /// The Core Image filter name for this `BlendMode`, that can be applied to a `CALayer`'s `compositingFilter`.
   /// Supported compositing filters are defined here: https://developer.apple.com/library/archive/documentation/GraphicsImaging/Reference/CoreImageFilterReference/index.html#//apple_ref/doc/uid/TP30000136-SW71
@@ -29,3 +30,4 @@ extension BlendMode {
     }
   }
 }
+#endif

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-#if canImport(UIKit)
+#if canImport(UIKit) && canImport(QuartzCore)
 import UIKit
 
 /// An Objective-C compatible wrapper around Lottie's Animation class.

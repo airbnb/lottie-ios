@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 8/15/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - DropShadowModel
@@ -158,3 +159,4 @@ extension CALayer {
   }
 
 }
+#endif

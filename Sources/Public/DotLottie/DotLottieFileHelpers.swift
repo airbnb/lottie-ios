@@ -5,6 +5,7 @@
 //  Created by Evandro Hoffmann on 20/10/22.
 //
 
+#if canImport(QuartzCore)
 import Foundation
 
 extension DotLottieFile {
@@ -371,3 +372,4 @@ extension DispatchQueue {
     label: "com.airbnb.lottie.dot-lottie",
     qos: .userInitiated)
 }
+#endif

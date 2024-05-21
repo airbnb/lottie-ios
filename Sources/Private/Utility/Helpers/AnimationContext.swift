@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if canImport(QuartzCore)
 import QuartzCore
 
 /// A completion block for animations.
@@ -90,3 +91,4 @@ class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
 
   let completionBlock: LottieCompletionBlock?
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/18/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - GroupNodeProperties
@@ -163,3 +164,4 @@ final class GroupNode: AnimatorNode {
   }
 
 }
+#endif

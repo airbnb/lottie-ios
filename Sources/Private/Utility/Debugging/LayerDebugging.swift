@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/24/19.
 //
 
+#if canImport(QuartzCore)
 import QuartzCore
 
 // MARK: - LayerDebugStyle
@@ -220,3 +221,4 @@ extension [LayerModel] {
   }
 
 }
+#endif

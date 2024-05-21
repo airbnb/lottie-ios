@@ -5,6 +5,7 @@
 //  Created by Brandon Withrow on 1/25/19.
 //
 
+#if canImport(QuartzCore)
 /// Connects a LottieImageProvider to a group of image layers
 final class LayerImageProvider {
 
@@ -50,3 +51,4 @@ final class LayerImageProvider {
     }
   }
 }
+#endif
