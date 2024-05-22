@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'tmg-lottie-ios'
+  s.name             = 'lottie-ios'
   s.version          = '4.4.3'
   s.summary          = 'A library to render native animations from bodymovin json'
 
