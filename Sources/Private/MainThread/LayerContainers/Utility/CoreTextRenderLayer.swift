@@ -31,6 +31,22 @@ final class CoreTextRenderLayer: CALayer {
     }
   }
 
+  public var start: Int? {
+    didSet {
+      needsContentUpdate = true
+      setNeedsLayout()
+      setNeedsDisplay()
+    }
+  }
+
+  public var end: Int? {
+    didSet {
+      needsContentUpdate = true
+      setNeedsLayout()
+      setNeedsDisplay()
+    }
+  }
+
   public var font: CTFont? {
     didSet {
       needsContentUpdate = true
@@ -259,7 +275,13 @@ final class CoreTextRenderLayer: CALayer {
       attributes[NSAttributedString.Key.foregroundColor] = fillColor
     }
 
-    let attrString = NSAttributedString(string: text, attributes: attributes)
+    let attrString = NSMutableAttributedString(string: text, attributes: attributes)
+
+    // Proof of concept showing that we're at least able to apply different attributed string stylings each frame:
+    if let start {
+      attrString.addAttribute(NSAttributedString.Key.foregroundColor, value: CGColor.rgba(0, 0, 0, 0), range: NSRange(location: start, length: text.count - start))
+    }
+
     attributedString = attrString
 
     if fillColor != nil {

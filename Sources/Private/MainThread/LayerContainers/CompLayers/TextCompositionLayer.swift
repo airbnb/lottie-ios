@@ -133,11 +133,15 @@ final class TextCompositionLayer: CompositionLayer {
     let strokeColor = rootNode?.textOutputNode.strokeColor ?? text.strokeColorData?.cgColorValue
     let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
     let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
+    let start = rootNode?.textOutputNode.start.flatMap { Int($0) }
+    let end = rootNode?.textOutputNode.end.flatMap { Int($0) }
     let matrix = rootNode?.textOutputNode.xform ?? CATransform3DIdentity
     let ctFont = fontProvider.fontFor(family: text.fontFamily, size: CGFloat(text.fontSize))
 
     // Set all of the text layer options
     textLayer.text = textString
+    textLayer.start = start
+    textLayer.end = end
     textLayer.font = ctFont
     textLayer.alignment = text.justification.textAlignment
     textLayer.lineHeight = CGFloat(text.lineHeight)
