@@ -185,7 +185,7 @@ namespace :lint do
 
   desc 'Lints the CocoaPods podspec'
   task :podspec do
-    sh 'pod lib lint lottie-ios.podspec'
+    sh 'pod lib lint tmg-lottie-ios.podspec'
   end
 
   desc 'Lints the EmbeddedLibraries directory'
