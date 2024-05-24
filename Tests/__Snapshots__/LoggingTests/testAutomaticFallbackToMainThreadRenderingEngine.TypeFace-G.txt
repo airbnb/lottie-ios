@@ -1,0 +1,6 @@
+[warning] Encountered Core Animation compatibility issue while setting up animation:
+[dotted_lines.Ellipse 1.Stroke 1] The Core Animation rendering engine does not support animating multiple keyframes for stroke dashPattern values, due to limitations of Core Animation.
+This animation may have additional compatibility issues, but animation setup was cancelled early to avoid wasted work.
+
+Automatically falling back to Main Thread rendering engine. This fallback comes with some additional performance
+overhead, which can be reduced by manually specifying that this animation should always use the Main Thread engine.

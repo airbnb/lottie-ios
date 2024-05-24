@@ -1,0 +1,79 @@
+Checkmark Outlines 2.Group 1.Stroke 1.Color
+Checkmark Outlines 2.Group 1.Stroke 1.Opacity
+Checkmark Outlines 2.Group 1.Stroke 1.Stroke Width
+Checkmark Outlines 2.Group 1.Transform.Opacity
+Checkmark Outlines 2.Group 1.Transform.Position
+Checkmark Outlines 2.Group 1.Transform.Rotation
+Checkmark Outlines 2.Group 1.Transform.Scale
+Checkmark Outlines 2.Group 1.Transform.Scale
+Checkmark Outlines 2.Transform.Opacity
+Checkmark Outlines 2.Transform.Position
+Checkmark Outlines 2.Transform.Rotation
+Checkmark Outlines 2.Transform.Scale
+Checkmark Outlines 2.Transform.Scale
+Checkmark Outlines.Group 1.Stroke 1.Color
+Checkmark Outlines.Group 1.Stroke 1.Opacity
+Checkmark Outlines.Group 1.Stroke 1.Stroke Width
+Checkmark Outlines.Group 1.Transform.Opacity
+Checkmark Outlines.Group 1.Transform.Position
+Checkmark Outlines.Group 1.Transform.Rotation
+Checkmark Outlines.Group 1.Transform.Scale
+Checkmark Outlines.Group 1.Transform.Scale
+Checkmark Outlines.Transform.Opacity
+Checkmark Outlines.Transform.Position
+Checkmark Outlines.Transform.Rotation
+Checkmark Outlines.Transform.Scale
+Checkmark Outlines.Transform.Scale
+Switch Outline Outlines.Fill 1.Color
+Switch Outline Outlines.Fill 1.Opacity
+Switch Outline Outlines.Group 1.Transform.Opacity
+Switch Outline Outlines.Group 1.Transform.Position
+Switch Outline Outlines.Group 1.Transform.Rotation
+Switch Outline Outlines.Group 1.Transform.Scale
+Switch Outline Outlines.Group 1.Transform.Scale
+Switch Outline Outlines.Transform.Opacity
+Switch Outline Outlines.Transform.Position
+Switch Outline Outlines.Transform.Rotation
+Switch Outline Outlines.Transform.Scale
+Switch Outline Outlines.Transform.Scale
+White BG Outlines.Group 1.Fill 1.Color
+White BG Outlines.Group 1.Fill 1.Opacity
+White BG Outlines.Group 1.Transform.Opacity
+White BG Outlines.Group 1.Transform.Position
+White BG Outlines.Group 1.Transform.Rotation
+White BG Outlines.Group 1.Transform.Scale
+White BG Outlines.Group 1.Transform.Scale
+White BG Outlines.Transform.Opacity
+White BG Outlines.Transform.Position
+White BG Outlines.Transform.Position
+White BG Outlines.Transform.Position
+White BG Outlines.Transform.Position
+White BG Outlines.Transform.Rotation
+White BG Outlines.Transform.Rotation
+White BG Outlines.Transform.Rotation
+White BG Outlines.Transform.Rotation
+White BG Outlines.Transform.Scale
+White BG Outlines.Transform.Scale
+White BG Outlines.Transform.Scale
+White BG Outlines.Transform.Scale
+White BG Outlines.Transform.Scale
+White BG Outlines.Transform.Scale
+White BG Outlines.Transform.Scale
+White BG Outlines.Transform.Scale
+X Outlines.Group 1.Stroke 1.Color
+X Outlines.Group 1.Stroke 1.Opacity
+X Outlines.Group 1.Stroke 1.Stroke Width
+X Outlines.Group 1.Transform.Opacity
+X Outlines.Group 1.Transform.Position
+X Outlines.Group 1.Transform.Rotation
+X Outlines.Group 1.Transform.Scale
+X Outlines.Group 1.Transform.Scale
+X Outlines.Transform.Opacity
+X Outlines.Transform.Position
+X Outlines.Transform.Position
+X Outlines.Transform.Rotation
+X Outlines.Transform.Rotation
+X Outlines.Transform.Scale
+X Outlines.Transform.Scale
+X Outlines.Transform.Scale
+X Outlines.Transform.Scale

@@ -1,0 +1,6 @@
+// Created by Cal Stephens on 3/12/24.
+// Copyright © 2024 Airbnb Inc. All rights reserved.
+
+// The version numbers used when building Lottie.xcframework
+MARKETING_VERSION = 4.4.3
+CURRENT_PROJECT_VERSION = 443 // a three-digit representation of the marketing version, without dots.

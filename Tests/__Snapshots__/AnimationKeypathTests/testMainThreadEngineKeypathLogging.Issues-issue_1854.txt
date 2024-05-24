@@ -1,0 +1,40 @@
+.accent
+.accent.Ellipse 1
+.accent.Ellipse 1.Anchor Point
+.accent.Ellipse 1.Ellipse Path 1
+.accent.Ellipse 1.Ellipse Path 1.Position
+.accent.Ellipse 1.Ellipse Path 1.Size
+.accent.Ellipse 1.Opacity
+.accent.Ellipse 1.Position
+.accent.Ellipse 1.Rotation
+.accent.Ellipse 1.Rotation X
+.accent.Ellipse 1.Rotation Y
+.accent.Ellipse 1.Rotation Z
+.accent.Ellipse 1.Scale
+.accent.Ellipse 1.Skew
+.accent.Ellipse 1.Skew Axis
+.accent.Ellipse 1.Transform
+.accent.Ellipse 1.Transform.Anchor Point
+.accent.Ellipse 1.Transform.Opacity
+.accent.Ellipse 1.Transform.Position
+.accent.Ellipse 1.Transform.Rotation
+.accent.Ellipse 1.Transform.Rotation X
+.accent.Ellipse 1.Transform.Rotation Y
+.accent.Ellipse 1.Transform.Rotation Z
+.accent.Ellipse 1.Transform.Scale
+.accent.Ellipse 1.Transform.Skew
+.accent.Ellipse 1.Transform.Skew Axis
+.accent.Gradient Fill 1
+.accent.Gradient Fill 1.Colors
+.accent.Gradient Fill 1.End Point
+.accent.Gradient Fill 1.Opacity
+.accent.Gradient Fill 1.Start Point
+.accent.Transform
+.accent.Transform.Anchor Point
+.accent.Transform.Opacity
+.accent.Transform.Position
+.accent.Transform.Rotation
+.accent.Transform.Rotation X
+.accent.Transform.Rotation Y
+.accent.Transform.Rotation Z
+.accent.Transform.Scale

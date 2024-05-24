@@ -1,0 +1,682 @@
+GroupShapeLayer
+GroupShapeLayer.Group 1
+GroupShapeLayer.Group 1.Anchor Point
+GroupShapeLayer.Group 1.Opacity
+GroupShapeLayer.Group 1.Position
+GroupShapeLayer.Group 1.Rotation
+GroupShapeLayer.Group 1.Rotation X
+GroupShapeLayer.Group 1.Rotation Y
+GroupShapeLayer.Group 1.Rotation Z
+GroupShapeLayer.Group 1.Scale
+GroupShapeLayer.Group 1.Shape 1
+GroupShapeLayer.Group 1.Shape 1.Anchor Point
+GroupShapeLayer.Group 1.Shape 1.Fill 1
+GroupShapeLayer.Group 1.Shape 1.Fill 1.Color
+GroupShapeLayer.Group 1.Shape 1.Fill 1.Opacity
+GroupShapeLayer.Group 1.Shape 1.Opacity
+GroupShapeLayer.Group 1.Shape 1.Path 1
+GroupShapeLayer.Group 1.Shape 1.Path 1.Path
+GroupShapeLayer.Group 1.Shape 1.Position
+GroupShapeLayer.Group 1.Shape 1.Rotation
+GroupShapeLayer.Group 1.Shape 1.Rotation X
+GroupShapeLayer.Group 1.Shape 1.Rotation Y
+GroupShapeLayer.Group 1.Shape 1.Rotation Z
+GroupShapeLayer.Group 1.Shape 1.Scale
+GroupShapeLayer.Group 1.Shape 1.Skew
+GroupShapeLayer.Group 1.Shape 1.Skew Axis
+GroupShapeLayer.Group 1.Shape 1.Stroke 1
+GroupShapeLayer.Group 1.Shape 1.Stroke 1.Color
+GroupShapeLayer.Group 1.Shape 1.Stroke 1.Dash Phase
+GroupShapeLayer.Group 1.Shape 1.Stroke 1.Dashes
+GroupShapeLayer.Group 1.Shape 1.Stroke 1.Opacity
+GroupShapeLayer.Group 1.Shape 1.Stroke 1.Stroke Width
+GroupShapeLayer.Group 1.Shape 1.Transform
+GroupShapeLayer.Group 1.Shape 1.Transform.Anchor Point
+GroupShapeLayer.Group 1.Shape 1.Transform.Opacity
+GroupShapeLayer.Group 1.Shape 1.Transform.Position
+GroupShapeLayer.Group 1.Shape 1.Transform.Rotation
+GroupShapeLayer.Group 1.Shape 1.Transform.Rotation X
+GroupShapeLayer.Group 1.Shape 1.Transform.Rotation Y
+GroupShapeLayer.Group 1.Shape 1.Transform.Rotation Z
+GroupShapeLayer.Group 1.Shape 1.Transform.Scale
+GroupShapeLayer.Group 1.Shape 1.Transform.Skew
+GroupShapeLayer.Group 1.Shape 1.Transform.Skew Axis
+GroupShapeLayer.Group 1.Shape 2
+GroupShapeLayer.Group 1.Shape 2.Anchor Point
+GroupShapeLayer.Group 1.Shape 2.Fill 1
+GroupShapeLayer.Group 1.Shape 2.Fill 1.Color
+GroupShapeLayer.Group 1.Shape 2.Fill 1.Opacity
+GroupShapeLayer.Group 1.Shape 2.Opacity
+GroupShapeLayer.Group 1.Shape 2.Path 1
+GroupShapeLayer.Group 1.Shape 2.Path 1.Path
+GroupShapeLayer.Group 1.Shape 2.Position
+GroupShapeLayer.Group 1.Shape 2.Rotation
+GroupShapeLayer.Group 1.Shape 2.Rotation X
+GroupShapeLayer.Group 1.Shape 2.Rotation Y
+GroupShapeLayer.Group 1.Shape 2.Rotation Z
+GroupShapeLayer.Group 1.Shape 2.Scale
+GroupShapeLayer.Group 1.Shape 2.Skew
+GroupShapeLayer.Group 1.Shape 2.Skew Axis
+GroupShapeLayer.Group 1.Shape 2.Stroke 1
+GroupShapeLayer.Group 1.Shape 2.Stroke 1.Color
+GroupShapeLayer.Group 1.Shape 2.Stroke 1.Dash Phase
+GroupShapeLayer.Group 1.Shape 2.Stroke 1.Dashes
+GroupShapeLayer.Group 1.Shape 2.Stroke 1.Opacity
+GroupShapeLayer.Group 1.Shape 2.Stroke 1.Stroke Width
+GroupShapeLayer.Group 1.Shape 2.Transform
+GroupShapeLayer.Group 1.Shape 2.Transform.Anchor Point
+GroupShapeLayer.Group 1.Shape 2.Transform.Opacity
+GroupShapeLayer.Group 1.Shape 2.Transform.Position
+GroupShapeLayer.Group 1.Shape 2.Transform.Rotation
+GroupShapeLayer.Group 1.Shape 2.Transform.Rotation X
+GroupShapeLayer.Group 1.Shape 2.Transform.Rotation Y
+GroupShapeLayer.Group 1.Shape 2.Transform.Rotation Z
+GroupShapeLayer.Group 1.Shape 2.Transform.Scale
+GroupShapeLayer.Group 1.Shape 2.Transform.Skew
+GroupShapeLayer.Group 1.Shape 2.Transform.Skew Axis
+GroupShapeLayer.Group 1.Skew
+GroupShapeLayer.Group 1.Skew Axis
+GroupShapeLayer.Group 1.Transform
+GroupShapeLayer.Group 1.Transform.Anchor Point
+GroupShapeLayer.Group 1.Transform.Opacity
+GroupShapeLayer.Group 1.Transform.Position
+GroupShapeLayer.Group 1.Transform.Rotation
+GroupShapeLayer.Group 1.Transform.Rotation X
+GroupShapeLayer.Group 1.Transform.Rotation Y
+GroupShapeLayer.Group 1.Transform.Rotation Z
+GroupShapeLayer.Group 1.Transform.Scale
+GroupShapeLayer.Group 1.Transform.Skew
+GroupShapeLayer.Group 1.Transform.Skew Axis
+GroupShapeLayer.Transform
+GroupShapeLayer.Transform.Anchor Point
+GroupShapeLayer.Transform.Opacity
+GroupShapeLayer.Transform.Position
+GroupShapeLayer.Transform.Rotation
+GroupShapeLayer.Transform.Rotation X
+GroupShapeLayer.Transform.Rotation Y
+GroupShapeLayer.Transform.Rotation Z
+GroupShapeLayer.Transform.Scale
+LoopLayer
+LoopLayer.LoopShape
+LoopLayer.LoopShape.Anchor Point
+LoopLayer.LoopShape.Fill 1
+LoopLayer.LoopShape.Fill 1.Color
+LoopLayer.LoopShape.Fill 1.Opacity
+LoopLayer.LoopShape.LoopPath
+LoopLayer.LoopShape.LoopPath.Path
+LoopLayer.LoopShape.Opacity
+LoopLayer.LoopShape.Position
+LoopLayer.LoopShape.Rotation
+LoopLayer.LoopShape.Rotation X
+LoopLayer.LoopShape.Rotation Y
+LoopLayer.LoopShape.Rotation Z
+LoopLayer.LoopShape.Scale
+LoopLayer.LoopShape.Skew
+LoopLayer.LoopShape.Skew Axis
+LoopLayer.LoopShape.Stroke 1
+LoopLayer.LoopShape.Stroke 1.Color
+LoopLayer.LoopShape.Stroke 1.Dash Phase
+LoopLayer.LoopShape.Stroke 1.Dashes
+LoopLayer.LoopShape.Stroke 1.Opacity
+LoopLayer.LoopShape.Stroke 1.Stroke Width
+LoopLayer.LoopShape.Transform
+LoopLayer.LoopShape.Transform.Anchor Point
+LoopLayer.LoopShape.Transform.Opacity
+LoopLayer.LoopShape.Transform.Position
+LoopLayer.LoopShape.Transform.Rotation
+LoopLayer.LoopShape.Transform.Rotation X
+LoopLayer.LoopShape.Transform.Rotation Y
+LoopLayer.LoopShape.Transform.Rotation Z
+LoopLayer.LoopShape.Transform.Scale
+LoopLayer.LoopShape.Transform.Skew
+LoopLayer.LoopShape.Transform.Skew Axis
+LoopLayer.Transform
+LoopLayer.Transform.Anchor Point
+LoopLayer.Transform.Opacity
+LoopLayer.Transform.Position
+LoopLayer.Transform.Rotation
+LoopLayer.Transform.Rotation X
+LoopLayer.Transform.Rotation Y
+LoopLayer.Transform.Rotation Z
+LoopLayer.Transform.Scale
+Precomp
+Precomp.DoubleGroupShape
+Precomp.DoubleGroupShape.TopGroup
+Precomp.DoubleGroupShape.TopGroup.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 1
+Precomp.DoubleGroupShape.TopGroup.Group 1.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Position
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Fill 1
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Fill 1.Color
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Fill 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Path 1
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Path 1.Path
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Position
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 1.Transform.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Fill 1
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Fill 1.Color
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Fill 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Path 1
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Path 1.Path
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Position
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Stroke 1
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Stroke 1.Color
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Stroke 1.Dash Phase
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Stroke 1.Dashes
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Stroke 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Stroke 1.Stroke Width
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Shape 2.Transform.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 1.Group 1.Transform.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Position
+Precomp.DoubleGroupShape.TopGroup.Group 1.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 1.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 1.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 1.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 1.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 1.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 1.Transform.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 2
+Precomp.DoubleGroupShape.TopGroup.Group 2.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Position
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Fill 1
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Fill 1.Color
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Fill 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Path 1
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Path 1.Path
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Position
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 1.Transform.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Fill 1
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Fill 1.Color
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Fill 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Path 1
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Path 1.Path
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Position
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Stroke 1
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Stroke 1.Color
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Stroke 1.Dash Phase
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Stroke 1.Dashes
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Stroke 1.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Stroke 1.Stroke Width
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Shape 2.Transform.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 2.Group 1.Transform.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 2.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Position
+Precomp.DoubleGroupShape.TopGroup.Group 2.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 2.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 2.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 2.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 2.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 2.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Skew
+Precomp.DoubleGroupShape.TopGroup.Group 2.Transform.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Opacity
+Precomp.DoubleGroupShape.TopGroup.Position
+Precomp.DoubleGroupShape.TopGroup.Rotation
+Precomp.DoubleGroupShape.TopGroup.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Scale
+Precomp.DoubleGroupShape.TopGroup.Skew
+Precomp.DoubleGroupShape.TopGroup.Skew Axis
+Precomp.DoubleGroupShape.TopGroup.Transform
+Precomp.DoubleGroupShape.TopGroup.Transform.Anchor Point
+Precomp.DoubleGroupShape.TopGroup.Transform.Opacity
+Precomp.DoubleGroupShape.TopGroup.Transform.Position
+Precomp.DoubleGroupShape.TopGroup.Transform.Rotation
+Precomp.DoubleGroupShape.TopGroup.Transform.Rotation X
+Precomp.DoubleGroupShape.TopGroup.Transform.Rotation Y
+Precomp.DoubleGroupShape.TopGroup.Transform.Rotation Z
+Precomp.DoubleGroupShape.TopGroup.Transform.Scale
+Precomp.DoubleGroupShape.TopGroup.Transform.Skew
+Precomp.DoubleGroupShape.TopGroup.Transform.Skew Axis
+Precomp.DoubleGroupShape.Transform
+Precomp.DoubleGroupShape.Transform.Anchor Point
+Precomp.DoubleGroupShape.Transform.Opacity
+Precomp.DoubleGroupShape.Transform.Position
+Precomp.DoubleGroupShape.Transform.Rotation
+Precomp.DoubleGroupShape.Transform.Rotation X
+Precomp.DoubleGroupShape.Transform.Rotation Y
+Precomp.DoubleGroupShape.Transform.Rotation Z
+Precomp.DoubleGroupShape.Transform.Scale
+Precomp.GroupShape
+Precomp.GroupShape.Group 1
+Precomp.GroupShape.Group 1.Anchor Point
+Precomp.GroupShape.Group 1.Opacity
+Precomp.GroupShape.Group 1.Position
+Precomp.GroupShape.Group 1.Rotation
+Precomp.GroupShape.Group 1.Rotation X
+Precomp.GroupShape.Group 1.Rotation Y
+Precomp.GroupShape.Group 1.Rotation Z
+Precomp.GroupShape.Group 1.Scale
+Precomp.GroupShape.Group 1.Shape 1
+Precomp.GroupShape.Group 1.Shape 1.Anchor Point
+Precomp.GroupShape.Group 1.Shape 1.Fill 1
+Precomp.GroupShape.Group 1.Shape 1.Fill 1.Color
+Precomp.GroupShape.Group 1.Shape 1.Fill 1.Opacity
+Precomp.GroupShape.Group 1.Shape 1.Opacity
+Precomp.GroupShape.Group 1.Shape 1.Path 1
+Precomp.GroupShape.Group 1.Shape 1.Path 1.Path
+Precomp.GroupShape.Group 1.Shape 1.Position
+Precomp.GroupShape.Group 1.Shape 1.Rotation
+Precomp.GroupShape.Group 1.Shape 1.Rotation X
+Precomp.GroupShape.Group 1.Shape 1.Rotation Y
+Precomp.GroupShape.Group 1.Shape 1.Rotation Z
+Precomp.GroupShape.Group 1.Shape 1.Scale
+Precomp.GroupShape.Group 1.Shape 1.Skew
+Precomp.GroupShape.Group 1.Shape 1.Skew Axis
+Precomp.GroupShape.Group 1.Shape 1.Transform
+Precomp.GroupShape.Group 1.Shape 1.Transform.Anchor Point
+Precomp.GroupShape.Group 1.Shape 1.Transform.Opacity
+Precomp.GroupShape.Group 1.Shape 1.Transform.Position
+Precomp.GroupShape.Group 1.Shape 1.Transform.Rotation
+Precomp.GroupShape.Group 1.Shape 1.Transform.Rotation X
+Precomp.GroupShape.Group 1.Shape 1.Transform.Rotation Y
+Precomp.GroupShape.Group 1.Shape 1.Transform.Rotation Z
+Precomp.GroupShape.Group 1.Shape 1.Transform.Scale
+Precomp.GroupShape.Group 1.Shape 1.Transform.Skew
+Precomp.GroupShape.Group 1.Shape 1.Transform.Skew Axis
+Precomp.GroupShape.Group 1.Shape 2
+Precomp.GroupShape.Group 1.Shape 2.Anchor Point
+Precomp.GroupShape.Group 1.Shape 2.Fill 1
+Precomp.GroupShape.Group 1.Shape 2.Fill 1.Color
+Precomp.GroupShape.Group 1.Shape 2.Fill 1.Opacity
+Precomp.GroupShape.Group 1.Shape 2.Opacity
+Precomp.GroupShape.Group 1.Shape 2.Path 1
+Precomp.GroupShape.Group 1.Shape 2.Path 1.Path
+Precomp.GroupShape.Group 1.Shape 2.Position
+Precomp.GroupShape.Group 1.Shape 2.Rotation
+Precomp.GroupShape.Group 1.Shape 2.Rotation X
+Precomp.GroupShape.Group 1.Shape 2.Rotation Y
+Precomp.GroupShape.Group 1.Shape 2.Rotation Z
+Precomp.GroupShape.Group 1.Shape 2.Scale
+Precomp.GroupShape.Group 1.Shape 2.Skew
+Precomp.GroupShape.Group 1.Shape 2.Skew Axis
+Precomp.GroupShape.Group 1.Shape 2.Stroke 1
+Precomp.GroupShape.Group 1.Shape 2.Stroke 1.Color
+Precomp.GroupShape.Group 1.Shape 2.Stroke 1.Dash Phase
+Precomp.GroupShape.Group 1.Shape 2.Stroke 1.Dashes
+Precomp.GroupShape.Group 1.Shape 2.Stroke 1.Opacity
+Precomp.GroupShape.Group 1.Shape 2.Stroke 1.Stroke Width
+Precomp.GroupShape.Group 1.Shape 2.Transform
+Precomp.GroupShape.Group 1.Shape 2.Transform.Anchor Point
+Precomp.GroupShape.Group 1.Shape 2.Transform.Opacity
+Precomp.GroupShape.Group 1.Shape 2.Transform.Position
+Precomp.GroupShape.Group 1.Shape 2.Transform.Rotation
+Precomp.GroupShape.Group 1.Shape 2.Transform.Rotation X
+Precomp.GroupShape.Group 1.Shape 2.Transform.Rotation Y
+Precomp.GroupShape.Group 1.Shape 2.Transform.Rotation Z
+Precomp.GroupShape.Group 1.Shape 2.Transform.Scale
+Precomp.GroupShape.Group 1.Shape 2.Transform.Skew
+Precomp.GroupShape.Group 1.Shape 2.Transform.Skew Axis
+Precomp.GroupShape.Group 1.Skew
+Precomp.GroupShape.Group 1.Skew Axis
+Precomp.GroupShape.Group 1.Transform
+Precomp.GroupShape.Group 1.Transform.Anchor Point
+Precomp.GroupShape.Group 1.Transform.Opacity
+Precomp.GroupShape.Group 1.Transform.Position
+Precomp.GroupShape.Group 1.Transform.Rotation
+Precomp.GroupShape.Group 1.Transform.Rotation X
+Precomp.GroupShape.Group 1.Transform.Rotation Y
+Precomp.GroupShape.Group 1.Transform.Rotation Z
+Precomp.GroupShape.Group 1.Transform.Scale
+Precomp.GroupShape.Group 1.Transform.Skew
+Precomp.GroupShape.Group 1.Transform.Skew Axis
+Precomp.GroupShape.Transform
+Precomp.GroupShape.Transform.Anchor Point
+Precomp.GroupShape.Transform.Opacity
+Precomp.GroupShape.Transform.Position
+Precomp.GroupShape.Transform.Rotation
+Precomp.GroupShape.Transform.Rotation X
+Precomp.GroupShape.Transform.Rotation Y
+Precomp.GroupShape.Transform.Rotation Z
+Precomp.GroupShape.Transform.Scale
+Precomp.SingleShape
+Precomp.SingleShape.Shape 1
+Precomp.SingleShape.Shape 1.Anchor Point
+Precomp.SingleShape.Shape 1.Fill 1
+Precomp.SingleShape.Shape 1.Fill 1.Color
+Precomp.SingleShape.Shape 1.Fill 1.Opacity
+Precomp.SingleShape.Shape 1.Opacity
+Precomp.SingleShape.Shape 1.Path 1
+Precomp.SingleShape.Shape 1.Path 1.Path
+Precomp.SingleShape.Shape 1.Position
+Precomp.SingleShape.Shape 1.Rotation
+Precomp.SingleShape.Shape 1.Rotation X
+Precomp.SingleShape.Shape 1.Rotation Y
+Precomp.SingleShape.Shape 1.Rotation Z
+Precomp.SingleShape.Shape 1.Scale
+Precomp.SingleShape.Shape 1.Skew
+Precomp.SingleShape.Shape 1.Skew Axis
+Precomp.SingleShape.Shape 1.Transform
+Precomp.SingleShape.Shape 1.Transform.Anchor Point
+Precomp.SingleShape.Shape 1.Transform.Opacity
+Precomp.SingleShape.Shape 1.Transform.Position
+Precomp.SingleShape.Shape 1.Transform.Rotation
+Precomp.SingleShape.Shape 1.Transform.Rotation X
+Precomp.SingleShape.Shape 1.Transform.Rotation Y
+Precomp.SingleShape.Shape 1.Transform.Rotation Z
+Precomp.SingleShape.Shape 1.Transform.Scale
+Precomp.SingleShape.Shape 1.Transform.Skew
+Precomp.SingleShape.Shape 1.Transform.Skew Axis
+Precomp.SingleShape.Transform
+Precomp.SingleShape.Transform.Anchor Point
+Precomp.SingleShape.Transform.Opacity
+Precomp.SingleShape.Transform.Position
+Precomp.SingleShape.Transform.Rotation
+Precomp.SingleShape.Transform.Rotation X
+Precomp.SingleShape.Transform.Rotation Y
+Precomp.SingleShape.Transform.Rotation Z
+Precomp.SingleShape.Transform.Scale
+Precomp.Transform
+Precomp.Transform.Anchor Point
+Precomp.Transform.Opacity
+Precomp.Transform.Position
+Precomp.Transform.Rotation
+Precomp.Transform.Rotation X
+Precomp.Transform.Rotation Y
+Precomp.Transform.Rotation Z
+Precomp.Transform.Scale
+Shape Layer 1
+Shape Layer 1.Shape 1
+Shape Layer 1.Shape 1.Anchor Point
+Shape Layer 1.Shape 1.Fill 1
+Shape Layer 1.Shape 1.Fill 1.Color
+Shape Layer 1.Shape 1.Fill 1.Opacity
+Shape Layer 1.Shape 1.Opacity
+Shape Layer 1.Shape 1.Path 1
+Shape Layer 1.Shape 1.Path 1.Path
+Shape Layer 1.Shape 1.Position
+Shape Layer 1.Shape 1.Rotation
+Shape Layer 1.Shape 1.Rotation X
+Shape Layer 1.Shape 1.Rotation Y
+Shape Layer 1.Shape 1.Rotation Z
+Shape Layer 1.Shape 1.Scale
+Shape Layer 1.Shape 1.Skew
+Shape Layer 1.Shape 1.Skew Axis
+Shape Layer 1.Shape 1.Stroke 1
+Shape Layer 1.Shape 1.Stroke 1.Color
+Shape Layer 1.Shape 1.Stroke 1.Dash Phase
+Shape Layer 1.Shape 1.Stroke 1.Dashes
+Shape Layer 1.Shape 1.Stroke 1.Opacity
+Shape Layer 1.Shape 1.Stroke 1.Stroke Width
+Shape Layer 1.Shape 1.Transform
+Shape Layer 1.Shape 1.Transform.Anchor Point
+Shape Layer 1.Shape 1.Transform.Opacity
+Shape Layer 1.Shape 1.Transform.Position
+Shape Layer 1.Shape 1.Transform.Rotation
+Shape Layer 1.Shape 1.Transform.Rotation X
+Shape Layer 1.Shape 1.Transform.Rotation Y
+Shape Layer 1.Shape 1.Transform.Rotation Z
+Shape Layer 1.Shape 1.Transform.Scale
+Shape Layer 1.Shape 1.Transform.Skew
+Shape Layer 1.Shape 1.Transform.Skew Axis
+Shape Layer 1.Transform
+Shape Layer 1.Transform.Anchor Point
+Shape Layer 1.Transform.Opacity
+Shape Layer 1.Transform.Position
+Shape Layer 1.Transform.Rotation
+Shape Layer 1.Transform.Rotation X
+Shape Layer 1.Transform.Rotation Y
+Shape Layer 1.Transform.Rotation Z
+Shape Layer 1.Transform.Scale
+TwoShapeLayer
+TwoShapeLayer.Shape 1
+TwoShapeLayer.Shape 1.Anchor Point
+TwoShapeLayer.Shape 1.Fill 1
+TwoShapeLayer.Shape 1.Fill 1.Color
+TwoShapeLayer.Shape 1.Fill 1.Opacity
+TwoShapeLayer.Shape 1.Opacity
+TwoShapeLayer.Shape 1.Path 1
+TwoShapeLayer.Shape 1.Path 1.Path
+TwoShapeLayer.Shape 1.Position
+TwoShapeLayer.Shape 1.Rotation
+TwoShapeLayer.Shape 1.Rotation X
+TwoShapeLayer.Shape 1.Rotation Y
+TwoShapeLayer.Shape 1.Rotation Z
+TwoShapeLayer.Shape 1.Scale
+TwoShapeLayer.Shape 1.Skew
+TwoShapeLayer.Shape 1.Skew Axis
+TwoShapeLayer.Shape 1.Stroke 1
+TwoShapeLayer.Shape 1.Stroke 1.Color
+TwoShapeLayer.Shape 1.Stroke 1.Dash Phase
+TwoShapeLayer.Shape 1.Stroke 1.Dashes
+TwoShapeLayer.Shape 1.Stroke 1.Opacity
+TwoShapeLayer.Shape 1.Stroke 1.Stroke Width
+TwoShapeLayer.Shape 1.Transform
+TwoShapeLayer.Shape 1.Transform.Anchor Point
+TwoShapeLayer.Shape 1.Transform.Opacity
+TwoShapeLayer.Shape 1.Transform.Position
+TwoShapeLayer.Shape 1.Transform.Rotation
+TwoShapeLayer.Shape 1.Transform.Rotation X
+TwoShapeLayer.Shape 1.Transform.Rotation Y
+TwoShapeLayer.Shape 1.Transform.Rotation Z
+TwoShapeLayer.Shape 1.Transform.Scale
+TwoShapeLayer.Shape 1.Transform.Skew
+TwoShapeLayer.Shape 1.Transform.Skew Axis
+TwoShapeLayer.Shape 2
+TwoShapeLayer.Shape 2.Anchor Point
+TwoShapeLayer.Shape 2.Fill 1
+TwoShapeLayer.Shape 2.Fill 1.Color
+TwoShapeLayer.Shape 2.Fill 1.Opacity
+TwoShapeLayer.Shape 2.Opacity
+TwoShapeLayer.Shape 2.Path 1
+TwoShapeLayer.Shape 2.Path 1.Path
+TwoShapeLayer.Shape 2.Position
+TwoShapeLayer.Shape 2.Rotation
+TwoShapeLayer.Shape 2.Rotation X
+TwoShapeLayer.Shape 2.Rotation Y
+TwoShapeLayer.Shape 2.Rotation Z
+TwoShapeLayer.Shape 2.Scale
+TwoShapeLayer.Shape 2.Skew
+TwoShapeLayer.Shape 2.Skew Axis
+TwoShapeLayer.Shape 2.Stroke 1
+TwoShapeLayer.Shape 2.Stroke 1.Color
+TwoShapeLayer.Shape 2.Stroke 1.Dash Phase
+TwoShapeLayer.Shape 2.Stroke 1.Dashes
+TwoShapeLayer.Shape 2.Stroke 1.Opacity
+TwoShapeLayer.Shape 2.Stroke 1.Stroke Width
+TwoShapeLayer.Shape 2.Transform
+TwoShapeLayer.Shape 2.Transform.Anchor Point
+TwoShapeLayer.Shape 2.Transform.Opacity
+TwoShapeLayer.Shape 2.Transform.Position
+TwoShapeLayer.Shape 2.Transform.Rotation
+TwoShapeLayer.Shape 2.Transform.Rotation X
+TwoShapeLayer.Shape 2.Transform.Rotation Y
+TwoShapeLayer.Shape 2.Transform.Rotation Z
+TwoShapeLayer.Shape 2.Transform.Scale
+TwoShapeLayer.Shape 2.Transform.Skew
+TwoShapeLayer.Shape 2.Transform.Skew Axis
+TwoShapeLayer.Transform
+TwoShapeLayer.Transform.Anchor Point
+TwoShapeLayer.Transform.Opacity
+TwoShapeLayer.Transform.Position
+TwoShapeLayer.Transform.Rotation
+TwoShapeLayer.Transform.Rotation X
+TwoShapeLayer.Transform.Rotation Y
+TwoShapeLayer.Transform.Rotation Z
+TwoShapeLayer.Transform.Scale
+WiggleLayer
+WiggleLayer.Shape 1
+WiggleLayer.Shape 1.Anchor Point
+WiggleLayer.Shape 1.Fill 1
+WiggleLayer.Shape 1.Fill 1.Color
+WiggleLayer.Shape 1.Fill 1.Opacity
+WiggleLayer.Shape 1.Opacity
+WiggleLayer.Shape 1.Position
+WiggleLayer.Shape 1.Rotation
+WiggleLayer.Shape 1.Rotation X
+WiggleLayer.Shape 1.Rotation Y
+WiggleLayer.Shape 1.Rotation Z
+WiggleLayer.Shape 1.Scale
+WiggleLayer.Shape 1.Skew
+WiggleLayer.Shape 1.Skew Axis
+WiggleLayer.Shape 1.Stroke 1
+WiggleLayer.Shape 1.Stroke 1.Color
+WiggleLayer.Shape 1.Stroke 1.Dash Phase
+WiggleLayer.Shape 1.Stroke 1.Dashes
+WiggleLayer.Shape 1.Stroke 1.Opacity
+WiggleLayer.Shape 1.Stroke 1.Stroke Width
+WiggleLayer.Shape 1.Transform
+WiggleLayer.Shape 1.Transform.Anchor Point
+WiggleLayer.Shape 1.Transform.Opacity
+WiggleLayer.Shape 1.Transform.Position
+WiggleLayer.Shape 1.Transform.Rotation
+WiggleLayer.Shape 1.Transform.Rotation X
+WiggleLayer.Shape 1.Transform.Rotation Y
+WiggleLayer.Shape 1.Transform.Rotation Z
+WiggleLayer.Shape 1.Transform.Scale
+WiggleLayer.Shape 1.Transform.Skew
+WiggleLayer.Shape 1.Transform.Skew Axis
+WiggleLayer.Shape 1.Wigglepath
+WiggleLayer.Shape 1.Wigglepath.Path
+WiggleLayer.Transform
+WiggleLayer.Transform.Anchor Point
+WiggleLayer.Transform.Opacity
+WiggleLayer.Transform.Position
+WiggleLayer.Transform.Rotation
+WiggleLayer.Transform.Rotation X
+WiggleLayer.Transform.Rotation Y
+WiggleLayer.Transform.Rotation Z
+WiggleLayer.Transform.Scale

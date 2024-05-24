@@ -1,0 +1,5 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[dotted_lines.Ellipse 1.Stroke 1] The Core Animation rendering engine does not support animating multiple keyframes for stroke dashPattern values, due to limitations of Core Animation.
+[dotted_lines.Ellipse 1.Stroke 1] The Core Animation rendering engine does not support animating multiple keyframes for stroke dashPattern values, due to limitations of Core Animation.
+[Dotted_lines.Ellipse 1.Stroke 1] The Core Animation rendering engine does not support animating multiple keyframes for stroke dashPattern values, due to limitations of Core Animation.
+[Dotted_lines.Ellipse 1.Stroke 1] The Core Animation rendering engine does not support animating multiple keyframes for stroke dashPattern values, due to limitations of Core Animation.

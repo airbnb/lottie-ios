@@ -9,3 +9,18 @@ build/
 
 # macOS
 .DS_Store
+
+# Swift Package Manager
+.swiftpm
+.build/
+
+# Carthage support tests
+script/test-carthage/Carthage
+
+# Test artifacts
+Tests/Artifacts
+
+# Private test animations
+Tests/Samples/Private/*.json
+Tests/Samples/Private/**/*.json
+Tests/__Snapshots__/**/*Private*

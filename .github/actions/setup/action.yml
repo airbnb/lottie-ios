@@ -1,0 +1,32 @@
+name: Setup
+description: Setup the Lottie iOS CI Environment
+inputs:
+  xcode:
+    description: The version of Xcode to select
+  install-mint:
+    description: Whether to install mint
+    default: true
+  install-carthage:
+    description: Whether to install Carthage
+    default: false
+runs:
+  using: composite
+  steps:
+  - name: Select Xcode ${{ inputs.xcode }}
+    run: sudo xcode-select --switch /Applications/Xcode_${{ inputs.xcode }}.app
+    if: ${{ inputs.xcode }}
+    shell: bash
+
+  - name: Install Mint via Homebrew
+    run: brew install mint
+    if: ${{ inputs.install-mint == 'true' }}
+    shell: bash
+
+  - name: Install Carthage via Homebrew
+    run: brew install carthage
+    if: ${{ inputs.install-carthage == 'true' }}
+    shell: bash
+
+  - name: Install Ruby Gems
+    run: bundle install
+    shell: bash

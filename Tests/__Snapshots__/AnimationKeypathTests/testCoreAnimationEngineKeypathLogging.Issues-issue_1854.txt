@@ -1,0 +1,16 @@
+.accent.Ellipse 1.Transform.Opacity
+.accent.Ellipse 1.Transform.Position
+.accent.Ellipse 1.Transform.Rotation
+.accent.Ellipse 1.Transform.Scale
+.accent.Ellipse 1.Transform.Scale
+.accent.Gradient Fill 1.Colors
+.accent.Gradient Fill 1.Colors
+.accent.Gradient Fill 1.Colors
+.accent.Gradient Fill 1.Colors
+.accent.Gradient Fill 1.Opacity
+.accent.Gradient Fill 1.Opacity
+.accent.Transform.Opacity
+.accent.Transform.Position
+.accent.Transform.Rotation
+.accent.Transform.Scale
+.accent.Transform.Scale

@@ -1,0 +1,2 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[root layer] This animation has a very large number of layers with time remapping (3670 layers over 1001 frames) so will perform poorly with the Core Animation rendering engine.

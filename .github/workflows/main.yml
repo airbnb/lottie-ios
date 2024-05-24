@@ -1,0 +1,181 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-package-no-visionOS:
+    name: "Build Package"
+    runs-on: macos-14
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode:
+        - '15.0.1' # Swift 5.9, but no visionOS support
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          xcode: ${{ matrix.xcode }}
+      - name: Build Package
+        # Only Xcode 15.2 and later support visionOS, so exclude it on earlier versions.
+        run: SKIP_VISION_OS=true bundle exec rake build:package:all
+
+  build-package:
+    name: "Build Package"
+    runs-on: macos-14
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode:
+        - '15.2' # Swift 5.9
+        - '15.3' # Swift 5.10
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          xcode: ${{ matrix.xcode }}
+      - name: Build Package
+        run: bundle exec rake build:package:all
+
+
+  build-example:
+    name: "Build Example App"
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          xcode: '15.3' # Swift 5.10
+      - name: Build Example
+        run: bundle exec rake build:example:all
+
+  test-package:
+    name: "Test Package"
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          xcode: '15.3' # Swift 5.10
+      - name: Test Package
+        run: bundle exec rake test:package
+      - name: Process test artifacts
+        if: always()
+        run: bundle exec rake test:process
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: TestArtifacts
+          path: Tests/Artifacts
+
+  emerge-upload:
+    name: "Emerge Upload"
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+      - name: Build Package
+        run: bundle exec rake emerge:upload
+        env:
+          EMERGE_API_TOKEN: ${{ secrets.EMERGE_API_TOKEN }}
+          PR_NUMBER: ${{ github.event.number }}
+
+  build-xcframework-minimum-supported-version:
+    name: "Build XCFramework"
+    runs-on: macos-14
+    strategy:
+      matrix:
+        xcode:
+          # XCFrameworks are forwards-compatible but not backwards-compatible.
+          # The Xcode version we use for this job is that oldest Xcode version that
+          # will be able to use these XCFrameworks and the lottie-spm package.
+          # This should be the minimum Xcode version permitted by the App Store.
+          # As of April 2024, this is Xcode 15.0: https://developer.apple.com/news/?id=fxu2qp7b
+          #  - However, testing in https://github.com/airbnb/lottie-spm/pull/12 shows that
+          #    Xcode 15.0 can use an XCFramework built by Xcode 15.2.
+          - '15.2' # Swift 5.9, first Xcode version with visionOS support.
+    steps:
+      - uses: actions/checkout@v2
+      - uses: apple-actions/import-codesign-certs@v2
+        continue-on-error: true
+        with:
+          p12-file-base64: ${{ secrets.SIGNING_CERTIFICATE_BASE_64 }}
+          p12-password: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
+      - uses: ./.github/actions/setup
+        with:
+          xcode: ${{ matrix.xcode }}
+      - name: Build XCFramework
+        run: bundle exec rake build:xcframework[Lottie-Xcode-${{ matrix.xcode }}]
+      - name: Upload XCFramework
+        uses: actions/upload-artifact@v2
+        with:
+          name: BuildProducts
+          path: .build/archives
+
+  cocoapod:
+    name: "Lint CocoaPods podspec"
+    runs-on: macos-14
+    strategy:
+      matrix:
+        xcode:
+          - '15.3' # Swift 5.10
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          install-mint: false
+          xcode: ${{ matrix.xcode }}
+      - name: Lint CocoaPod Podspec
+        run: bundle exec rake lint:podspec
+
+  spm-xcode-15:
+    name: "Test Swift Package Manager"
+    runs-on: macos-14
+    strategy:
+      matrix:
+        xcode:
+        - '15.3' # Swift 5.10
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          install-mint: true
+          xcode: ${{ matrix.xcode }}
+      - name: Test Swift Package Manager support
+        run: bundle exec rake test:spm
+
+  carthage:
+    name: "Test Carthage support"
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          install-mint: true
+          install-carthage: true
+          xcode: '15.3' # Swift 5.10
+      - name: Test Carthage support
+        run: bundle exec rake test:carthage
+
+  swiftlint:
+    name: "Lint Swift"
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+      - name: Lint Swift
+        run: bundle exec rake lint:swift
+
+  embedded-libraries:
+    name: "Lint Embedded Libraries"
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+      - name: Lint Embedded Libraries
+        run: bundle exec rake lint:EmbeddedLibraries

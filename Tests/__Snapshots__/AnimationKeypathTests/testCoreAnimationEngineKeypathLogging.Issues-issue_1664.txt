@@ -1,0 +1,157 @@
+card_depth.Transform.Opacity
+card_depth.Transform.Position
+card_depth.Transform.Rotation
+card_depth.Transform.Scale
+card_depth.Transform.Scale
+card_depth.base_color.Transform.Opacity
+card_depth.base_color.Transform.Position
+card_depth.base_color.Transform.Rotation
+card_depth.base_color.Transform.Scale
+card_depth.base_color.Transform.Scale
+card_depth.base_color.card_depth.Fill 1.Color
+card_depth.base_color.card_depth.Fill 1.Opacity
+card_depth.base_color.card_depth.Stroke 1.Color
+card_depth.base_color.card_depth.Stroke 1.Opacity
+card_depth.base_color.card_depth.Stroke 1.Stroke Width
+card_depth.base_color.card_depth.Transform.Opacity
+card_depth.base_color.card_depth.Transform.Position
+card_depth.base_color.card_depth.Transform.Rotation
+card_depth.base_color.card_depth.Transform.Scale
+card_depth.base_color.card_depth.Transform.Scale
+card_depth_MASK.Transform.Opacity
+card_depth_MASK.Transform.Position
+card_depth_MASK.Transform.Rotation
+card_depth_MASK.Transform.Scale
+card_depth_MASK.Transform.Scale
+card_depth_MASK.mask.Fill 1.Color
+card_depth_MASK.mask.Fill 1.Opacity
+card_depth_MASK.mask.Transform.Opacity
+card_depth_MASK.mask.Transform.Position
+card_depth_MASK.mask.Transform.Rotation
+card_depth_MASK.mask.Transform.Scale
+card_depth_MASK.mask.Transform.Scale
+card_front.Transform.Opacity
+card_front.Transform.Position
+card_front.Transform.Rotation
+card_front.Transform.Scale
+card_front.Transform.Scale
+card_front.base_color.Transform.Opacity
+card_front.base_color.Transform.Position
+card_front.base_color.Transform.Rotation
+card_front.base_color.Transform.Scale
+card_front.base_color.Transform.Scale
+card_front.base_color.graph.Fill 1.Color
+card_front.base_color.graph.Fill 1.Opacity
+card_front.base_color.graph.Transform.Opacity
+card_front.base_color.graph.Transform.Position
+card_front.base_color.graph.Transform.Rotation
+card_front.base_color.graph.Transform.Scale
+card_front.base_color.graph.Transform.Scale
+card_front.base_color.lines.Stroke 1.Color
+card_front.base_color.lines.Stroke 1.Opacity
+card_front.base_color.lines.Stroke 1.Stroke Width
+card_front.base_color.lines.Transform.Opacity
+card_front.base_color.lines.Transform.Position
+card_front.base_color.lines.Transform.Rotation
+card_front.base_color.lines.Transform.Scale
+card_front.base_color.lines.Transform.Scale
+card_front.card_bg.Transform.Opacity
+card_front.card_bg.Transform.Position
+card_front.card_bg.Transform.Rotation
+card_front.card_bg.Transform.Scale
+card_front.card_bg.Transform.Scale
+card_front.card_bg.bg.Fill 1.Color
+card_front.card_bg.bg.Fill 1.Opacity
+card_front.card_bg.bg.Transform.Opacity
+card_front.card_bg.bg.Transform.Position
+card_front.card_bg.bg.Transform.Rotation
+card_front.card_bg.bg.Transform.Scale
+card_front.card_bg.bg.Transform.Scale
+finger_L.Transform.Opacity
+finger_L.Transform.Rotation
+finger_L.Transform.Scale
+finger_L.Transform.Scale
+finger_L.accent_color.Transform.Opacity
+finger_L.accent_color.Transform.Position
+finger_L.accent_color.Transform.Rotation
+finger_L.accent_color.Transform.Scale
+finger_L.accent_color.Transform.Scale
+finger_L.accent_color.circle.Fill 1.Color
+finger_L.accent_color.circle.Fill 1.Opacity
+finger_L.accent_color.circle.Transform.Opacity
+finger_L.accent_color.circle.Transform.Position
+finger_L.accent_color.circle.Transform.Rotation
+finger_L.accent_color.circle.Transform.Scale
+finger_L.accent_color.circle.Transform.Scale
+finger_L.accent_color.circle_fade.Fill 1.Color
+finger_L.accent_color.circle_fade.Fill 1.Opacity
+finger_L.accent_color.circle_fade.Transform.Opacity
+finger_L.accent_color.circle_fade.Transform.Position
+finger_L.accent_color.circle_fade.Transform.Rotation
+finger_L.accent_color.circle_fade.Transform.Scale
+finger_L.accent_color.circle_fade.Transform.Scale
+finger_L.accent_color.ring_fade.Stroke 1.Color
+finger_L.accent_color.ring_fade.Stroke 1.Opacity
+finger_L.accent_color.ring_fade.Stroke 1.Stroke Width
+finger_L.accent_color.ring_fade.Transform.Opacity
+finger_L.accent_color.ring_fade.Transform.Position
+finger_L.accent_color.ring_fade.Transform.Rotation
+finger_L.accent_color.ring_fade.Transform.Scale
+finger_L.accent_color.ring_fade.Transform.Scale
+finger_L.base_color.Transform.Opacity
+finger_L.base_color.Transform.Position
+finger_L.base_color.Transform.Rotation
+finger_L.base_color.Transform.Scale
+finger_L.base_color.Transform.Scale
+finger_L.base_color.ring.Stroke 1.Color
+finger_L.base_color.ring.Stroke 1.Opacity
+finger_L.base_color.ring.Stroke 1.Stroke Width
+finger_L.base_color.ring.Transform.Opacity
+finger_L.base_color.ring.Transform.Position
+finger_L.base_color.ring.Transform.Rotation
+finger_L.base_color.ring.Transform.Scale
+finger_L.base_color.ring.Transform.Scale
+finger_R.Transform.Opacity
+finger_R.Transform.Rotation
+finger_R.Transform.Scale
+finger_R.Transform.Scale
+finger_R.accent_color.Transform.Opacity
+finger_R.accent_color.Transform.Position
+finger_R.accent_color.Transform.Rotation
+finger_R.accent_color.Transform.Scale
+finger_R.accent_color.Transform.Scale
+finger_R.accent_color.circle.Fill 1.Color
+finger_R.accent_color.circle.Fill 1.Opacity
+finger_R.accent_color.circle.Transform.Opacity
+finger_R.accent_color.circle.Transform.Position
+finger_R.accent_color.circle.Transform.Rotation
+finger_R.accent_color.circle.Transform.Scale
+finger_R.accent_color.circle.Transform.Scale
+finger_R.accent_color.circle_fade.Fill 1.Color
+finger_R.accent_color.circle_fade.Fill 1.Opacity
+finger_R.accent_color.circle_fade.Transform.Opacity
+finger_R.accent_color.circle_fade.Transform.Position
+finger_R.accent_color.circle_fade.Transform.Rotation
+finger_R.accent_color.circle_fade.Transform.Scale
+finger_R.accent_color.circle_fade.Transform.Scale
+finger_R.accent_color.ring_fade.Stroke 1.Color
+finger_R.accent_color.ring_fade.Stroke 1.Opacity
+finger_R.accent_color.ring_fade.Stroke 1.Stroke Width
+finger_R.accent_color.ring_fade.Transform.Opacity
+finger_R.accent_color.ring_fade.Transform.Position
+finger_R.accent_color.ring_fade.Transform.Rotation
+finger_R.accent_color.ring_fade.Transform.Scale
+finger_R.accent_color.ring_fade.Transform.Scale
+finger_R.base_color.Transform.Opacity
+finger_R.base_color.Transform.Position
+finger_R.base_color.Transform.Rotation
+finger_R.base_color.Transform.Scale
+finger_R.base_color.Transform.Scale
+finger_R.base_color.ring.Stroke 1.Color
+finger_R.base_color.ring.Stroke 1.Opacity
+finger_R.base_color.ring.Stroke 1.Stroke Width
+finger_R.base_color.ring.Transform.Opacity
+finger_R.base_color.ring.Transform.Position
+finger_R.base_color.ring.Transform.Rotation
+finger_R.base_color.ring.Transform.Scale
+finger_R.base_color.ring.Transform.Scale

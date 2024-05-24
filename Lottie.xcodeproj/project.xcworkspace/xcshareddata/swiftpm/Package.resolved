@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Difference",
+        "repositoryURL": "https://github.com/krzysztofzablocki/Difference",
+        "state": {
+          "branch": null,
+          "revision": "f627d00718033c3d7888acd5f4e3524a843db1cf",
+          "version": "1.0.2"
+        }
+      },
+      {
+        "package": "swift-snapshot-testing",
+        "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing.git",
+        "state": {
+          "branch": null,
+          "revision": "0c2826f26d00ff5ddf2de92cb6b2139b0dd3d1ee",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

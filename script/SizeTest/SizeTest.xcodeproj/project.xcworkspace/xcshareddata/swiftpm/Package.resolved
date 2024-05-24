@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AirbnbSwift",
+        "repositoryURL": "https://github.com/airbnb/swift",
+        "state": {
+          "branch": null,
+          "revision": "6900f5ab7ab7394ac85eb9da52b2528ee329b206",
+          "version": "1.0.4"
+        }
+      },
+      {
+        "package": "swift-argument-parser",
+        "repositoryURL": "https://github.com/apple/swift-argument-parser",
+        "state": {
+          "branch": null,
+          "revision": "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
+          "version": "1.2.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

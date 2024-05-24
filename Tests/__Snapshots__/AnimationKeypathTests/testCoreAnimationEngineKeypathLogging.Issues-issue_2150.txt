@@ -1,0 +1,29 @@
+Pre-comp_Arrow.Dark Gray Solid 4.Color
+Pre-comp_Arrow.Dark Gray Solid 4.Transform.Opacity
+Pre-comp_Arrow.Dark Gray Solid 4.Transform.Position
+Pre-comp_Arrow.Dark Gray Solid 4.Transform.Rotation
+Pre-comp_Arrow.Dark Gray Solid 4.Transform.Scale
+Pre-comp_Arrow.Dark Gray Solid 4.Transform.Scale
+Pre-comp_Arrow.Dark Gray Solid 5.Color
+Pre-comp_Arrow.Dark Gray Solid 5.Transform.Opacity
+Pre-comp_Arrow.Dark Gray Solid 5.Transform.Position
+Pre-comp_Arrow.Dark Gray Solid 5.Transform.Rotation
+Pre-comp_Arrow.Dark Gray Solid 5.Transform.Scale
+Pre-comp_Arrow.Dark Gray Solid 5.Transform.Scale
+Pre-comp_Arrow.Null 1.Transform.Rotation
+Pre-comp_Arrow.Null 1.Transform.Rotation
+Pre-comp_Arrow.Null 1.Transform.Rotation
+Pre-comp_Arrow.Null 1.Transform.Rotation
+Pre-comp_Arrow.Null 1.Transform.Scale
+Pre-comp_Arrow.Null 1.Transform.Scale
+Pre-comp_Arrow.Null 1.Transform.Scale
+Pre-comp_Arrow.Null 1.Transform.Scale
+Pre-comp_Arrow.Null 1.Transform.Scale
+Pre-comp_Arrow.Null 1.Transform.Scale
+Pre-comp_Arrow.Null 1.Transform.Scale
+Pre-comp_Arrow.Null 1.Transform.Scale
+Pre-comp_Arrow.Transform.Opacity
+Pre-comp_Arrow.Transform.Position
+Pre-comp_Arrow.Transform.Rotation
+Pre-comp_Arrow.Transform.Scale
+Pre-comp_Arrow.Transform.Scale

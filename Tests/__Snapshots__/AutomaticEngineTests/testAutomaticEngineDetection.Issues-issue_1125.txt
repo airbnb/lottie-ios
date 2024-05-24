@@ -1,0 +1,2 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[mask.Trim Paths 1] The Core Animation rendering engine doesn't currently support applying trims to filled shapes (only stroked shapes).
