@@ -9,7 +9,7 @@ struct LottieViewLayoutDemoView: View {
     HStack {
       VStack {
         LottieView(animation: .named("Samples/LottieLogo1"))
-          .configure(\.contentMode, value: .scaleAspectFit)
+          .configure(\.contentMode, to: .scaleAspectFit)
           .looping()
           .frame(maxWidth: 100)
 
