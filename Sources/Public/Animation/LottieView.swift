@@ -141,9 +141,42 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     }
   }
 
+  /// Returns a copy of this `LottieView` updated to have the specific configuration property
+  /// applied to its represented `LottieAnimationView` whenever it is updated via the `updateUIView(...)`
+  /// or `updateNSView(...)` methods.
+  ///
+  /// - note: This configuration will be applied on every SwiftUI render pass.
+  ///         Be wary of applying heavy side-effects as configuration values.
+  public func configure<Property>(
+    _ property: ReferenceWritableKeyPath<LottieAnimationView, Property>,
+    to value: Property)
+    -> Self
+  {
+    configure { $0[keyPath: property] = value }
+  }
+
+  /// Returns a copy of this `LottieView` updated to have the specific configuration property
+  /// applied to its represented `LottieAnimationView` whenever it is updated via the `updateUIView(...)`
+  /// or `updateNSView(...)` methods.
+  ///
+  /// - note: If the `value` is already the currently-applied configuration value, it won't be applied
+  public func configure<Property: Equatable>(
+    _ property: ReferenceWritableKeyPath<LottieAnimationView, Property>,
+    to value: Property)
+    -> Self
+  {
+    configure {
+      guard $0[keyPath: property] != value else { return }
+      $0[keyPath: property] = value
+    }
+  }
+
   /// Returns a copy of this `LottieView` updated to have the given closure applied to its
   /// represented `LottieAnimationView` whenever it is updated via the `updateUIView(…)`
   /// or `updateNSView(…)` method.
+  ///
+  /// - note: This configuration closure will be executed on every SwiftUI render pass.
+  ///         Be wary of applying heavy side-effects inside it.
   public func configure(_ configure: @escaping (LottieAnimationView) -> Void) -> Self {
     var copy = self
     copy.configurations.append { context in
