@@ -141,6 +141,16 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     }
   }
 
+  /// Returns a copy of this `LottieView` updated to have the specific configuration property
+  /// applied to its represented `LottieAnimationView` whenever it is updated via the `updateUIView(...)`
+  /// or `updateNSView(...)` methods.
+  public func configure<Property>(
+    _ property: ReferenceWritableKeyPath<LottieAnimationView, Property>,
+    value: Property
+  ) -> Self {
+    configure { $0[keyPath: property] = value }
+  }
+
   /// Returns a copy of this `LottieView` updated to have the given closure applied to its
   /// represented `LottieAnimationView` whenever it is updated via the `updateUIView(…)`
   /// or `updateNSView(…)` method.
