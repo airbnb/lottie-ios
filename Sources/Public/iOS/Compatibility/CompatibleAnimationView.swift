@@ -22,23 +22,18 @@ public final class CompatibleAnimation: NSObject {
     subdirectory: String? = nil,
     bundle: Bundle = Bundle.main)
   {
-    self.name = name
-    self.subdirectory = subdirectory
-    self.bundle = bundle
+	self.animation = LottieAnimation.named(name, bundle: bundle, subdirectory: subdirectory)
     super.init()
   }
 
   public init(animation: LottieAnimation) {
-    name = ""
-    subdirectory = nil
-    bundle = Bundle.main
+	self.animation = animation
     super.init()
-    self.animation = animation
   }
 
   // MARK: Internal
 
-  private(set) lazy var animation = LottieAnimation.named(name, bundle: bundle, subdirectory: subdirectory)
+  var animation: LottieAnimation
 
   @objc
   static func named(_ name: String) -> CompatibleAnimation {
