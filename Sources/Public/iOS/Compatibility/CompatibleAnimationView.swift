@@ -22,12 +22,12 @@ public final class CompatibleAnimation: NSObject {
     subdirectory: String? = nil,
     bundle: Bundle = Bundle.main)
   {
-	self.animation = LottieAnimation.named(name, bundle: bundle, subdirectory: subdirectory)
+    animation = LottieAnimation.named(name, bundle: bundle, subdirectory: subdirectory)
     super.init()
   }
 
   public init(animation: LottieAnimation) {
-	self.animation = animation
+    self.animation = animation
     super.init()
   }
 
@@ -47,8 +47,8 @@ public final class CompatibleAnimation: NSObject {
   private let bundle: Bundle
 }
 
-public extension LottieAnimation {
-  func ocCompatible() -> CompatibleAnimation {
+extension LottieAnimation {
+  public func ocCompatible() -> CompatibleAnimation {
     CompatibleAnimation(animation: self)
   }
 }
