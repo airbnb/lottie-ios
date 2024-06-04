@@ -343,7 +343,14 @@ extension BezierPath: Codable {
       totalLength = totalLength + pathElement.length
     }
     if closed {
-      let closeElement = previousElement.pathElementTo(firstVertex)
+      // Don't use an out tangent for the closing point, since the
+      // closing point is exactly equal to the starting point.
+      let closeVertex = CurveVertex(
+        point: firstVertex.point,
+        inTangentRelative: firstVertex.inTangentRelative,
+        outTangentRelative: .zero)
+
+      let closeElement = previousElement.pathElementTo(closeVertex)
       decodedElements.append(closeElement)
       totalLength = totalLength + closeElement.length
     }
@@ -448,7 +455,14 @@ extension BezierPath: AnyInitializable {
       totalLength = totalLength + pathElement.length
     }
     if closed {
-      let closeElement = previousElement.pathElementTo(firstVertex)
+      // Don't use an out tangent for the closing point, since the
+      // closing point is exactly equal to the starting point.
+      let closeVertex = CurveVertex(
+        point: firstVertex.point,
+        inTangentRelative: firstVertex.inTangentRelative,
+        outTangentRelative: .zero)
+
+      let closeElement = previousElement.pathElementTo(closeVertex)
       decodedElements.append(closeElement)
       totalLength = totalLength + closeElement.length
     }
