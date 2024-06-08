@@ -1151,6 +1151,8 @@
 		D453D8B228FF9EA900D3F49C /* DefaultAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */; };
 		D453D8B328FF9EAA00D3F49C /* DefaultAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */; };
 		D453D8B428FF9EAA00D3F49C /* DefaultAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */; };
+		E95C386F2C14B7FC00329910 /* DropShadowNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C386E2C14B7FC00329910 /* DropShadowNode.swift */; };
+		E95C38712C14D14300329910 /* LayerEffectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C38702C14D14300329910 /* LayerEffectNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1476,6 +1478,8 @@
 		D453D8AA28FE6EE300D3F49C /* LottieAnimationCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationCache.swift; sourceTree = "<group>"; };
 		D453D8AE28FF9BC600D3F49C /* AnimationCacheProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationCacheProviderTests.swift; sourceTree = "<group>"; };
 		D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAnimationCache.swift; sourceTree = "<group>"; };
+		E95C386E2C14B7FC00329910 /* DropShadowNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadowNode.swift; sourceTree = "<group>"; };
+		E95C38702C14D14300329910 /* LayerEffectNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerEffectNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1959,6 +1963,7 @@
 		2E9C95662822F43000677516 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
+				E95C386D2C14B7DC00329910 /* LayoutEffectNodes */,
 				2E9C95672822F43000677516 /* ModifierNodes */,
 				2E9C95692822F43000677516 /* RenderContainers */,
 				2E9C956B2822F43000677516 /* OutputNodes */,
@@ -2444,6 +2449,15 @@
 				6C48785F2901D8C70005AF07 /* DotLottieImageProvider.swift */,
 			);
 			path = DotLottie;
+			sourceTree = "<group>";
+		};
+		E95C386D2C14B7DC00329910 /* LayoutEffectNodes */ = {
+			isa = PBXGroup;
+			children = (
+				E95C386E2C14B7FC00329910 /* DropShadowNode.swift */,
+				E95C38702C14D14300329910 /* LayerEffectNode.swift */,
+			);
+			path = LayoutEffectNodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3005,6 +3019,7 @@
 				2E9C96152822F43100677516 /* Transform.swift in Sources */,
 				2E9C97472822F43100677516 /* CGFloatExtensions.swift in Sources */,
 				2EAF5AC527A0798700E00531 /* UIColorExtension.swift in Sources */,
+				E95C386F2C14B7FC00329910 /* DropShadowNode.swift in Sources */,
 				2E9C967E2822F43100677516 /* GradientStrokeRenderer.swift in Sources */,
 				08E207182A56014E002DCE17 /* SwiftUIView.swift in Sources */,
 				2E9C96932822F43100677516 /* PolygonNode.swift in Sources */,
@@ -3186,6 +3201,7 @@
 				2E9C97652822F43100677516 /* CurveVertex.swift in Sources */,
 				0820D5C52A8BF60F007D705C /* EffectValue.swift in Sources */,
 				08C002042A46150D00AB54BA /* FileManager+ZIP.swift in Sources */,
+				E95C38712C14D14300329910 /* LayerEffectNode.swift in Sources */,
 				08E2072A2A56014E002DCE17 /* DidSelectProviding.swift in Sources */,
 				0820D5CD2A8BF6FF007D705C /* ColorEffectValue.swift in Sources */,
 				2E9C96482822F43100677516 /* NullCompositionLayer.swift in Sources */,
