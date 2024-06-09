@@ -1153,6 +1153,12 @@
 		D453D8B428FF9EAA00D3F49C /* DefaultAnimationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */; };
 		E95C386F2C14B7FC00329910 /* DropShadowNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C386E2C14B7FC00329910 /* DropShadowNode.swift */; };
 		E95C38712C14D14300329910 /* LayerEffectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C38702C14D14300329910 /* LayerEffectNode.swift */; };
+		E95C38722C15559500329910 /* DropShadowNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C386E2C14B7FC00329910 /* DropShadowNode.swift */; };
+		E95C38732C15559600329910 /* DropShadowNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C386E2C14B7FC00329910 /* DropShadowNode.swift */; };
+		E95C38742C15559700329910 /* DropShadowNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C386E2C14B7FC00329910 /* DropShadowNode.swift */; };
+		E95C38752C15559D00329910 /* LayerEffectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C38702C14D14300329910 /* LayerEffectNode.swift */; };
+		E95C38762C15559E00329910 /* LayerEffectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C38702C14D14300329910 /* LayerEffectNode.swift */; };
+		E95C38772C15559F00329910 /* LayerEffectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C38702C14D14300329910 /* LayerEffectNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2724,11 +2730,13 @@
 				080DEF6F2A95709700BE2D96 /* RenderingEngineOption.swift in Sources */,
 				080DEFB22A9570FE00BE2D96 /* ErasedContentProviding.swift in Sources */,
 				080DF0772A95717D00BE2D96 /* CompoundBezierPath.swift in Sources */,
+				E95C38742C15559700329910 /* DropShadowNode.swift in Sources */,
 				080DEF8E2A9570D500BE2D96 /* LottieColor.swift in Sources */,
 				080DF0162A95713800BE2D96 /* PathOutputNode.swift in Sources */,
 				080DF00A2A95713000BE2D96 /* InvertedMatteLayer.swift in Sources */,
 				080DEFCD2A95711400BE2D96 /* Archive.swift in Sources */,
 				080DEF912A9570DD00BE2D96 /* LRUAnimationCache.swift in Sources */,
+				E95C38772C15559F00329910 /* LayerEffectNode.swift in Sources */,
 				080DF05D2A95716A00BE2D96 /* ImageAsset.swift in Sources */,
 				080DF0722A95717D00BE2D96 /* UnitBezier.swift in Sources */,
 				080DF05E2A95716D00BE2D96 /* EffectValue.swift in Sources */,
@@ -3334,6 +3342,7 @@
 				0887347028F0CBDE00458627 /* LottieAnimation.swift in Sources */,
 				2E9C97422822F43100677516 /* TestHelpers.swift in Sources */,
 				08EF21DD289C643B0097EA47 /* KeyframeInterpolator.swift in Sources */,
+				E95C38722C15559500329910 /* DropShadowNode.swift in Sources */,
 				2E9C96162822F43100677516 /* Transform.swift in Sources */,
 				2E9C97482822F43100677516 /* CGFloatExtensions.swift in Sources */,
 				0820D5942A8ACD67007D705C /* LottieButton.swift in Sources */,
@@ -3515,6 +3524,7 @@
 				2E9C96492822F43100677516 /* NullCompositionLayer.swift in Sources */,
 				2EAF5AFF27A0798700E00531 /* GradientValueProvider.swift in Sources */,
 				2E9C96BE2822F43100677516 /* AnyValueContainer.swift in Sources */,
+				E95C38752C15559D00329910 /* LayerEffectNode.swift in Sources */,
 				08E2072B2A56014E002DCE17 /* DidSelectProviding.swift in Sources */,
 				2E9C96612822F43100677516 /* LayerFontProvider.swift in Sources */,
 				6C7698442A38A71200E9BEF4 /* DotLottieConfiguration.swift in Sources */,
@@ -3621,6 +3631,7 @@
 				2E9C97492822F43100677516 /* CGFloatExtensions.swift in Sources */,
 				2EAF5AC727A0798700E00531 /* UIColorExtension.swift in Sources */,
 				2E9C96802822F43100677516 /* GradientStrokeRenderer.swift in Sources */,
+				E95C38732C15559600329910 /* DropShadowNode.swift in Sources */,
 				2E9C96952822F43100677516 /* PolygonNode.swift in Sources */,
 				08E2071A2A56014E002DCE17 /* SwiftUIView.swift in Sources */,
 				2E9C96E62822F43100677516 /* MaskCompositionLayer.swift in Sources */,
@@ -3802,6 +3813,7 @@
 				2E9C97672822F43100677516 /* CurveVertex.swift in Sources */,
 				0820D5C72A8BF60F007D705C /* EffectValue.swift in Sources */,
 				2E9C964A2822F43100677516 /* NullCompositionLayer.swift in Sources */,
+				E95C38762C15559E00329910 /* LayerEffectNode.swift in Sources */,
 				08E2072C2A56014E002DCE17 /* DidSelectProviding.swift in Sources */,
 				0820D5CF2A8BF6FF007D705C /* ColorEffectValue.swift in Sources */,
 				08C002ED2A46196300AB54BA /* Archive+Helpers.swift in Sources */,
