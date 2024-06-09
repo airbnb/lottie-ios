@@ -1963,7 +1963,7 @@
 		2E9C95662822F43000677516 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
-				E95C386D2C14B7DC00329910 /* LayoutEffectNodes */,
+				E95C386D2C14B7DC00329910 /* LayerEffectNodes */,
 				2E9C95672822F43000677516 /* ModifierNodes */,
 				2E9C95692822F43000677516 /* RenderContainers */,
 				2E9C956B2822F43000677516 /* OutputNodes */,
@@ -2451,13 +2451,13 @@
 			path = DotLottie;
 			sourceTree = "<group>";
 		};
-		E95C386D2C14B7DC00329910 /* LayoutEffectNodes */ = {
+		E95C386D2C14B7DC00329910 /* LayerEffectNodes */ = {
 			isa = PBXGroup;
 			children = (
 				E95C386E2C14B7FC00329910 /* DropShadowNode.swift */,
 				E95C38702C14D14300329910 /* LayerEffectNode.swift */,
 			);
-			path = LayoutEffectNodes;
+			path = LayerEffectNodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
