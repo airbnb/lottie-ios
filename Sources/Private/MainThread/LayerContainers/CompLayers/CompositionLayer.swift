@@ -36,6 +36,10 @@ class CompositionLayer: CALayer, KeypathSearchable {
       "bounds" : NSNull(),
       "anchorPoint" : NSNull(),
       "sublayerTransform" : NSNull(),
+      "shadowOpacity" : NSNull(),
+      "shadowOffset" : NSNull(),
+      "shadowColor" : NSNull(),
+      "shadowRadius" : NSNull(),
     ]
 
     contentsLayer.anchorPoint = .zero
