@@ -36,6 +36,10 @@ class CompositionLayer: CALayer, KeypathSearchable {
       "bounds" : NSNull(),
       "anchorPoint" : NSNull(),
       "sublayerTransform" : NSNull(),
+      "shadowOpacity" : NSNull(),
+      "shadowOffset" : NSNull(),
+      "shadowColor" : NSNull(),
+      "shadowRadius" : NSNull(),
     ]
 
     contentsLayer.anchorPoint = .zero
@@ -55,6 +59,14 @@ class CompositionLayer: CALayer, KeypathSearchable {
       contentsLayer.mask = maskLayer
     }
 
+    // There are two different drop shadow schemas, either using `DropShadowEffect` or `DropShadowStyle`.
+    // If both happen to be present, prefer the `DropShadowEffect` (which is the drop shadow schema
+    // supported on other platforms).
+    let dropShadowEffect = layer.effects.first(where: { $0 is DropShadowEffect }) as? DropShadowModel
+    let dropShadowStyle = layer.styles.first(where: { $0 is DropShadowStyle }) as? DropShadowModel
+    if let dropShadowModel = dropShadowEffect ?? dropShadowStyle {
+      layerEffectNodes.append(DropShadowNode(model: dropShadowModel))
+    }
     name = layer.name
   }
 
@@ -72,6 +84,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
     keypathName = layer.keypathName
     childKeypaths = [transformNode.transformProperties]
     maskLayer = nil
+    layerEffectNodes = layer.layerEffectNodes
     super.init(layer: layer)
   }
 
@@ -95,6 +108,8 @@ class CompositionLayer: CALayer, KeypathSearchable {
   let outFrame: CGFloat
   let startFrame: CGFloat
   let timeStretch: CGFloat
+
+  var layerEffectNodes: [LayerEffectNode] = []
 
   // MARK: Keypath Searchable
 
@@ -142,6 +157,10 @@ class CompositionLayer: CALayer, KeypathSearchable {
     contentsLayer.opacity = transformNode.opacity
     contentsLayer.isHidden = !layerVisible
     layerDelegate?.frameUpdated(frame: frame)
+
+    for layerEffectNode in layerEffectNodes {
+      layerEffectNode.updateWithFrame(layer: self, frame: frame)
+    }
   }
 
   func displayContentsWithFrame(frame _: CGFloat, forceUpdates _: Bool) {
