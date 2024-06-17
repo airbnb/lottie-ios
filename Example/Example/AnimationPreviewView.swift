@@ -69,15 +69,13 @@ struct AnimationPreviewView: View {
           currentRenderingEngine = animationView.currentRenderingEngine
         }
       }
-      // TODO: REVERT
-      // .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
-      .getRealtimeAnimationFrame(animationPlaying ? $currentFrame : nil)
+      .getRealtimeAnimationProgress(animationPlaying ? $sliderValue : nil)
 
       Spacer()
 
       HStack {
         #if !os(tvOS)
-        Slider(value: $currentFrame, in: 0...300, step: 1, onEditingChanged: { editing in
+        Slider(value: $sliderValue, in: 0...1, onEditingChanged: { editing in
           if animationPlaying, editing {
             animationPlaying = false
           }
@@ -95,13 +93,6 @@ struct AnimationPreviewView: View {
             Image(systemName: "play.fill")
           }
         }
-
-        // TODO: REVERT
-
-        Spacer(minLength: 16)
-
-        Text("\(Int(currentFrame))")
-          .frame(minWidth: 30)
       }
       .padding(.all, 16)
     }
@@ -124,8 +115,7 @@ struct AnimationPreviewView: View {
   private let urls: [URL]
 
   @State private var animationPlaying = true
-  // @State private var sliderValue: AnimationProgressTime = 0
-  @State private var currentFrame: AnimationFrameTime = 0
+  @State private var sliderValue: AnimationProgressTime = 0
   @State private var currentURLIndex: Int
   @State private var renderingEngine: RenderingEngineOption = .automatic
   @State private var loopMode: LottieLoopMode = .loop
@@ -137,7 +127,7 @@ struct AnimationPreviewView: View {
     if animationPlaying {
       .playing(.fromProgress(playFromProgress, toProgress: playToProgress, loopMode: loopMode))
     } else {
-      .paused(at: .frame(currentFrame))
+      .paused(at: .progress(sliderValue))
     }
   }
 
