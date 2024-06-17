@@ -15,6 +15,7 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
 
   init(textAnimator: TextAnimator) {
     keypathName = textAnimator.name
+    textRangeUnit = textAnimator.textRangeUnit
     var properties = [String : AnyNodeProperty]()
 
     if let keyframeGroup = textAnimator.anchor {
@@ -123,6 +124,13 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
       end = nil
     }
 
+    if let selectedRangeOpacityKeyframes = textAnimator.opacity {
+      selectedRangeOpacity = NodeProperty(provider: KeyframeInterpolator(keyframes: selectedRangeOpacityKeyframes.keyframes))
+      properties["SelectedRangeOpacity"] = selectedRangeOpacity
+    } else {
+      selectedRangeOpacity = nil
+    }
+
     keypathProperties = properties
 
     self.properties = Array(keypathProperties.values)
@@ -147,6 +155,8 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
   let tracking: NodeProperty<LottieVector1D>?
   let start: NodeProperty<LottieVector1D>?
   let end: NodeProperty<LottieVector1D>?
+  let selectedRangeOpacity: NodeProperty<LottieVector1D>?
+  let textRangeUnit: TextRangeUnit?
 
   let keypathProperties: [String: AnyNodeProperty]
   let properties: [AnyNodeProperty]
@@ -257,6 +267,15 @@ final class TextOutputNode: NodeOutput {
     }
   }
 
+  var selectedRangeOpacity: CGFloat? {
+    get {
+      _selectedRangeOpacity
+    }
+    set {
+      _selectedRangeOpacity = newValue
+    }
+  }
+
   func hasOutputUpdates(_: CGFloat) -> Bool {
     // TODO Fix This
     true
@@ -272,6 +291,7 @@ final class TextOutputNode: NodeOutput {
   fileprivate var _strokeWidth: CGFloat?
   fileprivate var _start: CGFloat?
   fileprivate var _end: CGFloat?
+  fileprivate var _selectedRangeOpacity: CGFloat?
 }
 
 // MARK: - TextAnimatorNode
@@ -314,12 +334,13 @@ class TextAnimatorNode: AnimatorNode {
 
   func rebuildOutputs(frame _: CGFloat) {
     textOutputNode.xform = textAnimatorProperties.caTransform
-    textOutputNode.opacity = 1.0//(textAnimatorProperties.opacity?.value.cgFloatValue ?? 100) * 0.01
+    textOutputNode.opacity = 1.0
     textOutputNode.strokeColor = textAnimatorProperties.strokeColor?.value.cgColorValue
     textOutputNode.fillColor = textAnimatorProperties.fillColor?.value.cgColorValue
     textOutputNode.tracking = textAnimatorProperties.tracking?.value.cgFloatValue ?? 1
     textOutputNode.strokeWidth = textAnimatorProperties.strokeWidth?.value.cgFloatValue ?? 0
     textOutputNode.start = textAnimatorProperties.start?.value.cgFloatValue
     textOutputNode.end = textAnimatorProperties.end?.value.cgFloatValue
+    textOutputNode.selectedRangeOpacity = (textAnimatorProperties.opacity?.value.cgFloatValue).flatMap { $0 * 0.01 }
   }
 }

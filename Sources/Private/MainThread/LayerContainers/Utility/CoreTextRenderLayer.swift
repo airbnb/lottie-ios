@@ -31,22 +31,6 @@ final class CoreTextRenderLayer: CALayer {
     }
   }
 
-  public var start: Int? {
-    didSet {
-      needsContentUpdate = true
-      setNeedsLayout()
-      setNeedsDisplay()
-    }
-  }
-
-  public var end: Int? {
-    didSet {
-      needsContentUpdate = true
-      setNeedsLayout()
-      setNeedsDisplay()
-    }
-  }
-
   public var font: CTFont? {
     didSet {
       needsContentUpdate = true
@@ -55,7 +39,7 @@ final class CoreTextRenderLayer: CALayer {
     }
   }
 
-  public var alignment: NSTextAlignment = .left {
+  public var alignment = NSTextAlignment.left {
     didSet {
       needsContentUpdate = true
       setNeedsLayout()
@@ -111,6 +95,40 @@ final class CoreTextRenderLayer: CALayer {
   }
 
   public var preferredSize: CGSize? {
+    didSet {
+      needsContentUpdate = true
+      setNeedsLayout()
+      setNeedsDisplay()
+    }
+  }
+
+  public var start: Int? {
+    didSet {
+      needsContentUpdate = true
+      setNeedsLayout()
+      setNeedsDisplay()
+    }
+  }
+
+  public var end: Int? {
+    didSet {
+      needsContentUpdate = true
+      setNeedsLayout()
+      setNeedsDisplay()
+    }
+  }
+
+  /// The type of unit to use when computing the `start` / `end` range within the text string
+  public var textRangeUnit: TextRangeUnit? {
+    didSet {
+      needsContentUpdate = true
+      setNeedsLayout()
+      setNeedsDisplay()
+    }
+  }
+
+  /// The opacity to apply to the range between `start` and `end`
+  public var selectedRangeOpacity: CGFloat? {
     didSet {
       needsContentUpdate = true
       setNeedsLayout()
@@ -192,8 +210,8 @@ final class CoreTextRenderLayer: CALayer {
 
   // MARK: Private
 
-  private var drawingRect: CGRect = .zero
-  private var drawingAnchor: CGPoint = .zero
+  private var drawingRect = CGRect.zero
+  private var drawingAnchor = CGPoint.zero
   private var fillFrameSetter: CTFramesetter?
   private var attributedString: NSAttributedString?
   private var strokeFrameSetter: CTFramesetter?
@@ -277,9 +295,54 @@ final class CoreTextRenderLayer: CALayer {
 
     let attrString = NSMutableAttributedString(string: text, attributes: attributes)
 
-    // Proof of concept showing that we're at least able to apply different attributed string stylings each frame:
-    if let start {
-      attrString.addAttribute(NSAttributedString.Key.foregroundColor, value: CGColor.rgba(0, 0, 0, 0), range: NSRange(location: start, length: text.count - start))
+    // Apply the text animator within between the `start` and `end` indices
+    if let start, let end, let selectedRangeOpacity {
+      // The start and end of a text animator refer to the portions of the text
+      // where that animator is applies. In the schema these can be represented
+      // in absolute index value, or as percentages relative to the dynamic string length.
+      var startIndex: Int
+      var endIndex: Int
+
+      switch textRangeUnit ?? .percentage {
+      case .index:
+        startIndex = start
+        endIndex = end
+
+      case .percentage:
+        let startPercentage = Double(start) / 100
+        let endPercentage = Double(end) / 100
+
+        startIndex = Int(round(Double(attrString.length) * startPercentage))
+        endIndex = Int(round(Double(attrString.length) * endPercentage))
+      }
+
+      // Carefully cap the indices, since passing invalid indices
+      // to `NSAttributedString` will crash the app.
+      startIndex = startIndex.clamp(0, attrString.length)
+      endIndex = endIndex.clamp(0, attrString.length)
+
+      // Make sure the end index actually comes after the start index
+      if endIndex < startIndex {
+        swap(&startIndex, &endIndex)
+      }
+
+      // Apply the `selectedRangeOpacity` to the current `fillColor` if provided
+      let textRangeColor: CGColor
+      if let fillColor {
+        if let (r, g, b) = fillColor.rgb {
+          textRangeColor = .rgba(r, g, b, selectedRangeOpacity)
+        } else {
+          LottieLogger.shared.warn("Could not convert color \(fillColor) to RGB values.")
+          textRangeColor = .rgba(0, 0, 0, selectedRangeOpacity)
+        }
+      } else {
+        textRangeColor = .rgba(0, 0, 0, selectedRangeOpacity)
+      }
+
+      attrString.addAttribute(
+        NSAttributedString.Key.foregroundColor,
+        value: textRangeColor,
+        range: NSRange(location: startIndex, length: endIndex - startIndex))
     }
 
     attributedString = attrString

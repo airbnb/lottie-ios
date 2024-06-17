@@ -5,6 +5,15 @@
 //  Created by Brandon Withrow on 1/9/19.
 //
 
+// MARK: - TextRangeUnit
+
+enum TextRangeUnit: Int, RawRepresentable, Codable {
+  case percentage = 1
+  case index = 2
+}
+
+// MARK: - TextAnimator
+
 final class TextAnimator: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
@@ -37,6 +46,7 @@ final class TextAnimator: Codable, DictionaryInitializable {
     let selectorContainer = try? container.nestedContainer(keyedBy: TextSelectorKeys.self, forKey: .textSelector)
     start = try? selectorContainer?.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .start)
     end = try? selectorContainer?.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .start)
+    textRangeUnit = try? selectorContainer?.decodeIfPresent(TextRangeUnit.self, forKey: .textRangeUnits)
   }
 
   init(dictionary: [String: Any]) throws {
@@ -127,6 +137,12 @@ final class TextAnimator: Codable, DictionaryInitializable {
     } else {
       end = nil
     }
+
+    if let textRangeUnitValue = selectorDictionary[TextSelectorKeys.textRangeUnits.rawValue] as? Int {
+      textRangeUnit = TextRangeUnit(rawValue: textRangeUnitValue)
+    } else {
+      textRangeUnit = nil
+    }
   }
 
   // MARK: Internal
@@ -178,6 +194,9 @@ final class TextAnimator: Codable, DictionaryInitializable {
   /// End
   let end: KeyframeGroup<LottieVector1D>?
 
+  /// The type of unit used by the start/end ranges
+  let textRangeUnit: TextRangeUnit?
+
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     var animatorContainer = container.nestedContainer(keyedBy: TextAnimatorKeys.self, forKey: .textAnimator)
@@ -199,6 +218,7 @@ final class TextAnimator: Codable, DictionaryInitializable {
     case start = "s"
     case end = "e"
     case offset = "o"
+    case textRangeUnits = "r"
   }
 
   private enum TextAnimatorKeys: String, CodingKey {
