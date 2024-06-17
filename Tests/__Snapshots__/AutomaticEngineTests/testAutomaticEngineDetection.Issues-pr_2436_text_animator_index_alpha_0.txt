@@ -1,0 +1,2 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[Paris, FR] The Core Animation rendering engine currently doesn't support text animators.

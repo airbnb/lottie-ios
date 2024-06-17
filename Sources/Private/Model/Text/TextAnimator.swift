@@ -45,7 +45,7 @@ final class TextAnimator: Codable, DictionaryInitializable {
 
     let selectorContainer = try? container.nestedContainer(keyedBy: TextSelectorKeys.self, forKey: .textSelector)
     start = try? selectorContainer?.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .start)
-    end = try? selectorContainer?.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .start)
+    end = try? selectorContainer?.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .end)
     textRangeUnit = try? selectorContainer?.decodeIfPresent(TextRangeUnit.self, forKey: .textRangeUnits)
   }
 
