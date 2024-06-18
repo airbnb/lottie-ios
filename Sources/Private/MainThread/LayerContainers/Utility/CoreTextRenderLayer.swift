@@ -296,7 +296,7 @@ final class CoreTextRenderLayer: CALayer {
     let attrString = NSMutableAttributedString(string: text, attributes: attributes)
 
     // Apply the text animator within between the `start` and `end` indices
-    if let start, let end, let selectedRangeOpacity {
+    if let selectedRangeOpacity {
       // The start and end of a text animator refer to the portions of the text
       // where that animator is applies. In the schema these can be represented
       // in absolute index value, or as percentages relative to the dynamic string length.
@@ -305,12 +305,12 @@ final class CoreTextRenderLayer: CALayer {
 
       switch textRangeUnit ?? .percentage {
       case .index:
-        startIndex = start
-        endIndex = end
+        startIndex = start ?? 0
+        endIndex = end ?? text.count
 
       case .percentage:
-        let startPercentage = Double(start) / 100
-        let endPercentage = Double(end) / 100
+        let startPercentage = Double(start ?? 0) / 100
+        let endPercentage = Double(end ?? 100) / 100
 
         startIndex = Int(round(Double(attrString.length) * startPercentage))
         endIndex = Int(round(Double(attrString.length) * endPercentage))
