@@ -37,6 +37,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
       assetLibrary: animation.assetLibrary,
       layerImageProvider: layerImageProvider,
       layerTextProvider: layerTextProvider,
+      layerFontProvider: layerFontProvider,
       textProvider: textProvider,
       fontProvider: fontProvider,
       frameRate: CGFloat(animation.framerate),
