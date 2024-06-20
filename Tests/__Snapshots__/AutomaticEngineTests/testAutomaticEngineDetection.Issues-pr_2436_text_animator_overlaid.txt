@@ -1,0 +1,7 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[Paris, France] The Core Animation rendering engine currently doesn't support text animators.
+[Paris, France] The Core Animation rendering engine currently doesn't support text animators.
+[Montreal, Canada] The Core Animation rendering engine currently doesn't support text animators.
+[Montreal, Canada] The Core Animation rendering engine currently doesn't support text animators.
+[Düsseldorf, Germany] The Core Animation rendering engine currently doesn't support text animators.
+[Düsseldorf, Germany] The Core Animation rendering engine currently doesn't support text animators.

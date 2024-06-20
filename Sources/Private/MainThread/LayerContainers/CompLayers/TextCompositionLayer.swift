@@ -135,6 +135,10 @@ final class TextCompositionLayer: CompositionLayer {
     let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
     let matrix = rootNode?.textOutputNode.xform ?? CATransform3DIdentity
     let ctFont = fontProvider.fontFor(family: text.fontFamily, size: CGFloat(text.fontSize))
+    let start = rootNode?.textOutputNode.start.flatMap { Int($0) }
+    let end = rootNode?.textOutputNode.end.flatMap { Int($0) }
+    let selectedRangeOpacity = rootNode?.textOutputNode.selectedRangeOpacity
+    let textRangeUnit = rootNode?.textAnimatorProperties.textRangeUnit
 
     // Set all of the text layer options
     textLayer.text = textString
@@ -142,6 +146,12 @@ final class TextCompositionLayer: CompositionLayer {
     textLayer.alignment = text.justification.textAlignment
     textLayer.lineHeight = CGFloat(text.lineHeight)
     textLayer.tracking = tracking
+
+    // Configure the text animators
+    textLayer.start = start
+    textLayer.end = end
+    textLayer.textRangeUnit = textRangeUnit
+    textLayer.selectedRangeOpacity = selectedRangeOpacity
 
     if let fillColor = rootNode?.textOutputNode.fillColor {
       textLayer.fillColor = fillColor

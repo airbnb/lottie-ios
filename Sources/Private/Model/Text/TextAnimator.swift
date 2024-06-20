@@ -5,6 +5,15 @@
 //  Created by Brandon Withrow on 1/9/19.
 //
 
+// MARK: - TextRangeUnit
+
+enum TextRangeUnit: Int, RawRepresentable, Codable {
+  case percentage = 1
+  case index = 2
+}
+
+// MARK: - TextAnimator
+
 final class TextAnimator: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
@@ -12,6 +21,7 @@ final class TextAnimator: Codable, DictionaryInitializable {
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: TextAnimator.CodingKeys.self)
     name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
+
     let animatorContainer = try container.nestedContainer(keyedBy: TextAnimatorKeys.self, forKey: .textAnimator)
     fillColor = try animatorContainer.decodeIfPresent(KeyframeGroup<LottieColor>.self, forKey: .fillColor)
     strokeColor = try animatorContainer.decodeIfPresent(KeyframeGroup<LottieColor>.self, forKey: .strokeColor)
@@ -32,10 +42,16 @@ final class TextAnimator: Codable, DictionaryInitializable {
       rotationZ = nil
     }
     opacity = try animatorContainer.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .opacity)
+
+    let selectorContainer = try? container.nestedContainer(keyedBy: TextSelectorKeys.self, forKey: .textSelector)
+    start = try? selectorContainer?.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .start)
+    end = try? selectorContainer?.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .end)
+    textRangeUnit = try? selectorContainer?.decodeIfPresent(TextRangeUnit.self, forKey: .textRangeUnits)
   }
 
   init(dictionary: [String: Any]) throws {
     name = (try? dictionary.value(for: CodingKeys.name)) ?? ""
+
     let animatorDictionary: [String: Any] = try dictionary.value(for: CodingKeys.textAnimator)
     if let fillColorDictionary = animatorDictionary[TextAnimatorKeys.fillColor.rawValue] as? [String: Any] {
       fillColor = try? KeyframeGroup<LottieColor>(dictionary: fillColorDictionary)
@@ -107,6 +123,26 @@ final class TextAnimator: Codable, DictionaryInitializable {
     } else {
       opacity = nil
     }
+
+    let selectorDictionary: [String: Any] = try dictionary.value(for: CodingKeys.textSelector)
+
+    if let startDictionary = selectorDictionary[TextSelectorKeys.start.rawValue] as? [String: Any] {
+      start = try KeyframeGroup<LottieVector1D>(dictionary: startDictionary)
+    } else {
+      start = nil
+    }
+
+    if let endDictionary = selectorDictionary[TextSelectorKeys.end.rawValue] as? [String: Any] {
+      end = try KeyframeGroup<LottieVector1D>(dictionary: endDictionary)
+    } else {
+      end = nil
+    }
+
+    if let textRangeUnitValue = selectorDictionary[TextSelectorKeys.textRangeUnits.rawValue] as? Int {
+      textRangeUnit = TextRangeUnit(rawValue: textRangeUnitValue)
+    } else {
+      textRangeUnit = nil
+    }
   }
 
   // MARK: Internal
@@ -152,6 +188,15 @@ final class TextAnimator: Codable, DictionaryInitializable {
   /// Tracking
   let tracking: KeyframeGroup<LottieVector1D>?
 
+  /// Start
+  let start: KeyframeGroup<LottieVector1D>?
+
+  /// End
+  let end: KeyframeGroup<LottieVector1D>?
+
+  /// The type of unit used by the start/end ranges
+  let textRangeUnit: TextRangeUnit?
+
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     var animatorContainer = container.nestedContainer(keyedBy: TextAnimatorKeys.self, forKey: .textAnimator)
@@ -164,7 +209,7 @@ final class TextAnimator: Codable, DictionaryInitializable {
   // MARK: Private
 
   private enum CodingKeys: String, CodingKey {
-//    case textSelector = "s" TODO
+    case textSelector = "s"
     case textAnimator = "a"
     case name = "nm"
   }
@@ -173,6 +218,7 @@ final class TextAnimator: Codable, DictionaryInitializable {
     case start = "s"
     case end = "e"
     case offset = "o"
+    case textRangeUnits = "r"
   }
 
   private enum TextAnimatorKeys: String, CodingKey {
