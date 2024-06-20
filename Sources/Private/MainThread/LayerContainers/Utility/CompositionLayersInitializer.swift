@@ -49,7 +49,7 @@ extension [LayerModel] {
           precomp: precompLayer,
           asset: precompAsset,
           layerImageProvider: layerImageProvider,
-          layerTextProvider: layerTextProvider, 
+          layerTextProvider: layerTextProvider,
           layerFontProvider: layerFontProvider,
           textProvider: textProvider,
           fontProvider: fontProvider,
