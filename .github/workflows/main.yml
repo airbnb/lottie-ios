@@ -110,7 +110,7 @@ jobs:
         with:
           xcode: ${{ matrix.xcode }}
       - name: Build XCFramework
-        run: bundle exec rake build:xcframework[Lottie-Xcode-${{ matrix.xcode }}]
+        run: bundle exec rake build:xcframework
       - name: Upload XCFramework
         uses: actions/upload-artifact@v2
         with:
