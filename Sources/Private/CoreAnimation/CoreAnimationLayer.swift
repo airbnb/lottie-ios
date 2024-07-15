@@ -15,9 +15,9 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   ///    `CompatibilityTracker.Mode.abort`.
   init(
     animation: LottieAnimation,
-    imageProvider: AnimationImageProvider,
-    textProvider: AnimationKeypathTextProvider,
-    fontProvider: AnimationFontProvider,
+    imageProvider: any AnimationImageProvider,
+    textProvider: any AnimationKeypathTextProvider,
+    fontProvider: any AnimationFontProvider,
     maskAnimationToBounds: Bool,
     compatibilityTrackerMode: CompatibilityTracker.Mode,
     logger: LottieLogger)
@@ -103,13 +103,13 @@ final class CoreAnimationLayer: BaseAnimationLayer {
 
   /// The `AnimationImageProvider` that `ImageLayer`s use to retrieve images,
   /// referenced by name in the animation json.
-  var imageProvider: AnimationImageProvider {
+  var imageProvider: any AnimationImageProvider {
     didSet { reloadImages() }
   }
 
   /// The `AnimationKeypathTextProvider` that `TextLayer`'s use to retrieve texts,
   /// that they should use to render their text context
-  var textProvider: AnimationKeypathTextProvider {
+  var textProvider: any AnimationKeypathTextProvider {
     didSet {
       // We need to rebuild the current animation after updating the text provider,
       // since this is used in `TextLayer.setupAnimations(context:)`
@@ -119,7 +119,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
 
   /// The `FontProvider` that `TextLayer`s use to retrieve the `CTFont`
   /// that they should use to render their text content
-  var fontProvider: AnimationFontProvider {
+  var fontProvider: any AnimationFontProvider {
     didSet { reloadFonts() }
   }
 
@@ -286,7 +286,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
 
     // Set up the new animations with the current `TimingConfiguration`
     for animationLayer in sublayers ?? [] {
-      try (animationLayer as? AnimationLayer)?.setupAnimations(context: layerContext)
+      try (animationLayer as? (any AnimationLayer))?.setupAnimations(context: layerContext)
     }
   }
 
@@ -431,7 +431,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
   }
 
   var _animationLayers: [CALayer] {
-    (sublayers ?? []).filter { $0 is AnimationLayer }
+    (sublayers ?? []).filter { $0 is any AnimationLayer }
   }
 
   func reloadImages() {
@@ -487,7 +487,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
     return allAnimationKeypaths
   }
 
-  func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
+  func setValueProvider(_ valueProvider: any AnyValueProvider, keypath: AnimationKeypath) {
     valueProviderStore.setValueProvider(valueProvider, keypath: keypath)
 
     // We need to rebuild the current animation after registering a value provider,
@@ -516,7 +516,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
     return nil
   }
 
-  func animatorNodes(for _: AnimationKeypath) -> [AnimatorNode]? {
+  func animatorNodes(for _: AnimationKeypath) -> [any AnimatorNode]? {
     logger.assertionFailure("""
       The Core Animation rendering engine does not use `AnimatorNode`s
       """)

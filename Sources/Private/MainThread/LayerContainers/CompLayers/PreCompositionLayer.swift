@@ -17,8 +17,8 @@ final class PreCompositionLayer: CompositionLayer {
     layerImageProvider: LayerImageProvider,
     layerTextProvider: LayerTextProvider,
     layerFontProvider: LayerFontProvider,
-    textProvider: AnimationKeypathTextProvider,
-    fontProvider: AnimationFontProvider,
+    textProvider: any AnimationKeypathTextProvider,
+    fontProvider: any AnimationFontProvider,
     assetLibrary: AssetLibrary?,
     frameRate: CGFloat,
     rootAnimationLayer: MainThreadAnimationLayer?)
@@ -103,7 +103,7 @@ final class PreCompositionLayer: CompositionLayer {
   let frameRate: CGFloat
   let remappingNode: NodeProperty<LottieVector1D>?
 
-  override var keypathProperties: [String: AnyNodeProperty] {
+  override var keypathProperties: [String: any AnyNodeProperty] {
     guard let remappingNode else {
       return super.keypathProperties
     }

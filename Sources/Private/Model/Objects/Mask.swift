@@ -23,7 +23,7 @@ final class Mask: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: Mask.CodingKeys.self)
     mode = try container.decodeIfPresent(MaskMode.self, forKey: .mode) ?? .add
     opacity = try container

@@ -16,7 +16,7 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
   init(textAnimator: TextAnimator) {
     keypathName = textAnimator.name
     textRangeUnit = textAnimator.textRangeUnit
-    var properties = [String : AnyNodeProperty]()
+    var properties = [String : any AnyNodeProperty]()
 
     if let keyframeGroup = textAnimator.anchor {
       anchor = NodeProperty(provider: KeyframeInterpolator(keyframes: keyframeGroup.keyframes))
@@ -158,8 +158,8 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
   let selectedRangeOpacity: NodeProperty<LottieVector1D>?
   let textRangeUnit: TextRangeUnit?
 
-  let keypathProperties: [String: AnyNodeProperty]
-  let properties: [AnyNodeProperty]
+  let keypathProperties: [String: any AnyNodeProperty]
+  let properties: [any AnyNodeProperty]
 
   var caTransform: CATransform3D {
     CATransform3D.makeTransform(
@@ -191,7 +191,7 @@ final class TextOutputNode: NodeOutput {
 
   var outputPath: CGPath?
 
-  var parent: NodeOutput? {
+  var parent: (any NodeOutput)? {
     parentTextNode
   }
 
@@ -312,19 +312,19 @@ class TextAnimatorNode: AnimatorNode {
 
   let textAnimatorProperties: TextAnimatorNodeProperties
 
-  let parentNode: AnimatorNode?
+  let parentNode: (any AnimatorNode)?
   var hasLocalUpdates = false
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
   var isEnabled = true
 
-  var outputNode: NodeOutput {
+  var outputNode: any NodeOutput {
     textOutputNode
   }
 
   // MARK: Animator Node Protocol
 
-  var propertyMap: NodePropertyMap & KeypathSearchable {
+  var propertyMap: any (NodePropertyMap & KeypathSearchable) {
     textAnimatorProperties
   }
 

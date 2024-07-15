@@ -22,7 +22,7 @@ final class Merge: ShapeItem {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: Merge.CodingKeys.self)
     mode = try container.decode(MergeMode.self, forKey: .mode)
     try super.init(from: decoder)
@@ -42,7 +42,7 @@ final class Merge: ShapeItem {
   /// The mode of the merge path
   let mode: MergeMode
 
-  override func encode(to encoder: Encoder) throws {
+  override func encode(to encoder: any Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(mode, forKey: .mode)

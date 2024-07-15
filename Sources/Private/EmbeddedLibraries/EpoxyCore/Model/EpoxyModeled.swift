@@ -46,7 +46,7 @@ extension EpoxyModeled {
 
   /// Returns a copy of this model produced by merging the given `other` model's storage into this
   /// model's storage.
-  func merging(_ other: EpoxyModeled) -> Self {
+  func merging(_ other: any EpoxyModeled) -> Self {
     var copy = self
     copy.storage.merge(other.storage)
     return copy

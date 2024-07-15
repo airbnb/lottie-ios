@@ -16,9 +16,9 @@ public class LottieAnimationLayer: CALayer {
   /// Initializes a LottieAnimationLayer with an animation.
   public init(
     animation: LottieAnimation?,
-    imageProvider: AnimationImageProvider? = nil,
-    textProvider: AnimationKeypathTextProvider = DefaultTextProvider(),
-    fontProvider: AnimationFontProvider = DefaultFontProvider(),
+    imageProvider: (any AnimationImageProvider)? = nil,
+    textProvider: any AnimationKeypathTextProvider = DefaultTextProvider(),
+    fontProvider: any AnimationFontProvider = DefaultFontProvider(),
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)
   {
@@ -40,8 +40,8 @@ public class LottieAnimationLayer: CALayer {
   public init(
     dotLottie: DotLottieFile?,
     animationId: String? = nil,
-    textProvider: AnimationKeypathTextProvider = DefaultTextProvider(),
-    fontProvider: AnimationFontProvider = DefaultFontProvider(),
+    textProvider: any AnimationKeypathTextProvider = DefaultTextProvider(),
+    fontProvider: any AnimationFontProvider = DefaultFontProvider(),
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)
   {
@@ -484,7 +484,7 @@ public class LottieAnimationLayer: CALayer {
   public private(set) var currentPlaybackMode: LottiePlaybackMode?
 
   /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
-  public private(set) var valueProviders = [AnimationKeypath: AnyValueProvider]()
+  public private(set) var valueProviders = [AnimationKeypath: any AnyValueProvider]()
 
   /// A closure called when the animation layer has been loaded.
   /// Will inform the receiver the type of rendering engine that is used for the layer.
@@ -594,7 +594,7 @@ public class LottieAnimationLayer: CALayer {
   /// animation with its required image data.
   ///
   /// Setting this will cause the animation to reload its image contents.
-  public var imageProvider: AnimationImageProvider {
+  public var imageProvider: any AnimationImageProvider {
     didSet {
       rootAnimationLayer?.imageProvider = imageProvider.cachedImageProvider
       reloadImages()
@@ -603,7 +603,7 @@ public class LottieAnimationLayer: CALayer {
 
   /// Sets the text provider for animation layer. A text provider provides the
   /// animation with values for text layers
-  public var textProvider: AnimationKeypathTextProvider {
+  public var textProvider: any AnimationKeypathTextProvider {
     didSet {
       rootAnimationLayer?.textProvider = textProvider
     }
@@ -611,7 +611,7 @@ public class LottieAnimationLayer: CALayer {
 
   /// Sets the text provider for animation layer. A text provider provides the
   /// animation with values for text layers
-  public var fontProvider: AnimationFontProvider {
+  public var fontProvider: any AnimationFontProvider {
     didSet {
       rootAnimationLayer?.fontProvider = fontProvider
     }
@@ -847,7 +847,7 @@ public class LottieAnimationLayer: CALayer {
   /// /// Set the provider on the animationView.
   /// animationView.setValueProvider(redValueProvider, keypath: fillKeypath)
   /// ```
-  public func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
+  public func setValueProvider(_ valueProvider: any AnyValueProvider, keypath: AnimationKeypath) {
     guard let animationLayer = rootAnimationLayer else { return }
 
     valueProviders[keypath] = valueProvider
@@ -1026,7 +1026,7 @@ public class LottieAnimationLayer: CALayer {
 
   // MARK: Internal
 
-  var rootAnimationLayer: RootAnimationLayer? = nil
+  var rootAnimationLayer: (any RootAnimationLayer)? = nil
 
   /// Context describing the animation that is currently playing in this `LottieAnimationView`
   ///  - When non-nil, an animation is currently playing in this layer. Otherwise,
@@ -1153,7 +1153,7 @@ public class LottieAnimationLayer: CALayer {
     guard let animation else {
       return
     }
-    let rootAnimationLayer: RootAnimationLayer? =
+    let rootAnimationLayer: (any RootAnimationLayer)? =
       switch renderingEngine {
       case .automatic:
         makeAutomaticEngineLayer(for: animation)

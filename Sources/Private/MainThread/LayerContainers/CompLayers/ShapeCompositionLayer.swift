@@ -42,7 +42,7 @@ final class ShapeCompositionLayer: CompositionLayer {
 
   // MARK: Internal
 
-  let rootNode: AnimatorNode?
+  let rootNode: (any AnimatorNode)?
   let renderContainer: ShapeContainerLayer?
 
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {

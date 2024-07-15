@@ -177,9 +177,9 @@ private class MaskNodeProperties: NodePropertyMap {
 
   // MARK: Internal
 
-  var propertyMap: [String: AnyNodeProperty]
+  var propertyMap: [String: any AnyNodeProperty]
 
-  var properties: [AnyNodeProperty]
+  var properties: [any AnyNodeProperty]
 
   let mode: MaskMode
   let inverted: Bool

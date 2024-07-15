@@ -11,7 +11,7 @@ import QuartzCore
 
 /// A protocol that defines a node that holds render instructions
 protocol RenderNode {
-  var renderer: Renderable & NodeOutput { get }
+  var renderer: any (Renderable & NodeOutput) { get }
 }
 
 // MARK: - Renderable
@@ -44,7 +44,7 @@ protocol Renderable {
 
 extension RenderNode where Self: AnimatorNode {
 
-  var outputNode: NodeOutput {
+  var outputNode: any NodeOutput {
     renderer
   }
 

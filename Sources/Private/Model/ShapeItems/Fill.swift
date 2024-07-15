@@ -19,7 +19,7 @@ final class Fill: ShapeItem {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: Fill.CodingKeys.self)
     opacity = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .opacity)
     color = try container.decode(KeyframeGroup<LottieColor>.self, forKey: .color)
@@ -54,7 +54,7 @@ final class Fill: ShapeItem {
   /// The fill rule to use when filling a path
   let fillRule: FillRule
 
-  override func encode(to encoder: Encoder) throws {
+  override func encode(to encoder: any Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(opacity, forKey: .opacity)

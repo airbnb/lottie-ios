@@ -9,7 +9,7 @@ final class DropShadowNode: LayerEffectNode {
 
   // MARK: Lifecycle
 
-  init(model: DropShadowModel) {
+  init(model: any DropShadowModel) {
     properties = DropShadowNodeProperties(model: model)
   }
 
@@ -55,7 +55,7 @@ final class DropShadowNodeProperties: NodePropertyMap {
 
   // MARK: Lifecycle
 
-  init(model: DropShadowModel) {
+  init(model: any DropShadowModel) {
     if let opacityKeyframes = model._opacity?.keyframes {
       opacity = NodeProperty(provider: KeyframeInterpolator(keyframes: opacityKeyframes))
       propertyMap[PropertyName.opacity.rawValue] = opacity
@@ -91,8 +91,8 @@ final class DropShadowNodeProperties: NodePropertyMap {
 
   // MARK: Internal
 
-  var propertyMap: [String: AnyNodeProperty] = [:]
-  var properties: [AnyNodeProperty]
+  var propertyMap: [String: any AnyNodeProperty] = [:]
+  var properties: [any AnyNodeProperty]
 
   let opacity: NodeProperty<LottieVector1D>?
   let radius: NodeProperty<LottieVector1D>?

@@ -16,7 +16,7 @@ extension LottieVector1D: Codable {
 
   // MARK: Lifecycle
 
-  public init(from decoder: Decoder) throws {
+  public init(from decoder: any Decoder) throws {
     /// Try to decode an array of doubles
     do {
       var container = try decoder.unkeyedContainer()
@@ -28,7 +28,7 @@ extension LottieVector1D: Codable {
 
   // MARK: Public
 
-  public func encode(to encoder: Encoder) throws {
+  public func encode(to encoder: any Encoder) throws {
     var container = encoder.singleValueContainer()
     try container.encode(value)
   }
@@ -78,7 +78,7 @@ public struct LottieVector2D: Codable, Hashable, Sendable {
     self.y = y
   }
 
-  public init(from decoder: Decoder) throws {
+  public init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: LottieVector2D.CodingKeys.self)
 
     do {
@@ -98,7 +98,7 @@ public struct LottieVector2D: Codable, Hashable, Sendable {
 
   // MARK: Public
 
-  public func encode(to encoder: Encoder) throws {
+  public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: LottieVector2D.CodingKeys.self)
     try container.encode(x, forKey: .x)
     try container.encode(y, forKey: .y)
@@ -174,7 +174,7 @@ extension LottieVector3D: Codable {
     self.z = Double(z)
   }
 
-  public init(from decoder: Decoder) throws {
+  public init(from decoder: any Decoder) throws {
     var container = try decoder.unkeyedContainer()
 
     if !container.isAtEnd {
@@ -198,7 +198,7 @@ extension LottieVector3D: Codable {
 
   // MARK: Public
 
-  public func encode(to encoder: Encoder) throws {
+  public func encode(to encoder: any Encoder) throws {
     var container = encoder.unkeyedContainer()
     try container.encode(x)
     try container.encode(y)

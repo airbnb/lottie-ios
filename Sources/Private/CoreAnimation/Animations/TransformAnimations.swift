@@ -72,7 +72,7 @@ extension CALayer {
   ///    since child layers don't inherit the `opacity` of their parent.
   @nonobjc
   func addTransformAnimations(
-    for transformModel: TransformModel,
+    for transformModel: any TransformModel,
     context: LayerAnimationContext)
     throws
   {
@@ -102,7 +102,7 @@ extension CALayer {
 
   @nonobjc
   private func addPositionAnimations(
-    from transformModel: TransformModel,
+    from transformModel: any TransformModel,
     context: LayerAnimationContext)
     throws
   {
@@ -136,7 +136,7 @@ extension CALayer {
 
   @nonobjc
   private func addAnchorPointAnimation(
-    from transformModel: TransformModel,
+    from transformModel: any TransformModel,
     context: LayerAnimationContext)
     throws
   {
@@ -161,7 +161,7 @@ extension CALayer {
 
   @nonobjc
   private func addScaleAnimations(
-    from transformModel: TransformModel,
+    from transformModel: any TransformModel,
     context: LayerAnimationContext)
     throws
   {
@@ -189,7 +189,7 @@ extension CALayer {
   }
 
   private func addRotationAnimations(
-    from transformModel: TransformModel,
+    from transformModel: any TransformModel,
     context: LayerAnimationContext)
     throws
   {
@@ -249,7 +249,7 @@ extension CALayer {
   /// This is more expensive that animating each component separately, since
   /// it may require manually interpolating the keyframes at each frame.
   private func addCombinedTransformAnimation(
-    for transformModel: TransformModel,
+    for transformModel: any TransformModel,
     context: LayerAnimationContext)
     throws
   {

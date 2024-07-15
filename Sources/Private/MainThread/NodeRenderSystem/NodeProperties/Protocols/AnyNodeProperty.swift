@@ -20,19 +20,19 @@ protocol AnyNodeProperty {
   func update(frame: CGFloat)
 
   /// The stored value container for the property
-  var valueContainer: AnyValueContainer { get }
+  var valueContainer: any AnyValueContainer { get }
 
   /// The value provider for the property
-  var valueProvider: AnyValueProvider { get }
+  var valueProvider: any AnyValueProvider { get }
 
   /// The original value provider for the property
-  var originalValueProvider: AnyValueProvider { get }
+  var originalValueProvider: any AnyValueProvider { get }
 
   /// The Type of the value provider
   var valueType: Any.Type { get }
 
   /// Sets the value provider for the property.
-  func setProvider(provider: AnyValueProvider)
+  func setProvider(provider: any AnyValueProvider)
 }
 
 extension AnyNodeProperty {

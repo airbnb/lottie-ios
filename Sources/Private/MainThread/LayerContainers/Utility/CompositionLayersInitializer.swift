@@ -15,8 +15,8 @@ extension [LayerModel] {
     layerImageProvider: LayerImageProvider,
     layerTextProvider: LayerTextProvider,
     layerFontProvider: LayerFontProvider,
-    textProvider: AnimationKeypathTextProvider,
-    fontProvider: AnimationFontProvider,
+    textProvider: any AnimationKeypathTextProvider,
+    fontProvider: any AnimationFontProvider,
     frameRate: CGFloat,
     rootAnimationLayer: MainThreadAnimationLayer?)
     -> [CompositionLayer]

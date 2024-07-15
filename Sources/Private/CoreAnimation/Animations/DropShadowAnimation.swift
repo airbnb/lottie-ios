@@ -84,7 +84,7 @@ extension CALayer {
   /// Adds drop shadow animations from the given `DropShadowModel` to this layer
   @nonobjc
   func addDropShadowAnimations(
-    for dropShadowModel: DropShadowModel,
+    for dropShadowModel: any DropShadowModel,
     context: LayerAnimationContext)
     throws
   {
@@ -96,7 +96,7 @@ extension CALayer {
 
   // MARK: Private
 
-  private func addShadowOpacityAnimation(from model: DropShadowModel, context: LayerAnimationContext) throws {
+  private func addShadowOpacityAnimation(from model: any DropShadowModel, context: LayerAnimationContext) throws {
     guard let opacityKeyframes = model._opacity else { return }
 
     try addAnimation(
@@ -111,7 +111,7 @@ extension CALayer {
       context: context)
   }
 
-  private func addShadowColorAnimation(from model: DropShadowModel, context: LayerAnimationContext) throws {
+  private func addShadowColorAnimation(from model: any DropShadowModel, context: LayerAnimationContext) throws {
     guard let shadowColorKeyframes = model._color else { return }
 
     try addAnimation(
@@ -121,7 +121,7 @@ extension CALayer {
       context: context)
   }
 
-  private func addShadowRadiusAnimation(from model: DropShadowModel, context: LayerAnimationContext) throws {
+  private func addShadowRadiusAnimation(from model: any DropShadowModel, context: LayerAnimationContext) throws {
     guard let shadowSizeKeyframes = model._radius else { return }
 
     try addAnimation(
@@ -131,7 +131,7 @@ extension CALayer {
       context: context)
   }
 
-  private func addShadowOffsetAnimation(from model: DropShadowModel, context: LayerAnimationContext) throws {
+  private func addShadowOffsetAnimation(from model: any DropShadowModel, context: LayerAnimationContext) throws {
     guard
       let angleKeyframes = model._angle,
       let distanceKeyframes = model._distance

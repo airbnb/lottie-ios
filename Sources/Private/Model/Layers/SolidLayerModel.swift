@@ -10,7 +10,7 @@ final class SolidLayerModel: LayerModel {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: SolidLayerModel.CodingKeys.self)
     colorHex = try container.decode(String.self, forKey: .colorHex)
     width = try container.decode(Double.self, forKey: .width)
@@ -36,7 +36,7 @@ final class SolidLayerModel: LayerModel {
   /// The height of the color layer
   let height: Double
 
-  override func encode(to encoder: Encoder) throws {
+  override func encode(to encoder: any Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(colorHex, forKey: .colorHex)

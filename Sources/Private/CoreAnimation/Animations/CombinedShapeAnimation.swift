@@ -38,7 +38,7 @@ final class CombinedShapeItem: ShapeItem {
     super.init(name: name, type: .shape, hidden: false)
   }
 
-  required init(from _: Decoder) throws {
+  required init(from _: any Decoder) throws {
     fatalError("init(from:) has not been implemented")
   }
 

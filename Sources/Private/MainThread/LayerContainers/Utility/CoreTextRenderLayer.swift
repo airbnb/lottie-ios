@@ -146,7 +146,7 @@ final class CoreTextRenderLayer: CALayer {
 
   // MARK: Internal
 
-  override func action(forKey _: String) -> CAAction? {
+  override func action(forKey _: String) -> (any CAAction)? {
     nil
   }
 

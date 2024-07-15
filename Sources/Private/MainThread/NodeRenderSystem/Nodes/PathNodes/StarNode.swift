@@ -48,8 +48,8 @@ final class StarNodeProperties: NodePropertyMap, KeypathSearchable {
 
   var keypathName: String
 
-  let keypathProperties: [String: AnyNodeProperty]
-  let properties: [AnyNodeProperty]
+  let keypathProperties: [String: any AnyNodeProperty]
+  let properties: [any AnyNodeProperty]
 
   let direction: PathDirection
   let position: NodeProperty<LottieVector3D>
@@ -67,7 +67,7 @@ final class StarNode: AnimatorNode, PathNode {
 
   // MARK: Lifecycle
 
-  init(parentNode: AnimatorNode?, star: Star) {
+  init(parentNode: (any AnimatorNode)?, star: Star) {
     pathOutput = PathOutputNode(parent: parentNode?.outputNode)
     properties = StarNodeProperties(star: star)
     self.parentNode = parentNode
@@ -82,13 +82,13 @@ final class StarNode: AnimatorNode, PathNode {
 
   let pathOutput: PathOutputNode
 
-  let parentNode: AnimatorNode?
+  let parentNode: (any AnimatorNode)?
   var hasLocalUpdates = false
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
   // MARK: Animator Node
-  var propertyMap: NodePropertyMap & KeypathSearchable {
+  var propertyMap: any (NodePropertyMap & KeypathSearchable) {
     properties
   }
 

@@ -34,8 +34,8 @@ final class EllipseNodeProperties: NodePropertyMap, KeypathSearchable {
   let position: NodeProperty<LottieVector3D>
   let size: NodeProperty<LottieVector3D>
 
-  let keypathProperties: [String: AnyNodeProperty]
-  let properties: [AnyNodeProperty]
+  let keypathProperties: [String: any AnyNodeProperty]
+  let properties: [any AnyNodeProperty]
 }
 
 // MARK: - EllipseNode
@@ -44,7 +44,7 @@ final class EllipseNode: AnimatorNode, PathNode {
 
   // MARK: Lifecycle
 
-  init(parentNode: AnimatorNode?, ellipse: Ellipse) {
+  init(parentNode: (any AnimatorNode)?, ellipse: Ellipse) {
     pathOutput = PathOutputNode(parent: parentNode?.outputNode)
     properties = EllipseNodeProperties(ellipse: ellipse)
     self.parentNode = parentNode
@@ -58,14 +58,14 @@ final class EllipseNode: AnimatorNode, PathNode {
 
   let properties: EllipseNodeProperties
 
-  let parentNode: AnimatorNode?
+  let parentNode: (any AnimatorNode)?
   var hasLocalUpdates = false
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
   // MARK: Animator Node
 
-  var propertyMap: NodePropertyMap & KeypathSearchable {
+  var propertyMap: any (NodePropertyMap & KeypathSearchable) {
     properties
   }
 

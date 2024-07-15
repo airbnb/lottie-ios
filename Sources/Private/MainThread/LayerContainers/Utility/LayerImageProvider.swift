@@ -10,7 +10,7 @@ final class LayerImageProvider {
 
   // MARK: Lifecycle
 
-  init(imageProvider: AnimationImageProvider, assets: [String: ImageAsset]?) {
+  init(imageProvider: any AnimationImageProvider, assets: [String: ImageAsset]?) {
     self.imageProvider = imageProvider
     imageLayers = [ImageCompositionLayer]()
     if let assets {
@@ -26,7 +26,7 @@ final class LayerImageProvider {
   private(set) var imageLayers: [ImageCompositionLayer]
   let imageAssets: [String: ImageAsset]
 
-  var imageProvider: AnimationImageProvider {
+  var imageProvider: any AnimationImageProvider {
     didSet {
       reloadImages()
     }

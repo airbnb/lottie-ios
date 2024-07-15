@@ -8,7 +8,7 @@ enum LayerEffectType: Int, Codable, Sendable {
   case dropShadow = 25
   case unknown = 9999
 
-  init(from decoder: Decoder) throws {
+  init(from decoder: any Decoder) throws {
     self = try LayerEffectType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
   }
 }
@@ -35,7 +35,7 @@ class LayerEffect: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: LayerEffect.CodingKeys.self)
     name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Effect"
     type = try container.decode(LayerEffectType.self, forKey: .type)

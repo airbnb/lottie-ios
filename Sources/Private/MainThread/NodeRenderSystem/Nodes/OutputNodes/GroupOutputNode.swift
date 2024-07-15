@@ -11,15 +11,15 @@ class GroupOutputNode: NodeOutput {
 
   // MARK: Lifecycle
 
-  init(parent: NodeOutput?, rootNode: NodeOutput?) {
+  init(parent: (any NodeOutput)?, rootNode: (any NodeOutput)?) {
     self.parent = parent
     self.rootNode = rootNode
   }
 
   // MARK: Internal
 
-  let parent: NodeOutput?
-  let rootNode: NodeOutput?
+  let parent: (any NodeOutput)?
+  let rootNode: (any NodeOutput)?
   var isEnabled = true
 
   private(set) var outputPath: CGPath? = nil

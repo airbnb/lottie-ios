@@ -9,7 +9,7 @@ final class AssetLibrary: Codable, AnyInitializable, Sendable {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     var container = try decoder.unkeyedContainer()
     var containerForKeys = container
 
@@ -68,7 +68,7 @@ final class AssetLibrary: Codable, AnyInitializable, Sendable {
   let imageAssets: [String: ImageAsset]
   let precompAssets: [String: PrecompAsset]
 
-  func encode(to encoder: Encoder) throws {
+  func encode(to encoder: any Encoder) throws {
     var container = encoder.unkeyedContainer()
     try container.encode(contentsOf: Array(assets.values))
   }

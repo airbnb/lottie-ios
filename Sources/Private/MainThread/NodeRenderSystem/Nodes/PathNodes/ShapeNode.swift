@@ -28,8 +28,8 @@ final class ShapeNodeProperties: NodePropertyMap, KeypathSearchable {
   var keypathName: String
 
   let path: NodeProperty<BezierPath>
-  let keypathProperties: [String: AnyNodeProperty]
-  let properties: [AnyNodeProperty]
+  let keypathProperties: [String: any AnyNodeProperty]
+  let properties: [any AnyNodeProperty]
 
 }
 
@@ -39,7 +39,7 @@ final class ShapeNode: AnimatorNode, PathNode {
 
   // MARK: Lifecycle
 
-  init(parentNode: AnimatorNode?, shape: Shape) {
+  init(parentNode: (any AnimatorNode)?, shape: Shape) {
     pathOutput = PathOutputNode(parent: parentNode?.outputNode)
     properties = ShapeNodeProperties(shape: shape)
     self.parentNode = parentNode
@@ -51,13 +51,13 @@ final class ShapeNode: AnimatorNode, PathNode {
 
   let pathOutput: PathOutputNode
 
-  let parentNode: AnimatorNode?
+  let parentNode: (any AnimatorNode)?
   var hasLocalUpdates = false
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
   // MARK: Animator Node
-  var propertyMap: NodePropertyMap & KeypathSearchable {
+  var propertyMap: any (NodePropertyMap & KeypathSearchable) {
     properties
   }
 

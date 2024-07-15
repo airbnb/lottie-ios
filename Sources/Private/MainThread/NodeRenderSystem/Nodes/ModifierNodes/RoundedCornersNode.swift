@@ -23,8 +23,8 @@ final class RoundedCornersProperties: NodePropertyMap, KeypathSearchable {
 
   // MARK: Internal
 
-  let keypathProperties: [String: AnyNodeProperty]
-  let properties: [AnyNodeProperty]
+  let keypathProperties: [String: any AnyNodeProperty]
+  let properties: [any AnyNodeProperty]
   let keypathName: String
 
   let radius: NodeProperty<LottieVector1D>
@@ -36,7 +36,7 @@ final class RoundedCornersNode: AnimatorNode {
 
   // MARK: Lifecycle
 
-  init(parentNode: AnimatorNode?, roundedCorners: RoundedCorners, upstreamPaths: [PathOutputNode]) {
+  init(parentNode: (any AnimatorNode)?, roundedCorners: RoundedCorners, upstreamPaths: [PathOutputNode]) {
     outputNode = PassThroughOutputNode(parent: parentNode?.outputNode)
     self.parentNode = parentNode
     properties = RoundedCornersProperties(roundedCorners: roundedCorners)
@@ -47,15 +47,15 @@ final class RoundedCornersNode: AnimatorNode {
 
   let properties: RoundedCornersProperties
 
-  let parentNode: AnimatorNode?
-  let outputNode: NodeOutput
+  let parentNode: (any AnimatorNode)?
+  let outputNode: any NodeOutput
   var hasLocalUpdates = false
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
   var isEnabled = true
 
   // MARK: Animator Node
-  var propertyMap: NodePropertyMap & KeypathSearchable {
+  var propertyMap: any (NodePropertyMap & KeypathSearchable) {
     properties
   }
 

@@ -137,7 +137,7 @@ final class GradientFillRenderer: PassThroughOutputNode, Renderable {
 
   // MARK: Lifecycle
 
-  override init(parent: NodeOutput?) {
+  override init(parent: (any NodeOutput)?) {
     super.init(parent: parent)
 
     maskLayer.fillColor = .rgb(1, 1, 1)

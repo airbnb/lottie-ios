@@ -13,7 +13,7 @@ class NodeProperty<T>: AnyNodeProperty {
 
   // MARK: Lifecycle
 
-  init(provider: AnyValueProvider) {
+  init(provider: any AnyValueProvider) {
     valueProvider = provider
     originalValueProvider = valueProvider
     typedContainer = ValueContainer<T>(provider.value(frame: 0) as! T)
@@ -22,8 +22,8 @@ class NodeProperty<T>: AnyNodeProperty {
 
   // MARK: Internal
 
-  var valueProvider: AnyValueProvider
-  var originalValueProvider: AnyValueProvider
+  var valueProvider: any AnyValueProvider
+  var originalValueProvider: any AnyValueProvider
 
   var valueType: Any.Type { T.self }
 
@@ -31,7 +31,7 @@ class NodeProperty<T>: AnyNodeProperty {
     typedContainer.outputValue
   }
 
-  var valueContainer: AnyValueContainer {
+  var valueContainer: any AnyValueContainer {
     typedContainer
   }
 
@@ -39,7 +39,7 @@ class NodeProperty<T>: AnyNodeProperty {
     valueContainer.needsUpdate || valueProvider.hasUpdate(frame: frame)
   }
 
-  func setProvider(provider: AnyValueProvider) {
+  func setProvider(provider: any AnyValueProvider) {
     guard provider.valueType == valueType else { return }
     valueProvider = provider
     valueContainer.setNeedsUpdate()

@@ -43,7 +43,7 @@ final class SolidCompositionLayer: CompositionLayer {
   let colorProperty: NodeProperty<LottieColor>?
   let solidShape = CAShapeLayer()
 
-  override var keypathProperties: [String: AnyNodeProperty] {
+  override var keypathProperties: [String: any AnyNodeProperty] {
     guard let colorProperty else { return super.keypathProperties }
     return [PropertyName.color.rawValue : colorProperty]
   }

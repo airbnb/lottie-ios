@@ -55,10 +55,10 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
 
   var keypathName = "Transform"
 
-  var childKeypaths: [KeypathSearchable] = []
+  var childKeypaths: [any KeypathSearchable] = []
 
-  let keypathProperties: [String: AnyNodeProperty]
-  let properties: [AnyNodeProperty]
+  let keypathProperties: [String: any AnyNodeProperty]
+  let properties: [any AnyNodeProperty]
 
   let anchor: NodeProperty<LottieVector3D>
   let position: NodeProperty<LottieVector3D>
@@ -91,13 +91,13 @@ final class GroupNode: AnimatorNode {
   // MARK: Lifecycle
 
   // MARK: Initializer
-  init(name: String, parentNode: AnimatorNode?, tree: NodeTree) {
+  init(name: String, parentNode: (any AnimatorNode)?, tree: NodeTree) {
     self.parentNode = parentNode
     keypathName = name
     rootNode = tree.rootNode
     properties = GroupNodeProperties(transform: tree.transform)
     groupOutput = GroupOutputNode(parent: parentNode?.outputNode, rootNode: rootNode?.outputNode)
-    var childKeypaths: [KeypathSearchable] = tree.childrenNodes
+    var childKeypaths: [any KeypathSearchable] = tree.childrenNodes
     childKeypaths.append(properties)
     self.childKeypaths = childKeypaths
 
@@ -113,7 +113,7 @@ final class GroupNode: AnimatorNode {
 
   let properties: GroupNodeProperties
 
-  let rootNode: AnimatorNode?
+  let rootNode: (any AnimatorNode)?
 
   var container = ShapeContainerLayer()
 
@@ -121,9 +121,9 @@ final class GroupNode: AnimatorNode {
 
   let keypathName: String
 
-  let childKeypaths: [KeypathSearchable]
+  let childKeypaths: [any KeypathSearchable]
 
-  let parentNode: AnimatorNode?
+  let parentNode: (any AnimatorNode)?
   var hasLocalUpdates = false
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
@@ -134,11 +134,11 @@ final class GroupNode: AnimatorNode {
 
   // MARK: Animator Node Protocol
 
-  var propertyMap: NodePropertyMap & KeypathSearchable {
+  var propertyMap: any (NodePropertyMap & KeypathSearchable) {
     properties
   }
 
-  var outputNode: NodeOutput {
+  var outputNode: any NodeOutput {
     groupOutput
   }
 

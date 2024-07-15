@@ -10,7 +10,7 @@ final class Shape: ShapeItem {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: Shape.CodingKeys.self)
     path = try container.decode(KeyframeGroup<BezierPath>.self, forKey: .path)
     direction = try container.decodeIfPresent(PathDirection.self, forKey: .direction)
@@ -38,7 +38,7 @@ final class Shape: ShapeItem {
 
   let direction: PathDirection?
 
-  override func encode(to encoder: Encoder) throws {
+  override func encode(to encoder: any Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(path, forKey: .path)

@@ -289,7 +289,7 @@ extension BezierPath: Codable {
 
   // MARK: Lifecycle
 
-  init(from decoder: Decoder) throws {
+  init(from decoder: any Decoder) throws {
     let container: KeyedDecodingContainer<BezierPath.CodingKeys>
 
     if let keyedContainer = try? decoder.container(keyedBy: BezierPath.CodingKeys.self) {
@@ -378,7 +378,7 @@ extension BezierPath: Codable {
     case vertices = "v"
   }
 
-  func encode(to encoder: Encoder) throws {
+  func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: BezierPath.CodingKeys.self)
     try container.encode(closed, forKey: .closed)
 

@@ -42,7 +42,7 @@ public enum LayerType: Int, Codable {
   case text
   case unknown
 
-  public init(from decoder: Decoder) throws {
+  public init(from decoder: any Decoder) throws {
     self = try LayerType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .null
   }
 }
@@ -84,7 +84,7 @@ class LayerModel: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: LayerModel.CodingKeys.self)
     name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Layer"
     index = try container.decodeIfPresent(Int.self, forKey: .index) ?? .random(in: Int.min...Int.max)

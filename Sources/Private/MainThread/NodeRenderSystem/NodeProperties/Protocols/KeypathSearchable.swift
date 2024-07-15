@@ -14,10 +14,10 @@ protocol KeypathSearchable {
   var keypathName: String { get }
 
   /// A list of properties belonging to the keypath.
-  var keypathProperties: [String: AnyNodeProperty] { get }
+  var keypathProperties: [String: any AnyNodeProperty] { get }
 
   /// Children Keypaths
-  var childKeypaths: [KeypathSearchable] { get }
+  var childKeypaths: [any KeypathSearchable] { get }
 
   var keypathLayer: CALayer? { get }
 }

@@ -503,8 +503,8 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   private var animationDidLoad: ((LottieAnimationSource) -> Void)?
   private var animationCompletionHandler: LottieCompletionBlock?
   private var showPlaceholderWhileReloading = false
-  private var textProvider: AnimationKeypathTextProvider = DefaultTextProvider()
-  private var fontProvider: AnimationFontProvider = DefaultFontProvider()
+  private var textProvider: any AnimationKeypathTextProvider = DefaultTextProvider()
+  private var fontProvider: any AnimationFontProvider = DefaultFontProvider()
   private var configuration: LottieConfiguration = .shared
   private var dotLottieConfigurationComponents: DotLottieConfigurationComponents = .imageProvider
   private var logger: LottieLogger = .shared
@@ -512,8 +512,8 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   private let placeholder: (() -> Placeholder)?
 
   private var imageProviderConfiguration: (
-    imageProvider: AnimationImageProvider,
-    imageProvidersAreEqual: (AnimationImageProvider, AnimationImageProvider) -> Bool)?
+    imageProvider: any AnimationImageProvider,
+    imageProvidersAreEqual: (any AnimationImageProvider, any AnimationImageProvider) -> Bool)?
 
   private var animationSource: LottieAnimationSource? {
     localAnimation ?? remoteAnimation

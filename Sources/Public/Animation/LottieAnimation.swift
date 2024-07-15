@@ -24,7 +24,7 @@ public final class LottieAnimation: Codable, Sendable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
-  required public init(from decoder: Decoder) throws {
+  required public init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: LottieAnimation.CodingKeys.self)
     version = try container.decode(String.self, forKey: .version)
     type = try container.decodeIfPresent(CoordinateSpace.self, forKey: .type) ?? .type2d

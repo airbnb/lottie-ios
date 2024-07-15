@@ -48,8 +48,8 @@ final class StrokeNodeProperties: NodePropertyMap, KeypathSearchable {
   // MARK: Internal
 
   let keypathName: String
-  let keypathProperties: [String: AnyNodeProperty]
-  let properties: [AnyNodeProperty]
+  let keypathProperties: [String: any AnyNodeProperty]
+  let properties: [any AnyNodeProperty]
 
   let opacity: NodeProperty<LottieVector1D>
   let color: NodeProperty<LottieColor>
@@ -71,7 +71,7 @@ final class StrokeNode: AnimatorNode, RenderNode {
 
   // MARK: Lifecycle
 
-  init(parentNode: AnimatorNode?, stroke: Stroke) {
+  init(parentNode: (any AnimatorNode)?, stroke: Stroke) {
     strokeRender = StrokeRenderer(parent: parentNode?.outputNode)
     strokeProperties = StrokeNodeProperties(stroke: stroke)
     self.parentNode = parentNode
@@ -83,18 +83,18 @@ final class StrokeNode: AnimatorNode, RenderNode {
 
   let strokeProperties: StrokeNodeProperties
 
-  let parentNode: AnimatorNode?
+  let parentNode: (any AnimatorNode)?
   var hasLocalUpdates = false
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
-  var renderer: NodeOutput & Renderable {
+  var renderer: any (NodeOutput & Renderable) {
     strokeRender
   }
 
   // MARK: Animator Node Protocol
 
-  var propertyMap: NodePropertyMap & KeypathSearchable {
+  var propertyMap: any (NodePropertyMap & KeypathSearchable) {
     strokeProperties
   }
 

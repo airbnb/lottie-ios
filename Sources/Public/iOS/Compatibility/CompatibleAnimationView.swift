@@ -532,7 +532,7 @@ public final class CompatibleDictionaryTextProvider: NSObject {
 
   // MARK: Internal
 
-  var textProvider: AnimationKeypathTextProvider? {
+  var textProvider: (any AnimationKeypathTextProvider)? {
     DictionaryTextProvider(values)
   }
 

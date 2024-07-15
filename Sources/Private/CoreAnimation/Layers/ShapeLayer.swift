@@ -350,7 +350,7 @@ extension ShapeItem {
       !drawsCGPath,
       // Stroke widths are affected by scaling, but fill colors aren't.
       // We can expand this to other types of items in the future if necessary.
-      let stroke = self as? StrokeShapeItem,
+      let stroke = self as? any StrokeShapeItem,
       // We only need to handle scaling if there's a `ShapeTransform` present
       let transform = childGroup.items.first(where: { $0 is ShapeTransform }) as? ShapeTransform
     else { return self }
@@ -517,8 +517,8 @@ extension [ShapeItemLayer.Item] {
       // when the items have the same `alpha` animations.
       let allAlphaAnimationsAreIdentical = {
         strokesAndFills.allSatisfy { item in
-          (item.item as? OpacityAnimationModel)?.opacity
-            == (strokesAndFills.first?.item as? OpacityAnimationModel)?.opacity
+          (item.item as? any OpacityAnimationModel)?.opacity
+            == (strokesAndFills.first?.item as? any OpacityAnimationModel)?.opacity
         }
       }
 

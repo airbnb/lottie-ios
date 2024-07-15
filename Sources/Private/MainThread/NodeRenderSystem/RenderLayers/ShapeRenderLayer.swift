@@ -12,7 +12,7 @@ final class ShapeRenderLayer: ShapeContainerLayer {
 
   // MARK: Lifecycle
 
-  init(renderer: Renderable & NodeOutput) {
+  init(renderer: any (Renderable & NodeOutput)) {
     self.renderer = renderer
     super.init()
     anchorPoint = .zero
@@ -57,7 +57,7 @@ final class ShapeRenderLayer: ShapeContainerLayer {
 
   // MARK: Internal
 
-  fileprivate(set) var renderer: Renderable & NodeOutput
+  fileprivate(set) var renderer: any (Renderable & NodeOutput)
 
   let shapeLayer = CAShapeLayer()
 

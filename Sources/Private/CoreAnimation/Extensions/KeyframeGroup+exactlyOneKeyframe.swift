@@ -10,7 +10,7 @@ extension KeyframeGroup {
   ///    support animating a given property (e.g. if Core Animation itself doesn't
   ///    support the property).
   func exactlyOneKeyframe(
-    context: CompatibilityTrackerProviding,
+    context: any CompatibilityTrackerProviding,
     description: String,
     fileID _: StaticString = #fileID,
     line _: UInt = #line)

@@ -18,7 +18,7 @@ final class ValueProviderStore {
   // MARK: Internal
 
   /// Registers an `AnyValueProvider` for the given `AnimationKeypath`
-  func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
+  func setValueProvider(_ valueProvider: any AnyValueProvider, keypath: AnimationKeypath) {
     logger.assert(
       valueProvider.typeErasedStorage.isSupportedByCoreAnimationRenderingEngine,
       """
@@ -96,10 +96,10 @@ final class ValueProviderStore {
   // MARK: Private
 
   private let logger: LottieLogger
-  private var valueProviders = [(keypath: AnimationKeypath, valueProvider: AnyValueProvider)]()
+  private var valueProviders = [(keypath: AnimationKeypath, valueProvider: any AnyValueProvider)]()
 
   /// Retrieves the most-recently-registered Value Provider that matches the given keypath.
-  private func valueProvider(for keypath: AnimationKeypath) -> AnyValueProvider? {
+  private func valueProvider(for keypath: AnimationKeypath) -> (any AnyValueProvider)? {
     // Find the last keypath matching the given keypath,
     // so we return the value provider that was registered most-recently
     valueProviders.last(where: { registeredKeypath, _ in

@@ -44,8 +44,8 @@ final class TextCompositionLayer: CompositionLayer {
 
   init(
     textLayer: TextLayerModel,
-    textProvider: AnimationKeypathTextProvider,
-    fontProvider: AnimationFontProvider,
+    textProvider: any AnimationKeypathTextProvider,
+    fontProvider: any AnimationFontProvider,
     rootAnimationLayer: MainThreadAnimationLayer?)
   {
     var rootNode: TextAnimatorNode?
@@ -93,8 +93,8 @@ final class TextCompositionLayer: CompositionLayer {
   let textDocument: KeyframeInterpolator<TextDocument>?
 
   let textLayer = CoreTextRenderLayer()
-  var textProvider: AnimationKeypathTextProvider
-  var fontProvider: AnimationFontProvider
+  var textProvider: any AnimationKeypathTextProvider
+  var fontProvider: any AnimationFontProvider
   weak var rootAnimationLayer: MainThreadAnimationLayer?
 
   lazy var fullAnimationKeypath: AnimationKeypath = // Individual layers don't know their full keypaths, so we have to delegate
@@ -124,7 +124,7 @@ final class TextCompositionLayer: CompositionLayer {
     let textString: String =
       if let keypathTextValue = textProvider.text(for: fullAnimationKeypath, sourceText: text.text) {
         keypathTextValue
-      } else if let legacyTextProvider = textProvider as? LegacyAnimationTextProvider {
+      } else if let legacyTextProvider = textProvider as? any LegacyAnimationTextProvider {
         legacyTextProvider.textFor(keypathName: keypathName, sourceText: text.text)
       } else {
         text.text

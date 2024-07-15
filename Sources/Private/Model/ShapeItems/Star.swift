@@ -19,7 +19,7 @@ final class Star: ShapeItem {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: Star.CodingKeys.self)
     direction = try container.decodeIfPresent(PathDirection.self, forKey: .direction) ?? .clockwise
     position = try container.decode(KeyframeGroup<LottieVector3D>.self, forKey: .position)
@@ -99,7 +99,7 @@ final class Star: ShapeItem {
   /// The type of star
   let starType: StarType
 
-  override func encode(to encoder: Encoder) throws {
+  override func encode(to encoder: any Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(direction, forKey: .direction)

@@ -19,7 +19,7 @@ class BaseAnimationLayer: CALayer, AnimationLayer {
 
   func setupAnimations(context: LayerAnimationContext) throws {
     for childAnimationLayer in managedSublayers {
-      try (childAnimationLayer as? AnimationLayer)?.setupAnimations(context: context)
+      try (childAnimationLayer as? any AnimationLayer)?.setupAnimations(context: context)
     }
   }
 

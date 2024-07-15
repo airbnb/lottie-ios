@@ -30,8 +30,8 @@ final class TrimPathProperties: NodePropertyMap, KeypathSearchable {
 
   // MARK: Internal
 
-  let keypathProperties: [String: AnyNodeProperty]
-  let properties: [AnyNodeProperty]
+  let keypathProperties: [String: any AnyNodeProperty]
+  let properties: [any AnyNodeProperty]
   let keypathName: String
 
   let start: NodeProperty<LottieVector1D>
@@ -46,7 +46,7 @@ final class TrimPathNode: AnimatorNode {
 
   // MARK: Lifecycle
 
-  init(parentNode: AnimatorNode?, trim: Trim, upstreamPaths: [PathOutputNode]) {
+  init(parentNode: (any AnimatorNode)?, trim: Trim, upstreamPaths: [PathOutputNode]) {
     outputNode = PassThroughOutputNode(parent: parentNode?.outputNode)
     self.parentNode = parentNode
     properties = TrimPathProperties(trim: trim)
@@ -57,15 +57,15 @@ final class TrimPathNode: AnimatorNode {
 
   let properties: TrimPathProperties
 
-  let parentNode: AnimatorNode?
-  let outputNode: NodeOutput
+  let parentNode: (any AnimatorNode)?
+  let outputNode: any NodeOutput
   var hasLocalUpdates = false
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
   var isEnabled = true
 
   // MARK: Animator Node
-  var propertyMap: NodePropertyMap & KeypathSearchable {
+  var propertyMap: any (NodePropertyMap & KeypathSearchable) {
     properties
   }
 

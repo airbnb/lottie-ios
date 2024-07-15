@@ -21,7 +21,7 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
     rotationZ = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.rotationZ.keyframes))
     opacity = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.opacity.keyframes))
 
-    var propertyMap: [String: AnyNodeProperty] = [
+    var propertyMap: [String: any AnyNodeProperty] = [
       "Anchor Point" : anchor,
       PropertyName.scale.rawValue : scale,
       PropertyName.rotation.rawValue: rotationZ,
@@ -60,10 +60,10 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
 
   // MARK: Internal
 
-  let keypathProperties: [String: AnyNodeProperty]
+  let keypathProperties: [String: any AnyNodeProperty]
   var keypathName = "Transform"
 
-  let properties: [AnyNodeProperty]
+  let properties: [any AnyNodeProperty]
 
   let anchor: NodeProperty<LottieVector3D>
   let scale: NodeProperty<LottieVector3D>
@@ -75,7 +75,7 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
   let positionY: NodeProperty<LottieVector1D>?
   let opacity: NodeProperty<LottieVector1D>
 
-  var childKeypaths: [KeypathSearchable] {
+  var childKeypaths: [any KeypathSearchable] {
     []
   }
 }
@@ -92,11 +92,11 @@ class LayerTransformNode: AnimatorNode {
 
   // MARK: Internal
 
-  let outputNode: NodeOutput = PassThroughOutputNode(parent: nil)
+  let outputNode: any NodeOutput = PassThroughOutputNode(parent: nil)
 
   let transformProperties: LayerTransformProperties
 
-  var parentNode: AnimatorNode?
+  var parentNode: (any AnimatorNode)?
   var hasLocalUpdates = false
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
@@ -108,7 +108,7 @@ class LayerTransformNode: AnimatorNode {
 
   // MARK: Animator Node Protocol
 
-  var propertyMap: NodePropertyMap & KeypathSearchable {
+  var propertyMap: any (NodePropertyMap & KeypathSearchable) {
     transformProperties
   }
 

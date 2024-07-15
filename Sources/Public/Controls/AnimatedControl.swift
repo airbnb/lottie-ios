@@ -186,7 +186,7 @@ open class AnimatedControl: LottieControlType {
   }
 
   /// Sets a ValueProvider for the specified keypath
-  public func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
+  public func setValueProvider(_ valueProvider: any AnyValueProvider, keypath: AnimationKeypath) {
     animationView.setValueProvider(valueProvider, keypath: keypath)
   }
 

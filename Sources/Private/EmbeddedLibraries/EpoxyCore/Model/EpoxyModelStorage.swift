@@ -84,5 +84,5 @@ private struct PropertyStorage {
   var value: Any
 
   /// The property's corresponding `EpoxyModelProperty`, erased to an `AnyEpoxyModelProperty`.
-  var property: AnyEpoxyModelProperty
+  var property: any AnyEpoxyModelProperty
 }

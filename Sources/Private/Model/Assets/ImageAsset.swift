@@ -20,7 +20,7 @@ public final class ImageAsset: Asset {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: ImageAsset.CodingKeys.self)
     name = try container.decode(String.self, forKey: .name)
     directory = try container.decode(String.self, forKey: .directory)
@@ -50,7 +50,7 @@ public final class ImageAsset: Asset {
 
   public let height: Double
 
-  override public func encode(to encoder: Encoder) throws {
+  override public func encode(to encoder: any Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(name, forKey: .name)

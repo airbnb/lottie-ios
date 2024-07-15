@@ -14,9 +14,9 @@ protocol RootAnimationLayer: CALayer {
   var respectAnimationFrameRate: Bool { get set }
 
   var _animationLayers: [CALayer] { get }
-  var imageProvider: AnimationImageProvider { get set }
-  var textProvider: AnimationKeypathTextProvider { get set }
-  var fontProvider: AnimationFontProvider { get set }
+  var imageProvider: any AnimationImageProvider { get set }
+  var textProvider: any AnimationKeypathTextProvider { get set }
+  var fontProvider: any AnimationFontProvider { get set }
 
   /// The `CAAnimation` key corresponding to the primary animation.
   ///  - `LottieAnimationView` uses this key to check if the animation is still active
@@ -35,12 +35,12 @@ protocol RootAnimationLayer: CALayer {
   func forceDisplayUpdate()
   func logHierarchyKeypaths()
   func allHierarchyKeypaths() -> [String]
-  func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath)
+  func setValueProvider(_ valueProvider: any AnyValueProvider, keypath: AnimationKeypath)
   func getValue(for keypath: AnimationKeypath, atFrame: AnimationFrameTime?) -> Any?
   func getOriginalValue(for keypath: AnimationKeypath, atFrame: AnimationFrameTime?) -> Any?
 
   func layer(for keypath: AnimationKeypath) -> CALayer?
-  func animatorNodes(for keypath: AnimationKeypath) -> [AnimatorNode]?
+  func animatorNodes(for keypath: AnimationKeypath) -> [any AnimatorNode]?
 }
 
 // MARK: - AnimationKey

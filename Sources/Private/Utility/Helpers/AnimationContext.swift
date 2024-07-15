@@ -83,7 +83,7 @@ class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
 
   // MARK: Internal
 
-  var animationLayer: RootAnimationLayer?
+  var animationLayer: (any RootAnimationLayer)?
   var animationKey: String?
   var ignoreDelegate = false
   var animationState: AnimationContextState = .playing

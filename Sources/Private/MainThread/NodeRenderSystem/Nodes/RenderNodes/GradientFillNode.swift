@@ -45,8 +45,8 @@ final class GradientFillProperties: NodePropertyMap, KeypathSearchable {
   let numberOfColors: Int
   let fillRule: FillRule
 
-  let keypathProperties: [String: AnyNodeProperty]
-  let properties: [AnyNodeProperty]
+  let keypathProperties: [String: any AnyNodeProperty]
+  let properties: [any AnyNodeProperty]
 
 }
 
@@ -56,7 +56,7 @@ final class GradientFillNode: AnimatorNode, RenderNode {
 
   // MARK: Lifecycle
 
-  init(parentNode: AnimatorNode?, gradientFill: GradientFill) {
+  init(parentNode: (any AnimatorNode)?, gradientFill: GradientFill) {
     fillRender = GradientFillRenderer(parent: parentNode?.outputNode)
     fillProperties = GradientFillProperties(gradientfill: gradientFill)
     self.parentNode = parentNode
@@ -68,18 +68,18 @@ final class GradientFillNode: AnimatorNode, RenderNode {
 
   let fillProperties: GradientFillProperties
 
-  let parentNode: AnimatorNode?
+  let parentNode: (any AnimatorNode)?
   var hasLocalUpdates = false
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
-  var renderer: NodeOutput & Renderable {
+  var renderer: any (NodeOutput & Renderable) {
     fillRender
   }
 
   // MARK: Animator Node Protocol
 
-  var propertyMap: NodePropertyMap & KeypathSearchable {
+  var propertyMap: any (NodePropertyMap & KeypathSearchable) {
     fillProperties
   }
 

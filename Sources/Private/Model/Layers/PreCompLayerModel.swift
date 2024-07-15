@@ -10,7 +10,7 @@ final class PreCompLayerModel: LayerModel {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: PreCompLayerModel.CodingKeys.self)
     referenceID = try container.decode(String.self, forKey: .referenceID)
     timeRemapping = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .timeRemapping)
@@ -45,7 +45,7 @@ final class PreCompLayerModel: LayerModel {
   /// Precomp Height
   let height: Double
 
-  override func encode(to encoder: Encoder) throws {
+  override func encode(to encoder: any Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(referenceID, forKey: .referenceID)

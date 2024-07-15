@@ -80,7 +80,7 @@ struct Entry: Equatable {
     static let size = 30
     let fileNameData: Data
     let extraFieldData: Data
-    var extraFields: [ExtensibleDataField]?
+    var extraFields: [any ExtensibleDataField]?
   }
 
   struct DataDescriptor<T: BinaryInteger>: DataSerializable {
@@ -122,7 +122,7 @@ struct Entry: Equatable {
     let extraFieldData: Data
     let fileCommentData: Data
 
-    var extraFields: [ExtensibleDataField]?
+    var extraFields: [any ExtensibleDataField]?
 
     var usesDataDescriptor: Bool { (generalPurposeBitFlag & (1 << 3)) != 0 }
     var usesUTF8PathEncoding: Bool { (generalPurposeBitFlag & (1 << 11)) != 0 }

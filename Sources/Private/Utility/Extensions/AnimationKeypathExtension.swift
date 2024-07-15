@@ -9,7 +9,7 @@ import QuartzCore
 
 extension KeypathSearchable {
 
-  func animatorNodes(for keyPath: AnimationKeypath) -> [AnimatorNode]? {
+  func animatorNodes(for keyPath: AnimationKeypath) -> [any AnimatorNode]? {
     // Make sure there is a current key path.
     guard let currentKey = keyPath.currentKey else { return nil }
 
@@ -17,7 +17,7 @@ extension KeypathSearchable {
     guard let nextKeypath = keyPath.popKey(keypathName) else {
       // We may be on the final keypath. Check for match.
       if
-        let node = self as? AnimatorNode,
+        let node = self as? any AnimatorNode,
         currentKey.equalsKeypath(keypathName)
       {
         // This is the final keypath and matches self. Return.s
@@ -27,10 +27,10 @@ extension KeypathSearchable {
       return nil
     }
 
-    var results: [AnimatorNode] = []
+    var results: [any AnimatorNode] = []
 
     if
-      let node = self as? AnimatorNode,
+      let node = self as? any AnimatorNode,
       nextKeypath.currentKey == nil
     {
       // Keypath matched self and was the final keypath.
@@ -61,14 +61,14 @@ extension KeypathSearchable {
     return results
   }
 
-  func nodeProperties(for keyPath: AnimationKeypath) -> [AnyNodeProperty]? {
+  func nodeProperties(for keyPath: AnimationKeypath) -> [any AnyNodeProperty]? {
     guard let nextKeypath = keyPath.popKey(keypathName) else {
       /// Nope. Stop Search
       return nil
     }
 
     /// Keypath matches in some way. Continue the search.
-    var results: [AnyNodeProperty] = []
+    var results: [any AnyNodeProperty] = []
 
     /// Check if we have a property keypath yet
     if

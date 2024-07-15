@@ -62,8 +62,8 @@ class CompositionLayer: CALayer, KeypathSearchable {
     // There are two different drop shadow schemas, either using `DropShadowEffect` or `DropShadowStyle`.
     // If both happen to be present, prefer the `DropShadowEffect` (which is the drop shadow schema
     // supported on other platforms).
-    let dropShadowEffect = layer.effects.first(where: { $0 is DropShadowEffect }) as? DropShadowModel
-    let dropShadowStyle = layer.styles.first(where: { $0 is DropShadowStyle }) as? DropShadowModel
+    let dropShadowEffect = layer.effects.first(where: { $0 is DropShadowEffect }) as? any DropShadowModel
+    let dropShadowStyle = layer.styles.first(where: { $0 is DropShadowStyle }) as? any DropShadowModel
     if let dropShadowModel = dropShadowEffect ?? dropShadowStyle {
       layerEffectNodes.append(DropShadowNode(model: dropShadowModel))
     }
@@ -94,7 +94,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
 
   // MARK: Internal
 
-  weak var layerDelegate: CompositionLayerDelegate?
+  weak var layerDelegate: (any CompositionLayerDelegate)?
 
   let transformNode: LayerTransformNode
 
@@ -109,13 +109,13 @@ class CompositionLayer: CALayer, KeypathSearchable {
   let startFrame: CGFloat
   let timeStretch: CGFloat
 
-  var layerEffectNodes: [LayerEffectNode] = []
+  var layerEffectNodes: [any LayerEffectNode] = []
 
   // MARK: Keypath Searchable
 
   let keypathName: String
 
-  final var childKeypaths: [KeypathSearchable]
+  final var childKeypaths: [any KeypathSearchable]
 
   var renderScale: CGFloat = 1 {
     didSet {
@@ -137,7 +137,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
     }
   }
 
-  var keypathProperties: [String: AnyNodeProperty] {
+  var keypathProperties: [String: any AnyNodeProperty] {
     [:]
   }
 

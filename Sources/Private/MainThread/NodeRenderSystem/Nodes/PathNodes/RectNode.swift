@@ -34,8 +34,8 @@ final class RectNodeProperties: NodePropertyMap, KeypathSearchable {
 
   var keypathName: String
 
-  let keypathProperties: [String: AnyNodeProperty]
-  let properties: [AnyNodeProperty]
+  let keypathProperties: [String: any AnyNodeProperty]
+  let properties: [any AnyNodeProperty]
 
   let direction: PathDirection
   let position: NodeProperty<LottieVector3D>
@@ -50,7 +50,7 @@ final class RectangleNode: AnimatorNode, PathNode {
 
   // MARK: Lifecycle
 
-  init(parentNode: AnimatorNode?, rectangle: Rectangle) {
+  init(parentNode: (any AnimatorNode)?, rectangle: Rectangle) {
     properties = RectNodeProperties(rectangle: rectangle)
     pathOutput = PathOutputNode(parent: parentNode?.outputNode)
     self.parentNode = parentNode
@@ -61,14 +61,14 @@ final class RectangleNode: AnimatorNode, PathNode {
   let properties: RectNodeProperties
 
   let pathOutput: PathOutputNode
-  let parentNode: AnimatorNode?
+  let parentNode: (any AnimatorNode)?
   var hasLocalUpdates = false
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
   // MARK: Animator Node
 
-  var propertyMap: NodePropertyMap & KeypathSearchable {
+  var propertyMap: any (NodePropertyMap & KeypathSearchable) {
     properties
   }
 

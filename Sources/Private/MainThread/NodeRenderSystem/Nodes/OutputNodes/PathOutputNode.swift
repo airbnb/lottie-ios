@@ -12,13 +12,13 @@ class PathOutputNode: NodeOutput {
 
   // MARK: Lifecycle
 
-  init(parent: NodeOutput?) {
+  init(parent: (any NodeOutput)?) {
     self.parent = parent
   }
 
   // MARK: Internal
 
-  let parent: NodeOutput?
+  let parent: (any NodeOutput)?
 
   fileprivate(set) var outputPath: CGPath? = nil
 

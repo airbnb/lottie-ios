@@ -5,7 +5,7 @@ final class Vector1DEffectValue: EffectValue {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     value = try? container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .value)
     try super.init(from: decoder)
@@ -22,7 +22,7 @@ final class Vector1DEffectValue: EffectValue {
   /// The value of the slider
   let value: KeyframeGroup<LottieVector1D>?
 
-  override func encode(to encoder: Encoder) throws {
+  override func encode(to encoder: any Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(value, forKey: .value)

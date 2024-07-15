@@ -65,7 +65,7 @@ struct CustomizableProperty<ValueRepresentation> {
   ///  - `value` is the value for the current frame that should be converted,
   ///    as returned by `AnyValueProvider.typeErasedStorage`.
   ///  - `valueProvider` is the `AnyValueProvider` that returned the type-erased value.
-  let conversion: (_ value: Any, _ valueProvider: AnyValueProvider) -> ValueRepresentation?
+  let conversion: (_ value: Any, _ valueProvider: any AnyValueProvider) -> ValueRepresentation?
 }
 
 // MARK: - PropertyName

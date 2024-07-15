@@ -11,7 +11,7 @@ final class LayerFontProvider {
 
   // MARK: Lifecycle
 
-  init(fontProvider: AnimationFontProvider) {
+  init(fontProvider: any AnimationFontProvider) {
     self.fontProvider = fontProvider
     textLayers = []
     reloadTexts()
@@ -21,7 +21,7 @@ final class LayerFontProvider {
 
   private(set) var textLayers: [TextCompositionLayer]
 
-  var fontProvider: AnimationFontProvider {
+  var fontProvider: any AnimationFontProvider {
     didSet {
       reloadTexts()
     }

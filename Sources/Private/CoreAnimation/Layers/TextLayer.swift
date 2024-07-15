@@ -50,7 +50,7 @@ final class TextLayer: BaseCompositionLayer {
     // instead if implemented.
     if let keypathTextValue = context.textProvider.text(for: textAnimationContext.currentKeypath, sourceText: sourceText.text) {
       renderLayer.text = keypathTextValue
-    } else if let legacyTextProvider = context.textProvider as? LegacyAnimationTextProvider {
+    } else if let legacyTextProvider = context.textProvider as? any LegacyAnimationTextProvider {
       renderLayer.text = legacyTextProvider.textFor(
         keypathName: textAnimationContext.currentKeypath.fullPath,
         sourceText: sourceText.text)

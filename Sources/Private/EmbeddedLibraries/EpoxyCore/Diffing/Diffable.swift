@@ -11,7 +11,7 @@ protocol Diffable {
   ///
   /// - Parameters:
   ///     - otherDiffableItem: The other item to check equality against while diffing.
-  func isDiffableItemEqual(to otherDiffableItem: Diffable) -> Bool
+  func isDiffableItemEqual(to otherDiffableItem: any Diffable) -> Bool
 
   /// The identifier to use when checking identity while diffing.
   var diffIdentifier: AnyHashable { get }

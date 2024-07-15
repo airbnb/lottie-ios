@@ -10,12 +10,12 @@ import QuartzCore
 // MARK: - NodePropertyMap
 
 protocol NodePropertyMap {
-  var properties: [AnyNodeProperty] { get }
+  var properties: [any AnyNodeProperty] { get }
 }
 
 extension NodePropertyMap {
 
-  var childKeypaths: [KeypathSearchable] {
+  var childKeypaths: [any KeypathSearchable] {
     []
   }
 

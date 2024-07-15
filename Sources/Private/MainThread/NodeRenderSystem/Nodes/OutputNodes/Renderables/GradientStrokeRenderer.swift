@@ -13,7 +13,7 @@ final class GradientStrokeRenderer: PassThroughOutputNode, Renderable {
 
   // MARK: Lifecycle
 
-  override init(parent: NodeOutput?) {
+  override init(parent: (any NodeOutput)?) {
     strokeRender = StrokeRenderer(parent: nil)
     gradientRender = LegacyGradientFillRenderer(parent: nil)
     strokeRender.color = .rgb(1, 1, 1)

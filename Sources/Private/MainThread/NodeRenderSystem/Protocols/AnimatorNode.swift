@@ -14,7 +14,7 @@ import QuartzCore
 protocol NodeOutput {
 
   /// The parent node.
-  var parent: NodeOutput? { get }
+  var parent: (any NodeOutput)? { get }
 
   /// Returns true if there are any updates upstream. OutputPath must be built before returning.
   func hasOutputUpdates(_ forFrame: CGFloat) -> Bool
@@ -46,13 +46,13 @@ protocol AnimatorNode: AnyObject, KeypathSearchable {
   /// These properties are also settable and gettable through the dynamic
   /// property system.
   ///
-  var propertyMap: NodePropertyMap & KeypathSearchable { get }
+  var propertyMap: any (NodePropertyMap & KeypathSearchable) { get }
 
   /// The upstream input node
-  var parentNode: AnimatorNode? { get }
+  var parentNode: (any AnimatorNode)? { get }
 
   /// The output of the node.
-  var outputNode: NodeOutput { get }
+  var outputNode: any NodeOutput { get }
 
   /// Update the outputs of the node. Called if local contents were update or if outputsNeedUpdate returns true.
   func rebuildOutputs(frame: CGFloat)
@@ -182,11 +182,11 @@ extension AnimatorNode {
     propertyMap.keypathName
   }
 
-  var keypathProperties: [String: AnyNodeProperty] {
+  var keypathProperties: [String: any AnyNodeProperty] {
     propertyMap.keypathProperties
   }
 
-  var childKeypaths: [KeypathSearchable] {
+  var childKeypaths: [any KeypathSearchable] {
     propertyMap.childKeypaths
   }
 

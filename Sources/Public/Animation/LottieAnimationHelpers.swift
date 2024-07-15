@@ -42,7 +42,7 @@ extension LottieAnimation {
     _ name: String,
     bundle: Bundle = Bundle.main,
     subdirectory: String? = nil,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
+    animationCache: (any AnimationCacheProvider)? = LottieAnimationCache.shared)
     -> LottieAnimation?
   {
     /// Create a cache key for the animation.
@@ -77,7 +77,7 @@ extension LottieAnimation {
   /// - Returns: Deserialized `LottieAnimation`. Optional.
   public static func filepath(
     _ filepath: String,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
+    animationCache: (any AnimationCacheProvider)? = LottieAnimationCache.shared)
     -> LottieAnimation?
   {
     /// Check cache for animation
@@ -111,7 +111,7 @@ extension LottieAnimation {
   public static func asset(
     _ name: String,
     bundle: Bundle = Bundle.main,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
+    animationCache: (any AnimationCacheProvider)? = LottieAnimationCache.shared)
     -> LottieAnimation?
   {
     /// Create a cache key for the animation.
@@ -174,7 +174,7 @@ extension LottieAnimation {
   public static func loadedFrom(
     url: URL,
     session: URLSession = .shared,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
+    animationCache: (any AnimationCacheProvider)? = LottieAnimationCache.shared)
     async -> LottieAnimation?
   {
     await withCheckedContinuation { continuation in
@@ -198,7 +198,7 @@ extension LottieAnimation {
     url: URL,
     session: URLSession = .shared,
     closure: @escaping LottieAnimation.DownloadClosure,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
+    animationCache: (any AnimationCacheProvider)? = LottieAnimationCache.shared)
   {
     if let animationCache, let animation = animationCache.animation(forKey: url.absoluteString) {
       closure(animation)

@@ -34,8 +34,8 @@ final class FillNodeProperties: NodePropertyMap, KeypathSearchable {
   let color: NodeProperty<LottieColor>
   let type: FillRule
 
-  let keypathProperties: [String: AnyNodeProperty]
-  let properties: [AnyNodeProperty]
+  let keypathProperties: [String: any AnyNodeProperty]
+  let properties: [any AnyNodeProperty]
 
 }
 
@@ -45,7 +45,7 @@ final class FillNode: AnimatorNode, RenderNode {
 
   // MARK: Lifecycle
 
-  init(parentNode: AnimatorNode?, fill: Fill) {
+  init(parentNode: (any AnimatorNode)?, fill: Fill) {
     fillRender = FillRenderer(parent: parentNode?.outputNode)
     fillProperties = FillNodeProperties(fill: fill)
     self.parentNode = parentNode
@@ -57,18 +57,18 @@ final class FillNode: AnimatorNode, RenderNode {
 
   let fillProperties: FillNodeProperties
 
-  let parentNode: AnimatorNode?
+  let parentNode: (any AnimatorNode)?
   var hasLocalUpdates = false
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
-  var renderer: NodeOutput & Renderable {
+  var renderer: any (NodeOutput & Renderable) {
     fillRender
   }
 
   // MARK: Animator Node Protocol
 
-  var propertyMap: NodePropertyMap & KeypathSearchable {
+  var propertyMap: any (NodePropertyMap & KeypathSearchable) {
     fillProperties
   }
 

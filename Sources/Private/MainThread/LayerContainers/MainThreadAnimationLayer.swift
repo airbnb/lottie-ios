@@ -19,9 +19,9 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
 
   init(
     animation: LottieAnimation,
-    imageProvider: AnimationImageProvider,
-    textProvider: AnimationKeypathTextProvider,
-    fontProvider: AnimationFontProvider,
+    imageProvider: any AnimationImageProvider,
+    textProvider: any AnimationKeypathTextProvider,
+    fontProvider: any AnimationFontProvider,
     maskAnimationToBounds: Bool,
     logger: LottieLogger)
   {
@@ -116,7 +116,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     return super.needsDisplay(forKey: key)
   }
 
-  override public func action(forKey event: String) -> CAAction? {
+  override public func action(forKey event: String) -> (any CAAction)? {
     if event == "currentFrame" {
       let animation = CABasicAnimation(keyPath: event)
       animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
@@ -176,7 +176,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     Array(animationLayers)
   }
 
-  var imageProvider: AnimationImageProvider {
+  var imageProvider: any AnimationImageProvider {
     get {
       layerImageProvider.imageProvider
     }
@@ -193,12 +193,12 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     }
   }
 
-  var textProvider: AnimationKeypathTextProvider {
+  var textProvider: any AnimationKeypathTextProvider {
     get { layerTextProvider.textProvider }
     set { layerTextProvider.textProvider = newValue }
   }
 
-  var fontProvider: AnimationFontProvider {
+  var fontProvider: any AnimationFontProvider {
     get { layerFontProvider.fontProvider }
     set { layerFontProvider.fontProvider = newValue }
   }
@@ -230,7 +230,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     animationLayers.flatMap { $0.allKeypaths() }
   }
 
-  func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
+  func setValueProvider(_ valueProvider: any AnyValueProvider, keypath: AnimationKeypath) {
     for layer in animationLayers {
       if let foundProperties = layer.nodeProperties(for: keypath) {
         for property in foundProperties {
@@ -283,8 +283,8 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     return nil
   }
 
-  func animatorNodes(for keypath: AnimationKeypath) -> [AnimatorNode]? {
-    var results = [AnimatorNode]()
+  func animatorNodes(for keypath: AnimationKeypath) -> [any AnimatorNode]? {
+    var results = [any AnimatorNode]()
     for layer in animationLayers {
       if let nodes = layer.animatorNodes(for: keypath) {
         results.append(contentsOf: nodes)

@@ -13,7 +13,7 @@ private final class CachedImageProvider: AnimationImageProvider {
   ///
   /// - Parameter imageProvider: The provider to load image from asset
   ///
-  public init(imageProvider: AnimationImageProvider) {
+  public init(imageProvider: any AnimationImageProvider) {
     self.imageProvider = imageProvider
   }
 
@@ -43,7 +43,7 @@ private final class CachedImageProvider: AnimationImageProvider {
   ///    clears all cached values when the app is backgrounded instead of
   ///    only when the app receives a memory warning notification.
   private var imageCache = LRUCache<String, CGImage>()
-  private let imageProvider: AnimationImageProvider
+  private let imageProvider: any AnimationImageProvider
 
 }
 
@@ -51,7 +51,7 @@ extension AnimationImageProvider {
   /// Create a cache enabled image provider which will reuse the asset image with the same asset id
   /// It wraps the current provider as image loader, and uses `NSCache` to cache the images for resue.
   /// The cache will be reset when the `animation` is reset.
-  var cachedImageProvider: AnimationImageProvider {
+  var cachedImageProvider: any AnimationImageProvider {
     guard cacheEligible else { return self }
     return CachedImageProvider(imageProvider: self)
   }

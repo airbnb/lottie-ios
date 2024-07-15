@@ -17,7 +17,7 @@ public enum ReducedMotionOption {
   /// Dynamically check the given `ReducedMotionOptionProvider` each time an animation begins.
   ///  - Includes a Hashable `dataID` to support `ReducedMotionOption`'s `Hashable` requirement,
   ///    which is required due to `LottieConfiguration`'s existing `Hashable` requirement.
-  case dynamic(ReducedMotionOptionProvider, dataID: AnyHashable)
+  case dynamic(any ReducedMotionOptionProvider, dataID: AnyHashable)
 }
 
 extension ReducedMotionOption {

@@ -23,7 +23,7 @@ public struct DotLottieConfiguration {
   public var speed: Double
 
   /// Animation Image Provider
-  public var imageProvider: AnimationImageProvider? {
+  public var imageProvider: (any AnimationImageProvider)? {
     dotLottieImageProvider
   }
 

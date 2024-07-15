@@ -9,7 +9,7 @@ final class PrecompAsset: Asset {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: PrecompAsset.CodingKeys.self)
     layers = try container.decode([LayerModel].self, ofFamily: LayerType.self, forKey: .layers)
     try super.init(from: decoder)
@@ -30,7 +30,7 @@ final class PrecompAsset: Asset {
   /// Layers of the precomp
   let layers: [LayerModel]
 
-  override func encode(to encoder: Encoder) throws {
+  override func encode(to encoder: any Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(layers, forKey: .layers)

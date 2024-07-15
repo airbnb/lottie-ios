@@ -50,7 +50,7 @@ final class KeyframeGroup<T> {
 // MARK: Decodable
 
 extension KeyframeGroup: Decodable where T: Decodable {
-  convenience init(from decoder: Decoder) throws {
+  convenience init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: KeyframeWrapperKey.self)
     let unsupportedAfterEffectsExpression = try? container.decode(String.self, forKey: .unsupportedAfterEffectsExpression)
 
@@ -112,7 +112,7 @@ extension KeyframeGroup: Decodable where T: Decodable {
 // MARK: Encodable
 
 extension KeyframeGroup: Encodable where T: Encodable {
-  func encode(to encoder: Encoder) throws {
+  func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: KeyframeWrapperKey.self)
 
     if keyframes.count == 1 {
@@ -240,7 +240,7 @@ protocol AnyKeyframeGroup {
   var untyped: KeyframeGroup<Any> { get }
 
   /// An untyped `KeyframeInterpolator` for these keyframes
-  var interpolator: AnyValueProvider { get }
+  var interpolator: any AnyValueProvider { get }
 }
 
 // MARK: - KeyframeGroup + AnyKeyframeGroup
@@ -250,7 +250,7 @@ extension KeyframeGroup: AnyKeyframeGroup where T: AnyInterpolatable {
     map { $0 as Any }
   }
 
-  var interpolator: AnyValueProvider {
+  var interpolator: any AnyValueProvider {
     KeyframeInterpolator(keyframes: keyframes)
   }
 }

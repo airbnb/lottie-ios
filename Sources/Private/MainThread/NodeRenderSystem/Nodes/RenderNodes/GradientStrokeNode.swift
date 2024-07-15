@@ -74,8 +74,8 @@ final class GradientStrokeProperties: NodePropertyMap, KeypathSearchable {
   let gradientType: GradientType
   let numberOfColors: Int
 
-  let keypathProperties: [String: AnyNodeProperty]
-  let properties: [AnyNodeProperty]
+  let keypathProperties: [String: any AnyNodeProperty]
+  let properties: [any AnyNodeProperty]
 
 }
 
@@ -85,7 +85,7 @@ final class GradientStrokeNode: AnimatorNode, RenderNode {
 
   // MARK: Lifecycle
 
-  init(parentNode: AnimatorNode?, gradientStroke: GradientStroke) {
+  init(parentNode: (any AnimatorNode)?, gradientStroke: GradientStroke) {
     strokeRender = GradientStrokeRenderer(parent: parentNode?.outputNode)
     strokeProperties = GradientStrokeProperties(gradientStroke: gradientStroke)
     self.parentNode = parentNode
@@ -97,18 +97,18 @@ final class GradientStrokeNode: AnimatorNode, RenderNode {
 
   let strokeProperties: GradientStrokeProperties
 
-  let parentNode: AnimatorNode?
+  let parentNode: (any AnimatorNode)?
   var hasLocalUpdates = false
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
-  var renderer: NodeOutput & Renderable {
+  var renderer: any (NodeOutput & Renderable) {
     strokeRender
   }
 
   // MARK: Animator Node Protocol
 
-  var propertyMap: NodePropertyMap & KeypathSearchable {
+  var propertyMap: any (NodePropertyMap & KeypathSearchable) {
     strokeProperties
   }
 

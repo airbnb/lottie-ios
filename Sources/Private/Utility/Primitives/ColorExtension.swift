@@ -13,7 +13,7 @@ extension LottieColor: Codable {
 
   // MARK: Lifecycle
 
-  public init(from decoder: Decoder) throws {
+  public init(from decoder: any Decoder) throws {
     var container = try decoder.unkeyedContainer()
 
     var r1: Double =
@@ -53,7 +53,7 @@ extension LottieColor: Codable {
 
   // MARK: Public
 
-  public func encode(to encoder: Encoder) throws {
+  public func encode(to encoder: any Encoder) throws {
     var container = encoder.unkeyedContainer()
     try container.encode(r)
     try container.encode(g)

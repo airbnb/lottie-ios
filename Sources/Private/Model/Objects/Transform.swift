@@ -10,7 +10,7 @@ final class Transform: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     /// This manual override of decode is required because we want to throw an error
     /// in the case that there is not position data.
     let container = try decoder.container(keyedBy: Transform.CodingKeys.self)

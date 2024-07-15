@@ -9,7 +9,7 @@ final class Repeater: ShapeItem {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: Repeater.CodingKeys.self)
     copies = try container
       .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .copies) ?? KeyframeGroup(LottieVector1D(0))
@@ -134,7 +134,7 @@ final class Repeater: ShapeItem {
   /// Scale
   let scale: KeyframeGroup<LottieVector3D>
 
-  override func encode(to encoder: Encoder) throws {
+  override func encode(to encoder: any Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(copies, forKey: .copies)

@@ -30,7 +30,7 @@ extension EpoxyModeled where Self: StyleIDProviding {
 
   private var styleIDProperty: EpoxyModelProperty<AnyHashable?> {
     .init(
-      keyPath: \StyleIDProviding.styleID,
+      keyPath: \(any StyleIDProviding).styleID,
       defaultValue: nil,
       updateStrategy: .replace)
   }

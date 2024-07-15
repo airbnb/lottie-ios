@@ -10,7 +10,7 @@ final class LayerTextProvider {
 
   // MARK: Lifecycle
 
-  init(textProvider: AnimationKeypathTextProvider) {
+  init(textProvider: any AnimationKeypathTextProvider) {
     self.textProvider = textProvider
     textLayers = []
     reloadTexts()
@@ -20,7 +20,7 @@ final class LayerTextProvider {
 
   private(set) var textLayers: [TextCompositionLayer]
 
-  var textProvider: AnimationKeypathTextProvider {
+  var textProvider: any AnimationKeypathTextProvider {
     didSet {
       reloadTexts()
     }

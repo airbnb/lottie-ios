@@ -9,7 +9,7 @@ final class ShapeTransform: ShapeItem {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: ShapeTransform.CodingKeys.self)
     anchor = try container
       .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .anchor) ??
@@ -162,7 +162,7 @@ final class ShapeTransform: ShapeItem {
   /// Skew Axis
   let skewAxis: KeyframeGroup<LottieVector1D>
 
-  override func encode(to encoder: Encoder) throws {
+  override func encode(to encoder: any Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(anchor, forKey: .anchor)

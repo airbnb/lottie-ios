@@ -13,7 +13,7 @@ protocol StrokeShapeItem: ShapeItem, OpacityAnimationModel {
   var lineJoin: LineJoin { get }
   var miterLimit: Double { get }
   var dashPattern: [DashElement]? { get }
-  func copy(width: KeyframeGroup<LottieVector1D>) -> StrokeShapeItem
+  func copy(width: KeyframeGroup<LottieVector1D>) -> any StrokeShapeItem
 }
 
 // MARK: - Stroke + StrokeShapeItem
@@ -21,7 +21,7 @@ protocol StrokeShapeItem: ShapeItem, OpacityAnimationModel {
 extension Stroke: StrokeShapeItem {
   var strokeColor: KeyframeGroup<LottieColor>? { color }
 
-  func copy(width: KeyframeGroup<LottieVector1D>) -> StrokeShapeItem {
+  func copy(width: KeyframeGroup<LottieVector1D>) -> any StrokeShapeItem {
     // Type-erase the copy from `Stroke` to `StrokeShapeItem`
     let copy: Stroke = copy(width: width)
     return copy
@@ -33,7 +33,7 @@ extension Stroke: StrokeShapeItem {
 extension GradientStroke: StrokeShapeItem {
   var strokeColor: KeyframeGroup<LottieColor>? { nil }
 
-  func copy(width: KeyframeGroup<LottieVector1D>) -> StrokeShapeItem {
+  func copy(width: KeyframeGroup<LottieVector1D>) -> any StrokeShapeItem {
     // Type-erase the copy from `GradientStroke` to `StrokeShapeItem`
     let copy: GradientStroke = copy(width: width)
     return copy
@@ -45,7 +45,7 @@ extension GradientStroke: StrokeShapeItem {
 extension CAShapeLayer {
   /// Adds animations for properties related to the given `Stroke` object (`strokeColor`, `lineWidth`, etc)
   @nonobjc
-  func addStrokeAnimations(for stroke: StrokeShapeItem, context: LayerAnimationContext) throws {
+  func addStrokeAnimations(for stroke: any StrokeShapeItem, context: LayerAnimationContext) throws {
     lineJoin = stroke.lineJoin.caLineJoin
     lineCap = stroke.lineCap.caLineCap
     miterLimit = CGFloat(stroke.miterLimit)

@@ -8,11 +8,11 @@
 // MARK: - NodeTree
 
 final class NodeTree {
-  var rootNode: AnimatorNode? = nil
+  var rootNode: (any AnimatorNode)? = nil
   var transform: ShapeTransform? = nil
   var renderContainers: [ShapeContainerLayer] = []
   var paths: [PathOutputNode] = []
-  var childrenNodes: [AnimatorNode] = []
+  var childrenNodes: [any AnimatorNode] = []
 }
 
 extension [ShapeItem] {
@@ -93,12 +93,12 @@ extension [ShapeItem] {
           """)
       }
 
-      if let pathNode = nodeTree.rootNode as? PathNode {
+      if let pathNode = nodeTree.rootNode as? any PathNode {
         //// Add path container to the node tree
         nodeTree.paths.append(pathNode.pathOutput)
       }
 
-      if let renderNode = nodeTree.rootNode as? RenderNode {
+      if let renderNode = nodeTree.rootNode as? any RenderNode {
         nodeTree.renderContainers.append(ShapeRenderLayer(renderer: renderNode.renderer))
       }
     }

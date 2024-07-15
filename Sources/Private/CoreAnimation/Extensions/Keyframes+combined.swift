@@ -201,7 +201,7 @@ enum Keyframes {
   /// `requiresManualInterpolation` determines whether the keyframes must be computed using `Keyframes.manuallyInterpolated`,
   /// which interpolates the value at each frame, or if the keyframes can simply be combined.
   private static func combined<CombinedResult>(
-    _ allGroups: [AnyKeyframeGroup],
+    _ allGroups: [any AnyKeyframeGroup],
     requiresManualInterpolation: Bool,
     makeCombinedResult: ([Any]) throws -> CombinedResult?)
     rethrows
@@ -244,7 +244,7 @@ enum Keyframes {
   }
 
   private static func manuallyInterpolated<CombinedResult>(
-    _ allGroups: [AnyKeyframeGroup],
+    _ allGroups: [any AnyKeyframeGroup],
     makeCombinedResult: ([Any]) throws -> CombinedResult?)
     rethrows
     -> KeyframeGroup<CombinedResult>

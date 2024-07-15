@@ -7,7 +7,7 @@ enum LayerStyleType: Int, Codable, Sendable {
   case dropShadow = 1
   case unknown = 9999
 
-  init(from decoder: Decoder) throws {
+  init(from decoder: any Decoder) throws {
     self = try LayerStyleType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
   }
 }
@@ -34,7 +34,7 @@ class LayerStyle: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: LayerStyle.CodingKeys.self)
     name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Style"
     type = try container.decode(LayerStyleType.self, forKey: .type)

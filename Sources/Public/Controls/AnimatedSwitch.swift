@@ -221,7 +221,7 @@ open class AnimatedSwitch: AnimatedControl {
 
   // MARK: Fileprivate
 
-  fileprivate var hapticGenerator: ImpactGenerator
+  fileprivate var hapticGenerator: any ImpactGenerator
 
   fileprivate var _isOn = false {
     didSet {

@@ -18,7 +18,7 @@ final class TextAnimator: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: TextAnimator.CodingKeys.self)
     name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
 
@@ -197,7 +197,7 @@ final class TextAnimator: Codable, DictionaryInitializable {
   /// The type of unit used by the start/end ranges
   let textRangeUnit: TextRangeUnit?
 
-  func encode(to encoder: Encoder) throws {
+  func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     var animatorContainer = container.nestedContainer(keyedBy: TextAnimatorKeys.self, forKey: .textAnimator)
     try animatorContainer.encodeIfPresent(fillColor, forKey: .fillColor)

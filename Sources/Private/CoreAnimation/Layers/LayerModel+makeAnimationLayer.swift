@@ -6,9 +6,9 @@
 /// Context available when constructing an `AnimationLayer`
 struct LayerContext {
   let animation: LottieAnimation
-  let imageProvider: AnimationImageProvider
-  let textProvider: AnimationKeypathTextProvider
-  let fontProvider: AnimationFontProvider
+  let imageProvider: any AnimationImageProvider
+  let textProvider: any AnimationKeypathTextProvider
+  let fontProvider: any AnimationFontProvider
   let compatibilityTracker: CompatibilityTracker
   var layerName: String
 

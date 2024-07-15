@@ -32,7 +32,7 @@ extension GradientRenderLayer {
   ///  - The RGB components and alpha components can have different color stops / locations,
   ///    so have to be rendered in separate `CAGradientLayer`s.
   func addGradientAnimations(
-    for gradient: GradientShapeItem,
+    for gradient: any GradientShapeItem,
     type: GradientContentType,
     context: LayerAnimationContext)
     throws
@@ -86,7 +86,7 @@ extension GradientRenderLayer {
   // MARK: Private
 
   private func addLinearGradientAnimations(
-    for gradient: GradientShapeItem,
+    for gradient: any GradientShapeItem,
     context: LayerAnimationContext)
     throws
   {
@@ -109,7 +109,7 @@ extension GradientRenderLayer {
       context: context)
   }
 
-  private func addRadialGradientAnimations(for gradient: GradientShapeItem, context: LayerAnimationContext) throws {
+  private func addRadialGradientAnimations(for gradient: any GradientShapeItem, context: LayerAnimationContext) throws {
     type = .radial
 
     let combinedKeyframes = Keyframes.combined(

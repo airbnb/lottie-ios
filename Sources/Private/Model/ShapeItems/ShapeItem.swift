@@ -24,7 +24,7 @@ enum ShapeType: String, Codable, Sendable {
   case transform = "tr"
   case unknown
 
-  public init(from decoder: Decoder) throws {
+  public init(from decoder: any Decoder) throws {
     self = try ShapeType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
   }
 }
@@ -78,7 +78,7 @@ class ShapeItem: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: ShapeItem.CodingKeys.self)
     name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Layer"
     type = try container.decode(ShapeType.self, forKey: .type)

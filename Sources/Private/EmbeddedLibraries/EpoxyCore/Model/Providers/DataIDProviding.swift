@@ -39,7 +39,7 @@ extension EpoxyModeled where Self: DataIDProviding {
 
   private var dataIDProperty: EpoxyModelProperty<AnyHashable> {
     EpoxyModelProperty(
-      keyPath: \DataIDProviding.dataID,
+      keyPath: \(any DataIDProviding).dataID,
       defaultValue: DefaultDataID.noneProvided,
       updateStrategy: .replace)
   }

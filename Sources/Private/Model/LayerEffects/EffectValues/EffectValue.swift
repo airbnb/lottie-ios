@@ -10,7 +10,7 @@ enum EffectValueType: Int, Codable, Sendable {
   case color = 2
   case unknown = 9999
 
-  init(from decoder: Decoder) throws {
+  init(from decoder: any Decoder) throws {
     self = try EffectValueType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
   }
 }
@@ -41,7 +41,7 @@ class EffectValue: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: EffectValue.CodingKeys.self)
     type = try container.decode(EffectValueType.self, forKey: .type)
     name = try container.decode(String.self, forKey: .name)

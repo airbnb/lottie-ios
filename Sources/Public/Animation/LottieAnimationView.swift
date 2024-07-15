@@ -98,9 +98,9 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// Initializes an AnimationView with an animation.
   public init(
     animation: LottieAnimation?,
-    imageProvider: AnimationImageProvider? = nil,
-    textProvider: AnimationKeypathTextProvider = DefaultTextProvider(),
-    fontProvider: AnimationFontProvider = DefaultFontProvider(),
+    imageProvider: (any AnimationImageProvider)? = nil,
+    textProvider: any AnimationKeypathTextProvider = DefaultTextProvider(),
+    fontProvider: any AnimationFontProvider = DefaultFontProvider(),
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)
   {
@@ -123,8 +123,8 @@ open class LottieAnimationView: LottieAnimationViewBase {
   public init(
     dotLottie: DotLottieFile?,
     animationId: String? = nil,
-    textProvider: AnimationKeypathTextProvider = DefaultTextProvider(),
-    fontProvider: AnimationFontProvider = DefaultFontProvider(),
+    textProvider: any AnimationKeypathTextProvider = DefaultTextProvider(),
+    fontProvider: any AnimationFontProvider = DefaultFontProvider(),
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)
   {
@@ -181,9 +181,9 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   convenience init(
     animationSource: LottieAnimationSource?,
-    imageProvider: AnimationImageProvider? = nil,
-    textProvider: AnimationKeypathTextProvider = DefaultTextProvider(),
-    fontProvider: AnimationFontProvider = DefaultFontProvider(),
+    imageProvider: (any AnimationImageProvider)? = nil,
+    textProvider: any AnimationKeypathTextProvider = DefaultTextProvider(),
+    fontProvider: any AnimationFontProvider = DefaultFontProvider(),
     configuration: LottieConfiguration = .shared,
     logger: LottieLogger = .shared)
   {
@@ -381,7 +381,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   }
 
   /// Value Providers that have been registered using `setValueProvider(_:keypath:)`
-  public var valueProviders: [AnimationKeypath: AnyValueProvider] {
+  public var valueProviders: [AnimationKeypath: any AnyValueProvider] {
     lottieAnimationLayer.valueProviders
   }
 
@@ -447,21 +447,21 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// animation with its required image data.
   ///
   /// Setting this will cause the animation to reload its image contents.
-  public var imageProvider: AnimationImageProvider {
+  public var imageProvider: any AnimationImageProvider {
     get { lottieAnimationLayer.imageProvider }
     set { lottieAnimationLayer.imageProvider = newValue }
   }
 
   /// Sets the text provider for animation view. A text provider provides the
   /// animation with values for text layers
-  public var textProvider: AnimationKeypathTextProvider {
+  public var textProvider: any AnimationKeypathTextProvider {
     get { lottieAnimationLayer.textProvider }
     set { lottieAnimationLayer.textProvider = newValue }
   }
 
   /// Sets the text provider for animation view. A text provider provides the
   /// animation with values for text layers
-  public var fontProvider: AnimationFontProvider {
+  public var fontProvider: any AnimationFontProvider {
     get { lottieAnimationLayer.fontProvider }
     set { lottieAnimationLayer.fontProvider = newValue }
   }
@@ -669,7 +669,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// /// Set the provider on the animationView.
   /// animationView.setValueProvider(redValueProvider, keypath: fillKeypath)
   /// ```
-  public func setValueProvider(_ valueProvider: AnyValueProvider, keypath: AnimationKeypath) {
+  public func setValueProvider(_ valueProvider: any AnyValueProvider, keypath: AnimationKeypath) {
     lottieAnimationLayer.setValueProvider(valueProvider, keypath: keypath)
   }
 
@@ -816,7 +816,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// The backing CALayer for this animation view.
   let lottieAnimationLayer: LottieAnimationLayer
 
-  var animationLayer: RootAnimationLayer? {
+  var animationLayer: (any RootAnimationLayer)? {
     lottieAnimationLayer.rootAnimationLayer
   }
 

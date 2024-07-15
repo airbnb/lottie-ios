@@ -37,7 +37,7 @@ extension GradientStroke: OpacityAnimationModel { }
 extension CALayer {
   /// Adds the opacity animation from the given `OpacityAnimationModel` to this layer
   @nonobjc
-  func addOpacityAnimation(for opacity: OpacityAnimationModel, context: LayerAnimationContext) throws {
+  func addOpacityAnimation(for opacity: any OpacityAnimationModel, context: LayerAnimationContext) throws {
     try addAnimation(
       for: .opacity,
       keyframes: opacity.opacity,

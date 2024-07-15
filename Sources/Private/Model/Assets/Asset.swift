@@ -11,7 +11,7 @@ public class Asset: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
-  required public init(from decoder: Decoder) throws {
+  required public init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: Asset.CodingKeys.self)
     if let id = try? container.decode(String.self, forKey: .id) {
       self.id = id

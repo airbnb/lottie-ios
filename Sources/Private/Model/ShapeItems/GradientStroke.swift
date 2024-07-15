@@ -29,7 +29,7 @@ final class GradientStroke: ShapeItem {
 
   // MARK: Lifecycle
 
-  required init(from decoder: Decoder) throws {
+  required init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: GradientStroke.CodingKeys.self)
     opacity = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .opacity)
     startPoint = try container.decode(KeyframeGroup<LottieVector3D>.self, forKey: .startPoint)
@@ -193,7 +193,7 @@ final class GradientStroke: ShapeItem {
       dashPattern: dashPattern)
   }
 
-  override func encode(to encoder: Encoder) throws {
+  override func encode(to encoder: any Encoder) throws {
     try super.encode(to: encoder)
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(opacity, forKey: .opacity)

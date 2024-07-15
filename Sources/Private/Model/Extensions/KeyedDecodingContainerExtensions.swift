@@ -50,7 +50,7 @@ extension KeyedDecodingContainer {
   ///     - key: The CodingKey to look up the list in the current container.
   /// - Returns: The resulting list of heterogeneousType elements.
   func decodeIfPresent<T: Decodable, U: ClassFamily>(_: [T].Type, ofFamily family: U.Type, forKey key: K) throws -> [T]? {
-    var container: UnkeyedDecodingContainer
+    var container: any UnkeyedDecodingContainer
     do {
       container = try nestedUnkeyedContainer(forKey: key)
     } catch {

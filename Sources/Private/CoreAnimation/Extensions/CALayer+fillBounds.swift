@@ -12,7 +12,7 @@ extension CALayer {
   func fillBoundsOfSuperlayer() {
     guard let superlayer else { return }
 
-    if let customLayerLayer = self as? CustomLayoutLayer {
+    if let customLayerLayer = self as? any CustomLayoutLayer {
       customLayerLayer.layout(superlayerBounds: superlayer.bounds)
     }
 
