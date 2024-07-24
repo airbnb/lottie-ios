@@ -33,7 +33,7 @@ You can pull the [Lottie Github Repo](https://github.com/airbnb/lottie-ios/) and
 
 ### Swift Package Manager
 
-To install Lottie using [Swift Package Manager](https://github.com/apple/swift-package-manager) you can follow the [tutorial published by Apple](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) using the URL for the Lottie repo with the current version:
+To install Lottie using [Swift Package Manager](https://github.com/swiftlang/swift-package-manager) you can follow the [tutorial published by Apple](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) using the URL for the Lottie repo with the current version:
 
 1. In Xcode, select “File” → “Add Packages...”
 1. Enter https://github.com/airbnb/lottie-spm.git
