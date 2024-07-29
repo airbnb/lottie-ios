@@ -676,6 +676,9 @@ open class LottieAnimationView: LottieAnimationViewBase {
   /// Reads the value of a property specified by the Keypath.
   /// Returns nil if no property is found.
   ///
+  /// Note: This method isn't supported by the Core Animation rendering engine and will always return `nil` if used.
+  /// It is still supported by the Main Thread rendering engine.
+  ///
   /// - Parameter for: The keypath used to search for the property.
   /// - Parameter atFrame: The Frame Time of the value to query. If nil then the current frame is used.
   public func getValue(for keypath: AnimationKeypath, atFrame: AnimationFrameTime?) -> Any? {
