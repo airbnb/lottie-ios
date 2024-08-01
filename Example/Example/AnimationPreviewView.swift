@@ -137,7 +137,7 @@ struct AnimationPreviewView: View {
     Menu {
       Menu {
         option("Automatic", keyPath: \.renderingEngine, value: .automatic)
-        option("Core Animaiton", keyPath: \.renderingEngine, value: .coreAnimation)
+        option("Core Animation", keyPath: \.renderingEngine, value: .coreAnimation)
         option("Main Thread", keyPath: \.renderingEngine, value: .mainThread)
       } label: {
         Text("Rendering Engine")
