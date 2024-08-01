@@ -935,7 +935,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
       }
     }
 
-    // UIView Animation does not implicitly set CAAnimation time or timing fuctions.
+    // UIView Animation does not implicitly set CAAnimation time or timing functions.
     // If layout is changed in an animation we must get the current animation duration
     // and timing function and then manually create a CAAnimation to match the UIView animation.
     // If layout is changed without animation, explicitly set animation duration to 0.0
