@@ -16,7 +16,7 @@ jobs:
         xcode:
         - '15.0.1' # Swift 5.9, but no visionOS support
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
           xcode: ${{ matrix.xcode }}
@@ -34,7 +34,7 @@ jobs:
         - '15.2' # Swift 5.9
         - '15.3' # Swift 5.10
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
           xcode: ${{ matrix.xcode }}
@@ -46,7 +46,7 @@ jobs:
     name: "Build Example App"
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
           xcode: '15.3' # Swift 5.10
@@ -57,7 +57,7 @@ jobs:
     name: "Test Package"
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
           xcode: '15.3' # Swift 5.10
@@ -68,7 +68,7 @@ jobs:
         run: bundle exec rake test:process
       - name: Upload artifacts
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: TestArtifacts
           path: Tests/Artifacts
@@ -77,7 +77,7 @@ jobs:
     name: "Emerge Upload"
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - name: Build Package
         run: bundle exec rake emerge:upload
@@ -100,8 +100,8 @@ jobs:
           #    Xcode 15.0 can use an XCFramework built by Xcode 15.2.
           - '15.2' # Swift 5.9, first Xcode version with visionOS support.
     steps:
-      - uses: actions/checkout@v2
-      - uses: apple-actions/import-codesign-certs@v2
+      - uses: actions/checkout@v4
+      - uses: apple-actions/import-codesign-certs@v3
         continue-on-error: true
         with:
           p12-file-base64: ${{ secrets.SIGNING_CERTIFICATE_BASE_64 }}
@@ -112,7 +112,7 @@ jobs:
       - name: Build XCFramework
         run: bundle exec rake build:xcframework
       - name: Upload XCFramework
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: BuildProducts
           path: .build/archives
@@ -125,7 +125,7 @@ jobs:
         xcode:
           - '15.3' # Swift 5.10
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
           install-mint: false
@@ -141,7 +141,7 @@ jobs:
         xcode:
         - '15.3' # Swift 5.10
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
           install-mint: true
@@ -153,7 +153,7 @@ jobs:
     name: "Test Carthage support"
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
           install-mint: true
@@ -166,7 +166,7 @@ jobs:
     name: "Lint Swift"
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - name: Lint Swift
         run: bundle exec rake lint:swift
@@ -175,7 +175,7 @@ jobs:
     name: "Lint Embedded Libraries"
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - name: Lint Embedded Libraries
         run: bundle exec rake lint:EmbeddedLibraries
