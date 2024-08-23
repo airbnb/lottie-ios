@@ -381,9 +381,9 @@ public class LottieAnimationLayer: CALayer {
 
       switch position {
       case .start:
-        currentTime = from.frameTime
+        currentFrame = from.frameTime
       case .end:
-        currentTime = from.frameTime + from.durationFrameTime
+        currentFrame = from.frameTime + from.durationFrameTime
       }
     }
 
