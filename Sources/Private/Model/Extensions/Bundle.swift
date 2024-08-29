@@ -12,7 +12,7 @@ extension Bundle {
     }
 
     // Check for data assets
-    let assetKey = subdirectory != nil ? "\(subdirectory ?? "")/\(name)" : name
+    let assetKey = subdirectory != nil ? "\(subdirectory.orEmpty)/\(name)" : name
     return try Data(assetName: assetKey, in: self)
   }
 
@@ -23,7 +23,7 @@ extension Bundle {
       return try Data(contentsOf: url)
     }
 
-    let assetKey = subdirectory != nil ? "\(subdirectory ?? "")/\(name)" : name
+    let assetKey = subdirectory != nil ? "\(subdirectory.orEmpty)/\(name)" : name
     return try Data(assetName: assetKey, in: self)
   }
 }

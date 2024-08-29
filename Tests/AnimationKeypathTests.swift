@@ -139,7 +139,7 @@ final class AnimationKeypathTests: XCTestCase {
     let animationView = await SnapshotConfiguration.makeAnimationView(
       for: animationName,
       configuration: configuration)
-    return animationView?.allHierarchyKeypaths() ?? []
+    return animationView?.allHierarchyKeypaths().orEmpty
   }
 
 }

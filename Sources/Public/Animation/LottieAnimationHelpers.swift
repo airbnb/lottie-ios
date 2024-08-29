@@ -46,7 +46,7 @@ extension LottieAnimation {
     -> LottieAnimation?
   {
     /// Create a cache key for the animation.
-    let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
+    let cacheKey = bundle.bundlePath + subdirectory.orEmpty + "/" + name
 
     /// Check cache for animation
     if

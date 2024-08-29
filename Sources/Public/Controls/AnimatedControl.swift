@@ -42,7 +42,7 @@ open class AnimatedControl: LottieControlType {
       animation: animation,
       configuration: configuration)
 
-    super.init(frame: animation?.bounds ?? .zero)
+    super.init(frame: (animation?.bounds).or(.zero))
     commonInit()
   }
 
@@ -162,7 +162,7 @@ open class AnimatedControl: LottieControlType {
   public var animation: LottieAnimation? {
     didSet {
       animationView.animation = animation
-      animationView.bounds = animation?.bounds ?? .zero
+      animationView.bounds = (animation?.bounds).or(.zero)
       #if canImport(UIKit)
       setNeedsLayout()
       #elseif canImport(AppKit)

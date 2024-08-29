@@ -31,13 +31,13 @@ struct DotLottieAnimation: Codable {
     case .bounce:
       .autoReverse
     case .normal, nil:
-      (loop ?? false) ? .loop : .playOnce
+      loop.orFalse ? .loop : .playOnce
     }
   }
 
   /// Animation speed
   var animationSpeed: Double {
-    (speed ?? 1) * Double(direction ?? 1)
+    speed.or(1) * Double(direction.or(1))
   }
 
   /// Loads `LottieAnimation` from `animationUrl`

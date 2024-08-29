@@ -159,8 +159,8 @@ extension Trim {
     // so the total path length includes the maximum stroke
     let startStrokes = adjustedStrokeStart.keyframes.map { $0.value.cgFloatValue }
     let endStrokes = adjustedStrokeEnd.keyframes.map { $0.value.cgFloatValue }
-    let minimumStrokeMultiplier = Double(floor((startStrokes.min() ?? 0) / 100.0))
-    let maximumStrokeMultiplier = Double(ceil((endStrokes.max() ?? 100) / 100.0))
+    let minimumStrokeMultiplier = Double(floor((startStrokes.min().orZero) / 100.0))
+    let maximumStrokeMultiplier = Double(ceil((endStrokes.max().or(100)) / 100.0))
 
     if minimumStrokeMultiplier < 0 {
       // Core Animation doesn't support negative stroke offsets, so we have to

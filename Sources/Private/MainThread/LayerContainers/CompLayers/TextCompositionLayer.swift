@@ -100,9 +100,9 @@ final class TextCompositionLayer: CompositionLayer {
   lazy var fullAnimationKeypath: AnimationKeypath = // Individual layers don't know their full keypaths, so we have to delegate
     // to the `MainThreadAnimationLayer` to search the layer hierarchy and find
     // the full keypath (which includes this layer's parent layers)
-    rootAnimationLayer?.keypath(for: self)
+    (rootAnimationLayer?.keypath(for: self))
     // If that failed for some reason, just use the last path component (which we do have here)
-    ?? AnimationKeypath(keypath: keypathName)
+    .or(AnimationKeypath(keypath: keypathName))
 
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
     guard let textDocument else { return }
@@ -110,7 +110,7 @@ final class TextCompositionLayer: CompositionLayer {
     textLayer.contentsScale = renderScale
 
     let documentUpdate = textDocument.hasUpdate(frame: frame)
-    let animatorUpdate = rootNode?.updateContents(frame, forceLocalUpdate: forceUpdates) ?? false
+    let animatorUpdate = (rootNode?.updateContents(frame, forceLocalUpdate: forceUpdates)).orFalse
     guard documentUpdate == true || animatorUpdate == true else { return }
 
     rootNode?.rebuildOutputs(frame: frame)
@@ -130,10 +130,10 @@ final class TextCompositionLayer: CompositionLayer {
         text.text
       }
 
-    let strokeColor = rootNode?.textOutputNode.strokeColor ?? text.strokeColorData?.cgColorValue
-    let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
-    let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
-    let matrix = rootNode?.textOutputNode.xform ?? CATransform3DIdentity
+    let strokeColor = rootNode?.textOutputNode.strokeColor.or(text.strokeColorData?.cgColorValue)
+    let strokeWidth = (rootNode?.textOutputNode.strokeWidth).or(CGFloat(text.strokeWidth.orZero))
+    let tracking = (CGFloat(text.fontSize) * ((rootNode?.textOutputNode.tracking).or(CGFloat(text.tracking)))) / 1000.0
+    let matrix = (rootNode?.textOutputNode.xform).or(CATransform3DIdentity)
     let ctFont = fontProvider.fontFor(family: text.fontFamily, size: CGFloat(text.fontSize))
     let start = rootNode?.textOutputNode.start.flatMap { Int($0) }
     let end = rootNode?.textOutputNode.end.flatMap { Int($0) }
@@ -162,14 +162,14 @@ final class TextCompositionLayer: CompositionLayer {
     }
 
     textLayer.preferredSize = text.textFrameSize?.sizeValue
-    textLayer.strokeOnTop = text.strokeOverFill ?? false
+    textLayer.strokeOnTop = text.strokeOverFill.orFalse
     textLayer.strokeWidth = strokeWidth
     textLayer.strokeColor = strokeColor
     textLayer.sizeToFit()
 
-    textLayer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
+    textLayer.opacity = Float((rootNode?.textOutputNode.opacity).or(1))
     textLayer.transform = CATransform3DIdentity
-    textLayer.position = text.textFramePosition?.pointValue ?? CGPoint.zero
+    textLayer.position = (text.textFramePosition?.pointValue).or(CGPoint.zero)
     textLayer.transform = matrix
   }
 

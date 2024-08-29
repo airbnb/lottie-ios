@@ -73,7 +73,7 @@ class BaseCompositionLayer: BaseAnimationLayer {
       // supported on other platforms).
       let dropShadowEffect = baseLayerModel.effects.first(where: { $0 is DropShadowEffect }) as? DropShadowModel
       let dropShadowStyle = baseLayerModel.styles.first(where: { $0 is DropShadowStyle }) as? DropShadowModel
-      if let dropShadowModel = dropShadowEffect ?? dropShadowStyle {
+      if let dropShadowModel = dropShadowEffect.or(dropShadowStyle) {
         try contentsLayer.addDropShadowAnimations(for: dropShadowModel, context: context)
       }
     }

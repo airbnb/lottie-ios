@@ -11,7 +11,7 @@ enum EffectValueType: Int, Codable, Sendable {
   case unknown = 9999
 
   init(from decoder: Decoder) throws {
-    self = try EffectValueType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
+    self = try EffectValueType(rawValue: decoder.singleValueContainer().decode(RawValue.self)).or(.unknown)
   }
 }
 
@@ -48,8 +48,8 @@ class EffectValue: Codable, DictionaryInitializable {
   }
 
   required init(dictionary: [String: Any]) throws {
-    type = (try? dictionary.value(for: CodingKeys.type)).flatMap(EffectValueType.init(rawValue:)) ?? .unknown
-    name = (try? dictionary.value(for: CodingKeys.name)) ?? "Effect"
+    type = (try? dictionary.value(for: CodingKeys.type)).flatMap(EffectValueType.init(rawValue:)).or(.unknown)
+    name = (try? dictionary.value(for: CodingKeys.name)).or("Effect")
   }
 
   // MARK: Internal
@@ -72,7 +72,7 @@ extension [EffectValue] {
   static func fromDictionaries(_ dictionaries: [[String: Any]]) throws -> [EffectValue] {
     try dictionaries.compactMap { dictionary in
       let shapeType = dictionary[EffectValue.CodingKeys.type.rawValue] as? Int
-      switch EffectValueType(rawValue: shapeType ?? EffectValueType.unknown.rawValue) {
+      switch EffectValueType(rawValue: shapeType.or(EffectValueType.unknown.rawValue)) {
       case .slider:
         return try Vector1DEffectValue(dictionary: dictionary)
       case .angle:

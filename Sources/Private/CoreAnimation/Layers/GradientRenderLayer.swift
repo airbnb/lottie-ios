@@ -65,7 +65,7 @@ final class GradientRenderLayer: CAGradientLayer {
       height: CALayer.veryLargeLayerPadding + gradientReferenceBounds.height + CALayer.veryLargeLayerPadding)
 
     // Align the center of this layer to be at the center point of its parent layer
-    let superlayerSize = superlayer?.frame.size ?? gradientReferenceBounds.size
+    let superlayerSize = (superlayer?.frame.size).or(gradientReferenceBounds.size)
 
     transform = CATransform3DMakeTranslation(
       (superlayerSize.width - bounds.width) / 2,

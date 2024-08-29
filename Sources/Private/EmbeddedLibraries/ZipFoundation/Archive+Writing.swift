@@ -201,7 +201,7 @@ extension Archive {
       // Central Directory
       fseeko(archiveFile, off_t(startOfCD), SEEK_SET)
       _ = try Data.writeLargeChunk(existingData, size: existingSize, bufferSize: bufferSize, to: archiveFile)
-      let permissions = permissions ?? (type == .directory ? defaultDirectoryPermissions : defaultFilePermissions)
+      let permissions = permissions.or(type == .directory ? defaultDirectoryPermissions : defaultFilePermissions)
       let externalAttributes = FileManager.externalFileAttributesForEntry(of: type, permissions: permissions)
       let centralDir = try writeCentralDirectoryStructure(
         localFileHeader: localFileHeader,

@@ -27,7 +27,7 @@ class BaseAnimationLayer: CALayer, AnimationLayer {
 
   /// All of the sublayers managed by this container
   private var managedSublayers: [CALayer] {
-    (sublayers ?? []) + [mask].compactMap { $0 }
+    sublayers.orEmpty + [mask].compactMap { $0 }
   }
 
 }

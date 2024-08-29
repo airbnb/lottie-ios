@@ -87,14 +87,14 @@ final class TextLayer: BaseCompositionLayer {
 
     renderLayer.fillColor = text.fillColorData?.cgColorValue
     renderLayer.strokeColor = text.strokeColorData?.cgColorValue
-    renderLayer.strokeWidth = CGFloat(text.strokeWidth ?? 0)
-    renderLayer.strokeOnTop = text.strokeOverFill ?? false
+    renderLayer.strokeWidth = CGFloat(text.strokeWidth.orZero)
+    renderLayer.strokeOnTop = text.strokeOverFill.orFalse
 
     renderLayer.preferredSize = text.textFrameSize?.sizeValue
     renderLayer.sizeToFit()
 
     renderLayer.transform = CATransform3DIdentity
-    renderLayer.position = text.textFramePosition?.pointValue ?? .zero
+    renderLayer.position = (text.textFramePosition?.pointValue).or(.zero)
   }
 
   // MARK: Private

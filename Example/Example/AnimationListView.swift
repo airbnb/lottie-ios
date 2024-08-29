@@ -130,7 +130,7 @@ extension AnimationListView {
     return ((try? fileManager.contentsOfDirectory(
       at: Bundle.main.resourceURL!.appendingPathComponent(directory),
       includingPropertiesForKeys: [.isDirectoryKey],
-      options: [])) ?? [])
+      options: [])).orEmpty)
       .filter { url in
         var isDirectory = ObjCBool(false)
         fileManager.fileExists(atPath: url.path, isDirectory: &isDirectory)
@@ -151,8 +151,8 @@ extension AnimationListView {
 
   /// All Lottie animation URLs within the current `directory`
   private var animationURLs: [URL] {
-    (Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: directory) ?? []) +
-      (Bundle.main.urls(forResourcesWithExtension: "lottie", subdirectory: directory) ?? [])
+    (Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: directory).orEmpty) +
+    (Bundle.main.urls(forResourcesWithExtension: "lottie", subdirectory: directory).orEmpty)
   }
 
   private var customDemos: [Item] {
@@ -204,7 +204,7 @@ extension AnimationListView.Content {
   var name: String {
     switch self {
     case .directory(let directory):
-      directory.components(separatedBy: "/").last ?? directory
+      directory.components(separatedBy: "/").last.or(directory)
     case .custom(let name, _):
       name
     }

@@ -12,14 +12,14 @@ final class Repeater: ShapeItem {
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Repeater.CodingKeys.self)
     copies = try container
-      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .copies) ?? KeyframeGroup(LottieVector1D(0))
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .copies).or(KeyframeGroup(LottieVector1D(0)))
     offset = try container
-      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .offset) ?? KeyframeGroup(LottieVector1D(0))
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .offset).or(KeyframeGroup(LottieVector1D(0)))
     let transformContainer = try container.nestedContainer(keyedBy: TransformKeys.self, forKey: .transform)
     startOpacity = try transformContainer
-      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .startOpacity) ?? KeyframeGroup(LottieVector1D(100))
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .startOpacity).or(KeyframeGroup(LottieVector1D(100)))
     endOpacity = try transformContainer
-      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .endOpacity) ?? KeyframeGroup(LottieVector1D(100))
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .endOpacity).or(KeyframeGroup(LottieVector1D(100)))
     if let rotation = try transformContainer.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotation) {
       rotationZ = rotation
     } else if let rotation = try transformContainer.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotationZ) {
@@ -29,19 +29,19 @@ final class Repeater: ShapeItem {
     }
 
     rotationX = try transformContainer
-      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotationX) ?? KeyframeGroup(LottieVector1D(0))
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotationX).or(KeyframeGroup(LottieVector1D(0)))
     rotationY = try transformContainer
-      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotationY) ?? KeyframeGroup(LottieVector1D(0))
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotationY).or(KeyframeGroup(LottieVector1D(0)))
 
     position = try transformContainer
-      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .position) ??
-      KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .position)
+      .or(KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0)))
     anchorPoint = try transformContainer
-      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .anchorPoint) ??
-      KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .anchorPoint)
+      .or(KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0)))
     scale = try transformContainer
-      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .scale) ??
-      KeyframeGroup(LottieVector3D(x: Double(100), y: 100, z: 100))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .scale)
+      .or(KeyframeGroup(LottieVector3D(x: Double(100), y: 100, z: 100)))
     try super.init(from: decoder)
   }
 

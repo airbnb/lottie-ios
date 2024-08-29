@@ -27,7 +27,7 @@ public final class LottieAnimation: Codable, Sendable, DictionaryInitializable {
   required public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: LottieAnimation.CodingKeys.self)
     version = try container.decode(String.self, forKey: .version)
-    type = try container.decodeIfPresent(CoordinateSpace.self, forKey: .type) ?? .type2d
+    type = try container.decodeIfPresent(CoordinateSpace.self, forKey: .type).or(.type2d)
     startFrame = try container.decode(AnimationFrameTime.self, forKey: .startFrame)
     endFrame = try container.decode(AnimationFrameTime.self, forKey: .endFrame)
     framerate = try container.decode(Double.self, forKey: .framerate)

@@ -57,8 +57,8 @@ extension MeasuringViewRepresentable {
 
     // Creates a `CGSize` by replacing `nil`s with `UIView.noIntrinsicMetric`
     uiView.proposedSize = .init(
-      width: children.first { $0.label == "width" }?.value as? CGFloat ?? ViewType.noIntrinsicMetric,
-      height: children.first { $0.label == "height" }?.value as? CGFloat ?? ViewType.noIntrinsicMetric)
+      width: (children.first { $0.label == "width" }?.value as? CGFloat).or(ViewType.noIntrinsicMetric),
+      height: (children.first { $0.label == "height" }?.value as? CGFloat).or(ViewType.noIntrinsicMetric))
 
     size = uiView.measuredFittingSize
   }
@@ -75,8 +75,8 @@ extension MeasuringViewRepresentable {
 
     // Creates a size by replacing `nil`s with `UIView.noIntrinsicMetric`
     uiView.proposedSize = .init(
-      width: proposal.width ?? ViewType.noIntrinsicMetric,
-      height: proposal.height ?? ViewType.noIntrinsicMetric)
+      width: proposal.width.or(ViewType.noIntrinsicMetric),
+      height: proposal.height.or(ViewType.noIntrinsicMetric))
 
     return uiView.measuredFittingSize
   }
@@ -96,8 +96,8 @@ extension MeasuringViewRepresentable {
 
     // Creates a `CGSize` by replacing `nil`s with `UIView.noIntrinsicMetric`
     nsView.proposedSize = .init(
-      width: children.first { $0.label == "width" }?.value as? CGFloat ?? ViewType.noIntrinsicMetric,
-      height: children.first { $0.label == "height" }?.value as? CGFloat ?? ViewType.noIntrinsicMetric)
+      width: (children.first { $0.label == "width" }?.value as? CGFloat).or(ViewType.noIntrinsicMetric),
+      height: (children.first { $0.label == "height" }?.value as? CGFloat).or(ViewType.noIntrinsicMetric))
 
     size = nsView.measuredFittingSize
   }
@@ -115,8 +115,8 @@ extension MeasuringViewRepresentable {
 
     // Creates a size by replacing `nil`s with `UIView.noIntrinsicMetric`
     nsView.proposedSize = .init(
-      width: proposal.width ?? ViewType.noIntrinsicMetric,
-      height: proposal.height ?? ViewType.noIntrinsicMetric)
+      width: proposal.width.or(ViewType.noIntrinsicMetric),
+      height: proposal.height.or(ViewType.noIntrinsicMetric))
 
     return nsView.measuredFittingSize
   }

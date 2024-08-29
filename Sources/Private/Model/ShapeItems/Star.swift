@@ -21,7 +21,7 @@ final class Star: ShapeItem {
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Star.CodingKeys.self)
-    direction = try container.decodeIfPresent(PathDirection.self, forKey: .direction) ?? .clockwise
+    direction = try container.decodeIfPresent(PathDirection.self, forKey: .direction).or(.clockwise)
     position = try container.decode(KeyframeGroup<LottieVector3D>.self, forKey: .position)
     outerRadius = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .outerRadius)
     outerRoundness = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .outerRoundness)

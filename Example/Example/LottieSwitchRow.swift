@@ -21,11 +21,11 @@ struct LottieSwitchRow: View {
       LottieSwitch(animation: .named(animationName))
         .isOn($isOn)
         .onAnimation(
-          fromProgress: onTimeRange?.lowerBound ?? 0,
-          toProgress: onTimeRange?.upperBound ?? 1)
+          fromProgress: onTimeRange?.lowerBound.orZero,
+          toProgress: onTimeRange?.upperBound.or(1))
         .offAnimation(
-          fromProgress: offTimeRange?.lowerBound ?? 1,
-          toProgress: offTimeRange?.upperBound ?? 0)
+          fromProgress: offTimeRange?.lowerBound.or(1),
+          toProgress: offTimeRange?.upperBound.orZero)
         .colorValueProviders(colorValueProviders)
         .frame(width: 80, height: 80)
 

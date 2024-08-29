@@ -133,7 +133,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
         let animationKeys = animationKeys(),
         !animationKeys.isEmpty
       {
-        presentation()?.currentFrame ?? currentFrame
+        (presentation()?.currentFrame).or(currentFrame)
       } else {
         // We ignore the presentation's frame if there's no animation in the layer.
         currentFrame
@@ -236,7 +236,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
         for property in foundProperties {
           property.setProvider(provider: valueProvider)
         }
-        layer.displayWithFrame(frame: presentation()?.currentFrame ?? currentFrame, forceUpdates: true)
+        layer.displayWithFrame(frame: (presentation()?.currentFrame).or(currentFrame), forceUpdates: true)
       }
     }
   }
@@ -247,7 +247,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
         let foundProperties = layer.nodeProperties(for: keypath),
         let first = foundProperties.first
       {
-        return first.valueProvider.value(frame: atFrame ?? currentFrame)
+        return first.valueProvider.value(frame: atFrame.or(currentFrame))
       }
     }
     return nil
@@ -259,7 +259,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
         let foundProperties = layer.nodeProperties(for: keypath),
         let first = foundProperties.first
       {
-        return first.originalValueProvider.value(frame: atFrame ?? currentFrame)
+        return first.originalValueProvider.value(frame: atFrame.or(currentFrame))
       }
     }
     return nil

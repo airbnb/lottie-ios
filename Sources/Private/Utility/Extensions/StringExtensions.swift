@@ -40,4 +40,18 @@ extension String {
       blue: CGFloat(rgbValue & 0x0000FF) / 255.0)
   }
 
+  /// Checks if the string consists only of whitespace characters.
+  ///
+  /// - Returns: `true` if the string contains only whitespace characters, including newlines, or is empty; otherwise, `false`.
+  ///
+  /// Example:
+  ///
+  /// ```swift
+  /// let blankString = "   "
+  /// let nonBlankString = "Hello, World!"
+  ///
+  /// let isBlank = blankString.isBlank // isBlank will be true
+  /// let isNonBlank = nonBlankString.isBlank // isNonBlank will be false
+  /// ```
+  @inlinable var isBlank: Bool { allSatisfy { $0.isWhitespace } }
 }

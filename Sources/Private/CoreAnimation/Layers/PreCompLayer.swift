@@ -53,7 +53,7 @@ final class PreCompLayer: BaseCompositionLayer {
   ///
   func setup(context: LayerContext) throws {
     try setupLayerHierarchy(
-      for: context.animation.assetLibrary?.precompAssets[preCompLayer.referenceID]?.layers ?? [],
+      for: (context.animation.assetLibrary?.precompAssets[preCompLayer.referenceID]?.layers).orEmpty,
       context: context)
   }
 

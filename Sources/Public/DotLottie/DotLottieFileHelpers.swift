@@ -64,7 +64,7 @@ extension DotLottieFile {
         "`DotLottieFile.SynchronouslyBlockingCurrentThread` methods shouldn't be called on the main thread.")
 
       /// Create a cache key for the lottie.
-      let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
+      let cacheKey = bundle.bundlePath + subdirectory.orEmpty + "/" + name
 
       /// Check cache for lottie
       if

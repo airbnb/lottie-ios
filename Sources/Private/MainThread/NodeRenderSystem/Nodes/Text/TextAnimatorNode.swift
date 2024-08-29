@@ -163,12 +163,12 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
 
   var caTransform: CATransform3D {
     CATransform3D.makeTransform(
-      anchor: anchor?.value.pointValue ?? .zero,
-      position: position?.value.pointValue ?? .zero,
-      scale: scale?.value.sizeValue ?? CGSize(width: 100, height: 100),
-      rotationX: rotationX?.value.cgFloatValue ?? 0,
-      rotationY: rotationY?.value.cgFloatValue ?? 0,
-      rotationZ: rotationZ?.value.cgFloatValue ?? 0,
+      anchor: (anchor?.value.pointValue).or(.zero),
+      position: (position?.value.pointValue).or(.zero),
+      scale: (scale?.value.sizeValue).or(CGSize(width: 100, height: 100)),
+      rotationX: (rotationX?.value.cgFloatValue).orZero,
+      rotationY: (rotationY?.value.cgFloatValue).orZero,
+      rotationZ: (rotationZ?.value.cgFloatValue).orZero,
       skew: skew?.value.cgFloatValue,
       skewAxis: skewAxis?.value.cgFloatValue)
   }
@@ -197,7 +197,7 @@ final class TextOutputNode: NodeOutput {
 
   var xform: CATransform3D {
     get {
-      _xform ?? parentTextNode?.xform ?? CATransform3DIdentity
+      _xform.or((parentTextNode?.xform).or(CATransform3DIdentity))
     }
     set {
       _xform = newValue
@@ -206,7 +206,7 @@ final class TextOutputNode: NodeOutput {
 
   var opacity: CGFloat {
     get {
-      _opacity ?? parentTextNode?.opacity ?? 1
+      _opacity.or((parentTextNode?.opacity).or(1))
     }
     set {
       _opacity = newValue
@@ -215,7 +215,7 @@ final class TextOutputNode: NodeOutput {
 
   var strokeColor: CGColor? {
     get {
-      _strokeColor ?? parentTextNode?.strokeColor
+      _strokeColor.or(parentTextNode?.strokeColor)
     }
     set {
       _strokeColor = newValue
@@ -224,7 +224,7 @@ final class TextOutputNode: NodeOutput {
 
   var fillColor: CGColor? {
     get {
-      _fillColor ?? parentTextNode?.fillColor
+      _fillColor.or(parentTextNode?.fillColor)
     }
     set {
       _fillColor = newValue
@@ -233,7 +233,7 @@ final class TextOutputNode: NodeOutput {
 
   var tracking: CGFloat {
     get {
-      _tracking ?? parentTextNode?.tracking ?? 0
+      _tracking.or((parentTextNode?.tracking).orZero)
     }
     set {
       _tracking = newValue
@@ -242,7 +242,7 @@ final class TextOutputNode: NodeOutput {
 
   var strokeWidth: CGFloat {
     get {
-      _strokeWidth ?? parentTextNode?.strokeWidth ?? 0
+      _strokeWidth.or((parentTextNode?.strokeWidth).orZero)
     }
     set {
       _strokeWidth = newValue
@@ -337,8 +337,8 @@ class TextAnimatorNode: AnimatorNode {
     textOutputNode.opacity = 1.0
     textOutputNode.strokeColor = textAnimatorProperties.strokeColor?.value.cgColorValue
     textOutputNode.fillColor = textAnimatorProperties.fillColor?.value.cgColorValue
-    textOutputNode.tracking = textAnimatorProperties.tracking?.value.cgFloatValue ?? 1
-    textOutputNode.strokeWidth = textAnimatorProperties.strokeWidth?.value.cgFloatValue ?? 0
+    textOutputNode.tracking = (textAnimatorProperties.tracking?.value.cgFloatValue).or(1)
+    textOutputNode.strokeWidth = (textAnimatorProperties.strokeWidth?.value.cgFloatValue).orZero
     textOutputNode.start = textAnimatorProperties.start?.value.cgFloatValue
     textOutputNode.end = textAnimatorProperties.end?.value.cgFloatValue
     textOutputNode.selectedRangeOpacity = (textAnimatorProperties.opacity?.value.cgFloatValue).flatMap { $0 * 0.01 }

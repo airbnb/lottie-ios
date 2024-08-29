@@ -34,8 +34,8 @@ extension Keyframe {
       return 0
     }
 
-    let outTanPoint = outTangent?.pointValue ?? .zero
-    let inTanPoint = to.inTangent?.pointValue ?? CGPoint(x: 1, y: 1)
+    let outTanPoint = (outTangent?.pointValue).or(.zero)
+    let inTanPoint = (to.inTangent?.pointValue).or(CGPoint(x: 1, y: 1))
     var progress: CGFloat = keyTime.remap(fromLow: startTime, fromHigh: endTime, toLow: 0, toHigh: 1)
     if !outTanPoint.isZero || !inTanPoint.equalTo(CGPoint(x: 1, y: 1)) {
       /// Cubic interpolation

@@ -161,7 +161,7 @@ struct Entry: Equatable {
   /// - Note: Always returns `0` for entries of type `EntryType.directory`.
   var checksum: CRC32 {
     if centralDirectoryStructure.usesDataDescriptor {
-      return zip64DataDescriptor?.crc32 ?? dataDescriptor?.crc32 ?? 0
+      return (zip64DataDescriptor?.crc32).or((dataDescriptor?.crc32).orZero)
     }
     return centralDirectoryStructure.crc32
   }
@@ -170,7 +170,7 @@ struct Entry: Equatable {
   var type: EntryType {
     // OS Type is stored in the upper byte of versionMadeBy
     let osTypeRaw = centralDirectoryStructure.versionMadeBy >> 8
-    let osType = OSType(rawValue: UInt(osTypeRaw)) ?? .unused
+    let osType = OSType(rawValue: UInt(osTypeRaw)).or(.unused)
     var isDirectory = path.hasSuffix("/")
     switch osType {
     case .unix, .osx:
@@ -201,17 +201,17 @@ struct Entry: Equatable {
   /// The size of the receiver's compressed data.
   var compressedSize: UInt64 {
     if centralDirectoryStructure.isZIP64 {
-      return zip64DataDescriptor?.compressedSize ?? centralDirectoryStructure.effectiveCompressedSize
+      return (zip64DataDescriptor?.compressedSize).or(centralDirectoryStructure.effectiveCompressedSize)
     }
-    return UInt64(dataDescriptor?.compressedSize ?? centralDirectoryStructure.compressedSize)
+    return UInt64((dataDescriptor?.compressedSize).or(centralDirectoryStructure.compressedSize))
   }
 
   /// The size of the receiver's uncompressed data.
   var uncompressedSize: UInt64 {
     if centralDirectoryStructure.isZIP64 {
-      return zip64DataDescriptor?.uncompressedSize ?? centralDirectoryStructure.effectiveUncompressedSize
+      return (zip64DataDescriptor?.uncompressedSize).or(centralDirectoryStructure.effectiveUncompressedSize)
     }
-    return UInt64(dataDescriptor?.uncompressedSize ?? centralDirectoryStructure.uncompressedSize)
+    return UInt64((dataDescriptor?.uncompressedSize).or(centralDirectoryStructure.uncompressedSize))
   }
 
   /// The combined size of the local header, the data and the optional data descriptor.
@@ -249,7 +249,7 @@ struct Entry: Equatable {
   /// - Parameters:
   ///   - encoding: `String.Encoding`
   func path(using encoding: String.Encoding) -> String {
-    String(data: centralDirectoryStructure.fileNameData, encoding: encoding) ?? ""
+    String(data: centralDirectoryStructure.fileNameData, encoding: encoding).orEmpty
   }
 
 }

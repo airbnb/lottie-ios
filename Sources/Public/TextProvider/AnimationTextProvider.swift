@@ -79,7 +79,7 @@ public final class DictionaryTextProvider: AnimationKeypathTextProvider, LegacyA
 
   /// Never called directly by Lottie, but we continue to implement this conformance for backwards compatibility.
   public func textFor(keypathName: String, sourceText: String) -> String {
-    values[keypathName] ?? sourceText
+    values[keypathName].or(sourceText)
   }
 
   // MARK: Internal

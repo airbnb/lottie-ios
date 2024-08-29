@@ -149,7 +149,7 @@ final class GroupNode: AnimatorNode {
   }
 
   func performAdditionalLocalUpdates(frame: CGFloat, forceLocalUpdate: Bool) -> Bool {
-    rootNode?.updateContents(frame, forceLocalUpdate: forceLocalUpdate) ?? false
+    (rootNode?.updateContents(frame, forceLocalUpdate: forceLocalUpdate)).orFalse
   }
 
   func performAdditionalOutputUpdates(_ frame: CGFloat, forceOutputUpdate: Bool) {

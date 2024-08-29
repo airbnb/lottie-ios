@@ -108,7 +108,7 @@ extension AnimatorNode {
     guard isEnabled else {
       // Disabled node, pass through.
       lastUpdateFrame = frame
-      return parentNode?.updateOutputs(frame, forceOutputUpdate: forceOutputUpdate) ?? false
+      return (parentNode?.updateOutputs(frame, forceOutputUpdate: forceOutputUpdate)).orFalse
     }
 
     if forceOutputUpdate == false && lastUpdateFrame != nil && lastUpdateFrame! == frame {
@@ -121,8 +121,8 @@ extension AnimatorNode {
 
     /// Perform upstream output updates. Optionally mark upstream updates if any.
     hasUpstreamUpdates = (
-      parentNode?
-        .updateOutputs(frame, forceOutputUpdate: forceUpstreamUpdates) ?? false || hasUpstreamUpdates)
+      (parentNode?
+        .updateOutputs(frame, forceOutputUpdate: forceUpstreamUpdates)).orFalse || hasUpstreamUpdates)
 
     /// Perform additional local output updates
     performAdditionalOutputUpdates(frame, forceOutputUpdate: forceUpstreamUpdates)
@@ -140,7 +140,7 @@ extension AnimatorNode {
   func updateContents(_ frame: CGFloat, forceLocalUpdate: Bool) -> Bool {
     guard isEnabled else {
       // Disabled node, pass through.
-      return parentNode?.updateContents(frame, forceLocalUpdate: forceLocalUpdate) ?? false
+      return (parentNode?.updateContents(frame, forceLocalUpdate: forceLocalUpdate)).orFalse
     }
 
     if forceLocalUpdate == false && lastUpdateFrame != nil && lastUpdateFrame! == frame {
@@ -152,7 +152,7 @@ extension AnimatorNode {
     hasLocalUpdates = forceLocalUpdate ? forceLocalUpdate : propertyMap.needsLocalUpdate(frame: frame)
 
     /// Were there upstream updates? If so mark the node
-    hasUpstreamUpdates = parentNode?.updateContents(frame, forceLocalUpdate: forceLocalUpdate) ?? false
+    hasUpstreamUpdates = (parentNode?.updateContents(frame, forceLocalUpdate: forceLocalUpdate)).orFalse
 
     /// Perform property updates if necessary.
     if hasLocalUpdates {

@@ -50,7 +50,7 @@ final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
   /// compared to `intrinsicContentSize` which has `UIView.noIntrinsicMetric` fields in the case of
   /// no intrinsic size.
   var measuredFittingSize: CGSize {
-    _measuredFittingSize ?? measureView()
+    _measuredFittingSize.or(measureView())
   }
 
   /// The `UIView` content that's being measured by this container.

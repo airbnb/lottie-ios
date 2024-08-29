@@ -172,18 +172,18 @@ final class Archive: Sequence {
   var preferredEncoding: String.Encoding?
 
   var totalNumberOfEntriesInCentralDirectory: UInt64 {
-    zip64EndOfCentralDirectory?.record.totalNumberOfEntriesInCentralDirectory
-      ?? UInt64(endOfCentralDirectoryRecord.totalNumberOfEntriesInCentralDirectory)
+    (zip64EndOfCentralDirectory?.record.totalNumberOfEntriesInCentralDirectory)
+      .or(UInt64(endOfCentralDirectoryRecord.totalNumberOfEntriesInCentralDirectory))
   }
 
   var sizeOfCentralDirectory: UInt64 {
-    zip64EndOfCentralDirectory?.record.sizeOfCentralDirectory
-      ?? UInt64(endOfCentralDirectoryRecord.sizeOfCentralDirectory)
+    (zip64EndOfCentralDirectory?.record.sizeOfCentralDirectory)
+      .or(UInt64(endOfCentralDirectoryRecord.sizeOfCentralDirectory))
   }
 
   var offsetToStartOfCentralDirectory: UInt64 {
-    zip64EndOfCentralDirectory?.record.offsetToStartOfCentralDirectory
-      ?? UInt64(endOfCentralDirectoryRecord.offsetToStartOfCentralDirectory)
+    (zip64EndOfCentralDirectory?.record.offsetToStartOfCentralDirectory)
+      .or(UInt64(endOfCentralDirectoryRecord.offsetToStartOfCentralDirectory))
   }
 
   #if swift(>=5.0)

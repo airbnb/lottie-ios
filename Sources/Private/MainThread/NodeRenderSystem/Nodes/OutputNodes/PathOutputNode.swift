@@ -30,13 +30,13 @@ class PathOutputNode: NodeOutput {
 
   func hasOutputUpdates(_ forFrame: CGFloat) -> Bool {
     guard isEnabled else {
-      let upstreamUpdates = parent?.hasOutputUpdates(forFrame) ?? false
+      let upstreamUpdates = (parent?.hasOutputUpdates(forFrame)).orFalse
       outputPath = parent?.outputPath
       return upstreamUpdates
     }
 
     /// Ask if parent was updated
-    let upstreamUpdates = parent?.hasOutputUpdates(forFrame) ?? false
+    let upstreamUpdates = (parent?.hasOutputUpdates(forFrame)).orFalse
 
     /// If parent was updated and the path hasn't been built for this frame, clear the path.
     if upstreamUpdates && lastPathBuildFrame != forFrame {

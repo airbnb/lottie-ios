@@ -64,7 +64,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
     // supported on other platforms).
     let dropShadowEffect = layer.effects.first(where: { $0 is DropShadowEffect }) as? DropShadowModel
     let dropShadowStyle = layer.styles.first(where: { $0 is DropShadowStyle }) as? DropShadowModel
-    if let dropShadowModel = dropShadowEffect ?? dropShadowStyle {
+    if let dropShadowModel = dropShadowEffect.or(dropShadowStyle) {
       layerEffectNodes.append(DropShadowNode(model: dropShadowModel))
     }
     name = layer.name

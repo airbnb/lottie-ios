@@ -32,16 +32,16 @@ class GroupOutputNode: NodeOutput {
 
   func hasOutputUpdates(_ forFrame: CGFloat) -> Bool {
     guard isEnabled else {
-      let upstreamUpdates = parent?.hasOutputUpdates(forFrame) ?? false
+      let upstreamUpdates = (parent?.hasOutputUpdates(forFrame)).orFalse
       outputPath = parent?.outputPath
       return upstreamUpdates
     }
 
-    let upstreamUpdates = parent?.hasOutputUpdates(forFrame) ?? false
+    let upstreamUpdates = (parent?.hasOutputUpdates(forFrame)).orFalse
     if upstreamUpdates {
       outputPath = nil
     }
-    let rootUpdates = rootNode?.hasOutputUpdates(forFrame) ?? false
+    let rootUpdates = (rootNode?.hasOutputUpdates(forFrame)).orFalse
     if rootUpdates {
       outputPath = nil
     }

@@ -303,14 +303,14 @@ final class CoreTextRenderLayer: CALayer {
       var startIndex: Int
       var endIndex: Int
 
-      switch textRangeUnit ?? .percentage {
+      switch textRangeUnit.or(.percentage) {
       case .index:
-        startIndex = start ?? 0
-        endIndex = end ?? text.count
+        startIndex = start.orZero
+        endIndex = end.or(text.count)
 
       case .percentage:
-        let startPercentage = Double(start ?? 0) / 100
-        let endPercentage = Double(end ?? 100) / 100
+        let startPercentage = Double(start.orZero) / 100
+        let endPercentage = Double(end.or(100)) / 100
 
         startIndex = Int(round(Double(attrString.length) * startPercentage))
         endIndex = Int(round(Double(attrString.length) * endPercentage))
@@ -365,7 +365,7 @@ final class CoreTextRenderLayer: CALayer {
       strokeWidth = 0
     }
 
-    guard let setter = fillFrameSetter ?? strokeFrameSetter else {
+    guard let setter = fillFrameSetter.or(strokeFrameSetter) else {
       return
     }
 

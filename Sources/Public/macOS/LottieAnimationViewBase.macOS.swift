@@ -61,7 +61,7 @@ open class LottieAnimationViewBase: NSView {
   // MARK: Internal
 
   var screenScale: CGFloat {
-    NSApp.mainWindow?.backingScaleFactor ?? 1
+    NSApp.mainWindow?.backingScaleFactor.or(1)
   }
 
   var viewLayer: CALayer? {

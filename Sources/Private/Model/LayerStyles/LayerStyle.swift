@@ -8,7 +8,7 @@ enum LayerStyleType: Int, Codable, Sendable {
   case unknown = 9999
 
   init(from decoder: Decoder) throws {
-    self = try LayerStyleType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
+    self = try LayerStyleType(rawValue: decoder.singleValueContainer().decode(RawValue.self)).or(.unknown)
   }
 }
 
@@ -36,13 +36,13 @@ class LayerStyle: Codable, DictionaryInitializable {
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: LayerStyle.CodingKeys.self)
-    name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Style"
+    name = try container.decodeIfPresent(String.self, forKey: .name).or("Style")
     type = try container.decode(LayerStyleType.self, forKey: .type)
   }
 
   required init(dictionary: [String: Any]) throws {
-    name = (try? dictionary.value(for: CodingKeys.name)) ?? "Layer"
-    type = LayerStyleType(rawValue: try dictionary.value(for: CodingKeys.type)) ?? .unknown
+    name = (try? dictionary.value(for: CodingKeys.name)).or("Layer")
+    type = LayerStyleType(rawValue: try dictionary.value(for: CodingKeys.type)).or(.unknown)
   }
 
   // MARK: Internal
@@ -65,7 +65,7 @@ extension [LayerStyle] {
   static func fromDictionaries(_ dictionaries: [[String: Any]]) throws -> [LayerStyle] {
     try dictionaries.compactMap { dictionary in
       let shapeType = dictionary[LayerStyle.CodingKeys.type.rawValue] as? Int
-      switch LayerStyleType(rawValue: shapeType ?? LayerStyleType.unknown.rawValue) {
+      switch LayerStyleType(rawValue: shapeType.or(LayerStyleType.unknown.rawValue)) {
       case .dropShadow:
         return try DropShadowStyle(dictionary: dictionary)
       case .unknown, nil:

@@ -45,13 +45,13 @@ public final class DotLottieFile {
   lazy var animationsUrl: URL = fileUrl.appendingPathComponent("\(DotLottieFile.animationsFolderName)")
 
   /// All files in animations folder
-  lazy var animationUrls: [URL] = FileManager.default.urls(for: animationsUrl) ?? []
+  lazy var animationUrls: [URL] = FileManager.default.urls(for: animationsUrl).orEmpty
 
   /// Images folder url
   lazy var imagesUrl: URL = fileUrl.appendingPathComponent("\(DotLottieFile.imagesFolderName)")
 
   /// All images in images folder
-  lazy var imageUrls: [URL] = FileManager.default.urls(for: imagesUrl) ?? []
+  lazy var imageUrls: [URL] = FileManager.default.urls(for: imagesUrl).orEmpty
 
   /// The `LottieAnimation` and `DotLottieConfiguration` for the given animation ID in this file
   func animation(for id: String? = nil) -> DotLottieFile.Animation? {

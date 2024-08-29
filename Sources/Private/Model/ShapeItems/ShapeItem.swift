@@ -25,7 +25,7 @@ enum ShapeType: String, Codable, Sendable {
   case unknown
 
   public init(from decoder: Decoder) throws {
-    self = try ShapeType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
+    self = try ShapeType(rawValue: decoder.singleValueContainer().decode(RawValue.self)).or(.unknown)
   }
 }
 
@@ -80,15 +80,15 @@ class ShapeItem: Codable, DictionaryInitializable {
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: ShapeItem.CodingKeys.self)
-    name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Layer"
+    name = try container.decodeIfPresent(String.self, forKey: .name).or("Layer")
     type = try container.decode(ShapeType.self, forKey: .type)
-    hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden) ?? false
+    hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden).orFalse
   }
 
   required init(dictionary: [String: Any]) throws {
-    name = (try? dictionary.value(for: CodingKeys.name)) ?? "Layer"
-    type = ShapeType(rawValue: try dictionary.value(for: CodingKeys.type)) ?? .unknown
-    hidden = (try? dictionary.value(for: CodingKeys.hidden)) ?? false
+    name = (try? dictionary.value(for: CodingKeys.name)).or("Layer")
+    type = ShapeType(rawValue: try dictionary.value(for: CodingKeys.type)).or(.unknown)
+    hidden = (try? dictionary.value(for: CodingKeys.hidden)).orFalse
   }
 
   init(
@@ -125,7 +125,7 @@ extension [ShapeItem] {
   static func fromDictionaries(_ dictionaries: [[String: Any]]) throws -> [ShapeItem] {
     try dictionaries.compactMap { dictionary in
       let shapeType = dictionary[ShapeItem.CodingKeys.type.rawValue] as? String
-      switch ShapeType(rawValue: shapeType ?? ShapeType.unknown.rawValue) {
+      switch ShapeType(rawValue: shapeType.or(ShapeType.unknown.rawValue)) {
       case .ellipse:
         return try Ellipse(dictionary: dictionary)
       case .fill:

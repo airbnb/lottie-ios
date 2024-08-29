@@ -157,7 +157,7 @@ final class AnimationViewTests: XCTestCase {
 
               // Check that the animation is playing in the correct direction:
               // After a brief delay we should be closer to the from frame than the to frame
-              let distanceFromStartFrame = abs((values.fromFrame ?? 0) - animationView.realtimeAnimationFrame)
+              let distanceFromStartFrame = abs(values.fromFrame.orZero - animationView.realtimeAnimationFrame)
               let distanceFromEndFrame = abs(values.toFrame - animationView.realtimeAnimationFrame)
               XCTAssertTrue(
                 distanceFromStartFrame < distanceFromEndFrame,

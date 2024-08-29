@@ -106,9 +106,9 @@ extension Star {
     Keyframes.combined(
       position,
       outerRadius,
-      innerRadius ?? KeyframeGroup(LottieVector1D(0)),
+      innerRadius.or(KeyframeGroup(LottieVector1D(0))),
       outerRoundness,
-      innerRoundness ?? KeyframeGroup(LottieVector1D(0)),
+      innerRoundness.or(KeyframeGroup(LottieVector1D(0))),
       points,
       rotation,
       makeCombinedResult: Star.Keyframe.init)

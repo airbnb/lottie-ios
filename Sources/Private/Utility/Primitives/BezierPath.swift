@@ -299,7 +299,7 @@ extension BezierPath: Codable {
       container = try unkeyedContainer.nestedContainer(keyedBy: BezierPath.CodingKeys.self)
     }
 
-    closed = try container.decodeIfPresent(Bool.self, forKey: .closed) ?? true
+    closed = try container.decodeIfPresent(Bool.self, forKey: .closed).orTrue
 
     var vertexContainer = try container.nestedUnkeyedContainer(forKey: .vertices)
     var inPointsContainer = try container.nestedUnkeyedContainer(forKey: .inPoints)
@@ -413,7 +413,7 @@ extension BezierPath: AnyInitializable {
     } else {
       throw InitializableError.invalidInput()
     }
-    closed = (try? pathDictionary.value(for: CodingKeys.closed)) ?? true
+    closed = (try? pathDictionary.value(for: CodingKeys.closed)).orTrue
     var vertexDictionaries: [Any] = try pathDictionary.value(for: CodingKeys.vertices)
     var inPointsDictionaries: [Any] = try pathDictionary.value(for: CodingKeys.inPoints)
     var outPointsDictionaries: [Any] = try pathDictionary.value(for: CodingKeys.outPoints)

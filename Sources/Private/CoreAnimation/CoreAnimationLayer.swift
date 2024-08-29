@@ -226,7 +226,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
 
   /// The current or pending playback state of the animation displayed in this layer
   private var playbackState: PlaybackState? {
-    pendingAnimationConfiguration?.playbackState ?? currentPlaybackState
+    (pendingAnimationConfiguration?.playbackState).or(currentPlaybackState)
   }
 
   /// Context used when setting up and configuring sublayers
@@ -285,7 +285,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     setupPlaceholderAnimation(context: layerContext)
 
     // Set up the new animations with the current `TimingConfiguration`
-    for animationLayer in sublayers ?? [] {
+    for animationLayer in sublayers.orEmpty {
       try (animationLayer as? AnimationLayer)?.setupAnimations(context: layerContext)
     }
   }
@@ -375,7 +375,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
         if !animationCurrentlyPlaying, let configuration = currentAnimationConfiguration {
           return configuration.animationContext.playTo
         } else {
-          return animation.frameTime(forProgress: (presentation() ?? self).animationProgress)
+          return animation.frameTime(forProgress: (presentation().or(self)).animationProgress)
         }
       }
     }
@@ -431,7 +431,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
   }
 
   var _animationLayers: [CALayer] {
-    (sublayers ?? []).filter { $0 is AnimationLayer }
+    sublayers.orEmpty.filter { $0 is AnimationLayer }
   }
 
   func reloadImages() {
@@ -467,7 +467,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
   }
 
   func allHierarchyKeypaths() -> [String] {
-    guard pendingAnimationConfiguration?.animationConfiguration ?? currentAnimationConfiguration != nil else {
+    guard (pendingAnimationConfiguration?.animationConfiguration).or(currentAnimationConfiguration).isNotNil else {
       logger.info("Cannot log hierarchy keypaths until animation has been set up at least once")
       return []
     }
@@ -570,7 +570,7 @@ extension CALayer {
   var allSublayers: [CALayer] {
     var allSublayers: [CALayer] = []
 
-    for sublayer in sublayers ?? [] {
+    for sublayer in sublayers.orEmpty {
       allSublayers.append(sublayer)
       allSublayers.append(contentsOf: sublayer.allSublayers)
     }
@@ -583,7 +583,7 @@ extension CALayer {
   var numberOfLayersWithTimeRemapping: Int {
     var numberOfSublayersWithTimeRemapping = 0
 
-    for sublayer in sublayers ?? [] {
+    for sublayer in sublayers.orEmpty {
       if 
         let preCompLayer = sublayer as? PreCompLayer,
         preCompLayer.preCompLayer.timeRemapping != nil

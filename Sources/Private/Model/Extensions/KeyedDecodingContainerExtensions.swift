@@ -35,7 +35,7 @@ extension KeyedDecodingContainer {
     var tmpContainer = container
     while !container.isAtEnd {
       let typeContainer = try container.nestedContainer(keyedBy: Discriminator.self)
-      let family: U = (try? typeContainer.decodeIfPresent(U.self, forKey: U.discriminator)) ?? .unknown
+      let family: U = (try? typeContainer.decodeIfPresent(U.self, forKey: U.discriminator)).or(.unknown)
       if let type = family.getType() as? T.Type {
         list.append(try tmpContainer.decode(type))
       }
@@ -61,7 +61,7 @@ extension KeyedDecodingContainer {
     var tmpContainer = container
     while !container.isAtEnd {
       let typeContainer = try container.nestedContainer(keyedBy: Discriminator.self)
-      let family: U = (try? typeContainer.decodeIfPresent(U.self, forKey: U.discriminator)) ?? .unknown
+      let family: U = (try? typeContainer.decodeIfPresent(U.self, forKey: U.discriminator)).or(.unknown)
       if let type = family.getType() as? T.Type {
         list.append(try tmpContainer.decode(type))
       }

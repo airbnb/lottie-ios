@@ -225,7 +225,7 @@ enum Keyframes {
     }
 
     var combinedKeyframes = ContiguousArray<Keyframe<CombinedResult>>()
-    let baseKeyframes = (animatingKeyframes.first ?? untypedGroups[0]).keyframes
+    let baseKeyframes = (animatingKeyframes.first.or(untypedGroups[0])).keyframes
 
     for index in baseKeyframes.indices {
       let baseKeyframe = baseKeyframes[index]
@@ -254,8 +254,8 @@ enum Keyframes {
 
     let times = untypedGroups.flatMap { $0.keyframes.map { $0.time } }
 
-    let minimumTime = times.min() ?? 0
-    let maximumTime = times.max() ?? 0
+    let minimumTime = times.min().orZero
+    let maximumTime = times.max().orZero
 
     // We disable Core Animation interpolation when using manually interpolated keyframes,
     // so we don't animate between these values. To prevent the animation from being choppy

@@ -215,7 +215,7 @@ public final class CompatibleAnimationView: UIView {
 
   @objc public var compatibleDictionaryTextProvider: CompatibleDictionaryTextProvider? {
     didSet {
-      animationView.textProvider = compatibleDictionaryTextProvider?.textProvider ?? DefaultTextProvider()
+      animationView.textProvider = (compatibleDictionaryTextProvider?.textProvider).or(DefaultTextProvider())
     }
   }
 
@@ -239,7 +239,7 @@ public final class CompatibleAnimationView: UIView {
 
   @objc
   public var duration: CGFloat {
-    animationView.animation?.duration ?? 0.0
+    (animationView.animation?.duration).orZero
   }
 
   @objc
@@ -469,7 +469,7 @@ public final class CompatibleAnimationView: UIView {
   {
     animationView.convert(
       rect,
-      toLayerAt: keypath?.animationKeypath) ?? .zero
+      toLayerAt: keypath?.animationKeypath).or(.zero)
   }
 
   @objc
@@ -480,22 +480,22 @@ public final class CompatibleAnimationView: UIView {
   {
     animationView.convert(
       point,
-      toLayerAt: keypath?.animationKeypath) ?? .zero
+      toLayerAt: keypath?.animationKeypath).or(.zero)
   }
 
   @objc
   public func progressTime(forMarker named: String) -> CGFloat {
-    animationView.progressTime(forMarker: named) ?? 0
+    animationView.progressTime(forMarker: named).orZero
   }
 
   @objc
   public func frameTime(forMarker named: String) -> CGFloat {
-    animationView.frameTime(forMarker: named) ?? 0
+    animationView.frameTime(forMarker: named).orZero
   }
 
   @objc
   public func durationFrameTime(forMarker named: String) -> CGFloat {
-    animationView.durationFrameTime(forMarker: named) ?? 0
+    animationView.durationFrameTime(forMarker: named).orZero
   }
 
   // MARK: Private

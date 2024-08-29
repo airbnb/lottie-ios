@@ -27,7 +27,7 @@ final class ValueProviderStore {
       """)
 
     let supportedProperties = PropertyName.allCases.map { $0.rawValue }
-    let propertyBeingCustomized = keypath.keys.last ?? ""
+    let propertyBeingCustomized = keypath.keys.last.orEmpty
 
     logger.assert(
       supportedProperties.contains(propertyBeingCustomized),

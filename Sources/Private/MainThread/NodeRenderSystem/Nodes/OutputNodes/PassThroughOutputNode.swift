@@ -31,7 +31,7 @@ class PassThroughOutputNode: NodeOutput {
 
   func hasOutputUpdates(_ forFrame: CGFloat) -> Bool {
     /// Changes to this node do not affect downstream nodes.
-    let parentUpdate = parent?.hasOutputUpdates(forFrame) ?? false
+    let parentUpdate = (parent?.hasOutputUpdates(forFrame)).orFalse
     /// Changes to upstream nodes do, however, affect this nodes state.
     hasUpdate = hasUpdate || parentUpdate
     return parentUpdate
@@ -39,7 +39,7 @@ class PassThroughOutputNode: NodeOutput {
 
   func hasRenderUpdates(_ forFrame: CGFloat) -> Bool {
     /// Return true if there are upstream updates or if this node has updates
-    let upstreamUpdates = parent?.hasOutputUpdates(forFrame) ?? false
+    let upstreamUpdates = (parent?.hasOutputUpdates(forFrame)).orFalse
     hasUpdate = hasUpdate || upstreamUpdates
     return hasUpdate
   }

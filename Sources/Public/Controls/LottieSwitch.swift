@@ -18,7 +18,7 @@ public struct LottieSwitch: UIViewConfiguringSwiftUIView {
   public var body: some View {
     AnimatedSwitch.swiftUIView {
       let animatedSwitch = AnimatedSwitch(animation: animation, configuration: configuration)
-      animatedSwitch.isOn = isOn?.wrappedValue ?? false
+      animatedSwitch.isOn = (isOn?.wrappedValue).orFalse
       return animatedSwitch
     }
     .configure { context in

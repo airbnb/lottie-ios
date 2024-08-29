@@ -38,9 +38,9 @@ final class GradientStroke: ShapeItem {
     highlightLength = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .highlightLength)
     highlightAngle = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .highlightAngle)
     width = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .width)
-    lineCap = try container.decodeIfPresent(LineCap.self, forKey: .lineCap) ?? .round
-    lineJoin = try container.decodeIfPresent(LineJoin.self, forKey: .lineJoin) ?? .round
-    miterLimit = try container.decodeIfPresent(Double.self, forKey: .miterLimit) ?? 4
+    lineCap = try container.decodeIfPresent(LineCap.self, forKey: .lineCap).or(.round)
+    lineJoin = try container.decodeIfPresent(LineJoin.self, forKey: .lineJoin).or(.round)
+    miterLimit = try container.decodeIfPresent(Double.self, forKey: .miterLimit).or(4)
     // TODO Decode Color Objects instead of array.
     let colorsContainer = try container.nestedContainer(keyedBy: GradientDataKeys.self, forKey: .colors)
     colors = try colorsContainer.decode(KeyframeGroup<[Double]>.self, forKey: .colors)
@@ -89,7 +89,7 @@ final class GradientStroke: ShapeItem {
     } else {
       lineJoin = .round
     }
-    miterLimit = (try? dictionary.value(for: CodingKeys.miterLimit)) ?? 4
+    miterLimit = (try? dictionary.value(for: CodingKeys.miterLimit)).or(4)
     let colorsDictionary: [String: Any] = try dictionary.value(for: CodingKeys.colors)
     let nestedColorsDictionary: [String: Any] = try colorsDictionary.value(for: GradientDataKeys.colors)
     colors = try KeyframeGroup<[Double]>(dictionary: nestedColorsDictionary)

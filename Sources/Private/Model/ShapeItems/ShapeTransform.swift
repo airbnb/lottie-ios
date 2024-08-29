@@ -12,19 +12,19 @@ final class ShapeTransform: ShapeItem {
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: ShapeTransform.CodingKeys.self)
     anchor = try container
-      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .anchor) ??
-      KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .anchor)
+      .or(KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0)))
     position = try container
-      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .position) ??
-      KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .position)
+      .or(KeyframeGroup(LottieVector3D(x: Double(0), y: 0, z: 0)))
     scale = try container
-      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .scale) ??
-      KeyframeGroup(LottieVector3D(x: Double(100), y: 100, z: 100))
+      .decodeIfPresent(KeyframeGroup<LottieVector3D>.self, forKey: .scale)
+      .or(KeyframeGroup(LottieVector3D(x: Double(100), y: 100, z: 100)))
 
     rotationX = try container
-      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotationX) ?? KeyframeGroup(LottieVector1D(0))
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotationX).or(KeyframeGroup(LottieVector1D(0)))
     rotationY = try container
-      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotationY) ?? KeyframeGroup(LottieVector1D(0))
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotationY).or(KeyframeGroup(LottieVector1D(0)))
     if
       let rotation = try container
         .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .rotation)
@@ -40,10 +40,10 @@ final class ShapeTransform: ShapeItem {
     }
 
     opacity = try container
-      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .opacity) ?? KeyframeGroup(LottieVector1D(100))
-    skew = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .skew) ?? KeyframeGroup(LottieVector1D(0))
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .opacity).or(KeyframeGroup(LottieVector1D(100)))
+    skew = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .skew).or(KeyframeGroup(LottieVector1D(0)))
     skewAxis = try container
-      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .skewAxis) ?? KeyframeGroup(LottieVector1D(0))
+      .decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .skewAxis).or(KeyframeGroup(LottieVector1D(0)))
     try super.init(from: decoder)
   }
 

@@ -266,15 +266,15 @@ extension CALayer {
 
     let combinedTransformKeyframes = Keyframes.combined(
       transformModel.anchorPoint,
-      transformModel._position ?? KeyframeGroup(LottieVector3D(x: 0.0, y: 0.0, z: 0.0)),
-      transformModel._positionX ?? KeyframeGroup(LottieVector1D(0)),
-      transformModel._positionY ?? KeyframeGroup(LottieVector1D(0)),
+      transformModel._position.or(KeyframeGroup(LottieVector3D(x: 0.0, y: 0.0, z: 0.0))),
+      transformModel._positionX.or(KeyframeGroup(LottieVector1D(0))),
+      transformModel._positionY.or(KeyframeGroup(LottieVector1D(0))),
       transformModel.scale,
       transformModel.rotationX,
       transformModel.rotationY,
       transformModel.rotationZ,
-      transformModel._skew ?? KeyframeGroup(LottieVector1D(0)),
-      transformModel._skewAxis ?? KeyframeGroup(LottieVector1D(0)),
+      transformModel._skew.or(KeyframeGroup(LottieVector1D(0))),
+      transformModel._skewAxis.or(KeyframeGroup(LottieVector1D(0))),
       requiresManualInterpolation: requiresManualInterpolation,
       makeCombinedResult: {
         anchor, position, positionX, positionY, scale, rotationX, rotationY, rotationZ, skew, skewAxis

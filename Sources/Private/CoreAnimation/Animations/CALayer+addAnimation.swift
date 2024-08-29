@@ -251,9 +251,9 @@ extension CALayer {
   {
     // Convert the list of `Keyframe<T>` into
     // the representation used by `CAKeyframeAnimation`
-    var keyTimes = try customKeyTimes ?? keyframes.map { keyframeModel -> NSNumber in
+    var keyTimes = try customKeyTimes.or(keyframes.map { keyframeModel -> NSNumber in
       NSNumber(value: Float(try context.progressTime(for: keyframeModel.time)))
-    }
+    })
 
     var timingFunctions = timingFunctions(for: keyframes)
     let calculationMode = calculationMode(for: keyframes)
@@ -324,8 +324,8 @@ extension CALayer {
     {
       let nextKeyframe = keyframes[index + 1]
 
-      let controlPoint1 = keyframe.outTangent?.pointValue ?? .zero
-      let controlPoint2 = nextKeyframe.inTangent?.pointValue ?? CGPoint(x: 1, y: 1)
+      let controlPoint1 = (keyframe.outTangent?.pointValue).or(.zero)
+      let controlPoint2 = (nextKeyframe.inTangent?.pointValue).or(CGPoint(x: 1, y: 1))
 
       timingFunctions.append(CAMediaTimingFunction(
         controlPoints:

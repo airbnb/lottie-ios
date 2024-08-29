@@ -953,17 +953,17 @@ open class LottieAnimationView: LottieAnimationViewBase {
       animationLayer.removeAnimation(forKey: positionKey)
       animationLayer.removeAnimation(forKey: transformKey)
 
-      let positionAnimation = animation.copy() as? CABasicAnimation ?? CABasicAnimation(keyPath: "position")
+      let positionAnimation = (animation.copy() as? CABasicAnimation).or(CABasicAnimation(keyPath: "position"))
       positionAnimation.keyPath = "position"
       positionAnimation.isAdditive = false
-      positionAnimation.fromValue = (animationLayer.presentation() ?? animationLayer).position
+      positionAnimation.fromValue = (animationLayer.presentation().or(animationLayer)).position
       positionAnimation.toValue = position
       positionAnimation.isRemovedOnCompletion = true
 
-      let xformAnimation = animation.copy() as? CABasicAnimation ?? CABasicAnimation(keyPath: "transform")
+      let xformAnimation = (animation.copy() as? CABasicAnimation).or(CABasicAnimation(keyPath: "transform"))
       xformAnimation.keyPath = "transform"
       xformAnimation.isAdditive = false
-      xformAnimation.fromValue = (animationLayer.presentation() ?? animationLayer).transform
+      xformAnimation.fromValue = (animationLayer.presentation().or(animationLayer)).transform
       xformAnimation.toValue = xform
       xformAnimation.isRemovedOnCompletion = true
 

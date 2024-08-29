@@ -23,7 +23,7 @@ public class LottieAnimationLayer: CALayer {
     logger: LottieLogger = .shared)
   {
     self.animation = animation
-    self.imageProvider = imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
+    self.imageProvider = imageProvider.or(BundleImageProvider(bundle: Bundle.main, searchPath: nil))
     self.textProvider = textProvider
     self.fontProvider = fontProvider
     self.configuration = configuration
@@ -47,15 +47,15 @@ public class LottieAnimationLayer: CALayer {
   {
     let dotLottieAnimation = dotLottie?.animation(for: animationId)
     animation = dotLottieAnimation?.animation
-    imageProvider = dotLottie?.imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
+    imageProvider = (dotLottie?.imageProvider).or(BundleImageProvider(bundle: Bundle.main, searchPath: nil))
     self.textProvider = textProvider
     self.fontProvider = fontProvider
     self.configuration = configuration
     screenScale = 1
     self.logger = logger
     super.init()
-    loopMode = dotLottieAnimation?.configuration.loopMode ?? .playOnce
-    animationSpeed = CGFloat(dotLottieAnimation?.configuration.speed ?? 1)
+    loopMode = (dotLottieAnimation?.configuration.loopMode).or(.playOnce)
+    animationSpeed = CGFloat((dotLottieAnimation?.configuration.speed).or(1))
     makeAnimationLayer(usingEngine: configuration.renderingEngine)
     if let animation {
       frame = animation.bounds
@@ -138,7 +138,7 @@ public class LottieAnimationLayer: CALayer {
     guard let animation else { return }
 
     defer {
-      currentPlaybackMode = .playing(.fromProgress(fromProgress, toProgress: toProgress, loopMode: loopMode ?? self.loopMode))
+      currentPlaybackMode = .playing(.fromProgress(fromProgress, toProgress: toProgress, loopMode: loopMode.or(self.loopMode)))
     }
 
     if shouldOverrideWithReducedMotionAnimation {
@@ -152,7 +152,7 @@ public class LottieAnimationLayer: CALayer {
       self.loopMode = loopMode
     }
     let context = AnimationContext(
-      playFrom: animation.frameTime(forProgress: fromProgress ?? currentProgress),
+      playFrom: animation.frameTime(forProgress: fromProgress.or(currentProgress)),
       playTo: animation.frameTime(forProgress: toProgress),
       closure: completion)
     addNewAnimationForContext(context)
@@ -171,7 +171,7 @@ public class LottieAnimationLayer: CALayer {
     completion: LottieCompletionBlock? = nil)
   {
     defer {
-      currentPlaybackMode = .playing(.fromFrame(fromFrame, toFrame: toFrame, loopMode: loopMode ?? self.loopMode))
+      currentPlaybackMode = .playing(.fromFrame(fromFrame, toFrame: toFrame, loopMode: loopMode.or(self.loopMode)))
     }
 
     if shouldOverrideWithReducedMotionAnimation {
@@ -186,7 +186,7 @@ public class LottieAnimationLayer: CALayer {
     }
 
     let context = AnimationContext(
-      playFrom: fromFrame ?? currentFrame,
+      playFrom: fromFrame.or(currentFrame),
       playTo: toFrame,
       closure: completion)
     addNewAnimationForContext(context)
@@ -219,7 +219,7 @@ public class LottieAnimationLayer: CALayer {
         fromMarker,
         toMarker: toMarker,
         playEndMarkerFrame: playEndMarkerFrame,
-        loopMode: loopMode ?? self.loopMode))
+        loopMode: loopMode.or(self.loopMode)))
     }
 
     if shouldOverrideWithReducedMotionAnimation {
@@ -272,7 +272,7 @@ public class LottieAnimationLayer: CALayer {
     }
 
     defer {
-      currentPlaybackMode = .playing(.marker(marker, loopMode: loopMode ?? self.loopMode))
+      currentPlaybackMode = .playing(.marker(marker, loopMode: loopMode.or(self.loopMode)))
     }
 
     if shouldOverrideWithReducedMotionAnimation {
@@ -521,7 +521,7 @@ public class LottieAnimationLayer: CALayer {
   /// since the Core Animation engine does not have any CPU overhead.
   public var backgroundBehavior: LottieBackgroundBehavior {
     get {
-      let currentBackgroundBehavior = _backgroundBehavior ?? .default(for: currentRenderingEngine ?? .mainThread)
+      let currentBackgroundBehavior = _backgroundBehavior.or(.default(for: currentRenderingEngine.or(.mainThread)))
 
       if
         currentRenderingEngine == .mainThread,
@@ -710,13 +710,13 @@ public class LottieAnimationLayer: CALayer {
       currentPlaybackMode = .paused(at: .frame(currentFrame))
     }
     get {
-      rootAnimationLayer?.currentFrame ?? 0
+      (rootAnimationLayer?.currentFrame).orZero
     }
   }
 
   /// Returns the current animation frame while an animation is playing.
   public var realtimeAnimationFrame: AnimationFrameTime {
-    isAnimationPlaying ? rootAnimationLayer?.presentation()?.currentFrame ?? currentFrame : currentFrame
+    isAnimationPlaying ? (rootAnimationLayer?.presentation()?.currentFrame).or(currentFrame) : currentFrame
   }
 
   /// Returns the current animation frame while an animation is playing.
@@ -881,7 +881,7 @@ public class LottieAnimationLayer: CALayer {
   /// Computes and returns a list of all child keypaths in the current animation.
   /// The returned list is the same as the log output of `logHierarchyKeypaths()`
   public func allHierarchyKeypaths() -> [String] {
-    rootAnimationLayer?.allHierarchyKeypaths() ?? []
+    (rootAnimationLayer?.allHierarchyKeypaths()).orEmpty
   }
 
   /// Converts a CGRect from the LottieAnimationView's coordinate space into the

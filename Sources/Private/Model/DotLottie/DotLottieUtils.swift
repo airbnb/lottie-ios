@@ -31,7 +31,7 @@ extension URL {
   }
 
   var urls: [URL] {
-    FileManager.default.urls(for: self) ?? []
+    FileManager.default.urls(for: self).orEmpty
   }
 }
 

@@ -53,7 +53,7 @@ final class MaskCompositionLayer: CALayer {
   override func layoutSublayers() {
     super.layoutSublayers()
 
-    for sublayer in sublayers ?? [] {
+    for sublayer in sublayers.orEmpty {
       sublayer.fillBoundsOfSuperlayer()
     }
   }

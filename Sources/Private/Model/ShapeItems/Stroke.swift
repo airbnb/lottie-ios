@@ -14,9 +14,9 @@ final class Stroke: ShapeItem {
     opacity = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .opacity)
     color = try container.decode(KeyframeGroup<LottieColor>.self, forKey: .color)
     width = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .width)
-    lineCap = try container.decodeIfPresent(LineCap.self, forKey: .lineCap) ?? .round
-    lineJoin = try container.decodeIfPresent(LineJoin.self, forKey: .lineJoin) ?? .round
-    miterLimit = try container.decodeIfPresent(Double.self, forKey: .miterLimit) ?? 4
+    lineCap = try container.decodeIfPresent(LineCap.self, forKey: .lineCap).or(.round)
+    lineJoin = try container.decodeIfPresent(LineJoin.self, forKey: .lineJoin).or(.round)
+    miterLimit = try container.decodeIfPresent(Double.self, forKey: .miterLimit).or(4)
     dashPattern = try container.decodeIfPresent([DashElement].self, forKey: .dashPattern)
     try super.init(from: decoder)
   }
@@ -44,7 +44,7 @@ final class Stroke: ShapeItem {
     } else {
       lineJoin = .round
     }
-    miterLimit = (try? dictionary.value(for: CodingKeys.miterLimit)) ?? 4
+    miterLimit = (try? dictionary.value(for: CodingKeys.miterLimit)).or(4)
     let dashPatternDictionaries = dictionary[CodingKeys.dashPattern.rawValue] as? [[String: Any]]
     dashPattern = try? dashPatternDictionaries?.map { try DashElement(dictionary: $0) }
     try super.init(dictionary: dictionary)

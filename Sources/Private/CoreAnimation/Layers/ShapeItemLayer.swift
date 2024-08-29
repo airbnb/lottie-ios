@@ -234,7 +234,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
     try shapeLayer.addAnimations(
       for: shape.item,
       context: context.for(shape),
-      pathMultiplier: trimPathMultiplier ?? 1,
+      pathMultiplier: trimPathMultiplier.or(1),
       roundedCorners: otherItems.first(RoundedCorners.self))
 
     if let (fill, context) = otherItems.first(Fill.self, context: context) {
@@ -284,7 +284,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
     try layers.shapeMaskLayer.addAnimations(
       for: shape.item,
       context: context.for(shape),
-      pathMultiplier: trimPathMultiplier ?? 1,
+      pathMultiplier: trimPathMultiplier.or(1),
       roundedCorners: otherItems.first(RoundedCorners.self))
 
     if let (gradientStroke, context) = otherItems.first(GradientStroke.self, context: context) {

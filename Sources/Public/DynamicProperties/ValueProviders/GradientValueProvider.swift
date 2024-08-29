@@ -74,7 +74,7 @@ public final class GradientValueProvider: ValueProvider {
         hasUpdate = false
 
         let newColors = block(frame)
-        let newLocations = locationsBlock?(frame) ?? []
+        let newLocations = (locationsBlock?(frame)).orEmpty
         value = value(from: newColors, locations: newLocations)
 
         return value

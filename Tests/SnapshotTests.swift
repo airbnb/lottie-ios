@@ -93,7 +93,7 @@ final class SnapshotTests: XCTestCase {
 
   override func setUp() {
     // Register fonts from the Samples/Fonts directory
-    for fontAssetURL in Bundle.lottie.urls(forResourcesWithExtension: "ttf", subdirectory: "Samples/Fonts") ?? [] {
+    for fontAssetURL in Bundle.lottie.urls(forResourcesWithExtension: "ttf", subdirectory: "Samples/Fonts").orEmpty {
       CTFontManagerRegisterFontsForURL(fontAssetURL as CFURL, .process, nil)
     }
 
@@ -114,12 +114,12 @@ final class SnapshotTests: XCTestCase {
 
   /// All of the `progressPercentagesToSnapshot` values used in the snapshot tests
   private let knownProgressPercentageValues: Set<Double> = Set(Samples.sampleAnimationNames.flatMap {
-    SnapshotConfiguration.forSample(named: $0).customProgressValuesToSnapshot ?? defaultProgressPercentageValues
+    SnapshotConfiguration.forSample(named: $0).customProgressValuesToSnapshot.or(defaultProgressPercentageValues)
   })
 
   /// All of the `customFramesToSnapshot` values used in the snapshot tests
   private let knownFrameValues: Set<Double> = Set(Samples.sampleAnimationNames.flatMap {
-    SnapshotConfiguration.forSample(named: $0).customFramesToSnapshot ?? []
+    SnapshotConfiguration.forSample(named: $0).customFramesToSnapshot.orEmpty
   })
 
   /// Progress values or frames that should be snapshot in `compareSampleSnapshots`
@@ -323,7 +323,7 @@ extension SnapshotConfiguration {
     customSnapshotConfiguration: SnapshotConfiguration? = nil)
     async -> LottieAnimationView?
   {
-    let snapshotConfiguration = customSnapshotConfiguration ?? SnapshotConfiguration.forSample(named: sampleAnimationName)
+    let snapshotConfiguration = customSnapshotConfiguration.or(SnapshotConfiguration.forSample(named: sampleAnimationName))
 
     let animationView: LottieAnimationView
     if let animation = Samples.animation(named: sampleAnimationName) {

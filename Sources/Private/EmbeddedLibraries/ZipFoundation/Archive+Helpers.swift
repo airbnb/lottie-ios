@@ -151,7 +151,7 @@ extension Archive {
       fileNameLength: UInt16(fileNameData.count),
       extraFieldLength: extraFieldLength,
       fileNameData: fileNameData,
-      extraFieldData: zip64ExtendedInformation?.data ?? Data())
+      extraFieldData: (zip64ExtendedInformation?.data).or(Data()))
     _ = try Data.write(chunk: localFileHeader.data, to: archiveFile)
     return localFileHeader
   }
@@ -187,9 +187,9 @@ extension Archive {
       // Size of extra fields, shouldn't include the leading 4 bytes
       zip64ExtendedInformation = Entry.ZIP64ExtendedInformation(
         dataSize: extraFieldLength,
-        uncompressedSize: extraUncompressedSize ?? 0,
-        compressedSize: extraCompressedSize ?? 0,
-        relativeOffsetOfLocalHeader: extraOffset ?? 0,
+        uncompressedSize: extraUncompressedSize.orZero,
+        compressedSize: extraCompressedSize.orZero,
+        relativeOffsetOfLocalHeader: extraOffset.orZero,
         diskNumberStart: 0)
       extraFieldLength += Entry.ZIP64ExtendedInformation.headerSize
     }
@@ -199,7 +199,7 @@ extension Archive {
       relativeOffset: relativeOffsetOfCD,
       extraField: (
         extraFieldLength,
-        zip64ExtendedInformation?.data ?? Data()))
+        (zip64ExtendedInformation?.data).or(Data())))
     _ = try Data.write(chunk: centralDirectory.data, to: archiveFile)
     return centralDirectory
   }
@@ -319,7 +319,7 @@ extension Archive {
     offsetOfEndOfCentralDirectory: UInt64)
     throws -> ZIP64EndOfCentralDirectory
   {
-    var zip64EOCD: ZIP64EndOfCentralDirectory = zip64EndOfCentralDirectory ?? {
+    var zip64EOCD: ZIP64EndOfCentralDirectory = zip64EndOfCentralDirectory.or({
       // Shouldn't include the leading 12 bytes: (size - 12 = 44)
       let record = ZIP64EndOfCentralDirectoryRecord(
         sizeOfZIP64EndOfCentralDirectoryRecord: UInt64(44),
@@ -337,7 +337,7 @@ extension Archive {
         relativeOffsetOfZIP64EOCDRecord: 0,
         totalNumberOfDisk: 1)
       return ZIP64EndOfCentralDirectory(record: record, locator: locator)
-    }()
+    }())
 
     let updatedRecord = ZIP64EndOfCentralDirectoryRecord(
       record: zip64EOCD.record,

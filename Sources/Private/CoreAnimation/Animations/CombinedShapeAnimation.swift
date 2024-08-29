@@ -65,8 +65,8 @@ extension CombinedShapeItem {
 
     let times = shapes.flatMap { $0.keyframes.map { $0.time } }
 
-    let minimumTime = times.min() ?? 0
-    let maximumTime = times.max() ?? 0
+    let minimumTime = times.min().orZero
+    let maximumTime = times.max().orZero
     let animationLocalTimeRange = Int(minimumTime)...Int(maximumTime)
 
     let interpolatedKeyframes = animationLocalTimeRange.map { localTime in

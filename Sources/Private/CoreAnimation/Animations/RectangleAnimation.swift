@@ -46,7 +46,7 @@ extension Rectangle {
 
   /// Creates a single array of animatable keyframes from the separate arrays of keyframes in this Rectangle
   func combinedKeyframes(roundedCorners: RoundedCorners?) throws -> KeyframeGroup<Rectangle.Keyframe> {
-    let cornerRadius = roundedCorners?.radius ?? cornerRadius
+    let cornerRadius = (roundedCorners?.radius).or(cornerRadius)
     return Keyframes.combined(
       size, position, cornerRadius,
       makeCombinedResult: Rectangle.Keyframe.init)

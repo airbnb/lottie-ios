@@ -44,7 +44,7 @@ final class DropShadowNode: LayerEffectNode {
       layer.shadowOffset = .init(width: offsetX, height: offsetY)
     }
     layer.shadowColor = properties.color?.value.cgColorValue
-    layer.shadowRadius = properties.radius?.value.cgFloatValue ?? 0
+    layer.shadowRadius = (properties.radius?.value.cgFloatValue).orZero
   }
 
 }

@@ -9,7 +9,7 @@ enum LayerEffectType: Int, Codable, Sendable {
   case unknown = 9999
 
   init(from decoder: Decoder) throws {
-    self = try LayerEffectType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
+    self = try LayerEffectType(rawValue: decoder.singleValueContainer().decode(RawValue.self)).or(.unknown)
   }
 }
 
@@ -37,14 +37,14 @@ class LayerEffect: Codable, DictionaryInitializable {
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: LayerEffect.CodingKeys.self)
-    name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Effect"
+    name = try container.decodeIfPresent(String.self, forKey: .name).or("Effect")
     type = try container.decode(LayerEffectType.self, forKey: .type)
-    effects = try container.decodeIfPresent([EffectValue].self, ofFamily: EffectValueType.self, forKey: .effects) ?? []
+    effects = try container.decodeIfPresent([EffectValue].self, ofFamily: EffectValueType.self, forKey: .effects).orEmpty
   }
 
   required init(dictionary: [String: Any]) throws {
-    name = (try? dictionary.value(for: CodingKeys.name)) ?? "Layer"
-    type = LayerEffectType(rawValue: try dictionary.value(for: CodingKeys.type)) ?? .unknown
+    name = (try? dictionary.value(for: CodingKeys.name)).or("Layer")
+    type = LayerEffectType(rawValue: try dictionary.value(for: CodingKeys.type)).or(.unknown)
     if let valueDictionaries = dictionary[CodingKeys.effects.rawValue] as? [[String: Any]] {
       effects = try [EffectValue].fromDictionaries(valueDictionaries)
     } else {
@@ -83,7 +83,7 @@ extension [LayerEffect] {
   static func fromDictionaries(_ dictionaries: [[String: Any]]) throws -> [LayerEffect] {
     try dictionaries.compactMap { dictionary in
       let shapeType = dictionary[LayerEffect.CodingKeys.type.rawValue] as? Int
-      switch LayerEffectType(rawValue: shapeType ?? LayerEffectType.unknown.rawValue) {
+      switch LayerEffectType(rawValue: shapeType.or(LayerEffectType.unknown.rawValue)) {
       case .dropShadow:
         return try DropShadowEffect(dictionary: dictionary)
       case .unknown, nil:

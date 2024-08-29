@@ -31,7 +31,7 @@ enum EpoxyModelArrayBuilder<Model> {
   }
 
   static func buildOptional(_ children: Component?) -> Component {
-    children ?? []
+    children.orEmpty
   }
 
   static func buildEither(first child: Component) -> Component {

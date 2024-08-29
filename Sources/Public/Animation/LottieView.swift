@@ -516,7 +516,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     imageProvidersAreEqual: (AnimationImageProvider, AnimationImageProvider) -> Bool)?
 
   private var animationSource: LottieAnimationSource? {
-    localAnimation ?? remoteAnimation
+    localAnimation.or(remoteAnimation)
   }
 
   private func loadAnimationIfNecessary() {

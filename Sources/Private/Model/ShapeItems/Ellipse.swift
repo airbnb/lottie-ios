@@ -21,7 +21,7 @@ final class Ellipse: ShapeItem {
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: Ellipse.CodingKeys.self)
-    direction = try container.decodeIfPresent(PathDirection.self, forKey: .direction) ?? .clockwise
+    direction = try container.decodeIfPresent(PathDirection.self, forKey: .direction).or(.clockwise)
     position = try container.decode(KeyframeGroup<LottieVector3D>.self, forKey: .position)
     size = try container.decode(KeyframeGroup<LottieVector3D>.self, forKey: .size)
     try super.init(from: decoder)

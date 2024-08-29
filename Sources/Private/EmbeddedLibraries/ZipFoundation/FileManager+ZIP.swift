@@ -349,7 +349,7 @@ extension Date {
 
 extension CocoaError {
   static func error(_ code: CocoaError.Code, userInfo: [AnyHashable: Any]? = nil, url: URL? = nil) -> Error {
-    var info: [String: Any] = userInfo as? [String: Any] ?? [:]
+    var info: [String: Any] = (userInfo as? [String: Any]).orEmpty
     if let url {
       info[NSURLErrorKey] = url
     }

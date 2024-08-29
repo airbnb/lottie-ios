@@ -27,7 +27,7 @@ extension LottieAnimationView {
     configuration: LottieConfiguration = .shared)
   {
     let animation = LottieAnimation.named(name, bundle: bundle, subdirectory: subdirectory, animationCache: animationCache)
-    let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil)
+    let provider = imageProvider.or(BundleImageProvider(bundle: bundle, searchPath: nil))
     self.init(animation: animation, imageProvider: provider, configuration: configuration)
   }
 
@@ -43,8 +43,8 @@ extension LottieAnimationView {
     configuration: LottieConfiguration = .shared)
   {
     let animation = LottieAnimation.filepath(filePath, animationCache: animationCache)
-    let provider = imageProvider ??
-      FilepathImageProvider(filepath: URL(fileURLWithPath: filePath).deletingLastPathComponent().path)
+    let provider = imageProvider
+      .or(FilepathImageProvider(filepath: URL(fileURLWithPath: filePath).deletingLastPathComponent().path))
     self.init(animation: animation, imageProvider: provider, configuration: configuration)
   }
 
@@ -93,7 +93,7 @@ extension LottieAnimationView {
     configuration: LottieConfiguration = .shared)
   {
     let animation = LottieAnimation.asset(name, bundle: bundle, animationCache: animationCache)
-    let provider = imageProvider ?? BundleImageProvider(bundle: bundle, searchPath: nil)
+    let provider = imageProvider.or(BundleImageProvider(bundle: bundle, searchPath: nil))
     self.init(animation: animation, imageProvider: provider, configuration: configuration)
   }
 

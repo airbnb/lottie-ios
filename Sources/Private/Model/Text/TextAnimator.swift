@@ -20,7 +20,7 @@ final class TextAnimator: Codable, DictionaryInitializable {
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: TextAnimator.CodingKeys.self)
-    name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
+    name = try container.decodeIfPresent(String.self, forKey: .name).orEmpty
 
     let animatorContainer = try container.nestedContainer(keyedBy: TextAnimatorKeys.self, forKey: .textAnimator)
     fillColor = try animatorContainer.decodeIfPresent(KeyframeGroup<LottieColor>.self, forKey: .fillColor)
@@ -50,7 +50,7 @@ final class TextAnimator: Codable, DictionaryInitializable {
   }
 
   init(dictionary: [String: Any]) throws {
-    name = (try? dictionary.value(for: CodingKeys.name)) ?? ""
+    name = (try? dictionary.value(for: CodingKeys.name)).orEmpty
 
     let animatorDictionary: [String: Any] = try dictionary.value(for: CodingKeys.textAnimator)
     if let fillColorDictionary = animatorDictionary[TextAnimatorKeys.fillColor.rawValue] as? [String: Any] {

@@ -43,7 +43,7 @@ public enum LayerType: Int, Codable {
   case unknown
 
   public init(from decoder: Decoder) throws {
-    self = try LayerType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .null
+    self = try LayerType(rawValue: decoder.singleValueContainer().decode(RawValue.self)).or(.null)
   }
 }
 
@@ -86,28 +86,28 @@ class LayerModel: Codable, DictionaryInitializable {
 
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: LayerModel.CodingKeys.self)
-    name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Layer"
-    index = try container.decodeIfPresent(Int.self, forKey: .index) ?? .random(in: Int.min...Int.max)
+    name = try container.decodeIfPresent(String.self, forKey: .name).or("Layer")
+    index = try container.decodeIfPresent(Int.self, forKey: .index).or(.random(in: Int.min...Int.max))
     type = try container.decode(LayerType.self, forKey: .type)
-    coordinateSpace = try container.decodeIfPresent(CoordinateSpace.self, forKey: .coordinateSpace) ?? .type2d
+    coordinateSpace = try container.decodeIfPresent(CoordinateSpace.self, forKey: .coordinateSpace).or(.type2d)
     inFrame = try container.decode(Double.self, forKey: .inFrame)
     outFrame = try container.decode(Double.self, forKey: .outFrame)
     startTime = try container.decode(Double.self, forKey: .startTime)
-    transform = try container.decodeIfPresent(Transform.self, forKey: .transform) ?? .default
+    transform = try container.decodeIfPresent(Transform.self, forKey: .transform).or(.default)
     parent = try container.decodeIfPresent(Int.self, forKey: .parent)
-    blendMode = try container.decodeIfPresent(BlendMode.self, forKey: .blendMode) ?? .normal
+    blendMode = try container.decodeIfPresent(BlendMode.self, forKey: .blendMode).or(.normal)
     masks = try container.decodeIfPresent([Mask].self, forKey: .masks)
-    timeStretch = try container.decodeIfPresent(Double.self, forKey: .timeStretch) ?? 1
+    timeStretch = try container.decodeIfPresent(Double.self, forKey: .timeStretch).or(1)
     matte = try container.decodeIfPresent(MatteType.self, forKey: .matte)
-    hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden) ?? false
-    styles = try container.decodeIfPresent([LayerStyle].self, ofFamily: LayerStyleType.self, forKey: .styles) ?? []
-    effects = try container.decodeIfPresent([LayerEffect].self, ofFamily: LayerEffectType.self, forKey: .effects) ?? []
+    hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden).orFalse
+    styles = try container.decodeIfPresent([LayerStyle].self, ofFamily: LayerStyleType.self, forKey: .styles).orEmpty
+    effects = try container.decodeIfPresent([LayerEffect].self, ofFamily: LayerEffectType.self, forKey: .effects).orEmpty
   }
 
   required init(dictionary: [String: Any]) throws {
-    name = (try? dictionary.value(for: CodingKeys.name)) ?? "Layer"
+    name = (try? dictionary.value(for: CodingKeys.name)).or("Layer")
     index = try dictionary.value(for: CodingKeys.index) ?? .random(in: Int.min...Int.max)
-    type = LayerType(rawValue: try dictionary.value(for: CodingKeys.type)) ?? .null
+    type = LayerType(rawValue: try dictionary.value(for: CodingKeys.type)).or(.null)
     if
       let coordinateSpaceRawValue = dictionary[CodingKeys.coordinateSpace.rawValue] as? Int,
       let coordinateSpace = CoordinateSpace(rawValue: coordinateSpaceRawValue)
@@ -141,13 +141,13 @@ class LayerModel: Codable, DictionaryInitializable {
     } else {
       masks = nil
     }
-    timeStretch = (try? dictionary.value(for: CodingKeys.timeStretch)) ?? 1
+    timeStretch = (try? dictionary.value(for: CodingKeys.timeStretch)).or(1)
     if let matteRawValue = dictionary[CodingKeys.matte.rawValue] as? Int {
       matte = MatteType(rawValue: matteRawValue)
     } else {
       matte = nil
     }
-    hidden = (try? dictionary.value(for: CodingKeys.hidden)) ?? false
+    hidden = (try? dictionary.value(for: CodingKeys.hidden)).orFalse
     if let styleDictionaries = dictionary[CodingKeys.styles.rawValue] as? [[String: Any]] {
       styles = try [LayerStyle].fromDictionaries(styleDictionaries)
     } else {
@@ -236,7 +236,7 @@ extension [LayerModel] {
   static func fromDictionaries(_ dictionaries: [[String: Any]]) throws -> [LayerModel] {
     try dictionaries.compactMap { dictionary in
       let layerType = dictionary[LayerModel.CodingKeys.type.rawValue] as? Int
-      switch LayerType(rawValue: layerType ?? LayerType.null.rawValue) {
+      switch LayerType(rawValue: layerType.or(LayerType.null.rawValue)) {
       case .precomp:
         return try PreCompLayerModel(dictionary: dictionary)
       case .solid:

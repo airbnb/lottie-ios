@@ -27,7 +27,7 @@ final class GradientFill: ShapeItem {
     gradientType = try container.decode(GradientType.self, forKey: .gradientType)
     highlightLength = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .highlightLength)
     highlightAngle = try container.decodeIfPresent(KeyframeGroup<LottieVector1D>.self, forKey: .highlightAngle)
-    fillRule = try container.decodeIfPresent(FillRule.self, forKey: .fillRule) ?? .nonZeroWinding
+    fillRule = try container.decodeIfPresent(FillRule.self, forKey: .fillRule).or(.nonZeroWinding)
     let colorsContainer = try container.nestedContainer(keyedBy: GradientDataKeys.self, forKey: .colors)
     colors = try colorsContainer.decode(KeyframeGroup<[Double]>.self, forKey: .colors)
     numberOfColors = try colorsContainer.decode(Int.self, forKey: .numberOfColors)
