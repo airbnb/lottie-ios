@@ -24,7 +24,7 @@ final class ShapeItemLayer: BaseAnimationLayer {
       "`ShapeItemLayer` must contain exactly one `ShapeItem` that draws a `GPPath`")
 
     try context.compatibilityAssert(
-      !otherItems.contains(where: { $0.item.drawsCGPath }),
+      !otherItems.contains(where: \.item.drawsCGPath),
       "`ShapeItemLayer` must contain exactly one `ShapeItem` that draws a `GPPath`")
 
     super.init()

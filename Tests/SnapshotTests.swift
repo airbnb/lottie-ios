@@ -64,8 +64,8 @@ final class SnapshotTests: XCTestCase {
       animationName = animationName.replacingOccurrences(of: "-", with: "/")
 
       XCTAssert(
-        Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).json") })
-          || Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).lottie") }),
+        Samples.sampleAnimationURLs.contains(where: \.absoluteString.hasSuffix("\(animationName).json"))
+          || Samples.sampleAnimationURLs.contains(where: \.absoluteString.hasSuffix("\(animationName).lottie")),
         "Snapshot \"\(snapshotURL.lastPathComponent)\" has no corresponding sample animation. Expecting \(animationName).json|.lottie")
     }
   }

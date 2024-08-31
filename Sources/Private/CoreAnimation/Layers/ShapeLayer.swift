@@ -259,7 +259,7 @@ extension CALayer {
     // but in practice can be any combination of items. The implementation expects all path-drawing
     // shape items to be managed by a `GroupLayer`, so if there's a top-level path item we
     // have to create a placeholder group.
-    if parentGroup == nil, otherItems.contains(where: { $0.item.drawsCGPath }) {
+    if parentGroup == nil, otherItems.contains(where: \.item.drawsCGPath) {
       groupItems = [Group(items: items.map { $0.item }, name: "")]
       otherItems = []
     }
