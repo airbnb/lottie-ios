@@ -33,6 +33,9 @@ protocol AnyNodeProperty {
 
   /// Sets the value provider for the property.
   func setProvider(provider: AnyValueProvider)
+
+  /// Removes the value provider for the property.
+  func removeProvider()
 }
 
 extension AnyNodeProperty {

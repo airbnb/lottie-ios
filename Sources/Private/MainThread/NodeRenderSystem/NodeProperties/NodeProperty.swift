@@ -45,6 +45,11 @@ class NodeProperty<T>: AnyNodeProperty {
     valueContainer.setNeedsUpdate()
   }
 
+  func removeProvider() {
+    valueProvider = originalValueProvider
+    valueContainer.setNeedsUpdate()
+  }
+
   func update(frame: CGFloat) {
     typedContainer.setValue(valueProvider.value(frame: frame), forFrame: frame)
   }

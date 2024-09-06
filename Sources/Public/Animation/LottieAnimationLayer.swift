@@ -854,6 +854,13 @@ public class LottieAnimationLayer: CALayer {
     animationLayer.setValueProvider(valueProvider, keypath: keypath)
   }
 
+  public func removeValueProvider(keypath: AnimationKeypath) {
+    guard let animationLayer = rootAnimationLayer else { return }
+
+    valueProviders[keypath] = nil
+    animationLayer.removeValueProvider(keypath: keypath)
+  }
+
   /// Reads the value of a property specified by the Keypath.
   /// Returns nil if no property is found.
   ///
