@@ -495,8 +495,8 @@ extension CoreAnimationLayer: RootAnimationLayer {
     rebuildCurrentAnimation()
   }
 
-  func removeValueProvider(keypath: AnimationKeypath) {
-    valueProviderStore.removeValueProvider(keypath: keypath)
+  func removeValueProvider(for keypath: AnimationKeypath) {
+    valueProviderStore.removeValueProvider(for: keypath)
 
     // We need to rebuild the current animation after removing a value provider,
     // since any existing `CAAnimation`s could now be out of date.

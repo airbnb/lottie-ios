@@ -41,7 +41,7 @@ final class ValueProviderStore {
   }
 
   /// Removes all ValueProviders for the given `AnimationKeypath`
-  func removeValueProvider(keypath: AnimationKeypath) {
+  func removeValueProvider(for keypath: AnimationKeypath) {
       valueProviders.removeAll(where: { $0.keypath == keypath })
   }
 

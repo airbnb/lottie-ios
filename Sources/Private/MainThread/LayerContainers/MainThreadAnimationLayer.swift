@@ -241,7 +241,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     }
   }
 
-  func removeValueProvider(keypath: AnimationKeypath) {
+  func removeValueProvider(for keypath: AnimationKeypath) {
     for layer in animationLayers {
       if let foundProperties = layer.nodeProperties(for: keypath) {
         for property in foundProperties {

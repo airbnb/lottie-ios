@@ -191,8 +191,8 @@ open class AnimatedControl: LottieControlType {
   }
 
   /// Removes a ValueProvider for the specified keypath
-  public func removeValueProvider(keypath: AnimationKeypath) {
-    animationView.removeValueProvider(keypath: keypath)
+  public func removeValueProvider(for keypath: AnimationKeypath) {
+    animationView.removeValueProvider(for: keypath)
   }
 
   // MARK: Internal

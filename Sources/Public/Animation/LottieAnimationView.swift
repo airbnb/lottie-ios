@@ -675,8 +675,8 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   /// Sets a ValueProvider for the specified keypath. The value provider will be removed
   /// on all properties that match the keypath.
-  public func removeValueProvider(keypath: AnimationKeypath) {
-    lottieAnimationLayer.removeValueProvider(keypath: keypath)
+  public func removeValueProvider(for keypath: AnimationKeypath) {
+    lottieAnimationLayer.removeValueProvider(for: keypath)
   }
 
   /// Reads the value of a property specified by the Keypath.
