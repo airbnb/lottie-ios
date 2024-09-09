@@ -76,5 +76,15 @@ final class ValueProvidersTests: XCTestCase {
       for: "Layer.Shape Group.Stroke 1.Color",
       context: animationContext)
     XCTAssertEqual(keyFramesQuery4?.keyframes.map(\.value.components), [[0, 0, 0, 1]])
+
+      // Test removing specific keypath
+      let keypathToRemove: AnimationKeypath = "**.Color"
+      store.setValueProvider(ColorValueProvider(.black), keypath: keypathToRemove)
+      store.removeValueProvider(for: keypathToRemove)
+      let keyFramesQuery5 = try store.customKeyframes(
+        of: .color,
+        for: "Layer.Shape Group.Stroke 1.Color",
+        context: animationContext)
+      XCTAssertNil(keyFramesQuery5)
   }
 }
