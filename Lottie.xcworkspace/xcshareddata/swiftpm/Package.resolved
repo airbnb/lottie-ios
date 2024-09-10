@@ -1,4 +1,5 @@
 {
+  "originHash" : "570a44d70ad213b218bf7f5ebda4b1039c8fcc9f31854902e91f484af1d6cfc3",
   "pins" : [
     {
       "identity" : "difference",
@@ -10,24 +11,6 @@
       }
     },
     {
-      "identity" : "swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/airbnb/swift",
-      "state" : {
-        "revision" : "6900f5ab7ab7394ac85eb9da52b2528ee329b206",
-        "version" : "1.0.4"
-      }
-    },
-    {
-      "identity" : "swift-argument-parser",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-argument-parser",
-      "state" : {
-        "revision" : "fddd1c00396eed152c45a46bea9f47b98e59301d",
-        "version" : "1.2.0"
-      }
-    },
-    {
       "identity" : "swift-snapshot-testing",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-snapshot-testing.git",
@@ -36,5 +19,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

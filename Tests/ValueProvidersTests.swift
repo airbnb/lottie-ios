@@ -86,5 +86,14 @@ final class ValueProvidersTests: XCTestCase {
       for: "Layer.Shape Group.Stroke 1.Color",
       context: animationContext)
     XCTAssertNil(keyFramesQuery5)
+
+    // Test removing wildcard keypath
+    store.setValueProvider(ColorValueProvider(.black), keypath: "**1.Color")
+    store.removeValueProvider(for: "**.Color")
+    let keyFramesQuery6 = try store.customKeyframes(
+      of: .color,
+      for: "Layer.Shape Group.Stroke 1.Color",
+      context: animationContext)
+    XCTAssertNil(keyFramesQuery6)
   }
 }
