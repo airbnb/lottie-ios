@@ -5,6 +5,8 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+// MARK: - SolidLayerModel
+
 /// A layer that holds a solid color.
 final class SolidLayerModel: LayerModel {
 
@@ -52,3 +54,10 @@ final class SolidLayerModel: LayerModel {
     case height = "sh"
   }
 }
+
+// MARK: Sendable
+
+/// `SolidLayerModel` inherits `@unchecked Sendable` from `LayerModel` and
+/// we need to restate that here to avoid a warning in Xcode 16
+// swiftlint:disable:next no_unchecked_sendable
+extension SolidLayerModel: @unchecked Sendable { }

@@ -43,3 +43,10 @@ final class RoundedCorners: ShapeItem {
     case radius = "r"
   }
 }
+
+// MARK: Sendable
+
+/// `RoundedCorners` inherits `@unchecked Sendable` from `ShapeItem` and
+/// we need to restate that here to avoid a warning in Xcode 16
+// swiftlint:disable:next no_unchecked_sendable
+extension RoundedCorners: @unchecked Sendable { }

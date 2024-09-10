@@ -70,3 +70,10 @@ final class Fill: ShapeItem {
     case fillRule = "r"
   }
 }
+
+// MARK: Sendable
+
+/// `Fill` inherits `@unchecked Sendable` from `ShapeItem` and
+/// we need to restate that here to avoid a warning in Xcode 16
+// swiftlint:disable:next no_unchecked_sendable
+extension Fill: @unchecked Sendable { }

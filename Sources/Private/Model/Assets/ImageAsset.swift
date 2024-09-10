@@ -131,3 +131,10 @@ extension ImageAsset {
     #endif
   }
 }
+
+// MARK: - ImageAsset + Sendable
+
+/// `ImageAsset` inherits `@unchecked Sendable` from `Asset` and
+/// we need to restate that here to avoid a warning in Xcode 16
+// swiftlint:disable:next no_unchecked_sendable
+extension ImageAsset: @unchecked Sendable { }

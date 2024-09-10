@@ -5,6 +5,8 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+// MARK: - ShapeLayerModel
+
 /// A layer that holds vector shape objects.
 final class ShapeLayerModel: LayerModel {
 
@@ -39,3 +41,10 @@ final class ShapeLayerModel: LayerModel {
     case items = "shapes"
   }
 }
+
+// MARK: Sendable
+
+/// `ShapeLayerModel` inherits `@unchecked Sendable` from `LayerModel` and
+/// we need to restate that here to avoid a warning in Xcode 16
+// swiftlint:disable:next no_unchecked_sendable
+extension ShapeLayerModel: @unchecked Sendable { }

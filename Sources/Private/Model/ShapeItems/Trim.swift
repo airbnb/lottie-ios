@@ -81,3 +81,10 @@ final class Trim: ShapeItem {
     case trimType = "m"
   }
 }
+
+// MARK: Sendable
+
+/// `Trim` inherits `@unchecked Sendable` from `ShapeItem` and
+/// we need to restate that here to avoid a warning in Xcode 16
+// swiftlint:disable:next no_unchecked_sendable
+extension Trim: @unchecked Sendable { }

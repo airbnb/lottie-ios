@@ -5,6 +5,8 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+// MARK: - PreCompLayerModel
+
 /// A layer that holds another animation composition.
 final class PreCompLayerModel: LayerModel {
 
@@ -63,3 +65,10 @@ final class PreCompLayerModel: LayerModel {
     case height = "h"
   }
 }
+
+// MARK: Sendable
+
+/// `PreCompLayerModel` inherits `@unchecked Sendable` from `LayerModel` and
+/// we need to restate that here to avoid a warning in Xcode 16
+// swiftlint:disable:next no_unchecked_sendable
+extension PreCompLayerModel: @unchecked Sendable { }
