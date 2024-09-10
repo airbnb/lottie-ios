@@ -241,6 +241,17 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     }
   }
 
+  func removeValueProvider(for keypath: AnimationKeypath) {
+    for layer in animationLayers {
+      if let foundProperties = layer.nodeProperties(for: keypath) {
+        for property in foundProperties {
+          property.removeProvider()
+        }
+        layer.displayWithFrame(frame: presentation()?.currentFrame ?? currentFrame, forceUpdates: true)
+      }
+    }
+  }
+
   func getValue(for keypath: AnimationKeypath, atFrame: CGFloat?) -> Any? {
     for layer in animationLayers {
       if

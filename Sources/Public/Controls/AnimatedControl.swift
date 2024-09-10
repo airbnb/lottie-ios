@@ -190,6 +190,11 @@ open class AnimatedControl: LottieControlType {
     animationView.setValueProvider(valueProvider, keypath: keypath)
   }
 
+  /// Removes a ValueProvider for the specified keypath
+  public func removeValueProvider(for keypath: AnimationKeypath) {
+    animationView.removeValueProvider(for: keypath)
+  }
+
   // MARK: Internal
 
   var stateMap: [UInt: String] = [:]
