@@ -857,7 +857,10 @@ public class LottieAnimationLayer: CALayer {
   public func removeValueProvider(for keypath: AnimationKeypath) {
     guard let animationLayer = rootAnimationLayer else { return }
 
-    valueProviders[keypath] = nil
+    valueProviders.forEach {
+      guard $0.key.matches(keypath) else { return }
+      valueProviders[$0.key] = nil
+    }
     animationLayer.removeValueProvider(for: keypath)
   }
 
