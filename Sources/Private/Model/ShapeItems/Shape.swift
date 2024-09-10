@@ -5,6 +5,8 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+// MARK: - Shape
+
 /// An item that defines an custom shape
 final class Shape: ShapeItem {
 
@@ -52,3 +54,10 @@ final class Shape: ShapeItem {
     case direction = "d"
   }
 }
+
+// MARK: Sendable
+
+/// `Shape` inherits `@unchecked Sendable` from `ShapeItem` and
+/// we need to restate that here to avoid a warning in Xcode 16
+// swiftlint:disable:next no_unchecked_sendable
+extension Shape: @unchecked Sendable { }

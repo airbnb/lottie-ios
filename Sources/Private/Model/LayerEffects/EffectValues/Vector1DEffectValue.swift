@@ -1,6 +1,8 @@
 // Created by Cal Stephens on 8/14/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
+// MARK: - Vector1DEffectValue
+
 final class Vector1DEffectValue: EffectValue {
 
   // MARK: Lifecycle
@@ -34,3 +36,10 @@ final class Vector1DEffectValue: EffectValue {
     case value = "v"
   }
 }
+
+// MARK: Sendable
+
+/// `Vector1DEffectValue` inherits `@unchecked Sendable` from `EffectValue` and
+/// we need to restate that here to avoid a warning in Xcode 16
+// swiftlint:disable:next no_unchecked_sendable
+extension Vector1DEffectValue: @unchecked Sendable { }

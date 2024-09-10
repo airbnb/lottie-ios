@@ -54,3 +54,10 @@ final class Merge: ShapeItem {
     case mode = "mm"
   }
 }
+
+// MARK: Sendable
+
+/// `Merge` inherits `@unchecked Sendable` from `ShapeItem` and
+/// we need to restate that here to avoid a warning in Xcode 16
+// swiftlint:disable:next no_unchecked_sendable
+extension Merge: @unchecked Sendable { }

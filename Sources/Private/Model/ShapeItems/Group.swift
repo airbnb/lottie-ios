@@ -5,6 +5,8 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+// MARK: - Group
+
 /// An item that define a a group of shape items
 final class Group: ShapeItem {
 
@@ -44,3 +46,10 @@ final class Group: ShapeItem {
     case items = "it"
   }
 }
+
+// MARK: Sendable
+
+/// `Group` inherits `@unchecked Sendable` from `ShapeItem` and
+/// we need to restate that here to avoid a warning in Xcode 16
+// swiftlint:disable:next no_unchecked_sendable
+extension Group: @unchecked Sendable { }

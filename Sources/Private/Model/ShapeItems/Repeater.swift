@@ -5,6 +5,8 @@
 //  Created by Brandon Withrow on 1/8/19.
 //
 
+// MARK: - Repeater
+
 final class Repeater: ShapeItem {
 
   // MARK: Lifecycle
@@ -170,3 +172,10 @@ final class Repeater: ShapeItem {
     case scale = "s"
   }
 }
+
+// MARK: Sendable
+
+/// `Repeater` inherits `@unchecked Sendable` from `ShapeItem` and
+/// we need to restate that here to avoid a warning in Xcode 16
+// swiftlint:disable:next no_unchecked_sendable
+extension Repeater: @unchecked Sendable { }

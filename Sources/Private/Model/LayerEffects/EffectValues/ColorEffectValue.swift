@@ -1,6 +1,8 @@
 // Created by Cal Stephens on 8/14/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
+// MARK: - ColorEffectValue
+
 final class ColorEffectValue: EffectValue {
 
   // MARK: Lifecycle
@@ -34,3 +36,10 @@ final class ColorEffectValue: EffectValue {
     case value = "v"
   }
 }
+
+// MARK: Sendable
+
+/// `ColorEffectValue` inherits `@unchecked Sendable` from `EffectValue` and
+/// we need to restate that here to avoid a warning in Xcode 16
+// swiftlint:disable:next no_unchecked_sendable
+extension ColorEffectValue: @unchecked Sendable { }
