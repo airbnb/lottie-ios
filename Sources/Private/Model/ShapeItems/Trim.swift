@@ -23,7 +23,7 @@ final class Trim: ShapeItem {
     start = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .start)
     end = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .end)
     offset = try container.decode(KeyframeGroup<LottieVector1D>.self, forKey: .offset)
-    trimType = try container.decode(TrimType.self, forKey: .trimType)
+    trimType = try container.decodeIfPresent(TrimType.self, forKey: .trimType) ?? .individually
     try super.init(from: decoder)
   }
 
