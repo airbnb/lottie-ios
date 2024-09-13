@@ -1,0 +1,5 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[Body.Layer.Layer] Rounded corners support is not currently implemented for combined shape items
+[Face.Vector 8.Layer.Layer] Rounded corners support is not currently implemented for combined shape items
+[tail.Layer.Layer] Rounded corners support is not currently implemented for combined shape items
+[hash.Layer.Layer] Rounded corners support is not currently implemented for combined shape items
