@@ -125,7 +125,7 @@ extension DotLottieFile {
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
     async throws -> DotLottieFile
   {
-    try await withCheckedThrowingContinuation { continuation in
+    try await withUnsafeThrowingContinuation { continuation in
       DotLottieFile.named(name, bundle: bundle, subdirectory: subdirectory, dotLottieCache: dotLottieCache) { result in
         continuation.resume(with: result)
       }
@@ -169,7 +169,7 @@ extension DotLottieFile {
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
     async throws -> DotLottieFile
   {
-    try await withCheckedThrowingContinuation { continuation in
+    try await withUnsafeThrowingContinuation { continuation in
       DotLottieFile.loadedFrom(filepath: filepath, dotLottieCache: dotLottieCache) { result in
         continuation.resume(with: result)
       }
@@ -208,7 +208,7 @@ extension DotLottieFile {
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
     async throws -> DotLottieFile
   {
-    try await withCheckedThrowingContinuation { continuation in
+    try await withUnsafeThrowingContinuation { continuation in
       DotLottieFile.asset(named: name, bundle: bundle, dotLottieCache: dotLottieCache) { result in
         continuation.resume(with: result)
       }
@@ -273,7 +273,7 @@ extension DotLottieFile {
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
     async throws -> DotLottieFile
   {
-    try await withCheckedThrowingContinuation { continuation in
+    try await withUnsafeThrowingContinuation { continuation in
       DotLottieFile.loadedFrom(url: url, session: session, dotLottieCache: dotLottieCache) { result in
         continuation.resume(with: result)
       }
@@ -356,7 +356,7 @@ extension DotLottieFile {
     dispatchQueue: DispatchQueue = .dotLottie)
     async throws -> DotLottieFile
   {
-    try await withCheckedThrowingContinuation { continuation in
+    try await withUnsafeThrowingContinuation { continuation in
       loadedFrom(data: data, filename: filename, dispatchQueue: dispatchQueue) { result in
         continuation.resume(with: result)
       }
