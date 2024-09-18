@@ -424,9 +424,11 @@ extension CoreAnimationLayer: RootAnimationLayer {
   var respectAnimationFrameRate: Bool {
     get { false }
     set {
-      logger.assertionFailure("""
-        The Core Animation rendering engine currently doesn't support `respectAnimationFrameRate`)
-        """)
+      if newValue {
+        logger.assertionFailure("""
+            The Core Animation rendering engine currently doesn't support `respectAnimationFrameRate`)
+            """)
+      }
     }
   }
 
