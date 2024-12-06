@@ -7,6 +7,8 @@ let package = Package(
   platforms: [.iOS("13.0"), .macOS("10.15"), .tvOS("13.0"), .custom("visionOS", versionString: "1.0")],
   products: [
     .library(name: "Lottie", targets: ["Lottie"]),
+    // Product for dynamic linking, as SPM builds libraries statically by default.
+    // This product should be used in a modular project structure with multiple packages using Lottie to avoid duplicate symbols.
     .library(name: "Lottie-Dynamic", type: .dynamic, targets: ["Lottie"]),
   ],
   dependencies: [
