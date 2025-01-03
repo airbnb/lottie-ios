@@ -36,7 +36,7 @@ struct SwiftUIView<Content: ViewType, Storage>: MeasuringViewRepresentable,
 
   var configurations: [Configuration] = []
 
-  var sizing: SwiftUIMeasurementContainerStrategy = .automatic
+  var sizing = SwiftUIMeasurementContainerStrategy.automatic
 
   // MARK: Private
 

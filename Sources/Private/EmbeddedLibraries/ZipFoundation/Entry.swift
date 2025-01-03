@@ -237,7 +237,7 @@ struct Entry: Equatable {
     return dataOffset
   }
 
-  static func == (lhs: Entry, rhs: Entry) -> Bool {
+  static func ==(lhs: Entry, rhs: Entry) -> Bool {
     lhs.path == rhs.path
       && lhs.localFileHeader.crc32 == rhs.localFileHeader.crc32
       && lhs.centralDirectoryStructure.effectiveRelativeOffsetOfLocalHeader

@@ -16,7 +16,7 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
   init(textAnimator: TextAnimator) {
     keypathName = textAnimator.name
     textRangeUnit = textAnimator.textRangeUnit
-    var properties = [String : AnyNodeProperty]()
+    var properties = [String: AnyNodeProperty]()
 
     if let keyframeGroup = textAnimator.anchor {
       anchor = NodeProperty(provider: KeyframeInterpolator(keyframes: keyframeGroup.keyframes))

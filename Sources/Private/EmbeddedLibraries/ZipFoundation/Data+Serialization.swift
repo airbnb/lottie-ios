@@ -38,10 +38,9 @@ extension Data {
     guard let data = try? readChunk(of: T.size, from: file) else {
       return nil
     }
-    let structure = T(data: data, additionalDataProvider: { additionalDataSize -> Data in
+    return T(data: data, additionalDataProvider: { additionalDataSize -> Data in
       try self.readChunk(of: additionalDataSize, from: file)
     })
-    return structure
   }
 
   static func consumePart(

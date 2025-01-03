@@ -61,8 +61,8 @@ struct BezierPathKeyframe: Interpolatable {
   /// that can have different counts / timing parameters
   static func combining(
     path: KeyframeGroup<BezierPath>,
-    cornerRadius: KeyframeGroup<LottieVector1D>?) throws
-    -> KeyframeGroup<BezierPathKeyframe>
+    cornerRadius: KeyframeGroup<LottieVector1D>?)
+    throws -> KeyframeGroup<BezierPathKeyframe>
   {
     guard
       let cornerRadius,

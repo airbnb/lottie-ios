@@ -116,7 +116,7 @@ struct IndexPathChangeset {
     inserts.isEmpty && deletes.isEmpty && updates.isEmpty && moves.isEmpty
   }
 
-  static func += (left: inout IndexPathChangeset, right: IndexPathChangeset) {
+  static func +=(left: inout IndexPathChangeset, right: IndexPathChangeset) {
     left.inserts += right.inserts
     left.deletes += right.deletes
     left.updates += right.updates

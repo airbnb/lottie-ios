@@ -22,13 +22,13 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
     opacity = NodeProperty(provider: KeyframeInterpolator(keyframes: transform.opacity.keyframes))
 
     var propertyMap: [String: AnyNodeProperty] = [
-      "Anchor Point" : anchor,
-      PropertyName.scale.rawValue : scale,
+      "Anchor Point": anchor,
+      PropertyName.scale.rawValue: scale,
       PropertyName.rotation.rawValue: rotationZ,
-      "Rotation X" : rotationX,
-      "Rotation Y" : rotationY,
-      "Rotation Z" : rotationZ,
-      PropertyName.opacity.rawValue : opacity,
+      "Rotation X": rotationX,
+      "Rotation Y": rotationY,
+      "Rotation Z": rotationZ,
+      PropertyName.opacity.rawValue: opacity,
     ]
 
     if

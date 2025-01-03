@@ -69,7 +69,7 @@ public enum LottieLoopMode: Hashable {
 // MARK: Equatable
 
 extension LottieLoopMode: Equatable {
-  public static func == (lhs: LottieLoopMode, rhs: LottieLoopMode) -> Bool {
+  public static func ==(lhs: LottieLoopMode, rhs: LottieLoopMode) -> Bool {
     switch (lhs, rhs) {
     case (.repeat(let lhsAmount), .repeat(let rhsAmount)),
          (.repeatBackwards(let lhsAmount), .repeatBackwards(let rhsAmount)):

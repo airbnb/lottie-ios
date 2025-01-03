@@ -264,12 +264,12 @@ extension CGPoint {
   }
 
   /// Operator convenience to divide points with /
-  static func / (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
+  static func /(lhs: CGPoint, rhs: CGFloat) -> CGPoint {
     CGPoint(x: lhs.x / rhs, y: lhs.y / rhs)
   }
 
   /// Operator convenience to multiply points with *
-  static func * (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
+  static func *(lhs: CGPoint, rhs: CGFloat) -> CGPoint {
     CGPoint(x: lhs.x * rhs, y: lhs.y * rhs)
   }
 
@@ -414,8 +414,7 @@ extension CGPoint {
     let c = inTangent.interpolate(to: to, amount: amount)
     let d = a.interpolate(to: b, amount: amount)
     let e = b.interpolate(to: c, amount: amount)
-    let f = d.interpolate(to: e, amount: amount)
-    return f
+    return d.interpolate(to: e, amount: amount)
   }
 
   func colinear(_ a: CGPoint, _ b: CGPoint) -> Bool {

@@ -9,7 +9,7 @@
 
 /// Used for mapping a heterogeneous list to classes for parsing.
 extension LayerType: ClassFamily {
-  static var discriminator: Discriminator = .type
+  static var discriminator = Discriminator.type
 
   func getType() -> AnyObject.Type {
     switch self {

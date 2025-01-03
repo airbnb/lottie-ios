@@ -37,7 +37,7 @@ final class ColorEffectValue: EffectValue {
   }
 }
 
-// MARK: Sendable
+// MARK: @unchecked Sendable
 
 /// `ColorEffectValue` inherits `@unchecked Sendable` from `EffectValue` and
 /// we need to restate that here to avoid a warning in Xcode 16

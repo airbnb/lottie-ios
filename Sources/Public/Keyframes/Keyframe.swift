@@ -68,7 +68,7 @@ public final class Keyframe<T> {
 // MARK: Equatable
 
 extension Keyframe: Equatable where T: Equatable {
-  public static func == (lhs: Keyframe<T>, rhs: Keyframe<T>) -> Bool {
+  public static func ==(lhs: Keyframe<T>, rhs: Keyframe<T>) -> Bool {
     lhs.value == rhs.value
       && lhs.time == rhs.time
       && lhs.isHold == rhs.isHold

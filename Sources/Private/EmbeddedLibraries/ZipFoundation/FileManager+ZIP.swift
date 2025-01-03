@@ -89,8 +89,7 @@ extension FileManager {
     #endif
 
     let timeStamp = TimeInterval(modTimeSpec.tv_sec) + TimeInterval(modTimeSpec.tv_nsec) / 1000000000.0
-    let modDate = Date(timeIntervalSince1970: timeStamp)
-    return modDate
+    return Date(timeIntervalSince1970: timeStamp)
   }
 
   class func fileSizeForItem(at url: URL) throws -> Int64 {
@@ -308,7 +307,7 @@ extension Date {
   // MARK: Internal
 
   var fileModificationDateTime: (UInt16, UInt16) {
-    (self.fileModificationDate, self.fileModificationTime)
+    (fileModificationDate, fileModificationTime)
   }
 
   var fileModificationDate: UInt16 {

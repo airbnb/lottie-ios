@@ -39,7 +39,7 @@ final class PrecompAsset: Asset {
   }
 }
 
-// MARK: Sendable
+// MARK: @unchecked Sendable
 
 /// `PrecompAsset` inherits `@unchecked Sendable` from `Asset` and
 /// we need to restate that here to avoid a warning in Xcode 16

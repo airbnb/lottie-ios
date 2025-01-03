@@ -33,7 +33,7 @@ enum ShapeType: String, Codable, Sendable {
 
 extension ShapeType: ClassFamily {
 
-  static var discriminator: Discriminator = .type
+  static var discriminator = Discriminator.type
 
   func getType() -> AnyObject.Type {
     switch self {

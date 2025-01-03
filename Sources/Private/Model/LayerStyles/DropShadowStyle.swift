@@ -71,7 +71,7 @@ final class DropShadowStyle: LayerStyle {
   }
 }
 
-// MARK: Sendable
+// MARK: @unchecked Sendable
 
 /// `DropShadowStyle` inherits `@unchecked Sendable` from `LayerStyle` and
 /// we need to restate that here to avoid a warning in Xcode 16

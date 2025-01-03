@@ -58,7 +58,7 @@ public class DotLottieCache: DotLottieCacheProvider {
 
 }
 
-// MARK: Sendable
+// MARK: @unchecked Sendable
 
 // DotLottieCacheProvider has a Sendable requirement, but we can't
 // redesign DotLottieCache to be properly Sendable without making breaking changes.

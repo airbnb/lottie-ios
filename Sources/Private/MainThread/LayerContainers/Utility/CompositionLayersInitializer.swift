@@ -22,7 +22,7 @@ extension [LayerModel] {
     -> [CompositionLayer]
   {
     var compositionLayers = [CompositionLayer]()
-    var layerMap = [Int : CompositionLayer]()
+    var layerMap = [Int: CompositionLayer]()
 
     /// Organize the assets into a dictionary of [ID : ImageAsset]
     var childLayers = [LayerModel]()

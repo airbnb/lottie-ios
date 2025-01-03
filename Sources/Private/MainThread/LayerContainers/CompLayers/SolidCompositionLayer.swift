@@ -45,7 +45,7 @@ final class SolidCompositionLayer: CompositionLayer {
 
   override var keypathProperties: [String: AnyNodeProperty] {
     guard let colorProperty else { return super.keypathProperties }
-    return [PropertyName.color.rawValue : colorProperty]
+    return [PropertyName.color.rawValue: colorProperty]
   }
 
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates _: Bool) {

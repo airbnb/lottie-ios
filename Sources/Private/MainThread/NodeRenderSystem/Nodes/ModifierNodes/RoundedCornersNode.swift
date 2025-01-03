@@ -17,7 +17,7 @@ final class RoundedCornersProperties: NodePropertyMap, KeypathSearchable {
   init(roundedCorners: RoundedCorners) {
     keypathName = roundedCorners.name
     radius = NodeProperty(provider: KeyframeInterpolator(keyframes: roundedCorners.radius.keyframes))
-    keypathProperties = ["Radius" : radius]
+    keypathProperties = ["Radius": radius]
     properties = Array(keypathProperties.values)
   }
 

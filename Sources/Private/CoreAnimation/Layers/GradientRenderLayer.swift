@@ -25,7 +25,7 @@ final class GradientRenderLayer: CAGradientLayer {
 
   /// The reference bounds within this layer that the gradient's
   /// `startPoint` and `endPoint` should be calculated relative to
-  var gradientReferenceBounds: CGRect = .zero {
+  var gradientReferenceBounds = CGRect.zero {
     didSet {
       if oldValue != gradientReferenceBounds {
         updateLayout()

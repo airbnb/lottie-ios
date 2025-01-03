@@ -31,26 +31,26 @@ class CompositionLayer: CALayer, KeypathSearchable {
     super.init()
     anchorPoint = .zero
     actions = [
-      "opacity" : NSNull(),
-      "transform" : NSNull(),
-      "bounds" : NSNull(),
-      "anchorPoint" : NSNull(),
-      "sublayerTransform" : NSNull(),
-      "shadowOpacity" : NSNull(),
-      "shadowOffset" : NSNull(),
-      "shadowColor" : NSNull(),
-      "shadowRadius" : NSNull(),
+      "opacity": NSNull(),
+      "transform": NSNull(),
+      "bounds": NSNull(),
+      "anchorPoint": NSNull(),
+      "sublayerTransform": NSNull(),
+      "shadowOpacity": NSNull(),
+      "shadowOffset": NSNull(),
+      "shadowColor": NSNull(),
+      "shadowRadius": NSNull(),
     ]
 
     contentsLayer.anchorPoint = .zero
     contentsLayer.bounds = CGRect(origin: .zero, size: size)
     contentsLayer.actions = [
-      "opacity" : NSNull(),
-      "transform" : NSNull(),
-      "bounds" : NSNull(),
-      "anchorPoint" : NSNull(),
-      "sublayerTransform" : NSNull(),
-      "hidden" : NSNull(),
+      "opacity": NSNull(),
+      "transform": NSNull(),
+      "bounds": NSNull(),
+      "anchorPoint": NSNull(),
+      "sublayerTransform": NSNull(),
+      "hidden": NSNull(),
     ]
     compositingFilter = layer.blendMode.filterName
     addSublayer(contentsLayer)

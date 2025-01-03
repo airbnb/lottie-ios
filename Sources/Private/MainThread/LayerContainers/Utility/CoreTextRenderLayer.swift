@@ -217,43 +217,6 @@ final class CoreTextRenderLayer: CALayer {
   private var strokeFrameSetter: CTFramesetter?
   private var needsContentUpdate = false
 
-  /// Draws Debug colors for the font alignment.
-  private func drawDebug(_ ctx: CGContext) {
-    if let font {
-      let ascent = CTFontGetAscent(font)
-      let descent = CTFontGetDescent(font)
-      let capHeight = CTFontGetCapHeight(font)
-      let leading = CTFontGetLeading(font)
-
-      // Ascent Red
-      ctx.setFillColor(CGColor(srgbRed: 1, green: 0, blue: 0, alpha: 0.5))
-      ctx.fill(CGRect(x: 0, y: 0, width: drawingRect.width, height: ascent))
-
-      // Descent Blue
-      ctx.setFillColor(CGColor(srgbRed: 0, green: 0, blue: 1, alpha: 0.5))
-      ctx.fill(CGRect(x: 0, y: ascent, width: drawingRect.width, height: descent))
-
-      // Leading Yellow
-      ctx.setFillColor(CGColor(srgbRed: 1, green: 1, blue: 0, alpha: 0.5))
-      ctx.fill(CGRect(x: 0, y: ascent + descent, width: drawingRect.width, height: leading))
-
-      // Cap height Green
-      ctx.setFillColor(CGColor(srgbRed: 0, green: 1, blue: 0, alpha: 0.5))
-      ctx.fill(CGRect(x: 0, y: ascent - capHeight, width: drawingRect.width, height: capHeight))
-
-      if drawingRect.height - ascent + descent + leading > 0 {
-        // Remainder
-        ctx.setFillColor(CGColor(srgbRed: 0, green: 1, blue: 1, alpha: 0.5))
-        ctx
-          .fill(CGRect(
-            x: 0,
-            y: ascent + descent + leading,
-            width: drawingRect.width,
-            height: drawingRect.height - ascent + descent + leading))
-      }
-    }
-  }
-
   private func updateTextContent() {
     guard needsContentUpdate else { return }
     needsContentUpdate = false

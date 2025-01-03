@@ -44,7 +44,7 @@ final class DropShadowEffect: LayerEffect {
 
 }
 
-// MARK: Sendable
+// MARK: @unchecked Sendable
 
 /// `DropShadowEffect` inherits `@unchecked Sendable` from `LayerEffect` and
 /// we need to restate that here to avoid a warning in Xcode 16

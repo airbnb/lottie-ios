@@ -18,7 +18,7 @@ enum EffectValueType: Int, Codable, Sendable {
 // MARK: ClassFamily
 
 extension EffectValueType: ClassFamily {
-  static var discriminator: Discriminator = .type
+  static var discriminator = Discriminator.type
 
   func getType() -> AnyObject.Type {
     switch self {

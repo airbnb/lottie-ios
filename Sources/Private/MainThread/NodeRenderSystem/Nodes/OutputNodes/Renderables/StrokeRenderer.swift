@@ -94,13 +94,13 @@ final class StrokeRenderer: PassThroughOutputNode, Renderable {
     }
   }
 
-  var lineCap: LineCap = .none {
+  var lineCap = LineCap.none {
     didSet {
       hasUpdate = true
     }
   }
 
-  var lineJoin: LineJoin = .none {
+  var lineJoin = LineJoin.none {
     didSet {
       hasUpdate = true
     }
