@@ -138,7 +138,7 @@ public struct LottieSwitch: UIViewConfiguringSwiftUIView {
   // MARK: Private
 
   private let animation: LottieAnimation?
-  private var configuration: LottieConfiguration = .shared
+  private var configuration = LottieConfiguration.shared
   private var isOn: Binding<Bool>?
 
 }

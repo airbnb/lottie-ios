@@ -594,7 +594,7 @@ extension CALayer {
     var numberOfSublayersWithTimeRemapping = 0
 
     for sublayer in sublayers ?? [] {
-      if 
+      if
         let preCompLayer = sublayer as? PreCompLayer,
         preCompLayer.preCompLayer.timeRemapping != nil
       {

@@ -37,11 +37,9 @@ extension Snapshotting where Value == UIView, Format == UIImage {
           fatalError("Presentation layer does not exist and cannot be snapshot")
         }
 
-        let image = UIGraphicsImageRenderer(bounds: view.bounds).image { context in
+        return UIGraphicsImageRenderer(bounds: view.bounds).image { context in
           presentationLayer.render(in: context.cgContext)
         }
-
-        return image
       }
   }
 }

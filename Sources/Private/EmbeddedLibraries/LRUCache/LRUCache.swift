@@ -43,8 +43,8 @@ let LRUCacheMemoryWarningNotification: NSNotification.Name =
 #else
 
 /// Notification that cache should be cleared
-let LRUCacheMemoryWarningNotification: NSNotification.Name =
-  .init("LRUCacheMemoryWarningNotification")
+let LRUCacheMemoryWarningNotification =
+  NSNotification.Name("LRUCacheMemoryWarningNotification")
 
 #endif
 
@@ -99,7 +99,7 @@ final class LRUCache<Key: Hashable, Value> {
   private var values: [Key: Container] = [:]
   private unowned(unsafe) var head: Container?
   private unowned(unsafe) var tail: Container?
-  private let lock: NSLock = .init()
+  private let lock = NSLock()
   private var token: AnyObject?
   private let notificationCenter: NotificationCenter
 

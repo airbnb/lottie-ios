@@ -638,7 +638,7 @@ public class LottieAnimationLayer: CALayer {
   }
 
   /// Sets the loop behavior for `play` calls. Defaults to `playOnce`
-  public var loopMode: LottieLoopMode = .playOnce {
+  public var loopMode = LottieLoopMode.playOnce {
     didSet {
       updateInFlightAnimation()
     }
@@ -857,9 +857,9 @@ public class LottieAnimationLayer: CALayer {
   public func removeValueProvider(for keypath: AnimationKeypath) {
     guard let animationLayer = rootAnimationLayer else { return }
 
-    valueProviders.forEach {
-      guard $0.key.matches(keypath) else { return }
-      valueProviders[$0.key] = nil
+    for valueProvider in valueProviders {
+      guard valueProvider.key.matches(keypath) else { continue }
+      valueProviders[valueProvider.key] = nil
     }
     animationLayer.removeValueProvider(for: keypath)
   }

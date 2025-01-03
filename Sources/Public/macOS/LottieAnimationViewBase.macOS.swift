@@ -39,7 +39,7 @@ open class LottieAnimationViewBase: NSView {
     true
   }
 
-  public var contentMode: LottieContentMode = .scaleAspectFit {
+  public var contentMode = LottieContentMode.scaleAspectFit {
     didSet {
       setNeedsLayout()
     }

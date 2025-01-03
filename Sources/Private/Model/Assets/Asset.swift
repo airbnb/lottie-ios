@@ -42,7 +42,7 @@ public class Asset: Codable, DictionaryInitializable {
   }
 }
 
-// MARK: Sendable
+// MARK: @unchecked Sendable
 
 /// Since `Asset` isn't `final`, we have to use `@unchecked Sendable` instead of `Sendable.`
 /// All `Asset` subclasses are immutable `Sendable` values.

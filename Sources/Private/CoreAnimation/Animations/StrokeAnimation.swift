@@ -23,6 +23,7 @@ extension Stroke: StrokeShapeItem {
 
   func copy(width: KeyframeGroup<LottieVector1D>) -> StrokeShapeItem {
     // Type-erase the copy from `Stroke` to `StrokeShapeItem`
+    // swiftformat:disable:next redundantProperty
     let copy: Stroke = copy(width: width)
     return copy
   }
@@ -35,6 +36,7 @@ extension GradientStroke: StrokeShapeItem {
 
   func copy(width: KeyframeGroup<LottieVector1D>) -> StrokeShapeItem {
     // Type-erase the copy from `GradientStroke` to `StrokeShapeItem`
+    // swiftformat:disable:next redundantProperty
     let copy: GradientStroke = copy(width: width)
     return copy
   }

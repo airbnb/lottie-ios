@@ -190,7 +190,7 @@ extension KeyframeGroup: DictionaryInitializable where T: AnyInitializable {
 // MARK: Equatable
 
 extension KeyframeGroup: Equatable where T: Equatable {
-  static func == (_ lhs: KeyframeGroup<T>, _ rhs: KeyframeGroup<T>) -> Bool {
+  static func ==(_ lhs: KeyframeGroup<T>, _ rhs: KeyframeGroup<T>) -> Bool {
     lhs.keyframes == rhs.keyframes
   }
 }

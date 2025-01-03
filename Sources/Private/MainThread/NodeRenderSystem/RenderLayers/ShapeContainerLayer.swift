@@ -15,12 +15,12 @@ class ShapeContainerLayer: CALayer {
   override init() {
     super.init()
     actions = [
-      "position" : NSNull(),
-      "bounds" : NSNull(),
-      "anchorPoint" : NSNull(),
-      "transform" : NSNull(),
-      "opacity" : NSNull(),
-      "hidden" : NSNull(),
+      "position": NSNull(),
+      "bounds": NSNull(),
+      "anchorPoint": NSNull(),
+      "transform": NSNull(),
+      "opacity": NSNull(),
+      "hidden": NSNull(),
     ]
   }
 

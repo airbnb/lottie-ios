@@ -45,7 +45,7 @@ final class FillRenderer: PassThroughOutputNode, Renderable {
     }
   }
 
-  var fillRule: FillRule = .none {
+  var fillRule = FillRule.none {
     didSet {
       hasUpdate = true
     }

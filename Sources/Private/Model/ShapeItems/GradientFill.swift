@@ -134,7 +134,7 @@ final class GradientFill: ShapeItem {
   }
 }
 
-// MARK: Sendable
+// MARK: @unchecked Sendable
 
 /// `GradientFill` inherits `@unchecked Sendable` from `ShapeItem` and
 /// we need to restate that here to avoid a warning in Xcode 16

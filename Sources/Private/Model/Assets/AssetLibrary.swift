@@ -13,10 +13,10 @@ final class AssetLibrary: Codable, AnyInitializable, Sendable {
     var container = try decoder.unkeyedContainer()
     var containerForKeys = container
 
-    var decodedAssets = [String : Asset]()
+    var decodedAssets = [String: Asset]()
 
-    var imageAssets = [String : ImageAsset]()
-    var precompAssets = [String : PrecompAsset]()
+    var imageAssets = [String: ImageAsset]()
+    var precompAssets = [String: PrecompAsset]()
 
     while
       !container.isAtEnd,
@@ -42,9 +42,9 @@ final class AssetLibrary: Codable, AnyInitializable, Sendable {
     guard let dictionaries = value as? [[String: Any]] else {
       throw InitializableError.invalidInput()
     }
-    var decodedAssets = [String : Asset]()
-    var imageAssets = [String : ImageAsset]()
-    var precompAssets = [String : PrecompAsset]()
+    var decodedAssets = [String: Asset]()
+    var imageAssets = [String: ImageAsset]()
+    var precompAssets = [String: PrecompAsset]()
     for dictionary in dictionaries {
       if dictionary[PrecompAsset.CodingKeys.layers.rawValue] != nil {
         let asset = try PrecompAsset(dictionary: dictionary)

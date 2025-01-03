@@ -37,16 +37,16 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
       skewAxis = NodeProperty(provider: SingleValueProvider(LottieVector1D(0)))
     }
     keypathProperties = [
-      "Anchor Point" : anchor,
-      PropertyName.position.rawValue : position,
-      PropertyName.scale.rawValue : scale,
-      PropertyName.rotation.rawValue : rotationZ,
-      "Rotation X" : rotationX,
-      "Rotation Y" : rotationY,
-      "Rotation Z" : rotationZ,
-      PropertyName.opacity.rawValue : opacity,
-      "Skew" : skew,
-      "Skew Axis" : skewAxis,
+      "Anchor Point": anchor,
+      PropertyName.position.rawValue: position,
+      PropertyName.scale.rawValue: scale,
+      PropertyName.rotation.rawValue: rotationZ,
+      "Rotation X": rotationX,
+      "Rotation Y": rotationY,
+      "Rotation Z": rotationZ,
+      PropertyName.opacity.rawValue: opacity,
+      "Skew": skew,
+      "Skew Axis": skewAxis,
     ]
     properties = Array(keypathProperties.values)
   }

@@ -46,7 +46,7 @@ final class ImageCompositionLayer: CompositionLayer {
     }
   }
 
-  var imageContentsGravity: CALayerContentsGravity = .resize {
+  var imageContentsGravity = CALayerContentsGravity.resize {
     didSet {
       contentsLayer.contentsGravity = imageContentsGravity
     }

@@ -41,7 +41,7 @@ final class ImageLayerModel: LayerModel {
   }
 }
 
-// MARK: Sendable
+// MARK: @unchecked Sendable
 
 /// `ImageLayerModel` inherits `@unchecked Sendable` from `LayerModel` and
 /// we need to restate that here to avoid a warning in Xcode 16

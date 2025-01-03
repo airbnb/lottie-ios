@@ -171,21 +171,6 @@ final class Archive: Sequence {
   var zip64EndOfCentralDirectory: ZIP64EndOfCentralDirectory?
   var preferredEncoding: String.Encoding?
 
-  var totalNumberOfEntriesInCentralDirectory: UInt64 {
-    zip64EndOfCentralDirectory?.record.totalNumberOfEntriesInCentralDirectory
-      ?? UInt64(endOfCentralDirectoryRecord.totalNumberOfEntriesInCentralDirectory)
-  }
-
-  var sizeOfCentralDirectory: UInt64 {
-    zip64EndOfCentralDirectory?.record.sizeOfCentralDirectory
-      ?? UInt64(endOfCentralDirectoryRecord.sizeOfCentralDirectory)
-  }
-
-  var offsetToStartOfCentralDirectory: UInt64 {
-    zip64EndOfCentralDirectory?.record.offsetToStartOfCentralDirectory
-      ?? UInt64(endOfCentralDirectoryRecord.offsetToStartOfCentralDirectory)
-  }
-
   #if swift(>=5.0)
   var memoryFile: MemoryFile?
 
@@ -220,6 +205,21 @@ final class Archive: Sequence {
     zip64EndOfCentralDirectory = config.zip64EndOfCentralDirectory
   }
   #endif
+
+  var totalNumberOfEntriesInCentralDirectory: UInt64 {
+    zip64EndOfCentralDirectory?.record.totalNumberOfEntriesInCentralDirectory
+      ?? UInt64(endOfCentralDirectoryRecord.totalNumberOfEntriesInCentralDirectory)
+  }
+
+  var sizeOfCentralDirectory: UInt64 {
+    zip64EndOfCentralDirectory?.record.sizeOfCentralDirectory
+      ?? UInt64(endOfCentralDirectoryRecord.sizeOfCentralDirectory)
+  }
+
+  var offsetToStartOfCentralDirectory: UInt64 {
+    zip64EndOfCentralDirectory?.record.offsetToStartOfCentralDirectory
+      ?? UInt64(endOfCentralDirectoryRecord.offsetToStartOfCentralDirectory)
+  }
 
   // MARK: - Helpers
 

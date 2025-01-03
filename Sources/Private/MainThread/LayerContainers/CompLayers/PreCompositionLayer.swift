@@ -107,7 +107,7 @@ final class PreCompositionLayer: CompositionLayer {
     guard let remappingNode else {
       return super.keypathProperties
     }
-    return ["Time Remap" : remappingNode]
+    return ["Time Remap": remappingNode]
   }
 
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {

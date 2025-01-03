@@ -17,26 +17,26 @@ final class ShapeRenderLayer: ShapeContainerLayer {
     super.init()
     anchorPoint = .zero
     actions = [
-      "position" : NSNull(),
-      "bounds" : NSNull(),
-      "anchorPoint" : NSNull(),
-      "path" : NSNull(),
-      "transform" : NSNull(),
-      "opacity" : NSNull(),
-      "hidden" : NSNull(),
+      "position": NSNull(),
+      "bounds": NSNull(),
+      "anchorPoint": NSNull(),
+      "path": NSNull(),
+      "transform": NSNull(),
+      "opacity": NSNull(),
+      "hidden": NSNull(),
     ]
     shapeLayer.actions = [
-      "position" : NSNull(),
-      "bounds" : NSNull(),
-      "anchorPoint" : NSNull(),
-      "path" : NSNull(),
-      "fillColor" : NSNull(),
-      "strokeColor" : NSNull(),
-      "lineWidth" : NSNull(),
-      "miterLimit" : NSNull(),
-      "lineDashPhase" : NSNull(),
+      "position": NSNull(),
+      "bounds": NSNull(),
+      "anchorPoint": NSNull(),
+      "path": NSNull(),
+      "fillColor": NSNull(),
+      "strokeColor": NSNull(),
+      "lineWidth": NSNull(),
+      "miterLimit": NSNull(),
+      "lineDashPhase": NSNull(),
       "opacity": NSNull(),
-      "hidden" : NSNull(),
+      "hidden": NSNull(),
     ]
     addSublayer(shapeLayer)
 

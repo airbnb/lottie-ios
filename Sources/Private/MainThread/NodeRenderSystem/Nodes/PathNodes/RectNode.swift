@@ -22,9 +22,9 @@ final class RectNodeProperties: NodePropertyMap, KeypathSearchable {
     cornerRadius = NodeProperty(provider: KeyframeInterpolator(keyframes: rectangle.cornerRadius.keyframes))
 
     keypathProperties = [
-      PropertyName.position.rawValue : position,
-      "Size" : size,
-      "Roundness" : cornerRadius,
+      PropertyName.position.rawValue: position,
+      "Size": size,
+      "Roundness": cornerRadius,
     ]
 
     properties = Array(keypathProperties.values)
@@ -102,7 +102,7 @@ extension BezierPath {
     -> BezierPath
   {
     let size = inputSize * 0.5
-    let radius = min(min(cornerRadius, size.width) , size.height)
+    let radius = min(min(cornerRadius, size.width), size.height)
 
     var bezierPath = BezierPath()
     let points: [CurveVertex]

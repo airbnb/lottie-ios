@@ -494,8 +494,9 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
 
   // MARK: Private
 
-  private let localAnimation: LottieAnimationSource?
   @State private var remoteAnimation: LottieAnimationSource?
+
+  private let localAnimation: LottieAnimationSource?
   private var playbackMode: LottiePlaybackMode?
   private var animationSpeed: Double?
   private var reloadAnimationTrigger: AnyEquatable?
@@ -505,9 +506,9 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
   private var showPlaceholderWhileReloading = false
   private var textProvider: AnimationKeypathTextProvider = DefaultTextProvider()
   private var fontProvider: AnimationFontProvider = DefaultFontProvider()
-  private var configuration: LottieConfiguration = .shared
-  private var dotLottieConfigurationComponents: DotLottieConfigurationComponents = .imageProvider
-  private var logger: LottieLogger = .shared
+  private var configuration = LottieConfiguration.shared
+  private var dotLottieConfigurationComponents = DotLottieConfigurationComponents.imageProvider
+  private var logger = LottieLogger.shared
   private var sizing = SwiftUIMeasurementContainerStrategy.automatic
   private let placeholder: (() -> Placeholder)?
 
@@ -593,7 +594,7 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
       container.invalidateIntrinsicContentSize()
     }
 
-    if 
+    if
       let playbackMode,
       playbackMode != view.currentPlaybackMode
     {

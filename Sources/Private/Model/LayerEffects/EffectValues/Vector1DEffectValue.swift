@@ -37,7 +37,7 @@ final class Vector1DEffectValue: EffectValue {
   }
 }
 
-// MARK: Sendable
+// MARK: @unchecked Sendable
 
 /// `Vector1DEffectValue` inherits `@unchecked Sendable` from `EffectValue` and
 /// we need to restate that here to avoid a warning in Xcode 16

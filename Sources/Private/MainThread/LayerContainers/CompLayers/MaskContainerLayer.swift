@@ -108,7 +108,7 @@ private class MaskLayer: CALayer {
       : .rgb(0, 1, 0)
     maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
     actions = [
-      "opacity" : NSNull(),
+      "opacity": NSNull(),
     ]
   }
 
@@ -168,9 +168,9 @@ private class MaskNodeProperties: NodePropertyMap {
     shape = NodeProperty(provider: KeyframeInterpolator(keyframes: mask.shape.keyframes))
     expansion = NodeProperty(provider: KeyframeInterpolator(keyframes: mask.expansion.keyframes))
     propertyMap = [
-      PropertyName.opacity.rawValue : opacity,
-      "Shape" : shape,
-      "Expansion" : expansion,
+      PropertyName.opacity.rawValue: opacity,
+      "Shape": shape,
+      "Expansion": expansion,
     ]
     properties = Array(propertyMap.values)
   }

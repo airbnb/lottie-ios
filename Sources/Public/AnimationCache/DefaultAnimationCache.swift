@@ -58,7 +58,7 @@ public class DefaultAnimationCache: AnimationCacheProvider {
   private let cache = LRUCache<String, LottieAnimation>()
 }
 
-// MARK: Sendable
+// MARK: @unchecked Sendable
 
 // LottieAnimationCache has a Sendable requirement, but we can't
 // redesign DefaultAnimationCache to be properly Sendable without

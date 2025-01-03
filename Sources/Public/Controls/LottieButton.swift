@@ -117,6 +117,6 @@ public struct LottieButton: UIViewConfiguringSwiftUIView {
 
   private let animation: LottieAnimation?
   private let action: () -> Void
-  private var configuration: LottieConfiguration = .shared
+  private var configuration = LottieConfiguration.shared
 }
 #endif

@@ -21,9 +21,9 @@ final class TrimPathProperties: NodePropertyMap, KeypathSearchable {
     offset = NodeProperty(provider: KeyframeInterpolator(keyframes: trim.offset.keyframes))
     type = trim.trimType
     keypathProperties = [
-      "Start" : start,
-      "End" : end,
-      "Offset" : offset,
+      "Start": start,
+      "End": end,
+      "Offset": offset,
     ]
     properties = Array(keypathProperties.values)
   }
