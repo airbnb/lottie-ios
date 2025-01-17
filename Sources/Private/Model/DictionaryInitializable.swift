@@ -8,7 +8,7 @@
 // MARK: - InitializableError
 
 enum InitializableError: Error {
-  case invalidInput(file: StaticString = #file, line: UInt = #line)
+  case invalidInput(file: StaticString = #fileID, line: UInt = #line)
 }
 
 // MARK: - DictionaryInitializable
@@ -32,7 +32,7 @@ extension Dictionary {
   @_disfavoredOverload
   func value<T, KeyType: RawRepresentable>(
     for key: KeyType,
-    file: StaticString = #file,
+    file: StaticString = #fileID,
     line: UInt = #line)
     throws -> T where KeyType.RawValue == Key
   {
@@ -44,7 +44,7 @@ extension Dictionary {
 
   func value<T: AnyInitializable, KeyType: RawRepresentable>(
     for key: KeyType,
-    file: StaticString = #file,
+    file: StaticString = #fileID,
     line: UInt = #line)
     throws -> T where KeyType.RawValue == Key
   {
