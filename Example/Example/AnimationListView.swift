@@ -40,25 +40,25 @@ struct AnimationListView: View {
               .frame(height: 50)
           }
         }
-        .navigationDestination(for: Item.self) { item in
-          switch item {
-          case .animation(_, let animationPath):
-            AnimationPreviewView(animationSource: .local(animationPath: animationPath))
-          case .remoteAnimations(let name, let urls):
-            AnimationPreviewView(animationSource: .remote(urls: urls, name: name))
-          case .animationList(let listContent):
-            AnimationListView(content: listContent)
-          case .controlsDemo:
-            ControlsDemoView()
-          case .swiftUIInteroperability:
-            SwiftUIInteroperabilityDemoView()
-          case .lottieViewLayoutDemo:
-            LottieViewLayoutDemoView()
-          }
-        }
       }
     }
     .navigationTitle(content.name)
+    .navigationDestination(for: Item.self) { item in
+      switch item {
+      case .animation(_, let animationPath):
+        AnimationPreviewView(animationSource: .local(animationPath: animationPath))
+      case .remoteAnimations(let name, let urls):
+        AnimationPreviewView(animationSource: .remote(urls: urls, name: name))
+      case .animationList(let listContent):
+        AnimationListView(content: listContent)
+      case .controlsDemo:
+        ControlsDemoView()
+      case .swiftUIInteroperability:
+        SwiftUIInteroperabilityDemoView()
+      case .lottieViewLayoutDemo:
+        LottieViewLayoutDemoView()
+      }
+    }
   }
 
   func makeThumbnailAnimation(for item: Item) async throws -> LottieAnimationSource? {
