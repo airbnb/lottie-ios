@@ -7,11 +7,38 @@
 
 // MARK: - AnimationKeypathTextProvider
 
+public struct TextRangeData {
+    let start:Int?
+    let end:Int?
+    let rangeOpacity:CGFloat?
+    let rangeUnit:TextRangeUnit?
+    let rangeColor:CGColor?
+    let rangeFont:UIFont?
+}
 /// Protocol for providing dynamic text to for a Lottie animation.
 public protocol AnimationKeypathTextProvider: AnyObject {
-  /// The text to display for the given `AnimationKeypath`.
-  /// If `nil` is returned, continues using the existing default text value.
-  func text(for keypath: AnimationKeypath, sourceText: String) -> String?
+    /// The text to display for the given `AnimationKeypath`.
+    /// If `nil` is returned, continues using the existing default text value.
+    func text(for keypath: AnimationKeypath, sourceText: String) -> String?
+    
+    func updateLineHieght(_ lineHeight:Double) -> Double?
+    
+    func updateWorldSpacing(_ worldSpace:Double) -> Double?
+    
+    func updateTextFillColor(_ fillColor:CGColor?)-> CGColor?
+    
+    func updateTextStrokeColor(_ strokeColor:CGColor?)-> CGColor?
+    
+    func updateTextBackgroundColor()-> CGColor?
+    
+    func updateTextStrokeWidth(_ strokeWidth:Double?)-> Double?
+        
+    func updateRangeText() -> TextRangeData?
+    
+    func updateTextAlinment() -> NSTextAlignment?
+    
+    func updateShowUnderLine() -> Bool?
+    
 }
 
 // MARK: - AnimationKeypathTextProvider
@@ -51,6 +78,40 @@ extension LegacyAnimationTextProvider {
 ///  - The dictionary keys can either be the full layer keypath string (e.g. `MY_LAYER.text_value`)
 ///    or simply the final path component of the keypath (e.g. `text_value`).
 public final class DictionaryTextProvider: AnimationKeypathTextProvider, LegacyAnimationTextProvider {
+    public func updateLineHieght(_ lineHeight: Double) -> Double? {
+        return lineHeight
+    }
+    public func updateWorldSpacing(_ worldSpace:Double) -> Double? {
+        return worldSpace
+    }
+    public func updateTextFillColor(_ fillColor:CGColor?)-> CGColor? {
+        return fillColor
+    }
+    
+    public func updateTextStrokeColor(_ strokeColor:CGColor?)-> CGColor? {
+        return strokeColor
+    }
+    
+    public func updateShowUnderLine() -> Bool? {
+        return false
+    }
+    
+    public func updateTextStrokeWidth(_ strokeWidth:Double?)-> Double? {
+        return strokeWidth
+    }
+    
+    public func updateTextBackgroundColor()-> CGColor? {
+        return nil
+    }
+    
+    public func updateRangeText() -> TextRangeData? {
+        
+        return nil
+    }
+    
+    public func updateTextAlinment() -> NSTextAlignment? {
+        return nil
+    }
 
   // MARK: Lifecycle
 
@@ -99,7 +160,41 @@ extension DictionaryTextProvider: Equatable {
 
 /// Default text provider. Uses text in the animation file
 public final class DefaultTextProvider: AnimationKeypathTextProvider, LegacyAnimationTextProvider {
+    public func updateLineHieght(_ lineHeight: Double) -> Double? {
+        return lineHeight
+    }
+    
+    public func updateWorldSpacing(_ worldSpace:Double) -> Double? {
+        return worldSpace
+    }
+    
+    public func updateTextFillColor(_ fillColor:CGColor?)-> CGColor? {
+        return fillColor
+    }
+    
+    public func updateTextStrokeColor(_ strokeColor:CGColor?)-> CGColor? {
+        return strokeColor
+    }
+    
+    public func updateTextStrokeWidth(_ strokeWidth:Double?)-> Double? {
+        return strokeWidth
+    }
+    
+    public func updateShowUnderLine() -> Bool? {
+        return false
+    }
+    
+    public func updateTextBackgroundColor()-> CGColor? {
+        return nil
+    }
 
+    public func updateRangeText() -> TextRangeData? {
+        
+        return nil
+    }
+    public func updateTextAlinment() -> NSTextAlignment? {
+        return nil
+    }
   // MARK: Lifecycle
 
   public init() { }

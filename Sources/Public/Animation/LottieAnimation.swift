@@ -137,10 +137,10 @@ public final class LottieAnimation: Codable, Sendable, DictionaryInitializable {
   let type: CoordinateSpace
 
   /// The height of the composition in points.
-  let width: Double
-
-  /// The width of the composition in points.
-  let height: Double
+  var width: Double
+    
+   /// The width of the composition in points.
+  var height: Double
 
   /// The list of animation layers
   let layers: [LayerModel]
