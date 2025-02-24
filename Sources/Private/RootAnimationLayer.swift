@@ -17,7 +17,7 @@ protocol RootAnimationLayer: CALayer {
   var imageProvider: AnimationImageProvider { get set }
   var textProvider: AnimationKeypathTextProvider { get set }
   var fontProvider: AnimationFontProvider { get set }
-
+       
   /// The `CAAnimation` key corresponding to the primary animation.
   ///  - `LottieAnimationView` uses this key to check if the animation is still active
   var primaryAnimationKey: AnimationKey { get }
