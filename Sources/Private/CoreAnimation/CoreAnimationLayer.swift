@@ -370,9 +370,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
         // When a non-repeating animation is complete, `animation(forKey: #keyPath(animationProgress))`
         // is no longer present and the Core-Animation-managed `animationProgress` value is just 0.
         // In that case, since the animation is complete, we just return the final frame that was played to.
-        let animationCurrentlyPlaying = animation(forKey: #keyPath(animationProgress)) != nil
-
-        if !animationCurrentlyPlaying, let configuration = currentAnimationConfiguration {
+        if isAnimationPlaying == false, let configuration = currentAnimationConfiguration {
           return configuration.animationContext.playTo
         } else {
           return animation.frameTime(forProgress: (presentation() ?? self).animationProgress)
@@ -380,6 +378,15 @@ extension CoreAnimationLayer: RootAnimationLayer {
       }
     }
     set {
+      // As a performance optimization, do nothing if the layer is already paused on the correct frame.
+      // This could happen if the transitioning to `.paused(at: .progress(1))` after already completing
+      // a `.playing(.toProgress(1, loopMode: .playOnce))` animation. This avoids the need to reinitialize
+      // the animation layer.
+      if currentFrame == newValue, isAnimationPlaying == false {
+        currentPlaybackState = .paused(frame: newValue)
+        return
+      }
+
       // We can display a specific frame of the animation by setting
       // `timeOffset` of this layer. This requires setting up the layer hierarchy
       // with a specific configuration (speed=0, etc) at least once. But if
