@@ -1,0 +1,3 @@
+Does not support Core Animation engine. Encountered compatibility issues:
+[0] The Core Animation rendering engine does not support animating multiple keyframes for text layer text values, due to limitations of Core Animation.
+[0] The Core Animation rendering engine does not support animating multiple keyframes for text layer text values, due to limitations of Core Animation.
