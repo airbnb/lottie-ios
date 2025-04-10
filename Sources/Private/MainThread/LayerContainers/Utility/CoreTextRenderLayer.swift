@@ -520,60 +520,29 @@ final class CoreTextRenderLayer: CALayer {
                 CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
                 nil)
             
-            let topMargen = ascent - capHeight
-            print("=ascent==>\(ascent)")
-            print("=capHeight==>\(capHeight)")
-            print("=descent==>\(descent)")
-            print("=leading==>\(leading)")
-            print("=drawingRectHeight===>\(drawingRect.height)\n")
-//            let count = CFArrayGetCount(CTFrameGetLines(frame))
-//
-//            guard count > 0 else { return }
+            let textHeight = ascent + descent + leading
+            // 动态计算垂直居中位置
+            let verticalCenter = size.height / 2.0
+            // 计算基线位置，考虑描边的影响
+                var baselineAdjustment: CGFloat = 0
+                if strokeColor != nil && strokeWidth > 0 {
+                    // 根据描边宽度调整基线
+                    baselineAdjustment = min(strokeWidth * 0.5, ascent * 0.3)
+                }
+                
+            let textBaseline = verticalCenter + (ascent - textHeight / 2.0) - (ascent * 0.3) - baselineAdjustment
             
-            let fontHeight = ascent + descent;
-            let centerY = (drawingRect.height - fontHeight) * 0.5
-            
-            print("ascent + capHeight - descent ===>\(ascent + capHeight - descent)")
-            
-            print("centerY ===>\(centerY) \n")
-            
-            print("siezeHeight====>\(size.height)")
-            
-            print("siezeHeight====>\(size.width)")
-            
-            print("siezeHeight====>\(drawingRect.width)")
-            
-            var drawHeight = size.height;
-            if drawHeight > 30 {
-                drawHeight = 30.0
-            } else if drawHeight > 25 {
-                drawHeight = 25.0
-            } else if drawHeight > 0 {
-                drawHeight = 20
-            }
             switch alignment {
-//            case .left:
-//                textAnchor = CGPoint(x: 0, y: ascent)
-//            case .right:
-//                textAnchor = CGPoint(x: size.width, y: ascent)
-//            case .center:
-//                textAnchor = CGPoint(x: size.width * 0.5, y: ascent)
-//            default:
-//                textAnchor = .zero
             case .left:
-                textAnchor = CGPoint(x: size.width * 0.5, y: drawHeight + descent)
+                textAnchor = CGPoint(x: size.width * 0.5, y: textBaseline)
             case .right:
-                textAnchor = CGPoint(x: size.width * 0.5, y: drawHeight + descent)
+                textAnchor = CGPoint(x: size.width * 0.5, y: textBaseline)
             case .center:
-                textAnchor = CGPoint(x: size.width * 0.5, y: drawHeight + descent)
+                textAnchor = CGPoint(x: size.width * 0.5, y: textBaseline)
             default:
                 textAnchor = .zero
             }
-            drawingRect = CGRect(
-                x: 0,
-                y: 0,
-                width: ceil(size.width),
-                height: ceil(size.height + descent))
+            drawingRect = CGRect(origin: .zero, size: size)
         }
         
         // Now Calculate Anchor

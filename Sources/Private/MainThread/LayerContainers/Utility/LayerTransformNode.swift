@@ -132,7 +132,9 @@ class LayerTransformNode: AnimatorNode {
       }
 
     localTransform = CATransform3D.makeTransform(
-      anchor: transformProperties.anchor.value.pointValue,
+//      anchor: transformProperties.anchor.value.pointValue,\
+    //这里注释上面的，是因为有的json自带a[k[1,2,3]],自动偏移导致文本框无法居中，所以这里修改不读取直接设置0
+      anchor: CGPoint(x: 0, y: 0),
       position: position,
       scale: transformProperties.scale.value.sizeValue,
       rotationX: transformProperties.rotationX.value.cgFloatValue,
