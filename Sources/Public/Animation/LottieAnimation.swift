@@ -31,8 +31,10 @@ public final class LottieAnimation: Codable, Sendable, DictionaryInitializable {
     startFrame = try container.decode(AnimationFrameTime.self, forKey: .startFrame)
     endFrame = try container.decode(AnimationFrameTime.self, forKey: .endFrame)
     framerate = try container.decode(Double.self, forKey: .framerate)
-    width = try container.decode(Double.self, forKey: .width)
-    height = try container.decode(Double.self, forKey: .height)
+//    width = try container.decode(Double.self, forKey: .width)
+//    height = try container.decode(Double.self, forKey: .height)
+      width = 1024
+      height = 1024
     layers = try container.decode([LayerModel].self, ofFamily: LayerType.self, forKey: .layers)
     glyphs = try container.decodeIfPresent([Glyph].self, forKey: .glyphs)
     fonts = try container.decodeIfPresent(FontList.self, forKey: .fonts)
@@ -63,8 +65,10 @@ public final class LottieAnimation: Codable, Sendable, DictionaryInitializable {
     startFrame = try dictionary.value(for: CodingKeys.startFrame)
     endFrame = try dictionary.value(for: CodingKeys.endFrame)
     framerate = try dictionary.value(for: CodingKeys.framerate)
-    width = try dictionary.value(for: CodingKeys.width)
-    height = try dictionary.value(for: CodingKeys.height)
+//    width = try dictionary.value(for: CodingKeys.width)
+//    height = try dictionary.value(for: CodingKeys.height)
+      width = 1024
+      height = 1024
     let layerDictionaries: [[String: Any]] = try dictionary.value(for: CodingKeys.layers)
     layers = try [LayerModel].fromDictionaries(layerDictionaries)
     if let glyphDictionaries = dictionary[CodingKeys.glyphs.rawValue] as? [[String: Any]] {

@@ -135,7 +135,8 @@ class LayerTransformNode: AnimatorNode {
 //      anchor: transformProperties.anchor.value.pointValue,\
     //这里注释上面的，是因为有的json自带a[k[1,2,3]],自动偏移导致文本框无法居中，所以这里修改不读取直接设置0
       anchor: CGPoint(x: 0, y: 0),
-      position: position,
+//      position: position,//这里设置是为了动态修改json里面的宽度和高度都是1024*1024，
+      position: CGPoint(x:512, y: 512),
       scale: transformProperties.scale.value.sizeValue,
       rotationX: transformProperties.rotationX.value.cgFloatValue,
       rotationY: transformProperties.rotationY.value.cgFloatValue,
