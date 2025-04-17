@@ -526,8 +526,11 @@ final class CoreTextRenderLayer: CALayer {
             // 计算基线位置，考虑描边的影响
                 var baselineAdjustment: CGFloat = 0
                 if strokeColor != nil && strokeWidth > 0 {
-                    // 根据描边宽度调整基线
-                    baselineAdjustment = min(strokeWidth * 0.5, ascent * 0.3)
+                    if strokeWidth > 6 {
+                        baselineAdjustment = min(strokeWidth * 0.5, ascent * 0.4)
+                    } else {
+                        baselineAdjustment = min(strokeWidth * 0.5, ascent * 0.3)
+                    }
                 }
                 
             let textBaseline = verticalCenter + (ascent - textHeight / 2.0) - (ascent * 0.3) - baselineAdjustment
