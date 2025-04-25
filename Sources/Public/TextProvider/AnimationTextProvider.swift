@@ -5,6 +5,8 @@
 //  Created by Alexandr Goncharov on 07/06/2019.
 //
 
+import Foundation
+
 // MARK: - AnimationKeypathTextProvider
 
 /// Protocol for providing dynamic text to for a Lottie animation.
@@ -43,6 +45,15 @@ extension LegacyAnimationTextProvider {
   public func text(for _: AnimationKeypath, sourceText _: String) -> String? {
     nil
   }
+}
+
+// MARK: - TextContentScaleProvider
+
+/// `AnimationKeypathTextProvider` that can additionally customize the content scale of the rendered text
+public protocol TextContentsScaleProvider: AnimationKeypathTextProvider {
+  /// The `contentsScale` value to use when rendering text for the given layer keypath.
+  /// Customizing the `contentsScale` can help reduce aliasing caused by text resizing.
+  func contentsScale(for keypath: AnimationKeypath) -> CGFloat?
 }
 
 // MARK: - DictionaryTextProvider
