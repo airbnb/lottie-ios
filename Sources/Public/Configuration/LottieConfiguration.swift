@@ -24,7 +24,15 @@ public struct LottieConfiguration: Hashable {
 
   /// The global configuration of Lottie,
   /// which applies to all `LottieAnimationView`s by default.
-  public static var shared = LottieConfiguration()
+    ///
+    public static var shared: LottieConfiguration = {
+        var configuration: LottieConfiguration = .init()
+        /// Override the default engine to avoid CoreAnimation regressions on IOS 18
+        if #available(iOS 18.0, *) {
+            configuration.renderingEngine = .mainThread
+        }
+        return configuration
+    }()
 
   /// The rendering engine implementation to use when displaying an animation
   ///  - Defaults to `RenderingEngineOption.automatic`, which uses the
