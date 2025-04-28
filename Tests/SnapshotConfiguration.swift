@@ -13,6 +13,8 @@ struct SnapshotConfiguration {
   /// captured snapshot with the reference image in `Tests/__Snapshots`
   ///  - This can be lowered for snapshots that render somewhat nondeterministically,
   ///    but should be kept as high as possible (while still permitting the diff to succeed)
+  /// - Defaults to 0.985 to reduce the number of flaky snapshots due to small differences
+  ///    in rendering based on OS version.
   var precision: Float = 0.985
 
   /// Dynamic value providers that should be applied to the animation
