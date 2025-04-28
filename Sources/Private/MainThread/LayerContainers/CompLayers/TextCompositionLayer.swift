@@ -21,6 +21,8 @@ extension TextJustification {
       .right
     case .center:
       .center
+    case .justifyLastLineLeft, .justifyLastLineRight, .justifyLastLineCenter, .justifyLastLineFull:
+      .justified
     }
   }
 
@@ -32,6 +34,8 @@ extension TextJustification {
       .right
     case .center:
       .center
+    case .justifyLastLineLeft, .justifyLastLineRight, .justifyLastLineCenter, .justifyLastLineFull:
+      .justified
     }
   }
 }
