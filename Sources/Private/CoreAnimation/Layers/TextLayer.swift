@@ -58,6 +58,14 @@ final class TextLayer: BaseCompositionLayer {
       renderLayer.text = sourceText.text
     }
 
+    // Apply the custom contents scale for this layer if it was provided
+    if
+      let contentsScaleProvider = context.textProvider as? TextContentsScaleProvider,
+      let contentsScale = contentsScaleProvider.contentsScale(for: textAnimationContext.currentKeypath)
+    {
+      renderLayer.contentsScale = contentsScale
+    }
+
     renderLayer.sizeToFit()
   }
 
