@@ -111,18 +111,13 @@ jobs:
           xcode: ${{ matrix.xcode }}
       - name: Build Dynamic XCFramework
         run: bundle exec rake build:xcframework\['dynamic'\]
-      - name: Upload Dynamic XCFramework
-        uses: actions/upload-artifact@v4
-        with:
-          name: BuildProducts
-          path: .build/archives
       - name: Build Static XCFramework
         run: bundle exec rake build:xcframework\['static'\]
-      - name: Upload Static XCFramework
+      - name: Upload XCFrameworks
         uses: actions/upload-artifact@v4
         with:
           name: BuildProducts
-          path: .build/archives
+          path: .build
 
   cocoapod:
     name: "Lint CocoaPods podspec"
