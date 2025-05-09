@@ -109,9 +109,16 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           xcode: ${{ matrix.xcode }}
-      - name: Build XCFramework
-        run: bundle exec rake build:xcframework
-      - name: Upload XCFramework
+      - name: Build Dynamic XCFramework
+        run: bundle exec rake build:xcframework\['dynamic'\]
+      - name: Upload Dynamic XCFramework
+        uses: actions/upload-artifact@v4
+        with:
+          name: BuildProducts
+          path: .build/archives
+      - name: Build Static XCFramework
+        run: bundle exec rake build:xcframework\['static'\]
+      - name: Upload Static XCFramework
         uses: actions/upload-artifact@v4
         with:
           name: BuildProducts

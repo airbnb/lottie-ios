@@ -62,22 +62,31 @@ namespace :build do
   end
 
   desc 'Builds an xcframework for all supported platforms'
-  task :xcframework, [:zip_archive_name] do |_t, args|
-    args.with_defaults(:zip_archive_name => 'Lottie')
+  task :xcframework, [:framework_type] do |_t, args|
+    args.with_defaults(:framework_type => 'dynamic')
+ 
+    case args[:framework_type]
+    when 'dynamic'
+      mach_o_type = 'mh_dylib'
+      xcframework_name = 'Lottie' # Backward compatibility
+    when 'static'
+      mach_o_type = 'staticlib'
+      xcframework_name = 'Lottie-Static'
+    end
 
     sh 'rm -rf .build/archives'
 
     # Build the framework for each supported platform, including simulators
-    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (iOS)" -destination generic/platform=iOS -archivePath ".build/archives/Lottie_iOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO')
-    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (iOS)" -destination "generic/platform=iOS Simulator" -archivePath ".build/archives/Lottie_iOS_Simulator" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO')
-    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (iOS)" -destination "generic/platform=macOS,variant=Mac Catalyst" -archivePath ".build/archives/Lottie_Mac_Catalyst" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO')
-    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (macOS)" -destination generic/platform=macOS -archivePath ".build/archives/Lottie_macOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO')
-    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (tvOS)" -destination generic/platform=tvOS -archivePath ".build/archives/Lottie_tvOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO')
-    xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (tvOS)" -destination "generic/platform=tvOS Simulator" -archivePath ".build/archives/Lottie_tvOS_Simulator" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO')
+    xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (iOS)\" -destination generic/platform=iOS -archivePath \".build/archives/Lottie_iOS\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
+    xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (iOS)\" -destination \"generic/platform=iOS Simulator\" -archivePath \".build/archives/Lottie_iOS_Simulator\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
+    xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (iOS)\" -destination \"generic/platform=macOS,variant=Mac Catalyst\" -archivePath \".build/archives/Lottie_Mac_Catalyst\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
+    xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (macOS)\" -destination generic/platform=macOS -archivePath \".build/archives/Lottie_macOS\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
+    xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (tvOS)\" -destination generic/platform=tvOS -archivePath \".build/archives/Lottie_tvOS\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
+    xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (tvOS)\" -destination \"generic/platform=tvOS Simulator\" -archivePath \".build/archives/Lottie_tvOS_Simulator\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
 
     ifVisionOSEnabled {
-      xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (visionOS)" -destination generic/platform=visionOS -archivePath ".build/archives/Lottie_visionOS" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO')
-      xcodebuild('archive -workspace Lottie.xcworkspace -scheme "Lottie (visionOS)" -destination "generic/platform=visionOS Simulator" -archivePath ".build/archives/Lottie_visionOS_Simulator" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO')
+      xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (visionOS)\" -destination generic/platform=visionOS -archivePath \".build/archives/Lottie_visionOS\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
+      xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (visionOS)\" -destination \"generic/platform=visionOS Simulator\" -archivePath \".build/archives/Lottie_visionOS_Simulator\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
     }
 
     # Combine all of the platforms into a single XCFramework
@@ -96,7 +105,7 @@ namespace :build do
       xcframeworkInvocation.push('-archive .build/archives/Lottie_visionOS_Simulator.xcarchive -framework Lottie.framework')
     }
 
-    xcframeworkInvocation.push('-output .build/archives/Lottie.xcframework')
+    xcframeworkInvocation.push("-output .build/archives/#{xcframework_name}.xcframework")
 
     xcodebuild(xcframeworkInvocation.join(" "))
 
@@ -110,19 +119,21 @@ namespace :build do
       `security find-certificate -c 'Lottie iOS'`
       if $?.success?
         puts "Signing certificate is installed. Code signing Lottie.xcframework."
-        sh 'codesign --timestamp -v --sign "Lottie iOS" Lottie.xcframework'
+        sh "codesign --timestamp -v --sign \"Lottie iOS\" #{xcframework_name}.xcframework"
       else
-        puts "Signing certificate is not installed. Lottie.xcframework will not be code signed."
+        puts "Signing certificate is not installed. #{xcframework_name}.xcframework will not be code signed."
       end
 
       # Archive the XCFramework into a zip file
       # Use --symlinks to avoid "Multiple binaries share the same codesign path. This can happen if your build process copies frameworks by following symlinks." 
       # error when validating macOS apps (#1948)
-      sh "zip -r --symlinks #{args[:zip_archive_name]}.xcframework.zip Lottie.xcframework"
-      sh 'rm -rf Lottie.xcframework'
+      sh "zip -r --symlinks #{xcframework_name}.xcframework.zip #{xcframework_name}.xcframework"
+      sh "rm -rf #{xcframework_name}.xcframework"
+      # Remove unnecessary xcarchive files
+      sh 'rm -rf *.xcarchive'
     end
 
-    sh "swift package compute-checksum .build/archives/#{args[:zip_archive_name]}.xcframework.zip"
+    sh "swift package compute-checksum .build/archives/#{xcframework_name}.xcframework.zip"
   end
 end
 
