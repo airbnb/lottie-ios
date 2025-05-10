@@ -109,13 +109,15 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           xcode: ${{ matrix.xcode }}
-      - name: Build XCFramework
-        run: bundle exec rake build:xcframework
-      - name: Upload XCFramework
+      - name: Build Dynamic XCFramework
+        run: bundle exec rake build:xcframework\['dynamic'\]
+      - name: Build Static XCFramework
+        run: bundle exec rake build:xcframework\['static'\]
+      - name: Upload XCFrameworks
         uses: actions/upload-artifact@v4
         with:
           name: BuildProducts
-          path: .build/archives
+          path: .build/artifacts
 
   cocoapod:
     name: "Lint CocoaPods podspec"
