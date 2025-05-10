@@ -105,11 +105,11 @@ namespace :build do
       xcframeworkInvocation.push('-archive .build/archives/Lottie_visionOS_Simulator.xcarchive -framework Lottie.framework')
     }
 
-    xcframeworkInvocation.push("-output .build/#{xcframework_name}.xcframework")
+    xcframeworkInvocation.push("-output .build/artifacts/#{xcframework_name}.xcframework")
 
     xcodebuild(xcframeworkInvocation.join(" "))
 
-    Dir.chdir('.build') do
+    Dir.chdir('.build/artifacts') do
       # Codesign the XCFramework using the "Lottie iOS" certificate, which should be installed in the keychain.
       #  - Check to make sure the certificate is installed before attemtping to codesign.
       #  - In GitHub actions CI, only jobs run by contibutors have access to repo secrets,
@@ -129,11 +129,9 @@ namespace :build do
       # error when validating macOS apps (#1948)
       sh "zip -r --symlinks #{xcframework_name}.xcframework.zip #{xcframework_name}.xcframework"
       sh "rm -rf #{xcframework_name}.xcframework"
-      # Remove unnecessary xcarchive files
-      sh 'rm -rf ./archives'
     end
 
-    sh "swift package compute-checksum .build/#{xcframework_name}.xcframework.zip"
+    sh "swift package compute-checksum .build/artifacts/#{xcframework_name}.xcframework.zip"
   end
 end
 
