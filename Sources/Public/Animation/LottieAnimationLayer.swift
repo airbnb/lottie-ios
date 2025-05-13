@@ -728,11 +728,15 @@ public class LottieAnimationLayer: CALayer {
   }
 
   /// Sets the speed of the animation playback. Defaults to 1
-  public var animationSpeed: CGFloat = 1 {
-    didSet {
-      updateInFlightAnimation()
+    public var animationSpeed: CGFloat = 1 {
+        didSet {
+            // If a previous animation was queued but not played due to zero speed, trigger it now
+            if animationContext != nil, animationSpeed != 0, !isAnimationPlaying {
+                updateInFlightAnimation()
+            }
+        }
     }
-  }
+
 
   /// When `true` the animation will play back at the framerate encoded in the
   /// `LottieAnimation` model. When `false` the animation will play at the framerate
@@ -1439,7 +1443,10 @@ public class LottieAnimationLayer: CALayer {
     let layerAnimation = CABasicAnimation(keyPath: "currentFrame")
     layerAnimation.fromValue = playFrom
     layerAnimation.toValue = playTo
-    layerAnimation.speed = Float(animationSpeed)
+      if animationSpeed == 0 {
+          self.animationContext = animationContext
+          return
+      }
     layerAnimation.duration = TimeInterval(duration)
     layerAnimation.fillMode = CAMediaTimingFillMode.both
     layerAnimation.repeatCount = loopMode.caAnimationConfiguration.repeatCount

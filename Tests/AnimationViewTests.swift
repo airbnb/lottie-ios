@@ -70,6 +70,28 @@ final class AnimationViewTests: XCTestCase {
 
     wait(for: [expectation], timeout: 1.0)
   }
+    
+    func testPlayWithSpeedZeroThenResume() {
+        let animation = LottieAnimation.named("LottieLogo1")
+        let view = LottieAnimationView(animation: animation)
+
+        view.animationSpeed = 0
+        view.play()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            view.animationSpeed = 1
+        }
+
+        let expectation = XCTestExpectation(description: "Animation resumes after speed set to 1")
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            if view.realtimeAnimationFrame > 0 {
+                expectation.fulfill()
+            }
+        }
+
+        wait(for: [expectation], timeout: 2.0)
+    }
 
   func testPlayFromFrameToFrame() {
     XCTExpectFailure("Realtime animation playback tests are flaky in CI", strict: false) {
