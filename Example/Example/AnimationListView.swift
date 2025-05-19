@@ -20,7 +20,22 @@ struct AnimationListView: View {
   var body: some View {
     List {
       ForEach(items, id: \.self) { item in
-        NavigationLink(value: item) {
+        NavigationLink {
+          switch item {
+          case .animation(_, let animationPath):
+            AnimationPreviewView(animationSource: .local(animationPath: animationPath))
+          case .remoteAnimations(let name, let urls):
+            AnimationPreviewView(animationSource: .remote(urls: urls, name: name))
+          case .animationList(let listContent):
+            AnimationListView(content: listContent)
+          case .controlsDemo:
+            ControlsDemoView()
+          case .swiftUIInteroperability:
+            SwiftUIInteroperabilityDemoView()
+          case .lottieViewLayoutDemo:
+            LottieViewLayoutDemoView()
+          }
+        } label: {
           switch item {
           case .animation, .remoteAnimations:
             HStack {

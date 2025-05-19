@@ -42,16 +42,46 @@ public final class DotLottieFile {
   private(set) var imageProvider: DotLottieImageProvider?
 
   /// Animations folder url
-  lazy var animationsUrl: URL = fileUrl.appendingPathComponent("\(DotLottieFile.animationsFolderName)")
+  ///
+  /// - Parameters:
+  ///  - version: version of .lottie file
+  func animationsUrl(for version: String?) -> URL {
+    switch Int(version ?? "1") ?? 1 {
+    case 2...:
+      fileUrl.appendingPathComponent("a")
+    default:
+      fileUrl.appendingPathComponent("animations")
+    }
+  }
 
   /// All files in animations folder
-  lazy var animationUrls: [URL] = FileManager.default.urls(for: animationsUrl) ?? []
+  ///
+  /// - Parameters:
+  ///  - version: version of .lottie file
+  func animationUrls(for version: String?) -> [URL] {
+    FileManager.default.urls(for: animationsUrl(for: version)) ?? []
+  }
 
   /// Images folder url
-  lazy var imagesUrl: URL = fileUrl.appendingPathComponent("\(DotLottieFile.imagesFolderName)")
+  ///
+  /// - Parameters:
+  ///  - version: version of .lottie file
+  func imagesUrl(for version: String?) -> URL {
+    switch Int(version ?? "1") ?? 1 {
+    case 2...:
+      fileUrl.appendingPathComponent("i")
+    default:
+      fileUrl.appendingPathComponent("images")
+    }
+  }
 
   /// All images in images folder
-  lazy var imageUrls: [URL] = FileManager.default.urls(for: imagesUrl) ?? []
+  ///
+  /// - Parameters:
+  ///  - version: version of .lottie file
+  func imageUrls(for version: String?) -> [URL] {
+    FileManager.default.urls(for: imagesUrl(for: version)) ?? []
+  }
 
   /// The `LottieAnimation` and `DotLottieConfiguration` for the given animation ID in this file
   func animation(for id: String? = nil) -> DotLottieFile.Animation? {
@@ -71,8 +101,6 @@ public final class DotLottieFile {
   // MARK: Private
 
   private static let manifestFileName = "manifest.json"
-  private static let animationsFolderName = "animations"
-  private static let imagesFolderName = "images"
 
   private let fileUrl: URL
 
@@ -104,10 +132,12 @@ public final class DotLottieFile {
 
   /// Loads file content to memory
   private func loadContent() throws {
-    imageProvider = DotLottieImageProvider(filepath: imagesUrl)
+    let manifest = try loadManifest()
 
-    animations = try loadManifest().animations.map { dotLottieAnimation in
-      let animation = try dotLottieAnimation.animation(url: animationsUrl)
+    imageProvider = DotLottieImageProvider(filepath: imagesUrl(for: manifest.version))
+
+    animations = try manifest.animations.map { dotLottieAnimation in
+      let animation = try dotLottieAnimation.animation(url: animationsUrl(for: manifest.version))
       let configuration = DotLottieConfiguration(
         id: dotLottieAnimation.id,
         loopMode: dotLottieAnimation.loopMode,
