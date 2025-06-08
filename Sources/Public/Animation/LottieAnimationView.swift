@@ -1043,6 +1043,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   // MARK: Fileprivate
 
+
   fileprivate func updateAnimationForBackgroundState() {
     lottieAnimationLayer.updateAnimationForBackgroundState()
   }
