@@ -479,7 +479,7 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   /// Returns `true` if the animation will start playing when this view is added to a window.
   public var isAnimationQueued: Bool {
-    lottieAnimationLayer.hasAnimationContext && waitingToPlayAnimation
+    lottieAnimationLayer.hasAnimationContext
   }
 
   /// Sets the loop behavior for `play` calls. Defaults to `playOnce`
@@ -1043,18 +1043,12 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   // MARK: Fileprivate
 
-  fileprivate var waitingToPlayAnimation = false
-
   fileprivate func updateAnimationForBackgroundState() {
     lottieAnimationLayer.updateAnimationForBackgroundState()
   }
 
   fileprivate func updateAnimationForForegroundState() {
-    let wasWaitingToPlayAnimation = waitingToPlayAnimation
-    if waitingToPlayAnimation {
-      waitingToPlayAnimation = false
-    }
-    lottieAnimationLayer.updateAnimationForForegroundState(wasWaitingToPlayAnimation: wasWaitingToPlayAnimation)
+    lottieAnimationLayer.updateAnimationForForegroundState()
   }
 
   // MARK: Private
