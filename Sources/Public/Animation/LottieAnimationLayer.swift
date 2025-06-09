@@ -1023,9 +1023,11 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
-  public func updateAnimationForForegroundState() {
-    if let _ = animationContext {
-      if backgroundBehavior == .pauseAndRestore {
+  public func updateAnimationForForegroundState(wasWaitingToPlayAnimation: Bool) {
+    if let currentContext = animationContext {
+      if wasWaitingToPlayAnimation {
+        addNewAnimationForContext(currentContext)
+      } else if backgroundBehavior == .pauseAndRestore {
         /// Restore animation from saved state
         updateInFlightAnimation()
       }
