@@ -6,15 +6,68 @@
 //
 
 // MARK: - AnimationKeypathTextProvider
-
 public struct TextRangeData {
-    let start:Int?
-    let end:Int?
-    let rangeOpacity:CGFloat?
-    let rangeUnit:TextRangeUnit?
-    let rangeColor:CGColor?
-    let rangeFont:UIFont?
+    
+    // ① 属性改为 public（可读即可）
+    public let start: Int?
+    public let end: Int?
+    public let rangeOpacity: CGFloat?
+    public let rangeUnit: TextRangeUnit?
+    public let rangeColor: CGColor?
+    public let rangeFont: UIFont?
+    public let strokeColor: CGColor?
+    public let strokeFineness: Double?
+    public let shadow: TextShadowData?
+    // ② 初始化器改为 public
+    public init(start: Int? = nil,
+                end: Int? = nil,
+                rangeOpacity: CGFloat? = 1,
+                rangeUnit: TextRangeUnit? = .index,
+                rangeColor: CGColor? = nil,
+                rangeFont: UIFont? = nil,
+                strokeColor: CGColor? = nil,
+                strokeFineness: Double? = nil,
+                shadow: TextShadowData? = nil) {
+        self.start        = start
+        self.end          = end
+        self.rangeOpacity = rangeOpacity
+        self.rangeUnit    = rangeUnit
+        self.rangeColor   = rangeColor
+        self.rangeFont    = rangeFont
+        self.strokeColor = strokeColor
+        self.strokeFineness = strokeFineness
+        self.shadow = shadow
+    }
 }
+
+public struct TextBackgroundData {
+    public let color: CGColor?
+    public let radius: Double?
+    public let offset: CGPoint?
+    public let enlarge: CGPoint?
+    public init(color: CGColor?, radius: Double?, offset: CGPoint?, enlarge: CGPoint?) {
+        self.color = color
+        self.radius = radius
+        self.offset = offset
+        self.enlarge = enlarge
+    }
+}
+
+public struct TextShadowData {
+    public let shadowColor: CGColor?
+    public let shadowOpacity: Double?
+    public let shadowBlur: Double?
+    public let shadowDistance: Double?
+    public let shadowAngle: Double?
+    public init(shadowColor: CGColor?, shadowOpacity: Double?, shadowBlur: Double?, shadowDistance: Double?, shadowAngle: Double?) {
+        self.shadowColor = shadowColor
+        self.shadowOpacity = shadowOpacity
+        self.shadowBlur = shadowBlur
+        self.shadowDistance = shadowDistance
+        self.shadowAngle = shadowAngle
+    }
+}
+
 /// Protocol for providing dynamic text to for a Lottie animation.
 public protocol AnimationKeypathTextProvider: AnyObject {
     /// The text to display for the given `AnimationKeypath`.
@@ -27,9 +80,11 @@ public protocol AnimationKeypathTextProvider: AnyObject {
     
     func updateTextFillColor(_ fillColor:CGColor?)-> CGColor?
     
+    func updateTextShadowColor()-> TextShadowData?
+    
     func updateTextStrokeColor(_ strokeColor:CGColor?)-> CGColor?
     
-    func updateTextBackgroundColor()-> CGColor?
+    func updateTextBackgroundColor()-> TextBackgroundData?
     
     func updateTextStrokeWidth(_ strokeWidth:Double?)-> Double?
         
@@ -88,6 +143,9 @@ public final class DictionaryTextProvider: AnimationKeypathTextProvider, LegacyA
         return fillColor
     }
     
+    public func updateTextShadowColor()-> TextShadowData? {
+        return nil
+    }
     public func updateTextStrokeColor(_ strokeColor:CGColor?)-> CGColor? {
         return strokeColor
     }
@@ -100,7 +158,7 @@ public final class DictionaryTextProvider: AnimationKeypathTextProvider, LegacyA
         return strokeWidth
     }
     
-    public func updateTextBackgroundColor()-> CGColor? {
+    public func updateTextBackgroundColor()-> TextBackgroundData? {
         return nil
     }
     
@@ -172,6 +230,10 @@ public final class DefaultTextProvider: AnimationKeypathTextProvider, LegacyAnim
         return fillColor
     }
     
+    public func updateTextShadowColor()-> TextShadowData? {
+        return nil
+    }
+    
     public func updateTextStrokeColor(_ strokeColor:CGColor?)-> CGColor? {
         return strokeColor
     }
@@ -184,7 +246,7 @@ public final class DefaultTextProvider: AnimationKeypathTextProvider, LegacyAnim
         return false
     }
     
-    public func updateTextBackgroundColor()-> CGColor? {
+    public func updateTextBackgroundColor()-> TextBackgroundData? {
         return nil
     }
 

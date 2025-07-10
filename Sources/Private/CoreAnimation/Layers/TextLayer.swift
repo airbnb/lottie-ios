@@ -159,11 +159,11 @@ final class TextLayer: BaseCompositionLayer {
         } else {
             renderLayer.showUnderLine = false
         }
-        if let backColor = context.textProvider.updateTextBackgroundColor() {
-            renderLayer.backColor = backColor
-        } else {
-            renderLayer.backColor = nil
-        }
+//        if let backColor = context.textProvider.updateTextBackgroundColor() {
+//            renderLayer.backColor = backColor.color
+//        } else {
+//            renderLayer.backColor = nil
+//        }
         
         var strokeColor:CGColor?
         if let newStrokeColor = context.textProvider.updateTextStrokeColor(text.strokeColorData?.cgColorValue) {
