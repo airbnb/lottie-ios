@@ -7,7 +7,7 @@
 
 // MARK: - TextRangeUnit
 
-enum TextRangeUnit: Int, RawRepresentable, Codable {
+public enum TextRangeUnit: Int, RawRepresentable, Codable {
   case percentage = 1
   case index = 2
 }
