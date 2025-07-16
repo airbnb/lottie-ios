@@ -117,37 +117,36 @@ class LayerTransformNode: AnimatorNode {
   }
 
   func rebuildOutputs(frame _: CGFloat) {
-    opacity = Float(transformProperties.opacity.value.cgFloatValue) * 0.01
+      opacity = Float(transformProperties.opacity.value.cgFloatValue) * 0.01
 
-    let position: CGPoint =
-      if let point = transformProperties.position?.value.pointValue {
-        point
-      } else if
-        let xPos = transformProperties.positionX?.value.cgFloatValue,
-        let yPos = transformProperties.positionY?.value.cgFloatValue
-      {
-        CGPoint(x: xPos, y: yPos)
+      let position: CGPoint =
+        if let point = transformProperties.position?.value.pointValue {
+          point
+        } else if
+          let xPos = transformProperties.positionX?.value.cgFloatValue,
+          let yPos = transformProperties.positionY?.value.cgFloatValue
+        {
+          CGPoint(x: xPos, y: yPos)
+        } else {
+          .zero
+        }
+
+      localTransform = CATransform3D.makeTransform(
+  //      anchor: transformProperties.anchor.value.pointValue,\
+      //这里注释上面的，是因为有的json自带a[k[1,2,3]],自动偏移导致文本框无法居中，所以这里修改不读取直接设置0
+        anchor: CGPoint(x: 0, y: 0),
+        position: position,
+        scale: transformProperties.scale.value.sizeValue,
+        rotationX: transformProperties.rotationX.value.cgFloatValue,
+        rotationY: transformProperties.rotationY.value.cgFloatValue,
+        rotationZ: transformProperties.rotationZ.value.cgFloatValue,
+        skew: nil,
+        skewAxis: nil)
+
+      if let parentNode = parentNode as? LayerTransformNode {
+        globalTransform = CATransform3DConcat(localTransform, parentNode.globalTransform)
       } else {
-        .zero
+        globalTransform = localTransform
       }
-
-    localTransform = CATransform3D.makeTransform(
-//      anchor: transformProperties.anchor.value.pointValue,\
-    //这里注释上面的，是因为有的json自带a[k[1,2,3]],自动偏移导致文本框无法居中，所以这里修改不读取直接设置0
-      anchor: CGPoint(x: 0, y: 0),
-//      position: position,//这里设置是为了动态修改json里面的宽度和高度都是1024*1024，
-      position: CGPoint(x:512, y: 512),
-      scale: transformProperties.scale.value.sizeValue,
-      rotationX: transformProperties.rotationX.value.cgFloatValue,
-      rotationY: transformProperties.rotationY.value.cgFloatValue,
-      rotationZ: transformProperties.rotationZ.value.cgFloatValue,
-      skew: nil,
-      skewAxis: nil)
-
-    if let parentNode = parentNode as? LayerTransformNode {
-      globalTransform = CATransform3DConcat(localTransform, parentNode.globalTransform)
-    } else {
-      globalTransform = localTransform
-    }
   }
 }
