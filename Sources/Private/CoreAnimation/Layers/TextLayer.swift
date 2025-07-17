@@ -28,6 +28,7 @@ final class TextLayer: BaseCompositionLayer {
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     
     /// Called by CoreAnimation to create a shadow copy of this layer
     /// More details: https://developer.apple.com/documentation/quartzcore/calayer/1410842-init
@@ -73,20 +74,22 @@ final class TextLayer: BaseCompositionLayer {
         renderLayer.sizeToFit()
     }
     
-    func configureRenderLayer(with context: LayerContext) throws {
-        // We can't use `CATextLayer`, because it doesn't support enough features we use.
-        // Instead, we use the same `CoreTextRenderLayer` (with a custom `draw` implementation)
-        // used by the Main Thread rendering engine. This means the Core Animation engine can't
-        // _animate_ text properties, but it can display static text without any issues.
-        let text = try textLayerModel.text.exactlyOneKeyframe(context: context, description: "text layer text")
-        
-        // The Core Animation engine doesn't currently support `TextAnimator`s.
-        //  - We could add support for animating the transform-related properties without much trouble.
-        //  - We may be able to support animating `fillColor` by getting clever with layer blend modes
-        //    or masks (e.g. use `CoreTextRenderLayer` to draw black glyphs, and then fill them in
-        //    using a `CAShapeLayer`).
-        if !textLayerModel.animators.isEmpty {
-            try context.logCompatibilityIssue("""
+   
+
+  func configureRenderLayer(with context: LayerContext) throws {
+    // We can't use `CATextLayer`, because it doesn't support enough features we use.
+    // Instead, we use the same `CoreTextRenderLayer` (with a custom `draw` implementation)
+    // used by the Main Thread rendering engine. This means the Core Animation engine can't
+    // _animate_ text properties, but it can display static text without any issues.
+    let text = try textLayerModel.text.exactlyOneKeyframe(context: context, description: "text layer text")
+
+    // The Core Animation engine doesn't currently support `TextAnimator`s.
+    //  - We could add support for animating the transform-related properties without much trouble.
+    //  - We may be able to support animating `fillColor` by getting clever with layer blend modes
+    //    or masks (e.g. use `CoreTextRenderLayer` to draw black glyphs, and then fill them in
+    //    using a `CAShapeLayer`).
+    if !textLayerModel.animators.isEmpty {
+      try context.logCompatibilityIssue("""
         The Core Animation rendering engine currently doesn't support text animators.
         """)
         }
@@ -190,6 +193,14 @@ final class TextLayer: BaseCompositionLayer {
         renderLayer.strokeOnTop = text.strokeOverFill ?? false
         
         renderLayer.preferredSize = text.textFrameSize?.sizeValue
+        // Apply the custom contents scale for this layer if it was provided
+        if
+          let contentsScaleProvider = context.textProvider as? TextContentsScaleProvider,
+          let contentsScale = contentsScaleProvider.contentsScale(for: textAnimationContext.currentKeypath)
+        {
+          renderLayer.contentsScale = contentsScale
+        }
+
         renderLayer.sizeToFit()
         
         renderLayer.transform = CATransform3DIdentity

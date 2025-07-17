@@ -13,6 +13,7 @@ import UIKit
 #endif
 
 extension TextJustification {
+
     var textAlignment: NSTextAlignment {
         switch self {
         case .left:
@@ -33,6 +34,30 @@ extension TextJustification {
         case .center:
                 .center
         }
+
+  var textAlignment: NSTextAlignment {
+    switch self {
+    case .left:
+      .left
+    case .right:
+      .right
+    case .center:
+      .center
+    case .justifyLastLineLeft, .justifyLastLineRight, .justifyLastLineCenter, .justifyLastLineFull:
+      .justified
+    }
+  }
+
+  var caTextAlignement: CATextLayerAlignmentMode {
+    switch self {
+    case .left:
+      .left
+    case .right:
+      .right
+    case .center:
+      .center
+    case .justifyLastLineLeft, .justifyLastLineRight, .justifyLastLineCenter, .justifyLastLineFull:
+      .justified
     }
 }
 

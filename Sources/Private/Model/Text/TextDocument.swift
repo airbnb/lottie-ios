@@ -11,6 +11,10 @@ enum TextJustification: Int, Codable {
   case left
   case right
   case center
+  case justifyLastLineLeft
+  case justifyLastLineRight
+  case justifyLastLineCenter
+  case justifyLastLineFull
 }
 
 // MARK: - TextDocument

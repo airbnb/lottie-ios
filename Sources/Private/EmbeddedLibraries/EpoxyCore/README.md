@@ -15,7 +15,7 @@ directly within the Lottie library and compile everything as a single unit.
 From time to time we may need to update to a more recent version of EpoxyCore.
 When doing this, follow these steps:
 
- 1. Download the latest release from https://github.com/epoxy-ios/EpoxyCore
+ 1. Download the latest release from https://github.com/airbnb/epoxy-ios
     and replace the source code in this directory with the updated code.
     
  2. Update the URL at the top of this file to indicate what release is being used.
