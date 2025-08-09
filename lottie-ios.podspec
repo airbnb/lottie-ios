@@ -32,9 +32,9 @@ Lottie enables designers to create and ship beautiful animations without an engi
   s.resource_bundles = {
     'LottiePrivacyInfo' => ['Sources/PrivacyInfo.xcprivacy'],
   }
-  s.ios.exclude_files = 'Sources/Public/MacOS/**/*'
+  s.ios.exclude_files = 'Sources/Public/iOS/**/*'
   s.tvos.exclude_files = 'Sources/Public/MacOS/**/*'
-  s.osx.exclude_files = 'Sources/Public/iOS/**/*'
+  s.osx.exclude_files = 'Sources/Public/MacOS/**/*'
 
   s.ios.frameworks = ['UIKit', 'CoreGraphics', 'QuartzCore']
   s.tvos.frameworks = ['UIKit', 'CoreGraphics', 'QuartzCore']
