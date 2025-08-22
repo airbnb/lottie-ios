@@ -169,39 +169,52 @@ extension LottieAnimation {
   /// Loads a Lottie animation asynchronously from the URL.
   ///
   /// - Parameter url: The url to load the animation from.
+  /// - Parameter session: The `URLSession` used to load the animation. Defaults to `URLSession.shared`.
   /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LottieAnimationCache.shared`. Optional.
   ///
+  /// - Returns: Loaded Lottie animation, or `nil` if loading failed.
   public static func loadedFrom(
     url: URL,
     session: URLSession = .shared,
     animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
     async -> LottieAnimation?
   {
-    await withCheckedContinuation { continuation in
-      LottieAnimation.loadedFrom(
-        url: url,
-        session: session,
-        closure: { result in
-          continuation.resume(returning: result)
-        },
-        animationCache: animationCache)
+    var dataTask: URLSessionDataTask?
+    let cancelTask = { dataTask?.cancel() }
+    return await withTaskCancellationHandler {
+      await withCheckedContinuation { continuation in
+        dataTask = LottieAnimation.loadedFrom(
+          url: url,
+          session: session,
+          closure: { result in
+            continuation.resume(returning: result)
+          },
+          animationCache: animationCache)
+      }
+    } onCancel: {
+      cancelTask()
     }
   }
 
   /// Loads a Lottie animation asynchronously from the URL.
   ///
   /// - Parameter url: The url to load the animation from.
+  /// - Parameter session: The `URLSession` used to load the animation. Defaults to `URLSession.shared`.
   /// - Parameter closure: A closure to be called when the animation has loaded.
   /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LottieAnimationCache.shared`. Optional.
   ///
+  /// - Returns: `URLSessionDataTask` that can be used to cancel the request, or `nil` if the animation was loaded from cache.
+  @discardableResult
   public static func loadedFrom(
     url: URL,
     session: URLSession = .shared,
     closure: @escaping LottieAnimation.DownloadClosure,
     animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
+    -> URLSessionDataTask?
   {
     if let animationCache, let animation = animationCache.animation(forKey: url.absoluteString) {
       closure(animation)
+      return nil
     } else {
       let task = session.dataTask(with: url) { data, _, error in
         guard error == nil, let jsonData = data else {
@@ -223,6 +236,7 @@ extension LottieAnimation {
         }
       }
       task.resume()
+      return task
     }
   }
 
