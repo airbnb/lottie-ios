@@ -199,6 +199,10 @@ final class CoreAnimationLayer: BaseAnimationLayer {
 
   /// Configuration for the animation that is currently setup in this layer
   private var currentAnimationConfiguration: AnimationConfiguration?
+    
+  /// The real-world time at which the animation playback was started.
+  /// Used to calculate the animation's current progress, including time spent in the background.
+  private var animationStartedAt: Date?
 
   /// The current progress of the placeholder `CAAnimation`,
   /// which is also the realtime animation progress of this layer's animation
@@ -283,6 +287,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
 
     // Setup a placeholder animation to let us track the realtime animation progress
     setupPlaceholderAnimation(context: layerContext)
+    animationStartedAt = Date()
 
     // Set up the new animations with the current `TimingConfiguration`
     for animationLayer in sublayers ?? [] {
@@ -343,15 +348,27 @@ extension CoreAnimationLayer: RootAnimationLayer {
   var isAnimationPlaying: Bool? {
     switch pendingAnimationConfiguration?.playbackState {
     case .playing:
-      true
+      return true
+
     case .paused:
-      false
+      return false
+
     case nil:
       switch playbackState {
       case .playing:
-        animation(forKey: #keyPath(animationProgress)) != nil
+        guard let animationStartedAt, let currentAnimationConfiguration else { return false }
+        if currentAnimationConfiguration.timingConfiguration.repeatCount == .greatestFiniteMagnitude {
+          return true
+        }
+
+        let animationDuration = Double(currentAnimationConfiguration.animationContext.playTo - currentAnimationConfiguration.animationContext.playFrom) / animation.framerate
+        let speed = Double(currentAnimationConfiguration.timingConfiguration.speed)
+        let repeatCount = Double(currentAnimationConfiguration.timingConfiguration.repeatCount)
+        let realDuration = animationDuration / speed * repeatCount
+        return animationStartedAt.distance(to: Date()) < realDuration
+
       case nil, .paused:
-        false
+        return false
       }
     }
   }
@@ -536,6 +553,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
   func removeAnimations() {
     currentAnimationConfiguration = nil
     currentPlaybackState = nil
+    animationStartedAt = nil
     removeAllAnimations()
 
     for sublayer in allSublayers {
