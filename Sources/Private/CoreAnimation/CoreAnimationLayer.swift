@@ -199,7 +199,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
 
   /// Configuration for the animation that is currently setup in this layer
   private var currentAnimationConfiguration: AnimationConfiguration?
-    
+
   /// The real-world time at which the animation playback was started.
   /// Used to calculate the animation's current progress, including time spent in the background.
   private var animationStartedAt: Date?
@@ -361,7 +361,9 @@ extension CoreAnimationLayer: RootAnimationLayer {
           return true
         }
 
-        let animationDuration = Double(currentAnimationConfiguration.animationContext.playTo - currentAnimationConfiguration.animationContext.playFrom) / animation.framerate
+        let animationDuration = Double(
+          currentAnimationConfiguration.animationContext.playTo -
+            currentAnimationConfiguration.animationContext.playFrom) / animation.framerate
         let speed = Double(currentAnimationConfiguration.timingConfiguration.speed)
         let repeatCount = Double(currentAnimationConfiguration.timingConfiguration.repeatCount)
         let realDuration = animationDuration / speed * repeatCount
