@@ -412,6 +412,7 @@ extension CoreAnimationLayer: RootAnimationLayer {
           // However when the animation is paused, we need to be able to render the final frame.
           // To allow this we have to extend the length of the animation by one frame.
           playTo: animation.endFrame + 1,
+          framerate: animation.framerate,
           closure: nil),
         timingConfiguration: CAMediaTimingConfiguration(speed: 0))
 

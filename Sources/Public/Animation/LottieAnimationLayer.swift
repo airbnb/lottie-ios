@@ -118,6 +118,7 @@ public class LottieAnimationLayer: CALayer {
     let context = AnimationContext(
       playFrom: CGFloat(animation.startFrame),
       playTo: CGFloat(animation.endFrame),
+      framerate: animation.framerate,
       closure: completion)
     removeCurrentAnimationIfNecessary()
     addNewAnimationForContext(context)
@@ -154,6 +155,7 @@ public class LottieAnimationLayer: CALayer {
     let context = AnimationContext(
       playFrom: animation.frameTime(forProgress: fromProgress ?? currentProgress),
       playTo: animation.frameTime(forProgress: toProgress),
+      framerate: animation.framerate,
       closure: completion)
     addNewAnimationForContext(context)
   }
@@ -170,6 +172,8 @@ public class LottieAnimationLayer: CALayer {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil)
   {
+    guard let animation else { return }
+
     defer {
       currentPlaybackMode = .playing(.fromFrame(fromFrame, toFrame: toFrame, loopMode: loopMode ?? self.loopMode))
     }
@@ -188,6 +192,7 @@ public class LottieAnimationLayer: CALayer {
     let context = AnimationContext(
       playFrom: fromFrame ?? currentFrame,
       playTo: toFrame,
+      framerate: animation.framerate,
       closure: completion)
     addNewAnimationForContext(context)
   }
@@ -248,6 +253,7 @@ public class LottieAnimationLayer: CALayer {
     let context = AnimationContext(
       playFrom: fromTime,
       playTo: playTo,
+      framerate: animation.framerate,
       closure: completion)
     addNewAnimationForContext(context)
   }
@@ -1095,6 +1101,7 @@ public class LottieAnimationLayer: CALayer {
     let newContext = AnimationContext(
       playFrom: animationContext.playFrom,
       playTo: animationContext.playTo,
+      framerate: animationContext.framerate,
       closure: animationContext.closure.completionBlock)
 
     /// Remove current animation, and freeze the current frame.
@@ -1316,6 +1323,7 @@ public class LottieAnimationLayer: CALayer {
       addNewAnimationForContext(AnimationContext(
         playFrom: animationContext.playFrom,
         playTo: animationContext.playTo,
+        framerate: animationContext.framerate,
         closure: animationContext.closure.completionBlock))
     }
   }
