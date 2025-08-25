@@ -366,16 +366,9 @@ extension CoreAnimationLayer: RootAnimationLayer {
         guard let animationStartedAt, let currentAnimationConfiguration else { return false }
         if currentAnimationConfiguration.timingConfiguration.repeatCount == .greatestFiniteMagnitude {
           return true
+        } else {
+          return animationStartedAt.distance(to: Date()) < currentAnimationConfiguration.expectedAnimationDuration
         }
-
-        let animationDuration = Double(
-          currentAnimationConfiguration.animationContext.playTo -
-          currentAnimationConfiguration.animationContext.playFrom) / animation.framerate
-        let speed = Double(currentAnimationConfiguration.timingConfiguration.speed)
-        let repeatCount = Double(currentAnimationConfiguration.timingConfiguration.repeatCount)
-          let durationMultiplier = currentAnimationConfiguration.timingConfiguration.autoreverses ? 2.0 : 1.0
-        let realDuration = animationDuration * durationMultiplier / speed * repeatCount
-        return animationStartedAt.distance(to: Date()) < realDuration
 
       case nil, .paused:
         return false
