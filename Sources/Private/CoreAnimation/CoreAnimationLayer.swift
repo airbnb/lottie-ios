@@ -363,10 +363,11 @@ extension CoreAnimationLayer: RootAnimationLayer {
 
         let animationDuration = Double(
           currentAnimationConfiguration.animationContext.playTo -
-            currentAnimationConfiguration.animationContext.playFrom) / animation.framerate
+          currentAnimationConfiguration.animationContext.playFrom) / animation.framerate
         let speed = Double(currentAnimationConfiguration.timingConfiguration.speed)
         let repeatCount = Double(currentAnimationConfiguration.timingConfiguration.repeatCount)
-        let realDuration = animationDuration / speed * repeatCount
+          let durationMultiplier = currentAnimationConfiguration.timingConfiguration.autoreverses ? 2.0 : 1.0
+        let realDuration = animationDuration * durationMultiplier / speed * repeatCount
         return animationStartedAt.distance(to: Date()) < realDuration
 
       case nil, .paused:
