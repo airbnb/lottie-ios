@@ -363,6 +363,10 @@ extension CoreAnimationLayer: RootAnimationLayer {
     case nil:
       switch playbackState {
       case .playing:
+        if animation(forKey: #keyPath(animationProgress)) != nil {
+          return true
+        }
+
         guard let animationStartedAt, let currentAnimationConfiguration else { return false }
         if currentAnimationConfiguration.timingConfiguration.repeatCount == .greatestFiniteMagnitude {
           return true
