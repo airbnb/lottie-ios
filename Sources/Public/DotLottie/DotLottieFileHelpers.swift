@@ -266,33 +266,48 @@ extension DotLottieFile {
   /// Loads a DotLottie animation asynchronously from the URL.
   ///
   /// - Parameter url: The url to load the animation from.
-  /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LRUAnimationCache.sharedCache`. Optional.
+  /// - Parameter session: The `URLSession` used to load the animation. Defaults to `URLSession.shared`.
+  /// - Parameter dotLottieCache: A cache for holding loaded animations. Defaults to `DotLottieCache.sharedCache`. Optional.
+  ///
+  /// - Returns: Loaded DotLottie animation.
   public static func loadedFrom(
     url: URL,
     session: URLSession = .shared,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
     async throws -> DotLottieFile
   {
-    try await withCheckedThrowingContinuation { continuation in
-      DotLottieFile.loadedFrom(url: url, session: session, dotLottieCache: dotLottieCache) { result in
-        continuation.resume(with: result)
+    var dataTask: URLSessionDataTask?
+    let cancelTask = { dataTask?.cancel() }
+    return try await withTaskCancellationHandler {
+      try await withCheckedThrowingContinuation { continuation in
+        dataTask = DotLottieFile.loadedFrom(url: url, session: session, dotLottieCache: dotLottieCache) { result in
+          continuation.resume(with: result)
+        }
       }
+    } onCancel: {
+      cancelTask()
     }
   }
 
   /// Loads a DotLottie animation asynchronously from the URL.
   ///
   /// - Parameter url: The url to load the animation from.
-  /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LRUAnimationCache.sharedCache`. Optional.
+  /// - Parameter session: The `URLSession` used to load the animation. Defaults to `URLSession.shared`.
+  /// - Parameter dotLottieCache: A cache for holding loaded animations. Defaults to `DotLottieCache.sharedCache`. Optional.
   /// - Parameter handleResult: A closure to be called when the animation has loaded.
+  ///
+  /// - Returns: `URLSessionDataTask` that can be used to cancel the request, or `nil` if the animation was loaded from cache.
+  @discardableResult
   public static func loadedFrom(
     url: URL,
     session: URLSession = .shared,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
+    -> URLSessionDataTask?
   {
     if let dotLottieCache, let lottie = dotLottieCache.file(forKey: url.absoluteString) {
       handleResult(.success(lottie))
+      return nil
     } else {
       let task = session.dataTask(with: url) { data, _, error in
         do {
@@ -314,6 +329,7 @@ extension DotLottieFile {
         }
       }
       task.resume()
+      return task
     }
   }
 
