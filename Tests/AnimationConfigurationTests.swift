@@ -64,4 +64,15 @@ final class AnimationConfigurationTests: XCTestCase {
 
     XCTAssertEqual(config.expectedAnimationDuration, 6.0, accuracy: 0.0001)
   }
+
+  func testExpectedDuration_ComplexContext() {
+    let context = AnimationContext(playFrom: 30, playTo: 300, framerate: 30, closure: nil)
+    let timing = CoreAnimationLayer.CAMediaTimingConfiguration(autoreverses: true, repeatCount: 3, speed: 2, timeOffset: 2)
+    let config = CoreAnimationLayer.AnimationConfiguration(
+      animationContext: context,
+      timingConfiguration: timing,
+      recordHierarchyKeypath: nil)
+
+    XCTAssertEqual(config.expectedAnimationDuration, 25.0, accuracy: 0.0001)
+  }
 }

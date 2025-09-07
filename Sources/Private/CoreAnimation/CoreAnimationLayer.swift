@@ -90,7 +90,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
       let durationMultiplier = timingConfiguration.autoreverses ? 2.0 : 1.0
       let speed = Double(timingConfiguration.speed)
       let repeatCount = Double(timingConfiguration.repeatCount)
-      return animationDuration * durationMultiplier / speed * repeatCount
+      let timeOffset = timingConfiguration.timeOffset
+      return animationDuration * durationMultiplier / speed * repeatCount - timeOffset
     }
 
     static func ==(_ lhs: AnimationConfiguration, _ rhs: AnimationConfiguration) -> Bool {
