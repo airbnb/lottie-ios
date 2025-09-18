@@ -296,7 +296,7 @@ extension LottieAnimation {
   {
     let progressTime: AnimationFrameTime
     let frameDuration = endFrame - startFrame
-    
+
     if frameDuration == 0.0 {
       progressTime = 0.0
     } else {
