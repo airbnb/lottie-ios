@@ -587,11 +587,17 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     // prohibitive to do so on every state update.
     if animationSource.animation !== view.animation {
       view.loadAnimation(animationSource)
-      animationDidLoad?(animationSource)
 
       // Invalidate the intrinsic size of the SwiftUI measurement container,
       // since any cached measurements will be out of date after updating the animation.
       container.invalidateIntrinsicContentSize()
+
+      // Call the `animationDidLoad` asynchronously
+      // to prevent consumers that update state in that callback from
+      // causing SwiftUI to emit warnings about modifying state during view updates.
+      DispatchQueue.main.async {
+        animationDidLoad?(animationSource)
+      }
     }
 
     if
