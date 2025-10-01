@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "Lottie",
+  name: "TMGLottie",
   // Minimum platform versions should be kept in sync with the per-platform targets in Lottie.xcodeproj, lottie-ios.podspec, and lottie-spm's Package.swift
   platforms: [.iOS("13.0"), .macOS("10.15"), .tvOS("13.0"), .custom("visionOS", versionString: "1.0")],
   products: [.library(name: "Lottie", targets: ["Lottie"])],
