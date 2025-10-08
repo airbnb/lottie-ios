@@ -562,6 +562,7 @@
 		19465F52282F998B00BB2C97 /* CachedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19465F51282F998B00BB2C97 /* CachedImageProvider.swift */; };
 		19465F53282F998B00BB2C97 /* CachedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19465F51282F998B00BB2C97 /* CachedImageProvider.swift */; };
 		19465F54282F998B00BB2C97 /* CachedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19465F51282F998B00BB2C97 /* CachedImageProvider.swift */; };
+		263C0AE32E5CA0D30063205E /* AnimationConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263C0AE22E5CA0D30063205E /* AnimationConfigurationTests.swift */; };
 		2E044E272820536800FA773B /* AutomaticEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E044E262820536800FA773B /* AutomaticEngineTests.swift */; };
 		2E09FA0627B6CEB600BA84E5 /* HardcodedFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */; };
 		2E450DAC283415D500E56D19 /* OpacityAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E450DAB283415D500E56D19 /* OpacityAnimation.swift */; };
@@ -1274,6 +1275,7 @@
 		08FB47C52B23B86500744478 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = Sources/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		08FE934D28F4CCAC00D3A7E6 /* InfiniteOpaqueAnimationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteOpaqueAnimationLayer.swift; sourceTree = "<group>"; };
 		19465F51282F998B00BB2C97 /* CachedImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageProvider.swift; sourceTree = "<group>"; };
+		263C0AE22E5CA0D30063205E /* AnimationConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationConfigurationTests.swift; sourceTree = "<group>"; };
 		2E044E262820536800FA773B /* AutomaticEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticEngineTests.swift; sourceTree = "<group>"; };
 		2E09FA0527B6CEB600BA84E5 /* HardcodedFontProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcodedFontProvider.swift; sourceTree = "<group>"; };
 		2E450DAB283415D500E56D19 /* OpacityAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpacityAnimation.swift; sourceTree = "<group>"; };
@@ -1781,6 +1783,7 @@
 				2E044E262820536800FA773B /* AutomaticEngineTests.swift */,
 				6DB3BDB528243FA5002A276D /* ValueProvidersTests.swift */,
 				D453D8AE28FF9BC600D3F49C /* AnimationCacheProviderTests.swift */,
+				263C0AE22E5CA0D30063205E /* AnimationConfigurationTests.swift */,
 				08CB2680291ED2B700B4F071 /* AnimationViewTests.swift */,
 				2E70F79E295BB6D30089A0EF /* CompatibleAnimationViewTests.swift */,
 				080F5FDB2AB1075000ADC32C /* TextProviderTests.swift */,
@@ -3289,6 +3292,7 @@
 				080F5FDC2AB1075000ADC32C /* TextProviderTests.swift in Sources */,
 				6DB3BDB628243FA5002A276D /* ValueProvidersTests.swift in Sources */,
 				2E72128327BB329C0027BC56 /* AnimationKeypathTests.swift in Sources */,
+				263C0AE32E5CA0D30063205E /* AnimationConfigurationTests.swift in Sources */,
 				2E044E272820536800FA773B /* AutomaticEngineTests.swift in Sources */,
 				D453D8AF28FF9BC600D3F49C /* AnimationCacheProviderTests.swift in Sources */,
 			);

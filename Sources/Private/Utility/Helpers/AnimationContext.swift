@@ -20,15 +20,18 @@ struct AnimationContext {
   init(
     playFrom: AnimationFrameTime,
     playTo: AnimationFrameTime,
+    framerate: Double,
     closure: LottieCompletionBlock?)
   {
     self.playTo = playTo
     self.playFrom = playFrom
+    self.framerate = framerate
     self.closure = AnimationCompletionDelegate(completionBlock: closure)
   }
 
   var playFrom: AnimationFrameTime
   var playTo: AnimationFrameTime
+  var framerate: Double
   var closure: AnimationCompletionDelegate
 
 }
@@ -42,6 +45,7 @@ extension AnimationContext: Equatable {
   static func ==(_ lhs: AnimationContext, _ rhs: AnimationContext) -> Bool {
     lhs.playTo == rhs.playTo
       && lhs.playFrom == rhs.playFrom
+      && lhs.framerate == rhs.framerate
       && (lhs.closure.completionBlock == nil) == (rhs.closure.completionBlock == nil)
   }
 }
