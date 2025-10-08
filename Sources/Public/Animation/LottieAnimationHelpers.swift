@@ -294,7 +294,14 @@ extension LottieAnimation {
     clamped: Bool = true)
     -> AnimationProgressTime
   {
-    let progressTime = ((frameTime - startFrame) / (endFrame - startFrame))
+    let progressTime: AnimationFrameTime
+    let frameDuration = endFrame - startFrame
+
+    if frameDuration == 0.0 {
+      progressTime = 0.0
+    } else {
+      progressTime = ((frameTime - startFrame) / frameDuration)
+    }
 
     if clamped {
       return progressTime.clamp(0, 1)
