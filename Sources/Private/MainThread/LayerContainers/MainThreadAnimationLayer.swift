@@ -69,6 +69,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
       {
         /// We have a layer that requires a matte.
         mattedLayer = layer
+        continue
       }
       addSublayer(layer)
     }
