@@ -71,6 +71,7 @@ final class PreCompositionLayer: CompositionLayer {
       {
         /// We have a layer that requires a matte.
         mattedLayer = layer
+        continue
       }
       contentsLayer.addSublayer(layer)
     }
