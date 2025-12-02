@@ -179,7 +179,7 @@ extension LottieAnimation {
     animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
     async -> LottieAnimation?
   {
-    var dataTask: LottieDataTask?
+    var dataTask: URLSessionDataTask?
     let cancelTask = { dataTask?.cancel() }
     return await withTaskCancellationHandler {
       await withCheckedContinuation { continuation in
@@ -203,14 +203,14 @@ extension LottieAnimation {
   /// - Parameter closure: A closure to be called when the animation has loaded.
   /// - Parameter animationCache: A cache for holding loaded animations. Defaults to `LottieAnimationCache.shared`. Optional.
   ///
-  /// - Returns: `LottieDataTask` that can be used to cancel the request, or `nil` if the animation was loaded from cache.
+  /// - Returns: `URLSessionDataTask` that can be used to cancel the request, or `nil` if the animation was loaded from cache.
   @discardableResult
   public static func loadedFrom(
     url: URL,
     session: LottieURLSession = LottieConfiguration.defaultURLSession,
     closure: @escaping LottieAnimation.DownloadClosure,
     animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
-    -> LottieDataTask?
+    -> URLSessionDataTask?
   {
     if let animationCache, let animation = animationCache.animation(forKey: url.absoluteString) {
       closure(animation)
@@ -235,7 +235,7 @@ extension LottieAnimation {
           }
         }
       }
-      task.resume()
+      task?.resume()
       return task
     }
   }
