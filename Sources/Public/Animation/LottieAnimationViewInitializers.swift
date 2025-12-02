@@ -53,11 +53,12 @@ extension LottieAnimationView {
   /// - Parameter url: The url to load the animation from.
   /// - Parameter imageProvider: An image provider for the animation's image data.
   /// If none is supplied Lottie will search in the main bundle for images.
+  /// - Parameter session: The `LottieURLSession` used to load the animation. Defaults to `LottieConfiguration.defaultURLSession`.
   /// - Parameter closure: A closure to be called when the animation has loaded.
   public convenience init(
     url: URL,
     imageProvider: AnimationImageProvider? = nil,
-    session: URLSession = .shared,
+    session: LottieURLSession = LottieConfiguration.defaultURLSession,
     closure: @escaping LottieAnimationView.DownloadClosure,
     animationCache: AnimationCacheProvider? = LottieAnimationCache.shared,
     configuration: LottieConfiguration = .shared)
@@ -159,13 +160,14 @@ extension LottieAnimationView {
   ///
   /// - Parameter dotLottieUrl: The url to load the lottie file from.
   /// - Parameter animationId: Animation id to play. Optional. Defaults to first animation in file.
+  /// - Parameter session: The `LottieURLSession` used to load the animation. Defaults to `LottieConfiguration.defaultURLSession`.
   /// - Parameter completion: A closure to be called when the animation has loaded.
   public convenience init(
     dotLottieUrl url: URL,
     animationId: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     configuration: LottieConfiguration = .shared,
-    session: URLSession = .shared,
+    session: LottieURLSession = LottieConfiguration.defaultURLSession,
     completion: ((LottieAnimationView, Error?) -> Void)? = nil)
   {
     if let dotLottieCache, let lottie = dotLottieCache.file(forKey: url.absoluteString) {
