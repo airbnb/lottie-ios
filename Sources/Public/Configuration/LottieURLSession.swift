@@ -13,7 +13,7 @@ public protocol LottieURLSession: Sendable {
   ///   - url: The URL to retrieve.
   ///   - completionHandler: The completion handler to call when the load request is complete.
   /// - Returns: A `URLSessionDataTask` that can be resumed or cancelled, or `nil` for mock implementations.
-  func dataTask(
+  func lottieDataTask(
     with url: URL,
     completionHandler: @escaping @Sendable (Data?, URLResponse?, (any Error)?) -> Void)
     -> URLSessionDataTask?
@@ -22,11 +22,11 @@ public protocol LottieURLSession: Sendable {
 // MARK: - URLSession + LottieURLSession
 
 extension URLSession: LottieURLSession {
-  public func dataTask(
+  public func lottieDataTask(
     with url: URL,
     completionHandler: @escaping @Sendable (Data?, URLResponse?, (any Error)?) -> Void)
     -> URLSessionDataTask?
   {
-    dataTask(with: url, completionHandler: completionHandler) as URLSessionDataTask
+    dataTask(with: url, completionHandler: completionHandler)
   }
 }

@@ -216,7 +216,7 @@ extension LottieAnimation {
       closure(animation)
       return nil
     } else {
-      let task = session.dataTask(with: url) { data, _, error in
+      let task = session.lottieDataTask(with: url) { data, _, error in
         guard error == nil, let jsonData = data else {
           DispatchQueue.main.async {
             closure(nil)

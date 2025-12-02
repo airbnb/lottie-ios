@@ -309,7 +309,7 @@ extension DotLottieFile {
       handleResult(.success(lottie))
       return nil
     } else {
-      let task = session.dataTask(with: url) { data, _, error in
+      let task = session.lottieDataTask(with: url) { data, _, error in
         do {
           if let error {
             throw error
