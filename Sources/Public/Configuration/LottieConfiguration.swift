@@ -1,6 +1,7 @@
 // Created by Cal Stephens on 12/13/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
+import Foundation
 import QuartzCore
 
 /// Global configuration options for Lottie animations
@@ -44,4 +45,17 @@ public struct LottieConfiguration: Hashable {
   /// The color space to be used for rendering
   ///  - Defaults to `CGColorSpaceCreateDeviceRGB()`
   public var colorSpace: CGColorSpace
+
+  /// The default URL session used to load remote Lottie animations.
+  ///  - Defaults to `URLSession.shared`
+  ///  - Set this to a custom `LottieURLSession` implementation to control network behavior,
+  ///    such as disabling network requests during screenshot tests.
+  ///
+  /// For screenshot tests, you can disable network requests by providing a mock implementation:
+  /// ```swift
+  /// LottieConfiguration.shared.defaultURLSession = DisabledURLSession()
+  /// ```
+  /// This ensures that animations loaded from URLs will not make actual network requests,
+  /// making screenshot tests more stable and deterministic.
+  public static var defaultURLSession: LottieURLSession = URLSession.shared
 }

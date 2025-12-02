@@ -266,17 +266,17 @@ extension DotLottieFile {
   /// Loads a DotLottie animation asynchronously from the URL.
   ///
   /// - Parameter url: The url to load the animation from.
-  /// - Parameter session: The `URLSession` used to load the animation. Defaults to `URLSession.shared`.
+  /// - Parameter session: The `LottieURLSession` used to load the animation. Defaults to `LottieConfiguration.defaultURLSession`.
   /// - Parameter dotLottieCache: A cache for holding loaded animations. Defaults to `DotLottieCache.sharedCache`. Optional.
   ///
   /// - Returns: Loaded DotLottie animation.
   public static func loadedFrom(
     url: URL,
-    session: URLSession = .shared,
+    session: LottieURLSession = LottieConfiguration.defaultURLSession,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
     async throws -> DotLottieFile
   {
-    var dataTask: URLSessionDataTask?
+    var dataTask: LottieDataTask?
     let cancelTask = { dataTask?.cancel() }
     return try await withTaskCancellationHandler {
       try await withCheckedThrowingContinuation { continuation in
@@ -292,24 +292,24 @@ extension DotLottieFile {
   /// Loads a DotLottie animation asynchronously from the URL.
   ///
   /// - Parameter url: The url to load the animation from.
-  /// - Parameter session: The `URLSession` used to load the animation. Defaults to `URLSession.shared`.
+  /// - Parameter session: The `LottieURLSession` used to load the animation. Defaults to `LottieConfiguration.defaultURLSession`.
   /// - Parameter dotLottieCache: A cache for holding loaded animations. Defaults to `DotLottieCache.sharedCache`. Optional.
   /// - Parameter handleResult: A closure to be called when the animation has loaded.
   ///
-  /// - Returns: `URLSessionDataTask` that can be used to cancel the request, or `nil` if the animation was loaded from cache.
+  /// - Returns: `LottieDataTask` that can be used to cancel the request, or `nil` if the animation was loaded from cache.
   @discardableResult
   public static func loadedFrom(
     url: URL,
-    session: URLSession = .shared,
+    session: LottieURLSession = LottieConfiguration.defaultURLSession,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
-    -> URLSessionDataTask?
+    -> LottieDataTask?
   {
     if let dotLottieCache, let lottie = dotLottieCache.file(forKey: url.absoluteString) {
       handleResult(.success(lottie))
       return nil
     } else {
-      let task = session.dataTask(with: url) { data, _, error in
+      let task = session.lottieDataTask(with: url) { data, _, error in
         do {
           if let error {
             throw error

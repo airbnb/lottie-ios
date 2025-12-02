@@ -97,6 +97,37 @@ In Xcode you can verify this by selecting `Lottie.xcframework` and confirming th
 
 ![Code Signature in Xcode](_Gifs/code_signature.png)
 
+## Screenshot Tests
+
+When running screenshot tests, you may want to disable network requests to ensure more stable and deterministic results. Lottie provides a `LottieURLSession` protocol that allows you to mock or disable network requests.
+
+To disable network requests during screenshot tests, set `LottieConfiguration.defaultURLSession` to a mock implementation:
+
+```swift
+// Create a mock URL session that ignores network requests
+class DisabledURLSession: LottieURLSession {
+  func lottieDataTask(
+    with url: URL,
+    completionHandler: @escaping @Sendable (Data?, URLResponse?, (any Error)?) -> Void)
+    -> LottieDataTask
+  {
+    // Return a no-op task that never makes a network request
+    completionHandler(nil, nil, URLError(.cancelled))
+    return DisabledDataTask()
+  }
+}
+
+class DisabledDataTask: LottieDataTask {
+  func resume() { }
+  func cancel() { }
+}
+
+// In your test setup (e.g., setUp() method):
+LottieConfiguration.defaultURLSession = DisabledURLSession()
+```
+
+This ensures that any Lottie animations loaded from URLs will not make actual network requests, making your screenshot tests more reliable and faster.
+
 ## Contributing
 
 We always appreciate contributions from the community. To make changes to the project, you can clone the repo and open `Lottie.xcworkspace`. This workspace includes:
