@@ -27,6 +27,19 @@ public struct LottieConfiguration: Hashable {
   /// which applies to all `LottieAnimationView`s by default.
   public static var shared = LottieConfiguration()
 
+  /// The default URL session used to load remote Lottie animations.
+  ///  - Defaults to `URLSession.shared`
+  ///  - Set this to a custom `LottieURLSession` implementation to control network behavior,
+  ///    such as disabling network requests during screenshot tests.
+  ///
+  /// For screenshot tests, you can disable network requests by providing a mock implementation:
+  /// ```swift
+  /// LottieConfiguration.defaultURLSession = DisabledURLSession()
+  /// ```
+  /// This ensures that animations loaded from URLs will not make actual network requests,
+  /// making screenshot tests more stable and deterministic.
+  public static var defaultURLSession: LottieURLSession = URLSession.shared
+
   /// The rendering engine implementation to use when displaying an animation
   ///  - Defaults to `RenderingEngineOption.automatic`, which uses the
   ///    Core Animation rendering engine for supported animations, and
@@ -45,17 +58,4 @@ public struct LottieConfiguration: Hashable {
   /// The color space to be used for rendering
   ///  - Defaults to `CGColorSpaceCreateDeviceRGB()`
   public var colorSpace: CGColorSpace
-
-  /// The default URL session used to load remote Lottie animations.
-  ///  - Defaults to `URLSession.shared`
-  ///  - Set this to a custom `LottieURLSession` implementation to control network behavior,
-  ///    such as disabling network requests during screenshot tests.
-  ///
-  /// For screenshot tests, you can disable network requests by providing a mock implementation:
-  /// ```swift
-  /// LottieConfiguration.shared.defaultURLSession = DisabledURLSession()
-  /// ```
-  /// This ensures that animations loaded from URLs will not make actual network requests,
-  /// making screenshot tests more stable and deterministic.
-  public static var defaultURLSession: LottieURLSession = URLSession.shared
 }

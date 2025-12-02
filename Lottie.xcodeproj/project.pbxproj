@@ -336,6 +336,10 @@
 		08AB05552A61C20400DE86FD /* ReducedMotionOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB05542A61C20400DE86FD /* ReducedMotionOption.swift */; };
 		08AB05562A61C20400DE86FD /* ReducedMotionOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB05542A61C20400DE86FD /* ReducedMotionOption.swift */; };
 		08AB05572A61C20400DE86FD /* ReducedMotionOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB05542A61C20400DE86FD /* ReducedMotionOption.swift */; };
+		20439AE0516A49FDB3BA8D42 /* LottieURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135AB552F4524F1D995D3A15 /* LottieURLSession.swift */; };
+		3E8B8C645ABC4C98B91F7B66 /* LottieURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135AB552F4524F1D995D3A15 /* LottieURLSession.swift */; };
+		AB5FA114D9A847068F233099 /* LottieURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135AB552F4524F1D995D3A15 /* LottieURLSession.swift */; };
+		ACC10C5D826649EABEBFB707 /* LottieURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135AB552F4524F1D995D3A15 /* LottieURLSession.swift */; };
 		08AB05592A61C5B700DE86FD /* DecodingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB05582A61C5B700DE86FD /* DecodingStrategy.swift */; };
 		08AB055A2A61C5B700DE86FD /* DecodingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB05582A61C5B700DE86FD /* DecodingStrategy.swift */; };
 		08AB055B2A61C5B700DE86FD /* DecodingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB05582A61C5B700DE86FD /* DecodingStrategy.swift */; };
@@ -1194,6 +1198,7 @@
 		089C50C12ABA0C6D007903D3 /* LoggingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingTests.swift; sourceTree = "<group>"; };
 		089E5D9E2B4CCD3F00F4F836 /* Keyframes+timeRemapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keyframes+timeRemapping.swift"; sourceTree = "<group>"; };
 		08AB05542A61C20400DE86FD /* ReducedMotionOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReducedMotionOption.swift; sourceTree = "<group>"; };
+		135AB552F4524F1D995D3A15 /* LottieURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieURLSession.swift; sourceTree = "<group>"; };
 		08AB05582A61C5B700DE86FD /* DecodingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingStrategy.swift; sourceTree = "<group>"; };
 		08AB055C2A61C5CC00DE86FD /* RenderingEngineOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingEngineOption.swift; sourceTree = "<group>"; };
 		08BCA8452B0E8E0B00594EEB /* LRUCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRUCache.swift; sourceTree = "<group>"; };
@@ -1566,6 +1571,7 @@
 			children = (
 				2EAF59C727A0798700E00531 /* LottieConfiguration.swift */,
 				08AB05542A61C20400DE86FD /* ReducedMotionOption.swift */,
+				135AB552F4524F1D995D3A15 /* LottieURLSession.swift */,
 				08AB05582A61C5B700DE86FD /* DecodingStrategy.swift */,
 				08AB055C2A61C5CC00DE86FD /* RenderingEngineOption.swift */,
 			);
@@ -2815,6 +2821,7 @@
 				080DF0792A95717F00BE2D96 /* KeyframeExtensions.swift in Sources */,
 				080DF0062A95712D00BE2D96 /* ShapeCompositionLayer.swift in Sources */,
 				080DEF702A95709700BE2D96 /* ReducedMotionOption.swift in Sources */,
+				20439AE0516A49FDB3BA8D42 /* LottieURLSession.swift in Sources */,
 				080DEFCF2A95711400BE2D96 /* URL+ZIP.swift in Sources */,
 				080DEFEE2A95711E00BE2D96 /* TransformLayer.swift in Sources */,
 				080DEFC52A95710F00BE2D96 /* ViewType.swift in Sources */,
@@ -3054,6 +3061,7 @@
 				2EAF5A9B27A0798700E00531 /* BundleImageProvider.macOS.swift in Sources */,
 				2E9C969F2822F43100677516 /* TextAnimatorNode.swift in Sources */,
 				08AB05552A61C20400DE86FD /* ReducedMotionOption.swift in Sources */,
+				3E8B8C645ABC4C98B91F7B66 /* LottieURLSession.swift in Sources */,
 				2EAF5AFB27A0798700E00531 /* SizeValueProvider.swift in Sources */,
 				2E9C97562822F43100677516 /* MathKit.swift in Sources */,
 				2E9C96902822F43100677516 /* EllipseNode.swift in Sources */,
@@ -3549,6 +3557,7 @@
 				2E9C96E82822F43100677516 /* ImageLayer.swift in Sources */,
 				2E9C972D2822F43100677516 /* StarAnimation.swift in Sources */,
 				08AB05562A61C20400DE86FD /* ReducedMotionOption.swift in Sources */,
+				AB5FA114D9A847068F233099 /* LottieURLSession.swift in Sources */,
 				2E9C96E22822F43100677516 /* LayerModel+makeAnimationLayer.swift in Sources */,
 				08E207372A56014E002DCE17 /* MakeViewProviding.swift in Sources */,
 				2E9C96A92822F43100677516 /* FillNode.swift in Sources */,
@@ -3659,6 +3668,7 @@
 				2E9C96A12822F43100677516 /* TextAnimatorNode.swift in Sources */,
 				2EAF5AFD27A0798700E00531 /* SizeValueProvider.swift in Sources */,
 				08AB05572A61C20400DE86FD /* ReducedMotionOption.swift in Sources */,
+				ACC10C5D826649EABEBFB707 /* LottieURLSession.swift in Sources */,
 				2E9C97582822F43100677516 /* MathKit.swift in Sources */,
 				2E9C96922822F43100677516 /* EllipseNode.swift in Sources */,
 				2E9C975B2822F43100677516 /* BezierPath.swift in Sources */,
