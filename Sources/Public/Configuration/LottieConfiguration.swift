@@ -31,13 +31,6 @@ public struct LottieConfiguration: Hashable {
   ///  - Defaults to `URLSession.shared`
   ///  - Set this to a custom `LottieURLSession` implementation to control network behavior,
   ///    such as disabling network requests during screenshot tests.
-  ///
-  /// For screenshot tests, you can disable network requests by providing a mock implementation:
-  /// ```swift
-  /// LottieConfiguration.defaultURLSession = DisabledURLSession()
-  /// ```
-  /// This ensures that animations loaded from URLs will not make actual network requests,
-  /// making screenshot tests more stable and deterministic.
   public static var defaultURLSession: LottieURLSession = URLSession.shared
 
   /// The rendering engine implementation to use when displaying an animation
