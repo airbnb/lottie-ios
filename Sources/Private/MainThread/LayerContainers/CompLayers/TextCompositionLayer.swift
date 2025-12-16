@@ -91,8 +91,8 @@ final class TextCompositionLayer: CompositionLayer {
     rootNode = nil
     textDocument = nil
 
-    fillColorNode = layer.fillColorNode
-    strokeColorNode = layer.strokeColorNode
+    fillColorNode = NodeProperty(provider: layer.fillColorNode.valueProvider)
+    strokeColorNode = NodeProperty(provider: layer.strokeColorNode.valueProvider)
 
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
@@ -123,13 +123,13 @@ final class TextCompositionLayer: CompositionLayer {
   override var keypathProperties: [String: AnyNodeProperty] {
     guard let rootNode = rootNode else {
       return [
-        "Color": fillColorNode,
-        "Stroke Color": strokeColorNode,
+        PropertyName.color.rawValue: fillColorNode,
+        PropertyName.strokeColor.rawValue: strokeColorNode,
       ]
     }
     var properties = super.keypathProperties
-    properties["Color"] = fillColorNode
-    properties["Stroke Color"] = strokeColorNode
+    properties[PropertyName.color.rawValue] = fillColorNode
+    properties[PropertyName.strokeColor.rawValue] = strokeColorNode
     return properties
   }
   
