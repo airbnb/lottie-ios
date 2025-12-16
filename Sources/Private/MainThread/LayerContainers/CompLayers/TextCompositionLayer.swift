@@ -59,6 +59,12 @@ final class TextCompositionLayer: CompositionLayer {
     self.rootNode = rootNode
     textDocument = KeyframeInterpolator(keyframes: textLayer.text.keyframes)
 
+    let fillKeyframes = textLayer.text.keyframes.map { $0.withValue($0.value.fillColorData ?? LottieColor(r: 0, g: 0, b: 0, a: 0)) }
+    fillColorNode = NodeProperty(provider: KeyframeInterpolator(keyframes: ContiguousArray(fillKeyframes)))
+
+    let strokeKeyframes = textLayer.text.keyframes.map { $0.withValue($0.value.strokeColorData ?? LottieColor(r: 0, g: 0, b: 0, a: 0)) }
+    strokeColorNode = NodeProperty(provider: KeyframeInterpolator(keyframes: ContiguousArray(strokeKeyframes)))
+
     self.textProvider = textProvider
     self.fontProvider = fontProvider
     self.rootAnimationLayer = rootAnimationLayer
@@ -85,6 +91,9 @@ final class TextCompositionLayer: CompositionLayer {
     rootNode = nil
     textDocument = nil
 
+    fillColorNode = layer.fillColorNode
+    strokeColorNode = layer.strokeColorNode
+
     textProvider = DefaultTextProvider()
     fontProvider = DefaultFontProvider()
 
@@ -95,6 +104,9 @@ final class TextCompositionLayer: CompositionLayer {
 
   let rootNode: TextAnimatorNode?
   let textDocument: KeyframeInterpolator<TextDocument>?
+
+  let fillColorNode: NodeProperty<LottieColor>
+  let strokeColorNode: NodeProperty<LottieColor>
 
   let textLayer = CoreTextRenderLayer()
   var textProvider: AnimationKeypathTextProvider
@@ -108,14 +120,30 @@ final class TextCompositionLayer: CompositionLayer {
     // If that failed for some reason, just use the last path component (which we do have here)
     ?? AnimationKeypath(keypath: keypathName)
 
+  override var keypathProperties: [String: AnyNodeProperty] {
+    guard let rootNode = rootNode else {
+      return [
+        "Color": fillColorNode,
+        "Stroke Color": strokeColorNode,
+      ]
+    }
+    var properties = super.keypathProperties
+    properties["Color"] = fillColorNode
+    properties["Stroke Color"] = strokeColorNode
+    return properties
+  }
+  
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
     guard let textDocument else { return }
 
     textLayer.contentsScale = renderScale
 
+    fillColorNode.update(frame: frame)
+    strokeColorNode.update(frame: frame)
+
     let documentUpdate = textDocument.hasUpdate(frame: frame)
     let animatorUpdate = rootNode?.updateContents(frame, forceLocalUpdate: forceUpdates) ?? false
-    guard documentUpdate == true || animatorUpdate == true else { return }
+    guard documentUpdate == true || animatorUpdate == true || fillColorNode.needsUpdate(frame: frame) || strokeColorNode.needsUpdate(frame: frame) else { return }
 
     rootNode?.rebuildOutputs(frame: frame)
 
@@ -134,7 +162,7 @@ final class TextCompositionLayer: CompositionLayer {
         text.text
       }
 
-    let strokeColor = rootNode?.textOutputNode.strokeColor ?? text.strokeColorData?.cgColorValue
+    let strokeColor = rootNode?.textOutputNode.strokeColor ?? strokeColorNode.value.cgColorValue
     let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
     let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
     let matrix = rootNode?.textOutputNode.xform ?? CATransform3DIdentity
@@ -159,10 +187,8 @@ final class TextCompositionLayer: CompositionLayer {
 
     if let fillColor = rootNode?.textOutputNode.fillColor {
       textLayer.fillColor = fillColor
-    } else if let fillColor = text.fillColorData?.cgColorValue {
-      textLayer.fillColor = fillColor
     } else {
-      textLayer.fillColor = nil
+      textLayer.fillColor = fillColorNode.value.cgColorValue
     }
 
     textLayer.preferredSize = text.textFrameSize?.sizeValue

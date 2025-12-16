@@ -67,6 +67,23 @@ final class TextLayer: BaseCompositionLayer {
     }
 
     renderLayer.sizeToFit()
+
+    // Check if there are any dynamic color overrides for this text layer.
+    if let customFillColor = try textAnimationContext.valueProviderStore.customKeyframes(
+      of: .color,
+      for: textAnimationContext.currentKeypath.appendingKey("Color"),
+      context: textAnimationContext)
+    {
+      renderLayer.fillColor = customFillColor.keyframes[0].value
+    }
+
+    if let customStrokeColor = try textAnimationContext.valueProviderStore.customKeyframes(
+      of: .color,
+      for: textAnimationContext.currentKeypath.appendingKey("Stroke Color"),
+      context: textAnimationContext)
+    {
+      renderLayer.strokeColor = customStrokeColor.keyframes[0].value
+    }
   }
 
   func configureRenderLayer(with context: LayerContext) throws {
