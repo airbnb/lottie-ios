@@ -59,10 +59,16 @@ final class TextCompositionLayer: CompositionLayer {
     self.rootNode = rootNode
     textDocument = KeyframeInterpolator(keyframes: textLayer.text.keyframes)
 
-    let fillKeyframes = textLayer.text.keyframes.map { $0.withValue($0.value.fillColorData ?? LottieColor(r: 0, g: 0, b: 0, a: 0)) }
+    let transparent = LottieColor(r: 0, g: 0, b: 0, a: 0)
+
+    let fillKeyframes = textLayer.text.keyframes.map { keyframe in
+      keyframe.withValue(keyframe.value.fillColorData ?? transparent)
+    }
     fillColorNode = NodeProperty(provider: KeyframeInterpolator(keyframes: ContiguousArray(fillKeyframes)))
 
-    let strokeKeyframes = textLayer.text.keyframes.map { $0.withValue($0.value.strokeColorData ?? LottieColor(r: 0, g: 0, b: 0, a: 0)) }
+    let strokeKeyframes = textLayer.text.keyframes.map { keyframe in
+      keyframe.withValue(keyframe.value.strokeColorData ?? transparent)
+    }
     strokeColorNode = NodeProperty(provider: KeyframeInterpolator(keyframes: ContiguousArray(strokeKeyframes)))
 
     self.textProvider = textProvider
