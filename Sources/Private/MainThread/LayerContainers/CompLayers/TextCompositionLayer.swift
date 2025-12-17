@@ -160,16 +160,18 @@ final class TextCompositionLayer: CompositionLayer {
     // Prior to Lottie 4.3.0 the Main Thread rendering engine always just used `LegacyAnimationTextProvider`
     // and called it with the `keypathName` (only the last path component of the full keypath).
     // Starting in Lottie 4.3.0 we use `AnimationKeypathTextProvider` instead if implemented.
-    let textString: String =
-      if let keypathTextValue = textProvider.text(for: fullAnimationKeypath, sourceText: text.text) {
-        keypathTextValue
-      } else if let legacyTextProvider = textProvider as? LegacyAnimationTextProvider {
-        legacyTextProvider.textFor(keypathName: keypathName, sourceText: text.text)
-      } else {
-        text.text
-      }
+    let textString: String
+    if let keypathTextValue = textProvider.text(for: fullAnimationKeypath, sourceText: text.text) {
+      textString = keypathTextValue
+    } else if let legacyTextProvider = textProvider as? LegacyAnimationTextProvider {
+      textString = legacyTextProvider.textFor(keypathName: keypathName, sourceText: text.text)
+    } else {
+      textString = text.text
+    }
 
-    let isStrokeOverridden = (strokeColorNode.valueProvider as? AnyObject) !== (strokeColorNode.originalValueProvider as? AnyObject)
+    let isStrokeOverridden =
+      (strokeColorNode.valueProvider as AnyObject) !== (strokeColorNode.originalValueProvider as AnyObject)
+
     let strokeColor: CGColor?
     if let animatorStroke = rootNode?.textOutputNode.strokeColor {
       strokeColor = animatorStroke
@@ -201,7 +203,9 @@ final class TextCompositionLayer: CompositionLayer {
     textLayer.textRangeUnit = textRangeUnit
     textLayer.selectedRangeOpacity = selectedRangeOpacity
 
-    let isFillOverridden = (fillColorNode.valueProvider as? AnyObject) !== (fillColorNode.originalValueProvider as? AnyObject)
+    let isFillOverridden =
+      (fillColorNode.valueProvider as AnyObject) !== (fillColorNode.originalValueProvider as AnyObject)
+
     if let fillColor = rootNode?.textOutputNode.fillColor {
       textLayer.fillColor = fillColor
     } else if isFillOverridden {
