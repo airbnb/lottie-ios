@@ -73,7 +73,9 @@ final class TextLayer: BaseCompositionLayer {
     // Animated ValueProviders will only have their first keyframe applied.
     if let customFillColor = try textAnimationContext.valueProviderStore.customKeyframes(
       of: .color,
-      for: textAnimationContext.currentKeypath.appendingKey(PropertyName.color.rawValue),
+      for: textAnimationContext
+        .currentKeypath
+        .appendingKey(PropertyName.color.rawValue),
       context: textAnimationContext)
     {
       renderLayer.fillColor = customFillColor.keyframes[0].value
@@ -81,7 +83,9 @@ final class TextLayer: BaseCompositionLayer {
 
     if let customStrokeColor = try textAnimationContext.valueProviderStore.customKeyframes(
       of: .color,
-      for: textAnimationContext.currentKeypath.appendingKey(PropertyName.strokeColor.rawValue),
+      for: textAnimationContext
+        .currentKeypath
+        .appendingKey(PropertyName.strokeColor.rawValue),
       context: textAnimationContext)
     {
       renderLayer.strokeColor = customStrokeColor.keyframes[0].value

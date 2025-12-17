@@ -139,18 +139,23 @@ final class TextCompositionLayer: CompositionLayer {
     properties[PropertyName.strokeColor.rawValue] = strokeColorNode
     return properties
   }
-  
+
   override func displayContentsWithFrame(frame: CGFloat, forceUpdates: Bool) {
     guard let textDocument else { return }
 
     textLayer.contentsScale = renderScale
-    
+
     fillColorNode.update(frame: frame)
     strokeColorNode.update(frame: frame)
 
     let documentUpdate = textDocument.hasUpdate(frame: frame)
     let animatorUpdate = rootNode?.updateContents(frame, forceLocalUpdate: forceUpdates) ?? false
-    guard documentUpdate == true || animatorUpdate == true || fillColorNode.needsUpdate(frame: frame) || strokeColorNode.needsUpdate(frame: frame) else { return }
+    guard
+      documentUpdate == true ||
+      animatorUpdate == true ||
+      fillColorNode.needsUpdate(frame: frame) ||
+      strokeColorNode.needsUpdate(frame: frame)
+    else { return }
 
     rootNode?.rebuildOutputs(frame: frame)
 
@@ -160,25 +165,23 @@ final class TextCompositionLayer: CompositionLayer {
     // Prior to Lottie 4.3.0 the Main Thread rendering engine always just used `LegacyAnimationTextProvider`
     // and called it with the `keypathName` (only the last path component of the full keypath).
     // Starting in Lottie 4.3.0 we use `AnimationKeypathTextProvider` instead if implemented.
-    let textString: String
-    if let keypathTextValue = textProvider.text(for: fullAnimationKeypath, sourceText: text.text) {
-      textString = keypathTextValue
+    let textString: String = if let keypathTextValue = textProvider.text(for: fullAnimationKeypath, sourceText: text.text) {
+      keypathTextValue
     } else if let legacyTextProvider = textProvider as? LegacyAnimationTextProvider {
-      textString = legacyTextProvider.textFor(keypathName: keypathName, sourceText: text.text)
+      legacyTextProvider.textFor(keypathName: keypathName, sourceText: text.text)
     } else {
-      textString = text.text
+      text.text
     }
 
     let isStrokeOverridden =
       (strokeColorNode.valueProvider as AnyObject) !== (strokeColorNode.originalValueProvider as AnyObject)
 
-    let strokeColor: CGColor?
-    if let animatorStroke = rootNode?.textOutputNode.strokeColor {
-      strokeColor = animatorStroke
+    let strokeColor: CGColor? = if let animatorStroke = rootNode?.textOutputNode.strokeColor {
+      animatorStroke
     } else if isStrokeOverridden {
-      strokeColor = strokeColorNode.value.cgColorValue
+      strokeColorNode.value.cgColorValue
     } else {
-      strokeColor = text.strokeColorData?.cgColorValue
+      text.strokeColorData?.cgColorValue
     }
 
     let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
@@ -206,12 +209,12 @@ final class TextCompositionLayer: CompositionLayer {
     let isFillOverridden =
       (fillColorNode.valueProvider as AnyObject) !== (fillColorNode.originalValueProvider as AnyObject)
 
-    if let fillColor = rootNode?.textOutputNode.fillColor {
-      textLayer.fillColor = fillColor
+    textLayer.fillColor = if let fillColor = rootNode?.textOutputNode.fillColor {
+      fillColor
     } else if isFillOverridden {
-      textLayer.fillColor = fillColorNode.value.cgColorValue
+      fillColorNode.value.cgColorValue
     } else {
-      textLayer.fillColor = text.fillColorData?.cgColorValue
+      text.fillColorData?.cgColorValue
     }
 
     textLayer.preferredSize = text.textFrameSize?.sizeValue
@@ -219,7 +222,7 @@ final class TextCompositionLayer: CompositionLayer {
     textLayer.strokeWidth = strokeWidth
     textLayer.strokeColor = strokeColor
     textLayer.sizeToFit()
-    
+
     textLayer.opacity = Float(rootNode?.textOutputNode.opacity ?? 1)
     textLayer.transform = CATransform3DIdentity
     textLayer.position = text.textFramePosition?.pointValue ?? CGPoint.zero
