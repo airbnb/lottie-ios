@@ -165,24 +165,26 @@ final class TextCompositionLayer: CompositionLayer {
     // Prior to Lottie 4.3.0 the Main Thread rendering engine always just used `LegacyAnimationTextProvider`
     // and called it with the `keypathName` (only the last path component of the full keypath).
     // Starting in Lottie 4.3.0 we use `AnimationKeypathTextProvider` instead if implemented.
-    let textString: String = if let keypathTextValue = textProvider.text(for: fullAnimationKeypath, sourceText: text.text) {
-      keypathTextValue
-    } else if let legacyTextProvider = textProvider as? LegacyAnimationTextProvider {
-      legacyTextProvider.textFor(keypathName: keypathName, sourceText: text.text)
-    } else {
-      text.text
-    }
+    let textString: String =
+      if let keypathTextValue = textProvider.text(for: fullAnimationKeypath, sourceText: text.text) {
+        keypathTextValue
+      } else if let legacyTextProvider = textProvider as? LegacyAnimationTextProvider {
+        legacyTextProvider.textFor(keypathName: keypathName, sourceText: text.text)
+      } else {
+        text.text
+      }
 
     let isStrokeOverridden =
       (strokeColorNode.valueProvider as AnyObject) !== (strokeColorNode.originalValueProvider as AnyObject)
 
-    let strokeColor: CGColor? = if let animatorStroke = rootNode?.textOutputNode.strokeColor {
-      animatorStroke
-    } else if isStrokeOverridden {
-      strokeColorNode.value.cgColorValue
-    } else {
-      text.strokeColorData?.cgColorValue
-    }
+    let strokeColor: CGColor? =
+      if let animatorStroke = rootNode?.textOutputNode.strokeColor {
+        animatorStroke
+      } else if isStrokeOverridden {
+        strokeColorNode.value.cgColorValue
+      } else {
+        text.strokeColorData?.cgColorValue
+      }
 
     let strokeWidth = rootNode?.textOutputNode.strokeWidth ?? CGFloat(text.strokeWidth ?? 0)
     let tracking = (CGFloat(text.fontSize) * (rootNode?.textOutputNode.tracking ?? CGFloat(text.tracking))) / 1000.0
@@ -209,13 +211,14 @@ final class TextCompositionLayer: CompositionLayer {
     let isFillOverridden =
       (fillColorNode.valueProvider as AnyObject) !== (fillColorNode.originalValueProvider as AnyObject)
 
-    textLayer.fillColor = if let fillColor = rootNode?.textOutputNode.fillColor {
-      fillColor
-    } else if isFillOverridden {
-      fillColorNode.value.cgColorValue
-    } else {
-      text.fillColorData?.cgColorValue
-    }
+    textLayer.fillColor =
+      if let fillColor = rootNode?.textOutputNode.fillColor {
+        fillColor
+      } else if isFillOverridden {
+        fillColorNode.value.cgColorValue
+      } else {
+        text.fillColorData?.cgColorValue
+      }
 
     textLayer.preferredSize = text.textFrameSize?.sizeValue
     textLayer.strokeOnTop = text.strokeOverFill ?? false
