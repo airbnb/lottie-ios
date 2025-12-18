@@ -208,6 +208,14 @@ final class TextCompositionLayer: CompositionLayer {
     textLayer.textRangeUnit = textRangeUnit
     textLayer.selectedRangeOpacity = selectedRangeOpacity
 
+    // Check for an explicit override. If not overridden, we default to `TextDocument` 
+    // to support transparency (avoiding the default black color of the value provider).
+    // `fillColorNode` is non-optional and defaults to black if the color was not overridden.
+    // If the color has been overridden, we use the new color: `fillColorNode.value.cgColorValue`.
+    // Otherwise, we use the default color from the text: `text.fillColorData?.cgColorValue`.
+    //
+    // We cannot remove the cast since `AnyValueProvider` is not a class-bound protocol, 
+    // so we must cast to `AnyObject` to perform an identity comparison.
     let isFillOverridden =
       (fillColorNode.valueProvider as AnyObject) !== (fillColorNode.originalValueProvider as AnyObject)
 

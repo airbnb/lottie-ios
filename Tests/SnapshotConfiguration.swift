@@ -82,6 +82,11 @@ extension SnapshotConfiguration {
     "DotLottie/animation_inline_image": .precision(0.95),
     "LottieFiles/gradient_shapes": .precision(0.95),
 
+    /// Tests that the text color can be updated using a ValueProvider
+    "Nonanimating/TextColorTest": .customValueProviders([
+      "**.TEXT.Color": ColorValueProvider(.red),
+    ]),
+
     /// Test cases for the `AnimationKeypath` / `AnyValueProvider` system
     "Nonanimating/keypathTest": .customValueProviders([
       "**.Stroke 1.Color": ColorValueProvider(.black),

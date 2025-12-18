@@ -79,6 +79,12 @@ final class TextLayer: BaseCompositionLayer {
           .appendingKey(PropertyName.color.rawValue),
         context: textAnimationContext)
     {
+      if customFillColor.keyframes.count > 1 {
+        try textAnimationContext.logCompatibilityIssue("""
+          The Core Animation rendering engine currently doesn't support animated text color overrides.
+          """)
+      }
+
       renderLayer.fillColor = customFillColor.keyframes[0].value
     }
 
