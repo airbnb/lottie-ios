@@ -83,7 +83,7 @@ extension SnapshotConfiguration {
     "LottieFiles/gradient_shapes": .precision(0.95),
 
     /// Tests that the text color can be updated using a ValueProvider
-    "Nonanimating/TextColorTest": .customValueProviders([
+    "Nonanimating/Text_Color": .customValueProviders([
       "**.TEXT.Color": ColorValueProvider(.red),
     ]),
 
