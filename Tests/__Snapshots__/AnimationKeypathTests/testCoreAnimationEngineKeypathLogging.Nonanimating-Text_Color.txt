@@ -1,0 +1,7 @@
+TEXT.Color
+TEXT.Stroke Color
+TEXT.Transform.Opacity
+TEXT.Transform.Position
+TEXT.Transform.Rotation
+TEXT.Transform.Scale
+TEXT.Transform.Scale
