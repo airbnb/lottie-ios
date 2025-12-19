@@ -81,6 +81,7 @@ enum PropertyName: String, CaseIterable {
   case rotation = "Rotation"
   case strokeWidth = "Stroke Width"
   case gradientColors = "Colors"
+  case strokeColor = "Stroke Color"
 }
 
 // MARK: CALayer properties

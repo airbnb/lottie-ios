@@ -67,6 +67,37 @@ final class TextLayer: BaseCompositionLayer {
     }
 
     renderLayer.sizeToFit()
+
+    // Check if there are any dynamic color overrides for this text layer.
+    // NOTE: The Core Animation engine currently only supports static color overrides for text.
+    // Animated ValueProviders will only have their first keyframe applied.
+    if
+      let customFillColor = try textAnimationContext.valueProviderStore.customKeyframes(
+        of: .color,
+        for: textAnimationContext
+          .currentKeypath
+          .appendingKey(PropertyName.color.rawValue),
+        context: textAnimationContext)
+    {
+      if customFillColor.keyframes.count > 1 {
+        try textAnimationContext.logCompatibilityIssue("""
+          The Core Animation rendering engine currently doesn't support animated text color overrides.
+          """)
+      }
+
+      renderLayer.fillColor = customFillColor.keyframes[0].value
+    }
+
+    if
+      let customStrokeColor = try textAnimationContext.valueProviderStore.customKeyframes(
+        of: .color,
+        for: textAnimationContext
+          .currentKeypath
+          .appendingKey(PropertyName.strokeColor.rawValue),
+        context: textAnimationContext)
+    {
+      renderLayer.strokeColor = customStrokeColor.keyframes[0].value
+    }
   }
 
   func configureRenderLayer(with context: LayerContext) throws {
