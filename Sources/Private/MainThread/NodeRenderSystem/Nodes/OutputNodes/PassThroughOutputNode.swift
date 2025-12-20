@@ -7,7 +7,8 @@
 
 import CoreGraphics
 
-final class PassThroughOutputNode: NodeOutput {
+/// Base class for pass-through nodes
+class PassThroughOutputNode: NodeOutput {
 
   // MARK: Lifecycle
 

@@ -37,7 +37,8 @@ extension EffectValueType: ClassFamily {
 
 // MARK: - EffectValue
 
-final class EffectValue: Codable, DictionaryInitializable {
+/// Base class for layer effects
+class EffectValue: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 

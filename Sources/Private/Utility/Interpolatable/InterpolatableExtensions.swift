@@ -76,7 +76,7 @@ extension LottieColor {
 
     var h: Double
     var s: Double
-    var v: Double = maxValue
+    let v = maxValue
 
     let d = maxValue - minValue
     s = maxValue == 0 ? 0 : d / maxValue

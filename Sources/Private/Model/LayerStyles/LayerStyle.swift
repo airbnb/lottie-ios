@@ -30,7 +30,8 @@ extension LayerStyleType: ClassFamily {
 
 // MARK: - LayerStyle
 
-final class LayerStyle: Codable, DictionaryInitializable {
+/// Base class for layer styles
+class LayerStyle: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 

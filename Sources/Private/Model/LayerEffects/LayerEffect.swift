@@ -31,7 +31,8 @@ extension LayerEffectType: ClassFamily {
 
 // MARK: - LayerEffect
 
-final class LayerEffect: Codable, DictionaryInitializable {
+/// Base class for layer effects
+class LayerEffect: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 

@@ -73,8 +73,8 @@ extension ShapeType: ClassFamily {
 
 // MARK: - ShapeItem
 
-/// An item belonging to a Shape Layer
-final class ShapeItem: Codable, DictionaryInitializable {
+/// Base class for items belonging to a Shape Layer
+class ShapeItem: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
