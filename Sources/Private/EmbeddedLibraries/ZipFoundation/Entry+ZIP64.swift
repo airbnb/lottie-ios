@@ -23,9 +23,10 @@ extension Entry {
   }
 
   struct ZIP64ExtendedInformation: ExtensibleDataField {
+    static let headerSize: UInt16 = 4
+
     let headerID: UInt16 = ExtraFieldHeaderID.zip64ExtendedInformation.rawValue
     let dataSize: UInt16
-    static let headerSize: UInt16 = 4
     let uncompressedSize: UInt64
     let compressedSize: UInt64
     let relativeOffsetOfLocalHeader: UInt64
@@ -41,7 +42,7 @@ typealias Field = Entry.ZIP64ExtendedInformation.Field
 
 extension Entry.LocalFileHeader {
   var validFields: [Field] {
-    var fields: [Field] = []
+    var fields = [Field]()
     if uncompressedSize == .max { fields.append(.uncompressedSize) }
     if compressedSize == .max { fields.append(.compressedSize) }
     return fields
@@ -50,7 +51,7 @@ extension Entry.LocalFileHeader {
 
 extension Entry.CentralDirectoryStructure {
   var validFields: [Field] {
-    var fields: [Field] = []
+    var fields = [Field]()
     if uncompressedSize == .max { fields.append(.uncompressedSize) }
     if compressedSize == .max { fields.append(.compressedSize) }
     if relativeOffsetOfLocalHeader == .max { fields.append(.relativeOffsetOfLocalHeader) }
@@ -71,7 +72,7 @@ extension Entry.ZIP64ExtendedInformation {
     let headerLength = 4
     guard fields.reduce(0, { $0 + $1.size }) + headerLength == data.count else { return nil }
     var readOffset = headerLength
-    func value<T>(of field: Field) throws -> T where T: BinaryInteger {
+    func value<T: BinaryInteger>(of field: Field) throws -> T {
       if fields.contains(field) {
         defer {
           readOffset += MemoryLayout<T>.size

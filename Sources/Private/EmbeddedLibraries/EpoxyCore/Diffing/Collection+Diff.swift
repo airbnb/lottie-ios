@@ -104,7 +104,8 @@ extension Collection where Element: Diffable, Index == Int {
 
     EpoxyLogger.shared.assert(
       old.count + inserts.count - deletes.count == new.count,
-      "Failed sanity check for old count with changes matching new count.")
+      "Failed sanity check for old count with changes matching new count."
+    )
 
     return IndexChangeset(
       inserts: inserts,
@@ -112,7 +113,8 @@ extension Collection where Element: Diffable, Index == Int {
       updates: updates,
       moves: moves,
       newIndices: oldResults.map { $0.correspondingNewIndex },
-      duplicates: duplicates.map { $0.newIndices })
+      duplicates: duplicates.map { $0.newIndices }
+    )
   }
 
   /// Diffs between two collections (eg. `Array`s) of `Diffable` items, and returns an `IndexPathChangeset`
@@ -125,9 +127,8 @@ extension Collection where Element: Diffable, Index == Int {
   func makeIndexPathChangeset(
     from other: Self,
     fromSection: Int = 0,
-    toSection: Int = 0)
-    -> IndexPathChangeset
-  {
+    toSection: Int = 0
+  ) -> IndexPathChangeset {
     let indexChangeset = makeChangeset(from: other)
 
     return IndexPathChangeset(
@@ -147,7 +148,8 @@ extension Collection where Element: Diffable, Index == Int {
         duplicate.map { index in
           [toSection, index]
         }
-      })
+      }
+    )
   }
 
   /// Diffs between two collections (e.g. `Array`s) of `Diffable` items, returning an
@@ -165,7 +167,8 @@ extension Collection where Element: Diffable, Index == Int {
       updates: indexChangeset.updates,
       moves: indexChangeset.moves,
       newIndices: indexChangeset.newIndices,
-      duplicates: indexChangeset.duplicates.map { .init($0) })
+      duplicates: indexChangeset.duplicates.map { .init($0) }
+    )
   }
 
 }
@@ -192,7 +195,8 @@ extension Collection where Element: DiffableSection, Index == Int {
       let itemIndexChangeset = toItems.makeIndexPathChangeset(
         from: fromItems,
         fromSection: fromSectionIndex,
-        toSection: toSectionIndex)
+        toSection: toSectionIndex
+      )
 
       itemChangeset += itemIndexChangeset
     }

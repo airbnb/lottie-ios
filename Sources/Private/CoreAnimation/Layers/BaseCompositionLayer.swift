@@ -42,7 +42,9 @@ class BaseCompositionLayer: BaseAnimationLayer {
   let contentsLayer = BaseAnimationLayer()
 
   /// Whether or not this layer render should render any visible content
-  var renderLayerContents: Bool { true }
+  var renderLayerContents: Bool {
+    true
+  }
 
   /// Sets up the base `LayerModel` animations for this layer,
   /// and all child `AnimationLayer`s.
@@ -66,7 +68,8 @@ class BaseCompositionLayer: BaseAnimationLayer {
       try contentsLayer.addVisibilityAnimation(
         inFrame: CGFloat(baseLayerModel.inFrame),
         outFrame: CGFloat(baseLayerModel.outFrame),
-        context: context)
+        context: context
+      )
 
       // There are two different drop shadow schemas, either using `DropShadowEffect` or `DropShadowStyle`.
       // If both happen to be present, prefer the `DropShadowEffect` (which is the drop shadow schema

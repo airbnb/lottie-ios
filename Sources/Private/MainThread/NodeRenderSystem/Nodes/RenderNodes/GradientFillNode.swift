@@ -77,8 +77,6 @@ final class GradientFillNode: AnimatorNode, RenderNode {
     fillRender
   }
 
-  // MARK: Animator Node Protocol
-
   var propertyMap: NodePropertyMap & KeypathSearchable {
     fillProperties
   }

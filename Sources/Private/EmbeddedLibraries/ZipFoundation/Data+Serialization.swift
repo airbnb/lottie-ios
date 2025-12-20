@@ -19,8 +19,10 @@ typealias FILEPointer = UnsafeMutablePointer<FILE>
 // MARK: - DataSerializable
 
 protocol DataSerializable {
-  static var size: Int { get }
   init?(data: Data, additionalDataProvider: (Int) throws -> Data)
+
+  static var size: Int { get }
+
   var data: Data { get }
 }
 
@@ -30,8 +32,8 @@ extension Data {
     case unwritableFile
   }
 
-  static func readStruct<T>(from file: FILEPointer, at offset: UInt64)
-    -> T? where T: DataSerializable
+  static func readStruct<T: DataSerializable>(from file: FILEPointer, at offset: UInt64)
+    -> T?
   {
     guard offset <= .max else { return nil }
     fseeko(file, off_t(offset), SEEK_SET)
@@ -48,9 +50,8 @@ extension Data {
     chunkSize: Int,
     skipCRC32: Bool = false,
     provider: Provider,
-    consumer: Consumer)
-    throws -> CRC32
-  {
+    consumer: Consumer
+  ) throws -> CRC32 {
     var checksum = CRC32(0)
     guard size > 0 else {
       try consumer(Data())
@@ -112,9 +113,8 @@ extension Data {
     _ chunk: Data,
     size: UInt64,
     bufferSize: Int,
-    to file: FILEPointer)
-    throws -> UInt64
-  {
+    to file: FILEPointer
+  ) throws -> UInt64 {
     var sizeWritten: UInt64 = 0
     chunk.withUnsafeBytes { rawBufferPointer in
       if let baseAddress = rawBufferPointer.baseAddress, rawBufferPointer.count > 0 {

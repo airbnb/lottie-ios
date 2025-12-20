@@ -17,24 +17,24 @@ final class DataURLTests: XCTestCase {
 
   let red5x5Base64 = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAEklEQVR42mP8z8AARKiAkQaCAFxlCfyG/gCwAAAAAElFTkSuQmCC"
 
-  func testValidDataURL() {
+  func testValidDataURL() throws {
     let dataString = "data:image/png;base64,\(red5x5Base64)"
 
     let data = Data(dataString: dataString)
     XCTAssertNotNil(data, "Data should not be nil if valid base64 string")
-    let image = UIImage(data: data!)
+    let image = UIImage(data: try XCTUnwrap(data))
     XCTAssertNotNil(image, "Should be valid image")
 
     // Since legacy options will print nil host logs
     let legacyData = Data(dataString: dataString, options: .legacy)
     XCTAssertNotNil(legacyData, "Data should not be nil if valid base64 string")
-    let legacyImage = UIImage(data: legacyData!)
+    let legacyImage = UIImage(data: try XCTUnwrap(legacyData))
     XCTAssertNotNil(legacyImage, "Should be valid image")
 
     XCTAssertEqual(data, legacyData)
   }
 
-  func testValidDataURLWithoutBase64() {
+  func testValidDataURLWithoutBase64() throws {
     let dataString = "data:image/png,\(red5x5)"
     // Since ;base64 is missing still prints nil host warnings.
     // If we can figure out how to turn red5x5 into Data properly
@@ -42,7 +42,7 @@ final class DataURLTests: XCTestCase {
     let data = Data(dataString: dataString)
     XCTAssertNotNil(data, "Data should not be nil since format is valid data URL")
 
-    let image = UIImage(data: data!)
+    let image = UIImage(data: try XCTUnwrap(data))
     XCTAssertNotNil(image, "Should be valid image. Since missing ';base64' the data is valid just not base64 encoded")
   }
 

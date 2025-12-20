@@ -14,7 +14,7 @@ struct LottieSwitchRow: View {
   var title: String
   var onTimeRange: ClosedRange<AnimationProgressTime>?
   var offTimeRange: ClosedRange<AnimationProgressTime>?
-  var colorValueProviders: [String: [Keyframe<LottieColor>]] = [:]
+  var colorValueProviders = [String: [Keyframe<LottieColor>]]()
 
   var body: some View {
     HStack {
@@ -22,10 +22,12 @@ struct LottieSwitchRow: View {
         .isOn($isOn)
         .onAnimation(
           fromProgress: onTimeRange?.lowerBound ?? 0,
-          toProgress: onTimeRange?.upperBound ?? 1)
+          toProgress: onTimeRange?.upperBound ?? 1
+        )
         .offAnimation(
           fromProgress: offTimeRange?.lowerBound ?? 1,
-          toProgress: offTimeRange?.upperBound ?? 0)
+          toProgress: offTimeRange?.upperBound ?? 0
+        )
         .colorValueProviders(colorValueProviders)
         .frame(width: 80, height: 80)
 
@@ -45,7 +47,8 @@ extension LottieSwitch {
     for (keypath, keyframes) in colorValueProviders {
       copy = copy.valueProvider(
         ColorValueProvider(keyframes),
-        for: AnimationKeypath(keypath: keypath))
+        for: AnimationKeypath(keypath: keypath)
+      )
     }
 
     return copy

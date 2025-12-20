@@ -34,7 +34,7 @@ public final class DotLottieFile {
   }
 
   /// List of `LottieAnimation` in the file
-  public private(set) var animations: [Animation] = []
+  public private(set) var animations = [Animation]()
 
   // MARK: Internal
 
@@ -142,11 +142,13 @@ public final class DotLottieFile {
         id: dotLottieAnimation.id,
         loopMode: dotLottieAnimation.loopMode,
         speed: dotLottieAnimation.animationSpeed,
-        dotLottieImageProvider: imageProvider)
+        dotLottieImageProvider: imageProvider
+      )
 
       return DotLottieFile.Animation(
         animation: animation,
-        configuration: configuration)
+        configuration: configuration
+      )
     }
   }
 
@@ -175,7 +177,7 @@ extension String {
   }
 }
 
-// MARK: - DotLottieFile + Sendable
+// MARK: - DotLottieFile + @unchecked Sendable
 
 // Mark `DotLottieFile` as `@unchecked Sendable` to allow it to be used when strict concurrency is enabled.
 // In the future, it may be necessary to make changes to the internal implementation of `DotLottieFile`

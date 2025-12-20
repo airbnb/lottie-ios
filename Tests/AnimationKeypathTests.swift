@@ -11,19 +11,12 @@ final class AnimationKeypathTests: XCTestCase {
 
   // MARK: Internal
 
-  /// All of the sample animations with custom value providers defined in `SnapshotConfiguration.swift`
-  /// should also participate in more in-depth tests for `AnimationKeypath` generation.
-  var animationKeypathTestAnimations: [String] {
-    Samples.sampleAnimationNames.filter { sampleAnimationName in
-      !SnapshotConfiguration.forSample(named: sampleAnimationName).customValueProviders.isEmpty
-    }
-  }
-
   func testMainThreadEngineKeypathLogging() async {
     for animationKeypathTestAnimation in animationKeypathTestAnimations {
       await snapshotHierarchyKeypaths(
         animationName: animationKeypathTestAnimation,
-        configuration: LottieConfiguration(renderingEngine: .mainThread))
+        configuration: LottieConfiguration(renderingEngine: .mainThread)
+      )
     }
   }
 
@@ -31,7 +24,8 @@ final class AnimationKeypathTests: XCTestCase {
     for animationKeypathTestAnimation in animationKeypathTestAnimations {
       await snapshotHierarchyKeypaths(
         animationName: animationKeypathTestAnimation,
-        configuration: LottieConfiguration(renderingEngine: .coreAnimation))
+        configuration: LottieConfiguration(renderingEngine: .coreAnimation)
+      )
     }
   }
 
@@ -77,7 +71,8 @@ final class AnimationKeypathTests: XCTestCase {
   func testLayerForKeypath() {
     let animationView = LottieAnimationView(
       animation: Samples.animation(named: "Boat_Loader"),
-      configuration: LottieConfiguration(renderingEngine: .mainThread))
+      configuration: LottieConfiguration(renderingEngine: .mainThread)
+    )
 
     XCTAssertNotNil(animationView.animationLayer?.layer(for: "Success.FishComplete.Fish1Tail 7"))
     XCTAssertNotNil(animationView.animationLayer?.layer(for: "Success.FishComplete"))
@@ -91,11 +86,13 @@ final class AnimationKeypathTests: XCTestCase {
     for animationName in animationKeypathTestAnimations {
       let mainThreadKeypaths = Set(await hierarchyKeypaths(
         animationName: animationName,
-        configuration: .init(renderingEngine: .mainThread)))
+        configuration: .init(renderingEngine: .mainThread)
+      ))
 
       let coreAnimationKeypaths = await hierarchyKeypaths(
         animationName: animationName,
-        configuration: .init(renderingEngine: .coreAnimation))
+        configuration: .init(renderingEngine: .coreAnimation)
+      )
 
       for coreAnimationKeypath in coreAnimationKeypaths {
         XCTAssert(
@@ -103,7 +100,8 @@ final class AnimationKeypathTests: XCTestCase {
           """
           [\(animationName)] "\(coreAnimationKeypath)" from Core Animation rendering engine \
           is not supported in Main Thread rendering engine
-          """)
+          """
+        )
       }
     }
   }
@@ -118,13 +116,20 @@ final class AnimationKeypathTests: XCTestCase {
 
   // MARK: Private
 
+  /// All of the sample animations with custom value providers defined in `SnapshotConfiguration.swift`
+  /// should also participate in more in-depth tests for `AnimationKeypath` generation.
+  private var animationKeypathTestAnimations: [String] {
+    Samples.sampleAnimationNames.filter { sampleAnimationName in
+      !SnapshotConfiguration.forSample(named: sampleAnimationName).customValueProviders.isEmpty
+    }
+  }
+
   private func snapshotHierarchyKeypaths(
     animationName: String,
     configuration: LottieConfiguration,
     function: String = #function,
-    line: UInt = #line)
-    async
-  {
+    line: UInt = #line
+  ) async {
     let hierarchyKeypaths = await hierarchyKeypaths(animationName: animationName, configuration: configuration)
 
     assertSnapshot(
@@ -132,13 +137,15 @@ final class AnimationKeypathTests: XCTestCase {
       as: .description,
       named: animationName,
       testName: function,
-      line: line)
+      line: line
+    )
   }
 
   private func hierarchyKeypaths(animationName: String, configuration: LottieConfiguration) async -> [String] {
     let animationView = await SnapshotConfiguration.makeAnimationView(
       for: animationName,
-      configuration: configuration)
+      configuration: configuration
+    )
     return animationView?.allHierarchyKeypaths() ?? []
   }
 

@@ -16,7 +16,8 @@ final class RoundedCorners: ShapeItem {
     radius = try
       container.decode(
         KeyframeGroup<LottieVector1D>.self,
-        forKey: .radius)
+        forKey: .radius
+      )
     try super.init(from: decoder)
   }
 

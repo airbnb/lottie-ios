@@ -20,8 +20,8 @@ public class LottieAnimationLayer: CALayer {
     textProvider: AnimationKeypathTextProvider = DefaultTextProvider(),
     fontProvider: AnimationFontProvider = DefaultFontProvider(),
     configuration: LottieConfiguration = .shared,
-    logger: LottieLogger = .shared)
-  {
+    logger: LottieLogger = .shared
+  ) {
     self.animation = animation
     self.imageProvider = imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     self.textProvider = textProvider
@@ -43,8 +43,8 @@ public class LottieAnimationLayer: CALayer {
     textProvider: AnimationKeypathTextProvider = DefaultTextProvider(),
     fontProvider: AnimationFontProvider = DefaultFontProvider(),
     configuration: LottieConfiguration = .shared,
-    logger: LottieLogger = .shared)
-  {
+    logger: LottieLogger = .shared
+  ) {
     let dotLottieAnimation = dotLottie?.animation(for: animationId)
     animation = dotLottieAnimation?.animation
     imageProvider = dotLottie?.imageProvider ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
@@ -64,8 +64,8 @@ public class LottieAnimationLayer: CALayer {
 
   public init(
     configuration: LottieConfiguration = .shared,
-    logger: LottieLogger = .shared)
-  {
+    logger: LottieLogger = .shared
+  ) {
     animation = nil
     imageProvider = BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     textProvider = DefaultTextProvider()
@@ -119,7 +119,8 @@ public class LottieAnimationLayer: CALayer {
       playFrom: CGFloat(animation.startFrame),
       playTo: CGFloat(animation.endFrame),
       framerate: animation.framerate,
-      closure: completion)
+      closure: completion
+    )
     removeCurrentAnimationIfNecessary()
     addNewAnimationForContext(context)
   }
@@ -134,8 +135,8 @@ public class LottieAnimationLayer: CALayer {
     fromProgress: AnimationProgressTime? = nil,
     toProgress: AnimationProgressTime,
     loopMode: LottieLoopMode? = nil,
-    completion: LottieCompletionBlock? = nil)
-  {
+    completion: LottieCompletionBlock? = nil
+  ) {
     guard let animation else { return }
 
     defer {
@@ -156,7 +157,8 @@ public class LottieAnimationLayer: CALayer {
       playFrom: animation.frameTime(forProgress: fromProgress ?? currentProgress),
       playTo: animation.frameTime(forProgress: toProgress),
       framerate: animation.framerate,
-      closure: completion)
+      closure: completion
+    )
     addNewAnimationForContext(context)
   }
 
@@ -170,8 +172,8 @@ public class LottieAnimationLayer: CALayer {
     fromFrame: AnimationFrameTime? = nil,
     toFrame: AnimationFrameTime,
     loopMode: LottieLoopMode? = nil,
-    completion: LottieCompletionBlock? = nil)
-  {
+    completion: LottieCompletionBlock? = nil
+  ) {
     guard let animation else { return }
 
     defer {
@@ -193,7 +195,8 @@ public class LottieAnimationLayer: CALayer {
       playFrom: fromFrame ?? currentFrame,
       playTo: toFrame,
       framerate: animation.framerate,
-      closure: completion)
+      closure: completion
+    )
     addNewAnimationForContext(context)
   }
 
@@ -217,14 +220,15 @@ public class LottieAnimationLayer: CALayer {
     toMarker: String,
     playEndMarkerFrame: Bool = true,
     loopMode: LottieLoopMode? = nil,
-    completion: LottieCompletionBlock? = nil)
-  {
+    completion: LottieCompletionBlock? = nil
+  ) {
     defer {
       currentPlaybackMode = .playing(.fromMarker(
         fromMarker,
         toMarker: toMarker,
         playEndMarkerFrame: playEndMarkerFrame,
-        loopMode: loopMode ?? self.loopMode))
+        loopMode: loopMode ?? self.loopMode
+      ))
     }
 
     if shouldOverrideWithReducedMotionAnimation {
@@ -254,7 +258,8 @@ public class LottieAnimationLayer: CALayer {
       playFrom: fromTime,
       playTo: playTo,
       framerate: animation.framerate,
-      closure: completion)
+      closure: completion
+    )
     addNewAnimationForContext(context)
   }
 
@@ -271,8 +276,8 @@ public class LottieAnimationLayer: CALayer {
   open func play(
     marker: String,
     loopMode: LottieLoopMode? = nil,
-    completion: LottieCompletionBlock? = nil)
-  {
+    completion: LottieCompletionBlock? = nil
+  ) {
     guard let from = animation?.markerMap?[marker] else {
       return
     }
@@ -290,7 +295,8 @@ public class LottieAnimationLayer: CALayer {
       fromFrame: from.frameTime,
       toFrame: from.frameTime + from.durationFrameTime,
       loopMode: loopMode,
-      completion: completion)
+      completion: completion
+    )
   }
 
   /// Plays the given markers sequentially in order.
@@ -311,8 +317,8 @@ public class LottieAnimationLayer: CALayer {
   /// - Parameter completion: An optional completion closure to be called when the animation stops.
   open func play(
     markers: [String],
-    completion: LottieCompletionBlock? = nil)
-  {
+    completion: LottieCompletionBlock? = nil
+  ) {
     guard !markers.isEmpty else { return }
 
     defer {
@@ -399,8 +405,8 @@ public class LottieAnimationLayer: CALayer {
   @available(*, deprecated, renamed: "setPlaybackMode(_:completion:)", message: "Will be removed in a future major release.")
   open func play(
     _ playbackMode: LottiePlaybackMode,
-    animationCompletionHandler: LottieCompletionBlock? = nil)
-  {
+    animationCompletionHandler: LottieCompletionBlock? = nil
+  ) {
     setPlaybackMode(playbackMode, completion: animationCompletionHandler)
   }
 
@@ -410,8 +416,8 @@ public class LottieAnimationLayer: CALayer {
   ///   an animation triggered by this method completes.
   open func setPlaybackMode(
     _ playbackMode: LottiePlaybackMode,
-    completion: LottieCompletionBlock? = nil)
-  {
+    completion: LottieCompletionBlock? = nil
+  ) {
     switch playbackMode {
     case .paused(at: let state):
       pause(at: state)
@@ -459,14 +465,16 @@ public class LottieAnimationLayer: CALayer {
         fromProgress: from,
         toProgress: to,
         loopMode: loopMode,
-        completion: completion)
+        completion: completion
+      )
 
     case .fromFrame(let from, let to, let loopMode):
       play(
         fromFrame: from,
         toFrame: to,
         loopMode: loopMode,
-        completion: completion)
+        completion: completion
+      )
 
     case .fromMarker(let from, let to, let playEndMarkerFrame, let loopMode):
       play(
@@ -474,7 +482,8 @@ public class LottieAnimationLayer: CALayer {
         toMarker: to,
         playEndMarkerFrame: playEndMarkerFrame,
         loopMode: loopMode,
-        completion: completion)
+        completion: completion
+      )
 
     case .marker(let name, loopMode: let loopMode):
       play(marker: name, loopMode: loopMode, completion: completion)
@@ -507,7 +516,9 @@ public class LottieAnimationLayer: CALayer {
 
   /// The underlying CALayer created to display the content.
   /// Use this property to change CALayer props like the content's transform, anchor point, etc.
-  public var animationLayer: CALayer? { rootAnimationLayer }
+  public var animationLayer: CALayer? {
+    rootAnimationLayer
+  }
 
   public var screenScale: CGFloat {
     didSet {
@@ -798,8 +809,8 @@ public class LottieAnimationLayer: CALayer {
   ///   - dotLottieFile: Lottie file to play
   public func loadAnimation(
     _ animationId: String? = nil,
-    from dotLottieFile: DotLottieFile)
-  {
+    from dotLottieFile: DotLottieFile
+  ) {
     guard let dotLottieAnimation = dotLottieFile.animation(for: animationId) else { return }
     loadAnimation(dotLottieAnimation)
   }
@@ -815,8 +826,8 @@ public class LottieAnimationLayer: CALayer {
   ///   - dotLottieFile: Lottie file to play
   public func loadAnimation(
     atIndex index: Int,
-    from dotLottieFile: DotLottieFile)
-  {
+    from dotLottieFile: DotLottieFile
+  ) {
     guard let dotLottieAnimation = dotLottieFile.animation(at: index) else { return }
     loadAnimation(dotLottieAnimation)
   }
@@ -1102,7 +1113,8 @@ public class LottieAnimationLayer: CALayer {
       playFrom: animationContext.playFrom,
       playTo: animationContext.playTo,
       framerate: animationContext.framerate,
-      closure: animationContext.closure.completionBlock)
+      closure: animationContext.closure.completionBlock
+    )
 
     /// Remove current animation, and freeze the current frame.
     let pauseFrame = realtimeAnimationFrame
@@ -1209,7 +1221,8 @@ public class LottieAnimationLayer: CALayer {
       textProvider: textProvider,
       fontProvider: fontProvider,
       maskAnimationToBounds: maskAnimationToBounds,
-      logger: logger)
+      logger: logger
+    )
 
     mainThreadAnimationLayer.forceDisplayUpdateOnEachFrame = mainThreadRenderingEngineShouldForceDisplayUpdateOnEachFrame
     return mainThreadAnimationLayer
@@ -1224,7 +1237,8 @@ public class LottieAnimationLayer: CALayer {
         fontProvider: fontProvider,
         maskAnimationToBounds: maskAnimationToBounds,
         compatibilityTrackerMode: .track,
-        logger: logger)
+        logger: logger
+      )
 
       coreAnimationLayer.didSetUpAnimation = { [logger] compatibilityIssues in
         logger.assert(
@@ -1236,7 +1250,8 @@ public class LottieAnimationLayer: CALayer {
               To resolve this issue, you can use `RenderingEngineOption.automatic`, which automatically falls back
               to the Main Thread rendering engine when necessary, or just use `RenderingEngineOption.mainThread`.
 
-              """)
+              """
+        )
       }
 
       return coreAnimationLayer
@@ -1260,7 +1275,8 @@ public class LottieAnimationLayer: CALayer {
         fontProvider: fontProvider,
         maskAnimationToBounds: maskAnimationToBounds,
         compatibilityTrackerMode: .abort,
-        logger: logger)
+        logger: logger
+      )
 
       coreAnimationLayer.didSetUpAnimation = { [weak self] issues in
         self?.automaticEngineLayerDidSetUpAnimation(issues)
@@ -1298,7 +1314,8 @@ public class LottieAnimationLayer: CALayer {
           Automatically falling back to Main Thread rendering engine. This fallback comes with some additional performance
           overhead, which can be reduced by manually specifying that this animation should always use the Main Thread engine.
 
-          """)
+          """
+    )
 
     let animationContext = animationContext
     let currentFrame = currentFrame
@@ -1324,7 +1341,8 @@ public class LottieAnimationLayer: CALayer {
         playFrom: animationContext.playFrom,
         playTo: animationContext.playTo,
         framerate: animationContext.framerate,
-        closure: animationContext.closure.completionBlock))
+        closure: animationContext.closure.completionBlock
+      ))
     }
   }
 
@@ -1373,7 +1391,8 @@ public class LottieAnimationLayer: CALayer {
       var timingConfiguration = CoreAnimationLayer.CAMediaTimingConfiguration(
         autoreverses: loopMode.caAnimationConfiguration.autoreverses,
         repeatCount: loopMode.caAnimationConfiguration.repeatCount,
-        speed: abs(Float(animationSpeed)))
+        speed: abs(Float(animationSpeed))
+      )
 
       // The animation should start playing from the `currentFrame`,
       // if `currentFrame` is included in the time range being played.
@@ -1416,7 +1435,8 @@ public class LottieAnimationLayer: CALayer {
 
       coreAnimationLayer.playAnimation(configuration: .init(
         animationContext: animationContext,
-        timingConfiguration: timingConfiguration))
+        timingConfiguration: timingConfiguration
+      ))
 
       return
     }
@@ -1433,7 +1453,8 @@ public class LottieAnimationLayer: CALayer {
     let playingForward: Bool =
       (
         (animationSpeed > 0 && playFrom < playTo) ||
-          (animationSpeed < 0 && playTo < playFrom))
+          (animationSpeed < 0 && playTo < playFrom)
+      )
 
     var startFrame = currentFrame.clamp(min(playFrom, playTo), max(playFrom, playTo))
     if startFrame == playTo {

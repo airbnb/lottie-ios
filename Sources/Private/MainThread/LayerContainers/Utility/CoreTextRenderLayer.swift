@@ -21,9 +21,9 @@ import UIKit
 /// A CALayer subclass that renders text content using CoreText
 final class CoreTextRenderLayer: CALayer {
 
-  // MARK: Public
+  // MARK: Internal
 
-  public var text: String? {
+  var text: String? {
     didSet {
       needsContentUpdate = true
       setNeedsLayout()
@@ -31,7 +31,7 @@ final class CoreTextRenderLayer: CALayer {
     }
   }
 
-  public var font: CTFont? {
+  var font: CTFont? {
     didSet {
       needsContentUpdate = true
       setNeedsLayout()
@@ -39,7 +39,7 @@ final class CoreTextRenderLayer: CALayer {
     }
   }
 
-  public var alignment = NSTextAlignment.left {
+  var alignment = NSTextAlignment.left {
     didSet {
       needsContentUpdate = true
       setNeedsLayout()
@@ -47,7 +47,7 @@ final class CoreTextRenderLayer: CALayer {
     }
   }
 
-  public var lineHeight: CGFloat = 0 {
+  var lineHeight: CGFloat = 0 {
     didSet {
       needsContentUpdate = true
       setNeedsLayout()
@@ -55,7 +55,7 @@ final class CoreTextRenderLayer: CALayer {
     }
   }
 
-  public var tracking: CGFloat = 0 {
+  var tracking: CGFloat = 0 {
     didSet {
       needsContentUpdate = true
       setNeedsLayout()
@@ -63,7 +63,7 @@ final class CoreTextRenderLayer: CALayer {
     }
   }
 
-  public var fillColor: CGColor? {
+  var fillColor: CGColor? {
     didSet {
       needsContentUpdate = true
       setNeedsLayout()
@@ -71,7 +71,7 @@ final class CoreTextRenderLayer: CALayer {
     }
   }
 
-  public var strokeColor: CGColor? {
+  var strokeColor: CGColor? {
     didSet {
       needsContentUpdate = true
       setNeedsLayout()
@@ -79,7 +79,7 @@ final class CoreTextRenderLayer: CALayer {
     }
   }
 
-  public var strokeWidth: CGFloat = 0 {
+  var strokeWidth: CGFloat = 0 {
     didSet {
       needsContentUpdate = true
       setNeedsLayout()
@@ -87,22 +87,14 @@ final class CoreTextRenderLayer: CALayer {
     }
   }
 
-  public var strokeOnTop = false {
+  var strokeOnTop = false {
     didSet {
       setNeedsLayout()
       setNeedsDisplay()
     }
   }
 
-  public var preferredSize: CGSize? {
-    didSet {
-      needsContentUpdate = true
-      setNeedsLayout()
-      setNeedsDisplay()
-    }
-  }
-
-  public var start: Int? {
+  var preferredSize: CGSize? {
     didSet {
       needsContentUpdate = true
       setNeedsLayout()
@@ -110,7 +102,15 @@ final class CoreTextRenderLayer: CALayer {
     }
   }
 
-  public var end: Int? {
+  var start: Int? {
+    didSet {
+      needsContentUpdate = true
+      setNeedsLayout()
+      setNeedsDisplay()
+    }
+  }
+
+  var end: Int? {
     didSet {
       needsContentUpdate = true
       setNeedsLayout()
@@ -119,7 +119,7 @@ final class CoreTextRenderLayer: CALayer {
   }
 
   /// The type of unit to use when computing the `start` / `end` range within the text string
-  public var textRangeUnit: TextRangeUnit? {
+  var textRangeUnit: TextRangeUnit? {
     didSet {
       needsContentUpdate = true
       setNeedsLayout()
@@ -128,7 +128,7 @@ final class CoreTextRenderLayer: CALayer {
   }
 
   /// The opacity to apply to the range between `start` and `end`
-  public var selectedRangeOpacity: CGFloat? {
+  var selectedRangeOpacity: CGFloat? {
     didSet {
       needsContentUpdate = true
       setNeedsLayout()
@@ -136,15 +136,13 @@ final class CoreTextRenderLayer: CALayer {
     }
   }
 
-  public func sizeToFit() {
+  func sizeToFit() {
     updateTextContent()
     bounds = drawingRect
     anchorPoint = drawingAnchor
     setNeedsLayout()
     setNeedsDisplay()
   }
-
-  // MARK: Internal
 
   override func action(forKey _: String) -> CAAction? {
     nil
@@ -305,7 +303,8 @@ final class CoreTextRenderLayer: CALayer {
       attrString.addAttribute(
         NSAttributedString.Key.foregroundColor,
         value: textRangeColor,
-        range: NSRange(location: startIndex, length: endIndex - startIndex))
+        range: NSRange(location: startIndex, length: endIndex - startIndex)
+      )
     }
 
     attributedString = attrString
@@ -345,7 +344,8 @@ final class CoreTextRenderLayer: CALayer {
         CFRange(location: 0, length: attrString.length),
         nil,
         CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
-        nil)
+        nil
+      )
       switch alignment {
       case .left:
         textAnchor = CGPoint(x: 0, y: ascent)
@@ -360,13 +360,15 @@ final class CoreTextRenderLayer: CALayer {
         x: 0,
         y: 0,
         width: ceil(size.width),
-        height: ceil(size.height))
+        height: ceil(size.height)
+      )
     }
 
     // Now Calculate Anchor
     drawingAnchor = CGPoint(
       x: textAnchor.x.remap(fromLow: 0, fromHigh: drawingRect.size.width, toLow: 0, toHigh: 1),
-      y: textAnchor.y.remap(fromLow: 0, fromHigh: drawingRect.size.height, toLow: 0, toHigh: 1))
+      y: textAnchor.y.remap(fromLow: 0, fromHigh: drawingRect.size.height, toLow: 0, toHigh: 1)
+    )
 
     if fillFrameSetter != nil, strokeFrameSetter != nil {
       drawingRect.size.width += strokeWidth

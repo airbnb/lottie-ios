@@ -92,8 +92,6 @@ final class StrokeNode: AnimatorNode, RenderNode {
     strokeRender
   }
 
-  // MARK: Animator Node Protocol
-
   var propertyMap: NodePropertyMap & KeypathSearchable {
     strokeProperties
   }
@@ -134,7 +132,8 @@ final class StrokeNode: AnimatorNode, RenderNode {
 extension [DashElement] {
   typealias ShapeLayerConfiguration = (
     dashPatterns: ContiguousArray<ContiguousArray<Keyframe<LottieVector1D>>>,
-    dashPhase: ContiguousArray<Keyframe<LottieVector1D>>)
+    dashPhase: ContiguousArray<Keyframe<LottieVector1D>>
+  )
 
   /// Converts the `[DashElement]` data model into `lineDashPattern` and `lineDashPhase`
   /// representations usable in a `CAShapeLayer`

@@ -52,13 +52,15 @@ final class SnapshotTests: XCTestCase {
       for percentage in knownProgressPercentageValues {
         animationName = animationName.replacingOccurrences(
           of: "-\(Int(percentage * 100)).png",
-          with: "")
+          with: ""
+        )
       }
 
       for frame in knownFrameValues {
         animationName = animationName.replacingOccurrences(
           of: "-Frame-\(Int(frame)).png",
-          with: "")
+          with: ""
+        )
       }
 
       animationName = animationName.replacingOccurrences(of: "-", with: "/")
@@ -66,7 +68,8 @@ final class SnapshotTests: XCTestCase {
       XCTAssert(
         Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).json") })
           || Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).lottie") }),
-        "Snapshot \"\(snapshotURL.lastPathComponent)\" has no corresponding sample animation. Expecting \(animationName).json|.lottie")
+        "Snapshot \"\(snapshotURL.lastPathComponent)\" has no corresponding sample animation. Expecting \(animationName).json|.lottie"
+      )
     }
   }
 
@@ -80,7 +83,8 @@ final class SnapshotTests: XCTestCase {
       XCTAssert(
         Samples.sampleAnimationURLs.contains(expectedJsonFile)
           || Samples.sampleAnimationURLs.contains(expectedDotLottieFile),
-        "Custom configuration for \"\(animationName)\" has no corresponding sample animation")
+        "Custom configuration for \"\(animationName)\" has no corresponding sample animation"
+      )
     }
   }
 
@@ -132,7 +136,8 @@ final class SnapshotTests: XCTestCase {
       for customProgressValue in customProgressValuesToSnapshot {
         assert(
           knownProgressPercentageValues.contains(customProgressValue),
-          "All progress values being used must be listed in `knownProgressPercentageValues`")
+          "All progress values being used must be listed in `knownProgressPercentageValues`"
+        )
       }
 
       return customProgressValuesToSnapshot.map { .progress($0) }
@@ -144,9 +149,8 @@ final class SnapshotTests: XCTestCase {
   /// Captures snapshots of `sampleAnimationURLs` and compares them to the snapshot images stored on disk
   private func compareSampleSnapshots(
     configuration: LottieConfiguration,
-    testName: String = #function)
-    async throws
-  {
+    testName: String = #function
+  ) async throws {
     guard try SnapshotTests.enabled else { return }
 
     #if os(iOS)
@@ -159,7 +163,8 @@ final class SnapshotTests: XCTestCase {
         guard
           let animationView = await SnapshotConfiguration.makeAnimationView(
             for: sampleAnimationName,
-            configuration: configuration)
+            configuration: configuration
+          )
         else { continue }
 
         animationView.setPlaybackMode(.paused(at: pauseState))
@@ -182,9 +187,11 @@ final class SnapshotTests: XCTestCase {
           matching: animationView,
           as: .imageOfPresentationLayer(
             precision: SnapshotConfiguration.forSample(named: sampleAnimationName).precision,
-            perceptualPrecision: 0.97),
+            perceptualPrecision: 0.97
+          ),
           named: "\(sampleAnimationName) (\(pauseStateDescription))",
-          testName: testName)
+          testName: testName
+        )
       }
     }
     #endif
@@ -264,7 +271,8 @@ enum Samples {
   /// The list of snapshot image files in `Tests/__Snapshots__`
   static let snapshotURLs = Bundle.lottie.fileURLs(
     in: "__Snapshots__/SnapshotTests",
-    withSuffix: "png")
+    withSuffix: "png"
+  )
 
   /// The list of sample animation files in `Tests/Samples`
   static let sampleAnimationURLs = Bundle.lottie.fileURLs(in: Samples.directoryName, withSuffix: "json")
@@ -292,7 +300,8 @@ enum Samples {
       let animation = LottieAnimation.named(
         sampleAnimationName,
         bundle: .lottie,
-        subdirectory: Samples.directoryName)
+        subdirectory: Samples.directoryName
+      )
     else { return nil }
 
     return animation
@@ -303,7 +312,8 @@ enum Samples {
       let dotLottieFile = try? await DotLottieFile.named(
         sampleDotLottieName,
         bundle: .lottie,
-        subdirectory: Samples.directoryName)
+        subdirectory: Samples.directoryName
+      )
     else {
       XCTFail("Could not parse Samples/\(sampleDotLottieName).lottie")
       return nil
@@ -320,9 +330,8 @@ extension SnapshotConfiguration {
     for sampleAnimationName: String,
     configuration: LottieConfiguration,
     logger: LottieLogger = LottieLogger.shared,
-    customSnapshotConfiguration: SnapshotConfiguration? = nil)
-    async -> LottieAnimationView?
-  {
+    customSnapshotConfiguration: SnapshotConfiguration? = nil
+  ) async -> LottieAnimationView? {
     let snapshotConfiguration = customSnapshotConfiguration ?? SnapshotConfiguration.forSample(named: sampleAnimationName)
 
     let animationView: LottieAnimationView
@@ -330,12 +339,14 @@ extension SnapshotConfiguration {
       animationView = LottieAnimationView(
         animation: animation,
         configuration: configuration,
-        logger: logger)
+        logger: logger
+      )
     } else if let dotLottieFile = await Samples.dotLottie(named: sampleAnimationName) {
       animationView = LottieAnimationView(
         dotLottie: dotLottieFile,
         configuration: configuration,
-        logger: logger)
+        logger: logger
+      )
     } else {
       XCTFail("Couldn't create Animation View for \(sampleAnimationName)")
       return nil

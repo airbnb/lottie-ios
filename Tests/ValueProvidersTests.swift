@@ -14,7 +14,8 @@ final class ValueProvidersTests: XCTestCase {
   func testGetValue() async throws {
     let optionalAnimationView = await SnapshotConfiguration.makeAnimationView(
       for: "HamburgerArrow",
-      configuration: .init(renderingEngine: .mainThread))
+      configuration: .init(renderingEngine: .mainThread)
+    )
 
     let animationView = try XCTUnwrap(optionalAnimationView)
 
@@ -30,7 +31,8 @@ final class ValueProvidersTests: XCTestCase {
   func testValueProviderStore() async throws {
     let optionalAnimationView = await SnapshotConfiguration.makeAnimationView(
       for: "HamburgerArrow",
-      configuration: .init(renderingEngine: .mainThread))
+      configuration: .init(renderingEngine: .mainThread)
+    )
     let animation = try XCTUnwrap(optionalAnimationView?.animation)
 
     let store = ValueProviderStore(logger: .printToConsole)
@@ -44,14 +46,16 @@ final class ValueProvidersTests: XCTestCase {
       logger: .printToConsole,
       loggingState: LoggingState(),
       currentKeypath: .init(keys: []),
-      textProvider: DictionaryTextProvider([:]))
+      textProvider: DictionaryTextProvider([:])
+    )
 
     // Test that the store returns the expected value for the provider.
     store.setValueProvider(ColorValueProvider(.red), keypath: "**.Color")
     let keyFramesQuery1 = try store.customKeyframes(
       of: .color,
       for: "Layer.Shape Group.Stroke 1.Color",
-      context: animationContext)
+      context: animationContext
+    )
     XCTAssertEqual(keyFramesQuery1?.keyframes.map(\.value.components), [[1, 0, 0, 1]])
 
     // Test a different provider/keypath.
@@ -59,14 +63,16 @@ final class ValueProvidersTests: XCTestCase {
     let keyFramesQuery2 = try store.customKeyframes(
       of: .color,
       for: "A1.Shape 1.Stroke 1.Color",
-      context: animationContext)
+      context: animationContext
+    )
     XCTAssertEqual(keyFramesQuery2?.keyframes.map(\.value.components), [[0, 0, 1, 1]])
 
     // Test that adding a different keypath didn't disrupt the original one.
     let keyFramesQuery3 = try store.customKeyframes(
       of: .color,
       for: "Layer.Shape Group.Stroke 1.Color",
-      context: animationContext)
+      context: animationContext
+    )
     XCTAssertEqual(keyFramesQuery3?.keyframes.map(\.value.components), [[1, 0, 0, 1]])
 
     // Test overriding the original keypath with a new provider stores the new provider.
@@ -74,7 +80,8 @@ final class ValueProvidersTests: XCTestCase {
     let keyFramesQuery4 = try store.customKeyframes(
       of: .color,
       for: "Layer.Shape Group.Stroke 1.Color",
-      context: animationContext)
+      context: animationContext
+    )
     XCTAssertEqual(keyFramesQuery4?.keyframes.map(\.value.components), [[0, 0, 0, 1]])
 
     // Test removing specific keypath
@@ -84,7 +91,8 @@ final class ValueProvidersTests: XCTestCase {
     let keyFramesQuery5 = try store.customKeyframes(
       of: .color,
       for: "Layer.Shape Group.Stroke 1.Color",
-      context: animationContext)
+      context: animationContext
+    )
     XCTAssertNil(keyFramesQuery5)
 
     // Test removing wildcard keypath
@@ -93,7 +101,8 @@ final class ValueProvidersTests: XCTestCase {
     let keyFramesQuery6 = try store.customKeyframes(
       of: .color,
       for: "Layer.Shape Group.Stroke 1.Color",
-      context: animationContext)
+      context: animationContext
+    )
     XCTAssertNil(keyFramesQuery6)
   }
 }

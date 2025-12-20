@@ -83,7 +83,8 @@ struct CurveVertex {
       return (
         start: CurveVertex(point: point, inTangentRelative: inTangentRelative, outTangentRelative: .zero),
         trimPoint: CurveVertex(point: point, inTangentRelative: .zero, outTangentRelative: outTangentRelative),
-        end: toVertex)
+        end: toVertex
+      )
     }
 
     /// If position is greater than or equal to 1, trim at end.
@@ -93,11 +94,14 @@ struct CurveVertex {
         trimPoint: CurveVertex(
           point: toVertex.point,
           inTangentRelative: toVertex.inTangentRelative,
-          outTangentRelative: .zero),
+          outTangentRelative: .zero
+        ),
         end: CurveVertex(
           point: toVertex.point,
           inTangentRelative: .zero,
-          outTangentRelative: toVertex.outTangentRelative))
+          outTangentRelative: toVertex.outTangentRelative
+        )
+      )
     }
 
     if outTangentRelative.isZero, toVertex.inTangentRelative.isZero {
@@ -106,7 +110,8 @@ struct CurveVertex {
       return (
         start: self,
         trimPoint: CurveVertex(point: trimPoint, inTangentRelative: .zero, outTangentRelative: .zero),
-        end: toVertex)
+        end: toVertex
+      )
     }
     /// Cutting by amount gives incorrect length....
     /// One option is to cut by a stride until it gets close then edge it down.
@@ -121,7 +126,8 @@ struct CurveVertex {
     return (
       start: CurveVertex(point: point, inTangent: inTangent, outTangent: a),
       trimPoint: CurveVertex(point: f, inTangent: d, outTangent: e),
-      end: CurveVertex(point: toVertex.point, inTangent: c, outTangent: toVertex.outTangent))
+      end: CurveVertex(point: toVertex.point, inTangent: c, outTangent: toVertex.outTangent)
+    )
   }
 
   /// Trims a curve of a known length to a specific length and returns the points.

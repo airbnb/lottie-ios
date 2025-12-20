@@ -26,9 +26,8 @@ extension Archive {
     to url: URL,
     bufferSize: Int = defaultReadChunkSize,
     skipCRC32: Bool = false,
-    progress: Progress? = nil)
-    throws -> CRC32
-  {
+    progress: Progress? = nil
+  ) throws -> CRC32 {
     guard bufferSize > 0 else {
       throw ArchiveError.invalidBufferSize
     }
@@ -51,7 +50,8 @@ extension Archive {
         bufferSize: bufferSize,
         skipCRC32: skipCRC32,
         progress: progress,
-        consumer: consumer)
+        consumer: consumer
+      )
 
     case .directory:
       let consumer = { (_: Data) in
@@ -62,7 +62,8 @@ extension Archive {
         bufferSize: bufferSize,
         skipCRC32: skipCRC32,
         progress: progress,
-        consumer: consumer)
+        consumer: consumer
+      )
 
     case .symlink:
       guard !fileManager.itemExists(at: url) else {
@@ -78,7 +79,8 @@ extension Archive {
         bufferSize: bufferSize,
         skipCRC32: skipCRC32,
         progress: progress,
-        consumer: consumer)
+        consumer: consumer
+      )
     }
     let attributes = FileManager.attributes(from: entry)
     try fileManager.setAttributes(attributes, ofItemAtPath: url.path)
@@ -100,9 +102,8 @@ extension Archive {
     bufferSize: Int = defaultReadChunkSize,
     skipCRC32: Bool = false,
     progress: Progress? = nil,
-    consumer: Consumer)
-    throws -> CRC32
-  {
+    consumer: Consumer
+  ) throws -> CRC32 {
     guard bufferSize > 0 else {
       throw ArchiveError.invalidBufferSize
     }
@@ -122,14 +123,16 @@ extension Archive {
           bufferSize: bufferSize,
           skipCRC32: skipCRC32,
           progress: progress,
-          with: consumer)
+          with: consumer
+        )
 
       case .deflate: checksum = try readCompressed(
           entry: entry,
           bufferSize: bufferSize,
           skipCRC32: skipCRC32,
           progress: progress,
-          with: consumer)
+          with: consumer
+        )
       }
 
     case .directory:

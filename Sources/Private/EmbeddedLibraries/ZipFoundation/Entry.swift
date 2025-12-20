@@ -25,8 +25,8 @@ struct Entry: Equatable {
     centralDirectoryStructure: CentralDirectoryStructure,
     localFileHeader: LocalFileHeader,
     dataDescriptor: DefaultDataDescriptor? = nil,
-    zip64DataDescriptor: ZIP64DataDescriptor? = nil)
-  {
+    zip64DataDescriptor: ZIP64DataDescriptor? = nil
+  ) {
     // We currently don't support encrypted archives
     guard !centralDirectoryStructure.isEncrypted else { return nil }
     self.centralDirectoryStructure = centralDirectoryStructure
@@ -66,6 +66,8 @@ struct Entry: Equatable {
   }
 
   struct LocalFileHeader: DataSerializable {
+    static let size = 30
+
     let localFileHeaderSignature = UInt32(localFileHeaderStructSignature)
     let versionNeededToExtract: UInt16
     let generalPurposeBitFlag: UInt16
@@ -77,13 +79,20 @@ struct Entry: Equatable {
     let uncompressedSize: UInt32
     let fileNameLength: UInt16
     let extraFieldLength: UInt16
-    static let size = 30
     let fileNameData: Data
     let extraFieldData: Data
     var extraFields: [ExtensibleDataField]?
   }
 
   struct DataDescriptor<T: BinaryInteger>: DataSerializable {
+    static var memoryLengthOfSize: Int {
+      MemoryLayout<T>.size
+    }
+
+    static var size: Int {
+      memoryLengthOfSize * 2 + 8
+    }
+
     let data: Data
     let dataDescriptorSignature = UInt32(dataDescriptorStructSignature)
     let crc32: UInt32
@@ -91,8 +100,6 @@ struct Entry: Equatable {
     // For ZIP64 format archives, the compressed and uncompressed sizes are 8 bytes each.
     let compressedSize: T
     let uncompressedSize: T
-    static var memoryLengthOfSize: Int { MemoryLayout<T>.size }
-    static var size: Int { memoryLengthOfSize * 2 + 8 }
   }
 
   typealias DefaultDataDescriptor = DataDescriptor<UInt32>
@@ -124,9 +131,18 @@ struct Entry: Equatable {
 
     var extraFields: [ExtensibleDataField]?
 
-    var usesDataDescriptor: Bool { (generalPurposeBitFlag & (1 << 3)) != 0 }
-    var usesUTF8PathEncoding: Bool { (generalPurposeBitFlag & (1 << 11)) != 0 }
-    var isEncrypted: Bool { (generalPurposeBitFlag & (1 << 0)) != 0 }
+    var usesDataDescriptor: Bool {
+      (generalPurposeBitFlag & (1 << 3)) != 0
+    }
+
+    var usesUTF8PathEncoding: Bool {
+      (generalPurposeBitFlag & (1 << 11)) != 0
+    }
+
+    var isEncrypted: Bool {
+      (generalPurposeBitFlag & (1 << 0)) != 0
+    }
+
     var isZIP64: Bool {
       // If ZIP64 extended information is existing, try to treat cd as ZIP64 format
       // even if the version needed to extract is lower than 4.5
@@ -260,8 +276,8 @@ extension Entry.CentralDirectoryStructure {
     localFileHeader: Entry.LocalFileHeader,
     fileAttributes: UInt32,
     relativeOffset: UInt32,
-    extraField: (length: UInt16, data: Data))
-  {
+    extraField: (length: UInt16, data: Data)
+  ) {
     versionMadeBy = UInt16(789)
     versionNeededToExtract = localFileHeader.versionNeededToExtract
     generalPurposeBitFlag = localFileHeader.generalPurposeBitFlag
@@ -284,7 +300,8 @@ extension Entry.CentralDirectoryStructure {
     if
       let zip64ExtendedInformation = Entry.ZIP64ExtendedInformation.scanForZIP64Field(
         in: extraFieldData,
-        fields: validFields)
+        fields: validFields
+      )
     {
       extraFields = [zip64ExtendedInformation]
     }
@@ -293,13 +310,14 @@ extension Entry.CentralDirectoryStructure {
   init(
     centralDirectoryStructure: Entry.CentralDirectoryStructure,
     zip64ExtendedInformation: Entry.ZIP64ExtendedInformation?,
-    relativeOffset: UInt32)
-  {
+    relativeOffset: UInt32
+  ) {
     if let existingInfo = zip64ExtendedInformation {
       extraFieldData = existingInfo.data
       versionNeededToExtract = max(
         centralDirectoryStructure.versionNeededToExtract,
-        Archive.Version.v45.rawValue)
+        Archive.Version.v45.rawValue
+      )
     } else {
       extraFieldData = centralDirectoryStructure.extraFieldData
       let existingVersion = centralDirectoryStructure.versionNeededToExtract
@@ -327,7 +345,8 @@ extension Entry.CentralDirectoryStructure {
     if
       let zip64ExtendedInformation = Entry.ZIP64ExtendedInformation.scanForZIP64Field(
         in: extraFieldData,
-        fields: validFields)
+        fields: validFields
+      )
     {
       extraFields = [zip64ExtendedInformation]
     }

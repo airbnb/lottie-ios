@@ -9,9 +9,8 @@ extension CAShapeLayer {
   func addAnimations(
     for combinedShapes: CombinedShapeItem,
     context: LayerAnimationContext,
-    pathMultiplier: PathMultiplier)
-    throws
-  {
+    pathMultiplier: PathMultiplier
+  ) throws {
     try addAnimation(
       for: .path,
       keyframes: combinedShapes.shapes,
@@ -22,7 +21,8 @@ extension CAShapeLayer {
         }
         return combinedPath
       },
-      context: context)
+      context: context
+    )
   }
 }
 
@@ -56,9 +56,8 @@ extension CombinedShapeItem {
   /// Manually combines the given shape keyframes by manually interpolating at each frame
   static func manuallyInterpolating(
     shapes: [KeyframeGroup<BezierPath>],
-    name: String)
-    -> CombinedShapeItem
-  {
+    name: String
+  ) -> CombinedShapeItem {
     let interpolators = shapes.map { shape in
       KeyframeInterpolator(keyframes: shape.keyframes)
     }
@@ -74,16 +73,18 @@ extension CombinedShapeItem {
         value: interpolators.compactMap { interpolator in
           interpolator.value(frame: AnimationFrameTime(localTime)) as? BezierPath
         },
-        time: AnimationFrameTime(localTime))
+        time: AnimationFrameTime(localTime)
+      )
     }
 
     return CombinedShapeItem(
       shapes: KeyframeGroup(keyframes: ContiguousArray(interpolatedKeyframes)),
-      name: name)
+      name: name
+    )
   }
 }
 
-// MARK: Sendable
+// MARK: @unchecked Sendable
 
 /// `CombinedShapeItem` inherits `@unchecked Sendable` from `ShapeItem` and
 /// we need to restate that here to avoid a warning in Xcode 16

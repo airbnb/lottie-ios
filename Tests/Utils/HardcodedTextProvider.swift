@@ -6,7 +6,7 @@ import Lottie
 // MARK: - HardcodedTextProvider
 
 /// An `AnimationTextProvider` that always returns a specific hardcoded text
-class HardcodedTextProvider: AnimationKeypathTextProvider {
+final class HardcodedTextProvider: AnimationKeypathTextProvider {
 
   // MARK: Lifecycle
 

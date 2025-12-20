@@ -57,7 +57,8 @@ struct BezierPath {
     updateVertex(
       CurveVertex(previous.vertex.inTangent, previous.vertex.point, outTangent),
       atIndex: elements.endIndex - 1,
-      remeasure: false)
+      remeasure: false
+    )
     addVertex(newVertex)
   }
 
@@ -67,7 +68,8 @@ struct BezierPath {
     updateVertex(
       CurveVertex(previous.vertex.inTangent, previous.vertex.point, previous.vertex.point),
       atIndex: elements.endIndex - 1,
-      remeasure: false)
+      remeasure: false
+    )
     addVertex(newVertex)
   }
 
@@ -311,7 +313,8 @@ extension BezierPath: Codable {
       throw DecodingError.dataCorruptedError(
         forKey: CodingKeys.vertices,
         in: container,
-        debugDescription: "Vertex data does not match In Tangents and Out Tangents")
+        debugDescription: "Vertex data does not match In Tangents and Out Tangents"
+      )
     }
 
     guard let count = vertexContainer.count, count > 0 else {
@@ -326,7 +329,8 @@ extension BezierPath: Codable {
     let firstVertex = CurveVertex(
       point: try vertexContainer.decode(CGPoint.self),
       inTangentRelative: try inPointsContainer.decode(CGPoint.self),
-      outTangentRelative: try outPointsContainer.decode(CGPoint.self))
+      outTangentRelative: try outPointsContainer.decode(CGPoint.self)
+    )
     var previousElement = PathElement(vertex: firstVertex)
     decodedElements.append(previousElement)
 
@@ -336,7 +340,8 @@ extension BezierPath: Codable {
       let vertex = CurveVertex(
         point: try vertexContainer.decode(CGPoint.self),
         inTangentRelative: try inPointsContainer.decode(CGPoint.self),
-        outTangentRelative: try outPointsContainer.decode(CGPoint.self))
+        outTangentRelative: try outPointsContainer.decode(CGPoint.self)
+      )
       let pathElement = previousElement.pathElementTo(vertex)
       decodedElements.append(pathElement)
       previousElement = pathElement
@@ -348,7 +353,8 @@ extension BezierPath: Codable {
       let closeVertex = CurveVertex(
         point: firstVertex.point,
         inTangentRelative: firstVertex.inTangentRelative,
-        outTangentRelative: .zero)
+        outTangentRelative: .zero
+      )
 
       let closeElement = previousElement.pathElementTo(closeVertex)
       decodedElements.append(closeElement)
@@ -436,7 +442,8 @@ extension BezierPath: AnyInitializable {
     let firstVertex = CurveVertex(
       point: try CGPoint(value: firstVertexDictionary),
       inTangentRelative: try CGPoint(value: firstInPointsDictionary),
-      outTangentRelative: try CGPoint(value: firstOutPointsDictionary))
+      outTangentRelative: try CGPoint(value: firstOutPointsDictionary)
+    )
     var previousElement = PathElement(vertex: firstVertex)
     decodedElements.append(previousElement)
 
@@ -448,7 +455,8 @@ extension BezierPath: AnyInitializable {
       let vertex = CurveVertex(
         point: try CGPoint(value: vertexDictionary),
         inTangentRelative: try CGPoint(value: inPointsDictionary),
-        outTangentRelative: try CGPoint(value: outPointsDictionary))
+        outTangentRelative: try CGPoint(value: outPointsDictionary)
+      )
       let pathElement = previousElement.pathElementTo(vertex)
       decodedElements.append(pathElement)
       previousElement = pathElement
@@ -460,7 +468,8 @@ extension BezierPath: AnyInitializable {
       let closeVertex = CurveVertex(
         point: firstVertex.point,
         inTangentRelative: firstVertex.inTangentRelative,
-        outTangentRelative: .zero)
+        outTangentRelative: .zero
+      )
 
       let closeElement = previousElement.pathElementTo(closeVertex)
       decodedElements.append(closeElement)

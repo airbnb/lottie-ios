@@ -40,7 +40,7 @@ public final class LottieAnimation: Codable, Sendable, DictionaryInitializable {
     markers = try container.decodeIfPresent([Marker].self, forKey: .markers)
 
     if let markers {
-      var markerMap: [String: Marker] = [:]
+      var markerMap = [String: Marker]()
       for marker in markers {
         markerMap[marker.name] = marker
       }
@@ -84,7 +84,7 @@ public final class LottieAnimation: Codable, Sendable, DictionaryInitializable {
     }
     if let markerDictionaries = dictionary[CodingKeys.markers.rawValue] as? [[String: Any]] {
       let markers = try markerDictionaries.map { try Marker(dictionary: $0) }
-      var markerMap: [String: Marker] = [:]
+      var markerMap = [String: Marker]()
       for marker in markers {
         markerMap[marker.name] = marker
       }

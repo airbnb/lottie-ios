@@ -7,9 +7,8 @@ extension Keyframes {
   ///    we have to manually interpolate the keyframes at every frame in the animation.
   static func manuallyInterpolatedWithTimeRemapping<T: AnyInterpolatable>(
     _ keyframes: KeyframeGroup<T>,
-    context: LayerAnimationContext)
-    -> KeyframeGroup<T>
-  {
+    context: LayerAnimationContext
+  ) -> KeyframeGroup<T> {
     let minimumTime = context.animation.startFrame
     let maximumTime = context.animation.endFrame
     let animationLocalTimeRange = stride(from: minimumTime, to: maximumTime, by: 1.0)
@@ -38,7 +37,8 @@ extension Keyframes {
 
       return Keyframe(
         value: valueAtRemappedTime,
-        time: AnimationFrameTime(globalTime))
+        time: AnimationFrameTime(globalTime)
+      )
     }
 
     return KeyframeGroup(keyframes: ContiguousArray(interpolatedRemappedKeyframes))

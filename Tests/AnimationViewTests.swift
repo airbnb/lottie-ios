@@ -19,7 +19,8 @@ final class AnimationViewTests: XCTestCase {
     let animationView = LottieAnimationView(
       name: "LottieLogo1",
       bundle: .lottie,
-      subdirectory: Samples.directoryName)
+      subdirectory: Samples.directoryName
+    )
 
     XCTAssertNotNil(animationView.animation)
 
@@ -46,7 +47,8 @@ final class AnimationViewTests: XCTestCase {
         XCTAssertNotNil(animationView.animation)
         XCTAssert(Thread.isMainThread)
         expectation.fulfill()
-      })
+      }
+    )
 
     XCTExpectFailure("This test case has been flaky in CI", strict: false) {
       wait(for: [expectation], timeout: 1.0)
@@ -59,7 +61,8 @@ final class AnimationViewTests: XCTestCase {
     let animationView = LottieAnimationView(
       dotLottieName: "DotLottie/animation",
       bundle: .lottie,
-      subdirectory: Samples.directoryName)
+      subdirectory: Samples.directoryName
+    )
 
     animationView.animationLoaded = { [weak animationView] view, animation in
       XCTAssert(view.animation === animation)
@@ -88,12 +91,14 @@ final class AnimationViewTests: XCTestCase {
       let animationSupportedByCoreAnimationRenderingEngine = LottieAnimation.named(
         "Issues/issue_1877",
         bundle: .lottie,
-        subdirectory: Samples.directoryName)
+        subdirectory: Samples.directoryName
+      )
 
       let animationUnsupportedByCoreAnimationRenderingEngine = LottieAnimation.named(
         "TypeFace/G",
         bundle: .lottie,
-        subdirectory: Samples.directoryName)
+        subdirectory: Samples.directoryName
+      )
 
       let animations = [
         animationSupportedByCoreAnimationRenderingEngine,
@@ -108,7 +113,8 @@ final class AnimationViewTests: XCTestCase {
           for engine in engineOptions {
             let animationView = LottieAnimationView(
               animation: animation,
-              configuration: .init(renderingEngine: engine.engine))
+              configuration: .init(renderingEngine: engine.engine)
+            )
 
             window.addSubview(animationView)
             defer {
@@ -116,25 +122,30 @@ final class AnimationViewTests: XCTestCase {
             }
 
             let animationPlayingExpectation = XCTestExpectation(
-              description: "Animation playing case \(test) on engine: \(engine.label)")
+              description: "Animation playing case \(test) on engine: \(engine.label)"
+            )
 
             let animationCompleteExpectation = XCTestExpectation(
-              description: "Finished playing case \(test) on engine: \(engine.label)")
+              description: "Finished playing case \(test) on engine: \(engine.label)"
+            )
 
             animationView.play(fromFrame: values.fromFrame, toFrame: values.toFrame, loopMode: .playOnce) { finished in
               XCTAssertTrue(
                 finished,
-                "Failed case \(test) on engine: \(engine.label)")
+                "Failed case \(test) on engine: \(engine.label)"
+              )
 
               XCTAssertEqual(
                 animationView.currentFrame,
                 values.toFrame,
                 accuracy: 0.01,
-                "Failed case \(test) on engine: \(engine.label)")
+                "Failed case \(test) on engine: \(engine.label)"
+              )
 
               XCTAssertFalse(
                 animationView.isAnimationPlaying,
-                "Failed case \(test) on engine: \(engine.label)")
+                "Failed case \(test) on engine: \(engine.label)"
+              )
 
               animationCompleteExpectation.fulfill()
             }
@@ -153,7 +164,8 @@ final class AnimationViewTests: XCTestCase {
 
               XCTAssertTrue(
                 animationView.isAnimationPlaying,
-                "Failed case \(test) on engine: \(engine.label)")
+                "Failed case \(test) on engine: \(engine.label)"
+              )
 
               // Check that the animation is playing in the correct direction:
               // After a brief delay we should be closer to the from frame than the to frame
@@ -161,7 +173,8 @@ final class AnimationViewTests: XCTestCase {
               let distanceFromEndFrame = abs(values.toFrame - animationView.realtimeAnimationFrame)
               XCTAssertTrue(
                 distanceFromStartFrame < distanceFromEndFrame,
-                "Failed case \(test) on engine: \(engine.label)")
+                "Failed case \(test) on engine: \(engine.label)"
+              )
             }
 
             wait(for: [animationPlayingExpectation, animationCompleteExpectation], timeout: 1.0)

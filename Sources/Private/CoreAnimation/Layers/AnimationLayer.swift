@@ -97,7 +97,8 @@ struct LayerAnimationContext {
   func progressTime(for frame: AnimationFrameTime) throws -> AnimationProgressTime {
     try compatibilityAssert(
       !mustUseComplexTimeRemapping,
-      "LayerAnimationContext.time(forFrame:) does not support complex time remapping")
+      "LayerAnimationContext.time(forFrame:) does not support complex time remapping"
+    )
 
     let animationFrameCount = animationDuration * animation.framerate
     return (simpleTimeRemapping(frame) - animation.startFrame) / animationFrameCount
@@ -108,16 +109,16 @@ struct LayerAnimationContext {
   func time(forFrame frame: AnimationFrameTime) throws -> TimeInterval {
     try compatibilityAssert(
       !mustUseComplexTimeRemapping,
-      "LayerAnimationContext.time(forFrame:) does not support complex time remapping")
+      "LayerAnimationContext.time(forFrame:) does not support complex time remapping"
+    )
 
     return animation.time(forFrame: simpleTimeRemapping(frame))
   }
 
   /// Chains an additional time remapping closure onto the `simpleTimeRemapping` closure
   func withSimpleTimeRemapping(
-    _ additionalSimpleTimeRemapping: @escaping (_ localTime: AnimationFrameTime) -> AnimationFrameTime)
-    -> LayerAnimationContext
-  {
+    _ additionalSimpleTimeRemapping: @escaping (_ localTime: AnimationFrameTime) -> AnimationFrameTime
+  ) -> LayerAnimationContext {
     var copy = self
     copy.simpleTimeRemapping = { [existingSimpleTimeRemapping = simpleTimeRemapping] time in
       existingSimpleTimeRemapping(additionalSimpleTimeRemapping(time))
@@ -131,9 +132,8 @@ struct LayerAnimationContext {
   ///  - `required: true` is necessary when this time remapping is not available via `simpleTimeRemapping`.
   func withComplexTimeRemapping(
     required: Bool,
-    _ additionalComplexTimeRemapping: @escaping (_ globalTime: AnimationFrameTime) -> AnimationFrameTime)
-    -> LayerAnimationContext
-  {
+    _ additionalComplexTimeRemapping: @escaping (_ globalTime: AnimationFrameTime) -> AnimationFrameTime
+  ) -> LayerAnimationContext {
     var copy = self
     copy.mustUseComplexTimeRemapping = copy.mustUseComplexTimeRemapping || required
     copy.complexTimeRemapping = { [existingComplexTimeRemapping = complexTimeRemapping] time in

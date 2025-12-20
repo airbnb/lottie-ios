@@ -34,9 +34,8 @@ extension Archive {
     relativeTo baseURL: URL,
     compressionMethod: CompressionMethod = .none,
     bufferSize: Int = defaultWriteChunkSize,
-    progress: Progress? = nil)
-    throws
-  {
+    progress: Progress? = nil
+  ) throws {
     let fileURL = baseURL.appendingPathComponent(path)
 
     try addEntry(
@@ -44,7 +43,8 @@ extension Archive {
       fileURL: fileURL,
       compressionMethod: compressionMethod,
       bufferSize: bufferSize,
-      progress: progress)
+      progress: progress
+    )
   }
 
   /// Write files, directories or symlinks to the receiver.
@@ -62,9 +62,8 @@ extension Archive {
     fileURL: URL,
     compressionMethod: CompressionMethod = .none,
     bufferSize: Int = defaultWriteChunkSize,
-    progress: Progress? = nil)
-    throws
-  {
+    progress: Progress? = nil
+  ) throws {
     let fileManager = FileManager()
     guard fileManager.itemExists(at: fileURL) else {
       throw CocoaError(.fileReadNoSuchFile, userInfo: [NSFilePathErrorKey: fileURL.path])
@@ -95,7 +94,8 @@ extension Archive {
         compressionMethod: compressionMethod,
         bufferSize: bufferSize,
         progress: progress,
-        provider: provider)
+        provider: provider
+      )
 
     case .directory:
       provider = { _, _ in Data() }
@@ -108,7 +108,8 @@ extension Archive {
         compressionMethod: compressionMethod,
         bufferSize: bufferSize,
         progress: progress,
-        provider: provider)
+        provider: provider
+      )
 
     case .symlink:
       provider = { _, _ -> Data in
@@ -127,7 +128,8 @@ extension Archive {
         compressionMethod: compressionMethod,
         bufferSize: bufferSize,
         progress: progress,
-        provider: provider)
+        provider: provider
+      )
     }
   }
 
@@ -156,14 +158,14 @@ extension Archive {
     compressionMethod: CompressionMethod = .none,
     bufferSize: Int = defaultWriteChunkSize,
     progress: Progress? = nil,
-    provider: Provider)
-    throws
-  {
+    provider: Provider
+  ) throws {
     guard accessMode != .read else { throw ArchiveError.unwritableArchive }
     // Directories and symlinks cannot be compressed
     let compressionMethod = type == .file ? compressionMethod : .none
     progress?.totalUnitCount = type == .directory ? defaultDirectoryUnitCount : uncompressedSize
-    let (eocdRecord, zip64EOCD) = (endOfCentralDirectoryRecord, zip64EndOfCentralDirectory)
+    let eocdRecord = endOfCentralDirectoryRecord
+    let zip64EOCD = zip64EndOfCentralDirectory
     guard offsetToStartOfCentralDirectory <= .max else { throw ArchiveError.invalidCentralDirectoryOffset }
     var startOfCD = Int64(offsetToStartOfCentralDirectory)
     fseeko(archiveFile, off_t(startOfCD), SEEK_SET)
@@ -180,7 +182,8 @@ extension Archive {
         compressionMethod: compressionMethod,
         size: (UInt64(uncompressedSize), 0),
         checksum: 0,
-        modificationDateTime: modDateTime)
+        modificationDateTime: modDateTime
+      )
       // File Data
       let (written, checksum) = try writeEntry(
         uncompressedSize: uncompressedSize,
@@ -188,7 +191,8 @@ extension Archive {
         compressionMethod: compressionMethod,
         bufferSize: bufferSize,
         progress: progress,
-        provider: provider)
+        provider: provider
+      )
       startOfCD = Int64(ftello(archiveFile))
       // Write the local file header a second time. Now with compressedSize (if applicable) and a valid checksum.
       fseeko(archiveFile, off_t(fileHeaderStart), SEEK_SET)
@@ -197,7 +201,8 @@ extension Archive {
         compressionMethod: compressionMethod,
         size: (UInt64(uncompressedSize), UInt64(written)),
         checksum: checksum,
-        modificationDateTime: modDateTime)
+        modificationDateTime: modDateTime
+      )
       // Central Directory
       fseeko(archiveFile, off_t(startOfCD), SEEK_SET)
       _ = try Data.writeLargeChunk(existingData, size: existingSize, bufferSize: bufferSize, to: archiveFile)
@@ -206,14 +211,16 @@ extension Archive {
       let centralDir = try writeCentralDirectoryStructure(
         localFileHeader: localFileHeader,
         relativeOffset: UInt64(fileHeaderStart),
-        externalFileAttributes: externalAttributes)
+        externalFileAttributes: externalAttributes
+      )
       // End of Central Directory Record (including ZIP64 End of Central Directory Record/Locator)
       let startOfEOCD = UInt64(ftello(archiveFile))
       let eocd = try writeEndOfCentralDirectory(
         centralDirectoryStructure: centralDir,
         startOfCentralDirectory: UInt64(startOfCD),
         startOfEndOfCentralDirectory: startOfEOCD,
-        operation: .add)
+        operation: .add
+      )
       (endOfCentralDirectoryRecord, zip64EndOfCentralDirectory) = eocd
     } catch ArchiveError.cancelledOperation {
       try rollback(UInt64(fileHeaderStart), (existingData, existingSize), bufferSize, eocdRecord, zip64EOCD)
@@ -253,10 +260,12 @@ extension Archive {
           of: Int64(currentEntry.localSize),
           chunkSize: bufferSize,
           provider: provider,
-          consumer: consumer)
+          consumer: consumer
+        )
         let updatedCentralDirectory = updateOffsetInCentralDirectory(
           centralDirectoryStructure: cds,
-          updatedOffset: entryStart - offset)
+          updatedOffset: entryStart - offset
+        )
         centralDirectoryData.append(updatedCentralDirectory.data)
       } else { offset = currentEntry.localSize }
     }
@@ -270,7 +279,8 @@ extension Archive {
         centralDirectoryStructure: entry.centralDirectoryStructure,
         startOfCentralDirectory: startOfCentralDirectory,
         startOfEndOfCentralDirectory: startOfEndOfCentralDirectory,
-        operation: .remove)
+        operation: .remove
+      )
     (tempArchive.endOfCentralDirectoryRecord, tempArchive.zip64EndOfCentralDirectory) = ecodStructure
     (endOfCentralDirectoryRecord, zip64EndOfCentralDirectory) = ecodStructure
     fflush(tempArchive.archiveFile)
@@ -318,16 +328,18 @@ extension Archive {
 
   private func updateOffsetInCentralDirectory(
     centralDirectoryStructure: CentralDirectoryStructure,
-    updatedOffset: UInt64)
-    -> CentralDirectoryStructure
-  {
+    updatedOffset: UInt64
+  ) -> CentralDirectoryStructure {
     let zip64ExtendedInformation = Entry.ZIP64ExtendedInformation(
-      zip64ExtendedInformation: centralDirectoryStructure.zip64ExtendedInformation, offset: updatedOffset)
+      zip64ExtendedInformation: centralDirectoryStructure.zip64ExtendedInformation,
+      offset: updatedOffset
+    )
     let offsetInCD = updatedOffset < maxOffsetOfLocalFileHeader ? UInt32(updatedOffset) : UInt32.max
     return CentralDirectoryStructure(
       centralDirectoryStructure: centralDirectoryStructure,
       zip64ExtendedInformation: zip64ExtendedInformation,
-      relativeOffset: offsetInCD)
+      relativeOffset: offsetInCD
+    )
   }
 
   private func rollback(
@@ -335,9 +347,8 @@ extension Archive {
     _ existingCentralDirectory: (data: Data, size: UInt64),
     _ bufferSize: Int,
     _ endOfCentralDirRecord: EndOfCentralDirectoryRecord,
-    _ zip64EndOfCentralDirectory: ZIP64EndOfCentralDirectory?)
-    throws
-  {
+    _ zip64EndOfCentralDirectory: ZIP64EndOfCentralDirectory?
+  ) throws {
     fflush(archiveFile)
     ftruncate(fileno(archiveFile), off_t(localFileHeaderStart))
     fseeko(archiveFile, off_t(localFileHeaderStart), SEEK_SET)
@@ -345,7 +356,8 @@ extension Archive {
       existingCentralDirectory.data,
       size: existingCentralDirectory.size,
       bufferSize: bufferSize,
-      to: archiveFile)
+      to: archiveFile
+    )
     _ = try Data.write(chunk: existingCentralDirectory.data, to: archiveFile)
     if let zip64EOCD = zip64EndOfCentralDirectory {
       _ = try Data.write(chunk: zip64EOCD.data, to: archiveFile)
@@ -362,7 +374,8 @@ extension Archive {
         let tempArchive = Archive(
           data: Data(),
           accessMode: .create,
-          preferredEncoding: preferredEncoding)
+          preferredEncoding: preferredEncoding
+        )
       else {
         throw ArchiveError.unwritableArchive
       }

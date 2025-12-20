@@ -13,7 +13,7 @@ import Foundation
 ///
 /// Once `cacheSize` is reached, the least recently used lottie will be ejected.
 /// The default size of the cache is 100.
-public class DotLottieCache: DotLottieCacheProvider {
+public final class DotLottieCache: DotLottieCacheProvider {
 
   // MARK: Lifecycle
 

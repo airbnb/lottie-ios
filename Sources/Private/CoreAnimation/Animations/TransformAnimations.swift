@@ -43,22 +43,53 @@ protocol TransformModel {
 // MARK: - Transform + TransformModel
 
 extension Transform: TransformModel {
-  var _position: KeyframeGroup<LottieVector3D>? { position }
-  var _positionX: KeyframeGroup<LottieVector1D>? { positionX }
-  var _positionY: KeyframeGroup<LottieVector1D>? { positionY }
-  var _skew: KeyframeGroup<LottieVector1D>? { nil }
-  var _skewAxis: KeyframeGroup<LottieVector1D>? { nil }
+  var _position: KeyframeGroup<LottieVector3D>? {
+    position
+  }
+
+  var _positionX: KeyframeGroup<LottieVector1D>? {
+    positionX
+  }
+
+  var _positionY: KeyframeGroup<LottieVector1D>? {
+    positionY
+  }
+
+  var _skew: KeyframeGroup<LottieVector1D>? {
+    nil
+  }
+
+  var _skewAxis: KeyframeGroup<LottieVector1D>? {
+    nil
+  }
 }
 
 // MARK: - ShapeTransform + TransformModel
 
 extension ShapeTransform: TransformModel {
-  var anchorPoint: KeyframeGroup<LottieVector3D> { anchor }
-  var _position: KeyframeGroup<LottieVector3D>? { position }
-  var _positionX: KeyframeGroup<LottieVector1D>? { nil }
-  var _positionY: KeyframeGroup<LottieVector1D>? { nil }
-  var _skew: KeyframeGroup<LottieVector1D>? { skew }
-  var _skewAxis: KeyframeGroup<LottieVector1D>? { skewAxis }
+  var anchorPoint: KeyframeGroup<LottieVector3D> {
+    anchor
+  }
+
+  var _position: KeyframeGroup<LottieVector3D>? {
+    position
+  }
+
+  var _positionX: KeyframeGroup<LottieVector1D>? {
+    nil
+  }
+
+  var _positionY: KeyframeGroup<LottieVector1D>? {
+    nil
+  }
+
+  var _skew: KeyframeGroup<LottieVector1D>? {
+    skew
+  }
+
+  var _skewAxis: KeyframeGroup<LottieVector1D>? {
+    skewAxis
+  }
 }
 
 // MARK: - CALayer + TransformModel
@@ -73,9 +104,8 @@ extension CALayer {
   @nonobjc
   func addTransformAnimations(
     for transformModel: TransformModel,
-    context: LayerAnimationContext)
-    throws
-  {
+    context: LayerAnimationContext
+  ) throws {
     if
       // CALayers don't support animating skew with its own set of keyframes.
       // If the transform includes a skew, we have to combine all of the transform
@@ -103,15 +133,15 @@ extension CALayer {
   @nonobjc
   private func addPositionAnimations(
     from transformModel: TransformModel,
-    context: LayerAnimationContext)
-    throws
-  {
+    context: LayerAnimationContext
+  ) throws {
     if let positionKeyframes = transformModel._position {
       try addAnimation(
         for: .position,
         keyframes: positionKeyframes,
         value: \.pointValue,
-        context: context)
+        context: context
+      )
     } else if
       let xKeyframes = transformModel._positionX,
       let yKeyframes = transformModel._positionY
@@ -120,13 +150,15 @@ extension CALayer {
         for: .positionX,
         keyframes: xKeyframes,
         value: \.cgFloatValue,
-        context: context)
+        context: context
+      )
 
       try addAnimation(
         for: .positionY,
         keyframes: yKeyframes,
         value: \.cgFloatValue,
-        context: context)
+        context: context
+      )
     } else {
       try context.logCompatibilityIssue("""
         `Transform` values must provide either `position` or `positionX` / `positionY` keyframes
@@ -137,9 +169,8 @@ extension CALayer {
   @nonobjc
   private func addAnchorPointAnimation(
     from transformModel: TransformModel,
-    context: LayerAnimationContext)
-    throws
-  {
+    context: LayerAnimationContext
+  ) throws {
     try addAnimation(
       for: .anchorPoint,
       keyframes: transformModel.anchorPoint,
@@ -154,17 +185,18 @@ extension CALayer {
         // relative decimal values expected by Core Animation.
         return CGPoint(
           x: CGFloat(absoluteAnchorPoint.x) / bounds.width,
-          y: CGFloat(absoluteAnchorPoint.y) / bounds.height)
+          y: CGFloat(absoluteAnchorPoint.y) / bounds.height
+        )
       },
-      context: context)
+      context: context
+    )
   }
 
   @nonobjc
   private func addScaleAnimations(
     from transformModel: TransformModel,
-    context: LayerAnimationContext)
-    throws
-  {
+    context: LayerAnimationContext
+  ) throws {
     try addAnimation(
       for: .scaleX,
       keyframes: transformModel.scale,
@@ -174,7 +206,8 @@ extension CALayer {
         // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
         CGFloat(scale.x) / 100
       },
-      context: context)
+      context: context
+    )
 
     try addAnimation(
       for: .scaleY,
@@ -185,14 +218,14 @@ extension CALayer {
         // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
         CGFloat(scale.y) / 100
       },
-      context: context)
+      context: context
+    )
   }
 
   private func addRotationAnimations(
     from transformModel: TransformModel,
-    context: LayerAnimationContext)
-    throws
-  {
+    context: LayerAnimationContext
+  ) throws {
     let containsXRotationValues = transformModel.rotationX.keyframes.contains(where: { $0.value.cgFloatValue != 0 })
     let containsYRotationValues = transformModel.rotationY.keyframes.contains(where: { $0.value.cgFloatValue != 0 })
 
@@ -222,7 +255,8 @@ extension CALayer {
       value: { rotationDegrees in
         rotationDegrees.cgFloatValue * .pi / 180
       },
-      context: context)
+      context: context
+    )
 
     try addAnimation(
       for: .rotationY,
@@ -230,7 +264,8 @@ extension CALayer {
       value: { rotationDegrees in
         rotationDegrees.cgFloatValue * .pi / 180
       },
-      context: context)
+      context: context
+    )
 
     try addAnimation(
       for: .rotationZ,
@@ -241,7 +276,8 @@ extension CALayer {
         // values expected by Core Animation (e.g. π/2, π, 2π)
         rotationDegrees.cgFloatValue * .pi / 180
       },
-      context: context)
+      context: context
+    )
   }
 
   /// Adds an animation for the entire `transform` key by combining all of the
@@ -250,9 +286,8 @@ extension CALayer {
   /// it may require manually interpolating the keyframes at each frame.
   private func addCombinedTransformAnimation(
     for transformModel: TransformModel,
-    context: LayerAnimationContext)
-    throws
-  {
+    context: LayerAnimationContext
+  ) throws {
     let requiresManualInterpolation =
       // Core Animation doesn't animate skew changes properly. If the skew value
       // changes over the course of the animation then we have to manually
@@ -279,7 +314,6 @@ extension CALayer {
       makeCombinedResult: {
         anchor, position, positionX, positionY, scale, rotationX, rotationY, rotationZ, skew, skewAxis
           -> Hold<CATransform3D> in
-
         let transformPosition: CGPoint =
           if transformModel._positionX != nil, transformModel._positionY != nil {
             CGPoint(x: positionX.cgFloatValue, y: positionY.cgFloatValue)
@@ -295,16 +329,19 @@ extension CALayer {
           rotationY: rotationY.cgFloatValue,
           rotationZ: rotationZ.cgFloatValue,
           skew: skew.cgFloatValue,
-          skewAxis: skewAxis.cgFloatValue)
+          skewAxis: skewAxis.cgFloatValue
+        )
 
         return Hold(value: transform)
-      })
+      }
+    )
 
     try addAnimation(
       for: .transform,
       keyframes: combinedTransformKeyframes,
       value: { $0.value },
-      context: context)
+      context: context
+    )
   }
 
 }

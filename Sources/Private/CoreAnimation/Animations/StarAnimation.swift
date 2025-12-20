@@ -12,9 +12,8 @@ extension CAShapeLayer {
   func addAnimations(
     for star: Star,
     context: LayerAnimationContext,
-    pathMultiplier: PathMultiplier)
-    throws
-  {
+    pathMultiplier: PathMultiplier
+  ) throws {
     switch star.starType {
     case .star:
       try addStarAnimation(for: star, context: context, pathMultiplier: pathMultiplier)
@@ -31,9 +30,8 @@ extension CAShapeLayer {
   private func addStarAnimation(
     for star: Star,
     context: LayerAnimationContext,
-    pathMultiplier: PathMultiplier)
-    throws
-  {
+    pathMultiplier: PathMultiplier
+  ) throws {
     try addAnimation(
       for: .path,
       keyframes: try star.combinedKeyframes(),
@@ -46,20 +44,21 @@ extension CAShapeLayer {
           innerRoundedness: keyframe.innerRoundness.cgFloatValue,
           numberOfPoints: keyframe.points.cgFloatValue,
           rotation: keyframe.rotation.cgFloatValue,
-          direction: star.direction)
-          .cgPath()
-          .duplicated(times: pathMultiplier)
+          direction: star.direction
+        )
+        .cgPath()
+        .duplicated(times: pathMultiplier)
       },
-      context: context)
+      context: context
+    )
   }
 
   @nonobjc
   private func addPolygonAnimation(
     for star: Star,
     context: LayerAnimationContext,
-    pathMultiplier: PathMultiplier)
-    throws
-  {
+    pathMultiplier: PathMultiplier
+  ) throws {
     try addAnimation(
       for: .path,
       keyframes: try star.combinedKeyframes(),
@@ -70,11 +69,13 @@ extension CAShapeLayer {
           outerRadius: keyframe.outerRadius.cgFloatValue,
           outerRoundedness: keyframe.outerRoundness.cgFloatValue,
           rotation: keyframe.rotation.cgFloatValue,
-          direction: star.direction)
-          .cgPath()
-          .duplicated(times: pathMultiplier)
+          direction: star.direction
+        )
+        .cgPath()
+        .duplicated(times: pathMultiplier)
       },
-      context: context)
+      context: context
+    )
   }
 }
 
@@ -97,7 +98,8 @@ extension Star {
         outerRoundness: outerRoundness.interpolate(to: to.outerRoundness, amount: amount),
         innerRoundness: innerRoundness.interpolate(to: to.innerRoundness, amount: amount),
         points: points.interpolate(to: to.points, amount: amount),
-        rotation: rotation.interpolate(to: to.rotation, amount: amount))
+        rotation: rotation.interpolate(to: to.rotation, amount: amount)
+      )
     }
   }
 
@@ -111,6 +113,7 @@ extension Star {
       innerRoundness ?? KeyframeGroup(LottieVector1D(0)),
       points,
       rotation,
-      makeCombinedResult: Star.Keyframe.init)
+      makeCombinedResult: Star.Keyframe.init
+    )
   }
 }

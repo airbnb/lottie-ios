@@ -30,7 +30,7 @@ extension LayerStyleType: ClassFamily {
 
 // MARK: - LayerStyle
 
-class LayerStyle: Codable, DictionaryInitializable {
+final class LayerStyle: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
@@ -76,7 +76,7 @@ extension [LayerStyle] {
   }
 }
 
-// MARK: - LayerStyle + Sendable
+// MARK: - LayerStyle + @unchecked Sendable
 
 /// Since `LayerStyle` isn't `final`, we have to use `@unchecked Sendable` instead of `Sendable.`
 /// All `LayerStyle` subclasses are immutable `Sendable` values.

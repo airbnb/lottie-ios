@@ -23,8 +23,8 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     textProvider: AnimationKeypathTextProvider,
     fontProvider: AnimationFontProvider,
     maskAnimationToBounds: Bool,
-    logger: LottieLogger)
-  {
+    logger: LottieLogger
+  ) {
     layerImageProvider = LayerImageProvider(imageProvider: imageProvider, assets: animation.assetLibrary?.imageAssets)
     layerTextProvider = LayerTextProvider(textProvider: textProvider)
     layerFontProvider = LayerFontProvider(fontProvider: fontProvider)
@@ -41,7 +41,8 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
       textProvider: textProvider,
       fontProvider: fontProvider,
       frameRate: CGFloat(animation.framerate),
-      rootAnimationLayer: self)
+      rootAnimationLayer: self
+    )
 
     var imageLayers = [ImageCompositionLayer]()
     var textLayers = [TextCompositionLayer]()
@@ -103,50 +104,9 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
     fatalError("init(coder:) has not been implemented")
   }
 
-  // MARK: Public
-
-  public var respectAnimationFrameRate = false
-
-  // MARK: CALayer Animations
-
-  override public class func needsDisplay(forKey key: String) -> Bool {
-    if key == "currentFrame" {
-      return true
-    }
-    return super.needsDisplay(forKey: key)
-  }
-
-  override public func action(forKey event: String) -> CAAction? {
-    if event == "currentFrame" {
-      let animation = CABasicAnimation(keyPath: event)
-      animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
-      animation.fromValue = presentation()?.currentFrame
-      return animation
-    }
-    return super.action(forKey: event)
-  }
-
-  public override func display() {
-    guard Thread.isMainThread else { return }
-    var newFrame: CGFloat =
-      if
-        let animationKeys = animationKeys(),
-        !animationKeys.isEmpty
-      {
-        presentation()?.currentFrame ?? currentFrame
-      } else {
-        // We ignore the presentation's frame if there's no animation in the layer.
-        currentFrame
-      }
-    if respectAnimationFrameRate {
-      newFrame = floor(newFrame)
-    }
-    for animationLayer in animationLayers {
-      animationLayer.displayWithFrame(frame: newFrame, forceUpdates: forceDisplayUpdateOnEachFrame)
-    }
-  }
-
   // MARK: Internal
+
+  var respectAnimationFrameRate = false
 
   /// The animatable Current Frame Property
   @NSManaged var currentFrame: CGFloat
@@ -201,6 +161,43 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
   var fontProvider: AnimationFontProvider {
     get { layerFontProvider.fontProvider }
     set { layerFontProvider.fontProvider = newValue }
+  }
+
+  override class func needsDisplay(forKey key: String) -> Bool {
+    if key == "currentFrame" {
+      return true
+    }
+    return super.needsDisplay(forKey: key)
+  }
+
+  override func action(forKey event: String) -> CAAction? {
+    if event == "currentFrame" {
+      let animation = CABasicAnimation(keyPath: event)
+      animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+      animation.fromValue = presentation()?.currentFrame
+      return animation
+    }
+    return super.action(forKey: event)
+  }
+
+  override func display() {
+    guard Thread.isMainThread else { return }
+    var newFrame: CGFloat =
+      if
+        let animationKeys = animationKeys(),
+        !animationKeys.isEmpty
+      {
+        presentation()?.currentFrame ?? currentFrame
+      } else {
+        // We ignore the presentation's frame if there's no animation in the layer.
+        currentFrame
+      }
+    if respectAnimationFrameRate {
+      newFrame = floor(newFrame)
+    }
+    for animationLayer in animationLayers {
+      animationLayer.displayWithFrame(frame: newFrame, forceUpdates: forceDisplayUpdateOnEachFrame)
+    }
   }
 
   func reloadImages() {
@@ -317,7 +314,7 @@ final class MainThreadAnimationLayer: CALayer, RootAnimationLayer {
 
 // MARK: - BlankImageProvider
 
-private class BlankImageProvider: AnimationImageProvider {
+private final class BlankImageProvider: AnimationImageProvider {
   func imageForAsset(asset _: ImageAsset) -> CGImage? {
     nil
   }

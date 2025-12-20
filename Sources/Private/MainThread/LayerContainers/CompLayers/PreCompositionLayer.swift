@@ -21,8 +21,8 @@ final class PreCompositionLayer: CompositionLayer {
     fontProvider: AnimationFontProvider,
     assetLibrary: AssetLibrary?,
     frameRate: CGFloat,
-    rootAnimationLayer: MainThreadAnimationLayer?)
-  {
+    rootAnimationLayer: MainThreadAnimationLayer?
+  ) {
     animationLayers = []
     if let keyframes = precomp.timeRemapping?.keyframes {
       remappingNode = NodeProperty(provider: KeyframeInterpolator(keyframes: keyframes))
@@ -43,7 +43,8 @@ final class PreCompositionLayer: CompositionLayer {
       textProvider: textProvider,
       fontProvider: fontProvider,
       frameRate: frameRate,
-      rootAnimationLayer: rootAnimationLayer)
+      rootAnimationLayer: rootAnimationLayer
+    )
 
     var imageLayers = [ImageCompositionLayer]()
     var textLayers = [TextCompositionLayer]()

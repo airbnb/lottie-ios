@@ -41,8 +41,6 @@ public final class FloatValueProvider: ValueProvider {
     }
   }
 
-  // MARK: ValueProvider Protocol
-
   public var valueType: Any.Type {
     LottieVector1D.self
   }

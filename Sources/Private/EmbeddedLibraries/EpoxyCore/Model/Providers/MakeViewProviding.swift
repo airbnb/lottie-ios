@@ -55,6 +55,7 @@ extension ViewEpoxyModeled where Self: MakeViewProviding {
     .init(
       keyPath: \Self.makeView,
       defaultValue: View.init,
-      updateStrategy: .replace)
+      updateStrategy: .replace
+    )
   }
 }

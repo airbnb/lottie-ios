@@ -150,6 +150,8 @@ final class Archive: Sequence {
   }
 
   struct EndOfCentralDirectoryRecord: DataSerializable {
+    static let size = 22
+
     let endOfCentralDirectorySignature = UInt32(endOfCentralDirectoryStructSignature)
     let numberOfDisk: UInt16
     let numberOfDiskStart: UInt16
@@ -159,7 +161,6 @@ final class Archive: Sequence {
     let offsetToStartOfCentralDirectory: UInt32
     let zipFileCommentLength: UInt16
     let zipFileCommentData: Data
-    static let size = 22
   }
 
   /// URL of an Archive's backing file.
@@ -221,8 +222,6 @@ final class Archive: Sequence {
       ?? UInt64(endOfCentralDirectoryRecord.offsetToStartOfCentralDirectory)
   }
 
-  // MARK: - Helpers
-
   static func scanForEndOfCentralDirectoryRecord(in file: FILEPointer)
     -> EndOfCentralDirectoryStructure?
   {
@@ -256,7 +255,8 @@ final class Archive: Sequence {
       guard
         let centralDirStruct: CentralDirectoryStructure = Data.readStruct(
           from: self.archiveFile,
-          at: directoryIndex)
+          at: directoryIndex
+        )
       else {
         return nil
       }
@@ -264,7 +264,8 @@ final class Archive: Sequence {
       guard
         let localFileHeader: LocalFileHeader = Data.readStruct(
           from: self.archiveFile,
-          at: offset)
+          at: offset
+        )
       else { return nil }
       var dataDescriptor: DataDescriptor?
       var zip64DataDescriptor: ZIP64DataDescriptor?
@@ -292,7 +293,8 @@ final class Archive: Sequence {
         centralDirectoryStructure: centralDirStruct,
         localFileHeader: localFileHeader,
         dataDescriptor: dataDescriptor,
-        zip64DataDescriptor: zip64DataDescriptor)
+        zip64DataDescriptor: zip64DataDescriptor
+      )
     }
   }
 
@@ -359,8 +361,8 @@ extension Archive.EndOfCentralDirectoryRecord {
     numberOfEntriesOnDisk: UInt16,
     numberOfEntriesInCentralDirectory: UInt16,
     updatedSizeOfCentralDirectory: UInt32,
-    startOfCentralDirectory: UInt32)
-  {
+    startOfCentralDirectory: UInt32
+  ) {
     numberOfDisk = record.numberOfDisk
     numberOfDiskStart = record.numberOfDiskStart
     totalNumberOfEntriesOnDisk = numberOfEntriesOnDisk

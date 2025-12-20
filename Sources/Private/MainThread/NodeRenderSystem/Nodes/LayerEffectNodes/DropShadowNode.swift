@@ -91,7 +91,7 @@ final class DropShadowNodeProperties: NodePropertyMap {
 
   // MARK: Internal
 
-  var propertyMap: [String: AnyNodeProperty] = [:]
+  var propertyMap = [String: AnyNodeProperty]()
   var properties: [AnyNodeProperty]
 
   let opacity: NodeProperty<LottieVector1D>?

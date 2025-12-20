@@ -11,12 +11,12 @@ extension CAShapeLayer {
     context: LayerAnimationContext,
     pathMultiplier: PathMultiplier = 1,
     transformPath: (CGPath) -> CGPath = { $0 },
-    roundedCorners: RoundedCorners? = nil)
-    throws
-  {
+    roundedCorners: RoundedCorners? = nil
+  ) throws {
     let combinedKeyframes = try BezierPathKeyframe.combining(
       path: customPath,
-      cornerRadius: roundedCorners?.radius)
+      cornerRadius: roundedCorners?.radius
+    )
 
     try addAnimation(
       for: .path,
@@ -29,7 +29,8 @@ extension CAShapeLayer {
 
         return transformPath(path.cgPath().duplicated(times: pathMultiplier))
       },
-      context: context)
+      context: context
+    )
   }
 }
 
@@ -61,9 +62,8 @@ struct BezierPathKeyframe: Interpolatable {
   /// that can have different counts / timing parameters
   static func combining(
     path: KeyframeGroup<BezierPath>,
-    cornerRadius: KeyframeGroup<LottieVector1D>?)
-    throws -> KeyframeGroup<BezierPathKeyframe>
-  {
+    cornerRadius: KeyframeGroup<LottieVector1D>?
+  ) throws -> KeyframeGroup<BezierPathKeyframe> {
     guard
       let cornerRadius,
       cornerRadius.keyframes.contains(where: { $0.value.cgFloatValue > 0 })
@@ -74,13 +74,16 @@ struct BezierPathKeyframe: Interpolatable {
     }
 
     return Keyframes.combined(
-      path, cornerRadius,
-      makeCombinedResult: BezierPathKeyframe.init)
+      path,
+      cornerRadius,
+      makeCombinedResult: BezierPathKeyframe.init
+    )
   }
 
   func interpolate(to: BezierPathKeyframe, amount: CGFloat) -> BezierPathKeyframe {
     BezierPathKeyframe(
       path: path.interpolate(to: to.path, amount: amount),
-      cornerRadius: cornerRadius.interpolate(to: to.cornerRadius, amount: amount))
+      cornerRadius: cornerRadius.interpolate(to: to.cornerRadius, amount: amount)
+    )
   }
 }

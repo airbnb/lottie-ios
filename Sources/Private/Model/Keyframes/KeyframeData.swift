@@ -24,8 +24,8 @@ final class KeyframeData<T> {
     inTangent: LottieVector2D?,
     outTangent: LottieVector2D?,
     spatialInTangent: LottieVector3D?,
-    spatialOutTangent: LottieVector3D?)
-  {
+    spatialOutTangent: LottieVector3D?
+  ) {
     self.startValue = startValue
     self.endValue = endValue
     self.time = time
@@ -105,6 +105,7 @@ extension KeyframeData: DictionaryInitializable where T: AnyInitializable {
       inTangent: inTangent,
       outTangent: outTangent,
       spatialInTangent: spatialInTangent,
-      spatialOutTangent: spatialOutTangent)
+      spatialOutTangent: spatialOutTangent
+    )
   }
 }

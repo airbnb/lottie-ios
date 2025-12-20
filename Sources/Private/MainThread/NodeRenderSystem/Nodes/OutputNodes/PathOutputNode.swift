@@ -8,7 +8,7 @@
 import CoreGraphics
 
 /// A node that has an output of a BezierPath
-class PathOutputNode: NodeOutput {
+final class PathOutputNode: NodeOutput {
 
   // MARK: Lifecycle
 
@@ -26,7 +26,7 @@ class PathOutputNode: NodeOutput {
   var lastPathBuildFrame: CGFloat? = nil
   var isEnabled = true
   fileprivate(set) var totalLength: CGFloat = 0
-  fileprivate(set) var pathObjects: [CompoundBezierPath] = []
+  fileprivate(set) var pathObjects = [CompoundBezierPath]()
 
   func hasOutputUpdates(_ forFrame: CGFloat) -> Bool {
     guard isEnabled else {

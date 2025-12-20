@@ -14,7 +14,8 @@ extension Keyframe where T: AnyInterpolatable {
       to: to.value,
       amount: progress,
       spatialOutTangent: spatialOutTangent?.pointValue,
-      spatialInTangent: to.spatialInTangent?.pointValue)
+      spatialInTangent: to.spatialInTangent?.pointValue
+    )
   }
 }
 

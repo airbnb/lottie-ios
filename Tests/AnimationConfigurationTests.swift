@@ -16,7 +16,8 @@ final class AnimationConfigurationTests: XCTestCase {
     let config = CoreAnimationLayer.AnimationConfiguration(
       animationContext: context,
       timingConfiguration: timing,
-      recordHierarchyKeypath: nil)
+      recordHierarchyKeypath: nil
+    )
 
     XCTAssertEqual(config.expectedAnimationDuration, 2.0, accuracy: 0.0001)
   }
@@ -27,7 +28,8 @@ final class AnimationConfigurationTests: XCTestCase {
     let config = CoreAnimationLayer.AnimationConfiguration(
       animationContext: context,
       timingConfiguration: timing,
-      recordHierarchyKeypath: nil)
+      recordHierarchyKeypath: nil
+    )
 
     XCTAssertEqual(config.expectedAnimationDuration, 4.0, accuracy: 0.0001)
   }
@@ -38,7 +40,8 @@ final class AnimationConfigurationTests: XCTestCase {
     let config = CoreAnimationLayer.AnimationConfiguration(
       animationContext: context,
       timingConfiguration: timing,
-      recordHierarchyKeypath: nil)
+      recordHierarchyKeypath: nil
+    )
 
     XCTAssertEqual(config.expectedAnimationDuration, 6.0, accuracy: 0.0001)
   }
@@ -49,7 +52,8 @@ final class AnimationConfigurationTests: XCTestCase {
     let config = CoreAnimationLayer.AnimationConfiguration(
       animationContext: context,
       timingConfiguration: timing,
-      recordHierarchyKeypath: nil)
+      recordHierarchyKeypath: nil
+    )
 
     XCTAssertEqual(config.expectedAnimationDuration, 1.0, accuracy: 0.0001)
   }
@@ -60,7 +64,8 @@ final class AnimationConfigurationTests: XCTestCase {
     let config = CoreAnimationLayer.AnimationConfiguration(
       animationContext: context,
       timingConfiguration: timing,
-      recordHierarchyKeypath: nil)
+      recordHierarchyKeypath: nil
+    )
 
     XCTAssertEqual(config.expectedAnimationDuration, 6.0, accuracy: 0.0001)
   }
@@ -71,7 +76,8 @@ final class AnimationConfigurationTests: XCTestCase {
     let config = CoreAnimationLayer.AnimationConfiguration(
       animationContext: context,
       timingConfiguration: timing,
-      recordHierarchyKeypath: nil)
+      recordHierarchyKeypath: nil
+    )
 
     XCTAssertEqual(config.expectedAnimationDuration, 25.0, accuracy: 0.0001)
   }

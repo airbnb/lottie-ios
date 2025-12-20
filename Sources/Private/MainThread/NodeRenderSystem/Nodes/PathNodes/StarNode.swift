@@ -87,7 +87,6 @@ final class StarNode: AnimatorNode, PathNode {
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
-  // MARK: Animator Node
   var propertyMap: NodePropertyMap & KeypathSearchable {
     properties
   }
@@ -107,7 +106,8 @@ final class StarNode: AnimatorNode, PathNode {
       innerRoundedness: properties.innerRoundedness.value.cgFloatValue,
       numberOfPoints: properties.points.value.cgFloatValue,
       rotation: properties.rotation.value.cgFloatValue,
-      direction: properties.direction)
+      direction: properties.direction
+    )
 
     pathOutput.setPath(path, updateFrame: frame)
   }
@@ -124,9 +124,8 @@ extension BezierPath {
     innerRoundedness inputInnerRoundedness: CGFloat,
     numberOfPoints: CGFloat,
     rotation: CGFloat,
-    direction: PathDirection)
-    -> BezierPath
-  {
+    direction: PathDirection
+  ) -> BezierPath {
     var currentAngle = (rotation - 90).toRadians()
     let anglePerPoint = (2 * CGFloat.pi) / numberOfPoints
     let halfAnglePerPoint = anglePerPoint / 2.0
@@ -186,10 +185,12 @@ extension BezierPath {
 
         var cp1 = CGPoint(
           x: cp1Radius * cp1Roundedness * StarNode.PolystarConstant * cp1Dx,
-          y: cp1Radius * cp1Roundedness * StarNode.PolystarConstant * cp1Dy)
+          y: cp1Radius * cp1Roundedness * StarNode.PolystarConstant * cp1Dy
+        )
         var cp2 = CGPoint(
           x: cp2Radius * cp2Roundedness * StarNode.PolystarConstant * cp2Dx,
-          y: cp2Radius * cp2Roundedness * StarNode.PolystarConstant * cp2Dy)
+          y: cp2Radius * cp2Roundedness * StarNode.PolystarConstant * cp2Dy
+        )
         if partialPointAmount != 0 {
           if i == 0 {
             cp1 = cp1 * partialPointAmount
@@ -201,7 +202,8 @@ extension BezierPath {
         vertices[vertices.endIndex - 1] = CurveVertex(
           previousVertex.inTangent,
           previousVertex.point,
-          previousVertex.point - cp1)
+          previousVertex.point - cp1
+        )
         vertices.append(CurveVertex(point: point + position, inTangentRelative: cp2, outTangentRelative: .zero))
       }
       currentAngle += dTheta

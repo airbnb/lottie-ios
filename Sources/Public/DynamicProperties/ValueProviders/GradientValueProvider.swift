@@ -18,8 +18,8 @@ public final class GradientValueProvider: ValueProvider {
   /// Initializes with a block provider.
   public init(
     block: @escaping ColorsValueBlock,
-    locations: ColorLocationsBlock? = nil)
-  {
+    locations: ColorLocationsBlock? = nil
+  ) {
     self.block = block
     locationsBlock = locations
     colors = []
@@ -30,8 +30,8 @@ public final class GradientValueProvider: ValueProvider {
   /// Initializes with an array of colors.
   public init(
     _ colors: [LottieColor],
-    locations: [Double] = [])
-  {
+    locations: [Double] = []
+  ) {
     self.colors = colors
     self.locations = locations
     identity = [AnyHashable(colors), AnyHashable(locations)]
@@ -61,8 +61,6 @@ public final class GradientValueProvider: ValueProvider {
       hasUpdate = true
     }
   }
-
-  // MARK: ValueProvider Protocol
 
   public var valueType: Any.Type {
     [Double].self
@@ -97,7 +95,7 @@ public final class GradientValueProvider: ValueProvider {
 
   private var block: ColorsValueBlock?
   private var locationsBlock: ColorLocationsBlock?
-  private var value: [Double] = []
+  private var value = [Double]()
 
   private let identity: AnyHashable
 

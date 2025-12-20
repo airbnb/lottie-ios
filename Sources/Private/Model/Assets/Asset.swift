@@ -7,7 +7,7 @@
 
 // MARK: - Asset
 
-public class Asset: Codable, DictionaryInitializable {
+public final class Asset: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 

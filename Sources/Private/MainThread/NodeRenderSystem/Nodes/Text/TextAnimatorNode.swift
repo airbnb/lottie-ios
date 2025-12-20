@@ -170,7 +170,8 @@ final class TextAnimatorNodeProperties: NodePropertyMap, KeypathSearchable {
       rotationY: rotationY?.value.cgFloatValue ?? 0,
       rotationZ: rotationZ?.value.cgFloatValue ?? 0,
       skew: skew?.value.cgFloatValue,
-      skewAxis: skewAxis?.value.cgFloatValue)
+      skewAxis: skewAxis?.value.cgFloatValue
+    )
   }
 }
 
@@ -296,7 +297,7 @@ final class TextOutputNode: NodeOutput {
 
 // MARK: - TextAnimatorNode
 
-class TextAnimatorNode: AnimatorNode {
+final class TextAnimatorNode: AnimatorNode {
 
   // MARK: Lifecycle
 
@@ -321,8 +322,6 @@ class TextAnimatorNode: AnimatorNode {
   var outputNode: NodeOutput {
     textOutputNode
   }
-
-  // MARK: Animator Node Protocol
 
   var propertyMap: NodePropertyMap & KeypathSearchable {
     textAnimatorProperties

@@ -10,9 +10,8 @@ extension CAShapeLayer {
     for rectangle: Rectangle,
     context: LayerAnimationContext,
     pathMultiplier: PathMultiplier,
-    roundedCorners: RoundedCorners?)
-    throws
-  {
+    roundedCorners: RoundedCorners?
+  ) throws {
     try addAnimation(
       for: .path,
       keyframes: try rectangle.combinedKeyframes(roundedCorners: roundedCorners),
@@ -21,11 +20,13 @@ extension CAShapeLayer {
           position: keyframe.position.pointValue,
           size: keyframe.size.sizeValue,
           cornerRadius: keyframe.cornerRadius.cgFloatValue,
-          direction: rectangle.direction)
-          .cgPath()
-          .duplicated(times: pathMultiplier)
+          direction: rectangle.direction
+        )
+        .cgPath()
+        .duplicated(times: pathMultiplier)
       },
-      context: context)
+      context: context
+    )
   }
 }
 
@@ -40,7 +41,8 @@ extension Rectangle {
       Rectangle.Keyframe(
         size: size.interpolate(to: to.size, amount: amount),
         position: position.interpolate(to: to.position, amount: amount),
-        cornerRadius: cornerRadius.interpolate(to: to.cornerRadius, amount: amount))
+        cornerRadius: cornerRadius.interpolate(to: to.cornerRadius, amount: amount)
+      )
     }
   }
 
@@ -48,7 +50,10 @@ extension Rectangle {
   func combinedKeyframes(roundedCorners: RoundedCorners?) throws -> KeyframeGroup<Rectangle.Keyframe> {
     let cornerRadius = roundedCorners?.radius ?? cornerRadius
     return Keyframes.combined(
-      size, position, cornerRadius,
-      makeCombinedResult: Rectangle.Keyframe.init)
+      size,
+      position,
+      cornerRadius,
+      makeCombinedResult: Rectangle.Keyframe.init
+    )
   }
 }

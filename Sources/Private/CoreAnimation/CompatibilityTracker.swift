@@ -49,7 +49,8 @@ final class CompatibilityTracker {
       // Compatibility messages are usually written in source files using multi-line strings,
       // but converting them to be a single line makes it easier to read the ultimate log output.
       message: message.replacingOccurrences(of: "\n", with: " "),
-      context: context)
+      context: context
+    )
 
     switch mode {
     case .abort:
@@ -64,9 +65,8 @@ final class CompatibilityTracker {
   func assert(
     _ condition: Bool,
     _ message: @autoclosure () -> String,
-    context: @autoclosure () -> String)
-    throws
-  {
+    context: @autoclosure () -> String
+  ) throws {
     if !condition {
       try logIssue(message: message(), context: context())
     }
@@ -106,9 +106,8 @@ extension CompatibilityTrackerProviding {
   /// according to `CompatibilityTracker.Mode`
   func compatibilityAssert(
     _ condition: Bool,
-    _ message: @autoclosure () -> String)
-    throws
-  {
+    _ message: @autoclosure () -> String
+  ) throws {
     try compatibilityTracker.assert(condition, message(), context: compatibilityIssueContext)
   }
 }

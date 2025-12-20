@@ -9,7 +9,7 @@
 import AppKit
 
 /// An `AnimationImageProvider` that provides images by name from a specific filepath.
-public class FilepathImageProvider: AnimationImageProvider {
+public final class FilepathImageProvider: AnimationImageProvider {
 
   // MARK: Lifecycle
 

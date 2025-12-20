@@ -74,7 +74,9 @@ extension LottieColor {
     let maxValue = max(r, g, b)
     let minValue = min(r, g, b)
 
-    var h: Double, s: Double, v: Double = maxValue
+    var h: Double
+    var s: Double
+    var v: Double = maxValue
 
     let d = maxValue - minValue
     s = maxValue == 0 ? 0 : d / maxValue
@@ -110,7 +112,8 @@ extension CurveVertex: Interpolatable {
     CurveVertex(
       point: point.interpolate(to: to.point, amount: amount),
       inTangent: inTangent.interpolate(to: to.inTangent, amount: amount),
-      outTangent: outTangent.interpolate(to: to.outTangent, amount: amount))
+      outTangent: outTangent.interpolate(to: to.outTangent, amount: amount)
+    )
   }
 }
 

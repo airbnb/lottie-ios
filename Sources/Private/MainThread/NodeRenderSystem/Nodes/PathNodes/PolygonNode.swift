@@ -36,7 +36,7 @@ final class PolygonNodeProperties: NodePropertyMap, KeypathSearchable {
 
   var keypathName: String
 
-  var childKeypaths: [KeypathSearchable] = []
+  var childKeypaths = [KeypathSearchable]()
 
   let keypathProperties: [String: AnyNodeProperty]
   let properties: [AnyNodeProperty]
@@ -75,8 +75,6 @@ final class PolygonNode: AnimatorNode, PathNode {
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
-  // MARK: Animator Node
-
   var propertyMap: NodePropertyMap & KeypathSearchable {
     properties
   }
@@ -94,7 +92,8 @@ final class PolygonNode: AnimatorNode, PathNode {
       outerRadius: properties.outerRadius.value.cgFloatValue,
       outerRoundedness: properties.outerRoundedness.value.cgFloatValue,
       rotation: properties.rotation.value.cgFloatValue,
-      direction: properties.direction)
+      direction: properties.direction
+    )
 
     pathOutput.setPath(path, updateFrame: frame)
   }
@@ -109,16 +108,16 @@ extension BezierPath {
     outerRadius: CGFloat,
     outerRoundedness inputOuterRoundedness: CGFloat,
     rotation: CGFloat,
-    direction: PathDirection)
-    -> BezierPath
-  {
+    direction: PathDirection
+  ) -> BezierPath {
     var currentAngle = (rotation - 90).toRadians()
     let anglePerPoint = ((2 * CGFloat.pi) / numberOfPoints)
     let outerRoundedness = inputOuterRoundedness * 0.01
 
     var point = CGPoint(
       x: outerRadius * cos(currentAngle),
-      y: outerRadius * sin(currentAngle))
+      y: outerRadius * sin(currentAngle)
+    )
     var vertices = [CurveVertex(point: point + position, inTangentRelative: .zero, outTangentRelative: .zero)]
 
     var previousPoint = point
@@ -127,7 +126,8 @@ extension BezierPath {
       previousPoint = point
       point = CGPoint(
         x: outerRadius * cos(currentAngle),
-        y: outerRadius * sin(currentAngle))
+        y: outerRadius * sin(currentAngle)
+      )
 
       if outerRoundedness != 0 {
         let cp1Theta = (atan2(previousPoint.y, previousPoint.x) - CGFloat.pi / 2)
@@ -140,16 +140,19 @@ extension BezierPath {
 
         let cp1 = CGPoint(
           x: outerRadius * outerRoundedness * PolygonNode.PolygonConstant * cp1Dx,
-          y: outerRadius * outerRoundedness * PolygonNode.PolygonConstant * cp1Dy)
+          y: outerRadius * outerRoundedness * PolygonNode.PolygonConstant * cp1Dy
+        )
         let cp2 = CGPoint(
           x: outerRadius * outerRoundedness * PolygonNode.PolygonConstant * cp2Dx,
-          y: outerRadius * outerRoundedness * PolygonNode.PolygonConstant * cp2Dy)
+          y: outerRadius * outerRoundedness * PolygonNode.PolygonConstant * cp2Dy
+        )
 
         let previousVertex = vertices[vertices.endIndex - 1]
         vertices[vertices.endIndex - 1] = CurveVertex(
           previousVertex.inTangent,
           previousVertex.point,
-          previousVertex.point - cp1)
+          previousVertex.point - cp1
+        )
         vertices.append(CurveVertex(point: point + position, inTangentRelative: cp2, outTangentRelative: .zero))
       } else {
         vertices.append(CurveVertex(point: point + position, inTangentRelative: .zero, outTangentRelative: .zero))

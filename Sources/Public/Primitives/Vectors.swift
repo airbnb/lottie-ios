@@ -23,14 +23,14 @@ public struct LottieVector1D: Hashable, Sendable {
 /// These vectors are encoded and decoded from [Double]
 public struct LottieVector3D: Hashable, Sendable {
 
-  public let x: Double
-  public let y: Double
-  public let z: Double
-
   public init(x: Double, y: Double, z: Double) {
     self.x = x
     self.y = y
     self.z = z
   }
+
+  public let x: Double
+  public let y: Double
+  public let z: Double
 
 }

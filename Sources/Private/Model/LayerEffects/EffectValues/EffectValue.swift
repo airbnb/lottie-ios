@@ -37,7 +37,7 @@ extension EffectValueType: ClassFamily {
 
 // MARK: - EffectValue
 
-class EffectValue: Codable, DictionaryInitializable {
+final class EffectValue: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
@@ -89,7 +89,7 @@ extension [EffectValue] {
   }
 }
 
-// MARK: - EffectValue + Sendable
+// MARK: - EffectValue + @unchecked Sendable
 
 /// Since `EffectValue` isn't `final`, we have to use `@unchecked Sendable` instead of `Sendable.`
 /// All `EffectValue` subclasses are immutable `Sendable` values.

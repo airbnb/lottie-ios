@@ -41,8 +41,6 @@ public final class PointValueProvider: ValueProvider {
     }
   }
 
-  // MARK: ValueProvider Protocol
-
   public var valueType: Any.Type {
     LottieVector3D.self
   }

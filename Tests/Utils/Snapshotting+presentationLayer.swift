@@ -12,9 +12,8 @@ extension Snapshotting where Value == UIView, Format == UIImage {
   static func imageOfPresentationLayer(
     precision: Float = 1,
     perceptualPrecision: Float = 1,
-    traits: UITraitCollection = .init())
-    -> Snapshotting<UIView, UIImage>
-  {
+    traits: UITraitCollection = .init()
+  ) -> Snapshotting<UIView, UIImage> {
     // Use the SnapshotTesting framework's base `SimplySnapshot.image`
     // implementation for creating and diffing image files
     SimplySnapshotting.image(precision: precision, perceptualPrecision: perceptualPrecision, scale: traits.displayScale)

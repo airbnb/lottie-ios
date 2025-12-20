@@ -9,7 +9,7 @@
 import AppKit
 
 /// Provides an image for a lottie animation from a provided Bundle.
-public class BundleImageProvider: AnimationImageProvider {
+public final class BundleImageProvider: AnimationImageProvider {
 
   // MARK: Lifecycle
 

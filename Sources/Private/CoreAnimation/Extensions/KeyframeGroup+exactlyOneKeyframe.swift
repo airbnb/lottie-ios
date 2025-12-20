@@ -13,16 +13,15 @@ extension KeyframeGroup {
     context: CompatibilityTrackerProviding,
     description: String,
     fileID _: StaticString = #fileID,
-    line _: UInt = #line)
-    throws
-    -> T
-  {
+    line _: UInt = #line
+  ) throws -> T {
     try context.compatibilityAssert(
       keyframes.count == 1,
       """
       The Core Animation rendering engine does not support animating multiple keyframes
       for \(description) values, due to limitations of Core Animation.
-      """)
+      """
+    )
 
     return keyframes[0].value
   }

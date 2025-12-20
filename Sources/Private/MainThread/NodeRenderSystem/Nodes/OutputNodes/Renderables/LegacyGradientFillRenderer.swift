@@ -24,7 +24,7 @@ final class LegacyGradientFillRenderer: PassThroughOutputNode, Renderable {
     }
   }
 
-  var colors: [CGFloat] = [] {
+  var colors = [CGFloat]() {
     didSet {
       hasUpdate = true
     }
@@ -95,7 +95,8 @@ final class LegacyGradientFillRenderer: PassThroughOutputNode, Renderable {
         let maskGradient = CGGradient(
           colorsSpace: maskColorSpace,
           colors: alphaColors as CFArray,
-          locations: alphaLocations),
+          locations: alphaLocations
+        ),
         let maskContext = CGContext(
           data: nil,
           width: inContext.width,
@@ -103,7 +104,8 @@ final class LegacyGradientFillRenderer: PassThroughOutputNode, Renderable {
           bitsPerComponent: 8,
           bytesPerRow: inContext.width,
           space: maskColorSpace,
-          bitmapInfo: 0)
+          bitmapInfo: 0
+        )
       else { return }
       let flipVertical = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: CGFloat(maskContext.height))
       maskContext.concatenate(flipVertical)
@@ -113,7 +115,8 @@ final class LegacyGradientFillRenderer: PassThroughOutputNode, Renderable {
           maskGradient,
           start: start,
           end: end,
-          options: [.drawsAfterEndLocation, .drawsBeforeStartLocation])
+          options: [.drawsAfterEndLocation, .drawsBeforeStartLocation]
+        )
       } else {
         maskContext.drawRadialGradient(
           maskGradient,
@@ -121,7 +124,8 @@ final class LegacyGradientFillRenderer: PassThroughOutputNode, Renderable {
           startRadius: 0,
           endCenter: start,
           endRadius: start.distanceTo(end),
-          options: [.drawsAfterEndLocation, .drawsBeforeStartLocation])
+          options: [.drawsAfterEndLocation, .drawsBeforeStartLocation]
+        )
       }
       /// Clips the gradient
       if let alphaMask = maskContext.makeImage() {
@@ -134,7 +138,8 @@ final class LegacyGradientFillRenderer: PassThroughOutputNode, Renderable {
       let gradient = CGGradient(
         colorsSpace: LottieConfiguration.shared.colorSpace,
         colors: gradientColors as CFArray,
-        locations: colorLocations)
+        locations: colorLocations
+      )
     else { return }
 
     if type == .linear {
@@ -146,7 +151,8 @@ final class LegacyGradientFillRenderer: PassThroughOutputNode, Renderable {
         startRadius: 0,
         endCenter: start,
         endRadius: start.distanceTo(end),
-        options: [.drawsAfterEndLocation, .drawsBeforeStartLocation])
+        options: [.drawsAfterEndLocation, .drawsBeforeStartLocation]
+      )
     }
   }
 }

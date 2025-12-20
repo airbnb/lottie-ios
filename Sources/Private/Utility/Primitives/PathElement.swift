@@ -61,7 +61,9 @@ struct PathElement {
       vertex: CurveVertex(
         point: fromElement.vertex.point,
         inTangent: fromElement.vertex.inTangent,
-        outTangent: trimResults.start.outTangent))
+        outTangent: trimResults.start.outTangent
+      )
+    )
     /// Recalculating the length here is a waste as the trimCurve function also accurately calculates this length.
     let spanAEnd = spanAStart.pathElementTo(trimResults.trimPoint)
 
@@ -69,7 +71,8 @@ struct PathElement {
     let spanBEnd = spanBStart.pathElementTo(trimResults.end)
     return (
       leftSpan: (start: spanAStart, end: spanAEnd),
-      rightSpan: (start: spanBStart, end: spanBEnd))
+      rightSpan: (start: spanBStart, end: spanBEnd)
+    )
   }
 
 }

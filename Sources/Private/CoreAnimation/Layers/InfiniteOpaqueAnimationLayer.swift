@@ -46,7 +46,8 @@ final class InfiniteOpaqueAnimationLayer: BaseAnimationLayer {
       CATransform3DMakeTranslation(-CALayer.veryLargeLayerPadding, -CALayer.veryLargeLayerPadding, 0),
       scaleRatioX,
       scaleRatioY,
-      1)
+      1
+    )
   }
 
   // MARK: Private

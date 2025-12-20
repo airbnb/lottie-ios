@@ -17,12 +17,12 @@ extension DotLottieFile {
     /// - Parameter dotLottieCache: A cache for holding loaded lotties. Defaults to `LRUDotLottieCache.sharedCache`. Optional.
     public static func loadedFrom(
       filepath: String,
-      dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
-      -> Result<DotLottieFile, Error>
-    {
+      dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache
+    ) -> Result<DotLottieFile, Error> {
       LottieLogger.shared.assert(
         !Thread.isMainThread,
-        "`DotLottieFile.SynchronouslyBlockingCurrentThread` methods shouldn't be called on the main thread.")
+        "`DotLottieFile.SynchronouslyBlockingCurrentThread` methods shouldn't be called on the main thread."
+      )
 
       /// Check cache for lottie
       if
@@ -56,12 +56,12 @@ extension DotLottieFile {
       _ name: String,
       bundle: Bundle = Bundle.main,
       subdirectory: String? = nil,
-      dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
-      -> Result<DotLottieFile, Error>
-    {
+      dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache
+    ) -> Result<DotLottieFile, Error> {
       LottieLogger.shared.assert(
         !Thread.isMainThread,
-        "`DotLottieFile.SynchronouslyBlockingCurrentThread` methods shouldn't be called on the main thread.")
+        "`DotLottieFile.SynchronouslyBlockingCurrentThread` methods shouldn't be called on the main thread."
+      )
 
       /// Create a cache key for the lottie.
       let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
@@ -96,12 +96,12 @@ extension DotLottieFile {
     ///   - filename: The name of the lottie file without the lottie extension. eg. "StarAnimation"
     public static func loadedFrom(
       data: Data,
-      filename: String)
-      -> Result<DotLottieFile, Error>
-    {
+      filename: String
+    ) -> Result<DotLottieFile, Error> {
       LottieLogger.shared.assert(
         !Thread.isMainThread,
-        "`DotLottieFile.SynchronouslyBlockingCurrentThread` methods shouldn't be called on the main thread.")
+        "`DotLottieFile.SynchronouslyBlockingCurrentThread` methods shouldn't be called on the main thread."
+      )
 
       do {
         let dotLottieFile = try DotLottieFile(data: data, filename: filename)
@@ -122,9 +122,8 @@ extension DotLottieFile {
     _ name: String,
     bundle: Bundle = Bundle.main,
     subdirectory: String? = nil,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
-    async throws -> DotLottieFile
-  {
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache
+  ) async throws -> DotLottieFile {
     try await withCheckedThrowingContinuation { continuation in
       DotLottieFile.named(name, bundle: bundle, subdirectory: subdirectory, dotLottieCache: dotLottieCache) { result in
         continuation.resume(with: result)
@@ -146,14 +145,15 @@ extension DotLottieFile {
     subdirectory: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     dispatchQueue: DispatchQueue = .dotLottie,
-    handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
-  {
+    handleResult: @escaping (Result<DotLottieFile, Error>) -> Void
+  ) {
     dispatchQueue.async {
       let result = SynchronouslyBlockingCurrentThread.named(
         name,
         bundle: bundle,
         subdirectory: subdirectory,
-        dotLottieCache: dotLottieCache)
+        dotLottieCache: dotLottieCache
+      )
 
       DispatchQueue.main.async {
         handleResult(result)
@@ -166,9 +166,8 @@ extension DotLottieFile {
   /// - Parameter dotLottieCache: A cache for holding loaded lotties. Defaults to `LRUDotLottieCache.sharedCache`. Optional.
   public static func loadedFrom(
     filepath: String,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
-    async throws -> DotLottieFile
-  {
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache
+  ) async throws -> DotLottieFile {
     try await withCheckedThrowingContinuation { continuation in
       DotLottieFile.loadedFrom(filepath: filepath, dotLottieCache: dotLottieCache) { result in
         continuation.resume(with: result)
@@ -185,12 +184,13 @@ extension DotLottieFile {
     filepath: String,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     dispatchQueue: DispatchQueue = .dotLottie,
-    handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
-  {
+    handleResult: @escaping (Result<DotLottieFile, Error>) -> Void
+  ) {
     dispatchQueue.async {
       let result = SynchronouslyBlockingCurrentThread.loadedFrom(
         filepath: filepath,
-        dotLottieCache: dotLottieCache)
+        dotLottieCache: dotLottieCache
+      )
 
       DispatchQueue.main.async {
         handleResult(result)
@@ -205,9 +205,8 @@ extension DotLottieFile {
   public static func asset(
     named name: String,
     bundle: Bundle = Bundle.main,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
-    async throws -> DotLottieFile
-  {
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache
+  ) async throws -> DotLottieFile {
     try await withCheckedThrowingContinuation { continuation in
       DotLottieFile.asset(named: name, bundle: bundle, dotLottieCache: dotLottieCache) { result in
         continuation.resume(with: result)
@@ -226,8 +225,8 @@ extension DotLottieFile {
     bundle: Bundle = Bundle.main,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     dispatchQueue: DispatchQueue = .dotLottie,
-    handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
-  {
+    handleResult: @escaping (Result<DotLottieFile, Error>) -> Void
+  ) {
     dispatchQueue.async {
       /// Create a cache key for the lottie.
       let cacheKey = bundle.bundlePath + "/" + name
@@ -273,9 +272,8 @@ extension DotLottieFile {
   public static func loadedFrom(
     url: URL,
     session: LottieURLSession = LottieConfiguration.defaultURLSession,
-    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache)
-    async throws -> DotLottieFile
-  {
+    dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache
+  ) async throws -> DotLottieFile {
     var dataTask: URLSessionDataTask?
     let cancelTask = { dataTask?.cancel() }
     return try await withTaskCancellationHandler {
@@ -302,9 +300,8 @@ extension DotLottieFile {
     url: URL,
     session: LottieURLSession = LottieConfiguration.defaultURLSession,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
-    handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
-    -> URLSessionDataTask?
-  {
+    handleResult: @escaping (Result<DotLottieFile, Error>) -> Void
+  ) -> URLSessionDataTask? {
     if let dotLottieCache, let lottie = dotLottieCache.file(forKey: url.absoluteString) {
       handleResult(.success(lottie))
       return nil
@@ -344,8 +341,8 @@ extension DotLottieFile {
     data: Data,
     filename: String,
     dispatchQueue: DispatchQueue = .dotLottie,
-    handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
-  {
+    handleResult: @escaping (Result<DotLottieFile, Error>) -> Void
+  ) {
     dispatchQueue.async {
       do {
         let dotLottie = try DotLottieFile(data: data, filename: filename)
@@ -369,9 +366,8 @@ extension DotLottieFile {
   public static func loadedFrom(
     data: Data,
     filename: String,
-    dispatchQueue: DispatchQueue = .dotLottie)
-    async throws -> DotLottieFile
-  {
+    dispatchQueue: DispatchQueue = .dotLottie
+  ) async throws -> DotLottieFile {
     try await withCheckedThrowingContinuation { continuation in
       loadedFrom(data: data, filename: filename, dispatchQueue: dispatchQueue) { result in
         continuation.resume(with: result)
@@ -385,5 +381,6 @@ extension DispatchQueue {
   /// which can trigger file loading errors due to concurrent unzipping on a single archive.
   public static let dotLottie = DispatchQueue(
     label: "com.airbnb.lottie.dot-lottie",
-    qos: .userInitiated)
+    qos: .userInitiated
+  )
 }

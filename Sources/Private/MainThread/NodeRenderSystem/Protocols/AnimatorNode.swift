@@ -16,12 +16,13 @@ protocol NodeOutput {
   /// The parent node.
   var parent: NodeOutput? { get }
 
-  /// Returns true if there are any updates upstream. OutputPath must be built before returning.
-  func hasOutputUpdates(_ forFrame: CGFloat) -> Bool
-
   var outputPath: CGPath? { get }
 
   var isEnabled: Bool { get set }
+
+  /// Returns true if there are any updates upstream. OutputPath must be built before returning.
+  func hasOutputUpdates(_ forFrame: CGFloat) -> Bool
+
 }
 
 // MARK: - AnimatorNode
@@ -54,16 +55,14 @@ protocol AnimatorNode: AnyObject, KeypathSearchable {
   /// The output of the node.
   var outputNode: NodeOutput { get }
 
-  /// Update the outputs of the node. Called if local contents were update or if outputsNeedUpdate returns true.
-  func rebuildOutputs(frame: CGFloat)
-
   /// Setters for marking current node state.
   var isEnabled: Bool { get set }
   var hasLocalUpdates: Bool { get set }
   var hasUpstreamUpdates: Bool { get set }
   var lastUpdateFrame: CGFloat? { get set }
 
-  // MARK: Optional
+  /// Update the outputs of the node. Called if local contents were update or if outputsNeedUpdate returns true.
+  func rebuildOutputs(frame: CGFloat)
 
   /// Marks if updates to this node affect nodes downstream.
   func localUpdatesPermeateDownstream() -> Bool
@@ -122,7 +121,8 @@ extension AnimatorNode {
     /// Perform upstream output updates. Optionally mark upstream updates if any.
     hasUpstreamUpdates = (
       parentNode?
-        .updateOutputs(frame, forceOutputUpdate: forceUpstreamUpdates) ?? false || hasUpstreamUpdates)
+        .updateOutputs(frame, forceOutputUpdate: forceUpstreamUpdates) ?? false || hasUpstreamUpdates
+    )
 
     /// Perform additional local output updates
     performAdditionalOutputUpdates(frame, forceOutputUpdate: forceUpstreamUpdates)

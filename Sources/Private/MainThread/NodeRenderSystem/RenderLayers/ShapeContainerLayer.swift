@@ -37,7 +37,7 @@ class ShapeContainerLayer: CALayer {
 
   // MARK: Internal
 
-  private(set) var renderLayers: [ShapeContainerLayer] = []
+  private(set) var renderLayers = [ShapeContainerLayer]()
 
   var renderScale: CGFloat = 1 {
     didSet {

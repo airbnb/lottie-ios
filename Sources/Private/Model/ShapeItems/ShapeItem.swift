@@ -24,7 +24,7 @@ enum ShapeType: String, Codable, Sendable {
   case transform = "tr"
   case unknown
 
-  public init(from decoder: Decoder) throws {
+  init(from decoder: Decoder) throws {
     self = try ShapeType(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
   }
 }
@@ -74,7 +74,7 @@ extension ShapeType: ClassFamily {
 // MARK: - ShapeItem
 
 /// An item belonging to a Shape Layer
-class ShapeItem: Codable, DictionaryInitializable {
+final class ShapeItem: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
@@ -94,8 +94,8 @@ class ShapeItem: Codable, DictionaryInitializable {
   init(
     name: String,
     type: ShapeType,
-    hidden: Bool)
-  {
+    hidden: Bool
+  ) {
     self.name = name
     self.type = type
     self.hidden = hidden
@@ -163,7 +163,7 @@ extension [ShapeItem] {
   }
 }
 
-// MARK: - ShapeItem + Sendable
+// MARK: - ShapeItem + @unchecked Sendable
 
 /// Since `ShapeItem` isn't `final`, we have to use `@unchecked Sendable` instead of `Sendable.`
 /// All `ShapeItem` subclasses are immutable `Sendable` values.

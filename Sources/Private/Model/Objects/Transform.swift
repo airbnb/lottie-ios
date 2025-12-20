@@ -176,8 +176,8 @@ final class Transform: Codable, DictionaryInitializable {
     rotationY: KeyframeGroup<LottieVector1D>,
     rotationZ: KeyframeGroup<LottieVector1D>,
     opacity: KeyframeGroup<LottieVector1D>,
-    rotation: KeyframeGroup<LottieVector1D>?)
-  {
+    rotation: KeyframeGroup<LottieVector1D>?
+  ) {
     self.anchorPoint = anchorPoint
     self.position = position
     self.positionX = positionX
@@ -223,7 +223,8 @@ final class Transform: Codable, DictionaryInitializable {
       rotationY: KeyframeGroup(LottieVector1D(0)),
       rotationZ: KeyframeGroup(LottieVector1D(0)),
       opacity: KeyframeGroup(LottieVector1D(100)),
-      rotation: nil)
+      rotation: nil
+    )
   }
 
   /// The anchor point of the transform.

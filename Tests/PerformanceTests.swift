@@ -18,7 +18,8 @@ final class PerformanceTests: XCTestCase {
       of: .mainThread,
       with: .coreAnimation,
       for: simpleAnimation,
-      iterations: 2000)
+      iterations: 2000
+    )
 
     // This is basically a snapshot test for the performance of the Core Animation engine
     // compared to the Main Thread engine. Currently, the Core Animation engine is
@@ -34,7 +35,8 @@ final class PerformanceTests: XCTestCase {
       of: .mainThread,
       with: .coreAnimation,
       for: complexAnimation,
-      iterations: 500)
+      iterations: 500
+    )
 
     // The Core Animation engine is currently about 1.7x slower than the
     // Main Thread engine in this example.
@@ -50,7 +52,8 @@ final class PerformanceTests: XCTestCase {
       of: .coreAnimation,
       with: .automatic,
       for: simpleAnimation,
-      iterations: 2000)
+      iterations: 2000
+    )
 
     // The automatic engine option should have the same performance as the core animation engine,
     // when rendering an animation supported by the CA engine.
@@ -102,12 +105,14 @@ final class PerformanceTests: XCTestCase {
   private let simpleAnimation = LottieAnimation.named(
     "loading_dots_1",
     bundle: .lottie,
-    subdirectory: "Samples/LottieFiles")!
+    subdirectory: "Samples/LottieFiles"
+  )!
 
   private let complexAnimation = LottieAnimation.named(
     "LottieLogo2",
     bundle: .lottie,
-    subdirectory: "Samples")!
+    subdirectory: "Samples"
+  )!
 
   /// Compares initializing the given animation with the two given engines,
   /// and returns the ratio of how much slower engine B is than engine A.
@@ -115,9 +120,8 @@ final class PerformanceTests: XCTestCase {
     of engineA: RenderingEngineOption,
     with engineB: RenderingEngineOption,
     for animation: LottieAnimation,
-    iterations: Int)
-    -> Double
-  {
+    iterations: Int
+  ) -> Double {
     let engineAPerformance = measurePerformance {
       for _ in 0..<iterations {
         setUpAndTearDownAnimationView(with: animation, configuration: .init(renderingEngine: engineA))

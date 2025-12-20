@@ -18,28 +18,32 @@ final class TextProviderTests: XCTestCase {
     await snapshotTextProviderCalls(
       animationName: "Issues/issue_1949_full_paths",
       configuration: LottieConfiguration(renderingEngine: .mainThread),
-      textProvider: LoggingAnimationKeypathTextProvider())
+      textProvider: LoggingAnimationKeypathTextProvider()
+    )
   }
 
   func testMainThreadLegacyTextProvider() async {
     await snapshotTextProviderCalls(
       animationName: "Issues/issue_1949_full_paths",
       configuration: LottieConfiguration(renderingEngine: .mainThread),
-      textProvider: LoggingLegacyAnimationTextProvider())
+      textProvider: LoggingLegacyAnimationTextProvider()
+    )
   }
 
   func testCoreAnimationTextProvider() async {
     await snapshotTextProviderCalls(
       animationName: "Issues/issue_1949_full_paths",
       configuration: LottieConfiguration(renderingEngine: .coreAnimation),
-      textProvider: LoggingAnimationKeypathTextProvider())
+      textProvider: LoggingAnimationKeypathTextProvider()
+    )
   }
 
   func testCoreAnimationLegacyTextProvider() async {
     await snapshotTextProviderCalls(
       animationName: "Issues/issue_1949_full_paths",
       configuration: LottieConfiguration(renderingEngine: .coreAnimation),
-      textProvider: LoggingLegacyAnimationTextProvider())
+      textProvider: LoggingLegacyAnimationTextProvider()
+    )
   }
 
   // MARK: Private
@@ -49,32 +53,33 @@ final class TextProviderTests: XCTestCase {
     configuration: LottieConfiguration,
     textProvider: LoggingTextProvider,
     function: String = #function,
-    line: UInt = #line)
-    async
-  {
+    line: UInt = #line
+  ) async {
     let textProviderCalls = await textProviderCalls(
       animationName: animationName,
       configuration: configuration,
-      textProvider: textProvider)
+      textProvider: textProvider
+    )
 
     assertSnapshot(
       matching: textProviderCalls.sorted().joined(separator: "\n"),
       as: .description,
       named: animationName,
       testName: function,
-      line: line)
+      line: line
+    )
   }
 
   private func textProviderCalls(
     animationName: String,
     configuration: LottieConfiguration,
-    textProvider: LoggingTextProvider)
-    async -> [String]
-  {
+    textProvider: LoggingTextProvider
+  ) async -> [String] {
     let animationView = await SnapshotConfiguration.makeAnimationView(
       for: animationName,
       configuration: configuration,
-      customSnapshotConfiguration: .customTextProvider(textProvider))!
+      customSnapshotConfiguration: .customTextProvider(textProvider)
+    )!
 
     animationView.renderContentsForUnitTests()
 
@@ -99,7 +104,7 @@ private final class LoggingLegacyAnimationTextProvider: LegacyAnimationTextProvi
 
   // MARK: Internal
 
-  var methodCalls: [String] = []
+  var methodCalls = [String]()
 
   func textFor(keypathName: String, sourceText: String) -> String {
     methodCalls.append("textFor(keypathName: \"\(keypathName)\", sourceText: \"\(sourceText)\")")
@@ -119,7 +124,7 @@ private final class LoggingAnimationKeypathTextProvider: AnimationKeypathTextPro
 
   // MARK: Internal
 
-  var methodCalls: [String] = []
+  var methodCalls = [String]()
 
   func text(for keypath: AnimationKeypath, sourceText: String) -> String? {
     let keypathString = keypath.keys.joined(separator: ".")

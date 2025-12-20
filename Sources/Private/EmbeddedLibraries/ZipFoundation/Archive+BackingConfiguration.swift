@@ -24,8 +24,8 @@ extension Archive {
       file: FILEPointer,
       endOfCentralDirectoryRecord: EndOfCentralDirectoryRecord,
       zip64EndOfCentralDirectory: ZIP64EndOfCentralDirectory? = nil,
-      memoryFile: MemoryFile? = nil)
-    {
+      memoryFile: MemoryFile? = nil
+    ) {
       self.file = file
       self.endOfCentralDirectoryRecord = endOfCentralDirectoryRecord
       self.zip64EndOfCentralDirectory = zip64EndOfCentralDirectory
@@ -36,8 +36,8 @@ extension Archive {
     init(
       file: FILEPointer,
       endOfCentralDirectoryRecord: EndOfCentralDirectoryRecord,
-      zip64EndOfCentralDirectory: ZIP64EndOfCentralDirectory?)
-    {
+      zip64EndOfCentralDirectory: ZIP64EndOfCentralDirectory?
+    ) {
       self.file = file
       self.endOfCentralDirectoryRecord = endOfCentralDirectoryRecord
       self.zip64EndOfCentralDirectory = zip64EndOfCentralDirectory
@@ -61,7 +61,8 @@ extension Archive {
       return BackingConfiguration(
         file: archiveFile,
         endOfCentralDirectoryRecord: eocdRecord,
-        zip64EndOfCentralDirectory: zip64EOCD)
+        zip64EndOfCentralDirectory: zip64EOCD
+      )
 
     case .create:
       let endOfCentralDirectoryRecord = EndOfCentralDirectoryRecord(
@@ -72,7 +73,8 @@ extension Archive {
         sizeOfCentralDirectory: 0,
         offsetToStartOfCentralDirectory: 0,
         zipFileCommentLength: 0,
-        zipFileCommentData: Data())
+        zipFileCommentData: Data()
+      )
       do {
         try endOfCentralDirectoryRecord.data.write(to: url, options: .withoutOverwriting)
       } catch { return nil }
@@ -90,7 +92,8 @@ extension Archive {
       return BackingConfiguration(
         file: archiveFile,
         endOfCentralDirectoryRecord: eocdRecord,
-        zip64EndOfCentralDirectory: zip64EOCD)
+        zip64EndOfCentralDirectory: zip64EOCD
+      )
     }
   }
 
@@ -117,7 +120,8 @@ extension Archive {
         file: archiveFile,
         endOfCentralDirectoryRecord: eocdRecord,
         zip64EndOfCentralDirectory: zip64EOCD,
-        memoryFile: memoryFile)
+        memoryFile: memoryFile
+      )
 
     case .create:
       let endOfCentralDirectoryRecord = EndOfCentralDirectoryRecord(
@@ -128,7 +132,8 @@ extension Archive {
         sizeOfCentralDirectory: 0,
         offsetToStartOfCentralDirectory: 0,
         zipFileCommentLength: 0,
-        zipFileCommentData: Data())
+        zipFileCommentData: Data()
+      )
       _ = endOfCentralDirectoryRecord.data.withUnsafeBytes { (buffer: UnsafeRawBufferPointer) in
         fwrite(buffer.baseAddress, buffer.count, 1, archiveFile) // Errors handled during read
       }
@@ -144,7 +149,8 @@ extension Archive {
         file: archiveFile,
         endOfCentralDirectoryRecord: eocdRecord,
         zip64EndOfCentralDirectory: zip64EOCD,
-        memoryFile: memoryFile)
+        memoryFile: memoryFile
+      )
     }
   }
   #endif

@@ -71,7 +71,8 @@ private struct RepeaterTransform {
       LottieVector3D(
         x: position.x * Double(index),
         y: position.y * Double(index),
-        z: position.z * Double(index))
+        z: position.z * Double(index)
+      )
     }
   }
 
@@ -90,9 +91,23 @@ private struct RepeaterTransform {
 // MARK: TransformModel
 
 extension RepeaterTransform: TransformModel {
-  var _position: KeyframeGroup<LottieVector3D>? { position }
-  var _positionX: KeyframeGroup<LottieVector1D>? { nil }
-  var _positionY: KeyframeGroup<LottieVector1D>? { nil }
-  var _skew: KeyframeGroup<LottieVector1D>? { nil }
-  var _skewAxis: KeyframeGroup<LottieVector1D>? { nil }
+  var _position: KeyframeGroup<LottieVector3D>? {
+    position
+  }
+
+  var _positionX: KeyframeGroup<LottieVector1D>? {
+    nil
+  }
+
+  var _positionY: KeyframeGroup<LottieVector1D>? {
+    nil
+  }
+
+  var _skew: KeyframeGroup<LottieVector1D>? {
+    nil
+  }
+
+  var _skewAxis: KeyframeGroup<LottieVector1D>? {
+    nil
+  }
 }

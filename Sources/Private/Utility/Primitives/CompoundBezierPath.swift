@@ -68,7 +68,8 @@ struct CompoundBezierPath {
         newPaths.append(contentsOf: path.trim(
           fromLength: fromPosition * path.length,
           toLength: toPosition * path.length,
-          offsetLength: offset * path.length))
+          offsetLength: offset * path.length
+        ))
       }
       return CompoundBezierPath(paths: newPaths)
     }
@@ -142,7 +143,8 @@ struct CompoundBezierPath {
           let trimPath = path.trim(
             fromLength: trim.start > pathStartPosition ? (trim.start - pathStartPosition) : 0,
             toLength: trim.end < pathEndPosition ? (trim.end - pathStartPosition) : path.length,
-            offsetLength: 0).first
+            offsetLength: 0
+          ).first
         {
           compoundPath = compoundPath.addPath(path: trimPath)
         }

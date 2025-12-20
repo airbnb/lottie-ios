@@ -67,7 +67,7 @@ struct Demo<Content: View>: View {
 /// Demonstrates how `LottieView` is animated by the `.offset` modifier.
 struct OnAppearOffsetAnimation: View {
 
-  @State private var demo1Appeared = false
+  // MARK: Internal
 
   var body: some View {
     LottieView {
@@ -85,6 +85,11 @@ struct OnAppearOffsetAnimation: View {
       }
     }
   }
+
+  // MARK: Private
+
+  @State private var demo1Appeared = false
+
 }
 
 // MARK: - PlaceholderSizeInheritance

@@ -9,7 +9,7 @@ import CoreGraphics
 import Foundation
 
 /// A node property that holds a reference to a T ValueProvider and a T ValueContainer.
-class NodeProperty<T>: AnyNodeProperty {
+final class NodeProperty<T>: AnyNodeProperty {
 
   // MARK: Lifecycle
 
@@ -25,7 +25,9 @@ class NodeProperty<T>: AnyNodeProperty {
   var valueProvider: AnyValueProvider
   var originalValueProvider: AnyValueProvider
 
-  var valueType: Any.Type { T.self }
+  var valueType: Any.Type {
+    T.self
+  }
 
   var value: T {
     typedContainer.outputValue

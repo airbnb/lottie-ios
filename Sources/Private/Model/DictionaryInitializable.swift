@@ -33,9 +33,8 @@ extension Dictionary {
   func value<T, KeyType: RawRepresentable>(
     for key: KeyType,
     file: StaticString = #fileID,
-    line: UInt = #line)
-    throws -> T where KeyType.RawValue == Key
-  {
+    line: UInt = #line
+  ) throws -> T where KeyType.RawValue == Key {
     guard let value = self[key.rawValue] as? T else {
       throw InitializableError.invalidInput(file: file, line: line)
     }
@@ -45,9 +44,8 @@ extension Dictionary {
   func value<T: AnyInitializable, KeyType: RawRepresentable>(
     for key: KeyType,
     file: StaticString = #fileID,
-    line: UInt = #line)
-    throws -> T where KeyType.RawValue == Key
-  {
+    line: UInt = #line
+  ) throws -> T where KeyType.RawValue == Key {
     if let value = self[key.rawValue] as? T {
       return value
     }
@@ -61,7 +59,7 @@ extension Dictionary {
 
 }
 
-// MARK: - AnyInitializable + AnyInitializable
+// MARK: - [Double] + AnyInitializable
 
 extension [Double]: AnyInitializable {
 

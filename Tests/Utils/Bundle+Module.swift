@@ -13,7 +13,7 @@ extension Bundle {
   func fileURLs(in directory: String, withSuffix suffix: String) -> [URL] {
     let enumerator = FileManager.default.enumerator(atPath: Bundle.lottie.bundlePath)!
 
-    var fileURLs: [URL] = []
+    var fileURLs = [URL]()
 
     while let fileSubpath = enumerator.nextObject() as? String {
       if
