@@ -5,16 +5,6 @@
 /// diffing.
 struct SectionedChangeset {
 
-  // MARK: Lifecycle
-
-  init(
-    sectionChangeset: IndexSetChangeset,
-    itemChangeset: IndexPathChangeset)
-  {
-    self.sectionChangeset = sectionChangeset
-    self.itemChangeset = itemChangeset
-  }
-
   // MARK: Internal
 
   /// A set of the minimum changes to get from one set of sections to another.

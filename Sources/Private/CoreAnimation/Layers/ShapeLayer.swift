@@ -133,12 +133,14 @@ final class GroupLayer: BaseAnimationLayer {
         let allPathKeyframes = shapeRenderGroup.pathItems.compactMap { ($0.item as? Shape)?.path }
         let combinedShape = CombinedShapeItem(
           shapes: Keyframes.combined(allPathKeyframes),
-          name: group.name)
+          name: group.name
+        )
 
         let sublayer = try ShapeItemLayer(
           shape: ShapeItemLayer.Item(item: combinedShape, groupPath: shapeRenderGroup.pathItems[0].groupPath),
           otherItems: shapeRenderGroup.otherItems,
-          context: context)
+          context: context
+        )
 
         addSublayer(sublayer)
       }
@@ -151,7 +153,8 @@ final class GroupLayer: BaseAnimationLayer {
           let sublayer = try ShapeItemLayer(
             shape: pathDrawingItem,
             otherItems: shapeRenderGroup.otherItems,
-            context: context)
+            context: context
+          )
 
           addSublayer(sublayer)
         }
@@ -172,9 +175,8 @@ extension CALayer {
     from items: [ShapeItemLayer.Item],
     parentGroup: Group?,
     parentGroupPath: [String],
-    context: LayerContext)
-    throws
-  {
+    context: LayerContext
+  ) throws {
     // If the layer has any `Repeater`s, set up each repeater
     // and then handle any remaining groups like normal.
     if items.contains(where: { $0.item is Repeater }) {
@@ -188,7 +190,8 @@ extension CALayer {
             repeater,
             items: repeaterGrouping.grouping,
             parentGroupPath: parentGroupPath,
-            context: context)
+            context: context
+          )
         }
 
         // Any remaining items after the last repeater are handled like normal
@@ -197,7 +200,8 @@ extension CALayer {
             from: repeaterGrouping.grouping,
             parentGroup: parentGroup,
             parentGroupPath: parentGroupPath,
-            context: context)
+            context: context
+          )
         }
       }
     }
@@ -207,7 +211,8 @@ extension CALayer {
         from: items,
         parentGroup: parentGroup,
         parentGroupPath: parentGroupPath,
-        context: context)
+        context: context
+      )
 
       for groupLayer in groupLayers {
         addSublayer(groupLayer)
@@ -222,9 +227,8 @@ extension CALayer {
     _ repeater: Repeater,
     items allItems: [ShapeItemLayer.Item],
     parentGroupPath: [String],
-    context: LayerContext)
-    throws
-  {
+    context: LayerContext
+  ) throws {
     let items = allItems.filter { !($0.item is Repeater) }
     let copyCount = Int(try repeater.copies.exactlyOneKeyframe(context: context, description: "repeater copies").value)
 
@@ -233,7 +237,8 @@ extension CALayer {
         from: items,
         parentGroup: nil, // The repeater layer acts as the parent of its sublayers
         parentGroupPath: parentGroupPath,
-        context: context)
+        context: context
+      )
 
       for groupLayer in groupLayers {
         let repeatedLayer = RepeaterLayer(repeater: repeater, childLayer: groupLayer, index: index)
@@ -249,9 +254,8 @@ extension CALayer {
     from items: [ShapeItemLayer.Item],
     parentGroup: Group?,
     parentGroupPath: [String],
-    context: LayerContext)
-    throws -> [GroupLayer]
-  {
+    context: LayerContext
+  ) throws -> [GroupLayer] {
     var groupItems = items.compactMap { $0.item as? Group }.filter { !$0.hidden }
     var otherItems = items.filter { !($0.item is Group) && !$0.item.hidden }
 
@@ -291,14 +295,16 @@ extension CALayer {
       let inheritedItems = try inheritedItemsForChildGroups.map { item in
         ShapeItemLayer.Item(
           item: try item.item.scaledCopyForChildGroup(group, context: context),
-          groupPath: item.groupPath)
+          groupPath: item.groupPath
+        )
       }
 
       return try GroupLayer(
         group: group,
         items: childItems + inheritedItems,
         groupPath: pathForChildren,
-        context: context)
+        context: context
+      )
     }
   }
 }
@@ -396,7 +402,7 @@ extension Collection {
   {
     guard !isEmpty else { return [] }
 
-    var groupings: [(grouping: [Element], trailingSeparator: Element?)] = []
+    var groupings = [(grouping: [Element], trailingSeparator: Element?)]()
 
     for element in self {
       if groupings.isEmpty || groupings.last?.trailingSeparator != nil {
@@ -420,9 +426,9 @@ extension Collection {
 struct ShapeRenderGroup {
   /// The items in this group that render `CGPath`s.
   /// Valid shape render groups must have at least one path-drawing item.
-  var pathItems: [ShapeItemLayer.Item] = []
+  var pathItems = [ShapeItemLayer.Item]()
   /// Shape items that modify the appearance of the shapes rendered by this group
-  var otherItems: [ShapeItemLayer.Item] = []
+  var otherItems = [ShapeItemLayer.Item]()
 }
 
 extension [ShapeItemLayer.Item] {
@@ -536,7 +542,8 @@ extension [ShapeItemLayer.Item] {
       return strokesAndFills.map { strokeOrFill in
         ShapeRenderGroup(
           pathItems: group.pathItems,
-          otherItems: [strokeOrFill] + otherItems)
+          otherItems: [strokeOrFill] + otherItems
+        )
       }
     }
 
@@ -548,7 +555,8 @@ extension [ShapeItemLayer.Item] {
     let itemsInValidRenderGroups = NSSet(
       array: renderGroups.lazy
         .flatMap { $0.pathItems + $0.otherItems }
-        .map { $0.item })
+        .map { $0.item }
+    )
 
     // `unusedItems` should only include each original item a single time,
     // and should preserve the existing order

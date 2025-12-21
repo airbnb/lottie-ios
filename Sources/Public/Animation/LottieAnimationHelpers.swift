@@ -28,8 +28,6 @@ extension LottieAnimation {
     CGSize(width: width, height: height)
   }
 
-  // MARK: Animation (Loading)
-
   /// Loads an animation model from a bundle by its name. Returns `nil` if an animation is not found.
   ///
   /// - Parameter name: The name of the json file without the json extension. EG "StarAnimation"
@@ -42,9 +40,8 @@ extension LottieAnimation {
     _ name: String,
     bundle: Bundle = Bundle.main,
     subdirectory: String? = nil,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
-    -> LottieAnimation?
-  {
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared
+  ) -> LottieAnimation? {
     /// Create a cache key for the animation.
     let cacheKey = bundle.bundlePath + (subdirectory ?? "") + "/" + name
 
@@ -77,9 +74,8 @@ extension LottieAnimation {
   /// - Returns: Deserialized `LottieAnimation`. Optional.
   public static func filepath(
     _ filepath: String,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
-    -> LottieAnimation?
-  {
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared
+  ) -> LottieAnimation? {
     /// Check cache for animation
     if
       let animationCache,
@@ -111,9 +107,8 @@ extension LottieAnimation {
   public static func asset(
     _ name: String,
     bundle: Bundle = Bundle.main,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
-    -> LottieAnimation?
-  {
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared
+  ) -> LottieAnimation? {
     /// Create a cache key for the animation.
     let cacheKey = bundle.bundlePath + "/" + name
 
@@ -151,9 +146,8 @@ extension LottieAnimation {
   ///
   public static func from(
     data: Data,
-    strategy: DecodingStrategy = LottieConfiguration.shared.decodingStrategy)
-    throws -> LottieAnimation
-  {
+    strategy: DecodingStrategy = LottieConfiguration.shared.decodingStrategy
+  ) throws -> LottieAnimation {
     switch strategy {
     case .legacyCodable:
       return try JSONDecoder().decode(LottieAnimation.self, from: data)
@@ -176,9 +170,8 @@ extension LottieAnimation {
   public static func loadedFrom(
     url: URL,
     session: LottieURLSession = LottieConfiguration.defaultURLSession,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
-    async -> LottieAnimation?
-  {
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared
+  ) async -> LottieAnimation? {
     var dataTask: URLSessionDataTask?
     let cancelTask = { dataTask?.cancel() }
     return await withTaskCancellationHandler {
@@ -189,7 +182,8 @@ extension LottieAnimation {
           closure: { result in
             continuation.resume(returning: result)
           },
-          animationCache: animationCache)
+          animationCache: animationCache
+        )
       }
     } onCancel: {
       cancelTask()
@@ -209,9 +203,8 @@ extension LottieAnimation {
     url: URL,
     session: LottieURLSession = LottieConfiguration.defaultURLSession,
     closure: @escaping LottieAnimation.DownloadClosure,
-    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared)
-    -> URLSessionDataTask?
-  {
+    animationCache: AnimationCacheProvider? = LottieAnimationCache.shared
+  ) -> URLSessionDataTask? {
     if let animationCache, let animation = animationCache.animation(forKey: url.absoluteString) {
       closure(animation)
       return nil
@@ -239,8 +232,6 @@ extension LottieAnimation {
       return task
     }
   }
-
-  // MARK: Animation (Helpers)
 
   /// Markers are a way to describe a point in time by a key name.
   ///
@@ -291,9 +282,8 @@ extension LottieAnimation {
   /// (optionally clamped to between 0 and 1).
   public func progressTime(
     forFrame frameTime: AnimationFrameTime,
-    clamped: Bool = true)
-    -> AnimationProgressTime
-  {
+    clamped: Bool = true
+  ) -> AnimationProgressTime {
     let progressTime: AnimationFrameTime
     let frameDuration = endFrame - startFrame
 
@@ -326,7 +316,7 @@ extension LottieAnimation {
   }
 }
 
-// MARK: - Foundation.Bundle + Sendable
+// MARK: - Foundation.Bundle + @unchecked Sendable
 
 /// Necessary to suppress warnings like:
 /// ```

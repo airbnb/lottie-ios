@@ -54,7 +54,8 @@ final class PreCompLayer: BaseCompositionLayer {
   func setup(context: LayerContext) throws {
     try setupLayerHierarchy(
       for: context.animation.assetLibrary?.precompAssets[preCompLayer.referenceID]?.layers ?? [],
-      context: context)
+      context: context
+    )
   }
 
   override func setupAnimations(context: LayerAnimationContext) throws {
@@ -98,7 +99,8 @@ extension PreCompLayer: CustomLayoutLayer {
       x: superlayerBounds.origin.x,
       y: superlayerBounds.origin.y,
       width: CGFloat(preCompLayer.width),
-      height: CGFloat(preCompLayer.height))
+      height: CGFloat(preCompLayer.height)
+    )
 
     contentsLayer.masksToBounds = true
   }

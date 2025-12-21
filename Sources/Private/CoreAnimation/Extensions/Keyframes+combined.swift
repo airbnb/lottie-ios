@@ -10,32 +10,28 @@ enum Keyframes {
   /// Combines the given keyframe groups of `Keyframe<T>`s into a single keyframe group of of `Keyframe<[T]>`s
   ///  - If all of the `KeyframeGroup`s have the exact same animation timing, the keyframes are merged
   ///  - Otherwise, the keyframes are manually interpolated at each frame in the animation
-  static func combined<T>(
+  static func combined<T: AnyInterpolatable>(
     _ allGroups: [KeyframeGroup<T>],
-    requiresManualInterpolation: Bool = false)
-    -> KeyframeGroup<[T]>
-    where T: AnyInterpolatable
-  {
+    requiresManualInterpolation: Bool = false
+  ) -> KeyframeGroup<[T]> {
     Keyframes.combined(
       allGroups,
       requiresManualInterpolation: requiresManualInterpolation,
       makeCombinedResult: { untypedValues in
         untypedValues.compactMap { $0 as? T }
-      })
+      }
+    )
   }
 
   /// Combines the given keyframe groups of `Keyframe<T>`s into a single keyframe group of of `Keyframe<[T]>`s
   ///  - If all of the `KeyframeGroup`s have the exact same animation timing, the keyframes are merged
   ///  - Otherwise, the keyframes are manually interpolated at each frame in the animation
-  static func combined<T1, T2, CombinedResult>(
+  static func combined<T1: AnyInterpolatable, T2: AnyInterpolatable, CombinedResult>(
     _ k1: KeyframeGroup<T1>,
     _ k2: KeyframeGroup<T2>,
     requiresManualInterpolation: Bool = false,
-    makeCombinedResult: (T1, T2) throws -> CombinedResult)
-    rethrows
-    -> KeyframeGroup<CombinedResult>
-    where T1: AnyInterpolatable, T2: AnyInterpolatable
-  {
+    makeCombinedResult: (T1, T2) throws -> CombinedResult
+  ) rethrows -> KeyframeGroup<CombinedResult> {
     try Keyframes.combined(
       [k1, k2],
       requiresManualInterpolation: requiresManualInterpolation,
@@ -46,21 +42,20 @@ enum Keyframes {
         else { return nil }
 
         return try makeCombinedResult(t1, t2)
-      })
+      }
+    )
   }
 
   /// Combines the given keyframe groups of `Keyframe<T>`s into a single keyframe group of of `Keyframe<[T]>`s
   ///  - If all of the `KeyframeGroup`s have the exact same animation timing, the keyframes are merged
   ///  - Otherwise, the keyframes are manually interpolated at each frame in the animation
-  static func combined<T1, T2, T3, CombinedResult>(
+  static func combined<T1: AnyInterpolatable, T2: AnyInterpolatable, T3: AnyInterpolatable, CombinedResult>(
     _ k1: KeyframeGroup<T1>,
     _ k2: KeyframeGroup<T2>,
     _ k3: KeyframeGroup<T3>,
     requiresManualInterpolation: Bool = false,
-    makeCombinedResult: (T1, T2, T3) -> CombinedResult)
-    -> KeyframeGroup<CombinedResult>
-    where T1: AnyInterpolatable, T2: AnyInterpolatable, T3: AnyInterpolatable
-  {
+    makeCombinedResult: (T1, T2, T3) -> CombinedResult
+  ) -> KeyframeGroup<CombinedResult> {
     Keyframes.combined(
       [k1, k2, k3],
       requiresManualInterpolation: requiresManualInterpolation,
@@ -72,13 +67,23 @@ enum Keyframes {
         else { return nil }
 
         return makeCombinedResult(t1, t2, t3)
-      })
+      }
+    )
   }
 
   /// Combines the given keyframe groups of `Keyframe<T>`s into a single keyframe group of of `Keyframe<[T]>`s
   ///  - If all of the `KeyframeGroup`s have the exact same animation timing, the keyframes are merged
   ///  - Otherwise, the keyframes are manually interpolated at each frame in the animation
-  static func combined<T1, T2, T3, T4, T5, T6, T7, CombinedResult>(
+  static func combined<
+    T1: AnyInterpolatable,
+    T2: AnyInterpolatable,
+    T3: AnyInterpolatable,
+    T4: AnyInterpolatable,
+    T5: AnyInterpolatable,
+    T6: AnyInterpolatable,
+    T7: AnyInterpolatable,
+    CombinedResult
+  >(
     _ k1: KeyframeGroup<T1>,
     _ k2: KeyframeGroup<T2>,
     _ k3: KeyframeGroup<T3>,
@@ -87,11 +92,8 @@ enum Keyframes {
     _ k6: KeyframeGroup<T6>,
     _ k7: KeyframeGroup<T7>,
     requiresManualInterpolation: Bool = false,
-    makeCombinedResult: (T1, T2, T3, T4, T5, T6, T7) -> CombinedResult)
-    -> KeyframeGroup<CombinedResult>
-    where T1: AnyInterpolatable, T2: AnyInterpolatable, T3: AnyInterpolatable, T4: AnyInterpolatable,
-    T5: AnyInterpolatable, T6: AnyInterpolatable, T7: AnyInterpolatable
-  {
+    makeCombinedResult: (T1, T2, T3, T4, T5, T6, T7) -> CombinedResult
+  ) -> KeyframeGroup<CombinedResult> {
     Keyframes.combined(
       [k1, k2, k3, k4, k5, k6, k7],
       requiresManualInterpolation: requiresManualInterpolation,
@@ -107,13 +109,24 @@ enum Keyframes {
         else { return nil }
 
         return makeCombinedResult(t1, t2, t3, t4, t5, t6, t7)
-      })
+      }
+    )
   }
 
   /// Combines the given keyframe groups of `Keyframe<T>`s into a single keyframe group of of `Keyframe<[T]>`s
   ///  - If all of the `KeyframeGroup`s have the exact same animation timing, the keyframes are merged
   ///  - Otherwise, the keyframes are manually interpolated at each frame in the animation
-  static func combined<T1, T2, T3, T4, T5, T6, T7, T8, CombinedResult>(
+  static func combined<
+    T1: AnyInterpolatable,
+    T2: AnyInterpolatable,
+    T3: AnyInterpolatable,
+    T4: AnyInterpolatable,
+    T5: AnyInterpolatable,
+    T6: AnyInterpolatable,
+    T7: AnyInterpolatable,
+    T8: AnyInterpolatable,
+    CombinedResult
+  >(
     _ k1: KeyframeGroup<T1>,
     _ k2: KeyframeGroup<T2>,
     _ k3: KeyframeGroup<T3>,
@@ -123,11 +136,8 @@ enum Keyframes {
     _ k7: KeyframeGroup<T7>,
     _ k8: KeyframeGroup<T8>,
     requiresManualInterpolation: Bool = false,
-    makeCombinedResult: (T1, T2, T3, T4, T5, T6, T7, T8) -> CombinedResult)
-    -> KeyframeGroup<CombinedResult>
-    where T1: AnyInterpolatable, T2: AnyInterpolatable, T3: AnyInterpolatable, T4: AnyInterpolatable,
-    T5: AnyInterpolatable, T6: AnyInterpolatable, T7: AnyInterpolatable, T8: AnyInterpolatable
-  {
+    makeCombinedResult: (T1, T2, T3, T4, T5, T6, T7, T8) -> CombinedResult
+  ) -> KeyframeGroup<CombinedResult> {
     Keyframes.combined(
       [k1, k2, k3, k4, k5, k6, k7, k8],
       requiresManualInterpolation: requiresManualInterpolation,
@@ -144,13 +154,26 @@ enum Keyframes {
         else { return nil }
 
         return makeCombinedResult(t1, t2, t3, t4, t5, t6, t7, t8)
-      })
+      }
+    )
   }
 
   /// Combines the given keyframe groups of `Keyframe<T>`s into a single keyframe group of of `Keyframe<[T]>`s
   ///  - If all of the `KeyframeGroup`s have the exact same animation timing, the keyframes are merged
   ///  - Otherwise, the keyframes are manually interpolated at each frame in the animation
-  static func combined<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, CombinedResult>(
+  static func combined<
+    T1: AnyInterpolatable,
+    T2: AnyInterpolatable,
+    T3: AnyInterpolatable,
+    T4: AnyInterpolatable,
+    T5: AnyInterpolatable,
+    T6: AnyInterpolatable,
+    T7: AnyInterpolatable,
+    T8: AnyInterpolatable,
+    T9: AnyInterpolatable,
+    T10: AnyInterpolatable,
+    CombinedResult
+  >(
     _ k1: KeyframeGroup<T1>,
     _ k2: KeyframeGroup<T2>,
     _ k3: KeyframeGroup<T3>,
@@ -162,12 +185,8 @@ enum Keyframes {
     _ k9: KeyframeGroup<T9>,
     _ k10: KeyframeGroup<T10>,
     requiresManualInterpolation: Bool = false,
-    makeCombinedResult: (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10) -> CombinedResult)
-    -> KeyframeGroup<CombinedResult>
-    where T1: AnyInterpolatable, T2: AnyInterpolatable, T3: AnyInterpolatable, T4: AnyInterpolatable,
-    T5: AnyInterpolatable, T6: AnyInterpolatable, T7: AnyInterpolatable, T8: AnyInterpolatable,
-    T9: AnyInterpolatable, T10: AnyInterpolatable
-  {
+    makeCombinedResult: (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10) -> CombinedResult
+  ) -> KeyframeGroup<CombinedResult> {
     Keyframes.combined(
       [k1, k2, k3, k4, k5, k6, k7, k8, k9, k10],
       requiresManualInterpolation: requiresManualInterpolation,
@@ -186,7 +205,8 @@ enum Keyframes {
         else { return nil }
 
         return makeCombinedResult(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10)
-      })
+      }
+    )
   }
 
   // MARK: Private
@@ -203,10 +223,8 @@ enum Keyframes {
   private static func combined<CombinedResult>(
     _ allGroups: [AnyKeyframeGroup],
     requiresManualInterpolation: Bool,
-    makeCombinedResult: ([Any]) throws -> CombinedResult?)
-    rethrows
-    -> KeyframeGroup<CombinedResult>
-  {
+    makeCombinedResult: ([Any]) throws -> CombinedResult?
+  ) rethrows -> KeyframeGroup<CombinedResult> {
     let untypedGroups = allGroups.map { $0.untyped }
 
     // Animations with no timing information (e.g. with just a single keyframe)
@@ -245,10 +263,8 @@ enum Keyframes {
 
   private static func manuallyInterpolated<CombinedResult>(
     _ allGroups: [AnyKeyframeGroup],
-    makeCombinedResult: ([Any]) throws -> CombinedResult?)
-    rethrows
-    -> KeyframeGroup<CombinedResult>
-  {
+    makeCombinedResult: ([Any]) throws -> CombinedResult?
+  ) rethrows -> KeyframeGroup<CombinedResult> {
     let untypedGroups = allGroups.map { $0.untyped }
     let untypedInterpolators = allGroups.map { $0.interpolator }
 
@@ -279,7 +295,8 @@ enum Keyframes {
         time: AnimationFrameTime(localTime),
         // Since we already manually interpolated the keyframes, have Core Animation display
         // each value as a static keyframe rather than trying to interpolate between them.
-        isHold: true)
+        isHold: true
+      )
     }
 
     return KeyframeGroup(keyframes: ContiguousArray(interpolatedKeyframes))

@@ -20,13 +20,15 @@ extension URL {
         for: .itemReplacementDirectory,
         in: .userDomainMask,
         appropriateFor: archive.url,
-        create: true)
+        create: true
+      )
     {
       return tempDir
     }
     #endif
 
     return URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(
-      ProcessInfo.processInfo.globallyUniqueString)
+      ProcessInfo.processInfo.globallyUniqueString
+    )
   }
 }

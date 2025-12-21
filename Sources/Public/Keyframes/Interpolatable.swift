@@ -45,8 +45,8 @@ public protocol SpatialInterpolatable: AnyInterpolatable {
     to: Self,
     amount: CGFloat,
     spatialOutTangent: CGPoint?,
-    spatialInTangent: CGPoint?)
-    -> Self
+    spatialInTangent: CGPoint?
+  ) -> Self
 }
 
 // MARK: - AnyInterpolatable
@@ -61,8 +61,8 @@ public protocol AnyInterpolatable {
     to: Self,
     amount: CGFloat,
     spatialOutTangent: CGPoint?,
-    spatialInTangent: CGPoint?)
-    -> Self
+    spatialInTangent: CGPoint?
+  ) -> Self
 }
 
 extension Interpolatable {
@@ -70,9 +70,8 @@ extension Interpolatable {
     to: Self,
     amount: CGFloat,
     spatialOutTangent _: CGPoint?,
-    spatialInTangent _: CGPoint?)
-    -> Self
-  {
+    spatialInTangent _: CGPoint?
+  ) -> Self {
     interpolate(to: to, amount: amount)
   }
 }
@@ -85,21 +84,22 @@ extension SpatialInterpolatable {
       to: to,
       amount: amount,
       spatialOutTangent: nil,
-      spatialInTangent: nil)
+      spatialInTangent: nil
+    )
   }
 
   public func _interpolate(
     to: Self,
     amount: CGFloat,
     spatialOutTangent: CGPoint?,
-    spatialInTangent: CGPoint?)
-    -> Self
-  {
+    spatialInTangent: CGPoint?
+  ) -> Self {
     interpolate(
       to: to,
       amount: amount,
       spatialOutTangent: spatialOutTangent,
-      spatialInTangent: spatialInTangent)
+      spatialInTangent: spatialInTangent
+    )
   }
 }
 
@@ -129,7 +129,8 @@ extension CGRect: Interpolatable {
       x: origin.x.interpolate(to: to.origin.x, amount: amount),
       y: origin.y.interpolate(to: to.origin.y, amount: amount),
       width: width.interpolate(to: to.width, amount: amount),
-      height: height.interpolate(to: to.height, amount: amount))
+      height: height.interpolate(to: to.height, amount: amount)
+    )
   }
 }
 
@@ -139,7 +140,8 @@ extension CGSize: Interpolatable {
   public func interpolate(to: CGSize, amount: CGFloat) -> CGSize {
     CGSize(
       width: width.interpolate(to: to.width, amount: amount),
-      height: height.interpolate(to: to.height, amount: amount))
+      height: height.interpolate(to: to.height, amount: amount)
+    )
   }
 }
 
@@ -150,16 +152,16 @@ extension CGPoint: SpatialInterpolatable {
     to: CGPoint,
     amount: CGFloat,
     spatialOutTangent: CGPoint?,
-    spatialInTangent: CGPoint?)
-    -> CGPoint
-  {
+    spatialInTangent: CGPoint?
+  ) -> CGPoint {
     guard
       let outTan = spatialOutTangent,
       let inTan = spatialInTangent
     else {
       return CGPoint(
         x: x.interpolate(to: to.x, amount: amount),
-        y: y.interpolate(to: to.y, amount: amount))
+        y: y.interpolate(to: to.y, amount: amount)
+      )
     }
 
     let cp1 = self + outTan
@@ -176,7 +178,8 @@ extension LottieColor: Interpolatable {
       r: r.interpolate(to: to.r, amount: amount),
       g: g.interpolate(to: to.g, amount: amount),
       b: b.interpolate(to: to.b, amount: amount),
-      a: a.interpolate(to: to.a, amount: amount))
+      a: a.interpolate(to: to.a, amount: amount)
+    )
   }
 }
 
@@ -195,15 +198,15 @@ extension LottieVector2D: SpatialInterpolatable {
     to: LottieVector2D,
     amount: CGFloat,
     spatialOutTangent: CGPoint?,
-    spatialInTangent: CGPoint?)
-    -> LottieVector2D
-  {
+    spatialInTangent: CGPoint?
+  ) -> LottieVector2D {
     pointValue.interpolate(
       to: to.pointValue,
       amount: amount,
       spatialOutTangent: spatialOutTangent,
-      spatialInTangent: spatialInTangent)
-      .vector2dValue
+      spatialInTangent: spatialInTangent
+    )
+    .vector2dValue
   }
 }
 
@@ -214,27 +217,29 @@ extension LottieVector3D: SpatialInterpolatable {
     to: LottieVector3D,
     amount: CGFloat,
     spatialOutTangent: CGPoint?,
-    spatialInTangent: CGPoint?)
-    -> LottieVector3D
-  {
+    spatialInTangent: CGPoint?
+  ) -> LottieVector3D {
     if spatialInTangent != nil || spatialOutTangent != nil {
       // TODO Support third dimension spatial interpolation
       let point = pointValue.interpolate(
         to: to.pointValue,
         amount: amount,
         spatialOutTangent: spatialOutTangent,
-        spatialInTangent: spatialInTangent)
+        spatialInTangent: spatialInTangent
+      )
 
       return LottieVector3D(
         x: point.x,
         y: point.y,
-        z: CGFloat(z.interpolate(to: to.z, amount: amount)))
+        z: CGFloat(z.interpolate(to: to.z, amount: amount))
+      )
     }
 
     return LottieVector3D(
       x: x.interpolate(to: to.x, amount: amount),
       y: y.interpolate(to: to.y, amount: amount),
-      z: z.interpolate(to: to.z, amount: amount))
+      z: z.interpolate(to: to.z, amount: amount)
+    )
   }
 }
 
@@ -244,7 +249,8 @@ extension Array: Interpolatable, AnyInterpolatable where Element: Interpolatable
   public func interpolate(to: [Element], amount: CGFloat) -> [Element] {
     LottieLogger.shared.assert(
       count == to.count,
-      "When interpolating Arrays, both array sound have the same element count.")
+      "When interpolating Arrays, both array sound have the same element count."
+    )
 
     return zip(self, to).map { lhs, rhs in
       lhs.interpolate(to: rhs, amount: amount)

@@ -258,7 +258,7 @@ extension [LayerModel] {
   }
 }
 
-// MARK: - LayerModel + Sendable
+// MARK: - LayerModel + @unchecked Sendable
 
 /// Since `LayerModel` isn't `final`, we have to use `@unchecked Sendable` instead of `Sendable.`
 /// All `LayerModel` subclasses are immutable `Sendable` values.

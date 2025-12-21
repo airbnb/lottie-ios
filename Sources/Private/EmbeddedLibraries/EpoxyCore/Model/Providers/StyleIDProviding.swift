@@ -32,6 +32,7 @@ extension EpoxyModeled where Self: StyleIDProviding {
     .init(
       keyPath: \StyleIDProviding.styleID,
       defaultValue: nil,
-      updateStrategy: .replace)
+      updateStrategy: .replace
+    )
   }
 }

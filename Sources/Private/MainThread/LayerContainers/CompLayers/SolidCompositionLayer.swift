@@ -18,7 +18,8 @@ final class SolidCompositionLayer: CompositionLayer {
         r: Double(components.red),
         g: Double(components.green),
         b: Double(components.blue),
-        a: 1)))
+        a: 1
+      )))
 
     super.init(layer: solid, size: .zero)
     solidShape.path = CGPath(rect: CGRect(x: 0, y: 0, width: solid.width, height: solid.height), transform: nil)

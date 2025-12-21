@@ -15,7 +15,7 @@ import Foundation
 /// The default size of the cache is 100.
 ///
 /// This cache implementation also responds to memory pressure.
-public class DefaultAnimationCache: AnimationCacheProvider {
+public final class DefaultAnimationCache: AnimationCacheProvider {
 
   // MARK: Lifecycle
 

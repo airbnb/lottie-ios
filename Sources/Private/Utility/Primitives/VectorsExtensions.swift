@@ -247,7 +247,9 @@ extension CGSize {
 extension CATransform3D {
 
   enum Axis {
-    case x, y, z
+    case x
+    case y
+    case z
   }
 
   static func makeSkew(skew: CGFloat, skewAxis: CGFloat) -> CATransform3D {
@@ -271,7 +273,8 @@ extension CATransform3D {
       m41: 0,
       m42: 0,
       m43: 0,
-      m44: 1)
+      m44: 1
+    )
 
     let transform2 = CATransform3D(
       m11: 1,
@@ -289,7 +292,8 @@ extension CATransform3D {
       m41: 0,
       m42: 0,
       m43: 0,
-      m44: 1)
+      m44: 1
+    )
 
     let transform3 = CATransform3D(
       m11: mCos,
@@ -307,7 +311,8 @@ extension CATransform3D {
       m41: 0,
       m42: 0,
       m43: 0,
-      m44: 1)
+      m44: 1
+    )
     return CATransform3DConcat(transform3, CATransform3DConcat(transform2, transform1))
   }
 
@@ -319,9 +324,8 @@ extension CATransform3D {
     rotationY: CGFloat,
     rotationZ: CGFloat,
     skew: CGFloat?,
-    skewAxis: CGFloat?)
-    -> CATransform3D
-  {
+    skewAxis: CGFloat?
+  ) -> CATransform3D {
     if let skew, let skewAxis {
       return CATransform3DMakeTranslation(position.x, position.y, 0)
         .rotated(rotationX, axis: .x)
@@ -345,7 +349,8 @@ extension CATransform3D {
       degrees.toRadians(),
       axis == .x ? 1 : 0,
       axis == .y ? 1 : 0,
-      axis == .z ? 1 : 0)
+      axis == .z ? 1 : 0
+    )
   }
 
   func translated(_ translation: CGPoint) -> CATransform3D {

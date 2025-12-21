@@ -54,7 +54,6 @@ final class RoundedCornersNode: AnimatorNode {
   var lastUpdateFrame: CGFloat? = nil
   var isEnabled = true
 
-  // MARK: Animator Node
   var propertyMap: NodePropertyMap & KeypathSearchable {
     properties
   }
@@ -71,7 +70,8 @@ final class RoundedCornersNode: AnimatorNode {
         if cornerRadius != 0 {
           pathContainer.appendPath(
             path.roundCorners(radius: cornerRadius),
-            updateFrame: frame)
+            updateFrame: frame
+          )
         } else {
           pathContainer.appendPath(path, updateFrame: frame)
         }

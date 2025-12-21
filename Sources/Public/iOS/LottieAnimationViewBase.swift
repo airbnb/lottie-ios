@@ -62,12 +62,14 @@ open class LottieAnimationViewBase: UIView {
       self,
       selector: #selector(animationWillEnterForeground),
       name: UIApplication.willEnterForegroundNotification,
-      object: nil)
+      object: nil
+    )
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(animationWillMoveToBackground),
       name: UIApplication.didEnterBackgroundNotification,
-      object: nil)
+      object: nil
+    )
   }
 
   @objc

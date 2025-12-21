@@ -17,7 +17,8 @@ final class LoggingTests: XCTestCase {
   func testAnimationWithNoIssues() async {
     await snapshotLoggedMessages(
       animationName: "LottieLogo1",
-      configuration: LottieConfiguration(renderingEngine: .automatic))
+      configuration: LottieConfiguration(renderingEngine: .automatic)
+    )
   }
 
   func testAutomaticFallbackToMainThreadRenderingEngine() async {
@@ -26,7 +27,8 @@ final class LoggingTests: XCTestCase {
     //  > for stroke dashPattern values, due to limitations of Core Animation.
     await snapshotLoggedMessages(
       animationName: "TypeFace/G",
-      configuration: LottieConfiguration(renderingEngine: .automatic))
+      configuration: LottieConfiguration(renderingEngine: .automatic)
+    )
   }
 
   func testCoreAnimationRenderingEngineUnsupportedAnimation() async {
@@ -35,7 +37,8 @@ final class LoggingTests: XCTestCase {
     //  > for stroke dashPattern values, due to limitations of Core Animation.
     await snapshotLoggedMessages(
       animationName: "TypeFace/G",
-      configuration: LottieConfiguration(renderingEngine: .coreAnimation))
+      configuration: LottieConfiguration(renderingEngine: .coreAnimation)
+    )
   }
 
   func testExplicitMainThreadRenderingEngine() async {
@@ -43,14 +46,16 @@ final class LoggingTests: XCTestCase {
     // Manually specifying the Main Thread rendering engine should silence the log messages.
     await snapshotLoggedMessages(
       animationName: "TypeFace/G",
-      configuration: LottieConfiguration(renderingEngine: .mainThread))
+      configuration: LottieConfiguration(renderingEngine: .mainThread)
+    )
   }
 
   func testUnsupportedAfterEffectsExpressionsWarning() async {
     // This animation has unsupported After Effects expressions, which triggers a log message
     await snapshotLoggedMessages(
       animationName: "LottieFiles/growth",
-      configuration: LottieConfiguration(renderingEngine: .automatic))
+      configuration: LottieConfiguration(renderingEngine: .automatic)
+    )
   }
 
   // MARK: Private
@@ -59,9 +64,8 @@ final class LoggingTests: XCTestCase {
     animationName: String,
     configuration: LottieConfiguration,
     function: String = #function,
-    line: UInt = #line)
-    async
-  {
+    line: UInt = #line
+  ) async {
     let loggedMessages = await loggedMessages(for: animationName, configuration: configuration)
 
     assertSnapshot(
@@ -69,7 +73,8 @@ final class LoggingTests: XCTestCase {
       as: .description,
       named: animationName,
       testName: function,
-      line: line)
+      line: line
+    )
   }
 
   private func loggedMessages(for animationName: String, configuration: LottieConfiguration) async -> [String] {
@@ -89,12 +94,14 @@ final class LoggingTests: XCTestCase {
       },
       info: { message in
         logMessages.append("[info] \(message())")
-      })
+      }
+    )
 
     let animationView = await SnapshotConfiguration.makeAnimationView(
       for: animationName,
       configuration: configuration,
-      logger: logger)!
+      logger: logger
+    )!
 
     animationView.renderContentsForUnitTests()
 

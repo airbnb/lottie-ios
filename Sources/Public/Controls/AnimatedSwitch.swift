@@ -25,8 +25,8 @@ open class AnimatedSwitch: AnimatedControl {
 
   public override init(
     animation: LottieAnimation?,
-    configuration: LottieConfiguration = .shared)
-  {
+    configuration: LottieConfiguration = .shared
+  ) {
     /// Generate a haptic generator if available.
     #if os(iOS)
     hapticGenerator = HapticGenerator()
@@ -149,8 +149,8 @@ open class AnimatedSwitch: AnimatedControl {
   public func setProgressForState(
     fromProgress: AnimationProgressTime,
     toProgress: AnimationProgressTime,
-    forOnState: Bool)
-  {
+    forOnState: Bool
+  ) {
     if forOnState {
       onStartProgress = fromProgress
       onEndProgress = toProgress
@@ -169,8 +169,6 @@ open class AnimatedSwitch: AnimatedControl {
   private(set) var offStartProgress: CGFloat = 1
   private(set) var offEndProgress: CGFloat = 0
 
-  // MARK: Animation State
-
   func updateOnState(isOn: Bool, animated: Bool, shouldFireHaptics: Bool) {
     _isOn = isOn
     var startProgress = isOn ? onStartProgress : offStartProgress
@@ -185,7 +183,8 @@ open class AnimatedSwitch: AnimatedControl {
       if
         realtimeProgress.isInRange(
           min(previousStateStart, previousStateEnd),
-          max(previousStateStart, previousStateEnd))
+          max(previousStateStart, previousStateEnd)
+        )
       {
         /// Animation is currently in the previous time range. Reverse the previous play.
         startProgress = previousStateEnd
@@ -216,7 +215,8 @@ open class AnimatedSwitch: AnimatedControl {
         if finished, !(animationView.animationLayer is CoreAnimationLayer) {
           animationView.currentProgress = finalProgress
         }
-      })
+      }
+    )
   }
 
   // MARK: Fileprivate
@@ -250,7 +250,7 @@ protocol ImpactGenerator {
 }
 
 #if os(iOS)
-class HapticGenerator: ImpactGenerator {
+final class HapticGenerator: ImpactGenerator {
 
   // MARK: Internal
 
@@ -265,7 +265,7 @@ class HapticGenerator: ImpactGenerator {
 #else
 // MARK: - NullHapticGenerator
 
-class NullHapticGenerator: ImpactGenerator {
+final class NullHapticGenerator: ImpactGenerator {
   func generateImpact() { }
 }
 #endif

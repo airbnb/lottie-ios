@@ -7,7 +7,7 @@
 
 import QuartzCore
 
-class GroupOutputNode: NodeOutput {
+final class GroupOutputNode: NodeOutput {
 
   // MARK: Lifecycle
 

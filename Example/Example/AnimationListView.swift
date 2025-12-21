@@ -145,7 +145,8 @@ extension AnimationListView {
     return ((try? fileManager.contentsOfDirectory(
       at: Bundle.main.resourceURL!.appendingPathComponent(directory),
       includingPropertiesForKeys: [.isDirectoryKey],
-      options: [])) ?? [])
+      options: []
+    )) ?? [])
       .filter { url in
         var isDirectory = ObjCBool(false)
         fileManager.fileExists(atPath: url.path, isDirectory: &isDirectory)
@@ -206,14 +207,17 @@ extension AnimationListView.Content {
       items: [
         .remoteAnimations(
           name: "Rooms Animation",
-          urls: [URL(string: "https://a0.muscache.com/pictures/96699af6-b73e-499f-b0f5-3c862ae7d126.json")!]),
+          urls: [URL(string: "https://a0.muscache.com/pictures/96699af6-b73e-499f-b0f5-3c862ae7d126.json")!]
+        ),
         .remoteAnimations(
           name: "Multiple Animations",
           urls: [
             URL(string: "https://a0.muscache.com/pictures/a7c140ee-6818-4a8a-b3b1-0c785054a611.json")!,
             URL(string: "https://a0.muscache.com/pictures/96699af6-b73e-499f-b0f5-3c862ae7d126.json")!,
-          ]),
-      ])
+          ]
+        ),
+      ]
+    )
   }
 
   var name: String {

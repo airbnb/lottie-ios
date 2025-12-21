@@ -70,9 +70,8 @@ public struct LottieButton: UIViewConfiguringSwiftUIView {
   public func animate(
     fromProgress: AnimationProgressTime,
     toProgress: AnimationProgressTime,
-    on event: LottieControlEvent)
-    -> Self
-  {
+    on event: LottieControlEvent
+  ) -> Self {
     configure { view in
       // `setPlayRange` just modifies a dictionary,
       // so we can just call it on every state update without diffing
@@ -85,9 +84,8 @@ public struct LottieButton: UIViewConfiguringSwiftUIView {
   public func animate(
     fromMarker: String,
     toMarker: String,
-    on event: LottieControlEvent)
-    -> Self
-  {
+    on event: LottieControlEvent
+  ) -> Self {
     configure { view in
       // `setPlayRange` just modifies a dictionary,
       // so we can just call it on every state update without diffing
@@ -99,9 +97,8 @@ public struct LottieButton: UIViewConfiguringSwiftUIView {
   /// The value provider must be `Equatable` to avoid unnecessary state updates / re-renders.
   public func valueProvider<ValueProvider: AnyValueProvider & Equatable>(
     _ valueProvider: ValueProvider,
-    for keypath: AnimationKeypath)
-    -> Self
-  {
+    for keypath: AnimationKeypath
+  ) -> Self {
     configure { view in
       if (view.animationView.valueProviders[keypath] as? ValueProvider) != valueProvider {
         view.animationView.setValueProvider(valueProvider, keypath: keypath)

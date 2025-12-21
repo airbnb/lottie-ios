@@ -23,12 +23,16 @@ public enum ReducedMotionOption {
 extension ReducedMotionOption {
   /// The standard behavior where Lottie animations play normally with no overrides.
   /// By default this mode is used when the system "reduced motion" option is disabled.
-  public static var standardMotion: ReducedMotionOption { .specific(.standardMotion) }
+  public static var standardMotion: ReducedMotionOption {
+    .specific(.standardMotion)
+  }
 
   /// Lottie animations with a "reduced motion" marker will play that marker instead of any other animations.
   /// By default this mode is used when the system "reduced motion" option is enabled.
   ///  - Valid marker names include "reduced motion", "reducedMotion", "reduced_motion" (case insensitive).
-  public static var reducedMotion: ReducedMotionOption { .specific(.reducedMotion) }
+  public static var reducedMotion: ReducedMotionOption {
+    .specific(.reducedMotion)
+  }
 
   /// A `ReducedMotionOptionProvider` that returns `.reducedMotion` when
   /// the system `UIAccessibility.isReduceMotionEnabled` option is `true`.

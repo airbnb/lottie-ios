@@ -58,8 +58,8 @@ final class LRUCache<Key: Hashable, Value> {
   init(
     totalCostLimit: Int = .max,
     countLimit: Int = .max,
-    notificationCenter: NotificationCenter = .default)
-  {
+    notificationCenter: NotificationCenter = .default
+  ) {
     self.totalCostLimit = totalCostLimit
     self.countLimit = countLimit
     self.notificationCenter = notificationCenter
@@ -67,8 +67,8 @@ final class LRUCache<Key: Hashable, Value> {
     token = notificationCenter.addObserver(
       forName: LRUCacheMemoryWarningNotification,
       object: nil,
-      queue: nil)
-    { [weak self] _ in
+      queue: nil
+    ) { [weak self] _ in
       self?.removeAllValues()
     }
   }
@@ -96,7 +96,7 @@ final class LRUCache<Key: Hashable, Value> {
 
   // MARK: Private
 
-  private var values: [Key: Container] = [:]
+  private var values = [Key: Container]()
   private unowned(unsafe) var head: Container?
   private unowned(unsafe) var tail: Container?
   private let lock = NSLock()
@@ -146,7 +146,8 @@ extension LRUCache {
       let container = Container(
         value: value,
         cost: cost,
-        key: key)
+        key: key
+      )
       values[key] = container
       append(container)
     }

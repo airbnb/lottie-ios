@@ -39,8 +39,13 @@ extension CGFloat {
     absolute ? abs(a - self) : a - self
   }
 
-  func toRadians() -> CGFloat { self * .pi / 180 }
-  func toDegrees() -> CGFloat { self * 180 / .pi }
+  func toRadians() -> CGFloat {
+    self * .pi / 180
+  }
+
+  func toDegrees() -> CGFloat {
+    self * 180 / .pi
+  }
 
 }
 
@@ -73,7 +78,8 @@ extension CGRect {
       x: center.x - (size.width * 0.5),
       y: center.y - (size.height * 0.5),
       width: size.width,
-      height: size.height)
+      height: size.height
+    )
   }
 
   // MARK: Internal
@@ -91,7 +97,8 @@ extension CGRect {
     set {
       origin = CGPoint(
         x: newValue.x - (size.width * 0.5),
-        y: newValue.y - (size.height * 0.5))
+        y: newValue.y - (size.height * 0.5)
+      )
     }
   }
 
@@ -103,7 +110,8 @@ extension CGRect {
     set {
       origin = CGPoint(
         x: newValue.x,
-        y: newValue.y)
+        y: newValue.y
+      )
     }
   }
 
@@ -115,7 +123,8 @@ extension CGRect {
     set {
       origin = CGPoint(
         x: newValue.x,
-        y: newValue.y - size.height)
+        y: newValue.y - size.height
+      )
     }
   }
 
@@ -127,7 +136,8 @@ extension CGRect {
     set {
       origin = CGPoint(
         x: newValue.x - size.width,
-        y: newValue.y)
+        y: newValue.y
+      )
     }
   }
 
@@ -139,7 +149,8 @@ extension CGRect {
     set {
       origin = CGPoint(
         x: newValue.x - size.width,
-        y: newValue.y - size.height)
+        y: newValue.y - size.height
+      )
     }
   }
 
@@ -309,9 +320,8 @@ extension CGPoint {
     amount: CGFloat,
     maxIterations: Int = 3,
     samples: Int = 20,
-    accuracy: CGFloat = 1)
-    -> CGPoint
-  {
+    accuracy: CGFloat = 1
+  ) -> CGPoint {
     if amount == 0 {
       return self
     }
@@ -430,13 +440,15 @@ extension CGPoint {
   func subtract(_ point: CGPoint) -> CGPoint {
     CGPoint(
       x: x - point.x,
-      y: y - point.y)
+      y: y - point.y
+    )
   }
 
   /// Adds the given point from the receiving point.
   func add(_ point: CGPoint) -> CGPoint {
     CGPoint(
       x: x + point.x,
-      y: y + point.y)
+      y: y + point.y
+    )
   }
 }

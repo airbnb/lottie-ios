@@ -82,7 +82,7 @@ final class LayerTransformProperties: NodePropertyMap, KeypathSearchable {
 
 // MARK: - LayerTransformNode
 
-class LayerTransformNode: AnimatorNode {
+final class LayerTransformNode: AnimatorNode {
 
   // MARK: Lifecycle
 
@@ -105,8 +105,6 @@ class LayerTransformNode: AnimatorNode {
   var opacity: Float = 1
   var localTransform: CATransform3D = CATransform3DIdentity
   var globalTransform: CATransform3D = CATransform3DIdentity
-
-  // MARK: Animator Node Protocol
 
   var propertyMap: NodePropertyMap & KeypathSearchable {
     transformProperties
@@ -139,7 +137,8 @@ class LayerTransformNode: AnimatorNode {
       rotationY: transformProperties.rotationY.value.cgFloatValue,
       rotationZ: transformProperties.rotationZ.value.cgFloatValue,
       skew: nil,
-      skewAxis: nil)
+      skewAxis: nil
+    )
 
     if let parentNode = parentNode as? LayerTransformNode {
       globalTransform = CATransform3DConcat(localTransform, parentNode.globalTransform)

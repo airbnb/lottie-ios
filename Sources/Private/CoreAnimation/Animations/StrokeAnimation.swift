@@ -13,13 +13,16 @@ protocol StrokeShapeItem: ShapeItem, OpacityAnimationModel {
   var lineJoin: LineJoin { get }
   var miterLimit: Double { get }
   var dashPattern: [DashElement]? { get }
+
   func copy(width: KeyframeGroup<LottieVector1D>) -> StrokeShapeItem
 }
 
 // MARK: - Stroke + StrokeShapeItem
 
 extension Stroke: StrokeShapeItem {
-  var strokeColor: KeyframeGroup<LottieColor>? { color }
+  var strokeColor: KeyframeGroup<LottieColor>? {
+    color
+  }
 
   func copy(width: KeyframeGroup<LottieVector1D>) -> StrokeShapeItem {
     // Type-erase the copy from `Stroke` to `StrokeShapeItem`
@@ -32,7 +35,9 @@ extension Stroke: StrokeShapeItem {
 // MARK: - GradientStroke + StrokeShapeItem
 
 extension GradientStroke: StrokeShapeItem {
-  var strokeColor: KeyframeGroup<LottieColor>? { nil }
+  var strokeColor: KeyframeGroup<LottieColor>? {
+    nil
+  }
 
   func copy(width: KeyframeGroup<LottieVector1D>) -> StrokeShapeItem {
     // Type-erase the copy from `GradientStroke` to `StrokeShapeItem`
@@ -57,14 +62,16 @@ extension CAShapeLayer {
         for: .strokeColor,
         keyframes: strokeColor,
         value: \.cgColorValue,
-        context: context)
+        context: context
+      )
     }
 
     try addAnimation(
       for: .lineWidth,
       keyframes: stroke.width,
       value: \.cgFloatValue,
-      context: context)
+      context: context
+    )
 
     try addOpacityAnimation(for: stroke, context: context)
 
@@ -82,7 +89,8 @@ extension CAShapeLayer {
         for: .lineDashPhase,
         keyframes: KeyframeGroup(keyframes: dashPhase),
         value: \.cgFloatValue,
-        context: context)
+        context: context
+      )
     }
   }
 }

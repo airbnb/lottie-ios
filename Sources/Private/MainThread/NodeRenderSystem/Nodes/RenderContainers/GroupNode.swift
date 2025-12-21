@@ -55,7 +55,7 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
 
   var keypathName = "Transform"
 
-  var childKeypaths: [KeypathSearchable] = []
+  var childKeypaths = [KeypathSearchable]()
 
   let keypathProperties: [String: AnyNodeProperty]
   let properties: [AnyNodeProperty]
@@ -80,7 +80,8 @@ final class GroupNodeProperties: NodePropertyMap, KeypathSearchable {
       rotationY: rotationY.value.cgFloatValue,
       rotationZ: rotationZ.value.cgFloatValue,
       skew: skew.value.cgFloatValue,
-      skewAxis: skewAxis.value.cgFloatValue)
+      skewAxis: skewAxis.value.cgFloatValue
+    )
   }
 }
 
@@ -90,7 +91,6 @@ final class GroupNode: AnimatorNode {
 
   // MARK: Lifecycle
 
-  // MARK: Initializer
   init(name: String, parentNode: AnimatorNode?, tree: NodeTree) {
     self.parentNode = parentNode
     keypathName = name
@@ -108,7 +108,6 @@ final class GroupNode: AnimatorNode {
 
   // MARK: Internal
 
-  // MARK: Properties
   let groupOutput: GroupOutputNode
 
   let properties: GroupNodeProperties
@@ -116,8 +115,6 @@ final class GroupNode: AnimatorNode {
   let rootNode: AnimatorNode?
 
   var container = ShapeContainerLayer()
-
-  // MARK: Keypath Searchable
 
   let keypathName: String
 
@@ -131,8 +128,6 @@ final class GroupNode: AnimatorNode {
   var keypathLayer: CALayer? {
     container
   }
-
-  // MARK: Animator Node Protocol
 
   var propertyMap: NodePropertyMap & KeypathSearchable {
     properties

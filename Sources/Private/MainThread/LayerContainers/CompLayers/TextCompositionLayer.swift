@@ -50,8 +50,8 @@ final class TextCompositionLayer: CompositionLayer {
     textLayer: TextLayerModel,
     textProvider: AnimationKeypathTextProvider,
     fontProvider: AnimationFontProvider,
-    rootAnimationLayer: MainThreadAnimationLayer?)
-  {
+    rootAnimationLayer: MainThreadAnimationLayer?
+  ) {
     var rootNode: TextAnimatorNode?
     for animator in textLayer.animators {
       rootNode = TextAnimatorNode(parentNode: rootNode, textAnimator: animator)

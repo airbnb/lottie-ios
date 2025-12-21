@@ -27,7 +27,7 @@ extension KeypathSearchable {
       return nil
     }
 
-    var results: [AnimatorNode] = []
+    var results = [AnimatorNode]()
 
     if
       let node = self as? AnimatorNode,
@@ -68,7 +68,7 @@ extension KeypathSearchable {
     }
 
     /// Keypath matches in some way. Continue the search.
-    var results: [AnyNodeProperty] = []
+    var results = [AnyNodeProperty]()
 
     /// Check if we have a property keypath yet
     if
@@ -122,7 +122,7 @@ extension KeypathSearchable {
 
   /// Computes the list of animation keypaths that descend from this layer
   func allKeypaths(for keyPath: AnimationKeypath? = nil) -> [String] {
-    var allKeypaths: [String] = []
+    var allKeypaths = [String]()
 
     let newKeypath: AnimationKeypath =
       if let previousKeypath = keyPath {
@@ -146,7 +146,7 @@ extension KeypathSearchable {
 
   /// Computes the list of animation keypaths that descend from this layer
   func layerKeypaths(for keyPath: AnimationKeypath? = nil) -> [CALayer: AnimationKeypath] {
-    var allKeypaths: [CALayer: AnimationKeypath] = [:]
+    var allKeypaths = [CALayer: AnimationKeypath]()
 
     let newKeypath: AnimationKeypath =
       if let previousKeypath = keyPath {

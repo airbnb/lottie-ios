@@ -13,13 +13,13 @@ private final class CachedImageProvider: AnimationImageProvider {
   ///
   /// - Parameter imageProvider: The provider to load image from asset
   ///
-  public init(imageProvider: AnimationImageProvider) {
+  init(imageProvider: AnimationImageProvider) {
     self.imageProvider = imageProvider
   }
 
-  // MARK: Public
+  // MARK: Internal
 
-  public func imageForAsset(asset: ImageAsset) -> CGImage? {
+  func imageForAsset(asset: ImageAsset) -> CGImage? {
     if let image = imageCache.value(forKey: asset.id) {
       return image
     }
@@ -29,8 +29,6 @@ private final class CachedImageProvider: AnimationImageProvider {
     }
     return nil
   }
-
-  // MARK: Internal
 
   func contentsGravity(for asset: ImageAsset) -> CALayerContentsGravity {
     imageProvider.contentsGravity(for: asset)

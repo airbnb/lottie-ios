@@ -21,8 +21,8 @@ struct AnimationContext {
     playFrom: AnimationFrameTime,
     playTo: AnimationFrameTime,
     framerate: Double,
-    closure: LottieCompletionBlock?)
-  {
+    closure: LottieCompletionBlock?
+  ) {
     self.playTo = playTo
     self.playFrom = playFrom
     self.framerate = framerate
@@ -60,7 +60,7 @@ enum AnimationContextState {
 
 // MARK: - AnimationCompletionDelegate
 
-class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
+final class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
 
   // MARK: Lifecycle
 
@@ -69,9 +69,16 @@ class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
     super.init()
   }
 
-  // MARK: Public
+  // MARK: Internal
 
-  public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+  var animationLayer: RootAnimationLayer?
+  var animationKey: String?
+  var ignoreDelegate = false
+  var animationState = AnimationContextState.playing
+
+  let completionBlock: LottieCompletionBlock?
+
+  func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
     guard ignoreDelegate == false else { return }
     animationState = flag ? .complete : .cancelled
     if let animationLayer, let key = animationKey {
@@ -85,12 +92,4 @@ class AnimationCompletionDelegate: NSObject, CAAnimationDelegate {
     }
   }
 
-  // MARK: Internal
-
-  var animationLayer: RootAnimationLayer?
-  var animationKey: String?
-  var ignoreDelegate = false
-  var animationState = AnimationContextState.playing
-
-  let completionBlock: LottieCompletionBlock?
 }

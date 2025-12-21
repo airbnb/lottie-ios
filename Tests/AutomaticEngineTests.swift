@@ -32,7 +32,8 @@ final class AutomaticEngineTests: XCTestCase {
         fontProvider: DefaultFontProvider(),
         maskAnimationToBounds: true,
         compatibilityTrackerMode: .track,
-        logger: .shared))
+        logger: .shared
+      ))
 
       animationLayer.didSetUpAnimation = { issues in
         compatibilityIssues = issues
@@ -53,7 +54,8 @@ final class AutomaticEngineTests: XCTestCase {
       assertSnapshot(
         matching: compatibilityReport,
         as: .description,
-        named: sampleAnimationName)
+        named: sampleAnimationName
+      )
     }
   }
 

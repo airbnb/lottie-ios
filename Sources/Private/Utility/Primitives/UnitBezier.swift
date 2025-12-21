@@ -80,7 +80,11 @@ struct UnitBezier {
 
   /// Given an `x` value solve for the parametric value `t`
   private func solveCurveX(_ x: CGFloat, epsilon: CGFloat) -> CGFloat {
-    var t0, t1, t2, x2, d2: CGFloat
+    var t0: CGFloat
+    var t1: CGFloat
+    var t2: CGFloat
+    var x2: CGFloat
+    var d2: CGFloat
 
     // First try a few iterations of Newton-Raphson -- normally very fast.
     t2 = x

@@ -10,9 +10,9 @@
 final class NodeTree {
   var rootNode: AnimatorNode? = nil
   var transform: ShapeTransform? = nil
-  var renderContainers: [ShapeContainerLayer] = []
-  var paths: [PathOutputNode] = []
-  var childrenNodes: [AnimatorNode] = []
+  var renderContainers = [ShapeContainerLayer]()
+  var paths = [PathOutputNode]()
+  var childrenNodes = [AnimatorNode]()
 }
 
 extension [ShapeItem] {
@@ -72,7 +72,8 @@ extension [ShapeItem] {
         let node = RoundedCornersNode(
           parentNode: nodeTree.rootNode,
           roundedCorners: roundedCorners,
-          upstreamPaths: nodeTree.paths)
+          upstreamPaths: nodeTree.paths
+        )
         nodeTree.rootNode = node
         nodeTree.childrenNodes.append(node)
       } else if let xform = item as? ShapeTransform {

@@ -61,8 +61,8 @@ final class Stroke: ShapeItem {
     lineCap: LineCap,
     lineJoin: LineJoin,
     miterLimit: Double,
-    dashPattern: [DashElement]?)
-  {
+    dashPattern: [DashElement]?
+  ) {
     self.opacity = opacity
     self.color = color
     self.width = width
@@ -107,7 +107,8 @@ final class Stroke: ShapeItem {
       lineCap: lineCap,
       lineJoin: lineJoin,
       miterLimit: miterLimit,
-      dashPattern: dashPattern)
+      dashPattern: dashPattern
+    )
   }
 
   override func encode(to encoder: Encoder) throws {

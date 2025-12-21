@@ -37,7 +37,8 @@ public enum LottiePlaybackMode: Hashable {
     _ fromMarker: String?,
     toMarker: String,
     playEndMarkerFrame: Bool = true,
-    loopMode: LottieLoopMode)
+    loopMode: LottieLoopMode
+  )
 
   @available(*, deprecated, renamed: "LottiePlaybackMode.playing(_:)", message: "Will be removed in a future major release.")
   case marker(_ marker: String, loopMode: LottieLoopMode)
@@ -73,7 +74,8 @@ public enum LottiePlaybackMode: Hashable {
     case fromProgress(
       _ fromProgress: AnimationProgressTime?,
       toProgress: AnimationProgressTime,
-      loopMode: LottieLoopMode)
+      loopMode: LottieLoopMode
+    )
 
     /// The animation plays from the given `fromFrame` to the given `toFrame`.
     /// - Parameter fromFrame: The start frame of the animation. If `nil` the animation will start at the current frame.
@@ -82,7 +84,8 @@ public enum LottiePlaybackMode: Hashable {
     case fromFrame(
       _ fromFrame: AnimationFrameTime?,
       toFrame: AnimationFrameTime,
-      loopMode: LottieLoopMode)
+      loopMode: LottieLoopMode
+    )
 
     /// Plays the animation from a named marker to another marker.
     ///
@@ -101,7 +104,8 @@ public enum LottiePlaybackMode: Hashable {
       _ fromMarker: String?,
       toMarker: String,
       playEndMarkerFrame: Bool = true,
-      loopMode: LottieLoopMode)
+      loopMode: LottieLoopMode
+    )
 
     /// Plays the animation from a named marker to the end of the marker's duration.
     ///
@@ -114,7 +118,8 @@ public enum LottiePlaybackMode: Hashable {
     /// - Parameter loopMode: The loop behavior of the animation.
     case marker(
       _ marker: String,
-      loopMode: LottieLoopMode)
+      loopMode: LottieLoopMode
+    )
 
     /// Plays the given markers sequentially in order.
     ///
@@ -155,9 +160,8 @@ extension LottiePlaybackMode {
   public static func toMarker(
     _ toMarker: String,
     playEndMarkerFrame: Bool = true,
-    loopMode: LottieLoopMode)
-    -> LottiePlaybackMode
-  {
+    loopMode: LottieLoopMode
+  ) -> LottiePlaybackMode {
     .playing(.fromMarker(nil, toMarker: toMarker, playEndMarkerFrame: playEndMarkerFrame, loopMode: loopMode))
   }
 }
@@ -191,9 +195,8 @@ extension LottiePlaybackMode.PlaybackMode {
   public static func toMarker(
     _ toMarker: String,
     playEndMarkerFrame: Bool = true,
-    loopMode: LottieLoopMode)
-    -> Self
-  {
+    loopMode: LottieLoopMode
+  ) -> Self {
     .fromMarker(nil, toMarker: toMarker, playEndMarkerFrame: playEndMarkerFrame, loopMode: loopMode)
   }
 }
@@ -217,20 +220,23 @@ extension LottiePlaybackMode {
       .playing(.fromProgress(
         fromProgress,
         toProgress: toProgress,
-        loopMode: updatedLoopMode))
+        loopMode: updatedLoopMode
+      ))
 
     case .fromFrame(let fromFrame, toFrame: let toFrame, _):
       .playing(.fromFrame(
         fromFrame,
         toFrame: toFrame,
-        loopMode: updatedLoopMode))
+        loopMode: updatedLoopMode
+      ))
 
     case .fromMarker(let fromMarker, let toMarker, let playEndMarkerFrame, _):
       .playing(.fromMarker(
         fromMarker,
         toMarker: toMarker,
         playEndMarkerFrame: playEndMarkerFrame,
-        loopMode: updatedLoopMode))
+        loopMode: updatedLoopMode
+      ))
 
     case .marker(let marker, _):
       .playing(.marker(marker, loopMode: updatedLoopMode))

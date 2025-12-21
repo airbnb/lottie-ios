@@ -18,7 +18,7 @@ struct SnapshotConfiguration {
   var precision: Float = 0.985
 
   /// Dynamic value providers that should be applied to the animation
-  var customValueProviders: [AnimationKeypath: AnyValueProvider] = [:]
+  var customValueProviders = [AnimationKeypath: AnyValueProvider]()
 
   /// A custom `AnimationImageProvider` to use when rendering this animation
   var customImageProvider: AnimationImageProvider?
@@ -84,7 +84,7 @@ extension SnapshotConfiguration {
 
     /// Tests that the text color can be updated using a ValueProvider
     "Nonanimating/Text_Color": .customValueProviders([
-      "**.TEXT.Color": ColorValueProvider(.red),
+      "**.TEXT.Color": ColorValueProvider(.red)
     ]),
 
     /// Test cases for the `AnimationKeypath` / `AnyValueProvider` system
@@ -105,7 +105,7 @@ extension SnapshotConfiguration {
     ]),
 
     "Issues/issue_1837_opacity": .customValueProviders([
-      "Dark Gray Solid 1.Transform.Opacity": FloatValueProvider(10),
+      "Dark Gray Solid 1.Transform.Opacity": FloatValueProvider(10)
     ]),
 
     "Issues/issue_1837_scale_rotation": .customValueProviders([
@@ -114,11 +114,11 @@ extension SnapshotConfiguration {
     ]),
 
     "Issues/issue_2042": .customValueProviders([
-      "MASTER.Transform.Position": PointValueProvider(CGPoint(x: 214, y: 120)),
+      "MASTER.Transform.Position": PointValueProvider(CGPoint(x: 214, y: 120))
     ]),
 
     "Issues/issue_1664": .customValueProviders([
-      "**.base_color.**.Color": ColorValueProvider(.black),
+      "**.base_color.**.Color": ColorValueProvider(.black)
     ]).precision(0.95),
 
     "Issues/issue_1854": .customValueProviders([
@@ -128,23 +128,24 @@ extension SnapshotConfiguration {
           LottieColor(r: 1, g: 1, b: 1, a: 0.5),
           LottieColor(r: 1, g: 1, b: 1, a: 1),
         ],
-        locations: [0, 0.3, 1.0]),
+        locations: [0, 0.3, 1.0]
+      )
     ]),
 
     "Issues/issue_1847": .customValueProviders([
-      "**.Stroke 1.**.Color": ColorValueProvider(.red),
+      "**.Stroke 1.**.Color": ColorValueProvider(.red)
     ]),
 
     "Issues/issue_2150": .customValueProviders([
-      "**.Color": ColorValueProvider(.red),
+      "**.Color": ColorValueProvider(.red)
     ]),
 
     "Issues/issue_2094": .customValueProviders([
-      "**.Stroke Width": FloatValueProvider(2),
+      "**.Stroke Width": FloatValueProvider(2)
     ]),
 
     "Issues/issue_2262": .customValueProviders([
-      "**.Accent.**.Color": ColorValueProvider(.black),
+      "**.Accent.**.Color": ColorValueProvider(.black)
     ]),
 
     // Test cases for `AnimatedImageProvider`
@@ -212,7 +213,8 @@ extension SnapshotConfiguration {
 
     // Other misc test cases
     "Issues/issue_2310": .customViewportFrame(
-      CGRect(x: 0, y: 0, width: 85, height: 85).insetBy(dx: 10, dy: 10)),
+      CGRect(x: 0, y: 0, width: 85, height: 85).insetBy(dx: 10, dy: 10)
+    ),
   ]
 }
 
@@ -256,9 +258,8 @@ extension SnapshotConfiguration {
 
   /// A `SnapshotConfiguration` value using the given custom value providers
   static func customValueProviders(
-    _ customValueProviders: [AnimationKeypath: AnyValueProvider])
-    -> SnapshotConfiguration
-  {
+    _ customValueProviders: [AnimationKeypath: AnyValueProvider]
+  ) -> SnapshotConfiguration {
     var configuration = SnapshotConfiguration.default
     configuration.customValueProviders = customValueProviders
     return configuration
@@ -266,18 +267,16 @@ extension SnapshotConfiguration {
 
   /// A `SnapshotConfiguration` value using the given custom value providers
   static func customImageProvider(
-    _ customImageProvider: AnimationImageProvider)
-    -> SnapshotConfiguration
-  {
+    _ customImageProvider: AnimationImageProvider
+  ) -> SnapshotConfiguration {
     var configuration = SnapshotConfiguration.default
     configuration.customImageProvider = customImageProvider
     return configuration
   }
 
   static func customTextProvider(
-    _ customTextProvider: AnimationKeypathTextProvider)
-    -> SnapshotConfiguration
-  {
+    _ customTextProvider: AnimationKeypathTextProvider
+  ) -> SnapshotConfiguration {
     var configuration = SnapshotConfiguration.default
     configuration.customTextProvider = customTextProvider
     return configuration
@@ -285,9 +284,8 @@ extension SnapshotConfiguration {
 
   /// A `SnapshotConfiguration` value using the given custom value providers
   static func customFontProvider(
-    _ customFontProvider: AnimationFontProvider)
-    -> SnapshotConfiguration
-  {
+    _ customFontProvider: AnimationFontProvider
+  ) -> SnapshotConfiguration {
     var configuration = SnapshotConfiguration.default
     configuration.customFontProvider = customFontProvider
     return configuration

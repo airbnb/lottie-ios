@@ -64,7 +64,6 @@ final class TrimPathNode: AnimatorNode {
   var lastUpdateFrame: CGFloat? = nil
   var isEnabled = true
 
-  // MARK: Animator Node
   var propertyMap: NodePropertyMap & KeypathSearchable {
     properties
   }
@@ -103,7 +102,8 @@ final class TrimPathNode: AnimatorNode {
           // We are treating each compount path as an individual path. Its subpaths are treated as a whole.
           pathContainer.appendPath(
             path.trim(fromPosition: start, toPosition: end, offset: offset, trimSimultaneously: false),
-            updateFrame: frame)
+            updateFrame: frame
+          )
         }
       }
       return
@@ -254,7 +254,8 @@ final class TrimPathNode: AnimatorNode {
               fromPosition: cutFromLength / path.length,
               toPosition: cutToLength / path.length,
               offset: 0,
-              trimSimultaneously: false)
+              trimSimultaneously: false
+            )
             pathContainer.appendPath(newPath, updateFrame: frame)
             break
           }

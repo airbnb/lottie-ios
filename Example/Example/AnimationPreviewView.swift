@@ -48,7 +48,8 @@ struct AnimationPreviewView: View {
         try await Self.loadAnimation(
           from: animationSource,
           urls: urls,
-          currentURLIndex: currentURLIndex)
+          currentURLIndex: currentURLIndex
+        )
       } placeholder: {
         LoadingIndicator()
           .frame(width: 50, height: 50)
@@ -179,9 +180,8 @@ struct AnimationPreviewView: View {
   private static func loadAnimation(
     from animationSource: AnimationSource,
     urls: [URL],
-    currentURLIndex: Int)
-    async throws -> LottieAnimationSource?
-  {
+    currentURLIndex: Int
+  ) async throws -> LottieAnimationSource? {
     switch animationSource {
     case .local(let name):
       if name.hasSuffix(".lottie") {
@@ -229,15 +229,14 @@ extension AnimationImageProvider where Self == FilepathImageProvider {
   static var exampleAppSampleImages: FilepathImageProvider {
     FilepathImageProvider(
       filepath: Bundle.main.resourceURL!.appending(path: "Samples/Images"),
-      contentsGravity: .resizeAspect)
+      contentsGravity: .resizeAspect
+    )
   }
 }
 
 // MARK: - LoadingIndicator
 
 struct LoadingIndicator: View {
-  @State private var animating = false
-
   var body: some View {
     Image(systemName: "rays")
       .rotationEffect(animating ? Angle.degrees(360) : .zero)
@@ -245,9 +244,13 @@ struct LoadingIndicator: View {
         Animation
           .linear(duration: 2)
           .repeatForever(autoreverses: false),
-        value: animating)
+        value: animating
+      )
       .onAppear {
         animating = true
       }
   }
+
+  @State private var animating = false
+
 }

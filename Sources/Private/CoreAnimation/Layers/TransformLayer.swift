@@ -6,6 +6,8 @@ final class TransformLayer: BaseCompositionLayer {
 
   /// `TransformLayer`s don't render any visible content,
   /// they just `transform` their sublayers
-  override var renderLayerContents: Bool { false }
+  override var renderLayerContents: Bool {
+    false
+  }
 
 }

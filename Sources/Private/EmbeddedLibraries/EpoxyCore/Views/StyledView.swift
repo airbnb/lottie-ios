@@ -22,13 +22,14 @@
 /// - SeeAlso: `BehaviorsConfigurableView`
 /// - SeeAlso: `EpoxyableView`
 protocol StyledView: ViewType {
+  /// Creates an instance of this view configured with the given `Style` instance.
+  init(style: Style)
+
   /// The style type of this view, passed into its initializer to configure the resulting instance.
   ///
   /// Defaults to `Never` for views that do not have a `Style`.
   associatedtype Style: Hashable = Never
 
-  /// Creates an instance of this view configured with the given `Style` instance.
-  init(style: Style)
 }
 
 // MARK: Defaults

@@ -4,13 +4,14 @@
 // MARK: - AnyEquatable
 
 struct AnyEquatable {
-  private let value: Any
-  private let equals: (Any) -> Bool
-
   init<T: Equatable>(_ value: T) {
     self.value = value
     equals = { $0 as? T == value }
   }
+
+  private let value: Any
+  private let equals: (Any) -> Bool
+
 }
 
 // MARK: Equatable

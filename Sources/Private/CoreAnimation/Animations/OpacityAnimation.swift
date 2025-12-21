@@ -47,6 +47,7 @@ extension CALayer {
         // expected by Core Animation (e.g. 0.0, 0.5, 1.0).
         $0.cgFloatValue / 100
       },
-      context: context)
+      context: context
+    )
   }
 }

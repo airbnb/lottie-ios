@@ -24,7 +24,8 @@ final class ValueProviderStore {
       """
       The Core Animation rendering engine doesn't support Value Providers that vend a closure,
       because that would require calling the closure on the main thread once per frame.
-      """)
+      """
+    )
 
     let supportedProperties = PropertyName.allCases.map { $0.rawValue }
     let propertyBeingCustomized = keypath.keys.last ?? ""
@@ -34,7 +35,8 @@ final class ValueProviderStore {
       """
       The Core Animation rendering engine currently doesn't support customizing "\(propertyBeingCustomized)" \
       properties. Supported properties are: \(supportedProperties.joined(separator: ", ")).
-      """)
+      """
+    )
 
     valueProviders.removeAll(where: { $0.keypath == keypath })
     valueProviders.append((keypath: keypath, valueProvider: valueProvider))
@@ -50,9 +52,8 @@ final class ValueProviderStore {
   func customKeyframes<Value>(
     of customizableProperty: CustomizableProperty<Value>,
     for keypath: AnimationKeypath,
-    context: LayerAnimationContext)
-    throws -> KeyframeGroup<Value>?
-  {
+    context: LayerAnimationContext
+  ) throws -> KeyframeGroup<Value>? {
     context.recordHierarchyKeypath?(keypath.fullPath)
 
     guard let anyValueProvider = valueProvider(for: keypath) else {

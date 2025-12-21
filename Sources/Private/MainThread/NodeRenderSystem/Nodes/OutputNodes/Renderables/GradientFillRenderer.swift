@@ -23,7 +23,7 @@ private final class GradientFillLayer: CALayer {
     }
   }
 
-  var colors: [CGFloat] = [] {
+  var colors = [CGFloat]() {
     didSet {
       setNeedsDisplay()
     }
@@ -73,7 +73,8 @@ private final class GradientFillLayer: CALayer {
         let maskGradient = CGGradient(
           colorsSpace: maskColorSpace,
           colors: alphaColors as CFArray,
-          locations: alphaLocations),
+          locations: alphaLocations
+        ),
         let maskContext = CGContext(
           data: nil,
           width: ctx.width,
@@ -81,7 +82,8 @@ private final class GradientFillLayer: CALayer {
           bitsPerComponent: 8,
           bytesPerRow: ctx.width,
           space: maskColorSpace,
-          bitmapInfo: 0)
+          bitmapInfo: 0
+        )
       else { return }
       let flipVertical = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: CGFloat(maskContext.height))
       maskContext.concatenate(flipVertical)
@@ -91,7 +93,8 @@ private final class GradientFillLayer: CALayer {
           maskGradient,
           start: start,
           end: end,
-          options: [.drawsAfterEndLocation, .drawsBeforeStartLocation])
+          options: [.drawsAfterEndLocation, .drawsBeforeStartLocation]
+        )
       } else {
         maskContext.drawRadialGradient(
           maskGradient,
@@ -99,7 +102,8 @@ private final class GradientFillLayer: CALayer {
           startRadius: 0,
           endCenter: start,
           endRadius: start.distanceTo(end),
-          options: [.drawsAfterEndLocation, .drawsBeforeStartLocation])
+          options: [.drawsAfterEndLocation, .drawsBeforeStartLocation]
+        )
       }
       /// Clips the gradient
       if let alphaMask = maskContext.makeImage() {
@@ -112,7 +116,8 @@ private final class GradientFillLayer: CALayer {
       let gradient = CGGradient(
         colorsSpace: LottieConfiguration.shared.colorSpace,
         colors: gradientColors as CFArray,
-        locations: colorLocations)
+        locations: colorLocations
+      )
     else { return }
 
     if type == .linear {
@@ -124,7 +129,8 @@ private final class GradientFillLayer: CALayer {
         startRadius: 0,
         endCenter: start,
         endRadius: start.distanceTo(end),
-        options: [.drawsAfterEndLocation, .drawsBeforeStartLocation])
+        options: [.drawsAfterEndLocation, .drawsBeforeStartLocation]
+      )
     }
   }
 
@@ -173,7 +179,7 @@ final class GradientFillRenderer: PassThroughOutputNode, Renderable {
     }
   }
 
-  var colors: [CGFloat] = [] {
+  var colors = [CGFloat]() {
     didSet {
       hasUpdate = true
     }
@@ -221,7 +227,8 @@ final class GradientFillRenderer: PassThroughOutputNode, Renderable {
     let frame = path.boundingBox
     let anchor = CGPoint(
       x: -frame.origin.x / frame.size.width,
-      y: -frame.origin.y / frame.size.height)
+      y: -frame.origin.y / frame.size.height
+    )
     maskLayer.path = path
     maskLayer.bounds = path.boundingBox
     maskLayer.anchorPoint = anchor

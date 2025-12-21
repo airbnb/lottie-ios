@@ -106,8 +106,6 @@ final class GradientStrokeNode: AnimatorNode, RenderNode {
     strokeRender
   }
 
-  // MARK: Animator Node Protocol
-
   var propertyMap: NodePropertyMap & KeypathSearchable {
     strokeProperties
   }

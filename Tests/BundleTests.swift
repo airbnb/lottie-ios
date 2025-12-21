@@ -11,7 +11,7 @@ import XCTest
 
 final class BundleTests: XCTestCase {
 
-  var bundle: Bundle { .lottie }
+  // MARK: Internal
 
   func testGetAnimationDataWithSuffix() throws {
     let data = try bundle.getAnimationData("HamburgerArrow.json", subdirectory: "Samples")
@@ -22,4 +22,11 @@ final class BundleTests: XCTestCase {
     let data = try bundle.getAnimationData("HamburgerArrow", subdirectory: "Samples")
     XCTAssertNotNil(data)
   }
+
+  // MARK: Private
+
+  private var bundle: Bundle {
+    .lottie
+  }
+
 }

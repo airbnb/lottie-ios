@@ -46,11 +46,13 @@ final class GradientRenderLayer: CAGradientLayer {
 
     let pointInBounds = CGPoint(
       x: referencePoint.x + CALayer.veryLargeLayerPadding,
-      y: referencePoint.y + CALayer.veryLargeLayerPadding)
+      y: referencePoint.y + CALayer.veryLargeLayerPadding
+    )
 
     return CGPoint(
       x: CGFloat(pointInBounds.x) / bounds.width,
-      y: CGFloat(pointInBounds.y) / bounds.height)
+      y: CGFloat(pointInBounds.y) / bounds.height
+    )
   }
 
   // MARK: Private
@@ -62,7 +64,8 @@ final class GradientRenderLayer: CAGradientLayer {
       x: gradientReferenceBounds.origin.x,
       y: gradientReferenceBounds.origin.y,
       width: CALayer.veryLargeLayerPadding + gradientReferenceBounds.width + CALayer.veryLargeLayerPadding,
-      height: CALayer.veryLargeLayerPadding + gradientReferenceBounds.height + CALayer.veryLargeLayerPadding)
+      height: CALayer.veryLargeLayerPadding + gradientReferenceBounds.height + CALayer.veryLargeLayerPadding
+    )
 
     // Align the center of this layer to be at the center point of its parent layer
     let superlayerSize = superlayer?.frame.size ?? gradientReferenceBounds.size
@@ -70,7 +73,8 @@ final class GradientRenderLayer: CAGradientLayer {
     transform = CATransform3DMakeTranslation(
       (superlayerSize.width - bounds.width) / 2,
       (superlayerSize.height - bounds.height) / 2,
-      0)
+      0
+    )
   }
 
 }

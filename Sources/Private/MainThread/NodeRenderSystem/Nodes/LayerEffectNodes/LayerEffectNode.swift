@@ -6,8 +6,9 @@ import QuartzCore
 // MARK: - LayerEffectNode
 
 protocol LayerEffectNode {
-  func applyEffect(to layer: CALayer)
   var propertyMap: NodePropertyMap { get }
+
+  func applyEffect(to layer: CALayer)
 }
 
 extension LayerEffectNode {

@@ -59,7 +59,8 @@ extension ValueProvider {
         keyframes.map { keyframe in
           keyframe.withValue(keyframe.value as Any)
         },
-        interpolate: storage.value(frame:))
+        interpolate: storage.value(frame:)
+      )
     }
   }
 }

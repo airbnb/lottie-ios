@@ -111,10 +111,11 @@ extension Data {
   // MARK: Internal
 
   struct DataURLReadOptions: OptionSet {
-    let rawValue: Int
-
     /// Will read Data URL using Data(contentsOf:)
     static let legacy = DataURLReadOptions(rawValue: 1 << 0)
+
+    let rawValue: Int
+
   }
 
 }
@@ -132,7 +133,7 @@ extension ImageAsset {
   }
 }
 
-// MARK: - ImageAsset + Sendable
+// MARK: - ImageAsset + @unchecked Sendable
 
 /// `ImageAsset` inherits `@unchecked Sendable` from `Asset` and
 /// we need to restate that here to avoid a warning in Xcode 16

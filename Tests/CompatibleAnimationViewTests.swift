@@ -9,12 +9,12 @@ import XCTest
 @MainActor
 final class CompatibleAnimationViewTests: XCTestCase {
   func testCompatibleAnimationView() throws {
-    guard try SnapshotTests.enabled else { return }
+    XCTAssert(try SnapshotTests.enabled)
 
     #if os(iOS)
     let animation = CompatibleAnimation(name: "LottieLogo2", subdirectory: Samples.directoryName, bundle: .lottie)
     let animationView = CompatibleAnimationView(compatibleAnimation: animation)
-    animationView.frame.size = animation.animation!.snapshotSize(for: .default)
+    animationView.frame.size = try XCTUnwrap(animation.animation?.snapshotSize(for: .default))
     animationView.currentProgress = 0.5
     assertSnapshot(matching: animationView, as: .imageOfPresentationLayer())
     #endif

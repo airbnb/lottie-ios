@@ -11,7 +11,7 @@ import Foundation
 // MARK: - KeyframeInterpolator
 
 /// A value provider that produces a value at Time from a group of keyframes
-final class KeyframeInterpolator<ValueType>: ValueProvider where ValueType: AnyInterpolatable {
+final class KeyframeInterpolator<ValueType: AnyInterpolatable>: ValueProvider {
 
   // MARK: Lifecycle
 

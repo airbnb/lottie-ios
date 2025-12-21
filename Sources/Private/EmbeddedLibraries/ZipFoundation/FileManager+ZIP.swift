@@ -36,9 +36,8 @@ extension FileManager {
   class func permissions(
     for externalFileAttributes: UInt32,
     osType: Entry.OSType,
-    entryType: Entry.EntryType)
-    -> UInt16
-  {
+    entryType: Entry.EntryType
+  ) -> UInt16 {
     switch osType {
     case .unix, .osx:
       let permissions = mode_t(externalFileAttributes >> 16) & ~S_IFMT
@@ -139,9 +138,8 @@ extension FileManager {
     to destinationURL: URL,
     shouldKeepParent: Bool = true,
     compressionMethod: CompressionMethod = .none,
-    progress: Progress? = nil)
-    throws
-  {
+    progress: Progress? = nil
+  ) throws {
     let fileManager = FileManager()
     guard fileManager.itemExists(at: sourceURL) else {
       throw CocoaError(.fileReadNoSuchFile, userInfo: [NSFilePathErrorKey: sourceURL.path])
@@ -179,12 +177,14 @@ extension FileManager {
             with: finalEntryPath,
             relativeTo: finalBaseURL,
             compressionMethod: compressionMethod,
-            progress: entryProgress)
+            progress: entryProgress
+          )
         } else {
           try archive.addEntry(
             with: finalEntryPath,
             relativeTo: finalBaseURL,
-            compressionMethod: compressionMethod)
+            compressionMethod: compressionMethod
+          )
         }
       }
     } else {
@@ -194,7 +194,8 @@ extension FileManager {
         with: sourceURL.lastPathComponent,
         relativeTo: baseURL,
         compressionMethod: compressionMethod,
-        progress: progress)
+        progress: progress
+      )
     }
   }
 
@@ -212,9 +213,8 @@ extension FileManager {
     to destinationURL: URL,
     skipCRC32: Bool = false,
     progress: Progress? = nil,
-    preferredEncoding: String.Encoding? = nil)
-    throws
-  {
+    preferredEncoding: String.Encoding? = nil
+  ) throws {
     let fileManager = FileManager()
     guard fileManager.itemExists(at: sourceURL) else {
       throw CocoaError(.fileReadNoSuchFile, userInfo: [NSFilePathErrorKey: sourceURL.path])
@@ -244,7 +244,8 @@ extension FileManager {
       guard entryURL.isContained(in: destinationURL) else {
         throw CocoaError(
           .fileReadInvalidFileName,
-          userInfo: [NSFilePathErrorKey: entryURL.path])
+          userInfo: [NSFilePathErrorKey: entryURL.path]
+        )
       }
       let crc32: CRC32
       if let progress {
@@ -263,8 +264,6 @@ extension FileManager {
       try verifyChecksumIfNecessary()
     }
   }
-
-  // MARK: - Helpers
 
   func itemExists(at url: URL) -> Bool {
     // Use `URL.checkResourceIsReachable()` instead of `FileManager.fileExists()` here

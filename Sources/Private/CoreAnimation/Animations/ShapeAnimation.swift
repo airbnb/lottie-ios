@@ -10,16 +10,16 @@ extension CAShapeLayer {
     for shape: ShapeItem,
     context: LayerAnimationContext,
     pathMultiplier: PathMultiplier,
-    roundedCorners: RoundedCorners?)
-    throws
-  {
+    roundedCorners: RoundedCorners?
+  ) throws {
     switch shape {
     case let customShape as Shape:
       try addAnimations(
         for: customShape.path,
         context: context,
         pathMultiplier: pathMultiplier,
-        roundedCorners: roundedCorners)
+        roundedCorners: roundedCorners
+      )
 
     case let combinedShape as CombinedShapeItem:
       try addAnimations(for: combinedShape, context: context, pathMultiplier: pathMultiplier)
@@ -35,7 +35,8 @@ extension CAShapeLayer {
         for: rectangle,
         context: context,
         pathMultiplier: pathMultiplier,
-        roundedCorners: roundedCorners)
+        roundedCorners: roundedCorners
+      )
 
     case let star as Star:
       try addAnimations(for: star, context: context, pathMultiplier: pathMultiplier)
@@ -59,7 +60,8 @@ extension CAShapeLayer {
       for: .fillColor,
       keyframes: fill.color,
       value: \.cgColorValue,
-      context: context)
+      context: context
+    )
 
     try addOpacityAnimation(for: fill, context: context)
   }
@@ -77,7 +79,9 @@ extension CAShapeLayer {
         // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.25, 0.5, 1.0).
         CGFloat(strokeStart.cgFloatValue) / CGFloat(pathMultiplier) / 100
-      }, context: context)
+      },
+      context: context
+    )
 
     try addAnimation(
       for: .strokeEnd,
@@ -87,7 +91,9 @@ extension CAShapeLayer {
         // (e.g. 25%, 50%, 100%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.25, 0.5, 1.0).
         CGFloat(strokeEnd.cgFloatValue) / CGFloat(pathMultiplier) / 100
-      }, context: context)
+      },
+      context: context
+    )
 
     return pathMultiplier
   }
@@ -150,7 +156,8 @@ extension Trim {
         let offsetStart = start.cgFloatValue + (offset.cgFloatValue / 360 * 100)
         let offsetEnd = end.cgFloatValue + (offset.cgFloatValue / 360 * 100)
         return (start: LottieVector1D(offsetStart), end: LottieVector1D(offsetEnd))
-      })
+      }
+    )
 
     var adjustedStrokeStart = offsetStrokeKeyframes.map { $0.start }
     var adjustedStrokeEnd = offsetStrokeKeyframes.map { $0.end }
@@ -172,7 +179,8 @@ extension Trim {
     return (
       strokeStart: adjustedStrokeStart,
       strokeEnd: adjustedStrokeEnd,
-      pathMultiplier: Int(abs(maximumStrokeMultiplier) + abs(minimumStrokeMultiplier)))
+      pathMultiplier: Int(abs(maximumStrokeMultiplier) + abs(minimumStrokeMultiplier))
+    )
   }
 
   // MARK: Private
@@ -227,10 +235,12 @@ extension Trim {
         } else {
           return (start: endValue, end: startValue)
         }
-      })
+      }
+    )
 
     return (
       strokeStart: combinedKeyframes.map { $0.start },
-      strokeEnd: combinedKeyframes.map { $0.end })
+      strokeEnd: combinedKeyframes.map { $0.end }
+    )
   }
 }

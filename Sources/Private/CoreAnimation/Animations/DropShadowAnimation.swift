@@ -28,10 +28,21 @@ protocol DropShadowModel {
 // MARK: - DropShadowStyle + DropShadowModel
 
 extension DropShadowStyle: DropShadowModel {
-  var _opacity: KeyframeGroup<LottieVector1D>? { opacity }
-  var _color: KeyframeGroup<LottieColor>? { color }
-  var _angle: KeyframeGroup<LottieVector1D>? { angle }
-  var _distance: KeyframeGroup<LottieVector1D>? { distance }
+  var _opacity: KeyframeGroup<LottieVector1D>? {
+    opacity
+  }
+
+  var _color: KeyframeGroup<LottieColor>? {
+    color
+  }
+
+  var _angle: KeyframeGroup<LottieVector1D>? {
+    angle
+  }
+
+  var _distance: KeyframeGroup<LottieVector1D>? {
+    distance
+  }
 
   var _radius: KeyframeGroup<LottieVector1D>? {
     size.map { sizeValue in
@@ -46,8 +57,13 @@ extension DropShadowStyle: DropShadowModel {
 // MARK: - DropShadowEffect + DropShadowModel
 
 extension DropShadowEffect: DropShadowModel {
-  var _color: KeyframeGroup<LottieColor>? { color?.value }
-  var _distance: KeyframeGroup<LottieVector1D>? { distance?.value }
+  var _color: KeyframeGroup<LottieColor>? {
+    color?.value
+  }
+
+  var _distance: KeyframeGroup<LottieVector1D>? {
+    distance?.value
+  }
 
   var _radius: KeyframeGroup<LottieVector1D>? {
     softness?.value?.map { softnessValue in
@@ -85,9 +101,8 @@ extension CALayer {
   @nonobjc
   func addDropShadowAnimations(
     for dropShadowModel: DropShadowModel,
-    context: LayerAnimationContext)
-    throws
-  {
+    context: LayerAnimationContext
+  ) throws {
     try addShadowOpacityAnimation(from: dropShadowModel, context: context)
     try addShadowColorAnimation(from: dropShadowModel, context: context)
     try addShadowRadiusAnimation(from: dropShadowModel, context: context)
@@ -108,7 +123,8 @@ extension CALayer {
         // expected by Core Animation (e.g. 0.0, 0.5, 1.0).
         $0.cgFloatValue / 100
       },
-      context: context)
+      context: context
+    )
   }
 
   private func addShadowColorAnimation(from model: DropShadowModel, context: LayerAnimationContext) throws {
@@ -118,7 +134,8 @@ extension CALayer {
       for: .shadowColor,
       keyframes: shadowColorKeyframes,
       value: \.cgColorValue,
-      context: context)
+      context: context
+    )
   }
 
   private func addShadowRadiusAnimation(from model: DropShadowModel, context: LayerAnimationContext) throws {
@@ -128,7 +145,8 @@ extension CALayer {
       for: .shadowRadius,
       keyframes: shadowSizeKeyframes,
       value: \.cgFloatValue,
-      context: context)
+      context: context
+    )
   }
 
   private func addShadowOffsetAnimation(from model: DropShadowModel, context: LayerAnimationContext) throws {
@@ -154,7 +172,8 @@ extension CALayer {
       for: .shadowOffset,
       keyframes: offsetKeyframes,
       value: { $0 },
-      context: context)
+      context: context
+    )
   }
 
 }

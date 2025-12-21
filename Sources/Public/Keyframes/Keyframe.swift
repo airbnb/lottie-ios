@@ -16,8 +16,8 @@ public final class Keyframe<T> {
   public init(
     _ value: T,
     spatialInTangent: LottieVector3D? = nil,
-    spatialOutTangent: LottieVector3D? = nil)
-  {
+    spatialOutTangent: LottieVector3D? = nil
+  ) {
     self.value = value
     time = 0
     isHold = true
@@ -35,8 +35,8 @@ public final class Keyframe<T> {
     inTangent: LottieVector2D? = nil,
     outTangent: LottieVector2D? = nil,
     spatialInTangent: LottieVector3D? = nil,
-    spatialOutTangent: LottieVector3D? = nil)
-  {
+    spatialOutTangent: LottieVector3D? = nil
+  ) {
     self.value = value
     self.time = time
     self.isHold = isHold

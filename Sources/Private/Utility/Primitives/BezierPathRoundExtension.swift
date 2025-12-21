@@ -35,7 +35,8 @@ extension CompoundBezierPath {
     var newPaths = [BezierPath]()
     for path in paths {
       newPaths.append(
-        path.roundCorners(radius: radius))
+        path.roundCorners(radius: radius)
+      )
     }
 
     return CompoundBezierPath(paths: newPaths)
@@ -124,7 +125,9 @@ extension BezierPath {
           CurveVertex(
             CGPoint(x: iX, y: iY),
             CGPoint(x: vX, y: vY),
-            CGPoint(x: oX, y: oY)))
+            CGPoint(x: oX, y: oY)
+          )
+        )
 
         closestIndex = (elementIndex + 1) % uniquePath.elements.count
 
@@ -143,7 +146,9 @@ extension BezierPath {
           CurveVertex(
             CGPoint(x: iX, y: iY),
             CGPoint(x: vX, y: vY),
-            CGPoint(x: oX, y: oY)))
+            CGPoint(x: oX, y: oY)
+          )
+        )
       }
     }
 

@@ -45,7 +45,8 @@ final class SolidLayer: BaseCompositionLayer {
       for: .fillColor,
       keyframes: KeyframeGroup(solidLayer.colorHex.lottieColor),
       value: { $0.cgColorValue },
-      context: context)
+      context: context
+    )
   }
 
   // MARK: Private

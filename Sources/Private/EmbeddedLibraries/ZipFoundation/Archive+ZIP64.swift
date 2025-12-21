@@ -26,6 +26,8 @@ extension Archive {
   }
 
   struct ZIP64EndOfCentralDirectoryRecord: DataSerializable {
+    static let size = 56
+
     let zip64EOCDRecordSignature = UInt32(zip64EOCDRecordStructSignature)
     let sizeOfZIP64EndOfCentralDirectoryRecord: UInt64
     let versionMadeBy: UInt16
@@ -37,15 +39,15 @@ extension Archive {
     let sizeOfCentralDirectory: UInt64
     let offsetToStartOfCentralDirectory: UInt64
     let zip64ExtensibleDataSector: Data
-    static let size = 56
   }
 
   struct ZIP64EndOfCentralDirectoryLocator: DataSerializable {
+    static let size = 20
+
     let zip64EOCDLocatorSignature = UInt32(zip64EOCDLocatorStructSignature)
     let numberOfDiskWithZIP64EOCDRecordStart: UInt32
     let relativeOffsetOfZIP64EOCDRecord: UInt64
     let totalNumberOfDisk: UInt32
-    static let size = 20
   }
 }
 
@@ -75,8 +77,8 @@ extension Archive.ZIP64EndOfCentralDirectoryRecord {
     numberOfEntriesOnDisk: UInt64,
     numberOfEntriesInCD: UInt64,
     sizeOfCentralDirectory: UInt64,
-    offsetToStartOfCD: UInt64)
-  {
+    offsetToStartOfCD: UInt64
+  ) {
     sizeOfZIP64EndOfCentralDirectoryRecord = record.sizeOfZIP64EndOfCentralDirectoryRecord
     versionMadeBy = record.versionMadeBy
     versionNeededToExtract = record.versionNeededToExtract
@@ -155,16 +157,35 @@ extension Archive.ZIP64EndOfCentralDirectoryLocator {
 }
 
 extension Archive.ZIP64EndOfCentralDirectory {
-  var data: Data { record.data + locator.data }
+  var data: Data {
+    record.data + locator.data
+  }
 }
 
 /// Properties that represent the maximum value of each field
 var maxUInt32 = UInt32.max
 var maxUInt16 = UInt16.max
 
-var maxCompressedSize: UInt32 { maxUInt32 }
-var maxUncompressedSize: UInt32 { maxUInt32 }
-var maxOffsetOfLocalFileHeader: UInt32 { maxUInt32 }
-var maxOffsetOfCentralDirectory: UInt32 { maxUInt32 }
-var maxSizeOfCentralDirectory: UInt32 { maxUInt32 }
-var maxTotalNumberOfEntries: UInt16 { maxUInt16 }
+var maxCompressedSize: UInt32 {
+  maxUInt32
+}
+
+var maxUncompressedSize: UInt32 {
+  maxUInt32
+}
+
+var maxOffsetOfLocalFileHeader: UInt32 {
+  maxUInt32
+}
+
+var maxOffsetOfCentralDirectory: UInt32 {
+  maxUInt32
+}
+
+var maxSizeOfCentralDirectory: UInt32 {
+  maxUInt32
+}
+
+var maxTotalNumberOfEntries: UInt16 {
+  maxUInt16
+}

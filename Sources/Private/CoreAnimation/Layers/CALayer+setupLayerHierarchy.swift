@@ -12,9 +12,8 @@ extension CALayer {
   @nonobjc
   func setupLayerHierarchy(
     for layers: [LayerModel],
-    context: LayerContext)
-    throws
-  {
+    context: LayerContext
+  ) throws {
     // A `LottieAnimation`'s `LayerModel`s are listed from front to back,
     // but `CALayer.sublayers` are listed from back to front.
     // We reverse the layer ordering to match what Core Animation expects.
@@ -32,9 +31,8 @@ extension CALayer {
     func makeParentTransformLayer(
       childLayerModel: LayerModel,
       childLayer: CALayer,
-      name: (LayerModel) -> String)
-      -> CALayer
-    {
+      name: (LayerModel) -> String
+    ) -> CALayer {
       guard
         let parentIndex = childLayerModel.parent,
         let parentLayerModel = layersByIndex[parentIndex]
@@ -47,7 +45,8 @@ extension CALayer {
       return makeParentTransformLayer(
         childLayerModel: parentLayerModel,
         childLayer: parentLayer,
-        name: name)
+        name: name
+      )
     }
 
     // Create an `AnimationLayer` for each `LayerModel`
@@ -63,7 +62,8 @@ extension CALayer {
         childLayer: layer,
         name: { parentLayerModel in
           "\(layerModel.name) (parent, \(parentLayerModel.name))"
-        })
+        }
+      )
 
       // Create the `mask` layer for this layer, if it has a `MatteType`
       if
@@ -75,7 +75,8 @@ extension CALayer {
           childLayer: maskLayer,
           name: { parentLayerModel in
             "\(mask.model.name) (mask of \(layerModel.name)) (parent, \(parentLayerModel.name))"
-          })
+          }
+        )
 
         // Set up a parent container to host both the layer
         // and its mask in the same coordinate space
@@ -106,9 +107,8 @@ extension CALayer {
   fileprivate func maskLayer(
     for matteLayerModel: LayerModel,
     type: MatteType,
-    context: LayerContext)
-    throws -> CALayer?
-  {
+    context: LayerContext
+  ) throws -> CALayer? {
     switch type {
     case .add:
       return try matteLayerModel.makeAnimationLayer(context: context)

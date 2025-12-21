@@ -63,8 +63,6 @@ final class EllipseNode: AnimatorNode, PathNode {
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
-  // MARK: Animator Node
-
   var propertyMap: NodePropertyMap & KeypathSearchable {
     properties
   }
@@ -80,8 +78,10 @@ final class EllipseNode: AnimatorNode, PathNode {
       .ellipse(
         size: properties.size.value.sizeValue,
         center: properties.position.value.pointValue,
-        direction: properties.direction),
-      updateFrame: frame)
+        direction: properties.direction
+      ),
+      updateFrame: frame
+    )
   }
 
 }
@@ -91,9 +91,8 @@ extension BezierPath {
   static func ellipse(
     size: CGSize,
     center: CGPoint,
-    direction: PathDirection)
-    -> BezierPath
-  {
+    direction: PathDirection
+  ) -> BezierPath {
     // Unfortunately we HAVE to manually build out the ellipse.
     // Every Apple method constructs an ellipse from the 3 o-clock position
     // After effects constructs from the Noon position.
@@ -113,26 +112,31 @@ extension BezierPath {
     var path = BezierPath(startPoint: CurveVertex(
       point: q1,
       inTangentRelative: CGPoint(x: -cp.width, y: 0),
-      outTangentRelative: CGPoint(x: cp.width, y: 0)))
+      outTangentRelative: CGPoint(x: cp.width, y: 0)
+    ))
     path.addVertex(CurveVertex(
       point: q2,
       inTangentRelative: CGPoint(x: 0, y: -cp.height),
-      outTangentRelative: CGPoint(x: 0, y: cp.height)))
+      outTangentRelative: CGPoint(x: 0, y: cp.height)
+    ))
 
     path.addVertex(CurveVertex(
       point: q3,
       inTangentRelative: CGPoint(x: cp.width, y: 0),
-      outTangentRelative: CGPoint(x: -cp.width, y: 0)))
+      outTangentRelative: CGPoint(x: -cp.width, y: 0)
+    ))
 
     path.addVertex(CurveVertex(
       point: q4,
       inTangentRelative: CGPoint(x: 0, y: cp.height),
-      outTangentRelative: CGPoint(x: 0, y: -cp.height)))
+      outTangentRelative: CGPoint(x: 0, y: -cp.height)
+    ))
 
     path.addVertex(CurveVertex(
       point: q1,
       inTangentRelative: CGPoint(x: -cp.width, y: 0),
-      outTangentRelative: CGPoint(x: cp.width, y: 0)))
+      outTangentRelative: CGPoint(x: cp.width, y: 0)
+    ))
     path.close()
     return path
   }

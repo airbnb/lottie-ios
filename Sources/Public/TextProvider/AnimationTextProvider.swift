@@ -47,7 +47,7 @@ extension LegacyAnimationTextProvider {
   }
 }
 
-// MARK: - TextContentScaleProvider
+// MARK: - TextContentsScaleProvider
 
 /// `AnimationKeypathTextProvider` that can additionally customize the content scale of the rendered text
 public protocol TextContentsScaleProvider: AnimationKeypathTextProvider {

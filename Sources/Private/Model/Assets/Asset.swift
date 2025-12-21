@@ -7,6 +7,7 @@
 
 // MARK: - Asset
 
+/// Base class assets defined in Lottie manifests
 public class Asset: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle

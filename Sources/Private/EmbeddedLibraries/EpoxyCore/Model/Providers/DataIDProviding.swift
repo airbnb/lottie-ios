@@ -41,7 +41,8 @@ extension EpoxyModeled where Self: DataIDProviding {
     EpoxyModelProperty(
       keyPath: \DataIDProviding.dataID,
       defaultValue: DefaultDataID.noneProvided,
-      updateStrategy: .replace)
+      updateStrategy: .replace
+    )
   }
 }
 

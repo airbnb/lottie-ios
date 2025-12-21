@@ -39,7 +39,8 @@ extension Entry.LocalFileHeader {
     if
       let zip64ExtendedInformation = Entry.ZIP64ExtendedInformation.scanForZIP64Field(
         in: extraFieldData,
-        fields: validFields)
+        fields: validFields
+      )
     {
       extraFields = [zip64ExtendedInformation]
     }
@@ -116,7 +117,8 @@ extension Entry.CentralDirectoryStructure {
     if
       let zip64ExtendedInformation = Entry.ZIP64ExtendedInformation.scanForZIP64Field(
         in: extraFieldData,
-        fields: validFields)
+        fields: validFields
+      )
     {
       extraFields = [zip64ExtendedInformation]
     }

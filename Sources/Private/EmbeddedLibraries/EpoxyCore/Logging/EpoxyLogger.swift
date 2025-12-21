@@ -26,8 +26,8 @@ final class EpoxyLogger {
       // swiftlint:disable:next no_direct_standard_out_logs
       print(message())
       #endif
-    })
-  {
+    }
+  ) {
     _assert = assert
     _assertionFailure = assertionFailure
     _warn = warn
@@ -40,22 +40,22 @@ final class EpoxyLogger {
     _ condition: @autoclosure () -> Bool,
     _ message: @autoclosure () -> String,
     _ fileID: StaticString,
-    _ line: UInt)
-    -> Void
+    _ line: UInt
+  ) -> Void
 
   /// Logs that an assertion failure occurred.
   typealias AssertionFailure = (
     _ message: @autoclosure () -> String,
     _ fileID: StaticString,
-    _ line: UInt)
-    -> Void
+    _ line: UInt
+  ) -> Void
 
   /// Logs a warning message.
   typealias Warn = (
     _ message: @autoclosure () -> String,
     _ fileID: StaticString,
-    _ line: UInt)
-    -> Void
+    _ line: UInt
+  ) -> Void
 
   /// The shared instance used to log Epoxy assertions and warnings.
   ///
@@ -67,8 +67,8 @@ final class EpoxyLogger {
     _ condition: @autoclosure () -> Bool,
     _ message: @autoclosure () -> String = String(),
     fileID: StaticString = #fileID,
-    line: UInt = #line)
-  {
+    line: UInt = #line
+  ) {
     _assert(condition(), message(), fileID, line)
   }
 
@@ -76,8 +76,8 @@ final class EpoxyLogger {
   func assertionFailure(
     _ message: @autoclosure () -> String = String(),
     fileID: StaticString = #fileID,
-    line: UInt = #line)
-  {
+    line: UInt = #line
+  ) {
     _assertionFailure(message(), fileID, line)
   }
 
@@ -85,8 +85,8 @@ final class EpoxyLogger {
   func warn(
     _ message: @autoclosure () -> String = String(),
     fileID: StaticString = #fileID,
-    line: UInt = #line)
-  {
+    line: UInt = #line
+  ) {
     _warn(message(), fileID, line)
   }
 

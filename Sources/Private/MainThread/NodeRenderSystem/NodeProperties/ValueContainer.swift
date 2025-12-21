@@ -9,7 +9,7 @@ import CoreGraphics
 import Foundation
 
 /// A container for a node value that is Typed to T.
-class ValueContainer<T>: AnyValueContainer {
+final class ValueContainer<T>: AnyValueContainer {
 
   // MARK: Lifecycle
 

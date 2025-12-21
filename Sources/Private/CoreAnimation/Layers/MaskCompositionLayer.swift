@@ -133,6 +133,7 @@ extension MaskCompositionLayer.MaskLayer: AnimationLayer {
         } else {
           return maskPath
         }
-      })
+      }
+    )
   }
 }

@@ -12,8 +12,8 @@ final class ImageLayer: BaseCompositionLayer {
 
   init(
     imageLayer: ImageLayerModel,
-    context: LayerContext)
-  {
+    context: LayerContext
+  ) {
     self.imageLayer = imageLayer
     super.init(layerModel: imageLayer)
     setupImage(context: context)
@@ -75,6 +75,7 @@ extension ImageLayer: CustomLayoutLayer {
       x: superlayerBounds.origin.x,
       y: superlayerBounds.origin.y,
       width: CGFloat(imageAsset.width),
-      height: CGFloat(imageAsset.height))
+      height: CGFloat(imageAsset.height)
+    )
   }
 }

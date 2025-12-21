@@ -17,7 +17,9 @@ public enum RenderingEngineOption: Hashable {
   /// The Main Thread rendering engine, which supports all Lottie features
   /// but runs on the main thread, which comes with some CPU overhead and
   /// can cause the animation to play at a low framerate when the CPU is busy.
-  public static var mainThread: RenderingEngineOption { .specific(.mainThread) }
+  public static var mainThread: RenderingEngineOption {
+    .specific(.mainThread)
+  }
 
   /// The Core Animation rendering engine, that animates using Core Animation
   /// and has better performance characteristics than the Main Thread engine,
@@ -28,7 +30,9 @@ public enum RenderingEngineOption: Hashable {
   ///    rendering engine. When using `RenderingEngineOption.automatic`,
   ///    Lottie will automatically fall back to the Main Thread engine
   ///    when necessary.
-  public static var coreAnimation: RenderingEngineOption { .specific(.coreAnimation) }
+  public static var coreAnimation: RenderingEngineOption {
+    .specific(.coreAnimation)
+  }
 }
 
 // MARK: - RenderingEngine

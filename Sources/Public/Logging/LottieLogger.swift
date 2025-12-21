@@ -34,8 +34,8 @@ public final class LottieLogger {
       // swiftlint:disable:next no_direct_standard_out_logs
       print(message())
       #endif
-    })
-  {
+    }
+  ) {
     _assert = assert
     _assertionFailure = assertionFailure
     _warn = warn
@@ -49,22 +49,22 @@ public final class LottieLogger {
     _ condition: @autoclosure () -> Bool,
     _ message: @autoclosure () -> String,
     _ fileID: StaticString,
-    _ line: UInt)
-    -> Void
+    _ line: UInt
+  ) -> Void
 
   /// Logs that an assertion failure occurred.
   public typealias AssertionFailure = (
     _ message: @autoclosure () -> String,
     _ fileID: StaticString,
-    _ line: UInt)
-    -> Void
+    _ line: UInt
+  ) -> Void
 
   /// Logs a warning message.
   public typealias Warn = (
     _ message: @autoclosure () -> String,
     _ fileID: StaticString,
-    _ line: UInt)
-    -> Void
+    _ line: UInt
+  ) -> Void
 
   /// Prints a purely informational message.
   public typealias Info = (_ message: @autoclosure () -> String) -> Void
@@ -79,8 +79,8 @@ public final class LottieLogger {
     _ condition: @autoclosure () -> Bool,
     _ message: @autoclosure () -> String = String(),
     fileID: StaticString = #fileID,
-    line: UInt = #line)
-  {
+    line: UInt = #line
+  ) {
     _assert(condition(), message(), fileID, line)
   }
 
@@ -88,8 +88,8 @@ public final class LottieLogger {
   public func assertionFailure(
     _ message: @autoclosure () -> String = String(),
     fileID: StaticString = #fileID,
-    line: UInt = #line)
-  {
+    line: UInt = #line
+  ) {
     _assertionFailure(message(), fileID, line)
   }
 
@@ -97,8 +97,8 @@ public final class LottieLogger {
   public func warn(
     _ message: @autoclosure () -> String = String(),
     fileID: StaticString = #fileID,
-    line: UInt = #line)
-  {
+    line: UInt = #line
+  ) {
     _warn(message(), fileID, line)
   }
 
@@ -132,6 +132,7 @@ extension LottieLogger {
       assertionFailure: { message, _, _ in
         // swiftlint:disable:next no_direct_standard_out_logs
         print(message())
-      })
+      }
+    )
   }
 }

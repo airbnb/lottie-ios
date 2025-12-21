@@ -66,8 +66,6 @@ final class RectangleNode: AnimatorNode, PathNode {
   var hasUpstreamUpdates = false
   var lastUpdateFrame: CGFloat? = nil
 
-  // MARK: Animator Node
-
   var propertyMap: NodePropertyMap & KeypathSearchable {
     properties
   }
@@ -84,8 +82,10 @@ final class RectangleNode: AnimatorNode, PathNode {
         position: properties.position.value.pointValue,
         size: properties.size.value.sizeValue,
         cornerRadius: properties.cornerRadius.value.cgFloatValue,
-        direction: properties.direction),
-      updateFrame: frame)
+        direction: properties.direction
+      ),
+      updateFrame: frame
+    )
   }
 
 }
@@ -98,9 +98,8 @@ extension BezierPath {
     position: CGPoint,
     size inputSize: CGSize,
     cornerRadius: CGFloat,
-    direction: PathDirection)
-    -> BezierPath
-  {
+    direction: PathDirection
+  ) -> BezierPath {
     let size = inputSize * 0.5
     let radius = min(min(cornerRadius, size.width), size.height)
 
@@ -114,32 +113,37 @@ extension BezierPath {
         CurveVertex(
           point: CGPoint(x: size.width, y: -size.height),
           inTangentRelative: .zero,
-          outTangentRelative: .zero)
-          .translated(position),
+          outTangentRelative: .zero
+        )
+        .translated(position),
         /// Corner 1
         CurveVertex(
           point: CGPoint(x: size.width, y: size.height),
           inTangentRelative: .zero,
-          outTangentRelative: .zero)
-          .translated(position),
+          outTangentRelative: .zero
+        )
+        .translated(position),
         /// Corner 2
         CurveVertex(
           point: CGPoint(x: -size.width, y: size.height),
           inTangentRelative: .zero,
-          outTangentRelative: .zero)
-          .translated(position),
+          outTangentRelative: .zero
+        )
+        .translated(position),
         /// Corner 3
         CurveVertex(
           point: CGPoint(x: -size.width, y: -size.height),
           inTangentRelative: .zero,
-          outTangentRelative: .zero)
-          .translated(position),
+          outTangentRelative: .zero
+        )
+        .translated(position),
         /// Corner 4
         CurveVertex(
           point: CGPoint(x: size.width, y: -size.height),
           inTangentRelative: .zero,
-          outTangentRelative: .zero)
-          .translated(position),
+          outTangentRelative: .zero
+        )
+        .translated(position),
       ]
     } else {
       let controlPoint = radius * EllipseNode.ControlPointConstant
@@ -148,70 +152,79 @@ extension BezierPath {
         CurveVertex(
           CGPoint(x: radius, y: 0),
           CGPoint(x: radius, y: 0),
-          CGPoint(x: radius, y: 0))
-          .translated(CGPoint(x: -radius, y: radius))
-          .translated(CGPoint(x: size.width, y: -size.height))
-          .translated(position),
+          CGPoint(x: radius, y: 0)
+        )
+        .translated(CGPoint(x: -radius, y: radius))
+        .translated(CGPoint(x: size.width, y: -size.height))
+        .translated(position),
         /// Corner 1
         CurveVertex(
           CGPoint(x: radius, y: 0), // In tangent
           CGPoint(x: radius, y: 0), // Point
-          CGPoint(x: radius, y: controlPoint))
-          .translated(CGPoint(x: -radius, y: -radius))
-          .translated(CGPoint(x: size.width, y: size.height))
-          .translated(position),
+          CGPoint(x: radius, y: controlPoint)
+        )
+        .translated(CGPoint(x: -radius, y: -radius))
+        .translated(CGPoint(x: size.width, y: size.height))
+        .translated(position),
         CurveVertex(
           CGPoint(x: controlPoint, y: radius), // In tangent
           CGPoint(x: 0, y: radius), // Point
-          CGPoint(x: 0, y: radius)) // Out Tangent
-          .translated(CGPoint(x: -radius, y: -radius))
-          .translated(CGPoint(x: size.width, y: size.height))
-          .translated(position),
+          CGPoint(x: 0, y: radius)
+        ) // Out Tangent
+        .translated(CGPoint(x: -radius, y: -radius))
+        .translated(CGPoint(x: size.width, y: size.height))
+        .translated(position),
         /// Corner 2
         CurveVertex(
           CGPoint(x: 0, y: radius), // In tangent
           CGPoint(x: 0, y: radius), // Point
-          CGPoint(x: -controlPoint, y: radius)) // Out tangent
-          .translated(CGPoint(x: radius, y: -radius))
-          .translated(CGPoint(x: -size.width, y: size.height))
-          .translated(position),
+          CGPoint(x: -controlPoint, y: radius)
+        ) // Out tangent
+        .translated(CGPoint(x: radius, y: -radius))
+        .translated(CGPoint(x: -size.width, y: size.height))
+        .translated(position),
         CurveVertex(
           CGPoint(x: -radius, y: controlPoint), // In tangent
           CGPoint(x: -radius, y: 0), // Point
-          CGPoint(x: -radius, y: 0)) // Out tangent
-          .translated(CGPoint(x: radius, y: -radius))
-          .translated(CGPoint(x: -size.width, y: size.height))
-          .translated(position),
+          CGPoint(x: -radius, y: 0)
+        ) // Out tangent
+        .translated(CGPoint(x: radius, y: -radius))
+        .translated(CGPoint(x: -size.width, y: size.height))
+        .translated(position),
         /// Corner 3
         CurveVertex(
           CGPoint(x: -radius, y: 0), // In tangent
           CGPoint(x: -radius, y: 0), // Point
-          CGPoint(x: -radius, y: -controlPoint)) // Out tangent
-          .translated(CGPoint(x: radius, y: radius))
-          .translated(CGPoint(x: -size.width, y: -size.height))
-          .translated(position),
+          CGPoint(x: -radius, y: -controlPoint)
+        ) // Out tangent
+        .translated(CGPoint(x: radius, y: radius))
+        .translated(CGPoint(x: -size.width, y: -size.height))
+        .translated(position),
         CurveVertex(
           CGPoint(x: -controlPoint, y: -radius), // In tangent
           CGPoint(x: 0, y: -radius), // Point
-          CGPoint(x: 0, y: -radius)) // Out tangent
-          .translated(CGPoint(x: radius, y: radius))
-          .translated(CGPoint(x: -size.width, y: -size.height))
-          .translated(position),
+          CGPoint(x: 0, y: -radius)
+        ) // Out tangent
+        .translated(CGPoint(x: radius, y: radius))
+        .translated(CGPoint(x: -size.width, y: -size.height))
+        .translated(position),
         /// Corner 4
         CurveVertex(
           CGPoint(x: 0, y: -radius), // In tangent
           CGPoint(x: 0, y: -radius), // Point
-          CGPoint(x: controlPoint, y: -radius)) // Out tangent
-          .translated(CGPoint(x: -radius, y: radius))
-          .translated(CGPoint(x: size.width, y: -size.height))
-          .translated(position),
+          CGPoint(x: controlPoint, y: -radius)
+        ) // Out tangent
+        .translated(CGPoint(x: -radius, y: radius))
+        .translated(CGPoint(x: size.width, y: -size.height))
+        .translated(position),
         CurveVertex(
           CGPoint(x: radius, y: -controlPoint), // In tangent
           CGPoint(x: radius, y: 0), // Point
-          CGPoint(x: radius, y: 0)) // Out tangent
-          .translated(CGPoint(x: -radius, y: radius))
-          .translated(CGPoint(x: size.width, y: -size.height))
-          .translated(position),
+          CGPoint(x: radius, y: 0)
+        ) // Out tangent
+        .translated(CGPoint(x: -radius, y: radius))
+        .translated(CGPoint(x: size.width, y: -size.height))
+        .translated(position),
       ]
     }
     let reversed = direction == .counterClockwise

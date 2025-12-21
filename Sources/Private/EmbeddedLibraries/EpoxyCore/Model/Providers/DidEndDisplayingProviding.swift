@@ -36,6 +36,7 @@ extension CallbackContextEpoxyModeled where Self: DidEndDisplayingProviding {
     .init(
       keyPath: \Self.didEndDisplaying,
       defaultValue: nil,
-      updateStrategy: .chain())
+      updateStrategy: .chain()
+    )
   }
 }

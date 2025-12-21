@@ -22,12 +22,12 @@ protocol Renderable {
   /// The last frame in which this node was updated.
   var hasUpdate: Bool { get }
 
-  func hasRenderUpdates(_ forFrame: CGFloat) -> Bool
-
   /// Determines if the renderer requires a custom context for drawing.
   /// If yes the shape layer will perform a custom drawing pass.
   /// If no the shape layer will be a standard CAShapeLayer
   var shouldRenderInContext: Bool { get }
+
+  func hasRenderUpdates(_ forFrame: CGFloat) -> Bool
 
   /// Passes in the CAShapeLayer to update
   func updateShapeLayer(layer: CAShapeLayer)

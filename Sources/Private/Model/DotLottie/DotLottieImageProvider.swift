@@ -14,7 +14,7 @@ import AppKit
 // MARK: - DotLottieImageProvider
 
 /// An image provider that loads the images from a DotLottieFile into memory
-class DotLottieImageProvider: AnimationImageProvider {
+final class DotLottieImageProvider: AnimationImageProvider {
 
   // MARK: Lifecycle
 

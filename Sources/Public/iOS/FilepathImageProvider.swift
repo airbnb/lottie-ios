@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Provides an image for a lottie animation from a provided Bundle.
-public class FilepathImageProvider: AnimationImageProvider {
+public final class FilepathImageProvider: AnimationImageProvider {
 
   // MARK: Lifecycle
 

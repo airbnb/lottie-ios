@@ -31,6 +31,7 @@ extension LayerEffectType: ClassFamily {
 
 // MARK: - LayerEffect
 
+/// Base class for layer effects
 class LayerEffect: Codable, DictionaryInitializable {
 
   // MARK: Lifecycle
@@ -94,7 +95,7 @@ extension [LayerEffect] {
   }
 }
 
-// MARK: - LayerEffect + Sendable
+// MARK: - LayerEffect + @unchecked Sendable
 
 /// Since `LayerEffect` isn't `final`, we have to use `@unchecked Sendable` instead of `Sendable.`
 /// All `LayerEffect` subclasses are immutable `Sendable` values.

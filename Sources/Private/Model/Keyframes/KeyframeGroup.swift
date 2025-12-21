@@ -18,16 +18,16 @@ final class KeyframeGroup<T> {
 
   init(
     keyframes: ContiguousArray<Keyframe<T>>,
-    unsupportedAfterEffectsExpression: String? = nil)
-  {
+    unsupportedAfterEffectsExpression: String? = nil
+  ) {
     self.keyframes = keyframes
     self.unsupportedAfterEffectsExpression = unsupportedAfterEffectsExpression
   }
 
   init(
     _ value: T,
-    unsupportedAfterEffectsExpression: String? = nil)
-  {
+    unsupportedAfterEffectsExpression: String? = nil
+  ) {
     keyframes = [Keyframe(value)]
     self.unsupportedAfterEffectsExpression = unsupportedAfterEffectsExpression
   }
@@ -58,7 +58,8 @@ extension KeyframeGroup: Decodable where T: Decodable {
       /// Try to decode raw value; No keyframe data.
       self.init(
         keyframes: [Keyframe<T>(keyframeData)],
-        unsupportedAfterEffectsExpression: unsupportedAfterEffectsExpression)
+        unsupportedAfterEffectsExpression: unsupportedAfterEffectsExpression
+      )
     } else {
       // Decode and array of keyframes.
       //
@@ -89,7 +90,8 @@ extension KeyframeGroup: Decodable where T: Decodable {
           throw DecodingError.dataCorruptedError(
             forKey: KeyframeWrapperKey.keyframeData,
             in: container,
-            debugDescription: "Missing keyframe data.")
+            debugDescription: "Missing keyframe data."
+          )
         }
 
         keyframes.append(Keyframe<T>(
@@ -99,12 +101,14 @@ extension KeyframeGroup: Decodable where T: Decodable {
           inTangent: previousKeyframeData?.inTangent,
           outTangent: keyframeData.outTangent,
           spatialInTangent: previousKeyframeData?.spatialInTangent,
-          spatialOutTangent: keyframeData.spatialOutTangent))
+          spatialOutTangent: keyframeData.spatialOutTangent
+        ))
         previousKeyframeData = keyframeData
       }
       self.init(
         keyframes: keyframes,
-        unsupportedAfterEffectsExpression: unsupportedAfterEffectsExpression)
+        unsupportedAfterEffectsExpression: unsupportedAfterEffectsExpression
+      )
     }
   }
 }
@@ -132,7 +136,8 @@ extension KeyframeGroup: Encodable where T: Encodable {
           inTangent: nextKeyframe.inTangent,
           outTangent: keyframe.outTangent,
           spatialInTangent: nil,
-          spatialOutTangent: nil)
+          spatialOutTangent: nil
+        )
         try keyframeContainer.encode(keyframeData)
       }
     }
@@ -176,14 +181,16 @@ extension KeyframeGroup: DictionaryInitializable where T: AnyInitializable {
           inTangent: previousKeyframeData?.inTangent,
           outTangent: data.outTangent,
           spatialInTangent: previousKeyframeData?.spatialInTangent,
-          spatialOutTangent: data.spatialOutTangent))
+          spatialOutTangent: data.spatialOutTangent
+        ))
         previousKeyframeData = data
       }
     }
 
     self.init(
       keyframes: keyframes,
-      unsupportedAfterEffectsExpression: unsupportedAfterEffectsExpression)
+      unsupportedAfterEffectsExpression: unsupportedAfterEffectsExpression
+    )
   }
 }
 
@@ -217,7 +224,8 @@ extension Keyframe {
       inTangent: inTangent,
       outTangent: outTangent,
       spatialInTangent: spatialInTangent,
-      spatialOutTangent: spatialOutTangent)
+      spatialOutTangent: spatialOutTangent
+    )
   }
 }
 
@@ -228,7 +236,8 @@ extension KeyframeGroup {
       keyframes: ContiguousArray(try keyframes.map { keyframe in
         keyframe.withValue(try transformation(keyframe.value))
       }),
-      unsupportedAfterEffectsExpression: unsupportedAfterEffectsExpression)
+      unsupportedAfterEffectsExpression: unsupportedAfterEffectsExpression
+    )
   }
 }
 

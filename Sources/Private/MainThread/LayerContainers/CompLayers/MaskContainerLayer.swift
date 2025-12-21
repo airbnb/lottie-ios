@@ -79,7 +79,7 @@ final class MaskContainerLayer: CALayer {
 
   // MARK: Fileprivate
 
-  fileprivate var maskLayers: [MaskLayer] = []
+  fileprivate var maskLayers = [MaskLayer]()
 }
 
 extension CGRect {
@@ -88,13 +88,14 @@ extension CGRect {
       x: -10_000_000,
       y: -10_000_000,
       width: 20_000_000,
-      height: 20_000_000)
+      height: 20_000_000
+    )
   }
 }
 
 // MARK: - MaskLayer
 
-private class MaskLayer: CALayer {
+private final class MaskLayer: CALayer {
 
   // MARK: Lifecycle
 
@@ -108,7 +109,7 @@ private class MaskLayer: CALayer {
       : .rgb(0, 1, 0)
     maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
     actions = [
-      "opacity": NSNull(),
+      "opacity": NSNull()
     ]
   }
 
@@ -157,7 +158,7 @@ private class MaskLayer: CALayer {
 
 // MARK: - MaskNodeProperties
 
-private class MaskNodeProperties: NodePropertyMap {
+private final class MaskNodeProperties: NodePropertyMap {
 
   // MARK: Lifecycle
 

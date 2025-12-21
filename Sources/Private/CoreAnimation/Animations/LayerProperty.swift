@@ -39,12 +39,13 @@ extension LayerProperty where ValueRepresentation: Equatable {
   init(
     caLayerKeypath: String,
     defaultValue: ValueRepresentation?,
-    customizableProperty: CustomizableProperty<ValueRepresentation>?)
-  {
+    customizableProperty: CustomizableProperty<ValueRepresentation>?
+  ) {
     self.init(
       caLayerKeypath: caLayerKeypath,
       isDefaultValue: { $0 == defaultValue },
-      customizableProperty: customizableProperty)
+      customizableProperty: customizableProperty
+    )
   }
 }
 
@@ -91,63 +92,72 @@ extension LayerProperty {
     .init(
       caLayerKeypath: "transform.translation",
       defaultValue: CGPoint(x: 0, y: 0),
-      customizableProperty: .position)
+      customizableProperty: .position
+    )
   }
 
   static var positionX: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.translation.x",
       defaultValue: 0,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 
   static var positionY: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.translation.y",
       defaultValue: 0,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 
   static var scale: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.scale",
       defaultValue: 1,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 
   static var scaleX: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.scale.x",
       defaultValue: 1,
-      customizableProperty: .scaleX)
+      customizableProperty: .scaleX
+    )
   }
 
   static var scaleY: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.scale.y",
       defaultValue: 1,
-      customizableProperty: .scaleY)
+      customizableProperty: .scaleY
+    )
   }
 
   static var rotationX: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.rotation.x",
       defaultValue: 0,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 
   static var rotationY: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.rotation.y",
       defaultValue: 0,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 
   static var rotationZ: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: "transform.rotation.z",
       defaultValue: 0,
-      customizableProperty: .rotation)
+      customizableProperty: .rotation
+    )
   }
 
   static var anchorPoint: LayerProperty<CGPoint> {
@@ -156,21 +166,24 @@ extension LayerProperty {
       // This is intentionally not `GGPoint(x: 0.5, y: 0.5)` (the actual default)
       // to opt `anchorPoint` out of the KVC `setValue` flow, which causes issues.
       defaultValue: nil,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 
   static var opacity: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: #keyPath(CALayer.opacity),
       defaultValue: 1,
-      customizableProperty: .opacity)
+      customizableProperty: .opacity
+    )
   }
 
   static var isHidden: LayerProperty<Bool> {
     .init(
       caLayerKeypath: #keyPath(CALayer.isHidden),
       defaultValue: false,
-      customizableProperty: nil /* unsupported */ )
+      customizableProperty: nil // unsupported
+    )
   }
 
   static var transform: LayerProperty<CATransform3D> {
@@ -180,35 +193,40 @@ extension LayerProperty {
         guard let transform else { return false }
         return CATransform3DIsIdentity(transform)
       },
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 
   static var shadowOpacity: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: #keyPath(CALayer.shadowOpacity),
       defaultValue: 0,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 
   static var shadowColor: LayerProperty<CGColor> {
     .init(
       caLayerKeypath: #keyPath(CALayer.shadowColor),
       defaultValue: .rgb(0, 0, 0),
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 
   static var shadowRadius: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: #keyPath(CALayer.shadowRadius),
       defaultValue: 3.0,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 
   static var shadowOffset: LayerProperty<CGSize> {
     .init(
       caLayerKeypath: #keyPath(CALayer.shadowOffset),
       defaultValue: CGSize(width: 0, height: -3.0),
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 }
 
@@ -219,49 +237,56 @@ extension LayerProperty {
     .init(
       caLayerKeypath: #keyPath(CAShapeLayer.path),
       defaultValue: nil,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 
   static var fillColor: LayerProperty<CGColor> {
     .init(
       caLayerKeypath: #keyPath(CAShapeLayer.fillColor),
       defaultValue: nil,
-      customizableProperty: .color)
+      customizableProperty: .color
+    )
   }
 
   static var lineWidth: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: #keyPath(CAShapeLayer.lineWidth),
       defaultValue: 1,
-      customizableProperty: .floatValue(.strokeWidth))
+      customizableProperty: .floatValue(.strokeWidth)
+    )
   }
 
   static var lineDashPhase: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: #keyPath(CAShapeLayer.lineDashPhase),
       defaultValue: 0,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 
   static var strokeColor: LayerProperty<CGColor> {
     .init(
       caLayerKeypath: #keyPath(CAShapeLayer.strokeColor),
       defaultValue: nil,
-      customizableProperty: .color)
+      customizableProperty: .color
+    )
   }
 
   static var strokeStart: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: #keyPath(CAShapeLayer.strokeStart),
       defaultValue: 0,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 
   static var strokeEnd: LayerProperty<CGFloat> {
     .init(
       caLayerKeypath: #keyPath(CAShapeLayer.strokeEnd),
       defaultValue: 1,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 }
 
@@ -272,28 +297,32 @@ extension LayerProperty {
     .init(
       caLayerKeypath: #keyPath(CAGradientLayer.colors),
       defaultValue: nil,
-      customizableProperty: .gradientColors)
+      customizableProperty: .gradientColors
+    )
   }
 
   static var locations: LayerProperty<[CGFloat]> {
     .init(
       caLayerKeypath: #keyPath(CAGradientLayer.locations),
       defaultValue: nil,
-      customizableProperty: .gradientLocations)
+      customizableProperty: .gradientLocations
+    )
   }
 
   static var startPoint: LayerProperty<CGPoint> {
     .init(
       caLayerKeypath: #keyPath(CAGradientLayer.startPoint),
       defaultValue: nil,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 
   static var endPoint: LayerProperty<CGPoint> {
     .init(
       caLayerKeypath: #keyPath(CAGradientLayer.endPoint),
       defaultValue: nil,
-      customizableProperty: nil /* currently unsupported */ )
+      customizableProperty: nil // currently unsupported
+    )
   }
 }
 
@@ -309,7 +338,8 @@ extension CustomizableProperty {
         }
 
         return .rgba(CGFloat(color.r), CGFloat(color.g), CGFloat(color.b), CGFloat(color.a))
-      })
+      }
+    )
   }
 
   static var opacity: CustomizableProperty<CGFloat> {
@@ -322,7 +352,8 @@ extension CustomizableProperty {
         // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
         return vector.cgFloatValue / 100
-      })
+      }
+    )
   }
 
   static var scaleX: CustomizableProperty<CGFloat> {
@@ -335,7 +366,8 @@ extension CustomizableProperty {
         // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
         return vector.pointValue.x / 100
-      })
+      }
+    )
   }
 
   static var scaleY: CustomizableProperty<CGFloat> {
@@ -348,7 +380,8 @@ extension CustomizableProperty {
         // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
         // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
         return vector.pointValue.y / 100
-      })
+      }
+    )
   }
 
   static var rotation: CustomizableProperty<CGFloat> {
@@ -361,7 +394,8 @@ extension CustomizableProperty {
         // (e.g. 90º, 180º, 360º) so we covert to radians to get the
         // values expected by Core Animation (e.g. π/2, π, 2π)
         return vector.cgFloatValue * .pi / 180
-      })
+      }
+    )
   }
 
   static var position: CustomizableProperty<CGPoint> {
@@ -370,7 +404,8 @@ extension CustomizableProperty {
       conversion: { typeErasedValue, _ in
         guard let vector = typeErasedValue as? LottieVector3D else { return nil }
         return vector.pointValue
-      })
+      }
+    )
   }
 
   static var gradientColors: CustomizableProperty<[CGColor]> {
@@ -379,7 +414,8 @@ extension CustomizableProperty {
       conversion: { _, typeErasedValueProvider in
         guard let gradientValueProvider = typeErasedValueProvider as? GradientValueProvider else { return nil }
         return gradientValueProvider.colors.map { $0.cgColorValue }
-      })
+      }
+    )
   }
 
   static var gradientLocations: CustomizableProperty<[CGFloat]> {
@@ -388,7 +424,8 @@ extension CustomizableProperty {
       conversion: { _, typeErasedValueProvider in
         guard let gradientValueProvider = typeErasedValueProvider as? GradientValueProvider else { return nil }
         return gradientValueProvider.locations.map { CGFloat($0) }
-      })
+      }
+    )
   }
 
   static func floatValue(_ name: PropertyName...) -> CustomizableProperty<CGFloat> {
@@ -397,6 +434,7 @@ extension CustomizableProperty {
       conversion: { typeErasedValue, _ in
         guard let vector = typeErasedValue as? LottieVector1D else { return nil }
         return vector.cgFloatValue
-      })
+      }
+    )
   }
 }

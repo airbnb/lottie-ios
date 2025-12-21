@@ -32,15 +32,14 @@ open class AnimatedControl: LottieControlType {
 
   // MARK: Lifecycle
 
-  // MARK: Initializers
-
   public init(
     animation: LottieAnimation?,
-    configuration: LottieConfiguration = .shared)
-  {
+    configuration: LottieConfiguration = .shared
+  ) {
     animationView = LottieAnimationView(
       animation: animation,
-      configuration: configuration)
+      configuration: configuration
+    )
 
     super.init(frame: animation?.bounds ?? .zero)
     commonInit()
@@ -59,8 +58,6 @@ open class AnimatedControl: LottieControlType {
   }
 
   // MARK: Open
-
-  // MARK: UIControl Overrides
 
   open override var isEnabled: Bool {
     didSet {
@@ -124,7 +121,8 @@ open class AnimatedControl: LottieControlType {
         matching: .any,
         until: .distantFuture,
         inMode: .eventTracking,
-        dequeue: true)
+        dequeue: true
+      )
     {
       if event.type == .leftMouseUp {
         keepOn = false
@@ -197,7 +195,7 @@ open class AnimatedControl: LottieControlType {
 
   // MARK: Internal
 
-  var stateMap: [UInt: String] = [:]
+  var stateMap = [UInt: String]()
 
   #if canImport(UIKit)
   var currentState: LottieControlState {

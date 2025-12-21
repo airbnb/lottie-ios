@@ -53,8 +53,6 @@ public final class ColorValueProvider: ValueProvider {
     }
   }
 
-  // MARK: ValueProvider Protocol
-
   public var valueType: Any.Type {
     LottieColor.self
   }

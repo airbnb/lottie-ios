@@ -9,9 +9,8 @@ extension CALayer {
   func addVisibilityAnimation(
     inFrame: AnimationFrameTime,
     outFrame: AnimationFrameTime,
-    context: LayerAnimationContext)
-    throws
-  {
+    context: LayerAnimationContext
+  ) throws {
     /// If this layer uses `complexTimeRemapping`, use the `addAnimation` codepath
     /// which uses `Keyframes.manuallyInterpolatedWithTimeRemapping`.
     if context.mustUseComplexTimeRemapping {
@@ -25,7 +24,8 @@ extension CALayer {
         for: .isHidden,
         keyframes: isHiddenKeyframes.map { Hold(value: $0) },
         value: { $0.value },
-        context: context)
+        context: context
+      )
     }
 
     /// Otherwise continue using the legacy codepath that doesn't support complex time remapping.

@@ -109,9 +109,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
   let startFrame: CGFloat
   let timeStretch: CGFloat
 
-  var layerEffectNodes: [LayerEffectNode] = []
-
-  // MARK: Keypath Searchable
+  var layerEffectNodes = [LayerEffectNode]()
 
   let keypathName: String
 

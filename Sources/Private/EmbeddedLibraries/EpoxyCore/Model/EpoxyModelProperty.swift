@@ -42,8 +42,8 @@ struct EpoxyModelProperty<Value> {
   init<Model>(
     keyPath: KeyPath<Model, Value>,
     defaultValue: @escaping @autoclosure () -> Value,
-    updateStrategy: UpdateStrategy)
-  {
+    updateStrategy: UpdateStrategy
+  ) {
     self.keyPath = keyPath
     self.defaultValue = defaultValue
     self.updateStrategy = updateStrategy

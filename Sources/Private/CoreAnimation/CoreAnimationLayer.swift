@@ -20,9 +20,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     fontProvider: AnimationFontProvider,
     maskAnimationToBounds: Bool,
     compatibilityTrackerMode: CompatibilityTracker.Mode,
-    logger: LottieLogger)
-    throws
-  {
+    logger: LottieLogger
+  ) throws {
     self.animation = animation
     self.imageProvider = imageProvider
     self.textProvider = textProvider
@@ -85,6 +84,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     var animationContext: AnimationContext
     var timingConfiguration: CAMediaTimingConfiguration
     var recordHierarchyKeypath: ((String) -> Void)?
+
     var expectedAnimationDuration: TimeInterval {
       let animationDuration = Double(animationContext.playTo - animationContext.playFrom) / animationContext.framerate
       let durationMultiplier = timingConfiguration.autoreverses ? 2.0 : 1.0
@@ -138,11 +138,12 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   ///     will only be set up a single time.
   func playAnimation(
     configuration: AnimationConfiguration,
-    playbackState: PlaybackState = .playing)
-  {
+    playbackState: PlaybackState = .playing
+  ) {
     pendingAnimationConfiguration = (
       animationConfiguration: configuration,
-      playbackState: playbackState)
+      playbackState: playbackState
+    )
 
     setNeedsDisplay()
   }
@@ -200,7 +201,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   /// queued by calling `playAnimation` but not yet actually set up
   private var pendingAnimationConfiguration: (
     animationConfiguration: AnimationConfiguration,
-    playbackState: PlaybackState)?
+    playbackState: PlaybackState
+  )?
 
   /// A modification that should be applied to the next animation configuration
   private var pendingAnimationConfigurationModification: ((inout AnimationConfiguration) -> Void)?
@@ -249,7 +251,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
       textProvider: textProvider,
       fontProvider: fontProvider,
       compatibilityTracker: compatibilityTracker,
-      layerName: "root layer")
+      layerName: "root layer"
+    )
   }
 
   private func setup() {
@@ -259,7 +262,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   private func setupChildLayers() throws {
     try setupLayerHierarchy(
       for: animation.layers,
-      context: layerContext)
+      context: layerContext
+    )
 
     try validateReasonableNumberOfTimeRemappingLayers()
   }
@@ -282,7 +286,8 @@ final class CoreAnimationLayer: BaseAnimationLayer {
       loggingState: loggingState,
       currentKeypath: AnimationKeypath(keys: []),
       textProvider: textProvider,
-      recordHierarchyKeypath: configuration.recordHierarchyKeypath)
+      recordHierarchyKeypath: configuration.recordHierarchyKeypath
+    )
 
     // Perform a layout pass if necessary so all of the sublayers
     // have the most up-to-date sizing information
@@ -418,8 +423,10 @@ extension CoreAnimationLayer: RootAnimationLayer {
           // To allow this we have to extend the length of the animation by one frame.
           playTo: animation.endFrame + 1,
           framerate: animation.framerate,
-          closure: nil),
-        timingConfiguration: CAMediaTimingConfiguration(speed: 0))
+          closure: nil
+        ),
+        timingConfiguration: CAMediaTimingConfiguration(speed: 0)
+      )
 
       if
         pendingAnimationConfiguration == nil,
@@ -431,7 +438,8 @@ extension CoreAnimationLayer: RootAnimationLayer {
       else {
         playAnimation(
           configuration: requiredAnimationConfiguration,
-          playbackState: .paused(frame: newValue))
+          playbackState: .paused(frame: newValue)
+        )
       }
     }
   }
@@ -594,7 +602,8 @@ extension CoreAnimationLayer: RootAnimationLayer {
       """
       This animation has a very large number of layers with time remapping (\(numberOfLayersWithTimeRemapping) \
       layers over \(numberOfFrames) frames) so will perform poorly with the Core Animation rendering engine.
-      """)
+      """
+    )
   }
 
 }
@@ -605,7 +614,7 @@ extension CALayer {
   /// All of the layers in the layer tree that are descendants from this later
   @nonobjc
   var allSublayers: [CALayer] {
-    var allSublayers: [CALayer] = []
+    var allSublayers = [CALayer]()
 
     for sublayer in sublayers ?? [] {
       allSublayers.append(sublayer)

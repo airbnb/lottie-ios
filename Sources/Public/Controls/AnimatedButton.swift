@@ -20,8 +20,8 @@ open class AnimatedButton: AnimatedControl {
 
   public override init(
     animation: LottieAnimation?,
-    configuration: LottieConfiguration = .shared)
-  {
+    configuration: LottieConfiguration = .shared
+  ) {
     super.init(animation: animation, configuration: configuration)
 
     #if canImport(UIKit)
@@ -123,5 +123,6 @@ open class AnimatedButton: AnimatedControl {
 
   private var rangesForEvents: [AnyHashable: (from: CGFloat, to: CGFloat)] = [LottieControlEvent.touchUpInside.id: (
     from: 0,
-    to: 1)]
+    to: 1
+  )]
 }

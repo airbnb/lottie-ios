@@ -34,9 +34,8 @@ extension GradientRenderLayer {
   func addGradientAnimations(
     for gradient: GradientShapeItem,
     type: GradientContentType,
-    context: LayerAnimationContext)
-    throws
-  {
+    context: LayerAnimationContext
+  ) throws {
     // We have to set `colors` and `locations` to non-nil values
     // for the animations below to actually take effect
     locations = []
@@ -47,12 +46,14 @@ extension GradientRenderLayer {
     case .rgb:
       colors = .init(
         repeating: CGColor.rgb(0, 0, 0),
-        count: gradient.numberOfColors)
+        count: gradient.numberOfColors
+      )
 
     case .alpha:
       colors = .init(
         repeating: CGColor.rgb(0, 0, 0),
-        count: gradient.colorConfiguration(from: gradient.colors.keyframes[0].value, type: .alpha).count)
+        count: gradient.colorConfiguration(from: gradient.colors.keyframes[0].value, type: .alpha).count
+      )
     }
 
     try addAnimation(
@@ -61,7 +62,8 @@ extension GradientRenderLayer {
       value: { colorComponents in
         gradient.colorConfiguration(from: colorComponents, type: type).map { $0.color }
       },
-      context: context)
+      context: context
+    )
 
     try addAnimation(
       for: .locations,
@@ -69,7 +71,8 @@ extension GradientRenderLayer {
       value: { colorComponents in
         gradient.colorConfiguration(from: colorComponents, type: type).map { $0.location }
       },
-      context: context)
+      context: context
+    )
 
     try addOpacityAnimation(for: gradient, context: context)
 
@@ -87,9 +90,8 @@ extension GradientRenderLayer {
 
   private func addLinearGradientAnimations(
     for gradient: GradientShapeItem,
-    context: LayerAnimationContext)
-    throws
-  {
+    context: LayerAnimationContext
+  ) throws {
     type = .axial
 
     try addAnimation(
@@ -98,7 +100,8 @@ extension GradientRenderLayer {
       value: { absoluteStartPoint in
         percentBasedPointInBounds(from: absoluteStartPoint.pointValue)
       },
-      context: context)
+      context: context
+    )
 
     try addAnimation(
       for: .endPoint,
@@ -106,14 +109,16 @@ extension GradientRenderLayer {
       value: { absoluteEndPoint in
         percentBasedPointInBounds(from: absoluteEndPoint.pointValue)
       },
-      context: context)
+      context: context
+    )
   }
 
   private func addRadialGradientAnimations(for gradient: GradientShapeItem, context: LayerAnimationContext) throws {
     type = .radial
 
     let combinedKeyframes = Keyframes.combined(
-      gradient.startPoint, gradient.endPoint,
+      gradient.startPoint,
+      gradient.endPoint,
       makeCombinedResult: { absoluteStartPoint, absoluteEndPoint -> RadialGradientKeyframes in
         // Convert the absolute start / end points to the relative structure used by Core Animation
         let relativeStartPoint = percentBasedPointInBounds(from: absoluteStartPoint.pointValue)
@@ -121,22 +126,27 @@ extension GradientRenderLayer {
         let relativeEndPoint = percentBasedPointInBounds(
           from: CGPoint(
             x: absoluteStartPoint.x + radius,
-            y: absoluteStartPoint.y + radius))
+            y: absoluteStartPoint.y + radius
+          )
+        )
 
         return RadialGradientKeyframes(startPoint: relativeStartPoint, endPoint: relativeEndPoint)
-      })
+      }
+    )
 
     try addAnimation(
       for: .startPoint,
       keyframes: combinedKeyframes,
       value: \.startPoint,
-      context: context)
+      context: context
+    )
 
     try addAnimation(
       for: .endPoint,
       keyframes: combinedKeyframes,
       value: \.endPoint,
-      context: context)
+      context: context
+    )
   }
 }
 
@@ -149,7 +159,8 @@ private struct RadialGradientKeyframes: Interpolatable {
   func interpolate(to: RadialGradientKeyframes, amount: CGFloat) -> RadialGradientKeyframes {
     RadialGradientKeyframes(
       startPoint: startPoint.interpolate(to: to.startPoint, amount: amount),
-      endPoint: endPoint.interpolate(to: to.endPoint, amount: amount))
+      endPoint: endPoint.interpolate(to: to.endPoint, amount: amount)
+    )
   }
 }
 
@@ -199,14 +210,14 @@ extension GradientShapeItem {
   ///    so each has to be rendered in a separate `CAGradientLayer`.
   fileprivate func colorConfiguration(
     from colorComponents: [Double],
-    type: GradientContentType)
-    -> GradientColorConfiguration
-  {
+    type: GradientContentType
+  ) -> GradientColorConfiguration {
     switch type {
     case .rgb:
       precondition(
         colorComponents.count >= numberOfColors * 4,
-        "Each color must have RGB components and a location component")
+        "Each color must have RGB components and a location component"
+      )
 
       // Each group of four `Double` values represents a single `CGColor`,
       // and its relative location within the gradient.
@@ -220,7 +231,8 @@ extension GradientShapeItem {
         let color = CGColor.rgb(
           CGFloat(colorComponents[colorStartIndex + 1]),
           CGFloat(colorComponents[colorStartIndex + 2]),
-          CGFloat(colorComponents[colorStartIndex + 3]))
+          CGFloat(colorComponents[colorStartIndex + 3])
+        )
 
         colors.append((color: color, location: colorLocation))
       }

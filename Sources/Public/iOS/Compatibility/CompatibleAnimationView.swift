@@ -20,8 +20,8 @@ public final class CompatibleAnimation: NSObject {
   public init(
     name: String,
     subdirectory: String? = nil,
-    bundle: Bundle = Bundle.main)
-  {
+    bundle: Bundle = Bundle.main
+  ) {
     self.name = name
     self.subdirectory = subdirectory
     self.bundle = bundle
@@ -72,9 +72,8 @@ public enum CompatibleRenderingEngineOption: Int {
   /// Converts a CompatibleRenderingEngineOption to the corresponding LottieConfiguration for
   /// internal rendering engine configuration.
   public static func generateLottieConfiguration(
-    _ configuration: CompatibleRenderingEngineOption)
-    -> LottieConfiguration
-  {
+    _ configuration: CompatibleRenderingEngineOption
+  ) -> LottieConfiguration {
     switch configuration {
     case .shared:
       LottieConfiguration.shared
@@ -134,11 +133,12 @@ public final class CompatibleAnimationView: UIView {
   @objc
   public init(
     compatibleAnimation: CompatibleAnimation,
-    compatibleRenderingEngineOption: CompatibleRenderingEngineOption)
-  {
+    compatibleRenderingEngineOption: CompatibleRenderingEngineOption
+  ) {
     animationView = LottieAnimationView(
       animation: compatibleAnimation.animation,
-      configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
+      configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption)
+    )
     self.compatibleAnimation = compatibleAnimation
     super.init(frame: .zero)
     commonInit()
@@ -158,7 +158,8 @@ public final class CompatibleAnimationView: UIView {
     animationView = LottieAnimationView(
       url: url,
       closure: { _ in },
-      configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
+      configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption)
+    )
     super.init(frame: .zero)
     commonInit()
   }
@@ -177,10 +178,12 @@ public final class CompatibleAnimationView: UIView {
     if let animation = try? LottieAnimation.from(data: data) {
       animationView = LottieAnimationView(
         animation: animation,
-        configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
+        configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption)
+      )
     } else {
       animationView = LottieAnimationView(
-        configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption))
+        configuration: CompatibleRenderingEngineOption.generateLottieConfiguration(compatibleRenderingEngineOption)
+      )
     }
     super.init(frame: .zero)
     commonInit()
@@ -329,13 +332,14 @@ public final class CompatibleAnimationView: UIView {
   public func play(
     fromProgress: CGFloat,
     toProgress: CGFloat,
-    completion: ((Bool) -> Void)? = nil)
-  {
+    completion: ((Bool) -> Void)? = nil
+  ) {
     animationView.play(
       fromProgress: fromProgress,
       toProgress: toProgress,
       loopMode: nil,
-      completion: completion)
+      completion: completion
+    )
   }
 
   /// Note: When calling this code from Objective-C, the method signature is
@@ -344,13 +348,14 @@ public final class CompatibleAnimationView: UIView {
   public func play(
     fromFrame: CGFloat,
     toFrame: CGFloat,
-    completion: ((Bool) -> Void)? = nil)
-  {
+    completion: ((Bool) -> Void)? = nil
+  ) {
     animationView.play(
       fromFrame: fromFrame,
       toFrame: toFrame,
       loopMode: nil,
-      completion: completion)
+      completion: completion
+    )
   }
 
   /// Note: When calling this code from Objective-C, the method signature is
@@ -359,22 +364,24 @@ public final class CompatibleAnimationView: UIView {
   public func play(
     fromMarker: String,
     toMarker: String,
-    completion: ((Bool) -> Void)? = nil)
-  {
+    completion: ((Bool) -> Void)? = nil
+  ) {
     animationView.play(
       fromMarker: fromMarker,
       toMarker: toMarker,
-      completion: completion)
+      completion: completion
+    )
   }
 
   @objc
   public func play(
     marker: String,
-    completion: ((Bool) -> Void)? = nil)
-  {
+    completion: ((Bool) -> Void)? = nil
+  ) {
     animationView.play(
       marker: marker,
-      completion: completion)
+      completion: completion
+    )
   }
 
   @objc
@@ -400,12 +407,12 @@ public final class CompatibleAnimationView: UIView {
   @objc
   public func getValue(
     for keypath: CompatibleAnimationKeypath,
-    atFrame: CGFloat)
-    -> Any?
-  {
+    atFrame: CGFloat
+  ) -> Any? {
     animationView.getValue(
       for: keypath.animationKeypath,
-      atFrame: atFrame)
+      atFrame: atFrame
+    )
   }
 
   @objc
@@ -448,39 +455,41 @@ public final class CompatibleAnimationView: UIView {
       red: CGFloat(colorValue.r),
       green: CGFloat(colorValue.g),
       blue: CGFloat(colorValue.b),
-      alpha: CGFloat(colorValue.a))
+      alpha: CGFloat(colorValue.a)
+    )
   }
 
   @objc
   public func addSubview(
     _ subview: AnimationSubview,
-    forLayerAt keypath: CompatibleAnimationKeypath)
-  {
+    forLayerAt keypath: CompatibleAnimationKeypath
+  ) {
     animationView.addSubview(
       subview,
-      forLayerAt: keypath.animationKeypath)
+      forLayerAt: keypath.animationKeypath
+    )
   }
 
   @objc
   public func convert(
     rect: CGRect,
-    toLayerAt keypath: CompatibleAnimationKeypath?)
-    -> CGRect
-  {
+    toLayerAt keypath: CompatibleAnimationKeypath?
+  ) -> CGRect {
     animationView.convert(
       rect,
-      toLayerAt: keypath?.animationKeypath) ?? .zero
+      toLayerAt: keypath?.animationKeypath
+    ) ?? .zero
   }
 
   @objc
   public func convert(
     point: CGPoint,
-    toLayerAt keypath: CompatibleAnimationKeypath?)
-    -> CGPoint
-  {
+    toLayerAt keypath: CompatibleAnimationKeypath?
+  ) -> CGPoint {
     animationView.convert(
       point,
-      toLayerAt: keypath?.animationKeypath) ?? .zero
+      toLayerAt: keypath?.animationKeypath
+    ) ?? .zero
   }
 
   @objc

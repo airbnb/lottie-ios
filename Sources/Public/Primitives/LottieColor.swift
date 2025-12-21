@@ -28,16 +28,16 @@ public enum ColorFormatDenominator: Hashable {
 
 public struct LottieColor: Hashable {
 
-  public var r: Double
-  public var g: Double
-  public var b: Double
-  public var a: Double
-
   public init(r: Double, g: Double, b: Double, a: Double, denominator: ColorFormatDenominator = .One) {
     self.r = r / denominator.value
     self.g = g / denominator.value
     self.b = b / denominator.value
     self.a = a / denominator.value
   }
+
+  public var r: Double
+  public var g: Double
+  public var b: Double
+  public var a: Double
 
 }

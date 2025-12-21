@@ -14,7 +14,8 @@ struct ControlsDemoView: View {
         animationName: "Samples/Switch",
         title: "Switch",
         onTimeRange: 0.5...1.0,
-        offTimeRange: 0.0...0.5)
+        offTimeRange: 0.0...0.5
+      )
 
       LottieSwitchRow(
         animationName: "Samples/Switch",
@@ -30,22 +31,26 @@ struct ControlsDemoView: View {
             Keyframe(value: LottieColor(r: 0.76, g: 0.76, b: 0.76, a: 1), time: 75),
             Keyframe(value: LottieColor.black, time: 150),
           ],
-        ])
+        ]
+      )
 
       LottieButtonRow(
         animationName: "Samples/TwitterHeartButton",
-        title: "Twitter Heart Button")
+        title: "Twitter Heart Button"
+      )
 
       LottieButtonRow(
         animationName: "Samples/Switch",
-        title: "Switch as Button")
+        title: "Switch as Button"
+      )
 
       LottieSwitchRow(
         animationName: "Samples/Issues/issue_1877",
         title: "Issue #1877",
         onTimeRange: nil, // use the default (0...1)
         offTimeRange: nil, // use the default (1...0)
-        colorValueProviders: ["**.Color": [Keyframe(.black)]])
+        colorValueProviders: ["**.Color": [Keyframe(.black)]]
+      )
     }
     .navigationTitle("Controls Demo")
   }

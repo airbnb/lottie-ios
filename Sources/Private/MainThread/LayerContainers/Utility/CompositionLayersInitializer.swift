@@ -18,9 +18,8 @@ extension [LayerModel] {
     textProvider: AnimationKeypathTextProvider,
     fontProvider: AnimationFontProvider,
     frameRate: CGFloat,
-    rootAnimationLayer: MainThreadAnimationLayer?)
-    -> [CompositionLayer]
-  {
+    rootAnimationLayer: MainThreadAnimationLayer?
+  ) -> [CompositionLayer] {
     var compositionLayers = [CompositionLayer]()
     var layerMap = [Int: CompositionLayer]()
 
@@ -55,7 +54,8 @@ extension [LayerModel] {
           fontProvider: fontProvider,
           assetLibrary: assetLibrary,
           frameRate: frameRate,
-          rootAnimationLayer: rootAnimationLayer)
+          rootAnimationLayer: rootAnimationLayer
+        )
         compositionLayers.append(precompContainer)
         layerMap[layer.index] = precompContainer
       } else if
@@ -65,7 +65,8 @@ extension [LayerModel] {
       {
         let imageContainer = ImageCompositionLayer(
           imageLayer: imageLayer,
-          size: CGSize(width: imageAsset.width, height: imageAsset.height))
+          size: CGSize(width: imageAsset.width, height: imageAsset.height)
+        )
         compositionLayers.append(imageContainer)
         layerMap[layer.index] = imageContainer
       } else if let textLayer = layer as? TextLayerModel {
@@ -73,7 +74,8 @@ extension [LayerModel] {
           textLayer: textLayer,
           textProvider: textProvider,
           fontProvider: fontProvider,
-          rootAnimationLayer: rootAnimationLayer)
+          rootAnimationLayer: rootAnimationLayer
+        )
         compositionLayers.append(textContainer)
         layerMap[layer.index] = textContainer
       } else {

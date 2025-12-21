@@ -13,12 +13,6 @@ import Foundation
 /// A property of a node. The node property holds a provider and a container
 protocol AnyNodeProperty {
 
-  /// Returns true if the property needs to recompute its stored value
-  func needsUpdate(frame: CGFloat) -> Bool
-
-  /// Updates the property for the frame
-  func update(frame: CGFloat)
-
   /// The stored value container for the property
   var valueContainer: AnyValueContainer { get }
 
@@ -30,6 +24,12 @@ protocol AnyNodeProperty {
 
   /// The Type of the value provider
   var valueType: Any.Type { get }
+
+  /// Returns true if the property needs to recompute its stored value
+  func needsUpdate(frame: CGFloat) -> Bool
+
+  /// Updates the property for the frame
+  func update(frame: CGFloat)
 
   /// Sets the value provider for the property.
   func setProvider(provider: AnyValueProvider)

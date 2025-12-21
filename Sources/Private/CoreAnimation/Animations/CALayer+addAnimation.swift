@@ -14,9 +14,8 @@ extension CALayer {
     for property: LayerProperty<ValueRepresentation>,
     keyframes: KeyframeGroup<KeyframeValue>,
     value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
-    context: LayerAnimationContext)
-    throws
-  {
+    context: LayerAnimationContext
+  ) throws {
     if let customAnimation = try customizedAnimation(for: property, context: context) {
       add(customAnimation, timedWith: context)
     }
@@ -26,7 +25,8 @@ extension CALayer {
         for: property,
         keyframes: keyframes,
         value: keyframeValueMapping,
-        context: context)
+        context: context
+      )
     {
       let timedAnimation = defaultAnimation.timed(with: context, for: self)
       add(timedAnimation, forKey: property.caLayerKeypath)
@@ -43,9 +43,8 @@ extension CALayer {
     for property: LayerProperty<ValueRepresentation>,
     keyframes keyframeGroup: KeyframeGroup<KeyframeValue>,
     value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
-    context: LayerAnimationContext)
-    throws -> CAAnimation?
-  {
+    context: LayerAnimationContext
+  ) throws -> CAAnimation? {
     let keyframes = keyframeGroup.keyframes
     guard !keyframes.isEmpty else { return nil }
 
@@ -68,7 +67,8 @@ extension CALayer {
       return singleKeyframeAnimation(
         for: property,
         keyframeValue: try keyframeValueMapping(keyframes[0].value),
-        writeDirectlyToPropertyIfPossible: true)
+        writeDirectlyToPropertyIfPossible: true
+      )
     }
 
     /// If we're required to use the `complexTimeRemapping` from some parent `PreCompLayer`,
@@ -78,7 +78,8 @@ extension CALayer {
         for: property,
         keyframes: Keyframes.manuallyInterpolatedWithTimeRemapping(keyframeGroup, context: context),
         value: keyframeValueMapping,
-        context: context.withoutTimeRemapping())
+        context: context.withoutTimeRemapping()
+      )
     }
 
     // Split the keyframes into segments with the same `CAAnimationCalculationMode` value
@@ -92,13 +93,15 @@ extension CALayer {
         for: property,
         keyframes: animationSegments[0],
         value: keyframeValueMapping,
-        context: context)
+        context: context
+      )
     } else {
       return try animationGroup(
         for: property,
         animationSegments: animationSegments,
         value: keyframeValueMapping,
-        context: context)
+        context: context
+      )
     }
   }
 
@@ -108,15 +111,15 @@ extension CALayer {
   @nonobjc
   private func customizedAnimation<ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
-    context: LayerAnimationContext)
-    throws -> CAPropertyAnimation?
-  {
+    context: LayerAnimationContext
+  ) throws -> CAPropertyAnimation? {
     guard
       let customizableProperty = property.customizableProperty,
       let customKeyframes = try context.valueProviderStore.customKeyframes(
         of: customizableProperty,
         for: AnimationKeypath(keys: context.currentKeypath.keys + customizableProperty.name.map { $0.rawValue }),
-        context: context)
+        context: context
+      )
     else { return nil }
 
     // Since custom animations are overriding an existing animation,
@@ -127,7 +130,8 @@ extension CALayer {
       let singleKeyframeAnimation = singleKeyframeAnimation(
         for: property,
         keyframeValue: customKeyframes.keyframes[0].value,
-        writeDirectlyToPropertyIfPossible: false)
+        writeDirectlyToPropertyIfPossible: false
+      )
     {
       return singleKeyframeAnimation
     }
@@ -136,7 +140,8 @@ extension CALayer {
       for: property,
       keyframes: Array(customKeyframes.keyframes),
       value: { $0 },
-      context: context)
+      context: context
+    )
   }
 
   /// Creates an animation that applies a single keyframe to this layer property
@@ -145,9 +150,8 @@ extension CALayer {
   private func singleKeyframeAnimation<ValueRepresentation>(
     for property: LayerProperty<ValueRepresentation>,
     keyframeValue: ValueRepresentation,
-    writeDirectlyToPropertyIfPossible: Bool)
-    -> CABasicAnimation?
-  {
+    writeDirectlyToPropertyIfPossible: Bool
+  ) -> CABasicAnimation? {
     if writeDirectlyToPropertyIfPossible {
       // If the keyframe value is the same as the layer's default value for this property,
       // then we can just ignore this set of keyframes.
@@ -180,9 +184,8 @@ extension CALayer {
     for property: LayerProperty<ValueRepresentation>,
     animationSegments: [[Keyframe<KeyframeValue>]],
     value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
-    context: LayerAnimationContext)
-    throws -> CAAnimationGroup
-  {
+    context: LayerAnimationContext
+  ) throws -> CAAnimationGroup {
     // Build the `CAKeyframeAnimation` for each segment of keyframes
     // with the same `CAAnimationCalculationMode`.
     //  - Here we have a non-zero number of animation segments,
@@ -201,13 +204,15 @@ extension CALayer {
       if isFirstSegment {
         segmentStartTime = min(
           try context.time(forFrame: context.animation.startFrame),
-          segmentStartTime)
+          segmentStartTime
+        )
       }
 
       if isLastSegment {
         segmentEndTime = max(
           try context.time(forFrame: context.animation.endFrame),
-          segmentEndTime)
+          segmentEndTime
+        )
       }
 
       let segmentDuration = segmentEndTime - segmentStartTime
@@ -227,7 +232,8 @@ extension CALayer {
         keyframes: animationSegment,
         value: keyframeValueMapping,
         customKeyTimes: customKeyTimes,
-        context: context)
+        context: context
+      )
 
       animation.duration = segmentDuration
       animation.beginTime = segmentStartTime
@@ -245,10 +251,8 @@ extension CALayer {
     keyframes: [Keyframe<KeyframeValue>],
     value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
     customKeyTimes: [NSNumber]? = nil,
-    context: LayerAnimationContext)
-    throws
-    -> CAKeyframeAnimation
-  {
+    context: LayerAnimationContext
+  ) throws -> CAKeyframeAnimation {
     // Convert the list of `Keyframe<T>` into
     // the representation used by `CAKeyframeAnimation`
     var keyTimes = try customKeyTimes ?? keyframes.map { keyframeModel -> NSNumber in
@@ -284,7 +288,8 @@ extension CALayer {
         keyTimes: &keyTimes,
         timingFunctions: &timingFunctions,
         for: calculationMode,
-        context: context)
+        context: context
+      )
 
       animation.values = values
     }
@@ -298,9 +303,8 @@ extension CALayer {
   /// The `CAAnimationCalculationMode` that should be used for a `CAKeyframeAnimation`
   /// animating the given keyframes
   private func calculationMode<KeyframeValue>(
-    for keyframes: [Keyframe<KeyframeValue>])
-    -> CAAnimationCalculationMode
-  {
+    for keyframes: [Keyframe<KeyframeValue>]
+  ) -> CAAnimationCalculationMode {
     // At this point we expect all of the animations to have been split in
     // to segments based on the `CAAnimationCalculationMode`, so we can just
     // check the first keyframe.
@@ -313,11 +317,10 @@ extension CALayer {
 
   /// `timingFunctions` to apply to a `CAKeyframeAnimation` animating the given keyframes
   private func timingFunctions<KeyframeValue>(
-    for keyframes: [Keyframe<KeyframeValue>])
-    -> [CAMediaTimingFunction]
-  {
+    for keyframes: [Keyframe<KeyframeValue>]
+  ) -> [CAMediaTimingFunction] {
     // Compute the timing function between each keyframe and the subsequent keyframe
-    var timingFunctions: [CAMediaTimingFunction] = []
+    var timingFunctions = [CAMediaTimingFunction]()
 
     for (index, keyframe) in keyframes.enumerated()
       where index != keyframes.indices.last
@@ -332,7 +335,8 @@ extension CALayer {
         Float(controlPoint1.x),
         Float(controlPoint1.y),
         Float(controlPoint2.x),
-        Float(controlPoint2.y)))
+        Float(controlPoint2.y)
+      ))
     }
 
     return timingFunctions
@@ -342,9 +346,8 @@ extension CALayer {
   /// which accounts for `spatialInTangent`s and `spatialOutTangents`
   private func path<KeyframeValue>(
     keyframes positionKeyframes: [Keyframe<KeyframeValue>],
-    value keyframeValueMapping: (KeyframeValue) throws -> CGPoint) rethrows
-    -> CGPath
-  {
+    value keyframeValueMapping: (KeyframeValue) throws -> CGPoint
+  ) rethrows -> CGPath {
     let path = CGMutablePath()
 
     for (index, keyframe) in positionKeyframes.enumerated() {
@@ -363,7 +366,8 @@ extension CALayer {
           path.addCurve(
             to: try keyframeValueMapping(nextKeyframe.value),
             control1: try keyframeValueMapping(keyframe.value) + controlPoint1,
-            control2: try keyframeValueMapping(nextKeyframe.value) + controlPoint2)
+            control2: try keyframeValueMapping(nextKeyframe.value) + controlPoint2
+          )
         }
 
         else {
@@ -382,8 +386,8 @@ extension CALayer {
     keyTimes: inout [NSNumber],
     timingFunctions: inout [CAMediaTimingFunction],
     for calculationMode: CAAnimationCalculationMode,
-    context: LayerAnimationContext)
-  {
+    context: LayerAnimationContext
+  ) {
     // Validate that we have correct start (0.0) and end (1.0) keyframes.
     // From the documentation of `CAKeyframeAnimation.keyTimes`:
     //  - The first value in the `keyTimes` array must be 0.0 and the last value must be 1.0.
@@ -406,11 +410,13 @@ extension CALayer {
       //    should match the number of elements in the values property
       context.logger.assert(
         values.count == keyTimes.count,
-        "`values.count` must exactly equal `keyTimes.count`")
+        "`values.count` must exactly equal `keyTimes.count`"
+      )
 
       context.logger.assert(
         timingFunctions.count == (values.count - 1),
-        "`timingFunctions.count` must exactly equal `values.count - 1`")
+        "`timingFunctions.count` must exactly equal `values.count - 1`"
+      )
 
     case .discrete:
       // From the documentation of `CAKeyframeAnimation.keyTimes`:
@@ -420,7 +426,8 @@ extension CALayer {
 
       context.logger.assert(
         keyTimes.count == values.count + 1,
-        "`keyTimes.count` must exactly equal `values.count + 1`")
+        "`keyTimes.count` must exactly equal `values.count + 1`"
+      )
 
     default:
       context.logger.assertionFailure("""
@@ -439,8 +446,8 @@ extension RandomAccessCollection {
   func segmentsSplitByCalculationMode<KeyframeValue>() -> [[Element]]
     where Element == Keyframe<KeyframeValue>, Index == Int
   {
-    var segments: [[Element]] = []
-    var currentSegment: [Element] = []
+    var segments = [[Element]]()
+    var currentSegment = [Element]()
 
     for keyframe in self {
       guard let mostRecentKeyframe = currentSegment.last else {

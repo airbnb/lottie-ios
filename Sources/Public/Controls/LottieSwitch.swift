@@ -86,15 +86,15 @@ public struct LottieSwitch: UIViewConfiguringSwiftUIView {
   /// Defaults to playing the entire animation forwards (0...1).
   public func onAnimation(
     fromProgress onStartProgress: AnimationProgressTime,
-    toProgress onEndProgress: AnimationProgressTime)
-    -> Self
-  {
+    toProgress onEndProgress: AnimationProgressTime
+  ) -> Self {
     configure { view in
       if onStartProgress != view.onStartProgress || onEndProgress != view.onEndProgress {
         view.setProgressForState(
           fromProgress: onStartProgress,
           toProgress: onEndProgress,
-          forOnState: true)
+          forOnState: true
+        )
       }
     }
   }
@@ -104,15 +104,15 @@ public struct LottieSwitch: UIViewConfiguringSwiftUIView {
   /// Defaults to playing the entire animation backwards (1...0).
   public func offAnimation(
     fromProgress offStartProgress: AnimationProgressTime,
-    toProgress offEndProgress: AnimationProgressTime)
-    -> Self
-  {
+    toProgress offEndProgress: AnimationProgressTime
+  ) -> Self {
     configure { view in
       if offStartProgress != view.offStartProgress || offEndProgress != view.offEndProgress {
         view.setProgressForState(
           fromProgress: offStartProgress,
           toProgress: offEndProgress,
-          forOnState: false)
+          forOnState: false
+        )
       }
     }
   }
@@ -121,9 +121,8 @@ public struct LottieSwitch: UIViewConfiguringSwiftUIView {
   /// The value provider must be `Equatable` to avoid unnecessary state updates / re-renders.
   public func valueProvider<ValueProvider: AnyValueProvider & Equatable>(
     _ valueProvider: ValueProvider,
-    for keypath: AnimationKeypath)
-    -> Self
-  {
+    for keypath: AnimationKeypath
+  ) -> Self {
     configure { view in
       if (view.animationView.valueProviders[keypath] as? ValueProvider) != valueProvider {
         view.animationView.setValueProvider(valueProvider, keypath: keypath)
