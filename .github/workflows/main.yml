@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
-          xcode: '16.4' # Swift 6.1
+          xcode: '26.1.1' # Swift 6.2
       - name: Build Example
         run: bundle exec rake build:example:all
 
@@ -136,7 +136,7 @@ jobs:
         with:
           install-mint: true
           install-carthage: true
-          xcode: '16.4' # Swift 6.1
+          xcode: '26.1.1' # Swift 6.2
       - name: Test Carthage support
         run: bundle exec rake test:carthage
 
