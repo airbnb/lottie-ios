@@ -24,7 +24,8 @@ let package = Package(
         "Private/EmbeddedLibraries/EpoxyCore/README.md",
         "Private/EmbeddedLibraries/LRUCache/README.md",
       ],
-      resources: [.copy("PrivacyInfo.xcprivacy")]
+      resources: [.copy("PrivacyInfo.xcprivacy")],
+      swiftSettings: [.swiftLanguageMode(.v5)]
     )
   ]
 )
