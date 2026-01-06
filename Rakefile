@@ -53,7 +53,7 @@ namespace :build do
 
     desc 'Builds the visionOS Lottie Example app'
     task :visionOS do
-      xcodebuild('build -scheme "Example (Multiplatform)" -destination "platform=visionOS Simulator,name=Apple Vision Pro" -workspace Lottie.xcworkspace')
+      xcodebuild('build -scheme "Example (Multiplatform)" -destination "platform=visionOS Simulator,OS=26.1,name=Apple Vision Pro" -workspace Lottie.xcworkspace')
     end
   end
 
@@ -156,7 +156,7 @@ namespace :test do
       xcodebuild('build -scheme CarthageTest  -destination "platform=iOS Simulator,name=iPhone SE (3rd generation)"')
       xcodebuild('build -scheme CarthageTest -destination generic/platform=macOS')
       xcodebuild('build -scheme CarthageTest -destination "platform=tvOS Simulator,name=Apple TV"')
-      xcodebuild('build -scheme CarthageTest -destination "platform=visionOS Simulator,name=Apple Vision Pro"')
+      xcodebuild('build -scheme CarthageTest -destination "platform=visionOS Simulator,OS=26.1,name=Apple Vision Pro"')
     end
   end
 
