@@ -87,29 +87,6 @@ jobs:
           xcode: ${{ matrix.xcode }}
       - name: Build Dynamic XCFramework
         run: bundle exec rake build:xcframework\['dynamic'\]
-      - name: Upload XCFrameworks
-        uses: actions/upload-artifact@v4
-        with:
-          name: BuildProducts
-          path: .build/artifacts
-
-  build-static-xcframework-minimum-supported-version:
-    name: "Build Static XCFramework"
-    runs-on: macos-15
-    strategy:
-      matrix:
-        xcode:
-          - '16.4' # Swift 6.1
-    steps:
-      - uses: actions/checkout@v4
-      - uses: apple-actions/import-codesign-certs@v3
-        continue-on-error: true
-        with:
-          p12-file-base64: ${{ secrets.SIGNING_CERTIFICATE_BASE_64 }}
-          p12-password: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
-      - uses: ./.github/actions/setup
-        with:
-          xcode: ${{ matrix.xcode }}
       - name: Build Static XCFramework
         run: bundle exec rake build:xcframework\['static'\]
       - name: Upload XCFrameworks
