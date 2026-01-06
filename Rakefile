@@ -27,9 +27,7 @@ namespace :build do
 
     desc 'Builds the Lottie package for visionOS'
     task :visionOS do
-      ifVisionOSEnabled {
-        xcodebuild('build -scheme "Lottie (visionOS)" -destination generic/platform=visionOS -workspace Lottie.xcworkspace OTHER_SWIFT_FLAGS="-warnings-as-errors"')
-      }
+      xcodebuild('build -scheme "Lottie (visionOS)" -destination generic/platform=visionOS -workspace Lottie.xcworkspace OTHER_SWIFT_FLAGS="-warnings-as-errors"')
     end
   end
 
@@ -55,9 +53,7 @@ namespace :build do
 
     desc 'Builds the visionOS Lottie Example app'
     task :visionOS do
-      ifVisionOSEnabled {
-        xcodebuild('build -scheme "Example (Multiplatform)" -destination "platform=visionOS Simulator,name=Apple Vision Pro" -workspace Lottie.xcworkspace')
-      }
+      xcodebuild('build -scheme "Example (Multiplatform)" -destination "platform=visionOS Simulator,name=Apple Vision Pro" -workspace Lottie.xcworkspace')
     end
   end
 
@@ -83,11 +79,8 @@ namespace :build do
     xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (macOS)\" -destination generic/platform=macOS -archivePath \".build/archives/Lottie_macOS\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
     xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (tvOS)\" -destination generic/platform=tvOS -archivePath \".build/archives/Lottie_tvOS\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
     xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (tvOS)\" -destination \"generic/platform=tvOS Simulator\" -archivePath \".build/archives/Lottie_tvOS_Simulator\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
-
-    ifVisionOSEnabled {
-      xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (visionOS)\" -destination generic/platform=visionOS -archivePath \".build/archives/Lottie_visionOS\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
-      xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (visionOS)\" -destination \"generic/platform=visionOS Simulator\" -archivePath \".build/archives/Lottie_visionOS_Simulator\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
-    }
+    xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (visionOS)\" -destination generic/platform=visionOS -archivePath \".build/archives/Lottie_visionOS\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
+    xcodebuild("archive -workspace Lottie.xcworkspace -scheme \"Lottie (visionOS)\" -destination \"generic/platform=visionOS Simulator\" -archivePath \".build/archives/Lottie_visionOS_Simulator\" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO MACH_O_TYPE=\"#{mach_o_type}\"")
 
     # Combine all of the platforms into a single XCFramework
     xcframeworkInvocation = [
@@ -98,14 +91,10 @@ namespace :build do
       '-archive .build/archives/Lottie_tvOS.xcarchive -framework Lottie.framework',
       '-archive .build/archives/Lottie_tvOS_Simulator.xcarchive -framework Lottie.framework',
       '-archive .build/archives/Lottie_macOS.xcarchive -framework Lottie.framework',
+      '-archive .build/archives/Lottie_visionOS.xcarchive -framework Lottie.framework',
+      '-archive .build/archives/Lottie_visionOS_Simulator.xcarchive -framework Lottie.framework',
+      "-output .build/artifacts/#{xcframework_name}.xcframework",
     ]
-
-    ifVisionOSEnabled {
-      xcframeworkInvocation.push('-archive .build/archives/Lottie_visionOS.xcarchive -framework Lottie.framework')
-      xcframeworkInvocation.push('-archive .build/archives/Lottie_visionOS_Simulator.xcarchive -framework Lottie.framework')
-    }
-
-    xcframeworkInvocation.push("-output .build/artifacts/#{xcframework_name}.xcframework")
 
     xcodebuild(xcframeworkInvocation.join(" "))
 
@@ -178,10 +167,7 @@ namespace :test do
       xcodebuild('build -scheme "Lottie" -destination generic/platform=iOS')
       xcodebuild('build -scheme "Lottie" -destination generic/platform=macOS')
       xcodebuild('build -scheme "Lottie" -destination generic/platform=tvOS')
-
-      ifVisionOSEnabled {
-        xcodebuild('build -scheme "Lottie" -destination generic/platform=visionOS')
-      }
+      xcodebuild('build -scheme "Lottie" -destination generic/platform=visionOS')
     end
   end
 end
@@ -254,15 +240,5 @@ def xcodebuild(command)
     sh "set -o pipefail && xcodebuild #{command} | mint run thii/xcbeautify@0.10.2"
   else
     sh "xcodebuild #{command}"
-  end
-end
-
-# Runs the given code block, unless `SKIP_VISION_OS=true`.
-# TODO: Remove this once Lottie only supports Xcode 15.2+.
-def ifVisionOSEnabled
-  if ENV["SKIP_VISION_OS"] == "true"
-    puts "Skipping visionOS build"
-  else
-    yield
   end
 end
