@@ -168,6 +168,15 @@ final class CoreTextRenderLayer: CALayer {
     }
 
     let drawingPath = CGPath(rect: drawingRect, transform: nil)
+    let horizontalOffset: CGFloat = switch alignment {
+    case .left:
+      compensationPadding
+    case .right:
+      -compensationPadding
+    default:
+      0
+    }
+    ctx.translateBy(x: horizontalOffset, y: -compensationPadding)
 
     let fillFrame: CTFrame? =
       if let setter = fillFrameSetter {
@@ -214,6 +223,10 @@ final class CoreTextRenderLayer: CALayer {
   private var attributedString: NSAttributedString?
   private var strokeFrameSetter: CTFramesetter?
   private var needsContentUpdate = false
+
+  private var compensationPadding: CGFloat {
+    (font.map(CTFontGetSize) ?? 0) * 0.2
+  }
 
   private func updateTextContent() {
     guard needsContentUpdate else { return }
@@ -346,21 +359,22 @@ final class CoreTextRenderLayer: CALayer {
         CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
         nil
       )
+      let adjustedSize = CGSize(width: size.width + compensationPadding * 2, height: size.height + compensationPadding * 2)
       switch alignment {
       case .left:
-        textAnchor = CGPoint(x: 0, y: ascent)
+        textAnchor = CGPoint(x: compensationPadding, y: ascent + compensationPadding)
       case .right:
-        textAnchor = CGPoint(x: size.width, y: ascent)
+        textAnchor = CGPoint(x: adjustedSize.width - compensationPadding, y: ascent + compensationPadding)
       case .center:
-        textAnchor = CGPoint(x: size.width * 0.5, y: ascent)
+        textAnchor = CGPoint(x: adjustedSize.width * 0.5, y: ascent + compensationPadding)
       default:
         textAnchor = .zero
       }
       drawingRect = CGRect(
         x: 0,
         y: 0,
-        width: ceil(size.width),
-        height: ceil(size.height)
+        width: ceil(adjustedSize.width),
+        height: ceil(adjustedSize.height)
       )
     }
 
