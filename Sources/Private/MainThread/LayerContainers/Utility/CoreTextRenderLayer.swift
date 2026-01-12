@@ -168,15 +168,18 @@ final class CoreTextRenderLayer: CALayer {
     }
 
     let drawingPath = CGPath(rect: drawingRect, transform: nil)
-    let horizontalOffset: CGFloat = switch alignment {
-    case .left:
-      compensationPadding
-    case .right:
-      -compensationPadding
-    default:
-      0
+    if preferredSize == nil {
+      let horizontalOffset: CGFloat =
+        switch alignment {
+        case .left:
+          compensationPadding
+        case .right:
+          -compensationPadding
+        default:
+          0
+        }
+      ctx.translateBy(x: horizontalOffset, y: -compensationPadding)
     }
-    ctx.translateBy(x: horizontalOffset, y: -compensationPadding)
 
     let fillFrame: CTFrame? =
       if let setter = fillFrameSetter {
