@@ -178,7 +178,7 @@ final class CoreTextRenderLayer: CALayer {
         default:
           0
         }
-      ctx.translateBy(x: horizontalOffset, y: -compensationPadding)
+      ctx.translateBy(x: horizontalOffset, y: 0)
     }
 
     let fillFrame: CTFrame? =
@@ -362,14 +362,14 @@ final class CoreTextRenderLayer: CALayer {
         CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
         nil
       )
-      let adjustedSize = CGSize(width: size.width + compensationPadding * 2, height: size.height + compensationPadding * 2)
+      let adjustedSize = CGSize(width: size.width + compensationPadding * 2, height: size.height)
       switch alignment {
       case .left:
-        textAnchor = CGPoint(x: compensationPadding, y: ascent + compensationPadding)
+        textAnchor = CGPoint(x: compensationPadding, y: ascent)
       case .right:
-        textAnchor = CGPoint(x: adjustedSize.width - compensationPadding, y: ascent + compensationPadding)
+        textAnchor = CGPoint(x: adjustedSize.width - compensationPadding, y: ascent)
       case .center:
-        textAnchor = CGPoint(x: adjustedSize.width * 0.5, y: ascent + compensationPadding)
+        textAnchor = CGPoint(x: adjustedSize.width * 0.5, y: ascent)
       default:
         textAnchor = .zero
       }
