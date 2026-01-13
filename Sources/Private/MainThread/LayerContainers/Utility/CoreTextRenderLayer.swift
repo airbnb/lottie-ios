@@ -196,7 +196,7 @@ final class CoreTextRenderLayer: CALayer {
       }
 
     // This fixes a vertical padding issue that arises when drawing some fonts.
-    // For some reason some fonts, such as Helvetica draw with and ascender that is greater than the one reported by CTFontGetAscender.
+    // For some reason some fonts, such as Helvetica draw with an ascender that is greater than the one reported by CTFontGetAscender.
     // I suspect this is actually an issue with the Attributed string, but cannot reproduce.
 
     if let fillFrame {
