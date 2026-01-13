@@ -168,6 +168,18 @@ final class CoreTextRenderLayer: CALayer {
     }
 
     let drawingPath = CGPath(rect: drawingRect, transform: nil)
+    if preferredSize == nil {
+      let horizontalOffset: CGFloat =
+        switch alignment {
+        case .left:
+          compensationPadding
+        case .right:
+          -compensationPadding
+        default:
+          0
+        }
+      ctx.translateBy(x: horizontalOffset, y: 0)
+    }
 
     let fillFrame: CTFrame? =
       if let setter = fillFrameSetter {
@@ -184,7 +196,7 @@ final class CoreTextRenderLayer: CALayer {
       }
 
     // This fixes a vertical padding issue that arises when drawing some fonts.
-    // For some reason some fonts, such as Helvetica draw with and ascender that is greater than the one reported by CTFontGetAscender.
+    // For some reason some fonts, such as Helvetica draw with an ascender that is greater than the one reported by CTFontGetAscender.
     // I suspect this is actually an issue with the Attributed string, but cannot reproduce.
 
     if let fillFrame {
@@ -214,6 +226,16 @@ final class CoreTextRenderLayer: CALayer {
   private var attributedString: NSAttributedString?
   private var strokeFrameSetter: CTFramesetter?
   private var needsContentUpdate = false
+
+  /// Horizontal compensation padding for the fonts that report wrong geometry.
+  ///
+  /// Some fonts have symbols that are drawn beyond the suggested frame
+  /// that CoreText returns, especially calligraphy fonts. This padding tries to compensate for that.
+  /// Because we can't know for sure the real size of the text,
+  /// the 20% value was experimentally chosen to account for most such cases.
+  private var compensationPadding: CGFloat {
+    (font.map(CTFontGetSize) ?? 0) * 0.2
+  }
 
   private func updateTextContent() {
     guard needsContentUpdate else { return }
@@ -346,21 +368,25 @@ final class CoreTextRenderLayer: CALayer {
         CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
         nil
       )
+
+      // Suggested size + horizontal compensation for fonts with inaccurate geometry.
+      let adjustedSize = CGSize(width: size.width + compensationPadding * 2, height: size.height)
+
       switch alignment {
       case .left:
-        textAnchor = CGPoint(x: 0, y: ascent)
+        textAnchor = CGPoint(x: compensationPadding, y: ascent)
       case .right:
-        textAnchor = CGPoint(x: size.width, y: ascent)
+        textAnchor = CGPoint(x: adjustedSize.width - compensationPadding, y: ascent)
       case .center:
-        textAnchor = CGPoint(x: size.width * 0.5, y: ascent)
+        textAnchor = CGPoint(x: adjustedSize.width * 0.5, y: ascent)
       default:
         textAnchor = .zero
       }
       drawingRect = CGRect(
         x: 0,
         y: 0,
-        width: ceil(size.width),
-        height: ceil(size.height)
+        width: ceil(adjustedSize.width),
+        height: ceil(adjustedSize.height)
       )
     }
 
