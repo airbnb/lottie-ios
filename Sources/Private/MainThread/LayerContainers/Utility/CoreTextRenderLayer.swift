@@ -227,6 +227,12 @@ final class CoreTextRenderLayer: CALayer {
   private var strokeFrameSetter: CTFramesetter?
   private var needsContentUpdate = false
 
+  /// Horizontal compensation padding for the fonts that report wrong geometry.
+  ///
+  /// Some fonts have symbols that are drawn beyond the suggested frame
+  /// that CoreText returns, especially calligraphy fonts. This padding tries to compensate for that.
+  /// Because we can't know for sure the real size of the text,
+  /// the 20% value was experimentally chosen to account for most such cases.
   private var compensationPadding: CGFloat {
     (font.map(CTFontGetSize) ?? 0) * 0.2
   }
@@ -362,7 +368,10 @@ final class CoreTextRenderLayer: CALayer {
         CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
         nil
       )
+
+      // Suggested size + horizontal compensation for fonts with inaccurate geometry.
       let adjustedSize = CGSize(width: size.width + compensationPadding * 2, height: size.height)
+
       switch alignment {
       case .left:
         textAnchor = CGPoint(x: compensationPadding, y: ascent)
