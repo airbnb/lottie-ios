@@ -105,6 +105,8 @@ public class LottieAnimationLayer: CALayer {
   open func play(completion: LottieCompletionBlock? = nil) {
     guard let animation else { return }
 
+    if renderStaticFrameIfNeeded(completion: completion) { return }
+
     defer {
       currentPlaybackMode = .playing(.fromProgress(nil, toProgress: 1, loopMode: loopMode))
     }
@@ -138,6 +140,8 @@ public class LottieAnimationLayer: CALayer {
     completion: LottieCompletionBlock? = nil
   ) {
     guard let animation else { return }
+
+    if renderStaticFrameIfNeeded(completion: completion) { return }
 
     defer {
       currentPlaybackMode = .playing(.fromProgress(fromProgress, toProgress: toProgress, loopMode: loopMode ?? self.loopMode))
@@ -175,6 +179,8 @@ public class LottieAnimationLayer: CALayer {
     completion: LottieCompletionBlock? = nil
   ) {
     guard let animation else { return }
+
+    if renderStaticFrameIfNeeded(completion: completion) { return }
 
     defer {
       currentPlaybackMode = .playing(.fromFrame(fromFrame, toFrame: toFrame, loopMode: loopMode ?? self.loopMode))
@@ -222,6 +228,8 @@ public class LottieAnimationLayer: CALayer {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil
   ) {
+    if renderStaticFrameIfNeeded(completion: completion) { return }
+
     defer {
       currentPlaybackMode = .playing(.fromMarker(
         fromMarker,
@@ -278,6 +286,8 @@ public class LottieAnimationLayer: CALayer {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil
   ) {
+    if renderStaticFrameIfNeeded(completion: completion) { return }
+
     guard let from = animation?.markerMap?[marker] else {
       return
     }
@@ -319,6 +329,8 @@ public class LottieAnimationLayer: CALayer {
     markers: [String],
     completion: LottieCompletionBlock? = nil
   ) {
+    if renderStaticFrameIfNeeded(completion: completion) { return }
+
     guard !markers.isEmpty else { return }
 
     defer {
@@ -1502,10 +1514,25 @@ public class LottieAnimationLayer: CALayer {
     reducedMotionMarker != nil
   }
 
+  /// Whether or not the animation should be forced to render statically (for snapshot testing).
+  private var shouldForceStaticRendering: Bool {
+    configuration.reducedMotionOption.currentReducedMotionMode == .disabledMotion
+  }
+
+  /// Checks if static rendering is enabled and renders the static frame if so.
+  /// - Returns: `true` if static rendering was performed and the caller should return early.
+  private func renderStaticFrameIfNeeded(completion: LottieCompletionBlock?) -> Bool {
+    if shouldForceStaticRendering {
+      renderStaticFrame(completion: completion)
+      return true
+    }
+    return false
+  }
+
   /// The marker that corresponds to the current "reduced motion" mode.
   private var reducedMotionMarker: Marker? {
     switch configuration.reducedMotionOption.currentReducedMotionMode {
-    case .standardMotion:
+    case .standardMotion, .disabledMotion:
       nil
     case .reducedMotion:
       animation?.reducedMotionMarker
@@ -1536,6 +1563,23 @@ public class LottieAnimationLayer: CALayer {
     defer { configuration = currentConfiguration }
 
     play(marker: reducedMotionMarker.name, completion: completion)
+  }
+
+  /// Renders the animation statically at a single frame without playing.
+  /// Used when `disabledMotion` mode is enabled for snapshot testing.
+  /// Prefers the first frame of the reduced motion marker if present,
+  /// otherwise falls back to the animation's start frame.
+  private func renderStaticFrame(completion: LottieCompletionBlock?) {
+    guard let animation else { return }
+    removeCurrentAnimationIfNecessary()
+
+    // Use the first frame of the reduced motion marker if present,
+    // otherwise fall back to the animation's start frame
+    let staticFrame = animation.reducedMotionMarker?.frameTime ?? animation.startFrame
+
+    currentFrame = staticFrame
+    currentPlaybackMode = .paused(at: .frame(staticFrame))
+    completion?(true)
   }
 
 }
