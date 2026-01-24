@@ -17,7 +17,7 @@ jobs:
         - '16.4' # Swift 6.1
         - '26.1.1' # Swift 6.2
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
         with:
           xcode: ${{ matrix.xcode }}
@@ -29,7 +29,7 @@ jobs:
     name: "Build Example App"
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
         with:
           xcode: '26.1.1' # Swift 6.2
@@ -40,7 +40,7 @@ jobs:
     name: "Test Package"
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
         with:
           xcode: '16.4' # Swift 6.1
@@ -51,7 +51,7 @@ jobs:
         run: bundle exec rake test:process
       - name: Upload artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: TestArtifacts
           path: Tests/Artifacts
@@ -60,7 +60,7 @@ jobs:
     name: "Emerge Upload"
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
       - name: Build Package
         run: bundle exec rake emerge:upload
@@ -76,7 +76,7 @@ jobs:
         xcode:
           - '16.4' # Swift 6.1
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: apple-actions/import-codesign-certs@v3
         continue-on-error: true
         with:
@@ -90,7 +90,7 @@ jobs:
       - name: Build Static XCFramework
         run: bundle exec rake build:xcframework\['static'\]
       - name: Upload XCFrameworks
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: BuildProducts
           path: .build/artifacts
@@ -103,7 +103,7 @@ jobs:
         xcode:
           - '16.4' # Swift 6.1
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
         with:
           install-mint: false
@@ -119,7 +119,7 @@ jobs:
         xcode:
         - '16.4' # Swift 6.1
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
         with:
           install-mint: true
@@ -131,7 +131,7 @@ jobs:
     name: "Test Carthage support"
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
         with:
           install-mint: true
@@ -144,7 +144,7 @@ jobs:
     name: "Lint Swift"
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
       - name: Lint Swift
         run: bundle exec rake lint:swift
@@ -153,7 +153,7 @@ jobs:
     name: "Lint Embedded Libraries"
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
       - name: Lint Embedded Libraries
         run: bundle exec rake lint:EmbeddedLibraries
