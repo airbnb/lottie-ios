@@ -109,10 +109,7 @@ public class LottieAnimationLayer: CALayer {
       currentPlaybackMode = .playing(.fromProgress(nil, toProgress: 1, loopMode: loopMode))
     }
 
-    if shouldOverrideWithReducedMotionAnimation {
-      playReducedMotionAnimation(completion: completion)
-      return
-    }
+    if overrideReducedMotionIfNeeded(completion: completion) { return }
 
     /// Build a context for the animation.
     let context = AnimationContext(
@@ -143,10 +140,7 @@ public class LottieAnimationLayer: CALayer {
       currentPlaybackMode = .playing(.fromProgress(fromProgress, toProgress: toProgress, loopMode: loopMode ?? self.loopMode))
     }
 
-    if shouldOverrideWithReducedMotionAnimation {
-      playReducedMotionAnimation(completion: completion)
-      return
-    }
+    if overrideReducedMotionIfNeeded(completion: completion) { return }
 
     removeCurrentAnimationIfNecessary()
     if let loopMode {
@@ -180,10 +174,7 @@ public class LottieAnimationLayer: CALayer {
       currentPlaybackMode = .playing(.fromFrame(fromFrame, toFrame: toFrame, loopMode: loopMode ?? self.loopMode))
     }
 
-    if shouldOverrideWithReducedMotionAnimation {
-      playReducedMotionAnimation(completion: completion)
-      return
-    }
+    if overrideReducedMotionIfNeeded(completion: completion) { return }
 
     removeCurrentAnimationIfNecessary()
     if let loopMode {
@@ -231,10 +222,7 @@ public class LottieAnimationLayer: CALayer {
       ))
     }
 
-    if shouldOverrideWithReducedMotionAnimation {
-      playReducedMotionAnimation(completion: completion)
-      return
-    }
+    if overrideReducedMotionIfNeeded(completion: completion) { return }
 
     guard let animation, let markers = animation.markerMap, let to = markers[toMarker] else {
       return
@@ -286,10 +274,7 @@ public class LottieAnimationLayer: CALayer {
       currentPlaybackMode = .playing(.marker(marker, loopMode: loopMode ?? self.loopMode))
     }
 
-    if shouldOverrideWithReducedMotionAnimation {
-      playReducedMotionAnimation(completion: completion)
-      return
-    }
+    if overrideReducedMotionIfNeeded(completion: completion) { return }
 
     play(
       fromFrame: from.frameTime,
@@ -325,10 +310,7 @@ public class LottieAnimationLayer: CALayer {
       currentPlaybackMode = .playing(.markers(markers))
     }
 
-    if shouldOverrideWithReducedMotionAnimation {
-      playReducedMotionAnimation(completion: nil)
-      return
-    }
+    if overrideReducedMotionIfNeeded(completion: completion) { return }
 
     let markerToPlay = markers[0]
     let followingMarkers = Array(markers.dropFirst())
@@ -1505,10 +1487,27 @@ public class LottieAnimationLayer: CALayer {
   /// The marker that corresponds to the current "reduced motion" mode.
   private var reducedMotionMarker: Marker? {
     switch configuration.reducedMotionOption.currentReducedMotionMode {
-    case .standardMotion:
+    case .standardMotion, .disabledMotion:
       nil
     case .reducedMotion:
       animation?.reducedMotionMarker
+    }
+  }
+
+  /// Checks if static rendering or reduced motion is enabled and renders as appropriate.
+  /// - Returns: `true` if override happened and the caller should return early.
+  private func overrideReducedMotionIfNeeded(completion: LottieCompletionBlock?) -> Bool {
+    switch configuration.reducedMotionOption {
+    case .disabledMotion:
+      renderStaticFrame(completion: completion)
+      return true
+
+    case .reducedMotion:
+      playReducedMotionAnimation(completion: completion)
+      return true
+
+    case .standardMotion, .specific(_), .dynamic(_, dataID: _):
+      return false
     }
   }
 
@@ -1536,6 +1535,23 @@ public class LottieAnimationLayer: CALayer {
     defer { configuration = currentConfiguration }
 
     play(marker: reducedMotionMarker.name, completion: completion)
+  }
+
+  /// Renders the animation statically at a single frame without playing.
+  /// Used when `disabledMotion` mode is enabled for snapshot testing.
+  /// Prefers the first frame of the reduced motion marker if present,
+  /// otherwise falls back to the animation's start frame.
+  private func renderStaticFrame(completion: LottieCompletionBlock?) {
+    guard let animation else { return }
+    removeCurrentAnimationIfNecessary()
+
+    // Use the first frame of the reduced motion marker if present,
+    // otherwise fall back to the animation's start frame
+    let staticFrame = animation.reducedMotionMarker?.frameTime ?? animation.startFrame
+
+    currentFrame = staticFrame
+    currentPlaybackMode = .paused(at: .frame(staticFrame))
+    completion?(true)
   }
 
 }

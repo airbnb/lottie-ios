@@ -34,6 +34,12 @@ extension ReducedMotionOption {
     .specific(.reducedMotion)
   }
 
+  /// Animations are disabled and render statically at their first frame instead of playing.
+  /// This is useful for snapshot testing where animation non-determinism can cause flaky tests.
+  public static var disabledMotion: ReducedMotionOption {
+    .specific(.disabledMotion)
+  }
+
   /// A `ReducedMotionOptionProvider` that returns `.reducedMotion` when
   /// the system `UIAccessibility.isReduceMotionEnabled` option is `true`.
   /// This is the default option of `LottieConfiguration`.
@@ -88,6 +94,10 @@ public enum ReducedMotionMode: Hashable {
   /// Lottie animations with a "reduced motion" marker will play that marker instead of any other animations.
   /// By default this mode is used when the system "reduced motion" option is enabled.
   case reducedMotion
+
+  /// Animations are disabled and render statically at their first frame instead of playing.
+  /// This is useful for snapshot testing where animation non-determinism can cause flaky tests.
+  case disabledMotion
 }
 
 // MARK: - ReducedMotionOptionProvider
