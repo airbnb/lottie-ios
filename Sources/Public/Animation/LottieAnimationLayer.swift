@@ -213,7 +213,6 @@ public class LottieAnimationLayer: CALayer {
     loopMode: LottieLoopMode? = nil,
     completion: LottieCompletionBlock? = nil
   ) {
-
     defer {
       currentPlaybackMode = .playing(.fromMarker(
         fromMarker,
@@ -305,7 +304,6 @@ public class LottieAnimationLayer: CALayer {
     markers: [String],
     completion: LottieCompletionBlock? = nil
   ) {
-
     guard !markers.isEmpty else { return }
 
     defer {
@@ -1486,21 +1484,6 @@ public class LottieAnimationLayer: CALayer {
     reducedMotionMarker != nil
   }
 
-  /// Checks if static rendering or reduced motion is enabled and renders as appropriate.
-  /// - Returns: `true` if override happened and the caller should return early.
-  private func overrideReducedMotionIfNeeded(completion: LottieCompletionBlock?) -> Bool {
-    switch configuration.reducedMotionOption {
-    case .disabledMotion:
-      renderStaticFrame(completion: completion)
-      return true
-    case .reducedMotion:
-      playReducedMotionAnimation(completion: completion)
-      return true
-    case .standardMotion, .specific(_), .dynamic(_, dataID: _):
-      return false
-    }
-  }
-
   /// The marker that corresponds to the current "reduced motion" mode.
   private var reducedMotionMarker: Marker? {
     switch configuration.reducedMotionOption.currentReducedMotionMode {
@@ -1508,6 +1491,23 @@ public class LottieAnimationLayer: CALayer {
       nil
     case .reducedMotion:
       animation?.reducedMotionMarker
+    }
+  }
+
+  /// Checks if static rendering or reduced motion is enabled and renders as appropriate.
+  /// - Returns: `true` if override happened and the caller should return early.
+  private func overrideReducedMotionIfNeeded(completion: LottieCompletionBlock?) -> Bool {
+    switch configuration.reducedMotionOption {
+    case .disabledMotion:
+      renderStaticFrame(completion: completion)
+      return true
+
+    case .reducedMotion:
+      playReducedMotionAnimation(completion: completion)
+      return true
+
+    case .standardMotion, .specific(_), .dynamic(_, dataID: _):
+      return false
     }
   }
 
