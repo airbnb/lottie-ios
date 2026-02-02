@@ -1034,9 +1034,9 @@ open class LottieAnimationView: LottieAnimationViewBase {
     guard superview != nil else { return }
 
     if window != nil {
-      updateAnimationForForegroundState()
+      updateAnimationForWindowAppear()
     } else {
-      updateAnimationForBackgroundState()
+      updateAnimationForWindowDisappear()
     }
   }
 
@@ -1062,6 +1062,18 @@ open class LottieAnimationView: LottieAnimationViewBase {
       waitingToPlayAnimation = false
     }
     lottieAnimationLayer.updateAnimationForForegroundState(wasWaitingToPlayAnimation: wasWaitingToPlayAnimation)
+  }
+
+  fileprivate func updateAnimationForWindowDisappear() {
+    lottieAnimationLayer.updateAnimationForWindowDisappear()
+  }
+
+  fileprivate func updateAnimationForWindowAppear() {
+    let wasWaitingToPlayAnimation = waitingToPlayAnimation
+    if waitingToPlayAnimation {
+      waitingToPlayAnimation = false
+    }
+    lottieAnimationLayer.updateAnimationForWindowAppear(wasWaitingToPlayAnimation: wasWaitingToPlayAnimation)
   }
 
   // MARK: Private
