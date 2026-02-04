@@ -87,11 +87,10 @@ extension [ShapeItem] {
         /// Now add all child paths to current tree
         nodeTree.paths.append(contentsOf: tree.paths)
         nodeTree.renderContainers.append(node.container)
-      } else if item is Repeater {
-        LottieLogger.shared.warn("""
-          The Main Thread rendering engine doesn't currently support repeaters.
-          To play an animation with repeaters, you can use the Core Animation rendering engine instead.
-          """)
+      } else if let repeater = item as? Repeater {
+        let node = RepeaterNode(parentNode: nodeTree.rootNode, repeater: repeater, upstreamPaths: nodeTree.paths)
+        nodeTree.rootNode = node
+        nodeTree.childrenNodes.append(node)
       }
 
       if let pathNode = nodeTree.rootNode as? PathNode {
