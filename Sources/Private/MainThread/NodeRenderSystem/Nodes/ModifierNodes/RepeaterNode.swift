@@ -203,3 +203,13 @@ extension BezierPath {
     return newPath
   }
 }
+
+extension CompoundBezierPath {
+  fileprivate func transformed(by transform: CGAffineTransform) -> CompoundBezierPath {
+    var newPaths = [BezierPath]()
+    for path in paths {
+      newPaths.append(path.transformed(by: transform))
+    }
+    return CompoundBezierPath(paths: newPaths)
+  }
+}
