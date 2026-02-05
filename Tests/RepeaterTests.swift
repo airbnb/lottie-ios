@@ -15,31 +15,28 @@ final class RepeaterTests: XCTestCase {
     // 1. Load the sample animation
     let bundle = Bundle(for: type(of: self))
     let resourceURL = bundle.url(forResource: "repeater_test", withExtension: "json", subdirectory: "Samples")
-    
+
     // Fallback if Bundle structure differs in test harness
     let fileURL = resourceURL ?? URL(fileURLWithPath: "Tests/Samples/repeater_test.json")
-    
-    guard let animation = LottieAnimation.filepath(fileURL.path) else {
-        XCTFail("Could not load repeater_test.json")
-        return
-    }
+
+    let animation = try XCTUnwrap(LottieAnimation.filepath(fileURL.path), "Could not load repeater_test.json")
 
     // 2. Setup AnimationView with Main Thread engine
     let config = LottieConfiguration(renderingEngine: .mainThread)
     let animationView = LottieAnimationView(animation: animation, configuration: config)
-    
+
     animationView.frame = CGRect(x: 0, y: 0, width: 500, height: 500)
-    
+
     // 3. Force layout / update
     animationView.layoutIfNeeded()
     animationView.currentProgress = 0.5
-    
+
     // 4. Verification
     // Since we cannot easily snapshot in this environment, we rely on the fact that
     // the build/run didn't crash. (If environment was working).
     // The mere existence of valid RepeaterNode hook prevents the "Warning: Repeater not supported" log
     // and correctly processes the node tree.
-    
+
     XCTAssertNotNil(animationView)
   }
 }
