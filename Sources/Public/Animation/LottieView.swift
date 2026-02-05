@@ -281,6 +281,13 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     }
   }
 
+  /// Returns a copy of this view updated to have the provided window background behavior.
+  public func windowBackgroundBehavior(_ value: LottieBackgroundBehavior?) -> Self {
+    configure { view in
+      view.windowBackgroundBehavior = value
+    }
+  }
+
   /// Returns a copy of this view with its accessibility label updated to the given value.
   public func accessibilityLabel(_ accessibilityLabel: String?) -> Self {
     configure { view in

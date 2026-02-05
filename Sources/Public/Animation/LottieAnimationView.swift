@@ -406,6 +406,13 @@ open class LottieAnimationView: LottieAnimationViewBase {
     set { lottieAnimationLayer.backgroundBehavior = newValue }
   }
 
+  /// Behavior when the view is added to or removed from the window hierarchy.
+  /// Defaults to `backgroundBehavior` when `nil`. See ``LottieAnimationLayer/windowBackgroundBehavior``.
+  public var windowBackgroundBehavior: LottieBackgroundBehavior? {
+    get { lottieAnimationLayer.windowBackgroundBehavior }
+    set { lottieAnimationLayer.windowBackgroundBehavior = newValue }
+  }
+
   /// Sets the animation backing the animation view. Setting this will clear the
   /// view's contents, completion blocks and current state. The new animation will
   /// be loaded up and set to the beginning of its timeline.
@@ -1020,12 +1027,12 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   @objc
   override func animationWillMoveToBackground() {
-    updateAnimationForBackgroundState()
+    updateAnimationForBackgroundState(forWindow: false)
   }
 
   @objc
   override func animationWillEnterForeground() {
-    updateAnimationForForegroundState()
+    updateAnimationForForegroundState(forWindow: false)
   }
 
   override func animationMovedToWindow() {
@@ -1034,9 +1041,9 @@ open class LottieAnimationView: LottieAnimationViewBase {
     guard superview != nil else { return }
 
     if window != nil {
-      updateAnimationForWindowAppear()
+      updateAnimationForForegroundState(forWindow: true)
     } else {
-      updateAnimationForWindowDisappear()
+      updateAnimationForBackgroundState(forWindow: true)
     }
   }
 
@@ -1052,28 +1059,19 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   fileprivate var waitingToPlayAnimation = false
 
-  fileprivate func updateAnimationForBackgroundState() {
-    lottieAnimationLayer.updateAnimationForBackgroundState()
+  fileprivate func updateAnimationForBackgroundState(forWindow: Bool) {
+    lottieAnimationLayer.updateAnimationForBackgroundState(forWindow: forWindow)
   }
 
-  fileprivate func updateAnimationForForegroundState() {
+  fileprivate func updateAnimationForForegroundState(forWindow: Bool) {
     let wasWaitingToPlayAnimation = waitingToPlayAnimation
     if waitingToPlayAnimation {
       waitingToPlayAnimation = false
     }
-    lottieAnimationLayer.updateAnimationForForegroundState(wasWaitingToPlayAnimation: wasWaitingToPlayAnimation)
-  }
-
-  fileprivate func updateAnimationForWindowDisappear() {
-    lottieAnimationLayer.updateAnimationForWindowDisappear()
-  }
-
-  fileprivate func updateAnimationForWindowAppear() {
-    let wasWaitingToPlayAnimation = waitingToPlayAnimation
-    if waitingToPlayAnimation {
-      waitingToPlayAnimation = false
-    }
-    lottieAnimationLayer.updateAnimationForWindowAppear(wasWaitingToPlayAnimation: wasWaitingToPlayAnimation)
+    lottieAnimationLayer.updateAnimationForForegroundState(
+      wasWaitingToPlayAnimation: wasWaitingToPlayAnimation,
+      forWindow: forWindow
+    )
   }
 
   // MARK: Private

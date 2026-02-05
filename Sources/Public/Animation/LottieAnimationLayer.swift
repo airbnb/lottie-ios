@@ -487,6 +487,23 @@ public class LottieAnimationLayer: CALayer {
   /// Will inform the receiver the type of rendering engine that is used for the layer.
   public var animationLayerDidLoad: ((_ animationLayer: LottieAnimationLayer, _ renderingEngine: RenderingEngineOption) -> Void)?
 
+  /// Behavior when the view is added to or removed from the window hierarchy.
+  ///
+  /// Views may be removed from the window hierarchy in scenarios such as:
+  /// - SwiftUI navigation (`NavigationStack`, `TabView`, `LazyVStack`, sheets)
+  /// - `UICollectionView` / `UITableView` cell reuse
+  /// - `UIPageViewController` page transitions
+  /// - Custom container view controllers
+  ///
+  /// By default, this uses the same value as `backgroundBehavior`. Set this property
+  /// when you need different behavior for window attachment changes versus app
+  /// foreground/background transitions.
+  ///
+  /// For example, use `.continuePlaying` here with the Core Animation rendering engine
+  /// if you want animations to seamlessly resume after navigation, while still using
+  /// a different `backgroundBehavior` for app background transitions.
+  public var windowBackgroundBehavior: LottieBackgroundBehavior?
+
   /// The configuration that this `LottieAnimationView` uses when playing its animation
   public var configuration: LottieConfiguration {
     didSet {
@@ -996,55 +1013,43 @@ public class LottieAnimationLayer: CALayer {
     return animation.durationFrameTime(forMarker: named)
   }
 
-  /// Called when app moves to background. Applies `backgroundBehavior` policy.
-  public func updateAnimationForBackgroundState() {
-    guard let currentContext = animationContext else { return }
+  public func updateAnimationForBackgroundState(forWindow: Bool = false) {
+    if let currentContext = animationContext {
+      let behavior = forWindow ? (windowBackgroundBehavior ?? backgroundBehavior) : backgroundBehavior
+      switch behavior {
+      case .stop:
+        removeCurrentAnimation()
+        updateAnimationFrame(currentContext.playFrom)
 
-    switch backgroundBehavior {
-    case .stop:
-      removeCurrentAnimation()
-      updateAnimationFrame(currentContext.playFrom)
+      case .pause:
+        removeCurrentAnimation()
 
-    case .pause:
-      removeCurrentAnimation()
+      case .pauseAndRestore:
+        currentContext.closure.ignoreDelegate = true
+        removeCurrentAnimation()
+        /// Keep the stale context around for when the app enters the foreground.
+        animationContext = currentContext
 
-    case .pauseAndRestore:
-      pauseAndPreserveAnimation()
+      case .forceFinish:
+        removeCurrentAnimation()
+        updateAnimationFrame(currentContext.playTo)
 
-    case .forceFinish:
-      removeCurrentAnimation()
-      updateAnimationFrame(currentContext.playTo)
-
-    case .continuePlaying:
-      break
+      case .continuePlaying:
+        break
+      }
     }
   }
 
-  /// Called when app returns to foreground. Restores based on `backgroundBehavior` policy.
-  public func updateAnimationForForegroundState(wasWaitingToPlayAnimation: Bool) {
-    guard animationContext != nil else { return }
-
-    if wasWaitingToPlayAnimation {
-      restorePreservedAnimation(startIfWaiting: true)
-    } else if backgroundBehavior == .pauseAndRestore {
-      restorePreservedAnimation(startIfWaiting: false)
+  public func updateAnimationForForegroundState(wasWaitingToPlayAnimation: Bool, forWindow: Bool = false) {
+    if let currentContext = animationContext {
+      let behavior = forWindow ? (windowBackgroundBehavior ?? backgroundBehavior) : backgroundBehavior
+      if wasWaitingToPlayAnimation {
+        addNewAnimationForContext(currentContext)
+      } else if behavior == .pauseAndRestore {
+        /// Restore animation from saved state
+        updateInFlightAnimation()
+      }
     }
-  }
-
-  /// Called when view is removed from window hierarchy (NOT app background).
-  /// Always preserves animation state for restore, regardless of `backgroundBehavior`.
-  /// This fixes SwiftUI compatibility where views are frequently removed/re-added
-  /// during transitions, navigation, or conditional rendering.
-  public func updateAnimationForWindowDisappear() {
-    guard animationContext != nil else { return }
-    pauseAndPreserveAnimation()
-  }
-
-  /// Called when view is added to window hierarchy (NOT app foreground).
-  /// Always restores animation if there was one playing.
-  public func updateAnimationForWindowAppear(wasWaitingToPlayAnimation: Bool) {
-    guard animationContext != nil else { return }
-    restorePreservedAnimation(startIfWaiting: wasWaitingToPlayAnimation)
   }
 
   // MARK: Internal
@@ -1160,26 +1165,6 @@ public class LottieAnimationLayer: CALayer {
     animationLayer?.removeAnimation(forKey: activeAnimationName)
     updateAnimationFrame(pauseFrame)
     animationContext = nil
-  }
-
-  /// Pauses animation and preserves context for later restore.
-  fileprivate func pauseAndPreserveAnimation() {
-    guard let currentContext = animationContext else { return }
-    currentContext.closure.ignoreDelegate = true
-    removeCurrentAnimation()
-    animationContext = currentContext
-  }
-
-  /// Restores animation from preserved context.
-  /// - Parameter startIfWaiting: If true and animation was queued (not yet started), starts it.
-  ///   If false, only resumes an already-started animation.
-  fileprivate func restorePreservedAnimation(startIfWaiting: Bool) {
-    guard let currentContext = animationContext else { return }
-    if startIfWaiting {
-      addNewAnimationForContext(currentContext)
-    } else {
-      updateInFlightAnimation()
-    }
   }
 
   fileprivate func makeAnimationLayer(usingEngine renderingEngine: RenderingEngineOption) {
