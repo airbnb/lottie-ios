@@ -487,23 +487,6 @@ public class LottieAnimationLayer: CALayer {
   /// Will inform the receiver the type of rendering engine that is used for the layer.
   public var animationLayerDidLoad: ((_ animationLayer: LottieAnimationLayer, _ renderingEngine: RenderingEngineOption) -> Void)?
 
-  /// Behavior when the view is added to or removed from the window hierarchy.
-  ///
-  /// Views may be removed from the window hierarchy in scenarios such as:
-  /// - SwiftUI navigation (`NavigationStack`, `TabView`, `LazyVStack`, sheets)
-  /// - `UICollectionView` / `UITableView` cell reuse
-  /// - `UIPageViewController` page transitions
-  /// - Custom container view controllers
-  ///
-  /// By default, this uses the same value as `backgroundBehavior`. Set this property
-  /// when you need different behavior for window attachment changes versus app
-  /// foreground/background transitions.
-  ///
-  /// For example, use `.continuePlaying` here with the Core Animation rendering engine
-  /// if you want animations to seamlessly resume after navigation, while still using
-  /// a different `backgroundBehavior` for app background transitions.
-  public var windowBackgroundBehavior: LottieBackgroundBehavior?
-
   /// The configuration that this `LottieAnimationView` uses when playing its animation
   public var configuration: LottieConfiguration {
     didSet {
@@ -1013,10 +996,10 @@ public class LottieAnimationLayer: CALayer {
     return animation.durationFrameTime(forMarker: named)
   }
 
-  public func updateAnimationForBackgroundState(forWindow: Bool = false) {
+  public func updateAnimationForBackgroundState(backgroundBehavior: LottieBackgroundBehavior? = nil) {
     if let currentContext = animationContext {
-      let behavior = forWindow ? (windowBackgroundBehavior ?? backgroundBehavior) : backgroundBehavior
-      switch behavior {
+      let effectiveBehavior = backgroundBehavior ?? self.backgroundBehavior
+      switch effectiveBehavior {
       case .stop:
         removeCurrentAnimation()
         updateAnimationFrame(currentContext.playFrom)
@@ -1040,12 +1023,15 @@ public class LottieAnimationLayer: CALayer {
     }
   }
 
-  public func updateAnimationForForegroundState(wasWaitingToPlayAnimation: Bool, forWindow: Bool = false) {
+  public func updateAnimationForForegroundState(
+    wasWaitingToPlayAnimation: Bool,
+    backgroundBehavior: LottieBackgroundBehavior? = nil
+  ) {
     if let currentContext = animationContext {
-      let behavior = forWindow ? (windowBackgroundBehavior ?? backgroundBehavior) : backgroundBehavior
+      let effectiveBehavior = backgroundBehavior ?? self.backgroundBehavior
       if wasWaitingToPlayAnimation {
         addNewAnimationForContext(currentContext)
-      } else if behavior == .pauseAndRestore {
+      } else if effectiveBehavior == .pauseAndRestore {
         /// Restore animation from saved state
         updateInFlightAnimation()
       }
