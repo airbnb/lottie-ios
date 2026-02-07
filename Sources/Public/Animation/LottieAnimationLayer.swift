@@ -1385,7 +1385,7 @@ public class LottieAnimationLayer: CALayer {
       // if `currentFrame` is included in the time range being played.
       let lowerBoundTime = min(animationContext.playFrom, animationContext.playTo)
       let upperBoundTime = max(animationContext.playFrom, animationContext.playTo)
-      if (lowerBoundTime ..< upperBoundTime).contains(round(currentFrame)) {
+      if (lowerBoundTime ..< upperBoundTime).contains(trunc(currentFrame)) {
         // We have to configure this differently depending on the loop mode:
         switch loopMode {
         // When playing exactly once (and not looping), we can just set the
