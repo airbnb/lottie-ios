@@ -1079,6 +1079,7 @@
 		2EAF5B0627A0798700E00531 /* AnimationFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF59F227A0798700E00531 /* AnimationFontProvider.swift */; };
 		36E57EAC28AF7ADF00B7EFDA /* HardcodedTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E57EAB28AF7ADF00B7EFDA /* HardcodedTextProvider.swift */; };
 		3E8B8C645ABC4C98B91F7B66 /* LottieURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135AB552F4524F1D995D3A15 /* LottieURLSession.swift */; };
+		43819F71A58612715B62F78E /* CompatibleFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABF108DE311DD788312C4B /* CompatibleFontProvider.swift */; };
 		57210913291073E400169699 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57210912291073E400169699 /* RoundedCorners.swift */; };
 		57210914291073E400169699 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57210912291073E400169699 /* RoundedCorners.swift */; };
 		57210915291073E400169699 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57210912291073E400169699 /* RoundedCorners.swift */; };
@@ -1134,6 +1135,8 @@
 		82A552752A2FD44B00E47AC8 /* LottieAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A552742A2FD44B00E47AC8 /* LottieAnimationLayer.swift */; };
 		82A552762A2FD44B00E47AC8 /* LottieAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A552742A2FD44B00E47AC8 /* LottieAnimationLayer.swift */; };
 		82A552772A2FD44B00E47AC8 /* LottieAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A552742A2FD44B00E47AC8 /* LottieAnimationLayer.swift */; };
+		85D3C1C42A05E453829E9C8C /* CompatibleFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABF108DE311DD788312C4B /* CompatibleFontProvider.swift */; };
+		8BCB93B72127BD2FDB0C4DEE /* CompatibleFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABF108DE311DD788312C4B /* CompatibleFontProvider.swift */; };
 		A1D5BAAC27C731A500777D06 /* DataURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D5BAAB27C731A500777D06 /* DataURLTests.swift */; };
 		A40460592832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
 		A404605A2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
@@ -1164,6 +1167,7 @@
 		E95C38752C15559D00329910 /* LayerEffectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C38702C14D14300329910 /* LayerEffectNode.swift */; };
 		E95C38762C15559E00329910 /* LayerEffectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C38702C14D14300329910 /* LayerEffectNode.swift */; };
 		E95C38772C15559F00329910 /* LayerEffectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C38702C14D14300329910 /* LayerEffectNode.swift */; };
+		F5BFF3060F37A38192BF9C77 /* CompatibleFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABF108DE311DD788312C4B /* CompatibleFontProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1493,6 +1497,7 @@
 		D453D8B028FF9E3A00D3F49C /* DefaultAnimationCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAnimationCache.swift; sourceTree = "<group>"; };
 		E95C386E2C14B7FC00329910 /* DropShadowNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadowNode.swift; sourceTree = "<group>"; };
 		E95C38702C14D14300329910 /* LayerEffectNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerEffectNode.swift; sourceTree = "<group>"; };
+		F3ABF108DE311DD788312C4B /* CompatibleFontProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompatibleFontProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2342,6 +2347,7 @@
 			children = (
 				2EAF59D027A0798700E00531 /* CompatibleAnimationKeypath.swift */,
 				2EAF59D127A0798700E00531 /* CompatibleAnimationView.swift */,
+				F3ABF108DE311DD788312C4B /* CompatibleFontProvider.swift */,
 			);
 			path = Compatibility;
 			sourceTree = "<group>";
@@ -2541,8 +2547,6 @@
 			dependencies = (
 			);
 			name = "Lottie-iOS";
-			packageProductDependencies = (
-			);
 			productName = Lottie;
 			productReference = 2E80409A27A0725D006E74CB /* Lottie.framework */;
 			productType = "com.apple.product-type.framework";
@@ -2986,6 +2990,7 @@
 				080DEFAA2A9570FE00BE2D96 /* SetContentProviding.swift in Sources */,
 				080DF07E2A95718200BE2D96 /* RootAnimationLayer.swift in Sources */,
 				080DEFFD2A95712400BE2D96 /* EllipseAnimation.swift in Sources */,
+				43819F71A58612715B62F78E /* CompatibleFontProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3276,6 +3281,7 @@
 				2E9C96122822F43100677516 /* DashPattern.swift in Sources */,
 				2E9C960C2822F43100677516 /* ShapeLayerModel.swift in Sources */,
 				2E9C97082822F43100677516 /* CompatibilityTracker.swift in Sources */,
+				F5BFF3060F37A38192BF9C77 /* CompatibleFontProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3593,6 +3599,7 @@
 				2E9C96132822F43100677516 /* DashPattern.swift in Sources */,
 				2E9C960D2822F43100677516 /* ShapeLayerModel.swift in Sources */,
 				2E9C97092822F43100677516 /* CompatibilityTracker.swift in Sources */,
+				8BCB93B72127BD2FDB0C4DEE /* CompatibleFontProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3883,6 +3890,7 @@
 				08C002F22A46196300AB54BA /* Archive+ReadingDeprecated.swift in Sources */,
 				2E9C970A2822F43100677516 /* CompatibilityTracker.swift in Sources */,
 				08C002E52A46196300AB54BA /* Archive+Writing.swift in Sources */,
+				85D3C1C42A05E453829E9C8C /* CompatibleFontProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
