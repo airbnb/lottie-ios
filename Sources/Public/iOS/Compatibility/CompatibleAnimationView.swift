@@ -223,11 +223,11 @@ public final class CompatibleAnimationView: UIView {
   }
 
   @objc public var compatibleAnimationFontProvider: CompatibleAnimationFontProvider? {
-  didSet {
-    animationView.fontProvider =
-      compatibleAnimationFontProvider.map(CompatibleFontProvider.init) ?? DefaultFontProvider()
+    didSet {
+      animationView.fontProvider =
+        compatibleAnimationFontProvider.map(CompatibleFontProvider.init) ?? DefaultFontProvider()
+    }
   }
-}
 
   @objc
   public override var contentMode: UIView.ContentMode {

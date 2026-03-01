@@ -11,20 +11,30 @@ import UIKit
 /// An Objective-C compatible protocol for providing fonts to Lottie.
 @objc
 public protocol CompatibleAnimationFontProvider: NSObjectProtocol {
-  @objc func fontFor(family: String, size: CGFloat) -> CTFont?
+  @objc
+  func fontFor(family: String, size: CGFloat) -> CTFont?
 }
+
 /// An internal wrapper that converts a `CompatibleAnimationFontProvider` to a Lottie `AnimationFontProvider`.
-internal final class CompatibleFontProvider: AnimationFontProvider {
-  let fontProvider: CompatibleAnimationFontProvider
+final class CompatibleFontProvider: AnimationFontProvider {
+
+  // MARK: Lifecycle
+
   init(fontProvider: CompatibleAnimationFontProvider) {
     self.fontProvider = fontProvider
   }
+
+  // MARK: Internal
+
+  let fontProvider: CompatibleAnimationFontProvider
+
   func fontFor(family: String, size: CGFloat) -> CTFont? {
     fontProvider.fontFor(family: family, size: size)
   }
 }
+
 extension CompatibleFontProvider: Equatable {
-  static func == (lhs: CompatibleFontProvider, rhs: CompatibleFontProvider) -> Bool {
+  static func ==(lhs: CompatibleFontProvider, rhs: CompatibleFontProvider) -> Bool {
     lhs.fontProvider.isEqual(rhs.fontProvider)
   }
 }
