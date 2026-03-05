@@ -229,6 +229,13 @@ public final class CompatibleAnimationView: UIView {
     }
   }
 
+  @objc public var compatibleAnimationImageProvider: CompatibleAnimationImageProvider? {
+    didSet {
+      animationView.imageProvider =
+        compatibleAnimationImageProvider.map(CompatibleImageProvider.init) ?? BundleImageProvider(bundle: Bundle.main)
+    }
+  }
+
   @objc
   public override var contentMode: UIView.ContentMode {
     set { animationView.contentMode = newValue }
