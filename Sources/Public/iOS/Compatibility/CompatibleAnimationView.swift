@@ -232,7 +232,7 @@ public final class CompatibleAnimationView: UIView {
   @objc public var compatibleAnimationImageProvider: CompatibleAnimationImageProvider? {
     didSet {
       animationView.imageProvider =
-        compatibleAnimationImageProvider.map(CompatibleImageProvider.init) ?? BundleImageProvider(bundle: Bundle.main)
+        compatibleAnimationImageProvider.map(CompatibleImageProvider.init) ?? BundleImageProvider(bundle: Bundle.main, searchPath: nil)
     }
   }
 
