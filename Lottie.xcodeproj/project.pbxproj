@@ -1080,6 +1080,7 @@
 		36E57EAC28AF7ADF00B7EFDA /* HardcodedTextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E57EAB28AF7ADF00B7EFDA /* HardcodedTextProvider.swift */; };
 		3E8B8C645ABC4C98B91F7B66 /* LottieURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135AB552F4524F1D995D3A15 /* LottieURLSession.swift */; };
 		43819F71A58612715B62F78E /* CompatibleFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABF108DE311DD788312C4B /* CompatibleFontProvider.swift */; };
+		43819F72A58612715B62F78E /* CompatibleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABF109DE311DD788312C4B /* CompatibleImageProvider.swift */; };
 		57210913291073E400169699 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57210912291073E400169699 /* RoundedCorners.swift */; };
 		57210914291073E400169699 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57210912291073E400169699 /* RoundedCorners.swift */; };
 		57210915291073E400169699 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57210912291073E400169699 /* RoundedCorners.swift */; };
@@ -1136,7 +1137,9 @@
 		82A552762A2FD44B00E47AC8 /* LottieAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A552742A2FD44B00E47AC8 /* LottieAnimationLayer.swift */; };
 		82A552772A2FD44B00E47AC8 /* LottieAnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A552742A2FD44B00E47AC8 /* LottieAnimationLayer.swift */; };
 		85D3C1C42A05E453829E9C8C /* CompatibleFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABF108DE311DD788312C4B /* CompatibleFontProvider.swift */; };
+		85D3C1C52A05E453829E9C8C /* CompatibleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABF109DE311DD788312C4B /* CompatibleImageProvider.swift */; };
 		8BCB93B72127BD2FDB0C4DEE /* CompatibleFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABF108DE311DD788312C4B /* CompatibleFontProvider.swift */; };
+		8BCB93B82127BD2FDB0C4DEE /* CompatibleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABF109DE311DD788312C4B /* CompatibleImageProvider.swift */; };
 		A1D5BAAC27C731A500777D06 /* DataURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D5BAAB27C731A500777D06 /* DataURLTests.swift */; };
 		A40460592832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
 		A404605A2832C52B00ACFEDC /* BlendMode+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40460582832C52B00ACFEDC /* BlendMode+Filter.swift */; };
@@ -1168,6 +1171,7 @@
 		E95C38762C15559E00329910 /* LayerEffectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C38702C14D14300329910 /* LayerEffectNode.swift */; };
 		E95C38772C15559F00329910 /* LayerEffectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C38702C14D14300329910 /* LayerEffectNode.swift */; };
 		F5BFF3060F37A38192BF9C77 /* CompatibleFontProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABF108DE311DD788312C4B /* CompatibleFontProvider.swift */; };
+		F5BFF3070F37A38192BF9C77 /* CompatibleImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABF109DE311DD788312C4B /* CompatibleImageProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1498,6 +1502,7 @@
 		E95C386E2C14B7FC00329910 /* DropShadowNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadowNode.swift; sourceTree = "<group>"; };
 		E95C38702C14D14300329910 /* LayerEffectNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerEffectNode.swift; sourceTree = "<group>"; };
 		F3ABF108DE311DD788312C4B /* CompatibleFontProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompatibleFontProvider.swift; sourceTree = "<group>"; };
+		F3ABF109DE311DD788312C4B /* CompatibleImageProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompatibleImageProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2348,6 +2353,7 @@
 				2EAF59D027A0798700E00531 /* CompatibleAnimationKeypath.swift */,
 				2EAF59D127A0798700E00531 /* CompatibleAnimationView.swift */,
 				F3ABF108DE311DD788312C4B /* CompatibleFontProvider.swift */,
+				F3ABF109DE311DD788312C4B /* CompatibleImageProvider.swift */,
 			);
 			path = Compatibility;
 			sourceTree = "<group>";
@@ -2991,6 +2997,7 @@
 				080DF07E2A95718200BE2D96 /* RootAnimationLayer.swift in Sources */,
 				080DEFFD2A95712400BE2D96 /* EllipseAnimation.swift in Sources */,
 				43819F71A58612715B62F78E /* CompatibleFontProvider.swift in Sources */,
+				43819F72A58612715B62F78E /* CompatibleImageProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3282,6 +3289,7 @@
 				2E9C960C2822F43100677516 /* ShapeLayerModel.swift in Sources */,
 				2E9C97082822F43100677516 /* CompatibilityTracker.swift in Sources */,
 				F5BFF3060F37A38192BF9C77 /* CompatibleFontProvider.swift in Sources */,
+				F5BFF3070F37A38192BF9C77 /* CompatibleImageProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3600,6 +3608,7 @@
 				2E9C960D2822F43100677516 /* ShapeLayerModel.swift in Sources */,
 				2E9C97092822F43100677516 /* CompatibilityTracker.swift in Sources */,
 				8BCB93B72127BD2FDB0C4DEE /* CompatibleFontProvider.swift in Sources */,
+				8BCB93B82127BD2FDB0C4DEE /* CompatibleImageProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3891,6 +3900,7 @@
 				2E9C970A2822F43100677516 /* CompatibilityTracker.swift in Sources */,
 				08C002E52A46196300AB54BA /* Archive+Writing.swift in Sources */,
 				85D3C1C42A05E453829E9C8C /* CompatibleFontProvider.swift in Sources */,
+				85D3C1C52A05E453829E9C8C /* CompatibleImageProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
