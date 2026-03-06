@@ -107,41 +107,40 @@ extension [ShapeItem] {
   }
 }
 
-fileprivate extension AnimatorNode {
+extension AnimatorNode {
   /// Helper function to avoid casting to `PathNode`
   /// More performant replacement for `nodeTree.rootNode as? PathNode`
-  func getPathNode() -> PathNode? {
-
+  fileprivate func getPathNode() -> PathNode? {
     switch self {
     case let node as EllipseNode:
-      return node
+      node
     case let node as PolygonNode:
-      return node
+      node
     case let node as ShapeNode:
-      return node
+      node
     case let node as StarNode:
-      return node
+      node
     case let node as RectangleNode:
-      return node
+      node
     default:
-      return nil
+      nil
     }
   }
 
   /// Helper function to avoid casting to `RenderNode`
   /// More performant replacement for `nodeTree.rootNode as? RenderNode`
-  func getRenderNode() -> RenderNode? {
+  fileprivate func getRenderNode() -> RenderNode? {
     switch self {
     case let node as GradientFillNode:
-      return node
+      node
     case let node as StrokeNode:
-      return node
+      node
     case let node as FillNode:
-      return node
+      node
     case let node as GradientStrokeNode:
-      return node
+      node
     default:
-      return nil
+      nil
     }
   }
 }
