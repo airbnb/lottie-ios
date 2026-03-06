@@ -24,7 +24,9 @@ final class ShapeCompositionLayer: CompositionLayer {
       renderContainer.insertRenderLayer(container)
     }
     rootNode?.updateTree(0, forceUpdates: true)
-    childKeypaths.append(contentsOf: results.childrenNodes)
+    // Use direct downcasting from `AnimatorNode` to `KeypathSearchable`
+    // to avoid calling `_arrayForceCast` for performance reasons
+    childKeypaths.append(contentsOf: results.childrenNodes.map { $0 as KeypathSearchable })
   }
 
   override init(layer: Any) {
