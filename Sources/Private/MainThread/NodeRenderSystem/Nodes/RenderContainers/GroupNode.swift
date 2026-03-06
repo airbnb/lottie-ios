@@ -97,7 +97,9 @@ final class GroupNode: AnimatorNode {
     rootNode = tree.rootNode
     properties = GroupNodeProperties(transform: tree.transform)
     groupOutput = GroupOutputNode(parent: parentNode?.outputNode, rootNode: rootNode?.outputNode)
-    var childKeypaths: [KeypathSearchable] = tree.childrenNodes
+    // Use direct downcasting from `AnimatorNode` to `KeypathSearchable`
+    // to avoid calling `_arrayForceCast` for performance reasons
+    var childKeypaths: [KeypathSearchable] = tree.childrenNodes.map { $0 as KeypathSearchable }
     childKeypaths.append(properties)
     self.childKeypaths = childKeypaths
 
