@@ -94,12 +94,12 @@ extension [ShapeItem] {
           """)
       }
 
-      if let pathNode = getPathNode(rootNode: nodeTree.rootNode) {
+      if let pathNode = nodeTree.rootNode?.getPathNode() {
         //// Add path container to the node tree
         nodeTree.paths.append(pathNode.pathOutput)
       }
 
-      if let renderNode = getRenderNode(rootNode: nodeTree.rootNode) {
+      if let renderNode = nodeTree.rootNode?.getRenderNode() {
         nodeTree.renderContainers.append(ShapeRenderLayer(renderer: renderNode.renderer))
       }
     }
@@ -107,41 +107,41 @@ extension [ShapeItem] {
   }
 }
 
-/// Helper function to avoid casting to `PathNode`
-/// More performant replacement for `nodeTree.rootNode as? PathNode`
-private func getPathNode(rootNode: AnimatorNode?) -> PathNode? {
-  guard let rootNode else { return nil }
+fileprivate extension AnimatorNode {
+  /// Helper function to avoid casting to `PathNode`
+  /// More performant replacement for `nodeTree.rootNode as? PathNode`
+  func getPathNode() -> PathNode? {
 
-  switch rootNode {
-  case let node as EllipseNode:
-    return node
-  case let node as PolygonNode:
-    return node
-  case let node as ShapeNode:
-    return node
-  case let node as StarNode:
-    return node
-  case let node as RectangleNode:
-    return node
-  default:
-    return nil
+    switch self {
+    case let node as EllipseNode:
+      return node
+    case let node as PolygonNode:
+      return node
+    case let node as ShapeNode:
+      return node
+    case let node as StarNode:
+      return node
+    case let node as RectangleNode:
+      return node
+    default:
+      return nil
+    }
   }
-}
 
-/// Helper function to avoid casting to `RenderNode`
-/// More performant replacement for `nodeTree.rootNode as? RenderNode`
-private func getRenderNode(rootNode: AnimatorNode?) -> RenderNode? {
-  guard let rootNode else { return nil }
-  switch rootNode {
-  case let node as GradientFillNode:
-    return node
-  case let node as StrokeNode:
-    return node
-  case let node as FillNode:
-    return node
-  case let node as GradientStrokeNode:
-    return node
-  default:
-    return nil
+  /// Helper function to avoid casting to `RenderNode`
+  /// More performant replacement for `nodeTree.rootNode as? RenderNode`
+  func getRenderNode() -> RenderNode? {
+    switch self {
+    case let node as GradientFillNode:
+      return node
+    case let node as StrokeNode:
+      return node
+    case let node as FillNode:
+      return node
+    case let node as GradientStrokeNode:
+      return node
+    default:
+      return nil
+    }
   }
 }
