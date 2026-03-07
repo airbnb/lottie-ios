@@ -109,7 +109,7 @@ public final class GradientValueProvider: ValueProvider {
 
       let location = locations.count > i
         ? locations[i]
-        : (Double(i) / Double(colors.count - 1))
+        : (colors.count > 1 ? Double(i) / Double(colors.count - 1) : 0.0)
 
       colorValues.append(location)
       colorValues.append(colors[i].r)
