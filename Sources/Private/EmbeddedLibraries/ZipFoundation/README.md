@@ -1,7 +1,7 @@
 ## ZipFoundation
 
 This directory includes the source code of the ZIPFoundation library, from the following release:
-https://github.com/weichsel/ZIPFoundation/releases/tag/0.9.16
+https://github.com/weichsel/ZIPFoundation/releases/tag/0.9.18
 
 Lottie is distributed via multiple package managers (SPM, Cocoapods, Carthage, and NPM),
 each with different packaging and compilation requirements. 
