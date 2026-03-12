@@ -26,7 +26,8 @@ extension Archive {
     to url: URL,
     bufferSize: Int = defaultReadChunkSize,
     skipCRC32: Bool = false,
-    progress: Progress? = nil
+    progress: Progress? = nil,
+    allowedDestination: URL? = nil
   ) throws -> CRC32 {
     guard bufferSize > 0 else {
       throw ArchiveError.invalidBufferSize
@@ -71,6 +72,22 @@ extension Archive {
       }
       let consumer = { (data: Data) in
         guard let linkPath = String(data: data, encoding: .utf8) else { throw ArchiveError.invalidEntryPath }
+        // Validate that the symlink target resolves within the allowed destination directory.
+        // Without this check, a malicious ZIP could create symlinks pointing to arbitrary system files.
+        if let allowedDestination = allowedDestination {
+          let resolvedTarget: URL
+          if linkPath.hasPrefix("/") {
+            resolvedTarget = URL(fileURLWithPath: linkPath).standardized
+          } else {
+            resolvedTarget = url.deletingLastPathComponent().appendingPathComponent(linkPath).standardized
+          }
+          guard resolvedTarget.isContained(in: allowedDestination) else {
+            throw CocoaError(
+              .fileReadInvalidFileName,
+              userInfo: [NSFilePathErrorKey: resolvedTarget.path]
+            )
+          }
+        }
         try fileManager.createParentDirectoryStructure(for: url)
         try fileManager.createSymbolicLink(atPath: url.path, withDestinationPath: linkPath)
       }

@@ -251,9 +251,15 @@ extension FileManager {
       if let progress {
         let entryProgress = archive.makeProgressForReading(entry)
         progress.addChild(entryProgress, withPendingUnitCount: entryProgress.totalUnitCount)
-        crc32 = try archive.extract(entry, to: entryURL, skipCRC32: skipCRC32, progress: entryProgress)
+        crc32 = try archive.extract(
+          entry,
+          to: entryURL,
+          skipCRC32: skipCRC32,
+          progress: entryProgress,
+          allowedDestination: destinationURL
+        )
       } else {
-        crc32 = try archive.extract(entry, to: entryURL, skipCRC32: skipCRC32)
+        crc32 = try archive.extract(entry, to: entryURL, skipCRC32: skipCRC32, allowedDestination: destinationURL)
       }
 
       func verifyChecksumIfNecessary() throws {
