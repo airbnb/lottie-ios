@@ -34,7 +34,7 @@ extension GradientRenderLayer {
   func addGradientAnimations(
     for gradient: GradientShapeItem,
     type: GradientContentType,
-    context: LayerAnimationContext
+    context: LayerAnimationContext,
   ) throws {
     // We have to set `colors` and `locations` to non-nil values
     // for the animations below to actually take effect
@@ -46,13 +46,16 @@ extension GradientRenderLayer {
     case .rgb:
       colors = .init(
         repeating: CGColor.rgb(0, 0, 0),
-        count: gradient.numberOfColors
+        count: try resolveGradientColorsCount(
+          in: context,
+          gradient: gradient,
+        ),
       )
 
     case .alpha:
       colors = .init(
         repeating: CGColor.rgb(0, 0, 0),
-        count: gradient.colorConfiguration(from: gradient.colors.keyframes[0].value, type: .alpha).count
+        count: gradient.colorConfiguration(from: gradient.colors.keyframes[0].value, type: .alpha).count,
       )
     }
 
@@ -62,7 +65,7 @@ extension GradientRenderLayer {
       value: { colorComponents in
         gradient.colorConfiguration(from: colorComponents, type: type).map { $0.color }
       },
-      context: context
+      context: context,
     )
 
     try addAnimation(
@@ -71,7 +74,7 @@ extension GradientRenderLayer {
       value: { colorComponents in
         gradient.colorConfiguration(from: colorComponents, type: type).map { $0.location }
       },
-      context: context
+      context: context,
     )
 
     try addOpacityAnimation(for: gradient, context: context)
@@ -90,7 +93,7 @@ extension GradientRenderLayer {
 
   private func addLinearGradientAnimations(
     for gradient: GradientShapeItem,
-    context: LayerAnimationContext
+    context: LayerAnimationContext,
   ) throws {
     type = .axial
 
@@ -100,7 +103,7 @@ extension GradientRenderLayer {
       value: { absoluteStartPoint in
         percentBasedPointInBounds(from: absoluteStartPoint.pointValue)
       },
-      context: context
+      context: context,
     )
 
     try addAnimation(
@@ -109,7 +112,7 @@ extension GradientRenderLayer {
       value: { absoluteEndPoint in
         percentBasedPointInBounds(from: absoluteEndPoint.pointValue)
       },
-      context: context
+      context: context,
     )
   }
 
@@ -126,27 +129,53 @@ extension GradientRenderLayer {
         let relativeEndPoint = percentBasedPointInBounds(
           from: CGPoint(
             x: absoluteStartPoint.x + radius,
-            y: absoluteStartPoint.y + radius
+            y: absoluteStartPoint.y + radius,
           )
         )
 
         return RadialGradientKeyframes(startPoint: relativeStartPoint, endPoint: relativeEndPoint)
-      }
+      },
     )
 
     try addAnimation(
       for: .startPoint,
       keyframes: combinedKeyframes,
       value: \.startPoint,
-      context: context
+      context: context,
     )
 
     try addAnimation(
       for: .endPoint,
       keyframes: combinedKeyframes,
       value: \.endPoint,
-      context: context
+      context: context,
     )
+  }
+
+  /// Core Animation ignores the gradient animation when the number of provided colors
+  /// does not match the expected count. For example, if the `colors` array is initialized
+  /// from a JSON value containing 3 colors, but a value provider supplies only 2 colors,
+  /// the animation will be ignored. To avoid this, always ensure the `CAGradientLayer`
+  /// color count matches the input colors, whether defined in the JSON or supplied via
+  /// a value provider.
+  private func resolveGradientColorsCount(
+    in context: LayerAnimationContext,
+    gradient: GradientShapeItem,
+  ) throws -> Int {
+    let colorsProperty = LayerProperty<[CGColor]>.colors.customizableProperty
+
+    guard
+      let colorsProperty,
+      let customKeyframes = try context.valueProviderStore.customKeyframes(
+        of: colorsProperty,
+        for: AnimationKeypath(keys: colorsProperty.name.map { $0.rawValue }),
+        context: context,
+      )
+    else {
+      return gradient.numberOfColors
+    }
+
+    return customKeyframes.keyframes[0].value.count
   }
 }
 
@@ -159,7 +188,7 @@ private struct RadialGradientKeyframes: Interpolatable {
   func interpolate(to: RadialGradientKeyframes, amount: CGFloat) -> RadialGradientKeyframes {
     RadialGradientKeyframes(
       startPoint: startPoint.interpolate(to: to.startPoint, amount: amount),
-      endPoint: endPoint.interpolate(to: to.endPoint, amount: amount)
+      endPoint: endPoint.interpolate(to: to.endPoint, amount: amount),
     )
   }
 }
@@ -210,20 +239,20 @@ extension GradientShapeItem {
   ///    so each has to be rendered in a separate `CAGradientLayer`.
   fileprivate func colorConfiguration(
     from colorComponents: [Double],
-    type: GradientContentType
+    type: GradientContentType,
   ) -> GradientColorConfiguration {
     switch type {
     case .rgb:
       precondition(
         colorComponents.count >= numberOfColors * 4,
-        "Each color must have RGB components and a location component"
+        "Each color must have RGB components and a location component",
       )
 
       // Each group of four `Double` values represents a single `CGColor`,
       // and its relative location within the gradient.
       var colors = GradientColorConfiguration()
 
-      for colorIndex in 0..<numberOfColors {
+      for colorIndex in 0 ..< numberOfColors {
         let colorStartIndex = colorIndex * 4
 
         let colorLocation = CGFloat(colorComponents[colorStartIndex])
@@ -231,7 +260,7 @@ extension GradientShapeItem {
         let color = CGColor.rgb(
           CGFloat(colorComponents[colorStartIndex + 1]),
           CGFloat(colorComponents[colorStartIndex + 2]),
-          CGFloat(colorComponents[colorStartIndex + 3])
+          CGFloat(colorComponents[colorStartIndex + 3]),
         )
 
         colors.append((color: color, location: colorLocation))
