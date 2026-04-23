@@ -46,11 +46,10 @@ extension GradientRenderLayer {
     case .rgb:
       colors = .init(
         repeating: CGColor.rgb(0, 0, 0),
-        count: gradient.numberOfColors
-//        try resolveGradientColorsCount(
-//          in: context,
-//          gradient: gradient,
-//        ),
+        count: try resolveGradientColorsCount(
+          in: context,
+          gradient: gradient
+        )
       )
 
     case .alpha:
