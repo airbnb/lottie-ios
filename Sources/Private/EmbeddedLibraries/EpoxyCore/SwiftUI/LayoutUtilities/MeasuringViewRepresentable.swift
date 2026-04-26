@@ -55,10 +55,14 @@ extension MeasuringViewRepresentable {
     // extra work here.
     let children = Mirror(reflecting: proposedSize).children
 
-    // Creates a `CGSize` by replacing `nil`s with `UIView.noIntrinsicMetric`
+    // Creates a `CGSize` by replacing `nil`s and non-finite values (e.g. `CGFloat.infinity`
+    // proposed by `.scaledToFill()`) with `UIView.noIntrinsicMetric`. Non-finite values must be
+    // treated as unconstrained — passing them through causes `SwiftUIMeasurementContainer` to
+    // return an infinite fitting size, which SwiftUI propagates to the host view frame and triggers
+    // a `CALayerInvalidGeometry` crash before layout even reaches the animation layer.
     uiView.proposedSize = .init(
-      width: children.first { $0.label == "width" }?.value as? CGFloat ?? ViewType.noIntrinsicMetric,
-      height: children.first { $0.label == "height" }?.value as? CGFloat ?? ViewType.noIntrinsicMetric
+      width: (children.first { $0.label == "width" }?.value as? CGFloat).finiteOrNil ?? ViewType.noIntrinsicMetric,
+      height: (children.first { $0.label == "height" }?.value as? CGFloat).finiteOrNil ?? ViewType.noIntrinsicMetric
     )
 
     size = uiView.measuredFittingSize
@@ -73,10 +77,13 @@ extension MeasuringViewRepresentable {
   ) -> CGSize? {
     uiView.strategy = sizing
 
-    // Creates a size by replacing `nil`s with `UIView.noIntrinsicMetric`
+    // Creates a size by replacing `nil`s and non-finite values (e.g. `CGFloat.infinity` proposed
+    // by `.scaledToFill()`) with `UIView.noIntrinsicMetric`. Non-finite values must be treated as
+    // unconstrained to prevent a `CALayerInvalidGeometry` crash when SwiftUI sets the host view
+    // frame to an infinite size.
     uiView.proposedSize = .init(
-      width: proposal.width ?? ViewType.noIntrinsicMetric,
-      height: proposal.height ?? ViewType.noIntrinsicMetric
+      width: proposal.width.finiteOrNil ?? ViewType.noIntrinsicMetric,
+      height: proposal.height.finiteOrNil ?? ViewType.noIntrinsicMetric
     )
 
     return uiView.measuredFittingSize
@@ -95,10 +102,10 @@ extension MeasuringViewRepresentable {
 
     let children = Mirror(reflecting: proposedSize).children
 
-    // Creates a `CGSize` by replacing `nil`s with `UIView.noIntrinsicMetric`
+    // Creates a `CGSize` by replacing `nil`s and non-finite values with `NSView.noIntrinsicMetric`.
     nsView.proposedSize = .init(
-      width: children.first { $0.label == "width" }?.value as? CGFloat ?? ViewType.noIntrinsicMetric,
-      height: children.first { $0.label == "height" }?.value as? CGFloat ?? ViewType.noIntrinsicMetric
+      width: (children.first { $0.label == "width" }?.value as? CGFloat).finiteOrNil ?? ViewType.noIntrinsicMetric,
+      height: (children.first { $0.label == "height" }?.value as? CGFloat).finiteOrNil ?? ViewType.noIntrinsicMetric
     )
 
     size = nsView.measuredFittingSize
@@ -114,10 +121,10 @@ extension MeasuringViewRepresentable {
   ) -> CGSize? {
     nsView.strategy = sizing
 
-    // Creates a size by replacing `nil`s with `UIView.noIntrinsicMetric`
+    // Creates a size by replacing `nil`s and non-finite values with `NSView.noIntrinsicMetric`.
     nsView.proposedSize = .init(
-      width: proposal.width ?? ViewType.noIntrinsicMetric,
-      height: proposal.height ?? ViewType.noIntrinsicMetric
+      width: proposal.width.finiteOrNil ?? ViewType.noIntrinsicMetric,
+      height: proposal.height.finiteOrNil ?? ViewType.noIntrinsicMetric
     )
 
     return nsView.measuredFittingSize
@@ -125,4 +132,22 @@ extension MeasuringViewRepresentable {
   #endif
 }
 #endif
+
+// MARK: - CGFloat
+
+extension CGFloat {
+  /// Returns `self` if finite, otherwise `nil`.
+  ///
+  /// Used to normalize `CGFloat.infinity` proposals from SwiftUI modifiers like `.scaledToFill()`
+  /// into `noIntrinsicMetric`, preventing them from propagating as literal infinite frame sizes.
+  fileprivate var finiteOrNil: CGFloat? {
+    isFinite ? self : nil
+  }
+}
+
+extension Optional where Wrapped == CGFloat {
+  fileprivate var finiteOrNil: CGFloat? {
+    flatMap { $0.isFinite ? $0 : nil }
+  }
+}
 #endif

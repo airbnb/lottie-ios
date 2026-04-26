@@ -881,6 +881,8 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   override func layoutAnimation() {
     guard let animation = lottieAnimationLayer.animation, let animationLayer = lottieAnimationLayer.animationLayer else { return }
+    guard bounds.size.width.isFinite, bounds.size.height.isFinite,
+          bounds.size.width > 0, bounds.size.height > 0 else { return }
 
     var position = animation.bounds.center
     let xform: CATransform3D

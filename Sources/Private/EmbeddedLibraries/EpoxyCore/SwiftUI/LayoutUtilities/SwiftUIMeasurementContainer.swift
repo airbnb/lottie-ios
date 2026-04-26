@@ -4,6 +4,77 @@
 #if canImport(SwiftUI)
 import SwiftUI
 
+// MARK: - NonFiniteClampingLayer
+
+#if !os(macOS)
+/// A `CALayer` subclass that silently clamps non-finite `position` and `bounds` values to zero.
+///
+/// SwiftUI can assign `CGFloat.infinity` geometry to a `UIViewRepresentable` when layout modifiers
+/// like `.scaledToFill()` are applied to a `.resizable()` `LottieView`. UIKit's autoresizing
+/// machinery propagates that infinite size to `SwiftUIMeasurementContainer`, causing
+/// `-[CALayer setPosition:]` to throw `CALayerInvalidGeometry`. Clamping here — at the exact
+/// crash site — is the most reliable guard. This class is non-generic and non-final so its
+/// property overrides are guaranteed to be visible to the Objective-C runtime regardless of how
+/// UIKit or SwiftUI sets the layer geometry. SwiftUI re-layouts with correct finite values once
+/// the layout pass resolves.
+private class NonFiniteClampingLayer: CALayer {
+  @objc override var position: CGPoint {
+    get { super.position }
+    set {
+      super.position = CGPoint(
+        x: newValue.x.isFinite ? newValue.x : 0,
+        y: newValue.y.isFinite ? newValue.y : 0)
+    }
+  }
+
+  @objc override var bounds: CGRect {
+    get { super.bounds }
+    set {
+      super.bounds = CGRect(
+        x: newValue.origin.x.isFinite ? newValue.origin.x : 0,
+        y: newValue.origin.y.isFinite ? newValue.origin.y : 0,
+        width: newValue.size.width.isFinite ? newValue.size.width : 0,
+        height: newValue.size.height.isFinite ? newValue.size.height : 0)
+    }
+  }
+}
+#endif
+
+// MARK: - _SwiftUIMeasurementContainerBase
+
+/// Non-generic, non-final base class for `SwiftUIMeasurementContainer`.
+///
+/// ObjC-critical overrides (`layerClass`, `frame`) MUST live here rather than in the generic
+/// subclass. Swift generic classes have unreliable ObjC method dispatch: UIKit calls `-setFrame:`
+/// and `+layerClass` via the ObjC runtime, which may bypass Swift property overrides defined on a
+/// generic class entirely. A concrete non-generic class has no such limitation.
+#if os(macOS)
+class _SwiftUIMeasurementContainerBase: NSView { }
+#else
+class _SwiftUIMeasurementContainerBase: UIView {
+
+  /// Backs the view with `NonFiniteClampingLayer` so `-[CALayer setPosition:]` never receives
+  /// a non-finite value, which would throw `CALayerInvalidGeometry`.
+  override class var layerClass: AnyClass {
+    NonFiniteClampingLayer.self
+  }
+
+  /// Belt-and-suspenders UIView-level guard. Clamps any non-finite frame component to zero
+  /// before forwarding to UIKit, preventing the layer position from ever being set to infinity.
+  @objc dynamic override var frame: CGRect {
+    get { super.frame }
+    set {
+      var safe = newValue
+      if !safe.origin.x.isFinite { safe.origin.x = 0 }
+      if !safe.origin.y.isFinite { safe.origin.y = 0 }
+      if !safe.size.width.isFinite { safe.size.width = 0 }
+      if !safe.size.height.isFinite { safe.size.height = 0 }
+      super.frame = safe
+    }
+  }
+}
+#endif
+
 // MARK: - SwiftUIMeasurementContainer
 
 /// A view that has an `intrinsicContentSize` of the `uiView`'s `systemLayoutSizeFitting(…)` and
@@ -13,7 +84,7 @@ import SwiftUI
 /// height through the `SwiftUISizingContext` binding.
 ///
 /// - SeeAlso: ``MeasuringViewRepresentable``
-final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
+final class SwiftUIMeasurementContainer<Content: ViewType>: _SwiftUIMeasurementContainerBase {
 
   // MARK: Lifecycle
 
@@ -23,13 +94,36 @@ final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
 
     // On iOS 15 and below, passing zero can result in a constraint failure the first time a view
     // is displayed, but the system gracefully recovers afterwards. On iOS 16, it's fine to pass
-    // zero.
-    let initialSize: CGSize =
-      if #available(iOS 16, tvOS 16, macOS 13, *) {
-        .zero
-      } else {
-        .init(width: 375, height: 150)
-      }
+    // zero — but see the iOS 16+ note below.
+    //
+    // iOS 16+ / iOS 26 sublayer NaN issue:
+    // On iOS 26, UIKit applies proportional sublayer repositioning inside UIView animation blocks.
+    // When LottieView is presented via fullScreenCover, the container starts at (0×0) and later
+    // transitions to its final size during the presentation animation. UIKit computes the new
+    // sublayer position as:
+    //   newPosition = oldPosition × (newBoundsWidth / oldBoundsWidth)
+    //               = 70 × (432 / 0) = 70 × ∞ = NaN  →  CALayerInvalidGeometry crash
+    //
+    // Using the content's intrinsic size as the initial frame prevents the (0×0) intermediate
+    // state entirely. If intrinsic size is unavailable (e.g., async animation not yet loaded),
+    // we fall back to zero — the existing guards in layoutAnimation() and NonFiniteClampingLayer
+    // still protect that path.
+    let initialSize: CGSize
+    #if os(macOS)
+    // macOS is unaffected by the iOS 26 sublayer NaN issue; restore the original behaviour.
+    if #available(macOS 13, *) {
+      initialSize = .zero
+    } else {
+      initialSize = .init(width: 375, height: 150)
+    }
+    #else
+    if #available(iOS 16, tvOS 16, *) {
+      let intrinsic = content.intrinsicContentSize
+      initialSize = (intrinsic.width > 0 && intrinsic.height > 0) ? intrinsic : .zero
+    } else {
+      initialSize = .init(width: 375, height: 150)
+    }
+    #endif
     super.init(frame: .init(origin: .zero, size: initialSize))
 
     addSubview(content)
@@ -111,9 +205,19 @@ final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
   override func layoutSubviews() {
     super.layoutSubviews()
 
-    // We need to re-measure the view whenever the size of the bounds changes, as the previous size
-    // may now be incorrect.
-    if latestMeasurementBoundsSize != nil, bounds.size != latestMeasurementBoundsSize {
+    // Re-measure only when bounds changed by at least 1pt in any dimension.
+    //
+    // On iOS 26, fullScreenCover uses a long presentation animation that sets the container's
+    // bounds to many intermediate values during the transition. The strict equality check
+    // (`bounds.size != latestMeasurementBoundsSize`) would call super.invalidateIntrinsicContentSize()
+    // on every animation frame — potentially thousands of times — each of which causes SwiftUI to
+    // re-layout the entire hierarchy (including expensive multi-pass text measurement for wrapping
+    // labels). A 1pt threshold skips sub-point noise and intermediate animation frames while still
+    // catching genuine size changes that require a new measurement pass.
+    if
+      let last = latestMeasurementBoundsSize,
+      abs(bounds.size.width - last.width) >= 1 || abs(bounds.size.height - last.height) >= 1
+    {
       // This will trigger SwiftUI to re-measure the view.
       super.invalidateIntrinsicContentSize()
     }
@@ -301,7 +405,30 @@ final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
 
     _intrinsicContentSize = measuredSize
 
-    let measuredFittingSize = measuredSize.replacingNoIntrinsicMetric(with: proposedSizeElseBounds)
+    var measuredFittingSize = measuredSize.replacingNoIntrinsicMetric(with: proposedSizeElseBounds)
+
+    // When strategy is `.proposed` and the fitting size is zero in any dimension — which
+    // happens during SwiftUI's first layout pass on iOS 16+ before bounds have been
+    // established (initial frame is `.zero`) — fall back to the content's intrinsic content
+    // size for the zero dimension.
+    //
+    // Without this, SwiftUI modifiers like `.scaledToFill()` receive a (0, 0) size, compute
+    // a scale factor of `proposed / 0 = ∞`, and assign an infinite frame to the view. That
+    // infinite frame propagates via UIKit autoresizing to `SwiftUIMeasurementContainer` and
+    // crashes `-[CALayer setPosition:]` with `CALayerInvalidGeometry`. Returning the
+    // content's natural size gives `.scaledToFill()` a real aspect ratio so it never
+    // produces infinity. Only applies when the content has a positive intrinsic size in both
+    // dimensions, so views with no intrinsic size are unaffected.
+    if case .proposed = resolvedStrategy,
+       measuredFittingSize.width == 0 || measuredFittingSize.height == 0
+    {
+      let intrinsicSize = content.intrinsicContentSize
+      if intrinsicSize.width > 0, intrinsicSize.height > 0 {
+        if measuredFittingSize.width == 0 { measuredFittingSize.width = intrinsicSize.width }
+        if measuredFittingSize.height == 0 { measuredFittingSize.height = intrinsicSize.height }
+      }
+    }
+
     _measuredFittingSize = measuredFittingSize
     return measuredFittingSize
   }
@@ -311,7 +438,7 @@ final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
 
 /// The measurement strategy of a `SwiftUIMeasurementContainer`.
 enum SwiftUIMeasurementContainerStrategy {
-  /// The container makes a best effort to correctly choose the measurement strategy of the view.
+  /// The container makes a best effort to correctly choose the measurement strategy of the view.
   ///
   /// The best effort is based on a number of heuristics:
   /// - The `uiView` will be given its intrinsic width and/or height when measurement in that
