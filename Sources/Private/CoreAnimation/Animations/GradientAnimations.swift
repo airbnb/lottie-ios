@@ -168,7 +168,9 @@ extension GradientRenderLayer {
       let colorsProperty,
       let customKeyframes = try context.valueProviderStore.customKeyframes(
         of: colorsProperty,
-        for: AnimationKeypath(keys: colorsProperty.name.map { $0.rawValue }),
+        for: AnimationKeypath(
+          keys: context.currentKeypath.keys + colorsProperty.name.map { $0.rawValue }
+        ),
         context: context
       )
     else {

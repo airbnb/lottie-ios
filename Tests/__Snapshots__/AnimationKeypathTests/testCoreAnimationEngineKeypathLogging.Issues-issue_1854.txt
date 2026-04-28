@@ -7,6 +7,7 @@
 .accent.Gradient Fill 1.Colors
 .accent.Gradient Fill 1.Colors
 .accent.Gradient Fill 1.Colors
+.accent.Gradient Fill 1.Colors
 .accent.Gradient Fill 1.Opacity
 .accent.Gradient Fill 1.Opacity
 .accent.Transform.Opacity
@@ -14,4 +15,3 @@
 .accent.Transform.Rotation
 .accent.Transform.Scale
 .accent.Transform.Scale
-Colors
