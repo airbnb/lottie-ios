@@ -133,7 +133,7 @@ extension SnapshotConfiguration {
     ]),
 
     "Issues/issue_2677": .customValueProviders([
-      "**.**.Colors": GradientValueProvider(
+      "**.**.**.Colors": GradientValueProvider(
         [
           LottieColor(r: 0.5, g: 0.5, b: 1, a: 1),
           LottieColor(r: 0.2, g: 0.6, b: 0.7, a: 1),
