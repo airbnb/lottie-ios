@@ -1154,6 +1154,23 @@ public class LottieAnimationLayer: CALayer {
   }
 
   fileprivate func makeAnimationLayer(usingEngine renderingEngine: RenderingEngineOption) {
+    // Guard against re-entrant calls. On iOS 26+, Core Animation can call `display()` on a
+    // newly-created sublayer synchronously during `addSublayer`, which may trigger the automatic
+    // engine fallback path and attempt to call `makeAnimationLayer` again while we're still inside
+    // this method. Defer the re-entrant request and execute it after the current call completes.
+    guard !isMakingAnimationLayer else {
+      pendingAnimationLayerEngine = renderingEngine
+      return
+    }
+    isMakingAnimationLayer = true
+    defer {
+      isMakingAnimationLayer = false
+      if let pendingEngine = pendingAnimationLayerEngine {
+        pendingAnimationLayerEngine = nil
+        makeAnimationLayer(usingEngine: pendingEngine)
+      }
+    }
+
     /// Disable the default implicit crossfade animation Core Animation creates
     /// when adding or removing sublayers.
     actions = ["sublayers": NSNull()]
@@ -1482,6 +1499,18 @@ public class LottieAnimationLayer: CALayer {
 
   /// The `LottieBackgroundBehavior` that was specified manually by setting `self.backgroundBehavior`
   private var _backgroundBehavior: LottieBackgroundBehavior?
+
+  /// Guards against re-entrant calls to `makeAnimationLayer(usingEngine:)`.
+  ///
+  /// On iOS 26+, Core Animation may call `CALayer.display()` synchronously during a sublayer's
+  /// `init`, which can trigger `automaticEngineLayerDidSetUpAnimation` → `makeAnimationLayer`
+  /// while the original `makeAnimationLayer` call is still on the stack. This re-entrant call
+  /// must be deferred until the first call completes to avoid accessing a partially-initialized
+  /// layer and crashing with `EXC_BAD_ACCESS`.
+  private var isMakingAnimationLayer = false
+
+  /// A pending engine to use when `makeAnimationLayer` is called re-entrantly.
+  private var pendingAnimationLayerEngine: RenderingEngineOption?
 
   /// Whether or not the current animation should be overridden with
   /// the marker matching the current "reduced motion" mode.
