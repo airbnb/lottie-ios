@@ -46,7 +46,7 @@ extension GradientRenderLayer {
     case .rgb:
       colors = .init(
         repeating: CGColor.rgb(0, 0, 0),
-        count: try resolveGradientColorsCount(
+        count: try gradientColorsCount(
           in: context,
           gradient: gradient
         )
@@ -158,7 +158,7 @@ extension GradientRenderLayer {
   /// the animation will be ignored. To avoid this, always ensure the `CAGradientLayer`
   /// color count matches the input colors, whether defined in the JSON or supplied via
   /// a value provider.
-  private func resolveGradientColorsCount(
+  private func gradientColorsCount(
     in context: LayerAnimationContext,
     gradient: GradientShapeItem
   ) throws -> Int {
