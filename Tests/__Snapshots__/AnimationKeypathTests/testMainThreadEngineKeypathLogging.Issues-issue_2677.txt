@@ -1,0 +1,19 @@
+Shape Layer 1
+Shape Layer 1.Gradient Fill 1
+Shape Layer 1.Gradient Fill 1.Colors
+Shape Layer 1.Gradient Fill 1.End Point
+Shape Layer 1.Gradient Fill 1.Opacity
+Shape Layer 1.Gradient Fill 1.Start Point
+Shape Layer 1.Rectangle Path 1
+Shape Layer 1.Rectangle Path 1.Position
+Shape Layer 1.Rectangle Path 1.Roundness
+Shape Layer 1.Rectangle Path 1.Size
+Shape Layer 1.Transform
+Shape Layer 1.Transform.Anchor Point
+Shape Layer 1.Transform.Opacity
+Shape Layer 1.Transform.Position
+Shape Layer 1.Transform.Rotation
+Shape Layer 1.Transform.Rotation X
+Shape Layer 1.Transform.Rotation Y
+Shape Layer 1.Transform.Rotation Z
+Shape Layer 1.Transform.Scale
