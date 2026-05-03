@@ -1159,15 +1159,17 @@ public class LottieAnimationLayer: CALayer {
     // engine fallback path and attempt to call `makeAnimationLayer` again while we're still inside
     // this method. Defer the re-entrant request and execute it after the current call completes.
     guard !isMakingAnimationLayer else {
-      pendingAnimationLayerEngine = renderingEngine
+      pendingAnimationLayerSetup = { [weak self] in
+        self?.makeAnimationLayer(usingEngine: renderingEngine)
+      }
       return
     }
     isMakingAnimationLayer = true
     defer {
       isMakingAnimationLayer = false
-      if let pendingEngine = pendingAnimationLayerEngine {
-        pendingAnimationLayerEngine = nil
-        makeAnimationLayer(usingEngine: pendingEngine)
+      if let pendingSetup = pendingAnimationLayerSetup {
+        pendingAnimationLayerSetup = nil
+        pendingSetup()
       }
     }
 
@@ -1306,6 +1308,17 @@ public class LottieAnimationLayer: CALayer {
   fileprivate func automaticEngineLayerDidSetUpAnimation(_ compatibilityIssues: [CompatibilityIssue]) {
     // If there weren't any compatibility issues, then there's nothing else to do
     if compatibilityIssues.isEmpty {
+      return
+    }
+
+    // On iOS 26+, this callback can fire synchronously during `addSublayer` while
+    // `makeAnimationLayer` is still on the stack. Defer the entire fallback — including
+    // the `currentFrame` restore and `addNewAnimationForContext` — until the outer
+    // `makeAnimationLayer` call completes, so they operate on the fully-initialized layer.
+    if isMakingAnimationLayer {
+      pendingAnimationLayerSetup = { [weak self] in
+        self?.automaticEngineLayerDidSetUpAnimation(compatibilityIssues)
+      }
       return
     }
 
@@ -1504,13 +1517,14 @@ public class LottieAnimationLayer: CALayer {
   ///
   /// On iOS 26+, Core Animation may call `CALayer.display()` synchronously during a sublayer's
   /// `init`, which can trigger `automaticEngineLayerDidSetUpAnimation` → `makeAnimationLayer`
-  /// while the original `makeAnimationLayer` call is still on the stack. This re-entrant call
+  /// while the original `makeAnimationLayer` call is still on the stack. Re-entrant calls
   /// must be deferred until the first call completes to avoid accessing a partially-initialized
   /// layer and crashing with `EXC_BAD_ACCESS`.
   private var isMakingAnimationLayer = false
 
-  /// A pending engine to use when `makeAnimationLayer` is called re-entrantly.
-  private var pendingAnimationLayerEngine: RenderingEngineOption?
+  /// A closure to execute after the current `makeAnimationLayer` call completes, used to
+  /// defer re-entrant layer setup (including the automatic engine fallback path).
+  private var pendingAnimationLayerSetup: (() -> Void)?
 
   /// Whether or not the current animation should be overridden with
   /// the marker matching the current "reduced motion" mode.
