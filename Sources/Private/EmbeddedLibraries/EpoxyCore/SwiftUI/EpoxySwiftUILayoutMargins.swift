@@ -1,7 +1,6 @@
 // Created by eric_horacek on 10/8/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
-#if canImport(SwiftUI)
 import SwiftUI
 
 // MARK: - View
@@ -23,16 +22,7 @@ extension View {
 
 extension EnvironmentValues {
   /// The layout margins of the parent `EpoxySwiftUIHostingView`, else zero if there is none.
-  var epoxyLayoutMargins: EdgeInsets {
-    get { self[EpoxyLayoutMarginsKey.self] }
-    set { self[EpoxyLayoutMarginsKey.self] = newValue }
-  }
-}
-
-// MARK: - EpoxyLayoutMarginsKey
-
-private struct EpoxyLayoutMarginsKey: EnvironmentKey {
-  static let defaultValue = EdgeInsets()
+  @Entry var epoxyLayoutMargins = EdgeInsets()
 }
 
 // MARK: - EpoxyLayoutMarginsPadding
@@ -46,4 +36,3 @@ private struct EpoxyLayoutMarginsPadding: ViewModifier {
     content.padding(epoxyLayoutMargins)
   }
 }
-#endif

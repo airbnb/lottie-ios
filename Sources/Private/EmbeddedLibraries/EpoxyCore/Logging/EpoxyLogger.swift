@@ -11,14 +11,14 @@ final class EpoxyLogger {
     assert: @escaping Assert = { condition, message, file, line in
       // If we default to `Swift.assert` directly with `assert: Assert = Swift.assert`,
       // the call will unexpectedly not respect the -O flag and will crash in release
-      // https://github.com/swiftlang/swift/issues/60249
+      // https://github.com/apple/swift/issues/60249
       Swift.assert(condition(), message(), file: file, line: line)
     },
     assertionFailure: @escaping AssertionFailure = { message, file, line in
       // If we default to `Swift.assertionFailure` directly with
       // `assertionFailure: AssertionFailure = Swift.assertionFailure`,
       // the call will unexpectedly not respect the -O flag and will crash in release
-      // https://github.com/swiftlang/swift/issues/60249
+      // https://github.com/apple/swift/issues/60249
       Swift.assertionFailure(message(), file: file, line: line)
     },
     warn: @escaping Warn = { message, _, _ in
@@ -36,6 +36,7 @@ final class EpoxyLogger {
   // MARK: Internal
 
   /// Logs that an assertion occurred.
+  // swiftformat:disable trailingCommas
   typealias Assert = (
     _ condition: @autoclosure () -> Bool,
     _ message: @autoclosure () -> String,
@@ -56,6 +57,8 @@ final class EpoxyLogger {
     _ fileID: StaticString,
     _ line: UInt
   ) -> Void
+
+  // swiftformat:enable trailingCommas
 
   /// The shared instance used to log Epoxy assertions and warnings.
   ///

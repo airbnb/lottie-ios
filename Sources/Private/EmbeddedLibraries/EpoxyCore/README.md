@@ -1,7 +1,7 @@
 ## EpoxyCore
 
 This directory includes the source code of the EpoxyCore library, from the following release:
-https://github.com/airbnb/epoxy-ios/releases/tag/0.10.0
+https://github.com/airbnb/epoxy-ios/releases/tag/0.11.0
 
 Lottie is distributed via multiple package managers (SPM, Cocoapods, Carthage, and NPM),
 each with different packaging and compilation requirements. 

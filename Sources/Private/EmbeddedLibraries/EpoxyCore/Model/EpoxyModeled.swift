@@ -31,7 +31,7 @@ extension EpoxyModeled {
   /// property, e.g.:
   ///
   /// ````
-  /// internal func title(_ value: String?) -> Self {
+  /// func title(_ value: String?) -> Self {
   ///   copy(updating: titleProperty, to: value)
   /// }
   /// ````

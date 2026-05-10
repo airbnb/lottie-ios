@@ -1,7 +1,6 @@
 // Created by eric_horacek on 6/22/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
-#if canImport(SwiftUI)
 import SwiftUI
 
 // MARK: - MeasuringViewRepresentable
@@ -85,6 +84,7 @@ extension MeasuringViewRepresentable {
 }
 
 #elseif os(macOS)
+@available(macOS 10.15, *)
 extension MeasuringViewRepresentable {
   func _overrideSizeThatFits(
     _ size: inout CGSize,
@@ -124,5 +124,4 @@ extension MeasuringViewRepresentable {
   }
   #endif
 }
-#endif
 #endif
