@@ -1,7 +1,6 @@
 // Created by eric_horacek on 9/8/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
-#if canImport(SwiftUI)
 import SwiftUI
 
 // MARK: - SwiftUIView
@@ -145,4 +144,3 @@ extension SwiftUIView {
     fileprivate(set) var storage: Storage
   }
 }
-#endif

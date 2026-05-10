@@ -11,17 +11,17 @@
 /// For example, to declare a `EpoxyModelProperty` that fulfills the `TitleProviding` protocol:
 ///
 /// ````
-/// internal protocol TitleProviding {
+/// protocol TitleProviding {
 ///   var title: String? { get }
 /// }
 ///
 /// extension EpoxyModeled where Self: TitleProviding {
-///   internal var title: String? {
+///   var title: String? {
 ///     get { self[titleProperty] }
 ///     set { self[titleProperty] = newValue }
 ///   }
 ///
-///   internal func title(_ value: String?) -> Self {
+///   func title(_ value: String?) -> Self {
 ///     copy(updating: titleProperty, to: value)
 ///   }
 ///
@@ -74,7 +74,7 @@ extension EpoxyModelProperty {
       self.update = update
     }
 
-    // MARK: Public
+    // MARK: Internal
 
     /// A closure used to update an `EpoxyModelProperty` from an old value to a new value.
     var update: (_ old: Value, _ new: Value) -> Value

@@ -26,7 +26,7 @@ struct ViewDifferentiator: Hashable {
     self.styleID = styleID
   }
 
-  // MARK: Public
+  // MARK: Internal
 
   var viewTypeDescription: String
   var styleID: AnyHashable?

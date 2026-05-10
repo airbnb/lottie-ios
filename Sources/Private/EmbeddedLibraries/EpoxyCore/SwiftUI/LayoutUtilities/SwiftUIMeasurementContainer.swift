@@ -113,12 +113,19 @@ final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
 
     // We need to re-measure the view whenever the size of the bounds changes, as the previous size
     // may now be incorrect.
-    if latestMeasurementBoundsSize != nil, bounds.size != latestMeasurementBoundsSize {
-      // This will trigger SwiftUI to re-measure the view.
-      super.invalidateIntrinsicContentSize()
+    if latestMeasurementBoundsSize != nil, bounds.size != latestMeasurementBoundsSize, !_hasPendingInvalidation {
+      // Defer invalidation to debounce during rapid bounds changes (e.g., fullScreenCover animation)
+      _hasPendingInvalidation = true
+      NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(deferredInvalidateIntrinsicContentSize), object: nil)
+      perform(#selector(deferredInvalidateIntrinsicContentSize), with: nil, afterDelay: 0)
     }
   }
   #endif
+
+  @objc private func deferredInvalidateIntrinsicContentSize() {
+    _hasPendingInvalidation = false
+    super.invalidateIntrinsicContentSize()
+  }
 
   override func invalidateIntrinsicContentSize() {
     super.invalidateIntrinsicContentSize()
@@ -140,6 +147,9 @@ final class SwiftUIMeasurementContainer<Content: ViewType>: ViewType {
 
   /// The bounds size at the time of the latest measurement.
   private var latestMeasurementBoundsSize: CGSize?
+
+  /// Whether a deferred invalidation of intrinsic content size is pending (used for debouncing).
+  private var _hasPendingInvalidation = false
 
   /// The most recently updated set of constraints constraining `uiView` to `self`.
   private var uiViewConstraints = [NSLayoutConstraint.Attribute: NSLayoutConstraint]()

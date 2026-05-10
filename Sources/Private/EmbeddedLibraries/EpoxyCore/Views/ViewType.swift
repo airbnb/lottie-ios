@@ -1,9 +1,9 @@
 // Created by Cal Stephens on 6/26/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
-#if canImport(SwiftUI)
 import SwiftUI
-#if canImport(UIKit)
+
+#if os(iOS) || os(tvOS) || os(visionOS)
 import UIKit
 
 /// The platform's main view type.
@@ -24,7 +24,7 @@ extension ViewRepresentableType {
   typealias RepresentableViewType = UIViewType
 }
 
-#elseif canImport(AppKit)
+#elseif os(macOS)
 import AppKit
 
 /// The platform's main view type.
@@ -44,5 +44,4 @@ extension ViewRepresentableType {
   /// Either `UIViewType` on iOS/tvOS or `NSViewType` on macOS.
   typealias RepresentableViewType = NSViewType
 }
-#endif
 #endif
