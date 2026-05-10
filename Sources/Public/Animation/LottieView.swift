@@ -126,12 +126,6 @@ public struct LottieView<Placeholder: View>: UIViewConfiguringSwiftUIView {
     }
     .sizing(sizing)
     .configure { context in
-      // Pre-set container frame to prevent NaN/infinity crash from .zero initialization on iOS 16+
-      if context.container.bounds.size == .zero {
-        context.container.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-      }
-    }
-    .configure { context in
       applyCurrentAnimationConfiguration(to: context.view, in: context.container)
     }
     .configurations(configurations)
