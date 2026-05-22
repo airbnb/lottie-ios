@@ -29,7 +29,11 @@ class CompositionLayer: CALayer, KeypathSearchable {
     keypathName = layer.name
     childKeypaths = [transformNode.transformProperties]
     super.init()
-    anchorPoint = .zero
+    // Set actions BEFORE setting anchorPoint so CoreAnimation's implicit
+    // animation lookup finds NSNull and skips animation creation.
+    // In Xcode 26 / iOS 26 the animation-creation path dereferences a pointer
+    // that is null when the layer is not yet part of a tree, causing a crash at
+    // -[CALayer setAnchorPoint:] when actions has not been configured first.
     actions = [
       "opacity": NSNull(),
       "transform": NSNull(),
@@ -41,9 +45,8 @@ class CompositionLayer: CALayer, KeypathSearchable {
       "shadowColor": NSNull(),
       "shadowRadius": NSNull(),
     ]
+    anchorPoint = .zero
 
-    contentsLayer.anchorPoint = .zero
-    contentsLayer.bounds = CGRect(origin: .zero, size: size)
     contentsLayer.actions = [
       "opacity": NSNull(),
       "transform": NSNull(),
@@ -52,6 +55,8 @@ class CompositionLayer: CALayer, KeypathSearchable {
       "sublayerTransform": NSNull(),
       "hidden": NSNull(),
     ]
+    contentsLayer.anchorPoint = .zero
+    contentsLayer.bounds = CGRect(origin: .zero, size: size)
     compositingFilter = layer.blendMode.filterName
     addSublayer(contentsLayer)
 
