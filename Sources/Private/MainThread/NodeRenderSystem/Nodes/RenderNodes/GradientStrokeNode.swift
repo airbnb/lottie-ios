@@ -124,13 +124,13 @@ final class GradientStrokeNode: AnimatorNode, RenderNode {
     /// Update gradient properties
     strokeRender.gradientRender.start = strokeProperties.startPoint.value.pointValue
     strokeRender.gradientRender.end = strokeProperties.endPoint.value.pointValue
-    strokeRender.gradientRender.opacity = strokeProperties.opacity.value.cgFloatValue
+    strokeRender.gradientRender.opacity = strokeProperties.opacity.value.cgFloatValue * 0.01
     strokeRender.gradientRender.colors = strokeProperties.colors.value.map { CGFloat($0) }
     strokeRender.gradientRender.type = strokeProperties.gradientType
     strokeRender.gradientRender.numberOfColors = strokeProperties.numberOfColors
 
     /// Now update stroke properties
-    strokeRender.strokeRender.opacity = strokeProperties.opacity.value.cgFloatValue
+    strokeRender.strokeRender.opacity = strokeProperties.opacity.value.cgFloatValue * 0.01
     strokeRender.strokeRender.width = strokeProperties.width.value.cgFloatValue
     strokeRender.strokeRender.miterLimit = strokeProperties.miterLimit
     strokeRender.strokeRender.lineCap = strokeProperties.lineCap

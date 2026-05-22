@@ -32,6 +32,11 @@ final class GradientStrokeRenderer: PassThroughOutputNode, Renderable {
     return updates || strokeRender.hasUpdate || gradientRender.hasUpdate
   }
 
+  override func hasRenderUpdates(_ forFrame: CGFloat) -> Bool {
+    let updates = super.hasRenderUpdates(forFrame)
+    return updates || strokeRender.hasUpdate || gradientRender.hasUpdate
+  }
+
   func updateShapeLayer(layer _: CAShapeLayer) {
     /// Not Applicable
   }
