@@ -104,6 +104,20 @@ extension SnapshotConfiguration {
       ]),
     ]),
 
+    // Same overrides as `Switch` above — the file content is identical to
+    // Switch.json, so this proves the `.lot` extension load path produces
+    // byte-equivalent rendering when given the same value providers.
+    "DotLotExtension/Switch": .customValueProviders([
+      "Checkmark Outlines.Group 1.Stroke 1.Color": ColorValueProvider(.black),
+      "Checkmark Outlines 2.Group 1.Stroke 1.Color": ColorValueProvider(.black),
+      "X Outlines.Group 1.Stroke 1.Color": ColorValueProvider(.black),
+      "Switch Outline Outlines.Fill 1.Color": ColorValueProvider([
+        Keyframe(value: LottieColor.black, time: 0),
+        Keyframe(value: LottieColor(r: 0.76, g: 0.76, b: 0.76, a: 1), time: 75),
+        Keyframe(value: LottieColor.black, time: 150),
+      ]),
+    ]),
+
     "Issues/issue_1837_opacity": .customValueProviders([
       "Dark Gray Solid 1.Transform.Opacity": FloatValueProvider(10)
     ]),
