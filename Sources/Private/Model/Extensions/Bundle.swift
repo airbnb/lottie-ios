@@ -10,6 +10,11 @@ extension Bundle {
     if let url = url(forResource: name, withExtension: "json", subdirectory: subdirectory) {
       return try Data(contentsOf: url)
     }
+    // `.lot` is the IANA-registered short extension for `video/lottie+json` and is
+    // treated as a synonym for `.json` when loading Lottie animations.
+    if let url = url(forResource: name, withExtension: "lot", subdirectory: subdirectory) {
+      return try Data(contentsOf: url)
+    }
 
     // Check for data assets
     let assetKey = subdirectory != nil ? "\(subdirectory ?? "")/\(name)" : name
@@ -30,9 +35,11 @@ extension Bundle {
 
 extension String {
   fileprivate func removingJSONSuffix() -> String {
-    // Allow filenames to be passed with a ".json" extension (but not other extensions)
-    // to keep the behavior from Lottie 2.x - instead of failing to load the animation
-    guard hasSuffix(".json") else {
+    // Allow filenames to be passed with a ".json" extension (or its IANA-registered
+    // synonym ".lot") so the bundle lookup still works when the caller passes the
+    // extension as part of the name. Keeps the behavior from Lottie 2.x for .json
+    // and extends it to .lot per the `video/lottie+json` media type spec.
+    guard hasSuffix(".json") || hasSuffix(".lot") else {
       return self
     }
 
