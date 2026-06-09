@@ -67,8 +67,9 @@ final class SnapshotTests: XCTestCase {
 
       XCTAssert(
         Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).json") })
-          || Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).lottie") }),
-        "Snapshot \"\(snapshotURL.lastPathComponent)\" has no corresponding sample animation. Expecting \(animationName).json|.lottie"
+          || Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).lottie") })
+          || Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).lot") }),
+        "Snapshot \"\(snapshotURL.lastPathComponent)\" has no corresponding sample animation. Expecting \(animationName).json|.lottie|.lot"
       )
     }
   }
@@ -277,6 +278,7 @@ enum Samples {
   /// The list of sample animation files in `Tests/Samples`
   static let sampleAnimationURLs = Bundle.lottie.fileURLs(in: Samples.directoryName, withSuffix: "json")
     + Bundle.lottie.fileURLs(in: Samples.directoryName, withSuffix: "lottie")
+    + Bundle.lottie.fileURLs(in: Samples.directoryName, withSuffix: "lot")
 
   /// The list of sample animation names in `Tests/Samples`
   static let sampleAnimationNames = sampleAnimationURLs.lazy
@@ -293,6 +295,7 @@ enum Samples {
         .joined(separator: "/")
         .replacingOccurrences(of: ".json", with: "")
         .replacingOccurrences(of: ".lottie", with: "")
+        .replacingOccurrences(of: ".lot", with: "")
     }
 
   static func animation(named sampleAnimationName: String) -> LottieAnimation? {
