@@ -110,6 +110,9 @@
 		080DEFD32A95711400BE2D96 /* Entry+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E92A46150D00AB54BA /* Entry+Serialization.swift */; };
 		080DEFD42A95711400BE2D96 /* Archive+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E02A46150D00AB54BA /* Archive+Helpers.swift */; };
 		080DEFD52A95711800BE2D96 /* Archive+ReadingDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001EF2A46150D00AB54BA /* Archive+ReadingDeprecated.swift */; };
+		08D000112A95720000BE2D96 /* Archive+Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D000012A95720000BE2D96 /* Archive+Deprecated.swift */; };
+		08D000122A95720000BE2D96 /* Date+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D000022A95720000BE2D96 /* Date+ZIP.swift */; };
+		08D000132A95720000BE2D96 /* FileManager+ZIPDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D000032A95720000BE2D96 /* FileManager+ZIPDeprecated.swift */; };
 		080DEFD62A95711800BE2D96 /* Entry+ZIP64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001EE2A46150D00AB54BA /* Entry+ZIP64.swift */; };
 		080DEFD72A95711800BE2D96 /* FileManager+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001F12A46150D00AB54BA /* FileManager+ZIP.swift */; };
 		080DEFD82A95711800BE2D96 /* Archive+Writing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001EC2A46150D00AB54BA /* Archive+Writing.swift */; };
@@ -361,6 +364,9 @@
 		08C002002A46150D00AB54BA /* Data+CompressionDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001ED2A46150D00AB54BA /* Data+CompressionDeprecated.swift */; };
 		08C002012A46150D00AB54BA /* Entry+ZIP64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001EE2A46150D00AB54BA /* Entry+ZIP64.swift */; };
 		08C002022A46150D00AB54BA /* Archive+ReadingDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001EF2A46150D00AB54BA /* Archive+ReadingDeprecated.swift */; };
+		08D000212A95720000BE2D96 /* Archive+Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D000012A95720000BE2D96 /* Archive+Deprecated.swift */; };
+		08D000222A95720000BE2D96 /* Date+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D000022A95720000BE2D96 /* Date+ZIP.swift */; };
+		08D000232A95720000BE2D96 /* FileManager+ZIPDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D000032A95720000BE2D96 /* FileManager+ZIPDeprecated.swift */; };
 		08C002032A46150D00AB54BA /* Data+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001F02A46150D00AB54BA /* Data+Serialization.swift */; };
 		08C002042A46150D00AB54BA /* FileManager+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001F12A46150D00AB54BA /* FileManager+ZIP.swift */; };
 		08C002052A46150D00AB54BA /* Archive+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001F22A46150D00AB54BA /* Archive+Progress.swift */; };
@@ -382,6 +388,9 @@
 		08C002DE2A46196300AB54BA /* Archive+MemoryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E12A46150D00AB54BA /* Archive+MemoryFile.swift */; };
 		08C002DF2A46196300AB54BA /* Archive+Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E42A46150D00AB54BA /* Archive+Reading.swift */; };
 		08C002E02A46196300AB54BA /* Archive+ReadingDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001EF2A46150D00AB54BA /* Archive+ReadingDeprecated.swift */; };
+		08D000312A95720000BE2D96 /* Archive+Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D000012A95720000BE2D96 /* Archive+Deprecated.swift */; };
+		08D000322A95720000BE2D96 /* Date+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D000022A95720000BE2D96 /* Date+ZIP.swift */; };
+		08D000332A95720000BE2D96 /* FileManager+ZIPDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D000032A95720000BE2D96 /* FileManager+ZIPDeprecated.swift */; };
 		08C002E12A46196300AB54BA /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E72A46150D00AB54BA /* Data+Compression.swift */; };
 		08C002E22A46196300AB54BA /* Archive+BackingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E22A46150D00AB54BA /* Archive+BackingConfiguration.swift */; };
 		08C002E32A46196300AB54BA /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E32A46150D00AB54BA /* Archive.swift */; };
@@ -400,6 +409,9 @@
 		08C002F02A46196300AB54BA /* Archive+MemoryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E12A46150D00AB54BA /* Archive+MemoryFile.swift */; };
 		08C002F12A46196300AB54BA /* Archive+Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001E42A46150D00AB54BA /* Archive+Reading.swift */; };
 		08C002F22A46196300AB54BA /* Archive+ReadingDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C001EF2A46150D00AB54BA /* Archive+ReadingDeprecated.swift */; };
+		08D000412A95720000BE2D96 /* Archive+Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D000012A95720000BE2D96 /* Archive+Deprecated.swift */; };
+		08D000422A95720000BE2D96 /* Date+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D000022A95720000BE2D96 /* Date+ZIP.swift */; };
+		08D000432A95720000BE2D96 /* FileManager+ZIPDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D000032A95720000BE2D96 /* FileManager+ZIPDeprecated.swift */; };
 		08C002F52A461D6A00AB54BA /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C002F42A461D6A00AB54BA /* LottieView.swift */; };
 		08C002F62A461D6A00AB54BA /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C002F42A461D6A00AB54BA /* LottieView.swift */; };
 		08CB2681291ED2B700B4F071 /* AnimationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB2680291ED2B700B4F071 /* AnimationViewTests.swift */; };
@@ -1226,6 +1238,9 @@
 		08C001ED2A46150D00AB54BA /* Data+CompressionDeprecated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+CompressionDeprecated.swift"; sourceTree = "<group>"; };
 		08C001EE2A46150D00AB54BA /* Entry+ZIP64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Entry+ZIP64.swift"; sourceTree = "<group>"; };
 		08C001EF2A46150D00AB54BA /* Archive+ReadingDeprecated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+ReadingDeprecated.swift"; sourceTree = "<group>"; };
+		08D000012A95720000BE2D96 /* Archive+Deprecated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+Deprecated.swift"; sourceTree = "<group>"; };
+		08D000022A95720000BE2D96 /* Date+ZIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+ZIP.swift"; sourceTree = "<group>"; };
+		08D000032A95720000BE2D96 /* FileManager+ZIPDeprecated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+ZIPDeprecated.swift"; sourceTree = "<group>"; };
 		08C001F02A46150D00AB54BA /* Data+Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Serialization.swift"; sourceTree = "<group>"; };
 		08C001F12A46150D00AB54BA /* FileManager+ZIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+ZIP.swift"; sourceTree = "<group>"; };
 		08C001F22A46150D00AB54BA /* Archive+Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+Progress.swift"; sourceTree = "<group>"; };
@@ -1627,6 +1642,9 @@
 				08C001ED2A46150D00AB54BA /* Data+CompressionDeprecated.swift */,
 				08C001EE2A46150D00AB54BA /* Entry+ZIP64.swift */,
 				08C001EF2A46150D00AB54BA /* Archive+ReadingDeprecated.swift */,
+				08D000012A95720000BE2D96 /* Archive+Deprecated.swift */,
+				08D000022A95720000BE2D96 /* Date+ZIP.swift */,
+				08D000032A95720000BE2D96 /* FileManager+ZIPDeprecated.swift */,
 				08C001F02A46150D00AB54BA /* Data+Serialization.swift */,
 				08C001F12A46150D00AB54BA /* FileManager+ZIP.swift */,
 				08C001F22A46150D00AB54BA /* Archive+Progress.swift */,
@@ -2950,6 +2968,9 @@
 				080DEF922A9570DD00BE2D96 /* LottieAnimationCache.swift in Sources */,
 				080DF0622A95716D00BE2D96 /* LayerEffect.swift in Sources */,
 				080DEFD52A95711800BE2D96 /* Archive+ReadingDeprecated.swift in Sources */,
+				08D000112A95720000BE2D96 /* Archive+Deprecated.swift in Sources */,
+				08D000122A95720000BE2D96 /* Date+ZIP.swift in Sources */,
+				08D000132A95720000BE2D96 /* FileManager+ZIPDeprecated.swift in Sources */,
 				080DF0082A95712D00BE2D96 /* ImageCompositionLayer.swift in Sources */,
 				080DEFA52A9570FB00BE2D96 /* CallbackContextEpoxyModeled.swift in Sources */,
 				080DF00C2A95713000BE2D96 /* LayerTextProvider.swift in Sources */,
@@ -3165,6 +3186,9 @@
 				08E6CF932A86E29100A6D92F /* LottieViewType.swift in Sources */,
 				08C001F32A46150D00AB54BA /* Archive+Helpers.swift in Sources */,
 				08C002022A46150D00AB54BA /* Archive+ReadingDeprecated.swift in Sources */,
+				08D000212A95720000BE2D96 /* Archive+Deprecated.swift in Sources */,
+				08D000222A95720000BE2D96 /* Date+ZIP.swift in Sources */,
+				08D000232A95720000BE2D96 /* FileManager+ZIPDeprecated.swift in Sources */,
 				2E9C96512822F43100677516 /* PreCompositionLayer.swift in Sources */,
 				2EAF5AF227A0798700E00531 /* AnyValueProvider.swift in Sources */,
 				2E9C96632822F43100677516 /* CoreTextRenderLayer.swift in Sources */,
@@ -3344,6 +3368,9 @@
 				08C002D82A46196300AB54BA /* Data+Serialization.swift in Sources */,
 				08E207582A56014E002DCE17 /* EpoxyModelProperty.swift in Sources */,
 				08C002E02A46196300AB54BA /* Archive+ReadingDeprecated.swift in Sources */,
+				08D000312A95720000BE2D96 /* Archive+Deprecated.swift in Sources */,
+				08D000322A95720000BE2D96 /* Date+ZIP.swift in Sources */,
+				08D000332A95720000BE2D96 /* FileManager+ZIPDeprecated.swift in Sources */,
 				08E207342A56014E002DCE17 /* ErasedContentProviding.swift in Sources */,
 				6D99D6442823790700E5205B /* LegacyGradientFillRenderer.swift in Sources */,
 				2EAF5B0527A0798700E00531 /* AnimationFontProvider.swift in Sources */,
@@ -3897,6 +3924,9 @@
 				2E9C96142822F43100677516 /* DashPattern.swift in Sources */,
 				2E9C960E2822F43100677516 /* ShapeLayerModel.swift in Sources */,
 				08C002F22A46196300AB54BA /* Archive+ReadingDeprecated.swift in Sources */,
+				08D000412A95720000BE2D96 /* Archive+Deprecated.swift in Sources */,
+				08D000422A95720000BE2D96 /* Date+ZIP.swift in Sources */,
+				08D000432A95720000BE2D96 /* FileManager+ZIPDeprecated.swift in Sources */,
 				2E9C970A2822F43100677516 /* CompatibilityTracker.swift in Sources */,
 				08C002E52A46196300AB54BA /* Archive+Writing.swift in Sources */,
 				85D3C1C42A05E453829E9C8C /* CompatibleFontProvider.swift in Sources */,

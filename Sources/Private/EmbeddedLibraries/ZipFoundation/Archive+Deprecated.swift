@@ -9,15 +9,15 @@ import Foundation
 
 extension Archive {
 
-    @available(*, deprecated, message: "Please use the throwing initializer.")
-    convenience init?(url: URL, accessMode mode: AccessMode, preferredEncoding: String.Encoding? = nil) {
-        try? self.init(url: url, accessMode: mode, pathEncoding: preferredEncoding)
-    }
+  @available(*, deprecated, message: "Please use the throwing initializer.")
+  convenience init?(url: URL, accessMode mode: AccessMode, preferredEncoding: String.Encoding? = nil) {
+    try? self.init(url: url, accessMode: mode, pathEncoding: preferredEncoding)
+  }
 
-#if swift(>=5.0)
-    @available(*, deprecated, message: "Please use the throwing initializer.")
-    convenience init?(data: Data = Data(), accessMode mode: AccessMode, preferredEncoding: String.Encoding? = nil) {
-        try? self.init(data: data, accessMode: mode, pathEncoding: preferredEncoding)
-    }
-#endif
+  #if swift(>=5.0)
+  @available(*, deprecated, message: "Please use the throwing initializer.")
+  convenience init?(data: Data = Data(), accessMode mode: AccessMode, preferredEncoding: String.Encoding? = nil) {
+    try? self.init(data: data, accessMode: mode, pathEncoding: preferredEncoding)
+  }
+  #endif
 }
