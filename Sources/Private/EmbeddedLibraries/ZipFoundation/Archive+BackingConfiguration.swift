@@ -2,7 +2,7 @@
 //  Archive+BackingConfiguration.swift
 //  ZIPFoundation
 //
-//  Copyright © 2017-2021 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
+//  Copyright © 2017-2025 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
 //  Released under the MIT License.
 //
 //  See https://github.com/weichsel/ZIPFoundation/blob/master/LICENSE for license information.
@@ -16,7 +16,6 @@ extension Archive {
     let file: FILEPointer
     let endOfCentralDirectoryRecord: EndOfCentralDirectoryRecord
     let zip64EndOfCentralDirectory: ZIP64EndOfCentralDirectory?
-
     #if swift(>=5.0)
     let memoryFile: MemoryFile?
 
@@ -45,18 +44,19 @@ extension Archive {
     #endif
   }
 
-  static func makeBackingConfiguration(for url: URL, mode: AccessMode)
-    -> BackingConfiguration?
+  static func makeBackingConfiguration(for url: URL, mode: AccessMode) throws
+    -> BackingConfiguration
   {
     let fileManager = FileManager()
     switch mode {
     case .read:
       let fileSystemRepresentation = fileManager.fileSystemRepresentation(withPath: url.path)
-      guard
-        let archiveFile = fopen(fileSystemRepresentation, "rb"),
-        let (eocdRecord, zip64EOCD) = Archive.scanForEndOfCentralDirectoryRecord(in: archiveFile)
-      else {
-        return nil
+      guard let archiveFile = fopen(fileSystemRepresentation, "rb") else {
+        throw POSIXError(errno, path: url.path)
+      }
+      guard let (eocdRecord, zip64EOCD) = Archive.scanForEndOfCentralDirectoryRecord(in: archiveFile) else {
+        fclose(archiveFile)
+        throw ArchiveError.missingEndOfCentralDirectoryRecord
       }
       return BackingConfiguration(
         file: archiveFile,
@@ -75,18 +75,17 @@ extension Archive {
         zipFileCommentLength: 0,
         zipFileCommentData: Data()
       )
-      do {
-        try endOfCentralDirectoryRecord.data.write(to: url, options: .withoutOverwriting)
-      } catch { return nil }
+      try endOfCentralDirectoryRecord.data.write(to: url, options: .withoutOverwriting)
       fallthrough
 
     case .update:
       let fileSystemRepresentation = fileManager.fileSystemRepresentation(withPath: url.path)
-      guard
-        let archiveFile = fopen(fileSystemRepresentation, "rb+"),
-        let (eocdRecord, zip64EOCD) = Archive.scanForEndOfCentralDirectoryRecord(in: archiveFile)
-      else {
-        return nil
+      guard let archiveFile = fopen(fileSystemRepresentation, "rb+") else {
+        throw POSIXError(errno, path: url.path)
+      }
+      guard let (eocdRecord, zip64EOCD) = Archive.scanForEndOfCentralDirectoryRecord(in: archiveFile) else {
+        fclose(archiveFile)
+        throw ArchiveError.missingEndOfCentralDirectoryRecord
       }
       fseeko(archiveFile, 0, SEEK_SET)
       return BackingConfiguration(
@@ -98,22 +97,15 @@ extension Archive {
   }
 
   #if swift(>=5.0)
-  static func makeBackingConfiguration(for data: Data, mode: AccessMode)
-    -> BackingConfiguration?
+  static func makeBackingConfiguration(for data: Data, mode: AccessMode) throws
+    -> BackingConfiguration
   {
-    let posixMode =
-      switch mode {
-      case .read: "rb"
-      case .create: "wb+"
-      case .update: "rb+"
-      }
     let memoryFile = MemoryFile(data: data)
-    guard let archiveFile = memoryFile.open(mode: posixMode) else { return nil }
-
+    let archiveFile = try memoryFile.open(mode: mode)
     switch mode {
     case .read:
       guard let (eocdRecord, zip64EOCD) = Archive.scanForEndOfCentralDirectoryRecord(in: archiveFile) else {
-        return nil
+        throw ArchiveError.missingEndOfCentralDirectoryRecord
       }
 
       return BackingConfiguration(
@@ -141,7 +133,7 @@ extension Archive {
 
     case .update:
       guard let (eocdRecord, zip64EOCD) = Archive.scanForEndOfCentralDirectoryRecord(in: archiveFile) else {
-        return nil
+        throw ArchiveError.missingEndOfCentralDirectoryRecord
       }
 
       fseeko(archiveFile, 0, SEEK_SET)

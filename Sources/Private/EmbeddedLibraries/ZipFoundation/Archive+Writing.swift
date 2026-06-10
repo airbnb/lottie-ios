@@ -2,7 +2,7 @@
 //  Archive+Writing.swift
 //  ZIPFoundation
 //
-//  Copyright © 2017-2021 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
+//  Copyright © 2017-2025 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
 //  Released under the MIT License.
 //
 //  See https://github.com/weichsel/ZIPFoundation/blob/master/LICENSE for license information.
@@ -71,7 +71,7 @@ extension Archive {
     let type = try FileManager.typeForItem(at: fileURL)
     // symlinks do not need to be readable
     guard type == .symlink || fileManager.isReadableFile(atPath: fileURL.path) else {
-      throw CocoaError(.fileReadNoPermission, userInfo: [NSFilePathErrorKey: url.path])
+      throw CocoaError(.fileReadNoPermission, userInfo: [NSFilePathErrorKey: fileURL.path])
     }
     let modDate = try FileManager.fileModificationDateTimeForItem(at: fileURL)
     let uncompressedSize = type == .directory ? 0 : try FileManager.fileSizeForItem(at: fileURL)
@@ -81,7 +81,7 @@ extension Archive {
     case .file:
       let entryFileSystemRepresentation = fileManager.fileSystemRepresentation(withPath: fileURL.path)
       guard let entryFile: FILEPointer = fopen(entryFileSystemRepresentation, "rb") else {
-        throw CocoaError(.fileNoSuchFile)
+        throw POSIXError(errno, path: url.path)
       }
       defer { fclose(entryFile) }
       provider = { _, _ in try Data.readChunk(of: bufferSize, from: entryFile) }
@@ -173,6 +173,8 @@ extension Archive {
     let existingData = try Data.readChunk(of: Int(existingSize), from: archiveFile)
     fseeko(archiveFile, off_t(startOfCD), SEEK_SET)
     let fileHeaderStart = Int64(ftello(archiveFile))
+    guard fileHeaderStart >= 0 else { throw ArchiveError.unwritableArchive }
+
     let modDateTime = modificationDate.fileModificationDateTime
     defer { fflush(self.archiveFile) }
     do {
@@ -194,6 +196,8 @@ extension Archive {
         provider: provider
       )
       startOfCD = Int64(ftello(archiveFile))
+      guard startOfCD >= 0 else { throw ArchiveError.unwritableArchive }
+
       // Write the local file header a second time. Now with compressedSize (if applicable) and a valid checksum.
       fseeko(archiveFile, off_t(fileHeaderStart), SEEK_SET)
       localFileHeader = try writeLocalFileHeader(
@@ -214,13 +218,16 @@ extension Archive {
         externalFileAttributes: externalAttributes
       )
       // End of Central Directory Record (including ZIP64 End of Central Directory Record/Locator)
-      let startOfEOCD = UInt64(ftello(archiveFile))
-      let eocd = try writeEndOfCentralDirectory(
-        centralDirectoryStructure: centralDir,
-        startOfCentralDirectory: UInt64(startOfCD),
-        startOfEndOfCentralDirectory: startOfEOCD,
-        operation: .add
-      )
+      let startOfEOCD = Int64(ftello(archiveFile))
+      guard startOfEOCD >= 0 else { throw ArchiveError.unwritableArchive }
+
+      let eocd = try
+        writeEndOfCentralDirectory(
+          centralDirectoryStructure: centralDir,
+          startOfCentralDirectory: UInt64(startOfCD),
+          startOfEndOfCentralDirectory: UInt64(startOfEOCD),
+          operation: .add
+        )
       (endOfCentralDirectoryRecord, zip64EndOfCentralDirectory) = eocd
     } catch ArchiveError.cancelledOperation {
       try rollback(UInt64(fileHeaderStart), (existingData, existingSize), bufferSize, eocdRecord, zip64EOCD)
@@ -248,7 +255,7 @@ extension Archive {
         let entryStart = cds.effectiveRelativeOffsetOfLocalHeader
         fseeko(archiveFile, off_t(entryStart), SEEK_SET)
         let provider: Provider = { _, chunkSize -> Data in
-          try Data.readChunk(of: chunkSize, from: self.archiveFile)
+          return try Data.readChunk(of: chunkSize, from: self.archiveFile)
         }
         let consumer: Consumer = {
           if progress?.isCancelled == true { throw ArchiveError.cancelledOperation }
@@ -269,16 +276,20 @@ extension Archive {
         centralDirectoryData.append(updatedCentralDirectory.data)
       } else { offset = currentEntry.localSize }
     }
-    let startOfCentralDirectory = UInt64(ftello(tempArchive.archiveFile))
+    let startOfCentralDirectory = Int64(ftello(tempArchive.archiveFile))
+    guard startOfCentralDirectory >= 0 else { throw ArchiveError.unwritableArchive }
+
     _ = try Data.write(chunk: centralDirectoryData, to: tempArchive.archiveFile)
-    let startOfEndOfCentralDirectory = UInt64(ftello(tempArchive.archiveFile))
+    let startOfEndOfCentralDirectory = Int64(ftello(tempArchive.archiveFile))
+    guard startOfEndOfCentralDirectory >= 0 else { throw ArchiveError.unwritableArchive }
+
     tempArchive.endOfCentralDirectoryRecord = endOfCentralDirectoryRecord
     tempArchive.zip64EndOfCentralDirectory = zip64EndOfCentralDirectory
     let ecodStructure = try
       tempArchive.writeEndOfCentralDirectory(
         centralDirectoryStructure: entry.centralDirectoryStructure,
-        startOfCentralDirectory: startOfCentralDirectory,
-        startOfEndOfCentralDirectory: startOfEndOfCentralDirectory,
+        startOfCentralDirectory: UInt64(startOfCentralDirectory),
+        startOfEndOfCentralDirectory: UInt64(startOfEndOfCentralDirectory),
         operation: .remove
       )
     (tempArchive.endOfCentralDirectoryRecord, tempArchive.zip64EndOfCentralDirectory) = ecodStructure
@@ -288,15 +299,13 @@ extension Archive {
   }
 
   func replaceCurrentArchive(with archive: Archive) throws {
-    fclose(archiveFile)
     if isMemoryArchive {
       #if swift(>=5.0)
-      guard
-        let data = archive.data,
-        let config = Archive.makeBackingConfiguration(for: data, mode: .update)
-      else {
+      guard let data = archive.data else {
         throw ArchiveError.unwritableArchive
       }
+
+      let config = try Archive.makeBackingConfiguration(for: data, mode: .update)
       archiveFile = config.file
       memoryFile = config.memoryFile
       endOfCentralDirectoryRecord = config.endOfCentralDirectoryRecord
@@ -304,7 +313,7 @@ extension Archive {
       #endif
     } else {
       let fileManager = FileManager()
-      #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+      #if os(macOS) || os(iOS) || os(tvOS) || os(visionOS) || os(watchOS)
       do {
         _ = try fileManager.replaceItemAt(url, withItemAt: archive.url)
       } catch {
@@ -317,6 +326,7 @@ extension Archive {
       #endif
       let fileSystemRepresentation = fileManager.fileSystemRepresentation(withPath: url.path)
       guard let file = fopen(fileSystemRepresentation, "rb+") else { throw ArchiveError.unreadableArchive }
+
       archiveFile = file
     }
   }
@@ -370,16 +380,11 @@ extension Archive {
     var url: URL?
     if isMemoryArchive {
       #if swift(>=5.0)
-      guard
-        let tempArchive = Archive(
-          data: Data(),
-          accessMode: .create,
-          preferredEncoding: preferredEncoding
-        )
-      else {
-        throw ArchiveError.unwritableArchive
-      }
-      archive = tempArchive
+      archive = try Archive(
+        data: Data(),
+        accessMode: .create,
+        pathEncoding: pathEncoding
+      )
       #else
       fatalError("Memory archives are unsupported.")
       #endif
@@ -389,9 +394,7 @@ extension Archive {
       let uniqueString = ProcessInfo.processInfo.globallyUniqueString
       let tempArchiveURL = tempDir.appendingPathComponent(uniqueString)
       try manager.createParentDirectoryStructure(for: tempArchiveURL)
-      guard let tempArchive = Archive(url: tempArchiveURL, accessMode: .create) else {
-        throw ArchiveError.unwritableArchive
-      }
+      let tempArchive = try Archive(url: tempArchiveURL, accessMode: .create)
       archive = tempArchive
       url = tempDir
     }

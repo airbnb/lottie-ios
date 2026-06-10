@@ -2,7 +2,7 @@
 //  Archive+MemoryFile.swift
 //  ZIPFoundation
 //
-//  Copyright © 2017-2021 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
+//  Copyright © 2017-2025 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
 //  Released under the MIT License.
 //
 //  See https://github.com/weichsel/ZIPFoundation/blob/master/LICENSE for license information.
@@ -19,49 +19,53 @@ extension Archive {
 #if swift(>=5.0)
 
 extension Archive {
+
+  final class MemoryFile {
+
+    // MARK: Lifecycle
+
+    init(data: Data = Data()) {
+      self.data = data
+    }
+
+    // MARK: Internal
+
+    private(set) var data: Data
+
+    func open(mode: AccessMode) throws -> FILEPointer {
+      let cookie = Unmanaged.passRetained(self)
+      #if os(macOS) || os(iOS) || os(tvOS) || os(visionOS) || os(watchOS) || os(Android)
+      guard
+        let result = mode.isWritable
+        ? funopen(cookie.toOpaque(), readStub, writeStub, seekStub, closeStub)
+        : funopen(cookie.toOpaque(), readStub, nil, seekStub, closeStub)
+      else { throw MemoryFileError.invalidMemoryFile }
+      #else
+      let stubs = cookie_io_functions_t(read: readStub, write: writeStub, seek: seekStub, close: closeStub)
+      guard let result = fopencookie(cookie.toOpaque(), mode.posixMode, stubs)
+      else { throw MemoryFileError.invalidMemoryFile }
+      #endif
+      return result
+    }
+
+    // MARK: Private
+
+    private var offset = 0
+
+  }
+
   /// Returns a `Data` object containing a representation of the receiver.
   var data: Data? {
     memoryFile?.data
   }
 }
 
-final class MemoryFile {
-
-  // MARK: Lifecycle
-
-  init(data: Data = Data()) {
-    self.data = data
-  }
-
-  // MARK: Internal
-
-  private(set) var data: Data
-
-  func open(mode: String) -> FILEPointer? {
-    let cookie = Unmanaged.passRetained(self)
-    let writable = mode.count > 0 && (mode.first! != "r" || mode.last! == "+")
-    let append = mode.count > 0 && mode.first! == "a"
-    #if os(macOS) || canImport(UIKit) || os(Android)
-    let result = writable
-      ? funopen(cookie.toOpaque(), readStub, writeStub, seekStub, closeStub)
-      : funopen(cookie.toOpaque(), readStub, nil, seekStub, closeStub)
-    #else
-    let stubs = cookie_io_functions_t(read: readStub, write: writeStub, seek: seekStub, close: closeStub)
-    let result = fopencookie(cookie.toOpaque(), mode, stubs)
-    #endif
-    if append {
-      fseeko(result, 0, SEEK_END)
-    }
-    return result
-  }
-
-  // MARK: Private
-
-  private var offset = 0
-
+enum MemoryFileError: Error {
+  case invalidMemoryFile
 }
 
-extension MemoryFile {
+extension Archive.MemoryFile {
+
   fileprivate func readData(buffer: UnsafeMutableRawBufferPointer) -> Int {
     let size = min(buffer.count, data.count - offset)
     let start = data.startIndex
@@ -81,7 +85,10 @@ extension MemoryFile {
       data.append(buffer.bindMemory(to: UInt8.self))
     } else {
       let start = data.startIndex // May have changed in earlier mutation
-      data.replaceSubrange(start + offset..<start + offset + buffer.count, with: buffer.bindMemory(to: UInt8.self))
+      data.replaceSubrange(
+        start + offset..<start + offset + buffer.count,
+        with: buffer.bindMemory(to: UInt8.self)
+      )
     }
     offset += buffer.count
     return buffer.count
@@ -101,18 +108,19 @@ extension MemoryFile {
   }
 }
 
-private func fileFromCookie(cookie: UnsafeRawPointer) -> MemoryFile {
-  Unmanaged<MemoryFile>.fromOpaque(cookie).takeUnretainedValue()
+private func fileFromCookie(cookie: UnsafeRawPointer) -> Archive.MemoryFile {
+  Unmanaged<Archive.MemoryFile>.fromOpaque(cookie).takeUnretainedValue()
 }
 
 private func closeStub(_ cookie: UnsafeMutableRawPointer?) -> Int32 {
   if let cookie {
-    Unmanaged<MemoryFile>.fromOpaque(cookie).release()
+    Unmanaged<Archive.MemoryFile>.fromOpaque(cookie).release()
   }
   return 0
 }
 
-#if os(macOS) || canImport(UIKit) || os(Android)
+#if os(macOS) || os(iOS) || os(tvOS) || os(visionOS) || os(watchOS) || os(Android)
+
 private func readStub(
   _ cookie: UnsafeMutableRawPointer?,
   _ bytePtr: UnsafeMutablePointer<Int8>?,
@@ -145,6 +153,18 @@ private func seekStub(
 }
 
 #else
+
+extension Archive.AccessMode {
+
+  var posixMode: String {
+    switch self {
+    case .read: "rb"
+    case .create: "wb+"
+    case .update: "rb+"
+    }
+  }
+}
+
 private func readStub(
   _ cookie: UnsafeMutableRawPointer?,
   _ bytePtr: UnsafeMutablePointer<Int8>?,

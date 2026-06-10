@@ -2,7 +2,7 @@
 //  Archive+Helpers.swift
 //  ZIPFoundation
 //
-//  Copyright © 2017-2021 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
+//  Copyright © 2017-2025 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
 //  Released under the MIT License.
 //
 //  See https://github.com/weichsel/ZIPFoundation/blob/master/LICENSE for license information.
@@ -26,7 +26,7 @@ extension Archive {
       chunkSize: bufferSize,
       skipCRC32: skipCRC32,
       provider: { _, chunkSize -> Data in
-        try Data.readChunk(of: chunkSize, from: self.archiveFile)
+        return try Data.readChunk(of: chunkSize, from: self.archiveFile)
       },
       consumer: { data in
         if progress?.isCancelled == true { throw ArchiveError.cancelledOperation }
@@ -50,7 +50,7 @@ extension Archive {
       bufferSize: bufferSize,
       skipCRC32: skipCRC32,
       provider: { _, chunkSize -> Data in
-        try Data.readChunk(of: chunkSize, from: self.archiveFile)
+        return try Data.readChunk(of: chunkSize, from: self.archiveFile)
       },
       consumer: { data in
         if progress?.isCancelled == true { throw ArchiveError.cancelledOperation }
@@ -113,8 +113,7 @@ extension Archive {
     modificationDateTime: (UInt16, UInt16)
   ) throws -> LocalFileHeader {
     // We always set Bit 11 in generalPurposeBitFlag, which indicates an UTF-8 encoded path.
-    guard let fileNameData = path.data(using: .utf8) else { throw ArchiveError.invalidEntryPath }
-
+    let fileNameData = Data(path.utf8)
     var uncompressedSizeOfLFH = UInt32(0)
     var compressedSizeOfLFH = UInt32(0)
     var extraFieldLength = UInt16(0)

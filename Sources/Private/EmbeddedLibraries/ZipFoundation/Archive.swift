@@ -2,7 +2,7 @@
 //  Archive.swift
 //  ZIPFoundation
 //
-//  Copyright © 2017-2021 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
+//  Copyright © 2017-2025 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
 //  Released under the MIT License.
 //
 //  See https://github.com/weichsel/ZIPFoundation/blob/master/LICENSE for license information.
@@ -66,22 +66,20 @@ final class Archive: Sequence {
   /// - Parameters:
   ///   - url: File URL to the receivers backing file.
   ///   - mode: Access mode of the receiver.
-  ///   - preferredEncoding: Encoding for entry paths. Overrides the encoding specified in the archive.
-  ///                        This encoding is only used when _decoding_ paths from the receiver.
-  ///                        Paths of entries added with `addEntry` are always UTF-8 encoded.
+  ///   - pathEncoding: Encoding for entry paths. Overrides the encoding specified in the archive.
+  ///                   This encoding is only used when _decoding_ paths from the receiver.
+  ///                   Paths of entries added with `addEntry` are always UTF-8 encoded.
   /// - Returns: An archive initialized with a backing file at the passed in file URL and the given access mode
   ///   or `nil` if the following criteria are not met:
   /// - Note:
   ///   - The file URL _must_ point to an existing file for `AccessMode.read`.
   ///   - The file URL _must_ point to a non-existing file for `AccessMode.create`.
   ///   - The file URL _must_ point to an existing file for `AccessMode.update`.
-  init?(url: URL, accessMode mode: AccessMode, preferredEncoding: String.Encoding? = nil) {
+  init(url: URL, accessMode mode: AccessMode, pathEncoding: String.Encoding? = nil) throws {
     self.url = url
     accessMode = mode
-    self.preferredEncoding = preferredEncoding
-    guard let config = Archive.makeBackingConfiguration(for: url, mode: mode) else {
-      return nil
-    }
+    self.pathEncoding = pathEncoding
+    let config = try Archive.makeBackingConfiguration(for: url, mode: mode)
     archiveFile = config.file
     endOfCentralDirectoryRecord = config.endOfCentralDirectoryRecord
     zip64EndOfCentralDirectory = config.zip64EndOfCentralDirectory
@@ -129,6 +127,8 @@ final class Archive: Sequence {
     case invalidCentralDirectoryEntryCount
     /// Thrown when an archive does not contain the required End of Central Directory Record.
     case missingEndOfCentralDirectoryRecord
+    /// Thrown when an entry contains a symlink pointing to a path outside the destination directory.
+    case uncontainedSymlink
   }
 
   /// The access mode for an `Archive`.
@@ -139,6 +139,11 @@ final class Archive: Sequence {
     case read
     /// Indicates that a newly instantiated `Archive` should update an existing backing file.
     case update
+
+    /// Indicates that the archive can be written to.
+    var isWritable: Bool {
+      self != .read
+    }
   }
 
   /// The version of an `Archive`
@@ -167,10 +172,9 @@ final class Archive: Sequence {
   let url: URL
   /// Access mode for an archive file.
   let accessMode: AccessMode
-  var archiveFile: FILEPointer
   var endOfCentralDirectoryRecord: EndOfCentralDirectoryRecord
   var zip64EndOfCentralDirectory: ZIP64EndOfCentralDirectory?
-  var preferredEncoding: String.Encoding?
+  var pathEncoding: String.Encoding?
 
   #if swift(>=5.0)
   var memoryFile: MemoryFile?
@@ -182,30 +186,31 @@ final class Archive: Sequence {
   /// - Parameters:
   ///   - data: `Data` object used as backing for in-memory archives.
   ///   - mode: Access mode of the receiver.
-  ///   - preferredEncoding: Encoding for entry paths. Overrides the encoding specified in the archive.
-  ///                        This encoding is only used when _decoding_ paths from the receiver.
-  ///                        Paths of entries added with `addEntry` are always UTF-8 encoded.
+  ///   - pathEncoding: Encoding for entry paths. Overrides the encoding specified in the archive.
+  ///                   This encoding is only used when _decoding_ paths from the receiver.
+  ///                   Paths of entries added with `addEntry` are always UTF-8 encoded.
   /// - Returns: An in-memory archive initialized with passed in backing data.
   /// - Note:
   ///   - The backing `data` _must_ contain a valid ZIP archive for `AccessMode.read` and `AccessMode.update`.
   ///   - The backing `data` _must_ be empty (or omitted) for `AccessMode.create`.
-  init?(data: Data = Data(), accessMode mode: AccessMode, preferredEncoding: String.Encoding? = nil) {
-    guard
-      let url = URL(string: "\(memoryURLScheme)://"),
-      let config = Archive.makeBackingConfiguration(for: data, mode: mode)
-    else {
-      return nil
-    }
-
+  init(data: Data = Data(), accessMode mode: AccessMode, pathEncoding: String.Encoding? = nil) throws {
+    let url = URL(string: "\(memoryURLScheme)://")!
     self.url = url
     accessMode = mode
-    self.preferredEncoding = preferredEncoding
+    self.pathEncoding = pathEncoding
+    let config = try Archive.makeBackingConfiguration(for: data, mode: mode)
     archiveFile = config.file
     memoryFile = config.memoryFile
     endOfCentralDirectoryRecord = config.endOfCentralDirectoryRecord
     zip64EndOfCentralDirectory = config.zip64EndOfCentralDirectory
   }
   #endif
+
+  var archiveFile: FILEPointer {
+    willSet {
+      fclose(archiveFile)
+    }
+  }
 
   var totalNumberOfEntriesInCentralDirectory: UInt64 {
     zip64EndOfCentralDirectory?.record.totalNumberOfEntriesInCentralDirectory
@@ -229,6 +234,8 @@ final class Archive: Sequence {
     var index = minEndOfCentralDirectoryOffset
     fseeko(file, 0, SEEK_END)
     let archiveLength = Int64(ftello(file))
+    guard archiveLength >= 0 else { return nil }
+
     while eocdOffset == 0, index <= archiveLength {
       fseeko(file, off_t(archiveLength - index), SEEK_SET)
       var potentialDirectoryEndTag = UInt32()
@@ -307,7 +314,7 @@ final class Archive: Sequence {
   /// - Parameter path: A relative file path identifying the corresponding `Entry`.
   /// - Returns: An `Entry` with the given `path`. Otherwise, `nil`.
   subscript(path: String) -> Entry? {
-    if let encoding = preferredEncoding {
+    if let encoding = pathEncoding {
       return first { $0.path(using: encoding) == path }
     }
     return first { $0.path == path }
@@ -318,14 +325,11 @@ final class Archive: Sequence {
   private static func scanForZIP64EndOfCentralDirectory(in file: FILEPointer, eocdOffset: UInt64)
     -> ZIP64EndOfCentralDirectory?
   {
-    guard UInt64(ZIP64EndOfCentralDirectoryLocator.size) < eocdOffset else {
-      return nil
-    }
-    let locatorOffset = eocdOffset - UInt64(ZIP64EndOfCentralDirectoryLocator.size)
+    guard UInt64(ZIP64EndOfCentralDirectoryLocator.size) < eocdOffset else { return nil }
 
-    guard UInt64(ZIP64EndOfCentralDirectoryRecord.size) < locatorOffset else {
-      return nil
-    }
+    let locatorOffset = eocdOffset - UInt64(ZIP64EndOfCentralDirectoryLocator.size)
+    guard UInt64(ZIP64EndOfCentralDirectoryRecord.size) < locatorOffset else { return nil }
+
     let recordOffset = locatorOffset - UInt64(ZIP64EndOfCentralDirectoryRecord.size)
     guard
       let locator: ZIP64EndOfCentralDirectoryLocator = Data.readStruct(from: file, at: locatorOffset),

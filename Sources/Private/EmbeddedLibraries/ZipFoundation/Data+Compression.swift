@@ -2,7 +2,7 @@
 //  Data+Compression.swift
 //  ZIPFoundation
 //
-//  Copyright © 2017-2021 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
+//  Copyright © 2017-2025 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
 //  Released under the MIT License.
 //
 //  See https://github.com/weichsel/ZIPFoundation/blob/master/LICENSE for license information.
@@ -53,7 +53,7 @@ extension Data {
   ///   - consumer: A closure that processes the result of the compress operation.
   /// - Returns: The checksum of the processed content.
   static func compress(size: Int64, bufferSize: Int, provider: Provider, consumer: Consumer) throws -> CRC32 {
-    #if os(macOS) || canImport(UIKit)
+    #if os(macOS) || os(iOS) || os(tvOS) || os(visionOS) || os(watchOS)
     return try process(
       operation: COMPRESSION_STREAM_ENCODE,
       size: size,
@@ -81,7 +81,7 @@ extension Data {
     provider: Provider,
     consumer: Consumer
   ) throws -> CRC32 {
-    #if os(macOS) || canImport(UIKit)
+    #if os(macOS) || os(iOS) || os(tvOS) || os(visionOS) || os(watchOS)
     return try process(
       operation: COMPRESSION_STREAM_DECODE,
       size: size,
@@ -114,7 +114,7 @@ extension Data {
 
 // MARK: - Apple Platforms
 
-#if os(macOS) || canImport(UIKit)
+#if os(macOS) || os(iOS) || os(tvOS) || os(visionOS) || os(watchOS)
 import Compression
 
 extension Data {
@@ -616,7 +616,7 @@ extension Data {
     }
   }
 
-  #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+  #if os(macOS) || os(iOS) || os(tvOS) || os(visionOS) || os(watchOS)
   #else
   mutating func withUnsafeMutableBytes<T>(_ body: (UnsafeMutableRawBufferPointer) throws -> T) rethrows -> T {
     let count = count

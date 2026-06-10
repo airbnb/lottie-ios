@@ -2,7 +2,7 @@
 //  Data+Serialization.swift
 //  ZIPFoundation
 //
-//  Copyright © 2017-2021 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
+//  Copyright © 2017-2025 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
 //  Released under the MIT License.
 //
 //  See https://github.com/weichsel/ZIPFoundation/blob/master/LICENSE for license information.
@@ -41,7 +41,7 @@ extension Data {
       return nil
     }
     return T(data: data, additionalDataProvider: { additionalDataSize -> Data in
-      try self.readChunk(of: additionalDataSize, from: file)
+      return try self.readChunk(of: additionalDataSize, from: file)
     })
   }
 
@@ -84,6 +84,7 @@ extension Data {
     let bytesRead = fread(bytes, 1, size, file)
     let error = ferror(file)
     if error > 0 {
+      bytes.deallocate()
       throw DataError.unreadableFile
     }
     #if swift(>=4.1)
@@ -137,12 +138,9 @@ extension Data {
   }
 
   func scanValue<T>(start: Int) -> T {
-    let subdata = subdata(in: start..<start + MemoryLayout<T>.size)
-    #if swift(>=5.0)
-    return subdata.withUnsafeBytes { $0.load(as: T.self) }
-    #else
-    return subdata.withUnsafeBytes { $0.pointee }
-    #endif
+    withUnsafeBytes {
+      $0.loadUnaligned(fromByteOffset: start, as: T.self)
+    }
   }
 
 }

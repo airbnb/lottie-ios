@@ -2,7 +2,7 @@
 //  Entry+ZIP64.swift
 //  ZIPFoundation
 //
-//  Copyright © 2017-2021 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
+//  Copyright © 2017-2025 Thomas Zoechling, https://www.peakstep.com and the ZIP Foundation project authors.
 //  Released under the MIT License.
 //
 //  See https://github.com/weichsel/ZIPFoundation/blob/master/LICENSE for license information.
@@ -18,8 +18,10 @@ protocol ExtensibleDataField {
 }
 
 extension Entry {
+
   enum EntryError: Error {
-    case invalidDataError
+    case missingPermissionsAttributeError
+    case missingModificationDateAttributeError
   }
 
   struct ZIP64ExtendedInformation: ExtensibleDataField {
@@ -71,29 +73,23 @@ extension Entry.ZIP64ExtendedInformation {
   init?(data: Data, fields: [Field]) {
     let headerLength = 4
     guard fields.reduce(0, { $0 + $1.size }) + headerLength == data.count else { return nil }
+
     var readOffset = headerLength
-    func value<T: BinaryInteger>(of field: Field) throws -> T {
-      if fields.contains(field) {
-        defer {
-          readOffset += MemoryLayout<T>.size
-        }
-        guard readOffset + field.size <= data.count else {
-          throw Entry.EntryError.invalidDataError
-        }
+    func value<T: BinaryInteger>(of field: Field) -> T {
+      if fields.contains(field), readOffset + field.size <= data.count {
+        defer { readOffset += MemoryLayout<T>.size }
+
         return data.scanValue(start: readOffset)
       } else {
         return 0
       }
     }
-    do {
-      dataSize = data.scanValue(start: 2)
-      uncompressedSize = try value(of: .uncompressedSize)
-      compressedSize = try value(of: .compressedSize)
-      relativeOffsetOfLocalHeader = try value(of: .relativeOffsetOfLocalHeader)
-      diskNumberStart = try value(of: .diskNumberStart)
-    } catch {
-      return nil
-    }
+
+    dataSize = data.scanValue(start: 2)
+    uncompressedSize = value(of: .uncompressedSize)
+    compressedSize = value(of: .compressedSize)
+    relativeOffsetOfLocalHeader = value(of: .relativeOffsetOfLocalHeader)
+    diskNumberStart = value(of: .diskNumberStart)
   }
 
   init?(zip64ExtendedInformation: Entry.ZIP64ExtendedInformation?, offset: UInt64) {
