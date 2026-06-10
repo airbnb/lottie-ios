@@ -67,22 +67,25 @@ final class SnapshotTests: XCTestCase {
 
       XCTAssert(
         Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).json") })
-          || Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).lottie") }),
-        "Snapshot \"\(snapshotURL.lastPathComponent)\" has no corresponding sample animation. Expecting \(animationName).json|.lottie"
+          || Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).lottie") })
+          || Samples.sampleAnimationURLs.contains(where: { $0.absoluteString.hasSuffix("\(animationName).lot") }),
+        "Snapshot \"\(snapshotURL.lastPathComponent)\" has no corresponding sample animation. Expecting \(animationName).json|.lottie|.lot"
       )
     }
   }
 
   /// Validates that all of the custom snapshot configurations in `SnapshotConfiguration.customMapping`
-  /// reference a sample json file that actually exists
+  /// reference a sample animation file that actually exists
   func testCustomSnapshotConfigurationsHaveCorrespondingSampleFile() {
     for (animationName, _) in SnapshotConfiguration.customMapping {
       let expectedJsonFile = Bundle.lottie.bundleURL.appendingPathComponent("Samples/\(animationName).json")
       let expectedDotLottieFile = Bundle.lottie.bundleURL.appendingPathComponent("Samples/\(animationName).lottie")
+      let expectedLotFile = Bundle.lottie.bundleURL.appendingPathComponent("Samples/\(animationName).lot")
 
       XCTAssert(
         Samples.sampleAnimationURLs.contains(expectedJsonFile)
-          || Samples.sampleAnimationURLs.contains(expectedDotLottieFile),
+          || Samples.sampleAnimationURLs.contains(expectedDotLottieFile)
+          || Samples.sampleAnimationURLs.contains(expectedLotFile),
         "Custom configuration for \"\(animationName)\" has no corresponding sample animation"
       )
     }
@@ -277,6 +280,7 @@ enum Samples {
   /// The list of sample animation files in `Tests/Samples`
   static let sampleAnimationURLs = Bundle.lottie.fileURLs(in: Samples.directoryName, withSuffix: "json")
     + Bundle.lottie.fileURLs(in: Samples.directoryName, withSuffix: "lottie")
+    + Bundle.lottie.fileURLs(in: Samples.directoryName, withSuffix: "lot")
 
   /// The list of sample animation names in `Tests/Samples`
   static let sampleAnimationNames = sampleAnimationURLs.lazy
@@ -293,6 +297,7 @@ enum Samples {
         .joined(separator: "/")
         .replacingOccurrences(of: ".json", with: "")
         .replacingOccurrences(of: ".lottie", with: "")
+        .replacingOccurrences(of: ".lot", with: "")
     }
 
   static func animation(named sampleAnimationName: String) -> LottieAnimation? {

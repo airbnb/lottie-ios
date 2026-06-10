@@ -12,6 +12,10 @@ import Foundation
 enum DotLottieUtils {
   static let dotLottieExtension = "lottie"
   static let jsonExtension = "json"
+  /// IANA-approved short extension for the `video/lottie+json` media type.
+  /// See https://www.iana.org/assignments/media-types/video/lottie+json
+  /// Treated as an alias for `.json` everywhere a Lottie JSON animation is loaded.
+  static let lotExtension = "lot"
 
   /// Temp folder to app directory
   static var tempDirectoryURL: URL {
@@ -25,9 +29,10 @@ extension URL {
     pathExtension == DotLottieUtils.dotLottieExtension
   }
 
-  /// Checks if url is a json file
+  /// Checks if url is a json file (`.json` or its IANA-registered alias `.lot`)
   var isJsonFile: Bool {
     pathExtension == DotLottieUtils.jsonExtension
+      || pathExtension == DotLottieUtils.lotExtension
   }
 
   var urls: [URL] {
