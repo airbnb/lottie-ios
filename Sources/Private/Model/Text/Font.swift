@@ -11,11 +11,19 @@ final class Font: Codable, Sendable, DictionaryInitializable {
 
   // MARK: Lifecycle
 
+  required init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    name = try container.decode(String.self, forKey: .name)
+    familyName = try container.decode(String.self, forKey: .familyName)
+    style = try container.decode(String.self, forKey: .style)
+    ascent = try container.decodeIfPresent(Double.self, forKey: .ascent) ?? 0
+  }
+
   init(dictionary: [String: Any]) throws {
     name = try dictionary.value(for: CodingKeys.name)
     familyName = try dictionary.value(for: CodingKeys.familyName)
     style = try dictionary.value(for: CodingKeys.style)
-    ascent = try dictionary.value(for: CodingKeys.ascent)
+    ascent = (try? dictionary.value(for: CodingKeys.ascent)) ?? 0
   }
 
   // MARK: Internal
