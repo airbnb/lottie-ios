@@ -971,9 +971,13 @@ open class LottieAnimationView: LottieAnimationViewBase {
     // If layout is changed without animation, explicitly set animation duration to 0.0
     // inside CATransaction to avoid unwanted artifacts.
     /// Check if any animation exist on the view's layer, and match it.
+    /// `UIView.animate` adds the implicit frame animation to the view's backing
+    /// layer (`viewLayer`), not to `lottieAnimationLayer` (a sublayer). We must read
+    /// the in-flight animation from `viewLayer` so layout changes inside an animation
+    /// block are matched (see issue #2585, regressed in 4.3.0).
     if
-      let key = lottieAnimationLayer.animationKeys()?.first,
-      let animation = lottieAnimationLayer.animation(forKey: key),
+      let key = viewLayer?.animationKeys()?.first,
+      let animation = viewLayer?.animation(forKey: key),
       animateLayoutChangesWithCurrentCoreAnimationContext
     {
       // The layout is happening within an animation block. Grab the animation data.
