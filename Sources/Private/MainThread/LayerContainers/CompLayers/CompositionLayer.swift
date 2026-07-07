@@ -29,7 +29,6 @@ class CompositionLayer: CALayer, KeypathSearchable {
     keypathName = layer.name
     childKeypaths = [transformNode.transformProperties]
     super.init()
-    anchorPoint = .zero
     actions = [
       "opacity": NSNull(),
       "transform": NSNull(),
@@ -41,8 +40,8 @@ class CompositionLayer: CALayer, KeypathSearchable {
       "shadowColor": NSNull(),
       "shadowRadius": NSNull(),
     ]
+    anchorPoint = .zero
 
-    contentsLayer.anchorPoint = .zero
     contentsLayer.bounds = CGRect(origin: .zero, size: size)
     contentsLayer.actions = [
       "opacity": NSNull(),
@@ -52,6 +51,7 @@ class CompositionLayer: CALayer, KeypathSearchable {
       "sublayerTransform": NSNull(),
       "hidden": NSNull(),
     ]
+    contentsLayer.anchorPoint = .zero
     compositingFilter = layer.blendMode.filterName
     addSublayer(contentsLayer)
 
