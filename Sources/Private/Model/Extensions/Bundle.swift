@@ -1,6 +1,8 @@
 import Foundation
 #if canImport(UIKit)
+#if !os(watchOS)
 import UIKit
+#endif
 #endif
 
 extension Bundle {

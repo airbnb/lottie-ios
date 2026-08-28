@@ -8,12 +8,18 @@
 import CoreGraphics
 import CoreText
 import Foundation
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
 /// Needed for NSMutableParagraphStyle...
 #if os(OSX)
 import AppKit
 #else
+#if !os(watchOS)
 import UIKit
+#endif
 #endif
 
 // MARK: - CoreTextRenderLayer
@@ -259,21 +265,20 @@ final class CoreTextRenderLayer: CALayer {
     // Calculate line spacing
     let lineSpacing = max(CGFloat(minLineHeight) + lineHeight, CGFloat(minLineHeight))
     // Build Attributes
-    let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.lineSpacing = lineSpacing
-    paragraphStyle.lineHeightMultiple = 1
-    paragraphStyle.maximumLineHeight = ascent + descent + leading
-    paragraphStyle.alignment = alignment
-    paragraphStyle.lineBreakMode = NSLineBreakMode.byWordWrapping
+    let paragraphStyle = lottieMakeParagraphStyle(
+      lineSpacing: lineSpacing,
+      maximumLineHeight: ascent + descent + leading,
+      alignment: alignment
+    )
     var attributes: [NSAttributedString.Key: Any] = [
-      NSAttributedString.Key.ligature: 0,
-      NSAttributedString.Key.font: font,
-      NSAttributedString.Key.kern: tracking,
-      NSAttributedString.Key.paragraphStyle: paragraphStyle,
+      lottieLigatureKey: 0,
+      lottieFontKey: font,
+      lottieKernKey: tracking,
+      lottieParagraphStyleKey: paragraphStyle,
     ]
 
     if let fillColor {
-      attributes[NSAttributedString.Key.foregroundColor] = fillColor
+      attributes[lottieForegroundColorKey] = fillColor
     }
 
     let attrString = NSMutableAttributedString(string: text, attributes: attributes)
@@ -323,7 +328,7 @@ final class CoreTextRenderLayer: CALayer {
       }
 
       attrString.addAttribute(
-        NSAttributedString.Key.foregroundColor,
+        lottieForegroundColorKey,
         value: textRangeColor,
         range: NSRange(location: startIndex, length: endIndex - startIndex)
       )
@@ -339,9 +344,9 @@ final class CoreTextRenderLayer: CALayer {
     }
 
     if let strokeColor {
-      attributes[NSAttributedString.Key.foregroundColor] = nil
-      attributes[NSAttributedString.Key.strokeWidth] = strokeWidth
-      attributes[NSAttributedString.Key.strokeColor] = strokeColor
+      attributes[lottieForegroundColorKey] = nil
+      attributes[lottieStrokeWidthKey] = strokeWidth
+      attributes[lottieStrokeColorKey] = strokeColor
       let strokeAttributedString = NSAttributedString(string: text, attributes: attributes)
       strokeFrameSetter = CTFramesetterCreateWithAttributedString(strokeAttributedString as CFAttributedString)
     } else {
@@ -422,3 +427,102 @@ extension CGContext {
     }
   }
 }
+
+#if os(watchOS)
+/// `NSAttributedString.Key.foregroundColor` is declared by UIKit, which this
+/// build cannot import. CoreText's own key is the same string.
+let lottieForegroundColorKey = NSAttributedString.Key(kCTForegroundColorAttributeName as String)
+#else
+let lottieForegroundColorKey = NSAttributedString.Key.foregroundColor
+#endif
+
+#if os(watchOS)
+let lottieStrokeWidthKey = NSAttributedString.Key(kCTStrokeWidthAttributeName as String)
+let lottieStrokeColorKey = NSAttributedString.Key(kCTStrokeColorAttributeName as String)
+let lottieParagraphStyleKey = NSAttributedString.Key(kCTParagraphStyleAttributeName as String)
+#else
+let lottieStrokeWidthKey = NSAttributedString.Key.strokeWidth
+let lottieStrokeColorKey = NSAttributedString.Key.strokeColor
+let lottieParagraphStyleKey = NSAttributedString.Key.paragraphStyle
+#endif
+
+#if os(watchOS)
+import CoreText
+
+let lottieFontKey = NSAttributedString.Key(kCTFontAttributeName as String)
+let lottieKernKey = NSAttributedString.Key(kCTKernAttributeName as String)
+let lottieLigatureKey = NSAttributedString.Key(kCTLigatureAttributeName as String)
+
+/// UIKit's `NSMutableParagraphStyle` is not reachable from this build, so the
+/// same settings are expressed with CoreText's own paragraph style, which is
+/// what the text is ultimately drawn with in any case.
+func lottieMakeParagraphStyle(
+  lineSpacing: CGFloat,
+  maximumLineHeight: CGFloat,
+  alignment: NSTextAlignment
+) -> CTParagraphStyle {
+  var ctAlignment: CTTextAlignment =
+    switch alignment {
+    case .left: .left
+    case .center: .center
+    case .right: .right
+    case .justified: .justified
+    case .natural: .natural
+    }
+  var spacing = lineSpacing
+  var maxHeight = maximumLineHeight
+  var wrap = CTLineBreakMode.byWordWrapping
+
+  // `CTParagraphStyleSetting` holds a raw pointer to each value, so the values
+  // have to outlive the array. Taking `&x` inside the literal would not.
+  return withUnsafePointer(to: &ctAlignment) { alignment in
+    withUnsafePointer(to: &spacing) { spacing in
+      withUnsafePointer(to: &maxHeight) { maxHeight in
+        withUnsafePointer(to: &wrap) { wrap in
+          let settings = [
+            CTParagraphStyleSetting(
+              spec: .alignment,
+              valueSize: MemoryLayout<CTTextAlignment>.size,
+              value: alignment
+            ),
+            CTParagraphStyleSetting(
+              spec: .lineSpacingAdjustment,
+              valueSize: MemoryLayout<CGFloat>.size,
+              value: spacing
+            ),
+            CTParagraphStyleSetting(
+              spec: .maximumLineHeight,
+              valueSize: MemoryLayout<CGFloat>.size,
+              value: maxHeight
+            ),
+            CTParagraphStyleSetting(
+              spec: .lineBreakMode,
+              valueSize: MemoryLayout<CTLineBreakMode>.size,
+              value: wrap
+            ),
+          ]
+          return CTParagraphStyleCreate(settings, settings.count)
+        }
+      }
+    }
+  }
+}
+#else
+let lottieFontKey = NSAttributedString.Key.font
+let lottieKernKey = NSAttributedString.Key.kern
+let lottieLigatureKey = NSAttributedString.Key.ligature
+
+func lottieMakeParagraphStyle(
+  lineSpacing: CGFloat,
+  maximumLineHeight: CGFloat,
+  alignment: NSTextAlignment
+) -> NSParagraphStyle {
+  let style = NSMutableParagraphStyle()
+  style.lineSpacing = lineSpacing
+  style.lineHeightMultiple = 1
+  style.maximumLineHeight = maximumLineHeight
+  style.alignment = alignment
+  style.lineBreakMode = .byWordWrapping
+  return style
+}
+#endif

@@ -8,8 +8,27 @@
 /// Needed for NSMutableParagraphStyle...
 #if os(OSX)
 import AppKit
+#elseif os(watchOS)
+import CAShim
+// UIKit is deliberately not imported on watchOS: it re-exports the SDK's
+// gated CoreAnimation over the shim for the whole module.
+import CoreGraphics
+import CoreText
+import Foundation
 #else
 import UIKit
+#endif
+
+#if os(watchOS)
+/// UIKit's, which watchOS cannot import here. Only the four cases Lottie maps
+/// to are needed, and the raw values match UIKit's so behaviour is unchanged.
+public enum NSTextAlignment: Int {
+  case left = 0
+  case center = 1
+  case right = 2
+  case justified = 3
+  case natural = 4
+}
 #endif
 
 extension TextJustification {

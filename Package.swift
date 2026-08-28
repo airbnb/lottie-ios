@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
   name: "Lottie",
   // Minimum platform versions should be kept in sync with the per-platform targets in Lottie.xcodeproj, lottie-ios.podspec, and lottie-spm's Package.swift
-  platforms: [.iOS("13.0"), .macOS("10.15"), .tvOS("13.0"), .visionOS("1.0")],
+  platforms: [.iOS("13.0"), .macOS("10.15"), .tvOS("13.0"), .visionOS("1.0"), .watchOS("10.0")],
   products: [
     .library(name: "Lottie", targets: ["Lottie"]),
     // Product for dynamic linking, as SPM builds libraries statically by default.
@@ -16,16 +16,33 @@ let package = Package(
   ],
   targets: [
     .target(
+      name: "CAShim",
+      path: "Sources/CAShim",
+      publicHeadersPath: "include"
+    ),
+    .target(
       name: "Lottie",
+      dependencies: [.target(name: "CAShim", condition: .when(platforms: [.watchOS]))],
       path: "Sources",
       exclude: [
+        "CAShim",
         "Private/EmbeddedLibraries/README.md",
         "Private/EmbeddedLibraries/ZipFoundation/README.md",
         "Private/EmbeddedLibraries/EpoxyCore/README.md",
         "Private/EmbeddedLibraries/LRUCache/README.md",
       ],
       resources: [.copy("PrivacyInfo.xcprivacy")],
-      swiftSettings: [.swiftLanguageMode(.v5)]
-    )
+      swiftSettings: [.swiftLanguageMode(.v5)],
+      linkerSettings: [
+        // watchOS does not link QuartzCore implicitly, because CoreAnimation is
+        // not part of its public SDK. The symbols are present in the framework;
+        // only the declarations are withheld, which is what CAShim restores.
+        .linkedFramework("QuartzCore", .when(platforms: [.watchOS])),
+        // For WKAccessibilityIsReduceMotionEnabled, which CAShim declares
+        // rather than importing WatchKit - WatchKit re-exports UIKit's view of
+        // CoreAnimation, which would defeat the shim for the whole module.
+        .linkedFramework("WatchKit", .when(platforms: [.watchOS])),
+      ]
+    ),
   ]
 )

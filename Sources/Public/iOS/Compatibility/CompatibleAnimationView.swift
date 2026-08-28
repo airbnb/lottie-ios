@@ -1,3 +1,4 @@
+#if !os(watchOS)
 //
 //  CompatibleAnimationView.swift
 //  Lottie_iOS
@@ -564,4 +565,6 @@ public final class CompatibleDictionaryTextProvider: NSObject {
 
   private let values: [String: String]
 }
+#endif
+
 #endif

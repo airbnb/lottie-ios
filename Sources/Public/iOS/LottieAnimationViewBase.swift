@@ -1,3 +1,4 @@
+#if !os(watchOS)
 //
 //  LottieAnimationViewBase.swift
 //  lottie-swift-iOS
@@ -82,4 +83,6 @@ open class LottieAnimationViewBase: UIView {
     // Implemented by subclasses.
   }
 }
+#endif
+
 #endif

@@ -1,3 +1,4 @@
+#if !os(watchOS)
 //
 //  AnimatedButton.swift
 //  lottie-swift
@@ -126,3 +127,5 @@ open class AnimatedButton: AnimatedControl {
     to: 1
   )]
 }
+
+#endif

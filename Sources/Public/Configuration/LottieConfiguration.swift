@@ -2,7 +2,13 @@
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
 import Foundation
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
+
+// MARK: - LottieConfiguration
 
 /// Global configuration options for Lottie animations
 public struct LottieConfiguration: Hashable {

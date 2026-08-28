@@ -1,3 +1,4 @@
+#if !os(watchOS)
 // Created by eric_horacek on 12/1/20.
 // Copyright © 2020 Airbnb Inc. All rights reserved.
 
@@ -59,3 +60,5 @@ extension ViewEpoxyModeled where Self: MakeViewProviding {
     )
   }
 }
+
+#endif

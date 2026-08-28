@@ -1,3 +1,4 @@
+#if !os(watchOS)
 //
 //  UIColorExtension.swift
 //  lottie-swift
@@ -20,4 +21,6 @@ extension UIColor {
   }
 
 }
+#endif
+
 #endif

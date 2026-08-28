@@ -5,7 +5,13 @@
 //  Created by Brandon Withrow on 1/18/19.
 //
 
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
+
+// MARK: - ShapeRenderLayer
 
 /// The layer responsible for rendering shape objects
 final class ShapeRenderLayer: ShapeContainerLayer {

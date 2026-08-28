@@ -1,3 +1,4 @@
+#if !os(watchOS)
 // Created by eric_horacek on 9/8/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
@@ -144,3 +145,5 @@ extension SwiftUIView {
     fileprivate(set) var storage: Storage
   }
 }
+
+#endif

@@ -1,0 +1,6 @@
+// An explicit map so the Xcode framework targets can find this alongside SPM.
+module CAShim {
+  umbrella header "QuartzCore.h"
+  export *
+  module * { export * }
+}

@@ -9,7 +9,9 @@ import CoreGraphics
 import Foundation
 
 #if canImport(UIKit)
+#if !os(watchOS)
 import UIKit
+#endif
 #elseif canImport(AppKit)
 import AppKit
 #endif
@@ -126,7 +128,7 @@ extension ImageAsset {
     guard let data = Data(imageAsset: self) else { return nil }
 
     #if canImport(UIKit)
-    return UIImage(data: data)?.cgImage
+    return lottieDecodeCGImage(data)
     #elseif canImport(AppKit)
     return NSImage(data: data)?.lottie_CGImage
     #endif

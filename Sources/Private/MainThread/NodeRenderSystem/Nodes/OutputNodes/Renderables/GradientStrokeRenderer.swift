@@ -5,9 +5,13 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
 
-// MARK: - Renderer
+// MARK: - GradientStrokeRenderer
 
 final class GradientStrokeRenderer: PassThroughOutputNode, Renderable {
 

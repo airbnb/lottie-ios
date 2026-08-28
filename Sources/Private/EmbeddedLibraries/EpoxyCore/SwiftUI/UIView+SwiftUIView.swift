@@ -1,3 +1,4 @@
+#if !os(watchOS)
 // Created by eric_horacek on 3/3/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
@@ -37,3 +38,5 @@ protocol ViewTypeProtocol: ViewType { }
 // MARK: - ViewType + ViewTypeProtocol
 
 extension ViewType: ViewTypeProtocol { }
+
+#endif

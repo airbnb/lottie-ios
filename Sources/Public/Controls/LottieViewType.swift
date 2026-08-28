@@ -1,3 +1,4 @@
+#if !os(watchOS)
 // Created by Cal Stephens on 8/11/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
@@ -76,4 +77,6 @@ public struct LottieNSControlEvent: Equatable, Sendable {
     [AnyHashable(event.rawValue), AnyHashable(inside)]
   }
 }
+#endif
+
 #endif

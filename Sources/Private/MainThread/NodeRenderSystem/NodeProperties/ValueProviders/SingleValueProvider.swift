@@ -6,7 +6,13 @@
 //
 
 import Foundation
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
+
+// MARK: - SingleValueProvider
 
 /// Returns a value for every frame.
 final class SingleValueProvider<ValueType: AnyInterpolatable>: ValueProvider {

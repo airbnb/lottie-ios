@@ -1,7 +1,11 @@
 // Created by Cal Stephens on 12/21/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
 
 extension CAShapeLayer {
   /// Adds animations for the given `BezierPath` keyframes to this `CALayer`

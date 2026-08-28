@@ -2,7 +2,11 @@
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
 #if canImport(UIKit)
+#if os(watchOS)
+import CAShim // declares WKAccessibilityIsReduceMotionEnabled without WatchKit
+#else
 import UIKit
+#endif
 #elseif canImport(AppKit)
 import AppKit
 #endif
@@ -116,7 +120,12 @@ public struct SystemReducedMotionOptionProvider: ReducedMotionOptionProvider {
 
   public var currentReducedMotionMode: ReducedMotionMode {
     #if canImport(UIKit)
-    if UIAccessibility.isReduceMotionEnabled {
+    #if os(watchOS)
+    let reduced = WKAccessibilityIsReduceMotionEnabled()
+    #else
+    let reduced = UIAccessibility.isReduceMotionEnabled
+    #endif
+    if reduced {
       return .reducedMotion
     } else {
       return .standardMotion

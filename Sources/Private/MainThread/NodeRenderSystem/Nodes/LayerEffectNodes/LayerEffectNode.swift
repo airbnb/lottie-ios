@@ -1,7 +1,11 @@
 // Created by Lan Xu on 2024/6/8.
 // Copyright © 2024 Airbnb Inc. All rights reserved.
 
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
 
 // MARK: - LayerEffectNode
 

@@ -34,11 +34,20 @@
 import Foundation
 
 #if canImport(UIKit)
+#if !os(watchOS)
 import UIKit
+#endif
 
 /// Notification that cache should be cleared
+#if os(watchOS)
+/// watchOS has no UIApplication, and importing UIKit here would re-export the
+/// SDK's gated CoreAnimation over the shim for the whole module. The name is
+/// the same one UIKit posts, so anything that does raise it still lands.
+let LRUCacheMemoryWarningNotification = NSNotification.Name("UIApplicationDidReceiveMemoryWarningNotification")
+#else
 let LRUCacheMemoryWarningNotification: NSNotification.Name =
   UIApplication.didReceiveMemoryWarningNotification
+#endif
 
 #else
 

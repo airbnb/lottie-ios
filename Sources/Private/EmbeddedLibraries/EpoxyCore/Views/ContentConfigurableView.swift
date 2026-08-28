@@ -1,3 +1,4 @@
+#if !os(watchOS)
 //  Created by Laura Skelton on 5/30/17.
 //  Copyright © 2017 Airbnb. All rights reserved.
 
@@ -34,3 +35,5 @@ protocol ContentConfigurableView: ViewType {
 extension ContentConfigurableView where Content == Never {
   func setContent(_: Never, animated _: Bool) { }
 }
+
+#endif

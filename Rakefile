@@ -8,7 +8,7 @@ namespace :build do
   desc 'Builds the Lottie package for supported platforms'
   namespace :package do
     desc 'Builds the Lottie package for all supported platforms'
-    task all: ['iOS', 'macOS', 'tvOS', 'visionOS']
+    task all: ['iOS', 'macOS', 'tvOS', 'visionOS', 'watchOS']
 
     desc 'Builds the Lottie package for iOS'
     task :iOS do
@@ -28,6 +28,11 @@ namespace :build do
     desc 'Builds the Lottie package for visionOS'
     task :visionOS do
       xcodebuild('build -scheme "Lottie (visionOS)" -destination generic/platform=visionOS -workspace Lottie.xcworkspace OTHER_SWIFT_FLAGS="-warnings-as-errors"')
+    end
+
+    desc 'Builds the Lottie package for watchOS'
+    task :watchOS do
+      xcodebuild('build -scheme "Lottie (watchOS)" -destination generic/platform=watchOS -workspace Lottie.xcworkspace OTHER_SWIFT_FLAGS="-warnings-as-errors"')
     end
   end
 

@@ -1,7 +1,11 @@
 // Created by Cal Stephens on 1/28/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
 
 extension CAShapeLayer {
   /// Adds animations for the given `CombinedShapeItem` to this `CALayer`

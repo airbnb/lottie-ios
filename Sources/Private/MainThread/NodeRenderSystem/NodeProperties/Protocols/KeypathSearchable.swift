@@ -5,7 +5,13 @@
 //  Created by Brandon Withrow on 2/4/19.
 //
 
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
+
+// MARK: - KeypathSearchable
 
 /// Protocol that provides keypath search functionality. Returns all node properties associated with a keypath.
 protocol KeypathSearchable {

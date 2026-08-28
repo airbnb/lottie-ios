@@ -1,9 +1,13 @@
 // Created by Cal Stephens on 10/10/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
 
-// MARK: - ExpandedAnimationLayer
+// MARK: - InfiniteOpaqueAnimationLayer
 
 /// A `BaseAnimationLayer` subclass that renders its background color
 /// as if the layer is infinitely large, without affecting its bounds

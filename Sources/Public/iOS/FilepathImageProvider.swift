@@ -1,3 +1,4 @@
+#if !os(watchOS)
 //
 //  FilepathImageProvider.swift
 //  lottie-swift
@@ -75,4 +76,6 @@ extension FilepathImageProvider: Equatable {
     lhs.filepath == rhs.filepath
   }
 }
+#endif
+
 #endif

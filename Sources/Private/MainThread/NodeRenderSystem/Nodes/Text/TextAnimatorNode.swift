@@ -5,7 +5,11 @@
 //  Created by Brandon Withrow on 2/19/19.
 //
 
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
 
 // MARK: - TextAnimatorNodeProperties
 

@@ -1,3 +1,4 @@
+#if !os(watchOS)
 //
 //  AnimatedSwitch.swift
 //  lottie-swift
@@ -268,4 +269,6 @@ final class HapticGenerator: ImpactGenerator {
 final class NullHapticGenerator: ImpactGenerator {
   func generateImpact() { }
 }
+#endif
+
 #endif

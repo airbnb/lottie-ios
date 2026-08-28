@@ -1,3 +1,4 @@
+#if !os(watchOS)
 //
 //  AnimationSubview.swift
 //  lottie-swift
@@ -16,4 +17,6 @@ public final class AnimationSubview: UIView {
   }
 
 }
+#endif
+
 #endif

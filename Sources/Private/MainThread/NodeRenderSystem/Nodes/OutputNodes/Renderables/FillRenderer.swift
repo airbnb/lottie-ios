@@ -5,7 +5,11 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
 
 extension FillRule {
   var cgFillRule: CGPathFillRule {

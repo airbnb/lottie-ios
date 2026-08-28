@@ -1,3 +1,4 @@
+#if !os(watchOS)
 // Created by Bryn Bodayle on 1/20/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
@@ -639,5 +640,7 @@ extension View {
     overlay(content(), alignment: .center)
   }
 }
+
+#endif
 
 #endif

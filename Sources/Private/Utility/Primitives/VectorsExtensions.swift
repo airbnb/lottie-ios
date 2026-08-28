@@ -7,7 +7,11 @@
 
 import CoreGraphics
 import Foundation
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
 
 // MARK: - LottieVector1D + Codable
 

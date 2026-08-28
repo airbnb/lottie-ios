@@ -5,7 +5,13 @@
 //  Created by Brandon Withrow on 1/30/19.
 //
 
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
+
+// MARK: - ShapeContainerLayer
 
 /// The base layer that holds Shapes and Shape Renderers
 class ShapeContainerLayer: CALayer {

@@ -1,3 +1,4 @@
+#if !os(watchOS)
 // Created by eric_horacek on 6/22/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
@@ -124,4 +125,6 @@ extension MeasuringViewRepresentable {
   }
   #endif
 }
+#endif
+
 #endif

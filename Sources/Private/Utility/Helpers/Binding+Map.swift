@@ -1,3 +1,4 @@
+#if !os(watchOS)
 // Created by miguel_jimenez on 7/27/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
@@ -16,4 +17,6 @@ extension Binding {
     }
   }
 }
+#endif
+
 #endif

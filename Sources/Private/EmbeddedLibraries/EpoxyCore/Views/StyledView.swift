@@ -1,3 +1,4 @@
+#if !os(watchOS)
 //  Created by Laura Skelton on 4/14/16.
 //  Copyright © 2016 Airbnb. All rights reserved.
 
@@ -41,3 +42,5 @@ extension StyledView where Style == Never {
     switch style { }
   }
 }
+
+#endif

@@ -6,7 +6,11 @@
 //
 
 import Foundation
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
 
 /// A completion block for animations.
 ///  - `true` is passed in if the animation completed playing.

@@ -1,3 +1,4 @@
+#if !os(watchOS)
 //
 //  LottieBundleImageProvider.swift
 //  lottie-swift
@@ -95,4 +96,6 @@ extension BundleImageProvider: Equatable {
       && lhs.searchPath == rhs.searchPath
   }
 }
+#endif
+
 #endif

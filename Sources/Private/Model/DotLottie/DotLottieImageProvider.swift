@@ -6,7 +6,11 @@
 //
 
 #if canImport(UIKit)
+import CoreGraphics
+import Foundation
+#if !os(watchOS)
 import UIKit
+#endif
 #elseif canImport(AppKit)
 import AppKit
 #endif
@@ -58,7 +62,7 @@ final class DotLottieImageProvider: AnimationImageProvider {
       #if canImport(UIKit)
       if
         let data = try? Data(contentsOf: url),
-        let image = UIImage(data: data)?.cgImage
+        let image = lottieDecodeCGImage(data)
       {
         images[url.lastPathComponent] = image
       }

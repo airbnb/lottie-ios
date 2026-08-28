@@ -1,7 +1,11 @@
 // Created by Cal Stephens on 1/6/22.
 // Copyright © 2022 Airbnb Inc. All rights reserved.
 
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
 
 extension CAAnimation {
   /// Creates a `CAAnimation` that wraps this animation,

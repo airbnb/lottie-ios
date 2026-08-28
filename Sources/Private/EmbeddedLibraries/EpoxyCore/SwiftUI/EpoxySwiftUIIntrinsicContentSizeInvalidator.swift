@@ -1,3 +1,4 @@
+#if !os(watchOS)
 // Created by matthew_cheok on 11/19/21.
 // Copyright © 2021 Airbnb Inc. All rights reserved.
 
@@ -32,3 +33,5 @@ extension EnvironmentValues {
   /// A means of invalidating the intrinsic content size of the parent `EpoxySwiftUIHostingView`.
   @Entry var epoxyIntrinsicContentSizeInvalidator = EpoxyIntrinsicContentSizeInvalidator(invalidate: { })
 }
+
+#endif

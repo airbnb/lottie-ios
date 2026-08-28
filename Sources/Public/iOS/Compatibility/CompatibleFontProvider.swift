@@ -1,3 +1,4 @@
+#if !os(watchOS)
 //
 //  CompatibleFontProvider.swift
 //  Lottie_iOS
@@ -38,4 +39,6 @@ extension CompatibleFontProvider: Equatable {
     lhs.fontProvider.isEqual(rhs.fontProvider)
   }
 }
+#endif
+
 #endif

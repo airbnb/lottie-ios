@@ -5,7 +5,11 @@
 //  Created by Brandon Withrow on 1/23/19.
 //
 
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
 
 // MARK: - LottieBackgroundBehavior
 
@@ -83,6 +87,8 @@ extension LottieLoopMode: Equatable {
     }
   }
 }
+
+#if !os(watchOS)
 
 // MARK: - LottieAnimationView
 
@@ -1092,3 +1098,5 @@ open class LottieAnimationView: LottieAnimationViewBase {
 
   private let logger: LottieLogger
 }
+
+#endif

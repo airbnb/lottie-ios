@@ -1,3 +1,4 @@
+#if !os(watchOS)
 //
 //  AnimationViewInitializers.swift
 //  lottie-swift-iOS
@@ -224,3 +225,5 @@ extension LottieAnimationView {
 enum LottieDownloadError: Error {
   case downloadFailed
 }
+
+#endif

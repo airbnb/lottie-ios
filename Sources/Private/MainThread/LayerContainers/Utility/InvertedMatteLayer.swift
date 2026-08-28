@@ -5,7 +5,13 @@
 //  Created by Brandon Withrow on 1/28/19.
 //
 
+#if os(watchOS)
+import CAShim
+#else
 import QuartzCore
+#endif
+
+// MARK: - InvertedMatteLayer
 
 /// A layer that inverses the alpha output of its input layer.
 ///

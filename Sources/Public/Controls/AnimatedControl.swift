@@ -1,3 +1,4 @@
+#if !os(watchOS)
 //
 //  AnimatedControl.swift
 //  lottie-swift
@@ -246,3 +247,5 @@ open class AnimatedControl: LottieControlType {
     animationView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
   }
 }
+
+#endif

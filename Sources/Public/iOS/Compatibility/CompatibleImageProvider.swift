@@ -1,3 +1,4 @@
+#if !os(watchOS)
 //
 //  CompatibleImageProvider.swift
 //  Lottie_iOS
@@ -40,4 +41,6 @@ extension CompatibleImageProvider: Equatable {
     lhs.imageProvider.isEqual(rhs.imageProvider)
   }
 }
+#endif
+
 #endif

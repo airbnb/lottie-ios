@@ -1,3 +1,4 @@
+#if !os(watchOS)
 // Created by Cal Stephens on 8/11/23.
 // Copyright © 2023 Airbnb Inc. All rights reserved.
 
@@ -141,4 +142,6 @@ public struct LottieSwitch: UIViewConfiguringSwiftUIView {
   private var isOn: Binding<Bool>?
 
 }
+#endif
+
 #endif
