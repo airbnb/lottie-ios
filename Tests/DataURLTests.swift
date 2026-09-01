@@ -79,6 +79,12 @@ final class DataURLTests: XCTestCase {
     XCTAssertNotNil(decoder.decode(red5x5Base64))
   }
 
+  func testBase64DecodeSkipsWhenAvailableMemoryIsZero() {
+    let decoder = Base64DataURLDecoder(availableMemoryByteCount: { 0 })
+
+    XCTAssertNil(decoder.decode(red5x5Base64))
+  }
+
   func testBase64DecodeProceedsWhenAvailableMemoryIsUnavailable() {
     let decoder = Base64DataURLDecoder(availableMemoryByteCount: { nil })
 

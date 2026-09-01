@@ -136,8 +136,7 @@ struct Base64DataURLDecoder {
 
   init(availableMemoryByteCount: @escaping () -> Int? = {
     #if os(iOS) || os(tvOS) || os(visionOS)
-    let availableMemory = os_proc_available_memory()
-    return availableMemory > 0 ? Int(availableMemory) : nil
+    return Int(os_proc_available_memory())
     #else
     return nil
     #endif
