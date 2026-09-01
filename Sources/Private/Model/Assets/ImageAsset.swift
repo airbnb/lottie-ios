@@ -106,7 +106,7 @@ extension Data {
       !options.contains(DataURLReadOptions.legacy)
     {
       let encodedString = String(trimmedDataString[base64Range.upperBound...])
-      guard let decodedData = Base64DataURLDecoder.shared.decode(encodedString) else {
+      guard let decodedData = Base64DataURLDecoder().decode(encodedString) else {
         return nil
       }
       self = decodedData
@@ -134,21 +134,17 @@ struct Base64DataURLDecoder {
 
   // MARK: Lifecycle
 
-  init(availableMemoryByteCount: @escaping () -> Int) {
+  init(availableMemoryByteCount: @escaping () -> Int = {
+    #if os(iOS) || os(tvOS) || os(visionOS)
+    return Int(os_proc_available_memory())
+    #else
+    return 0
+    #endif
+  }) {
     self.availableMemoryByteCount = availableMemoryByteCount
   }
 
   // MARK: Internal
-
-  static let shared = Base64DataURLDecoder(
-    availableMemoryByteCount: {
-      #if os(iOS) || os(tvOS) || os(visionOS)
-      return Int(os_proc_available_memory())
-      #else
-      return 0
-      #endif
-    }
-  )
 
   let availableMemoryByteCount: () -> Int
 
@@ -157,6 +153,9 @@ struct Base64DataURLDecoder {
     let availableMemory = availableMemoryByteCount()
 
     if availableMemory > 0, estimatedDecodedByteCount > availableMemory {
+      LottieLogger.shared.warn(
+        "Skipping base64 decode: estimated decoded size (\(estimatedDecodedByteCount) bytes) exceeds available memory (\(availableMemory) bytes)."
+      )
       return nil
     }
 
