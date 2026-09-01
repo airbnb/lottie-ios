@@ -134,11 +134,12 @@ struct Base64DataURLDecoder {
 
   // MARK: Lifecycle
 
-  init(availableMemoryByteCount: @escaping () -> Int = {
+  init(availableMemoryByteCount: @escaping () -> Int? = {
     #if os(iOS) || os(tvOS) || os(visionOS)
-    return Int(os_proc_available_memory())
+    let availableMemory = os_proc_available_memory()
+    return availableMemory > 0 ? Int(availableMemory) : nil
     #else
-    return 0
+    return nil
     #endif
   }) {
     self.availableMemoryByteCount = availableMemoryByteCount
@@ -146,13 +147,13 @@ struct Base64DataURLDecoder {
 
   // MARK: Internal
 
-  let availableMemoryByteCount: () -> Int
+  let availableMemoryByteCount: () -> Int?
 
   func decode(_ encodedString: String) -> Data? {
     let estimatedDecodedByteCount = Self.estimatedDecodedByteCount(for: encodedString)
     let availableMemory = availableMemoryByteCount()
 
-    if availableMemory > 0, estimatedDecodedByteCount > availableMemory {
+    if let availableMemory, estimatedDecodedByteCount > availableMemory {
       LottieLogger.shared.warn(
         "Skipping base64 decode: estimated decoded size (\(estimatedDecodedByteCount) bytes) exceeds available memory (\(availableMemory) bytes)."
       )
