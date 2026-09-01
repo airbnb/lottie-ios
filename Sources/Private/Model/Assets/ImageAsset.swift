@@ -6,8 +6,11 @@
 //
 
 import CoreGraphics
-import Darwin
 import Foundation
+
+#if canImport(Darwin)
+import Darwin
+#endif
 
 #if canImport(UIKit)
 import UIKit
@@ -103,7 +106,7 @@ extension Data {
       !options.contains(DataURLReadOptions.legacy)
     {
       let encodedString = String(trimmedDataString[base64Range.upperBound...])
-      guard let decodedData = Base64DataURLDecoding.decode(encodedString) else {
+      guard let decodedData = Base64DataURLDecoder.shared.decode(encodedString) else {
         return nil
       }
       self = decodedData
@@ -124,16 +127,36 @@ extension Data {
 
 }
 
-// MARK: - Base64DataURLDecoding
+// MARK: - Base64DataURLDecoder
 
 /// Guards Base64 Data URL decoding when the estimated payload exceeds available process memory.
-private enum Base64DataURLDecoding {
+struct Base64DataURLDecoder {
 
-  static func decode(_ encodedString: String) -> Data? {
-    let estimatedDecodedByteCount = estimatedDecodedByteCount(for: encodedString)
-    let availableMemoryByteCount = os_proc_available_memory()
+  // MARK: Lifecycle
 
-    if availableMemoryByteCount > 0, estimatedDecodedByteCount > availableMemoryByteCount {
+  init(availableMemoryByteCount: @escaping () -> Int) {
+    self.availableMemoryByteCount = availableMemoryByteCount
+  }
+
+  // MARK: Internal
+
+  static let shared = Base64DataURLDecoder(
+    availableMemoryByteCount: {
+      #if os(iOS) || os(tvOS) || os(visionOS)
+      return Int(os_proc_available_memory())
+      #else
+      return 0
+      #endif
+    }
+  )
+
+  let availableMemoryByteCount: () -> Int
+
+  func decode(_ encodedString: String) -> Data? {
+    let estimatedDecodedByteCount = Self.estimatedDecodedByteCount(for: encodedString)
+    let availableMemory = availableMemoryByteCount()
+
+    if availableMemory > 0, estimatedDecodedByteCount > availableMemory {
       return nil
     }
 
