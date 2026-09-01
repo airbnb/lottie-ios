@@ -137,16 +137,10 @@ extension Data {
 /// A small Swift base64 decoder that avoids Foundation APIs which can raise NSMallocException.
 private enum Base64Decoder {
 
+  // MARK: Internal
+
   /// Maximum decoded payload size for embedded image assets (64 MB).
   static let maxDecodedByteCount = 64 * 1024 * 1024
-
-  private static let reverseLookup: [UInt8: UInt8] = {
-    var map = [UInt8: UInt8]()
-    for (index, character) in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".utf8.enumerated() {
-      map[character] = UInt8(index)
-    }
-    return map
-  }()
 
   static func decode(_ string: String) -> Data? {
     let utf8 = Array(string.utf8)
@@ -181,6 +175,16 @@ private enum Base64Decoder {
 
     return Data(bytes)
   }
+
+  // MARK: Private
+
+  private static let reverseLookup: [UInt8: UInt8] = {
+    var map = [UInt8: UInt8]()
+    for (index, character) in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".utf8.enumerated() {
+      map[character] = UInt8(index)
+    }
+    return map
+  }()
 
 }
 
