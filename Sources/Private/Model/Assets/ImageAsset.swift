@@ -102,10 +102,22 @@ extension Data {
       !options.contains(DataURLReadOptions.legacy)
     {
       let encodedString = String(trimmedDataString[base64Range.upperBound...])
-      self.init(base64Encoded: encodedString)
+      // Foundation's Data(base64Encoded:) can raise NSMallocException on allocation failure.
+      // Decode in Swift so malformed or oversized payloads fail gracefully.
+      self.init(swiftBase64Encoded: encodedString)
     } else {
       try? self.init(contentsOf: url)
     }
+  }
+
+  /// Initializes `Data` from a base64 encoded string using a Swift decoder.
+  ///
+  /// Returns nil when the input is not valid base64 or exceeds the maximum supported size.
+  init?(swiftBase64Encoded string: String) {
+    guard let decoded = Base64Decoder.decode(string) else {
+      return nil
+    }
+    self = decoded
   }
 
   // MARK: Internal
@@ -116,6 +128,58 @@ extension Data {
 
     let rawValue: Int
 
+  }
+
+}
+
+// MARK: - Base64Decoder
+
+/// A small Swift base64 decoder that avoids Foundation APIs which can raise NSMallocException.
+private enum Base64Decoder {
+
+  /// Maximum decoded payload size for embedded image assets (64 MB).
+  static let maxDecodedByteCount = 64 * 1024 * 1024
+
+  private static let reverseLookup: [UInt8: UInt8] = {
+    var map = [UInt8: UInt8]()
+    for (index, character) in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".utf8.enumerated() {
+      map[character] = UInt8(index)
+    }
+    return map
+  }()
+
+  static func decode(_ string: String) -> Data? {
+    let utf8 = Array(string.utf8)
+    guard !utf8.isEmpty, utf8.count.isMultiple(of: 4) else { return nil }
+
+    let estimatedDecodedLength = utf8.count * 3 / 4
+    guard estimatedDecodedLength <= maxDecodedByteCount else { return nil }
+
+    var bytes = [UInt8]()
+    bytes.reserveCapacity(estimatedDecodedLength)
+
+    var buffer: UInt32 = 0
+    var bitsCollected = 0
+
+    for byte in utf8 {
+      if byte == UInt8(ascii: "=") {
+        break
+      }
+
+      guard let value = reverseLookup[byte] else {
+        return nil
+      }
+
+      buffer = (buffer << 6) | UInt32(value)
+      bitsCollected += 6
+
+      if bitsCollected >= 8 {
+        bitsCollected -= 8
+        bytes.append(UInt8((buffer >> bitsCollected) & 0xFF))
+      }
+    }
+
+    return Data(bytes)
   }
 
 }
