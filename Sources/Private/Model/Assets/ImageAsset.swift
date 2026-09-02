@@ -132,16 +132,26 @@ extension Data {
 /// Guards Base64 Data URL decoding when the estimated payload exceeds available process memory.
 struct Base64DataURLDecoder {
 
+  // MARK: Internal
+
   let availableMemoryByteCount: () -> Int?
 
-  init(availableMemoryByteCount: @escaping () -> Int? = {
-    #if os(iOS) || os(tvOS) || os(visionOS)
+  // MARK: Lifecycle
+
+  init(availableMemoryByteCount: @escaping () -> Int? = Base64DataURLDecoder.platformAvailableMemoryByteCount) {
+    self.availableMemoryByteCount = availableMemoryByteCount
+  }
+
+  // MARK: Internal
+
+  static func platformAvailableMemoryByteCount() -> Int? {
+    #if targetEnvironment(simulator)
+    return nil
+    #elseif os(iOS) || os(tvOS) || os(visionOS)
     return Int(os_proc_available_memory())
     #else
     return nil
     #endif
-  }) {
-    self.availableMemoryByteCount = availableMemoryByteCount
   }
 
   static func estimatedDecodedByteCount(for encodedString: String) -> Int {
@@ -160,14 +170,14 @@ struct Base64DataURLDecoder {
 
   func decode(_ encodedString: String) -> Data? {
     let estimatedDecodedByteCount = Self.estimatedDecodedByteCount(for: encodedString)
-    let availableMemory = availableMemoryByteCount()
-
-    // 0 means the platform could not report a budget, not that the process has no memory.
-    if let availableMemory, availableMemory > 0, estimatedDecodedByteCount > availableMemory {
-      LottieLogger.shared.warn(
-        "Skipping base64 decode: estimated decoded size (\(estimatedDecodedByteCount) bytes) exceeds available memory (\(availableMemory) bytes)."
-      )
-      return nil
+    if let availableMemory = availableMemoryByteCount() {
+      // 0 means the process already exceeded its memory limit.
+      if availableMemory == 0 || estimatedDecodedByteCount > availableMemory {
+        LottieLogger.shared.warn(
+          "Skipping base64 decode: estimated decoded size (\(estimatedDecodedByteCount) bytes) exceeds available memory (\(availableMemory) bytes)."
+        )
+        return nil
+      }
     }
 
     return Data(base64Encoded: encodedString)
