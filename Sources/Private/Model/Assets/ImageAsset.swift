@@ -132,10 +132,6 @@ extension Data {
 /// Guards Base64 Data URL decoding when the estimated payload exceeds available process memory.
 struct Base64DataURLDecoder {
 
-  // MARK: Internal
-
-  let availableMemoryByteCount: () -> Int?
-
   // MARK: Lifecycle
 
   init(availableMemoryByteCount: @escaping () -> Int? = Base64DataURLDecoder.platformAvailableMemoryByteCount) {
@@ -143,6 +139,8 @@ struct Base64DataURLDecoder {
   }
 
   // MARK: Internal
+
+  let availableMemoryByteCount: () -> Int?
 
   static func platformAvailableMemoryByteCount() -> Int? {
     #if targetEnvironment(simulator)
