@@ -132,7 +132,7 @@ extension Data {
 /// Guards Base64 Data URL decoding when the estimated payload exceeds available process memory.
 struct Base64DataURLDecoder {
 
-  // MARK: Lifecycle
+  let availableMemoryByteCount: () -> Int?
 
   init(availableMemoryByteCount: @escaping () -> Int? = {
     #if os(iOS) || os(tvOS) || os(visionOS)
@@ -142,24 +142,6 @@ struct Base64DataURLDecoder {
     #endif
   }) {
     self.availableMemoryByteCount = availableMemoryByteCount
-  }
-
-  // MARK: Internal
-
-  let availableMemoryByteCount: () -> Int?
-
-  func decode(_ encodedString: String) -> Data? {
-    let estimatedDecodedByteCount = Self.estimatedDecodedByteCount(for: encodedString)
-    let availableMemory = availableMemoryByteCount()
-
-    if let availableMemory, estimatedDecodedByteCount > availableMemory {
-      LottieLogger.shared.warn(
-        "Skipping base64 decode: estimated decoded size (\(estimatedDecodedByteCount) bytes) exceeds available memory (\(availableMemory) bytes)."
-      )
-      return nil
-    }
-
-    return Data(base64Encoded: encodedString)
   }
 
   static func estimatedDecodedByteCount(for encodedString: String) -> Int {
@@ -174,6 +156,21 @@ struct Base64DataURLDecoder {
     }
 
     return max(0, (encodedByteCount * 3 / 4) - padding)
+  }
+
+  func decode(_ encodedString: String) -> Data? {
+    let estimatedDecodedByteCount = Self.estimatedDecodedByteCount(for: encodedString)
+    let availableMemory = availableMemoryByteCount()
+
+    // 0 means the platform could not report a budget, not that the process has no memory.
+    if let availableMemory, availableMemory > 0, estimatedDecodedByteCount > availableMemory {
+      LottieLogger.shared.warn(
+        "Skipping base64 decode: estimated decoded size (\(estimatedDecodedByteCount) bytes) exceeds available memory (\(availableMemory) bytes)."
+      )
+      return nil
+    }
+
+    return Data(base64Encoded: encodedString)
   }
 
 }
