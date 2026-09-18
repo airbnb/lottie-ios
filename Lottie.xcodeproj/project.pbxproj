@@ -231,6 +231,7 @@
 		080DF0492A95715C00BE2D96 /* PreCompLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95382822F43000677516 /* PreCompLayerModel.swift */; };
 		080DF04A2A95715C00BE2D96 /* SolidLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95342822F43000677516 /* SolidLayerModel.swift */; };
 		080DF04B2A95715C00BE2D96 /* LayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95352822F43000677516 /* LayerModel.swift */; };
+		AB0000000000000000000005 /* LayerModel+TrackMatte.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000001 /* LayerModel+TrackMatte.swift */; };
 		080DF04C2A95715C00BE2D96 /* TextLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95372822F43000677516 /* TextLayerModel.swift */; };
 		080DF04D2A95715C00BE2D96 /* ShapeLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95392822F43000677516 /* ShapeLayerModel.swift */; };
 		080DF04E2A95715F00BE2D96 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C953D2822F43000677516 /* Transform.swift */; };
@@ -636,8 +637,11 @@
 		2E9C95FE2822F43100677516 /* SolidLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95342822F43000677516 /* SolidLayerModel.swift */; };
 		2E9C95FF2822F43100677516 /* SolidLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95342822F43000677516 /* SolidLayerModel.swift */; };
 		2E9C96002822F43100677516 /* LayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95352822F43000677516 /* LayerModel.swift */; };
+		AB0000000000000000000004 /* LayerModel+TrackMatte.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000001 /* LayerModel+TrackMatte.swift */; };
 		2E9C96012822F43100677516 /* LayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95352822F43000677516 /* LayerModel.swift */; };
+		AB0000000000000000000003 /* LayerModel+TrackMatte.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000001 /* LayerModel+TrackMatte.swift */; };
 		2E9C96022822F43100677516 /* LayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95352822F43000677516 /* LayerModel.swift */; };
+		AB0000000000000000000002 /* LayerModel+TrackMatte.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000001 /* LayerModel+TrackMatte.swift */; };
 		2E9C96032822F43100677516 /* ImageLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95362822F43000677516 /* ImageLayerModel.swift */; };
 		2E9C96042822F43100677516 /* ImageLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95362822F43000677516 /* ImageLayerModel.swift */; };
 		2E9C96052822F43100677516 /* ImageLayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C95362822F43000677516 /* ImageLayerModel.swift */; };
@@ -1141,6 +1145,7 @@
 		6DB3BDBD28245A14002A276D /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3BDBB28245A14002A276D /* CGPointExtension.swift */; };
 		6DB3BDBE28245A14002A276D /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3BDBB28245A14002A276D /* CGPointExtension.swift */; };
 		6DB3BDC328245AA2002A276D /* ParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3BDBF28245A6A002A276D /* ParsingTests.swift */; };
+		AB0000000000000000000007 /* TrackMatteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000006 /* TrackMatteTests.swift */; };
 		6DEF696E2824A76C007D640F /* BundleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEF696D2824A76C007D640F /* BundleTests.swift */; };
 		7E48BF582860CECF00A39198 /* UnitBezier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48BF572860CECF00A39198 /* UnitBezier.swift */; };
 		7E48BF592860CECF00A39198 /* UnitBezier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48BF572860CECF00A39198 /* UnitBezier.swift */; };
@@ -1332,6 +1337,7 @@
 		2E9C95322822F43000677516 /* Star.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
 		2E9C95342822F43000677516 /* SolidLayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidLayerModel.swift; sourceTree = "<group>"; };
 		2E9C95352822F43000677516 /* LayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerModel.swift; sourceTree = "<group>"; };
+		AB0000000000000000000001 /* LayerModel+TrackMatte.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LayerModel+TrackMatte.swift"; sourceTree = "<group>"; };
 		2E9C95362822F43000677516 /* ImageLayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLayerModel.swift; sourceTree = "<group>"; };
 		2E9C95372822F43000677516 /* TextLayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayerModel.swift; sourceTree = "<group>"; };
 		2E9C95382822F43000677516 /* PreCompLayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreCompLayerModel.swift; sourceTree = "<group>"; };
@@ -1503,6 +1509,7 @@
 		6DB3BDB7282454A6002A276D /* DictionaryInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryInitializable.swift; sourceTree = "<group>"; };
 		6DB3BDBB28245A14002A276D /* CGPointExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
 		6DB3BDBF28245A6A002A276D /* ParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingTests.swift; sourceTree = "<group>"; };
+		AB0000000000000000000006 /* TrackMatteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackMatteTests.swift; sourceTree = "<group>"; };
 		6DEF696D2824A76C007D640F /* BundleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleTests.swift; sourceTree = "<group>"; };
 		7E48BF572860CECF00A39198 /* UnitBezier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitBezier.swift; sourceTree = "<group>"; };
 		82A552742A2FD44B00E47AC8 /* LottieAnimationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationLayer.swift; sourceTree = "<group>"; };
@@ -1812,6 +1819,7 @@
 				2E72128427BB32DB0027BC56 /* PerformanceTests.swift */,
 				6DEF696D2824A76C007D640F /* BundleTests.swift */,
 				6DB3BDBF28245A6A002A276D /* ParsingTests.swift */,
+				AB0000000000000000000006 /* TrackMatteTests.swift */,
 				A1D5BAAB27C731A500777D06 /* DataURLTests.swift */,
 				2E8040BD27A07343006E74CB /* Utils */,
 				2E044E262820536800FA773B /* AutomaticEngineTests.swift */,
@@ -1883,6 +1891,7 @@
 			children = (
 				2E9C95342822F43000677516 /* SolidLayerModel.swift */,
 				2E9C95352822F43000677516 /* LayerModel.swift */,
+				AB0000000000000000000001 /* LayerModel+TrackMatte.swift */,
 				2E9C95362822F43000677516 /* ImageLayerModel.swift */,
 				2E9C95372822F43000677516 /* TextLayerModel.swift */,
 				2E9C95382822F43000677516 /* PreCompLayerModel.swift */,
@@ -2804,6 +2813,7 @@
 				080DEF812A9570C400BE2D96 /* DotLottieFile.swift in Sources */,
 				080DEF792A9570B500BE2D96 /* AnimatedControl.swift in Sources */,
 				080DF04B2A95715C00BE2D96 /* LayerModel.swift in Sources */,
+				AB0000000000000000000005 /* LayerModel+TrackMatte.swift in Sources */,
 				080DF0452A95715900BE2D96 /* GradientStroke.swift in Sources */,
 				080DEFEC2A95711E00BE2D96 /* CALayer+setupLayerHierarchy.swift in Sources */,
 				080DEFB82A95710300BE2D96 /* AnyEpoxyModelProperty.swift in Sources */,
@@ -3253,6 +3263,7 @@
 				0887347528F0CCDD00458627 /* LottieAnimationHelpers.swift in Sources */,
 				08E2075A2A56014E002DCE17 /* EpoxyModelArrayBuilder.swift in Sources */,
 				2E9C96002822F43100677516 /* LayerModel.swift in Sources */,
+				AB0000000000000000000004 /* LayerModel+TrackMatte.swift in Sources */,
 				2E9C97652822F43100677516 /* CurveVertex.swift in Sources */,
 				0820D5C52A8BF60F007D705C /* EffectValue.swift in Sources */,
 				08C002042A46150D00AB54BA /* FileManager+ZIP.swift in Sources */,
@@ -3335,6 +3346,7 @@
 				36E57EAC28AF7ADF00B7EFDA /* HardcodedTextProvider.swift in Sources */,
 				2E72128527BB32DB0027BC56 /* PerformanceTests.swift in Sources */,
 				6DB3BDC328245AA2002A276D /* ParsingTests.swift in Sources */,
+				AB0000000000000000000007 /* TrackMatteTests.swift in Sources */,
 				080F5FDC2AB1075000ADC32C /* TextProviderTests.swift in Sources */,
 				6DB3BDB628243FA5002A276D /* ValueProvidersTests.swift in Sources */,
 				2E72128327BB329C0027BC56 /* AnimationKeypathTests.swift in Sources */,
@@ -3573,6 +3585,7 @@
 				2E9C95E02822F43100677516 /* Shape.swift in Sources */,
 				0887347628F0CCDD00458627 /* LottieAnimationHelpers.swift in Sources */,
 				2E9C96012822F43100677516 /* LayerModel.swift in Sources */,
+				AB0000000000000000000003 /* LayerModel+TrackMatte.swift in Sources */,
 				2E9C97662822F43100677516 /* CurveVertex.swift in Sources */,
 				2E9C96492822F43100677516 /* NullCompositionLayer.swift in Sources */,
 				2EAF5AFF27A0798700E00531 /* GradientValueProvider.swift in Sources */,
@@ -3865,6 +3878,7 @@
 				2E9C95E12822F43100677516 /* Shape.swift in Sources */,
 				0887347728F0CCDD00458627 /* LottieAnimationHelpers.swift in Sources */,
 				2E9C96022822F43100677516 /* LayerModel.swift in Sources */,
+				AB0000000000000000000002 /* LayerModel+TrackMatte.swift in Sources */,
 				08E2075C2A56014E002DCE17 /* EpoxyModelArrayBuilder.swift in Sources */,
 				6CC544932902FF7D00212722 /* DotLottieCache.swift in Sources */,
 				2E9C97672822F43100677516 /* CurveVertex.swift in Sources */,

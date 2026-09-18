@@ -49,9 +49,12 @@ final class PreCompositionLayer: CompositionLayer {
     var imageLayers = [ImageCompositionLayer]()
     var textLayers = [TextCompositionLayer]()
 
-    var mattedLayer: CompositionLayer? = nil
+    /// `CompositionLayer`s are created one-to-one from `asset.layers`, so a layer and
+    /// its `LayerModel` share the same offset once both are in z-axis order.
+    let layersInZAxisOrder = Array(layers.reversed())
+    let trackMattes = asset.layers.reversed().resolveTrackMattes()
 
-    for layer in layers.reversed() {
+    for (offset, layer) in layersInZAxisOrder.enumerated() {
       layer.bounds = bounds
       animationLayers.append(layer)
       if let imageLayer = layer as? ImageCompositionLayer {
@@ -60,20 +63,17 @@ final class PreCompositionLayer: CompositionLayer {
       if let textLayer = layer as? TextCompositionLayer {
         textLayers.append(textLayer)
       }
-      if let matte = mattedLayer {
-        /// The previous layer requires this layer to be its matte
-        matte.matteLayer = layer
-        mattedLayer = nil
-        continue
-      }
-      if
-        let matte = layer.matteType,
-        matte == .add || matte == .invert
-      {
-        /// We have a layer that requires a matte.
-        mattedLayer = layer
-      }
+      /// A layer used as a track matte is masked into the layer referencing it,
+      /// and is never displayed on its own.
+      guard !trackMattes.matteSourceOffsets.contains(offset) else { continue }
       contentsLayer.addSublayer(layer)
+    }
+
+    /// Track mattes are applied once every layer has its `bounds`, since a matte can be
+    /// provided by a layer anywhere in the layer list and `InvertedMatteLayer` reads the
+    /// bounds of its input matte upfront.
+    for (layerOffset, matteOffset) in trackMattes.matteOffsets {
+      layersInZAxisOrder[layerOffset].matteLayer = layersInZAxisOrder[matteOffset]
     }
 
     childKeypaths.append(contentsOf: layers)
