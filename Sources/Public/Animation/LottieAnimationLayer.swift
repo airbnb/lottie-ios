@@ -758,7 +758,7 @@ public class LottieAnimationLayer: CALayer {
       }
 
       if animationLayer is CoreAnimationLayer {
-        return .coreAnimation
+        return .coreAnimation()
       } else {
         return .mainThread
       }

@@ -128,6 +128,157 @@ extension CALayer {
     }
   }
 
+  @nonobjc
+  func positionAnimations(
+    from transformModel: TransformModel,
+    context: LayerAnimationContext
+  ) throws -> AnimationsByKey {
+    if let positionKeyframes = transformModel._position {
+      return try keyframeAnimation(
+        for: .position,
+        keyframes: positionKeyframes,
+        value: \.pointValue,
+        context: context
+      )
+    } else if
+      let xKeyframes = transformModel._positionX,
+      let yKeyframes = transformModel._positionY
+    {
+      let xAnimation = try keyframeAnimation(
+        for: .positionX,
+        keyframes: xKeyframes,
+        value: \.cgFloatValue,
+        context: context
+      )
+      let yAnimation = try keyframeAnimation(
+        for: .positionY,
+        keyframes: yKeyframes,
+        value: \.cgFloatValue,
+        context: context
+      )
+
+      return Dictionary.merging(
+        xAnimation,
+        yAnimation,
+        uniquingKeysWith: { new, _ in new
+        }
+      )
+    } else {
+      try context.logCompatibilityIssue("""
+        `Transform` values must provide either `position` or `positionX` / `positionY` keyframes
+        """)
+    }
+
+    return [:]
+  }
+
+  @nonobjc
+  func anchorPointAnimation(
+    from transformModel: TransformModel,
+    context: LayerAnimationContext
+  ) throws -> AnimationsByKey {
+    try keyframeAnimation(
+      for: .anchorPoint,
+      keyframes: transformModel.anchorPoint,
+      value: { absoluteAnchorPoint in
+        guard bounds.width > 0, bounds.height > 0 else {
+          context.logger.assertionFailure("Size must be non-zero before an animation can be played")
+          return .zero
+        }
+
+        // Lottie animation files express anchorPoint as an absolute point value,
+        // so we have to divide by the width/height of this layer to get the
+        // relative decimal values expected by Core Animation.
+        return CGPoint(
+          x: CGFloat(absoluteAnchorPoint.x) / bounds.width,
+          y: CGFloat(absoluteAnchorPoint.y) / bounds.height
+        )
+      },
+      context: context
+    )
+  }
+
+  @nonobjc
+  func scaleAnimations(
+    from transformModel: TransformModel,
+    context: LayerAnimationContext
+  ) throws -> AnimationsByKey {
+    let xAnimation = try keyframeAnimation(
+      for: .scaleX,
+      keyframes: transformModel.scale,
+      value: { scale in
+        // Lottie animation files express scale as a numerical percentage value
+        // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
+        // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
+        CGFloat(scale.x) / 100
+      },
+      context: context
+    )
+    let yAnimation = try keyframeAnimation(
+      for: .scaleY,
+      keyframes: transformModel.scale,
+      value: { scale in
+        // Lottie animation files express scale as a numerical percentage value
+        // (e.g. 50%, 100%, 200%) so we divide by 100 to get the decimal values
+        // expected by Core Animation (e.g. 0.5, 1.0, 2.0).
+        CGFloat(scale.y) / 100
+      },
+      context: context
+    )
+
+    return Dictionary.merging(
+      xAnimation,
+      yAnimation,
+      uniquingKeysWith: { new, _ in new
+      }
+    )
+  }
+
+  func rotationAnimations(
+    from transformModel: TransformModel,
+    context: LayerAnimationContext
+  ) throws -> AnimationsByKey {
+    // Lottie animation files express rotation in degrees
+    // (e.g. 90º, 180º, 360º) so we convert to radians to get the
+    // values expected by Core Animation (e.g. π/2, π, 2π)
+
+    let xAnimation = try keyframeAnimation(
+      for: .rotationX,
+      keyframes: transformModel.rotationX,
+      value: { rotationDegrees in
+        rotationDegrees.cgFloatValue * .pi / 180
+      },
+      context: context
+    )
+
+    let yAnimation = try keyframeAnimation(
+      for: .rotationY,
+      keyframes: transformModel.rotationY,
+      value: { rotationDegrees in
+        rotationDegrees.cgFloatValue * .pi / 180
+      },
+      context: context
+    )
+
+    let zAnimation = try keyframeAnimation(
+      for: .rotationZ,
+      keyframes: transformModel.rotationZ,
+      value: { rotationDegrees in
+        // Lottie animation files express rotation in degrees
+        // (e.g. 90º, 180º, 360º) so we convert to radians to get the
+        // values expected by Core Animation (e.g. π/2, π, 2π)
+        rotationDegrees.cgFloatValue * .pi / 180
+      },
+      context: context
+    )
+
+    return Dictionary.merging(
+      xAnimation,
+      yAnimation,
+      zAnimation
+    ) { new, _ in new }
+  }
+
   // MARK: Private
 
   @nonobjc

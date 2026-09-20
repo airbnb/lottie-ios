@@ -158,7 +158,7 @@ final class AnimationViewTests: XCTestCase {
                 if animation === animationUnsupportedByCoreAnimationRenderingEngine {
                   XCTAssertEqual(animationView.currentRenderingEngine, .mainThread)
                 } else {
-                  XCTAssertEqual(animationView.currentRenderingEngine, .coreAnimation)
+                  XCTAssertEqual(animationView.currentRenderingEngine, .coreAnimation(.main))
                 }
               }
 

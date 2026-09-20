@@ -104,7 +104,7 @@ struct AnimationPreviewView: View {
       updateIndex()
     }
     .toolbar {
-      Text((currentRenderingEngine ?? .coreAnimation).description)
+      Text((currentRenderingEngine ?? .coreAnimation(.main)).description)
       optionsMenu
     }
   }

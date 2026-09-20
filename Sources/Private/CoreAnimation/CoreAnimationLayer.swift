@@ -312,6 +312,27 @@ final class CoreAnimationLayer: BaseAnimationLayer {
   /// progress of this animation (between 0 and 1). This lets us provide
   /// realtime animation progress via `self.currentFrame`.
   private func setupPlaceholderAnimation(context: LayerAnimationContext) {
+    if CALayer.isCreatingAnimationsInBackground {
+      DispatchQueue.global().async {
+        let timedProgressAnimation = self.timedProgressAnimation(context: context)
+
+        DispatchQueue.main.async {
+          self.add(timedProgressAnimation, forKey: #keyPath(animationProgress))
+
+          #if DEBUG
+          TestHelpers.backgroundAnimationSetupComplete?()
+          #endif
+        }
+      }
+    } else {
+      let timedProgressAnimation = timedProgressAnimation(context: context)
+      add(timedProgressAnimation, forKey: #keyPath(animationProgress))
+    }
+  }
+
+  private func timedProgressAnimation(
+    context: LayerAnimationContext
+  ) -> CAAnimation {
     let animationProgressTracker = CABasicAnimation(keyPath: #keyPath(animationProgress))
     animationProgressTracker.fromValue = 0
     animationProgressTracker.toValue = 1
@@ -323,7 +344,7 @@ final class CoreAnimationLayer: BaseAnimationLayer {
     // has finished playing (if it doesn't loop infinitely)
     timedProgressAnimation.isRemovedOnCompletion = true
 
-    add(timedProgressAnimation, forKey: #keyPath(animationProgress))
+    return timedProgressAnimation
   }
 
   /// Removes the current `CAAnimation`s, and rebuilds new animations

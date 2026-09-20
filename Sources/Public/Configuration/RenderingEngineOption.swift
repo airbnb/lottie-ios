@@ -31,7 +31,11 @@ public enum RenderingEngineOption: Hashable {
   ///    Lottie will automatically fall back to the Main Thread engine
   ///    when necessary.
   public static var coreAnimation: RenderingEngineOption {
-    .specific(.coreAnimation)
+    .specific(.coreAnimation(.main))
+  }
+
+  public static var coreAnimationBackground: RenderingEngineOption {
+    .specific(.coreAnimation(.background))
   }
 }
 
@@ -47,7 +51,19 @@ public enum RenderingEngine: Hashable {
   /// The Core Animation rendering engine, that animates using Core Animation
   /// and has better performance characteristics than the Main Thread engine,
   /// but doesn't support all Lottie features.
-  case coreAnimation
+  case coreAnimation(AnimationSetupThread = .main)
+}
+
+// MARK: RenderingEngine.AnimationSetupThread
+
+/// Describes which thread the Core Animation rendering engine creates its
+/// animation on. The setup of the animation happens on the main thread
+/// regardless of this option.
+extension RenderingEngine {
+  public enum AnimationSetupThread: Hashable {
+    case main
+    case background
+  }
 }
 
 // MARK: - RenderingEngineOption + RawRepresentable, CustomStringConvertible
@@ -94,7 +110,7 @@ extension RenderingEngine: RawRepresentable, CustomStringConvertible {
     case "Main Thread":
       self = .mainThread
     case "Core Animation":
-      self = .coreAnimation
+      self = .coreAnimation()
     default:
       return nil
     }

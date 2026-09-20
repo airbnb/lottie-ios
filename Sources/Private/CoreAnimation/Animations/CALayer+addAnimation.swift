@@ -33,6 +33,29 @@ extension CALayer {
     }
   }
 
+  @nonobjc
+  func keyframeAnimation<KeyframeValue: AnyInterpolatable, ValueRepresentation>(
+    for property: LayerProperty<ValueRepresentation>,
+    keyframes: KeyframeGroup<KeyframeValue>,
+    value keyframeValueMapping: (KeyframeValue) throws -> ValueRepresentation,
+    context: LayerAnimationContext
+  ) throws -> AnimationsByKey {
+    if let customAnimation = try customizedAnimation(for: property, context: context) {
+      return [customAnimation.keyPath: customAnimation.timed(with: context, for: self)]
+    } else if
+      let defaultAnimation = try defaultAnimation(
+        for: property,
+        keyframes: keyframes,
+        value: keyframeValueMapping,
+        context: context
+      )
+    {
+      return [property.caLayerKeypath: defaultAnimation.timed(with: context, for: self)]
+    }
+    // TODO: Consider how to handle failure here? If it worth it to throw an error or return an optional?
+    return [:]
+  }
+
   // MARK: Private
 
   /// Constructs a `CAAnimation` that reflects the given keyframes
@@ -163,7 +186,7 @@ extension CALayer {
       // then we can apply the keyframe value directly to the layer using KVC instead
       // of creating a `CAAnimation`.
       let currentValue = value(forKey: property.caLayerKeypath) as? ValueRepresentation
-      if property.isDefaultValue(currentValue) {
+      if property.isDefaultValue(currentValue), !CALayer.isCreatingAnimationsInBackground {
         setValue(keyframeValue, forKeyPath: property.caLayerKeypath)
         return nil
       }
