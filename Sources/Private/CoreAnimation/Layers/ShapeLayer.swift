@@ -241,7 +241,7 @@ extension CALayer {
       )
 
       for groupLayer in groupLayers {
-        let repeatedLayer = RepeaterLayer(repeater: repeater, childLayer: groupLayer, index: index)
+        let repeatedLayer = RepeaterLayer(repeater: repeater, childLayer: groupLayer, index: index, copyCount: copyCount)
         addSublayer(repeatedLayer)
       }
     }
