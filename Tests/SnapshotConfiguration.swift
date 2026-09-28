@@ -239,6 +239,10 @@ extension SnapshotConfiguration {
     "Issues/issue_2310": .customViewportFrame(
       CGRect(x: 0, y: 0, width: 85, height: 85).insetBy(dx: 10, dy: 10)
     ),
+
+    /// A `Repeater` with `startOpacity: 100` / `endOpacity: 0`. Content doesn't change
+    /// over time, so a single snapshot is enough to cover the per-copy opacity gradient.
+    "Issues/repeater_opacity": SnapshotConfiguration.default.nonanimating(),
   ]
 }
 
