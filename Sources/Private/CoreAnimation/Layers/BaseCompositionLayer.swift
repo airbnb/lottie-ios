@@ -58,8 +58,108 @@ class BaseCompositionLayer: BaseAnimationLayer {
   }
 
   func setupLayerAnimations(context: LayerAnimationContext) throws {
+    if CALayer.isCreatingAnimationsInBackground {
+      setupAnimationsOnBackgroundThread(context: context)
+    } else {
+      try setupAnimationsOnMainThread(context: context)
+    }
+  }
+
+  func setupChildAnimations(context: LayerAnimationContext) throws {
+    try super.setupAnimations(context: context)
+  }
+
+  override func addSublayer(_ layer: CALayer) {
+    if layer === contentsLayer {
+      super.addSublayer(contentsLayer)
+    } else {
+      contentsLayer.addSublayer(layer)
+    }
+  }
+
+  // MARK: Private
+
+  private let baseLayerModel: LayerModel
+
+  // TODO: This is a throwing function. To preserve the semantics on this, we should aim to be able to throw an error from this branch as well
+  private func setupAnimationsOnBackgroundThread(
+    context: LayerAnimationContext
+  ) {
+    DispatchQueue.global().async {
+      do {
+        let animations = try self.animationsOnBackgroundThread(context: context)
+
+        DispatchQueue.main.async {
+          for (key, animation) in animations {
+            self.contentsLayer.add(animation, forKey: key)
+          }
+          #if DEBUG
+          TestHelpers.backgroundAnimationSetupComplete?()
+          #endif
+        }
+      } catch { }
+    }
+  }
+
+  private func animationsOnBackgroundThread(
+    context: LayerAnimationContext
+  ) throws -> AnimationsByKey {
     let transformContext = context.addingKeypathComponent("Transform")
 
+    let positionAnimation = try contentsLayer.positionAnimations(
+      from: baseLayerModel.transform,
+      context: transformContext
+    )
+
+    let anchorPointAnimation = try contentsLayer.anchorPointAnimation(
+      from: baseLayerModel.transform,
+      context: transformContext
+    )
+
+    let scaleAnimation = try contentsLayer.scaleAnimations(
+      from: baseLayerModel.transform,
+      context: transformContext
+    )
+
+    let rotationAnimation = try contentsLayer.rotationAnimations(
+      from: baseLayerModel.transform,
+      context: transformContext
+    )
+
+    var appearanceAnimation = AnimationsByKey()
+    if renderLayerContents {
+      let opacityAnimation = try contentsLayer.opacityAnimation(
+        for: baseLayerModel.transform,
+        context: transformContext
+      )
+
+      let visibilityAnimation = try contentsLayer.visibilityAnimation(
+        inFrame: CGFloat(baseLayerModel.inFrame),
+        outFrame: CGFloat(baseLayerModel.outFrame),
+        context: context
+      )
+
+      appearanceAnimation = Dictionary.merging(
+        opacityAnimation,
+        visibilityAnimation,
+        uniquingKeysWith: { _, new in new }
+      )
+    }
+
+    return Dictionary.merging(
+      positionAnimation,
+      anchorPointAnimation,
+      scaleAnimation,
+      rotationAnimation,
+      appearanceAnimation,
+      uniquingKeysWith: { _, new in new }
+    )
+  }
+
+  private func setupAnimationsOnMainThread(
+    context: LayerAnimationContext
+  ) throws {
+    let transformContext = context.addingKeypathComponent("Transform")
     try contentsLayer.addTransformAnimations(for: baseLayerModel.transform, context: transformContext)
 
     if renderLayerContents {
@@ -88,22 +188,6 @@ class BaseCompositionLayer: BaseAnimationLayer {
       }
     }
   }
-
-  func setupChildAnimations(context: LayerAnimationContext) throws {
-    try super.setupAnimations(context: context)
-  }
-
-  override func addSublayer(_ layer: CALayer) {
-    if layer === contentsLayer {
-      super.addSublayer(contentsLayer)
-    } else {
-      contentsLayer.addSublayer(layer)
-    }
-  }
-
-  // MARK: Private
-
-  private let baseLayerModel: LayerModel
 
   private func setupSublayers() {
     addSublayer(contentsLayer)

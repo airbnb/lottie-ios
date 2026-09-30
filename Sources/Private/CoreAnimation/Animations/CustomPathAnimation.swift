@@ -32,6 +32,34 @@ extension CAShapeLayer {
       context: context
     )
   }
+
+  @nonobjc
+  func customShapeAnimation(
+    for customPath: KeyframeGroup<BezierPath>,
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier = 1,
+    transformPath: (CGPath) -> CGPath = { $0 },
+    roundedCorners: RoundedCorners? = nil
+  ) throws -> AnimationsByKey {
+    let combinedKeyframes = try BezierPathKeyframe.combining(
+      path: customPath,
+      cornerRadius: roundedCorners?.radius
+    )
+
+    return try keyframeAnimation(
+      for: .path,
+      keyframes: combinedKeyframes,
+      value: { pathKeyframe in
+        var path = pathKeyframe.path
+        if let cornerRadius = pathKeyframe.cornerRadius {
+          path = path.roundCorners(radius: cornerRadius.cgFloatValue)
+        }
+
+        return transformPath(path.cgPath().duplicated(times: pathMultiplier))
+      },
+      context: context
+    )
+  }
 }
 
 extension CGPath {
