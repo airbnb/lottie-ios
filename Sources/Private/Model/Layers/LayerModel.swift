@@ -99,6 +99,13 @@ class LayerModel: Codable, DictionaryInitializable {
     masks = try container.decodeIfPresent([Mask].self, forKey: .masks)
     timeStretch = try container.decodeIfPresent(Double.self, forKey: .timeStretch) ?? 1
     matte = try container.decodeIfPresent(MatteType.self, forKey: .matte)
+    matteParent = try container.decodeIfPresent(Int.self, forKey: .matteParent)
+    // `td` is specified as a 0-1 integer, but some authoring tools emit a boolean instead.
+    if let isMatteTargetRawValue = try? container.decode(Int.self, forKey: .isMatteTarget) {
+      isMatteTarget = isMatteTargetRawValue != 0
+    } else {
+      isMatteTarget = (try? container.decode(Bool.self, forKey: .isMatteTarget)) ?? false
+    }
     hidden = try container.decodeIfPresent(Bool.self, forKey: .hidden) ?? false
     styles = try container.decodeIfPresent([LayerStyle].self, ofFamily: LayerStyleType.self, forKey: .styles) ?? []
     effects = try container.decodeIfPresent([LayerEffect].self, ofFamily: LayerEffectType.self, forKey: .effects) ?? []
@@ -146,6 +153,12 @@ class LayerModel: Codable, DictionaryInitializable {
       matte = MatteType(rawValue: matteRawValue)
     } else {
       matte = nil
+    }
+    matteParent = try? dictionary.value(for: CodingKeys.matteParent)
+    if let isMatteTargetRawValue = dictionary[CodingKeys.isMatteTarget.rawValue] as? Int {
+      isMatteTarget = isMatteTargetRawValue != 0
+    } else {
+      isMatteTarget = (try? dictionary.value(for: CodingKeys.isMatteTarget)) ?? false
     }
     hidden = (try? dictionary.value(for: CodingKeys.hidden)) ?? false
     if let styleDictionaries = dictionary[CodingKeys.styles.rawValue] as? [[String: Any]] {
@@ -200,6 +213,14 @@ class LayerModel: Codable, DictionaryInitializable {
   /// The type of matte if any.
   let matte: MatteType?
 
+  /// The `index` of the layer used as this layer's track matte.
+  /// When `nil`, the matte is the layer immediately above this one in the layer list.
+  let matteParent: Int?
+
+  /// Whether or not another layer uses this layer as its track matte,
+  /// in which case this layer is not rendered on its own.
+  let isMatteTarget: Bool
+
   /// Whether or not this layer is hidden, in which case it will not be rendered.
   let hidden: Bool
 
@@ -225,6 +246,8 @@ class LayerModel: Codable, DictionaryInitializable {
     case masks = "masksProperties"
     case timeStretch = "sr"
     case matte = "tt"
+    case matteParent = "tp"
+    case isMatteTarget = "td"
     case hidden = "hd"
     case styles = "sy"
     case effects = "ef"

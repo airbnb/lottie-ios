@@ -49,8 +49,9 @@ extension CALayer {
       )
     }
 
-    // Create an `AnimationLayer` for each `LayerModel`
-    for (layerModel, mask) in try layersInZAxisOrder.pairedLayersAndMasks() {
+    // Create an `AnimationLayer` for each `LayerModel`.
+    //  - Layers used as a track matte are omitted, since they're not rendered on their own.
+    for (layerModel, mask) in layersInZAxisOrder.pairedLayersAndMattes() {
       guard let layer = try layerModel.makeAnimationLayer(context: context) else {
         continue
       }
@@ -100,11 +101,11 @@ extension CALayer {
     }
   }
 
-  // MARK: Fileprivate
+  // MARK: Private
 
   /// Creates a mask `CALayer` from the given matte layer model, using the `MatteType`
   /// from the layer that is being masked.
-  fileprivate func maskLayer(
+  private func maskLayer(
     for matteLayerModel: LayerModel,
     type: MatteType,
     context: LayerContext
@@ -136,34 +137,4 @@ extension CALayer {
     }
   }
 
-}
-
-extension Collection<LayerModel> {
-  /// Pairs each `LayerModel` within this array with
-  /// a `LayerModel` to use as its mask, if applicable
-  /// based on the layer's `MatteType` configuration.
-  ///  - Assumes the layers are sorted in z-axis order.
-  fileprivate func pairedLayersAndMasks() throws
-    -> [(layer: LayerModel, mask: (model: LayerModel, matteType: MatteType)?)]
-  {
-    var layersAndMasks = [(layer: LayerModel, mask: (model: LayerModel, matteType: MatteType)?)]()
-    var unprocessedLayers = reversed()
-
-    while let layer = unprocessedLayers.popLast() {
-      /// If a layer has a `MatteType`, then the next layer will be used as its `mask`
-      if
-        let matteType = layer.matte,
-        matteType != .none,
-        let maskLayer = unprocessedLayers.popLast()
-      {
-        layersAndMasks.append((layer: layer, mask: (model: maskLayer, matteType: matteType)))
-      }
-
-      else {
-        layersAndMasks.append((layer: layer, mask: nil))
-      }
-    }
-
-    return layersAndMasks
-  }
 }
