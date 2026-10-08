@@ -51,6 +51,64 @@ extension CAShapeLayer {
     }
   }
 
+  @nonobjc
+  func pathAnimation(
+    for shape: ShapeItem,
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier,
+    roundedCorners: RoundedCorners?
+  ) throws -> AnimationsByKey {
+    switch shape {
+    case let customShape as Shape:
+      return try customShapeAnimation(
+        for: customShape.path,
+        context: context,
+        pathMultiplier: pathMultiplier,
+        roundedCorners: roundedCorners
+      )
+
+    case let combinedShape as CombinedShapeItem:
+      try context.compatibilityAssert(roundedCorners == nil, """
+        Rounded corners support is not currently implemented for combined shape items
+        """)
+      return try combinedShapeAnimation(
+        for: combinedShape,
+        context: context,
+        pathMultiplier: pathMultiplier
+      )
+
+    case let ellipse as Ellipse:
+      return try ellipseAnimation(
+        for: ellipse,
+        context: context,
+        pathMultiplier: pathMultiplier
+      )
+
+    case let rectangle as Rectangle:
+      return try rectangleAnimation(
+        for: rectangle,
+        context: context,
+        pathMultiplier: pathMultiplier,
+        roundedCorners: roundedCorners
+      )
+
+    case let star as Star:
+      try context.compatibilityAssert(roundedCorners == nil, """
+        Rounded corners support is currently not implemented for polygon items
+        """)
+      return try polygonsAnimation(
+        for: star,
+        context: context,
+        pathMultiplier: pathMultiplier
+      )
+
+    default:
+      // None of the other `ShapeItem` subclasses draw a `path`
+      try context.logCompatibilityIssue("Unexpected shape type \(type(of: shape))")
+      return [:]
+    }
+  }
+
   /// Adds a `fillColor` animation for the given `Fill` object
   @nonobjc
   func addAnimations(for fill: Fill, context: LayerAnimationContext) throws {
@@ -64,6 +122,33 @@ extension CAShapeLayer {
     )
 
     try addOpacityAnimation(for: fill, context: context)
+  }
+
+  @nonobjc
+  func fillColorAnimation(
+    for fill: Fill,
+    context: LayerAnimationContext
+  ) throws -> AnimationsByKey {
+    fillRule = fill.fillRule.caFillRule
+
+    let fillAnimation = try keyframeAnimation(
+      for: .fillColor,
+      keyframes: fill.color,
+      value: \.cgColorValue,
+      context: context
+    )
+
+    let opacityAnimation = try opacityAnimation(
+      for: fill,
+      context: context
+    )
+
+    return Dictionary.merging(
+      fillAnimation,
+      opacityAnimation,
+      uniquingKeysWith: { _, new in new
+      }
+    )
   }
 
   /// Adds animations for `strokeStart` and `strokeEnd` from the given `Trim` object
