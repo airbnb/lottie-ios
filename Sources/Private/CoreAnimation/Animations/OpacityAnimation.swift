@@ -50,4 +50,22 @@ extension CALayer {
       context: context
     )
   }
+
+  @nonobjc
+  func opacityAnimation(
+    for opacity: OpacityAnimationModel,
+    context: LayerAnimationContext
+  ) throws -> AnimationsByKey {
+    try keyframeAnimation(
+      for: .opacity,
+      keyframes: opacity.opacity,
+      value: {
+        // Lottie animation files express opacity as a numerical percentage value
+        // (e.g. 0%, 50%, 100%) so we divide by 100 to get the decimal values
+        // expected by Core Animation (e.g. 0.0, 0.5, 1.0).
+        $0.cgFloatValue / 100
+      },
+      context: context
+    )
+  }
 }

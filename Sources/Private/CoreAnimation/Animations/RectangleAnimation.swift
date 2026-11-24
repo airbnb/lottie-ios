@@ -28,6 +28,30 @@ extension CAShapeLayer {
       context: context
     )
   }
+
+  @nonobjc
+  func rectangleAnimation(
+    for rectangle: Rectangle,
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier,
+    roundedCorners: RoundedCorners?
+  ) throws -> AnimationsByKey {
+    try keyframeAnimation(
+      for: .path,
+      keyframes: try rectangle.combinedKeyframes(roundedCorners: roundedCorners),
+      value: { keyframe in
+        BezierPath.rectangle(
+          position: keyframe.position.pointValue,
+          size: keyframe.size.sizeValue,
+          cornerRadius: keyframe.cornerRadius.cgFloatValue,
+          direction: rectangle.direction
+        )
+        .cgPath()
+        .duplicated(times: pathMultiplier)
+      },
+      context: context
+    )
+  }
 }
 
 extension Rectangle {

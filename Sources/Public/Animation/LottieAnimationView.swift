@@ -877,6 +877,10 @@ open class LottieAnimationView: LottieAnimationViewBase {
       invalidateIntrinsicContentSize()
       setNeedsLayout()
     }
+
+    if case .specific(.coreAnimation(let thread)) = configuration.renderingEngine {
+      CALayer.animationSetupThread = thread
+    }
   }
 
   override func layoutAnimation() {

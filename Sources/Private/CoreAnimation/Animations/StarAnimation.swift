@@ -24,6 +24,22 @@ extension CAShapeLayer {
     }
   }
 
+  @nonobjc
+  func polygonsAnimation(
+    for star: Star,
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier
+  ) throws -> AnimationsByKey {
+    switch star.starType {
+    case .star:
+      try starAnimation(for: star, context: context, pathMultiplier: pathMultiplier)
+    case .polygon:
+      try polygonAnimation(for: star, context: context, pathMultiplier: pathMultiplier)
+    case .none:
+      [:]
+    }
+  }
+
   // MARK: Private
 
   @nonobjc
@@ -54,12 +70,64 @@ extension CAShapeLayer {
   }
 
   @nonobjc
+  private func starAnimation(
+    for star: Star,
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier
+  ) throws -> AnimationsByKey {
+    try keyframeAnimation(
+      for: .path,
+      keyframes: try star.combinedKeyframes(),
+      value: { keyframe in
+        BezierPath.star(
+          position: keyframe.position.pointValue,
+          outerRadius: keyframe.outerRadius.cgFloatValue,
+          innerRadius: keyframe.innerRadius.cgFloatValue,
+          outerRoundedness: keyframe.outerRoundness.cgFloatValue,
+          innerRoundedness: keyframe.innerRoundness.cgFloatValue,
+          numberOfPoints: keyframe.points.cgFloatValue,
+          rotation: keyframe.rotation.cgFloatValue,
+          direction: star.direction
+        )
+        .cgPath()
+        .duplicated(times: pathMultiplier)
+      },
+      context: context
+    )
+  }
+
+  @nonobjc
   private func addPolygonAnimation(
     for star: Star,
     context: LayerAnimationContext,
     pathMultiplier: PathMultiplier
   ) throws {
     try addAnimation(
+      for: .path,
+      keyframes: try star.combinedKeyframes(),
+      value: { keyframe in
+        BezierPath.polygon(
+          position: keyframe.position.pointValue,
+          numberOfPoints: keyframe.points.cgFloatValue,
+          outerRadius: keyframe.outerRadius.cgFloatValue,
+          outerRoundedness: keyframe.outerRoundness.cgFloatValue,
+          rotation: keyframe.rotation.cgFloatValue,
+          direction: star.direction
+        )
+        .cgPath()
+        .duplicated(times: pathMultiplier)
+      },
+      context: context
+    )
+  }
+
+  @nonobjc
+  private func polygonAnimation(
+    for star: Star,
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier
+  ) throws -> AnimationsByKey {
+    try keyframeAnimation(
       for: .path,
       keyframes: try star.combinedKeyframes(),
       value: { keyframe in

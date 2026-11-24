@@ -92,6 +92,21 @@ final class PerformanceTests: XCTestCase {
     }
   }
 
+  func testCoreAnimationRendererPerformance_mainVsBackgroundThread() throws {
+    let animation = try XCTUnwrap(LottieAnimation.named(
+      "one_circle",
+      bundle: .lottie,
+      subdirectory: "Samples/LottieFiles"
+    ))
+
+    let ratio = compareCoreAnimationRendererPerformance(
+      for: animation,
+      iterations: 20
+    )
+
+    XCTAssertLessThan(ratio, 1.0)
+  }
+
   override func setUp() {
     TestHelpers.performanceTestsAreRunning = true
   }
@@ -156,6 +171,100 @@ final class PerformanceTests: XCTestCase {
 
     /// The view / layer is deallocated when the transaction is flushed
     CATransaction.flush()
+  }
+
+  private func compareCoreAnimationRendererPerformance(
+    for animation: LottieAnimation,
+    iterations: Int
+  ) -> Double {
+    // Warm-up pass to avoid measuring one-time first-call setup costs
+    // (e.g. render server connection, cache population), which would
+    // otherwise make whichever configuration runs first look artificially
+    // slower.
+    measureRenderingPerformance(
+      for: animation,
+      with: .init(renderingEngine: .coreAnimation),
+      range: 0..<1
+    )
+
+    let range = (0..<iterations)
+
+    let mainThread = measureRenderingPerformance(
+      for: animation,
+      with: .init(renderingEngine: .coreAnimation),
+      range: range
+    )
+
+    let backgroundThread = measureCoreAnimationBackgroundPerformance(
+      for: animation,
+      range: range
+    )
+
+    return backgroundThread / mainThread
+  }
+
+  private func measureCoreAnimationBackgroundPerformance(
+    for animation: LottieAnimation,
+    range: Range<Int>
+  ) -> Double {
+    // We need to create them on the main thread, otherwise `UIKit` will complain about the fact that we modify an `UIView` backing layer from a thread different from the UI one.
+    let views = setupAnimationViews(
+      for: animation,
+      in: range,
+      with: .init(renderingEngine: .coreAnimationBackground)
+    )
+
+    let expectation = expectation(description: "Core Animation Renderer Background Setup")
+    let layersWithAnimations = 3
+    expectation.expectedFulfillmentCount = range.count * layersWithAnimations
+
+    TestHelpers.backgroundAnimationSetupComplete = {
+      expectation.fulfill()
+    }
+
+    let performance = measurePerformance {
+      for i in range {
+        views[i].animationLayer!.display()
+      }
+
+      wait(for: [expectation])
+    }
+
+    TestHelpers.backgroundAnimationSetupComplete = nil
+
+    return performance
+  }
+
+  @discardableResult
+  private func measureRenderingPerformance(
+    for animation: LottieAnimation,
+    with configuration: LottieConfiguration,
+    range: Range<Int>
+  ) -> Double {
+    let views = setupAnimationViews(
+      for: animation,
+      in: range,
+      with: configuration
+    )
+
+    return measurePerformance {
+      for i in range {
+        views[i].animationLayer!.display()
+      }
+    }
+  }
+
+  private func setupAnimationViews(
+    for animation: LottieAnimation,
+    in range: Range<Int>,
+    with configuration: LottieConfiguration
+  ) -> [LottieAnimationView] {
+    range.map { _ in
+      setupAnimationView(
+        with: animation,
+        configuration: configuration
+      )
+    }
   }
 
   /// Compares performance of scrubbing the given animation with both the Main Thread and Core Animation engine,

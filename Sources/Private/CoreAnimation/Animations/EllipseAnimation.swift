@@ -26,6 +26,28 @@ extension CAShapeLayer {
       context: context
     )
   }
+
+  @nonobjc
+  func ellipseAnimation(
+    for ellipse: Ellipse,
+    context: LayerAnimationContext,
+    pathMultiplier: PathMultiplier
+  ) throws -> AnimationsByKey {
+    try keyframeAnimation(
+      for: .path,
+      keyframes: ellipse.combinedKeyframes(),
+      value: { keyframe in
+        BezierPath.ellipse(
+          size: keyframe.size.sizeValue,
+          center: keyframe.position.pointValue,
+          direction: ellipse.direction
+        )
+        .cgPath()
+        .duplicated(times: pathMultiplier)
+      },
+      context: context
+    )
+  }
 }
 
 extension Ellipse {

@@ -3,6 +3,10 @@
 
 import QuartzCore
 
+typealias AnimationsByKey = [String?: CAAnimation]
+
+// MARK: - BaseAnimationLayer
+
 /// A base `CALayer` that manages the frame and animations
 /// of its `sublayers` and `mask`
 class BaseAnimationLayer: CALayer, AnimationLayer {
